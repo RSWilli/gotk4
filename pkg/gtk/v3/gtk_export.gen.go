@@ -501,7 +501,7 @@ func _gotk4_gtk3_TextBufferSerializeFunc(carg1 *C.GtkTextBuffer, carg2 *C.GtkTex
 	var start          *TextIter  // in, none, converted
 	var end            *TextIter  // in, none, converted
 	var length         uint       // out, full, casted
-	var goret          []uint8    // return, transfer: none, C Pointers: 1, Name: array[guint8], scope: , array (inner: *typesystem.CastablePrimitive)
+	var goret          []uint8    // return, transfer: none, C Pointers: 1, Name: array[guint8], scope: , nullable, array (inner: *typesystem.CastablePrimitive)
 
 	registerBuffer = UnsafeTextBufferFromGlibNone(unsafe.Pointer(carg1))
 	contentBuffer = UnsafeTextBufferFromGlibNone(unsafe.Pointer(carg2))
@@ -850,7 +850,7 @@ func _gotk4_gtk3_CalendarDetailFunc(carg1 *C.GtkCalendar, carg2 C.guint, carg3 C
 	var year     uint     // in, none, casted
 	var month    uint     // in, none, casted
 	var day      uint     // in, none, casted
-	var goret    string   // return, full, string
+	var goret    string   // return, full, string, nullable-string
 
 	calendar = UnsafeCalendarFromGlibNone(unsafe.Pointer(carg1))
 	year = uint(carg2)
@@ -859,7 +859,9 @@ func _gotk4_gtk3_CalendarDetailFunc(carg1 *C.GtkCalendar, carg2 C.guint, carg3 C
 
 	goret = fn(calendar, year, month, day)
 
-	cret = (*C.gchar)(unsafe.Pointer(C.CString(goret)))
+	if goret != "" {
+		cret = (*C.gchar)(unsafe.Pointer(C.CString(goret)))
+	}
 
 	return cret
 }

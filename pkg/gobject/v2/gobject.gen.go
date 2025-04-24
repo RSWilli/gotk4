@@ -641,13 +641,13 @@ func EnumCompleteTypeInfo(gEnumType Type, constValues *EnumValue) TypeInfo {
 // 
 // The function returns the following values:
 // 
-// 	- goret *EnumValue 
+// 	- goret *EnumValue (nullable) 
 //
 // Returns the #GEnumValue for a value.
 func EnumGetValue(enumClass *EnumClass, value int) *EnumValue {
 	var carg1 *C.GEnumClass // in, none, converted
 	var carg2 C.gint        // in, none, casted
-	var cret  *C.GEnumValue // return, none, converted
+	var cret  *C.GEnumValue // return, none, converted, nullable
 
 	carg1 = (*C.GEnumClass)(UnsafeEnumClassToGlibNone(enumClass))
 	carg2 = C.gint(value)
@@ -658,7 +658,9 @@ func EnumGetValue(enumClass *EnumClass, value int) *EnumValue {
 
 	var goret *EnumValue
 
-	goret = UnsafeEnumValueFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeEnumValueFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -672,13 +674,13 @@ func EnumGetValue(enumClass *EnumClass, value int) *EnumValue {
 // 
 // The function returns the following values:
 // 
-// 	- goret *EnumValue 
+// 	- goret *EnumValue (nullable) 
 //
 // Looks up a #GEnumValue by name.
 func EnumGetValueByName(enumClass *EnumClass, name string) *EnumValue {
 	var carg1 *C.GEnumClass // in, none, converted
 	var carg2 *C.gchar      // in, none, string
-	var cret  *C.GEnumValue // return, none, converted
+	var cret  *C.GEnumValue // return, none, converted, nullable
 
 	carg1 = (*C.GEnumClass)(UnsafeEnumClassToGlibNone(enumClass))
 	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
@@ -690,7 +692,9 @@ func EnumGetValueByName(enumClass *EnumClass, name string) *EnumValue {
 
 	var goret *EnumValue
 
-	goret = UnsafeEnumValueFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeEnumValueFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -704,13 +708,13 @@ func EnumGetValueByName(enumClass *EnumClass, name string) *EnumValue {
 // 
 // The function returns the following values:
 // 
-// 	- goret *EnumValue 
+// 	- goret *EnumValue (nullable) 
 //
 // Looks up a #GEnumValue by nickname.
 func EnumGetValueByNick(enumClass *EnumClass, nick string) *EnumValue {
 	var carg1 *C.GEnumClass // in, none, converted
 	var carg2 *C.gchar      // in, none, string
-	var cret  *C.GEnumValue // return, none, converted
+	var cret  *C.GEnumValue // return, none, converted, nullable
 
 	carg1 = (*C.GEnumClass)(UnsafeEnumClassToGlibNone(enumClass))
 	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(nick)))
@@ -722,7 +726,9 @@ func EnumGetValueByNick(enumClass *EnumClass, nick string) *EnumValue {
 
 	var goret *EnumValue
 
-	goret = UnsafeEnumValueFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeEnumValueFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -847,13 +853,13 @@ func FlagsCompleteTypeInfo(gFlagsType Type, constValues *FlagsValue) TypeInfo {
 // 
 // The function returns the following values:
 // 
-// 	- goret *FlagsValue 
+// 	- goret *FlagsValue (nullable) 
 //
 // Returns the first #GFlagsValue which is set in @value.
 func FlagsGetFirstValue(flagsClass *FlagsClass, value uint) *FlagsValue {
 	var carg1 *C.GFlagsClass // in, none, converted
 	var carg2 C.guint        // in, none, casted
-	var cret  *C.GFlagsValue // return, none, converted
+	var cret  *C.GFlagsValue // return, none, converted, nullable
 
 	carg1 = (*C.GFlagsClass)(UnsafeFlagsClassToGlibNone(flagsClass))
 	carg2 = C.guint(value)
@@ -864,7 +870,9 @@ func FlagsGetFirstValue(flagsClass *FlagsClass, value uint) *FlagsValue {
 
 	var goret *FlagsValue
 
-	goret = UnsafeFlagsValueFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeFlagsValueFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -878,13 +886,13 @@ func FlagsGetFirstValue(flagsClass *FlagsClass, value uint) *FlagsValue {
 // 
 // The function returns the following values:
 // 
-// 	- goret *FlagsValue 
+// 	- goret *FlagsValue (nullable) 
 //
 // Looks up a #GFlagsValue by name.
 func FlagsGetValueByName(flagsClass *FlagsClass, name string) *FlagsValue {
 	var carg1 *C.GFlagsClass // in, none, converted
 	var carg2 *C.gchar       // in, none, string
-	var cret  *C.GFlagsValue // return, none, converted
+	var cret  *C.GFlagsValue // return, none, converted, nullable
 
 	carg1 = (*C.GFlagsClass)(UnsafeFlagsClassToGlibNone(flagsClass))
 	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
@@ -896,7 +904,9 @@ func FlagsGetValueByName(flagsClass *FlagsClass, name string) *FlagsValue {
 
 	var goret *FlagsValue
 
-	goret = UnsafeFlagsValueFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeFlagsValueFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -910,13 +920,13 @@ func FlagsGetValueByName(flagsClass *FlagsClass, name string) *FlagsValue {
 // 
 // The function returns the following values:
 // 
-// 	- goret *FlagsValue 
+// 	- goret *FlagsValue (nullable) 
 //
 // Looks up a #GFlagsValue by nickname.
 func FlagsGetValueByNick(flagsClass *FlagsClass, nick string) *FlagsValue {
 	var carg1 *C.GFlagsClass // in, none, converted
 	var carg2 *C.gchar       // in, none, string
-	var cret  *C.GFlagsValue // return, none, converted
+	var cret  *C.GFlagsValue // return, none, converted, nullable
 
 	carg1 = (*C.GFlagsClass)(UnsafeFlagsClassToGlibNone(flagsClass))
 	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(nick)))
@@ -928,7 +938,9 @@ func FlagsGetValueByNick(flagsClass *FlagsClass, nick string) *FlagsValue {
 
 	var goret *FlagsValue
 
-	goret = UnsafeFlagsValueFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeFlagsValueFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -1208,14 +1220,14 @@ func SignalLookup(name string, itype Type) uint {
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Given the signal's identifier, finds its name.
 // 
 // Two different signals may have the same name, if they have differing types.
 func SignalName(signalId uint) string {
 	var carg1 C.guint  // in, none, casted
-	var cret  *C.gchar // return, none, string
+	var cret  *C.gchar // return, none, string, nullable-string
 
 	carg1 = C.guint(signalId)
 
@@ -1224,7 +1236,9 @@ func SignalName(signalId uint) string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -1877,7 +1891,7 @@ func TypeIsA(typ Type, isAType Type) bool {
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Get the unique name that is assigned to a type ID.  Note that this
 // function (like all other GType API) cannot cope with invalid type
@@ -1886,7 +1900,7 @@ func TypeIsA(typ Type, isAType Type) bool {
 // not be passed in and will most likely lead to a crash.
 func TypeName(typ Type) string {
 	var carg1 C.GType  // in, none, casted, alias
-	var cret  *C.gchar // return, none, string
+	var cret  *C.gchar // return, none, string, nullable-string
 
 	carg1 = C.GType(typ)
 
@@ -1895,7 +1909,9 @@ func TypeName(typ Type) string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }

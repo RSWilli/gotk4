@@ -5537,7 +5537,7 @@ func CanonicalizeFilename(filename string, relativeTo string) string {
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Checks that the GLib library in use is compatible with the
 // given version.
@@ -5558,7 +5558,7 @@ func CheckVersion(requiredMajor uint, requiredMinor uint, requiredMicro uint) st
 	var carg1 C.guint  // in, none, casted
 	var carg2 C.guint  // in, none, casted
 	var carg3 C.guint  // in, none, casted
-	var cret  *C.gchar // return, none, string
+	var cret  *C.gchar // return, none, string, nullable-string
 
 	carg1 = C.guint(requiredMajor)
 	carg2 = C.guint(requiredMinor)
@@ -5571,7 +5571,9 @@ func CheckVersion(requiredMajor uint, requiredMinor uint, requiredMicro uint) st
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -5718,7 +5720,7 @@ func NewChildWatchSource(pid Pid) *Source {
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Computes the checksum for a binary @data. This is a
 // convenience wrapper for g_checksum_new(), g_checksum_get_string()
@@ -5728,7 +5730,7 @@ func NewChildWatchSource(pid Pid) *Source {
 func ComputeChecksumForBytes(checksumType ChecksumType, data *Bytes) string {
 	var carg1 C.GChecksumType // in, none, casted
 	var carg2 *C.GBytes       // in, none, converted
-	var cret  *C.gchar        // return, full, string
+	var cret  *C.gchar        // return, full, string, nullable-string
 
 	carg1 = C.GChecksumType(checksumType)
 	carg2 = (*C.GBytes)(UnsafeBytesToGlibNone(data))
@@ -5739,8 +5741,10 @@ func ComputeChecksumForBytes(checksumType ChecksumType, data *Bytes) string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+		defer C.free(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -5754,7 +5758,7 @@ func ComputeChecksumForBytes(checksumType ChecksumType, data *Bytes) string {
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Computes the checksum for a binary @data of @length. This is a
 // convenience wrapper for g_checksum_new(), g_checksum_get_string()
@@ -5765,7 +5769,7 @@ func ComputeChecksumForData(checksumType ChecksumType, data []uint8) string {
 	var carg1 C.GChecksumType // in, none, casted
 	var carg2 *C.guchar       // in, transfer: none, C Pointers: 1, Name: array[guint8], array (inner: *typesystem.CastablePrimitive, length-by: carg3)
 	var carg3 C.gsize         // implicit
-	var cret  *C.gchar        // return, full, string
+	var cret  *C.gchar        // return, full, string, nullable-string
 
 	carg1 = C.GChecksumType(checksumType)
 	_ = data
@@ -5779,8 +5783,10 @@ func ComputeChecksumForData(checksumType ChecksumType, data []uint8) string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+		defer C.free(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -5795,7 +5801,7 @@ func ComputeChecksumForData(checksumType ChecksumType, data []uint8) string {
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Computes the checksum of a string.
 // 
@@ -5804,7 +5810,7 @@ func ComputeChecksumForString(checksumType ChecksumType, str string, length int)
 	var carg1 C.GChecksumType // in, none, casted
 	var carg2 *C.gchar        // in, none, string
 	var carg3 C.gssize        // in, none, casted
-	var cret  *C.gchar        // return, full, string
+	var cret  *C.gchar        // return, full, string, nullable-string
 
 	carg1 = C.GChecksumType(checksumType)
 	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
@@ -5818,8 +5824,10 @@ func ComputeChecksumForString(checksumType ChecksumType, str string, length int)
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+		defer C.free(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -6561,14 +6569,14 @@ func Dpgettext2(domain string, _context string, msgid string) string {
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Returns the value of the environment variable @variable in the
 // provided list @envp.
 func EnvironGetenv(envp []string, variable string) string {
 	var carg1 **C.gchar // in, transfer: none, C Pointers: 2, Name: array[filename], nullable, array (inner: *typesystem.StringPrimitive, zero-terminated)
 	var carg2 *C.gchar  // in, none, string
-	var cret  *C.gchar  // return, none, string
+	var cret  *C.gchar  // return, none, string, nullable
 
 	_ = envp
 	_ = carg1
@@ -6582,7 +6590,9 @@ func EnvironGetenv(envp []string, variable string) string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -7475,7 +7485,7 @@ func FilenameToUTF8(opsysstring string, len int) (uint, uint, string, error) {
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Locates the first executable named @program in the user's path, in the
 // same way that execvp() would locate it. Returns an allocated string
@@ -7496,7 +7506,7 @@ func FilenameToUTF8(opsysstring string, len int) (uint, uint, string, error) {
 // including the type suffix.
 func FindProgramInPath(program string) string {
 	var carg1 *C.gchar // in, none, string
-	var cret  *C.gchar // return, full, string
+	var cret  *C.gchar // return, full, string, nullable-string
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(program)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -7506,8 +7516,10 @@ func FindProgramInPath(program string) string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+		defer C.free(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -7590,7 +7602,7 @@ func FormatSizeFull(size uint64, flags FormatSizeFlags) string {
 // GetApplicationName wraps g_get_application_name
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets a human-readable name for the application, as set by
 // g_set_application_name(). This name should be localized if
@@ -7600,13 +7612,15 @@ func FormatSizeFull(size uint64, flags FormatSizeFlags) string {
 // g_get_prgname() (which may be %NULL if g_set_prgname() has also not
 // been called).
 func GetApplicationName() string {
-	var cret *C.gchar // return, none, string
+	var cret *C.gchar // return, none, string, nullable-string
 
 	cret = C.g_get_application_name()
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -7989,7 +8003,7 @@ func GetMonotonicTime() int64 {
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Get information about the operating system.
 // 
@@ -8001,7 +8015,7 @@ func GetMonotonicTime() int64 {
 // check if the result is %NULL.
 func GetOsInfo(keyName string) string {
 	var carg1 *C.gchar // in, none, string
-	var cret  *C.gchar // return, full, string
+	var cret  *C.gchar // return, full, string, nullable-string
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(keyName)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -8011,8 +8025,10 @@ func GetOsInfo(keyName string) string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+		defer C.free(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -8020,7 +8036,7 @@ func GetOsInfo(keyName string) string {
 // GetPrgname wraps g_get_prgname
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the name of the program. This name should not be localized,
 // in contrast to g_get_application_name().
@@ -8031,13 +8047,15 @@ func GetOsInfo(keyName string) string {
 // #GtkApplication::startup handler. The program name is found by
 // taking the last component of @argv[0].
 func GetPrgname() string {
-	var cret *C.gchar // return, none, string
+	var cret *C.gchar // return, none, string, nullable-string
 
 	cret = C.g_get_prgname()
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -8373,7 +8391,7 @@ func GetUserRuntimeDir() string {
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Returns the full path of a special directory using its logical id.
 // 
@@ -8387,7 +8405,7 @@ func GetUserRuntimeDir() string {
 // will not reflect any change once the special directories are loaded.
 func GetUserSpecialDir(directory UserDirectory) string {
 	var carg1 C.GUserDirectory // in, none, casted
-	var cret  *C.gchar         // return, none, string
+	var cret  *C.gchar         // return, none, string, nullable
 
 	carg1 = C.GUserDirectory(directory)
 
@@ -8396,7 +8414,9 @@ func GetUserSpecialDir(directory UserDirectory) string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -8443,7 +8463,7 @@ func GetUserStateDir() string {
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Returns the value of an environment variable.
 // 
@@ -8454,7 +8474,7 @@ func GetUserStateDir() string {
 // references to other environment variables, they are expanded.
 func Getenv(variable string) string {
 	var carg1 *C.gchar // in, none, string
-	var cret  *C.gchar // return, none, string
+	var cret  *C.gchar // return, none, string, nullable
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(variable)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -8464,7 +8484,9 @@ func Getenv(variable string) string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -8583,14 +8605,14 @@ func HostnameIsNonASCII(hostname string) bool {
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Converts @hostname to its canonical ASCII form; an ASCII-only
 // string containing no uppercase letters and not ending with a
 // trailing dot.
 func HostnameToASCII(hostname string) string {
 	var carg1 *C.gchar // in, none, string
-	var cret  *C.gchar // return, full, string
+	var cret  *C.gchar // return, full, string, nullable-string
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(hostname)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -8600,8 +8622,10 @@ func HostnameToASCII(hostname string) string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+		defer C.free(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -8614,7 +8638,7 @@ func HostnameToASCII(hostname string) string {
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Converts @hostname to its canonical presentation form; a UTF-8
 // string in Unicode normalization form C, containing no uppercase
@@ -8625,7 +8649,7 @@ func HostnameToASCII(hostname string) string {
 // the canonical presentation form will be entirely ASCII.
 func HostnameToUnicode(hostname string) string {
 	var carg1 *C.gchar // in, none, string
-	var cret  *C.gchar // return, full, string
+	var cret  *C.gchar // return, full, string, nullable-string
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(hostname)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -8635,8 +8659,10 @@ func HostnameToUnicode(hostname string) string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+		defer C.free(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -9631,17 +9657,19 @@ func LogWriterSupportsColor(outputFd int) bool {
 // MainCurrentSource wraps g_main_current_source
 // The function returns the following values:
 // 
-// 	- goret *Source 
+// 	- goret *Source (nullable) 
 //
 // Returns the currently firing source for this thread.
 func MainCurrentSource() *Source {
-	var cret *C.GSource // return, none, converted
+	var cret *C.GSource // return, none, converted, nullable
 
 	cret = C.g_main_current_source()
 
 	var goret *Source
 
-	goret = UnsafeSourceFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeSourceFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -10071,14 +10099,14 @@ func PathIsAbsolute(fileName string) bool {
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Returns a pointer into @file_name after the root component,
 // i.e. after the "/" in UNIX or "C:\" under Windows. If @file_name
 // is not an absolute path it returns %NULL.
 func PathSkipRoot(fileName string) string {
 	var carg1 *C.gchar // in, none, string
-	var cret  *C.gchar // return, none, string
+	var cret  *C.gchar // return, none, string, nullable
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(fileName)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -10088,7 +10116,9 @@ func PathSkipRoot(fileName string) string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -12913,7 +12943,7 @@ func UTF8CollateKeyForFilename(str string, len int) string {
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Finds the start of the next UTF-8 character in the string after @p.
 // 
@@ -12928,7 +12958,7 @@ func UTF8CollateKeyForFilename(str string, len int) string {
 func UTF8FindNextChar(p string, end string) string {
 	var carg1 *C.gchar // in, none, string
 	var carg2 *C.gchar // in, none, string, nullable-string
-	var cret  *C.gchar // return, none, string
+	var cret  *C.gchar // return, none, string, nullable-string
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(p)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -12943,7 +12973,9 @@ func UTF8FindNextChar(p string, end string) string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -12957,7 +12989,7 @@ func UTF8FindNextChar(p string, end string) string {
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Given a position @p with a UTF-8 encoded string @str, find the start
 // of the previous UTF-8 character starting before @p. Returns %NULL if no
@@ -12969,7 +13001,7 @@ func UTF8FindNextChar(p string, end string) string {
 func UTF8FindPrevChar(str string, p string) string {
 	var carg1 *C.gchar // in, none, string
 	var carg2 *C.gchar // in, none, string
-	var cret  *C.gchar // return, none, string
+	var cret  *C.gchar // return, none, string, nullable-string
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -12982,7 +13014,9 @@ func UTF8FindPrevChar(str string, p string) string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -13111,7 +13145,7 @@ func UTF8MakeValid(str string, len int) string {
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Converts a string into canonical form, standardizing
 // such issues as whether a character with an accent
@@ -13142,7 +13176,7 @@ func UTF8Normalize(str string, len int, mode NormalizeMode) string {
 	var carg1 *C.gchar         // in, none, string
 	var carg2 C.gssize         // in, none, casted
 	var carg3 C.GNormalizeMode // in, none, casted
-	var cret  *C.gchar         // return, full, string
+	var cret  *C.gchar         // return, full, string, nullable-string
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -13156,8 +13190,10 @@ func UTF8Normalize(str string, len int, mode NormalizeMode) string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+		defer C.free(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -13286,7 +13322,7 @@ func UTF8PrevChar(p string) string {
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Finds the leftmost occurrence of the given Unicode character
 // in a UTF-8 encoded string, while limiting the search to @len bytes.
@@ -13295,7 +13331,7 @@ func UTF8Strchr(p string, len int, c uint32) string {
 	var carg1 *C.gchar   // in, none, string
 	var carg2 C.gssize   // in, none, casted
 	var carg3 C.gunichar // in, none, casted
-	var cret  *C.gchar   // return, none, string
+	var cret  *C.gchar   // return, none, string, nullable-string
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(p)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -13309,7 +13345,9 @@ func UTF8Strchr(p string, len int, c uint32) string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -13441,7 +13479,7 @@ func UTF8Strncpy(dest string, src string, n uint) string {
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Find the rightmost occurrence of the given Unicode character
 // in a UTF-8 encoded string, while limiting the search to @len bytes.
@@ -13450,7 +13488,7 @@ func UTF8Strrchr(p string, len int, c uint32) string {
 	var carg1 *C.gchar   // in, none, string
 	var carg2 C.gssize   // in, none, casted
 	var carg3 C.gunichar // in, none, casted
-	var cret  *C.gchar   // return, none, string
+	var cret  *C.gchar   // return, none, string, nullable-string
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(p)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -13464,7 +13502,9 @@ func UTF8Strrchr(p string, len int, c uint32) string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -15796,7 +15836,7 @@ func UnsafeBytesToGlibFull(b *Bytes) unsafe.Pointer {
 // 
 // The function returns the following values:
 // 
-// 	- goret unsafe.Pointer 
+// 	- goret unsafe.Pointer (nullable) 
 //
 // Gets a pointer to a region in @bytes.
 // 
@@ -15823,7 +15863,7 @@ func (bytes *Bytes) GetRegion(elementSize uint, offset uint, nElements uint) uns
 	var carg1 C.gsize         // in, none, casted
 	var carg2 C.gsize         // in, none, casted
 	var carg3 C.gsize         // in, none, casted
-	var cret  C.gconstpointer // return, none, casted
+	var cret  C.gconstpointer // return, none, casted, nullable
 
 	carg0 = (*C.GBytes)(UnsafeBytesToGlibNone(bytes))
 	carg1 = C.gsize(elementSize)
@@ -15838,7 +15878,9 @@ func (bytes *Bytes) GetRegion(elementSize uint, offset uint, nElements uint) uns
 
 	var goret unsafe.Pointer
 
-	goret = unsafe.Pointer(cret)
+	if cret != nil {
+		goret = unsafe.Pointer(cret)
+	}
 
 	return goret
 }
@@ -15996,7 +16038,7 @@ func UnsafeChecksumToGlibFull(c *Checksum) unsafe.Pointer {
 // 
 // The function returns the following values:
 // 
-// 	- goret *Checksum 
+// 	- goret *Checksum (nullable) 
 //
 // Creates a new #GChecksum, using the checksum algorithm @checksum_type.
 // If the @checksum_type is not known, %NULL is returned.
@@ -16013,7 +16055,7 @@ func UnsafeChecksumToGlibFull(c *Checksum) unsafe.Pointer {
 // on it anymore.
 func NewChecksum(checksumType ChecksumType) *Checksum {
 	var carg1 C.GChecksumType // in, none, casted
-	var cret  *C.GChecksum    // return, full, converted
+	var cret  *C.GChecksum    // return, full, converted, nullable
 
 	carg1 = C.GChecksumType(checksumType)
 
@@ -16022,7 +16064,9 @@ func NewChecksum(checksumType ChecksumType) *Checksum {
 
 	var goret *Checksum
 
-	goret = UnsafeChecksumFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeChecksumFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -16249,7 +16293,7 @@ func UnsafeDateTimeToGlibFull(d *DateTime) unsafe.Pointer {
 // 
 // The function returns the following values:
 // 
-// 	- goret *DateTime 
+// 	- goret *DateTime (nullable) 
 //
 // Creates a new #GDateTime corresponding to the given date and time in
 // the time zone @tz.
@@ -16287,7 +16331,7 @@ func NewDateTime(tz *TimeZone, year int, month int, day int, hour int, minute in
 	var carg5 C.gint       // in, none, casted
 	var carg6 C.gint       // in, none, casted
 	var carg7 C.gdouble    // in, none, casted
-	var cret  *C.GDateTime // return, full, converted
+	var cret  *C.GDateTime // return, full, converted, nullable
 
 	carg1 = (*C.GTimeZone)(UnsafeTimeZoneToGlibNone(tz))
 	carg2 = C.gint(year)
@@ -16308,7 +16352,9 @@ func NewDateTime(tz *TimeZone, year int, month int, day int, hour int, minute in
 
 	var goret *DateTime
 
-	goret = UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -16323,7 +16369,7 @@ func NewDateTime(tz *TimeZone, year int, month int, day int, hour int, minute in
 // 
 // The function returns the following values:
 // 
-// 	- goret *DateTime 
+// 	- goret *DateTime (nullable) 
 //
 // Creates a #GDateTime corresponding to the given
 // [ISO 8601 formatted string](https://en.wikipedia.org/wiki/ISO_8601)
@@ -16371,7 +16417,7 @@ func NewDateTime(tz *TimeZone, year int, month int, day int, hour int, minute in
 func NewDateTimeFromISO8601(text string, defaultTz *TimeZone) *DateTime {
 	var carg1 *C.gchar     // in, none, string
 	var carg2 *C.GTimeZone // in, none, converted, nullable
-	var cret  *C.GDateTime // return, full, converted
+	var cret  *C.GDateTime // return, full, converted, nullable
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(text)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -16385,7 +16431,9 @@ func NewDateTimeFromISO8601(text string, defaultTz *TimeZone) *DateTime {
 
 	var goret *DateTime
 
-	goret = UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -16403,7 +16451,7 @@ func NewDateTimeFromISO8601(text string, defaultTz *TimeZone) *DateTime {
 // 
 // The function returns the following values:
 // 
-// 	- goret *DateTime 
+// 	- goret *DateTime (nullable) 
 //
 // Creates a new #GDateTime corresponding to the given date and time in
 // the local time zone.
@@ -16417,7 +16465,7 @@ func NewDateTimeLocal(year int, month int, day int, hour int, minute int, second
 	var carg4 C.gint       // in, none, casted
 	var carg5 C.gint       // in, none, casted
 	var carg6 C.gdouble    // in, none, casted
-	var cret  *C.GDateTime // return, full, converted
+	var cret  *C.GDateTime // return, full, converted, nullable
 
 	carg1 = C.gint(year)
 	carg2 = C.gint(month)
@@ -16436,7 +16484,9 @@ func NewDateTimeLocal(year int, month int, day int, hour int, minute int, second
 
 	var goret *DateTime
 
-	goret = UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -16449,7 +16499,7 @@ func NewDateTimeLocal(year int, month int, day int, hour int, minute int, second
 // 
 // The function returns the following values:
 // 
-// 	- goret *DateTime 
+// 	- goret *DateTime (nullable) 
 //
 // Creates a #GDateTime corresponding to this exact instant in the given
 // time zone @tz.  The time is as accurate as the system allows, to a
@@ -16462,7 +16512,7 @@ func NewDateTimeLocal(year int, month int, day int, hour int, minute int, second
 // when you are done with it.
 func NewDateTimeNow(tz *TimeZone) *DateTime {
 	var carg1 *C.GTimeZone // in, none, converted
-	var cret  *C.GDateTime // return, full, converted
+	var cret  *C.GDateTime // return, full, converted, nullable
 
 	carg1 = (*C.GTimeZone)(UnsafeTimeZoneToGlibNone(tz))
 
@@ -16471,7 +16521,9 @@ func NewDateTimeNow(tz *TimeZone) *DateTime {
 
 	var goret *DateTime
 
-	goret = UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -16479,7 +16531,7 @@ func NewDateTimeNow(tz *TimeZone) *DateTime {
 // NewDateTimeNowLocal wraps g_date_time_new_now_local
 // The function returns the following values:
 // 
-// 	- goret *DateTime 
+// 	- goret *DateTime (nullable) 
 //
 // Creates a #GDateTime corresponding to this exact instant in the local
 // time zone.
@@ -16487,13 +16539,15 @@ func NewDateTimeNow(tz *TimeZone) *DateTime {
 // This is equivalent to calling g_date_time_new_now() with the time
 // zone returned by g_time_zone_new_local().
 func NewDateTimeNowLocal() *DateTime {
-	var cret *C.GDateTime // return, full, converted
+	var cret *C.GDateTime // return, full, converted, nullable
 
 	cret = C.g_date_time_new_now_local()
 
 	var goret *DateTime
 
-	goret = UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -16501,20 +16555,22 @@ func NewDateTimeNowLocal() *DateTime {
 // NewDateTimeNowUTC wraps g_date_time_new_now_utc
 // The function returns the following values:
 // 
-// 	- goret *DateTime 
+// 	- goret *DateTime (nullable) 
 //
 // Creates a #GDateTime corresponding to this exact instant in UTC.
 // 
 // This is equivalent to calling g_date_time_new_now() with the time
 // zone returned by g_time_zone_new_utc().
 func NewDateTimeNowUTC() *DateTime {
-	var cret *C.GDateTime // return, full, converted
+	var cret *C.GDateTime // return, full, converted, nullable
 
 	cret = C.g_date_time_new_now_utc()
 
 	var goret *DateTime
 
-	goret = UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -16532,7 +16588,7 @@ func NewDateTimeNowUTC() *DateTime {
 // 
 // The function returns the following values:
 // 
-// 	- goret *DateTime 
+// 	- goret *DateTime (nullable) 
 //
 // Creates a new #GDateTime corresponding to the given date and time in
 // UTC.
@@ -16546,7 +16602,7 @@ func NewDateTimeUTC(year int, month int, day int, hour int, minute int, seconds 
 	var carg4 C.gint       // in, none, casted
 	var carg5 C.gint       // in, none, casted
 	var carg6 C.gdouble    // in, none, casted
-	var cret  *C.GDateTime // return, full, converted
+	var cret  *C.GDateTime // return, full, converted, nullable
 
 	carg1 = C.gint(year)
 	carg2 = C.gint(month)
@@ -16565,7 +16621,9 @@ func NewDateTimeUTC(year int, month int, day int, hour int, minute int, seconds 
 
 	var goret *DateTime
 
-	goret = UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -16578,13 +16636,13 @@ func NewDateTimeUTC(year int, month int, day int, hour int, minute int, seconds 
 // 
 // The function returns the following values:
 // 
-// 	- goret *DateTime 
+// 	- goret *DateTime (nullable) 
 //
 // Creates a copy of @datetime and adds the specified timespan to the copy.
 func (datetime *DateTime) Add(timespan TimeSpan) *DateTime {
 	var carg0 *C.GDateTime // in, none, converted
 	var carg1 C.GTimeSpan  // in, none, casted, alias
-	var cret  *C.GDateTime // return, full, converted
+	var cret  *C.GDateTime // return, full, converted, nullable
 
 	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
 	carg1 = C.GTimeSpan(timespan)
@@ -16595,7 +16653,9 @@ func (datetime *DateTime) Add(timespan TimeSpan) *DateTime {
 
 	var goret *DateTime
 
-	goret = UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -16608,14 +16668,14 @@ func (datetime *DateTime) Add(timespan TimeSpan) *DateTime {
 // 
 // The function returns the following values:
 // 
-// 	- goret *DateTime 
+// 	- goret *DateTime (nullable) 
 //
 // Creates a copy of @datetime and adds the specified number of days to the
 // copy. Add negative values to subtract days.
 func (datetime *DateTime) AddDays(days int) *DateTime {
 	var carg0 *C.GDateTime // in, none, converted
 	var carg1 C.gint       // in, none, casted
-	var cret  *C.GDateTime // return, full, converted
+	var cret  *C.GDateTime // return, full, converted, nullable
 
 	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
 	carg1 = C.gint(days)
@@ -16626,7 +16686,9 @@ func (datetime *DateTime) AddDays(days int) *DateTime {
 
 	var goret *DateTime
 
-	goret = UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -16644,7 +16706,7 @@ func (datetime *DateTime) AddDays(days int) *DateTime {
 // 
 // The function returns the following values:
 // 
-// 	- goret *DateTime 
+// 	- goret *DateTime (nullable) 
 //
 // Creates a new #GDateTime adding the specified values to the current date and
 // time in @datetime. Add negative values to subtract.
@@ -16656,7 +16718,7 @@ func (datetime *DateTime) AddFull(years int, months int, days int, hours int, mi
 	var carg4 C.gint       // in, none, casted
 	var carg5 C.gint       // in, none, casted
 	var carg6 C.gdouble    // in, none, casted
-	var cret  *C.GDateTime // return, full, converted
+	var cret  *C.GDateTime // return, full, converted, nullable
 
 	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
 	carg1 = C.gint(years)
@@ -16677,7 +16739,9 @@ func (datetime *DateTime) AddFull(years int, months int, days int, hours int, mi
 
 	var goret *DateTime
 
-	goret = UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -16690,14 +16754,14 @@ func (datetime *DateTime) AddFull(years int, months int, days int, hours int, mi
 // 
 // The function returns the following values:
 // 
-// 	- goret *DateTime 
+// 	- goret *DateTime (nullable) 
 //
 // Creates a copy of @datetime and adds the specified number of hours.
 // Add negative values to subtract hours.
 func (datetime *DateTime) AddHours(hours int) *DateTime {
 	var carg0 *C.GDateTime // in, none, converted
 	var carg1 C.gint       // in, none, casted
-	var cret  *C.GDateTime // return, full, converted
+	var cret  *C.GDateTime // return, full, converted, nullable
 
 	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
 	carg1 = C.gint(hours)
@@ -16708,7 +16772,9 @@ func (datetime *DateTime) AddHours(hours int) *DateTime {
 
 	var goret *DateTime
 
-	goret = UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -16721,14 +16787,14 @@ func (datetime *DateTime) AddHours(hours int) *DateTime {
 // 
 // The function returns the following values:
 // 
-// 	- goret *DateTime 
+// 	- goret *DateTime (nullable) 
 //
 // Creates a copy of @datetime adding the specified number of minutes.
 // Add negative values to subtract minutes.
 func (datetime *DateTime) AddMinutes(minutes int) *DateTime {
 	var carg0 *C.GDateTime // in, none, converted
 	var carg1 C.gint       // in, none, casted
-	var cret  *C.GDateTime // return, full, converted
+	var cret  *C.GDateTime // return, full, converted, nullable
 
 	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
 	carg1 = C.gint(minutes)
@@ -16739,7 +16805,9 @@ func (datetime *DateTime) AddMinutes(minutes int) *DateTime {
 
 	var goret *DateTime
 
-	goret = UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -16752,7 +16820,7 @@ func (datetime *DateTime) AddMinutes(minutes int) *DateTime {
 // 
 // The function returns the following values:
 // 
-// 	- goret *DateTime 
+// 	- goret *DateTime (nullable) 
 //
 // Creates a copy of @datetime and adds the specified number of months to the
 // copy. Add negative values to subtract months.
@@ -16764,7 +16832,7 @@ func (datetime *DateTime) AddMinutes(minutes int) *DateTime {
 func (datetime *DateTime) AddMonths(months int) *DateTime {
 	var carg0 *C.GDateTime // in, none, converted
 	var carg1 C.gint       // in, none, casted
-	var cret  *C.GDateTime // return, full, converted
+	var cret  *C.GDateTime // return, full, converted, nullable
 
 	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
 	carg1 = C.gint(months)
@@ -16775,7 +16843,9 @@ func (datetime *DateTime) AddMonths(months int) *DateTime {
 
 	var goret *DateTime
 
-	goret = UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -16788,14 +16858,14 @@ func (datetime *DateTime) AddMonths(months int) *DateTime {
 // 
 // The function returns the following values:
 // 
-// 	- goret *DateTime 
+// 	- goret *DateTime (nullable) 
 //
 // Creates a copy of @datetime and adds the specified number of seconds.
 // Add negative values to subtract seconds.
 func (datetime *DateTime) AddSeconds(seconds float64) *DateTime {
 	var carg0 *C.GDateTime // in, none, converted
 	var carg1 C.gdouble    // in, none, casted
-	var cret  *C.GDateTime // return, full, converted
+	var cret  *C.GDateTime // return, full, converted, nullable
 
 	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
 	carg1 = C.gdouble(seconds)
@@ -16806,7 +16876,9 @@ func (datetime *DateTime) AddSeconds(seconds float64) *DateTime {
 
 	var goret *DateTime
 
-	goret = UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -16819,14 +16891,14 @@ func (datetime *DateTime) AddSeconds(seconds float64) *DateTime {
 // 
 // The function returns the following values:
 // 
-// 	- goret *DateTime 
+// 	- goret *DateTime (nullable) 
 //
 // Creates a copy of @datetime and adds the specified number of weeks to the
 // copy. Add negative values to subtract weeks.
 func (datetime *DateTime) AddWeeks(weeks int) *DateTime {
 	var carg0 *C.GDateTime // in, none, converted
 	var carg1 C.gint       // in, none, casted
-	var cret  *C.GDateTime // return, full, converted
+	var cret  *C.GDateTime // return, full, converted, nullable
 
 	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
 	carg1 = C.gint(weeks)
@@ -16837,7 +16909,9 @@ func (datetime *DateTime) AddWeeks(weeks int) *DateTime {
 
 	var goret *DateTime
 
-	goret = UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -16850,7 +16924,7 @@ func (datetime *DateTime) AddWeeks(weeks int) *DateTime {
 // 
 // The function returns the following values:
 // 
-// 	- goret *DateTime 
+// 	- goret *DateTime (nullable) 
 //
 // Creates a copy of @datetime and adds the specified number of years to the
 // copy. Add negative values to subtract years.
@@ -16860,7 +16934,7 @@ func (datetime *DateTime) AddWeeks(weeks int) *DateTime {
 func (datetime *DateTime) AddYears(years int) *DateTime {
 	var carg0 *C.GDateTime // in, none, converted
 	var carg1 C.gint       // in, none, casted
-	var cret  *C.GDateTime // return, full, converted
+	var cret  *C.GDateTime // return, full, converted, nullable
 
 	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
 	carg1 = C.gint(years)
@@ -16871,7 +16945,9 @@ func (datetime *DateTime) AddYears(years int) *DateTime {
 
 	var goret *DateTime
 
-	goret = UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -16917,7 +16993,7 @@ func (end *DateTime) Difference(begin *DateTime) TimeSpan {
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Creates a newly allocated string representing the requested @format.
 // 
@@ -17046,7 +17122,7 @@ func (end *DateTime) Difference(begin *DateTime) TimeSpan {
 func (datetime *DateTime) Format(format string) string {
 	var carg0 *C.GDateTime // in, none, converted
 	var carg1 *C.gchar     // in, none, string
-	var cret  *C.gchar     // return, full, string
+	var cret  *C.gchar     // return, full, string, nullable-string
 
 	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(format)))
@@ -17058,8 +17134,10 @@ func (datetime *DateTime) Format(format string) string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+		defer C.free(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -17067,7 +17145,7 @@ func (datetime *DateTime) Format(format string) string {
 // FormatISO8601 wraps g_date_time_format_iso8601
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Format @datetime in [ISO 8601 format](https://en.wikipedia.org/wiki/ISO_8601),
 // including the date, time and time zone, and return that as a UTF-8 encoded
@@ -17076,7 +17154,7 @@ func (datetime *DateTime) Format(format string) string {
 // Since GLib 2.66, this will output to sub-second precision if needed.
 func (datetime *DateTime) FormatISO8601() string {
 	var carg0 *C.GDateTime // in, none, converted
-	var cret  *C.gchar     // return, full, string
+	var cret  *C.gchar     // return, full, string, nullable-string
 
 	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
 
@@ -17085,8 +17163,10 @@ func (datetime *DateTime) FormatISO8601() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+		defer C.free(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -17540,7 +17620,7 @@ func (datetime *DateTime) IsDaylightSavings() bool {
 // ToLocal wraps g_date_time_to_local
 // The function returns the following values:
 // 
-// 	- goret *DateTime 
+// 	- goret *DateTime (nullable) 
 //
 // Creates a new #GDateTime corresponding to the same instant in time as
 // @datetime, but in the local time zone.
@@ -17549,7 +17629,7 @@ func (datetime *DateTime) IsDaylightSavings() bool {
 // time zone returned by g_time_zone_new_local().
 func (datetime *DateTime) ToLocal() *DateTime {
 	var carg0 *C.GDateTime // in, none, converted
-	var cret  *C.GDateTime // return, full, converted
+	var cret  *C.GDateTime // return, full, converted, nullable
 
 	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
 
@@ -17558,7 +17638,9 @@ func (datetime *DateTime) ToLocal() *DateTime {
 
 	var goret *DateTime
 
-	goret = UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -17571,7 +17653,7 @@ func (datetime *DateTime) ToLocal() *DateTime {
 // 
 // The function returns the following values:
 // 
-// 	- goret *DateTime 
+// 	- goret *DateTime (nullable) 
 //
 // Create a new #GDateTime corresponding to the same instant in time as
 // @datetime, but in the time zone @tz.
@@ -17582,7 +17664,7 @@ func (datetime *DateTime) ToLocal() *DateTime {
 func (datetime *DateTime) ToTimezone(tz *TimeZone) *DateTime {
 	var carg0 *C.GDateTime // in, none, converted
 	var carg1 *C.GTimeZone // in, none, converted
-	var cret  *C.GDateTime // return, full, converted
+	var cret  *C.GDateTime // return, full, converted, nullable
 
 	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
 	carg1 = (*C.GTimeZone)(UnsafeTimeZoneToGlibNone(tz))
@@ -17593,7 +17675,9 @@ func (datetime *DateTime) ToTimezone(tz *TimeZone) *DateTime {
 
 	var goret *DateTime
 
-	goret = UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -17601,7 +17685,7 @@ func (datetime *DateTime) ToTimezone(tz *TimeZone) *DateTime {
 // ToUTC wraps g_date_time_to_utc
 // The function returns the following values:
 // 
-// 	- goret *DateTime 
+// 	- goret *DateTime (nullable) 
 //
 // Creates a new #GDateTime corresponding to the same instant in time as
 // @datetime, but in UTC.
@@ -17610,7 +17694,7 @@ func (datetime *DateTime) ToTimezone(tz *TimeZone) *DateTime {
 // time zone returned by g_time_zone_new_utc().
 func (datetime *DateTime) ToUTC() *DateTime {
 	var carg0 *C.GDateTime // in, none, converted
-	var cret  *C.GDateTime // return, full, converted
+	var cret  *C.GDateTime // return, full, converted, nullable
 
 	carg0 = (*C.GDateTime)(UnsafeDateTimeToGlibNone(datetime))
 
@@ -17619,7 +17703,9 @@ func (datetime *DateTime) ToUTC() *DateTime {
 
 	var goret *DateTime
 
-	goret = UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -18116,7 +18202,7 @@ func UnsafeHmacToGlibFull(h *Hmac) unsafe.Pointer {
 // 
 // The function returns the following values:
 // 
-// 	- goret *Hmac 
+// 	- goret *Hmac (nullable) 
 //
 // Creates a new #GHmac, using the digest algorithm @digest_type.
 // If the @digest_type is not known, %NULL is returned.
@@ -18138,7 +18224,7 @@ func NewHmac(digestType ChecksumType, key []byte) *Hmac {
 	var carg1 C.GChecksumType // in, none, casted
 	var carg2 *C.guchar       // in, transfer: none, C Pointers: 1, Name: array[guchar], array (inner: *typesystem.CastablePrimitive, length-by: carg3)
 	var carg3 C.gsize         // implicit
-	var cret  *C.GHmac        // return, full, converted
+	var cret  *C.GHmac        // return, full, converted, nullable
 
 	carg1 = C.GChecksumType(digestType)
 	_ = key
@@ -18152,7 +18238,9 @@ func NewHmac(digestType ChecksumType, key []byte) *Hmac {
 
 	var goret *Hmac
 
-	goret = UnsafeHmacFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeHmacFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -19908,7 +19996,7 @@ func (keyFile *KeyFile) GetKeys(groupName string) (uint, []string, error) {
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Returns the actual locale which the result of
 // g_key_file_get_locale_string() or g_key_file_get_locale_string_list()
@@ -19924,7 +20012,7 @@ func (keyFile *KeyFile) GetLocaleForKey(groupName string, key string, locale str
 	var carg1 *C.gchar    // in, none, string
 	var carg2 *C.gchar    // in, none, string
 	var carg3 *C.gchar    // in, none, string, nullable-string
-	var cret  *C.gchar    // return, full, string
+	var cret  *C.gchar    // return, full, string, nullable-string
 
 	carg0 = (*C.GKeyFile)(UnsafeKeyFileToGlibNone(keyFile))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(groupName)))
@@ -19944,8 +20032,10 @@ func (keyFile *KeyFile) GetLocaleForKey(groupName string, key string, locale str
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+		defer C.free(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -20082,12 +20172,12 @@ func (keyFile *KeyFile) GetLocaleStringList(groupName string, key string, locale
 // GetStartGroup wraps g_key_file_get_start_group
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Returns the name of the start group of the file.
 func (keyFile *KeyFile) GetStartGroup() string {
 	var carg0 *C.GKeyFile // in, none, converted
-	var cret  *C.gchar    // return, full, string
+	var cret  *C.gchar    // return, full, string, nullable-string
 
 	carg0 = (*C.GKeyFile)(UnsafeKeyFileToGlibNone(keyFile))
 
@@ -20096,8 +20186,10 @@ func (keyFile *KeyFile) GetStartGroup() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+		defer C.free(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -21529,7 +21621,7 @@ func MainContextDefault() *MainContext {
 // MainContextGetThreadDefault wraps g_main_context_get_thread_default
 // The function returns the following values:
 // 
-// 	- goret *MainContext 
+// 	- goret *MainContext (nullable) 
 //
 // Gets the thread-default #GMainContext for this thread. Asynchronous
 // operations that want to be able to be run in contexts other than
@@ -21543,13 +21635,15 @@ func MainContextDefault() *MainContext {
 // If you need to hold a reference on the context, use
 // [func@GLib.MainContext.ref_thread_default] instead.
 func MainContextGetThreadDefault() *MainContext {
-	var cret *C.GMainContext // return, none, converted
+	var cret *C.GMainContext // return, none, converted, nullable
 
 	cret = C.g_main_context_get_thread_default()
 
 	var goret *MainContext
 
-	goret = UnsafeMainContextFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeMainContextFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -22446,7 +22540,7 @@ func (file *MappedFile) GetBytes() *Bytes {
 // GetContents wraps g_mapped_file_get_contents
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Returns the contents of a #GMappedFile.
 // 
@@ -22456,7 +22550,7 @@ func (file *MappedFile) GetBytes() *Bytes {
 // If the file is empty then %NULL is returned.
 func (file *MappedFile) GetContents() string {
 	var carg0 *C.GMappedFile // in, none, converted
-	var cret  *C.gchar       // return, none, string
+	var cret  *C.gchar       // return, none, string, nullable-string
 
 	carg0 = (*C.GMappedFile)(UnsafeMappedFileToGlibNone(file))
 
@@ -22465,7 +22559,9 @@ func (file *MappedFile) GetContents() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -22891,7 +22987,7 @@ func UnsafeMatchInfoToGlibFull(m *MatchInfo) unsafe.Pointer {
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 // 	- _goerr error (nullable): an error 
 //
 // Returns a new string containing the text in @string_to_expand with
@@ -22914,7 +23010,7 @@ func UnsafeMatchInfoToGlibFull(m *MatchInfo) unsafe.Pointer {
 func (matchInfo *MatchInfo) ExpandReferences(stringToExpand string) (string, error) {
 	var carg0 *C.GMatchInfo // in, none, converted
 	var carg1 *C.gchar      // in, none, string
-	var cret  *C.gchar      // return, full, string
+	var cret  *C.gchar      // return, full, string, nullable-string
 	var _cerr *C.GError     // out, full, converted, nullable
 
 	carg0 = (*C.GMatchInfo)(UnsafeMatchInfoToGlibNone(matchInfo))
@@ -22928,8 +23024,10 @@ func (matchInfo *MatchInfo) ExpandReferences(stringToExpand string) (string, err
 	var goret  string
 	var _goerr error
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+		defer C.free(unsafe.Pointer(cret))
+	}
 	if _cerr != nil {
 		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -22945,7 +23043,7 @@ func (matchInfo *MatchInfo) ExpandReferences(stringToExpand string) (string, err
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Retrieves the text matching the @match_num'th capturing
 // parentheses. 0 is the full text of the match, 1 is the first paren
@@ -22966,7 +23064,7 @@ func (matchInfo *MatchInfo) ExpandReferences(stringToExpand string) (string, err
 func (matchInfo *MatchInfo) Fetch(matchNum int) string {
 	var carg0 *C.GMatchInfo // in, none, converted
 	var carg1 C.gint        // in, none, casted
-	var cret  *C.gchar      // return, full, string
+	var cret  *C.gchar      // return, full, string, nullable-string
 
 	carg0 = (*C.GMatchInfo)(UnsafeMatchInfoToGlibNone(matchInfo))
 	carg1 = C.gint(matchNum)
@@ -22977,8 +23075,10 @@ func (matchInfo *MatchInfo) Fetch(matchNum int) string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+		defer C.free(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -23030,7 +23130,7 @@ func (matchInfo *MatchInfo) FetchAll() []string {
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Retrieves the text matching the capturing parentheses named @name.
 // 
@@ -23043,7 +23143,7 @@ func (matchInfo *MatchInfo) FetchAll() []string {
 func (matchInfo *MatchInfo) FetchNamed(name string) string {
 	var carg0 *C.GMatchInfo // in, none, converted
 	var carg1 *C.gchar      // in, none, string
-	var cret  *C.gchar      // return, full, string
+	var cret  *C.gchar      // return, full, string, nullable-string
 
 	carg0 = (*C.GMatchInfo)(UnsafeMatchInfoToGlibNone(matchInfo))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
@@ -23055,8 +23155,10 @@ func (matchInfo *MatchInfo) FetchNamed(name string) string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+		defer C.free(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -24440,7 +24542,7 @@ func (buf *PathBuf) Clear() {
 // ClearToPath wraps g_path_buf_clear_to_path
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Clears the contents of the path buffer and returns the built path.
 // 
@@ -24449,7 +24551,7 @@ func (buf *PathBuf) Clear() {
 // See also: g_path_buf_to_path()
 func (buf *PathBuf) ClearToPath() string {
 	var carg0 *C.GPathBuf // in, none, converted
-	var cret  *C.char     // return, full, string, casted *C.gchar
+	var cret  *C.char     // return, full, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GPathBuf)(UnsafePathBufToGlibNone(buf))
 
@@ -24458,8 +24560,10 @@ func (buf *PathBuf) ClearToPath() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+		defer C.free(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -24467,7 +24571,7 @@ func (buf *PathBuf) ClearToPath() string {
 // FreeToPath wraps g_path_buf_free_to_path
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Frees a `GPathBuf` allocated by g_path_buf_new(), and
 // returns the path inside the buffer.
@@ -24477,7 +24581,7 @@ func (buf *PathBuf) ClearToPath() string {
 // See also: g_path_buf_to_path()
 func (buf *PathBuf) FreeToPath() string {
 	var carg0 *C.GPathBuf // in, none, converted
-	var cret  *C.char     // return, full, string, casted *C.gchar
+	var cret  *C.char     // return, full, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GPathBuf)(UnsafePathBufToGlibNone(buf))
 
@@ -24486,8 +24590,10 @@ func (buf *PathBuf) FreeToPath() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+		defer C.free(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -24755,7 +24861,7 @@ func (buf *PathBuf) SetFilename(fileName string) bool {
 // ToPath wraps g_path_buf_to_path
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Retrieves the built path from the path buffer.
 // 
@@ -24765,7 +24871,7 @@ func (buf *PathBuf) SetFilename(fileName string) bool {
 // If the path buffer is empty, this function returns `NULL`.
 func (buf *PathBuf) ToPath() string {
 	var carg0 *C.GPathBuf // in, none, converted
-	var cret  *C.char     // return, full, string, casted *C.gchar
+	var cret  *C.char     // return, full, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GPathBuf)(UnsafePathBufToGlibNone(buf))
 
@@ -24774,8 +24880,10 @@ func (buf *PathBuf) ToPath() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+		defer C.free(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -25568,7 +25676,7 @@ func UnsafeRegexToGlibFull(r *Regex) unsafe.Pointer {
 // 
 // The function returns the following values:
 // 
-// 	- goret *Regex 
+// 	- goret *Regex (nullable) 
 // 	- _goerr error (nullable): an error 
 //
 // Compiles the regular expression to an internal form, and does
@@ -25577,7 +25685,7 @@ func NewRegex(pattern string, compileOptions RegexCompileFlags, matchOptions Reg
 	var carg1 *C.gchar             // in, none, string
 	var carg2 C.GRegexCompileFlags // in, none, casted
 	var carg3 C.GRegexMatchFlags   // in, none, casted
-	var cret  *C.GRegex            // return, full, converted
+	var cret  *C.GRegex            // return, full, converted, nullable
 	var _cerr *C.GError            // out, full, converted, nullable
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(pattern)))
@@ -25593,7 +25701,9 @@ func NewRegex(pattern string, compileOptions RegexCompileFlags, matchOptions Reg
 	var goret  *Regex
 	var _goerr error
 
-	goret = UnsafeRegexFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeRegexFromGlibFull(unsafe.Pointer(cret))
+	}
 	if _cerr != nil {
 		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -28121,7 +28231,7 @@ func (source *Source) GetCanRecurse() bool {
 // GetContext wraps g_source_get_context
 // The function returns the following values:
 // 
-// 	- goret *MainContext 
+// 	- goret *MainContext (nullable) 
 //
 // Gets the [struct@GLib.MainContext] with which the source is associated.
 // 
@@ -28133,7 +28243,7 @@ func (source *Source) GetCanRecurse() bool {
 // whose [struct@GLib.MainContext] has been destroyed is an error.
 func (source *Source) GetContext() *MainContext {
 	var carg0 *C.GSource      // in, none, converted
-	var cret  *C.GMainContext // return, none, converted
+	var cret  *C.GMainContext // return, none, converted, nullable
 
 	carg0 = (*C.GSource)(UnsafeSourceToGlibNone(source))
 
@@ -28142,7 +28252,9 @@ func (source *Source) GetContext() *MainContext {
 
 	var goret *MainContext
 
-	goret = UnsafeMainContextFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeMainContextFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -28181,13 +28293,13 @@ func (source *Source) GetID() uint {
 // GetName wraps g_source_get_name
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets a name for the source, used in debugging and profiling.  The
 // name may be #NULL if it has never been set with [method@GLib.Source.set_name].
 func (source *Source) GetName() string {
 	var carg0 *C.GSource // in, none, converted
-	var cret  *C.char    // return, none, string, casted *C.gchar
+	var cret  *C.char    // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GSource)(UnsafeSourceToGlibNone(source))
 
@@ -28196,7 +28308,9 @@ func (source *Source) GetName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -28883,7 +28997,7 @@ func UnsafeTimeZoneToGlibFull(t *TimeZone) unsafe.Pointer {
 // 
 // The function returns the following values:
 // 
-// 	- goret *TimeZone 
+// 	- goret *TimeZone (nullable) 
 //
 // Creates a #GTimeZone corresponding to @identifier. If @identifier cannot be
 // parsed or loaded, %NULL is returned.
@@ -28952,7 +29066,7 @@ func UnsafeTimeZoneToGlibFull(t *TimeZone) unsafe.Pointer {
 // when you are done with it.
 func NewTimeZoneIdentifier(identifier string) *TimeZone {
 	var carg1 *C.gchar     // in, none, string, nullable-string
-	var cret  *C.GTimeZone // return, full, converted
+	var cret  *C.GTimeZone // return, full, converted, nullable
 
 	if identifier != "" {
 		carg1 = (*C.gchar)(unsafe.Pointer(C.CString(identifier)))
@@ -28964,7 +29078,9 @@ func NewTimeZoneIdentifier(identifier string) *TimeZone {
 
 	var goret *TimeZone
 
-	goret = UnsafeTimeZoneFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeTimeZoneFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -29488,13 +29604,13 @@ func UnsafeTreeNodeToGlibFull(t *TreeNode) unsafe.Pointer {
 // Next wraps g_tree_node_next
 // The function returns the following values:
 // 
-// 	- goret *TreeNode 
+// 	- goret *TreeNode (nullable) 
 //
 // Returns the next in-order node of the tree, or %NULL
 // if the passed node was already the last one.
 func (node *TreeNode) Next() *TreeNode {
 	var carg0 *C.GTreeNode // in, none, converted
-	var cret  *C.GTreeNode // return, none, converted
+	var cret  *C.GTreeNode // return, none, converted, nullable
 
 	carg0 = (*C.GTreeNode)(UnsafeTreeNodeToGlibNone(node))
 
@@ -29503,7 +29619,9 @@ func (node *TreeNode) Next() *TreeNode {
 
 	var goret *TreeNode
 
-	goret = UnsafeTreeNodeFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeTreeNodeFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -29511,13 +29629,13 @@ func (node *TreeNode) Next() *TreeNode {
 // Previous wraps g_tree_node_previous
 // The function returns the following values:
 // 
-// 	- goret *TreeNode 
+// 	- goret *TreeNode (nullable) 
 //
 // Returns the previous in-order node of the tree, or %NULL
 // if the passed node was already the first one.
 func (node *TreeNode) Previous() *TreeNode {
 	var carg0 *C.GTreeNode // in, none, converted
-	var cret  *C.GTreeNode // return, none, converted
+	var cret  *C.GTreeNode // return, none, converted, nullable
 
 	carg0 = (*C.GTreeNode)(UnsafeTreeNodeToGlibNone(node))
 
@@ -29526,7 +29644,9 @@ func (node *TreeNode) Previous() *TreeNode {
 
 	var goret *TreeNode
 
-	goret = UnsafeTreeNodeFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeTreeNodeFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -30346,7 +30466,7 @@ func UriParse(uriString string, flags URIFlags) (*Uri, error) {
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the scheme portion of a URI string.
 // [RFC 3986](https://tools.ietf.org/html/rfc3986#section-3) decodes the scheme
@@ -30357,7 +30477,7 @@ func UriParse(uriString string, flags URIFlags) (*Uri, error) {
 // Common schemes include `file`, `https`, `svn+ssh`, etc.
 func UriParseScheme(uri string) string {
 	var carg1 *C.char // in, none, string, casted *C.gchar
-	var cret  *C.char // return, full, string, casted *C.gchar
+	var cret  *C.char // return, full, string, casted *C.gchar, nullable
 
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(uri)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -30367,8 +30487,10 @@ func UriParseScheme(uri string) string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+		defer C.free(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -30381,7 +30503,7 @@ func UriParseScheme(uri string) string {
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the scheme portion of a URI string.
 // [RFC 3986](https://tools.ietf.org/html/rfc3986#section-3) decodes the scheme
@@ -30395,7 +30517,7 @@ func UriParseScheme(uri string) string {
 // all-lowercase and does not need to be freed.
 func UriPeekScheme(uri string) string {
 	var carg1 *C.char // in, none, string, casted *C.gchar
-	var cret  *C.char // return, none, string, casted *C.gchar
+	var cret  *C.char // return, none, string, casted *C.gchar, nullable
 
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(uri)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -30405,7 +30527,9 @@ func UriPeekScheme(uri string) string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -30819,7 +30943,7 @@ func UriUnescapeBytes(escapedString string, length int, illegalCharacters string
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Unescapes a segment of an escaped string.
 // 
@@ -30835,7 +30959,7 @@ func UriUnescapeSegment(escapedString string, escapedStringEnd string, illegalCh
 	var carg1 *C.char // in, none, string, nullable-string
 	var carg2 *C.char // in, none, string, nullable-string
 	var carg3 *C.char // in, none, string, nullable-string
-	var cret  *C.char // return, full, string, casted *C.gchar
+	var cret  *C.char // return, full, string, casted *C.gchar, nullable
 
 	if escapedString != "" {
 		carg1 = (*C.char)(unsafe.Pointer(C.CString(escapedString)))
@@ -30857,8 +30981,10 @@ func UriUnescapeSegment(escapedString string, escapedStringEnd string, illegalCh
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+		defer C.free(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -30873,7 +30999,7 @@ func UriUnescapeSegment(escapedString string, escapedStringEnd string, illegalCh
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Unescapes a whole escaped string.
 // 
@@ -30885,7 +31011,7 @@ func UriUnescapeSegment(escapedString string, escapedStringEnd string, illegalCh
 func UriUnescapeString(escapedString string, illegalCharacters string) string {
 	var carg1 *C.char // in, none, string, casted *C.gchar
 	var carg2 *C.char // in, none, string, nullable-string
-	var cret  *C.char // return, full, string, casted *C.gchar
+	var cret  *C.char // return, full, string, casted *C.gchar, nullable
 
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(escapedString)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -30900,8 +31026,10 @@ func UriUnescapeString(escapedString string, illegalCharacters string) string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+		defer C.free(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -30909,7 +31037,7 @@ func UriUnescapeString(escapedString string, illegalCharacters string) string {
 // GetAuthParams wraps g_uri_get_auth_params
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets @uri's authentication parameters, which may contain
 // `%`-encoding, depending on the flags with which @uri was created.
@@ -30920,7 +31048,7 @@ func UriUnescapeString(escapedString string, illegalCharacters string) string {
 // further parsing this information.
 func (uri *Uri) GetAuthParams() string {
 	var carg0 *C.GUri  // in, none, converted
-	var cret  *C.gchar // return, none, string
+	var cret  *C.gchar // return, none, string, nullable-string
 
 	carg0 = (*C.GUri)(UnsafeUriToGlibNone(uri))
 
@@ -30929,7 +31057,9 @@ func (uri *Uri) GetAuthParams() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -30959,13 +31089,13 @@ func (uri *Uri) GetFlags() URIFlags {
 // GetFragment wraps g_uri_get_fragment
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets @uri's fragment, which may contain `%`-encoding, depending on
 // the flags with which @uri was created.
 func (uri *Uri) GetFragment() string {
 	var carg0 *C.GUri  // in, none, converted
-	var cret  *C.gchar // return, none, string
+	var cret  *C.gchar // return, none, string, nullable-string
 
 	carg0 = (*C.GUri)(UnsafeUriToGlibNone(uri))
 
@@ -30974,7 +31104,9 @@ func (uri *Uri) GetFragment() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -30982,7 +31114,7 @@ func (uri *Uri) GetFragment() string {
 // GetHost wraps g_uri_get_host
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets @uri's host. This will never have `%`-encoded characters,
 // unless it is non-UTF-8 (which can only be the case if @uri was
@@ -30995,7 +31127,7 @@ func (uri *Uri) GetFragment() string {
 // `fe80::1234%``25em1` if the string is still encoded).
 func (uri *Uri) GetHost() string {
 	var carg0 *C.GUri  // in, none, converted
-	var cret  *C.gchar // return, none, string
+	var cret  *C.gchar // return, none, string, nullable-string
 
 	carg0 = (*C.GUri)(UnsafeUriToGlibNone(uri))
 
@@ -31004,7 +31136,9 @@ func (uri *Uri) GetHost() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -31012,14 +31146,14 @@ func (uri *Uri) GetHost() string {
 // GetPassword wraps g_uri_get_password
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets @uri's password, which may contain `%`-encoding, depending on
 // the flags with which @uri was created. (If @uri was not created
 // with %G_URI_FLAGS_HAS_PASSWORD then this will be %NULL.)
 func (uri *Uri) GetPassword() string {
 	var carg0 *C.GUri  // in, none, converted
-	var cret  *C.gchar // return, none, string
+	var cret  *C.gchar // return, none, string, nullable-string
 
 	carg0 = (*C.GUri)(UnsafeUriToGlibNone(uri))
 
@@ -31028,7 +31162,9 @@ func (uri *Uri) GetPassword() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -31081,7 +31217,7 @@ func (uri *Uri) GetPort() int {
 // GetQuery wraps g_uri_get_query
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets @uri's query, which may contain `%`-encoding, depending on the
 // flags with which @uri was created.
@@ -31090,7 +31226,7 @@ func (uri *Uri) GetPort() int {
 // #GUriParamsIter or g_uri_parse_params() may be useful.
 func (uri *Uri) GetQuery() string {
 	var carg0 *C.GUri  // in, none, converted
-	var cret  *C.gchar // return, none, string
+	var cret  *C.gchar // return, none, string, nullable-string
 
 	carg0 = (*C.GUri)(UnsafeUriToGlibNone(uri))
 
@@ -31099,7 +31235,9 @@ func (uri *Uri) GetQuery() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -31130,7 +31268,7 @@ func (uri *Uri) GetScheme() string {
 // GetUser wraps g_uri_get_user
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the ‘username’ component of @uri's userinfo, which may contain
 // `%`-encoding, depending on the flags with which @uri was created.
@@ -31138,7 +31276,7 @@ func (uri *Uri) GetScheme() string {
 // %G_URI_FLAGS_HAS_AUTH_PARAMS, this is the same as g_uri_get_userinfo().
 func (uri *Uri) GetUser() string {
 	var carg0 *C.GUri  // in, none, converted
-	var cret  *C.gchar // return, none, string
+	var cret  *C.gchar // return, none, string, nullable-string
 
 	carg0 = (*C.GUri)(UnsafeUriToGlibNone(uri))
 
@@ -31147,7 +31285,9 @@ func (uri *Uri) GetUser() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -31155,13 +31295,13 @@ func (uri *Uri) GetUser() string {
 // GetUserinfo wraps g_uri_get_userinfo
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets @uri's userinfo, which may contain `%`-encoding, depending on
 // the flags with which @uri was created.
 func (uri *Uri) GetUserinfo() string {
 	var carg0 *C.GUri  // in, none, converted
-	var cret  *C.gchar // return, none, string
+	var cret  *C.gchar // return, none, string, nullable-string
 
 	carg0 = (*C.GUri)(UnsafeUriToGlibNone(uri))
 
@@ -31170,7 +31310,9 @@ func (uri *Uri) GetUserinfo() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }

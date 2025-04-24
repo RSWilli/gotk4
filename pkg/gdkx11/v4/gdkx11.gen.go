@@ -102,13 +102,13 @@ func X11DeviceGetID(device X11DeviceXI2) int {
 // 
 // The function returns the following values:
 // 
-// 	- goret X11DeviceXI2 
+// 	- goret X11DeviceXI2 (nullable) 
 //
 // Returns the `GdkDevice` that wraps the given device ID.
 func X11DeviceManagerLookup(deviceManager X11DeviceManagerXI2, deviceId int) X11DeviceXI2 {
 	var carg1 *C.GdkX11DeviceManagerXI2 // in, none, converted
 	var carg2 C.int                     // in, none, casted, casted C.gint
-	var cret  *C.GdkDevice              // return, none, converted, casted *C.GdkX11DeviceXI2
+	var cret  *C.GdkDevice              // return, none, converted, casted *C.GdkX11DeviceXI2, nullable
 
 	carg1 = (*C.GdkX11DeviceManagerXI2)(UnsafeX11DeviceManagerXI2ToGlibNone(deviceManager))
 	carg2 = C.int(deviceId)
@@ -119,7 +119,9 @@ func X11DeviceManagerLookup(deviceManager X11DeviceManagerXI2, deviceId int) X11
 
 	var goret X11DeviceXI2
 
-	goret = UnsafeX11DeviceXI2FromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeX11DeviceXI2FromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -538,14 +540,14 @@ func UnsafeX11DisplayToGlibFull(c X11Display) unsafe.Pointer {
 // 
 // The function returns the following values:
 // 
-// 	- goret gdk.Display 
+// 	- goret gdk.Display (nullable) 
 //
 // Tries to open a new display to the X server given by
 // @display_name. If opening the display fails, %NULL is
 // returned.
 func X11DisplayOpen(displayName string) gdk.Display {
 	var carg1 *C.char       // in, none, string, nullable-string
-	var cret  *C.GdkDisplay // return, full, converted
+	var cret  *C.GdkDisplay // return, full, converted, nullable
 
 	if displayName != "" {
 		carg1 = (*C.char)(unsafe.Pointer(C.CString(displayName)))
@@ -557,7 +559,9 @@ func X11DisplayOpen(displayName string) gdk.Display {
 
 	var goret gdk.Display
 
-	goret = gdk.UnsafeDisplayFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gdk.UnsafeDisplayFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -1348,7 +1352,7 @@ type X11Surface interface {
 	// GetGroup wraps gdk_x11_surface_get_group
 	// The function returns the following values:
 	// 
-	// 	- goret gdk.Surface 
+	// 	- goret gdk.Surface (nullable) 
 	//
 	// Returns the group this surface belongs to.
 	GetGroup() gdk.Surface
@@ -1527,12 +1531,12 @@ func (surface *X11SurfaceInstance) GetDesktop() uint32 {
 // GetGroup wraps gdk_x11_surface_get_group
 // The function returns the following values:
 // 
-// 	- goret gdk.Surface 
+// 	- goret gdk.Surface (nullable) 
 //
 // Returns the group this surface belongs to.
 func (surface *X11SurfaceInstance) GetGroup() gdk.Surface {
 	var carg0 *C.GdkSurface // in, none, converted, casted *C.GdkX11Surface
-	var cret  *C.GdkSurface // return, none, converted
+	var cret  *C.GdkSurface // return, none, converted, nullable
 
 	carg0 = (*C.GdkSurface)(UnsafeX11SurfaceToGlibNone(surface))
 
@@ -1541,7 +1545,9 @@ func (surface *X11SurfaceInstance) GetGroup() gdk.Surface {
 
 	var goret gdk.Surface
 
-	goret = gdk.UnsafeSurfaceFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gdk.UnsafeSurfaceFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }

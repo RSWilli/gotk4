@@ -78,7 +78,7 @@ type WaylandDevice interface {
 	// GetNodePath wraps gdk_wayland_device_get_node_path
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Returns the `/dev/input/event*` path of this device.
 	// 
@@ -130,7 +130,7 @@ func UnsafeWaylandDeviceToGlibFull(c WaylandDevice) unsafe.Pointer {
 // GetNodePath wraps gdk_wayland_device_get_node_path
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Returns the `/dev/input/event*` path of this device.
 // 
@@ -142,7 +142,7 @@ func UnsafeWaylandDeviceToGlibFull(c WaylandDevice) unsafe.Pointer {
 // %GDK_SOURCE_PEN, %GDK_SOURCE_TABLET_PAD.
 func (device *WaylandDeviceInstance) GetNodePath() string {
 	var carg0 *C.GdkDevice // in, none, converted, casted *C.GdkWaylandDevice
-	var cret  *C.char      // return, none, string, casted *C.gchar
+	var cret  *C.char      // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GdkDevice)(UnsafeWaylandDeviceToGlibNone(device))
 
@@ -151,7 +151,9 @@ func (device *WaylandDeviceInstance) GetNodePath() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }

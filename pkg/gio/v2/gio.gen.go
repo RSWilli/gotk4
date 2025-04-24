@@ -5901,12 +5901,12 @@ func ContentTypeEquals(type1 string, type2 string) bool {
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Tries to find a content type based on the mime type name.
 func ContentTypeFromMIMEType(mimeType string) string {
 	var carg1 *C.gchar // in, none, string
-	var cret  *C.gchar // return, full, string
+	var cret  *C.gchar // return, full, string, nullable-string
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(mimeType)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -5916,8 +5916,10 @@ func ContentTypeFromMIMEType(mimeType string) string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+		defer C.free(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -5959,7 +5961,7 @@ func ContentTypeGetDescription(typ string) string {
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the generic icon name for a content type.
 // 
@@ -5968,7 +5970,7 @@ func ContentTypeGetDescription(typ string) string {
 // specification for more on the generic icon name.
 func ContentTypeGetGenericIconName(typ string) string {
 	var carg1 *C.gchar // in, none, string
-	var cret  *C.gchar // return, full, string
+	var cret  *C.gchar // return, full, string, nullable-string
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(typ)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -5978,8 +5980,10 @@ func ContentTypeGetGenericIconName(typ string) string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+		defer C.free(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -6041,12 +6045,12 @@ func ContentTypeGetMIMEDirs() []string {
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the mime type for the content type, if one is registered.
 func ContentTypeGetMIMEType(typ string) string {
 	var carg1 *C.gchar // in, none, string
-	var cret  *C.gchar // return, full, string
+	var cret  *C.gchar // return, full, string, nullable-string
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(typ)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -6056,8 +6060,10 @@ func ContentTypeGetMIMEType(typ string) string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+		defer C.free(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -6946,7 +6952,7 @@ func DBusIsUniqueName(str string) bool {
 // 
 // The function returns the following values:
 // 
-// 	- goret []uint8 
+// 	- goret []uint8 (nullable) 
 //
 // Unescapes an string that was previously escaped with
 // g_dbus_escape_object_path(). If the string is in a format that could
@@ -6958,7 +6964,7 @@ func DBusIsUniqueName(str string) bool {
 // should contain `c` instead).
 func DBusUnescapeObjectPath(s string) []uint8 {
 	var carg1 *C.gchar  // in, none, string
-	var cret  *C.guint8 // return, transfer: none, C Pointers: 1, Name: array[guint8], scope: , array (inner: *typesystem.CastablePrimitive, zero-terminated)
+	var cret  *C.guint8 // return, transfer: none, C Pointers: 1, Name: array[guint8], scope: , nullable, array (inner: *typesystem.CastablePrimitive, zero-terminated)
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(s)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -7779,7 +7785,7 @@ type Action interface {
 	// GetParameterType wraps g_action_get_parameter_type
 	// The function returns the following values:
 	// 
-	// 	- goret *glib.VariantType 
+	// 	- goret *glib.VariantType (nullable) 
 	//
 	// Queries the type of the parameter that must be given when activating
 	// @action.
@@ -7794,7 +7800,7 @@ type Action interface {
 	// GetStateType wraps g_action_get_state_type
 	// The function returns the following values:
 	// 
-	// 	- goret *glib.VariantType 
+	// 	- goret *glib.VariantType (nullable) 
 	//
 	// Queries the type of the state of @action.
 	// 
@@ -7937,7 +7943,7 @@ func (action *ActionInstance) GetName() string {
 // GetParameterType wraps g_action_get_parameter_type
 // The function returns the following values:
 // 
-// 	- goret *glib.VariantType 
+// 	- goret *glib.VariantType (nullable) 
 //
 // Queries the type of the parameter that must be given when activating
 // @action.
@@ -7950,7 +7956,7 @@ func (action *ActionInstance) GetName() string {
 // [type@GLib.Variant], but `NULL` instead.
 func (action *ActionInstance) GetParameterType() *glib.VariantType {
 	var carg0 *C.GAction      // in, none, converted
-	var cret  *C.GVariantType // return, none, converted
+	var cret  *C.GVariantType // return, none, converted, nullable
 
 	carg0 = (*C.GAction)(UnsafeActionToGlibNone(action))
 
@@ -7959,7 +7965,9 @@ func (action *ActionInstance) GetParameterType() *glib.VariantType {
 
 	var goret *glib.VariantType
 
-	goret = glib.UnsafeVariantTypeFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = glib.UnsafeVariantTypeFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -7967,7 +7975,7 @@ func (action *ActionInstance) GetParameterType() *glib.VariantType {
 // GetStateType wraps g_action_get_state_type
 // The function returns the following values:
 // 
-// 	- goret *glib.VariantType 
+// 	- goret *glib.VariantType (nullable) 
 //
 // Queries the type of the state of @action.
 // 
@@ -7983,7 +7991,7 @@ func (action *ActionInstance) GetParameterType() *glib.VariantType {
 // will return `NULL` and you must not call [method@Gio.Action.change_state].
 func (action *ActionInstance) GetStateType() *glib.VariantType {
 	var carg0 *C.GAction      // in, none, converted
-	var cret  *C.GVariantType // return, none, converted
+	var cret  *C.GVariantType // return, none, converted, nullable
 
 	carg0 = (*C.GAction)(UnsafeActionToGlibNone(action))
 
@@ -7992,7 +8000,9 @@ func (action *ActionInstance) GetStateType() *glib.VariantType {
 
 	var goret *glib.VariantType
 
-	goret = glib.UnsafeVariantTypeFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = glib.UnsafeVariantTypeFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -8108,7 +8118,7 @@ type ActionGroup interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret *glib.VariantType 
+	// 	- goret *glib.VariantType (nullable) 
 	//
 	// Queries the type of the parameter that must be given when activating
 	// the named action within @action_group.
@@ -8132,7 +8142,7 @@ type ActionGroup interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret *glib.VariantType 
+	// 	- goret *glib.VariantType (nullable) 
 	//
 	// Queries the type of the state of the named action within
 	// @action_group.
@@ -8347,7 +8357,7 @@ func (actionGroup *ActionGroupInstance) GetActionEnabled(actionName string) bool
 // 
 // The function returns the following values:
 // 
-// 	- goret *glib.VariantType 
+// 	- goret *glib.VariantType (nullable) 
 //
 // Queries the type of the parameter that must be given when activating
 // the named action within @action_group.
@@ -8365,7 +8375,7 @@ func (actionGroup *ActionGroupInstance) GetActionEnabled(actionName string) bool
 func (actionGroup *ActionGroupInstance) GetActionParameterType(actionName string) *glib.VariantType {
 	var carg0 *C.GActionGroup // in, none, converted
 	var carg1 *C.gchar        // in, none, string
-	var cret  *C.GVariantType // return, none, converted
+	var cret  *C.GVariantType // return, none, converted, nullable
 
 	carg0 = (*C.GActionGroup)(UnsafeActionGroupToGlibNone(actionGroup))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(actionName)))
@@ -8377,7 +8387,9 @@ func (actionGroup *ActionGroupInstance) GetActionParameterType(actionName string
 
 	var goret *glib.VariantType
 
-	goret = glib.UnsafeVariantTypeFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = glib.UnsafeVariantTypeFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -8390,7 +8402,7 @@ func (actionGroup *ActionGroupInstance) GetActionParameterType(actionName string
 // 
 // The function returns the following values:
 // 
-// 	- goret *glib.VariantType 
+// 	- goret *glib.VariantType (nullable) 
 //
 // Queries the type of the state of the named action within
 // @action_group.
@@ -8411,7 +8423,7 @@ func (actionGroup *ActionGroupInstance) GetActionParameterType(actionName string
 func (actionGroup *ActionGroupInstance) GetActionStateType(actionName string) *glib.VariantType {
 	var carg0 *C.GActionGroup // in, none, converted
 	var carg1 *C.gchar        // in, none, string
-	var cret  *C.GVariantType // return, none, converted
+	var cret  *C.GVariantType // return, none, converted, nullable
 
 	carg0 = (*C.GActionGroup)(UnsafeActionGroupToGlibNone(actionGroup))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(actionName)))
@@ -8423,7 +8435,9 @@ func (actionGroup *ActionGroupInstance) GetActionStateType(actionName string) *g
 
 	var goret *glib.VariantType
 
-	goret = glib.UnsafeVariantTypeFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = glib.UnsafeVariantTypeFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -8557,7 +8571,7 @@ type ActionMap interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret Action 
+	// 	- goret Action (nullable) 
 	//
 	// Looks up the action with the name @action_name in @action_map.
 	// 
@@ -8675,7 +8689,7 @@ func (actionMap *ActionMapInstance) AddAction(action Action) {
 // 
 // The function returns the following values:
 // 
-// 	- goret Action 
+// 	- goret Action (nullable) 
 //
 // Looks up the action with the name @action_name in @action_map.
 // 
@@ -8683,7 +8697,7 @@ func (actionMap *ActionMapInstance) AddAction(action Action) {
 func (actionMap *ActionMapInstance) LookupAction(actionName string) Action {
 	var carg0 *C.GActionMap // in, none, converted
 	var carg1 *C.gchar      // in, none, string
-	var cret  *C.GAction    // return, none, converted
+	var cret  *C.GAction    // return, none, converted, nullable
 
 	carg0 = (*C.GActionMap)(UnsafeActionMapToGlibNone(actionMap))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(actionName)))
@@ -8695,7 +8709,9 @@ func (actionMap *ActionMapInstance) LookupAction(actionName string) Action {
 
 	var goret Action
 
-	goret = UnsafeActionFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeActionFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -8901,7 +8917,7 @@ type AppInfo interface {
 	// GetCommandline wraps g_app_info_get_commandline
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the commandline with which the application will be
 	// started.
@@ -8909,7 +8925,7 @@ type AppInfo interface {
 	// GetDescription wraps g_app_info_get_description
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets a human-readable description of an installed application.
 	GetDescription() string
@@ -8935,14 +8951,14 @@ type AppInfo interface {
 	// GetIcon wraps g_app_info_get_icon
 	// The function returns the following values:
 	// 
-	// 	- goret Icon 
+	// 	- goret Icon (nullable) 
 	//
 	// Gets the icon for the application.
 	GetIcon() Icon
 	// GetID wraps g_app_info_get_id
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the ID of an application. An id is a string that identifies the
 	// application. The exact format of the id is platform dependent. For instance,
@@ -9240,13 +9256,13 @@ func AppInfoGetAllForType(contentType string) []AppInfo {
 // 
 // The function returns the following values:
 // 
-// 	- goret AppInfo 
+// 	- goret AppInfo (nullable) 
 //
 // Gets the default [iface@Gio.AppInfo] for a given content type.
 func AppInfoGetDefaultForType(contentType string, mustSupportUris bool) AppInfo {
 	var carg1 *C.char     // in, none, string, casted *C.gchar
 	var carg2 C.gboolean  // in
-	var cret  *C.GAppInfo // return, full, converted
+	var cret  *C.GAppInfo // return, full, converted, nullable
 
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(contentType)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -9260,7 +9276,9 @@ func AppInfoGetDefaultForType(contentType string, mustSupportUris bool) AppInfo 
 
 	var goret AppInfo
 
-	goret = UnsafeAppInfoFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeAppInfoFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -9350,7 +9368,7 @@ func AppInfoGetDefaultForTypeFinish(result AsyncResult) (AppInfo, error) {
 // 
 // The function returns the following values:
 // 
-// 	- goret AppInfo 
+// 	- goret AppInfo (nullable) 
 //
 // Gets the default application for handling URIs with the given URI scheme.
 // 
@@ -9358,7 +9376,7 @@ func AppInfoGetDefaultForTypeFinish(result AsyncResult) (AppInfo, error) {
 // For example, `http`, `ftp` or `sip`.
 func AppInfoGetDefaultForURIScheme(uriScheme string) AppInfo {
 	var carg1 *C.char     // in, none, string, casted *C.gchar
-	var cret  *C.GAppInfo // return, full, converted
+	var cret  *C.GAppInfo // return, full, converted, nullable
 
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(uriScheme)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -9368,7 +9386,9 @@ func AppInfoGetDefaultForURIScheme(uriScheme string) AppInfo {
 
 	var goret AppInfo
 
-	goret = UnsafeAppInfoFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeAppInfoFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -9851,13 +9871,13 @@ func (appinfo1 *AppInfoInstance) Equal(appinfo2 AppInfo) bool {
 // GetCommandline wraps g_app_info_get_commandline
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the commandline with which the application will be
 // started.
 func (appinfo *AppInfoInstance) GetCommandline() string {
 	var carg0 *C.GAppInfo // in, none, converted
-	var cret  *C.char     // return, none, string, casted *C.gchar
+	var cret  *C.char     // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GAppInfo)(UnsafeAppInfoToGlibNone(appinfo))
 
@@ -9866,7 +9886,9 @@ func (appinfo *AppInfoInstance) GetCommandline() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -9874,12 +9896,12 @@ func (appinfo *AppInfoInstance) GetCommandline() string {
 // GetDescription wraps g_app_info_get_description
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets a human-readable description of an installed application.
 func (appinfo *AppInfoInstance) GetDescription() string {
 	var carg0 *C.GAppInfo // in, none, converted
-	var cret  *C.char     // return, none, string, casted *C.gchar
+	var cret  *C.char     // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GAppInfo)(UnsafeAppInfoToGlibNone(appinfo))
 
@@ -9888,7 +9910,9 @@ func (appinfo *AppInfoInstance) GetDescription() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -9945,12 +9969,12 @@ func (appinfo *AppInfoInstance) GetExecutable() string {
 // GetIcon wraps g_app_info_get_icon
 // The function returns the following values:
 // 
-// 	- goret Icon 
+// 	- goret Icon (nullable) 
 //
 // Gets the icon for the application.
 func (appinfo *AppInfoInstance) GetIcon() Icon {
 	var carg0 *C.GAppInfo // in, none, converted
-	var cret  *C.GIcon    // return, none, converted
+	var cret  *C.GIcon    // return, none, converted, nullable
 
 	carg0 = (*C.GAppInfo)(UnsafeAppInfoToGlibNone(appinfo))
 
@@ -9959,7 +9983,9 @@ func (appinfo *AppInfoInstance) GetIcon() Icon {
 
 	var goret Icon
 
-	goret = UnsafeIconFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeIconFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -9967,7 +9993,7 @@ func (appinfo *AppInfoInstance) GetIcon() Icon {
 // GetID wraps g_app_info_get_id
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the ID of an application. An id is a string that identifies the
 // application. The exact format of the id is platform dependent. For instance,
@@ -9977,7 +10003,7 @@ func (appinfo *AppInfoInstance) GetIcon() Icon {
 // been constructed.
 func (appinfo *AppInfoInstance) GetID() string {
 	var carg0 *C.GAppInfo // in, none, converted
-	var cret  *C.char     // return, none, string, casted *C.gchar
+	var cret  *C.char     // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GAppInfo)(UnsafeAppInfoToGlibNone(appinfo))
 
@@ -9986,7 +10012,9 @@ func (appinfo *AppInfoInstance) GetID() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -10786,7 +10814,7 @@ type AsyncResult interface {
 	// GetSourceObject wraps g_async_result_get_source_object
 	// The function returns the following values:
 	// 
-	// 	- goret gobject.Object 
+	// 	- goret gobject.Object (nullable) 
 	//
 	// Gets the source object from a [iface@Gio.AsyncResult].
 	GetSourceObject() gobject.Object
@@ -10850,12 +10878,12 @@ func UnsafeAsyncResultToGlibFull(c AsyncResult) unsafe.Pointer {
 // GetSourceObject wraps g_async_result_get_source_object
 // The function returns the following values:
 // 
-// 	- goret gobject.Object 
+// 	- goret gobject.Object (nullable) 
 //
 // Gets the source object from a [iface@Gio.AsyncResult].
 func (res *AsyncResultInstance) GetSourceObject() gobject.Object {
 	var carg0 *C.GAsyncResult // in, none, converted
-	var cret  *C.GObject      // return, full, converted
+	var cret  *C.GObject      // return, full, converted, nullable
 
 	carg0 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(res))
 
@@ -10864,7 +10892,9 @@ func (res *AsyncResultInstance) GetSourceObject() gobject.Object {
 
 	var goret gobject.Object
 
-	goret = gobject.UnsafeObjectFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gobject.UnsafeObjectFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -11307,7 +11337,7 @@ type DBusInterface interface {
 	// DupObject wraps g_dbus_interface_dup_object
 	// The function returns the following values:
 	// 
-	// 	- goret DBusObject 
+	// 	- goret DBusObject (nullable) 
 	//
 	// Gets the #GDBusObject that @interface_ belongs to, if any.
 	DupObject() DBusObject
@@ -11372,12 +11402,12 @@ func UnsafeDBusInterfaceToGlibFull(c DBusInterface) unsafe.Pointer {
 // DupObject wraps g_dbus_interface_dup_object
 // The function returns the following values:
 // 
-// 	- goret DBusObject 
+// 	- goret DBusObject (nullable) 
 //
 // Gets the #GDBusObject that @interface_ belongs to, if any.
 func (interface_ *DBusInterfaceInstance) DupObject() DBusObject {
 	var carg0 *C.GDBusInterface // in, none, converted
-	var cret  *C.GDBusObject    // return, full, converted
+	var cret  *C.GDBusObject    // return, full, converted, nullable
 
 	carg0 = (*C.GDBusInterface)(UnsafeDBusInterfaceToGlibNone(interface_))
 
@@ -11386,7 +11416,9 @@ func (interface_ *DBusInterfaceInstance) DupObject() DBusObject {
 
 	var goret DBusObject
 
-	goret = UnsafeDBusObjectFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeDBusObjectFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -11462,7 +11494,7 @@ type DBusObject interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret DBusInterface 
+	// 	- goret DBusInterface (nullable) 
 	//
 	// Gets the D-Bus interface with name @interface_name associated with
 	// @object, if any.
@@ -11537,14 +11569,14 @@ func UnsafeDBusObjectToGlibFull(c DBusObject) unsafe.Pointer {
 // 
 // The function returns the following values:
 // 
-// 	- goret DBusInterface 
+// 	- goret DBusInterface (nullable) 
 //
 // Gets the D-Bus interface with name @interface_name associated with
 // @object, if any.
 func (object *DBusObjectInstance) GetInterface(interfaceName string) DBusInterface {
 	var carg0 *C.GDBusObject    // in, none, converted
 	var carg1 *C.gchar          // in, none, string
-	var cret  *C.GDBusInterface // return, full, converted
+	var cret  *C.GDBusInterface // return, full, converted, nullable
 
 	carg0 = (*C.GDBusObject)(UnsafeDBusObjectToGlibNone(object))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(interfaceName)))
@@ -11556,7 +11588,9 @@ func (object *DBusObjectInstance) GetInterface(interfaceName string) DBusInterfa
 
 	var goret DBusInterface
 
-	goret = UnsafeDBusInterfaceFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeDBusInterfaceFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -11653,7 +11687,7 @@ type DBusObjectManager interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret DBusInterface 
+	// 	- goret DBusInterface (nullable) 
 	//
 	// Gets the interface proxy for @interface_name at @object_path, if
 	// any.
@@ -11666,7 +11700,7 @@ type DBusObjectManager interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret DBusObject 
+	// 	- goret DBusObject (nullable) 
 	//
 	// Gets the #GDBusObject at @object_path, if any.
 	GetObject(string) DBusObject
@@ -11755,7 +11789,7 @@ func UnsafeDBusObjectManagerToGlibFull(c DBusObjectManager) unsafe.Pointer {
 // 
 // The function returns the following values:
 // 
-// 	- goret DBusInterface 
+// 	- goret DBusInterface (nullable) 
 //
 // Gets the interface proxy for @interface_name at @object_path, if
 // any.
@@ -11763,7 +11797,7 @@ func (manager *DBusObjectManagerInstance) GetInterface(objectPath string, interf
 	var carg0 *C.GDBusObjectManager // in, none, converted
 	var carg1 *C.gchar              // in, none, string
 	var carg2 *C.gchar              // in, none, string
-	var cret  *C.GDBusInterface     // return, full, converted
+	var cret  *C.GDBusInterface     // return, full, converted, nullable
 
 	carg0 = (*C.GDBusObjectManager)(UnsafeDBusObjectManagerToGlibNone(manager))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(objectPath)))
@@ -11778,7 +11812,9 @@ func (manager *DBusObjectManagerInstance) GetInterface(objectPath string, interf
 
 	var goret DBusInterface
 
-	goret = UnsafeDBusInterfaceFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeDBusInterfaceFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -11791,13 +11827,13 @@ func (manager *DBusObjectManagerInstance) GetInterface(objectPath string, interf
 // 
 // The function returns the following values:
 // 
-// 	- goret DBusObject 
+// 	- goret DBusObject (nullable) 
 //
 // Gets the #GDBusObject at @object_path, if any.
 func (manager *DBusObjectManagerInstance) GetObject(objectPath string) DBusObject {
 	var carg0 *C.GDBusObjectManager // in, none, converted
 	var carg1 *C.gchar              // in, none, string
-	var cret  *C.GDBusObject        // return, full, converted
+	var cret  *C.GDBusObject        // return, full, converted, nullable
 
 	carg0 = (*C.GDBusObjectManager)(UnsafeDBusObjectManagerToGlibNone(manager))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(objectPath)))
@@ -11809,7 +11845,9 @@ func (manager *DBusObjectManagerInstance) GetObject(objectPath string) DBusObjec
 
 	var goret DBusObject
 
-	goret = UnsafeDBusObjectFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeDBusObjectFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -12738,7 +12776,7 @@ type Drive interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the identifier of the given kind for @drive. The only
 	// identifier currently available is
@@ -12754,7 +12792,7 @@ type Drive interface {
 	// GetSortKey wraps g_drive_get_sort_key
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the sort key for @drive, if any.
 	GetSortKey() string
@@ -13301,7 +13339,7 @@ func (drive *DriveInstance) GetIcon() Icon {
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the identifier of the given kind for @drive. The only
 // identifier currently available is
@@ -13309,7 +13347,7 @@ func (drive *DriveInstance) GetIcon() Icon {
 func (drive *DriveInstance) GetIdentifier(kind string) string {
 	var carg0 *C.GDrive // in, none, converted
 	var carg1 *C.char   // in, none, string, casted *C.gchar
-	var cret  *C.char   // return, full, string, casted *C.gchar
+	var cret  *C.char   // return, full, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GDrive)(UnsafeDriveToGlibNone(drive))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(kind)))
@@ -13321,8 +13359,10 @@ func (drive *DriveInstance) GetIdentifier(kind string) string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+		defer C.free(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -13353,12 +13393,12 @@ func (drive *DriveInstance) GetName() string {
 // GetSortKey wraps g_drive_get_sort_key
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the sort key for @drive, if any.
 func (drive *DriveInstance) GetSortKey() string {
 	var carg0 *C.GDrive // in, none, converted
-	var cret  *C.gchar  // return, none, string
+	var cret  *C.gchar  // return, none, string, nullable-string
 
 	carg0 = (*C.GDrive)(UnsafeDriveToGlibNone(drive))
 
@@ -13367,7 +13407,9 @@ func (drive *DriveInstance) GetSortKey() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -13942,7 +13984,7 @@ type DtlsConnection interface {
 	// GetCertificate wraps g_dtls_connection_get_certificate
 	// The function returns the following values:
 	// 
-	// 	- goret TlsCertificate 
+	// 	- goret TlsCertificate (nullable) 
 	//
 	// Gets @conn's certificate, as set by
 	// g_dtls_connection_set_certificate().
@@ -13950,7 +13992,7 @@ type DtlsConnection interface {
 	// GetCiphersuiteName wraps g_dtls_connection_get_ciphersuite_name
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Returns the name of the current DTLS ciphersuite, or %NULL if the
 	// connection has not handshaked or has been closed. Beware that the TLS
@@ -13964,7 +14006,7 @@ type DtlsConnection interface {
 	// GetDatabase wraps g_dtls_connection_get_database
 	// The function returns the following values:
 	// 
-	// 	- goret TlsDatabase 
+	// 	- goret TlsDatabase (nullable) 
 	//
 	// Gets the certificate database that @conn uses to verify
 	// peer certificates. See g_dtls_connection_set_database().
@@ -13972,7 +14014,7 @@ type DtlsConnection interface {
 	// GetInteraction wraps g_dtls_connection_get_interaction
 	// The function returns the following values:
 	// 
-	// 	- goret TlsInteraction 
+	// 	- goret TlsInteraction (nullable) 
 	//
 	// Get the object that will be used to interact with the user. It will be used
 	// for things like prompting the user for passwords. If %NULL is returned, then
@@ -13981,7 +14023,7 @@ type DtlsConnection interface {
 	// GetNegotiatedProtocol wraps g_dtls_connection_get_negotiated_protocol
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the name of the application-layer protocol negotiated during
 	// the handshake.
@@ -13994,7 +14036,7 @@ type DtlsConnection interface {
 	// GetPeerCertificate wraps g_dtls_connection_get_peer_certificate
 	// The function returns the following values:
 	// 
-	// 	- goret TlsCertificate 
+	// 	- goret TlsCertificate (nullable) 
 	//
 	// Gets @conn's peer's certificate after the handshake has completed
 	// or failed. (It is not set during the emission of
@@ -14537,13 +14579,13 @@ func (conn *DtlsConnectionInstance) EmitAcceptCertificate(peerCert TlsCertificat
 // GetCertificate wraps g_dtls_connection_get_certificate
 // The function returns the following values:
 // 
-// 	- goret TlsCertificate 
+// 	- goret TlsCertificate (nullable) 
 //
 // Gets @conn's certificate, as set by
 // g_dtls_connection_set_certificate().
 func (conn *DtlsConnectionInstance) GetCertificate() TlsCertificate {
 	var carg0 *C.GDtlsConnection // in, none, converted
-	var cret  *C.GTlsCertificate // return, none, converted
+	var cret  *C.GTlsCertificate // return, none, converted, nullable
 
 	carg0 = (*C.GDtlsConnection)(UnsafeDtlsConnectionToGlibNone(conn))
 
@@ -14552,7 +14594,9 @@ func (conn *DtlsConnectionInstance) GetCertificate() TlsCertificate {
 
 	var goret TlsCertificate
 
-	goret = UnsafeTlsCertificateFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeTlsCertificateFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -14560,7 +14604,7 @@ func (conn *DtlsConnectionInstance) GetCertificate() TlsCertificate {
 // GetCiphersuiteName wraps g_dtls_connection_get_ciphersuite_name
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Returns the name of the current DTLS ciphersuite, or %NULL if the
 // connection has not handshaked or has been closed. Beware that the TLS
@@ -14572,7 +14616,7 @@ func (conn *DtlsConnectionInstance) GetCertificate() TlsCertificate {
 // is not recommended.
 func (conn *DtlsConnectionInstance) GetCiphersuiteName() string {
 	var carg0 *C.GDtlsConnection // in, none, converted
-	var cret  *C.gchar           // return, full, string
+	var cret  *C.gchar           // return, full, string, nullable-string
 
 	carg0 = (*C.GDtlsConnection)(UnsafeDtlsConnectionToGlibNone(conn))
 
@@ -14581,8 +14625,10 @@ func (conn *DtlsConnectionInstance) GetCiphersuiteName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+		defer C.free(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -14590,13 +14636,13 @@ func (conn *DtlsConnectionInstance) GetCiphersuiteName() string {
 // GetDatabase wraps g_dtls_connection_get_database
 // The function returns the following values:
 // 
-// 	- goret TlsDatabase 
+// 	- goret TlsDatabase (nullable) 
 //
 // Gets the certificate database that @conn uses to verify
 // peer certificates. See g_dtls_connection_set_database().
 func (conn *DtlsConnectionInstance) GetDatabase() TlsDatabase {
 	var carg0 *C.GDtlsConnection // in, none, converted
-	var cret  *C.GTlsDatabase    // return, none, converted
+	var cret  *C.GTlsDatabase    // return, none, converted, nullable
 
 	carg0 = (*C.GDtlsConnection)(UnsafeDtlsConnectionToGlibNone(conn))
 
@@ -14605,7 +14651,9 @@ func (conn *DtlsConnectionInstance) GetDatabase() TlsDatabase {
 
 	var goret TlsDatabase
 
-	goret = UnsafeTlsDatabaseFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeTlsDatabaseFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -14613,14 +14661,14 @@ func (conn *DtlsConnectionInstance) GetDatabase() TlsDatabase {
 // GetInteraction wraps g_dtls_connection_get_interaction
 // The function returns the following values:
 // 
-// 	- goret TlsInteraction 
+// 	- goret TlsInteraction (nullable) 
 //
 // Get the object that will be used to interact with the user. It will be used
 // for things like prompting the user for passwords. If %NULL is returned, then
 // no user interaction will occur for this connection.
 func (conn *DtlsConnectionInstance) GetInteraction() TlsInteraction {
 	var carg0 *C.GDtlsConnection // in, none, converted
-	var cret  *C.GTlsInteraction // return, none, converted
+	var cret  *C.GTlsInteraction // return, none, converted, nullable
 
 	carg0 = (*C.GDtlsConnection)(UnsafeDtlsConnectionToGlibNone(conn))
 
@@ -14629,7 +14677,9 @@ func (conn *DtlsConnectionInstance) GetInteraction() TlsInteraction {
 
 	var goret TlsInteraction
 
-	goret = UnsafeTlsInteractionFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeTlsInteractionFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -14637,7 +14687,7 @@ func (conn *DtlsConnectionInstance) GetInteraction() TlsInteraction {
 // GetNegotiatedProtocol wraps g_dtls_connection_get_negotiated_protocol
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the name of the application-layer protocol negotiated during
 // the handshake.
@@ -14648,7 +14698,7 @@ func (conn *DtlsConnectionInstance) GetInteraction() TlsInteraction {
 // g_dtls_connection_set_advertised_protocols().
 func (conn *DtlsConnectionInstance) GetNegotiatedProtocol() string {
 	var carg0 *C.GDtlsConnection // in, none, converted
-	var cret  *C.gchar           // return, none, string
+	var cret  *C.gchar           // return, none, string, nullable-string
 
 	carg0 = (*C.GDtlsConnection)(UnsafeDtlsConnectionToGlibNone(conn))
 
@@ -14657,7 +14707,9 @@ func (conn *DtlsConnectionInstance) GetNegotiatedProtocol() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -14665,14 +14717,14 @@ func (conn *DtlsConnectionInstance) GetNegotiatedProtocol() string {
 // GetPeerCertificate wraps g_dtls_connection_get_peer_certificate
 // The function returns the following values:
 // 
-// 	- goret TlsCertificate 
+// 	- goret TlsCertificate (nullable) 
 //
 // Gets @conn's peer's certificate after the handshake has completed
 // or failed. (It is not set during the emission of
 // #GDtlsConnection::accept-certificate.)
 func (conn *DtlsConnectionInstance) GetPeerCertificate() TlsCertificate {
 	var carg0 *C.GDtlsConnection // in, none, converted
-	var cret  *C.GTlsCertificate // return, none, converted
+	var cret  *C.GTlsCertificate // return, none, converted, nullable
 
 	carg0 = (*C.GDtlsConnection)(UnsafeDtlsConnectionToGlibNone(conn))
 
@@ -14681,7 +14733,9 @@ func (conn *DtlsConnectionInstance) GetPeerCertificate() TlsCertificate {
 
 	var goret TlsCertificate
 
-	goret = UnsafeTlsCertificateFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeTlsCertificateFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -16084,7 +16138,7 @@ type File interface {
 	// GetBasename wraps g_file_get_basename
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the base name (the last component of the path) for a given #GFile.
 	// 
@@ -16141,7 +16195,7 @@ type File interface {
 	// GetParent wraps g_file_get_parent
 	// The function returns the following values:
 	// 
-	// 	- goret File 
+	// 	- goret File (nullable) 
 	//
 	// Gets the parent directory for the @file.
 	// If the @file represents the root directory of the
@@ -16172,7 +16226,7 @@ type File interface {
 	// GetPath wraps g_file_get_path
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the local pathname for #GFile, if one exists. If non-%NULL, this is
 	// guaranteed to be an absolute, canonical path. It might contain symlinks.
@@ -16187,7 +16241,7 @@ type File interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the path for @descendant relative to @parent.
 	// 
@@ -16205,7 +16259,7 @@ type File interface {
 	// GetURIScheme wraps g_file_get_uri_scheme
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the URI scheme for a #GFile.
 	// RFC 3986 decodes the scheme as:
@@ -16823,7 +16877,7 @@ type File interface {
 	// PeekPath wraps g_file_peek_path
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Exactly like g_file_get_path(), but caches the result via
 	// g_object_set_qdata_full().  This is useful for example in C
@@ -19685,7 +19739,7 @@ func (file *FileInstance) FindEnclosingMountFinish(res AsyncResult) (Mount, erro
 // GetBasename wraps g_file_get_basename
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the base name (the last component of the path) for a given #GFile.
 // 
@@ -19702,7 +19756,7 @@ func (file *FileInstance) FindEnclosingMountFinish(res AsyncResult) (Mount, erro
 // This call does no blocking I/O.
 func (file *FileInstance) GetBasename() string {
 	var carg0 *C.GFile // in, none, converted
-	var cret  *C.char  // return, full, string, casted *C.gchar
+	var cret  *C.char  // return, full, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
 
@@ -19711,8 +19765,10 @@ func (file *FileInstance) GetBasename() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+		defer C.free(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -19801,7 +19857,7 @@ func (file *FileInstance) GetChildForDisplayName(displayName string) (File, erro
 // GetParent wraps g_file_get_parent
 // The function returns the following values:
 // 
-// 	- goret File 
+// 	- goret File (nullable) 
 //
 // Gets the parent directory for the @file.
 // If the @file represents the root directory of the
@@ -19810,7 +19866,7 @@ func (file *FileInstance) GetChildForDisplayName(displayName string) (File, erro
 // This call does no blocking I/O.
 func (file *FileInstance) GetParent() File {
 	var carg0 *C.GFile // in, none, converted
-	var cret  *C.GFile // return, full, converted
+	var cret  *C.GFile // return, full, converted, nullable
 
 	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
 
@@ -19819,7 +19875,9 @@ func (file *FileInstance) GetParent() File {
 
 	var goret File
 
-	goret = UnsafeFileFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeFileFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -19863,7 +19921,7 @@ func (file *FileInstance) GetParseName() string {
 // GetPath wraps g_file_get_path
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the local pathname for #GFile, if one exists. If non-%NULL, this is
 // guaranteed to be an absolute, canonical path. It might contain symlinks.
@@ -19871,7 +19929,7 @@ func (file *FileInstance) GetParseName() string {
 // This call does no blocking I/O.
 func (file *FileInstance) GetPath() string {
 	var carg0 *C.GFile // in, none, converted
-	var cret  *C.char  // return, full, string, casted *C.gchar
+	var cret  *C.char  // return, full, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
 
@@ -19880,8 +19938,10 @@ func (file *FileInstance) GetPath() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+		defer C.free(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -19894,7 +19954,7 @@ func (file *FileInstance) GetPath() string {
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the path for @descendant relative to @parent.
 // 
@@ -19902,7 +19962,7 @@ func (file *FileInstance) GetPath() string {
 func (parent *FileInstance) GetRelativePath(descendant File) string {
 	var carg0 *C.GFile // in, none, converted
 	var carg1 *C.GFile // in, none, converted
-	var cret  *C.char  // return, full, string, casted *C.gchar
+	var cret  *C.char  // return, full, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GFile)(UnsafeFileToGlibNone(parent))
 	carg1 = (*C.GFile)(UnsafeFileToGlibNone(descendant))
@@ -19913,8 +19973,10 @@ func (parent *FileInstance) GetRelativePath(descendant File) string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+		defer C.free(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -19947,7 +20009,7 @@ func (file *FileInstance) GetURI() string {
 // GetURIScheme wraps g_file_get_uri_scheme
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the URI scheme for a #GFile.
 // RFC 3986 decodes the scheme as:
@@ -19962,7 +20024,7 @@ func (file *FileInstance) GetURI() string {
 // This call does no blocking I/O.
 func (file *FileInstance) GetURIScheme() string {
 	var carg0 *C.GFile // in, none, converted
-	var cret  *C.char  // return, full, string, casted *C.gchar
+	var cret  *C.char  // return, full, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
 
@@ -19971,8 +20033,10 @@ func (file *FileInstance) GetURIScheme() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+		defer C.free(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -21380,7 +21444,7 @@ func (file *FileInstance) OpenReadwriteFinish(res AsyncResult) (FileIOStream, er
 // PeekPath wraps g_file_peek_path
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Exactly like g_file_get_path(), but caches the result via
 // g_object_set_qdata_full().  This is useful for example in C
@@ -21391,7 +21455,7 @@ func (file *FileInstance) OpenReadwriteFinish(res AsyncResult) (FileIOStream, er
 // This call does no blocking I/O.
 func (file *FileInstance) PeekPath() string {
 	var carg0 *C.GFile // in, none, converted
-	var cret  *C.char  // return, none, string, casted *C.gchar
+	var cret  *C.char  // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
 
@@ -21400,7 +21464,9 @@ func (file *FileInstance) PeekPath() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -24123,7 +24189,7 @@ type Icon interface {
 	// ToString wraps g_icon_to_string
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Generates a textual representation of @icon that can be used for
 	// serialization such as when passing @icon to a different process or
@@ -24258,7 +24324,7 @@ func (icon1 *IconInstance) Equal(icon2 Icon) bool {
 // ToString wraps g_icon_to_string
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Generates a textual representation of @icon that can be used for
 // serialization such as when passing @icon to a different process or
@@ -24278,7 +24344,7 @@ func (icon1 *IconInstance) Equal(icon2 Icon) bool {
 //   the encoding is simply the name (such as `network-server`).
 func (icon *IconInstance) ToString() string {
 	var carg0 *C.GIcon // in, none, converted
-	var cret  *C.gchar // return, full, string
+	var cret  *C.gchar // return, full, string, nullable-string
 
 	carg0 = (*C.GIcon)(UnsafeIconToGlibNone(icon))
 
@@ -24287,8 +24353,10 @@ func (icon *IconInstance) ToString() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+		defer C.free(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -24607,7 +24675,7 @@ type ListModel interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret gobject.Object 
+	// 	- goret gobject.Object (nullable) 
 	//
 	// Get the item at @position.
 	// 
@@ -24763,7 +24831,7 @@ func (list *ListModelInstance) GetNItems() uint {
 // 
 // The function returns the following values:
 // 
-// 	- goret gobject.Object 
+// 	- goret gobject.Object (nullable) 
 //
 // Get the item at @position.
 // 
@@ -24780,7 +24848,7 @@ func (list *ListModelInstance) GetNItems() uint {
 func (list *ListModelInstance) GetObject(position uint) gobject.Object {
 	var carg0 *C.GListModel // in, none, converted
 	var carg1 C.guint       // in, none, casted
-	var cret  *C.GObject    // return, full, converted
+	var cret  *C.GObject    // return, full, converted, nullable
 
 	carg0 = (*C.GListModel)(UnsafeListModelToGlibNone(list))
 	carg1 = C.guint(position)
@@ -24791,7 +24859,9 @@ func (list *ListModelInstance) GetObject(position uint) gobject.Object {
 
 	var goret gobject.Object
 
-	goret = gobject.UnsafeObjectFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gobject.UnsafeObjectFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -25339,7 +25409,7 @@ type Mount interface {
 	// GetDrive wraps g_mount_get_drive
 	// The function returns the following values:
 	// 
-	// 	- goret Drive 
+	// 	- goret Drive (nullable) 
 	//
 	// Gets the drive for the @mount.
 	// 
@@ -25370,7 +25440,7 @@ type Mount interface {
 	// GetSortKey wraps g_mount_get_sort_key
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the sort key for @mount, if any.
 	GetSortKey() string
@@ -25384,7 +25454,7 @@ type Mount interface {
 	// GetUUID wraps g_mount_get_uuid
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the UUID for the @mount. The reference is typically based on
 	// the file system UUID for the mount in question and should be
@@ -25394,7 +25464,7 @@ type Mount interface {
 	// GetVolume wraps g_mount_get_volume
 	// The function returns the following values:
 	// 
-	// 	- goret Volume 
+	// 	- goret Volume (nullable) 
 	//
 	// Gets the volume for the @mount.
 	GetVolume() Volume
@@ -25887,7 +25957,7 @@ func (mount *MountInstance) GetDefaultLocation() File {
 // GetDrive wraps g_mount_get_drive
 // The function returns the following values:
 // 
-// 	- goret Drive 
+// 	- goret Drive (nullable) 
 //
 // Gets the drive for the @mount.
 // 
@@ -25895,7 +25965,7 @@ func (mount *MountInstance) GetDefaultLocation() File {
 // using that object to get the #GDrive.
 func (mount *MountInstance) GetDrive() Drive {
 	var carg0 *C.GMount // in, none, converted
-	var cret  *C.GDrive // return, full, converted
+	var cret  *C.GDrive // return, full, converted, nullable
 
 	carg0 = (*C.GMount)(UnsafeMountToGlibNone(mount))
 
@@ -25904,7 +25974,9 @@ func (mount *MountInstance) GetDrive() Drive {
 
 	var goret Drive
 
-	goret = UnsafeDriveFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeDriveFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -25979,12 +26051,12 @@ func (mount *MountInstance) GetRoot() File {
 // GetSortKey wraps g_mount_get_sort_key
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the sort key for @mount, if any.
 func (mount *MountInstance) GetSortKey() string {
 	var carg0 *C.GMount // in, none, converted
-	var cret  *C.gchar  // return, none, string
+	var cret  *C.gchar  // return, none, string, nullable-string
 
 	carg0 = (*C.GMount)(UnsafeMountToGlibNone(mount))
 
@@ -25993,7 +26065,9 @@ func (mount *MountInstance) GetSortKey() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -26023,7 +26097,7 @@ func (mount *MountInstance) GetSymbolicIcon() Icon {
 // GetUUID wraps g_mount_get_uuid
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the UUID for the @mount. The reference is typically based on
 // the file system UUID for the mount in question and should be
@@ -26031,7 +26105,7 @@ func (mount *MountInstance) GetSymbolicIcon() Icon {
 // available.
 func (mount *MountInstance) GetUUID() string {
 	var carg0 *C.GMount // in, none, converted
-	var cret  *C.char   // return, full, string, casted *C.gchar
+	var cret  *C.char   // return, full, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GMount)(UnsafeMountToGlibNone(mount))
 
@@ -26040,8 +26114,10 @@ func (mount *MountInstance) GetUUID() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+		defer C.free(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -26049,12 +26125,12 @@ func (mount *MountInstance) GetUUID() string {
 // GetVolume wraps g_mount_get_volume
 // The function returns the following values:
 // 
-// 	- goret Volume 
+// 	- goret Volume (nullable) 
 //
 // Gets the volume for the @mount.
 func (mount *MountInstance) GetVolume() Volume {
 	var carg0 *C.GMount  // in, none, converted
-	var cret  *C.GVolume // return, full, converted
+	var cret  *C.GVolume // return, full, converted, nullable
 
 	carg0 = (*C.GMount)(UnsafeMountToGlibNone(mount))
 
@@ -26063,7 +26139,9 @@ func (mount *MountInstance) GetVolume() Volume {
 
 	var goret Volume
 
-	goret = UnsafeVolumeFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeVolumeFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -27878,13 +27956,13 @@ func UnsafeProxyToGlibFull(c Proxy) unsafe.Pointer {
 // 
 // The function returns the following values:
 // 
-// 	- goret Proxy 
+// 	- goret Proxy (nullable) 
 //
 // Find the `gio-proxy` extension point for a proxy implementation that supports
 // the specified protocol.
 func ProxyGetDefaultForProtocol(protocol string) Proxy {
 	var carg1 *C.gchar  // in, none, string
-	var cret  *C.GProxy // return, full, converted
+	var cret  *C.GProxy // return, full, converted, nullable
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(protocol)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -27894,7 +27972,9 @@ func ProxyGetDefaultForProtocol(protocol string) Proxy {
 
 	var goret Proxy
 
-	goret = UnsafeProxyFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeProxyFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -29410,7 +29490,7 @@ type TlsClientConnection interface {
 	// GetServerIdentity wraps g_tls_client_connection_get_server_identity
 	// The function returns the following values:
 	// 
-	// 	- goret SocketConnectable 
+	// 	- goret SocketConnectable (nullable) 
 	//
 	// Gets @conn's expected server identity
 	GetServerIdentity() SocketConnectable
@@ -29617,12 +29697,12 @@ func (conn *TlsClientConnectionInstance) CopySessionState(source TlsClientConnec
 // GetServerIdentity wraps g_tls_client_connection_get_server_identity
 // The function returns the following values:
 // 
-// 	- goret SocketConnectable 
+// 	- goret SocketConnectable (nullable) 
 //
 // Gets @conn's expected server identity
 func (conn *TlsClientConnectionInstance) GetServerIdentity() SocketConnectable {
 	var carg0 *C.GTlsClientConnection // in, none, converted
-	var cret  *C.GSocketConnectable   // return, none, converted
+	var cret  *C.GSocketConnectable   // return, none, converted, nullable
 
 	carg0 = (*C.GTlsClientConnection)(UnsafeTlsClientConnectionToGlibNone(conn))
 
@@ -29631,7 +29711,9 @@ func (conn *TlsClientConnectionInstance) GetServerIdentity() SocketConnectable {
 
 	var goret SocketConnectable
 
-	goret = UnsafeSocketConnectableFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeSocketConnectableFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -30105,7 +30187,7 @@ type Volume interface {
 	// GetActivationRoot wraps g_volume_get_activation_root
 	// The function returns the following values:
 	// 
-	// 	- goret File 
+	// 	- goret File (nullable) 
 	//
 	// Gets the activation root for a #GVolume if it is known ahead of
 	// mount time. Returns %NULL otherwise. If not %NULL and if @volume
@@ -30137,7 +30219,7 @@ type Volume interface {
 	// GetDrive wraps g_volume_get_drive
 	// The function returns the following values:
 	// 
-	// 	- goret Drive 
+	// 	- goret Drive (nullable) 
 	//
 	// Gets the drive for the @volume.
 	GetDrive() Drive
@@ -30156,7 +30238,7 @@ type Volume interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the identifier of the given kind for @volume.
 	// See the [introduction](#volume-identifiers) for more
@@ -30165,7 +30247,7 @@ type Volume interface {
 	// GetMount wraps g_volume_get_mount
 	// The function returns the following values:
 	// 
-	// 	- goret Mount 
+	// 	- goret Mount (nullable) 
 	//
 	// Gets the mount for the @volume.
 	GetMount() Mount
@@ -30179,7 +30261,7 @@ type Volume interface {
 	// GetSortKey wraps g_volume_get_sort_key
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the sort key for @volume, if any.
 	GetSortKey() string
@@ -30193,7 +30275,7 @@ type Volume interface {
 	// GetUUID wraps g_volume_get_uuid
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the UUID for the @volume. The reference is typically based on
 	// the file system UUID for the volume in question and should be
@@ -30524,7 +30606,7 @@ func (volume *VolumeInstance) EnumerateIdentifiers() []string {
 // GetActivationRoot wraps g_volume_get_activation_root
 // The function returns the following values:
 // 
-// 	- goret File 
+// 	- goret File (nullable) 
 //
 // Gets the activation root for a #GVolume if it is known ahead of
 // mount time. Returns %NULL otherwise. If not %NULL and if @volume
@@ -30554,7 +30636,7 @@ func (volume *VolumeInstance) EnumerateIdentifiers() []string {
 // g_mount_is_shadowed() for more details.
 func (volume *VolumeInstance) GetActivationRoot() File {
 	var carg0 *C.GVolume // in, none, converted
-	var cret  *C.GFile   // return, full, converted
+	var cret  *C.GFile   // return, full, converted, nullable
 
 	carg0 = (*C.GVolume)(UnsafeVolumeToGlibNone(volume))
 
@@ -30563,7 +30645,9 @@ func (volume *VolumeInstance) GetActivationRoot() File {
 
 	var goret File
 
-	goret = UnsafeFileFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeFileFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -30571,12 +30655,12 @@ func (volume *VolumeInstance) GetActivationRoot() File {
 // GetDrive wraps g_volume_get_drive
 // The function returns the following values:
 // 
-// 	- goret Drive 
+// 	- goret Drive (nullable) 
 //
 // Gets the drive for the @volume.
 func (volume *VolumeInstance) GetDrive() Drive {
 	var carg0 *C.GVolume // in, none, converted
-	var cret  *C.GDrive  // return, full, converted
+	var cret  *C.GDrive  // return, full, converted, nullable
 
 	carg0 = (*C.GVolume)(UnsafeVolumeToGlibNone(volume))
 
@@ -30585,7 +30669,9 @@ func (volume *VolumeInstance) GetDrive() Drive {
 
 	var goret Drive
 
-	goret = UnsafeDriveFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeDriveFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -30620,7 +30706,7 @@ func (volume *VolumeInstance) GetIcon() Icon {
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the identifier of the given kind for @volume.
 // See the [introduction](#volume-identifiers) for more
@@ -30628,7 +30714,7 @@ func (volume *VolumeInstance) GetIcon() Icon {
 func (volume *VolumeInstance) GetIdentifier(kind string) string {
 	var carg0 *C.GVolume // in, none, converted
 	var carg1 *C.char    // in, none, string, casted *C.gchar
-	var cret  *C.char    // return, full, string, casted *C.gchar
+	var cret  *C.char    // return, full, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GVolume)(UnsafeVolumeToGlibNone(volume))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(kind)))
@@ -30640,8 +30726,10 @@ func (volume *VolumeInstance) GetIdentifier(kind string) string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+		defer C.free(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -30649,12 +30737,12 @@ func (volume *VolumeInstance) GetIdentifier(kind string) string {
 // GetMount wraps g_volume_get_mount
 // The function returns the following values:
 // 
-// 	- goret Mount 
+// 	- goret Mount (nullable) 
 //
 // Gets the mount for the @volume.
 func (volume *VolumeInstance) GetMount() Mount {
 	var carg0 *C.GVolume // in, none, converted
-	var cret  *C.GMount  // return, full, converted
+	var cret  *C.GMount  // return, full, converted, nullable
 
 	carg0 = (*C.GVolume)(UnsafeVolumeToGlibNone(volume))
 
@@ -30663,7 +30751,9 @@ func (volume *VolumeInstance) GetMount() Mount {
 
 	var goret Mount
 
-	goret = UnsafeMountFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeMountFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -30694,12 +30784,12 @@ func (volume *VolumeInstance) GetName() string {
 // GetSortKey wraps g_volume_get_sort_key
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the sort key for @volume, if any.
 func (volume *VolumeInstance) GetSortKey() string {
 	var carg0 *C.GVolume // in, none, converted
-	var cret  *C.gchar   // return, none, string
+	var cret  *C.gchar   // return, none, string, nullable-string
 
 	carg0 = (*C.GVolume)(UnsafeVolumeToGlibNone(volume))
 
@@ -30708,7 +30798,9 @@ func (volume *VolumeInstance) GetSortKey() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -30738,7 +30830,7 @@ func (volume *VolumeInstance) GetSymbolicIcon() Icon {
 // GetUUID wraps g_volume_get_uuid
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the UUID for the @volume. The reference is typically based on
 // the file system UUID for the volume in question and should be
@@ -30746,7 +30838,7 @@ func (volume *VolumeInstance) GetSymbolicIcon() Icon {
 // available.
 func (volume *VolumeInstance) GetUUID() string {
 	var carg0 *C.GVolume // in, none, converted
-	var cret  *C.char    // return, full, string, casted *C.gchar
+	var cret  *C.char    // return, full, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GVolume)(UnsafeVolumeToGlibNone(volume))
 
@@ -30755,8 +30847,10 @@ func (volume *VolumeInstance) GetUUID() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+		defer C.free(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -31888,14 +31982,14 @@ type Application interface {
 	// GetApplicationID wraps g_application_get_application_id
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the unique identifier for @application.
 	GetApplicationID() string
 	// GetDBusConnection wraps g_application_get_dbus_connection
 	// The function returns the following values:
 	// 
-	// 	- goret DBusConnection 
+	// 	- goret DBusConnection (nullable) 
 	//
 	// Gets the #GDBusConnection being used by the application, or %NULL.
 	// 
@@ -31914,7 +32008,7 @@ type Application interface {
 	// GetDBusObjectPath wraps g_application_get_dbus_object_path
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the D-Bus object path being used by the application, or %NULL.
 	// 
@@ -31987,7 +32081,7 @@ type Application interface {
 	// GetResourceBasePath wraps g_application_get_resource_base_path
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the resource base path of @application.
 	// 
@@ -31996,7 +32090,7 @@ type Application interface {
 	// GetVersion wraps g_application_get_version
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the version of @application.
 	GetVersion() string
@@ -32579,7 +32673,7 @@ func NewApplication(applicationId string, flags ApplicationFlags) Application {
 // ApplicationGetDefault wraps g_application_get_default
 // The function returns the following values:
 // 
-// 	- goret Application 
+// 	- goret Application (nullable) 
 //
 // Returns the default #GApplication instance for this process.
 // 
@@ -32589,13 +32683,15 @@ func NewApplication(applicationId string, flags ApplicationFlags) Application {
 // 
 // If there is no default application then %NULL is returned.
 func ApplicationGetDefault() Application {
-	var cret *C.GApplication // return, none, converted
+	var cret *C.GApplication // return, none, converted, nullable
 
 	cret = C.g_application_get_default()
 
 	var goret Application
 
-	goret = UnsafeApplicationFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeApplicationFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -32871,12 +32967,12 @@ func (application *ApplicationInstance) AddOptionGroup(group *glib.OptionGroup) 
 // GetApplicationID wraps g_application_get_application_id
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the unique identifier for @application.
 func (application *ApplicationInstance) GetApplicationID() string {
 	var carg0 *C.GApplication // in, none, converted
-	var cret  *C.gchar        // return, none, string
+	var cret  *C.gchar        // return, none, string, nullable-string
 
 	carg0 = (*C.GApplication)(UnsafeApplicationToGlibNone(application))
 
@@ -32885,7 +32981,9 @@ func (application *ApplicationInstance) GetApplicationID() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -32893,7 +32991,7 @@ func (application *ApplicationInstance) GetApplicationID() string {
 // GetDBusConnection wraps g_application_get_dbus_connection
 // The function returns the following values:
 // 
-// 	- goret DBusConnection 
+// 	- goret DBusConnection (nullable) 
 //
 // Gets the #GDBusConnection being used by the application, or %NULL.
 // 
@@ -32910,7 +33008,7 @@ func (application *ApplicationInstance) GetApplicationID() string {
 // registered.  See g_application_get_is_registered().
 func (application *ApplicationInstance) GetDBusConnection() DBusConnection {
 	var carg0 *C.GApplication    // in, none, converted
-	var cret  *C.GDBusConnection // return, none, converted
+	var cret  *C.GDBusConnection // return, none, converted, nullable
 
 	carg0 = (*C.GApplication)(UnsafeApplicationToGlibNone(application))
 
@@ -32919,7 +33017,9 @@ func (application *ApplicationInstance) GetDBusConnection() DBusConnection {
 
 	var goret DBusConnection
 
-	goret = UnsafeDBusConnectionFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeDBusConnectionFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -32927,7 +33027,7 @@ func (application *ApplicationInstance) GetDBusConnection() DBusConnection {
 // GetDBusObjectPath wraps g_application_get_dbus_object_path
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the D-Bus object path being used by the application, or %NULL.
 // 
@@ -32945,7 +33045,7 @@ func (application *ApplicationInstance) GetDBusConnection() DBusConnection {
 // registered.  See g_application_get_is_registered().
 func (application *ApplicationInstance) GetDBusObjectPath() string {
 	var carg0 *C.GApplication // in, none, converted
-	var cret  *C.gchar        // return, none, string
+	var cret  *C.gchar        // return, none, string, nullable-string
 
 	carg0 = (*C.GApplication)(UnsafeApplicationToGlibNone(application))
 
@@ -32954,7 +33054,9 @@ func (application *ApplicationInstance) GetDBusObjectPath() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -33096,14 +33198,14 @@ func (application *ApplicationInstance) GetIsRemote() bool {
 // GetResourceBasePath wraps g_application_get_resource_base_path
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the resource base path of @application.
 // 
 // See g_application_set_resource_base_path() for more information.
 func (application *ApplicationInstance) GetResourceBasePath() string {
 	var carg0 *C.GApplication // in, none, converted
-	var cret  *C.gchar        // return, none, string
+	var cret  *C.gchar        // return, none, string, nullable-string
 
 	carg0 = (*C.GApplication)(UnsafeApplicationToGlibNone(application))
 
@@ -33112,7 +33214,9 @@ func (application *ApplicationInstance) GetResourceBasePath() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -33120,12 +33224,12 @@ func (application *ApplicationInstance) GetResourceBasePath() string {
 // GetVersion wraps g_application_get_version
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the version of @application.
 func (application *ApplicationInstance) GetVersion() string {
 	var carg0 *C.GApplication // in, none, converted
-	var cret  *C.gchar        // return, none, string
+	var cret  *C.gchar        // return, none, string, nullable-string
 
 	carg0 = (*C.GApplication)(UnsafeApplicationToGlibNone(application))
 
@@ -33134,7 +33238,9 @@ func (application *ApplicationInstance) GetVersion() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -34153,7 +34259,7 @@ type ApplicationCommandLine interface {
 	// GetCwd wraps g_application_command_line_get_cwd
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the working directory of the command line invocation.
 	// The string may contain non-utf8 data.
@@ -34221,7 +34327,7 @@ type ApplicationCommandLine interface {
 	// GetStdin wraps g_application_command_line_get_stdin
 	// The function returns the following values:
 	// 
-	// 	- goret InputStream 
+	// 	- goret InputStream (nullable) 
 	//
 	// Gets the stdin of the invoking process.
 	// 
@@ -34242,7 +34348,7 @@ type ApplicationCommandLine interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the value of a particular environment variable of the command
 	// line invocation, as would be returned by g_getenv().  The strings may
@@ -34450,7 +34556,7 @@ func (cmdline *ApplicationCommandLineInstance) GetArguments() (int, []string) {
 // GetCwd wraps g_application_command_line_get_cwd
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the working directory of the command line invocation.
 // The string may contain non-utf8 data.
@@ -34462,7 +34568,7 @@ func (cmdline *ApplicationCommandLineInstance) GetArguments() (int, []string) {
 // long as @cmdline exists.
 func (cmdline *ApplicationCommandLineInstance) GetCwd() string {
 	var carg0 *C.GApplicationCommandLine // in, none, converted
-	var cret  *C.gchar                   // return, none, string
+	var cret  *C.gchar                   // return, none, string, nullable
 
 	carg0 = (*C.GApplicationCommandLine)(UnsafeApplicationCommandLineToGlibNone(cmdline))
 
@@ -34471,7 +34577,9 @@ func (cmdline *ApplicationCommandLineInstance) GetCwd() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -34597,7 +34705,7 @@ func (cmdline *ApplicationCommandLineInstance) GetOptionsDict() *glib.VariantDic
 // GetStdin wraps g_application_command_line_get_stdin
 // The function returns the following values:
 // 
-// 	- goret InputStream 
+// 	- goret InputStream (nullable) 
 //
 // Gets the stdin of the invoking process.
 // 
@@ -34611,7 +34719,7 @@ func (cmdline *ApplicationCommandLineInstance) GetOptionsDict() *glib.VariantDic
 // You must only call this function once per commandline invocation.
 func (cmdline *ApplicationCommandLineInstance) GetStdin() InputStream {
 	var carg0 *C.GApplicationCommandLine // in, none, converted
-	var cret  *C.GInputStream            // return, full, converted
+	var cret  *C.GInputStream            // return, full, converted, nullable
 
 	carg0 = (*C.GApplicationCommandLine)(UnsafeApplicationCommandLineToGlibNone(cmdline))
 
@@ -34620,7 +34728,9 @@ func (cmdline *ApplicationCommandLineInstance) GetStdin() InputStream {
 
 	var goret InputStream
 
-	goret = UnsafeInputStreamFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeInputStreamFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -34633,7 +34743,7 @@ func (cmdline *ApplicationCommandLineInstance) GetStdin() InputStream {
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the value of a particular environment variable of the command
 // line invocation, as would be returned by g_getenv().  The strings may
@@ -34649,7 +34759,7 @@ func (cmdline *ApplicationCommandLineInstance) GetStdin() InputStream {
 func (cmdline *ApplicationCommandLineInstance) Getenv(name string) string {
 	var carg0 *C.GApplicationCommandLine // in, none, converted
 	var carg1 *C.gchar                   // in, none, string
-	var cret  *C.gchar                   // return, none, string
+	var cret  *C.gchar                   // return, none, string, nullable-string
 
 	carg0 = (*C.GApplicationCommandLine)(UnsafeApplicationCommandLineToGlibNone(cmdline))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
@@ -34661,7 +34771,9 @@ func (cmdline *ApplicationCommandLineInstance) Getenv(name string) string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -35925,7 +36037,7 @@ type DBusConnection interface {
 	// GetPeerCredentials wraps g_dbus_connection_get_peer_credentials
 	// The function returns the following values:
 	// 
-	// 	- goret Credentials 
+	// 	- goret Credentials (nullable) 
 	//
 	// Gets the credentials of the authenticated peer. This will always
 	// return %NULL unless @connection acted as a server
@@ -35951,7 +36063,7 @@ type DBusConnection interface {
 	// GetUniqueName wraps g_dbus_connection_get_unique_name
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the unique name of @connection as assigned by the message
 	// bus. This can also be used to figure out if @connection is a
@@ -37176,7 +37288,7 @@ func (connection *DBusConnectionInstance) GetLastSerial() uint32 {
 // GetPeerCredentials wraps g_dbus_connection_get_peer_credentials
 // The function returns the following values:
 // 
-// 	- goret Credentials 
+// 	- goret Credentials (nullable) 
 //
 // Gets the credentials of the authenticated peer. This will always
 // return %NULL unless @connection acted as a server
@@ -37189,7 +37301,7 @@ func (connection *DBusConnectionInstance) GetLastSerial() uint32 {
 // %NULL for message bus clients.
 func (connection *DBusConnectionInstance) GetPeerCredentials() Credentials {
 	var carg0 *C.GDBusConnection // in, none, converted
-	var cret  *C.GCredentials    // return, none, converted
+	var cret  *C.GCredentials    // return, none, converted, nullable
 
 	carg0 = (*C.GDBusConnection)(UnsafeDBusConnectionToGlibNone(connection))
 
@@ -37198,7 +37310,9 @@ func (connection *DBusConnectionInstance) GetPeerCredentials() Credentials {
 
 	var goret Credentials
 
-	goret = UnsafeCredentialsFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeCredentialsFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -37232,14 +37346,14 @@ func (connection *DBusConnectionInstance) GetStream() IOStream {
 // GetUniqueName wraps g_dbus_connection_get_unique_name
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the unique name of @connection as assigned by the message
 // bus. This can also be used to figure out if @connection is a
 // message bus connection.
 func (connection *DBusConnectionInstance) GetUniqueName() string {
 	var carg0 *C.GDBusConnection // in, none, converted
-	var cret  *C.gchar           // return, none, string
+	var cret  *C.gchar           // return, none, string, nullable-string
 
 	carg0 = (*C.GDBusConnection)(UnsafeDBusConnectionToGlibNone(connection))
 
@@ -37248,7 +37362,9 @@ func (connection *DBusConnectionInstance) GetUniqueName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -37845,7 +37961,7 @@ type DBusInterfaceSkeleton interface {
 	// GetConnection wraps g_dbus_interface_skeleton_get_connection
 	// The function returns the following values:
 	// 
-	// 	- goret DBusConnection 
+	// 	- goret DBusConnection (nullable) 
 	//
 	// Gets the first connection that @interface_ is exported on, if any.
 	GetConnection() DBusConnection
@@ -37875,7 +37991,7 @@ type DBusInterfaceSkeleton interface {
 	// GetObjectPath wraps g_dbus_interface_skeleton_get_object_path
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the object path that @interface_ is exported on, if any.
 	GetObjectPath() string
@@ -38069,12 +38185,12 @@ func (interface_ *DBusInterfaceSkeletonInstance) Flush() {
 // GetConnection wraps g_dbus_interface_skeleton_get_connection
 // The function returns the following values:
 // 
-// 	- goret DBusConnection 
+// 	- goret DBusConnection (nullable) 
 //
 // Gets the first connection that @interface_ is exported on, if any.
 func (interface_ *DBusInterfaceSkeletonInstance) GetConnection() DBusConnection {
 	var carg0 *C.GDBusInterfaceSkeleton // in, none, converted
-	var cret  *C.GDBusConnection        // return, none, converted
+	var cret  *C.GDBusConnection        // return, none, converted, nullable
 
 	carg0 = (*C.GDBusInterfaceSkeleton)(UnsafeDBusInterfaceSkeletonToGlibNone(interface_))
 
@@ -38083,7 +38199,9 @@ func (interface_ *DBusInterfaceSkeletonInstance) GetConnection() DBusConnection 
 
 	var goret DBusConnection
 
-	goret = UnsafeDBusConnectionFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeDBusConnectionFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -38166,12 +38284,12 @@ func (interface_ *DBusInterfaceSkeletonInstance) GetInfo() *DBusInterfaceInfo {
 // GetObjectPath wraps g_dbus_interface_skeleton_get_object_path
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the object path that @interface_ is exported on, if any.
 func (interface_ *DBusInterfaceSkeletonInstance) GetObjectPath() string {
 	var carg0 *C.GDBusInterfaceSkeleton // in, none, converted
-	var cret  *C.gchar                  // return, none, string
+	var cret  *C.gchar                  // return, none, string, nullable-string
 
 	carg0 = (*C.GDBusInterfaceSkeleton)(UnsafeDBusInterfaceSkeletonToGlibNone(interface_))
 
@@ -38180,7 +38298,9 @@ func (interface_ *DBusInterfaceSkeletonInstance) GetObjectPath() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -38367,7 +38487,7 @@ type DBusMessage interface {
 	// GetArg0 wraps g_dbus_message_get_arg0
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Convenience to get the first item in the body of @message.
 	// 
@@ -38377,7 +38497,7 @@ type DBusMessage interface {
 	// GetArg0Path wraps g_dbus_message_get_arg0_path
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Convenience to get the first item in the body of @message.
 	// 
@@ -38393,14 +38513,14 @@ type DBusMessage interface {
 	// GetDestination wraps g_dbus_message_get_destination
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Convenience getter for the %G_DBUS_MESSAGE_HEADER_FIELD_DESTINATION header field.
 	GetDestination() string
 	// GetErrorName wraps g_dbus_message_get_error_name
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Convenience getter for the %G_DBUS_MESSAGE_HEADER_FIELD_ERROR_NAME header field.
 	GetErrorName() string
@@ -38421,7 +38541,7 @@ type DBusMessage interface {
 	// GetInterface wraps g_dbus_message_get_interface
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Convenience getter for the %G_DBUS_MESSAGE_HEADER_FIELD_INTERFACE header field.
 	GetInterface() string
@@ -38437,7 +38557,7 @@ type DBusMessage interface {
 	// GetMember wraps g_dbus_message_get_member
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Convenience getter for the %G_DBUS_MESSAGE_HEADER_FIELD_MEMBER header field.
 	GetMember() string
@@ -38451,7 +38571,7 @@ type DBusMessage interface {
 	// GetPath wraps g_dbus_message_get_path
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Convenience getter for the %G_DBUS_MESSAGE_HEADER_FIELD_PATH header field.
 	GetPath() string
@@ -38465,7 +38585,7 @@ type DBusMessage interface {
 	// GetSender wraps g_dbus_message_get_sender
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Convenience getter for the %G_DBUS_MESSAGE_HEADER_FIELD_SENDER header field.
 	GetSender() string
@@ -38937,7 +39057,7 @@ func (message *DBusMessageInstance) Copy() (DBusMessage, error) {
 // GetArg0 wraps g_dbus_message_get_arg0
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Convenience to get the first item in the body of @message.
 // 
@@ -38945,7 +39065,7 @@ func (message *DBusMessageInstance) Copy() (DBusMessage, error) {
 // arg0 values.
 func (message *DBusMessageInstance) GetArg0() string {
 	var carg0 *C.GDBusMessage // in, none, converted
-	var cret  *C.gchar        // return, none, string
+	var cret  *C.gchar        // return, none, string, nullable-string
 
 	carg0 = (*C.GDBusMessage)(UnsafeDBusMessageToGlibNone(message))
 
@@ -38954,7 +39074,9 @@ func (message *DBusMessageInstance) GetArg0() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -38962,14 +39084,14 @@ func (message *DBusMessageInstance) GetArg0() string {
 // GetArg0Path wraps g_dbus_message_get_arg0_path
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Convenience to get the first item in the body of @message.
 // 
 // See [method@Gio.DBusMessage.get_arg0] for returning string-typed arg0 values.
 func (message *DBusMessageInstance) GetArg0Path() string {
 	var carg0 *C.GDBusMessage // in, none, converted
-	var cret  *C.gchar        // return, none, string
+	var cret  *C.gchar        // return, none, string, nullable-string
 
 	carg0 = (*C.GDBusMessage)(UnsafeDBusMessageToGlibNone(message))
 
@@ -38978,7 +39100,9 @@ func (message *DBusMessageInstance) GetArg0Path() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -39008,12 +39132,12 @@ func (message *DBusMessageInstance) GetByteOrder() DBusMessageByteOrder {
 // GetDestination wraps g_dbus_message_get_destination
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Convenience getter for the %G_DBUS_MESSAGE_HEADER_FIELD_DESTINATION header field.
 func (message *DBusMessageInstance) GetDestination() string {
 	var carg0 *C.GDBusMessage // in, none, converted
-	var cret  *C.gchar        // return, none, string
+	var cret  *C.gchar        // return, none, string, nullable-string
 
 	carg0 = (*C.GDBusMessage)(UnsafeDBusMessageToGlibNone(message))
 
@@ -39022,7 +39146,9 @@ func (message *DBusMessageInstance) GetDestination() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -39030,12 +39156,12 @@ func (message *DBusMessageInstance) GetDestination() string {
 // GetErrorName wraps g_dbus_message_get_error_name
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Convenience getter for the %G_DBUS_MESSAGE_HEADER_FIELD_ERROR_NAME header field.
 func (message *DBusMessageInstance) GetErrorName() string {
 	var carg0 *C.GDBusMessage // in, none, converted
-	var cret  *C.gchar        // return, none, string
+	var cret  *C.gchar        // return, none, string, nullable-string
 
 	carg0 = (*C.GDBusMessage)(UnsafeDBusMessageToGlibNone(message))
 
@@ -39044,7 +39170,9 @@ func (message *DBusMessageInstance) GetErrorName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -39098,12 +39226,12 @@ func (message *DBusMessageInstance) GetHeaderFields() []byte {
 // GetInterface wraps g_dbus_message_get_interface
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Convenience getter for the %G_DBUS_MESSAGE_HEADER_FIELD_INTERFACE header field.
 func (message *DBusMessageInstance) GetInterface() string {
 	var carg0 *C.GDBusMessage // in, none, converted
-	var cret  *C.gchar        // return, none, string
+	var cret  *C.gchar        // return, none, string, nullable-string
 
 	carg0 = (*C.GDBusMessage)(UnsafeDBusMessageToGlibNone(message))
 
@@ -39112,7 +39240,9 @@ func (message *DBusMessageInstance) GetInterface() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -39146,12 +39276,12 @@ func (message *DBusMessageInstance) GetLocked() bool {
 // GetMember wraps g_dbus_message_get_member
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Convenience getter for the %G_DBUS_MESSAGE_HEADER_FIELD_MEMBER header field.
 func (message *DBusMessageInstance) GetMember() string {
 	var carg0 *C.GDBusMessage // in, none, converted
-	var cret  *C.gchar        // return, none, string
+	var cret  *C.gchar        // return, none, string, nullable-string
 
 	carg0 = (*C.GDBusMessage)(UnsafeDBusMessageToGlibNone(message))
 
@@ -39160,7 +39290,9 @@ func (message *DBusMessageInstance) GetMember() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -39190,12 +39322,12 @@ func (message *DBusMessageInstance) GetMessageType() DBusMessageType {
 // GetPath wraps g_dbus_message_get_path
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Convenience getter for the %G_DBUS_MESSAGE_HEADER_FIELD_PATH header field.
 func (message *DBusMessageInstance) GetPath() string {
 	var carg0 *C.GDBusMessage // in, none, converted
-	var cret  *C.gchar        // return, none, string
+	var cret  *C.gchar        // return, none, string, nullable-string
 
 	carg0 = (*C.GDBusMessage)(UnsafeDBusMessageToGlibNone(message))
 
@@ -39204,7 +39336,9 @@ func (message *DBusMessageInstance) GetPath() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -39234,12 +39368,12 @@ func (message *DBusMessageInstance) GetReplySerial() uint32 {
 // GetSender wraps g_dbus_message_get_sender
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Convenience getter for the %G_DBUS_MESSAGE_HEADER_FIELD_SENDER header field.
 func (message *DBusMessageInstance) GetSender() string {
 	var carg0 *C.GDBusMessage // in, none, converted
-	var cret  *C.gchar        // return, none, string
+	var cret  *C.gchar        // return, none, string, nullable-string
 
 	carg0 = (*C.GDBusMessage)(UnsafeDBusMessageToGlibNone(message))
 
@@ -39248,7 +39382,9 @@ func (message *DBusMessageInstance) GetSender() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -39816,7 +39952,7 @@ type DBusMethodInvocation interface {
 	// GetMethodInfo wraps g_dbus_method_invocation_get_method_info
 	// The function returns the following values:
 	// 
-	// 	- goret *DBusMethodInfo 
+	// 	- goret *DBusMethodInfo (nullable) 
 	//
 	// Gets information about the method call, if any.
 	// 
@@ -39842,7 +39978,7 @@ type DBusMethodInvocation interface {
 	// GetPropertyInfo wraps g_dbus_method_invocation_get_property_info
 	// The function returns the following values:
 	// 
-	// 	- goret *DBusPropertyInfo 
+	// 	- goret *DBusPropertyInfo (nullable) 
 	//
 	// Gets information about the property that this method call is for, if
 	// any.
@@ -40020,7 +40156,7 @@ func (invocation *DBusMethodInvocationInstance) GetMessage() DBusMessage {
 // GetMethodInfo wraps g_dbus_method_invocation_get_method_info
 // The function returns the following values:
 // 
-// 	- goret *DBusMethodInfo 
+// 	- goret *DBusMethodInfo (nullable) 
 //
 // Gets information about the method call, if any.
 // 
@@ -40030,7 +40166,7 @@ func (invocation *DBusMethodInvocationInstance) GetMessage() DBusMessage {
 // #GDBusInterfaceVTable for more information.
 func (invocation *DBusMethodInvocationInstance) GetMethodInfo() *DBusMethodInfo {
 	var carg0 *C.GDBusMethodInvocation // in, none, converted
-	var cret  *C.GDBusMethodInfo       // return, none, converted
+	var cret  *C.GDBusMethodInfo       // return, none, converted, nullable
 
 	carg0 = (*C.GDBusMethodInvocation)(UnsafeDBusMethodInvocationToGlibNone(invocation))
 
@@ -40039,7 +40175,9 @@ func (invocation *DBusMethodInvocationInstance) GetMethodInfo() *DBusMethodInfo 
 
 	var goret *DBusMethodInfo
 
-	goret = UnsafeDBusMethodInfoFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeDBusMethodInfoFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -40091,7 +40229,7 @@ func (invocation *DBusMethodInvocationInstance) GetObjectPath() string {
 // GetPropertyInfo wraps g_dbus_method_invocation_get_property_info
 // The function returns the following values:
 // 
-// 	- goret *DBusPropertyInfo 
+// 	- goret *DBusPropertyInfo (nullable) 
 //
 // Gets information about the property that this method call is for, if
 // any.
@@ -40106,7 +40244,7 @@ func (invocation *DBusMethodInvocationInstance) GetObjectPath() string {
 // If the call was GetAll, %NULL will be returned.
 func (invocation *DBusMethodInvocationInstance) GetPropertyInfo() *DBusPropertyInfo {
 	var carg0 *C.GDBusMethodInvocation // in, none, converted
-	var cret  *C.GDBusPropertyInfo     // return, none, converted
+	var cret  *C.GDBusPropertyInfo     // return, none, converted, nullable
 
 	carg0 = (*C.GDBusMethodInvocation)(UnsafeDBusMethodInvocationToGlibNone(invocation))
 
@@ -40115,7 +40253,9 @@ func (invocation *DBusMethodInvocationInstance) GetPropertyInfo() *DBusPropertyI
 
 	var goret *DBusPropertyInfo
 
-	goret = UnsafeDBusPropertyInfoFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeDBusPropertyInfoFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -40344,7 +40484,7 @@ type DBusObjectManagerClient interface {
 	// GetNameOwner wraps g_dbus_object_manager_client_get_name_owner
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// The unique name that owns the name that @manager is for or %NULL if
 	// no-one currently owns that name. You can connect to the
@@ -40523,7 +40663,7 @@ func (manager *DBusObjectManagerClientInstance) GetName() string {
 // GetNameOwner wraps g_dbus_object_manager_client_get_name_owner
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // The unique name that owns the name that @manager is for or %NULL if
 // no-one currently owns that name. You can connect to the
@@ -40531,7 +40671,7 @@ func (manager *DBusObjectManagerClientInstance) GetName() string {
 // #GDBusObjectManagerClient:name-owner property.
 func (manager *DBusObjectManagerClientInstance) GetNameOwner() string {
 	var carg0 *C.GDBusObjectManagerClient // in, none, converted
-	var cret  *C.gchar                    // return, full, string
+	var cret  *C.gchar                    // return, full, string, nullable-string
 
 	carg0 = (*C.GDBusObjectManagerClient)(UnsafeDBusObjectManagerClientToGlibNone(manager))
 
@@ -40540,8 +40680,10 @@ func (manager *DBusObjectManagerClientInstance) GetNameOwner() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+		defer C.free(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -40612,7 +40754,7 @@ type DBusObjectManagerServer interface {
 	// GetConnection wraps g_dbus_object_manager_server_get_connection
 	// The function returns the following values:
 	// 
-	// 	- goret DBusConnection 
+	// 	- goret DBusConnection (nullable) 
 	//
 	// Gets the #GDBusConnection used by @manager.
 	GetConnection() DBusConnection
@@ -40776,12 +40918,12 @@ func (manager *DBusObjectManagerServerInstance) ExportUniquely(object DBusObject
 // GetConnection wraps g_dbus_object_manager_server_get_connection
 // The function returns the following values:
 // 
-// 	- goret DBusConnection 
+// 	- goret DBusConnection (nullable) 
 //
 // Gets the #GDBusConnection used by @manager.
 func (manager *DBusObjectManagerServerInstance) GetConnection() DBusConnection {
 	var carg0 *C.GDBusObjectManagerServer // in, none, converted
-	var cret  *C.GDBusConnection          // return, full, converted
+	var cret  *C.GDBusConnection          // return, full, converted, nullable
 
 	carg0 = (*C.GDBusObjectManagerServer)(UnsafeDBusObjectManagerServerToGlibNone(manager))
 
@@ -40790,7 +40932,9 @@ func (manager *DBusObjectManagerServerInstance) GetConnection() DBusConnection {
 
 	var goret DBusConnection
 
-	goret = UnsafeDBusConnectionFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeDBusConnectionFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -41320,7 +41464,7 @@ type DBusProxy interface {
 	// GetCachedPropertyNames wraps g_dbus_proxy_get_cached_property_names
 	// The function returns the following values:
 	// 
-	// 	- goret []string 
+	// 	- goret []string (nullable) 
 	//
 	// Gets the names of all cached properties on @proxy.
 	GetCachedPropertyNames() []string
@@ -41352,7 +41496,7 @@ type DBusProxy interface {
 	// GetInterfaceInfo wraps g_dbus_proxy_get_interface_info
 	// The function returns the following values:
 	// 
-	// 	- goret *DBusInterfaceInfo 
+	// 	- goret *DBusInterfaceInfo (nullable) 
 	//
 	// Returns the #GDBusInterfaceInfo, if any, specifying the interface
 	// that @proxy conforms to. See the #GDBusProxy:g-interface-info
@@ -41368,7 +41512,7 @@ type DBusProxy interface {
 	// GetName wraps g_dbus_proxy_get_name
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the name that @proxy was constructed for.
 	// 
@@ -41379,7 +41523,7 @@ type DBusProxy interface {
 	// GetNameOwner wraps g_dbus_proxy_get_name_owner
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// The unique name that owns the name that @proxy is for or %NULL if
 	// no-one currently owns that name. You may connect to the
@@ -41815,12 +41959,12 @@ func NewDBusProxyForBus(cancellable context.Context, busType BusType, flags DBus
 // GetCachedPropertyNames wraps g_dbus_proxy_get_cached_property_names
 // The function returns the following values:
 // 
-// 	- goret []string 
+// 	- goret []string (nullable) 
 //
 // Gets the names of all cached properties on @proxy.
 func (proxy *DBusProxyInstance) GetCachedPropertyNames() []string {
 	var carg0 *C.GDBusProxy // in, none, converted
-	var cret  **C.gchar     // return, transfer: full, C Pointers: 2, Name: array[utf8], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
+	var cret  **C.gchar     // return, transfer: full, C Pointers: 2, Name: array[utf8], scope: , nullable, array (inner: *typesystem.StringPrimitive, zero-terminated)
 
 	carg0 = (*C.GDBusProxy)(UnsafeDBusProxyToGlibNone(proxy))
 
@@ -41909,14 +42053,14 @@ func (proxy *DBusProxyInstance) GetFlags() DBusProxyFlags {
 // GetInterfaceInfo wraps g_dbus_proxy_get_interface_info
 // The function returns the following values:
 // 
-// 	- goret *DBusInterfaceInfo 
+// 	- goret *DBusInterfaceInfo (nullable) 
 //
 // Returns the #GDBusInterfaceInfo, if any, specifying the interface
 // that @proxy conforms to. See the #GDBusProxy:g-interface-info
 // property for more details.
 func (proxy *DBusProxyInstance) GetInterfaceInfo() *DBusInterfaceInfo {
 	var carg0 *C.GDBusProxy         // in, none, converted
-	var cret  *C.GDBusInterfaceInfo // return, none, converted
+	var cret  *C.GDBusInterfaceInfo // return, none, converted, nullable
 
 	carg0 = (*C.GDBusProxy)(UnsafeDBusProxyToGlibNone(proxy))
 
@@ -41925,7 +42069,9 @@ func (proxy *DBusProxyInstance) GetInterfaceInfo() *DBusInterfaceInfo {
 
 	var goret *DBusInterfaceInfo
 
-	goret = UnsafeDBusInterfaceInfoFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeDBusInterfaceInfoFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -41955,7 +42101,7 @@ func (proxy *DBusProxyInstance) GetInterfaceName() string {
 // GetName wraps g_dbus_proxy_get_name
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the name that @proxy was constructed for.
 // 
@@ -41964,7 +42110,7 @@ func (proxy *DBusProxyInstance) GetInterfaceName() string {
 // pattern.
 func (proxy *DBusProxyInstance) GetName() string {
 	var carg0 *C.GDBusProxy // in, none, converted
-	var cret  *C.gchar      // return, none, string
+	var cret  *C.gchar      // return, none, string, nullable-string
 
 	carg0 = (*C.GDBusProxy)(UnsafeDBusProxyToGlibNone(proxy))
 
@@ -41973,7 +42119,9 @@ func (proxy *DBusProxyInstance) GetName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -41981,7 +42129,7 @@ func (proxy *DBusProxyInstance) GetName() string {
 // GetNameOwner wraps g_dbus_proxy_get_name_owner
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // The unique name that owns the name that @proxy is for or %NULL if
 // no-one currently owns that name. You may connect to the
@@ -41989,7 +42137,7 @@ func (proxy *DBusProxyInstance) GetName() string {
 // #GDBusProxy:g-name-owner property.
 func (proxy *DBusProxyInstance) GetNameOwner() string {
 	var carg0 *C.GDBusProxy // in, none, converted
-	var cret  *C.gchar      // return, full, string
+	var cret  *C.gchar      // return, full, string, nullable-string
 
 	carg0 = (*C.GDBusProxy)(UnsafeDBusProxyToGlibNone(proxy))
 
@@ -41998,8 +42146,10 @@ func (proxy *DBusProxyInstance) GetNameOwner() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+		defer C.free(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -42633,7 +42783,7 @@ func UnsafeDebugControllerDBusToGlibFull(c DebugControllerDBus) unsafe.Pointer {
 // 
 // The function returns the following values:
 // 
-// 	- goret DebugControllerDBus 
+// 	- goret DebugControllerDBus (nullable) 
 // 	- _goerr error (nullable): an error 
 //
 // Create a new #GDebugControllerDBus and synchronously initialize it.
@@ -42646,7 +42796,7 @@ func UnsafeDebugControllerDBusToGlibFull(c DebugControllerDBus) unsafe.Pointer {
 func NewDebugControllerDBus(cancellable context.Context, connection DBusConnection) (DebugControllerDBus, error) {
 	var carg2 *C.GCancellable         // in, none, converted, nullable
 	var carg1 *C.GDBusConnection      // in, none, converted
-	var cret  *C.GDebugControllerDBus // return, full, converted
+	var cret  *C.GDebugControllerDBus // return, full, converted, nullable
 	var _cerr *C.GError               // out, full, converted, nullable
 
 	if cancellable != nil {
@@ -42661,7 +42811,9 @@ func NewDebugControllerDBus(cancellable context.Context, connection DBusConnecti
 	var goret  DebugControllerDBus
 	var _goerr error
 
-	goret = UnsafeDebugControllerDBusFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeDebugControllerDBusFromGlibFull(unsafe.Pointer(cret))
+	}
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -43289,7 +43441,7 @@ type FileEnumerator interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret FileInfo 
+	// 	- goret FileInfo (nullable) 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Returns information for the next file in the enumerated object.
@@ -43773,7 +43925,7 @@ func (direnum *FileEnumeratorInstance) Iterate(cancellable context.Context) (Fil
 // 
 // The function returns the following values:
 // 
-// 	- goret FileInfo 
+// 	- goret FileInfo (nullable) 
 // 	- _goerr error (nullable): an error 
 //
 // Returns information for the next file in the enumerated object.
@@ -43790,7 +43942,7 @@ func (direnum *FileEnumeratorInstance) Iterate(cancellable context.Context) (Fil
 func (enumerator *FileEnumeratorInstance) NextFile(cancellable context.Context) (FileInfo, error) {
 	var carg0 *C.GFileEnumerator // in, none, converted
 	var carg1 *C.GCancellable    // in, none, converted, nullable
-	var cret  *C.GFileInfo       // return, full, converted
+	var cret  *C.GFileInfo       // return, full, converted, nullable
 	var _cerr *C.GError          // out, full, converted, nullable
 
 	carg0 = (*C.GFileEnumerator)(UnsafeFileEnumeratorToGlibNone(enumerator))
@@ -43805,7 +43957,9 @@ func (enumerator *FileEnumeratorInstance) NextFile(cancellable context.Context) 
 	var goret  FileInfo
 	var _goerr error
 
-	goret = UnsafeFileInfoFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeFileInfoFromGlibFull(unsafe.Pointer(cret))
+	}
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -44161,7 +44315,7 @@ type FileInfo interface {
 	// GetAccessDateTime wraps g_file_info_get_access_date_time
 	// The function returns the following values:
 	// 
-	// 	- goret *glib.DateTime 
+	// 	- goret *glib.DateTime (nullable) 
 	//
 	// Gets the access time of the current @info and returns it as a
 	// #GDateTime.
@@ -44182,7 +44336,7 @@ type FileInfo interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the value of an attribute, formatted as a string.
 	// This escapes things as needed to make the string valid
@@ -44209,7 +44363,7 @@ type FileInfo interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the value of a byte string attribute. If the attribute does
 	// not contain a byte string, %NULL will be returned.
@@ -44222,7 +44376,7 @@ type FileInfo interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the value of a byte string attribute as a file path.
 	// 
@@ -44267,7 +44421,7 @@ type FileInfo interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret gobject.Object 
+	// 	- goret gobject.Object (nullable) 
 	//
 	// Gets the value of a #GObject attribute. If the attribute does
 	// not contain a #GObject, %NULL will be returned.
@@ -44292,7 +44446,7 @@ type FileInfo interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the value of a string attribute. If the attribute does
 	// not contain a string, %NULL will be returned.
@@ -44305,7 +44459,7 @@ type FileInfo interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret []string 
+	// 	- goret []string (nullable) 
 	//
 	// Gets the value of a stringv attribute. If the attribute does
 	// not contain a stringv, %NULL will be returned.
@@ -44353,7 +44507,7 @@ type FileInfo interface {
 	// GetContentType wraps g_file_info_get_content_type
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the file's content type.
 	// 
@@ -44363,7 +44517,7 @@ type FileInfo interface {
 	// GetCreationDateTime wraps g_file_info_get_creation_date_time
 	// The function returns the following values:
 	// 
-	// 	- goret *glib.DateTime 
+	// 	- goret *glib.DateTime (nullable) 
 	//
 	// Gets the creation time of the current @info and returns it as a
 	// #GDateTime.
@@ -44379,7 +44533,7 @@ type FileInfo interface {
 	// GetDeletionDate wraps g_file_info_get_deletion_date
 	// The function returns the following values:
 	// 
-	// 	- goret *glib.DateTime 
+	// 	- goret *glib.DateTime (nullable) 
 	//
 	// Returns the #GDateTime representing the deletion date of the file, as
 	// available in %G_FILE_ATTRIBUTE_TRASH_DELETION_DATE. If the
@@ -44408,7 +44562,7 @@ type FileInfo interface {
 	// GetETag wraps g_file_info_get_etag
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the [entity tag](iface.File.html#entity-tags) for a given
 	// #GFileInfo. See %G_FILE_ATTRIBUTE_ETAG_VALUE.
@@ -44430,7 +44584,7 @@ type FileInfo interface {
 	// GetIcon wraps g_file_info_get_icon
 	// The function returns the following values:
 	// 
-	// 	- goret Icon 
+	// 	- goret Icon (nullable) 
 	//
 	// Gets the icon for a file.
 	// 
@@ -44470,7 +44624,7 @@ type FileInfo interface {
 	// GetModificationDateTime wraps g_file_info_get_modification_date_time
 	// The function returns the following values:
 	// 
-	// 	- goret *glib.DateTime 
+	// 	- goret *glib.DateTime (nullable) 
 	//
 	// Gets the modification time of the current @info and returns it as a
 	// #GDateTime.
@@ -44519,7 +44673,7 @@ type FileInfo interface {
 	// GetSymbolicIcon wraps g_file_info_get_symbolic_icon
 	// The function returns the following values:
 	// 
-	// 	- goret Icon 
+	// 	- goret Icon (nullable) 
 	//
 	// Gets the symbolic icon for a file.
 	// 
@@ -44529,7 +44683,7 @@ type FileInfo interface {
 	// GetSymlinkTarget wraps g_file_info_get_symlink_target
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the symlink target for a given #GFileInfo.
 	// 
@@ -44570,7 +44724,7 @@ type FileInfo interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret []string 
+	// 	- goret []string (nullable) 
 	//
 	// Lists the file info structure's attributes.
 	ListAttributes(string) []string
@@ -44974,7 +45128,7 @@ func (other *FileInfoInstance) Dup() FileInfo {
 // GetAccessDateTime wraps g_file_info_get_access_date_time
 // The function returns the following values:
 // 
-// 	- goret *glib.DateTime 
+// 	- goret *glib.DateTime (nullable) 
 //
 // Gets the access time of the current @info and returns it as a
 // #GDateTime.
@@ -44988,7 +45142,7 @@ func (other *FileInfoInstance) Dup() FileInfo {
 // be queried separately using g_file_info_get_attribute_uint32().
 func (info *FileInfoInstance) GetAccessDateTime() *glib.DateTime {
 	var carg0 *C.GFileInfo // in, none, converted
-	var cret  *C.GDateTime // return, full, converted
+	var cret  *C.GDateTime // return, full, converted, nullable
 
 	carg0 = (*C.GFileInfo)(UnsafeFileInfoToGlibNone(info))
 
@@ -44997,7 +45151,9 @@ func (info *FileInfoInstance) GetAccessDateTime() *glib.DateTime {
 
 	var goret *glib.DateTime
 
-	goret = glib.UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = glib.UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -45010,7 +45166,7 @@ func (info *FileInfoInstance) GetAccessDateTime() *glib.DateTime {
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the value of an attribute, formatted as a string.
 // This escapes things as needed to make the string valid
@@ -45018,7 +45174,7 @@ func (info *FileInfoInstance) GetAccessDateTime() *glib.DateTime {
 func (info *FileInfoInstance) GetAttributeAsString(attribute string) string {
 	var carg0 *C.GFileInfo // in, none, converted
 	var carg1 *C.char      // in, none, string, casted *C.gchar
-	var cret  *C.char      // return, full, string, casted *C.gchar
+	var cret  *C.char      // return, full, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GFileInfo)(UnsafeFileInfoToGlibNone(info))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(attribute)))
@@ -45030,8 +45186,10 @@ func (info *FileInfoInstance) GetAttributeAsString(attribute string) string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+		defer C.free(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -45078,14 +45236,14 @@ func (info *FileInfoInstance) GetAttributeBoolean(attribute string) bool {
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the value of a byte string attribute. If the attribute does
 // not contain a byte string, %NULL will be returned.
 func (info *FileInfoInstance) GetAttributeByteString(attribute string) string {
 	var carg0 *C.GFileInfo // in, none, converted
 	var carg1 *C.char      // in, none, string, casted *C.gchar
-	var cret  *C.char      // return, none, string, casted *C.gchar
+	var cret  *C.char      // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GFileInfo)(UnsafeFileInfoToGlibNone(info))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(attribute)))
@@ -45097,7 +45255,9 @@ func (info *FileInfoInstance) GetAttributeByteString(attribute string) string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -45110,7 +45270,7 @@ func (info *FileInfoInstance) GetAttributeByteString(attribute string) string {
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the value of a byte string attribute as a file path.
 // 
@@ -45121,7 +45281,7 @@ func (info *FileInfoInstance) GetAttributeByteString(attribute string) string {
 func (info *FileInfoInstance) GetAttributeFilePath(attribute string) string {
 	var carg0 *C.GFileInfo // in, none, converted
 	var carg1 *C.char      // in, none, string, casted *C.gchar
-	var cret  *C.char      // return, none, string, casted *C.gchar
+	var cret  *C.char      // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GFileInfo)(UnsafeFileInfoToGlibNone(info))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(attribute)))
@@ -45133,7 +45293,9 @@ func (info *FileInfoInstance) GetAttributeFilePath(attribute string) string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -45212,14 +45374,14 @@ func (info *FileInfoInstance) GetAttributeInt64(attribute string) int64 {
 // 
 // The function returns the following values:
 // 
-// 	- goret gobject.Object 
+// 	- goret gobject.Object (nullable) 
 //
 // Gets the value of a #GObject attribute. If the attribute does
 // not contain a #GObject, %NULL will be returned.
 func (info *FileInfoInstance) GetAttributeObject(attribute string) gobject.Object {
 	var carg0 *C.GFileInfo // in, none, converted
 	var carg1 *C.char      // in, none, string, casted *C.gchar
-	var cret  *C.GObject   // return, none, converted
+	var cret  *C.GObject   // return, none, converted, nullable
 
 	carg0 = (*C.GFileInfo)(UnsafeFileInfoToGlibNone(info))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(attribute)))
@@ -45231,7 +45393,9 @@ func (info *FileInfoInstance) GetAttributeObject(attribute string) gobject.Objec
 
 	var goret gobject.Object
 
-	goret = gobject.UnsafeObjectFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gobject.UnsafeObjectFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -45275,14 +45439,14 @@ func (info *FileInfoInstance) GetAttributeStatus(attribute string) FileAttribute
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the value of a string attribute. If the attribute does
 // not contain a string, %NULL will be returned.
 func (info *FileInfoInstance) GetAttributeString(attribute string) string {
 	var carg0 *C.GFileInfo // in, none, converted
 	var carg1 *C.char      // in, none, string, casted *C.gchar
-	var cret  *C.char      // return, none, string, casted *C.gchar
+	var cret  *C.char      // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GFileInfo)(UnsafeFileInfoToGlibNone(info))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(attribute)))
@@ -45294,7 +45458,9 @@ func (info *FileInfoInstance) GetAttributeString(attribute string) string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -45307,14 +45473,14 @@ func (info *FileInfoInstance) GetAttributeString(attribute string) string {
 // 
 // The function returns the following values:
 // 
-// 	- goret []string 
+// 	- goret []string (nullable) 
 //
 // Gets the value of a stringv attribute. If the attribute does
 // not contain a stringv, %NULL will be returned.
 func (info *FileInfoInstance) GetAttributeStringv(attribute string) []string {
 	var carg0 *C.GFileInfo // in, none, converted
 	var carg1 *C.char      // in, none, string, casted *C.gchar
-	var cret  **C.char     // return, transfer: none, C Pointers: 2, Name: array[utf8], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
+	var cret  **C.char     // return, transfer: none, C Pointers: 2, Name: array[utf8], scope: , nullable, array (inner: *typesystem.StringPrimitive, zero-terminated)
 
 	carg0 = (*C.GFileInfo)(UnsafeFileInfoToGlibNone(info))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(attribute)))
@@ -45433,7 +45599,7 @@ func (info *FileInfoInstance) GetAttributeUint64(attribute string) uint64 {
 // GetContentType wraps g_file_info_get_content_type
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the file's content type.
 // 
@@ -45441,7 +45607,7 @@ func (info *FileInfoInstance) GetAttributeUint64(attribute string) uint64 {
 // %G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE.
 func (info *FileInfoInstance) GetContentType() string {
 	var carg0 *C.GFileInfo // in, none, converted
-	var cret  *C.char      // return, none, string, casted *C.gchar
+	var cret  *C.char      // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GFileInfo)(UnsafeFileInfoToGlibNone(info))
 
@@ -45450,7 +45616,9 @@ func (info *FileInfoInstance) GetContentType() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -45458,7 +45626,7 @@ func (info *FileInfoInstance) GetContentType() string {
 // GetCreationDateTime wraps g_file_info_get_creation_date_time
 // The function returns the following values:
 // 
-// 	- goret *glib.DateTime 
+// 	- goret *glib.DateTime (nullable) 
 //
 // Gets the creation time of the current @info and returns it as a
 // #GDateTime.
@@ -45472,7 +45640,7 @@ func (info *FileInfoInstance) GetContentType() string {
 // be queried separately using g_file_info_get_attribute_uint32().
 func (info *FileInfoInstance) GetCreationDateTime() *glib.DateTime {
 	var carg0 *C.GFileInfo // in, none, converted
-	var cret  *C.GDateTime // return, full, converted
+	var cret  *C.GDateTime // return, full, converted, nullable
 
 	carg0 = (*C.GFileInfo)(UnsafeFileInfoToGlibNone(info))
 
@@ -45481,7 +45649,9 @@ func (info *FileInfoInstance) GetCreationDateTime() *glib.DateTime {
 
 	var goret *glib.DateTime
 
-	goret = glib.UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = glib.UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -45489,14 +45659,14 @@ func (info *FileInfoInstance) GetCreationDateTime() *glib.DateTime {
 // GetDeletionDate wraps g_file_info_get_deletion_date
 // The function returns the following values:
 // 
-// 	- goret *glib.DateTime 
+// 	- goret *glib.DateTime (nullable) 
 //
 // Returns the #GDateTime representing the deletion date of the file, as
 // available in %G_FILE_ATTRIBUTE_TRASH_DELETION_DATE. If the
 // %G_FILE_ATTRIBUTE_TRASH_DELETION_DATE attribute is unset, %NULL is returned.
 func (info *FileInfoInstance) GetDeletionDate() *glib.DateTime {
 	var carg0 *C.GFileInfo // in, none, converted
-	var cret  *C.GDateTime // return, full, converted
+	var cret  *C.GDateTime // return, full, converted, nullable
 
 	carg0 = (*C.GFileInfo)(UnsafeFileInfoToGlibNone(info))
 
@@ -45505,7 +45675,9 @@ func (info *FileInfoInstance) GetDeletionDate() *glib.DateTime {
 
 	var goret *glib.DateTime
 
-	goret = glib.UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = glib.UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -45563,7 +45735,7 @@ func (info *FileInfoInstance) GetEditName() string {
 // GetETag wraps g_file_info_get_etag
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the [entity tag](iface.File.html#entity-tags) for a given
 // #GFileInfo. See %G_FILE_ATTRIBUTE_ETAG_VALUE.
@@ -45572,7 +45744,7 @@ func (info *FileInfoInstance) GetEditName() string {
 // %G_FILE_ATTRIBUTE_ETAG_VALUE.
 func (info *FileInfoInstance) GetETag() string {
 	var carg0 *C.GFileInfo // in, none, converted
-	var cret  *C.char      // return, none, string, casted *C.gchar
+	var cret  *C.char      // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GFileInfo)(UnsafeFileInfoToGlibNone(info))
 
@@ -45581,7 +45753,9 @@ func (info *FileInfoInstance) GetETag() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -45615,7 +45789,7 @@ func (info *FileInfoInstance) GetFileType() FileType {
 // GetIcon wraps g_file_info_get_icon
 // The function returns the following values:
 // 
-// 	- goret Icon 
+// 	- goret Icon (nullable) 
 //
 // Gets the icon for a file.
 // 
@@ -45623,7 +45797,7 @@ func (info *FileInfoInstance) GetFileType() FileType {
 // %G_FILE_ATTRIBUTE_STANDARD_ICON.
 func (info *FileInfoInstance) GetIcon() Icon {
 	var carg0 *C.GFileInfo // in, none, converted
-	var cret  *C.GIcon     // return, none, converted
+	var cret  *C.GIcon     // return, none, converted, nullable
 
 	carg0 = (*C.GFileInfo)(UnsafeFileInfoToGlibNone(info))
 
@@ -45632,7 +45806,9 @@ func (info *FileInfoInstance) GetIcon() Icon {
 
 	var goret Icon
 
-	goret = UnsafeIconFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeIconFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -45721,7 +45897,7 @@ func (info *FileInfoInstance) GetIsSymlink() bool {
 // GetModificationDateTime wraps g_file_info_get_modification_date_time
 // The function returns the following values:
 // 
-// 	- goret *glib.DateTime 
+// 	- goret *glib.DateTime (nullable) 
 //
 // Gets the modification time of the current @info and returns it as a
 // #GDateTime.
@@ -45735,7 +45911,7 @@ func (info *FileInfoInstance) GetIsSymlink() bool {
 // be queried separately using g_file_info_get_attribute_uint32().
 func (info *FileInfoInstance) GetModificationDateTime() *glib.DateTime {
 	var carg0 *C.GFileInfo // in, none, converted
-	var cret  *C.GDateTime // return, full, converted
+	var cret  *C.GDateTime // return, full, converted, nullable
 
 	carg0 = (*C.GFileInfo)(UnsafeFileInfoToGlibNone(info))
 
@@ -45744,7 +45920,9 @@ func (info *FileInfoInstance) GetModificationDateTime() *glib.DateTime {
 
 	var goret *glib.DateTime
 
-	goret = glib.UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = glib.UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -45830,7 +46008,7 @@ func (info *FileInfoInstance) GetSortOrder() int32 {
 // GetSymbolicIcon wraps g_file_info_get_symbolic_icon
 // The function returns the following values:
 // 
-// 	- goret Icon 
+// 	- goret Icon (nullable) 
 //
 // Gets the symbolic icon for a file.
 // 
@@ -45838,7 +46016,7 @@ func (info *FileInfoInstance) GetSortOrder() int32 {
 // %G_FILE_ATTRIBUTE_STANDARD_SYMBOLIC_ICON.
 func (info *FileInfoInstance) GetSymbolicIcon() Icon {
 	var carg0 *C.GFileInfo // in, none, converted
-	var cret  *C.GIcon     // return, none, converted
+	var cret  *C.GIcon     // return, none, converted, nullable
 
 	carg0 = (*C.GFileInfo)(UnsafeFileInfoToGlibNone(info))
 
@@ -45847,7 +46025,9 @@ func (info *FileInfoInstance) GetSymbolicIcon() Icon {
 
 	var goret Icon
 
-	goret = UnsafeIconFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeIconFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -45855,7 +46035,7 @@ func (info *FileInfoInstance) GetSymbolicIcon() Icon {
 // GetSymlinkTarget wraps g_file_info_get_symlink_target
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the symlink target for a given #GFileInfo.
 // 
@@ -45863,7 +46043,7 @@ func (info *FileInfoInstance) GetSymbolicIcon() Icon {
 // %G_FILE_ATTRIBUTE_STANDARD_SYMLINK_TARGET.
 func (info *FileInfoInstance) GetSymlinkTarget() string {
 	var carg0 *C.GFileInfo // in, none, converted
-	var cret  *C.char      // return, none, string, casted *C.gchar
+	var cret  *C.char      // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GFileInfo)(UnsafeFileInfoToGlibNone(info))
 
@@ -45872,7 +46052,9 @@ func (info *FileInfoInstance) GetSymlinkTarget() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -45953,13 +46135,13 @@ func (info *FileInfoInstance) HasNamespace(nameSpace string) bool {
 // 
 // The function returns the following values:
 // 
-// 	- goret []string 
+// 	- goret []string (nullable) 
 //
 // Lists the file info structure's attributes.
 func (info *FileInfoInstance) ListAttributes(nameSpace string) []string {
 	var carg0 *C.GFileInfo // in, none, converted
 	var carg1 *C.char      // in, none, string, nullable-string
-	var cret  **C.char     // return, transfer: full, C Pointers: 2, Name: array[utf8], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
+	var cret  **C.char     // return, transfer: full, C Pointers: 2, Name: array[utf8], scope: , nullable, array (inner: *typesystem.StringPrimitive, zero-terminated)
 
 	carg0 = (*C.GFileInfo)(UnsafeFileInfoToGlibNone(info))
 	if nameSpace != "" {
@@ -46949,7 +47131,7 @@ type FilenameCompleter interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Obtains a completion for @initial_text from @completer.
 	GetCompletionSuffix(string) string
@@ -47040,13 +47222,13 @@ func NewFilenameCompleter() FilenameCompleter {
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Obtains a completion for @initial_text from @completer.
 func (completer *FilenameCompleterInstance) GetCompletionSuffix(initialText string) string {
 	var carg0 *C.GFilenameCompleter // in, none, converted
 	var carg1 *C.char               // in, none, string, casted *C.gchar
-	var cret  *C.char               // return, full, string, casted *C.gchar
+	var cret  *C.char               // return, full, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GFilenameCompleter)(UnsafeFilenameCompleterToGlibNone(completer))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(initialText)))
@@ -47058,8 +47240,10 @@ func (completer *FilenameCompleterInstance) GetCompletionSuffix(initialText stri
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+		defer C.free(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -48082,12 +48266,12 @@ func NewInetAddressAny(family SocketFamily) InetAddress {
 // 
 // The function returns the following values:
 // 
-// 	- goret InetAddress 
+// 	- goret InetAddress (nullable) 
 //
 // Parses @string as an IP address and creates a new #GInetAddress.
 func NewInetAddressFromString(str string) InetAddress {
 	var carg1 *C.gchar        // in, none, string
-	var cret  *C.GInetAddress // return, full, converted
+	var cret  *C.GInetAddress // return, full, converted, nullable
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -48097,7 +48281,9 @@ func NewInetAddressFromString(str string) InetAddress {
 
 	var goret InetAddress
 
-	goret = UnsafeInetAddressFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeInetAddressFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -50621,7 +50807,7 @@ type MenuItem interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret MenuModel 
+	// 	- goret MenuModel (nullable) 
 	//
 	// Queries the named @link on @menu_item.
 	GetLink(string) MenuModel
@@ -50972,13 +51158,13 @@ func NewMenuItemSubmenu(label string, submenu MenuModel) MenuItem {
 // 
 // The function returns the following values:
 // 
-// 	- goret MenuModel 
+// 	- goret MenuModel (nullable) 
 //
 // Queries the named @link on @menu_item.
 func (menuItem *MenuItemInstance) GetLink(link string) MenuModel {
 	var carg0 *C.GMenuItem  // in, none, converted
 	var carg1 *C.gchar      // in, none, string
-	var cret  *C.GMenuModel // return, full, converted
+	var cret  *C.GMenuModel // return, full, converted, nullable
 
 	carg0 = (*C.GMenuItem)(UnsafeMenuItemToGlibNone(menuItem))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(link)))
@@ -50990,7 +51176,9 @@ func (menuItem *MenuItemInstance) GetLink(link string) MenuModel {
 
 	var goret MenuModel
 
-	goret = UnsafeMenuModelFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeMenuModelFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -51541,7 +51729,7 @@ type MenuModel interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret MenuModel 
+	// 	- goret MenuModel (nullable) 
 	//
 	// Queries the item at position @item_index in @model for the link
 	// specified by @link.
@@ -51688,7 +51876,7 @@ func UnsafeMenuModelToGlibFull(c MenuModel) unsafe.Pointer {
 // 
 // The function returns the following values:
 // 
-// 	- goret MenuModel 
+// 	- goret MenuModel (nullable) 
 //
 // Queries the item at position @item_index in @model for the link
 // specified by @link.
@@ -51699,7 +51887,7 @@ func (model *MenuModelInstance) GetItemLink(itemIndex int, link string) MenuMode
 	var carg0 *C.GMenuModel // in, none, converted
 	var carg1 C.gint        // in, none, casted
 	var carg2 *C.gchar      // in, none, string
-	var cret  *C.GMenuModel // return, full, converted
+	var cret  *C.GMenuModel // return, full, converted, nullable
 
 	carg0 = (*C.GMenuModel)(UnsafeMenuModelToGlibNone(model))
 	carg1 = C.gint(itemIndex)
@@ -51713,7 +51901,9 @@ func (model *MenuModelInstance) GetItemLink(itemIndex int, link string) MenuMode
 
 	var goret MenuModel
 
-	goret = UnsafeMenuModelFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeMenuModelFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -51953,7 +52143,7 @@ type MountOperation interface {
 	// GetDomain wraps g_mount_operation_get_domain
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the domain of the mount operation.
 	GetDomain() string
@@ -51976,7 +52166,7 @@ type MountOperation interface {
 	// GetPassword wraps g_mount_operation_get_password
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets a password from the mount operation.
 	GetPassword() string
@@ -51997,7 +52187,7 @@ type MountOperation interface {
 	// GetUsername wraps g_mount_operation_get_username
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Get the user name from the mount operation.
 	GetUsername() string
@@ -52224,12 +52414,12 @@ func (op *MountOperationInstance) GetChoice() int {
 // GetDomain wraps g_mount_operation_get_domain
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the domain of the mount operation.
 func (op *MountOperationInstance) GetDomain() string {
 	var carg0 *C.GMountOperation // in, none, converted
-	var cret  *C.char            // return, none, string, casted *C.gchar
+	var cret  *C.char            // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GMountOperation)(UnsafeMountOperationToGlibNone(op))
 
@@ -52238,7 +52428,9 @@ func (op *MountOperationInstance) GetDomain() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -52296,12 +52488,12 @@ func (op *MountOperationInstance) GetIsTcryptSystemVolume() bool {
 // GetPassword wraps g_mount_operation_get_password
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets a password from the mount operation.
 func (op *MountOperationInstance) GetPassword() string {
 	var carg0 *C.GMountOperation // in, none, converted
-	var cret  *C.char            // return, none, string, casted *C.gchar
+	var cret  *C.char            // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GMountOperation)(UnsafeMountOperationToGlibNone(op))
 
@@ -52310,7 +52502,9 @@ func (op *MountOperationInstance) GetPassword() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -52362,12 +52556,12 @@ func (op *MountOperationInstance) GetPim() uint {
 // GetUsername wraps g_mount_operation_get_username
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Get the user name from the mount operation.
 func (op *MountOperationInstance) GetUsername() string {
 	var carg0 *C.GMountOperation // in, none, converted
-	var cret  *C.char            // return, none, string, casted *C.gchar
+	var cret  *C.char            // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GMountOperation)(UnsafeMountOperationToGlibNone(op))
 
@@ -52376,7 +52570,9 @@ func (op *MountOperationInstance) GetUsername() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -52675,7 +52871,7 @@ type NetworkAddress interface {
 	// GetScheme wraps g_network_address_get_scheme
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets @addr's scheme
 	GetScheme() string
@@ -52941,12 +53137,12 @@ func (addr *NetworkAddressInstance) GetPort() uint16 {
 // GetScheme wraps g_network_address_get_scheme
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets @addr's scheme
 func (addr *NetworkAddressInstance) GetScheme() string {
 	var carg0 *C.GNetworkAddress // in, none, converted
-	var cret  *C.gchar           // return, none, string
+	var cret  *C.gchar           // return, none, string, nullable-string
 
 	carg0 = (*C.GNetworkAddress)(UnsafeNetworkAddressToGlibNone(addr))
 
@@ -52955,7 +53151,9 @@ func (addr *NetworkAddressInstance) GetScheme() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -65050,7 +65248,7 @@ type SocketAddressEnumerator interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret SocketAddress 
+	// 	- goret SocketAddress (nullable) 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Retrieves the next #GSocketAddress from @enumerator. Note that this
@@ -65089,7 +65287,7 @@ type SocketAddressEnumerator interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret SocketAddress 
+	// 	- goret SocketAddress (nullable) 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Retrieves the result of a completed call to
@@ -65141,7 +65339,7 @@ func UnsafeSocketAddressEnumeratorToGlibFull(c SocketAddressEnumerator) unsafe.P
 // 
 // The function returns the following values:
 // 
-// 	- goret SocketAddress 
+// 	- goret SocketAddress (nullable) 
 // 	- _goerr error (nullable): an error 
 //
 // Retrieves the next #GSocketAddress from @enumerator. Note that this
@@ -65160,7 +65358,7 @@ func UnsafeSocketAddressEnumeratorToGlibFull(c SocketAddressEnumerator) unsafe.P
 func (enumerator *SocketAddressEnumeratorInstance) Next(cancellable context.Context) (SocketAddress, error) {
 	var carg0 *C.GSocketAddressEnumerator // in, none, converted
 	var carg1 *C.GCancellable             // in, none, converted, nullable
-	var cret  *C.GSocketAddress           // return, full, converted
+	var cret  *C.GSocketAddress           // return, full, converted, nullable
 	var _cerr *C.GError                   // out, full, converted, nullable
 
 	carg0 = (*C.GSocketAddressEnumerator)(UnsafeSocketAddressEnumeratorToGlibNone(enumerator))
@@ -65175,7 +65373,9 @@ func (enumerator *SocketAddressEnumeratorInstance) Next(cancellable context.Cont
 	var goret  SocketAddress
 	var _goerr error
 
-	goret = UnsafeSocketAddressFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeSocketAddressFromGlibFull(unsafe.Pointer(cret))
+	}
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -65225,7 +65425,7 @@ func (enumerator *SocketAddressEnumeratorInstance) NextAsync(cancellable context
 // 
 // The function returns the following values:
 // 
-// 	- goret SocketAddress 
+// 	- goret SocketAddress (nullable) 
 // 	- _goerr error (nullable): an error 
 //
 // Retrieves the result of a completed call to
@@ -65235,7 +65435,7 @@ func (enumerator *SocketAddressEnumeratorInstance) NextAsync(cancellable context
 func (enumerator *SocketAddressEnumeratorInstance) NextFinish(result AsyncResult) (SocketAddress, error) {
 	var carg0 *C.GSocketAddressEnumerator // in, none, converted
 	var carg1 *C.GAsyncResult             // in, none, converted
-	var cret  *C.GSocketAddress           // return, full, converted
+	var cret  *C.GSocketAddress           // return, full, converted, nullable
 	var _cerr *C.GError                   // out, full, converted, nullable
 
 	carg0 = (*C.GSocketAddressEnumerator)(UnsafeSocketAddressEnumeratorToGlibNone(enumerator))
@@ -65248,7 +65448,9 @@ func (enumerator *SocketAddressEnumeratorInstance) NextFinish(result AsyncResult
 	var goret  SocketAddress
 	var _goerr error
 
-	goret = UnsafeSocketAddressFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeSocketAddressFromGlibFull(unsafe.Pointer(cret))
+	}
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -65583,7 +65785,7 @@ type SocketClient interface {
 	// GetLocalAddress wraps g_socket_client_get_local_address
 	// The function returns the following values:
 	// 
-	// 	- goret SocketAddress 
+	// 	- goret SocketAddress (nullable) 
 	//
 	// Gets the local address of the socket client.
 	// 
@@ -66555,14 +66757,14 @@ func (client *SocketClientInstance) GetFamily() SocketFamily {
 // GetLocalAddress wraps g_socket_client_get_local_address
 // The function returns the following values:
 // 
-// 	- goret SocketAddress 
+// 	- goret SocketAddress (nullable) 
 //
 // Gets the local address of the socket client.
 // 
 // See g_socket_client_set_local_address() for details.
 func (client *SocketClientInstance) GetLocalAddress() SocketAddress {
 	var carg0 *C.GSocketClient  // in, none, converted
-	var cret  *C.GSocketAddress // return, none, converted
+	var cret  *C.GSocketAddress // return, none, converted, nullable
 
 	carg0 = (*C.GSocketClient)(UnsafeSocketClientToGlibNone(client))
 
@@ -66571,7 +66773,9 @@ func (client *SocketClientInstance) GetLocalAddress() SocketAddress {
 
 	var goret SocketAddress
 
-	goret = UnsafeSocketAddressFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeSocketAddressFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -69283,7 +69487,7 @@ type Task interface {
 	// GetCancellable wraps g_task_get_cancellable
 	// The function returns the following values:
 	// 
-	// 	- goret context.Context 
+	// 	- goret context.Context (nullable) 
 	//
 	// Gets @task's #GCancellable
 	GetCancellable() context.Context
@@ -69320,7 +69524,7 @@ type Task interface {
 	// GetName wraps g_task_get_name
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets @task’s name. See g_task_set_name().
 	GetName() string
@@ -69615,12 +69819,12 @@ func UnsafeTaskToGlibFull(c Task) unsafe.Pointer {
 // GetCancellable wraps g_task_get_cancellable
 // The function returns the following values:
 // 
-// 	- goret context.Context 
+// 	- goret context.Context (nullable) 
 //
 // Gets @task's #GCancellable
 func (task *TaskInstance) GetCancellable() context.Context {
 	var carg0 *C.GTask        // in, none, converted
-	var cret  *C.GCancellable // return, none, converted
+	var cret  *C.GCancellable // return, none, converted, nullable
 
 	carg0 = (*C.GTask)(UnsafeTaskToGlibNone(task))
 
@@ -69629,7 +69833,9 @@ func (task *TaskInstance) GetCancellable() context.Context {
 
 	var goret context.Context
 
-	goret = NewCancellableContext(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = NewCancellableContext(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -69716,12 +69922,12 @@ func (task *TaskInstance) GetContext() *glib.MainContext {
 // GetName wraps g_task_get_name
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets @task’s name. See g_task_set_name().
 func (task *TaskInstance) GetName() string {
 	var carg0 *C.GTask // in, none, converted
-	var cret  *C.gchar // return, none, string
+	var cret  *C.gchar // return, none, string, nullable-string
 
 	carg0 = (*C.GTask)(UnsafeTaskToGlibNone(task))
 
@@ -69730,7 +69936,9 @@ func (task *TaskInstance) GetName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -70631,7 +70839,7 @@ type TestDBus interface {
 	// GetBusAddress wraps g_test_dbus_get_bus_address
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Get the address on which dbus-daemon is running. If g_test_dbus_up() has not
 	// been called yet, %NULL is returned. This can be used with
@@ -70780,14 +70988,14 @@ func (self *TestDBusInstance) Down() {
 // GetBusAddress wraps g_test_dbus_get_bus_address
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Get the address on which dbus-daemon is running. If g_test_dbus_up() has not
 // been called yet, %NULL is returned. This can be used with
 // g_dbus_connection_new_for_address().
 func (self *TestDBusInstance) GetBusAddress() string {
 	var carg0 *C.GTestDBus // in, none, converted
-	var cret  *C.gchar     // return, none, string
+	var cret  *C.gchar     // return, none, string, nullable-string
 
 	carg0 = (*C.GTestDBus)(UnsafeTestDBusToGlibNone(self))
 
@@ -70796,7 +71004,9 @@ func (self *TestDBusInstance) GetBusAddress() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -71255,35 +71465,35 @@ type TlsCertificate interface {
 	// GetIssuer wraps g_tls_certificate_get_issuer
 	// The function returns the following values:
 	// 
-	// 	- goret TlsCertificate 
+	// 	- goret TlsCertificate (nullable) 
 	//
 	// Gets the #GTlsCertificate representing @cert's issuer, if known
 	GetIssuer() TlsCertificate
 	// GetIssuerName wraps g_tls_certificate_get_issuer_name
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Returns the issuer name from the certificate.
 	GetIssuerName() string
 	// GetNotValidAfter wraps g_tls_certificate_get_not_valid_after
 	// The function returns the following values:
 	// 
-	// 	- goret *glib.DateTime 
+	// 	- goret *glib.DateTime (nullable) 
 	//
 	// Returns the time at which the certificate became or will become invalid.
 	GetNotValidAfter() *glib.DateTime
 	// GetNotValidBefore wraps g_tls_certificate_get_not_valid_before
 	// The function returns the following values:
 	// 
-	// 	- goret *glib.DateTime 
+	// 	- goret *glib.DateTime (nullable) 
 	//
 	// Returns the time at which the certificate became or will become valid.
 	GetNotValidBefore() *glib.DateTime
 	// GetSubjectName wraps g_tls_certificate_get_subject_name
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Returns the subject name from the certificate.
 	GetSubjectName() string
@@ -71749,12 +71959,12 @@ func TlsCertificateListNewFromFile(file string) ([]TlsCertificate, error) {
 // GetIssuer wraps g_tls_certificate_get_issuer
 // The function returns the following values:
 // 
-// 	- goret TlsCertificate 
+// 	- goret TlsCertificate (nullable) 
 //
 // Gets the #GTlsCertificate representing @cert's issuer, if known
 func (cert *TlsCertificateInstance) GetIssuer() TlsCertificate {
 	var carg0 *C.GTlsCertificate // in, none, converted
-	var cret  *C.GTlsCertificate // return, none, converted
+	var cret  *C.GTlsCertificate // return, none, converted, nullable
 
 	carg0 = (*C.GTlsCertificate)(UnsafeTlsCertificateToGlibNone(cert))
 
@@ -71763,7 +71973,9 @@ func (cert *TlsCertificateInstance) GetIssuer() TlsCertificate {
 
 	var goret TlsCertificate
 
-	goret = UnsafeTlsCertificateFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeTlsCertificateFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -71771,12 +71983,12 @@ func (cert *TlsCertificateInstance) GetIssuer() TlsCertificate {
 // GetIssuerName wraps g_tls_certificate_get_issuer_name
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Returns the issuer name from the certificate.
 func (cert *TlsCertificateInstance) GetIssuerName() string {
 	var carg0 *C.GTlsCertificate // in, none, converted
-	var cret  *C.gchar           // return, full, string
+	var cret  *C.gchar           // return, full, string, nullable-string
 
 	carg0 = (*C.GTlsCertificate)(UnsafeTlsCertificateToGlibNone(cert))
 
@@ -71785,8 +71997,10 @@ func (cert *TlsCertificateInstance) GetIssuerName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+		defer C.free(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -71794,12 +72008,12 @@ func (cert *TlsCertificateInstance) GetIssuerName() string {
 // GetNotValidAfter wraps g_tls_certificate_get_not_valid_after
 // The function returns the following values:
 // 
-// 	- goret *glib.DateTime 
+// 	- goret *glib.DateTime (nullable) 
 //
 // Returns the time at which the certificate became or will become invalid.
 func (cert *TlsCertificateInstance) GetNotValidAfter() *glib.DateTime {
 	var carg0 *C.GTlsCertificate // in, none, converted
-	var cret  *C.GDateTime       // return, full, converted
+	var cret  *C.GDateTime       // return, full, converted, nullable
 
 	carg0 = (*C.GTlsCertificate)(UnsafeTlsCertificateToGlibNone(cert))
 
@@ -71808,7 +72022,9 @@ func (cert *TlsCertificateInstance) GetNotValidAfter() *glib.DateTime {
 
 	var goret *glib.DateTime
 
-	goret = glib.UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = glib.UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -71816,12 +72032,12 @@ func (cert *TlsCertificateInstance) GetNotValidAfter() *glib.DateTime {
 // GetNotValidBefore wraps g_tls_certificate_get_not_valid_before
 // The function returns the following values:
 // 
-// 	- goret *glib.DateTime 
+// 	- goret *glib.DateTime (nullable) 
 //
 // Returns the time at which the certificate became or will become valid.
 func (cert *TlsCertificateInstance) GetNotValidBefore() *glib.DateTime {
 	var carg0 *C.GTlsCertificate // in, none, converted
-	var cret  *C.GDateTime       // return, full, converted
+	var cret  *C.GDateTime       // return, full, converted, nullable
 
 	carg0 = (*C.GTlsCertificate)(UnsafeTlsCertificateToGlibNone(cert))
 
@@ -71830,7 +72046,9 @@ func (cert *TlsCertificateInstance) GetNotValidBefore() *glib.DateTime {
 
 	var goret *glib.DateTime
 
-	goret = glib.UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = glib.UnsafeDateTimeFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -71838,12 +72056,12 @@ func (cert *TlsCertificateInstance) GetNotValidBefore() *glib.DateTime {
 // GetSubjectName wraps g_tls_certificate_get_subject_name
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Returns the subject name from the certificate.
 func (cert *TlsCertificateInstance) GetSubjectName() string {
 	var carg0 *C.GTlsCertificate // in, none, converted
-	var cret  *C.gchar           // return, full, string
+	var cret  *C.gchar           // return, full, string, nullable-string
 
 	carg0 = (*C.GTlsCertificate)(UnsafeTlsCertificateToGlibNone(cert))
 
@@ -71852,8 +72070,10 @@ func (cert *TlsCertificateInstance) GetSubjectName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+		defer C.free(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -72002,7 +72222,7 @@ type TlsConnection interface {
 	// GetCertificate wraps g_tls_connection_get_certificate
 	// The function returns the following values:
 	// 
-	// 	- goret TlsCertificate 
+	// 	- goret TlsCertificate (nullable) 
 	//
 	// Gets @conn's certificate, as set by
 	// g_tls_connection_set_certificate().
@@ -72010,7 +72230,7 @@ type TlsConnection interface {
 	// GetCiphersuiteName wraps g_tls_connection_get_ciphersuite_name
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Returns the name of the current TLS ciphersuite, or %NULL if the
 	// connection has not handshaked or has been closed. Beware that the TLS
@@ -72024,7 +72244,7 @@ type TlsConnection interface {
 	// GetDatabase wraps g_tls_connection_get_database
 	// The function returns the following values:
 	// 
-	// 	- goret TlsDatabase 
+	// 	- goret TlsDatabase (nullable) 
 	//
 	// Gets the certificate database that @conn uses to verify
 	// peer certificates. See g_tls_connection_set_database().
@@ -72032,7 +72252,7 @@ type TlsConnection interface {
 	// GetInteraction wraps g_tls_connection_get_interaction
 	// The function returns the following values:
 	// 
-	// 	- goret TlsInteraction 
+	// 	- goret TlsInteraction (nullable) 
 	//
 	// Get the object that will be used to interact with the user. It will be used
 	// for things like prompting the user for passwords. If %NULL is returned, then
@@ -72041,7 +72261,7 @@ type TlsConnection interface {
 	// GetNegotiatedProtocol wraps g_tls_connection_get_negotiated_protocol
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the name of the application-layer protocol negotiated during
 	// the handshake.
@@ -72054,7 +72274,7 @@ type TlsConnection interface {
 	// GetPeerCertificate wraps g_tls_connection_get_peer_certificate
 	// The function returns the following values:
 	// 
-	// 	- goret TlsCertificate 
+	// 	- goret TlsCertificate (nullable) 
 	//
 	// Gets @conn's peer's certificate after the handshake has completed
 	// or failed. (It is not set during the emission of
@@ -72442,13 +72662,13 @@ func (conn *TlsConnectionInstance) EmitAcceptCertificate(peerCert TlsCertificate
 // GetCertificate wraps g_tls_connection_get_certificate
 // The function returns the following values:
 // 
-// 	- goret TlsCertificate 
+// 	- goret TlsCertificate (nullable) 
 //
 // Gets @conn's certificate, as set by
 // g_tls_connection_set_certificate().
 func (conn *TlsConnectionInstance) GetCertificate() TlsCertificate {
 	var carg0 *C.GTlsConnection  // in, none, converted
-	var cret  *C.GTlsCertificate // return, none, converted
+	var cret  *C.GTlsCertificate // return, none, converted, nullable
 
 	carg0 = (*C.GTlsConnection)(UnsafeTlsConnectionToGlibNone(conn))
 
@@ -72457,7 +72677,9 @@ func (conn *TlsConnectionInstance) GetCertificate() TlsCertificate {
 
 	var goret TlsCertificate
 
-	goret = UnsafeTlsCertificateFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeTlsCertificateFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -72465,7 +72687,7 @@ func (conn *TlsConnectionInstance) GetCertificate() TlsCertificate {
 // GetCiphersuiteName wraps g_tls_connection_get_ciphersuite_name
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Returns the name of the current TLS ciphersuite, or %NULL if the
 // connection has not handshaked or has been closed. Beware that the TLS
@@ -72477,7 +72699,7 @@ func (conn *TlsConnectionInstance) GetCertificate() TlsCertificate {
 // is not recommended.
 func (conn *TlsConnectionInstance) GetCiphersuiteName() string {
 	var carg0 *C.GTlsConnection // in, none, converted
-	var cret  *C.gchar          // return, full, string
+	var cret  *C.gchar          // return, full, string, nullable-string
 
 	carg0 = (*C.GTlsConnection)(UnsafeTlsConnectionToGlibNone(conn))
 
@@ -72486,8 +72708,10 @@ func (conn *TlsConnectionInstance) GetCiphersuiteName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+		defer C.free(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -72495,13 +72719,13 @@ func (conn *TlsConnectionInstance) GetCiphersuiteName() string {
 // GetDatabase wraps g_tls_connection_get_database
 // The function returns the following values:
 // 
-// 	- goret TlsDatabase 
+// 	- goret TlsDatabase (nullable) 
 //
 // Gets the certificate database that @conn uses to verify
 // peer certificates. See g_tls_connection_set_database().
 func (conn *TlsConnectionInstance) GetDatabase() TlsDatabase {
 	var carg0 *C.GTlsConnection // in, none, converted
-	var cret  *C.GTlsDatabase   // return, none, converted
+	var cret  *C.GTlsDatabase   // return, none, converted, nullable
 
 	carg0 = (*C.GTlsConnection)(UnsafeTlsConnectionToGlibNone(conn))
 
@@ -72510,7 +72734,9 @@ func (conn *TlsConnectionInstance) GetDatabase() TlsDatabase {
 
 	var goret TlsDatabase
 
-	goret = UnsafeTlsDatabaseFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeTlsDatabaseFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -72518,14 +72744,14 @@ func (conn *TlsConnectionInstance) GetDatabase() TlsDatabase {
 // GetInteraction wraps g_tls_connection_get_interaction
 // The function returns the following values:
 // 
-// 	- goret TlsInteraction 
+// 	- goret TlsInteraction (nullable) 
 //
 // Get the object that will be used to interact with the user. It will be used
 // for things like prompting the user for passwords. If %NULL is returned, then
 // no user interaction will occur for this connection.
 func (conn *TlsConnectionInstance) GetInteraction() TlsInteraction {
 	var carg0 *C.GTlsConnection  // in, none, converted
-	var cret  *C.GTlsInteraction // return, none, converted
+	var cret  *C.GTlsInteraction // return, none, converted, nullable
 
 	carg0 = (*C.GTlsConnection)(UnsafeTlsConnectionToGlibNone(conn))
 
@@ -72534,7 +72760,9 @@ func (conn *TlsConnectionInstance) GetInteraction() TlsInteraction {
 
 	var goret TlsInteraction
 
-	goret = UnsafeTlsInteractionFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeTlsInteractionFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -72542,7 +72770,7 @@ func (conn *TlsConnectionInstance) GetInteraction() TlsInteraction {
 // GetNegotiatedProtocol wraps g_tls_connection_get_negotiated_protocol
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the name of the application-layer protocol negotiated during
 // the handshake.
@@ -72553,7 +72781,7 @@ func (conn *TlsConnectionInstance) GetInteraction() TlsInteraction {
 // g_tls_connection_set_advertised_protocols().
 func (conn *TlsConnectionInstance) GetNegotiatedProtocol() string {
 	var carg0 *C.GTlsConnection // in, none, converted
-	var cret  *C.gchar          // return, none, string
+	var cret  *C.gchar          // return, none, string, nullable-string
 
 	carg0 = (*C.GTlsConnection)(UnsafeTlsConnectionToGlibNone(conn))
 
@@ -72562,7 +72790,9 @@ func (conn *TlsConnectionInstance) GetNegotiatedProtocol() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -72570,14 +72800,14 @@ func (conn *TlsConnectionInstance) GetNegotiatedProtocol() string {
 // GetPeerCertificate wraps g_tls_connection_get_peer_certificate
 // The function returns the following values:
 // 
-// 	- goret TlsCertificate 
+// 	- goret TlsCertificate (nullable) 
 //
 // Gets @conn's peer's certificate after the handshake has completed
 // or failed. (It is not set during the emission of
 // #GTlsConnection::accept-certificate.)
 func (conn *TlsConnectionInstance) GetPeerCertificate() TlsCertificate {
 	var carg0 *C.GTlsConnection  // in, none, converted
-	var cret  *C.GTlsCertificate // return, none, converted
+	var cret  *C.GTlsCertificate // return, none, converted, nullable
 
 	carg0 = (*C.GTlsConnection)(UnsafeTlsConnectionToGlibNone(conn))
 
@@ -72586,7 +72816,9 @@ func (conn *TlsConnectionInstance) GetPeerCertificate() TlsCertificate {
 
 	var goret TlsCertificate
 
-	goret = UnsafeTlsCertificateFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeTlsCertificateFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -73169,7 +73401,7 @@ type TlsDatabase interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Create a handle string for the certificate. The database will only be able
 	// to create a handle for certificates that originate from the database. In
@@ -73191,7 +73423,7 @@ type TlsDatabase interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret TlsCertificate 
+	// 	- goret TlsCertificate (nullable) 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Look up a certificate by its handle.
@@ -73473,7 +73705,7 @@ func UnsafeTlsDatabaseToGlibFull(c TlsDatabase) unsafe.Pointer {
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Create a handle string for the certificate. The database will only be able
 // to create a handle for certificates that originate from the database. In
@@ -73486,7 +73718,7 @@ func UnsafeTlsDatabaseToGlibFull(c TlsDatabase) unsafe.Pointer {
 func (self *TlsDatabaseInstance) CreateCertificateHandle(certificate TlsCertificate) string {
 	var carg0 *C.GTlsDatabase    // in, none, converted
 	var carg1 *C.GTlsCertificate // in, none, converted
-	var cret  *C.gchar           // return, full, string
+	var cret  *C.gchar           // return, full, string, nullable-string
 
 	carg0 = (*C.GTlsDatabase)(UnsafeTlsDatabaseToGlibNone(self))
 	carg1 = (*C.GTlsCertificate)(UnsafeTlsCertificateToGlibNone(certificate))
@@ -73497,8 +73729,10 @@ func (self *TlsDatabaseInstance) CreateCertificateHandle(certificate TlsCertific
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+		defer C.free(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -73514,7 +73748,7 @@ func (self *TlsDatabaseInstance) CreateCertificateHandle(certificate TlsCertific
 // 
 // The function returns the following values:
 // 
-// 	- goret TlsCertificate 
+// 	- goret TlsCertificate (nullable) 
 // 	- _goerr error (nullable): an error 
 //
 // Look up a certificate by its handle.
@@ -73535,7 +73769,7 @@ func (self *TlsDatabaseInstance) LookupCertificateForHandle(cancellable context.
 	var carg1 *C.gchar                  // in, none, string
 	var carg2 *C.GTlsInteraction        // in, none, converted, nullable
 	var carg3 C.GTlsDatabaseLookupFlags // in, none, casted
-	var cret  *C.GTlsCertificate        // return, full, converted
+	var cret  *C.GTlsCertificate        // return, full, converted, nullable
 	var _cerr *C.GError                 // out, full, converted, nullable
 
 	carg0 = (*C.GTlsDatabase)(UnsafeTlsDatabaseToGlibNone(self))
@@ -73559,7 +73793,9 @@ func (self *TlsDatabaseInstance) LookupCertificateForHandle(cancellable context.
 	var goret  TlsCertificate
 	var _goerr error
 
-	goret = UnsafeTlsCertificateFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeTlsCertificateFromGlibFull(unsafe.Pointer(cret))
+	}
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -75605,7 +75841,7 @@ type VolumeMonitor interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret Mount 
+	// 	- goret Mount (nullable) 
 	//
 	// Finds a #GMount object by its UUID (see g_mount_get_uuid())
 	GetMountForUUID(string) Mount
@@ -75627,7 +75863,7 @@ type VolumeMonitor interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret Volume 
+	// 	- goret Volume (nullable) 
 	//
 	// Finds a #GVolume object by its UUID (see g_volume_get_uuid())
 	GetVolumeForUUID(string) Volume
@@ -75846,13 +76082,13 @@ func (volumeMonitor *VolumeMonitorInstance) GetConnectedDrives() []Drive {
 // 
 // The function returns the following values:
 // 
-// 	- goret Mount 
+// 	- goret Mount (nullable) 
 //
 // Finds a #GMount object by its UUID (see g_mount_get_uuid())
 func (volumeMonitor *VolumeMonitorInstance) GetMountForUUID(uuid string) Mount {
 	var carg0 *C.GVolumeMonitor // in, none, converted
 	var carg1 *C.char           // in, none, string, casted *C.gchar
-	var cret  *C.GMount         // return, full, converted
+	var cret  *C.GMount         // return, full, converted, nullable
 
 	carg0 = (*C.GVolumeMonitor)(UnsafeVolumeMonitorToGlibNone(volumeMonitor))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(uuid)))
@@ -75864,7 +76100,9 @@ func (volumeMonitor *VolumeMonitorInstance) GetMountForUUID(uuid string) Mount {
 
 	var goret Mount
 
-	goret = UnsafeMountFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeMountFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -75909,13 +76147,13 @@ func (volumeMonitor *VolumeMonitorInstance) GetMounts() []Mount {
 // 
 // The function returns the following values:
 // 
-// 	- goret Volume 
+// 	- goret Volume (nullable) 
 //
 // Finds a #GVolume object by its UUID (see g_volume_get_uuid())
 func (volumeMonitor *VolumeMonitorInstance) GetVolumeForUUID(uuid string) Volume {
 	var carg0 *C.GVolumeMonitor // in, none, converted
 	var carg1 *C.char           // in, none, string, casted *C.gchar
-	var cret  *C.GVolume        // return, full, converted
+	var cret  *C.GVolume        // return, full, converted, nullable
 
 	carg0 = (*C.GVolumeMonitor)(UnsafeVolumeMonitorToGlibNone(volumeMonitor))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(uuid)))
@@ -75927,7 +76165,9 @@ func (volumeMonitor *VolumeMonitorInstance) GetVolumeForUUID(uuid string) Volume
 
 	var goret Volume
 
-	goret = UnsafeVolumeFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeVolumeFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -76058,7 +76298,7 @@ type ZlibCompressor interface {
 	// GetFileInfo wraps g_zlib_compressor_get_file_info
 	// The function returns the following values:
 	// 
-	// 	- goret FileInfo 
+	// 	- goret FileInfo (nullable) 
 	//
 	// Returns the #GZlibCompressor:file-info property.
 	GetFileInfo() FileInfo
@@ -76147,12 +76387,12 @@ func NewZlibCompressor(format ZlibCompressorFormat, level int) ZlibCompressor {
 // GetFileInfo wraps g_zlib_compressor_get_file_info
 // The function returns the following values:
 // 
-// 	- goret FileInfo 
+// 	- goret FileInfo (nullable) 
 //
 // Returns the #GZlibCompressor:file-info property.
 func (compressor *ZlibCompressorInstance) GetFileInfo() FileInfo {
 	var carg0 *C.GZlibCompressor // in, none, converted
-	var cret  *C.GFileInfo       // return, none, converted
+	var cret  *C.GFileInfo       // return, none, converted, nullable
 
 	carg0 = (*C.GZlibCompressor)(UnsafeZlibCompressorToGlibNone(compressor))
 
@@ -76161,7 +76401,9 @@ func (compressor *ZlibCompressorInstance) GetFileInfo() FileInfo {
 
 	var goret FileInfo
 
-	goret = UnsafeFileInfoFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeFileInfoFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -76213,7 +76455,7 @@ type ZlibDecompressor interface {
 	// GetFileInfo wraps g_zlib_decompressor_get_file_info
 	// The function returns the following values:
 	// 
-	// 	- goret FileInfo 
+	// 	- goret FileInfo (nullable) 
 	//
 	// Retrieves the #GFileInfo constructed from the GZIP header data
 	// of compressed data processed by @compressor, or %NULL if @decompressor's
@@ -76287,7 +76529,7 @@ func NewZlibDecompressor(format ZlibCompressorFormat) ZlibDecompressor {
 // GetFileInfo wraps g_zlib_decompressor_get_file_info
 // The function returns the following values:
 // 
-// 	- goret FileInfo 
+// 	- goret FileInfo (nullable) 
 //
 // Retrieves the #GFileInfo constructed from the GZIP header data
 // of compressed data processed by @compressor, or %NULL if @decompressor's
@@ -76296,7 +76538,7 @@ func NewZlibDecompressor(format ZlibCompressorFormat) ZlibDecompressor {
 // data stream at all.
 func (decompressor *ZlibDecompressorInstance) GetFileInfo() FileInfo {
 	var carg0 *C.GZlibDecompressor // in, none, converted
-	var cret  *C.GFileInfo         // return, none, converted
+	var cret  *C.GFileInfo         // return, none, converted, nullable
 
 	carg0 = (*C.GZlibDecompressor)(UnsafeZlibDecompressorToGlibNone(decompressor))
 
@@ -76305,7 +76547,9 @@ func (decompressor *ZlibDecompressorInstance) GetFileInfo() FileInfo {
 
 	var goret FileInfo
 
-	goret = UnsafeFileInfoFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeFileInfoFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -76450,7 +76694,7 @@ type FileIOStream interface {
 	// GetETag wraps g_file_io_stream_get_etag
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the entity tag for the file when it has been written.
 	// This must be called after the stream has been written
@@ -76562,14 +76806,14 @@ func UnsafeFileIOStreamToGlibFull(c FileIOStream) unsafe.Pointer {
 // GetETag wraps g_file_io_stream_get_etag
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the entity tag for the file when it has been written.
 // This must be called after the stream has been written
 // and closed, as the etag can change while writing.
 func (stream *FileIOStreamInstance) GetETag() string {
 	var carg0 *C.GFileIOStream // in, none, converted
-	var cret  *C.char          // return, full, string, casted *C.gchar
+	var cret  *C.char          // return, full, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GFileIOStream)(UnsafeFileIOStreamToGlibNone(stream))
 
@@ -76578,8 +76822,10 @@ func (stream *FileIOStreamInstance) GetETag() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+		defer C.free(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -77011,7 +77257,7 @@ type FileOutputStream interface {
 	// GetETag wraps g_file_output_stream_get_etag
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the entity tag for the file when it has been written.
 	// This must be called after the stream has been written
@@ -77122,14 +77368,14 @@ func UnsafeFileOutputStreamToGlibFull(c FileOutputStream) unsafe.Pointer {
 // GetETag wraps g_file_output_stream_get_etag
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the entity tag for the file when it has been written.
 // This must be called after the stream has been written
 // and closed, as the etag can change while writing.
 func (stream *FileOutputStreamInstance) GetETag() string {
 	var carg0 *C.GFileOutputStream // in, none, converted
-	var cret  *C.char              // return, full, string, casted *C.gchar
+	var cret  *C.char              // return, full, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GFileOutputStream)(UnsafeFileOutputStreamToGlibNone(stream))
 
@@ -77138,8 +77384,10 @@ func (stream *FileOutputStreamInstance) GetETag() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+		defer C.free(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -77711,7 +77959,7 @@ func NewInetSocketAddress(address InetAddress, port uint16) SocketAddress {
 // 
 // The function returns the following values:
 // 
-// 	- goret SocketAddress 
+// 	- goret SocketAddress (nullable) 
 //
 // Creates a new #GInetSocketAddress for @address and @port.
 // 
@@ -77720,7 +77968,7 @@ func NewInetSocketAddress(address InetAddress, port uint16) SocketAddress {
 func NewInetSocketAddressFromString(address string, port uint) SocketAddress {
 	var carg1 *C.char           // in, none, string, casted *C.gchar
 	var carg2 C.guint           // in, none, casted
-	var cret  *C.GSocketAddress // return, full, converted
+	var cret  *C.GSocketAddress // return, full, converted, nullable
 
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(address)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -77732,7 +77980,9 @@ func NewInetSocketAddressFromString(address string, port uint) SocketAddress {
 
 	var goret SocketAddress
 
-	goret = UnsafeSocketAddressFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeSocketAddressFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -78860,7 +79110,7 @@ type ProxyAddress interface {
 	// GetPassword wraps g_proxy_address_get_password
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets @proxy's password.
 	GetPassword() string
@@ -78874,14 +79124,14 @@ type ProxyAddress interface {
 	// GetURI wraps g_proxy_address_get_uri
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the proxy URI that @proxy was constructed from.
 	GetURI() string
 	// GetUsername wraps g_proxy_address_get_username
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets @proxy's username.
 	GetUsername() string
@@ -79068,12 +79318,12 @@ func (proxy *ProxyAddressInstance) GetDestinationProtocol() string {
 // GetPassword wraps g_proxy_address_get_password
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets @proxy's password.
 func (proxy *ProxyAddressInstance) GetPassword() string {
 	var carg0 *C.GProxyAddress // in, none, converted
-	var cret  *C.gchar         // return, none, string
+	var cret  *C.gchar         // return, none, string, nullable-string
 
 	carg0 = (*C.GProxyAddress)(UnsafeProxyAddressToGlibNone(proxy))
 
@@ -79082,7 +79332,9 @@ func (proxy *ProxyAddressInstance) GetPassword() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -79112,12 +79364,12 @@ func (proxy *ProxyAddressInstance) GetProtocol() string {
 // GetURI wraps g_proxy_address_get_uri
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the proxy URI that @proxy was constructed from.
 func (proxy *ProxyAddressInstance) GetURI() string {
 	var carg0 *C.GProxyAddress // in, none, converted
-	var cret  *C.gchar         // return, none, string
+	var cret  *C.gchar         // return, none, string, nullable-string
 
 	carg0 = (*C.GProxyAddress)(UnsafeProxyAddressToGlibNone(proxy))
 
@@ -79126,7 +79378,9 @@ func (proxy *ProxyAddressInstance) GetURI() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -79134,12 +79388,12 @@ func (proxy *ProxyAddressInstance) GetURI() string {
 // GetUsername wraps g_proxy_address_get_username
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets @proxy's username.
 func (proxy *ProxyAddressInstance) GetUsername() string {
 	var carg0 *C.GProxyAddress // in, none, converted
-	var cret  *C.gchar         // return, none, string
+	var cret  *C.gchar         // return, none, string, nullable-string
 
 	carg0 = (*C.GProxyAddress)(UnsafeProxyAddressToGlibNone(proxy))
 
@@ -79148,7 +79402,9 @@ func (proxy *ProxyAddressInstance) GetUsername() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -80415,7 +80671,7 @@ type DataInputStream interface {
 	// The function returns the following values:
 	// 
 	// 	- length uint: a #gsize to get the length of the data read in. 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Reads a line from the data input stream.  Note that no encoding
@@ -80450,7 +80706,7 @@ type DataInputStream interface {
 	// The function returns the following values:
 	// 
 	// 	- length uint: a #gsize to get the length of the data read in. 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Finish an asynchronous call started by
@@ -80467,7 +80723,7 @@ type DataInputStream interface {
 	// The function returns the following values:
 	// 
 	// 	- length uint: a #gsize to get the length of the data read in. 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Finish an asynchronous call started by
@@ -80482,7 +80738,7 @@ type DataInputStream interface {
 	// The function returns the following values:
 	// 
 	// 	- length uint: a #gsize to get the length of the data read in. 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Reads a UTF-8 encoded line from the data input stream.
@@ -80973,7 +81229,7 @@ func (stream *DataInputStreamInstance) ReadInt64(cancellable context.Context) (i
 // The function returns the following values:
 // 
 // 	- length uint: a #gsize to get the length of the data read in. 
-// 	- goret string 
+// 	- goret string (nullable) 
 // 	- _goerr error (nullable): an error 
 //
 // Reads a line from the data input stream.  Note that no encoding
@@ -80987,7 +81243,7 @@ func (stream *DataInputStreamInstance) ReadLine(cancellable context.Context) (ui
 	var carg0 *C.GDataInputStream // in, none, converted
 	var carg2 *C.GCancellable     // in, none, converted, nullable
 	var carg1 C.gsize             // out, full, casted
-	var cret  *C.char             // return, transfer: full, C Pointers: 1, Name: array[unknown], scope: , array (inner: <nil>, zero-terminated)
+	var cret  *C.char             // return, transfer: full, C Pointers: 1, Name: array[unknown], scope: , nullable, array (inner: <nil>, zero-terminated)
 	var _cerr *C.GError           // out, full, converted, nullable
 
 	carg0 = (*C.GDataInputStream)(UnsafeDataInputStreamToGlibNone(stream))
@@ -81061,7 +81317,7 @@ func (stream *DataInputStreamInstance) ReadLineAsync(cancellable context.Context
 // The function returns the following values:
 // 
 // 	- length uint: a #gsize to get the length of the data read in. 
-// 	- goret string 
+// 	- goret string (nullable) 
 // 	- _goerr error (nullable): an error 
 //
 // Finish an asynchronous call started by
@@ -81072,7 +81328,7 @@ func (stream *DataInputStreamInstance) ReadLineFinish(result AsyncResult) (uint,
 	var carg0 *C.GDataInputStream // in, none, converted
 	var carg1 *C.GAsyncResult     // in, none, converted
 	var carg2 C.gsize             // out, full, casted
-	var cret  *C.char             // return, transfer: full, C Pointers: 1, Name: array[unknown], scope: , array (inner: <nil>, zero-terminated)
+	var cret  *C.char             // return, transfer: full, C Pointers: 1, Name: array[unknown], scope: , nullable, array (inner: <nil>, zero-terminated)
 	var _cerr *C.GError           // out, full, converted, nullable
 
 	carg0 = (*C.GDataInputStream)(UnsafeDataInputStreamToGlibNone(stream))
@@ -81106,7 +81362,7 @@ func (stream *DataInputStreamInstance) ReadLineFinish(result AsyncResult) (uint,
 // The function returns the following values:
 // 
 // 	- length uint: a #gsize to get the length of the data read in. 
-// 	- goret string 
+// 	- goret string (nullable) 
 // 	- _goerr error (nullable): an error 
 //
 // Finish an asynchronous call started by
@@ -81115,7 +81371,7 @@ func (stream *DataInputStreamInstance) ReadLineFinishUTF8(result AsyncResult) (u
 	var carg0 *C.GDataInputStream // in, none, converted
 	var carg1 *C.GAsyncResult     // in, none, converted
 	var carg2 C.gsize             // out, full, casted
-	var cret  *C.char             // return, full, string, casted *C.gchar
+	var cret  *C.char             // return, full, string, casted *C.gchar, nullable
 	var _cerr *C.GError           // out, full, converted, nullable
 
 	carg0 = (*C.GDataInputStream)(UnsafeDataInputStreamToGlibNone(stream))
@@ -81130,8 +81386,10 @@ func (stream *DataInputStreamInstance) ReadLineFinishUTF8(result AsyncResult) (u
 	var _goerr error
 
 	length = uint(carg2)
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+		defer C.free(unsafe.Pointer(cret))
+	}
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -81148,7 +81406,7 @@ func (stream *DataInputStreamInstance) ReadLineFinishUTF8(result AsyncResult) (u
 // The function returns the following values:
 // 
 // 	- length uint: a #gsize to get the length of the data read in. 
-// 	- goret string 
+// 	- goret string (nullable) 
 // 	- _goerr error (nullable): an error 
 //
 // Reads a UTF-8 encoded line from the data input stream.
@@ -81160,7 +81418,7 @@ func (stream *DataInputStreamInstance) ReadLineUTF8(cancellable context.Context)
 	var carg0 *C.GDataInputStream // in, none, converted
 	var carg2 *C.GCancellable     // in, none, converted, nullable
 	var carg1 C.gsize             // out, full, casted
-	var cret  *C.char             // return, full, string, casted *C.gchar
+	var cret  *C.char             // return, full, string, casted *C.gchar, nullable
 	var _cerr *C.GError           // out, full, converted, nullable
 
 	carg0 = (*C.GDataInputStream)(UnsafeDataInputStreamToGlibNone(stream))
@@ -81177,8 +81435,10 @@ func (stream *DataInputStreamInstance) ReadLineUTF8(cancellable context.Context)
 	var _goerr error
 
 	length = uint(carg1)
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+		defer C.free(unsafe.Pointer(cret))
+	}
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -83504,7 +83764,7 @@ func UnsafeDBusAnnotationInfoToGlibFull(d *DBusAnnotationInfo) unsafe.Pointer {
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Looks up the value of an annotation.
 // 
@@ -83512,7 +83772,7 @@ func UnsafeDBusAnnotationInfoToGlibFull(d *DBusAnnotationInfo) unsafe.Pointer {
 func DBusAnnotationInfoLookup(annotations []*DBusAnnotationInfo, name string) string {
 	var carg1 **C.GDBusAnnotationInfo // in, transfer: none, C Pointers: 2, Name: array[DBusAnnotationInfo], nullable, array (inner: *typesystem.Record, zero-terminated)
 	var carg2 *C.gchar                // in, none, string
-	var cret  *C.gchar                // return, none, string
+	var cret  *C.gchar                // return, none, string, nullable-string
 
 	_ = annotations
 	_ = carg1
@@ -83526,7 +83786,9 @@ func DBusAnnotationInfoLookup(annotations []*DBusAnnotationInfo, name string) st
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -83860,7 +84122,7 @@ func (info *DBusInterfaceInfo) CacheRelease() {
 // 
 // The function returns the following values:
 // 
-// 	- goret *DBusMethodInfo 
+// 	- goret *DBusMethodInfo (nullable) 
 //
 // Looks up information about a method.
 // 
@@ -83869,7 +84131,7 @@ func (info *DBusInterfaceInfo) CacheRelease() {
 func (info *DBusInterfaceInfo) LookupMethod(name string) *DBusMethodInfo {
 	var carg0 *C.GDBusInterfaceInfo // in, none, converted
 	var carg1 *C.gchar              // in, none, string
-	var cret  *C.GDBusMethodInfo    // return, none, converted
+	var cret  *C.GDBusMethodInfo    // return, none, converted, nullable
 
 	carg0 = (*C.GDBusInterfaceInfo)(UnsafeDBusInterfaceInfoToGlibNone(info))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
@@ -83881,7 +84143,9 @@ func (info *DBusInterfaceInfo) LookupMethod(name string) *DBusMethodInfo {
 
 	var goret *DBusMethodInfo
 
-	goret = UnsafeDBusMethodInfoFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeDBusMethodInfoFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -83894,7 +84158,7 @@ func (info *DBusInterfaceInfo) LookupMethod(name string) *DBusMethodInfo {
 // 
 // The function returns the following values:
 // 
-// 	- goret *DBusPropertyInfo 
+// 	- goret *DBusPropertyInfo (nullable) 
 //
 // Looks up information about a property.
 // 
@@ -83903,7 +84167,7 @@ func (info *DBusInterfaceInfo) LookupMethod(name string) *DBusMethodInfo {
 func (info *DBusInterfaceInfo) LookupProperty(name string) *DBusPropertyInfo {
 	var carg0 *C.GDBusInterfaceInfo // in, none, converted
 	var carg1 *C.gchar              // in, none, string
-	var cret  *C.GDBusPropertyInfo  // return, none, converted
+	var cret  *C.GDBusPropertyInfo  // return, none, converted, nullable
 
 	carg0 = (*C.GDBusInterfaceInfo)(UnsafeDBusInterfaceInfoToGlibNone(info))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
@@ -83915,7 +84179,9 @@ func (info *DBusInterfaceInfo) LookupProperty(name string) *DBusPropertyInfo {
 
 	var goret *DBusPropertyInfo
 
-	goret = UnsafeDBusPropertyInfoFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeDBusPropertyInfoFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -83928,7 +84194,7 @@ func (info *DBusInterfaceInfo) LookupProperty(name string) *DBusPropertyInfo {
 // 
 // The function returns the following values:
 // 
-// 	- goret *DBusSignalInfo 
+// 	- goret *DBusSignalInfo (nullable) 
 //
 // Looks up information about a signal.
 // 
@@ -83937,7 +84203,7 @@ func (info *DBusInterfaceInfo) LookupProperty(name string) *DBusPropertyInfo {
 func (info *DBusInterfaceInfo) LookupSignal(name string) *DBusSignalInfo {
 	var carg0 *C.GDBusInterfaceInfo // in, none, converted
 	var carg1 *C.gchar              // in, none, string
-	var cret  *C.GDBusSignalInfo    // return, none, converted
+	var cret  *C.GDBusSignalInfo    // return, none, converted, nullable
 
 	carg0 = (*C.GDBusInterfaceInfo)(UnsafeDBusInterfaceInfoToGlibNone(info))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
@@ -83949,7 +84215,9 @@ func (info *DBusInterfaceInfo) LookupSignal(name string) *DBusSignalInfo {
 
 	var goret *DBusSignalInfo
 
-	goret = UnsafeDBusSignalInfoFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeDBusSignalInfoFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -84329,7 +84597,7 @@ func NewDBusNodeInfoForXML(xmlData string) (*DBusNodeInfo, error) {
 // 
 // The function returns the following values:
 // 
-// 	- goret *DBusInterfaceInfo 
+// 	- goret *DBusInterfaceInfo (nullable) 
 //
 // Looks up information about an interface.
 // 
@@ -84337,7 +84605,7 @@ func NewDBusNodeInfoForXML(xmlData string) (*DBusNodeInfo, error) {
 func (info *DBusNodeInfo) LookupInterface(name string) *DBusInterfaceInfo {
 	var carg0 *C.GDBusNodeInfo      // in, none, converted
 	var carg1 *C.gchar              // in, none, string
-	var cret  *C.GDBusInterfaceInfo // return, none, converted
+	var cret  *C.GDBusInterfaceInfo // return, none, converted, nullable
 
 	carg0 = (*C.GDBusNodeInfo)(UnsafeDBusNodeInfoToGlibNone(info))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
@@ -84349,7 +84617,9 @@ func (info *DBusNodeInfo) LookupInterface(name string) *DBusInterfaceInfo {
 
 	var goret *DBusInterfaceInfo
 
-	goret = UnsafeDBusInterfaceInfoFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeDBusInterfaceInfoFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -86102,12 +86372,12 @@ func (matcher *FileAttributeMatcher) EnumerateNamespace(ns string) bool {
 // EnumerateNext wraps g_file_attribute_matcher_enumerate_next
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the next matched attribute from a #GFileAttributeMatcher.
 func (matcher *FileAttributeMatcher) EnumerateNext() string {
 	var carg0 *C.GFileAttributeMatcher // in, none, converted
-	var cret  *C.char                  // return, none, string, casted *C.gchar
+	var cret  *C.char                  // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GFileAttributeMatcher)(UnsafeFileAttributeMatcherToGlibNone(matcher))
 
@@ -86116,7 +86386,9 @@ func (matcher *FileAttributeMatcher) EnumerateNext() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -86198,7 +86470,7 @@ func (matcher *FileAttributeMatcher) MatchesOnly(attribute string) bool {
 // 
 // The function returns the following values:
 // 
-// 	- goret *FileAttributeMatcher 
+// 	- goret *FileAttributeMatcher (nullable) 
 //
 // Subtracts all attributes of @subtract from @matcher and returns
 // a matcher that supports those attributes.
@@ -86211,7 +86483,7 @@ func (matcher *FileAttributeMatcher) MatchesOnly(attribute string) bool {
 func (matcher *FileAttributeMatcher) Subtract(subtract *FileAttributeMatcher) *FileAttributeMatcher {
 	var carg0 *C.GFileAttributeMatcher // in, none, converted
 	var carg1 *C.GFileAttributeMatcher // in, none, converted, nullable
-	var cret  *C.GFileAttributeMatcher // return, full, converted
+	var cret  *C.GFileAttributeMatcher // return, full, converted, nullable
 
 	carg0 = (*C.GFileAttributeMatcher)(UnsafeFileAttributeMatcherToGlibNone(matcher))
 	if subtract != nil {
@@ -86224,7 +86496,9 @@ func (matcher *FileAttributeMatcher) Subtract(subtract *FileAttributeMatcher) *F
 
 	var goret *FileAttributeMatcher
 
-	goret = UnsafeFileAttributeMatcherFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeFileAttributeMatcherFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -90969,7 +91243,7 @@ func (schema *SettingsSchema) GetKey(name string) *SettingsSchemaKey {
 // GetPath wraps g_settings_schema_get_path
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the path associated with @schema, or %NULL.
 // 
@@ -90982,7 +91256,7 @@ func (schema *SettingsSchema) GetKey(name string) *SettingsSchemaKey {
 // relocatable schemas, this function will return %NULL.
 func (schema *SettingsSchema) GetPath() string {
 	var carg0 *C.GSettingsSchema // in, none, converted
-	var cret  *C.gchar           // return, none, string
+	var cret  *C.gchar           // return, none, string, nullable-string
 
 	carg0 = (*C.GSettingsSchema)(UnsafeSettingsSchemaToGlibNone(schema))
 
@@ -90991,7 +91265,9 @@ func (schema *SettingsSchema) GetPath() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -91169,7 +91445,7 @@ func UnsafeSettingsSchemaKeyToGlibFull(s *SettingsSchemaKey) unsafe.Pointer {
 // GetDescription wraps g_settings_schema_key_get_description
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the description for @key.
 // 
@@ -91187,7 +91463,7 @@ func UnsafeSettingsSchemaKeyToGlibFull(s *SettingsSchemaKey) unsafe.Pointer {
 // directory.
 func (key *SettingsSchemaKey) GetDescription() string {
 	var carg0 *C.GSettingsSchemaKey // in, none, converted
-	var cret  *C.gchar              // return, none, string
+	var cret  *C.gchar              // return, none, string, nullable-string
 
 	carg0 = (*C.GSettingsSchemaKey)(UnsafeSettingsSchemaKeyToGlibNone(key))
 
@@ -91196,7 +91472,9 @@ func (key *SettingsSchemaKey) GetDescription() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -91226,7 +91504,7 @@ func (key *SettingsSchemaKey) GetName() string {
 // GetSummary wraps g_settings_schema_key_get_summary
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the summary for @key.
 // 
@@ -91243,7 +91521,7 @@ func (key *SettingsSchemaKey) GetName() string {
 // directory.
 func (key *SettingsSchemaKey) GetSummary() string {
 	var carg0 *C.GSettingsSchemaKey // in, none, converted
-	var cret  *C.gchar              // return, none, string
+	var cret  *C.gchar              // return, none, string, nullable-string
 
 	carg0 = (*C.GSettingsSchemaKey)(UnsafeSettingsSchemaKeyToGlibNone(key))
 
@@ -91252,7 +91530,9 @@ func (key *SettingsSchemaKey) GetSummary() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -91439,7 +91719,7 @@ func NewSettingsSchemaSourceFromDirectory(directory string, parent *SettingsSche
 // SettingsSchemaSourceGetDefault wraps g_settings_schema_source_get_default
 // The function returns the following values:
 // 
-// 	- goret *SettingsSchemaSource 
+// 	- goret *SettingsSchemaSource (nullable) 
 //
 // Gets the default system schema source.
 // 
@@ -91455,13 +91735,15 @@ func NewSettingsSchemaSourceFromDirectory(directory string, parent *SettingsSche
 // lookups performed against the default source should probably be done
 // recursively.
 func SettingsSchemaSourceGetDefault() *SettingsSchemaSource {
-	var cret *C.GSettingsSchemaSource // return, none, converted
+	var cret *C.GSettingsSchemaSource // return, none, converted, nullable
 
 	cret = C.g_settings_schema_source_get_default()
 
 	var goret *SettingsSchemaSource
 
-	goret = UnsafeSettingsSchemaSourceFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeSettingsSchemaSourceFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -91475,7 +91757,7 @@ func SettingsSchemaSourceGetDefault() *SettingsSchemaSource {
 // 
 // The function returns the following values:
 // 
-// 	- goret *SettingsSchema 
+// 	- goret *SettingsSchema (nullable) 
 //
 // Looks up a schema with the identifier @schema_id in @source.
 // 
@@ -91491,7 +91773,7 @@ func (source *SettingsSchemaSource) Lookup(schemaId string, recursive bool) *Set
 	var carg0 *C.GSettingsSchemaSource // in, none, converted
 	var carg1 *C.gchar                 // in, none, string
 	var carg2 C.gboolean               // in
-	var cret  *C.GSettingsSchema       // return, full, converted
+	var cret  *C.GSettingsSchema       // return, full, converted, nullable
 
 	carg0 = (*C.GSettingsSchemaSource)(UnsafeSettingsSchemaSourceToGlibNone(source))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(schemaId)))
@@ -91507,7 +91789,9 @@ func (source *SettingsSchemaSource) Lookup(schemaId string, recursive bool) *Set
 
 	var goret *SettingsSchema
 
-	goret = UnsafeSettingsSchemaFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeSettingsSchemaFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }

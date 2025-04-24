@@ -1275,7 +1275,7 @@ type Renderer interface {
 	// GetSurface wraps gsk_renderer_get_surface
 	// The function returns the following values:
 	// 
-	// 	- goret gdk.Surface 
+	// 	- goret gdk.Surface (nullable) 
 	//
 	// Retrieves the `GdkSurface` set using gsk_enderer_realize().
 	// 
@@ -1375,7 +1375,7 @@ func UnsafeRendererToGlibFull(c Renderer) unsafe.Pointer {
 // 
 // The function returns the following values:
 // 
-// 	- goret Renderer 
+// 	- goret Renderer (nullable) 
 //
 // Creates an appropriate `GskRenderer` instance for the given @surface.
 // 
@@ -1386,7 +1386,7 @@ func UnsafeRendererToGlibFull(c Renderer) unsafe.Pointer {
 // The renderer will be realized before it is returned.
 func NewRendererForSurface(surface gdk.Surface) Renderer {
 	var carg1 *C.GdkSurface  // in, none, converted
-	var cret  *C.GskRenderer // return, full, converted
+	var cret  *C.GskRenderer // return, full, converted, nullable
 
 	carg1 = (*C.GdkSurface)(gdk.UnsafeSurfaceToGlibNone(surface))
 
@@ -1395,7 +1395,9 @@ func NewRendererForSurface(surface gdk.Surface) Renderer {
 
 	var goret Renderer
 
-	goret = UnsafeRendererFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeRendererFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -1403,14 +1405,14 @@ func NewRendererForSurface(surface gdk.Surface) Renderer {
 // GetSurface wraps gsk_renderer_get_surface
 // The function returns the following values:
 // 
-// 	- goret gdk.Surface 
+// 	- goret gdk.Surface (nullable) 
 //
 // Retrieves the `GdkSurface` set using gsk_enderer_realize().
 // 
 // If the renderer has not been realized yet, %NULL will be returned.
 func (renderer *RendererInstance) GetSurface() gdk.Surface {
 	var carg0 *C.GskRenderer // in, none, converted
-	var cret  *C.GdkSurface  // return, none, converted
+	var cret  *C.GdkSurface  // return, none, converted, nullable
 
 	carg0 = (*C.GskRenderer)(UnsafeRendererToGlibNone(renderer))
 
@@ -1419,7 +1421,9 @@ func (renderer *RendererInstance) GetSurface() gdk.Surface {
 
 	var goret gdk.Surface
 
-	goret = gdk.UnsafeSurfaceFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gdk.UnsafeSurfaceFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -2264,7 +2268,7 @@ func UnsafePathToGlibFull(p *Path) unsafe.Pointer {
 // 
 // The function returns the following values:
 // 
-// 	- goret *Path 
+// 	- goret *Path (nullable) 
 //
 // This is a convenience function that constructs a `GskPath`
 // from a serialized form.
@@ -2293,7 +2297,7 @@ func UnsafePathToGlibFull(p *Path) unsafe.Pointer {
 // The `O` command is an extension that is not supported in SVG.
 func PathParse(str string) *Path {
 	var carg1 *C.char    // in, none, string, casted *C.gchar
-	var cret  *C.GskPath // return, full, converted
+	var cret  *C.GskPath // return, full, converted, nullable
 
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(str)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -2303,7 +2307,9 @@ func PathParse(str string) *Path {
 
 	var goret *Path
 
-	goret = UnsafePathFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafePathFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -5161,13 +5167,13 @@ func (other *Stroke) Copy() *Stroke {
 // The function returns the following values:
 // 
 // 	- nDash uint: number of elements in the array returned 
-// 	- goret []float32 
+// 	- goret []float32 (nullable) 
 //
 // Gets the dash array in use or `NULL` if dashing is disabled.
 func (self *Stroke) GetDash() (uint, []float32) {
 	var carg0 *C.GskStroke // in, none, converted
 	var carg1 C.gsize      // out, full, casted
-	var cret  *C.float     // return, transfer: none, C Pointers: 1, Name: array[gfloat], scope: , array (inner: *typesystem.CastablePrimitive)
+	var cret  *C.float     // return, transfer: none, C Pointers: 1, Name: array[gfloat], scope: , nullable, array (inner: *typesystem.CastablePrimitive)
 
 	carg0 = (*C.GskStroke)(UnsafeStrokeToGlibNone(self))
 
@@ -5668,7 +5674,7 @@ func (self *Transform) GetCategory() TransformCategory {
 // Invert wraps gsk_transform_invert
 // The function returns the following values:
 // 
-// 	- goret *Transform 
+// 	- goret *Transform (nullable) 
 //
 // Inverts the given transform.
 // 
@@ -5682,7 +5688,7 @@ func (self *Transform) GetCategory() TransformCategory {
 // if you want to keep it around.
 func (self *Transform) Invert() *Transform {
 	var carg0 *C.GskTransform // in, none, converted
-	var cret  *C.GskTransform // return, full, converted
+	var cret  *C.GskTransform // return, full, converted, nullable
 
 	carg0 = (*C.GskTransform)(UnsafeTransformToGlibNone(self))
 
@@ -5691,7 +5697,9 @@ func (self *Transform) Invert() *Transform {
 
 	var goret *Transform
 
-	goret = UnsafeTransformFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeTransformFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -5777,7 +5785,7 @@ func (next *Transform) Perspective(depth float32) *Transform {
 // 
 // The function returns the following values:
 // 
-// 	- goret *Transform 
+// 	- goret *Transform (nullable) 
 //
 // Rotates @next @angle degrees in 2D - or in 3D-speak, around the Z axis.
 // The rotation happens around the origin point of (0, 0).
@@ -5787,7 +5795,7 @@ func (next *Transform) Perspective(depth float32) *Transform {
 func (next *Transform) Rotate(angle float32) *Transform {
 	var carg0 *C.GskTransform // in, none, converted
 	var carg1 C.float         // in, none, casted, casted C.gfloat
-	var cret  *C.GskTransform // return, full, converted
+	var cret  *C.GskTransform // return, full, converted, nullable
 
 	carg0 = (*C.GskTransform)(UnsafeTransformToGlibNone(next))
 	carg1 = C.float(angle)
@@ -5798,7 +5806,9 @@ func (next *Transform) Rotate(angle float32) *Transform {
 
 	var goret *Transform
 
-	goret = UnsafeTransformFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeTransformFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -5812,7 +5822,7 @@ func (next *Transform) Rotate(angle float32) *Transform {
 // 
 // The function returns the following values:
 // 
-// 	- goret *Transform 
+// 	- goret *Transform (nullable) 
 //
 // Rotates @next @angle degrees around @axis.
 // 
@@ -5824,7 +5834,7 @@ func (next *Transform) Rotate3D(angle float32, axis *graphene.Vec3) *Transform {
 	var carg0 *C.GskTransform    // in, none, converted
 	var carg1 C.float            // in, none, casted, casted C.gfloat
 	var carg2 *C.graphene_vec3_t // in, none, converted
-	var cret  *C.GskTransform    // return, full, converted
+	var cret  *C.GskTransform    // return, full, converted, nullable
 
 	carg0 = (*C.GskTransform)(UnsafeTransformToGlibNone(next))
 	carg1 = C.float(angle)
@@ -5837,7 +5847,9 @@ func (next *Transform) Rotate3D(angle float32, axis *graphene.Vec3) *Transform {
 
 	var goret *Transform
 
-	goret = UnsafeTransformFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeTransformFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -5851,7 +5863,7 @@ func (next *Transform) Rotate3D(angle float32, axis *graphene.Vec3) *Transform {
 // 
 // The function returns the following values:
 // 
-// 	- goret *Transform 
+// 	- goret *Transform (nullable) 
 //
 // Scales @next in 2-dimensional space by the given factors.
 // 
@@ -5863,7 +5875,7 @@ func (next *Transform) Scale(factorX float32, factorY float32) *Transform {
 	var carg0 *C.GskTransform // in, none, converted
 	var carg1 C.float         // in, none, casted, casted C.gfloat
 	var carg2 C.float         // in, none, casted, casted C.gfloat
-	var cret  *C.GskTransform // return, full, converted
+	var cret  *C.GskTransform // return, full, converted, nullable
 
 	carg0 = (*C.GskTransform)(UnsafeTransformToGlibNone(next))
 	carg1 = C.float(factorX)
@@ -5876,7 +5888,9 @@ func (next *Transform) Scale(factorX float32, factorY float32) *Transform {
 
 	var goret *Transform
 
-	goret = UnsafeTransformFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeTransformFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -5891,7 +5905,7 @@ func (next *Transform) Scale(factorX float32, factorY float32) *Transform {
 // 
 // The function returns the following values:
 // 
-// 	- goret *Transform 
+// 	- goret *Transform (nullable) 
 //
 // Scales @next by the given factors.
 // 
@@ -5902,7 +5916,7 @@ func (next *Transform) Scale3D(factorX float32, factorY float32, factorZ float32
 	var carg1 C.float         // in, none, casted, casted C.gfloat
 	var carg2 C.float         // in, none, casted, casted C.gfloat
 	var carg3 C.float         // in, none, casted, casted C.gfloat
-	var cret  *C.GskTransform // return, full, converted
+	var cret  *C.GskTransform // return, full, converted, nullable
 
 	carg0 = (*C.GskTransform)(UnsafeTransformToGlibNone(next))
 	carg1 = C.float(factorX)
@@ -5917,7 +5931,9 @@ func (next *Transform) Scale3D(factorX float32, factorY float32, factorZ float32
 
 	var goret *Transform
 
-	goret = UnsafeTransformFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeTransformFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -5931,7 +5947,7 @@ func (next *Transform) Scale3D(factorX float32, factorY float32, factorZ float32
 // 
 // The function returns the following values:
 // 
-// 	- goret *Transform 
+// 	- goret *Transform (nullable) 
 //
 // Applies a skew transform.
 // 
@@ -5941,7 +5957,7 @@ func (next *Transform) Skew(skewX float32, skewY float32) *Transform {
 	var carg0 *C.GskTransform // in, none, converted
 	var carg1 C.float         // in, none, casted, casted C.gfloat
 	var carg2 C.float         // in, none, casted, casted C.gfloat
-	var cret  *C.GskTransform // return, full, converted
+	var cret  *C.GskTransform // return, full, converted, nullable
 
 	carg0 = (*C.GskTransform)(UnsafeTransformToGlibNone(next))
 	carg1 = C.float(skewX)
@@ -5954,7 +5970,9 @@ func (next *Transform) Skew(skewX float32, skewY float32) *Transform {
 
 	var goret *Transform
 
-	goret = UnsafeTransformFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeTransformFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -6234,7 +6252,7 @@ func (self *Transform) ToTranslate() (float32, float32) {
 // 
 // The function returns the following values:
 // 
-// 	- goret *Transform 
+// 	- goret *Transform (nullable) 
 //
 // Applies all the operations from @other to @next.
 // 
@@ -6243,7 +6261,7 @@ func (self *Transform) ToTranslate() (float32, float32) {
 func (next *Transform) Transform(other *Transform) *Transform {
 	var carg0 *C.GskTransform // in, none, converted
 	var carg1 *C.GskTransform // in, none, converted, nullable
-	var cret  *C.GskTransform // return, full, converted
+	var cret  *C.GskTransform // return, full, converted, nullable
 
 	carg0 = (*C.GskTransform)(UnsafeTransformToGlibNone(next))
 	if other != nil {
@@ -6256,7 +6274,9 @@ func (next *Transform) Transform(other *Transform) *Transform {
 
 	var goret *Transform
 
-	goret = UnsafeTransformFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeTransformFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -6337,7 +6357,7 @@ func (self *Transform) TransformPoint(point *graphene.Point) graphene.Point {
 // 
 // The function returns the following values:
 // 
-// 	- goret *Transform 
+// 	- goret *Transform (nullable) 
 //
 // Translates @next in 2-dimensional space by @point.
 // 
@@ -6346,7 +6366,7 @@ func (self *Transform) TransformPoint(point *graphene.Point) graphene.Point {
 func (next *Transform) Translate(point *graphene.Point) *Transform {
 	var carg0 *C.GskTransform     // in, none, converted
 	var carg1 *C.graphene_point_t // in, none, converted
-	var cret  *C.GskTransform     // return, full, converted
+	var cret  *C.GskTransform     // return, full, converted, nullable
 
 	carg0 = (*C.GskTransform)(UnsafeTransformToGlibNone(next))
 	carg1 = (*C.graphene_point_t)(graphene.UnsafePointToGlibNone(point))
@@ -6357,7 +6377,9 @@ func (next *Transform) Translate(point *graphene.Point) *Transform {
 
 	var goret *Transform
 
-	goret = UnsafeTransformFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeTransformFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -6370,7 +6392,7 @@ func (next *Transform) Translate(point *graphene.Point) *Transform {
 // 
 // The function returns the following values:
 // 
-// 	- goret *Transform 
+// 	- goret *Transform (nullable) 
 //
 // Translates @next by @point.
 // 
@@ -6379,7 +6401,7 @@ func (next *Transform) Translate(point *graphene.Point) *Transform {
 func (next *Transform) Translate3D(point *graphene.Point3D) *Transform {
 	var carg0 *C.GskTransform       // in, none, converted
 	var carg1 *C.graphene_point3d_t // in, none, converted
-	var cret  *C.GskTransform       // return, full, converted
+	var cret  *C.GskTransform       // return, full, converted, nullable
 
 	carg0 = (*C.GskTransform)(UnsafeTransformToGlibNone(next))
 	carg1 = (*C.graphene_point3d_t)(graphene.UnsafePoint3DToGlibNone(point))
@@ -6390,7 +6412,9 @@ func (next *Transform) Translate3D(point *graphene.Point3D) *Transform {
 
 	var goret *Transform
 
-	goret = UnsafeTransformFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeTransformFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }

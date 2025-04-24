@@ -579,7 +579,7 @@ type Pixbuf interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret Pixbuf 
+	// 	- goret Pixbuf (nullable) 
 	//
 	// Takes an existing pixbuf and adds an alpha channel to it.
 	// 
@@ -598,7 +598,7 @@ type Pixbuf interface {
 	// ApplyEmbeddedOrientation wraps gdk_pixbuf_apply_embedded_orientation
 	// The function returns the following values:
 	// 
-	// 	- goret Pixbuf 
+	// 	- goret Pixbuf (nullable) 
 	//
 	// Takes an existing pixbuf and checks for the presence of an
 	// associated "orientation" option.
@@ -689,7 +689,7 @@ type Pixbuf interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret Pixbuf 
+	// 	- goret Pixbuf (nullable) 
 	//
 	// Creates a new pixbuf by scaling `src` to `dest_width` x `dest_height`
 	// and alpha blending the result with a checkboard of colors `color1`
@@ -698,7 +698,7 @@ type Pixbuf interface {
 	// Copy wraps gdk_pixbuf_copy
 	// The function returns the following values:
 	// 
-	// 	- goret Pixbuf 
+	// 	- goret Pixbuf (nullable) 
 	//
 	// Creates a new `GdkPixbuf` with a copy of the information in the specified
 	// `pixbuf`.
@@ -764,7 +764,7 @@ type Pixbuf interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret Pixbuf 
+	// 	- goret Pixbuf (nullable) 
 	//
 	// Flips a pixbuf horizontally or vertically and returns the
 	// result in a new pixbuf.
@@ -819,7 +819,7 @@ type Pixbuf interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Looks up @key in the list of options that may have been attached to the
 	// @pixbuf when it was loaded, or that may have been attached by another
@@ -930,7 +930,7 @@ type Pixbuf interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret Pixbuf 
+	// 	- goret Pixbuf (nullable) 
 	//
 	// Rotates a pixbuf by a multiple of 90 degrees, and returns the
 	// result in a new pixbuf.
@@ -1111,7 +1111,7 @@ type Pixbuf interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret Pixbuf 
+	// 	- goret Pixbuf (nullable) 
 	//
 	// Create a new pixbuf containing a copy of `src` scaled to
 	// `dest_width` x `dest_height`.
@@ -1202,7 +1202,7 @@ func UnsafePixbufToGlibFull(c Pixbuf) unsafe.Pointer {
 // 
 // The function returns the following values:
 // 
-// 	- goret Pixbuf 
+// 	- goret Pixbuf (nullable) 
 //
 // Creates a new `GdkPixbuf` structure and allocates a buffer for it.
 // 
@@ -1216,7 +1216,7 @@ func NewPixbuf(colorspace Colorspace, hasAlpha bool, bitsPerSample int, width in
 	var carg3 C.int           // in, none, casted, casted C.gint
 	var carg4 C.int           // in, none, casted, casted C.gint
 	var carg5 C.int           // in, none, casted, casted C.gint
-	var cret  *C.GdkPixbuf    // return, full, converted
+	var cret  *C.GdkPixbuf    // return, full, converted, nullable
 
 	carg1 = C.GdkColorspace(colorspace)
 	if hasAlpha {
@@ -1235,7 +1235,9 @@ func NewPixbuf(colorspace Colorspace, hasAlpha bool, bitsPerSample int, width in
 
 	var goret Pixbuf
 
-	goret = UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -1307,7 +1309,7 @@ func NewPixbufFromBytes(data *glib.Bytes, colorspace Colorspace, hasAlpha bool, 
 // 
 // The function returns the following values:
 // 
-// 	- goret Pixbuf 
+// 	- goret Pixbuf (nullable) 
 // 	- _goerr error (nullable): an error 
 //
 // Creates a new pixbuf by loading an image from a file.
@@ -1324,7 +1326,7 @@ func NewPixbufFromBytes(data *glib.Bytes, colorspace Colorspace, hasAlpha bool, 
 // The error domains are `GDK_PIXBUF_ERROR` and `G_FILE_ERROR`.
 func NewPixbufFromFile(filename string) (Pixbuf, error) {
 	var carg1 *C.char      // in, none, string, casted *C.gchar
-	var cret  *C.GdkPixbuf // return, full, converted
+	var cret  *C.GdkPixbuf // return, full, converted, nullable
 	var _cerr *C.GError    // out, full, converted, nullable
 
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(filename)))
@@ -1336,7 +1338,9 @@ func NewPixbufFromFile(filename string) (Pixbuf, error) {
 	var goret  Pixbuf
 	var _goerr error
 
-	goret = UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
+	}
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -1356,7 +1360,7 @@ func NewPixbufFromFile(filename string) (Pixbuf, error) {
 // 
 // The function returns the following values:
 // 
-// 	- goret Pixbuf 
+// 	- goret Pixbuf (nullable) 
 // 	- _goerr error (nullable): an error 
 //
 // Creates a new pixbuf by loading an image from a file.
@@ -1386,7 +1390,7 @@ func NewPixbufFromFileAtScale(filename string, width int, height int, preserveAs
 	var carg2 C.int        // in, none, casted, casted C.gint
 	var carg3 C.int        // in, none, casted, casted C.gint
 	var carg4 C.gboolean   // in
-	var cret  *C.GdkPixbuf // return, full, converted
+	var cret  *C.GdkPixbuf // return, full, converted, nullable
 	var _cerr *C.GError    // out, full, converted, nullable
 
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(filename)))
@@ -1406,7 +1410,9 @@ func NewPixbufFromFileAtScale(filename string, width int, height int, preserveAs
 	var goret  Pixbuf
 	var _goerr error
 
-	goret = UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
+	}
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -1425,7 +1431,7 @@ func NewPixbufFromFileAtScale(filename string, width int, height int, preserveAs
 // 
 // The function returns the following values:
 // 
-// 	- goret Pixbuf 
+// 	- goret Pixbuf (nullable) 
 // 	- _goerr error (nullable): an error 
 //
 // Creates a new pixbuf by loading an image from a file.
@@ -1450,7 +1456,7 @@ func NewPixbufFromFileAtSize(filename string, width int, height int) (Pixbuf, er
 	var carg1 *C.char      // in, none, string, casted *C.gchar
 	var carg2 C.int        // in, none, casted, casted C.gint
 	var carg3 C.int        // in, none, casted, casted C.gint
-	var cret  *C.GdkPixbuf // return, full, converted
+	var cret  *C.GdkPixbuf // return, full, converted, nullable
 	var _cerr *C.GError    // out, full, converted, nullable
 
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(filename)))
@@ -1466,7 +1472,9 @@ func NewPixbufFromFileAtSize(filename string, width int, height int) (Pixbuf, er
 	var goret  Pixbuf
 	var _goerr error
 
-	goret = UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
+	}
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -1482,7 +1490,7 @@ func NewPixbufFromFileAtSize(filename string, width int, height int) (Pixbuf, er
 // 
 // The function returns the following values:
 // 
-// 	- goret Pixbuf 
+// 	- goret Pixbuf (nullable) 
 // 	- _goerr error (nullable): an error 
 //
 // Creates a new pixbuf by loading an image from an resource.
@@ -1491,7 +1499,7 @@ func NewPixbufFromFileAtSize(filename string, width int, height int) (Pixbuf, er
 // @error will be set.
 func NewPixbufFromResource(resourcePath string) (Pixbuf, error) {
 	var carg1 *C.char      // in, none, string, casted *C.gchar
-	var cret  *C.GdkPixbuf // return, full, converted
+	var cret  *C.GdkPixbuf // return, full, converted, nullable
 	var _cerr *C.GError    // out, full, converted, nullable
 
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(resourcePath)))
@@ -1503,7 +1511,9 @@ func NewPixbufFromResource(resourcePath string) (Pixbuf, error) {
 	var goret  Pixbuf
 	var _goerr error
 
-	goret = UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
+	}
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -1522,7 +1532,7 @@ func NewPixbufFromResource(resourcePath string) (Pixbuf, error) {
 // 
 // The function returns the following values:
 // 
-// 	- goret Pixbuf 
+// 	- goret Pixbuf (nullable) 
 // 	- _goerr error (nullable): an error 
 //
 // Creates a new pixbuf by loading an image from an resource.
@@ -1543,7 +1553,7 @@ func NewPixbufFromResourceAtScale(resourcePath string, width int, height int, pr
 	var carg2 C.int        // in, none, casted, casted C.gint
 	var carg3 C.int        // in, none, casted, casted C.gint
 	var carg4 C.gboolean   // in
-	var cret  *C.GdkPixbuf // return, full, converted
+	var cret  *C.GdkPixbuf // return, full, converted, nullable
 	var _cerr *C.GError    // out, full, converted, nullable
 
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(resourcePath)))
@@ -1563,7 +1573,9 @@ func NewPixbufFromResourceAtScale(resourcePath string, width int, height int, pr
 	var goret  Pixbuf
 	var _goerr error
 
-	goret = UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
+	}
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -1580,7 +1592,7 @@ func NewPixbufFromResourceAtScale(resourcePath string, width int, height int, pr
 // 
 // The function returns the following values:
 // 
-// 	- goret Pixbuf 
+// 	- goret Pixbuf (nullable) 
 // 	- _goerr error (nullable): an error 
 //
 // Creates a new pixbuf by loading an image from an input stream.
@@ -1598,7 +1610,7 @@ func NewPixbufFromResourceAtScale(resourcePath string, width int, height int, pr
 func NewPixbufFromStream(cancellable context.Context, stream gio.InputStream) (Pixbuf, error) {
 	var carg2 *C.GCancellable // in, none, converted, nullable
 	var carg1 *C.GInputStream // in, none, converted
-	var cret  *C.GdkPixbuf    // return, full, converted
+	var cret  *C.GdkPixbuf    // return, full, converted, nullable
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	if cancellable != nil {
@@ -1613,7 +1625,9 @@ func NewPixbufFromStream(cancellable context.Context, stream gio.InputStream) (P
 	var goret  Pixbuf
 	var _goerr error
 
-	goret = UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
+	}
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -1633,7 +1647,7 @@ func NewPixbufFromStream(cancellable context.Context, stream gio.InputStream) (P
 // 
 // The function returns the following values:
 // 
-// 	- goret Pixbuf 
+// 	- goret Pixbuf (nullable) 
 // 	- _goerr error (nullable): an error 
 //
 // Creates a new pixbuf by loading an image from an input stream.
@@ -1663,7 +1677,7 @@ func NewPixbufFromStreamAtScale(cancellable context.Context, stream gio.InputStr
 	var carg2 C.gint          // in, none, casted
 	var carg3 C.gint          // in, none, casted
 	var carg4 C.gboolean      // in
-	var cret  *C.GdkPixbuf    // return, full, converted
+	var cret  *C.GdkPixbuf    // return, full, converted, nullable
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	if cancellable != nil {
@@ -1686,7 +1700,9 @@ func NewPixbufFromStreamAtScale(cancellable context.Context, stream gio.InputStr
 	var goret  Pixbuf
 	var _goerr error
 
-	goret = UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
+	}
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -1702,14 +1718,14 @@ func NewPixbufFromStreamAtScale(cancellable context.Context, stream gio.InputStr
 // 
 // The function returns the following values:
 // 
-// 	- goret Pixbuf 
+// 	- goret Pixbuf (nullable) 
 // 	- _goerr error (nullable): an error 
 //
 // Finishes an asynchronous pixbuf creation operation started with
 // gdk_pixbuf_new_from_stream_async().
 func NewPixbufFromStreamFinish(asyncResult gio.AsyncResult) (Pixbuf, error) {
 	var carg1 *C.GAsyncResult // in, none, converted
-	var cret  *C.GdkPixbuf    // return, full, converted
+	var cret  *C.GdkPixbuf    // return, full, converted, nullable
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	carg1 = (*C.GAsyncResult)(gio.UnsafeAsyncResultToGlibNone(asyncResult))
@@ -1720,7 +1736,9 @@ func NewPixbufFromStreamFinish(asyncResult gio.AsyncResult) (Pixbuf, error) {
 	var goret  Pixbuf
 	var _goerr error
 
-	goret = UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
+	}
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -1736,7 +1754,7 @@ func NewPixbufFromStreamFinish(asyncResult gio.AsyncResult) (Pixbuf, error) {
 // 
 // The function returns the following values:
 // 
-// 	- goret Pixbuf 
+// 	- goret Pixbuf (nullable) 
 //
 // Creates a new pixbuf by parsing XPM data in memory.
 // 
@@ -1744,7 +1762,7 @@ func NewPixbufFromStreamFinish(asyncResult gio.AsyncResult) (Pixbuf, error) {
 // program's C source.
 func NewPixbufFromXPMData(data []string) Pixbuf {
 	var carg1 **C.char     // in, transfer: none, C Pointers: 2, Name: array[utf8], array (inner: *typesystem.StringPrimitive, zero-terminated)
-	var cret  *C.GdkPixbuf // return, full, converted
+	var cret  *C.GdkPixbuf // return, full, converted, nullable
 
 	_ = data
 	_ = carg1
@@ -1755,7 +1773,9 @@ func NewPixbufFromXPMData(data []string) Pixbuf {
 
 	var goret Pixbuf
 
-	goret = UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -1819,14 +1839,14 @@ func PixbufCalculateRowstride(colorspace Colorspace, hasAlpha bool, bitsPerSampl
 // 
 // 	- width int: Return location for the width of the image 
 // 	- height int: Return location for the height of the image 
-// 	- goret *PixbufFormat 
+// 	- goret *PixbufFormat (nullable) 
 //
 // Parses an image file far enough to determine its format and size.
 func PixbufGetFileInfo(filename string) (int, int, *PixbufFormat) {
 	var carg1 *C.gchar           // in, none, string
 	var carg2 C.gint             // out, full, casted
 	var carg3 C.gint             // out, full, casted
-	var cret  *C.GdkPixbufFormat // return, none, converted
+	var cret  *C.GdkPixbufFormat // return, none, converted, nullable
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(filename)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -1840,7 +1860,9 @@ func PixbufGetFileInfo(filename string) (int, int, *PixbufFormat) {
 
 	width = int(carg2)
 	height = int(carg3)
-	goret = UnsafePixbufFormatFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafePixbufFormatFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return width, height, goret
 }
@@ -1894,7 +1916,7 @@ func PixbufGetFileInfoAsync(cancellable context.Context, filename string, callba
 // 
 // 	- width int: Return location for the width of the image, or `NULL` 
 // 	- height int: Return location for the height of the image, or `NULL` 
-// 	- goret *PixbufFormat 
+// 	- goret *PixbufFormat (nullable) 
 // 	- _goerr error (nullable): an error 
 //
 // Finishes an asynchronous pixbuf parsing operation started with
@@ -1903,7 +1925,7 @@ func PixbufGetFileInfoFinish(asyncResult gio.AsyncResult) (int, int, *PixbufForm
 	var carg1 *C.GAsyncResult    // in, none, converted
 	var carg2 C.gint             // out, full, casted
 	var carg3 C.gint             // out, full, casted
-	var cret  *C.GdkPixbufFormat // return, none, converted
+	var cret  *C.GdkPixbufFormat // return, none, converted, nullable
 	var _cerr *C.GError          // out, full, converted, nullable
 
 	carg1 = (*C.GAsyncResult)(gio.UnsafeAsyncResultToGlibNone(asyncResult))
@@ -1918,7 +1940,9 @@ func PixbufGetFileInfoFinish(asyncResult gio.AsyncResult) (int, int, *PixbufForm
 
 	width = int(carg2)
 	height = int(carg3)
-	goret = UnsafePixbufFormatFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafePixbufFormatFromGlibNone(unsafe.Pointer(cret))
+	}
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -2134,7 +2158,7 @@ func PixbufSaveToStreamFinish(asyncResult gio.AsyncResult) (bool, error) {
 // 
 // The function returns the following values:
 // 
-// 	- goret Pixbuf 
+// 	- goret Pixbuf (nullable) 
 //
 // Takes an existing pixbuf and adds an alpha channel to it.
 // 
@@ -2155,7 +2179,7 @@ func (pixbuf *PixbufInstance) AddAlpha(substituteColor bool, r byte, g byte, b b
 	var carg2 C.guchar     // in, none, casted
 	var carg3 C.guchar     // in, none, casted
 	var carg4 C.guchar     // in, none, casted
-	var cret  *C.GdkPixbuf // return, full, converted
+	var cret  *C.GdkPixbuf // return, full, converted, nullable
 
 	carg0 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(pixbuf))
 	if substituteColor {
@@ -2174,7 +2198,9 @@ func (pixbuf *PixbufInstance) AddAlpha(substituteColor bool, r byte, g byte, b b
 
 	var goret Pixbuf
 
-	goret = UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -2182,7 +2208,7 @@ func (pixbuf *PixbufInstance) AddAlpha(substituteColor bool, r byte, g byte, b b
 // ApplyEmbeddedOrientation wraps gdk_pixbuf_apply_embedded_orientation
 // The function returns the following values:
 // 
-// 	- goret Pixbuf 
+// 	- goret Pixbuf (nullable) 
 //
 // Takes an existing pixbuf and checks for the presence of an
 // associated "orientation" option.
@@ -2196,7 +2222,7 @@ func (pixbuf *PixbufInstance) AddAlpha(substituteColor bool, r byte, g byte, b b
 // will be performed so that the pixbuf is oriented correctly.
 func (src *PixbufInstance) ApplyEmbeddedOrientation() Pixbuf {
 	var carg0 *C.GdkPixbuf // in, none, converted
-	var cret  *C.GdkPixbuf // return, full, converted
+	var cret  *C.GdkPixbuf // return, full, converted, nullable
 
 	carg0 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(src))
 
@@ -2205,7 +2231,9 @@ func (src *PixbufInstance) ApplyEmbeddedOrientation() Pixbuf {
 
 	var goret Pixbuf
 
-	goret = UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -2385,7 +2413,7 @@ func (src *PixbufInstance) CompositeColor(dest Pixbuf, destX int, destY int, des
 // 
 // The function returns the following values:
 // 
-// 	- goret Pixbuf 
+// 	- goret Pixbuf (nullable) 
 //
 // Creates a new pixbuf by scaling `src` to `dest_width` x `dest_height`
 // and alpha blending the result with a checkboard of colors `color1`
@@ -2399,7 +2427,7 @@ func (src *PixbufInstance) CompositeColorSimple(destWidth int, destHeight int, i
 	var carg5 C.int           // in, none, casted, casted C.gint
 	var carg6 C.guint32       // in, none, casted
 	var carg7 C.guint32       // in, none, casted
-	var cret  *C.GdkPixbuf    // return, full, converted
+	var cret  *C.GdkPixbuf    // return, full, converted, nullable
 
 	carg0 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(src))
 	carg1 = C.int(destWidth)
@@ -2422,7 +2450,9 @@ func (src *PixbufInstance) CompositeColorSimple(destWidth int, destHeight int, i
 
 	var goret Pixbuf
 
-	goret = UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -2430,7 +2460,7 @@ func (src *PixbufInstance) CompositeColorSimple(destWidth int, destHeight int, i
 // Copy wraps gdk_pixbuf_copy
 // The function returns the following values:
 // 
-// 	- goret Pixbuf 
+// 	- goret Pixbuf (nullable) 
 //
 // Creates a new `GdkPixbuf` with a copy of the information in the specified
 // `pixbuf`.
@@ -2439,7 +2469,7 @@ func (src *PixbufInstance) CompositeColorSimple(destWidth int, destHeight int, i
 // use gdk_pixbuf_copy_options() for this.
 func (pixbuf *PixbufInstance) Copy() Pixbuf {
 	var carg0 *C.GdkPixbuf // in, none, converted
-	var cret  *C.GdkPixbuf // return, full, converted
+	var cret  *C.GdkPixbuf // return, full, converted, nullable
 
 	carg0 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(pixbuf))
 
@@ -2448,7 +2478,9 @@ func (pixbuf *PixbufInstance) Copy() Pixbuf {
 
 	var goret Pixbuf
 
-	goret = UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -2571,14 +2603,14 @@ func (pixbuf *PixbufInstance) Fill(pixel uint32) {
 // 
 // The function returns the following values:
 // 
-// 	- goret Pixbuf 
+// 	- goret Pixbuf (nullable) 
 //
 // Flips a pixbuf horizontally or vertically and returns the
 // result in a new pixbuf.
 func (src *PixbufInstance) Flip(horizontal bool) Pixbuf {
 	var carg0 *C.GdkPixbuf // in, none, converted
 	var carg1 C.gboolean   // in
-	var cret  *C.GdkPixbuf // return, full, converted
+	var cret  *C.GdkPixbuf // return, full, converted, nullable
 
 	carg0 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(src))
 	if horizontal {
@@ -2591,7 +2623,9 @@ func (src *PixbufInstance) Flip(horizontal bool) Pixbuf {
 
 	var goret Pixbuf
 
-	goret = UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -2738,7 +2772,7 @@ func (pixbuf *PixbufInstance) GetNChannels() int {
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Looks up @key in the list of options that may have been attached to the
 // @pixbuf when it was loaded, or that may have been attached by another
@@ -2758,7 +2792,7 @@ func (pixbuf *PixbufInstance) GetNChannels() int {
 func (pixbuf *PixbufInstance) GetOption(key string) string {
 	var carg0 *C.GdkPixbuf // in, none, converted
 	var carg1 *C.gchar     // in, none, string
-	var cret  *C.gchar     // return, none, string
+	var cret  *C.gchar     // return, none, string, nullable-string
 
 	carg0 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(pixbuf))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(key)))
@@ -2770,7 +2804,9 @@ func (pixbuf *PixbufInstance) GetOption(key string) string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -2998,7 +3034,7 @@ func (pixbuf *PixbufInstance) RemoveOption(key string) bool {
 // 
 // The function returns the following values:
 // 
-// 	- goret Pixbuf 
+// 	- goret Pixbuf (nullable) 
 //
 // Rotates a pixbuf by a multiple of 90 degrees, and returns the
 // result in a new pixbuf.
@@ -3007,7 +3043,7 @@ func (pixbuf *PixbufInstance) RemoveOption(key string) bool {
 func (src *PixbufInstance) RotateSimple(angle PixbufRotation) Pixbuf {
 	var carg0 *C.GdkPixbuf        // in, none, converted
 	var carg1 C.GdkPixbufRotation // in, none, casted
-	var cret  *C.GdkPixbuf        // return, full, converted
+	var cret  *C.GdkPixbuf        // return, full, converted, nullable
 
 	carg0 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(src))
 	carg1 = C.GdkPixbufRotation(angle)
@@ -3018,7 +3054,9 @@ func (src *PixbufInstance) RotateSimple(angle PixbufRotation) Pixbuf {
 
 	var goret Pixbuf
 
-	goret = UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -3460,7 +3498,7 @@ func (src *PixbufInstance) Scale(dest Pixbuf, destX int, destY int, destWidth in
 // 
 // The function returns the following values:
 // 
-// 	- goret Pixbuf 
+// 	- goret Pixbuf (nullable) 
 //
 // Create a new pixbuf containing a copy of `src` scaled to
 // `dest_width` x `dest_height`.
@@ -3485,7 +3523,7 @@ func (src *PixbufInstance) ScaleSimple(destWidth int, destHeight int, interpType
 	var carg1 C.int           // in, none, casted, casted C.gint
 	var carg2 C.int           // in, none, casted, casted C.gint
 	var carg3 C.GdkInterpType // in, none, casted
-	var cret  *C.GdkPixbuf    // return, full, converted
+	var cret  *C.GdkPixbuf    // return, full, converted, nullable
 
 	carg0 = (*C.GdkPixbuf)(UnsafePixbufToGlibNone(src))
 	carg1 = C.int(destWidth)
@@ -3500,7 +3538,9 @@ func (src *PixbufInstance) ScaleSimple(destWidth int, destHeight int, interpType
 
 	var goret Pixbuf
 
-	goret = UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -3630,7 +3670,7 @@ type PixbufLoader interface {
 	// GetFormat wraps gdk_pixbuf_loader_get_format
 	// The function returns the following values:
 	// 
-	// 	- goret *PixbufFormat 
+	// 	- goret *PixbufFormat (nullable) 
 	//
 	// Obtains the available information about the format of the
 	// currently loading image file.
@@ -3638,7 +3678,7 @@ type PixbufLoader interface {
 	// GetPixbuf wraps gdk_pixbuf_loader_get_pixbuf
 	// The function returns the following values:
 	// 
-	// 	- goret Pixbuf 
+	// 	- goret Pixbuf (nullable) 
 	//
 	// Queries the #GdkPixbuf that a pixbuf loader is currently creating.
 	// 
@@ -3932,13 +3972,13 @@ func (loader *PixbufLoaderInstance) Close() (bool, error) {
 // GetFormat wraps gdk_pixbuf_loader_get_format
 // The function returns the following values:
 // 
-// 	- goret *PixbufFormat 
+// 	- goret *PixbufFormat (nullable) 
 //
 // Obtains the available information about the format of the
 // currently loading image file.
 func (loader *PixbufLoaderInstance) GetFormat() *PixbufFormat {
 	var carg0 *C.GdkPixbufLoader // in, none, converted
-	var cret  *C.GdkPixbufFormat // return, none, converted
+	var cret  *C.GdkPixbufFormat // return, none, converted, nullable
 
 	carg0 = (*C.GdkPixbufLoader)(UnsafePixbufLoaderToGlibNone(loader))
 
@@ -3947,7 +3987,9 @@ func (loader *PixbufLoaderInstance) GetFormat() *PixbufFormat {
 
 	var goret *PixbufFormat
 
-	goret = UnsafePixbufFormatFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafePixbufFormatFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -3955,7 +3997,7 @@ func (loader *PixbufLoaderInstance) GetFormat() *PixbufFormat {
 // GetPixbuf wraps gdk_pixbuf_loader_get_pixbuf
 // The function returns the following values:
 // 
-// 	- goret Pixbuf 
+// 	- goret Pixbuf (nullable) 
 //
 // Queries the #GdkPixbuf that a pixbuf loader is currently creating.
 // 
@@ -3974,7 +4016,7 @@ func (loader *PixbufLoaderInstance) GetFormat() *PixbufFormat {
 // image" of the animation (see gdk_pixbuf_animation_get_static_image()).
 func (loader *PixbufLoaderInstance) GetPixbuf() Pixbuf {
 	var carg0 *C.GdkPixbufLoader // in, none, converted
-	var cret  *C.GdkPixbuf       // return, none, converted
+	var cret  *C.GdkPixbuf       // return, none, converted, nullable
 
 	carg0 = (*C.GdkPixbufLoader)(UnsafePixbufLoaderToGlibNone(loader))
 
@@ -3983,7 +4025,9 @@ func (loader *PixbufLoaderInstance) GetPixbuf() Pixbuf {
 
 	var goret Pixbuf
 
-	goret = UnsafePixbufFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafePixbufFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -4225,12 +4269,12 @@ func UnsafePixbufFormatToGlibFull(p *PixbufFormat) unsafe.Pointer {
 // Copy wraps gdk_pixbuf_format_copy
 // The function returns the following values:
 // 
-// 	- goret *PixbufFormat 
+// 	- goret *PixbufFormat (nullable) 
 //
 // Creates a copy of `format`.
 func (format *PixbufFormat) Copy() *PixbufFormat {
 	var carg0 *C.GdkPixbufFormat // in, none, converted
-	var cret  *C.GdkPixbufFormat // return, full, converted
+	var cret  *C.GdkPixbufFormat // return, full, converted, nullable
 
 	carg0 = (*C.GdkPixbufFormat)(UnsafePixbufFormatToGlibNone(format))
 
@@ -4239,7 +4283,9 @@ func (format *PixbufFormat) Copy() *PixbufFormat {
 
 	var goret *PixbufFormat
 
-	goret = UnsafePixbufFormatFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafePixbufFormatFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -4247,12 +4293,12 @@ func (format *PixbufFormat) Copy() *PixbufFormat {
 // GetDescription wraps gdk_pixbuf_format_get_description
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Returns a description of the format.
 func (format *PixbufFormat) GetDescription() string {
 	var carg0 *C.GdkPixbufFormat // in, none, converted
-	var cret  *C.gchar           // return, full, string
+	var cret  *C.gchar           // return, full, string, nullable-string
 
 	carg0 = (*C.GdkPixbufFormat)(UnsafePixbufFormatToGlibNone(format))
 
@@ -4261,8 +4307,10 @@ func (format *PixbufFormat) GetDescription() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+		defer C.free(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -4270,13 +4318,13 @@ func (format *PixbufFormat) GetDescription() string {
 // GetExtensions wraps gdk_pixbuf_format_get_extensions
 // The function returns the following values:
 // 
-// 	- goret []string 
+// 	- goret []string (nullable) 
 //
 // Returns the filename extensions typically used for files in the
 // given format.
 func (format *PixbufFormat) GetExtensions() []string {
 	var carg0 *C.GdkPixbufFormat // in, none, converted
-	var cret  **C.gchar          // return, transfer: full, C Pointers: 2, Name: array[utf8], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
+	var cret  **C.gchar          // return, transfer: full, C Pointers: 2, Name: array[utf8], scope: , nullable, array (inner: *typesystem.StringPrimitive, zero-terminated)
 
 	carg0 = (*C.GdkPixbufFormat)(UnsafePixbufFormatToGlibNone(format))
 
@@ -4295,7 +4343,7 @@ func (format *PixbufFormat) GetExtensions() []string {
 // GetLicense wraps gdk_pixbuf_format_get_license
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Returns information about the license of the image loader for the format.
 // 
@@ -4303,7 +4351,7 @@ func (format *PixbufFormat) GetExtensions() []string {
 // "LGPL", "GPL", "QPL", "GPL/QPL", or "other" to indicate some other license.
 func (format *PixbufFormat) GetLicense() string {
 	var carg0 *C.GdkPixbufFormat // in, none, converted
-	var cret  *C.gchar           // return, full, string
+	var cret  *C.gchar           // return, full, string, nullable-string
 
 	carg0 = (*C.GdkPixbufFormat)(UnsafePixbufFormatToGlibNone(format))
 
@@ -4312,8 +4360,10 @@ func (format *PixbufFormat) GetLicense() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+		defer C.free(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -4321,12 +4371,12 @@ func (format *PixbufFormat) GetLicense() string {
 // GetMIMETypes wraps gdk_pixbuf_format_get_mime_types
 // The function returns the following values:
 // 
-// 	- goret []string 
+// 	- goret []string (nullable) 
 //
 // Returns the mime types supported by the format.
 func (format *PixbufFormat) GetMIMETypes() []string {
 	var carg0 *C.GdkPixbufFormat // in, none, converted
-	var cret  **C.gchar          // return, transfer: full, C Pointers: 2, Name: array[utf8], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
+	var cret  **C.gchar          // return, transfer: full, C Pointers: 2, Name: array[utf8], scope: , nullable, array (inner: *typesystem.StringPrimitive, zero-terminated)
 
 	carg0 = (*C.GdkPixbufFormat)(UnsafePixbufFormatToGlibNone(format))
 
@@ -4345,12 +4395,12 @@ func (format *PixbufFormat) GetMIMETypes() []string {
 // GetName wraps gdk_pixbuf_format_get_name
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Returns the name of the format.
 func (format *PixbufFormat) GetName() string {
 	var carg0 *C.GdkPixbufFormat // in, none, converted
-	var cret  *C.gchar           // return, full, string
+	var cret  *C.gchar           // return, full, string, nullable-string
 
 	carg0 = (*C.GdkPixbufFormat)(UnsafePixbufFormatToGlibNone(format))
 
@@ -4359,8 +4409,10 @@ func (format *PixbufFormat) GetName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+		defer C.free(unsafe.Pointer(cret))
+	}
 
 	return goret
 }

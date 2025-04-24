@@ -8493,7 +8493,7 @@ func AcceleratorValid(keyval uint, modifiers gdk.ModifierType) bool {
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Checks that the GTK library in use is compatible with the
 // given version.
@@ -8522,7 +8522,7 @@ func CheckVersion(requiredMajor uint, requiredMinor uint, requiredMicro uint) st
 	var carg1 C.guint // in, none, casted
 	var carg2 C.guint // in, none, casted
 	var carg3 C.guint // in, none, casted
-	var cret  *C.char // return, none, string, casted *C.gchar
+	var cret  *C.char // return, none, string, casted *C.gchar, nullable
 
 	carg1 = C.guint(requiredMajor)
 	carg2 = C.guint(requiredMinor)
@@ -8535,7 +8535,9 @@ func CheckVersion(requiredMajor uint, requiredMinor uint, requiredMicro uint) st
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -9325,7 +9327,7 @@ type Accessible interface {
 	// GetAccessibleParent wraps gtk_accessible_get_accessible_parent
 	// The function returns the following values:
 	// 
-	// 	- goret Accessible 
+	// 	- goret Accessible (nullable) 
 	//
 	// Retrieves the accessible parent for an accessible object.
 	// 
@@ -9363,14 +9365,14 @@ type Accessible interface {
 	// GetFirstAccessibleChild wraps gtk_accessible_get_first_accessible_child
 	// The function returns the following values:
 	// 
-	// 	- goret Accessible 
+	// 	- goret Accessible (nullable) 
 	//
 	// Retrieves the first accessible child of an accessible object.
 	GetFirstAccessibleChild() Accessible
 	// GetNextAccessibleSibling wraps gtk_accessible_get_next_accessible_sibling
 	// The function returns the following values:
 	// 
-	// 	- goret Accessible 
+	// 	- goret Accessible (nullable) 
 	//
 	// Retrieves the next accessible sibling of an accessible object
 	GetNextAccessibleSibling() Accessible
@@ -9561,14 +9563,14 @@ func (self *AccessibleInstance) Announce(message string, priority AccessibleAnno
 // GetAccessibleParent wraps gtk_accessible_get_accessible_parent
 // The function returns the following values:
 // 
-// 	- goret Accessible 
+// 	- goret Accessible (nullable) 
 //
 // Retrieves the accessible parent for an accessible object.
 // 
 // This function returns `NULL` for top level widgets.
 func (self *AccessibleInstance) GetAccessibleParent() Accessible {
 	var carg0 *C.GtkAccessible // in, none, converted
-	var cret  *C.GtkAccessible // return, full, converted
+	var cret  *C.GtkAccessible // return, full, converted, nullable
 
 	carg0 = (*C.GtkAccessible)(UnsafeAccessibleToGlibNone(self))
 
@@ -9577,7 +9579,9 @@ func (self *AccessibleInstance) GetAccessibleParent() Accessible {
 
 	var goret Accessible
 
-	goret = UnsafeAccessibleFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeAccessibleFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -9673,12 +9677,12 @@ func (self *AccessibleInstance) GetBounds() (int, int, int, int, bool) {
 // GetFirstAccessibleChild wraps gtk_accessible_get_first_accessible_child
 // The function returns the following values:
 // 
-// 	- goret Accessible 
+// 	- goret Accessible (nullable) 
 //
 // Retrieves the first accessible child of an accessible object.
 func (self *AccessibleInstance) GetFirstAccessibleChild() Accessible {
 	var carg0 *C.GtkAccessible // in, none, converted
-	var cret  *C.GtkAccessible // return, full, converted
+	var cret  *C.GtkAccessible // return, full, converted, nullable
 
 	carg0 = (*C.GtkAccessible)(UnsafeAccessibleToGlibNone(self))
 
@@ -9687,7 +9691,9 @@ func (self *AccessibleInstance) GetFirstAccessibleChild() Accessible {
 
 	var goret Accessible
 
-	goret = UnsafeAccessibleFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeAccessibleFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -9695,12 +9701,12 @@ func (self *AccessibleInstance) GetFirstAccessibleChild() Accessible {
 // GetNextAccessibleSibling wraps gtk_accessible_get_next_accessible_sibling
 // The function returns the following values:
 // 
-// 	- goret Accessible 
+// 	- goret Accessible (nullable) 
 //
 // Retrieves the next accessible sibling of an accessible object
 func (self *AccessibleInstance) GetNextAccessibleSibling() Accessible {
 	var carg0 *C.GtkAccessible // in, none, converted
-	var cret  *C.GtkAccessible // return, full, converted
+	var cret  *C.GtkAccessible // return, full, converted, nullable
 
 	carg0 = (*C.GtkAccessible)(UnsafeAccessibleToGlibNone(self))
 
@@ -9709,7 +9715,9 @@ func (self *AccessibleInstance) GetNextAccessibleSibling() Accessible {
 
 	var goret Accessible
 
-	goret = UnsafeAccessibleFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeAccessibleFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -10237,7 +10245,7 @@ type Actionable interface {
 	// GetActionName wraps gtk_actionable_get_action_name
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the action name for @actionable.
 	GetActionName() string
@@ -10316,12 +10324,12 @@ func UnsafeActionableToGlibFull(c Actionable) unsafe.Pointer {
 // GetActionName wraps gtk_actionable_get_action_name
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the action name for @actionable.
 func (actionable *ActionableInstance) GetActionName() string {
 	var carg0 *C.GtkActionable // in, none, converted
-	var cret  *C.char          // return, none, string, casted *C.gchar
+	var cret  *C.char          // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkActionable)(UnsafeActionableToGlibNone(actionable))
 
@@ -10330,7 +10338,9 @@ func (actionable *ActionableInstance) GetActionName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -10422,7 +10432,7 @@ type Buildable interface {
 	// GetBuildableID wraps gtk_buildable_get_buildable_id
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the ID of the @buildable object.
 	// 
@@ -10472,7 +10482,7 @@ func UnsafeBuildableToGlibFull(c Buildable) unsafe.Pointer {
 // GetBuildableID wraps gtk_buildable_get_buildable_id
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the ID of the @buildable object.
 // 
@@ -10480,7 +10490,7 @@ func UnsafeBuildableToGlibFull(c Buildable) unsafe.Pointer {
 // of the `&lt;object&gt;` tag used to construct the @buildable.
 func (buildable *BuildableInstance) GetBuildableID() string {
 	var carg0 *C.GtkBuildable // in, none, converted
-	var cret  *C.char         // return, none, string, casted *C.gchar
+	var cret  *C.char         // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkBuildable)(UnsafeBuildableToGlibNone(buildable))
 
@@ -10489,7 +10499,9 @@ func (buildable *BuildableInstance) GetBuildableID() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -11119,7 +11131,7 @@ type Scrollable interface {
 	// GetHAdjustment wraps gtk_scrollable_get_hadjustment
 	// The function returns the following values:
 	// 
-	// 	- goret Adjustment 
+	// 	- goret Adjustment (nullable) 
 	//
 	// Retrieves the `GtkAdjustment` used for horizontal scrolling.
 	GetHAdjustment() Adjustment
@@ -11133,7 +11145,7 @@ type Scrollable interface {
 	// GetVAdjustment wraps gtk_scrollable_get_vadjustment
 	// The function returns the following values:
 	// 
-	// 	- goret Adjustment 
+	// 	- goret Adjustment (nullable) 
 	//
 	// Retrieves the `GtkAdjustment` used for vertical scrolling.
 	GetVAdjustment() Adjustment
@@ -11260,12 +11272,12 @@ func (scrollable *ScrollableInstance) GetBorder() (Border, bool) {
 // GetHAdjustment wraps gtk_scrollable_get_hadjustment
 // The function returns the following values:
 // 
-// 	- goret Adjustment 
+// 	- goret Adjustment (nullable) 
 //
 // Retrieves the `GtkAdjustment` used for horizontal scrolling.
 func (scrollable *ScrollableInstance) GetHAdjustment() Adjustment {
 	var carg0 *C.GtkScrollable // in, none, converted
-	var cret  *C.GtkAdjustment // return, none, converted
+	var cret  *C.GtkAdjustment // return, none, converted, nullable
 
 	carg0 = (*C.GtkScrollable)(UnsafeScrollableToGlibNone(scrollable))
 
@@ -11274,7 +11286,9 @@ func (scrollable *ScrollableInstance) GetHAdjustment() Adjustment {
 
 	var goret Adjustment
 
-	goret = UnsafeAdjustmentFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeAdjustmentFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -11304,12 +11318,12 @@ func (scrollable *ScrollableInstance) GetHScrollPolicy() ScrollablePolicy {
 // GetVAdjustment wraps gtk_scrollable_get_vadjustment
 // The function returns the following values:
 // 
-// 	- goret Adjustment 
+// 	- goret Adjustment (nullable) 
 //
 // Retrieves the `GtkAdjustment` used for vertical scrolling.
 func (scrollable *ScrollableInstance) GetVAdjustment() Adjustment {
 	var carg0 *C.GtkScrollable // in, none, converted
-	var cret  *C.GtkAdjustment // return, none, converted
+	var cret  *C.GtkAdjustment // return, none, converted, nullable
 
 	carg0 = (*C.GtkScrollable)(UnsafeScrollableToGlibNone(scrollable))
 
@@ -11318,7 +11332,9 @@ func (scrollable *ScrollableInstance) GetVAdjustment() Adjustment {
 
 	var goret Adjustment
 
-	goret = UnsafeAdjustmentFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeAdjustmentFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -12641,7 +12657,7 @@ func UnsafeATContextToGlibFull(c ATContext) unsafe.Pointer {
 // 
 // The function returns the following values:
 // 
-// 	- goret ATContext 
+// 	- goret ATContext (nullable) 
 //
 // Creates a new `GtkATContext` instance for the given accessible role,
 // accessible instance, and display connection.
@@ -12652,7 +12668,7 @@ func ATContextCreate(accessibleRole AccessibleRole, accessible Accessible, displ
 	var carg1 C.GtkAccessibleRole // in, none, casted
 	var carg2 *C.GtkAccessible    // in, none, converted
 	var carg3 *C.GdkDisplay       // in, none, converted
-	var cret  *C.GtkATContext     // return, full, converted
+	var cret  *C.GtkATContext     // return, full, converted, nullable
 
 	carg1 = C.GtkAccessibleRole(accessibleRole)
 	carg2 = (*C.GtkAccessible)(UnsafeAccessibleToGlibNone(accessible))
@@ -12665,7 +12681,9 @@ func ATContextCreate(accessibleRole AccessibleRole, accessible Accessible, displ
 
 	var goret ATContext
 
-	goret = UnsafeATContextFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeATContextFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -13468,7 +13486,7 @@ type AlertDialog interface {
 	// GetButtons wraps gtk_alert_dialog_get_buttons
 	// The function returns the following values:
 	// 
-	// 	- goret []string 
+	// 	- goret []string (nullable) 
 	//
 	// Returns the button labels for the alert.
 	GetButtons() []string
@@ -13693,12 +13711,12 @@ func (self *AlertDialogInstance) ChooseFinish(result gio.AsyncResult) (int, erro
 // GetButtons wraps gtk_alert_dialog_get_buttons
 // The function returns the following values:
 // 
-// 	- goret []string 
+// 	- goret []string (nullable) 
 //
 // Returns the button labels for the alert.
 func (self *AlertDialogInstance) GetButtons() []string {
 	var carg0 *C.GtkAlertDialog // in, none, converted
-	var cret  **C.char          // return, transfer: none, C Pointers: 2, Name: array[utf8], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
+	var cret  **C.char          // return, transfer: none, C Pointers: 2, Name: array[utf8], scope: , nullable, array (inner: *typesystem.StringPrimitive, zero-terminated)
 
 	carg0 = (*C.GtkAlertDialog)(UnsafeAlertDialogToGlibNone(self))
 
@@ -14138,7 +14156,7 @@ type Application interface {
 	// GetActiveWindow wraps gtk_application_get_active_window
 	// The function returns the following values:
 	// 
-	// 	- goret Window 
+	// 	- goret Window (nullable) 
 	//
 	// Gets the “active” window for the application.
 	// 
@@ -14155,7 +14173,7 @@ type Application interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret gio.Menu 
+	// 	- goret gio.Menu (nullable) 
 	//
 	// Gets a menu from automatically loaded resources.
 	// 
@@ -14165,7 +14183,7 @@ type Application interface {
 	// GetMenubar wraps gtk_application_get_menubar
 	// The function returns the following values:
 	// 
-	// 	- goret gio.MenuModel 
+	// 	- goret gio.MenuModel (nullable) 
 	//
 	// Returns the menu model that has been set with
 	// [method@Gtk.Application.set_menubar].
@@ -14178,7 +14196,7 @@ type Application interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret Window 
+	// 	- goret Window (nullable) 
 	//
 	// Returns the [class@Gtk.ApplicationWindow] with the given ID.
 	// 
@@ -14555,7 +14573,7 @@ func (application *ApplicationInstance) GetActionsForAccel(accel string) []strin
 // GetActiveWindow wraps gtk_application_get_active_window
 // The function returns the following values:
 // 
-// 	- goret Window 
+// 	- goret Window (nullable) 
 //
 // Gets the “active” window for the application.
 // 
@@ -14565,7 +14583,7 @@ func (application *ApplicationInstance) GetActionsForAccel(accel string) []strin
 // recently-focused window within this application.
 func (application *ApplicationInstance) GetActiveWindow() Window {
 	var carg0 *C.GtkApplication // in, none, converted
-	var cret  *C.GtkWindow      // return, none, converted
+	var cret  *C.GtkWindow      // return, none, converted, nullable
 
 	carg0 = (*C.GtkApplication)(UnsafeApplicationToGlibNone(application))
 
@@ -14574,7 +14592,9 @@ func (application *ApplicationInstance) GetActiveWindow() Window {
 
 	var goret Window
 
-	goret = UnsafeWindowFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWindowFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -14587,7 +14607,7 @@ func (application *ApplicationInstance) GetActiveWindow() Window {
 // 
 // The function returns the following values:
 // 
-// 	- goret gio.Menu 
+// 	- goret gio.Menu (nullable) 
 //
 // Gets a menu from automatically loaded resources.
 // 
@@ -14596,7 +14616,7 @@ func (application *ApplicationInstance) GetActiveWindow() Window {
 func (application *ApplicationInstance) GetMenuByID(id string) gio.Menu {
 	var carg0 *C.GtkApplication // in, none, converted
 	var carg1 *C.char           // in, none, string, casted *C.gchar
-	var cret  *C.GMenu          // return, none, converted
+	var cret  *C.GMenu          // return, none, converted, nullable
 
 	carg0 = (*C.GtkApplication)(UnsafeApplicationToGlibNone(application))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(id)))
@@ -14608,7 +14628,9 @@ func (application *ApplicationInstance) GetMenuByID(id string) gio.Menu {
 
 	var goret gio.Menu
 
-	goret = gio.UnsafeMenuFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gio.UnsafeMenuFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -14616,13 +14638,13 @@ func (application *ApplicationInstance) GetMenuByID(id string) gio.Menu {
 // GetMenubar wraps gtk_application_get_menubar
 // The function returns the following values:
 // 
-// 	- goret gio.MenuModel 
+// 	- goret gio.MenuModel (nullable) 
 //
 // Returns the menu model that has been set with
 // [method@Gtk.Application.set_menubar].
 func (application *ApplicationInstance) GetMenubar() gio.MenuModel {
 	var carg0 *C.GtkApplication // in, none, converted
-	var cret  *C.GMenuModel     // return, none, converted
+	var cret  *C.GMenuModel     // return, none, converted, nullable
 
 	carg0 = (*C.GtkApplication)(UnsafeApplicationToGlibNone(application))
 
@@ -14631,7 +14653,9 @@ func (application *ApplicationInstance) GetMenubar() gio.MenuModel {
 
 	var goret gio.MenuModel
 
-	goret = gio.UnsafeMenuModelFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gio.UnsafeMenuModelFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -14644,7 +14668,7 @@ func (application *ApplicationInstance) GetMenubar() gio.MenuModel {
 // 
 // The function returns the following values:
 // 
-// 	- goret Window 
+// 	- goret Window (nullable) 
 //
 // Returns the [class@Gtk.ApplicationWindow] with the given ID.
 // 
@@ -14653,7 +14677,7 @@ func (application *ApplicationInstance) GetMenubar() gio.MenuModel {
 func (application *ApplicationInstance) GetWindowByID(id uint) Window {
 	var carg0 *C.GtkApplication // in, none, converted
 	var carg1 C.guint           // in, none, casted
-	var cret  *C.GtkWindow      // return, none, converted
+	var cret  *C.GtkWindow      // return, none, converted, nullable
 
 	carg0 = (*C.GtkApplication)(UnsafeApplicationToGlibNone(application))
 	carg1 = C.guint(id)
@@ -14664,7 +14688,9 @@ func (application *ApplicationInstance) GetWindowByID(id uint) Window {
 
 	var goret Window
 
-	goret = UnsafeWindowFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWindowFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -14978,7 +15004,7 @@ type BookmarkList interface {
 	// GetAttributes wraps gtk_bookmark_list_get_attributes
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the attributes queried on the children.
 	GetAttributes() string
@@ -15108,12 +15134,12 @@ func NewBookmarkList(filename string, attributes string) BookmarkList {
 // GetAttributes wraps gtk_bookmark_list_get_attributes
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the attributes queried on the children.
 func (self *BookmarkListInstance) GetAttributes() string {
 	var carg0 *C.GtkBookmarkList // in, none, converted
-	var cret  *C.char            // return, none, string, casted *C.gchar
+	var cret  *C.char            // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkBookmarkList)(UnsafeBookmarkListToGlibNone(self))
 
@@ -15122,7 +15148,9 @@ func (self *BookmarkListInstance) GetAttributes() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -15795,7 +15823,7 @@ type Builder interface {
 	// GetCurrentObject wraps gtk_builder_get_current_object
 	// The function returns the following values:
 	// 
-	// 	- goret gobject.Object 
+	// 	- goret gobject.Object (nullable) 
 	//
 	// Gets the current object set via gtk_builder_set_current_object().
 	GetCurrentObject() gobject.Object
@@ -15807,7 +15835,7 @@ type Builder interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret gobject.Object 
+	// 	- goret gobject.Object (nullable) 
 	//
 	// Gets the object named @name.
 	// 
@@ -15834,7 +15862,7 @@ type Builder interface {
 	// GetTranslationDomain wraps gtk_builder_get_translation_domain
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the translation domain of @builder.
 	GetTranslationDomain() string
@@ -16495,12 +16523,12 @@ func (builder *BuilderInstance) ExtendWithTemplate(object gobject.Object, templa
 // GetCurrentObject wraps gtk_builder_get_current_object
 // The function returns the following values:
 // 
-// 	- goret gobject.Object 
+// 	- goret gobject.Object (nullable) 
 //
 // Gets the current object set via gtk_builder_set_current_object().
 func (builder *BuilderInstance) GetCurrentObject() gobject.Object {
 	var carg0 *C.GtkBuilder // in, none, converted
-	var cret  *C.GObject    // return, none, converted
+	var cret  *C.GObject    // return, none, converted, nullable
 
 	carg0 = (*C.GtkBuilder)(UnsafeBuilderToGlibNone(builder))
 
@@ -16509,7 +16537,9 @@ func (builder *BuilderInstance) GetCurrentObject() gobject.Object {
 
 	var goret gobject.Object
 
-	goret = gobject.UnsafeObjectFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gobject.UnsafeObjectFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -16522,7 +16552,7 @@ func (builder *BuilderInstance) GetCurrentObject() gobject.Object {
 // 
 // The function returns the following values:
 // 
-// 	- goret gobject.Object 
+// 	- goret gobject.Object (nullable) 
 //
 // Gets the object named @name.
 // 
@@ -16531,7 +16561,7 @@ func (builder *BuilderInstance) GetCurrentObject() gobject.Object {
 func (builder *BuilderInstance) GetObject(name string) gobject.Object {
 	var carg0 *C.GtkBuilder // in, none, converted
 	var carg1 *C.char       // in, none, string, casted *C.gchar
-	var cret  *C.GObject    // return, none, converted
+	var cret  *C.GObject    // return, none, converted, nullable
 
 	carg0 = (*C.GtkBuilder)(UnsafeBuilderToGlibNone(builder))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
@@ -16543,7 +16573,9 @@ func (builder *BuilderInstance) GetObject(name string) gobject.Object {
 
 	var goret gobject.Object
 
-	goret = gobject.UnsafeObjectFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gobject.UnsafeObjectFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -16605,12 +16637,12 @@ func (builder *BuilderInstance) GetScope() BuilderScope {
 // GetTranslationDomain wraps gtk_builder_get_translation_domain
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the translation domain of @builder.
 func (builder *BuilderInstance) GetTranslationDomain() string {
 	var carg0 *C.GtkBuilder // in, none, converted
-	var cret  *C.char       // return, none, string, casted *C.gchar
+	var cret  *C.char       // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkBuilder)(UnsafeBuilderToGlibNone(builder))
 
@@ -16619,7 +16651,9 @@ func (builder *BuilderInstance) GetTranslationDomain() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -16923,7 +16957,7 @@ type ColorDialog interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret *gdk.RGBA 
+	// 	- goret *gdk.RGBA (nullable) 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Finishes the [method@Gtk.ColorDialog.choose_rgba] call and
@@ -17085,7 +17119,7 @@ func (self *ColorDialogInstance) ChooseRGBA(cancellable context.Context, parent 
 // 
 // The function returns the following values:
 // 
-// 	- goret *gdk.RGBA 
+// 	- goret *gdk.RGBA (nullable) 
 // 	- _goerr error (nullable): an error 
 //
 // Finishes the [method@Gtk.ColorDialog.choose_rgba] call and
@@ -17093,7 +17127,7 @@ func (self *ColorDialogInstance) ChooseRGBA(cancellable context.Context, parent 
 func (self *ColorDialogInstance) ChooseRGBAFinish(result gio.AsyncResult) (*gdk.RGBA, error) {
 	var carg0 *C.GtkColorDialog // in, none, converted
 	var carg1 *C.GAsyncResult   // in, none, converted
-	var cret  *C.GdkRGBA        // return, full, converted
+	var cret  *C.GdkRGBA        // return, full, converted, nullable
 	var _cerr *C.GError         // out, full, converted, nullable
 
 	carg0 = (*C.GtkColorDialog)(UnsafeColorDialogToGlibNone(self))
@@ -17106,7 +17140,9 @@ func (self *ColorDialogInstance) ChooseRGBAFinish(result gio.AsyncResult) (*gdk.
 	var goret  *gdk.RGBA
 	var _goerr error
 
-	goret = gdk.UnsafeRGBAFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gdk.UnsafeRGBAFromGlibFull(unsafe.Pointer(cret))
+	}
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -17281,7 +17317,7 @@ type ColumnViewColumn interface {
 	// GetColumnView wraps gtk_column_view_column_get_column_view
 	// The function returns the following values:
 	// 
-	// 	- goret ColumnView 
+	// 	- goret ColumnView (nullable) 
 	//
 	// Gets the column view that's currently displaying this column.
 	// 
@@ -17297,7 +17333,7 @@ type ColumnViewColumn interface {
 	// GetFactory wraps gtk_column_view_column_get_factory
 	// The function returns the following values:
 	// 
-	// 	- goret ListItemFactory 
+	// 	- goret ListItemFactory (nullable) 
 	//
 	// Gets the factory that's currently used to populate list items for
 	// this column.
@@ -17312,7 +17348,7 @@ type ColumnViewColumn interface {
 	// GetHeaderMenu wraps gtk_column_view_column_get_header_menu
 	// The function returns the following values:
 	// 
-	// 	- goret gio.MenuModel 
+	// 	- goret gio.MenuModel (nullable) 
 	//
 	// Gets the menu model that is used to create the context menu
 	// for the column header.
@@ -17320,7 +17356,7 @@ type ColumnViewColumn interface {
 	// GetID wraps gtk_column_view_column_get_id
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Returns the ID set with gtk_column_view_column_set_id().
 	GetID() string
@@ -17334,14 +17370,14 @@ type ColumnViewColumn interface {
 	// GetSorter wraps gtk_column_view_column_get_sorter
 	// The function returns the following values:
 	// 
-	// 	- goret Sorter 
+	// 	- goret Sorter (nullable) 
 	//
 	// Returns the sorter that is associated with the column.
 	GetSorter() Sorter
 	// GetTitle wraps gtk_column_view_column_get_title
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Returns the title set with gtk_column_view_column_set_title().
 	GetTitle() string
@@ -17536,14 +17572,14 @@ func NewColumnViewColumn(title string, factory ListItemFactory) ColumnViewColumn
 // GetColumnView wraps gtk_column_view_column_get_column_view
 // The function returns the following values:
 // 
-// 	- goret ColumnView 
+// 	- goret ColumnView (nullable) 
 //
 // Gets the column view that's currently displaying this column.
 // 
 // If @self has not been added to a column view yet, %NULL is returned.
 func (self *ColumnViewColumnInstance) GetColumnView() ColumnView {
 	var carg0 *C.GtkColumnViewColumn // in, none, converted
-	var cret  *C.GtkColumnView       // return, none, converted
+	var cret  *C.GtkColumnView       // return, none, converted, nullable
 
 	carg0 = (*C.GtkColumnViewColumn)(UnsafeColumnViewColumnToGlibNone(self))
 
@@ -17552,7 +17588,9 @@ func (self *ColumnViewColumnInstance) GetColumnView() ColumnView {
 
 	var goret ColumnView
 
-	goret = UnsafeColumnViewFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeColumnViewFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -17584,13 +17622,13 @@ func (self *ColumnViewColumnInstance) GetExpand() bool {
 // GetFactory wraps gtk_column_view_column_get_factory
 // The function returns the following values:
 // 
-// 	- goret ListItemFactory 
+// 	- goret ListItemFactory (nullable) 
 //
 // Gets the factory that's currently used to populate list items for
 // this column.
 func (self *ColumnViewColumnInstance) GetFactory() ListItemFactory {
 	var carg0 *C.GtkColumnViewColumn // in, none, converted
-	var cret  *C.GtkListItemFactory  // return, none, converted
+	var cret  *C.GtkListItemFactory  // return, none, converted, nullable
 
 	carg0 = (*C.GtkColumnViewColumn)(UnsafeColumnViewColumnToGlibNone(self))
 
@@ -17599,7 +17637,9 @@ func (self *ColumnViewColumnInstance) GetFactory() ListItemFactory {
 
 	var goret ListItemFactory
 
-	goret = UnsafeListItemFactoryFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeListItemFactoryFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -17629,13 +17669,13 @@ func (self *ColumnViewColumnInstance) GetFixedWidth() int {
 // GetHeaderMenu wraps gtk_column_view_column_get_header_menu
 // The function returns the following values:
 // 
-// 	- goret gio.MenuModel 
+// 	- goret gio.MenuModel (nullable) 
 //
 // Gets the menu model that is used to create the context menu
 // for the column header.
 func (self *ColumnViewColumnInstance) GetHeaderMenu() gio.MenuModel {
 	var carg0 *C.GtkColumnViewColumn // in, none, converted
-	var cret  *C.GMenuModel          // return, none, converted
+	var cret  *C.GMenuModel          // return, none, converted, nullable
 
 	carg0 = (*C.GtkColumnViewColumn)(UnsafeColumnViewColumnToGlibNone(self))
 
@@ -17644,7 +17684,9 @@ func (self *ColumnViewColumnInstance) GetHeaderMenu() gio.MenuModel {
 
 	var goret gio.MenuModel
 
-	goret = gio.UnsafeMenuModelFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gio.UnsafeMenuModelFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -17652,12 +17694,12 @@ func (self *ColumnViewColumnInstance) GetHeaderMenu() gio.MenuModel {
 // GetID wraps gtk_column_view_column_get_id
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Returns the ID set with gtk_column_view_column_set_id().
 func (self *ColumnViewColumnInstance) GetID() string {
 	var carg0 *C.GtkColumnViewColumn // in, none, converted
-	var cret  *C.char                // return, none, string, casted *C.gchar
+	var cret  *C.char                // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkColumnViewColumn)(UnsafeColumnViewColumnToGlibNone(self))
 
@@ -17666,7 +17708,9 @@ func (self *ColumnViewColumnInstance) GetID() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -17698,12 +17742,12 @@ func (self *ColumnViewColumnInstance) GetResizable() bool {
 // GetSorter wraps gtk_column_view_column_get_sorter
 // The function returns the following values:
 // 
-// 	- goret Sorter 
+// 	- goret Sorter (nullable) 
 //
 // Returns the sorter that is associated with the column.
 func (self *ColumnViewColumnInstance) GetSorter() Sorter {
 	var carg0 *C.GtkColumnViewColumn // in, none, converted
-	var cret  *C.GtkSorter           // return, none, converted
+	var cret  *C.GtkSorter           // return, none, converted, nullable
 
 	carg0 = (*C.GtkColumnViewColumn)(UnsafeColumnViewColumnToGlibNone(self))
 
@@ -17712,7 +17756,9 @@ func (self *ColumnViewColumnInstance) GetSorter() Sorter {
 
 	var goret Sorter
 
-	goret = UnsafeSorterFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeSorterFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -17720,12 +17766,12 @@ func (self *ColumnViewColumnInstance) GetSorter() Sorter {
 // GetTitle wraps gtk_column_view_column_get_title
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Returns the title set with gtk_column_view_column_set_title().
 func (self *ColumnViewColumnInstance) GetTitle() string {
 	var carg0 *C.GtkColumnViewColumn // in, none, converted
-	var cret  *C.char                // return, none, string, casted *C.gchar
+	var cret  *C.char                // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkColumnViewColumn)(UnsafeColumnViewColumnToGlibNone(self))
 
@@ -17734,7 +17780,9 @@ func (self *ColumnViewColumnInstance) GetTitle() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -18516,7 +18564,7 @@ type Constraint interface {
 	// GetSource wraps gtk_constraint_get_source
 	// The function returns the following values:
 	// 
-	// 	- goret ConstraintTarget 
+	// 	- goret ConstraintTarget (nullable) 
 	//
 	// Retrieves the [iface@Gtk.ConstraintTarget] used as the source for the
 	// constraint.
@@ -18541,7 +18589,7 @@ type Constraint interface {
 	// GetTarget wraps gtk_constraint_get_target
 	// The function returns the following values:
 	// 
-	// 	- goret ConstraintTarget 
+	// 	- goret ConstraintTarget (nullable) 
 	//
 	// Retrieves the [iface@Gtk.ConstraintTarget] used as the target for
 	// the constraint.
@@ -18686,7 +18734,7 @@ func (constraint *ConstraintInstance) GetRelation() ConstraintRelation {
 // GetSource wraps gtk_constraint_get_source
 // The function returns the following values:
 // 
-// 	- goret ConstraintTarget 
+// 	- goret ConstraintTarget (nullable) 
 //
 // Retrieves the [iface@Gtk.ConstraintTarget] used as the source for the
 // constraint.
@@ -18695,7 +18743,7 @@ func (constraint *ConstraintInstance) GetRelation() ConstraintRelation {
 // the widget using the [class@Gtk.ConstraintLayout] as the source.
 func (constraint *ConstraintInstance) GetSource() ConstraintTarget {
 	var carg0 *C.GtkConstraint       // in, none, converted
-	var cret  *C.GtkConstraintTarget // return, none, converted
+	var cret  *C.GtkConstraintTarget // return, none, converted, nullable
 
 	carg0 = (*C.GtkConstraint)(UnsafeConstraintToGlibNone(constraint))
 
@@ -18704,7 +18752,9 @@ func (constraint *ConstraintInstance) GetSource() ConstraintTarget {
 
 	var goret ConstraintTarget
 
-	goret = UnsafeConstraintTargetFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeConstraintTargetFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -18756,7 +18806,7 @@ func (constraint *ConstraintInstance) GetStrength() int {
 // GetTarget wraps gtk_constraint_get_target
 // The function returns the following values:
 // 
-// 	- goret ConstraintTarget 
+// 	- goret ConstraintTarget (nullable) 
 //
 // Retrieves the [iface@Gtk.ConstraintTarget] used as the target for
 // the constraint.
@@ -18765,7 +18815,7 @@ func (constraint *ConstraintInstance) GetStrength() int {
 // the widget using the [class@Gtk.ConstraintLayout] as the target.
 func (constraint *ConstraintInstance) GetTarget() ConstraintTarget {
 	var carg0 *C.GtkConstraint       // in, none, converted
-	var cret  *C.GtkConstraintTarget // return, none, converted
+	var cret  *C.GtkConstraintTarget // return, none, converted, nullable
 
 	carg0 = (*C.GtkConstraint)(UnsafeConstraintToGlibNone(constraint))
 
@@ -18774,7 +18824,9 @@ func (constraint *ConstraintInstance) GetTarget() ConstraintTarget {
 
 	var goret ConstraintTarget
 
-	goret = UnsafeConstraintTargetFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeConstraintTargetFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -18921,7 +18973,7 @@ type ConstraintGuide interface {
 	// GetName wraps gtk_constraint_guide_get_name
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Retrieves the name set using gtk_constraint_guide_set_name().
 	GetName() string
@@ -19104,12 +19156,12 @@ func (guide *ConstraintGuideInstance) GetMinSize() (int, int) {
 // GetName wraps gtk_constraint_guide_get_name
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Retrieves the name set using gtk_constraint_guide_set_name().
 func (guide *ConstraintGuideInstance) GetName() string {
 	var carg0 *C.GtkConstraintGuide // in, none, converted
-	var cret  *C.char               // return, none, string, casted *C.gchar
+	var cret  *C.char               // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkConstraintGuide)(UnsafeConstraintGuideToGlibNone(guide))
 
@@ -19118,7 +19170,9 @@ func (guide *ConstraintGuideInstance) GetName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -19726,14 +19780,14 @@ type DirectoryList interface {
 	// GetAttributes wraps gtk_directory_list_get_attributes
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the attributes queried on the children.
 	GetAttributes() string
 	// GetError wraps gtk_directory_list_get_error
 	// The function returns the following values:
 	// 
-	// 	- goret error 
+	// 	- goret error (nullable) 
 	//
 	// Gets the loading error, if any.
 	// 
@@ -19747,7 +19801,7 @@ type DirectoryList interface {
 	// GetFile wraps gtk_directory_list_get_file
 	// The function returns the following values:
 	// 
-	// 	- goret gio.File 
+	// 	- goret gio.File (nullable) 
 	//
 	// Gets the file whose children are currently enumerated.
 	GetFile() gio.File
@@ -19914,12 +19968,12 @@ func NewDirectoryList(attributes string, file gio.File) DirectoryList {
 // GetAttributes wraps gtk_directory_list_get_attributes
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the attributes queried on the children.
 func (self *DirectoryListInstance) GetAttributes() string {
 	var carg0 *C.GtkDirectoryList // in, none, converted
-	var cret  *C.char             // return, none, string, casted *C.gchar
+	var cret  *C.char             // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkDirectoryList)(UnsafeDirectoryListToGlibNone(self))
 
@@ -19928,7 +19982,9 @@ func (self *DirectoryListInstance) GetAttributes() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -19936,7 +19992,7 @@ func (self *DirectoryListInstance) GetAttributes() string {
 // GetError wraps gtk_directory_list_get_error
 // The function returns the following values:
 // 
-// 	- goret error 
+// 	- goret error (nullable) 
 //
 // Gets the loading error, if any.
 // 
@@ -19948,7 +20004,7 @@ func (self *DirectoryListInstance) GetAttributes() string {
 // successfully queried files will remain in the list.
 func (self *DirectoryListInstance) GetError() error {
 	var carg0 *C.GtkDirectoryList // in, none, converted
-	var cret  *C.GError           // return, none, converted
+	var cret  *C.GError           // return, none, converted, nullable
 
 	carg0 = (*C.GtkDirectoryList)(UnsafeDirectoryListToGlibNone(self))
 
@@ -19957,7 +20013,9 @@ func (self *DirectoryListInstance) GetError() error {
 
 	var goret error
 
-	goret = glib.UnsafeErrorFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = glib.UnsafeErrorFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -19965,12 +20023,12 @@ func (self *DirectoryListInstance) GetError() error {
 // GetFile wraps gtk_directory_list_get_file
 // The function returns the following values:
 // 
-// 	- goret gio.File 
+// 	- goret gio.File (nullable) 
 //
 // Gets the file whose children are currently enumerated.
 func (self *DirectoryListInstance) GetFile() gio.File {
 	var carg0 *C.GtkDirectoryList // in, none, converted
-	var cret  *C.GFile            // return, none, converted
+	var cret  *C.GFile            // return, none, converted, nullable
 
 	carg0 = (*C.GtkDirectoryList)(UnsafeDirectoryListToGlibNone(self))
 
@@ -19979,7 +20037,9 @@ func (self *DirectoryListInstance) GetFile() gio.File {
 
 	var goret gio.File
 
-	goret = gio.UnsafeFileFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gio.UnsafeFileFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -20731,7 +20791,7 @@ type EventController interface {
 	// GetCurrentEventDevice wraps gtk_event_controller_get_current_event_device
 	// The function returns the following values:
 	// 
-	// 	- goret gdk.Device 
+	// 	- goret gdk.Device (nullable) 
 	//
 	// Returns the device of the event that is currently being
 	// handled by the controller.
@@ -20761,7 +20821,7 @@ type EventController interface {
 	// GetName wraps gtk_event_controller_get_name
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the name of @controller.
 	GetName() string
@@ -20782,7 +20842,7 @@ type EventController interface {
 	// GetWidget wraps gtk_event_controller_get_widget
 	// The function returns the following values:
 	// 
-	// 	- goret Widget 
+	// 	- goret Widget (nullable) 
 	//
 	// Returns the `GtkWidget` this controller relates to.
 	GetWidget() Widget
@@ -20868,7 +20928,7 @@ func UnsafeEventControllerToGlibFull(c EventController) unsafe.Pointer {
 // GetCurrentEventDevice wraps gtk_event_controller_get_current_event_device
 // The function returns the following values:
 // 
-// 	- goret gdk.Device 
+// 	- goret gdk.Device (nullable) 
 //
 // Returns the device of the event that is currently being
 // handled by the controller.
@@ -20876,7 +20936,7 @@ func UnsafeEventControllerToGlibFull(c EventController) unsafe.Pointer {
 // At other times, %NULL is returned.
 func (controller *EventControllerInstance) GetCurrentEventDevice() gdk.Device {
 	var carg0 *C.GtkEventController // in, none, converted
-	var cret  *C.GdkDevice          // return, none, converted
+	var cret  *C.GdkDevice          // return, none, converted, nullable
 
 	carg0 = (*C.GtkEventController)(UnsafeEventControllerToGlibNone(controller))
 
@@ -20885,7 +20945,9 @@ func (controller *EventControllerInstance) GetCurrentEventDevice() gdk.Device {
 
 	var goret gdk.Device
 
-	goret = gdk.UnsafeDeviceFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gdk.UnsafeDeviceFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -20943,12 +21005,12 @@ func (controller *EventControllerInstance) GetCurrentEventTime() uint32 {
 // GetName wraps gtk_event_controller_get_name
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the name of @controller.
 func (controller *EventControllerInstance) GetName() string {
 	var carg0 *C.GtkEventController // in, none, converted
-	var cret  *C.char               // return, none, string, casted *C.gchar
+	var cret  *C.char               // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkEventController)(UnsafeEventControllerToGlibNone(controller))
 
@@ -20957,7 +21019,9 @@ func (controller *EventControllerInstance) GetName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -21009,12 +21073,12 @@ func (controller *EventControllerInstance) GetPropagationPhase() PropagationPhas
 // GetWidget wraps gtk_event_controller_get_widget
 // The function returns the following values:
 // 
-// 	- goret Widget 
+// 	- goret Widget (nullable) 
 //
 // Returns the `GtkWidget` this controller relates to.
 func (controller *EventControllerInstance) GetWidget() Widget {
 	var carg0 *C.GtkEventController // in, none, converted
-	var cret  *C.GtkWidget          // return, none, converted
+	var cret  *C.GtkWidget          // return, none, converted, nullable
 
 	carg0 = (*C.GtkEventController)(UnsafeEventControllerToGlibNone(controller))
 
@@ -21023,7 +21087,9 @@ func (controller *EventControllerInstance) GetWidget() Widget {
 
 	var goret Widget
 
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -21369,7 +21435,7 @@ type EventControllerKey interface {
 	// GetIMContext wraps gtk_event_controller_key_get_im_context
 	// The function returns the following values:
 	// 
-	// 	- goret IMContext 
+	// 	- goret IMContext (nullable) 
 	//
 	// Gets the input method context of the key @controller.
 	GetIMContext() IMContext
@@ -21521,12 +21587,12 @@ func (controller *EventControllerKeyInstance) GetGroup() uint {
 // GetIMContext wraps gtk_event_controller_key_get_im_context
 // The function returns the following values:
 // 
-// 	- goret IMContext 
+// 	- goret IMContext (nullable) 
 //
 // Gets the input method context of the key @controller.
 func (controller *EventControllerKeyInstance) GetIMContext() IMContext {
 	var carg0 *C.GtkEventControllerKey // in, none, converted
-	var cret  *C.GtkIMContext          // return, none, converted
+	var cret  *C.GtkIMContext          // return, none, converted, nullable
 
 	carg0 = (*C.GtkEventControllerKey)(UnsafeEventControllerKeyToGlibNone(controller))
 
@@ -21535,7 +21601,9 @@ func (controller *EventControllerKeyInstance) GetIMContext() IMContext {
 
 	var goret IMContext
 
-	goret = UnsafeIMContextFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeIMContextFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -22130,14 +22198,14 @@ type FileDialog interface {
 	// GetAcceptLabel wraps gtk_file_dialog_get_accept_label
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Retrieves the text used by the dialog on its accept button.
 	GetAcceptLabel() string
 	// GetDefaultFilter wraps gtk_file_dialog_get_default_filter
 	// The function returns the following values:
 	// 
-	// 	- goret FileFilter 
+	// 	- goret FileFilter (nullable) 
 	//
 	// Gets the filter that will be selected by default
 	// in the file chooser dialog.
@@ -22145,7 +22213,7 @@ type FileDialog interface {
 	// GetFilters wraps gtk_file_dialog_get_filters
 	// The function returns the following values:
 	// 
-	// 	- goret gio.ListModel 
+	// 	- goret gio.ListModel (nullable) 
 	//
 	// Gets the filters that will be offered to the user
 	// in the file chooser dialog.
@@ -22153,7 +22221,7 @@ type FileDialog interface {
 	// GetInitialFile wraps gtk_file_dialog_get_initial_file
 	// The function returns the following values:
 	// 
-	// 	- goret gio.File 
+	// 	- goret gio.File (nullable) 
 	//
 	// Gets the file that will be initially selected in
 	// the file chooser dialog.
@@ -22161,7 +22229,7 @@ type FileDialog interface {
 	// GetInitialFolder wraps gtk_file_dialog_get_initial_folder
 	// The function returns the following values:
 	// 
-	// 	- goret gio.File 
+	// 	- goret gio.File (nullable) 
 	//
 	// Gets the folder that will be set as the
 	// initial folder in the file chooser dialog.
@@ -22169,7 +22237,7 @@ type FileDialog interface {
 	// GetInitialName wraps gtk_file_dialog_get_initial_name
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the name for the file that should be initially set.
 	GetInitialName() string
@@ -22212,7 +22280,7 @@ type FileDialog interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret gio.File 
+	// 	- goret gio.File (nullable) 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Finishes the [method@Gtk.FileDialog.open] call and
@@ -22243,7 +22311,7 @@ type FileDialog interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret gio.ListModel 
+	// 	- goret gio.ListModel (nullable) 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Finishes the [method@Gtk.FileDialog.open] call and
@@ -22271,7 +22339,7 @@ type FileDialog interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret gio.File 
+	// 	- goret gio.File (nullable) 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Finishes the [method@Gtk.FileDialog.save] call and
@@ -22303,7 +22371,7 @@ type FileDialog interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret gio.File 
+	// 	- goret gio.File (nullable) 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Finishes the [method@Gtk.FileDialog.select_folder] call and
@@ -22334,7 +22402,7 @@ type FileDialog interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret gio.ListModel 
+	// 	- goret gio.ListModel (nullable) 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Finishes the [method@Gtk.FileDialog.select_multiple_folders]
@@ -22484,12 +22552,12 @@ func NewFileDialog() FileDialog {
 // GetAcceptLabel wraps gtk_file_dialog_get_accept_label
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Retrieves the text used by the dialog on its accept button.
 func (self *FileDialogInstance) GetAcceptLabel() string {
 	var carg0 *C.GtkFileDialog // in, none, converted
-	var cret  *C.char          // return, none, string, casted *C.gchar
+	var cret  *C.char          // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkFileDialog)(UnsafeFileDialogToGlibNone(self))
 
@@ -22498,7 +22566,9 @@ func (self *FileDialogInstance) GetAcceptLabel() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -22506,13 +22576,13 @@ func (self *FileDialogInstance) GetAcceptLabel() string {
 // GetDefaultFilter wraps gtk_file_dialog_get_default_filter
 // The function returns the following values:
 // 
-// 	- goret FileFilter 
+// 	- goret FileFilter (nullable) 
 //
 // Gets the filter that will be selected by default
 // in the file chooser dialog.
 func (self *FileDialogInstance) GetDefaultFilter() FileFilter {
 	var carg0 *C.GtkFileDialog // in, none, converted
-	var cret  *C.GtkFileFilter // return, none, converted
+	var cret  *C.GtkFileFilter // return, none, converted, nullable
 
 	carg0 = (*C.GtkFileDialog)(UnsafeFileDialogToGlibNone(self))
 
@@ -22521,7 +22591,9 @@ func (self *FileDialogInstance) GetDefaultFilter() FileFilter {
 
 	var goret FileFilter
 
-	goret = UnsafeFileFilterFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeFileFilterFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -22529,13 +22601,13 @@ func (self *FileDialogInstance) GetDefaultFilter() FileFilter {
 // GetFilters wraps gtk_file_dialog_get_filters
 // The function returns the following values:
 // 
-// 	- goret gio.ListModel 
+// 	- goret gio.ListModel (nullable) 
 //
 // Gets the filters that will be offered to the user
 // in the file chooser dialog.
 func (self *FileDialogInstance) GetFilters() gio.ListModel {
 	var carg0 *C.GtkFileDialog // in, none, converted
-	var cret  *C.GListModel    // return, none, converted
+	var cret  *C.GListModel    // return, none, converted, nullable
 
 	carg0 = (*C.GtkFileDialog)(UnsafeFileDialogToGlibNone(self))
 
@@ -22544,7 +22616,9 @@ func (self *FileDialogInstance) GetFilters() gio.ListModel {
 
 	var goret gio.ListModel
 
-	goret = gio.UnsafeListModelFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gio.UnsafeListModelFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -22552,13 +22626,13 @@ func (self *FileDialogInstance) GetFilters() gio.ListModel {
 // GetInitialFile wraps gtk_file_dialog_get_initial_file
 // The function returns the following values:
 // 
-// 	- goret gio.File 
+// 	- goret gio.File (nullable) 
 //
 // Gets the file that will be initially selected in
 // the file chooser dialog.
 func (self *FileDialogInstance) GetInitialFile() gio.File {
 	var carg0 *C.GtkFileDialog // in, none, converted
-	var cret  *C.GFile         // return, none, converted
+	var cret  *C.GFile         // return, none, converted, nullable
 
 	carg0 = (*C.GtkFileDialog)(UnsafeFileDialogToGlibNone(self))
 
@@ -22567,7 +22641,9 @@ func (self *FileDialogInstance) GetInitialFile() gio.File {
 
 	var goret gio.File
 
-	goret = gio.UnsafeFileFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gio.UnsafeFileFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -22575,13 +22651,13 @@ func (self *FileDialogInstance) GetInitialFile() gio.File {
 // GetInitialFolder wraps gtk_file_dialog_get_initial_folder
 // The function returns the following values:
 // 
-// 	- goret gio.File 
+// 	- goret gio.File (nullable) 
 //
 // Gets the folder that will be set as the
 // initial folder in the file chooser dialog.
 func (self *FileDialogInstance) GetInitialFolder() gio.File {
 	var carg0 *C.GtkFileDialog // in, none, converted
-	var cret  *C.GFile         // return, none, converted
+	var cret  *C.GFile         // return, none, converted, nullable
 
 	carg0 = (*C.GtkFileDialog)(UnsafeFileDialogToGlibNone(self))
 
@@ -22590,7 +22666,9 @@ func (self *FileDialogInstance) GetInitialFolder() gio.File {
 
 	var goret gio.File
 
-	goret = gio.UnsafeFileFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gio.UnsafeFileFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -22598,12 +22676,12 @@ func (self *FileDialogInstance) GetInitialFolder() gio.File {
 // GetInitialName wraps gtk_file_dialog_get_initial_name
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the name for the file that should be initially set.
 func (self *FileDialogInstance) GetInitialName() string {
 	var carg0 *C.GtkFileDialog // in, none, converted
-	var cret  *C.char          // return, none, string, casted *C.gchar
+	var cret  *C.char          // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkFileDialog)(UnsafeFileDialogToGlibNone(self))
 
@@ -22612,7 +22690,9 @@ func (self *FileDialogInstance) GetInitialName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -22713,7 +22793,7 @@ func (self *FileDialogInstance) Open(cancellable context.Context, parent Window,
 // 
 // The function returns the following values:
 // 
-// 	- goret gio.File 
+// 	- goret gio.File (nullable) 
 // 	- _goerr error (nullable): an error 
 //
 // Finishes the [method@Gtk.FileDialog.open] call and
@@ -22721,7 +22801,7 @@ func (self *FileDialogInstance) Open(cancellable context.Context, parent Window,
 func (self *FileDialogInstance) OpenFinish(result gio.AsyncResult) (gio.File, error) {
 	var carg0 *C.GtkFileDialog // in, none, converted
 	var carg1 *C.GAsyncResult  // in, none, converted
-	var cret  *C.GFile         // return, full, converted
+	var cret  *C.GFile         // return, full, converted, nullable
 	var _cerr *C.GError        // out, full, converted, nullable
 
 	carg0 = (*C.GtkFileDialog)(UnsafeFileDialogToGlibNone(self))
@@ -22734,7 +22814,9 @@ func (self *FileDialogInstance) OpenFinish(result gio.AsyncResult) (gio.File, er
 	var goret  gio.File
 	var _goerr error
 
-	goret = gio.UnsafeFileFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gio.UnsafeFileFromGlibFull(unsafe.Pointer(cret))
+	}
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -22792,7 +22874,7 @@ func (self *FileDialogInstance) OpenMultiple(cancellable context.Context, parent
 // 
 // The function returns the following values:
 // 
-// 	- goret gio.ListModel 
+// 	- goret gio.ListModel (nullable) 
 // 	- _goerr error (nullable): an error 
 //
 // Finishes the [method@Gtk.FileDialog.open] call and
@@ -22800,7 +22882,7 @@ func (self *FileDialogInstance) OpenMultiple(cancellable context.Context, parent
 func (self *FileDialogInstance) OpenMultipleFinish(result gio.AsyncResult) (gio.ListModel, error) {
 	var carg0 *C.GtkFileDialog // in, none, converted
 	var carg1 *C.GAsyncResult  // in, none, converted
-	var cret  *C.GListModel    // return, full, converted
+	var cret  *C.GListModel    // return, full, converted, nullable
 	var _cerr *C.GError        // out, full, converted, nullable
 
 	carg0 = (*C.GtkFileDialog)(UnsafeFileDialogToGlibNone(self))
@@ -22813,7 +22895,9 @@ func (self *FileDialogInstance) OpenMultipleFinish(result gio.AsyncResult) (gio.
 	var goret  gio.ListModel
 	var _goerr error
 
-	goret = gio.UnsafeListModelFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gio.UnsafeListModelFromGlibFull(unsafe.Pointer(cret))
+	}
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -22868,7 +22952,7 @@ func (self *FileDialogInstance) Save(cancellable context.Context, parent Window,
 // 
 // The function returns the following values:
 // 
-// 	- goret gio.File 
+// 	- goret gio.File (nullable) 
 // 	- _goerr error (nullable): an error 
 //
 // Finishes the [method@Gtk.FileDialog.save] call and
@@ -22876,7 +22960,7 @@ func (self *FileDialogInstance) Save(cancellable context.Context, parent Window,
 func (self *FileDialogInstance) SaveFinish(result gio.AsyncResult) (gio.File, error) {
 	var carg0 *C.GtkFileDialog // in, none, converted
 	var carg1 *C.GAsyncResult  // in, none, converted
-	var cret  *C.GFile         // return, full, converted
+	var cret  *C.GFile         // return, full, converted, nullable
 	var _cerr *C.GError        // out, full, converted, nullable
 
 	carg0 = (*C.GtkFileDialog)(UnsafeFileDialogToGlibNone(self))
@@ -22889,7 +22973,9 @@ func (self *FileDialogInstance) SaveFinish(result gio.AsyncResult) (gio.File, er
 	var goret  gio.File
 	var _goerr error
 
-	goret = gio.UnsafeFileFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gio.UnsafeFileFromGlibFull(unsafe.Pointer(cret))
+	}
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -22948,7 +23034,7 @@ func (self *FileDialogInstance) SelectFolder(cancellable context.Context, parent
 // 
 // The function returns the following values:
 // 
-// 	- goret gio.File 
+// 	- goret gio.File (nullable) 
 // 	- _goerr error (nullable): an error 
 //
 // Finishes the [method@Gtk.FileDialog.select_folder] call and
@@ -22956,7 +23042,7 @@ func (self *FileDialogInstance) SelectFolder(cancellable context.Context, parent
 func (self *FileDialogInstance) SelectFolderFinish(result gio.AsyncResult) (gio.File, error) {
 	var carg0 *C.GtkFileDialog // in, none, converted
 	var carg1 *C.GAsyncResult  // in, none, converted
-	var cret  *C.GFile         // return, full, converted
+	var cret  *C.GFile         // return, full, converted, nullable
 	var _cerr *C.GError        // out, full, converted, nullable
 
 	carg0 = (*C.GtkFileDialog)(UnsafeFileDialogToGlibNone(self))
@@ -22969,7 +23055,9 @@ func (self *FileDialogInstance) SelectFolderFinish(result gio.AsyncResult) (gio.
 	var goret  gio.File
 	var _goerr error
 
-	goret = gio.UnsafeFileFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gio.UnsafeFileFromGlibFull(unsafe.Pointer(cret))
+	}
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -23027,7 +23115,7 @@ func (self *FileDialogInstance) SelectMultipleFolders(cancellable context.Contex
 // 
 // The function returns the following values:
 // 
-// 	- goret gio.ListModel 
+// 	- goret gio.ListModel (nullable) 
 // 	- _goerr error (nullable): an error 
 //
 // Finishes the [method@Gtk.FileDialog.select_multiple_folders]
@@ -23035,7 +23123,7 @@ func (self *FileDialogInstance) SelectMultipleFolders(cancellable context.Contex
 func (self *FileDialogInstance) SelectMultipleFoldersFinish(result gio.AsyncResult) (gio.ListModel, error) {
 	var carg0 *C.GtkFileDialog // in, none, converted
 	var carg1 *C.GAsyncResult  // in, none, converted
-	var cret  *C.GListModel    // return, full, converted
+	var cret  *C.GListModel    // return, full, converted, nullable
 	var _cerr *C.GError        // out, full, converted, nullable
 
 	carg0 = (*C.GtkFileDialog)(UnsafeFileDialogToGlibNone(self))
@@ -23048,7 +23136,9 @@ func (self *FileDialogInstance) SelectMultipleFoldersFinish(result gio.AsyncResu
 	var goret  gio.ListModel
 	var _goerr error
 
-	goret = gio.UnsafeListModelFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gio.UnsafeListModelFromGlibFull(unsafe.Pointer(cret))
+	}
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -23282,7 +23372,7 @@ type FileLauncher interface {
 	// GetFile wraps gtk_file_launcher_get_file
 	// The function returns the following values:
 	// 
-	// 	- goret gio.File 
+	// 	- goret gio.File (nullable) 
 	//
 	// Gets the file that will be opened.
 	GetFile() gio.File
@@ -23465,12 +23555,12 @@ func (self *FileLauncherInstance) GetAlwaysAsk() bool {
 // GetFile wraps gtk_file_launcher_get_file
 // The function returns the following values:
 // 
-// 	- goret gio.File 
+// 	- goret gio.File (nullable) 
 //
 // Gets the file that will be opened.
 func (self *FileLauncherInstance) GetFile() gio.File {
 	var carg0 *C.GtkFileLauncher // in, none, converted
-	var cret  *C.GFile           // return, none, converted
+	var cret  *C.GFile           // return, none, converted, nullable
 
 	carg0 = (*C.GtkFileLauncher)(UnsafeFileLauncherToGlibNone(self))
 
@@ -23479,7 +23569,9 @@ func (self *FileLauncherInstance) GetFile() gio.File {
 
 	var goret gio.File
 
-	goret = gio.UnsafeFileFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gio.UnsafeFileFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -23948,7 +24040,7 @@ type FilterListModel interface {
 	// GetFilter wraps gtk_filter_list_model_get_filter
 	// The function returns the following values:
 	// 
-	// 	- goret Filter 
+	// 	- goret Filter (nullable) 
 	//
 	// Gets the `GtkFilter` currently set on @self.
 	GetFilter() Filter
@@ -23964,7 +24056,7 @@ type FilterListModel interface {
 	// GetModel wraps gtk_filter_list_model_get_model
 	// The function returns the following values:
 	// 
-	// 	- goret gio.ListModel 
+	// 	- goret gio.ListModel (nullable) 
 	//
 	// Gets the model currently filtered or %NULL if none.
 	GetModel() gio.ListModel
@@ -24112,12 +24204,12 @@ func NewFilterListModel(model gio.ListModel, filter Filter) FilterListModel {
 // GetFilter wraps gtk_filter_list_model_get_filter
 // The function returns the following values:
 // 
-// 	- goret Filter 
+// 	- goret Filter (nullable) 
 //
 // Gets the `GtkFilter` currently set on @self.
 func (self *FilterListModelInstance) GetFilter() Filter {
 	var carg0 *C.GtkFilterListModel // in, none, converted
-	var cret  *C.GtkFilter          // return, none, converted
+	var cret  *C.GtkFilter          // return, none, converted, nullable
 
 	carg0 = (*C.GtkFilterListModel)(UnsafeFilterListModelToGlibNone(self))
 
@@ -24126,7 +24218,9 @@ func (self *FilterListModelInstance) GetFilter() Filter {
 
 	var goret Filter
 
-	goret = UnsafeFilterFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeFilterFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -24160,12 +24254,12 @@ func (self *FilterListModelInstance) GetIncremental() bool {
 // GetModel wraps gtk_filter_list_model_get_model
 // The function returns the following values:
 // 
-// 	- goret gio.ListModel 
+// 	- goret gio.ListModel (nullable) 
 //
 // Gets the model currently filtered or %NULL if none.
 func (self *FilterListModelInstance) GetModel() gio.ListModel {
 	var carg0 *C.GtkFilterListModel // in, none, converted
-	var cret  *C.GListModel         // return, none, converted
+	var cret  *C.GListModel         // return, none, converted, nullable
 
 	carg0 = (*C.GtkFilterListModel)(UnsafeFilterListModelToGlibNone(self))
 
@@ -24174,7 +24268,9 @@ func (self *FilterListModelInstance) GetModel() gio.ListModel {
 
 	var goret gio.ListModel
 
-	goret = gio.UnsafeListModelFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gio.UnsafeListModelFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -24323,7 +24419,7 @@ type FlattenListModel interface {
 	// GetModel wraps gtk_flatten_list_model_get_model
 	// The function returns the following values:
 	// 
-	// 	- goret gio.ListModel 
+	// 	- goret gio.ListModel (nullable) 
 	//
 	// Gets the model set via gtk_flatten_list_model_set_model().
 	GetModel() gio.ListModel
@@ -24335,7 +24431,7 @@ type FlattenListModel interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret gio.ListModel 
+	// 	- goret gio.ListModel (nullable) 
 	//
 	// Returns the model containing the item at the given position.
 	GetModelForItem(uint) gio.ListModel
@@ -24418,12 +24514,12 @@ func NewFlattenListModel(model gio.ListModel) FlattenListModel {
 // GetModel wraps gtk_flatten_list_model_get_model
 // The function returns the following values:
 // 
-// 	- goret gio.ListModel 
+// 	- goret gio.ListModel (nullable) 
 //
 // Gets the model set via gtk_flatten_list_model_set_model().
 func (self *FlattenListModelInstance) GetModel() gio.ListModel {
 	var carg0 *C.GtkFlattenListModel // in, none, converted
-	var cret  *C.GListModel          // return, none, converted
+	var cret  *C.GListModel          // return, none, converted, nullable
 
 	carg0 = (*C.GtkFlattenListModel)(UnsafeFlattenListModelToGlibNone(self))
 
@@ -24432,7 +24528,9 @@ func (self *FlattenListModelInstance) GetModel() gio.ListModel {
 
 	var goret gio.ListModel
 
-	goret = gio.UnsafeListModelFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gio.UnsafeListModelFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -24445,13 +24543,13 @@ func (self *FlattenListModelInstance) GetModel() gio.ListModel {
 // 
 // The function returns the following values:
 // 
-// 	- goret gio.ListModel 
+// 	- goret gio.ListModel (nullable) 
 //
 // Returns the model containing the item at the given position.
 func (self *FlattenListModelInstance) GetModelForItem(position uint) gio.ListModel {
 	var carg0 *C.GtkFlattenListModel // in, none, converted
 	var carg1 C.guint                // in, none, casted
-	var cret  *C.GListModel          // return, none, converted
+	var cret  *C.GListModel          // return, none, converted, nullable
 
 	carg0 = (*C.GtkFlattenListModel)(UnsafeFlattenListModelToGlibNone(self))
 	carg1 = C.guint(position)
@@ -24462,7 +24560,9 @@ func (self *FlattenListModelInstance) GetModelForItem(position uint) gio.ListMod
 
 	var goret gio.ListModel
 
-	goret = gio.UnsafeListModelFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gio.UnsafeListModelFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -24534,7 +24634,7 @@ type FontDialog interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret pango.FontFace 
+	// 	- goret pango.FontFace (nullable) 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Finishes the [method@Gtk.FontDialog.choose_face] call
@@ -24561,7 +24661,7 @@ type FontDialog interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret pango.FontFamily 
+	// 	- goret pango.FontFamily (nullable) 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Finishes the [method@Gtk.FontDialog.choose_family] call
@@ -24629,7 +24729,7 @@ type FontDialog interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret *pango.FontDescription 
+	// 	- goret *pango.FontDescription (nullable) 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Finishes the [method@Gtk.FontDialog.choose_font] call
@@ -24638,7 +24738,7 @@ type FontDialog interface {
 	// GetFilter wraps gtk_font_dialog_get_filter
 	// The function returns the following values:
 	// 
-	// 	- goret Filter 
+	// 	- goret Filter (nullable) 
 	//
 	// Returns the filter that decides which fonts to display
 	// in the font chooser dialog.
@@ -24646,7 +24746,7 @@ type FontDialog interface {
 	// GetFontMap wraps gtk_font_dialog_get_font_map
 	// The function returns the following values:
 	// 
-	// 	- goret pango.FontMap 
+	// 	- goret pango.FontMap (nullable) 
 	//
 	// Returns the fontmap from which fonts are selected,
 	// or `NULL` for the default fontmap.
@@ -24654,7 +24754,7 @@ type FontDialog interface {
 	// GetLanguage wraps gtk_font_dialog_get_language
 	// The function returns the following values:
 	// 
-	// 	- goret *pango.Language 
+	// 	- goret *pango.Language (nullable) 
 	//
 	// Returns the language for which font features are applied.
 	GetLanguage() *pango.Language
@@ -24830,7 +24930,7 @@ func (self *FontDialogInstance) ChooseFace(cancellable context.Context, parent W
 // 
 // The function returns the following values:
 // 
-// 	- goret pango.FontFace 
+// 	- goret pango.FontFace (nullable) 
 // 	- _goerr error (nullable): an error 
 //
 // Finishes the [method@Gtk.FontDialog.choose_face] call
@@ -24838,7 +24938,7 @@ func (self *FontDialogInstance) ChooseFace(cancellable context.Context, parent W
 func (self *FontDialogInstance) ChooseFaceFinish(result gio.AsyncResult) (pango.FontFace, error) {
 	var carg0 *C.GtkFontDialog // in, none, converted
 	var carg1 *C.GAsyncResult  // in, none, converted
-	var cret  *C.PangoFontFace // return, full, converted
+	var cret  *C.PangoFontFace // return, full, converted, nullable
 	var _cerr *C.GError        // out, full, converted, nullable
 
 	carg0 = (*C.GtkFontDialog)(UnsafeFontDialogToGlibNone(self))
@@ -24851,7 +24951,9 @@ func (self *FontDialogInstance) ChooseFaceFinish(result gio.AsyncResult) (pango.
 	var goret  pango.FontFace
 	var _goerr error
 
-	goret = pango.UnsafeFontFaceFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = pango.UnsafeFontFaceFromGlibFull(unsafe.Pointer(cret))
+	}
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -24910,7 +25012,7 @@ func (self *FontDialogInstance) ChooseFamily(cancellable context.Context, parent
 // 
 // The function returns the following values:
 // 
-// 	- goret pango.FontFamily 
+// 	- goret pango.FontFamily (nullable) 
 // 	- _goerr error (nullable): an error 
 //
 // Finishes the [method@Gtk.FontDialog.choose_family] call
@@ -24922,7 +25024,7 @@ func (self *FontDialogInstance) ChooseFamily(cancellable context.Context, parent
 func (self *FontDialogInstance) ChooseFamilyFinish(result gio.AsyncResult) (pango.FontFamily, error) {
 	var carg0 *C.GtkFontDialog   // in, none, converted
 	var carg1 *C.GAsyncResult    // in, none, converted
-	var cret  *C.PangoFontFamily // return, full, converted
+	var cret  *C.PangoFontFamily // return, full, converted, nullable
 	var _cerr *C.GError          // out, full, converted, nullable
 
 	carg0 = (*C.GtkFontDialog)(UnsafeFontDialogToGlibNone(self))
@@ -24935,7 +25037,9 @@ func (self *FontDialogInstance) ChooseFamilyFinish(result gio.AsyncResult) (pang
 	var goret  pango.FontFamily
 	var _goerr error
 
-	goret = pango.UnsafeFontFamilyFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = pango.UnsafeFontFamilyFromGlibFull(unsafe.Pointer(cret))
+	}
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -25096,7 +25200,7 @@ func (self *FontDialogInstance) ChooseFontAndFeaturesFinish(result gio.AsyncResu
 // 
 // The function returns the following values:
 // 
-// 	- goret *pango.FontDescription 
+// 	- goret *pango.FontDescription (nullable) 
 // 	- _goerr error (nullable): an error 
 //
 // Finishes the [method@Gtk.FontDialog.choose_font] call
@@ -25104,7 +25208,7 @@ func (self *FontDialogInstance) ChooseFontAndFeaturesFinish(result gio.AsyncResu
 func (self *FontDialogInstance) ChooseFontFinish(result gio.AsyncResult) (*pango.FontDescription, error) {
 	var carg0 *C.GtkFontDialog        // in, none, converted
 	var carg1 *C.GAsyncResult         // in, none, converted
-	var cret  *C.PangoFontDescription // return, full, converted
+	var cret  *C.PangoFontDescription // return, full, converted, nullable
 	var _cerr *C.GError               // out, full, converted, nullable
 
 	carg0 = (*C.GtkFontDialog)(UnsafeFontDialogToGlibNone(self))
@@ -25117,7 +25221,9 @@ func (self *FontDialogInstance) ChooseFontFinish(result gio.AsyncResult) (*pango
 	var goret  *pango.FontDescription
 	var _goerr error
 
-	goret = pango.UnsafeFontDescriptionFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = pango.UnsafeFontDescriptionFromGlibFull(unsafe.Pointer(cret))
+	}
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -25128,13 +25234,13 @@ func (self *FontDialogInstance) ChooseFontFinish(result gio.AsyncResult) (*pango
 // GetFilter wraps gtk_font_dialog_get_filter
 // The function returns the following values:
 // 
-// 	- goret Filter 
+// 	- goret Filter (nullable) 
 //
 // Returns the filter that decides which fonts to display
 // in the font chooser dialog.
 func (self *FontDialogInstance) GetFilter() Filter {
 	var carg0 *C.GtkFontDialog // in, none, converted
-	var cret  *C.GtkFilter     // return, none, converted
+	var cret  *C.GtkFilter     // return, none, converted, nullable
 
 	carg0 = (*C.GtkFontDialog)(UnsafeFontDialogToGlibNone(self))
 
@@ -25143,7 +25249,9 @@ func (self *FontDialogInstance) GetFilter() Filter {
 
 	var goret Filter
 
-	goret = UnsafeFilterFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeFilterFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -25151,13 +25259,13 @@ func (self *FontDialogInstance) GetFilter() Filter {
 // GetFontMap wraps gtk_font_dialog_get_font_map
 // The function returns the following values:
 // 
-// 	- goret pango.FontMap 
+// 	- goret pango.FontMap (nullable) 
 //
 // Returns the fontmap from which fonts are selected,
 // or `NULL` for the default fontmap.
 func (self *FontDialogInstance) GetFontMap() pango.FontMap {
 	var carg0 *C.GtkFontDialog // in, none, converted
-	var cret  *C.PangoFontMap  // return, none, converted
+	var cret  *C.PangoFontMap  // return, none, converted, nullable
 
 	carg0 = (*C.GtkFontDialog)(UnsafeFontDialogToGlibNone(self))
 
@@ -25166,7 +25274,9 @@ func (self *FontDialogInstance) GetFontMap() pango.FontMap {
 
 	var goret pango.FontMap
 
-	goret = pango.UnsafeFontMapFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = pango.UnsafeFontMapFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -25174,12 +25284,12 @@ func (self *FontDialogInstance) GetFontMap() pango.FontMap {
 // GetLanguage wraps gtk_font_dialog_get_language
 // The function returns the following values:
 // 
-// 	- goret *pango.Language 
+// 	- goret *pango.Language (nullable) 
 //
 // Returns the language for which font features are applied.
 func (self *FontDialogInstance) GetLanguage() *pango.Language {
 	var carg0 *C.GtkFontDialog // in, none, converted
-	var cret  *C.PangoLanguage // return, full, converted
+	var cret  *C.PangoLanguage // return, full, converted, nullable
 
 	carg0 = (*C.GtkFontDialog)(UnsafeFontDialogToGlibNone(self))
 
@@ -25188,7 +25298,9 @@ func (self *FontDialogInstance) GetLanguage() *pango.Language {
 
 	var goret *pango.Language
 
-	goret = pango.UnsafeLanguageFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = pango.UnsafeLanguageFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -25490,7 +25602,7 @@ type Gesture interface {
 	// GetDevice wraps gtk_gesture_get_device
 	// The function returns the following values:
 	// 
-	// 	- goret gdk.Device 
+	// 	- goret gdk.Device (nullable) 
 	//
 	// Returns the logical `GdkDevice` that is currently operating
 	// on @gesture.
@@ -25507,7 +25619,7 @@ type Gesture interface {
 	// GetLastUpdatedSequence wraps gtk_gesture_get_last_updated_sequence
 	// The function returns the following values:
 	// 
-	// 	- goret *gdk.EventSequence 
+	// 	- goret *gdk.EventSequence (nullable) 
 	//
 	// Returns the `GdkEventSequence` that was last updated on @gesture.
 	GetLastUpdatedSequence() *gdk.EventSequence
@@ -25843,7 +25955,7 @@ func (gesture *GestureInstance) GetBoundingBoxCenter() (float64, float64, bool) 
 // GetDevice wraps gtk_gesture_get_device
 // The function returns the following values:
 // 
-// 	- goret gdk.Device 
+// 	- goret gdk.Device (nullable) 
 //
 // Returns the logical `GdkDevice` that is currently operating
 // on @gesture.
@@ -25851,7 +25963,7 @@ func (gesture *GestureInstance) GetBoundingBoxCenter() (float64, float64, bool) 
 // This returns %NULL if the gesture is not being interacted.
 func (gesture *GestureInstance) GetDevice() gdk.Device {
 	var carg0 *C.GtkGesture // in, none, converted
-	var cret  *C.GdkDevice  // return, none, converted
+	var cret  *C.GdkDevice  // return, none, converted, nullable
 
 	carg0 = (*C.GtkGesture)(UnsafeGestureToGlibNone(gesture))
 
@@ -25860,7 +25972,9 @@ func (gesture *GestureInstance) GetDevice() gdk.Device {
 
 	var goret gdk.Device
 
-	goret = gdk.UnsafeDeviceFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gdk.UnsafeDeviceFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -25897,12 +26011,12 @@ func (gesture *GestureInstance) GetGroup() []Gesture {
 // GetLastUpdatedSequence wraps gtk_gesture_get_last_updated_sequence
 // The function returns the following values:
 // 
-// 	- goret *gdk.EventSequence 
+// 	- goret *gdk.EventSequence (nullable) 
 //
 // Returns the `GdkEventSequence` that was last updated on @gesture.
 func (gesture *GestureInstance) GetLastUpdatedSequence() *gdk.EventSequence {
 	var carg0 *C.GtkGesture       // in, none, converted
-	var cret  *C.GdkEventSequence // return, none, converted
+	var cret  *C.GdkEventSequence // return, none, converted, nullable
 
 	carg0 = (*C.GtkGesture)(UnsafeGestureToGlibNone(gesture))
 
@@ -25911,7 +26025,9 @@ func (gesture *GestureInstance) GetLastUpdatedSequence() *gdk.EventSequence {
 
 	var goret *gdk.EventSequence
 
-	goret = gdk.UnsafeEventSequenceFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gdk.UnsafeEventSequenceFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -26496,7 +26612,7 @@ type GestureSingle interface {
 	// GetCurrentSequence wraps gtk_gesture_single_get_current_sequence
 	// The function returns the following values:
 	// 
-	// 	- goret *gdk.EventSequence 
+	// 	- goret *gdk.EventSequence (nullable) 
 	//
 	// Returns the event sequence currently interacting with @gesture.
 	// 
@@ -26645,7 +26761,7 @@ func (gesture *GestureSingleInstance) GetCurrentButton() uint {
 // GetCurrentSequence wraps gtk_gesture_single_get_current_sequence
 // The function returns the following values:
 // 
-// 	- goret *gdk.EventSequence 
+// 	- goret *gdk.EventSequence (nullable) 
 //
 // Returns the event sequence currently interacting with @gesture.
 // 
@@ -26653,7 +26769,7 @@ func (gesture *GestureSingleInstance) GetCurrentButton() uint {
 // returns %TRUE.
 func (gesture *GestureSingleInstance) GetCurrentSequence() *gdk.EventSequence {
 	var carg0 *C.GtkGestureSingle // in, none, converted
-	var cret  *C.GdkEventSequence // return, full, converted
+	var cret  *C.GdkEventSequence // return, full, converted, nullable
 
 	carg0 = (*C.GtkGestureSingle)(UnsafeGestureSingleToGlibNone(gesture))
 
@@ -26662,7 +26778,9 @@ func (gesture *GestureSingleInstance) GetCurrentSequence() *gdk.EventSequence {
 
 	var goret *gdk.EventSequence
 
-	goret = gdk.UnsafeEventSequenceFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gdk.UnsafeEventSequenceFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -26829,7 +26947,7 @@ type GestureStylus interface {
 	// GetDeviceTool wraps gtk_gesture_stylus_get_device_tool
 	// The function returns the following values:
 	// 
-	// 	- goret gdk.DeviceTool 
+	// 	- goret gdk.DeviceTool (nullable) 
 	//
 	// Returns the `GdkDeviceTool` currently driving input through this gesture.
 	// 
@@ -26979,7 +27097,7 @@ func (gesture *GestureStylusInstance) GetAxis(axis gdk.AxisUse) (float64, bool) 
 // GetDeviceTool wraps gtk_gesture_stylus_get_device_tool
 // The function returns the following values:
 // 
-// 	- goret gdk.DeviceTool 
+// 	- goret gdk.DeviceTool (nullable) 
 //
 // Returns the `GdkDeviceTool` currently driving input through this gesture.
 // 
@@ -26989,7 +27107,7 @@ func (gesture *GestureStylusInstance) GetAxis(axis gdk.AxisUse) (float64, bool) 
 // signals.
 func (gesture *GestureStylusInstance) GetDeviceTool() gdk.DeviceTool {
 	var carg0 *C.GtkGestureStylus // in, none, converted
-	var cret  *C.GdkDeviceTool    // return, none, converted
+	var cret  *C.GdkDeviceTool    // return, none, converted, nullable
 
 	carg0 = (*C.GtkGestureStylus)(UnsafeGestureStylusToGlibNone(gesture))
 
@@ -26998,7 +27116,9 @@ func (gesture *GestureStylusInstance) GetDeviceTool() gdk.DeviceTool {
 
 	var goret gdk.DeviceTool
 
-	goret = gdk.UnsafeDeviceToolFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gdk.UnsafeDeviceToolFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -28371,7 +28491,7 @@ type IconPaintable interface {
 	// GetFile wraps gtk_icon_paintable_get_file
 	// The function returns the following values:
 	// 
-	// 	- goret gio.File 
+	// 	- goret gio.File (nullable) 
 	//
 	// Gets the `GFile` that was used to load the icon.
 	// 
@@ -28380,7 +28500,7 @@ type IconPaintable interface {
 	// GetIconName wraps gtk_icon_paintable_get_icon_name
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Get the icon name being used for this icon.
 	// 
@@ -28484,14 +28604,14 @@ func NewIconPaintableForFile(file gio.File, size int, scale int) IconPaintable {
 // GetFile wraps gtk_icon_paintable_get_file
 // The function returns the following values:
 // 
-// 	- goret gio.File 
+// 	- goret gio.File (nullable) 
 //
 // Gets the `GFile` that was used to load the icon.
 // 
 // Returns %NULL if the icon was not loaded from a file.
 func (self *IconPaintableInstance) GetFile() gio.File {
 	var carg0 *C.GtkIconPaintable // in, none, converted
-	var cret  *C.GFile            // return, full, converted
+	var cret  *C.GFile            // return, full, converted, nullable
 
 	carg0 = (*C.GtkIconPaintable)(UnsafeIconPaintableToGlibNone(self))
 
@@ -28500,7 +28620,9 @@ func (self *IconPaintableInstance) GetFile() gio.File {
 
 	var goret gio.File
 
-	goret = gio.UnsafeFileFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gio.UnsafeFileFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -28508,7 +28630,7 @@ func (self *IconPaintableInstance) GetFile() gio.File {
 // GetIconName wraps gtk_icon_paintable_get_icon_name
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Get the icon name being used for this icon.
 // 
@@ -28521,7 +28643,7 @@ func (self *IconPaintableInstance) GetFile() gio.File {
 // returns %NULL.
 func (self *IconPaintableInstance) GetIconName() string {
 	var carg0 *C.GtkIconPaintable // in, none, converted
-	var cret  *C.char             // return, none, string, casted *C.gchar
+	var cret  *C.char             // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkIconPaintable)(UnsafeIconPaintableToGlibNone(self))
 
@@ -28530,7 +28652,9 @@ func (self *IconPaintableInstance) GetIconName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -28638,7 +28762,7 @@ type IconTheme interface {
 	// GetDisplay wraps gtk_icon_theme_get_display
 	// The function returns the following values:
 	// 
-	// 	- goret gdk.Display 
+	// 	- goret gdk.Display (nullable) 
 	//
 	// Returns the display that the `GtkIconTheme` object was
 	// created for.
@@ -28669,7 +28793,7 @@ type IconTheme interface {
 	// GetResourcePath wraps gtk_icon_theme_get_resource_path
 	// The function returns the following values:
 	// 
-	// 	- goret []string 
+	// 	- goret []string (nullable) 
 	//
 	// Gets the current resource path.
 	// 
@@ -28678,7 +28802,7 @@ type IconTheme interface {
 	// GetSearchPath wraps gtk_icon_theme_get_search_path
 	// The function returns the following values:
 	// 
-	// 	- goret []string 
+	// 	- goret []string (nullable) 
 	//
 	// Gets the current search path.
 	// 
@@ -28976,13 +29100,13 @@ func (self *IconThemeInstance) AddSearchPath(path string) {
 // GetDisplay wraps gtk_icon_theme_get_display
 // The function returns the following values:
 // 
-// 	- goret gdk.Display 
+// 	- goret gdk.Display (nullable) 
 //
 // Returns the display that the `GtkIconTheme` object was
 // created for.
 func (self *IconThemeInstance) GetDisplay() gdk.Display {
 	var carg0 *C.GtkIconTheme // in, none, converted
-	var cret  *C.GdkDisplay   // return, none, converted
+	var cret  *C.GdkDisplay   // return, none, converted, nullable
 
 	carg0 = (*C.GtkIconTheme)(UnsafeIconThemeToGlibNone(self))
 
@@ -28991,7 +29115,9 @@ func (self *IconThemeInstance) GetDisplay() gdk.Display {
 
 	var goret gdk.Display
 
-	goret = gdk.UnsafeDisplayFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gdk.UnsafeDisplayFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -29060,14 +29186,14 @@ func (self *IconThemeInstance) GetIconSizes(iconName string) []int {
 // GetResourcePath wraps gtk_icon_theme_get_resource_path
 // The function returns the following values:
 // 
-// 	- goret []string 
+// 	- goret []string (nullable) 
 //
 // Gets the current resource path.
 // 
 // See [method@Gtk.IconTheme.set_resource_path].
 func (self *IconThemeInstance) GetResourcePath() []string {
 	var carg0 *C.GtkIconTheme // in, none, converted
-	var cret  **C.char        // return, transfer: full, C Pointers: 2, Name: array[utf8], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
+	var cret  **C.char        // return, transfer: full, C Pointers: 2, Name: array[utf8], scope: , nullable, array (inner: *typesystem.StringPrimitive, zero-terminated)
 
 	carg0 = (*C.GtkIconTheme)(UnsafeIconThemeToGlibNone(self))
 
@@ -29086,14 +29212,14 @@ func (self *IconThemeInstance) GetResourcePath() []string {
 // GetSearchPath wraps gtk_icon_theme_get_search_path
 // The function returns the following values:
 // 
-// 	- goret []string 
+// 	- goret []string (nullable) 
 //
 // Gets the current search path.
 // 
 // See [method@Gtk.IconTheme.set_search_path].
 func (self *IconThemeInstance) GetSearchPath() []string {
 	var carg0 *C.GtkIconTheme // in, none, converted
-	var cret  **C.char        // return, transfer: full, C Pointers: 2, Name: array[filename], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
+	var cret  **C.char        // return, transfer: full, C Pointers: 2, Name: array[filename], scope: , nullable, array (inner: *typesystem.StringPrimitive, zero-terminated)
 
 	carg0 = (*C.GtkIconTheme)(UnsafeIconThemeToGlibNone(self))
 
@@ -29645,7 +29771,7 @@ type LayoutManager interface {
 	// GetWidget wraps gtk_layout_manager_get_widget
 	// The function returns the following values:
 	// 
-	// 	- goret Widget 
+	// 	- goret Widget (nullable) 
 	//
 	// Retrieves the `GtkWidget` using the given `GtkLayoutManager`.
 	GetWidget() Widget
@@ -29817,12 +29943,12 @@ func (manager *LayoutManagerInstance) GetRequestMode() SizeRequestMode {
 // GetWidget wraps gtk_layout_manager_get_widget
 // The function returns the following values:
 // 
-// 	- goret Widget 
+// 	- goret Widget (nullable) 
 //
 // Retrieves the `GtkWidget` using the given `GtkLayoutManager`.
 func (manager *LayoutManagerInstance) GetWidget() Widget {
 	var carg0 *C.GtkLayoutManager // in, none, converted
-	var cret  *C.GtkWidget        // return, none, converted
+	var cret  *C.GtkWidget        // return, none, converted, nullable
 
 	carg0 = (*C.GtkLayoutManager)(UnsafeLayoutManagerToGlibNone(manager))
 
@@ -29831,7 +29957,9 @@ func (manager *LayoutManagerInstance) GetWidget() Widget {
 
 	var goret Widget
 
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -29937,7 +30065,7 @@ type ListHeader interface {
 	// GetChild wraps gtk_list_header_get_child
 	// The function returns the following values:
 	// 
-	// 	- goret Widget 
+	// 	- goret Widget (nullable) 
 	//
 	// Gets the child previously set via gtk_list_header_set_child() or
 	// %NULL if none was set.
@@ -30022,13 +30150,13 @@ func UnsafeListHeaderToGlibFull(c ListHeader) unsafe.Pointer {
 // GetChild wraps gtk_list_header_get_child
 // The function returns the following values:
 // 
-// 	- goret Widget 
+// 	- goret Widget (nullable) 
 //
 // Gets the child previously set via gtk_list_header_set_child() or
 // %NULL if none was set.
 func (self *ListHeaderInstance) GetChild() Widget {
 	var carg0 *C.GtkListHeader // in, none, converted
-	var cret  *C.GtkWidget     // return, none, converted
+	var cret  *C.GtkWidget     // return, none, converted, nullable
 
 	carg0 = (*C.GtkListHeader)(UnsafeListHeaderToGlibNone(self))
 
@@ -30037,7 +30165,9 @@ func (self *ListHeaderInstance) GetChild() Widget {
 
 	var goret Widget
 
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -30195,7 +30325,7 @@ type ListItem interface {
 	// GetChild wraps gtk_list_item_get_child
 	// The function returns the following values:
 	// 
-	// 	- goret Widget 
+	// 	- goret Widget (nullable) 
 	//
 	// Gets the child previously set via gtk_list_item_set_child() or
 	// %NULL if none was set.
@@ -30426,13 +30556,13 @@ func (self *ListItemInstance) GetActivatable() bool {
 // GetChild wraps gtk_list_item_get_child
 // The function returns the following values:
 // 
-// 	- goret Widget 
+// 	- goret Widget (nullable) 
 //
 // Gets the child previously set via gtk_list_item_set_child() or
 // %NULL if none was set.
 func (self *ListItemInstance) GetChild() Widget {
 	var carg0 *C.GtkListItem // in, none, converted
-	var cret  *C.GtkWidget   // return, none, converted
+	var cret  *C.GtkWidget   // return, none, converted, nullable
 
 	carg0 = (*C.GtkListItem)(UnsafeListItemToGlibNone(self))
 
@@ -30441,7 +30571,9 @@ func (self *ListItemInstance) GetChild() Widget {
 
 	var goret Widget
 
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -30852,7 +30984,7 @@ type MapListModel interface {
 	// GetModel wraps gtk_map_list_model_get_model
 	// The function returns the following values:
 	// 
-	// 	- goret gio.ListModel 
+	// 	- goret gio.ListModel (nullable) 
 	//
 	// Gets the model that is currently being mapped or %NULL if none.
 	GetModel() gio.ListModel
@@ -30917,12 +31049,12 @@ func UnsafeMapListModelToGlibFull(c MapListModel) unsafe.Pointer {
 // GetModel wraps gtk_map_list_model_get_model
 // The function returns the following values:
 // 
-// 	- goret gio.ListModel 
+// 	- goret gio.ListModel (nullable) 
 //
 // Gets the model that is currently being mapped or %NULL if none.
 func (self *MapListModelInstance) GetModel() gio.ListModel {
 	var carg0 *C.GtkMapListModel // in, none, converted
-	var cret  *C.GListModel      // return, none, converted
+	var cret  *C.GListModel      // return, none, converted, nullable
 
 	carg0 = (*C.GtkMapListModel)(UnsafeMapListModelToGlibNone(self))
 
@@ -30931,7 +31063,9 @@ func (self *MapListModelInstance) GetModel() gio.ListModel {
 
 	var goret gio.ListModel
 
-	goret = gio.UnsafeListModelFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gio.UnsafeListModelFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -31057,7 +31191,7 @@ type MediaStream interface {
 	// GetError wraps gtk_media_stream_get_error
 	// The function returns the following values:
 	// 
-	// 	- goret error 
+	// 	- goret error (nullable) 
 	//
 	// If the stream is in an error state, returns the `GError`
 	// explaining that state.
@@ -31471,7 +31605,7 @@ func (self *MediaStreamInstance) GetEnded() bool {
 // GetError wraps gtk_media_stream_get_error
 // The function returns the following values:
 // 
-// 	- goret error 
+// 	- goret error (nullable) 
 //
 // If the stream is in an error state, returns the `GError`
 // explaining that state.
@@ -31489,7 +31623,7 @@ func (self *MediaStreamInstance) GetEnded() bool {
 // set, e.g. with [method@Gtk.MediaFile.set_file].
 func (self *MediaStreamInstance) GetError() error {
 	var carg0 *C.GtkMediaStream // in, none, converted
-	var cret  *C.GError         // return, none, converted
+	var cret  *C.GError         // return, none, converted, nullable
 
 	carg0 = (*C.GtkMediaStream)(UnsafeMediaStreamToGlibNone(self))
 
@@ -31498,7 +31632,9 @@ func (self *MediaStreamInstance) GetError() error {
 
 	var goret error
 
-	goret = glib.UnsafeErrorFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = glib.UnsafeErrorFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -32152,7 +32288,7 @@ type MountOperation interface {
 	// GetParent wraps gtk_mount_operation_get_parent
 	// The function returns the following values:
 	// 
-	// 	- goret Window 
+	// 	- goret Window (nullable) 
 	//
 	// Gets the transient parent used by the `GtkMountOperation`.
 	GetParent() Window
@@ -32274,12 +32410,12 @@ func (op *MountOperationInstance) GetDisplay() gdk.Display {
 // GetParent wraps gtk_mount_operation_get_parent
 // The function returns the following values:
 // 
-// 	- goret Window 
+// 	- goret Window (nullable) 
 //
 // Gets the transient parent used by the `GtkMountOperation`.
 func (op *MountOperationInstance) GetParent() Window {
 	var carg0 *C.GtkMountOperation // in, none, converted
-	var cret  *C.GtkWindow         // return, none, converted
+	var cret  *C.GtkWindow         // return, none, converted, nullable
 
 	carg0 = (*C.GtkMountOperation)(UnsafeMountOperationToGlibNone(op))
 
@@ -32288,7 +32424,9 @@ func (op *MountOperationInstance) GetParent() Window {
 
 	var goret Window
 
-	goret = UnsafeWindowFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWindowFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -32502,7 +32640,7 @@ type MultiSelection interface {
 	// GetModel wraps gtk_multi_selection_get_model
 	// The function returns the following values:
 	// 
-	// 	- goret gio.ListModel 
+	// 	- goret gio.ListModel (nullable) 
 	//
 	// Returns the underlying model of @self.
 	GetModel() gio.ListModel
@@ -32587,12 +32725,12 @@ func NewMultiSelection(model gio.ListModel) MultiSelection {
 // GetModel wraps gtk_multi_selection_get_model
 // The function returns the following values:
 // 
-// 	- goret gio.ListModel 
+// 	- goret gio.ListModel (nullable) 
 //
 // Returns the underlying model of @self.
 func (self *MultiSelectionInstance) GetModel() gio.ListModel {
 	var carg0 *C.GtkMultiSelection // in, none, converted
-	var cret  *C.GListModel        // return, none, converted
+	var cret  *C.GListModel        // return, none, converted, nullable
 
 	carg0 = (*C.GtkMultiSelection)(UnsafeMultiSelectionToGlibNone(self))
 
@@ -32601,7 +32739,9 @@ func (self *MultiSelectionInstance) GetModel() gio.ListModel {
 
 	var goret gio.ListModel
 
-	goret = gio.UnsafeListModelFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gio.UnsafeListModelFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -32684,14 +32824,14 @@ type NativeDialog interface {
 	// GetTitle wraps gtk_native_dialog_get_title
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the title of the `GtkNativeDialog`.
 	GetTitle() string
 	// GetTransientFor wraps gtk_native_dialog_get_transient_for
 	// The function returns the following values:
 	// 
-	// 	- goret Window 
+	// 	- goret Window (nullable) 
 	//
 	// Fetches the transient parent for this window.
 	GetTransientFor() Window
@@ -32852,12 +32992,12 @@ func (self *NativeDialogInstance) GetModal() bool {
 // GetTitle wraps gtk_native_dialog_get_title
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the title of the `GtkNativeDialog`.
 func (self *NativeDialogInstance) GetTitle() string {
 	var carg0 *C.GtkNativeDialog // in, none, converted
-	var cret  *C.char            // return, none, string, casted *C.gchar
+	var cret  *C.char            // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkNativeDialog)(UnsafeNativeDialogToGlibNone(self))
 
@@ -32866,7 +33006,9 @@ func (self *NativeDialogInstance) GetTitle() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -32874,12 +33016,12 @@ func (self *NativeDialogInstance) GetTitle() string {
 // GetTransientFor wraps gtk_native_dialog_get_transient_for
 // The function returns the following values:
 // 
-// 	- goret Window 
+// 	- goret Window (nullable) 
 //
 // Fetches the transient parent for this window.
 func (self *NativeDialogInstance) GetTransientFor() Window {
 	var carg0 *C.GtkNativeDialog // in, none, converted
-	var cret  *C.GtkWindow       // return, none, converted
+	var cret  *C.GtkWindow       // return, none, converted, nullable
 
 	carg0 = (*C.GtkNativeDialog)(UnsafeNativeDialogToGlibNone(self))
 
@@ -32888,7 +33030,9 @@ func (self *NativeDialogInstance) GetTransientFor() Window {
 
 	var goret Window
 
-	goret = UnsafeWindowFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWindowFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -33065,7 +33209,7 @@ type NoSelection interface {
 	// GetModel wraps gtk_no_selection_get_model
 	// The function returns the following values:
 	// 
-	// 	- goret gio.ListModel 
+	// 	- goret gio.ListModel (nullable) 
 	//
 	// Gets the model that @self is wrapping.
 	GetModel() gio.ListModel
@@ -33150,12 +33294,12 @@ func NewNoSelection(model gio.ListModel) NoSelection {
 // GetModel wraps gtk_no_selection_get_model
 // The function returns the following values:
 // 
-// 	- goret gio.ListModel 
+// 	- goret gio.ListModel (nullable) 
 //
 // Gets the model that @self is wrapping.
 func (self *NoSelectionInstance) GetModel() gio.ListModel {
 	var carg0 *C.GtkNoSelection // in, none, converted
-	var cret  *C.GListModel     // return, none, converted
+	var cret  *C.GListModel     // return, none, converted, nullable
 
 	carg0 = (*C.GtkNoSelection)(UnsafeNoSelectionToGlibNone(self))
 
@@ -33164,7 +33308,9 @@ func (self *NoSelectionInstance) GetModel() gio.ListModel {
 
 	var goret gio.ListModel
 
-	goret = gio.UnsafeListModelFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gio.UnsafeListModelFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -35065,7 +35211,7 @@ type RecentManager interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret *RecentInfo 
+	// 	- goret *RecentInfo (nullable) 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Searches for a URI inside the recently used resources list, and
@@ -35369,7 +35515,7 @@ func (manager *RecentManagerInstance) HasItem(uri string) bool {
 // 
 // The function returns the following values:
 // 
-// 	- goret *RecentInfo 
+// 	- goret *RecentInfo (nullable) 
 // 	- _goerr error (nullable): an error 
 //
 // Searches for a URI inside the recently used resources list, and
@@ -35378,7 +35524,7 @@ func (manager *RecentManagerInstance) HasItem(uri string) bool {
 func (manager *RecentManagerInstance) LookupItem(uri string) (*RecentInfo, error) {
 	var carg0 *C.GtkRecentManager // in, none, converted
 	var carg1 *C.char             // in, none, string, casted *C.gchar
-	var cret  *C.GtkRecentInfo    // return, full, converted
+	var cret  *C.GtkRecentInfo    // return, full, converted, nullable
 	var _cerr *C.GError           // out, full, converted, nullable
 
 	carg0 = (*C.GtkRecentManager)(UnsafeRecentManagerToGlibNone(manager))
@@ -35392,7 +35538,9 @@ func (manager *RecentManagerInstance) LookupItem(uri string) (*RecentInfo, error
 	var goret  *RecentInfo
 	var _goerr error
 
-	goret = UnsafeRecentInfoFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeRecentInfoFromGlibFull(unsafe.Pointer(cret))
+	}
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -35550,7 +35698,7 @@ type SelectionFilterModel interface {
 	// GetModel wraps gtk_selection_filter_model_get_model
 	// The function returns the following values:
 	// 
-	// 	- goret SelectionModel 
+	// 	- goret SelectionModel (nullable) 
 	//
 	// Gets the model currently filtered or %NULL if none.
 	GetModel() SelectionModel
@@ -35639,12 +35787,12 @@ func NewSelectionFilterModel(model SelectionModel) SelectionFilterModel {
 // GetModel wraps gtk_selection_filter_model_get_model
 // The function returns the following values:
 // 
-// 	- goret SelectionModel 
+// 	- goret SelectionModel (nullable) 
 //
 // Gets the model currently filtered or %NULL if none.
 func (self *SelectionFilterModelInstance) GetModel() SelectionModel {
 	var carg0 *C.GtkSelectionFilterModel // in, none, converted
-	var cret  *C.GtkSelectionModel       // return, none, converted
+	var cret  *C.GtkSelectionModel       // return, none, converted, nullable
 
 	carg0 = (*C.GtkSelectionFilterModel)(UnsafeSelectionFilterModelToGlibNone(self))
 
@@ -35653,7 +35801,9 @@ func (self *SelectionFilterModelInstance) GetModel() SelectionModel {
 
 	var goret SelectionModel
 
-	goret = UnsafeSelectionModelFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeSelectionModelFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -35777,20 +35927,22 @@ func UnsafeSettingsToGlibFull(c Settings) unsafe.Pointer {
 // SettingsGetDefault wraps gtk_settings_get_default
 // The function returns the following values:
 // 
-// 	- goret Settings 
+// 	- goret Settings (nullable) 
 //
 // Gets the `GtkSettings` object for the default display, creating
 // it if necessary.
 // 
 // See [func@Gtk.Settings.get_for_display].
 func SettingsGetDefault() Settings {
-	var cret *C.GtkSettings // return, none, converted
+	var cret *C.GtkSettings // return, none, converted, nullable
 
 	cret = C.gtk_settings_get_default()
 
 	var goret Settings
 
-	goret = UnsafeSettingsFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeSettingsFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -35878,14 +36030,14 @@ type Shortcut interface {
 	// GetAction wraps gtk_shortcut_get_action
 	// The function returns the following values:
 	// 
-	// 	- goret ShortcutAction 
+	// 	- goret ShortcutAction (nullable) 
 	//
 	// Gets the action that is activated by this shortcut.
 	GetAction() ShortcutAction
 	// GetTrigger wraps gtk_shortcut_get_trigger
 	// The function returns the following values:
 	// 
-	// 	- goret ShortcutTrigger 
+	// 	- goret ShortcutTrigger (nullable) 
 	//
 	// Gets the trigger used to trigger @self.
 	GetTrigger() ShortcutTrigger
@@ -35983,12 +36135,12 @@ func NewShortcut(trigger ShortcutTrigger, action ShortcutAction) Shortcut {
 // GetAction wraps gtk_shortcut_get_action
 // The function returns the following values:
 // 
-// 	- goret ShortcutAction 
+// 	- goret ShortcutAction (nullable) 
 //
 // Gets the action that is activated by this shortcut.
 func (self *ShortcutInstance) GetAction() ShortcutAction {
 	var carg0 *C.GtkShortcut       // in, none, converted
-	var cret  *C.GtkShortcutAction // return, none, converted
+	var cret  *C.GtkShortcutAction // return, none, converted, nullable
 
 	carg0 = (*C.GtkShortcut)(UnsafeShortcutToGlibNone(self))
 
@@ -35997,7 +36149,9 @@ func (self *ShortcutInstance) GetAction() ShortcutAction {
 
 	var goret ShortcutAction
 
-	goret = UnsafeShortcutActionFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeShortcutActionFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -36005,12 +36159,12 @@ func (self *ShortcutInstance) GetAction() ShortcutAction {
 // GetTrigger wraps gtk_shortcut_get_trigger
 // The function returns the following values:
 // 
-// 	- goret ShortcutTrigger 
+// 	- goret ShortcutTrigger (nullable) 
 //
 // Gets the trigger used to trigger @self.
 func (self *ShortcutInstance) GetTrigger() ShortcutTrigger {
 	var carg0 *C.GtkShortcut        // in, none, converted
-	var cret  *C.GtkShortcutTrigger // return, none, converted
+	var cret  *C.GtkShortcutTrigger // return, none, converted, nullable
 
 	carg0 = (*C.GtkShortcut)(UnsafeShortcutToGlibNone(self))
 
@@ -36019,7 +36173,9 @@ func (self *ShortcutInstance) GetTrigger() ShortcutTrigger {
 
 	var goret ShortcutTrigger
 
-	goret = UnsafeShortcutTriggerFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeShortcutTriggerFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -36163,7 +36319,7 @@ func UnsafeShortcutActionToGlibFull(c ShortcutAction) unsafe.Pointer {
 // 
 // The function returns the following values:
 // 
-// 	- goret ShortcutAction 
+// 	- goret ShortcutAction (nullable) 
 //
 // Tries to parse the given string into an action.
 // 
@@ -36179,7 +36335,7 @@ func UnsafeShortcutActionToGlibFull(c ShortcutAction) unsafe.Pointer {
 // - `signal(NAME)`, for a `GtkSignalAction` for the signal `NAME`
 func ShortcutActionParseString(str string) ShortcutAction {
 	var carg1 *C.char              // in, none, string, casted *C.gchar
-	var cret  *C.GtkShortcutAction // return, full, converted
+	var cret  *C.GtkShortcutAction // return, full, converted, nullable
 
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(str)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -36189,7 +36345,9 @@ func ShortcutActionParseString(str string) ShortcutAction {
 
 	var goret ShortcutAction
 
-	goret = UnsafeShortcutActionFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeShortcutActionFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -36692,7 +36850,7 @@ func UnsafeShortcutTriggerToGlibFull(c ShortcutTrigger) unsafe.Pointer {
 // 
 // The function returns the following values:
 // 
-// 	- goret ShortcutTrigger 
+// 	- goret ShortcutTrigger (nullable) 
 //
 // Tries to parse the given string into a trigger.
 // 
@@ -36712,7 +36870,7 @@ func UnsafeShortcutTriggerToGlibFull(c ShortcutTrigger) unsafe.Pointer {
 // `&lt;` and `&amp;gt;` instead of `&gt;`.
 func ShortcutTriggerParseString(str string) ShortcutTrigger {
 	var carg1 *C.char               // in, none, string, casted *C.gchar
-	var cret  *C.GtkShortcutTrigger // return, full, converted
+	var cret  *C.GtkShortcutTrigger // return, full, converted, nullable
 
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(str)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -36722,7 +36880,9 @@ func ShortcutTriggerParseString(str string) ShortcutTrigger {
 
 	var goret ShortcutTrigger
 
-	goret = UnsafeShortcutTriggerFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeShortcutTriggerFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -37154,7 +37314,7 @@ type SingleSelection interface {
 	// GetModel wraps gtk_single_selection_get_model
 	// The function returns the following values:
 	// 
-	// 	- goret gio.ListModel 
+	// 	- goret gio.ListModel (nullable) 
 	//
 	// Gets the model that @self is wrapping.
 	GetModel() gio.ListModel
@@ -37339,12 +37499,12 @@ func (self *SingleSelectionInstance) GetCanUnselect() bool {
 // GetModel wraps gtk_single_selection_get_model
 // The function returns the following values:
 // 
-// 	- goret gio.ListModel 
+// 	- goret gio.ListModel (nullable) 
 //
 // Gets the model that @self is wrapping.
 func (self *SingleSelectionInstance) GetModel() gio.ListModel {
 	var carg0 *C.GtkSingleSelection // in, none, converted
-	var cret  *C.GListModel         // return, none, converted
+	var cret  *C.GListModel         // return, none, converted, nullable
 
 	carg0 = (*C.GtkSingleSelection)(UnsafeSingleSelectionToGlibNone(self))
 
@@ -37353,7 +37513,9 @@ func (self *SingleSelectionInstance) GetModel() gio.ListModel {
 
 	var goret gio.ListModel
 
-	goret = gio.UnsafeListModelFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gio.UnsafeListModelFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -37829,7 +37991,7 @@ type SliceListModel interface {
 	// GetModel wraps gtk_slice_list_model_get_model
 	// The function returns the following values:
 	// 
-	// 	- goret gio.ListModel 
+	// 	- goret gio.ListModel (nullable) 
 	//
 	// Gets the model that is currently being used or %NULL if none.
 	GetModel() gio.ListModel
@@ -37962,12 +38124,12 @@ func NewSliceListModel(model gio.ListModel, offset uint, size uint) SliceListMod
 // GetModel wraps gtk_slice_list_model_get_model
 // The function returns the following values:
 // 
-// 	- goret gio.ListModel 
+// 	- goret gio.ListModel (nullable) 
 //
 // Gets the model that is currently being used or %NULL if none.
 func (self *SliceListModelInstance) GetModel() gio.ListModel {
 	var carg0 *C.GtkSliceListModel // in, none, converted
-	var cret  *C.GListModel        // return, none, converted
+	var cret  *C.GListModel        // return, none, converted, nullable
 
 	carg0 = (*C.GtkSliceListModel)(UnsafeSliceListModelToGlibNone(self))
 
@@ -37976,7 +38138,9 @@ func (self *SliceListModelInstance) GetModel() gio.ListModel {
 
 	var goret gio.ListModel
 
-	goret = gio.UnsafeListModelFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gio.UnsafeListModelFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -38560,7 +38724,7 @@ type Snapshot interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret gdk.Paintable 
+	// 	- goret gdk.Paintable (nullable) 
 	//
 	// Returns a paintable encapsulating the render node
 	// that was constructed by @snapshot.
@@ -39643,7 +39807,7 @@ func (snapshot *SnapshotInstance) Scale3D(factorX float32, factorY float32, fact
 // 
 // The function returns the following values:
 // 
-// 	- goret gdk.Paintable 
+// 	- goret gdk.Paintable (nullable) 
 //
 // Returns a paintable encapsulating the render node
 // that was constructed by @snapshot.
@@ -39654,7 +39818,7 @@ func (snapshot *SnapshotInstance) Scale3D(factorX float32, factorY float32, fact
 func (snapshot *SnapshotInstance) ToPaintable(size *graphene.Size) gdk.Paintable {
 	var carg0 *C.GtkSnapshot     // in, none, converted, casted *C.Snapshot
 	var carg1 *C.graphene_size_t // in, none, converted, nullable
-	var cret  *C.GdkPaintable    // return, full, converted
+	var cret  *C.GdkPaintable    // return, full, converted, nullable
 
 	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	if size != nil {
@@ -39667,7 +39831,9 @@ func (snapshot *SnapshotInstance) ToPaintable(size *graphene.Size) gdk.Paintable
 
 	var goret gdk.Paintable
 
-	goret = gdk.UnsafePaintableFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gdk.UnsafePaintableFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -39805,7 +39971,7 @@ type SortListModel interface {
 	// GetModel wraps gtk_sort_list_model_get_model
 	// The function returns the following values:
 	// 
-	// 	- goret gio.ListModel 
+	// 	- goret gio.ListModel (nullable) 
 	//
 	// Gets the model currently sorted or %NULL if none.
 	GetModel() gio.ListModel
@@ -39835,7 +40001,7 @@ type SortListModel interface {
 	// GetSectionSorter wraps gtk_sort_list_model_get_section_sorter
 	// The function returns the following values:
 	// 
-	// 	- goret Sorter 
+	// 	- goret Sorter (nullable) 
 	//
 	// Gets the section sorter that is used to sort items of @self into
 	// sections.
@@ -39843,7 +40009,7 @@ type SortListModel interface {
 	// GetSorter wraps gtk_sort_list_model_get_sorter
 	// The function returns the following values:
 	// 
-	// 	- goret Sorter 
+	// 	- goret Sorter (nullable) 
 	//
 	// Gets the sorter that is used to sort @self.
 	GetSorter() Sorter
@@ -39999,12 +40165,12 @@ func (self *SortListModelInstance) GetIncremental() bool {
 // GetModel wraps gtk_sort_list_model_get_model
 // The function returns the following values:
 // 
-// 	- goret gio.ListModel 
+// 	- goret gio.ListModel (nullable) 
 //
 // Gets the model currently sorted or %NULL if none.
 func (self *SortListModelInstance) GetModel() gio.ListModel {
 	var carg0 *C.GtkSortListModel // in, none, converted
-	var cret  *C.GListModel       // return, none, converted
+	var cret  *C.GListModel       // return, none, converted, nullable
 
 	carg0 = (*C.GtkSortListModel)(UnsafeSortListModelToGlibNone(self))
 
@@ -40013,7 +40179,9 @@ func (self *SortListModelInstance) GetModel() gio.ListModel {
 
 	var goret gio.ListModel
 
-	goret = gio.UnsafeListModelFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gio.UnsafeListModelFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -40059,13 +40227,13 @@ func (self *SortListModelInstance) GetPending() uint {
 // GetSectionSorter wraps gtk_sort_list_model_get_section_sorter
 // The function returns the following values:
 // 
-// 	- goret Sorter 
+// 	- goret Sorter (nullable) 
 //
 // Gets the section sorter that is used to sort items of @self into
 // sections.
 func (self *SortListModelInstance) GetSectionSorter() Sorter {
 	var carg0 *C.GtkSortListModel // in, none, converted
-	var cret  *C.GtkSorter        // return, none, converted
+	var cret  *C.GtkSorter        // return, none, converted, nullable
 
 	carg0 = (*C.GtkSortListModel)(UnsafeSortListModelToGlibNone(self))
 
@@ -40074,7 +40242,9 @@ func (self *SortListModelInstance) GetSectionSorter() Sorter {
 
 	var goret Sorter
 
-	goret = UnsafeSorterFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeSorterFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -40082,12 +40252,12 @@ func (self *SortListModelInstance) GetSectionSorter() Sorter {
 // GetSorter wraps gtk_sort_list_model_get_sorter
 // The function returns the following values:
 // 
-// 	- goret Sorter 
+// 	- goret Sorter (nullable) 
 //
 // Gets the sorter that is used to sort @self.
 func (self *SortListModelInstance) GetSorter() Sorter {
 	var carg0 *C.GtkSortListModel // in, none, converted
-	var cret  *C.GtkSorter        // return, none, converted
+	var cret  *C.GtkSorter        // return, none, converted, nullable
 
 	carg0 = (*C.GtkSortListModel)(UnsafeSortListModelToGlibNone(self))
 
@@ -40096,7 +40266,9 @@ func (self *SortListModelInstance) GetSorter() Sorter {
 
 	var goret Sorter
 
-	goret = UnsafeSorterFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeSorterFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -40413,14 +40585,14 @@ type StackPage interface {
 	// GetIconName wraps gtk_stack_page_get_icon_name
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Returns the icon name of the page.
 	GetIconName() string
 	// GetName wraps gtk_stack_page_get_name
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Returns the name of the page.
 	GetName() string
@@ -40434,7 +40606,7 @@ type StackPage interface {
 	// GetTitle wraps gtk_stack_page_get_title
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the page title.
 	GetTitle() string
@@ -40564,12 +40736,12 @@ func (self *StackPageInstance) GetChild() Widget {
 // GetIconName wraps gtk_stack_page_get_icon_name
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Returns the icon name of the page.
 func (self *StackPageInstance) GetIconName() string {
 	var carg0 *C.GtkStackPage // in, none, converted
-	var cret  *C.char         // return, none, string, casted *C.gchar
+	var cret  *C.char         // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkStackPage)(UnsafeStackPageToGlibNone(self))
 
@@ -40578,7 +40750,9 @@ func (self *StackPageInstance) GetIconName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -40586,12 +40760,12 @@ func (self *StackPageInstance) GetIconName() string {
 // GetName wraps gtk_stack_page_get_name
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Returns the name of the page.
 func (self *StackPageInstance) GetName() string {
 	var carg0 *C.GtkStackPage // in, none, converted
-	var cret  *C.char         // return, none, string, casted *C.gchar
+	var cret  *C.char         // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkStackPage)(UnsafeStackPageToGlibNone(self))
 
@@ -40600,7 +40774,9 @@ func (self *StackPageInstance) GetName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -40632,12 +40808,12 @@ func (self *StackPageInstance) GetNeedsAttention() bool {
 // GetTitle wraps gtk_stack_page_get_title
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the page title.
 func (self *StackPageInstance) GetTitle() string {
 	var carg0 *C.GtkStackPage // in, none, converted
-	var cret  *C.char         // return, none, string, casted *C.gchar
+	var cret  *C.char         // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkStackPage)(UnsafeStackPageToGlibNone(self))
 
@@ -40646,7 +40822,9 @@ func (self *StackPageInstance) GetTitle() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -40869,7 +41047,7 @@ type StringFilter interface {
 	// GetSearch wraps gtk_string_filter_get_search
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the search term.
 	GetSearch() string
@@ -40985,12 +41163,12 @@ func (self *StringFilterInstance) GetMatchMode() StringFilterMatchMode {
 // GetSearch wraps gtk_string_filter_get_search
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the search term.
 func (self *StringFilterInstance) GetSearch() string {
 	var carg0 *C.GtkStringFilter // in, none, converted
-	var cret  *C.char            // return, none, string, casted *C.gchar
+	var cret  *C.char            // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkStringFilter)(UnsafeStringFilterToGlibNone(self))
 
@@ -40999,7 +41177,9 @@ func (self *StringFilterInstance) GetSearch() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -41130,7 +41310,7 @@ type StringList interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the string that is at @position in @self.
 	// 
@@ -41286,7 +41466,7 @@ func (self *StringListInstance) Append(str string) {
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the string that is at @position in @self.
 // 
@@ -41297,7 +41477,7 @@ func (self *StringListInstance) Append(str string) {
 func (self *StringListInstance) GetString(position uint) string {
 	var carg0 *C.GtkStringList // in, none, converted
 	var carg1 C.guint          // in, none, casted
-	var cret  *C.char          // return, none, string, casted *C.gchar
+	var cret  *C.char          // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkStringList)(UnsafeStringListToGlibNone(self))
 	carg1 = C.guint(position)
@@ -41308,7 +41488,9 @@ func (self *StringListInstance) GetString(position uint) string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -42222,7 +42404,7 @@ type TextBuffer interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret TextMark 
+	// 	- goret TextMark (nullable) 
 	//
 	// Returns the mark named @name in buffer @buffer, or %NULL if no such
 	// mark exists in the buffer.
@@ -44062,14 +44244,14 @@ func (buffer *TextBufferInstance) GetLineCount() int {
 // 
 // The function returns the following values:
 // 
-// 	- goret TextMark 
+// 	- goret TextMark (nullable) 
 //
 // Returns the mark named @name in buffer @buffer, or %NULL if no such
 // mark exists in the buffer.
 func (buffer *TextBufferInstance) GetMark(name string) TextMark {
 	var carg0 *C.GtkTextBuffer // in, none, converted
 	var carg1 *C.char          // in, none, string, casted *C.gchar
-	var cret  *C.GtkTextMark   // return, none, converted
+	var cret  *C.GtkTextMark   // return, none, converted, nullable
 
 	carg0 = (*C.GtkTextBuffer)(UnsafeTextBufferToGlibNone(buffer))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
@@ -44081,7 +44263,9 @@ func (buffer *TextBufferInstance) GetMark(name string) TextMark {
 
 	var goret TextMark
 
-	goret = UnsafeTextMarkFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeTextMarkFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -45591,7 +45775,7 @@ type TextMark interface {
 	// GetBuffer wraps gtk_text_mark_get_buffer
 	// The function returns the following values:
 	// 
-	// 	- goret TextBuffer 
+	// 	- goret TextBuffer (nullable) 
 	//
 	// Gets the buffer this mark is located inside.
 	// 
@@ -45617,7 +45801,7 @@ type TextMark interface {
 	// GetName wraps gtk_text_mark_get_name
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Returns the mark name.
 	// 
@@ -45732,14 +45916,14 @@ func NewTextMark(name string, leftGravity bool) TextMark {
 // GetBuffer wraps gtk_text_mark_get_buffer
 // The function returns the following values:
 // 
-// 	- goret TextBuffer 
+// 	- goret TextBuffer (nullable) 
 //
 // Gets the buffer this mark is located inside.
 // 
 // Returns %NULL if the mark is deleted.
 func (mark *TextMarkInstance) GetBuffer() TextBuffer {
 	var carg0 *C.GtkTextMark   // in, none, converted
-	var cret  *C.GtkTextBuffer // return, none, converted
+	var cret  *C.GtkTextBuffer // return, none, converted, nullable
 
 	carg0 = (*C.GtkTextMark)(UnsafeTextMarkToGlibNone(mark))
 
@@ -45748,7 +45932,9 @@ func (mark *TextMarkInstance) GetBuffer() TextBuffer {
 
 	var goret TextBuffer
 
-	goret = UnsafeTextBufferFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeTextBufferFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -45807,14 +45993,14 @@ func (mark *TextMarkInstance) GetLeftGravity() bool {
 // GetName wraps gtk_text_mark_get_name
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Returns the mark name.
 // 
 // Returns %NULL for anonymous marks.
 func (mark *TextMarkInstance) GetName() string {
 	var carg0 *C.GtkTextMark // in, none, converted
-	var cret  *C.char        // return, none, string, casted *C.gchar
+	var cret  *C.char        // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkTextMark)(UnsafeTextMarkToGlibNone(mark))
 
@@ -45823,7 +46009,9 @@ func (mark *TextMarkInstance) GetName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -46177,7 +46365,7 @@ type TextTagTable interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret TextTag 
+	// 	- goret TextTag (nullable) 
 	//
 	// Look up a named tag.
 	Lookup(string) TextTag
@@ -46357,13 +46545,13 @@ func (table *TextTagTableInstance) GetSize() int {
 // 
 // The function returns the following values:
 // 
-// 	- goret TextTag 
+// 	- goret TextTag (nullable) 
 //
 // Look up a named tag.
 func (table *TextTagTableInstance) Lookup(name string) TextTag {
 	var carg0 *C.GtkTextTagTable // in, none, converted
 	var carg1 *C.char            // in, none, string, casted *C.gchar
-	var cret  *C.GtkTextTag      // return, none, converted
+	var cret  *C.GtkTextTag      // return, none, converted, nullable
 
 	carg0 = (*C.GtkTextTagTable)(UnsafeTextTagTableToGlibNone(table))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
@@ -46375,7 +46563,9 @@ func (table *TextTagTableInstance) Lookup(name string) TextTag {
 
 	var goret TextTag
 
-	goret = UnsafeTextTagFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeTextTagFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -46789,7 +46979,7 @@ type TreeListModel interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret TreeListRow 
+	// 	- goret TreeListRow (nullable) 
 	//
 	// Gets the row item corresponding to the child at index @position for
 	// @self's root model.
@@ -46830,7 +47020,7 @@ type TreeListModel interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret TreeListRow 
+	// 	- goret TreeListRow (nullable) 
 	//
 	// Gets the row object for the given row.
 	// 
@@ -46937,7 +47127,7 @@ func (self *TreeListModelInstance) GetAutoexpand() bool {
 // 
 // The function returns the following values:
 // 
-// 	- goret TreeListRow 
+// 	- goret TreeListRow (nullable) 
 //
 // Gets the row item corresponding to the child at index @position for
 // @self's root model.
@@ -46949,7 +47139,7 @@ func (self *TreeListModelInstance) GetAutoexpand() bool {
 func (self *TreeListModelInstance) GetChildRow(position uint) TreeListRow {
 	var carg0 *C.GtkTreeListModel // in, none, converted
 	var carg1 C.guint             // in, none, casted
-	var cret  *C.GtkTreeListRow   // return, full, converted
+	var cret  *C.GtkTreeListRow   // return, full, converted, nullable
 
 	carg0 = (*C.GtkTreeListModel)(UnsafeTreeListModelToGlibNone(self))
 	carg1 = C.guint(position)
@@ -46960,7 +47150,9 @@ func (self *TreeListModelInstance) GetChildRow(position uint) TreeListRow {
 
 	var goret TreeListRow
 
-	goret = UnsafeTreeListRowFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeTreeListRowFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -47028,7 +47220,7 @@ func (self *TreeListModelInstance) GetPassthrough() bool {
 // 
 // The function returns the following values:
 // 
-// 	- goret TreeListRow 
+// 	- goret TreeListRow (nullable) 
 //
 // Gets the row object for the given row.
 // 
@@ -47050,7 +47242,7 @@ func (self *TreeListModelInstance) GetPassthrough() bool {
 func (self *TreeListModelInstance) GetRow(position uint) TreeListRow {
 	var carg0 *C.GtkTreeListModel // in, none, converted
 	var carg1 C.guint             // in, none, casted
-	var cret  *C.GtkTreeListRow   // return, full, converted
+	var cret  *C.GtkTreeListRow   // return, full, converted, nullable
 
 	carg0 = (*C.GtkTreeListModel)(UnsafeTreeListModelToGlibNone(self))
 	carg1 = C.guint(position)
@@ -47061,7 +47253,9 @@ func (self *TreeListModelInstance) GetRow(position uint) TreeListRow {
 
 	var goret TreeListRow
 
-	goret = UnsafeTreeListRowFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeTreeListRowFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -47124,7 +47318,7 @@ type TreeListRow interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret TreeListRow 
+	// 	- goret TreeListRow (nullable) 
 	//
 	// If @self is not expanded or @position is greater than the
 	// number of children, %NULL is returned.
@@ -47132,7 +47326,7 @@ type TreeListRow interface {
 	// GetChildren wraps gtk_tree_list_row_get_children
 	// The function returns the following values:
 	// 
-	// 	- goret gio.ListModel 
+	// 	- goret gio.ListModel (nullable) 
 	//
 	// If the row is expanded, gets the model holding the children of @self.
 	// 
@@ -47165,7 +47359,7 @@ type TreeListRow interface {
 	// GetParent wraps gtk_tree_list_row_get_parent
 	// The function returns the following values:
 	// 
-	// 	- goret TreeListRow 
+	// 	- goret TreeListRow (nullable) 
 	//
 	// Gets the row representing the parent for @self.
 	// 
@@ -47259,14 +47453,14 @@ func UnsafeTreeListRowToGlibFull(c TreeListRow) unsafe.Pointer {
 // 
 // The function returns the following values:
 // 
-// 	- goret TreeListRow 
+// 	- goret TreeListRow (nullable) 
 //
 // If @self is not expanded or @position is greater than the
 // number of children, %NULL is returned.
 func (self *TreeListRowInstance) GetChildRow(position uint) TreeListRow {
 	var carg0 *C.GtkTreeListRow // in, none, converted
 	var carg1 C.guint           // in, none, casted
-	var cret  *C.GtkTreeListRow // return, full, converted
+	var cret  *C.GtkTreeListRow // return, full, converted, nullable
 
 	carg0 = (*C.GtkTreeListRow)(UnsafeTreeListRowToGlibNone(self))
 	carg1 = C.guint(position)
@@ -47277,7 +47471,9 @@ func (self *TreeListRowInstance) GetChildRow(position uint) TreeListRow {
 
 	var goret TreeListRow
 
-	goret = UnsafeTreeListRowFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeTreeListRowFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -47285,7 +47481,7 @@ func (self *TreeListRowInstance) GetChildRow(position uint) TreeListRow {
 // GetChildren wraps gtk_tree_list_row_get_children
 // The function returns the following values:
 // 
-// 	- goret gio.ListModel 
+// 	- goret gio.ListModel (nullable) 
 //
 // If the row is expanded, gets the model holding the children of @self.
 // 
@@ -47295,7 +47491,7 @@ func (self *TreeListRowInstance) GetChildRow(position uint) TreeListRow {
 // [property@Gtk.TreeListModel:passthrough] is set to.
 func (self *TreeListRowInstance) GetChildren() gio.ListModel {
 	var carg0 *C.GtkTreeListRow // in, none, converted
-	var cret  *C.GListModel     // return, none, converted
+	var cret  *C.GListModel     // return, none, converted, nullable
 
 	carg0 = (*C.GtkTreeListRow)(UnsafeTreeListRowToGlibNone(self))
 
@@ -47304,7 +47500,9 @@ func (self *TreeListRowInstance) GetChildren() gio.ListModel {
 
 	var goret gio.ListModel
 
-	goret = gio.UnsafeListModelFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gio.UnsafeListModelFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -47365,7 +47563,7 @@ func (self *TreeListRowInstance) GetExpanded() bool {
 // GetParent wraps gtk_tree_list_row_get_parent
 // The function returns the following values:
 // 
-// 	- goret TreeListRow 
+// 	- goret TreeListRow (nullable) 
 //
 // Gets the row representing the parent for @self.
 // 
@@ -47380,7 +47578,7 @@ func (self *TreeListRowInstance) GetExpanded() bool {
 // it will forever return %NULL.
 func (self *TreeListRowInstance) GetParent() TreeListRow {
 	var carg0 *C.GtkTreeListRow // in, none, converted
-	var cret  *C.GtkTreeListRow // return, full, converted
+	var cret  *C.GtkTreeListRow // return, full, converted, nullable
 
 	carg0 = (*C.GtkTreeListRow)(UnsafeTreeListRowToGlibNone(self))
 
@@ -47389,7 +47587,9 @@ func (self *TreeListRowInstance) GetParent() TreeListRow {
 
 	var goret TreeListRow
 
-	goret = UnsafeTreeListRowFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeTreeListRowFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -47505,7 +47705,7 @@ type TreeListRowSorter interface {
 	// GetSorter wraps gtk_tree_list_row_sorter_get_sorter
 	// The function returns the following values:
 	// 
-	// 	- goret Sorter 
+	// 	- goret Sorter (nullable) 
 	//
 	// Returns the sorter used by @self.
 	GetSorter() Sorter
@@ -47594,12 +47794,12 @@ func NewTreeListRowSorter(sorter Sorter) TreeListRowSorter {
 // GetSorter wraps gtk_tree_list_row_sorter_get_sorter
 // The function returns the following values:
 // 
-// 	- goret Sorter 
+// 	- goret Sorter (nullable) 
 //
 // Returns the sorter used by @self.
 func (self *TreeListRowSorterInstance) GetSorter() Sorter {
 	var carg0 *C.GtkTreeListRowSorter // in, none, converted
-	var cret  *C.GtkSorter            // return, none, converted
+	var cret  *C.GtkSorter            // return, none, converted, nullable
 
 	carg0 = (*C.GtkTreeListRowSorter)(UnsafeTreeListRowSorterToGlibNone(self))
 
@@ -47608,7 +47808,9 @@ func (self *TreeListRowSorterInstance) GetSorter() Sorter {
 
 	var goret Sorter
 
-	goret = UnsafeSorterFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeSorterFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -47664,7 +47866,7 @@ type UriLauncher interface {
 	// GetURI wraps gtk_uri_launcher_get_uri
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the uri that will be opened.
 	GetURI() string
@@ -47772,12 +47974,12 @@ func NewUriLauncher(uri string) UriLauncher {
 // GetURI wraps gtk_uri_launcher_get_uri
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the uri that will be opened.
 func (self *UriLauncherInstance) GetURI() string {
 	var carg0 *C.GtkUriLauncher // in, none, converted
-	var cret  *C.char           // return, none, string, casted *C.gchar
+	var cret  *C.char           // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkUriLauncher)(UnsafeUriLauncherToGlibNone(self))
 
@@ -47786,7 +47988,9 @@ func (self *UriLauncherInstance) GetURI() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -48657,7 +48861,7 @@ type Widget interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret Widget 
+	// 	- goret Widget (nullable) 
 	//
 	// Gets the first ancestor of @widget with type @widget_type.
 	// 
@@ -48752,7 +48956,7 @@ type Widget interface {
 	// GetCursor wraps gtk_widget_get_cursor
 	// The function returns the following values:
 	// 
-	// 	- goret gdk.Cursor 
+	// 	- goret gdk.Cursor (nullable) 
 	//
 	// Queries the cursor set on @widget.
 	// 
@@ -48785,7 +48989,7 @@ type Widget interface {
 	// GetFirstChild wraps gtk_widget_get_first_child
 	// The function returns the following values:
 	// 
-	// 	- goret Widget 
+	// 	- goret Widget (nullable) 
 	//
 	// Returns the widget’s first child.
 	// 
@@ -48794,7 +48998,7 @@ type Widget interface {
 	// GetFocusChild wraps gtk_widget_get_focus_child
 	// The function returns the following values:
 	// 
-	// 	- goret Widget 
+	// 	- goret Widget (nullable) 
 	//
 	// Returns the current focus child of @widget.
 	GetFocusChild() Widget
@@ -48820,7 +49024,7 @@ type Widget interface {
 	// GetFontMap wraps gtk_widget_get_font_map
 	// The function returns the following values:
 	// 
-	// 	- goret pango.FontMap 
+	// 	- goret pango.FontMap (nullable) 
 	//
 	// Gets the font map of @widget.
 	// 
@@ -48829,7 +49033,7 @@ type Widget interface {
 	// GetFrameClock wraps gtk_widget_get_frame_clock
 	// The function returns the following values:
 	// 
-	// 	- goret gdk.FrameClock 
+	// 	- goret gdk.FrameClock (nullable) 
 	//
 	// Obtains the frame clock for a widget.
 	// 
@@ -48931,7 +49135,7 @@ type Widget interface {
 	// GetLastChild wraps gtk_widget_get_last_child
 	// The function returns the following values:
 	// 
-	// 	- goret Widget 
+	// 	- goret Widget (nullable) 
 	//
 	// Returns the widget’s last child.
 	// 
@@ -48940,7 +49144,7 @@ type Widget interface {
 	// GetLayoutManager wraps gtk_widget_get_layout_manager
 	// The function returns the following values:
 	// 
-	// 	- goret LayoutManager 
+	// 	- goret LayoutManager (nullable) 
 	//
 	// Retrieves the layout manager used by @widget.
 	// 
@@ -48993,7 +49197,7 @@ type Widget interface {
 	// GetNextSibling wraps gtk_widget_get_next_sibling
 	// The function returns the following values:
 	// 
-	// 	- goret Widget 
+	// 	- goret Widget (nullable) 
 	//
 	// Returns the widget’s next sibling.
 	// 
@@ -49033,7 +49237,7 @@ type Widget interface {
 	// GetParent wraps gtk_widget_get_parent
 	// The function returns the following values:
 	// 
-	// 	- goret Widget 
+	// 	- goret Widget (nullable) 
 	//
 	// Returns the parent widget of @widget.
 	GetParent() Widget
@@ -49061,7 +49265,7 @@ type Widget interface {
 	// GetPrevSibling wraps gtk_widget_get_prev_sibling
 	// The function returns the following values:
 	// 
-	// 	- goret Widget 
+	// 	- goret Widget (nullable) 
 	//
 	// Returns the widget’s previous sibling.
 	// 
@@ -49229,7 +49433,7 @@ type Widget interface {
 	// GetTooltipMarkup wraps gtk_widget_get_tooltip_markup
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the contents of the tooltip for @widget.
 	// 
@@ -49240,7 +49444,7 @@ type Widget interface {
 	// GetTooltipText wraps gtk_widget_get_tooltip_text
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the contents of the tooltip for @widget.
 	// 
@@ -49668,7 +49872,7 @@ type Widget interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret Widget 
+	// 	- goret Widget (nullable) 
 	//
 	// Finds the descendant of @widget closest to the point (@x, @y).
 	// 
@@ -51278,7 +51482,7 @@ func (widget *WidgetInstance) ErrorBell() {
 // 
 // The function returns the following values:
 // 
-// 	- goret Widget 
+// 	- goret Widget (nullable) 
 //
 // Gets the first ancestor of @widget with type @widget_type.
 // 
@@ -51292,7 +51496,7 @@ func (widget *WidgetInstance) ErrorBell() {
 func (widget *WidgetInstance) GetAncestor(widgetType gobject.Type) Widget {
 	var carg0 *C.GtkWidget // in, none, converted
 	var carg1 C.GType      // in, none, casted, alias
-	var cret  *C.GtkWidget // return, none, converted
+	var cret  *C.GtkWidget // return, none, converted, nullable
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 	carg1 = C.GType(widgetType)
@@ -51303,7 +51507,9 @@ func (widget *WidgetInstance) GetAncestor(widgetType gobject.Type) Widget {
 
 	var goret Widget
 
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -51521,14 +51727,14 @@ func (self *WidgetInstance) GetCSSName() string {
 // GetCursor wraps gtk_widget_get_cursor
 // The function returns the following values:
 // 
-// 	- goret gdk.Cursor 
+// 	- goret gdk.Cursor (nullable) 
 //
 // Queries the cursor set on @widget.
 // 
 // See [method@Gtk.Widget.set_cursor] for details.
 func (widget *WidgetInstance) GetCursor() gdk.Cursor {
 	var carg0 *C.GtkWidget // in, none, converted
-	var cret  *C.GdkCursor // return, none, converted
+	var cret  *C.GdkCursor // return, none, converted, nullable
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 
@@ -51537,7 +51743,9 @@ func (widget *WidgetInstance) GetCursor() gdk.Cursor {
 
 	var goret gdk.Cursor
 
-	goret = gdk.UnsafeCursorFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gdk.UnsafeCursorFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -51599,14 +51807,14 @@ func (widget *WidgetInstance) GetDisplay() gdk.Display {
 // GetFirstChild wraps gtk_widget_get_first_child
 // The function returns the following values:
 // 
-// 	- goret Widget 
+// 	- goret Widget (nullable) 
 //
 // Returns the widget’s first child.
 // 
 // This API is primarily meant for widget implementations.
 func (widget *WidgetInstance) GetFirstChild() Widget {
 	var carg0 *C.GtkWidget // in, none, converted
-	var cret  *C.GtkWidget // return, none, converted
+	var cret  *C.GtkWidget // return, none, converted, nullable
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 
@@ -51615,7 +51823,9 @@ func (widget *WidgetInstance) GetFirstChild() Widget {
 
 	var goret Widget
 
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -51623,12 +51833,12 @@ func (widget *WidgetInstance) GetFirstChild() Widget {
 // GetFocusChild wraps gtk_widget_get_focus_child
 // The function returns the following values:
 // 
-// 	- goret Widget 
+// 	- goret Widget (nullable) 
 //
 // Returns the current focus child of @widget.
 func (widget *WidgetInstance) GetFocusChild() Widget {
 	var carg0 *C.GtkWidget // in, none, converted
-	var cret  *C.GtkWidget // return, none, converted
+	var cret  *C.GtkWidget // return, none, converted, nullable
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 
@@ -51637,7 +51847,9 @@ func (widget *WidgetInstance) GetFocusChild() Widget {
 
 	var goret Widget
 
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -51698,14 +51910,14 @@ func (widget *WidgetInstance) GetFocusable() bool {
 // GetFontMap wraps gtk_widget_get_font_map
 // The function returns the following values:
 // 
-// 	- goret pango.FontMap 
+// 	- goret pango.FontMap (nullable) 
 //
 // Gets the font map of @widget.
 // 
 // See [method@Gtk.Widget.set_font_map].
 func (widget *WidgetInstance) GetFontMap() pango.FontMap {
 	var carg0 *C.GtkWidget    // in, none, converted
-	var cret  *C.PangoFontMap // return, none, converted
+	var cret  *C.PangoFontMap // return, none, converted, nullable
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 
@@ -51714,7 +51926,9 @@ func (widget *WidgetInstance) GetFontMap() pango.FontMap {
 
 	var goret pango.FontMap
 
-	goret = pango.UnsafeFontMapFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = pango.UnsafeFontMapFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -51722,7 +51936,7 @@ func (widget *WidgetInstance) GetFontMap() pango.FontMap {
 // GetFrameClock wraps gtk_widget_get_frame_clock
 // The function returns the following values:
 // 
-// 	- goret gdk.FrameClock 
+// 	- goret gdk.FrameClock (nullable) 
 //
 // Obtains the frame clock for a widget.
 // 
@@ -51748,7 +51962,7 @@ func (widget *WidgetInstance) GetFontMap() pango.FontMap {
 // Unrealized widgets do not have a frame clock.
 func (widget *WidgetInstance) GetFrameClock() gdk.FrameClock {
 	var carg0 *C.GtkWidget     // in, none, converted
-	var cret  *C.GdkFrameClock // return, none, converted
+	var cret  *C.GdkFrameClock // return, none, converted, nullable
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 
@@ -51757,7 +51971,9 @@ func (widget *WidgetInstance) GetFrameClock() gdk.FrameClock {
 
 	var goret gdk.FrameClock
 
-	goret = gdk.UnsafeFrameClockFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gdk.UnsafeFrameClockFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -51920,14 +52136,14 @@ func (widget *WidgetInstance) GetHExpandSet() bool {
 // GetLastChild wraps gtk_widget_get_last_child
 // The function returns the following values:
 // 
-// 	- goret Widget 
+// 	- goret Widget (nullable) 
 //
 // Returns the widget’s last child.
 // 
 // This API is primarily meant for widget implementations.
 func (widget *WidgetInstance) GetLastChild() Widget {
 	var carg0 *C.GtkWidget // in, none, converted
-	var cret  *C.GtkWidget // return, none, converted
+	var cret  *C.GtkWidget // return, none, converted, nullable
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 
@@ -51936,7 +52152,9 @@ func (widget *WidgetInstance) GetLastChild() Widget {
 
 	var goret Widget
 
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -51944,14 +52162,14 @@ func (widget *WidgetInstance) GetLastChild() Widget {
 // GetLayoutManager wraps gtk_widget_get_layout_manager
 // The function returns the following values:
 // 
-// 	- goret LayoutManager 
+// 	- goret LayoutManager (nullable) 
 //
 // Retrieves the layout manager used by @widget.
 // 
 // See [method@Gtk.Widget.set_layout_manager].
 func (widget *WidgetInstance) GetLayoutManager() LayoutManager {
 	var carg0 *C.GtkWidget        // in, none, converted
-	var cret  *C.GtkLayoutManager // return, none, converted
+	var cret  *C.GtkLayoutManager // return, none, converted, nullable
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 
@@ -51960,7 +52178,9 @@ func (widget *WidgetInstance) GetLayoutManager() LayoutManager {
 
 	var goret LayoutManager
 
-	goret = UnsafeLayoutManagerFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeLayoutManagerFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -52104,14 +52324,14 @@ func (widget *WidgetInstance) GetName() string {
 // GetNextSibling wraps gtk_widget_get_next_sibling
 // The function returns the following values:
 // 
-// 	- goret Widget 
+// 	- goret Widget (nullable) 
 //
 // Returns the widget’s next sibling.
 // 
 // This API is primarily meant for widget implementations.
 func (widget *WidgetInstance) GetNextSibling() Widget {
 	var carg0 *C.GtkWidget // in, none, converted
-	var cret  *C.GtkWidget // return, none, converted
+	var cret  *C.GtkWidget // return, none, converted, nullable
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 
@@ -52120,7 +52340,9 @@ func (widget *WidgetInstance) GetNextSibling() Widget {
 
 	var goret Widget
 
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -52204,12 +52426,12 @@ func (widget *WidgetInstance) GetPangoContext() pango.Context {
 // GetParent wraps gtk_widget_get_parent
 // The function returns the following values:
 // 
-// 	- goret Widget 
+// 	- goret Widget (nullable) 
 //
 // Returns the parent widget of @widget.
 func (widget *WidgetInstance) GetParent() Widget {
 	var carg0 *C.GtkWidget // in, none, converted
-	var cret  *C.GtkWidget // return, none, converted
+	var cret  *C.GtkWidget // return, none, converted, nullable
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 
@@ -52218,7 +52440,9 @@ func (widget *WidgetInstance) GetParent() Widget {
 
 	var goret Widget
 
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -52269,14 +52493,14 @@ func (widget *WidgetInstance) GetPreferredSize() (Requisition, Requisition) {
 // GetPrevSibling wraps gtk_widget_get_prev_sibling
 // The function returns the following values:
 // 
-// 	- goret Widget 
+// 	- goret Widget (nullable) 
 //
 // Returns the widget’s previous sibling.
 // 
 // This API is primarily meant for widget implementations.
 func (widget *WidgetInstance) GetPrevSibling() Widget {
 	var carg0 *C.GtkWidget // in, none, converted
-	var cret  *C.GtkWidget // return, none, converted
+	var cret  *C.GtkWidget // return, none, converted, nullable
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 
@@ -52285,7 +52509,9 @@ func (widget *WidgetInstance) GetPrevSibling() Widget {
 
 	var goret Widget
 
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -52636,7 +52862,7 @@ func (widget *WidgetInstance) GetTemplateChild(widgetType gobject.Type, name str
 // GetTooltipMarkup wraps gtk_widget_get_tooltip_markup
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the contents of the tooltip for @widget.
 // 
@@ -52645,7 +52871,7 @@ func (widget *WidgetInstance) GetTemplateChild(widgetType gobject.Type, name str
 // function returns %NULL.
 func (widget *WidgetInstance) GetTooltipMarkup() string {
 	var carg0 *C.GtkWidget // in, none, converted
-	var cret  *C.char      // return, none, string, casted *C.gchar
+	var cret  *C.char      // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 
@@ -52654,7 +52880,9 @@ func (widget *WidgetInstance) GetTooltipMarkup() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -52662,7 +52890,7 @@ func (widget *WidgetInstance) GetTooltipMarkup() string {
 // GetTooltipText wraps gtk_widget_get_tooltip_text
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the contents of the tooltip for @widget.
 // 
@@ -52671,7 +52899,7 @@ func (widget *WidgetInstance) GetTooltipMarkup() string {
 // this function will return the escaped text.
 func (widget *WidgetInstance) GetTooltipText() string {
 	var carg0 *C.GtkWidget // in, none, converted
-	var cret  *C.char      // return, none, string, casted *C.gchar
+	var cret  *C.char      // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 
@@ -52680,7 +52908,9 @@ func (widget *WidgetInstance) GetTooltipText() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -53569,7 +53799,7 @@ func (widget *WidgetInstance) ObserveControllers() gio.ListModel {
 // 
 // The function returns the following values:
 // 
-// 	- goret Widget 
+// 	- goret Widget (nullable) 
 //
 // Finds the descendant of @widget closest to the point (@x, @y).
 // 
@@ -53590,7 +53820,7 @@ func (widget *WidgetInstance) Pick(x float64, y float64, flags PickFlags) Widget
 	var carg1 C.double       // in, none, casted, casted C.gdouble
 	var carg2 C.double       // in, none, casted, casted C.gdouble
 	var carg3 C.GtkPickFlags // in, none, casted
-	var cret  *C.GtkWidget   // return, none, converted
+	var cret  *C.GtkWidget   // return, none, converted, nullable
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 	carg1 = C.double(x)
@@ -53605,7 +53835,9 @@ func (widget *WidgetInstance) Pick(x float64, y float64, flags PickFlags) Widget
 
 	var goret Widget
 
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -55083,7 +55315,7 @@ type WidgetPaintable interface {
 	// GetWidget wraps gtk_widget_paintable_get_widget
 	// The function returns the following values:
 	// 
-	// 	- goret Widget 
+	// 	- goret Widget (nullable) 
 	//
 	// Returns the widget that is observed or %NULL if none.
 	GetWidget() Widget
@@ -55166,12 +55398,12 @@ func NewWidgetPaintable(widget Widget) WidgetPaintable {
 // GetWidget wraps gtk_widget_paintable_get_widget
 // The function returns the following values:
 // 
-// 	- goret Widget 
+// 	- goret Widget (nullable) 
 //
 // Returns the widget that is observed or %NULL if none.
 func (self *WidgetPaintableInstance) GetWidget() Widget {
 	var carg0 *C.GtkWidgetPaintable // in, none, converted
-	var cret  *C.GtkWidget          // return, none, converted
+	var cret  *C.GtkWidget          // return, none, converted, nullable
 
 	carg0 = (*C.GtkWidgetPaintable)(UnsafeWidgetPaintableToGlibNone(self))
 
@@ -55180,7 +55412,9 @@ func (self *WidgetPaintableInstance) GetWidget() Widget {
 
 	var goret Widget
 
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -55337,14 +55571,14 @@ type Window interface {
 	// GetApplication wraps gtk_window_get_application
 	// The function returns the following values:
 	// 
-	// 	- goret Application 
+	// 	- goret Application (nullable) 
 	//
 	// Gets the `GtkApplication` associated with the window.
 	GetApplication() Application
 	// GetChild wraps gtk_window_get_child
 	// The function returns the following values:
 	// 
-	// 	- goret Widget 
+	// 	- goret Widget (nullable) 
 	//
 	// Gets the child widget of @window.
 	GetChild() Widget
@@ -55373,7 +55607,7 @@ type Window interface {
 	// GetDefaultWidget wraps gtk_window_get_default_widget
 	// The function returns the following values:
 	// 
-	// 	- goret Widget 
+	// 	- goret Widget (nullable) 
 	//
 	// Returns the default widget for @window.
 	GetDefaultWidget() Widget
@@ -55394,7 +55628,7 @@ type Window interface {
 	// GetFocus wraps gtk_window_get_focus
 	// The function returns the following values:
 	// 
-	// 	- goret Widget 
+	// 	- goret Widget (nullable) 
 	//
 	// Retrieves the current focused widget within the window.
 	// 
@@ -55437,7 +55671,7 @@ type Window interface {
 	// GetIconName wraps gtk_window_get_icon_name
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Returns the name of the themed icon for the window.
 	GetIconName() string
@@ -55465,14 +55699,14 @@ type Window interface {
 	// GetTitle wraps gtk_window_get_title
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Retrieves the title of the window.
 	GetTitle() string
 	// GetTitlebar wraps gtk_window_get_titlebar
 	// The function returns the following values:
 	// 
-	// 	- goret Widget 
+	// 	- goret Widget (nullable) 
 	//
 	// Returns the custom titlebar that has been set with
 	// gtk_window_set_titlebar().
@@ -55480,7 +55714,7 @@ type Window interface {
 	// GetTransientFor wraps gtk_window_get_transient_for
 	// The function returns the following values:
 	// 
-	// 	- goret Window 
+	// 	- goret Window (nullable) 
 	//
 	// Fetches the transient parent for this window.
 	GetTransientFor() Window
@@ -56053,7 +56287,7 @@ func NewWindow() Widget {
 // WindowGetDefaultIconName wraps gtk_window_get_default_icon_name
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Returns the fallback icon name for windows.
 // 
@@ -56061,13 +56295,15 @@ func NewWindow() Widget {
 // be modified. It is only valid until the next call to
 // [func@Gtk.Window.set_default_icon_name].
 func WindowGetDefaultIconName() string {
-	var cret *C.char // return, none, string, casted *C.gchar
+	var cret *C.char // return, none, string, casted *C.gchar, nullable
 
 	cret = C.gtk_window_get_default_icon_name()
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -56285,12 +56521,12 @@ func (window *WindowInstance) FullscreenOnMonitor(monitor gdk.Monitor) {
 // GetApplication wraps gtk_window_get_application
 // The function returns the following values:
 // 
-// 	- goret Application 
+// 	- goret Application (nullable) 
 //
 // Gets the `GtkApplication` associated with the window.
 func (window *WindowInstance) GetApplication() Application {
 	var carg0 *C.GtkWindow      // in, none, converted
-	var cret  *C.GtkApplication // return, none, converted
+	var cret  *C.GtkApplication // return, none, converted, nullable
 
 	carg0 = (*C.GtkWindow)(UnsafeWindowToGlibNone(window))
 
@@ -56299,7 +56535,9 @@ func (window *WindowInstance) GetApplication() Application {
 
 	var goret Application
 
-	goret = UnsafeApplicationFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeApplicationFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -56307,12 +56545,12 @@ func (window *WindowInstance) GetApplication() Application {
 // GetChild wraps gtk_window_get_child
 // The function returns the following values:
 // 
-// 	- goret Widget 
+// 	- goret Widget (nullable) 
 //
 // Gets the child widget of @window.
 func (window *WindowInstance) GetChild() Widget {
 	var carg0 *C.GtkWindow // in, none, converted
-	var cret  *C.GtkWidget // return, none, converted
+	var cret  *C.GtkWidget // return, none, converted, nullable
 
 	carg0 = (*C.GtkWindow)(UnsafeWindowToGlibNone(window))
 
@@ -56321,7 +56559,9 @@ func (window *WindowInstance) GetChild() Widget {
 
 	var goret Widget
 
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -56386,12 +56626,12 @@ func (window *WindowInstance) GetDefaultSize() (int, int) {
 // GetDefaultWidget wraps gtk_window_get_default_widget
 // The function returns the following values:
 // 
-// 	- goret Widget 
+// 	- goret Widget (nullable) 
 //
 // Returns the default widget for @window.
 func (window *WindowInstance) GetDefaultWidget() Widget {
 	var carg0 *C.GtkWindow // in, none, converted
-	var cret  *C.GtkWidget // return, none, converted
+	var cret  *C.GtkWidget // return, none, converted, nullable
 
 	carg0 = (*C.GtkWindow)(UnsafeWindowToGlibNone(window))
 
@@ -56400,7 +56640,9 @@ func (window *WindowInstance) GetDefaultWidget() Widget {
 
 	var goret Widget
 
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -56456,7 +56698,7 @@ func (window *WindowInstance) GetDestroyWithParent() bool {
 // GetFocus wraps gtk_window_get_focus
 // The function returns the following values:
 // 
-// 	- goret Widget 
+// 	- goret Widget (nullable) 
 //
 // Retrieves the current focused widget within the window.
 // 
@@ -56466,7 +56708,7 @@ func (window *WindowInstance) GetDestroyWithParent() bool {
 // not be %TRUE for the widget.
 func (window *WindowInstance) GetFocus() Widget {
 	var carg0 *C.GtkWindow // in, none, converted
-	var cret  *C.GtkWidget // return, none, converted
+	var cret  *C.GtkWidget // return, none, converted, nullable
 
 	carg0 = (*C.GtkWindow)(UnsafeWindowToGlibNone(window))
 
@@ -56475,7 +56717,9 @@ func (window *WindowInstance) GetFocus() Widget {
 
 	var goret Widget
 
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -56580,12 +56824,12 @@ func (window *WindowInstance) GetHideOnClose() bool {
 // GetIconName wraps gtk_window_get_icon_name
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Returns the name of the themed icon for the window.
 func (window *WindowInstance) GetIconName() string {
 	var carg0 *C.GtkWindow // in, none, converted
-	var cret  *C.char      // return, none, string, casted *C.gchar
+	var cret  *C.char      // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkWindow)(UnsafeWindowToGlibNone(window))
 
@@ -56594,7 +56838,9 @@ func (window *WindowInstance) GetIconName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -56674,12 +56920,12 @@ func (window *WindowInstance) GetResizable() bool {
 // GetTitle wraps gtk_window_get_title
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Retrieves the title of the window.
 func (window *WindowInstance) GetTitle() string {
 	var carg0 *C.GtkWindow // in, none, converted
-	var cret  *C.char      // return, none, string, casted *C.gchar
+	var cret  *C.char      // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkWindow)(UnsafeWindowToGlibNone(window))
 
@@ -56688,7 +56934,9 @@ func (window *WindowInstance) GetTitle() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -56696,13 +56944,13 @@ func (window *WindowInstance) GetTitle() string {
 // GetTitlebar wraps gtk_window_get_titlebar
 // The function returns the following values:
 // 
-// 	- goret Widget 
+// 	- goret Widget (nullable) 
 //
 // Returns the custom titlebar that has been set with
 // gtk_window_set_titlebar().
 func (window *WindowInstance) GetTitlebar() Widget {
 	var carg0 *C.GtkWindow // in, none, converted
-	var cret  *C.GtkWidget // return, none, converted
+	var cret  *C.GtkWidget // return, none, converted, nullable
 
 	carg0 = (*C.GtkWindow)(UnsafeWindowToGlibNone(window))
 
@@ -56711,7 +56959,9 @@ func (window *WindowInstance) GetTitlebar() Widget {
 
 	var goret Widget
 
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -56719,12 +56969,12 @@ func (window *WindowInstance) GetTitlebar() Widget {
 // GetTransientFor wraps gtk_window_get_transient_for
 // The function returns the following values:
 // 
-// 	- goret Window 
+// 	- goret Window (nullable) 
 //
 // Fetches the transient parent for this window.
 func (window *WindowInstance) GetTransientFor() Window {
 	var carg0 *C.GtkWindow // in, none, converted
-	var cret  *C.GtkWindow // return, none, converted
+	var cret  *C.GtkWindow // return, none, converted, nullable
 
 	carg0 = (*C.GtkWindow)(UnsafeWindowToGlibNone(window))
 
@@ -56733,7 +56983,9 @@ func (window *WindowInstance) GetTransientFor() Window {
 
 	var goret Window
 
-	goret = UnsafeWindowFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWindowFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -57705,7 +57957,7 @@ type WindowControls interface {
 	// GetDecorationLayout wraps gtk_window_controls_get_decoration_layout
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the decoration layout of this `GtkWindowControls`.
 	GetDecorationLayout() string
@@ -57825,12 +58077,12 @@ func NewWindowControls(side PackType) Widget {
 // GetDecorationLayout wraps gtk_window_controls_get_decoration_layout
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the decoration layout of this `GtkWindowControls`.
 func (self *WindowControlsInstance) GetDecorationLayout() string {
 	var carg0 *C.GtkWindowControls // in, none, converted
-	var cret  *C.char              // return, none, string, casted *C.gchar
+	var cret  *C.char              // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkWindowControls)(UnsafeWindowControlsToGlibNone(self))
 
@@ -57839,7 +58091,9 @@ func (self *WindowControlsInstance) GetDecorationLayout() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -58155,7 +58409,7 @@ type WindowHandle interface {
 	// GetChild wraps gtk_window_handle_get_child
 	// The function returns the following values:
 	// 
-	// 	- goret Widget 
+	// 	- goret Widget (nullable) 
 	//
 	// Gets the child widget of @self.
 	GetChild() Widget
@@ -58228,12 +58482,12 @@ func NewWindowHandle() Widget {
 // GetChild wraps gtk_window_handle_get_child
 // The function returns the following values:
 // 
-// 	- goret Widget 
+// 	- goret Widget (nullable) 
 //
 // Gets the child widget of @self.
 func (self *WindowHandleInstance) GetChild() Widget {
 	var carg0 *C.GtkWindowHandle // in, none, converted
-	var cret  *C.GtkWidget       // return, none, converted
+	var cret  *C.GtkWidget       // return, none, converted, nullable
 
 	carg0 = (*C.GtkWindowHandle)(UnsafeWindowHandleToGlibNone(self))
 
@@ -58242,7 +58496,9 @@ func (self *WindowHandleInstance) GetChild() Widget {
 
 	var goret Widget
 
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -58372,14 +58628,14 @@ type AboutDialog interface {
 	// GetComments wraps gtk_about_dialog_get_comments
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Returns the comments string.
 	GetComments() string
 	// GetCopyright wraps gtk_about_dialog_get_copyright
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Returns the copyright string.
 	GetCopyright() string
@@ -58394,7 +58650,7 @@ type AboutDialog interface {
 	// GetLicense wraps gtk_about_dialog_get_license
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Returns the license information.
 	GetLicense() string
@@ -58408,35 +58664,35 @@ type AboutDialog interface {
 	// GetLogo wraps gtk_about_dialog_get_logo
 	// The function returns the following values:
 	// 
-	// 	- goret gdk.Paintable 
+	// 	- goret gdk.Paintable (nullable) 
 	//
 	// Returns the paintable displayed as logo in the about dialog.
 	GetLogo() gdk.Paintable
 	// GetLogoIconName wraps gtk_about_dialog_get_logo_icon_name
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Returns the icon name displayed as logo in the about dialog.
 	GetLogoIconName() string
 	// GetProgramName wraps gtk_about_dialog_get_program_name
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Returns the program name displayed in the about dialog.
 	GetProgramName() string
 	// GetSystemInformation wraps gtk_about_dialog_get_system_information
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Returns the system information that is shown in the about dialog.
 	GetSystemInformation() string
 	// GetTranslatorCredits wraps gtk_about_dialog_get_translator_credits
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Returns the translator credits string which is displayed
 	// in the credits page.
@@ -58444,21 +58700,21 @@ type AboutDialog interface {
 	// GetVersion wraps gtk_about_dialog_get_version
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Returns the version string.
 	GetVersion() string
 	// GetWebsite wraps gtk_about_dialog_get_website
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Returns the website URL.
 	GetWebsite() string
 	// GetWebsiteLabel wraps gtk_about_dialog_get_website_label
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Returns the label used for the website link.
 	GetWebsiteLabel() string
@@ -58799,12 +59055,12 @@ func (about *AboutDialogInstance) GetAuthors() []string {
 // GetComments wraps gtk_about_dialog_get_comments
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Returns the comments string.
 func (about *AboutDialogInstance) GetComments() string {
 	var carg0 *C.GtkAboutDialog // in, none, converted
-	var cret  *C.char           // return, none, string, casted *C.gchar
+	var cret  *C.char           // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkAboutDialog)(UnsafeAboutDialogToGlibNone(about))
 
@@ -58813,7 +59069,9 @@ func (about *AboutDialogInstance) GetComments() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -58821,12 +59079,12 @@ func (about *AboutDialogInstance) GetComments() string {
 // GetCopyright wraps gtk_about_dialog_get_copyright
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Returns the copyright string.
 func (about *AboutDialogInstance) GetCopyright() string {
 	var carg0 *C.GtkAboutDialog // in, none, converted
-	var cret  *C.char           // return, none, string, casted *C.gchar
+	var cret  *C.char           // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkAboutDialog)(UnsafeAboutDialogToGlibNone(about))
 
@@ -58835,7 +59093,9 @@ func (about *AboutDialogInstance) GetCopyright() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -58868,12 +59128,12 @@ func (about *AboutDialogInstance) GetDocumenters() []string {
 // GetLicense wraps gtk_about_dialog_get_license
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Returns the license information.
 func (about *AboutDialogInstance) GetLicense() string {
 	var carg0 *C.GtkAboutDialog // in, none, converted
-	var cret  *C.char           // return, none, string, casted *C.gchar
+	var cret  *C.char           // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkAboutDialog)(UnsafeAboutDialogToGlibNone(about))
 
@@ -58882,7 +59142,9 @@ func (about *AboutDialogInstance) GetLicense() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -58912,12 +59174,12 @@ func (about *AboutDialogInstance) GetLicenseType() License {
 // GetLogo wraps gtk_about_dialog_get_logo
 // The function returns the following values:
 // 
-// 	- goret gdk.Paintable 
+// 	- goret gdk.Paintable (nullable) 
 //
 // Returns the paintable displayed as logo in the about dialog.
 func (about *AboutDialogInstance) GetLogo() gdk.Paintable {
 	var carg0 *C.GtkAboutDialog // in, none, converted
-	var cret  *C.GdkPaintable   // return, none, converted
+	var cret  *C.GdkPaintable   // return, none, converted, nullable
 
 	carg0 = (*C.GtkAboutDialog)(UnsafeAboutDialogToGlibNone(about))
 
@@ -58926,7 +59188,9 @@ func (about *AboutDialogInstance) GetLogo() gdk.Paintable {
 
 	var goret gdk.Paintable
 
-	goret = gdk.UnsafePaintableFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gdk.UnsafePaintableFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -58934,12 +59198,12 @@ func (about *AboutDialogInstance) GetLogo() gdk.Paintable {
 // GetLogoIconName wraps gtk_about_dialog_get_logo_icon_name
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Returns the icon name displayed as logo in the about dialog.
 func (about *AboutDialogInstance) GetLogoIconName() string {
 	var carg0 *C.GtkAboutDialog // in, none, converted
-	var cret  *C.char           // return, none, string, casted *C.gchar
+	var cret  *C.char           // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkAboutDialog)(UnsafeAboutDialogToGlibNone(about))
 
@@ -58948,7 +59212,9 @@ func (about *AboutDialogInstance) GetLogoIconName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -58956,12 +59222,12 @@ func (about *AboutDialogInstance) GetLogoIconName() string {
 // GetProgramName wraps gtk_about_dialog_get_program_name
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Returns the program name displayed in the about dialog.
 func (about *AboutDialogInstance) GetProgramName() string {
 	var carg0 *C.GtkAboutDialog // in, none, converted
-	var cret  *C.char           // return, none, string, casted *C.gchar
+	var cret  *C.char           // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkAboutDialog)(UnsafeAboutDialogToGlibNone(about))
 
@@ -58970,7 +59236,9 @@ func (about *AboutDialogInstance) GetProgramName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -58978,12 +59246,12 @@ func (about *AboutDialogInstance) GetProgramName() string {
 // GetSystemInformation wraps gtk_about_dialog_get_system_information
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Returns the system information that is shown in the about dialog.
 func (about *AboutDialogInstance) GetSystemInformation() string {
 	var carg0 *C.GtkAboutDialog // in, none, converted
-	var cret  *C.char           // return, none, string, casted *C.gchar
+	var cret  *C.char           // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkAboutDialog)(UnsafeAboutDialogToGlibNone(about))
 
@@ -58992,7 +59260,9 @@ func (about *AboutDialogInstance) GetSystemInformation() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -59000,13 +59270,13 @@ func (about *AboutDialogInstance) GetSystemInformation() string {
 // GetTranslatorCredits wraps gtk_about_dialog_get_translator_credits
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Returns the translator credits string which is displayed
 // in the credits page.
 func (about *AboutDialogInstance) GetTranslatorCredits() string {
 	var carg0 *C.GtkAboutDialog // in, none, converted
-	var cret  *C.char           // return, none, string, casted *C.gchar
+	var cret  *C.char           // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkAboutDialog)(UnsafeAboutDialogToGlibNone(about))
 
@@ -59015,7 +59285,9 @@ func (about *AboutDialogInstance) GetTranslatorCredits() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -59023,12 +59295,12 @@ func (about *AboutDialogInstance) GetTranslatorCredits() string {
 // GetVersion wraps gtk_about_dialog_get_version
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Returns the version string.
 func (about *AboutDialogInstance) GetVersion() string {
 	var carg0 *C.GtkAboutDialog // in, none, converted
-	var cret  *C.char           // return, none, string, casted *C.gchar
+	var cret  *C.char           // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkAboutDialog)(UnsafeAboutDialogToGlibNone(about))
 
@@ -59037,7 +59309,9 @@ func (about *AboutDialogInstance) GetVersion() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -59045,12 +59319,12 @@ func (about *AboutDialogInstance) GetVersion() string {
 // GetWebsite wraps gtk_about_dialog_get_website
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Returns the website URL.
 func (about *AboutDialogInstance) GetWebsite() string {
 	var carg0 *C.GtkAboutDialog // in, none, converted
-	var cret  *C.char           // return, none, string, casted *C.gchar
+	var cret  *C.char           // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkAboutDialog)(UnsafeAboutDialogToGlibNone(about))
 
@@ -59059,7 +59333,9 @@ func (about *AboutDialogInstance) GetWebsite() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -59067,12 +59343,12 @@ func (about *AboutDialogInstance) GetWebsite() string {
 // GetWebsiteLabel wraps gtk_about_dialog_get_website_label
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Returns the label used for the website link.
 func (about *AboutDialogInstance) GetWebsiteLabel() string {
 	var carg0 *C.GtkAboutDialog // in, none, converted
-	var cret  *C.char           // return, none, string, casted *C.gchar
+	var cret  *C.char           // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkAboutDialog)(UnsafeAboutDialogToGlibNone(about))
 
@@ -59081,7 +59357,9 @@ func (about *AboutDialogInstance) GetWebsiteLabel() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -59567,7 +59845,7 @@ type ActionBar interface {
 	// GetCenterWidget wraps gtk_action_bar_get_center_widget
 	// The function returns the following values:
 	// 
-	// 	- goret Widget 
+	// 	- goret Widget (nullable) 
 	//
 	// Retrieves the center bar widget of the bar.
 	GetCenterWidget() Widget
@@ -59694,12 +59972,12 @@ func NewActionBar() Widget {
 // GetCenterWidget wraps gtk_action_bar_get_center_widget
 // The function returns the following values:
 // 
-// 	- goret Widget 
+// 	- goret Widget (nullable) 
 //
 // Retrieves the center bar widget of the bar.
 func (actionBar *ActionBarInstance) GetCenterWidget() Widget {
 	var carg0 *C.GtkActionBar // in, none, converted
-	var cret  *C.GtkWidget    // return, none, converted
+	var cret  *C.GtkWidget    // return, none, converted, nullable
 
 	carg0 = (*C.GtkActionBar)(UnsafeActionBarToGlibNone(actionBar))
 
@@ -59708,7 +59986,9 @@ func (actionBar *ActionBarInstance) GetCenterWidget() Widget {
 
 	var goret Widget
 
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -60271,7 +60551,7 @@ type ApplicationWindow interface {
 	// GetHelpOverlay wraps gtk_application_window_get_help_overlay
 	// The function returns the following values:
 	// 
-	// 	- goret ShortcutsWindow 
+	// 	- goret ShortcutsWindow (nullable) 
 	//
 	// Gets the `GtkShortcutsWindow` that is associated with @window.
 	// 
@@ -60406,14 +60686,14 @@ func NewApplicationWindow(application Application) Widget {
 // GetHelpOverlay wraps gtk_application_window_get_help_overlay
 // The function returns the following values:
 // 
-// 	- goret ShortcutsWindow 
+// 	- goret ShortcutsWindow (nullable) 
 //
 // Gets the `GtkShortcutsWindow` that is associated with @window.
 // 
 // See [method@Gtk.ApplicationWindow.set_help_overlay].
 func (window *ApplicationWindowInstance) GetHelpOverlay() ShortcutsWindow {
 	var carg0 *C.GtkApplicationWindow // in, none, converted
-	var cret  *C.GtkShortcutsWindow   // return, none, converted
+	var cret  *C.GtkShortcutsWindow   // return, none, converted, nullable
 
 	carg0 = (*C.GtkApplicationWindow)(UnsafeApplicationWindowToGlibNone(window))
 
@@ -60422,7 +60702,9 @@ func (window *ApplicationWindowInstance) GetHelpOverlay() ShortcutsWindow {
 
 	var goret ShortcutsWindow
 
-	goret = UnsafeShortcutsWindowFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeShortcutsWindowFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -60562,7 +60844,7 @@ type AspectFrame interface {
 	// GetChild wraps gtk_aspect_frame_get_child
 	// The function returns the following values:
 	// 
-	// 	- goret Widget 
+	// 	- goret Widget (nullable) 
 	//
 	// Gets the child widget of @self.
 	GetChild() Widget
@@ -60738,12 +61020,12 @@ func NewAspectFrame(xalign float32, yalign float32, ratio float32, obeyChild boo
 // GetChild wraps gtk_aspect_frame_get_child
 // The function returns the following values:
 // 
-// 	- goret Widget 
+// 	- goret Widget (nullable) 
 //
 // Gets the child widget of @self.
 func (self *AspectFrameInstance) GetChild() Widget {
 	var carg0 *C.GtkAspectFrame // in, none, converted
-	var cret  *C.GtkWidget      // return, none, converted
+	var cret  *C.GtkWidget      // return, none, converted, nullable
 
 	carg0 = (*C.GtkAspectFrame)(UnsafeAspectFrameToGlibNone(self))
 
@@ -60752,7 +61034,9 @@ func (self *AspectFrameInstance) GetChild() Widget {
 
 	var goret Widget
 
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -62098,14 +62382,14 @@ type BuilderListItemFactory interface {
 	// GetResource wraps gtk_builder_list_item_factory_get_resource
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// If the data references a resource, gets the path of that resource.
 	GetResource() string
 	// GetScope wraps gtk_builder_list_item_factory_get_scope
 	// The function returns the following values:
 	// 
-	// 	- goret BuilderScope 
+	// 	- goret BuilderScope (nullable) 
 	//
 	// Gets the scope used when constructing listitems.
 	GetScope() BuilderScope
@@ -62242,12 +62526,12 @@ func (self *BuilderListItemFactoryInstance) GetBytes() *glib.Bytes {
 // GetResource wraps gtk_builder_list_item_factory_get_resource
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // If the data references a resource, gets the path of that resource.
 func (self *BuilderListItemFactoryInstance) GetResource() string {
 	var carg0 *C.GtkBuilderListItemFactory // in, none, converted
-	var cret  *C.char                      // return, none, string, casted *C.gchar
+	var cret  *C.char                      // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkBuilderListItemFactory)(UnsafeBuilderListItemFactoryToGlibNone(self))
 
@@ -62256,7 +62540,9 @@ func (self *BuilderListItemFactoryInstance) GetResource() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -62264,12 +62550,12 @@ func (self *BuilderListItemFactoryInstance) GetResource() string {
 // GetScope wraps gtk_builder_list_item_factory_get_scope
 // The function returns the following values:
 // 
-// 	- goret BuilderScope 
+// 	- goret BuilderScope (nullable) 
 //
 // Gets the scope used when constructing listitems.
 func (self *BuilderListItemFactoryInstance) GetScope() BuilderScope {
 	var carg0 *C.GtkBuilderListItemFactory // in, none, converted
-	var cret  *C.GtkBuilderScope           // return, none, converted
+	var cret  *C.GtkBuilderScope           // return, none, converted, nullable
 
 	carg0 = (*C.GtkBuilderListItemFactory)(UnsafeBuilderListItemFactoryToGlibNone(self))
 
@@ -62278,7 +62564,9 @@ func (self *BuilderListItemFactoryInstance) GetScope() BuilderScope {
 
 	var goret BuilderScope
 
-	goret = UnsafeBuilderScopeFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeBuilderScopeFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -62353,7 +62641,7 @@ type Button interface {
 	// GetChild wraps gtk_button_get_child
 	// The function returns the following values:
 	// 
-	// 	- goret Widget 
+	// 	- goret Widget (nullable) 
 	//
 	// Gets the child widget of @button.
 	GetChild() Widget
@@ -62367,7 +62655,7 @@ type Button interface {
 	// GetIconName wraps gtk_button_get_icon_name
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Returns the icon name of the button.
 	// 
@@ -62378,7 +62666,7 @@ type Button interface {
 	// GetLabel wraps gtk_button_get_label
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Fetches the text from the label of the button.
 	// 
@@ -62673,12 +62961,12 @@ func (button *ButtonInstance) GetCanShrink() bool {
 // GetChild wraps gtk_button_get_child
 // The function returns the following values:
 // 
-// 	- goret Widget 
+// 	- goret Widget (nullable) 
 //
 // Gets the child widget of @button.
 func (button *ButtonInstance) GetChild() Widget {
 	var carg0 *C.GtkButton // in, none, converted
-	var cret  *C.GtkWidget // return, none, converted
+	var cret  *C.GtkWidget // return, none, converted, nullable
 
 	carg0 = (*C.GtkButton)(UnsafeButtonToGlibNone(button))
 
@@ -62687,7 +62975,9 @@ func (button *ButtonInstance) GetChild() Widget {
 
 	var goret Widget
 
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -62719,7 +63009,7 @@ func (button *ButtonInstance) GetHasFrame() bool {
 // GetIconName wraps gtk_button_get_icon_name
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Returns the icon name of the button.
 // 
@@ -62728,7 +63018,7 @@ func (button *ButtonInstance) GetHasFrame() bool {
 // an empty button with [ctor@Gtk.Button.new] to use as a container.
 func (button *ButtonInstance) GetIconName() string {
 	var carg0 *C.GtkButton // in, none, converted
-	var cret  *C.char      // return, none, string, casted *C.gchar
+	var cret  *C.char      // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkButton)(UnsafeButtonToGlibNone(button))
 
@@ -62737,7 +63027,9 @@ func (button *ButtonInstance) GetIconName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -62745,7 +63037,7 @@ func (button *ButtonInstance) GetIconName() string {
 // GetLabel wraps gtk_button_get_label
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Fetches the text from the label of the button.
 // 
@@ -62754,7 +63046,7 @@ func (button *ButtonInstance) GetIconName() string {
 // an empty button with [ctor@Gtk.Button.new] to use as a container.
 func (button *ButtonInstance) GetLabel() string {
 	var carg0 *C.GtkButton // in, none, converted
-	var cret  *C.char      // return, none, string, casted *C.gchar
+	var cret  *C.char      // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkButton)(UnsafeButtonToGlibNone(button))
 
@@ -62763,7 +63055,9 @@ func (button *ButtonInstance) GetLabel() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -63842,14 +64136,14 @@ type CenterBox interface {
 	// GetCenterWidget wraps gtk_center_box_get_center_widget
 	// The function returns the following values:
 	// 
-	// 	- goret Widget 
+	// 	- goret Widget (nullable) 
 	//
 	// Gets the center widget, or %NULL if there is none.
 	GetCenterWidget() Widget
 	// GetEndWidget wraps gtk_center_box_get_end_widget
 	// The function returns the following values:
 	// 
-	// 	- goret Widget 
+	// 	- goret Widget (nullable) 
 	//
 	// Gets the end widget, or %NULL if there is none.
 	GetEndWidget() Widget
@@ -63863,7 +64157,7 @@ type CenterBox interface {
 	// GetStartWidget wraps gtk_center_box_get_start_widget
 	// The function returns the following values:
 	// 
-	// 	- goret Widget 
+	// 	- goret Widget (nullable) 
 	//
 	// Gets the start widget, or %NULL if there is none.
 	GetStartWidget() Widget
@@ -64021,12 +64315,12 @@ func (self *CenterBoxInstance) GetBaselinePosition() BaselinePosition {
 // GetCenterWidget wraps gtk_center_box_get_center_widget
 // The function returns the following values:
 // 
-// 	- goret Widget 
+// 	- goret Widget (nullable) 
 //
 // Gets the center widget, or %NULL if there is none.
 func (self *CenterBoxInstance) GetCenterWidget() Widget {
 	var carg0 *C.GtkCenterBox // in, none, converted
-	var cret  *C.GtkWidget    // return, none, converted
+	var cret  *C.GtkWidget    // return, none, converted, nullable
 
 	carg0 = (*C.GtkCenterBox)(UnsafeCenterBoxToGlibNone(self))
 
@@ -64035,7 +64329,9 @@ func (self *CenterBoxInstance) GetCenterWidget() Widget {
 
 	var goret Widget
 
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -64043,12 +64339,12 @@ func (self *CenterBoxInstance) GetCenterWidget() Widget {
 // GetEndWidget wraps gtk_center_box_get_end_widget
 // The function returns the following values:
 // 
-// 	- goret Widget 
+// 	- goret Widget (nullable) 
 //
 // Gets the end widget, or %NULL if there is none.
 func (self *CenterBoxInstance) GetEndWidget() Widget {
 	var carg0 *C.GtkCenterBox // in, none, converted
-	var cret  *C.GtkWidget    // return, none, converted
+	var cret  *C.GtkWidget    // return, none, converted, nullable
 
 	carg0 = (*C.GtkCenterBox)(UnsafeCenterBoxToGlibNone(self))
 
@@ -64057,7 +64353,9 @@ func (self *CenterBoxInstance) GetEndWidget() Widget {
 
 	var goret Widget
 
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -64089,12 +64387,12 @@ func (self *CenterBoxInstance) GetShrinkCenterLast() bool {
 // GetStartWidget wraps gtk_center_box_get_start_widget
 // The function returns the following values:
 // 
-// 	- goret Widget 
+// 	- goret Widget (nullable) 
 //
 // Gets the start widget, or %NULL if there is none.
 func (self *CenterBoxInstance) GetStartWidget() Widget {
 	var carg0 *C.GtkCenterBox // in, none, converted
-	var cret  *C.GtkWidget    // return, none, converted
+	var cret  *C.GtkWidget    // return, none, converted, nullable
 
 	carg0 = (*C.GtkCenterBox)(UnsafeCenterBoxToGlibNone(self))
 
@@ -64103,7 +64401,9 @@ func (self *CenterBoxInstance) GetStartWidget() Widget {
 
 	var goret Widget
 
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -64261,14 +64561,14 @@ type CenterLayout interface {
 	// GetCenterWidget wraps gtk_center_layout_get_center_widget
 	// The function returns the following values:
 	// 
-	// 	- goret Widget 
+	// 	- goret Widget (nullable) 
 	//
 	// Returns the center widget of the layout.
 	GetCenterWidget() Widget
 	// GetEndWidget wraps gtk_center_layout_get_end_widget
 	// The function returns the following values:
 	// 
-	// 	- goret Widget 
+	// 	- goret Widget (nullable) 
 	//
 	// Returns the end widget of the layout.
 	GetEndWidget() Widget
@@ -64289,7 +64589,7 @@ type CenterLayout interface {
 	// GetStartWidget wraps gtk_center_layout_get_start_widget
 	// The function returns the following values:
 	// 
-	// 	- goret Widget 
+	// 	- goret Widget (nullable) 
 	//
 	// Returns the start widget of the layout.
 	GetStartWidget() Widget
@@ -64435,12 +64735,12 @@ func (self *CenterLayoutInstance) GetBaselinePosition() BaselinePosition {
 // GetCenterWidget wraps gtk_center_layout_get_center_widget
 // The function returns the following values:
 // 
-// 	- goret Widget 
+// 	- goret Widget (nullable) 
 //
 // Returns the center widget of the layout.
 func (self *CenterLayoutInstance) GetCenterWidget() Widget {
 	var carg0 *C.GtkCenterLayout // in, none, converted
-	var cret  *C.GtkWidget       // return, none, converted
+	var cret  *C.GtkWidget       // return, none, converted, nullable
 
 	carg0 = (*C.GtkCenterLayout)(UnsafeCenterLayoutToGlibNone(self))
 
@@ -64449,7 +64749,9 @@ func (self *CenterLayoutInstance) GetCenterWidget() Widget {
 
 	var goret Widget
 
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -64457,12 +64759,12 @@ func (self *CenterLayoutInstance) GetCenterWidget() Widget {
 // GetEndWidget wraps gtk_center_layout_get_end_widget
 // The function returns the following values:
 // 
-// 	- goret Widget 
+// 	- goret Widget (nullable) 
 //
 // Returns the end widget of the layout.
 func (self *CenterLayoutInstance) GetEndWidget() Widget {
 	var carg0 *C.GtkCenterLayout // in, none, converted
-	var cret  *C.GtkWidget       // return, none, converted
+	var cret  *C.GtkWidget       // return, none, converted, nullable
 
 	carg0 = (*C.GtkCenterLayout)(UnsafeCenterLayoutToGlibNone(self))
 
@@ -64471,7 +64773,9 @@ func (self *CenterLayoutInstance) GetEndWidget() Widget {
 
 	var goret Widget
 
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -64525,12 +64829,12 @@ func (self *CenterLayoutInstance) GetShrinkCenterLast() bool {
 // GetStartWidget wraps gtk_center_layout_get_start_widget
 // The function returns the following values:
 // 
-// 	- goret Widget 
+// 	- goret Widget (nullable) 
 //
 // Returns the start widget of the layout.
 func (self *CenterLayoutInstance) GetStartWidget() Widget {
 	var carg0 *C.GtkCenterLayout // in, none, converted
-	var cret  *C.GtkWidget       // return, none, converted
+	var cret  *C.GtkWidget       // return, none, converted, nullable
 
 	carg0 = (*C.GtkCenterLayout)(UnsafeCenterLayoutToGlibNone(self))
 
@@ -64539,7 +64843,9 @@ func (self *CenterLayoutInstance) GetStartWidget() Widget {
 
 	var goret Widget
 
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -64775,7 +65081,7 @@ type CheckButton interface {
 	// GetChild wraps gtk_check_button_get_child
 	// The function returns the following values:
 	// 
-	// 	- goret Widget 
+	// 	- goret Widget (nullable) 
 	//
 	// Gets the child widget of @button or `NULL` if [property@CheckButton:label] is set.
 	GetChild() Widget
@@ -64789,7 +65095,7 @@ type CheckButton interface {
 	// GetLabel wraps gtk_check_button_get_label
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Returns the label of the check button or `NULL` if [property@CheckButton:child] is set.
 	GetLabel() string
@@ -65057,12 +65363,12 @@ func (self *CheckButtonInstance) GetActive() bool {
 // GetChild wraps gtk_check_button_get_child
 // The function returns the following values:
 // 
-// 	- goret Widget 
+// 	- goret Widget (nullable) 
 //
 // Gets the child widget of @button or `NULL` if [property@CheckButton:label] is set.
 func (button *CheckButtonInstance) GetChild() Widget {
 	var carg0 *C.GtkCheckButton // in, none, converted
-	var cret  *C.GtkWidget      // return, none, converted
+	var cret  *C.GtkWidget      // return, none, converted, nullable
 
 	carg0 = (*C.GtkCheckButton)(UnsafeCheckButtonToGlibNone(button))
 
@@ -65071,7 +65377,9 @@ func (button *CheckButtonInstance) GetChild() Widget {
 
 	var goret Widget
 
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -65103,12 +65411,12 @@ func (checkButton *CheckButtonInstance) GetInconsistent() bool {
 // GetLabel wraps gtk_check_button_get_label
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Returns the label of the check button or `NULL` if [property@CheckButton:child] is set.
 func (self *CheckButtonInstance) GetLabel() string {
 	var carg0 *C.GtkCheckButton // in, none, converted
-	var cret  *C.char           // return, none, string, casted *C.gchar
+	var cret  *C.char           // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkCheckButton)(UnsafeCheckButtonToGlibNone(self))
 
@@ -65117,7 +65425,9 @@ func (self *CheckButtonInstance) GetLabel() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -65370,7 +65680,7 @@ type ColorDialogButton interface {
 	// GetDialog wraps gtk_color_dialog_button_get_dialog
 	// The function returns the following values:
 	// 
-	// 	- goret ColorDialog 
+	// 	- goret ColorDialog (nullable) 
 	//
 	// Returns the `GtkColorDialog` of @self.
 	GetDialog() ColorDialog
@@ -65495,12 +65805,12 @@ func NewColorDialogButton(dialog ColorDialog) Widget {
 // GetDialog wraps gtk_color_dialog_button_get_dialog
 // The function returns the following values:
 // 
-// 	- goret ColorDialog 
+// 	- goret ColorDialog (nullable) 
 //
 // Returns the `GtkColorDialog` of @self.
 func (self *ColorDialogButtonInstance) GetDialog() ColorDialog {
 	var carg0 *C.GtkColorDialogButton // in, none, converted
-	var cret  *C.GtkColorDialog       // return, none, converted
+	var cret  *C.GtkColorDialog       // return, none, converted, nullable
 
 	carg0 = (*C.GtkColorDialogButton)(UnsafeColorDialogButtonToGlibNone(self))
 
@@ -65509,7 +65819,9 @@ func (self *ColorDialogButtonInstance) GetDialog() ColorDialog {
 
 	var goret ColorDialog
 
-	goret = UnsafeColorDialogFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeColorDialogFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -65707,14 +66019,14 @@ type ColumnView interface {
 	// GetHeaderFactory wraps gtk_column_view_get_header_factory
 	// The function returns the following values:
 	// 
-	// 	- goret ListItemFactory 
+	// 	- goret ListItemFactory (nullable) 
 	//
 	// Gets the factory that's currently used to populate section headers.
 	GetHeaderFactory() ListItemFactory
 	// GetModel wraps gtk_column_view_get_model
 	// The function returns the following values:
 	// 
-	// 	- goret SelectionModel 
+	// 	- goret SelectionModel (nullable) 
 	//
 	// Gets the model that's currently used to read the items displayed.
 	GetModel() SelectionModel
@@ -65728,7 +66040,7 @@ type ColumnView interface {
 	// GetRowFactory wraps gtk_column_view_get_row_factory
 	// The function returns the following values:
 	// 
-	// 	- goret ListItemFactory 
+	// 	- goret ListItemFactory (nullable) 
 	//
 	// Gets the factory set via [method@Gtk.ColumnView.set_row_factory].
 	GetRowFactory() ListItemFactory
@@ -65759,7 +66071,7 @@ type ColumnView interface {
 	// GetSorter wraps gtk_column_view_get_sorter
 	// The function returns the following values:
 	// 
-	// 	- goret Sorter 
+	// 	- goret Sorter (nullable) 
 	//
 	// Returns a special sorter that reflects the users sorting
 	// choices in the column view.
@@ -66098,12 +66410,12 @@ func (self *ColumnViewInstance) GetEnableRubberband() bool {
 // GetHeaderFactory wraps gtk_column_view_get_header_factory
 // The function returns the following values:
 // 
-// 	- goret ListItemFactory 
+// 	- goret ListItemFactory (nullable) 
 //
 // Gets the factory that's currently used to populate section headers.
 func (self *ColumnViewInstance) GetHeaderFactory() ListItemFactory {
 	var carg0 *C.GtkColumnView      // in, none, converted
-	var cret  *C.GtkListItemFactory // return, none, converted
+	var cret  *C.GtkListItemFactory // return, none, converted, nullable
 
 	carg0 = (*C.GtkColumnView)(UnsafeColumnViewToGlibNone(self))
 
@@ -66112,7 +66424,9 @@ func (self *ColumnViewInstance) GetHeaderFactory() ListItemFactory {
 
 	var goret ListItemFactory
 
-	goret = UnsafeListItemFactoryFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeListItemFactoryFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -66120,12 +66434,12 @@ func (self *ColumnViewInstance) GetHeaderFactory() ListItemFactory {
 // GetModel wraps gtk_column_view_get_model
 // The function returns the following values:
 // 
-// 	- goret SelectionModel 
+// 	- goret SelectionModel (nullable) 
 //
 // Gets the model that's currently used to read the items displayed.
 func (self *ColumnViewInstance) GetModel() SelectionModel {
 	var carg0 *C.GtkColumnView     // in, none, converted
-	var cret  *C.GtkSelectionModel // return, none, converted
+	var cret  *C.GtkSelectionModel // return, none, converted, nullable
 
 	carg0 = (*C.GtkColumnView)(UnsafeColumnViewToGlibNone(self))
 
@@ -66134,7 +66448,9 @@ func (self *ColumnViewInstance) GetModel() SelectionModel {
 
 	var goret SelectionModel
 
-	goret = UnsafeSelectionModelFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeSelectionModelFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -66166,12 +66482,12 @@ func (self *ColumnViewInstance) GetReorderable() bool {
 // GetRowFactory wraps gtk_column_view_get_row_factory
 // The function returns the following values:
 // 
-// 	- goret ListItemFactory 
+// 	- goret ListItemFactory (nullable) 
 //
 // Gets the factory set via [method@Gtk.ColumnView.set_row_factory].
 func (self *ColumnViewInstance) GetRowFactory() ListItemFactory {
 	var carg0 *C.GtkColumnView      // in, none, converted
-	var cret  *C.GtkListItemFactory // return, none, converted
+	var cret  *C.GtkListItemFactory // return, none, converted, nullable
 
 	carg0 = (*C.GtkColumnView)(UnsafeColumnViewToGlibNone(self))
 
@@ -66180,7 +66496,9 @@ func (self *ColumnViewInstance) GetRowFactory() ListItemFactory {
 
 	var goret ListItemFactory
 
-	goret = UnsafeListItemFactoryFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeListItemFactoryFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -66263,7 +66581,7 @@ func (self *ColumnViewInstance) GetSingleClickActivate() bool {
 // GetSorter wraps gtk_column_view_get_sorter
 // The function returns the following values:
 // 
-// 	- goret Sorter 
+// 	- goret Sorter (nullable) 
 //
 // Returns a special sorter that reflects the users sorting
 // choices in the column view.
@@ -66286,7 +66604,7 @@ func (self *ColumnViewInstance) GetSingleClickActivate() bool {
 // ```
 func (self *ColumnViewInstance) GetSorter() Sorter {
 	var carg0 *C.GtkColumnView // in, none, converted
-	var cret  *C.GtkSorter     // return, none, converted
+	var cret  *C.GtkSorter     // return, none, converted, nullable
 
 	carg0 = (*C.GtkColumnView)(UnsafeColumnViewToGlibNone(self))
 
@@ -66295,7 +66613,9 @@ func (self *ColumnViewInstance) GetSorter() Sorter {
 
 	var goret Sorter
 
-	goret = UnsafeSorterFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeSorterFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -66689,7 +67009,7 @@ type ColumnViewCell interface {
 	// GetChild wraps gtk_column_view_cell_get_child
 	// The function returns the following values:
 	// 
-	// 	- goret Widget 
+	// 	- goret Widget (nullable) 
 	//
 	// Gets the child previously set via gtk_column_view_cell_set_child() or
 	// %NULL if none was set.
@@ -66790,13 +67110,13 @@ func UnsafeColumnViewCellToGlibFull(c ColumnViewCell) unsafe.Pointer {
 // GetChild wraps gtk_column_view_cell_get_child
 // The function returns the following values:
 // 
-// 	- goret Widget 
+// 	- goret Widget (nullable) 
 //
 // Gets the child previously set via gtk_column_view_cell_set_child() or
 // %NULL if none was set.
 func (self *ColumnViewCellInstance) GetChild() Widget {
 	var carg0 *C.GtkColumnViewCell // in, none, converted
-	var cret  *C.GtkWidget         // return, none, converted
+	var cret  *C.GtkWidget         // return, none, converted, nullable
 
 	carg0 = (*C.GtkColumnViewCell)(UnsafeColumnViewCellToGlibNone(self))
 
@@ -66805,7 +67125,9 @@ func (self *ColumnViewCellInstance) GetChild() Widget {
 
 	var goret Widget
 
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -67010,7 +67332,7 @@ type ColumnViewSorter interface {
 	// The function returns the following values:
 	// 
 	// 	- sortOrder SortType: return location for the sort order 
-	// 	- goret ColumnViewColumn 
+	// 	- goret ColumnViewColumn (nullable) 
 	//
 	// Gets the @position'th sort column and its associated sort order.
 	// 
@@ -67020,7 +67342,7 @@ type ColumnViewSorter interface {
 	// GetPrimarySortColumn wraps gtk_column_view_sorter_get_primary_sort_column
 	// The function returns the following values:
 	// 
-	// 	- goret ColumnViewColumn 
+	// 	- goret ColumnViewColumn (nullable) 
 	//
 	// Returns the primary sort column.
 	// 
@@ -67118,7 +67440,7 @@ func (self *ColumnViewSorterInstance) GetNSortColumns() uint {
 // The function returns the following values:
 // 
 // 	- sortOrder SortType: return location for the sort order 
-// 	- goret ColumnViewColumn 
+// 	- goret ColumnViewColumn (nullable) 
 //
 // Gets the @position'th sort column and its associated sort order.
 // 
@@ -67128,7 +67450,7 @@ func (self *ColumnViewSorterInstance) GetNthSortColumn(position uint) (SortType,
 	var carg0 *C.GtkColumnViewSorter // in, none, converted
 	var carg1 C.guint                // in, none, casted
 	var carg2 C.GtkSortType          // out, full, casted
-	var cret  *C.GtkColumnViewColumn // return, none, converted
+	var cret  *C.GtkColumnViewColumn // return, none, converted, nullable
 
 	carg0 = (*C.GtkColumnViewSorter)(UnsafeColumnViewSorterToGlibNone(self))
 	carg1 = C.guint(position)
@@ -67141,7 +67463,9 @@ func (self *ColumnViewSorterInstance) GetNthSortColumn(position uint) (SortType,
 	var goret     ColumnViewColumn
 
 	sortOrder = SortType(carg2)
-	goret = UnsafeColumnViewColumnFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeColumnViewColumnFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return sortOrder, goret
 }
@@ -67149,7 +67473,7 @@ func (self *ColumnViewSorterInstance) GetNthSortColumn(position uint) (SortType,
 // GetPrimarySortColumn wraps gtk_column_view_sorter_get_primary_sort_column
 // The function returns the following values:
 // 
-// 	- goret ColumnViewColumn 
+// 	- goret ColumnViewColumn (nullable) 
 //
 // Returns the primary sort column.
 // 
@@ -67157,7 +67481,7 @@ func (self *ColumnViewSorterInstance) GetNthSortColumn(position uint) (SortType,
 // in a column view header.
 func (self *ColumnViewSorterInstance) GetPrimarySortColumn() ColumnViewColumn {
 	var carg0 *C.GtkColumnViewSorter // in, none, converted
-	var cret  *C.GtkColumnViewColumn // return, none, converted
+	var cret  *C.GtkColumnViewColumn // return, none, converted, nullable
 
 	carg0 = (*C.GtkColumnViewSorter)(UnsafeColumnViewSorterToGlibNone(self))
 
@@ -67166,7 +67490,9 @@ func (self *ColumnViewSorterInstance) GetPrimarySortColumn() ColumnViewColumn {
 
 	var goret ColumnViewColumn
 
-	goret = UnsafeColumnViewColumnFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeColumnViewColumnFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -68028,7 +68354,7 @@ type DragIcon interface {
 	// GetChild wraps gtk_drag_icon_get_child
 	// The function returns the following values:
 	// 
-	// 	- goret Widget 
+	// 	- goret Widget (nullable) 
 	//
 	// Gets the widget currently used as drag icon.
 	GetChild() Widget
@@ -68127,7 +68453,7 @@ func DragIconGetForDrag(drag gdk.Drag) Widget {
 // 
 // The function returns the following values:
 // 
-// 	- goret Widget 
+// 	- goret Widget (nullable) 
 //
 // Creates a widget that can be used as a drag icon for the given
 // @value.
@@ -68141,7 +68467,7 @@ func DragIconGetForDrag(drag gdk.Drag) Widget {
 // a drag icon using this function there.
 func DragIconCreateWidgetForValue(value *gobject.Value) Widget {
 	var carg1 *C.GValue    // in, none, converted
-	var cret  *C.GtkWidget // return, full, converted
+	var cret  *C.GtkWidget // return, full, converted, nullable
 
 	carg1 = (*C.GValue)(gobject.UnsafeValueToGlibUseAnyInstead(value))
 
@@ -68150,7 +68476,9 @@ func DragIconCreateWidgetForValue(value *gobject.Value) Widget {
 
 	var goret Widget
 
-	goret = UnsafeWidgetFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWidgetFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -68190,12 +68518,12 @@ func DragIconSetFromPaintable(drag gdk.Drag, paintable gdk.Paintable, hotX int, 
 // GetChild wraps gtk_drag_icon_get_child
 // The function returns the following values:
 // 
-// 	- goret Widget 
+// 	- goret Widget (nullable) 
 //
 // Gets the widget currently used as drag icon.
 func (self *DragIconInstance) GetChild() Widget {
 	var carg0 *C.GtkDragIcon // in, none, converted
-	var cret  *C.GtkWidget   // return, none, converted
+	var cret  *C.GtkWidget   // return, none, converted, nullable
 
 	carg0 = (*C.GtkDragIcon)(UnsafeDragIconToGlibNone(self))
 
@@ -68204,7 +68532,9 @@ func (self *DragIconInstance) GetChild() Widget {
 
 	var goret Widget
 
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -68334,14 +68664,14 @@ type DragSource interface {
 	// GetContent wraps gtk_drag_source_get_content
 	// The function returns the following values:
 	// 
-	// 	- goret gdk.ContentProvider 
+	// 	- goret gdk.ContentProvider (nullable) 
 	//
 	// Gets the current content provider of a `GtkDragSource`.
 	GetContent() gdk.ContentProvider
 	// GetDrag wraps gtk_drag_source_get_drag
 	// The function returns the following values:
 	// 
-	// 	- goret gdk.Drag 
+	// 	- goret gdk.Drag (nullable) 
 	//
 	// Returns the underlying `GdkDrag` object for an ongoing drag.
 	GetDrag() gdk.Drag
@@ -68526,12 +68856,12 @@ func (source *DragSourceInstance) GetActions() gdk.DragAction {
 // GetContent wraps gtk_drag_source_get_content
 // The function returns the following values:
 // 
-// 	- goret gdk.ContentProvider 
+// 	- goret gdk.ContentProvider (nullable) 
 //
 // Gets the current content provider of a `GtkDragSource`.
 func (source *DragSourceInstance) GetContent() gdk.ContentProvider {
 	var carg0 *C.GtkDragSource      // in, none, converted
-	var cret  *C.GdkContentProvider // return, none, converted
+	var cret  *C.GdkContentProvider // return, none, converted, nullable
 
 	carg0 = (*C.GtkDragSource)(UnsafeDragSourceToGlibNone(source))
 
@@ -68540,7 +68870,9 @@ func (source *DragSourceInstance) GetContent() gdk.ContentProvider {
 
 	var goret gdk.ContentProvider
 
-	goret = gdk.UnsafeContentProviderFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gdk.UnsafeContentProviderFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -68548,12 +68880,12 @@ func (source *DragSourceInstance) GetContent() gdk.ContentProvider {
 // GetDrag wraps gtk_drag_source_get_drag
 // The function returns the following values:
 // 
-// 	- goret gdk.Drag 
+// 	- goret gdk.Drag (nullable) 
 //
 // Returns the underlying `GdkDrag` object for an ongoing drag.
 func (source *DragSourceInstance) GetDrag() gdk.Drag {
 	var carg0 *C.GtkDragSource // in, none, converted
-	var cret  *C.GdkDrag       // return, none, converted
+	var cret  *C.GdkDrag       // return, none, converted, nullable
 
 	carg0 = (*C.GtkDragSource)(UnsafeDragSourceToGlibNone(source))
 
@@ -68562,7 +68894,9 @@ func (source *DragSourceInstance) GetDrag() gdk.Drag {
 
 	var goret gdk.Drag
 
-	goret = gdk.UnsafeDragFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gdk.UnsafeDragFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -69059,7 +69393,7 @@ type DropControllerMotion interface {
 	// GetDrop wraps gtk_drop_controller_motion_get_drop
 	// The function returns the following values:
 	// 
-	// 	- goret gdk.Drop 
+	// 	- goret gdk.Drop (nullable) 
 	//
 	// Returns the `GdkDrop` of a current Drag-and-Drop operation
 	// over the widget of @self.
@@ -69169,13 +69503,13 @@ func (self *DropControllerMotionInstance) ContainsPointer() bool {
 // GetDrop wraps gtk_drop_controller_motion_get_drop
 // The function returns the following values:
 // 
-// 	- goret gdk.Drop 
+// 	- goret gdk.Drop (nullable) 
 //
 // Returns the `GdkDrop` of a current Drag-and-Drop operation
 // over the widget of @self.
 func (self *DropControllerMotionInstance) GetDrop() gdk.Drop {
 	var carg0 *C.GtkDropControllerMotion // in, none, converted
-	var cret  *C.GdkDrop                 // return, none, converted
+	var cret  *C.GdkDrop                 // return, none, converted, nullable
 
 	carg0 = (*C.GtkDropControllerMotion)(UnsafeDropControllerMotionToGlibNone(self))
 
@@ -69184,7 +69518,9 @@ func (self *DropControllerMotionInstance) GetDrop() gdk.Drop {
 
 	var goret gdk.Drop
 
-	goret = gdk.UnsafeDropFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gdk.UnsafeDropFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -69319,7 +69655,7 @@ type DropDown interface {
 	// GetFactory wraps gtk_drop_down_get_factory
 	// The function returns the following values:
 	// 
-	// 	- goret ListItemFactory 
+	// 	- goret ListItemFactory (nullable) 
 	//
 	// Gets the factory that's currently used to populate list items.
 	// 
@@ -69330,21 +69666,21 @@ type DropDown interface {
 	// GetHeaderFactory wraps gtk_drop_down_get_header_factory
 	// The function returns the following values:
 	// 
-	// 	- goret ListItemFactory 
+	// 	- goret ListItemFactory (nullable) 
 	//
 	// Gets the factory that's currently used to create header widgets for the popup.
 	GetHeaderFactory() ListItemFactory
 	// GetListFactory wraps gtk_drop_down_get_list_factory
 	// The function returns the following values:
 	// 
-	// 	- goret ListItemFactory 
+	// 	- goret ListItemFactory (nullable) 
 	//
 	// Gets the factory that's currently used to populate list items in the popup.
 	GetListFactory() ListItemFactory
 	// GetModel wraps gtk_drop_down_get_model
 	// The function returns the following values:
 	// 
-	// 	- goret gio.ListModel 
+	// 	- goret gio.ListModel (nullable) 
 	//
 	// Gets the model that provides the displayed items.
 	GetModel() gio.ListModel
@@ -69550,7 +69886,7 @@ func (self *DropDownInstance) GetEnableSearch() bool {
 // GetFactory wraps gtk_drop_down_get_factory
 // The function returns the following values:
 // 
-// 	- goret ListItemFactory 
+// 	- goret ListItemFactory (nullable) 
 //
 // Gets the factory that's currently used to populate list items.
 // 
@@ -69559,7 +69895,7 @@ func (self *DropDownInstance) GetEnableSearch() bool {
 // if [property@Gtk.DropDown:list-factory] is not set.
 func (self *DropDownInstance) GetFactory() ListItemFactory {
 	var carg0 *C.GtkDropDown        // in, none, converted
-	var cret  *C.GtkListItemFactory // return, none, converted
+	var cret  *C.GtkListItemFactory // return, none, converted, nullable
 
 	carg0 = (*C.GtkDropDown)(UnsafeDropDownToGlibNone(self))
 
@@ -69568,7 +69904,9 @@ func (self *DropDownInstance) GetFactory() ListItemFactory {
 
 	var goret ListItemFactory
 
-	goret = UnsafeListItemFactoryFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeListItemFactoryFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -69576,12 +69914,12 @@ func (self *DropDownInstance) GetFactory() ListItemFactory {
 // GetHeaderFactory wraps gtk_drop_down_get_header_factory
 // The function returns the following values:
 // 
-// 	- goret ListItemFactory 
+// 	- goret ListItemFactory (nullable) 
 //
 // Gets the factory that's currently used to create header widgets for the popup.
 func (self *DropDownInstance) GetHeaderFactory() ListItemFactory {
 	var carg0 *C.GtkDropDown        // in, none, converted
-	var cret  *C.GtkListItemFactory // return, none, converted
+	var cret  *C.GtkListItemFactory // return, none, converted, nullable
 
 	carg0 = (*C.GtkDropDown)(UnsafeDropDownToGlibNone(self))
 
@@ -69590,7 +69928,9 @@ func (self *DropDownInstance) GetHeaderFactory() ListItemFactory {
 
 	var goret ListItemFactory
 
-	goret = UnsafeListItemFactoryFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeListItemFactoryFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -69598,12 +69938,12 @@ func (self *DropDownInstance) GetHeaderFactory() ListItemFactory {
 // GetListFactory wraps gtk_drop_down_get_list_factory
 // The function returns the following values:
 // 
-// 	- goret ListItemFactory 
+// 	- goret ListItemFactory (nullable) 
 //
 // Gets the factory that's currently used to populate list items in the popup.
 func (self *DropDownInstance) GetListFactory() ListItemFactory {
 	var carg0 *C.GtkDropDown        // in, none, converted
-	var cret  *C.GtkListItemFactory // return, none, converted
+	var cret  *C.GtkListItemFactory // return, none, converted, nullable
 
 	carg0 = (*C.GtkDropDown)(UnsafeDropDownToGlibNone(self))
 
@@ -69612,7 +69952,9 @@ func (self *DropDownInstance) GetListFactory() ListItemFactory {
 
 	var goret ListItemFactory
 
-	goret = UnsafeListItemFactoryFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeListItemFactoryFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -69620,12 +69962,12 @@ func (self *DropDownInstance) GetListFactory() ListItemFactory {
 // GetModel wraps gtk_drop_down_get_model
 // The function returns the following values:
 // 
-// 	- goret gio.ListModel 
+// 	- goret gio.ListModel (nullable) 
 //
 // Gets the model that provides the displayed items.
 func (self *DropDownInstance) GetModel() gio.ListModel {
 	var carg0 *C.GtkDropDown // in, none, converted
-	var cret  *C.GListModel  // return, none, converted
+	var cret  *C.GListModel  // return, none, converted, nullable
 
 	carg0 = (*C.GtkDropDown)(UnsafeDropDownToGlibNone(self))
 
@@ -69634,7 +69976,9 @@ func (self *DropDownInstance) GetModel() gio.ListModel {
 
 	var goret gio.ListModel
 
-	goret = gio.UnsafeListModelFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gio.UnsafeListModelFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -69979,7 +70323,7 @@ type DropTarget interface {
 	// GetCurrentDrop wraps gtk_drop_target_get_current_drop
 	// The function returns the following values:
 	// 
-	// 	- goret gdk.Drop 
+	// 	- goret gdk.Drop (nullable) 
 	//
 	// Gets the currently handled drop operation.
 	// 
@@ -69988,7 +70332,7 @@ type DropTarget interface {
 	// GetFormats wraps gtk_drop_target_get_formats
 	// The function returns the following values:
 	// 
-	// 	- goret *gdk.ContentFormats 
+	// 	- goret *gdk.ContentFormats (nullable) 
 	//
 	// Gets the data formats that this drop target accepts.
 	// 
@@ -69999,7 +70343,7 @@ type DropTarget interface {
 	// 
 	// 	- nTypes uint: the number of `GType`s contained in the
 	//   return value 
-	// 	- goret []gobject.Type 
+	// 	- goret []gobject.Type (nullable) 
 	//
 	// Gets the list of supported `GType`s that can be dropped on the target.
 	// 
@@ -70015,7 +70359,7 @@ type DropTarget interface {
 	// GetValue wraps gtk_drop_target_get_value
 	// The function returns the following values:
 	// 
-	// 	- goret *gobject.Value 
+	// 	- goret *gobject.Value (nullable) 
 	//
 	// Gets the current drop data, as a `GValue`.
 	GetValue() *gobject.Value
@@ -70201,14 +70545,14 @@ func (self *DropTargetInstance) GetActions() gdk.DragAction {
 // GetCurrentDrop wraps gtk_drop_target_get_current_drop
 // The function returns the following values:
 // 
-// 	- goret gdk.Drop 
+// 	- goret gdk.Drop (nullable) 
 //
 // Gets the currently handled drop operation.
 // 
 // If no drop operation is going on, %NULL is returned.
 func (self *DropTargetInstance) GetCurrentDrop() gdk.Drop {
 	var carg0 *C.GtkDropTarget // in, none, converted
-	var cret  *C.GdkDrop       // return, none, converted
+	var cret  *C.GdkDrop       // return, none, converted, nullable
 
 	carg0 = (*C.GtkDropTarget)(UnsafeDropTargetToGlibNone(self))
 
@@ -70217,7 +70561,9 @@ func (self *DropTargetInstance) GetCurrentDrop() gdk.Drop {
 
 	var goret gdk.Drop
 
-	goret = gdk.UnsafeDropFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gdk.UnsafeDropFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -70225,14 +70571,14 @@ func (self *DropTargetInstance) GetCurrentDrop() gdk.Drop {
 // GetFormats wraps gtk_drop_target_get_formats
 // The function returns the following values:
 // 
-// 	- goret *gdk.ContentFormats 
+// 	- goret *gdk.ContentFormats (nullable) 
 //
 // Gets the data formats that this drop target accepts.
 // 
 // If the result is %NULL, all formats are expected to be supported.
 func (self *DropTargetInstance) GetFormats() *gdk.ContentFormats {
 	var carg0 *C.GtkDropTarget     // in, none, converted
-	var cret  *C.GdkContentFormats // return, none, converted
+	var cret  *C.GdkContentFormats // return, none, converted, nullable
 
 	carg0 = (*C.GtkDropTarget)(UnsafeDropTargetToGlibNone(self))
 
@@ -70241,7 +70587,9 @@ func (self *DropTargetInstance) GetFormats() *gdk.ContentFormats {
 
 	var goret *gdk.ContentFormats
 
-	goret = gdk.UnsafeContentFormatsFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gdk.UnsafeContentFormatsFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -70251,7 +70599,7 @@ func (self *DropTargetInstance) GetFormats() *gdk.ContentFormats {
 // 
 // 	- nTypes uint: the number of `GType`s contained in the
 //   return value 
-// 	- goret []gobject.Type 
+// 	- goret []gobject.Type (nullable) 
 //
 // Gets the list of supported `GType`s that can be dropped on the target.
 // 
@@ -70259,7 +70607,7 @@ func (self *DropTargetInstance) GetFormats() *gdk.ContentFormats {
 func (self *DropTargetInstance) GetGTypes() (uint, []gobject.Type) {
 	var carg0 *C.GtkDropTarget // in, none, converted
 	var carg1 C.gsize          // out, full, casted
-	var cret  *C.GType         // return, transfer: none, C Pointers: 1, Name: array[Type], scope: , array (inner: *typesystem.Alias)
+	var cret  *C.GType         // return, transfer: none, C Pointers: 1, Name: array[Type], scope: , nullable, array (inner: *typesystem.Alias)
 
 	carg0 = (*C.GtkDropTarget)(UnsafeDropTargetToGlibNone(self))
 
@@ -70304,12 +70652,12 @@ func (self *DropTargetInstance) GetPreload() bool {
 // GetValue wraps gtk_drop_target_get_value
 // The function returns the following values:
 // 
-// 	- goret *gobject.Value 
+// 	- goret *gobject.Value (nullable) 
 //
 // Gets the current drop data, as a `GValue`.
 func (self *DropTargetInstance) GetValue() *gobject.Value {
 	var carg0 *C.GtkDropTarget // in, none, converted
-	var cret  *C.GValue        // return, none, converted
+	var cret  *C.GValue        // return, none, converted, nullable
 
 	carg0 = (*C.GtkDropTarget)(UnsafeDropTargetToGlibNone(self))
 
@@ -70318,7 +70666,9 @@ func (self *DropTargetInstance) GetValue() *gobject.Value {
 
 	var goret *gobject.Value
 
-	goret = gobject.UnsafeValueFromGlibUseAnyInstead(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gobject.UnsafeValueFromGlibUseAnyInstead(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -70522,7 +70872,7 @@ type DropTargetAsync interface {
 	// GetFormats wraps gtk_drop_target_async_get_formats
 	// The function returns the following values:
 	// 
-	// 	- goret *gdk.ContentFormats 
+	// 	- goret *gdk.ContentFormats (nullable) 
 	//
 	// Gets the data formats that this drop target accepts.
 	// 
@@ -70704,14 +71054,14 @@ func (self *DropTargetAsyncInstance) GetActions() gdk.DragAction {
 // GetFormats wraps gtk_drop_target_async_get_formats
 // The function returns the following values:
 // 
-// 	- goret *gdk.ContentFormats 
+// 	- goret *gdk.ContentFormats (nullable) 
 //
 // Gets the data formats that this drop target accepts.
 // 
 // If the result is %NULL, all formats are expected to be supported.
 func (self *DropTargetAsyncInstance) GetFormats() *gdk.ContentFormats {
 	var carg0 *C.GtkDropTargetAsync // in, none, converted
-	var cret  *C.GdkContentFormats  // return, full, converted
+	var cret  *C.GdkContentFormats  // return, full, converted, nullable
 
 	carg0 = (*C.GtkDropTargetAsync)(UnsafeDropTargetAsyncToGlibNone(self))
 
@@ -70720,7 +71070,9 @@ func (self *DropTargetAsyncInstance) GetFormats() *gdk.ContentFormats {
 
 	var goret *gdk.ContentFormats
 
-	goret = gdk.UnsafeContentFormatsFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gdk.UnsafeContentFormatsFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -71203,7 +71555,7 @@ type Entry interface {
 	// GetAttributes wraps gtk_entry_get_attributes
 	// The function returns the following values:
 	// 
-	// 	- goret *pango.AttrList 
+	// 	- goret *pango.AttrList (nullable) 
 	//
 	// Gets the attribute list of the `GtkEntry`.
 	// 
@@ -71228,7 +71580,7 @@ type Entry interface {
 	// GetExtraMenu wraps gtk_entry_get_extra_menu
 	// The function returns the following values:
 	// 
-	// 	- goret gio.MenuModel 
+	// 	- goret gio.MenuModel (nullable) 
 	//
 	// Gets the menu model set with gtk_entry_set_extra_menu().
 	GetExtraMenu() gio.MenuModel
@@ -71297,7 +71649,7 @@ type Entry interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret gio.Icon 
+	// 	- goret gio.Icon (nullable) 
 	//
 	// Retrieves the `GIcon` used for the icon.
 	// 
@@ -71312,7 +71664,7 @@ type Entry interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Retrieves the icon name used for the icon.
 	// 
@@ -71327,7 +71679,7 @@ type Entry interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret gdk.Paintable 
+	// 	- goret gdk.Paintable (nullable) 
 	//
 	// Retrieves the `GdkPaintable` used for the icon.
 	// 
@@ -71369,7 +71721,7 @@ type Entry interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the contents of the tooltip on the icon at the specified
 	// position in @entry.
@@ -71382,7 +71734,7 @@ type Entry interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the contents of the tooltip on the icon at the specified
 	// position in @entry.
@@ -71428,7 +71780,7 @@ type Entry interface {
 	// GetPlaceholderText wraps gtk_entry_get_placeholder_text
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Retrieves the text that will be displayed when @entry
 	// is empty and unfocused
@@ -71453,7 +71805,7 @@ type Entry interface {
 	// GetTabs wraps gtk_entry_get_tabs
 	// The function returns the following values:
 	// 
-	// 	- goret *pango.TabArray 
+	// 	- goret *pango.TabArray (nullable) 
 	//
 	// Gets the tabstops of the `GtkEntry`.
 	// 
@@ -71980,14 +72332,14 @@ func (entry *EntryInstance) GetAlignment() float32 {
 // GetAttributes wraps gtk_entry_get_attributes
 // The function returns the following values:
 // 
-// 	- goret *pango.AttrList 
+// 	- goret *pango.AttrList (nullable) 
 //
 // Gets the attribute list of the `GtkEntry`.
 // 
 // See [method@Gtk.Entry.set_attributes].
 func (entry *EntryInstance) GetAttributes() *pango.AttrList {
 	var carg0 *C.GtkEntry      // in, none, converted
-	var cret  *C.PangoAttrList // return, none, converted
+	var cret  *C.PangoAttrList // return, none, converted, nullable
 
 	carg0 = (*C.GtkEntry)(UnsafeEntryToGlibNone(entry))
 
@@ -71996,7 +72348,9 @@ func (entry *EntryInstance) GetAttributes() *pango.AttrList {
 
 	var goret *pango.AttrList
 
-	goret = pango.UnsafeAttrListFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = pango.UnsafeAttrListFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -72050,12 +72404,12 @@ func (entry *EntryInstance) GetCurrentIconDragSource() int {
 // GetExtraMenu wraps gtk_entry_get_extra_menu
 // The function returns the following values:
 // 
-// 	- goret gio.MenuModel 
+// 	- goret gio.MenuModel (nullable) 
 //
 // Gets the menu model set with gtk_entry_set_extra_menu().
 func (entry *EntryInstance) GetExtraMenu() gio.MenuModel {
 	var carg0 *C.GtkEntry   // in, none, converted
-	var cret  *C.GMenuModel // return, none, converted
+	var cret  *C.GMenuModel // return, none, converted, nullable
 
 	carg0 = (*C.GtkEntry)(UnsafeEntryToGlibNone(entry))
 
@@ -72064,7 +72418,9 @@ func (entry *EntryInstance) GetExtraMenu() gio.MenuModel {
 
 	var goret gio.MenuModel
 
-	goret = gio.UnsafeMenuModelFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gio.UnsafeMenuModelFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -72212,7 +72568,7 @@ func (entry *EntryInstance) GetIconAtPos(x int, y int) int {
 // 
 // The function returns the following values:
 // 
-// 	- goret gio.Icon 
+// 	- goret gio.Icon (nullable) 
 //
 // Retrieves the `GIcon` used for the icon.
 // 
@@ -72221,7 +72577,7 @@ func (entry *EntryInstance) GetIconAtPos(x int, y int) int {
 func (entry *EntryInstance) GetIconGIcon(iconPos EntryIconPosition) gio.Icon {
 	var carg0 *C.GtkEntry            // in, none, converted
 	var carg1 C.GtkEntryIconPosition // in, none, casted
-	var cret  *C.GIcon               // return, none, converted
+	var cret  *C.GIcon               // return, none, converted, nullable
 
 	carg0 = (*C.GtkEntry)(UnsafeEntryToGlibNone(entry))
 	carg1 = C.GtkEntryIconPosition(iconPos)
@@ -72232,7 +72588,9 @@ func (entry *EntryInstance) GetIconGIcon(iconPos EntryIconPosition) gio.Icon {
 
 	var goret gio.Icon
 
-	goret = gio.UnsafeIconFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gio.UnsafeIconFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -72245,7 +72603,7 @@ func (entry *EntryInstance) GetIconGIcon(iconPos EntryIconPosition) gio.Icon {
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Retrieves the icon name used for the icon.
 // 
@@ -72254,7 +72612,7 @@ func (entry *EntryInstance) GetIconGIcon(iconPos EntryIconPosition) gio.Icon {
 func (entry *EntryInstance) GetIconName(iconPos EntryIconPosition) string {
 	var carg0 *C.GtkEntry            // in, none, converted
 	var carg1 C.GtkEntryIconPosition // in, none, casted
-	var cret  *C.char                // return, none, string, casted *C.gchar
+	var cret  *C.char                // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkEntry)(UnsafeEntryToGlibNone(entry))
 	carg1 = C.GtkEntryIconPosition(iconPos)
@@ -72265,7 +72623,9 @@ func (entry *EntryInstance) GetIconName(iconPos EntryIconPosition) string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -72278,7 +72638,7 @@ func (entry *EntryInstance) GetIconName(iconPos EntryIconPosition) string {
 // 
 // The function returns the following values:
 // 
-// 	- goret gdk.Paintable 
+// 	- goret gdk.Paintable (nullable) 
 //
 // Retrieves the `GdkPaintable` used for the icon.
 // 
@@ -72286,7 +72646,7 @@ func (entry *EntryInstance) GetIconName(iconPos EntryIconPosition) string {
 func (entry *EntryInstance) GetIconPaintable(iconPos EntryIconPosition) gdk.Paintable {
 	var carg0 *C.GtkEntry            // in, none, converted
 	var carg1 C.GtkEntryIconPosition // in, none, casted
-	var cret  *C.GdkPaintable        // return, none, converted
+	var cret  *C.GdkPaintable        // return, none, converted, nullable
 
 	carg0 = (*C.GtkEntry)(UnsafeEntryToGlibNone(entry))
 	carg1 = C.GtkEntryIconPosition(iconPos)
@@ -72297,7 +72657,9 @@ func (entry *EntryInstance) GetIconPaintable(iconPos EntryIconPosition) gdk.Pain
 
 	var goret gdk.Paintable
 
-	goret = gdk.UnsafePaintableFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gdk.UnsafePaintableFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -72376,14 +72738,14 @@ func (entry *EntryInstance) GetIconStorageType(iconPos EntryIconPosition) ImageT
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the contents of the tooltip on the icon at the specified
 // position in @entry.
 func (entry *EntryInstance) GetIconTooltipMarkup(iconPos EntryIconPosition) string {
 	var carg0 *C.GtkEntry            // in, none, converted
 	var carg1 C.GtkEntryIconPosition // in, none, casted
-	var cret  *C.char                // return, full, string, casted *C.gchar
+	var cret  *C.char                // return, full, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkEntry)(UnsafeEntryToGlibNone(entry))
 	carg1 = C.GtkEntryIconPosition(iconPos)
@@ -72394,8 +72756,10 @@ func (entry *EntryInstance) GetIconTooltipMarkup(iconPos EntryIconPosition) stri
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+		defer C.free(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -72408,14 +72772,14 @@ func (entry *EntryInstance) GetIconTooltipMarkup(iconPos EntryIconPosition) stri
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the contents of the tooltip on the icon at the specified
 // position in @entry.
 func (entry *EntryInstance) GetIconTooltipText(iconPos EntryIconPosition) string {
 	var carg0 *C.GtkEntry            // in, none, converted
 	var carg1 C.GtkEntryIconPosition // in, none, casted
-	var cret  *C.char                // return, full, string, casted *C.gchar
+	var cret  *C.char                // return, full, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkEntry)(UnsafeEntryToGlibNone(entry))
 	carg1 = C.GtkEntryIconPosition(iconPos)
@@ -72426,8 +72790,10 @@ func (entry *EntryInstance) GetIconTooltipText(iconPos EntryIconPosition) string
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+		defer C.free(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -72550,13 +72916,13 @@ func (entry *EntryInstance) GetOverwriteMode() bool {
 // GetPlaceholderText wraps gtk_entry_get_placeholder_text
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Retrieves the text that will be displayed when @entry
 // is empty and unfocused
 func (entry *EntryInstance) GetPlaceholderText() string {
 	var carg0 *C.GtkEntry // in, none, converted
-	var cret  *C.char     // return, none, string, casted *C.gchar
+	var cret  *C.char     // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkEntry)(UnsafeEntryToGlibNone(entry))
 
@@ -72565,7 +72931,9 @@ func (entry *EntryInstance) GetPlaceholderText() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -72620,14 +72988,14 @@ func (entry *EntryInstance) GetProgressPulseStep() float64 {
 // GetTabs wraps gtk_entry_get_tabs
 // The function returns the following values:
 // 
-// 	- goret *pango.TabArray 
+// 	- goret *pango.TabArray (nullable) 
 //
 // Gets the tabstops of the `GtkEntry`.
 // 
 // See [method@Gtk.Entry.set_tabs].
 func (entry *EntryInstance) GetTabs() *pango.TabArray {
 	var carg0 *C.GtkEntry      // in, none, converted
-	var cret  *C.PangoTabArray // return, none, converted
+	var cret  *C.PangoTabArray // return, none, converted, nullable
 
 	carg0 = (*C.GtkEntry)(UnsafeEntryToGlibNone(entry))
 
@@ -72636,7 +73004,9 @@ func (entry *EntryInstance) GetTabs() *pango.TabArray {
 
 	var goret *pango.TabArray
 
-	goret = pango.UnsafeTabArrayFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = pango.UnsafeTabArrayFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -73624,7 +73994,7 @@ type Expander interface {
 	// GetChild wraps gtk_expander_get_child
 	// The function returns the following values:
 	// 
-	// 	- goret Widget 
+	// 	- goret Widget (nullable) 
 	//
 	// Gets the child widget of @expander.
 	GetChild() Widget
@@ -73640,7 +74010,7 @@ type Expander interface {
 	// GetLabel wraps gtk_expander_get_label
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Fetches the text from a label widget.
 	// 
@@ -73653,7 +74023,7 @@ type Expander interface {
 	// GetLabelWidget wraps gtk_expander_get_label_widget
 	// The function returns the following values:
 	// 
-	// 	- goret Widget 
+	// 	- goret Widget (nullable) 
 	//
 	// Retrieves the label widget for the frame.
 	GetLabelWidget() Widget
@@ -73868,12 +74238,12 @@ func NewExpanderWithMnemonic(label string) Widget {
 // GetChild wraps gtk_expander_get_child
 // The function returns the following values:
 // 
-// 	- goret Widget 
+// 	- goret Widget (nullable) 
 //
 // Gets the child widget of @expander.
 func (expander *ExpanderInstance) GetChild() Widget {
 	var carg0 *C.GtkExpander // in, none, converted
-	var cret  *C.GtkWidget   // return, none, converted
+	var cret  *C.GtkWidget   // return, none, converted, nullable
 
 	carg0 = (*C.GtkExpander)(UnsafeExpanderToGlibNone(expander))
 
@@ -73882,7 +74252,9 @@ func (expander *ExpanderInstance) GetChild() Widget {
 
 	var goret Widget
 
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -73916,7 +74288,7 @@ func (expander *ExpanderInstance) GetExpanded() bool {
 // GetLabel wraps gtk_expander_get_label
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Fetches the text from a label widget.
 // 
@@ -73927,7 +74299,7 @@ func (expander *ExpanderInstance) GetExpanded() bool {
 // container.
 func (expander *ExpanderInstance) GetLabel() string {
 	var carg0 *C.GtkExpander // in, none, converted
-	var cret  *C.char        // return, none, string, casted *C.gchar
+	var cret  *C.char        // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkExpander)(UnsafeExpanderToGlibNone(expander))
 
@@ -73936,7 +74308,9 @@ func (expander *ExpanderInstance) GetLabel() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -73944,12 +74318,12 @@ func (expander *ExpanderInstance) GetLabel() string {
 // GetLabelWidget wraps gtk_expander_get_label_widget
 // The function returns the following values:
 // 
-// 	- goret Widget 
+// 	- goret Widget (nullable) 
 //
 // Retrieves the label widget for the frame.
 func (expander *ExpanderInstance) GetLabelWidget() Widget {
 	var carg0 *C.GtkExpander // in, none, converted
-	var cret  *C.GtkWidget   // return, none, converted
+	var cret  *C.GtkWidget   // return, none, converted, nullable
 
 	carg0 = (*C.GtkExpander)(UnsafeExpanderToGlibNone(expander))
 
@@ -73958,7 +74332,9 @@ func (expander *ExpanderInstance) GetLabelWidget() Widget {
 
 	var goret Widget
 
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -74319,7 +74695,7 @@ type FileFilter interface {
 	// GetName wraps gtk_file_filter_get_name
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the human-readable name for the filter.
 	// 
@@ -74527,14 +74903,14 @@ func (filter *FileFilterInstance) GetAttributes() []string {
 // GetName wraps gtk_file_filter_get_name
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the human-readable name for the filter.
 // 
 // See [method@Gtk.FileFilter.set_name].
 func (filter *FileFilterInstance) GetName() string {
 	var carg0 *C.GtkFileFilter // in, none, converted
-	var cret  *C.char          // return, none, string, casted *C.gchar
+	var cret  *C.char          // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkFileFilter)(UnsafeFileFilterToGlibNone(filter))
 
@@ -74543,7 +74919,9 @@ func (filter *FileFilterInstance) GetName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -74656,7 +75034,7 @@ type Fixed interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret *gsk.Transform 
+	// 	- goret *gsk.Transform (nullable) 
 	//
 	// Retrieves the transformation for @widget set using
 	// gtk_fixed_set_child_transform().
@@ -74816,14 +75194,14 @@ func (fixed *FixedInstance) GetChildPosition(widget Widget) (float64, float64) {
 // 
 // The function returns the following values:
 // 
-// 	- goret *gsk.Transform 
+// 	- goret *gsk.Transform (nullable) 
 //
 // Retrieves the transformation for @widget set using
 // gtk_fixed_set_child_transform().
 func (fixed *FixedInstance) GetChildTransform(widget Widget) *gsk.Transform {
 	var carg0 *C.GtkFixed     // in, none, converted
 	var carg1 *C.GtkWidget    // in, none, converted
-	var cret  *C.GskTransform // return, none, converted
+	var cret  *C.GskTransform // return, none, converted, nullable
 
 	carg0 = (*C.GtkFixed)(UnsafeFixedToGlibNone(fixed))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
@@ -74834,7 +75212,9 @@ func (fixed *FixedInstance) GetChildTransform(widget Widget) *gsk.Transform {
 
 	var goret *gsk.Transform
 
-	goret = gsk.UnsafeTransformFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gsk.UnsafeTransformFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -75061,7 +75441,7 @@ type FixedLayoutChild interface {
 	// GetTransform wraps gtk_fixed_layout_child_get_transform
 	// The function returns the following values:
 	// 
-	// 	- goret *gsk.Transform 
+	// 	- goret *gsk.Transform (nullable) 
 	//
 	// Retrieves the transformation of the child.
 	GetTransform() *gsk.Transform
@@ -75114,12 +75494,12 @@ func UnsafeFixedLayoutChildToGlibFull(c FixedLayoutChild) unsafe.Pointer {
 // GetTransform wraps gtk_fixed_layout_child_get_transform
 // The function returns the following values:
 // 
-// 	- goret *gsk.Transform 
+// 	- goret *gsk.Transform (nullable) 
 //
 // Retrieves the transformation of the child.
 func (child *FixedLayoutChildInstance) GetTransform() *gsk.Transform {
 	var carg0 *C.GtkFixedLayoutChild // in, none, converted
-	var cret  *C.GskTransform        // return, none, converted
+	var cret  *C.GskTransform        // return, none, converted, nullable
 
 	carg0 = (*C.GtkFixedLayoutChild)(UnsafeFixedLayoutChildToGlibNone(child))
 
@@ -75128,7 +75508,9 @@ func (child *FixedLayoutChildInstance) GetTransform() *gsk.Transform {
 
 	var goret *gsk.Transform
 
-	goret = gsk.UnsafeTransformFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gsk.UnsafeTransformFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -75258,7 +75640,7 @@ type FlowBox interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret FlowBoxChild 
+	// 	- goret FlowBoxChild (nullable) 
 	//
 	// Gets the nth child in the @box.
 	GetChildAtIndex(int) FlowBoxChild
@@ -75271,7 +75653,7 @@ type FlowBox interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret FlowBoxChild 
+	// 	- goret FlowBoxChild (nullable) 
 	//
 	// Gets the child in the (@x, @y) position.
 	// 
@@ -75755,13 +76137,13 @@ func (box *FlowBoxInstance) GetActivateOnSingleClick() bool {
 // 
 // The function returns the following values:
 // 
-// 	- goret FlowBoxChild 
+// 	- goret FlowBoxChild (nullable) 
 //
 // Gets the nth child in the @box.
 func (box *FlowBoxInstance) GetChildAtIndex(idx int) FlowBoxChild {
 	var carg0 *C.GtkFlowBox      // in, none, converted
 	var carg1 C.int              // in, none, casted, casted C.gint
-	var cret  *C.GtkFlowBoxChild // return, none, converted
+	var cret  *C.GtkFlowBoxChild // return, none, converted, nullable
 
 	carg0 = (*C.GtkFlowBox)(UnsafeFlowBoxToGlibNone(box))
 	carg1 = C.int(idx)
@@ -75772,7 +76154,9 @@ func (box *FlowBoxInstance) GetChildAtIndex(idx int) FlowBoxChild {
 
 	var goret FlowBoxChild
 
-	goret = UnsafeFlowBoxChildFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeFlowBoxChildFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -75786,7 +76170,7 @@ func (box *FlowBoxInstance) GetChildAtIndex(idx int) FlowBoxChild {
 // 
 // The function returns the following values:
 // 
-// 	- goret FlowBoxChild 
+// 	- goret FlowBoxChild (nullable) 
 //
 // Gets the child in the (@x, @y) position.
 // 
@@ -75795,7 +76179,7 @@ func (box *FlowBoxInstance) GetChildAtPos(x int, y int) FlowBoxChild {
 	var carg0 *C.GtkFlowBox      // in, none, converted
 	var carg1 C.int              // in, none, casted, casted C.gint
 	var carg2 C.int              // in, none, casted, casted C.gint
-	var cret  *C.GtkFlowBoxChild // return, none, converted
+	var cret  *C.GtkFlowBoxChild // return, none, converted, nullable
 
 	carg0 = (*C.GtkFlowBox)(UnsafeFlowBoxToGlibNone(box))
 	carg1 = C.int(x)
@@ -75808,7 +76192,9 @@ func (box *FlowBoxInstance) GetChildAtPos(x int, y int) FlowBoxChild {
 
 	var goret FlowBoxChild
 
-	goret = UnsafeFlowBoxChildFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeFlowBoxChildFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -76589,7 +76975,7 @@ type FlowBoxChild interface {
 	// GetChild wraps gtk_flow_box_child_get_child
 	// The function returns the following values:
 	// 
-	// 	- goret Widget 
+	// 	- goret Widget (nullable) 
 	//
 	// Gets the child widget of @self.
 	GetChild() Widget
@@ -76730,12 +77116,12 @@ func (child *FlowBoxChildInstance) Changed() {
 // GetChild wraps gtk_flow_box_child_get_child
 // The function returns the following values:
 // 
-// 	- goret Widget 
+// 	- goret Widget (nullable) 
 //
 // Gets the child widget of @self.
 func (self *FlowBoxChildInstance) GetChild() Widget {
 	var carg0 *C.GtkFlowBoxChild // in, none, converted
-	var cret  *C.GtkWidget       // return, none, converted
+	var cret  *C.GtkWidget       // return, none, converted, nullable
 
 	carg0 = (*C.GtkFlowBoxChild)(UnsafeFlowBoxChildToGlibNone(self))
 
@@ -76744,7 +77130,9 @@ func (self *FlowBoxChildInstance) GetChild() Widget {
 
 	var goret Widget
 
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -76872,14 +77260,14 @@ type FontDialogButton interface {
 	// GetDialog wraps gtk_font_dialog_button_get_dialog
 	// The function returns the following values:
 	// 
-	// 	- goret FontDialog 
+	// 	- goret FontDialog (nullable) 
 	//
 	// Returns the `GtkFontDialog` of @self.
 	GetDialog() FontDialog
 	// GetFontDesc wraps gtk_font_dialog_button_get_font_desc
 	// The function returns the following values:
 	// 
-	// 	- goret *pango.FontDescription 
+	// 	- goret *pango.FontDescription (nullable) 
 	//
 	// Returns the font of the button.
 	// 
@@ -76890,7 +77278,7 @@ type FontDialogButton interface {
 	// GetFontFeatures wraps gtk_font_dialog_button_get_font_features
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Returns the font features of the button.
 	// 
@@ -76905,7 +77293,7 @@ type FontDialogButton interface {
 	// GetLanguage wraps gtk_font_dialog_button_get_language
 	// The function returns the following values:
 	// 
-	// 	- goret *pango.Language 
+	// 	- goret *pango.Language (nullable) 
 	//
 	// Returns the language that is used for font features.
 	GetLanguage() *pango.Language
@@ -77086,12 +77474,12 @@ func NewFontDialogButton(dialog FontDialog) Widget {
 // GetDialog wraps gtk_font_dialog_button_get_dialog
 // The function returns the following values:
 // 
-// 	- goret FontDialog 
+// 	- goret FontDialog (nullable) 
 //
 // Returns the `GtkFontDialog` of @self.
 func (self *FontDialogButtonInstance) GetDialog() FontDialog {
 	var carg0 *C.GtkFontDialogButton // in, none, converted
-	var cret  *C.GtkFontDialog       // return, none, converted
+	var cret  *C.GtkFontDialog       // return, none, converted, nullable
 
 	carg0 = (*C.GtkFontDialogButton)(UnsafeFontDialogButtonToGlibNone(self))
 
@@ -77100,7 +77488,9 @@ func (self *FontDialogButtonInstance) GetDialog() FontDialog {
 
 	var goret FontDialog
 
-	goret = UnsafeFontDialogFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeFontDialogFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -77108,7 +77498,7 @@ func (self *FontDialogButtonInstance) GetDialog() FontDialog {
 // GetFontDesc wraps gtk_font_dialog_button_get_font_desc
 // The function returns the following values:
 // 
-// 	- goret *pango.FontDescription 
+// 	- goret *pango.FontDescription (nullable) 
 //
 // Returns the font of the button.
 // 
@@ -77117,7 +77507,7 @@ func (self *FontDialogButtonInstance) GetDialog() FontDialog {
 // informed about changes, listen to "notify::font-desc".
 func (self *FontDialogButtonInstance) GetFontDesc() *pango.FontDescription {
 	var carg0 *C.GtkFontDialogButton  // in, none, converted
-	var cret  *C.PangoFontDescription // return, none, converted
+	var cret  *C.PangoFontDescription // return, none, converted, nullable
 
 	carg0 = (*C.GtkFontDialogButton)(UnsafeFontDialogButtonToGlibNone(self))
 
@@ -77126,7 +77516,9 @@ func (self *FontDialogButtonInstance) GetFontDesc() *pango.FontDescription {
 
 	var goret *pango.FontDescription
 
-	goret = pango.UnsafeFontDescriptionFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = pango.UnsafeFontDescriptionFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -77134,7 +77526,7 @@ func (self *FontDialogButtonInstance) GetFontDesc() *pango.FontDescription {
 // GetFontFeatures wraps gtk_font_dialog_button_get_font_features
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Returns the font features of the button.
 // 
@@ -77147,7 +77539,7 @@ func (self *FontDialogButtonInstance) GetFontDesc() *pango.FontDescription {
 // `GTK_FONT_LEVEL_FEATURES`.
 func (self *FontDialogButtonInstance) GetFontFeatures() string {
 	var carg0 *C.GtkFontDialogButton // in, none, converted
-	var cret  *C.char                // return, none, string, casted *C.gchar
+	var cret  *C.char                // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkFontDialogButton)(UnsafeFontDialogButtonToGlibNone(self))
 
@@ -77156,7 +77548,9 @@ func (self *FontDialogButtonInstance) GetFontFeatures() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -77164,12 +77558,12 @@ func (self *FontDialogButtonInstance) GetFontFeatures() string {
 // GetLanguage wraps gtk_font_dialog_button_get_language
 // The function returns the following values:
 // 
-// 	- goret *pango.Language 
+// 	- goret *pango.Language (nullable) 
 //
 // Returns the language that is used for font features.
 func (self *FontDialogButtonInstance) GetLanguage() *pango.Language {
 	var carg0 *C.GtkFontDialogButton // in, none, converted
-	var cret  *C.PangoLanguage       // return, full, converted
+	var cret  *C.PangoLanguage       // return, full, converted, nullable
 
 	carg0 = (*C.GtkFontDialogButton)(UnsafeFontDialogButtonToGlibNone(self))
 
@@ -77178,7 +77572,9 @@ func (self *FontDialogButtonInstance) GetLanguage() *pango.Language {
 
 	var goret *pango.Language
 
-	goret = pango.UnsafeLanguageFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = pango.UnsafeLanguageFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -77482,14 +77878,14 @@ type Frame interface {
 	// GetChild wraps gtk_frame_get_child
 	// The function returns the following values:
 	// 
-	// 	- goret Widget 
+	// 	- goret Widget (nullable) 
 	//
 	// Gets the child widget of @frame.
 	GetChild() Widget
 	// GetLabel wraps gtk_frame_get_label
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Returns the frame labels text.
 	// 
@@ -77506,7 +77902,7 @@ type Frame interface {
 	// GetLabelWidget wraps gtk_frame_get_label_widget
 	// The function returns the following values:
 	// 
-	// 	- goret Widget 
+	// 	- goret Widget (nullable) 
 	//
 	// Retrieves the label widget for the frame.
 	GetLabelWidget() Widget
@@ -77634,12 +78030,12 @@ func NewFrame(label string) Widget {
 // GetChild wraps gtk_frame_get_child
 // The function returns the following values:
 // 
-// 	- goret Widget 
+// 	- goret Widget (nullable) 
 //
 // Gets the child widget of @frame.
 func (frame *FrameInstance) GetChild() Widget {
 	var carg0 *C.GtkFrame  // in, none, converted
-	var cret  *C.GtkWidget // return, none, converted
+	var cret  *C.GtkWidget // return, none, converted, nullable
 
 	carg0 = (*C.GtkFrame)(UnsafeFrameToGlibNone(frame))
 
@@ -77648,7 +78044,9 @@ func (frame *FrameInstance) GetChild() Widget {
 
 	var goret Widget
 
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -77656,7 +78054,7 @@ func (frame *FrameInstance) GetChild() Widget {
 // GetLabel wraps gtk_frame_get_label
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Returns the frame labels text.
 // 
@@ -77664,7 +78062,7 @@ func (frame *FrameInstance) GetChild() Widget {
 // is returned.
 func (frame *FrameInstance) GetLabel() string {
 	var carg0 *C.GtkFrame // in, none, converted
-	var cret  *C.char     // return, none, string, casted *C.gchar
+	var cret  *C.char     // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkFrame)(UnsafeFrameToGlibNone(frame))
 
@@ -77673,7 +78071,9 @@ func (frame *FrameInstance) GetLabel() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -77703,12 +78103,12 @@ func (frame *FrameInstance) GetLabelAlign() float32 {
 // GetLabelWidget wraps gtk_frame_get_label_widget
 // The function returns the following values:
 // 
-// 	- goret Widget 
+// 	- goret Widget (nullable) 
 //
 // Retrieves the label widget for the frame.
 func (frame *FrameInstance) GetLabelWidget() Widget {
 	var carg0 *C.GtkFrame  // in, none, converted
-	var cret  *C.GtkWidget // return, none, converted
+	var cret  *C.GtkWidget // return, none, converted, nullable
 
 	carg0 = (*C.GtkFrame)(UnsafeFrameToGlibNone(frame))
 
@@ -77717,7 +78117,9 @@ func (frame *FrameInstance) GetLabelWidget() Widget {
 
 	var goret Widget
 
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -77980,14 +78382,14 @@ type GLArea interface {
 	// GetContext wraps gtk_gl_area_get_context
 	// The function returns the following values:
 	// 
-	// 	- goret gdk.GLContext 
+	// 	- goret gdk.GLContext (nullable) 
 	//
 	// Retrieves the `GdkGLContext` used by @area.
 	GetContext() gdk.GLContext
 	// GetError wraps gtk_gl_area_get_error
 	// The function returns the following values:
 	// 
-	// 	- goret error 
+	// 	- goret error (nullable) 
 	//
 	// Gets the current error set on the @area.
 	GetError() error
@@ -78310,12 +78712,12 @@ func (area *GLAreaInstance) GetAutoRender() bool {
 // GetContext wraps gtk_gl_area_get_context
 // The function returns the following values:
 // 
-// 	- goret gdk.GLContext 
+// 	- goret gdk.GLContext (nullable) 
 //
 // Retrieves the `GdkGLContext` used by @area.
 func (area *GLAreaInstance) GetContext() gdk.GLContext {
 	var carg0 *C.GtkGLArea    // in, none, converted
-	var cret  *C.GdkGLContext // return, none, converted
+	var cret  *C.GdkGLContext // return, none, converted, nullable
 
 	carg0 = (*C.GtkGLArea)(UnsafeGLAreaToGlibNone(area))
 
@@ -78324,7 +78726,9 @@ func (area *GLAreaInstance) GetContext() gdk.GLContext {
 
 	var goret gdk.GLContext
 
-	goret = gdk.UnsafeGLContextFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gdk.UnsafeGLContextFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -78332,12 +78736,12 @@ func (area *GLAreaInstance) GetContext() gdk.GLContext {
 // GetError wraps gtk_gl_area_get_error
 // The function returns the following values:
 // 
-// 	- goret error 
+// 	- goret error (nullable) 
 //
 // Gets the current error set on the @area.
 func (area *GLAreaInstance) GetError() error {
 	var carg0 *C.GtkGLArea // in, none, converted
-	var cret  *C.GError    // return, none, converted
+	var cret  *C.GError    // return, none, converted, nullable
 
 	carg0 = (*C.GtkGLArea)(UnsafeGLAreaToGlibNone(area))
 
@@ -78346,7 +78750,9 @@ func (area *GLAreaInstance) GetError() error {
 
 	var goret error
 
-	goret = glib.UnsafeErrorFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = glib.UnsafeErrorFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -79421,7 +79827,7 @@ type GraphicsOffload interface {
 	// GetChild wraps gtk_graphics_offload_get_child
 	// The function returns the following values:
 	// 
-	// 	- goret Widget 
+	// 	- goret Widget (nullable) 
 	//
 	// Gets the child of @self.
 	GetChild() Widget
@@ -79577,12 +79983,12 @@ func (self *GraphicsOffloadInstance) GetBlackBackground() bool {
 // GetChild wraps gtk_graphics_offload_get_child
 // The function returns the following values:
 // 
-// 	- goret Widget 
+// 	- goret Widget (nullable) 
 //
 // Gets the child of @self.
 func (self *GraphicsOffloadInstance) GetChild() Widget {
 	var carg0 *C.GtkGraphicsOffload // in, none, converted
-	var cret  *C.GtkWidget          // return, none, converted
+	var cret  *C.GtkWidget          // return, none, converted, nullable
 
 	carg0 = (*C.GtkGraphicsOffload)(UnsafeGraphicsOffloadToGlibNone(self))
 
@@ -79591,7 +79997,9 @@ func (self *GraphicsOffloadInstance) GetChild() Widget {
 
 	var goret Widget
 
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -79853,7 +80261,7 @@ type Grid interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret Widget 
+	// 	- goret Widget (nullable) 
 	//
 	// Gets the child of @grid whose area covers the grid
 	// cell at @column, @row.
@@ -80233,7 +80641,7 @@ func (grid *GridInstance) GetBaselineRow() int {
 // 
 // The function returns the following values:
 // 
-// 	- goret Widget 
+// 	- goret Widget (nullable) 
 //
 // Gets the child of @grid whose area covers the grid
 // cell at @column, @row.
@@ -80241,7 +80649,7 @@ func (grid *GridInstance) GetChildAt(column int, row int) Widget {
 	var carg0 *C.GtkGrid   // in, none, converted
 	var carg1 C.int        // in, none, casted, casted C.gint
 	var carg2 C.int        // in, none, casted, casted C.gint
-	var cret  *C.GtkWidget // return, none, converted
+	var cret  *C.GtkWidget // return, none, converted, nullable
 
 	carg0 = (*C.GtkGrid)(UnsafeGridToGlibNone(grid))
 	carg1 = C.int(column)
@@ -80254,7 +80662,9 @@ func (grid *GridInstance) GetChildAt(column int, row int) Widget {
 
 	var goret Widget
 
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -81537,7 +81947,7 @@ type HeaderBar interface {
 	// GetDecorationLayout wraps gtk_header_bar_get_decoration_layout
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the decoration layout of the `GtkHeaderBar`.
 	GetDecorationLayout() string
@@ -81552,7 +81962,7 @@ type HeaderBar interface {
 	// GetTitleWidget wraps gtk_header_bar_get_title_widget
 	// The function returns the following values:
 	// 
-	// 	- goret Widget 
+	// 	- goret Widget (nullable) 
 	//
 	// Retrieves the title widget of the header.
 	// 
@@ -81710,12 +82120,12 @@ func NewHeaderBar() Widget {
 // GetDecorationLayout wraps gtk_header_bar_get_decoration_layout
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the decoration layout of the `GtkHeaderBar`.
 func (bar *HeaderBarInstance) GetDecorationLayout() string {
 	var carg0 *C.GtkHeaderBar // in, none, converted
-	var cret  *C.char         // return, none, string, casted *C.gchar
+	var cret  *C.char         // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkHeaderBar)(UnsafeHeaderBarToGlibNone(bar))
 
@@ -81724,7 +82134,9 @@ func (bar *HeaderBarInstance) GetDecorationLayout() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -81757,14 +82169,14 @@ func (bar *HeaderBarInstance) GetShowTitleButtons() bool {
 // GetTitleWidget wraps gtk_header_bar_get_title_widget
 // The function returns the following values:
 // 
-// 	- goret Widget 
+// 	- goret Widget (nullable) 
 //
 // Retrieves the title widget of the header.
 // 
 // See [method@Gtk.HeaderBar.set_title_widget].
 func (bar *HeaderBarInstance) GetTitleWidget() Widget {
 	var carg0 *C.GtkHeaderBar // in, none, converted
-	var cret  *C.GtkWidget    // return, none, converted
+	var cret  *C.GtkWidget    // return, none, converted, nullable
 
 	carg0 = (*C.GtkHeaderBar)(UnsafeHeaderBarToGlibNone(bar))
 
@@ -81773,7 +82185,9 @@ func (bar *HeaderBarInstance) GetTitleWidget() Widget {
 
 	var goret Widget
 
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -82000,7 +82414,7 @@ type Image interface {
 	// GetGIcon wraps gtk_image_get_gicon
 	// The function returns the following values:
 	// 
-	// 	- goret gio.Icon 
+	// 	- goret gio.Icon (nullable) 
 	//
 	// Gets the `GIcon` being displayed by the `GtkImage`.
 	// 
@@ -82012,7 +82426,7 @@ type Image interface {
 	// GetIconName wraps gtk_image_get_icon_name
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the icon name and size being displayed by the `GtkImage`.
 	// 
@@ -82031,7 +82445,7 @@ type Image interface {
 	// GetPaintable wraps gtk_image_get_paintable
 	// The function returns the following values:
 	// 
-	// 	- goret gdk.Paintable 
+	// 	- goret gdk.Paintable (nullable) 
 	//
 	// Gets the image `GdkPaintable` being displayed by the `GtkImage`.
 	// 
@@ -82390,7 +82804,7 @@ func (image *ImageInstance) Clear() {
 // GetGIcon wraps gtk_image_get_gicon
 // The function returns the following values:
 // 
-// 	- goret gio.Icon 
+// 	- goret gio.Icon (nullable) 
 //
 // Gets the `GIcon` being displayed by the `GtkImage`.
 // 
@@ -82400,7 +82814,7 @@ func (image *ImageInstance) Clear() {
 // returned `GIcon`.
 func (image *ImageInstance) GetGIcon() gio.Icon {
 	var carg0 *C.GtkImage // in, none, converted
-	var cret  *C.GIcon    // return, none, converted
+	var cret  *C.GIcon    // return, none, converted, nullable
 
 	carg0 = (*C.GtkImage)(UnsafeImageToGlibNone(image))
 
@@ -82409,7 +82823,9 @@ func (image *ImageInstance) GetGIcon() gio.Icon {
 
 	var goret gio.Icon
 
-	goret = gio.UnsafeIconFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gio.UnsafeIconFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -82417,7 +82833,7 @@ func (image *ImageInstance) GetGIcon() gio.Icon {
 // GetIconName wraps gtk_image_get_icon_name
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the icon name and size being displayed by the `GtkImage`.
 // 
@@ -82427,7 +82843,7 @@ func (image *ImageInstance) GetGIcon() gio.Icon {
 // be freed.
 func (image *ImageInstance) GetIconName() string {
 	var carg0 *C.GtkImage // in, none, converted
-	var cret  *C.char     // return, none, string, casted *C.gchar
+	var cret  *C.char     // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkImage)(UnsafeImageToGlibNone(image))
 
@@ -82436,7 +82852,9 @@ func (image *ImageInstance) GetIconName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -82466,7 +82884,7 @@ func (image *ImageInstance) GetIconSize() IconSize {
 // GetPaintable wraps gtk_image_get_paintable
 // The function returns the following values:
 // 
-// 	- goret gdk.Paintable 
+// 	- goret gdk.Paintable (nullable) 
 //
 // Gets the image `GdkPaintable` being displayed by the `GtkImage`.
 // 
@@ -82476,7 +82894,7 @@ func (image *ImageInstance) GetIconSize() IconSize {
 // returned paintable.
 func (image *ImageInstance) GetPaintable() gdk.Paintable {
 	var carg0 *C.GtkImage     // in, none, converted
-	var cret  *C.GdkPaintable // return, none, converted
+	var cret  *C.GdkPaintable // return, none, converted, nullable
 
 	carg0 = (*C.GtkImage)(UnsafeImageToGlibNone(image))
 
@@ -82485,7 +82903,9 @@ func (image *ImageInstance) GetPaintable() gdk.Paintable {
 
 	var goret gdk.Paintable
 
-	goret = gdk.UnsafePaintableFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gdk.UnsafePaintableFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -82737,7 +83157,7 @@ type Inscription interface {
 	// GetAttributes wraps gtk_inscription_get_attributes
 	// The function returns the following values:
 	// 
-	// 	- goret *pango.AttrList 
+	// 	- goret *pango.AttrList (nullable) 
 	//
 	// Gets the inscription's attribute list.
 	GetAttributes() *pango.AttrList
@@ -82780,7 +83200,7 @@ type Inscription interface {
 	// GetText wraps gtk_inscription_get_text
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the text that is displayed.
 	GetText() string
@@ -83007,12 +83427,12 @@ func NewInscription(text string) Widget {
 // GetAttributes wraps gtk_inscription_get_attributes
 // The function returns the following values:
 // 
-// 	- goret *pango.AttrList 
+// 	- goret *pango.AttrList (nullable) 
 //
 // Gets the inscription's attribute list.
 func (self *InscriptionInstance) GetAttributes() *pango.AttrList {
 	var carg0 *C.GtkInscription // in, none, converted
-	var cret  *C.PangoAttrList  // return, none, converted
+	var cret  *C.PangoAttrList  // return, none, converted, nullable
 
 	carg0 = (*C.GtkInscription)(UnsafeInscriptionToGlibNone(self))
 
@@ -83021,7 +83441,9 @@ func (self *InscriptionInstance) GetAttributes() *pango.AttrList {
 
 	var goret *pango.AttrList
 
-	goret = pango.UnsafeAttrListFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = pango.UnsafeAttrListFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -83125,12 +83547,12 @@ func (self *InscriptionInstance) GetNatLines() uint {
 // GetText wraps gtk_inscription_get_text
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the text that is displayed.
 func (self *InscriptionInstance) GetText() string {
 	var carg0 *C.GtkInscription // in, none, converted
-	var cret  *C.char           // return, none, string, casted *C.gchar
+	var cret  *C.char           // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkInscription)(UnsafeInscriptionToGlibNone(self))
 
@@ -83139,7 +83561,9 @@ func (self *InscriptionInstance) GetText() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -83859,7 +84283,7 @@ type Label interface {
 	// GetAttributes wraps gtk_label_get_attributes
 	// The function returns the following values:
 	// 
-	// 	- goret *pango.AttrList 
+	// 	- goret *pango.AttrList (nullable) 
 	//
 	// Gets the label's attribute list.
 	// 
@@ -83873,7 +84297,7 @@ type Label interface {
 	// GetCurrentURI wraps gtk_label_get_current_uri
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Returns the URI for the currently active link in the label.
 	// 
@@ -83896,7 +84320,7 @@ type Label interface {
 	// GetExtraMenu wraps gtk_label_get_extra_menu
 	// The function returns the following values:
 	// 
-	// 	- goret gio.MenuModel 
+	// 	- goret gio.MenuModel (nullable) 
 	//
 	// Gets the extra menu model of @label.
 	// 
@@ -83981,7 +84405,7 @@ type Label interface {
 	// GetMnemonicWidget wraps gtk_label_get_mnemonic_widget
 	// The function returns the following values:
 	// 
-	// 	- goret Widget 
+	// 	- goret Widget (nullable) 
 	//
 	// Retrieves the target of the mnemonic (keyboard shortcut) of this
 	// label.
@@ -84023,7 +84447,7 @@ type Label interface {
 	// GetTabs wraps gtk_label_get_tabs
 	// The function returns the following values:
 	// 
-	// 	- goret *pango.TabArray 
+	// 	- goret *pango.TabArray (nullable) 
 	//
 	// Gets the tabs for @self.
 	// 
@@ -84601,7 +85025,7 @@ func NewLabelWithMnemonic(str string) Widget {
 // GetAttributes wraps gtk_label_get_attributes
 // The function returns the following values:
 // 
-// 	- goret *pango.AttrList 
+// 	- goret *pango.AttrList (nullable) 
 //
 // Gets the label's attribute list.
 // 
@@ -84613,7 +85037,7 @@ func NewLabelWithMnemonic(str string) Widget {
 // `pango_layout_get_attributes (gtk_label_get_layout (self))`.
 func (self *LabelInstance) GetAttributes() *pango.AttrList {
 	var carg0 *C.GtkLabel      // in, none, converted
-	var cret  *C.PangoAttrList // return, none, converted
+	var cret  *C.PangoAttrList // return, none, converted, nullable
 
 	carg0 = (*C.GtkLabel)(UnsafeLabelToGlibNone(self))
 
@@ -84622,7 +85046,9 @@ func (self *LabelInstance) GetAttributes() *pango.AttrList {
 
 	var goret *pango.AttrList
 
-	goret = pango.UnsafeAttrListFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = pango.UnsafeAttrListFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -84630,7 +85056,7 @@ func (self *LabelInstance) GetAttributes() *pango.AttrList {
 // GetCurrentURI wraps gtk_label_get_current_uri
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Returns the URI for the currently active link in the label.
 // 
@@ -84642,7 +85068,7 @@ func (self *LabelInstance) GetAttributes() *pango.AttrList {
 // handler or for use in a [signal@Gtk.Widget::query-tooltip] handler.
 func (self *LabelInstance) GetCurrentURI() string {
 	var carg0 *C.GtkLabel // in, none, converted
-	var cret  *C.char     // return, none, string, casted *C.gchar
+	var cret  *C.char     // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkLabel)(UnsafeLabelToGlibNone(self))
 
@@ -84651,7 +85077,9 @@ func (self *LabelInstance) GetCurrentURI() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -84683,14 +85111,14 @@ func (self *LabelInstance) GetEllipsize() pango.EllipsizeMode {
 // GetExtraMenu wraps gtk_label_get_extra_menu
 // The function returns the following values:
 // 
-// 	- goret gio.MenuModel 
+// 	- goret gio.MenuModel (nullable) 
 //
 // Gets the extra menu model of @label.
 // 
 // See [method@Gtk.Label.set_extra_menu].
 func (self *LabelInstance) GetExtraMenu() gio.MenuModel {
 	var carg0 *C.GtkLabel   // in, none, converted
-	var cret  *C.GMenuModel // return, none, converted
+	var cret  *C.GMenuModel // return, none, converted, nullable
 
 	carg0 = (*C.GtkLabel)(UnsafeLabelToGlibNone(self))
 
@@ -84699,7 +85127,9 @@ func (self *LabelInstance) GetExtraMenu() gio.MenuModel {
 
 	var goret gio.MenuModel
 
-	goret = gio.UnsafeMenuModelFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gio.UnsafeMenuModelFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -84891,7 +85321,7 @@ func (self *LabelInstance) GetMnemonicKeyval() uint {
 // GetMnemonicWidget wraps gtk_label_get_mnemonic_widget
 // The function returns the following values:
 // 
-// 	- goret Widget 
+// 	- goret Widget (nullable) 
 //
 // Retrieves the target of the mnemonic (keyboard shortcut) of this
 // label.
@@ -84899,7 +85329,7 @@ func (self *LabelInstance) GetMnemonicKeyval() uint {
 // See [method@Gtk.Label.set_mnemonic_widget].
 func (self *LabelInstance) GetMnemonicWidget() Widget {
 	var carg0 *C.GtkLabel  // in, none, converted
-	var cret  *C.GtkWidget // return, none, converted
+	var cret  *C.GtkWidget // return, none, converted, nullable
 
 	carg0 = (*C.GtkLabel)(UnsafeLabelToGlibNone(self))
 
@@ -84908,7 +85338,9 @@ func (self *LabelInstance) GetMnemonicWidget() Widget {
 
 	var goret Widget
 
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -85020,7 +85452,7 @@ func (self *LabelInstance) GetSingleLineMode() bool {
 // GetTabs wraps gtk_label_get_tabs
 // The function returns the following values:
 // 
-// 	- goret *pango.TabArray 
+// 	- goret *pango.TabArray (nullable) 
 //
 // Gets the tabs for @self.
 // 
@@ -85028,7 +85460,7 @@ func (self *LabelInstance) GetSingleLineMode() bool {
 // Free the return value with [method@Pango.TabArray.free].
 func (self *LabelInstance) GetTabs() *pango.TabArray {
 	var carg0 *C.GtkLabel      // in, none, converted
-	var cret  *C.PangoTabArray // return, full, converted
+	var cret  *C.PangoTabArray // return, full, converted, nullable
 
 	carg0 = (*C.GtkLabel)(UnsafeLabelToGlibNone(self))
 
@@ -85037,7 +85469,9 @@ func (self *LabelInstance) GetTabs() *pango.TabArray {
 
 	var goret *pango.TabArray
 
-	goret = pango.UnsafeTabArrayFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = pango.UnsafeTabArrayFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -87168,7 +87602,7 @@ type ListBox interface {
 	// GetAdjustment wraps gtk_list_box_get_adjustment
 	// The function returns the following values:
 	// 
-	// 	- goret Adjustment 
+	// 	- goret Adjustment (nullable) 
 	//
 	// Gets the adjustment (if any) that the widget uses to
 	// for vertical scrolling.
@@ -87181,7 +87615,7 @@ type ListBox interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret ListBoxRow 
+	// 	- goret ListBoxRow (nullable) 
 	//
 	// Gets the n-th child in the list (not counting headers).
 	// 
@@ -87196,14 +87630,14 @@ type ListBox interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret ListBoxRow 
+	// 	- goret ListBoxRow (nullable) 
 	//
 	// Gets the row at the @y position.
 	GetRowAtY(int) ListBoxRow
 	// GetSelectedRow wraps gtk_list_box_get_selected_row
 	// The function returns the following values:
 	// 
-	// 	- goret ListBoxRow 
+	// 	- goret ListBoxRow (nullable) 
 	//
 	// Gets the selected row, or %NULL if no rows are selected.
 	// 
@@ -87674,13 +88108,13 @@ func (box *ListBoxInstance) GetActivateOnSingleClick() bool {
 // GetAdjustment wraps gtk_list_box_get_adjustment
 // The function returns the following values:
 // 
-// 	- goret Adjustment 
+// 	- goret Adjustment (nullable) 
 //
 // Gets the adjustment (if any) that the widget uses to
 // for vertical scrolling.
 func (box *ListBoxInstance) GetAdjustment() Adjustment {
 	var carg0 *C.GtkListBox    // in, none, converted
-	var cret  *C.GtkAdjustment // return, none, converted
+	var cret  *C.GtkAdjustment // return, none, converted, nullable
 
 	carg0 = (*C.GtkListBox)(UnsafeListBoxToGlibNone(box))
 
@@ -87689,7 +88123,9 @@ func (box *ListBoxInstance) GetAdjustment() Adjustment {
 
 	var goret Adjustment
 
-	goret = UnsafeAdjustmentFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeAdjustmentFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -87702,7 +88138,7 @@ func (box *ListBoxInstance) GetAdjustment() Adjustment {
 // 
 // The function returns the following values:
 // 
-// 	- goret ListBoxRow 
+// 	- goret ListBoxRow (nullable) 
 //
 // Gets the n-th child in the list (not counting headers).
 // 
@@ -87711,7 +88147,7 @@ func (box *ListBoxInstance) GetAdjustment() Adjustment {
 func (box *ListBoxInstance) GetRowAtIndex(index_ int) ListBoxRow {
 	var carg0 *C.GtkListBox    // in, none, converted
 	var carg1 C.int            // in, none, casted, casted C.gint
-	var cret  *C.GtkListBoxRow // return, none, converted
+	var cret  *C.GtkListBoxRow // return, none, converted, nullable
 
 	carg0 = (*C.GtkListBox)(UnsafeListBoxToGlibNone(box))
 	carg1 = C.int(index_)
@@ -87722,7 +88158,9 @@ func (box *ListBoxInstance) GetRowAtIndex(index_ int) ListBoxRow {
 
 	var goret ListBoxRow
 
-	goret = UnsafeListBoxRowFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeListBoxRowFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -87735,13 +88173,13 @@ func (box *ListBoxInstance) GetRowAtIndex(index_ int) ListBoxRow {
 // 
 // The function returns the following values:
 // 
-// 	- goret ListBoxRow 
+// 	- goret ListBoxRow (nullable) 
 //
 // Gets the row at the @y position.
 func (box *ListBoxInstance) GetRowAtY(y int) ListBoxRow {
 	var carg0 *C.GtkListBox    // in, none, converted
 	var carg1 C.int            // in, none, casted, casted C.gint
-	var cret  *C.GtkListBoxRow // return, none, converted
+	var cret  *C.GtkListBoxRow // return, none, converted, nullable
 
 	carg0 = (*C.GtkListBox)(UnsafeListBoxToGlibNone(box))
 	carg1 = C.int(y)
@@ -87752,7 +88190,9 @@ func (box *ListBoxInstance) GetRowAtY(y int) ListBoxRow {
 
 	var goret ListBoxRow
 
-	goret = UnsafeListBoxRowFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeListBoxRowFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -87760,7 +88200,7 @@ func (box *ListBoxInstance) GetRowAtY(y int) ListBoxRow {
 // GetSelectedRow wraps gtk_list_box_get_selected_row
 // The function returns the following values:
 // 
-// 	- goret ListBoxRow 
+// 	- goret ListBoxRow (nullable) 
 //
 // Gets the selected row, or %NULL if no rows are selected.
 // 
@@ -87769,7 +88209,7 @@ func (box *ListBoxInstance) GetRowAtY(y int) ListBoxRow {
 // find all selected rows.
 func (box *ListBoxInstance) GetSelectedRow() ListBoxRow {
 	var carg0 *C.GtkListBox    // in, none, converted
-	var cret  *C.GtkListBoxRow // return, none, converted
+	var cret  *C.GtkListBoxRow // return, none, converted, nullable
 
 	carg0 = (*C.GtkListBox)(UnsafeListBoxToGlibNone(box))
 
@@ -87778,7 +88218,9 @@ func (box *ListBoxInstance) GetSelectedRow() ListBoxRow {
 
 	var goret ListBoxRow
 
-	goret = UnsafeListBoxRowFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeListBoxRowFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -88451,14 +88893,14 @@ type ListBoxRow interface {
 	// GetChild wraps gtk_list_box_row_get_child
 	// The function returns the following values:
 	// 
-	// 	- goret Widget 
+	// 	- goret Widget (nullable) 
 	//
 	// Gets the child widget of @row.
 	GetChild() Widget
 	// GetHeader wraps gtk_list_box_row_get_header
 	// The function returns the following values:
 	// 
-	// 	- goret Widget 
+	// 	- goret Widget (nullable) 
 	//
 	// Returns the current header of the @row.
 	// 
@@ -88660,12 +89102,12 @@ func (row *ListBoxRowInstance) GetActivatable() bool {
 // GetChild wraps gtk_list_box_row_get_child
 // The function returns the following values:
 // 
-// 	- goret Widget 
+// 	- goret Widget (nullable) 
 //
 // Gets the child widget of @row.
 func (row *ListBoxRowInstance) GetChild() Widget {
 	var carg0 *C.GtkListBoxRow // in, none, converted
-	var cret  *C.GtkWidget     // return, none, converted
+	var cret  *C.GtkWidget     // return, none, converted, nullable
 
 	carg0 = (*C.GtkListBoxRow)(UnsafeListBoxRowToGlibNone(row))
 
@@ -88674,7 +89116,9 @@ func (row *ListBoxRowInstance) GetChild() Widget {
 
 	var goret Widget
 
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -88682,7 +89126,7 @@ func (row *ListBoxRowInstance) GetChild() Widget {
 // GetHeader wraps gtk_list_box_row_get_header
 // The function returns the following values:
 // 
-// 	- goret Widget 
+// 	- goret Widget (nullable) 
 //
 // Returns the current header of the @row.
 // 
@@ -88692,7 +89136,7 @@ func (row *ListBoxRowInstance) GetChild() Widget {
 // the state of it.
 func (row *ListBoxRowInstance) GetHeader() Widget {
 	var carg0 *C.GtkListBoxRow // in, none, converted
-	var cret  *C.GtkWidget     // return, none, converted
+	var cret  *C.GtkWidget     // return, none, converted, nullable
 
 	carg0 = (*C.GtkListBoxRow)(UnsafeListBoxRowToGlibNone(row))
 
@@ -88701,7 +89145,9 @@ func (row *ListBoxRowInstance) GetHeader() Widget {
 
 	var goret Widget
 
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -89004,21 +89450,21 @@ type ListView interface {
 	// GetFactory wraps gtk_list_view_get_factory
 	// The function returns the following values:
 	// 
-	// 	- goret ListItemFactory 
+	// 	- goret ListItemFactory (nullable) 
 	//
 	// Gets the factory that's currently used to populate list items.
 	GetFactory() ListItemFactory
 	// GetHeaderFactory wraps gtk_list_view_get_header_factory
 	// The function returns the following values:
 	// 
-	// 	- goret ListItemFactory 
+	// 	- goret ListItemFactory (nullable) 
 	//
 	// Gets the factory that's currently used to populate section headers.
 	GetHeaderFactory() ListItemFactory
 	// GetModel wraps gtk_list_view_get_model
 	// The function returns the following values:
 	// 
-	// 	- goret SelectionModel 
+	// 	- goret SelectionModel (nullable) 
 	//
 	// Gets the model that's currently used to read the items displayed.
 	GetModel() SelectionModel
@@ -89260,12 +89706,12 @@ func (self *ListViewInstance) GetEnableRubberband() bool {
 // GetFactory wraps gtk_list_view_get_factory
 // The function returns the following values:
 // 
-// 	- goret ListItemFactory 
+// 	- goret ListItemFactory (nullable) 
 //
 // Gets the factory that's currently used to populate list items.
 func (self *ListViewInstance) GetFactory() ListItemFactory {
 	var carg0 *C.GtkListView        // in, none, converted
-	var cret  *C.GtkListItemFactory // return, none, converted
+	var cret  *C.GtkListItemFactory // return, none, converted, nullable
 
 	carg0 = (*C.GtkListView)(UnsafeListViewToGlibNone(self))
 
@@ -89274,7 +89720,9 @@ func (self *ListViewInstance) GetFactory() ListItemFactory {
 
 	var goret ListItemFactory
 
-	goret = UnsafeListItemFactoryFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeListItemFactoryFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -89282,12 +89730,12 @@ func (self *ListViewInstance) GetFactory() ListItemFactory {
 // GetHeaderFactory wraps gtk_list_view_get_header_factory
 // The function returns the following values:
 // 
-// 	- goret ListItemFactory 
+// 	- goret ListItemFactory (nullable) 
 //
 // Gets the factory that's currently used to populate section headers.
 func (self *ListViewInstance) GetHeaderFactory() ListItemFactory {
 	var carg0 *C.GtkListView        // in, none, converted
-	var cret  *C.GtkListItemFactory // return, none, converted
+	var cret  *C.GtkListItemFactory // return, none, converted, nullable
 
 	carg0 = (*C.GtkListView)(UnsafeListViewToGlibNone(self))
 
@@ -89296,7 +89744,9 @@ func (self *ListViewInstance) GetHeaderFactory() ListItemFactory {
 
 	var goret ListItemFactory
 
-	goret = UnsafeListItemFactoryFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeListItemFactoryFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -89304,12 +89754,12 @@ func (self *ListViewInstance) GetHeaderFactory() ListItemFactory {
 // GetModel wraps gtk_list_view_get_model
 // The function returns the following values:
 // 
-// 	- goret SelectionModel 
+// 	- goret SelectionModel (nullable) 
 //
 // Gets the model that's currently used to read the items displayed.
 func (self *ListViewInstance) GetModel() SelectionModel {
 	var carg0 *C.GtkListView       // in, none, converted
-	var cret  *C.GtkSelectionModel // return, none, converted
+	var cret  *C.GtkSelectionModel // return, none, converted, nullable
 
 	carg0 = (*C.GtkListView)(UnsafeListViewToGlibNone(self))
 
@@ -89318,7 +89768,9 @@ func (self *ListViewInstance) GetModel() SelectionModel {
 
 	var goret SelectionModel
 
-	goret = UnsafeSelectionModelFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeSelectionModelFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -89622,7 +90074,7 @@ type MediaControls interface {
 	// GetMediaStream wraps gtk_media_controls_get_media_stream
 	// The function returns the following values:
 	// 
-	// 	- goret MediaStream 
+	// 	- goret MediaStream (nullable) 
 	//
 	// Gets the media stream managed by @controls or %NULL if none.
 	GetMediaStream() MediaStream
@@ -89715,12 +90167,12 @@ func NewMediaControls(stream MediaStream) Widget {
 // GetMediaStream wraps gtk_media_controls_get_media_stream
 // The function returns the following values:
 // 
-// 	- goret MediaStream 
+// 	- goret MediaStream (nullable) 
 //
 // Gets the media stream managed by @controls or %NULL if none.
 func (controls *MediaControlsInstance) GetMediaStream() MediaStream {
 	var carg0 *C.GtkMediaControls // in, none, converted
-	var cret  *C.GtkMediaStream   // return, none, converted
+	var cret  *C.GtkMediaStream   // return, none, converted, nullable
 
 	carg0 = (*C.GtkMediaControls)(UnsafeMediaControlsToGlibNone(controls))
 
@@ -89729,7 +90181,9 @@ func (controls *MediaControlsInstance) GetMediaStream() MediaStream {
 
 	var goret MediaStream
 
-	goret = UnsafeMediaStreamFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeMediaStreamFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -89784,7 +90238,7 @@ type MediaFile interface {
 	// GetFile wraps gtk_media_file_get_file
 	// The function returns the following values:
 	// 
-	// 	- goret gio.File 
+	// 	- goret gio.File (nullable) 
 	//
 	// Returns the file that @self is currently playing from.
 	// 
@@ -89794,7 +90248,7 @@ type MediaFile interface {
 	// GetInputStream wraps gtk_media_file_get_input_stream
 	// The function returns the following values:
 	// 
-	// 	- goret gio.InputStream 
+	// 	- goret gio.InputStream (nullable) 
 	//
 	// Returns the stream that @self is currently playing from.
 	// 
@@ -90039,7 +90493,7 @@ func (self *MediaFileInstance) Clear() {
 // GetFile wraps gtk_media_file_get_file
 // The function returns the following values:
 // 
-// 	- goret gio.File 
+// 	- goret gio.File (nullable) 
 //
 // Returns the file that @self is currently playing from.
 // 
@@ -90047,7 +90501,7 @@ func (self *MediaFileInstance) Clear() {
 // %NULL is returned.
 func (self *MediaFileInstance) GetFile() gio.File {
 	var carg0 *C.GtkMediaFile // in, none, converted
-	var cret  *C.GFile        // return, none, converted
+	var cret  *C.GFile        // return, none, converted, nullable
 
 	carg0 = (*C.GtkMediaFile)(UnsafeMediaFileToGlibNone(self))
 
@@ -90056,7 +90510,9 @@ func (self *MediaFileInstance) GetFile() gio.File {
 
 	var goret gio.File
 
-	goret = gio.UnsafeFileFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gio.UnsafeFileFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -90064,7 +90520,7 @@ func (self *MediaFileInstance) GetFile() gio.File {
 // GetInputStream wraps gtk_media_file_get_input_stream
 // The function returns the following values:
 // 
-// 	- goret gio.InputStream 
+// 	- goret gio.InputStream (nullable) 
 //
 // Returns the stream that @self is currently playing from.
 // 
@@ -90072,7 +90528,7 @@ func (self *MediaFileInstance) GetFile() gio.File {
 // %NULL is returned.
 func (self *MediaFileInstance) GetInputStream() gio.InputStream {
 	var carg0 *C.GtkMediaFile // in, none, converted
-	var cret  *C.GInputStream // return, none, converted
+	var cret  *C.GInputStream // return, none, converted, nullable
 
 	carg0 = (*C.GtkMediaFile)(UnsafeMediaFileToGlibNone(self))
 
@@ -90081,7 +90537,9 @@ func (self *MediaFileInstance) GetInputStream() gio.InputStream {
 
 	var goret gio.InputStream
 
-	goret = gio.UnsafeInputStreamFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gio.UnsafeInputStreamFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -90294,7 +90752,7 @@ type MenuButton interface {
 	// GetChild wraps gtk_menu_button_get_child
 	// The function returns the following values:
 	// 
-	// 	- goret Widget 
+	// 	- goret Widget (nullable) 
 	//
 	// Gets the child widget of @menu_button.
 	GetChild() Widget
@@ -90315,28 +90773,28 @@ type MenuButton interface {
 	// GetIconName wraps gtk_menu_button_get_icon_name
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the name of the icon shown in the button.
 	GetIconName() string
 	// GetLabel wraps gtk_menu_button_get_label
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the label shown in the button
 	GetLabel() string
 	// GetMenuModel wraps gtk_menu_button_get_menu_model
 	// The function returns the following values:
 	// 
-	// 	- goret gio.MenuModel 
+	// 	- goret gio.MenuModel (nullable) 
 	//
 	// Returns the `GMenuModel` used to generate the popup.
 	GetMenuModel() gio.MenuModel
 	// GetPopover wraps gtk_menu_button_get_popover
 	// The function returns the following values:
 	// 
-	// 	- goret Popover 
+	// 	- goret Popover (nullable) 
 	//
 	// Returns the `GtkPopover` that pops out of the button.
 	// 
@@ -90691,12 +91149,12 @@ func (menuButton *MenuButtonInstance) GetCanShrink() bool {
 // GetChild wraps gtk_menu_button_get_child
 // The function returns the following values:
 // 
-// 	- goret Widget 
+// 	- goret Widget (nullable) 
 //
 // Gets the child widget of @menu_button.
 func (menuButton *MenuButtonInstance) GetChild() Widget {
 	var carg0 *C.GtkMenuButton // in, none, converted
-	var cret  *C.GtkWidget     // return, none, converted
+	var cret  *C.GtkWidget     // return, none, converted, nullable
 
 	carg0 = (*C.GtkMenuButton)(UnsafeMenuButtonToGlibNone(menuButton))
 
@@ -90705,7 +91163,9 @@ func (menuButton *MenuButtonInstance) GetChild() Widget {
 
 	var goret Widget
 
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -90759,12 +91219,12 @@ func (menuButton *MenuButtonInstance) GetHasFrame() bool {
 // GetIconName wraps gtk_menu_button_get_icon_name
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the name of the icon shown in the button.
 func (menuButton *MenuButtonInstance) GetIconName() string {
 	var carg0 *C.GtkMenuButton // in, none, converted
-	var cret  *C.char          // return, none, string, casted *C.gchar
+	var cret  *C.char          // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkMenuButton)(UnsafeMenuButtonToGlibNone(menuButton))
 
@@ -90773,7 +91233,9 @@ func (menuButton *MenuButtonInstance) GetIconName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -90781,12 +91243,12 @@ func (menuButton *MenuButtonInstance) GetIconName() string {
 // GetLabel wraps gtk_menu_button_get_label
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the label shown in the button
 func (menuButton *MenuButtonInstance) GetLabel() string {
 	var carg0 *C.GtkMenuButton // in, none, converted
-	var cret  *C.char          // return, none, string, casted *C.gchar
+	var cret  *C.char          // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkMenuButton)(UnsafeMenuButtonToGlibNone(menuButton))
 
@@ -90795,7 +91257,9 @@ func (menuButton *MenuButtonInstance) GetLabel() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -90803,12 +91267,12 @@ func (menuButton *MenuButtonInstance) GetLabel() string {
 // GetMenuModel wraps gtk_menu_button_get_menu_model
 // The function returns the following values:
 // 
-// 	- goret gio.MenuModel 
+// 	- goret gio.MenuModel (nullable) 
 //
 // Returns the `GMenuModel` used to generate the popup.
 func (menuButton *MenuButtonInstance) GetMenuModel() gio.MenuModel {
 	var carg0 *C.GtkMenuButton // in, none, converted
-	var cret  *C.GMenuModel    // return, none, converted
+	var cret  *C.GMenuModel    // return, none, converted, nullable
 
 	carg0 = (*C.GtkMenuButton)(UnsafeMenuButtonToGlibNone(menuButton))
 
@@ -90817,7 +91281,9 @@ func (menuButton *MenuButtonInstance) GetMenuModel() gio.MenuModel {
 
 	var goret gio.MenuModel
 
-	goret = gio.UnsafeMenuModelFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gio.UnsafeMenuModelFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -90825,7 +91291,7 @@ func (menuButton *MenuButtonInstance) GetMenuModel() gio.MenuModel {
 // GetPopover wraps gtk_menu_button_get_popover
 // The function returns the following values:
 // 
-// 	- goret Popover 
+// 	- goret Popover (nullable) 
 //
 // Returns the `GtkPopover` that pops out of the button.
 // 
@@ -90833,7 +91299,7 @@ func (menuButton *MenuButtonInstance) GetMenuModel() gio.MenuModel {
 // returns %NULL.
 func (menuButton *MenuButtonInstance) GetPopover() Popover {
 	var carg0 *C.GtkMenuButton // in, none, converted
-	var cret  *C.GtkPopover    // return, none, converted
+	var cret  *C.GtkPopover    // return, none, converted, nullable
 
 	carg0 = (*C.GtkMenuButton)(UnsafeMenuButtonToGlibNone(menuButton))
 
@@ -90842,7 +91308,9 @@ func (menuButton *MenuButtonInstance) GetPopover() Popover {
 
 	var goret Popover
 
-	goret = UnsafePopoverFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafePopoverFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -91998,7 +92466,7 @@ type Notebook interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret Widget 
+	// 	- goret Widget (nullable) 
 	//
 	// Gets one of the action widgets.
 	// 
@@ -92014,7 +92482,7 @@ type Notebook interface {
 	// GetGroupName wraps gtk_notebook_get_group_name
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the current group name for @notebook.
 	GetGroupName() string
@@ -92026,7 +92494,7 @@ type Notebook interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret Widget 
+	// 	- goret Widget (nullable) 
 	//
 	// Retrieves the menu label widget of the page containing @child.
 	GetMenuLabel(Widget) Widget
@@ -92038,7 +92506,7 @@ type Notebook interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Retrieves the text of the menu label for the page containing
 	// @child.
@@ -92059,7 +92527,7 @@ type Notebook interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret Widget 
+	// 	- goret Widget (nullable) 
 	//
 	// Returns the child widget contained in page number @page_num.
 	GetNthPage(int) Widget
@@ -92127,7 +92595,7 @@ type Notebook interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret Widget 
+	// 	- goret Widget (nullable) 
 	//
 	// Returns the tab label widget for the page @child.
 	// 
@@ -92142,7 +92610,7 @@ type Notebook interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Retrieves the text of the tab label for the page containing
 	// @child.
@@ -92734,7 +93202,7 @@ func (notebook *NotebookInstance) DetachTab(child Widget) {
 // 
 // The function returns the following values:
 // 
-// 	- goret Widget 
+// 	- goret Widget (nullable) 
 //
 // Gets one of the action widgets.
 // 
@@ -92742,7 +93210,7 @@ func (notebook *NotebookInstance) DetachTab(child Widget) {
 func (notebook *NotebookInstance) GetActionWidget(packType PackType) Widget {
 	var carg0 *C.GtkNotebook // in, none, converted
 	var carg1 C.GtkPackType  // in, none, casted
-	var cret  *C.GtkWidget   // return, none, converted
+	var cret  *C.GtkWidget   // return, none, converted, nullable
 
 	carg0 = (*C.GtkNotebook)(UnsafeNotebookToGlibNone(notebook))
 	carg1 = C.GtkPackType(packType)
@@ -92753,7 +93221,9 @@ func (notebook *NotebookInstance) GetActionWidget(packType PackType) Widget {
 
 	var goret Widget
 
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -92783,12 +93253,12 @@ func (notebook *NotebookInstance) GetCurrentPage() int {
 // GetGroupName wraps gtk_notebook_get_group_name
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the current group name for @notebook.
 func (notebook *NotebookInstance) GetGroupName() string {
 	var carg0 *C.GtkNotebook // in, none, converted
-	var cret  *C.char        // return, none, string, casted *C.gchar
+	var cret  *C.char        // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkNotebook)(UnsafeNotebookToGlibNone(notebook))
 
@@ -92797,7 +93267,9 @@ func (notebook *NotebookInstance) GetGroupName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -92810,13 +93282,13 @@ func (notebook *NotebookInstance) GetGroupName() string {
 // 
 // The function returns the following values:
 // 
-// 	- goret Widget 
+// 	- goret Widget (nullable) 
 //
 // Retrieves the menu label widget of the page containing @child.
 func (notebook *NotebookInstance) GetMenuLabel(child Widget) Widget {
 	var carg0 *C.GtkNotebook // in, none, converted
 	var carg1 *C.GtkWidget   // in, none, converted
-	var cret  *C.GtkWidget   // return, none, converted
+	var cret  *C.GtkWidget   // return, none, converted, nullable
 
 	carg0 = (*C.GtkNotebook)(UnsafeNotebookToGlibNone(notebook))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(child))
@@ -92827,7 +93299,9 @@ func (notebook *NotebookInstance) GetMenuLabel(child Widget) Widget {
 
 	var goret Widget
 
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -92840,14 +93314,14 @@ func (notebook *NotebookInstance) GetMenuLabel(child Widget) Widget {
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Retrieves the text of the menu label for the page containing
 // @child.
 func (notebook *NotebookInstance) GetMenuLabelText(child Widget) string {
 	var carg0 *C.GtkNotebook // in, none, converted
 	var carg1 *C.GtkWidget   // in, none, converted
-	var cret  *C.char        // return, none, string, casted *C.gchar
+	var cret  *C.char        // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkNotebook)(UnsafeNotebookToGlibNone(notebook))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(child))
@@ -92858,7 +93332,9 @@ func (notebook *NotebookInstance) GetMenuLabelText(child Widget) string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -92894,13 +93370,13 @@ func (notebook *NotebookInstance) GetNPages() int {
 // 
 // The function returns the following values:
 // 
-// 	- goret Widget 
+// 	- goret Widget (nullable) 
 //
 // Returns the child widget contained in page number @page_num.
 func (notebook *NotebookInstance) GetNthPage(pageNum int) Widget {
 	var carg0 *C.GtkNotebook // in, none, converted
 	var carg1 C.int          // in, none, casted, casted C.gint
-	var cret  *C.GtkWidget   // return, none, converted
+	var cret  *C.GtkWidget   // return, none, converted, nullable
 
 	carg0 = (*C.GtkNotebook)(UnsafeNotebookToGlibNone(notebook))
 	carg1 = C.int(pageNum)
@@ -92911,7 +93387,9 @@ func (notebook *NotebookInstance) GetNthPage(pageNum int) Widget {
 
 	var goret Widget
 
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -93084,7 +93562,7 @@ func (notebook *NotebookInstance) GetTabDetachable(child Widget) bool {
 // 
 // The function returns the following values:
 // 
-// 	- goret Widget 
+// 	- goret Widget (nullable) 
 //
 // Returns the tab label widget for the page @child.
 // 
@@ -93093,7 +93571,7 @@ func (notebook *NotebookInstance) GetTabDetachable(child Widget) bool {
 func (notebook *NotebookInstance) GetTabLabel(child Widget) Widget {
 	var carg0 *C.GtkNotebook // in, none, converted
 	var carg1 *C.GtkWidget   // in, none, converted
-	var cret  *C.GtkWidget   // return, none, converted
+	var cret  *C.GtkWidget   // return, none, converted, nullable
 
 	carg0 = (*C.GtkNotebook)(UnsafeNotebookToGlibNone(notebook))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(child))
@@ -93104,7 +93582,9 @@ func (notebook *NotebookInstance) GetTabLabel(child Widget) Widget {
 
 	var goret Widget
 
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -93117,14 +93597,14 @@ func (notebook *NotebookInstance) GetTabLabel(child Widget) Widget {
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Retrieves the text of the tab label for the page containing
 // @child.
 func (notebook *NotebookInstance) GetTabLabelText(child Widget) string {
 	var carg0 *C.GtkNotebook // in, none, converted
 	var carg1 *C.GtkWidget   // in, none, converted
-	var cret  *C.char        // return, none, string, casted *C.gchar
+	var cret  *C.char        // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkNotebook)(UnsafeNotebookToGlibNone(notebook))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(child))
@@ -93135,7 +93615,9 @@ func (notebook *NotebookInstance) GetTabLabelText(child Widget) string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -94219,7 +94701,7 @@ type Overlay interface {
 	// GetChild wraps gtk_overlay_get_child
 	// The function returns the following values:
 	// 
-	// 	- goret Widget 
+	// 	- goret Widget (nullable) 
 	//
 	// Gets the child widget of @overlay.
 	GetChild() Widget
@@ -94399,12 +94881,12 @@ func (overlay *OverlayInstance) AddOverlay(widget Widget) {
 // GetChild wraps gtk_overlay_get_child
 // The function returns the following values:
 // 
-// 	- goret Widget 
+// 	- goret Widget (nullable) 
 //
 // Gets the child widget of @overlay.
 func (overlay *OverlayInstance) GetChild() Widget {
 	var carg0 *C.GtkOverlay // in, none, converted
-	var cret  *C.GtkWidget  // return, none, converted
+	var cret  *C.GtkWidget  // return, none, converted, nullable
 
 	carg0 = (*C.GtkOverlay)(UnsafeOverlayToGlibNone(overlay))
 
@@ -94413,7 +94895,9 @@ func (overlay *OverlayInstance) GetChild() Widget {
 
 	var goret Widget
 
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -94702,7 +95186,7 @@ type Paned interface {
 	// GetEndChild wraps gtk_paned_get_end_child
 	// The function returns the following values:
 	// 
-	// 	- goret Widget 
+	// 	- goret Widget (nullable) 
 	//
 	// Retrieves the end child of the given `GtkPaned`.
 	GetEndChild() Widget
@@ -94744,7 +95228,7 @@ type Paned interface {
 	// GetStartChild wraps gtk_paned_get_start_child
 	// The function returns the following values:
 	// 
-	// 	- goret Widget 
+	// 	- goret Widget (nullable) 
 	//
 	// Retrieves the start child of the given `GtkPaned`.
 	GetStartChild() Widget
@@ -94970,12 +95454,12 @@ func NewPaned(orientation Orientation) Widget {
 // GetEndChild wraps gtk_paned_get_end_child
 // The function returns the following values:
 // 
-// 	- goret Widget 
+// 	- goret Widget (nullable) 
 //
 // Retrieves the end child of the given `GtkPaned`.
 func (paned *PanedInstance) GetEndChild() Widget {
 	var carg0 *C.GtkPaned  // in, none, converted
-	var cret  *C.GtkWidget // return, none, converted
+	var cret  *C.GtkWidget // return, none, converted, nullable
 
 	carg0 = (*C.GtkPaned)(UnsafePanedToGlibNone(paned))
 
@@ -94984,7 +95468,9 @@ func (paned *PanedInstance) GetEndChild() Widget {
 
 	var goret Widget
 
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -95110,12 +95596,12 @@ func (paned *PanedInstance) GetShrinkStartChild() bool {
 // GetStartChild wraps gtk_paned_get_start_child
 // The function returns the following values:
 // 
-// 	- goret Widget 
+// 	- goret Widget (nullable) 
 //
 // Retrieves the start child of the given `GtkPaned`.
 func (paned *PanedInstance) GetStartChild() Widget {
 	var carg0 *C.GtkPaned  // in, none, converted
-	var cret  *C.GtkWidget // return, none, converted
+	var cret  *C.GtkWidget // return, none, converted, nullable
 
 	carg0 = (*C.GtkPaned)(UnsafePanedToGlibNone(paned))
 
@@ -95124,7 +95610,9 @@ func (paned *PanedInstance) GetStartChild() Widget {
 
 	var goret Widget
 
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -95453,7 +95941,7 @@ type PasswordEntry interface {
 	// GetExtraMenu wraps gtk_password_entry_get_extra_menu
 	// The function returns the following values:
 	// 
-	// 	- goret gio.MenuModel 
+	// 	- goret gio.MenuModel (nullable) 
 	//
 	// Gets the menu model set with gtk_password_entry_set_extra_menu().
 	GetExtraMenu() gio.MenuModel
@@ -95561,12 +96049,12 @@ func NewPasswordEntry() Widget {
 // GetExtraMenu wraps gtk_password_entry_get_extra_menu
 // The function returns the following values:
 // 
-// 	- goret gio.MenuModel 
+// 	- goret gio.MenuModel (nullable) 
 //
 // Gets the menu model set with gtk_password_entry_set_extra_menu().
 func (entry *PasswordEntryInstance) GetExtraMenu() gio.MenuModel {
 	var carg0 *C.GtkPasswordEntry // in, none, converted
-	var cret  *C.GMenuModel       // return, none, converted
+	var cret  *C.GMenuModel       // return, none, converted, nullable
 
 	carg0 = (*C.GtkPasswordEntry)(UnsafePasswordEntryToGlibNone(entry))
 
@@ -95575,7 +96063,9 @@ func (entry *PasswordEntryInstance) GetExtraMenu() gio.MenuModel {
 
 	var goret gio.MenuModel
 
-	goret = gio.UnsafeMenuModelFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gio.UnsafeMenuModelFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -95729,7 +96219,7 @@ type Picture interface {
 	// GetAlternativeText wraps gtk_picture_get_alternative_text
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the alternative textual description of the picture.
 	// 
@@ -95754,7 +96244,7 @@ type Picture interface {
 	// GetFile wraps gtk_picture_get_file
 	// The function returns the following values:
 	// 
-	// 	- goret gio.File 
+	// 	- goret gio.File (nullable) 
 	//
 	// Gets the `GFile` currently displayed if @self is displaying a file.
 	// 
@@ -95764,7 +96254,7 @@ type Picture interface {
 	// GetPaintable wraps gtk_picture_get_paintable
 	// The function returns the following values:
 	// 
-	// 	- goret gdk.Paintable 
+	// 	- goret gdk.Paintable (nullable) 
 	//
 	// Gets the `GdkPaintable` being displayed by the `GtkPicture`.
 	GetPaintable() gdk.Paintable
@@ -96056,14 +96546,14 @@ func NewPictureForResource(resourcePath string) Widget {
 // GetAlternativeText wraps gtk_picture_get_alternative_text
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the alternative textual description of the picture.
 // 
 // The returned string will be %NULL if the picture cannot be described textually.
 func (self *PictureInstance) GetAlternativeText() string {
 	var carg0 *C.GtkPicture // in, none, converted
-	var cret  *C.char       // return, none, string, casted *C.gchar
+	var cret  *C.char       // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkPicture)(UnsafePictureToGlibNone(self))
 
@@ -96072,7 +96562,9 @@ func (self *PictureInstance) GetAlternativeText() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -96128,7 +96620,7 @@ func (self *PictureInstance) GetContentFit() ContentFit {
 // GetFile wraps gtk_picture_get_file
 // The function returns the following values:
 // 
-// 	- goret gio.File 
+// 	- goret gio.File (nullable) 
 //
 // Gets the `GFile` currently displayed if @self is displaying a file.
 // 
@@ -96136,7 +96628,7 @@ func (self *PictureInstance) GetContentFit() ContentFit {
 // [method@Gtk.Picture.set_paintable] was used, then %NULL is returned.
 func (self *PictureInstance) GetFile() gio.File {
 	var carg0 *C.GtkPicture // in, none, converted
-	var cret  *C.GFile      // return, none, converted
+	var cret  *C.GFile      // return, none, converted, nullable
 
 	carg0 = (*C.GtkPicture)(UnsafePictureToGlibNone(self))
 
@@ -96145,7 +96637,9 @@ func (self *PictureInstance) GetFile() gio.File {
 
 	var goret gio.File
 
-	goret = gio.UnsafeFileFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gio.UnsafeFileFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -96153,12 +96647,12 @@ func (self *PictureInstance) GetFile() gio.File {
 // GetPaintable wraps gtk_picture_get_paintable
 // The function returns the following values:
 // 
-// 	- goret gdk.Paintable 
+// 	- goret gdk.Paintable (nullable) 
 //
 // Gets the `GdkPaintable` being displayed by the `GtkPicture`.
 func (self *PictureInstance) GetPaintable() gdk.Paintable {
 	var carg0 *C.GtkPicture   // in, none, converted
-	var cret  *C.GdkPaintable // return, none, converted
+	var cret  *C.GdkPaintable // return, none, converted, nullable
 
 	carg0 = (*C.GtkPicture)(UnsafePictureToGlibNone(self))
 
@@ -96167,7 +96661,9 @@ func (self *PictureInstance) GetPaintable() gdk.Paintable {
 
 	var goret gdk.Paintable
 
-	goret = gdk.UnsafePaintableFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gdk.UnsafePaintableFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -96479,7 +96975,7 @@ type Popover interface {
 	// GetChild wraps gtk_popover_get_child
 	// The function returns the following values:
 	// 
-	// 	- goret Widget 
+	// 	- goret Widget (nullable) 
 	//
 	// Gets the child widget of @popover.
 	GetChild() Widget
@@ -96786,12 +97282,12 @@ func (popover *PopoverInstance) GetCascadePopdown() bool {
 // GetChild wraps gtk_popover_get_child
 // The function returns the following values:
 // 
-// 	- goret Widget 
+// 	- goret Widget (nullable) 
 //
 // Gets the child widget of @popover.
 func (popover *PopoverInstance) GetChild() Widget {
 	var carg0 *C.GtkPopover // in, none, converted
-	var cret  *C.GtkWidget  // return, none, converted
+	var cret  *C.GtkWidget  // return, none, converted, nullable
 
 	carg0 = (*C.GtkPopover)(UnsafePopoverToGlibNone(popover))
 
@@ -96800,7 +97296,9 @@ func (popover *PopoverInstance) GetChild() Widget {
 
 	var goret Widget
 
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -97373,7 +97871,7 @@ type PopoverMenu interface {
 	// GetMenuModel wraps gtk_popover_menu_get_menu_model
 	// The function returns the following values:
 	// 
-	// 	- goret gio.MenuModel 
+	// 	- goret gio.MenuModel (nullable) 
 	//
 	// Returns the menu model used to populate the popover.
 	GetMenuModel() gio.MenuModel
@@ -97610,12 +98108,12 @@ func (popover *PopoverMenuInstance) GetFlags() PopoverMenuFlags {
 // GetMenuModel wraps gtk_popover_menu_get_menu_model
 // The function returns the following values:
 // 
-// 	- goret gio.MenuModel 
+// 	- goret gio.MenuModel (nullable) 
 //
 // Returns the menu model used to populate the popover.
 func (popover *PopoverMenuInstance) GetMenuModel() gio.MenuModel {
 	var carg0 *C.GtkPopoverMenu // in, none, converted
-	var cret  *C.GMenuModel     // return, none, converted
+	var cret  *C.GMenuModel     // return, none, converted, nullable
 
 	carg0 = (*C.GtkPopoverMenu)(UnsafePopoverMenuToGlibNone(popover))
 
@@ -97624,7 +98122,9 @@ func (popover *PopoverMenuInstance) GetMenuModel() gio.MenuModel {
 
 	var goret gio.MenuModel
 
-	goret = gio.UnsafeMenuModelFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gio.UnsafeMenuModelFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -97778,7 +98278,7 @@ type PopoverMenuBar interface {
 	// GetMenuModel wraps gtk_popover_menu_bar_get_menu_model
 	// The function returns the following values:
 	// 
-	// 	- goret gio.MenuModel 
+	// 	- goret gio.MenuModel (nullable) 
 	//
 	// Returns the model from which the contents of @bar are taken.
 	GetMenuModel() gio.MenuModel
@@ -97925,12 +98425,12 @@ func (bar *PopoverMenuBarInstance) AddChild(child Widget, id string) bool {
 // GetMenuModel wraps gtk_popover_menu_bar_get_menu_model
 // The function returns the following values:
 // 
-// 	- goret gio.MenuModel 
+// 	- goret gio.MenuModel (nullable) 
 //
 // Returns the model from which the contents of @bar are taken.
 func (bar *PopoverMenuBarInstance) GetMenuModel() gio.MenuModel {
 	var carg0 *C.GtkPopoverMenuBar // in, none, converted
-	var cret  *C.GMenuModel        // return, none, converted
+	var cret  *C.GMenuModel        // return, none, converted, nullable
 
 	carg0 = (*C.GtkPopoverMenuBar)(UnsafePopoverMenuBarToGlibNone(bar))
 
@@ -97939,7 +98439,9 @@ func (bar *PopoverMenuBarInstance) GetMenuModel() gio.MenuModel {
 
 	var goret gio.MenuModel
 
-	goret = gio.UnsafeMenuModelFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gio.UnsafeMenuModelFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -98114,7 +98616,7 @@ type ProgressBar interface {
 	// GetText wraps gtk_progress_bar_get_text
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Retrieves the text that is displayed with the progress bar.
 	// 
@@ -98405,7 +98907,7 @@ func (pbar *ProgressBarInstance) GetShowText() bool {
 // GetText wraps gtk_progress_bar_get_text
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Retrieves the text that is displayed with the progress bar.
 // 
@@ -98413,7 +98915,7 @@ func (pbar *ProgressBarInstance) GetShowText() bool {
 // so will become invalid if you change the text in the progress bar.
 func (pbar *ProgressBarInstance) GetText() string {
 	var carg0 *C.GtkProgressBar // in, none, converted
-	var cret  *C.char           // return, none, string, casted *C.gchar
+	var cret  *C.char           // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkProgressBar)(UnsafeProgressBarToGlibNone(pbar))
 
@@ -98422,7 +98924,9 @@ func (pbar *ProgressBarInstance) GetText() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -99603,7 +100107,7 @@ type Revealer interface {
 	// GetChild wraps gtk_revealer_get_child
 	// The function returns the following values:
 	// 
-	// 	- goret Widget 
+	// 	- goret Widget (nullable) 
 	//
 	// Gets the child widget of @revealer.
 	GetChild() Widget
@@ -99753,12 +100257,12 @@ func NewRevealer() Widget {
 // GetChild wraps gtk_revealer_get_child
 // The function returns the following values:
 // 
-// 	- goret Widget 
+// 	- goret Widget (nullable) 
 //
 // Gets the child widget of @revealer.
 func (revealer *RevealerInstance) GetChild() Widget {
 	var carg0 *C.GtkRevealer // in, none, converted
-	var cret  *C.GtkWidget   // return, none, converted
+	var cret  *C.GtkWidget   // return, none, converted, nullable
 
 	carg0 = (*C.GtkRevealer)(UnsafeRevealerToGlibNone(revealer))
 
@@ -99767,7 +100271,9 @@ func (revealer *RevealerInstance) GetChild() Widget {
 
 	var goret Widget
 
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -100114,7 +100620,7 @@ type Scale interface {
 	// GetLayout wraps gtk_scale_get_layout
 	// The function returns the following values:
 	// 
-	// 	- goret pango.Layout 
+	// 	- goret pango.Layout (nullable) 
 	//
 	// Gets the `PangoLayout` used to display the scale.
 	// 
@@ -100476,7 +100982,7 @@ func (scale *ScaleInstance) GetHasOrigin() bool {
 // GetLayout wraps gtk_scale_get_layout
 // The function returns the following values:
 // 
-// 	- goret pango.Layout 
+// 	- goret pango.Layout (nullable) 
 //
 // Gets the `PangoLayout` used to display the scale.
 // 
@@ -100484,7 +100990,7 @@ func (scale *ScaleInstance) GetHasOrigin() bool {
 // to be freed by the caller.
 func (scale *ScaleInstance) GetLayout() pango.Layout {
 	var carg0 *C.GtkScale    // in, none, converted
-	var cret  *C.PangoLayout // return, none, converted
+	var cret  *C.PangoLayout // return, none, converted, nullable
 
 	carg0 = (*C.GtkScale)(UnsafeScaleToGlibNone(scale))
 
@@ -100493,7 +100999,9 @@ func (scale *ScaleInstance) GetLayout() pango.Layout {
 
 	var goret pango.Layout
 
-	goret = pango.UnsafeLayoutFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = pango.UnsafeLayoutFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -101539,7 +102047,7 @@ type ScrolledWindow interface {
 	// GetChild wraps gtk_scrolled_window_get_child
 	// The function returns the following values:
 	// 
-	// 	- goret Widget 
+	// 	- goret Widget (nullable) 
 	//
 	// Gets the child widget of @scrolled_window.
 	// 
@@ -101949,7 +102457,7 @@ func NewScrolledWindow() Widget {
 // GetChild wraps gtk_scrolled_window_get_child
 // The function returns the following values:
 // 
-// 	- goret Widget 
+// 	- goret Widget (nullable) 
 //
 // Gets the child widget of @scrolled_window.
 // 
@@ -101958,7 +102466,7 @@ func NewScrolledWindow() Widget {
 // using [method@Gtk.Viewport.get_child].
 func (scrolledWindow *ScrolledWindowInstance) GetChild() Widget {
 	var carg0 *C.GtkScrolledWindow // in, none, converted
-	var cret  *C.GtkWidget         // return, none, converted
+	var cret  *C.GtkWidget         // return, none, converted, nullable
 
 	carg0 = (*C.GtkScrolledWindow)(UnsafeScrolledWindowToGlibNone(scrolledWindow))
 
@@ -101967,7 +102475,9 @@ func (scrolledWindow *ScrolledWindowInstance) GetChild() Widget {
 
 	var goret Widget
 
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -102805,14 +103315,14 @@ type SearchBar interface {
 	// GetChild wraps gtk_search_bar_get_child
 	// The function returns the following values:
 	// 
-	// 	- goret Widget 
+	// 	- goret Widget (nullable) 
 	//
 	// Gets the child widget of @bar.
 	GetChild() Widget
 	// GetKeyCaptureWidget wraps gtk_search_bar_get_key_capture_widget
 	// The function returns the following values:
 	// 
-	// 	- goret Widget 
+	// 	- goret Widget (nullable) 
 	//
 	// Gets the widget that @bar is capturing key events from.
 	GetKeyCaptureWidget() Widget
@@ -102950,12 +103460,12 @@ func NewSearchBar() Widget {
 // GetChild wraps gtk_search_bar_get_child
 // The function returns the following values:
 // 
-// 	- goret Widget 
+// 	- goret Widget (nullable) 
 //
 // Gets the child widget of @bar.
 func (bar *SearchBarInstance) GetChild() Widget {
 	var carg0 *C.GtkSearchBar // in, none, converted
-	var cret  *C.GtkWidget    // return, none, converted
+	var cret  *C.GtkWidget    // return, none, converted, nullable
 
 	carg0 = (*C.GtkSearchBar)(UnsafeSearchBarToGlibNone(bar))
 
@@ -102964,7 +103474,9 @@ func (bar *SearchBarInstance) GetChild() Widget {
 
 	var goret Widget
 
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -102972,12 +103484,12 @@ func (bar *SearchBarInstance) GetChild() Widget {
 // GetKeyCaptureWidget wraps gtk_search_bar_get_key_capture_widget
 // The function returns the following values:
 // 
-// 	- goret Widget 
+// 	- goret Widget (nullable) 
 //
 // Gets the widget that @bar is capturing key events from.
 func (bar *SearchBarInstance) GetKeyCaptureWidget() Widget {
 	var carg0 *C.GtkSearchBar // in, none, converted
-	var cret  *C.GtkWidget    // return, none, converted
+	var cret  *C.GtkWidget    // return, none, converted, nullable
 
 	carg0 = (*C.GtkSearchBar)(UnsafeSearchBarToGlibNone(bar))
 
@@ -102986,7 +103498,9 @@ func (bar *SearchBarInstance) GetKeyCaptureWidget() Widget {
 
 	var goret Widget
 
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -103229,14 +103743,14 @@ type SearchEntry interface {
 	// GetKeyCaptureWidget wraps gtk_search_entry_get_key_capture_widget
 	// The function returns the following values:
 	// 
-	// 	- goret Widget 
+	// 	- goret Widget (nullable) 
 	//
 	// Gets the widget that @entry is capturing key events from.
 	GetKeyCaptureWidget() Widget
 	// GetPlaceholderText wraps gtk_search_entry_get_placeholder_text
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the placeholder text associated with @entry.
 	GetPlaceholderText() string
@@ -103471,12 +103985,12 @@ func (entry *SearchEntryInstance) GetInputPurpose() InputPurpose {
 // GetKeyCaptureWidget wraps gtk_search_entry_get_key_capture_widget
 // The function returns the following values:
 // 
-// 	- goret Widget 
+// 	- goret Widget (nullable) 
 //
 // Gets the widget that @entry is capturing key events from.
 func (entry *SearchEntryInstance) GetKeyCaptureWidget() Widget {
 	var carg0 *C.GtkSearchEntry // in, none, converted
-	var cret  *C.GtkWidget      // return, none, converted
+	var cret  *C.GtkWidget      // return, none, converted, nullable
 
 	carg0 = (*C.GtkSearchEntry)(UnsafeSearchEntryToGlibNone(entry))
 
@@ -103485,7 +103999,9 @@ func (entry *SearchEntryInstance) GetKeyCaptureWidget() Widget {
 
 	var goret Widget
 
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -103493,12 +104009,12 @@ func (entry *SearchEntryInstance) GetKeyCaptureWidget() Widget {
 // GetPlaceholderText wraps gtk_search_entry_get_placeholder_text
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the placeholder text associated with @entry.
 func (entry *SearchEntryInstance) GetPlaceholderText() string {
 	var carg0 *C.GtkSearchEntry // in, none, converted
-	var cret  *C.char           // return, none, string, casted *C.gchar
+	var cret  *C.char           // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkSearchEntry)(UnsafeSearchEntryToGlibNone(entry))
 
@@ -103507,7 +104023,9 @@ func (entry *SearchEntryInstance) GetPlaceholderText() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -103860,14 +104378,14 @@ type ShortcutLabel interface {
 	// GetAccelerator wraps gtk_shortcut_label_get_accelerator
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Retrieves the current accelerator of @self.
 	GetAccelerator() string
 	// GetDisabledText wraps gtk_shortcut_label_get_disabled_text
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Retrieves the text that is displayed when no accelerator is set.
 	GetDisabledText() string
@@ -103967,12 +104485,12 @@ func NewShortcutLabel(accelerator string) Widget {
 // GetAccelerator wraps gtk_shortcut_label_get_accelerator
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Retrieves the current accelerator of @self.
 func (self *ShortcutLabelInstance) GetAccelerator() string {
 	var carg0 *C.GtkShortcutLabel // in, none, converted
-	var cret  *C.char             // return, none, string, casted *C.gchar
+	var cret  *C.char             // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkShortcutLabel)(UnsafeShortcutLabelToGlibNone(self))
 
@@ -103981,7 +104499,9 @@ func (self *ShortcutLabelInstance) GetAccelerator() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -103989,12 +104509,12 @@ func (self *ShortcutLabelInstance) GetAccelerator() string {
 // GetDisabledText wraps gtk_shortcut_label_get_disabled_text
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Retrieves the text that is displayed when no accelerator is set.
 func (self *ShortcutLabelInstance) GetDisabledText() string {
 	var carg0 *C.GtkShortcutLabel // in, none, converted
-	var cret  *C.char             // return, none, string, casted *C.gchar
+	var cret  *C.char             // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkShortcutLabel)(UnsafeShortcutLabelToGlibNone(self))
 
@@ -104003,7 +104523,9 @@ func (self *ShortcutLabelInstance) GetDisabledText() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -106184,7 +106706,7 @@ type Stack interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret Widget 
+	// 	- goret Widget (nullable) 
 	//
 	// Finds the child with the name given as the argument.
 	// 
@@ -106262,7 +106784,7 @@ type Stack interface {
 	// GetVisibleChild wraps gtk_stack_get_visible_child
 	// The function returns the following values:
 	// 
-	// 	- goret Widget 
+	// 	- goret Widget (nullable) 
 	//
 	// Gets the currently visible child of @stack.
 	// 
@@ -106271,7 +106793,7 @@ type Stack interface {
 	// GetVisibleChildName wraps gtk_stack_get_visible_child_name
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Returns the name of the currently visible child of @stack.
 	// 
@@ -106582,7 +107104,7 @@ func (stack *StackInstance) AddTitled(child Widget, name string, title string) S
 // 
 // The function returns the following values:
 // 
-// 	- goret Widget 
+// 	- goret Widget (nullable) 
 //
 // Finds the child with the name given as the argument.
 // 
@@ -106590,7 +107112,7 @@ func (stack *StackInstance) AddTitled(child Widget, name string, title string) S
 func (stack *StackInstance) GetChildByName(name string) Widget {
 	var carg0 *C.GtkStack  // in, none, converted
 	var carg1 *C.char      // in, none, string, casted *C.gchar
-	var cret  *C.GtkWidget // return, none, converted
+	var cret  *C.GtkWidget // return, none, converted, nullable
 
 	carg0 = (*C.GtkStack)(UnsafeStackToGlibNone(stack))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
@@ -106602,7 +107124,9 @@ func (stack *StackInstance) GetChildByName(name string) Widget {
 
 	var goret Widget
 
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -106810,14 +107334,14 @@ func (stack *StackInstance) GetVhomogeneous() bool {
 // GetVisibleChild wraps gtk_stack_get_visible_child
 // The function returns the following values:
 // 
-// 	- goret Widget 
+// 	- goret Widget (nullable) 
 //
 // Gets the currently visible child of @stack.
 // 
 // Returns %NULL if there are no visible children.
 func (stack *StackInstance) GetVisibleChild() Widget {
 	var carg0 *C.GtkStack  // in, none, converted
-	var cret  *C.GtkWidget // return, none, converted
+	var cret  *C.GtkWidget // return, none, converted, nullable
 
 	carg0 = (*C.GtkStack)(UnsafeStackToGlibNone(stack))
 
@@ -106826,7 +107350,9 @@ func (stack *StackInstance) GetVisibleChild() Widget {
 
 	var goret Widget
 
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -106834,14 +107360,14 @@ func (stack *StackInstance) GetVisibleChild() Widget {
 // GetVisibleChildName wraps gtk_stack_get_visible_child_name
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Returns the name of the currently visible child of @stack.
 // 
 // Returns %NULL if there is no visible child.
 func (stack *StackInstance) GetVisibleChildName() string {
 	var carg0 *C.GtkStack // in, none, converted
-	var cret  *C.char     // return, none, string, casted *C.gchar
+	var cret  *C.char     // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkStack)(UnsafeStackToGlibNone(stack))
 
@@ -106850,7 +107376,9 @@ func (stack *StackInstance) GetVisibleChildName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -107119,7 +107647,7 @@ type StackSidebar interface {
 	// GetStack wraps gtk_stack_sidebar_get_stack
 	// The function returns the following values:
 	// 
-	// 	- goret Stack 
+	// 	- goret Stack (nullable) 
 	//
 	// Retrieves the stack.
 	GetStack() Stack
@@ -107204,12 +107732,12 @@ func NewStackSidebar() Widget {
 // GetStack wraps gtk_stack_sidebar_get_stack
 // The function returns the following values:
 // 
-// 	- goret Stack 
+// 	- goret Stack (nullable) 
 //
 // Retrieves the stack.
 func (self *StackSidebarInstance) GetStack() Stack {
 	var carg0 *C.GtkStackSidebar // in, none, converted
-	var cret  *C.GtkStack        // return, none, converted
+	var cret  *C.GtkStack        // return, none, converted, nullable
 
 	carg0 = (*C.GtkStackSidebar)(UnsafeStackSidebarToGlibNone(self))
 
@@ -107218,7 +107746,9 @@ func (self *StackSidebarInstance) GetStack() Stack {
 
 	var goret Stack
 
-	goret = UnsafeStackFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeStackFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -107304,7 +107834,7 @@ type StackSwitcher interface {
 	// GetStack wraps gtk_stack_switcher_get_stack
 	// The function returns the following values:
 	// 
-	// 	- goret Stack 
+	// 	- goret Stack (nullable) 
 	//
 	// Retrieves the stack.
 	GetStack() Stack
@@ -107389,12 +107919,12 @@ func NewStackSwitcher() Widget {
 // GetStack wraps gtk_stack_switcher_get_stack
 // The function returns the following values:
 // 
-// 	- goret Stack 
+// 	- goret Stack (nullable) 
 //
 // Retrieves the stack.
 func (switcher *StackSwitcherInstance) GetStack() Stack {
 	var carg0 *C.GtkStackSwitcher // in, none, converted
-	var cret  *C.GtkStack         // return, none, converted
+	var cret  *C.GtkStack         // return, none, converted, nullable
 
 	carg0 = (*C.GtkStackSwitcher)(UnsafeStackSwitcherToGlibNone(switcher))
 
@@ -107403,7 +107933,9 @@ func (switcher *StackSwitcherInstance) GetStack() Stack {
 
 	var goret Stack
 
-	goret = UnsafeStackFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeStackFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -107896,7 +108428,7 @@ type Text interface {
 	// GetAttributes wraps gtk_text_get_attributes
 	// The function returns the following values:
 	// 
-	// 	- goret *pango.AttrList 
+	// 	- goret *pango.AttrList (nullable) 
 	//
 	// Gets the attribute list that was set on the `GtkText`.
 	// 
@@ -107921,7 +108453,7 @@ type Text interface {
 	// GetExtraMenu wraps gtk_text_get_extra_menu
 	// The function returns the following values:
 	// 
-	// 	- goret gio.MenuModel 
+	// 	- goret gio.MenuModel (nullable) 
 	//
 	// Gets the menu model for extra items in the context menu.
 	// 
@@ -107976,7 +108508,7 @@ type Text interface {
 	// GetPlaceholderText wraps gtk_text_get_placeholder_text
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Retrieves the text that will be displayed when
 	// @self is empty and unfocused
@@ -107994,7 +108526,7 @@ type Text interface {
 	// GetTabs wraps gtk_text_get_tabs
 	// The function returns the following values:
 	// 
-	// 	- goret *pango.TabArray 
+	// 	- goret *pango.TabArray (nullable) 
 	//
 	// Gets the tabstops that were set on the `GtkText`.
 	// 
@@ -108504,14 +109036,14 @@ func (self *TextInstance) GetActivatesDefault() bool {
 // GetAttributes wraps gtk_text_get_attributes
 // The function returns the following values:
 // 
-// 	- goret *pango.AttrList 
+// 	- goret *pango.AttrList (nullable) 
 //
 // Gets the attribute list that was set on the `GtkText`.
 // 
 // See [method@Gtk.Text.set_attributes].
 func (self *TextInstance) GetAttributes() *pango.AttrList {
 	var carg0 *C.GtkText       // in, none, converted
-	var cret  *C.PangoAttrList // return, none, converted
+	var cret  *C.PangoAttrList // return, none, converted, nullable
 
 	carg0 = (*C.GtkText)(UnsafeTextToGlibNone(self))
 
@@ -108520,7 +109052,9 @@ func (self *TextInstance) GetAttributes() *pango.AttrList {
 
 	var goret *pango.AttrList
 
-	goret = pango.UnsafeAttrListFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = pango.UnsafeAttrListFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -108576,14 +109110,14 @@ func (self *TextInstance) GetEnableEmojiCompletion() bool {
 // GetExtraMenu wraps gtk_text_get_extra_menu
 // The function returns the following values:
 // 
-// 	- goret gio.MenuModel 
+// 	- goret gio.MenuModel (nullable) 
 //
 // Gets the menu model for extra items in the context menu.
 // 
 // See [method@Gtk.Text.set_extra_menu].
 func (self *TextInstance) GetExtraMenu() gio.MenuModel {
 	var carg0 *C.GtkText    // in, none, converted
-	var cret  *C.GMenuModel // return, none, converted
+	var cret  *C.GMenuModel // return, none, converted, nullable
 
 	carg0 = (*C.GtkText)(UnsafeTextToGlibNone(self))
 
@@ -108592,7 +109126,9 @@ func (self *TextInstance) GetExtraMenu() gio.MenuModel {
 
 	var goret gio.MenuModel
 
-	goret = gio.UnsafeMenuModelFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gio.UnsafeMenuModelFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -108723,7 +109259,7 @@ func (self *TextInstance) GetOverwriteMode() bool {
 // GetPlaceholderText wraps gtk_text_get_placeholder_text
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Retrieves the text that will be displayed when
 // @self is empty and unfocused
@@ -108731,7 +109267,7 @@ func (self *TextInstance) GetOverwriteMode() bool {
 // If no placeholder text has been set, %NULL will be returned.
 func (self *TextInstance) GetPlaceholderText() string {
 	var carg0 *C.GtkText // in, none, converted
-	var cret  *C.char    // return, none, string, casted *C.gchar
+	var cret  *C.char    // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkText)(UnsafeTextToGlibNone(self))
 
@@ -108740,7 +109276,9 @@ func (self *TextInstance) GetPlaceholderText() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -108773,14 +109311,14 @@ func (self *TextInstance) GetPropagateTextWidth() bool {
 // GetTabs wraps gtk_text_get_tabs
 // The function returns the following values:
 // 
-// 	- goret *pango.TabArray 
+// 	- goret *pango.TabArray (nullable) 
 //
 // Gets the tabstops that were set on the `GtkText`.
 // 
 // See [method@Gtk.Text.set_tabs].
 func (self *TextInstance) GetTabs() *pango.TabArray {
 	var carg0 *C.GtkText       // in, none, converted
-	var cret  *C.PangoTabArray // return, none, converted
+	var cret  *C.PangoTabArray // return, none, converted, nullable
 
 	carg0 = (*C.GtkText)(UnsafeTextToGlibNone(self))
 
@@ -108789,7 +109327,9 @@ func (self *TextInstance) GetTabs() *pango.TabArray {
 
 	var goret *pango.TabArray
 
-	goret = pango.UnsafeTabArrayFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = pango.UnsafeTabArrayFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -109715,7 +110255,7 @@ type TextView interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret Widget 
+	// 	- goret Widget (nullable) 
 	//
 	// Gets a `GtkWidget` that has previously been set as gutter.
 	// 
@@ -109938,7 +110478,7 @@ type TextView interface {
 	// GetTabs wraps gtk_text_view_get_tabs
 	// The function returns the following values:
 	// 
-	// 	- goret *pango.TabArray 
+	// 	- goret *pango.TabArray (nullable) 
 	//
 	// Gets the default tabs for @text_view.
 	// 
@@ -111130,7 +111670,7 @@ func (textView *TextViewInstance) GetExtraMenu() gio.MenuModel {
 // 
 // The function returns the following values:
 // 
-// 	- goret Widget 
+// 	- goret Widget (nullable) 
 //
 // Gets a `GtkWidget` that has previously been set as gutter.
 // 
@@ -111141,7 +111681,7 @@ func (textView *TextViewInstance) GetExtraMenu() gio.MenuModel {
 func (textView *TextViewInstance) GetGutter(win TextWindowType) Widget {
 	var carg0 *C.GtkTextView      // in, none, converted
 	var carg1 C.GtkTextWindowType // in, none, casted
-	var cret  *C.GtkWidget        // return, none, converted
+	var cret  *C.GtkWidget        // return, none, converted, nullable
 
 	carg0 = (*C.GtkTextView)(UnsafeTextViewToGlibNone(textView))
 	carg1 = C.GtkTextWindowType(win)
@@ -111152,7 +111692,9 @@ func (textView *TextViewInstance) GetGutter(win TextWindowType) Widget {
 
 	var goret Widget
 
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -111693,7 +112235,7 @@ func (textView *TextViewInstance) GetRTLContext() pango.Context {
 // GetTabs wraps gtk_text_view_get_tabs
 // The function returns the following values:
 // 
-// 	- goret *pango.TabArray 
+// 	- goret *pango.TabArray (nullable) 
 //
 // Gets the default tabs for @text_view.
 // 
@@ -111702,7 +112244,7 @@ func (textView *TextViewInstance) GetRTLContext() pango.Context {
 // return value with [method@Pango.TabArray.free].
 func (textView *TextViewInstance) GetTabs() *pango.TabArray {
 	var carg0 *C.GtkTextView   // in, none, converted
-	var cret  *C.PangoTabArray // return, full, converted
+	var cret  *C.PangoTabArray // return, full, converted, nullable
 
 	carg0 = (*C.GtkTextView)(UnsafeTextViewToGlibNone(textView))
 
@@ -111711,7 +112253,9 @@ func (textView *TextViewInstance) GetTabs() *pango.TabArray {
 
 	var goret *pango.TabArray
 
-	goret = pango.UnsafeTabArrayFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = pango.UnsafeTabArrayFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -113326,7 +113870,7 @@ type TreeExpander interface {
 	// GetChild wraps gtk_tree_expander_get_child
 	// The function returns the following values:
 	// 
-	// 	- goret Widget 
+	// 	- goret Widget (nullable) 
 	//
 	// Gets the child widget displayed by @self.
 	GetChild() Widget
@@ -113354,7 +113898,7 @@ type TreeExpander interface {
 	// GetListRow wraps gtk_tree_expander_get_list_row
 	// The function returns the following values:
 	// 
-	// 	- goret TreeListRow 
+	// 	- goret TreeListRow (nullable) 
 	//
 	// Gets the list row managed by @self.
 	GetListRow() TreeListRow
@@ -113468,12 +114012,12 @@ func NewTreeExpander() Widget {
 // GetChild wraps gtk_tree_expander_get_child
 // The function returns the following values:
 // 
-// 	- goret Widget 
+// 	- goret Widget (nullable) 
 //
 // Gets the child widget displayed by @self.
 func (self *TreeExpanderInstance) GetChild() Widget {
 	var carg0 *C.GtkTreeExpander // in, none, converted
-	var cret  *C.GtkWidget       // return, none, converted
+	var cret  *C.GtkWidget       // return, none, converted, nullable
 
 	carg0 = (*C.GtkTreeExpander)(UnsafeTreeExpanderToGlibNone(self))
 
@@ -113482,7 +114026,9 @@ func (self *TreeExpanderInstance) GetChild() Widget {
 
 	var goret Widget
 
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -113562,12 +114108,12 @@ func (self *TreeExpanderInstance) GetIndentForIcon() bool {
 // GetListRow wraps gtk_tree_expander_get_list_row
 // The function returns the following values:
 // 
-// 	- goret TreeListRow 
+// 	- goret TreeListRow (nullable) 
 //
 // Gets the list row managed by @self.
 func (self *TreeExpanderInstance) GetListRow() TreeListRow {
 	var carg0 *C.GtkTreeExpander // in, none, converted
-	var cret  *C.GtkTreeListRow  // return, none, converted
+	var cret  *C.GtkTreeListRow  // return, none, converted, nullable
 
 	carg0 = (*C.GtkTreeExpander)(UnsafeTreeExpanderToGlibNone(self))
 
@@ -113576,7 +114122,9 @@ func (self *TreeExpanderInstance) GetListRow() TreeListRow {
 
 	var goret TreeListRow
 
-	goret = UnsafeTreeListRowFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeTreeListRowFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -113731,7 +114279,7 @@ type Video interface {
 	// GetFile wraps gtk_video_get_file
 	// The function returns the following values:
 	// 
-	// 	- goret gio.File 
+	// 	- goret gio.File (nullable) 
 	//
 	// Gets the file played by @self or %NULL if not playing back
 	// a file.
@@ -113755,7 +114303,7 @@ type Video interface {
 	// GetMediaStream wraps gtk_video_get_media_stream
 	// The function returns the following values:
 	// 
-	// 	- goret MediaStream 
+	// 	- goret MediaStream (nullable) 
 	//
 	// Gets the media stream managed by @self or %NULL if none.
 	GetMediaStream() MediaStream
@@ -114047,13 +114595,13 @@ func (self *VideoInstance) GetAutoplay() bool {
 // GetFile wraps gtk_video_get_file
 // The function returns the following values:
 // 
-// 	- goret gio.File 
+// 	- goret gio.File (nullable) 
 //
 // Gets the file played by @self or %NULL if not playing back
 // a file.
 func (self *VideoInstance) GetFile() gio.File {
 	var carg0 *C.GtkVideo // in, none, converted
-	var cret  *C.GFile    // return, none, converted
+	var cret  *C.GFile    // return, none, converted, nullable
 
 	carg0 = (*C.GtkVideo)(UnsafeVideoToGlibNone(self))
 
@@ -114062,7 +114610,9 @@ func (self *VideoInstance) GetFile() gio.File {
 
 	var goret gio.File
 
-	goret = gio.UnsafeFileFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gio.UnsafeFileFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -114118,12 +114668,12 @@ func (self *VideoInstance) GetLoop() bool {
 // GetMediaStream wraps gtk_video_get_media_stream
 // The function returns the following values:
 // 
-// 	- goret MediaStream 
+// 	- goret MediaStream (nullable) 
 //
 // Gets the media stream managed by @self or %NULL if none.
 func (self *VideoInstance) GetMediaStream() MediaStream {
 	var carg0 *C.GtkVideo       // in, none, converted
-	var cret  *C.GtkMediaStream // return, none, converted
+	var cret  *C.GtkMediaStream // return, none, converted, nullable
 
 	carg0 = (*C.GtkVideo)(UnsafeVideoToGlibNone(self))
 
@@ -114132,7 +114682,9 @@ func (self *VideoInstance) GetMediaStream() MediaStream {
 
 	var goret MediaStream
 
-	goret = UnsafeMediaStreamFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeMediaStreamFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -114342,7 +114894,7 @@ type Viewport interface {
 	// GetChild wraps gtk_viewport_get_child
 	// The function returns the following values:
 	// 
-	// 	- goret Widget 
+	// 	- goret Widget (nullable) 
 	//
 	// Gets the child widget of @viewport.
 	GetChild() Widget
@@ -114477,12 +115029,12 @@ func NewViewport(hadjustment Adjustment, vadjustment Adjustment) Widget {
 // GetChild wraps gtk_viewport_get_child
 // The function returns the following values:
 // 
-// 	- goret Widget 
+// 	- goret Widget (nullable) 
 //
 // Gets the child widget of @viewport.
 func (viewport *ViewportInstance) GetChild() Widget {
 	var carg0 *C.GtkViewport // in, none, converted
-	var cret  *C.GtkWidget   // return, none, converted
+	var cret  *C.GtkWidget   // return, none, converted, nullable
 
 	carg0 = (*C.GtkViewport)(UnsafeViewportToGlibNone(viewport))
 
@@ -114491,7 +115043,9 @@ func (viewport *ViewportInstance) GetChild() Widget {
 
 	var goret Widget
 
-	goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWidgetFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -114796,7 +115350,7 @@ type GridView interface {
 	// GetFactory wraps gtk_grid_view_get_factory
 	// The function returns the following values:
 	// 
-	// 	- goret ListItemFactory 
+	// 	- goret ListItemFactory (nullable) 
 	//
 	// Gets the factory that's currently used to populate list items.
 	GetFactory() ListItemFactory
@@ -114817,7 +115371,7 @@ type GridView interface {
 	// GetModel wraps gtk_grid_view_get_model
 	// The function returns the following values:
 	// 
-	// 	- goret SelectionModel 
+	// 	- goret SelectionModel (nullable) 
 	//
 	// Gets the model that's currently used to read the items displayed.
 	GetModel() SelectionModel
@@ -115057,12 +115611,12 @@ func (self *GridViewInstance) GetEnableRubberband() bool {
 // GetFactory wraps gtk_grid_view_get_factory
 // The function returns the following values:
 // 
-// 	- goret ListItemFactory 
+// 	- goret ListItemFactory (nullable) 
 //
 // Gets the factory that's currently used to populate list items.
 func (self *GridViewInstance) GetFactory() ListItemFactory {
 	var carg0 *C.GtkGridView        // in, none, converted
-	var cret  *C.GtkListItemFactory // return, none, converted
+	var cret  *C.GtkListItemFactory // return, none, converted, nullable
 
 	carg0 = (*C.GtkGridView)(UnsafeGridViewToGlibNone(self))
 
@@ -115071,7 +115625,9 @@ func (self *GridViewInstance) GetFactory() ListItemFactory {
 
 	var goret ListItemFactory
 
-	goret = UnsafeListItemFactoryFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeListItemFactoryFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -115123,12 +115679,12 @@ func (self *GridViewInstance) GetMinColumns() uint {
 // GetModel wraps gtk_grid_view_get_model
 // The function returns the following values:
 // 
-// 	- goret SelectionModel 
+// 	- goret SelectionModel (nullable) 
 //
 // Gets the model that's currently used to read the items displayed.
 func (self *GridViewInstance) GetModel() SelectionModel {
 	var carg0 *C.GtkGridView       // in, none, converted
-	var cret  *C.GtkSelectionModel // return, none, converted
+	var cret  *C.GtkSelectionModel // return, none, converted, nullable
 
 	carg0 = (*C.GtkGridView)(UnsafeGridViewToGlibNone(self))
 
@@ -115137,7 +115693,9 @@ func (self *GridViewInstance) GetModel() SelectionModel {
 
 	var goret SelectionModel
 
-	goret = UnsafeSelectionModelFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeSelectionModelFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -117990,7 +118548,7 @@ func UnsafeBuildableParseContextToGlibFull(b *BuildableParseContext) unsafe.Poin
 // GetElement wraps gtk_buildable_parse_context_get_element
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Retrieves the name of the currently open element.
 // 
@@ -117999,7 +118557,7 @@ func UnsafeBuildableParseContextToGlibFull(b *BuildableParseContext) unsafe.Poin
 // elements, see gtk_buildable_parse_context_get_element_stack().
 func (_context *BuildableParseContext) GetElement() string {
 	var carg0 *C.GtkBuildableParseContext // in, none, converted
-	var cret  *C.char                     // return, none, string, casted *C.gchar
+	var cret  *C.char                     // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkBuildableParseContext)(UnsafeBuildableParseContextToGlibNone(_context))
 
@@ -118008,7 +118566,9 @@ func (_context *BuildableParseContext) GetElement() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -120141,12 +120701,12 @@ func NewCssSectionWithBytes(file gio.File, bytes *glib.Bytes, start *CssLocation
 // GetBytes wraps gtk_css_section_get_bytes
 // The function returns the following values:
 // 
-// 	- goret *glib.Bytes 
+// 	- goret *glib.Bytes (nullable) 
 //
 // Gets the bytes that @section was parsed from.
 func (section *CssSection) GetBytes() *glib.Bytes {
 	var carg0 *C.GtkCssSection // in, none, converted
-	var cret  *C.GBytes        // return, none, converted
+	var cret  *C.GBytes        // return, none, converted, nullable
 
 	carg0 = (*C.GtkCssSection)(UnsafeCssSectionToGlibNone(section))
 
@@ -120155,7 +120715,9 @@ func (section *CssSection) GetBytes() *glib.Bytes {
 
 	var goret *glib.Bytes
 
-	goret = glib.UnsafeBytesFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = glib.UnsafeBytesFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -120185,7 +120747,7 @@ func (section *CssSection) GetEndLocation() *CssLocation {
 // GetFile wraps gtk_css_section_get_file
 // The function returns the following values:
 // 
-// 	- goret gio.File 
+// 	- goret gio.File (nullable) 
 //
 // Gets the file that @section was parsed from.
 // 
@@ -120193,7 +120755,7 @@ func (section *CssSection) GetEndLocation() *CssLocation {
 // [method@Gtk.CssProvider.load_from_data], then `NULL` is returned.
 func (section *CssSection) GetFile() gio.File {
 	var carg0 *C.GtkCssSection // in, none, converted
-	var cret  *C.GFile         // return, none, converted
+	var cret  *C.GFile         // return, none, converted, nullable
 
 	carg0 = (*C.GtkCssSection)(UnsafeCssSectionToGlibNone(section))
 
@@ -120202,7 +120764,9 @@ func (section *CssSection) GetFile() gio.File {
 
 	var goret gio.File
 
-	goret = gio.UnsafeFileFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gio.UnsafeFileFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -120210,7 +120774,7 @@ func (section *CssSection) GetFile() gio.File {
 // GetParent wraps gtk_css_section_get_parent
 // The function returns the following values:
 // 
-// 	- goret *CssSection 
+// 	- goret *CssSection (nullable) 
 //
 // Gets the parent section for the given `section`.
 // 
@@ -120222,7 +120786,7 @@ func (section *CssSection) GetFile() gio.File {
 // a different file.
 func (section *CssSection) GetParent() *CssSection {
 	var carg0 *C.GtkCssSection // in, none, converted
-	var cret  *C.GtkCssSection // return, none, converted
+	var cret  *C.GtkCssSection // return, none, converted, nullable
 
 	carg0 = (*C.GtkCssSection)(UnsafeCssSectionToGlibNone(section))
 
@@ -120231,7 +120795,9 @@ func (section *CssSection) GetParent() *CssSection {
 
 	var goret *CssSection
 
-	goret = UnsafeCssSectionFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeCssSectionFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -127226,7 +127792,7 @@ func UnsafeRecentInfoToGlibFull(r *RecentInfo) unsafe.Pointer {
 // 
 // The function returns the following values:
 // 
-// 	- goret gio.AppInfo 
+// 	- goret gio.AppInfo (nullable) 
 // 	- _goerr error (nullable): an error 
 //
 // Creates a `GAppInfo` for the specified `GtkRecentInfo`
@@ -127236,7 +127802,7 @@ func UnsafeRecentInfoToGlibFull(r *RecentInfo) unsafe.Pointer {
 func (info *RecentInfo) CreateAppInfo(appName string) (gio.AppInfo, error) {
 	var carg0 *C.GtkRecentInfo // in, none, converted
 	var carg1 *C.char          // in, none, string, nullable-string
-	var cret  *C.GAppInfo      // return, full, converted
+	var cret  *C.GAppInfo      // return, full, converted, nullable
 	var _cerr *C.GError        // out, full, converted, nullable
 
 	carg0 = (*C.GtkRecentInfo)(UnsafeRecentInfoToGlibNone(info))
@@ -127252,7 +127818,9 @@ func (info *RecentInfo) CreateAppInfo(appName string) (gio.AppInfo, error) {
 	var goret  gio.AppInfo
 	var _goerr error
 
-	goret = gio.UnsafeAppInfoFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gio.UnsafeAppInfoFromGlibFull(unsafe.Pointer(cret))
+	}
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -127461,12 +128029,12 @@ func (info *RecentInfo) GetDisplayName() string {
 // GetGIcon wraps gtk_recent_info_get_gicon
 // The function returns the following values:
 // 
-// 	- goret gio.Icon 
+// 	- goret gio.Icon (nullable) 
 //
 // Retrieves the icon associated to the resource MIME type.
 func (info *RecentInfo) GetGIcon() gio.Icon {
 	var carg0 *C.GtkRecentInfo // in, none, converted
-	var cret  *C.GIcon         // return, full, converted
+	var cret  *C.GIcon         // return, full, converted, nullable
 
 	carg0 = (*C.GtkRecentInfo)(UnsafeRecentInfoToGlibNone(info))
 
@@ -127475,7 +128043,9 @@ func (info *RecentInfo) GetGIcon() gio.Icon {
 
 	var goret gio.Icon
 
-	goret = gio.UnsafeIconFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gio.UnsafeIconFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -127636,7 +128206,7 @@ func (info *RecentInfo) GetURI() string {
 // GetURIDisplay wraps gtk_recent_info_get_uri_display
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets a displayable version of the resource’s URI.
 // 
@@ -127645,7 +128215,7 @@ func (info *RecentInfo) GetURI() string {
 // of [method@Gtk.RecentInfo.get_uri].
 func (info *RecentInfo) GetURIDisplay() string {
 	var carg0 *C.GtkRecentInfo // in, none, converted
-	var cret  *C.char          // return, full, string, casted *C.gchar
+	var cret  *C.char          // return, full, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GtkRecentInfo)(UnsafeRecentInfoToGlibNone(info))
 
@@ -127654,8 +128224,10 @@ func (info *RecentInfo) GetURIDisplay() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+		defer C.free(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -132075,7 +132647,7 @@ func (iter *TextIter) GetCharsInLine() int {
 // GetChildAnchor wraps gtk_text_iter_get_child_anchor
 // The function returns the following values:
 // 
-// 	- goret TextChildAnchor 
+// 	- goret TextChildAnchor (nullable) 
 //
 // If the location at @iter contains a child anchor, the
 // anchor is returned.
@@ -132083,7 +132655,7 @@ func (iter *TextIter) GetCharsInLine() int {
 // Otherwise, %NULL is returned.
 func (iter *TextIter) GetChildAnchor() TextChildAnchor {
 	var carg0 *C.GtkTextIter        // in, none, converted
-	var cret  *C.GtkTextChildAnchor // return, none, converted
+	var cret  *C.GtkTextChildAnchor // return, none, converted, nullable
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
 
@@ -132092,7 +132664,9 @@ func (iter *TextIter) GetChildAnchor() TextChildAnchor {
 
 	var goret TextChildAnchor
 
-	goret = UnsafeTextChildAnchorFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeTextChildAnchorFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -132264,14 +132838,14 @@ func (iter *TextIter) GetOffset() int {
 // GetPaintable wraps gtk_text_iter_get_paintable
 // The function returns the following values:
 // 
-// 	- goret gdk.Paintable 
+// 	- goret gdk.Paintable (nullable) 
 //
 // If the element at @iter is a paintable, the paintable is returned.
 // 
 // Otherwise, %NULL is returned.
 func (iter *TextIter) GetPaintable() gdk.Paintable {
 	var carg0 *C.GtkTextIter  // in, none, converted
-	var cret  *C.GdkPaintable // return, none, converted
+	var cret  *C.GdkPaintable // return, none, converted, nullable
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
 
@@ -132280,7 +132854,9 @@ func (iter *TextIter) GetPaintable() gdk.Paintable {
 
 	var goret gdk.Paintable
 
-	goret = gdk.UnsafePaintableFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gdk.UnsafePaintableFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }

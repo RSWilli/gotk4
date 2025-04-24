@@ -430,6 +430,7 @@ func NewCallableParameters(e *env, v gir.CallableAttrs) (*Parameters, resolvedSt
 			},
 			TransferOwnership: transfer,
 			CTypePointers:     ctypePointers,
+			Nullable:          v.ReturnValue.Nullable,
 		}
 
 		if transfer == TransferBorrow {

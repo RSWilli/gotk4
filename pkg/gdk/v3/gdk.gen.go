@@ -9232,18 +9232,20 @@ func GetDefaultRootWindow() Window {
 // GetDisplayArgName wraps gdk_get_display_arg_name
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the display name specified in the command line arguments passed
 // to gdk_init() or gdk_parse_args(), if any.
 func GetDisplayArgName() string {
-	var cret *C.gchar // return, none, string
+	var cret *C.gchar // return, none, string, nullable-string
 
 	cret = C.gdk_get_display_arg_name()
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -9419,7 +9421,7 @@ func KeyvalIsUpper(keyval uint) bool {
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Converts a key value into a symbolic name.
 // 
@@ -9428,7 +9430,7 @@ func KeyvalIsUpper(keyval uint) bool {
 // but without the leading “GDK_KEY_”.
 func KeyvalName(keyval uint) string {
 	var carg1 C.guint  // in, none, casted
-	var cret  *C.gchar // return, none, string
+	var cret  *C.gchar // return, none, string, nullable-string
 
 	carg1 = C.guint(keyval)
 
@@ -9437,7 +9439,9 @@ func KeyvalName(keyval uint) string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -9571,12 +9575,12 @@ func NotifyStartupCompleteWithID(startupId string) {
 // 
 // The function returns the following values:
 // 
-// 	- goret Window 
+// 	- goret Window (nullable) 
 //
 // Gets the window that @window is embedded in.
 func OffscreenWindowGetEmbedder(window Window) Window {
 	var carg1 *C.GdkWindow // in, none, converted
-	var cret  *C.GdkWindow // return, none, converted
+	var cret  *C.GdkWindow // return, none, converted, nullable
 
 	carg1 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
 
@@ -9585,7 +9589,9 @@ func OffscreenWindowGetEmbedder(window Window) Window {
 
 	var goret Window
 
-	goret = UnsafeWindowFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWindowFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -9735,7 +9741,7 @@ func PangoContextGetForScreen(screen Screen) pango.Context {
 // 
 // The function returns the following values:
 // 
-// 	- goret gdkpixbuf.Pixbuf 
+// 	- goret gdkpixbuf.Pixbuf (nullable) 
 //
 // Transfers image data from a #GdkWindow and converts it to an RGB(A)
 // representation inside a #GdkPixbuf.
@@ -9774,7 +9780,7 @@ func PixbufGetFromWindow(window Window, srcX int, srcY int, width int, height in
 	var carg3 C.gint       // in, none, casted
 	var carg4 C.gint       // in, none, casted
 	var carg5 C.gint       // in, none, casted
-	var cret  *C.GdkPixbuf // return, full, converted
+	var cret  *C.GdkPixbuf // return, full, converted, nullable
 
 	carg1 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
 	carg2 = C.gint(srcX)
@@ -9791,7 +9797,9 @@ func PixbufGetFromWindow(window Window, srcX int, srcY int, width int, height in
 
 	var goret gdkpixbuf.Pixbuf
 
-	goret = gdkpixbuf.UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gdkpixbuf.UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -10317,7 +10325,7 @@ func UnicodeToKeyval(wc uint32) uint {
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Converts an UTF-8 string into the best possible representation
 // as a STRING. The representation of characters not in STRING
@@ -10325,7 +10333,7 @@ func UnicodeToKeyval(wc uint32) uint {
 // \x{ABCD}, or it may be in some other form of approximation.
 func UTF8ToStringTarget(str string) string {
 	var carg1 *C.gchar // in, none, string
-	var cret  *C.gchar // return, full, string
+	var cret  *C.gchar // return, full, string, nullable-string
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -10335,8 +10343,10 @@ func UTF8ToStringTarget(str string) string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+		defer C.free(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -10891,7 +10901,7 @@ type Cursor interface {
 	// GetImage wraps gdk_cursor_get_image
 	// The function returns the following values:
 	// 
-	// 	- goret gdkpixbuf.Pixbuf 
+	// 	- goret gdkpixbuf.Pixbuf (nullable) 
 	//
 	// Returns a #GdkPixbuf with the image used to display the cursor.
 	// 
@@ -10944,13 +10954,13 @@ func UnsafeCursorToGlibFull(c Cursor) unsafe.Pointer {
 // 
 // The function returns the following values:
 // 
-// 	- goret Cursor 
+// 	- goret Cursor (nullable) 
 //
 // Creates a new cursor from the set of builtin cursors.
 func NewCursorForDisplay(display Display, cursorType CursorType) Cursor {
 	var carg1 *C.GdkDisplay   // in, none, converted
 	var carg2 C.GdkCursorType // in, none, casted
-	var cret  *C.GdkCursor    // return, full, converted
+	var cret  *C.GdkCursor    // return, full, converted, nullable
 
 	carg1 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
 	carg2 = C.GdkCursorType(cursorType)
@@ -10961,7 +10971,9 @@ func NewCursorForDisplay(display Display, cursorType CursorType) Cursor {
 
 	var goret Cursor
 
-	goret = UnsafeCursorFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeCursorFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -10975,7 +10987,7 @@ func NewCursorForDisplay(display Display, cursorType CursorType) Cursor {
 // 
 // The function returns the following values:
 // 
-// 	- goret Cursor 
+// 	- goret Cursor (nullable) 
 //
 // Creates a new cursor by looking up @name in the current cursor
 // theme.
@@ -11020,7 +11032,7 @@ func NewCursorForDisplay(display Display, cursorType CursorType) Cursor {
 func NewCursorFromName(display Display, name string) Cursor {
 	var carg1 *C.GdkDisplay // in, none, converted
 	var carg2 *C.gchar      // in, none, string
-	var cret  *C.GdkCursor  // return, full, converted
+	var cret  *C.GdkCursor  // return, full, converted, nullable
 
 	carg1 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
 	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
@@ -11032,7 +11044,9 @@ func NewCursorFromName(display Display, name string) Cursor {
 
 	var goret Cursor
 
-	goret = UnsafeCursorFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeCursorFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -11140,7 +11154,7 @@ func (cursor *CursorInstance) GetDisplay() Display {
 // GetImage wraps gdk_cursor_get_image
 // The function returns the following values:
 // 
-// 	- goret gdkpixbuf.Pixbuf 
+// 	- goret gdkpixbuf.Pixbuf (nullable) 
 //
 // Returns a #GdkPixbuf with the image used to display the cursor.
 // 
@@ -11149,7 +11163,7 @@ func (cursor *CursorInstance) GetDisplay() Display {
 // case, %NULL is returned.
 func (cursor *CursorInstance) GetImage() gdkpixbuf.Pixbuf {
 	var carg0 *C.GdkCursor // in, none, converted
-	var cret  *C.GdkPixbuf // return, full, converted
+	var cret  *C.GdkPixbuf // return, full, converted, nullable
 
 	carg0 = (*C.GdkCursor)(UnsafeCursorToGlibNone(cursor))
 
@@ -11158,7 +11172,9 @@ func (cursor *CursorInstance) GetImage() gdkpixbuf.Pixbuf {
 
 	var goret gdkpixbuf.Pixbuf
 
-	goret = gdkpixbuf.UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gdkpixbuf.UnsafePixbufFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -11186,7 +11202,7 @@ type Device interface {
 	// GetAssociatedDevice wraps gdk_device_get_associated_device
 	// The function returns the following values:
 	// 
-	// 	- goret Device 
+	// 	- goret Device (nullable) 
 	//
 	// Returns the associated device to @device, if @device is of type
 	// %GDK_DEVICE_TYPE_MASTER, it will return the paired pointer or
@@ -11257,7 +11273,7 @@ type Device interface {
 	// GetLastEventWindow wraps gdk_device_get_last_event_window
 	// The function returns the following values:
 	// 
-	// 	- goret Window 
+	// 	- goret Window (nullable) 
 	//
 	// Gets information about which window the given pointer device is in, based on events
 	// that have been received so far from the display server. If another application
@@ -11322,7 +11338,7 @@ type Device interface {
 	// GetProductID wraps gdk_device_get_product_id
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Returns the product ID of this device, or %NULL if this information couldn't
 	// be obtained. This ID is retrieved from the device, and is thus constant for
@@ -11345,7 +11361,7 @@ type Device interface {
 	// GetVendorID wraps gdk_device_get_vendor_id
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Returns the vendor ID of this device, or %NULL if this information couldn't
 	// be obtained. This ID is retrieved from the device, and is thus constant for
@@ -11381,7 +11397,7 @@ type Device interface {
 	//         relative to the window origin, or %NULL. 
 	// 	- winY int: return location for the Y coordinate of the device location,
 	//         relative to the window origin, or %NULL. 
-	// 	- goret Window 
+	// 	- goret Window (nullable) 
 	//
 	// Obtains the window underneath @device, returning the location of the device in @win_x and @win_y. Returns
 	// %NULL if the window tree under @device is not known to GDK (for example, belongs to another application).
@@ -11397,7 +11413,7 @@ type Device interface {
 	//         relative to the window origin, or %NULL. 
 	// 	- winY float64: return location for the Y coordinate of the device location,
 	//         relative to the window origin, or %NULL. 
-	// 	- goret Window 
+	// 	- goret Window (nullable) 
 	//
 	// Obtains the window underneath @device, returning the location of the device in @win_x and @win_y in
 	// double precision. Returns %NULL if the window tree under @device is not known to GDK (for example,
@@ -11418,7 +11434,7 @@ type Device interface {
 	// ListSlaveDevices wraps gdk_device_list_slave_devices
 	// The function returns the following values:
 	// 
-	// 	- goret []Device 
+	// 	- goret []Device (nullable) 
 	//
 	// If the device if of type %GDK_DEVICE_TYPE_MASTER, it will return
 	// the list of slave devices attached to it, otherwise it will return
@@ -11536,7 +11552,7 @@ func UnsafeDeviceToGlibFull(c Device) unsafe.Pointer {
 // GetAssociatedDevice wraps gdk_device_get_associated_device
 // The function returns the following values:
 // 
-// 	- goret Device 
+// 	- goret Device (nullable) 
 //
 // Returns the associated device to @device, if @device is of type
 // %GDK_DEVICE_TYPE_MASTER, it will return the paired pointer or
@@ -11549,7 +11565,7 @@ func UnsafeDeviceToGlibFull(c Device) unsafe.Pointer {
 // returned, as there is no associated device.
 func (device *DeviceInstance) GetAssociatedDevice() Device {
 	var carg0 *C.GdkDevice // in, none, converted
-	var cret  *C.GdkDevice // return, none, converted
+	var cret  *C.GdkDevice // return, none, converted, nullable
 
 	carg0 = (*C.GdkDevice)(UnsafeDeviceToGlibNone(device))
 
@@ -11558,7 +11574,9 @@ func (device *DeviceInstance) GetAssociatedDevice() Device {
 
 	var goret Device
 
-	goret = UnsafeDeviceFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeDeviceFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -11728,7 +11746,7 @@ func (device *DeviceInstance) GetKey(index_ uint) (uint, ModifierType, bool) {
 // GetLastEventWindow wraps gdk_device_get_last_event_window
 // The function returns the following values:
 // 
-// 	- goret Window 
+// 	- goret Window (nullable) 
 //
 // Gets information about which window the given pointer device is in, based on events
 // that have been received so far from the display server. If another application
@@ -11737,7 +11755,7 @@ func (device *DeviceInstance) GetKey(index_ uint) (uint, ModifierType, bool) {
 // application's windows.
 func (device *DeviceInstance) GetLastEventWindow() Window {
 	var carg0 *C.GdkDevice // in, none, converted
-	var cret  *C.GdkWindow // return, none, converted
+	var cret  *C.GdkWindow // return, none, converted, nullable
 
 	carg0 = (*C.GdkDevice)(UnsafeDeviceToGlibNone(device))
 
@@ -11746,7 +11764,9 @@ func (device *DeviceInstance) GetLastEventWindow() Window {
 
 	var goret Window
 
-	goret = UnsafeWindowFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWindowFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -11910,14 +11930,14 @@ func (device *DeviceInstance) GetPositionDouble() (Screen, float64, float64) {
 // GetProductID wraps gdk_device_get_product_id
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Returns the product ID of this device, or %NULL if this information couldn't
 // be obtained. This ID is retrieved from the device, and is thus constant for
 // it. See gdk_device_get_vendor_id() for more information.
 func (device *DeviceInstance) GetProductID() string {
 	var carg0 *C.GdkDevice // in, none, converted
-	var cret  *C.gchar     // return, none, string
+	var cret  *C.gchar     // return, none, string, nullable-string
 
 	carg0 = (*C.GdkDevice)(UnsafeDeviceToGlibNone(device))
 
@@ -11926,7 +11946,9 @@ func (device *DeviceInstance) GetProductID() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -11978,7 +12000,7 @@ func (device *DeviceInstance) GetSource() InputSource {
 // GetVendorID wraps gdk_device_get_vendor_id
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Returns the vendor ID of this device, or %NULL if this information couldn't
 // be obtained. This ID is retrieved from the device, and is thus constant for
@@ -12008,7 +12030,7 @@ func (device *DeviceInstance) GetSource() InputSource {
 // ]|
 func (device *DeviceInstance) GetVendorID() string {
 	var carg0 *C.GdkDevice // in, none, converted
-	var cret  *C.gchar     // return, none, string
+	var cret  *C.gchar     // return, none, string, nullable-string
 
 	carg0 = (*C.GdkDevice)(UnsafeDeviceToGlibNone(device))
 
@@ -12017,7 +12039,9 @@ func (device *DeviceInstance) GetVendorID() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -12029,7 +12053,7 @@ func (device *DeviceInstance) GetVendorID() string {
 //         relative to the window origin, or %NULL. 
 // 	- winY int: return location for the Y coordinate of the device location,
 //         relative to the window origin, or %NULL. 
-// 	- goret Window 
+// 	- goret Window (nullable) 
 //
 // Obtains the window underneath @device, returning the location of the device in @win_x and @win_y. Returns
 // %NULL if the window tree under @device is not known to GDK (for example, belongs to another application).
@@ -12041,7 +12065,7 @@ func (device *DeviceInstance) GetWindowAtPosition() (int, int, Window) {
 	var carg0 *C.GdkDevice // in, none, converted
 	var carg1 C.gint       // out, full, casted
 	var carg2 C.gint       // out, full, casted
-	var cret  *C.GdkWindow // return, none, converted
+	var cret  *C.GdkWindow // return, none, converted, nullable
 
 	carg0 = (*C.GdkDevice)(UnsafeDeviceToGlibNone(device))
 
@@ -12054,7 +12078,9 @@ func (device *DeviceInstance) GetWindowAtPosition() (int, int, Window) {
 
 	winX = int(carg1)
 	winY = int(carg2)
-	goret = UnsafeWindowFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWindowFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return winX, winY, goret
 }
@@ -12066,7 +12092,7 @@ func (device *DeviceInstance) GetWindowAtPosition() (int, int, Window) {
 //         relative to the window origin, or %NULL. 
 // 	- winY float64: return location for the Y coordinate of the device location,
 //         relative to the window origin, or %NULL. 
-// 	- goret Window 
+// 	- goret Window (nullable) 
 //
 // Obtains the window underneath @device, returning the location of the device in @win_x and @win_y in
 // double precision. Returns %NULL if the window tree under @device is not known to GDK (for example,
@@ -12079,7 +12105,7 @@ func (device *DeviceInstance) GetWindowAtPositionDouble() (float64, float64, Win
 	var carg0 *C.GdkDevice // in, none, converted
 	var carg1 C.gdouble    // out, full, casted
 	var carg2 C.gdouble    // out, full, casted
-	var cret  *C.GdkWindow // return, none, converted
+	var cret  *C.GdkWindow // return, none, converted, nullable
 
 	carg0 = (*C.GdkDevice)(UnsafeDeviceToGlibNone(device))
 
@@ -12092,7 +12118,9 @@ func (device *DeviceInstance) GetWindowAtPositionDouble() (float64, float64, Win
 
 	winX = float64(carg1)
 	winY = float64(carg2)
-	goret = UnsafeWindowFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWindowFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return winX, winY, goret
 }
@@ -12130,7 +12158,7 @@ func (device *DeviceInstance) ListAxes() []*Atom {
 // ListSlaveDevices wraps gdk_device_list_slave_devices
 // The function returns the following values:
 // 
-// 	- goret []Device 
+// 	- goret []Device (nullable) 
 //
 // If the device if of type %GDK_DEVICE_TYPE_MASTER, it will return
 // the list of slave devices attached to it, otherwise it will return
@@ -12434,7 +12462,7 @@ type DeviceManager interface {
 	// GetDisplay wraps gdk_device_manager_get_display
 	// The function returns the following values:
 	// 
-	// 	- goret Display 
+	// 	- goret Display (nullable) 
 	//
 	// Gets the #GdkDisplay associated to @device_manager.
 	GetDisplay() Display
@@ -12502,12 +12530,12 @@ func UnsafeDeviceManagerToGlibFull(c DeviceManager) unsafe.Pointer {
 // GetDisplay wraps gdk_device_manager_get_display
 // The function returns the following values:
 // 
-// 	- goret Display 
+// 	- goret Display (nullable) 
 //
 // Gets the #GdkDisplay associated to @device_manager.
 func (deviceManager *DeviceManagerInstance) GetDisplay() Display {
 	var carg0 *C.GdkDeviceManager // in, none, converted
-	var cret  *C.GdkDisplay       // return, none, converted
+	var cret  *C.GdkDisplay       // return, none, converted, nullable
 
 	carg0 = (*C.GdkDeviceManager)(UnsafeDeviceManagerToGlibNone(deviceManager))
 
@@ -12516,7 +12544,9 @@ func (deviceManager *DeviceManagerInstance) GetDisplay() Display {
 
 	var goret Display
 
-	goret = UnsafeDisplayFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeDisplayFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -12825,7 +12855,7 @@ type Display interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret Monitor 
+	// 	- goret Monitor (nullable) 
 	//
 	// Gets a monitor associated with this display.
 	GetMonitor(int) Monitor
@@ -12877,7 +12907,7 @@ type Display interface {
 	// GetPrimaryMonitor wraps gdk_display_get_primary_monitor
 	// The function returns the following values:
 	// 
-	// 	- goret Monitor 
+	// 	- goret Monitor (nullable) 
 	//
 	// Gets the primary monitor for the display.
 	// 
@@ -13079,19 +13109,21 @@ func UnsafeDisplayToGlibFull(c Display) unsafe.Pointer {
 // DisplayGetDefault wraps gdk_display_get_default
 // The function returns the following values:
 // 
-// 	- goret Display 
+// 	- goret Display (nullable) 
 //
 // Gets the default #GdkDisplay. This is a convenience
 // function for:
 // `gdk_display_manager_get_default_display (gdk_display_manager_get ())`.
 func DisplayGetDefault() Display {
-	var cret *C.GdkDisplay // return, none, converted
+	var cret *C.GdkDisplay // return, none, converted, nullable
 
 	cret = C.gdk_display_get_default()
 
 	var goret Display
 
-	goret = UnsafeDisplayFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeDisplayFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -13104,12 +13136,12 @@ func DisplayGetDefault() Display {
 // 
 // The function returns the following values:
 // 
-// 	- goret Display 
+// 	- goret Display (nullable) 
 //
 // Opens a display.
 func DisplayOpen(displayName string) Display {
 	var carg1 *C.gchar      // in, none, string
-	var cret  *C.GdkDisplay // return, none, converted
+	var cret  *C.GdkDisplay // return, none, converted, nullable
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(displayName)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -13119,7 +13151,9 @@ func DisplayOpen(displayName string) Display {
 
 	var goret Display
 
-	goret = UnsafeDisplayFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeDisplayFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -13348,13 +13382,13 @@ func (display *DisplayInstance) GetMaximalCursorSize() (uint, uint) {
 // 
 // The function returns the following values:
 // 
-// 	- goret Monitor 
+// 	- goret Monitor (nullable) 
 //
 // Gets a monitor associated with this display.
 func (display *DisplayInstance) GetMonitor(monitorNum int) Monitor {
 	var carg0 *C.GdkDisplay // in, none, converted
 	var carg1 C.int         // in, none, casted, casted C.gint
-	var cret  *C.GdkMonitor // return, none, converted
+	var cret  *C.GdkMonitor // return, none, converted, nullable
 
 	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
 	carg1 = C.int(monitorNum)
@@ -13365,7 +13399,9 @@ func (display *DisplayInstance) GetMonitor(monitorNum int) Monitor {
 
 	var goret Monitor
 
-	goret = UnsafeMonitorFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeMonitorFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -13487,7 +13523,7 @@ func (display *DisplayInstance) GetName() string {
 // GetPrimaryMonitor wraps gdk_display_get_primary_monitor
 // The function returns the following values:
 // 
-// 	- goret Monitor 
+// 	- goret Monitor (nullable) 
 //
 // Gets the primary monitor for the display.
 // 
@@ -13497,7 +13533,7 @@ func (display *DisplayInstance) GetName() string {
 // such as panels should place themselves on the primary monitor.
 func (display *DisplayInstance) GetPrimaryMonitor() Monitor {
 	var carg0 *C.GdkDisplay // in, none, converted
-	var cret  *C.GdkMonitor // return, none, converted
+	var cret  *C.GdkMonitor // return, none, converted, nullable
 
 	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
 
@@ -13506,7 +13542,9 @@ func (display *DisplayInstance) GetPrimaryMonitor() Monitor {
 
 	var goret Monitor
 
-	goret = UnsafeMonitorFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeMonitorFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -13933,7 +13971,7 @@ type DisplayManager interface {
 	// GetDefaultDisplay wraps gdk_display_manager_get_default_display
 	// The function returns the following values:
 	// 
-	// 	- goret Display 
+	// 	- goret Display (nullable) 
 	//
 	// Gets the default #GdkDisplay.
 	GetDefaultDisplay() Display
@@ -13952,7 +13990,7 @@ type DisplayManager interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret Display 
+	// 	- goret Display (nullable) 
 	//
 	// Opens a display.
 	OpenDisplay(string) Display
@@ -14031,12 +14069,12 @@ func DisplayManagerGet() DisplayManager {
 // GetDefaultDisplay wraps gdk_display_manager_get_default_display
 // The function returns the following values:
 // 
-// 	- goret Display 
+// 	- goret Display (nullable) 
 //
 // Gets the default #GdkDisplay.
 func (manager *DisplayManagerInstance) GetDefaultDisplay() Display {
 	var carg0 *C.GdkDisplayManager // in, none, converted
-	var cret  *C.GdkDisplay        // return, none, converted
+	var cret  *C.GdkDisplay        // return, none, converted, nullable
 
 	carg0 = (*C.GdkDisplayManager)(UnsafeDisplayManagerToGlibNone(manager))
 
@@ -14045,7 +14083,9 @@ func (manager *DisplayManagerInstance) GetDefaultDisplay() Display {
 
 	var goret Display
 
-	goret = UnsafeDisplayFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeDisplayFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -14087,13 +14127,13 @@ func (manager *DisplayManagerInstance) ListDisplays() []Display {
 // 
 // The function returns the following values:
 // 
-// 	- goret Display 
+// 	- goret Display (nullable) 
 //
 // Opens a display.
 func (manager *DisplayManagerInstance) OpenDisplay(name string) Display {
 	var carg0 *C.GdkDisplayManager // in, none, converted
 	var carg1 *C.gchar             // in, none, string
-	var cret  *C.GdkDisplay        // return, none, converted
+	var cret  *C.GdkDisplay        // return, none, converted, nullable
 
 	carg0 = (*C.GdkDisplayManager)(UnsafeDisplayManagerToGlibNone(manager))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
@@ -14105,7 +14145,9 @@ func (manager *DisplayManagerInstance) OpenDisplay(name string) Display {
 
 	var goret Display
 
-	goret = UnsafeDisplayFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeDisplayFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -14173,7 +14215,7 @@ type DragContext interface {
 	// GetDragWindow wraps gdk_drag_context_get_drag_window
 	// The function returns the following values:
 	// 
-	// 	- goret Window 
+	// 	- goret Window (nullable) 
 	//
 	// Returns the window on which the drag icon should be rendered
 	// during the drag operation. Note that the window may not be
@@ -14405,7 +14447,7 @@ func (_context *DragContextInstance) GetDevice() Device {
 // GetDragWindow wraps gdk_drag_context_get_drag_window
 // The function returns the following values:
 // 
-// 	- goret Window 
+// 	- goret Window (nullable) 
 //
 // Returns the window on which the drag icon should be rendered
 // during the drag operation. Note that the window may not be
@@ -14415,7 +14457,7 @@ func (_context *DragContextInstance) GetDevice() Device {
 // the drag operation is over.
 func (_context *DragContextInstance) GetDragWindow() Window {
 	var carg0 *C.GdkDragContext // in, none, converted
-	var cret  *C.GdkWindow      // return, none, converted
+	var cret  *C.GdkWindow      // return, none, converted, nullable
 
 	carg0 = (*C.GdkDragContext)(UnsafeDragContextToGlibNone(_context))
 
@@ -14424,7 +14466,9 @@ func (_context *DragContextInstance) GetDragWindow() Window {
 
 	var goret Window
 
-	goret = UnsafeWindowFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWindowFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -14868,7 +14912,7 @@ type FrameClock interface {
 	// GetCurrentTimings wraps gdk_frame_clock_get_current_timings
 	// The function returns the following values:
 	// 
-	// 	- goret *FrameTimings 
+	// 	- goret *FrameTimings (nullable) 
 	//
 	// Gets the frame timings for the current frame.
 	GetCurrentTimings() *FrameTimings
@@ -14934,7 +14978,7 @@ type FrameClock interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret *FrameTimings 
+	// 	- goret *FrameTimings (nullable) 
 	//
 	// Retrieves a #GdkFrameTimings object holding timing information
 	// for the current frame or a recent frame. The #GdkFrameTimings
@@ -15072,12 +15116,12 @@ func (frameClock *FrameClockInstance) EndUpdating() {
 // GetCurrentTimings wraps gdk_frame_clock_get_current_timings
 // The function returns the following values:
 // 
-// 	- goret *FrameTimings 
+// 	- goret *FrameTimings (nullable) 
 //
 // Gets the frame timings for the current frame.
 func (frameClock *FrameClockInstance) GetCurrentTimings() *FrameTimings {
 	var carg0 *C.GdkFrameClock   // in, none, converted
-	var cret  *C.GdkFrameTimings // return, none, converted
+	var cret  *C.GdkFrameTimings // return, none, converted, nullable
 
 	carg0 = (*C.GdkFrameClock)(UnsafeFrameClockToGlibNone(frameClock))
 
@@ -15086,7 +15130,9 @@ func (frameClock *FrameClockInstance) GetCurrentTimings() *FrameTimings {
 
 	var goret *FrameTimings
 
-	goret = UnsafeFrameTimingsFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeFrameTimingsFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -15219,7 +15265,7 @@ func (frameClock *FrameClockInstance) GetRefreshInfo(baseTime int64) (int64, int
 // 
 // The function returns the following values:
 // 
-// 	- goret *FrameTimings 
+// 	- goret *FrameTimings (nullable) 
 //
 // Retrieves a #GdkFrameTimings object holding timing information
 // for the current frame or a recent frame. The #GdkFrameTimings
@@ -15227,7 +15273,7 @@ func (frameClock *FrameClockInstance) GetRefreshInfo(baseTime int64) (int64, int
 func (frameClock *FrameClockInstance) GetTimings(frameCounter int64) *FrameTimings {
 	var carg0 *C.GdkFrameClock   // in, none, converted
 	var carg1 C.gint64           // in, none, casted
-	var cret  *C.GdkFrameTimings // return, none, converted
+	var cret  *C.GdkFrameTimings // return, none, converted, nullable
 
 	carg0 = (*C.GdkFrameClock)(UnsafeFrameClockToGlibNone(frameClock))
 	carg1 = C.gint64(frameCounter)
@@ -15238,7 +15284,9 @@ func (frameClock *FrameClockInstance) GetTimings(frameCounter int64) *FrameTimin
 
 	var goret *FrameTimings
 
-	goret = UnsafeFrameTimingsFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeFrameTimingsFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -15406,7 +15454,7 @@ type GLContext interface {
 	// GetDisplay wraps gdk_gl_context_get_display
 	// The function returns the following values:
 	// 
-	// 	- goret Display 
+	// 	- goret Display (nullable) 
 	//
 	// Retrieves the #GdkDisplay the @context is created for
 	GetDisplay() Display
@@ -15429,7 +15477,7 @@ type GLContext interface {
 	// GetSharedContext wraps gdk_gl_context_get_shared_context
 	// The function returns the following values:
 	// 
-	// 	- goret GLContext 
+	// 	- goret GLContext (nullable) 
 	//
 	// Retrieves the #GdkGLContext that this @context share data with.
 	GetSharedContext() GLContext
@@ -15453,7 +15501,7 @@ type GLContext interface {
 	// GetWindow wraps gdk_gl_context_get_window
 	// The function returns the following values:
 	// 
-	// 	- goret Window 
+	// 	- goret Window (nullable) 
 	//
 	// Retrieves the #GdkWindow used by the @context.
 	GetWindow() Window
@@ -15606,17 +15654,19 @@ func GLContextClearCurrent() {
 // GLContextGetCurrent wraps gdk_gl_context_get_current
 // The function returns the following values:
 // 
-// 	- goret GLContext 
+// 	- goret GLContext (nullable) 
 //
 // Retrieves the current #GdkGLContext.
 func GLContextGetCurrent() GLContext {
-	var cret *C.GdkGLContext // return, none, converted
+	var cret *C.GdkGLContext // return, none, converted, nullable
 
 	cret = C.gdk_gl_context_get_current()
 
 	var goret GLContext
 
-	goret = UnsafeGLContextFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeGLContextFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -15648,12 +15698,12 @@ func (_context *GLContextInstance) GetDebugEnabled() bool {
 // GetDisplay wraps gdk_gl_context_get_display
 // The function returns the following values:
 // 
-// 	- goret Display 
+// 	- goret Display (nullable) 
 //
 // Retrieves the #GdkDisplay the @context is created for
 func (_context *GLContextInstance) GetDisplay() Display {
 	var carg0 *C.GdkGLContext // in, none, converted
-	var cret  *C.GdkDisplay   // return, none, converted
+	var cret  *C.GdkDisplay   // return, none, converted, nullable
 
 	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(_context))
 
@@ -15662,7 +15712,9 @@ func (_context *GLContextInstance) GetDisplay() Display {
 
 	var goret Display
 
-	goret = UnsafeDisplayFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeDisplayFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -15721,12 +15773,12 @@ func (_context *GLContextInstance) GetRequiredVersion() (int, int) {
 // GetSharedContext wraps gdk_gl_context_get_shared_context
 // The function returns the following values:
 // 
-// 	- goret GLContext 
+// 	- goret GLContext (nullable) 
 //
 // Retrieves the #GdkGLContext that this @context share data with.
 func (_context *GLContextInstance) GetSharedContext() GLContext {
 	var carg0 *C.GdkGLContext // in, none, converted
-	var cret  *C.GdkGLContext // return, none, converted
+	var cret  *C.GdkGLContext // return, none, converted, nullable
 
 	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(_context))
 
@@ -15735,7 +15787,9 @@ func (_context *GLContextInstance) GetSharedContext() GLContext {
 
 	var goret GLContext
 
-	goret = UnsafeGLContextFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeGLContextFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -15795,12 +15849,12 @@ func (_context *GLContextInstance) GetVersion() (int, int) {
 // GetWindow wraps gdk_gl_context_get_window
 // The function returns the following values:
 // 
-// 	- goret Window 
+// 	- goret Window (nullable) 
 //
 // Retrieves the #GdkWindow used by the @context.
 func (_context *GLContextInstance) GetWindow() Window {
 	var carg0 *C.GdkGLContext // in, none, converted
-	var cret  *C.GdkWindow    // return, none, converted
+	var cret  *C.GdkWindow    // return, none, converted, nullable
 
 	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(_context))
 
@@ -15809,7 +15863,9 @@ func (_context *GLContextInstance) GetWindow() Window {
 
 	var goret Window
 
-	goret = UnsafeWindowFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWindowFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -16642,7 +16698,7 @@ type Monitor interface {
 	// GetManufacturer wraps gdk_monitor_get_manufacturer
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the name or PNP ID of the monitor's manufacturer, if available.
 	// 
@@ -16654,7 +16710,7 @@ type Monitor interface {
 	// GetModel wraps gdk_monitor_get_model
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the a string identifying the monitor model, if available.
 	GetModel() string
@@ -16834,7 +16890,7 @@ func (monitor *MonitorInstance) GetHeightMm() int {
 // GetManufacturer wraps gdk_monitor_get_manufacturer
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the name or PNP ID of the monitor's manufacturer, if available.
 // 
@@ -16844,7 +16900,7 @@ func (monitor *MonitorInstance) GetHeightMm() int {
 // PNP ID registry is located at https://uefi.org/pnp_id_list
 func (monitor *MonitorInstance) GetManufacturer() string {
 	var carg0 *C.GdkMonitor // in, none, converted
-	var cret  *C.char       // return, none, string, casted *C.gchar
+	var cret  *C.char       // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GdkMonitor)(UnsafeMonitorToGlibNone(monitor))
 
@@ -16853,7 +16909,9 @@ func (monitor *MonitorInstance) GetManufacturer() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -16861,12 +16919,12 @@ func (monitor *MonitorInstance) GetManufacturer() string {
 // GetModel wraps gdk_monitor_get_model
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the a string identifying the monitor model, if available.
 func (monitor *MonitorInstance) GetModel() string {
 	var carg0 *C.GdkMonitor // in, none, converted
-	var cret  *C.char       // return, none, string, casted *C.gchar
+	var cret  *C.char       // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GdkMonitor)(UnsafeMonitorToGlibNone(monitor))
 
@@ -16875,7 +16933,9 @@ func (monitor *MonitorInstance) GetModel() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -17086,7 +17146,7 @@ type Screen interface {
 	// GetRGBAVisual wraps gdk_screen_get_rgba_visual
 	// The function returns the following values:
 	// 
-	// 	- goret Visual 
+	// 	- goret Visual (nullable) 
 	//
 	// Gets a visual to use for creating windows with an alpha channel.
 	// The windowing system on which GTK+ is running
@@ -17150,7 +17210,7 @@ type Screen interface {
 	// GetWindowStack wraps gdk_screen_get_window_stack
 	// The function returns the following values:
 	// 
-	// 	- goret []Window 
+	// 	- goret []Window (nullable) 
 	//
 	// Returns a #GList of #GdkWindows representing the current
 	// window stack.
@@ -17261,18 +17321,20 @@ func UnsafeScreenToGlibFull(c Screen) unsafe.Pointer {
 // ScreenGetDefault wraps gdk_screen_get_default
 // The function returns the following values:
 // 
-// 	- goret Screen 
+// 	- goret Screen (nullable) 
 //
 // Gets the default screen for the default display. (See
 // gdk_display_get_default ()).
 func ScreenGetDefault() Screen {
-	var cret *C.GdkScreen // return, none, converted
+	var cret *C.GdkScreen // return, none, converted, nullable
 
 	cret = C.gdk_screen_get_default()
 
 	var goret Screen
 
-	goret = UnsafeScreenFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeScreenFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -17325,7 +17387,7 @@ func (screen *ScreenInstance) GetResolution() float64 {
 // GetRGBAVisual wraps gdk_screen_get_rgba_visual
 // The function returns the following values:
 // 
-// 	- goret Visual 
+// 	- goret Visual (nullable) 
 //
 // Gets a visual to use for creating windows with an alpha channel.
 // The windowing system on which GTK+ is running
@@ -17342,7 +17404,7 @@ func (screen *ScreenInstance) GetResolution() float64 {
 // gdk_window_set_opacity().
 func (screen *ScreenInstance) GetRGBAVisual() Visual {
 	var carg0 *C.GdkScreen // in, none, converted
-	var cret  *C.GdkVisual // return, none, converted
+	var cret  *C.GdkVisual // return, none, converted, nullable
 
 	carg0 = (*C.GdkScreen)(UnsafeScreenToGlibNone(screen))
 
@@ -17351,7 +17413,9 @@ func (screen *ScreenInstance) GetRGBAVisual() Visual {
 
 	var goret Visual
 
-	goret = UnsafeVisualFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeVisualFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -17480,7 +17544,7 @@ func (screen *ScreenInstance) GetToplevelWindows() []Window {
 // GetWindowStack wraps gdk_screen_get_window_stack
 // The function returns the following values:
 // 
-// 	- goret []Window 
+// 	- goret []Window (nullable) 
 //
 // Returns a #GList of #GdkWindows representing the current
 // window stack.
@@ -17663,14 +17727,14 @@ type Seat interface {
 	// GetKeyboard wraps gdk_seat_get_keyboard
 	// The function returns the following values:
 	// 
-	// 	- goret Device 
+	// 	- goret Device (nullable) 
 	//
 	// Returns the master device that routes keyboard events.
 	GetKeyboard() Device
 	// GetPointer wraps gdk_seat_get_pointer
 	// The function returns the following values:
 	// 
-	// 	- goret Device 
+	// 	- goret Device (nullable) 
 	//
 	// Returns the master device that routes pointer events.
 	GetPointer() Device
@@ -17797,12 +17861,12 @@ func (seat *SeatInstance) GetDisplay() Display {
 // GetKeyboard wraps gdk_seat_get_keyboard
 // The function returns the following values:
 // 
-// 	- goret Device 
+// 	- goret Device (nullable) 
 //
 // Returns the master device that routes keyboard events.
 func (seat *SeatInstance) GetKeyboard() Device {
 	var carg0 *C.GdkSeat   // in, none, converted
-	var cret  *C.GdkDevice // return, none, converted
+	var cret  *C.GdkDevice // return, none, converted, nullable
 
 	carg0 = (*C.GdkSeat)(UnsafeSeatToGlibNone(seat))
 
@@ -17811,7 +17875,9 @@ func (seat *SeatInstance) GetKeyboard() Device {
 
 	var goret Device
 
-	goret = UnsafeDeviceFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeDeviceFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -17819,12 +17885,12 @@ func (seat *SeatInstance) GetKeyboard() Device {
 // GetPointer wraps gdk_seat_get_pointer
 // The function returns the following values:
 // 
-// 	- goret Device 
+// 	- goret Device (nullable) 
 //
 // Returns the master device that routes pointer events.
 func (seat *SeatInstance) GetPointer() Device {
 	var carg0 *C.GdkSeat   // in, none, converted
-	var cret  *C.GdkDevice // return, none, converted
+	var cret  *C.GdkDevice // return, none, converted, nullable
 
 	carg0 = (*C.GdkSeat)(UnsafeSeatToGlibNone(seat))
 
@@ -17833,7 +17899,9 @@ func (seat *SeatInstance) GetPointer() Device {
 
 	var goret Device
 
-	goret = UnsafeDeviceFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeDeviceFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -18486,7 +18554,7 @@ type Window interface {
 	// GetCursor wraps gdk_window_get_cursor
 	// The function returns the following values:
 	// 
-	// 	- goret Cursor 
+	// 	- goret Cursor (nullable) 
 	//
 	// Retrieves a #GdkCursor pointer for the cursor currently set on the
 	// specified #GdkWindow, or %NULL.  If the return value is %NULL then
@@ -18510,7 +18578,7 @@ type Window interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret Cursor 
+	// 	- goret Cursor (nullable) 
 	//
 	// Retrieves a #GdkCursor pointer for the @device currently set on the
 	// specified #GdkWindow, or %NULL.  If the return value is %NULL then
@@ -18540,7 +18608,7 @@ type Window interface {
 	// 	- x int: return location for the X coordinate of @device, or %NULL. 
 	// 	- y int: return location for the Y coordinate of @device, or %NULL. 
 	// 	- mask ModifierType: return location for the modifier mask, or %NULL. 
-	// 	- goret Window 
+	// 	- goret Window (nullable) 
 	//
 	// Obtains the current device position and modifier state.
 	// The position is given in coordinates relative to the upper left
@@ -18559,7 +18627,7 @@ type Window interface {
 	// 	- x float64: return location for the X coordinate of @device, or %NULL. 
 	// 	- y float64: return location for the Y coordinate of @device, or %NULL. 
 	// 	- mask ModifierType: return location for the modifier mask, or %NULL. 
-	// 	- goret Window 
+	// 	- goret Window (nullable) 
 	//
 	// Obtains the current device position in doubles and modifier state.
 	// The position is given in coordinates relative to the upper left
@@ -20470,7 +20538,7 @@ func (window *WindowInstance) GetChildren() []Window {
 // GetCursor wraps gdk_window_get_cursor
 // The function returns the following values:
 // 
-// 	- goret Cursor 
+// 	- goret Cursor (nullable) 
 //
 // Retrieves a #GdkCursor pointer for the cursor currently set on the
 // specified #GdkWindow, or %NULL.  If the return value is %NULL then
@@ -20478,7 +20546,7 @@ func (window *WindowInstance) GetChildren() []Window {
 // using the cursor for its parent window.
 func (window *WindowInstance) GetCursor() Cursor {
 	var carg0 *C.GdkWindow // in, none, converted
-	var cret  *C.GdkCursor // return, none, converted
+	var cret  *C.GdkCursor // return, none, converted, nullable
 
 	carg0 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
 
@@ -20487,7 +20555,9 @@ func (window *WindowInstance) GetCursor() Cursor {
 
 	var goret Cursor
 
-	goret = UnsafeCursorFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeCursorFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -20529,7 +20599,7 @@ func (window *WindowInstance) GetDecorations() (WMDecoration, bool) {
 // 
 // The function returns the following values:
 // 
-// 	- goret Cursor 
+// 	- goret Cursor (nullable) 
 //
 // Retrieves a #GdkCursor pointer for the @device currently set on the
 // specified #GdkWindow, or %NULL.  If the return value is %NULL then
@@ -20538,7 +20608,7 @@ func (window *WindowInstance) GetDecorations() (WMDecoration, bool) {
 func (window *WindowInstance) GetDeviceCursor(device Device) Cursor {
 	var carg0 *C.GdkWindow // in, none, converted
 	var carg1 *C.GdkDevice // in, none, converted
-	var cret  *C.GdkCursor // return, none, converted
+	var cret  *C.GdkCursor // return, none, converted, nullable
 
 	carg0 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
 	carg1 = (*C.GdkDevice)(UnsafeDeviceToGlibNone(device))
@@ -20549,7 +20619,9 @@ func (window *WindowInstance) GetDeviceCursor(device Device) Cursor {
 
 	var goret Cursor
 
-	goret = UnsafeCursorFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeCursorFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -20595,7 +20667,7 @@ func (window *WindowInstance) GetDeviceEvents(device Device) EventMask {
 // 	- x int: return location for the X coordinate of @device, or %NULL. 
 // 	- y int: return location for the Y coordinate of @device, or %NULL. 
 // 	- mask ModifierType: return location for the modifier mask, or %NULL. 
-// 	- goret Window 
+// 	- goret Window (nullable) 
 //
 // Obtains the current device position and modifier state.
 // The position is given in coordinates relative to the upper left
@@ -20608,7 +20680,7 @@ func (window *WindowInstance) GetDevicePosition(device Device) (int, int, Modifi
 	var carg2 C.gint            // out, full, casted
 	var carg3 C.gint            // out, full, casted
 	var carg4 C.GdkModifierType // out, full, casted
-	var cret  *C.GdkWindow      // return, none, converted
+	var cret  *C.GdkWindow      // return, none, converted, nullable
 
 	carg0 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
 	carg1 = (*C.GdkDevice)(UnsafeDeviceToGlibNone(device))
@@ -20625,7 +20697,9 @@ func (window *WindowInstance) GetDevicePosition(device Device) (int, int, Modifi
 	x = int(carg2)
 	y = int(carg3)
 	mask = ModifierType(carg4)
-	goret = UnsafeWindowFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWindowFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return x, y, mask, goret
 }
@@ -20641,7 +20715,7 @@ func (window *WindowInstance) GetDevicePosition(device Device) (int, int, Modifi
 // 	- x float64: return location for the X coordinate of @device, or %NULL. 
 // 	- y float64: return location for the Y coordinate of @device, or %NULL. 
 // 	- mask ModifierType: return location for the modifier mask, or %NULL. 
-// 	- goret Window 
+// 	- goret Window (nullable) 
 //
 // Obtains the current device position in doubles and modifier state.
 // The position is given in coordinates relative to the upper left
@@ -20652,7 +20726,7 @@ func (window *WindowInstance) GetDevicePositionDouble(device Device) (float64, f
 	var carg2 C.gdouble         // out, full, casted
 	var carg3 C.gdouble         // out, full, casted
 	var carg4 C.GdkModifierType // out, full, casted
-	var cret  *C.GdkWindow      // return, none, converted
+	var cret  *C.GdkWindow      // return, none, converted, nullable
 
 	carg0 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
 	carg1 = (*C.GdkDevice)(UnsafeDeviceToGlibNone(device))
@@ -20669,7 +20743,9 @@ func (window *WindowInstance) GetDevicePositionDouble(device Device) (float64, f
 	x = float64(carg2)
 	y = float64(carg3)
 	mask = ModifierType(carg4)
-	goret = UnsafeWindowFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeWindowFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return x, y, mask, goret
 }

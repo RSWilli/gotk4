@@ -4888,7 +4888,7 @@ func Version() int {
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Checks that the Pango library in use is compatible with the
 // given version.
@@ -4911,7 +4911,7 @@ func VersionCheck(requiredMajor int, requiredMinor int, requiredMicro int) strin
 	var carg1 C.int   // in, none, casted, casted C.gint
 	var carg2 C.int   // in, none, casted, casted C.gint
 	var carg3 C.int   // in, none, casted, casted C.gint
-	var cret  *C.char // return, none, string, casted *C.gchar
+	var cret  *C.char // return, none, string, casted *C.gchar, nullable
 
 	carg1 = C.int(requiredMajor)
 	carg2 = C.int(requiredMinor)
@@ -4924,7 +4924,9 @@ func VersionCheck(requiredMajor int, requiredMinor int, requiredMicro int) strin
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -5003,14 +5005,14 @@ type Context interface {
 	// GetFontDescription wraps pango_context_get_font_description
 	// The function returns the following values:
 	// 
-	// 	- goret *FontDescription 
+	// 	- goret *FontDescription (nullable) 
 	//
 	// Retrieve the default font description for the context.
 	GetFontDescription() *FontDescription
 	// GetFontMap wraps pango_context_get_font_map
 	// The function returns the following values:
 	// 
-	// 	- goret FontMap 
+	// 	- goret FontMap (nullable) 
 	//
 	// Gets the `PangoFontMap` used to look up fonts for this context.
 	GetFontMap() FontMap
@@ -5045,7 +5047,7 @@ type Context interface {
 	// GetMatrix wraps pango_context_get_matrix
 	// The function returns the following values:
 	// 
-	// 	- goret *Matrix 
+	// 	- goret *Matrix (nullable) 
 	//
 	// Gets the transformation matrix that will be applied when
 	// rendering with this context.
@@ -5114,7 +5116,7 @@ type Context interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret Font 
+	// 	- goret Font (nullable) 
 	//
 	// Loads the font in one of the fontmaps in the context
 	// that is the closest match for @desc.
@@ -5128,7 +5130,7 @@ type Context interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret Fontset 
+	// 	- goret Fontset (nullable) 
 	//
 	// Load a set of fonts in the context that can be used to render
 	// a font matching @desc.
@@ -5368,12 +5370,12 @@ func (_context *ContextInstance) GetBaseGravity() Gravity {
 // GetFontDescription wraps pango_context_get_font_description
 // The function returns the following values:
 // 
-// 	- goret *FontDescription 
+// 	- goret *FontDescription (nullable) 
 //
 // Retrieve the default font description for the context.
 func (_context *ContextInstance) GetFontDescription() *FontDescription {
 	var carg0 *C.PangoContext         // in, none, converted
-	var cret  *C.PangoFontDescription // return, none, converted
+	var cret  *C.PangoFontDescription // return, none, converted, nullable
 
 	carg0 = (*C.PangoContext)(UnsafeContextToGlibNone(_context))
 
@@ -5382,7 +5384,9 @@ func (_context *ContextInstance) GetFontDescription() *FontDescription {
 
 	var goret *FontDescription
 
-	goret = UnsafeFontDescriptionFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeFontDescriptionFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -5390,12 +5394,12 @@ func (_context *ContextInstance) GetFontDescription() *FontDescription {
 // GetFontMap wraps pango_context_get_font_map
 // The function returns the following values:
 // 
-// 	- goret FontMap 
+// 	- goret FontMap (nullable) 
 //
 // Gets the `PangoFontMap` used to look up fonts for this context.
 func (_context *ContextInstance) GetFontMap() FontMap {
 	var carg0 *C.PangoContext // in, none, converted
-	var cret  *C.PangoFontMap // return, none, converted
+	var cret  *C.PangoFontMap // return, none, converted, nullable
 
 	carg0 = (*C.PangoContext)(UnsafeContextToGlibNone(_context))
 
@@ -5404,7 +5408,9 @@ func (_context *ContextInstance) GetFontMap() FontMap {
 
 	var goret FontMap
 
-	goret = UnsafeFontMapFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeFontMapFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -5485,7 +5491,7 @@ func (_context *ContextInstance) GetLanguage() *Language {
 // GetMatrix wraps pango_context_get_matrix
 // The function returns the following values:
 // 
-// 	- goret *Matrix 
+// 	- goret *Matrix (nullable) 
 //
 // Gets the transformation matrix that will be applied when
 // rendering with this context.
@@ -5493,7 +5499,7 @@ func (_context *ContextInstance) GetLanguage() *Language {
 // See [method@Pango.Context.set_matrix].
 func (_context *ContextInstance) GetMatrix() *Matrix {
 	var carg0 *C.PangoContext // in, none, converted
-	var cret  *C.PangoMatrix  // return, none, converted
+	var cret  *C.PangoMatrix  // return, none, converted, nullable
 
 	carg0 = (*C.PangoContext)(UnsafeContextToGlibNone(_context))
 
@@ -5502,7 +5508,9 @@ func (_context *ContextInstance) GetMatrix() *Matrix {
 
 	var goret *Matrix
 
-	goret = UnsafeMatrixFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeMatrixFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -5626,14 +5634,14 @@ func (_context *ContextInstance) GetSerial() uint {
 // 
 // The function returns the following values:
 // 
-// 	- goret Font 
+// 	- goret Font (nullable) 
 //
 // Loads the font in one of the fontmaps in the context
 // that is the closest match for @desc.
 func (_context *ContextInstance) LoadFont(desc *FontDescription) Font {
 	var carg0 *C.PangoContext         // in, none, converted
 	var carg1 *C.PangoFontDescription // in, none, converted
-	var cret  *C.PangoFont            // return, full, converted
+	var cret  *C.PangoFont            // return, full, converted, nullable
 
 	carg0 = (*C.PangoContext)(UnsafeContextToGlibNone(_context))
 	carg1 = (*C.PangoFontDescription)(UnsafeFontDescriptionToGlibNone(desc))
@@ -5644,7 +5652,9 @@ func (_context *ContextInstance) LoadFont(desc *FontDescription) Font {
 
 	var goret Font
 
-	goret = UnsafeFontFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeFontFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -5658,7 +5668,7 @@ func (_context *ContextInstance) LoadFont(desc *FontDescription) Font {
 // 
 // The function returns the following values:
 // 
-// 	- goret Fontset 
+// 	- goret Fontset (nullable) 
 //
 // Load a set of fonts in the context that can be used to render
 // a font matching @desc.
@@ -5666,7 +5676,7 @@ func (_context *ContextInstance) LoadFontset(desc *FontDescription, language *La
 	var carg0 *C.PangoContext         // in, none, converted
 	var carg1 *C.PangoFontDescription // in, none, converted
 	var carg2 *C.PangoLanguage        // in, none, converted
-	var cret  *C.PangoFontset         // return, full, converted
+	var cret  *C.PangoFontset         // return, full, converted, nullable
 
 	carg0 = (*C.PangoContext)(UnsafeContextToGlibNone(_context))
 	carg1 = (*C.PangoFontDescription)(UnsafeFontDescriptionToGlibNone(desc))
@@ -5679,7 +5689,9 @@ func (_context *ContextInstance) LoadFontset(desc *FontDescription, language *La
 
 	var goret Fontset
 
-	goret = UnsafeFontsetFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeFontsetFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -6020,7 +6032,7 @@ func NewCoverage() Coverage {
 // 
 // The function returns the following values:
 // 
-// 	- goret Coverage 
+// 	- goret Coverage (nullable) 
 //
 // Convert data generated from [method@Pango.Coverage.to_bytes]
 // back to a `PangoCoverage`.
@@ -6029,7 +6041,7 @@ func NewCoverage() Coverage {
 func CoverageFromBytes(bytes []uint8) Coverage {
 	var carg1 *C.guchar        // in, transfer: none, C Pointers: 1, Name: array[guint8], array (inner: *typesystem.CastablePrimitive, length-by: carg2)
 	var carg2 C.int            // implicit
-	var cret  *C.PangoCoverage // return, full, converted
+	var cret  *C.PangoCoverage // return, full, converted, nullable
 
 	_ = bytes
 	_ = carg1
@@ -6041,7 +6053,9 @@ func CoverageFromBytes(bytes []uint8) Coverage {
 
 	var goret Coverage
 
-	goret = UnsafeCoverageFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeCoverageFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -6232,7 +6246,7 @@ type Font interface {
 	// GetFontMap wraps pango_font_get_font_map
 	// The function returns the following values:
 	// 
-	// 	- goret FontMap 
+	// 	- goret FontMap (nullable) 
 	//
 	// Gets the font map for which the font was created.
 	// 
@@ -6383,7 +6397,7 @@ func FontDescriptionsFree(descs []*FontDescription) {
 // 
 // The function returns the following values:
 // 
-// 	- goret Font 
+// 	- goret Font (nullable) 
 // 	- _goerr error (nullable): an error 
 //
 // Loads data previously created via [method@Pango.Font.serialize].
@@ -6396,7 +6410,7 @@ func FontDescriptionsFree(descs []*FontDescription) {
 func FontDeserialize(_context Context, bytes *glib.Bytes) (Font, error) {
 	var carg1 *C.PangoContext // in, none, converted
 	var carg2 *C.GBytes       // in, none, converted
-	var cret  *C.PangoFont    // return, full, converted
+	var cret  *C.PangoFont    // return, full, converted, nullable
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	carg1 = (*C.PangoContext)(UnsafeContextToGlibNone(_context))
@@ -6409,7 +6423,9 @@ func FontDeserialize(_context Context, bytes *glib.Bytes) (Font, error) {
 	var goret  Font
 	var _goerr error
 
-	goret = UnsafeFontFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeFontFromGlibFull(unsafe.Pointer(cret))
+	}
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -6522,7 +6538,7 @@ func (font *FontInstance) GetFace() FontFace {
 // GetFontMap wraps pango_font_get_font_map
 // The function returns the following values:
 // 
-// 	- goret FontMap 
+// 	- goret FontMap (nullable) 
 //
 // Gets the font map for which the font was created.
 // 
@@ -6537,7 +6553,7 @@ func (font *FontInstance) GetFace() FontFace {
 // as a `PangoContext` holds a reference to the font map.
 func (font *FontInstance) GetFontMap() FontMap {
 	var carg0 *C.PangoFont    // in, none, converted
-	var cret  *C.PangoFontMap // return, none, converted
+	var cret  *C.PangoFontMap // return, none, converted, nullable
 
 	carg0 = (*C.PangoFont)(UnsafeFontToGlibNone(font))
 
@@ -6546,7 +6562,9 @@ func (font *FontInstance) GetFontMap() FontMap {
 
 	var goret FontMap
 
-	goret = UnsafeFontMapFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeFontMapFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -6928,7 +6946,7 @@ type FontFamily interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret FontFace 
+	// 	- goret FontFace (nullable) 
 	//
 	// Gets the `PangoFontFace` of @family with the given name.
 	GetFace(string) FontFace
@@ -7023,13 +7041,13 @@ func UnsafeFontFamilyToGlibFull(c FontFamily) unsafe.Pointer {
 // 
 // The function returns the following values:
 // 
-// 	- goret FontFace 
+// 	- goret FontFace (nullable) 
 //
 // Gets the `PangoFontFace` of @family with the given name.
 func (family *FontFamilyInstance) GetFace(name string) FontFace {
 	var carg0 *C.PangoFontFamily // in, none, converted
 	var carg1 *C.char            // in, none, string, nullable-string
-	var cret  *C.PangoFontFace   // return, none, converted
+	var cret  *C.PangoFontFace   // return, none, converted, nullable
 
 	carg0 = (*C.PangoFontFamily)(UnsafeFontFamilyToGlibNone(family))
 	if name != "" {
@@ -7043,7 +7061,9 @@ func (family *FontFamilyInstance) GetFace(name string) FontFace {
 
 	var goret FontFace
 
-	goret = UnsafeFontFaceFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeFontFaceFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -7241,7 +7261,7 @@ type FontMap interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret Font 
+	// 	- goret Font (nullable) 
 	//
 	// Load the font in the fontmap that is the closest match for @desc.
 	LoadFont(Context, *FontDescription) Font
@@ -7255,7 +7275,7 @@ type FontMap interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret Fontset 
+	// 	- goret Fontset (nullable) 
 	//
 	// Load a set of fonts in the fontmap that can be used to render
 	// a font matching @desc.
@@ -7480,14 +7500,14 @@ func (fontmap *FontMapInstance) GetSerial() uint {
 // 
 // The function returns the following values:
 // 
-// 	- goret Font 
+// 	- goret Font (nullable) 
 //
 // Load the font in the fontmap that is the closest match for @desc.
 func (fontmap *FontMapInstance) LoadFont(_context Context, desc *FontDescription) Font {
 	var carg0 *C.PangoFontMap         // in, none, converted
 	var carg1 *C.PangoContext         // in, none, converted
 	var carg2 *C.PangoFontDescription // in, none, converted
-	var cret  *C.PangoFont            // return, full, converted
+	var cret  *C.PangoFont            // return, full, converted, nullable
 
 	carg0 = (*C.PangoFontMap)(UnsafeFontMapToGlibNone(fontmap))
 	carg1 = (*C.PangoContext)(UnsafeContextToGlibNone(_context))
@@ -7500,7 +7520,9 @@ func (fontmap *FontMapInstance) LoadFont(_context Context, desc *FontDescription
 
 	var goret Font
 
-	goret = UnsafeFontFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeFontFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -7515,7 +7537,7 @@ func (fontmap *FontMapInstance) LoadFont(_context Context, desc *FontDescription
 // 
 // The function returns the following values:
 // 
-// 	- goret Fontset 
+// 	- goret Fontset (nullable) 
 //
 // Load a set of fonts in the fontmap that can be used to render
 // a font matching @desc.
@@ -7524,7 +7546,7 @@ func (fontmap *FontMapInstance) LoadFontset(_context Context, desc *FontDescript
 	var carg1 *C.PangoContext         // in, none, converted
 	var carg2 *C.PangoFontDescription // in, none, converted
 	var carg3 *C.PangoLanguage        // in, none, converted
-	var cret  *C.PangoFontset         // return, full, converted
+	var cret  *C.PangoFontset         // return, full, converted, nullable
 
 	carg0 = (*C.PangoFontMap)(UnsafeFontMapToGlibNone(fontmap))
 	carg1 = (*C.PangoContext)(UnsafeContextToGlibNone(_context))
@@ -7539,7 +7561,9 @@ func (fontmap *FontMapInstance) LoadFontset(_context Context, desc *FontDescript
 
 	var goret Fontset
 
-	goret = UnsafeFontsetFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeFontsetFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -7984,7 +8008,7 @@ type Layout interface {
 	// GetAttributes wraps pango_layout_get_attributes
 	// The function returns the following values:
 	// 
-	// 	- goret *AttrList 
+	// 	- goret *AttrList (nullable) 
 	//
 	// Gets the attribute list for the layout, if any.
 	GetAttributes() *AttrList
@@ -8128,7 +8152,7 @@ type Layout interface {
 	// GetFontDescription wraps pango_layout_get_font_description
 	// The function returns the following values:
 	// 
-	// 	- goret *FontDescription 
+	// 	- goret *FontDescription (nullable) 
 	//
 	// Gets the font description for the layout, if any.
 	GetFontDescription() *FontDescription
@@ -8182,7 +8206,7 @@ type Layout interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret *LayoutLine 
+	// 	- goret *LayoutLine (nullable) 
 	//
 	// Retrieves a particular line from a `PangoLayout`.
 	// 
@@ -8205,7 +8229,7 @@ type Layout interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret *LayoutLine 
+	// 	- goret *LayoutLine (nullable) 
 	//
 	// Retrieves a particular line from a `PangoLayout`.
 	// 
@@ -8338,7 +8362,7 @@ type Layout interface {
 	// GetTabs wraps pango_layout_get_tabs
 	// The function returns the following values:
 	// 
-	// 	- goret *TabArray 
+	// 	- goret *TabArray (nullable) 
 	//
 	// Gets the current `PangoTabArray` used by this layout.
 	// 
@@ -8970,7 +8994,7 @@ func NewLayout(_context Context) Layout {
 // 
 // The function returns the following values:
 // 
-// 	- goret Layout 
+// 	- goret Layout (nullable) 
 // 	- _goerr error (nullable): an error 
 //
 // Loads data previously created via [method@Pango.Layout.serialize].
@@ -8984,7 +9008,7 @@ func LayoutDeserialize(_context Context, bytes *glib.Bytes, flags LayoutDeserial
 	var carg1 *C.PangoContext               // in, none, converted
 	var carg2 *C.GBytes                     // in, none, converted
 	var carg3 C.PangoLayoutDeserializeFlags // in, none, casted
-	var cret  *C.PangoLayout                // return, full, converted
+	var cret  *C.PangoLayout                // return, full, converted, nullable
 	var _cerr *C.GError                     // out, full, converted, nullable
 
 	carg1 = (*C.PangoContext)(UnsafeContextToGlibNone(_context))
@@ -8999,7 +9023,9 @@ func LayoutDeserialize(_context Context, bytes *glib.Bytes, flags LayoutDeserial
 	var goret  Layout
 	var _goerr error
 
-	goret = UnsafeLayoutFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeLayoutFromGlibFull(unsafe.Pointer(cret))
+	}
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -9074,12 +9100,12 @@ func (layout *LayoutInstance) GetAlignment() Alignment {
 // GetAttributes wraps pango_layout_get_attributes
 // The function returns the following values:
 // 
-// 	- goret *AttrList 
+// 	- goret *AttrList (nullable) 
 //
 // Gets the attribute list for the layout, if any.
 func (layout *LayoutInstance) GetAttributes() *AttrList {
 	var carg0 *C.PangoLayout   // in, none, converted
-	var cret  *C.PangoAttrList // return, none, converted
+	var cret  *C.PangoAttrList // return, none, converted, nullable
 
 	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
 
@@ -9088,7 +9114,9 @@ func (layout *LayoutInstance) GetAttributes() *AttrList {
 
 	var goret *AttrList
 
-	goret = UnsafeAttrListFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeAttrListFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -9400,12 +9428,12 @@ func (layout *LayoutInstance) GetExtents() (Rectangle, Rectangle) {
 // GetFontDescription wraps pango_layout_get_font_description
 // The function returns the following values:
 // 
-// 	- goret *FontDescription 
+// 	- goret *FontDescription (nullable) 
 //
 // Gets the font description for the layout, if any.
 func (layout *LayoutInstance) GetFontDescription() *FontDescription {
 	var carg0 *C.PangoLayout          // in, none, converted
-	var cret  *C.PangoFontDescription // return, none, converted
+	var cret  *C.PangoFontDescription // return, none, converted, nullable
 
 	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
 
@@ -9414,7 +9442,9 @@ func (layout *LayoutInstance) GetFontDescription() *FontDescription {
 
 	var goret *FontDescription
 
-	goret = UnsafeFontDescriptionFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeFontDescriptionFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -9548,7 +9578,7 @@ func (layout *LayoutInstance) GetJustifyLastLine() bool {
 // 
 // The function returns the following values:
 // 
-// 	- goret *LayoutLine 
+// 	- goret *LayoutLine (nullable) 
 //
 // Retrieves a particular line from a `PangoLayout`.
 // 
@@ -9557,7 +9587,7 @@ func (layout *LayoutInstance) GetJustifyLastLine() bool {
 func (layout *LayoutInstance) GetLine(line int) *LayoutLine {
 	var carg0 *C.PangoLayout     // in, none, converted
 	var carg1 C.int              // in, none, casted, casted C.gint
-	var cret  *C.PangoLayoutLine // return, none, converted
+	var cret  *C.PangoLayoutLine // return, none, converted, nullable
 
 	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
 	carg1 = C.int(line)
@@ -9568,7 +9598,9 @@ func (layout *LayoutInstance) GetLine(line int) *LayoutLine {
 
 	var goret *LayoutLine
 
-	goret = UnsafeLayoutLineFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeLayoutLineFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -9604,7 +9636,7 @@ func (layout *LayoutInstance) GetLineCount() int {
 // 
 // The function returns the following values:
 // 
-// 	- goret *LayoutLine 
+// 	- goret *LayoutLine (nullable) 
 //
 // Retrieves a particular line from a `PangoLayout`.
 // 
@@ -9614,7 +9646,7 @@ func (layout *LayoutInstance) GetLineCount() int {
 func (layout *LayoutInstance) GetLineReadonly(line int) *LayoutLine {
 	var carg0 *C.PangoLayout     // in, none, converted
 	var carg1 C.int              // in, none, casted, casted C.gint
-	var cret  *C.PangoLayoutLine // return, none, converted
+	var cret  *C.PangoLayoutLine // return, none, converted, nullable
 
 	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
 	carg1 = C.int(line)
@@ -9625,7 +9657,9 @@ func (layout *LayoutInstance) GetLineReadonly(line int) *LayoutLine {
 
 	var goret *LayoutLine
 
-	goret = UnsafeLayoutLineFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeLayoutLineFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -9939,7 +9973,7 @@ func (layout *LayoutInstance) GetSpacing() int {
 // GetTabs wraps pango_layout_get_tabs
 // The function returns the following values:
 // 
-// 	- goret *TabArray 
+// 	- goret *TabArray (nullable) 
 //
 // Gets the current `PangoTabArray` used by this layout.
 // 
@@ -9949,7 +9983,7 @@ func (layout *LayoutInstance) GetSpacing() int {
 // The return value should be freed with [method@Pango.TabArray.free].
 func (layout *LayoutInstance) GetTabs() *TabArray {
 	var carg0 *C.PangoLayout   // in, none, converted
-	var cret  *C.PangoTabArray // return, full, converted
+	var cret  *C.PangoTabArray // return, full, converted, nullable
 
 	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
 
@@ -9958,7 +9992,9 @@ func (layout *LayoutInstance) GetTabs() *TabArray {
 
 	var goret *TabArray
 
-	goret = UnsafeTabArrayFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeTabArrayFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -11189,14 +11225,14 @@ type Renderer interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret *Color 
+	// 	- goret *Color (nullable) 
 	//
 	// Gets the current rendering color for the specified part.
 	GetColor(RenderPart) *Color
 	// GetLayout wraps pango_renderer_get_layout
 	// The function returns the following values:
 	// 
-	// 	- goret Layout 
+	// 	- goret Layout (nullable) 
 	//
 	// Gets the layout currently being rendered using @renderer.
 	// 
@@ -11209,7 +11245,7 @@ type Renderer interface {
 	// GetLayoutLine wraps pango_renderer_get_layout_line
 	// The function returns the following values:
 	// 
-	// 	- goret *LayoutLine 
+	// 	- goret *LayoutLine (nullable) 
 	//
 	// Gets the layout line currently being rendered using @renderer.
 	// 
@@ -11222,7 +11258,7 @@ type Renderer interface {
 	// GetMatrix wraps pango_renderer_get_matrix
 	// The function returns the following values:
 	// 
-	// 	- goret *Matrix 
+	// 	- goret *Matrix (nullable) 
 	//
 	// Gets the transformation matrix that will be applied when
 	// rendering.
@@ -11697,13 +11733,13 @@ func (renderer *RendererInstance) GetAlpha(part RenderPart) uint16 {
 // 
 // The function returns the following values:
 // 
-// 	- goret *Color 
+// 	- goret *Color (nullable) 
 //
 // Gets the current rendering color for the specified part.
 func (renderer *RendererInstance) GetColor(part RenderPart) *Color {
 	var carg0 *C.PangoRenderer  // in, none, converted
 	var carg1 C.PangoRenderPart // in, none, casted
-	var cret  *C.PangoColor     // return, none, converted
+	var cret  *C.PangoColor     // return, none, converted, nullable
 
 	carg0 = (*C.PangoRenderer)(UnsafeRendererToGlibNone(renderer))
 	carg1 = C.PangoRenderPart(part)
@@ -11714,7 +11750,9 @@ func (renderer *RendererInstance) GetColor(part RenderPart) *Color {
 
 	var goret *Color
 
-	goret = UnsafeColorFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeColorFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -11722,7 +11760,7 @@ func (renderer *RendererInstance) GetColor(part RenderPart) *Color {
 // GetLayout wraps pango_renderer_get_layout
 // The function returns the following values:
 // 
-// 	- goret Layout 
+// 	- goret Layout (nullable) 
 //
 // Gets the layout currently being rendered using @renderer.
 // 
@@ -11733,7 +11771,7 @@ func (renderer *RendererInstance) GetColor(part RenderPart) *Color {
 // rendered.
 func (renderer *RendererInstance) GetLayout() Layout {
 	var carg0 *C.PangoRenderer // in, none, converted
-	var cret  *C.PangoLayout   // return, none, converted
+	var cret  *C.PangoLayout   // return, none, converted, nullable
 
 	carg0 = (*C.PangoRenderer)(UnsafeRendererToGlibNone(renderer))
 
@@ -11742,7 +11780,9 @@ func (renderer *RendererInstance) GetLayout() Layout {
 
 	var goret Layout
 
-	goret = UnsafeLayoutFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeLayoutFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -11750,7 +11790,7 @@ func (renderer *RendererInstance) GetLayout() Layout {
 // GetLayoutLine wraps pango_renderer_get_layout_line
 // The function returns the following values:
 // 
-// 	- goret *LayoutLine 
+// 	- goret *LayoutLine (nullable) 
 //
 // Gets the layout line currently being rendered using @renderer.
 // 
@@ -11761,7 +11801,7 @@ func (renderer *RendererInstance) GetLayout() Layout {
 // rendered.
 func (renderer *RendererInstance) GetLayoutLine() *LayoutLine {
 	var carg0 *C.PangoRenderer   // in, none, converted
-	var cret  *C.PangoLayoutLine // return, none, converted
+	var cret  *C.PangoLayoutLine // return, none, converted, nullable
 
 	carg0 = (*C.PangoRenderer)(UnsafeRendererToGlibNone(renderer))
 
@@ -11770,7 +11810,9 @@ func (renderer *RendererInstance) GetLayoutLine() *LayoutLine {
 
 	var goret *LayoutLine
 
-	goret = UnsafeLayoutLineFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeLayoutLineFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -11778,7 +11820,7 @@ func (renderer *RendererInstance) GetLayoutLine() *LayoutLine {
 // GetMatrix wraps pango_renderer_get_matrix
 // The function returns the following values:
 // 
-// 	- goret *Matrix 
+// 	- goret *Matrix (nullable) 
 //
 // Gets the transformation matrix that will be applied when
 // rendering.
@@ -11786,7 +11828,7 @@ func (renderer *RendererInstance) GetLayoutLine() *LayoutLine {
 // See [method@Pango.Renderer.set_matrix].
 func (renderer *RendererInstance) GetMatrix() *Matrix {
 	var carg0 *C.PangoRenderer // in, none, converted
-	var cret  *C.PangoMatrix   // return, none, converted
+	var cret  *C.PangoMatrix   // return, none, converted, nullable
 
 	carg0 = (*C.PangoRenderer)(UnsafeRendererToGlibNone(renderer))
 
@@ -11795,7 +11837,9 @@ func (renderer *RendererInstance) GetMatrix() *Matrix {
 
 	var goret *Matrix
 
-	goret = UnsafeMatrixFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeMatrixFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -12524,7 +12568,7 @@ func (iterator *AttrIterator) Copy() *AttrIterator {
 // 
 // The function returns the following values:
 // 
-// 	- goret *Attribute 
+// 	- goret *Attribute (nullable) 
 //
 // Find the current attribute of a particular type
 // at the iterator location.
@@ -12535,7 +12579,7 @@ func (iterator *AttrIterator) Copy() *AttrIterator {
 func (iterator *AttrIterator) Get(typ AttrType) *Attribute {
 	var carg0 *C.PangoAttrIterator // in, none, converted
 	var carg1 C.PangoAttrType      // in, none, casted
-	var cret  *C.PangoAttribute    // return, none, converted
+	var cret  *C.PangoAttribute    // return, none, converted, nullable
 
 	carg0 = (*C.PangoAttrIterator)(UnsafeAttrIteratorToGlibNone(iterator))
 	carg1 = C.PangoAttrType(typ)
@@ -12546,7 +12590,9 @@ func (iterator *AttrIterator) Get(typ AttrType) *Attribute {
 
 	var goret *Attribute
 
-	goret = UnsafeAttributeFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeAttributeFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -12844,7 +12890,7 @@ func NewAttrList() *AttrList {
 // 
 // The function returns the following values:
 // 
-// 	- goret *AttrList 
+// 	- goret *AttrList (nullable) 
 //
 // Deserializes a `PangoAttrList` from a string.
 // 
@@ -12852,7 +12898,7 @@ func NewAttrList() *AttrList {
 // See that functions for details about the format.
 func AttrListFromString(text string) *AttrList {
 	var carg1 *C.char          // in, none, string, casted *C.gchar
-	var cret  *C.PangoAttrList // return, full, converted
+	var cret  *C.PangoAttrList // return, full, converted, nullable
 
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(text)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -12862,7 +12908,9 @@ func AttrListFromString(text string) *AttrList {
 
 	var goret *AttrList
 
-	goret = UnsafeAttrListFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeAttrListFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -12900,12 +12948,12 @@ func (list *AttrList) Change(attr *Attribute) {
 // Copy wraps pango_attr_list_copy
 // The function returns the following values:
 // 
-// 	- goret *AttrList 
+// 	- goret *AttrList (nullable) 
 //
 // Copy @list and return an identical new list.
 func (list *AttrList) Copy() *AttrList {
 	var carg0 *C.PangoAttrList // in, none, converted
-	var cret  *C.PangoAttrList // return, full, converted
+	var cret  *C.PangoAttrList // return, full, converted, nullable
 
 	carg0 = (*C.PangoAttrList)(UnsafeAttrListToGlibNone(list))
 
@@ -12914,7 +12962,9 @@ func (list *AttrList) Copy() *AttrList {
 
 	var goret *AttrList
 
-	goret = UnsafeAttrListFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeAttrListFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -12965,7 +13015,7 @@ func (list *AttrList) Equal(otherList *AttrList) bool {
 // 
 // The function returns the following values:
 // 
-// 	- goret *AttrList 
+// 	- goret *AttrList (nullable) 
 //
 // Given a `PangoAttrList` and callback function, removes
 // any elements of @list for which @func returns %TRUE and
@@ -12974,7 +13024,7 @@ func (list *AttrList) Filter(fn AttrFilterFunc) *AttrList {
 	var carg0 *C.PangoAttrList      // in, none, converted
 	var carg1 C.PangoAttrFilterFunc // callback, scope: call, closure: carg2
 	var carg2 C.gpointer            // implicit
-	var cret  *C.PangoAttrList      // return, full, converted
+	var cret  *C.PangoAttrList      // return, full, converted, nullable
 
 	carg0 = (*C.PangoAttrList)(UnsafeAttrListToGlibNone(list))
 	carg1 = (*[0]byte)(C._gotk4_pango1_AttrFilterFunc)
@@ -12987,7 +13037,9 @@ func (list *AttrList) Filter(fn AttrFilterFunc) *AttrList {
 
 	var goret *AttrList
 
-	goret = UnsafeAttrListFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeAttrListFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -13594,14 +13646,14 @@ func UnsafeAttributeToGlibFull(a *Attribute) unsafe.Pointer {
 // AsColor wraps pango_attribute_as_color
 // The function returns the following values:
 // 
-// 	- goret *AttrColor 
+// 	- goret *AttrColor (nullable) 
 //
 // Returns the attribute cast to `PangoAttrColor`.
 // 
 // This is mainly useful for language bindings.
 func (attr *Attribute) AsColor() *AttrColor {
 	var carg0 *C.PangoAttribute // in, none, converted
-	var cret  *C.PangoAttrColor // return, none, converted
+	var cret  *C.PangoAttrColor // return, none, converted, nullable
 
 	carg0 = (*C.PangoAttribute)(UnsafeAttributeToGlibNone(attr))
 
@@ -13610,7 +13662,9 @@ func (attr *Attribute) AsColor() *AttrColor {
 
 	var goret *AttrColor
 
-	goret = UnsafeAttrColorFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeAttrColorFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -13618,14 +13672,14 @@ func (attr *Attribute) AsColor() *AttrColor {
 // AsFloat wraps pango_attribute_as_float
 // The function returns the following values:
 // 
-// 	- goret *AttrFloat 
+// 	- goret *AttrFloat (nullable) 
 //
 // Returns the attribute cast to `PangoAttrFloat`.
 // 
 // This is mainly useful for language bindings.
 func (attr *Attribute) AsFloat() *AttrFloat {
 	var carg0 *C.PangoAttribute // in, none, converted
-	var cret  *C.PangoAttrFloat // return, none, converted
+	var cret  *C.PangoAttrFloat // return, none, converted, nullable
 
 	carg0 = (*C.PangoAttribute)(UnsafeAttributeToGlibNone(attr))
 
@@ -13634,7 +13688,9 @@ func (attr *Attribute) AsFloat() *AttrFloat {
 
 	var goret *AttrFloat
 
-	goret = UnsafeAttrFloatFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeAttrFloatFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -13642,14 +13698,14 @@ func (attr *Attribute) AsFloat() *AttrFloat {
 // AsFontDesc wraps pango_attribute_as_font_desc
 // The function returns the following values:
 // 
-// 	- goret *AttrFontDesc 
+// 	- goret *AttrFontDesc (nullable) 
 //
 // Returns the attribute cast to `PangoAttrFontDesc`.
 // 
 // This is mainly useful for language bindings.
 func (attr *Attribute) AsFontDesc() *AttrFontDesc {
 	var carg0 *C.PangoAttribute    // in, none, converted
-	var cret  *C.PangoAttrFontDesc // return, none, converted
+	var cret  *C.PangoAttrFontDesc // return, none, converted, nullable
 
 	carg0 = (*C.PangoAttribute)(UnsafeAttributeToGlibNone(attr))
 
@@ -13658,7 +13714,9 @@ func (attr *Attribute) AsFontDesc() *AttrFontDesc {
 
 	var goret *AttrFontDesc
 
-	goret = UnsafeAttrFontDescFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeAttrFontDescFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -13666,14 +13724,14 @@ func (attr *Attribute) AsFontDesc() *AttrFontDesc {
 // AsFontFeatures wraps pango_attribute_as_font_features
 // The function returns the following values:
 // 
-// 	- goret *AttrFontFeatures 
+// 	- goret *AttrFontFeatures (nullable) 
 //
 // Returns the attribute cast to `PangoAttrFontFeatures`.
 // 
 // This is mainly useful for language bindings.
 func (attr *Attribute) AsFontFeatures() *AttrFontFeatures {
 	var carg0 *C.PangoAttribute        // in, none, converted
-	var cret  *C.PangoAttrFontFeatures // return, none, converted
+	var cret  *C.PangoAttrFontFeatures // return, none, converted, nullable
 
 	carg0 = (*C.PangoAttribute)(UnsafeAttributeToGlibNone(attr))
 
@@ -13682,7 +13740,9 @@ func (attr *Attribute) AsFontFeatures() *AttrFontFeatures {
 
 	var goret *AttrFontFeatures
 
-	goret = UnsafeAttrFontFeaturesFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeAttrFontFeaturesFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -13690,14 +13750,14 @@ func (attr *Attribute) AsFontFeatures() *AttrFontFeatures {
 // AsInt wraps pango_attribute_as_int
 // The function returns the following values:
 // 
-// 	- goret *AttrInt 
+// 	- goret *AttrInt (nullable) 
 //
 // Returns the attribute cast to `PangoAttrInt`.
 // 
 // This is mainly useful for language bindings.
 func (attr *Attribute) AsInt() *AttrInt {
 	var carg0 *C.PangoAttribute // in, none, converted
-	var cret  *C.PangoAttrInt   // return, none, converted
+	var cret  *C.PangoAttrInt   // return, none, converted, nullable
 
 	carg0 = (*C.PangoAttribute)(UnsafeAttributeToGlibNone(attr))
 
@@ -13706,7 +13766,9 @@ func (attr *Attribute) AsInt() *AttrInt {
 
 	var goret *AttrInt
 
-	goret = UnsafeAttrIntFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeAttrIntFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -13714,14 +13776,14 @@ func (attr *Attribute) AsInt() *AttrInt {
 // AsLanguage wraps pango_attribute_as_language
 // The function returns the following values:
 // 
-// 	- goret *AttrLanguage 
+// 	- goret *AttrLanguage (nullable) 
 //
 // Returns the attribute cast to `PangoAttrLanguage`.
 // 
 // This is mainly useful for language bindings.
 func (attr *Attribute) AsLanguage() *AttrLanguage {
 	var carg0 *C.PangoAttribute    // in, none, converted
-	var cret  *C.PangoAttrLanguage // return, none, converted
+	var cret  *C.PangoAttrLanguage // return, none, converted, nullable
 
 	carg0 = (*C.PangoAttribute)(UnsafeAttributeToGlibNone(attr))
 
@@ -13730,7 +13792,9 @@ func (attr *Attribute) AsLanguage() *AttrLanguage {
 
 	var goret *AttrLanguage
 
-	goret = UnsafeAttrLanguageFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeAttrLanguageFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -13738,14 +13802,14 @@ func (attr *Attribute) AsLanguage() *AttrLanguage {
 // AsShape wraps pango_attribute_as_shape
 // The function returns the following values:
 // 
-// 	- goret *AttrShape 
+// 	- goret *AttrShape (nullable) 
 //
 // Returns the attribute cast to `PangoAttrShape`.
 // 
 // This is mainly useful for language bindings.
 func (attr *Attribute) AsShape() *AttrShape {
 	var carg0 *C.PangoAttribute // in, none, converted
-	var cret  *C.PangoAttrShape // return, none, converted
+	var cret  *C.PangoAttrShape // return, none, converted, nullable
 
 	carg0 = (*C.PangoAttribute)(UnsafeAttributeToGlibNone(attr))
 
@@ -13754,7 +13818,9 @@ func (attr *Attribute) AsShape() *AttrShape {
 
 	var goret *AttrShape
 
-	goret = UnsafeAttrShapeFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeAttrShapeFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -13762,14 +13828,14 @@ func (attr *Attribute) AsShape() *AttrShape {
 // AsSize wraps pango_attribute_as_size
 // The function returns the following values:
 // 
-// 	- goret *AttrSize 
+// 	- goret *AttrSize (nullable) 
 //
 // Returns the attribute cast to `PangoAttrSize`.
 // 
 // This is mainly useful for language bindings.
 func (attr *Attribute) AsSize() *AttrSize {
 	var carg0 *C.PangoAttribute // in, none, converted
-	var cret  *C.PangoAttrSize  // return, none, converted
+	var cret  *C.PangoAttrSize  // return, none, converted, nullable
 
 	carg0 = (*C.PangoAttribute)(UnsafeAttributeToGlibNone(attr))
 
@@ -13778,7 +13844,9 @@ func (attr *Attribute) AsSize() *AttrSize {
 
 	var goret *AttrSize
 
-	goret = UnsafeAttrSizeFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeAttrSizeFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -13786,14 +13854,14 @@ func (attr *Attribute) AsSize() *AttrSize {
 // AsString wraps pango_attribute_as_string
 // The function returns the following values:
 // 
-// 	- goret *AttrString 
+// 	- goret *AttrString (nullable) 
 //
 // Returns the attribute cast to `PangoAttrString`.
 // 
 // This is mainly useful for language bindings.
 func (attr *Attribute) AsString() *AttrString {
 	var carg0 *C.PangoAttribute  // in, none, converted
-	var cret  *C.PangoAttrString // return, none, converted
+	var cret  *C.PangoAttrString // return, none, converted, nullable
 
 	carg0 = (*C.PangoAttribute)(UnsafeAttributeToGlibNone(attr))
 
@@ -13802,7 +13870,9 @@ func (attr *Attribute) AsString() *AttrString {
 
 	var goret *AttrString
 
-	goret = UnsafeAttrStringFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeAttrStringFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -13965,7 +14035,7 @@ func UnsafeColorToGlibFull(c *Color) unsafe.Pointer {
 // Copy wraps pango_color_copy
 // The function returns the following values:
 // 
-// 	- goret *Color 
+// 	- goret *Color (nullable) 
 //
 // Creates a copy of @src.
 // 
@@ -13975,7 +14045,7 @@ func UnsafeColorToGlibFull(c *Color) unsafe.Pointer {
 // in C).
 func (src *Color) Copy() *Color {
 	var carg0 *C.PangoColor // in, none, converted
-	var cret  *C.PangoColor // return, full, converted
+	var cret  *C.PangoColor // return, full, converted, nullable
 
 	carg0 = (*C.PangoColor)(UnsafeColorToGlibNone(src))
 
@@ -13984,7 +14054,9 @@ func (src *Color) Copy() *Color {
 
 	var goret *Color
 
-	goret = UnsafeColorFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeColorFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -14451,12 +14523,12 @@ func (desc *FontDescription) BetterMatch(oldMatch *FontDescription, newMatch *Fo
 // Copy wraps pango_font_description_copy
 // The function returns the following values:
 // 
-// 	- goret *FontDescription 
+// 	- goret *FontDescription (nullable) 
 //
 // Make a copy of a `PangoFontDescription`.
 func (desc *FontDescription) Copy() *FontDescription {
 	var carg0 *C.PangoFontDescription // in, none, converted
-	var cret  *C.PangoFontDescription // return, full, converted
+	var cret  *C.PangoFontDescription // return, full, converted, nullable
 
 	carg0 = (*C.PangoFontDescription)(UnsafeFontDescriptionToGlibNone(desc))
 
@@ -14465,7 +14537,9 @@ func (desc *FontDescription) Copy() *FontDescription {
 
 	var goret *FontDescription
 
-	goret = UnsafeFontDescriptionFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeFontDescriptionFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -14473,7 +14547,7 @@ func (desc *FontDescription) Copy() *FontDescription {
 // CopyStatic wraps pango_font_description_copy_static
 // The function returns the following values:
 // 
-// 	- goret *FontDescription 
+// 	- goret *FontDescription (nullable) 
 //
 // Make a copy of a `PangoFontDescription`, but don't duplicate
 // allocated fields.
@@ -14484,7 +14558,7 @@ func (desc *FontDescription) Copy() *FontDescription {
 // to be used when the copy is only needed temporarily.
 func (desc *FontDescription) CopyStatic() *FontDescription {
 	var carg0 *C.PangoFontDescription // in, none, converted
-	var cret  *C.PangoFontDescription // return, full, converted
+	var cret  *C.PangoFontDescription // return, full, converted, nullable
 
 	carg0 = (*C.PangoFontDescription)(UnsafeFontDescriptionToGlibNone(desc))
 
@@ -14493,7 +14567,9 @@ func (desc *FontDescription) CopyStatic() *FontDescription {
 
 	var goret *FontDescription
 
-	goret = UnsafeFontDescriptionFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeFontDescriptionFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -14538,14 +14614,14 @@ func (desc1 *FontDescription) Equal(desc2 *FontDescription) bool {
 // GetFamily wraps pango_font_description_get_family
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the family name field of a font description.
 // 
 // See [method@Pango.FontDescription.set_family].
 func (desc *FontDescription) GetFamily() string {
 	var carg0 *C.PangoFontDescription // in, none, converted
-	var cret  *C.char                 // return, none, string, casted *C.gchar
+	var cret  *C.char                 // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.PangoFontDescription)(UnsafeFontDescriptionToGlibNone(desc))
 
@@ -14554,7 +14630,9 @@ func (desc *FontDescription) GetFamily() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -14562,14 +14640,14 @@ func (desc *FontDescription) GetFamily() string {
 // GetFeatures wraps pango_font_description_get_features
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the features field of a font description.
 // 
 // See [method@Pango.FontDescription.set_features].
 func (desc *FontDescription) GetFeatures() string {
 	var carg0 *C.PangoFontDescription // in, none, converted
-	var cret  *C.char                 // return, none, string, casted *C.gchar
+	var cret  *C.char                 // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.PangoFontDescription)(UnsafeFontDescriptionToGlibNone(desc))
 
@@ -14578,7 +14656,9 @@ func (desc *FontDescription) GetFeatures() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -14756,14 +14836,14 @@ func (desc *FontDescription) GetVariant() Variant {
 // GetVariations wraps pango_font_description_get_variations
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the variations field of a font description.
 // 
 // See [method@Pango.FontDescription.set_variations].
 func (desc *FontDescription) GetVariations() string {
 	var carg0 *C.PangoFontDescription // in, none, converted
-	var cret  *C.char                 // return, none, string, casted *C.gchar
+	var cret  *C.char                 // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.PangoFontDescription)(UnsafeFontDescriptionToGlibNone(desc))
 
@@ -14772,7 +14852,9 @@ func (desc *FontDescription) GetVariations() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -15263,7 +15345,7 @@ func (desc *FontDescription) SetWeight(weight Weight) {
 // ToFilename wraps pango_font_description_to_filename
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Creates a filename representation of a font description.
 // 
@@ -15273,7 +15355,7 @@ func (desc *FontDescription) SetWeight(weight Weight) {
 // lower case only.
 func (desc *FontDescription) ToFilename() string {
 	var carg0 *C.PangoFontDescription // in, none, converted
-	var cret  *C.char                 // return, full, string, casted *C.gchar
+	var cret  *C.char                 // return, full, string, casted *C.gchar, nullable
 
 	carg0 = (*C.PangoFontDescription)(UnsafeFontDescriptionToGlibNone(desc))
 
@@ -15282,8 +15364,10 @@ func (desc *FontDescription) ToFilename() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+		defer C.free(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -16246,12 +16330,12 @@ func (glyphItem *GlyphItem) ApplyAttrs(text string, list *AttrList) []*GlyphItem
 // Copy wraps pango_glyph_item_copy
 // The function returns the following values:
 // 
-// 	- goret *GlyphItem 
+// 	- goret *GlyphItem (nullable) 
 //
 // Make a deep copy of an existing `PangoGlyphItem` structure.
 func (orig *GlyphItem) Copy() *GlyphItem {
 	var carg0 *C.PangoGlyphItem // in, none, converted
-	var cret  *C.PangoGlyphItem // return, full, converted
+	var cret  *C.PangoGlyphItem // return, full, converted, nullable
 
 	carg0 = (*C.PangoGlyphItem)(UnsafeGlyphItemToGlibNone(orig))
 
@@ -16260,7 +16344,9 @@ func (orig *GlyphItem) Copy() *GlyphItem {
 
 	var goret *GlyphItem
 
-	goret = UnsafeGlyphItemFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeGlyphItemFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -16275,7 +16361,7 @@ func (orig *GlyphItem) Copy() *GlyphItem {
 // 
 // The function returns the following values:
 // 
-// 	- goret *GlyphItem 
+// 	- goret *GlyphItem (nullable) 
 //
 // Modifies @orig to cover only the text after @split_index, and
 // returns a new item that covers the text before @split_index that
@@ -16292,7 +16378,7 @@ func (orig *GlyphItem) Split(text string, splitIndex int) *GlyphItem {
 	var carg0 *C.PangoGlyphItem // in, none, converted
 	var carg1 *C.char           // in, none, string, casted *C.gchar
 	var carg2 C.int             // in, none, casted, casted C.gint
-	var cret  *C.PangoGlyphItem // return, full, converted
+	var cret  *C.PangoGlyphItem // return, full, converted, nullable
 
 	carg0 = (*C.PangoGlyphItem)(UnsafeGlyphItemToGlibNone(orig))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(text)))
@@ -16306,7 +16392,9 @@ func (orig *GlyphItem) Split(text string, splitIndex int) *GlyphItem {
 
 	var goret *GlyphItem
 
-	goret = UnsafeGlyphItemFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeGlyphItemFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -16427,12 +16515,12 @@ func UnsafeGlyphItemIterToGlibFull(g *GlyphItemIter) unsafe.Pointer {
 // Copy wraps pango_glyph_item_iter_copy
 // The function returns the following values:
 // 
-// 	- goret *GlyphItemIter 
+// 	- goret *GlyphItemIter (nullable) 
 //
 // Make a shallow copy of an existing `PangoGlyphItemIter` structure.
 func (orig *GlyphItemIter) Copy() *GlyphItemIter {
 	var carg0 *C.PangoGlyphItemIter // in, none, converted
-	var cret  *C.PangoGlyphItemIter // return, full, converted
+	var cret  *C.PangoGlyphItemIter // return, full, converted, nullable
 
 	carg0 = (*C.PangoGlyphItemIter)(UnsafeGlyphItemIterToGlibNone(orig))
 
@@ -16441,7 +16529,9 @@ func (orig *GlyphItemIter) Copy() *GlyphItemIter {
 
 	var goret *GlyphItemIter
 
-	goret = UnsafeGlyphItemIterFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeGlyphItemIterFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -16676,12 +16766,12 @@ func NewGlyphString() *GlyphString {
 // Copy wraps pango_glyph_string_copy
 // The function returns the following values:
 // 
-// 	- goret *GlyphString 
+// 	- goret *GlyphString (nullable) 
 //
 // Copy a glyph string and associated storage.
 func (str *GlyphString) Copy() *GlyphString {
 	var carg0 *C.PangoGlyphString // in, none, converted
-	var cret  *C.PangoGlyphString // return, full, converted
+	var cret  *C.PangoGlyphString // return, full, converted, nullable
 
 	carg0 = (*C.PangoGlyphString)(UnsafeGlyphStringToGlibNone(str))
 
@@ -16690,7 +16780,9 @@ func (str *GlyphString) Copy() *GlyphString {
 
 	var goret *GlyphString
 
-	goret = UnsafeGlyphStringFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeGlyphStringFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -17212,12 +17304,12 @@ func (item *Item) ApplyAttrs(iter *AttrIterator) {
 // Copy wraps pango_item_copy
 // The function returns the following values:
 // 
-// 	- goret *Item 
+// 	- goret *Item (nullable) 
 //
 // Copy an existing `PangoItem` structure.
 func (item *Item) Copy() *Item {
 	var carg0 *C.PangoItem // in, none, converted
-	var cret  *C.PangoItem // return, full, converted
+	var cret  *C.PangoItem // return, full, converted, nullable
 
 	carg0 = (*C.PangoItem)(UnsafeItemToGlibNone(item))
 
@@ -17226,7 +17318,9 @@ func (item *Item) Copy() *Item {
 
 	var goret *Item
 
-	goret = UnsafeItemFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeItemFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -17390,7 +17484,7 @@ func UnsafeLanguageToGlibFull(l *Language) unsafe.Pointer {
 // 
 // The function returns the following values:
 // 
-// 	- goret *Language 
+// 	- goret *Language (nullable) 
 //
 // Convert a language tag to a `PangoLanguage`.
 // 
@@ -17406,7 +17500,7 @@ func UnsafeLanguageToGlibFull(l *Language) unsafe.Pointer {
 // `PangoLanguage` for the current locale of the process.
 func LanguageFromString(language string) *Language {
 	var carg1 *C.char          // in, none, string, nullable-string
-	var cret  *C.PangoLanguage // return, none, converted
+	var cret  *C.PangoLanguage // return, none, converted, nullable
 
 	if language != "" {
 		carg1 = (*C.char)(unsafe.Pointer(C.CString(language)))
@@ -17418,7 +17512,9 @@ func LanguageFromString(language string) *Language {
 
 	var goret *Language
 
-	goret = UnsafeLanguageFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeLanguageFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -17474,7 +17570,7 @@ func LanguageGetDefault() *Language {
 // LanguageGetPreferred wraps pango_language_get_preferred
 // The function returns the following values:
 // 
-// 	- goret []*Language 
+// 	- goret []*Language (nullable) 
 //
 // Returns the list of languages that the user prefers.
 // 
@@ -17488,7 +17584,7 @@ func LanguageGetDefault() *Language {
 // you should first try the default language, followed by the
 // languages returned by this function.
 func LanguageGetPreferred() []*Language {
-	var cret **C.PangoLanguage // return, transfer: none, C Pointers: 2, Name: array[Language], scope: , array (inner: *typesystem.Record, zero-terminated)
+	var cret **C.PangoLanguage // return, transfer: none, C Pointers: 2, Name: array[Language], scope: , nullable, array (inner: *typesystem.Record, zero-terminated)
 
 	cret = C.pango_language_get_preferred()
 
@@ -17545,7 +17641,7 @@ func (language *Language) GetSampleString() string {
 // The function returns the following values:
 // 
 // 	- numScripts int: location to return number of scripts 
-// 	- goret []Script 
+// 	- goret []Script (nullable) 
 //
 // Determines the scripts used to to write @language.
 // 
@@ -17573,7 +17669,7 @@ func (language *Language) GetSampleString() string {
 func (language *Language) GetScripts() (int, []Script) {
 	var carg0 *C.PangoLanguage // in, none, converted
 	var carg1 C.int            // out, full, casted, casted C.gint
-	var cret  *C.PangoScript   // return, transfer: none, C Pointers: 1, Name: array[Script], scope: , array (inner: *typesystem.Enum)
+	var cret  *C.PangoScript   // return, transfer: none, C Pointers: 1, Name: array[Script], scope: , nullable, array (inner: *typesystem.Enum)
 
 	carg0 = (*C.PangoLanguage)(UnsafeLanguageToGlibNone(language))
 
@@ -17866,12 +17962,12 @@ func (iter *LayoutIter) AtLastLine() bool {
 // Copy wraps pango_layout_iter_copy
 // The function returns the following values:
 // 
-// 	- goret *LayoutIter 
+// 	- goret *LayoutIter (nullable) 
 //
 // Copies a `PangoLayoutIter`.
 func (iter *LayoutIter) Copy() *LayoutIter {
 	var carg0 *C.PangoLayoutIter // in, none, converted
-	var cret  *C.PangoLayoutIter // return, full, converted
+	var cret  *C.PangoLayoutIter // return, full, converted, nullable
 
 	carg0 = (*C.PangoLayoutIter)(UnsafeLayoutIterToGlibNone(iter))
 
@@ -17880,7 +17976,9 @@ func (iter *LayoutIter) Copy() *LayoutIter {
 
 	var goret *LayoutIter
 
-	goret = UnsafeLayoutIterFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeLayoutIterFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -18002,12 +18100,12 @@ func (iter *LayoutIter) GetIndex() int {
 // GetLayout wraps pango_layout_iter_get_layout
 // The function returns the following values:
 // 
-// 	- goret Layout 
+// 	- goret Layout (nullable) 
 //
 // Gets the layout associated with a `PangoLayoutIter`.
 func (iter *LayoutIter) GetLayout() Layout {
 	var carg0 *C.PangoLayoutIter // in, none, converted
-	var cret  *C.PangoLayout     // return, none, converted
+	var cret  *C.PangoLayout     // return, none, converted, nullable
 
 	carg0 = (*C.PangoLayoutIter)(UnsafeLayoutIterToGlibNone(iter))
 
@@ -18016,7 +18114,9 @@ func (iter *LayoutIter) GetLayout() Layout {
 
 	var goret Layout
 
-	goret = UnsafeLayoutFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeLayoutFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -18054,7 +18154,7 @@ func (iter *LayoutIter) GetLayoutExtents() (Rectangle, Rectangle) {
 // GetLine wraps pango_layout_iter_get_line
 // The function returns the following values:
 // 
-// 	- goret *LayoutLine 
+// 	- goret *LayoutLine (nullable) 
 //
 // Gets the current line.
 // 
@@ -18063,7 +18163,7 @@ func (iter *LayoutIter) GetLayoutExtents() (Rectangle, Rectangle) {
 // glyph widths, etc.).
 func (iter *LayoutIter) GetLine() *LayoutLine {
 	var carg0 *C.PangoLayoutIter // in, none, converted
-	var cret  *C.PangoLayoutLine // return, none, converted
+	var cret  *C.PangoLayoutLine // return, none, converted, nullable
 
 	carg0 = (*C.PangoLayoutIter)(UnsafeLayoutIterToGlibNone(iter))
 
@@ -18072,7 +18172,9 @@ func (iter *LayoutIter) GetLine() *LayoutLine {
 
 	var goret *LayoutLine
 
-	goret = UnsafeLayoutLineFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeLayoutLineFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -18115,7 +18217,7 @@ func (iter *LayoutIter) GetLineExtents() (Rectangle, Rectangle) {
 // GetLineReadonly wraps pango_layout_iter_get_line_readonly
 // The function returns the following values:
 // 
-// 	- goret *LayoutLine 
+// 	- goret *LayoutLine (nullable) 
 //
 // Gets the current line for read-only access.
 // 
@@ -18124,7 +18226,7 @@ func (iter *LayoutIter) GetLineExtents() (Rectangle, Rectangle) {
 // (glyphs, glyph widths, etc.).
 func (iter *LayoutIter) GetLineReadonly() *LayoutLine {
 	var carg0 *C.PangoLayoutIter // in, none, converted
-	var cret  *C.PangoLayoutLine // return, none, converted
+	var cret  *C.PangoLayoutLine // return, none, converted, nullable
 
 	carg0 = (*C.PangoLayoutIter)(UnsafeLayoutIterToGlibNone(iter))
 
@@ -18133,7 +18235,9 @@ func (iter *LayoutIter) GetLineReadonly() *LayoutLine {
 
 	var goret *LayoutLine
 
-	goret = UnsafeLayoutLineFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeLayoutLineFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -18177,7 +18281,7 @@ func (iter *LayoutIter) GetLineYrange() (int, int) {
 // GetRun wraps pango_layout_iter_get_run
 // The function returns the following values:
 // 
-// 	- goret *LayoutRun 
+// 	- goret *LayoutRun (nullable) 
 //
 // Gets the current run.
 // 
@@ -18190,7 +18294,7 @@ func (iter *LayoutIter) GetLineYrange() (int, int) {
 // plan to modify the contents of the run (glyphs, glyph widths, etc.).
 func (iter *LayoutIter) GetRun() *LayoutRun {
 	var carg0 *C.PangoLayoutIter // in, none, converted
-	var cret  *C.PangoLayoutRun  // return, transfer: none, C Pointers: 1, Name: LayoutRun, scope: 
+	var cret  *C.PangoLayoutRun  // return, transfer: none, C Pointers: 1, Name: LayoutRun, scope: , nullable, nullable
 
 	carg0 = (*C.PangoLayoutIter)(UnsafeLayoutIterToGlibNone(iter))
 
@@ -18199,9 +18303,11 @@ func (iter *LayoutIter) GetRun() *LayoutRun {
 
 	var goret *LayoutRun
 
-	_ = goret
-	_ = cret
-	panic("unimplemented conversion of *LayoutRun (PangoLayoutRun*)")
+	if cret != nil {
+		_ = goret
+		_ = cret
+		panic("unimplemented conversion of *LayoutRun (PangoLayoutRun*)")
+	}
 
 	return goret
 }
@@ -18269,7 +18375,7 @@ func (iter *LayoutIter) GetRunExtents() (Rectangle, Rectangle) {
 // GetRunReadonly wraps pango_layout_iter_get_run_readonly
 // The function returns the following values:
 // 
-// 	- goret *LayoutRun 
+// 	- goret *LayoutRun (nullable) 
 //
 // Gets the current run for read-only access.
 // 
@@ -18283,7 +18389,7 @@ func (iter *LayoutIter) GetRunExtents() (Rectangle, Rectangle) {
 // glyph widths, etc.).
 func (iter *LayoutIter) GetRunReadonly() *LayoutRun {
 	var carg0 *C.PangoLayoutIter // in, none, converted
-	var cret  *C.PangoLayoutRun  // return, transfer: none, C Pointers: 1, Name: LayoutRun, scope: 
+	var cret  *C.PangoLayoutRun  // return, transfer: none, C Pointers: 1, Name: LayoutRun, scope: , nullable, nullable
 
 	carg0 = (*C.PangoLayoutIter)(UnsafeLayoutIterToGlibNone(iter))
 
@@ -18292,9 +18398,11 @@ func (iter *LayoutIter) GetRunReadonly() *LayoutRun {
 
 	var goret *LayoutRun
 
-	_ = goret
-	_ = cret
-	panic("unimplemented conversion of *LayoutRun (PangoLayoutRun*)")
+	if cret != nil {
+		_ = goret
+		_ = cret
+		panic("unimplemented conversion of *LayoutRun (PangoLayoutRun*)")
+	}
 
 	return goret
 }
@@ -18940,12 +19048,12 @@ func (matrix *Matrix) Concat(newMatrix *Matrix) {
 // Copy wraps pango_matrix_copy
 // The function returns the following values:
 // 
-// 	- goret *Matrix 
+// 	- goret *Matrix (nullable) 
 //
 // Copies a `PangoMatrix`.
 func (matrix *Matrix) Copy() *Matrix {
 	var carg0 *C.PangoMatrix // in, none, converted
-	var cret  *C.PangoMatrix // return, full, converted
+	var cret  *C.PangoMatrix // return, full, converted, nullable
 
 	carg0 = (*C.PangoMatrix)(UnsafeMatrixToGlibNone(matrix))
 
@@ -18954,7 +19062,9 @@ func (matrix *Matrix) Copy() *Matrix {
 
 	var goret *Matrix
 
-	goret = UnsafeMatrixFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeMatrixFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -19562,7 +19672,7 @@ func NewTabArray(initialSize int, positionsInPixels bool) *TabArray {
 // 
 // The function returns the following values:
 // 
-// 	- goret *TabArray 
+// 	- goret *TabArray (nullable) 
 //
 // Deserializes a `PangoTabArray` from a string.
 // 
@@ -19570,7 +19680,7 @@ func NewTabArray(initialSize int, positionsInPixels bool) *TabArray {
 // See that functions for details about the format.
 func TabArrayFromString(text string) *TabArray {
 	var carg1 *C.char          // in, none, string, casted *C.gchar
-	var cret  *C.PangoTabArray // return, full, converted
+	var cret  *C.PangoTabArray // return, full, converted, nullable
 
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(text)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -19580,7 +19690,9 @@ func TabArrayFromString(text string) *TabArray {
 
 	var goret *TabArray
 
-	goret = UnsafeTabArrayFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeTabArrayFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }

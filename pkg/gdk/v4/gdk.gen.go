@@ -7365,7 +7365,7 @@ func ContentSerializeFinish(result gio.AsyncResult) (bool, error) {
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Canonicalizes the given mime type and interns the result.
 // 
@@ -7373,7 +7373,7 @@ func ContentSerializeFinish(result gio.AsyncResult) (bool, error) {
 // See RFC 2048 for the syntax if mime types.
 func InternMIMEType(str string) string {
 	var carg1 *C.char // in, none, string, casted *C.gchar
-	var cret  *C.char // return, none, string, casted *C.gchar
+	var cret  *C.char // return, none, string, casted *C.gchar, nullable
 
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(str)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -7383,7 +7383,9 @@ func InternMIMEType(str string) string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -7519,7 +7521,7 @@ func KeyvalIsUpper(keyval uint) bool {
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Converts a key value into a symbolic name.
 // 
@@ -7528,7 +7530,7 @@ func KeyvalIsUpper(keyval uint) bool {
 // but without the leading “GDK_KEY_”.
 func KeyvalName(keyval uint) string {
 	var carg1 C.guint // in, none, casted
-	var cret  *C.char // return, none, string, casted *C.gchar
+	var cret  *C.char // return, none, string, casted *C.gchar, nullable
 
 	carg1 = C.guint(keyval)
 
@@ -7537,7 +7539,9 @@ func KeyvalName(keyval uint) string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -8724,7 +8728,7 @@ type Popup interface {
 	// GetParent wraps gdk_popup_get_parent
 	// The function returns the following values:
 	// 
-	// 	- goret Surface 
+	// 	- goret Surface (nullable) 
 	//
 	// Returns the parent surface of a popup.
 	GetParent() Surface
@@ -8857,12 +8861,12 @@ func (popup *PopupInstance) GetAutohide() bool {
 // GetParent wraps gdk_popup_get_parent
 // The function returns the following values:
 // 
-// 	- goret Surface 
+// 	- goret Surface (nullable) 
 //
 // Returns the parent surface of a popup.
 func (popup *PopupInstance) GetParent() Surface {
 	var carg0 *C.GdkPopup   // in, none, converted
-	var cret  *C.GdkSurface // return, none, converted
+	var cret  *C.GdkSurface // return, none, converted, nullable
 
 	carg0 = (*C.GdkPopup)(UnsafePopupToGlibNone(popup))
 
@@ -8871,7 +8875,9 @@ func (popup *PopupInstance) GetParent() Surface {
 
 	var goret Surface
 
-	goret = UnsafeSurfaceFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeSurfaceFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -10057,7 +10063,7 @@ type CicpParams interface {
 	// BuildColorState wraps gdk_cicp_params_build_color_state
 	// The function returns the following values:
 	// 
-	// 	- goret *ColorState 
+	// 	- goret *ColorState (nullable) 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Creates a new `GdkColorState` object for the cicp parameters in @self.
@@ -10188,7 +10194,7 @@ func NewCicpParams() CicpParams {
 // BuildColorState wraps gdk_cicp_params_build_color_state
 // The function returns the following values:
 // 
-// 	- goret *ColorState 
+// 	- goret *ColorState (nullable) 
 // 	- _goerr error (nullable): an error 
 //
 // Creates a new `GdkColorState` object for the cicp parameters in @self.
@@ -10198,7 +10204,7 @@ func NewCicpParams() CicpParams {
 // with an error message that can be presented to the user.
 func (self *CicpParamsInstance) BuildColorState() (*ColorState, error) {
 	var carg0 *C.GdkCicpParams // in, none, converted
-	var cret  *C.GdkColorState // return, full, converted
+	var cret  *C.GdkColorState // return, full, converted, nullable
 	var _cerr *C.GError        // out, full, converted, nullable
 
 	carg0 = (*C.GdkCicpParams)(UnsafeCicpParamsToGlibNone(self))
@@ -10209,7 +10215,9 @@ func (self *CicpParamsInstance) BuildColorState() (*ColorState, error) {
 	var goret  *ColorState
 	var _goerr error
 
-	goret = UnsafeColorStateFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeColorStateFromGlibFull(unsafe.Pointer(cret))
+	}
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -10417,7 +10425,7 @@ type Clipboard interface {
 	// GetContent wraps gdk_clipboard_get_content
 	// The function returns the following values:
 	// 
-	// 	- goret ContentProvider 
+	// 	- goret ContentProvider (nullable) 
 	//
 	// Returns the `GdkContentProvider` currently set on @clipboard.
 	// 
@@ -10476,7 +10484,7 @@ type Clipboard interface {
 	// 
 	// 	- outMimeType string: location to store
 	//   the chosen mime type 
-	// 	- goret gio.InputStream 
+	// 	- goret gio.InputStream (nullable) 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Finishes an asynchronous clipboard read.
@@ -10504,7 +10512,7 @@ type Clipboard interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Finishes an asynchronous clipboard read.
@@ -10532,7 +10540,7 @@ type Clipboard interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret Texture 
+	// 	- goret Texture (nullable) 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Finishes an asynchronous clipboard read.
@@ -10682,7 +10690,7 @@ func UnsafeClipboardToGlibFull(c Clipboard) unsafe.Pointer {
 // GetContent wraps gdk_clipboard_get_content
 // The function returns the following values:
 // 
-// 	- goret ContentProvider 
+// 	- goret ContentProvider (nullable) 
 //
 // Returns the `GdkContentProvider` currently set on @clipboard.
 // 
@@ -10690,7 +10698,7 @@ func UnsafeClipboardToGlibFull(c Clipboard) unsafe.Pointer {
 // current process, %NULL will be returned.
 func (clipboard *ClipboardInstance) GetContent() ContentProvider {
 	var carg0 *C.GdkClipboard       // in, none, converted
-	var cret  *C.GdkContentProvider // return, none, converted
+	var cret  *C.GdkContentProvider // return, none, converted, nullable
 
 	carg0 = (*C.GdkClipboard)(UnsafeClipboardToGlibNone(clipboard))
 
@@ -10699,7 +10707,9 @@ func (clipboard *ClipboardInstance) GetContent() ContentProvider {
 
 	var goret ContentProvider
 
-	goret = UnsafeContentProviderFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeContentProviderFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -10831,7 +10841,7 @@ func (clipboard *ClipboardInstance) ReadAsync(cancellable context.Context, mimeT
 // 
 // 	- outMimeType string: location to store
 //   the chosen mime type 
-// 	- goret gio.InputStream 
+// 	- goret gio.InputStream (nullable) 
 // 	- _goerr error (nullable): an error 
 //
 // Finishes an asynchronous clipboard read.
@@ -10841,7 +10851,7 @@ func (clipboard *ClipboardInstance) ReadFinish(result gio.AsyncResult) (string, 
 	var carg0 *C.GdkClipboard // in, none, converted
 	var carg1 *C.GAsyncResult // in, none, converted
 	var carg2 *C.char         // out, none, string, casted *C.gchar
-	var cret  *C.GInputStream // return, full, converted
+	var cret  *C.GInputStream // return, full, converted, nullable
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	carg0 = (*C.GdkClipboard)(UnsafeClipboardToGlibNone(clipboard))
@@ -10856,7 +10866,9 @@ func (clipboard *ClipboardInstance) ReadFinish(result gio.AsyncResult) (string, 
 	var _goerr      error
 
 	outMimeType = C.GoString((*C.char)(unsafe.Pointer(carg2)))
-	goret = gio.UnsafeInputStreamFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gio.UnsafeInputStreamFromGlibFull(unsafe.Pointer(cret))
+	}
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -10905,7 +10917,7 @@ func (clipboard *ClipboardInstance) ReadTextAsync(cancellable context.Context, c
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 // 	- _goerr error (nullable): an error 
 //
 // Finishes an asynchronous clipboard read.
@@ -10914,7 +10926,7 @@ func (clipboard *ClipboardInstance) ReadTextAsync(cancellable context.Context, c
 func (clipboard *ClipboardInstance) ReadTextFinish(result gio.AsyncResult) (string, error) {
 	var carg0 *C.GdkClipboard // in, none, converted
 	var carg1 *C.GAsyncResult // in, none, converted
-	var cret  *C.char         // return, full, string, casted *C.gchar
+	var cret  *C.char         // return, full, string, casted *C.gchar, nullable
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	carg0 = (*C.GdkClipboard)(UnsafeClipboardToGlibNone(clipboard))
@@ -10927,8 +10939,10 @@ func (clipboard *ClipboardInstance) ReadTextFinish(result gio.AsyncResult) (stri
 	var goret  string
 	var _goerr error
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+		defer C.free(unsafe.Pointer(cret))
+	}
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -10977,7 +10991,7 @@ func (clipboard *ClipboardInstance) ReadTextureAsync(cancellable context.Context
 // 
 // The function returns the following values:
 // 
-// 	- goret Texture 
+// 	- goret Texture (nullable) 
 // 	- _goerr error (nullable): an error 
 //
 // Finishes an asynchronous clipboard read.
@@ -10986,7 +11000,7 @@ func (clipboard *ClipboardInstance) ReadTextureAsync(cancellable context.Context
 func (clipboard *ClipboardInstance) ReadTextureFinish(result gio.AsyncResult) (Texture, error) {
 	var carg0 *C.GdkClipboard // in, none, converted
 	var carg1 *C.GAsyncResult // in, none, converted
-	var cret  *C.GdkTexture   // return, full, converted
+	var cret  *C.GdkTexture   // return, full, converted, nullable
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	carg0 = (*C.GdkClipboard)(UnsafeClipboardToGlibNone(clipboard))
@@ -10999,7 +11013,9 @@ func (clipboard *ClipboardInstance) ReadTextureFinish(result gio.AsyncResult) (T
 	var goret  Texture
 	var _goerr error
 
-	goret = UnsafeTextureFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeTextureFromGlibFull(unsafe.Pointer(cret))
+	}
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -11274,7 +11290,7 @@ type ContentDeserializer interface {
 	// GetCancellable wraps gdk_content_deserializer_get_cancellable
 	// The function returns the following values:
 	// 
-	// 	- goret context.Context 
+	// 	- goret context.Context (nullable) 
 	//
 	// Gets the cancellable for the current operation.
 	// 
@@ -11368,14 +11384,14 @@ func UnsafeContentDeserializerToGlibFull(c ContentDeserializer) unsafe.Pointer {
 // GetCancellable wraps gdk_content_deserializer_get_cancellable
 // The function returns the following values:
 // 
-// 	- goret context.Context 
+// 	- goret context.Context (nullable) 
 //
 // Gets the cancellable for the current operation.
 // 
 // This is the `GCancellable` that was passed to [func@Gdk.content_deserialize_async].
 func (deserializer *ContentDeserializerInstance) GetCancellable() context.Context {
 	var carg0 *C.GdkContentDeserializer // in, none, converted
-	var cret  *C.GCancellable           // return, none, converted
+	var cret  *C.GCancellable           // return, none, converted, nullable
 
 	carg0 = (*C.GdkContentDeserializer)(UnsafeContentDeserializerToGlibNone(deserializer))
 
@@ -11384,7 +11400,9 @@ func (deserializer *ContentDeserializerInstance) GetCancellable() context.Contex
 
 	var goret context.Context
 
-	goret = gio.NewCancellableContext(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gio.NewCancellableContext(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -11985,7 +12003,7 @@ type ContentSerializer interface {
 	// GetCancellable wraps gdk_content_serializer_get_cancellable
 	// The function returns the following values:
 	// 
-	// 	- goret context.Context 
+	// 	- goret context.Context (nullable) 
 	//
 	// Gets the cancellable for the current operation.
 	// 
@@ -12079,14 +12097,14 @@ func UnsafeContentSerializerToGlibFull(c ContentSerializer) unsafe.Pointer {
 // GetCancellable wraps gdk_content_serializer_get_cancellable
 // The function returns the following values:
 // 
-// 	- goret context.Context 
+// 	- goret context.Context (nullable) 
 //
 // Gets the cancellable for the current operation.
 // 
 // This is the `GCancellable` that was passed to [func@content_serialize_async].
 func (serializer *ContentSerializerInstance) GetCancellable() context.Context {
 	var carg0 *C.GdkContentSerializer // in, none, converted
-	var cret  *C.GCancellable         // return, none, converted
+	var cret  *C.GCancellable         // return, none, converted, nullable
 
 	carg0 = (*C.GdkContentSerializer)(UnsafeContentSerializerToGlibNone(serializer))
 
@@ -12095,7 +12113,9 @@ func (serializer *ContentSerializerInstance) GetCancellable() context.Context {
 
 	var goret context.Context
 
-	goret = gio.NewCancellableContext(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gio.NewCancellableContext(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -12276,7 +12296,7 @@ type Cursor interface {
 	// GetFallback wraps gdk_cursor_get_fallback
 	// The function returns the following values:
 	// 
-	// 	- goret Cursor 
+	// 	- goret Cursor (nullable) 
 	//
 	// Returns the fallback for this @cursor.
 	// 
@@ -12315,7 +12335,7 @@ type Cursor interface {
 	// GetName wraps gdk_cursor_get_name
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Returns the name of the cursor.
 	// 
@@ -12324,7 +12344,7 @@ type Cursor interface {
 	// GetTexture wraps gdk_cursor_get_texture
 	// The function returns the following values:
 	// 
-	// 	- goret Texture 
+	// 	- goret Texture (nullable) 
 	//
 	// Returns the texture for the cursor.
 	// 
@@ -12376,7 +12396,7 @@ func UnsafeCursorToGlibFull(c Cursor) unsafe.Pointer {
 // 
 // The function returns the following values:
 // 
-// 	- goret Cursor 
+// 	- goret Cursor (nullable) 
 //
 // Creates a new cursor by looking up @name in the current cursor
 // theme.
@@ -12398,7 +12418,7 @@ func UnsafeCursorToGlibFull(c Cursor) unsafe.Pointer {
 func NewCursorFromName(name string, fallback Cursor) Cursor {
 	var carg1 *C.char      // in, none, string, casted *C.gchar
 	var carg2 *C.GdkCursor // in, none, converted, nullable
-	var cret  *C.GdkCursor // return, full, converted
+	var cret  *C.GdkCursor // return, full, converted, nullable
 
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -12412,7 +12432,9 @@ func NewCursorFromName(name string, fallback Cursor) Cursor {
 
 	var goret Cursor
 
-	goret = UnsafeCursorFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeCursorFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -12462,7 +12484,7 @@ func NewCursorFromTexture(texture Texture, hotspotX int, hotspotY int, fallback 
 // GetFallback wraps gdk_cursor_get_fallback
 // The function returns the following values:
 // 
-// 	- goret Cursor 
+// 	- goret Cursor (nullable) 
 //
 // Returns the fallback for this @cursor.
 // 
@@ -12473,7 +12495,7 @@ func NewCursorFromTexture(texture Texture, hotspotX int, hotspotY int, fallback 
 // it is used on does not support textured cursors.
 func (cursor *CursorInstance) GetFallback() Cursor {
 	var carg0 *C.GdkCursor // in, none, converted
-	var cret  *C.GdkCursor // return, none, converted
+	var cret  *C.GdkCursor // return, none, converted, nullable
 
 	carg0 = (*C.GdkCursor)(UnsafeCursorToGlibNone(cursor))
 
@@ -12482,7 +12504,9 @@ func (cursor *CursorInstance) GetFallback() Cursor {
 
 	var goret Cursor
 
-	goret = UnsafeCursorFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeCursorFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -12546,14 +12570,14 @@ func (cursor *CursorInstance) GetHotspotY() int {
 // GetName wraps gdk_cursor_get_name
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Returns the name of the cursor.
 // 
 // If the cursor is not a named cursor, %NULL will be returned.
 func (cursor *CursorInstance) GetName() string {
 	var carg0 *C.GdkCursor // in, none, converted
-	var cret  *C.char      // return, none, string, casted *C.gchar
+	var cret  *C.char      // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GdkCursor)(UnsafeCursorToGlibNone(cursor))
 
@@ -12562,7 +12586,9 @@ func (cursor *CursorInstance) GetName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -12570,14 +12596,14 @@ func (cursor *CursorInstance) GetName() string {
 // GetTexture wraps gdk_cursor_get_texture
 // The function returns the following values:
 // 
-// 	- goret Texture 
+// 	- goret Texture (nullable) 
 //
 // Returns the texture for the cursor.
 // 
 // If the cursor is a named cursor, %NULL will be returned.
 func (cursor *CursorInstance) GetTexture() Texture {
 	var carg0 *C.GdkCursor  // in, none, converted
-	var cret  *C.GdkTexture // return, none, converted
+	var cret  *C.GdkTexture // return, none, converted, nullable
 
 	carg0 = (*C.GdkCursor)(UnsafeCursorToGlibNone(cursor))
 
@@ -12586,7 +12612,9 @@ func (cursor *CursorInstance) GetTexture() Texture {
 
 	var goret Texture
 
-	goret = UnsafeTextureFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeTextureFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -12622,7 +12650,7 @@ type Device interface {
 	// GetDeviceTool wraps gdk_device_get_device_tool
 	// The function returns the following values:
 	// 
-	// 	- goret DeviceTool 
+	// 	- goret DeviceTool (nullable) 
 	//
 	// Retrieves the current tool for @device.
 	GetDeviceTool() DeviceTool
@@ -12690,7 +12718,7 @@ type Device interface {
 	// GetProductID wraps gdk_device_get_product_id
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Returns the product ID of this device.
 	// 
@@ -12727,7 +12755,7 @@ type Device interface {
 	//   of the device location relative to the surface origin 
 	// 	- winY float64: return location for the Y coordinate
 	//   of the device location relative to the surface origin 
-	// 	- goret Surface 
+	// 	- goret Surface (nullable) 
 	//
 	// Obtains the surface underneath @device, returning the location of the
 	// device in @win_x and @win_y.
@@ -12750,7 +12778,7 @@ type Device interface {
 	// GetVendorID wraps gdk_device_get_vendor_id
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Returns the vendor ID of this device.
 	// 
@@ -12869,12 +12897,12 @@ func (device *DeviceInstance) GetCapsLockState() bool {
 // GetDeviceTool wraps gdk_device_get_device_tool
 // The function returns the following values:
 // 
-// 	- goret DeviceTool 
+// 	- goret DeviceTool (nullable) 
 //
 // Retrieves the current tool for @device.
 func (device *DeviceInstance) GetDeviceTool() DeviceTool {
 	var carg0 *C.GdkDevice     // in, none, converted
-	var cret  *C.GdkDeviceTool // return, none, converted
+	var cret  *C.GdkDeviceTool // return, none, converted, nullable
 
 	carg0 = (*C.GdkDevice)(UnsafeDeviceToGlibNone(device))
 
@@ -12883,7 +12911,9 @@ func (device *DeviceInstance) GetDeviceTool() DeviceTool {
 
 	var goret DeviceTool
 
-	goret = UnsafeDeviceToolFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeDeviceToolFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -13061,7 +13091,7 @@ func (device *DeviceInstance) GetNumTouches() uint {
 // GetProductID wraps gdk_device_get_product_id
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Returns the product ID of this device.
 // 
@@ -13069,7 +13099,7 @@ func (device *DeviceInstance) GetNumTouches() uint {
 // See [method@Gdk.Device.get_vendor_id] for more information.
 func (device *DeviceInstance) GetProductID() string {
 	var carg0 *C.GdkDevice // in, none, converted
-	var cret  *C.char      // return, none, string, casted *C.gchar
+	var cret  *C.char      // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GdkDevice)(UnsafeDeviceToGlibNone(device))
 
@@ -13078,7 +13108,9 @@ func (device *DeviceInstance) GetProductID() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -13160,7 +13192,7 @@ func (device *DeviceInstance) GetSource() InputSource {
 //   of the device location relative to the surface origin 
 // 	- winY float64: return location for the Y coordinate
 //   of the device location relative to the surface origin 
-// 	- goret Surface 
+// 	- goret Surface (nullable) 
 //
 // Obtains the surface underneath @device, returning the location of the
 // device in @win_x and @win_y.
@@ -13171,7 +13203,7 @@ func (device *DeviceInstance) GetSurfaceAtPosition() (float64, float64, Surface)
 	var carg0 *C.GdkDevice  // in, none, converted
 	var carg1 C.double      // out, full, casted, casted C.gdouble
 	var carg2 C.double      // out, full, casted, casted C.gdouble
-	var cret  *C.GdkSurface // return, none, converted
+	var cret  *C.GdkSurface // return, none, converted, nullable
 
 	carg0 = (*C.GdkDevice)(UnsafeDeviceToGlibNone(device))
 
@@ -13184,7 +13216,9 @@ func (device *DeviceInstance) GetSurfaceAtPosition() (float64, float64, Surface)
 
 	winX = float64(carg1)
 	winY = float64(carg2)
-	goret = UnsafeSurfaceFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeSurfaceFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return winX, winY, goret
 }
@@ -13219,7 +13253,7 @@ func (device *DeviceInstance) GetTimestamp() uint32 {
 // GetVendorID wraps gdk_device_get_vendor_id
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Returns the vendor ID of this device.
 // 
@@ -13250,7 +13284,7 @@ func (device *DeviceInstance) GetTimestamp() uint32 {
 // ```
 func (device *DeviceInstance) GetVendorID() string {
 	var carg0 *C.GdkDevice // in, none, converted
-	var cret  *C.char      // return, none, string, casted *C.gchar
+	var cret  *C.char      // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GdkDevice)(UnsafeDeviceToGlibNone(device))
 
@@ -13259,7 +13293,9 @@ func (device *DeviceInstance) GetVendorID() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -13599,7 +13635,7 @@ type Display interface {
 	// GetDefaultSeat wraps gdk_display_get_default_seat
 	// The function returns the following values:
 	// 
-	// 	- goret Seat 
+	// 	- goret Seat (nullable) 
 	//
 	// Returns the default `GdkSeat` for this display.
 	// 
@@ -13629,7 +13665,7 @@ type Display interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret Monitor 
+	// 	- goret Monitor (nullable) 
 	//
 	// Gets the monitor in which the largest area of @surface
 	// resides.
@@ -13877,7 +13913,7 @@ func UnsafeDisplayToGlibFull(c Display) unsafe.Pointer {
 // DisplayGetDefault wraps gdk_display_get_default
 // The function returns the following values:
 // 
-// 	- goret Display 
+// 	- goret Display (nullable) 
 //
 // Gets the default `GdkDisplay`.
 // 
@@ -13885,13 +13921,15 @@ func UnsafeDisplayToGlibFull(c Display) unsafe.Pointer {
 // 
 //     gdk_display_manager_get_default_display (gdk_display_manager_get ())
 func DisplayGetDefault() Display {
-	var cret *C.GdkDisplay // return, none, converted
+	var cret *C.GdkDisplay // return, none, converted, nullable
 
 	cret = C.gdk_display_get_default()
 
 	var goret Display
 
-	goret = UnsafeDisplayFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeDisplayFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -13904,14 +13942,14 @@ func DisplayGetDefault() Display {
 // 
 // The function returns the following values:
 // 
-// 	- goret Display 
+// 	- goret Display (nullable) 
 //
 // Opens a display.
 // 
 // If opening the display fails, `NULL` is returned.
 func DisplayOpen(displayName string) Display {
 	var carg1 *C.char       // in, none, string, nullable-string
-	var cret  *C.GdkDisplay // return, none, converted
+	var cret  *C.GdkDisplay // return, none, converted, nullable
 
 	if displayName != "" {
 		carg1 = (*C.char)(unsafe.Pointer(C.CString(displayName)))
@@ -13923,7 +13961,9 @@ func DisplayOpen(displayName string) Display {
 
 	var goret Display
 
-	goret = UnsafeDisplayFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeDisplayFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -14091,7 +14131,7 @@ func (display *DisplayInstance) GetClipboard() Clipboard {
 // GetDefaultSeat wraps gdk_display_get_default_seat
 // The function returns the following values:
 // 
-// 	- goret Seat 
+// 	- goret Seat (nullable) 
 //
 // Returns the default `GdkSeat` for this display.
 // 
@@ -14099,7 +14139,7 @@ func (display *DisplayInstance) GetClipboard() Clipboard {
 // this function will return %NULL.
 func (display *DisplayInstance) GetDefaultSeat() Seat {
 	var carg0 *C.GdkDisplay // in, none, converted
-	var cret  *C.GdkSeat    // return, none, converted
+	var cret  *C.GdkSeat    // return, none, converted, nullable
 
 	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
 
@@ -14108,7 +14148,9 @@ func (display *DisplayInstance) GetDefaultSeat() Seat {
 
 	var goret Seat
 
-	goret = UnsafeSeatFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeSeatFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -14151,14 +14193,14 @@ func (display *DisplayInstance) GetDmabufFormats() *DmabufFormats {
 // 
 // The function returns the following values:
 // 
-// 	- goret Monitor 
+// 	- goret Monitor (nullable) 
 //
 // Gets the monitor in which the largest area of @surface
 // resides.
 func (display *DisplayInstance) GetMonitorAtSurface(surface Surface) Monitor {
 	var carg0 *C.GdkDisplay // in, none, converted
 	var carg1 *C.GdkSurface // in, none, converted
-	var cret  *C.GdkMonitor // return, none, converted
+	var cret  *C.GdkMonitor // return, none, converted, nullable
 
 	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
 	carg1 = (*C.GdkSurface)(UnsafeSurfaceToGlibNone(surface))
@@ -14169,7 +14211,9 @@ func (display *DisplayInstance) GetMonitorAtSurface(surface Surface) Monitor {
 
 	var goret Monitor
 
-	goret = UnsafeMonitorFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeMonitorFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -14691,7 +14735,7 @@ type DisplayManager interface {
 	// GetDefaultDisplay wraps gdk_display_manager_get_default_display
 	// The function returns the following values:
 	// 
-	// 	- goret Display 
+	// 	- goret Display (nullable) 
 	//
 	// Gets the default `GdkDisplay`.
 	GetDefaultDisplay() Display
@@ -14710,7 +14754,7 @@ type DisplayManager interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret Display 
+	// 	- goret Display (nullable) 
 	//
 	// Opens a display.
 	OpenDisplay(string) Display
@@ -14791,12 +14835,12 @@ func DisplayManagerGet() DisplayManager {
 // GetDefaultDisplay wraps gdk_display_manager_get_default_display
 // The function returns the following values:
 // 
-// 	- goret Display 
+// 	- goret Display (nullable) 
 //
 // Gets the default `GdkDisplay`.
 func (manager *DisplayManagerInstance) GetDefaultDisplay() Display {
 	var carg0 *C.GdkDisplayManager // in, none, converted
-	var cret  *C.GdkDisplay        // return, none, converted
+	var cret  *C.GdkDisplay        // return, none, converted, nullable
 
 	carg0 = (*C.GdkDisplayManager)(UnsafeDisplayManagerToGlibNone(manager))
 
@@ -14805,7 +14849,9 @@ func (manager *DisplayManagerInstance) GetDefaultDisplay() Display {
 
 	var goret Display
 
-	goret = UnsafeDisplayFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeDisplayFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -14847,13 +14893,13 @@ func (manager *DisplayManagerInstance) ListDisplays() []Display {
 // 
 // The function returns the following values:
 // 
-// 	- goret Display 
+// 	- goret Display (nullable) 
 //
 // Opens a display.
 func (manager *DisplayManagerInstance) OpenDisplay(name string) Display {
 	var carg0 *C.GdkDisplayManager // in, none, converted
 	var carg1 *C.char              // in, none, string, nullable-string
-	var cret  *C.GdkDisplay        // return, none, converted
+	var cret  *C.GdkDisplay        // return, none, converted, nullable
 
 	carg0 = (*C.GdkDisplayManager)(UnsafeDisplayManagerToGlibNone(manager))
 	if name != "" {
@@ -14867,7 +14913,9 @@ func (manager *DisplayManagerInstance) OpenDisplay(name string) Display {
 
 	var goret Display
 
-	goret = UnsafeDisplayFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeDisplayFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -14971,7 +15019,7 @@ type DmabufTextureBuilder interface {
 	// GetColorState wraps gdk_dmabuf_texture_builder_get_color_state
 	// The function returns the following values:
 	// 
-	// 	- goret *ColorState 
+	// 	- goret *ColorState (nullable) 
 	//
 	// Gets the color state previously set via gdk_dmabuf_texture_builder_set_color_state().
 	GetColorState() *ColorState
@@ -15061,7 +15109,7 @@ type DmabufTextureBuilder interface {
 	// GetUpdateTexture wraps gdk_dmabuf_texture_builder_get_update_texture
 	// The function returns the following values:
 	// 
-	// 	- goret Texture 
+	// 	- goret Texture (nullable) 
 	//
 	// Gets the texture previously set via gdk_dmabuf_texture_builder_set_update_texture() or
 	// %NULL if none was set.
@@ -15252,12 +15300,12 @@ func NewDmabufTextureBuilder() DmabufTextureBuilder {
 // GetColorState wraps gdk_dmabuf_texture_builder_get_color_state
 // The function returns the following values:
 // 
-// 	- goret *ColorState 
+// 	- goret *ColorState (nullable) 
 //
 // Gets the color state previously set via gdk_dmabuf_texture_builder_set_color_state().
 func (self *DmabufTextureBuilderInstance) GetColorState() *ColorState {
 	var carg0 *C.GdkDmabufTextureBuilder // in, none, converted
-	var cret  *C.GdkColorState           // return, full, converted
+	var cret  *C.GdkColorState           // return, full, converted, nullable
 
 	carg0 = (*C.GdkDmabufTextureBuilder)(UnsafeDmabufTextureBuilderToGlibNone(self))
 
@@ -15266,7 +15314,9 @@ func (self *DmabufTextureBuilderInstance) GetColorState() *ColorState {
 
 	var goret *ColorState
 
-	goret = UnsafeColorStateFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeColorStateFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -15503,13 +15553,13 @@ func (self *DmabufTextureBuilderInstance) GetStride(plane uint) uint {
 // GetUpdateTexture wraps gdk_dmabuf_texture_builder_get_update_texture
 // The function returns the following values:
 // 
-// 	- goret Texture 
+// 	- goret Texture (nullable) 
 //
 // Gets the texture previously set via gdk_dmabuf_texture_builder_set_update_texture() or
 // %NULL if none was set.
 func (self *DmabufTextureBuilderInstance) GetUpdateTexture() Texture {
 	var carg0 *C.GdkDmabufTextureBuilder // in, none, converted
-	var cret  *C.GdkTexture              // return, none, converted
+	var cret  *C.GdkTexture              // return, none, converted, nullable
 
 	carg0 = (*C.GdkDmabufTextureBuilder)(UnsafeDmabufTextureBuilderToGlibNone(self))
 
@@ -15518,7 +15568,9 @@ func (self *DmabufTextureBuilderInstance) GetUpdateTexture() Texture {
 
 	var goret Texture
 
-	goret = UnsafeTextureFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeTextureFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -15887,7 +15939,7 @@ type Drag interface {
 	// GetDragSurface wraps gdk_drag_get_drag_surface
 	// The function returns the following values:
 	// 
-	// 	- goret Surface 
+	// 	- goret Surface (nullable) 
 	//
 	// Returns the surface on which the drag icon should be rendered
 	// during the drag operation.
@@ -15993,7 +16045,7 @@ func UnsafeDragToGlibFull(c Drag) unsafe.Pointer {
 // 
 // The function returns the following values:
 // 
-// 	- goret Drag 
+// 	- goret Drag (nullable) 
 //
 // Starts a drag and creates a new drag context for it.
 // 
@@ -16016,7 +16068,7 @@ func DragBegin(surface Surface, device Device, content ContentProvider, actions 
 	var carg4 C.GdkDragAction       // in, none, casted
 	var carg5 C.double              // in, none, casted, casted C.gdouble
 	var carg6 C.double              // in, none, casted, casted C.gdouble
-	var cret  *C.GdkDrag            // return, full, converted
+	var cret  *C.GdkDrag            // return, full, converted, nullable
 
 	carg1 = (*C.GdkSurface)(UnsafeSurfaceToGlibNone(surface))
 	carg2 = (*C.GdkDevice)(UnsafeDeviceToGlibNone(device))
@@ -16035,7 +16087,9 @@ func DragBegin(surface Surface, device Device, content ContentProvider, actions 
 
 	var goret Drag
 
-	goret = UnsafeDragFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeDragFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -16162,7 +16216,7 @@ func (drag *DragInstance) GetDisplay() Display {
 // GetDragSurface wraps gdk_drag_get_drag_surface
 // The function returns the following values:
 // 
-// 	- goret Surface 
+// 	- goret Surface (nullable) 
 //
 // Returns the surface on which the drag icon should be rendered
 // during the drag operation.
@@ -16173,7 +16227,7 @@ func (drag *DragInstance) GetDisplay() Display {
 // when the drag operation is over.
 func (drag *DragInstance) GetDragSurface() Surface {
 	var carg0 *C.GdkDrag    // in, none, converted
-	var cret  *C.GdkSurface // return, none, converted
+	var cret  *C.GdkSurface // return, none, converted, nullable
 
 	carg0 = (*C.GdkDrag)(UnsafeDragToGlibNone(drag))
 
@@ -16182,7 +16236,9 @@ func (drag *DragInstance) GetDragSurface() Surface {
 
 	var goret Surface
 
-	goret = UnsafeSurfaceFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeSurfaceFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -16325,14 +16381,14 @@ type DrawContext interface {
 	// GetDisplay wraps gdk_draw_context_get_display
 	// The function returns the following values:
 	// 
-	// 	- goret Display 
+	// 	- goret Display (nullable) 
 	//
 	// Retrieves the `GdkDisplay` the @context is created for
 	GetDisplay() Display
 	// GetSurface wraps gdk_draw_context_get_surface
 	// The function returns the following values:
 	// 
-	// 	- goret Surface 
+	// 	- goret Surface (nullable) 
 	//
 	// Retrieves the surface that @context is bound to.
 	GetSurface() Surface
@@ -16375,12 +16431,12 @@ func UnsafeDrawContextToGlibFull(c DrawContext) unsafe.Pointer {
 // GetDisplay wraps gdk_draw_context_get_display
 // The function returns the following values:
 // 
-// 	- goret Display 
+// 	- goret Display (nullable) 
 //
 // Retrieves the `GdkDisplay` the @context is created for
 func (_context *DrawContextInstance) GetDisplay() Display {
 	var carg0 *C.GdkDrawContext // in, none, converted
-	var cret  *C.GdkDisplay     // return, none, converted
+	var cret  *C.GdkDisplay     // return, none, converted, nullable
 
 	carg0 = (*C.GdkDrawContext)(UnsafeDrawContextToGlibNone(_context))
 
@@ -16389,7 +16445,9 @@ func (_context *DrawContextInstance) GetDisplay() Display {
 
 	var goret Display
 
-	goret = UnsafeDisplayFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeDisplayFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -16397,12 +16455,12 @@ func (_context *DrawContextInstance) GetDisplay() Display {
 // GetSurface wraps gdk_draw_context_get_surface
 // The function returns the following values:
 // 
-// 	- goret Surface 
+// 	- goret Surface (nullable) 
 //
 // Retrieves the surface that @context is bound to.
 func (_context *DrawContextInstance) GetSurface() Surface {
 	var carg0 *C.GdkDrawContext // in, none, converted
-	var cret  *C.GdkSurface     // return, none, converted
+	var cret  *C.GdkSurface     // return, none, converted, nullable
 
 	carg0 = (*C.GdkDrawContext)(UnsafeDrawContextToGlibNone(_context))
 
@@ -16411,7 +16469,9 @@ func (_context *DrawContextInstance) GetSurface() Surface {
 
 	var goret Surface
 
-	goret = UnsafeSurfaceFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeSurfaceFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -16492,7 +16552,7 @@ type Drop interface {
 	// GetDrag wraps gdk_drop_get_drag
 	// The function returns the following values:
 	// 
-	// 	- goret Drag 
+	// 	- goret Drag (nullable) 
 	//
 	// If this is an in-app drag-and-drop operation, returns the `GdkDrag`
 	// that corresponds to this drop.
@@ -16537,7 +16597,7 @@ type Drop interface {
 	// The function returns the following values:
 	// 
 	// 	- outMimeType string: return location for the used mime type 
-	// 	- goret gio.InputStream 
+	// 	- goret gio.InputStream (nullable) 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Finishes an async drop read operation.
@@ -16728,7 +16788,7 @@ func (self *DropInstance) GetDisplay() Display {
 // GetDrag wraps gdk_drop_get_drag
 // The function returns the following values:
 // 
-// 	- goret Drag 
+// 	- goret Drag (nullable) 
 //
 // If this is an in-app drag-and-drop operation, returns the `GdkDrag`
 // that corresponds to this drop.
@@ -16736,7 +16796,7 @@ func (self *DropInstance) GetDisplay() Display {
 // If it is not, %NULL is returned.
 func (self *DropInstance) GetDrag() Drag {
 	var carg0 *C.GdkDrop // in, none, converted
-	var cret  *C.GdkDrag // return, none, converted
+	var cret  *C.GdkDrag // return, none, converted, nullable
 
 	carg0 = (*C.GdkDrop)(UnsafeDropToGlibNone(self))
 
@@ -16745,7 +16805,9 @@ func (self *DropInstance) GetDrag() Drag {
 
 	var goret Drag
 
-	goret = UnsafeDragFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeDragFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -16846,7 +16908,7 @@ func (self *DropInstance) ReadAsync(cancellable context.Context, mimeTypes []str
 // The function returns the following values:
 // 
 // 	- outMimeType string: return location for the used mime type 
-// 	- goret gio.InputStream 
+// 	- goret gio.InputStream (nullable) 
 // 	- _goerr error (nullable): an error 
 //
 // Finishes an async drop read operation.
@@ -16861,7 +16923,7 @@ func (self *DropInstance) ReadFinish(result gio.AsyncResult) (string, gio.InputS
 	var carg0 *C.GdkDrop      // in, none, converted
 	var carg1 *C.GAsyncResult // in, none, converted
 	var carg2 *C.char         // out, none, string, casted *C.gchar
-	var cret  *C.GInputStream // return, full, converted
+	var cret  *C.GInputStream // return, full, converted, nullable
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	carg0 = (*C.GdkDrop)(UnsafeDropToGlibNone(self))
@@ -16876,7 +16938,9 @@ func (self *DropInstance) ReadFinish(result gio.AsyncResult) (string, gio.InputS
 	var _goerr      error
 
 	outMimeType = C.GoString((*C.char)(unsafe.Pointer(carg2)))
-	goret = gio.UnsafeInputStreamFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = gio.UnsafeInputStreamFromGlibFull(unsafe.Pointer(cret))
+	}
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -17029,7 +17093,7 @@ type FrameClock interface {
 	// GetCurrentTimings wraps gdk_frame_clock_get_current_timings
 	// The function returns the following values:
 	// 
-	// 	- goret *FrameTimings 
+	// 	- goret *FrameTimings (nullable) 
 	//
 	// Gets the frame timings for the current frame.
 	GetCurrentTimings() *FrameTimings
@@ -17108,7 +17172,7 @@ type FrameClock interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret *FrameTimings 
+	// 	- goret *FrameTimings (nullable) 
 	//
 	// Retrieves a `GdkFrameTimings` object holding timing information
 	// for the current frame or a recent frame.
@@ -17260,12 +17324,12 @@ func (frameClock *FrameClockInstance) EndUpdating() {
 // GetCurrentTimings wraps gdk_frame_clock_get_current_timings
 // The function returns the following values:
 // 
-// 	- goret *FrameTimings 
+// 	- goret *FrameTimings (nullable) 
 //
 // Gets the frame timings for the current frame.
 func (frameClock *FrameClockInstance) GetCurrentTimings() *FrameTimings {
 	var carg0 *C.GdkFrameClock   // in, none, converted
-	var cret  *C.GdkFrameTimings // return, none, converted
+	var cret  *C.GdkFrameTimings // return, none, converted, nullable
 
 	carg0 = (*C.GdkFrameClock)(UnsafeFrameClockToGlibNone(frameClock))
 
@@ -17274,7 +17338,9 @@ func (frameClock *FrameClockInstance) GetCurrentTimings() *FrameTimings {
 
 	var goret *FrameTimings
 
-	goret = UnsafeFrameTimingsFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeFrameTimingsFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -17435,7 +17501,7 @@ func (frameClock *FrameClockInstance) GetRefreshInfo(baseTime int64) (int64, int
 // 
 // The function returns the following values:
 // 
-// 	- goret *FrameTimings 
+// 	- goret *FrameTimings (nullable) 
 //
 // Retrieves a `GdkFrameTimings` object holding timing information
 // for the current frame or a recent frame.
@@ -17446,7 +17512,7 @@ func (frameClock *FrameClockInstance) GetRefreshInfo(baseTime int64) (int64, int
 func (frameClock *FrameClockInstance) GetTimings(frameCounter int64) *FrameTimings {
 	var carg0 *C.GdkFrameClock   // in, none, converted
 	var carg1 C.gint64           // in, none, casted
-	var cret  *C.GdkFrameTimings // return, none, converted
+	var cret  *C.GdkFrameTimings // return, none, converted, nullable
 
 	carg0 = (*C.GdkFrameClock)(UnsafeFrameClockToGlibNone(frameClock))
 	carg1 = C.gint64(frameCounter)
@@ -17457,7 +17523,9 @@ func (frameClock *FrameClockInstance) GetTimings(frameCounter int64) *FrameTimin
 
 	var goret *FrameTimings
 
-	goret = UnsafeFrameTimingsFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeFrameTimingsFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -17650,7 +17718,7 @@ type GLContext interface {
 	// GetDisplay wraps gdk_gl_context_get_display
 	// The function returns the following values:
 	// 
-	// 	- goret Display 
+	// 	- goret Display (nullable) 
 	//
 	// Retrieves the display the @context is created for
 	GetDisplay() Display
@@ -17679,7 +17747,7 @@ type GLContext interface {
 	// GetSurface wraps gdk_gl_context_get_surface
 	// The function returns the following values:
 	// 
-	// 	- goret Surface 
+	// 	- goret Surface (nullable) 
 	//
 	// Retrieves the surface used by the @context.
 	GetSurface() Surface
@@ -17893,17 +17961,19 @@ func GLContextClearCurrent() {
 // GLContextGetCurrent wraps gdk_gl_context_get_current
 // The function returns the following values:
 // 
-// 	- goret GLContext 
+// 	- goret GLContext (nullable) 
 //
 // Retrieves the current `GdkGLContext`.
 func GLContextGetCurrent() GLContext {
-	var cret *C.GdkGLContext // return, none, converted
+	var cret *C.GdkGLContext // return, none, converted, nullable
 
 	cret = C.gdk_gl_context_get_current()
 
 	var goret GLContext
 
-	goret = UnsafeGLContextFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeGLContextFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -17983,12 +18053,12 @@ func (_context *GLContextInstance) GetDebugEnabled() bool {
 // GetDisplay wraps gdk_gl_context_get_display
 // The function returns the following values:
 // 
-// 	- goret Display 
+// 	- goret Display (nullable) 
 //
 // Retrieves the display the @context is created for
 func (_context *GLContextInstance) GetDisplay() Display {
 	var carg0 *C.GdkGLContext // in, none, converted
-	var cret  *C.GdkDisplay   // return, none, converted
+	var cret  *C.GdkDisplay   // return, none, converted, nullable
 
 	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(_context))
 
@@ -17997,7 +18067,9 @@ func (_context *GLContextInstance) GetDisplay() Display {
 
 	var goret Display
 
-	goret = UnsafeDisplayFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeDisplayFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -18062,12 +18134,12 @@ func (_context *GLContextInstance) GetRequiredVersion() (int, int) {
 // GetSurface wraps gdk_gl_context_get_surface
 // The function returns the following values:
 // 
-// 	- goret Surface 
+// 	- goret Surface (nullable) 
 //
 // Retrieves the surface used by the @context.
 func (_context *GLContextInstance) GetSurface() Surface {
 	var carg0 *C.GdkGLContext // in, none, converted
-	var cret  *C.GdkSurface   // return, none, converted
+	var cret  *C.GdkSurface   // return, none, converted, nullable
 
 	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(_context))
 
@@ -18076,7 +18148,9 @@ func (_context *GLContextInstance) GetSurface() Surface {
 
 	var goret Surface
 
-	goret = UnsafeSurfaceFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeSurfaceFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -18438,7 +18512,7 @@ type GLTextureBuilder interface {
 	// GetContext wraps gdk_gl_texture_builder_get_context
 	// The function returns the following values:
 	// 
-	// 	- goret GLContext 
+	// 	- goret GLContext (nullable) 
 	//
 	// Gets the context previously set via gdk_gl_texture_builder_set_context() or
 	// %NULL if none was set.
@@ -18476,7 +18550,7 @@ type GLTextureBuilder interface {
 	// GetUpdateTexture wraps gdk_gl_texture_builder_get_update_texture
 	// The function returns the following values:
 	// 
-	// 	- goret Texture 
+	// 	- goret Texture (nullable) 
 	//
 	// Gets the texture previously set via gdk_gl_texture_builder_set_update_texture() or
 	// %NULL if none was set.
@@ -18665,13 +18739,13 @@ func (self *GLTextureBuilderInstance) GetColorState() *ColorState {
 // GetContext wraps gdk_gl_texture_builder_get_context
 // The function returns the following values:
 // 
-// 	- goret GLContext 
+// 	- goret GLContext (nullable) 
 //
 // Gets the context previously set via gdk_gl_texture_builder_set_context() or
 // %NULL if none was set.
 func (self *GLTextureBuilderInstance) GetContext() GLContext {
 	var carg0 *C.GdkGLTextureBuilder // in, none, converted
-	var cret  *C.GdkGLContext        // return, none, converted
+	var cret  *C.GdkGLContext        // return, none, converted, nullable
 
 	carg0 = (*C.GdkGLTextureBuilder)(UnsafeGLTextureBuilderToGlibNone(self))
 
@@ -18680,7 +18754,9 @@ func (self *GLTextureBuilderInstance) GetContext() GLContext {
 
 	var goret GLContext
 
-	goret = UnsafeGLContextFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeGLContextFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -18780,13 +18856,13 @@ func (self *GLTextureBuilderInstance) GetID() uint {
 // GetUpdateTexture wraps gdk_gl_texture_builder_get_update_texture
 // The function returns the following values:
 // 
-// 	- goret Texture 
+// 	- goret Texture (nullable) 
 //
 // Gets the texture previously set via gdk_gl_texture_builder_set_update_texture() or
 // %NULL if none was set.
 func (self *GLTextureBuilderInstance) GetUpdateTexture() Texture {
 	var carg0 *C.GdkGLTextureBuilder // in, none, converted
-	var cret  *C.GdkTexture          // return, none, converted
+	var cret  *C.GdkTexture          // return, none, converted, nullable
 
 	carg0 = (*C.GdkGLTextureBuilder)(UnsafeGLTextureBuilderToGlibNone(self))
 
@@ -18795,7 +18871,9 @@ func (self *GLTextureBuilderInstance) GetUpdateTexture() Texture {
 
 	var goret Texture
 
-	goret = UnsafeTextureFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeTextureFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -19055,7 +19133,7 @@ type MemoryTextureBuilder interface {
 	// GetBytes wraps gdk_memory_texture_builder_get_bytes
 	// The function returns the following values:
 	// 
-	// 	- goret *glib.Bytes 
+	// 	- goret *glib.Bytes (nullable) 
 	//
 	// Gets the bytes previously set via gdk_memory_texture_builder_set_bytes()
 	// or %NULL if none was set.
@@ -19092,7 +19170,7 @@ type MemoryTextureBuilder interface {
 	// GetUpdateTexture wraps gdk_memory_texture_builder_get_update_texture
 	// The function returns the following values:
 	// 
-	// 	- goret Texture 
+	// 	- goret Texture (nullable) 
 	//
 	// Gets the texture previously set via gdk_memory_texture_builder_set_update_texture()
 	// or %NULL if none was set.
@@ -19261,13 +19339,13 @@ func (self *MemoryTextureBuilderInstance) Build() Texture {
 // GetBytes wraps gdk_memory_texture_builder_get_bytes
 // The function returns the following values:
 // 
-// 	- goret *glib.Bytes 
+// 	- goret *glib.Bytes (nullable) 
 //
 // Gets the bytes previously set via gdk_memory_texture_builder_set_bytes()
 // or %NULL if none was set.
 func (self *MemoryTextureBuilderInstance) GetBytes() *glib.Bytes {
 	var carg0 *C.GdkMemoryTextureBuilder // in, none, converted
-	var cret  *C.GBytes                  // return, none, converted
+	var cret  *C.GBytes                  // return, none, converted, nullable
 
 	carg0 = (*C.GdkMemoryTextureBuilder)(UnsafeMemoryTextureBuilderToGlibNone(self))
 
@@ -19276,7 +19354,9 @@ func (self *MemoryTextureBuilderInstance) GetBytes() *glib.Bytes {
 
 	var goret *glib.Bytes
 
-	goret = glib.UnsafeBytesFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = glib.UnsafeBytesFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -19373,13 +19453,13 @@ func (self *MemoryTextureBuilderInstance) GetStride() uint {
 // GetUpdateTexture wraps gdk_memory_texture_builder_get_update_texture
 // The function returns the following values:
 // 
-// 	- goret Texture 
+// 	- goret Texture (nullable) 
 //
 // Gets the texture previously set via gdk_memory_texture_builder_set_update_texture()
 // or %NULL if none was set.
 func (self *MemoryTextureBuilderInstance) GetUpdateTexture() Texture {
 	var carg0 *C.GdkMemoryTextureBuilder // in, none, converted
-	var cret  *C.GdkTexture              // return, none, converted
+	var cret  *C.GdkTexture              // return, none, converted, nullable
 
 	carg0 = (*C.GdkMemoryTextureBuilder)(UnsafeMemoryTextureBuilderToGlibNone(self))
 
@@ -19388,7 +19468,9 @@ func (self *MemoryTextureBuilderInstance) GetUpdateTexture() Texture {
 
 	var goret Texture
 
-	goret = UnsafeTextureFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeTextureFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -19594,7 +19676,7 @@ type Monitor interface {
 	// GetConnector wraps gdk_monitor_get_connector
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the name of the monitor's connector, if available.
 	// 
@@ -19605,7 +19687,7 @@ type Monitor interface {
 	// GetDescription wraps gdk_monitor_get_description
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets a string describing the monitor, if available.
 	// 
@@ -19639,7 +19721,7 @@ type Monitor interface {
 	// GetManufacturer wraps gdk_monitor_get_manufacturer
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the name or PNP ID of the monitor's manufacturer.
 	// 
@@ -19652,7 +19734,7 @@ type Monitor interface {
 	// GetModel wraps gdk_monitor_get_model
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the string identifying the monitor model, if available.
 	GetModel() string
@@ -19762,7 +19844,7 @@ func UnsafeMonitorToGlibFull(c Monitor) unsafe.Pointer {
 // GetConnector wraps gdk_monitor_get_connector
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the name of the monitor's connector, if available.
 // 
@@ -19771,7 +19853,7 @@ func UnsafeMonitorToGlibFull(c Monitor) unsafe.Pointer {
 // relied on as stable identifiers of a specific monitor.
 func (monitor *MonitorInstance) GetConnector() string {
 	var carg0 *C.GdkMonitor // in, none, converted
-	var cret  *C.char       // return, none, string, casted *C.gchar
+	var cret  *C.char       // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GdkMonitor)(UnsafeMonitorToGlibNone(monitor))
 
@@ -19780,7 +19862,9 @@ func (monitor *MonitorInstance) GetConnector() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -19788,14 +19872,14 @@ func (monitor *MonitorInstance) GetConnector() string {
 // GetDescription wraps gdk_monitor_get_description
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets a string describing the monitor, if available.
 // 
 // This can be used to identify a monitor in the UI.
 func (monitor *MonitorInstance) GetDescription() string {
 	var carg0 *C.GdkMonitor // in, none, converted
-	var cret  *C.char       // return, none, string, casted *C.gchar
+	var cret  *C.char       // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GdkMonitor)(UnsafeMonitorToGlibNone(monitor))
 
@@ -19804,7 +19888,9 @@ func (monitor *MonitorInstance) GetDescription() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -19884,7 +19970,7 @@ func (monitor *MonitorInstance) GetHeightMm() int {
 // GetManufacturer wraps gdk_monitor_get_manufacturer
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the name or PNP ID of the monitor's manufacturer.
 // 
@@ -19895,7 +19981,7 @@ func (monitor *MonitorInstance) GetHeightMm() int {
 // [https://uefi.org/pnp_id_list](https://uefi.org/pnp_id_list).
 func (monitor *MonitorInstance) GetManufacturer() string {
 	var carg0 *C.GdkMonitor // in, none, converted
-	var cret  *C.char       // return, none, string, casted *C.gchar
+	var cret  *C.char       // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GdkMonitor)(UnsafeMonitorToGlibNone(monitor))
 
@@ -19904,7 +19990,9 @@ func (monitor *MonitorInstance) GetManufacturer() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -19912,12 +20000,12 @@ func (monitor *MonitorInstance) GetManufacturer() string {
 // GetModel wraps gdk_monitor_get_model
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the string identifying the monitor model, if available.
 func (monitor *MonitorInstance) GetModel() string {
 	var carg0 *C.GdkMonitor // in, none, converted
-	var cret  *C.char       // return, none, string, casted *C.gchar
+	var cret  *C.char       // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GdkMonitor)(UnsafeMonitorToGlibNone(monitor))
 
@@ -19926,7 +20014,9 @@ func (monitor *MonitorInstance) GetModel() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -20137,14 +20227,14 @@ type Seat interface {
 	// GetKeyboard wraps gdk_seat_get_keyboard
 	// The function returns the following values:
 	// 
-	// 	- goret Device 
+	// 	- goret Device (nullable) 
 	//
 	// Returns the device that routes keyboard events.
 	GetKeyboard() Device
 	// GetPointer wraps gdk_seat_get_pointer
 	// The function returns the following values:
 	// 
-	// 	- goret Device 
+	// 	- goret Device (nullable) 
 	//
 	// Returns the device that routes pointer events.
 	GetPointer() Device
@@ -20297,12 +20387,12 @@ func (seat *SeatInstance) GetDisplay() Display {
 // GetKeyboard wraps gdk_seat_get_keyboard
 // The function returns the following values:
 // 
-// 	- goret Device 
+// 	- goret Device (nullable) 
 //
 // Returns the device that routes keyboard events.
 func (seat *SeatInstance) GetKeyboard() Device {
 	var carg0 *C.GdkSeat   // in, none, converted
-	var cret  *C.GdkDevice // return, none, converted
+	var cret  *C.GdkDevice // return, none, converted, nullable
 
 	carg0 = (*C.GdkSeat)(UnsafeSeatToGlibNone(seat))
 
@@ -20311,7 +20401,9 @@ func (seat *SeatInstance) GetKeyboard() Device {
 
 	var goret Device
 
-	goret = UnsafeDeviceFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeDeviceFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -20319,12 +20411,12 @@ func (seat *SeatInstance) GetKeyboard() Device {
 // GetPointer wraps gdk_seat_get_pointer
 // The function returns the following values:
 // 
-// 	- goret Device 
+// 	- goret Device (nullable) 
 //
 // Returns the device that routes pointer events.
 func (seat *SeatInstance) GetPointer() Device {
 	var carg0 *C.GdkSeat   // in, none, converted
-	var cret  *C.GdkDevice // return, none, converted
+	var cret  *C.GdkDevice // return, none, converted, nullable
 
 	carg0 = (*C.GdkSeat)(UnsafeSeatToGlibNone(seat))
 
@@ -20333,7 +20425,9 @@ func (seat *SeatInstance) GetPointer() Device {
 
 	var goret Device
 
-	goret = UnsafeDeviceFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeDeviceFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -20514,7 +20608,7 @@ type Surface interface {
 	// GetCursor wraps gdk_surface_get_cursor
 	// The function returns the following values:
 	// 
-	// 	- goret Cursor 
+	// 	- goret Cursor (nullable) 
 	//
 	// Retrieves a `GdkCursor` pointer for the cursor currently set on the
 	// `GdkSurface`.
@@ -20532,7 +20626,7 @@ type Surface interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret Cursor 
+	// 	- goret Cursor (nullable) 
 	//
 	// Retrieves a `GdkCursor` pointer for the @device currently set on the
 	// specified `GdkSurface`.
@@ -20913,7 +21007,7 @@ func (surface *SurfaceInstance) Destroy() {
 // GetCursor wraps gdk_surface_get_cursor
 // The function returns the following values:
 // 
-// 	- goret Cursor 
+// 	- goret Cursor (nullable) 
 //
 // Retrieves a `GdkCursor` pointer for the cursor currently set on the
 // `GdkSurface`.
@@ -20924,7 +21018,7 @@ func (surface *SurfaceInstance) Destroy() {
 // Use [method@Gdk.Surface.set_cursor] to unset the cursor of the surface.
 func (surface *SurfaceInstance) GetCursor() Cursor {
 	var carg0 *C.GdkSurface // in, none, converted
-	var cret  *C.GdkCursor  // return, none, converted
+	var cret  *C.GdkCursor  // return, none, converted, nullable
 
 	carg0 = (*C.GdkSurface)(UnsafeSurfaceToGlibNone(surface))
 
@@ -20933,7 +21027,9 @@ func (surface *SurfaceInstance) GetCursor() Cursor {
 
 	var goret Cursor
 
-	goret = UnsafeCursorFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeCursorFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -20946,7 +21042,7 @@ func (surface *SurfaceInstance) GetCursor() Cursor {
 // 
 // The function returns the following values:
 // 
-// 	- goret Cursor 
+// 	- goret Cursor (nullable) 
 //
 // Retrieves a `GdkCursor` pointer for the @device currently set on the
 // specified `GdkSurface`.
@@ -20958,7 +21054,7 @@ func (surface *SurfaceInstance) GetCursor() Cursor {
 func (surface *SurfaceInstance) GetDeviceCursor(device Device) Cursor {
 	var carg0 *C.GdkSurface // in, none, converted
 	var carg1 *C.GdkDevice  // in, none, converted
-	var cret  *C.GdkCursor  // return, none, converted
+	var cret  *C.GdkCursor  // return, none, converted, nullable
 
 	carg0 = (*C.GdkSurface)(UnsafeSurfaceToGlibNone(surface))
 	carg1 = (*C.GdkDevice)(UnsafeDeviceToGlibNone(device))
@@ -20969,7 +21065,9 @@ func (surface *SurfaceInstance) GetDeviceCursor(device Device) Cursor {
 
 	var goret Cursor
 
-	goret = UnsafeCursorFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeCursorFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -22575,7 +22673,7 @@ func ColorStateGetSrgbLinear() *ColorState {
 // CreateCicpParams wraps gdk_color_state_create_cicp_params
 // The function returns the following values:
 // 
-// 	- goret CicpParams 
+// 	- goret CicpParams (nullable) 
 //
 // Create a [class@Gdk.CicpParams] representing the colorstate.
 // 
@@ -22584,7 +22682,7 @@ func ColorStateGetSrgbLinear() *ColorState {
 // this function returns `NULL`.
 func (self *ColorState) CreateCicpParams() CicpParams {
 	var carg0 *C.GdkColorState // in, none, converted
-	var cret  *C.GdkCicpParams // return, full, converted
+	var cret  *C.GdkCicpParams // return, full, converted, nullable
 
 	carg0 = (*C.GdkColorState)(UnsafeColorStateToGlibNone(self))
 
@@ -22593,7 +22691,9 @@ func (self *ColorState) CreateCicpParams() CicpParams {
 
 	var goret CicpParams
 
-	goret = UnsafeCicpParamsFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeCicpParamsFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -22817,7 +22917,7 @@ func NewContentFormatsForGType(typ gobject.Type) *ContentFormats {
 // 
 // The function returns the following values:
 // 
-// 	- goret *ContentFormats 
+// 	- goret *ContentFormats (nullable) 
 //
 // Parses the given @string into `GdkContentFormats` and
 // returns the formats.
@@ -22829,7 +22929,7 @@ func NewContentFormatsForGType(typ gobject.Type) *ContentFormats {
 // is returned.
 func ContentFormatsParse(str string) *ContentFormats {
 	var carg1 *C.char              // in, none, string, casted *C.gchar
-	var cret  *C.GdkContentFormats // return, full, converted
+	var cret  *C.GdkContentFormats // return, full, converted, nullable
 
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(str)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -22839,7 +22939,9 @@ func ContentFormatsParse(str string) *ContentFormats {
 
 	var goret *ContentFormats
 
-	goret = UnsafeContentFormatsFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeContentFormatsFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -22914,7 +23016,7 @@ func (formats *ContentFormats) ContainMIMEType(mimeType string) bool {
 // 
 // 	- nGtypes uint: optional pointer to take the
 //   number of `GType`s contained in the return value 
-// 	- goret []gobject.Type 
+// 	- goret []gobject.Type (nullable) 
 //
 // Gets the `GType`s included in @formats.
 // 
@@ -22923,7 +23025,7 @@ func (formats *ContentFormats) ContainMIMEType(mimeType string) bool {
 func (formats *ContentFormats) GetGTypes() (uint, []gobject.Type) {
 	var carg0 *C.GdkContentFormats // in, none, converted
 	var carg1 C.gsize              // out, full, casted
-	var cret  *C.GType             // return, transfer: none, C Pointers: 1, Name: array[Type], scope: , array (inner: *typesystem.Alias, zero-terminated)
+	var cret  *C.GType             // return, transfer: none, C Pointers: 1, Name: array[Type], scope: , nullable, array (inner: *typesystem.Alias, zero-terminated)
 
 	carg0 = (*C.GdkContentFormats)(UnsafeContentFormatsToGlibNone(formats))
 
@@ -22946,7 +23048,7 @@ func (formats *ContentFormats) GetGTypes() (uint, []gobject.Type) {
 // 
 // 	- nMimeTypes uint: optional pointer to take the
 //   number of mime types contained in the return value 
-// 	- goret []string 
+// 	- goret []string (nullable) 
 //
 // Gets the mime types included in @formats.
 // 
@@ -22955,7 +23057,7 @@ func (formats *ContentFormats) GetGTypes() (uint, []gobject.Type) {
 func (formats *ContentFormats) GetMIMETypes() (uint, []string) {
 	var carg0 *C.GdkContentFormats // in, none, converted
 	var carg1 C.gsize              // out, full, casted
-	var cret  **C.char             // return, transfer: none, C Pointers: 2, Name: array[utf8], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
+	var cret  **C.char             // return, transfer: none, C Pointers: 2, Name: array[utf8], scope: , nullable, array (inner: *typesystem.StringPrimitive, zero-terminated)
 
 	carg0 = (*C.GdkContentFormats)(UnsafeContentFormatsToGlibNone(formats))
 
@@ -23046,7 +23148,7 @@ func (first *ContentFormats) MatchGType(second *ContentFormats) gobject.Type {
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Finds the first mime type from @first that is also contained
 // in @second.
@@ -23055,7 +23157,7 @@ func (first *ContentFormats) MatchGType(second *ContentFormats) gobject.Type {
 func (first *ContentFormats) MatchMIMEType(second *ContentFormats) string {
 	var carg0 *C.GdkContentFormats // in, none, converted
 	var carg1 *C.GdkContentFormats // in, none, converted
-	var cret  *C.char              // return, none, string, casted *C.gchar
+	var cret  *C.char              // return, none, string, casted *C.gchar, nullable
 
 	carg0 = (*C.GdkContentFormats)(UnsafeContentFormatsToGlibNone(first))
 	carg1 = (*C.GdkContentFormats)(UnsafeContentFormatsToGlibNone(second))
@@ -23066,7 +23168,9 @@ func (first *ContentFormats) MatchMIMEType(second *ContentFormats) string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -26860,13 +26964,13 @@ func (layout *ToplevelLayout) GetFullscreen() (bool, bool) {
 // GetFullscreenMonitor wraps gdk_toplevel_layout_get_fullscreen_monitor
 // The function returns the following values:
 // 
-// 	- goret Monitor 
+// 	- goret Monitor (nullable) 
 //
 // Returns the monitor that the layout is fullscreening
 // the surface on.
 func (layout *ToplevelLayout) GetFullscreenMonitor() Monitor {
 	var carg0 *C.GdkToplevelLayout // in, none, converted
-	var cret  *C.GdkMonitor        // return, none, converted
+	var cret  *C.GdkMonitor        // return, none, converted, nullable
 
 	carg0 = (*C.GdkToplevelLayout)(UnsafeToplevelLayoutToGlibNone(layout))
 
@@ -26875,7 +26979,9 @@ func (layout *ToplevelLayout) GetFullscreenMonitor() Monitor {
 
 	var goret Monitor
 
-	goret = UnsafeMonitorFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeMonitorFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }

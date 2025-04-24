@@ -97,13 +97,13 @@ func X11DeviceGetID(device X11DeviceCore) int {
 // 
 // The function returns the following values:
 // 
-// 	- goret X11DeviceCore 
+// 	- goret X11DeviceCore (nullable) 
 //
 // Returns the #GdkDevice that wraps the given device ID.
 func X11DeviceManagerLookup(deviceManager X11DeviceManagerCore, deviceId int) X11DeviceCore {
 	var carg1 *C.GdkDeviceManager // in, none, converted, casted *C.GdkX11DeviceManagerCore
 	var carg2 C.gint              // in, none, casted
-	var cret  *C.GdkDevice        // return, none, converted, casted *C.GdkX11DeviceCore
+	var cret  *C.GdkDevice        // return, none, converted, casted *C.GdkX11DeviceCore, nullable
 
 	carg1 = (*C.GdkDeviceManager)(UnsafeX11DeviceManagerCoreToGlibNone(deviceManager))
 	carg2 = C.gint(deviceId)
@@ -114,7 +114,9 @@ func X11DeviceManagerLookup(deviceManager X11DeviceManagerCore, deviceId int) X1
 
 	var goret X11DeviceCore
 
-	goret = UnsafeX11DeviceCoreFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeX11DeviceCoreFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }

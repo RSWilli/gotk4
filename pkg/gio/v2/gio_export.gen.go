@@ -150,7 +150,7 @@ func _gotk4_gio2_DBusMessageFilterFunction(carg1 *C.GDBusConnection, carg2 *C.GD
 	var connection DBusConnection // in, none, converted
 	var message    DBusMessage    // in, full, converted
 	var incoming   bool           // in
-	var goret      DBusMessage    // return, full, converted
+	var goret      DBusMessage    // return, full, converted, nullable
 
 	connection = UnsafeDBusConnectionFromGlibNone(unsafe.Pointer(carg1))
 	message = UnsafeDBusMessageFromGlibFull(unsafe.Pointer(carg2))
@@ -160,7 +160,9 @@ func _gotk4_gio2_DBusMessageFilterFunction(carg1 *C.GDBusConnection, carg2 *C.GD
 
 	goret = fn(connection, message, incoming)
 
-	cret = (*C.GDBusMessage)(UnsafeDBusMessageToGlibFull(goret))
+	if goret != nil {
+		cret = (*C.GDBusMessage)(UnsafeDBusMessageToGlibFull(goret))
+	}
 
 	return cret
 }
@@ -209,7 +211,7 @@ func _gotk4_gio2_DBusSubtreeIntrospectFunc(carg1 *C.GDBusConnection, carg2 *C.gc
 	var sender     string               // in, none, string
 	var objectPath string               // in, none, string
 	var node       string               // in, none, string
-	var goret      []*DBusInterfaceInfo // return, transfer: full, C Pointers: 2, Name: array[DBusInterfaceInfo], scope: , array (inner: *typesystem.Record, zero-terminated)
+	var goret      []*DBusInterfaceInfo // return, transfer: full, C Pointers: 2, Name: array[DBusInterfaceInfo], scope: , nullable, array (inner: *typesystem.Record, zero-terminated)
 
 	connection = UnsafeDBusConnectionFromGlibNone(unsafe.Pointer(carg1))
 	sender = C.GoString((*C.char)(unsafe.Pointer(carg2)))

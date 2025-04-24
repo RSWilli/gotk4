@@ -2466,7 +2466,7 @@ type Action interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Returns a description of the specified action of the object.
 	GetActionDescription(int) string
@@ -2478,7 +2478,7 @@ type Action interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the keybinding which can be used to activate this action, if one
 	// exists. The string returned should contain localized, human-readable,
@@ -2511,7 +2511,7 @@ type Action interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Returns the localized name of the specified action of the object.
 	GetLocalizedName(int) string
@@ -2532,7 +2532,7 @@ type Action interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Returns a non-localized string naming the specified action of the
 	// object. This name is generally not descriptive of the end result
@@ -2642,13 +2642,13 @@ func (action *ActionInstance) DoAction(i int) bool {
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Returns a description of the specified action of the object.
 func (action *ActionInstance) GetActionDescription(i int) string {
 	var carg0 *C.AtkAction // in, none, converted
 	var carg1 C.gint       // in, none, casted
-	var cret  *C.gchar     // return, none, string
+	var cret  *C.gchar     // return, none, string, nullable-string
 
 	carg0 = (*C.AtkAction)(UnsafeActionToGlibNone(action))
 	carg1 = C.gint(i)
@@ -2659,7 +2659,9 @@ func (action *ActionInstance) GetActionDescription(i int) string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -2672,7 +2674,7 @@ func (action *ActionInstance) GetActionDescription(i int) string {
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the keybinding which can be used to activate this action, if one
 // exists. The string returned should contain localized, human-readable,
@@ -2699,7 +2701,7 @@ func (action *ActionInstance) GetActionDescription(i int) string {
 func (action *ActionInstance) GetKeybinding(i int) string {
 	var carg0 *C.AtkAction // in, none, converted
 	var carg1 C.gint       // in, none, casted
-	var cret  *C.gchar     // return, none, string
+	var cret  *C.gchar     // return, none, string, nullable-string
 
 	carg0 = (*C.AtkAction)(UnsafeActionToGlibNone(action))
 	carg1 = C.gint(i)
@@ -2710,7 +2712,9 @@ func (action *ActionInstance) GetKeybinding(i int) string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -2723,13 +2727,13 @@ func (action *ActionInstance) GetKeybinding(i int) string {
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Returns the localized name of the specified action of the object.
 func (action *ActionInstance) GetLocalizedName(i int) string {
 	var carg0 *C.AtkAction // in, none, converted
 	var carg1 C.gint       // in, none, casted
-	var cret  *C.gchar     // return, none, string
+	var cret  *C.gchar     // return, none, string, nullable-string
 
 	carg0 = (*C.AtkAction)(UnsafeActionToGlibNone(action))
 	carg1 = C.gint(i)
@@ -2740,7 +2744,9 @@ func (action *ActionInstance) GetLocalizedName(i int) string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -2777,7 +2783,7 @@ func (action *ActionInstance) GetNActions() int {
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Returns a non-localized string naming the specified action of the
 // object. This name is generally not descriptive of the end result
@@ -2796,7 +2802,7 @@ func (action *ActionInstance) GetNActions() int {
 func (action *ActionInstance) GetActionName(i int) string {
 	var carg0 *C.AtkAction // in, none, converted
 	var carg1 C.gint       // in, none, casted
-	var cret  *C.gchar     // return, none, string
+	var cret  *C.gchar     // return, none, string, nullable-string
 
 	carg0 = (*C.AtkAction)(UnsafeActionToGlibNone(action))
 	carg1 = C.gint(i)
@@ -2807,7 +2813,9 @@ func (action *ActionInstance) GetActionName(i int) string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -2956,7 +2964,7 @@ type Component interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret Object 
+	// 	- goret Object (nullable) 
 	//
 	// Gets a reference to the accessible child, if one exists, at the
 	// coordinate point specified by @x and @y.
@@ -3281,7 +3289,7 @@ func (component *ComponentInstance) GrabFocus() bool {
 // 
 // The function returns the following values:
 // 
-// 	- goret Object 
+// 	- goret Object (nullable) 
 //
 // Gets a reference to the accessible child, if one exists, at the
 // coordinate point specified by @x and @y.
@@ -3290,7 +3298,7 @@ func (component *ComponentInstance) RefAccessibleAtPoint(x int, y int, coordType
 	var carg1 C.gint          // in, none, casted
 	var carg2 C.gint          // in, none, casted
 	var carg3 C.AtkCoordType  // in, none, casted
-	var cret  *C.AtkObject    // return, full, converted
+	var cret  *C.AtkObject    // return, full, converted, nullable
 
 	carg0 = (*C.AtkComponent)(UnsafeComponentToGlibNone(component))
 	carg1 = C.gint(x)
@@ -3305,7 +3313,9 @@ func (component *ComponentInstance) RefAccessibleAtPoint(x int, y int, coordType
 
 	var goret Object
 
-	goret = UnsafeObjectFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeObjectFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -3556,7 +3566,7 @@ type Document interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Retrieves the value of the given @attribute_name inside @document.
 	GetAttributeValue(string) string
@@ -3678,13 +3688,13 @@ func UnsafeDocumentToGlibFull(c Document) unsafe.Pointer {
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Retrieves the value of the given @attribute_name inside @document.
 func (document *DocumentInstance) GetAttributeValue(attributeName string) string {
 	var carg0 *C.AtkDocument // in, none, converted
 	var carg1 *C.gchar       // in, none, string
-	var cret  *C.gchar       // return, none, string
+	var cret  *C.gchar       // return, none, string, nullable-string
 
 	carg0 = (*C.AtkDocument)(UnsafeDocumentToGlibNone(document))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(attributeName)))
@@ -3696,7 +3706,9 @@ func (document *DocumentInstance) GetAttributeValue(attributeName string) string
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -4418,7 +4430,7 @@ type Image interface {
 	// GetImageLocale wraps atk_image_get_image_locale
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Retrieves the locale identifier associated to the #AtkImage.
 	GetImageLocale() string
@@ -4530,12 +4542,12 @@ func (image *ImageInstance) GetImageDescription() string {
 // GetImageLocale wraps atk_image_get_image_locale
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Retrieves the locale identifier associated to the #AtkImage.
 func (image *ImageInstance) GetImageLocale() string {
 	var carg0 *C.AtkImage // in, none, converted
-	var cret  *C.gchar    // return, none, string
+	var cret  *C.gchar    // return, none, string, nullable-string
 
 	carg0 = (*C.AtkImage)(UnsafeImageToGlibNone(image))
 
@@ -4544,7 +4556,9 @@ func (image *ImageInstance) GetImageLocale() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -4789,7 +4803,7 @@ type Selection interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret Object 
+	// 	- goret Object (nullable) 
 	//
 	// Gets a reference to the accessible object representing the specified
 	// selected child of the object.
@@ -4993,7 +5007,7 @@ func (selection *SelectionInstance) IsChildSelected(i int) bool {
 // 
 // The function returns the following values:
 // 
-// 	- goret Object 
+// 	- goret Object (nullable) 
 //
 // Gets a reference to the accessible object representing the specified
 // selected child of the object.
@@ -5004,7 +5018,7 @@ func (selection *SelectionInstance) IsChildSelected(i int) bool {
 func (selection *SelectionInstance) RefSelection(i int) Object {
 	var carg0 *C.AtkSelection // in, none, converted
 	var carg1 C.gint          // in, none, casted
-	var cret  *C.AtkObject    // return, full, converted
+	var cret  *C.AtkObject    // return, full, converted, nullable
 
 	carg0 = (*C.AtkSelection)(UnsafeSelectionToGlibNone(selection))
 	carg1 = C.gint(i)
@@ -5015,7 +5029,9 @@ func (selection *SelectionInstance) RefSelection(i int) Object {
 
 	var goret Object
 
-	goret = UnsafeObjectFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeObjectFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -5157,7 +5173,7 @@ type StreamableContent interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Get a string representing a URI in IETF standard format
 	// (see http://www.ietf.org/rfc/rfc2396.txt) from which the object's content
@@ -5301,7 +5317,7 @@ func (streamable *StreamableContentInstance) GetStream(mimeType string) *glib.IO
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Get a string representing a URI in IETF standard format
 // (see http://www.ietf.org/rfc/rfc2396.txt) from which the object's content
@@ -5314,7 +5330,7 @@ func (streamable *StreamableContentInstance) GetStream(mimeType string) *glib.IO
 func (streamable *StreamableContentInstance) GetURI(mimeType string) string {
 	var carg0 *C.AtkStreamableContent // in, none, converted
 	var carg1 *C.gchar                // in, none, string
-	var cret  *C.gchar                // return, none, string
+	var cret  *C.gchar                // return, none, string, nullable-string
 
 	carg0 = (*C.AtkStreamableContent)(UnsafeStreamableContentToGlibNone(streamable))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(mimeType)))
@@ -5326,7 +5342,9 @@ func (streamable *StreamableContentInstance) GetURI(mimeType string) string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -5401,7 +5419,7 @@ type Table interface {
 	// GetCaption wraps atk_table_get_caption
 	// The function returns the following values:
 	// 
-	// 	- goret Object 
+	// 	- goret Object (nullable) 
 	//
 	// Gets the caption for the @table.
 	GetCaption() Object
@@ -5439,7 +5457,7 @@ type Table interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret Object 
+	// 	- goret Object (nullable) 
 	//
 	// Gets the column header of a specified column in an accessible table.
 	GetColumnHeader(int) Object
@@ -5465,7 +5483,7 @@ type Table interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the description text of the specified row in the table
 	GetRowDescription(int) string
@@ -5491,7 +5509,7 @@ type Table interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret Object 
+	// 	- goret Object (nullable) 
 	//
 	// Gets the row header of a specified row in an accessible table.
 	GetRowHeader(int) Object
@@ -5806,12 +5824,12 @@ func (table *TableInstance) AddRowSelection(row int) bool {
 // GetCaption wraps atk_table_get_caption
 // The function returns the following values:
 // 
-// 	- goret Object 
+// 	- goret Object (nullable) 
 //
 // Gets the caption for the @table.
 func (table *TableInstance) GetCaption() Object {
 	var carg0 *C.AtkTable  // in, none, converted
-	var cret  *C.AtkObject // return, none, converted
+	var cret  *C.AtkObject // return, none, converted, nullable
 
 	carg0 = (*C.AtkTable)(UnsafeTableToGlibNone(table))
 
@@ -5820,7 +5838,9 @@ func (table *TableInstance) GetCaption() Object {
 
 	var goret Object
 
-	goret = UnsafeObjectFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeObjectFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -5898,13 +5918,13 @@ func (table *TableInstance) GetColumnExtentAt(row int, column int) int {
 // 
 // The function returns the following values:
 // 
-// 	- goret Object 
+// 	- goret Object (nullable) 
 //
 // Gets the column header of a specified column in an accessible table.
 func (table *TableInstance) GetColumnHeader(column int) Object {
 	var carg0 *C.AtkTable  // in, none, converted
 	var carg1 C.gint       // in, none, casted
-	var cret  *C.AtkObject // return, none, converted
+	var cret  *C.AtkObject // return, none, converted, nullable
 
 	carg0 = (*C.AtkTable)(UnsafeTableToGlibNone(table))
 	carg1 = C.gint(column)
@@ -5915,7 +5935,9 @@ func (table *TableInstance) GetColumnHeader(column int) Object {
 
 	var goret Object
 
-	goret = UnsafeObjectFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeObjectFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -5972,13 +5994,13 @@ func (table *TableInstance) GetNRows() int {
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the description text of the specified row in the table
 func (table *TableInstance) GetRowDescription(row int) string {
 	var carg0 *C.AtkTable // in, none, converted
 	var carg1 C.gint      // in, none, casted
-	var cret  *C.gchar    // return, none, string
+	var cret  *C.gchar    // return, none, string, nullable-string
 
 	carg0 = (*C.AtkTable)(UnsafeTableToGlibNone(table))
 	carg1 = C.gint(row)
@@ -5989,7 +6011,9 @@ func (table *TableInstance) GetRowDescription(row int) string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -6037,13 +6061,13 @@ func (table *TableInstance) GetRowExtentAt(row int, column int) int {
 // 
 // The function returns the following values:
 // 
-// 	- goret Object 
+// 	- goret Object (nullable) 
 //
 // Gets the row header of a specified row in an accessible table.
 func (table *TableInstance) GetRowHeader(row int) Object {
 	var carg0 *C.AtkTable  // in, none, converted
 	var carg1 C.gint       // in, none, casted
-	var cret  *C.AtkObject // return, none, converted
+	var cret  *C.AtkObject // return, none, converted, nullable
 
 	carg0 = (*C.AtkTable)(UnsafeTableToGlibNone(table))
 	carg1 = C.gint(row)
@@ -6054,7 +6078,9 @@ func (table *TableInstance) GetRowHeader(row int) Object {
 
 	var goret Object
 
-	goret = UnsafeObjectFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeObjectFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -6966,7 +6992,7 @@ type Text interface {
 	//                in the case of error (e.g. invalid offset, not implemented) 
 	// 	- endOffset int: the offset of the first character after the returned string,
 	//              or -1 in the case of error (e.g. invalid offset, not implemented) 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets a portion of the text exposed through an #AtkText according to a given @offset
 	// and a specific @granularity, along with the start and end offsets defining the
@@ -7555,7 +7581,7 @@ func (text *TextInstance) GetSelection(selectionNum int) (int, int, string) {
 //                in the case of error (e.g. invalid offset, not implemented) 
 // 	- endOffset int: the offset of the first character after the returned string,
 //              or -1 in the case of error (e.g. invalid offset, not implemented) 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets a portion of the text exposed through an #AtkText according to a given @offset
 // and a specific @granularity, along with the start and end offsets defining the
@@ -7593,7 +7619,7 @@ func (text *TextInstance) GetStringAtOffset(offset int, granularity TextGranular
 	var carg2 C.AtkTextGranularity // in, none, casted
 	var carg3 C.gint               // out, full, casted
 	var carg4 C.gint               // out, full, casted
-	var cret  *C.gchar             // return, full, string
+	var cret  *C.gchar             // return, full, string, nullable-string
 
 	carg0 = (*C.AtkText)(UnsafeTextToGlibNone(text))
 	carg1 = C.gint(offset)
@@ -7610,8 +7636,10 @@ func (text *TextInstance) GetStringAtOffset(offset int, granularity TextGranular
 
 	startOffset = int(carg3)
 	endOffset = int(carg4)
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-	defer C.free(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+		defer C.free(unsafe.Pointer(cret))
+	}
 
 	return startOffset, endOffset, goret
 }
@@ -8089,7 +8117,7 @@ type Value interface {
 	// GetRange wraps atk_value_get_range
 	// The function returns the following values:
 	// 
-	// 	- goret *Range 
+	// 	- goret *Range (nullable) 
 	//
 	// Gets the range of this object.
 	GetRange() *Range
@@ -8216,12 +8244,12 @@ func (obj *ValueInstance) GetIncrement() float64 {
 // GetRange wraps atk_value_get_range
 // The function returns the following values:
 // 
-// 	- goret *Range 
+// 	- goret *Range (nullable) 
 //
 // Gets the range of this object.
 func (obj *ValueInstance) GetRange() *Range {
 	var carg0 *C.AtkValue // in, none, converted
-	var cret  *C.AtkRange // return, full, converted
+	var cret  *C.AtkRange // return, full, converted, nullable
 
 	carg0 = (*C.AtkValue)(UnsafeValueToGlibNone(obj))
 
@@ -8230,7 +8258,9 @@ func (obj *ValueInstance) GetRange() *Range {
 
 	var goret *Range
 
-	goret = UnsafeRangeFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeRangeFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -11242,7 +11272,7 @@ type StateSet interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret StateSet 
+	// 	- goret StateSet (nullable) 
 	//
 	// Constructs the union of the two sets.
 	OrSets(StateSet) StateSet
@@ -11541,13 +11571,13 @@ func (set *StateSetInstance) IsEmpty() bool {
 // 
 // The function returns the following values:
 // 
-// 	- goret StateSet 
+// 	- goret StateSet (nullable) 
 //
 // Constructs the union of the two sets.
 func (set *StateSetInstance) OrSets(compareSet StateSet) StateSet {
 	var carg0 *C.AtkStateSet // in, none, converted
 	var carg1 *C.AtkStateSet // in, none, converted
-	var cret  *C.AtkStateSet // return, full, converted
+	var cret  *C.AtkStateSet // return, full, converted, nullable
 
 	carg0 = (*C.AtkStateSet)(UnsafeStateSetToGlibNone(set))
 	carg1 = (*C.AtkStateSet)(UnsafeStateSetToGlibNone(compareSet))
@@ -11558,7 +11588,9 @@ func (set *StateSetInstance) OrSets(compareSet StateSet) StateSet {
 
 	var goret StateSet
 
-	goret = UnsafeStateSetFromGlibFull(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeStateSetFromGlibFull(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
