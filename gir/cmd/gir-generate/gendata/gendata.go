@@ -215,20 +215,8 @@ var Main = genmain.Data{
 			},
 			"GObject-2": {
 				MinVersion: "2.80",
-				ManualTypes: []typesystem.Type{
-					&typesystem.Alias{
-						BaseType: typesystem.BaseType{
-							GirName: "Type",
-							CTyp:    "GType",
-							CGoTyp:  "C.GType",
-							GoTyp:   "Type",
-						},
-						AliasedType: typesystem.CouldBeForeign[typesystem.Type]{
-							Namespace: nil,
-							Type:      typesystem.Guint64,
-						},
-					},
-					&typesystem.Class{
+				ManualTypes: func() []typesystem.Type { // use an immediately invoked function to create the circular references
+					object := &typesystem.Class{
 						BaseType: typesystem.BaseType{
 							GirName: "Object",
 							GoTyp:   "ObjectInstance",
@@ -244,36 +232,59 @@ var Main = genmain.Data{
 							ToGlibNoneFunction:     "UnsafeObjectToGlibNone",
 							ToGlibFullFunction:     "UnsafeObjectToGlibFull",
 						},
-					},
-					// this is needed so that the type structs can be looked up:
-					&typesystem.Record{
+						GoExtendOverrideStructName: "ObjectOverrides",
+						GoUnsafeApplyOverridesName: "UnsafeApplyObjectOverrides",
+					}
+					objectClass := &typesystem.Record{
 						BaseType: typesystem.BaseType{
 							GirName: "ObjectClass",
 							GoTyp:   "ObjectClass",
 							CTyp:    "GObjectClass",
 							CGoTyp:  "C.GObjectClass",
 						},
-						// not transferable, we don't want any methods with this
-						BaseConversions: typesystem.BaseConversions{},
-					},
-					&typesystem.Record{
-						BaseType: typesystem.BaseType{
-							GirName: "Value",
-							GoTyp:   "Value",
-							CTyp:    "GValue",
-							CGoTyp:  "C.GValue",
-						},
 						BaseConversions: typesystem.BaseConversions{
-							FromGlibBorrowFunction: "ValueFromNative",
-
-							// these should get implemented manually, because "any" would be a better match
-							FromGlibFullFunction: "UnsafeValueFromGlibUseAnyInstead",
-							FromGlibNoneFunction: "UnsafeValueFromGlibUseAnyInstead",
-							ToGlibNoneFunction:   "UnsafeValueToGlibUseAnyInstead",
-							ToGlibFullFunction:   "UnsafeValueToGlibUseAnyInstead",
+							FromGlibBorrowFunction: "UnsafeObjectClassFromGlibBorrow",
+							// not transferable, we don't want any methods with this
 						},
-					},
-				},
+					}
+
+					object.TypeStruct = objectClass
+					objectClass.IsTypeStructFor = object
+
+					return []typesystem.Type{
+						&typesystem.Alias{
+							BaseType: typesystem.BaseType{
+								GirName: "Type",
+								CTyp:    "GType",
+								CGoTyp:  "C.GType",
+								GoTyp:   "Type",
+							},
+							AliasedType: typesystem.CouldBeForeign[typesystem.Type]{
+								Namespace: nil,
+								Type:      typesystem.Guint64,
+							},
+						},
+						object,
+						objectClass,
+						&typesystem.Record{
+							BaseType: typesystem.BaseType{
+								GirName: "Value",
+								GoTyp:   "Value",
+								CTyp:    "GValue",
+								CGoTyp:  "C.GValue",
+							},
+							BaseConversions: typesystem.BaseConversions{
+								FromGlibBorrowFunction: "ValueFromNative",
+
+								// these should get implemented manually, because "any" would be a better match
+								FromGlibFullFunction: "UnsafeValueFromGlibUseAnyInstead",
+								FromGlibNoneFunction: "UnsafeValueFromGlibUseAnyInstead",
+								ToGlibNoneFunction:   "UnsafeValueToGlibUseAnyInstead",
+								ToGlibFullFunction:   "UnsafeValueToGlibUseAnyInstead",
+							},
+						},
+					}
+				}(),
 				IgnoredDefinitions: []typesystem.IgnoreFunc{
 					// manually implemented, but hidden from the user
 					typesystem.IgnoreMatching("ParamSpec"),
