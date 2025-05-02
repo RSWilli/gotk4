@@ -92,3 +92,23 @@ func _gotk4_gdkpixbuf2_PixbufSaveFunc(carg1 *C.gchar, carg2 C.gsize, carg3 **C.G
 	return cret
 }
 
+//export _gotk4_gdkpixbuf2_PixbufLoader_area_prepared
+func _gotk4_gdkpixbuf2_PixbufLoader_area_prepared(carg0 *C.GdkPixbufLoader) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gdkpixbuf2_PixbufLoader_area_updated
+func _gotk4_gdkpixbuf2_PixbufLoader_area_updated(carg0 *C.GdkPixbufLoader, carg1 C.int, carg2 C.int, carg3 C.int, carg4 C.int) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gdkpixbuf2_PixbufLoader_closed
+func _gotk4_gdkpixbuf2_PixbufLoader_closed(carg0 *C.GdkPixbufLoader) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gdkpixbuf2_PixbufLoader_size_prepared
+func _gotk4_gdkpixbuf2_PixbufLoader_size_prepared(carg0 *C.GdkPixbufLoader, carg1 C.int, carg2 C.int) {
+	panic("unimplemented")
+}
+

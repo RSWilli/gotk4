@@ -3057,6 +3057,76 @@ func (e UnicodeScript) String() string {
 	}
 }
 
+// UnicodeScriptFromISO15924 wraps g_unicode_script_from_iso15924
+// 
+// The function takes the following parameters:
+// 
+// 	- iso15924 uint32: a Unicode script 
+// 
+// The function returns the following values:
+// 
+// 	- goret UnicodeScript 
+//
+// Looks up the Unicode script for @iso15924.  ISO 15924 assigns four-letter
+// codes to scripts.  For example, the code for Arabic is 'Arab'.
+// This function accepts four letter codes encoded as a @guint32 in a
+// big-endian fashion.  That is, the code expected for Arabic is
+// 0x41726162 (0x41 is ASCII code for 'A', 0x72 is ASCII code for 'r', etc).
+// 
+// See
+// [Codes for the representation of names of scripts](http://unicode.org/iso15924/codelists.html)
+// for details.
+func UnicodeScriptFromISO15924(iso15924 uint32) UnicodeScript {
+	var carg1 C.guint32        // in, none, casted
+	var cret  C.GUnicodeScript // return, none, casted
+
+	carg1 = C.guint32(iso15924)
+
+	cret = C.g_unicode_script_from_iso15924(carg1)
+	runtime.KeepAlive(iso15924)
+
+	var goret UnicodeScript
+
+	goret = UnicodeScript(cret)
+
+	return goret
+}
+
+// UnicodeScriptToISO15924 wraps g_unicode_script_to_iso15924
+// 
+// The function takes the following parameters:
+// 
+// 	- script UnicodeScript: a Unicode script 
+// 
+// The function returns the following values:
+// 
+// 	- goret uint32 
+//
+// Looks up the ISO 15924 code for @script.  ISO 15924 assigns four-letter
+// codes to scripts.  For example, the code for Arabic is 'Arab'.  The
+// four letter codes are encoded as a @guint32 by this function in a
+// big-endian fashion.  That is, the code returned for Arabic is
+// 0x41726162 (0x41 is ASCII code for 'A', 0x72 is ASCII code for 'r', etc).
+// 
+// See
+// [Codes for the representation of names of scripts](http://unicode.org/iso15924/codelists.html)
+// for details.
+func UnicodeScriptToISO15924(script UnicodeScript) uint32 {
+	var carg1 C.GUnicodeScript // in, none, casted
+	var cret  C.guint32        // return, none, casted
+
+	carg1 = C.GUnicodeScript(script)
+
+	cret = C.g_unicode_script_to_iso15924(carg1)
+	runtime.KeepAlive(script)
+
+	var goret uint32
+
+	goret = uint32(cret)
+
+	return goret
+}
+
 // UnicodeType wraps GUnicodeType
 //
 // These are the possible character classifications from the
@@ -6047,6 +6117,7 @@ func Convert(str string, toCodeset string, fromCodeset string) (uint, uint, stri
 }
 
 // ConvertErrorQuark wraps g_convert_error_quark
+// 
 // The function returns the following values:
 // 
 // 	- goret Quark 
@@ -6725,6 +6796,7 @@ func FileErrorFromErrno(errNo int) FileError {
 }
 
 // FileErrorQuark wraps g_file_error_quark
+// 
 // The function returns the following values:
 // 
 // 	- goret Quark 
@@ -7600,6 +7672,7 @@ func FormatSizeFull(size uint64, flags FormatSizeFlags) string {
 }
 
 // GetApplicationName wraps g_get_application_name
+// 
 // The function returns the following values:
 // 
 // 	- goret string (nullable) 
@@ -7626,6 +7699,7 @@ func GetApplicationName() string {
 }
 
 // GetCharset wraps g_get_charset
+// 
 // The function returns the following values:
 // 
 // 	- charset string: return location for character set
@@ -7671,6 +7745,7 @@ func GetCharset() (string, bool) {
 }
 
 // GetCodeset wraps g_get_codeset
+// 
 // The function returns the following values:
 // 
 // 	- goret string 
@@ -7690,6 +7765,7 @@ func GetCodeset() string {
 }
 
 // GetConsoleCharset wraps g_get_console_charset
+// 
 // The function returns the following values:
 // 
 // 	- charset string: return location for character set
@@ -7731,6 +7807,7 @@ func GetConsoleCharset() (string, bool) {
 }
 
 // GetCurrentDir wraps g_get_current_dir
+// 
 // The function returns the following values:
 // 
 // 	- goret string 
@@ -7759,6 +7836,7 @@ func GetCurrentDir() string {
 }
 
 // GetEnviron wraps g_get_environ
+// 
 // The function returns the following values:
 // 
 // 	- goret []string 
@@ -7788,6 +7866,7 @@ func GetEnviron() []string {
 }
 
 // GetHomeDir wraps g_get_home_dir
+// 
 // The function returns the following values:
 // 
 // 	- goret string 
@@ -7825,6 +7904,7 @@ func GetHomeDir() string {
 }
 
 // GetHostName wraps g_get_host_name
+// 
 // The function returns the following values:
 // 
 // 	- goret string 
@@ -7856,6 +7936,7 @@ func GetHostName() string {
 }
 
 // GetLanguageNames wraps g_get_language_names
+// 
 // The function returns the following values:
 // 
 // 	- goret []string 
@@ -7969,6 +8050,7 @@ func GetLocaleVariants(locale string) []string {
 }
 
 // GetMonotonicTime wraps g_get_monotonic_time
+// 
 // The function returns the following values:
 // 
 // 	- goret int64 
@@ -8034,6 +8116,7 @@ func GetOsInfo(keyName string) string {
 }
 
 // GetPrgname wraps g_get_prgname
+// 
 // The function returns the following values:
 // 
 // 	- goret string (nullable) 
@@ -8061,6 +8144,7 @@ func GetPrgname() string {
 }
 
 // GetRealName wraps g_get_real_name
+// 
 // The function returns the following values:
 // 
 // 	- goret string 
@@ -8083,6 +8167,7 @@ func GetRealName() string {
 }
 
 // GetRealTime wraps g_get_real_time
+// 
 // The function returns the following values:
 // 
 // 	- goret int64 
@@ -8109,6 +8194,7 @@ func GetRealTime() int64 {
 }
 
 // GetSystemConfigDirs wraps g_get_system_config_dirs
+// 
 // The function returns the following values:
 // 
 // 	- goret []string 
@@ -8148,6 +8234,7 @@ func GetSystemConfigDirs() []string {
 }
 
 // GetSystemDataDirs wraps g_get_system_data_dirs
+// 
 // The function returns the following values:
 // 
 // 	- goret []string 
@@ -8201,6 +8288,7 @@ func GetSystemDataDirs() []string {
 }
 
 // GetTmpDir wraps g_get_tmp_dir
+// 
 // The function returns the following values:
 // 
 // 	- goret string 
@@ -8232,6 +8320,7 @@ func GetTmpDir() string {
 }
 
 // GetUserCacheDir wraps g_get_user_cache_dir
+// 
 // The function returns the following values:
 // 
 // 	- goret string 
@@ -8265,6 +8354,7 @@ func GetUserCacheDir() string {
 }
 
 // GetUserConfigDir wraps g_get_user_config_dir
+// 
 // The function returns the following values:
 // 
 // 	- goret string 
@@ -8299,6 +8389,7 @@ func GetUserConfigDir() string {
 }
 
 // GetUserDataDir wraps g_get_user_data_dir
+// 
 // The function returns the following values:
 // 
 // 	- goret string 
@@ -8333,6 +8424,7 @@ func GetUserDataDir() string {
 }
 
 // GetUserName wraps g_get_user_name
+// 
 // The function returns the following values:
 // 
 // 	- goret string 
@@ -8354,6 +8446,7 @@ func GetUserName() string {
 }
 
 // GetUserRuntimeDir wraps g_get_user_runtime_dir
+// 
 // The function returns the following values:
 // 
 // 	- goret string 
@@ -8422,6 +8515,7 @@ func GetUserSpecialDir(directory UserDirectory) string {
 }
 
 // GetUserStateDir wraps g_get_user_state_dir
+// 
 // The function returns the following values:
 // 
 // 	- goret string 
@@ -8718,6 +8812,7 @@ func IdleAddFull(priority int, function SourceFunc) uint {
 }
 
 // NewIdleSource wraps g_idle_source_new
+// 
 // The function returns the following values:
 // 
 // 	- goret *Source 
@@ -9002,6 +9097,7 @@ func IOCreateWatch(channel *IOChannel, condition IOCondition) *Source {
 }
 
 // Listenv wraps g_listenv
+// 
 // The function returns the following values:
 // 
 // 	- goret []string 
@@ -9160,6 +9256,7 @@ func LocaleToUTF8(opsysstring string) (uint, uint, string, error) {
 }
 
 // LogGetDebugEnabled wraps g_log_get_debug_enabled
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -9655,6 +9752,7 @@ func LogWriterSupportsColor(outputFd int) bool {
 }
 
 // MainCurrentSource wraps g_main_current_source
+// 
 // The function returns the following values:
 // 
 // 	- goret *Source (nullable) 
@@ -9675,6 +9773,7 @@ func MainCurrentSource() *Source {
 }
 
 // MainDepth wraps g_main_depth
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -9793,6 +9892,7 @@ func MainDepth() int {
 }
 
 // MarkupErrorQuark wraps g_markup_error_quark
+// 
 // The function returns the following values:
 // 
 // 	- goret Quark 
@@ -9888,6 +9988,7 @@ func MkdirWithParents(pathname string, mode int) int {
 }
 
 // NumberParserErrorQuark wraps g_number_parser_error_quark
+// 
 // The function returns the following values:
 // 
 // 	- goret Quark 
@@ -9904,6 +10005,7 @@ func NumberParserErrorQuark() Quark {
 }
 
 // OptionErrorQuark wraps g_option_error_quark
+// 
 // The function returns the following values:
 // 
 // 	- goret Quark 
@@ -10398,6 +10500,7 @@ func QuarkTryString(str string) Quark {
 }
 
 // RandomDouble wraps g_random_double
+// 
 // The function returns the following values:
 // 
 // 	- goret float64 
@@ -10448,6 +10551,7 @@ func RandomDoubleRange(begin float64, end float64) float64 {
 }
 
 // RandomInt wraps g_random_int
+// 
 // The function returns the following values:
 // 
 // 	- goret uint32 
@@ -10646,6 +10750,7 @@ func Setenv(variable string, value string, overwrite bool) bool {
 }
 
 // ShellErrorQuark wraps g_shell_error_quark
+// 
 // The function returns the following values:
 // 
 // 	- goret Quark 
@@ -11073,6 +11178,7 @@ func SpawnCommandLineSync(commandLine string) (string, string, int, bool, error)
 }
 
 // SpawnErrorQuark wraps g_spawn_error_quark
+// 
 // The function returns the following values:
 // 
 // 	- goret Quark 
@@ -11089,6 +11195,7 @@ func SpawnErrorQuark() Quark {
 }
 
 // SpawnExitErrorQuark wraps g_spawn_exit_error_quark
+// 
 // The function returns the following values:
 // 
 // 	- goret Quark 
@@ -13957,6 +14064,7 @@ func UUIDStringIsValid(str string) bool {
 }
 
 // UUIDStringRandom wraps g_uuid_string_random
+// 
 // The function returns the following values:
 // 
 // 	- goret string 
@@ -14030,7 +14138,7 @@ func UnsafeBookmarkFileFromGlibBorrow(p unsafe.Pointer) *BookmarkFile {
 	return &BookmarkFile{&bookmarkFile{(*C.GBookmarkFile)(p)}}
 }
 
-// UnsafeBookmarkFileFromGlibNone is used to convert raw C.GBookmarkFile pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeBookmarkFileFromGlibNone is used to convert raw C.GBookmarkFile pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeBookmarkFileFromGlibNone(p unsafe.Pointer) *BookmarkFile {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeBookmarkFileFromGlibBorrow(p)
@@ -14043,7 +14151,7 @@ func UnsafeBookmarkFileFromGlibNone(p unsafe.Pointer) *BookmarkFile {
 	return wrapped
 }
 
-// UnsafeBookmarkFileFromGlibFull is used to convert raw C.GBookmarkFile pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeBookmarkFileFromGlibFull is used to convert raw C.GBookmarkFile pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeBookmarkFileFromGlibFull(p unsafe.Pointer) *BookmarkFile {
 	wrapped := UnsafeBookmarkFileFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -14075,7 +14183,9 @@ func UnsafeBookmarkFileToGlibFull(b *BookmarkFile) unsafe.Pointer {
 	b.native = nil // BookmarkFile is invalid from here on
 	return _p
 }
+
 // NewBookmarkFile wraps g_bookmark_file_new
+// 
 // The function returns the following values:
 // 
 // 	- goret *BookmarkFile 
@@ -14098,6 +14208,7 @@ func NewBookmarkFile() *BookmarkFile {
 }
 
 // BookmarkFileErrorQuark wraps g_bookmark_file_error_quark
+// 
 // The function returns the following values:
 // 
 // 	- goret Quark 
@@ -14198,6 +14309,7 @@ func (bookmark *BookmarkFile) AddGroup(uri string, group string) {
 }
 
 // Copy wraps g_bookmark_file_copy
+// 
 // The function returns the following values:
 // 
 // 	- goret *BookmarkFile 
@@ -14645,6 +14757,7 @@ func (bookmark *BookmarkFile) GetModifiedDateTime(uri string) (*DateTime, error)
 }
 
 // GetSize wraps g_bookmark_file_get_size
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -14712,6 +14825,7 @@ func (bookmark *BookmarkFile) GetTitle(uri string) (string, error) {
 }
 
 // GetURIs wraps g_bookmark_file_get_uris
+// 
 // The function returns the following values:
 // 
 // 	- length uint: return location for the number of returned URIs, or %NULL 
@@ -15599,6 +15713,7 @@ func (bookmark *BookmarkFile) SetVisitedDateTime(uri string, visited *DateTime) 
 }
 
 // ToData wraps g_bookmark_file_to_data
+// 
 // The function returns the following values:
 // 
 // 	- length uint: return location for the length of the returned string, or %NULL 
@@ -15689,7 +15804,7 @@ func UnsafeByteArrayFromGlibBorrow(p unsafe.Pointer) *ByteArray {
 	return &ByteArray{&byteArray{(*C.GByteArray)(p)}}
 }
 
-// UnsafeByteArrayFromGlibNone is used to convert raw C.GByteArray pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeByteArrayFromGlibNone is used to convert raw C.GByteArray pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeByteArrayFromGlibNone(p unsafe.Pointer) *ByteArray {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeByteArrayFromGlibBorrow(p)
@@ -15702,7 +15817,7 @@ func UnsafeByteArrayFromGlibNone(p unsafe.Pointer) *ByteArray {
 	return wrapped
 }
 
-// UnsafeByteArrayFromGlibFull is used to convert raw C.GByteArray pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeByteArrayFromGlibFull is used to convert raw C.GByteArray pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeByteArrayFromGlibFull(p unsafe.Pointer) *ByteArray {
 	wrapped := UnsafeByteArrayFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -15734,6 +15849,7 @@ func UnsafeByteArrayToGlibFull(b *ByteArray) unsafe.Pointer {
 	b.native = nil // ByteArray is invalid from here on
 	return _p
 }
+
 // Bytes wraps GBytes
 //
 // A simple refcounted data type representing an immutable sequence of zero or
@@ -15774,7 +15890,7 @@ func UnsafeBytesFromGlibBorrow(p unsafe.Pointer) *Bytes {
 	return &Bytes{&bytes{(*C.GBytes)(p)}}
 }
 
-// UnsafeBytesFromGlibNone is used to convert raw C.GBytes pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeBytesFromGlibNone is used to convert raw C.GBytes pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeBytesFromGlibNone(p unsafe.Pointer) *Bytes {
 	C.g_bytes_ref((*C.GBytes)(p))
 	wrapped := UnsafeBytesFromGlibBorrow(p)
@@ -15787,7 +15903,7 @@ func UnsafeBytesFromGlibNone(p unsafe.Pointer) *Bytes {
 	return wrapped
 }
 
-// UnsafeBytesFromGlibFull is used to convert raw C.GBytes pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeBytesFromGlibFull is used to convert raw C.GBytes pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeBytesFromGlibFull(p unsafe.Pointer) *Bytes {
 	wrapped := UnsafeBytesFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -15826,6 +15942,7 @@ func UnsafeBytesToGlibFull(b *Bytes) unsafe.Pointer {
 	b.native = nil // Bytes is invalid from here on
 	return _p
 }
+
 // GetRegion wraps g_bytes_get_region
 // 
 // The function takes the following parameters:
@@ -15886,6 +16003,7 @@ func (bytes *Bytes) GetRegion(elementSize uint, offset uint, nElements uint) uns
 }
 
 // GetSize wraps g_bytes_get_size
+// 
 // The function returns the following values:
 // 
 // 	- goret uint 
@@ -15985,7 +16103,7 @@ func UnsafeChecksumFromGlibBorrow(p unsafe.Pointer) *Checksum {
 	return &Checksum{&checksum{(*C.GChecksum)(p)}}
 }
 
-// UnsafeChecksumFromGlibNone is used to convert raw C.GChecksum pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeChecksumFromGlibNone is used to convert raw C.GChecksum pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeChecksumFromGlibNone(p unsafe.Pointer) *Checksum {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeChecksumFromGlibBorrow(p)
@@ -15998,7 +16116,7 @@ func UnsafeChecksumFromGlibNone(p unsafe.Pointer) *Checksum {
 	return wrapped
 }
 
-// UnsafeChecksumFromGlibFull is used to convert raw C.GChecksum pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeChecksumFromGlibFull is used to convert raw C.GChecksum pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeChecksumFromGlibFull(p unsafe.Pointer) *Checksum {
 	wrapped := UnsafeChecksumFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -16030,6 +16148,7 @@ func UnsafeChecksumToGlibFull(c *Checksum) unsafe.Pointer {
 	c.native = nil // Checksum is invalid from here on
 	return _p
 }
+
 // NewChecksum wraps g_checksum_new
 // 
 // The function takes the following parameters:
@@ -16099,6 +16218,7 @@ func ChecksumTypeGetLength(checksumType ChecksumType) int {
 }
 
 // Copy wraps g_checksum_copy
+// 
 // The function returns the following values:
 // 
 // 	- goret *Checksum 
@@ -16123,6 +16243,7 @@ func (checksum *Checksum) Copy() *Checksum {
 }
 
 // GetString wraps g_checksum_get_string
+// 
 // The function returns the following values:
 // 
 // 	- goret string 
@@ -16227,7 +16348,7 @@ func UnsafeDateTimeFromGlibBorrow(p unsafe.Pointer) *DateTime {
 	return &DateTime{&dateTime{(*C.GDateTime)(p)}}
 }
 
-// UnsafeDateTimeFromGlibNone is used to convert raw C.GDateTime pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeDateTimeFromGlibNone is used to convert raw C.GDateTime pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeDateTimeFromGlibNone(p unsafe.Pointer) *DateTime {
 	C.g_date_time_ref((*C.GDateTime)(p))
 	wrapped := UnsafeDateTimeFromGlibBorrow(p)
@@ -16240,7 +16361,7 @@ func UnsafeDateTimeFromGlibNone(p unsafe.Pointer) *DateTime {
 	return wrapped
 }
 
-// UnsafeDateTimeFromGlibFull is used to convert raw C.GDateTime pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeDateTimeFromGlibFull is used to convert raw C.GDateTime pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeDateTimeFromGlibFull(p unsafe.Pointer) *DateTime {
 	wrapped := UnsafeDateTimeFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -16279,6 +16400,7 @@ func UnsafeDateTimeToGlibFull(d *DateTime) unsafe.Pointer {
 	d.native = nil // DateTime is invalid from here on
 	return _p
 }
+
 // NewDateTime wraps g_date_time_new
 // 
 // The function takes the following parameters:
@@ -16529,6 +16651,7 @@ func NewDateTimeNow(tz *TimeZone) *DateTime {
 }
 
 // NewDateTimeNowLocal wraps g_date_time_new_now_local
+// 
 // The function returns the following values:
 // 
 // 	- goret *DateTime (nullable) 
@@ -16553,6 +16676,7 @@ func NewDateTimeNowLocal() *DateTime {
 }
 
 // NewDateTimeNowUTC wraps g_date_time_new_now_utc
+// 
 // The function returns the following values:
 // 
 // 	- goret *DateTime (nullable) 
@@ -17143,6 +17267,7 @@ func (datetime *DateTime) Format(format string) string {
 }
 
 // FormatISO8601 wraps g_date_time_format_iso8601
+// 
 // The function returns the following values:
 // 
 // 	- goret string (nullable) 
@@ -17172,6 +17297,7 @@ func (datetime *DateTime) FormatISO8601() string {
 }
 
 // GetDayOfMonth wraps g_date_time_get_day_of_month
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -17195,6 +17321,7 @@ func (datetime *DateTime) GetDayOfMonth() int {
 }
 
 // GetDayOfWeek wraps g_date_time_get_day_of_week
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -17218,6 +17345,7 @@ func (datetime *DateTime) GetDayOfWeek() int {
 }
 
 // GetDayOfYear wraps g_date_time_get_day_of_year
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -17241,6 +17369,7 @@ func (datetime *DateTime) GetDayOfYear() int {
 }
 
 // GetHour wraps g_date_time_get_hour
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -17263,6 +17392,7 @@ func (datetime *DateTime) GetHour() int {
 }
 
 // GetMicrosecond wraps g_date_time_get_microsecond
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -17285,6 +17415,7 @@ func (datetime *DateTime) GetMicrosecond() int {
 }
 
 // GetMinute wraps g_date_time_get_minute
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -17307,6 +17438,7 @@ func (datetime *DateTime) GetMinute() int {
 }
 
 // GetMonth wraps g_date_time_get_month
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -17330,6 +17462,7 @@ func (datetime *DateTime) GetMonth() int {
 }
 
 // GetSecond wraps g_date_time_get_second
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -17352,6 +17485,7 @@ func (datetime *DateTime) GetSecond() int {
 }
 
 // GetSeconds wraps g_date_time_get_seconds
+// 
 // The function returns the following values:
 // 
 // 	- goret float64 
@@ -17375,6 +17509,7 @@ func (datetime *DateTime) GetSeconds() float64 {
 }
 
 // GetTimezone wraps g_date_time_get_timezone
+// 
 // The function returns the following values:
 // 
 // 	- goret *TimeZone 
@@ -17397,6 +17532,7 @@ func (datetime *DateTime) GetTimezone() *TimeZone {
 }
 
 // GetTimezoneAbbreviation wraps g_date_time_get_timezone_abbreviation
+// 
 // The function returns the following values:
 // 
 // 	- goret string 
@@ -17424,6 +17560,7 @@ func (datetime *DateTime) GetTimezoneAbbreviation() string {
 }
 
 // GetUTCOffset wraps g_date_time_get_utc_offset
+// 
 // The function returns the following values:
 // 
 // 	- goret TimeSpan 
@@ -17453,6 +17590,7 @@ func (datetime *DateTime) GetUTCOffset() TimeSpan {
 }
 
 // GetWeekNumberingYear wraps g_date_time_get_week_numbering_year
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -17505,6 +17643,7 @@ func (datetime *DateTime) GetWeekNumberingYear() int {
 }
 
 // GetWeekOfYear wraps g_date_time_get_week_of_year
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -17541,6 +17680,7 @@ func (datetime *DateTime) GetWeekOfYear() int {
 }
 
 // GetYear wraps g_date_time_get_year
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -17563,6 +17703,7 @@ func (datetime *DateTime) GetYear() int {
 }
 
 // GetYmd wraps g_date_time_get_ymd
+// 
 // The function returns the following values:
 // 
 // 	- year int: the return location for the gregorian year, or %NULL. 
@@ -17593,6 +17734,7 @@ func (datetime *DateTime) GetYmd() (int, int, int) {
 }
 
 // IsDaylightSavings wraps g_date_time_is_daylight_savings
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -17618,6 +17760,7 @@ func (datetime *DateTime) IsDaylightSavings() bool {
 }
 
 // ToLocal wraps g_date_time_to_local
+// 
 // The function returns the following values:
 // 
 // 	- goret *DateTime (nullable) 
@@ -17683,6 +17826,7 @@ func (datetime *DateTime) ToTimezone(tz *TimeZone) *DateTime {
 }
 
 // ToUTC wraps g_date_time_to_utc
+// 
 // The function returns the following values:
 // 
 // 	- goret *DateTime (nullable) 
@@ -17728,7 +17872,7 @@ func UnsafeDebugKeyFromGlibBorrow(p unsafe.Pointer) *DebugKey {
 	return &DebugKey{&debugKey{(*C.GDebugKey)(p)}}
 }
 
-// UnsafeDebugKeyFromGlibNone is used to convert raw C.GDebugKey pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeDebugKeyFromGlibNone is used to convert raw C.GDebugKey pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeDebugKeyFromGlibNone(p unsafe.Pointer) *DebugKey {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeDebugKeyFromGlibBorrow(p)
@@ -17741,7 +17885,7 @@ func UnsafeDebugKeyFromGlibNone(p unsafe.Pointer) *DebugKey {
 	return wrapped
 }
 
-// UnsafeDebugKeyFromGlibFull is used to convert raw C.GDebugKey pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeDebugKeyFromGlibFull is used to convert raw C.GDebugKey pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeDebugKeyFromGlibFull(p unsafe.Pointer) *DebugKey {
 	wrapped := UnsafeDebugKeyFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -17773,6 +17917,7 @@ func UnsafeDebugKeyToGlibFull(d *DebugKey) unsafe.Pointer {
 	d.native = nil // DebugKey is invalid from here on
 	return _p
 }
+
 // Dir wraps GDir
 //
 // An opaque structure representing an opened directory.
@@ -17790,7 +17935,7 @@ func UnsafeDirFromGlibBorrow(p unsafe.Pointer) *Dir {
 	return &Dir{&dir{(*C.GDir)(p)}}
 }
 
-// UnsafeDirFromGlibNone is used to convert raw C.GDir pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeDirFromGlibNone is used to convert raw C.GDir pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeDirFromGlibNone(p unsafe.Pointer) *Dir {
 	C.g_dir_ref((*C.GDir)(p))
 	wrapped := UnsafeDirFromGlibBorrow(p)
@@ -17803,7 +17948,7 @@ func UnsafeDirFromGlibNone(p unsafe.Pointer) *Dir {
 	return wrapped
 }
 
-// UnsafeDirFromGlibFull is used to convert raw C.GDir pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeDirFromGlibFull is used to convert raw C.GDir pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeDirFromGlibFull(p unsafe.Pointer) *Dir {
 	wrapped := UnsafeDirFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -17842,6 +17987,7 @@ func UnsafeDirToGlibFull(d *Dir) unsafe.Pointer {
 	d.native = nil // Dir is invalid from here on
 	return _p
 }
+
 // DirOpen wraps g_dir_open
 // 
 // The function takes the following parameters:
@@ -17951,6 +18097,7 @@ func (dir *Dir) Close() {
 }
 
 // ReadName wraps g_dir_read_name
+// 
 // The function returns the following values:
 // 
 // 	- goret string 
@@ -18020,7 +18167,7 @@ func UnsafeHashTableIterFromGlibBorrow(p unsafe.Pointer) *HashTableIter {
 	return &HashTableIter{&hashTableIter{(*C.GHashTableIter)(p)}}
 }
 
-// UnsafeHashTableIterFromGlibNone is used to convert raw C.GHashTableIter pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeHashTableIterFromGlibNone is used to convert raw C.GHashTableIter pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeHashTableIterFromGlibNone(p unsafe.Pointer) *HashTableIter {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeHashTableIterFromGlibBorrow(p)
@@ -18033,7 +18180,7 @@ func UnsafeHashTableIterFromGlibNone(p unsafe.Pointer) *HashTableIter {
 	return wrapped
 }
 
-// UnsafeHashTableIterFromGlibFull is used to convert raw C.GHashTableIter pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeHashTableIterFromGlibFull is used to convert raw C.GHashTableIter pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeHashTableIterFromGlibFull(p unsafe.Pointer) *HashTableIter {
 	wrapped := UnsafeHashTableIterFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -18065,6 +18212,7 @@ func UnsafeHashTableIterToGlibFull(h *HashTableIter) unsafe.Pointer {
 	h.native = nil // HashTableIter is invalid from here on
 	return _p
 }
+
 // Remove wraps g_hash_table_iter_remove
 //
 // Removes the key/value pair currently pointed to by the iterator
@@ -18141,7 +18289,7 @@ func UnsafeHmacFromGlibBorrow(p unsafe.Pointer) *Hmac {
 	return &Hmac{&hmac{(*C.GHmac)(p)}}
 }
 
-// UnsafeHmacFromGlibNone is used to convert raw C.GHmac pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeHmacFromGlibNone is used to convert raw C.GHmac pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeHmacFromGlibNone(p unsafe.Pointer) *Hmac {
 	C.g_hmac_ref((*C.GHmac)(p))
 	wrapped := UnsafeHmacFromGlibBorrow(p)
@@ -18154,7 +18302,7 @@ func UnsafeHmacFromGlibNone(p unsafe.Pointer) *Hmac {
 	return wrapped
 }
 
-// UnsafeHmacFromGlibFull is used to convert raw C.GHmac pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeHmacFromGlibFull is used to convert raw C.GHmac pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeHmacFromGlibFull(p unsafe.Pointer) *Hmac {
 	wrapped := UnsafeHmacFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -18193,6 +18341,7 @@ func UnsafeHmacToGlibFull(h *Hmac) unsafe.Pointer {
 	h.native = nil // Hmac is invalid from here on
 	return _p
 }
+
 // NewHmac wraps g_hmac_new
 // 
 // The function takes the following parameters:
@@ -18246,6 +18395,7 @@ func NewHmac(digestType ChecksumType, key []byte) *Hmac {
 }
 
 // Copy wraps g_hmac_copy
+// 
 // The function returns the following values:
 // 
 // 	- goret *Hmac 
@@ -18270,6 +18420,7 @@ func (hmac *Hmac) Copy() *Hmac {
 }
 
 // GetString wraps g_hmac_get_string
+// 
 // The function returns the following values:
 // 
 // 	- goret string 
@@ -18374,7 +18525,7 @@ func UnsafeIOChannelFromGlibBorrow(p unsafe.Pointer) *IOChannel {
 	return &IOChannel{&ioChannel{(*C.GIOChannel)(p)}}
 }
 
-// UnsafeIOChannelFromGlibNone is used to convert raw C.GIOChannel pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeIOChannelFromGlibNone is used to convert raw C.GIOChannel pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeIOChannelFromGlibNone(p unsafe.Pointer) *IOChannel {
 	C.g_io_channel_ref((*C.GIOChannel)(p))
 	wrapped := UnsafeIOChannelFromGlibBorrow(p)
@@ -18387,7 +18538,7 @@ func UnsafeIOChannelFromGlibNone(p unsafe.Pointer) *IOChannel {
 	return wrapped
 }
 
-// UnsafeIOChannelFromGlibFull is used to convert raw C.GIOChannel pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeIOChannelFromGlibFull is used to convert raw C.GIOChannel pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeIOChannelFromGlibFull(p unsafe.Pointer) *IOChannel {
 	wrapped := UnsafeIOChannelFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -18426,6 +18577,7 @@ func UnsafeIOChannelToGlibFull(i *IOChannel) unsafe.Pointer {
 	i.native = nil // IOChannel is invalid from here on
 	return _p
 }
+
 // NewIOChannelFile wraps g_io_channel_new_file
 // 
 // The function takes the following parameters:
@@ -18498,6 +18650,7 @@ func IOChannelErrorFromErrno(en int) IOChannelError {
 }
 
 // IOChannelErrorQuark wraps g_io_channel_error_quark
+// 
 // The function returns the following values:
 // 
 // 	- goret Quark 
@@ -18514,6 +18667,7 @@ func IOChannelErrorQuark() Quark {
 }
 
 // Flush wraps g_io_channel_flush
+// 
 // The function returns the following values:
 // 
 // 	- goret IOStatus 
@@ -18542,6 +18696,7 @@ func (channel *IOChannel) Flush() (IOStatus, error) {
 }
 
 // GetBufferCondition wraps g_io_channel_get_buffer_condition
+// 
 // The function returns the following values:
 // 
 // 	- goret IOCondition 
@@ -18566,6 +18721,7 @@ func (channel *IOChannel) GetBufferCondition() IOCondition {
 }
 
 // GetBufferSize wraps g_io_channel_get_buffer_size
+// 
 // The function returns the following values:
 // 
 // 	- goret uint 
@@ -18588,6 +18744,7 @@ func (channel *IOChannel) GetBufferSize() uint {
 }
 
 // GetBuffered wraps g_io_channel_get_buffered
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -18612,6 +18769,7 @@ func (channel *IOChannel) GetBuffered() bool {
 }
 
 // GetCloseOnUnref wraps g_io_channel_get_close_on_unref
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -18639,6 +18797,7 @@ func (channel *IOChannel) GetCloseOnUnref() bool {
 }
 
 // GetEncoding wraps g_io_channel_get_encoding
+// 
 // The function returns the following values:
 // 
 // 	- goret string 
@@ -18663,6 +18822,7 @@ func (channel *IOChannel) GetEncoding() string {
 }
 
 // GetFlags wraps g_io_channel_get_flags
+// 
 // The function returns the following values:
 // 
 // 	- goret IOFlags 
@@ -18693,6 +18853,7 @@ func (channel *IOChannel) GetFlags() IOFlags {
 }
 
 // GetLineTerm wraps g_io_channel_get_line_term
+// 
 // The function returns the following values:
 // 
 // 	- length int: a location to return the length of the line terminator 
@@ -18737,6 +18898,7 @@ func (channel *IOChannel) Init() {
 }
 
 // ReadLine wraps g_io_channel_read_line
+// 
 // The function returns the following values:
 // 
 // 	- strReturn string: The line read from the #GIOChannel, including the
@@ -18784,6 +18946,7 @@ func (channel *IOChannel) ReadLine() (string, uint, uint, IOStatus, error) {
 }
 
 // ReadToEnd wraps g_io_channel_read_to_end
+// 
 // The function returns the following values:
 // 
 // 	- strReturn string: Location to
@@ -18825,6 +18988,7 @@ func (channel *IOChannel) ReadToEnd() (string, IOStatus, error) {
 }
 
 // ReadUnichar wraps g_io_channel_read_unichar
+// 
 // The function returns the following values:
 // 
 // 	- thechar uint32: a location to return a character 
@@ -19220,7 +19384,7 @@ func UnsafeIOFuncsFromGlibBorrow(p unsafe.Pointer) *IOFuncs {
 	return &IOFuncs{&ioFuncs{(*C.GIOFuncs)(p)}}
 }
 
-// UnsafeIOFuncsFromGlibNone is used to convert raw C.GIOFuncs pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeIOFuncsFromGlibNone is used to convert raw C.GIOFuncs pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeIOFuncsFromGlibNone(p unsafe.Pointer) *IOFuncs {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeIOFuncsFromGlibBorrow(p)
@@ -19233,7 +19397,7 @@ func UnsafeIOFuncsFromGlibNone(p unsafe.Pointer) *IOFuncs {
 	return wrapped
 }
 
-// UnsafeIOFuncsFromGlibFull is used to convert raw C.GIOFuncs pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeIOFuncsFromGlibFull is used to convert raw C.GIOFuncs pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeIOFuncsFromGlibFull(p unsafe.Pointer) *IOFuncs {
 	wrapped := UnsafeIOFuncsFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -19265,6 +19429,7 @@ func UnsafeIOFuncsToGlibFull(i *IOFuncs) unsafe.Pointer {
 	i.native = nil // IOFuncs is invalid from here on
 	return _p
 }
+
 // KeyFile wraps GKeyFile
 //
 // `GKeyFile` parses .ini-like config files.
@@ -19412,7 +19577,7 @@ func UnsafeKeyFileFromGlibBorrow(p unsafe.Pointer) *KeyFile {
 	return &KeyFile{&keyFile{(*C.GKeyFile)(p)}}
 }
 
-// UnsafeKeyFileFromGlibNone is used to convert raw C.GKeyFile pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeKeyFileFromGlibNone is used to convert raw C.GKeyFile pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeKeyFileFromGlibNone(p unsafe.Pointer) *KeyFile {
 	C.g_key_file_ref((*C.GKeyFile)(p))
 	wrapped := UnsafeKeyFileFromGlibBorrow(p)
@@ -19425,7 +19590,7 @@ func UnsafeKeyFileFromGlibNone(p unsafe.Pointer) *KeyFile {
 	return wrapped
 }
 
-// UnsafeKeyFileFromGlibFull is used to convert raw C.GKeyFile pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeKeyFileFromGlibFull is used to convert raw C.GKeyFile pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeKeyFileFromGlibFull(p unsafe.Pointer) *KeyFile {
 	wrapped := UnsafeKeyFileFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -19464,7 +19629,9 @@ func UnsafeKeyFileToGlibFull(k *KeyFile) unsafe.Pointer {
 	k.native = nil // KeyFile is invalid from here on
 	return _p
 }
+
 // NewKeyFile wraps g_key_file_new
+// 
 // The function returns the following values:
 // 
 // 	- goret *KeyFile 
@@ -19486,6 +19653,7 @@ func NewKeyFile() *KeyFile {
 }
 
 // KeyFileErrorQuark wraps g_key_file_error_quark
+// 
 // The function returns the following values:
 // 
 // 	- goret Quark 
@@ -19762,6 +19930,7 @@ func (keyFile *KeyFile) GetDoubleList(groupName string, key string) (uint, []flo
 }
 
 // GetGroups wraps g_key_file_get_groups
+// 
 // The function returns the following values:
 // 
 // 	- length uint: return location for the number of returned groups, or %NULL 
@@ -20170,6 +20339,7 @@ func (keyFile *KeyFile) GetLocaleStringList(groupName string, key string, locale
 }
 
 // GetStartGroup wraps g_key_file_get_start_group
+// 
 // The function returns the following values:
 // 
 // 	- goret string (nullable) 
@@ -21377,6 +21547,7 @@ func (keyFile *KeyFile) SetValue(groupName string, key string, value string) {
 }
 
 // ToData wraps g_key_file_to_data
+// 
 // The function returns the following values:
 // 
 // 	- length uint: return location for the length of the
@@ -21436,7 +21607,7 @@ func UnsafeLogFieldFromGlibBorrow(p unsafe.Pointer) *LogField {
 	return &LogField{&logField{(*C.GLogField)(p)}}
 }
 
-// UnsafeLogFieldFromGlibNone is used to convert raw C.GLogField pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeLogFieldFromGlibNone is used to convert raw C.GLogField pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeLogFieldFromGlibNone(p unsafe.Pointer) *LogField {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeLogFieldFromGlibBorrow(p)
@@ -21449,7 +21620,7 @@ func UnsafeLogFieldFromGlibNone(p unsafe.Pointer) *LogField {
 	return wrapped
 }
 
-// UnsafeLogFieldFromGlibFull is used to convert raw C.GLogField pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeLogFieldFromGlibFull is used to convert raw C.GLogField pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeLogFieldFromGlibFull(p unsafe.Pointer) *LogField {
 	wrapped := UnsafeLogFieldFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -21481,6 +21652,7 @@ func UnsafeLogFieldToGlibFull(l *LogField) unsafe.Pointer {
 	l.native = nil // LogField is invalid from here on
 	return _p
 }
+
 // MainContext wraps GMainContext
 //
 // The `GMainContext` struct is an opaque data
@@ -21499,7 +21671,7 @@ func UnsafeMainContextFromGlibBorrow(p unsafe.Pointer) *MainContext {
 	return &MainContext{&mainContext{(*C.GMainContext)(p)}}
 }
 
-// UnsafeMainContextFromGlibNone is used to convert raw C.GMainContext pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeMainContextFromGlibNone is used to convert raw C.GMainContext pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeMainContextFromGlibNone(p unsafe.Pointer) *MainContext {
 	C.g_main_context_ref((*C.GMainContext)(p))
 	wrapped := UnsafeMainContextFromGlibBorrow(p)
@@ -21512,7 +21684,7 @@ func UnsafeMainContextFromGlibNone(p unsafe.Pointer) *MainContext {
 	return wrapped
 }
 
-// UnsafeMainContextFromGlibFull is used to convert raw C.GMainContext pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeMainContextFromGlibFull is used to convert raw C.GMainContext pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeMainContextFromGlibFull(p unsafe.Pointer) *MainContext {
 	wrapped := UnsafeMainContextFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -21551,7 +21723,9 @@ func UnsafeMainContextToGlibFull(m *MainContext) unsafe.Pointer {
 	m.native = nil // MainContext is invalid from here on
 	return _p
 }
+
 // NewMainContext wraps g_main_context_new
+// 
 // The function returns the following values:
 // 
 // 	- goret *MainContext 
@@ -21598,6 +21772,7 @@ func NewMainContextWithFlags(flags MainContextFlags) *MainContext {
 }
 
 // MainContextDefault wraps g_main_context_default
+// 
 // The function returns the following values:
 // 
 // 	- goret *MainContext 
@@ -21619,6 +21794,7 @@ func MainContextDefault() *MainContext {
 }
 
 // MainContextGetThreadDefault wraps g_main_context_get_thread_default
+// 
 // The function returns the following values:
 // 
 // 	- goret *MainContext (nullable) 
@@ -21649,6 +21825,7 @@ func MainContextGetThreadDefault() *MainContext {
 }
 
 // MainContextRefThreadDefault wraps g_main_context_ref_thread_default
+// 
 // The function returns the following values:
 // 
 // 	- goret *MainContext 
@@ -21673,6 +21850,7 @@ func MainContextRefThreadDefault() *MainContext {
 }
 
 // Acquire wraps g_main_context_acquire
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -21882,6 +22060,7 @@ func (_context *MainContext) InvokeFull(priority int, function SourceFunc) {
 }
 
 // IsOwner wraps g_main_context_is_owner
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -21954,6 +22133,7 @@ func (_context *MainContext) Iteration(mayBlock bool) bool {
 }
 
 // Pending wraps g_main_context_pending
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -21991,6 +22171,7 @@ func (_context *MainContext) PopThreadDefault() {
 }
 
 // Prepare wraps g_main_context_prepare
+// 
 // The function returns the following values:
 // 
 // 	- priority int: location to store priority of highest priority
@@ -22169,7 +22350,7 @@ func UnsafeMainLoopFromGlibBorrow(p unsafe.Pointer) *MainLoop {
 	return &MainLoop{&mainLoop{(*C.GMainLoop)(p)}}
 }
 
-// UnsafeMainLoopFromGlibNone is used to convert raw C.GMainLoop pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeMainLoopFromGlibNone is used to convert raw C.GMainLoop pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeMainLoopFromGlibNone(p unsafe.Pointer) *MainLoop {
 	C.g_main_loop_ref((*C.GMainLoop)(p))
 	wrapped := UnsafeMainLoopFromGlibBorrow(p)
@@ -22182,7 +22363,7 @@ func UnsafeMainLoopFromGlibNone(p unsafe.Pointer) *MainLoop {
 	return wrapped
 }
 
-// UnsafeMainLoopFromGlibFull is used to convert raw C.GMainLoop pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeMainLoopFromGlibFull is used to convert raw C.GMainLoop pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeMainLoopFromGlibFull(p unsafe.Pointer) *MainLoop {
 	wrapped := UnsafeMainLoopFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -22221,6 +22402,7 @@ func UnsafeMainLoopToGlibFull(m *MainLoop) unsafe.Pointer {
 	m.native = nil // MainLoop is invalid from here on
 	return _p
 }
+
 // NewMainLoop wraps g_main_loop_new
 // 
 // The function takes the following parameters:
@@ -22260,6 +22442,7 @@ func NewMainLoop(_context *MainContext, isRunning bool) *MainLoop {
 }
 
 // GetContext wraps g_main_loop_get_context
+// 
 // The function returns the following values:
 // 
 // 	- goret *MainContext 
@@ -22282,6 +22465,7 @@ func (loop *MainLoop) GetContext() *MainContext {
 }
 
 // IsRunning wraps g_main_loop_is_running
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -22356,7 +22540,7 @@ func UnsafeMappedFileFromGlibBorrow(p unsafe.Pointer) *MappedFile {
 	return &MappedFile{&mappedFile{(*C.GMappedFile)(p)}}
 }
 
-// UnsafeMappedFileFromGlibNone is used to convert raw C.GMappedFile pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeMappedFileFromGlibNone is used to convert raw C.GMappedFile pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeMappedFileFromGlibNone(p unsafe.Pointer) *MappedFile {
 	C.g_mapped_file_ref((*C.GMappedFile)(p))
 	wrapped := UnsafeMappedFileFromGlibBorrow(p)
@@ -22369,7 +22553,7 @@ func UnsafeMappedFileFromGlibNone(p unsafe.Pointer) *MappedFile {
 	return wrapped
 }
 
-// UnsafeMappedFileFromGlibFull is used to convert raw C.GMappedFile pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeMappedFileFromGlibFull is used to convert raw C.GMappedFile pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeMappedFileFromGlibFull(p unsafe.Pointer) *MappedFile {
 	wrapped := UnsafeMappedFileFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -22408,6 +22592,7 @@ func UnsafeMappedFileToGlibFull(m *MappedFile) unsafe.Pointer {
 	m.native = nil // MappedFile is invalid from here on
 	return _p
 }
+
 // NewMappedFile wraps g_mapped_file_new
 // 
 // The function takes the following parameters:
@@ -22514,6 +22699,7 @@ func NewMappedFileFromFd(fd int, writable bool) (*MappedFile, error) {
 }
 
 // GetBytes wraps g_mapped_file_get_bytes
+// 
 // The function returns the following values:
 // 
 // 	- goret *Bytes 
@@ -22538,6 +22724,7 @@ func (file *MappedFile) GetBytes() *Bytes {
 }
 
 // GetContents wraps g_mapped_file_get_contents
+// 
 // The function returns the following values:
 // 
 // 	- goret string (nullable) 
@@ -22567,6 +22754,7 @@ func (file *MappedFile) GetContents() string {
 }
 
 // GetLength wraps g_mapped_file_get_length
+// 
 // The function returns the following values:
 // 
 // 	- goret uint 
@@ -22609,7 +22797,7 @@ func UnsafeMarkupParseContextFromGlibBorrow(p unsafe.Pointer) *MarkupParseContex
 	return &MarkupParseContext{&markupParseContext{(*C.GMarkupParseContext)(p)}}
 }
 
-// UnsafeMarkupParseContextFromGlibNone is used to convert raw C.GMarkupParseContext pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeMarkupParseContextFromGlibNone is used to convert raw C.GMarkupParseContext pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeMarkupParseContextFromGlibNone(p unsafe.Pointer) *MarkupParseContext {
 	C.g_markup_parse_context_ref((*C.GMarkupParseContext)(p))
 	wrapped := UnsafeMarkupParseContextFromGlibBorrow(p)
@@ -22622,7 +22810,7 @@ func UnsafeMarkupParseContextFromGlibNone(p unsafe.Pointer) *MarkupParseContext 
 	return wrapped
 }
 
-// UnsafeMarkupParseContextFromGlibFull is used to convert raw C.GMarkupParseContext pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeMarkupParseContextFromGlibFull is used to convert raw C.GMarkupParseContext pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeMarkupParseContextFromGlibFull(p unsafe.Pointer) *MarkupParseContext {
 	wrapped := UnsafeMarkupParseContextFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -22661,7 +22849,9 @@ func UnsafeMarkupParseContextToGlibFull(m *MarkupParseContext) unsafe.Pointer {
 	m.native = nil // MarkupParseContext is invalid from here on
 	return _p
 }
+
 // EndParse wraps g_markup_parse_context_end_parse
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -22696,6 +22886,7 @@ func (_context *MarkupParseContext) EndParse() (bool, error) {
 }
 
 // GetElement wraps g_markup_parse_context_get_element
+// 
 // The function returns the following values:
 // 
 // 	- goret string 
@@ -22722,6 +22913,7 @@ func (_context *MarkupParseContext) GetElement() string {
 }
 
 // GetElementStack wraps g_markup_parse_context_get_element_stack
+// 
 // The function returns the following values:
 // 
 // 	- goret []string 
@@ -22761,6 +22953,7 @@ func (_context *MarkupParseContext) GetElementStack() []string {
 }
 
 // GetPosition wraps g_markup_parse_context_get_position
+// 
 // The function returns the following values:
 // 
 // 	- lineNumber int: return location for a line number, or %NULL 
@@ -22864,7 +23057,7 @@ func UnsafeMarkupParserFromGlibBorrow(p unsafe.Pointer) *MarkupParser {
 	return &MarkupParser{&markupParser{(*C.GMarkupParser)(p)}}
 }
 
-// UnsafeMarkupParserFromGlibNone is used to convert raw C.GMarkupParser pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeMarkupParserFromGlibNone is used to convert raw C.GMarkupParser pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeMarkupParserFromGlibNone(p unsafe.Pointer) *MarkupParser {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeMarkupParserFromGlibBorrow(p)
@@ -22877,7 +23070,7 @@ func UnsafeMarkupParserFromGlibNone(p unsafe.Pointer) *MarkupParser {
 	return wrapped
 }
 
-// UnsafeMarkupParserFromGlibFull is used to convert raw C.GMarkupParser pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeMarkupParserFromGlibFull is used to convert raw C.GMarkupParser pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeMarkupParserFromGlibFull(p unsafe.Pointer) *MarkupParser {
 	wrapped := UnsafeMarkupParserFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -22909,6 +23102,7 @@ func UnsafeMarkupParserToGlibFull(m *MarkupParser) unsafe.Pointer {
 	m.native = nil // MarkupParser is invalid from here on
 	return _p
 }
+
 // MatchInfo wraps GMatchInfo
 //
 // A GMatchInfo is an opaque struct used to return information about
@@ -22927,7 +23121,7 @@ func UnsafeMatchInfoFromGlibBorrow(p unsafe.Pointer) *MatchInfo {
 	return &MatchInfo{&matchInfo{(*C.GMatchInfo)(p)}}
 }
 
-// UnsafeMatchInfoFromGlibNone is used to convert raw C.GMatchInfo pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeMatchInfoFromGlibNone is used to convert raw C.GMatchInfo pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeMatchInfoFromGlibNone(p unsafe.Pointer) *MatchInfo {
 	C.g_match_info_ref((*C.GMatchInfo)(p))
 	wrapped := UnsafeMatchInfoFromGlibBorrow(p)
@@ -22940,7 +23134,7 @@ func UnsafeMatchInfoFromGlibNone(p unsafe.Pointer) *MatchInfo {
 	return wrapped
 }
 
-// UnsafeMatchInfoFromGlibFull is used to convert raw C.GMatchInfo pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeMatchInfoFromGlibFull is used to convert raw C.GMatchInfo pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeMatchInfoFromGlibFull(p unsafe.Pointer) *MatchInfo {
 	wrapped := UnsafeMatchInfoFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -22979,6 +23173,7 @@ func UnsafeMatchInfoToGlibFull(m *MatchInfo) unsafe.Pointer {
 	m.native = nil // MatchInfo is invalid from here on
 	return _p
 }
+
 // ExpandReferences wraps g_match_info_expand_references
 // 
 // The function takes the following parameters:
@@ -23084,6 +23279,7 @@ func (matchInfo *MatchInfo) Fetch(matchNum int) string {
 }
 
 // FetchAll wraps g_match_info_fetch_all
+// 
 // The function returns the following values:
 // 
 // 	- goret []string 
@@ -23265,6 +23461,7 @@ func (matchInfo *MatchInfo) FetchPos(matchNum int) (int, int, bool) {
 }
 
 // GetMatchCount wraps g_match_info_get_match_count
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -23294,6 +23491,7 @@ func (matchInfo *MatchInfo) GetMatchCount() int {
 }
 
 // GetRegex wraps g_match_info_get_regex
+// 
 // The function returns the following values:
 // 
 // 	- goret *Regex 
@@ -23318,6 +23516,7 @@ func (matchInfo *MatchInfo) GetRegex() *Regex {
 }
 
 // GetString wraps g_match_info_get_string
+// 
 // The function returns the following values:
 // 
 // 	- goret string 
@@ -23342,6 +23541,7 @@ func (matchInfo *MatchInfo) GetString() string {
 }
 
 // IsPartialMatch wraps g_match_info_is_partial_match
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -23398,6 +23598,7 @@ func (matchInfo *MatchInfo) IsPartialMatch() bool {
 }
 
 // Matches wraps g_match_info_matches
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -23422,6 +23623,7 @@ func (matchInfo *MatchInfo) Matches() bool {
 }
 
 // Next wraps g_match_info_next
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -23473,7 +23675,7 @@ func UnsafeNodeFromGlibBorrow(p unsafe.Pointer) *Node {
 	return &Node{&node{(*C.GNode)(p)}}
 }
 
-// UnsafeNodeFromGlibNone is used to convert raw C.GNode pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeNodeFromGlibNone is used to convert raw C.GNode pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeNodeFromGlibNone(p unsafe.Pointer) *Node {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeNodeFromGlibBorrow(p)
@@ -23486,7 +23688,7 @@ func UnsafeNodeFromGlibNone(p unsafe.Pointer) *Node {
 	return wrapped
 }
 
-// UnsafeNodeFromGlibFull is used to convert raw C.GNode pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeNodeFromGlibFull is used to convert raw C.GNode pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeNodeFromGlibFull(p unsafe.Pointer) *Node {
 	wrapped := UnsafeNodeFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -23518,6 +23720,7 @@ func UnsafeNodeToGlibFull(n *Node) unsafe.Pointer {
 	n.native = nil // Node is invalid from here on
 	return _p
 }
+
 // ChildPosition wraps g_node_child_position
 // 
 // The function takes the following parameters:
@@ -23551,6 +23754,7 @@ func (node *Node) ChildPosition(child *Node) int {
 }
 
 // Depth wraps g_node_depth
+// 
 // The function returns the following values:
 // 
 // 	- goret uint 
@@ -23610,6 +23814,7 @@ func (node *Node) IsAncestor(descendant *Node) bool {
 }
 
 // MaxHeight wraps g_node_max_height
+// 
 // The function returns the following values:
 // 
 // 	- goret uint 
@@ -23636,6 +23841,7 @@ func (root *Node) MaxHeight() uint {
 }
 
 // NChildren wraps g_node_n_children
+// 
 // The function returns the following values:
 // 
 // 	- goret uint 
@@ -23732,7 +23938,7 @@ func UnsafeOptionContextFromGlibBorrow(p unsafe.Pointer) *OptionContext {
 	return &OptionContext{&optionContext{(*C.GOptionContext)(p)}}
 }
 
-// UnsafeOptionContextFromGlibNone is used to convert raw C.GOptionContext pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeOptionContextFromGlibNone is used to convert raw C.GOptionContext pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeOptionContextFromGlibNone(p unsafe.Pointer) *OptionContext {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeOptionContextFromGlibBorrow(p)
@@ -23745,7 +23951,7 @@ func UnsafeOptionContextFromGlibNone(p unsafe.Pointer) *OptionContext {
 	return wrapped
 }
 
-// UnsafeOptionContextFromGlibFull is used to convert raw C.GOptionContext pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeOptionContextFromGlibFull is used to convert raw C.GOptionContext pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeOptionContextFromGlibFull(p unsafe.Pointer) *OptionContext {
 	wrapped := UnsafeOptionContextFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -23777,6 +23983,7 @@ func UnsafeOptionContextToGlibFull(o *OptionContext) unsafe.Pointer {
 	o.native = nil // OptionContext is invalid from here on
 	return _p
 }
+
 // AddGroup wraps g_option_context_add_group
 // 
 // The function takes the following parameters:
@@ -23830,6 +24037,7 @@ func (_context *OptionContext) AddMainEntries(entries []OptionEntry, translation
 }
 
 // GetDescription wraps g_option_context_get_description
+// 
 // The function returns the following values:
 // 
 // 	- goret string 
@@ -23897,6 +24105,7 @@ func (_context *OptionContext) GetHelp(mainHelp bool, group *OptionGroup) string
 }
 
 // GetHelpEnabled wraps g_option_context_get_help_enabled
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -23922,6 +24131,7 @@ func (_context *OptionContext) GetHelpEnabled() bool {
 }
 
 // GetIgnoreUnknownOptions wraps g_option_context_get_ignore_unknown_options
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -23947,6 +24157,7 @@ func (_context *OptionContext) GetIgnoreUnknownOptions() bool {
 }
 
 // GetMainGroup wraps g_option_context_get_main_group
+// 
 // The function returns the following values:
 // 
 // 	- goret *OptionGroup 
@@ -23969,6 +24180,7 @@ func (_context *OptionContext) GetMainGroup() *OptionGroup {
 }
 
 // GetStrictPosix wraps g_option_context_get_strict_posix
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -23995,6 +24207,7 @@ func (_context *OptionContext) GetStrictPosix() bool {
 }
 
 // GetSummary wraps g_option_context_get_summary
+// 
 // The function returns the following values:
 // 
 // 	- goret string 
@@ -24229,7 +24442,7 @@ func UnsafeOptionEntryFromGlibBorrow(p unsafe.Pointer) *OptionEntry {
 	return &OptionEntry{&optionEntry{(*C.GOptionEntry)(p)}}
 }
 
-// UnsafeOptionEntryFromGlibNone is used to convert raw C.GOptionEntry pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeOptionEntryFromGlibNone is used to convert raw C.GOptionEntry pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeOptionEntryFromGlibNone(p unsafe.Pointer) *OptionEntry {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeOptionEntryFromGlibBorrow(p)
@@ -24242,7 +24455,7 @@ func UnsafeOptionEntryFromGlibNone(p unsafe.Pointer) *OptionEntry {
 	return wrapped
 }
 
-// UnsafeOptionEntryFromGlibFull is used to convert raw C.GOptionEntry pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeOptionEntryFromGlibFull is used to convert raw C.GOptionEntry pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeOptionEntryFromGlibFull(p unsafe.Pointer) *OptionEntry {
 	wrapped := UnsafeOptionEntryFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -24274,6 +24487,7 @@ func UnsafeOptionEntryToGlibFull(o *OptionEntry) unsafe.Pointer {
 	o.native = nil // OptionEntry is invalid from here on
 	return _p
 }
+
 // OptionGroup wraps GOptionGroup
 //
 // A `GOptionGroup` struct defines the options in a single
@@ -24297,7 +24511,7 @@ func UnsafeOptionGroupFromGlibBorrow(p unsafe.Pointer) *OptionGroup {
 	return &OptionGroup{&optionGroup{(*C.GOptionGroup)(p)}}
 }
 
-// UnsafeOptionGroupFromGlibNone is used to convert raw C.GOptionGroup pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeOptionGroupFromGlibNone is used to convert raw C.GOptionGroup pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeOptionGroupFromGlibNone(p unsafe.Pointer) *OptionGroup {
 	C.g_option_group_ref((*C.GOptionGroup)(p))
 	wrapped := UnsafeOptionGroupFromGlibBorrow(p)
@@ -24310,7 +24524,7 @@ func UnsafeOptionGroupFromGlibNone(p unsafe.Pointer) *OptionGroup {
 	return wrapped
 }
 
-// UnsafeOptionGroupFromGlibFull is used to convert raw C.GOptionGroup pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeOptionGroupFromGlibFull is used to convert raw C.GOptionGroup pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeOptionGroupFromGlibFull(p unsafe.Pointer) *OptionGroup {
 	wrapped := UnsafeOptionGroupFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -24349,6 +24563,7 @@ func UnsafeOptionGroupToGlibFull(o *OptionGroup) unsafe.Pointer {
 	o.native = nil // OptionGroup is invalid from here on
 	return _p
 }
+
 // AddEntries wraps g_option_group_add_entries
 // 
 // The function takes the following parameters:
@@ -24437,7 +24652,7 @@ func UnsafePathBufFromGlibBorrow(p unsafe.Pointer) *PathBuf {
 	return &PathBuf{&pathBuf{(*C.GPathBuf)(p)}}
 }
 
-// UnsafePathBufFromGlibNone is used to convert raw C.GPathBuf pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafePathBufFromGlibNone is used to convert raw C.GPathBuf pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafePathBufFromGlibNone(p unsafe.Pointer) *PathBuf {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafePathBufFromGlibBorrow(p)
@@ -24450,7 +24665,7 @@ func UnsafePathBufFromGlibNone(p unsafe.Pointer) *PathBuf {
 	return wrapped
 }
 
-// UnsafePathBufFromGlibFull is used to convert raw C.GPathBuf pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafePathBufFromGlibFull is used to convert raw C.GPathBuf pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafePathBufFromGlibFull(p unsafe.Pointer) *PathBuf {
 	wrapped := UnsafePathBufFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -24482,6 +24697,7 @@ func UnsafePathBufToGlibFull(p *PathBuf) unsafe.Pointer {
 	p.native = nil // PathBuf is invalid from here on
 	return _p
 }
+
 // PathBufEqual wraps g_path_buf_equal
 // 
 // The function takes the following parameters:
@@ -24540,6 +24756,7 @@ func (buf *PathBuf) Clear() {
 }
 
 // ClearToPath wraps g_path_buf_clear_to_path
+// 
 // The function returns the following values:
 // 
 // 	- goret string (nullable) 
@@ -24569,6 +24786,7 @@ func (buf *PathBuf) ClearToPath() string {
 }
 
 // FreeToPath wraps g_path_buf_free_to_path
+// 
 // The function returns the following values:
 // 
 // 	- goret string (nullable) 
@@ -24599,6 +24817,7 @@ func (buf *PathBuf) FreeToPath() string {
 }
 
 // Init wraps g_path_buf_init
+// 
 // The function returns the following values:
 // 
 // 	- goret *PathBuf 
@@ -24654,6 +24873,7 @@ func (buf *PathBuf) InitFromPath(path string) *PathBuf {
 }
 
 // Pop wraps g_path_buf_pop
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -24859,6 +25079,7 @@ func (buf *PathBuf) SetFilename(fileName string) bool {
 }
 
 // ToPath wraps g_path_buf_to_path
+// 
 // The function returns the following values:
 // 
 // 	- goret string (nullable) 
@@ -24920,7 +25141,7 @@ func UnsafePatternSpecFromGlibBorrow(p unsafe.Pointer) *PatternSpec {
 	return &PatternSpec{&patternSpec{(*C.GPatternSpec)(p)}}
 }
 
-// UnsafePatternSpecFromGlibNone is used to convert raw C.GPatternSpec pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafePatternSpecFromGlibNone is used to convert raw C.GPatternSpec pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafePatternSpecFromGlibNone(p unsafe.Pointer) *PatternSpec {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafePatternSpecFromGlibBorrow(p)
@@ -24933,7 +25154,7 @@ func UnsafePatternSpecFromGlibNone(p unsafe.Pointer) *PatternSpec {
 	return wrapped
 }
 
-// UnsafePatternSpecFromGlibFull is used to convert raw C.GPatternSpec pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafePatternSpecFromGlibFull is used to convert raw C.GPatternSpec pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafePatternSpecFromGlibFull(p unsafe.Pointer) *PatternSpec {
 	wrapped := UnsafePatternSpecFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -24965,6 +25186,7 @@ func UnsafePatternSpecToGlibFull(p *PatternSpec) unsafe.Pointer {
 	p.native = nil // PatternSpec is invalid from here on
 	return _p
 }
+
 // NewPatternSpec wraps g_pattern_spec_new
 // 
 // The function takes the following parameters:
@@ -24994,6 +25216,7 @@ func NewPatternSpec(pattern string) *PatternSpec {
 }
 
 // Copy wraps g_pattern_spec_copy
+// 
 // The function returns the following values:
 // 
 // 	- goret *PatternSpec 
@@ -25166,7 +25389,7 @@ func UnsafePollFDFromGlibBorrow(p unsafe.Pointer) *PollFD {
 	return &PollFD{&pollFD{(*C.GPollFD)(p)}}
 }
 
-// UnsafePollFDFromGlibNone is used to convert raw C.GPollFD pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafePollFDFromGlibNone is used to convert raw C.GPollFD pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafePollFDFromGlibNone(p unsafe.Pointer) *PollFD {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafePollFDFromGlibBorrow(p)
@@ -25179,7 +25402,7 @@ func UnsafePollFDFromGlibNone(p unsafe.Pointer) *PollFD {
 	return wrapped
 }
 
-// UnsafePollFDFromGlibFull is used to convert raw C.GPollFD pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafePollFDFromGlibFull is used to convert raw C.GPollFD pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafePollFDFromGlibFull(p unsafe.Pointer) *PollFD {
 	wrapped := UnsafePollFDFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -25211,6 +25434,7 @@ func UnsafePollFDToGlibFull(p *PollFD) unsafe.Pointer {
 	p.native = nil // PollFD is invalid from here on
 	return _p
 }
+
 // Rand wraps GRand
 //
 // The GRand struct is an opaque data structure. It should only be
@@ -25229,7 +25453,7 @@ func UnsafeRandFromGlibBorrow(p unsafe.Pointer) *Rand {
 	return &Rand{&rand{(*C.GRand)(p)}}
 }
 
-// UnsafeRandFromGlibNone is used to convert raw C.GRand pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeRandFromGlibNone is used to convert raw C.GRand pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeRandFromGlibNone(p unsafe.Pointer) *Rand {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeRandFromGlibBorrow(p)
@@ -25242,7 +25466,7 @@ func UnsafeRandFromGlibNone(p unsafe.Pointer) *Rand {
 	return wrapped
 }
 
-// UnsafeRandFromGlibFull is used to convert raw C.GRand pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeRandFromGlibFull is used to convert raw C.GRand pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeRandFromGlibFull(p unsafe.Pointer) *Rand {
 	wrapped := UnsafeRandFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -25274,7 +25498,9 @@ func UnsafeRandToGlibFull(r *Rand) unsafe.Pointer {
 	r.native = nil // Rand is invalid from here on
 	return _p
 }
+
 // NewRand wraps g_rand_new
+// 
 // The function returns the following values:
 // 
 // 	- goret *Rand 
@@ -25358,6 +25584,7 @@ func NewRandWithSeedArray(seed *uint32, seedLength uint) *Rand {
 }
 
 // Copy wraps g_rand_copy
+// 
 // The function returns the following values:
 // 
 // 	- goret *Rand 
@@ -25382,6 +25609,7 @@ func (rand_ *Rand) Copy() *Rand {
 }
 
 // Double wraps g_rand_double
+// 
 // The function returns the following values:
 // 
 // 	- goret float64 
@@ -25440,6 +25668,7 @@ func (rand_ *Rand) DoubleRange(begin float64, end float64) float64 {
 }
 
 // Int wraps g_rand_int
+// 
 // The function returns the following values:
 // 
 // 	- goret uint32 
@@ -25614,7 +25843,7 @@ func UnsafeRegexFromGlibBorrow(p unsafe.Pointer) *Regex {
 	return &Regex{&regex{(*C.GRegex)(p)}}
 }
 
-// UnsafeRegexFromGlibNone is used to convert raw C.GRegex pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeRegexFromGlibNone is used to convert raw C.GRegex pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeRegexFromGlibNone(p unsafe.Pointer) *Regex {
 	C.g_regex_ref((*C.GRegex)(p))
 	wrapped := UnsafeRegexFromGlibBorrow(p)
@@ -25627,7 +25856,7 @@ func UnsafeRegexFromGlibNone(p unsafe.Pointer) *Regex {
 	return wrapped
 }
 
-// UnsafeRegexFromGlibFull is used to convert raw C.GRegex pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeRegexFromGlibFull is used to convert raw C.GRegex pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeRegexFromGlibFull(p unsafe.Pointer) *Regex {
 	wrapped := UnsafeRegexFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -25666,6 +25895,7 @@ func UnsafeRegexToGlibFull(r *Regex) unsafe.Pointer {
 	r.native = nil // Regex is invalid from here on
 	return _p
 }
+
 // NewRegex wraps g_regex_new
 // 
 // The function takes the following parameters:
@@ -25763,6 +25993,7 @@ func RegexCheckReplacement(replacement string) (bool, bool, error) {
 }
 
 // RegexErrorQuark wraps g_regex_error_quark
+// 
 // The function returns the following values:
 // 
 // 	- goret Quark 
@@ -25976,6 +26207,7 @@ func RegexSplitSimple(pattern string, str string, compileOptions RegexCompileFla
 }
 
 // GetCaptureCount wraps g_regex_get_capture_count
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -25998,6 +26230,7 @@ func (regex *Regex) GetCaptureCount() int {
 }
 
 // GetCompileFlags wraps g_regex_get_compile_flags
+// 
 // The function returns the following values:
 // 
 // 	- goret RegexCompileFlags 
@@ -26024,6 +26257,7 @@ func (regex *Regex) GetCompileFlags() RegexCompileFlags {
 }
 
 // GetHasCrOrLf wraps g_regex_get_has_cr_or_lf
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -26048,6 +26282,7 @@ func (regex *Regex) GetHasCrOrLf() bool {
 }
 
 // GetMatchFlags wraps g_regex_get_match_flags
+// 
 // The function returns the following values:
 // 
 // 	- goret RegexMatchFlags 
@@ -26070,6 +26305,7 @@ func (regex *Regex) GetMatchFlags() RegexMatchFlags {
 }
 
 // GetMaxBackref wraps g_regex_get_max_backref
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -26094,6 +26330,7 @@ func (regex *Regex) GetMaxBackref() int {
 }
 
 // GetMaxLookbehind wraps g_regex_get_max_lookbehind
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -26118,6 +26355,7 @@ func (regex *Regex) GetMaxLookbehind() int {
 }
 
 // GetPattern wraps g_regex_get_pattern
+// 
 // The function returns the following values:
 // 
 // 	- goret string 
@@ -26802,7 +27040,7 @@ func UnsafeScannerFromGlibBorrow(p unsafe.Pointer) *Scanner {
 	return &Scanner{&scanner{(*C.GScanner)(p)}}
 }
 
-// UnsafeScannerFromGlibNone is used to convert raw C.GScanner pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeScannerFromGlibNone is used to convert raw C.GScanner pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeScannerFromGlibNone(p unsafe.Pointer) *Scanner {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeScannerFromGlibBorrow(p)
@@ -26815,7 +27053,7 @@ func UnsafeScannerFromGlibNone(p unsafe.Pointer) *Scanner {
 	return wrapped
 }
 
-// UnsafeScannerFromGlibFull is used to convert raw C.GScanner pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeScannerFromGlibFull is used to convert raw C.GScanner pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeScannerFromGlibFull(p unsafe.Pointer) *Scanner {
 	wrapped := UnsafeScannerFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -26847,7 +27085,9 @@ func UnsafeScannerToGlibFull(s *Scanner) unsafe.Pointer {
 	s.native = nil // Scanner is invalid from here on
 	return _p
 }
+
 // CurLine wraps g_scanner_cur_line
+// 
 // The function returns the following values:
 // 
 // 	- goret uint 
@@ -26872,6 +27112,7 @@ func (scanner *Scanner) CurLine() uint {
 }
 
 // CurPosition wraps g_scanner_cur_position
+// 
 // The function returns the following values:
 // 
 // 	- goret uint 
@@ -26896,6 +27137,7 @@ func (scanner *Scanner) CurPosition() uint {
 }
 
 // CurToken wraps g_scanner_cur_token
+// 
 // The function returns the following values:
 // 
 // 	- goret TokenType 
@@ -26919,6 +27161,7 @@ func (scanner *Scanner) CurToken() TokenType {
 }
 
 // EOF wraps g_scanner_eof
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -26944,6 +27187,7 @@ func (scanner *Scanner) EOF() bool {
 }
 
 // GetNextToken wraps g_scanner_get_next_token
+// 
 // The function returns the following values:
 // 
 // 	- goret TokenType 
@@ -27012,6 +27256,7 @@ func (scanner *Scanner) InputText(text string, textLen uint) {
 }
 
 // PeekNextToken wraps g_scanner_peek_next_token
+// 
 // The function returns the following values:
 // 
 // 	- goret TokenType 
@@ -27189,7 +27434,7 @@ func UnsafeScannerConfigFromGlibBorrow(p unsafe.Pointer) *ScannerConfig {
 	return &ScannerConfig{&scannerConfig{(*C.GScannerConfig)(p)}}
 }
 
-// UnsafeScannerConfigFromGlibNone is used to convert raw C.GScannerConfig pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeScannerConfigFromGlibNone is used to convert raw C.GScannerConfig pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeScannerConfigFromGlibNone(p unsafe.Pointer) *ScannerConfig {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeScannerConfigFromGlibBorrow(p)
@@ -27202,7 +27447,7 @@ func UnsafeScannerConfigFromGlibNone(p unsafe.Pointer) *ScannerConfig {
 	return wrapped
 }
 
-// UnsafeScannerConfigFromGlibFull is used to convert raw C.GScannerConfig pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeScannerConfigFromGlibFull is used to convert raw C.GScannerConfig pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeScannerConfigFromGlibFull(p unsafe.Pointer) *ScannerConfig {
 	wrapped := UnsafeScannerConfigFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -27234,6 +27479,7 @@ func UnsafeScannerConfigToGlibFull(s *ScannerConfig) unsafe.Pointer {
 	s.native = nil // ScannerConfig is invalid from here on
 	return _p
 }
+
 // Sequence wraps GSequence
 //
 // The #GSequence struct is an opaque data type representing a
@@ -27252,7 +27498,7 @@ func UnsafeSequenceFromGlibBorrow(p unsafe.Pointer) *Sequence {
 	return &Sequence{&sequence{(*C.GSequence)(p)}}
 }
 
-// UnsafeSequenceFromGlibNone is used to convert raw C.GSequence pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeSequenceFromGlibNone is used to convert raw C.GSequence pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeSequenceFromGlibNone(p unsafe.Pointer) *Sequence {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeSequenceFromGlibBorrow(p)
@@ -27265,7 +27511,7 @@ func UnsafeSequenceFromGlibNone(p unsafe.Pointer) *Sequence {
 	return wrapped
 }
 
-// UnsafeSequenceFromGlibFull is used to convert raw C.GSequence pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeSequenceFromGlibFull is used to convert raw C.GSequence pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeSequenceFromGlibFull(p unsafe.Pointer) *Sequence {
 	wrapped := UnsafeSequenceFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -27297,6 +27543,7 @@ func UnsafeSequenceToGlibFull(s *Sequence) unsafe.Pointer {
 	s.native = nil // Sequence is invalid from here on
 	return _p
 }
+
 // SequenceMove wraps g_sequence_move
 // 
 // The function takes the following parameters:
@@ -27485,6 +27732,7 @@ func SequenceSwap(a *SequenceIter, b *SequenceIter) {
 }
 
 // GetBeginIter wraps g_sequence_get_begin_iter
+// 
 // The function returns the following values:
 // 
 // 	- goret *SequenceIter 
@@ -27507,6 +27755,7 @@ func (seq *Sequence) GetBeginIter() *SequenceIter {
 }
 
 // GetEndIter wraps g_sequence_get_end_iter
+// 
 // The function returns the following values:
 // 
 // 	- goret *SequenceIter 
@@ -27560,6 +27809,7 @@ func (seq *Sequence) GetIterAtPos(pos int) *SequenceIter {
 }
 
 // GetLength wraps g_sequence_get_length
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -27584,6 +27834,7 @@ func (seq *Sequence) GetLength() int {
 }
 
 // IsEmpty wraps g_sequence_is_empty
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -27656,7 +27907,7 @@ func UnsafeSequenceIterFromGlibBorrow(p unsafe.Pointer) *SequenceIter {
 	return &SequenceIter{&sequenceIter{(*C.GSequenceIter)(p)}}
 }
 
-// UnsafeSequenceIterFromGlibNone is used to convert raw C.GSequenceIter pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeSequenceIterFromGlibNone is used to convert raw C.GSequenceIter pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeSequenceIterFromGlibNone(p unsafe.Pointer) *SequenceIter {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeSequenceIterFromGlibBorrow(p)
@@ -27669,7 +27920,7 @@ func UnsafeSequenceIterFromGlibNone(p unsafe.Pointer) *SequenceIter {
 	return wrapped
 }
 
-// UnsafeSequenceIterFromGlibFull is used to convert raw C.GSequenceIter pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeSequenceIterFromGlibFull is used to convert raw C.GSequenceIter pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeSequenceIterFromGlibFull(p unsafe.Pointer) *SequenceIter {
 	wrapped := UnsafeSequenceIterFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -27701,6 +27952,7 @@ func UnsafeSequenceIterToGlibFull(s *SequenceIter) unsafe.Pointer {
 	s.native = nil // SequenceIter is invalid from here on
 	return _p
 }
+
 // Compare wraps g_sequence_iter_compare
 // 
 // The function takes the following parameters:
@@ -27735,6 +27987,7 @@ func (a *SequenceIter) Compare(b *SequenceIter) int {
 }
 
 // GetPosition wraps g_sequence_iter_get_position
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -27757,6 +28010,7 @@ func (iter *SequenceIter) GetPosition() int {
 }
 
 // GetSequence wraps g_sequence_iter_get_sequence
+// 
 // The function returns the following values:
 // 
 // 	- goret *Sequence 
@@ -27779,6 +28033,7 @@ func (iter *SequenceIter) GetSequence() *Sequence {
 }
 
 // IsBegin wraps g_sequence_iter_is_begin
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -27803,6 +28058,7 @@ func (iter *SequenceIter) IsBegin() bool {
 }
 
 // IsEnd wraps g_sequence_iter_is_end
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -27861,6 +28117,7 @@ func (iter *SequenceIter) Move(delta int) *SequenceIter {
 }
 
 // Next wraps g_sequence_iter_next
+// 
 // The function returns the following values:
 // 
 // 	- goret *SequenceIter 
@@ -27884,6 +28141,7 @@ func (iter *SequenceIter) Next() *SequenceIter {
 }
 
 // Prev wraps g_sequence_iter_prev
+// 
 // The function returns the following values:
 // 
 // 	- goret *SequenceIter 
@@ -27924,7 +28182,7 @@ func UnsafeSourceFromGlibBorrow(p unsafe.Pointer) *Source {
 	return &Source{&source{(*C.GSource)(p)}}
 }
 
-// UnsafeSourceFromGlibNone is used to convert raw C.GSource pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeSourceFromGlibNone is used to convert raw C.GSource pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeSourceFromGlibNone(p unsafe.Pointer) *Source {
 	C.g_source_ref((*C.GSource)(p))
 	wrapped := UnsafeSourceFromGlibBorrow(p)
@@ -27937,7 +28195,7 @@ func UnsafeSourceFromGlibNone(p unsafe.Pointer) *Source {
 	return wrapped
 }
 
-// UnsafeSourceFromGlibFull is used to convert raw C.GSource pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeSourceFromGlibFull is used to convert raw C.GSource pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeSourceFromGlibFull(p unsafe.Pointer) *Source {
 	wrapped := UnsafeSourceFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -27976,6 +28234,7 @@ func UnsafeSourceToGlibFull(s *Source) unsafe.Pointer {
 	s.native = nil // Source is invalid from here on
 	return _p
 }
+
 // NewSource wraps g_source_new
 // 
 // The function takes the following parameters:
@@ -28204,6 +28463,7 @@ func (source *Source) Attach(_context *MainContext) uint {
 }
 
 // GetCanRecurse wraps g_source_get_can_recurse
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -28229,6 +28489,7 @@ func (source *Source) GetCanRecurse() bool {
 }
 
 // GetContext wraps g_source_get_context
+// 
 // The function returns the following values:
 // 
 // 	- goret *MainContext (nullable) 
@@ -28260,6 +28521,7 @@ func (source *Source) GetContext() *MainContext {
 }
 
 // GetID wraps g_source_get_id
+// 
 // The function returns the following values:
 // 
 // 	- goret uint 
@@ -28291,6 +28553,7 @@ func (source *Source) GetID() uint {
 }
 
 // GetName wraps g_source_get_name
+// 
 // The function returns the following values:
 // 
 // 	- goret string (nullable) 
@@ -28316,6 +28579,7 @@ func (source *Source) GetName() string {
 }
 
 // GetPriority wraps g_source_get_priority
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -28338,6 +28602,7 @@ func (source *Source) GetPriority() int {
 }
 
 // GetReadyTime wraps g_source_get_ready_time
+// 
 // The function returns the following values:
 // 
 // 	- goret int64 
@@ -28364,6 +28629,7 @@ func (source *Source) GetReadyTime() int64 {
 }
 
 // GetTime wraps g_source_get_time
+// 
 // The function returns the following values:
 // 
 // 	- goret int64 
@@ -28392,6 +28658,7 @@ func (source *Source) GetTime() int64 {
 }
 
 // IsDestroyed wraps g_source_is_destroyed
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -28769,7 +29036,7 @@ func UnsafeSourceCallbackFuncsFromGlibBorrow(p unsafe.Pointer) *SourceCallbackFu
 	return &SourceCallbackFuncs{&sourceCallbackFuncs{(*C.GSourceCallbackFuncs)(p)}}
 }
 
-// UnsafeSourceCallbackFuncsFromGlibNone is used to convert raw C.GSourceCallbackFuncs pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeSourceCallbackFuncsFromGlibNone is used to convert raw C.GSourceCallbackFuncs pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeSourceCallbackFuncsFromGlibNone(p unsafe.Pointer) *SourceCallbackFuncs {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeSourceCallbackFuncsFromGlibBorrow(p)
@@ -28782,7 +29049,7 @@ func UnsafeSourceCallbackFuncsFromGlibNone(p unsafe.Pointer) *SourceCallbackFunc
 	return wrapped
 }
 
-// UnsafeSourceCallbackFuncsFromGlibFull is used to convert raw C.GSourceCallbackFuncs pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeSourceCallbackFuncsFromGlibFull is used to convert raw C.GSourceCallbackFuncs pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeSourceCallbackFuncsFromGlibFull(p unsafe.Pointer) *SourceCallbackFuncs {
 	wrapped := UnsafeSourceCallbackFuncsFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -28814,6 +29081,7 @@ func UnsafeSourceCallbackFuncsToGlibFull(s *SourceCallbackFuncs) unsafe.Pointer 
 	s.native = nil // SourceCallbackFuncs is invalid from here on
 	return _p
 }
+
 // SourceFuncs wraps GSourceFuncs
 //
 // The `GSourceFuncs` struct contains a table of
@@ -28850,7 +29118,7 @@ func UnsafeSourceFuncsFromGlibBorrow(p unsafe.Pointer) *SourceFuncs {
 	return &SourceFuncs{&sourceFuncs{(*C.GSourceFuncs)(p)}}
 }
 
-// UnsafeSourceFuncsFromGlibNone is used to convert raw C.GSourceFuncs pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeSourceFuncsFromGlibNone is used to convert raw C.GSourceFuncs pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeSourceFuncsFromGlibNone(p unsafe.Pointer) *SourceFuncs {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeSourceFuncsFromGlibBorrow(p)
@@ -28863,7 +29131,7 @@ func UnsafeSourceFuncsFromGlibNone(p unsafe.Pointer) *SourceFuncs {
 	return wrapped
 }
 
-// UnsafeSourceFuncsFromGlibFull is used to convert raw C.GSourceFuncs pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeSourceFuncsFromGlibFull is used to convert raw C.GSourceFuncs pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeSourceFuncsFromGlibFull(p unsafe.Pointer) *SourceFuncs {
 	wrapped := UnsafeSourceFuncsFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -28895,6 +29163,7 @@ func UnsafeSourceFuncsToGlibFull(s *SourceFuncs) unsafe.Pointer {
 	s.native = nil // SourceFuncs is invalid from here on
 	return _p
 }
+
 // TimeZone wraps GTimeZone
 //
 // A `GTimeZone` represents a time zone, at no particular point in time.
@@ -28937,7 +29206,7 @@ func UnsafeTimeZoneFromGlibBorrow(p unsafe.Pointer) *TimeZone {
 	return &TimeZone{&timeZone{(*C.GTimeZone)(p)}}
 }
 
-// UnsafeTimeZoneFromGlibNone is used to convert raw C.GTimeZone pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeTimeZoneFromGlibNone is used to convert raw C.GTimeZone pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeTimeZoneFromGlibNone(p unsafe.Pointer) *TimeZone {
 	C.g_time_zone_ref((*C.GTimeZone)(p))
 	wrapped := UnsafeTimeZoneFromGlibBorrow(p)
@@ -28950,7 +29219,7 @@ func UnsafeTimeZoneFromGlibNone(p unsafe.Pointer) *TimeZone {
 	return wrapped
 }
 
-// UnsafeTimeZoneFromGlibFull is used to convert raw C.GTimeZone pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeTimeZoneFromGlibFull is used to convert raw C.GTimeZone pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeTimeZoneFromGlibFull(p unsafe.Pointer) *TimeZone {
 	wrapped := UnsafeTimeZoneFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -28989,6 +29258,7 @@ func UnsafeTimeZoneToGlibFull(t *TimeZone) unsafe.Pointer {
 	t.native = nil // TimeZone is invalid from here on
 	return _p
 }
+
 // NewTimeZoneIdentifier wraps g_time_zone_new_identifier
 // 
 // The function takes the following parameters:
@@ -29086,6 +29356,7 @@ func NewTimeZoneIdentifier(identifier string) *TimeZone {
 }
 
 // NewTimeZoneLocal wraps g_time_zone_new_local
+// 
 // The function returns the following values:
 // 
 // 	- goret *TimeZone 
@@ -29148,6 +29419,7 @@ func NewTimeZoneOffset(seconds int32) *TimeZone {
 }
 
 // NewTimeZoneUTC wraps g_time_zone_new_utc
+// 
 // The function returns the following values:
 // 
 // 	- goret *TimeZone 
@@ -29258,6 +29530,7 @@ func (tz *TimeZone) GetAbbreviation(interval int) string {
 }
 
 // GetIdentifier wraps g_time_zone_get_identifier
+// 
 // The function returns the following values:
 // 
 // 	- goret string 
@@ -29375,7 +29648,7 @@ func UnsafeTimerFromGlibBorrow(p unsafe.Pointer) *Timer {
 	return &Timer{&timer{(*C.GTimer)(p)}}
 }
 
-// UnsafeTimerFromGlibNone is used to convert raw C.GTimer pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeTimerFromGlibNone is used to convert raw C.GTimer pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeTimerFromGlibNone(p unsafe.Pointer) *Timer {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeTimerFromGlibBorrow(p)
@@ -29388,7 +29661,7 @@ func UnsafeTimerFromGlibNone(p unsafe.Pointer) *Timer {
 	return wrapped
 }
 
-// UnsafeTimerFromGlibFull is used to convert raw C.GTimer pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeTimerFromGlibFull is used to convert raw C.GTimer pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeTimerFromGlibFull(p unsafe.Pointer) *Timer {
 	wrapped := UnsafeTimerFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -29420,6 +29693,7 @@ func UnsafeTimerToGlibFull(t *Timer) unsafe.Pointer {
 	t.native = nil // Timer is invalid from here on
 	return _p
 }
+
 // Continue wraps g_timer_continue
 //
 // Resumes a timer that has previously been stopped with
@@ -29474,6 +29748,7 @@ func (timer *Timer) Elapsed(microseconds *uint32) float64 {
 }
 
 // IsActive wraps g_timer_is_active
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -29556,7 +29831,7 @@ func UnsafeTreeNodeFromGlibBorrow(p unsafe.Pointer) *TreeNode {
 	return &TreeNode{&treeNode{(*C.GTreeNode)(p)}}
 }
 
-// UnsafeTreeNodeFromGlibNone is used to convert raw C.GTreeNode pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeTreeNodeFromGlibNone is used to convert raw C.GTreeNode pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeTreeNodeFromGlibNone(p unsafe.Pointer) *TreeNode {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeTreeNodeFromGlibBorrow(p)
@@ -29569,7 +29844,7 @@ func UnsafeTreeNodeFromGlibNone(p unsafe.Pointer) *TreeNode {
 	return wrapped
 }
 
-// UnsafeTreeNodeFromGlibFull is used to convert raw C.GTreeNode pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeTreeNodeFromGlibFull is used to convert raw C.GTreeNode pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeTreeNodeFromGlibFull(p unsafe.Pointer) *TreeNode {
 	wrapped := UnsafeTreeNodeFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -29601,7 +29876,9 @@ func UnsafeTreeNodeToGlibFull(t *TreeNode) unsafe.Pointer {
 	t.native = nil // TreeNode is invalid from here on
 	return _p
 }
+
 // Next wraps g_tree_node_next
+// 
 // The function returns the following values:
 // 
 // 	- goret *TreeNode (nullable) 
@@ -29627,6 +29904,7 @@ func (node *TreeNode) Next() *TreeNode {
 }
 
 // Previous wraps g_tree_node_previous
+// 
 // The function returns the following values:
 // 
 // 	- goret *TreeNode (nullable) 
@@ -29828,7 +30106,7 @@ func UnsafeUriFromGlibBorrow(p unsafe.Pointer) *Uri {
 	return &Uri{&uri{(*C.GUri)(p)}}
 }
 
-// UnsafeUriFromGlibNone is used to convert raw C.GUri pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeUriFromGlibNone is used to convert raw C.GUri pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeUriFromGlibNone(p unsafe.Pointer) *Uri {
 	C.g_uri_ref((*C.GUri)(p))
 	wrapped := UnsafeUriFromGlibBorrow(p)
@@ -29841,7 +30119,7 @@ func UnsafeUriFromGlibNone(p unsafe.Pointer) *Uri {
 	return wrapped
 }
 
-// UnsafeUriFromGlibFull is used to convert raw C.GUri pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeUriFromGlibFull is used to convert raw C.GUri pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeUriFromGlibFull(p unsafe.Pointer) *Uri {
 	wrapped := UnsafeUriFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -29880,6 +30158,7 @@ func UnsafeUriToGlibFull(u *Uri) unsafe.Pointer {
 	u.native = nil // Uri is invalid from here on
 	return _p
 }
+
 // UriBuild wraps g_uri_build
 // 
 // The function takes the following parameters:
@@ -30043,6 +30322,7 @@ func UriBuildWithUser(flags URIFlags, scheme string, user string, password strin
 }
 
 // UriErrorQuark wraps g_uri_error_quark
+// 
 // The function returns the following values:
 // 
 // 	- goret Quark 
@@ -31035,6 +31315,7 @@ func UriUnescapeString(escapedString string, illegalCharacters string) string {
 }
 
 // GetAuthParams wraps g_uri_get_auth_params
+// 
 // The function returns the following values:
 // 
 // 	- goret string (nullable) 
@@ -31065,6 +31346,7 @@ func (uri *Uri) GetAuthParams() string {
 }
 
 // GetFlags wraps g_uri_get_flags
+// 
 // The function returns the following values:
 // 
 // 	- goret URIFlags 
@@ -31087,6 +31369,7 @@ func (uri *Uri) GetFlags() URIFlags {
 }
 
 // GetFragment wraps g_uri_get_fragment
+// 
 // The function returns the following values:
 // 
 // 	- goret string (nullable) 
@@ -31112,6 +31395,7 @@ func (uri *Uri) GetFragment() string {
 }
 
 // GetHost wraps g_uri_get_host
+// 
 // The function returns the following values:
 // 
 // 	- goret string (nullable) 
@@ -31144,6 +31428,7 @@ func (uri *Uri) GetHost() string {
 }
 
 // GetPassword wraps g_uri_get_password
+// 
 // The function returns the following values:
 // 
 // 	- goret string (nullable) 
@@ -31170,6 +31455,7 @@ func (uri *Uri) GetPassword() string {
 }
 
 // GetPath wraps g_uri_get_path
+// 
 // The function returns the following values:
 // 
 // 	- goret string 
@@ -31193,6 +31479,7 @@ func (uri *Uri) GetPath() string {
 }
 
 // GetPort wraps g_uri_get_port
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -31215,6 +31502,7 @@ func (uri *Uri) GetPort() int {
 }
 
 // GetQuery wraps g_uri_get_query
+// 
 // The function returns the following values:
 // 
 // 	- goret string (nullable) 
@@ -31243,6 +31531,7 @@ func (uri *Uri) GetQuery() string {
 }
 
 // GetScheme wraps g_uri_get_scheme
+// 
 // The function returns the following values:
 // 
 // 	- goret string 
@@ -31266,6 +31555,7 @@ func (uri *Uri) GetScheme() string {
 }
 
 // GetUser wraps g_uri_get_user
+// 
 // The function returns the following values:
 // 
 // 	- goret string (nullable) 
@@ -31293,6 +31583,7 @@ func (uri *Uri) GetUser() string {
 }
 
 // GetUserinfo wraps g_uri_get_userinfo
+// 
 // The function returns the following values:
 // 
 // 	- goret string (nullable) 
@@ -31362,6 +31653,7 @@ func (baseUri *Uri) ParseRelative(uriRef string, flags URIFlags) (*Uri, error) {
 }
 
 // ToString wraps g_uri_to_string
+// 
 // The function returns the following values:
 // 
 // 	- goret string 
@@ -31452,7 +31744,7 @@ func UnsafeUriParamsIterFromGlibBorrow(p unsafe.Pointer) *UriParamsIter {
 	return &UriParamsIter{&uriParamsIter{(*C.GUriParamsIter)(p)}}
 }
 
-// UnsafeUriParamsIterFromGlibNone is used to convert raw C.GUriParamsIter pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeUriParamsIterFromGlibNone is used to convert raw C.GUriParamsIter pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeUriParamsIterFromGlibNone(p unsafe.Pointer) *UriParamsIter {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeUriParamsIterFromGlibBorrow(p)
@@ -31465,7 +31757,7 @@ func UnsafeUriParamsIterFromGlibNone(p unsafe.Pointer) *UriParamsIter {
 	return wrapped
 }
 
-// UnsafeUriParamsIterFromGlibFull is used to convert raw C.GUriParamsIter pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeUriParamsIterFromGlibFull is used to convert raw C.GUriParamsIter pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeUriParamsIterFromGlibFull(p unsafe.Pointer) *UriParamsIter {
 	wrapped := UnsafeUriParamsIterFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -31497,6 +31789,7 @@ func UnsafeUriParamsIterToGlibFull(u *UriParamsIter) unsafe.Pointer {
 	u.native = nil // UriParamsIter is invalid from here on
 	return _p
 }
+
 // Init wraps g_uri_params_iter_init
 // 
 // The function takes the following parameters:
@@ -31568,6 +31861,7 @@ func (iter *UriParamsIter) Init(params string, length int, separators string, fl
 }
 
 // Next wraps g_uri_params_iter_next
+// 
 // The function returns the following values:
 // 
 // 	- attribute string (nullable): on return, contains
@@ -31644,7 +31938,7 @@ func UnsafeVariantBuilderFromGlibBorrow(p unsafe.Pointer) *VariantBuilder {
 	return &VariantBuilder{&variantBuilder{(*C.GVariantBuilder)(p)}}
 }
 
-// UnsafeVariantBuilderFromGlibNone is used to convert raw C.GVariantBuilder pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeVariantBuilderFromGlibNone is used to convert raw C.GVariantBuilder pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeVariantBuilderFromGlibNone(p unsafe.Pointer) *VariantBuilder {
 	C.g_variant_builder_ref((*C.GVariantBuilder)(p))
 	wrapped := UnsafeVariantBuilderFromGlibBorrow(p)
@@ -31657,7 +31951,7 @@ func UnsafeVariantBuilderFromGlibNone(p unsafe.Pointer) *VariantBuilder {
 	return wrapped
 }
 
-// UnsafeVariantBuilderFromGlibFull is used to convert raw C.GVariantBuilder pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeVariantBuilderFromGlibFull is used to convert raw C.GVariantBuilder pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeVariantBuilderFromGlibFull(p unsafe.Pointer) *VariantBuilder {
 	wrapped := UnsafeVariantBuilderFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -31696,6 +31990,7 @@ func UnsafeVariantBuilderToGlibFull(v *VariantBuilder) unsafe.Pointer {
 	v.native = nil // VariantBuilder is invalid from here on
 	return _p
 }
+
 // NewVariantBuilder wraps g_variant_builder_new
 // 
 // The function takes the following parameters:
@@ -31907,7 +32202,7 @@ func UnsafeVariantDictFromGlibBorrow(p unsafe.Pointer) *VariantDict {
 	return &VariantDict{&variantDict{(*C.GVariantDict)(p)}}
 }
 
-// UnsafeVariantDictFromGlibNone is used to convert raw C.GVariantDict pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeVariantDictFromGlibNone is used to convert raw C.GVariantDict pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeVariantDictFromGlibNone(p unsafe.Pointer) *VariantDict {
 	C.g_variant_dict_ref((*C.GVariantDict)(p))
 	wrapped := UnsafeVariantDictFromGlibBorrow(p)
@@ -31920,7 +32215,7 @@ func UnsafeVariantDictFromGlibNone(p unsafe.Pointer) *VariantDict {
 	return wrapped
 }
 
-// UnsafeVariantDictFromGlibFull is used to convert raw C.GVariantDict pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeVariantDictFromGlibFull is used to convert raw C.GVariantDict pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeVariantDictFromGlibFull(p unsafe.Pointer) *VariantDict {
 	wrapped := UnsafeVariantDictFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -31959,6 +32254,7 @@ func UnsafeVariantDictToGlibFull(v *VariantDict) unsafe.Pointer {
 	v.native = nil // VariantDict is invalid from here on
 	return _p
 }
+
 // Clear wraps g_variant_dict_clear
 //
 // Releases all memory associated with a #GVariantDict without freeing
@@ -32217,7 +32513,7 @@ func UnsafeVariantTypeFromGlibBorrow(p unsafe.Pointer) *VariantType {
 	return &VariantType{&variantType{(*C.GVariantType)(p)}}
 }
 
-// UnsafeVariantTypeFromGlibNone is used to convert raw C.GVariantType pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeVariantTypeFromGlibNone is used to convert raw C.GVariantType pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeVariantTypeFromGlibNone(p unsafe.Pointer) *VariantType {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeVariantTypeFromGlibBorrow(p)
@@ -32230,7 +32526,7 @@ func UnsafeVariantTypeFromGlibNone(p unsafe.Pointer) *VariantType {
 	return wrapped
 }
 
-// UnsafeVariantTypeFromGlibFull is used to convert raw C.GVariantType pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeVariantTypeFromGlibFull is used to convert raw C.GVariantType pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeVariantTypeFromGlibFull(p unsafe.Pointer) *VariantType {
 	wrapped := UnsafeVariantTypeFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -32262,6 +32558,7 @@ func UnsafeVariantTypeToGlibFull(v *VariantType) unsafe.Pointer {
 	v.native = nil // VariantType is invalid from here on
 	return _p
 }
+
 // NewVariantType wraps g_variant_type_new
 // 
 // The function takes the following parameters:
@@ -32564,6 +32861,7 @@ func VariantTypeStringScan(str string, limit string) (string, bool) {
 }
 
 // Copy wraps g_variant_type_copy
+// 
 // The function returns the following values:
 // 
 // 	- goret *VariantType 
@@ -32587,6 +32885,7 @@ func (typ *VariantType) Copy() *VariantType {
 }
 
 // DupString wraps g_variant_type_dup_string
+// 
 // The function returns the following values:
 // 
 // 	- goret string 
@@ -32612,6 +32911,7 @@ func (typ *VariantType) DupString() string {
 }
 
 // Element wraps g_variant_type_element
+// 
 // The function returns the following values:
 // 
 // 	- goret *VariantType 
@@ -32636,6 +32936,7 @@ func (typ *VariantType) Element() *VariantType {
 }
 
 // First wraps g_variant_type_first
+// 
 // The function returns the following values:
 // 
 // 	- goret *VariantType 
@@ -32671,6 +32972,7 @@ func (typ *VariantType) First() *VariantType {
 }
 
 // GetStringLength wraps g_variant_type_get_string_length
+// 
 // The function returns the following values:
 // 
 // 	- goret uint 
@@ -32695,6 +32997,7 @@ func (typ *VariantType) GetStringLength() uint {
 }
 
 // IsArray wraps g_variant_type_is_array
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -32724,6 +33027,7 @@ func (typ *VariantType) IsArray() bool {
 }
 
 // IsBasic wraps g_variant_type_is_basic
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -32756,6 +33060,7 @@ func (typ *VariantType) IsBasic() bool {
 }
 
 // IsContainer wraps g_variant_type_is_container
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -32787,6 +33092,7 @@ func (typ *VariantType) IsContainer() bool {
 }
 
 // IsDefinite wraps g_variant_type_is_definite
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -32820,6 +33126,7 @@ func (typ *VariantType) IsDefinite() bool {
 }
 
 // IsDictEntry wraps g_variant_type_is_dict_entry
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -32849,6 +33156,7 @@ func (typ *VariantType) IsDictEntry() bool {
 }
 
 // IsMaybe wraps g_variant_type_is_maybe
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -32914,6 +33222,7 @@ func (typ *VariantType) IsSubtypeOf(supertype *VariantType) bool {
 }
 
 // IsTuple wraps g_variant_type_is_tuple
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -32944,6 +33253,7 @@ func (typ *VariantType) IsTuple() bool {
 }
 
 // IsVariant wraps g_variant_type_is_variant
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -32968,6 +33278,7 @@ func (typ *VariantType) IsVariant() bool {
 }
 
 // Key wraps g_variant_type_key
+// 
 // The function returns the following values:
 // 
 // 	- goret *VariantType 
@@ -32994,6 +33305,7 @@ func (typ *VariantType) Key() *VariantType {
 }
 
 // NItems wraps g_variant_type_n_items
+// 
 // The function returns the following values:
 // 
 // 	- goret uint 
@@ -33024,6 +33336,7 @@ func (typ *VariantType) NItems() uint {
 }
 
 // Next wraps g_variant_type_next
+// 
 // The function returns the following values:
 // 
 // 	- goret *VariantType 
@@ -33056,6 +33369,7 @@ func (typ *VariantType) Next() *VariantType {
 }
 
 // Value wraps g_variant_type_value
+// 
 // The function returns the following values:
 // 
 // 	- goret *VariantType 

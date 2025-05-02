@@ -21,6 +21,62 @@ import (
 // #cgo CFLAGS: -Wno-deprecated-declarations
 // #include <gdk/gdk.h>
 // extern void _gotk4_gio2_AsyncReadyCallback(GObject*, GAsyncResult*, gpointer);
+// extern GdkPaintable* _gotk4_gdk4_Paintable_get_current_image(GdkPaintable*);
+// extern GdkPaintableFlags _gotk4_gdk4_Paintable_get_flags(GdkPaintable*);
+// extern double _gotk4_gdk4_Paintable_get_intrinsic_aspect_ratio(GdkPaintable*);
+// extern int _gotk4_gdk4_Paintable_get_intrinsic_height(GdkPaintable*);
+// extern int _gotk4_gdk4_Paintable_get_intrinsic_width(GdkPaintable*);
+// extern void _gotk4_gdk4_Paintable_snapshot(GdkPaintable*, GdkSnapshot*, double, double);
+// GdkPaintable* _gotk4_gdk4_Paintable_virtual_get_current_image(void* fnptr, GdkPaintable* carg0) {
+// 	return ((GdkPaintable* (*) (GdkPaintable*))(fnptr))(carg0);
+// }
+// GdkPaintableFlags _gotk4_gdk4_Paintable_virtual_get_flags(void* fnptr, GdkPaintable* carg0) {
+// 	return ((GdkPaintableFlags (*) (GdkPaintable*))(fnptr))(carg0);
+// }
+// double _gotk4_gdk4_Paintable_virtual_get_intrinsic_aspect_ratio(void* fnptr, GdkPaintable* carg0) {
+// 	return ((double (*) (GdkPaintable*))(fnptr))(carg0);
+// }
+// int _gotk4_gdk4_Paintable_virtual_get_intrinsic_height(void* fnptr, GdkPaintable* carg0) {
+// 	return ((int (*) (GdkPaintable*))(fnptr))(carg0);
+// }
+// int _gotk4_gdk4_Paintable_virtual_get_intrinsic_width(void* fnptr, GdkPaintable* carg0) {
+// 	return ((int (*) (GdkPaintable*))(fnptr))(carg0);
+// }
+// void _gotk4_gdk4_Paintable_virtual_snapshot(void* fnptr, GdkPaintable* carg0, GdkSnapshot* carg1, double carg2, double carg3) {
+// 	return ((void (*) (GdkPaintable*, GdkSnapshot*, double, double))(fnptr))(carg0, carg1, carg2, carg3);
+// }
+// extern void _gotk4_gdk4_ContentProvider_attach_clipboard(GdkContentProvider*, GdkClipboard*);
+// extern void _gotk4_gdk4_ContentProvider_content_changed(GdkContentProvider*);
+// extern void _gotk4_gdk4_ContentProvider_detach_clipboard(GdkContentProvider*, GdkClipboard*);
+// extern gboolean _gotk4_gdk4_ContentProvider_get_value(GdkContentProvider*, GValue, GError*);
+// extern GdkContentFormats* _gotk4_gdk4_ContentProvider_ref_formats(GdkContentProvider*);
+// extern GdkContentFormats* _gotk4_gdk4_ContentProvider_ref_storable_formats(GdkContentProvider*);
+// extern void _gotk4_gdk4_ContentProvider_write_mime_type_async(GdkContentProvider*, char*, GOutputStream*, int, GCancellable*, GAsyncReadyCallback, gpointer);
+// extern gboolean _gotk4_gdk4_ContentProvider_write_mime_type_finish(GdkContentProvider*, GAsyncResult*, GError*);
+// void _gotk4_gdk4_ContentProvider_virtual_attach_clipboard(void* fnptr, GdkContentProvider* carg0, GdkClipboard* carg1) {
+// 	return ((void (*) (GdkContentProvider*, GdkClipboard*))(fnptr))(carg0, carg1);
+// }
+// void _gotk4_gdk4_ContentProvider_virtual_content_changed(void* fnptr, GdkContentProvider* carg0) {
+// 	return ((void (*) (GdkContentProvider*))(fnptr))(carg0);
+// }
+// void _gotk4_gdk4_ContentProvider_virtual_detach_clipboard(void* fnptr, GdkContentProvider* carg0, GdkClipboard* carg1) {
+// 	return ((void (*) (GdkContentProvider*, GdkClipboard*))(fnptr))(carg0, carg1);
+// }
+// gboolean _gotk4_gdk4_ContentProvider_virtual_get_value(void* fnptr, GdkContentProvider* carg0, GValue* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GdkContentProvider*, GValue*, GError**))(fnptr))(carg0, carg1, _cerr);
+// }
+// GdkContentFormats* _gotk4_gdk4_ContentProvider_virtual_ref_formats(void* fnptr, GdkContentProvider* carg0) {
+// 	return ((GdkContentFormats* (*) (GdkContentProvider*))(fnptr))(carg0);
+// }
+// GdkContentFormats* _gotk4_gdk4_ContentProvider_virtual_ref_storable_formats(void* fnptr, GdkContentProvider* carg0) {
+// 	return ((GdkContentFormats* (*) (GdkContentProvider*))(fnptr))(carg0);
+// }
+// void _gotk4_gdk4_ContentProvider_virtual_write_mime_type_async(void* fnptr, GdkContentProvider* carg0, char* carg1, GOutputStream* carg2, int carg3, GCancellable* carg4, GAsyncReadyCallback carg5, gpointer carg6) {
+// 	return ((void (*) (GdkContentProvider*, char*, GOutputStream*, int, GCancellable*, GAsyncReadyCallback, gpointer))(fnptr))(carg0, carg1, carg2, carg3, carg4, carg5, carg6);
+// }
+// gboolean _gotk4_gdk4_ContentProvider_virtual_write_mime_type_finish(void* fnptr, GdkContentProvider* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GdkContentProvider*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
+// }
 import "C"
 
 // GType values.
@@ -5159,6 +5215,25 @@ func (e DmabufError) String() string {
 	}
 }
 
+// DmabufErrorQuark wraps gdk_dmabuf_error_quark
+// 
+// The function returns the following values:
+// 
+// 	- goret glib.Quark 
+//
+// Registers an error quark for [class@Gdk.DmabufTexture] errors.
+func DmabufErrorQuark() glib.Quark {
+	var cret C.GQuark // return, none, casted, alias
+
+	cret = C.gdk_dmabuf_error_quark()
+
+	var goret glib.Quark
+
+	goret = glib.Quark(cret)
+
+	return goret
+}
+
 // DragCancelReason wraps GdkDragCancelReason
 //
 // Used in `GdkDrag` to the reason of a cancelled DND operation.
@@ -5465,6 +5540,25 @@ func (e GLError) String() string {
 		case GLErrorUnsupportedProfile: return "GLErrorUnsupportedProfile"
 		default: return fmt.Sprintf("GLError(%d)", e)
 	}
+}
+
+// GLErrorQuark wraps gdk_gl_error_quark
+// 
+// The function returns the following values:
+// 
+// 	- goret glib.Quark 
+//
+// Registers an error quark for [class@Gdk.GLContext] errors.
+func GLErrorQuark() glib.Quark {
+	var cret C.GQuark // return, none, casted, alias
+
+	cret = C.gdk_gl_error_quark()
+
+	var goret glib.Quark
+
+	goret = glib.Quark(cret)
+
+	return goret
 }
 
 // Gravity wraps GdkGravity
@@ -6199,6 +6293,25 @@ func (e TextureError) String() string {
 	}
 }
 
+// TextureErrorQuark wraps gdk_texture_error_quark
+// 
+// The function returns the following values:
+// 
+// 	- goret glib.Quark 
+//
+// Registers an error quark for [class@Gdk.Texture] errors.
+func TextureErrorQuark() glib.Quark {
+	var cret C.GQuark // return, none, casted, alias
+
+	cret = C.gdk_texture_error_quark()
+
+	var goret glib.Quark
+
+	goret = glib.Quark(cret)
+
+	return goret
+}
+
 // TitlebarGesture wraps GdkTitlebarGesture
 //
 // The kind of title bar gesture to emit with
@@ -6338,6 +6451,25 @@ func (e VulkanError) String() string {
 		case VulkanErrorUnsupported: return "VulkanErrorUnsupported"
 		default: return fmt.Sprintf("VulkanError(%d)", e)
 	}
+}
+
+// VulkanErrorQuark wraps gdk_vulkan_error_quark
+// 
+// The function returns the following values:
+// 
+// 	- goret glib.Quark 
+//
+// Registers an error quark for [class@Gdk.VulkanContext] errors.
+func VulkanErrorQuark() glib.Quark {
+	var cret C.GQuark // return, none, casted, alias
+
+	cret = C.gdk_vulkan_error_quark()
+
+	var goret glib.Quark
+
+	goret = glib.Quark(cret)
+
+	return goret
 }
 
 // AnchorHints wraps GdkAnchorHints
@@ -6620,6 +6752,39 @@ func (f DragAction) String() string {
 		parts = append(parts, "ActionAsk")
 	}
 	return "DragAction(" + strings.Join(parts, "|") + ")"
+}
+
+// DragActionIsUnique wraps gdk_drag_action_is_unique
+// 
+// The function takes the following parameters:
+// 
+// 	- action DragAction: a `GdkDragAction` 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Checks if @action represents a single action or includes
+// multiple actions.
+// 
+// When @action is 0 - ie no action was given, %TRUE
+// is returned.
+func DragActionIsUnique(action DragAction) bool {
+	var carg1 C.GdkDragAction // in, none, casted
+	var cret  C.gboolean      // return
+
+	carg1 = C.GdkDragAction(action)
+
+	cret = C.gdk_drag_action_is_unique(carg1)
+	runtime.KeepAlive(action)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
 }
 
 // FrameClockPhase wraps GdkFrameClockPhase
@@ -7778,6 +7943,7 @@ type DevicePad interface {
 	// Returns the number of features a tablet pad has.
 	GetNFeatures(DevicePadFeature) int
 	// GetNGroups wraps gdk_device_pad_get_n_groups
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int 
@@ -7925,6 +8091,7 @@ func (pad *DevicePadInstance) GetNFeatures(feature DevicePadFeature) int {
 }
 
 // GetNGroups wraps gdk_device_pad_get_n_groups
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -7948,6 +8115,16 @@ func (pad *DevicePadInstance) GetNGroups() int {
 	goret = int(cret)
 
 	return goret
+}
+
+// DevicePadOverrides is the struct used to override the default implementation of virtual methods.
+// it is generic over the extending instance type.
+type DevicePadOverrides[Instance DevicePad] struct {
+}
+
+// UnsafeApplyDevicePadOverrides applies the overrides to init the gclass by setting the trampoline functions.
+// This is used by the bindings internally and only exported for visibility to other bindings code.
+func UnsafeApplyDevicePadOverrides[Instance DevicePad](gclass unsafe.Pointer, overrides DevicePadOverrides[Instance]) {
 }
 
 // DragSurfaceInstance is the instance type used by all types implementing GdkDragSurface. It is used internally by the bindings. Users should use the interface [DragSurface] instead.
@@ -8087,6 +8264,17 @@ func (dragSurface *DragSurfaceInstance) Present(width int, height int) bool {
 func (o *DragSurfaceInstance) ConnectComputeSize(fn func(DragSurface, *DragSurfaceSize)) gobject.SignalHandle {
 	return o.Instance.Connect("compute-size", fn)
 }
+
+// DragSurfaceOverrides is the struct used to override the default implementation of virtual methods.
+// it is generic over the extending instance type.
+type DragSurfaceOverrides[Instance DragSurface] struct {
+}
+
+// UnsafeApplyDragSurfaceOverrides applies the overrides to init the gclass by setting the trampoline functions.
+// This is used by the bindings internally and only exported for visibility to other bindings code.
+func UnsafeApplyDragSurfaceOverrides[Instance DragSurface](gclass unsafe.Pointer, overrides DragSurfaceOverrides[Instance]) {
+}
+
 // PaintableInstance is the instance type used by all types implementing GdkPaintable. It is used internally by the bindings. Users should use the interface [Paintable] instead.
 type PaintableInstance struct {
 	_ [0]func() // equal guard
@@ -8175,6 +8363,7 @@ type Paintable interface {
 	// other dimension when only one dimension is given.
 	ComputeConcreteSize(float64, float64, float64, float64) (float64, float64)
 	// GetCurrentImage wraps gdk_paintable_get_current_image
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Paintable 
@@ -8187,6 +8376,7 @@ type Paintable interface {
 	// If the @paintable is already immutable, it will return itself.
 	GetCurrentImage() Paintable
 	// GetFlags wraps gdk_paintable_get_flags
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret PaintableFlags 
@@ -8198,6 +8388,7 @@ type Paintable interface {
 	// See [flags@Gdk.PaintableFlags] for the flags and what they mean.
 	GetFlags() PaintableFlags
 	// GetIntrinsicAspectRatio wraps gdk_paintable_get_intrinsic_aspect_ratio
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret float64 
@@ -8221,6 +8412,7 @@ type Paintable interface {
 	// it returns 0. Negative values are never returned.
 	GetIntrinsicAspectRatio() float64
 	// GetIntrinsicHeight wraps gdk_paintable_get_intrinsic_height
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int 
@@ -8237,6 +8429,7 @@ type Paintable interface {
 	// Negative values are never returned.
 	GetIntrinsicHeight() int
 	// GetIntrinsicWidth wraps gdk_paintable_get_intrinsic_width
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int 
@@ -8449,6 +8642,7 @@ func (paintable *PaintableInstance) ComputeConcreteSize(specifiedWidth float64, 
 }
 
 // GetCurrentImage wraps gdk_paintable_get_current_image
+// 
 // The function returns the following values:
 // 
 // 	- goret Paintable 
@@ -8476,6 +8670,7 @@ func (paintable *PaintableInstance) GetCurrentImage() Paintable {
 }
 
 // GetFlags wraps gdk_paintable_get_flags
+// 
 // The function returns the following values:
 // 
 // 	- goret PaintableFlags 
@@ -8502,6 +8697,7 @@ func (paintable *PaintableInstance) GetFlags() PaintableFlags {
 }
 
 // GetIntrinsicAspectRatio wraps gdk_paintable_get_intrinsic_aspect_ratio
+// 
 // The function returns the following values:
 // 
 // 	- goret float64 
@@ -8540,6 +8736,7 @@ func (paintable *PaintableInstance) GetIntrinsicAspectRatio() float64 {
 }
 
 // GetIntrinsicHeight wraps gdk_paintable_get_intrinsic_height
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -8571,6 +8768,7 @@ func (paintable *PaintableInstance) GetIntrinsicHeight() int {
 }
 
 // GetIntrinsicWidth wraps gdk_paintable_get_intrinsic_width
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -8683,6 +8881,7 @@ func (paintable *PaintableInstance) Snapshot(snapshot Snapshot, width float64, h
 func (o *PaintableInstance) ConnectInvalidateContents(fn func(Paintable)) gobject.SignalHandle {
 	return o.Instance.Connect("invalidate-contents", fn)
 }
+
 // ConnectInvalidateSize connects the provided callback to the "invalidate-size" signal
 //
 // Emitted when the intrinsic size of the @paintable changes.
@@ -8698,6 +8897,74 @@ func (o *PaintableInstance) ConnectInvalidateContents(fn func(Paintable)) gobjec
 func (o *PaintableInstance) ConnectInvalidateSize(fn func(Paintable)) gobject.SignalHandle {
 	return o.Instance.Connect("invalidate-size", fn)
 }
+
+// PaintableOverrides is the struct used to override the default implementation of virtual methods.
+// it is generic over the extending instance type.
+type PaintableOverrides[Instance Paintable] struct {
+	// GetCurrentImage allows you to override the implementation of the virtual method get_current_image.
+	// The function returns the following values:
+	// 
+	// 	- goret Paintable 
+	GetCurrentImage func(Instance) Paintable
+	// GetFlags allows you to override the implementation of the virtual method get_flags.
+	// The function returns the following values:
+	// 
+	// 	- goret PaintableFlags 
+	GetFlags func(Instance) PaintableFlags
+	// GetIntrinsicAspectRatio allows you to override the implementation of the virtual method get_intrinsic_aspect_ratio.
+	// The function returns the following values:
+	// 
+	// 	- goret float64 
+	GetIntrinsicAspectRatio func(Instance) float64
+	// GetIntrinsicHeight allows you to override the implementation of the virtual method get_intrinsic_height.
+	// The function returns the following values:
+	// 
+	// 	- goret int 
+	GetIntrinsicHeight func(Instance) int
+	// GetIntrinsicWidth allows you to override the implementation of the virtual method get_intrinsic_width.
+	// The function returns the following values:
+	// 
+	// 	- goret int 
+	GetIntrinsicWidth func(Instance) int
+	// Snapshot allows you to override the implementation of the virtual method snapshot.
+	// The function takes the following parameters:
+	// 
+	// 	- snapshot Snapshot: a `GdkSnapshot` to snapshot to 
+	// 	- width float64: width to snapshot in 
+	// 	- height float64: height to snapshot in 
+	Snapshot func(Instance, Snapshot, float64, float64)
+}
+
+// UnsafeApplyPaintableOverrides applies the overrides to init the gclass by setting the trampoline functions.
+// This is used by the bindings internally and only exported for visibility to other bindings code.
+func UnsafeApplyPaintableOverrides[Instance Paintable](gclass unsafe.Pointer, overrides PaintableOverrides[Instance]) {
+	pclass := (*C.GdkPaintableInterface)(gclass)
+
+	if overrides.GetCurrentImage != nil {
+		pclass.get_current_image = (*[0]byte)(C._gotk4_gdk4_Paintable_get_current_image)
+	}
+
+	if overrides.GetFlags != nil {
+		pclass.get_flags = (*[0]byte)(C._gotk4_gdk4_Paintable_get_flags)
+	}
+
+	if overrides.GetIntrinsicAspectRatio != nil {
+		pclass.get_intrinsic_aspect_ratio = (*[0]byte)(C._gotk4_gdk4_Paintable_get_intrinsic_aspect_ratio)
+	}
+
+	if overrides.GetIntrinsicHeight != nil {
+		pclass.get_intrinsic_height = (*[0]byte)(C._gotk4_gdk4_Paintable_get_intrinsic_height)
+	}
+
+	if overrides.GetIntrinsicWidth != nil {
+		pclass.get_intrinsic_width = (*[0]byte)(C._gotk4_gdk4_Paintable_get_intrinsic_width)
+	}
+
+	if overrides.Snapshot != nil {
+		pclass.snapshot = (*[0]byte)(C._gotk4_gdk4_Paintable_snapshot)
+	}
+}
+
 // PopupInstance is the instance type used by all types implementing GdkPopup. It is used internally by the bindings. Users should use the interface [Popup] instead.
 type PopupInstance struct {
 	_ [0]func() // equal guard
@@ -8719,6 +8986,7 @@ type Popup interface {
 	upcastToGdkPopup() *PopupInstance
 
 	// GetAutohide wraps gdk_popup_get_autohide
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
@@ -8726,6 +8994,7 @@ type Popup interface {
 	// Returns whether this popup is set to hide on outside clicks.
 	GetAutohide() bool
 	// GetParent wraps gdk_popup_get_parent
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Surface (nullable) 
@@ -8733,6 +9002,7 @@ type Popup interface {
 	// Returns the parent surface of a popup.
 	GetParent() Surface
 	// GetPositionX wraps gdk_popup_get_position_x
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int 
@@ -8740,6 +9010,7 @@ type Popup interface {
 	// Obtains the position of the popup relative to its parent.
 	GetPositionX() int
 	// GetPositionY wraps gdk_popup_get_position_y
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int 
@@ -8747,6 +9018,7 @@ type Popup interface {
 	// Obtains the position of the popup relative to its parent.
 	GetPositionY() int
 	// GetRectAnchor wraps gdk_popup_get_rect_anchor
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Gravity 
@@ -8757,6 +9029,7 @@ type Popup interface {
 	// or after the [signal@Gdk.Surface::layout] signal is emitted.
 	GetRectAnchor() Gravity
 	// GetSurfaceAnchor wraps gdk_popup_get_surface_anchor
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Gravity 
@@ -8835,6 +9108,7 @@ func UnsafePopupToGlibFull(c Popup) unsafe.Pointer {
 }
 
 // GetAutohide wraps gdk_popup_get_autohide
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -8859,6 +9133,7 @@ func (popup *PopupInstance) GetAutohide() bool {
 }
 
 // GetParent wraps gdk_popup_get_parent
+// 
 // The function returns the following values:
 // 
 // 	- goret Surface (nullable) 
@@ -8883,6 +9158,7 @@ func (popup *PopupInstance) GetParent() Surface {
 }
 
 // GetPositionX wraps gdk_popup_get_position_x
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -8905,6 +9181,7 @@ func (popup *PopupInstance) GetPositionX() int {
 }
 
 // GetPositionY wraps gdk_popup_get_position_y
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -8927,6 +9204,7 @@ func (popup *PopupInstance) GetPositionY() int {
 }
 
 // GetRectAnchor wraps gdk_popup_get_rect_anchor
+// 
 // The function returns the following values:
 // 
 // 	- goret Gravity 
@@ -8952,6 +9230,7 @@ func (popup *PopupInstance) GetRectAnchor() Gravity {
 }
 
 // GetSurfaceAnchor wraps gdk_popup_get_surface_anchor
+// 
 // The function returns the following values:
 // 
 // 	- goret Gravity 
@@ -9030,6 +9309,16 @@ func (popup *PopupInstance) Present(width int, height int, layout *PopupLayout) 
 	return goret
 }
 
+// PopupOverrides is the struct used to override the default implementation of virtual methods.
+// it is generic over the extending instance type.
+type PopupOverrides[Instance Popup] struct {
+}
+
+// UnsafeApplyPopupOverrides applies the overrides to init the gclass by setting the trampoline functions.
+// This is used by the bindings internally and only exported for visibility to other bindings code.
+func UnsafeApplyPopupOverrides[Instance Popup](gclass unsafe.Pointer, overrides PopupOverrides[Instance]) {
+}
+
 // ToplevelInstance is the instance type used by all types implementing GdkToplevel. It is used internally by the bindings. Users should use the interface [Toplevel] instead.
 type ToplevelInstance struct {
 	_ [0]func() // equal guard
@@ -9092,6 +9381,7 @@ type Toplevel interface {
 	// calling this function.
 	Focus(uint32)
 	// GetState wraps gdk_toplevel_get_state
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret ToplevelState 
@@ -9100,6 +9390,7 @@ type Toplevel interface {
 	// from the `GdkToplevelState` enumeration.
 	GetState() ToplevelState
 	// Lower wraps gdk_toplevel_lower
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
@@ -9109,6 +9400,7 @@ type Toplevel interface {
 	// The windowing system may choose to ignore the request.
 	Lower() bool
 	// Minimize wraps gdk_toplevel_minimize
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
@@ -9221,6 +9513,7 @@ type Toplevel interface {
 	// if you’re using [GtkWindow](../gtk4/class.Window.html).
 	SetTransientFor(Surface)
 	// SupportsEdgeConstraints wraps gdk_toplevel_supports_edge_constraints
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
@@ -9402,6 +9695,7 @@ func (toplevel *ToplevelInstance) Focus(timestamp uint32) {
 }
 
 // GetState wraps gdk_toplevel_get_state
+// 
 // The function returns the following values:
 // 
 // 	- goret ToplevelState 
@@ -9425,6 +9719,7 @@ func (toplevel *ToplevelInstance) GetState() ToplevelState {
 }
 
 // Lower wraps gdk_toplevel_lower
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -9451,6 +9746,7 @@ func (toplevel *ToplevelInstance) Lower() bool {
 }
 
 // Minimize wraps gdk_toplevel_minimize
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -9673,6 +9969,7 @@ func (toplevel *ToplevelInstance) SetTransientFor(parent Surface) {
 }
 
 // SupportsEdgeConstraints wraps gdk_toplevel_supports_edge_constraints
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -9747,6 +10044,17 @@ func (toplevel *ToplevelInstance) TitlebarGesture(gesture TitlebarGesture) bool 
 func (o *ToplevelInstance) ConnectComputeSize(fn func(Toplevel, *ToplevelSize)) gobject.SignalHandle {
 	return o.Instance.Connect("compute-size", fn)
 }
+
+// ToplevelOverrides is the struct used to override the default implementation of virtual methods.
+// it is generic over the extending instance type.
+type ToplevelOverrides[Instance Toplevel] struct {
+}
+
+// UnsafeApplyToplevelOverrides applies the overrides to init the gclass by setting the trampoline functions.
+// This is used by the bindings internally and only exported for visibility to other bindings code.
+func UnsafeApplyToplevelOverrides[Instance Toplevel](gclass unsafe.Pointer, overrides ToplevelOverrides[Instance]) {
+}
+
 // AppLaunchContextInstance is the instance type used by all types extending GdkAppLaunchContext. It is used internally by the bindings. Users should use the interface [AppLaunchContext] instead.
 type AppLaunchContextInstance struct {
 	_ [0]func() // equal guard
@@ -9781,6 +10089,7 @@ type AppLaunchContext interface {
 	upcastToGdkAppLaunchContext() *AppLaunchContextInstance
 
 	// GetDisplay wraps gdk_app_launch_context_get_display
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Display 
@@ -9892,6 +10201,7 @@ func UnsafeAppLaunchContextToGlibFull(c AppLaunchContext) unsafe.Pointer {
 }
 
 // GetDisplay wraps gdk_app_launch_context_get_display
+// 
 // The function returns the following values:
 // 
 // 	- goret Display 
@@ -10061,6 +10371,7 @@ type CicpParams interface {
 	upcastToGdkCicpParams() *CicpParamsInstance
 
 	// BuildColorState wraps gdk_cicp_params_build_color_state
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret *ColorState (nullable) 
@@ -10073,6 +10384,7 @@ type CicpParams interface {
 	// with an error message that can be presented to the user.
 	BuildColorState() (*ColorState, error)
 	// GetColorPrimaries wraps gdk_cicp_params_get_color_primaries
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret uint 
@@ -10081,6 +10393,7 @@ type CicpParams interface {
 	// of @self.
 	GetColorPrimaries() uint
 	// GetMatrixCoefficients wraps gdk_cicp_params_get_matrix_coefficients
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret uint 
@@ -10088,6 +10401,7 @@ type CicpParams interface {
 	// Gets the matrix-coefficients property of @self.
 	GetMatrixCoefficients() uint
 	// GetRange wraps gdk_cicp_params_get_range
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret CicpRange 
@@ -10095,6 +10409,7 @@ type CicpParams interface {
 	// Gets the range property of @self.
 	GetRange() CicpRange
 	// GetTransferFunction wraps gdk_cicp_params_get_transfer_function
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret uint 
@@ -10171,6 +10486,7 @@ func UnsafeCicpParamsToGlibFull(c CicpParams) unsafe.Pointer {
 }
 
 // NewCicpParams wraps gdk_cicp_params_new
+// 
 // The function returns the following values:
 // 
 // 	- goret CicpParams 
@@ -10192,6 +10508,7 @@ func NewCicpParams() CicpParams {
 }
 
 // BuildColorState wraps gdk_cicp_params_build_color_state
+// 
 // The function returns the following values:
 // 
 // 	- goret *ColorState (nullable) 
@@ -10226,6 +10543,7 @@ func (self *CicpParamsInstance) BuildColorState() (*ColorState, error) {
 }
 
 // GetColorPrimaries wraps gdk_cicp_params_get_color_primaries
+// 
 // The function returns the following values:
 // 
 // 	- goret uint 
@@ -10249,6 +10567,7 @@ func (self *CicpParamsInstance) GetColorPrimaries() uint {
 }
 
 // GetMatrixCoefficients wraps gdk_cicp_params_get_matrix_coefficients
+// 
 // The function returns the following values:
 // 
 // 	- goret uint 
@@ -10271,6 +10590,7 @@ func (self *CicpParamsInstance) GetMatrixCoefficients() uint {
 }
 
 // GetRange wraps gdk_cicp_params_get_range
+// 
 // The function returns the following values:
 // 
 // 	- goret CicpRange 
@@ -10293,6 +10613,7 @@ func (self *CicpParamsInstance) GetRange() CicpRange {
 }
 
 // GetTransferFunction wraps gdk_cicp_params_get_transfer_function
+// 
 // The function returns the following values:
 // 
 // 	- goret uint 
@@ -10423,6 +10744,7 @@ type Clipboard interface {
 	upcastToGdkClipboard() *ClipboardInstance
 
 	// GetContent wraps gdk_clipboard_get_content
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret ContentProvider (nullable) 
@@ -10433,6 +10755,7 @@ type Clipboard interface {
 	// current process, %NULL will be returned.
 	GetContent() ContentProvider
 	// GetDisplay wraps gdk_clipboard_get_display
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Display 
@@ -10440,6 +10763,7 @@ type Clipboard interface {
 	// Gets the `GdkDisplay` that the clipboard was created for.
 	GetDisplay() Display
 	// GetFormats wraps gdk_clipboard_get_formats
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret *ContentFormats 
@@ -10447,6 +10771,7 @@ type Clipboard interface {
 	// Gets the formats that the clipboard can provide its current contents in.
 	GetFormats() *ContentFormats
 	// IsLocal wraps gdk_clipboard_is_local
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
@@ -10688,6 +11013,7 @@ func UnsafeClipboardToGlibFull(c Clipboard) unsafe.Pointer {
 }
 
 // GetContent wraps gdk_clipboard_get_content
+// 
 // The function returns the following values:
 // 
 // 	- goret ContentProvider (nullable) 
@@ -10715,6 +11041,7 @@ func (clipboard *ClipboardInstance) GetContent() ContentProvider {
 }
 
 // GetDisplay wraps gdk_clipboard_get_display
+// 
 // The function returns the following values:
 // 
 // 	- goret Display 
@@ -10737,6 +11064,7 @@ func (clipboard *ClipboardInstance) GetDisplay() Display {
 }
 
 // GetFormats wraps gdk_clipboard_get_formats
+// 
 // The function returns the following values:
 // 
 // 	- goret *ContentFormats 
@@ -10759,6 +11087,7 @@ func (clipboard *ClipboardInstance) GetFormats() *ContentFormats {
 }
 
 // IsLocal wraps gdk_clipboard_is_local
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -11259,6 +11588,7 @@ func (clipboard *ClipboardInstance) StoreFinish(result gio.AsyncResult) (bool, e
 func (o *ClipboardInstance) ConnectChanged(fn func(Clipboard)) gobject.SignalHandle {
 	return o.Connect("changed", fn)
 }
+
 // ContentDeserializerInstance is the instance type used by all types extending GdkContentDeserializer. It is used internally by the bindings. Users should use the interface [ContentDeserializer] instead.
 type ContentDeserializerInstance struct {
 	_ [0]func() // equal guard
@@ -11288,6 +11618,7 @@ type ContentDeserializer interface {
 	upcastToGdkContentDeserializer() *ContentDeserializerInstance
 
 	// GetCancellable wraps gdk_content_deserializer_get_cancellable
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret context.Context (nullable) 
@@ -11297,6 +11628,7 @@ type ContentDeserializer interface {
 	// This is the `GCancellable` that was passed to [func@Gdk.content_deserialize_async].
 	GetCancellable() context.Context
 	// GetGType wraps gdk_content_deserializer_get_gtype
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret gobject.Type 
@@ -11304,6 +11636,7 @@ type ContentDeserializer interface {
 	// Gets the `GType` to create an instance of.
 	GetGType() gobject.Type
 	// GetInputStream wraps gdk_content_deserializer_get_input_stream
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret gio.InputStream 
@@ -11313,6 +11646,7 @@ type ContentDeserializer interface {
 	// This is the stream that was passed to [func@Gdk.content_deserialize_async].
 	GetInputStream() gio.InputStream
 	// GetMIMEType wraps gdk_content_deserializer_get_mime_type
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret string 
@@ -11320,6 +11654,7 @@ type ContentDeserializer interface {
 	// Gets the mime type to deserialize from.
 	GetMIMEType() string
 	// GetPriority wraps gdk_content_deserializer_get_priority
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int 
@@ -11382,6 +11717,7 @@ func UnsafeContentDeserializerToGlibFull(c ContentDeserializer) unsafe.Pointer {
 }
 
 // GetCancellable wraps gdk_content_deserializer_get_cancellable
+// 
 // The function returns the following values:
 // 
 // 	- goret context.Context (nullable) 
@@ -11408,6 +11744,7 @@ func (deserializer *ContentDeserializerInstance) GetCancellable() context.Contex
 }
 
 // GetGType wraps gdk_content_deserializer_get_gtype
+// 
 // The function returns the following values:
 // 
 // 	- goret gobject.Type 
@@ -11430,6 +11767,7 @@ func (deserializer *ContentDeserializerInstance) GetGType() gobject.Type {
 }
 
 // GetInputStream wraps gdk_content_deserializer_get_input_stream
+// 
 // The function returns the following values:
 // 
 // 	- goret gio.InputStream 
@@ -11454,6 +11792,7 @@ func (deserializer *ContentDeserializerInstance) GetInputStream() gio.InputStrea
 }
 
 // GetMIMEType wraps gdk_content_deserializer_get_mime_type
+// 
 // The function returns the following values:
 // 
 // 	- goret string 
@@ -11476,6 +11815,7 @@ func (deserializer *ContentDeserializerInstance) GetMIMEType() string {
 }
 
 // GetPriority wraps gdk_content_deserializer_get_priority
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -11560,6 +11900,7 @@ type ContentProvider interface {
 	// Emits the ::content-changed signal.
 	ContentChanged()
 	// GetValue wraps gdk_content_provider_get_value
+	// 
 	// The function returns the following values:
 	// 
 	// 	- value gobject.Value: the `GValue` to fill 
@@ -11575,6 +11916,7 @@ type ContentProvider interface {
 	// `G_IO_ERROR_NOT_SUPPORTED` will be reported.
 	GetValue() (gobject.Value, bool, error)
 	// RefFormats wraps gdk_content_provider_ref_formats
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret *ContentFormats 
@@ -11582,6 +11924,7 @@ type ContentProvider interface {
 	// Gets the formats that the provider can provide its current contents in.
 	RefFormats() *ContentFormats
 	// RefStorableFormats wraps gdk_content_provider_ref_storable_formats
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret *ContentFormats 
@@ -11786,6 +12129,7 @@ func (provider *ContentProviderInstance) ContentChanged() {
 }
 
 // GetValue wraps gdk_content_provider_get_value
+// 
 // The function returns the following values:
 // 
 // 	- value gobject.Value: the `GValue` to fill 
@@ -11828,6 +12172,7 @@ func (provider *ContentProviderInstance) GetValue() (gobject.Value, bool, error)
 }
 
 // RefFormats wraps gdk_content_provider_ref_formats
+// 
 // The function returns the following values:
 // 
 // 	- goret *ContentFormats 
@@ -11850,6 +12195,7 @@ func (provider *ContentProviderInstance) RefFormats() *ContentFormats {
 }
 
 // RefStorableFormats wraps gdk_content_provider_ref_storable_formats
+// 
 // The function returns the following values:
 // 
 // 	- goret *ContentFormats 
@@ -11971,6 +12317,103 @@ func (provider *ContentProviderInstance) WriteMIMETypeFinish(result gio.AsyncRes
 func (o *ContentProviderInstance) ConnectContentChanged(fn func(ContentProvider)) gobject.SignalHandle {
 	return o.Connect("content-changed", fn)
 }
+
+// ContentProviderOverrides is the struct used to override the default implementation of virtual methods.
+// it is generic over the extending instance type.
+type ContentProviderOverrides[Instance ContentProvider] struct {
+	// gobject.ObjectOverrides allows you to override virtual methods from the parent class gobject.Object
+	gobject.ObjectOverrides[Instance]
+
+	// AttachClipboard allows you to override the implementation of the virtual method attach_clipboard.
+	// The function takes the following parameters:
+	// 
+	// 	- clipboard Clipboard 
+	AttachClipboard func(Instance, Clipboard)
+	// ContentChanged allows you to override the implementation of the virtual method content_changed.
+	ContentChanged func(Instance)
+	// DetachClipboard allows you to override the implementation of the virtual method detach_clipboard.
+	// The function takes the following parameters:
+	// 
+	// 	- clipboard Clipboard 
+	DetachClipboard func(Instance, Clipboard)
+	// GetValue allows you to override the implementation of the virtual method get_value.
+	// The function returns the following values:
+	// 
+	// 	- value gobject.Value: the `GValue` to fill 
+	// 	- goret bool 
+	// 	- _goerr error (nullable): an error 
+	GetValue func(Instance) (gobject.Value, bool, error)
+	// RefFormats allows you to override the implementation of the virtual method ref_formats.
+	// The function returns the following values:
+	// 
+	// 	- goret *ContentFormats 
+	RefFormats func(Instance) *ContentFormats
+	// RefStorableFormats allows you to override the implementation of the virtual method ref_storable_formats.
+	// The function returns the following values:
+	// 
+	// 	- goret *ContentFormats 
+	RefStorableFormats func(Instance) *ContentFormats
+	// WriteMIMETypeAsync allows you to override the implementation of the virtual method write_mime_type_async.
+	// The function takes the following parameters:
+	// 
+	// 	- cancellable context.Context (nullable): optional `GCancellable` object, %NULL to ignore. 
+	// 	- mimeType string: the mime type to provide the data in 
+	// 	- stream gio.OutputStream: the `GOutputStream` to write to 
+	// 	- ioPriority int: I/O priority of the request. 
+	// 	- callback gio.AsyncReadyCallback (nullable): callback to call when the request is satisfied 
+	WriteMIMETypeAsync func(Instance, context.Context, string, gio.OutputStream, int, gio.AsyncReadyCallback)
+	// WriteMIMETypeFinish allows you to override the implementation of the virtual method write_mime_type_finish.
+	// The function takes the following parameters:
+	// 
+	// 	- result gio.AsyncResult: a `GAsyncResult` 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	// 	- _goerr error (nullable): an error 
+	WriteMIMETypeFinish func(Instance, gio.AsyncResult) (bool, error)
+}
+
+// UnsafeApplyContentProviderOverrides applies the overrides to init the gclass by setting the trampoline functions.
+// This is used by the bindings internally and only exported for visibility to other bindings code.
+func UnsafeApplyContentProviderOverrides[Instance ContentProvider](gclass unsafe.Pointer, overrides ContentProviderOverrides[Instance]) {
+	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
+
+	pclass := (*C.GdkContentProviderClass)(gclass)
+
+	if overrides.AttachClipboard != nil {
+		pclass.attach_clipboard = (*[0]byte)(C._gotk4_gdk4_ContentProvider_attach_clipboard)
+	}
+
+	if overrides.ContentChanged != nil {
+		pclass.content_changed = (*[0]byte)(C._gotk4_gdk4_ContentProvider_content_changed)
+	}
+
+	if overrides.DetachClipboard != nil {
+		pclass.detach_clipboard = (*[0]byte)(C._gotk4_gdk4_ContentProvider_detach_clipboard)
+	}
+
+	if overrides.GetValue != nil {
+		pclass.get_value = (*[0]byte)(C._gotk4_gdk4_ContentProvider_get_value)
+	}
+
+	if overrides.RefFormats != nil {
+		pclass.ref_formats = (*[0]byte)(C._gotk4_gdk4_ContentProvider_ref_formats)
+	}
+
+	if overrides.RefStorableFormats != nil {
+		pclass.ref_storable_formats = (*[0]byte)(C._gotk4_gdk4_ContentProvider_ref_storable_formats)
+	}
+
+	if overrides.WriteMIMETypeAsync != nil {
+		pclass.write_mime_type_async = (*[0]byte)(C._gotk4_gdk4_ContentProvider_write_mime_type_async)
+	}
+
+	if overrides.WriteMIMETypeFinish != nil {
+		pclass.write_mime_type_finish = (*[0]byte)(C._gotk4_gdk4_ContentProvider_write_mime_type_finish)
+	}
+}
+
 // ContentSerializerInstance is the instance type used by all types extending GdkContentSerializer. It is used internally by the bindings. Users should use the interface [ContentSerializer] instead.
 type ContentSerializerInstance struct {
 	_ [0]func() // equal guard
@@ -12001,6 +12444,7 @@ type ContentSerializer interface {
 	upcastToGdkContentSerializer() *ContentSerializerInstance
 
 	// GetCancellable wraps gdk_content_serializer_get_cancellable
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret context.Context (nullable) 
@@ -12010,6 +12454,7 @@ type ContentSerializer interface {
 	// This is the `GCancellable` that was passed to [func@content_serialize_async].
 	GetCancellable() context.Context
 	// GetGType wraps gdk_content_serializer_get_gtype
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret gobject.Type 
@@ -12017,6 +12462,7 @@ type ContentSerializer interface {
 	// Gets the `GType` to of the object to serialize.
 	GetGType() gobject.Type
 	// GetMIMEType wraps gdk_content_serializer_get_mime_type
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret string 
@@ -12024,6 +12470,7 @@ type ContentSerializer interface {
 	// Gets the mime type to serialize to.
 	GetMIMEType() string
 	// GetOutputStream wraps gdk_content_serializer_get_output_stream
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret gio.OutputStream 
@@ -12033,6 +12480,7 @@ type ContentSerializer interface {
 	// This is the stream that was passed to [func@content_serialize_async].
 	GetOutputStream() gio.OutputStream
 	// GetPriority wraps gdk_content_serializer_get_priority
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int 
@@ -12095,6 +12543,7 @@ func UnsafeContentSerializerToGlibFull(c ContentSerializer) unsafe.Pointer {
 }
 
 // GetCancellable wraps gdk_content_serializer_get_cancellable
+// 
 // The function returns the following values:
 // 
 // 	- goret context.Context (nullable) 
@@ -12121,6 +12570,7 @@ func (serializer *ContentSerializerInstance) GetCancellable() context.Context {
 }
 
 // GetGType wraps gdk_content_serializer_get_gtype
+// 
 // The function returns the following values:
 // 
 // 	- goret gobject.Type 
@@ -12143,6 +12593,7 @@ func (serializer *ContentSerializerInstance) GetGType() gobject.Type {
 }
 
 // GetMIMEType wraps gdk_content_serializer_get_mime_type
+// 
 // The function returns the following values:
 // 
 // 	- goret string 
@@ -12165,6 +12616,7 @@ func (serializer *ContentSerializerInstance) GetMIMEType() string {
 }
 
 // GetOutputStream wraps gdk_content_serializer_get_output_stream
+// 
 // The function returns the following values:
 // 
 // 	- goret gio.OutputStream 
@@ -12189,6 +12641,7 @@ func (serializer *ContentSerializerInstance) GetOutputStream() gio.OutputStream 
 }
 
 // GetPriority wraps gdk_content_serializer_get_priority
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -12294,6 +12747,7 @@ type Cursor interface {
 	upcastToGdkCursor() *CursorInstance
 
 	// GetFallback wraps gdk_cursor_get_fallback
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Cursor (nullable) 
@@ -12307,6 +12761,7 @@ type Cursor interface {
 	// it is used on does not support textured cursors.
 	GetFallback() Cursor
 	// GetHotspotX wraps gdk_cursor_get_hotspot_x
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int 
@@ -12320,6 +12775,7 @@ type Cursor interface {
 	// [ctor@Gdk.Cursor.new_from_texture].
 	GetHotspotX() int
 	// GetHotspotY wraps gdk_cursor_get_hotspot_y
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int 
@@ -12333,6 +12789,7 @@ type Cursor interface {
 	// [ctor@Gdk.Cursor.new_from_texture].
 	GetHotspotY() int
 	// GetName wraps gdk_cursor_get_name
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret string (nullable) 
@@ -12342,6 +12799,7 @@ type Cursor interface {
 	// If the cursor is not a named cursor, %NULL will be returned.
 	GetName() string
 	// GetTexture wraps gdk_cursor_get_texture
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Texture (nullable) 
@@ -12482,6 +12940,7 @@ func NewCursorFromTexture(texture Texture, hotspotX int, hotspotY int, fallback 
 }
 
 // GetFallback wraps gdk_cursor_get_fallback
+// 
 // The function returns the following values:
 // 
 // 	- goret Cursor (nullable) 
@@ -12512,6 +12971,7 @@ func (cursor *CursorInstance) GetFallback() Cursor {
 }
 
 // GetHotspotX wraps gdk_cursor_get_hotspot_x
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -12540,6 +13000,7 @@ func (cursor *CursorInstance) GetHotspotX() int {
 }
 
 // GetHotspotY wraps gdk_cursor_get_hotspot_y
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -12568,6 +13029,7 @@ func (cursor *CursorInstance) GetHotspotY() int {
 }
 
 // GetName wraps gdk_cursor_get_name
+// 
 // The function returns the following values:
 // 
 // 	- goret string (nullable) 
@@ -12594,6 +13056,7 @@ func (cursor *CursorInstance) GetName() string {
 }
 
 // GetTexture wraps gdk_cursor_get_texture
+// 
 // The function returns the following values:
 // 
 // 	- goret Texture (nullable) 
@@ -12639,6 +13102,7 @@ type Device interface {
 	upcastToGdkDevice() *DeviceInstance
 
 	// GetCapsLockState wraps gdk_device_get_caps_lock_state
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
@@ -12648,6 +13112,7 @@ type Device interface {
 	// This is only relevant for keyboard devices.
 	GetCapsLockState() bool
 	// GetDeviceTool wraps gdk_device_get_device_tool
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret DeviceTool (nullable) 
@@ -12655,6 +13120,7 @@ type Device interface {
 	// Retrieves the current tool for @device.
 	GetDeviceTool() DeviceTool
 	// GetDirection wraps gdk_device_get_direction
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret pango.Direction 
@@ -12667,6 +13133,7 @@ type Device interface {
 	// of its symbols. See [func@Pango.unichar_direction].
 	GetDirection() pango.Direction
 	// GetDisplay wraps gdk_device_get_display
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Display 
@@ -12674,6 +13141,7 @@ type Device interface {
 	// Returns the `GdkDisplay` to which @device pertains.
 	GetDisplay() Display
 	// GetHasCursor wraps gdk_device_get_has_cursor
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
@@ -12684,6 +13152,7 @@ type Device interface {
 	// don't have a pointer.
 	GetHasCursor() bool
 	// GetModifierState wraps gdk_device_get_modifier_state
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret ModifierType 
@@ -12693,6 +13162,7 @@ type Device interface {
 	// This is only relevant for keyboard devices.
 	GetModifierState() ModifierType
 	// GetName wraps gdk_device_get_name
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret string 
@@ -12700,6 +13170,7 @@ type Device interface {
 	// The name of the device, suitable for showing in a user interface.
 	GetName() string
 	// GetNumLockState wraps gdk_device_get_num_lock_state
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
@@ -12709,6 +13180,7 @@ type Device interface {
 	// This is only relevant for keyboard devices.
 	GetNumLockState() bool
 	// GetNumTouches wraps gdk_device_get_num_touches
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret uint 
@@ -12716,6 +13188,7 @@ type Device interface {
 	// Retrieves the number of touch points associated to @device.
 	GetNumTouches() uint
 	// GetProductID wraps gdk_device_get_product_id
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret string (nullable) 
@@ -12726,6 +13199,7 @@ type Device interface {
 	// See [method@Gdk.Device.get_vendor_id] for more information.
 	GetProductID() string
 	// GetScrollLockState wraps gdk_device_get_scroll_lock_state
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
@@ -12735,6 +13209,7 @@ type Device interface {
 	// This is only relevant for keyboard devices.
 	GetScrollLockState() bool
 	// GetSeat wraps gdk_device_get_seat
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Seat 
@@ -12742,6 +13217,7 @@ type Device interface {
 	// Returns the `GdkSeat` the device belongs to.
 	GetSeat() Seat
 	// GetSource wraps gdk_device_get_source
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret InputSource 
@@ -12749,6 +13225,7 @@ type Device interface {
 	// Determines the type of the device.
 	GetSource() InputSource
 	// GetSurfaceAtPosition wraps gdk_device_get_surface_at_position
+	// 
 	// The function returns the following values:
 	// 
 	// 	- winX float64: return location for the X coordinate
@@ -12764,6 +13241,7 @@ type Device interface {
 	// (for example, belongs to another application).
 	GetSurfaceAtPosition() (float64, float64, Surface)
 	// GetTimestamp wraps gdk_device_get_timestamp
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret uint32 
@@ -12776,6 +13254,7 @@ type Device interface {
 	// update the timestamp).
 	GetTimestamp() uint32
 	// GetVendorID wraps gdk_device_get_vendor_id
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret string (nullable) 
@@ -12809,6 +13288,7 @@ type Device interface {
 	// ```
 	GetVendorID() string
 	// HasBidiLayouts wraps gdk_device_has_bidi_layouts
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
@@ -12869,6 +13349,7 @@ func UnsafeDeviceToGlibFull(c Device) unsafe.Pointer {
 }
 
 // GetCapsLockState wraps gdk_device_get_caps_lock_state
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -12895,6 +13376,7 @@ func (device *DeviceInstance) GetCapsLockState() bool {
 }
 
 // GetDeviceTool wraps gdk_device_get_device_tool
+// 
 // The function returns the following values:
 // 
 // 	- goret DeviceTool (nullable) 
@@ -12919,6 +13401,7 @@ func (device *DeviceInstance) GetDeviceTool() DeviceTool {
 }
 
 // GetDirection wraps gdk_device_get_direction
+// 
 // The function returns the following values:
 // 
 // 	- goret pango.Direction 
@@ -12946,6 +13429,7 @@ func (device *DeviceInstance) GetDirection() pango.Direction {
 }
 
 // GetDisplay wraps gdk_device_get_display
+// 
 // The function returns the following values:
 // 
 // 	- goret Display 
@@ -12968,6 +13452,7 @@ func (device *DeviceInstance) GetDisplay() Display {
 }
 
 // GetHasCursor wraps gdk_device_get_has_cursor
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -12995,6 +13480,7 @@ func (device *DeviceInstance) GetHasCursor() bool {
 }
 
 // GetModifierState wraps gdk_device_get_modifier_state
+// 
 // The function returns the following values:
 // 
 // 	- goret ModifierType 
@@ -13019,6 +13505,7 @@ func (device *DeviceInstance) GetModifierState() ModifierType {
 }
 
 // GetName wraps gdk_device_get_name
+// 
 // The function returns the following values:
 // 
 // 	- goret string 
@@ -13041,6 +13528,7 @@ func (device *DeviceInstance) GetName() string {
 }
 
 // GetNumLockState wraps gdk_device_get_num_lock_state
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -13067,6 +13555,7 @@ func (device *DeviceInstance) GetNumLockState() bool {
 }
 
 // GetNumTouches wraps gdk_device_get_num_touches
+// 
 // The function returns the following values:
 // 
 // 	- goret uint 
@@ -13089,6 +13578,7 @@ func (device *DeviceInstance) GetNumTouches() uint {
 }
 
 // GetProductID wraps gdk_device_get_product_id
+// 
 // The function returns the following values:
 // 
 // 	- goret string (nullable) 
@@ -13116,6 +13606,7 @@ func (device *DeviceInstance) GetProductID() string {
 }
 
 // GetScrollLockState wraps gdk_device_get_scroll_lock_state
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -13142,6 +13633,7 @@ func (device *DeviceInstance) GetScrollLockState() bool {
 }
 
 // GetSeat wraps gdk_device_get_seat
+// 
 // The function returns the following values:
 // 
 // 	- goret Seat 
@@ -13164,6 +13656,7 @@ func (device *DeviceInstance) GetSeat() Seat {
 }
 
 // GetSource wraps gdk_device_get_source
+// 
 // The function returns the following values:
 // 
 // 	- goret InputSource 
@@ -13186,6 +13679,7 @@ func (device *DeviceInstance) GetSource() InputSource {
 }
 
 // GetSurfaceAtPosition wraps gdk_device_get_surface_at_position
+// 
 // The function returns the following values:
 // 
 // 	- winX float64: return location for the X coordinate
@@ -13224,6 +13718,7 @@ func (device *DeviceInstance) GetSurfaceAtPosition() (float64, float64, Surface)
 }
 
 // GetTimestamp wraps gdk_device_get_timestamp
+// 
 // The function returns the following values:
 // 
 // 	- goret uint32 
@@ -13251,6 +13746,7 @@ func (device *DeviceInstance) GetTimestamp() uint32 {
 }
 
 // GetVendorID wraps gdk_device_get_vendor_id
+// 
 // The function returns the following values:
 // 
 // 	- goret string (nullable) 
@@ -13301,6 +13797,7 @@ func (device *DeviceInstance) GetVendorID() string {
 }
 
 // HasBidiLayouts wraps gdk_device_has_bidi_layouts
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -13339,12 +13836,14 @@ func (device *DeviceInstance) HasBidiLayouts() bool {
 func (o *DeviceInstance) ConnectChanged(fn func(Device)) gobject.SignalHandle {
 	return o.Connect("changed", fn)
 }
+
 // ConnectToolChanged connects the provided callback to the "tool-changed" signal
 //
 // Emitted on pen/eraser devices whenever tools enter or leave proximity.
 func (o *DeviceInstance) ConnectToolChanged(fn func(Device, DeviceTool)) gobject.SignalHandle {
 	return o.Connect("tool-changed", fn)
 }
+
 // DeviceToolInstance is the instance type used by all types extending GdkDeviceTool. It is used internally by the bindings. Users should use the interface [DeviceTool] instead.
 type DeviceToolInstance struct {
 	_ [0]func() // equal guard
@@ -13361,6 +13860,7 @@ type DeviceTool interface {
 	upcastToGdkDeviceTool() *DeviceToolInstance
 
 	// GetAxes wraps gdk_device_tool_get_axes
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret AxisFlags 
@@ -13368,6 +13868,7 @@ type DeviceTool interface {
 	// Gets the axes of the tool.
 	GetAxes() AxisFlags
 	// GetHardwareID wraps gdk_device_tool_get_hardware_id
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret uint64 
@@ -13385,6 +13886,7 @@ type DeviceTool interface {
 	// `GdkDeviceToolType`, but different hardware identifiers.
 	GetHardwareID() uint64
 	// GetSerial wraps gdk_device_tool_get_serial
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret uint64 
@@ -13395,6 +13897,7 @@ type DeviceTool interface {
 	// (eg. a tablet pen) across program executions.
 	GetSerial() uint64
 	// GetToolType wraps gdk_device_tool_get_tool_type
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret DeviceToolType 
@@ -13438,6 +13941,7 @@ func UnsafeDeviceToolToGlibFull(c DeviceTool) unsafe.Pointer {
 }
 
 // GetAxes wraps gdk_device_tool_get_axes
+// 
 // The function returns the following values:
 // 
 // 	- goret AxisFlags 
@@ -13460,6 +13964,7 @@ func (tool *DeviceToolInstance) GetAxes() AxisFlags {
 }
 
 // GetHardwareID wraps gdk_device_tool_get_hardware_id
+// 
 // The function returns the following values:
 // 
 // 	- goret uint64 
@@ -13492,6 +13997,7 @@ func (tool *DeviceToolInstance) GetHardwareID() uint64 {
 }
 
 // GetSerial wraps gdk_device_tool_get_serial
+// 
 // The function returns the following values:
 // 
 // 	- goret uint64 
@@ -13517,6 +14023,7 @@ func (tool *DeviceToolInstance) GetSerial() uint64 {
 }
 
 // GetToolType wraps gdk_device_tool_get_tool_type
+// 
 // The function returns the following values:
 // 
 // 	- goret DeviceToolType 
@@ -13577,6 +14084,7 @@ type Display interface {
 	// This cleans up associated resources.
 	Close()
 	// CreateGLContext wraps gdk_display_create_gl_context
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret GLContext 
@@ -13618,6 +14126,7 @@ type Display interface {
 	// handled synchronously, this function will do nothing.
 	Flush()
 	// GetAppLaunchContext wraps gdk_display_get_app_launch_context
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret AppLaunchContext 
@@ -13626,6 +14135,7 @@ type Display interface {
 	// applications on the given display.
 	GetAppLaunchContext() AppLaunchContext
 	// GetClipboard wraps gdk_display_get_clipboard
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Clipboard 
@@ -13633,6 +14143,7 @@ type Display interface {
 	// Gets the clipboard used for copy/paste operations.
 	GetClipboard() Clipboard
 	// GetDefaultSeat wraps gdk_display_get_default_seat
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Seat (nullable) 
@@ -13643,6 +14154,7 @@ type Display interface {
 	// this function will return %NULL.
 	GetDefaultSeat() Seat
 	// GetDmabufFormats wraps gdk_display_get_dmabuf_formats
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret *DmabufFormats 
@@ -13671,6 +14183,7 @@ type Display interface {
 	// resides.
 	GetMonitorAtSurface(Surface) Monitor
 	// GetMonitors wraps gdk_display_get_monitors
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret gio.ListModel 
@@ -13684,6 +14197,7 @@ type Display interface {
 	// this list to monitor changes to the monitor of this display.
 	GetMonitors() gio.ListModel
 	// GetName wraps gdk_display_get_name
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret string 
@@ -13691,6 +14205,7 @@ type Display interface {
 	// Gets the name of the display.
 	GetName() string
 	// GetPrimaryClipboard wraps gdk_display_get_primary_clipboard
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Clipboard 
@@ -13715,6 +14230,7 @@ type Display interface {
 	// for the @display.
 	GetSetting(string, *gobject.Value) bool
 	// IsClosed wraps gdk_display_is_closed
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
@@ -13722,6 +14238,7 @@ type Display interface {
 	// Finds out if the display has been closed.
 	IsClosed() bool
 	// IsComposited wraps gdk_display_is_composited
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
@@ -13738,6 +14255,7 @@ type Display interface {
 	// On modern displays, this value is always %TRUE.
 	IsComposited() bool
 	// IsRGBA wraps gdk_display_is_rgba
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
@@ -13755,6 +14273,7 @@ type Display interface {
 	// On modern displays, this value is always %TRUE.
 	IsRGBA() bool
 	// ListSeats wraps gdk_display_list_seats
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret []Seat 
@@ -13762,6 +14281,7 @@ type Display interface {
 	// Returns the list of seats known to @display.
 	ListSeats() []Seat
 	// PrepareGL wraps gdk_display_prepare_gl
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
@@ -13783,6 +14303,7 @@ type Display interface {
 	// might make use of OpenGL.
 	PrepareGL() (bool, error)
 	// SupportsInputShapes wraps gdk_display_supports_input_shapes
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
@@ -13795,6 +14316,7 @@ type Display interface {
 	// On modern displays, this value is always %TRUE.
 	SupportsInputShapes() bool
 	// SupportsShadowWidth wraps gdk_display_supports_shadow_width
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
@@ -13911,6 +14433,7 @@ func UnsafeDisplayToGlibFull(c Display) unsafe.Pointer {
 }
 
 // DisplayGetDefault wraps gdk_display_get_default
+// 
 // The function returns the following values:
 // 
 // 	- goret Display (nullable) 
@@ -13995,6 +14518,7 @@ func (display *DisplayInstance) Close() {
 }
 
 // CreateGLContext wraps gdk_display_create_gl_context
+// 
 // The function returns the following values:
 // 
 // 	- goret GLContext 
@@ -14084,6 +14608,7 @@ func (display *DisplayInstance) Flush() {
 }
 
 // GetAppLaunchContext wraps gdk_display_get_app_launch_context
+// 
 // The function returns the following values:
 // 
 // 	- goret AppLaunchContext 
@@ -14107,6 +14632,7 @@ func (display *DisplayInstance) GetAppLaunchContext() AppLaunchContext {
 }
 
 // GetClipboard wraps gdk_display_get_clipboard
+// 
 // The function returns the following values:
 // 
 // 	- goret Clipboard 
@@ -14129,6 +14655,7 @@ func (display *DisplayInstance) GetClipboard() Clipboard {
 }
 
 // GetDefaultSeat wraps gdk_display_get_default_seat
+// 
 // The function returns the following values:
 // 
 // 	- goret Seat (nullable) 
@@ -14156,6 +14683,7 @@ func (display *DisplayInstance) GetDefaultSeat() Seat {
 }
 
 // GetDmabufFormats wraps gdk_display_get_dmabuf_formats
+// 
 // The function returns the following values:
 // 
 // 	- goret *DmabufFormats 
@@ -14219,6 +14747,7 @@ func (display *DisplayInstance) GetMonitorAtSurface(surface Surface) Monitor {
 }
 
 // GetMonitors wraps gdk_display_get_monitors
+// 
 // The function returns the following values:
 // 
 // 	- goret gio.ListModel 
@@ -14247,6 +14776,7 @@ func (self *DisplayInstance) GetMonitors() gio.ListModel {
 }
 
 // GetName wraps gdk_display_get_name
+// 
 // The function returns the following values:
 // 
 // 	- goret string 
@@ -14269,6 +14799,7 @@ func (display *DisplayInstance) GetName() string {
 }
 
 // GetPrimaryClipboard wraps gdk_display_get_primary_clipboard
+// 
 // The function returns the following values:
 // 
 // 	- goret Clipboard 
@@ -14332,6 +14863,7 @@ func (display *DisplayInstance) GetSetting(name string, value *gobject.Value) bo
 }
 
 // IsClosed wraps gdk_display_is_closed
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -14356,6 +14888,7 @@ func (display *DisplayInstance) IsClosed() bool {
 }
 
 // IsComposited wraps gdk_display_is_composited
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -14389,6 +14922,7 @@ func (display *DisplayInstance) IsComposited() bool {
 }
 
 // IsRGBA wraps gdk_display_is_rgba
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -14423,6 +14957,7 @@ func (display *DisplayInstance) IsRGBA() bool {
 }
 
 // ListSeats wraps gdk_display_list_seats
+// 
 // The function returns the following values:
 // 
 // 	- goret []Seat 
@@ -14452,6 +14987,7 @@ func (display *DisplayInstance) ListSeats() []Seat {
 }
 
 // PrepareGL wraps gdk_display_prepare_gl
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -14495,6 +15031,7 @@ func (self *DisplayInstance) PrepareGL() (bool, error) {
 }
 
 // SupportsInputShapes wraps gdk_display_supports_input_shapes
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -14524,6 +15061,7 @@ func (display *DisplayInstance) SupportsInputShapes() bool {
 }
 
 // SupportsShadowWidth wraps gdk_display_supports_shadow_width
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -14652,30 +15190,35 @@ func (display *DisplayInstance) TranslateKey(keycode uint, state ModifierType, g
 func (o *DisplayInstance) ConnectClosed(fn func(Display, bool)) gobject.SignalHandle {
 	return o.Connect("closed", fn)
 }
+
 // ConnectOpened connects the provided callback to the "opened" signal
 //
 // Emitted when the connection to the windowing system for @display is opened.
 func (o *DisplayInstance) ConnectOpened(fn func(Display)) gobject.SignalHandle {
 	return o.Connect("opened", fn)
 }
+
 // ConnectSeatAdded connects the provided callback to the "seat-added" signal
 //
 // Emitted whenever a new seat is made known to the windowing system.
 func (o *DisplayInstance) ConnectSeatAdded(fn func(Display, Seat)) gobject.SignalHandle {
 	return o.Connect("seat-added", fn)
 }
+
 // ConnectSeatRemoved connects the provided callback to the "seat-removed" signal
 //
 // Emitted whenever a seat is removed by the windowing system.
 func (o *DisplayInstance) ConnectSeatRemoved(fn func(Display, Seat)) gobject.SignalHandle {
 	return o.Connect("seat-removed", fn)
 }
+
 // ConnectSettingChanged connects the provided callback to the "setting-changed" signal
 //
 // Emitted whenever a setting changes its value.
 func (o *DisplayInstance) ConnectSettingChanged(fn func(Display, string)) gobject.SignalHandle {
 	return o.Connect("setting-changed", fn)
 }
+
 // DisplayManagerInstance is the instance type used by all types extending GdkDisplayManager. It is used internally by the bindings. Users should use the interface [DisplayManager] instead.
 type DisplayManagerInstance struct {
 	_ [0]func() // equal guard
@@ -14733,6 +15276,7 @@ type DisplayManager interface {
 	upcastToGdkDisplayManager() *DisplayManagerInstance
 
 	// GetDefaultDisplay wraps gdk_display_manager_get_default_display
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Display (nullable) 
@@ -14740,6 +15284,7 @@ type DisplayManager interface {
 	// Gets the default `GdkDisplay`.
 	GetDefaultDisplay() Display
 	// ListDisplays wraps gdk_display_manager_list_displays
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret []Display 
@@ -14807,6 +15352,7 @@ func UnsafeDisplayManagerToGlibFull(c DisplayManager) unsafe.Pointer {
 }
 
 // DisplayManagerGet wraps gdk_display_manager_get
+// 
 // The function returns the following values:
 // 
 // 	- goret DisplayManager 
@@ -14833,6 +15379,7 @@ func DisplayManagerGet() DisplayManager {
 }
 
 // GetDefaultDisplay wraps gdk_display_manager_get_default_display
+// 
 // The function returns the following values:
 // 
 // 	- goret Display (nullable) 
@@ -14857,6 +15404,7 @@ func (manager *DisplayManagerInstance) GetDefaultDisplay() Display {
 }
 
 // ListDisplays wraps gdk_display_manager_list_displays
+// 
 // The function returns the following values:
 // 
 // 	- goret []Display 
@@ -14945,6 +15493,7 @@ func (manager *DisplayManagerInstance) SetDefaultDisplay(display Display) {
 func (o *DisplayManagerInstance) ConnectDisplayOpened(fn func(DisplayManager, Display)) gobject.SignalHandle {
 	return o.Connect("display-opened", fn)
 }
+
 // DmabufTextureBuilderInstance is the instance type used by all types extending GdkDmabufTextureBuilder. It is used internally by the bindings. Users should use the interface [DmabufTextureBuilder] instead.
 type DmabufTextureBuilderInstance struct {
 	_ [0]func() // equal guard
@@ -15017,6 +15566,7 @@ type DmabufTextureBuilder interface {
 	upcastToGdkDmabufTextureBuilder() *DmabufTextureBuilderInstance
 
 	// GetColorState wraps gdk_dmabuf_texture_builder_get_color_state
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret *ColorState (nullable) 
@@ -15024,6 +15574,7 @@ type DmabufTextureBuilder interface {
 	// Gets the color state previously set via gdk_dmabuf_texture_builder_set_color_state().
 	GetColorState() *ColorState
 	// GetDisplay wraps gdk_dmabuf_texture_builder_get_display
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Display 
@@ -15044,6 +15595,7 @@ type DmabufTextureBuilder interface {
 	// Gets the file descriptor for a plane.
 	GetFd(uint) int
 	// GetFourcc wraps gdk_dmabuf_texture_builder_get_fourcc
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret uint32 
@@ -15054,6 +15606,7 @@ type DmabufTextureBuilder interface {
 	// The format is specified as a fourcc code.
 	GetFourcc() uint32
 	// GetHeight wraps gdk_dmabuf_texture_builder_get_height
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret uint 
@@ -15062,6 +15615,7 @@ type DmabufTextureBuilder interface {
 	// 0 if the height wasn't set.
 	GetHeight() uint
 	// GetModifier wraps gdk_dmabuf_texture_builder_get_modifier
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret uint64 
@@ -15069,6 +15623,7 @@ type DmabufTextureBuilder interface {
 	// Gets the modifier value.
 	GetModifier() uint64
 	// GetNPlanes wraps gdk_dmabuf_texture_builder_get_n_planes
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret uint 
@@ -15088,6 +15643,7 @@ type DmabufTextureBuilder interface {
 	// Gets the offset value for a plane.
 	GetOffset(uint) uint
 	// GetPremultiplied wraps gdk_dmabuf_texture_builder_get_premultiplied
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
@@ -15107,6 +15663,7 @@ type DmabufTextureBuilder interface {
 	// Gets the stride value for a plane.
 	GetStride(uint) uint
 	// GetUpdateTexture wraps gdk_dmabuf_texture_builder_get_update_texture
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Texture (nullable) 
@@ -15115,6 +15672,7 @@ type DmabufTextureBuilder interface {
 	// %NULL if none was set.
 	GetUpdateTexture() Texture
 	// GetWidth wraps gdk_dmabuf_texture_builder_get_width
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret uint 
@@ -15280,6 +15838,7 @@ func UnsafeDmabufTextureBuilderToGlibFull(c DmabufTextureBuilder) unsafe.Pointer
 }
 
 // NewDmabufTextureBuilder wraps gdk_dmabuf_texture_builder_new
+// 
 // The function returns the following values:
 // 
 // 	- goret DmabufTextureBuilder 
@@ -15298,6 +15857,7 @@ func NewDmabufTextureBuilder() DmabufTextureBuilder {
 }
 
 // GetColorState wraps gdk_dmabuf_texture_builder_get_color_state
+// 
 // The function returns the following values:
 // 
 // 	- goret *ColorState (nullable) 
@@ -15322,6 +15882,7 @@ func (self *DmabufTextureBuilderInstance) GetColorState() *ColorState {
 }
 
 // GetDisplay wraps gdk_dmabuf_texture_builder_get_display
+// 
 // The function returns the following values:
 // 
 // 	- goret Display 
@@ -15375,6 +15936,7 @@ func (self *DmabufTextureBuilderInstance) GetFd(plane uint) int {
 }
 
 // GetFourcc wraps gdk_dmabuf_texture_builder_get_fourcc
+// 
 // The function returns the following values:
 // 
 // 	- goret uint32 
@@ -15400,6 +15962,7 @@ func (self *DmabufTextureBuilderInstance) GetFourcc() uint32 {
 }
 
 // GetHeight wraps gdk_dmabuf_texture_builder_get_height
+// 
 // The function returns the following values:
 // 
 // 	- goret uint 
@@ -15423,6 +15986,7 @@ func (self *DmabufTextureBuilderInstance) GetHeight() uint {
 }
 
 // GetModifier wraps gdk_dmabuf_texture_builder_get_modifier
+// 
 // The function returns the following values:
 // 
 // 	- goret uint64 
@@ -15445,6 +16009,7 @@ func (self *DmabufTextureBuilderInstance) GetModifier() uint64 {
 }
 
 // GetNPlanes wraps gdk_dmabuf_texture_builder_get_n_planes
+// 
 // The function returns the following values:
 // 
 // 	- goret uint 
@@ -15497,6 +16062,7 @@ func (self *DmabufTextureBuilderInstance) GetOffset(plane uint) uint {
 }
 
 // GetPremultiplied wraps gdk_dmabuf_texture_builder_get_premultiplied
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -15551,6 +16117,7 @@ func (self *DmabufTextureBuilderInstance) GetStride(plane uint) uint {
 }
 
 // GetUpdateTexture wraps gdk_dmabuf_texture_builder_get_update_texture
+// 
 // The function returns the following values:
 // 
 // 	- goret Texture (nullable) 
@@ -15576,6 +16143,7 @@ func (self *DmabufTextureBuilderInstance) GetUpdateTexture() Texture {
 }
 
 // GetWidth wraps gdk_dmabuf_texture_builder_get_width
+// 
 // The function returns the following values:
 // 
 // 	- goret uint 
@@ -15909,6 +16477,7 @@ type Drag interface {
 	// all subsequent calls will be ignored.
 	DropDone(bool)
 	// GetActions wraps gdk_drag_get_actions
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret DragAction 
@@ -15916,6 +16485,7 @@ type Drag interface {
 	// Determines the bitmask of possible actions proposed by the source.
 	GetActions() DragAction
 	// GetContent wraps gdk_drag_get_content
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret ContentProvider 
@@ -15923,6 +16493,7 @@ type Drag interface {
 	// Returns the `GdkContentProvider` associated to the `GdkDrag` object.
 	GetContent() ContentProvider
 	// GetDevice wraps gdk_drag_get_device
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Device 
@@ -15930,6 +16501,7 @@ type Drag interface {
 	// Returns the `GdkDevice` associated to the `GdkDrag` object.
 	GetDevice() Device
 	// GetDisplay wraps gdk_drag_get_display
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Display 
@@ -15937,6 +16509,7 @@ type Drag interface {
 	// Gets the `GdkDisplay` that the drag object was created for.
 	GetDisplay() Display
 	// GetDragSurface wraps gdk_drag_get_drag_surface
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Surface (nullable) 
@@ -15950,6 +16523,7 @@ type Drag interface {
 	// when the drag operation is over.
 	GetDragSurface() Surface
 	// GetFormats wraps gdk_drag_get_formats
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret *ContentFormats 
@@ -15957,6 +16531,7 @@ type Drag interface {
 	// Retrieves the formats supported by this `GdkDrag` object.
 	GetFormats() *ContentFormats
 	// GetSelectedAction wraps gdk_drag_get_selected_action
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret DragAction 
@@ -15964,6 +16539,7 @@ type Drag interface {
 	// Determines the action chosen by the drag destination.
 	GetSelectedAction() DragAction
 	// GetSurface wraps gdk_drag_get_surface
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Surface 
@@ -16126,6 +16702,7 @@ func (drag *DragInstance) DropDone(success bool) {
 }
 
 // GetActions wraps gdk_drag_get_actions
+// 
 // The function returns the following values:
 // 
 // 	- goret DragAction 
@@ -16148,6 +16725,7 @@ func (drag *DragInstance) GetActions() DragAction {
 }
 
 // GetContent wraps gdk_drag_get_content
+// 
 // The function returns the following values:
 // 
 // 	- goret ContentProvider 
@@ -16170,6 +16748,7 @@ func (drag *DragInstance) GetContent() ContentProvider {
 }
 
 // GetDevice wraps gdk_drag_get_device
+// 
 // The function returns the following values:
 // 
 // 	- goret Device 
@@ -16192,6 +16771,7 @@ func (drag *DragInstance) GetDevice() Device {
 }
 
 // GetDisplay wraps gdk_drag_get_display
+// 
 // The function returns the following values:
 // 
 // 	- goret Display 
@@ -16214,6 +16794,7 @@ func (drag *DragInstance) GetDisplay() Display {
 }
 
 // GetDragSurface wraps gdk_drag_get_drag_surface
+// 
 // The function returns the following values:
 // 
 // 	- goret Surface (nullable) 
@@ -16244,6 +16825,7 @@ func (drag *DragInstance) GetDragSurface() Surface {
 }
 
 // GetFormats wraps gdk_drag_get_formats
+// 
 // The function returns the following values:
 // 
 // 	- goret *ContentFormats 
@@ -16266,6 +16848,7 @@ func (drag *DragInstance) GetFormats() *ContentFormats {
 }
 
 // GetSelectedAction wraps gdk_drag_get_selected_action
+// 
 // The function returns the following values:
 // 
 // 	- goret DragAction 
@@ -16288,6 +16871,7 @@ func (drag *DragInstance) GetSelectedAction() DragAction {
 }
 
 // GetSurface wraps gdk_drag_get_surface
+// 
 // The function returns the following values:
 // 
 // 	- goret Surface 
@@ -16341,6 +16925,7 @@ func (drag *DragInstance) SetHotspot(hotX int, hotY int) {
 func (o *DragInstance) ConnectCancel(fn func(Drag, DragCancelReason)) gobject.SignalHandle {
 	return o.Connect("cancel", fn)
 }
+
 // ConnectDNDFinished connects the provided callback to the "dnd-finished" signal
 //
 // Emitted when the destination side has finished reading all data.
@@ -16349,12 +16934,14 @@ func (o *DragInstance) ConnectCancel(fn func(Drag, DragCancelReason)) gobject.Si
 func (o *DragInstance) ConnectDNDFinished(fn func(Drag)) gobject.SignalHandle {
 	return o.Connect("dnd-finished", fn)
 }
+
 // ConnectDropPerformed connects the provided callback to the "drop-performed" signal
 //
 // Emitted when the drop operation is performed on an accepting client.
 func (o *DragInstance) ConnectDropPerformed(fn func(Drag)) gobject.SignalHandle {
 	return o.Connect("drop-performed", fn)
 }
+
 // DrawContextInstance is the instance type used by all types extending GdkDrawContext. It is used internally by the bindings. Users should use the interface [DrawContext] instead.
 type DrawContextInstance struct {
 	_ [0]func() // equal guard
@@ -16379,6 +16966,7 @@ type DrawContext interface {
 	upcastToGdkDrawContext() *DrawContextInstance
 
 	// GetDisplay wraps gdk_draw_context_get_display
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Display (nullable) 
@@ -16386,6 +16974,7 @@ type DrawContext interface {
 	// Retrieves the `GdkDisplay` the @context is created for
 	GetDisplay() Display
 	// GetSurface wraps gdk_draw_context_get_surface
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Surface (nullable) 
@@ -16429,6 +17018,7 @@ func UnsafeDrawContextToGlibFull(c DrawContext) unsafe.Pointer {
 }
 
 // GetDisplay wraps gdk_draw_context_get_display
+// 
 // The function returns the following values:
 // 
 // 	- goret Display (nullable) 
@@ -16453,6 +17043,7 @@ func (_context *DrawContextInstance) GetDisplay() Display {
 }
 
 // GetSurface wraps gdk_draw_context_get_surface
+// 
 // The function returns the following values:
 // 
 // 	- goret Surface (nullable) 
@@ -16516,6 +17107,7 @@ type Drop interface {
 	// available via [method@Gdk.Drop.get_actions].
 	Finish(DragAction)
 	// GetActions wraps gdk_drop_get_actions
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret DragAction 
@@ -16536,6 +17128,7 @@ type Drop interface {
 	// side will not change this value anymore once a drop has started.
 	GetActions() DragAction
 	// GetDevice wraps gdk_drop_get_device
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Device 
@@ -16543,6 +17136,7 @@ type Drop interface {
 	// Returns the `GdkDevice` performing the drop.
 	GetDevice() Device
 	// GetDisplay wraps gdk_drop_get_display
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Display 
@@ -16550,6 +17144,7 @@ type Drop interface {
 	// Gets the `GdkDisplay` that @self was created for.
 	GetDisplay() Display
 	// GetDrag wraps gdk_drop_get_drag
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Drag (nullable) 
@@ -16560,6 +17155,7 @@ type Drop interface {
 	// If it is not, %NULL is returned.
 	GetDrag() Drag
 	// GetFormats wraps gdk_drop_get_formats
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret *ContentFormats 
@@ -16568,6 +17164,7 @@ type Drop interface {
 	// to be read in.
 	GetFormats() *ContentFormats
 	// GetSurface wraps gdk_drop_get_surface
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Surface 
@@ -16707,6 +17304,7 @@ func (self *DropInstance) Finish(action DragAction) {
 }
 
 // GetActions wraps gdk_drop_get_actions
+// 
 // The function returns the following values:
 // 
 // 	- goret DragAction 
@@ -16742,6 +17340,7 @@ func (self *DropInstance) GetActions() DragAction {
 }
 
 // GetDevice wraps gdk_drop_get_device
+// 
 // The function returns the following values:
 // 
 // 	- goret Device 
@@ -16764,6 +17363,7 @@ func (self *DropInstance) GetDevice() Device {
 }
 
 // GetDisplay wraps gdk_drop_get_display
+// 
 // The function returns the following values:
 // 
 // 	- goret Display 
@@ -16786,6 +17386,7 @@ func (self *DropInstance) GetDisplay() Display {
 }
 
 // GetDrag wraps gdk_drop_get_drag
+// 
 // The function returns the following values:
 // 
 // 	- goret Drag (nullable) 
@@ -16813,6 +17414,7 @@ func (self *DropInstance) GetDrag() Drag {
 }
 
 // GetFormats wraps gdk_drop_get_formats
+// 
 // The function returns the following values:
 // 
 // 	- goret *ContentFormats 
@@ -16836,6 +17438,7 @@ func (self *DropInstance) GetFormats() *ContentFormats {
 }
 
 // GetSurface wraps gdk_drop_get_surface
+// 
 // The function returns the following values:
 // 
 // 	- goret Surface 
@@ -17091,6 +17694,7 @@ type FrameClock interface {
 	// See the documentation for [method@Gdk.FrameClock.begin_updating].
 	EndUpdating()
 	// GetCurrentTimings wraps gdk_frame_clock_get_current_timings
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret *FrameTimings (nullable) 
@@ -17098,6 +17702,7 @@ type FrameClock interface {
 	// Gets the frame timings for the current frame.
 	GetCurrentTimings() *FrameTimings
 	// GetFPS wraps gdk_frame_clock_get_fps
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret float64 
@@ -17106,6 +17711,7 @@ type FrameClock interface {
 	// frame timings of @frame_clock.
 	GetFPS() float64
 	// GetFrameCounter wraps gdk_frame_clock_get_frame_counter
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int64 
@@ -17114,6 +17720,7 @@ type FrameClock interface {
 	// each frame drawn.
 	GetFrameCounter() int64
 	// GetFrameTime wraps gdk_frame_clock_get_frame_time
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int64 
@@ -17127,6 +17734,7 @@ type FrameClock interface {
 	// time.
 	GetFrameTime() int64
 	// GetHistoryStart wraps gdk_frame_clock_get_history_start
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int64 
@@ -17322,6 +17930,7 @@ func (frameClock *FrameClockInstance) EndUpdating() {
 }
 
 // GetCurrentTimings wraps gdk_frame_clock_get_current_timings
+// 
 // The function returns the following values:
 // 
 // 	- goret *FrameTimings (nullable) 
@@ -17346,6 +17955,7 @@ func (frameClock *FrameClockInstance) GetCurrentTimings() *FrameTimings {
 }
 
 // GetFPS wraps gdk_frame_clock_get_fps
+// 
 // The function returns the following values:
 // 
 // 	- goret float64 
@@ -17369,6 +17979,7 @@ func (frameClock *FrameClockInstance) GetFPS() float64 {
 }
 
 // GetFrameCounter wraps gdk_frame_clock_get_frame_counter
+// 
 // The function returns the following values:
 // 
 // 	- goret int64 
@@ -17392,6 +18003,7 @@ func (frameClock *FrameClockInstance) GetFrameCounter() int64 {
 }
 
 // GetFrameTime wraps gdk_frame_clock_get_frame_time
+// 
 // The function returns the following values:
 // 
 // 	- goret int64 
@@ -17420,6 +18032,7 @@ func (frameClock *FrameClockInstance) GetFrameTime() int64 {
 }
 
 // GetHistoryStart wraps gdk_frame_clock_get_history_start
+// 
 // The function returns the following values:
 // 
 // 	- goret int64 
@@ -17567,6 +18180,7 @@ func (frameClock *FrameClockInstance) RequestPhase(phase FrameClockPhase) {
 func (o *FrameClockInstance) ConnectAfterPaint(fn func(FrameClock)) gobject.SignalHandle {
 	return o.Connect("after-paint", fn)
 }
+
 // ConnectBeforePaint connects the provided callback to the "before-paint" signal
 //
 // Begins processing of the frame.
@@ -17575,6 +18189,7 @@ func (o *FrameClockInstance) ConnectAfterPaint(fn func(FrameClock)) gobject.Sign
 func (o *FrameClockInstance) ConnectBeforePaint(fn func(FrameClock)) gobject.SignalHandle {
 	return o.Connect("before-paint", fn)
 }
+
 // ConnectFlushEvents connects the provided callback to the "flush-events" signal
 //
 // Used to flush pending motion events that are being batched up and
@@ -17584,6 +18199,7 @@ func (o *FrameClockInstance) ConnectBeforePaint(fn func(FrameClock)) gobject.Sig
 func (o *FrameClockInstance) ConnectFlushEvents(fn func(FrameClock)) gobject.SignalHandle {
 	return o.Connect("flush-events", fn)
 }
+
 // ConnectLayout connects the provided callback to the "layout" signal
 //
 // Emitted as the second step of toolkit and application processing
@@ -17594,6 +18210,7 @@ func (o *FrameClockInstance) ConnectFlushEvents(fn func(FrameClock)) gobject.Sig
 func (o *FrameClockInstance) ConnectLayout(fn func(FrameClock)) gobject.SignalHandle {
 	return o.Connect("layout", fn)
 }
+
 // ConnectPaint connects the provided callback to the "paint" signal
 //
 // Emitted as the third step of toolkit and application processing
@@ -17606,6 +18223,7 @@ func (o *FrameClockInstance) ConnectLayout(fn func(FrameClock)) gobject.SignalHa
 func (o *FrameClockInstance) ConnectPaint(fn func(FrameClock)) gobject.SignalHandle {
 	return o.Connect("paint", fn)
 }
+
 // ConnectResumeEvents connects the provided callback to the "resume-events" signal
 //
 // Emitted after processing of the frame is finished.
@@ -17615,6 +18233,7 @@ func (o *FrameClockInstance) ConnectPaint(fn func(FrameClock)) gobject.SignalHan
 func (o *FrameClockInstance) ConnectResumeEvents(fn func(FrameClock)) gobject.SignalHandle {
 	return o.Connect("resume-events", fn)
 }
+
 // ConnectUpdate connects the provided callback to the "update" signal
 //
 // Emitted as the first step of toolkit and application processing
@@ -17627,6 +18246,7 @@ func (o *FrameClockInstance) ConnectResumeEvents(fn func(FrameClock)) gobject.Si
 func (o *FrameClockInstance) ConnectUpdate(fn func(FrameClock)) gobject.SignalHandle {
 	return o.Connect("update", fn)
 }
+
 // GLContextInstance is the instance type used by all types extending GdkGLContext. It is used internally by the bindings. Users should use the interface [GLContext] instead.
 type GLContextInstance struct {
 	_ [0]func() // equal guard
@@ -17691,6 +18311,7 @@ type GLContext interface {
 	upcastToGdkGLContext() *GLContextInstance
 
 	// GetAllowedApis wraps gdk_gl_context_get_allowed_apis
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret GLAPI 
@@ -17698,6 +18319,7 @@ type GLContext interface {
 	// Gets the allowed APIs set via gdk_gl_context_set_allowed_apis().
 	GetAllowedApis() GLAPI
 	// GetApi wraps gdk_gl_context_get_api
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret GLAPI 
@@ -17707,6 +18329,7 @@ type GLContext interface {
 	// If the renderer has not been realized yet, 0 is returned.
 	GetApi() GLAPI
 	// GetDebugEnabled wraps gdk_gl_context_get_debug_enabled
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
@@ -17716,6 +18339,7 @@ type GLContext interface {
 	// See [method@Gdk.GLContext.set_debug_enabled].
 	GetDebugEnabled() bool
 	// GetDisplay wraps gdk_gl_context_get_display
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Display (nullable) 
@@ -17723,6 +18347,7 @@ type GLContext interface {
 	// Retrieves the display the @context is created for
 	GetDisplay() Display
 	// GetForwardCompatible wraps gdk_gl_context_get_forward_compatible
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
@@ -17732,6 +18357,7 @@ type GLContext interface {
 	// See [method@Gdk.GLContext.set_forward_compatible].
 	GetForwardCompatible() bool
 	// GetRequiredVersion wraps gdk_gl_context_get_required_version
+	// 
 	// The function returns the following values:
 	// 
 	// 	- major int: return location for the major version to request 
@@ -17745,6 +18371,7 @@ type GLContext interface {
 	// See [method@Gdk.GLContext.set_required_version].
 	GetRequiredVersion() (int, int)
 	// GetSurface wraps gdk_gl_context_get_surface
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Surface (nullable) 
@@ -17752,6 +18379,7 @@ type GLContext interface {
 	// Retrieves the surface used by the @context.
 	GetSurface() Surface
 	// GetUseES wraps gdk_gl_context_get_use_es
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
@@ -17759,6 +18387,7 @@ type GLContext interface {
 	// Checks whether the @context is using an OpenGL or OpenGL ES profile.
 	GetUseES() bool
 	// GetVersion wraps gdk_gl_context_get_version
+	// 
 	// The function returns the following values:
 	// 
 	// 	- major int: return location for the major version 
@@ -17769,6 +18398,7 @@ type GLContext interface {
 	// The @context must be realized prior to calling this function.
 	GetVersion() (int, int)
 	// IsLegacy wraps gdk_gl_context_is_legacy
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
@@ -17818,6 +18448,7 @@ type GLContext interface {
 	// Makes the @context the current one.
 	MakeCurrent()
 	// Realize wraps gdk_gl_context_realize
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
@@ -17959,6 +18590,7 @@ func GLContextClearCurrent() {
 }
 
 // GLContextGetCurrent wraps gdk_gl_context_get_current
+// 
 // The function returns the following values:
 // 
 // 	- goret GLContext (nullable) 
@@ -17979,6 +18611,7 @@ func GLContextGetCurrent() GLContext {
 }
 
 // GetAllowedApis wraps gdk_gl_context_get_allowed_apis
+// 
 // The function returns the following values:
 // 
 // 	- goret GLAPI 
@@ -18001,6 +18634,7 @@ func (self *GLContextInstance) GetAllowedApis() GLAPI {
 }
 
 // GetApi wraps gdk_gl_context_get_api
+// 
 // The function returns the following values:
 // 
 // 	- goret GLAPI 
@@ -18025,6 +18659,7 @@ func (self *GLContextInstance) GetApi() GLAPI {
 }
 
 // GetDebugEnabled wraps gdk_gl_context_get_debug_enabled
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -18051,6 +18686,7 @@ func (_context *GLContextInstance) GetDebugEnabled() bool {
 }
 
 // GetDisplay wraps gdk_gl_context_get_display
+// 
 // The function returns the following values:
 // 
 // 	- goret Display (nullable) 
@@ -18075,6 +18711,7 @@ func (_context *GLContextInstance) GetDisplay() Display {
 }
 
 // GetForwardCompatible wraps gdk_gl_context_get_forward_compatible
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -18101,6 +18738,7 @@ func (_context *GLContextInstance) GetForwardCompatible() bool {
 }
 
 // GetRequiredVersion wraps gdk_gl_context_get_required_version
+// 
 // The function returns the following values:
 // 
 // 	- major int: return location for the major version to request 
@@ -18132,6 +18770,7 @@ func (_context *GLContextInstance) GetRequiredVersion() (int, int) {
 }
 
 // GetSurface wraps gdk_gl_context_get_surface
+// 
 // The function returns the following values:
 // 
 // 	- goret Surface (nullable) 
@@ -18156,6 +18795,7 @@ func (_context *GLContextInstance) GetSurface() Surface {
 }
 
 // GetUseES wraps gdk_gl_context_get_use_es
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -18180,6 +18820,7 @@ func (_context *GLContextInstance) GetUseES() bool {
 }
 
 // GetVersion wraps gdk_gl_context_get_version
+// 
 // The function returns the following values:
 // 
 // 	- major int: return location for the major version 
@@ -18208,6 +18849,7 @@ func (_context *GLContextInstance) GetVersion() (int, int) {
 }
 
 // IsLegacy wraps gdk_gl_context_is_legacy
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -18302,6 +18944,7 @@ func (_context *GLContextInstance) MakeCurrent() {
 }
 
 // Realize wraps gdk_gl_context_realize
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -18503,6 +19146,7 @@ type GLTextureBuilder interface {
 	upcastToGdkGLTextureBuilder() *GLTextureBuilderInstance
 
 	// GetColorState wraps gdk_gl_texture_builder_get_color_state
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret *ColorState 
@@ -18510,6 +19154,7 @@ type GLTextureBuilder interface {
 	// Gets the color state previously set via gdk_gl_texture_builder_set_color_state().
 	GetColorState() *ColorState
 	// GetContext wraps gdk_gl_texture_builder_get_context
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret GLContext (nullable) 
@@ -18518,6 +19163,7 @@ type GLTextureBuilder interface {
 	// %NULL if none was set.
 	GetContext() GLContext
 	// GetFormat wraps gdk_gl_texture_builder_get_format
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret MemoryFormat 
@@ -18525,6 +19171,7 @@ type GLTextureBuilder interface {
 	// Gets the format previously set via gdk_gl_texture_builder_set_format().
 	GetFormat() MemoryFormat
 	// GetHasMipmap wraps gdk_gl_texture_builder_get_has_mipmap
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
@@ -18532,6 +19179,7 @@ type GLTextureBuilder interface {
 	// Gets whether the texture has a mipmap.
 	GetHasMipmap() bool
 	// GetHeight wraps gdk_gl_texture_builder_get_height
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int 
@@ -18540,6 +19188,7 @@ type GLTextureBuilder interface {
 	// 0 if the height wasn't set.
 	GetHeight() int
 	// GetID wraps gdk_gl_texture_builder_get_id
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret uint 
@@ -18548,6 +19197,7 @@ type GLTextureBuilder interface {
 	// 0 if the id wasn't set.
 	GetID() uint
 	// GetUpdateTexture wraps gdk_gl_texture_builder_get_update_texture
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Texture (nullable) 
@@ -18556,6 +19206,7 @@ type GLTextureBuilder interface {
 	// %NULL if none was set.
 	GetUpdateTexture() Texture
 	// GetWidth wraps gdk_gl_texture_builder_get_width
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int 
@@ -18697,6 +19348,7 @@ func UnsafeGLTextureBuilderToGlibFull(c GLTextureBuilder) unsafe.Pointer {
 }
 
 // NewGLTextureBuilder wraps gdk_gl_texture_builder_new
+// 
 // The function returns the following values:
 // 
 // 	- goret GLTextureBuilder 
@@ -18715,6 +19367,7 @@ func NewGLTextureBuilder() GLTextureBuilder {
 }
 
 // GetColorState wraps gdk_gl_texture_builder_get_color_state
+// 
 // The function returns the following values:
 // 
 // 	- goret *ColorState 
@@ -18737,6 +19390,7 @@ func (self *GLTextureBuilderInstance) GetColorState() *ColorState {
 }
 
 // GetContext wraps gdk_gl_texture_builder_get_context
+// 
 // The function returns the following values:
 // 
 // 	- goret GLContext (nullable) 
@@ -18762,6 +19416,7 @@ func (self *GLTextureBuilderInstance) GetContext() GLContext {
 }
 
 // GetFormat wraps gdk_gl_texture_builder_get_format
+// 
 // The function returns the following values:
 // 
 // 	- goret MemoryFormat 
@@ -18784,6 +19439,7 @@ func (self *GLTextureBuilderInstance) GetFormat() MemoryFormat {
 }
 
 // GetHasMipmap wraps gdk_gl_texture_builder_get_has_mipmap
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -18808,6 +19464,7 @@ func (self *GLTextureBuilderInstance) GetHasMipmap() bool {
 }
 
 // GetHeight wraps gdk_gl_texture_builder_get_height
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -18831,6 +19488,7 @@ func (self *GLTextureBuilderInstance) GetHeight() int {
 }
 
 // GetID wraps gdk_gl_texture_builder_get_id
+// 
 // The function returns the following values:
 // 
 // 	- goret uint 
@@ -18854,6 +19512,7 @@ func (self *GLTextureBuilderInstance) GetID() uint {
 }
 
 // GetUpdateTexture wraps gdk_gl_texture_builder_get_update_texture
+// 
 // The function returns the following values:
 // 
 // 	- goret Texture (nullable) 
@@ -18879,6 +19538,7 @@ func (self *GLTextureBuilderInstance) GetUpdateTexture() Texture {
 }
 
 // GetWidth wraps gdk_gl_texture_builder_get_width
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -19118,6 +19778,7 @@ type MemoryTextureBuilder interface {
 	upcastToGdkMemoryTextureBuilder() *MemoryTextureBuilderInstance
 
 	// Build wraps gdk_memory_texture_builder_build
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Texture 
@@ -19131,6 +19792,7 @@ type MemoryTextureBuilder interface {
 	// possibly with changing properties in between.
 	Build() Texture
 	// GetBytes wraps gdk_memory_texture_builder_get_bytes
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret *glib.Bytes (nullable) 
@@ -19139,6 +19801,7 @@ type MemoryTextureBuilder interface {
 	// or %NULL if none was set.
 	GetBytes() *glib.Bytes
 	// GetColorState wraps gdk_memory_texture_builder_get_color_state
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret *ColorState 
@@ -19146,6 +19809,7 @@ type MemoryTextureBuilder interface {
 	// Gets the colorstate previously set via gdk_memory_texture_builder_set_color_state().
 	GetColorState() *ColorState
 	// GetFormat wraps gdk_memory_texture_builder_get_format
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret MemoryFormat 
@@ -19153,6 +19817,7 @@ type MemoryTextureBuilder interface {
 	// Gets the format previously set via gdk_memory_texture_builder_set_format().
 	GetFormat() MemoryFormat
 	// GetHeight wraps gdk_memory_texture_builder_get_height
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int 
@@ -19161,6 +19826,7 @@ type MemoryTextureBuilder interface {
 	// or 0 if the height wasn't set.
 	GetHeight() int
 	// GetStride wraps gdk_memory_texture_builder_get_stride
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret uint 
@@ -19168,6 +19834,7 @@ type MemoryTextureBuilder interface {
 	// Gets the stride previously set via gdk_memory_texture_builder_set_stride().
 	GetStride() uint
 	// GetUpdateTexture wraps gdk_memory_texture_builder_get_update_texture
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Texture (nullable) 
@@ -19176,6 +19843,7 @@ type MemoryTextureBuilder interface {
 	// or %NULL if none was set.
 	GetUpdateTexture() Texture
 	// GetWidth wraps gdk_memory_texture_builder_get_width
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int 
@@ -19291,6 +19959,7 @@ func UnsafeMemoryTextureBuilderToGlibFull(c MemoryTextureBuilder) unsafe.Pointer
 }
 
 // NewMemoryTextureBuilder wraps gdk_memory_texture_builder_new
+// 
 // The function returns the following values:
 // 
 // 	- goret MemoryTextureBuilder 
@@ -19309,6 +19978,7 @@ func NewMemoryTextureBuilder() MemoryTextureBuilder {
 }
 
 // Build wraps gdk_memory_texture_builder_build
+// 
 // The function returns the following values:
 // 
 // 	- goret Texture 
@@ -19337,6 +20007,7 @@ func (self *MemoryTextureBuilderInstance) Build() Texture {
 }
 
 // GetBytes wraps gdk_memory_texture_builder_get_bytes
+// 
 // The function returns the following values:
 // 
 // 	- goret *glib.Bytes (nullable) 
@@ -19362,6 +20033,7 @@ func (self *MemoryTextureBuilderInstance) GetBytes() *glib.Bytes {
 }
 
 // GetColorState wraps gdk_memory_texture_builder_get_color_state
+// 
 // The function returns the following values:
 // 
 // 	- goret *ColorState 
@@ -19384,6 +20056,7 @@ func (self *MemoryTextureBuilderInstance) GetColorState() *ColorState {
 }
 
 // GetFormat wraps gdk_memory_texture_builder_get_format
+// 
 // The function returns the following values:
 // 
 // 	- goret MemoryFormat 
@@ -19406,6 +20079,7 @@ func (self *MemoryTextureBuilderInstance) GetFormat() MemoryFormat {
 }
 
 // GetHeight wraps gdk_memory_texture_builder_get_height
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -19429,6 +20103,7 @@ func (self *MemoryTextureBuilderInstance) GetHeight() int {
 }
 
 // GetStride wraps gdk_memory_texture_builder_get_stride
+// 
 // The function returns the following values:
 // 
 // 	- goret uint 
@@ -19451,6 +20126,7 @@ func (self *MemoryTextureBuilderInstance) GetStride() uint {
 }
 
 // GetUpdateTexture wraps gdk_memory_texture_builder_get_update_texture
+// 
 // The function returns the following values:
 // 
 // 	- goret Texture (nullable) 
@@ -19476,6 +20152,7 @@ func (self *MemoryTextureBuilderInstance) GetUpdateTexture() Texture {
 }
 
 // GetWidth wraps gdk_memory_texture_builder_get_width
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -19674,6 +20351,7 @@ type Monitor interface {
 	upcastToGdkMonitor() *MonitorInstance
 
 	// GetConnector wraps gdk_monitor_get_connector
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret string (nullable) 
@@ -19685,6 +20363,7 @@ type Monitor interface {
 	// relied on as stable identifiers of a specific monitor.
 	GetConnector() string
 	// GetDescription wraps gdk_monitor_get_description
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret string (nullable) 
@@ -19694,6 +20373,7 @@ type Monitor interface {
 	// This can be used to identify a monitor in the UI.
 	GetDescription() string
 	// GetDisplay wraps gdk_monitor_get_display
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Display 
@@ -19701,6 +20381,7 @@ type Monitor interface {
 	// Gets the display that this monitor belongs to.
 	GetDisplay() Display
 	// GetGeometry wraps gdk_monitor_get_geometry
+	// 
 	// The function returns the following values:
 	// 
 	// 	- geometry Rectangle: a `GdkRectangle` to be filled with the monitor geometry 
@@ -19712,6 +20393,7 @@ type Monitor interface {
 	// ”device pixels” (see [method@Gdk.Monitor.get_scale]).
 	GetGeometry() Rectangle
 	// GetHeightMm wraps gdk_monitor_get_height_mm
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int 
@@ -19719,6 +20401,7 @@ type Monitor interface {
 	// Gets the height in millimeters of the monitor.
 	GetHeightMm() int
 	// GetManufacturer wraps gdk_monitor_get_manufacturer
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret string (nullable) 
@@ -19732,6 +20415,7 @@ type Monitor interface {
 	// [https://uefi.org/pnp_id_list](https://uefi.org/pnp_id_list).
 	GetManufacturer() string
 	// GetModel wraps gdk_monitor_get_model
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret string (nullable) 
@@ -19739,6 +20423,7 @@ type Monitor interface {
 	// Gets the string identifying the monitor model, if available.
 	GetModel() string
 	// GetRefreshRate wraps gdk_monitor_get_refresh_rate
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int 
@@ -19749,6 +20434,7 @@ type Monitor interface {
 	// is returned as 60000.
 	GetRefreshRate() int
 	// GetScale wraps gdk_monitor_get_scale
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret float64 
@@ -19761,6 +20447,7 @@ type Monitor interface {
 	// where it is better to use [method@Gdk.Surface.get_scale] instead.
 	GetScale() float64
 	// GetScaleFactor wraps gdk_monitor_get_scale_factor
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int 
@@ -19776,6 +20463,7 @@ type Monitor interface {
 	// where it is better to use [method@Gdk.Surface.get_scale_factor] instead.
 	GetScaleFactor() int
 	// GetSubpixelLayout wraps gdk_monitor_get_subpixel_layout
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret SubpixelLayout 
@@ -19784,6 +20472,7 @@ type Monitor interface {
 	// primaries for pixels.
 	GetSubpixelLayout() SubpixelLayout
 	// GetWidthMm wraps gdk_monitor_get_width_mm
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int 
@@ -19791,6 +20480,7 @@ type Monitor interface {
 	// Gets the width in millimeters of the monitor.
 	GetWidthMm() int
 	// IsValid wraps gdk_monitor_is_valid
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
@@ -19842,6 +20532,7 @@ func UnsafeMonitorToGlibFull(c Monitor) unsafe.Pointer {
 }
 
 // GetConnector wraps gdk_monitor_get_connector
+// 
 // The function returns the following values:
 // 
 // 	- goret string (nullable) 
@@ -19870,6 +20561,7 @@ func (monitor *MonitorInstance) GetConnector() string {
 }
 
 // GetDescription wraps gdk_monitor_get_description
+// 
 // The function returns the following values:
 // 
 // 	- goret string (nullable) 
@@ -19896,6 +20588,7 @@ func (monitor *MonitorInstance) GetDescription() string {
 }
 
 // GetDisplay wraps gdk_monitor_get_display
+// 
 // The function returns the following values:
 // 
 // 	- goret Display 
@@ -19918,6 +20611,7 @@ func (monitor *MonitorInstance) GetDisplay() Display {
 }
 
 // GetGeometry wraps gdk_monitor_get_geometry
+// 
 // The function returns the following values:
 // 
 // 	- geometry Rectangle: a `GdkRectangle` to be filled with the monitor geometry 
@@ -19946,6 +20640,7 @@ func (monitor *MonitorInstance) GetGeometry() Rectangle {
 }
 
 // GetHeightMm wraps gdk_monitor_get_height_mm
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -19968,6 +20663,7 @@ func (monitor *MonitorInstance) GetHeightMm() int {
 }
 
 // GetManufacturer wraps gdk_monitor_get_manufacturer
+// 
 // The function returns the following values:
 // 
 // 	- goret string (nullable) 
@@ -19998,6 +20694,7 @@ func (monitor *MonitorInstance) GetManufacturer() string {
 }
 
 // GetModel wraps gdk_monitor_get_model
+// 
 // The function returns the following values:
 // 
 // 	- goret string (nullable) 
@@ -20022,6 +20719,7 @@ func (monitor *MonitorInstance) GetModel() string {
 }
 
 // GetRefreshRate wraps gdk_monitor_get_refresh_rate
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -20047,6 +20745,7 @@ func (monitor *MonitorInstance) GetRefreshRate() int {
 }
 
 // GetScale wraps gdk_monitor_get_scale
+// 
 // The function returns the following values:
 // 
 // 	- goret float64 
@@ -20074,6 +20773,7 @@ func (monitor *MonitorInstance) GetScale() float64 {
 }
 
 // GetScaleFactor wraps gdk_monitor_get_scale_factor
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -20104,6 +20804,7 @@ func (monitor *MonitorInstance) GetScaleFactor() int {
 }
 
 // GetSubpixelLayout wraps gdk_monitor_get_subpixel_layout
+// 
 // The function returns the following values:
 // 
 // 	- goret SubpixelLayout 
@@ -20127,6 +20828,7 @@ func (monitor *MonitorInstance) GetSubpixelLayout() SubpixelLayout {
 }
 
 // GetWidthMm wraps gdk_monitor_get_width_mm
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -20149,6 +20851,7 @@ func (monitor *MonitorInstance) GetWidthMm() int {
 }
 
 // IsValid wraps gdk_monitor_is_valid
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -20182,6 +20885,7 @@ func (monitor *MonitorInstance) IsValid() bool {
 func (o *MonitorInstance) ConnectInvalidate(fn func(Monitor)) gobject.SignalHandle {
 	return o.Connect("invalidate", fn)
 }
+
 // SeatInstance is the instance type used by all types extending GdkSeat. It is used internally by the bindings. Users should use the interface [Seat] instead.
 type SeatInstance struct {
 	_ [0]func() // equal guard
@@ -20199,6 +20903,7 @@ type Seat interface {
 	upcastToGdkSeat() *SeatInstance
 
 	// GetCapabilities wraps gdk_seat_get_capabilities
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret SeatCapabilities 
@@ -20218,6 +20923,7 @@ type Seat interface {
 	// Returns the devices that match the given capabilities.
 	GetDevices(SeatCapabilities) []Device
 	// GetDisplay wraps gdk_seat_get_display
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Display 
@@ -20225,6 +20931,7 @@ type Seat interface {
 	// Returns the `GdkDisplay` this seat belongs to.
 	GetDisplay() Display
 	// GetKeyboard wraps gdk_seat_get_keyboard
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Device (nullable) 
@@ -20232,6 +20939,7 @@ type Seat interface {
 	// Returns the device that routes keyboard events.
 	GetKeyboard() Device
 	// GetPointer wraps gdk_seat_get_pointer
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Device (nullable) 
@@ -20239,6 +20947,7 @@ type Seat interface {
 	// Returns the device that routes pointer events.
 	GetPointer() Device
 	// GetTools wraps gdk_seat_get_tools
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret []DeviceTool 
@@ -20304,6 +21013,7 @@ func UnsafeSeatToGlibFull(c Seat) unsafe.Pointer {
 }
 
 // GetCapabilities wraps gdk_seat_get_capabilities
+// 
 // The function returns the following values:
 // 
 // 	- goret SeatCapabilities 
@@ -20363,6 +21073,7 @@ func (seat *SeatInstance) GetDevices(capabilities SeatCapabilities) []Device {
 }
 
 // GetDisplay wraps gdk_seat_get_display
+// 
 // The function returns the following values:
 // 
 // 	- goret Display 
@@ -20385,6 +21096,7 @@ func (seat *SeatInstance) GetDisplay() Display {
 }
 
 // GetKeyboard wraps gdk_seat_get_keyboard
+// 
 // The function returns the following values:
 // 
 // 	- goret Device (nullable) 
@@ -20409,6 +21121,7 @@ func (seat *SeatInstance) GetKeyboard() Device {
 }
 
 // GetPointer wraps gdk_seat_get_pointer
+// 
 // The function returns the following values:
 // 
 // 	- goret Device (nullable) 
@@ -20433,6 +21146,7 @@ func (seat *SeatInstance) GetPointer() Device {
 }
 
 // GetTools wraps gdk_seat_get_tools
+// 
 // The function returns the following values:
 // 
 // 	- goret []DeviceTool 
@@ -20467,12 +21181,14 @@ func (seat *SeatInstance) GetTools() []DeviceTool {
 func (o *SeatInstance) ConnectDeviceAdded(fn func(Seat, Device)) gobject.SignalHandle {
 	return o.Connect("device-added", fn)
 }
+
 // ConnectDeviceRemoved connects the provided callback to the "device-removed" signal
 //
 // Emitted when an input device is removed (e.g. unplugged).
 func (o *SeatInstance) ConnectDeviceRemoved(fn func(Seat, Device)) gobject.SignalHandle {
 	return o.Connect("device-removed", fn)
 }
+
 // ConnectToolAdded connects the provided callback to the "tool-added" signal
 //
 // Emitted whenever a new tool is made known to the seat.
@@ -20485,12 +21201,14 @@ func (o *SeatInstance) ConnectDeviceRemoved(fn func(Seat, Device)) gobject.Signa
 func (o *SeatInstance) ConnectToolAdded(fn func(Seat, DeviceTool)) gobject.SignalHandle {
 	return o.Connect("tool-added", fn)
 }
+
 // ConnectToolRemoved connects the provided callback to the "tool-removed" signal
 //
 // Emitted whenever a tool is no longer known to this @seat.
 func (o *SeatInstance) ConnectToolRemoved(fn func(Seat, DeviceTool)) gobject.SignalHandle {
 	return o.Connect("tool-removed", fn)
 }
+
 // SnapshotInstance is the instance type used by all types extending GdkSnapshot. It is used internally by the bindings. Users should use the interface [Snapshot] instead.
 type SnapshotInstance struct {
 	_ [0]func() // equal guard
@@ -20574,6 +21292,7 @@ type Surface interface {
 	// emits a short beep on the display just as [method@Gdk.Display.beep].
 	Beep()
 	// CreateCairoContext wraps gdk_surface_create_cairo_context
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret CairoContext 
@@ -20581,6 +21300,7 @@ type Surface interface {
 	// Creates a new `GdkCairoContext` for rendering on @surface.
 	CreateCairoContext() CairoContext
 	// CreateGLContext wraps gdk_surface_create_gl_context
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret GLContext 
@@ -20606,6 +21326,7 @@ type Surface interface {
 	// before that happens.
 	Destroy()
 	// GetCursor wraps gdk_surface_get_cursor
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Cursor (nullable) 
@@ -20655,6 +21376,7 @@ type Surface interface {
 	// left corner of @surface.
 	GetDevicePosition(Device) (float64, float64, ModifierType, bool)
 	// GetDisplay wraps gdk_surface_get_display
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Display 
@@ -20662,6 +21384,7 @@ type Surface interface {
 	// Gets the `GdkDisplay` associated with a `GdkSurface`.
 	GetDisplay() Display
 	// GetFrameClock wraps gdk_surface_get_frame_clock
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret FrameClock 
@@ -20672,6 +21395,7 @@ type Surface interface {
 	// reparented to a new toplevel surface.
 	GetFrameClock() FrameClock
 	// GetHeight wraps gdk_surface_get_height
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int 
@@ -20682,6 +21406,7 @@ type Surface interface {
 	// ”device pixels” (see [method@Gdk.Surface.get_scale_factor]).
 	GetHeight() int
 	// GetMapped wraps gdk_surface_get_mapped
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
@@ -20692,6 +21417,7 @@ type Surface interface {
 	// or [method@Gdk.Popup.present].
 	GetMapped() bool
 	// GetScale wraps gdk_surface_get_scale
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret float64 
@@ -20709,6 +21435,7 @@ type Surface interface {
 	// The scale may change during the lifetime of the surface.
 	GetScale() float64
 	// GetScaleFactor wraps gdk_surface_get_scale_factor
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int 
@@ -20726,6 +21453,7 @@ type Surface interface {
 	// The scale factor may change during the lifetime of the surface.
 	GetScaleFactor() int
 	// GetWidth wraps gdk_surface_get_width
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int 
@@ -20745,6 +21473,7 @@ type Surface interface {
 	// part of [gtk_widget_hide()](../gtk4/method.Widget.hide.html).
 	Hide()
 	// IsDestroyed wraps gdk_surface_is_destroyed
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
@@ -20930,6 +21659,7 @@ func (surface *SurfaceInstance) Beep() {
 }
 
 // CreateCairoContext wraps gdk_surface_create_cairo_context
+// 
 // The function returns the following values:
 // 
 // 	- goret CairoContext 
@@ -20952,6 +21682,7 @@ func (surface *SurfaceInstance) CreateCairoContext() CairoContext {
 }
 
 // CreateGLContext wraps gdk_surface_create_gl_context
+// 
 // The function returns the following values:
 // 
 // 	- goret GLContext 
@@ -21005,6 +21736,7 @@ func (surface *SurfaceInstance) Destroy() {
 }
 
 // GetCursor wraps gdk_surface_get_cursor
+// 
 // The function returns the following values:
 // 
 // 	- goret Cursor (nullable) 
@@ -21120,6 +21852,7 @@ func (surface *SurfaceInstance) GetDevicePosition(device Device) (float64, float
 }
 
 // GetDisplay wraps gdk_surface_get_display
+// 
 // The function returns the following values:
 // 
 // 	- goret Display 
@@ -21142,6 +21875,7 @@ func (surface *SurfaceInstance) GetDisplay() Display {
 }
 
 // GetFrameClock wraps gdk_surface_get_frame_clock
+// 
 // The function returns the following values:
 // 
 // 	- goret FrameClock 
@@ -21167,6 +21901,7 @@ func (surface *SurfaceInstance) GetFrameClock() FrameClock {
 }
 
 // GetHeight wraps gdk_surface_get_height
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -21192,6 +21927,7 @@ func (surface *SurfaceInstance) GetHeight() int {
 }
 
 // GetMapped wraps gdk_surface_get_mapped
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -21219,6 +21955,7 @@ func (surface *SurfaceInstance) GetMapped() bool {
 }
 
 // GetScale wraps gdk_surface_get_scale
+// 
 // The function returns the following values:
 // 
 // 	- goret float64 
@@ -21251,6 +21988,7 @@ func (surface *SurfaceInstance) GetScale() float64 {
 }
 
 // GetScaleFactor wraps gdk_surface_get_scale_factor
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -21283,6 +22021,7 @@ func (surface *SurfaceInstance) GetScaleFactor() int {
 }
 
 // GetWidth wraps gdk_surface_get_width
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -21325,6 +22064,7 @@ func (surface *SurfaceInstance) Hide() {
 }
 
 // IsDestroyed wraps gdk_surface_is_destroyed
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -21441,12 +22181,14 @@ func (surface *SurfaceInstance) SetDeviceCursor(device Device, cursor Cursor) {
 func (o *SurfaceInstance) ConnectEnterMonitor(fn func(Surface, Monitor)) gobject.SignalHandle {
 	return o.Connect("enter-monitor", fn)
 }
+
 // ConnectEvent connects the provided callback to the "event" signal
 //
 // Emitted when GDK receives an input event for @surface.
 func (o *SurfaceInstance) ConnectEvent(fn func(Surface, unsafe.Pointer) bool) gobject.SignalHandle {
 	return o.Connect("event", fn)
 }
+
 // ConnectLayout connects the provided callback to the "layout" signal
 //
 // Emitted when the size of @surface is changed, or when relayout should
@@ -21457,12 +22199,14 @@ func (o *SurfaceInstance) ConnectEvent(fn func(Surface, unsafe.Pointer) bool) go
 func (o *SurfaceInstance) ConnectLayout(fn func(Surface, int, int)) gobject.SignalHandle {
 	return o.Connect("layout", fn)
 }
+
 // ConnectLeaveMonitor connects the provided callback to the "leave-monitor" signal
 //
 // Emitted when @surface stops being present on the monitor.
 func (o *SurfaceInstance) ConnectLeaveMonitor(fn func(Surface, Monitor)) gobject.SignalHandle {
 	return o.Connect("leave-monitor", fn)
 }
+
 // TextureInstance is the instance type used by all types extending GdkTexture. It is used internally by the bindings. Users should use the interface [Texture] instead.
 type TextureInstance struct {
 	_ [0]func() // equal guard
@@ -21509,6 +22253,7 @@ type Texture interface {
 	upcastToGdkTexture() *TextureInstance
 
 	// GetColorState wraps gdk_texture_get_color_state
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret *ColorState 
@@ -21516,6 +22261,7 @@ type Texture interface {
 	// Returns the color state associated with the texture.
 	GetColorState() *ColorState
 	// GetFormat wraps gdk_texture_get_format
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret MemoryFormat 
@@ -21531,6 +22277,7 @@ type Texture interface {
 	// downloading the texture.
 	GetFormat() MemoryFormat
 	// GetHeight wraps gdk_texture_get_height
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int 
@@ -21538,6 +22285,7 @@ type Texture interface {
 	// Returns the height of the @texture, in pixels.
 	GetHeight() int
 	// GetWidth wraps gdk_texture_get_width
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int 
@@ -21563,6 +22311,7 @@ type Texture interface {
 	// gdk-pixbuf library.
 	SaveToPNG(string) bool
 	// SaveToPNGBytes wraps gdk_texture_save_to_png_bytes
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret *glib.Bytes 
@@ -21597,6 +22346,7 @@ type Texture interface {
 	// GTK will attempt to store data without loss.
 	SaveToTIFF(string) bool
 	// SaveToTIFFBytes wraps gdk_texture_save_to_tiff_bytes
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret *glib.Bytes 
@@ -21855,6 +22605,7 @@ func NewTextureFromResource(resourcePath string) Texture {
 }
 
 // GetColorState wraps gdk_texture_get_color_state
+// 
 // The function returns the following values:
 // 
 // 	- goret *ColorState 
@@ -21877,6 +22628,7 @@ func (self *TextureInstance) GetColorState() *ColorState {
 }
 
 // GetFormat wraps gdk_texture_get_format
+// 
 // The function returns the following values:
 // 
 // 	- goret MemoryFormat 
@@ -21907,6 +22659,7 @@ func (self *TextureInstance) GetFormat() MemoryFormat {
 }
 
 // GetHeight wraps gdk_texture_get_height
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -21929,6 +22682,7 @@ func (texture *TextureInstance) GetHeight() int {
 }
 
 // GetWidth wraps gdk_texture_get_width
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -21990,6 +22744,7 @@ func (texture *TextureInstance) SaveToPNG(filename string) bool {
 }
 
 // SaveToPNGBytes wraps gdk_texture_save_to_png_bytes
+// 
 // The function returns the following values:
 // 
 // 	- goret *glib.Bytes 
@@ -22060,6 +22815,7 @@ func (texture *TextureInstance) SaveToTIFF(filename string) bool {
 }
 
 // SaveToTIFFBytes wraps gdk_texture_save_to_tiff_bytes
+// 
 // The function returns the following values:
 // 
 // 	- goret *glib.Bytes 
@@ -22418,6 +23174,8 @@ func NewMemoryTexture(width int, height int, format MemoryFormat, bytes *glib.By
 }
 
 // CicpParamsClass wraps GdkCicpParamsClass
+// 
+// CicpParamsClass is the type struct for [CicpParams]
 type CicpParamsClass struct {
 	*cicpParamsClass
 }
@@ -22432,31 +23190,6 @@ func UnsafeCicpParamsClassFromGlibBorrow(p unsafe.Pointer) *CicpParamsClass {
 	return &CicpParamsClass{&cicpParamsClass{(*C.GdkCicpParamsClass)(p)}}
 }
 
-// UnsafeCicpParamsClassFromGlibNone is used to convert raw C.GdkCicpParamsClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeCicpParamsClassFromGlibNone(p unsafe.Pointer) *CicpParamsClass {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeCicpParamsClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.cicpParamsClass,
-		func (intern *cicpParamsClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeCicpParamsClassFromGlibFull is used to convert raw C.GdkCicpParamsClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeCicpParamsClassFromGlibFull(p unsafe.Pointer) *CicpParamsClass {
-	wrapped := UnsafeCicpParamsClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.cicpParamsClass,
-		func (intern *cicpParamsClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
 // UnsafeCicpParamsClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
 // 
 // After this is called, no other method on [CicpParamsClass] is expected to work anymore.
@@ -22469,14 +23202,15 @@ func UnsafeCicpParamsClassToGlibNone(c *CicpParamsClass) unsafe.Pointer {
 	return unsafe.Pointer(c.native)
 }
 
-// UnsafeCicpParamsClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeCicpParamsClassToGlibFull(c *CicpParamsClass) unsafe.Pointer {
-	runtime.SetFinalizer(c.cicpParamsClass, nil)
-	_p := unsafe.Pointer(c.native)
-	c.native = nil // CicpParamsClass is invalid from here on
-	return _p
+// ParentClass returns the type struct of the parent class of this type struct.
+// This essentially casts the underlying c pointer.
+func (c *CicpParamsClass) ParentClass() *gobject.ObjectClass {
+	parent := gobject.UnsafeObjectClassFromGlibBorrow(UnsafeCicpParamsClassToGlibNone(c))
+	// attach a cleanup to keep the instance alive as long as the parent is referenced
+	runtime.AddCleanup(parent, func(_ *CicpParamsClass) {}, c)
+	return parent
 }
+
 // ColorState wraps GdkColorState
 //
 // A `GdkColorState` object provides the information to interpret
@@ -22515,7 +23249,7 @@ func UnsafeColorStateFromGlibBorrow(p unsafe.Pointer) *ColorState {
 	return &ColorState{&colorState{(*C.GdkColorState)(p)}}
 }
 
-// UnsafeColorStateFromGlibNone is used to convert raw C.GdkColorState pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeColorStateFromGlibNone is used to convert raw C.GdkColorState pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeColorStateFromGlibNone(p unsafe.Pointer) *ColorState {
 	C.gdk_color_state_ref((*C.GdkColorState)(p))
 	wrapped := UnsafeColorStateFromGlibBorrow(p)
@@ -22528,7 +23262,7 @@ func UnsafeColorStateFromGlibNone(p unsafe.Pointer) *ColorState {
 	return wrapped
 }
 
-// UnsafeColorStateFromGlibFull is used to convert raw C.GdkColorState pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeColorStateFromGlibFull is used to convert raw C.GdkColorState pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeColorStateFromGlibFull(p unsafe.Pointer) *ColorState {
 	wrapped := UnsafeColorStateFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -22567,7 +23301,9 @@ func UnsafeColorStateToGlibFull(c *ColorState) unsafe.Pointer {
 	c.native = nil // ColorState is invalid from here on
 	return _p
 }
+
 // ColorStateGetRec2100Linear wraps gdk_color_state_get_rec2100_linear
+// 
 // The function returns the following values:
 // 
 // 	- goret *ColorState 
@@ -22594,6 +23330,7 @@ func ColorStateGetRec2100Linear() *ColorState {
 }
 
 // ColorStateGetRec2100Pq wraps gdk_color_state_get_rec2100_pq
+// 
 // The function returns the following values:
 // 
 // 	- goret *ColorState 
@@ -22620,6 +23357,7 @@ func ColorStateGetRec2100Pq() *ColorState {
 }
 
 // ColorStateGetSrgb wraps gdk_color_state_get_srgb
+// 
 // The function returns the following values:
 // 
 // 	- goret *ColorState 
@@ -22646,6 +23384,7 @@ func ColorStateGetSrgb() *ColorState {
 }
 
 // ColorStateGetSrgbLinear wraps gdk_color_state_get_srgb_linear
+// 
 // The function returns the following values:
 // 
 // 	- goret *ColorState 
@@ -22671,6 +23410,7 @@ func ColorStateGetSrgbLinear() *ColorState {
 }
 
 // CreateCicpParams wraps gdk_color_state_create_cicp_params
+// 
 // The function returns the following values:
 // 
 // 	- goret CicpParams (nullable) 
@@ -22794,7 +23534,7 @@ func UnsafeContentFormatsFromGlibBorrow(p unsafe.Pointer) *ContentFormats {
 	return &ContentFormats{&contentFormats{(*C.GdkContentFormats)(p)}}
 }
 
-// UnsafeContentFormatsFromGlibNone is used to convert raw C.GdkContentFormats pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeContentFormatsFromGlibNone is used to convert raw C.GdkContentFormats pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeContentFormatsFromGlibNone(p unsafe.Pointer) *ContentFormats {
 	C.gdk_content_formats_ref((*C.GdkContentFormats)(p))
 	wrapped := UnsafeContentFormatsFromGlibBorrow(p)
@@ -22807,7 +23547,7 @@ func UnsafeContentFormatsFromGlibNone(p unsafe.Pointer) *ContentFormats {
 	return wrapped
 }
 
-// UnsafeContentFormatsFromGlibFull is used to convert raw C.GdkContentFormats pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeContentFormatsFromGlibFull is used to convert raw C.GdkContentFormats pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeContentFormatsFromGlibFull(p unsafe.Pointer) *ContentFormats {
 	wrapped := UnsafeContentFormatsFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -22846,6 +23586,7 @@ func UnsafeContentFormatsToGlibFull(c *ContentFormats) unsafe.Pointer {
 	c.native = nil // ContentFormats is invalid from here on
 	return _p
 }
+
 // NewContentFormats wraps gdk_content_formats_new
 // 
 // The function takes the following parameters:
@@ -23012,6 +23753,7 @@ func (formats *ContentFormats) ContainMIMEType(mimeType string) bool {
 }
 
 // GetGTypes wraps gdk_content_formats_get_gtypes
+// 
 // The function returns the following values:
 // 
 // 	- nGtypes uint: optional pointer to take the
@@ -23044,6 +23786,7 @@ func (formats *ContentFormats) GetGTypes() (uint, []gobject.Type) {
 }
 
 // GetMIMETypes wraps gdk_content_formats_get_mime_types
+// 
 // The function returns the following values:
 // 
 // 	- nMimeTypes uint: optional pointer to take the
@@ -23176,6 +23919,7 @@ func (first *ContentFormats) MatchMIMEType(second *ContentFormats) string {
 }
 
 // ToString wraps gdk_content_formats_to_string
+// 
 // The function returns the following values:
 // 
 // 	- goret string 
@@ -23235,6 +23979,7 @@ func (first *ContentFormats) Union(second *ContentFormats) *ContentFormats {
 }
 
 // UnionDeserializeGTypes wraps gdk_content_formats_union_deserialize_gtypes
+// 
 // The function returns the following values:
 // 
 // 	- goret *ContentFormats 
@@ -23258,6 +24003,7 @@ func (formats *ContentFormats) UnionDeserializeGTypes() *ContentFormats {
 }
 
 // UnionDeserializeMIMETypes wraps gdk_content_formats_union_deserialize_mime_types
+// 
 // The function returns the following values:
 // 
 // 	- goret *ContentFormats 
@@ -23281,6 +24027,7 @@ func (formats *ContentFormats) UnionDeserializeMIMETypes() *ContentFormats {
 }
 
 // UnionSerializeGTypes wraps gdk_content_formats_union_serialize_gtypes
+// 
 // The function returns the following values:
 // 
 // 	- goret *ContentFormats 
@@ -23304,6 +24051,7 @@ func (formats *ContentFormats) UnionSerializeGTypes() *ContentFormats {
 }
 
 // UnionSerializeMIMETypes wraps gdk_content_formats_union_serialize_mime_types
+// 
 // The function returns the following values:
 // 
 // 	- goret *ContentFormats 
@@ -23356,7 +24104,7 @@ func UnsafeContentFormatsBuilderFromGlibBorrow(p unsafe.Pointer) *ContentFormats
 	return &ContentFormatsBuilder{&contentFormatsBuilder{(*C.GdkContentFormatsBuilder)(p)}}
 }
 
-// UnsafeContentFormatsBuilderFromGlibNone is used to convert raw C.GdkContentFormatsBuilder pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeContentFormatsBuilderFromGlibNone is used to convert raw C.GdkContentFormatsBuilder pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeContentFormatsBuilderFromGlibNone(p unsafe.Pointer) *ContentFormatsBuilder {
 	C.gdk_content_formats_builder_ref((*C.GdkContentFormatsBuilder)(p))
 	wrapped := UnsafeContentFormatsBuilderFromGlibBorrow(p)
@@ -23369,7 +24117,7 @@ func UnsafeContentFormatsBuilderFromGlibNone(p unsafe.Pointer) *ContentFormatsBu
 	return wrapped
 }
 
-// UnsafeContentFormatsBuilderFromGlibFull is used to convert raw C.GdkContentFormatsBuilder pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeContentFormatsBuilderFromGlibFull is used to convert raw C.GdkContentFormatsBuilder pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeContentFormatsBuilderFromGlibFull(p unsafe.Pointer) *ContentFormatsBuilder {
 	wrapped := UnsafeContentFormatsBuilderFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -23408,7 +24156,9 @@ func UnsafeContentFormatsBuilderToGlibFull(c *ContentFormatsBuilder) unsafe.Poin
 	c.native = nil // ContentFormatsBuilder is invalid from here on
 	return _p
 }
+
 // NewContentFormatsBuilder wraps gdk_content_formats_builder_new
+// 
 // The function returns the following values:
 // 
 // 	- goret *ContentFormatsBuilder 
@@ -23489,6 +24239,7 @@ func (builder *ContentFormatsBuilder) AddMIMEType(mimeType string) {
 }
 
 // ToFormats wraps gdk_content_formats_builder_to_formats
+// 
 // The function returns the following values:
 // 
 // 	- goret *ContentFormats 
@@ -23519,6 +24270,8 @@ func (builder *ContentFormatsBuilder) ToFormats() *ContentFormats {
 // ContentProviderClass wraps GdkContentProviderClass
 //
 // Class structure for `GdkContentProvider`.
+// 
+// ContentProviderClass is the type struct for [ContentProvider]
 type ContentProviderClass struct {
 	*contentProviderClass
 }
@@ -23533,31 +24286,6 @@ func UnsafeContentProviderClassFromGlibBorrow(p unsafe.Pointer) *ContentProvider
 	return &ContentProviderClass{&contentProviderClass{(*C.GdkContentProviderClass)(p)}}
 }
 
-// UnsafeContentProviderClassFromGlibNone is used to convert raw C.GdkContentProviderClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeContentProviderClassFromGlibNone(p unsafe.Pointer) *ContentProviderClass {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeContentProviderClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.contentProviderClass,
-		func (intern *contentProviderClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeContentProviderClassFromGlibFull is used to convert raw C.GdkContentProviderClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeContentProviderClassFromGlibFull(p unsafe.Pointer) *ContentProviderClass {
-	wrapped := UnsafeContentProviderClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.contentProviderClass,
-		func (intern *contentProviderClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
 // UnsafeContentProviderClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
 // 
 // After this is called, no other method on [ContentProviderClass] is expected to work anymore.
@@ -23570,14 +24298,15 @@ func UnsafeContentProviderClassToGlibNone(c *ContentProviderClass) unsafe.Pointe
 	return unsafe.Pointer(c.native)
 }
 
-// UnsafeContentProviderClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeContentProviderClassToGlibFull(c *ContentProviderClass) unsafe.Pointer {
-	runtime.SetFinalizer(c.contentProviderClass, nil)
-	_p := unsafe.Pointer(c.native)
-	c.native = nil // ContentProviderClass is invalid from here on
-	return _p
+// ParentClass returns the type struct of the parent class of this type struct.
+// This essentially casts the underlying c pointer.
+func (c *ContentProviderClass) ParentClass() *gobject.ObjectClass {
+	parent := gobject.UnsafeObjectClassFromGlibBorrow(UnsafeContentProviderClassToGlibNone(c))
+	// attach a cleanup to keep the instance alive as long as the parent is referenced
+	runtime.AddCleanup(parent, func(_ *ContentProviderClass) {}, c)
+	return parent
 }
+
 // DevicePadInterface wraps GdkDevicePadInterface
 type DevicePadInterface struct {
 	*devicePadInterface
@@ -23593,7 +24322,7 @@ func UnsafeDevicePadInterfaceFromGlibBorrow(p unsafe.Pointer) *DevicePadInterfac
 	return &DevicePadInterface{&devicePadInterface{(*C.GdkDevicePadInterface)(p)}}
 }
 
-// UnsafeDevicePadInterfaceFromGlibNone is used to convert raw C.GdkDevicePadInterface pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeDevicePadInterfaceFromGlibNone is used to convert raw C.GdkDevicePadInterface pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeDevicePadInterfaceFromGlibNone(p unsafe.Pointer) *DevicePadInterface {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeDevicePadInterfaceFromGlibBorrow(p)
@@ -23606,7 +24335,7 @@ func UnsafeDevicePadInterfaceFromGlibNone(p unsafe.Pointer) *DevicePadInterface 
 	return wrapped
 }
 
-// UnsafeDevicePadInterfaceFromGlibFull is used to convert raw C.GdkDevicePadInterface pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeDevicePadInterfaceFromGlibFull is used to convert raw C.GdkDevicePadInterface pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeDevicePadInterfaceFromGlibFull(p unsafe.Pointer) *DevicePadInterface {
 	wrapped := UnsafeDevicePadInterfaceFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -23638,6 +24367,7 @@ func UnsafeDevicePadInterfaceToGlibFull(d *DevicePadInterface) unsafe.Pointer {
 	d.native = nil // DevicePadInterface is invalid from here on
 	return _p
 }
+
 // DmabufFormats wraps GdkDmabufFormats
 //
 // The `GdkDmabufFormats` struct provides information about
@@ -23686,7 +24416,7 @@ func UnsafeDmabufFormatsFromGlibBorrow(p unsafe.Pointer) *DmabufFormats {
 	return &DmabufFormats{&dmabufFormats{(*C.GdkDmabufFormats)(p)}}
 }
 
-// UnsafeDmabufFormatsFromGlibNone is used to convert raw C.GdkDmabufFormats pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeDmabufFormatsFromGlibNone is used to convert raw C.GdkDmabufFormats pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeDmabufFormatsFromGlibNone(p unsafe.Pointer) *DmabufFormats {
 	C.gdk_dmabuf_formats_ref((*C.GdkDmabufFormats)(p))
 	wrapped := UnsafeDmabufFormatsFromGlibBorrow(p)
@@ -23699,7 +24429,7 @@ func UnsafeDmabufFormatsFromGlibNone(p unsafe.Pointer) *DmabufFormats {
 	return wrapped
 }
 
-// UnsafeDmabufFormatsFromGlibFull is used to convert raw C.GdkDmabufFormats pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeDmabufFormatsFromGlibFull is used to convert raw C.GdkDmabufFormats pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeDmabufFormatsFromGlibFull(p unsafe.Pointer) *DmabufFormats {
 	wrapped := UnsafeDmabufFormatsFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -23738,6 +24468,7 @@ func UnsafeDmabufFormatsToGlibFull(d *DmabufFormats) unsafe.Pointer {
 	d.native = nil // DmabufFormats is invalid from here on
 	return _p
 }
+
 // Contains wraps gdk_dmabuf_formats_contains
 // 
 // The function takes the following parameters:
@@ -23845,6 +24576,7 @@ func (formats *DmabufFormats) GetFormat(idx uint) (uint32, uint64) {
 }
 
 // GetNFormats wraps gdk_dmabuf_formats_get_n_formats
+// 
 // The function returns the following values:
 // 
 // 	- goret uint 
@@ -23872,6 +24604,8 @@ func (formats *DmabufFormats) GetNFormats() uint {
 }
 
 // DmabufTextureBuilderClass wraps GdkDmabufTextureBuilderClass
+// 
+// DmabufTextureBuilderClass is the type struct for [DmabufTextureBuilder]
 type DmabufTextureBuilderClass struct {
 	*dmabufTextureBuilderClass
 }
@@ -23886,31 +24620,6 @@ func UnsafeDmabufTextureBuilderClassFromGlibBorrow(p unsafe.Pointer) *DmabufText
 	return &DmabufTextureBuilderClass{&dmabufTextureBuilderClass{(*C.GdkDmabufTextureBuilderClass)(p)}}
 }
 
-// UnsafeDmabufTextureBuilderClassFromGlibNone is used to convert raw C.GdkDmabufTextureBuilderClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeDmabufTextureBuilderClassFromGlibNone(p unsafe.Pointer) *DmabufTextureBuilderClass {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeDmabufTextureBuilderClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.dmabufTextureBuilderClass,
-		func (intern *dmabufTextureBuilderClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeDmabufTextureBuilderClassFromGlibFull is used to convert raw C.GdkDmabufTextureBuilderClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeDmabufTextureBuilderClassFromGlibFull(p unsafe.Pointer) *DmabufTextureBuilderClass {
-	wrapped := UnsafeDmabufTextureBuilderClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.dmabufTextureBuilderClass,
-		func (intern *dmabufTextureBuilderClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
 // UnsafeDmabufTextureBuilderClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
 // 
 // After this is called, no other method on [DmabufTextureBuilderClass] is expected to work anymore.
@@ -23923,15 +24632,18 @@ func UnsafeDmabufTextureBuilderClassToGlibNone(d *DmabufTextureBuilderClass) uns
 	return unsafe.Pointer(d.native)
 }
 
-// UnsafeDmabufTextureBuilderClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeDmabufTextureBuilderClassToGlibFull(d *DmabufTextureBuilderClass) unsafe.Pointer {
-	runtime.SetFinalizer(d.dmabufTextureBuilderClass, nil)
-	_p := unsafe.Pointer(d.native)
-	d.native = nil // DmabufTextureBuilderClass is invalid from here on
-	return _p
+// ParentClass returns the type struct of the parent class of this type struct.
+// This essentially casts the underlying c pointer.
+func (d *DmabufTextureBuilderClass) ParentClass() *gobject.ObjectClass {
+	parent := gobject.UnsafeObjectClassFromGlibBorrow(UnsafeDmabufTextureBuilderClassToGlibNone(d))
+	// attach a cleanup to keep the instance alive as long as the parent is referenced
+	runtime.AddCleanup(parent, func(_ *DmabufTextureBuilderClass) {}, d)
+	return parent
 }
+
 // DmabufTextureClass wraps GdkDmabufTextureClass
+// 
+// DmabufTextureClass is the type struct for [DmabufTexture]
 type DmabufTextureClass struct {
 	*dmabufTextureClass
 }
@@ -23946,31 +24658,6 @@ func UnsafeDmabufTextureClassFromGlibBorrow(p unsafe.Pointer) *DmabufTextureClas
 	return &DmabufTextureClass{&dmabufTextureClass{(*C.GdkDmabufTextureClass)(p)}}
 }
 
-// UnsafeDmabufTextureClassFromGlibNone is used to convert raw C.GdkDmabufTextureClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeDmabufTextureClassFromGlibNone(p unsafe.Pointer) *DmabufTextureClass {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeDmabufTextureClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.dmabufTextureClass,
-		func (intern *dmabufTextureClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeDmabufTextureClassFromGlibFull is used to convert raw C.GdkDmabufTextureClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeDmabufTextureClassFromGlibFull(p unsafe.Pointer) *DmabufTextureClass {
-	wrapped := UnsafeDmabufTextureClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.dmabufTextureClass,
-		func (intern *dmabufTextureClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
 // UnsafeDmabufTextureClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
 // 
 // After this is called, no other method on [DmabufTextureClass] is expected to work anymore.
@@ -23983,14 +24670,15 @@ func UnsafeDmabufTextureClassToGlibNone(d *DmabufTextureClass) unsafe.Pointer {
 	return unsafe.Pointer(d.native)
 }
 
-// UnsafeDmabufTextureClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeDmabufTextureClassToGlibFull(d *DmabufTextureClass) unsafe.Pointer {
-	runtime.SetFinalizer(d.dmabufTextureClass, nil)
-	_p := unsafe.Pointer(d.native)
-	d.native = nil // DmabufTextureClass is invalid from here on
-	return _p
+// ParentClass returns the type struct of the parent class of this type struct.
+// This essentially casts the underlying c pointer.
+func (d *DmabufTextureClass) ParentClass() *TextureClass {
+	parent := UnsafeTextureClassFromGlibBorrow(UnsafeDmabufTextureClassToGlibNone(d))
+	// attach a cleanup to keep the instance alive as long as the parent is referenced
+	runtime.AddCleanup(parent, func(_ *DmabufTextureClass) {}, d)
+	return parent
 }
+
 // DragSurfaceInterface wraps GdkDragSurfaceInterface
 //
 // The `GdkDragSurfaceInterface` implementation is private to GDK.
@@ -24008,7 +24696,7 @@ func UnsafeDragSurfaceInterfaceFromGlibBorrow(p unsafe.Pointer) *DragSurfaceInte
 	return &DragSurfaceInterface{&dragSurfaceInterface{(*C.GdkDragSurfaceInterface)(p)}}
 }
 
-// UnsafeDragSurfaceInterfaceFromGlibNone is used to convert raw C.GdkDragSurfaceInterface pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeDragSurfaceInterfaceFromGlibNone is used to convert raw C.GdkDragSurfaceInterface pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeDragSurfaceInterfaceFromGlibNone(p unsafe.Pointer) *DragSurfaceInterface {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeDragSurfaceInterfaceFromGlibBorrow(p)
@@ -24021,7 +24709,7 @@ func UnsafeDragSurfaceInterfaceFromGlibNone(p unsafe.Pointer) *DragSurfaceInterf
 	return wrapped
 }
 
-// UnsafeDragSurfaceInterfaceFromGlibFull is used to convert raw C.GdkDragSurfaceInterface pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeDragSurfaceInterfaceFromGlibFull is used to convert raw C.GdkDragSurfaceInterface pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeDragSurfaceInterfaceFromGlibFull(p unsafe.Pointer) *DragSurfaceInterface {
 	wrapped := UnsafeDragSurfaceInterfaceFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -24053,6 +24741,7 @@ func UnsafeDragSurfaceInterfaceToGlibFull(d *DragSurfaceInterface) unsafe.Pointe
 	d.native = nil // DragSurfaceInterface is invalid from here on
 	return _p
 }
+
 // DragSurfaceSize wraps GdkDragSurfaceSize
 //
 // The `GdkDragSurfaceSize` struct contains information that is useful
@@ -24083,7 +24772,7 @@ func UnsafeDragSurfaceSizeFromGlibBorrow(p unsafe.Pointer) *DragSurfaceSize {
 	return &DragSurfaceSize{&dragSurfaceSize{(*C.GdkDragSurfaceSize)(p)}}
 }
 
-// UnsafeDragSurfaceSizeFromGlibNone is used to convert raw C.GdkDragSurfaceSize pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeDragSurfaceSizeFromGlibNone is used to convert raw C.GdkDragSurfaceSize pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeDragSurfaceSizeFromGlibNone(p unsafe.Pointer) *DragSurfaceSize {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeDragSurfaceSizeFromGlibBorrow(p)
@@ -24096,7 +24785,7 @@ func UnsafeDragSurfaceSizeFromGlibNone(p unsafe.Pointer) *DragSurfaceSize {
 	return wrapped
 }
 
-// UnsafeDragSurfaceSizeFromGlibFull is used to convert raw C.GdkDragSurfaceSize pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeDragSurfaceSizeFromGlibFull is used to convert raw C.GdkDragSurfaceSize pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeDragSurfaceSizeFromGlibFull(p unsafe.Pointer) *DragSurfaceSize {
 	wrapped := UnsafeDragSurfaceSizeFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -24128,6 +24817,7 @@ func UnsafeDragSurfaceSizeToGlibFull(d *DragSurfaceSize) unsafe.Pointer {
 	d.native = nil // DragSurfaceSize is invalid from here on
 	return _p
 }
+
 // SetSize wraps gdk_drag_surface_size_set_size
 // 
 // The function takes the following parameters:
@@ -24181,7 +24871,7 @@ func UnsafeEventSequenceFromGlibBorrow(p unsafe.Pointer) *EventSequence {
 	return &EventSequence{&eventSequence{(*C.GdkEventSequence)(p)}}
 }
 
-// UnsafeEventSequenceFromGlibNone is used to convert raw C.GdkEventSequence pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeEventSequenceFromGlibNone is used to convert raw C.GdkEventSequence pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeEventSequenceFromGlibNone(p unsafe.Pointer) *EventSequence {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeEventSequenceFromGlibBorrow(p)
@@ -24194,7 +24884,7 @@ func UnsafeEventSequenceFromGlibNone(p unsafe.Pointer) *EventSequence {
 	return wrapped
 }
 
-// UnsafeEventSequenceFromGlibFull is used to convert raw C.GdkEventSequence pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeEventSequenceFromGlibFull is used to convert raw C.GdkEventSequence pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeEventSequenceFromGlibFull(p unsafe.Pointer) *EventSequence {
 	wrapped := UnsafeEventSequenceFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -24226,6 +24916,7 @@ func UnsafeEventSequenceToGlibFull(e *EventSequence) unsafe.Pointer {
 	e.native = nil // EventSequence is invalid from here on
 	return _p
 }
+
 // FileList wraps GdkFileList
 //
 // An opaque type representing a list of files.
@@ -24255,7 +24946,7 @@ func UnsafeFileListFromGlibBorrow(p unsafe.Pointer) *FileList {
 	return &FileList{&fileList{(*C.GdkFileList)(p)}}
 }
 
-// UnsafeFileListFromGlibNone is used to convert raw C.GdkFileList pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeFileListFromGlibNone is used to convert raw C.GdkFileList pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeFileListFromGlibNone(p unsafe.Pointer) *FileList {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeFileListFromGlibBorrow(p)
@@ -24268,7 +24959,7 @@ func UnsafeFileListFromGlibNone(p unsafe.Pointer) *FileList {
 	return wrapped
 }
 
-// UnsafeFileListFromGlibFull is used to convert raw C.GdkFileList pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeFileListFromGlibFull is used to convert raw C.GdkFileList pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeFileListFromGlibFull(p unsafe.Pointer) *FileList {
 	wrapped := UnsafeFileListFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -24300,6 +24991,7 @@ func UnsafeFileListToGlibFull(f *FileList) unsafe.Pointer {
 	f.native = nil // FileList is invalid from here on
 	return _p
 }
+
 // NewFileListFromArray wraps gdk_file_list_new_from_array
 // 
 // The function takes the following parameters:
@@ -24334,6 +25026,7 @@ func NewFileListFromArray(files []gio.File) *FileList {
 }
 
 // GetFiles wraps gdk_file_list_get_files
+// 
 // The function returns the following values:
 // 
 // 	- goret []gio.File 
@@ -24365,6 +25058,8 @@ func (fileList *FileList) GetFiles() []gio.File {
 }
 
 // FrameClockClass wraps GdkFrameClockClass
+// 
+// FrameClockClass is the type struct for [FrameClock]
 type FrameClockClass struct {
 	*frameClockClass
 }
@@ -24379,31 +25074,6 @@ func UnsafeFrameClockClassFromGlibBorrow(p unsafe.Pointer) *FrameClockClass {
 	return &FrameClockClass{&frameClockClass{(*C.GdkFrameClockClass)(p)}}
 }
 
-// UnsafeFrameClockClassFromGlibNone is used to convert raw C.GdkFrameClockClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeFrameClockClassFromGlibNone(p unsafe.Pointer) *FrameClockClass {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeFrameClockClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.frameClockClass,
-		func (intern *frameClockClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeFrameClockClassFromGlibFull is used to convert raw C.GdkFrameClockClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeFrameClockClassFromGlibFull(p unsafe.Pointer) *FrameClockClass {
-	wrapped := UnsafeFrameClockClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.frameClockClass,
-		func (intern *frameClockClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
 // UnsafeFrameClockClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
 // 
 // After this is called, no other method on [FrameClockClass] is expected to work anymore.
@@ -24416,14 +25086,15 @@ func UnsafeFrameClockClassToGlibNone(f *FrameClockClass) unsafe.Pointer {
 	return unsafe.Pointer(f.native)
 }
 
-// UnsafeFrameClockClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeFrameClockClassToGlibFull(f *FrameClockClass) unsafe.Pointer {
-	runtime.SetFinalizer(f.frameClockClass, nil)
-	_p := unsafe.Pointer(f.native)
-	f.native = nil // FrameClockClass is invalid from here on
-	return _p
+// ParentClass returns the type struct of the parent class of this type struct.
+// This essentially casts the underlying c pointer.
+func (f *FrameClockClass) ParentClass() *gobject.ObjectClass {
+	parent := gobject.UnsafeObjectClassFromGlibBorrow(UnsafeFrameClockClassToGlibNone(f))
+	// attach a cleanup to keep the instance alive as long as the parent is referenced
+	runtime.AddCleanup(parent, func(_ *FrameClockClass) {}, f)
+	return parent
 }
+
 // FrameTimings wraps GdkFrameTimings
 //
 // A `GdkFrameTimings` object holds timing information for a single frame
@@ -24460,7 +25131,7 @@ func UnsafeFrameTimingsFromGlibBorrow(p unsafe.Pointer) *FrameTimings {
 	return &FrameTimings{&frameTimings{(*C.GdkFrameTimings)(p)}}
 }
 
-// UnsafeFrameTimingsFromGlibNone is used to convert raw C.GdkFrameTimings pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeFrameTimingsFromGlibNone is used to convert raw C.GdkFrameTimings pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeFrameTimingsFromGlibNone(p unsafe.Pointer) *FrameTimings {
 	C.gdk_frame_timings_ref((*C.GdkFrameTimings)(p))
 	wrapped := UnsafeFrameTimingsFromGlibBorrow(p)
@@ -24473,7 +25144,7 @@ func UnsafeFrameTimingsFromGlibNone(p unsafe.Pointer) *FrameTimings {
 	return wrapped
 }
 
-// UnsafeFrameTimingsFromGlibFull is used to convert raw C.GdkFrameTimings pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeFrameTimingsFromGlibFull is used to convert raw C.GdkFrameTimings pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeFrameTimingsFromGlibFull(p unsafe.Pointer) *FrameTimings {
 	wrapped := UnsafeFrameTimingsFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -24512,7 +25183,9 @@ func UnsafeFrameTimingsToGlibFull(f *FrameTimings) unsafe.Pointer {
 	f.native = nil // FrameTimings is invalid from here on
 	return _p
 }
+
 // GetComplete wraps gdk_frame_timings_get_complete
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -24549,6 +25222,7 @@ func (timings *FrameTimings) GetComplete() bool {
 }
 
 // GetFrameCounter wraps gdk_frame_timings_get_frame_counter
+// 
 // The function returns the following values:
 // 
 // 	- goret int64 
@@ -24572,6 +25246,7 @@ func (timings *FrameTimings) GetFrameCounter() int64 {
 }
 
 // GetFrameTime wraps gdk_frame_timings_get_frame_time
+// 
 // The function returns the following values:
 // 
 // 	- goret int64 
@@ -24597,6 +25272,7 @@ func (timings *FrameTimings) GetFrameTime() int64 {
 }
 
 // GetPredictedPresentationTime wraps gdk_frame_timings_get_predicted_presentation_time
+// 
 // The function returns the following values:
 // 
 // 	- goret int64 
@@ -24630,6 +25306,7 @@ func (timings *FrameTimings) GetPredictedPresentationTime() int64 {
 }
 
 // GetPresentationTime wraps gdk_frame_timings_get_presentation_time
+// 
 // The function returns the following values:
 // 
 // 	- goret int64 
@@ -24654,6 +25331,7 @@ func (timings *FrameTimings) GetPresentationTime() int64 {
 }
 
 // GetRefreshInterval wraps gdk_frame_timings_get_refresh_interval
+// 
 // The function returns the following values:
 // 
 // 	- goret int64 
@@ -24680,6 +25358,8 @@ func (timings *FrameTimings) GetRefreshInterval() int64 {
 }
 
 // GLTextureBuilderClass wraps GdkGLTextureBuilderClass
+// 
+// GLTextureBuilderClass is the type struct for [GLTextureBuilder]
 type GLTextureBuilderClass struct {
 	*glTextureBuilderClass
 }
@@ -24694,31 +25374,6 @@ func UnsafeGLTextureBuilderClassFromGlibBorrow(p unsafe.Pointer) *GLTextureBuild
 	return &GLTextureBuilderClass{&glTextureBuilderClass{(*C.GdkGLTextureBuilderClass)(p)}}
 }
 
-// UnsafeGLTextureBuilderClassFromGlibNone is used to convert raw C.GdkGLTextureBuilderClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeGLTextureBuilderClassFromGlibNone(p unsafe.Pointer) *GLTextureBuilderClass {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeGLTextureBuilderClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.glTextureBuilderClass,
-		func (intern *glTextureBuilderClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeGLTextureBuilderClassFromGlibFull is used to convert raw C.GdkGLTextureBuilderClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeGLTextureBuilderClassFromGlibFull(p unsafe.Pointer) *GLTextureBuilderClass {
-	wrapped := UnsafeGLTextureBuilderClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.glTextureBuilderClass,
-		func (intern *glTextureBuilderClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
 // UnsafeGLTextureBuilderClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
 // 
 // After this is called, no other method on [GLTextureBuilderClass] is expected to work anymore.
@@ -24731,15 +25386,18 @@ func UnsafeGLTextureBuilderClassToGlibNone(g *GLTextureBuilderClass) unsafe.Poin
 	return unsafe.Pointer(g.native)
 }
 
-// UnsafeGLTextureBuilderClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeGLTextureBuilderClassToGlibFull(g *GLTextureBuilderClass) unsafe.Pointer {
-	runtime.SetFinalizer(g.glTextureBuilderClass, nil)
-	_p := unsafe.Pointer(g.native)
-	g.native = nil // GLTextureBuilderClass is invalid from here on
-	return _p
+// ParentClass returns the type struct of the parent class of this type struct.
+// This essentially casts the underlying c pointer.
+func (g *GLTextureBuilderClass) ParentClass() *gobject.ObjectClass {
+	parent := gobject.UnsafeObjectClassFromGlibBorrow(UnsafeGLTextureBuilderClassToGlibNone(g))
+	// attach a cleanup to keep the instance alive as long as the parent is referenced
+	runtime.AddCleanup(parent, func(_ *GLTextureBuilderClass) {}, g)
+	return parent
 }
+
 // GLTextureClass wraps GdkGLTextureClass
+// 
+// GLTextureClass is the type struct for [GLTexture]
 type GLTextureClass struct {
 	*glTextureClass
 }
@@ -24754,31 +25412,6 @@ func UnsafeGLTextureClassFromGlibBorrow(p unsafe.Pointer) *GLTextureClass {
 	return &GLTextureClass{&glTextureClass{(*C.GdkGLTextureClass)(p)}}
 }
 
-// UnsafeGLTextureClassFromGlibNone is used to convert raw C.GdkGLTextureClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeGLTextureClassFromGlibNone(p unsafe.Pointer) *GLTextureClass {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeGLTextureClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.glTextureClass,
-		func (intern *glTextureClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeGLTextureClassFromGlibFull is used to convert raw C.GdkGLTextureClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeGLTextureClassFromGlibFull(p unsafe.Pointer) *GLTextureClass {
-	wrapped := UnsafeGLTextureClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.glTextureClass,
-		func (intern *glTextureClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
 // UnsafeGLTextureClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
 // 
 // After this is called, no other method on [GLTextureClass] is expected to work anymore.
@@ -24791,14 +25424,15 @@ func UnsafeGLTextureClassToGlibNone(g *GLTextureClass) unsafe.Pointer {
 	return unsafe.Pointer(g.native)
 }
 
-// UnsafeGLTextureClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeGLTextureClassToGlibFull(g *GLTextureClass) unsafe.Pointer {
-	runtime.SetFinalizer(g.glTextureClass, nil)
-	_p := unsafe.Pointer(g.native)
-	g.native = nil // GLTextureClass is invalid from here on
-	return _p
+// ParentClass returns the type struct of the parent class of this type struct.
+// This essentially casts the underlying c pointer.
+func (g *GLTextureClass) ParentClass() *TextureClass {
+	parent := UnsafeTextureClassFromGlibBorrow(UnsafeGLTextureClassToGlibNone(g))
+	// attach a cleanup to keep the instance alive as long as the parent is referenced
+	runtime.AddCleanup(parent, func(_ *GLTextureClass) {}, g)
+	return parent
 }
+
 // KeymapKey wraps GdkKeymapKey
 //
 // A `GdkKeymapKey` is a hardware key that can be mapped to a keyval.
@@ -24816,7 +25450,7 @@ func UnsafeKeymapKeyFromGlibBorrow(p unsafe.Pointer) *KeymapKey {
 	return &KeymapKey{&keymapKey{(*C.GdkKeymapKey)(p)}}
 }
 
-// UnsafeKeymapKeyFromGlibNone is used to convert raw C.GdkKeymapKey pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeKeymapKeyFromGlibNone is used to convert raw C.GdkKeymapKey pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeKeymapKeyFromGlibNone(p unsafe.Pointer) *KeymapKey {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeKeymapKeyFromGlibBorrow(p)
@@ -24829,7 +25463,7 @@ func UnsafeKeymapKeyFromGlibNone(p unsafe.Pointer) *KeymapKey {
 	return wrapped
 }
 
-// UnsafeKeymapKeyFromGlibFull is used to convert raw C.GdkKeymapKey pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeKeymapKeyFromGlibFull is used to convert raw C.GdkKeymapKey pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeKeymapKeyFromGlibFull(p unsafe.Pointer) *KeymapKey {
 	wrapped := UnsafeKeymapKeyFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -24861,7 +25495,10 @@ func UnsafeKeymapKeyToGlibFull(k *KeymapKey) unsafe.Pointer {
 	k.native = nil // KeymapKey is invalid from here on
 	return _p
 }
+
 // MemoryTextureBuilderClass wraps GdkMemoryTextureBuilderClass
+// 
+// MemoryTextureBuilderClass is the type struct for [MemoryTextureBuilder]
 type MemoryTextureBuilderClass struct {
 	*memoryTextureBuilderClass
 }
@@ -24876,31 +25513,6 @@ func UnsafeMemoryTextureBuilderClassFromGlibBorrow(p unsafe.Pointer) *MemoryText
 	return &MemoryTextureBuilderClass{&memoryTextureBuilderClass{(*C.GdkMemoryTextureBuilderClass)(p)}}
 }
 
-// UnsafeMemoryTextureBuilderClassFromGlibNone is used to convert raw C.GdkMemoryTextureBuilderClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeMemoryTextureBuilderClassFromGlibNone(p unsafe.Pointer) *MemoryTextureBuilderClass {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeMemoryTextureBuilderClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.memoryTextureBuilderClass,
-		func (intern *memoryTextureBuilderClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeMemoryTextureBuilderClassFromGlibFull is used to convert raw C.GdkMemoryTextureBuilderClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeMemoryTextureBuilderClassFromGlibFull(p unsafe.Pointer) *MemoryTextureBuilderClass {
-	wrapped := UnsafeMemoryTextureBuilderClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.memoryTextureBuilderClass,
-		func (intern *memoryTextureBuilderClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
 // UnsafeMemoryTextureBuilderClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
 // 
 // After this is called, no other method on [MemoryTextureBuilderClass] is expected to work anymore.
@@ -24913,15 +25525,18 @@ func UnsafeMemoryTextureBuilderClassToGlibNone(m *MemoryTextureBuilderClass) uns
 	return unsafe.Pointer(m.native)
 }
 
-// UnsafeMemoryTextureBuilderClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeMemoryTextureBuilderClassToGlibFull(m *MemoryTextureBuilderClass) unsafe.Pointer {
-	runtime.SetFinalizer(m.memoryTextureBuilderClass, nil)
-	_p := unsafe.Pointer(m.native)
-	m.native = nil // MemoryTextureBuilderClass is invalid from here on
-	return _p
+// ParentClass returns the type struct of the parent class of this type struct.
+// This essentially casts the underlying c pointer.
+func (m *MemoryTextureBuilderClass) ParentClass() *gobject.ObjectClass {
+	parent := gobject.UnsafeObjectClassFromGlibBorrow(UnsafeMemoryTextureBuilderClassToGlibNone(m))
+	// attach a cleanup to keep the instance alive as long as the parent is referenced
+	runtime.AddCleanup(parent, func(_ *MemoryTextureBuilderClass) {}, m)
+	return parent
 }
+
 // MemoryTextureClass wraps GdkMemoryTextureClass
+// 
+// MemoryTextureClass is the type struct for [MemoryTexture]
 type MemoryTextureClass struct {
 	*memoryTextureClass
 }
@@ -24936,31 +25551,6 @@ func UnsafeMemoryTextureClassFromGlibBorrow(p unsafe.Pointer) *MemoryTextureClas
 	return &MemoryTextureClass{&memoryTextureClass{(*C.GdkMemoryTextureClass)(p)}}
 }
 
-// UnsafeMemoryTextureClassFromGlibNone is used to convert raw C.GdkMemoryTextureClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeMemoryTextureClassFromGlibNone(p unsafe.Pointer) *MemoryTextureClass {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeMemoryTextureClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.memoryTextureClass,
-		func (intern *memoryTextureClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeMemoryTextureClassFromGlibFull is used to convert raw C.GdkMemoryTextureClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeMemoryTextureClassFromGlibFull(p unsafe.Pointer) *MemoryTextureClass {
-	wrapped := UnsafeMemoryTextureClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.memoryTextureClass,
-		func (intern *memoryTextureClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
 // UnsafeMemoryTextureClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
 // 
 // After this is called, no other method on [MemoryTextureClass] is expected to work anymore.
@@ -24973,15 +25563,18 @@ func UnsafeMemoryTextureClassToGlibNone(m *MemoryTextureClass) unsafe.Pointer {
 	return unsafe.Pointer(m.native)
 }
 
-// UnsafeMemoryTextureClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeMemoryTextureClassToGlibFull(m *MemoryTextureClass) unsafe.Pointer {
-	runtime.SetFinalizer(m.memoryTextureClass, nil)
-	_p := unsafe.Pointer(m.native)
-	m.native = nil // MemoryTextureClass is invalid from here on
-	return _p
+// ParentClass returns the type struct of the parent class of this type struct.
+// This essentially casts the underlying c pointer.
+func (m *MemoryTextureClass) ParentClass() *TextureClass {
+	parent := UnsafeTextureClassFromGlibBorrow(UnsafeMemoryTextureClassToGlibNone(m))
+	// attach a cleanup to keep the instance alive as long as the parent is referenced
+	runtime.AddCleanup(parent, func(_ *MemoryTextureClass) {}, m)
+	return parent
 }
+
 // MonitorClass wraps GdkMonitorClass
+// 
+// MonitorClass is the type struct for [Monitor]
 type MonitorClass struct {
 	*monitorClass
 }
@@ -24996,31 +25589,6 @@ func UnsafeMonitorClassFromGlibBorrow(p unsafe.Pointer) *MonitorClass {
 	return &MonitorClass{&monitorClass{(*C.GdkMonitorClass)(p)}}
 }
 
-// UnsafeMonitorClassFromGlibNone is used to convert raw C.GdkMonitorClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeMonitorClassFromGlibNone(p unsafe.Pointer) *MonitorClass {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeMonitorClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.monitorClass,
-		func (intern *monitorClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeMonitorClassFromGlibFull is used to convert raw C.GdkMonitorClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeMonitorClassFromGlibFull(p unsafe.Pointer) *MonitorClass {
-	wrapped := UnsafeMonitorClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.monitorClass,
-		func (intern *monitorClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
 // UnsafeMonitorClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
 // 
 // After this is called, no other method on [MonitorClass] is expected to work anymore.
@@ -25033,14 +25601,15 @@ func UnsafeMonitorClassToGlibNone(m *MonitorClass) unsafe.Pointer {
 	return unsafe.Pointer(m.native)
 }
 
-// UnsafeMonitorClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeMonitorClassToGlibFull(m *MonitorClass) unsafe.Pointer {
-	runtime.SetFinalizer(m.monitorClass, nil)
-	_p := unsafe.Pointer(m.native)
-	m.native = nil // MonitorClass is invalid from here on
-	return _p
+// ParentClass returns the type struct of the parent class of this type struct.
+// This essentially casts the underlying c pointer.
+func (m *MonitorClass) ParentClass() *gobject.ObjectClass {
+	parent := gobject.UnsafeObjectClassFromGlibBorrow(UnsafeMonitorClassToGlibNone(m))
+	// attach a cleanup to keep the instance alive as long as the parent is referenced
+	runtime.AddCleanup(parent, func(_ *MonitorClass) {}, m)
+	return parent
 }
+
 // PaintableInterface wraps GdkPaintableInterface
 //
 // The list of functions that can be implemented for the `GdkPaintable`
@@ -25066,7 +25635,7 @@ func UnsafePaintableInterfaceFromGlibBorrow(p unsafe.Pointer) *PaintableInterfac
 	return &PaintableInterface{&paintableInterface{(*C.GdkPaintableInterface)(p)}}
 }
 
-// UnsafePaintableInterfaceFromGlibNone is used to convert raw C.GdkPaintableInterface pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafePaintableInterfaceFromGlibNone is used to convert raw C.GdkPaintableInterface pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafePaintableInterfaceFromGlibNone(p unsafe.Pointer) *PaintableInterface {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafePaintableInterfaceFromGlibBorrow(p)
@@ -25079,7 +25648,7 @@ func UnsafePaintableInterfaceFromGlibNone(p unsafe.Pointer) *PaintableInterface 
 	return wrapped
 }
 
-// UnsafePaintableInterfaceFromGlibFull is used to convert raw C.GdkPaintableInterface pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafePaintableInterfaceFromGlibFull is used to convert raw C.GdkPaintableInterface pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafePaintableInterfaceFromGlibFull(p unsafe.Pointer) *PaintableInterface {
 	wrapped := UnsafePaintableInterfaceFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -25111,6 +25680,7 @@ func UnsafePaintableInterfaceToGlibFull(p *PaintableInterface) unsafe.Pointer {
 	p.native = nil // PaintableInterface is invalid from here on
 	return _p
 }
+
 // PopupInterface wraps GdkPopupInterface
 type PopupInterface struct {
 	*popupInterface
@@ -25126,7 +25696,7 @@ func UnsafePopupInterfaceFromGlibBorrow(p unsafe.Pointer) *PopupInterface {
 	return &PopupInterface{&popupInterface{(*C.GdkPopupInterface)(p)}}
 }
 
-// UnsafePopupInterfaceFromGlibNone is used to convert raw C.GdkPopupInterface pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafePopupInterfaceFromGlibNone is used to convert raw C.GdkPopupInterface pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafePopupInterfaceFromGlibNone(p unsafe.Pointer) *PopupInterface {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafePopupInterfaceFromGlibBorrow(p)
@@ -25139,7 +25709,7 @@ func UnsafePopupInterfaceFromGlibNone(p unsafe.Pointer) *PopupInterface {
 	return wrapped
 }
 
-// UnsafePopupInterfaceFromGlibFull is used to convert raw C.GdkPopupInterface pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafePopupInterfaceFromGlibFull is used to convert raw C.GdkPopupInterface pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafePopupInterfaceFromGlibFull(p unsafe.Pointer) *PopupInterface {
 	wrapped := UnsafePopupInterfaceFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -25171,6 +25741,7 @@ func UnsafePopupInterfaceToGlibFull(p *PopupInterface) unsafe.Pointer {
 	p.native = nil // PopupInterface is invalid from here on
 	return _p
 }
+
 // PopupLayout wraps GdkPopupLayout
 //
 // The `GdkPopupLayout` struct contains information that is
@@ -25232,7 +25803,7 @@ func UnsafePopupLayoutFromGlibBorrow(p unsafe.Pointer) *PopupLayout {
 	return &PopupLayout{&popupLayout{(*C.GdkPopupLayout)(p)}}
 }
 
-// UnsafePopupLayoutFromGlibNone is used to convert raw C.GdkPopupLayout pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafePopupLayoutFromGlibNone is used to convert raw C.GdkPopupLayout pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafePopupLayoutFromGlibNone(p unsafe.Pointer) *PopupLayout {
 	C.gdk_popup_layout_ref((*C.GdkPopupLayout)(p))
 	wrapped := UnsafePopupLayoutFromGlibBorrow(p)
@@ -25245,7 +25816,7 @@ func UnsafePopupLayoutFromGlibNone(p unsafe.Pointer) *PopupLayout {
 	return wrapped
 }
 
-// UnsafePopupLayoutFromGlibFull is used to convert raw C.GdkPopupLayout pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafePopupLayoutFromGlibFull is used to convert raw C.GdkPopupLayout pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafePopupLayoutFromGlibFull(p unsafe.Pointer) *PopupLayout {
 	wrapped := UnsafePopupLayoutFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -25284,6 +25855,7 @@ func UnsafePopupLayoutToGlibFull(p *PopupLayout) unsafe.Pointer {
 	p.native = nil // PopupLayout is invalid from here on
 	return _p
 }
+
 // NewPopupLayout wraps gdk_popup_layout_new
 // 
 // The function takes the following parameters:
@@ -25331,6 +25903,7 @@ func NewPopupLayout(anchorRect *Rectangle, rectAnchor Gravity, surfaceAnchor Gra
 }
 
 // Copy wraps gdk_popup_layout_copy
+// 
 // The function returns the following values:
 // 
 // 	- goret *PopupLayout 
@@ -25385,6 +25958,7 @@ func (layout *PopupLayout) Equal(other *PopupLayout) bool {
 }
 
 // GetAnchorHints wraps gdk_popup_layout_get_anchor_hints
+// 
 // The function returns the following values:
 // 
 // 	- goret AnchorHints 
@@ -25407,6 +25981,7 @@ func (layout *PopupLayout) GetAnchorHints() AnchorHints {
 }
 
 // GetAnchorRect wraps gdk_popup_layout_get_anchor_rect
+// 
 // The function returns the following values:
 // 
 // 	- goret *Rectangle 
@@ -25429,6 +26004,7 @@ func (layout *PopupLayout) GetAnchorRect() *Rectangle {
 }
 
 // GetOffset wraps gdk_popup_layout_get_offset
+// 
 // The function returns the following values:
 // 
 // 	- dx int: return location for the delta X coordinate 
@@ -25455,6 +26031,7 @@ func (layout *PopupLayout) GetOffset() (int, int) {
 }
 
 // GetRectAnchor wraps gdk_popup_layout_get_rect_anchor
+// 
 // The function returns the following values:
 // 
 // 	- goret Gravity 
@@ -25477,6 +26054,7 @@ func (layout *PopupLayout) GetRectAnchor() Gravity {
 }
 
 // GetShadowWidth wraps gdk_popup_layout_get_shadow_width
+// 
 // The function returns the following values:
 // 
 // 	- left int: return location for the left shadow width 
@@ -25511,6 +26089,7 @@ func (layout *PopupLayout) GetShadowWidth() (int, int, int, int) {
 }
 
 // GetSurfaceAnchor wraps gdk_popup_layout_get_surface_anchor
+// 
 // The function returns the following values:
 // 
 // 	- goret Gravity 
@@ -25709,7 +26288,7 @@ func UnsafeRGBAFromGlibBorrow(p unsafe.Pointer) *RGBA {
 	return &RGBA{&rgbA{(*C.GdkRGBA)(p)}}
 }
 
-// UnsafeRGBAFromGlibNone is used to convert raw C.GdkRGBA pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeRGBAFromGlibNone is used to convert raw C.GdkRGBA pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeRGBAFromGlibNone(p unsafe.Pointer) *RGBA {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeRGBAFromGlibBorrow(p)
@@ -25722,7 +26301,7 @@ func UnsafeRGBAFromGlibNone(p unsafe.Pointer) *RGBA {
 	return wrapped
 }
 
-// UnsafeRGBAFromGlibFull is used to convert raw C.GdkRGBA pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeRGBAFromGlibFull is used to convert raw C.GdkRGBA pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeRGBAFromGlibFull(p unsafe.Pointer) *RGBA {
 	wrapped := UnsafeRGBAFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -25754,7 +26333,9 @@ func UnsafeRGBAToGlibFull(r *RGBA) unsafe.Pointer {
 	r.native = nil // RGBA is invalid from here on
 	return _p
 }
+
 // Copy wraps gdk_rgba_copy
+// 
 // The function returns the following values:
 // 
 // 	- goret *RGBA 
@@ -25779,6 +26360,7 @@ func (rgba *RGBA) Copy() *RGBA {
 }
 
 // IsClear wraps gdk_rgba_is_clear
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -25805,6 +26387,7 @@ func (rgba *RGBA) IsClear() bool {
 }
 
 // IsOpaque wraps gdk_rgba_is_opaque
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -25884,6 +26467,7 @@ func (rgba *RGBA) Parse(spec string) bool {
 }
 
 // ToString wraps gdk_rgba_to_string
+// 
 // The function returns the following values:
 // 
 // 	- goret string 
@@ -25961,7 +26545,7 @@ func UnsafeRectangleFromGlibBorrow(p unsafe.Pointer) *Rectangle {
 	return &Rectangle{&rectangle{(*C.GdkRectangle)(p)}}
 }
 
-// UnsafeRectangleFromGlibNone is used to convert raw C.GdkRectangle pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeRectangleFromGlibNone is used to convert raw C.GdkRectangle pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeRectangleFromGlibNone(p unsafe.Pointer) *Rectangle {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeRectangleFromGlibBorrow(p)
@@ -25974,7 +26558,7 @@ func UnsafeRectangleFromGlibNone(p unsafe.Pointer) *Rectangle {
 	return wrapped
 }
 
-// UnsafeRectangleFromGlibFull is used to convert raw C.GdkRectangle pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeRectangleFromGlibFull is used to convert raw C.GdkRectangle pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeRectangleFromGlibFull(p unsafe.Pointer) *Rectangle {
 	wrapped := UnsafeRectangleFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -26006,6 +26590,7 @@ func UnsafeRectangleToGlibFull(r *Rectangle) unsafe.Pointer {
 	r.native = nil // Rectangle is invalid from here on
 	return _p
 }
+
 // ContainsPoint wraps gdk_rectangle_contains_point
 // 
 // The function takes the following parameters:
@@ -26159,6 +26744,8 @@ func (src1 *Rectangle) Union(src2 *Rectangle) Rectangle {
 }
 
 // SnapshotClass wraps GdkSnapshotClass
+// 
+// SnapshotClass is the type struct for [Snapshot]
 type SnapshotClass struct {
 	*snapshotClass
 }
@@ -26173,31 +26760,6 @@ func UnsafeSnapshotClassFromGlibBorrow(p unsafe.Pointer) *SnapshotClass {
 	return &SnapshotClass{&snapshotClass{(*C.GdkSnapshotClass)(p)}}
 }
 
-// UnsafeSnapshotClassFromGlibNone is used to convert raw C.GdkSnapshotClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeSnapshotClassFromGlibNone(p unsafe.Pointer) *SnapshotClass {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeSnapshotClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.snapshotClass,
-		func (intern *snapshotClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeSnapshotClassFromGlibFull is used to convert raw C.GdkSnapshotClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeSnapshotClassFromGlibFull(p unsafe.Pointer) *SnapshotClass {
-	wrapped := UnsafeSnapshotClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.snapshotClass,
-		func (intern *snapshotClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
 // UnsafeSnapshotClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
 // 
 // After this is called, no other method on [SnapshotClass] is expected to work anymore.
@@ -26210,15 +26772,18 @@ func UnsafeSnapshotClassToGlibNone(s *SnapshotClass) unsafe.Pointer {
 	return unsafe.Pointer(s.native)
 }
 
-// UnsafeSnapshotClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeSnapshotClassToGlibFull(s *SnapshotClass) unsafe.Pointer {
-	runtime.SetFinalizer(s.snapshotClass, nil)
-	_p := unsafe.Pointer(s.native)
-	s.native = nil // SnapshotClass is invalid from here on
-	return _p
+// ParentClass returns the type struct of the parent class of this type struct.
+// This essentially casts the underlying c pointer.
+func (s *SnapshotClass) ParentClass() *gobject.ObjectClass {
+	parent := gobject.UnsafeObjectClassFromGlibBorrow(UnsafeSnapshotClassToGlibNone(s))
+	// attach a cleanup to keep the instance alive as long as the parent is referenced
+	runtime.AddCleanup(parent, func(_ *SnapshotClass) {}, s)
+	return parent
 }
+
 // SurfaceClass wraps GdkSurfaceClass
+// 
+// SurfaceClass is the type struct for [Surface]
 type SurfaceClass struct {
 	*surfaceClass
 }
@@ -26233,31 +26798,6 @@ func UnsafeSurfaceClassFromGlibBorrow(p unsafe.Pointer) *SurfaceClass {
 	return &SurfaceClass{&surfaceClass{(*C.GdkSurfaceClass)(p)}}
 }
 
-// UnsafeSurfaceClassFromGlibNone is used to convert raw C.GdkSurfaceClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeSurfaceClassFromGlibNone(p unsafe.Pointer) *SurfaceClass {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeSurfaceClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.surfaceClass,
-		func (intern *surfaceClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeSurfaceClassFromGlibFull is used to convert raw C.GdkSurfaceClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeSurfaceClassFromGlibFull(p unsafe.Pointer) *SurfaceClass {
-	wrapped := UnsafeSurfaceClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.surfaceClass,
-		func (intern *surfaceClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
 // UnsafeSurfaceClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
 // 
 // After this is called, no other method on [SurfaceClass] is expected to work anymore.
@@ -26270,15 +26810,18 @@ func UnsafeSurfaceClassToGlibNone(s *SurfaceClass) unsafe.Pointer {
 	return unsafe.Pointer(s.native)
 }
 
-// UnsafeSurfaceClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeSurfaceClassToGlibFull(s *SurfaceClass) unsafe.Pointer {
-	runtime.SetFinalizer(s.surfaceClass, nil)
-	_p := unsafe.Pointer(s.native)
-	s.native = nil // SurfaceClass is invalid from here on
-	return _p
+// ParentClass returns the type struct of the parent class of this type struct.
+// This essentially casts the underlying c pointer.
+func (s *SurfaceClass) ParentClass() *gobject.ObjectClass {
+	parent := gobject.UnsafeObjectClassFromGlibBorrow(UnsafeSurfaceClassToGlibNone(s))
+	// attach a cleanup to keep the instance alive as long as the parent is referenced
+	runtime.AddCleanup(parent, func(_ *SurfaceClass) {}, s)
+	return parent
 }
+
 // TextureClass wraps GdkTextureClass
+// 
+// TextureClass is the type struct for [Texture]
 type TextureClass struct {
 	*textureClass
 }
@@ -26293,31 +26836,6 @@ func UnsafeTextureClassFromGlibBorrow(p unsafe.Pointer) *TextureClass {
 	return &TextureClass{&textureClass{(*C.GdkTextureClass)(p)}}
 }
 
-// UnsafeTextureClassFromGlibNone is used to convert raw C.GdkTextureClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeTextureClassFromGlibNone(p unsafe.Pointer) *TextureClass {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeTextureClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.textureClass,
-		func (intern *textureClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeTextureClassFromGlibFull is used to convert raw C.GdkTextureClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeTextureClassFromGlibFull(p unsafe.Pointer) *TextureClass {
-	wrapped := UnsafeTextureClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.textureClass,
-		func (intern *textureClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
 // UnsafeTextureClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
 // 
 // After this is called, no other method on [TextureClass] is expected to work anymore.
@@ -26330,14 +26848,15 @@ func UnsafeTextureClassToGlibNone(t *TextureClass) unsafe.Pointer {
 	return unsafe.Pointer(t.native)
 }
 
-// UnsafeTextureClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeTextureClassToGlibFull(t *TextureClass) unsafe.Pointer {
-	runtime.SetFinalizer(t.textureClass, nil)
-	_p := unsafe.Pointer(t.native)
-	t.native = nil // TextureClass is invalid from here on
-	return _p
+// ParentClass returns the type struct of the parent class of this type struct.
+// This essentially casts the underlying c pointer.
+func (t *TextureClass) ParentClass() *gobject.ObjectClass {
+	parent := gobject.UnsafeObjectClassFromGlibBorrow(UnsafeTextureClassToGlibNone(t))
+	// attach a cleanup to keep the instance alive as long as the parent is referenced
+	runtime.AddCleanup(parent, func(_ *TextureClass) {}, t)
+	return parent
 }
+
 // TextureDownloader wraps GdkTextureDownloader
 //
 // The `GdkTextureDownloader` is used to download the contents of a
@@ -26376,7 +26895,7 @@ func UnsafeTextureDownloaderFromGlibBorrow(p unsafe.Pointer) *TextureDownloader 
 	return &TextureDownloader{&textureDownloader{(*C.GdkTextureDownloader)(p)}}
 }
 
-// UnsafeTextureDownloaderFromGlibNone is used to convert raw C.GdkTextureDownloader pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeTextureDownloaderFromGlibNone is used to convert raw C.GdkTextureDownloader pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeTextureDownloaderFromGlibNone(p unsafe.Pointer) *TextureDownloader {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeTextureDownloaderFromGlibBorrow(p)
@@ -26389,7 +26908,7 @@ func UnsafeTextureDownloaderFromGlibNone(p unsafe.Pointer) *TextureDownloader {
 	return wrapped
 }
 
-// UnsafeTextureDownloaderFromGlibFull is used to convert raw C.GdkTextureDownloader pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeTextureDownloaderFromGlibFull is used to convert raw C.GdkTextureDownloader pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeTextureDownloaderFromGlibFull(p unsafe.Pointer) *TextureDownloader {
 	wrapped := UnsafeTextureDownloaderFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -26421,6 +26940,7 @@ func UnsafeTextureDownloaderToGlibFull(t *TextureDownloader) unsafe.Pointer {
 	t.native = nil // TextureDownloader is invalid from here on
 	return _p
 }
+
 // NewTextureDownloader wraps gdk_texture_downloader_new
 // 
 // The function takes the following parameters:
@@ -26452,6 +26972,7 @@ func NewTextureDownloader(texture Texture) *TextureDownloader {
 }
 
 // Copy wraps gdk_texture_downloader_copy
+// 
 // The function returns the following values:
 // 
 // 	- goret *TextureDownloader 
@@ -26476,6 +26997,7 @@ func (self *TextureDownloader) Copy() *TextureDownloader {
 }
 
 // DownloadBytes wraps gdk_texture_downloader_download_bytes
+// 
 // The function returns the following values:
 // 
 // 	- outStride uint: The stride of the resulting data in bytes 
@@ -26508,6 +27030,7 @@ func (self *TextureDownloader) DownloadBytes() (uint, *glib.Bytes) {
 }
 
 // GetColorState wraps gdk_texture_downloader_get_color_state
+// 
 // The function returns the following values:
 // 
 // 	- goret *ColorState 
@@ -26530,6 +27053,7 @@ func (self *TextureDownloader) GetColorState() *ColorState {
 }
 
 // GetFormat wraps gdk_texture_downloader_get_format
+// 
 // The function returns the following values:
 // 
 // 	- goret MemoryFormat 
@@ -26552,6 +27076,7 @@ func (self *TextureDownloader) GetFormat() MemoryFormat {
 }
 
 // GetTexture wraps gdk_texture_downloader_get_texture
+// 
 // The function returns the following values:
 // 
 // 	- goret Texture 
@@ -26657,7 +27182,7 @@ func UnsafeTimeCoordFromGlibBorrow(p unsafe.Pointer) *TimeCoord {
 	return &TimeCoord{&timeCoord{(*C.GdkTimeCoord)(p)}}
 }
 
-// UnsafeTimeCoordFromGlibNone is used to convert raw C.GdkTimeCoord pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeTimeCoordFromGlibNone is used to convert raw C.GdkTimeCoord pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeTimeCoordFromGlibNone(p unsafe.Pointer) *TimeCoord {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeTimeCoordFromGlibBorrow(p)
@@ -26670,7 +27195,7 @@ func UnsafeTimeCoordFromGlibNone(p unsafe.Pointer) *TimeCoord {
 	return wrapped
 }
 
-// UnsafeTimeCoordFromGlibFull is used to convert raw C.GdkTimeCoord pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeTimeCoordFromGlibFull is used to convert raw C.GdkTimeCoord pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeTimeCoordFromGlibFull(p unsafe.Pointer) *TimeCoord {
 	wrapped := UnsafeTimeCoordFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -26702,6 +27227,7 @@ func UnsafeTimeCoordToGlibFull(t *TimeCoord) unsafe.Pointer {
 	t.native = nil // TimeCoord is invalid from here on
 	return _p
 }
+
 // ToplevelInterface wraps GdkToplevelInterface
 type ToplevelInterface struct {
 	*toplevelInterface
@@ -26717,7 +27243,7 @@ func UnsafeToplevelInterfaceFromGlibBorrow(p unsafe.Pointer) *ToplevelInterface 
 	return &ToplevelInterface{&toplevelInterface{(*C.GdkToplevelInterface)(p)}}
 }
 
-// UnsafeToplevelInterfaceFromGlibNone is used to convert raw C.GdkToplevelInterface pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeToplevelInterfaceFromGlibNone is used to convert raw C.GdkToplevelInterface pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeToplevelInterfaceFromGlibNone(p unsafe.Pointer) *ToplevelInterface {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeToplevelInterfaceFromGlibBorrow(p)
@@ -26730,7 +27256,7 @@ func UnsafeToplevelInterfaceFromGlibNone(p unsafe.Pointer) *ToplevelInterface {
 	return wrapped
 }
 
-// UnsafeToplevelInterfaceFromGlibFull is used to convert raw C.GdkToplevelInterface pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeToplevelInterfaceFromGlibFull is used to convert raw C.GdkToplevelInterface pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeToplevelInterfaceFromGlibFull(p unsafe.Pointer) *ToplevelInterface {
 	wrapped := UnsafeToplevelInterfaceFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -26762,6 +27288,7 @@ func UnsafeToplevelInterfaceToGlibFull(t *ToplevelInterface) unsafe.Pointer {
 	t.native = nil // ToplevelInterface is invalid from here on
 	return _p
 }
+
 // ToplevelLayout wraps GdkToplevelLayout
 //
 // The `GdkToplevelLayout` struct contains information that
@@ -26799,7 +27326,7 @@ func UnsafeToplevelLayoutFromGlibBorrow(p unsafe.Pointer) *ToplevelLayout {
 	return &ToplevelLayout{&toplevelLayout{(*C.GdkToplevelLayout)(p)}}
 }
 
-// UnsafeToplevelLayoutFromGlibNone is used to convert raw C.GdkToplevelLayout pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeToplevelLayoutFromGlibNone is used to convert raw C.GdkToplevelLayout pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeToplevelLayoutFromGlibNone(p unsafe.Pointer) *ToplevelLayout {
 	C.gdk_toplevel_layout_ref((*C.GdkToplevelLayout)(p))
 	wrapped := UnsafeToplevelLayoutFromGlibBorrow(p)
@@ -26812,7 +27339,7 @@ func UnsafeToplevelLayoutFromGlibNone(p unsafe.Pointer) *ToplevelLayout {
 	return wrapped
 }
 
-// UnsafeToplevelLayoutFromGlibFull is used to convert raw C.GdkToplevelLayout pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeToplevelLayoutFromGlibFull is used to convert raw C.GdkToplevelLayout pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeToplevelLayoutFromGlibFull(p unsafe.Pointer) *ToplevelLayout {
 	wrapped := UnsafeToplevelLayoutFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -26851,7 +27378,9 @@ func UnsafeToplevelLayoutToGlibFull(t *ToplevelLayout) unsafe.Pointer {
 	t.native = nil // ToplevelLayout is invalid from here on
 	return _p
 }
+
 // NewToplevelLayout wraps gdk_toplevel_layout_new
+// 
 // The function returns the following values:
 // 
 // 	- goret *ToplevelLayout 
@@ -26876,6 +27405,7 @@ func NewToplevelLayout() *ToplevelLayout {
 }
 
 // Copy wraps gdk_toplevel_layout_copy
+// 
 // The function returns the following values:
 // 
 // 	- goret *ToplevelLayout 
@@ -26930,6 +27460,7 @@ func (layout *ToplevelLayout) Equal(other *ToplevelLayout) bool {
 }
 
 // GetFullscreen wraps gdk_toplevel_layout_get_fullscreen
+// 
 // The function returns the following values:
 // 
 // 	- fullscreen bool: location to store whether the toplevel should be fullscreen 
@@ -26962,6 +27493,7 @@ func (layout *ToplevelLayout) GetFullscreen() (bool, bool) {
 }
 
 // GetFullscreenMonitor wraps gdk_toplevel_layout_get_fullscreen_monitor
+// 
 // The function returns the following values:
 // 
 // 	- goret Monitor (nullable) 
@@ -26987,6 +27519,7 @@ func (layout *ToplevelLayout) GetFullscreenMonitor() Monitor {
 }
 
 // GetMaximized wraps gdk_toplevel_layout_get_maximized
+// 
 // The function returns the following values:
 // 
 // 	- maximized bool: set to %TRUE if the toplevel should be maximized 
@@ -27019,6 +27552,7 @@ func (layout *ToplevelLayout) GetMaximized() (bool, bool) {
 }
 
 // GetResizable wraps gdk_toplevel_layout_get_resizable
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -27145,7 +27679,7 @@ func UnsafeToplevelSizeFromGlibBorrow(p unsafe.Pointer) *ToplevelSize {
 	return &ToplevelSize{&toplevelSize{(*C.GdkToplevelSize)(p)}}
 }
 
-// UnsafeToplevelSizeFromGlibNone is used to convert raw C.GdkToplevelSize pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeToplevelSizeFromGlibNone is used to convert raw C.GdkToplevelSize pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeToplevelSizeFromGlibNone(p unsafe.Pointer) *ToplevelSize {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeToplevelSizeFromGlibBorrow(p)
@@ -27158,7 +27692,7 @@ func UnsafeToplevelSizeFromGlibNone(p unsafe.Pointer) *ToplevelSize {
 	return wrapped
 }
 
-// UnsafeToplevelSizeFromGlibFull is used to convert raw C.GdkToplevelSize pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeToplevelSizeFromGlibFull is used to convert raw C.GdkToplevelSize pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeToplevelSizeFromGlibFull(p unsafe.Pointer) *ToplevelSize {
 	wrapped := UnsafeToplevelSizeFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -27190,7 +27724,9 @@ func UnsafeToplevelSizeToGlibFull(t *ToplevelSize) unsafe.Pointer {
 	t.native = nil // ToplevelSize is invalid from here on
 	return _p
 }
+
 // GetBounds wraps gdk_toplevel_size_get_bounds
+// 
 // The function returns the following values:
 // 
 // 	- boundsWidth int: return location for width 

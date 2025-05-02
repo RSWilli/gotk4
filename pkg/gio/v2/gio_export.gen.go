@@ -252,3 +252,2353 @@ func _gotk4_gio2_VFSFileLookupFunc(carg1 *C.GVfs, carg2 *C.char, carg3 C.gpointe
 	return cret
 }
 
+//export _gotk4_gio2_Action_get_enabled
+func _gotk4_gio2_Action_get_enabled(carg0 *C.GAction) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Action_get_name
+func _gotk4_gio2_Action_get_name(carg0 *C.GAction) (cret *C.gchar) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Action_get_parameter_type
+func _gotk4_gio2_Action_get_parameter_type(carg0 *C.GAction) (cret *C.GVariantType) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Action_get_state_type
+func _gotk4_gio2_Action_get_state_type(carg0 *C.GAction) (cret *C.GVariantType) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_ActionGroup_action_added
+func _gotk4_gio2_ActionGroup_action_added(carg0 *C.GActionGroup, carg1 *C.gchar) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_ActionGroup_action_enabled_changed
+func _gotk4_gio2_ActionGroup_action_enabled_changed(carg0 *C.GActionGroup, carg1 *C.gchar, carg2 C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_ActionGroup_action_removed
+func _gotk4_gio2_ActionGroup_action_removed(carg0 *C.GActionGroup, carg1 *C.gchar) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_ActionGroup_get_action_enabled
+func _gotk4_gio2_ActionGroup_get_action_enabled(carg0 *C.GActionGroup, carg1 *C.gchar) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_ActionGroup_get_action_parameter_type
+func _gotk4_gio2_ActionGroup_get_action_parameter_type(carg0 *C.GActionGroup, carg1 *C.gchar) (cret *C.GVariantType) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_ActionGroup_get_action_state_type
+func _gotk4_gio2_ActionGroup_get_action_state_type(carg0 *C.GActionGroup, carg1 *C.gchar) (cret *C.GVariantType) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_ActionGroup_has_action
+func _gotk4_gio2_ActionGroup_has_action(carg0 *C.GActionGroup, carg1 *C.gchar) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_ActionGroup_list_actions
+func _gotk4_gio2_ActionGroup_list_actions(carg0 *C.GActionGroup) (cret **C.gchar) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_ActionMap_add_action
+func _gotk4_gio2_ActionMap_add_action(carg0 *C.GActionMap, carg1 *C.GAction) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_ActionMap_lookup_action
+func _gotk4_gio2_ActionMap_lookup_action(carg0 *C.GActionMap, carg1 *C.gchar) (cret *C.GAction) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_ActionMap_remove_action
+func _gotk4_gio2_ActionMap_remove_action(carg0 *C.GActionMap, carg1 *C.gchar) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_AppInfo_add_supports_type
+func _gotk4_gio2_AppInfo_add_supports_type(carg0 *C.GAppInfo, carg1 *C.char, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_AppInfo_can_delete
+func _gotk4_gio2_AppInfo_can_delete(carg0 *C.GAppInfo) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_AppInfo_can_remove_supports_type
+func _gotk4_gio2_AppInfo_can_remove_supports_type(carg0 *C.GAppInfo) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_AppInfo_do_delete
+func _gotk4_gio2_AppInfo_do_delete(carg0 *C.GAppInfo) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_AppInfo_dup
+func _gotk4_gio2_AppInfo_dup(carg0 *C.GAppInfo) (cret *C.GAppInfo) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_AppInfo_equal
+func _gotk4_gio2_AppInfo_equal(carg0 *C.GAppInfo, carg1 *C.GAppInfo) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_AppInfo_get_commandline
+func _gotk4_gio2_AppInfo_get_commandline(carg0 *C.GAppInfo) (cret *C.char) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_AppInfo_get_description
+func _gotk4_gio2_AppInfo_get_description(carg0 *C.GAppInfo) (cret *C.char) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_AppInfo_get_display_name
+func _gotk4_gio2_AppInfo_get_display_name(carg0 *C.GAppInfo) (cret *C.char) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_AppInfo_get_executable
+func _gotk4_gio2_AppInfo_get_executable(carg0 *C.GAppInfo) (cret *C.char) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_AppInfo_get_icon
+func _gotk4_gio2_AppInfo_get_icon(carg0 *C.GAppInfo) (cret *C.GIcon) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_AppInfo_get_id
+func _gotk4_gio2_AppInfo_get_id(carg0 *C.GAppInfo) (cret *C.char) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_AppInfo_get_name
+func _gotk4_gio2_AppInfo_get_name(carg0 *C.GAppInfo) (cret *C.char) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_AppInfo_get_supported_types
+func _gotk4_gio2_AppInfo_get_supported_types(carg0 *C.GAppInfo) (cret **C.char) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_AppInfo_launch_uris_finish
+func _gotk4_gio2_AppInfo_launch_uris_finish(carg0 *C.GAppInfo, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_AppInfo_remove_supports_type
+func _gotk4_gio2_AppInfo_remove_supports_type(carg0 *C.GAppInfo, carg1 *C.char, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_AppInfo_set_as_default_for_extension
+func _gotk4_gio2_AppInfo_set_as_default_for_extension(carg0 *C.GAppInfo, carg1 *C.char, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_AppInfo_set_as_default_for_type
+func _gotk4_gio2_AppInfo_set_as_default_for_type(carg0 *C.GAppInfo, carg1 *C.char, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_AppInfo_set_as_last_used_for_type
+func _gotk4_gio2_AppInfo_set_as_last_used_for_type(carg0 *C.GAppInfo, carg1 *C.char, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_AppInfo_should_show
+func _gotk4_gio2_AppInfo_should_show(carg0 *C.GAppInfo) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_AppInfo_supports_files
+func _gotk4_gio2_AppInfo_supports_files(carg0 *C.GAppInfo) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_AppInfo_supports_uris
+func _gotk4_gio2_AppInfo_supports_uris(carg0 *C.GAppInfo) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_AsyncInitable_init_async
+func _gotk4_gio2_AsyncInitable_init_async(carg0 *C.GAsyncInitable, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_AsyncInitable_init_finish
+func _gotk4_gio2_AsyncInitable_init_finish(carg0 *C.GAsyncInitable, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_AsyncResult_get_source_object
+func _gotk4_gio2_AsyncResult_get_source_object(carg0 *C.GAsyncResult) (cret *C.GObject) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Converter_convert
+func _gotk4_gio2_Converter_convert(carg0 *C.GConverter, carg1 unsafe.Pointer, carg2 C.gsize, carg3 unsafe.Pointer, carg4 C.gsize, carg5 C.GConverterFlags, carg6 *C.gsize, carg7 *C.gsize, _cerr **C.GError) (cret C.GConverterResult) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Converter_reset
+func _gotk4_gio2_Converter_reset(carg0 *C.GConverter) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_DBusInterface_dup_object
+func _gotk4_gio2_DBusInterface_dup_object(carg0 *C.GDBusInterface) (cret *C.GDBusObject) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_DBusInterface_get_info
+func _gotk4_gio2_DBusInterface_get_info(carg0 *C.GDBusInterface) (cret *C.GDBusInterfaceInfo) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_DBusInterface_set_object
+func _gotk4_gio2_DBusInterface_set_object(carg0 *C.GDBusInterface, carg1 *C.GDBusObject) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_DBusObject_get_interface
+func _gotk4_gio2_DBusObject_get_interface(carg0 *C.GDBusObject, carg1 *C.gchar) (cret *C.GDBusInterface) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_DBusObject_get_interfaces
+func _gotk4_gio2_DBusObject_get_interfaces(carg0 *C.GDBusObject) (cret *C.GList) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_DBusObject_get_object_path
+func _gotk4_gio2_DBusObject_get_object_path(carg0 *C.GDBusObject) (cret *C.gchar) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_DBusObject_interface_added
+func _gotk4_gio2_DBusObject_interface_added(carg0 *C.GDBusObject, carg1 *C.GDBusInterface) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_DBusObject_interface_removed
+func _gotk4_gio2_DBusObject_interface_removed(carg0 *C.GDBusObject, carg1 *C.GDBusInterface) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_DBusObjectManager_get_interface
+func _gotk4_gio2_DBusObjectManager_get_interface(carg0 *C.GDBusObjectManager, carg1 *C.gchar, carg2 *C.gchar) (cret *C.GDBusInterface) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_DBusObjectManager_get_object
+func _gotk4_gio2_DBusObjectManager_get_object(carg0 *C.GDBusObjectManager, carg1 *C.gchar) (cret *C.GDBusObject) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_DBusObjectManager_get_object_path
+func _gotk4_gio2_DBusObjectManager_get_object_path(carg0 *C.GDBusObjectManager) (cret *C.gchar) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_DBusObjectManager_get_objects
+func _gotk4_gio2_DBusObjectManager_get_objects(carg0 *C.GDBusObjectManager) (cret *C.GList) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_DBusObjectManager_interface_added
+func _gotk4_gio2_DBusObjectManager_interface_added(carg0 *C.GDBusObjectManager, carg1 *C.GDBusObject, carg2 *C.GDBusInterface) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_DBusObjectManager_interface_removed
+func _gotk4_gio2_DBusObjectManager_interface_removed(carg0 *C.GDBusObjectManager, carg1 *C.GDBusObject, carg2 *C.GDBusInterface) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_DBusObjectManager_object_added
+func _gotk4_gio2_DBusObjectManager_object_added(carg0 *C.GDBusObjectManager, carg1 *C.GDBusObject) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_DBusObjectManager_object_removed
+func _gotk4_gio2_DBusObjectManager_object_removed(carg0 *C.GDBusObjectManager, carg1 *C.GDBusObject) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_DatagramBased_condition_check
+func _gotk4_gio2_DatagramBased_condition_check(carg0 *C.GDatagramBased, carg1 C.GIOCondition) (cret C.GIOCondition) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_DatagramBased_condition_wait
+func _gotk4_gio2_DatagramBased_condition_wait(carg0 *C.GDatagramBased, carg1 C.GIOCondition, carg2 C.gint64, carg3 *C.GCancellable, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_DatagramBased_create_source
+func _gotk4_gio2_DatagramBased_create_source(carg0 *C.GDatagramBased, carg1 C.GIOCondition, carg2 *C.GCancellable) (cret *C.GSource) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_DatagramBased_receive_messages
+func _gotk4_gio2_DatagramBased_receive_messages(carg0 *C.GDatagramBased, carg1 *C.GInputMessage, carg2 C.guint, carg3 C.gint, carg4 C.gint64, carg5 *C.GCancellable, _cerr **C.GError) (cret C.gint) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_DatagramBased_send_messages
+func _gotk4_gio2_DatagramBased_send_messages(carg0 *C.GDatagramBased, carg1 *C.GOutputMessage, carg2 C.guint, carg3 C.gint, carg4 C.gint64, carg5 *C.GCancellable, _cerr **C.GError) (cret C.gint) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Drive_can_eject
+func _gotk4_gio2_Drive_can_eject(carg0 *C.GDrive) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Drive_can_poll_for_media
+func _gotk4_gio2_Drive_can_poll_for_media(carg0 *C.GDrive) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Drive_can_start
+func _gotk4_gio2_Drive_can_start(carg0 *C.GDrive) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Drive_can_start_degraded
+func _gotk4_gio2_Drive_can_start_degraded(carg0 *C.GDrive) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Drive_can_stop
+func _gotk4_gio2_Drive_can_stop(carg0 *C.GDrive) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Drive_changed
+func _gotk4_gio2_Drive_changed(carg0 *C.GDrive) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Drive_disconnected
+func _gotk4_gio2_Drive_disconnected(carg0 *C.GDrive) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Drive_eject
+func _gotk4_gio2_Drive_eject(carg0 *C.GDrive, carg1 C.GMountUnmountFlags, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Drive_eject_button
+func _gotk4_gio2_Drive_eject_button(carg0 *C.GDrive) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Drive_eject_finish
+func _gotk4_gio2_Drive_eject_finish(carg0 *C.GDrive, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Drive_eject_with_operation
+func _gotk4_gio2_Drive_eject_with_operation(carg0 *C.GDrive, carg1 C.GMountUnmountFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Drive_eject_with_operation_finish
+func _gotk4_gio2_Drive_eject_with_operation_finish(carg0 *C.GDrive, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Drive_enumerate_identifiers
+func _gotk4_gio2_Drive_enumerate_identifiers(carg0 *C.GDrive) (cret **C.char) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Drive_get_icon
+func _gotk4_gio2_Drive_get_icon(carg0 *C.GDrive) (cret *C.GIcon) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Drive_get_identifier
+func _gotk4_gio2_Drive_get_identifier(carg0 *C.GDrive, carg1 *C.char) (cret *C.char) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Drive_get_name
+func _gotk4_gio2_Drive_get_name(carg0 *C.GDrive) (cret *C.char) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Drive_get_sort_key
+func _gotk4_gio2_Drive_get_sort_key(carg0 *C.GDrive) (cret *C.gchar) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Drive_get_start_stop_type
+func _gotk4_gio2_Drive_get_start_stop_type(carg0 *C.GDrive) (cret C.GDriveStartStopType) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Drive_get_symbolic_icon
+func _gotk4_gio2_Drive_get_symbolic_icon(carg0 *C.GDrive) (cret *C.GIcon) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Drive_get_volumes
+func _gotk4_gio2_Drive_get_volumes(carg0 *C.GDrive) (cret *C.GList) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Drive_has_media
+func _gotk4_gio2_Drive_has_media(carg0 *C.GDrive) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Drive_has_volumes
+func _gotk4_gio2_Drive_has_volumes(carg0 *C.GDrive) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Drive_is_media_check_automatic
+func _gotk4_gio2_Drive_is_media_check_automatic(carg0 *C.GDrive) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Drive_is_media_removable
+func _gotk4_gio2_Drive_is_media_removable(carg0 *C.GDrive) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Drive_is_removable
+func _gotk4_gio2_Drive_is_removable(carg0 *C.GDrive) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Drive_poll_for_media
+func _gotk4_gio2_Drive_poll_for_media(carg0 *C.GDrive, carg1 *C.GCancellable, carg2 C.GAsyncReadyCallback, carg3 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Drive_poll_for_media_finish
+func _gotk4_gio2_Drive_poll_for_media_finish(carg0 *C.GDrive, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Drive_start
+func _gotk4_gio2_Drive_start(carg0 *C.GDrive, carg1 C.GDriveStartFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Drive_start_finish
+func _gotk4_gio2_Drive_start_finish(carg0 *C.GDrive, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Drive_stop
+func _gotk4_gio2_Drive_stop(carg0 *C.GDrive, carg1 C.GMountUnmountFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Drive_stop_button
+func _gotk4_gio2_Drive_stop_button(carg0 *C.GDrive) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Drive_stop_finish
+func _gotk4_gio2_Drive_stop_finish(carg0 *C.GDrive, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_DtlsConnection_accept_certificate
+func _gotk4_gio2_DtlsConnection_accept_certificate(carg0 *C.GDtlsConnection, carg1 *C.GTlsCertificate, carg2 C.GTlsCertificateFlags) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_DtlsConnection_get_negotiated_protocol
+func _gotk4_gio2_DtlsConnection_get_negotiated_protocol(carg0 *C.GDtlsConnection) (cret *C.gchar) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_DtlsConnection_handshake
+func _gotk4_gio2_DtlsConnection_handshake(carg0 *C.GDtlsConnection, carg1 *C.GCancellable, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_DtlsConnection_handshake_async
+func _gotk4_gio2_DtlsConnection_handshake_async(carg0 *C.GDtlsConnection, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_DtlsConnection_handshake_finish
+func _gotk4_gio2_DtlsConnection_handshake_finish(carg0 *C.GDtlsConnection, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_DtlsConnection_set_advertised_protocols
+func _gotk4_gio2_DtlsConnection_set_advertised_protocols(carg0 *C.GDtlsConnection, carg1 **C.gchar) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_DtlsConnection_shutdown
+func _gotk4_gio2_DtlsConnection_shutdown(carg0 *C.GDtlsConnection, carg1 C.gboolean, carg2 C.gboolean, carg3 *C.GCancellable, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_DtlsConnection_shutdown_async
+func _gotk4_gio2_DtlsConnection_shutdown_async(carg0 *C.GDtlsConnection, carg1 C.gboolean, carg2 C.gboolean, carg3 C.int, carg4 *C.GCancellable, carg5 C.GAsyncReadyCallback, carg6 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_DtlsConnection_shutdown_finish
+func _gotk4_gio2_DtlsConnection_shutdown_finish(carg0 *C.GDtlsConnection, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_append_to
+func _gotk4_gio2_File_append_to(carg0 *C.GFile, carg1 C.GFileCreateFlags, carg2 *C.GCancellable, _cerr **C.GError) (cret *C.GFileOutputStream) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_append_to_async
+func _gotk4_gio2_File_append_to_async(carg0 *C.GFile, carg1 C.GFileCreateFlags, carg2 C.int, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_append_to_finish
+func _gotk4_gio2_File_append_to_finish(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GFileOutputStream) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_copy_finish
+func _gotk4_gio2_File_copy_finish(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_create
+func _gotk4_gio2_File_create(carg0 *C.GFile, carg1 C.GFileCreateFlags, carg2 *C.GCancellable, _cerr **C.GError) (cret *C.GFileOutputStream) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_create_async
+func _gotk4_gio2_File_create_async(carg0 *C.GFile, carg1 C.GFileCreateFlags, carg2 C.int, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_create_finish
+func _gotk4_gio2_File_create_finish(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GFileOutputStream) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_create_readwrite
+func _gotk4_gio2_File_create_readwrite(carg0 *C.GFile, carg1 C.GFileCreateFlags, carg2 *C.GCancellable, _cerr **C.GError) (cret *C.GFileIOStream) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_create_readwrite_async
+func _gotk4_gio2_File_create_readwrite_async(carg0 *C.GFile, carg1 C.GFileCreateFlags, carg2 C.int, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_create_readwrite_finish
+func _gotk4_gio2_File_create_readwrite_finish(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GFileIOStream) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_delete_file
+func _gotk4_gio2_File_delete_file(carg0 *C.GFile, carg1 *C.GCancellable, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_delete_file_async
+func _gotk4_gio2_File_delete_file_async(carg0 *C.GFile, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_delete_file_finish
+func _gotk4_gio2_File_delete_file_finish(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_dup
+func _gotk4_gio2_File_dup(carg0 *C.GFile) (cret *C.GFile) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_eject_mountable
+func _gotk4_gio2_File_eject_mountable(carg0 *C.GFile, carg1 C.GMountUnmountFlags, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_eject_mountable_finish
+func _gotk4_gio2_File_eject_mountable_finish(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_eject_mountable_with_operation
+func _gotk4_gio2_File_eject_mountable_with_operation(carg0 *C.GFile, carg1 C.GMountUnmountFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_eject_mountable_with_operation_finish
+func _gotk4_gio2_File_eject_mountable_with_operation_finish(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_enumerate_children
+func _gotk4_gio2_File_enumerate_children(carg0 *C.GFile, carg1 *C.char, carg2 C.GFileQueryInfoFlags, carg3 *C.GCancellable, _cerr **C.GError) (cret *C.GFileEnumerator) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_enumerate_children_async
+func _gotk4_gio2_File_enumerate_children_async(carg0 *C.GFile, carg1 *C.char, carg2 C.GFileQueryInfoFlags, carg3 C.int, carg4 *C.GCancellable, carg5 C.GAsyncReadyCallback, carg6 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_enumerate_children_finish
+func _gotk4_gio2_File_enumerate_children_finish(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GFileEnumerator) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_equal
+func _gotk4_gio2_File_equal(carg0 *C.GFile, carg1 *C.GFile) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_find_enclosing_mount
+func _gotk4_gio2_File_find_enclosing_mount(carg0 *C.GFile, carg1 *C.GCancellable, _cerr **C.GError) (cret *C.GMount) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_find_enclosing_mount_async
+func _gotk4_gio2_File_find_enclosing_mount_async(carg0 *C.GFile, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_find_enclosing_mount_finish
+func _gotk4_gio2_File_find_enclosing_mount_finish(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GMount) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_get_basename
+func _gotk4_gio2_File_get_basename(carg0 *C.GFile) (cret *C.char) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_get_child_for_display_name
+func _gotk4_gio2_File_get_child_for_display_name(carg0 *C.GFile, carg1 *C.char, _cerr **C.GError) (cret *C.GFile) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_get_parent
+func _gotk4_gio2_File_get_parent(carg0 *C.GFile) (cret *C.GFile) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_get_parse_name
+func _gotk4_gio2_File_get_parse_name(carg0 *C.GFile) (cret *C.char) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_get_path
+func _gotk4_gio2_File_get_path(carg0 *C.GFile) (cret *C.char) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_get_relative_path
+func _gotk4_gio2_File_get_relative_path(carg0 *C.GFile, carg1 *C.GFile) (cret *C.char) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_get_uri
+func _gotk4_gio2_File_get_uri(carg0 *C.GFile) (cret *C.char) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_get_uri_scheme
+func _gotk4_gio2_File_get_uri_scheme(carg0 *C.GFile) (cret *C.char) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_has_uri_scheme
+func _gotk4_gio2_File_has_uri_scheme(carg0 *C.GFile, carg1 *C.char) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_hash
+func _gotk4_gio2_File_hash(carg0 *C.GFile) (cret C.guint) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_is_native
+func _gotk4_gio2_File_is_native(carg0 *C.GFile) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_make_directory
+func _gotk4_gio2_File_make_directory(carg0 *C.GFile, carg1 *C.GCancellable, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_make_directory_async
+func _gotk4_gio2_File_make_directory_async(carg0 *C.GFile, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_make_directory_finish
+func _gotk4_gio2_File_make_directory_finish(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_make_symbolic_link
+func _gotk4_gio2_File_make_symbolic_link(carg0 *C.GFile, carg1 *C.char, carg2 *C.GCancellable, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_make_symbolic_link_async
+func _gotk4_gio2_File_make_symbolic_link_async(carg0 *C.GFile, carg1 *C.char, carg2 C.int, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_make_symbolic_link_finish
+func _gotk4_gio2_File_make_symbolic_link_finish(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_measure_disk_usage_finish
+func _gotk4_gio2_File_measure_disk_usage_finish(carg0 *C.GFile, carg1 *C.GAsyncResult, carg2 *C.guint64, carg3 *C.guint64, carg4 *C.guint64, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_monitor_dir
+func _gotk4_gio2_File_monitor_dir(carg0 *C.GFile, carg1 C.GFileMonitorFlags, carg2 *C.GCancellable, _cerr **C.GError) (cret *C.GFileMonitor) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_monitor_file
+func _gotk4_gio2_File_monitor_file(carg0 *C.GFile, carg1 C.GFileMonitorFlags, carg2 *C.GCancellable, _cerr **C.GError) (cret *C.GFileMonitor) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_mount_enclosing_volume
+func _gotk4_gio2_File_mount_enclosing_volume(carg0 *C.GFile, carg1 C.GMountMountFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_mount_enclosing_volume_finish
+func _gotk4_gio2_File_mount_enclosing_volume_finish(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_mount_mountable
+func _gotk4_gio2_File_mount_mountable(carg0 *C.GFile, carg1 C.GMountMountFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_mount_mountable_finish
+func _gotk4_gio2_File_mount_mountable_finish(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GFile) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_move_finish
+func _gotk4_gio2_File_move_finish(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_open_readwrite
+func _gotk4_gio2_File_open_readwrite(carg0 *C.GFile, carg1 *C.GCancellable, _cerr **C.GError) (cret *C.GFileIOStream) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_open_readwrite_async
+func _gotk4_gio2_File_open_readwrite_async(carg0 *C.GFile, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_open_readwrite_finish
+func _gotk4_gio2_File_open_readwrite_finish(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GFileIOStream) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_poll_mountable
+func _gotk4_gio2_File_poll_mountable(carg0 *C.GFile, carg1 *C.GCancellable, carg2 C.GAsyncReadyCallback, carg3 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_poll_mountable_finish
+func _gotk4_gio2_File_poll_mountable_finish(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_prefix_matches
+func _gotk4_gio2_File_prefix_matches(carg0 *C.GFile, carg1 *C.GFile) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_query_filesystem_info
+func _gotk4_gio2_File_query_filesystem_info(carg0 *C.GFile, carg1 *C.char, carg2 *C.GCancellable, _cerr **C.GError) (cret *C.GFileInfo) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_query_filesystem_info_async
+func _gotk4_gio2_File_query_filesystem_info_async(carg0 *C.GFile, carg1 *C.char, carg2 C.int, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_query_filesystem_info_finish
+func _gotk4_gio2_File_query_filesystem_info_finish(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GFileInfo) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_query_info
+func _gotk4_gio2_File_query_info(carg0 *C.GFile, carg1 *C.char, carg2 C.GFileQueryInfoFlags, carg3 *C.GCancellable, _cerr **C.GError) (cret *C.GFileInfo) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_query_info_async
+func _gotk4_gio2_File_query_info_async(carg0 *C.GFile, carg1 *C.char, carg2 C.GFileQueryInfoFlags, carg3 C.int, carg4 *C.GCancellable, carg5 C.GAsyncReadyCallback, carg6 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_query_info_finish
+func _gotk4_gio2_File_query_info_finish(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GFileInfo) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_query_settable_attributes
+func _gotk4_gio2_File_query_settable_attributes(carg0 *C.GFile, carg1 *C.GCancellable, _cerr **C.GError) (cret *C.GFileAttributeInfoList) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_query_writable_namespaces
+func _gotk4_gio2_File_query_writable_namespaces(carg0 *C.GFile, carg1 *C.GCancellable, _cerr **C.GError) (cret *C.GFileAttributeInfoList) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_read_async
+func _gotk4_gio2_File_read_async(carg0 *C.GFile, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_read_finish
+func _gotk4_gio2_File_read_finish(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GFileInputStream) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_read_fn
+func _gotk4_gio2_File_read_fn(carg0 *C.GFile, carg1 *C.GCancellable, _cerr **C.GError) (cret *C.GFileInputStream) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_replace
+func _gotk4_gio2_File_replace(carg0 *C.GFile, carg1 *C.char, carg2 C.gboolean, carg3 C.GFileCreateFlags, carg4 *C.GCancellable, _cerr **C.GError) (cret *C.GFileOutputStream) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_replace_async
+func _gotk4_gio2_File_replace_async(carg0 *C.GFile, carg1 *C.char, carg2 C.gboolean, carg3 C.GFileCreateFlags, carg4 C.int, carg5 *C.GCancellable, carg6 C.GAsyncReadyCallback, carg7 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_replace_finish
+func _gotk4_gio2_File_replace_finish(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GFileOutputStream) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_replace_readwrite
+func _gotk4_gio2_File_replace_readwrite(carg0 *C.GFile, carg1 *C.char, carg2 C.gboolean, carg3 C.GFileCreateFlags, carg4 *C.GCancellable, _cerr **C.GError) (cret *C.GFileIOStream) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_replace_readwrite_async
+func _gotk4_gio2_File_replace_readwrite_async(carg0 *C.GFile, carg1 *C.char, carg2 C.gboolean, carg3 C.GFileCreateFlags, carg4 C.int, carg5 *C.GCancellable, carg6 C.GAsyncReadyCallback, carg7 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_replace_readwrite_finish
+func _gotk4_gio2_File_replace_readwrite_finish(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GFileIOStream) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_resolve_relative_path
+func _gotk4_gio2_File_resolve_relative_path(carg0 *C.GFile, carg1 *C.char) (cret *C.GFile) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_set_attributes_async
+func _gotk4_gio2_File_set_attributes_async(carg0 *C.GFile, carg1 *C.GFileInfo, carg2 C.GFileQueryInfoFlags, carg3 C.int, carg4 *C.GCancellable, carg5 C.GAsyncReadyCallback, carg6 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_set_attributes_finish
+func _gotk4_gio2_File_set_attributes_finish(carg0 *C.GFile, carg1 *C.GAsyncResult, carg2 **C.GFileInfo, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_set_attributes_from_info
+func _gotk4_gio2_File_set_attributes_from_info(carg0 *C.GFile, carg1 *C.GFileInfo, carg2 C.GFileQueryInfoFlags, carg3 *C.GCancellable, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_set_display_name
+func _gotk4_gio2_File_set_display_name(carg0 *C.GFile, carg1 *C.char, carg2 *C.GCancellable, _cerr **C.GError) (cret *C.GFile) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_set_display_name_async
+func _gotk4_gio2_File_set_display_name_async(carg0 *C.GFile, carg1 *C.char, carg2 C.int, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_set_display_name_finish
+func _gotk4_gio2_File_set_display_name_finish(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GFile) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_start_mountable
+func _gotk4_gio2_File_start_mountable(carg0 *C.GFile, carg1 C.GDriveStartFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_start_mountable_finish
+func _gotk4_gio2_File_start_mountable_finish(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_stop_mountable
+func _gotk4_gio2_File_stop_mountable(carg0 *C.GFile, carg1 C.GMountUnmountFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_stop_mountable_finish
+func _gotk4_gio2_File_stop_mountable_finish(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_trash
+func _gotk4_gio2_File_trash(carg0 *C.GFile, carg1 *C.GCancellable, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_trash_async
+func _gotk4_gio2_File_trash_async(carg0 *C.GFile, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_trash_finish
+func _gotk4_gio2_File_trash_finish(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_unmount_mountable
+func _gotk4_gio2_File_unmount_mountable(carg0 *C.GFile, carg1 C.GMountUnmountFlags, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_unmount_mountable_finish
+func _gotk4_gio2_File_unmount_mountable_finish(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_unmount_mountable_with_operation
+func _gotk4_gio2_File_unmount_mountable_with_operation(carg0 *C.GFile, carg1 C.GMountUnmountFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_File_unmount_mountable_with_operation_finish
+func _gotk4_gio2_File_unmount_mountable_with_operation_finish(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Icon_equal
+func _gotk4_gio2_Icon_equal(carg0 *C.GIcon, carg1 *C.GIcon) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Icon_hash
+func _gotk4_gio2_Icon_hash(carg0 *C.GIcon) (cret C.guint) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Initable_init
+func _gotk4_gio2_Initable_init(carg0 *C.GInitable, carg1 *C.GCancellable, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_ListModel_get_item_type
+func _gotk4_gio2_ListModel_get_item_type(carg0 *C.GListModel) (cret C.GType) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_ListModel_get_n_items
+func _gotk4_gio2_ListModel_get_n_items(carg0 *C.GListModel) (cret C.guint) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_LoadableIcon_load
+func _gotk4_gio2_LoadableIcon_load(carg0 *C.GLoadableIcon, carg1 C.int, carg2 **C.char, carg3 *C.GCancellable, _cerr **C.GError) (cret *C.GInputStream) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_LoadableIcon_load_async
+func _gotk4_gio2_LoadableIcon_load_async(carg0 *C.GLoadableIcon, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_LoadableIcon_load_finish
+func _gotk4_gio2_LoadableIcon_load_finish(carg0 *C.GLoadableIcon, carg1 *C.GAsyncResult, carg2 **C.char, _cerr **C.GError) (cret *C.GInputStream) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_MemoryMonitor_low_memory_warning
+func _gotk4_gio2_MemoryMonitor_low_memory_warning(carg0 *C.GMemoryMonitor, carg1 C.GMemoryMonitorWarningLevel) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Mount_can_eject
+func _gotk4_gio2_Mount_can_eject(carg0 *C.GMount) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Mount_can_unmount
+func _gotk4_gio2_Mount_can_unmount(carg0 *C.GMount) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Mount_changed
+func _gotk4_gio2_Mount_changed(carg0 *C.GMount) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Mount_eject
+func _gotk4_gio2_Mount_eject(carg0 *C.GMount, carg1 C.GMountUnmountFlags, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Mount_eject_finish
+func _gotk4_gio2_Mount_eject_finish(carg0 *C.GMount, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Mount_eject_with_operation
+func _gotk4_gio2_Mount_eject_with_operation(carg0 *C.GMount, carg1 C.GMountUnmountFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Mount_eject_with_operation_finish
+func _gotk4_gio2_Mount_eject_with_operation_finish(carg0 *C.GMount, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Mount_get_default_location
+func _gotk4_gio2_Mount_get_default_location(carg0 *C.GMount) (cret *C.GFile) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Mount_get_drive
+func _gotk4_gio2_Mount_get_drive(carg0 *C.GMount) (cret *C.GDrive) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Mount_get_icon
+func _gotk4_gio2_Mount_get_icon(carg0 *C.GMount) (cret *C.GIcon) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Mount_get_name
+func _gotk4_gio2_Mount_get_name(carg0 *C.GMount) (cret *C.char) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Mount_get_root
+func _gotk4_gio2_Mount_get_root(carg0 *C.GMount) (cret *C.GFile) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Mount_get_sort_key
+func _gotk4_gio2_Mount_get_sort_key(carg0 *C.GMount) (cret *C.gchar) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Mount_get_symbolic_icon
+func _gotk4_gio2_Mount_get_symbolic_icon(carg0 *C.GMount) (cret *C.GIcon) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Mount_get_uuid
+func _gotk4_gio2_Mount_get_uuid(carg0 *C.GMount) (cret *C.char) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Mount_get_volume
+func _gotk4_gio2_Mount_get_volume(carg0 *C.GMount) (cret *C.GVolume) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Mount_guess_content_type
+func _gotk4_gio2_Mount_guess_content_type(carg0 *C.GMount, carg1 C.gboolean, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Mount_guess_content_type_finish
+func _gotk4_gio2_Mount_guess_content_type_finish(carg0 *C.GMount, carg1 *C.GAsyncResult, _cerr **C.GError) (cret **C.gchar) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Mount_guess_content_type_sync
+func _gotk4_gio2_Mount_guess_content_type_sync(carg0 *C.GMount, carg1 C.gboolean, carg2 *C.GCancellable, _cerr **C.GError) (cret **C.gchar) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Mount_pre_unmount
+func _gotk4_gio2_Mount_pre_unmount(carg0 *C.GMount) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Mount_remount
+func _gotk4_gio2_Mount_remount(carg0 *C.GMount, carg1 C.GMountMountFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Mount_remount_finish
+func _gotk4_gio2_Mount_remount_finish(carg0 *C.GMount, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Mount_unmount
+func _gotk4_gio2_Mount_unmount(carg0 *C.GMount, carg1 C.GMountUnmountFlags, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Mount_unmount_finish
+func _gotk4_gio2_Mount_unmount_finish(carg0 *C.GMount, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Mount_unmount_with_operation
+func _gotk4_gio2_Mount_unmount_with_operation(carg0 *C.GMount, carg1 C.GMountUnmountFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Mount_unmount_with_operation_finish
+func _gotk4_gio2_Mount_unmount_with_operation_finish(carg0 *C.GMount, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Mount_unmounted
+func _gotk4_gio2_Mount_unmounted(carg0 *C.GMount) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_NetworkMonitor_can_reach
+func _gotk4_gio2_NetworkMonitor_can_reach(carg0 *C.GNetworkMonitor, carg1 *C.GSocketConnectable, carg2 *C.GCancellable, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_NetworkMonitor_can_reach_async
+func _gotk4_gio2_NetworkMonitor_can_reach_async(carg0 *C.GNetworkMonitor, carg1 *C.GSocketConnectable, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_NetworkMonitor_can_reach_finish
+func _gotk4_gio2_NetworkMonitor_can_reach_finish(carg0 *C.GNetworkMonitor, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_NetworkMonitor_network_changed
+func _gotk4_gio2_NetworkMonitor_network_changed(carg0 *C.GNetworkMonitor, carg1 C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_PollableInputStream_can_poll
+func _gotk4_gio2_PollableInputStream_can_poll(carg0 *C.GPollableInputStream) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_PollableInputStream_create_source
+func _gotk4_gio2_PollableInputStream_create_source(carg0 *C.GPollableInputStream, carg1 *C.GCancellable) (cret *C.GSource) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_PollableInputStream_is_readable
+func _gotk4_gio2_PollableInputStream_is_readable(carg0 *C.GPollableInputStream) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_PollableOutputStream_can_poll
+func _gotk4_gio2_PollableOutputStream_can_poll(carg0 *C.GPollableOutputStream) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_PollableOutputStream_create_source
+func _gotk4_gio2_PollableOutputStream_create_source(carg0 *C.GPollableOutputStream, carg1 *C.GCancellable) (cret *C.GSource) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_PollableOutputStream_is_writable
+func _gotk4_gio2_PollableOutputStream_is_writable(carg0 *C.GPollableOutputStream) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_PollableOutputStream_write_nonblocking
+func _gotk4_gio2_PollableOutputStream_write_nonblocking(carg0 *C.GPollableOutputStream, carg1 unsafe.Pointer, carg2 C.gsize, _cerr **C.GError) (cret C.gssize) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_PollableOutputStream_writev_nonblocking
+func _gotk4_gio2_PollableOutputStream_writev_nonblocking(carg0 *C.GPollableOutputStream, carg1 *C.GOutputVector, carg2 C.gsize, carg3 *C.gsize, _cerr **C.GError) (cret C.GPollableReturn) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Proxy_connect
+func _gotk4_gio2_Proxy_connect(carg0 *C.GProxy, carg1 *C.GIOStream, carg2 *C.GProxyAddress, carg3 *C.GCancellable, _cerr **C.GError) (cret *C.GIOStream) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Proxy_connect_async
+func _gotk4_gio2_Proxy_connect_async(carg0 *C.GProxy, carg1 *C.GIOStream, carg2 *C.GProxyAddress, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Proxy_connect_finish
+func _gotk4_gio2_Proxy_connect_finish(carg0 *C.GProxy, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GIOStream) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Proxy_supports_hostname
+func _gotk4_gio2_Proxy_supports_hostname(carg0 *C.GProxy) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_ProxyResolver_is_supported
+func _gotk4_gio2_ProxyResolver_is_supported(carg0 *C.GProxyResolver) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_ProxyResolver_lookup
+func _gotk4_gio2_ProxyResolver_lookup(carg0 *C.GProxyResolver, carg1 *C.gchar, carg2 *C.GCancellable, _cerr **C.GError) (cret **C.gchar) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_ProxyResolver_lookup_async
+func _gotk4_gio2_ProxyResolver_lookup_async(carg0 *C.GProxyResolver, carg1 *C.gchar, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_ProxyResolver_lookup_finish
+func _gotk4_gio2_ProxyResolver_lookup_finish(carg0 *C.GProxyResolver, carg1 *C.GAsyncResult, _cerr **C.GError) (cret **C.gchar) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Seekable_can_seek
+func _gotk4_gio2_Seekable_can_seek(carg0 *C.GSeekable) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Seekable_can_truncate
+func _gotk4_gio2_Seekable_can_truncate(carg0 *C.GSeekable) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Seekable_seek
+func _gotk4_gio2_Seekable_seek(carg0 *C.GSeekable, carg1 C.goffset, carg2 C.GSeekType, carg3 *C.GCancellable, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Seekable_tell
+func _gotk4_gio2_Seekable_tell(carg0 *C.GSeekable) (cret C.goffset) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Seekable_truncate_fn
+func _gotk4_gio2_Seekable_truncate_fn(carg0 *C.GSeekable, carg1 C.goffset, carg2 *C.GCancellable, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_SocketConnectable_enumerate
+func _gotk4_gio2_SocketConnectable_enumerate(carg0 *C.GSocketConnectable) (cret *C.GSocketAddressEnumerator) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_SocketConnectable_proxy_enumerate
+func _gotk4_gio2_SocketConnectable_proxy_enumerate(carg0 *C.GSocketConnectable) (cret *C.GSocketAddressEnumerator) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_SocketConnectable_to_string
+func _gotk4_gio2_SocketConnectable_to_string(carg0 *C.GSocketConnectable) (cret *C.gchar) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_TlsBackend_get_default_database
+func _gotk4_gio2_TlsBackend_get_default_database(carg0 *C.GTlsBackend) (cret *C.GTlsDatabase) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_TlsBackend_supports_dtls
+func _gotk4_gio2_TlsBackend_supports_dtls(carg0 *C.GTlsBackend) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_TlsBackend_supports_tls
+func _gotk4_gio2_TlsBackend_supports_tls(carg0 *C.GTlsBackend) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_TlsClientConnection_copy_session_state
+func _gotk4_gio2_TlsClientConnection_copy_session_state(carg0 *C.GTlsClientConnection, carg1 *C.GTlsClientConnection) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Volume_can_eject
+func _gotk4_gio2_Volume_can_eject(carg0 *C.GVolume) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Volume_can_mount
+func _gotk4_gio2_Volume_can_mount(carg0 *C.GVolume) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Volume_changed
+func _gotk4_gio2_Volume_changed(carg0 *C.GVolume) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Volume_eject
+func _gotk4_gio2_Volume_eject(carg0 *C.GVolume, carg1 C.GMountUnmountFlags, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Volume_eject_finish
+func _gotk4_gio2_Volume_eject_finish(carg0 *C.GVolume, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Volume_eject_with_operation
+func _gotk4_gio2_Volume_eject_with_operation(carg0 *C.GVolume, carg1 C.GMountUnmountFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Volume_eject_with_operation_finish
+func _gotk4_gio2_Volume_eject_with_operation_finish(carg0 *C.GVolume, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Volume_enumerate_identifiers
+func _gotk4_gio2_Volume_enumerate_identifiers(carg0 *C.GVolume) (cret **C.char) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Volume_get_activation_root
+func _gotk4_gio2_Volume_get_activation_root(carg0 *C.GVolume) (cret *C.GFile) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Volume_get_drive
+func _gotk4_gio2_Volume_get_drive(carg0 *C.GVolume) (cret *C.GDrive) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Volume_get_icon
+func _gotk4_gio2_Volume_get_icon(carg0 *C.GVolume) (cret *C.GIcon) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Volume_get_identifier
+func _gotk4_gio2_Volume_get_identifier(carg0 *C.GVolume, carg1 *C.char) (cret *C.char) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Volume_get_mount
+func _gotk4_gio2_Volume_get_mount(carg0 *C.GVolume) (cret *C.GMount) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Volume_get_name
+func _gotk4_gio2_Volume_get_name(carg0 *C.GVolume) (cret *C.char) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Volume_get_sort_key
+func _gotk4_gio2_Volume_get_sort_key(carg0 *C.GVolume) (cret *C.gchar) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Volume_get_symbolic_icon
+func _gotk4_gio2_Volume_get_symbolic_icon(carg0 *C.GVolume) (cret *C.GIcon) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Volume_get_uuid
+func _gotk4_gio2_Volume_get_uuid(carg0 *C.GVolume) (cret *C.char) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Volume_mount_finish
+func _gotk4_gio2_Volume_mount_finish(carg0 *C.GVolume, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Volume_mount_fn
+func _gotk4_gio2_Volume_mount_fn(carg0 *C.GVolume, carg1 C.GMountMountFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Volume_removed
+func _gotk4_gio2_Volume_removed(carg0 *C.GVolume) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Volume_should_automount
+func _gotk4_gio2_Volume_should_automount(carg0 *C.GVolume) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_AppLaunchContext_launch_failed
+func _gotk4_gio2_AppLaunchContext_launch_failed(carg0 *C.GAppLaunchContext, carg1 *C.char) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Application_activate
+func _gotk4_gio2_Application_activate(carg0 *C.GApplication) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Application_add_platform_data
+func _gotk4_gio2_Application_add_platform_data(carg0 *C.GApplication, carg1 *C.GVariantBuilder) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Application_command_line
+func _gotk4_gio2_Application_command_line(carg0 *C.GApplication, carg1 *C.GApplicationCommandLine) (cret C.int) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Application_dbus_register
+func _gotk4_gio2_Application_dbus_register(carg0 *C.GApplication, carg1 *C.GDBusConnection, carg2 *C.gchar, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Application_dbus_unregister
+func _gotk4_gio2_Application_dbus_unregister(carg0 *C.GApplication, carg1 *C.GDBusConnection, carg2 *C.gchar) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Application_handle_local_options
+func _gotk4_gio2_Application_handle_local_options(carg0 *C.GApplication, carg1 *C.GVariantDict) (cret C.gint) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Application_name_lost
+func _gotk4_gio2_Application_name_lost(carg0 *C.GApplication) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Application_open
+func _gotk4_gio2_Application_open(carg0 *C.GApplication, carg1 **C.GFile, carg2 C.gint, carg3 *C.gchar) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Application_quit_mainloop
+func _gotk4_gio2_Application_quit_mainloop(carg0 *C.GApplication) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Application_run_mainloop
+func _gotk4_gio2_Application_run_mainloop(carg0 *C.GApplication) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Application_shutdown
+func _gotk4_gio2_Application_shutdown(carg0 *C.GApplication) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Application_startup
+func _gotk4_gio2_Application_startup(carg0 *C.GApplication) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_ApplicationCommandLine_done
+func _gotk4_gio2_ApplicationCommandLine_done(carg0 *C.GApplicationCommandLine) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_ApplicationCommandLine_get_stdin
+func _gotk4_gio2_ApplicationCommandLine_get_stdin(carg0 *C.GApplicationCommandLine) (cret *C.GInputStream) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_ApplicationCommandLine_print_literal
+func _gotk4_gio2_ApplicationCommandLine_print_literal(carg0 *C.GApplicationCommandLine, carg1 *C.gchar) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_ApplicationCommandLine_printerr_literal
+func _gotk4_gio2_ApplicationCommandLine_printerr_literal(carg0 *C.GApplicationCommandLine, carg1 *C.gchar) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_DBusInterfaceSkeleton_flush
+func _gotk4_gio2_DBusInterfaceSkeleton_flush(carg0 *C.GDBusInterfaceSkeleton) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_DBusInterfaceSkeleton_g_authorize_method
+func _gotk4_gio2_DBusInterfaceSkeleton_g_authorize_method(carg0 *C.GDBusInterfaceSkeleton, carg1 *C.GDBusMethodInvocation) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_DBusInterfaceSkeleton_get_info
+func _gotk4_gio2_DBusInterfaceSkeleton_get_info(carg0 *C.GDBusInterfaceSkeleton) (cret *C.GDBusInterfaceInfo) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_DBusInterfaceSkeleton_get_vtable
+func _gotk4_gio2_DBusInterfaceSkeleton_get_vtable(carg0 *C.GDBusInterfaceSkeleton) (cret *C.GDBusInterfaceVTable) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_DBusObjectSkeleton_authorize_method
+func _gotk4_gio2_DBusObjectSkeleton_authorize_method(carg0 *C.GDBusObjectSkeleton, carg1 *C.GDBusInterfaceSkeleton, carg2 *C.GDBusMethodInvocation) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_DebugControllerDBus_authorize
+func _gotk4_gio2_DebugControllerDBus_authorize(carg0 *C.GDebugControllerDBus, carg1 *C.GDBusMethodInvocation) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_FileEnumerator_close_async
+func _gotk4_gio2_FileEnumerator_close_async(carg0 *C.GFileEnumerator, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_FileEnumerator_close_finish
+func _gotk4_gio2_FileEnumerator_close_finish(carg0 *C.GFileEnumerator, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_FileEnumerator_close_fn
+func _gotk4_gio2_FileEnumerator_close_fn(carg0 *C.GFileEnumerator, carg1 *C.GCancellable, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_FileEnumerator_next_file
+func _gotk4_gio2_FileEnumerator_next_file(carg0 *C.GFileEnumerator, carg1 *C.GCancellable, _cerr **C.GError) (cret *C.GFileInfo) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_FileEnumerator_next_files_async
+func _gotk4_gio2_FileEnumerator_next_files_async(carg0 *C.GFileEnumerator, carg1 C.int, carg2 C.int, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_FileEnumerator_next_files_finish
+func _gotk4_gio2_FileEnumerator_next_files_finish(carg0 *C.GFileEnumerator, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GList) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_FileMonitor_cancel
+func _gotk4_gio2_FileMonitor_cancel(carg0 *C.GFileMonitor) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_FileMonitor_changed
+func _gotk4_gio2_FileMonitor_changed(carg0 *C.GFileMonitor, carg1 *C.GFile, carg2 *C.GFile, carg3 C.GFileMonitorEvent) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_FilenameCompleter_got_completion_data
+func _gotk4_gio2_FilenameCompleter_got_completion_data(carg0 *C.GFilenameCompleter) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_IOStream_close_async
+func _gotk4_gio2_IOStream_close_async(carg0 *C.GIOStream, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_IOStream_close_finish
+func _gotk4_gio2_IOStream_close_finish(carg0 *C.GIOStream, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_IOStream_close_fn
+func _gotk4_gio2_IOStream_close_fn(carg0 *C.GIOStream, carg1 *C.GCancellable, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_IOStream_get_input_stream
+func _gotk4_gio2_IOStream_get_input_stream(carg0 *C.GIOStream) (cret *C.GInputStream) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_IOStream_get_output_stream
+func _gotk4_gio2_IOStream_get_output_stream(carg0 *C.GIOStream) (cret *C.GOutputStream) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_InetAddress_to_string
+func _gotk4_gio2_InetAddress_to_string(carg0 *C.GInetAddress) (cret *C.gchar) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_InputStream_close_async
+func _gotk4_gio2_InputStream_close_async(carg0 *C.GInputStream, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_InputStream_close_finish
+func _gotk4_gio2_InputStream_close_finish(carg0 *C.GInputStream, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_InputStream_close_fn
+func _gotk4_gio2_InputStream_close_fn(carg0 *C.GInputStream, carg1 *C.GCancellable, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_InputStream_read_finish
+func _gotk4_gio2_InputStream_read_finish(carg0 *C.GInputStream, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gssize) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_InputStream_read_fn
+func _gotk4_gio2_InputStream_read_fn(carg0 *C.GInputStream, carg1 *C.void, carg2 C.gsize, carg3 *C.GCancellable, _cerr **C.GError) (cret C.gssize) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_InputStream_skip
+func _gotk4_gio2_InputStream_skip(carg0 *C.GInputStream, carg1 C.gsize, carg2 *C.GCancellable, _cerr **C.GError) (cret C.gssize) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_InputStream_skip_async
+func _gotk4_gio2_InputStream_skip_async(carg0 *C.GInputStream, carg1 C.gsize, carg2 C.int, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_InputStream_skip_finish
+func _gotk4_gio2_InputStream_skip_finish(carg0 *C.GInputStream, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gssize) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_MenuLinkIter_get_next
+func _gotk4_gio2_MenuLinkIter_get_next(carg0 *C.GMenuLinkIter, carg1 **C.gchar, carg2 **C.GMenuModel) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_MenuModel_get_item_link
+func _gotk4_gio2_MenuModel_get_item_link(carg0 *C.GMenuModel, carg1 C.gint, carg2 *C.gchar) (cret *C.GMenuModel) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_MenuModel_get_n_items
+func _gotk4_gio2_MenuModel_get_n_items(carg0 *C.GMenuModel) (cret C.gint) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_MenuModel_is_mutable
+func _gotk4_gio2_MenuModel_is_mutable(carg0 *C.GMenuModel) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_MenuModel_iterate_item_attributes
+func _gotk4_gio2_MenuModel_iterate_item_attributes(carg0 *C.GMenuModel, carg1 C.gint) (cret *C.GMenuAttributeIter) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_MenuModel_iterate_item_links
+func _gotk4_gio2_MenuModel_iterate_item_links(carg0 *C.GMenuModel, carg1 C.gint) (cret *C.GMenuLinkIter) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_MountOperation_aborted
+func _gotk4_gio2_MountOperation_aborted(carg0 *C.GMountOperation) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_MountOperation_ask_password
+func _gotk4_gio2_MountOperation_ask_password(carg0 *C.GMountOperation, carg1 *C.char, carg2 *C.char, carg3 *C.char, carg4 C.GAskPasswordFlags) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_MountOperation_ask_question
+func _gotk4_gio2_MountOperation_ask_question(carg0 *C.GMountOperation, carg1 *C.char, carg2 **C.char) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_MountOperation_reply
+func _gotk4_gio2_MountOperation_reply(carg0 *C.GMountOperation, carg1 C.GMountOperationResult) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_MountOperation_show_unmount_progress
+func _gotk4_gio2_MountOperation_show_unmount_progress(carg0 *C.GMountOperation, carg1 *C.gchar, carg2 C.gint64, carg3 C.gint64) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_OutputStream_close_async
+func _gotk4_gio2_OutputStream_close_async(carg0 *C.GOutputStream, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_OutputStream_close_finish
+func _gotk4_gio2_OutputStream_close_finish(carg0 *C.GOutputStream, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_OutputStream_close_fn
+func _gotk4_gio2_OutputStream_close_fn(carg0 *C.GOutputStream, carg1 *C.GCancellable, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_OutputStream_flush
+func _gotk4_gio2_OutputStream_flush(carg0 *C.GOutputStream, carg1 *C.GCancellable, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_OutputStream_flush_async
+func _gotk4_gio2_OutputStream_flush_async(carg0 *C.GOutputStream, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_OutputStream_flush_finish
+func _gotk4_gio2_OutputStream_flush_finish(carg0 *C.GOutputStream, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_OutputStream_splice
+func _gotk4_gio2_OutputStream_splice(carg0 *C.GOutputStream, carg1 *C.GInputStream, carg2 C.GOutputStreamSpliceFlags, carg3 *C.GCancellable, _cerr **C.GError) (cret C.gssize) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_OutputStream_splice_async
+func _gotk4_gio2_OutputStream_splice_async(carg0 *C.GOutputStream, carg1 *C.GInputStream, carg2 C.GOutputStreamSpliceFlags, carg3 C.int, carg4 *C.GCancellable, carg5 C.GAsyncReadyCallback, carg6 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_OutputStream_splice_finish
+func _gotk4_gio2_OutputStream_splice_finish(carg0 *C.GOutputStream, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gssize) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_OutputStream_write_async
+func _gotk4_gio2_OutputStream_write_async(carg0 *C.GOutputStream, carg1 unsafe.Pointer, carg2 C.gsize, carg3 C.int, carg4 *C.GCancellable, carg5 C.GAsyncReadyCallback, carg6 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_OutputStream_write_finish
+func _gotk4_gio2_OutputStream_write_finish(carg0 *C.GOutputStream, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gssize) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_OutputStream_write_fn
+func _gotk4_gio2_OutputStream_write_fn(carg0 *C.GOutputStream, carg1 unsafe.Pointer, carg2 C.gsize, carg3 *C.GCancellable, _cerr **C.GError) (cret C.gssize) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_OutputStream_writev_async
+func _gotk4_gio2_OutputStream_writev_async(carg0 *C.GOutputStream, carg1 *C.GOutputVector, carg2 C.gsize, carg3 C.int, carg4 *C.GCancellable, carg5 C.GAsyncReadyCallback, carg6 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_OutputStream_writev_finish
+func _gotk4_gio2_OutputStream_writev_finish(carg0 *C.GOutputStream, carg1 *C.GAsyncResult, carg2 *C.gsize, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_OutputStream_writev_fn
+func _gotk4_gio2_OutputStream_writev_fn(carg0 *C.GOutputStream, carg1 *C.GOutputVector, carg2 C.gsize, carg3 *C.gsize, carg4 *C.GCancellable, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Permission_acquire
+func _gotk4_gio2_Permission_acquire(carg0 *C.GPermission, carg1 *C.GCancellable, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Permission_acquire_async
+func _gotk4_gio2_Permission_acquire_async(carg0 *C.GPermission, carg1 *C.GCancellable, carg2 C.GAsyncReadyCallback, carg3 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Permission_acquire_finish
+func _gotk4_gio2_Permission_acquire_finish(carg0 *C.GPermission, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Permission_release
+func _gotk4_gio2_Permission_release(carg0 *C.GPermission, carg1 *C.GCancellable, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Permission_release_async
+func _gotk4_gio2_Permission_release_async(carg0 *C.GPermission, carg1 *C.GCancellable, carg2 C.GAsyncReadyCallback, carg3 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Permission_release_finish
+func _gotk4_gio2_Permission_release_finish(carg0 *C.GPermission, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Resolver_lookup_by_address
+func _gotk4_gio2_Resolver_lookup_by_address(carg0 *C.GResolver, carg1 *C.GInetAddress, carg2 *C.GCancellable, _cerr **C.GError) (cret *C.gchar) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Resolver_lookup_by_address_async
+func _gotk4_gio2_Resolver_lookup_by_address_async(carg0 *C.GResolver, carg1 *C.GInetAddress, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Resolver_lookup_by_address_finish
+func _gotk4_gio2_Resolver_lookup_by_address_finish(carg0 *C.GResolver, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.gchar) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Resolver_lookup_by_name
+func _gotk4_gio2_Resolver_lookup_by_name(carg0 *C.GResolver, carg1 *C.gchar, carg2 *C.GCancellable, _cerr **C.GError) (cret *C.GList) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Resolver_lookup_by_name_async
+func _gotk4_gio2_Resolver_lookup_by_name_async(carg0 *C.GResolver, carg1 *C.gchar, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Resolver_lookup_by_name_finish
+func _gotk4_gio2_Resolver_lookup_by_name_finish(carg0 *C.GResolver, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GList) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Resolver_lookup_by_name_with_flags
+func _gotk4_gio2_Resolver_lookup_by_name_with_flags(carg0 *C.GResolver, carg1 *C.gchar, carg2 C.GResolverNameLookupFlags, carg3 *C.GCancellable, _cerr **C.GError) (cret *C.GList) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Resolver_lookup_by_name_with_flags_async
+func _gotk4_gio2_Resolver_lookup_by_name_with_flags_async(carg0 *C.GResolver, carg1 *C.gchar, carg2 C.GResolverNameLookupFlags, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Resolver_lookup_by_name_with_flags_finish
+func _gotk4_gio2_Resolver_lookup_by_name_with_flags_finish(carg0 *C.GResolver, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GList) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Resolver_lookup_records_async
+func _gotk4_gio2_Resolver_lookup_records_async(carg0 *C.GResolver, carg1 *C.gchar, carg2 C.GResolverRecordType, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Resolver_lookup_service_async
+func _gotk4_gio2_Resolver_lookup_service_async(carg0 *C.GResolver, carg1 *C.gchar, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Resolver_lookup_service_finish
+func _gotk4_gio2_Resolver_lookup_service_finish(carg0 *C.GResolver, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GList) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Resolver_reload
+func _gotk4_gio2_Resolver_reload(carg0 *C.GResolver) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Settings_change_event
+func _gotk4_gio2_Settings_change_event(carg0 *C.GSettings, carg1 *C.GQuark, carg2 C.gint) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Settings_changed
+func _gotk4_gio2_Settings_changed(carg0 *C.GSettings, carg1 *C.gchar) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Settings_writable_change_event
+func _gotk4_gio2_Settings_writable_change_event(carg0 *C.GSettings, carg1 C.GQuark) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Settings_writable_changed
+func _gotk4_gio2_Settings_writable_changed(carg0 *C.GSettings, carg1 *C.gchar) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_SocketAddress_get_family
+func _gotk4_gio2_SocketAddress_get_family(carg0 *C.GSocketAddress) (cret C.GSocketFamily) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_SocketAddress_get_native_size
+func _gotk4_gio2_SocketAddress_get_native_size(carg0 *C.GSocketAddress) (cret C.gssize) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_SocketAddressEnumerator_next
+func _gotk4_gio2_SocketAddressEnumerator_next(carg0 *C.GSocketAddressEnumerator, carg1 *C.GCancellable, _cerr **C.GError) (cret *C.GSocketAddress) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_SocketAddressEnumerator_next_async
+func _gotk4_gio2_SocketAddressEnumerator_next_async(carg0 *C.GSocketAddressEnumerator, carg1 *C.GCancellable, carg2 C.GAsyncReadyCallback, carg3 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_SocketAddressEnumerator_next_finish
+func _gotk4_gio2_SocketAddressEnumerator_next_finish(carg0 *C.GSocketAddressEnumerator, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GSocketAddress) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_SocketClient_event
+func _gotk4_gio2_SocketClient_event(carg0 *C.GSocketClient, carg1 C.GSocketClientEvent, carg2 *C.GSocketConnectable, carg3 *C.GIOStream) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_SocketControlMessage_get_level
+func _gotk4_gio2_SocketControlMessage_get_level(carg0 *C.GSocketControlMessage) (cret C.int) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_SocketControlMessage_get_size
+func _gotk4_gio2_SocketControlMessage_get_size(carg0 *C.GSocketControlMessage) (cret C.gsize) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_SocketControlMessage_get_type
+func _gotk4_gio2_SocketControlMessage_get_type(carg0 *C.GSocketControlMessage) (cret C.int) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_SocketListener_changed
+func _gotk4_gio2_SocketListener_changed(carg0 *C.GSocketListener) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_SocketListener_event
+func _gotk4_gio2_SocketListener_event(carg0 *C.GSocketListener, carg1 C.GSocketListenerEvent, carg2 *C.GSocket) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_SocketService_incoming
+func _gotk4_gio2_SocketService_incoming(carg0 *C.GSocketService, carg1 *C.GSocketConnection, carg2 *C.GObject) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_ThreadedSocketService_run
+func _gotk4_gio2_ThreadedSocketService_run(carg0 *C.GThreadedSocketService, carg1 *C.GSocketConnection, carg2 *C.GObject) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_TlsCertificate_verify
+func _gotk4_gio2_TlsCertificate_verify(carg0 *C.GTlsCertificate, carg1 *C.GSocketConnectable, carg2 *C.GTlsCertificate) (cret C.GTlsCertificateFlags) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_TlsConnection_accept_certificate
+func _gotk4_gio2_TlsConnection_accept_certificate(carg0 *C.GTlsConnection, carg1 *C.GTlsCertificate, carg2 C.GTlsCertificateFlags) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_TlsConnection_get_negotiated_protocol
+func _gotk4_gio2_TlsConnection_get_negotiated_protocol(carg0 *C.GTlsConnection) (cret *C.gchar) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_TlsConnection_handshake
+func _gotk4_gio2_TlsConnection_handshake(carg0 *C.GTlsConnection, carg1 *C.GCancellable, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_TlsConnection_handshake_async
+func _gotk4_gio2_TlsConnection_handshake_async(carg0 *C.GTlsConnection, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_TlsConnection_handshake_finish
+func _gotk4_gio2_TlsConnection_handshake_finish(carg0 *C.GTlsConnection, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_TlsDatabase_create_certificate_handle
+func _gotk4_gio2_TlsDatabase_create_certificate_handle(carg0 *C.GTlsDatabase, carg1 *C.GTlsCertificate) (cret *C.gchar) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_TlsDatabase_lookup_certificate_for_handle
+func _gotk4_gio2_TlsDatabase_lookup_certificate_for_handle(carg0 *C.GTlsDatabase, carg1 *C.gchar, carg2 *C.GTlsInteraction, carg3 C.GTlsDatabaseLookupFlags, carg4 *C.GCancellable, _cerr **C.GError) (cret *C.GTlsCertificate) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_TlsDatabase_lookup_certificate_for_handle_async
+func _gotk4_gio2_TlsDatabase_lookup_certificate_for_handle_async(carg0 *C.GTlsDatabase, carg1 *C.gchar, carg2 *C.GTlsInteraction, carg3 C.GTlsDatabaseLookupFlags, carg4 *C.GCancellable, carg5 C.GAsyncReadyCallback, carg6 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_TlsDatabase_lookup_certificate_for_handle_finish
+func _gotk4_gio2_TlsDatabase_lookup_certificate_for_handle_finish(carg0 *C.GTlsDatabase, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GTlsCertificate) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_TlsDatabase_lookup_certificate_issuer
+func _gotk4_gio2_TlsDatabase_lookup_certificate_issuer(carg0 *C.GTlsDatabase, carg1 *C.GTlsCertificate, carg2 *C.GTlsInteraction, carg3 C.GTlsDatabaseLookupFlags, carg4 *C.GCancellable, _cerr **C.GError) (cret *C.GTlsCertificate) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_TlsDatabase_lookup_certificate_issuer_async
+func _gotk4_gio2_TlsDatabase_lookup_certificate_issuer_async(carg0 *C.GTlsDatabase, carg1 *C.GTlsCertificate, carg2 *C.GTlsInteraction, carg3 C.GTlsDatabaseLookupFlags, carg4 *C.GCancellable, carg5 C.GAsyncReadyCallback, carg6 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_TlsDatabase_lookup_certificate_issuer_finish
+func _gotk4_gio2_TlsDatabase_lookup_certificate_issuer_finish(carg0 *C.GTlsDatabase, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GTlsCertificate) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_TlsDatabase_lookup_certificates_issued_by_finish
+func _gotk4_gio2_TlsDatabase_lookup_certificates_issued_by_finish(carg0 *C.GTlsDatabase, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GList) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_TlsDatabase_verify_chain
+func _gotk4_gio2_TlsDatabase_verify_chain(carg0 *C.GTlsDatabase, carg1 *C.GTlsCertificate, carg2 *C.gchar, carg3 *C.GSocketConnectable, carg4 *C.GTlsInteraction, carg5 C.GTlsDatabaseVerifyFlags, carg6 *C.GCancellable, _cerr **C.GError) (cret C.GTlsCertificateFlags) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_TlsDatabase_verify_chain_async
+func _gotk4_gio2_TlsDatabase_verify_chain_async(carg0 *C.GTlsDatabase, carg1 *C.GTlsCertificate, carg2 *C.gchar, carg3 *C.GSocketConnectable, carg4 *C.GTlsInteraction, carg5 C.GTlsDatabaseVerifyFlags, carg6 *C.GCancellable, carg7 C.GAsyncReadyCallback, carg8 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_TlsDatabase_verify_chain_finish
+func _gotk4_gio2_TlsDatabase_verify_chain_finish(carg0 *C.GTlsDatabase, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.GTlsCertificateFlags) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_TlsInteraction_ask_password
+func _gotk4_gio2_TlsInteraction_ask_password(carg0 *C.GTlsInteraction, carg1 *C.GTlsPassword, carg2 *C.GCancellable, _cerr **C.GError) (cret C.GTlsInteractionResult) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_TlsInteraction_ask_password_async
+func _gotk4_gio2_TlsInteraction_ask_password_async(carg0 *C.GTlsInteraction, carg1 *C.GTlsPassword, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_TlsInteraction_ask_password_finish
+func _gotk4_gio2_TlsInteraction_ask_password_finish(carg0 *C.GTlsInteraction, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.GTlsInteractionResult) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_TlsInteraction_request_certificate
+func _gotk4_gio2_TlsInteraction_request_certificate(carg0 *C.GTlsInteraction, carg1 *C.GTlsConnection, carg2 C.GTlsCertificateRequestFlags, carg3 *C.GCancellable, _cerr **C.GError) (cret C.GTlsInteractionResult) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_TlsInteraction_request_certificate_async
+func _gotk4_gio2_TlsInteraction_request_certificate_async(carg0 *C.GTlsInteraction, carg1 *C.GTlsConnection, carg2 C.GTlsCertificateRequestFlags, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_TlsInteraction_request_certificate_finish
+func _gotk4_gio2_TlsInteraction_request_certificate_finish(carg0 *C.GTlsInteraction, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.GTlsInteractionResult) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_TlsPassword_get_default_warning
+func _gotk4_gio2_TlsPassword_get_default_warning(carg0 *C.GTlsPassword) (cret *C.gchar) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_TlsPassword_get_value
+func _gotk4_gio2_TlsPassword_get_value(carg0 *C.GTlsPassword, carg1 *C.gsize) (cret *C.guchar) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Vfs_add_writable_namespaces
+func _gotk4_gio2_Vfs_add_writable_namespaces(carg0 *C.GVfs, carg1 *C.GFileAttributeInfoList) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Vfs_get_file_for_path
+func _gotk4_gio2_Vfs_get_file_for_path(carg0 *C.GVfs, carg1 *C.char) (cret *C.GFile) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Vfs_get_file_for_uri
+func _gotk4_gio2_Vfs_get_file_for_uri(carg0 *C.GVfs, carg1 *C.char) (cret *C.GFile) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Vfs_get_supported_uri_schemes
+func _gotk4_gio2_Vfs_get_supported_uri_schemes(carg0 *C.GVfs) (cret **C.gchar) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Vfs_is_active
+func _gotk4_gio2_Vfs_is_active(carg0 *C.GVfs) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Vfs_local_file_moved
+func _gotk4_gio2_Vfs_local_file_moved(carg0 *C.GVfs, carg1 *C.char, carg2 *C.char) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Vfs_local_file_removed
+func _gotk4_gio2_Vfs_local_file_removed(carg0 *C.GVfs, carg1 *C.char) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Vfs_local_file_set_attributes
+func _gotk4_gio2_Vfs_local_file_set_attributes(carg0 *C.GVfs, carg1 *C.char, carg2 *C.GFileInfo, carg3 C.GFileQueryInfoFlags, carg4 *C.GCancellable, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_Vfs_parse_name
+func _gotk4_gio2_Vfs_parse_name(carg0 *C.GVfs, carg1 *C.char) (cret *C.GFile) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_VolumeMonitor_drive_changed
+func _gotk4_gio2_VolumeMonitor_drive_changed(carg0 *C.GVolumeMonitor, carg1 *C.GDrive) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_VolumeMonitor_drive_connected
+func _gotk4_gio2_VolumeMonitor_drive_connected(carg0 *C.GVolumeMonitor, carg1 *C.GDrive) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_VolumeMonitor_drive_disconnected
+func _gotk4_gio2_VolumeMonitor_drive_disconnected(carg0 *C.GVolumeMonitor, carg1 *C.GDrive) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_VolumeMonitor_drive_eject_button
+func _gotk4_gio2_VolumeMonitor_drive_eject_button(carg0 *C.GVolumeMonitor, carg1 *C.GDrive) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_VolumeMonitor_drive_stop_button
+func _gotk4_gio2_VolumeMonitor_drive_stop_button(carg0 *C.GVolumeMonitor, carg1 *C.GDrive) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_VolumeMonitor_get_connected_drives
+func _gotk4_gio2_VolumeMonitor_get_connected_drives(carg0 *C.GVolumeMonitor) (cret *C.GList) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_VolumeMonitor_get_mount_for_uuid
+func _gotk4_gio2_VolumeMonitor_get_mount_for_uuid(carg0 *C.GVolumeMonitor, carg1 *C.char) (cret *C.GMount) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_VolumeMonitor_get_mounts
+func _gotk4_gio2_VolumeMonitor_get_mounts(carg0 *C.GVolumeMonitor) (cret *C.GList) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_VolumeMonitor_get_volume_for_uuid
+func _gotk4_gio2_VolumeMonitor_get_volume_for_uuid(carg0 *C.GVolumeMonitor, carg1 *C.char) (cret *C.GVolume) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_VolumeMonitor_get_volumes
+func _gotk4_gio2_VolumeMonitor_get_volumes(carg0 *C.GVolumeMonitor) (cret *C.GList) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_VolumeMonitor_mount_added
+func _gotk4_gio2_VolumeMonitor_mount_added(carg0 *C.GVolumeMonitor, carg1 *C.GMount) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_VolumeMonitor_mount_changed
+func _gotk4_gio2_VolumeMonitor_mount_changed(carg0 *C.GVolumeMonitor, carg1 *C.GMount) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_VolumeMonitor_mount_pre_unmount
+func _gotk4_gio2_VolumeMonitor_mount_pre_unmount(carg0 *C.GVolumeMonitor, carg1 *C.GMount) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_VolumeMonitor_mount_removed
+func _gotk4_gio2_VolumeMonitor_mount_removed(carg0 *C.GVolumeMonitor, carg1 *C.GMount) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_VolumeMonitor_volume_added
+func _gotk4_gio2_VolumeMonitor_volume_added(carg0 *C.GVolumeMonitor, carg1 *C.GVolume) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_VolumeMonitor_volume_changed
+func _gotk4_gio2_VolumeMonitor_volume_changed(carg0 *C.GVolumeMonitor, carg1 *C.GVolume) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_VolumeMonitor_volume_removed
+func _gotk4_gio2_VolumeMonitor_volume_removed(carg0 *C.GVolumeMonitor, carg1 *C.GVolume) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_FileIOStream_can_seek
+func _gotk4_gio2_FileIOStream_can_seek(carg0 *C.GFileIOStream) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_FileIOStream_can_truncate
+func _gotk4_gio2_FileIOStream_can_truncate(carg0 *C.GFileIOStream) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_FileIOStream_get_etag
+func _gotk4_gio2_FileIOStream_get_etag(carg0 *C.GFileIOStream) (cret *C.char) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_FileIOStream_query_info
+func _gotk4_gio2_FileIOStream_query_info(carg0 *C.GFileIOStream, carg1 *C.char, carg2 *C.GCancellable, _cerr **C.GError) (cret *C.GFileInfo) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_FileIOStream_query_info_async
+func _gotk4_gio2_FileIOStream_query_info_async(carg0 *C.GFileIOStream, carg1 *C.char, carg2 C.int, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_FileIOStream_query_info_finish
+func _gotk4_gio2_FileIOStream_query_info_finish(carg0 *C.GFileIOStream, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GFileInfo) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_FileIOStream_seek
+func _gotk4_gio2_FileIOStream_seek(carg0 *C.GFileIOStream, carg1 C.goffset, carg2 C.GSeekType, carg3 *C.GCancellable, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_FileIOStream_tell
+func _gotk4_gio2_FileIOStream_tell(carg0 *C.GFileIOStream) (cret C.goffset) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_FileIOStream_truncate_fn
+func _gotk4_gio2_FileIOStream_truncate_fn(carg0 *C.GFileIOStream, carg1 C.goffset, carg2 *C.GCancellable, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_FileInputStream_can_seek
+func _gotk4_gio2_FileInputStream_can_seek(carg0 *C.GFileInputStream) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_FileInputStream_query_info
+func _gotk4_gio2_FileInputStream_query_info(carg0 *C.GFileInputStream, carg1 *C.char, carg2 *C.GCancellable, _cerr **C.GError) (cret *C.GFileInfo) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_FileInputStream_query_info_async
+func _gotk4_gio2_FileInputStream_query_info_async(carg0 *C.GFileInputStream, carg1 *C.char, carg2 C.int, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_FileInputStream_query_info_finish
+func _gotk4_gio2_FileInputStream_query_info_finish(carg0 *C.GFileInputStream, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GFileInfo) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_FileInputStream_seek
+func _gotk4_gio2_FileInputStream_seek(carg0 *C.GFileInputStream, carg1 C.goffset, carg2 C.GSeekType, carg3 *C.GCancellable, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_FileInputStream_tell
+func _gotk4_gio2_FileInputStream_tell(carg0 *C.GFileInputStream) (cret C.goffset) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_FileOutputStream_can_seek
+func _gotk4_gio2_FileOutputStream_can_seek(carg0 *C.GFileOutputStream) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_FileOutputStream_can_truncate
+func _gotk4_gio2_FileOutputStream_can_truncate(carg0 *C.GFileOutputStream) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_FileOutputStream_get_etag
+func _gotk4_gio2_FileOutputStream_get_etag(carg0 *C.GFileOutputStream) (cret *C.char) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_FileOutputStream_query_info
+func _gotk4_gio2_FileOutputStream_query_info(carg0 *C.GFileOutputStream, carg1 *C.char, carg2 *C.GCancellable, _cerr **C.GError) (cret *C.GFileInfo) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_FileOutputStream_query_info_async
+func _gotk4_gio2_FileOutputStream_query_info_async(carg0 *C.GFileOutputStream, carg1 *C.char, carg2 C.int, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_FileOutputStream_query_info_finish
+func _gotk4_gio2_FileOutputStream_query_info_finish(carg0 *C.GFileOutputStream, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GFileInfo) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_FileOutputStream_seek
+func _gotk4_gio2_FileOutputStream_seek(carg0 *C.GFileOutputStream, carg1 C.goffset, carg2 C.GSeekType, carg3 *C.GCancellable, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_FileOutputStream_tell
+func _gotk4_gio2_FileOutputStream_tell(carg0 *C.GFileOutputStream) (cret C.goffset) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_FileOutputStream_truncate_fn
+func _gotk4_gio2_FileOutputStream_truncate_fn(carg0 *C.GFileOutputStream, carg1 C.goffset, carg2 *C.GCancellable, _cerr **C.GError) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_BufferedInputStream_fill
+func _gotk4_gio2_BufferedInputStream_fill(carg0 *C.GBufferedInputStream, carg1 C.gssize, carg2 *C.GCancellable, _cerr **C.GError) (cret C.gssize) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_BufferedInputStream_fill_async
+func _gotk4_gio2_BufferedInputStream_fill_async(carg0 *C.GBufferedInputStream, carg1 C.gssize, carg2 C.int, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gio2_BufferedInputStream_fill_finish
+func _gotk4_gio2_BufferedInputStream_fill_finish(carg0 *C.GBufferedInputStream, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gssize) {
+	panic("unimplemented")
+}
+

@@ -76,6 +76,7 @@ type WaylandDevice interface {
 	upcastToGdkWaylandDevice() *WaylandDeviceInstance
 
 	// GetNodePath wraps gdk_wayland_device_get_node_path
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret string (nullable) 
@@ -128,6 +129,7 @@ func UnsafeWaylandDeviceToGlibFull(c WaylandDevice) unsafe.Pointer {
 }
 
 // GetNodePath wraps gdk_wayland_device_get_node_path
+// 
 // The function returns the following values:
 // 
 // 	- goret string (nullable) 
@@ -828,6 +830,8 @@ func UnsafeWaylandPopupToGlibFull(c WaylandPopup) unsafe.Pointer {
 }
 
 // WaylandDeviceClass wraps GdkWaylandDeviceClass
+// 
+// WaylandDeviceClass is the type struct for [WaylandDevice]
 type WaylandDeviceClass struct {
 	*waylandDeviceClass
 }
@@ -842,31 +846,6 @@ func UnsafeWaylandDeviceClassFromGlibBorrow(p unsafe.Pointer) *WaylandDeviceClas
 	return &WaylandDeviceClass{&waylandDeviceClass{(*C.GdkWaylandDeviceClass)(p)}}
 }
 
-// UnsafeWaylandDeviceClassFromGlibNone is used to convert raw C.GdkWaylandDeviceClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeWaylandDeviceClassFromGlibNone(p unsafe.Pointer) *WaylandDeviceClass {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeWaylandDeviceClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.waylandDeviceClass,
-		func (intern *waylandDeviceClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeWaylandDeviceClassFromGlibFull is used to convert raw C.GdkWaylandDeviceClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeWaylandDeviceClassFromGlibFull(p unsafe.Pointer) *WaylandDeviceClass {
-	wrapped := UnsafeWaylandDeviceClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.waylandDeviceClass,
-		func (intern *waylandDeviceClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
 // UnsafeWaylandDeviceClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
 // 
 // After this is called, no other method on [WaylandDeviceClass] is expected to work anymore.
@@ -879,15 +858,9 @@ func UnsafeWaylandDeviceClassToGlibNone(w *WaylandDeviceClass) unsafe.Pointer {
 	return unsafe.Pointer(w.native)
 }
 
-// UnsafeWaylandDeviceClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeWaylandDeviceClassToGlibFull(w *WaylandDeviceClass) unsafe.Pointer {
-	runtime.SetFinalizer(w.waylandDeviceClass, nil)
-	_p := unsafe.Pointer(w.native)
-	w.native = nil // WaylandDeviceClass is invalid from here on
-	return _p
-}
 // WaylandDisplayClass wraps GdkWaylandDisplayClass
+// 
+// WaylandDisplayClass is the type struct for [WaylandDisplay]
 type WaylandDisplayClass struct {
 	*waylandDisplayClass
 }
@@ -902,31 +875,6 @@ func UnsafeWaylandDisplayClassFromGlibBorrow(p unsafe.Pointer) *WaylandDisplayCl
 	return &WaylandDisplayClass{&waylandDisplayClass{(*C.GdkWaylandDisplayClass)(p)}}
 }
 
-// UnsafeWaylandDisplayClassFromGlibNone is used to convert raw C.GdkWaylandDisplayClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeWaylandDisplayClassFromGlibNone(p unsafe.Pointer) *WaylandDisplayClass {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeWaylandDisplayClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.waylandDisplayClass,
-		func (intern *waylandDisplayClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeWaylandDisplayClassFromGlibFull is used to convert raw C.GdkWaylandDisplayClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeWaylandDisplayClassFromGlibFull(p unsafe.Pointer) *WaylandDisplayClass {
-	wrapped := UnsafeWaylandDisplayClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.waylandDisplayClass,
-		func (intern *waylandDisplayClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
 // UnsafeWaylandDisplayClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
 // 
 // After this is called, no other method on [WaylandDisplayClass] is expected to work anymore.
@@ -939,15 +887,9 @@ func UnsafeWaylandDisplayClassToGlibNone(w *WaylandDisplayClass) unsafe.Pointer 
 	return unsafe.Pointer(w.native)
 }
 
-// UnsafeWaylandDisplayClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeWaylandDisplayClassToGlibFull(w *WaylandDisplayClass) unsafe.Pointer {
-	runtime.SetFinalizer(w.waylandDisplayClass, nil)
-	_p := unsafe.Pointer(w.native)
-	w.native = nil // WaylandDisplayClass is invalid from here on
-	return _p
-}
 // WaylandGLContextClass wraps GdkWaylandGLContextClass
+// 
+// WaylandGLContextClass is the type struct for [WaylandGLContext]
 type WaylandGLContextClass struct {
 	*waylandGLContextClass
 }
@@ -962,31 +904,6 @@ func UnsafeWaylandGLContextClassFromGlibBorrow(p unsafe.Pointer) *WaylandGLConte
 	return &WaylandGLContextClass{&waylandGLContextClass{(*C.GdkWaylandGLContextClass)(p)}}
 }
 
-// UnsafeWaylandGLContextClassFromGlibNone is used to convert raw C.GdkWaylandGLContextClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeWaylandGLContextClassFromGlibNone(p unsafe.Pointer) *WaylandGLContextClass {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeWaylandGLContextClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.waylandGLContextClass,
-		func (intern *waylandGLContextClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeWaylandGLContextClassFromGlibFull is used to convert raw C.GdkWaylandGLContextClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeWaylandGLContextClassFromGlibFull(p unsafe.Pointer) *WaylandGLContextClass {
-	wrapped := UnsafeWaylandGLContextClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.waylandGLContextClass,
-		func (intern *waylandGLContextClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
 // UnsafeWaylandGLContextClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
 // 
 // After this is called, no other method on [WaylandGLContextClass] is expected to work anymore.
@@ -999,15 +916,9 @@ func UnsafeWaylandGLContextClassToGlibNone(w *WaylandGLContextClass) unsafe.Poin
 	return unsafe.Pointer(w.native)
 }
 
-// UnsafeWaylandGLContextClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeWaylandGLContextClassToGlibFull(w *WaylandGLContextClass) unsafe.Pointer {
-	runtime.SetFinalizer(w.waylandGLContextClass, nil)
-	_p := unsafe.Pointer(w.native)
-	w.native = nil // WaylandGLContextClass is invalid from here on
-	return _p
-}
 // WaylandMonitorClass wraps GdkWaylandMonitorClass
+// 
+// WaylandMonitorClass is the type struct for [WaylandMonitor]
 type WaylandMonitorClass struct {
 	*waylandMonitorClass
 }
@@ -1022,31 +933,6 @@ func UnsafeWaylandMonitorClassFromGlibBorrow(p unsafe.Pointer) *WaylandMonitorCl
 	return &WaylandMonitorClass{&waylandMonitorClass{(*C.GdkWaylandMonitorClass)(p)}}
 }
 
-// UnsafeWaylandMonitorClassFromGlibNone is used to convert raw C.GdkWaylandMonitorClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeWaylandMonitorClassFromGlibNone(p unsafe.Pointer) *WaylandMonitorClass {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeWaylandMonitorClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.waylandMonitorClass,
-		func (intern *waylandMonitorClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeWaylandMonitorClassFromGlibFull is used to convert raw C.GdkWaylandMonitorClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeWaylandMonitorClassFromGlibFull(p unsafe.Pointer) *WaylandMonitorClass {
-	wrapped := UnsafeWaylandMonitorClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.waylandMonitorClass,
-		func (intern *waylandMonitorClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
 // UnsafeWaylandMonitorClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
 // 
 // After this is called, no other method on [WaylandMonitorClass] is expected to work anymore.
@@ -1059,15 +945,18 @@ func UnsafeWaylandMonitorClassToGlibNone(w *WaylandMonitorClass) unsafe.Pointer 
 	return unsafe.Pointer(w.native)
 }
 
-// UnsafeWaylandMonitorClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeWaylandMonitorClassToGlibFull(w *WaylandMonitorClass) unsafe.Pointer {
-	runtime.SetFinalizer(w.waylandMonitorClass, nil)
-	_p := unsafe.Pointer(w.native)
-	w.native = nil // WaylandMonitorClass is invalid from here on
-	return _p
+// ParentClass returns the type struct of the parent class of this type struct.
+// This essentially casts the underlying c pointer.
+func (w *WaylandMonitorClass) ParentClass() *gdk.MonitorClass {
+	parent := gdk.UnsafeMonitorClassFromGlibBorrow(UnsafeWaylandMonitorClassToGlibNone(w))
+	// attach a cleanup to keep the instance alive as long as the parent is referenced
+	runtime.AddCleanup(parent, func(_ *WaylandMonitorClass) {}, w)
+	return parent
 }
+
 // WaylandSeatClass wraps GdkWaylandSeatClass
+// 
+// WaylandSeatClass is the type struct for [WaylandSeat]
 type WaylandSeatClass struct {
 	*waylandSeatClass
 }
@@ -1082,31 +971,6 @@ func UnsafeWaylandSeatClassFromGlibBorrow(p unsafe.Pointer) *WaylandSeatClass {
 	return &WaylandSeatClass{&waylandSeatClass{(*C.GdkWaylandSeatClass)(p)}}
 }
 
-// UnsafeWaylandSeatClassFromGlibNone is used to convert raw C.GdkWaylandSeatClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeWaylandSeatClassFromGlibNone(p unsafe.Pointer) *WaylandSeatClass {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeWaylandSeatClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.waylandSeatClass,
-		func (intern *waylandSeatClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeWaylandSeatClassFromGlibFull is used to convert raw C.GdkWaylandSeatClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeWaylandSeatClassFromGlibFull(p unsafe.Pointer) *WaylandSeatClass {
-	wrapped := UnsafeWaylandSeatClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.waylandSeatClass,
-		func (intern *waylandSeatClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
 // UnsafeWaylandSeatClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
 // 
 // After this is called, no other method on [WaylandSeatClass] is expected to work anymore.
@@ -1119,11 +983,3 @@ func UnsafeWaylandSeatClassToGlibNone(w *WaylandSeatClass) unsafe.Pointer {
 	return unsafe.Pointer(w.native)
 }
 
-// UnsafeWaylandSeatClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeWaylandSeatClassToGlibFull(w *WaylandSeatClass) unsafe.Pointer {
-	runtime.SetFinalizer(w.waylandSeatClass, nil)
-	_p := unsafe.Pointer(w.native)
-	w.native = nil // WaylandSeatClass is invalid from here on
-	return _p
-}

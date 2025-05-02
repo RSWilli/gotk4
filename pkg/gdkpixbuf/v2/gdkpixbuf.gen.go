@@ -20,6 +20,22 @@ import (
 // #include <gdk-pixbuf/gdk-pixbuf.h>
 // extern gboolean _gotk4_gdkpixbuf2_PixbufSaveFunc(const gchar*, gsize, GError*, gpointer);
 // extern void _gotk4_gio2_AsyncReadyCallback(GObject*, GAsyncResult*, gpointer);
+// extern void _gotk4_gdkpixbuf2_PixbufLoader_area_prepared(GdkPixbufLoader*);
+// extern void _gotk4_gdkpixbuf2_PixbufLoader_area_updated(GdkPixbufLoader*, int, int, int, int);
+// extern void _gotk4_gdkpixbuf2_PixbufLoader_closed(GdkPixbufLoader*);
+// extern void _gotk4_gdkpixbuf2_PixbufLoader_size_prepared(GdkPixbufLoader*, int, int);
+// void _gotk4_gdkpixbuf2_PixbufLoader_virtual_area_prepared(void* fnptr, GdkPixbufLoader* carg0) {
+// 	return ((void (*) (GdkPixbufLoader*))(fnptr))(carg0);
+// }
+// void _gotk4_gdkpixbuf2_PixbufLoader_virtual_area_updated(void* fnptr, GdkPixbufLoader* carg0, int carg1, int carg2, int carg3, int carg4) {
+// 	return ((void (*) (GdkPixbufLoader*, int, int, int, int))(fnptr))(carg0, carg1, carg2, carg3, carg4);
+// }
+// void _gotk4_gdkpixbuf2_PixbufLoader_virtual_closed(void* fnptr, GdkPixbufLoader* carg0) {
+// 	return ((void (*) (GdkPixbufLoader*))(fnptr))(carg0);
+// }
+// void _gotk4_gdkpixbuf2_PixbufLoader_virtual_size_prepared(void* fnptr, GdkPixbufLoader* carg0, int carg1, int carg2) {
+// 	return ((void (*) (GdkPixbufLoader*, int, int))(fnptr))(carg0, carg1, carg2);
+// }
 import "C"
 
 // GType values.
@@ -281,6 +297,23 @@ func (e PixbufError) String() string {
 		case PixbufErrorUnsupportedOperation: return "PixbufErrorUnsupportedOperation"
 		default: return fmt.Sprintf("PixbufError(%d)", e)
 	}
+}
+
+// PixbufErrorQuark wraps gdk_pixbuf_error_quark
+// 
+// The function returns the following values:
+// 
+// 	- goret glib.Quark 
+func PixbufErrorQuark() glib.Quark {
+	var cret C.GQuark // return, none, casted, alias
+
+	cret = C.gdk_pixbuf_error_quark()
+
+	var goret glib.Quark
+
+	goret = glib.Quark(cret)
+
+	return goret
 }
 
 // PixbufRotation wraps GdkPixbufRotation
@@ -596,6 +629,7 @@ type Pixbuf interface {
 	// will be ignored.
 	AddAlpha(bool, byte, byte, byte) Pixbuf
 	// ApplyEmbeddedOrientation wraps gdk_pixbuf_apply_embedded_orientation
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Pixbuf (nullable) 
@@ -696,6 +730,7 @@ type Pixbuf interface {
 	// and `color2`.
 	CompositeColorSimple(int, int, InterpType, int, int, uint32, uint32) Pixbuf
 	// Copy wraps gdk_pixbuf_copy
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Pixbuf (nullable) 
@@ -770,6 +805,7 @@ type Pixbuf interface {
 	// result in a new pixbuf.
 	Flip(bool) Pixbuf
 	// GetBitsPerSample wraps gdk_pixbuf_get_bits_per_sample
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int 
@@ -777,6 +813,7 @@ type Pixbuf interface {
 	// Queries the number of bits per color sample in a pixbuf.
 	GetBitsPerSample() int
 	// GetByteLength wraps gdk_pixbuf_get_byte_length
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret uint 
@@ -784,6 +821,7 @@ type Pixbuf interface {
 	// Returns the length of the pixel data, in bytes.
 	GetByteLength() uint
 	// GetColorspace wraps gdk_pixbuf_get_colorspace
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Colorspace 
@@ -791,6 +829,7 @@ type Pixbuf interface {
 	// Queries the color space of a pixbuf.
 	GetColorspace() Colorspace
 	// GetHasAlpha wraps gdk_pixbuf_get_has_alpha
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
@@ -798,6 +837,7 @@ type Pixbuf interface {
 	// Queries whether a pixbuf has an alpha channel (opacity information).
 	GetHasAlpha() bool
 	// GetHeight wraps gdk_pixbuf_get_height
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int 
@@ -805,6 +845,7 @@ type Pixbuf interface {
 	// Queries the height of a pixbuf.
 	GetHeight() int
 	// GetNChannels wraps gdk_pixbuf_get_n_channels
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int 
@@ -838,6 +879,7 @@ type Pixbuf interface {
 	// EXIF tag.
 	GetOption(string) string
 	// GetPixelsWithLength wraps gdk_pixbuf_get_pixels_with_length
+	// 
 	// The function returns the following values:
 	// 
 	// 	- length uint: The length of the binary data. 
@@ -852,6 +894,7 @@ type Pixbuf interface {
 	// about how the pixel data is stored in memory.
 	GetPixelsWithLength() (uint, []byte)
 	// GetRowstride wraps gdk_pixbuf_get_rowstride
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int 
@@ -860,6 +903,7 @@ type Pixbuf interface {
 	// the start of a row and the start of the next row.
 	GetRowstride() int
 	// GetWidth wraps gdk_pixbuf_get_width
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int 
@@ -890,6 +934,7 @@ type Pixbuf interface {
 	// to be mutable.
 	NewSubpixbuf(int, int, int, int) Pixbuf
 	// ReadPixelBytes wraps gdk_pixbuf_read_pixel_bytes
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret *glib.Bytes 
@@ -901,6 +946,7 @@ type Pixbuf interface {
 	// if gdk_pixbuf_get_pixels() is called on a read-only pixbuf.
 	ReadPixelBytes() *glib.Bytes
 	// ReadPixels wraps gdk_pixbuf_read_pixels
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret *uint8 
@@ -1951,6 +1997,7 @@ func PixbufGetFileInfoFinish(asyncResult gio.AsyncResult) (int, int, *PixbufForm
 }
 
 // PixbufGetFormats wraps gdk_pixbuf_get_formats
+// 
 // The function returns the following values:
 // 
 // 	- goret []*PixbufFormat 
@@ -2206,6 +2253,7 @@ func (pixbuf *PixbufInstance) AddAlpha(substituteColor bool, r byte, g byte, b b
 }
 
 // ApplyEmbeddedOrientation wraps gdk_pixbuf_apply_embedded_orientation
+// 
 // The function returns the following values:
 // 
 // 	- goret Pixbuf (nullable) 
@@ -2458,6 +2506,7 @@ func (src *PixbufInstance) CompositeColorSimple(destWidth int, destHeight int, i
 }
 
 // Copy wraps gdk_pixbuf_copy
+// 
 // The function returns the following values:
 // 
 // 	- goret Pixbuf (nullable) 
@@ -2631,6 +2680,7 @@ func (src *PixbufInstance) Flip(horizontal bool) Pixbuf {
 }
 
 // GetBitsPerSample wraps gdk_pixbuf_get_bits_per_sample
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -2653,6 +2703,7 @@ func (pixbuf *PixbufInstance) GetBitsPerSample() int {
 }
 
 // GetByteLength wraps gdk_pixbuf_get_byte_length
+// 
 // The function returns the following values:
 // 
 // 	- goret uint 
@@ -2675,6 +2726,7 @@ func (pixbuf *PixbufInstance) GetByteLength() uint {
 }
 
 // GetColorspace wraps gdk_pixbuf_get_colorspace
+// 
 // The function returns the following values:
 // 
 // 	- goret Colorspace 
@@ -2697,6 +2749,7 @@ func (pixbuf *PixbufInstance) GetColorspace() Colorspace {
 }
 
 // GetHasAlpha wraps gdk_pixbuf_get_has_alpha
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -2721,6 +2774,7 @@ func (pixbuf *PixbufInstance) GetHasAlpha() bool {
 }
 
 // GetHeight wraps gdk_pixbuf_get_height
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -2743,6 +2797,7 @@ func (pixbuf *PixbufInstance) GetHeight() int {
 }
 
 // GetNChannels wraps gdk_pixbuf_get_n_channels
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -2812,6 +2867,7 @@ func (pixbuf *PixbufInstance) GetOption(key string) string {
 }
 
 // GetPixelsWithLength wraps gdk_pixbuf_get_pixels_with_length
+// 
 // The function returns the following values:
 // 
 // 	- length uint: The length of the binary data. 
@@ -2846,6 +2902,7 @@ func (pixbuf *PixbufInstance) GetPixelsWithLength() (uint, []byte) {
 }
 
 // GetRowstride wraps gdk_pixbuf_get_rowstride
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -2869,6 +2926,7 @@ func (pixbuf *PixbufInstance) GetRowstride() int {
 }
 
 // GetWidth wraps gdk_pixbuf_get_width
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -2941,6 +2999,7 @@ func (srcPixbuf *PixbufInstance) NewSubpixbuf(srcX int, srcY int, width int, hei
 }
 
 // ReadPixelBytes wraps gdk_pixbuf_read_pixel_bytes
+// 
 // The function returns the following values:
 // 
 // 	- goret *glib.Bytes 
@@ -2967,6 +3026,7 @@ func (pixbuf *PixbufInstance) ReadPixelBytes() *glib.Bytes {
 }
 
 // ReadPixels wraps gdk_pixbuf_read_pixels
+// 
 // The function returns the following values:
 // 
 // 	- goret *uint8 
@@ -3646,6 +3706,7 @@ type PixbufLoader interface {
 	upcastToGdkPixbufLoader() *PixbufLoaderInstance
 
 	// Close wraps gdk_pixbuf_loader_close
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
@@ -3668,6 +3729,7 @@ type PixbufLoader interface {
 	// you will need to explicitly release any reference you hold.
 	Close() (bool, error)
 	// GetFormat wraps gdk_pixbuf_loader_get_format
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret *PixbufFormat (nullable) 
@@ -3676,6 +3738,7 @@ type PixbufLoader interface {
 	// currently loading image file.
 	GetFormat() *PixbufFormat
 	// GetPixbuf wraps gdk_pixbuf_loader_get_pixbuf
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Pixbuf (nullable) 
@@ -3813,6 +3876,7 @@ func UnsafePixbufLoaderToGlibFull(c PixbufLoader) unsafe.Pointer {
 }
 
 // NewPixbufLoader wraps gdk_pixbuf_loader_new
+// 
 // The function returns the following values:
 // 
 // 	- goret PixbufLoader 
@@ -3926,6 +3990,7 @@ func NewPixbufLoaderWithType(imageType string) (PixbufLoader, error) {
 }
 
 // Close wraps gdk_pixbuf_loader_close
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -3970,6 +4035,7 @@ func (loader *PixbufLoaderInstance) Close() (bool, error) {
 }
 
 // GetFormat wraps gdk_pixbuf_loader_get_format
+// 
 // The function returns the following values:
 // 
 // 	- goret *PixbufFormat (nullable) 
@@ -3995,6 +4061,7 @@ func (loader *PixbufLoaderInstance) GetFormat() *PixbufFormat {
 }
 
 // GetPixbuf wraps gdk_pixbuf_loader_get_pixbuf
+// 
 // The function returns the following values:
 // 
 // 	- goret Pixbuf (nullable) 
@@ -4153,6 +4220,7 @@ func (loader *PixbufLoaderInstance) WriteBytes(buffer *glib.Bytes) (bool, error)
 func (o *PixbufLoaderInstance) ConnectAreaPrepared(fn func(PixbufLoader)) gobject.SignalHandle {
 	return o.Connect("area-prepared", fn)
 }
+
 // ConnectAreaUpdated connects the provided callback to the "area-updated" signal
 //
 // This signal is emitted when a significant area of the image being
@@ -4166,6 +4234,7 @@ func (o *PixbufLoaderInstance) ConnectAreaPrepared(fn func(PixbufLoader)) gobjec
 func (o *PixbufLoaderInstance) ConnectAreaUpdated(fn func(PixbufLoader, int, int, int, int)) gobject.SignalHandle {
 	return o.Connect("area-updated", fn)
 }
+
 // ConnectClosed connects the provided callback to the "closed" signal
 //
 // This signal is emitted when gdk_pixbuf_loader_close() is called.
@@ -4176,6 +4245,7 @@ func (o *PixbufLoaderInstance) ConnectAreaUpdated(fn func(PixbufLoader, int, int
 func (o *PixbufLoaderInstance) ConnectClosed(fn func(PixbufLoader)) gobject.SignalHandle {
 	return o.Connect("closed", fn)
 }
+
 // ConnectSizePrepared connects the provided callback to the "size-prepared" signal
 //
 // This signal is emitted when the pixbuf loader has been fed the
@@ -4188,6 +4258,57 @@ func (o *PixbufLoaderInstance) ConnectClosed(fn func(PixbufLoader)) gobject.Sign
 func (o *PixbufLoaderInstance) ConnectSizePrepared(fn func(PixbufLoader, int, int)) gobject.SignalHandle {
 	return o.Connect("size-prepared", fn)
 }
+
+// PixbufLoaderOverrides is the struct used to override the default implementation of virtual methods.
+// it is generic over the extending instance type.
+type PixbufLoaderOverrides[Instance PixbufLoader] struct {
+	// gobject.ObjectOverrides allows you to override virtual methods from the parent class gobject.Object
+	gobject.ObjectOverrides[Instance]
+
+	// AreaPrepared allows you to override the implementation of the virtual method area_prepared.
+	AreaPrepared func(Instance)
+	// AreaUpdated allows you to override the implementation of the virtual method area_updated.
+	// The function takes the following parameters:
+	// 
+	// 	- x int 
+	// 	- y int 
+	// 	- width int 
+	// 	- height int 
+	AreaUpdated func(Instance, int, int, int, int)
+	// Closed allows you to override the implementation of the virtual method closed.
+	Closed func(Instance)
+	// SizePrepared allows you to override the implementation of the virtual method size_prepared.
+	// The function takes the following parameters:
+	// 
+	// 	- width int 
+	// 	- height int 
+	SizePrepared func(Instance, int, int)
+}
+
+// UnsafeApplyPixbufLoaderOverrides applies the overrides to init the gclass by setting the trampoline functions.
+// This is used by the bindings internally and only exported for visibility to other bindings code.
+func UnsafeApplyPixbufLoaderOverrides[Instance PixbufLoader](gclass unsafe.Pointer, overrides PixbufLoaderOverrides[Instance]) {
+	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
+
+	pclass := (*C.GdkPixbufLoaderClass)(gclass)
+
+	if overrides.AreaPrepared != nil {
+		pclass.area_prepared = (*[0]byte)(C._gotk4_gdkpixbuf2_PixbufLoader_area_prepared)
+	}
+
+	if overrides.AreaUpdated != nil {
+		pclass.area_updated = (*[0]byte)(C._gotk4_gdkpixbuf2_PixbufLoader_area_updated)
+	}
+
+	if overrides.Closed != nil {
+		pclass.closed = (*[0]byte)(C._gotk4_gdkpixbuf2_PixbufLoader_closed)
+	}
+
+	if overrides.SizePrepared != nil {
+		pclass.size_prepared = (*[0]byte)(C._gotk4_gdkpixbuf2_PixbufLoader_size_prepared)
+	}
+}
+
 // PixbufFormat wraps GdkPixbufFormat
 //
 // A `GdkPixbufFormat` contains information about the image format accepted
@@ -4221,7 +4342,7 @@ func UnsafePixbufFormatFromGlibBorrow(p unsafe.Pointer) *PixbufFormat {
 	return &PixbufFormat{&pixbufFormat{(*C.GdkPixbufFormat)(p)}}
 }
 
-// UnsafePixbufFormatFromGlibNone is used to convert raw C.GdkPixbufFormat pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafePixbufFormatFromGlibNone is used to convert raw C.GdkPixbufFormat pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafePixbufFormatFromGlibNone(p unsafe.Pointer) *PixbufFormat {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafePixbufFormatFromGlibBorrow(p)
@@ -4234,7 +4355,7 @@ func UnsafePixbufFormatFromGlibNone(p unsafe.Pointer) *PixbufFormat {
 	return wrapped
 }
 
-// UnsafePixbufFormatFromGlibFull is used to convert raw C.GdkPixbufFormat pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafePixbufFormatFromGlibFull is used to convert raw C.GdkPixbufFormat pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafePixbufFormatFromGlibFull(p unsafe.Pointer) *PixbufFormat {
 	wrapped := UnsafePixbufFormatFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -4266,7 +4387,9 @@ func UnsafePixbufFormatToGlibFull(p *PixbufFormat) unsafe.Pointer {
 	p.native = nil // PixbufFormat is invalid from here on
 	return _p
 }
+
 // Copy wraps gdk_pixbuf_format_copy
+// 
 // The function returns the following values:
 // 
 // 	- goret *PixbufFormat (nullable) 
@@ -4291,6 +4414,7 @@ func (format *PixbufFormat) Copy() *PixbufFormat {
 }
 
 // GetDescription wraps gdk_pixbuf_format_get_description
+// 
 // The function returns the following values:
 // 
 // 	- goret string (nullable) 
@@ -4316,6 +4440,7 @@ func (format *PixbufFormat) GetDescription() string {
 }
 
 // GetExtensions wraps gdk_pixbuf_format_get_extensions
+// 
 // The function returns the following values:
 // 
 // 	- goret []string (nullable) 
@@ -4341,6 +4466,7 @@ func (format *PixbufFormat) GetExtensions() []string {
 }
 
 // GetLicense wraps gdk_pixbuf_format_get_license
+// 
 // The function returns the following values:
 // 
 // 	- goret string (nullable) 
@@ -4369,6 +4495,7 @@ func (format *PixbufFormat) GetLicense() string {
 }
 
 // GetMIMETypes wraps gdk_pixbuf_format_get_mime_types
+// 
 // The function returns the following values:
 // 
 // 	- goret []string (nullable) 
@@ -4393,6 +4520,7 @@ func (format *PixbufFormat) GetMIMETypes() []string {
 }
 
 // GetName wraps gdk_pixbuf_format_get_name
+// 
 // The function returns the following values:
 // 
 // 	- goret string (nullable) 
@@ -4418,6 +4546,7 @@ func (format *PixbufFormat) GetName() string {
 }
 
 // IsDisabled wraps gdk_pixbuf_format_is_disabled
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -4480,6 +4609,7 @@ func (format *PixbufFormat) IsSaveOptionSupported(optionKey string) bool {
 }
 
 // IsScalable wraps gdk_pixbuf_format_is_scalable
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -4508,6 +4638,7 @@ func (format *PixbufFormat) IsScalable() bool {
 }
 
 // IsWritable wraps gdk_pixbuf_format_is_writable
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -4559,6 +4690,8 @@ func (format *PixbufFormat) SetDisabled(disabled bool) {
 }
 
 // PixbufLoaderClass wraps GdkPixbufLoaderClass
+// 
+// PixbufLoaderClass is the type struct for [PixbufLoader]
 type PixbufLoaderClass struct {
 	*pixbufLoaderClass
 }
@@ -4573,31 +4706,6 @@ func UnsafePixbufLoaderClassFromGlibBorrow(p unsafe.Pointer) *PixbufLoaderClass 
 	return &PixbufLoaderClass{&pixbufLoaderClass{(*C.GdkPixbufLoaderClass)(p)}}
 }
 
-// UnsafePixbufLoaderClassFromGlibNone is used to convert raw C.GdkPixbufLoaderClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafePixbufLoaderClassFromGlibNone(p unsafe.Pointer) *PixbufLoaderClass {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafePixbufLoaderClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.pixbufLoaderClass,
-		func (intern *pixbufLoaderClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafePixbufLoaderClassFromGlibFull is used to convert raw C.GdkPixbufLoaderClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafePixbufLoaderClassFromGlibFull(p unsafe.Pointer) *PixbufLoaderClass {
-	wrapped := UnsafePixbufLoaderClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.pixbufLoaderClass,
-		func (intern *pixbufLoaderClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
 // UnsafePixbufLoaderClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
 // 
 // After this is called, no other method on [PixbufLoaderClass] is expected to work anymore.
@@ -4610,15 +4718,18 @@ func UnsafePixbufLoaderClassToGlibNone(p *PixbufLoaderClass) unsafe.Pointer {
 	return unsafe.Pointer(p.native)
 }
 
-// UnsafePixbufLoaderClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafePixbufLoaderClassToGlibFull(p *PixbufLoaderClass) unsafe.Pointer {
-	runtime.SetFinalizer(p.pixbufLoaderClass, nil)
-	_p := unsafe.Pointer(p.native)
-	p.native = nil // PixbufLoaderClass is invalid from here on
-	return _p
+// ParentClass returns the type struct of the parent class of this type struct.
+// This essentially casts the underlying c pointer.
+func (p *PixbufLoaderClass) ParentClass() *gobject.ObjectClass {
+	parent := gobject.UnsafeObjectClassFromGlibBorrow(UnsafePixbufLoaderClassToGlibNone(p))
+	// attach a cleanup to keep the instance alive as long as the parent is referenced
+	runtime.AddCleanup(parent, func(_ *PixbufLoaderClass) {}, p)
+	return parent
 }
+
 // PixbufSimpleAnimClass wraps GdkPixbufSimpleAnimClass
+// 
+// PixbufSimpleAnimClass is the type struct for [PixbufSimpleAnim]
 type PixbufSimpleAnimClass struct {
 	*pixbufSimpleAnimClass
 }
@@ -4633,31 +4744,6 @@ func UnsafePixbufSimpleAnimClassFromGlibBorrow(p unsafe.Pointer) *PixbufSimpleAn
 	return &PixbufSimpleAnimClass{&pixbufSimpleAnimClass{(*C.GdkPixbufSimpleAnimClass)(p)}}
 }
 
-// UnsafePixbufSimpleAnimClassFromGlibNone is used to convert raw C.GdkPixbufSimpleAnimClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafePixbufSimpleAnimClassFromGlibNone(p unsafe.Pointer) *PixbufSimpleAnimClass {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafePixbufSimpleAnimClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.pixbufSimpleAnimClass,
-		func (intern *pixbufSimpleAnimClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafePixbufSimpleAnimClassFromGlibFull is used to convert raw C.GdkPixbufSimpleAnimClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafePixbufSimpleAnimClassFromGlibFull(p unsafe.Pointer) *PixbufSimpleAnimClass {
-	wrapped := UnsafePixbufSimpleAnimClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.pixbufSimpleAnimClass,
-		func (intern *pixbufSimpleAnimClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
 // UnsafePixbufSimpleAnimClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
 // 
 // After this is called, no other method on [PixbufSimpleAnimClass] is expected to work anymore.
@@ -4670,11 +4756,3 @@ func UnsafePixbufSimpleAnimClassToGlibNone(p *PixbufSimpleAnimClass) unsafe.Poin
 	return unsafe.Pointer(p.native)
 }
 
-// UnsafePixbufSimpleAnimClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafePixbufSimpleAnimClassToGlibFull(p *PixbufSimpleAnimClass) unsafe.Pointer {
-	runtime.SetFinalizer(p.pixbufSimpleAnimClass, nil)
-	_p := unsafe.Pointer(p.native)
-	p.native = nil // PixbufSimpleAnimClass is invalid from here on
-	return _p
-}

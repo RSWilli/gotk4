@@ -140,6 +140,16 @@ func UnsafeFontToGlibFull(c Font) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
+// FontOverrides is the struct used to override the default implementation of virtual methods.
+// it is generic over the extending instance type.
+type FontOverrides[Instance Font] struct {
+}
+
+// UnsafeApplyFontOverrides applies the overrides to init the gclass by setting the trampoline functions.
+// This is used by the bindings internally and only exported for visibility to other bindings code.
+func UnsafeApplyFontOverrides[Instance Font](gclass unsafe.Pointer, overrides FontOverrides[Instance]) {
+}
+
 // FontMapInstance is the instance type used by all types implementing PangoCairoFontMap. It is used internally by the bindings. Users should use the interface [FontMap] instead.
 type FontMapInstance struct {
 	_ [0]func() // equal guard
@@ -159,6 +169,7 @@ type FontMap interface {
 	upcastToPangoCairoFontMap() *FontMapInstance
 
 	// GetResolution wraps pango_cairo_font_map_get_resolution
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret float64 
@@ -240,6 +251,7 @@ func UnsafeFontMapToGlibFull(c FontMap) unsafe.Pointer {
 }
 
 // FontMapGetDefault wraps pango_cairo_font_map_get_default
+// 
 // The function returns the following values:
 // 
 // 	- goret pango.FontMap 
@@ -272,6 +284,7 @@ func FontMapGetDefault() pango.FontMap {
 }
 
 // NewFontMap wraps pango_cairo_font_map_new
+// 
 // The function returns the following values:
 // 
 // 	- goret pango.FontMap 
@@ -307,6 +320,7 @@ func NewFontMap() pango.FontMap {
 }
 
 // GetResolution wraps pango_cairo_font_map_get_resolution
+// 
 // The function returns the following values:
 // 
 // 	- goret float64 
@@ -379,5 +393,15 @@ func (fontmap *FontMapInstance) SetResolution(dpi float64) {
 	C.pango_cairo_font_map_set_resolution(carg0, carg1)
 	runtime.KeepAlive(fontmap)
 	runtime.KeepAlive(dpi)
+}
+
+// FontMapOverrides is the struct used to override the default implementation of virtual methods.
+// it is generic over the extending instance type.
+type FontMapOverrides[Instance FontMap] struct {
+}
+
+// UnsafeApplyFontMapOverrides applies the overrides to init the gclass by setting the trampoline functions.
+// This is used by the bindings internally and only exported for visibility to other bindings code.
+func UnsafeApplyFontMapOverrides[Instance FontMap](gclass unsafe.Pointer, overrides FontMapOverrides[Instance]) {
 }
 

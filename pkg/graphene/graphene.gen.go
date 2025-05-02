@@ -358,7 +358,7 @@ func UnsafeBoxFromGlibBorrow(p unsafe.Pointer) *Box {
 	return &Box{&box{(*C.graphene_box_t)(p)}}
 }
 
-// UnsafeBoxFromGlibNone is used to convert raw C.graphene_box_t pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeBoxFromGlibNone is used to convert raw C.graphene_box_t pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeBoxFromGlibNone(p unsafe.Pointer) *Box {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeBoxFromGlibBorrow(p)
@@ -371,7 +371,7 @@ func UnsafeBoxFromGlibNone(p unsafe.Pointer) *Box {
 	return wrapped
 }
 
-// UnsafeBoxFromGlibFull is used to convert raw C.graphene_box_t pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeBoxFromGlibFull is used to convert raw C.graphene_box_t pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeBoxFromGlibFull(p unsafe.Pointer) *Box {
 	wrapped := UnsafeBoxFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -403,7 +403,9 @@ func UnsafeBoxToGlibFull(b *Box) unsafe.Pointer {
 	b.native = nil // Box is invalid from here on
 	return _p
 }
+
 // BoxAlloc wraps graphene_box_alloc
+// 
 // The function returns the following values:
 // 
 // 	- goret *Box 
@@ -424,6 +426,7 @@ func BoxAlloc() *Box {
 }
 
 // BoxEmpty wraps graphene_box_empty
+// 
 // The function returns the following values:
 // 
 // 	- goret *Box 
@@ -444,6 +447,7 @@ func BoxEmpty() *Box {
 }
 
 // BoxInfinite wraps graphene_box_infinite
+// 
 // The function returns the following values:
 // 
 // 	- goret *Box 
@@ -464,6 +468,7 @@ func BoxInfinite() *Box {
 }
 
 // BoxMinusOne wraps graphene_box_minus_one
+// 
 // The function returns the following values:
 // 
 // 	- goret *Box 
@@ -485,6 +490,7 @@ func BoxMinusOne() *Box {
 }
 
 // BoxOne wraps graphene_box_one
+// 
 // The function returns the following values:
 // 
 // 	- goret *Box 
@@ -506,6 +512,7 @@ func BoxOne() *Box {
 }
 
 // BoxOneMinusOne wraps graphene_box_one_minus_one
+// 
 // The function returns the following values:
 // 
 // 	- goret *Box 
@@ -527,6 +534,7 @@ func BoxOneMinusOne() *Box {
 }
 
 // BoxZero wraps graphene_box_zero
+// 
 // The function returns the following values:
 // 
 // 	- goret *Box 
@@ -738,6 +746,7 @@ func (box *Box) ExpandVec3(vec *Vec3) Box {
 }
 
 // GetBoundingSphere wraps graphene_box_get_bounding_sphere
+// 
 // The function returns the following values:
 // 
 // 	- sphere Sphere: return location for the bounding sphere 
@@ -763,6 +772,7 @@ func (box *Box) GetBoundingSphere() Sphere {
 }
 
 // GetCenter wraps graphene_box_get_center
+// 
 // The function returns the following values:
 // 
 // 	- center Point3D: return location for the coordinates of
@@ -788,6 +798,7 @@ func (box *Box) GetCenter() Point3D {
 }
 
 // GetDepth wraps graphene_box_get_depth
+// 
 // The function returns the following values:
 // 
 // 	- goret float32 
@@ -810,6 +821,7 @@ func (box *Box) GetDepth() float32 {
 }
 
 // GetHeight wraps graphene_box_get_height
+// 
 // The function returns the following values:
 // 
 // 	- goret float32 
@@ -832,6 +844,7 @@ func (box *Box) GetHeight() float32 {
 }
 
 // GetMax wraps graphene_box_get_max
+// 
 // The function returns the following values:
 // 
 // 	- max Point3D: return location for the maximum point 
@@ -857,6 +870,7 @@ func (box *Box) GetMax() Point3D {
 }
 
 // GetMin wraps graphene_box_get_min
+// 
 // The function returns the following values:
 // 
 // 	- min Point3D: return location for the minimum point 
@@ -882,6 +896,7 @@ func (box *Box) GetMin() Point3D {
 }
 
 // GetSize wraps graphene_box_get_size
+// 
 // The function returns the following values:
 // 
 // 	- size Vec3: return location for the size 
@@ -907,6 +922,7 @@ func (box *Box) GetSize() Vec3 {
 }
 
 // GetWidth wraps graphene_box_get_width
+// 
 // The function returns the following values:
 // 
 // 	- goret float32 
@@ -1215,7 +1231,7 @@ func UnsafeEulerFromGlibBorrow(p unsafe.Pointer) *Euler {
 	return &Euler{&euler{(*C.graphene_euler_t)(p)}}
 }
 
-// UnsafeEulerFromGlibNone is used to convert raw C.graphene_euler_t pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeEulerFromGlibNone is used to convert raw C.graphene_euler_t pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeEulerFromGlibNone(p unsafe.Pointer) *Euler {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeEulerFromGlibBorrow(p)
@@ -1228,7 +1244,7 @@ func UnsafeEulerFromGlibNone(p unsafe.Pointer) *Euler {
 	return wrapped
 }
 
-// UnsafeEulerFromGlibFull is used to convert raw C.graphene_euler_t pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeEulerFromGlibFull is used to convert raw C.graphene_euler_t pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeEulerFromGlibFull(p unsafe.Pointer) *Euler {
 	wrapped := UnsafeEulerFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -1260,7 +1276,9 @@ func UnsafeEulerToGlibFull(e *Euler) unsafe.Pointer {
 	e.native = nil // Euler is invalid from here on
 	return _p
 }
+
 // EulerAlloc wraps graphene_euler_alloc
+// 
 // The function returns the following values:
 // 
 // 	- goret *Euler 
@@ -1311,6 +1329,7 @@ func (a *Euler) Equal(b *Euler) bool {
 }
 
 // GetAlpha wraps graphene_euler_get_alpha
+// 
 // The function returns the following values:
 // 
 // 	- goret float32 
@@ -1336,6 +1355,7 @@ func (e *Euler) GetAlpha() float32 {
 }
 
 // GetBeta wraps graphene_euler_get_beta
+// 
 // The function returns the following values:
 // 
 // 	- goret float32 
@@ -1361,6 +1381,7 @@ func (e *Euler) GetBeta() float32 {
 }
 
 // GetGamma wraps graphene_euler_get_gamma
+// 
 // The function returns the following values:
 // 
 // 	- goret float32 
@@ -1386,6 +1407,7 @@ func (e *Euler) GetGamma() float32 {
 }
 
 // GetOrder wraps graphene_euler_get_order
+// 
 // The function returns the following values:
 // 
 // 	- goret EulerOrder 
@@ -1414,6 +1436,7 @@ func (e *Euler) GetOrder() EulerOrder {
 }
 
 // GetX wraps graphene_euler_get_x
+// 
 // The function returns the following values:
 // 
 // 	- goret float32 
@@ -1436,6 +1459,7 @@ func (e *Euler) GetX() float32 {
 }
 
 // GetY wraps graphene_euler_get_y
+// 
 // The function returns the following values:
 // 
 // 	- goret float32 
@@ -1458,6 +1482,7 @@ func (e *Euler) GetY() float32 {
 }
 
 // GetZ wraps graphene_euler_get_z
+// 
 // The function returns the following values:
 // 
 // 	- goret float32 
@@ -1797,6 +1822,7 @@ func (e *Euler) Reorder(order EulerOrder) Euler {
 }
 
 // ToMatrix wraps graphene_euler_to_matrix
+// 
 // The function returns the following values:
 // 
 // 	- res Matrix: return location for a #graphene_matrix_t 
@@ -1836,6 +1862,7 @@ func (e *Euler) ToMatrix() Matrix {
 }
 
 // ToQuaternion wraps graphene_euler_to_quaternion
+// 
 // The function returns the following values:
 // 
 // 	- res Quaternion: return location for a #graphene_quaternion_t 
@@ -1860,6 +1887,7 @@ func (e *Euler) ToQuaternion() Quaternion {
 }
 
 // ToVec3 wraps graphene_euler_to_vec3
+// 
 // The function returns the following values:
 // 
 // 	- res Vec3: return location for a #graphene_vec3_t 
@@ -1916,7 +1944,7 @@ func UnsafeFrustumFromGlibBorrow(p unsafe.Pointer) *Frustum {
 	return &Frustum{&frustum{(*C.graphene_frustum_t)(p)}}
 }
 
-// UnsafeFrustumFromGlibNone is used to convert raw C.graphene_frustum_t pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeFrustumFromGlibNone is used to convert raw C.graphene_frustum_t pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeFrustumFromGlibNone(p unsafe.Pointer) *Frustum {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeFrustumFromGlibBorrow(p)
@@ -1929,7 +1957,7 @@ func UnsafeFrustumFromGlibNone(p unsafe.Pointer) *Frustum {
 	return wrapped
 }
 
-// UnsafeFrustumFromGlibFull is used to convert raw C.graphene_frustum_t pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeFrustumFromGlibFull is used to convert raw C.graphene_frustum_t pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeFrustumFromGlibFull(p unsafe.Pointer) *Frustum {
 	wrapped := UnsafeFrustumFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -1961,7 +1989,9 @@ func UnsafeFrustumToGlibFull(f *Frustum) unsafe.Pointer {
 	f.native = nil // Frustum is invalid from here on
 	return _p
 }
+
 // FrustumAlloc wraps graphene_frustum_alloc
+// 
 // The function returns the following values:
 // 
 // 	- goret *Frustum 
@@ -2248,7 +2278,7 @@ func UnsafeMatrixFromGlibBorrow(p unsafe.Pointer) *Matrix {
 	return &Matrix{&matrix{(*C.graphene_matrix_t)(p)}}
 }
 
-// UnsafeMatrixFromGlibNone is used to convert raw C.graphene_matrix_t pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeMatrixFromGlibNone is used to convert raw C.graphene_matrix_t pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeMatrixFromGlibNone(p unsafe.Pointer) *Matrix {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeMatrixFromGlibBorrow(p)
@@ -2261,7 +2291,7 @@ func UnsafeMatrixFromGlibNone(p unsafe.Pointer) *Matrix {
 	return wrapped
 }
 
-// UnsafeMatrixFromGlibFull is used to convert raw C.graphene_matrix_t pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeMatrixFromGlibFull is used to convert raw C.graphene_matrix_t pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeMatrixFromGlibFull(p unsafe.Pointer) *Matrix {
 	wrapped := UnsafeMatrixFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -2293,7 +2323,9 @@ func UnsafeMatrixToGlibFull(m *Matrix) unsafe.Pointer {
 	m.native = nil // Matrix is invalid from here on
 	return _p
 }
+
 // MatrixAlloc wraps graphene_matrix_alloc
+// 
 // The function returns the following values:
 // 
 // 	- goret *Matrix 
@@ -2312,6 +2344,7 @@ func MatrixAlloc() *Matrix {
 }
 
 // Decompose wraps graphene_matrix_decompose
+// 
 // The function returns the following values:
 // 
 // 	- translate Vec3: the translation vector 
@@ -2370,6 +2403,7 @@ func (m *Matrix) Decompose() (Vec3, Vec3, Quaternion, Vec3, Vec4, bool) {
 }
 
 // Determinant wraps graphene_matrix_determinant
+// 
 // The function returns the following values:
 // 
 // 	- goret float32 
@@ -2541,6 +2575,7 @@ func (m *Matrix) GetValue(row uint, col uint) float32 {
 }
 
 // GetXScale wraps graphene_matrix_get_x_scale
+// 
 // The function returns the following values:
 // 
 // 	- goret float32 
@@ -2563,6 +2598,7 @@ func (m *Matrix) GetXScale() float32 {
 }
 
 // GetXTranslation wraps graphene_matrix_get_x_translation
+// 
 // The function returns the following values:
 // 
 // 	- goret float32 
@@ -2585,6 +2621,7 @@ func (m *Matrix) GetXTranslation() float32 {
 }
 
 // GetYScale wraps graphene_matrix_get_y_scale
+// 
 // The function returns the following values:
 // 
 // 	- goret float32 
@@ -2607,6 +2644,7 @@ func (m *Matrix) GetYScale() float32 {
 }
 
 // GetYTranslation wraps graphene_matrix_get_y_translation
+// 
 // The function returns the following values:
 // 
 // 	- goret float32 
@@ -2629,6 +2667,7 @@ func (m *Matrix) GetYTranslation() float32 {
 }
 
 // GetZScale wraps graphene_matrix_get_z_scale
+// 
 // The function returns the following values:
 // 
 // 	- goret float32 
@@ -2651,6 +2690,7 @@ func (m *Matrix) GetZScale() float32 {
 }
 
 // GetZTranslation wraps graphene_matrix_get_z_translation
+// 
 // The function returns the following values:
 // 
 // 	- goret float32 
@@ -2895,6 +2935,7 @@ func (m *Matrix) InitFrustum(left float32, right float32, bottom float32, top fl
 }
 
 // InitIdentity wraps graphene_matrix_init_identity
+// 
 // The function returns the following values:
 // 
 // 	- goret *Matrix 
@@ -3244,6 +3285,7 @@ func (a *Matrix) Interpolate(b *Matrix, factor float64) Matrix {
 }
 
 // Inverse wraps graphene_matrix_inverse
+// 
 // The function returns the following values:
 // 
 // 	- res Matrix: return location for the
@@ -3273,6 +3315,7 @@ func (m *Matrix) Inverse() (Matrix, bool) {
 }
 
 // Is2D wraps graphene_matrix_is_2d
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -3296,6 +3339,7 @@ func (m *Matrix) Is2D() bool {
 }
 
 // IsBackfaceVisible wraps graphene_matrix_is_backface_visible
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -3318,6 +3362,7 @@ func (m *Matrix) IsBackfaceVisible() bool {
 }
 
 // IsIdentity wraps graphene_matrix_is_identity
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -3340,6 +3385,7 @@ func (m *Matrix) IsIdentity() bool {
 }
 
 // IsSingular wraps graphene_matrix_is_singular
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -3434,6 +3480,7 @@ func (a *Matrix) Near(b *Matrix, epsilon float32) bool {
 }
 
 // Normalize wraps graphene_matrix_normalize
+// 
 // The function returns the following values:
 // 
 // 	- res Matrix: return location for the normalized matrix 
@@ -3834,6 +3881,7 @@ func (m *Matrix) SkewYZ(factor float32) {
 }
 
 // To2D wraps graphene_matrix_to_2d
+// 
 // The function returns the following values:
 // 
 // 	- xx float64: return location for the xx member 
@@ -4242,6 +4290,7 @@ func (m *Matrix) Translate(pos *Point3D) {
 }
 
 // Transpose wraps graphene_matrix_transpose
+// 
 // The function returns the following values:
 // 
 // 	- res Matrix: return location for the
@@ -4417,7 +4466,7 @@ func UnsafePlaneFromGlibBorrow(p unsafe.Pointer) *Plane {
 	return &Plane{&plane{(*C.graphene_plane_t)(p)}}
 }
 
-// UnsafePlaneFromGlibNone is used to convert raw C.graphene_plane_t pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafePlaneFromGlibNone is used to convert raw C.graphene_plane_t pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafePlaneFromGlibNone(p unsafe.Pointer) *Plane {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafePlaneFromGlibBorrow(p)
@@ -4430,7 +4479,7 @@ func UnsafePlaneFromGlibNone(p unsafe.Pointer) *Plane {
 	return wrapped
 }
 
-// UnsafePlaneFromGlibFull is used to convert raw C.graphene_plane_t pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafePlaneFromGlibFull is used to convert raw C.graphene_plane_t pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafePlaneFromGlibFull(p unsafe.Pointer) *Plane {
 	wrapped := UnsafePlaneFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -4462,7 +4511,9 @@ func UnsafePlaneToGlibFull(p *Plane) unsafe.Pointer {
 	p.native = nil // Plane is invalid from here on
 	return _p
 }
+
 // PlaneAlloc wraps graphene_plane_alloc
+// 
 // The function returns the following values:
 // 
 // 	- goret *Plane 
@@ -4543,6 +4594,7 @@ func (a *Plane) Equal(b *Plane) bool {
 }
 
 // GetConstant wraps graphene_plane_get_constant
+// 
 // The function returns the following values:
 // 
 // 	- goret float32 
@@ -4566,6 +4618,7 @@ func (p *Plane) GetConstant() float32 {
 }
 
 // GetNormal wraps graphene_plane_get_normal
+// 
 // The function returns the following values:
 // 
 // 	- normal Vec3: return location for the normal vector 
@@ -4771,6 +4824,7 @@ func (p *Plane) InitFromVec4(src *Vec4) *Plane {
 }
 
 // Negate wraps graphene_plane_negate
+// 
 // The function returns the following values:
 // 
 // 	- res Plane: return location for the negated plane 
@@ -4796,6 +4850,7 @@ func (p *Plane) Negate() Plane {
 }
 
 // Normalize wraps graphene_plane_normalize
+// 
 // The function returns the following values:
 // 
 // 	- res Plane: return location for the normalized plane 
@@ -4894,7 +4949,7 @@ func UnsafePointFromGlibBorrow(p unsafe.Pointer) *Point {
 	return &Point{&point{(*C.graphene_point_t)(p)}}
 }
 
-// UnsafePointFromGlibNone is used to convert raw C.graphene_point_t pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafePointFromGlibNone is used to convert raw C.graphene_point_t pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafePointFromGlibNone(p unsafe.Pointer) *Point {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafePointFromGlibBorrow(p)
@@ -4907,7 +4962,7 @@ func UnsafePointFromGlibNone(p unsafe.Pointer) *Point {
 	return wrapped
 }
 
-// UnsafePointFromGlibFull is used to convert raw C.graphene_point_t pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafePointFromGlibFull is used to convert raw C.graphene_point_t pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafePointFromGlibFull(p unsafe.Pointer) *Point {
 	wrapped := UnsafePointFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -4939,7 +4994,9 @@ func UnsafePointToGlibFull(p *Point) unsafe.Pointer {
 	p.native = nil // Point is invalid from here on
 	return _p
 }
+
 // PointAlloc wraps graphene_point_alloc
+// 
 // The function returns the following values:
 // 
 // 	- goret *Point 
@@ -4977,6 +5034,7 @@ func PointAlloc() *Point {
 }
 
 // PointZero wraps graphene_point_zero
+// 
 // The function returns the following values:
 // 
 // 	- goret *Point 
@@ -5237,6 +5295,7 @@ func (a *Point) Near(b *Point, epsilon float32) bool {
 }
 
 // ToVec2 wraps graphene_point_to_vec2
+// 
 // The function returns the following values:
 // 
 // 	- v Vec2: return location for the vertex 
@@ -5290,7 +5349,7 @@ func UnsafePoint3DFromGlibBorrow(p unsafe.Pointer) *Point3D {
 	return &Point3D{&point3D{(*C.graphene_point3d_t)(p)}}
 }
 
-// UnsafePoint3DFromGlibNone is used to convert raw C.graphene_point3d_t pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafePoint3DFromGlibNone is used to convert raw C.graphene_point3d_t pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafePoint3DFromGlibNone(p unsafe.Pointer) *Point3D {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafePoint3DFromGlibBorrow(p)
@@ -5303,7 +5362,7 @@ func UnsafePoint3DFromGlibNone(p unsafe.Pointer) *Point3D {
 	return wrapped
 }
 
-// UnsafePoint3DFromGlibFull is used to convert raw C.graphene_point3d_t pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafePoint3DFromGlibFull is used to convert raw C.graphene_point3d_t pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafePoint3DFromGlibFull(p unsafe.Pointer) *Point3D {
 	wrapped := UnsafePoint3DFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -5335,7 +5394,9 @@ func UnsafePoint3DToGlibFull(p *Point3D) unsafe.Pointer {
 	p.native = nil // Point3D is invalid from here on
 	return _p
 }
+
 // Point3DAlloc wraps graphene_point3d_alloc
+// 
 // The function returns the following values:
 // 
 // 	- goret *Point3D 
@@ -5354,6 +5415,7 @@ func Point3DAlloc() *Point3D {
 }
 
 // Point3DZero wraps graphene_point3d_zero
+// 
 // The function returns the following values:
 // 
 // 	- goret *Point3D 
@@ -5640,6 +5702,7 @@ func (a *Point3D) Interpolate(b *Point3D, factor float64) Point3D {
 }
 
 // Length wraps graphene_point3d_length
+// 
 // The function returns the following values:
 // 
 // 	- goret float32 
@@ -5698,6 +5761,7 @@ func (a *Point3D) Near(b *Point3D, epsilon float32) bool {
 }
 
 // Normalize wraps graphene_point3d_normalize
+// 
 // The function returns the following values:
 // 
 // 	- res Point3D: return location for the normalized
@@ -5804,6 +5868,7 @@ func (p *Point3D) Scale(factor float32) Point3D {
 }
 
 // ToVec3 wraps graphene_point3d_to_vec3
+// 
 // The function returns the following values:
 // 
 // 	- v Vec3: return location for a #graphene_vec3_t 
@@ -5860,7 +5925,7 @@ func UnsafeQuadFromGlibBorrow(p unsafe.Pointer) *Quad {
 	return &Quad{&quad{(*C.graphene_quad_t)(p)}}
 }
 
-// UnsafeQuadFromGlibNone is used to convert raw C.graphene_quad_t pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeQuadFromGlibNone is used to convert raw C.graphene_quad_t pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeQuadFromGlibNone(p unsafe.Pointer) *Quad {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeQuadFromGlibBorrow(p)
@@ -5873,7 +5938,7 @@ func UnsafeQuadFromGlibNone(p unsafe.Pointer) *Quad {
 	return wrapped
 }
 
-// UnsafeQuadFromGlibFull is used to convert raw C.graphene_quad_t pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeQuadFromGlibFull is used to convert raw C.graphene_quad_t pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeQuadFromGlibFull(p unsafe.Pointer) *Quad {
 	wrapped := UnsafeQuadFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -5905,7 +5970,9 @@ func UnsafeQuadToGlibFull(q *Quad) unsafe.Pointer {
 	q.native = nil // Quad is invalid from here on
 	return _p
 }
+
 // QuadAlloc wraps graphene_quad_alloc
+// 
 // The function returns the following values:
 // 
 // 	- goret *Quad 
@@ -5926,6 +5993,7 @@ func QuadAlloc() *Quad {
 }
 
 // Bounds wraps graphene_quad_bounds
+// 
 // The function returns the following values:
 // 
 // 	- r Rect: return location for a #graphene_rect_t 
@@ -6146,7 +6214,7 @@ func UnsafeQuaternionFromGlibBorrow(p unsafe.Pointer) *Quaternion {
 	return &Quaternion{&quaternion{(*C.graphene_quaternion_t)(p)}}
 }
 
-// UnsafeQuaternionFromGlibNone is used to convert raw C.graphene_quaternion_t pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeQuaternionFromGlibNone is used to convert raw C.graphene_quaternion_t pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeQuaternionFromGlibNone(p unsafe.Pointer) *Quaternion {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeQuaternionFromGlibBorrow(p)
@@ -6159,7 +6227,7 @@ func UnsafeQuaternionFromGlibNone(p unsafe.Pointer) *Quaternion {
 	return wrapped
 }
 
-// UnsafeQuaternionFromGlibFull is used to convert raw C.graphene_quaternion_t pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeQuaternionFromGlibFull is used to convert raw C.graphene_quaternion_t pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeQuaternionFromGlibFull(p unsafe.Pointer) *Quaternion {
 	wrapped := UnsafeQuaternionFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -6191,7 +6259,9 @@ func UnsafeQuaternionToGlibFull(q *Quaternion) unsafe.Pointer {
 	q.native = nil // Quaternion is invalid from here on
 	return _p
 }
+
 // QuaternionAlloc wraps graphene_quaternion_alloc
+// 
 // The function returns the following values:
 // 
 // 	- goret *Quaternion 
@@ -6586,6 +6656,7 @@ func (q *Quaternion) InitFromVec4(src *Vec4) *Quaternion {
 }
 
 // InitIdentity wraps graphene_quaternion_init_identity
+// 
 // The function returns the following values:
 // 
 // 	- goret *Quaternion 
@@ -6609,6 +6680,7 @@ func (q *Quaternion) InitIdentity() *Quaternion {
 }
 
 // Invert wraps graphene_quaternion_invert
+// 
 // The function returns the following values:
 // 
 // 	- res Quaternion: return location for the inverted
@@ -6667,6 +6739,7 @@ func (a *Quaternion) Multiply(b *Quaternion) Quaternion {
 }
 
 // Normalize wraps graphene_quaternion_normalize
+// 
 // The function returns the following values:
 // 
 // 	- res Quaternion: return location for the normalized
@@ -6764,6 +6837,7 @@ func (a *Quaternion) Slerp(b *Quaternion, factor float32) Quaternion {
 }
 
 // ToAngleVec3 wraps graphene_quaternion_to_angle_vec3
+// 
 // The function returns the following values:
 // 
 // 	- angle float32: return location for the angle, in degrees 
@@ -6792,6 +6866,7 @@ func (q *Quaternion) ToAngleVec3() (float32, Vec3) {
 }
 
 // ToAngles wraps graphene_quaternion_to_angles
+// 
 // The function returns the following values:
 // 
 // 	- degX float32: return location for the rotation angle on
@@ -6827,6 +6902,7 @@ func (q *Quaternion) ToAngles() (float32, float32, float32) {
 }
 
 // ToMatrix wraps graphene_quaternion_to_matrix
+// 
 // The function returns the following values:
 // 
 // 	- m Matrix: a #graphene_matrix_t 
@@ -6852,6 +6928,7 @@ func (q *Quaternion) ToMatrix() Matrix {
 }
 
 // ToRadians wraps graphene_quaternion_to_radians
+// 
 // The function returns the following values:
 // 
 // 	- radX float32: return location for the rotation angle on
@@ -6887,6 +6964,7 @@ func (q *Quaternion) ToRadians() (float32, float32, float32) {
 }
 
 // ToVec4 wraps graphene_quaternion_to_vec4
+// 
 // The function returns the following values:
 // 
 // 	- res Vec4: return location for a
@@ -6944,7 +7022,7 @@ func UnsafeRayFromGlibBorrow(p unsafe.Pointer) *Ray {
 	return &Ray{&ray{(*C.graphene_ray_t)(p)}}
 }
 
-// UnsafeRayFromGlibNone is used to convert raw C.graphene_ray_t pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeRayFromGlibNone is used to convert raw C.graphene_ray_t pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeRayFromGlibNone(p unsafe.Pointer) *Ray {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeRayFromGlibBorrow(p)
@@ -6957,7 +7035,7 @@ func UnsafeRayFromGlibNone(p unsafe.Pointer) *Ray {
 	return wrapped
 }
 
-// UnsafeRayFromGlibFull is used to convert raw C.graphene_ray_t pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeRayFromGlibFull is used to convert raw C.graphene_ray_t pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeRayFromGlibFull(p unsafe.Pointer) *Ray {
 	wrapped := UnsafeRayFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -6989,7 +7067,9 @@ func UnsafeRayToGlibFull(r *Ray) unsafe.Pointer {
 	r.native = nil // Ray is invalid from here on
 	return _p
 }
+
 // RayAlloc wraps graphene_ray_alloc
+// 
 // The function returns the following values:
 // 
 // 	- goret *Ray 
@@ -7073,6 +7153,7 @@ func (r *Ray) GetClosestPointToPoint(p *Point3D) Point3D {
 }
 
 // GetDirection wraps graphene_ray_get_direction
+// 
 // The function returns the following values:
 // 
 // 	- direction Vec3: return location for the direction 
@@ -7165,6 +7246,7 @@ func (r *Ray) GetDistanceToPoint(p *Point3D) float32 {
 }
 
 // GetOrigin wraps graphene_ray_get_origin
+// 
 // The function returns the following values:
 // 
 // 	- origin Point3D: return location for the origin 
@@ -7573,7 +7655,7 @@ func UnsafeRectFromGlibBorrow(p unsafe.Pointer) *Rect {
 	return &Rect{&rect{(*C.graphene_rect_t)(p)}}
 }
 
-// UnsafeRectFromGlibNone is used to convert raw C.graphene_rect_t pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeRectFromGlibNone is used to convert raw C.graphene_rect_t pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeRectFromGlibNone(p unsafe.Pointer) *Rect {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeRectFromGlibBorrow(p)
@@ -7586,7 +7668,7 @@ func UnsafeRectFromGlibNone(p unsafe.Pointer) *Rect {
 	return wrapped
 }
 
-// UnsafeRectFromGlibFull is used to convert raw C.graphene_rect_t pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeRectFromGlibFull is used to convert raw C.graphene_rect_t pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeRectFromGlibFull(p unsafe.Pointer) *Rect {
 	wrapped := UnsafeRectFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -7618,7 +7700,9 @@ func UnsafeRectToGlibFull(r *Rect) unsafe.Pointer {
 	r.native = nil // Rect is invalid from here on
 	return _p
 }
+
 // RectAlloc wraps graphene_rect_alloc
+// 
 // The function returns the following values:
 // 
 // 	- goret *Rect 
@@ -7639,6 +7723,7 @@ func RectAlloc() *Rect {
 }
 
 // RectZero wraps graphene_rect_zero
+// 
 // The function returns the following values:
 // 
 // 	- goret *Rect 
@@ -7781,6 +7866,7 @@ func (r *Rect) Expand(p *Point) Rect {
 }
 
 // GetArea wraps graphene_rect_get_area
+// 
 // The function returns the following values:
 // 
 // 	- goret float32 
@@ -7803,6 +7889,7 @@ func (r *Rect) GetArea() float32 {
 }
 
 // GetBottomLeft wraps graphene_rect_get_bottom_left
+// 
 // The function returns the following values:
 // 
 // 	- p Point: return location for a #graphene_point_t 
@@ -7827,6 +7914,7 @@ func (r *Rect) GetBottomLeft() Point {
 }
 
 // GetBottomRight wraps graphene_rect_get_bottom_right
+// 
 // The function returns the following values:
 // 
 // 	- p Point: return location for a #graphene_point_t 
@@ -7851,6 +7939,7 @@ func (r *Rect) GetBottomRight() Point {
 }
 
 // GetCenter wraps graphene_rect_get_center
+// 
 // The function returns the following values:
 // 
 // 	- p Point: return location for a #graphene_point_t 
@@ -7875,6 +7964,7 @@ func (r *Rect) GetCenter() Point {
 }
 
 // GetHeight wraps graphene_rect_get_height
+// 
 // The function returns the following values:
 // 
 // 	- goret float32 
@@ -7897,6 +7987,7 @@ func (r *Rect) GetHeight() float32 {
 }
 
 // GetTopLeft wraps graphene_rect_get_top_left
+// 
 // The function returns the following values:
 // 
 // 	- p Point: return location for a #graphene_point_t 
@@ -7921,6 +8012,7 @@ func (r *Rect) GetTopLeft() Point {
 }
 
 // GetTopRight wraps graphene_rect_get_top_right
+// 
 // The function returns the following values:
 // 
 // 	- p Point: return location for a #graphene_point_t 
@@ -7945,6 +8037,7 @@ func (r *Rect) GetTopRight() Point {
 }
 
 // GetWidth wraps graphene_rect_get_width
+// 
 // The function returns the following values:
 // 
 // 	- goret float32 
@@ -7967,6 +8060,7 @@ func (r *Rect) GetWidth() float32 {
 }
 
 // GetX wraps graphene_rect_get_x
+// 
 // The function returns the following values:
 // 
 // 	- goret float32 
@@ -7990,6 +8084,7 @@ func (r *Rect) GetX() float32 {
 }
 
 // GetY wraps graphene_rect_get_y
+// 
 // The function returns the following values:
 // 
 // 	- goret float32 
@@ -8269,6 +8364,7 @@ func (a *Rect) Intersection(b *Rect) (Rect, bool) {
 }
 
 // Normalize wraps graphene_rect_normalize
+// 
 // The function returns the following values:
 // 
 // 	- goret *Rect 
@@ -8295,6 +8391,7 @@ func (r *Rect) Normalize() *Rect {
 }
 
 // NormalizeR wraps graphene_rect_normalize_r
+// 
 // The function returns the following values:
 // 
 // 	- res Rect: the return location for the
@@ -8399,6 +8496,7 @@ func (r *Rect) OffsetR(dX float32, dY float32) Rect {
 }
 
 // Round wraps graphene_rect_round
+// 
 // The function returns the following values:
 // 
 // 	- res Rect: return location for the
@@ -8434,6 +8532,7 @@ func (r *Rect) Round() Rect {
 }
 
 // RoundExtents wraps graphene_rect_round_extents
+// 
 // The function returns the following values:
 // 
 // 	- res Rect: return location for the
@@ -8479,6 +8578,7 @@ func (r *Rect) RoundExtents() Rect {
 }
 
 // RoundToPixel wraps graphene_rect_round_to_pixel
+// 
 // The function returns the following values:
 // 
 // 	- goret *Rect 
@@ -8593,7 +8693,7 @@ func UnsafeSimd4FFromGlibBorrow(p unsafe.Pointer) *Simd4F {
 	return &Simd4F{&simd4F{(*C.graphene_simd4f_t)(p)}}
 }
 
-// UnsafeSimd4FFromGlibNone is used to convert raw C.graphene_simd4f_t pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeSimd4FFromGlibNone is used to convert raw C.graphene_simd4f_t pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeSimd4FFromGlibNone(p unsafe.Pointer) *Simd4F {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeSimd4FFromGlibBorrow(p)
@@ -8606,7 +8706,7 @@ func UnsafeSimd4FFromGlibNone(p unsafe.Pointer) *Simd4F {
 	return wrapped
 }
 
-// UnsafeSimd4FFromGlibFull is used to convert raw C.graphene_simd4f_t pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeSimd4FFromGlibFull is used to convert raw C.graphene_simd4f_t pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeSimd4FFromGlibFull(p unsafe.Pointer) *Simd4F {
 	wrapped := UnsafeSimd4FFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -8638,6 +8738,7 @@ func UnsafeSimd4FToGlibFull(s *Simd4F) unsafe.Pointer {
 	s.native = nil // Simd4F is invalid from here on
 	return _p
 }
+
 // Simd4X4F wraps graphene_simd4x4f_t
 type Simd4X4F struct {
 	*simd4X4F
@@ -8653,7 +8754,7 @@ func UnsafeSimd4X4FFromGlibBorrow(p unsafe.Pointer) *Simd4X4F {
 	return &Simd4X4F{&simd4X4F{(*C.graphene_simd4x4f_t)(p)}}
 }
 
-// UnsafeSimd4X4FFromGlibNone is used to convert raw C.graphene_simd4x4f_t pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeSimd4X4FFromGlibNone is used to convert raw C.graphene_simd4x4f_t pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeSimd4X4FFromGlibNone(p unsafe.Pointer) *Simd4X4F {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeSimd4X4FFromGlibBorrow(p)
@@ -8666,7 +8767,7 @@ func UnsafeSimd4X4FFromGlibNone(p unsafe.Pointer) *Simd4X4F {
 	return wrapped
 }
 
-// UnsafeSimd4X4FFromGlibFull is used to convert raw C.graphene_simd4x4f_t pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeSimd4X4FFromGlibFull is used to convert raw C.graphene_simd4x4f_t pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeSimd4X4FFromGlibFull(p unsafe.Pointer) *Simd4X4F {
 	wrapped := UnsafeSimd4X4FFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -8698,6 +8799,7 @@ func UnsafeSimd4X4FToGlibFull(s *Simd4X4F) unsafe.Pointer {
 	s.native = nil // Simd4X4F is invalid from here on
 	return _p
 }
+
 // Size wraps graphene_size_t
 //
 // A size.
@@ -8727,7 +8829,7 @@ func UnsafeSizeFromGlibBorrow(p unsafe.Pointer) *Size {
 	return &Size{&size{(*C.graphene_size_t)(p)}}
 }
 
-// UnsafeSizeFromGlibNone is used to convert raw C.graphene_size_t pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeSizeFromGlibNone is used to convert raw C.graphene_size_t pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeSizeFromGlibNone(p unsafe.Pointer) *Size {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeSizeFromGlibBorrow(p)
@@ -8740,7 +8842,7 @@ func UnsafeSizeFromGlibNone(p unsafe.Pointer) *Size {
 	return wrapped
 }
 
-// UnsafeSizeFromGlibFull is used to convert raw C.graphene_size_t pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeSizeFromGlibFull is used to convert raw C.graphene_size_t pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeSizeFromGlibFull(p unsafe.Pointer) *Size {
 	wrapped := UnsafeSizeFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -8772,7 +8874,9 @@ func UnsafeSizeToGlibFull(s *Size) unsafe.Pointer {
 	s.native = nil // Size is invalid from here on
 	return _p
 }
+
 // SizeAlloc wraps graphene_size_alloc
+// 
 // The function returns the following values:
 // 
 // 	- goret *Size 
@@ -8793,6 +8897,7 @@ func SizeAlloc() *Size {
 }
 
 // SizeZero wraps graphene_size_zero
+// 
 // The function returns the following values:
 // 
 // 	- goret *Size 
@@ -9004,7 +9109,7 @@ func UnsafeSphereFromGlibBorrow(p unsafe.Pointer) *Sphere {
 	return &Sphere{&sphere{(*C.graphene_sphere_t)(p)}}
 }
 
-// UnsafeSphereFromGlibNone is used to convert raw C.graphene_sphere_t pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeSphereFromGlibNone is used to convert raw C.graphene_sphere_t pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeSphereFromGlibNone(p unsafe.Pointer) *Sphere {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeSphereFromGlibBorrow(p)
@@ -9017,7 +9122,7 @@ func UnsafeSphereFromGlibNone(p unsafe.Pointer) *Sphere {
 	return wrapped
 }
 
-// UnsafeSphereFromGlibFull is used to convert raw C.graphene_sphere_t pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeSphereFromGlibFull is used to convert raw C.graphene_sphere_t pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeSphereFromGlibFull(p unsafe.Pointer) *Sphere {
 	wrapped := UnsafeSphereFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -9049,7 +9154,9 @@ func UnsafeSphereToGlibFull(s *Sphere) unsafe.Pointer {
 	s.native = nil // Sphere is invalid from here on
 	return _p
 }
+
 // SphereAlloc wraps graphene_sphere_alloc
+// 
 // The function returns the following values:
 // 
 // 	- goret *Sphere 
@@ -9162,6 +9269,7 @@ func (a *Sphere) Equal(b *Sphere) bool {
 }
 
 // GetBoundingBox wraps graphene_sphere_get_bounding_box
+// 
 // The function returns the following values:
 // 
 // 	- box Box: return location for the bounding box 
@@ -9187,6 +9295,7 @@ func (s *Sphere) GetBoundingBox() Box {
 }
 
 // GetCenter wraps graphene_sphere_get_center
+// 
 // The function returns the following values:
 // 
 // 	- center Point3D: return location for the coordinates of
@@ -9212,6 +9321,7 @@ func (s *Sphere) GetCenter() Point3D {
 }
 
 // GetRadius wraps graphene_sphere_get_radius
+// 
 // The function returns the following values:
 // 
 // 	- goret float32 
@@ -9359,6 +9469,7 @@ func (s *Sphere) InitFromVectors(vectors []Vec3, center *Point3D) *Sphere {
 }
 
 // IsEmpty wraps graphene_sphere_is_empty
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -9442,7 +9553,7 @@ func UnsafeTriangleFromGlibBorrow(p unsafe.Pointer) *Triangle {
 	return &Triangle{&triangle{(*C.graphene_triangle_t)(p)}}
 }
 
-// UnsafeTriangleFromGlibNone is used to convert raw C.graphene_triangle_t pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeTriangleFromGlibNone is used to convert raw C.graphene_triangle_t pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeTriangleFromGlibNone(p unsafe.Pointer) *Triangle {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeTriangleFromGlibBorrow(p)
@@ -9455,7 +9566,7 @@ func UnsafeTriangleFromGlibNone(p unsafe.Pointer) *Triangle {
 	return wrapped
 }
 
-// UnsafeTriangleFromGlibFull is used to convert raw C.graphene_triangle_t pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeTriangleFromGlibFull is used to convert raw C.graphene_triangle_t pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeTriangleFromGlibFull(p unsafe.Pointer) *Triangle {
 	wrapped := UnsafeTriangleFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -9487,7 +9598,9 @@ func UnsafeTriangleToGlibFull(t *Triangle) unsafe.Pointer {
 	t.native = nil // Triangle is invalid from here on
 	return _p
 }
+
 // TriangleAlloc wraps graphene_triangle_alloc
+// 
 // The function returns the following values:
 // 
 // 	- goret *Triangle 
@@ -9568,6 +9681,7 @@ func (a *Triangle) Equal(b *Triangle) bool {
 }
 
 // GetArea wraps graphene_triangle_get_area
+// 
 // The function returns the following values:
 // 
 // 	- goret float32 
@@ -9644,6 +9758,7 @@ func (t *Triangle) GetBarycoords(p *Point3D) (Vec2, bool) {
 }
 
 // GetBoundingBox wraps graphene_triangle_get_bounding_box
+// 
 // The function returns the following values:
 // 
 // 	- res Box: return location for the box 
@@ -9668,6 +9783,7 @@ func (t *Triangle) GetBoundingBox() Box {
 }
 
 // GetMidpoint wraps graphene_triangle_get_midpoint
+// 
 // The function returns the following values:
 // 
 // 	- res Point3D: return location for the coordinates of
@@ -9696,6 +9812,7 @@ func (t *Triangle) GetMidpoint() Point3D {
 }
 
 // GetNormal wraps graphene_triangle_get_normal
+// 
 // The function returns the following values:
 // 
 // 	- res Vec3: return location for the normal vector 
@@ -9720,6 +9837,7 @@ func (t *Triangle) GetNormal() Vec3 {
 }
 
 // GetPlane wraps graphene_triangle_get_plane
+// 
 // The function returns the following values:
 // 
 // 	- res Plane: return location for the plane 
@@ -9744,6 +9862,7 @@ func (t *Triangle) GetPlane() Plane {
 }
 
 // GetPoints wraps graphene_triangle_get_points
+// 
 // The function returns the following values:
 // 
 // 	- a Point3D: return location for the coordinates
@@ -9846,6 +9965,7 @@ func (t *Triangle) GetUv(p *Point3D, uvA *Vec2, uvB *Vec2, uvC *Vec2) (Vec2, boo
 }
 
 // GetVertices wraps graphene_triangle_get_vertices
+// 
 // The function returns the following values:
 // 
 // 	- a Vec3: return location for the first vertex 
@@ -10047,7 +10167,7 @@ func UnsafeVec2FromGlibBorrow(p unsafe.Pointer) *Vec2 {
 	return &Vec2{&vec2{(*C.graphene_vec2_t)(p)}}
 }
 
-// UnsafeVec2FromGlibNone is used to convert raw C.graphene_vec2_t pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeVec2FromGlibNone is used to convert raw C.graphene_vec2_t pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeVec2FromGlibNone(p unsafe.Pointer) *Vec2 {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeVec2FromGlibBorrow(p)
@@ -10060,7 +10180,7 @@ func UnsafeVec2FromGlibNone(p unsafe.Pointer) *Vec2 {
 	return wrapped
 }
 
-// UnsafeVec2FromGlibFull is used to convert raw C.graphene_vec2_t pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeVec2FromGlibFull is used to convert raw C.graphene_vec2_t pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeVec2FromGlibFull(p unsafe.Pointer) *Vec2 {
 	wrapped := UnsafeVec2FromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -10092,7 +10212,9 @@ func UnsafeVec2ToGlibFull(v *Vec2) unsafe.Pointer {
 	v.native = nil // Vec2 is invalid from here on
 	return _p
 }
+
 // Vec2Alloc wraps graphene_vec2_alloc
+// 
 // The function returns the following values:
 // 
 // 	- goret *Vec2 
@@ -10115,6 +10237,7 @@ func Vec2Alloc() *Vec2 {
 }
 
 // Vec2One wraps graphene_vec2_one
+// 
 // The function returns the following values:
 // 
 // 	- goret *Vec2 
@@ -10133,6 +10256,7 @@ func Vec2One() *Vec2 {
 }
 
 // Vec2XAxis wraps graphene_vec2_x_axis
+// 
 // The function returns the following values:
 // 
 // 	- goret *Vec2 
@@ -10151,6 +10275,7 @@ func Vec2XAxis() *Vec2 {
 }
 
 // Vec2YAxis wraps graphene_vec2_y_axis
+// 
 // The function returns the following values:
 // 
 // 	- goret *Vec2 
@@ -10169,6 +10294,7 @@ func Vec2YAxis() *Vec2 {
 }
 
 // Vec2Zero wraps graphene_vec2_zero
+// 
 // The function returns the following values:
 // 
 // 	- goret *Vec2 
@@ -10314,6 +10440,7 @@ func (v1 *Vec2) Equal(v2 *Vec2) bool {
 }
 
 // GetX wraps graphene_vec2_get_x
+// 
 // The function returns the following values:
 // 
 // 	- goret float32 
@@ -10336,6 +10463,7 @@ func (v *Vec2) GetX() float32 {
 }
 
 // GetY wraps graphene_vec2_get_y
+// 
 // The function returns the following values:
 // 
 // 	- goret float32 
@@ -10493,6 +10621,7 @@ func (v1 *Vec2) Interpolate(v2 *Vec2, factor float64) Vec2 {
 }
 
 // Length wraps graphene_vec2_length
+// 
 // The function returns the following values:
 // 
 // 	- goret float32 
@@ -10649,6 +10778,7 @@ func (v1 *Vec2) Near(v2 *Vec2, epsilon float32) bool {
 }
 
 // Negate wraps graphene_vec2_negate
+// 
 // The function returns the following values:
 // 
 // 	- res Vec2: return location for the result vector 
@@ -10673,6 +10803,7 @@ func (v *Vec2) Negate() Vec2 {
 }
 
 // Normalize wraps graphene_vec2_normalize
+// 
 // The function returns the following values:
 // 
 // 	- res Vec2: return location for the
@@ -10795,7 +10926,7 @@ func UnsafeVec3FromGlibBorrow(p unsafe.Pointer) *Vec3 {
 	return &Vec3{&vec3{(*C.graphene_vec3_t)(p)}}
 }
 
-// UnsafeVec3FromGlibNone is used to convert raw C.graphene_vec3_t pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeVec3FromGlibNone is used to convert raw C.graphene_vec3_t pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeVec3FromGlibNone(p unsafe.Pointer) *Vec3 {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeVec3FromGlibBorrow(p)
@@ -10808,7 +10939,7 @@ func UnsafeVec3FromGlibNone(p unsafe.Pointer) *Vec3 {
 	return wrapped
 }
 
-// UnsafeVec3FromGlibFull is used to convert raw C.graphene_vec3_t pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeVec3FromGlibFull is used to convert raw C.graphene_vec3_t pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeVec3FromGlibFull(p unsafe.Pointer) *Vec3 {
 	wrapped := UnsafeVec3FromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -10840,7 +10971,9 @@ func UnsafeVec3ToGlibFull(v *Vec3) unsafe.Pointer {
 	v.native = nil // Vec3 is invalid from here on
 	return _p
 }
+
 // Vec3Alloc wraps graphene_vec3_alloc
+// 
 // The function returns the following values:
 // 
 // 	- goret *Vec3 
@@ -10863,6 +10996,7 @@ func Vec3Alloc() *Vec3 {
 }
 
 // Vec3One wraps graphene_vec3_one
+// 
 // The function returns the following values:
 // 
 // 	- goret *Vec3 
@@ -10882,6 +11016,7 @@ func Vec3One() *Vec3 {
 }
 
 // Vec3XAxis wraps graphene_vec3_x_axis
+// 
 // The function returns the following values:
 // 
 // 	- goret *Vec3 
@@ -10901,6 +11036,7 @@ func Vec3XAxis() *Vec3 {
 }
 
 // Vec3YAxis wraps graphene_vec3_y_axis
+// 
 // The function returns the following values:
 // 
 // 	- goret *Vec3 
@@ -10920,6 +11056,7 @@ func Vec3YAxis() *Vec3 {
 }
 
 // Vec3ZAxis wraps graphene_vec3_z_axis
+// 
 // The function returns the following values:
 // 
 // 	- goret *Vec3 
@@ -10939,6 +11076,7 @@ func Vec3ZAxis() *Vec3 {
 }
 
 // Vec3Zero wraps graphene_vec3_zero
+// 
 // The function returns the following values:
 // 
 // 	- goret *Vec3 
@@ -11116,6 +11254,7 @@ func (v1 *Vec3) Equal(v2 *Vec3) bool {
 }
 
 // GetX wraps graphene_vec3_get_x
+// 
 // The function returns the following values:
 // 
 // 	- goret float32 
@@ -11138,6 +11277,7 @@ func (v *Vec3) GetX() float32 {
 }
 
 // GetXY wraps graphene_vec3_get_xy
+// 
 // The function returns the following values:
 // 
 // 	- res Vec2: return location for a #graphene_vec2_t 
@@ -11163,6 +11303,7 @@ func (v *Vec3) GetXY() Vec2 {
 }
 
 // GetXY0 wraps graphene_vec3_get_xy0
+// 
 // The function returns the following values:
 // 
 // 	- res Vec3: return location for a #graphene_vec3_t 
@@ -11188,6 +11329,7 @@ func (v *Vec3) GetXY0() Vec3 {
 }
 
 // GetXYZ0 wraps graphene_vec3_get_xyz0
+// 
 // The function returns the following values:
 // 
 // 	- res Vec4: return location for the vector 
@@ -11213,6 +11355,7 @@ func (v *Vec3) GetXYZ0() Vec4 {
 }
 
 // GetXYZ1 wraps graphene_vec3_get_xyz1
+// 
 // The function returns the following values:
 // 
 // 	- res Vec4: return location for the vector 
@@ -11271,6 +11414,7 @@ func (v *Vec3) GetXyzw(w float32) Vec4 {
 }
 
 // GetY wraps graphene_vec3_get_y
+// 
 // The function returns the following values:
 // 
 // 	- goret float32 
@@ -11293,6 +11437,7 @@ func (v *Vec3) GetY() float32 {
 }
 
 // GetZ wraps graphene_vec3_get_z
+// 
 // The function returns the following values:
 // 
 // 	- goret float32 
@@ -11454,6 +11599,7 @@ func (v1 *Vec3) Interpolate(v2 *Vec3, factor float64) Vec3 {
 }
 
 // Length wraps graphene_vec3_length
+// 
 // The function returns the following values:
 // 
 // 	- goret float32 
@@ -11609,6 +11755,7 @@ func (v1 *Vec3) Near(v2 *Vec3, epsilon float32) bool {
 }
 
 // Negate wraps graphene_vec3_negate
+// 
 // The function returns the following values:
 // 
 // 	- res Vec3: return location for the result vector 
@@ -11633,6 +11780,7 @@ func (v *Vec3) Negate() Vec3 {
 }
 
 // Normalize wraps graphene_vec3_normalize
+// 
 // The function returns the following values:
 // 
 // 	- res Vec3: return location for the normalized vector 
@@ -11754,7 +11902,7 @@ func UnsafeVec4FromGlibBorrow(p unsafe.Pointer) *Vec4 {
 	return &Vec4{&vec4{(*C.graphene_vec4_t)(p)}}
 }
 
-// UnsafeVec4FromGlibNone is used to convert raw C.graphene_vec4_t pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeVec4FromGlibNone is used to convert raw C.graphene_vec4_t pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeVec4FromGlibNone(p unsafe.Pointer) *Vec4 {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeVec4FromGlibBorrow(p)
@@ -11767,7 +11915,7 @@ func UnsafeVec4FromGlibNone(p unsafe.Pointer) *Vec4 {
 	return wrapped
 }
 
-// UnsafeVec4FromGlibFull is used to convert raw C.graphene_vec4_t pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeVec4FromGlibFull is used to convert raw C.graphene_vec4_t pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeVec4FromGlibFull(p unsafe.Pointer) *Vec4 {
 	wrapped := UnsafeVec4FromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -11799,7 +11947,9 @@ func UnsafeVec4ToGlibFull(v *Vec4) unsafe.Pointer {
 	v.native = nil // Vec4 is invalid from here on
 	return _p
 }
+
 // Vec4Alloc wraps graphene_vec4_alloc
+// 
 // The function returns the following values:
 // 
 // 	- goret *Vec4 
@@ -11822,6 +11972,7 @@ func Vec4Alloc() *Vec4 {
 }
 
 // Vec4One wraps graphene_vec4_one
+// 
 // The function returns the following values:
 // 
 // 	- goret *Vec4 
@@ -11841,6 +11992,7 @@ func Vec4One() *Vec4 {
 }
 
 // Vec4WAxis wraps graphene_vec4_w_axis
+// 
 // The function returns the following values:
 // 
 // 	- goret *Vec4 
@@ -11860,6 +12012,7 @@ func Vec4WAxis() *Vec4 {
 }
 
 // Vec4XAxis wraps graphene_vec4_x_axis
+// 
 // The function returns the following values:
 // 
 // 	- goret *Vec4 
@@ -11879,6 +12032,7 @@ func Vec4XAxis() *Vec4 {
 }
 
 // Vec4YAxis wraps graphene_vec4_y_axis
+// 
 // The function returns the following values:
 // 
 // 	- goret *Vec4 
@@ -11898,6 +12052,7 @@ func Vec4YAxis() *Vec4 {
 }
 
 // Vec4ZAxis wraps graphene_vec4_z_axis
+// 
 // The function returns the following values:
 // 
 // 	- goret *Vec4 
@@ -11917,6 +12072,7 @@ func Vec4ZAxis() *Vec4 {
 }
 
 // Vec4Zero wraps graphene_vec4_zero
+// 
 // The function returns the following values:
 // 
 // 	- goret *Vec4 
@@ -12062,6 +12218,7 @@ func (v1 *Vec4) Equal(v2 *Vec4) bool {
 }
 
 // GetW wraps graphene_vec4_get_w
+// 
 // The function returns the following values:
 // 
 // 	- goret float32 
@@ -12084,6 +12241,7 @@ func (v *Vec4) GetW() float32 {
 }
 
 // GetX wraps graphene_vec4_get_x
+// 
 // The function returns the following values:
 // 
 // 	- goret float32 
@@ -12106,6 +12264,7 @@ func (v *Vec4) GetX() float32 {
 }
 
 // GetXY wraps graphene_vec4_get_xy
+// 
 // The function returns the following values:
 // 
 // 	- res Vec2: return location for a #graphene_vec2_t 
@@ -12131,6 +12290,7 @@ func (v *Vec4) GetXY() Vec2 {
 }
 
 // GetXYZ wraps graphene_vec4_get_xyz
+// 
 // The function returns the following values:
 // 
 // 	- res Vec3: return location for a graphene_vec3_t 
@@ -12156,6 +12316,7 @@ func (v *Vec4) GetXYZ() Vec3 {
 }
 
 // GetY wraps graphene_vec4_get_y
+// 
 // The function returns the following values:
 // 
 // 	- goret float32 
@@ -12178,6 +12339,7 @@ func (v *Vec4) GetY() float32 {
 }
 
 // GetZ wraps graphene_vec4_get_z
+// 
 // The function returns the following values:
 // 
 // 	- goret float32 
@@ -12417,6 +12579,7 @@ func (v1 *Vec4) Interpolate(v2 *Vec4, factor float64) Vec4 {
 }
 
 // Length wraps graphene_vec4_length
+// 
 // The function returns the following values:
 // 
 // 	- goret float32 
@@ -12572,6 +12735,7 @@ func (v1 *Vec4) Near(v2 *Vec4, epsilon float32) bool {
 }
 
 // Negate wraps graphene_vec4_negate
+// 
 // The function returns the following values:
 // 
 // 	- res Vec4: return location for the result vector 
@@ -12596,6 +12760,7 @@ func (v *Vec4) Negate() Vec4 {
 }
 
 // Normalize wraps graphene_vec4_normalize
+// 
 // The function returns the following values:
 // 
 // 	- res Vec4: return location for the normalized

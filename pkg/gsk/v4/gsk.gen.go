@@ -914,6 +914,25 @@ func (e SerializationError) String() string {
 	}
 }
 
+// SerializationErrorQuark wraps gsk_serialization_error_quark
+// 
+// The function returns the following values:
+// 
+// 	- goret glib.Quark 
+//
+// Registers an error quark for [class@Gsk.RenderNode] errors.
+func SerializationErrorQuark() glib.Quark {
+	var cret C.GQuark // return, none, casted, alias
+
+	cret = C.gsk_serialization_error_quark()
+
+	var goret glib.Quark
+
+	goret = glib.Quark(cret)
+
+	return goret
+}
+
 // TransformCategory wraps GskTransformCategory
 //
 // The categories of matrices relevant for GSK and GTK.
@@ -1247,6 +1266,20 @@ func UnsafeGLShaderToGlibFull(c GLShader) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
+// GLShaderOverrides is the struct used to override the default implementation of virtual methods.
+// it is generic over the extending instance type.
+type GLShaderOverrides[Instance GLShader] struct {
+	// gobject.ObjectOverrides allows you to override virtual methods from the parent class gobject.Object
+	gobject.ObjectOverrides[Instance]
+
+}
+
+// UnsafeApplyGLShaderOverrides applies the overrides to init the gclass by setting the trampoline functions.
+// This is used by the bindings internally and only exported for visibility to other bindings code.
+func UnsafeApplyGLShaderOverrides[Instance GLShader](gclass unsafe.Pointer, overrides GLShaderOverrides[Instance]) {
+	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
+}
+
 // RendererInstance is the instance type used by all types extending GskRenderer. It is used internally by the bindings. Users should use the interface [Renderer] instead.
 type RendererInstance struct {
 	_ [0]func() // equal guard
@@ -1273,6 +1306,7 @@ type Renderer interface {
 	upcastToGskRenderer() *RendererInstance
 
 	// GetSurface wraps gsk_renderer_get_surface
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret gdk.Surface (nullable) 
@@ -1282,6 +1316,7 @@ type Renderer interface {
 	// If the renderer has not been realized yet, %NULL will be returned.
 	GetSurface() gdk.Surface
 	// IsRealized wraps gsk_renderer_is_realized
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
@@ -1403,6 +1438,7 @@ func NewRendererForSurface(surface gdk.Surface) Renderer {
 }
 
 // GetSurface wraps gsk_renderer_get_surface
+// 
 // The function returns the following values:
 // 
 // 	- goret gdk.Surface (nullable) 
@@ -1429,6 +1465,7 @@ func (renderer *RendererInstance) GetSurface() gdk.Surface {
 }
 
 // IsRealized wraps gsk_renderer_is_realized
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -1610,6 +1647,7 @@ func UnsafeVulkanRendererToGlibFull(c VulkanRenderer) unsafe.Pointer {
 }
 
 // NewVulkanRenderer wraps gsk_vulkan_renderer_new
+// 
 // The function returns the following values:
 // 
 // 	- goret Renderer 
@@ -1689,6 +1727,7 @@ func UnsafeCairoRendererToGlibFull(c CairoRenderer) unsafe.Pointer {
 }
 
 // NewCairoRenderer wraps gsk_cairo_renderer_new
+// 
 // The function returns the following values:
 // 
 // 	- goret Renderer 
@@ -1768,6 +1807,7 @@ func UnsafeGLRendererToGlibFull(c GLRenderer) unsafe.Pointer {
 }
 
 // NewGLRenderer wraps gsk_gl_renderer_new
+// 
 // The function returns the following values:
 // 
 // 	- goret Renderer 
@@ -1840,6 +1880,7 @@ func UnsafeNglRendererToGlibFull(c NglRenderer) unsafe.Pointer {
 }
 
 // NewNglRenderer wraps gsk_ngl_renderer_new
+// 
 // The function returns the following values:
 // 
 // 	- goret Renderer 
@@ -1858,6 +1899,8 @@ func NewNglRenderer() Renderer {
 }
 
 // CairoRendererClass wraps GskCairoRendererClass
+// 
+// CairoRendererClass is the type struct for [CairoRenderer]
 type CairoRendererClass struct {
 	*cairoRendererClass
 }
@@ -1872,31 +1915,6 @@ func UnsafeCairoRendererClassFromGlibBorrow(p unsafe.Pointer) *CairoRendererClas
 	return &CairoRendererClass{&cairoRendererClass{(*C.GskCairoRendererClass)(p)}}
 }
 
-// UnsafeCairoRendererClassFromGlibNone is used to convert raw C.GskCairoRendererClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeCairoRendererClassFromGlibNone(p unsafe.Pointer) *CairoRendererClass {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeCairoRendererClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.cairoRendererClass,
-		func (intern *cairoRendererClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeCairoRendererClassFromGlibFull is used to convert raw C.GskCairoRendererClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeCairoRendererClassFromGlibFull(p unsafe.Pointer) *CairoRendererClass {
-	wrapped := UnsafeCairoRendererClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.cairoRendererClass,
-		func (intern *cairoRendererClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
 // UnsafeCairoRendererClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
 // 
 // After this is called, no other method on [CairoRendererClass] is expected to work anymore.
@@ -1909,14 +1927,15 @@ func UnsafeCairoRendererClassToGlibNone(c *CairoRendererClass) unsafe.Pointer {
 	return unsafe.Pointer(c.native)
 }
 
-// UnsafeCairoRendererClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeCairoRendererClassToGlibFull(c *CairoRendererClass) unsafe.Pointer {
-	runtime.SetFinalizer(c.cairoRendererClass, nil)
-	_p := unsafe.Pointer(c.native)
-	c.native = nil // CairoRendererClass is invalid from here on
-	return _p
+// ParentClass returns the type struct of the parent class of this type struct.
+// This essentially casts the underlying c pointer.
+func (c *CairoRendererClass) ParentClass() *RendererClass {
+	parent := UnsafeRendererClassFromGlibBorrow(UnsafeCairoRendererClassToGlibNone(c))
+	// attach a cleanup to keep the instance alive as long as the parent is referenced
+	runtime.AddCleanup(parent, func(_ *CairoRendererClass) {}, c)
+	return parent
 }
+
 // ColorStop wraps GskColorStop
 //
 // A color stop in a gradient node.
@@ -1934,7 +1953,7 @@ func UnsafeColorStopFromGlibBorrow(p unsafe.Pointer) *ColorStop {
 	return &ColorStop{&colorStop{(*C.GskColorStop)(p)}}
 }
 
-// UnsafeColorStopFromGlibNone is used to convert raw C.GskColorStop pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeColorStopFromGlibNone is used to convert raw C.GskColorStop pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeColorStopFromGlibNone(p unsafe.Pointer) *ColorStop {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeColorStopFromGlibBorrow(p)
@@ -1947,7 +1966,7 @@ func UnsafeColorStopFromGlibNone(p unsafe.Pointer) *ColorStop {
 	return wrapped
 }
 
-// UnsafeColorStopFromGlibFull is used to convert raw C.GskColorStop pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeColorStopFromGlibFull is used to convert raw C.GskColorStop pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeColorStopFromGlibFull(p unsafe.Pointer) *ColorStop {
 	wrapped := UnsafeColorStopFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -1979,7 +1998,10 @@ func UnsafeColorStopToGlibFull(c *ColorStop) unsafe.Pointer {
 	c.native = nil // ColorStop is invalid from here on
 	return _p
 }
+
 // GLRendererClass wraps GskGLRendererClass
+// 
+// GLRendererClass is the type struct for [GLRenderer]
 type GLRendererClass struct {
 	*glRendererClass
 }
@@ -1994,31 +2016,6 @@ func UnsafeGLRendererClassFromGlibBorrow(p unsafe.Pointer) *GLRendererClass {
 	return &GLRendererClass{&glRendererClass{(*C.GskGLRendererClass)(p)}}
 }
 
-// UnsafeGLRendererClassFromGlibNone is used to convert raw C.GskGLRendererClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeGLRendererClassFromGlibNone(p unsafe.Pointer) *GLRendererClass {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeGLRendererClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.glRendererClass,
-		func (intern *glRendererClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeGLRendererClassFromGlibFull is used to convert raw C.GskGLRendererClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeGLRendererClassFromGlibFull(p unsafe.Pointer) *GLRendererClass {
-	wrapped := UnsafeGLRendererClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.glRendererClass,
-		func (intern *glRendererClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
 // UnsafeGLRendererClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
 // 
 // After this is called, no other method on [GLRendererClass] is expected to work anymore.
@@ -2031,15 +2028,18 @@ func UnsafeGLRendererClassToGlibNone(g *GLRendererClass) unsafe.Pointer {
 	return unsafe.Pointer(g.native)
 }
 
-// UnsafeGLRendererClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeGLRendererClassToGlibFull(g *GLRendererClass) unsafe.Pointer {
-	runtime.SetFinalizer(g.glRendererClass, nil)
-	_p := unsafe.Pointer(g.native)
-	g.native = nil // GLRendererClass is invalid from here on
-	return _p
+// ParentClass returns the type struct of the parent class of this type struct.
+// This essentially casts the underlying c pointer.
+func (g *GLRendererClass) ParentClass() *RendererClass {
+	parent := UnsafeRendererClassFromGlibBorrow(UnsafeGLRendererClassToGlibNone(g))
+	// attach a cleanup to keep the instance alive as long as the parent is referenced
+	runtime.AddCleanup(parent, func(_ *GLRendererClass) {}, g)
+	return parent
 }
+
 // GLShaderClass wraps GskGLShaderClass
+// 
+// GLShaderClass is the type struct for [GLShader]
 type GLShaderClass struct {
 	*glShaderClass
 }
@@ -2054,31 +2054,6 @@ func UnsafeGLShaderClassFromGlibBorrow(p unsafe.Pointer) *GLShaderClass {
 	return &GLShaderClass{&glShaderClass{(*C.GskGLShaderClass)(p)}}
 }
 
-// UnsafeGLShaderClassFromGlibNone is used to convert raw C.GskGLShaderClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeGLShaderClassFromGlibNone(p unsafe.Pointer) *GLShaderClass {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeGLShaderClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.glShaderClass,
-		func (intern *glShaderClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeGLShaderClassFromGlibFull is used to convert raw C.GskGLShaderClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeGLShaderClassFromGlibFull(p unsafe.Pointer) *GLShaderClass {
-	wrapped := UnsafeGLShaderClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.glShaderClass,
-		func (intern *glShaderClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
 // UnsafeGLShaderClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
 // 
 // After this is called, no other method on [GLShaderClass] is expected to work anymore.
@@ -2091,14 +2066,15 @@ func UnsafeGLShaderClassToGlibNone(g *GLShaderClass) unsafe.Pointer {
 	return unsafe.Pointer(g.native)
 }
 
-// UnsafeGLShaderClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeGLShaderClassToGlibFull(g *GLShaderClass) unsafe.Pointer {
-	runtime.SetFinalizer(g.glShaderClass, nil)
-	_p := unsafe.Pointer(g.native)
-	g.native = nil // GLShaderClass is invalid from here on
-	return _p
+// ParentClass returns the type struct of the parent class of this type struct.
+// This essentially casts the underlying c pointer.
+func (g *GLShaderClass) ParentClass() *gobject.ObjectClass {
+	parent := gobject.UnsafeObjectClassFromGlibBorrow(UnsafeGLShaderClassToGlibNone(g))
+	// attach a cleanup to keep the instance alive as long as the parent is referenced
+	runtime.AddCleanup(parent, func(_ *GLShaderClass) {}, g)
+	return parent
 }
+
 // ParseLocation wraps GskParseLocation
 //
 // A location in a parse buffer.
@@ -2116,7 +2092,7 @@ func UnsafeParseLocationFromGlibBorrow(p unsafe.Pointer) *ParseLocation {
 	return &ParseLocation{&parseLocation{(*C.GskParseLocation)(p)}}
 }
 
-// UnsafeParseLocationFromGlibNone is used to convert raw C.GskParseLocation pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeParseLocationFromGlibNone is used to convert raw C.GskParseLocation pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeParseLocationFromGlibNone(p unsafe.Pointer) *ParseLocation {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeParseLocationFromGlibBorrow(p)
@@ -2129,7 +2105,7 @@ func UnsafeParseLocationFromGlibNone(p unsafe.Pointer) *ParseLocation {
 	return wrapped
 }
 
-// UnsafeParseLocationFromGlibFull is used to convert raw C.GskParseLocation pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeParseLocationFromGlibFull is used to convert raw C.GskParseLocation pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeParseLocationFromGlibFull(p unsafe.Pointer) *ParseLocation {
 	wrapped := UnsafeParseLocationFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -2161,6 +2137,7 @@ func UnsafeParseLocationToGlibFull(p *ParseLocation) unsafe.Pointer {
 	p.native = nil // ParseLocation is invalid from here on
 	return _p
 }
+
 // Path wraps GskPath
 //
 // A `GskPath` describes lines and curves that are more complex
@@ -2208,7 +2185,7 @@ func UnsafePathFromGlibBorrow(p unsafe.Pointer) *Path {
 	return &Path{&path{(*C.GskPath)(p)}}
 }
 
-// UnsafePathFromGlibNone is used to convert raw C.GskPath pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafePathFromGlibNone is used to convert raw C.GskPath pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafePathFromGlibNone(p unsafe.Pointer) *Path {
 	C.gsk_path_ref((*C.GskPath)(p))
 	wrapped := UnsafePathFromGlibBorrow(p)
@@ -2221,7 +2198,7 @@ func UnsafePathFromGlibNone(p unsafe.Pointer) *Path {
 	return wrapped
 }
 
-// UnsafePathFromGlibFull is used to convert raw C.GskPath pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafePathFromGlibFull is used to convert raw C.GskPath pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafePathFromGlibFull(p unsafe.Pointer) *Path {
 	wrapped := UnsafePathFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -2260,6 +2237,7 @@ func UnsafePathToGlibFull(p *Path) unsafe.Pointer {
 	p.native = nil // Path is invalid from here on
 	return _p
 }
+
 // PathParse wraps gsk_path_parse
 // 
 // The function takes the following parameters:
@@ -2367,6 +2345,7 @@ func (self *Path) ForEach(flags PathForEachFlags, fn PathForEachFunc) bool {
 }
 
 // GetBounds wraps gsk_path_get_bounds
+// 
 // The function returns the following values:
 // 
 // 	- bounds graphene.Rect: the bounds of the given path 
@@ -2460,6 +2439,7 @@ func (self *Path) GetClosestPoint(point *graphene.Point, threshold float32) (Pat
 }
 
 // GetEndPoint wraps gsk_path_get_end_point
+// 
 // The function returns the following values:
 // 
 // 	- result PathPoint: return location for point 
@@ -2493,6 +2473,7 @@ func (self *Path) GetEndPoint() (PathPoint, bool) {
 }
 
 // GetStartPoint wraps gsk_path_get_start_point
+// 
 // The function returns the following values:
 // 
 // 	- result PathPoint: return location for point 
@@ -2611,6 +2592,7 @@ func (self *Path) InFill(point *graphene.Point, fillRule FillRule) bool {
 }
 
 // IsClosed wraps gsk_path_is_closed
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -2636,6 +2618,7 @@ func (self *Path) IsClosed() bool {
 }
 
 // IsEmpty wraps gsk_path_is_empty
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -2660,6 +2643,7 @@ func (self *Path) IsEmpty() bool {
 }
 
 // ToString wraps gsk_path_to_string
+// 
 // The function returns the following values:
 // 
 // 	- goret string 
@@ -2755,7 +2739,7 @@ func UnsafePathBuilderFromGlibBorrow(p unsafe.Pointer) *PathBuilder {
 	return &PathBuilder{&pathBuilder{(*C.GskPathBuilder)(p)}}
 }
 
-// UnsafePathBuilderFromGlibNone is used to convert raw C.GskPathBuilder pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafePathBuilderFromGlibNone is used to convert raw C.GskPathBuilder pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafePathBuilderFromGlibNone(p unsafe.Pointer) *PathBuilder {
 	C.gsk_path_builder_ref((*C.GskPathBuilder)(p))
 	wrapped := UnsafePathBuilderFromGlibBorrow(p)
@@ -2768,7 +2752,7 @@ func UnsafePathBuilderFromGlibNone(p unsafe.Pointer) *PathBuilder {
 	return wrapped
 }
 
-// UnsafePathBuilderFromGlibFull is used to convert raw C.GskPathBuilder pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafePathBuilderFromGlibFull is used to convert raw C.GskPathBuilder pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafePathBuilderFromGlibFull(p unsafe.Pointer) *PathBuilder {
 	wrapped := UnsafePathBuilderFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -2807,7 +2791,9 @@ func UnsafePathBuilderToGlibFull(p *PathBuilder) unsafe.Pointer {
 	p.native = nil // PathBuilder is invalid from here on
 	return _p
 }
+
 // NewPathBuilder wraps gsk_path_builder_new
+// 
 // The function returns the following values:
 // 
 // 	- goret *PathBuilder 
@@ -3153,6 +3139,7 @@ func (self *PathBuilder) CubicTo(x1 float32, y1 float32, x2 float32, y2 float32,
 }
 
 // GetCurrentPoint wraps gsk_path_builder_get_current_point
+// 
 // The function returns the following values:
 // 
 // 	- goret *graphene.Point 
@@ -3673,6 +3660,7 @@ func (self *PathBuilder) SVGArcTo(rx float32, ry float32, xAxisRotation float32,
 }
 
 // ToPath wraps gsk_path_builder_to_path
+// 
 // The function returns the following values:
 // 
 // 	- goret *Path 
@@ -3739,7 +3727,7 @@ func UnsafePathMeasureFromGlibBorrow(p unsafe.Pointer) *PathMeasure {
 	return &PathMeasure{&pathMeasure{(*C.GskPathMeasure)(p)}}
 }
 
-// UnsafePathMeasureFromGlibNone is used to convert raw C.GskPathMeasure pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafePathMeasureFromGlibNone is used to convert raw C.GskPathMeasure pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafePathMeasureFromGlibNone(p unsafe.Pointer) *PathMeasure {
 	C.gsk_path_measure_ref((*C.GskPathMeasure)(p))
 	wrapped := UnsafePathMeasureFromGlibBorrow(p)
@@ -3752,7 +3740,7 @@ func UnsafePathMeasureFromGlibNone(p unsafe.Pointer) *PathMeasure {
 	return wrapped
 }
 
-// UnsafePathMeasureFromGlibFull is used to convert raw C.GskPathMeasure pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafePathMeasureFromGlibFull is used to convert raw C.GskPathMeasure pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafePathMeasureFromGlibFull(p unsafe.Pointer) *PathMeasure {
 	wrapped := UnsafePathMeasureFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -3791,6 +3779,7 @@ func UnsafePathMeasureToGlibFull(p *PathMeasure) unsafe.Pointer {
 	p.native = nil // PathMeasure is invalid from here on
 	return _p
 }
+
 // NewPathMeasure wraps gsk_path_measure_new
 // 
 // The function takes the following parameters:
@@ -3851,6 +3840,7 @@ func NewPathMeasureWithTolerance(path *Path, tolerance float32) *PathMeasure {
 }
 
 // GetLength wraps gsk_path_measure_get_length
+// 
 // The function returns the following values:
 // 
 // 	- goret float32 
@@ -3875,6 +3865,7 @@ func (self *PathMeasure) GetLength() float32 {
 }
 
 // GetPath wraps gsk_path_measure_get_path
+// 
 // The function returns the following values:
 // 
 // 	- goret *Path 
@@ -3937,6 +3928,7 @@ func (self *PathMeasure) GetPoint(distance float32) (PathPoint, bool) {
 }
 
 // GetTolerance wraps gsk_path_measure_get_tolerance
+// 
 // The function returns the following values:
 // 
 // 	- goret float32 
@@ -3999,7 +3991,7 @@ func UnsafePathPointFromGlibBorrow(p unsafe.Pointer) *PathPoint {
 	return &PathPoint{&pathPoint{(*C.GskPathPoint)(p)}}
 }
 
-// UnsafePathPointFromGlibNone is used to convert raw C.GskPathPoint pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafePathPointFromGlibNone is used to convert raw C.GskPathPoint pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafePathPointFromGlibNone(p unsafe.Pointer) *PathPoint {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafePathPointFromGlibBorrow(p)
@@ -4012,7 +4004,7 @@ func UnsafePathPointFromGlibNone(p unsafe.Pointer) *PathPoint {
 	return wrapped
 }
 
-// UnsafePathPointFromGlibFull is used to convert raw C.GskPathPoint pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafePathPointFromGlibFull is used to convert raw C.GskPathPoint pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafePathPointFromGlibFull(p unsafe.Pointer) *PathPoint {
 	wrapped := UnsafePathPointFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -4044,6 +4036,7 @@ func UnsafePathPointToGlibFull(p *PathPoint) unsafe.Pointer {
 	p.native = nil // PathPoint is invalid from here on
 	return _p
 }
+
 // Compare wraps gsk_path_point_compare
 // 
 // The function takes the following parameters:
@@ -4075,6 +4068,7 @@ func (point1 *PathPoint) Compare(point2 *PathPoint) int {
 }
 
 // Copy wraps gsk_path_point_copy
+// 
 // The function returns the following values:
 // 
 // 	- goret *PathPoint 
@@ -4349,6 +4343,8 @@ func (point *PathPoint) GetTangent(path *Path, direction PathDirection) graphene
 }
 
 // RendererClass wraps GskRendererClass
+// 
+// RendererClass is the type struct for [Renderer]
 type RendererClass struct {
 	*rendererClass
 }
@@ -4363,31 +4359,6 @@ func UnsafeRendererClassFromGlibBorrow(p unsafe.Pointer) *RendererClass {
 	return &RendererClass{&rendererClass{(*C.GskRendererClass)(p)}}
 }
 
-// UnsafeRendererClassFromGlibNone is used to convert raw C.GskRendererClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeRendererClassFromGlibNone(p unsafe.Pointer) *RendererClass {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeRendererClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.rendererClass,
-		func (intern *rendererClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeRendererClassFromGlibFull is used to convert raw C.GskRendererClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeRendererClassFromGlibFull(p unsafe.Pointer) *RendererClass {
-	wrapped := UnsafeRendererClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.rendererClass,
-		func (intern *rendererClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
 // UnsafeRendererClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
 // 
 // After this is called, no other method on [RendererClass] is expected to work anymore.
@@ -4400,14 +4371,15 @@ func UnsafeRendererClassToGlibNone(r *RendererClass) unsafe.Pointer {
 	return unsafe.Pointer(r.native)
 }
 
-// UnsafeRendererClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeRendererClassToGlibFull(r *RendererClass) unsafe.Pointer {
-	runtime.SetFinalizer(r.rendererClass, nil)
-	_p := unsafe.Pointer(r.native)
-	r.native = nil // RendererClass is invalid from here on
-	return _p
+// ParentClass returns the type struct of the parent class of this type struct.
+// This essentially casts the underlying c pointer.
+func (r *RendererClass) ParentClass() *gobject.ObjectClass {
+	parent := gobject.UnsafeObjectClassFromGlibBorrow(UnsafeRendererClassToGlibNone(r))
+	// attach a cleanup to keep the instance alive as long as the parent is referenced
+	runtime.AddCleanup(parent, func(_ *RendererClass) {}, r)
+	return parent
 }
+
 // RoundedRect wraps GskRoundedRect
 //
 // A rectangular region with rounded corners.
@@ -4437,7 +4409,7 @@ func UnsafeRoundedRectFromGlibBorrow(p unsafe.Pointer) *RoundedRect {
 	return &RoundedRect{&roundedRect{(*C.GskRoundedRect)(p)}}
 }
 
-// UnsafeRoundedRectFromGlibNone is used to convert raw C.GskRoundedRect pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeRoundedRectFromGlibNone is used to convert raw C.GskRoundedRect pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeRoundedRectFromGlibNone(p unsafe.Pointer) *RoundedRect {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeRoundedRectFromGlibBorrow(p)
@@ -4450,7 +4422,7 @@ func UnsafeRoundedRectFromGlibNone(p unsafe.Pointer) *RoundedRect {
 	return wrapped
 }
 
-// UnsafeRoundedRectFromGlibFull is used to convert raw C.GskRoundedRect pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeRoundedRectFromGlibFull is used to convert raw C.GskRoundedRect pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeRoundedRectFromGlibFull(p unsafe.Pointer) *RoundedRect {
 	wrapped := UnsafeRoundedRectFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -4482,6 +4454,7 @@ func UnsafeRoundedRectToGlibFull(r *RoundedRect) unsafe.Pointer {
 	r.native = nil // RoundedRect is invalid from here on
 	return _p
 }
+
 // ContainsPoint wraps gsk_rounded_rect_contains_point
 // 
 // The function takes the following parameters:
@@ -4696,6 +4669,7 @@ func (self *RoundedRect) IntersectsRect(rect *graphene.Rect) bool {
 }
 
 // IsRectilinear wraps gsk_rounded_rect_is_rectilinear
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -4724,6 +4698,7 @@ func (self *RoundedRect) IsRectilinear() bool {
 }
 
 // Normalize wraps gsk_rounded_rect_normalize
+// 
 // The function returns the following values:
 // 
 // 	- goret *RoundedRect 
@@ -4863,7 +4838,7 @@ func UnsafeShaderArgsBuilderFromGlibBorrow(p unsafe.Pointer) *ShaderArgsBuilder 
 	return &ShaderArgsBuilder{&shaderArgsBuilder{(*C.GskShaderArgsBuilder)(p)}}
 }
 
-// UnsafeShaderArgsBuilderFromGlibNone is used to convert raw C.GskShaderArgsBuilder pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeShaderArgsBuilderFromGlibNone is used to convert raw C.GskShaderArgsBuilder pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeShaderArgsBuilderFromGlibNone(p unsafe.Pointer) *ShaderArgsBuilder {
 	C.gsk_shader_args_builder_ref((*C.GskShaderArgsBuilder)(p))
 	wrapped := UnsafeShaderArgsBuilderFromGlibBorrow(p)
@@ -4876,7 +4851,7 @@ func UnsafeShaderArgsBuilderFromGlibNone(p unsafe.Pointer) *ShaderArgsBuilder {
 	return wrapped
 }
 
-// UnsafeShaderArgsBuilderFromGlibFull is used to convert raw C.GskShaderArgsBuilder pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeShaderArgsBuilderFromGlibFull is used to convert raw C.GskShaderArgsBuilder pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeShaderArgsBuilderFromGlibFull(p unsafe.Pointer) *ShaderArgsBuilder {
 	wrapped := UnsafeShaderArgsBuilderFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -4915,6 +4890,7 @@ func UnsafeShaderArgsBuilderToGlibFull(s *ShaderArgsBuilder) unsafe.Pointer {
 	s.native = nil // ShaderArgsBuilder is invalid from here on
 	return _p
 }
+
 // SetFloat wraps gsk_shader_args_builder_set_float
 // 
 // The function takes the following parameters:
@@ -4957,7 +4933,7 @@ func UnsafeShadowFromGlibBorrow(p unsafe.Pointer) *Shadow {
 	return &Shadow{&shadow{(*C.GskShadow)(p)}}
 }
 
-// UnsafeShadowFromGlibNone is used to convert raw C.GskShadow pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeShadowFromGlibNone is used to convert raw C.GskShadow pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeShadowFromGlibNone(p unsafe.Pointer) *Shadow {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeShadowFromGlibBorrow(p)
@@ -4970,7 +4946,7 @@ func UnsafeShadowFromGlibNone(p unsafe.Pointer) *Shadow {
 	return wrapped
 }
 
-// UnsafeShadowFromGlibFull is used to convert raw C.GskShadow pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeShadowFromGlibFull is used to convert raw C.GskShadow pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeShadowFromGlibFull(p unsafe.Pointer) *Shadow {
 	wrapped := UnsafeShadowFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -5002,6 +4978,7 @@ func UnsafeShadowToGlibFull(s *Shadow) unsafe.Pointer {
 	s.native = nil // Shadow is invalid from here on
 	return _p
 }
+
 // Stroke wraps GskStroke
 //
 // A `GskStroke` struct collects the parameters that influence
@@ -5032,7 +5009,7 @@ func UnsafeStrokeFromGlibBorrow(p unsafe.Pointer) *Stroke {
 	return &Stroke{&stroke{(*C.GskStroke)(p)}}
 }
 
-// UnsafeStrokeFromGlibNone is used to convert raw C.GskStroke pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeStrokeFromGlibNone is used to convert raw C.GskStroke pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeStrokeFromGlibNone(p unsafe.Pointer) *Stroke {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeStrokeFromGlibBorrow(p)
@@ -5045,7 +5022,7 @@ func UnsafeStrokeFromGlibNone(p unsafe.Pointer) *Stroke {
 	return wrapped
 }
 
-// UnsafeStrokeFromGlibFull is used to convert raw C.GskStroke pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeStrokeFromGlibFull is used to convert raw C.GskStroke pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeStrokeFromGlibFull(p unsafe.Pointer) *Stroke {
 	wrapped := UnsafeStrokeFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -5077,6 +5054,7 @@ func UnsafeStrokeToGlibFull(s *Stroke) unsafe.Pointer {
 	s.native = nil // Stroke is invalid from here on
 	return _p
 }
+
 // NewStroke wraps gsk_stroke_new
 // 
 // The function takes the following parameters:
@@ -5142,6 +5120,7 @@ func StrokeEqual(stroke1 unsafe.Pointer, stroke2 unsafe.Pointer) bool {
 }
 
 // Copy wraps gsk_stroke_copy
+// 
 // The function returns the following values:
 // 
 // 	- goret *Stroke 
@@ -5164,6 +5143,7 @@ func (other *Stroke) Copy() *Stroke {
 }
 
 // GetDash wraps gsk_stroke_get_dash
+// 
 // The function returns the following values:
 // 
 // 	- nDash uint: number of elements in the array returned 
@@ -5192,6 +5172,7 @@ func (self *Stroke) GetDash() (uint, []float32) {
 }
 
 // GetDashOffset wraps gsk_stroke_get_dash_offset
+// 
 // The function returns the following values:
 // 
 // 	- goret float32 
@@ -5214,6 +5195,7 @@ func (self *Stroke) GetDashOffset() float32 {
 }
 
 // GetLineCap wraps gsk_stroke_get_line_cap
+// 
 // The function returns the following values:
 // 
 // 	- goret LineCap 
@@ -5238,6 +5220,7 @@ func (self *Stroke) GetLineCap() LineCap {
 }
 
 // GetLineJoin wraps gsk_stroke_get_line_join
+// 
 // The function returns the following values:
 // 
 // 	- goret LineJoin 
@@ -5262,6 +5245,7 @@ func (self *Stroke) GetLineJoin() LineJoin {
 }
 
 // GetLineWidth wraps gsk_stroke_get_line_width
+// 
 // The function returns the following values:
 // 
 // 	- goret float32 
@@ -5284,6 +5268,7 @@ func (self *Stroke) GetLineWidth() float32 {
 }
 
 // GetMiterLimit wraps gsk_stroke_get_miter_limit
+// 
 // The function returns the following values:
 // 
 // 	- goret float32 
@@ -5501,7 +5486,7 @@ func UnsafeTransformFromGlibBorrow(p unsafe.Pointer) *Transform {
 	return &Transform{&transform{(*C.GskTransform)(p)}}
 }
 
-// UnsafeTransformFromGlibNone is used to convert raw C.GskTransform pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeTransformFromGlibNone is used to convert raw C.GskTransform pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeTransformFromGlibNone(p unsafe.Pointer) *Transform {
 	C.gsk_transform_ref((*C.GskTransform)(p))
 	wrapped := UnsafeTransformFromGlibBorrow(p)
@@ -5514,7 +5499,7 @@ func UnsafeTransformFromGlibNone(p unsafe.Pointer) *Transform {
 	return wrapped
 }
 
-// UnsafeTransformFromGlibFull is used to convert raw C.GskTransform pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeTransformFromGlibFull is used to convert raw C.GskTransform pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeTransformFromGlibFull(p unsafe.Pointer) *Transform {
 	wrapped := UnsafeTransformFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -5553,7 +5538,9 @@ func UnsafeTransformToGlibFull(t *Transform) unsafe.Pointer {
 	t.native = nil // Transform is invalid from here on
 	return _p
 }
+
 // NewTransform wraps gsk_transform_new
+// 
 // The function returns the following values:
 // 
 // 	- goret *Transform 
@@ -5650,6 +5637,7 @@ func (first *Transform) Equal(second *Transform) bool {
 }
 
 // GetCategory wraps gsk_transform_get_category
+// 
 // The function returns the following values:
 // 
 // 	- goret TransformCategory 
@@ -5672,6 +5660,7 @@ func (self *Transform) GetCategory() TransformCategory {
 }
 
 // Invert wraps gsk_transform_invert
+// 
 // The function returns the following values:
 // 
 // 	- goret *Transform (nullable) 
@@ -5978,6 +5967,7 @@ func (next *Transform) Skew(skewX float32, skewY float32) *Transform {
 }
 
 // To2D wraps gsk_transform_to_2d
+// 
 // The function returns the following values:
 // 
 // 	- outXx float32: return location for the xx member 
@@ -6036,6 +6026,7 @@ func (self *Transform) To2D() (float32, float32, float32, float32, float32, floa
 }
 
 // To2DComponents wraps gsk_transform_to_2d_components
+// 
 // The function returns the following values:
 // 
 // 	- outSkewX float32: return location for the skew factor
@@ -6105,6 +6096,7 @@ func (self *Transform) To2DComponents() (float32, float32, float32, float32, flo
 }
 
 // ToAffine wraps gsk_transform_to_affine
+// 
 // The function returns the following values:
 // 
 // 	- outScaleX float32: return location for the scale
@@ -6157,6 +6149,7 @@ func (self *Transform) ToAffine() (float32, float32, float32, float32) {
 }
 
 // ToMatrix wraps gsk_transform_to_matrix
+// 
 // The function returns the following values:
 // 
 // 	- outMatrix graphene.Matrix: The matrix to set 
@@ -6183,6 +6176,7 @@ func (self *Transform) ToMatrix() graphene.Matrix {
 }
 
 // ToString wraps gsk_transform_to_string
+// 
 // The function returns the following values:
 // 
 // 	- goret string 
@@ -6210,6 +6204,7 @@ func (self *Transform) ToString() string {
 }
 
 // ToTranslate wraps gsk_transform_to_translate
+// 
 // The function returns the following values:
 // 
 // 	- outDx float32: return location for the translation
@@ -6420,6 +6415,8 @@ func (next *Transform) Translate3D(point *graphene.Point3D) *Transform {
 }
 
 // VulkanRendererClass wraps GskVulkanRendererClass
+// 
+// VulkanRendererClass is the type struct for [VulkanRenderer]
 type VulkanRendererClass struct {
 	*vulkanRendererClass
 }
@@ -6434,31 +6431,6 @@ func UnsafeVulkanRendererClassFromGlibBorrow(p unsafe.Pointer) *VulkanRendererCl
 	return &VulkanRendererClass{&vulkanRendererClass{(*C.GskVulkanRendererClass)(p)}}
 }
 
-// UnsafeVulkanRendererClassFromGlibNone is used to convert raw C.GskVulkanRendererClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeVulkanRendererClassFromGlibNone(p unsafe.Pointer) *VulkanRendererClass {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeVulkanRendererClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.vulkanRendererClass,
-		func (intern *vulkanRendererClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeVulkanRendererClassFromGlibFull is used to convert raw C.GskVulkanRendererClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeVulkanRendererClassFromGlibFull(p unsafe.Pointer) *VulkanRendererClass {
-	wrapped := UnsafeVulkanRendererClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.vulkanRendererClass,
-		func (intern *vulkanRendererClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
 // UnsafeVulkanRendererClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
 // 
 // After this is called, no other method on [VulkanRendererClass] is expected to work anymore.
@@ -6471,11 +6443,12 @@ func UnsafeVulkanRendererClassToGlibNone(v *VulkanRendererClass) unsafe.Pointer 
 	return unsafe.Pointer(v.native)
 }
 
-// UnsafeVulkanRendererClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeVulkanRendererClassToGlibFull(v *VulkanRendererClass) unsafe.Pointer {
-	runtime.SetFinalizer(v.vulkanRendererClass, nil)
-	_p := unsafe.Pointer(v.native)
-	v.native = nil // VulkanRendererClass is invalid from here on
-	return _p
+// ParentClass returns the type struct of the parent class of this type struct.
+// This essentially casts the underlying c pointer.
+func (v *VulkanRendererClass) ParentClass() *RendererClass {
+	parent := UnsafeRendererClassFromGlibBorrow(UnsafeVulkanRendererClassToGlibNone(v))
+	// attach a cleanup to keep the instance alive as long as the parent is referenced
+	runtime.AddCleanup(parent, func(_ *VulkanRendererClass) {}, v)
+	return parent
 }
+

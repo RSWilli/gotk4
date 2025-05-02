@@ -56,3 +56,13 @@ func _gotk4_gdk3_WindowChildFunc(carg1 *C.GdkWindow, carg2 C.gpointer) (cret C.g
 	return cret
 }
 
+//export _gotk4_gdk3_Window_from_embedder
+func _gotk4_gdk3_Window_from_embedder(carg0 *C.GdkWindow, carg1 C.gdouble, carg2 C.gdouble, carg3 *C.gdouble, carg4 *C.gdouble) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gdk3_Window_to_embedder
+func _gotk4_gdk3_Window_to_embedder(carg0 *C.GdkWindow, carg1 C.gdouble, carg2 C.gdouble, carg3 *C.gdouble, carg4 *C.gdouble) {
+	panic("unimplemented")
+}
+

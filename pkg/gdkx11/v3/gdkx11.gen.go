@@ -141,6 +141,7 @@ func X11FreeCompoundText(ctext *uint8) {
 }
 
 // X11GetDefaultScreen wraps gdk_x11_get_default_screen
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -586,6 +587,7 @@ type X11Display interface {
 	upcastToGdkX11Display() *X11DisplayInstance
 
 	// ErrorTrapPop wraps gdk_x11_display_error_trap_pop
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int 
@@ -622,6 +624,7 @@ type X11Display interface {
 	// See also gdk_error_trap_push() to push a trap on all displays.
 	ErrorTrapPush()
 	// GetStartupNotificationID wraps gdk_x11_display_get_startup_notification_id
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret string 
@@ -629,6 +632,7 @@ type X11Display interface {
 	// Gets the startup notification ID for a display.
 	GetStartupNotificationID() string
 	// GetUserTime wraps gdk_x11_display_get_user_time
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret uint32 
@@ -781,6 +785,7 @@ func X11DisplayGetGLXVersion(display gdk.Display) (int, int, bool) {
 }
 
 // ErrorTrapPop wraps gdk_x11_display_error_trap_pop
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -848,6 +853,7 @@ func (display *X11DisplayInstance) ErrorTrapPush() {
 }
 
 // GetStartupNotificationID wraps gdk_x11_display_get_startup_notification_id
+// 
 // The function returns the following values:
 // 
 // 	- goret string 
@@ -870,6 +876,7 @@ func (display *X11DisplayInstance) GetStartupNotificationID() string {
 }
 
 // GetUserTime wraps gdk_x11_display_get_user_time
+// 
 // The function returns the following values:
 // 
 // 	- goret uint32 
@@ -1382,6 +1389,7 @@ type X11Screen interface {
 	upcastToGdkX11Screen() *X11ScreenInstance
 
 	// GetCurrentDesktop wraps gdk_x11_screen_get_current_desktop
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret uint32 
@@ -1392,6 +1400,7 @@ type X11Screen interface {
 	// [Extended Window Manager Hints](http://www.freedesktop.org/Standards/wm-spec) specification.
 	GetCurrentDesktop() uint32
 	// GetNumberOfDesktops wraps gdk_x11_screen_get_number_of_desktops
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret uint32 
@@ -1402,6 +1411,7 @@ type X11Screen interface {
 	// [Extended Window Manager Hints](http://www.freedesktop.org/Standards/wm-spec) specification.
 	GetNumberOfDesktops() uint32
 	// GetScreenNumber wraps gdk_x11_screen_get_screen_number
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int 
@@ -1409,6 +1419,7 @@ type X11Screen interface {
 	// Returns the index of a #GdkScreen.
 	GetScreenNumber() int
 	// GetWindowManagerName wraps gdk_x11_screen_get_window_manager_name
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret string 
@@ -1456,6 +1467,7 @@ func UnsafeX11ScreenToGlibFull(c X11Screen) unsafe.Pointer {
 }
 
 // GetCurrentDesktop wraps gdk_x11_screen_get_current_desktop
+// 
 // The function returns the following values:
 // 
 // 	- goret uint32 
@@ -1481,6 +1493,7 @@ func (screen *X11ScreenInstance) GetCurrentDesktop() uint32 {
 }
 
 // GetNumberOfDesktops wraps gdk_x11_screen_get_number_of_desktops
+// 
 // The function returns the following values:
 // 
 // 	- goret uint32 
@@ -1506,6 +1519,7 @@ func (screen *X11ScreenInstance) GetNumberOfDesktops() uint32 {
 }
 
 // GetScreenNumber wraps gdk_x11_screen_get_screen_number
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -1528,6 +1542,7 @@ func (screen *X11ScreenInstance) GetScreenNumber() int {
 }
 
 // GetWindowManagerName wraps gdk_x11_screen_get_window_manager_name
+// 
 // The function returns the following values:
 // 
 // 	- goret string 
@@ -1553,6 +1568,7 @@ func (screen *X11ScreenInstance) GetWindowManagerName() string {
 func (o *X11ScreenInstance) ConnectWindowManagerChanged(fn func(X11Screen)) gobject.SignalHandle {
 	return o.Connect("window-manager-changed", fn)
 }
+
 // X11VisualInstance is the instance type used by all types extending GdkX11Visual. It is used internally by the bindings. Users should use the interface [X11Visual] instead.
 type X11VisualInstance struct {
 	_ [0]func() // equal guard
@@ -1617,6 +1633,7 @@ type X11Window interface {
 	upcastToGdkX11Window() *X11WindowInstance
 
 	// GetDesktop wraps gdk_x11_window_get_desktop
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret uint32 
@@ -1766,6 +1783,7 @@ func UnsafeX11WindowToGlibFull(c X11Window) unsafe.Pointer {
 }
 
 // GetDesktop wraps gdk_x11_window_get_desktop
+// 
 // The function returns the following values:
 // 
 // 	- goret uint32 
@@ -1998,6 +2016,8 @@ func (window *X11WindowInstance) SetUTF8Property(name string, value string) {
 }
 
 // X11AppLaunchContextClass wraps GdkX11AppLaunchContextClass
+// 
+// X11AppLaunchContextClass is the type struct for [X11AppLaunchContext]
 type X11AppLaunchContextClass struct {
 	*x11AppLaunchContextClass
 }
@@ -2012,31 +2032,6 @@ func UnsafeX11AppLaunchContextClassFromGlibBorrow(p unsafe.Pointer) *X11AppLaunc
 	return &X11AppLaunchContextClass{&x11AppLaunchContextClass{(*C.GdkX11AppLaunchContextClass)(p)}}
 }
 
-// UnsafeX11AppLaunchContextClassFromGlibNone is used to convert raw C.GdkX11AppLaunchContextClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeX11AppLaunchContextClassFromGlibNone(p unsafe.Pointer) *X11AppLaunchContextClass {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeX11AppLaunchContextClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.x11AppLaunchContextClass,
-		func (intern *x11AppLaunchContextClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeX11AppLaunchContextClassFromGlibFull is used to convert raw C.GdkX11AppLaunchContextClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeX11AppLaunchContextClassFromGlibFull(p unsafe.Pointer) *X11AppLaunchContextClass {
-	wrapped := UnsafeX11AppLaunchContextClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.x11AppLaunchContextClass,
-		func (intern *x11AppLaunchContextClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
 // UnsafeX11AppLaunchContextClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
 // 
 // After this is called, no other method on [X11AppLaunchContextClass] is expected to work anymore.
@@ -2049,15 +2044,9 @@ func UnsafeX11AppLaunchContextClassToGlibNone(x *X11AppLaunchContextClass) unsaf
 	return unsafe.Pointer(x.native)
 }
 
-// UnsafeX11AppLaunchContextClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeX11AppLaunchContextClassToGlibFull(x *X11AppLaunchContextClass) unsafe.Pointer {
-	runtime.SetFinalizer(x.x11AppLaunchContextClass, nil)
-	_p := unsafe.Pointer(x.native)
-	x.native = nil // X11AppLaunchContextClass is invalid from here on
-	return _p
-}
 // X11CursorClass wraps GdkX11CursorClass
+// 
+// X11CursorClass is the type struct for [X11Cursor]
 type X11CursorClass struct {
 	*x11CursorClass
 }
@@ -2072,31 +2061,6 @@ func UnsafeX11CursorClassFromGlibBorrow(p unsafe.Pointer) *X11CursorClass {
 	return &X11CursorClass{&x11CursorClass{(*C.GdkX11CursorClass)(p)}}
 }
 
-// UnsafeX11CursorClassFromGlibNone is used to convert raw C.GdkX11CursorClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeX11CursorClassFromGlibNone(p unsafe.Pointer) *X11CursorClass {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeX11CursorClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.x11CursorClass,
-		func (intern *x11CursorClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeX11CursorClassFromGlibFull is used to convert raw C.GdkX11CursorClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeX11CursorClassFromGlibFull(p unsafe.Pointer) *X11CursorClass {
-	wrapped := UnsafeX11CursorClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.x11CursorClass,
-		func (intern *x11CursorClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
 // UnsafeX11CursorClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
 // 
 // After this is called, no other method on [X11CursorClass] is expected to work anymore.
@@ -2109,15 +2073,9 @@ func UnsafeX11CursorClassToGlibNone(x *X11CursorClass) unsafe.Pointer {
 	return unsafe.Pointer(x.native)
 }
 
-// UnsafeX11CursorClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeX11CursorClassToGlibFull(x *X11CursorClass) unsafe.Pointer {
-	runtime.SetFinalizer(x.x11CursorClass, nil)
-	_p := unsafe.Pointer(x.native)
-	x.native = nil // X11CursorClass is invalid from here on
-	return _p
-}
 // X11DeviceCoreClass wraps GdkX11DeviceCoreClass
+// 
+// X11DeviceCoreClass is the type struct for [X11DeviceCore]
 type X11DeviceCoreClass struct {
 	*x11DeviceCoreClass
 }
@@ -2132,31 +2090,6 @@ func UnsafeX11DeviceCoreClassFromGlibBorrow(p unsafe.Pointer) *X11DeviceCoreClas
 	return &X11DeviceCoreClass{&x11DeviceCoreClass{(*C.GdkX11DeviceCoreClass)(p)}}
 }
 
-// UnsafeX11DeviceCoreClassFromGlibNone is used to convert raw C.GdkX11DeviceCoreClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeX11DeviceCoreClassFromGlibNone(p unsafe.Pointer) *X11DeviceCoreClass {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeX11DeviceCoreClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.x11DeviceCoreClass,
-		func (intern *x11DeviceCoreClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeX11DeviceCoreClassFromGlibFull is used to convert raw C.GdkX11DeviceCoreClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeX11DeviceCoreClassFromGlibFull(p unsafe.Pointer) *X11DeviceCoreClass {
-	wrapped := UnsafeX11DeviceCoreClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.x11DeviceCoreClass,
-		func (intern *x11DeviceCoreClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
 // UnsafeX11DeviceCoreClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
 // 
 // After this is called, no other method on [X11DeviceCoreClass] is expected to work anymore.
@@ -2169,15 +2102,9 @@ func UnsafeX11DeviceCoreClassToGlibNone(x *X11DeviceCoreClass) unsafe.Pointer {
 	return unsafe.Pointer(x.native)
 }
 
-// UnsafeX11DeviceCoreClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeX11DeviceCoreClassToGlibFull(x *X11DeviceCoreClass) unsafe.Pointer {
-	runtime.SetFinalizer(x.x11DeviceCoreClass, nil)
-	_p := unsafe.Pointer(x.native)
-	x.native = nil // X11DeviceCoreClass is invalid from here on
-	return _p
-}
 // X11DeviceManagerCoreClass wraps GdkX11DeviceManagerCoreClass
+// 
+// X11DeviceManagerCoreClass is the type struct for [X11DeviceManagerCore]
 type X11DeviceManagerCoreClass struct {
 	*x11DeviceManagerCoreClass
 }
@@ -2192,31 +2119,6 @@ func UnsafeX11DeviceManagerCoreClassFromGlibBorrow(p unsafe.Pointer) *X11DeviceM
 	return &X11DeviceManagerCoreClass{&x11DeviceManagerCoreClass{(*C.GdkX11DeviceManagerCoreClass)(p)}}
 }
 
-// UnsafeX11DeviceManagerCoreClassFromGlibNone is used to convert raw C.GdkX11DeviceManagerCoreClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeX11DeviceManagerCoreClassFromGlibNone(p unsafe.Pointer) *X11DeviceManagerCoreClass {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeX11DeviceManagerCoreClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.x11DeviceManagerCoreClass,
-		func (intern *x11DeviceManagerCoreClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeX11DeviceManagerCoreClassFromGlibFull is used to convert raw C.GdkX11DeviceManagerCoreClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeX11DeviceManagerCoreClassFromGlibFull(p unsafe.Pointer) *X11DeviceManagerCoreClass {
-	wrapped := UnsafeX11DeviceManagerCoreClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.x11DeviceManagerCoreClass,
-		func (intern *x11DeviceManagerCoreClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
 // UnsafeX11DeviceManagerCoreClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
 // 
 // After this is called, no other method on [X11DeviceManagerCoreClass] is expected to work anymore.
@@ -2229,15 +2131,9 @@ func UnsafeX11DeviceManagerCoreClassToGlibNone(x *X11DeviceManagerCoreClass) uns
 	return unsafe.Pointer(x.native)
 }
 
-// UnsafeX11DeviceManagerCoreClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeX11DeviceManagerCoreClassToGlibFull(x *X11DeviceManagerCoreClass) unsafe.Pointer {
-	runtime.SetFinalizer(x.x11DeviceManagerCoreClass, nil)
-	_p := unsafe.Pointer(x.native)
-	x.native = nil // X11DeviceManagerCoreClass is invalid from here on
-	return _p
-}
 // X11DeviceManagerXI2Class wraps GdkX11DeviceManagerXI2Class
+// 
+// X11DeviceManagerXI2Class is the type struct for [X11DeviceManagerXI2]
 type X11DeviceManagerXI2Class struct {
 	*x11DeviceManagerXI2Class
 }
@@ -2252,31 +2148,6 @@ func UnsafeX11DeviceManagerXI2ClassFromGlibBorrow(p unsafe.Pointer) *X11DeviceMa
 	return &X11DeviceManagerXI2Class{&x11DeviceManagerXI2Class{(*C.GdkX11DeviceManagerXI2Class)(p)}}
 }
 
-// UnsafeX11DeviceManagerXI2ClassFromGlibNone is used to convert raw C.GdkX11DeviceManagerXI2Class pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeX11DeviceManagerXI2ClassFromGlibNone(p unsafe.Pointer) *X11DeviceManagerXI2Class {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeX11DeviceManagerXI2ClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.x11DeviceManagerXI2Class,
-		func (intern *x11DeviceManagerXI2Class) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeX11DeviceManagerXI2ClassFromGlibFull is used to convert raw C.GdkX11DeviceManagerXI2Class pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeX11DeviceManagerXI2ClassFromGlibFull(p unsafe.Pointer) *X11DeviceManagerXI2Class {
-	wrapped := UnsafeX11DeviceManagerXI2ClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.x11DeviceManagerXI2Class,
-		func (intern *x11DeviceManagerXI2Class) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
 // UnsafeX11DeviceManagerXI2ClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
 // 
 // After this is called, no other method on [X11DeviceManagerXI2Class] is expected to work anymore.
@@ -2289,15 +2160,18 @@ func UnsafeX11DeviceManagerXI2ClassToGlibNone(x *X11DeviceManagerXI2Class) unsaf
 	return unsafe.Pointer(x.native)
 }
 
-// UnsafeX11DeviceManagerXI2ClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeX11DeviceManagerXI2ClassToGlibFull(x *X11DeviceManagerXI2Class) unsafe.Pointer {
-	runtime.SetFinalizer(x.x11DeviceManagerXI2Class, nil)
-	_p := unsafe.Pointer(x.native)
-	x.native = nil // X11DeviceManagerXI2Class is invalid from here on
-	return _p
+// ParentClass returns the type struct of the parent class of this type struct.
+// This essentially casts the underlying c pointer.
+func (x *X11DeviceManagerXI2Class) ParentClass() *X11DeviceManagerCoreClass {
+	parent := UnsafeX11DeviceManagerCoreClassFromGlibBorrow(UnsafeX11DeviceManagerXI2ClassToGlibNone(x))
+	// attach a cleanup to keep the instance alive as long as the parent is referenced
+	runtime.AddCleanup(parent, func(_ *X11DeviceManagerXI2Class) {}, x)
+	return parent
 }
+
 // X11DeviceXI2Class wraps GdkX11DeviceXI2Class
+// 
+// X11DeviceXI2Class is the type struct for [X11DeviceXI2]
 type X11DeviceXI2Class struct {
 	*x11DeviceXI2Class
 }
@@ -2312,31 +2186,6 @@ func UnsafeX11DeviceXI2ClassFromGlibBorrow(p unsafe.Pointer) *X11DeviceXI2Class 
 	return &X11DeviceXI2Class{&x11DeviceXI2Class{(*C.GdkX11DeviceXI2Class)(p)}}
 }
 
-// UnsafeX11DeviceXI2ClassFromGlibNone is used to convert raw C.GdkX11DeviceXI2Class pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeX11DeviceXI2ClassFromGlibNone(p unsafe.Pointer) *X11DeviceXI2Class {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeX11DeviceXI2ClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.x11DeviceXI2Class,
-		func (intern *x11DeviceXI2Class) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeX11DeviceXI2ClassFromGlibFull is used to convert raw C.GdkX11DeviceXI2Class pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeX11DeviceXI2ClassFromGlibFull(p unsafe.Pointer) *X11DeviceXI2Class {
-	wrapped := UnsafeX11DeviceXI2ClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.x11DeviceXI2Class,
-		func (intern *x11DeviceXI2Class) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
 // UnsafeX11DeviceXI2ClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
 // 
 // After this is called, no other method on [X11DeviceXI2Class] is expected to work anymore.
@@ -2349,15 +2198,9 @@ func UnsafeX11DeviceXI2ClassToGlibNone(x *X11DeviceXI2Class) unsafe.Pointer {
 	return unsafe.Pointer(x.native)
 }
 
-// UnsafeX11DeviceXI2ClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeX11DeviceXI2ClassToGlibFull(x *X11DeviceXI2Class) unsafe.Pointer {
-	runtime.SetFinalizer(x.x11DeviceXI2Class, nil)
-	_p := unsafe.Pointer(x.native)
-	x.native = nil // X11DeviceXI2Class is invalid from here on
-	return _p
-}
 // X11DisplayClass wraps GdkX11DisplayClass
+// 
+// X11DisplayClass is the type struct for [X11Display]
 type X11DisplayClass struct {
 	*x11DisplayClass
 }
@@ -2372,31 +2215,6 @@ func UnsafeX11DisplayClassFromGlibBorrow(p unsafe.Pointer) *X11DisplayClass {
 	return &X11DisplayClass{&x11DisplayClass{(*C.GdkX11DisplayClass)(p)}}
 }
 
-// UnsafeX11DisplayClassFromGlibNone is used to convert raw C.GdkX11DisplayClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeX11DisplayClassFromGlibNone(p unsafe.Pointer) *X11DisplayClass {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeX11DisplayClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.x11DisplayClass,
-		func (intern *x11DisplayClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeX11DisplayClassFromGlibFull is used to convert raw C.GdkX11DisplayClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeX11DisplayClassFromGlibFull(p unsafe.Pointer) *X11DisplayClass {
-	wrapped := UnsafeX11DisplayClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.x11DisplayClass,
-		func (intern *x11DisplayClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
 // UnsafeX11DisplayClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
 // 
 // After this is called, no other method on [X11DisplayClass] is expected to work anymore.
@@ -2409,15 +2227,9 @@ func UnsafeX11DisplayClassToGlibNone(x *X11DisplayClass) unsafe.Pointer {
 	return unsafe.Pointer(x.native)
 }
 
-// UnsafeX11DisplayClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeX11DisplayClassToGlibFull(x *X11DisplayClass) unsafe.Pointer {
-	runtime.SetFinalizer(x.x11DisplayClass, nil)
-	_p := unsafe.Pointer(x.native)
-	x.native = nil // X11DisplayClass is invalid from here on
-	return _p
-}
 // X11DisplayManagerClass wraps GdkX11DisplayManagerClass
+// 
+// X11DisplayManagerClass is the type struct for [X11DisplayManager]
 type X11DisplayManagerClass struct {
 	*x11DisplayManagerClass
 }
@@ -2432,31 +2244,6 @@ func UnsafeX11DisplayManagerClassFromGlibBorrow(p unsafe.Pointer) *X11DisplayMan
 	return &X11DisplayManagerClass{&x11DisplayManagerClass{(*C.GdkX11DisplayManagerClass)(p)}}
 }
 
-// UnsafeX11DisplayManagerClassFromGlibNone is used to convert raw C.GdkX11DisplayManagerClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeX11DisplayManagerClassFromGlibNone(p unsafe.Pointer) *X11DisplayManagerClass {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeX11DisplayManagerClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.x11DisplayManagerClass,
-		func (intern *x11DisplayManagerClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeX11DisplayManagerClassFromGlibFull is used to convert raw C.GdkX11DisplayManagerClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeX11DisplayManagerClassFromGlibFull(p unsafe.Pointer) *X11DisplayManagerClass {
-	wrapped := UnsafeX11DisplayManagerClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.x11DisplayManagerClass,
-		func (intern *x11DisplayManagerClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
 // UnsafeX11DisplayManagerClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
 // 
 // After this is called, no other method on [X11DisplayManagerClass] is expected to work anymore.
@@ -2469,15 +2256,9 @@ func UnsafeX11DisplayManagerClassToGlibNone(x *X11DisplayManagerClass) unsafe.Po
 	return unsafe.Pointer(x.native)
 }
 
-// UnsafeX11DisplayManagerClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeX11DisplayManagerClassToGlibFull(x *X11DisplayManagerClass) unsafe.Pointer {
-	runtime.SetFinalizer(x.x11DisplayManagerClass, nil)
-	_p := unsafe.Pointer(x.native)
-	x.native = nil // X11DisplayManagerClass is invalid from here on
-	return _p
-}
 // X11DragContextClass wraps GdkX11DragContextClass
+// 
+// X11DragContextClass is the type struct for [X11DragContext]
 type X11DragContextClass struct {
 	*x11DragContextClass
 }
@@ -2492,31 +2273,6 @@ func UnsafeX11DragContextClassFromGlibBorrow(p unsafe.Pointer) *X11DragContextCl
 	return &X11DragContextClass{&x11DragContextClass{(*C.GdkX11DragContextClass)(p)}}
 }
 
-// UnsafeX11DragContextClassFromGlibNone is used to convert raw C.GdkX11DragContextClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeX11DragContextClassFromGlibNone(p unsafe.Pointer) *X11DragContextClass {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeX11DragContextClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.x11DragContextClass,
-		func (intern *x11DragContextClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeX11DragContextClassFromGlibFull is used to convert raw C.GdkX11DragContextClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeX11DragContextClassFromGlibFull(p unsafe.Pointer) *X11DragContextClass {
-	wrapped := UnsafeX11DragContextClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.x11DragContextClass,
-		func (intern *x11DragContextClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
 // UnsafeX11DragContextClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
 // 
 // After this is called, no other method on [X11DragContextClass] is expected to work anymore.
@@ -2529,15 +2285,9 @@ func UnsafeX11DragContextClassToGlibNone(x *X11DragContextClass) unsafe.Pointer 
 	return unsafe.Pointer(x.native)
 }
 
-// UnsafeX11DragContextClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeX11DragContextClassToGlibFull(x *X11DragContextClass) unsafe.Pointer {
-	runtime.SetFinalizer(x.x11DragContextClass, nil)
-	_p := unsafe.Pointer(x.native)
-	x.native = nil // X11DragContextClass is invalid from here on
-	return _p
-}
 // X11GLContextClass wraps GdkX11GLContextClass
+// 
+// X11GLContextClass is the type struct for [X11GLContext]
 type X11GLContextClass struct {
 	*x11GLContextClass
 }
@@ -2552,31 +2302,6 @@ func UnsafeX11GLContextClassFromGlibBorrow(p unsafe.Pointer) *X11GLContextClass 
 	return &X11GLContextClass{&x11GLContextClass{(*C.GdkX11GLContextClass)(p)}}
 }
 
-// UnsafeX11GLContextClassFromGlibNone is used to convert raw C.GdkX11GLContextClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeX11GLContextClassFromGlibNone(p unsafe.Pointer) *X11GLContextClass {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeX11GLContextClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.x11GLContextClass,
-		func (intern *x11GLContextClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeX11GLContextClassFromGlibFull is used to convert raw C.GdkX11GLContextClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeX11GLContextClassFromGlibFull(p unsafe.Pointer) *X11GLContextClass {
-	wrapped := UnsafeX11GLContextClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.x11GLContextClass,
-		func (intern *x11GLContextClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
 // UnsafeX11GLContextClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
 // 
 // After this is called, no other method on [X11GLContextClass] is expected to work anymore.
@@ -2589,15 +2314,9 @@ func UnsafeX11GLContextClassToGlibNone(x *X11GLContextClass) unsafe.Pointer {
 	return unsafe.Pointer(x.native)
 }
 
-// UnsafeX11GLContextClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeX11GLContextClassToGlibFull(x *X11GLContextClass) unsafe.Pointer {
-	runtime.SetFinalizer(x.x11GLContextClass, nil)
-	_p := unsafe.Pointer(x.native)
-	x.native = nil // X11GLContextClass is invalid from here on
-	return _p
-}
 // X11KeymapClass wraps GdkX11KeymapClass
+// 
+// X11KeymapClass is the type struct for [X11Keymap]
 type X11KeymapClass struct {
 	*x11KeymapClass
 }
@@ -2612,31 +2331,6 @@ func UnsafeX11KeymapClassFromGlibBorrow(p unsafe.Pointer) *X11KeymapClass {
 	return &X11KeymapClass{&x11KeymapClass{(*C.GdkX11KeymapClass)(p)}}
 }
 
-// UnsafeX11KeymapClassFromGlibNone is used to convert raw C.GdkX11KeymapClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeX11KeymapClassFromGlibNone(p unsafe.Pointer) *X11KeymapClass {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeX11KeymapClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.x11KeymapClass,
-		func (intern *x11KeymapClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeX11KeymapClassFromGlibFull is used to convert raw C.GdkX11KeymapClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeX11KeymapClassFromGlibFull(p unsafe.Pointer) *X11KeymapClass {
-	wrapped := UnsafeX11KeymapClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.x11KeymapClass,
-		func (intern *x11KeymapClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
 // UnsafeX11KeymapClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
 // 
 // After this is called, no other method on [X11KeymapClass] is expected to work anymore.
@@ -2649,15 +2343,9 @@ func UnsafeX11KeymapClassToGlibNone(x *X11KeymapClass) unsafe.Pointer {
 	return unsafe.Pointer(x.native)
 }
 
-// UnsafeX11KeymapClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeX11KeymapClassToGlibFull(x *X11KeymapClass) unsafe.Pointer {
-	runtime.SetFinalizer(x.x11KeymapClass, nil)
-	_p := unsafe.Pointer(x.native)
-	x.native = nil // X11KeymapClass is invalid from here on
-	return _p
-}
 // X11MonitorClass wraps GdkX11MonitorClass
+// 
+// X11MonitorClass is the type struct for [X11Monitor]
 type X11MonitorClass struct {
 	*x11MonitorClass
 }
@@ -2672,31 +2360,6 @@ func UnsafeX11MonitorClassFromGlibBorrow(p unsafe.Pointer) *X11MonitorClass {
 	return &X11MonitorClass{&x11MonitorClass{(*C.GdkX11MonitorClass)(p)}}
 }
 
-// UnsafeX11MonitorClassFromGlibNone is used to convert raw C.GdkX11MonitorClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeX11MonitorClassFromGlibNone(p unsafe.Pointer) *X11MonitorClass {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeX11MonitorClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.x11MonitorClass,
-		func (intern *x11MonitorClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeX11MonitorClassFromGlibFull is used to convert raw C.GdkX11MonitorClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeX11MonitorClassFromGlibFull(p unsafe.Pointer) *X11MonitorClass {
-	wrapped := UnsafeX11MonitorClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.x11MonitorClass,
-		func (intern *x11MonitorClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
 // UnsafeX11MonitorClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
 // 
 // After this is called, no other method on [X11MonitorClass] is expected to work anymore.
@@ -2709,15 +2372,18 @@ func UnsafeX11MonitorClassToGlibNone(x *X11MonitorClass) unsafe.Pointer {
 	return unsafe.Pointer(x.native)
 }
 
-// UnsafeX11MonitorClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeX11MonitorClassToGlibFull(x *X11MonitorClass) unsafe.Pointer {
-	runtime.SetFinalizer(x.x11MonitorClass, nil)
-	_p := unsafe.Pointer(x.native)
-	x.native = nil // X11MonitorClass is invalid from here on
-	return _p
+// ParentClass returns the type struct of the parent class of this type struct.
+// This essentially casts the underlying c pointer.
+func (x *X11MonitorClass) ParentClass() *gdk.MonitorClass {
+	parent := gdk.UnsafeMonitorClassFromGlibBorrow(UnsafeX11MonitorClassToGlibNone(x))
+	// attach a cleanup to keep the instance alive as long as the parent is referenced
+	runtime.AddCleanup(parent, func(_ *X11MonitorClass) {}, x)
+	return parent
 }
+
 // X11ScreenClass wraps GdkX11ScreenClass
+// 
+// X11ScreenClass is the type struct for [X11Screen]
 type X11ScreenClass struct {
 	*x11ScreenClass
 }
@@ -2732,31 +2398,6 @@ func UnsafeX11ScreenClassFromGlibBorrow(p unsafe.Pointer) *X11ScreenClass {
 	return &X11ScreenClass{&x11ScreenClass{(*C.GdkX11ScreenClass)(p)}}
 }
 
-// UnsafeX11ScreenClassFromGlibNone is used to convert raw C.GdkX11ScreenClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeX11ScreenClassFromGlibNone(p unsafe.Pointer) *X11ScreenClass {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeX11ScreenClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.x11ScreenClass,
-		func (intern *x11ScreenClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeX11ScreenClassFromGlibFull is used to convert raw C.GdkX11ScreenClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeX11ScreenClassFromGlibFull(p unsafe.Pointer) *X11ScreenClass {
-	wrapped := UnsafeX11ScreenClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.x11ScreenClass,
-		func (intern *x11ScreenClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
 // UnsafeX11ScreenClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
 // 
 // After this is called, no other method on [X11ScreenClass] is expected to work anymore.
@@ -2769,15 +2410,9 @@ func UnsafeX11ScreenClassToGlibNone(x *X11ScreenClass) unsafe.Pointer {
 	return unsafe.Pointer(x.native)
 }
 
-// UnsafeX11ScreenClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeX11ScreenClassToGlibFull(x *X11ScreenClass) unsafe.Pointer {
-	runtime.SetFinalizer(x.x11ScreenClass, nil)
-	_p := unsafe.Pointer(x.native)
-	x.native = nil // X11ScreenClass is invalid from here on
-	return _p
-}
 // X11VisualClass wraps GdkX11VisualClass
+// 
+// X11VisualClass is the type struct for [X11Visual]
 type X11VisualClass struct {
 	*x11VisualClass
 }
@@ -2792,31 +2427,6 @@ func UnsafeX11VisualClassFromGlibBorrow(p unsafe.Pointer) *X11VisualClass {
 	return &X11VisualClass{&x11VisualClass{(*C.GdkX11VisualClass)(p)}}
 }
 
-// UnsafeX11VisualClassFromGlibNone is used to convert raw C.GdkX11VisualClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeX11VisualClassFromGlibNone(p unsafe.Pointer) *X11VisualClass {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeX11VisualClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.x11VisualClass,
-		func (intern *x11VisualClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeX11VisualClassFromGlibFull is used to convert raw C.GdkX11VisualClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeX11VisualClassFromGlibFull(p unsafe.Pointer) *X11VisualClass {
-	wrapped := UnsafeX11VisualClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.x11VisualClass,
-		func (intern *x11VisualClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
 // UnsafeX11VisualClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
 // 
 // After this is called, no other method on [X11VisualClass] is expected to work anymore.
@@ -2829,15 +2439,9 @@ func UnsafeX11VisualClassToGlibNone(x *X11VisualClass) unsafe.Pointer {
 	return unsafe.Pointer(x.native)
 }
 
-// UnsafeX11VisualClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeX11VisualClassToGlibFull(x *X11VisualClass) unsafe.Pointer {
-	runtime.SetFinalizer(x.x11VisualClass, nil)
-	_p := unsafe.Pointer(x.native)
-	x.native = nil // X11VisualClass is invalid from here on
-	return _p
-}
 // X11WindowClass wraps GdkX11WindowClass
+// 
+// X11WindowClass is the type struct for [X11Window]
 type X11WindowClass struct {
 	*x11WindowClass
 }
@@ -2852,31 +2456,6 @@ func UnsafeX11WindowClassFromGlibBorrow(p unsafe.Pointer) *X11WindowClass {
 	return &X11WindowClass{&x11WindowClass{(*C.GdkX11WindowClass)(p)}}
 }
 
-// UnsafeX11WindowClassFromGlibNone is used to convert raw C.GdkX11WindowClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeX11WindowClassFromGlibNone(p unsafe.Pointer) *X11WindowClass {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeX11WindowClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.x11WindowClass,
-		func (intern *x11WindowClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeX11WindowClassFromGlibFull is used to convert raw C.GdkX11WindowClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeX11WindowClassFromGlibFull(p unsafe.Pointer) *X11WindowClass {
-	wrapped := UnsafeX11WindowClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.x11WindowClass,
-		func (intern *x11WindowClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
 // UnsafeX11WindowClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
 // 
 // After this is called, no other method on [X11WindowClass] is expected to work anymore.
@@ -2889,11 +2468,12 @@ func UnsafeX11WindowClassToGlibNone(x *X11WindowClass) unsafe.Pointer {
 	return unsafe.Pointer(x.native)
 }
 
-// UnsafeX11WindowClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeX11WindowClassToGlibFull(x *X11WindowClass) unsafe.Pointer {
-	runtime.SetFinalizer(x.x11WindowClass, nil)
-	_p := unsafe.Pointer(x.native)
-	x.native = nil // X11WindowClass is invalid from here on
-	return _p
+// ParentClass returns the type struct of the parent class of this type struct.
+// This essentially casts the underlying c pointer.
+func (x *X11WindowClass) ParentClass() *gdk.WindowClass {
+	parent := gdk.UnsafeWindowClassFromGlibBorrow(UnsafeX11WindowClassToGlibNone(x))
+	// attach a cleanup to keep the instance alive as long as the parent is referenced
+	runtime.AddCleanup(parent, func(_ *X11WindowClass) {}, x)
+	return parent
 }
+

@@ -284,7 +284,7 @@ func UnsafePixdataFromGlibBorrow(p unsafe.Pointer) *Pixdata {
 	return &Pixdata{&pixdata{(*C.GdkPixdata)(p)}}
 }
 
-// UnsafePixdataFromGlibNone is used to convert raw C.GdkPixdata pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafePixdataFromGlibNone is used to convert raw C.GdkPixdata pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafePixdataFromGlibNone(p unsafe.Pointer) *Pixdata {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafePixdataFromGlibBorrow(p)
@@ -297,7 +297,7 @@ func UnsafePixdataFromGlibNone(p unsafe.Pointer) *Pixdata {
 	return wrapped
 }
 
-// UnsafePixdataFromGlibFull is used to convert raw C.GdkPixdata pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafePixdataFromGlibFull is used to convert raw C.GdkPixdata pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafePixdataFromGlibFull(p unsafe.Pointer) *Pixdata {
 	wrapped := UnsafePixdataFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -329,6 +329,7 @@ func UnsafePixdataToGlibFull(p *Pixdata) unsafe.Pointer {
 	p.native = nil // Pixdata is invalid from here on
 	return _p
 }
+
 // Deserialize wraps gdk_pixdata_deserialize
 // 
 // The function takes the following parameters:
@@ -385,6 +386,7 @@ func (pixdata *Pixdata) Deserialize(stream []uint8) (bool, error) {
 }
 
 // Serialize wraps gdk_pixdata_serialize
+// 
 // The function returns the following values:
 // 
 // 	- streamLengthP uint: location to store the resulting stream length in. 

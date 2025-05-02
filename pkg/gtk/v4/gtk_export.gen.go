@@ -394,3 +394,788 @@ func _gotk4_gtk4_ScaleFormatValueFunc(carg1 *C.GtkScale, carg2 C.double, carg3 C
 	return cret
 }
 
+//export _gotk4_gtk4_Accessible_get_accessible_parent
+func _gotk4_gtk4_Accessible_get_accessible_parent(carg0 *C.GtkAccessible) (cret *C.GtkAccessible) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_Accessible_get_at_context
+func _gotk4_gtk4_Accessible_get_at_context(carg0 *C.GtkAccessible) (cret *C.GtkATContext) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_Accessible_get_bounds
+func _gotk4_gtk4_Accessible_get_bounds(carg0 *C.GtkAccessible, carg1 *C.int, carg2 *C.int, carg3 *C.int, carg4 *C.int) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_Accessible_get_first_accessible_child
+func _gotk4_gtk4_Accessible_get_first_accessible_child(carg0 *C.GtkAccessible) (cret *C.GtkAccessible) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_Accessible_get_next_accessible_sibling
+func _gotk4_gtk4_Accessible_get_next_accessible_sibling(carg0 *C.GtkAccessible) (cret *C.GtkAccessible) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_Accessible_get_platform_state
+func _gotk4_gtk4_Accessible_get_platform_state(carg0 *C.GtkAccessible, carg1 C.GtkAccessiblePlatformState) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_AccessibleRange_set_current_value
+func _gotk4_gtk4_AccessibleRange_set_current_value(carg0 *C.GtkAccessibleRange, carg1 C.double) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_AccessibleText_get_caret_position
+func _gotk4_gtk4_AccessibleText_get_caret_position(carg0 *C.GtkAccessibleText) (cret C.uint) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_AccessibleText_get_contents
+func _gotk4_gtk4_AccessibleText_get_contents(carg0 *C.GtkAccessibleText, carg1 C.uint, carg2 C.uint) (cret *C.GBytes) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_AccessibleText_get_contents_at
+func _gotk4_gtk4_AccessibleText_get_contents_at(carg0 *C.GtkAccessibleText, carg1 C.uint, carg2 C.GtkAccessibleTextGranularity, carg3 *C.uint, carg4 *C.uint) (cret *C.GBytes) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_AccessibleText_get_extents
+func _gotk4_gtk4_AccessibleText_get_extents(carg0 *C.GtkAccessibleText, carg1 C.uint, carg2 C.uint, carg3 *C.graphene_rect_t) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_AccessibleText_get_offset
+func _gotk4_gtk4_AccessibleText_get_offset(carg0 *C.GtkAccessibleText, carg1 *C.graphene_point_t, carg2 *C.uint) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_Actionable_get_action_name
+func _gotk4_gtk4_Actionable_get_action_name(carg0 *C.GtkActionable) (cret *C.char) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_Actionable_set_action_name
+func _gotk4_gtk4_Actionable_set_action_name(carg0 *C.GtkActionable, carg1 *C.char) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_Buildable_add_child
+func _gotk4_gtk4_Buildable_add_child(carg0 *C.GtkBuildable, carg1 *C.GtkBuilder, carg2 *C.GObject, carg3 *C.char) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_Buildable_get_id
+func _gotk4_gtk4_Buildable_get_id(carg0 *C.GtkBuildable) (cret *C.char) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_Buildable_get_internal_child
+func _gotk4_gtk4_Buildable_get_internal_child(carg0 *C.GtkBuildable, carg1 *C.GtkBuilder, carg2 *C.char) (cret *C.GObject) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_Buildable_parser_finished
+func _gotk4_gtk4_Buildable_parser_finished(carg0 *C.GtkBuildable, carg1 *C.GtkBuilder) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_Buildable_set_buildable_property
+func _gotk4_gtk4_Buildable_set_buildable_property(carg0 *C.GtkBuildable, carg1 *C.GtkBuilder, carg2 *C.char, carg3 *C.GValue) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_Buildable_set_id
+func _gotk4_gtk4_Buildable_set_id(carg0 *C.GtkBuildable, carg1 *C.char) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_BuilderScope_get_type_from_function
+func _gotk4_gtk4_BuilderScope_get_type_from_function(carg0 *C.GtkBuilderScope, carg1 *C.GtkBuilder, carg2 *C.char) (cret C.GType) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_BuilderScope_get_type_from_name
+func _gotk4_gtk4_BuilderScope_get_type_from_name(carg0 *C.GtkBuilderScope, carg1 *C.GtkBuilder, carg2 *C.char) (cret C.GType) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_Scrollable_get_border
+func _gotk4_gtk4_Scrollable_get_border(carg0 *C.GtkScrollable, carg1 *C.GtkBorder) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_SectionModel_get_section
+func _gotk4_gtk4_SectionModel_get_section(carg0 *C.GtkSectionModel, carg1 C.guint, carg2 *C.guint, carg3 *C.guint) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_SelectionModel_get_selection_in_range
+func _gotk4_gtk4_SelectionModel_get_selection_in_range(carg0 *C.GtkSelectionModel, carg1 C.guint, carg2 C.guint) (cret *C.GtkBitset) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_SelectionModel_is_selected
+func _gotk4_gtk4_SelectionModel_is_selected(carg0 *C.GtkSelectionModel, carg1 C.guint) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_SelectionModel_select_all
+func _gotk4_gtk4_SelectionModel_select_all(carg0 *C.GtkSelectionModel) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_SelectionModel_select_item
+func _gotk4_gtk4_SelectionModel_select_item(carg0 *C.GtkSelectionModel, carg1 C.guint, carg2 C.gboolean) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_SelectionModel_select_range
+func _gotk4_gtk4_SelectionModel_select_range(carg0 *C.GtkSelectionModel, carg1 C.guint, carg2 C.guint, carg3 C.gboolean) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_SelectionModel_set_selection
+func _gotk4_gtk4_SelectionModel_set_selection(carg0 *C.GtkSelectionModel, carg1 *C.GtkBitset, carg2 *C.GtkBitset) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_SelectionModel_unselect_all
+func _gotk4_gtk4_SelectionModel_unselect_all(carg0 *C.GtkSelectionModel) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_SelectionModel_unselect_item
+func _gotk4_gtk4_SelectionModel_unselect_item(carg0 *C.GtkSelectionModel, carg1 C.guint) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_SelectionModel_unselect_range
+func _gotk4_gtk4_SelectionModel_unselect_range(carg0 *C.GtkSelectionModel, carg1 C.guint, carg2 C.guint) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_ShortcutManager_add_controller
+func _gotk4_gtk4_ShortcutManager_add_controller(carg0 *C.GtkShortcutManager, carg1 *C.GtkShortcutController) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_ShortcutManager_remove_controller
+func _gotk4_gtk4_ShortcutManager_remove_controller(carg0 *C.GtkShortcutManager, carg1 *C.GtkShortcutController) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_SymbolicPaintable_snapshot_symbolic
+func _gotk4_gtk4_SymbolicPaintable_snapshot_symbolic(carg0 *C.GtkSymbolicPaintable, carg1 *C.GdkSnapshot, carg2 C.double, carg3 C.double, carg4 *C.GdkRGBA, carg5 C.gsize) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_Adjustment_changed
+func _gotk4_gtk4_Adjustment_changed(carg0 *C.GtkAdjustment) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_Adjustment_value_changed
+func _gotk4_gtk4_Adjustment_value_changed(carg0 *C.GtkAdjustment) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_Application_window_added
+func _gotk4_gtk4_Application_window_added(carg0 *C.GtkApplication, carg1 *C.GtkWindow) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_Application_window_removed
+func _gotk4_gtk4_Application_window_removed(carg0 *C.GtkApplication, carg1 *C.GtkWindow) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_EntryBuffer_delete_text
+func _gotk4_gtk4_EntryBuffer_delete_text(carg0 *C.GtkEntryBuffer, carg1 C.guint, carg2 C.guint) (cret C.guint) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_EntryBuffer_deleted_text
+func _gotk4_gtk4_EntryBuffer_deleted_text(carg0 *C.GtkEntryBuffer, carg1 C.guint, carg2 C.guint) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_EntryBuffer_get_length
+func _gotk4_gtk4_EntryBuffer_get_length(carg0 *C.GtkEntryBuffer) (cret C.guint) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_EntryBuffer_get_text
+func _gotk4_gtk4_EntryBuffer_get_text(carg0 *C.GtkEntryBuffer, carg1 *C.gsize) (cret *C.char) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_EntryBuffer_insert_text
+func _gotk4_gtk4_EntryBuffer_insert_text(carg0 *C.GtkEntryBuffer, carg1 C.guint, carg2 *C.char, carg3 C.guint) (cret C.guint) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_EntryBuffer_inserted_text
+func _gotk4_gtk4_EntryBuffer_inserted_text(carg0 *C.GtkEntryBuffer, carg1 C.guint, carg2 *C.char, carg3 C.guint) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_Filter_get_strictness
+func _gotk4_gtk4_Filter_get_strictness(carg0 *C.GtkFilter) (cret C.GtkFilterMatch) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_IMContext_activate_osk
+func _gotk4_gtk4_IMContext_activate_osk(carg0 *C.GtkIMContext) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_IMContext_commit
+func _gotk4_gtk4_IMContext_commit(carg0 *C.GtkIMContext, carg1 *C.char) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_IMContext_delete_surrounding
+func _gotk4_gtk4_IMContext_delete_surrounding(carg0 *C.GtkIMContext, carg1 C.int, carg2 C.int) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_IMContext_focus_in
+func _gotk4_gtk4_IMContext_focus_in(carg0 *C.GtkIMContext) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_IMContext_focus_out
+func _gotk4_gtk4_IMContext_focus_out(carg0 *C.GtkIMContext) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_IMContext_get_preedit_string
+func _gotk4_gtk4_IMContext_get_preedit_string(carg0 *C.GtkIMContext, carg1 **C.char, carg2 **C.PangoAttrList, carg3 *C.int) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_IMContext_get_surrounding_with_selection
+func _gotk4_gtk4_IMContext_get_surrounding_with_selection(carg0 *C.GtkIMContext, carg1 **C.char, carg2 *C.int, carg3 *C.int) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_IMContext_preedit_changed
+func _gotk4_gtk4_IMContext_preedit_changed(carg0 *C.GtkIMContext) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_IMContext_preedit_end
+func _gotk4_gtk4_IMContext_preedit_end(carg0 *C.GtkIMContext) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_IMContext_preedit_start
+func _gotk4_gtk4_IMContext_preedit_start(carg0 *C.GtkIMContext) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_IMContext_reset
+func _gotk4_gtk4_IMContext_reset(carg0 *C.GtkIMContext) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_IMContext_retrieve_surrounding
+func _gotk4_gtk4_IMContext_retrieve_surrounding(carg0 *C.GtkIMContext) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_IMContext_set_client_widget
+func _gotk4_gtk4_IMContext_set_client_widget(carg0 *C.GtkIMContext, carg1 *C.GtkWidget) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_IMContext_set_cursor_location
+func _gotk4_gtk4_IMContext_set_cursor_location(carg0 *C.GtkIMContext, carg1 *C.GdkRectangle) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_IMContext_set_surrounding_with_selection
+func _gotk4_gtk4_IMContext_set_surrounding_with_selection(carg0 *C.GtkIMContext, carg1 *C.char, carg2 C.int, carg3 C.int, carg4 C.int) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_IMContext_set_use_preedit
+func _gotk4_gtk4_IMContext_set_use_preedit(carg0 *C.GtkIMContext, carg1 C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_LayoutManager_allocate
+func _gotk4_gtk4_LayoutManager_allocate(carg0 *C.GtkLayoutManager, carg1 *C.GtkWidget, carg2 C.int, carg3 C.int, carg4 C.int) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_LayoutManager_create_layout_child
+func _gotk4_gtk4_LayoutManager_create_layout_child(carg0 *C.GtkLayoutManager, carg1 *C.GtkWidget, carg2 *C.GtkWidget) (cret *C.GtkLayoutChild) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_LayoutManager_get_request_mode
+func _gotk4_gtk4_LayoutManager_get_request_mode(carg0 *C.GtkLayoutManager, carg1 *C.GtkWidget) (cret C.GtkSizeRequestMode) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_LayoutManager_measure
+func _gotk4_gtk4_LayoutManager_measure(carg0 *C.GtkLayoutManager, carg1 *C.GtkWidget, carg2 C.GtkOrientation, carg3 C.int, carg4 *C.int, carg5 *C.int, carg6 *C.int, carg7 *C.int) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_LayoutManager_root
+func _gotk4_gtk4_LayoutManager_root(carg0 *C.GtkLayoutManager) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_LayoutManager_unroot
+func _gotk4_gtk4_LayoutManager_unroot(carg0 *C.GtkLayoutManager) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_MediaStream_pause
+func _gotk4_gtk4_MediaStream_pause(carg0 *C.GtkMediaStream) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_MediaStream_play
+func _gotk4_gtk4_MediaStream_play(carg0 *C.GtkMediaStream) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_MediaStream_realize
+func _gotk4_gtk4_MediaStream_realize(carg0 *C.GtkMediaStream, carg1 *C.GdkSurface) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_MediaStream_seek
+func _gotk4_gtk4_MediaStream_seek(carg0 *C.GtkMediaStream, carg1 C.gint64) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_MediaStream_unrealize
+func _gotk4_gtk4_MediaStream_unrealize(carg0 *C.GtkMediaStream, carg1 *C.GdkSurface) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_MediaStream_update_audio
+func _gotk4_gtk4_MediaStream_update_audio(carg0 *C.GtkMediaStream, carg1 C.gboolean, carg2 C.double) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_NativeDialog_hide
+func _gotk4_gtk4_NativeDialog_hide(carg0 *C.GtkNativeDialog) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_NativeDialog_response
+func _gotk4_gtk4_NativeDialog_response(carg0 *C.GtkNativeDialog, carg1 C.int) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_NativeDialog_show
+func _gotk4_gtk4_NativeDialog_show(carg0 *C.GtkNativeDialog) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_RecentManager_changed
+func _gotk4_gtk4_RecentManager_changed(carg0 *C.GtkRecentManager) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_Sorter_get_order
+func _gotk4_gtk4_Sorter_get_order(carg0 *C.GtkSorter) (cret C.GtkSorterOrder) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_TextBuffer_apply_tag
+func _gotk4_gtk4_TextBuffer_apply_tag(carg0 *C.GtkTextBuffer, carg1 *C.GtkTextTag, carg2 *C.GtkTextIter, carg3 *C.GtkTextIter) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_TextBuffer_begin_user_action
+func _gotk4_gtk4_TextBuffer_begin_user_action(carg0 *C.GtkTextBuffer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_TextBuffer_changed
+func _gotk4_gtk4_TextBuffer_changed(carg0 *C.GtkTextBuffer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_TextBuffer_delete_range
+func _gotk4_gtk4_TextBuffer_delete_range(carg0 *C.GtkTextBuffer, carg1 *C.GtkTextIter, carg2 *C.GtkTextIter) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_TextBuffer_end_user_action
+func _gotk4_gtk4_TextBuffer_end_user_action(carg0 *C.GtkTextBuffer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_TextBuffer_insert_child_anchor
+func _gotk4_gtk4_TextBuffer_insert_child_anchor(carg0 *C.GtkTextBuffer, carg1 *C.GtkTextIter, carg2 *C.GtkTextChildAnchor) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_TextBuffer_insert_paintable
+func _gotk4_gtk4_TextBuffer_insert_paintable(carg0 *C.GtkTextBuffer, carg1 *C.GtkTextIter, carg2 *C.GdkPaintable) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_TextBuffer_insert_text
+func _gotk4_gtk4_TextBuffer_insert_text(carg0 *C.GtkTextBuffer, carg1 *C.GtkTextIter, carg2 *C.char, carg3 C.int) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_TextBuffer_mark_deleted
+func _gotk4_gtk4_TextBuffer_mark_deleted(carg0 *C.GtkTextBuffer, carg1 *C.GtkTextMark) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_TextBuffer_mark_set
+func _gotk4_gtk4_TextBuffer_mark_set(carg0 *C.GtkTextBuffer, carg1 *C.GtkTextIter, carg2 *C.GtkTextMark) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_TextBuffer_modified_changed
+func _gotk4_gtk4_TextBuffer_modified_changed(carg0 *C.GtkTextBuffer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_TextBuffer_paste_done
+func _gotk4_gtk4_TextBuffer_paste_done(carg0 *C.GtkTextBuffer, carg1 *C.GdkClipboard) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_TextBuffer_redo
+func _gotk4_gtk4_TextBuffer_redo(carg0 *C.GtkTextBuffer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_TextBuffer_remove_tag
+func _gotk4_gtk4_TextBuffer_remove_tag(carg0 *C.GtkTextBuffer, carg1 *C.GtkTextTag, carg2 *C.GtkTextIter, carg3 *C.GtkTextIter) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_TextBuffer_undo
+func _gotk4_gtk4_TextBuffer_undo(carg0 *C.GtkTextBuffer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_Widget_compute_expand
+func _gotk4_gtk4_Widget_compute_expand(carg0 *C.GtkWidget, carg1 *C.gboolean, carg2 *C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_Widget_contains
+func _gotk4_gtk4_Widget_contains(carg0 *C.GtkWidget, carg1 C.double, carg2 C.double) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_Widget_css_changed
+func _gotk4_gtk4_Widget_css_changed(carg0 *C.GtkWidget, carg1 *C.GtkCssStyleChange) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_Widget_direction_changed
+func _gotk4_gtk4_Widget_direction_changed(carg0 *C.GtkWidget, carg1 C.GtkTextDirection) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_Widget_focus
+func _gotk4_gtk4_Widget_focus(carg0 *C.GtkWidget, carg1 C.GtkDirectionType) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_Widget_get_request_mode
+func _gotk4_gtk4_Widget_get_request_mode(carg0 *C.GtkWidget) (cret C.GtkSizeRequestMode) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_Widget_grab_focus
+func _gotk4_gtk4_Widget_grab_focus(carg0 *C.GtkWidget) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_Widget_keynav_failed
+func _gotk4_gtk4_Widget_keynav_failed(carg0 *C.GtkWidget, carg1 C.GtkDirectionType) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_Widget_map
+func _gotk4_gtk4_Widget_map(carg0 *C.GtkWidget) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_Widget_measure
+func _gotk4_gtk4_Widget_measure(carg0 *C.GtkWidget, carg1 C.GtkOrientation, carg2 C.int, carg3 *C.int, carg4 *C.int, carg5 *C.int, carg6 *C.int) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_Widget_mnemonic_activate
+func _gotk4_gtk4_Widget_mnemonic_activate(carg0 *C.GtkWidget, carg1 C.gboolean) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_Widget_move_focus
+func _gotk4_gtk4_Widget_move_focus(carg0 *C.GtkWidget, carg1 C.GtkDirectionType) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_Widget_query_tooltip
+func _gotk4_gtk4_Widget_query_tooltip(carg0 *C.GtkWidget, carg1 C.int, carg2 C.int, carg3 C.gboolean, carg4 *C.GtkTooltip) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_Widget_realize
+func _gotk4_gtk4_Widget_realize(carg0 *C.GtkWidget) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_Widget_root
+func _gotk4_gtk4_Widget_root(carg0 *C.GtkWidget) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_Widget_set_focus_child
+func _gotk4_gtk4_Widget_set_focus_child(carg0 *C.GtkWidget, carg1 *C.GtkWidget) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_Widget_size_allocate
+func _gotk4_gtk4_Widget_size_allocate(carg0 *C.GtkWidget, carg1 C.int, carg2 C.int, carg3 C.int) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_Widget_snapshot
+func _gotk4_gtk4_Widget_snapshot(carg0 *C.GtkWidget, carg1 *C.GtkSnapshot) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_Widget_state_flags_changed
+func _gotk4_gtk4_Widget_state_flags_changed(carg0 *C.GtkWidget, carg1 C.GtkStateFlags) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_Widget_system_setting_changed
+func _gotk4_gtk4_Widget_system_setting_changed(carg0 *C.GtkWidget, carg1 C.GtkSystemSetting) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_Widget_unmap
+func _gotk4_gtk4_Widget_unmap(carg0 *C.GtkWidget) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_Widget_unrealize
+func _gotk4_gtk4_Widget_unrealize(carg0 *C.GtkWidget) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_Widget_unroot
+func _gotk4_gtk4_Widget_unroot(carg0 *C.GtkWidget) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_Window_activate_default
+func _gotk4_gtk4_Window_activate_default(carg0 *C.GtkWindow) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_Window_activate_focus
+func _gotk4_gtk4_Window_activate_focus(carg0 *C.GtkWindow) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_Window_close_request
+func _gotk4_gtk4_Window_close_request(carg0 *C.GtkWindow) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_Window_enable_debugging
+func _gotk4_gtk4_Window_enable_debugging(carg0 *C.GtkWindow, carg1 C.gboolean) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_Window_keys_changed
+func _gotk4_gtk4_Window_keys_changed(carg0 *C.GtkWindow) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_Button_activate
+func _gotk4_gtk4_Button_activate(carg0 *C.GtkButton) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_Button_clicked
+func _gotk4_gtk4_Button_clicked(carg0 *C.GtkButton) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_CheckButton_activate
+func _gotk4_gtk4_CheckButton_activate(carg0 *C.GtkCheckButton) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_CheckButton_toggled
+func _gotk4_gtk4_CheckButton_toggled(carg0 *C.GtkCheckButton) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_DrawingArea_resize
+func _gotk4_gtk4_DrawingArea_resize(carg0 *C.GtkDrawingArea, carg1 C.int, carg2 C.int) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_Entry_activate
+func _gotk4_gtk4_Entry_activate(carg0 *C.GtkEntry) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_FlowBoxChild_activate
+func _gotk4_gtk4_FlowBoxChild_activate(carg0 *C.GtkFlowBoxChild) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_Frame_compute_child_allocation
+func _gotk4_gtk4_Frame_compute_child_allocation(carg0 *C.GtkFrame, carg1 *C.GtkAllocation) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_GLArea_render
+func _gotk4_gtk4_GLArea_render(carg0 *C.GtkGLArea, carg1 *C.GdkGLContext) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_GLArea_resize
+func _gotk4_gtk4_GLArea_resize(carg0 *C.GtkGLArea, carg1 C.int, carg2 C.int) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_ListBoxRow_activate
+func _gotk4_gtk4_ListBoxRow_activate(carg0 *C.GtkListBoxRow) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_MediaFile_close
+func _gotk4_gtk4_MediaFile_close(carg0 *C.GtkMediaFile) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_MediaFile_open
+func _gotk4_gtk4_MediaFile_open(carg0 *C.GtkMediaFile) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_Popover_activate_default
+func _gotk4_gtk4_Popover_activate_default(carg0 *C.GtkPopover) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_Popover_closed
+func _gotk4_gtk4_Popover_closed(carg0 *C.GtkPopover) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_Range_adjust_bounds
+func _gotk4_gtk4_Range_adjust_bounds(carg0 *C.GtkRange, carg1 C.double) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_Range_change_value
+func _gotk4_gtk4_Range_change_value(carg0 *C.GtkRange, carg1 C.GtkScrollType, carg2 C.double) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_Range_get_range_border
+func _gotk4_gtk4_Range_get_range_border(carg0 *C.GtkRange, carg1 *C.GtkBorder) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_Range_move_slider
+func _gotk4_gtk4_Range_move_slider(carg0 *C.GtkRange, carg1 C.GtkScrollType) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_Range_value_changed
+func _gotk4_gtk4_Range_value_changed(carg0 *C.GtkRange) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_Scale_get_layout_offsets
+func _gotk4_gtk4_Scale_get_layout_offsets(carg0 *C.GtkScale, carg1 *C.int, carg2 *C.int) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_ScaleButton_value_changed
+func _gotk4_gtk4_ScaleButton_value_changed(carg0 *C.GtkScaleButton, carg1 C.double) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_TextView_backspace
+func _gotk4_gtk4_TextView_backspace(carg0 *C.GtkTextView) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_TextView_copy_clipboard
+func _gotk4_gtk4_TextView_copy_clipboard(carg0 *C.GtkTextView) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_TextView_cut_clipboard
+func _gotk4_gtk4_TextView_cut_clipboard(carg0 *C.GtkTextView) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_TextView_delete_from_cursor
+func _gotk4_gtk4_TextView_delete_from_cursor(carg0 *C.GtkTextView, carg1 C.GtkDeleteType, carg2 C.int) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_TextView_extend_selection
+func _gotk4_gtk4_TextView_extend_selection(carg0 *C.GtkTextView, carg1 C.GtkTextExtendSelection, carg2 *C.GtkTextIter, carg3 *C.GtkTextIter, carg4 *C.GtkTextIter) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_TextView_insert_at_cursor
+func _gotk4_gtk4_TextView_insert_at_cursor(carg0 *C.GtkTextView, carg1 *C.char) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_TextView_insert_emoji
+func _gotk4_gtk4_TextView_insert_emoji(carg0 *C.GtkTextView) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_TextView_move_cursor
+func _gotk4_gtk4_TextView_move_cursor(carg0 *C.GtkTextView, carg1 C.GtkMovementStep, carg2 C.int, carg3 C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_TextView_paste_clipboard
+func _gotk4_gtk4_TextView_paste_clipboard(carg0 *C.GtkTextView) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_TextView_set_anchor
+func _gotk4_gtk4_TextView_set_anchor(carg0 *C.GtkTextView) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_TextView_snapshot_layer
+func _gotk4_gtk4_TextView_snapshot_layer(carg0 *C.GtkTextView, carg1 C.GtkTextViewLayer, carg2 *C.GtkSnapshot) {
+	panic("unimplemented")
+}
+
+//export _gotk4_gtk4_TextView_toggle_overwrite
+func _gotk4_gtk4_TextView_toggle_overwrite(carg0 *C.GtkTextView) {
+	panic("unimplemented")
+}
+

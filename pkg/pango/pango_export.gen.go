@@ -63,3 +63,173 @@ func _gotk4_pango1_FontsetForEachFunc(carg1 *C.PangoFontset, carg2 *C.PangoFont,
 	return cret
 }
 
+//export _gotk4_pango1_Font_describe
+func _gotk4_pango1_Font_describe(carg0 *C.PangoFont) (cret *C.PangoFontDescription) {
+	panic("unimplemented")
+}
+
+//export _gotk4_pango1_Font_describe_absolute
+func _gotk4_pango1_Font_describe_absolute(carg0 *C.PangoFont) (cret *C.PangoFontDescription) {
+	panic("unimplemented")
+}
+
+//export _gotk4_pango1_Font_get_coverage
+func _gotk4_pango1_Font_get_coverage(carg0 *C.PangoFont, carg1 *C.PangoLanguage) (cret *C.PangoCoverage) {
+	panic("unimplemented")
+}
+
+//export _gotk4_pango1_Font_get_font_map
+func _gotk4_pango1_Font_get_font_map(carg0 *C.PangoFont) (cret *C.PangoFontMap) {
+	panic("unimplemented")
+}
+
+//export _gotk4_pango1_Font_get_glyph_extents
+func _gotk4_pango1_Font_get_glyph_extents(carg0 *C.PangoFont, carg1 C.PangoGlyph, carg2 *C.PangoRectangle, carg3 *C.PangoRectangle) {
+	panic("unimplemented")
+}
+
+//export _gotk4_pango1_Font_get_metrics
+func _gotk4_pango1_Font_get_metrics(carg0 *C.PangoFont, carg1 *C.PangoLanguage) (cret *C.PangoFontMetrics) {
+	panic("unimplemented")
+}
+
+//export _gotk4_pango1_FontFace_describe
+func _gotk4_pango1_FontFace_describe(carg0 *C.PangoFontFace) (cret *C.PangoFontDescription) {
+	panic("unimplemented")
+}
+
+//export _gotk4_pango1_FontFace_get_face_name
+func _gotk4_pango1_FontFace_get_face_name(carg0 *C.PangoFontFace) (cret *C.char) {
+	panic("unimplemented")
+}
+
+//export _gotk4_pango1_FontFace_get_family
+func _gotk4_pango1_FontFace_get_family(carg0 *C.PangoFontFace) (cret *C.PangoFontFamily) {
+	panic("unimplemented")
+}
+
+//export _gotk4_pango1_FontFace_is_synthesized
+func _gotk4_pango1_FontFace_is_synthesized(carg0 *C.PangoFontFace) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_pango1_FontFamily_get_face
+func _gotk4_pango1_FontFamily_get_face(carg0 *C.PangoFontFamily, carg1 *C.char) (cret *C.PangoFontFace) {
+	panic("unimplemented")
+}
+
+//export _gotk4_pango1_FontFamily_get_name
+func _gotk4_pango1_FontFamily_get_name(carg0 *C.PangoFontFamily) (cret *C.char) {
+	panic("unimplemented")
+}
+
+//export _gotk4_pango1_FontFamily_is_monospace
+func _gotk4_pango1_FontFamily_is_monospace(carg0 *C.PangoFontFamily) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_pango1_FontFamily_is_variable
+func _gotk4_pango1_FontFamily_is_variable(carg0 *C.PangoFontFamily) (cret C.gboolean) {
+	panic("unimplemented")
+}
+
+//export _gotk4_pango1_FontMap_changed
+func _gotk4_pango1_FontMap_changed(carg0 *C.PangoFontMap) {
+	panic("unimplemented")
+}
+
+//export _gotk4_pango1_FontMap_get_family
+func _gotk4_pango1_FontMap_get_family(carg0 *C.PangoFontMap, carg1 *C.char) (cret *C.PangoFontFamily) {
+	panic("unimplemented")
+}
+
+//export _gotk4_pango1_FontMap_get_serial
+func _gotk4_pango1_FontMap_get_serial(carg0 *C.PangoFontMap) (cret C.guint) {
+	panic("unimplemented")
+}
+
+//export _gotk4_pango1_FontMap_load_font
+func _gotk4_pango1_FontMap_load_font(carg0 *C.PangoFontMap, carg1 *C.PangoContext, carg2 *C.PangoFontDescription) (cret *C.PangoFont) {
+	panic("unimplemented")
+}
+
+//export _gotk4_pango1_FontMap_load_fontset
+func _gotk4_pango1_FontMap_load_fontset(carg0 *C.PangoFontMap, carg1 *C.PangoContext, carg2 *C.PangoFontDescription, carg3 *C.PangoLanguage) (cret *C.PangoFontset) {
+	panic("unimplemented")
+}
+
+//export _gotk4_pango1_Fontset_foreach
+func _gotk4_pango1_Fontset_foreach(carg0 *C.PangoFontset, carg1 C.PangoFontsetForeachFunc, carg2 C.gpointer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_pango1_Fontset_get_font
+func _gotk4_pango1_Fontset_get_font(carg0 *C.PangoFontset, carg1 C.guint) (cret *C.PangoFont) {
+	panic("unimplemented")
+}
+
+//export _gotk4_pango1_Fontset_get_language
+func _gotk4_pango1_Fontset_get_language(carg0 *C.PangoFontset) (cret *C.PangoLanguage) {
+	panic("unimplemented")
+}
+
+//export _gotk4_pango1_Fontset_get_metrics
+func _gotk4_pango1_Fontset_get_metrics(carg0 *C.PangoFontset) (cret *C.PangoFontMetrics) {
+	panic("unimplemented")
+}
+
+//export _gotk4_pango1_Renderer_begin
+func _gotk4_pango1_Renderer_begin(carg0 *C.PangoRenderer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_pango1_Renderer_draw_error_underline
+func _gotk4_pango1_Renderer_draw_error_underline(carg0 *C.PangoRenderer, carg1 C.int, carg2 C.int, carg3 C.int, carg4 C.int) {
+	panic("unimplemented")
+}
+
+//export _gotk4_pango1_Renderer_draw_glyph
+func _gotk4_pango1_Renderer_draw_glyph(carg0 *C.PangoRenderer, carg1 *C.PangoFont, carg2 C.PangoGlyph, carg3 C.double, carg4 C.double) {
+	panic("unimplemented")
+}
+
+//export _gotk4_pango1_Renderer_draw_glyph_item
+func _gotk4_pango1_Renderer_draw_glyph_item(carg0 *C.PangoRenderer, carg1 *C.char, carg2 *C.PangoGlyphItem, carg3 C.int, carg4 C.int) {
+	panic("unimplemented")
+}
+
+//export _gotk4_pango1_Renderer_draw_glyphs
+func _gotk4_pango1_Renderer_draw_glyphs(carg0 *C.PangoRenderer, carg1 *C.PangoFont, carg2 *C.PangoGlyphString, carg3 C.int, carg4 C.int) {
+	panic("unimplemented")
+}
+
+//export _gotk4_pango1_Renderer_draw_rectangle
+func _gotk4_pango1_Renderer_draw_rectangle(carg0 *C.PangoRenderer, carg1 C.PangoRenderPart, carg2 C.int, carg3 C.int, carg4 C.int, carg5 C.int) {
+	panic("unimplemented")
+}
+
+//export _gotk4_pango1_Renderer_draw_shape
+func _gotk4_pango1_Renderer_draw_shape(carg0 *C.PangoRenderer, carg1 *C.PangoAttrShape, carg2 C.int, carg3 C.int) {
+	panic("unimplemented")
+}
+
+//export _gotk4_pango1_Renderer_draw_trapezoid
+func _gotk4_pango1_Renderer_draw_trapezoid(carg0 *C.PangoRenderer, carg1 C.PangoRenderPart, carg2 C.double, carg3 C.double, carg4 C.double, carg5 C.double, carg6 C.double, carg7 C.double) {
+	panic("unimplemented")
+}
+
+//export _gotk4_pango1_Renderer_end
+func _gotk4_pango1_Renderer_end(carg0 *C.PangoRenderer) {
+	panic("unimplemented")
+}
+
+//export _gotk4_pango1_Renderer_part_changed
+func _gotk4_pango1_Renderer_part_changed(carg0 *C.PangoRenderer, carg1 C.PangoRenderPart) {
+	panic("unimplemented")
+}
+
+//export _gotk4_pango1_Renderer_prepare_run
+func _gotk4_pango1_Renderer_prepare_run(carg0 *C.PangoRenderer, carg1 *C.PangoLayoutRun) {
+	panic("unimplemented")
+}
+

@@ -15,6 +15,582 @@ import (
 // #cgo pkg-config: atk
 // #cgo CFLAGS: -Wno-deprecated-declarations
 // #include <atk/atk.h>
+// extern gboolean _gotk4_atk1_Action_do_action(AtkAction*, gint);
+// extern gchar* _gotk4_atk1_Action_get_description(AtkAction*, gint);
+// extern gchar* _gotk4_atk1_Action_get_keybinding(AtkAction*, gint);
+// extern gchar* _gotk4_atk1_Action_get_localized_name(AtkAction*, gint);
+// extern gint _gotk4_atk1_Action_get_n_actions(AtkAction*);
+// extern gchar* _gotk4_atk1_Action_get_name(AtkAction*, gint);
+// extern gboolean _gotk4_atk1_Action_set_description(AtkAction*, gint, gchar*);
+// gboolean _gotk4_atk1_Action_virtual_do_action(void* fnptr, AtkAction* carg0, gint carg1) {
+// 	return ((gboolean (*) (AtkAction*, gint))(fnptr))(carg0, carg1);
+// }
+// gchar* _gotk4_atk1_Action_virtual_get_description(void* fnptr, AtkAction* carg0, gint carg1) {
+// 	return ((gchar* (*) (AtkAction*, gint))(fnptr))(carg0, carg1);
+// }
+// gchar* _gotk4_atk1_Action_virtual_get_keybinding(void* fnptr, AtkAction* carg0, gint carg1) {
+// 	return ((gchar* (*) (AtkAction*, gint))(fnptr))(carg0, carg1);
+// }
+// gchar* _gotk4_atk1_Action_virtual_get_localized_name(void* fnptr, AtkAction* carg0, gint carg1) {
+// 	return ((gchar* (*) (AtkAction*, gint))(fnptr))(carg0, carg1);
+// }
+// gint _gotk4_atk1_Action_virtual_get_n_actions(void* fnptr, AtkAction* carg0) {
+// 	return ((gint (*) (AtkAction*))(fnptr))(carg0);
+// }
+// gchar* _gotk4_atk1_Action_virtual_get_name(void* fnptr, AtkAction* carg0, gint carg1) {
+// 	return ((gchar* (*) (AtkAction*, gint))(fnptr))(carg0, carg1);
+// }
+// gboolean _gotk4_atk1_Action_virtual_set_description(void* fnptr, AtkAction* carg0, gint carg1, gchar* carg2) {
+// 	return ((gboolean (*) (AtkAction*, gint, gchar*))(fnptr))(carg0, carg1, carg2);
+// }
+// extern void _gotk4_atk1_Component_bounds_changed(AtkComponent*, AtkRectangle*);
+// extern gboolean _gotk4_atk1_Component_contains(AtkComponent*, gint, gint, AtkCoordType);
+// extern gdouble _gotk4_atk1_Component_get_alpha(AtkComponent*);
+// extern void _gotk4_atk1_Component_get_extents(AtkComponent*, gint, gint, gint, gint, AtkCoordType);
+// extern AtkLayer _gotk4_atk1_Component_get_layer(AtkComponent*);
+// extern gint _gotk4_atk1_Component_get_mdi_zorder(AtkComponent*);
+// extern gboolean _gotk4_atk1_Component_grab_focus(AtkComponent*);
+// extern AtkObject* _gotk4_atk1_Component_ref_accessible_at_point(AtkComponent*, gint, gint, AtkCoordType);
+// extern gboolean _gotk4_atk1_Component_scroll_to(AtkComponent*, AtkScrollType);
+// extern gboolean _gotk4_atk1_Component_scroll_to_point(AtkComponent*, AtkCoordType, gint, gint);
+// extern gboolean _gotk4_atk1_Component_set_extents(AtkComponent*, gint, gint, gint, gint, AtkCoordType);
+// extern gboolean _gotk4_atk1_Component_set_position(AtkComponent*, gint, gint, AtkCoordType);
+// extern gboolean _gotk4_atk1_Component_set_size(AtkComponent*, gint, gint);
+// void _gotk4_atk1_Component_virtual_bounds_changed(void* fnptr, AtkComponent* carg0, AtkRectangle* carg1) {
+// 	return ((void (*) (AtkComponent*, AtkRectangle*))(fnptr))(carg0, carg1);
+// }
+// gboolean _gotk4_atk1_Component_virtual_contains(void* fnptr, AtkComponent* carg0, gint carg1, gint carg2, AtkCoordType carg3) {
+// 	return ((gboolean (*) (AtkComponent*, gint, gint, AtkCoordType))(fnptr))(carg0, carg1, carg2, carg3);
+// }
+// gdouble _gotk4_atk1_Component_virtual_get_alpha(void* fnptr, AtkComponent* carg0) {
+// 	return ((gdouble (*) (AtkComponent*))(fnptr))(carg0);
+// }
+// void _gotk4_atk1_Component_virtual_get_extents(void* fnptr, AtkComponent* carg0, gint* carg1, gint* carg2, gint* carg3, gint* carg4, AtkCoordType carg5) {
+// 	return ((void (*) (AtkComponent*, gint*, gint*, gint*, gint*, AtkCoordType))(fnptr))(carg0, carg1, carg2, carg3, carg4, carg5);
+// }
+// AtkLayer _gotk4_atk1_Component_virtual_get_layer(void* fnptr, AtkComponent* carg0) {
+// 	return ((AtkLayer (*) (AtkComponent*))(fnptr))(carg0);
+// }
+// gint _gotk4_atk1_Component_virtual_get_mdi_zorder(void* fnptr, AtkComponent* carg0) {
+// 	return ((gint (*) (AtkComponent*))(fnptr))(carg0);
+// }
+// gboolean _gotk4_atk1_Component_virtual_grab_focus(void* fnptr, AtkComponent* carg0) {
+// 	return ((gboolean (*) (AtkComponent*))(fnptr))(carg0);
+// }
+// AtkObject* _gotk4_atk1_Component_virtual_ref_accessible_at_point(void* fnptr, AtkComponent* carg0, gint carg1, gint carg2, AtkCoordType carg3) {
+// 	return ((AtkObject* (*) (AtkComponent*, gint, gint, AtkCoordType))(fnptr))(carg0, carg1, carg2, carg3);
+// }
+// gboolean _gotk4_atk1_Component_virtual_scroll_to(void* fnptr, AtkComponent* carg0, AtkScrollType carg1) {
+// 	return ((gboolean (*) (AtkComponent*, AtkScrollType))(fnptr))(carg0, carg1);
+// }
+// gboolean _gotk4_atk1_Component_virtual_scroll_to_point(void* fnptr, AtkComponent* carg0, AtkCoordType carg1, gint carg2, gint carg3) {
+// 	return ((gboolean (*) (AtkComponent*, AtkCoordType, gint, gint))(fnptr))(carg0, carg1, carg2, carg3);
+// }
+// gboolean _gotk4_atk1_Component_virtual_set_extents(void* fnptr, AtkComponent* carg0, gint carg1, gint carg2, gint carg3, gint carg4, AtkCoordType carg5) {
+// 	return ((gboolean (*) (AtkComponent*, gint, gint, gint, gint, AtkCoordType))(fnptr))(carg0, carg1, carg2, carg3, carg4, carg5);
+// }
+// gboolean _gotk4_atk1_Component_virtual_set_position(void* fnptr, AtkComponent* carg0, gint carg1, gint carg2, AtkCoordType carg3) {
+// 	return ((gboolean (*) (AtkComponent*, gint, gint, AtkCoordType))(fnptr))(carg0, carg1, carg2, carg3);
+// }
+// gboolean _gotk4_atk1_Component_virtual_set_size(void* fnptr, AtkComponent* carg0, gint carg1, gint carg2) {
+// 	return ((gboolean (*) (AtkComponent*, gint, gint))(fnptr))(carg0, carg1, carg2);
+// }
+// extern gint _gotk4_atk1_Document_get_current_page_number(AtkDocument*);
+// extern gchar* _gotk4_atk1_Document_get_document_attribute_value(AtkDocument*, gchar*);
+// extern gint _gotk4_atk1_Document_get_page_count(AtkDocument*);
+// extern gboolean _gotk4_atk1_Document_set_document_attribute(AtkDocument*, gchar*, gchar*);
+// gint _gotk4_atk1_Document_virtual_get_current_page_number(void* fnptr, AtkDocument* carg0) {
+// 	return ((gint (*) (AtkDocument*))(fnptr))(carg0);
+// }
+// gchar* _gotk4_atk1_Document_virtual_get_document_attribute_value(void* fnptr, AtkDocument* carg0, gchar* carg1) {
+// 	return ((gchar* (*) (AtkDocument*, gchar*))(fnptr))(carg0, carg1);
+// }
+// gint _gotk4_atk1_Document_virtual_get_page_count(void* fnptr, AtkDocument* carg0) {
+// 	return ((gint (*) (AtkDocument*))(fnptr))(carg0);
+// }
+// gboolean _gotk4_atk1_Document_virtual_set_document_attribute(void* fnptr, AtkDocument* carg0, gchar* carg1, gchar* carg2) {
+// 	return ((gboolean (*) (AtkDocument*, gchar*, gchar*))(fnptr))(carg0, carg1, carg2);
+// }
+// extern void _gotk4_atk1_EditableText_copy_text(AtkEditableText*, gint, gint);
+// extern void _gotk4_atk1_EditableText_cut_text(AtkEditableText*, gint, gint);
+// extern void _gotk4_atk1_EditableText_delete_text(AtkEditableText*, gint, gint);
+// extern void _gotk4_atk1_EditableText_insert_text(AtkEditableText*, gchar*, gint, gint*);
+// extern void _gotk4_atk1_EditableText_paste_text(AtkEditableText*, gint);
+// extern void _gotk4_atk1_EditableText_set_text_contents(AtkEditableText*, gchar*);
+// void _gotk4_atk1_EditableText_virtual_copy_text(void* fnptr, AtkEditableText* carg0, gint carg1, gint carg2) {
+// 	return ((void (*) (AtkEditableText*, gint, gint))(fnptr))(carg0, carg1, carg2);
+// }
+// void _gotk4_atk1_EditableText_virtual_cut_text(void* fnptr, AtkEditableText* carg0, gint carg1, gint carg2) {
+// 	return ((void (*) (AtkEditableText*, gint, gint))(fnptr))(carg0, carg1, carg2);
+// }
+// void _gotk4_atk1_EditableText_virtual_delete_text(void* fnptr, AtkEditableText* carg0, gint carg1, gint carg2) {
+// 	return ((void (*) (AtkEditableText*, gint, gint))(fnptr))(carg0, carg1, carg2);
+// }
+// void _gotk4_atk1_EditableText_virtual_insert_text(void* fnptr, AtkEditableText* carg0, gchar* carg1, gint carg2, gint* carg3) {
+// 	return ((void (*) (AtkEditableText*, gchar*, gint, gint*))(fnptr))(carg0, carg1, carg2, carg3);
+// }
+// void _gotk4_atk1_EditableText_virtual_paste_text(void* fnptr, AtkEditableText* carg0, gint carg1) {
+// 	return ((void (*) (AtkEditableText*, gint))(fnptr))(carg0, carg1);
+// }
+// void _gotk4_atk1_EditableText_virtual_set_text_contents(void* fnptr, AtkEditableText* carg0, gchar* carg1) {
+// 	return ((void (*) (AtkEditableText*, gchar*))(fnptr))(carg0, carg1);
+// }
+// extern AtkHyperlink* _gotk4_atk1_HyperlinkImpl_get_hyperlink(AtkHyperlinkImpl*);
+// AtkHyperlink* _gotk4_atk1_HyperlinkImpl_virtual_get_hyperlink(void* fnptr, AtkHyperlinkImpl* carg0) {
+// 	return ((AtkHyperlink* (*) (AtkHyperlinkImpl*))(fnptr))(carg0);
+// }
+// extern AtkHyperlink* _gotk4_atk1_Hypertext_get_link(AtkHypertext*, gint);
+// extern gint _gotk4_atk1_Hypertext_get_link_index(AtkHypertext*, gint);
+// extern gint _gotk4_atk1_Hypertext_get_n_links(AtkHypertext*);
+// extern void _gotk4_atk1_Hypertext_link_selected(AtkHypertext*, gint);
+// AtkHyperlink* _gotk4_atk1_Hypertext_virtual_get_link(void* fnptr, AtkHypertext* carg0, gint carg1) {
+// 	return ((AtkHyperlink* (*) (AtkHypertext*, gint))(fnptr))(carg0, carg1);
+// }
+// gint _gotk4_atk1_Hypertext_virtual_get_link_index(void* fnptr, AtkHypertext* carg0, gint carg1) {
+// 	return ((gint (*) (AtkHypertext*, gint))(fnptr))(carg0, carg1);
+// }
+// gint _gotk4_atk1_Hypertext_virtual_get_n_links(void* fnptr, AtkHypertext* carg0) {
+// 	return ((gint (*) (AtkHypertext*))(fnptr))(carg0);
+// }
+// void _gotk4_atk1_Hypertext_virtual_link_selected(void* fnptr, AtkHypertext* carg0, gint carg1) {
+// 	return ((void (*) (AtkHypertext*, gint))(fnptr))(carg0, carg1);
+// }
+// extern gchar* _gotk4_atk1_Image_get_image_description(AtkImage*);
+// extern gchar* _gotk4_atk1_Image_get_image_locale(AtkImage*);
+// extern void _gotk4_atk1_Image_get_image_position(AtkImage*, gint, gint, AtkCoordType);
+// extern void _gotk4_atk1_Image_get_image_size(AtkImage*, gint, gint);
+// extern gboolean _gotk4_atk1_Image_set_image_description(AtkImage*, gchar*);
+// gchar* _gotk4_atk1_Image_virtual_get_image_description(void* fnptr, AtkImage* carg0) {
+// 	return ((gchar* (*) (AtkImage*))(fnptr))(carg0);
+// }
+// gchar* _gotk4_atk1_Image_virtual_get_image_locale(void* fnptr, AtkImage* carg0) {
+// 	return ((gchar* (*) (AtkImage*))(fnptr))(carg0);
+// }
+// void _gotk4_atk1_Image_virtual_get_image_position(void* fnptr, AtkImage* carg0, gint* carg1, gint* carg2, AtkCoordType carg3) {
+// 	return ((void (*) (AtkImage*, gint*, gint*, AtkCoordType))(fnptr))(carg0, carg1, carg2, carg3);
+// }
+// void _gotk4_atk1_Image_virtual_get_image_size(void* fnptr, AtkImage* carg0, gint* carg1, gint* carg2) {
+// 	return ((void (*) (AtkImage*, gint*, gint*))(fnptr))(carg0, carg1, carg2);
+// }
+// gboolean _gotk4_atk1_Image_virtual_set_image_description(void* fnptr, AtkImage* carg0, gchar* carg1) {
+// 	return ((gboolean (*) (AtkImage*, gchar*))(fnptr))(carg0, carg1);
+// }
+// extern gboolean _gotk4_atk1_Selection_add_selection(AtkSelection*, gint);
+// extern gboolean _gotk4_atk1_Selection_clear_selection(AtkSelection*);
+// extern gint _gotk4_atk1_Selection_get_selection_count(AtkSelection*);
+// extern gboolean _gotk4_atk1_Selection_is_child_selected(AtkSelection*, gint);
+// extern AtkObject* _gotk4_atk1_Selection_ref_selection(AtkSelection*, gint);
+// extern gboolean _gotk4_atk1_Selection_remove_selection(AtkSelection*, gint);
+// extern gboolean _gotk4_atk1_Selection_select_all_selection(AtkSelection*);
+// extern void _gotk4_atk1_Selection_selection_changed(AtkSelection*);
+// gboolean _gotk4_atk1_Selection_virtual_add_selection(void* fnptr, AtkSelection* carg0, gint carg1) {
+// 	return ((gboolean (*) (AtkSelection*, gint))(fnptr))(carg0, carg1);
+// }
+// gboolean _gotk4_atk1_Selection_virtual_clear_selection(void* fnptr, AtkSelection* carg0) {
+// 	return ((gboolean (*) (AtkSelection*))(fnptr))(carg0);
+// }
+// gint _gotk4_atk1_Selection_virtual_get_selection_count(void* fnptr, AtkSelection* carg0) {
+// 	return ((gint (*) (AtkSelection*))(fnptr))(carg0);
+// }
+// gboolean _gotk4_atk1_Selection_virtual_is_child_selected(void* fnptr, AtkSelection* carg0, gint carg1) {
+// 	return ((gboolean (*) (AtkSelection*, gint))(fnptr))(carg0, carg1);
+// }
+// AtkObject* _gotk4_atk1_Selection_virtual_ref_selection(void* fnptr, AtkSelection* carg0, gint carg1) {
+// 	return ((AtkObject* (*) (AtkSelection*, gint))(fnptr))(carg0, carg1);
+// }
+// gboolean _gotk4_atk1_Selection_virtual_remove_selection(void* fnptr, AtkSelection* carg0, gint carg1) {
+// 	return ((gboolean (*) (AtkSelection*, gint))(fnptr))(carg0, carg1);
+// }
+// gboolean _gotk4_atk1_Selection_virtual_select_all_selection(void* fnptr, AtkSelection* carg0) {
+// 	return ((gboolean (*) (AtkSelection*))(fnptr))(carg0);
+// }
+// void _gotk4_atk1_Selection_virtual_selection_changed(void* fnptr, AtkSelection* carg0) {
+// 	return ((void (*) (AtkSelection*))(fnptr))(carg0);
+// }
+// extern gchar* _gotk4_atk1_StreamableContent_get_mime_type(AtkStreamableContent*, gint);
+// extern gint _gotk4_atk1_StreamableContent_get_n_mime_types(AtkStreamableContent*);
+// extern GIOChannel* _gotk4_atk1_StreamableContent_get_stream(AtkStreamableContent*, gchar*);
+// extern gchar* _gotk4_atk1_StreamableContent_get_uri(AtkStreamableContent*, gchar*);
+// gchar* _gotk4_atk1_StreamableContent_virtual_get_mime_type(void* fnptr, AtkStreamableContent* carg0, gint carg1) {
+// 	return ((gchar* (*) (AtkStreamableContent*, gint))(fnptr))(carg0, carg1);
+// }
+// gint _gotk4_atk1_StreamableContent_virtual_get_n_mime_types(void* fnptr, AtkStreamableContent* carg0) {
+// 	return ((gint (*) (AtkStreamableContent*))(fnptr))(carg0);
+// }
+// GIOChannel* _gotk4_atk1_StreamableContent_virtual_get_stream(void* fnptr, AtkStreamableContent* carg0, gchar* carg1) {
+// 	return ((GIOChannel* (*) (AtkStreamableContent*, gchar*))(fnptr))(carg0, carg1);
+// }
+// gchar* _gotk4_atk1_StreamableContent_virtual_get_uri(void* fnptr, AtkStreamableContent* carg0, gchar* carg1) {
+// 	return ((gchar* (*) (AtkStreamableContent*, gchar*))(fnptr))(carg0, carg1);
+// }
+// extern gboolean _gotk4_atk1_Table_add_column_selection(AtkTable*, gint);
+// extern gboolean _gotk4_atk1_Table_add_row_selection(AtkTable*, gint);
+// extern void _gotk4_atk1_Table_column_deleted(AtkTable*, gint, gint);
+// extern void _gotk4_atk1_Table_column_inserted(AtkTable*, gint, gint);
+// extern void _gotk4_atk1_Table_column_reordered(AtkTable*);
+// extern AtkObject* _gotk4_atk1_Table_get_caption(AtkTable*);
+// extern gchar* _gotk4_atk1_Table_get_column_description(AtkTable*, gint);
+// extern gint _gotk4_atk1_Table_get_column_extent_at(AtkTable*, gint, gint);
+// extern AtkObject* _gotk4_atk1_Table_get_column_header(AtkTable*, gint);
+// extern gint _gotk4_atk1_Table_get_n_columns(AtkTable*);
+// extern gint _gotk4_atk1_Table_get_n_rows(AtkTable*);
+// extern gchar* _gotk4_atk1_Table_get_row_description(AtkTable*, gint);
+// extern gint _gotk4_atk1_Table_get_row_extent_at(AtkTable*, gint, gint);
+// extern AtkObject* _gotk4_atk1_Table_get_row_header(AtkTable*, gint);
+// extern gint _gotk4_atk1_Table_get_selected_columns(AtkTable*, gint**);
+// extern gint _gotk4_atk1_Table_get_selected_rows(AtkTable*, gint**);
+// extern AtkObject* _gotk4_atk1_Table_get_summary(AtkTable*);
+// extern gboolean _gotk4_atk1_Table_is_column_selected(AtkTable*, gint);
+// extern gboolean _gotk4_atk1_Table_is_row_selected(AtkTable*, gint);
+// extern gboolean _gotk4_atk1_Table_is_selected(AtkTable*, gint, gint);
+// extern void _gotk4_atk1_Table_model_changed(AtkTable*);
+// extern AtkObject* _gotk4_atk1_Table_ref_at(AtkTable*, gint, gint);
+// extern gboolean _gotk4_atk1_Table_remove_column_selection(AtkTable*, gint);
+// extern gboolean _gotk4_atk1_Table_remove_row_selection(AtkTable*, gint);
+// extern void _gotk4_atk1_Table_row_deleted(AtkTable*, gint, gint);
+// extern void _gotk4_atk1_Table_row_inserted(AtkTable*, gint, gint);
+// extern void _gotk4_atk1_Table_row_reordered(AtkTable*);
+// extern void _gotk4_atk1_Table_set_caption(AtkTable*, AtkObject*);
+// extern void _gotk4_atk1_Table_set_column_description(AtkTable*, gint, gchar*);
+// extern void _gotk4_atk1_Table_set_column_header(AtkTable*, gint, AtkObject*);
+// extern void _gotk4_atk1_Table_set_row_description(AtkTable*, gint, gchar*);
+// extern void _gotk4_atk1_Table_set_row_header(AtkTable*, gint, AtkObject*);
+// extern void _gotk4_atk1_Table_set_summary(AtkTable*, AtkObject*);
+// gboolean _gotk4_atk1_Table_virtual_add_column_selection(void* fnptr, AtkTable* carg0, gint carg1) {
+// 	return ((gboolean (*) (AtkTable*, gint))(fnptr))(carg0, carg1);
+// }
+// gboolean _gotk4_atk1_Table_virtual_add_row_selection(void* fnptr, AtkTable* carg0, gint carg1) {
+// 	return ((gboolean (*) (AtkTable*, gint))(fnptr))(carg0, carg1);
+// }
+// void _gotk4_atk1_Table_virtual_column_deleted(void* fnptr, AtkTable* carg0, gint carg1, gint carg2) {
+// 	return ((void (*) (AtkTable*, gint, gint))(fnptr))(carg0, carg1, carg2);
+// }
+// void _gotk4_atk1_Table_virtual_column_inserted(void* fnptr, AtkTable* carg0, gint carg1, gint carg2) {
+// 	return ((void (*) (AtkTable*, gint, gint))(fnptr))(carg0, carg1, carg2);
+// }
+// void _gotk4_atk1_Table_virtual_column_reordered(void* fnptr, AtkTable* carg0) {
+// 	return ((void (*) (AtkTable*))(fnptr))(carg0);
+// }
+// AtkObject* _gotk4_atk1_Table_virtual_get_caption(void* fnptr, AtkTable* carg0) {
+// 	return ((AtkObject* (*) (AtkTable*))(fnptr))(carg0);
+// }
+// gchar* _gotk4_atk1_Table_virtual_get_column_description(void* fnptr, AtkTable* carg0, gint carg1) {
+// 	return ((gchar* (*) (AtkTable*, gint))(fnptr))(carg0, carg1);
+// }
+// gint _gotk4_atk1_Table_virtual_get_column_extent_at(void* fnptr, AtkTable* carg0, gint carg1, gint carg2) {
+// 	return ((gint (*) (AtkTable*, gint, gint))(fnptr))(carg0, carg1, carg2);
+// }
+// AtkObject* _gotk4_atk1_Table_virtual_get_column_header(void* fnptr, AtkTable* carg0, gint carg1) {
+// 	return ((AtkObject* (*) (AtkTable*, gint))(fnptr))(carg0, carg1);
+// }
+// gint _gotk4_atk1_Table_virtual_get_n_columns(void* fnptr, AtkTable* carg0) {
+// 	return ((gint (*) (AtkTable*))(fnptr))(carg0);
+// }
+// gint _gotk4_atk1_Table_virtual_get_n_rows(void* fnptr, AtkTable* carg0) {
+// 	return ((gint (*) (AtkTable*))(fnptr))(carg0);
+// }
+// gchar* _gotk4_atk1_Table_virtual_get_row_description(void* fnptr, AtkTable* carg0, gint carg1) {
+// 	return ((gchar* (*) (AtkTable*, gint))(fnptr))(carg0, carg1);
+// }
+// gint _gotk4_atk1_Table_virtual_get_row_extent_at(void* fnptr, AtkTable* carg0, gint carg1, gint carg2) {
+// 	return ((gint (*) (AtkTable*, gint, gint))(fnptr))(carg0, carg1, carg2);
+// }
+// AtkObject* _gotk4_atk1_Table_virtual_get_row_header(void* fnptr, AtkTable* carg0, gint carg1) {
+// 	return ((AtkObject* (*) (AtkTable*, gint))(fnptr))(carg0, carg1);
+// }
+// gint _gotk4_atk1_Table_virtual_get_selected_columns(void* fnptr, AtkTable* carg0, gint** carg1) {
+// 	return ((gint (*) (AtkTable*, gint**))(fnptr))(carg0, carg1);
+// }
+// gint _gotk4_atk1_Table_virtual_get_selected_rows(void* fnptr, AtkTable* carg0, gint** carg1) {
+// 	return ((gint (*) (AtkTable*, gint**))(fnptr))(carg0, carg1);
+// }
+// AtkObject* _gotk4_atk1_Table_virtual_get_summary(void* fnptr, AtkTable* carg0) {
+// 	return ((AtkObject* (*) (AtkTable*))(fnptr))(carg0);
+// }
+// gboolean _gotk4_atk1_Table_virtual_is_column_selected(void* fnptr, AtkTable* carg0, gint carg1) {
+// 	return ((gboolean (*) (AtkTable*, gint))(fnptr))(carg0, carg1);
+// }
+// gboolean _gotk4_atk1_Table_virtual_is_row_selected(void* fnptr, AtkTable* carg0, gint carg1) {
+// 	return ((gboolean (*) (AtkTable*, gint))(fnptr))(carg0, carg1);
+// }
+// gboolean _gotk4_atk1_Table_virtual_is_selected(void* fnptr, AtkTable* carg0, gint carg1, gint carg2) {
+// 	return ((gboolean (*) (AtkTable*, gint, gint))(fnptr))(carg0, carg1, carg2);
+// }
+// void _gotk4_atk1_Table_virtual_model_changed(void* fnptr, AtkTable* carg0) {
+// 	return ((void (*) (AtkTable*))(fnptr))(carg0);
+// }
+// AtkObject* _gotk4_atk1_Table_virtual_ref_at(void* fnptr, AtkTable* carg0, gint carg1, gint carg2) {
+// 	return ((AtkObject* (*) (AtkTable*, gint, gint))(fnptr))(carg0, carg1, carg2);
+// }
+// gboolean _gotk4_atk1_Table_virtual_remove_column_selection(void* fnptr, AtkTable* carg0, gint carg1) {
+// 	return ((gboolean (*) (AtkTable*, gint))(fnptr))(carg0, carg1);
+// }
+// gboolean _gotk4_atk1_Table_virtual_remove_row_selection(void* fnptr, AtkTable* carg0, gint carg1) {
+// 	return ((gboolean (*) (AtkTable*, gint))(fnptr))(carg0, carg1);
+// }
+// void _gotk4_atk1_Table_virtual_row_deleted(void* fnptr, AtkTable* carg0, gint carg1, gint carg2) {
+// 	return ((void (*) (AtkTable*, gint, gint))(fnptr))(carg0, carg1, carg2);
+// }
+// void _gotk4_atk1_Table_virtual_row_inserted(void* fnptr, AtkTable* carg0, gint carg1, gint carg2) {
+// 	return ((void (*) (AtkTable*, gint, gint))(fnptr))(carg0, carg1, carg2);
+// }
+// void _gotk4_atk1_Table_virtual_row_reordered(void* fnptr, AtkTable* carg0) {
+// 	return ((void (*) (AtkTable*))(fnptr))(carg0);
+// }
+// void _gotk4_atk1_Table_virtual_set_caption(void* fnptr, AtkTable* carg0, AtkObject* carg1) {
+// 	return ((void (*) (AtkTable*, AtkObject*))(fnptr))(carg0, carg1);
+// }
+// void _gotk4_atk1_Table_virtual_set_column_description(void* fnptr, AtkTable* carg0, gint carg1, gchar* carg2) {
+// 	return ((void (*) (AtkTable*, gint, gchar*))(fnptr))(carg0, carg1, carg2);
+// }
+// void _gotk4_atk1_Table_virtual_set_column_header(void* fnptr, AtkTable* carg0, gint carg1, AtkObject* carg2) {
+// 	return ((void (*) (AtkTable*, gint, AtkObject*))(fnptr))(carg0, carg1, carg2);
+// }
+// void _gotk4_atk1_Table_virtual_set_row_description(void* fnptr, AtkTable* carg0, gint carg1, gchar* carg2) {
+// 	return ((void (*) (AtkTable*, gint, gchar*))(fnptr))(carg0, carg1, carg2);
+// }
+// void _gotk4_atk1_Table_virtual_set_row_header(void* fnptr, AtkTable* carg0, gint carg1, AtkObject* carg2) {
+// 	return ((void (*) (AtkTable*, gint, AtkObject*))(fnptr))(carg0, carg1, carg2);
+// }
+// void _gotk4_atk1_Table_virtual_set_summary(void* fnptr, AtkTable* carg0, AtkObject* carg1) {
+// 	return ((void (*) (AtkTable*, AtkObject*))(fnptr))(carg0, carg1);
+// }
+// extern gint _gotk4_atk1_TableCell_get_column_span(AtkTableCell*);
+// extern gboolean _gotk4_atk1_TableCell_get_position(AtkTableCell*, gint, gint);
+// extern gboolean _gotk4_atk1_TableCell_get_row_column_span(AtkTableCell*, gint, gint, gint, gint);
+// extern gint _gotk4_atk1_TableCell_get_row_span(AtkTableCell*);
+// extern AtkObject* _gotk4_atk1_TableCell_get_table(AtkTableCell*);
+// gint _gotk4_atk1_TableCell_virtual_get_column_span(void* fnptr, AtkTableCell* carg0) {
+// 	return ((gint (*) (AtkTableCell*))(fnptr))(carg0);
+// }
+// gboolean _gotk4_atk1_TableCell_virtual_get_position(void* fnptr, AtkTableCell* carg0, gint* carg1, gint* carg2) {
+// 	return ((gboolean (*) (AtkTableCell*, gint*, gint*))(fnptr))(carg0, carg1, carg2);
+// }
+// gboolean _gotk4_atk1_TableCell_virtual_get_row_column_span(void* fnptr, AtkTableCell* carg0, gint* carg1, gint* carg2, gint* carg3, gint* carg4) {
+// 	return ((gboolean (*) (AtkTableCell*, gint*, gint*, gint*, gint*))(fnptr))(carg0, carg1, carg2, carg3, carg4);
+// }
+// gint _gotk4_atk1_TableCell_virtual_get_row_span(void* fnptr, AtkTableCell* carg0) {
+// 	return ((gint (*) (AtkTableCell*))(fnptr))(carg0);
+// }
+// AtkObject* _gotk4_atk1_TableCell_virtual_get_table(void* fnptr, AtkTableCell* carg0) {
+// 	return ((AtkObject* (*) (AtkTableCell*))(fnptr))(carg0);
+// }
+// extern gboolean _gotk4_atk1_Text_add_selection(AtkText*, gint, gint);
+// extern AtkTextRange** _gotk4_atk1_Text_get_bounded_ranges(AtkText*, AtkTextRectangle*, AtkCoordType, AtkTextClipType, AtkTextClipType);
+// extern gint _gotk4_atk1_Text_get_caret_offset(AtkText*);
+// extern gunichar _gotk4_atk1_Text_get_character_at_offset(AtkText*, gint);
+// extern gint _gotk4_atk1_Text_get_character_count(AtkText*);
+// extern void _gotk4_atk1_Text_get_character_extents(AtkText*, gint, gint, gint, gint, gint, AtkCoordType);
+// extern gint _gotk4_atk1_Text_get_n_selections(AtkText*);
+// extern gint _gotk4_atk1_Text_get_offset_at_point(AtkText*, gint, gint, AtkCoordType);
+// extern void _gotk4_atk1_Text_get_range_extents(AtkText*, gint, gint, AtkCoordType, AtkTextRectangle);
+// extern gchar* _gotk4_atk1_Text_get_selection(AtkText*, gint, gint, gint);
+// extern gchar* _gotk4_atk1_Text_get_string_at_offset(AtkText*, gint, AtkTextGranularity, gint, gint);
+// extern gchar* _gotk4_atk1_Text_get_text(AtkText*, gint, gint);
+// extern gboolean _gotk4_atk1_Text_remove_selection(AtkText*, gint);
+// extern gboolean _gotk4_atk1_Text_scroll_substring_to(AtkText*, gint, gint, AtkScrollType);
+// extern gboolean _gotk4_atk1_Text_scroll_substring_to_point(AtkText*, gint, gint, AtkCoordType, gint, gint);
+// extern gboolean _gotk4_atk1_Text_set_caret_offset(AtkText*, gint);
+// extern gboolean _gotk4_atk1_Text_set_selection(AtkText*, gint, gint, gint);
+// extern void _gotk4_atk1_Text_text_attributes_changed(AtkText*);
+// extern void _gotk4_atk1_Text_text_caret_moved(AtkText*, gint);
+// extern void _gotk4_atk1_Text_text_changed(AtkText*, gint, gint);
+// extern void _gotk4_atk1_Text_text_selection_changed(AtkText*);
+// gboolean _gotk4_atk1_Text_virtual_add_selection(void* fnptr, AtkText* carg0, gint carg1, gint carg2) {
+// 	return ((gboolean (*) (AtkText*, gint, gint))(fnptr))(carg0, carg1, carg2);
+// }
+// AtkTextRange** _gotk4_atk1_Text_virtual_get_bounded_ranges(void* fnptr, AtkText* carg0, AtkTextRectangle* carg1, AtkCoordType carg2, AtkTextClipType carg3, AtkTextClipType carg4) {
+// 	return ((AtkTextRange** (*) (AtkText*, AtkTextRectangle*, AtkCoordType, AtkTextClipType, AtkTextClipType))(fnptr))(carg0, carg1, carg2, carg3, carg4);
+// }
+// gint _gotk4_atk1_Text_virtual_get_caret_offset(void* fnptr, AtkText* carg0) {
+// 	return ((gint (*) (AtkText*))(fnptr))(carg0);
+// }
+// gunichar _gotk4_atk1_Text_virtual_get_character_at_offset(void* fnptr, AtkText* carg0, gint carg1) {
+// 	return ((gunichar (*) (AtkText*, gint))(fnptr))(carg0, carg1);
+// }
+// gint _gotk4_atk1_Text_virtual_get_character_count(void* fnptr, AtkText* carg0) {
+// 	return ((gint (*) (AtkText*))(fnptr))(carg0);
+// }
+// void _gotk4_atk1_Text_virtual_get_character_extents(void* fnptr, AtkText* carg0, gint carg1, gint* carg2, gint* carg3, gint* carg4, gint* carg5, AtkCoordType carg6) {
+// 	return ((void (*) (AtkText*, gint, gint*, gint*, gint*, gint*, AtkCoordType))(fnptr))(carg0, carg1, carg2, carg3, carg4, carg5, carg6);
+// }
+// gint _gotk4_atk1_Text_virtual_get_n_selections(void* fnptr, AtkText* carg0) {
+// 	return ((gint (*) (AtkText*))(fnptr))(carg0);
+// }
+// gint _gotk4_atk1_Text_virtual_get_offset_at_point(void* fnptr, AtkText* carg0, gint carg1, gint carg2, AtkCoordType carg3) {
+// 	return ((gint (*) (AtkText*, gint, gint, AtkCoordType))(fnptr))(carg0, carg1, carg2, carg3);
+// }
+// void _gotk4_atk1_Text_virtual_get_range_extents(void* fnptr, AtkText* carg0, gint carg1, gint carg2, AtkCoordType carg3, AtkTextRectangle* carg4) {
+// 	return ((void (*) (AtkText*, gint, gint, AtkCoordType, AtkTextRectangle*))(fnptr))(carg0, carg1, carg2, carg3, carg4);
+// }
+// gchar* _gotk4_atk1_Text_virtual_get_selection(void* fnptr, AtkText* carg0, gint carg1, gint* carg2, gint* carg3) {
+// 	return ((gchar* (*) (AtkText*, gint, gint*, gint*))(fnptr))(carg0, carg1, carg2, carg3);
+// }
+// gchar* _gotk4_atk1_Text_virtual_get_string_at_offset(void* fnptr, AtkText* carg0, gint carg1, AtkTextGranularity carg2, gint* carg3, gint* carg4) {
+// 	return ((gchar* (*) (AtkText*, gint, AtkTextGranularity, gint*, gint*))(fnptr))(carg0, carg1, carg2, carg3, carg4);
+// }
+// gchar* _gotk4_atk1_Text_virtual_get_text(void* fnptr, AtkText* carg0, gint carg1, gint carg2) {
+// 	return ((gchar* (*) (AtkText*, gint, gint))(fnptr))(carg0, carg1, carg2);
+// }
+// gboolean _gotk4_atk1_Text_virtual_remove_selection(void* fnptr, AtkText* carg0, gint carg1) {
+// 	return ((gboolean (*) (AtkText*, gint))(fnptr))(carg0, carg1);
+// }
+// gboolean _gotk4_atk1_Text_virtual_scroll_substring_to(void* fnptr, AtkText* carg0, gint carg1, gint carg2, AtkScrollType carg3) {
+// 	return ((gboolean (*) (AtkText*, gint, gint, AtkScrollType))(fnptr))(carg0, carg1, carg2, carg3);
+// }
+// gboolean _gotk4_atk1_Text_virtual_scroll_substring_to_point(void* fnptr, AtkText* carg0, gint carg1, gint carg2, AtkCoordType carg3, gint carg4, gint carg5) {
+// 	return ((gboolean (*) (AtkText*, gint, gint, AtkCoordType, gint, gint))(fnptr))(carg0, carg1, carg2, carg3, carg4, carg5);
+// }
+// gboolean _gotk4_atk1_Text_virtual_set_caret_offset(void* fnptr, AtkText* carg0, gint carg1) {
+// 	return ((gboolean (*) (AtkText*, gint))(fnptr))(carg0, carg1);
+// }
+// gboolean _gotk4_atk1_Text_virtual_set_selection(void* fnptr, AtkText* carg0, gint carg1, gint carg2, gint carg3) {
+// 	return ((gboolean (*) (AtkText*, gint, gint, gint))(fnptr))(carg0, carg1, carg2, carg3);
+// }
+// void _gotk4_atk1_Text_virtual_text_attributes_changed(void* fnptr, AtkText* carg0) {
+// 	return ((void (*) (AtkText*))(fnptr))(carg0);
+// }
+// void _gotk4_atk1_Text_virtual_text_caret_moved(void* fnptr, AtkText* carg0, gint carg1) {
+// 	return ((void (*) (AtkText*, gint))(fnptr))(carg0, carg1);
+// }
+// void _gotk4_atk1_Text_virtual_text_changed(void* fnptr, AtkText* carg0, gint carg1, gint carg2) {
+// 	return ((void (*) (AtkText*, gint, gint))(fnptr))(carg0, carg1, carg2);
+// }
+// void _gotk4_atk1_Text_virtual_text_selection_changed(void* fnptr, AtkText* carg0) {
+// 	return ((void (*) (AtkText*))(fnptr))(carg0);
+// }
+// extern gdouble _gotk4_atk1_Value_get_increment(AtkValue*);
+// extern AtkRange* _gotk4_atk1_Value_get_range(AtkValue*);
+// extern GSList* _gotk4_atk1_Value_get_sub_ranges(AtkValue*);
+// extern void _gotk4_atk1_Value_get_value_and_text(AtkValue*, gdouble, gchar*);
+// extern void _gotk4_atk1_Value_set_value(AtkValue*, gdouble);
+// gdouble _gotk4_atk1_Value_virtual_get_increment(void* fnptr, AtkValue* carg0) {
+// 	return ((gdouble (*) (AtkValue*))(fnptr))(carg0);
+// }
+// AtkRange* _gotk4_atk1_Value_virtual_get_range(void* fnptr, AtkValue* carg0) {
+// 	return ((AtkRange* (*) (AtkValue*))(fnptr))(carg0);
+// }
+// GSList* _gotk4_atk1_Value_virtual_get_sub_ranges(void* fnptr, AtkValue* carg0) {
+// 	return ((GSList* (*) (AtkValue*))(fnptr))(carg0);
+// }
+// void _gotk4_atk1_Value_virtual_get_value_and_text(void* fnptr, AtkValue* carg0, gdouble* carg1, gchar** carg2) {
+// 	return ((void (*) (AtkValue*, gdouble*, gchar**))(fnptr))(carg0, carg1, carg2);
+// }
+// void _gotk4_atk1_Value_virtual_set_value(void* fnptr, AtkValue* carg0, gdouble carg1) {
+// 	return ((void (*) (AtkValue*, gdouble))(fnptr))(carg0, carg1);
+// }
+// extern gint _gotk4_atk1_Hyperlink_get_end_index(AtkHyperlink*);
+// extern gint _gotk4_atk1_Hyperlink_get_n_anchors(AtkHyperlink*);
+// extern AtkObject* _gotk4_atk1_Hyperlink_get_object(AtkHyperlink*, gint);
+// extern gint _gotk4_atk1_Hyperlink_get_start_index(AtkHyperlink*);
+// extern gchar* _gotk4_atk1_Hyperlink_get_uri(AtkHyperlink*, gint);
+// extern gboolean _gotk4_atk1_Hyperlink_is_valid(AtkHyperlink*);
+// extern void _gotk4_atk1_Hyperlink_link_activated(AtkHyperlink*);
+// extern guint _gotk4_atk1_Hyperlink_link_state(AtkHyperlink*);
+// gint _gotk4_atk1_Hyperlink_virtual_get_end_index(void* fnptr, AtkHyperlink* carg0) {
+// 	return ((gint (*) (AtkHyperlink*))(fnptr))(carg0);
+// }
+// gint _gotk4_atk1_Hyperlink_virtual_get_n_anchors(void* fnptr, AtkHyperlink* carg0) {
+// 	return ((gint (*) (AtkHyperlink*))(fnptr))(carg0);
+// }
+// AtkObject* _gotk4_atk1_Hyperlink_virtual_get_object(void* fnptr, AtkHyperlink* carg0, gint carg1) {
+// 	return ((AtkObject* (*) (AtkHyperlink*, gint))(fnptr))(carg0, carg1);
+// }
+// gint _gotk4_atk1_Hyperlink_virtual_get_start_index(void* fnptr, AtkHyperlink* carg0) {
+// 	return ((gint (*) (AtkHyperlink*))(fnptr))(carg0);
+// }
+// gchar* _gotk4_atk1_Hyperlink_virtual_get_uri(void* fnptr, AtkHyperlink* carg0, gint carg1) {
+// 	return ((gchar* (*) (AtkHyperlink*, gint))(fnptr))(carg0, carg1);
+// }
+// gboolean _gotk4_atk1_Hyperlink_virtual_is_valid(void* fnptr, AtkHyperlink* carg0) {
+// 	return ((gboolean (*) (AtkHyperlink*))(fnptr))(carg0);
+// }
+// void _gotk4_atk1_Hyperlink_virtual_link_activated(void* fnptr, AtkHyperlink* carg0) {
+// 	return ((void (*) (AtkHyperlink*))(fnptr))(carg0);
+// }
+// guint _gotk4_atk1_Hyperlink_virtual_link_state(void* fnptr, AtkHyperlink* carg0) {
+// 	return ((guint (*) (AtkHyperlink*))(fnptr))(carg0);
+// }
+// extern void _gotk4_atk1_Object_focus_event(AtkObject*, gboolean);
+// extern gchar* _gotk4_atk1_Object_get_description(AtkObject*);
+// extern gint _gotk4_atk1_Object_get_index_in_parent(AtkObject*);
+// extern gint _gotk4_atk1_Object_get_n_children(AtkObject*);
+// extern gchar* _gotk4_atk1_Object_get_name(AtkObject*);
+// extern gchar* _gotk4_atk1_Object_get_object_locale(AtkObject*);
+// extern AtkObject* _gotk4_atk1_Object_get_parent(AtkObject*);
+// extern AtkRole _gotk4_atk1_Object_get_role(AtkObject*);
+// extern void _gotk4_atk1_Object_property_change(AtkObject*, AtkPropertyValues*);
+// extern AtkRelationSet* _gotk4_atk1_Object_ref_relation_set(AtkObject*);
+// extern AtkStateSet* _gotk4_atk1_Object_ref_state_set(AtkObject*);
+// extern void _gotk4_atk1_Object_set_description(AtkObject*, gchar*);
+// extern void _gotk4_atk1_Object_set_name(AtkObject*, gchar*);
+// extern void _gotk4_atk1_Object_set_parent(AtkObject*, AtkObject*);
+// extern void _gotk4_atk1_Object_set_role(AtkObject*, AtkRole);
+// extern void _gotk4_atk1_Object_state_change(AtkObject*, gchar*, gboolean);
+// extern void _gotk4_atk1_Object_visible_data_changed(AtkObject*);
+// void _gotk4_atk1_Object_virtual_focus_event(void* fnptr, AtkObject* carg0, gboolean carg1) {
+// 	return ((void (*) (AtkObject*, gboolean))(fnptr))(carg0, carg1);
+// }
+// gchar* _gotk4_atk1_Object_virtual_get_description(void* fnptr, AtkObject* carg0) {
+// 	return ((gchar* (*) (AtkObject*))(fnptr))(carg0);
+// }
+// gint _gotk4_atk1_Object_virtual_get_index_in_parent(void* fnptr, AtkObject* carg0) {
+// 	return ((gint (*) (AtkObject*))(fnptr))(carg0);
+// }
+// gint _gotk4_atk1_Object_virtual_get_n_children(void* fnptr, AtkObject* carg0) {
+// 	return ((gint (*) (AtkObject*))(fnptr))(carg0);
+// }
+// gchar* _gotk4_atk1_Object_virtual_get_name(void* fnptr, AtkObject* carg0) {
+// 	return ((gchar* (*) (AtkObject*))(fnptr))(carg0);
+// }
+// gchar* _gotk4_atk1_Object_virtual_get_object_locale(void* fnptr, AtkObject* carg0) {
+// 	return ((gchar* (*) (AtkObject*))(fnptr))(carg0);
+// }
+// AtkObject* _gotk4_atk1_Object_virtual_get_parent(void* fnptr, AtkObject* carg0) {
+// 	return ((AtkObject* (*) (AtkObject*))(fnptr))(carg0);
+// }
+// AtkRole _gotk4_atk1_Object_virtual_get_role(void* fnptr, AtkObject* carg0) {
+// 	return ((AtkRole (*) (AtkObject*))(fnptr))(carg0);
+// }
+// void _gotk4_atk1_Object_virtual_property_change(void* fnptr, AtkObject* carg0, AtkPropertyValues* carg1) {
+// 	return ((void (*) (AtkObject*, AtkPropertyValues*))(fnptr))(carg0, carg1);
+// }
+// AtkRelationSet* _gotk4_atk1_Object_virtual_ref_relation_set(void* fnptr, AtkObject* carg0) {
+// 	return ((AtkRelationSet* (*) (AtkObject*))(fnptr))(carg0);
+// }
+// AtkStateSet* _gotk4_atk1_Object_virtual_ref_state_set(void* fnptr, AtkObject* carg0) {
+// 	return ((AtkStateSet* (*) (AtkObject*))(fnptr))(carg0);
+// }
+// void _gotk4_atk1_Object_virtual_set_description(void* fnptr, AtkObject* carg0, gchar* carg1) {
+// 	return ((void (*) (AtkObject*, gchar*))(fnptr))(carg0, carg1);
+// }
+// void _gotk4_atk1_Object_virtual_set_name(void* fnptr, AtkObject* carg0, gchar* carg1) {
+// 	return ((void (*) (AtkObject*, gchar*))(fnptr))(carg0, carg1);
+// }
+// void _gotk4_atk1_Object_virtual_set_parent(void* fnptr, AtkObject* carg0, AtkObject* carg1) {
+// 	return ((void (*) (AtkObject*, AtkObject*))(fnptr))(carg0, carg1);
+// }
+// void _gotk4_atk1_Object_virtual_set_role(void* fnptr, AtkObject* carg0, AtkRole carg1) {
+// 	return ((void (*) (AtkObject*, AtkRole))(fnptr))(carg0, carg1);
+// }
+// void _gotk4_atk1_Object_virtual_state_change(void* fnptr, AtkObject* carg0, gchar* carg1, gboolean carg2) {
+// 	return ((void (*) (AtkObject*, gchar*, gboolean))(fnptr))(carg0, carg1, carg2);
+// }
+// void _gotk4_atk1_Object_virtual_visible_data_changed(void* fnptr, AtkObject* carg0) {
+// 	return ((void (*) (AtkObject*))(fnptr))(carg0);
+// }
+// extern void _gotk4_atk1_ObjectFactory_invalidate(AtkObjectFactory*);
+// void _gotk4_atk1_ObjectFactory_virtual_invalidate(void* fnptr, AtkObjectFactory* carg0) {
+// 	return ((void (*) (AtkObjectFactory*))(fnptr))(carg0);
+// }
+// extern gchar* _gotk4_atk1_Plug_get_object_id(AtkPlug*);
+// gchar* _gotk4_atk1_Plug_virtual_get_object_id(void* fnptr, AtkPlug* carg0) {
+// 	return ((gchar* (*) (AtkPlug*))(fnptr))(carg0);
+// }
+// extern void _gotk4_atk1_Socket_embed(AtkSocket*, gchar*);
+// void _gotk4_atk1_Socket_virtual_embed(void* fnptr, AtkSocket* carg0, gchar* carg1) {
+// 	return ((void (*) (AtkSocket*, gchar*))(fnptr))(carg0, carg1);
+// }
 import "C"
 
 // GType values.
@@ -529,6 +1105,89 @@ func (e RelationType) String() string {
 		case RelationSubwindowOf: return "RelationSubwindowOf"
 		default: return fmt.Sprintf("RelationType(%d)", e)
 	}
+}
+
+// RelationTypeForName wraps atk_relation_type_for_name
+// 
+// The function takes the following parameters:
+// 
+// 	- name string: a string which is the (non-localized) name of an ATK relation type. 
+// 
+// The function returns the following values:
+// 
+// 	- goret RelationType 
+//
+// Get the #AtkRelationType type corresponding to a relation name.
+func RelationTypeForName(name string) RelationType {
+	var carg1 *C.gchar          // in, none, string
+	var cret  C.AtkRelationType // return, none, casted
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	cret = C.atk_relation_type_for_name(carg1)
+	runtime.KeepAlive(name)
+
+	var goret RelationType
+
+	goret = RelationType(cret)
+
+	return goret
+}
+
+// RelationTypeGetName wraps atk_relation_type_get_name
+// 
+// The function takes the following parameters:
+// 
+// 	- typ RelationType: The #AtkRelationType whose name is required 
+// 
+// The function returns the following values:
+// 
+// 	- goret string 
+//
+// Gets the description string describing the #AtkRelationType @type.
+func RelationTypeGetName(typ RelationType) string {
+	var carg1 C.AtkRelationType // in, none, casted
+	var cret  *C.gchar          // return, none, string
+
+	carg1 = C.AtkRelationType(typ)
+
+	cret = C.atk_relation_type_get_name(carg1)
+	runtime.KeepAlive(typ)
+
+	var goret string
+
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+
+	return goret
+}
+
+// RelationTypeRegister wraps atk_relation_type_register
+// 
+// The function takes the following parameters:
+// 
+// 	- name string: a name string 
+// 
+// The function returns the following values:
+// 
+// 	- goret RelationType 
+//
+// Associate @name with a new #AtkRelationType
+func RelationTypeRegister(name string) RelationType {
+	var carg1 *C.gchar          // in, none, string
+	var cret  C.AtkRelationType // return, none, casted
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	cret = C.atk_relation_type_register(carg1)
+	runtime.KeepAlive(name)
+
+	var goret RelationType
+
+	goret = RelationType(cret)
+
+	return goret
 }
 
 // Role wraps AtkRole
@@ -1282,6 +1941,88 @@ func (e Role) String() string {
 	}
 }
 
+// RoleForName wraps atk_role_for_name
+// 
+// The function takes the following parameters:
+// 
+// 	- name string: a string which is the (non-localized) name of an ATK role. 
+// 
+// The function returns the following values:
+// 
+// 	- goret Role 
+//
+// Get the #AtkRole type corresponding to a rolew name.
+func RoleForName(name string) Role {
+	var carg1 *C.gchar  // in, none, string
+	var cret  C.AtkRole // return, none, casted
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	cret = C.atk_role_for_name(carg1)
+	runtime.KeepAlive(name)
+
+	var goret Role
+
+	goret = Role(cret)
+
+	return goret
+}
+
+// RoleGetLocalizedName wraps atk_role_get_localized_name
+// 
+// The function takes the following parameters:
+// 
+// 	- role Role: The #AtkRole whose localized name is required 
+// 
+// The function returns the following values:
+// 
+// 	- goret string 
+//
+// Gets the localized description string describing the #AtkRole @role.
+func RoleGetLocalizedName(role Role) string {
+	var carg1 C.AtkRole // in, none, casted
+	var cret  *C.gchar  // return, none, string
+
+	carg1 = C.AtkRole(role)
+
+	cret = C.atk_role_get_localized_name(carg1)
+	runtime.KeepAlive(role)
+
+	var goret string
+
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+
+	return goret
+}
+
+// RoleGetName wraps atk_role_get_name
+// 
+// The function takes the following parameters:
+// 
+// 	- role Role: The #AtkRole whose name is required 
+// 
+// The function returns the following values:
+// 
+// 	- goret string 
+//
+// Gets the description string describing the #AtkRole @role.
+func RoleGetName(role Role) string {
+	var carg1 C.AtkRole // in, none, casted
+	var cret  *C.gchar  // return, none, string
+
+	carg1 = C.AtkRole(role)
+
+	cret = C.atk_role_get_name(carg1)
+	runtime.KeepAlive(role)
+
+	var goret string
+
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+
+	return goret
+}
+
 // ScrollType wraps AtkScrollType
 //
 // Specifies where an object should be placed on the screen when using scroll_to.
@@ -1667,6 +2408,89 @@ func (e StateType) String() string {
 	}
 }
 
+// StateTypeForName wraps atk_state_type_for_name
+// 
+// The function takes the following parameters:
+// 
+// 	- name string: a character string state name 
+// 
+// The function returns the following values:
+// 
+// 	- goret StateType 
+//
+// Gets the #AtkStateType corresponding to the description string @name.
+func StateTypeForName(name string) StateType {
+	var carg1 *C.gchar       // in, none, string
+	var cret  C.AtkStateType // return, none, casted
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	cret = C.atk_state_type_for_name(carg1)
+	runtime.KeepAlive(name)
+
+	var goret StateType
+
+	goret = StateType(cret)
+
+	return goret
+}
+
+// StateTypeGetName wraps atk_state_type_get_name
+// 
+// The function takes the following parameters:
+// 
+// 	- typ StateType: The #AtkStateType whose name is required 
+// 
+// The function returns the following values:
+// 
+// 	- goret string 
+//
+// Gets the description string describing the #AtkStateType @type.
+func StateTypeGetName(typ StateType) string {
+	var carg1 C.AtkStateType // in, none, casted
+	var cret  *C.gchar       // return, none, string
+
+	carg1 = C.AtkStateType(typ)
+
+	cret = C.atk_state_type_get_name(carg1)
+	runtime.KeepAlive(typ)
+
+	var goret string
+
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+
+	return goret
+}
+
+// StateTypeRegister wraps atk_state_type_register
+// 
+// The function takes the following parameters:
+// 
+// 	- name string: a character string describing the new state. 
+// 
+// The function returns the following values:
+// 
+// 	- goret StateType 
+//
+// Register a new object state.
+func StateTypeRegister(name string) StateType {
+	var carg1 *C.gchar       // in, none, string
+	var cret  C.AtkStateType // return, none, casted
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	cret = C.atk_state_type_register(carg1)
+	runtime.KeepAlive(name)
+
+	var goret StateType
+
+	goret = StateType(cret)
+
+	return goret
+}
+
 // TextAttribute wraps AtkTextAttribute
 //
 // Describes the text attributes supported
@@ -1840,6 +2664,122 @@ func (e TextAttribute) String() string {
 		case TextAttrWrapMode: return "TextAttrWrapMode"
 		default: return fmt.Sprintf("TextAttribute(%d)", e)
 	}
+}
+
+// TextAttributeForName wraps atk_text_attribute_for_name
+// 
+// The function takes the following parameters:
+// 
+// 	- name string: a string which is the (non-localized) name of an ATK text attribute. 
+// 
+// The function returns the following values:
+// 
+// 	- goret TextAttribute 
+//
+// Get the #AtkTextAttribute type corresponding to a text attribute name.
+func TextAttributeForName(name string) TextAttribute {
+	var carg1 *C.gchar           // in, none, string
+	var cret  C.AtkTextAttribute // return, none, casted
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	cret = C.atk_text_attribute_for_name(carg1)
+	runtime.KeepAlive(name)
+
+	var goret TextAttribute
+
+	goret = TextAttribute(cret)
+
+	return goret
+}
+
+// TextAttributeGetName wraps atk_text_attribute_get_name
+// 
+// The function takes the following parameters:
+// 
+// 	- attr TextAttribute: The #AtkTextAttribute whose name is required 
+// 
+// The function returns the following values:
+// 
+// 	- goret string 
+//
+// Gets the name corresponding to the #AtkTextAttribute
+func TextAttributeGetName(attr TextAttribute) string {
+	var carg1 C.AtkTextAttribute // in, none, casted
+	var cret  *C.gchar           // return, none, string
+
+	carg1 = C.AtkTextAttribute(attr)
+
+	cret = C.atk_text_attribute_get_name(carg1)
+	runtime.KeepAlive(attr)
+
+	var goret string
+
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+
+	return goret
+}
+
+// TextAttributeGetValue wraps atk_text_attribute_get_value
+// 
+// The function takes the following parameters:
+// 
+// 	- attr TextAttribute: The #AtkTextAttribute for which a value is required 
+// 	- index_ int: The index of the required value 
+// 
+// The function returns the following values:
+// 
+// 	- goret string (nullable) 
+//
+// Gets the value for the index of the #AtkTextAttribute
+func TextAttributeGetValue(attr TextAttribute, index_ int) string {
+	var carg1 C.AtkTextAttribute // in, none, casted
+	var carg2 C.gint             // in, none, casted
+	var cret  *C.gchar           // return, none, string, nullable-string
+
+	carg1 = C.AtkTextAttribute(attr)
+	carg2 = C.gint(index_)
+
+	cret = C.atk_text_attribute_get_value(carg1, carg2)
+	runtime.KeepAlive(attr)
+	runtime.KeepAlive(index_)
+
+	var goret string
+
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
+
+	return goret
+}
+
+// TextAttributeRegister wraps atk_text_attribute_register
+// 
+// The function takes the following parameters:
+// 
+// 	- name string: a name string 
+// 
+// The function returns the following values:
+// 
+// 	- goret TextAttribute 
+//
+// Associate @name with a new #AtkTextAttribute
+func TextAttributeRegister(name string) TextAttribute {
+	var carg1 *C.gchar           // in, none, string
+	var cret  C.AtkTextAttribute // return, none, casted
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	cret = C.atk_text_attribute_register(carg1)
+	runtime.KeepAlive(name)
+
+	var goret TextAttribute
+
+	goret = TextAttribute(cret)
+
+	return goret
 }
 
 // TextBoundary wraps AtkTextBoundary
@@ -2091,6 +3031,60 @@ func (e ValueType) String() string {
 	}
 }
 
+// ValueTypeGetLocalizedName wraps atk_value_type_get_localized_name
+// 
+// The function takes the following parameters:
+// 
+// 	- valueType ValueType: The #AtkValueType whose localized name is required 
+// 
+// The function returns the following values:
+// 
+// 	- goret string 
+//
+// Gets the localized description string describing the #AtkValueType @value_type.
+func ValueTypeGetLocalizedName(valueType ValueType) string {
+	var carg1 C.AtkValueType // in, none, casted
+	var cret  *C.gchar       // return, none, string
+
+	carg1 = C.AtkValueType(valueType)
+
+	cret = C.atk_value_type_get_localized_name(carg1)
+	runtime.KeepAlive(valueType)
+
+	var goret string
+
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+
+	return goret
+}
+
+// ValueTypeGetName wraps atk_value_type_get_name
+// 
+// The function takes the following parameters:
+// 
+// 	- valueType ValueType: The #AtkValueType whose name is required 
+// 
+// The function returns the following values:
+// 
+// 	- goret string 
+//
+// Gets the description string describing the #AtkValueType @value_type.
+func ValueTypeGetName(valueType ValueType) string {
+	var carg1 C.AtkValueType // in, none, casted
+	var cret  *C.gchar       // return, none, string
+
+	carg1 = C.AtkValueType(valueType)
+
+	cret = C.atk_value_type_get_name(carg1)
+	runtime.KeepAlive(valueType)
+
+	var goret string
+
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+
+	return goret
+}
+
 // HyperlinkStateFlags wraps AtkHyperlinkStateFlags
 //
 // Describes the type of link
@@ -2145,6 +3139,7 @@ type Function func() (goret bool)
 type KeySnoopFunc func(event *KeyEventStruct) (goret int)
 
 // GetBinaryAge wraps atk_get_binary_age
+// 
 // The function returns the following values:
 // 
 // 	- goret uint 
@@ -2164,6 +3159,7 @@ func GetBinaryAge() uint {
 }
 
 // GetDefaultRegistry wraps atk_get_default_registry
+// 
 // The function returns the following values:
 // 
 // 	- goret Registry 
@@ -2188,6 +3184,7 @@ func GetDefaultRegistry() Registry {
 }
 
 // GetFocusObject wraps atk_get_focus_object
+// 
 // The function returns the following values:
 // 
 // 	- goret Object 
@@ -2206,6 +3203,7 @@ func GetFocusObject() Object {
 }
 
 // GetInterfaceAge wraps atk_get_interface_age
+// 
 // The function returns the following values:
 // 
 // 	- goret uint 
@@ -2225,6 +3223,7 @@ func GetInterfaceAge() uint {
 }
 
 // GetMajorVersion wraps atk_get_major_version
+// 
 // The function returns the following values:
 // 
 // 	- goret uint 
@@ -2249,6 +3248,7 @@ func GetMajorVersion() uint {
 }
 
 // GetMicroVersion wraps atk_get_micro_version
+// 
 // The function returns the following values:
 // 
 // 	- goret uint 
@@ -2273,6 +3273,7 @@ func GetMicroVersion() uint {
 }
 
 // GetMinorVersion wraps atk_get_minor_version
+// 
 // The function returns the following values:
 // 
 // 	- goret uint 
@@ -2297,6 +3298,7 @@ func GetMinorVersion() uint {
 }
 
 // GetRoot wraps atk_get_root
+// 
 // The function returns the following values:
 // 
 // 	- goret Object 
@@ -2315,6 +3317,7 @@ func GetRoot() Object {
 }
 
 // GetToolkitName wraps atk_get_toolkit_name
+// 
 // The function returns the following values:
 // 
 // 	- goret string 
@@ -2333,6 +3336,7 @@ func GetToolkitName() string {
 }
 
 // GetToolkitVersion wraps atk_get_toolkit_version
+// 
 // The function returns the following values:
 // 
 // 	- goret string 
@@ -2351,6 +3355,7 @@ func GetToolkitVersion() string {
 }
 
 // GetVersion wraps atk_get_version
+// 
 // The function returns the following values:
 // 
 // 	- goret string 
@@ -2516,6 +3521,7 @@ type Action interface {
 	// Returns the localized name of the specified action of the object.
 	GetLocalizedName(int) string
 	// GetNActions wraps atk_action_get_n_actions
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int 
@@ -2752,6 +3758,7 @@ func (action *ActionInstance) GetLocalizedName(i int) string {
 }
 
 // GetNActions wraps atk_action_get_n_actions
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -2857,6 +3864,105 @@ func (action *ActionInstance) SetActionDescription(i int, desc string) bool {
 	return goret
 }
 
+// ActionOverrides is the struct used to override the default implementation of virtual methods.
+// it is generic over the extending instance type.
+type ActionOverrides[Instance Action] struct {
+	// DoAction allows you to override the implementation of the virtual method do_action.
+	// The function takes the following parameters:
+	// 
+	// 	- i int: the action index corresponding to the action to be performed 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	DoAction func(Instance, int) bool
+	// GetDescription allows you to override the implementation of the virtual method get_description.
+	// The function takes the following parameters:
+	// 
+	// 	- i int: the action index corresponding to the action to be performed 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret string (nullable) 
+	GetDescription func(Instance, int) string
+	// GetKeybinding allows you to override the implementation of the virtual method get_keybinding.
+	// The function takes the following parameters:
+	// 
+	// 	- i int: the action index corresponding to the action to be performed 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret string (nullable) 
+	GetKeybinding func(Instance, int) string
+	// GetLocalizedName allows you to override the implementation of the virtual method get_localized_name.
+	// The function takes the following parameters:
+	// 
+	// 	- i int: the action index corresponding to the action to be performed 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret string (nullable) 
+	GetLocalizedName func(Instance, int) string
+	// GetNActions allows you to override the implementation of the virtual method get_n_actions.
+	// The function returns the following values:
+	// 
+	// 	- goret int 
+	GetNActions func(Instance) int
+	// GetName allows you to override the implementation of the virtual method get_name.
+	// The function takes the following parameters:
+	// 
+	// 	- i int: the action index corresponding to the action to be performed 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret string (nullable) 
+	GetName func(Instance, int) string
+	// SetDescription allows you to override the implementation of the virtual method set_description.
+	// The function takes the following parameters:
+	// 
+	// 	- i int: the action index corresponding to the action to be performed 
+	// 	- desc string: the description to be assigned to this action 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	SetDescription func(Instance, int, string) bool
+}
+
+// UnsafeApplyActionOverrides applies the overrides to init the gclass by setting the trampoline functions.
+// This is used by the bindings internally and only exported for visibility to other bindings code.
+func UnsafeApplyActionOverrides[Instance Action](gclass unsafe.Pointer, overrides ActionOverrides[Instance]) {
+	pclass := (*C.AtkActionIface)(gclass)
+
+	if overrides.DoAction != nil {
+		pclass.do_action = (*[0]byte)(C._gotk4_atk1_Action_do_action)
+	}
+
+	if overrides.GetDescription != nil {
+		pclass.get_description = (*[0]byte)(C._gotk4_atk1_Action_get_description)
+	}
+
+	if overrides.GetKeybinding != nil {
+		pclass.get_keybinding = (*[0]byte)(C._gotk4_atk1_Action_get_keybinding)
+	}
+
+	if overrides.GetLocalizedName != nil {
+		pclass.get_localized_name = (*[0]byte)(C._gotk4_atk1_Action_get_localized_name)
+	}
+
+	if overrides.GetNActions != nil {
+		pclass.get_n_actions = (*[0]byte)(C._gotk4_atk1_Action_get_n_actions)
+	}
+
+	if overrides.GetName != nil {
+		pclass.get_name = (*[0]byte)(C._gotk4_atk1_Action_get_name)
+	}
+
+	if overrides.SetDescription != nil {
+		pclass.set_description = (*[0]byte)(C._gotk4_atk1_Action_set_description)
+	}
+}
+
 // ComponentInstance is the instance type used by all types implementing AtkComponent. It is used internally by the bindings. Users should use the interface [Component] instead.
 type ComponentInstance struct {
 	_ [0]func() // equal guard
@@ -2904,6 +4010,7 @@ type Component interface {
 	// re-implement it.
 	Contains(int, int, CoordType) bool
 	// GetAlpha wraps atk_component_get_alpha
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret float64 
@@ -2932,6 +4039,7 @@ type Component interface {
 	// support), all of x, y, width, height are set to -1.
 	GetExtents(CoordType) (int, int, int, int)
 	// GetLayer wraps atk_component_get_layer
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Layer 
@@ -2939,6 +4047,7 @@ type Component interface {
 	// Gets the layer of the component.
 	GetLayer() Layer
 	// GetMDIZOrder wraps atk_component_get_mdi_zorder
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int 
@@ -2947,6 +4056,7 @@ type Component interface {
 	// if the layer of the component is not ATK_LAYER_MDI or ATK_LAYER_WINDOW.
 	GetMDIZOrder() int
 	// GrabFocus wraps atk_component_grab_focus
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
@@ -3140,6 +4250,7 @@ func (component *ComponentInstance) Contains(x int, y int, coordType CoordType) 
 }
 
 // GetAlpha wraps atk_component_get_alpha
+// 
 // The function returns the following values:
 // 
 // 	- goret float64 
@@ -3210,6 +4321,7 @@ func (component *ComponentInstance) GetExtents(coordType CoordType) (int, int, i
 }
 
 // GetLayer wraps atk_component_get_layer
+// 
 // The function returns the following values:
 // 
 // 	- goret Layer 
@@ -3232,6 +4344,7 @@ func (component *ComponentInstance) GetLayer() Layer {
 }
 
 // GetMDIZOrder wraps atk_component_get_mdi_zorder
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -3255,6 +4368,7 @@ func (component *ComponentInstance) GetMDIZOrder() int {
 }
 
 // GrabFocus wraps atk_component_grab_focus
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -3534,6 +4648,189 @@ func (component *ComponentInstance) SetSize(width int, height int) bool {
 func (o *ComponentInstance) ConnectBoundsChanged(fn func(Component, Rectangle)) gobject.SignalHandle {
 	return o.Instance.Connect("bounds-changed", fn)
 }
+
+// ComponentOverrides is the struct used to override the default implementation of virtual methods.
+// it is generic over the extending instance type.
+type ComponentOverrides[Instance Component] struct {
+	// BoundsChanged allows you to override the implementation of the virtual method bounds_changed.
+	// The function takes the following parameters:
+	// 
+	// 	- bounds *Rectangle 
+	BoundsChanged func(Instance, *Rectangle)
+	// Contains allows you to override the implementation of the virtual method contains.
+	// The function takes the following parameters:
+	// 
+	// 	- x int: x coordinate 
+	// 	- y int: y coordinate 
+	// 	- coordType CoordType: specifies whether the coordinates are relative to the screen
+	// or to the components top level window 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	Contains func(Instance, int, int, CoordType) bool
+	// GetAlpha allows you to override the implementation of the virtual method get_alpha.
+	// The function returns the following values:
+	// 
+	// 	- goret float64 
+	GetAlpha func(Instance) float64
+	// GetExtents allows you to override the implementation of the virtual method get_extents.
+	// The function takes the following parameters:
+	// 
+	// 	- coordType CoordType: specifies whether the coordinates are relative to the screen
+	// or to the components top level window 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- x int: address of #gint to put x coordinate 
+	// 	- y int: address of #gint to put y coordinate 
+	// 	- width int: address of #gint to put width 
+	// 	- height int: address of #gint to put height 
+	GetExtents func(Instance, CoordType) (int, int, int, int)
+	// GetLayer allows you to override the implementation of the virtual method get_layer.
+	// The function returns the following values:
+	// 
+	// 	- goret Layer 
+	GetLayer func(Instance) Layer
+	// GetMDIZOrder allows you to override the implementation of the virtual method get_mdi_zorder.
+	// The function returns the following values:
+	// 
+	// 	- goret int 
+	GetMDIZOrder func(Instance) int
+	// GrabFocus allows you to override the implementation of the virtual method grab_focus.
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	GrabFocus func(Instance) bool
+	// RefAccessibleAtPoint allows you to override the implementation of the virtual method ref_accessible_at_point.
+	// The function takes the following parameters:
+	// 
+	// 	- x int: x coordinate 
+	// 	- y int: y coordinate 
+	// 	- coordType CoordType: specifies whether the coordinates are relative to the screen
+	// or to the components top level window 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret Object (nullable) 
+	RefAccessibleAtPoint func(Instance, int, int, CoordType) Object
+	// ScrollTo allows you to override the implementation of the virtual method scroll_to.
+	// The function takes the following parameters:
+	// 
+	// 	- typ ScrollType: specify where the object should be made visible. 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	ScrollTo func(Instance, ScrollType) bool
+	// ScrollToPoint allows you to override the implementation of the virtual method scroll_to_point.
+	// The function takes the following parameters:
+	// 
+	// 	- coords CoordType: specify whether coordinates are relative to the screen or to the
+	// parent object. 
+	// 	- x int: x-position where to scroll to 
+	// 	- y int: y-position where to scroll to 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	ScrollToPoint func(Instance, CoordType, int, int) bool
+	// SetExtents allows you to override the implementation of the virtual method set_extents.
+	// The function takes the following parameters:
+	// 
+	// 	- x int: x coordinate 
+	// 	- y int: y coordinate 
+	// 	- width int: width to set for @component 
+	// 	- height int: height to set for @component 
+	// 	- coordType CoordType: specifies whether the coordinates are relative to the screen
+	// or to the components top level window 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	SetExtents func(Instance, int, int, int, int, CoordType) bool
+	// SetPosition allows you to override the implementation of the virtual method set_position.
+	// The function takes the following parameters:
+	// 
+	// 	- x int: x coordinate 
+	// 	- y int: y coordinate 
+	// 	- coordType CoordType: specifies whether the coordinates are relative to the screen
+	// or to the component's top level window 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	SetPosition func(Instance, int, int, CoordType) bool
+	// SetSize allows you to override the implementation of the virtual method set_size.
+	// The function takes the following parameters:
+	// 
+	// 	- width int: width to set for @component 
+	// 	- height int: height to set for @component 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	SetSize func(Instance, int, int) bool
+}
+
+// UnsafeApplyComponentOverrides applies the overrides to init the gclass by setting the trampoline functions.
+// This is used by the bindings internally and only exported for visibility to other bindings code.
+func UnsafeApplyComponentOverrides[Instance Component](gclass unsafe.Pointer, overrides ComponentOverrides[Instance]) {
+	pclass := (*C.AtkComponentIface)(gclass)
+
+	if overrides.BoundsChanged != nil {
+		pclass.bounds_changed = (*[0]byte)(C._gotk4_atk1_Component_bounds_changed)
+	}
+
+	if overrides.Contains != nil {
+		pclass.contains = (*[0]byte)(C._gotk4_atk1_Component_contains)
+	}
+
+	if overrides.GetAlpha != nil {
+		pclass.get_alpha = (*[0]byte)(C._gotk4_atk1_Component_get_alpha)
+	}
+
+	if overrides.GetExtents != nil {
+		pclass.get_extents = (*[0]byte)(C._gotk4_atk1_Component_get_extents)
+	}
+
+	if overrides.GetLayer != nil {
+		pclass.get_layer = (*[0]byte)(C._gotk4_atk1_Component_get_layer)
+	}
+
+	if overrides.GetMDIZOrder != nil {
+		pclass.get_mdi_zorder = (*[0]byte)(C._gotk4_atk1_Component_get_mdi_zorder)
+	}
+
+	if overrides.GrabFocus != nil {
+		pclass.grab_focus = (*[0]byte)(C._gotk4_atk1_Component_grab_focus)
+	}
+
+	if overrides.RefAccessibleAtPoint != nil {
+		pclass.ref_accessible_at_point = (*[0]byte)(C._gotk4_atk1_Component_ref_accessible_at_point)
+	}
+
+	if overrides.ScrollTo != nil {
+		pclass.scroll_to = (*[0]byte)(C._gotk4_atk1_Component_scroll_to)
+	}
+
+	if overrides.ScrollToPoint != nil {
+		pclass.scroll_to_point = (*[0]byte)(C._gotk4_atk1_Component_scroll_to_point)
+	}
+
+	if overrides.SetExtents != nil {
+		pclass.set_extents = (*[0]byte)(C._gotk4_atk1_Component_set_extents)
+	}
+
+	if overrides.SetPosition != nil {
+		pclass.set_position = (*[0]byte)(C._gotk4_atk1_Component_set_position)
+	}
+
+	if overrides.SetSize != nil {
+		pclass.set_size = (*[0]byte)(C._gotk4_atk1_Component_set_size)
+	}
+}
+
 // DocumentInstance is the instance type used by all types implementing AtkDocument. It is used internally by the bindings. Users should use the interface [Document] instead.
 type DocumentInstance struct {
 	_ [0]func() // equal guard
@@ -3571,6 +4868,7 @@ type Document interface {
 	// Retrieves the value of the given @attribute_name inside @document.
 	GetAttributeValue(string) string
 	// GetCurrentPageNumber wraps atk_document_get_current_page_number
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int 
@@ -3578,6 +4876,7 @@ type Document interface {
 	// Retrieves the current page number inside @document.
 	GetCurrentPageNumber() int
 	// GetPageCount wraps atk_document_get_page_count
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int 
@@ -3714,6 +5013,7 @@ func (document *DocumentInstance) GetAttributeValue(attributeName string) string
 }
 
 // GetCurrentPageNumber wraps atk_document_get_current_page_number
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -3736,6 +5036,7 @@ func (document *DocumentInstance) GetCurrentPageNumber() int {
 }
 
 // GetPageCount wraps atk_document_get_page_count
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -3804,6 +5105,7 @@ func (document *DocumentInstance) SetAttributeValue(attributeName string, attrib
 func (o *DocumentInstance) ConnectDocumentAttributeChanged(fn func(Document, string, string)) gobject.SignalHandle {
 	return o.Instance.Connect("document-attribute-changed", fn)
 }
+
 // ConnectLoadComplete connects the provided callback to the "load-complete" signal
 //
 // The 'load-complete' signal is emitted when a pending load of
@@ -3818,6 +5120,7 @@ func (o *DocumentInstance) ConnectDocumentAttributeChanged(fn func(Document, str
 func (o *DocumentInstance) ConnectLoadComplete(fn func(Document)) gobject.SignalHandle {
 	return o.Instance.Connect("load-complete", fn)
 }
+
 // ConnectLoadStopped connects the provided callback to the "load-stopped" signal
 //
 // The 'load-stopped' signal is emitted when a pending load of
@@ -3829,6 +5132,7 @@ func (o *DocumentInstance) ConnectLoadComplete(fn func(Document)) gobject.Signal
 func (o *DocumentInstance) ConnectLoadStopped(fn func(Document)) gobject.SignalHandle {
 	return o.Instance.Connect("load-stopped", fn)
 }
+
 // ConnectPageChanged connects the provided callback to the "page-changed" signal
 //
 // The 'page-changed' signal is emitted when the current page of
@@ -3837,6 +5141,7 @@ func (o *DocumentInstance) ConnectLoadStopped(fn func(Document)) gobject.SignalH
 func (o *DocumentInstance) ConnectPageChanged(fn func(Document, int)) gobject.SignalHandle {
 	return o.Instance.Connect("page-changed", fn)
 }
+
 // ConnectReload connects the provided callback to the "reload" signal
 //
 // The 'reload' signal is emitted when the contents of a
@@ -3847,6 +5152,65 @@ func (o *DocumentInstance) ConnectPageChanged(fn func(Document, int)) gobject.Si
 func (o *DocumentInstance) ConnectReload(fn func(Document)) gobject.SignalHandle {
 	return o.Instance.Connect("reload", fn)
 }
+
+// DocumentOverrides is the struct used to override the default implementation of virtual methods.
+// it is generic over the extending instance type.
+type DocumentOverrides[Instance Document] struct {
+	// GetCurrentPageNumber allows you to override the implementation of the virtual method get_current_page_number.
+	// The function returns the following values:
+	// 
+	// 	- goret int 
+	GetCurrentPageNumber func(Instance) int
+	// GetDocumentAttributeValue allows you to override the implementation of the virtual method get_document_attribute_value.
+	// The function takes the following parameters:
+	// 
+	// 	- attributeName string: a character string representing the name of the attribute
+	//   whose value is being queried. 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret string (nullable) 
+	GetDocumentAttributeValue func(Instance, string) string
+	// GetPageCount allows you to override the implementation of the virtual method get_page_count.
+	// The function returns the following values:
+	// 
+	// 	- goret int 
+	GetPageCount func(Instance) int
+	// SetDocumentAttribute allows you to override the implementation of the virtual method set_document_attribute.
+	// The function takes the following parameters:
+	// 
+	// 	- attributeName string: a character string representing the name of the attribute
+	//   whose value is being set. 
+	// 	- attributeValue string: a string value to be associated with @attribute_name. 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	SetDocumentAttribute func(Instance, string, string) bool
+}
+
+// UnsafeApplyDocumentOverrides applies the overrides to init the gclass by setting the trampoline functions.
+// This is used by the bindings internally and only exported for visibility to other bindings code.
+func UnsafeApplyDocumentOverrides[Instance Document](gclass unsafe.Pointer, overrides DocumentOverrides[Instance]) {
+	pclass := (*C.AtkDocumentIface)(gclass)
+
+	if overrides.GetCurrentPageNumber != nil {
+		pclass.get_current_page_number = (*[0]byte)(C._gotk4_atk1_Document_get_current_page_number)
+	}
+
+	if overrides.GetDocumentAttributeValue != nil {
+		pclass.get_document_attribute_value = (*[0]byte)(C._gotk4_atk1_Document_get_document_attribute_value)
+	}
+
+	if overrides.GetPageCount != nil {
+		pclass.get_page_count = (*[0]byte)(C._gotk4_atk1_Document_get_page_count)
+	}
+
+	if overrides.SetDocumentAttribute != nil {
+		pclass.set_document_attribute = (*[0]byte)(C._gotk4_atk1_Document_set_document_attribute)
+	}
+}
+
 // EditableTextInstance is the instance type used by all types implementing AtkEditableText. It is used internally by the bindings. Users should use the interface [EditableText] instead.
 type EditableTextInstance struct {
 	_ [0]func() // equal guard
@@ -4110,6 +5474,78 @@ func (text *EditableTextInstance) SetTextContents(str string) {
 	runtime.KeepAlive(str)
 }
 
+// EditableTextOverrides is the struct used to override the default implementation of virtual methods.
+// it is generic over the extending instance type.
+type EditableTextOverrides[Instance EditableText] struct {
+	// CopyText allows you to override the implementation of the virtual method copy_text.
+	// The function takes the following parameters:
+	// 
+	// 	- startPos int: start position 
+	// 	- endPos int: end position 
+	CopyText func(Instance, int, int)
+	// CutText allows you to override the implementation of the virtual method cut_text.
+	// The function takes the following parameters:
+	// 
+	// 	- startPos int: start position 
+	// 	- endPos int: end position 
+	CutText func(Instance, int, int)
+	// DeleteText allows you to override the implementation of the virtual method delete_text.
+	// The function takes the following parameters:
+	// 
+	// 	- startPos int: start position 
+	// 	- endPos int: end position 
+	DeleteText func(Instance, int, int)
+	// InsertText allows you to override the implementation of the virtual method insert_text.
+	// The function takes the following parameters:
+	// 
+	// 	- str string: the text to insert 
+	// 	- length int: the length of text to insert, in bytes 
+	// 	- position *int: The caller initializes this to
+	// the position at which to insert the text. After the call it
+	// points at the position after the newly inserted text. 
+	InsertText func(Instance, string, int, *int)
+	// PasteText allows you to override the implementation of the virtual method paste_text.
+	// The function takes the following parameters:
+	// 
+	// 	- position int: position to paste 
+	PasteText func(Instance, int)
+	// SetTextContents allows you to override the implementation of the virtual method set_text_contents.
+	// The function takes the following parameters:
+	// 
+	// 	- str string: string to set for text contents of @text 
+	SetTextContents func(Instance, string)
+}
+
+// UnsafeApplyEditableTextOverrides applies the overrides to init the gclass by setting the trampoline functions.
+// This is used by the bindings internally and only exported for visibility to other bindings code.
+func UnsafeApplyEditableTextOverrides[Instance EditableText](gclass unsafe.Pointer, overrides EditableTextOverrides[Instance]) {
+	pclass := (*C.AtkEditableTextIface)(gclass)
+
+	if overrides.CopyText != nil {
+		pclass.copy_text = (*[0]byte)(C._gotk4_atk1_EditableText_copy_text)
+	}
+
+	if overrides.CutText != nil {
+		pclass.cut_text = (*[0]byte)(C._gotk4_atk1_EditableText_cut_text)
+	}
+
+	if overrides.DeleteText != nil {
+		pclass.delete_text = (*[0]byte)(C._gotk4_atk1_EditableText_delete_text)
+	}
+
+	if overrides.InsertText != nil {
+		pclass.insert_text = (*[0]byte)(C._gotk4_atk1_EditableText_insert_text)
+	}
+
+	if overrides.PasteText != nil {
+		pclass.paste_text = (*[0]byte)(C._gotk4_atk1_EditableText_paste_text)
+	}
+
+	if overrides.SetTextContents != nil {
+		pclass.set_text_contents = (*[0]byte)(C._gotk4_atk1_EditableText_set_text_contents)
+	}
+}
+
 // HyperlinkImplInstance is the instance type used by all types implementing AtkHyperlinkImpl. It is used internally by the bindings. Users should use the interface [HyperlinkImpl] instead.
 type HyperlinkImplInstance struct {
 	_ [0]func() // equal guard
@@ -4129,6 +5565,7 @@ type HyperlinkImpl interface {
 	upcastToAtkHyperlinkImpl() *HyperlinkImplInstance
 
 	// GetHyperlink wraps atk_hyperlink_impl_get_hyperlink
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Hyperlink 
@@ -4176,6 +5613,7 @@ func UnsafeHyperlinkImplToGlibFull(c HyperlinkImpl) unsafe.Pointer {
 }
 
 // GetHyperlink wraps atk_hyperlink_impl_get_hyperlink
+// 
 // The function returns the following values:
 // 
 // 	- goret Hyperlink 
@@ -4195,6 +5633,26 @@ func (impl *HyperlinkImplInstance) GetHyperlink() Hyperlink {
 	goret = UnsafeHyperlinkFromGlibFull(unsafe.Pointer(cret))
 
 	return goret
+}
+
+// HyperlinkImplOverrides is the struct used to override the default implementation of virtual methods.
+// it is generic over the extending instance type.
+type HyperlinkImplOverrides[Instance HyperlinkImpl] struct {
+	// GetHyperlink allows you to override the implementation of the virtual method get_hyperlink.
+	// The function returns the following values:
+	// 
+	// 	- goret Hyperlink 
+	GetHyperlink func(Instance) Hyperlink
+}
+
+// UnsafeApplyHyperlinkImplOverrides applies the overrides to init the gclass by setting the trampoline functions.
+// This is used by the bindings internally and only exported for visibility to other bindings code.
+func UnsafeApplyHyperlinkImplOverrides[Instance HyperlinkImpl](gclass unsafe.Pointer, overrides HyperlinkImplOverrides[Instance]) {
+	pclass := (*C.AtkHyperlinkImplIface)(gclass)
+
+	if overrides.GetHyperlink != nil {
+		pclass.get_hyperlink = (*[0]byte)(C._gotk4_atk1_HyperlinkImpl_get_hyperlink)
+	}
 }
 
 // HypertextInstance is the instance type used by all types implementing AtkHypertext. It is used internally by the bindings. Users should use the interface [Hypertext] instead.
@@ -4247,6 +5705,7 @@ type Hypertext interface {
 	// the character specified by @char_index.
 	GetLinkIndex(int) int
 	// GetNLinks wraps atk_hypertext_get_n_links
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int 
@@ -4362,6 +5821,7 @@ func (hypertext *HypertextInstance) GetLinkIndex(charIndex int) int {
 }
 
 // GetNLinks wraps atk_hypertext_get_n_links
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -4391,6 +5851,62 @@ func (hypertext *HypertextInstance) GetNLinks() int {
 func (o *HypertextInstance) ConnectLinkSelected(fn func(Hypertext, int)) gobject.SignalHandle {
 	return o.Instance.Connect("link-selected", fn)
 }
+
+// HypertextOverrides is the struct used to override the default implementation of virtual methods.
+// it is generic over the extending instance type.
+type HypertextOverrides[Instance Hypertext] struct {
+	// GetLink allows you to override the implementation of the virtual method get_link.
+	// The function takes the following parameters:
+	// 
+	// 	- linkIndex int: an integer specifying the desired link 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret Hyperlink 
+	GetLink func(Instance, int) Hyperlink
+	// GetLinkIndex allows you to override the implementation of the virtual method get_link_index.
+	// The function takes the following parameters:
+	// 
+	// 	- charIndex int: a character index 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret int 
+	GetLinkIndex func(Instance, int) int
+	// GetNLinks allows you to override the implementation of the virtual method get_n_links.
+	// The function returns the following values:
+	// 
+	// 	- goret int 
+	GetNLinks func(Instance) int
+	// LinkSelected allows you to override the implementation of the virtual method link_selected.
+	// The function takes the following parameters:
+	// 
+	// 	- linkIndex int 
+	LinkSelected func(Instance, int)
+}
+
+// UnsafeApplyHypertextOverrides applies the overrides to init the gclass by setting the trampoline functions.
+// This is used by the bindings internally and only exported for visibility to other bindings code.
+func UnsafeApplyHypertextOverrides[Instance Hypertext](gclass unsafe.Pointer, overrides HypertextOverrides[Instance]) {
+	pclass := (*C.AtkHypertextIface)(gclass)
+
+	if overrides.GetLink != nil {
+		pclass.get_link = (*[0]byte)(C._gotk4_atk1_Hypertext_get_link)
+	}
+
+	if overrides.GetLinkIndex != nil {
+		pclass.get_link_index = (*[0]byte)(C._gotk4_atk1_Hypertext_get_link_index)
+	}
+
+	if overrides.GetNLinks != nil {
+		pclass.get_n_links = (*[0]byte)(C._gotk4_atk1_Hypertext_get_n_links)
+	}
+
+	if overrides.LinkSelected != nil {
+		pclass.link_selected = (*[0]byte)(C._gotk4_atk1_Hypertext_link_selected)
+	}
+}
+
 // ImageInstance is the instance type used by all types implementing AtkImage. It is used internally by the bindings. Users should use the interface [Image] instead.
 type ImageInstance struct {
 	_ [0]func() // equal guard
@@ -4421,6 +5937,7 @@ type Image interface {
 	upcastToAtkImage() *ImageInstance
 
 	// GetImageDescription wraps atk_image_get_image_description
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret string 
@@ -4428,6 +5945,7 @@ type Image interface {
 	// Get a textual description of this image.
 	GetImageDescription() string
 	// GetImageLocale wraps atk_image_get_image_locale
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret string (nullable) 
@@ -4453,6 +5971,7 @@ type Image interface {
 	// to -1.
 	GetImagePosition(CoordType) (int, int)
 	// GetImageSize wraps atk_image_get_image_size
+	// 
 	// The function returns the following values:
 	// 
 	// 	- width int: filled with the image width, or -1 if the value cannot be obtained. 
@@ -4518,6 +6037,7 @@ func UnsafeImageToGlibFull(c Image) unsafe.Pointer {
 }
 
 // GetImageDescription wraps atk_image_get_image_description
+// 
 // The function returns the following values:
 // 
 // 	- goret string 
@@ -4540,6 +6060,7 @@ func (image *ImageInstance) GetImageDescription() string {
 }
 
 // GetImageLocale wraps atk_image_get_image_locale
+// 
 // The function returns the following values:
 // 
 // 	- goret string (nullable) 
@@ -4603,6 +6124,7 @@ func (image *ImageInstance) GetImagePosition(coordType CoordType) (int, int) {
 }
 
 // GetImageSize wraps atk_image_get_image_size
+// 
 // The function returns the following values:
 // 
 // 	- width int: filled with the image width, or -1 if the value cannot be obtained. 
@@ -4666,6 +6188,73 @@ func (image *ImageInstance) SetImageDescription(description string) bool {
 	return goret
 }
 
+// ImageOverrides is the struct used to override the default implementation of virtual methods.
+// it is generic over the extending instance type.
+type ImageOverrides[Instance Image] struct {
+	// GetImageDescription allows you to override the implementation of the virtual method get_image_description.
+	// The function returns the following values:
+	// 
+	// 	- goret string 
+	GetImageDescription func(Instance) string
+	// GetImageLocale allows you to override the implementation of the virtual method get_image_locale.
+	// The function returns the following values:
+	// 
+	// 	- goret string (nullable) 
+	GetImageLocale func(Instance) string
+	// GetImagePosition allows you to override the implementation of the virtual method get_image_position.
+	// The function takes the following parameters:
+	// 
+	// 	- coordType CoordType: specifies whether the coordinates are relative to the screen
+	// or to the components top level window 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- x int: address of #gint to put x coordinate position; otherwise, -1 if value cannot be obtained. 
+	// 	- y int: address of #gint to put y coordinate position; otherwise, -1 if value cannot be obtained. 
+	GetImagePosition func(Instance, CoordType) (int, int)
+	// GetImageSize allows you to override the implementation of the virtual method get_image_size.
+	// The function returns the following values:
+	// 
+	// 	- width int: filled with the image width, or -1 if the value cannot be obtained. 
+	// 	- height int: filled with the image height, or -1 if the value cannot be obtained. 
+	GetImageSize func(Instance) (int, int)
+	// SetImageDescription allows you to override the implementation of the virtual method set_image_description.
+	// The function takes the following parameters:
+	// 
+	// 	- description string: a string description to set for @image 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	SetImageDescription func(Instance, string) bool
+}
+
+// UnsafeApplyImageOverrides applies the overrides to init the gclass by setting the trampoline functions.
+// This is used by the bindings internally and only exported for visibility to other bindings code.
+func UnsafeApplyImageOverrides[Instance Image](gclass unsafe.Pointer, overrides ImageOverrides[Instance]) {
+	pclass := (*C.AtkImageIface)(gclass)
+
+	if overrides.GetImageDescription != nil {
+		pclass.get_image_description = (*[0]byte)(C._gotk4_atk1_Image_get_image_description)
+	}
+
+	if overrides.GetImageLocale != nil {
+		pclass.get_image_locale = (*[0]byte)(C._gotk4_atk1_Image_get_image_locale)
+	}
+
+	if overrides.GetImagePosition != nil {
+		pclass.get_image_position = (*[0]byte)(C._gotk4_atk1_Image_get_image_position)
+	}
+
+	if overrides.GetImageSize != nil {
+		pclass.get_image_size = (*[0]byte)(C._gotk4_atk1_Image_get_image_size)
+	}
+
+	if overrides.SetImageDescription != nil {
+		pclass.set_image_description = (*[0]byte)(C._gotk4_atk1_Image_set_image_description)
+	}
+}
+
 // ImplementorIfaceInstance is the instance type used by all types implementing AtkImplementorIface. It is used internally by the bindings. Users should use the interface [ImplementorIface] instead.
 type ImplementorIfaceInstance struct {
 	_ [0]func() // equal guard
@@ -4721,6 +6310,16 @@ func UnsafeImplementorIfaceToGlibFull(c ImplementorIface) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
+// ImplementorIfaceOverrides is the struct used to override the default implementation of virtual methods.
+// it is generic over the extending instance type.
+type ImplementorIfaceOverrides[Instance ImplementorIface] struct {
+}
+
+// UnsafeApplyImplementorIfaceOverrides applies the overrides to init the gclass by setting the trampoline functions.
+// This is used by the bindings internally and only exported for visibility to other bindings code.
+func UnsafeApplyImplementorIfaceOverrides[Instance ImplementorIface](gclass unsafe.Pointer, overrides ImplementorIfaceOverrides[Instance]) {
+}
+
 // SelectionInstance is the instance type used by all types implementing AtkSelection. It is used internally by the bindings. Users should use the interface [Selection] instead.
 type SelectionInstance struct {
 	_ [0]func() // equal guard
@@ -4760,6 +6359,7 @@ type Selection interface {
 	// object's selection.
 	AddSelection(int) bool
 	// ClearSelection wraps atk_selection_clear_selection
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
@@ -4768,6 +6368,7 @@ type Selection interface {
 	// are selected.
 	ClearSelection() bool
 	// GetSelectionCount wraps atk_selection_get_selection_count
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int 
@@ -4826,6 +6427,7 @@ type Selection interface {
 	// Removes the specified child of the object from the object's selection.
 	RemoveSelection(int) bool
 	// SelectAllSelection wraps atk_selection_select_all_selection
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
@@ -4912,6 +6514,7 @@ func (selection *SelectionInstance) AddSelection(i int) bool {
 }
 
 // ClearSelection wraps atk_selection_clear_selection
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -4937,6 +6540,7 @@ func (selection *SelectionInstance) ClearSelection() bool {
 }
 
 // GetSelectionCount wraps atk_selection_get_selection_count
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -5070,6 +6674,7 @@ func (selection *SelectionInstance) RemoveSelection(i int) bool {
 }
 
 // SelectAllSelection wraps atk_selection_select_all_selection
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -5101,6 +6706,105 @@ func (selection *SelectionInstance) SelectAllSelection() bool {
 func (o *SelectionInstance) ConnectSelectionChanged(fn func(Selection)) gobject.SignalHandle {
 	return o.Instance.Connect("selection-changed", fn)
 }
+
+// SelectionOverrides is the struct used to override the default implementation of virtual methods.
+// it is generic over the extending instance type.
+type SelectionOverrides[Instance Selection] struct {
+	// AddSelection allows you to override the implementation of the virtual method add_selection.
+	// The function takes the following parameters:
+	// 
+	// 	- i int: a #gint specifying the child index. 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	AddSelection func(Instance, int) bool
+	// ClearSelection allows you to override the implementation of the virtual method clear_selection.
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	ClearSelection func(Instance) bool
+	// GetSelectionCount allows you to override the implementation of the virtual method get_selection_count.
+	// The function returns the following values:
+	// 
+	// 	- goret int 
+	GetSelectionCount func(Instance) int
+	// IsChildSelected allows you to override the implementation of the virtual method is_child_selected.
+	// The function takes the following parameters:
+	// 
+	// 	- i int: a #gint specifying the child index. 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	IsChildSelected func(Instance, int) bool
+	// RefSelection allows you to override the implementation of the virtual method ref_selection.
+	// The function takes the following parameters:
+	// 
+	// 	- i int: a #gint specifying the index in the selection set.  (e.g. the
+	// ith selection as opposed to the ith child). 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret Object (nullable) 
+	RefSelection func(Instance, int) Object
+	// RemoveSelection allows you to override the implementation of the virtual method remove_selection.
+	// The function takes the following parameters:
+	// 
+	// 	- i int: a #gint specifying the index in the selection set.  (e.g. the
+	// ith selection as opposed to the ith child). 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	RemoveSelection func(Instance, int) bool
+	// SelectAllSelection allows you to override the implementation of the virtual method select_all_selection.
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	SelectAllSelection func(Instance) bool
+	// SelectionChanged allows you to override the implementation of the virtual method selection_changed.
+	SelectionChanged func(Instance)
+}
+
+// UnsafeApplySelectionOverrides applies the overrides to init the gclass by setting the trampoline functions.
+// This is used by the bindings internally and only exported for visibility to other bindings code.
+func UnsafeApplySelectionOverrides[Instance Selection](gclass unsafe.Pointer, overrides SelectionOverrides[Instance]) {
+	pclass := (*C.AtkSelectionIface)(gclass)
+
+	if overrides.AddSelection != nil {
+		pclass.add_selection = (*[0]byte)(C._gotk4_atk1_Selection_add_selection)
+	}
+
+	if overrides.ClearSelection != nil {
+		pclass.clear_selection = (*[0]byte)(C._gotk4_atk1_Selection_clear_selection)
+	}
+
+	if overrides.GetSelectionCount != nil {
+		pclass.get_selection_count = (*[0]byte)(C._gotk4_atk1_Selection_get_selection_count)
+	}
+
+	if overrides.IsChildSelected != nil {
+		pclass.is_child_selected = (*[0]byte)(C._gotk4_atk1_Selection_is_child_selected)
+	}
+
+	if overrides.RefSelection != nil {
+		pclass.ref_selection = (*[0]byte)(C._gotk4_atk1_Selection_ref_selection)
+	}
+
+	if overrides.RemoveSelection != nil {
+		pclass.remove_selection = (*[0]byte)(C._gotk4_atk1_Selection_remove_selection)
+	}
+
+	if overrides.SelectAllSelection != nil {
+		pclass.select_all_selection = (*[0]byte)(C._gotk4_atk1_Selection_select_all_selection)
+	}
+
+	if overrides.SelectionChanged != nil {
+		pclass.selection_changed = (*[0]byte)(C._gotk4_atk1_Selection_selection_changed)
+	}
+}
+
 // StreamableContentInstance is the instance type used by all types implementing AtkStreamableContent. It is used internally by the bindings. Users should use the interface [StreamableContent] instead.
 type StreamableContentInstance struct {
 	_ [0]func() // equal guard
@@ -5146,6 +6850,7 @@ type StreamableContent interface {
 	// type is at position 0, the second at position 1, and so on.
 	GetMIMEType(int) string
 	// GetNMIMETypes wraps atk_streamable_content_get_n_mime_types
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int 
@@ -5256,6 +6961,7 @@ func (streamable *StreamableContentInstance) GetMIMEType(i int) string {
 }
 
 // GetNMIMETypes wraps atk_streamable_content_get_n_mime_types
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -5349,6 +7055,66 @@ func (streamable *StreamableContentInstance) GetURI(mimeType string) string {
 	return goret
 }
 
+// StreamableContentOverrides is the struct used to override the default implementation of virtual methods.
+// it is generic over the extending instance type.
+type StreamableContentOverrides[Instance StreamableContent] struct {
+	// GetMIMEType allows you to override the implementation of the virtual method get_mime_type.
+	// The function takes the following parameters:
+	// 
+	// 	- i int: a gint representing the position of the mime type starting from 0 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret string 
+	GetMIMEType func(Instance, int) string
+	// GetNMIMETypes allows you to override the implementation of the virtual method get_n_mime_types.
+	// The function returns the following values:
+	// 
+	// 	- goret int 
+	GetNMIMETypes func(Instance) int
+	// GetStream allows you to override the implementation of the virtual method get_stream.
+	// The function takes the following parameters:
+	// 
+	// 	- mimeType string: a gchar* representing the mime type 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret *glib.IOChannel 
+	GetStream func(Instance, string) *glib.IOChannel
+	// GetURI allows you to override the implementation of the virtual method get_uri.
+	// The function takes the following parameters:
+	// 
+	// 	- mimeType string: a gchar* representing the mime type, or NULL to request a URI
+	// for the default mime type. 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret string (nullable) 
+	GetURI func(Instance, string) string
+}
+
+// UnsafeApplyStreamableContentOverrides applies the overrides to init the gclass by setting the trampoline functions.
+// This is used by the bindings internally and only exported for visibility to other bindings code.
+func UnsafeApplyStreamableContentOverrides[Instance StreamableContent](gclass unsafe.Pointer, overrides StreamableContentOverrides[Instance]) {
+	pclass := (*C.AtkStreamableContentIface)(gclass)
+
+	if overrides.GetMIMEType != nil {
+		pclass.get_mime_type = (*[0]byte)(C._gotk4_atk1_StreamableContent_get_mime_type)
+	}
+
+	if overrides.GetNMIMETypes != nil {
+		pclass.get_n_mime_types = (*[0]byte)(C._gotk4_atk1_StreamableContent_get_n_mime_types)
+	}
+
+	if overrides.GetStream != nil {
+		pclass.get_stream = (*[0]byte)(C._gotk4_atk1_StreamableContent_get_stream)
+	}
+
+	if overrides.GetURI != nil {
+		pclass.get_uri = (*[0]byte)(C._gotk4_atk1_StreamableContent_get_uri)
+	}
+}
+
 // TableInstance is the instance type used by all types implementing AtkTable. It is used internally by the bindings. Users should use the interface [Table] instead.
 type TableInstance struct {
 	_ [0]func() // equal guard
@@ -5417,6 +7183,7 @@ type Table interface {
 	// Adds the specified @row to the selection.
 	AddRowSelection(int) bool
 	// GetCaption wraps atk_table_get_caption
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Object (nullable) 
@@ -5462,6 +7229,7 @@ type Table interface {
 	// Gets the column header of a specified column in an accessible table.
 	GetColumnHeader(int) Object
 	// GetNColumns wraps atk_table_get_n_columns
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int 
@@ -5469,6 +7237,7 @@ type Table interface {
 	// Gets the number of columns in the table.
 	GetNColumns() int
 	// GetNRows wraps atk_table_get_n_rows
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int 
@@ -5540,6 +7309,7 @@ type Table interface {
 	// the selected row numbers. This array should be freed by the caller.
 	GetSelectedRows(**int) int
 	// GetSummary wraps atk_table_get_summary
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Object 
@@ -5822,6 +7592,7 @@ func (table *TableInstance) AddRowSelection(row int) bool {
 }
 
 // GetCaption wraps atk_table_get_caption
+// 
 // The function returns the following values:
 // 
 // 	- goret Object (nullable) 
@@ -5943,6 +7714,7 @@ func (table *TableInstance) GetColumnHeader(column int) Object {
 }
 
 // GetNColumns wraps atk_table_get_n_columns
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -5965,6 +7737,7 @@ func (table *TableInstance) GetNColumns() int {
 }
 
 // GetNRows wraps atk_table_get_n_rows
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -6152,6 +7925,7 @@ func (table *TableInstance) GetSelectedRows(selected **int) int {
 }
 
 // GetSummary wraps atk_table_get_summary
+// 
 // The function returns the following values:
 // 
 // 	- goret Object 
@@ -6517,6 +8291,7 @@ func (table *TableInstance) SetSummary(accessible Object) {
 func (o *TableInstance) ConnectColumnDeleted(fn func(Table, int, int)) gobject.SignalHandle {
 	return o.Instance.Connect("column-deleted", fn)
 }
+
 // ConnectColumnInserted connects the provided callback to the "column-inserted" signal
 //
 // The "column-inserted" signal is emitted by an object which
@@ -6524,6 +8299,7 @@ func (o *TableInstance) ConnectColumnDeleted(fn func(Table, int, int)) gobject.S
 func (o *TableInstance) ConnectColumnInserted(fn func(Table, int, int)) gobject.SignalHandle {
 	return o.Instance.Connect("column-inserted", fn)
 }
+
 // ConnectColumnReordered connects the provided callback to the "column-reordered" signal
 //
 // The "column-reordered" signal is emitted by an object which
@@ -6532,6 +8308,7 @@ func (o *TableInstance) ConnectColumnInserted(fn func(Table, int, int)) gobject.
 func (o *TableInstance) ConnectColumnReordered(fn func(Table)) gobject.SignalHandle {
 	return o.Instance.Connect("column-reordered", fn)
 }
+
 // ConnectModelChanged connects the provided callback to the "model-changed" signal
 //
 // The "model-changed" signal is emitted by an object which
@@ -6540,6 +8317,7 @@ func (o *TableInstance) ConnectColumnReordered(fn func(Table)) gobject.SignalHan
 func (o *TableInstance) ConnectModelChanged(fn func(Table)) gobject.SignalHandle {
 	return o.Instance.Connect("model-changed", fn)
 }
+
 // ConnectRowDeleted connects the provided callback to the "row-deleted" signal
 //
 // The "row-deleted" signal is emitted by an object which
@@ -6547,6 +8325,7 @@ func (o *TableInstance) ConnectModelChanged(fn func(Table)) gobject.SignalHandle
 func (o *TableInstance) ConnectRowDeleted(fn func(Table, int, int)) gobject.SignalHandle {
 	return o.Instance.Connect("row-deleted", fn)
 }
+
 // ConnectRowInserted connects the provided callback to the "row-inserted" signal
 //
 // The "row-inserted" signal is emitted by an object which
@@ -6554,6 +8333,7 @@ func (o *TableInstance) ConnectRowDeleted(fn func(Table, int, int)) gobject.Sign
 func (o *TableInstance) ConnectRowInserted(fn func(Table, int, int)) gobject.SignalHandle {
 	return o.Instance.Connect("row-inserted", fn)
 }
+
 // ConnectRowReordered connects the provided callback to the "row-reordered" signal
 //
 // The "row-reordered" signal is emitted by an object which
@@ -6562,6 +8342,385 @@ func (o *TableInstance) ConnectRowInserted(fn func(Table, int, int)) gobject.Sig
 func (o *TableInstance) ConnectRowReordered(fn func(Table)) gobject.SignalHandle {
 	return o.Instance.Connect("row-reordered", fn)
 }
+
+// TableOverrides is the struct used to override the default implementation of virtual methods.
+// it is generic over the extending instance type.
+type TableOverrides[Instance Table] struct {
+	// AddColumnSelection allows you to override the implementation of the virtual method add_column_selection.
+	// The function takes the following parameters:
+	// 
+	// 	- column int: a #gint representing a column in @table 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	AddColumnSelection func(Instance, int) bool
+	// AddRowSelection allows you to override the implementation of the virtual method add_row_selection.
+	// The function takes the following parameters:
+	// 
+	// 	- row int: a #gint representing a row in @table 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	AddRowSelection func(Instance, int) bool
+	// ColumnDeleted allows you to override the implementation of the virtual method column_deleted.
+	// The function takes the following parameters:
+	// 
+	// 	- column int 
+	// 	- numDeleted int 
+	ColumnDeleted func(Instance, int, int)
+	// ColumnInserted allows you to override the implementation of the virtual method column_inserted.
+	// The function takes the following parameters:
+	// 
+	// 	- column int 
+	// 	- numInserted int 
+	ColumnInserted func(Instance, int, int)
+	// ColumnReordered allows you to override the implementation of the virtual method column_reordered.
+	ColumnReordered func(Instance)
+	// GetCaption allows you to override the implementation of the virtual method get_caption.
+	// The function returns the following values:
+	// 
+	// 	- goret Object (nullable) 
+	GetCaption func(Instance) Object
+	// GetColumnDescription allows you to override the implementation of the virtual method get_column_description.
+	// The function takes the following parameters:
+	// 
+	// 	- column int: a #gint representing a column in @table 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret string 
+	GetColumnDescription func(Instance, int) string
+	// GetColumnExtentAt allows you to override the implementation of the virtual method get_column_extent_at.
+	// The function takes the following parameters:
+	// 
+	// 	- row int: a #gint representing a row in @table 
+	// 	- column int: a #gint representing a column in @table 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret int 
+	GetColumnExtentAt func(Instance, int, int) int
+	// GetColumnHeader allows you to override the implementation of the virtual method get_column_header.
+	// The function takes the following parameters:
+	// 
+	// 	- column int: a #gint representing a column in the table 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret Object (nullable) 
+	GetColumnHeader func(Instance, int) Object
+	// GetNColumns allows you to override the implementation of the virtual method get_n_columns.
+	// The function returns the following values:
+	// 
+	// 	- goret int 
+	GetNColumns func(Instance) int
+	// GetNRows allows you to override the implementation of the virtual method get_n_rows.
+	// The function returns the following values:
+	// 
+	// 	- goret int 
+	GetNRows func(Instance) int
+	// GetRowDescription allows you to override the implementation of the virtual method get_row_description.
+	// The function takes the following parameters:
+	// 
+	// 	- row int: a #gint representing a row in @table 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret string (nullable) 
+	GetRowDescription func(Instance, int) string
+	// GetRowExtentAt allows you to override the implementation of the virtual method get_row_extent_at.
+	// The function takes the following parameters:
+	// 
+	// 	- row int: a #gint representing a row in @table 
+	// 	- column int: a #gint representing a column in @table 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret int 
+	GetRowExtentAt func(Instance, int, int) int
+	// GetRowHeader allows you to override the implementation of the virtual method get_row_header.
+	// The function takes the following parameters:
+	// 
+	// 	- row int: a #gint representing a row in the table 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret Object (nullable) 
+	GetRowHeader func(Instance, int) Object
+	// GetSelectedColumns allows you to override the implementation of the virtual method get_selected_columns.
+	// The function takes the following parameters:
+	// 
+	// 	- selected **int: a #gint** that is to contain the selected columns numbers 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret int 
+	GetSelectedColumns func(Instance, **int) int
+	// GetSelectedRows allows you to override the implementation of the virtual method get_selected_rows.
+	// The function takes the following parameters:
+	// 
+	// 	- selected **int: a #gint** that is to contain the selected row numbers 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret int 
+	GetSelectedRows func(Instance, **int) int
+	// GetSummary allows you to override the implementation of the virtual method get_summary.
+	// The function returns the following values:
+	// 
+	// 	- goret Object 
+	GetSummary func(Instance) Object
+	// IsColumnSelected allows you to override the implementation of the virtual method is_column_selected.
+	// The function takes the following parameters:
+	// 
+	// 	- column int: a #gint representing a column in @table 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	IsColumnSelected func(Instance, int) bool
+	// IsRowSelected allows you to override the implementation of the virtual method is_row_selected.
+	// The function takes the following parameters:
+	// 
+	// 	- row int: a #gint representing a row in @table 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	IsRowSelected func(Instance, int) bool
+	// IsSelected allows you to override the implementation of the virtual method is_selected.
+	// The function takes the following parameters:
+	// 
+	// 	- row int: a #gint representing a row in @table 
+	// 	- column int: a #gint representing a column in @table 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	IsSelected func(Instance, int, int) bool
+	// ModelChanged allows you to override the implementation of the virtual method model_changed.
+	ModelChanged func(Instance)
+	// RefAt allows you to override the implementation of the virtual method ref_at.
+	// The function takes the following parameters:
+	// 
+	// 	- row int: a #gint representing a row in @table 
+	// 	- column int: a #gint representing a column in @table 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret Object 
+	RefAt func(Instance, int, int) Object
+	// RemoveColumnSelection allows you to override the implementation of the virtual method remove_column_selection.
+	// The function takes the following parameters:
+	// 
+	// 	- column int: a #gint representing a column in @table 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	RemoveColumnSelection func(Instance, int) bool
+	// RemoveRowSelection allows you to override the implementation of the virtual method remove_row_selection.
+	// The function takes the following parameters:
+	// 
+	// 	- row int: a #gint representing a row in @table 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	RemoveRowSelection func(Instance, int) bool
+	// RowDeleted allows you to override the implementation of the virtual method row_deleted.
+	// The function takes the following parameters:
+	// 
+	// 	- row int 
+	// 	- numDeleted int 
+	RowDeleted func(Instance, int, int)
+	// RowInserted allows you to override the implementation of the virtual method row_inserted.
+	// The function takes the following parameters:
+	// 
+	// 	- row int 
+	// 	- numInserted int 
+	RowInserted func(Instance, int, int)
+	// RowReordered allows you to override the implementation of the virtual method row_reordered.
+	RowReordered func(Instance)
+	// SetCaption allows you to override the implementation of the virtual method set_caption.
+	// The function takes the following parameters:
+	// 
+	// 	- caption Object: a #AtkObject representing the caption to set for @table 
+	SetCaption func(Instance, Object)
+	// SetColumnDescription allows you to override the implementation of the virtual method set_column_description.
+	// The function takes the following parameters:
+	// 
+	// 	- column int: a #gint representing a column in @table 
+	// 	- description string: a #gchar representing the description text
+	// to set for the specified @column of the @table 
+	SetColumnDescription func(Instance, int, string)
+	// SetColumnHeader allows you to override the implementation of the virtual method set_column_header.
+	// The function takes the following parameters:
+	// 
+	// 	- column int: a #gint representing a column in @table 
+	// 	- header Object: an #AtkTable 
+	SetColumnHeader func(Instance, int, Object)
+	// SetRowDescription allows you to override the implementation of the virtual method set_row_description.
+	// The function takes the following parameters:
+	// 
+	// 	- row int: a #gint representing a row in @table 
+	// 	- description string: a #gchar representing the description text
+	// to set for the specified @row of @table 
+	SetRowDescription func(Instance, int, string)
+	// SetRowHeader allows you to override the implementation of the virtual method set_row_header.
+	// The function takes the following parameters:
+	// 
+	// 	- row int: a #gint representing a row in @table 
+	// 	- header Object: an #AtkTable 
+	SetRowHeader func(Instance, int, Object)
+	// SetSummary allows you to override the implementation of the virtual method set_summary.
+	// The function takes the following parameters:
+	// 
+	// 	- accessible Object: an #AtkObject representing the summary description
+	// to set for @table 
+	SetSummary func(Instance, Object)
+}
+
+// UnsafeApplyTableOverrides applies the overrides to init the gclass by setting the trampoline functions.
+// This is used by the bindings internally and only exported for visibility to other bindings code.
+func UnsafeApplyTableOverrides[Instance Table](gclass unsafe.Pointer, overrides TableOverrides[Instance]) {
+	pclass := (*C.AtkTableIface)(gclass)
+
+	if overrides.AddColumnSelection != nil {
+		pclass.add_column_selection = (*[0]byte)(C._gotk4_atk1_Table_add_column_selection)
+	}
+
+	if overrides.AddRowSelection != nil {
+		pclass.add_row_selection = (*[0]byte)(C._gotk4_atk1_Table_add_row_selection)
+	}
+
+	if overrides.ColumnDeleted != nil {
+		pclass.column_deleted = (*[0]byte)(C._gotk4_atk1_Table_column_deleted)
+	}
+
+	if overrides.ColumnInserted != nil {
+		pclass.column_inserted = (*[0]byte)(C._gotk4_atk1_Table_column_inserted)
+	}
+
+	if overrides.ColumnReordered != nil {
+		pclass.column_reordered = (*[0]byte)(C._gotk4_atk1_Table_column_reordered)
+	}
+
+	if overrides.GetCaption != nil {
+		pclass.get_caption = (*[0]byte)(C._gotk4_atk1_Table_get_caption)
+	}
+
+	if overrides.GetColumnDescription != nil {
+		pclass.get_column_description = (*[0]byte)(C._gotk4_atk1_Table_get_column_description)
+	}
+
+	if overrides.GetColumnExtentAt != nil {
+		pclass.get_column_extent_at = (*[0]byte)(C._gotk4_atk1_Table_get_column_extent_at)
+	}
+
+	if overrides.GetColumnHeader != nil {
+		pclass.get_column_header = (*[0]byte)(C._gotk4_atk1_Table_get_column_header)
+	}
+
+	if overrides.GetNColumns != nil {
+		pclass.get_n_columns = (*[0]byte)(C._gotk4_atk1_Table_get_n_columns)
+	}
+
+	if overrides.GetNRows != nil {
+		pclass.get_n_rows = (*[0]byte)(C._gotk4_atk1_Table_get_n_rows)
+	}
+
+	if overrides.GetRowDescription != nil {
+		pclass.get_row_description = (*[0]byte)(C._gotk4_atk1_Table_get_row_description)
+	}
+
+	if overrides.GetRowExtentAt != nil {
+		pclass.get_row_extent_at = (*[0]byte)(C._gotk4_atk1_Table_get_row_extent_at)
+	}
+
+	if overrides.GetRowHeader != nil {
+		pclass.get_row_header = (*[0]byte)(C._gotk4_atk1_Table_get_row_header)
+	}
+
+	if overrides.GetSelectedColumns != nil {
+		pclass.get_selected_columns = (*[0]byte)(C._gotk4_atk1_Table_get_selected_columns)
+	}
+
+	if overrides.GetSelectedRows != nil {
+		pclass.get_selected_rows = (*[0]byte)(C._gotk4_atk1_Table_get_selected_rows)
+	}
+
+	if overrides.GetSummary != nil {
+		pclass.get_summary = (*[0]byte)(C._gotk4_atk1_Table_get_summary)
+	}
+
+	if overrides.IsColumnSelected != nil {
+		pclass.is_column_selected = (*[0]byte)(C._gotk4_atk1_Table_is_column_selected)
+	}
+
+	if overrides.IsRowSelected != nil {
+		pclass.is_row_selected = (*[0]byte)(C._gotk4_atk1_Table_is_row_selected)
+	}
+
+	if overrides.IsSelected != nil {
+		pclass.is_selected = (*[0]byte)(C._gotk4_atk1_Table_is_selected)
+	}
+
+	if overrides.ModelChanged != nil {
+		pclass.model_changed = (*[0]byte)(C._gotk4_atk1_Table_model_changed)
+	}
+
+	if overrides.RefAt != nil {
+		pclass.ref_at = (*[0]byte)(C._gotk4_atk1_Table_ref_at)
+	}
+
+	if overrides.RemoveColumnSelection != nil {
+		pclass.remove_column_selection = (*[0]byte)(C._gotk4_atk1_Table_remove_column_selection)
+	}
+
+	if overrides.RemoveRowSelection != nil {
+		pclass.remove_row_selection = (*[0]byte)(C._gotk4_atk1_Table_remove_row_selection)
+	}
+
+	if overrides.RowDeleted != nil {
+		pclass.row_deleted = (*[0]byte)(C._gotk4_atk1_Table_row_deleted)
+	}
+
+	if overrides.RowInserted != nil {
+		pclass.row_inserted = (*[0]byte)(C._gotk4_atk1_Table_row_inserted)
+	}
+
+	if overrides.RowReordered != nil {
+		pclass.row_reordered = (*[0]byte)(C._gotk4_atk1_Table_row_reordered)
+	}
+
+	if overrides.SetCaption != nil {
+		pclass.set_caption = (*[0]byte)(C._gotk4_atk1_Table_set_caption)
+	}
+
+	if overrides.SetColumnDescription != nil {
+		pclass.set_column_description = (*[0]byte)(C._gotk4_atk1_Table_set_column_description)
+	}
+
+	if overrides.SetColumnHeader != nil {
+		pclass.set_column_header = (*[0]byte)(C._gotk4_atk1_Table_set_column_header)
+	}
+
+	if overrides.SetRowDescription != nil {
+		pclass.set_row_description = (*[0]byte)(C._gotk4_atk1_Table_set_row_description)
+	}
+
+	if overrides.SetRowHeader != nil {
+		pclass.set_row_header = (*[0]byte)(C._gotk4_atk1_Table_set_row_header)
+	}
+
+	if overrides.SetSummary != nil {
+		pclass.set_summary = (*[0]byte)(C._gotk4_atk1_Table_set_summary)
+	}
+}
+
 // TableCellInstance is the instance type used by all types implementing AtkTableCell. It is used internally by the bindings. Users should use the interface [TableCell] instead.
 type TableCellInstance struct {
 	_ [0]func() // equal guard
@@ -6583,6 +8742,7 @@ type TableCell interface {
 	upcastToAtkTableCell() *TableCellInstance
 
 	// GetColumnSpan wraps atk_table_cell_get_column_span
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int 
@@ -6590,6 +8750,7 @@ type TableCell interface {
 	// Returns the number of columns occupied by this cell accessible.
 	GetColumnSpan() int
 	// GetPosition wraps atk_table_cell_get_position
+	// 
 	// The function returns the following values:
 	// 
 	// 	- row int: the row of the given cell. 
@@ -6599,6 +8760,7 @@ type TableCell interface {
 	// Retrieves the tabular position of this cell.
 	GetPosition() (int, int, bool)
 	// GetRowColumnSpan wraps atk_table_cell_get_row_column_span
+	// 
 	// The function returns the following values:
 	// 
 	// 	- row int: the row index of the given cell. 
@@ -6614,6 +8776,7 @@ type TableCell interface {
 	// on the object.
 	GetRowColumnSpan() (int, int, int, int, bool)
 	// GetRowSpan wraps atk_table_cell_get_row_span
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int 
@@ -6621,6 +8784,7 @@ type TableCell interface {
 	// Returns the number of rows occupied by this cell accessible.
 	GetRowSpan() int
 	// GetTable wraps atk_table_cell_get_table
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Object 
@@ -6668,6 +8832,7 @@ func UnsafeTableCellToGlibFull(c TableCell) unsafe.Pointer {
 }
 
 // GetColumnSpan wraps atk_table_cell_get_column_span
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -6690,6 +8855,7 @@ func (cell *TableCellInstance) GetColumnSpan() int {
 }
 
 // GetPosition wraps atk_table_cell_get_position
+// 
 // The function returns the following values:
 // 
 // 	- row int: the row of the given cell. 
@@ -6722,6 +8888,7 @@ func (cell *TableCellInstance) GetPosition() (int, int, bool) {
 }
 
 // GetRowColumnSpan wraps atk_table_cell_get_row_column_span
+// 
 // The function returns the following values:
 // 
 // 	- row int: the row index of the given cell. 
@@ -6766,6 +8933,7 @@ func (cell *TableCellInstance) GetRowColumnSpan() (int, int, int, int, bool) {
 }
 
 // GetRowSpan wraps atk_table_cell_get_row_span
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -6788,6 +8956,7 @@ func (cell *TableCellInstance) GetRowSpan() int {
 }
 
 // GetTable wraps atk_table_cell_get_table
+// 
 // The function returns the following values:
 // 
 // 	- goret Object 
@@ -6807,6 +8976,68 @@ func (cell *TableCellInstance) GetTable() Object {
 	goret = UnsafeObjectFromGlibFull(unsafe.Pointer(cret))
 
 	return goret
+}
+
+// TableCellOverrides is the struct used to override the default implementation of virtual methods.
+// it is generic over the extending instance type.
+type TableCellOverrides[Instance TableCell] struct {
+	// GetColumnSpan allows you to override the implementation of the virtual method get_column_span.
+	// The function returns the following values:
+	// 
+	// 	- goret int 
+	GetColumnSpan func(Instance) int
+	// GetPosition allows you to override the implementation of the virtual method get_position.
+	// The function returns the following values:
+	// 
+	// 	- row int: the row of the given cell. 
+	// 	- column int: the column of the given cell. 
+	// 	- goret bool 
+	GetPosition func(Instance) (int, int, bool)
+	// GetRowColumnSpan allows you to override the implementation of the virtual method get_row_column_span.
+	// The function returns the following values:
+	// 
+	// 	- row int: the row index of the given cell. 
+	// 	- column int: the column index of the given cell. 
+	// 	- rowSpan int: the number of rows occupied by this cell. 
+	// 	- columnSpan int: the number of columns occupied by this cell. 
+	// 	- goret bool 
+	GetRowColumnSpan func(Instance) (int, int, int, int, bool)
+	// GetRowSpan allows you to override the implementation of the virtual method get_row_span.
+	// The function returns the following values:
+	// 
+	// 	- goret int 
+	GetRowSpan func(Instance) int
+	// GetTable allows you to override the implementation of the virtual method get_table.
+	// The function returns the following values:
+	// 
+	// 	- goret Object 
+	GetTable func(Instance) Object
+}
+
+// UnsafeApplyTableCellOverrides applies the overrides to init the gclass by setting the trampoline functions.
+// This is used by the bindings internally and only exported for visibility to other bindings code.
+func UnsafeApplyTableCellOverrides[Instance TableCell](gclass unsafe.Pointer, overrides TableCellOverrides[Instance]) {
+	pclass := (*C.AtkTableCellIface)(gclass)
+
+	if overrides.GetColumnSpan != nil {
+		pclass.get_column_span = (*[0]byte)(C._gotk4_atk1_TableCell_get_column_span)
+	}
+
+	if overrides.GetPosition != nil {
+		pclass.get_position = (*[0]byte)(C._gotk4_atk1_TableCell_get_position)
+	}
+
+	if overrides.GetRowColumnSpan != nil {
+		pclass.get_row_column_span = (*[0]byte)(C._gotk4_atk1_TableCell_get_row_column_span)
+	}
+
+	if overrides.GetRowSpan != nil {
+		pclass.get_row_span = (*[0]byte)(C._gotk4_atk1_TableCell_get_row_span)
+	}
+
+	if overrides.GetTable != nil {
+		pclass.get_table = (*[0]byte)(C._gotk4_atk1_TableCell_get_table)
+	}
 }
 
 // TextInstance is the instance type used by all types implementing AtkText. It is used internally by the bindings. Users should use the interface [Text] instead.
@@ -6872,6 +9103,7 @@ type Text interface {
 	// Get the ranges of text in the specified bounding box.
 	GetBoundedRanges(*TextRectangle, CoordType, TextClipType, TextClipType) []*TextRange
 	// GetCaretOffset wraps atk_text_get_caret_offset
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int 
@@ -6891,6 +9123,7 @@ type Text interface {
 	// Gets the specified text.
 	GetCharacterAtOffset(int) uint32
 	// GetCharacterCount wraps atk_text_get_character_count
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int 
@@ -6918,6 +9151,7 @@ type Text interface {
 	//     a particular text offset.
 	GetCharacterExtents(int, CoordType) (int, int, int, int)
 	// GetNSelections wraps atk_text_get_n_selections
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int 
@@ -7293,6 +9527,7 @@ func (text *TextInstance) GetBoundedRanges(rect *TextRectangle, coordType CoordT
 }
 
 // GetCaretOffset wraps atk_text_get_caret_offset
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -7345,6 +9580,7 @@ func (text *TextInstance) GetCharacterAtOffset(offset int) uint32 {
 }
 
 // GetCharacterCount wraps atk_text_get_character_count
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -7417,6 +9653,7 @@ func (text *TextInstance) GetCharacterExtents(offset int, coords CoordType) (int
 }
 
 // GetNSelections wraps atk_text_get_n_selections
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -7906,6 +10143,7 @@ func (text *TextInstance) SetSelection(selectionNum int, startOffset int, endOff
 func (o *TextInstance) ConnectTextAttributesChanged(fn func(Text)) gobject.SignalHandle {
 	return o.Instance.Connect("text-attributes-changed", fn)
 }
+
 // ConnectTextCaretMoved connects the provided callback to the "text-caret-moved" signal
 //
 // The "text-caret-moved" signal is emitted when the caret
@@ -7914,6 +10152,7 @@ func (o *TextInstance) ConnectTextAttributesChanged(fn func(Text)) gobject.Signa
 func (o *TextInstance) ConnectTextCaretMoved(fn func(Text, int)) gobject.SignalHandle {
 	return o.Instance.Connect("text-caret-moved", fn)
 }
+
 // ConnectTextChanged connects the provided callback to the "text-changed" signal
 //
 // The "text-changed" signal is emitted when the text of the
@@ -7924,6 +10163,7 @@ func (o *TextInstance) ConnectTextCaretMoved(fn func(Text, int)) gobject.SignalH
 func (o *TextInstance) ConnectTextChanged(fn func(Text, int, int)) gobject.SignalHandle {
 	return o.Instance.Connect("text-changed", fn)
 }
+
 // ConnectTextInsert connects the provided callback to the "text-insert" signal
 //
 // The "text-insert" signal is emitted when a new text is
@@ -7933,6 +10173,7 @@ func (o *TextInstance) ConnectTextChanged(fn func(Text, int, int)) gobject.Signa
 func (o *TextInstance) ConnectTextInsert(fn func(Text, int, int, string)) gobject.SignalHandle {
 	return o.Instance.Connect("text-insert", fn)
 }
+
 // ConnectTextRemove connects the provided callback to the "text-remove" signal
 //
 // The "text-remove" signal is emitted when a new text is
@@ -7942,6 +10183,7 @@ func (o *TextInstance) ConnectTextInsert(fn func(Text, int, int, string)) gobjec
 func (o *TextInstance) ConnectTextRemove(fn func(Text, int, int, string)) gobject.SignalHandle {
 	return o.Instance.Connect("text-remove", fn)
 }
+
 // ConnectTextSelectionChanged connects the provided callback to the "text-selection-changed" signal
 //
 // The "text-selection-changed" signal is emitted when the
@@ -7949,6 +10191,304 @@ func (o *TextInstance) ConnectTextRemove(fn func(Text, int, int, string)) gobjec
 func (o *TextInstance) ConnectTextSelectionChanged(fn func(Text)) gobject.SignalHandle {
 	return o.Instance.Connect("text-selection-changed", fn)
 }
+
+// TextOverrides is the struct used to override the default implementation of virtual methods.
+// it is generic over the extending instance type.
+type TextOverrides[Instance Text] struct {
+	// AddSelection allows you to override the implementation of the virtual method add_selection.
+	// The function takes the following parameters:
+	// 
+	// 	- startOffset int: the starting character offset of the selected region 
+	// 	- endOffset int: the offset of the first character after the selected region. 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	AddSelection func(Instance, int, int) bool
+	// GetBoundedRanges allows you to override the implementation of the virtual method get_bounded_ranges.
+	// The function takes the following parameters:
+	// 
+	// 	- rect *TextRectangle: An AtkTextRectangle giving the dimensions of the bounding box. 
+	// 	- coordType CoordType: Specify whether coordinates are relative to the screen or widget window. 
+	// 	- xClipType TextClipType: Specify the horizontal clip type. 
+	// 	- yClipType TextClipType: Specify the vertical clip type. 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret []*TextRange 
+	GetBoundedRanges func(Instance, *TextRectangle, CoordType, TextClipType, TextClipType) []*TextRange
+	// GetCaretOffset allows you to override the implementation of the virtual method get_caret_offset.
+	// The function returns the following values:
+	// 
+	// 	- goret int 
+	GetCaretOffset func(Instance) int
+	// GetCharacterAtOffset allows you to override the implementation of the virtual method get_character_at_offset.
+	// The function takes the following parameters:
+	// 
+	// 	- offset int: a character offset within @text 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret uint32 
+	GetCharacterAtOffset func(Instance, int) uint32
+	// GetCharacterCount allows you to override the implementation of the virtual method get_character_count.
+	// The function returns the following values:
+	// 
+	// 	- goret int 
+	GetCharacterCount func(Instance) int
+	// GetCharacterExtents allows you to override the implementation of the virtual method get_character_extents.
+	// The function takes the following parameters:
+	// 
+	// 	- offset int: The offset of the text character for which bounding information is required. 
+	// 	- coords CoordType: specify whether coordinates are relative to the screen or widget window 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- x int: Pointer for the x coordinate of the bounding box 
+	// 	- y int: Pointer for the y coordinate of the bounding box 
+	// 	- width int: Pointer for the width of the bounding box 
+	// 	- height int: Pointer for the height of the bounding box 
+	GetCharacterExtents func(Instance, int, CoordType) (int, int, int, int)
+	// GetNSelections allows you to override the implementation of the virtual method get_n_selections.
+	// The function returns the following values:
+	// 
+	// 	- goret int 
+	GetNSelections func(Instance) int
+	// GetOffsetAtPoint allows you to override the implementation of the virtual method get_offset_at_point.
+	// The function takes the following parameters:
+	// 
+	// 	- x int: screen x-position of character 
+	// 	- y int: screen y-position of character 
+	// 	- coords CoordType: specify whether coordinates are relative to the screen or
+	// widget window 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret int 
+	GetOffsetAtPoint func(Instance, int, int, CoordType) int
+	// GetRangeExtents allows you to override the implementation of the virtual method get_range_extents.
+	// The function takes the following parameters:
+	// 
+	// 	- startOffset int: The offset of the first text character for which boundary
+	//        information is required. 
+	// 	- endOffset int: The offset of the text character after the last character
+	//        for which boundary information is required. 
+	// 	- coordType CoordType: Specify whether coordinates are relative to the screen or widget window. 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- rect TextRectangle: A pointer to a AtkTextRectangle which is filled in by this function. 
+	GetRangeExtents func(Instance, int, int, CoordType) TextRectangle
+	// GetSelection allows you to override the implementation of the virtual method get_selection.
+	// The function takes the following parameters:
+	// 
+	// 	- selectionNum int: The selection number.  The selected regions are
+	// assigned numbers that correspond to how far the region is from the
+	// start of the text.  The selected region closest to the beginning
+	// of the text region is assigned the number 0, etc.  Note that adding,
+	// moving or deleting a selected region can change the numbering. 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- startOffset int: passes back the starting character offset of the selected region 
+	// 	- endOffset int: passes back the ending character offset (offset immediately past)
+	// of the selected region 
+	// 	- goret string 
+	GetSelection func(Instance, int) (int, int, string)
+	// GetStringAtOffset allows you to override the implementation of the virtual method get_string_at_offset.
+	// The function takes the following parameters:
+	// 
+	// 	- offset int: position 
+	// 	- granularity TextGranularity: An #AtkTextGranularity 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- startOffset int: the starting character offset of the returned string, or -1
+	//                in the case of error (e.g. invalid offset, not implemented) 
+	// 	- endOffset int: the offset of the first character after the returned string,
+	//              or -1 in the case of error (e.g. invalid offset, not implemented) 
+	// 	- goret string (nullable) 
+	GetStringAtOffset func(Instance, int, TextGranularity) (int, int, string)
+	// GetText allows you to override the implementation of the virtual method get_text.
+	// The function takes the following parameters:
+	// 
+	// 	- startOffset int: a starting character offset within @text 
+	// 	- endOffset int: an ending character offset within @text, or -1 for the end of the string. 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret string 
+	GetText func(Instance, int, int) string
+	// RemoveSelection allows you to override the implementation of the virtual method remove_selection.
+	// The function takes the following parameters:
+	// 
+	// 	- selectionNum int: The selection number.  The selected regions are
+	// assigned numbers that correspond to how far the region is from the
+	// start of the text.  The selected region closest to the beginning
+	// of the text region is assigned the number 0, etc.  Note that adding,
+	// moving or deleting a selected region can change the numbering. 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	RemoveSelection func(Instance, int) bool
+	// ScrollSubstringTo allows you to override the implementation of the virtual method scroll_substring_to.
+	// The function takes the following parameters:
+	// 
+	// 	- startOffset int: start offset in the @text 
+	// 	- endOffset int: end offset in the @text, or -1 for the end of the text. 
+	// 	- typ ScrollType: specify where the object should be made visible. 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	ScrollSubstringTo func(Instance, int, int, ScrollType) bool
+	// ScrollSubstringToPoint allows you to override the implementation of the virtual method scroll_substring_to_point.
+	// The function takes the following parameters:
+	// 
+	// 	- startOffset int: start offset in the @text 
+	// 	- endOffset int: end offset in the @text, or -1 for the end of the text. 
+	// 	- coords CoordType: specify whether coordinates are relative to the screen or to the
+	// parent object. 
+	// 	- x int: x-position where to scroll to 
+	// 	- y int: y-position where to scroll to 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	ScrollSubstringToPoint func(Instance, int, int, CoordType, int, int) bool
+	// SetCaretOffset allows you to override the implementation of the virtual method set_caret_offset.
+	// The function takes the following parameters:
+	// 
+	// 	- offset int: the character offset of the new caret position 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	SetCaretOffset func(Instance, int) bool
+	// SetSelection allows you to override the implementation of the virtual method set_selection.
+	// The function takes the following parameters:
+	// 
+	// 	- selectionNum int: The selection number.  The selected regions are
+	// assigned numbers that correspond to how far the region is from the
+	// start of the text.  The selected region closest to the beginning
+	// of the text region is assigned the number 0, etc.  Note that adding,
+	// moving or deleting a selected region can change the numbering. 
+	// 	- startOffset int: the new starting character offset of the selection 
+	// 	- endOffset int: the new end position of (e.g. offset immediately past)
+	// the selection 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	SetSelection func(Instance, int, int, int) bool
+	// TextAttributesChanged allows you to override the implementation of the virtual method text_attributes_changed.
+	TextAttributesChanged func(Instance)
+	// TextCaretMoved allows you to override the implementation of the virtual method text_caret_moved.
+	// The function takes the following parameters:
+	// 
+	// 	- location int 
+	TextCaretMoved func(Instance, int)
+	// TextChanged allows you to override the implementation of the virtual method text_changed.
+	// The function takes the following parameters:
+	// 
+	// 	- position int 
+	// 	- length int 
+	TextChanged func(Instance, int, int)
+	// TextSelectionChanged allows you to override the implementation of the virtual method text_selection_changed.
+	TextSelectionChanged func(Instance)
+}
+
+// UnsafeApplyTextOverrides applies the overrides to init the gclass by setting the trampoline functions.
+// This is used by the bindings internally and only exported for visibility to other bindings code.
+func UnsafeApplyTextOverrides[Instance Text](gclass unsafe.Pointer, overrides TextOverrides[Instance]) {
+	pclass := (*C.AtkTextIface)(gclass)
+
+	if overrides.AddSelection != nil {
+		pclass.add_selection = (*[0]byte)(C._gotk4_atk1_Text_add_selection)
+	}
+
+	if overrides.GetBoundedRanges != nil {
+		pclass.get_bounded_ranges = (*[0]byte)(C._gotk4_atk1_Text_get_bounded_ranges)
+	}
+
+	if overrides.GetCaretOffset != nil {
+		pclass.get_caret_offset = (*[0]byte)(C._gotk4_atk1_Text_get_caret_offset)
+	}
+
+	if overrides.GetCharacterAtOffset != nil {
+		pclass.get_character_at_offset = (*[0]byte)(C._gotk4_atk1_Text_get_character_at_offset)
+	}
+
+	if overrides.GetCharacterCount != nil {
+		pclass.get_character_count = (*[0]byte)(C._gotk4_atk1_Text_get_character_count)
+	}
+
+	if overrides.GetCharacterExtents != nil {
+		pclass.get_character_extents = (*[0]byte)(C._gotk4_atk1_Text_get_character_extents)
+	}
+
+	if overrides.GetNSelections != nil {
+		pclass.get_n_selections = (*[0]byte)(C._gotk4_atk1_Text_get_n_selections)
+	}
+
+	if overrides.GetOffsetAtPoint != nil {
+		pclass.get_offset_at_point = (*[0]byte)(C._gotk4_atk1_Text_get_offset_at_point)
+	}
+
+	if overrides.GetRangeExtents != nil {
+		pclass.get_range_extents = (*[0]byte)(C._gotk4_atk1_Text_get_range_extents)
+	}
+
+	if overrides.GetSelection != nil {
+		pclass.get_selection = (*[0]byte)(C._gotk4_atk1_Text_get_selection)
+	}
+
+	if overrides.GetStringAtOffset != nil {
+		pclass.get_string_at_offset = (*[0]byte)(C._gotk4_atk1_Text_get_string_at_offset)
+	}
+
+	if overrides.GetText != nil {
+		pclass.get_text = (*[0]byte)(C._gotk4_atk1_Text_get_text)
+	}
+
+	if overrides.RemoveSelection != nil {
+		pclass.remove_selection = (*[0]byte)(C._gotk4_atk1_Text_remove_selection)
+	}
+
+	if overrides.ScrollSubstringTo != nil {
+		pclass.scroll_substring_to = (*[0]byte)(C._gotk4_atk1_Text_scroll_substring_to)
+	}
+
+	if overrides.ScrollSubstringToPoint != nil {
+		pclass.scroll_substring_to_point = (*[0]byte)(C._gotk4_atk1_Text_scroll_substring_to_point)
+	}
+
+	if overrides.SetCaretOffset != nil {
+		pclass.set_caret_offset = (*[0]byte)(C._gotk4_atk1_Text_set_caret_offset)
+	}
+
+	if overrides.SetSelection != nil {
+		pclass.set_selection = (*[0]byte)(C._gotk4_atk1_Text_set_selection)
+	}
+
+	if overrides.TextAttributesChanged != nil {
+		pclass.text_attributes_changed = (*[0]byte)(C._gotk4_atk1_Text_text_attributes_changed)
+	}
+
+	if overrides.TextCaretMoved != nil {
+		pclass.text_caret_moved = (*[0]byte)(C._gotk4_atk1_Text_text_caret_moved)
+	}
+
+	if overrides.TextChanged != nil {
+		pclass.text_changed = (*[0]byte)(C._gotk4_atk1_Text_text_changed)
+	}
+
+	if overrides.TextSelectionChanged != nil {
+		pclass.text_selection_changed = (*[0]byte)(C._gotk4_atk1_Text_text_selection_changed)
+	}
+}
+
 // ValueInstance is the instance type used by all types implementing AtkValue. It is used internally by the bindings. Users should use the interface [Value] instead.
 type ValueInstance struct {
 	_ [0]func() // equal guard
@@ -8105,6 +10645,7 @@ type Value interface {
 	upcastToAtkValue() *ValueInstance
 
 	// GetIncrement wraps atk_value_get_increment
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret float64 
@@ -8115,6 +10656,7 @@ type Value interface {
 	// platform.
 	GetIncrement() float64
 	// GetRange wraps atk_value_get_range
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret *Range (nullable) 
@@ -8122,6 +10664,7 @@ type Value interface {
 	// Gets the range of this object.
 	GetRange() *Range
 	// GetSubRanges wraps atk_value_get_sub_ranges
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret []*Range 
@@ -8130,6 +10673,7 @@ type Value interface {
 	// introduction for examples of subranges and when to expose them.
 	GetSubRanges() []*Range
 	// GetValueAndText wraps atk_value_get_value_and_text
+	// 
 	// The function returns the following values:
 	// 
 	// 	- value float64: address of #gdouble to put the current value of @obj 
@@ -8217,6 +10761,7 @@ func UnsafeValueToGlibFull(c Value) unsafe.Pointer {
 }
 
 // GetIncrement wraps atk_value_get_increment
+// 
 // The function returns the following values:
 // 
 // 	- goret float64 
@@ -8242,6 +10787,7 @@ func (obj *ValueInstance) GetIncrement() float64 {
 }
 
 // GetRange wraps atk_value_get_range
+// 
 // The function returns the following values:
 // 
 // 	- goret *Range (nullable) 
@@ -8266,6 +10812,7 @@ func (obj *ValueInstance) GetRange() *Range {
 }
 
 // GetSubRanges wraps atk_value_get_sub_ranges
+// 
 // The function returns the following values:
 // 
 // 	- goret []*Range 
@@ -8296,6 +10843,7 @@ func (obj *ValueInstance) GetSubRanges() []*Range {
 }
 
 // GetValueAndText wraps atk_value_get_value_and_text
+// 
 // The function returns the following values:
 // 
 // 	- value float64: address of #gdouble to put the current value of @obj 
@@ -8374,6 +10922,65 @@ func (obj *ValueInstance) SetValue(newValue float64) {
 func (o *ValueInstance) ConnectValueChanged(fn func(Value, float64, string)) gobject.SignalHandle {
 	return o.Instance.Connect("value-changed", fn)
 }
+
+// ValueOverrides is the struct used to override the default implementation of virtual methods.
+// it is generic over the extending instance type.
+type ValueOverrides[Instance Value] struct {
+	// GetIncrement allows you to override the implementation of the virtual method get_increment.
+	// The function returns the following values:
+	// 
+	// 	- goret float64 
+	GetIncrement func(Instance) float64
+	// GetRange allows you to override the implementation of the virtual method get_range.
+	// The function returns the following values:
+	// 
+	// 	- goret *Range (nullable) 
+	GetRange func(Instance) *Range
+	// GetSubRanges allows you to override the implementation of the virtual method get_sub_ranges.
+	// The function returns the following values:
+	// 
+	// 	- goret []*Range 
+	GetSubRanges func(Instance) []*Range
+	// GetValueAndText allows you to override the implementation of the virtual method get_value_and_text.
+	// The function returns the following values:
+	// 
+	// 	- value float64: address of #gdouble to put the current value of @obj 
+	// 	- text string: address of #gchar to put the human
+	// readable text alternative for @value 
+	GetValueAndText func(Instance) (float64, string)
+	// SetValue allows you to override the implementation of the virtual method set_value.
+	// The function takes the following parameters:
+	// 
+	// 	- newValue float64: a double which is the desired new accessible value. 
+	SetValue func(Instance, float64)
+}
+
+// UnsafeApplyValueOverrides applies the overrides to init the gclass by setting the trampoline functions.
+// This is used by the bindings internally and only exported for visibility to other bindings code.
+func UnsafeApplyValueOverrides[Instance Value](gclass unsafe.Pointer, overrides ValueOverrides[Instance]) {
+	pclass := (*C.AtkValueIface)(gclass)
+
+	if overrides.GetIncrement != nil {
+		pclass.get_increment = (*[0]byte)(C._gotk4_atk1_Value_get_increment)
+	}
+
+	if overrides.GetRange != nil {
+		pclass.get_range = (*[0]byte)(C._gotk4_atk1_Value_get_range)
+	}
+
+	if overrides.GetSubRanges != nil {
+		pclass.get_sub_ranges = (*[0]byte)(C._gotk4_atk1_Value_get_sub_ranges)
+	}
+
+	if overrides.GetValueAndText != nil {
+		pclass.get_value_and_text = (*[0]byte)(C._gotk4_atk1_Value_get_value_and_text)
+	}
+
+	if overrides.SetValue != nil {
+		pclass.set_value = (*[0]byte)(C._gotk4_atk1_Value_set_value)
+	}
+}
+
 // WindowInstance is the instance type used by all types implementing AtkWindow. It is used internally by the bindings. Users should use the interface [Window] instead.
 type WindowInstance struct {
 	_ [0]func() // equal guard
@@ -8486,6 +11093,7 @@ func UnsafeWindowToGlibFull(c Window) unsafe.Pointer {
 func (o *WindowInstance) ConnectActivate(fn func(Window)) gobject.SignalHandle {
 	return o.Instance.Connect("activate", fn)
 }
+
 // ConnectCreate connects the provided callback to the "create" signal
 //
 // The signal #AtkWindow::create is emitted when a new window
@@ -8493,6 +11101,7 @@ func (o *WindowInstance) ConnectActivate(fn func(Window)) gobject.SignalHandle {
 func (o *WindowInstance) ConnectCreate(fn func(Window)) gobject.SignalHandle {
 	return o.Instance.Connect("create", fn)
 }
+
 // ConnectDeactivate connects the provided callback to the "deactivate" signal
 //
 // The signal #AtkWindow::deactivate is emitted when a window is
@@ -8500,6 +11109,7 @@ func (o *WindowInstance) ConnectCreate(fn func(Window)) gobject.SignalHandle {
 func (o *WindowInstance) ConnectDeactivate(fn func(Window)) gobject.SignalHandle {
 	return o.Instance.Connect("deactivate", fn)
 }
+
 // ConnectDestroy connects the provided callback to the "destroy" signal
 //
 // The signal #AtkWindow::destroy is emitted when a window is
@@ -8507,6 +11117,7 @@ func (o *WindowInstance) ConnectDeactivate(fn func(Window)) gobject.SignalHandle
 func (o *WindowInstance) ConnectDestroy(fn func(Window)) gobject.SignalHandle {
 	return o.Instance.Connect("destroy", fn)
 }
+
 // ConnectMaximize connects the provided callback to the "maximize" signal
 //
 // The signal #AtkWindow::maximize is emitted when a window
@@ -8514,6 +11125,7 @@ func (o *WindowInstance) ConnectDestroy(fn func(Window)) gobject.SignalHandle {
 func (o *WindowInstance) ConnectMaximize(fn func(Window)) gobject.SignalHandle {
 	return o.Instance.Connect("maximize", fn)
 }
+
 // ConnectMinimize connects the provided callback to the "minimize" signal
 //
 // The signal #AtkWindow::minimize is emitted when a window
@@ -8521,6 +11133,7 @@ func (o *WindowInstance) ConnectMaximize(fn func(Window)) gobject.SignalHandle {
 func (o *WindowInstance) ConnectMinimize(fn func(Window)) gobject.SignalHandle {
 	return o.Instance.Connect("minimize", fn)
 }
+
 // ConnectMove connects the provided callback to the "move" signal
 //
 // The signal #AtkWindow::move is emitted when a window
@@ -8528,6 +11141,7 @@ func (o *WindowInstance) ConnectMinimize(fn func(Window)) gobject.SignalHandle {
 func (o *WindowInstance) ConnectMove(fn func(Window)) gobject.SignalHandle {
 	return o.Instance.Connect("move", fn)
 }
+
 // ConnectResize connects the provided callback to the "resize" signal
 //
 // The signal #AtkWindow::resize is emitted when a window
@@ -8535,6 +11149,7 @@ func (o *WindowInstance) ConnectMove(fn func(Window)) gobject.SignalHandle {
 func (o *WindowInstance) ConnectResize(fn func(Window)) gobject.SignalHandle {
 	return o.Instance.Connect("resize", fn)
 }
+
 // ConnectRestore connects the provided callback to the "restore" signal
 //
 // The signal #AtkWindow::restore is emitted when a window
@@ -8542,6 +11157,17 @@ func (o *WindowInstance) ConnectResize(fn func(Window)) gobject.SignalHandle {
 func (o *WindowInstance) ConnectRestore(fn func(Window)) gobject.SignalHandle {
 	return o.Instance.Connect("restore", fn)
 }
+
+// WindowOverrides is the struct used to override the default implementation of virtual methods.
+// it is generic over the extending instance type.
+type WindowOverrides[Instance Window] struct {
+}
+
+// UnsafeApplyWindowOverrides applies the overrides to init the gclass by setting the trampoline functions.
+// This is used by the bindings internally and only exported for visibility to other bindings code.
+func UnsafeApplyWindowOverrides[Instance Window](gclass unsafe.Pointer, overrides WindowOverrides[Instance]) {
+}
+
 // HyperlinkInstance is the instance type used by all types extending AtkHyperlink. It is used internally by the bindings. Users should use the interface [Hyperlink] instead.
 type HyperlinkInstance struct {
 	_ [0]func() // equal guard
@@ -8565,6 +11191,7 @@ type Hyperlink interface {
 	upcastToAtkHyperlink() *HyperlinkInstance
 
 	// GetEndIndex wraps atk_hyperlink_get_end_index
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int 
@@ -8572,6 +11199,7 @@ type Hyperlink interface {
 	// Gets the index with the hypertext document at which this link ends.
 	GetEndIndex() int
 	// GetNAnchors wraps atk_hyperlink_get_n_anchors
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int 
@@ -8596,6 +11224,7 @@ type Hyperlink interface {
 	// Multiple anchors are primarily used by client-side image maps.
 	GetObject(int) Object
 	// GetStartIndex wraps atk_hyperlink_get_start_index
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int 
@@ -8618,6 +11247,7 @@ type Hyperlink interface {
 	// Multiple anchors are primarily used by client-side image maps.
 	GetURI(int) string
 	// IsInline wraps atk_hyperlink_is_inline
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
@@ -8628,6 +11258,7 @@ type Hyperlink interface {
 	//           %TRUE.
 	IsInline() bool
 	// IsValid wraps atk_hyperlink_is_valid
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
@@ -8677,6 +11308,7 @@ func UnsafeHyperlinkToGlibFull(c Hyperlink) unsafe.Pointer {
 }
 
 // GetEndIndex wraps atk_hyperlink_get_end_index
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -8699,6 +11331,7 @@ func (link_ *HyperlinkInstance) GetEndIndex() int {
 }
 
 // GetNAnchors wraps atk_hyperlink_get_n_anchors
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -8756,6 +11389,7 @@ func (link_ *HyperlinkInstance) GetObject(i int) Object {
 }
 
 // GetStartIndex wraps atk_hyperlink_get_start_index
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -8812,6 +11446,7 @@ func (link_ *HyperlinkInstance) GetURI(i int) string {
 }
 
 // IsInline wraps atk_hyperlink_is_inline
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -8839,6 +11474,7 @@ func (link_ *HyperlinkInstance) IsInline() bool {
 }
 
 // IsValid wraps atk_hyperlink_is_valid
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -8870,6 +11506,100 @@ func (link_ *HyperlinkInstance) IsValid() bool {
 func (o *HyperlinkInstance) ConnectLinkActivated(fn func(Hyperlink)) gobject.SignalHandle {
 	return o.Connect("link-activated", fn)
 }
+
+// HyperlinkOverrides is the struct used to override the default implementation of virtual methods.
+// it is generic over the extending instance type.
+type HyperlinkOverrides[Instance Hyperlink] struct {
+	// gobject.ObjectOverrides allows you to override virtual methods from the parent class gobject.Object
+	gobject.ObjectOverrides[Instance]
+
+	// GetEndIndex allows you to override the implementation of the virtual method get_end_index.
+	// The function returns the following values:
+	// 
+	// 	- goret int 
+	GetEndIndex func(Instance) int
+	// GetNAnchors allows you to override the implementation of the virtual method get_n_anchors.
+	// The function returns the following values:
+	// 
+	// 	- goret int 
+	GetNAnchors func(Instance) int
+	// GetObject allows you to override the implementation of the virtual method get_object.
+	// The function takes the following parameters:
+	// 
+	// 	- i int: a (zero-index) integer specifying the desired anchor 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret Object 
+	GetObject func(Instance, int) Object
+	// GetStartIndex allows you to override the implementation of the virtual method get_start_index.
+	// The function returns the following values:
+	// 
+	// 	- goret int 
+	GetStartIndex func(Instance) int
+	// GetURI allows you to override the implementation of the virtual method get_uri.
+	// The function takes the following parameters:
+	// 
+	// 	- i int: a (zero-index) integer specifying the desired anchor 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret string 
+	GetURI func(Instance, int) string
+	// IsValid allows you to override the implementation of the virtual method is_valid.
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	IsValid func(Instance) bool
+	// LinkActivated allows you to override the implementation of the virtual method link_activated.
+	LinkActivated func(Instance)
+	// LinkState allows you to override the implementation of the virtual method link_state.
+	// The function returns the following values:
+	// 
+	// 	- goret uint 
+	LinkState func(Instance) uint
+}
+
+// UnsafeApplyHyperlinkOverrides applies the overrides to init the gclass by setting the trampoline functions.
+// This is used by the bindings internally and only exported for visibility to other bindings code.
+func UnsafeApplyHyperlinkOverrides[Instance Hyperlink](gclass unsafe.Pointer, overrides HyperlinkOverrides[Instance]) {
+	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
+
+	pclass := (*C.AtkHyperlinkClass)(gclass)
+
+	if overrides.GetEndIndex != nil {
+		pclass.get_end_index = (*[0]byte)(C._gotk4_atk1_Hyperlink_get_end_index)
+	}
+
+	if overrides.GetNAnchors != nil {
+		pclass.get_n_anchors = (*[0]byte)(C._gotk4_atk1_Hyperlink_get_n_anchors)
+	}
+
+	if overrides.GetObject != nil {
+		pclass.get_object = (*[0]byte)(C._gotk4_atk1_Hyperlink_get_object)
+	}
+
+	if overrides.GetStartIndex != nil {
+		pclass.get_start_index = (*[0]byte)(C._gotk4_atk1_Hyperlink_get_start_index)
+	}
+
+	if overrides.GetURI != nil {
+		pclass.get_uri = (*[0]byte)(C._gotk4_atk1_Hyperlink_get_uri)
+	}
+
+	if overrides.IsValid != nil {
+		pclass.is_valid = (*[0]byte)(C._gotk4_atk1_Hyperlink_is_valid)
+	}
+
+	if overrides.LinkActivated != nil {
+		pclass.link_activated = (*[0]byte)(C._gotk4_atk1_Hyperlink_link_activated)
+	}
+
+	if overrides.LinkState != nil {
+		pclass.link_state = (*[0]byte)(C._gotk4_atk1_Hyperlink_link_state)
+	}
+}
+
 // MiscInstance is the instance type used by all types extending AtkMisc. It is used internally by the bindings. Users should use the interface [Misc] instead.
 type MiscInstance struct {
 	_ [0]func() // equal guard
@@ -8923,6 +11653,20 @@ func UnsafeMiscToGlibFull(c Misc) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
+// MiscOverrides is the struct used to override the default implementation of virtual methods.
+// it is generic over the extending instance type.
+type MiscOverrides[Instance Misc] struct {
+	// gobject.ObjectOverrides allows you to override virtual methods from the parent class gobject.Object
+	gobject.ObjectOverrides[Instance]
+
+}
+
+// UnsafeApplyMiscOverrides applies the overrides to init the gclass by setting the trampoline functions.
+// This is used by the bindings internally and only exported for visibility to other bindings code.
+func UnsafeApplyMiscOverrides[Instance Misc](gclass unsafe.Pointer, overrides MiscOverrides[Instance]) {
+	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
+}
+
 // ObjectInstance is the instance type used by all types extending AtkObject. It is used internally by the bindings. Users should use the interface [Object] instead.
 type ObjectInstance struct {
 	_ [0]func() // equal guard
@@ -8973,6 +11717,7 @@ type Object interface {
 	// Adds a relationship of the specified type with the specified target.
 	AddRelationship(RelationType, Object) bool
 	// GetAccessibleID wraps atk_object_get_accessible_id
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret string 
@@ -8980,6 +11725,7 @@ type Object interface {
 	// Gets the accessible id of the accessible.
 	GetAccessibleID() string
 	// GetDescription wraps atk_object_get_description
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret string 
@@ -8987,6 +11733,7 @@ type Object interface {
 	// Gets the accessible description of the accessible.
 	GetDescription() string
 	// GetHelpText wraps atk_object_get_help_text
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret string 
@@ -8994,6 +11741,7 @@ type Object interface {
 	// Gets the help text associated with the accessible.
 	GetHelpText() string
 	// GetIndexInParent wraps atk_object_get_index_in_parent
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int 
@@ -9002,6 +11750,7 @@ type Object interface {
 	// accessible does not have an accessible parent.
 	GetIndexInParent() int
 	// GetNAccessibleChildren wraps atk_object_get_n_accessible_children
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int 
@@ -9009,6 +11758,7 @@ type Object interface {
 	// Gets the number of accessible children of the accessible.
 	GetNAccessibleChildren() int
 	// GetName wraps atk_object_get_name
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret string 
@@ -9016,6 +11766,7 @@ type Object interface {
 	// Gets the accessible name of the accessible.
 	GetName() string
 	// GetObjectLocale wraps atk_object_get_object_locale
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret string 
@@ -9024,6 +11775,7 @@ type Object interface {
 	// of @accessible.
 	GetObjectLocale() string
 	// GetParent wraps atk_object_get_parent
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Object 
@@ -9038,6 +11790,7 @@ type Object interface {
 	// atk_object_set_parent(), use atk_object_peek_parent().
 	GetParent() Object
 	// GetRole wraps atk_object_get_role
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Role 
@@ -9057,6 +11810,7 @@ type Object interface {
 	// emitting a notification is expected.
 	NotifyStateChange(State, bool)
 	// PeekParent wraps atk_object_peek_parent
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Object 
@@ -9084,6 +11838,7 @@ type Object interface {
 	// at index 0, the second at index 1 and so on.
 	RefAccessibleChild(int) Object
 	// RefRelationSet wraps atk_object_ref_relation_set
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret RelationSet 
@@ -9091,6 +11846,7 @@ type Object interface {
 	// Gets the #AtkRelationSet associated with the object.
 	RefRelationSet() RelationSet
 	// RefStateSet wraps atk_object_ref_state_set
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret StateSet 
@@ -9308,6 +12064,7 @@ func (object *ObjectInstance) AddRelationship(relationship RelationType, target 
 }
 
 // GetAccessibleID wraps atk_object_get_accessible_id
+// 
 // The function returns the following values:
 // 
 // 	- goret string 
@@ -9330,6 +12087,7 @@ func (accessible *ObjectInstance) GetAccessibleID() string {
 }
 
 // GetDescription wraps atk_object_get_description
+// 
 // The function returns the following values:
 // 
 // 	- goret string 
@@ -9352,6 +12110,7 @@ func (accessible *ObjectInstance) GetDescription() string {
 }
 
 // GetHelpText wraps atk_object_get_help_text
+// 
 // The function returns the following values:
 // 
 // 	- goret string 
@@ -9374,6 +12133,7 @@ func (accessible *ObjectInstance) GetHelpText() string {
 }
 
 // GetIndexInParent wraps atk_object_get_index_in_parent
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -9397,6 +12157,7 @@ func (accessible *ObjectInstance) GetIndexInParent() int {
 }
 
 // GetNAccessibleChildren wraps atk_object_get_n_accessible_children
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -9419,6 +12180,7 @@ func (accessible *ObjectInstance) GetNAccessibleChildren() int {
 }
 
 // GetName wraps atk_object_get_name
+// 
 // The function returns the following values:
 // 
 // 	- goret string 
@@ -9441,6 +12203,7 @@ func (accessible *ObjectInstance) GetName() string {
 }
 
 // GetObjectLocale wraps atk_object_get_object_locale
+// 
 // The function returns the following values:
 // 
 // 	- goret string 
@@ -9464,6 +12227,7 @@ func (accessible *ObjectInstance) GetObjectLocale() string {
 }
 
 // GetParent wraps atk_object_get_parent
+// 
 // The function returns the following values:
 // 
 // 	- goret Object 
@@ -9493,6 +12257,7 @@ func (accessible *ObjectInstance) GetParent() Object {
 }
 
 // GetRole wraps atk_object_get_role
+// 
 // The function returns the following values:
 // 
 // 	- goret Role 
@@ -9543,6 +12308,7 @@ func (accessible *ObjectInstance) NotifyStateChange(state State, value bool) {
 }
 
 // PeekParent wraps atk_object_peek_parent
+// 
 // The function returns the following values:
 // 
 // 	- goret Object 
@@ -9603,6 +12369,7 @@ func (accessible *ObjectInstance) RefAccessibleChild(i int) Object {
 }
 
 // RefRelationSet wraps atk_object_ref_relation_set
+// 
 // The function returns the following values:
 // 
 // 	- goret RelationSet 
@@ -9625,6 +12392,7 @@ func (accessible *ObjectInstance) RefRelationSet() RelationSet {
 }
 
 // RefStateSet wraps atk_object_ref_state_set
+// 
 // The function returns the following values:
 // 
 // 	- goret StateSet 
@@ -9824,6 +12592,7 @@ func (accessible *ObjectInstance) SetRole(role Role) {
 func (o *ObjectInstance) ConnectActiveDescendantChanged(fn func(Object, unsafe.Pointer)) gobject.SignalHandle {
 	return o.Connect("active-descendant-changed", fn)
 }
+
 // ConnectAnnouncement connects the provided callback to the "announcement" signal
 //
 // The "announcement" signal can be emitted to pass an announcement on to
@@ -9833,6 +12602,7 @@ func (o *ObjectInstance) ConnectActiveDescendantChanged(fn func(Object, unsafe.P
 func (o *ObjectInstance) ConnectAnnouncement(fn func(Object, string)) gobject.SignalHandle {
 	return o.Connect("announcement", fn)
 }
+
 // ConnectAttributeChanged connects the provided callback to the "attribute-changed" signal
 //
 // The "attribute-changed" signal should be emitted when one of an object's
@@ -9840,6 +12610,7 @@ func (o *ObjectInstance) ConnectAnnouncement(fn func(Object, string)) gobject.Si
 func (o *ObjectInstance) ConnectAttributeChanged(fn func(Object, string, string)) gobject.SignalHandle {
 	return o.Connect("attribute-changed", fn)
 }
+
 // ConnectChildrenChanged connects the provided callback to the "children-changed" signal
 //
 // The signal "children-changed" is emitted when a child is added or
@@ -9848,6 +12619,7 @@ func (o *ObjectInstance) ConnectAttributeChanged(fn func(Object, string, string)
 func (o *ObjectInstance) ConnectChildrenChanged(fn func(Object, uint, unsafe.Pointer)) gobject.SignalHandle {
 	return o.Connect("children-changed", fn)
 }
+
 // ConnectFocusEvent connects the provided callback to the "focus-event" signal
 //
 // The signal "focus-event" is emitted when an object gained or lost
@@ -9855,6 +12627,7 @@ func (o *ObjectInstance) ConnectChildrenChanged(fn func(Object, uint, unsafe.Poi
 func (o *ObjectInstance) ConnectFocusEvent(fn func(Object, bool)) gobject.SignalHandle {
 	return o.Connect("focus-event", fn)
 }
+
 // ConnectNotification connects the provided callback to the "notification" signal
 //
 // The "notification" signal can be emitted to pass an announcement on to
@@ -9862,6 +12635,7 @@ func (o *ObjectInstance) ConnectFocusEvent(fn func(Object, bool)) gobject.Signal
 func (o *ObjectInstance) ConnectNotification(fn func(Object, string, int)) gobject.SignalHandle {
 	return o.Connect("notification", fn)
 }
+
 // ConnectPropertyChange connects the provided callback to the "property-change" signal
 //
 // The signal "property-change" is emitted when an object's property
@@ -9880,6 +12654,7 @@ func (o *ObjectInstance) ConnectNotification(fn func(Object, string, int)) gobje
 func (o *ObjectInstance) ConnectPropertyChange(fn func(Object, unsafe.Pointer)) gobject.SignalHandle {
 	return o.Connect("property-change", fn)
 }
+
 // ConnectStateChange connects the provided callback to the "state-change" signal
 //
 // The "state-change" signal is emitted when an object's state
@@ -9888,6 +12663,7 @@ func (o *ObjectInstance) ConnectPropertyChange(fn func(Object, unsafe.Pointer)) 
 func (o *ObjectInstance) ConnectStateChange(fn func(Object, string, bool)) gobject.SignalHandle {
 	return o.Connect("state-change", fn)
 }
+
 // ConnectVisibleDataChanged connects the provided callback to the "visible-data-changed" signal
 //
 // The "visible-data-changed" signal is emitted when the visual
@@ -9895,6 +12671,174 @@ func (o *ObjectInstance) ConnectStateChange(fn func(Object, string, bool)) gobje
 func (o *ObjectInstance) ConnectVisibleDataChanged(fn func(Object)) gobject.SignalHandle {
 	return o.Connect("visible-data-changed", fn)
 }
+
+// ObjectOverrides is the struct used to override the default implementation of virtual methods.
+// it is generic over the extending instance type.
+type ObjectOverrides[Instance Object] struct {
+	// gobject.ObjectOverrides allows you to override virtual methods from the parent class gobject.Object
+	gobject.ObjectOverrides[Instance]
+
+	// FocusEvent allows you to override the implementation of the virtual method focus_event.
+	// The function takes the following parameters:
+	// 
+	// 	- focusIn bool 
+	FocusEvent func(Instance, bool)
+	// GetDescription allows you to override the implementation of the virtual method get_description.
+	// The function returns the following values:
+	// 
+	// 	- goret string 
+	GetDescription func(Instance) string
+	// GetIndexInParent allows you to override the implementation of the virtual method get_index_in_parent.
+	// The function returns the following values:
+	// 
+	// 	- goret int 
+	GetIndexInParent func(Instance) int
+	// GetNChildren allows you to override the implementation of the virtual method get_n_children.
+	// The function returns the following values:
+	// 
+	// 	- goret int 
+	GetNChildren func(Instance) int
+	// GetName allows you to override the implementation of the virtual method get_name.
+	// The function returns the following values:
+	// 
+	// 	- goret string 
+	GetName func(Instance) string
+	// GetObjectLocale allows you to override the implementation of the virtual method get_object_locale.
+	// The function returns the following values:
+	// 
+	// 	- goret string 
+	GetObjectLocale func(Instance) string
+	// GetParent allows you to override the implementation of the virtual method get_parent.
+	// The function returns the following values:
+	// 
+	// 	- goret Object 
+	GetParent func(Instance) Object
+	// GetRole allows you to override the implementation of the virtual method get_role.
+	// The function returns the following values:
+	// 
+	// 	- goret Role 
+	GetRole func(Instance) Role
+	// PropertyChange allows you to override the implementation of the virtual method property_change.
+	// The function takes the following parameters:
+	// 
+	// 	- values *PropertyValues 
+	PropertyChange func(Instance, *PropertyValues)
+	// RefRelationSet allows you to override the implementation of the virtual method ref_relation_set.
+	// The function returns the following values:
+	// 
+	// 	- goret RelationSet 
+	RefRelationSet func(Instance) RelationSet
+	// RefStateSet allows you to override the implementation of the virtual method ref_state_set.
+	// The function returns the following values:
+	// 
+	// 	- goret StateSet 
+	RefStateSet func(Instance) StateSet
+	// SetDescription allows you to override the implementation of the virtual method set_description.
+	// The function takes the following parameters:
+	// 
+	// 	- description string: a character string to be set as the accessible description 
+	SetDescription func(Instance, string)
+	// SetName allows you to override the implementation of the virtual method set_name.
+	// The function takes the following parameters:
+	// 
+	// 	- name string: a character string to be set as the accessible name 
+	SetName func(Instance, string)
+	// SetParent allows you to override the implementation of the virtual method set_parent.
+	// The function takes the following parameters:
+	// 
+	// 	- parent Object: an #AtkObject to be set as the accessible parent 
+	SetParent func(Instance, Object)
+	// SetRole allows you to override the implementation of the virtual method set_role.
+	// The function takes the following parameters:
+	// 
+	// 	- role Role: an #AtkRole to be set as the role 
+	SetRole func(Instance, Role)
+	// StateChange allows you to override the implementation of the virtual method state_change.
+	// The function takes the following parameters:
+	// 
+	// 	- name string 
+	// 	- stateSet bool 
+	StateChange func(Instance, string, bool)
+	// VisibleDataChanged allows you to override the implementation of the virtual method visible_data_changed.
+	VisibleDataChanged func(Instance)
+}
+
+// UnsafeApplyObjectOverrides applies the overrides to init the gclass by setting the trampoline functions.
+// This is used by the bindings internally and only exported for visibility to other bindings code.
+func UnsafeApplyObjectOverrides[Instance Object](gclass unsafe.Pointer, overrides ObjectOverrides[Instance]) {
+	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
+
+	pclass := (*C.AtkObjectClass)(gclass)
+
+	if overrides.FocusEvent != nil {
+		pclass.focus_event = (*[0]byte)(C._gotk4_atk1_Object_focus_event)
+	}
+
+	if overrides.GetDescription != nil {
+		pclass.get_description = (*[0]byte)(C._gotk4_atk1_Object_get_description)
+	}
+
+	if overrides.GetIndexInParent != nil {
+		pclass.get_index_in_parent = (*[0]byte)(C._gotk4_atk1_Object_get_index_in_parent)
+	}
+
+	if overrides.GetNChildren != nil {
+		pclass.get_n_children = (*[0]byte)(C._gotk4_atk1_Object_get_n_children)
+	}
+
+	if overrides.GetName != nil {
+		pclass.get_name = (*[0]byte)(C._gotk4_atk1_Object_get_name)
+	}
+
+	if overrides.GetObjectLocale != nil {
+		pclass.get_object_locale = (*[0]byte)(C._gotk4_atk1_Object_get_object_locale)
+	}
+
+	if overrides.GetParent != nil {
+		pclass.get_parent = (*[0]byte)(C._gotk4_atk1_Object_get_parent)
+	}
+
+	if overrides.GetRole != nil {
+		pclass.get_role = (*[0]byte)(C._gotk4_atk1_Object_get_role)
+	}
+
+	if overrides.PropertyChange != nil {
+		pclass.property_change = (*[0]byte)(C._gotk4_atk1_Object_property_change)
+	}
+
+	if overrides.RefRelationSet != nil {
+		pclass.ref_relation_set = (*[0]byte)(C._gotk4_atk1_Object_ref_relation_set)
+	}
+
+	if overrides.RefStateSet != nil {
+		pclass.ref_state_set = (*[0]byte)(C._gotk4_atk1_Object_ref_state_set)
+	}
+
+	if overrides.SetDescription != nil {
+		pclass.set_description = (*[0]byte)(C._gotk4_atk1_Object_set_description)
+	}
+
+	if overrides.SetName != nil {
+		pclass.set_name = (*[0]byte)(C._gotk4_atk1_Object_set_name)
+	}
+
+	if overrides.SetParent != nil {
+		pclass.set_parent = (*[0]byte)(C._gotk4_atk1_Object_set_parent)
+	}
+
+	if overrides.SetRole != nil {
+		pclass.set_role = (*[0]byte)(C._gotk4_atk1_Object_set_role)
+	}
+
+	if overrides.StateChange != nil {
+		pclass.state_change = (*[0]byte)(C._gotk4_atk1_Object_state_change)
+	}
+
+	if overrides.VisibleDataChanged != nil {
+		pclass.visible_data_changed = (*[0]byte)(C._gotk4_atk1_Object_visible_data_changed)
+	}
+}
+
 // ObjectFactoryInstance is the instance type used by all types extending AtkObjectFactory. It is used internally by the bindings. Users should use the interface [ObjectFactory] instead.
 type ObjectFactoryInstance struct {
 	_ [0]func() // equal guard
@@ -9931,6 +12875,7 @@ type ObjectFactory interface {
 	// on behalf of @obj
 	CreateAccessible(gobject.Object) Object
 	// GetAccessibleType wraps atk_object_factory_get_accessible_type
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret gobject.Type 
@@ -10013,6 +12958,7 @@ func (factory *ObjectFactoryInstance) CreateAccessible(obj gobject.Object) Objec
 }
 
 // GetAccessibleType wraps atk_object_factory_get_accessible_type
+// 
 // The function returns the following values:
 // 
 // 	- goret gobject.Type 
@@ -10050,6 +12996,28 @@ func (factory *ObjectFactoryInstance) Invalidate() {
 	runtime.KeepAlive(factory)
 }
 
+// ObjectFactoryOverrides is the struct used to override the default implementation of virtual methods.
+// it is generic over the extending instance type.
+type ObjectFactoryOverrides[Instance ObjectFactory] struct {
+	// gobject.ObjectOverrides allows you to override virtual methods from the parent class gobject.Object
+	gobject.ObjectOverrides[Instance]
+
+	// Invalidate allows you to override the implementation of the virtual method invalidate.
+	Invalidate func(Instance)
+}
+
+// UnsafeApplyObjectFactoryOverrides applies the overrides to init the gclass by setting the trampoline functions.
+// This is used by the bindings internally and only exported for visibility to other bindings code.
+func UnsafeApplyObjectFactoryOverrides[Instance ObjectFactory](gclass unsafe.Pointer, overrides ObjectFactoryOverrides[Instance]) {
+	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
+
+	pclass := (*C.AtkObjectFactoryClass)(gclass)
+
+	if overrides.Invalidate != nil {
+		pclass.invalidate = (*[0]byte)(C._gotk4_atk1_ObjectFactory_invalidate)
+	}
+}
+
 // PlugInstance is the instance type used by all types extending AtkPlug. It is used internally by the bindings. Users should use the interface [Plug] instead.
 type PlugInstance struct {
 	_ [0]func() // equal guard
@@ -10068,6 +13036,7 @@ type Plug interface {
 	upcastToAtkPlug() *PlugInstance
 
 	// GetID wraps atk_plug_get_id
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret string 
@@ -10136,6 +13105,7 @@ func UnsafePlugToGlibFull(c Plug) unsafe.Pointer {
 }
 
 // NewPlug wraps atk_plug_new
+// 
 // The function returns the following values:
 // 
 // 	- goret Object 
@@ -10154,6 +13124,7 @@ func NewPlug() Object {
 }
 
 // GetID wraps atk_plug_get_id
+// 
 // The function returns the following values:
 // 
 // 	- goret string 
@@ -10208,6 +13179,31 @@ func (plug *PlugInstance) SetChild(child Object) {
 	C.atk_plug_set_child(carg0, carg1)
 	runtime.KeepAlive(plug)
 	runtime.KeepAlive(child)
+}
+
+// PlugOverrides is the struct used to override the default implementation of virtual methods.
+// it is generic over the extending instance type.
+type PlugOverrides[Instance Plug] struct {
+	// ObjectOverrides allows you to override virtual methods from the parent class Object
+	ObjectOverrides[Instance]
+
+	// GetObjectID allows you to override the implementation of the virtual method get_object_id.
+	// The function returns the following values:
+	// 
+	// 	- goret string 
+	GetObjectID func(Instance) string
+}
+
+// UnsafeApplyPlugOverrides applies the overrides to init the gclass by setting the trampoline functions.
+// This is used by the bindings internally and only exported for visibility to other bindings code.
+func UnsafeApplyPlugOverrides[Instance Plug](gclass unsafe.Pointer, overrides PlugOverrides[Instance]) {
+	UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
+
+	pclass := (*C.AtkPlugClass)(gclass)
+
+	if overrides.GetObjectID != nil {
+		pclass.get_object_id = (*[0]byte)(C._gotk4_atk1_Plug_get_object_id)
+	}
 }
 
 // RegistryInstance is the instance type used by all types extending AtkRegistry. It is used internally by the bindings. Users should use the interface [Registry] instead.
@@ -10400,6 +13396,20 @@ func (registry *RegistryInstance) SetFactoryType(typ gobject.Type, factoryType g
 	runtime.KeepAlive(factoryType)
 }
 
+// RegistryOverrides is the struct used to override the default implementation of virtual methods.
+// it is generic over the extending instance type.
+type RegistryOverrides[Instance Registry] struct {
+	// gobject.ObjectOverrides allows you to override virtual methods from the parent class gobject.Object
+	gobject.ObjectOverrides[Instance]
+
+}
+
+// UnsafeApplyRegistryOverrides applies the overrides to init the gclass by setting the trampoline functions.
+// This is used by the bindings internally and only exported for visibility to other bindings code.
+func UnsafeApplyRegistryOverrides[Instance Registry](gclass unsafe.Pointer, overrides RegistryOverrides[Instance]) {
+	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
+}
+
 // RelationInstance is the instance type used by all types extending AtkRelation. It is used internally by the bindings. Users should use the interface [Relation] instead.
 type RelationInstance struct {
 	_ [0]func() // equal guard
@@ -10431,6 +13441,7 @@ type Relation interface {
 	// not already present.  See also atk_object_add_relationship().
 	AddTarget(Object)
 	// GetRelationType wraps atk_relation_get_relation_type
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret RelationType 
@@ -10544,6 +13555,7 @@ func (relation *RelationInstance) AddTarget(target Object) {
 }
 
 // GetRelationType wraps atk_relation_get_relation_type
+// 
 // The function returns the following values:
 // 
 // 	- goret RelationType 
@@ -10595,6 +13607,20 @@ func (relation *RelationInstance) RemoveTarget(target Object) bool {
 	}
 
 	return goret
+}
+
+// RelationOverrides is the struct used to override the default implementation of virtual methods.
+// it is generic over the extending instance type.
+type RelationOverrides[Instance Relation] struct {
+	// gobject.ObjectOverrides allows you to override virtual methods from the parent class gobject.Object
+	gobject.ObjectOverrides[Instance]
+
+}
+
+// UnsafeApplyRelationOverrides applies the overrides to init the gclass by setting the trampoline functions.
+// This is used by the bindings internally and only exported for visibility to other bindings code.
+func UnsafeApplyRelationOverrides[Instance Relation](gclass unsafe.Pointer, overrides RelationOverrides[Instance]) {
+	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
 }
 
 // RelationSetInstance is the instance type used by all types extending AtkRelationSet. It is used internally by the bindings. Users should use the interface [RelationSet] instead.
@@ -10675,6 +13701,7 @@ type RelationSet interface {
 	// @target.
 	ContainsTarget(RelationType, Object) bool
 	// GetNRelations wraps atk_relation_set_get_n_relations
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int 
@@ -10752,6 +13779,7 @@ func UnsafeRelationSetToGlibFull(c RelationSet) unsafe.Pointer {
 }
 
 // NewRelationSet wraps atk_relation_set_new
+// 
 // The function returns the following values:
 // 
 // 	- goret RelationSet 
@@ -10890,6 +13918,7 @@ func (set *RelationSetInstance) ContainsTarget(relationship RelationType, target
 }
 
 // GetNRelations wraps atk_relation_set_get_n_relations
+// 
 // The function returns the following values:
 // 
 // 	- goret int 
@@ -10992,6 +14021,20 @@ func (set *RelationSetInstance) Remove(relation Relation) {
 	runtime.KeepAlive(relation)
 }
 
+// RelationSetOverrides is the struct used to override the default implementation of virtual methods.
+// it is generic over the extending instance type.
+type RelationSetOverrides[Instance RelationSet] struct {
+	// gobject.ObjectOverrides allows you to override virtual methods from the parent class gobject.Object
+	gobject.ObjectOverrides[Instance]
+
+}
+
+// UnsafeApplyRelationSetOverrides applies the overrides to init the gclass by setting the trampoline functions.
+// This is used by the bindings internally and only exported for visibility to other bindings code.
+func UnsafeApplyRelationSetOverrides[Instance RelationSet](gclass unsafe.Pointer, overrides RelationSetOverrides[Instance]) {
+	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
+}
+
 // SocketInstance is the instance type used by all types extending AtkSocket. It is used internally by the bindings. Users should use the interface [Socket] instead.
 type SocketInstance struct {
 	_ [0]func() // equal guard
@@ -11050,6 +14093,7 @@ type Socket interface {
 	// as needed.
 	Embed(string)
 	// IsOccupied wraps atk_socket_is_occupied
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
@@ -11095,6 +14139,7 @@ func UnsafeSocketToGlibFull(c Socket) unsafe.Pointer {
 }
 
 // NewSocket wraps atk_socket_new
+// 
 // The function returns the following values:
 // 
 // 	- goret Object 
@@ -11142,6 +14187,7 @@ func (obj *SocketInstance) Embed(plugId string) {
 }
 
 // IsOccupied wraps atk_socket_is_occupied
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -11163,6 +14209,31 @@ func (obj *SocketInstance) IsOccupied() bool {
 	}
 
 	return goret
+}
+
+// SocketOverrides is the struct used to override the default implementation of virtual methods.
+// it is generic over the extending instance type.
+type SocketOverrides[Instance Socket] struct {
+	// ObjectOverrides allows you to override virtual methods from the parent class Object
+	ObjectOverrides[Instance]
+
+	// Embed allows you to override the implementation of the virtual method embed.
+	// The function takes the following parameters:
+	// 
+	// 	- plugId string: the ID of an #AtkPlug 
+	Embed func(Instance, string)
+}
+
+// UnsafeApplySocketOverrides applies the overrides to init the gclass by setting the trampoline functions.
+// This is used by the bindings internally and only exported for visibility to other bindings code.
+func UnsafeApplySocketOverrides[Instance Socket](gclass unsafe.Pointer, overrides SocketOverrides[Instance]) {
+	UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
+
+	pclass := (*C.AtkSocketClass)(gclass)
+
+	if overrides.Embed != nil {
+		pclass.embed = (*[0]byte)(C._gotk4_atk1_Socket_embed)
+	}
 }
 
 // StateSetInstance is the instance type used by all types extending AtkStateSet. It is used internally by the bindings. Users should use the interface [StateSet] instead.
@@ -11258,6 +14329,7 @@ type StateSet interface {
 	// specified set.
 	ContainsStates([]StateType) bool
 	// IsEmpty wraps atk_state_set_is_empty
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
@@ -11344,6 +14416,7 @@ func UnsafeStateSetToGlibFull(c StateSet) unsafe.Pointer {
 }
 
 // NewStateSet wraps atk_state_set_new
+// 
 // The function returns the following values:
 // 
 // 	- goret StateSet 
@@ -11540,6 +14613,7 @@ func (set *StateSetInstance) ContainsStates(types []StateType) bool {
 }
 
 // IsEmpty wraps atk_state_set_is_empty
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -11664,6 +14738,20 @@ func (set *StateSetInstance) XorSets(compareSet StateSet) StateSet {
 	return goret
 }
 
+// StateSetOverrides is the struct used to override the default implementation of virtual methods.
+// it is generic over the extending instance type.
+type StateSetOverrides[Instance StateSet] struct {
+	// gobject.ObjectOverrides allows you to override virtual methods from the parent class gobject.Object
+	gobject.ObjectOverrides[Instance]
+
+}
+
+// UnsafeApplyStateSetOverrides applies the overrides to init the gclass by setting the trampoline functions.
+// This is used by the bindings internally and only exported for visibility to other bindings code.
+func UnsafeApplyStateSetOverrides[Instance StateSet](gclass unsafe.Pointer, overrides StateSetOverrides[Instance]) {
+	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
+}
+
 // UtilInstance is the instance type used by all types extending AtkUtil. It is used internally by the bindings. Users should use the interface [Util] instead.
 type UtilInstance struct {
 	_ [0]func() // equal guard
@@ -11719,6 +14807,20 @@ func UnsafeUtilToGlibFull(c Util) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
+// UtilOverrides is the struct used to override the default implementation of virtual methods.
+// it is generic over the extending instance type.
+type UtilOverrides[Instance Util] struct {
+	// gobject.ObjectOverrides allows you to override virtual methods from the parent class gobject.Object
+	gobject.ObjectOverrides[Instance]
+
+}
+
+// UnsafeApplyUtilOverrides applies the overrides to init the gclass by setting the trampoline functions.
+// This is used by the bindings internally and only exported for visibility to other bindings code.
+func UnsafeApplyUtilOverrides[Instance Util](gclass unsafe.Pointer, overrides UtilOverrides[Instance]) {
+	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
+}
+
 // GObjectAccessibleInstance is the instance type used by all types extending AtkGObjectAccessible. It is used internally by the bindings. Users should use the interface [GObjectAccessible] instead.
 type GObjectAccessibleInstance struct {
 	_ [0]func() // equal guard
@@ -11740,6 +14842,7 @@ type GObjectAccessible interface {
 	upcastToAtkGObjectAccessible() *GObjectAccessibleInstance
 
 	// GetObject wraps atk_gobject_accessible_get_object
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret gobject.Object 
@@ -11812,6 +14915,7 @@ func GObjectAccessibleForObject(obj gobject.Object) Object {
 }
 
 // GetObject wraps atk_gobject_accessible_get_object
+// 
 // The function returns the following values:
 // 
 // 	- goret gobject.Object 
@@ -11831,6 +14935,20 @@ func (obj *GObjectAccessibleInstance) GetObject() gobject.Object {
 	goret = gobject.UnsafeObjectFromGlibNone(unsafe.Pointer(cret))
 
 	return goret
+}
+
+// GObjectAccessibleOverrides is the struct used to override the default implementation of virtual methods.
+// it is generic over the extending instance type.
+type GObjectAccessibleOverrides[Instance GObjectAccessible] struct {
+	// ObjectOverrides allows you to override virtual methods from the parent class Object
+	ObjectOverrides[Instance]
+
+}
+
+// UnsafeApplyGObjectAccessibleOverrides applies the overrides to init the gclass by setting the trampoline functions.
+// This is used by the bindings internally and only exported for visibility to other bindings code.
+func UnsafeApplyGObjectAccessibleOverrides[Instance GObjectAccessible](gclass unsafe.Pointer, overrides GObjectAccessibleOverrides[Instance]) {
+	UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
 }
 
 // NoOpObjectInstance is the instance type used by all types extending AtkNoOpObject. It is used internally by the bindings. Users should use the interface [NoOpObject] instead.
@@ -11979,6 +15097,20 @@ func NewNoOpObject(obj gobject.Object) Object {
 	return goret
 }
 
+// NoOpObjectOverrides is the struct used to override the default implementation of virtual methods.
+// it is generic over the extending instance type.
+type NoOpObjectOverrides[Instance NoOpObject] struct {
+	// ObjectOverrides allows you to override virtual methods from the parent class Object
+	ObjectOverrides[Instance]
+
+}
+
+// UnsafeApplyNoOpObjectOverrides applies the overrides to init the gclass by setting the trampoline functions.
+// This is used by the bindings internally and only exported for visibility to other bindings code.
+func UnsafeApplyNoOpObjectOverrides[Instance NoOpObject](gclass unsafe.Pointer, overrides NoOpObjectOverrides[Instance]) {
+	UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
+}
+
 // NoOpObjectFactoryInstance is the instance type used by all types extending AtkNoOpObjectFactory. It is used internally by the bindings. Users should use the interface [NoOpObjectFactory] instead.
 type NoOpObjectFactoryInstance struct {
 	_ [0]func() // equal guard
@@ -12036,6 +15168,7 @@ func UnsafeNoOpObjectFactoryToGlibFull(c NoOpObjectFactory) unsafe.Pointer {
 }
 
 // NewNoOpObjectFactory wraps atk_no_op_object_factory_new
+// 
 // The function returns the following values:
 // 
 // 	- goret ObjectFactory 
@@ -12052,6 +15185,20 @@ func NewNoOpObjectFactory() ObjectFactory {
 	goret = UnsafeObjectFactoryFromGlibFull(unsafe.Pointer(cret))
 
 	return goret
+}
+
+// NoOpObjectFactoryOverrides is the struct used to override the default implementation of virtual methods.
+// it is generic over the extending instance type.
+type NoOpObjectFactoryOverrides[Instance NoOpObjectFactory] struct {
+	// ObjectFactoryOverrides allows you to override virtual methods from the parent class ObjectFactory
+	ObjectFactoryOverrides[Instance]
+
+}
+
+// UnsafeApplyNoOpObjectFactoryOverrides applies the overrides to init the gclass by setting the trampoline functions.
+// This is used by the bindings internally and only exported for visibility to other bindings code.
+func UnsafeApplyNoOpObjectFactoryOverrides[Instance NoOpObjectFactory](gclass unsafe.Pointer, overrides NoOpObjectFactoryOverrides[Instance]) {
+	UnsafeApplyObjectFactoryOverrides(gclass, overrides.ObjectFactoryOverrides)
 }
 
 // ActionIface wraps AtkActionIface
@@ -12075,7 +15222,7 @@ func UnsafeActionIfaceFromGlibBorrow(p unsafe.Pointer) *ActionIface {
 	return &ActionIface{&actionIface{(*C.AtkActionIface)(p)}}
 }
 
-// UnsafeActionIfaceFromGlibNone is used to convert raw C.AtkActionIface pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeActionIfaceFromGlibNone is used to convert raw C.AtkActionIface pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeActionIfaceFromGlibNone(p unsafe.Pointer) *ActionIface {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeActionIfaceFromGlibBorrow(p)
@@ -12088,7 +15235,7 @@ func UnsafeActionIfaceFromGlibNone(p unsafe.Pointer) *ActionIface {
 	return wrapped
 }
 
-// UnsafeActionIfaceFromGlibFull is used to convert raw C.AtkActionIface pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeActionIfaceFromGlibFull is used to convert raw C.AtkActionIface pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeActionIfaceFromGlibFull(p unsafe.Pointer) *ActionIface {
 	wrapped := UnsafeActionIfaceFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -12120,6 +15267,7 @@ func UnsafeActionIfaceToGlibFull(a *ActionIface) unsafe.Pointer {
 	a.native = nil // ActionIface is invalid from here on
 	return _p
 }
+
 // Attribute wraps AtkAttribute
 //
 // AtkAttribute is a string name/value pair representing a generic
@@ -12147,7 +15295,7 @@ func UnsafeAttributeFromGlibBorrow(p unsafe.Pointer) *Attribute {
 	return &Attribute{&attribute{(*C.AtkAttribute)(p)}}
 }
 
-// UnsafeAttributeFromGlibNone is used to convert raw C.AtkAttribute pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeAttributeFromGlibNone is used to convert raw C.AtkAttribute pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeAttributeFromGlibNone(p unsafe.Pointer) *Attribute {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeAttributeFromGlibBorrow(p)
@@ -12160,7 +15308,7 @@ func UnsafeAttributeFromGlibNone(p unsafe.Pointer) *Attribute {
 	return wrapped
 }
 
-// UnsafeAttributeFromGlibFull is used to convert raw C.AtkAttribute pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeAttributeFromGlibFull is used to convert raw C.AtkAttribute pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeAttributeFromGlibFull(p unsafe.Pointer) *Attribute {
 	wrapped := UnsafeAttributeFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -12192,6 +15340,7 @@ func UnsafeAttributeToGlibFull(a *Attribute) unsafe.Pointer {
 	a.native = nil // Attribute is invalid from here on
 	return _p
 }
+
 // ComponentIface wraps AtkComponentIface
 //
 // The AtkComponent interface should be supported by any object that is
@@ -12212,7 +15361,7 @@ func UnsafeComponentIfaceFromGlibBorrow(p unsafe.Pointer) *ComponentIface {
 	return &ComponentIface{&componentIface{(*C.AtkComponentIface)(p)}}
 }
 
-// UnsafeComponentIfaceFromGlibNone is used to convert raw C.AtkComponentIface pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeComponentIfaceFromGlibNone is used to convert raw C.AtkComponentIface pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeComponentIfaceFromGlibNone(p unsafe.Pointer) *ComponentIface {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeComponentIfaceFromGlibBorrow(p)
@@ -12225,7 +15374,7 @@ func UnsafeComponentIfaceFromGlibNone(p unsafe.Pointer) *ComponentIface {
 	return wrapped
 }
 
-// UnsafeComponentIfaceFromGlibFull is used to convert raw C.AtkComponentIface pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeComponentIfaceFromGlibFull is used to convert raw C.AtkComponentIface pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeComponentIfaceFromGlibFull(p unsafe.Pointer) *ComponentIface {
 	wrapped := UnsafeComponentIfaceFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -12257,6 +15406,7 @@ func UnsafeComponentIfaceToGlibFull(c *ComponentIface) unsafe.Pointer {
 	c.native = nil // ComponentIface is invalid from here on
 	return _p
 }
+
 // DocumentIface wraps AtkDocumentIface
 type DocumentIface struct {
 	*documentIface
@@ -12272,7 +15422,7 @@ func UnsafeDocumentIfaceFromGlibBorrow(p unsafe.Pointer) *DocumentIface {
 	return &DocumentIface{&documentIface{(*C.AtkDocumentIface)(p)}}
 }
 
-// UnsafeDocumentIfaceFromGlibNone is used to convert raw C.AtkDocumentIface pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeDocumentIfaceFromGlibNone is used to convert raw C.AtkDocumentIface pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeDocumentIfaceFromGlibNone(p unsafe.Pointer) *DocumentIface {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeDocumentIfaceFromGlibBorrow(p)
@@ -12285,7 +15435,7 @@ func UnsafeDocumentIfaceFromGlibNone(p unsafe.Pointer) *DocumentIface {
 	return wrapped
 }
 
-// UnsafeDocumentIfaceFromGlibFull is used to convert raw C.AtkDocumentIface pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeDocumentIfaceFromGlibFull is used to convert raw C.AtkDocumentIface pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeDocumentIfaceFromGlibFull(p unsafe.Pointer) *DocumentIface {
 	wrapped := UnsafeDocumentIfaceFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -12317,6 +15467,7 @@ func UnsafeDocumentIfaceToGlibFull(d *DocumentIface) unsafe.Pointer {
 	d.native = nil // DocumentIface is invalid from here on
 	return _p
 }
+
 // EditableTextIface wraps AtkEditableTextIface
 type EditableTextIface struct {
 	*editableTextIface
@@ -12332,7 +15483,7 @@ func UnsafeEditableTextIfaceFromGlibBorrow(p unsafe.Pointer) *EditableTextIface 
 	return &EditableTextIface{&editableTextIface{(*C.AtkEditableTextIface)(p)}}
 }
 
-// UnsafeEditableTextIfaceFromGlibNone is used to convert raw C.AtkEditableTextIface pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeEditableTextIfaceFromGlibNone is used to convert raw C.AtkEditableTextIface pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeEditableTextIfaceFromGlibNone(p unsafe.Pointer) *EditableTextIface {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeEditableTextIfaceFromGlibBorrow(p)
@@ -12345,7 +15496,7 @@ func UnsafeEditableTextIfaceFromGlibNone(p unsafe.Pointer) *EditableTextIface {
 	return wrapped
 }
 
-// UnsafeEditableTextIfaceFromGlibFull is used to convert raw C.AtkEditableTextIface pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeEditableTextIfaceFromGlibFull is used to convert raw C.AtkEditableTextIface pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeEditableTextIfaceFromGlibFull(p unsafe.Pointer) *EditableTextIface {
 	wrapped := UnsafeEditableTextIfaceFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -12377,7 +15528,10 @@ func UnsafeEditableTextIfaceToGlibFull(e *EditableTextIface) unsafe.Pointer {
 	e.native = nil // EditableTextIface is invalid from here on
 	return _p
 }
+
 // GObjectAccessibleClass wraps AtkGObjectAccessibleClass
+// 
+// GObjectAccessibleClass is the type struct for [GObjectAccessible]
 type GObjectAccessibleClass struct {
 	*gObjectAccessibleClass
 }
@@ -12392,31 +15546,6 @@ func UnsafeGObjectAccessibleClassFromGlibBorrow(p unsafe.Pointer) *GObjectAccess
 	return &GObjectAccessibleClass{&gObjectAccessibleClass{(*C.AtkGObjectAccessibleClass)(p)}}
 }
 
-// UnsafeGObjectAccessibleClassFromGlibNone is used to convert raw C.AtkGObjectAccessibleClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeGObjectAccessibleClassFromGlibNone(p unsafe.Pointer) *GObjectAccessibleClass {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeGObjectAccessibleClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.gObjectAccessibleClass,
-		func (intern *gObjectAccessibleClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeGObjectAccessibleClassFromGlibFull is used to convert raw C.AtkGObjectAccessibleClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeGObjectAccessibleClassFromGlibFull(p unsafe.Pointer) *GObjectAccessibleClass {
-	wrapped := UnsafeGObjectAccessibleClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.gObjectAccessibleClass,
-		func (intern *gObjectAccessibleClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
 // UnsafeGObjectAccessibleClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
 // 
 // After this is called, no other method on [GObjectAccessibleClass] is expected to work anymore.
@@ -12429,15 +15558,18 @@ func UnsafeGObjectAccessibleClassToGlibNone(g *GObjectAccessibleClass) unsafe.Po
 	return unsafe.Pointer(g.native)
 }
 
-// UnsafeGObjectAccessibleClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeGObjectAccessibleClassToGlibFull(g *GObjectAccessibleClass) unsafe.Pointer {
-	runtime.SetFinalizer(g.gObjectAccessibleClass, nil)
-	_p := unsafe.Pointer(g.native)
-	g.native = nil // GObjectAccessibleClass is invalid from here on
-	return _p
+// ParentClass returns the type struct of the parent class of this type struct.
+// This essentially casts the underlying c pointer.
+func (g *GObjectAccessibleClass) ParentClass() *ObjectClass {
+	parent := UnsafeObjectClassFromGlibBorrow(UnsafeGObjectAccessibleClassToGlibNone(g))
+	// attach a cleanup to keep the instance alive as long as the parent is referenced
+	runtime.AddCleanup(parent, func(_ *GObjectAccessibleClass) {}, g)
+	return parent
 }
+
 // HyperlinkClass wraps AtkHyperlinkClass
+// 
+// HyperlinkClass is the type struct for [Hyperlink]
 type HyperlinkClass struct {
 	*hyperlinkClass
 }
@@ -12452,31 +15584,6 @@ func UnsafeHyperlinkClassFromGlibBorrow(p unsafe.Pointer) *HyperlinkClass {
 	return &HyperlinkClass{&hyperlinkClass{(*C.AtkHyperlinkClass)(p)}}
 }
 
-// UnsafeHyperlinkClassFromGlibNone is used to convert raw C.AtkHyperlinkClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeHyperlinkClassFromGlibNone(p unsafe.Pointer) *HyperlinkClass {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeHyperlinkClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.hyperlinkClass,
-		func (intern *hyperlinkClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeHyperlinkClassFromGlibFull is used to convert raw C.AtkHyperlinkClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeHyperlinkClassFromGlibFull(p unsafe.Pointer) *HyperlinkClass {
-	wrapped := UnsafeHyperlinkClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.hyperlinkClass,
-		func (intern *hyperlinkClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
 // UnsafeHyperlinkClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
 // 
 // After this is called, no other method on [HyperlinkClass] is expected to work anymore.
@@ -12489,14 +15596,15 @@ func UnsafeHyperlinkClassToGlibNone(h *HyperlinkClass) unsafe.Pointer {
 	return unsafe.Pointer(h.native)
 }
 
-// UnsafeHyperlinkClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeHyperlinkClassToGlibFull(h *HyperlinkClass) unsafe.Pointer {
-	runtime.SetFinalizer(h.hyperlinkClass, nil)
-	_p := unsafe.Pointer(h.native)
-	h.native = nil // HyperlinkClass is invalid from here on
-	return _p
+// ParentClass returns the type struct of the parent class of this type struct.
+// This essentially casts the underlying c pointer.
+func (h *HyperlinkClass) ParentClass() *gobject.ObjectClass {
+	parent := gobject.UnsafeObjectClassFromGlibBorrow(UnsafeHyperlinkClassToGlibNone(h))
+	// attach a cleanup to keep the instance alive as long as the parent is referenced
+	runtime.AddCleanup(parent, func(_ *HyperlinkClass) {}, h)
+	return parent
 }
+
 // HyperlinkImplIface wraps AtkHyperlinkImplIface
 type HyperlinkImplIface struct {
 	*hyperlinkImplIface
@@ -12512,7 +15620,7 @@ func UnsafeHyperlinkImplIfaceFromGlibBorrow(p unsafe.Pointer) *HyperlinkImplIfac
 	return &HyperlinkImplIface{&hyperlinkImplIface{(*C.AtkHyperlinkImplIface)(p)}}
 }
 
-// UnsafeHyperlinkImplIfaceFromGlibNone is used to convert raw C.AtkHyperlinkImplIface pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeHyperlinkImplIfaceFromGlibNone is used to convert raw C.AtkHyperlinkImplIface pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeHyperlinkImplIfaceFromGlibNone(p unsafe.Pointer) *HyperlinkImplIface {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeHyperlinkImplIfaceFromGlibBorrow(p)
@@ -12525,7 +15633,7 @@ func UnsafeHyperlinkImplIfaceFromGlibNone(p unsafe.Pointer) *HyperlinkImplIface 
 	return wrapped
 }
 
-// UnsafeHyperlinkImplIfaceFromGlibFull is used to convert raw C.AtkHyperlinkImplIface pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeHyperlinkImplIfaceFromGlibFull is used to convert raw C.AtkHyperlinkImplIface pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeHyperlinkImplIfaceFromGlibFull(p unsafe.Pointer) *HyperlinkImplIface {
 	wrapped := UnsafeHyperlinkImplIfaceFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -12557,6 +15665,7 @@ func UnsafeHyperlinkImplIfaceToGlibFull(h *HyperlinkImplIface) unsafe.Pointer {
 	h.native = nil // HyperlinkImplIface is invalid from here on
 	return _p
 }
+
 // HypertextIface wraps AtkHypertextIface
 type HypertextIface struct {
 	*hypertextIface
@@ -12572,7 +15681,7 @@ func UnsafeHypertextIfaceFromGlibBorrow(p unsafe.Pointer) *HypertextIface {
 	return &HypertextIface{&hypertextIface{(*C.AtkHypertextIface)(p)}}
 }
 
-// UnsafeHypertextIfaceFromGlibNone is used to convert raw C.AtkHypertextIface pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeHypertextIfaceFromGlibNone is used to convert raw C.AtkHypertextIface pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeHypertextIfaceFromGlibNone(p unsafe.Pointer) *HypertextIface {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeHypertextIfaceFromGlibBorrow(p)
@@ -12585,7 +15694,7 @@ func UnsafeHypertextIfaceFromGlibNone(p unsafe.Pointer) *HypertextIface {
 	return wrapped
 }
 
-// UnsafeHypertextIfaceFromGlibFull is used to convert raw C.AtkHypertextIface pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeHypertextIfaceFromGlibFull is used to convert raw C.AtkHypertextIface pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeHypertextIfaceFromGlibFull(p unsafe.Pointer) *HypertextIface {
 	wrapped := UnsafeHypertextIfaceFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -12617,6 +15726,7 @@ func UnsafeHypertextIfaceToGlibFull(h *HypertextIface) unsafe.Pointer {
 	h.native = nil // HypertextIface is invalid from here on
 	return _p
 }
+
 // ImageIface wraps AtkImageIface
 type ImageIface struct {
 	*imageIface
@@ -12632,7 +15742,7 @@ func UnsafeImageIfaceFromGlibBorrow(p unsafe.Pointer) *ImageIface {
 	return &ImageIface{&imageIface{(*C.AtkImageIface)(p)}}
 }
 
-// UnsafeImageIfaceFromGlibNone is used to convert raw C.AtkImageIface pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeImageIfaceFromGlibNone is used to convert raw C.AtkImageIface pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeImageIfaceFromGlibNone(p unsafe.Pointer) *ImageIface {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeImageIfaceFromGlibBorrow(p)
@@ -12645,7 +15755,7 @@ func UnsafeImageIfaceFromGlibNone(p unsafe.Pointer) *ImageIface {
 	return wrapped
 }
 
-// UnsafeImageIfaceFromGlibFull is used to convert raw C.AtkImageIface pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeImageIfaceFromGlibFull is used to convert raw C.AtkImageIface pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeImageIfaceFromGlibFull(p unsafe.Pointer) *ImageIface {
 	wrapped := UnsafeImageIfaceFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -12677,6 +15787,7 @@ func UnsafeImageIfaceToGlibFull(i *ImageIface) unsafe.Pointer {
 	i.native = nil // ImageIface is invalid from here on
 	return _p
 }
+
 // Implementor wraps AtkImplementor
 type Implementor struct {
 	*implementor
@@ -12692,7 +15803,7 @@ func UnsafeImplementorFromGlibBorrow(p unsafe.Pointer) *Implementor {
 	return &Implementor{&implementor{(*C.AtkImplementor)(p)}}
 }
 
-// UnsafeImplementorFromGlibNone is used to convert raw C.AtkImplementor pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeImplementorFromGlibNone is used to convert raw C.AtkImplementor pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeImplementorFromGlibNone(p unsafe.Pointer) *Implementor {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeImplementorFromGlibBorrow(p)
@@ -12705,7 +15816,7 @@ func UnsafeImplementorFromGlibNone(p unsafe.Pointer) *Implementor {
 	return wrapped
 }
 
-// UnsafeImplementorFromGlibFull is used to convert raw C.AtkImplementor pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeImplementorFromGlibFull is used to convert raw C.AtkImplementor pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeImplementorFromGlibFull(p unsafe.Pointer) *Implementor {
 	wrapped := UnsafeImplementorFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -12737,7 +15848,9 @@ func UnsafeImplementorToGlibFull(i *Implementor) unsafe.Pointer {
 	i.native = nil // Implementor is invalid from here on
 	return _p
 }
+
 // RefAccessible wraps atk_implementor_ref_accessible
+// 
 // The function returns the following values:
 // 
 // 	- goret Object 
@@ -12777,7 +15890,7 @@ func UnsafeKeyEventStructFromGlibBorrow(p unsafe.Pointer) *KeyEventStruct {
 	return &KeyEventStruct{&keyEventStruct{(*C.AtkKeyEventStruct)(p)}}
 }
 
-// UnsafeKeyEventStructFromGlibNone is used to convert raw C.AtkKeyEventStruct pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeKeyEventStructFromGlibNone is used to convert raw C.AtkKeyEventStruct pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeKeyEventStructFromGlibNone(p unsafe.Pointer) *KeyEventStruct {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeKeyEventStructFromGlibBorrow(p)
@@ -12790,7 +15903,7 @@ func UnsafeKeyEventStructFromGlibNone(p unsafe.Pointer) *KeyEventStruct {
 	return wrapped
 }
 
-// UnsafeKeyEventStructFromGlibFull is used to convert raw C.AtkKeyEventStruct pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeKeyEventStructFromGlibFull is used to convert raw C.AtkKeyEventStruct pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeKeyEventStructFromGlibFull(p unsafe.Pointer) *KeyEventStruct {
 	wrapped := UnsafeKeyEventStructFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -12822,9 +15935,12 @@ func UnsafeKeyEventStructToGlibFull(k *KeyEventStruct) unsafe.Pointer {
 	k.native = nil // KeyEventStruct is invalid from here on
 	return _p
 }
+
 // MiscClass wraps AtkMiscClass
 //
 // Usage of AtkMisc is deprecated since 2.12 and heavily discouraged.
+// 
+// MiscClass is the type struct for [Misc]
 type MiscClass struct {
 	*miscClass
 }
@@ -12839,31 +15955,6 @@ func UnsafeMiscClassFromGlibBorrow(p unsafe.Pointer) *MiscClass {
 	return &MiscClass{&miscClass{(*C.AtkMiscClass)(p)}}
 }
 
-// UnsafeMiscClassFromGlibNone is used to convert raw C.AtkMiscClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeMiscClassFromGlibNone(p unsafe.Pointer) *MiscClass {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeMiscClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.miscClass,
-		func (intern *miscClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeMiscClassFromGlibFull is used to convert raw C.AtkMiscClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeMiscClassFromGlibFull(p unsafe.Pointer) *MiscClass {
-	wrapped := UnsafeMiscClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.miscClass,
-		func (intern *miscClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
 // UnsafeMiscClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
 // 
 // After this is called, no other method on [MiscClass] is expected to work anymore.
@@ -12876,15 +15967,18 @@ func UnsafeMiscClassToGlibNone(m *MiscClass) unsafe.Pointer {
 	return unsafe.Pointer(m.native)
 }
 
-// UnsafeMiscClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeMiscClassToGlibFull(m *MiscClass) unsafe.Pointer {
-	runtime.SetFinalizer(m.miscClass, nil)
-	_p := unsafe.Pointer(m.native)
-	m.native = nil // MiscClass is invalid from here on
-	return _p
+// ParentClass returns the type struct of the parent class of this type struct.
+// This essentially casts the underlying c pointer.
+func (m *MiscClass) ParentClass() *gobject.ObjectClass {
+	parent := gobject.UnsafeObjectClassFromGlibBorrow(UnsafeMiscClassToGlibNone(m))
+	// attach a cleanup to keep the instance alive as long as the parent is referenced
+	runtime.AddCleanup(parent, func(_ *MiscClass) {}, m)
+	return parent
 }
+
 // NoOpObjectClass wraps AtkNoOpObjectClass
+// 
+// NoOpObjectClass is the type struct for [NoOpObject]
 type NoOpObjectClass struct {
 	*noOpObjectClass
 }
@@ -12899,31 +15993,6 @@ func UnsafeNoOpObjectClassFromGlibBorrow(p unsafe.Pointer) *NoOpObjectClass {
 	return &NoOpObjectClass{&noOpObjectClass{(*C.AtkNoOpObjectClass)(p)}}
 }
 
-// UnsafeNoOpObjectClassFromGlibNone is used to convert raw C.AtkNoOpObjectClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeNoOpObjectClassFromGlibNone(p unsafe.Pointer) *NoOpObjectClass {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeNoOpObjectClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.noOpObjectClass,
-		func (intern *noOpObjectClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeNoOpObjectClassFromGlibFull is used to convert raw C.AtkNoOpObjectClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeNoOpObjectClassFromGlibFull(p unsafe.Pointer) *NoOpObjectClass {
-	wrapped := UnsafeNoOpObjectClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.noOpObjectClass,
-		func (intern *noOpObjectClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
 // UnsafeNoOpObjectClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
 // 
 // After this is called, no other method on [NoOpObjectClass] is expected to work anymore.
@@ -12936,15 +16005,18 @@ func UnsafeNoOpObjectClassToGlibNone(n *NoOpObjectClass) unsafe.Pointer {
 	return unsafe.Pointer(n.native)
 }
 
-// UnsafeNoOpObjectClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeNoOpObjectClassToGlibFull(n *NoOpObjectClass) unsafe.Pointer {
-	runtime.SetFinalizer(n.noOpObjectClass, nil)
-	_p := unsafe.Pointer(n.native)
-	n.native = nil // NoOpObjectClass is invalid from here on
-	return _p
+// ParentClass returns the type struct of the parent class of this type struct.
+// This essentially casts the underlying c pointer.
+func (n *NoOpObjectClass) ParentClass() *ObjectClass {
+	parent := UnsafeObjectClassFromGlibBorrow(UnsafeNoOpObjectClassToGlibNone(n))
+	// attach a cleanup to keep the instance alive as long as the parent is referenced
+	runtime.AddCleanup(parent, func(_ *NoOpObjectClass) {}, n)
+	return parent
 }
+
 // NoOpObjectFactoryClass wraps AtkNoOpObjectFactoryClass
+// 
+// NoOpObjectFactoryClass is the type struct for [NoOpObjectFactory]
 type NoOpObjectFactoryClass struct {
 	*noOpObjectFactoryClass
 }
@@ -12959,31 +16031,6 @@ func UnsafeNoOpObjectFactoryClassFromGlibBorrow(p unsafe.Pointer) *NoOpObjectFac
 	return &NoOpObjectFactoryClass{&noOpObjectFactoryClass{(*C.AtkNoOpObjectFactoryClass)(p)}}
 }
 
-// UnsafeNoOpObjectFactoryClassFromGlibNone is used to convert raw C.AtkNoOpObjectFactoryClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeNoOpObjectFactoryClassFromGlibNone(p unsafe.Pointer) *NoOpObjectFactoryClass {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeNoOpObjectFactoryClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.noOpObjectFactoryClass,
-		func (intern *noOpObjectFactoryClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeNoOpObjectFactoryClassFromGlibFull is used to convert raw C.AtkNoOpObjectFactoryClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeNoOpObjectFactoryClassFromGlibFull(p unsafe.Pointer) *NoOpObjectFactoryClass {
-	wrapped := UnsafeNoOpObjectFactoryClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.noOpObjectFactoryClass,
-		func (intern *noOpObjectFactoryClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
 // UnsafeNoOpObjectFactoryClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
 // 
 // After this is called, no other method on [NoOpObjectFactoryClass] is expected to work anymore.
@@ -12996,15 +16043,18 @@ func UnsafeNoOpObjectFactoryClassToGlibNone(n *NoOpObjectFactoryClass) unsafe.Po
 	return unsafe.Pointer(n.native)
 }
 
-// UnsafeNoOpObjectFactoryClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeNoOpObjectFactoryClassToGlibFull(n *NoOpObjectFactoryClass) unsafe.Pointer {
-	runtime.SetFinalizer(n.noOpObjectFactoryClass, nil)
-	_p := unsafe.Pointer(n.native)
-	n.native = nil // NoOpObjectFactoryClass is invalid from here on
-	return _p
+// ParentClass returns the type struct of the parent class of this type struct.
+// This essentially casts the underlying c pointer.
+func (n *NoOpObjectFactoryClass) ParentClass() *ObjectFactoryClass {
+	parent := UnsafeObjectFactoryClassFromGlibBorrow(UnsafeNoOpObjectFactoryClassToGlibNone(n))
+	// attach a cleanup to keep the instance alive as long as the parent is referenced
+	runtime.AddCleanup(parent, func(_ *NoOpObjectFactoryClass) {}, n)
+	return parent
 }
+
 // ObjectClass wraps AtkObjectClass
+// 
+// ObjectClass is the type struct for [Object]
 type ObjectClass struct {
 	*objectClass
 }
@@ -13019,31 +16069,6 @@ func UnsafeObjectClassFromGlibBorrow(p unsafe.Pointer) *ObjectClass {
 	return &ObjectClass{&objectClass{(*C.AtkObjectClass)(p)}}
 }
 
-// UnsafeObjectClassFromGlibNone is used to convert raw C.AtkObjectClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeObjectClassFromGlibNone(p unsafe.Pointer) *ObjectClass {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeObjectClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.objectClass,
-		func (intern *objectClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeObjectClassFromGlibFull is used to convert raw C.AtkObjectClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeObjectClassFromGlibFull(p unsafe.Pointer) *ObjectClass {
-	wrapped := UnsafeObjectClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.objectClass,
-		func (intern *objectClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
 // UnsafeObjectClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
 // 
 // After this is called, no other method on [ObjectClass] is expected to work anymore.
@@ -13056,15 +16081,18 @@ func UnsafeObjectClassToGlibNone(o *ObjectClass) unsafe.Pointer {
 	return unsafe.Pointer(o.native)
 }
 
-// UnsafeObjectClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeObjectClassToGlibFull(o *ObjectClass) unsafe.Pointer {
-	runtime.SetFinalizer(o.objectClass, nil)
-	_p := unsafe.Pointer(o.native)
-	o.native = nil // ObjectClass is invalid from here on
-	return _p
+// ParentClass returns the type struct of the parent class of this type struct.
+// This essentially casts the underlying c pointer.
+func (o *ObjectClass) ParentClass() *gobject.ObjectClass {
+	parent := gobject.UnsafeObjectClassFromGlibBorrow(UnsafeObjectClassToGlibNone(o))
+	// attach a cleanup to keep the instance alive as long as the parent is referenced
+	runtime.AddCleanup(parent, func(_ *ObjectClass) {}, o)
+	return parent
 }
+
 // ObjectFactoryClass wraps AtkObjectFactoryClass
+// 
+// ObjectFactoryClass is the type struct for [ObjectFactory]
 type ObjectFactoryClass struct {
 	*objectFactoryClass
 }
@@ -13079,31 +16107,6 @@ func UnsafeObjectFactoryClassFromGlibBorrow(p unsafe.Pointer) *ObjectFactoryClas
 	return &ObjectFactoryClass{&objectFactoryClass{(*C.AtkObjectFactoryClass)(p)}}
 }
 
-// UnsafeObjectFactoryClassFromGlibNone is used to convert raw C.AtkObjectFactoryClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeObjectFactoryClassFromGlibNone(p unsafe.Pointer) *ObjectFactoryClass {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeObjectFactoryClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.objectFactoryClass,
-		func (intern *objectFactoryClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeObjectFactoryClassFromGlibFull is used to convert raw C.AtkObjectFactoryClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeObjectFactoryClassFromGlibFull(p unsafe.Pointer) *ObjectFactoryClass {
-	wrapped := UnsafeObjectFactoryClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.objectFactoryClass,
-		func (intern *objectFactoryClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
 // UnsafeObjectFactoryClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
 // 
 // After this is called, no other method on [ObjectFactoryClass] is expected to work anymore.
@@ -13116,15 +16119,18 @@ func UnsafeObjectFactoryClassToGlibNone(o *ObjectFactoryClass) unsafe.Pointer {
 	return unsafe.Pointer(o.native)
 }
 
-// UnsafeObjectFactoryClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeObjectFactoryClassToGlibFull(o *ObjectFactoryClass) unsafe.Pointer {
-	runtime.SetFinalizer(o.objectFactoryClass, nil)
-	_p := unsafe.Pointer(o.native)
-	o.native = nil // ObjectFactoryClass is invalid from here on
-	return _p
+// ParentClass returns the type struct of the parent class of this type struct.
+// This essentially casts the underlying c pointer.
+func (o *ObjectFactoryClass) ParentClass() *gobject.ObjectClass {
+	parent := gobject.UnsafeObjectClassFromGlibBorrow(UnsafeObjectFactoryClassToGlibNone(o))
+	// attach a cleanup to keep the instance alive as long as the parent is referenced
+	runtime.AddCleanup(parent, func(_ *ObjectFactoryClass) {}, o)
+	return parent
 }
+
 // PlugClass wraps AtkPlugClass
+// 
+// PlugClass is the type struct for [Plug]
 type PlugClass struct {
 	*plugClass
 }
@@ -13139,31 +16145,6 @@ func UnsafePlugClassFromGlibBorrow(p unsafe.Pointer) *PlugClass {
 	return &PlugClass{&plugClass{(*C.AtkPlugClass)(p)}}
 }
 
-// UnsafePlugClassFromGlibNone is used to convert raw C.AtkPlugClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafePlugClassFromGlibNone(p unsafe.Pointer) *PlugClass {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafePlugClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.plugClass,
-		func (intern *plugClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafePlugClassFromGlibFull is used to convert raw C.AtkPlugClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafePlugClassFromGlibFull(p unsafe.Pointer) *PlugClass {
-	wrapped := UnsafePlugClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.plugClass,
-		func (intern *plugClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
 // UnsafePlugClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
 // 
 // After this is called, no other method on [PlugClass] is expected to work anymore.
@@ -13176,14 +16157,15 @@ func UnsafePlugClassToGlibNone(p *PlugClass) unsafe.Pointer {
 	return unsafe.Pointer(p.native)
 }
 
-// UnsafePlugClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafePlugClassToGlibFull(p *PlugClass) unsafe.Pointer {
-	runtime.SetFinalizer(p.plugClass, nil)
-	_p := unsafe.Pointer(p.native)
-	p.native = nil // PlugClass is invalid from here on
-	return _p
+// ParentClass returns the type struct of the parent class of this type struct.
+// This essentially casts the underlying c pointer.
+func (p *PlugClass) ParentClass() *ObjectClass {
+	parent := UnsafeObjectClassFromGlibBorrow(UnsafePlugClassToGlibNone(p))
+	// attach a cleanup to keep the instance alive as long as the parent is referenced
+	runtime.AddCleanup(parent, func(_ *PlugClass) {}, p)
+	return parent
 }
+
 // PropertyValues wraps AtkPropertyValues
 //
 // Note: @old_value field of #AtkPropertyValues will not contain a
@@ -13203,7 +16185,7 @@ func UnsafePropertyValuesFromGlibBorrow(p unsafe.Pointer) *PropertyValues {
 	return &PropertyValues{&propertyValues{(*C.AtkPropertyValues)(p)}}
 }
 
-// UnsafePropertyValuesFromGlibNone is used to convert raw C.AtkPropertyValues pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafePropertyValuesFromGlibNone is used to convert raw C.AtkPropertyValues pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafePropertyValuesFromGlibNone(p unsafe.Pointer) *PropertyValues {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafePropertyValuesFromGlibBorrow(p)
@@ -13216,7 +16198,7 @@ func UnsafePropertyValuesFromGlibNone(p unsafe.Pointer) *PropertyValues {
 	return wrapped
 }
 
-// UnsafePropertyValuesFromGlibFull is used to convert raw C.AtkPropertyValues pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafePropertyValuesFromGlibFull is used to convert raw C.AtkPropertyValues pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafePropertyValuesFromGlibFull(p unsafe.Pointer) *PropertyValues {
 	wrapped := UnsafePropertyValuesFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -13248,6 +16230,7 @@ func UnsafePropertyValuesToGlibFull(p *PropertyValues) unsafe.Pointer {
 	p.native = nil // PropertyValues is invalid from here on
 	return _p
 }
+
 // Range wraps AtkRange
 //
 // A given range or subrange, to be used with #AtkValue
@@ -13283,7 +16266,7 @@ func UnsafeRangeFromGlibBorrow(p unsafe.Pointer) *Range {
 	return &Range{&_range{(*C.AtkRange)(p)}}
 }
 
-// UnsafeRangeFromGlibNone is used to convert raw C.AtkRange pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeRangeFromGlibNone is used to convert raw C.AtkRange pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeRangeFromGlibNone(p unsafe.Pointer) *Range {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeRangeFromGlibBorrow(p)
@@ -13296,7 +16279,7 @@ func UnsafeRangeFromGlibNone(p unsafe.Pointer) *Range {
 	return wrapped
 }
 
-// UnsafeRangeFromGlibFull is used to convert raw C.AtkRange pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeRangeFromGlibFull is used to convert raw C.AtkRange pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeRangeFromGlibFull(p unsafe.Pointer) *Range {
 	wrapped := UnsafeRangeFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -13328,6 +16311,7 @@ func UnsafeRangeToGlibFull(r *Range) unsafe.Pointer {
 	r.native = nil // Range is invalid from here on
 	return _p
 }
+
 // NewRange wraps atk_range_new
 // 
 // The function takes the following parameters:
@@ -13365,6 +16349,7 @@ func NewRange(lowerLimit float64, upperLimit float64, description string) *Range
 }
 
 // Copy wraps atk_range_copy
+// 
 // The function returns the following values:
 // 
 // 	- goret *Range 
@@ -13387,6 +16372,7 @@ func (src *Range) Copy() *Range {
 }
 
 // GetDescription wraps atk_range_get_description
+// 
 // The function returns the following values:
 // 
 // 	- goret string 
@@ -13409,6 +16395,7 @@ func (_range *Range) GetDescription() string {
 }
 
 // GetLowerLimit wraps atk_range_get_lower_limit
+// 
 // The function returns the following values:
 // 
 // 	- goret float64 
@@ -13431,6 +16418,7 @@ func (_range *Range) GetLowerLimit() float64 {
 }
 
 // GetUpperLimit wraps atk_range_get_upper_limit
+// 
 // The function returns the following values:
 // 
 // 	- goret float64 
@@ -13482,7 +16470,7 @@ func UnsafeRectangleFromGlibBorrow(p unsafe.Pointer) *Rectangle {
 	return &Rectangle{&rectangle{(*C.AtkRectangle)(p)}}
 }
 
-// UnsafeRectangleFromGlibNone is used to convert raw C.AtkRectangle pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeRectangleFromGlibNone is used to convert raw C.AtkRectangle pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeRectangleFromGlibNone(p unsafe.Pointer) *Rectangle {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeRectangleFromGlibBorrow(p)
@@ -13495,7 +16483,7 @@ func UnsafeRectangleFromGlibNone(p unsafe.Pointer) *Rectangle {
 	return wrapped
 }
 
-// UnsafeRectangleFromGlibFull is used to convert raw C.AtkRectangle pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeRectangleFromGlibFull is used to convert raw C.AtkRectangle pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeRectangleFromGlibFull(p unsafe.Pointer) *Rectangle {
 	wrapped := UnsafeRectangleFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -13527,7 +16515,10 @@ func UnsafeRectangleToGlibFull(r *Rectangle) unsafe.Pointer {
 	r.native = nil // Rectangle is invalid from here on
 	return _p
 }
+
 // RegistryClass wraps AtkRegistryClass
+// 
+// RegistryClass is the type struct for [Registry]
 type RegistryClass struct {
 	*registryClass
 }
@@ -13542,31 +16533,6 @@ func UnsafeRegistryClassFromGlibBorrow(p unsafe.Pointer) *RegistryClass {
 	return &RegistryClass{&registryClass{(*C.AtkRegistryClass)(p)}}
 }
 
-// UnsafeRegistryClassFromGlibNone is used to convert raw C.AtkRegistryClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeRegistryClassFromGlibNone(p unsafe.Pointer) *RegistryClass {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeRegistryClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.registryClass,
-		func (intern *registryClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeRegistryClassFromGlibFull is used to convert raw C.AtkRegistryClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeRegistryClassFromGlibFull(p unsafe.Pointer) *RegistryClass {
-	wrapped := UnsafeRegistryClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.registryClass,
-		func (intern *registryClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
 // UnsafeRegistryClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
 // 
 // After this is called, no other method on [RegistryClass] is expected to work anymore.
@@ -13579,15 +16545,18 @@ func UnsafeRegistryClassToGlibNone(r *RegistryClass) unsafe.Pointer {
 	return unsafe.Pointer(r.native)
 }
 
-// UnsafeRegistryClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeRegistryClassToGlibFull(r *RegistryClass) unsafe.Pointer {
-	runtime.SetFinalizer(r.registryClass, nil)
-	_p := unsafe.Pointer(r.native)
-	r.native = nil // RegistryClass is invalid from here on
-	return _p
+// ParentClass returns the type struct of the parent class of this type struct.
+// This essentially casts the underlying c pointer.
+func (r *RegistryClass) ParentClass() *gobject.ObjectClass {
+	parent := gobject.UnsafeObjectClassFromGlibBorrow(UnsafeRegistryClassToGlibNone(r))
+	// attach a cleanup to keep the instance alive as long as the parent is referenced
+	runtime.AddCleanup(parent, func(_ *RegistryClass) {}, r)
+	return parent
 }
+
 // RelationClass wraps AtkRelationClass
+// 
+// RelationClass is the type struct for [Relation]
 type RelationClass struct {
 	*relationClass
 }
@@ -13602,31 +16571,6 @@ func UnsafeRelationClassFromGlibBorrow(p unsafe.Pointer) *RelationClass {
 	return &RelationClass{&relationClass{(*C.AtkRelationClass)(p)}}
 }
 
-// UnsafeRelationClassFromGlibNone is used to convert raw C.AtkRelationClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeRelationClassFromGlibNone(p unsafe.Pointer) *RelationClass {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeRelationClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.relationClass,
-		func (intern *relationClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeRelationClassFromGlibFull is used to convert raw C.AtkRelationClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeRelationClassFromGlibFull(p unsafe.Pointer) *RelationClass {
-	wrapped := UnsafeRelationClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.relationClass,
-		func (intern *relationClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
 // UnsafeRelationClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
 // 
 // After this is called, no other method on [RelationClass] is expected to work anymore.
@@ -13639,15 +16583,18 @@ func UnsafeRelationClassToGlibNone(r *RelationClass) unsafe.Pointer {
 	return unsafe.Pointer(r.native)
 }
 
-// UnsafeRelationClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeRelationClassToGlibFull(r *RelationClass) unsafe.Pointer {
-	runtime.SetFinalizer(r.relationClass, nil)
-	_p := unsafe.Pointer(r.native)
-	r.native = nil // RelationClass is invalid from here on
-	return _p
+// ParentClass returns the type struct of the parent class of this type struct.
+// This essentially casts the underlying c pointer.
+func (r *RelationClass) ParentClass() *gobject.ObjectClass {
+	parent := gobject.UnsafeObjectClassFromGlibBorrow(UnsafeRelationClassToGlibNone(r))
+	// attach a cleanup to keep the instance alive as long as the parent is referenced
+	runtime.AddCleanup(parent, func(_ *RelationClass) {}, r)
+	return parent
 }
+
 // RelationSetClass wraps AtkRelationSetClass
+// 
+// RelationSetClass is the type struct for [RelationSet]
 type RelationSetClass struct {
 	*relationSetClass
 }
@@ -13662,31 +16609,6 @@ func UnsafeRelationSetClassFromGlibBorrow(p unsafe.Pointer) *RelationSetClass {
 	return &RelationSetClass{&relationSetClass{(*C.AtkRelationSetClass)(p)}}
 }
 
-// UnsafeRelationSetClassFromGlibNone is used to convert raw C.AtkRelationSetClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeRelationSetClassFromGlibNone(p unsafe.Pointer) *RelationSetClass {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeRelationSetClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.relationSetClass,
-		func (intern *relationSetClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeRelationSetClassFromGlibFull is used to convert raw C.AtkRelationSetClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeRelationSetClassFromGlibFull(p unsafe.Pointer) *RelationSetClass {
-	wrapped := UnsafeRelationSetClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.relationSetClass,
-		func (intern *relationSetClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
 // UnsafeRelationSetClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
 // 
 // After this is called, no other method on [RelationSetClass] is expected to work anymore.
@@ -13699,14 +16621,15 @@ func UnsafeRelationSetClassToGlibNone(r *RelationSetClass) unsafe.Pointer {
 	return unsafe.Pointer(r.native)
 }
 
-// UnsafeRelationSetClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeRelationSetClassToGlibFull(r *RelationSetClass) unsafe.Pointer {
-	runtime.SetFinalizer(r.relationSetClass, nil)
-	_p := unsafe.Pointer(r.native)
-	r.native = nil // RelationSetClass is invalid from here on
-	return _p
+// ParentClass returns the type struct of the parent class of this type struct.
+// This essentially casts the underlying c pointer.
+func (r *RelationSetClass) ParentClass() *gobject.ObjectClass {
+	parent := gobject.UnsafeObjectClassFromGlibBorrow(UnsafeRelationSetClassToGlibNone(r))
+	// attach a cleanup to keep the instance alive as long as the parent is referenced
+	runtime.AddCleanup(parent, func(_ *RelationSetClass) {}, r)
+	return parent
 }
+
 // SelectionIface wraps AtkSelectionIface
 type SelectionIface struct {
 	*selectionIface
@@ -13722,7 +16645,7 @@ func UnsafeSelectionIfaceFromGlibBorrow(p unsafe.Pointer) *SelectionIface {
 	return &SelectionIface{&selectionIface{(*C.AtkSelectionIface)(p)}}
 }
 
-// UnsafeSelectionIfaceFromGlibNone is used to convert raw C.AtkSelectionIface pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeSelectionIfaceFromGlibNone is used to convert raw C.AtkSelectionIface pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeSelectionIfaceFromGlibNone(p unsafe.Pointer) *SelectionIface {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeSelectionIfaceFromGlibBorrow(p)
@@ -13735,7 +16658,7 @@ func UnsafeSelectionIfaceFromGlibNone(p unsafe.Pointer) *SelectionIface {
 	return wrapped
 }
 
-// UnsafeSelectionIfaceFromGlibFull is used to convert raw C.AtkSelectionIface pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeSelectionIfaceFromGlibFull is used to convert raw C.AtkSelectionIface pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeSelectionIfaceFromGlibFull(p unsafe.Pointer) *SelectionIface {
 	wrapped := UnsafeSelectionIfaceFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -13767,7 +16690,10 @@ func UnsafeSelectionIfaceToGlibFull(s *SelectionIface) unsafe.Pointer {
 	s.native = nil // SelectionIface is invalid from here on
 	return _p
 }
+
 // SocketClass wraps AtkSocketClass
+// 
+// SocketClass is the type struct for [Socket]
 type SocketClass struct {
 	*socketClass
 }
@@ -13782,31 +16708,6 @@ func UnsafeSocketClassFromGlibBorrow(p unsafe.Pointer) *SocketClass {
 	return &SocketClass{&socketClass{(*C.AtkSocketClass)(p)}}
 }
 
-// UnsafeSocketClassFromGlibNone is used to convert raw C.AtkSocketClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeSocketClassFromGlibNone(p unsafe.Pointer) *SocketClass {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeSocketClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.socketClass,
-		func (intern *socketClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeSocketClassFromGlibFull is used to convert raw C.AtkSocketClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeSocketClassFromGlibFull(p unsafe.Pointer) *SocketClass {
-	wrapped := UnsafeSocketClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.socketClass,
-		func (intern *socketClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
 // UnsafeSocketClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
 // 
 // After this is called, no other method on [SocketClass] is expected to work anymore.
@@ -13819,15 +16720,18 @@ func UnsafeSocketClassToGlibNone(s *SocketClass) unsafe.Pointer {
 	return unsafe.Pointer(s.native)
 }
 
-// UnsafeSocketClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeSocketClassToGlibFull(s *SocketClass) unsafe.Pointer {
-	runtime.SetFinalizer(s.socketClass, nil)
-	_p := unsafe.Pointer(s.native)
-	s.native = nil // SocketClass is invalid from here on
-	return _p
+// ParentClass returns the type struct of the parent class of this type struct.
+// This essentially casts the underlying c pointer.
+func (s *SocketClass) ParentClass() *ObjectClass {
+	parent := UnsafeObjectClassFromGlibBorrow(UnsafeSocketClassToGlibNone(s))
+	// attach a cleanup to keep the instance alive as long as the parent is referenced
+	runtime.AddCleanup(parent, func(_ *SocketClass) {}, s)
+	return parent
 }
+
 // StateSetClass wraps AtkStateSetClass
+// 
+// StateSetClass is the type struct for [StateSet]
 type StateSetClass struct {
 	*stateSetClass
 }
@@ -13842,31 +16746,6 @@ func UnsafeStateSetClassFromGlibBorrow(p unsafe.Pointer) *StateSetClass {
 	return &StateSetClass{&stateSetClass{(*C.AtkStateSetClass)(p)}}
 }
 
-// UnsafeStateSetClassFromGlibNone is used to convert raw C.AtkStateSetClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeStateSetClassFromGlibNone(p unsafe.Pointer) *StateSetClass {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeStateSetClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.stateSetClass,
-		func (intern *stateSetClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeStateSetClassFromGlibFull is used to convert raw C.AtkStateSetClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeStateSetClassFromGlibFull(p unsafe.Pointer) *StateSetClass {
-	wrapped := UnsafeStateSetClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.stateSetClass,
-		func (intern *stateSetClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
 // UnsafeStateSetClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
 // 
 // After this is called, no other method on [StateSetClass] is expected to work anymore.
@@ -13879,14 +16758,15 @@ func UnsafeStateSetClassToGlibNone(s *StateSetClass) unsafe.Pointer {
 	return unsafe.Pointer(s.native)
 }
 
-// UnsafeStateSetClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeStateSetClassToGlibFull(s *StateSetClass) unsafe.Pointer {
-	runtime.SetFinalizer(s.stateSetClass, nil)
-	_p := unsafe.Pointer(s.native)
-	s.native = nil // StateSetClass is invalid from here on
-	return _p
+// ParentClass returns the type struct of the parent class of this type struct.
+// This essentially casts the underlying c pointer.
+func (s *StateSetClass) ParentClass() *gobject.ObjectClass {
+	parent := gobject.UnsafeObjectClassFromGlibBorrow(UnsafeStateSetClassToGlibNone(s))
+	// attach a cleanup to keep the instance alive as long as the parent is referenced
+	runtime.AddCleanup(parent, func(_ *StateSetClass) {}, s)
+	return parent
 }
+
 // StreamableContentIface wraps AtkStreamableContentIface
 type StreamableContentIface struct {
 	*streamableContentIface
@@ -13902,7 +16782,7 @@ func UnsafeStreamableContentIfaceFromGlibBorrow(p unsafe.Pointer) *StreamableCon
 	return &StreamableContentIface{&streamableContentIface{(*C.AtkStreamableContentIface)(p)}}
 }
 
-// UnsafeStreamableContentIfaceFromGlibNone is used to convert raw C.AtkStreamableContentIface pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeStreamableContentIfaceFromGlibNone is used to convert raw C.AtkStreamableContentIface pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeStreamableContentIfaceFromGlibNone(p unsafe.Pointer) *StreamableContentIface {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeStreamableContentIfaceFromGlibBorrow(p)
@@ -13915,7 +16795,7 @@ func UnsafeStreamableContentIfaceFromGlibNone(p unsafe.Pointer) *StreamableConte
 	return wrapped
 }
 
-// UnsafeStreamableContentIfaceFromGlibFull is used to convert raw C.AtkStreamableContentIface pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeStreamableContentIfaceFromGlibFull is used to convert raw C.AtkStreamableContentIface pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeStreamableContentIfaceFromGlibFull(p unsafe.Pointer) *StreamableContentIface {
 	wrapped := UnsafeStreamableContentIfaceFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -13947,6 +16827,7 @@ func UnsafeStreamableContentIfaceToGlibFull(s *StreamableContentIface) unsafe.Po
 	s.native = nil // StreamableContentIface is invalid from here on
 	return _p
 }
+
 // TableCellIface wraps AtkTableCellIface
 //
 // AtkTableCell is an interface for cells inside an #AtkTable.
@@ -13964,7 +16845,7 @@ func UnsafeTableCellIfaceFromGlibBorrow(p unsafe.Pointer) *TableCellIface {
 	return &TableCellIface{&tableCellIface{(*C.AtkTableCellIface)(p)}}
 }
 
-// UnsafeTableCellIfaceFromGlibNone is used to convert raw C.AtkTableCellIface pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeTableCellIfaceFromGlibNone is used to convert raw C.AtkTableCellIface pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeTableCellIfaceFromGlibNone(p unsafe.Pointer) *TableCellIface {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeTableCellIfaceFromGlibBorrow(p)
@@ -13977,7 +16858,7 @@ func UnsafeTableCellIfaceFromGlibNone(p unsafe.Pointer) *TableCellIface {
 	return wrapped
 }
 
-// UnsafeTableCellIfaceFromGlibFull is used to convert raw C.AtkTableCellIface pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeTableCellIfaceFromGlibFull is used to convert raw C.AtkTableCellIface pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeTableCellIfaceFromGlibFull(p unsafe.Pointer) *TableCellIface {
 	wrapped := UnsafeTableCellIfaceFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -14009,6 +16890,7 @@ func UnsafeTableCellIfaceToGlibFull(t *TableCellIface) unsafe.Pointer {
 	t.native = nil // TableCellIface is invalid from here on
 	return _p
 }
+
 // TableIface wraps AtkTableIface
 type TableIface struct {
 	*tableIface
@@ -14024,7 +16906,7 @@ func UnsafeTableIfaceFromGlibBorrow(p unsafe.Pointer) *TableIface {
 	return &TableIface{&tableIface{(*C.AtkTableIface)(p)}}
 }
 
-// UnsafeTableIfaceFromGlibNone is used to convert raw C.AtkTableIface pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeTableIfaceFromGlibNone is used to convert raw C.AtkTableIface pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeTableIfaceFromGlibNone(p unsafe.Pointer) *TableIface {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeTableIfaceFromGlibBorrow(p)
@@ -14037,7 +16919,7 @@ func UnsafeTableIfaceFromGlibNone(p unsafe.Pointer) *TableIface {
 	return wrapped
 }
 
-// UnsafeTableIfaceFromGlibFull is used to convert raw C.AtkTableIface pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeTableIfaceFromGlibFull is used to convert raw C.AtkTableIface pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeTableIfaceFromGlibFull(p unsafe.Pointer) *TableIface {
 	wrapped := UnsafeTableIfaceFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -14069,6 +16951,7 @@ func UnsafeTableIfaceToGlibFull(t *TableIface) unsafe.Pointer {
 	t.native = nil // TableIface is invalid from here on
 	return _p
 }
+
 // TextIface wraps AtkTextIface
 type TextIface struct {
 	*textIface
@@ -14084,7 +16967,7 @@ func UnsafeTextIfaceFromGlibBorrow(p unsafe.Pointer) *TextIface {
 	return &TextIface{&textIface{(*C.AtkTextIface)(p)}}
 }
 
-// UnsafeTextIfaceFromGlibNone is used to convert raw C.AtkTextIface pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeTextIfaceFromGlibNone is used to convert raw C.AtkTextIface pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeTextIfaceFromGlibNone(p unsafe.Pointer) *TextIface {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeTextIfaceFromGlibBorrow(p)
@@ -14097,7 +16980,7 @@ func UnsafeTextIfaceFromGlibNone(p unsafe.Pointer) *TextIface {
 	return wrapped
 }
 
-// UnsafeTextIfaceFromGlibFull is used to convert raw C.AtkTextIface pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeTextIfaceFromGlibFull is used to convert raw C.AtkTextIface pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeTextIfaceFromGlibFull(p unsafe.Pointer) *TextIface {
 	wrapped := UnsafeTextIfaceFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -14129,6 +17012,7 @@ func UnsafeTextIfaceToGlibFull(t *TextIface) unsafe.Pointer {
 	t.native = nil // TextIface is invalid from here on
 	return _p
 }
+
 // TextRange wraps AtkTextRange
 //
 // A structure used to describe a text range.
@@ -14158,7 +17042,7 @@ func UnsafeTextRangeFromGlibBorrow(p unsafe.Pointer) *TextRange {
 	return &TextRange{&textRange{(*C.AtkTextRange)(p)}}
 }
 
-// UnsafeTextRangeFromGlibNone is used to convert raw C.AtkTextRange pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeTextRangeFromGlibNone is used to convert raw C.AtkTextRange pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeTextRangeFromGlibNone(p unsafe.Pointer) *TextRange {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeTextRangeFromGlibBorrow(p)
@@ -14171,7 +17055,7 @@ func UnsafeTextRangeFromGlibNone(p unsafe.Pointer) *TextRange {
 	return wrapped
 }
 
-// UnsafeTextRangeFromGlibFull is used to convert raw C.AtkTextRange pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeTextRangeFromGlibFull is used to convert raw C.AtkTextRange pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeTextRangeFromGlibFull(p unsafe.Pointer) *TextRange {
 	wrapped := UnsafeTextRangeFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -14203,6 +17087,7 @@ func UnsafeTextRangeToGlibFull(t *TextRange) unsafe.Pointer {
 	t.native = nil // TextRange is invalid from here on
 	return _p
 }
+
 // TextRectangle wraps AtkTextRectangle
 //
 // A structure used to store a rectangle used by AtkText.
@@ -14220,7 +17105,7 @@ func UnsafeTextRectangleFromGlibBorrow(p unsafe.Pointer) *TextRectangle {
 	return &TextRectangle{&textRectangle{(*C.AtkTextRectangle)(p)}}
 }
 
-// UnsafeTextRectangleFromGlibNone is used to convert raw C.AtkTextRectangle pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeTextRectangleFromGlibNone is used to convert raw C.AtkTextRectangle pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeTextRectangleFromGlibNone(p unsafe.Pointer) *TextRectangle {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeTextRectangleFromGlibBorrow(p)
@@ -14233,7 +17118,7 @@ func UnsafeTextRectangleFromGlibNone(p unsafe.Pointer) *TextRectangle {
 	return wrapped
 }
 
-// UnsafeTextRectangleFromGlibFull is used to convert raw C.AtkTextRectangle pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeTextRectangleFromGlibFull is used to convert raw C.AtkTextRectangle pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeTextRectangleFromGlibFull(p unsafe.Pointer) *TextRectangle {
 	wrapped := UnsafeTextRectangleFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -14265,6 +17150,7 @@ func UnsafeTextRectangleToGlibFull(t *TextRectangle) unsafe.Pointer {
 	t.native = nil // TextRectangle is invalid from here on
 	return _p
 }
+
 // TextSelection wraps AtkTextSelection
 //
 // This structure represents a single  text selection within a document. This
@@ -14300,7 +17186,7 @@ func UnsafeTextSelectionFromGlibBorrow(p unsafe.Pointer) *TextSelection {
 	return &TextSelection{&textSelection{(*C.AtkTextSelection)(p)}}
 }
 
-// UnsafeTextSelectionFromGlibNone is used to convert raw C.AtkTextSelection pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeTextSelectionFromGlibNone is used to convert raw C.AtkTextSelection pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeTextSelectionFromGlibNone(p unsafe.Pointer) *TextSelection {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeTextSelectionFromGlibBorrow(p)
@@ -14313,7 +17199,7 @@ func UnsafeTextSelectionFromGlibNone(p unsafe.Pointer) *TextSelection {
 	return wrapped
 }
 
-// UnsafeTextSelectionFromGlibFull is used to convert raw C.AtkTextSelection pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeTextSelectionFromGlibFull is used to convert raw C.AtkTextSelection pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeTextSelectionFromGlibFull(p unsafe.Pointer) *TextSelection {
 	wrapped := UnsafeTextSelectionFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -14345,7 +17231,10 @@ func UnsafeTextSelectionToGlibFull(t *TextSelection) unsafe.Pointer {
 	t.native = nil // TextSelection is invalid from here on
 	return _p
 }
+
 // UtilClass wraps AtkUtilClass
+// 
+// UtilClass is the type struct for [Util]
 type UtilClass struct {
 	*utilClass
 }
@@ -14360,31 +17249,6 @@ func UnsafeUtilClassFromGlibBorrow(p unsafe.Pointer) *UtilClass {
 	return &UtilClass{&utilClass{(*C.AtkUtilClass)(p)}}
 }
 
-// UnsafeUtilClassFromGlibNone is used to convert raw C.AtkUtilClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeUtilClassFromGlibNone(p unsafe.Pointer) *UtilClass {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeUtilClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.utilClass,
-		func (intern *utilClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeUtilClassFromGlibFull is used to convert raw C.AtkUtilClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeUtilClassFromGlibFull(p unsafe.Pointer) *UtilClass {
-	wrapped := UnsafeUtilClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.utilClass,
-		func (intern *utilClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
 // UnsafeUtilClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
 // 
 // After this is called, no other method on [UtilClass] is expected to work anymore.
@@ -14397,14 +17261,15 @@ func UnsafeUtilClassToGlibNone(u *UtilClass) unsafe.Pointer {
 	return unsafe.Pointer(u.native)
 }
 
-// UnsafeUtilClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeUtilClassToGlibFull(u *UtilClass) unsafe.Pointer {
-	runtime.SetFinalizer(u.utilClass, nil)
-	_p := unsafe.Pointer(u.native)
-	u.native = nil // UtilClass is invalid from here on
-	return _p
+// ParentClass returns the type struct of the parent class of this type struct.
+// This essentially casts the underlying c pointer.
+func (u *UtilClass) ParentClass() *gobject.ObjectClass {
+	parent := gobject.UnsafeObjectClassFromGlibBorrow(UnsafeUtilClassToGlibNone(u))
+	// attach a cleanup to keep the instance alive as long as the parent is referenced
+	runtime.AddCleanup(parent, func(_ *UtilClass) {}, u)
+	return parent
 }
+
 // ValueIface wraps AtkValueIface
 type ValueIface struct {
 	*valueIface
@@ -14420,7 +17285,7 @@ func UnsafeValueIfaceFromGlibBorrow(p unsafe.Pointer) *ValueIface {
 	return &ValueIface{&valueIface{(*C.AtkValueIface)(p)}}
 }
 
-// UnsafeValueIfaceFromGlibNone is used to convert raw C.AtkValueIface pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeValueIfaceFromGlibNone is used to convert raw C.AtkValueIface pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeValueIfaceFromGlibNone(p unsafe.Pointer) *ValueIface {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeValueIfaceFromGlibBorrow(p)
@@ -14433,7 +17298,7 @@ func UnsafeValueIfaceFromGlibNone(p unsafe.Pointer) *ValueIface {
 	return wrapped
 }
 
-// UnsafeValueIfaceFromGlibFull is used to convert raw C.AtkValueIface pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeValueIfaceFromGlibFull is used to convert raw C.AtkValueIface pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeValueIfaceFromGlibFull(p unsafe.Pointer) *ValueIface {
 	wrapped := UnsafeValueIfaceFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -14465,6 +17330,7 @@ func UnsafeValueIfaceToGlibFull(v *ValueIface) unsafe.Pointer {
 	v.native = nil // ValueIface is invalid from here on
 	return _p
 }
+
 // WindowIface wraps AtkWindowIface
 type WindowIface struct {
 	*windowIface
@@ -14480,7 +17346,7 @@ func UnsafeWindowIfaceFromGlibBorrow(p unsafe.Pointer) *WindowIface {
 	return &WindowIface{&windowIface{(*C.AtkWindowIface)(p)}}
 }
 
-// UnsafeWindowIfaceFromGlibNone is used to convert raw C.AtkWindowIface pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeWindowIfaceFromGlibNone is used to convert raw C.AtkWindowIface pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeWindowIfaceFromGlibNone(p unsafe.Pointer) *WindowIface {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeWindowIfaceFromGlibBorrow(p)
@@ -14493,7 +17359,7 @@ func UnsafeWindowIfaceFromGlibNone(p unsafe.Pointer) *WindowIface {
 	return wrapped
 }
 
-// UnsafeWindowIfaceFromGlibFull is used to convert raw C.AtkWindowIface pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeWindowIfaceFromGlibFull is used to convert raw C.AtkWindowIface pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeWindowIfaceFromGlibFull(p unsafe.Pointer) *WindowIface {
 	wrapped := UnsafeWindowIfaceFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -14525,3 +17391,4 @@ func UnsafeWindowIfaceToGlibFull(w *WindowIface) unsafe.Pointer {
 	w.native = nil // WindowIface is invalid from here on
 	return _p
 }
+
