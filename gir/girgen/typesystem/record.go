@@ -29,6 +29,11 @@ type Record struct {
 	CgoUnrefFunction        string
 	CgoUnrefNeedsUnsafeCast bool
 
+	// IsTypeStructFor contains the (foreign) Class that this struct is a type struct for.
+	// This is used to figure out where in the type hierarchy the struct is. That way we can
+	// generate a cast-to-parent method for the struct.
+	IsTypeStructFor *Class
+
 	Functions    []*CallableSignature
 	Methods      []*CallableSignature
 	Constructors []*CallableSignature
@@ -74,6 +79,24 @@ func DeclareRecord(e *env, v gir.Record) *Record {
 
 		gir: v,
 	}
+}
+
+// markAsTypestructFor marks the record as a type struct for the given class in the current namespace.
+func (r *Record) markAsTypestructFor(e *env, c *Class) {
+	if r.IsTypeStructFor != nil {
+		e.logger.Warn("record is already marked as a type struct for another class", "record", r.GirName, "type-struct-for", r.IsTypeStructFor.CType(0))
+		return
+	}
+
+	// we don't want any methods using typestructs as parameters where
+	// we drop the ownership
+	r.BaseConversions.FromGlibFullFunction = ""
+	r.BaseConversions.FromGlibNoneFunction = ""
+	r.BaseConversions.ToGlibFullFunction = ""
+	// keep the borrow function, we need it to wrap the type struct
+	// keep the to none functions, because we need them for instance params
+
+	r.IsTypeStructFor = c
 }
 
 func (r *Record) declareNested(e *env) {
@@ -151,6 +174,30 @@ func (r *Record) declareNested(e *env) {
 				r.Fields = append(r.Fields, t)
 			}
 		}
+	}
+}
+
+// ParentTypeStruct resolves the parent classes type struct. This panics if the
+// record is not a type struct.
+func (r *Record) ParentTypeStruct() *CouldBeForeign[*Record] {
+	if r.IsTypeStructFor == nil {
+		return nil
+	}
+
+	if r.IsTypeStructFor.Parent.Type == nil {
+		return nil
+	}
+
+	parentTs := r.IsTypeStructFor.Parent.Type.TypeStruct
+
+	if parentTs == nil {
+		return nil
+	}
+
+	return &CouldBeForeign[*Record]{
+		// if the parent is foreign, so is the type struct:
+		Namespace: r.IsTypeStructFor.Parent.Namespace,
+		Type:      parentTs,
 	}
 }
 

@@ -13,6 +13,14 @@ import (
 // #cgo pkg-config: gobject-2.0
 // #cgo CFLAGS: -Wno-deprecated-declarations
 // #include <glib-object.h>
+// extern gboolean _gotk4_gobject2_TypeModule_load(GTypeModule*);
+// extern void _gotk4_gobject2_TypeModule_unload(GTypeModule*);
+// gboolean _gotk4_gobject2_TypeModule_virtual_load(void* fnptr, GTypeModule* carg0) {
+// 	return ((gboolean (*) (GTypeModule*))(fnptr))(carg0);
+// }
+// void _gotk4_gobject2_TypeModule_virtual_unload(void* fnptr, GTypeModule* carg0) {
+// 	return ((void (*) (GTypeModule*))(fnptr))(carg0);
+// }
 import "C"
 
 // GType values.
@@ -1020,6 +1028,7 @@ func FlagsToString(flagsType Type, value uint) string {
 }
 
 // GTypeGetType wraps g_gtype_get_type
+// 
 // The function returns the following values:
 // 
 // 	- goret Type 
@@ -1713,6 +1722,7 @@ func TypeFundamental(typeId Type) Type {
 }
 
 // TypeFundamentalNext wraps g_type_fundamental_next
+// 
 // The function returns the following values:
 // 
 // 	- goret Type 
@@ -1791,6 +1801,7 @@ func TypeGetPlugin(typ Type) TypePlugin {
 }
 
 // TypeGetTypeRegistrationSerial wraps g_type_get_type_registration_serial
+// 
 // The function returns the following values:
 // 
 // 	- goret uint 
@@ -2109,6 +2120,7 @@ func TypeTestFlags(typ Type, flags uint) bool {
 }
 
 // VariantGetGType wraps g_variant_get_gtype
+// 
 // The function returns the following values:
 // 
 // 	- goret Type 
@@ -2349,6 +2361,16 @@ func (plugin *TypePluginInstance) UsePlugin() {
 	runtime.KeepAlive(plugin)
 }
 
+// TypePluginOverrides is the struct used to override the default implementation of virtual methods.
+// it is generic over the extending instance type.
+type TypePluginOverrides[Instance TypePlugin] struct {
+}
+
+// UnsafeApplyTypePluginOverrides applies the overrides to init the gclass by setting the trampoline functions.
+// This is used by the bindings internally and only exported for visibility to other bindings code.
+func UnsafeApplyTypePluginOverrides[Instance TypePlugin](gclass unsafe.Pointer, overrides TypePluginOverrides[Instance]) {
+}
+
 // BindingGroupInstance is the instance type used by all types extending GBindingGroup. It is used internally by the bindings. Users should use the interface [BindingGroup] instead.
 type BindingGroupInstance struct {
 	_ [0]func() // equal guard
@@ -2406,6 +2428,7 @@ func UnsafeBindingGroupToGlibFull(c BindingGroup) unsafe.Pointer {
 }
 
 // NewBindingGroup wraps g_binding_group_new
+// 
 // The function returns the following values:
 // 
 // 	- goret BindingGroup 
@@ -2474,6 +2497,20 @@ func UnsafeInitiallyUnownedToGlibNone(c InitiallyUnowned) unsafe.Pointer {
 // UnsafeInitiallyUnownedToGlibFull is used to convert the instance to it's C value GInitiallyUnowned, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeInitiallyUnownedToGlibFull(c InitiallyUnowned) unsafe.Pointer {
 	return UnsafeObjectToGlibFull(c)
+}
+
+// InitiallyUnownedOverrides is the struct used to override the default implementation of virtual methods.
+// it is generic over the extending instance type.
+type InitiallyUnownedOverrides[Instance InitiallyUnowned] struct {
+	// ObjectOverrides allows you to override virtual methods from the parent class Object
+	ObjectOverrides[Instance]
+
+}
+
+// UnsafeApplyInitiallyUnownedOverrides applies the overrides to init the gclass by setting the trampoline functions.
+// This is used by the bindings internally and only exported for visibility to other bindings code.
+func UnsafeApplyInitiallyUnownedOverrides[Instance InitiallyUnowned](gclass unsafe.Pointer, overrides InitiallyUnownedOverrides[Instance]) {
+	UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
 }
 
 // TypeModuleInstance is the instance type used by all types extending GTypeModule. It is used internally by the bindings. Users should use the interface [TypeModule] instead.
@@ -2634,6 +2671,7 @@ type TypeModule interface {
 	// initialized, it must exist forever.)
 	Unuse()
 	// Use wraps g_type_module_use
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
@@ -2901,6 +2939,7 @@ func (module *TypeModuleInstance) Unuse() {
 }
 
 // Use wraps g_type_module_use
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -2927,6 +2966,37 @@ func (module *TypeModuleInstance) Use() bool {
 	return goret
 }
 
+// TypeModuleOverrides is the struct used to override the default implementation of virtual methods.
+// it is generic over the extending instance type.
+type TypeModuleOverrides[Instance TypeModule] struct {
+	// ObjectOverrides allows you to override virtual methods from the parent class Object
+	ObjectOverrides[Instance]
+
+	// Load allows you to override the implementation of the virtual method load.
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	Load func(Instance) bool
+	// Unload allows you to override the implementation of the virtual method unload.
+	Unload func(Instance)
+}
+
+// UnsafeApplyTypeModuleOverrides applies the overrides to init the gclass by setting the trampoline functions.
+// This is used by the bindings internally and only exported for visibility to other bindings code.
+func UnsafeApplyTypeModuleOverrides[Instance TypeModule](gclass unsafe.Pointer, overrides TypeModuleOverrides[Instance]) {
+	UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
+
+	pclass := (*C.GTypeModuleClass)(gclass)
+
+	if overrides.Load != nil {
+		pclass.load = (*[0]byte)(C._gotk4_gobject2_TypeModule_load)
+	}
+
+	if overrides.Unload != nil {
+		pclass.unload = (*[0]byte)(C._gotk4_gobject2_TypeModule_unload)
+	}
+}
+
 // CClosure wraps GCClosure
 //
 // A #GCClosure is a specialization of #GClosure for C function callbacks.
@@ -2944,7 +3014,7 @@ func UnsafeCClosureFromGlibBorrow(p unsafe.Pointer) *CClosure {
 	return &CClosure{&cClosure{(*C.GCClosure)(p)}}
 }
 
-// UnsafeCClosureFromGlibNone is used to convert raw C.GCClosure pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeCClosureFromGlibNone is used to convert raw C.GCClosure pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeCClosureFromGlibNone(p unsafe.Pointer) *CClosure {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeCClosureFromGlibBorrow(p)
@@ -2957,7 +3027,7 @@ func UnsafeCClosureFromGlibNone(p unsafe.Pointer) *CClosure {
 	return wrapped
 }
 
-// UnsafeCClosureFromGlibFull is used to convert raw C.GCClosure pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeCClosureFromGlibFull is used to convert raw C.GCClosure pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeCClosureFromGlibFull(p unsafe.Pointer) *CClosure {
 	wrapped := UnsafeCClosureFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -2989,6 +3059,7 @@ func UnsafeCClosureToGlibFull(c *CClosure) unsafe.Pointer {
 	c.native = nil // CClosure is invalid from here on
 	return _p
 }
+
 // ClosureNotifyData wraps GClosureNotifyData
 type ClosureNotifyData struct {
 	*closureNotifyData
@@ -3004,7 +3075,7 @@ func UnsafeClosureNotifyDataFromGlibBorrow(p unsafe.Pointer) *ClosureNotifyData 
 	return &ClosureNotifyData{&closureNotifyData{(*C.GClosureNotifyData)(p)}}
 }
 
-// UnsafeClosureNotifyDataFromGlibNone is used to convert raw C.GClosureNotifyData pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeClosureNotifyDataFromGlibNone is used to convert raw C.GClosureNotifyData pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeClosureNotifyDataFromGlibNone(p unsafe.Pointer) *ClosureNotifyData {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeClosureNotifyDataFromGlibBorrow(p)
@@ -3017,7 +3088,7 @@ func UnsafeClosureNotifyDataFromGlibNone(p unsafe.Pointer) *ClosureNotifyData {
 	return wrapped
 }
 
-// UnsafeClosureNotifyDataFromGlibFull is used to convert raw C.GClosureNotifyData pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeClosureNotifyDataFromGlibFull is used to convert raw C.GClosureNotifyData pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeClosureNotifyDataFromGlibFull(p unsafe.Pointer) *ClosureNotifyData {
 	wrapped := UnsafeClosureNotifyDataFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -3049,6 +3120,7 @@ func UnsafeClosureNotifyDataToGlibFull(c *ClosureNotifyData) unsafe.Pointer {
 	c.native = nil // ClosureNotifyData is invalid from here on
 	return _p
 }
+
 // EnumClass wraps GEnumClass
 //
 // The class of an enumeration type holds information about its
@@ -3067,7 +3139,7 @@ func UnsafeEnumClassFromGlibBorrow(p unsafe.Pointer) *EnumClass {
 	return &EnumClass{&enumClass{(*C.GEnumClass)(p)}}
 }
 
-// UnsafeEnumClassFromGlibNone is used to convert raw C.GEnumClass pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeEnumClassFromGlibNone is used to convert raw C.GEnumClass pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeEnumClassFromGlibNone(p unsafe.Pointer) *EnumClass {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeEnumClassFromGlibBorrow(p)
@@ -3080,7 +3152,7 @@ func UnsafeEnumClassFromGlibNone(p unsafe.Pointer) *EnumClass {
 	return wrapped
 }
 
-// UnsafeEnumClassFromGlibFull is used to convert raw C.GEnumClass pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeEnumClassFromGlibFull is used to convert raw C.GEnumClass pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeEnumClassFromGlibFull(p unsafe.Pointer) *EnumClass {
 	wrapped := UnsafeEnumClassFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -3112,6 +3184,7 @@ func UnsafeEnumClassToGlibFull(e *EnumClass) unsafe.Pointer {
 	e.native = nil // EnumClass is invalid from here on
 	return _p
 }
+
 // EnumValue wraps GEnumValue
 //
 // A structure which contains a single enum value, its name, and its
@@ -3130,7 +3203,7 @@ func UnsafeEnumValueFromGlibBorrow(p unsafe.Pointer) *EnumValue {
 	return &EnumValue{&enumValue{(*C.GEnumValue)(p)}}
 }
 
-// UnsafeEnumValueFromGlibNone is used to convert raw C.GEnumValue pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeEnumValueFromGlibNone is used to convert raw C.GEnumValue pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeEnumValueFromGlibNone(p unsafe.Pointer) *EnumValue {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeEnumValueFromGlibBorrow(p)
@@ -3143,7 +3216,7 @@ func UnsafeEnumValueFromGlibNone(p unsafe.Pointer) *EnumValue {
 	return wrapped
 }
 
-// UnsafeEnumValueFromGlibFull is used to convert raw C.GEnumValue pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeEnumValueFromGlibFull is used to convert raw C.GEnumValue pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeEnumValueFromGlibFull(p unsafe.Pointer) *EnumValue {
 	wrapped := UnsafeEnumValueFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -3175,6 +3248,7 @@ func UnsafeEnumValueToGlibFull(e *EnumValue) unsafe.Pointer {
 	e.native = nil // EnumValue is invalid from here on
 	return _p
 }
+
 // FlagsClass wraps GFlagsClass
 //
 // The class of a flags type holds information about its
@@ -3193,7 +3267,7 @@ func UnsafeFlagsClassFromGlibBorrow(p unsafe.Pointer) *FlagsClass {
 	return &FlagsClass{&flagsClass{(*C.GFlagsClass)(p)}}
 }
 
-// UnsafeFlagsClassFromGlibNone is used to convert raw C.GFlagsClass pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeFlagsClassFromGlibNone is used to convert raw C.GFlagsClass pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeFlagsClassFromGlibNone(p unsafe.Pointer) *FlagsClass {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeFlagsClassFromGlibBorrow(p)
@@ -3206,7 +3280,7 @@ func UnsafeFlagsClassFromGlibNone(p unsafe.Pointer) *FlagsClass {
 	return wrapped
 }
 
-// UnsafeFlagsClassFromGlibFull is used to convert raw C.GFlagsClass pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeFlagsClassFromGlibFull is used to convert raw C.GFlagsClass pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeFlagsClassFromGlibFull(p unsafe.Pointer) *FlagsClass {
 	wrapped := UnsafeFlagsClassFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -3238,6 +3312,7 @@ func UnsafeFlagsClassToGlibFull(f *FlagsClass) unsafe.Pointer {
 	f.native = nil // FlagsClass is invalid from here on
 	return _p
 }
+
 // FlagsValue wraps GFlagsValue
 //
 // A structure which contains a single flags value, its name, and its
@@ -3256,7 +3331,7 @@ func UnsafeFlagsValueFromGlibBorrow(p unsafe.Pointer) *FlagsValue {
 	return &FlagsValue{&flagsValue{(*C.GFlagsValue)(p)}}
 }
 
-// UnsafeFlagsValueFromGlibNone is used to convert raw C.GFlagsValue pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeFlagsValueFromGlibNone is used to convert raw C.GFlagsValue pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeFlagsValueFromGlibNone(p unsafe.Pointer) *FlagsValue {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeFlagsValueFromGlibBorrow(p)
@@ -3269,7 +3344,7 @@ func UnsafeFlagsValueFromGlibNone(p unsafe.Pointer) *FlagsValue {
 	return wrapped
 }
 
-// UnsafeFlagsValueFromGlibFull is used to convert raw C.GFlagsValue pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeFlagsValueFromGlibFull is used to convert raw C.GFlagsValue pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeFlagsValueFromGlibFull(p unsafe.Pointer) *FlagsValue {
 	wrapped := UnsafeFlagsValueFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -3301,9 +3376,12 @@ func UnsafeFlagsValueToGlibFull(f *FlagsValue) unsafe.Pointer {
 	f.native = nil // FlagsValue is invalid from here on
 	return _p
 }
+
 // InitiallyUnownedClass wraps GInitiallyUnownedClass
 //
 // The class structure for the GInitiallyUnowned type.
+// 
+// InitiallyUnownedClass is the type struct for [InitiallyUnowned]
 type InitiallyUnownedClass struct {
 	*initiallyUnownedClass
 }
@@ -3318,31 +3396,6 @@ func UnsafeInitiallyUnownedClassFromGlibBorrow(p unsafe.Pointer) *InitiallyUnown
 	return &InitiallyUnownedClass{&initiallyUnownedClass{(*C.GInitiallyUnownedClass)(p)}}
 }
 
-// UnsafeInitiallyUnownedClassFromGlibNone is used to convert raw C.GInitiallyUnownedClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeInitiallyUnownedClassFromGlibNone(p unsafe.Pointer) *InitiallyUnownedClass {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeInitiallyUnownedClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.initiallyUnownedClass,
-		func (intern *initiallyUnownedClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeInitiallyUnownedClassFromGlibFull is used to convert raw C.GInitiallyUnownedClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeInitiallyUnownedClassFromGlibFull(p unsafe.Pointer) *InitiallyUnownedClass {
-	wrapped := UnsafeInitiallyUnownedClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.initiallyUnownedClass,
-		func (intern *initiallyUnownedClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
 // UnsafeInitiallyUnownedClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
 // 
 // After this is called, no other method on [InitiallyUnownedClass] is expected to work anymore.
@@ -3355,14 +3408,15 @@ func UnsafeInitiallyUnownedClassToGlibNone(i *InitiallyUnownedClass) unsafe.Poin
 	return unsafe.Pointer(i.native)
 }
 
-// UnsafeInitiallyUnownedClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeInitiallyUnownedClassToGlibFull(i *InitiallyUnownedClass) unsafe.Pointer {
-	runtime.SetFinalizer(i.initiallyUnownedClass, nil)
-	_p := unsafe.Pointer(i.native)
-	i.native = nil // InitiallyUnownedClass is invalid from here on
-	return _p
+// ParentClass returns the type struct of the parent class of this type struct.
+// This essentially casts the underlying c pointer.
+func (i *InitiallyUnownedClass) ParentClass() *ObjectClass {
+	parent := UnsafeObjectClassFromGlibBorrow(UnsafeInitiallyUnownedClassToGlibNone(i))
+	// attach a cleanup to keep the instance alive as long as the parent is referenced
+	runtime.AddCleanup(parent, func(_ *InitiallyUnownedClass) {}, i)
+	return parent
 }
+
 // InterfaceInfo wraps GInterfaceInfo
 //
 // A structure that provides information to the type system which is
@@ -3381,7 +3435,7 @@ func UnsafeInterfaceInfoFromGlibBorrow(p unsafe.Pointer) *InterfaceInfo {
 	return &InterfaceInfo{&interfaceInfo{(*C.GInterfaceInfo)(p)}}
 }
 
-// UnsafeInterfaceInfoFromGlibNone is used to convert raw C.GInterfaceInfo pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeInterfaceInfoFromGlibNone is used to convert raw C.GInterfaceInfo pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeInterfaceInfoFromGlibNone(p unsafe.Pointer) *InterfaceInfo {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeInterfaceInfoFromGlibBorrow(p)
@@ -3394,7 +3448,7 @@ func UnsafeInterfaceInfoFromGlibNone(p unsafe.Pointer) *InterfaceInfo {
 	return wrapped
 }
 
-// UnsafeInterfaceInfoFromGlibFull is used to convert raw C.GInterfaceInfo pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeInterfaceInfoFromGlibFull is used to convert raw C.GInterfaceInfo pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeInterfaceInfoFromGlibFull(p unsafe.Pointer) *InterfaceInfo {
 	wrapped := UnsafeInterfaceInfoFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -3426,6 +3480,7 @@ func UnsafeInterfaceInfoToGlibFull(i *InterfaceInfo) unsafe.Pointer {
 	i.native = nil // InterfaceInfo is invalid from here on
 	return _p
 }
+
 // ObjectConstructParam wraps GObjectConstructParam
 //
 // The GObjectConstructParam struct is an auxiliary structure used to hand
@@ -3444,7 +3499,7 @@ func UnsafeObjectConstructParamFromGlibBorrow(p unsafe.Pointer) *ObjectConstruct
 	return &ObjectConstructParam{&objectConstructParam{(*C.GObjectConstructParam)(p)}}
 }
 
-// UnsafeObjectConstructParamFromGlibNone is used to convert raw C.GObjectConstructParam pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeObjectConstructParamFromGlibNone is used to convert raw C.GObjectConstructParam pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeObjectConstructParamFromGlibNone(p unsafe.Pointer) *ObjectConstructParam {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeObjectConstructParamFromGlibBorrow(p)
@@ -3457,7 +3512,7 @@ func UnsafeObjectConstructParamFromGlibNone(p unsafe.Pointer) *ObjectConstructPa
 	return wrapped
 }
 
-// UnsafeObjectConstructParamFromGlibFull is used to convert raw C.GObjectConstructParam pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeObjectConstructParamFromGlibFull is used to convert raw C.GObjectConstructParam pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeObjectConstructParamFromGlibFull(p unsafe.Pointer) *ObjectConstructParam {
 	wrapped := UnsafeObjectConstructParamFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -3489,6 +3544,7 @@ func UnsafeObjectConstructParamToGlibFull(o *ObjectConstructParam) unsafe.Pointe
 	o.native = nil // ObjectConstructParam is invalid from here on
 	return _p
 }
+
 // ParamSpecClass wraps GParamSpecClass
 //
 // The class structure for the GParamSpec type.
@@ -3508,7 +3564,7 @@ func UnsafeParamSpecClassFromGlibBorrow(p unsafe.Pointer) *ParamSpecClass {
 	return &ParamSpecClass{&paramSpecClass{(*C.GParamSpecClass)(p)}}
 }
 
-// UnsafeParamSpecClassFromGlibNone is used to convert raw C.GParamSpecClass pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeParamSpecClassFromGlibNone is used to convert raw C.GParamSpecClass pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeParamSpecClassFromGlibNone(p unsafe.Pointer) *ParamSpecClass {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeParamSpecClassFromGlibBorrow(p)
@@ -3521,7 +3577,7 @@ func UnsafeParamSpecClassFromGlibNone(p unsafe.Pointer) *ParamSpecClass {
 	return wrapped
 }
 
-// UnsafeParamSpecClassFromGlibFull is used to convert raw C.GParamSpecClass pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeParamSpecClassFromGlibFull is used to convert raw C.GParamSpecClass pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeParamSpecClassFromGlibFull(p unsafe.Pointer) *ParamSpecClass {
 	wrapped := UnsafeParamSpecClassFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -3553,6 +3609,7 @@ func UnsafeParamSpecClassToGlibFull(p *ParamSpecClass) unsafe.Pointer {
 	p.native = nil // ParamSpecClass is invalid from here on
 	return _p
 }
+
 // ParamSpecPool wraps GParamSpecPool
 //
 // A #GParamSpecPool maintains a collection of #GParamSpecs which can be
@@ -3574,7 +3631,7 @@ func UnsafeParamSpecPoolFromGlibBorrow(p unsafe.Pointer) *ParamSpecPool {
 	return &ParamSpecPool{&paramSpecPool{(*C.GParamSpecPool)(p)}}
 }
 
-// UnsafeParamSpecPoolFromGlibNone is used to convert raw C.GParamSpecPool pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeParamSpecPoolFromGlibNone is used to convert raw C.GParamSpecPool pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeParamSpecPoolFromGlibNone(p unsafe.Pointer) *ParamSpecPool {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeParamSpecPoolFromGlibBorrow(p)
@@ -3587,7 +3644,7 @@ func UnsafeParamSpecPoolFromGlibNone(p unsafe.Pointer) *ParamSpecPool {
 	return wrapped
 }
 
-// UnsafeParamSpecPoolFromGlibFull is used to convert raw C.GParamSpecPool pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeParamSpecPoolFromGlibFull is used to convert raw C.GParamSpecPool pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeParamSpecPoolFromGlibFull(p unsafe.Pointer) *ParamSpecPool {
 	wrapped := UnsafeParamSpecPoolFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -3619,6 +3676,7 @@ func UnsafeParamSpecPoolToGlibFull(p *ParamSpecPool) unsafe.Pointer {
 	p.native = nil // ParamSpecPool is invalid from here on
 	return _p
 }
+
 // ParamSpecTypeInfo wraps GParamSpecTypeInfo
 //
 // This structure is used to provide the type system with the information
@@ -3643,7 +3701,7 @@ func UnsafeParamSpecTypeInfoFromGlibBorrow(p unsafe.Pointer) *ParamSpecTypeInfo 
 	return &ParamSpecTypeInfo{&paramSpecTypeInfo{(*C.GParamSpecTypeInfo)(p)}}
 }
 
-// UnsafeParamSpecTypeInfoFromGlibNone is used to convert raw C.GParamSpecTypeInfo pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeParamSpecTypeInfoFromGlibNone is used to convert raw C.GParamSpecTypeInfo pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeParamSpecTypeInfoFromGlibNone(p unsafe.Pointer) *ParamSpecTypeInfo {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeParamSpecTypeInfoFromGlibBorrow(p)
@@ -3656,7 +3714,7 @@ func UnsafeParamSpecTypeInfoFromGlibNone(p unsafe.Pointer) *ParamSpecTypeInfo {
 	return wrapped
 }
 
-// UnsafeParamSpecTypeInfoFromGlibFull is used to convert raw C.GParamSpecTypeInfo pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeParamSpecTypeInfoFromGlibFull is used to convert raw C.GParamSpecTypeInfo pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeParamSpecTypeInfoFromGlibFull(p unsafe.Pointer) *ParamSpecTypeInfo {
 	wrapped := UnsafeParamSpecTypeInfoFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -3688,6 +3746,7 @@ func UnsafeParamSpecTypeInfoToGlibFull(p *ParamSpecTypeInfo) unsafe.Pointer {
 	p.native = nil // ParamSpecTypeInfo is invalid from here on
 	return _p
 }
+
 // SignalInvocationHint wraps GSignalInvocationHint
 //
 // The #GSignalInvocationHint structure is used to pass on additional information
@@ -3706,7 +3765,7 @@ func UnsafeSignalInvocationHintFromGlibBorrow(p unsafe.Pointer) *SignalInvocatio
 	return &SignalInvocationHint{&signalInvocationHint{(*C.GSignalInvocationHint)(p)}}
 }
 
-// UnsafeSignalInvocationHintFromGlibNone is used to convert raw C.GSignalInvocationHint pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeSignalInvocationHintFromGlibNone is used to convert raw C.GSignalInvocationHint pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeSignalInvocationHintFromGlibNone(p unsafe.Pointer) *SignalInvocationHint {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeSignalInvocationHintFromGlibBorrow(p)
@@ -3719,7 +3778,7 @@ func UnsafeSignalInvocationHintFromGlibNone(p unsafe.Pointer) *SignalInvocationH
 	return wrapped
 }
 
-// UnsafeSignalInvocationHintFromGlibFull is used to convert raw C.GSignalInvocationHint pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeSignalInvocationHintFromGlibFull is used to convert raw C.GSignalInvocationHint pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeSignalInvocationHintFromGlibFull(p unsafe.Pointer) *SignalInvocationHint {
 	wrapped := UnsafeSignalInvocationHintFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -3751,6 +3810,7 @@ func UnsafeSignalInvocationHintToGlibFull(s *SignalInvocationHint) unsafe.Pointe
 	s.native = nil // SignalInvocationHint is invalid from here on
 	return _p
 }
+
 // TypeFundamentalInfo wraps GTypeFundamentalInfo
 //
 // A structure that provides information to the type system which is
@@ -3769,7 +3829,7 @@ func UnsafeTypeFundamentalInfoFromGlibBorrow(p unsafe.Pointer) *TypeFundamentalI
 	return &TypeFundamentalInfo{&typeFundamentalInfo{(*C.GTypeFundamentalInfo)(p)}}
 }
 
-// UnsafeTypeFundamentalInfoFromGlibNone is used to convert raw C.GTypeFundamentalInfo pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeTypeFundamentalInfoFromGlibNone is used to convert raw C.GTypeFundamentalInfo pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeTypeFundamentalInfoFromGlibNone(p unsafe.Pointer) *TypeFundamentalInfo {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeTypeFundamentalInfoFromGlibBorrow(p)
@@ -3782,7 +3842,7 @@ func UnsafeTypeFundamentalInfoFromGlibNone(p unsafe.Pointer) *TypeFundamentalInf
 	return wrapped
 }
 
-// UnsafeTypeFundamentalInfoFromGlibFull is used to convert raw C.GTypeFundamentalInfo pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeTypeFundamentalInfoFromGlibFull is used to convert raw C.GTypeFundamentalInfo pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeTypeFundamentalInfoFromGlibFull(p unsafe.Pointer) *TypeFundamentalInfo {
 	wrapped := UnsafeTypeFundamentalInfoFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -3814,6 +3874,7 @@ func UnsafeTypeFundamentalInfoToGlibFull(t *TypeFundamentalInfo) unsafe.Pointer 
 	t.native = nil // TypeFundamentalInfo is invalid from here on
 	return _p
 }
+
 // TypeInfo wraps GTypeInfo
 //
 // This structure is used to provide the type system with the information
@@ -3839,7 +3900,7 @@ func UnsafeTypeInfoFromGlibBorrow(p unsafe.Pointer) *TypeInfo {
 	return &TypeInfo{&typeInfo{(*C.GTypeInfo)(p)}}
 }
 
-// UnsafeTypeInfoFromGlibNone is used to convert raw C.GTypeInfo pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeTypeInfoFromGlibNone is used to convert raw C.GTypeInfo pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeTypeInfoFromGlibNone(p unsafe.Pointer) *TypeInfo {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeTypeInfoFromGlibBorrow(p)
@@ -3852,7 +3913,7 @@ func UnsafeTypeInfoFromGlibNone(p unsafe.Pointer) *TypeInfo {
 	return wrapped
 }
 
-// UnsafeTypeInfoFromGlibFull is used to convert raw C.GTypeInfo pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeTypeInfoFromGlibFull is used to convert raw C.GTypeInfo pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeTypeInfoFromGlibFull(p unsafe.Pointer) *TypeInfo {
 	wrapped := UnsafeTypeInfoFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -3884,6 +3945,7 @@ func UnsafeTypeInfoToGlibFull(t *TypeInfo) unsafe.Pointer {
 	t.native = nil // TypeInfo is invalid from here on
 	return _p
 }
+
 // TypeInstance wraps GTypeInstance
 //
 // An opaque structure used as the base of all type instances.
@@ -3901,7 +3963,7 @@ func UnsafeTypeInstanceFromGlibBorrow(p unsafe.Pointer) *TypeInstance {
 	return &TypeInstance{&typeInstance{(*C.GTypeInstance)(p)}}
 }
 
-// UnsafeTypeInstanceFromGlibNone is used to convert raw C.GTypeInstance pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeTypeInstanceFromGlibNone is used to convert raw C.GTypeInstance pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeTypeInstanceFromGlibNone(p unsafe.Pointer) *TypeInstance {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeTypeInstanceFromGlibBorrow(p)
@@ -3914,7 +3976,7 @@ func UnsafeTypeInstanceFromGlibNone(p unsafe.Pointer) *TypeInstance {
 	return wrapped
 }
 
-// UnsafeTypeInstanceFromGlibFull is used to convert raw C.GTypeInstance pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeTypeInstanceFromGlibFull is used to convert raw C.GTypeInstance pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeTypeInstanceFromGlibFull(p unsafe.Pointer) *TypeInstance {
 	wrapped := UnsafeTypeInstanceFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -3946,10 +4008,13 @@ func UnsafeTypeInstanceToGlibFull(t *TypeInstance) unsafe.Pointer {
 	t.native = nil // TypeInstance is invalid from here on
 	return _p
 }
+
 // TypeModuleClass wraps GTypeModuleClass
 //
 // In order to implement dynamic loading of types based on #GTypeModule,
 // the @load and @unload functions in #GTypeModuleClass must be implemented.
+// 
+// TypeModuleClass is the type struct for [TypeModule]
 type TypeModuleClass struct {
 	*typeModuleClass
 }
@@ -3964,31 +4029,6 @@ func UnsafeTypeModuleClassFromGlibBorrow(p unsafe.Pointer) *TypeModuleClass {
 	return &TypeModuleClass{&typeModuleClass{(*C.GTypeModuleClass)(p)}}
 }
 
-// UnsafeTypeModuleClassFromGlibNone is used to convert raw C.GTypeModuleClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeTypeModuleClassFromGlibNone(p unsafe.Pointer) *TypeModuleClass {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeTypeModuleClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.typeModuleClass,
-		func (intern *typeModuleClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeTypeModuleClassFromGlibFull is used to convert raw C.GTypeModuleClass pointers to go while taking a reference. This is used by the bindings internally.
-func UnsafeTypeModuleClassFromGlibFull(p unsafe.Pointer) *TypeModuleClass {
-	wrapped := UnsafeTypeModuleClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.typeModuleClass,
-		func (intern *typeModuleClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
 // UnsafeTypeModuleClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
 // 
 // After this is called, no other method on [TypeModuleClass] is expected to work anymore.
@@ -4001,14 +4041,15 @@ func UnsafeTypeModuleClassToGlibNone(t *TypeModuleClass) unsafe.Pointer {
 	return unsafe.Pointer(t.native)
 }
 
-// UnsafeTypeModuleClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeTypeModuleClassToGlibFull(t *TypeModuleClass) unsafe.Pointer {
-	runtime.SetFinalizer(t.typeModuleClass, nil)
-	_p := unsafe.Pointer(t.native)
-	t.native = nil // TypeModuleClass is invalid from here on
-	return _p
+// ParentClass returns the type struct of the parent class of this type struct.
+// This essentially casts the underlying c pointer.
+func (t *TypeModuleClass) ParentClass() *ObjectClass {
+	parent := UnsafeObjectClassFromGlibBorrow(UnsafeTypeModuleClassToGlibNone(t))
+	// attach a cleanup to keep the instance alive as long as the parent is referenced
+	runtime.AddCleanup(parent, func(_ *TypeModuleClass) {}, t)
+	return parent
 }
+
 // TypePluginClass wraps GTypePluginClass
 //
 // The #GTypePlugin interface is used by the type system in order to handle
@@ -4027,7 +4068,7 @@ func UnsafeTypePluginClassFromGlibBorrow(p unsafe.Pointer) *TypePluginClass {
 	return &TypePluginClass{&typePluginClass{(*C.GTypePluginClass)(p)}}
 }
 
-// UnsafeTypePluginClassFromGlibNone is used to convert raw C.GTypePluginClass pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeTypePluginClassFromGlibNone is used to convert raw C.GTypePluginClass pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeTypePluginClassFromGlibNone(p unsafe.Pointer) *TypePluginClass {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeTypePluginClassFromGlibBorrow(p)
@@ -4040,7 +4081,7 @@ func UnsafeTypePluginClassFromGlibNone(p unsafe.Pointer) *TypePluginClass {
 	return wrapped
 }
 
-// UnsafeTypePluginClassFromGlibFull is used to convert raw C.GTypePluginClass pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeTypePluginClassFromGlibFull is used to convert raw C.GTypePluginClass pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeTypePluginClassFromGlibFull(p unsafe.Pointer) *TypePluginClass {
 	wrapped := UnsafeTypePluginClassFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -4072,6 +4113,7 @@ func UnsafeTypePluginClassToGlibFull(t *TypePluginClass) unsafe.Pointer {
 	t.native = nil // TypePluginClass is invalid from here on
 	return _p
 }
+
 // TypeValueTable wraps GTypeValueTable
 //
 // The #GTypeValueTable provides the functions required by the #GValue
@@ -4090,7 +4132,7 @@ func UnsafeTypeValueTableFromGlibBorrow(p unsafe.Pointer) *TypeValueTable {
 	return &TypeValueTable{&typeValueTable{(*C.GTypeValueTable)(p)}}
 }
 
-// UnsafeTypeValueTableFromGlibNone is used to convert raw C.GTypeValueTable pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeTypeValueTableFromGlibNone is used to convert raw C.GTypeValueTable pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeTypeValueTableFromGlibNone(p unsafe.Pointer) *TypeValueTable {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeTypeValueTableFromGlibBorrow(p)
@@ -4103,7 +4145,7 @@ func UnsafeTypeValueTableFromGlibNone(p unsafe.Pointer) *TypeValueTable {
 	return wrapped
 }
 
-// UnsafeTypeValueTableFromGlibFull is used to convert raw C.GTypeValueTable pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeTypeValueTableFromGlibFull is used to convert raw C.GTypeValueTable pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeTypeValueTableFromGlibFull(p unsafe.Pointer) *TypeValueTable {
 	wrapped := UnsafeTypeValueTableFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -4135,6 +4177,7 @@ func UnsafeTypeValueTableToGlibFull(t *TypeValueTable) unsafe.Pointer {
 	t.native = nil // TypeValueTable is invalid from here on
 	return _p
 }
+
 // WeakRef wraps GWeakRef
 //
 // A structure containing a weak reference to a #GObject.
@@ -4175,7 +4218,7 @@ func UnsafeWeakRefFromGlibBorrow(p unsafe.Pointer) *WeakRef {
 	return &WeakRef{&weakRef{(*C.GWeakRef)(p)}}
 }
 
-// UnsafeWeakRefFromGlibNone is used to convert raw C.GWeakRef pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeWeakRefFromGlibNone is used to convert raw C.GWeakRef pointers to go without transferring ownership. This is used by the bindings internally.
 func UnsafeWeakRefFromGlibNone(p unsafe.Pointer) *WeakRef {
 	// FIXME: this has no ref function, what should we do here?
 	wrapped := UnsafeWeakRefFromGlibBorrow(p)
@@ -4188,7 +4231,7 @@ func UnsafeWeakRefFromGlibNone(p unsafe.Pointer) *WeakRef {
 	return wrapped
 }
 
-// UnsafeWeakRefFromGlibFull is used to convert raw C.GWeakRef pointers to go while taking a reference. This is used by the bindings internally.
+// UnsafeWeakRefFromGlibFull is used to convert raw C.GWeakRef pointers to go while taking ownership. This is used by the bindings internally.
 func UnsafeWeakRefFromGlibFull(p unsafe.Pointer) *WeakRef {
 	wrapped := UnsafeWeakRefFromGlibBorrow(p)
 	runtime.SetFinalizer(
@@ -4220,3 +4263,4 @@ func UnsafeWeakRefToGlibFull(w *WeakRef) unsafe.Pointer {
 	w.native = nil // WeakRef is invalid from here on
 	return _p
 }
+

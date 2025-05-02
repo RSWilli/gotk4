@@ -4,12 +4,27 @@ import (
 	"fmt"
 
 	"github.com/diamondburned/gotk4/gir"
+	"github.com/diamondburned/gotk4/gir/girgen/strcases"
 )
 
 type VirtualMethod struct {
+	// TrampolineName is the name of the trampoline function that needs to be
+	// called when the virtual function was overridden.
 	TrampolineName string
 
+	// ParentTrampolineName is the C function name that is used to call the C function pointer
+	// of the virtual method of the parent class. This is needed because we cannot cast c function pointers
+	// to callable functions.
+	ParentTrampolineName string
+
 	Invoker *Field
+
+	// GoName is the name of the override in the Overrides struct.
+	GoName string
+
+	// ParentName is the name of the method on the instance that calls the default implementation
+	// on the parent class.
+	ParentName string
 
 	*Parameters
 }
@@ -25,8 +40,11 @@ func NewVirtualMethod(e *env, parent Type, typestruct *Record, v gir.VirtualMeth
 
 	e = e.sub("virtual method", v.Name)
 
+	// e.g. _gotk4_gtk4_AccessibleText_get_contents
+	trampoline := fmt.Sprintf("%s_%s_%s", e.trampolinePrefix(), parent.GoType(1), v.Name)
+
 	// e.g. _gotk4_gtk4_AccessibleText_virtual_get_contents
-	tramp := fmt.Sprintf("_%s_%s_virtual_%s", e.trampolinePrefix(), parent.GoType(0), v.Name)
+	parentTrampoline := fmt.Sprintf("%s_%s_virtual_%s", e.trampolinePrefix(), parent.GoType(1), v.Name)
 
 	params, _ := NewCallableParameters(e, v.CallableAttrs)
 
@@ -41,10 +59,15 @@ func NewVirtualMethod(e *env, parent Type, typestruct *Record, v gir.VirtualMeth
 		return nil
 	}
 
+	goname := strcases.SnakeToGo(true, field.CIndentifier())
+
 	return &VirtualMethod{
-		TrampolineName: tramp,
+		TrampolineName:       trampoline,
+		ParentTrampolineName: parentTrampoline,
 
 		Invoker:    field,
+		GoName:     goname,
+		ParentName: fmt.Sprintf("Parent%s", goname),
 		Parameters: params,
 	}
 }

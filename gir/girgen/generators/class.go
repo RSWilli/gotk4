@@ -20,6 +20,8 @@ type ClassGenerator struct {
 	// Methods contains all generated methods for the interface of the class
 	// This includes generated signal connect and emit methods
 	Methods MethodGeneratorList
+
+	Overrides Generator
 }
 
 func (g *ClassGenerator) Generate(w *file.Package) {
@@ -103,12 +105,13 @@ func (g *ClassGenerator) Generate(w *file.Package) {
 		w,
 		g.SubGenerators,
 		g.Methods,
+		g.Overrides,
 	)
 }
 
 func (g *ClassGenerator) generateWrapFunction(w file.File) {
 	baseClassIdentifier := "base"
-	baseClass := g.BaseClass()
+	baseClass := g.BaseClass
 
 	w.GoImportNamespace(baseClass.Namespace)
 
@@ -137,6 +140,12 @@ func NewClassGenerator(c *typesystem.Class) *ClassGenerator {
 		Doc:       NewTypeGoDocGenerator(c),
 		Class:     c,
 		Marshaler: marshaler,
+
+		Overrides: NoopGenerator{},
+	}
+
+	if !c.Final {
+		g.Overrides = NewGoOverridesGenerator(c)
 	}
 
 	for _, constructor := range c.Constructors {

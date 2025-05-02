@@ -24,6 +24,8 @@ type InterfaceGenerator struct {
 	// Methods contains all generated methods for the go interface of the interface
 	// This includes generated signal connect and emit methods
 	Methods MethodGeneratorList
+
+	Overrides Generator
 }
 
 func (g *InterfaceGenerator) Generate(w *file.Package) {
@@ -122,6 +124,7 @@ func (g *InterfaceGenerator) Generate(w *file.Package) {
 		w,
 		g.SubGenerators,
 		g.Methods,
+		g.Overrides,
 	)
 }
 
@@ -136,6 +139,8 @@ func NewInterfaceGenerator(c *typesystem.Interface) *InterfaceGenerator {
 		Doc:       NewTypeGoDocGenerator(c),
 		Interface: c,
 		Marshaler: marshaler,
+
+		Overrides: NewGoOverridesGenerator(c),
 	}
 
 	for _, fn := range c.Functions {

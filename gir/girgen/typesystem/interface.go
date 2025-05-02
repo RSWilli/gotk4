@@ -23,6 +23,13 @@ type Interface struct {
 
 	GoPrivateUpcastMethod string
 
+	// GoExtendOverrideStructName is the name of the struct that will be used to to override virtual class methods
+	// when extending the class.
+	GoExtendOverrideStructName string
+	// GoUnsafeApplyOverridesName is the name of the function that will be used to apply the overrides
+	// to the gclass.
+	GoUnsafeApplyOverridesName string
+
 	GoInterfaceName string
 
 	BaseConversions
@@ -93,6 +100,9 @@ func DeclareInterface(e *env, v gir.Interface) *Interface {
 		GoWrapBaseClassFunction: fmt.Sprintf("unsafeWrap%s", v.Name),
 
 		GoPrivateUpcastMethod: fmt.Sprintf("upcastTo%s", v.CType), // use cidentifier to not shadow parent methods
+
+		GoExtendOverrideStructName: fmt.Sprintf("%sOverrides", v.Name),
+		GoUnsafeApplyOverridesName: fmt.Sprintf("UnsafeApply%sOverrides", v.Name),
 
 		BaseConversions: BaseConversions{
 			FromGlibBorrowFunction: "", // no borrow function for interfaces

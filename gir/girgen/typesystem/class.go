@@ -14,6 +14,10 @@ type Class struct {
 
 	Doc
 
+	// BaseClass is GObject. It is needed to identify needed foreign references to functions and types
+	// if we are in a different namespace (which mostly we are)
+	BaseClass CouldBeForeign[*Class]
+
 	// GoInterfaceName is the name of the interface that describes the class. Every extending class will implement this
 	// interface. Constructors and methods on the class will use the interface (e.g. MyClasser) name instead of the pointer type
 	// (e.g. *MyClass) to allow easy passing of child class types.
@@ -23,10 +27,19 @@ type Class struct {
 
 	GoPrivateUpcastMethod string
 
+	// GoExtendOverrideStructName is the name of the struct that will be used to to override virtual class methods
+	// when extending the class.
+	GoExtendOverrideStructName string
+	// GoUnsafeApplyOverridesName is the name of the function that will be used to apply the overrides
+	// to the gclass.
+	GoUnsafeApplyOverridesName string
+
 	BaseConversions
 	Marshaler
 
 	Abstract bool
+	// Final is true if the class is final. This means that it can't be extended by other classes.
+	Final bool
 
 	// gir is used to resolve the class and it's nested definitions after it has been declared
 	gir gir.Class
@@ -96,10 +109,13 @@ func DeclareClass(e *env, v gir.Class) *Class {
 	c := &Class{
 		Doc:             NewDoc(&v.InfoAttrs, &v.InfoElements),
 		Abstract:        v.Abstract,
+		Final:           false, // overridden after the type struct is resolved
 		GoInterfaceName: v.Name,
 
-		GoWrapBaseClassFunction: fmt.Sprintf("unsafeWrap%s", v.Name),
-		GoPrivateUpcastMethod:   fmt.Sprintf("upcastTo%s", v.CType), // use cidentifier to not shadow parent methods
+		GoWrapBaseClassFunction:    fmt.Sprintf("unsafeWrap%s", v.Name),
+		GoPrivateUpcastMethod:      fmt.Sprintf("upcastTo%s", v.CType), // use cidentifier to not shadow parent methods
+		GoExtendOverrideStructName: fmt.Sprintf("%sOverrides", v.Name),
+		GoUnsafeApplyOverridesName: fmt.Sprintf("UnsafeApply%sOverrides", v.Name),
 
 		BaseConversions: BaseConversions{
 			FromGlibBorrowFunction: "", // no borrow function for classes
@@ -126,6 +142,20 @@ func DeclareClass(e *env, v gir.Class) *Class {
 func (c *Class) resolve(e *env) bool {
 	e = e.sub("class", c.gir.CType)
 
+	ns, baseClass := e.findTypeByGIRName("GObject.Object")
+	if baseClass == nil {
+		panic("Gobject.Object not found")
+	}
+
+	if _, ok := baseClass.(*Class); !ok {
+		panic("gobject is not a class")
+	}
+
+	c.BaseClass = CouldBeForeign[*Class]{
+		Namespace: ns,
+		Type:      baseClass.(*Class),
+	}
+
 	if c.gir.GLibTypeStruct != "" {
 		ns, typeStructType := e.findTypeByGIRName(c.gir.GLibTypeStruct)
 
@@ -138,6 +168,7 @@ func (c *Class) resolve(e *env) bool {
 			return false
 		}
 
+		// FIXME: the typestruct can also be an alias for a record
 		typeStruct, ok := typeStructType.(*Record)
 
 		if !ok {
@@ -146,7 +177,12 @@ func (c *Class) resolve(e *env) bool {
 		}
 
 		c.TypeStruct = typeStruct
+
+		typeStruct.markAsTypestructFor(e, c)
 	}
+
+	// Final check as in https://gitlab.gnome.org/GNOME/gi-docgen/-/blob/9bec04ee3a294111121c45be77f9b7803206f7f9/gidocgen/gdgenerate.py?page=2#L1548-1564
+	c.Final = c.gir.GLibTypeStruct == "" || c.TypeStruct.gir.Disguised
 
 	ns, parent := e.findTypeByGIRName(c.gir.Parent)
 
@@ -273,74 +309,63 @@ func (c *Class) ParentGoInterfaceName() string {
 }
 
 func (c *Class) BaseClassGoUnsafeFromGlibFullFunction() string {
-	base := c.BaseClass()
+	base := c.BaseClass
 	return base.WithForeignNamespace(base.Type.GoUnsafeFromGlibFullFunction())
 }
 
 func (c *Class) BaseClassGoUnsafeFromGlibNoneFunction() string {
-	base := c.BaseClass()
+	base := c.BaseClass
 	return base.WithForeignNamespace(base.Type.GoUnsafeFromGlibNoneFunction())
 }
 
 func (c *Class) BaseClassGoUnsafeToGlibFullFunction() string {
-	base := c.BaseClass()
+	base := c.BaseClass
 	return base.WithForeignNamespace(base.Type.GoUnsafeToGlibFullFunction())
 }
 
 func (c *Class) BaseClassGoUnsafeToGlibNoneFunction() string {
-	base := c.BaseClass()
+	base := c.BaseClass
 	return base.WithForeignNamespace(base.Type.GoUnsafeToGlibNoneFunction())
 }
 
-// BaseClass returns the base class from the view of the namespace of c
-func (c *Class) BaseClass() CouldBeForeign[*Class] {
-	parents := c.AllParents()
+// // AllParents returns a list of parents. Note that the list is relative to the current namespace,
+// // meaning that foreign types will be labeled as such.
+// //
+// // This also requires that the following chain can happen:
+// //
+// //	C1 -> ForeignA[C2] -> C3 -> ForeignB[C4] -> C5
+// //
+// // From the view of C1 the classes C3 and C5 are also foreign in there respective namespaces. C5 is the base
+// // class so it will be used as a pointer. They will get returned as:
+// //
+// //	[ForeignA[C2], ForeignA[C3], ForeignB[C4], ForeignB[C5]]
+// func (c *Class) AllParents() []CouldBeForeign[*Class] {
+// 	parents := make([]CouldBeForeign[*Class], 0, 10) // abitrary cap
 
-	if len(parents) == 0 {
-		panic("class is already the base class")
-	}
+// 	currentNs := c.Parent.Namespace
+// 	currentParent := c.Parent.Type
 
-	return parents[len(parents)-1]
-}
+// 	for {
+// 		parents = append(parents, CouldBeForeign[*Class]{
+// 			Namespace: currentNs,
+// 			Type:      currentParent,
+// 		})
 
-// AllParents returns a list of parents. Note that the list is relative to the current namespace,
-// meaning that foreign types will be labeled as such.
-//
-// This also requires that the following chain can happen:
-//
-//	C1 -> ForeignA[C2] -> C3 -> ForeignB[C4] -> C5
-//
-// From the view of C1 the classes C3 and C5 are also foreign in there respective namespaces. C5 is the base
-// class so it will be used as a pointer. They will get returned as:
-//
-//	[ForeignA[C2], ForeignA[C3], ForeignB[C4], ForeignB[C5]]
-func (c *Class) AllParents() []CouldBeForeign[*Class] {
-	parents := make([]CouldBeForeign[*Class], 0, 10) // abitrary cap
+// 		if currentParent.Parent.Type == nil {
+// 			break
+// 		}
 
-	currentNs := c.Parent.Namespace
-	currentParent := c.Parent.Type
+// 		nextParent := currentParent.Parent.Type
 
-	for {
-		parents = append(parents, CouldBeForeign[*Class]{
-			Namespace: currentNs,
-			Type:      currentParent,
-		})
+// 		if currentParent.Parent.Namespace != nil {
+// 			// only change the current namespace if the type is not local
+// 			// to the current type. If current type was foreign to c and next type
+// 			// is local to current, then next will still be foreign to c
+// 			currentNs = currentParent.Parent.Namespace
+// 		}
 
-		if currentParent.Parent.Type == nil {
-			break
-		}
+// 		currentParent = nextParent
+// 	}
 
-		nextParent := currentParent.Parent.Type
-
-		if currentParent.Parent.Namespace != nil {
-			// only change the current namespace if the type is not local
-			// to the current type. If current type was foreign to c and next type
-			// is local to current, then next will still be foreign to c
-			currentNs = currentParent.Parent.Namespace
-		}
-
-		currentParent = nextParent
-	}
-
-	return parents
-}
+// 	return parents
+// }

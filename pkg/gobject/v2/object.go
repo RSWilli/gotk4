@@ -269,9 +269,12 @@ func (v *ObjectInstance) propertyType(cstr *C.gchar) Type {
 }
 
 // TypeFromInstance is a wrapper around g_type_from_instance().
-// This is needed to lookup the signals in a signalquery for the object.
 func (v *ObjectInstance) typeFromInstance() Type {
-	c := C._g_type_from_instance(C.gpointer(v.unsafe()))
+	return unsafeTypeFromObject(v.unsafe())
+}
+
+func unsafeTypeFromObject(instance unsafe.Pointer) Type {
+	c := C._g_type_from_instance(C.gpointer(instance))
 	return Type(c)
 }
 
