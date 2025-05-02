@@ -28,7 +28,7 @@ func (cbs externCallbacks) reader() io.Reader {
 		for _, p := range cb.CParameters() {
 			params = append(params, p.CType())
 		}
-		
+
 		declarations = append(declarations, fmt.Sprintf("// extern %s %s(%s);\n", cb.CReturn.CType(), cb.TrampolineName, strings.Join(params, ", ")))
 	}
 
