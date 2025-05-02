@@ -10,19 +10,26 @@ import (
 )
 
 type GoDocGenerator struct {
-	DocString string
-	GIRDoc    typesystem.Doc
+	DocParagraphs []string
+	GIRDoc        typesystem.Doc
 }
 
 func (docg *GoDocGenerator) Generate(w file.CodeWriter) {
 	// scan the lines of the comment and prefix each line with "// "
-	r := strings.NewReader(docg.DocString)
-	scanner := bufio.NewScanner(r) // scan lines
+	for i, paragraph := range docg.DocParagraphs {
+		r := strings.NewReader(paragraph)
+		scanner := bufio.NewScanner(r) // scan lines
 
-	for scanner.Scan() {
-		w.Write([]byte("// "))
-		w.Write(scanner.Bytes())
-		w.Write([]byte("\n"))
+		for scanner.Scan() {
+			w.Write([]byte("// "))
+			w.Write(scanner.Bytes())
+			w.Write([]byte("\n"))
+		}
+
+		// add a blank line between paragraphs
+		if i < len(docg.DocParagraphs)-1 {
+			w.Write([]byte("// \n"))
+		}
 	}
 
 	var zerodoc typesystem.Doc
@@ -33,9 +40,9 @@ func (docg *GoDocGenerator) Generate(w file.CodeWriter) {
 
 	w.Write([]byte("//\n"))
 
-	// scan the lines of the comment and prefix each line with "//\t" to signify a quote/code example
-	r = strings.NewReader(docg.GIRDoc.Doc)
-	scanner = bufio.NewScanner(r) // scan lines
+	// scan the lines of the comment and prefix each line with "// "
+	r := strings.NewReader(docg.GIRDoc.Doc)
+	scanner := bufio.NewScanner(r) // scan lines
 
 	for scanner.Scan() {
 		w.Write([]byte("// "))
@@ -75,6 +82,11 @@ type DocumentedIdentifier interface {
 	typesystem.Documented
 }
 
+type DocumentedCallable interface {
+	DocumentedIdentifier
+	typesystem.Callable
+}
+
 func NewSignalGoDocGenerator(sig *typesystem.Signal) *GoDocGenerator {
 	var docstring string
 
@@ -85,15 +97,15 @@ func NewSignalGoDocGenerator(sig *typesystem.Signal) *GoDocGenerator {
 	}
 
 	return &GoDocGenerator{
-		DocString: docstring,
-		GIRDoc:    sig.Doc,
+		DocParagraphs: []string{docstring},
+		GIRDoc:        sig.Doc,
 	}
 }
 
 func NewIdentifierGoDocGenerator(identifier DocumentedIdentifier) *GoDocGenerator {
 	return &GoDocGenerator{
-		DocString: fmt.Sprintf("%s wraps %s", identifier.GoIndentifier(), identifier.CIndentifier()),
-		GIRDoc:    identifier.Documentation(),
+		DocParagraphs: []string{fmt.Sprintf("%s wraps %s", identifier.GoIndentifier(), identifier.CIndentifier())},
+		GIRDoc:        identifier.Documentation(),
 	}
 }
 
@@ -108,38 +120,51 @@ func NewTypeGoDocGenerator(typ DocumentedType) *GoDocGenerator {
 	}
 
 	return &GoDocGenerator{
-		DocString: fmt.Sprintf("%s wraps %s", gotype, typ.CType(0)),
-		GIRDoc:    typ.Documentation(),
+		DocParagraphs: []string{fmt.Sprintf("%s wraps %s", gotype, typ.CType(0))},
+		GIRDoc:        typ.Documentation(),
 	}
 }
 
-func NewCallableGoDocGenerator(callable *typesystem.CallableSignature) *GoDocGenerator {
+func NewCallableGoDocGenerator(callable DocumentedCallable) *GoDocGenerator {
 	g := NewIdentifierGoDocGenerator(callable)
+	g2 := NewParametersGoDocGenerator(callable)
 
-	var doc strings.Builder
+	g.DocParagraphs = append(g.DocParagraphs, g2.DocParagraphs...)
 
-	doc.WriteString(g.DocString)
+	return g
+}
 
-	if len(callable.GoParameters) > 0 {
-		doc.WriteString("\n\nThe function takes the following parameters:\n\n")
+func NewParametersGoDocGenerator(callable typesystem.Callable) *GoDocGenerator {
+	g := &GoDocGenerator{}
 
-		for _, param := range callable.GoParameters {
+	params := callable.CallableParameters()
+
+	if len(params.GoParameters) > 0 {
+		g.DocParagraphs = append(g.DocParagraphs, "The function takes the following parameters:\n")
+
+		var paramDoc strings.Builder
+
+		for _, param := range params.GoParameters {
 			if param.Skip || param.Implicit {
 				continue
 			}
-			fmt.Fprintf(&doc, "\t- %s \n", paramDocListItem(param))
+			fmt.Fprintf(&paramDoc, "\t- %s \n", paramDocListItem(param))
 		}
+
+		g.DocParagraphs = append(g.DocParagraphs, paramDoc.String())
 	}
 
-	if len(callable.GoReturns) > 0 {
-		doc.WriteString("\nThe function returns the following values:\n\n")
+	if len(params.GoReturns) > 0 {
+		g.DocParagraphs = append(g.DocParagraphs, "The function returns the following values:\n")
 
-		for _, rv := range callable.GoReturns {
-			fmt.Fprintf(&doc, "\t- %s \n", paramDocListItem(rv))
+		var returnDoc strings.Builder
+
+		for _, rv := range params.GoReturns {
+			fmt.Fprintf(&returnDoc, "\t- %s \n", paramDocListItem(rv))
 		}
-	}
 
-	g.DocString = doc.String()
+		g.DocParagraphs = append(g.DocParagraphs, returnDoc.String())
+	}
 
 	return g
 }
