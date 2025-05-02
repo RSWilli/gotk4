@@ -165,6 +165,8 @@ func (m *VirtualMethodGenerator) GenerateClassOverrideField(w file.File) {
 			continue
 		}
 
+		w.GoImportType(param.Type)
+
 		vparams = append(vparams, param.GoType())
 	}
 
