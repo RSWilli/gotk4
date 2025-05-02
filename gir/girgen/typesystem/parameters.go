@@ -120,6 +120,10 @@ func (p *Param) CType() string {
 	return p.Type.Type.CType(p.CTypePointers)
 }
 
+type Callable interface {
+	CallableParameters() *Parameters
+}
+
 type Parameters struct {
 	Doc
 
@@ -143,6 +147,11 @@ type Parameters struct {
 	// GoParameters will contain the parameters of the go function. C Params that are declared as "out"
 	// will not be in this list.
 	GoParameters ParamList
+}
+
+// CallableParameters implements the Callable interface
+func (p *Parameters) CallableParameters() *Parameters {
+	return p
 }
 
 func (param *Param) valid(e *env) bool {
