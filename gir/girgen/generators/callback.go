@@ -209,7 +209,7 @@ func NewCallbackGenerator(cb *typesystem.Callback) *CallbackGenerator {
 	return g
 }
 
-// GoSignature returns a string of the go function signature.
+// CGoTrampolineSignature returns a string of the cgo trampoline function signature.
 func (m *CallbackGenerator) CGoTrampolineSignature() string {
 	var ret string
 	if m.Callback.CReturn != nil && m.Callback.CReturn.Type.Type != typesystem.Void {
