@@ -42,6 +42,7 @@ func (s *SignalEmitGenerator) Generate(w *file.Package) {
 	}
 	w.Go().Unindent()
 	fmt.Fprintln(w.Go(), "}")
+	fmt.Fprintln(w.Go(), "")
 }
 
 // objectIdentifier returns the struct field that contains the gobject. This is only needed for interfaces.

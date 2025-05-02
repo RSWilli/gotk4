@@ -33,6 +33,7 @@ func (s *SignalConnectGenerator) Generate(w *file.Package) {
 	fmt.Fprintf(w.Go(), "return %s.Connect(\"%s\", fn)\n", s.objectIdentifier(), s.Name)
 	w.Go().Unindent()
 	fmt.Fprintln(w.Go(), "}")
+	fmt.Fprintln(w.Go(), "")
 }
 
 // objectIdentifier returns the struct field that contains the gobject. This is only needed for interfaces.
