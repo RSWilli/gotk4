@@ -268,6 +268,12 @@ func (v *ObjectInstance) propertyType(cstr *C.gchar) Type {
 	return Type(paramSpec.value_type)
 }
 
+func (v *ObjectInstance) unsafePrivateData() unsafe.Pointer {
+	private := C.g_type_instance_get_private((*C.GTypeInstance)(v.unsafe()), C.GType(v.typeFromInstance()))
+
+	return unsafe.Pointer(private)
+}
+
 // TypeFromInstance is a wrapper around g_type_from_instance().
 func (v *ObjectInstance) typeFromInstance() Type {
 	return unsafeTypeFromObject(v.unsafe())

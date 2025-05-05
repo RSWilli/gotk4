@@ -5,6 +5,7 @@ package gdk
 import (
 	"unsafe"
 
+	"github.com/diamondburned/gotk4/pkg/core/classdata"
 	"github.com/diamondburned/gotk4/pkg/core/userdata"
 )
 
@@ -58,11 +59,25 @@ func _gotk4_gdk3_WindowChildFunc(carg1 *C.GdkWindow, carg2 C.gpointer) (cret C.g
 
 //export _gotk4_gdk3_Window_from_embedder
 func _gotk4_gdk3_Window_from_embedder(carg0 *C.GdkWindow, carg1 C.gdouble, carg2 C.gdouble, carg3 *C.gdouble, carg4 *C.gdouble) {
-	panic("unimplemented")
+	var fn func(carg0 *C.GdkWindow, carg1 C.gdouble, carg2 C.gdouble, carg3 *C.gdouble, carg4 *C.gdouble)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gdk3_Window_from_embedder").(func(carg0 *C.GdkWindow, carg1 C.gdouble, carg2 C.gdouble, carg3 *C.gdouble, carg4 *C.gdouble))
+		if fn == nil {
+			panic("_gotk4_gdk3_Window_from_embedder: no function pointer found")
+		}
+	}
+	fn(carg0, carg1, carg2, carg3, carg4)
 }
 
 //export _gotk4_gdk3_Window_to_embedder
 func _gotk4_gdk3_Window_to_embedder(carg0 *C.GdkWindow, carg1 C.gdouble, carg2 C.gdouble, carg3 *C.gdouble, carg4 *C.gdouble) {
-	panic("unimplemented")
+	var fn func(carg0 *C.GdkWindow, carg1 C.gdouble, carg2 C.gdouble, carg3 *C.gdouble, carg4 *C.gdouble)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gdk3_Window_to_embedder").(func(carg0 *C.GdkWindow, carg1 C.gdouble, carg2 C.gdouble, carg3 *C.gdouble, carg4 *C.gdouble))
+		if fn == nil {
+			panic("_gotk4_gdk3_Window_to_embedder: no function pointer found")
+		}
+	}
+	fn(carg0, carg1, carg2, carg3, carg4)
 }
 

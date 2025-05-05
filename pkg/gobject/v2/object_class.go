@@ -29,3 +29,27 @@ func (o *ObjectClass) UnsafeAddPrivateData(size uintptr) {
 	// FIXME: this is deprecated, but the alternative is a macro?
 	C.g_type_class_add_private(C.gpointer(o.native), C.gsize(size))
 }
+
+func RegisterObjectSubClass[InstanceT Object](
+	name string,
+	classInit func(class *ObjectClass),
+	constructor func() InstanceT,
+	overrides ObjectOverrides[InstanceT],
+	signals map[string]SignalDefinition,
+	interfaceInits ...SubClassInterfaceInit[InstanceT],
+) Type {
+	return UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeObject,
+		UnsafeObjectClassFromGlibBorrow,
+		UnsafeApplyObjectOverrides,
+		func(obj *ObjectInstance) Object {
+			return obj
+		},
+		interfaceInits...,
+	)
+}

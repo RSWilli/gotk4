@@ -9,6 +9,7 @@ import (
 	"strings"
 	"unsafe"
 
+	"github.com/diamondburned/gotk4/pkg/core/classdata"
 	"github.com/diamondburned/gotk4/pkg/core/userdata"
 	"github.com/diamondburned/gotk4/pkg/gdkpixbuf/v2"
 	"github.com/diamondburned/gotk4/pkg/gio/v2"
@@ -8942,26 +8943,123 @@ func UnsafeApplyPaintableOverrides[Instance Paintable](gclass unsafe.Pointer, ov
 
 	if overrides.GetCurrentImage != nil {
 		pclass.get_current_image = (*[0]byte)(C._gotk4_gdk4_Paintable_get_current_image)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gdk4_Paintable_get_current_image",
+			func(carg0 *C.GdkPaintable) (cret *C.GdkPaintable) {
+				var paintable Instance  // go GdkPaintable subclass
+				var goret     Paintable // return, full, converted
+
+				paintable = UnsafePaintableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetCurrentImage(paintable)
+
+				cret = (*C.GdkPaintable)(UnsafePaintableToGlibFull(goret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetFlags != nil {
 		pclass.get_flags = (*[0]byte)(C._gotk4_gdk4_Paintable_get_flags)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gdk4_Paintable_get_flags",
+			func(carg0 *C.GdkPaintable) (cret C.GdkPaintableFlags) {
+				var paintable Instance       // go GdkPaintable subclass
+				var goret     PaintableFlags // return, none, casted
+
+				paintable = UnsafePaintableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetFlags(paintable)
+
+				cret = C.GdkPaintableFlags(goret)
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetIntrinsicAspectRatio != nil {
 		pclass.get_intrinsic_aspect_ratio = (*[0]byte)(C._gotk4_gdk4_Paintable_get_intrinsic_aspect_ratio)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gdk4_Paintable_get_intrinsic_aspect_ratio",
+			func(carg0 *C.GdkPaintable) (cret C.double) {
+				var paintable Instance // go GdkPaintable subclass
+				var goret     float64  // return, none, casted, casted C.gdouble
+
+				paintable = UnsafePaintableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetIntrinsicAspectRatio(paintable)
+
+				cret = C.double(goret)
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetIntrinsicHeight != nil {
 		pclass.get_intrinsic_height = (*[0]byte)(C._gotk4_gdk4_Paintable_get_intrinsic_height)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gdk4_Paintable_get_intrinsic_height",
+			func(carg0 *C.GdkPaintable) (cret C.int) {
+				var paintable Instance // go GdkPaintable subclass
+				var goret     int      // return, none, casted, casted C.gint
+
+				paintable = UnsafePaintableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetIntrinsicHeight(paintable)
+
+				cret = C.int(goret)
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetIntrinsicWidth != nil {
 		pclass.get_intrinsic_width = (*[0]byte)(C._gotk4_gdk4_Paintable_get_intrinsic_width)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gdk4_Paintable_get_intrinsic_width",
+			func(carg0 *C.GdkPaintable) (cret C.int) {
+				var paintable Instance // go GdkPaintable subclass
+				var goret     int      // return, none, casted, casted C.gint
+
+				paintable = UnsafePaintableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetIntrinsicWidth(paintable)
+
+				cret = C.int(goret)
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.Snapshot != nil {
 		pclass.snapshot = (*[0]byte)(C._gotk4_gdk4_Paintable_snapshot)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gdk4_Paintable_snapshot",
+			func(carg0 *C.GdkPaintable, carg1 *C.GdkSnapshot, carg2 C.double, carg3 C.double) {
+				var paintable Instance // go GdkPaintable subclass
+				var snapshot  Snapshot // in, none, converted
+				var width     float64  // in, none, casted, casted C.gdouble
+				var height    float64  // in, none, casted, casted C.gdouble
+
+				paintable = UnsafePaintableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				snapshot = UnsafeSnapshotFromGlibNone(unsafe.Pointer(carg1))
+				width = float64(carg2)
+				height = float64(carg3)
+
+				overrides.Snapshot(paintable, snapshot, width, height)
+			},
+		)
 	}
 }
 
@@ -12383,35 +12481,205 @@ func UnsafeApplyContentProviderOverrides[Instance ContentProvider](gclass unsafe
 
 	if overrides.AttachClipboard != nil {
 		pclass.attach_clipboard = (*[0]byte)(C._gotk4_gdk4_ContentProvider_attach_clipboard)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gdk4_ContentProvider_attach_clipboard",
+			func(carg0 *C.GdkContentProvider, carg1 *C.GdkClipboard) {
+				var provider  Instance  // go GdkContentProvider subclass
+				var clipboard Clipboard // in, none, converted
+
+				provider = UnsafeContentProviderFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				clipboard = UnsafeClipboardFromGlibNone(unsafe.Pointer(carg1))
+
+				overrides.AttachClipboard(provider, clipboard)
+			},
+		)
 	}
 
 	if overrides.ContentChanged != nil {
 		pclass.content_changed = (*[0]byte)(C._gotk4_gdk4_ContentProvider_content_changed)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gdk4_ContentProvider_content_changed",
+			func(carg0 *C.GdkContentProvider) {
+				var provider Instance // go GdkContentProvider subclass
+
+				provider = UnsafeContentProviderFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.ContentChanged(provider)
+			},
+		)
 	}
 
 	if overrides.DetachClipboard != nil {
 		pclass.detach_clipboard = (*[0]byte)(C._gotk4_gdk4_ContentProvider_detach_clipboard)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gdk4_ContentProvider_detach_clipboard",
+			func(carg0 *C.GdkContentProvider, carg1 *C.GdkClipboard) {
+				var provider  Instance  // go GdkContentProvider subclass
+				var clipboard Clipboard // in, none, converted
+
+				provider = UnsafeContentProviderFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				clipboard = UnsafeClipboardFromGlibNone(unsafe.Pointer(carg1))
+
+				overrides.DetachClipboard(provider, clipboard)
+			},
+		)
 	}
 
 	if overrides.GetValue != nil {
 		pclass.get_value = (*[0]byte)(C._gotk4_gdk4_ContentProvider_get_value)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gdk4_ContentProvider_get_value",
+			func(carg0 *C.GdkContentProvider, carg1 *C.GValue, _cerr **C.GError) (cret C.gboolean) {
+				var provider Instance      // go GdkContentProvider subclass
+				var value    gobject.Value // out, transfer: none, C Pointers: 0, Name: Value, caller-allocates
+				var goret    bool          // return
+				var _goerr   error         // out, full, converted
+
+				provider = UnsafeContentProviderFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				value, goret, _goerr = overrides.GetValue(provider)
+
+				_ = value
+				_ = carg1
+				panic("unimplemented conversion of gobject.Value (GValue)")
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.RefFormats != nil {
 		pclass.ref_formats = (*[0]byte)(C._gotk4_gdk4_ContentProvider_ref_formats)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gdk4_ContentProvider_ref_formats",
+			func(carg0 *C.GdkContentProvider) (cret *C.GdkContentFormats) {
+				var provider Instance        // go GdkContentProvider subclass
+				var goret    *ContentFormats // return, full, converted
+
+				provider = UnsafeContentProviderFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.RefFormats(provider)
+
+				cret = (*C.GdkContentFormats)(UnsafeContentFormatsToGlibFull(goret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.RefStorableFormats != nil {
 		pclass.ref_storable_formats = (*[0]byte)(C._gotk4_gdk4_ContentProvider_ref_storable_formats)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gdk4_ContentProvider_ref_storable_formats",
+			func(carg0 *C.GdkContentProvider) (cret *C.GdkContentFormats) {
+				var provider Instance        // go GdkContentProvider subclass
+				var goret    *ContentFormats // return, full, converted
+
+				provider = UnsafeContentProviderFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.RefStorableFormats(provider)
+
+				cret = (*C.GdkContentFormats)(UnsafeContentFormatsToGlibFull(goret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.WriteMIMETypeAsync != nil {
 		pclass.write_mime_type_async = (*[0]byte)(C._gotk4_gdk4_ContentProvider_write_mime_type_async)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gdk4_ContentProvider_write_mime_type_async",
+			func(carg0 *C.GdkContentProvider, carg1 *C.char, carg2 *C.GOutputStream, carg3 C.int, carg4 *C.GCancellable, carg5 C.GAsyncReadyCallback, carg6 C.gpointer) {
+				var provider    Instance               // go GdkContentProvider subclass
+				var cancellable context.Context        // in, none, converted, nullable
+				var mimeType    string                 // in, none, string, casted *C.gchar
+				var stream      gio.OutputStream       // in, none, converted
+				var ioPriority  int                    // in, none, casted, casted C.gint
+				var callback    gio.AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg6, nullable
+
+				provider = UnsafeContentProviderFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg4 != nil {
+					cancellable = gio.NewCancellableContext(unsafe.Pointer(carg4))
+				}
+				mimeType = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+				stream = gio.UnsafeOutputStreamFromGlibNone(unsafe.Pointer(carg2))
+				ioPriority = int(carg3)
+				if carg5 != nil {
+					_ = callback
+					_ = carg5
+					_ = _
+					_ = carg6
+					panic("unimplemented conversion of gio.AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.WriteMIMETypeAsync(provider, cancellable, mimeType, stream, ioPriority, callback)
+			},
+		)
 	}
 
 	if overrides.WriteMIMETypeFinish != nil {
 		pclass.write_mime_type_finish = (*[0]byte)(C._gotk4_gdk4_ContentProvider_write_mime_type_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gdk4_ContentProvider_write_mime_type_finish",
+			func(carg0 *C.GdkContentProvider, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+				var provider Instance        // go GdkContentProvider subclass
+				var result   gio.AsyncResult // in, none, converted
+				var goret    bool            // return
+				var _goerr   error           // out, full, converted
+
+				provider = UnsafeContentProviderFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = gio.UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.WriteMIMETypeFinish(provider, result)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
+}
+
+// RegisterContentProviderSubClass is used to register a go subclass of GdkContentProvider. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterContentProviderSubClass[InstanceT ContentProvider](
+		name string,
+		classInit func(class *ContentProviderClass),
+		constructor func() InstanceT,
+		overrides ContentProviderOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeContentProvider,
+		UnsafeContentProviderClassFromGlibBorrow,
+		UnsafeApplyContentProviderOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapContentProvider(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // ContentSerializerInstance is the instance type used by all types extending GdkContentSerializer. It is used internally by the bindings. Users should use the interface [ContentSerializer] instead.

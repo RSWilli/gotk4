@@ -34,6 +34,13 @@ type Class struct {
 	// to the gclass.
 	GoUnsafeApplyOverridesName string
 
+	// GType is the (foreign) Type that represents GType. It is needed because we need this type for the return value of the
+	// GoRegisterSubClassName function.
+	GType CouldBeForeign[Type]
+	// GoRegisterSubClassName is the name of the function that will be used to register a subclass for this class.
+	// it will wrap the gobject base register function (see gobject manual subclassing code)
+	GoRegisterSubClassName string
+
 	BaseConversions
 	Marshaler
 
@@ -116,6 +123,7 @@ func DeclareClass(e *env, v gir.Class) *Class {
 		GoPrivateUpcastMethod:      fmt.Sprintf("upcastTo%s", v.CType), // use cidentifier to not shadow parent methods
 		GoExtendOverrideStructName: fmt.Sprintf("%sOverrides", v.Name),
 		GoUnsafeApplyOverridesName: fmt.Sprintf("UnsafeApply%sOverrides", v.Name),
+		GoRegisterSubClassName:     fmt.Sprintf("Register%sSubClass", v.Name),
 
 		BaseConversions: BaseConversions{
 			FromGlibBorrowFunction: "", // no borrow function for classes
@@ -154,6 +162,17 @@ func (c *Class) resolve(e *env) bool {
 	c.BaseClass = CouldBeForeign[*Class]{
 		Namespace: ns,
 		Type:      baseClass.(*Class),
+	}
+
+	ns, gtype := e.findTypeByGIRName("GType")
+
+	if gtype == nil {
+		panic("GType not found")
+	}
+
+	c.GType = CouldBeForeign[Type]{
+		Namespace: ns,
+		Type:      gtype,
 	}
 
 	if c.gir.GLibTypeStruct != "" {

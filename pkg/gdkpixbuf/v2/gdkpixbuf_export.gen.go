@@ -5,6 +5,7 @@ package gdkpixbuf
 import (
 	"unsafe"
 
+	"github.com/diamondburned/gotk4/pkg/core/classdata"
 	"github.com/diamondburned/gotk4/pkg/core/userdata"
 	"github.com/diamondburned/gotk4/pkg/glib/v2"
 )
@@ -94,21 +95,49 @@ func _gotk4_gdkpixbuf2_PixbufSaveFunc(carg1 *C.gchar, carg2 C.gsize, carg3 **C.G
 
 //export _gotk4_gdkpixbuf2_PixbufLoader_area_prepared
 func _gotk4_gdkpixbuf2_PixbufLoader_area_prepared(carg0 *C.GdkPixbufLoader) {
-	panic("unimplemented")
+	var fn func(carg0 *C.GdkPixbufLoader)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gdkpixbuf2_PixbufLoader_area_prepared").(func(carg0 *C.GdkPixbufLoader))
+		if fn == nil {
+			panic("_gotk4_gdkpixbuf2_PixbufLoader_area_prepared: no function pointer found")
+		}
+	}
+	fn(carg0)
 }
 
 //export _gotk4_gdkpixbuf2_PixbufLoader_area_updated
 func _gotk4_gdkpixbuf2_PixbufLoader_area_updated(carg0 *C.GdkPixbufLoader, carg1 C.int, carg2 C.int, carg3 C.int, carg4 C.int) {
-	panic("unimplemented")
+	var fn func(carg0 *C.GdkPixbufLoader, carg1 C.int, carg2 C.int, carg3 C.int, carg4 C.int)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gdkpixbuf2_PixbufLoader_area_updated").(func(carg0 *C.GdkPixbufLoader, carg1 C.int, carg2 C.int, carg3 C.int, carg4 C.int))
+		if fn == nil {
+			panic("_gotk4_gdkpixbuf2_PixbufLoader_area_updated: no function pointer found")
+		}
+	}
+	fn(carg0, carg1, carg2, carg3, carg4)
 }
 
 //export _gotk4_gdkpixbuf2_PixbufLoader_closed
 func _gotk4_gdkpixbuf2_PixbufLoader_closed(carg0 *C.GdkPixbufLoader) {
-	panic("unimplemented")
+	var fn func(carg0 *C.GdkPixbufLoader)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gdkpixbuf2_PixbufLoader_closed").(func(carg0 *C.GdkPixbufLoader))
+		if fn == nil {
+			panic("_gotk4_gdkpixbuf2_PixbufLoader_closed: no function pointer found")
+		}
+	}
+	fn(carg0)
 }
 
 //export _gotk4_gdkpixbuf2_PixbufLoader_size_prepared
 func _gotk4_gdkpixbuf2_PixbufLoader_size_prepared(carg0 *C.GdkPixbufLoader, carg1 C.int, carg2 C.int) {
-	panic("unimplemented")
+	var fn func(carg0 *C.GdkPixbufLoader, carg1 C.int, carg2 C.int)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gdkpixbuf2_PixbufLoader_size_prepared").(func(carg0 *C.GdkPixbufLoader, carg1 C.int, carg2 C.int))
+		if fn == nil {
+			panic("_gotk4_gdkpixbuf2_PixbufLoader_size_prepared: no function pointer found")
+		}
+	}
+	fn(carg0, carg1, carg2)
 }
 

@@ -9,6 +9,7 @@ import (
 	"strings"
 	"unsafe"
 
+	"github.com/diamondburned/gotk4/pkg/core/classdata"
 	"github.com/diamondburned/gotk4/pkg/core/userdata"
 	"github.com/diamondburned/gotk4/pkg/gio/v2"
 	"github.com/diamondburned/gotk4/pkg/glib/v2"
@@ -4294,19 +4295,101 @@ func UnsafeApplyPixbufLoaderOverrides[Instance PixbufLoader](gclass unsafe.Point
 
 	if overrides.AreaPrepared != nil {
 		pclass.area_prepared = (*[0]byte)(C._gotk4_gdkpixbuf2_PixbufLoader_area_prepared)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gdkpixbuf2_PixbufLoader_area_prepared",
+			func(carg0 *C.GdkPixbufLoader) {
+				var loader Instance // go GdkPixbufLoader subclass
+
+				loader = UnsafePixbufLoaderFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.AreaPrepared(loader)
+			},
+		)
 	}
 
 	if overrides.AreaUpdated != nil {
 		pclass.area_updated = (*[0]byte)(C._gotk4_gdkpixbuf2_PixbufLoader_area_updated)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gdkpixbuf2_PixbufLoader_area_updated",
+			func(carg0 *C.GdkPixbufLoader, carg1 C.int, carg2 C.int, carg3 C.int, carg4 C.int) {
+				var loader Instance // go GdkPixbufLoader subclass
+				var x      int      // in, none, casted, casted C.gint
+				var y      int      // in, none, casted, casted C.gint
+				var width  int      // in, none, casted, casted C.gint
+				var height int      // in, none, casted, casted C.gint
+
+				loader = UnsafePixbufLoaderFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				x = int(carg1)
+				y = int(carg2)
+				width = int(carg3)
+				height = int(carg4)
+
+				overrides.AreaUpdated(loader, x, y, width, height)
+			},
+		)
 	}
 
 	if overrides.Closed != nil {
 		pclass.closed = (*[0]byte)(C._gotk4_gdkpixbuf2_PixbufLoader_closed)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gdkpixbuf2_PixbufLoader_closed",
+			func(carg0 *C.GdkPixbufLoader) {
+				var loader Instance // go GdkPixbufLoader subclass
+
+				loader = UnsafePixbufLoaderFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.Closed(loader)
+			},
+		)
 	}
 
 	if overrides.SizePrepared != nil {
 		pclass.size_prepared = (*[0]byte)(C._gotk4_gdkpixbuf2_PixbufLoader_size_prepared)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gdkpixbuf2_PixbufLoader_size_prepared",
+			func(carg0 *C.GdkPixbufLoader, carg1 C.int, carg2 C.int) {
+				var loader Instance // go GdkPixbufLoader subclass
+				var width  int      // in, none, casted, casted C.gint
+				var height int      // in, none, casted, casted C.gint
+
+				loader = UnsafePixbufLoaderFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				width = int(carg1)
+				height = int(carg2)
+
+				overrides.SizePrepared(loader, width, height)
+			},
+		)
 	}
+}
+
+// RegisterPixbufLoaderSubClass is used to register a go subclass of GdkPixbufLoader. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterPixbufLoaderSubClass[InstanceT PixbufLoader](
+		name string,
+		classInit func(class *PixbufLoaderClass),
+		constructor func() InstanceT,
+		overrides PixbufLoaderOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypePixbufLoader,
+		UnsafePixbufLoaderClassFromGlibBorrow,
+		UnsafeApplyPixbufLoaderOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapPixbufLoader(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // PixbufFormat wraps GdkPixbufFormat

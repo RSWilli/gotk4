@@ -8,6 +8,7 @@ import (
 	"strings"
 	"unsafe"
 
+	"github.com/diamondburned/gotk4/pkg/core/classdata"
 	"github.com/diamondburned/gotk4/pkg/glib/v2"
 	"github.com/diamondburned/gotk4/pkg/gobject/v2"
 )
@@ -3936,30 +3937,172 @@ func UnsafeApplyActionOverrides[Instance Action](gclass unsafe.Pointer, override
 
 	if overrides.DoAction != nil {
 		pclass.do_action = (*[0]byte)(C._gotk4_atk1_Action_do_action)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Action_do_action",
+			func(carg0 *C.AtkAction, carg1 C.gint) (cret C.gboolean) {
+				var action Instance // go AtkAction subclass
+				var i      int      // in, none, casted
+				var goret  bool     // return
+
+				action = UnsafeActionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				i = int(carg1)
+
+				goret = overrides.DoAction(action, i)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetDescription != nil {
 		pclass.get_description = (*[0]byte)(C._gotk4_atk1_Action_get_description)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Action_get_description",
+			func(carg0 *C.AtkAction, carg1 C.gint) (cret *C.gchar) {
+				var action Instance // go AtkAction subclass
+				var i      int      // in, none, casted
+				var goret  string   // return, none, string, nullable-string
+
+				action = UnsafeActionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				i = int(carg1)
+
+				goret = overrides.GetDescription(action, i)
+
+				if goret != "" {
+					cret = (*C.gchar)(unsafe.Pointer(C.CString(goret)))
+					defer C.free(unsafe.Pointer(cret))
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetKeybinding != nil {
 		pclass.get_keybinding = (*[0]byte)(C._gotk4_atk1_Action_get_keybinding)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Action_get_keybinding",
+			func(carg0 *C.AtkAction, carg1 C.gint) (cret *C.gchar) {
+				var action Instance // go AtkAction subclass
+				var i      int      // in, none, casted
+				var goret  string   // return, none, string, nullable-string
+
+				action = UnsafeActionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				i = int(carg1)
+
+				goret = overrides.GetKeybinding(action, i)
+
+				if goret != "" {
+					cret = (*C.gchar)(unsafe.Pointer(C.CString(goret)))
+					defer C.free(unsafe.Pointer(cret))
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetLocalizedName != nil {
 		pclass.get_localized_name = (*[0]byte)(C._gotk4_atk1_Action_get_localized_name)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Action_get_localized_name",
+			func(carg0 *C.AtkAction, carg1 C.gint) (cret *C.gchar) {
+				var action Instance // go AtkAction subclass
+				var i      int      // in, none, casted
+				var goret  string   // return, none, string, nullable-string
+
+				action = UnsafeActionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				i = int(carg1)
+
+				goret = overrides.GetLocalizedName(action, i)
+
+				if goret != "" {
+					cret = (*C.gchar)(unsafe.Pointer(C.CString(goret)))
+					defer C.free(unsafe.Pointer(cret))
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetNActions != nil {
 		pclass.get_n_actions = (*[0]byte)(C._gotk4_atk1_Action_get_n_actions)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Action_get_n_actions",
+			func(carg0 *C.AtkAction) (cret C.gint) {
+				var action Instance // go AtkAction subclass
+				var goret  int      // return, none, casted
+
+				action = UnsafeActionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetNActions(action)
+
+				cret = C.gint(goret)
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetName != nil {
 		pclass.get_name = (*[0]byte)(C._gotk4_atk1_Action_get_name)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Action_get_name",
+			func(carg0 *C.AtkAction, carg1 C.gint) (cret *C.gchar) {
+				var action Instance // go AtkAction subclass
+				var i      int      // in, none, casted
+				var goret  string   // return, none, string, nullable-string
+
+				action = UnsafeActionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				i = int(carg1)
+
+				goret = overrides.GetName(action, i)
+
+				if goret != "" {
+					cret = (*C.gchar)(unsafe.Pointer(C.CString(goret)))
+					defer C.free(unsafe.Pointer(cret))
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.SetDescription != nil {
 		pclass.set_description = (*[0]byte)(C._gotk4_atk1_Action_set_description)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Action_set_description",
+			func(carg0 *C.AtkAction, carg1 C.gint, carg2 *C.gchar) (cret C.gboolean) {
+				var action Instance // go AtkAction subclass
+				var i      int      // in, none, casted
+				var desc   string   // in, none, string
+				var goret  bool     // return
+
+				action = UnsafeActionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				i = int(carg1)
+				desc = C.GoString((*C.char)(unsafe.Pointer(carg2)))
+
+				goret = overrides.SetDescription(action, i, desc)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 }
 
@@ -4780,54 +4923,321 @@ func UnsafeApplyComponentOverrides[Instance Component](gclass unsafe.Pointer, ov
 
 	if overrides.BoundsChanged != nil {
 		pclass.bounds_changed = (*[0]byte)(C._gotk4_atk1_Component_bounds_changed)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Component_bounds_changed",
+			func(carg0 *C.AtkComponent, carg1 *C.AtkRectangle) {
+				var component Instance   // go AtkComponent subclass
+				var bounds    *Rectangle // in, none, converted
+
+				component = UnsafeComponentFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				bounds = UnsafeRectangleFromGlibNone(unsafe.Pointer(carg1))
+
+				overrides.BoundsChanged(component, bounds)
+			},
+		)
 	}
 
 	if overrides.Contains != nil {
 		pclass.contains = (*[0]byte)(C._gotk4_atk1_Component_contains)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Component_contains",
+			func(carg0 *C.AtkComponent, carg1 C.gint, carg2 C.gint, carg3 C.AtkCoordType) (cret C.gboolean) {
+				var component Instance  // go AtkComponent subclass
+				var x         int       // in, none, casted
+				var y         int       // in, none, casted
+				var coordType CoordType // in, none, casted
+				var goret     bool      // return
+
+				component = UnsafeComponentFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				x = int(carg1)
+				y = int(carg2)
+				coordType = CoordType(carg3)
+
+				goret = overrides.Contains(component, x, y, coordType)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetAlpha != nil {
 		pclass.get_alpha = (*[0]byte)(C._gotk4_atk1_Component_get_alpha)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Component_get_alpha",
+			func(carg0 *C.AtkComponent) (cret C.gdouble) {
+				var component Instance // go AtkComponent subclass
+				var goret     float64  // return, none, casted
+
+				component = UnsafeComponentFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetAlpha(component)
+
+				cret = C.gdouble(goret)
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetExtents != nil {
 		pclass.get_extents = (*[0]byte)(C._gotk4_atk1_Component_get_extents)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Component_get_extents",
+			func(carg0 *C.AtkComponent, carg1 *C.gint, carg2 *C.gint, carg3 *C.gint, carg4 *C.gint, carg5 C.AtkCoordType) {
+				var component Instance  // go AtkComponent subclass
+				var coordType CoordType // in, none, casted
+				var x         int       // out, full, casted
+				var y         int       // out, full, casted
+				var width     int       // out, full, casted
+				var height    int       // out, full, casted
+
+				component = UnsafeComponentFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				coordType = CoordType(carg5)
+
+				x, y, width, height = overrides.GetExtents(component, coordType)
+
+				*carg1 = C.gint(x)
+				*carg2 = C.gint(y)
+				*carg3 = C.gint(width)
+				*carg4 = C.gint(height)
+			},
+		)
 	}
 
 	if overrides.GetLayer != nil {
 		pclass.get_layer = (*[0]byte)(C._gotk4_atk1_Component_get_layer)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Component_get_layer",
+			func(carg0 *C.AtkComponent) (cret C.AtkLayer) {
+				var component Instance // go AtkComponent subclass
+				var goret     Layer    // return, none, casted
+
+				component = UnsafeComponentFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetLayer(component)
+
+				cret = C.AtkLayer(goret)
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetMDIZOrder != nil {
 		pclass.get_mdi_zorder = (*[0]byte)(C._gotk4_atk1_Component_get_mdi_zorder)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Component_get_mdi_zorder",
+			func(carg0 *C.AtkComponent) (cret C.gint) {
+				var component Instance // go AtkComponent subclass
+				var goret     int      // return, none, casted
+
+				component = UnsafeComponentFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetMDIZOrder(component)
+
+				cret = C.gint(goret)
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GrabFocus != nil {
 		pclass.grab_focus = (*[0]byte)(C._gotk4_atk1_Component_grab_focus)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Component_grab_focus",
+			func(carg0 *C.AtkComponent) (cret C.gboolean) {
+				var component Instance // go AtkComponent subclass
+				var goret     bool     // return
+
+				component = UnsafeComponentFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GrabFocus(component)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.RefAccessibleAtPoint != nil {
 		pclass.ref_accessible_at_point = (*[0]byte)(C._gotk4_atk1_Component_ref_accessible_at_point)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Component_ref_accessible_at_point",
+			func(carg0 *C.AtkComponent, carg1 C.gint, carg2 C.gint, carg3 C.AtkCoordType) (cret *C.AtkObject) {
+				var component Instance  // go AtkComponent subclass
+				var x         int       // in, none, casted
+				var y         int       // in, none, casted
+				var coordType CoordType // in, none, casted
+				var goret     Object    // return, full, converted, nullable
+
+				component = UnsafeComponentFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				x = int(carg1)
+				y = int(carg2)
+				coordType = CoordType(carg3)
+
+				goret = overrides.RefAccessibleAtPoint(component, x, y, coordType)
+
+				if goret != nil {
+					cret = (*C.AtkObject)(UnsafeObjectToGlibFull(goret))
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.ScrollTo != nil {
 		pclass.scroll_to = (*[0]byte)(C._gotk4_atk1_Component_scroll_to)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Component_scroll_to",
+			func(carg0 *C.AtkComponent, carg1 C.AtkScrollType) (cret C.gboolean) {
+				var component Instance   // go AtkComponent subclass
+				var typ       ScrollType // in, none, casted
+				var goret     bool       // return
+
+				component = UnsafeComponentFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				typ = ScrollType(carg1)
+
+				goret = overrides.ScrollTo(component, typ)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.ScrollToPoint != nil {
 		pclass.scroll_to_point = (*[0]byte)(C._gotk4_atk1_Component_scroll_to_point)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Component_scroll_to_point",
+			func(carg0 *C.AtkComponent, carg1 C.AtkCoordType, carg2 C.gint, carg3 C.gint) (cret C.gboolean) {
+				var component Instance  // go AtkComponent subclass
+				var coords    CoordType // in, none, casted
+				var x         int       // in, none, casted
+				var y         int       // in, none, casted
+				var goret     bool      // return
+
+				component = UnsafeComponentFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				coords = CoordType(carg1)
+				x = int(carg2)
+				y = int(carg3)
+
+				goret = overrides.ScrollToPoint(component, coords, x, y)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.SetExtents != nil {
 		pclass.set_extents = (*[0]byte)(C._gotk4_atk1_Component_set_extents)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Component_set_extents",
+			func(carg0 *C.AtkComponent, carg1 C.gint, carg2 C.gint, carg3 C.gint, carg4 C.gint, carg5 C.AtkCoordType) (cret C.gboolean) {
+				var component Instance  // go AtkComponent subclass
+				var x         int       // in, none, casted
+				var y         int       // in, none, casted
+				var width     int       // in, none, casted
+				var height    int       // in, none, casted
+				var coordType CoordType // in, none, casted
+				var goret     bool      // return
+
+				component = UnsafeComponentFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				x = int(carg1)
+				y = int(carg2)
+				width = int(carg3)
+				height = int(carg4)
+				coordType = CoordType(carg5)
+
+				goret = overrides.SetExtents(component, x, y, width, height, coordType)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.SetPosition != nil {
 		pclass.set_position = (*[0]byte)(C._gotk4_atk1_Component_set_position)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Component_set_position",
+			func(carg0 *C.AtkComponent, carg1 C.gint, carg2 C.gint, carg3 C.AtkCoordType) (cret C.gboolean) {
+				var component Instance  // go AtkComponent subclass
+				var x         int       // in, none, casted
+				var y         int       // in, none, casted
+				var coordType CoordType // in, none, casted
+				var goret     bool      // return
+
+				component = UnsafeComponentFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				x = int(carg1)
+				y = int(carg2)
+				coordType = CoordType(carg3)
+
+				goret = overrides.SetPosition(component, x, y, coordType)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.SetSize != nil {
 		pclass.set_size = (*[0]byte)(C._gotk4_atk1_Component_set_size)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Component_set_size",
+			func(carg0 *C.AtkComponent, carg1 C.gint, carg2 C.gint) (cret C.gboolean) {
+				var component Instance // go AtkComponent subclass
+				var width     int      // in, none, casted
+				var height    int      // in, none, casted
+				var goret     bool     // return
+
+				component = UnsafeComponentFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				width = int(carg1)
+				height = int(carg2)
+
+				goret = overrides.SetSize(component, width, height)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 }
 
@@ -5196,18 +5606,93 @@ func UnsafeApplyDocumentOverrides[Instance Document](gclass unsafe.Pointer, over
 
 	if overrides.GetCurrentPageNumber != nil {
 		pclass.get_current_page_number = (*[0]byte)(C._gotk4_atk1_Document_get_current_page_number)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Document_get_current_page_number",
+			func(carg0 *C.AtkDocument) (cret C.gint) {
+				var document Instance // go AtkDocument subclass
+				var goret    int      // return, none, casted
+
+				document = UnsafeDocumentFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetCurrentPageNumber(document)
+
+				cret = C.gint(goret)
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetDocumentAttributeValue != nil {
 		pclass.get_document_attribute_value = (*[0]byte)(C._gotk4_atk1_Document_get_document_attribute_value)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Document_get_document_attribute_value",
+			func(carg0 *C.AtkDocument, carg1 *C.gchar) (cret *C.gchar) {
+				var document      Instance // go AtkDocument subclass
+				var attributeName string   // in, none, string
+				var goret         string   // return, none, string, nullable-string
+
+				document = UnsafeDocumentFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				attributeName = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+
+				goret = overrides.GetDocumentAttributeValue(document, attributeName)
+
+				if goret != "" {
+					cret = (*C.gchar)(unsafe.Pointer(C.CString(goret)))
+					defer C.free(unsafe.Pointer(cret))
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetPageCount != nil {
 		pclass.get_page_count = (*[0]byte)(C._gotk4_atk1_Document_get_page_count)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Document_get_page_count",
+			func(carg0 *C.AtkDocument) (cret C.gint) {
+				var document Instance // go AtkDocument subclass
+				var goret    int      // return, none, casted
+
+				document = UnsafeDocumentFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetPageCount(document)
+
+				cret = C.gint(goret)
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.SetDocumentAttribute != nil {
 		pclass.set_document_attribute = (*[0]byte)(C._gotk4_atk1_Document_set_document_attribute)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Document_set_document_attribute",
+			func(carg0 *C.AtkDocument, carg1 *C.gchar, carg2 *C.gchar) (cret C.gboolean) {
+				var document       Instance // go AtkDocument subclass
+				var attributeName  string   // in, none, string
+				var attributeValue string   // in, none, string
+				var goret          bool     // return
+
+				document = UnsafeDocumentFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				attributeName = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+				attributeValue = C.GoString((*C.char)(unsafe.Pointer(carg2)))
+
+				goret = overrides.SetDocumentAttribute(document, attributeName, attributeValue)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 }
 
@@ -5523,26 +6008,116 @@ func UnsafeApplyEditableTextOverrides[Instance EditableText](gclass unsafe.Point
 
 	if overrides.CopyText != nil {
 		pclass.copy_text = (*[0]byte)(C._gotk4_atk1_EditableText_copy_text)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_EditableText_copy_text",
+			func(carg0 *C.AtkEditableText, carg1 C.gint, carg2 C.gint) {
+				var text     Instance // go AtkEditableText subclass
+				var startPos int      // in, none, casted
+				var endPos   int      // in, none, casted
+
+				text = UnsafeEditableTextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				startPos = int(carg1)
+				endPos = int(carg2)
+
+				overrides.CopyText(text, startPos, endPos)
+			},
+		)
 	}
 
 	if overrides.CutText != nil {
 		pclass.cut_text = (*[0]byte)(C._gotk4_atk1_EditableText_cut_text)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_EditableText_cut_text",
+			func(carg0 *C.AtkEditableText, carg1 C.gint, carg2 C.gint) {
+				var text     Instance // go AtkEditableText subclass
+				var startPos int      // in, none, casted
+				var endPos   int      // in, none, casted
+
+				text = UnsafeEditableTextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				startPos = int(carg1)
+				endPos = int(carg2)
+
+				overrides.CutText(text, startPos, endPos)
+			},
+		)
 	}
 
 	if overrides.DeleteText != nil {
 		pclass.delete_text = (*[0]byte)(C._gotk4_atk1_EditableText_delete_text)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_EditableText_delete_text",
+			func(carg0 *C.AtkEditableText, carg1 C.gint, carg2 C.gint) {
+				var text     Instance // go AtkEditableText subclass
+				var startPos int      // in, none, casted
+				var endPos   int      // in, none, casted
+
+				text = UnsafeEditableTextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				startPos = int(carg1)
+				endPos = int(carg2)
+
+				overrides.DeleteText(text, startPos, endPos)
+			},
+		)
 	}
 
 	if overrides.InsertText != nil {
 		pclass.insert_text = (*[0]byte)(C._gotk4_atk1_EditableText_insert_text)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_EditableText_insert_text",
+			func(carg0 *C.AtkEditableText, carg1 *C.gchar, carg2 C.gint, carg3 *C.gint) {
+				var text     Instance // go AtkEditableText subclass
+				var str      string   // in, none, string
+				var length   int      // in, none, casted
+				var position *int     // in, transfer: none, C Pointers: 1, Name: gint
+
+				text = UnsafeEditableTextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				str = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+				length = int(carg2)
+				_ = position
+				_ = carg3
+				panic("unimplemented conversion of *int (gint*)")
+
+				overrides.InsertText(text, str, length, position)
+			},
+		)
 	}
 
 	if overrides.PasteText != nil {
 		pclass.paste_text = (*[0]byte)(C._gotk4_atk1_EditableText_paste_text)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_EditableText_paste_text",
+			func(carg0 *C.AtkEditableText, carg1 C.gint) {
+				var text     Instance // go AtkEditableText subclass
+				var position int      // in, none, casted
+
+				text = UnsafeEditableTextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				position = int(carg1)
+
+				overrides.PasteText(text, position)
+			},
+		)
 	}
 
 	if overrides.SetTextContents != nil {
 		pclass.set_text_contents = (*[0]byte)(C._gotk4_atk1_EditableText_set_text_contents)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_EditableText_set_text_contents",
+			func(carg0 *C.AtkEditableText, carg1 *C.gchar) {
+				var text Instance // go AtkEditableText subclass
+				var str  string   // in, none, string
+
+				text = UnsafeEditableTextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				str = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+
+				overrides.SetTextContents(text, str)
+			},
+		)
 	}
 }
 
@@ -5652,6 +6227,22 @@ func UnsafeApplyHyperlinkImplOverrides[Instance HyperlinkImpl](gclass unsafe.Poi
 
 	if overrides.GetHyperlink != nil {
 		pclass.get_hyperlink = (*[0]byte)(C._gotk4_atk1_HyperlinkImpl_get_hyperlink)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_HyperlinkImpl_get_hyperlink",
+			func(carg0 *C.AtkHyperlinkImpl) (cret *C.AtkHyperlink) {
+				var impl  Instance  // go AtkHyperlinkImpl subclass
+				var goret Hyperlink // return, full, converted
+
+				impl = UnsafeHyperlinkImplFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetHyperlink(impl)
+
+				cret = (*C.AtkHyperlink)(UnsafeHyperlinkToGlibFull(goret))
+
+				return cret
+			},
+		)
 	}
 }
 
@@ -5892,18 +6483,83 @@ func UnsafeApplyHypertextOverrides[Instance Hypertext](gclass unsafe.Pointer, ov
 
 	if overrides.GetLink != nil {
 		pclass.get_link = (*[0]byte)(C._gotk4_atk1_Hypertext_get_link)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Hypertext_get_link",
+			func(carg0 *C.AtkHypertext, carg1 C.gint) (cret *C.AtkHyperlink) {
+				var hypertext Instance  // go AtkHypertext subclass
+				var linkIndex int       // in, none, casted
+				var goret     Hyperlink // return, none, converted
+
+				hypertext = UnsafeHypertextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				linkIndex = int(carg1)
+
+				goret = overrides.GetLink(hypertext, linkIndex)
+
+				cret = (*C.AtkHyperlink)(UnsafeHyperlinkToGlibNone(goret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetLinkIndex != nil {
 		pclass.get_link_index = (*[0]byte)(C._gotk4_atk1_Hypertext_get_link_index)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Hypertext_get_link_index",
+			func(carg0 *C.AtkHypertext, carg1 C.gint) (cret C.gint) {
+				var hypertext Instance // go AtkHypertext subclass
+				var charIndex int      // in, none, casted
+				var goret     int      // return, none, casted
+
+				hypertext = UnsafeHypertextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				charIndex = int(carg1)
+
+				goret = overrides.GetLinkIndex(hypertext, charIndex)
+
+				cret = C.gint(goret)
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetNLinks != nil {
 		pclass.get_n_links = (*[0]byte)(C._gotk4_atk1_Hypertext_get_n_links)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Hypertext_get_n_links",
+			func(carg0 *C.AtkHypertext) (cret C.gint) {
+				var hypertext Instance // go AtkHypertext subclass
+				var goret     int      // return, none, casted
+
+				hypertext = UnsafeHypertextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetNLinks(hypertext)
+
+				cret = C.gint(goret)
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.LinkSelected != nil {
 		pclass.link_selected = (*[0]byte)(C._gotk4_atk1_Hypertext_link_selected)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Hypertext_link_selected",
+			func(carg0 *C.AtkHypertext, carg1 C.gint) {
+				var hypertext Instance // go AtkHypertext subclass
+				var linkIndex int      // in, none, casted
+
+				hypertext = UnsafeHypertextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				linkIndex = int(carg1)
+
+				overrides.LinkSelected(hypertext, linkIndex)
+			},
+		)
 	}
 }
 
@@ -6236,22 +6892,112 @@ func UnsafeApplyImageOverrides[Instance Image](gclass unsafe.Pointer, overrides 
 
 	if overrides.GetImageDescription != nil {
 		pclass.get_image_description = (*[0]byte)(C._gotk4_atk1_Image_get_image_description)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Image_get_image_description",
+			func(carg0 *C.AtkImage) (cret *C.gchar) {
+				var image Instance // go AtkImage subclass
+				var goret string   // return, none, string
+
+				image = UnsafeImageFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetImageDescription(image)
+
+				cret = (*C.gchar)(unsafe.Pointer(C.CString(goret)))
+				defer C.free(unsafe.Pointer(cret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetImageLocale != nil {
 		pclass.get_image_locale = (*[0]byte)(C._gotk4_atk1_Image_get_image_locale)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Image_get_image_locale",
+			func(carg0 *C.AtkImage) (cret *C.gchar) {
+				var image Instance // go AtkImage subclass
+				var goret string   // return, none, string, nullable-string
+
+				image = UnsafeImageFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetImageLocale(image)
+
+				if goret != "" {
+					cret = (*C.gchar)(unsafe.Pointer(C.CString(goret)))
+					defer C.free(unsafe.Pointer(cret))
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetImagePosition != nil {
 		pclass.get_image_position = (*[0]byte)(C._gotk4_atk1_Image_get_image_position)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Image_get_image_position",
+			func(carg0 *C.AtkImage, carg1 *C.gint, carg2 *C.gint, carg3 C.AtkCoordType) {
+				var image     Instance  // go AtkImage subclass
+				var coordType CoordType // in, none, casted
+				var x         int       // out, full, casted
+				var y         int       // out, full, casted
+
+				image = UnsafeImageFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				coordType = CoordType(carg3)
+
+				x, y = overrides.GetImagePosition(image, coordType)
+
+				*carg1 = C.gint(x)
+				*carg2 = C.gint(y)
+			},
+		)
 	}
 
 	if overrides.GetImageSize != nil {
 		pclass.get_image_size = (*[0]byte)(C._gotk4_atk1_Image_get_image_size)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Image_get_image_size",
+			func(carg0 *C.AtkImage, carg1 *C.gint, carg2 *C.gint) {
+				var image  Instance // go AtkImage subclass
+				var width  int      // out, full, casted
+				var height int      // out, full, casted
+
+				image = UnsafeImageFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				width, height = overrides.GetImageSize(image)
+
+				*carg1 = C.gint(width)
+				*carg2 = C.gint(height)
+			},
+		)
 	}
 
 	if overrides.SetImageDescription != nil {
 		pclass.set_image_description = (*[0]byte)(C._gotk4_atk1_Image_set_image_description)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Image_set_image_description",
+			func(carg0 *C.AtkImage, carg1 *C.gchar) (cret C.gboolean) {
+				var image       Instance // go AtkImage subclass
+				var description string   // in, none, string
+				var goret       bool     // return
+
+				image = UnsafeImageFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				description = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+
+				goret = overrides.SetImageDescription(image, description)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 }
 
@@ -6774,34 +7520,177 @@ func UnsafeApplySelectionOverrides[Instance Selection](gclass unsafe.Pointer, ov
 
 	if overrides.AddSelection != nil {
 		pclass.add_selection = (*[0]byte)(C._gotk4_atk1_Selection_add_selection)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Selection_add_selection",
+			func(carg0 *C.AtkSelection, carg1 C.gint) (cret C.gboolean) {
+				var selection Instance // go AtkSelection subclass
+				var i         int      // in, none, casted
+				var goret     bool     // return
+
+				selection = UnsafeSelectionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				i = int(carg1)
+
+				goret = overrides.AddSelection(selection, i)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.ClearSelection != nil {
 		pclass.clear_selection = (*[0]byte)(C._gotk4_atk1_Selection_clear_selection)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Selection_clear_selection",
+			func(carg0 *C.AtkSelection) (cret C.gboolean) {
+				var selection Instance // go AtkSelection subclass
+				var goret     bool     // return
+
+				selection = UnsafeSelectionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.ClearSelection(selection)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetSelectionCount != nil {
 		pclass.get_selection_count = (*[0]byte)(C._gotk4_atk1_Selection_get_selection_count)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Selection_get_selection_count",
+			func(carg0 *C.AtkSelection) (cret C.gint) {
+				var selection Instance // go AtkSelection subclass
+				var goret     int      // return, none, casted
+
+				selection = UnsafeSelectionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetSelectionCount(selection)
+
+				cret = C.gint(goret)
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.IsChildSelected != nil {
 		pclass.is_child_selected = (*[0]byte)(C._gotk4_atk1_Selection_is_child_selected)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Selection_is_child_selected",
+			func(carg0 *C.AtkSelection, carg1 C.gint) (cret C.gboolean) {
+				var selection Instance // go AtkSelection subclass
+				var i         int      // in, none, casted
+				var goret     bool     // return
+
+				selection = UnsafeSelectionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				i = int(carg1)
+
+				goret = overrides.IsChildSelected(selection, i)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.RefSelection != nil {
 		pclass.ref_selection = (*[0]byte)(C._gotk4_atk1_Selection_ref_selection)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Selection_ref_selection",
+			func(carg0 *C.AtkSelection, carg1 C.gint) (cret *C.AtkObject) {
+				var selection Instance // go AtkSelection subclass
+				var i         int      // in, none, casted
+				var goret     Object   // return, full, converted, nullable
+
+				selection = UnsafeSelectionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				i = int(carg1)
+
+				goret = overrides.RefSelection(selection, i)
+
+				if goret != nil {
+					cret = (*C.AtkObject)(UnsafeObjectToGlibFull(goret))
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.RemoveSelection != nil {
 		pclass.remove_selection = (*[0]byte)(C._gotk4_atk1_Selection_remove_selection)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Selection_remove_selection",
+			func(carg0 *C.AtkSelection, carg1 C.gint) (cret C.gboolean) {
+				var selection Instance // go AtkSelection subclass
+				var i         int      // in, none, casted
+				var goret     bool     // return
+
+				selection = UnsafeSelectionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				i = int(carg1)
+
+				goret = overrides.RemoveSelection(selection, i)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.SelectAllSelection != nil {
 		pclass.select_all_selection = (*[0]byte)(C._gotk4_atk1_Selection_select_all_selection)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Selection_select_all_selection",
+			func(carg0 *C.AtkSelection) (cret C.gboolean) {
+				var selection Instance // go AtkSelection subclass
+				var goret     bool     // return
+
+				selection = UnsafeSelectionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.SelectAllSelection(selection)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.SelectionChanged != nil {
 		pclass.selection_changed = (*[0]byte)(C._gotk4_atk1_Selection_selection_changed)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Selection_selection_changed",
+			func(carg0 *C.AtkSelection) {
+				var selection Instance // go AtkSelection subclass
+
+				selection = UnsafeSelectionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.SelectionChanged(selection)
+			},
+		)
 	}
 }
 
@@ -7100,18 +7989,92 @@ func UnsafeApplyStreamableContentOverrides[Instance StreamableContent](gclass un
 
 	if overrides.GetMIMEType != nil {
 		pclass.get_mime_type = (*[0]byte)(C._gotk4_atk1_StreamableContent_get_mime_type)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_StreamableContent_get_mime_type",
+			func(carg0 *C.AtkStreamableContent, carg1 C.gint) (cret *C.gchar) {
+				var streamable Instance // go AtkStreamableContent subclass
+				var i          int      // in, none, casted
+				var goret      string   // return, none, string
+
+				streamable = UnsafeStreamableContentFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				i = int(carg1)
+
+				goret = overrides.GetMIMEType(streamable, i)
+
+				cret = (*C.gchar)(unsafe.Pointer(C.CString(goret)))
+				defer C.free(unsafe.Pointer(cret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetNMIMETypes != nil {
 		pclass.get_n_mime_types = (*[0]byte)(C._gotk4_atk1_StreamableContent_get_n_mime_types)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_StreamableContent_get_n_mime_types",
+			func(carg0 *C.AtkStreamableContent) (cret C.gint) {
+				var streamable Instance // go AtkStreamableContent subclass
+				var goret      int      // return, none, casted
+
+				streamable = UnsafeStreamableContentFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetNMIMETypes(streamable)
+
+				cret = C.gint(goret)
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetStream != nil {
 		pclass.get_stream = (*[0]byte)(C._gotk4_atk1_StreamableContent_get_stream)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_StreamableContent_get_stream",
+			func(carg0 *C.AtkStreamableContent, carg1 *C.gchar) (cret *C.GIOChannel) {
+				var streamable Instance        // go AtkStreamableContent subclass
+				var mimeType   string          // in, none, string
+				var goret      *glib.IOChannel // return, full, converted
+
+				streamable = UnsafeStreamableContentFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				mimeType = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+
+				goret = overrides.GetStream(streamable, mimeType)
+
+				cret = (*C.GIOChannel)(glib.UnsafeIOChannelToGlibFull(goret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetURI != nil {
 		pclass.get_uri = (*[0]byte)(C._gotk4_atk1_StreamableContent_get_uri)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_StreamableContent_get_uri",
+			func(carg0 *C.AtkStreamableContent, carg1 *C.gchar) (cret *C.gchar) {
+				var streamable Instance // go AtkStreamableContent subclass
+				var mimeType   string   // in, none, string
+				var goret      string   // return, none, string, nullable-string
+
+				streamable = UnsafeStreamableContentFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				mimeType = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+
+				goret = overrides.GetURI(streamable, mimeType)
+
+				if goret != "" {
+					cret = (*C.gchar)(unsafe.Pointer(C.CString(goret)))
+					defer C.free(unsafe.Pointer(cret))
+				}
+
+				return cret
+			},
+		)
 	}
 }
 
@@ -8590,134 +9553,701 @@ func UnsafeApplyTableOverrides[Instance Table](gclass unsafe.Pointer, overrides 
 
 	if overrides.AddColumnSelection != nil {
 		pclass.add_column_selection = (*[0]byte)(C._gotk4_atk1_Table_add_column_selection)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Table_add_column_selection",
+			func(carg0 *C.AtkTable, carg1 C.gint) (cret C.gboolean) {
+				var table  Instance // go AtkTable subclass
+				var column int      // in, none, casted
+				var goret  bool     // return
+
+				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				column = int(carg1)
+
+				goret = overrides.AddColumnSelection(table, column)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.AddRowSelection != nil {
 		pclass.add_row_selection = (*[0]byte)(C._gotk4_atk1_Table_add_row_selection)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Table_add_row_selection",
+			func(carg0 *C.AtkTable, carg1 C.gint) (cret C.gboolean) {
+				var table Instance // go AtkTable subclass
+				var row   int      // in, none, casted
+				var goret bool     // return
+
+				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				row = int(carg1)
+
+				goret = overrides.AddRowSelection(table, row)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.ColumnDeleted != nil {
 		pclass.column_deleted = (*[0]byte)(C._gotk4_atk1_Table_column_deleted)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Table_column_deleted",
+			func(carg0 *C.AtkTable, carg1 C.gint, carg2 C.gint) {
+				var table      Instance // go AtkTable subclass
+				var column     int      // in, none, casted
+				var numDeleted int      // in, none, casted
+
+				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				column = int(carg1)
+				numDeleted = int(carg2)
+
+				overrides.ColumnDeleted(table, column, numDeleted)
+			},
+		)
 	}
 
 	if overrides.ColumnInserted != nil {
 		pclass.column_inserted = (*[0]byte)(C._gotk4_atk1_Table_column_inserted)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Table_column_inserted",
+			func(carg0 *C.AtkTable, carg1 C.gint, carg2 C.gint) {
+				var table       Instance // go AtkTable subclass
+				var column      int      // in, none, casted
+				var numInserted int      // in, none, casted
+
+				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				column = int(carg1)
+				numInserted = int(carg2)
+
+				overrides.ColumnInserted(table, column, numInserted)
+			},
+		)
 	}
 
 	if overrides.ColumnReordered != nil {
 		pclass.column_reordered = (*[0]byte)(C._gotk4_atk1_Table_column_reordered)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Table_column_reordered",
+			func(carg0 *C.AtkTable) {
+				var table Instance // go AtkTable subclass
+
+				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.ColumnReordered(table)
+			},
+		)
 	}
 
 	if overrides.GetCaption != nil {
 		pclass.get_caption = (*[0]byte)(C._gotk4_atk1_Table_get_caption)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Table_get_caption",
+			func(carg0 *C.AtkTable) (cret *C.AtkObject) {
+				var table Instance // go AtkTable subclass
+				var goret Object   // return, none, converted, nullable
+
+				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetCaption(table)
+
+				if goret != nil {
+					cret = (*C.AtkObject)(UnsafeObjectToGlibNone(goret))
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetColumnDescription != nil {
 		pclass.get_column_description = (*[0]byte)(C._gotk4_atk1_Table_get_column_description)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Table_get_column_description",
+			func(carg0 *C.AtkTable, carg1 C.gint) (cret *C.gchar) {
+				var table  Instance // go AtkTable subclass
+				var column int      // in, none, casted
+				var goret  string   // return, none, string
+
+				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				column = int(carg1)
+
+				goret = overrides.GetColumnDescription(table, column)
+
+				cret = (*C.gchar)(unsafe.Pointer(C.CString(goret)))
+				defer C.free(unsafe.Pointer(cret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetColumnExtentAt != nil {
 		pclass.get_column_extent_at = (*[0]byte)(C._gotk4_atk1_Table_get_column_extent_at)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Table_get_column_extent_at",
+			func(carg0 *C.AtkTable, carg1 C.gint, carg2 C.gint) (cret C.gint) {
+				var table  Instance // go AtkTable subclass
+				var row    int      // in, none, casted
+				var column int      // in, none, casted
+				var goret  int      // return, none, casted
+
+				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				row = int(carg1)
+				column = int(carg2)
+
+				goret = overrides.GetColumnExtentAt(table, row, column)
+
+				cret = C.gint(goret)
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetColumnHeader != nil {
 		pclass.get_column_header = (*[0]byte)(C._gotk4_atk1_Table_get_column_header)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Table_get_column_header",
+			func(carg0 *C.AtkTable, carg1 C.gint) (cret *C.AtkObject) {
+				var table  Instance // go AtkTable subclass
+				var column int      // in, none, casted
+				var goret  Object   // return, none, converted, nullable
+
+				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				column = int(carg1)
+
+				goret = overrides.GetColumnHeader(table, column)
+
+				if goret != nil {
+					cret = (*C.AtkObject)(UnsafeObjectToGlibNone(goret))
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetNColumns != nil {
 		pclass.get_n_columns = (*[0]byte)(C._gotk4_atk1_Table_get_n_columns)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Table_get_n_columns",
+			func(carg0 *C.AtkTable) (cret C.gint) {
+				var table Instance // go AtkTable subclass
+				var goret int      // return, none, casted
+
+				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetNColumns(table)
+
+				cret = C.gint(goret)
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetNRows != nil {
 		pclass.get_n_rows = (*[0]byte)(C._gotk4_atk1_Table_get_n_rows)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Table_get_n_rows",
+			func(carg0 *C.AtkTable) (cret C.gint) {
+				var table Instance // go AtkTable subclass
+				var goret int      // return, none, casted
+
+				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetNRows(table)
+
+				cret = C.gint(goret)
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetRowDescription != nil {
 		pclass.get_row_description = (*[0]byte)(C._gotk4_atk1_Table_get_row_description)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Table_get_row_description",
+			func(carg0 *C.AtkTable, carg1 C.gint) (cret *C.gchar) {
+				var table Instance // go AtkTable subclass
+				var row   int      // in, none, casted
+				var goret string   // return, none, string, nullable-string
+
+				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				row = int(carg1)
+
+				goret = overrides.GetRowDescription(table, row)
+
+				if goret != "" {
+					cret = (*C.gchar)(unsafe.Pointer(C.CString(goret)))
+					defer C.free(unsafe.Pointer(cret))
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetRowExtentAt != nil {
 		pclass.get_row_extent_at = (*[0]byte)(C._gotk4_atk1_Table_get_row_extent_at)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Table_get_row_extent_at",
+			func(carg0 *C.AtkTable, carg1 C.gint, carg2 C.gint) (cret C.gint) {
+				var table  Instance // go AtkTable subclass
+				var row    int      // in, none, casted
+				var column int      // in, none, casted
+				var goret  int      // return, none, casted
+
+				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				row = int(carg1)
+				column = int(carg2)
+
+				goret = overrides.GetRowExtentAt(table, row, column)
+
+				cret = C.gint(goret)
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetRowHeader != nil {
 		pclass.get_row_header = (*[0]byte)(C._gotk4_atk1_Table_get_row_header)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Table_get_row_header",
+			func(carg0 *C.AtkTable, carg1 C.gint) (cret *C.AtkObject) {
+				var table Instance // go AtkTable subclass
+				var row   int      // in, none, casted
+				var goret Object   // return, none, converted, nullable
+
+				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				row = int(carg1)
+
+				goret = overrides.GetRowHeader(table, row)
+
+				if goret != nil {
+					cret = (*C.AtkObject)(UnsafeObjectToGlibNone(goret))
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetSelectedColumns != nil {
 		pclass.get_selected_columns = (*[0]byte)(C._gotk4_atk1_Table_get_selected_columns)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Table_get_selected_columns",
+			func(carg0 *C.AtkTable, carg1 **C.gint) (cret C.gint) {
+				var table    Instance // go AtkTable subclass
+				var selected **int    // in, transfer: none, C Pointers: 2, Name: gint
+				var goret    int      // return, none, casted
+
+				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				_ = selected
+				_ = carg1
+				panic("unimplemented conversion of **int (gint**)")
+
+				goret = overrides.GetSelectedColumns(table, selected)
+
+				cret = C.gint(goret)
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetSelectedRows != nil {
 		pclass.get_selected_rows = (*[0]byte)(C._gotk4_atk1_Table_get_selected_rows)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Table_get_selected_rows",
+			func(carg0 *C.AtkTable, carg1 **C.gint) (cret C.gint) {
+				var table    Instance // go AtkTable subclass
+				var selected **int    // in, transfer: none, C Pointers: 2, Name: gint
+				var goret    int      // return, none, casted
+
+				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				_ = selected
+				_ = carg1
+				panic("unimplemented conversion of **int (gint**)")
+
+				goret = overrides.GetSelectedRows(table, selected)
+
+				cret = C.gint(goret)
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetSummary != nil {
 		pclass.get_summary = (*[0]byte)(C._gotk4_atk1_Table_get_summary)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Table_get_summary",
+			func(carg0 *C.AtkTable) (cret *C.AtkObject) {
+				var table Instance // go AtkTable subclass
+				var goret Object   // return, full, converted
+
+				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetSummary(table)
+
+				cret = (*C.AtkObject)(UnsafeObjectToGlibFull(goret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.IsColumnSelected != nil {
 		pclass.is_column_selected = (*[0]byte)(C._gotk4_atk1_Table_is_column_selected)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Table_is_column_selected",
+			func(carg0 *C.AtkTable, carg1 C.gint) (cret C.gboolean) {
+				var table  Instance // go AtkTable subclass
+				var column int      // in, none, casted
+				var goret  bool     // return
+
+				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				column = int(carg1)
+
+				goret = overrides.IsColumnSelected(table, column)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.IsRowSelected != nil {
 		pclass.is_row_selected = (*[0]byte)(C._gotk4_atk1_Table_is_row_selected)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Table_is_row_selected",
+			func(carg0 *C.AtkTable, carg1 C.gint) (cret C.gboolean) {
+				var table Instance // go AtkTable subclass
+				var row   int      // in, none, casted
+				var goret bool     // return
+
+				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				row = int(carg1)
+
+				goret = overrides.IsRowSelected(table, row)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.IsSelected != nil {
 		pclass.is_selected = (*[0]byte)(C._gotk4_atk1_Table_is_selected)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Table_is_selected",
+			func(carg0 *C.AtkTable, carg1 C.gint, carg2 C.gint) (cret C.gboolean) {
+				var table  Instance // go AtkTable subclass
+				var row    int      // in, none, casted
+				var column int      // in, none, casted
+				var goret  bool     // return
+
+				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				row = int(carg1)
+				column = int(carg2)
+
+				goret = overrides.IsSelected(table, row, column)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.ModelChanged != nil {
 		pclass.model_changed = (*[0]byte)(C._gotk4_atk1_Table_model_changed)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Table_model_changed",
+			func(carg0 *C.AtkTable) {
+				var table Instance // go AtkTable subclass
+
+				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.ModelChanged(table)
+			},
+		)
 	}
 
 	if overrides.RefAt != nil {
 		pclass.ref_at = (*[0]byte)(C._gotk4_atk1_Table_ref_at)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Table_ref_at",
+			func(carg0 *C.AtkTable, carg1 C.gint, carg2 C.gint) (cret *C.AtkObject) {
+				var table  Instance // go AtkTable subclass
+				var row    int      // in, none, casted
+				var column int      // in, none, casted
+				var goret  Object   // return, full, converted
+
+				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				row = int(carg1)
+				column = int(carg2)
+
+				goret = overrides.RefAt(table, row, column)
+
+				cret = (*C.AtkObject)(UnsafeObjectToGlibFull(goret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.RemoveColumnSelection != nil {
 		pclass.remove_column_selection = (*[0]byte)(C._gotk4_atk1_Table_remove_column_selection)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Table_remove_column_selection",
+			func(carg0 *C.AtkTable, carg1 C.gint) (cret C.gboolean) {
+				var table  Instance // go AtkTable subclass
+				var column int      // in, none, casted
+				var goret  bool     // return
+
+				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				column = int(carg1)
+
+				goret = overrides.RemoveColumnSelection(table, column)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.RemoveRowSelection != nil {
 		pclass.remove_row_selection = (*[0]byte)(C._gotk4_atk1_Table_remove_row_selection)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Table_remove_row_selection",
+			func(carg0 *C.AtkTable, carg1 C.gint) (cret C.gboolean) {
+				var table Instance // go AtkTable subclass
+				var row   int      // in, none, casted
+				var goret bool     // return
+
+				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				row = int(carg1)
+
+				goret = overrides.RemoveRowSelection(table, row)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.RowDeleted != nil {
 		pclass.row_deleted = (*[0]byte)(C._gotk4_atk1_Table_row_deleted)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Table_row_deleted",
+			func(carg0 *C.AtkTable, carg1 C.gint, carg2 C.gint) {
+				var table      Instance // go AtkTable subclass
+				var row        int      // in, none, casted
+				var numDeleted int      // in, none, casted
+
+				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				row = int(carg1)
+				numDeleted = int(carg2)
+
+				overrides.RowDeleted(table, row, numDeleted)
+			},
+		)
 	}
 
 	if overrides.RowInserted != nil {
 		pclass.row_inserted = (*[0]byte)(C._gotk4_atk1_Table_row_inserted)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Table_row_inserted",
+			func(carg0 *C.AtkTable, carg1 C.gint, carg2 C.gint) {
+				var table       Instance // go AtkTable subclass
+				var row         int      // in, none, casted
+				var numInserted int      // in, none, casted
+
+				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				row = int(carg1)
+				numInserted = int(carg2)
+
+				overrides.RowInserted(table, row, numInserted)
+			},
+		)
 	}
 
 	if overrides.RowReordered != nil {
 		pclass.row_reordered = (*[0]byte)(C._gotk4_atk1_Table_row_reordered)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Table_row_reordered",
+			func(carg0 *C.AtkTable) {
+				var table Instance // go AtkTable subclass
+
+				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.RowReordered(table)
+			},
+		)
 	}
 
 	if overrides.SetCaption != nil {
 		pclass.set_caption = (*[0]byte)(C._gotk4_atk1_Table_set_caption)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Table_set_caption",
+			func(carg0 *C.AtkTable, carg1 *C.AtkObject) {
+				var table   Instance // go AtkTable subclass
+				var caption Object   // in, none, converted
+
+				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				caption = UnsafeObjectFromGlibNone(unsafe.Pointer(carg1))
+
+				overrides.SetCaption(table, caption)
+			},
+		)
 	}
 
 	if overrides.SetColumnDescription != nil {
 		pclass.set_column_description = (*[0]byte)(C._gotk4_atk1_Table_set_column_description)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Table_set_column_description",
+			func(carg0 *C.AtkTable, carg1 C.gint, carg2 *C.gchar) {
+				var table       Instance // go AtkTable subclass
+				var column      int      // in, none, casted
+				var description string   // in, none, string
+
+				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				column = int(carg1)
+				description = C.GoString((*C.char)(unsafe.Pointer(carg2)))
+
+				overrides.SetColumnDescription(table, column, description)
+			},
+		)
 	}
 
 	if overrides.SetColumnHeader != nil {
 		pclass.set_column_header = (*[0]byte)(C._gotk4_atk1_Table_set_column_header)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Table_set_column_header",
+			func(carg0 *C.AtkTable, carg1 C.gint, carg2 *C.AtkObject) {
+				var table  Instance // go AtkTable subclass
+				var column int      // in, none, casted
+				var header Object   // in, none, converted
+
+				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				column = int(carg1)
+				header = UnsafeObjectFromGlibNone(unsafe.Pointer(carg2))
+
+				overrides.SetColumnHeader(table, column, header)
+			},
+		)
 	}
 
 	if overrides.SetRowDescription != nil {
 		pclass.set_row_description = (*[0]byte)(C._gotk4_atk1_Table_set_row_description)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Table_set_row_description",
+			func(carg0 *C.AtkTable, carg1 C.gint, carg2 *C.gchar) {
+				var table       Instance // go AtkTable subclass
+				var row         int      // in, none, casted
+				var description string   // in, none, string
+
+				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				row = int(carg1)
+				description = C.GoString((*C.char)(unsafe.Pointer(carg2)))
+
+				overrides.SetRowDescription(table, row, description)
+			},
+		)
 	}
 
 	if overrides.SetRowHeader != nil {
 		pclass.set_row_header = (*[0]byte)(C._gotk4_atk1_Table_set_row_header)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Table_set_row_header",
+			func(carg0 *C.AtkTable, carg1 C.gint, carg2 *C.AtkObject) {
+				var table  Instance // go AtkTable subclass
+				var row    int      // in, none, casted
+				var header Object   // in, none, converted
+
+				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				row = int(carg1)
+				header = UnsafeObjectFromGlibNone(unsafe.Pointer(carg2))
+
+				overrides.SetRowHeader(table, row, header)
+			},
+		)
 	}
 
 	if overrides.SetSummary != nil {
 		pclass.set_summary = (*[0]byte)(C._gotk4_atk1_Table_set_summary)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Table_set_summary",
+			func(carg0 *C.AtkTable, carg1 *C.AtkObject) {
+				var table      Instance // go AtkTable subclass
+				var accessible Object   // in, none, converted
+
+				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				accessible = UnsafeObjectFromGlibNone(unsafe.Pointer(carg1))
+
+				overrides.SetSummary(table, accessible)
+			},
+		)
 	}
 }
 
@@ -9021,22 +10551,118 @@ func UnsafeApplyTableCellOverrides[Instance TableCell](gclass unsafe.Pointer, ov
 
 	if overrides.GetColumnSpan != nil {
 		pclass.get_column_span = (*[0]byte)(C._gotk4_atk1_TableCell_get_column_span)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_TableCell_get_column_span",
+			func(carg0 *C.AtkTableCell) (cret C.gint) {
+				var cell  Instance // go AtkTableCell subclass
+				var goret int      // return, none, casted
+
+				cell = UnsafeTableCellFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetColumnSpan(cell)
+
+				cret = C.gint(goret)
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetPosition != nil {
 		pclass.get_position = (*[0]byte)(C._gotk4_atk1_TableCell_get_position)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_TableCell_get_position",
+			func(carg0 *C.AtkTableCell, carg1 *C.gint, carg2 *C.gint) (cret C.gboolean) {
+				var cell   Instance // go AtkTableCell subclass
+				var row    int      // out, full, casted
+				var column int      // out, full, casted
+				var goret  bool     // return
+
+				cell = UnsafeTableCellFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				row, column, goret = overrides.GetPosition(cell)
+
+				*carg1 = C.gint(row)
+				*carg2 = C.gint(column)
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetRowColumnSpan != nil {
 		pclass.get_row_column_span = (*[0]byte)(C._gotk4_atk1_TableCell_get_row_column_span)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_TableCell_get_row_column_span",
+			func(carg0 *C.AtkTableCell, carg1 *C.gint, carg2 *C.gint, carg3 *C.gint, carg4 *C.gint) (cret C.gboolean) {
+				var cell       Instance // go AtkTableCell subclass
+				var row        int      // out, full, casted
+				var column     int      // out, full, casted
+				var rowSpan    int      // out, full, casted
+				var columnSpan int      // out, full, casted
+				var goret      bool     // return
+
+				cell = UnsafeTableCellFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				row, column, rowSpan, columnSpan, goret = overrides.GetRowColumnSpan(cell)
+
+				*carg1 = C.gint(row)
+				*carg2 = C.gint(column)
+				*carg3 = C.gint(rowSpan)
+				*carg4 = C.gint(columnSpan)
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetRowSpan != nil {
 		pclass.get_row_span = (*[0]byte)(C._gotk4_atk1_TableCell_get_row_span)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_TableCell_get_row_span",
+			func(carg0 *C.AtkTableCell) (cret C.gint) {
+				var cell  Instance // go AtkTableCell subclass
+				var goret int      // return, none, casted
+
+				cell = UnsafeTableCellFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetRowSpan(cell)
+
+				cret = C.gint(goret)
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetTable != nil {
 		pclass.get_table = (*[0]byte)(C._gotk4_atk1_TableCell_get_table)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_TableCell_get_table",
+			func(carg0 *C.AtkTableCell) (cret *C.AtkObject) {
+				var cell  Instance // go AtkTableCell subclass
+				var goret Object   // return, full, converted
+
+				cell = UnsafeTableCellFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetTable(cell)
+
+				cret = (*C.AtkObject)(UnsafeObjectToGlibFull(goret))
+
+				return cret
+			},
+		)
 	}
 }
 
@@ -10406,86 +12032,502 @@ func UnsafeApplyTextOverrides[Instance Text](gclass unsafe.Pointer, overrides Te
 
 	if overrides.AddSelection != nil {
 		pclass.add_selection = (*[0]byte)(C._gotk4_atk1_Text_add_selection)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Text_add_selection",
+			func(carg0 *C.AtkText, carg1 C.gint, carg2 C.gint) (cret C.gboolean) {
+				var text        Instance // go AtkText subclass
+				var startOffset int      // in, none, casted
+				var endOffset   int      // in, none, casted
+				var goret       bool     // return
+
+				text = UnsafeTextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				startOffset = int(carg1)
+				endOffset = int(carg2)
+
+				goret = overrides.AddSelection(text, startOffset, endOffset)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetBoundedRanges != nil {
 		pclass.get_bounded_ranges = (*[0]byte)(C._gotk4_atk1_Text_get_bounded_ranges)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Text_get_bounded_ranges",
+			func(carg0 *C.AtkText, carg1 *C.AtkTextRectangle, carg2 C.AtkCoordType, carg3 C.AtkTextClipType, carg4 C.AtkTextClipType) (cret **C.AtkTextRange) {
+				var text      Instance       // go AtkText subclass
+				var rect      *TextRectangle // in, none, converted
+				var coordType CoordType      // in, none, casted
+				var xClipType TextClipType   // in, none, casted
+				var yClipType TextClipType   // in, none, casted
+				var goret     []*TextRange   // return, transfer: full, C Pointers: 2, Name: array[TextRange], scope: , array (inner: *typesystem.Record, zero-terminated)
+
+				text = UnsafeTextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				rect = UnsafeTextRectangleFromGlibNone(unsafe.Pointer(carg1))
+				coordType = CoordType(carg2)
+				xClipType = TextClipType(carg3)
+				yClipType = TextClipType(carg4)
+
+				goret = overrides.GetBoundedRanges(text, rect, coordType, xClipType, yClipType)
+
+				_ = goret
+				_ = cret
+				panic("unimplemented conversion of []*TextRange (AtkTextRange**)")
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetCaretOffset != nil {
 		pclass.get_caret_offset = (*[0]byte)(C._gotk4_atk1_Text_get_caret_offset)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Text_get_caret_offset",
+			func(carg0 *C.AtkText) (cret C.gint) {
+				var text  Instance // go AtkText subclass
+				var goret int      // return, none, casted
+
+				text = UnsafeTextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetCaretOffset(text)
+
+				cret = C.gint(goret)
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetCharacterAtOffset != nil {
 		pclass.get_character_at_offset = (*[0]byte)(C._gotk4_atk1_Text_get_character_at_offset)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Text_get_character_at_offset",
+			func(carg0 *C.AtkText, carg1 C.gint) (cret C.gunichar) {
+				var text   Instance // go AtkText subclass
+				var offset int      // in, none, casted
+				var goret  uint32   // return, none, casted
+
+				text = UnsafeTextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				offset = int(carg1)
+
+				goret = overrides.GetCharacterAtOffset(text, offset)
+
+				cret = C.gunichar(goret)
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetCharacterCount != nil {
 		pclass.get_character_count = (*[0]byte)(C._gotk4_atk1_Text_get_character_count)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Text_get_character_count",
+			func(carg0 *C.AtkText) (cret C.gint) {
+				var text  Instance // go AtkText subclass
+				var goret int      // return, none, casted
+
+				text = UnsafeTextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetCharacterCount(text)
+
+				cret = C.gint(goret)
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetCharacterExtents != nil {
 		pclass.get_character_extents = (*[0]byte)(C._gotk4_atk1_Text_get_character_extents)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Text_get_character_extents",
+			func(carg0 *C.AtkText, carg1 C.gint, carg2 *C.gint, carg3 *C.gint, carg4 *C.gint, carg5 *C.gint, carg6 C.AtkCoordType) {
+				var text   Instance  // go AtkText subclass
+				var offset int       // in, none, casted
+				var coords CoordType // in, none, casted
+				var x      int       // out, full, casted
+				var y      int       // out, full, casted
+				var width  int       // out, full, casted
+				var height int       // out, full, casted
+
+				text = UnsafeTextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				offset = int(carg1)
+				coords = CoordType(carg6)
+
+				x, y, width, height = overrides.GetCharacterExtents(text, offset, coords)
+
+				*carg2 = C.gint(x)
+				*carg3 = C.gint(y)
+				*carg4 = C.gint(width)
+				*carg5 = C.gint(height)
+			},
+		)
 	}
 
 	if overrides.GetNSelections != nil {
 		pclass.get_n_selections = (*[0]byte)(C._gotk4_atk1_Text_get_n_selections)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Text_get_n_selections",
+			func(carg0 *C.AtkText) (cret C.gint) {
+				var text  Instance // go AtkText subclass
+				var goret int      // return, none, casted
+
+				text = UnsafeTextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetNSelections(text)
+
+				cret = C.gint(goret)
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetOffsetAtPoint != nil {
 		pclass.get_offset_at_point = (*[0]byte)(C._gotk4_atk1_Text_get_offset_at_point)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Text_get_offset_at_point",
+			func(carg0 *C.AtkText, carg1 C.gint, carg2 C.gint, carg3 C.AtkCoordType) (cret C.gint) {
+				var text   Instance  // go AtkText subclass
+				var x      int       // in, none, casted
+				var y      int       // in, none, casted
+				var coords CoordType // in, none, casted
+				var goret  int       // return, none, casted
+
+				text = UnsafeTextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				x = int(carg1)
+				y = int(carg2)
+				coords = CoordType(carg3)
+
+				goret = overrides.GetOffsetAtPoint(text, x, y, coords)
+
+				cret = C.gint(goret)
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetRangeExtents != nil {
 		pclass.get_range_extents = (*[0]byte)(C._gotk4_atk1_Text_get_range_extents)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Text_get_range_extents",
+			func(carg0 *C.AtkText, carg1 C.gint, carg2 C.gint, carg3 C.AtkCoordType, carg4 *C.AtkTextRectangle) {
+				var text        Instance      // go AtkText subclass
+				var startOffset int           // in, none, casted
+				var endOffset   int           // in, none, casted
+				var coordType   CoordType     // in, none, casted
+				var rect        TextRectangle // out, transfer: none, C Pointers: 0, Name: TextRectangle, caller-allocates
+
+				text = UnsafeTextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				startOffset = int(carg1)
+				endOffset = int(carg2)
+				coordType = CoordType(carg3)
+
+				rect = overrides.GetRangeExtents(text, startOffset, endOffset, coordType)
+
+				_ = rect
+				_ = carg4
+				panic("unimplemented conversion of TextRectangle (AtkTextRectangle)")
+			},
+		)
 	}
 
 	if overrides.GetSelection != nil {
 		pclass.get_selection = (*[0]byte)(C._gotk4_atk1_Text_get_selection)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Text_get_selection",
+			func(carg0 *C.AtkText, carg1 C.gint, carg2 *C.gint, carg3 *C.gint) (cret *C.gchar) {
+				var text         Instance // go AtkText subclass
+				var selectionNum int      // in, none, casted
+				var startOffset  int      // out, full, casted
+				var endOffset    int      // out, full, casted
+				var goret        string   // return, full, string
+
+				text = UnsafeTextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				selectionNum = int(carg1)
+
+				startOffset, endOffset, goret = overrides.GetSelection(text, selectionNum)
+
+				*carg2 = C.gint(startOffset)
+				*carg3 = C.gint(endOffset)
+				cret = (*C.gchar)(unsafe.Pointer(C.CString(goret)))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetStringAtOffset != nil {
 		pclass.get_string_at_offset = (*[0]byte)(C._gotk4_atk1_Text_get_string_at_offset)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Text_get_string_at_offset",
+			func(carg0 *C.AtkText, carg1 C.gint, carg2 C.AtkTextGranularity, carg3 *C.gint, carg4 *C.gint) (cret *C.gchar) {
+				var text        Instance        // go AtkText subclass
+				var offset      int             // in, none, casted
+				var granularity TextGranularity // in, none, casted
+				var startOffset int             // out, full, casted
+				var endOffset   int             // out, full, casted
+				var goret       string          // return, full, string, nullable-string
+
+				text = UnsafeTextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				offset = int(carg1)
+				granularity = TextGranularity(carg2)
+
+				startOffset, endOffset, goret = overrides.GetStringAtOffset(text, offset, granularity)
+
+				*carg3 = C.gint(startOffset)
+				*carg4 = C.gint(endOffset)
+				if goret != "" {
+					cret = (*C.gchar)(unsafe.Pointer(C.CString(goret)))
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetText != nil {
 		pclass.get_text = (*[0]byte)(C._gotk4_atk1_Text_get_text)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Text_get_text",
+			func(carg0 *C.AtkText, carg1 C.gint, carg2 C.gint) (cret *C.gchar) {
+				var text        Instance // go AtkText subclass
+				var startOffset int      // in, none, casted
+				var endOffset   int      // in, none, casted
+				var goret       string   // return, full, string
+
+				text = UnsafeTextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				startOffset = int(carg1)
+				endOffset = int(carg2)
+
+				goret = overrides.GetText(text, startOffset, endOffset)
+
+				cret = (*C.gchar)(unsafe.Pointer(C.CString(goret)))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.RemoveSelection != nil {
 		pclass.remove_selection = (*[0]byte)(C._gotk4_atk1_Text_remove_selection)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Text_remove_selection",
+			func(carg0 *C.AtkText, carg1 C.gint) (cret C.gboolean) {
+				var text         Instance // go AtkText subclass
+				var selectionNum int      // in, none, casted
+				var goret        bool     // return
+
+				text = UnsafeTextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				selectionNum = int(carg1)
+
+				goret = overrides.RemoveSelection(text, selectionNum)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.ScrollSubstringTo != nil {
 		pclass.scroll_substring_to = (*[0]byte)(C._gotk4_atk1_Text_scroll_substring_to)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Text_scroll_substring_to",
+			func(carg0 *C.AtkText, carg1 C.gint, carg2 C.gint, carg3 C.AtkScrollType) (cret C.gboolean) {
+				var text        Instance   // go AtkText subclass
+				var startOffset int        // in, none, casted
+				var endOffset   int        // in, none, casted
+				var typ         ScrollType // in, none, casted
+				var goret       bool       // return
+
+				text = UnsafeTextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				startOffset = int(carg1)
+				endOffset = int(carg2)
+				typ = ScrollType(carg3)
+
+				goret = overrides.ScrollSubstringTo(text, startOffset, endOffset, typ)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.ScrollSubstringToPoint != nil {
 		pclass.scroll_substring_to_point = (*[0]byte)(C._gotk4_atk1_Text_scroll_substring_to_point)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Text_scroll_substring_to_point",
+			func(carg0 *C.AtkText, carg1 C.gint, carg2 C.gint, carg3 C.AtkCoordType, carg4 C.gint, carg5 C.gint) (cret C.gboolean) {
+				var text        Instance  // go AtkText subclass
+				var startOffset int       // in, none, casted
+				var endOffset   int       // in, none, casted
+				var coords      CoordType // in, none, casted
+				var x           int       // in, none, casted
+				var y           int       // in, none, casted
+				var goret       bool      // return
+
+				text = UnsafeTextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				startOffset = int(carg1)
+				endOffset = int(carg2)
+				coords = CoordType(carg3)
+				x = int(carg4)
+				y = int(carg5)
+
+				goret = overrides.ScrollSubstringToPoint(text, startOffset, endOffset, coords, x, y)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.SetCaretOffset != nil {
 		pclass.set_caret_offset = (*[0]byte)(C._gotk4_atk1_Text_set_caret_offset)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Text_set_caret_offset",
+			func(carg0 *C.AtkText, carg1 C.gint) (cret C.gboolean) {
+				var text   Instance // go AtkText subclass
+				var offset int      // in, none, casted
+				var goret  bool     // return
+
+				text = UnsafeTextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				offset = int(carg1)
+
+				goret = overrides.SetCaretOffset(text, offset)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.SetSelection != nil {
 		pclass.set_selection = (*[0]byte)(C._gotk4_atk1_Text_set_selection)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Text_set_selection",
+			func(carg0 *C.AtkText, carg1 C.gint, carg2 C.gint, carg3 C.gint) (cret C.gboolean) {
+				var text         Instance // go AtkText subclass
+				var selectionNum int      // in, none, casted
+				var startOffset  int      // in, none, casted
+				var endOffset    int      // in, none, casted
+				var goret        bool     // return
+
+				text = UnsafeTextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				selectionNum = int(carg1)
+				startOffset = int(carg2)
+				endOffset = int(carg3)
+
+				goret = overrides.SetSelection(text, selectionNum, startOffset, endOffset)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.TextAttributesChanged != nil {
 		pclass.text_attributes_changed = (*[0]byte)(C._gotk4_atk1_Text_text_attributes_changed)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Text_text_attributes_changed",
+			func(carg0 *C.AtkText) {
+				var text Instance // go AtkText subclass
+
+				text = UnsafeTextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.TextAttributesChanged(text)
+			},
+		)
 	}
 
 	if overrides.TextCaretMoved != nil {
 		pclass.text_caret_moved = (*[0]byte)(C._gotk4_atk1_Text_text_caret_moved)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Text_text_caret_moved",
+			func(carg0 *C.AtkText, carg1 C.gint) {
+				var text     Instance // go AtkText subclass
+				var location int      // in, none, casted
+
+				text = UnsafeTextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				location = int(carg1)
+
+				overrides.TextCaretMoved(text, location)
+			},
+		)
 	}
 
 	if overrides.TextChanged != nil {
 		pclass.text_changed = (*[0]byte)(C._gotk4_atk1_Text_text_changed)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Text_text_changed",
+			func(carg0 *C.AtkText, carg1 C.gint, carg2 C.gint) {
+				var text     Instance // go AtkText subclass
+				var position int      // in, none, casted
+				var length   int      // in, none, casted
+
+				text = UnsafeTextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				position = int(carg1)
+				length = int(carg2)
+
+				overrides.TextChanged(text, position, length)
+			},
+		)
 	}
 
 	if overrides.TextSelectionChanged != nil {
 		pclass.text_selection_changed = (*[0]byte)(C._gotk4_atk1_Text_text_selection_changed)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Text_text_selection_changed",
+			func(carg0 *C.AtkText) {
+				var text Instance // go AtkText subclass
+
+				text = UnsafeTextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.TextSelectionChanged(text)
+			},
+		)
 	}
 }
 
@@ -10962,22 +13004,103 @@ func UnsafeApplyValueOverrides[Instance Value](gclass unsafe.Pointer, overrides 
 
 	if overrides.GetIncrement != nil {
 		pclass.get_increment = (*[0]byte)(C._gotk4_atk1_Value_get_increment)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Value_get_increment",
+			func(carg0 *C.AtkValue) (cret C.gdouble) {
+				var obj   Instance // go AtkValue subclass
+				var goret float64  // return, none, casted
+
+				obj = UnsafeValueFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetIncrement(obj)
+
+				cret = C.gdouble(goret)
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetRange != nil {
 		pclass.get_range = (*[0]byte)(C._gotk4_atk1_Value_get_range)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Value_get_range",
+			func(carg0 *C.AtkValue) (cret *C.AtkRange) {
+				var obj   Instance // go AtkValue subclass
+				var goret *Range   // return, full, converted, nullable
+
+				obj = UnsafeValueFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetRange(obj)
+
+				if goret != nil {
+					cret = (*C.AtkRange)(UnsafeRangeToGlibFull(goret))
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetSubRanges != nil {
 		pclass.get_sub_ranges = (*[0]byte)(C._gotk4_atk1_Value_get_sub_ranges)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Value_get_sub_ranges",
+			func(carg0 *C.AtkValue) (cret *C.GSList) {
+				var obj   Instance // go AtkValue subclass
+				var goret []*Range // return, transfer: full, C Pointers: 1, Name: SList, scope: 
+
+				obj = UnsafeValueFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetSubRanges(obj)
+
+				_ = goret
+				_ = cret
+				panic("unimplemented conversion of []*Range (GSList*)")
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetValueAndText != nil {
 		pclass.get_value_and_text = (*[0]byte)(C._gotk4_atk1_Value_get_value_and_text)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Value_get_value_and_text",
+			func(carg0 *C.AtkValue, carg1 *C.gdouble, carg2 **C.gchar) {
+				var obj   Instance // go AtkValue subclass
+				var value float64  // out, full, casted
+				var text  string   // out, full, string
+
+				obj = UnsafeValueFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				value, text = overrides.GetValueAndText(obj)
+
+				*carg1 = C.gdouble(value)
+				carg2 = (*C.gchar)(unsafe.Pointer(C.CString(text)))
+			},
+		)
 	}
 
 	if overrides.SetValue != nil {
 		pclass.set_value = (*[0]byte)(C._gotk4_atk1_Value_set_value)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Value_set_value",
+			func(carg0 *C.AtkValue, carg1 C.gdouble) {
+				var obj      Instance // go AtkValue subclass
+				var newValue float64  // in, none, casted
+
+				obj = UnsafeValueFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				newValue = float64(carg1)
+
+				overrides.SetValue(obj, newValue)
+			},
+		)
 	}
 }
 
@@ -11569,35 +13692,190 @@ func UnsafeApplyHyperlinkOverrides[Instance Hyperlink](gclass unsafe.Pointer, ov
 
 	if overrides.GetEndIndex != nil {
 		pclass.get_end_index = (*[0]byte)(C._gotk4_atk1_Hyperlink_get_end_index)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Hyperlink_get_end_index",
+			func(carg0 *C.AtkHyperlink) (cret C.gint) {
+				var link_ Instance // go AtkHyperlink subclass
+				var goret int      // return, none, casted
+
+				link_ = UnsafeHyperlinkFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetEndIndex(link_)
+
+				cret = C.gint(goret)
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetNAnchors != nil {
 		pclass.get_n_anchors = (*[0]byte)(C._gotk4_atk1_Hyperlink_get_n_anchors)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Hyperlink_get_n_anchors",
+			func(carg0 *C.AtkHyperlink) (cret C.gint) {
+				var link_ Instance // go AtkHyperlink subclass
+				var goret int      // return, none, casted
+
+				link_ = UnsafeHyperlinkFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetNAnchors(link_)
+
+				cret = C.gint(goret)
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetObject != nil {
 		pclass.get_object = (*[0]byte)(C._gotk4_atk1_Hyperlink_get_object)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Hyperlink_get_object",
+			func(carg0 *C.AtkHyperlink, carg1 C.gint) (cret *C.AtkObject) {
+				var link_ Instance // go AtkHyperlink subclass
+				var i     int      // in, none, casted
+				var goret Object   // return, none, converted
+
+				link_ = UnsafeHyperlinkFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				i = int(carg1)
+
+				goret = overrides.GetObject(link_, i)
+
+				cret = (*C.AtkObject)(UnsafeObjectToGlibNone(goret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetStartIndex != nil {
 		pclass.get_start_index = (*[0]byte)(C._gotk4_atk1_Hyperlink_get_start_index)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Hyperlink_get_start_index",
+			func(carg0 *C.AtkHyperlink) (cret C.gint) {
+				var link_ Instance // go AtkHyperlink subclass
+				var goret int      // return, none, casted
+
+				link_ = UnsafeHyperlinkFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetStartIndex(link_)
+
+				cret = C.gint(goret)
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetURI != nil {
 		pclass.get_uri = (*[0]byte)(C._gotk4_atk1_Hyperlink_get_uri)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Hyperlink_get_uri",
+			func(carg0 *C.AtkHyperlink, carg1 C.gint) (cret *C.gchar) {
+				var link_ Instance // go AtkHyperlink subclass
+				var i     int      // in, none, casted
+				var goret string   // return, full, string
+
+				link_ = UnsafeHyperlinkFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				i = int(carg1)
+
+				goret = overrides.GetURI(link_, i)
+
+				cret = (*C.gchar)(unsafe.Pointer(C.CString(goret)))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.IsValid != nil {
 		pclass.is_valid = (*[0]byte)(C._gotk4_atk1_Hyperlink_is_valid)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Hyperlink_is_valid",
+			func(carg0 *C.AtkHyperlink) (cret C.gboolean) {
+				var link_ Instance // go AtkHyperlink subclass
+				var goret bool     // return
+
+				link_ = UnsafeHyperlinkFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.IsValid(link_)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.LinkActivated != nil {
 		pclass.link_activated = (*[0]byte)(C._gotk4_atk1_Hyperlink_link_activated)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Hyperlink_link_activated",
+			func(carg0 *C.AtkHyperlink) {
+				var link_ Instance // go AtkHyperlink subclass
+
+				link_ = UnsafeHyperlinkFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.LinkActivated(link_)
+			},
+		)
 	}
 
 	if overrides.LinkState != nil {
 		pclass.link_state = (*[0]byte)(C._gotk4_atk1_Hyperlink_link_state)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Hyperlink_link_state",
+			func(carg0 *C.AtkHyperlink) (cret C.guint) {
+				var link_ Instance // go AtkHyperlink subclass
+				var goret uint     // return, none, casted
+
+				link_ = UnsafeHyperlinkFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.LinkState(link_)
+
+				cret = C.guint(goret)
+
+				return cret
+			},
+		)
 	}
+}
+
+// RegisterHyperlinkSubClass is used to register a go subclass of AtkHyperlink. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterHyperlinkSubClass[InstanceT Hyperlink](
+		name string,
+		classInit func(class *HyperlinkClass),
+		constructor func() InstanceT,
+		overrides HyperlinkOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeHyperlink,
+		UnsafeHyperlinkClassFromGlibBorrow,
+		UnsafeApplyHyperlinkOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapHyperlink(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // MiscInstance is the instance type used by all types extending AtkMisc. It is used internally by the bindings. Users should use the interface [Misc] instead.
@@ -11665,6 +13943,32 @@ type MiscOverrides[Instance Misc] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplyMiscOverrides[Instance Misc](gclass unsafe.Pointer, overrides MiscOverrides[Instance]) {
 	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
+}
+
+// RegisterMiscSubClass is used to register a go subclass of AtkMisc. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterMiscSubClass[InstanceT Misc](
+		name string,
+		classInit func(class *MiscClass),
+		constructor func() InstanceT,
+		overrides MiscOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeMisc,
+		UnsafeMiscClassFromGlibBorrow,
+		UnsafeApplyMiscOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapMisc(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // ObjectInstance is the instance type used by all types extending AtkObject. It is used internally by the bindings. Users should use the interface [Object] instead.
@@ -12772,71 +15076,352 @@ func UnsafeApplyObjectOverrides[Instance Object](gclass unsafe.Pointer, override
 
 	if overrides.FocusEvent != nil {
 		pclass.focus_event = (*[0]byte)(C._gotk4_atk1_Object_focus_event)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Object_focus_event",
+			func(carg0 *C.AtkObject, carg1 C.gboolean) {
+				var accessible Instance // go AtkObject subclass
+				var focusIn    bool     // in
+
+				accessible = UnsafeObjectFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg1 != 0 {
+					focusIn = true
+				}
+
+				overrides.FocusEvent(accessible, focusIn)
+			},
+		)
 	}
 
 	if overrides.GetDescription != nil {
 		pclass.get_description = (*[0]byte)(C._gotk4_atk1_Object_get_description)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Object_get_description",
+			func(carg0 *C.AtkObject) (cret *C.gchar) {
+				var accessible Instance // go AtkObject subclass
+				var goret      string   // return, none, string
+
+				accessible = UnsafeObjectFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetDescription(accessible)
+
+				cret = (*C.gchar)(unsafe.Pointer(C.CString(goret)))
+				defer C.free(unsafe.Pointer(cret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetIndexInParent != nil {
 		pclass.get_index_in_parent = (*[0]byte)(C._gotk4_atk1_Object_get_index_in_parent)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Object_get_index_in_parent",
+			func(carg0 *C.AtkObject) (cret C.gint) {
+				var accessible Instance // go AtkObject subclass
+				var goret      int      // return, none, casted
+
+				accessible = UnsafeObjectFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetIndexInParent(accessible)
+
+				cret = C.gint(goret)
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetNChildren != nil {
 		pclass.get_n_children = (*[0]byte)(C._gotk4_atk1_Object_get_n_children)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Object_get_n_children",
+			func(carg0 *C.AtkObject) (cret C.gint) {
+				var accessible Instance // go AtkObject subclass
+				var goret      int      // return, none, casted
+
+				accessible = UnsafeObjectFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetNChildren(accessible)
+
+				cret = C.gint(goret)
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetName != nil {
 		pclass.get_name = (*[0]byte)(C._gotk4_atk1_Object_get_name)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Object_get_name",
+			func(carg0 *C.AtkObject) (cret *C.gchar) {
+				var accessible Instance // go AtkObject subclass
+				var goret      string   // return, none, string
+
+				accessible = UnsafeObjectFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetName(accessible)
+
+				cret = (*C.gchar)(unsafe.Pointer(C.CString(goret)))
+				defer C.free(unsafe.Pointer(cret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetObjectLocale != nil {
 		pclass.get_object_locale = (*[0]byte)(C._gotk4_atk1_Object_get_object_locale)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Object_get_object_locale",
+			func(carg0 *C.AtkObject) (cret *C.gchar) {
+				var accessible Instance // go AtkObject subclass
+				var goret      string   // return, none, string
+
+				accessible = UnsafeObjectFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetObjectLocale(accessible)
+
+				cret = (*C.gchar)(unsafe.Pointer(C.CString(goret)))
+				defer C.free(unsafe.Pointer(cret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetParent != nil {
 		pclass.get_parent = (*[0]byte)(C._gotk4_atk1_Object_get_parent)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Object_get_parent",
+			func(carg0 *C.AtkObject) (cret *C.AtkObject) {
+				var accessible Instance // go AtkObject subclass
+				var goret      Object   // return, none, converted
+
+				accessible = UnsafeObjectFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetParent(accessible)
+
+				cret = (*C.AtkObject)(UnsafeObjectToGlibNone(goret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetRole != nil {
 		pclass.get_role = (*[0]byte)(C._gotk4_atk1_Object_get_role)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Object_get_role",
+			func(carg0 *C.AtkObject) (cret C.AtkRole) {
+				var accessible Instance // go AtkObject subclass
+				var goret      Role     // return, none, casted
+
+				accessible = UnsafeObjectFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetRole(accessible)
+
+				cret = C.AtkRole(goret)
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.PropertyChange != nil {
 		pclass.property_change = (*[0]byte)(C._gotk4_atk1_Object_property_change)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Object_property_change",
+			func(carg0 *C.AtkObject, carg1 *C.AtkPropertyValues) {
+				var accessible Instance        // go AtkObject subclass
+				var values     *PropertyValues // in, none, converted
+
+				accessible = UnsafeObjectFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				values = UnsafePropertyValuesFromGlibNone(unsafe.Pointer(carg1))
+
+				overrides.PropertyChange(accessible, values)
+			},
+		)
 	}
 
 	if overrides.RefRelationSet != nil {
 		pclass.ref_relation_set = (*[0]byte)(C._gotk4_atk1_Object_ref_relation_set)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Object_ref_relation_set",
+			func(carg0 *C.AtkObject) (cret *C.AtkRelationSet) {
+				var accessible Instance    // go AtkObject subclass
+				var goret      RelationSet // return, full, converted
+
+				accessible = UnsafeObjectFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.RefRelationSet(accessible)
+
+				cret = (*C.AtkRelationSet)(UnsafeRelationSetToGlibFull(goret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.RefStateSet != nil {
 		pclass.ref_state_set = (*[0]byte)(C._gotk4_atk1_Object_ref_state_set)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Object_ref_state_set",
+			func(carg0 *C.AtkObject) (cret *C.AtkStateSet) {
+				var accessible Instance // go AtkObject subclass
+				var goret      StateSet // return, full, converted
+
+				accessible = UnsafeObjectFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.RefStateSet(accessible)
+
+				cret = (*C.AtkStateSet)(UnsafeStateSetToGlibFull(goret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.SetDescription != nil {
 		pclass.set_description = (*[0]byte)(C._gotk4_atk1_Object_set_description)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Object_set_description",
+			func(carg0 *C.AtkObject, carg1 *C.gchar) {
+				var accessible  Instance // go AtkObject subclass
+				var description string   // in, none, string
+
+				accessible = UnsafeObjectFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				description = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+
+				overrides.SetDescription(accessible, description)
+			},
+		)
 	}
 
 	if overrides.SetName != nil {
 		pclass.set_name = (*[0]byte)(C._gotk4_atk1_Object_set_name)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Object_set_name",
+			func(carg0 *C.AtkObject, carg1 *C.gchar) {
+				var accessible Instance // go AtkObject subclass
+				var name       string   // in, none, string
+
+				accessible = UnsafeObjectFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				name = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+
+				overrides.SetName(accessible, name)
+			},
+		)
 	}
 
 	if overrides.SetParent != nil {
 		pclass.set_parent = (*[0]byte)(C._gotk4_atk1_Object_set_parent)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Object_set_parent",
+			func(carg0 *C.AtkObject, carg1 *C.AtkObject) {
+				var accessible Instance // go AtkObject subclass
+				var parent     Object   // in, none, converted
+
+				accessible = UnsafeObjectFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				parent = UnsafeObjectFromGlibNone(unsafe.Pointer(carg1))
+
+				overrides.SetParent(accessible, parent)
+			},
+		)
 	}
 
 	if overrides.SetRole != nil {
 		pclass.set_role = (*[0]byte)(C._gotk4_atk1_Object_set_role)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Object_set_role",
+			func(carg0 *C.AtkObject, carg1 C.AtkRole) {
+				var accessible Instance // go AtkObject subclass
+				var role       Role     // in, none, casted
+
+				accessible = UnsafeObjectFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				role = Role(carg1)
+
+				overrides.SetRole(accessible, role)
+			},
+		)
 	}
 
 	if overrides.StateChange != nil {
 		pclass.state_change = (*[0]byte)(C._gotk4_atk1_Object_state_change)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Object_state_change",
+			func(carg0 *C.AtkObject, carg1 *C.gchar, carg2 C.gboolean) {
+				var accessible Instance // go AtkObject subclass
+				var name       string   // in, none, string
+				var stateSet   bool     // in
+
+				accessible = UnsafeObjectFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				name = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+				if carg2 != 0 {
+					stateSet = true
+				}
+
+				overrides.StateChange(accessible, name, stateSet)
+			},
+		)
 	}
 
 	if overrides.VisibleDataChanged != nil {
 		pclass.visible_data_changed = (*[0]byte)(C._gotk4_atk1_Object_visible_data_changed)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Object_visible_data_changed",
+			func(carg0 *C.AtkObject) {
+				var accessible Instance // go AtkObject subclass
+
+				accessible = UnsafeObjectFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.VisibleDataChanged(accessible)
+			},
+		)
 	}
+}
+
+// RegisterObjectSubClass is used to register a go subclass of AtkObject. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterObjectSubClass[InstanceT Object](
+		name string,
+		classInit func(class *ObjectClass),
+		constructor func() InstanceT,
+		overrides ObjectOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeObject,
+		UnsafeObjectClassFromGlibBorrow,
+		UnsafeApplyObjectOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapObject(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // ObjectFactoryInstance is the instance type used by all types extending AtkObjectFactory. It is used internally by the bindings. Users should use the interface [ObjectFactory] instead.
@@ -13015,7 +15600,44 @@ func UnsafeApplyObjectFactoryOverrides[Instance ObjectFactory](gclass unsafe.Poi
 
 	if overrides.Invalidate != nil {
 		pclass.invalidate = (*[0]byte)(C._gotk4_atk1_ObjectFactory_invalidate)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_ObjectFactory_invalidate",
+			func(carg0 *C.AtkObjectFactory) {
+				var factory Instance // go AtkObjectFactory subclass
+
+				factory = UnsafeObjectFactoryFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.Invalidate(factory)
+			},
+		)
 	}
+}
+
+// RegisterObjectFactorySubClass is used to register a go subclass of AtkObjectFactory. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterObjectFactorySubClass[InstanceT ObjectFactory](
+		name string,
+		classInit func(class *ObjectFactoryClass),
+		constructor func() InstanceT,
+		overrides ObjectFactoryOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeObjectFactory,
+		UnsafeObjectFactoryClassFromGlibBorrow,
+		UnsafeApplyObjectFactoryOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapObjectFactory(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // PlugInstance is the instance type used by all types extending AtkPlug. It is used internally by the bindings. Users should use the interface [Plug] instead.
@@ -13203,7 +15825,49 @@ func UnsafeApplyPlugOverrides[Instance Plug](gclass unsafe.Pointer, overrides Pl
 
 	if overrides.GetObjectID != nil {
 		pclass.get_object_id = (*[0]byte)(C._gotk4_atk1_Plug_get_object_id)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Plug_get_object_id",
+			func(carg0 *C.AtkPlug) (cret *C.gchar) {
+				var obj   Instance // go AtkPlug subclass
+				var goret string   // return, full, string
+
+				obj = UnsafePlugFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetObjectID(obj)
+
+				cret = (*C.gchar)(unsafe.Pointer(C.CString(goret)))
+
+				return cret
+			},
+		)
 	}
+}
+
+// RegisterPlugSubClass is used to register a go subclass of AtkPlug. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterPlugSubClass[InstanceT Plug](
+		name string,
+		classInit func(class *PlugClass),
+		constructor func() InstanceT,
+		overrides PlugOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypePlug,
+		UnsafePlugClassFromGlibBorrow,
+		UnsafeApplyPlugOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapPlug(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // RegistryInstance is the instance type used by all types extending AtkRegistry. It is used internally by the bindings. Users should use the interface [Registry] instead.
@@ -13408,6 +16072,32 @@ type RegistryOverrides[Instance Registry] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplyRegistryOverrides[Instance Registry](gclass unsafe.Pointer, overrides RegistryOverrides[Instance]) {
 	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
+}
+
+// RegisterRegistrySubClass is used to register a go subclass of AtkRegistry. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterRegistrySubClass[InstanceT Registry](
+		name string,
+		classInit func(class *RegistryClass),
+		constructor func() InstanceT,
+		overrides RegistryOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeRegistry,
+		UnsafeRegistryClassFromGlibBorrow,
+		UnsafeApplyRegistryOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapRegistry(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // RelationInstance is the instance type used by all types extending AtkRelation. It is used internally by the bindings. Users should use the interface [Relation] instead.
@@ -13621,6 +16311,32 @@ type RelationOverrides[Instance Relation] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplyRelationOverrides[Instance Relation](gclass unsafe.Pointer, overrides RelationOverrides[Instance]) {
 	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
+}
+
+// RegisterRelationSubClass is used to register a go subclass of AtkRelation. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterRelationSubClass[InstanceT Relation](
+		name string,
+		classInit func(class *RelationClass),
+		constructor func() InstanceT,
+		overrides RelationOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeRelation,
+		UnsafeRelationClassFromGlibBorrow,
+		UnsafeApplyRelationOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapRelation(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // RelationSetInstance is the instance type used by all types extending AtkRelationSet. It is used internally by the bindings. Users should use the interface [RelationSet] instead.
@@ -14035,6 +16751,32 @@ func UnsafeApplyRelationSetOverrides[Instance RelationSet](gclass unsafe.Pointer
 	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
 }
 
+// RegisterRelationSetSubClass is used to register a go subclass of AtkRelationSet. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterRelationSetSubClass[InstanceT RelationSet](
+		name string,
+		classInit func(class *RelationSetClass),
+		constructor func() InstanceT,
+		overrides RelationSetOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeRelationSet,
+		UnsafeRelationSetClassFromGlibBorrow,
+		UnsafeApplyRelationSetOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapRelationSet(obj)
+		},
+		interfaceInits...,
+	)
+}
+
 // SocketInstance is the instance type used by all types extending AtkSocket. It is used internally by the bindings. Users should use the interface [Socket] instead.
 type SocketInstance struct {
 	_ [0]func() // equal guard
@@ -14233,7 +16975,46 @@ func UnsafeApplySocketOverrides[Instance Socket](gclass unsafe.Pointer, override
 
 	if overrides.Embed != nil {
 		pclass.embed = (*[0]byte)(C._gotk4_atk1_Socket_embed)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_atk1_Socket_embed",
+			func(carg0 *C.AtkSocket, carg1 *C.gchar) {
+				var obj    Instance // go AtkSocket subclass
+				var plugId string   // in, none, string
+
+				obj = UnsafeSocketFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				plugId = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+
+				overrides.Embed(obj, plugId)
+			},
+		)
 	}
+}
+
+// RegisterSocketSubClass is used to register a go subclass of AtkSocket. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterSocketSubClass[InstanceT Socket](
+		name string,
+		classInit func(class *SocketClass),
+		constructor func() InstanceT,
+		overrides SocketOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeSocket,
+		UnsafeSocketClassFromGlibBorrow,
+		UnsafeApplySocketOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapSocket(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // StateSetInstance is the instance type used by all types extending AtkStateSet. It is used internally by the bindings. Users should use the interface [StateSet] instead.
@@ -14752,6 +17533,32 @@ func UnsafeApplyStateSetOverrides[Instance StateSet](gclass unsafe.Pointer, over
 	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
 }
 
+// RegisterStateSetSubClass is used to register a go subclass of AtkStateSet. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterStateSetSubClass[InstanceT StateSet](
+		name string,
+		classInit func(class *StateSetClass),
+		constructor func() InstanceT,
+		overrides StateSetOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeStateSet,
+		UnsafeStateSetClassFromGlibBorrow,
+		UnsafeApplyStateSetOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapStateSet(obj)
+		},
+		interfaceInits...,
+	)
+}
+
 // UtilInstance is the instance type used by all types extending AtkUtil. It is used internally by the bindings. Users should use the interface [Util] instead.
 type UtilInstance struct {
 	_ [0]func() // equal guard
@@ -14819,6 +17626,32 @@ type UtilOverrides[Instance Util] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplyUtilOverrides[Instance Util](gclass unsafe.Pointer, overrides UtilOverrides[Instance]) {
 	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
+}
+
+// RegisterUtilSubClass is used to register a go subclass of AtkUtil. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterUtilSubClass[InstanceT Util](
+		name string,
+		classInit func(class *UtilClass),
+		constructor func() InstanceT,
+		overrides UtilOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeUtil,
+		UnsafeUtilClassFromGlibBorrow,
+		UnsafeApplyUtilOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapUtil(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // GObjectAccessibleInstance is the instance type used by all types extending AtkGObjectAccessible. It is used internally by the bindings. Users should use the interface [GObjectAccessible] instead.
@@ -14949,6 +17782,32 @@ type GObjectAccessibleOverrides[Instance GObjectAccessible] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplyGObjectAccessibleOverrides[Instance GObjectAccessible](gclass unsafe.Pointer, overrides GObjectAccessibleOverrides[Instance]) {
 	UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
+}
+
+// RegisterGObjectAccessibleSubClass is used to register a go subclass of AtkGObjectAccessible. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterGObjectAccessibleSubClass[InstanceT GObjectAccessible](
+		name string,
+		classInit func(class *GObjectAccessibleClass),
+		constructor func() InstanceT,
+		overrides GObjectAccessibleOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeGObjectAccessible,
+		UnsafeGObjectAccessibleClassFromGlibBorrow,
+		UnsafeApplyGObjectAccessibleOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapGObjectAccessible(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // NoOpObjectInstance is the instance type used by all types extending AtkNoOpObject. It is used internally by the bindings. Users should use the interface [NoOpObject] instead.
@@ -15111,6 +17970,32 @@ func UnsafeApplyNoOpObjectOverrides[Instance NoOpObject](gclass unsafe.Pointer, 
 	UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
 }
 
+// RegisterNoOpObjectSubClass is used to register a go subclass of AtkNoOpObject. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterNoOpObjectSubClass[InstanceT NoOpObject](
+		name string,
+		classInit func(class *NoOpObjectClass),
+		constructor func() InstanceT,
+		overrides NoOpObjectOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeNoOpObject,
+		UnsafeNoOpObjectClassFromGlibBorrow,
+		UnsafeApplyNoOpObjectOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapNoOpObject(obj)
+		},
+		interfaceInits...,
+	)
+}
+
 // NoOpObjectFactoryInstance is the instance type used by all types extending AtkNoOpObjectFactory. It is used internally by the bindings. Users should use the interface [NoOpObjectFactory] instead.
 type NoOpObjectFactoryInstance struct {
 	_ [0]func() // equal guard
@@ -15199,6 +18084,32 @@ type NoOpObjectFactoryOverrides[Instance NoOpObjectFactory] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplyNoOpObjectFactoryOverrides[Instance NoOpObjectFactory](gclass unsafe.Pointer, overrides NoOpObjectFactoryOverrides[Instance]) {
 	UnsafeApplyObjectFactoryOverrides(gclass, overrides.ObjectFactoryOverrides)
+}
+
+// RegisterNoOpObjectFactorySubClass is used to register a go subclass of AtkNoOpObjectFactory. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterNoOpObjectFactorySubClass[InstanceT NoOpObjectFactory](
+		name string,
+		classInit func(class *NoOpObjectFactoryClass),
+		constructor func() InstanceT,
+		overrides NoOpObjectFactoryOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeNoOpObjectFactory,
+		UnsafeNoOpObjectFactoryClassFromGlibBorrow,
+		UnsafeApplyNoOpObjectFactoryOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapNoOpObjectFactory(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // ActionIface wraps AtkActionIface

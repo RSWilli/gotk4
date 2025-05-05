@@ -49,19 +49,20 @@ func UnsafeApplyObjectOverrides[Instance Object](gclass unsafe.Pointer, override
 
 }
 
-type subClassData[InstanceT Object] struct {
+type subClassData struct {
 	classInit    func(gclass unsafe.Pointer)
-	instanceInit func(instance InstanceT)
+	instanceInit func(instance any)
 
 	// newFromGlib is the function to create a new instance from the glib pointer in the instance init function.
-	newFromGlib func(unsafe.Pointer) InstanceT
+	newFromGlib func(unsafe.Pointer) any
 }
 
 // UnsafeRegisterSubClass registers a new subclass of the given parentGtype. This is wrapped by the generated bindings
 // for ease of use.
 // This aligns with https://gjs.guide/guides/gobject/subclassing.html
-func UnsafeRegisterSubClass[InstanceT Object, ClassT, OverridesT ObjectOverrider[InstanceT]](
+func UnsafeRegisterSubClass[InstanceT Object, ClassT any, OverridesT ObjectOverrider[InstanceT]](
 	// user supplied arguments:
+	name string,
 	classInit func(class ClassT),
 	constructor func() InstanceT,
 	overrides OverridesT,
@@ -75,6 +76,12 @@ func UnsafeRegisterSubClass[InstanceT Object, ClassT, OverridesT ObjectOverrider
 	// user supplied interfaces:
 	interfaceInits ...SubClassInterfaceInit[InstanceT],
 ) Type {
+	if constructor == nil {
+		constructor = func() InstanceT {
+			var instance InstanceT
+			return instance
+		}
+	}
 	if classInit == nil {
 		classInit = func(class ClassT) {}
 	}
@@ -85,7 +92,8 @@ func UnsafeRegisterSubClass[InstanceT Object, ClassT, OverridesT ObjectOverrider
 		log.Panicln("GType", parentGtype, "is is unknown")
 	}
 
-	data := &subClassData[InstanceT]{
+	var data *subClassData
+	data = &subClassData{
 		classInit: func(gclass unsafe.Pointer) {
 			// first override the virtual methods on the class
 			parentApplyOverridesFunc(gclass, overrides)
@@ -100,10 +108,17 @@ func UnsafeRegisterSubClass[InstanceT Object, ClassT, OverridesT ObjectOverrider
 				signal.registerFor(name, gtype)
 			}
 
+			// save the subClass data with the class pointer
+			registerSubclassData(gclass, data)
+
+			// register the private data needed for the instance in instance init
+			baseClass := UnsafeObjectClassFromGlibBorrow(gclass)
+			baseClass.UnsafeAddPrivateData(unsafe.Sizeof(instanceID))
+
 			// then allow the user to call some methods on the class, e.g. to supply metadata
 			classInit(class)
 		},
-		newFromGlib: func(cInstance unsafe.Pointer) InstanceT {
+		newFromGlib: func(cInstance unsafe.Pointer) any {
 			obj := wrapObject(cInstance)
 			// parent is the pointer to the parent instance
 			parent := parentWrapObject(obj)
@@ -134,17 +149,20 @@ func UnsafeRegisterSubClass[InstanceT Object, ClassT, OverridesT ObjectOverrider
 				log.Panicln("instance is not a struct")
 			}
 
-			// panic on initialized first field
-			if !instanceValue.Field(0).IsZero() {
-				log.Panicln("instance first field is already set")
-			}
-
 			// panic on type mismatch of the first field
 			if instanceValue.Field(0).Type() != parentInstance.Type() {
 				log.Panicf("instance first field is not of the same type as parents instance type. expected %s, got %s\n", parentInstance.Type(), instanceValue.Field(0).Type())
 			}
 
+			// panic on initialized first field
+			if !instanceValue.Field(0).IsZero() {
+				log.Panicln("instance first field is already set")
+			}
+
 			instanceValue.Field(0).Set(parentInstance)
+
+			// store the instance in the private data of the instance, so we can retrieve it later
+			saveInstanceInPrivateData(instance, instance)
 
 			return instance
 		},
@@ -169,9 +187,34 @@ func UnsafeRegisterSubClass[InstanceT Object, ClassT, OverridesT ObjectOverrider
 		class_data:    C.gconstpointer(dataKey),
 	}
 
-	_ = typeInfo
+	cName := C.CString(name)
+	defer C.free(unsafe.Pointer(cName))
 
-	panic("not implemented")
+	gtype := C.g_type_register_static(
+		C.GType(parentGtype),
+		(*C.gchar)(cName),
+		typeInfo,
+		C.GTypeFlags(0),
+	)
+
+	// register the interfaces
+	for _, iface := range interfaceInits {
+		ifaceInfo := iface.toInterfaceInfo()
+		C.g_type_add_interface_static(gtype, C.GType(iface.InterfaceType), ifaceInfo)
+	}
+
+	t := Type(gtype)
+
+	// the key to make signals and object casting work is to register a GValueMarshaler:
+	RegisterGValueMarshaler(t, func(p unsafe.Pointer) (any, error) {
+		obj := ValueFromNative(p).Object()
+
+		loadInstanceFromPrivateData(obj)
+
+		return obj, nil
+	})
+
+	return t
 }
 
 type SignalDefinition struct {

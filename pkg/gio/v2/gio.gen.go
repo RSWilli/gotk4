@@ -9,6 +9,7 @@ import (
 	"strings"
 	"unsafe"
 
+	"github.com/diamondburned/gotk4/pkg/core/classdata"
 	"github.com/diamondburned/gotk4/pkg/core/userdata"
 	"github.com/diamondburned/gotk4/pkg/glib/v2"
 	"github.com/diamondburned/gotk4/pkg/gobject/v2"
@@ -10333,18 +10334,89 @@ func UnsafeApplyActionOverrides[Instance Action](gclass unsafe.Pointer, override
 
 	if overrides.GetEnabled != nil {
 		pclass.get_enabled = (*[0]byte)(C._gotk4_gio2_Action_get_enabled)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Action_get_enabled",
+			func(carg0 *C.GAction) (cret C.gboolean) {
+				var action Instance // go GAction subclass
+				var goret  bool     // return
+
+				action = UnsafeActionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetEnabled(action)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetName != nil {
 		pclass.get_name = (*[0]byte)(C._gotk4_gio2_Action_get_name)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Action_get_name",
+			func(carg0 *C.GAction) (cret *C.gchar) {
+				var action Instance // go GAction subclass
+				var goret  string   // return, none, string
+
+				action = UnsafeActionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetName(action)
+
+				cret = (*C.gchar)(unsafe.Pointer(C.CString(goret)))
+				defer C.free(unsafe.Pointer(cret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetParameterType != nil {
 		pclass.get_parameter_type = (*[0]byte)(C._gotk4_gio2_Action_get_parameter_type)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Action_get_parameter_type",
+			func(carg0 *C.GAction) (cret *C.GVariantType) {
+				var action Instance          // go GAction subclass
+				var goret  *glib.VariantType // return, none, converted, nullable
+
+				action = UnsafeActionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetParameterType(action)
+
+				if goret != nil {
+					cret = (*C.GVariantType)(glib.UnsafeVariantTypeToGlibNone(goret))
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetStateType != nil {
 		pclass.get_state_type = (*[0]byte)(C._gotk4_gio2_Action_get_state_type)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Action_get_state_type",
+			func(carg0 *C.GAction) (cret *C.GVariantType) {
+				var action Instance          // go GAction subclass
+				var goret  *glib.VariantType // return, none, converted, nullable
+
+				action = UnsafeActionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetStateType(action)
+
+				if goret != nil {
+					cret = (*C.GVariantType)(glib.UnsafeVariantTypeToGlibNone(goret))
+				}
+
+				return cret
+			},
+		)
 	}
 }
 
@@ -10941,34 +11013,175 @@ func UnsafeApplyActionGroupOverrides[Instance ActionGroup](gclass unsafe.Pointer
 
 	if overrides.ActionAdded != nil {
 		pclass.action_added = (*[0]byte)(C._gotk4_gio2_ActionGroup_action_added)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_ActionGroup_action_added",
+			func(carg0 *C.GActionGroup, carg1 *C.gchar) {
+				var actionGroup Instance // go GActionGroup subclass
+				var actionName  string   // in, none, string
+
+				actionGroup = UnsafeActionGroupFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				actionName = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+
+				overrides.ActionAdded(actionGroup, actionName)
+			},
+		)
 	}
 
 	if overrides.ActionEnabledChanged != nil {
 		pclass.action_enabled_changed = (*[0]byte)(C._gotk4_gio2_ActionGroup_action_enabled_changed)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_ActionGroup_action_enabled_changed",
+			func(carg0 *C.GActionGroup, carg1 *C.gchar, carg2 C.gboolean) {
+				var actionGroup Instance // go GActionGroup subclass
+				var actionName  string   // in, none, string
+				var enabled     bool     // in
+
+				actionGroup = UnsafeActionGroupFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				actionName = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+				if carg2 != 0 {
+					enabled = true
+				}
+
+				overrides.ActionEnabledChanged(actionGroup, actionName, enabled)
+			},
+		)
 	}
 
 	if overrides.ActionRemoved != nil {
 		pclass.action_removed = (*[0]byte)(C._gotk4_gio2_ActionGroup_action_removed)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_ActionGroup_action_removed",
+			func(carg0 *C.GActionGroup, carg1 *C.gchar) {
+				var actionGroup Instance // go GActionGroup subclass
+				var actionName  string   // in, none, string
+
+				actionGroup = UnsafeActionGroupFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				actionName = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+
+				overrides.ActionRemoved(actionGroup, actionName)
+			},
+		)
 	}
 
 	if overrides.GetActionEnabled != nil {
 		pclass.get_action_enabled = (*[0]byte)(C._gotk4_gio2_ActionGroup_get_action_enabled)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_ActionGroup_get_action_enabled",
+			func(carg0 *C.GActionGroup, carg1 *C.gchar) (cret C.gboolean) {
+				var actionGroup Instance // go GActionGroup subclass
+				var actionName  string   // in, none, string
+				var goret       bool     // return
+
+				actionGroup = UnsafeActionGroupFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				actionName = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+
+				goret = overrides.GetActionEnabled(actionGroup, actionName)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetActionParameterType != nil {
 		pclass.get_action_parameter_type = (*[0]byte)(C._gotk4_gio2_ActionGroup_get_action_parameter_type)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_ActionGroup_get_action_parameter_type",
+			func(carg0 *C.GActionGroup, carg1 *C.gchar) (cret *C.GVariantType) {
+				var actionGroup Instance          // go GActionGroup subclass
+				var actionName  string            // in, none, string
+				var goret       *glib.VariantType // return, none, converted, nullable
+
+				actionGroup = UnsafeActionGroupFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				actionName = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+
+				goret = overrides.GetActionParameterType(actionGroup, actionName)
+
+				if goret != nil {
+					cret = (*C.GVariantType)(glib.UnsafeVariantTypeToGlibNone(goret))
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetActionStateType != nil {
 		pclass.get_action_state_type = (*[0]byte)(C._gotk4_gio2_ActionGroup_get_action_state_type)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_ActionGroup_get_action_state_type",
+			func(carg0 *C.GActionGroup, carg1 *C.gchar) (cret *C.GVariantType) {
+				var actionGroup Instance          // go GActionGroup subclass
+				var actionName  string            // in, none, string
+				var goret       *glib.VariantType // return, none, converted, nullable
+
+				actionGroup = UnsafeActionGroupFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				actionName = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+
+				goret = overrides.GetActionStateType(actionGroup, actionName)
+
+				if goret != nil {
+					cret = (*C.GVariantType)(glib.UnsafeVariantTypeToGlibNone(goret))
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.HasAction != nil {
 		pclass.has_action = (*[0]byte)(C._gotk4_gio2_ActionGroup_has_action)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_ActionGroup_has_action",
+			func(carg0 *C.GActionGroup, carg1 *C.gchar) (cret C.gboolean) {
+				var actionGroup Instance // go GActionGroup subclass
+				var actionName  string   // in, none, string
+				var goret       bool     // return
+
+				actionGroup = UnsafeActionGroupFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				actionName = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+
+				goret = overrides.HasAction(actionGroup, actionName)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.ListActions != nil {
 		pclass.list_actions = (*[0]byte)(C._gotk4_gio2_ActionGroup_list_actions)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_ActionGroup_list_actions",
+			func(carg0 *C.GActionGroup) (cret **C.gchar) {
+				var actionGroup Instance // go GActionGroup subclass
+				var goret       []string // return, transfer: full, C Pointers: 2, Name: array[utf8], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
+
+				actionGroup = UnsafeActionGroupFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.ListActions(actionGroup)
+
+				_ = goret
+				_ = cret
+				panic("unimplemented conversion of []string (gchar**)")
+
+				return cret
+			},
+		)
 	}
 }
 
@@ -11260,14 +11473,60 @@ func UnsafeApplyActionMapOverrides[Instance ActionMap](gclass unsafe.Pointer, ov
 
 	if overrides.AddAction != nil {
 		pclass.add_action = (*[0]byte)(C._gotk4_gio2_ActionMap_add_action)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_ActionMap_add_action",
+			func(carg0 *C.GActionMap, carg1 *C.GAction) {
+				var actionMap Instance // go GActionMap subclass
+				var action    Action   // in, none, converted
+
+				actionMap = UnsafeActionMapFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				action = UnsafeActionFromGlibNone(unsafe.Pointer(carg1))
+
+				overrides.AddAction(actionMap, action)
+			},
+		)
 	}
 
 	if overrides.LookupAction != nil {
 		pclass.lookup_action = (*[0]byte)(C._gotk4_gio2_ActionMap_lookup_action)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_ActionMap_lookup_action",
+			func(carg0 *C.GActionMap, carg1 *C.gchar) (cret *C.GAction) {
+				var actionMap  Instance // go GActionMap subclass
+				var actionName string   // in, none, string
+				var goret      Action   // return, none, converted, nullable
+
+				actionMap = UnsafeActionMapFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				actionName = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+
+				goret = overrides.LookupAction(actionMap, actionName)
+
+				if goret != nil {
+					cret = (*C.GAction)(UnsafeActionToGlibNone(goret))
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.RemoveAction != nil {
 		pclass.remove_action = (*[0]byte)(C._gotk4_gio2_ActionMap_remove_action)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_ActionMap_remove_action",
+			func(carg0 *C.GActionMap, carg1 *C.gchar) {
+				var actionMap  Instance // go GActionMap subclass
+				var actionName string   // in, none, string
+
+				actionMap = UnsafeActionMapFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				actionName = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+
+				overrides.RemoveAction(actionMap, actionName)
+			},
+		)
 	}
 }
 
@@ -13018,90 +13277,510 @@ func UnsafeApplyAppInfoOverrides[Instance AppInfo](gclass unsafe.Pointer, overri
 
 	if overrides.AddSupportsType != nil {
 		pclass.add_supports_type = (*[0]byte)(C._gotk4_gio2_AppInfo_add_supports_type)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_AppInfo_add_supports_type",
+			func(carg0 *C.GAppInfo, carg1 *C.char, _cerr **C.GError) (cret C.gboolean) {
+				var appinfo     Instance // go GAppInfo subclass
+				var contentType string   // in, none, string, casted *C.gchar
+				var goret       bool     // return
+				var _goerr      error    // out, full, converted
+
+				appinfo = UnsafeAppInfoFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				contentType = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+
+				goret, _goerr = overrides.AddSupportsType(appinfo, contentType)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.CanDelete != nil {
 		pclass.can_delete = (*[0]byte)(C._gotk4_gio2_AppInfo_can_delete)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_AppInfo_can_delete",
+			func(carg0 *C.GAppInfo) (cret C.gboolean) {
+				var appinfo Instance // go GAppInfo subclass
+				var goret   bool     // return
+
+				appinfo = UnsafeAppInfoFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.CanDelete(appinfo)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.CanRemoveSupportsType != nil {
 		pclass.can_remove_supports_type = (*[0]byte)(C._gotk4_gio2_AppInfo_can_remove_supports_type)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_AppInfo_can_remove_supports_type",
+			func(carg0 *C.GAppInfo) (cret C.gboolean) {
+				var appinfo Instance // go GAppInfo subclass
+				var goret   bool     // return
+
+				appinfo = UnsafeAppInfoFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.CanRemoveSupportsType(appinfo)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.DoDelete != nil {
 		pclass.do_delete = (*[0]byte)(C._gotk4_gio2_AppInfo_do_delete)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_AppInfo_do_delete",
+			func(carg0 *C.GAppInfo) (cret C.gboolean) {
+				var appinfo Instance // go GAppInfo subclass
+				var goret   bool     // return
+
+				appinfo = UnsafeAppInfoFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.DoDelete(appinfo)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.Dup != nil {
 		pclass.dup = (*[0]byte)(C._gotk4_gio2_AppInfo_dup)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_AppInfo_dup",
+			func(carg0 *C.GAppInfo) (cret *C.GAppInfo) {
+				var appinfo Instance // go GAppInfo subclass
+				var goret   AppInfo  // return, full, converted
+
+				appinfo = UnsafeAppInfoFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.Dup(appinfo)
+
+				cret = (*C.GAppInfo)(UnsafeAppInfoToGlibFull(goret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.Equal != nil {
 		pclass.equal = (*[0]byte)(C._gotk4_gio2_AppInfo_equal)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_AppInfo_equal",
+			func(carg0 *C.GAppInfo, carg1 *C.GAppInfo) (cret C.gboolean) {
+				var appinfo1 Instance // go GAppInfo subclass
+				var appinfo2 AppInfo  // in, none, converted
+				var goret    bool     // return
+
+				appinfo1 = UnsafeAppInfoFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				appinfo2 = UnsafeAppInfoFromGlibNone(unsafe.Pointer(carg1))
+
+				goret = overrides.Equal(appinfo1, appinfo2)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetCommandline != nil {
 		pclass.get_commandline = (*[0]byte)(C._gotk4_gio2_AppInfo_get_commandline)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_AppInfo_get_commandline",
+			func(carg0 *C.GAppInfo) (cret *C.char) {
+				var appinfo Instance // go GAppInfo subclass
+				var goret   string   // return, none, string, nullable-string
+
+				appinfo = UnsafeAppInfoFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetCommandline(appinfo)
+
+				if goret != "" {
+					cret = (*C.char)(unsafe.Pointer(C.CString(goret)))
+					defer C.free(unsafe.Pointer(cret))
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetDescription != nil {
 		pclass.get_description = (*[0]byte)(C._gotk4_gio2_AppInfo_get_description)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_AppInfo_get_description",
+			func(carg0 *C.GAppInfo) (cret *C.char) {
+				var appinfo Instance // go GAppInfo subclass
+				var goret   string   // return, none, string, nullable-string
+
+				appinfo = UnsafeAppInfoFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetDescription(appinfo)
+
+				if goret != "" {
+					cret = (*C.char)(unsafe.Pointer(C.CString(goret)))
+					defer C.free(unsafe.Pointer(cret))
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetDisplayName != nil {
 		pclass.get_display_name = (*[0]byte)(C._gotk4_gio2_AppInfo_get_display_name)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_AppInfo_get_display_name",
+			func(carg0 *C.GAppInfo) (cret *C.char) {
+				var appinfo Instance // go GAppInfo subclass
+				var goret   string   // return, none, string, casted *C.gchar
+
+				appinfo = UnsafeAppInfoFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetDisplayName(appinfo)
+
+				cret = (*C.char)(unsafe.Pointer(C.CString(goret)))
+				defer C.free(unsafe.Pointer(cret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetExecutable != nil {
 		pclass.get_executable = (*[0]byte)(C._gotk4_gio2_AppInfo_get_executable)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_AppInfo_get_executable",
+			func(carg0 *C.GAppInfo) (cret *C.char) {
+				var appinfo Instance // go GAppInfo subclass
+				var goret   string   // return, none, string, casted *C.gchar
+
+				appinfo = UnsafeAppInfoFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetExecutable(appinfo)
+
+				cret = (*C.char)(unsafe.Pointer(C.CString(goret)))
+				defer C.free(unsafe.Pointer(cret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetIcon != nil {
 		pclass.get_icon = (*[0]byte)(C._gotk4_gio2_AppInfo_get_icon)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_AppInfo_get_icon",
+			func(carg0 *C.GAppInfo) (cret *C.GIcon) {
+				var appinfo Instance // go GAppInfo subclass
+				var goret   Icon     // return, none, converted, nullable
+
+				appinfo = UnsafeAppInfoFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetIcon(appinfo)
+
+				if goret != nil {
+					cret = (*C.GIcon)(UnsafeIconToGlibNone(goret))
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetID != nil {
 		pclass.get_id = (*[0]byte)(C._gotk4_gio2_AppInfo_get_id)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_AppInfo_get_id",
+			func(carg0 *C.GAppInfo) (cret *C.char) {
+				var appinfo Instance // go GAppInfo subclass
+				var goret   string   // return, none, string, nullable-string
+
+				appinfo = UnsafeAppInfoFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetID(appinfo)
+
+				if goret != "" {
+					cret = (*C.char)(unsafe.Pointer(C.CString(goret)))
+					defer C.free(unsafe.Pointer(cret))
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetName != nil {
 		pclass.get_name = (*[0]byte)(C._gotk4_gio2_AppInfo_get_name)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_AppInfo_get_name",
+			func(carg0 *C.GAppInfo) (cret *C.char) {
+				var appinfo Instance // go GAppInfo subclass
+				var goret   string   // return, none, string, casted *C.gchar
+
+				appinfo = UnsafeAppInfoFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetName(appinfo)
+
+				cret = (*C.char)(unsafe.Pointer(C.CString(goret)))
+				defer C.free(unsafe.Pointer(cret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetSupportedTypes != nil {
 		pclass.get_supported_types = (*[0]byte)(C._gotk4_gio2_AppInfo_get_supported_types)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_AppInfo_get_supported_types",
+			func(carg0 *C.GAppInfo) (cret **C.char) {
+				var appinfo Instance // go GAppInfo subclass
+				var goret   []string // return, transfer: none, C Pointers: 2, Name: array[utf8], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
+
+				appinfo = UnsafeAppInfoFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetSupportedTypes(appinfo)
+
+				_ = goret
+				_ = cret
+				panic("unimplemented conversion of []string (const char**)")
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.LaunchURIsFinish != nil {
 		pclass.launch_uris_finish = (*[0]byte)(C._gotk4_gio2_AppInfo_launch_uris_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_AppInfo_launch_uris_finish",
+			func(carg0 *C.GAppInfo, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+				var appinfo Instance    // go GAppInfo subclass
+				var result  AsyncResult // in, none, converted
+				var goret   bool        // return
+				var _goerr  error       // out, full, converted
+
+				appinfo = UnsafeAppInfoFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.LaunchURIsFinish(appinfo, result)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.RemoveSupportsType != nil {
 		pclass.remove_supports_type = (*[0]byte)(C._gotk4_gio2_AppInfo_remove_supports_type)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_AppInfo_remove_supports_type",
+			func(carg0 *C.GAppInfo, carg1 *C.char, _cerr **C.GError) (cret C.gboolean) {
+				var appinfo     Instance // go GAppInfo subclass
+				var contentType string   // in, none, string, casted *C.gchar
+				var goret       bool     // return
+				var _goerr      error    // out, full, converted
+
+				appinfo = UnsafeAppInfoFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				contentType = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+
+				goret, _goerr = overrides.RemoveSupportsType(appinfo, contentType)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.SetAsDefaultForExtension != nil {
 		pclass.set_as_default_for_extension = (*[0]byte)(C._gotk4_gio2_AppInfo_set_as_default_for_extension)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_AppInfo_set_as_default_for_extension",
+			func(carg0 *C.GAppInfo, carg1 *C.char, _cerr **C.GError) (cret C.gboolean) {
+				var appinfo   Instance // go GAppInfo subclass
+				var extension string   // in, none, string, casted *C.gchar
+				var goret     bool     // return
+				var _goerr    error    // out, full, converted
+
+				appinfo = UnsafeAppInfoFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				extension = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+
+				goret, _goerr = overrides.SetAsDefaultForExtension(appinfo, extension)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.SetAsDefaultForType != nil {
 		pclass.set_as_default_for_type = (*[0]byte)(C._gotk4_gio2_AppInfo_set_as_default_for_type)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_AppInfo_set_as_default_for_type",
+			func(carg0 *C.GAppInfo, carg1 *C.char, _cerr **C.GError) (cret C.gboolean) {
+				var appinfo     Instance // go GAppInfo subclass
+				var contentType string   // in, none, string, casted *C.gchar
+				var goret       bool     // return
+				var _goerr      error    // out, full, converted
+
+				appinfo = UnsafeAppInfoFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				contentType = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+
+				goret, _goerr = overrides.SetAsDefaultForType(appinfo, contentType)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.SetAsLastUsedForType != nil {
 		pclass.set_as_last_used_for_type = (*[0]byte)(C._gotk4_gio2_AppInfo_set_as_last_used_for_type)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_AppInfo_set_as_last_used_for_type",
+			func(carg0 *C.GAppInfo, carg1 *C.char, _cerr **C.GError) (cret C.gboolean) {
+				var appinfo     Instance // go GAppInfo subclass
+				var contentType string   // in, none, string, casted *C.gchar
+				var goret       bool     // return
+				var _goerr      error    // out, full, converted
+
+				appinfo = UnsafeAppInfoFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				contentType = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+
+				goret, _goerr = overrides.SetAsLastUsedForType(appinfo, contentType)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.ShouldShow != nil {
 		pclass.should_show = (*[0]byte)(C._gotk4_gio2_AppInfo_should_show)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_AppInfo_should_show",
+			func(carg0 *C.GAppInfo) (cret C.gboolean) {
+				var appinfo Instance // go GAppInfo subclass
+				var goret   bool     // return
+
+				appinfo = UnsafeAppInfoFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.ShouldShow(appinfo)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.SupportsFiles != nil {
 		pclass.supports_files = (*[0]byte)(C._gotk4_gio2_AppInfo_supports_files)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_AppInfo_supports_files",
+			func(carg0 *C.GAppInfo) (cret C.gboolean) {
+				var appinfo Instance // go GAppInfo subclass
+				var goret   bool     // return
+
+				appinfo = UnsafeAppInfoFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.SupportsFiles(appinfo)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.SupportsURIs != nil {
 		pclass.supports_uris = (*[0]byte)(C._gotk4_gio2_AppInfo_supports_uris)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_AppInfo_supports_uris",
+			func(carg0 *C.GAppInfo) (cret C.gboolean) {
+				var appinfo Instance // go GAppInfo subclass
+				var goret   bool     // return
+
+				appinfo = UnsafeAppInfoFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.SupportsURIs(appinfo)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 }
 
@@ -13505,10 +14184,57 @@ func UnsafeApplyAsyncInitableOverrides[Instance AsyncInitable](gclass unsafe.Poi
 
 	if overrides.InitAsync != nil {
 		pclass.init_async = (*[0]byte)(C._gotk4_gio2_AsyncInitable_init_async)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_AsyncInitable_init_async",
+			func(carg0 *C.GAsyncInitable, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
+				var initable    Instance           // go GAsyncInitable subclass
+				var cancellable context.Context    // in, none, converted, nullable
+				var ioPriority  int                // in, none, casted, casted C.gint
+				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg4, nullable
+
+				initable = UnsafeAsyncInitableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg2 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
+				}
+				ioPriority = int(carg1)
+				if carg3 != nil {
+					_ = callback
+					_ = carg3
+					_ = _
+					_ = carg4
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.InitAsync(initable, cancellable, ioPriority, callback)
+			},
+		)
 	}
 
 	if overrides.InitFinish != nil {
 		pclass.init_finish = (*[0]byte)(C._gotk4_gio2_AsyncInitable_init_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_AsyncInitable_init_finish",
+			func(carg0 *C.GAsyncInitable, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+				var initable Instance    // go GAsyncInitable subclass
+				var res      AsyncResult // in, none, converted
+				var goret    bool        // return
+				var _goerr   error       // out, full, converted
+
+				initable = UnsafeAsyncInitableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				res = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.InitFinish(initable, res)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 }
 
@@ -13758,6 +14484,24 @@ func UnsafeApplyAsyncResultOverrides[Instance AsyncResult](gclass unsafe.Pointer
 
 	if overrides.GetSourceObject != nil {
 		pclass.get_source_object = (*[0]byte)(C._gotk4_gio2_AsyncResult_get_source_object)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_AsyncResult_get_source_object",
+			func(carg0 *C.GAsyncResult) (cret *C.GObject) {
+				var res   Instance       // go GAsyncResult subclass
+				var goret gobject.Object // return, full, converted, nullable
+
+				res = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetSourceObject(res)
+
+				if goret != nil {
+					cret = (*C.GObject)(gobject.UnsafeObjectToGlibFull(goret))
+				}
+
+				return cret
+			},
+		)
 	}
 }
 
@@ -14171,10 +14915,55 @@ func UnsafeApplyConverterOverrides[Instance Converter](gclass unsafe.Pointer, ov
 
 	if overrides.Convert != nil {
 		pclass.convert = (*[0]byte)(C._gotk4_gio2_Converter_convert)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Converter_convert",
+			func(carg0 *C.GConverter, carg1 unsafe.Pointer, carg2 C.gsize, carg3 unsafe.Pointer, carg4 C.gsize, carg5 C.GConverterFlags, carg6 *C.gsize, carg7 *C.gsize, _cerr **C.GError) (cret C.GConverterResult) {
+				var converter    Instance        // go GConverter subclass
+				var inbuf        []byte          // in, transfer: none, C Pointers: 1, Name: array[unknown], nullable, array (inner: <nil>, length-by: carg2)
+				var outbuf       []byte          // in, transfer: none, C Pointers: 1, Name: array[unknown], array (inner: <nil>, length-by: carg4)
+				var flags        ConverterFlags  // in, none, casted
+				var bytesRead    uint            // out, full, casted
+				var bytesWritten uint            // out, full, casted
+				var goret        ConverterResult // return, none, casted
+				var _goerr       error           // out, full, converted
+
+				converter = UnsafeConverterFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				_ = inbuf
+				_ = carg1
+				_ = carg2
+				panic("unimplemented conversion of []byte (void*)")
+				_ = outbuf
+				_ = carg3
+				_ = carg4
+				panic("unimplemented conversion of []byte (void*)")
+				flags = ConverterFlags(carg5)
+
+				bytesRead, bytesWritten, goret, _goerr = overrides.Convert(converter, inbuf, outbuf, flags)
+
+				*carg6 = C.gsize(bytesRead)
+				*carg7 = C.gsize(bytesWritten)
+				cret = C.GConverterResult(goret)
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.Reset != nil {
 		pclass.reset = (*[0]byte)(C._gotk4_gio2_Converter_reset)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Converter_reset",
+			func(carg0 *C.GConverter) {
+				var converter Instance // go GConverter subclass
+
+				converter = UnsafeConverterFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.Reset(converter)
+			},
+		)
 	}
 }
 
@@ -14362,14 +15151,63 @@ func UnsafeApplyDBusInterfaceOverrides[Instance DBusInterface](gclass unsafe.Poi
 
 	if overrides.DupObject != nil {
 		pclass.dup_object = (*[0]byte)(C._gotk4_gio2_DBusInterface_dup_object)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_DBusInterface_dup_object",
+			func(carg0 *C.GDBusInterface) (cret *C.GDBusObject) {
+				var interface_ Instance   // go GDBusInterface subclass
+				var goret      DBusObject // return, full, converted, nullable
+
+				interface_ = UnsafeDBusInterfaceFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.DupObject(interface_)
+
+				if goret != nil {
+					cret = (*C.GDBusObject)(UnsafeDBusObjectToGlibFull(goret))
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetInfo != nil {
 		pclass.get_info = (*[0]byte)(C._gotk4_gio2_DBusInterface_get_info)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_DBusInterface_get_info",
+			func(carg0 *C.GDBusInterface) (cret *C.GDBusInterfaceInfo) {
+				var interface_ Instance           // go GDBusInterface subclass
+				var goret      *DBusInterfaceInfo // return, none, converted
+
+				interface_ = UnsafeDBusInterfaceFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetInfo(interface_)
+
+				cret = (*C.GDBusInterfaceInfo)(UnsafeDBusInterfaceInfoToGlibNone(goret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.SetObject != nil {
 		pclass.set_object = (*[0]byte)(C._gotk4_gio2_DBusInterface_set_object)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_DBusInterface_set_object",
+			func(carg0 *C.GDBusInterface, carg1 *C.GDBusObject) {
+				var interface_ Instance   // go GDBusInterface subclass
+				var object     DBusObject // in, none, converted, nullable
+
+				interface_ = UnsafeDBusInterfaceFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg1 != nil {
+					object = UnsafeDBusObjectFromGlibNone(unsafe.Pointer(carg1))
+				}
+
+				overrides.SetObject(interface_, object)
+			},
+		)
 	}
 }
 
@@ -14609,22 +15447,103 @@ func UnsafeApplyDBusObjectOverrides[Instance DBusObject](gclass unsafe.Pointer, 
 
 	if overrides.GetInterface != nil {
 		pclass.get_interface = (*[0]byte)(C._gotk4_gio2_DBusObject_get_interface)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_DBusObject_get_interface",
+			func(carg0 *C.GDBusObject, carg1 *C.gchar) (cret *C.GDBusInterface) {
+				var object        Instance      // go GDBusObject subclass
+				var interfaceName string        // in, none, string
+				var goret         DBusInterface // return, full, converted, nullable
+
+				object = UnsafeDBusObjectFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				interfaceName = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+
+				goret = overrides.GetInterface(object, interfaceName)
+
+				if goret != nil {
+					cret = (*C.GDBusInterface)(UnsafeDBusInterfaceToGlibFull(goret))
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetInterfaces != nil {
 		pclass.get_interfaces = (*[0]byte)(C._gotk4_gio2_DBusObject_get_interfaces)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_DBusObject_get_interfaces",
+			func(carg0 *C.GDBusObject) (cret *C.GList) {
+				var object Instance        // go GDBusObject subclass
+				var goret  []DBusInterface // return, transfer: full, C Pointers: 1, Name: List, scope: 
+
+				object = UnsafeDBusObjectFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetInterfaces(object)
+
+				_ = goret
+				_ = cret
+				panic("unimplemented conversion of []DBusInterface (GList*)")
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetObjectPath != nil {
 		pclass.get_object_path = (*[0]byte)(C._gotk4_gio2_DBusObject_get_object_path)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_DBusObject_get_object_path",
+			func(carg0 *C.GDBusObject) (cret *C.gchar) {
+				var object Instance // go GDBusObject subclass
+				var goret  string   // return, none, string
+
+				object = UnsafeDBusObjectFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetObjectPath(object)
+
+				cret = (*C.gchar)(unsafe.Pointer(C.CString(goret)))
+				defer C.free(unsafe.Pointer(cret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.InterfaceAdded != nil {
 		pclass.interface_added = (*[0]byte)(C._gotk4_gio2_DBusObject_interface_added)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_DBusObject_interface_added",
+			func(carg0 *C.GDBusObject, carg1 *C.GDBusInterface) {
+				var object     Instance      // go GDBusObject subclass
+				var interface_ DBusInterface // in, none, converted
+
+				object = UnsafeDBusObjectFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				interface_ = UnsafeDBusInterfaceFromGlibNone(unsafe.Pointer(carg1))
+
+				overrides.InterfaceAdded(object, interface_)
+			},
+		)
 	}
 
 	if overrides.InterfaceRemoved != nil {
 		pclass.interface_removed = (*[0]byte)(C._gotk4_gio2_DBusObject_interface_removed)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_DBusObject_interface_removed",
+			func(carg0 *C.GDBusObject, carg1 *C.GDBusInterface) {
+				var object     Instance      // go GDBusObject subclass
+				var interface_ DBusInterface // in, none, converted
+
+				object = UnsafeDBusObjectFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				interface_ = UnsafeDBusInterfaceFromGlibNone(unsafe.Pointer(carg1))
+
+				overrides.InterfaceRemoved(object, interface_)
+			},
+		)
 	}
 }
 
@@ -14974,34 +15893,167 @@ func UnsafeApplyDBusObjectManagerOverrides[Instance DBusObjectManager](gclass un
 
 	if overrides.GetInterface != nil {
 		pclass.get_interface = (*[0]byte)(C._gotk4_gio2_DBusObjectManager_get_interface)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_DBusObjectManager_get_interface",
+			func(carg0 *C.GDBusObjectManager, carg1 *C.gchar, carg2 *C.gchar) (cret *C.GDBusInterface) {
+				var manager       Instance      // go GDBusObjectManager subclass
+				var objectPath    string        // in, none, string
+				var interfaceName string        // in, none, string
+				var goret         DBusInterface // return, full, converted, nullable
+
+				manager = UnsafeDBusObjectManagerFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				objectPath = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+				interfaceName = C.GoString((*C.char)(unsafe.Pointer(carg2)))
+
+				goret = overrides.GetInterface(manager, objectPath, interfaceName)
+
+				if goret != nil {
+					cret = (*C.GDBusInterface)(UnsafeDBusInterfaceToGlibFull(goret))
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetObject != nil {
 		pclass.get_object = (*[0]byte)(C._gotk4_gio2_DBusObjectManager_get_object)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_DBusObjectManager_get_object",
+			func(carg0 *C.GDBusObjectManager, carg1 *C.gchar) (cret *C.GDBusObject) {
+				var manager    Instance   // go GDBusObjectManager subclass
+				var objectPath string     // in, none, string
+				var goret      DBusObject // return, full, converted, nullable
+
+				manager = UnsafeDBusObjectManagerFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				objectPath = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+
+				goret = overrides.GetObject(manager, objectPath)
+
+				if goret != nil {
+					cret = (*C.GDBusObject)(UnsafeDBusObjectToGlibFull(goret))
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetObjectPath != nil {
 		pclass.get_object_path = (*[0]byte)(C._gotk4_gio2_DBusObjectManager_get_object_path)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_DBusObjectManager_get_object_path",
+			func(carg0 *C.GDBusObjectManager) (cret *C.gchar) {
+				var manager Instance // go GDBusObjectManager subclass
+				var goret   string   // return, none, string
+
+				manager = UnsafeDBusObjectManagerFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetObjectPath(manager)
+
+				cret = (*C.gchar)(unsafe.Pointer(C.CString(goret)))
+				defer C.free(unsafe.Pointer(cret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetObjects != nil {
 		pclass.get_objects = (*[0]byte)(C._gotk4_gio2_DBusObjectManager_get_objects)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_DBusObjectManager_get_objects",
+			func(carg0 *C.GDBusObjectManager) (cret *C.GList) {
+				var manager Instance     // go GDBusObjectManager subclass
+				var goret   []DBusObject // return, transfer: full, C Pointers: 1, Name: List, scope: 
+
+				manager = UnsafeDBusObjectManagerFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetObjects(manager)
+
+				_ = goret
+				_ = cret
+				panic("unimplemented conversion of []DBusObject (GList*)")
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.InterfaceAdded != nil {
 		pclass.interface_added = (*[0]byte)(C._gotk4_gio2_DBusObjectManager_interface_added)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_DBusObjectManager_interface_added",
+			func(carg0 *C.GDBusObjectManager, carg1 *C.GDBusObject, carg2 *C.GDBusInterface) {
+				var manager    Instance      // go GDBusObjectManager subclass
+				var object     DBusObject    // in, none, converted
+				var interface_ DBusInterface // in, none, converted
+
+				manager = UnsafeDBusObjectManagerFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				object = UnsafeDBusObjectFromGlibNone(unsafe.Pointer(carg1))
+				interface_ = UnsafeDBusInterfaceFromGlibNone(unsafe.Pointer(carg2))
+
+				overrides.InterfaceAdded(manager, object, interface_)
+			},
+		)
 	}
 
 	if overrides.InterfaceRemoved != nil {
 		pclass.interface_removed = (*[0]byte)(C._gotk4_gio2_DBusObjectManager_interface_removed)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_DBusObjectManager_interface_removed",
+			func(carg0 *C.GDBusObjectManager, carg1 *C.GDBusObject, carg2 *C.GDBusInterface) {
+				var manager    Instance      // go GDBusObjectManager subclass
+				var object     DBusObject    // in, none, converted
+				var interface_ DBusInterface // in, none, converted
+
+				manager = UnsafeDBusObjectManagerFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				object = UnsafeDBusObjectFromGlibNone(unsafe.Pointer(carg1))
+				interface_ = UnsafeDBusInterfaceFromGlibNone(unsafe.Pointer(carg2))
+
+				overrides.InterfaceRemoved(manager, object, interface_)
+			},
+		)
 	}
 
 	if overrides.ObjectAdded != nil {
 		pclass.object_added = (*[0]byte)(C._gotk4_gio2_DBusObjectManager_object_added)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_DBusObjectManager_object_added",
+			func(carg0 *C.GDBusObjectManager, carg1 *C.GDBusObject) {
+				var manager Instance   // go GDBusObjectManager subclass
+				var object  DBusObject // in, none, converted
+
+				manager = UnsafeDBusObjectManagerFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				object = UnsafeDBusObjectFromGlibNone(unsafe.Pointer(carg1))
+
+				overrides.ObjectAdded(manager, object)
+			},
+		)
 	}
 
 	if overrides.ObjectRemoved != nil {
 		pclass.object_removed = (*[0]byte)(C._gotk4_gio2_DBusObjectManager_object_removed)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_DBusObjectManager_object_removed",
+			func(carg0 *C.GDBusObjectManager, carg1 *C.GDBusObject) {
+				var manager Instance   // go GDBusObjectManager subclass
+				var object  DBusObject // in, none, converted
+
+				manager = UnsafeDBusObjectManagerFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				object = UnsafeDBusObjectFromGlibNone(unsafe.Pointer(carg1))
+
+				overrides.ObjectRemoved(manager, object)
+			},
+		)
 	}
 }
 
@@ -15763,22 +16815,152 @@ func UnsafeApplyDatagramBasedOverrides[Instance DatagramBased](gclass unsafe.Poi
 
 	if overrides.ConditionCheck != nil {
 		pclass.condition_check = (*[0]byte)(C._gotk4_gio2_DatagramBased_condition_check)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_DatagramBased_condition_check",
+			func(carg0 *C.GDatagramBased, carg1 C.GIOCondition) (cret C.GIOCondition) {
+				var datagramBased Instance         // go GDatagramBased subclass
+				var condition     glib.IOCondition // in, none, casted
+				var goret         glib.IOCondition // return, none, casted
+
+				datagramBased = UnsafeDatagramBasedFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				condition = glib.IOCondition(carg1)
+
+				goret = overrides.ConditionCheck(datagramBased, condition)
+
+				cret = C.GIOCondition(goret)
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.ConditionWait != nil {
 		pclass.condition_wait = (*[0]byte)(C._gotk4_gio2_DatagramBased_condition_wait)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_DatagramBased_condition_wait",
+			func(carg0 *C.GDatagramBased, carg1 C.GIOCondition, carg2 C.gint64, carg3 *C.GCancellable, _cerr **C.GError) (cret C.gboolean) {
+				var datagramBased Instance         // go GDatagramBased subclass
+				var cancellable   context.Context  // in, none, converted, nullable
+				var condition     glib.IOCondition // in, none, casted
+				var timeout       int64            // in, none, casted
+				var goret         bool             // return
+				var _goerr        error            // out, full, converted
+
+				datagramBased = UnsafeDatagramBasedFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg3 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
+				}
+				condition = glib.IOCondition(carg1)
+				timeout = int64(carg2)
+
+				goret, _goerr = overrides.ConditionWait(datagramBased, cancellable, condition, timeout)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.CreateSource != nil {
 		pclass.create_source = (*[0]byte)(C._gotk4_gio2_DatagramBased_create_source)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_DatagramBased_create_source",
+			func(carg0 *C.GDatagramBased, carg1 C.GIOCondition, carg2 *C.GCancellable) (cret *C.GSource) {
+				var datagramBased Instance         // go GDatagramBased subclass
+				var cancellable   context.Context  // in, none, converted, nullable
+				var condition     glib.IOCondition // in, none, casted
+				var goret         *glib.Source     // return, full, converted
+
+				datagramBased = UnsafeDatagramBasedFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg2 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
+				}
+				condition = glib.IOCondition(carg1)
+
+				goret = overrides.CreateSource(datagramBased, cancellable, condition)
+
+				cret = (*C.GSource)(glib.UnsafeSourceToGlibFull(goret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.ReceiveMessages != nil {
 		pclass.receive_messages = (*[0]byte)(C._gotk4_gio2_DatagramBased_receive_messages)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_DatagramBased_receive_messages",
+			func(carg0 *C.GDatagramBased, carg1 *C.GInputMessage, carg2 C.guint, carg3 C.gint, carg4 C.gint64, carg5 *C.GCancellable, _cerr **C.GError) (cret C.gint) {
+				var datagramBased Instance        // go GDatagramBased subclass
+				var cancellable   context.Context // in, none, converted, nullable
+				var messages      []InputMessage  // in, transfer: none, C Pointers: 1, Name: array[InputMessage], array (inner: *typesystem.Record, length-by: carg2)
+				var flags         int             // in, none, casted
+				var timeout       int64           // in, none, casted
+				var goret         int             // return, none, casted
+				var _goerr        error           // out, full, converted
+
+				datagramBased = UnsafeDatagramBasedFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg5 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg5))
+				}
+				_ = messages
+				_ = carg1
+				_ = carg2
+				panic("unimplemented conversion of []InputMessage (GInputMessage*)")
+				flags = int(carg3)
+				timeout = int64(carg4)
+
+				goret, _goerr = overrides.ReceiveMessages(datagramBased, cancellable, messages, flags, timeout)
+
+				cret = C.gint(goret)
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.SendMessages != nil {
 		pclass.send_messages = (*[0]byte)(C._gotk4_gio2_DatagramBased_send_messages)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_DatagramBased_send_messages",
+			func(carg0 *C.GDatagramBased, carg1 *C.GOutputMessage, carg2 C.guint, carg3 C.gint, carg4 C.gint64, carg5 *C.GCancellable, _cerr **C.GError) (cret C.gint) {
+				var datagramBased Instance        // go GDatagramBased subclass
+				var cancellable   context.Context // in, none, converted, nullable
+				var messages      []OutputMessage // in, transfer: none, C Pointers: 1, Name: array[OutputMessage], array (inner: *typesystem.Record, length-by: carg2)
+				var flags         int             // in, none, casted
+				var timeout       int64           // in, none, casted
+				var goret         int             // return, none, casted
+				var _goerr        error           // out, full, converted
+
+				datagramBased = UnsafeDatagramBasedFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg5 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg5))
+				}
+				_ = messages
+				_ = carg1
+				_ = carg2
+				panic("unimplemented conversion of []OutputMessage (GOutputMessage*)")
+				flags = int(carg3)
+				timeout = int64(carg4)
+
+				goret, _goerr = overrides.SendMessages(datagramBased, cancellable, messages, flags, timeout)
+
+				cret = C.gint(goret)
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 }
 
@@ -17282,130 +18464,738 @@ func UnsafeApplyDriveOverrides[Instance Drive](gclass unsafe.Pointer, overrides 
 
 	if overrides.CanEject != nil {
 		pclass.can_eject = (*[0]byte)(C._gotk4_gio2_Drive_can_eject)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Drive_can_eject",
+			func(carg0 *C.GDrive) (cret C.gboolean) {
+				var drive Instance // go GDrive subclass
+				var goret bool     // return
+
+				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.CanEject(drive)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.CanPollForMedia != nil {
 		pclass.can_poll_for_media = (*[0]byte)(C._gotk4_gio2_Drive_can_poll_for_media)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Drive_can_poll_for_media",
+			func(carg0 *C.GDrive) (cret C.gboolean) {
+				var drive Instance // go GDrive subclass
+				var goret bool     // return
+
+				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.CanPollForMedia(drive)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.CanStart != nil {
 		pclass.can_start = (*[0]byte)(C._gotk4_gio2_Drive_can_start)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Drive_can_start",
+			func(carg0 *C.GDrive) (cret C.gboolean) {
+				var drive Instance // go GDrive subclass
+				var goret bool     // return
+
+				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.CanStart(drive)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.CanStartDegraded != nil {
 		pclass.can_start_degraded = (*[0]byte)(C._gotk4_gio2_Drive_can_start_degraded)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Drive_can_start_degraded",
+			func(carg0 *C.GDrive) (cret C.gboolean) {
+				var drive Instance // go GDrive subclass
+				var goret bool     // return
+
+				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.CanStartDegraded(drive)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.CanStop != nil {
 		pclass.can_stop = (*[0]byte)(C._gotk4_gio2_Drive_can_stop)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Drive_can_stop",
+			func(carg0 *C.GDrive) (cret C.gboolean) {
+				var drive Instance // go GDrive subclass
+				var goret bool     // return
+
+				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.CanStop(drive)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.Changed != nil {
 		pclass.changed = (*[0]byte)(C._gotk4_gio2_Drive_changed)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Drive_changed",
+			func(carg0 *C.GDrive) {
+				var drive Instance // go GDrive subclass
+
+				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.Changed(drive)
+			},
+		)
 	}
 
 	if overrides.Disconnected != nil {
 		pclass.disconnected = (*[0]byte)(C._gotk4_gio2_Drive_disconnected)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Drive_disconnected",
+			func(carg0 *C.GDrive) {
+				var drive Instance // go GDrive subclass
+
+				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.Disconnected(drive)
+			},
+		)
 	}
 
 	if overrides.Eject != nil {
 		pclass.eject = (*[0]byte)(C._gotk4_gio2_Drive_eject)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Drive_eject",
+			func(carg0 *C.GDrive, carg1 C.GMountUnmountFlags, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
+				var drive       Instance           // go GDrive subclass
+				var cancellable context.Context    // in, none, converted, nullable
+				var flags       MountUnmountFlags  // in, none, casted
+				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg4, nullable
+
+				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg2 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
+				}
+				flags = MountUnmountFlags(carg1)
+				if carg3 != nil {
+					_ = callback
+					_ = carg3
+					_ = _
+					_ = carg4
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.Eject(drive, cancellable, flags, callback)
+			},
+		)
 	}
 
 	if overrides.EjectButton != nil {
 		pclass.eject_button = (*[0]byte)(C._gotk4_gio2_Drive_eject_button)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Drive_eject_button",
+			func(carg0 *C.GDrive) {
+				var drive Instance // go GDrive subclass
+
+				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.EjectButton(drive)
+			},
+		)
 	}
 
 	if overrides.EjectFinish != nil {
 		pclass.eject_finish = (*[0]byte)(C._gotk4_gio2_Drive_eject_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Drive_eject_finish",
+			func(carg0 *C.GDrive, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+				var drive  Instance    // go GDrive subclass
+				var result AsyncResult // in, none, converted
+				var goret  bool        // return
+				var _goerr error       // out, full, converted
+
+				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.EjectFinish(drive, result)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.EjectWithOperation != nil {
 		pclass.eject_with_operation = (*[0]byte)(C._gotk4_gio2_Drive_eject_with_operation)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Drive_eject_with_operation",
+			func(carg0 *C.GDrive, carg1 C.GMountUnmountFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
+				var drive          Instance           // go GDrive subclass
+				var cancellable    context.Context    // in, none, converted, nullable
+				var flags          MountUnmountFlags  // in, none, casted
+				var mountOperation MountOperation     // in, none, converted, nullable
+				var callback       AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg5, nullable
+
+				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg3 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
+				}
+				flags = MountUnmountFlags(carg1)
+				if carg2 != nil {
+					mountOperation = UnsafeMountOperationFromGlibNone(unsafe.Pointer(carg2))
+				}
+				if carg4 != nil {
+					_ = callback
+					_ = carg4
+					_ = _
+					_ = carg5
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.EjectWithOperation(drive, cancellable, flags, mountOperation, callback)
+			},
+		)
 	}
 
 	if overrides.EjectWithOperationFinish != nil {
 		pclass.eject_with_operation_finish = (*[0]byte)(C._gotk4_gio2_Drive_eject_with_operation_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Drive_eject_with_operation_finish",
+			func(carg0 *C.GDrive, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+				var drive  Instance    // go GDrive subclass
+				var result AsyncResult // in, none, converted
+				var goret  bool        // return
+				var _goerr error       // out, full, converted
+
+				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.EjectWithOperationFinish(drive, result)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.EnumerateIdentifiers != nil {
 		pclass.enumerate_identifiers = (*[0]byte)(C._gotk4_gio2_Drive_enumerate_identifiers)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Drive_enumerate_identifiers",
+			func(carg0 *C.GDrive) (cret **C.char) {
+				var drive Instance // go GDrive subclass
+				var goret []string // return, transfer: full, C Pointers: 2, Name: array[utf8], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
+
+				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.EnumerateIdentifiers(drive)
+
+				_ = goret
+				_ = cret
+				panic("unimplemented conversion of []string (char**)")
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetIcon != nil {
 		pclass.get_icon = (*[0]byte)(C._gotk4_gio2_Drive_get_icon)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Drive_get_icon",
+			func(carg0 *C.GDrive) (cret *C.GIcon) {
+				var drive Instance // go GDrive subclass
+				var goret Icon     // return, full, converted
+
+				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetIcon(drive)
+
+				cret = (*C.GIcon)(UnsafeIconToGlibFull(goret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetIdentifier != nil {
 		pclass.get_identifier = (*[0]byte)(C._gotk4_gio2_Drive_get_identifier)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Drive_get_identifier",
+			func(carg0 *C.GDrive, carg1 *C.char) (cret *C.char) {
+				var drive Instance // go GDrive subclass
+				var kind  string   // in, none, string, casted *C.gchar
+				var goret string   // return, full, string, nullable-string
+
+				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				kind = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+
+				goret = overrides.GetIdentifier(drive, kind)
+
+				if goret != "" {
+					cret = (*C.char)(unsafe.Pointer(C.CString(goret)))
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetName != nil {
 		pclass.get_name = (*[0]byte)(C._gotk4_gio2_Drive_get_name)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Drive_get_name",
+			func(carg0 *C.GDrive) (cret *C.char) {
+				var drive Instance // go GDrive subclass
+				var goret string   // return, full, string, casted *C.gchar
+
+				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetName(drive)
+
+				cret = (*C.char)(unsafe.Pointer(C.CString(goret)))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetSortKey != nil {
 		pclass.get_sort_key = (*[0]byte)(C._gotk4_gio2_Drive_get_sort_key)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Drive_get_sort_key",
+			func(carg0 *C.GDrive) (cret *C.gchar) {
+				var drive Instance // go GDrive subclass
+				var goret string   // return, none, string, nullable-string
+
+				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetSortKey(drive)
+
+				if goret != "" {
+					cret = (*C.gchar)(unsafe.Pointer(C.CString(goret)))
+					defer C.free(unsafe.Pointer(cret))
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetStartStopType != nil {
 		pclass.get_start_stop_type = (*[0]byte)(C._gotk4_gio2_Drive_get_start_stop_type)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Drive_get_start_stop_type",
+			func(carg0 *C.GDrive) (cret C.GDriveStartStopType) {
+				var drive Instance           // go GDrive subclass
+				var goret DriveStartStopType // return, none, casted
+
+				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetStartStopType(drive)
+
+				cret = C.GDriveStartStopType(goret)
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetSymbolicIcon != nil {
 		pclass.get_symbolic_icon = (*[0]byte)(C._gotk4_gio2_Drive_get_symbolic_icon)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Drive_get_symbolic_icon",
+			func(carg0 *C.GDrive) (cret *C.GIcon) {
+				var drive Instance // go GDrive subclass
+				var goret Icon     // return, full, converted
+
+				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetSymbolicIcon(drive)
+
+				cret = (*C.GIcon)(UnsafeIconToGlibFull(goret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetVolumes != nil {
 		pclass.get_volumes = (*[0]byte)(C._gotk4_gio2_Drive_get_volumes)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Drive_get_volumes",
+			func(carg0 *C.GDrive) (cret *C.GList) {
+				var drive Instance // go GDrive subclass
+				var goret []Volume // return, transfer: full, C Pointers: 1, Name: List, scope: 
+
+				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetVolumes(drive)
+
+				_ = goret
+				_ = cret
+				panic("unimplemented conversion of []Volume (GList*)")
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.HasMedia != nil {
 		pclass.has_media = (*[0]byte)(C._gotk4_gio2_Drive_has_media)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Drive_has_media",
+			func(carg0 *C.GDrive) (cret C.gboolean) {
+				var drive Instance // go GDrive subclass
+				var goret bool     // return
+
+				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.HasMedia(drive)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.HasVolumes != nil {
 		pclass.has_volumes = (*[0]byte)(C._gotk4_gio2_Drive_has_volumes)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Drive_has_volumes",
+			func(carg0 *C.GDrive) (cret C.gboolean) {
+				var drive Instance // go GDrive subclass
+				var goret bool     // return
+
+				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.HasVolumes(drive)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.IsMediaCheckAutomatic != nil {
 		pclass.is_media_check_automatic = (*[0]byte)(C._gotk4_gio2_Drive_is_media_check_automatic)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Drive_is_media_check_automatic",
+			func(carg0 *C.GDrive) (cret C.gboolean) {
+				var drive Instance // go GDrive subclass
+				var goret bool     // return
+
+				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.IsMediaCheckAutomatic(drive)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.IsMediaRemovable != nil {
 		pclass.is_media_removable = (*[0]byte)(C._gotk4_gio2_Drive_is_media_removable)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Drive_is_media_removable",
+			func(carg0 *C.GDrive) (cret C.gboolean) {
+				var drive Instance // go GDrive subclass
+				var goret bool     // return
+
+				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.IsMediaRemovable(drive)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.IsRemovable != nil {
 		pclass.is_removable = (*[0]byte)(C._gotk4_gio2_Drive_is_removable)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Drive_is_removable",
+			func(carg0 *C.GDrive) (cret C.gboolean) {
+				var drive Instance // go GDrive subclass
+				var goret bool     // return
+
+				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.IsRemovable(drive)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.PollForMedia != nil {
 		pclass.poll_for_media = (*[0]byte)(C._gotk4_gio2_Drive_poll_for_media)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Drive_poll_for_media",
+			func(carg0 *C.GDrive, carg1 *C.GCancellable, carg2 C.GAsyncReadyCallback, carg3 C.gpointer) {
+				var drive       Instance           // go GDrive subclass
+				var cancellable context.Context    // in, none, converted, nullable
+				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg3, nullable
+
+				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg1 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg1))
+				}
+				if carg2 != nil {
+					_ = callback
+					_ = carg2
+					_ = _
+					_ = carg3
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.PollForMedia(drive, cancellable, callback)
+			},
+		)
 	}
 
 	if overrides.PollForMediaFinish != nil {
 		pclass.poll_for_media_finish = (*[0]byte)(C._gotk4_gio2_Drive_poll_for_media_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Drive_poll_for_media_finish",
+			func(carg0 *C.GDrive, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+				var drive  Instance    // go GDrive subclass
+				var result AsyncResult // in, none, converted
+				var goret  bool        // return
+				var _goerr error       // out, full, converted
+
+				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.PollForMediaFinish(drive, result)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.Start != nil {
 		pclass.start = (*[0]byte)(C._gotk4_gio2_Drive_start)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Drive_start",
+			func(carg0 *C.GDrive, carg1 C.GDriveStartFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
+				var drive          Instance           // go GDrive subclass
+				var cancellable    context.Context    // in, none, converted, nullable
+				var flags          DriveStartFlags    // in, none, casted
+				var mountOperation MountOperation     // in, none, converted, nullable
+				var callback       AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg5, nullable
+
+				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg3 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
+				}
+				flags = DriveStartFlags(carg1)
+				if carg2 != nil {
+					mountOperation = UnsafeMountOperationFromGlibNone(unsafe.Pointer(carg2))
+				}
+				if carg4 != nil {
+					_ = callback
+					_ = carg4
+					_ = _
+					_ = carg5
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.Start(drive, cancellable, flags, mountOperation, callback)
+			},
+		)
 	}
 
 	if overrides.StartFinish != nil {
 		pclass.start_finish = (*[0]byte)(C._gotk4_gio2_Drive_start_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Drive_start_finish",
+			func(carg0 *C.GDrive, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+				var drive  Instance    // go GDrive subclass
+				var result AsyncResult // in, none, converted
+				var goret  bool        // return
+				var _goerr error       // out, full, converted
+
+				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.StartFinish(drive, result)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.Stop != nil {
 		pclass.stop = (*[0]byte)(C._gotk4_gio2_Drive_stop)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Drive_stop",
+			func(carg0 *C.GDrive, carg1 C.GMountUnmountFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
+				var drive          Instance           // go GDrive subclass
+				var cancellable    context.Context    // in, none, converted, nullable
+				var flags          MountUnmountFlags  // in, none, casted
+				var mountOperation MountOperation     // in, none, converted, nullable
+				var callback       AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg5, nullable
+
+				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg3 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
+				}
+				flags = MountUnmountFlags(carg1)
+				if carg2 != nil {
+					mountOperation = UnsafeMountOperationFromGlibNone(unsafe.Pointer(carg2))
+				}
+				if carg4 != nil {
+					_ = callback
+					_ = carg4
+					_ = _
+					_ = carg5
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.Stop(drive, cancellable, flags, mountOperation, callback)
+			},
+		)
 	}
 
 	if overrides.StopButton != nil {
 		pclass.stop_button = (*[0]byte)(C._gotk4_gio2_Drive_stop_button)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Drive_stop_button",
+			func(carg0 *C.GDrive) {
+				var drive Instance // go GDrive subclass
+
+				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.StopButton(drive)
+			},
+		)
 	}
 
 	if overrides.StopFinish != nil {
 		pclass.stop_finish = (*[0]byte)(C._gotk4_gio2_Drive_stop_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Drive_stop_finish",
+			func(carg0 *C.GDrive, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+				var drive  Instance    // go GDrive subclass
+				var result AsyncResult // in, none, converted
+				var goret  bool        // return
+				var _goerr error       // out, full, converted
+
+				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.StopFinish(drive, result)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 }
 
@@ -19018,38 +20808,252 @@ func UnsafeApplyDtlsConnectionOverrides[Instance DtlsConnection](gclass unsafe.P
 
 	if overrides.AcceptCertificate != nil {
 		pclass.accept_certificate = (*[0]byte)(C._gotk4_gio2_DtlsConnection_accept_certificate)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_DtlsConnection_accept_certificate",
+			func(carg0 *C.GDtlsConnection, carg1 *C.GTlsCertificate, carg2 C.GTlsCertificateFlags) (cret C.gboolean) {
+				var connection Instance            // go GDtlsConnection subclass
+				var peerCert   TlsCertificate      // in, none, converted
+				var errors     TLSCertificateFlags // in, none, casted
+				var goret      bool                // return
+
+				connection = UnsafeDtlsConnectionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				peerCert = UnsafeTlsCertificateFromGlibNone(unsafe.Pointer(carg1))
+				errors = TLSCertificateFlags(carg2)
+
+				goret = overrides.AcceptCertificate(connection, peerCert, errors)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetNegotiatedProtocol != nil {
 		pclass.get_negotiated_protocol = (*[0]byte)(C._gotk4_gio2_DtlsConnection_get_negotiated_protocol)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_DtlsConnection_get_negotiated_protocol",
+			func(carg0 *C.GDtlsConnection) (cret *C.gchar) {
+				var conn  Instance // go GDtlsConnection subclass
+				var goret string   // return, none, string, nullable-string
+
+				conn = UnsafeDtlsConnectionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetNegotiatedProtocol(conn)
+
+				if goret != "" {
+					cret = (*C.gchar)(unsafe.Pointer(C.CString(goret)))
+					defer C.free(unsafe.Pointer(cret))
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.Handshake != nil {
 		pclass.handshake = (*[0]byte)(C._gotk4_gio2_DtlsConnection_handshake)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_DtlsConnection_handshake",
+			func(carg0 *C.GDtlsConnection, carg1 *C.GCancellable, _cerr **C.GError) (cret C.gboolean) {
+				var conn        Instance        // go GDtlsConnection subclass
+				var cancellable context.Context // in, none, converted, nullable
+				var goret       bool            // return
+				var _goerr      error           // out, full, converted
+
+				conn = UnsafeDtlsConnectionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg1 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg1))
+				}
+
+				goret, _goerr = overrides.Handshake(conn, cancellable)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.HandshakeAsync != nil {
 		pclass.handshake_async = (*[0]byte)(C._gotk4_gio2_DtlsConnection_handshake_async)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_DtlsConnection_handshake_async",
+			func(carg0 *C.GDtlsConnection, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
+				var conn        Instance           // go GDtlsConnection subclass
+				var cancellable context.Context    // in, none, converted, nullable
+				var ioPriority  int                // in, none, casted, casted C.gint
+				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg4, nullable
+
+				conn = UnsafeDtlsConnectionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg2 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
+				}
+				ioPriority = int(carg1)
+				if carg3 != nil {
+					_ = callback
+					_ = carg3
+					_ = _
+					_ = carg4
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.HandshakeAsync(conn, cancellable, ioPriority, callback)
+			},
+		)
 	}
 
 	if overrides.HandshakeFinish != nil {
 		pclass.handshake_finish = (*[0]byte)(C._gotk4_gio2_DtlsConnection_handshake_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_DtlsConnection_handshake_finish",
+			func(carg0 *C.GDtlsConnection, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+				var conn   Instance    // go GDtlsConnection subclass
+				var result AsyncResult // in, none, converted
+				var goret  bool        // return
+				var _goerr error       // out, full, converted
+
+				conn = UnsafeDtlsConnectionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.HandshakeFinish(conn, result)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.SetAdvertisedProtocols != nil {
 		pclass.set_advertised_protocols = (*[0]byte)(C._gotk4_gio2_DtlsConnection_set_advertised_protocols)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_DtlsConnection_set_advertised_protocols",
+			func(carg0 *C.GDtlsConnection, carg1 **C.gchar) {
+				var conn      Instance // go GDtlsConnection subclass
+				var protocols []string // in, transfer: none, C Pointers: 2, Name: array[utf8], nullable, array (inner: *typesystem.StringPrimitive, zero-terminated)
+
+				conn = UnsafeDtlsConnectionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				_ = protocols
+				_ = carg1
+				panic("unimplemented conversion of []string (const gchar* const*)")
+
+				overrides.SetAdvertisedProtocols(conn, protocols)
+			},
+		)
 	}
 
 	if overrides.Shutdown != nil {
 		pclass.shutdown = (*[0]byte)(C._gotk4_gio2_DtlsConnection_shutdown)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_DtlsConnection_shutdown",
+			func(carg0 *C.GDtlsConnection, carg1 C.gboolean, carg2 C.gboolean, carg3 *C.GCancellable, _cerr **C.GError) (cret C.gboolean) {
+				var conn          Instance        // go GDtlsConnection subclass
+				var cancellable   context.Context // in, none, converted, nullable
+				var shutdownRead  bool            // in
+				var shutdownWrite bool            // in
+				var goret         bool            // return
+				var _goerr        error           // out, full, converted
+
+				conn = UnsafeDtlsConnectionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg3 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
+				}
+				if carg1 != 0 {
+					shutdownRead = true
+				}
+				if carg2 != 0 {
+					shutdownWrite = true
+				}
+
+				goret, _goerr = overrides.Shutdown(conn, cancellable, shutdownRead, shutdownWrite)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.ShutdownAsync != nil {
 		pclass.shutdown_async = (*[0]byte)(C._gotk4_gio2_DtlsConnection_shutdown_async)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_DtlsConnection_shutdown_async",
+			func(carg0 *C.GDtlsConnection, carg1 C.gboolean, carg2 C.gboolean, carg3 C.int, carg4 *C.GCancellable, carg5 C.GAsyncReadyCallback, carg6 C.gpointer) {
+				var conn          Instance           // go GDtlsConnection subclass
+				var cancellable   context.Context    // in, none, converted, nullable
+				var shutdownRead  bool               // in
+				var shutdownWrite bool               // in
+				var ioPriority    int                // in, none, casted, casted C.gint
+				var callback      AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg6, nullable
+
+				conn = UnsafeDtlsConnectionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg4 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg4))
+				}
+				if carg1 != 0 {
+					shutdownRead = true
+				}
+				if carg2 != 0 {
+					shutdownWrite = true
+				}
+				ioPriority = int(carg3)
+				if carg5 != nil {
+					_ = callback
+					_ = carg5
+					_ = _
+					_ = carg6
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.ShutdownAsync(conn, cancellable, shutdownRead, shutdownWrite, ioPriority, callback)
+			},
+		)
 	}
 
 	if overrides.ShutdownFinish != nil {
 		pclass.shutdown_finish = (*[0]byte)(C._gotk4_gio2_DtlsConnection_shutdown_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_DtlsConnection_shutdown_finish",
+			func(carg0 *C.GDtlsConnection, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+				var conn   Instance    // go GDtlsConnection subclass
+				var result AsyncResult // in, none, converted
+				var goret  bool        // return
+				var _goerr error       // out, full, converted
+
+				conn = UnsafeDtlsConnectionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.ShutdownFinish(conn, result)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 }
 
@@ -28760,366 +30764,2494 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 
 	if overrides.AppendTo != nil {
 		pclass.append_to = (*[0]byte)(C._gotk4_gio2_File_append_to)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_append_to",
+			func(carg0 *C.GFile, carg1 C.GFileCreateFlags, carg2 *C.GCancellable, _cerr **C.GError) (cret *C.GFileOutputStream) {
+				var file        Instance         // go GFile subclass
+				var cancellable context.Context  // in, none, converted, nullable
+				var flags       FileCreateFlags  // in, none, casted
+				var goret       FileOutputStream // return, full, converted
+				var _goerr      error            // out, full, converted
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg2 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
+				}
+				flags = FileCreateFlags(carg1)
+
+				goret, _goerr = overrides.AppendTo(file, cancellable, flags)
+
+				cret = (*C.GFileOutputStream)(UnsafeFileOutputStreamToGlibFull(goret))
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.AppendToAsync != nil {
 		pclass.append_to_async = (*[0]byte)(C._gotk4_gio2_File_append_to_async)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_append_to_async",
+			func(carg0 *C.GFile, carg1 C.GFileCreateFlags, carg2 C.int, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
+				var file        Instance           // go GFile subclass
+				var cancellable context.Context    // in, none, converted, nullable
+				var flags       FileCreateFlags    // in, none, casted
+				var ioPriority  int                // in, none, casted, casted C.gint
+				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg5, nullable
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg3 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
+				}
+				flags = FileCreateFlags(carg1)
+				ioPriority = int(carg2)
+				if carg4 != nil {
+					_ = callback
+					_ = carg4
+					_ = _
+					_ = carg5
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.AppendToAsync(file, cancellable, flags, ioPriority, callback)
+			},
+		)
 	}
 
 	if overrides.AppendToFinish != nil {
 		pclass.append_to_finish = (*[0]byte)(C._gotk4_gio2_File_append_to_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_append_to_finish",
+			func(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GFileOutputStream) {
+				var file   Instance         // go GFile subclass
+				var res    AsyncResult      // in, none, converted
+				var goret  FileOutputStream // return, full, converted
+				var _goerr error            // out, full, converted
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				res = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.AppendToFinish(file, res)
+
+				cret = (*C.GFileOutputStream)(UnsafeFileOutputStreamToGlibFull(goret))
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.CopyFinish != nil {
 		pclass.copy_finish = (*[0]byte)(C._gotk4_gio2_File_copy_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_copy_finish",
+			func(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+				var file   Instance    // go GFile subclass
+				var res    AsyncResult // in, none, converted
+				var goret  bool        // return
+				var _goerr error       // out, full, converted
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				res = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.CopyFinish(file, res)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.Create != nil {
 		pclass.create = (*[0]byte)(C._gotk4_gio2_File_create)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_create",
+			func(carg0 *C.GFile, carg1 C.GFileCreateFlags, carg2 *C.GCancellable, _cerr **C.GError) (cret *C.GFileOutputStream) {
+				var file        Instance         // go GFile subclass
+				var cancellable context.Context  // in, none, converted, nullable
+				var flags       FileCreateFlags  // in, none, casted
+				var goret       FileOutputStream // return, full, converted
+				var _goerr      error            // out, full, converted
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg2 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
+				}
+				flags = FileCreateFlags(carg1)
+
+				goret, _goerr = overrides.Create(file, cancellable, flags)
+
+				cret = (*C.GFileOutputStream)(UnsafeFileOutputStreamToGlibFull(goret))
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.CreateAsync != nil {
 		pclass.create_async = (*[0]byte)(C._gotk4_gio2_File_create_async)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_create_async",
+			func(carg0 *C.GFile, carg1 C.GFileCreateFlags, carg2 C.int, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
+				var file        Instance           // go GFile subclass
+				var cancellable context.Context    // in, none, converted, nullable
+				var flags       FileCreateFlags    // in, none, casted
+				var ioPriority  int                // in, none, casted, casted C.gint
+				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg5, nullable
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg3 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
+				}
+				flags = FileCreateFlags(carg1)
+				ioPriority = int(carg2)
+				if carg4 != nil {
+					_ = callback
+					_ = carg4
+					_ = _
+					_ = carg5
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.CreateAsync(file, cancellable, flags, ioPriority, callback)
+			},
+		)
 	}
 
 	if overrides.CreateFinish != nil {
 		pclass.create_finish = (*[0]byte)(C._gotk4_gio2_File_create_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_create_finish",
+			func(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GFileOutputStream) {
+				var file   Instance         // go GFile subclass
+				var res    AsyncResult      // in, none, converted
+				var goret  FileOutputStream // return, full, converted
+				var _goerr error            // out, full, converted
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				res = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.CreateFinish(file, res)
+
+				cret = (*C.GFileOutputStream)(UnsafeFileOutputStreamToGlibFull(goret))
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.CreateReadwrite != nil {
 		pclass.create_readwrite = (*[0]byte)(C._gotk4_gio2_File_create_readwrite)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_create_readwrite",
+			func(carg0 *C.GFile, carg1 C.GFileCreateFlags, carg2 *C.GCancellable, _cerr **C.GError) (cret *C.GFileIOStream) {
+				var file        Instance        // go GFile subclass
+				var cancellable context.Context // in, none, converted, nullable
+				var flags       FileCreateFlags // in, none, casted
+				var goret       FileIOStream    // return, full, converted
+				var _goerr      error           // out, full, converted
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg2 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
+				}
+				flags = FileCreateFlags(carg1)
+
+				goret, _goerr = overrides.CreateReadwrite(file, cancellable, flags)
+
+				cret = (*C.GFileIOStream)(UnsafeFileIOStreamToGlibFull(goret))
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.CreateReadwriteAsync != nil {
 		pclass.create_readwrite_async = (*[0]byte)(C._gotk4_gio2_File_create_readwrite_async)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_create_readwrite_async",
+			func(carg0 *C.GFile, carg1 C.GFileCreateFlags, carg2 C.int, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
+				var file        Instance           // go GFile subclass
+				var cancellable context.Context    // in, none, converted, nullable
+				var flags       FileCreateFlags    // in, none, casted
+				var ioPriority  int                // in, none, casted, casted C.gint
+				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg5, nullable
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg3 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
+				}
+				flags = FileCreateFlags(carg1)
+				ioPriority = int(carg2)
+				if carg4 != nil {
+					_ = callback
+					_ = carg4
+					_ = _
+					_ = carg5
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.CreateReadwriteAsync(file, cancellable, flags, ioPriority, callback)
+			},
+		)
 	}
 
 	if overrides.CreateReadwriteFinish != nil {
 		pclass.create_readwrite_finish = (*[0]byte)(C._gotk4_gio2_File_create_readwrite_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_create_readwrite_finish",
+			func(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GFileIOStream) {
+				var file   Instance     // go GFile subclass
+				var res    AsyncResult  // in, none, converted
+				var goret  FileIOStream // return, full, converted
+				var _goerr error        // out, full, converted
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				res = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.CreateReadwriteFinish(file, res)
+
+				cret = (*C.GFileIOStream)(UnsafeFileIOStreamToGlibFull(goret))
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.DeleteFile != nil {
 		pclass.delete_file = (*[0]byte)(C._gotk4_gio2_File_delete_file)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_delete_file",
+			func(carg0 *C.GFile, carg1 *C.GCancellable, _cerr **C.GError) (cret C.gboolean) {
+				var file        Instance        // go GFile subclass
+				var cancellable context.Context // in, none, converted, nullable
+				var goret       bool            // return
+				var _goerr      error           // out, full, converted
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg1 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg1))
+				}
+
+				goret, _goerr = overrides.DeleteFile(file, cancellable)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.DeleteFileAsync != nil {
 		pclass.delete_file_async = (*[0]byte)(C._gotk4_gio2_File_delete_file_async)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_delete_file_async",
+			func(carg0 *C.GFile, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
+				var file        Instance           // go GFile subclass
+				var cancellable context.Context    // in, none, converted, nullable
+				var ioPriority  int                // in, none, casted, casted C.gint
+				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg4, nullable
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg2 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
+				}
+				ioPriority = int(carg1)
+				if carg3 != nil {
+					_ = callback
+					_ = carg3
+					_ = _
+					_ = carg4
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.DeleteFileAsync(file, cancellable, ioPriority, callback)
+			},
+		)
 	}
 
 	if overrides.DeleteFileFinish != nil {
 		pclass.delete_file_finish = (*[0]byte)(C._gotk4_gio2_File_delete_file_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_delete_file_finish",
+			func(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+				var file   Instance    // go GFile subclass
+				var result AsyncResult // in, none, converted
+				var goret  bool        // return
+				var _goerr error       // out, full, converted
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.DeleteFileFinish(file, result)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.Dup != nil {
 		pclass.dup = (*[0]byte)(C._gotk4_gio2_File_dup)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_dup",
+			func(carg0 *C.GFile) (cret *C.GFile) {
+				var file  Instance // go GFile subclass
+				var goret File     // return, full, converted
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.Dup(file)
+
+				cret = (*C.GFile)(UnsafeFileToGlibFull(goret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.EjectMountable != nil {
 		pclass.eject_mountable = (*[0]byte)(C._gotk4_gio2_File_eject_mountable)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_eject_mountable",
+			func(carg0 *C.GFile, carg1 C.GMountUnmountFlags, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
+				var file        Instance           // go GFile subclass
+				var cancellable context.Context    // in, none, converted, nullable
+				var flags       MountUnmountFlags  // in, none, casted
+				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg4, nullable
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg2 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
+				}
+				flags = MountUnmountFlags(carg1)
+				if carg3 != nil {
+					_ = callback
+					_ = carg3
+					_ = _
+					_ = carg4
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.EjectMountable(file, cancellable, flags, callback)
+			},
+		)
 	}
 
 	if overrides.EjectMountableFinish != nil {
 		pclass.eject_mountable_finish = (*[0]byte)(C._gotk4_gio2_File_eject_mountable_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_eject_mountable_finish",
+			func(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+				var file   Instance    // go GFile subclass
+				var result AsyncResult // in, none, converted
+				var goret  bool        // return
+				var _goerr error       // out, full, converted
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.EjectMountableFinish(file, result)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.EjectMountableWithOperation != nil {
 		pclass.eject_mountable_with_operation = (*[0]byte)(C._gotk4_gio2_File_eject_mountable_with_operation)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_eject_mountable_with_operation",
+			func(carg0 *C.GFile, carg1 C.GMountUnmountFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
+				var file           Instance           // go GFile subclass
+				var cancellable    context.Context    // in, none, converted, nullable
+				var flags          MountUnmountFlags  // in, none, casted
+				var mountOperation MountOperation     // in, none, converted, nullable
+				var callback       AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg5, nullable
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg3 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
+				}
+				flags = MountUnmountFlags(carg1)
+				if carg2 != nil {
+					mountOperation = UnsafeMountOperationFromGlibNone(unsafe.Pointer(carg2))
+				}
+				if carg4 != nil {
+					_ = callback
+					_ = carg4
+					_ = _
+					_ = carg5
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.EjectMountableWithOperation(file, cancellable, flags, mountOperation, callback)
+			},
+		)
 	}
 
 	if overrides.EjectMountableWithOperationFinish != nil {
 		pclass.eject_mountable_with_operation_finish = (*[0]byte)(C._gotk4_gio2_File_eject_mountable_with_operation_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_eject_mountable_with_operation_finish",
+			func(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+				var file   Instance    // go GFile subclass
+				var result AsyncResult // in, none, converted
+				var goret  bool        // return
+				var _goerr error       // out, full, converted
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.EjectMountableWithOperationFinish(file, result)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.EnumerateChildren != nil {
 		pclass.enumerate_children = (*[0]byte)(C._gotk4_gio2_File_enumerate_children)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_enumerate_children",
+			func(carg0 *C.GFile, carg1 *C.char, carg2 C.GFileQueryInfoFlags, carg3 *C.GCancellable, _cerr **C.GError) (cret *C.GFileEnumerator) {
+				var file        Instance           // go GFile subclass
+				var cancellable context.Context    // in, none, converted, nullable
+				var attributes  string             // in, none, string, casted *C.gchar
+				var flags       FileQueryInfoFlags // in, none, casted
+				var goret       FileEnumerator     // return, full, converted
+				var _goerr      error              // out, full, converted
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg3 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
+				}
+				attributes = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+				flags = FileQueryInfoFlags(carg2)
+
+				goret, _goerr = overrides.EnumerateChildren(file, cancellable, attributes, flags)
+
+				cret = (*C.GFileEnumerator)(UnsafeFileEnumeratorToGlibFull(goret))
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.EnumerateChildrenAsync != nil {
 		pclass.enumerate_children_async = (*[0]byte)(C._gotk4_gio2_File_enumerate_children_async)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_enumerate_children_async",
+			func(carg0 *C.GFile, carg1 *C.char, carg2 C.GFileQueryInfoFlags, carg3 C.int, carg4 *C.GCancellable, carg5 C.GAsyncReadyCallback, carg6 C.gpointer) {
+				var file        Instance           // go GFile subclass
+				var cancellable context.Context    // in, none, converted, nullable
+				var attributes  string             // in, none, string, casted *C.gchar
+				var flags       FileQueryInfoFlags // in, none, casted
+				var ioPriority  int                // in, none, casted, casted C.gint
+				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg6, nullable
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg4 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg4))
+				}
+				attributes = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+				flags = FileQueryInfoFlags(carg2)
+				ioPriority = int(carg3)
+				if carg5 != nil {
+					_ = callback
+					_ = carg5
+					_ = _
+					_ = carg6
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.EnumerateChildrenAsync(file, cancellable, attributes, flags, ioPriority, callback)
+			},
+		)
 	}
 
 	if overrides.EnumerateChildrenFinish != nil {
 		pclass.enumerate_children_finish = (*[0]byte)(C._gotk4_gio2_File_enumerate_children_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_enumerate_children_finish",
+			func(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GFileEnumerator) {
+				var file   Instance       // go GFile subclass
+				var res    AsyncResult    // in, none, converted
+				var goret  FileEnumerator // return, full, converted
+				var _goerr error          // out, full, converted
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				res = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.EnumerateChildrenFinish(file, res)
+
+				cret = (*C.GFileEnumerator)(UnsafeFileEnumeratorToGlibFull(goret))
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.Equal != nil {
 		pclass.equal = (*[0]byte)(C._gotk4_gio2_File_equal)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_equal",
+			func(carg0 *C.GFile, carg1 *C.GFile) (cret C.gboolean) {
+				var file1 Instance // go GFile subclass
+				var file2 File     // in, none, converted
+				var goret bool     // return
+
+				file1 = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file2 = UnsafeFileFromGlibNone(unsafe.Pointer(carg1))
+
+				goret = overrides.Equal(file1, file2)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.FindEnclosingMount != nil {
 		pclass.find_enclosing_mount = (*[0]byte)(C._gotk4_gio2_File_find_enclosing_mount)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_find_enclosing_mount",
+			func(carg0 *C.GFile, carg1 *C.GCancellable, _cerr **C.GError) (cret *C.GMount) {
+				var file        Instance        // go GFile subclass
+				var cancellable context.Context // in, none, converted, nullable
+				var goret       Mount           // return, full, converted
+				var _goerr      error           // out, full, converted
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg1 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg1))
+				}
+
+				goret, _goerr = overrides.FindEnclosingMount(file, cancellable)
+
+				cret = (*C.GMount)(UnsafeMountToGlibFull(goret))
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.FindEnclosingMountAsync != nil {
 		pclass.find_enclosing_mount_async = (*[0]byte)(C._gotk4_gio2_File_find_enclosing_mount_async)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_find_enclosing_mount_async",
+			func(carg0 *C.GFile, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
+				var file        Instance           // go GFile subclass
+				var cancellable context.Context    // in, none, converted, nullable
+				var ioPriority  int                // in, none, casted, casted C.gint
+				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg4, nullable
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg2 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
+				}
+				ioPriority = int(carg1)
+				if carg3 != nil {
+					_ = callback
+					_ = carg3
+					_ = _
+					_ = carg4
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.FindEnclosingMountAsync(file, cancellable, ioPriority, callback)
+			},
+		)
 	}
 
 	if overrides.FindEnclosingMountFinish != nil {
 		pclass.find_enclosing_mount_finish = (*[0]byte)(C._gotk4_gio2_File_find_enclosing_mount_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_find_enclosing_mount_finish",
+			func(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GMount) {
+				var file   Instance    // go GFile subclass
+				var res    AsyncResult // in, none, converted
+				var goret  Mount       // return, full, converted
+				var _goerr error       // out, full, converted
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				res = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.FindEnclosingMountFinish(file, res)
+
+				cret = (*C.GMount)(UnsafeMountToGlibFull(goret))
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetBasename != nil {
 		pclass.get_basename = (*[0]byte)(C._gotk4_gio2_File_get_basename)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_get_basename",
+			func(carg0 *C.GFile) (cret *C.char) {
+				var file  Instance // go GFile subclass
+				var goret string   // return, full, string, nullable-string
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetBasename(file)
+
+				if goret != "" {
+					cret = (*C.char)(unsafe.Pointer(C.CString(goret)))
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetChildForDisplayName != nil {
 		pclass.get_child_for_display_name = (*[0]byte)(C._gotk4_gio2_File_get_child_for_display_name)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_get_child_for_display_name",
+			func(carg0 *C.GFile, carg1 *C.char, _cerr **C.GError) (cret *C.GFile) {
+				var file        Instance // go GFile subclass
+				var displayName string   // in, none, string, casted *C.gchar
+				var goret       File     // return, full, converted
+				var _goerr      error    // out, full, converted
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				displayName = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+
+				goret, _goerr = overrides.GetChildForDisplayName(file, displayName)
+
+				cret = (*C.GFile)(UnsafeFileToGlibFull(goret))
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetParent != nil {
 		pclass.get_parent = (*[0]byte)(C._gotk4_gio2_File_get_parent)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_get_parent",
+			func(carg0 *C.GFile) (cret *C.GFile) {
+				var file  Instance // go GFile subclass
+				var goret File     // return, full, converted, nullable
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetParent(file)
+
+				if goret != nil {
+					cret = (*C.GFile)(UnsafeFileToGlibFull(goret))
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetParseName != nil {
 		pclass.get_parse_name = (*[0]byte)(C._gotk4_gio2_File_get_parse_name)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_get_parse_name",
+			func(carg0 *C.GFile) (cret *C.char) {
+				var file  Instance // go GFile subclass
+				var goret string   // return, full, string, casted *C.gchar
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetParseName(file)
+
+				cret = (*C.char)(unsafe.Pointer(C.CString(goret)))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetPath != nil {
 		pclass.get_path = (*[0]byte)(C._gotk4_gio2_File_get_path)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_get_path",
+			func(carg0 *C.GFile) (cret *C.char) {
+				var file  Instance // go GFile subclass
+				var goret string   // return, full, string, nullable-string
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetPath(file)
+
+				if goret != "" {
+					cret = (*C.char)(unsafe.Pointer(C.CString(goret)))
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetRelativePath != nil {
 		pclass.get_relative_path = (*[0]byte)(C._gotk4_gio2_File_get_relative_path)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_get_relative_path",
+			func(carg0 *C.GFile, carg1 *C.GFile) (cret *C.char) {
+				var parent     Instance // go GFile subclass
+				var descendant File     // in, none, converted
+				var goret      string   // return, full, string, nullable-string
+
+				parent = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				descendant = UnsafeFileFromGlibNone(unsafe.Pointer(carg1))
+
+				goret = overrides.GetRelativePath(parent, descendant)
+
+				if goret != "" {
+					cret = (*C.char)(unsafe.Pointer(C.CString(goret)))
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetURI != nil {
 		pclass.get_uri = (*[0]byte)(C._gotk4_gio2_File_get_uri)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_get_uri",
+			func(carg0 *C.GFile) (cret *C.char) {
+				var file  Instance // go GFile subclass
+				var goret string   // return, full, string, casted *C.gchar
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetURI(file)
+
+				cret = (*C.char)(unsafe.Pointer(C.CString(goret)))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetURIScheme != nil {
 		pclass.get_uri_scheme = (*[0]byte)(C._gotk4_gio2_File_get_uri_scheme)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_get_uri_scheme",
+			func(carg0 *C.GFile) (cret *C.char) {
+				var file  Instance // go GFile subclass
+				var goret string   // return, full, string, nullable-string
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetURIScheme(file)
+
+				if goret != "" {
+					cret = (*C.char)(unsafe.Pointer(C.CString(goret)))
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.HasURIScheme != nil {
 		pclass.has_uri_scheme = (*[0]byte)(C._gotk4_gio2_File_has_uri_scheme)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_has_uri_scheme",
+			func(carg0 *C.GFile, carg1 *C.char) (cret C.gboolean) {
+				var file      Instance // go GFile subclass
+				var uriScheme string   // in, none, string, casted *C.gchar
+				var goret     bool     // return
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				uriScheme = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+
+				goret = overrides.HasURIScheme(file, uriScheme)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.Hash != nil {
 		pclass.hash = (*[0]byte)(C._gotk4_gio2_File_hash)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_hash",
+			func(carg0 *C.GFile) (cret C.guint) {
+				var file  Instance // go GFile subclass
+				var goret uint     // return, none, casted
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.Hash(file)
+
+				cret = C.guint(goret)
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.IsNative != nil {
 		pclass.is_native = (*[0]byte)(C._gotk4_gio2_File_is_native)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_is_native",
+			func(carg0 *C.GFile) (cret C.gboolean) {
+				var file  Instance // go GFile subclass
+				var goret bool     // return
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.IsNative(file)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.MakeDirectory != nil {
 		pclass.make_directory = (*[0]byte)(C._gotk4_gio2_File_make_directory)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_make_directory",
+			func(carg0 *C.GFile, carg1 *C.GCancellable, _cerr **C.GError) (cret C.gboolean) {
+				var file        Instance        // go GFile subclass
+				var cancellable context.Context // in, none, converted, nullable
+				var goret       bool            // return
+				var _goerr      error           // out, full, converted
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg1 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg1))
+				}
+
+				goret, _goerr = overrides.MakeDirectory(file, cancellable)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.MakeDirectoryAsync != nil {
 		pclass.make_directory_async = (*[0]byte)(C._gotk4_gio2_File_make_directory_async)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_make_directory_async",
+			func(carg0 *C.GFile, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
+				var file        Instance           // go GFile subclass
+				var cancellable context.Context    // in, none, converted, nullable
+				var ioPriority  int                // in, none, casted, casted C.gint
+				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg4, nullable
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg2 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
+				}
+				ioPriority = int(carg1)
+				if carg3 != nil {
+					_ = callback
+					_ = carg3
+					_ = _
+					_ = carg4
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.MakeDirectoryAsync(file, cancellable, ioPriority, callback)
+			},
+		)
 	}
 
 	if overrides.MakeDirectoryFinish != nil {
 		pclass.make_directory_finish = (*[0]byte)(C._gotk4_gio2_File_make_directory_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_make_directory_finish",
+			func(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+				var file   Instance    // go GFile subclass
+				var result AsyncResult // in, none, converted
+				var goret  bool        // return
+				var _goerr error       // out, full, converted
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.MakeDirectoryFinish(file, result)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.MakeSymbolicLink != nil {
 		pclass.make_symbolic_link = (*[0]byte)(C._gotk4_gio2_File_make_symbolic_link)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_make_symbolic_link",
+			func(carg0 *C.GFile, carg1 *C.char, carg2 *C.GCancellable, _cerr **C.GError) (cret C.gboolean) {
+				var file         Instance        // go GFile subclass
+				var cancellable  context.Context // in, none, converted, nullable
+				var symlinkValue string          // in, none, string, casted *C.gchar
+				var goret        bool            // return
+				var _goerr       error           // out, full, converted
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg2 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
+				}
+				symlinkValue = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+
+				goret, _goerr = overrides.MakeSymbolicLink(file, cancellable, symlinkValue)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.MakeSymbolicLinkAsync != nil {
 		pclass.make_symbolic_link_async = (*[0]byte)(C._gotk4_gio2_File_make_symbolic_link_async)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_make_symbolic_link_async",
+			func(carg0 *C.GFile, carg1 *C.char, carg2 C.int, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
+				var file         Instance           // go GFile subclass
+				var cancellable  context.Context    // in, none, converted, nullable
+				var symlinkValue string             // in, none, string, casted *C.gchar
+				var ioPriority   int                // in, none, casted, casted C.gint
+				var callback     AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg5, nullable
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg3 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
+				}
+				symlinkValue = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+				ioPriority = int(carg2)
+				if carg4 != nil {
+					_ = callback
+					_ = carg4
+					_ = _
+					_ = carg5
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.MakeSymbolicLinkAsync(file, cancellable, symlinkValue, ioPriority, callback)
+			},
+		)
 	}
 
 	if overrides.MakeSymbolicLinkFinish != nil {
 		pclass.make_symbolic_link_finish = (*[0]byte)(C._gotk4_gio2_File_make_symbolic_link_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_make_symbolic_link_finish",
+			func(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+				var file   Instance    // go GFile subclass
+				var result AsyncResult // in, none, converted
+				var goret  bool        // return
+				var _goerr error       // out, full, converted
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.MakeSymbolicLinkFinish(file, result)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.MeasureDiskUsageFinish != nil {
 		pclass.measure_disk_usage_finish = (*[0]byte)(C._gotk4_gio2_File_measure_disk_usage_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_measure_disk_usage_finish",
+			func(carg0 *C.GFile, carg1 *C.GAsyncResult, carg2 *C.guint64, carg3 *C.guint64, carg4 *C.guint64, _cerr **C.GError) (cret C.gboolean) {
+				var file      Instance    // go GFile subclass
+				var result    AsyncResult // in, none, converted
+				var diskUsage uint64      // out, full, casted
+				var numDirs   uint64      // out, full, casted
+				var numFiles  uint64      // out, full, casted
+				var goret     bool        // return
+				var _goerr    error       // out, full, converted
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				diskUsage, numDirs, numFiles, goret, _goerr = overrides.MeasureDiskUsageFinish(file, result)
+
+				*carg2 = C.guint64(diskUsage)
+				*carg3 = C.guint64(numDirs)
+				*carg4 = C.guint64(numFiles)
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.MonitorDir != nil {
 		pclass.monitor_dir = (*[0]byte)(C._gotk4_gio2_File_monitor_dir)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_monitor_dir",
+			func(carg0 *C.GFile, carg1 C.GFileMonitorFlags, carg2 *C.GCancellable, _cerr **C.GError) (cret *C.GFileMonitor) {
+				var file        Instance         // go GFile subclass
+				var cancellable context.Context  // in, none, converted, nullable
+				var flags       FileMonitorFlags // in, none, casted
+				var goret       FileMonitor      // return, full, converted
+				var _goerr      error            // out, full, converted
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg2 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
+				}
+				flags = FileMonitorFlags(carg1)
+
+				goret, _goerr = overrides.MonitorDir(file, cancellable, flags)
+
+				cret = (*C.GFileMonitor)(UnsafeFileMonitorToGlibFull(goret))
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.MonitorFile != nil {
 		pclass.monitor_file = (*[0]byte)(C._gotk4_gio2_File_monitor_file)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_monitor_file",
+			func(carg0 *C.GFile, carg1 C.GFileMonitorFlags, carg2 *C.GCancellable, _cerr **C.GError) (cret *C.GFileMonitor) {
+				var file        Instance         // go GFile subclass
+				var cancellable context.Context  // in, none, converted, nullable
+				var flags       FileMonitorFlags // in, none, casted
+				var goret       FileMonitor      // return, full, converted
+				var _goerr      error            // out, full, converted
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg2 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
+				}
+				flags = FileMonitorFlags(carg1)
+
+				goret, _goerr = overrides.MonitorFile(file, cancellable, flags)
+
+				cret = (*C.GFileMonitor)(UnsafeFileMonitorToGlibFull(goret))
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.MountEnclosingVolume != nil {
 		pclass.mount_enclosing_volume = (*[0]byte)(C._gotk4_gio2_File_mount_enclosing_volume)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_mount_enclosing_volume",
+			func(carg0 *C.GFile, carg1 C.GMountMountFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
+				var location       Instance           // go GFile subclass
+				var cancellable    context.Context    // in, none, converted, nullable
+				var flags          MountMountFlags    // in, none, casted
+				var mountOperation MountOperation     // in, none, converted, nullable
+				var callback       AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg5, nullable
+
+				location = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg3 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
+				}
+				flags = MountMountFlags(carg1)
+				if carg2 != nil {
+					mountOperation = UnsafeMountOperationFromGlibNone(unsafe.Pointer(carg2))
+				}
+				if carg4 != nil {
+					_ = callback
+					_ = carg4
+					_ = _
+					_ = carg5
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.MountEnclosingVolume(location, cancellable, flags, mountOperation, callback)
+			},
+		)
 	}
 
 	if overrides.MountEnclosingVolumeFinish != nil {
 		pclass.mount_enclosing_volume_finish = (*[0]byte)(C._gotk4_gio2_File_mount_enclosing_volume_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_mount_enclosing_volume_finish",
+			func(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+				var location Instance    // go GFile subclass
+				var result   AsyncResult // in, none, converted
+				var goret    bool        // return
+				var _goerr   error       // out, full, converted
+
+				location = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.MountEnclosingVolumeFinish(location, result)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.MountMountable != nil {
 		pclass.mount_mountable = (*[0]byte)(C._gotk4_gio2_File_mount_mountable)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_mount_mountable",
+			func(carg0 *C.GFile, carg1 C.GMountMountFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
+				var file           Instance           // go GFile subclass
+				var cancellable    context.Context    // in, none, converted, nullable
+				var flags          MountMountFlags    // in, none, casted
+				var mountOperation MountOperation     // in, none, converted, nullable
+				var callback       AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg5, nullable
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg3 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
+				}
+				flags = MountMountFlags(carg1)
+				if carg2 != nil {
+					mountOperation = UnsafeMountOperationFromGlibNone(unsafe.Pointer(carg2))
+				}
+				if carg4 != nil {
+					_ = callback
+					_ = carg4
+					_ = _
+					_ = carg5
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.MountMountable(file, cancellable, flags, mountOperation, callback)
+			},
+		)
 	}
 
 	if overrides.MountMountableFinish != nil {
 		pclass.mount_mountable_finish = (*[0]byte)(C._gotk4_gio2_File_mount_mountable_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_mount_mountable_finish",
+			func(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GFile) {
+				var file   Instance    // go GFile subclass
+				var result AsyncResult // in, none, converted
+				var goret  File        // return, full, converted
+				var _goerr error       // out, full, converted
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.MountMountableFinish(file, result)
+
+				cret = (*C.GFile)(UnsafeFileToGlibFull(goret))
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.MoveFinish != nil {
 		pclass.move_finish = (*[0]byte)(C._gotk4_gio2_File_move_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_move_finish",
+			func(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+				var file   Instance    // go GFile subclass
+				var result AsyncResult // in, none, converted
+				var goret  bool        // return
+				var _goerr error       // out, full, converted
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.MoveFinish(file, result)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.OpenReadwrite != nil {
 		pclass.open_readwrite = (*[0]byte)(C._gotk4_gio2_File_open_readwrite)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_open_readwrite",
+			func(carg0 *C.GFile, carg1 *C.GCancellable, _cerr **C.GError) (cret *C.GFileIOStream) {
+				var file        Instance        // go GFile subclass
+				var cancellable context.Context // in, none, converted, nullable
+				var goret       FileIOStream    // return, full, converted
+				var _goerr      error           // out, full, converted
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg1 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg1))
+				}
+
+				goret, _goerr = overrides.OpenReadwrite(file, cancellable)
+
+				cret = (*C.GFileIOStream)(UnsafeFileIOStreamToGlibFull(goret))
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.OpenReadwriteAsync != nil {
 		pclass.open_readwrite_async = (*[0]byte)(C._gotk4_gio2_File_open_readwrite_async)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_open_readwrite_async",
+			func(carg0 *C.GFile, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
+				var file        Instance           // go GFile subclass
+				var cancellable context.Context    // in, none, converted, nullable
+				var ioPriority  int                // in, none, casted, casted C.gint
+				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg4, nullable
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg2 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
+				}
+				ioPriority = int(carg1)
+				if carg3 != nil {
+					_ = callback
+					_ = carg3
+					_ = _
+					_ = carg4
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.OpenReadwriteAsync(file, cancellable, ioPriority, callback)
+			},
+		)
 	}
 
 	if overrides.OpenReadwriteFinish != nil {
 		pclass.open_readwrite_finish = (*[0]byte)(C._gotk4_gio2_File_open_readwrite_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_open_readwrite_finish",
+			func(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GFileIOStream) {
+				var file   Instance     // go GFile subclass
+				var res    AsyncResult  // in, none, converted
+				var goret  FileIOStream // return, full, converted
+				var _goerr error        // out, full, converted
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				res = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.OpenReadwriteFinish(file, res)
+
+				cret = (*C.GFileIOStream)(UnsafeFileIOStreamToGlibFull(goret))
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.PollMountable != nil {
 		pclass.poll_mountable = (*[0]byte)(C._gotk4_gio2_File_poll_mountable)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_poll_mountable",
+			func(carg0 *C.GFile, carg1 *C.GCancellable, carg2 C.GAsyncReadyCallback, carg3 C.gpointer) {
+				var file        Instance           // go GFile subclass
+				var cancellable context.Context    // in, none, converted, nullable
+				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg3, nullable
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg1 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg1))
+				}
+				if carg2 != nil {
+					_ = callback
+					_ = carg2
+					_ = _
+					_ = carg3
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.PollMountable(file, cancellable, callback)
+			},
+		)
 	}
 
 	if overrides.PollMountableFinish != nil {
 		pclass.poll_mountable_finish = (*[0]byte)(C._gotk4_gio2_File_poll_mountable_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_poll_mountable_finish",
+			func(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+				var file   Instance    // go GFile subclass
+				var result AsyncResult // in, none, converted
+				var goret  bool        // return
+				var _goerr error       // out, full, converted
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.PollMountableFinish(file, result)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.PrefixMatches != nil {
 		pclass.prefix_matches = (*[0]byte)(C._gotk4_gio2_File_prefix_matches)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_prefix_matches",
+			func(carg0 *C.GFile, carg1 *C.GFile) (cret C.gboolean) {
+				var prefix Instance // go GFile subclass
+				var file   File     // in, none, converted
+				var goret  bool     // return
+
+				prefix = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg1))
+
+				goret = overrides.PrefixMatches(prefix, file)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.QueryFilesystemInfo != nil {
 		pclass.query_filesystem_info = (*[0]byte)(C._gotk4_gio2_File_query_filesystem_info)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_query_filesystem_info",
+			func(carg0 *C.GFile, carg1 *C.char, carg2 *C.GCancellable, _cerr **C.GError) (cret *C.GFileInfo) {
+				var file        Instance        // go GFile subclass
+				var cancellable context.Context // in, none, converted, nullable
+				var attributes  string          // in, none, string, casted *C.gchar
+				var goret       FileInfo        // return, full, converted
+				var _goerr      error           // out, full, converted
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg2 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
+				}
+				attributes = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+
+				goret, _goerr = overrides.QueryFilesystemInfo(file, cancellable, attributes)
+
+				cret = (*C.GFileInfo)(UnsafeFileInfoToGlibFull(goret))
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.QueryFilesystemInfoAsync != nil {
 		pclass.query_filesystem_info_async = (*[0]byte)(C._gotk4_gio2_File_query_filesystem_info_async)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_query_filesystem_info_async",
+			func(carg0 *C.GFile, carg1 *C.char, carg2 C.int, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
+				var file        Instance           // go GFile subclass
+				var cancellable context.Context    // in, none, converted, nullable
+				var attributes  string             // in, none, string, casted *C.gchar
+				var ioPriority  int                // in, none, casted, casted C.gint
+				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg5, nullable
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg3 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
+				}
+				attributes = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+				ioPriority = int(carg2)
+				if carg4 != nil {
+					_ = callback
+					_ = carg4
+					_ = _
+					_ = carg5
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.QueryFilesystemInfoAsync(file, cancellable, attributes, ioPriority, callback)
+			},
+		)
 	}
 
 	if overrides.QueryFilesystemInfoFinish != nil {
 		pclass.query_filesystem_info_finish = (*[0]byte)(C._gotk4_gio2_File_query_filesystem_info_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_query_filesystem_info_finish",
+			func(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GFileInfo) {
+				var file   Instance    // go GFile subclass
+				var res    AsyncResult // in, none, converted
+				var goret  FileInfo    // return, full, converted
+				var _goerr error       // out, full, converted
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				res = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.QueryFilesystemInfoFinish(file, res)
+
+				cret = (*C.GFileInfo)(UnsafeFileInfoToGlibFull(goret))
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.QueryInfo != nil {
 		pclass.query_info = (*[0]byte)(C._gotk4_gio2_File_query_info)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_query_info",
+			func(carg0 *C.GFile, carg1 *C.char, carg2 C.GFileQueryInfoFlags, carg3 *C.GCancellable, _cerr **C.GError) (cret *C.GFileInfo) {
+				var file        Instance           // go GFile subclass
+				var cancellable context.Context    // in, none, converted, nullable
+				var attributes  string             // in, none, string, casted *C.gchar
+				var flags       FileQueryInfoFlags // in, none, casted
+				var goret       FileInfo           // return, full, converted
+				var _goerr      error              // out, full, converted
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg3 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
+				}
+				attributes = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+				flags = FileQueryInfoFlags(carg2)
+
+				goret, _goerr = overrides.QueryInfo(file, cancellable, attributes, flags)
+
+				cret = (*C.GFileInfo)(UnsafeFileInfoToGlibFull(goret))
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.QueryInfoAsync != nil {
 		pclass.query_info_async = (*[0]byte)(C._gotk4_gio2_File_query_info_async)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_query_info_async",
+			func(carg0 *C.GFile, carg1 *C.char, carg2 C.GFileQueryInfoFlags, carg3 C.int, carg4 *C.GCancellable, carg5 C.GAsyncReadyCallback, carg6 C.gpointer) {
+				var file        Instance           // go GFile subclass
+				var cancellable context.Context    // in, none, converted, nullable
+				var attributes  string             // in, none, string, casted *C.gchar
+				var flags       FileQueryInfoFlags // in, none, casted
+				var ioPriority  int                // in, none, casted, casted C.gint
+				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg6, nullable
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg4 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg4))
+				}
+				attributes = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+				flags = FileQueryInfoFlags(carg2)
+				ioPriority = int(carg3)
+				if carg5 != nil {
+					_ = callback
+					_ = carg5
+					_ = _
+					_ = carg6
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.QueryInfoAsync(file, cancellable, attributes, flags, ioPriority, callback)
+			},
+		)
 	}
 
 	if overrides.QueryInfoFinish != nil {
 		pclass.query_info_finish = (*[0]byte)(C._gotk4_gio2_File_query_info_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_query_info_finish",
+			func(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GFileInfo) {
+				var file   Instance    // go GFile subclass
+				var res    AsyncResult // in, none, converted
+				var goret  FileInfo    // return, full, converted
+				var _goerr error       // out, full, converted
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				res = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.QueryInfoFinish(file, res)
+
+				cret = (*C.GFileInfo)(UnsafeFileInfoToGlibFull(goret))
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.QuerySettableAttributes != nil {
 		pclass.query_settable_attributes = (*[0]byte)(C._gotk4_gio2_File_query_settable_attributes)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_query_settable_attributes",
+			func(carg0 *C.GFile, carg1 *C.GCancellable, _cerr **C.GError) (cret *C.GFileAttributeInfoList) {
+				var file        Instance               // go GFile subclass
+				var cancellable context.Context        // in, none, converted, nullable
+				var goret       *FileAttributeInfoList // return, full, converted
+				var _goerr      error                  // out, full, converted
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg1 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg1))
+				}
+
+				goret, _goerr = overrides.QuerySettableAttributes(file, cancellable)
+
+				cret = (*C.GFileAttributeInfoList)(UnsafeFileAttributeInfoListToGlibFull(goret))
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.QueryWritableNamespaces != nil {
 		pclass.query_writable_namespaces = (*[0]byte)(C._gotk4_gio2_File_query_writable_namespaces)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_query_writable_namespaces",
+			func(carg0 *C.GFile, carg1 *C.GCancellable, _cerr **C.GError) (cret *C.GFileAttributeInfoList) {
+				var file        Instance               // go GFile subclass
+				var cancellable context.Context        // in, none, converted, nullable
+				var goret       *FileAttributeInfoList // return, full, converted
+				var _goerr      error                  // out, full, converted
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg1 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg1))
+				}
+
+				goret, _goerr = overrides.QueryWritableNamespaces(file, cancellable)
+
+				cret = (*C.GFileAttributeInfoList)(UnsafeFileAttributeInfoListToGlibFull(goret))
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.ReadAsync != nil {
 		pclass.read_async = (*[0]byte)(C._gotk4_gio2_File_read_async)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_read_async",
+			func(carg0 *C.GFile, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
+				var file        Instance           // go GFile subclass
+				var cancellable context.Context    // in, none, converted, nullable
+				var ioPriority  int                // in, none, casted, casted C.gint
+				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg4, nullable
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg2 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
+				}
+				ioPriority = int(carg1)
+				if carg3 != nil {
+					_ = callback
+					_ = carg3
+					_ = _
+					_ = carg4
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.ReadAsync(file, cancellable, ioPriority, callback)
+			},
+		)
 	}
 
 	if overrides.ReadFinish != nil {
 		pclass.read_finish = (*[0]byte)(C._gotk4_gio2_File_read_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_read_finish",
+			func(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GFileInputStream) {
+				var file   Instance        // go GFile subclass
+				var res    AsyncResult     // in, none, converted
+				var goret  FileInputStream // return, full, converted
+				var _goerr error           // out, full, converted
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				res = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.ReadFinish(file, res)
+
+				cret = (*C.GFileInputStream)(UnsafeFileInputStreamToGlibFull(goret))
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.ReadFn != nil {
 		pclass.read_fn = (*[0]byte)(C._gotk4_gio2_File_read_fn)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_read_fn",
+			func(carg0 *C.GFile, carg1 *C.GCancellable, _cerr **C.GError) (cret *C.GFileInputStream) {
+				var file        Instance        // go GFile subclass
+				var cancellable context.Context // in, none, converted, nullable
+				var goret       FileInputStream // return, full, converted
+				var _goerr      error           // out, full, converted
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg1 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg1))
+				}
+
+				goret, _goerr = overrides.ReadFn(file, cancellable)
+
+				cret = (*C.GFileInputStream)(UnsafeFileInputStreamToGlibFull(goret))
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.Replace != nil {
 		pclass.replace = (*[0]byte)(C._gotk4_gio2_File_replace)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_replace",
+			func(carg0 *C.GFile, carg1 *C.char, carg2 C.gboolean, carg3 C.GFileCreateFlags, carg4 *C.GCancellable, _cerr **C.GError) (cret *C.GFileOutputStream) {
+				var file        Instance         // go GFile subclass
+				var cancellable context.Context  // in, none, converted, nullable
+				var etag        string           // in, none, string, casted *C.gchar, nullable
+				var makeBackup  bool             // in
+				var flags       FileCreateFlags  // in, none, casted
+				var goret       FileOutputStream // return, full, converted
+				var _goerr      error            // out, full, converted
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg4 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg4))
+				}
+				if carg1 != nil {
+					etag = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+				}
+				if carg2 != 0 {
+					makeBackup = true
+				}
+				flags = FileCreateFlags(carg3)
+
+				goret, _goerr = overrides.Replace(file, cancellable, etag, makeBackup, flags)
+
+				cret = (*C.GFileOutputStream)(UnsafeFileOutputStreamToGlibFull(goret))
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.ReplaceAsync != nil {
 		pclass.replace_async = (*[0]byte)(C._gotk4_gio2_File_replace_async)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_replace_async",
+			func(carg0 *C.GFile, carg1 *C.char, carg2 C.gboolean, carg3 C.GFileCreateFlags, carg4 C.int, carg5 *C.GCancellable, carg6 C.GAsyncReadyCallback, carg7 C.gpointer) {
+				var file        Instance           // go GFile subclass
+				var cancellable context.Context    // in, none, converted, nullable
+				var etag        string             // in, none, string, casted *C.gchar, nullable
+				var makeBackup  bool               // in
+				var flags       FileCreateFlags    // in, none, casted
+				var ioPriority  int                // in, none, casted, casted C.gint
+				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg7, nullable
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg5 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg5))
+				}
+				if carg1 != nil {
+					etag = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+				}
+				if carg2 != 0 {
+					makeBackup = true
+				}
+				flags = FileCreateFlags(carg3)
+				ioPriority = int(carg4)
+				if carg6 != nil {
+					_ = callback
+					_ = carg6
+					_ = _
+					_ = carg7
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.ReplaceAsync(file, cancellable, etag, makeBackup, flags, ioPriority, callback)
+			},
+		)
 	}
 
 	if overrides.ReplaceFinish != nil {
 		pclass.replace_finish = (*[0]byte)(C._gotk4_gio2_File_replace_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_replace_finish",
+			func(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GFileOutputStream) {
+				var file   Instance         // go GFile subclass
+				var res    AsyncResult      // in, none, converted
+				var goret  FileOutputStream // return, full, converted
+				var _goerr error            // out, full, converted
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				res = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.ReplaceFinish(file, res)
+
+				cret = (*C.GFileOutputStream)(UnsafeFileOutputStreamToGlibFull(goret))
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.ReplaceReadwrite != nil {
 		pclass.replace_readwrite = (*[0]byte)(C._gotk4_gio2_File_replace_readwrite)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_replace_readwrite",
+			func(carg0 *C.GFile, carg1 *C.char, carg2 C.gboolean, carg3 C.GFileCreateFlags, carg4 *C.GCancellable, _cerr **C.GError) (cret *C.GFileIOStream) {
+				var file        Instance        // go GFile subclass
+				var cancellable context.Context // in, none, converted, nullable
+				var etag        string          // in, none, string, casted *C.gchar, nullable
+				var makeBackup  bool            // in
+				var flags       FileCreateFlags // in, none, casted
+				var goret       FileIOStream    // return, full, converted
+				var _goerr      error           // out, full, converted
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg4 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg4))
+				}
+				if carg1 != nil {
+					etag = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+				}
+				if carg2 != 0 {
+					makeBackup = true
+				}
+				flags = FileCreateFlags(carg3)
+
+				goret, _goerr = overrides.ReplaceReadwrite(file, cancellable, etag, makeBackup, flags)
+
+				cret = (*C.GFileIOStream)(UnsafeFileIOStreamToGlibFull(goret))
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.ReplaceReadwriteAsync != nil {
 		pclass.replace_readwrite_async = (*[0]byte)(C._gotk4_gio2_File_replace_readwrite_async)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_replace_readwrite_async",
+			func(carg0 *C.GFile, carg1 *C.char, carg2 C.gboolean, carg3 C.GFileCreateFlags, carg4 C.int, carg5 *C.GCancellable, carg6 C.GAsyncReadyCallback, carg7 C.gpointer) {
+				var file        Instance           // go GFile subclass
+				var cancellable context.Context    // in, none, converted, nullable
+				var etag        string             // in, none, string, casted *C.gchar, nullable
+				var makeBackup  bool               // in
+				var flags       FileCreateFlags    // in, none, casted
+				var ioPriority  int                // in, none, casted, casted C.gint
+				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg7, nullable
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg5 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg5))
+				}
+				if carg1 != nil {
+					etag = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+				}
+				if carg2 != 0 {
+					makeBackup = true
+				}
+				flags = FileCreateFlags(carg3)
+				ioPriority = int(carg4)
+				if carg6 != nil {
+					_ = callback
+					_ = carg6
+					_ = _
+					_ = carg7
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.ReplaceReadwriteAsync(file, cancellable, etag, makeBackup, flags, ioPriority, callback)
+			},
+		)
 	}
 
 	if overrides.ReplaceReadwriteFinish != nil {
 		pclass.replace_readwrite_finish = (*[0]byte)(C._gotk4_gio2_File_replace_readwrite_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_replace_readwrite_finish",
+			func(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GFileIOStream) {
+				var file   Instance     // go GFile subclass
+				var res    AsyncResult  // in, none, converted
+				var goret  FileIOStream // return, full, converted
+				var _goerr error        // out, full, converted
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				res = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.ReplaceReadwriteFinish(file, res)
+
+				cret = (*C.GFileIOStream)(UnsafeFileIOStreamToGlibFull(goret))
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.ResolveRelativePath != nil {
 		pclass.resolve_relative_path = (*[0]byte)(C._gotk4_gio2_File_resolve_relative_path)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_resolve_relative_path",
+			func(carg0 *C.GFile, carg1 *C.char) (cret *C.GFile) {
+				var file         Instance // go GFile subclass
+				var relativePath string   // in, none, string, casted *C.gchar
+				var goret        File     // return, full, converted
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				relativePath = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+
+				goret = overrides.ResolveRelativePath(file, relativePath)
+
+				cret = (*C.GFile)(UnsafeFileToGlibFull(goret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.SetAttributesAsync != nil {
 		pclass.set_attributes_async = (*[0]byte)(C._gotk4_gio2_File_set_attributes_async)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_set_attributes_async",
+			func(carg0 *C.GFile, carg1 *C.GFileInfo, carg2 C.GFileQueryInfoFlags, carg3 C.int, carg4 *C.GCancellable, carg5 C.GAsyncReadyCallback, carg6 C.gpointer) {
+				var file        Instance           // go GFile subclass
+				var cancellable context.Context    // in, none, converted, nullable
+				var info        FileInfo           // in, none, converted
+				var flags       FileQueryInfoFlags // in, none, casted
+				var ioPriority  int                // in, none, casted, casted C.gint
+				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg6, nullable
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg4 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg4))
+				}
+				info = UnsafeFileInfoFromGlibNone(unsafe.Pointer(carg1))
+				flags = FileQueryInfoFlags(carg2)
+				ioPriority = int(carg3)
+				if carg5 != nil {
+					_ = callback
+					_ = carg5
+					_ = _
+					_ = carg6
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.SetAttributesAsync(file, cancellable, info, flags, ioPriority, callback)
+			},
+		)
 	}
 
 	if overrides.SetAttributesFinish != nil {
 		pclass.set_attributes_finish = (*[0]byte)(C._gotk4_gio2_File_set_attributes_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_set_attributes_finish",
+			func(carg0 *C.GFile, carg1 *C.GAsyncResult, carg2 **C.GFileInfo, _cerr **C.GError) (cret C.gboolean) {
+				var file   Instance    // go GFile subclass
+				var result AsyncResult // in, none, converted
+				var info   FileInfo    // out, full, converted
+				var goret  bool        // return
+				var _goerr error       // out, full, converted
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				info, goret, _goerr = overrides.SetAttributesFinish(file, result)
+
+				*carg2 = (*C.GFileInfo)(UnsafeFileInfoToGlibFull(info))
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.SetAttributesFromInfo != nil {
 		pclass.set_attributes_from_info = (*[0]byte)(C._gotk4_gio2_File_set_attributes_from_info)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_set_attributes_from_info",
+			func(carg0 *C.GFile, carg1 *C.GFileInfo, carg2 C.GFileQueryInfoFlags, carg3 *C.GCancellable, _cerr **C.GError) (cret C.gboolean) {
+				var file        Instance           // go GFile subclass
+				var cancellable context.Context    // in, none, converted, nullable
+				var info        FileInfo           // in, none, converted
+				var flags       FileQueryInfoFlags // in, none, casted
+				var goret       bool               // return
+				var _goerr      error              // out, full, converted
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg3 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
+				}
+				info = UnsafeFileInfoFromGlibNone(unsafe.Pointer(carg1))
+				flags = FileQueryInfoFlags(carg2)
+
+				goret, _goerr = overrides.SetAttributesFromInfo(file, cancellable, info, flags)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.SetDisplayName != nil {
 		pclass.set_display_name = (*[0]byte)(C._gotk4_gio2_File_set_display_name)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_set_display_name",
+			func(carg0 *C.GFile, carg1 *C.char, carg2 *C.GCancellable, _cerr **C.GError) (cret *C.GFile) {
+				var file        Instance        // go GFile subclass
+				var cancellable context.Context // in, none, converted, nullable
+				var displayName string          // in, none, string, casted *C.gchar
+				var goret       File            // return, full, converted
+				var _goerr      error           // out, full, converted
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg2 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
+				}
+				displayName = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+
+				goret, _goerr = overrides.SetDisplayName(file, cancellable, displayName)
+
+				cret = (*C.GFile)(UnsafeFileToGlibFull(goret))
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.SetDisplayNameAsync != nil {
 		pclass.set_display_name_async = (*[0]byte)(C._gotk4_gio2_File_set_display_name_async)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_set_display_name_async",
+			func(carg0 *C.GFile, carg1 *C.char, carg2 C.int, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
+				var file        Instance           // go GFile subclass
+				var cancellable context.Context    // in, none, converted, nullable
+				var displayName string             // in, none, string, casted *C.gchar
+				var ioPriority  int                // in, none, casted, casted C.gint
+				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg5, nullable
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg3 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
+				}
+				displayName = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+				ioPriority = int(carg2)
+				if carg4 != nil {
+					_ = callback
+					_ = carg4
+					_ = _
+					_ = carg5
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.SetDisplayNameAsync(file, cancellable, displayName, ioPriority, callback)
+			},
+		)
 	}
 
 	if overrides.SetDisplayNameFinish != nil {
 		pclass.set_display_name_finish = (*[0]byte)(C._gotk4_gio2_File_set_display_name_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_set_display_name_finish",
+			func(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GFile) {
+				var file   Instance    // go GFile subclass
+				var res    AsyncResult // in, none, converted
+				var goret  File        // return, full, converted
+				var _goerr error       // out, full, converted
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				res = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.SetDisplayNameFinish(file, res)
+
+				cret = (*C.GFile)(UnsafeFileToGlibFull(goret))
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.StartMountable != nil {
 		pclass.start_mountable = (*[0]byte)(C._gotk4_gio2_File_start_mountable)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_start_mountable",
+			func(carg0 *C.GFile, carg1 C.GDriveStartFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
+				var file           Instance           // go GFile subclass
+				var cancellable    context.Context    // in, none, converted, nullable
+				var flags          DriveStartFlags    // in, none, casted
+				var startOperation MountOperation     // in, none, converted, nullable
+				var callback       AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg5, nullable
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg3 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
+				}
+				flags = DriveStartFlags(carg1)
+				if carg2 != nil {
+					startOperation = UnsafeMountOperationFromGlibNone(unsafe.Pointer(carg2))
+				}
+				if carg4 != nil {
+					_ = callback
+					_ = carg4
+					_ = _
+					_ = carg5
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.StartMountable(file, cancellable, flags, startOperation, callback)
+			},
+		)
 	}
 
 	if overrides.StartMountableFinish != nil {
 		pclass.start_mountable_finish = (*[0]byte)(C._gotk4_gio2_File_start_mountable_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_start_mountable_finish",
+			func(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+				var file   Instance    // go GFile subclass
+				var result AsyncResult // in, none, converted
+				var goret  bool        // return
+				var _goerr error       // out, full, converted
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.StartMountableFinish(file, result)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.StopMountable != nil {
 		pclass.stop_mountable = (*[0]byte)(C._gotk4_gio2_File_stop_mountable)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_stop_mountable",
+			func(carg0 *C.GFile, carg1 C.GMountUnmountFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
+				var file           Instance           // go GFile subclass
+				var cancellable    context.Context    // in, none, converted, nullable
+				var flags          MountUnmountFlags  // in, none, casted
+				var mountOperation MountOperation     // in, none, converted, nullable
+				var callback       AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg5, nullable
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg3 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
+				}
+				flags = MountUnmountFlags(carg1)
+				if carg2 != nil {
+					mountOperation = UnsafeMountOperationFromGlibNone(unsafe.Pointer(carg2))
+				}
+				if carg4 != nil {
+					_ = callback
+					_ = carg4
+					_ = _
+					_ = carg5
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.StopMountable(file, cancellable, flags, mountOperation, callback)
+			},
+		)
 	}
 
 	if overrides.StopMountableFinish != nil {
 		pclass.stop_mountable_finish = (*[0]byte)(C._gotk4_gio2_File_stop_mountable_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_stop_mountable_finish",
+			func(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+				var file   Instance    // go GFile subclass
+				var result AsyncResult // in, none, converted
+				var goret  bool        // return
+				var _goerr error       // out, full, converted
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.StopMountableFinish(file, result)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.Trash != nil {
 		pclass.trash = (*[0]byte)(C._gotk4_gio2_File_trash)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_trash",
+			func(carg0 *C.GFile, carg1 *C.GCancellable, _cerr **C.GError) (cret C.gboolean) {
+				var file        Instance        // go GFile subclass
+				var cancellable context.Context // in, none, converted, nullable
+				var goret       bool            // return
+				var _goerr      error           // out, full, converted
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg1 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg1))
+				}
+
+				goret, _goerr = overrides.Trash(file, cancellable)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.TrashAsync != nil {
 		pclass.trash_async = (*[0]byte)(C._gotk4_gio2_File_trash_async)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_trash_async",
+			func(carg0 *C.GFile, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
+				var file        Instance           // go GFile subclass
+				var cancellable context.Context    // in, none, converted, nullable
+				var ioPriority  int                // in, none, casted, casted C.gint
+				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg4, nullable
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg2 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
+				}
+				ioPriority = int(carg1)
+				if carg3 != nil {
+					_ = callback
+					_ = carg3
+					_ = _
+					_ = carg4
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.TrashAsync(file, cancellable, ioPriority, callback)
+			},
+		)
 	}
 
 	if overrides.TrashFinish != nil {
 		pclass.trash_finish = (*[0]byte)(C._gotk4_gio2_File_trash_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_trash_finish",
+			func(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+				var file   Instance    // go GFile subclass
+				var result AsyncResult // in, none, converted
+				var goret  bool        // return
+				var _goerr error       // out, full, converted
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.TrashFinish(file, result)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.UnmountMountable != nil {
 		pclass.unmount_mountable = (*[0]byte)(C._gotk4_gio2_File_unmount_mountable)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_unmount_mountable",
+			func(carg0 *C.GFile, carg1 C.GMountUnmountFlags, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
+				var file        Instance           // go GFile subclass
+				var cancellable context.Context    // in, none, converted, nullable
+				var flags       MountUnmountFlags  // in, none, casted
+				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg4, nullable
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg2 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
+				}
+				flags = MountUnmountFlags(carg1)
+				if carg3 != nil {
+					_ = callback
+					_ = carg3
+					_ = _
+					_ = carg4
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.UnmountMountable(file, cancellable, flags, callback)
+			},
+		)
 	}
 
 	if overrides.UnmountMountableFinish != nil {
 		pclass.unmount_mountable_finish = (*[0]byte)(C._gotk4_gio2_File_unmount_mountable_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_unmount_mountable_finish",
+			func(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+				var file   Instance    // go GFile subclass
+				var result AsyncResult // in, none, converted
+				var goret  bool        // return
+				var _goerr error       // out, full, converted
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.UnmountMountableFinish(file, result)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.UnmountMountableWithOperation != nil {
 		pclass.unmount_mountable_with_operation = (*[0]byte)(C._gotk4_gio2_File_unmount_mountable_with_operation)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_unmount_mountable_with_operation",
+			func(carg0 *C.GFile, carg1 C.GMountUnmountFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
+				var file           Instance           // go GFile subclass
+				var cancellable    context.Context    // in, none, converted, nullable
+				var flags          MountUnmountFlags  // in, none, casted
+				var mountOperation MountOperation     // in, none, converted, nullable
+				var callback       AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg5, nullable
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg3 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
+				}
+				flags = MountUnmountFlags(carg1)
+				if carg2 != nil {
+					mountOperation = UnsafeMountOperationFromGlibNone(unsafe.Pointer(carg2))
+				}
+				if carg4 != nil {
+					_ = callback
+					_ = carg4
+					_ = _
+					_ = carg5
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.UnmountMountableWithOperation(file, cancellable, flags, mountOperation, callback)
+			},
+		)
 	}
 
 	if overrides.UnmountMountableWithOperationFinish != nil {
 		pclass.unmount_mountable_with_operation_finish = (*[0]byte)(C._gotk4_gio2_File_unmount_mountable_with_operation_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_unmount_mountable_with_operation_finish",
+			func(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+				var file   Instance    // go GFile subclass
+				var result AsyncResult // in, none, converted
+				var goret  bool        // return
+				var _goerr error       // out, full, converted
+
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.UnmountMountableWithOperationFinish(file, result)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 }
 
@@ -29381,10 +33513,48 @@ func UnsafeApplyIconOverrides[Instance Icon](gclass unsafe.Pointer, overrides Ic
 
 	if overrides.Equal != nil {
 		pclass.equal = (*[0]byte)(C._gotk4_gio2_Icon_equal)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Icon_equal",
+			func(carg0 *C.GIcon, carg1 *C.GIcon) (cret C.gboolean) {
+				var icon1 Instance // go GIcon subclass
+				var icon2 Icon     // in, none, converted, nullable
+				var goret bool     // return
+
+				icon1 = UnsafeIconFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg1 != nil {
+					icon2 = UnsafeIconFromGlibNone(unsafe.Pointer(carg1))
+				}
+
+				goret = overrides.Equal(icon1, icon2)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.Hash != nil {
 		pclass.hash = (*[0]byte)(C._gotk4_gio2_Icon_hash)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Icon_hash",
+			func(carg0 *C.GIcon) (cret C.guint) {
+				var icon  Instance // go GIcon subclass
+				var goret uint     // return, none, casted
+
+				icon = UnsafeIconFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.Hash(icon)
+
+				cret = C.guint(goret)
+
+				return cret
+			},
+		)
 	}
 }
 
@@ -29614,6 +33784,30 @@ func UnsafeApplyInitableOverrides[Instance Initable](gclass unsafe.Pointer, over
 
 	if overrides.Init != nil {
 		pclass.init = (*[0]byte)(C._gotk4_gio2_Initable_init)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Initable_init",
+			func(carg0 *C.GInitable, carg1 *C.GCancellable, _cerr **C.GError) (cret C.gboolean) {
+				var initable    Instance        // go GInitable subclass
+				var cancellable context.Context // in, none, converted, nullable
+				var goret       bool            // return
+				var _goerr      error           // out, full, converted
+
+				initable = UnsafeInitableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg1 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg1))
+				}
+
+				goret, _goerr = overrides.Init(initable, cancellable)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 }
 
@@ -30002,10 +34196,42 @@ func UnsafeApplyListModelOverrides[Instance ListModel](gclass unsafe.Pointer, ov
 
 	if overrides.GetItemType != nil {
 		pclass.get_item_type = (*[0]byte)(C._gotk4_gio2_ListModel_get_item_type)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_ListModel_get_item_type",
+			func(carg0 *C.GListModel) (cret C.GType) {
+				var list  Instance     // go GListModel subclass
+				var goret gobject.Type // return, none, casted, alias
+
+				list = UnsafeListModelFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetItemType(list)
+
+				cret = C.GType(goret)
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetNItems != nil {
 		pclass.get_n_items = (*[0]byte)(C._gotk4_gio2_ListModel_get_n_items)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_ListModel_get_n_items",
+			func(carg0 *C.GListModel) (cret C.guint) {
+				var list  Instance // go GListModel subclass
+				var goret uint     // return, none, casted
+
+				list = UnsafeListModelFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetNItems(list)
+
+				cret = C.guint(goret)
+
+				return cret
+			},
+		)
 	}
 }
 
@@ -30284,14 +34510,87 @@ func UnsafeApplyLoadableIconOverrides[Instance LoadableIcon](gclass unsafe.Point
 
 	if overrides.Load != nil {
 		pclass.load = (*[0]byte)(C._gotk4_gio2_LoadableIcon_load)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_LoadableIcon_load",
+			func(carg0 *C.GLoadableIcon, carg1 C.int, carg2 **C.char, carg3 *C.GCancellable, _cerr **C.GError) (cret *C.GInputStream) {
+				var icon        Instance        // go GLoadableIcon subclass
+				var cancellable context.Context // in, none, converted, nullable
+				var size        int             // in, none, casted, casted C.gint
+				var typ         string          // out, full, string, casted *C.gchar
+				var goret       InputStream     // return, full, converted
+				var _goerr      error           // out, full, converted
+
+				icon = UnsafeLoadableIconFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg3 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
+				}
+				size = int(carg1)
+
+				typ, goret, _goerr = overrides.Load(icon, cancellable, size)
+
+				carg2 = (*C.char)(unsafe.Pointer(C.CString(typ)))
+				cret = (*C.GInputStream)(UnsafeInputStreamToGlibFull(goret))
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.LoadAsync != nil {
 		pclass.load_async = (*[0]byte)(C._gotk4_gio2_LoadableIcon_load_async)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_LoadableIcon_load_async",
+			func(carg0 *C.GLoadableIcon, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
+				var icon        Instance           // go GLoadableIcon subclass
+				var cancellable context.Context    // in, none, converted, nullable
+				var size        int                // in, none, casted, casted C.gint
+				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg4, nullable
+
+				icon = UnsafeLoadableIconFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg2 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
+				}
+				size = int(carg1)
+				if carg3 != nil {
+					_ = callback
+					_ = carg3
+					_ = _
+					_ = carg4
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.LoadAsync(icon, cancellable, size, callback)
+			},
+		)
 	}
 
 	if overrides.LoadFinish != nil {
 		pclass.load_finish = (*[0]byte)(C._gotk4_gio2_LoadableIcon_load_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_LoadableIcon_load_finish",
+			func(carg0 *C.GLoadableIcon, carg1 *C.GAsyncResult, carg2 **C.char, _cerr **C.GError) (cret *C.GInputStream) {
+				var icon   Instance    // go GLoadableIcon subclass
+				var res    AsyncResult // in, none, converted
+				var typ    string      // out, full, string, casted *C.gchar
+				var goret  InputStream // return, full, converted
+				var _goerr error       // out, full, converted
+
+				icon = UnsafeLoadableIconFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				res = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				typ, goret, _goerr = overrides.LoadFinish(icon, res)
+
+				carg2 = (*C.char)(unsafe.Pointer(C.CString(typ)))
+				cret = (*C.GInputStream)(UnsafeInputStreamToGlibFull(goret))
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 }
 
@@ -30449,6 +34748,19 @@ func UnsafeApplyMemoryMonitorOverrides[Instance MemoryMonitor](gclass unsafe.Poi
 
 	if overrides.LowMemoryWarning != nil {
 		pclass.low_memory_warning = (*[0]byte)(C._gotk4_gio2_MemoryMonitor_low_memory_warning)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_MemoryMonitor_low_memory_warning",
+			func(carg0 *C.GMemoryMonitor, carg1 C.GMemoryMonitorWarningLevel) {
+				var monitor Instance                  // go GMemoryMonitor subclass
+				var level   MemoryMonitorWarningLevel // in, none, casted
+
+				monitor = UnsafeMemoryMonitorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				level = MemoryMonitorWarningLevel(carg1)
+
+				overrides.LowMemoryWarning(monitor, level)
+			},
+		)
 	}
 }
 
@@ -32022,110 +36334,656 @@ func UnsafeApplyMountOverrides[Instance Mount](gclass unsafe.Pointer, overrides 
 
 	if overrides.CanEject != nil {
 		pclass.can_eject = (*[0]byte)(C._gotk4_gio2_Mount_can_eject)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Mount_can_eject",
+			func(carg0 *C.GMount) (cret C.gboolean) {
+				var mount Instance // go GMount subclass
+				var goret bool     // return
+
+				mount = UnsafeMountFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.CanEject(mount)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.CanUnmount != nil {
 		pclass.can_unmount = (*[0]byte)(C._gotk4_gio2_Mount_can_unmount)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Mount_can_unmount",
+			func(carg0 *C.GMount) (cret C.gboolean) {
+				var mount Instance // go GMount subclass
+				var goret bool     // return
+
+				mount = UnsafeMountFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.CanUnmount(mount)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.Changed != nil {
 		pclass.changed = (*[0]byte)(C._gotk4_gio2_Mount_changed)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Mount_changed",
+			func(carg0 *C.GMount) {
+				var mount Instance // go GMount subclass
+
+				mount = UnsafeMountFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.Changed(mount)
+			},
+		)
 	}
 
 	if overrides.Eject != nil {
 		pclass.eject = (*[0]byte)(C._gotk4_gio2_Mount_eject)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Mount_eject",
+			func(carg0 *C.GMount, carg1 C.GMountUnmountFlags, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
+				var mount       Instance           // go GMount subclass
+				var cancellable context.Context    // in, none, converted, nullable
+				var flags       MountUnmountFlags  // in, none, casted
+				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg4, nullable
+
+				mount = UnsafeMountFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg2 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
+				}
+				flags = MountUnmountFlags(carg1)
+				if carg3 != nil {
+					_ = callback
+					_ = carg3
+					_ = _
+					_ = carg4
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.Eject(mount, cancellable, flags, callback)
+			},
+		)
 	}
 
 	if overrides.EjectFinish != nil {
 		pclass.eject_finish = (*[0]byte)(C._gotk4_gio2_Mount_eject_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Mount_eject_finish",
+			func(carg0 *C.GMount, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+				var mount  Instance    // go GMount subclass
+				var result AsyncResult // in, none, converted
+				var goret  bool        // return
+				var _goerr error       // out, full, converted
+
+				mount = UnsafeMountFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.EjectFinish(mount, result)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.EjectWithOperation != nil {
 		pclass.eject_with_operation = (*[0]byte)(C._gotk4_gio2_Mount_eject_with_operation)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Mount_eject_with_operation",
+			func(carg0 *C.GMount, carg1 C.GMountUnmountFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
+				var mount          Instance           // go GMount subclass
+				var cancellable    context.Context    // in, none, converted, nullable
+				var flags          MountUnmountFlags  // in, none, casted
+				var mountOperation MountOperation     // in, none, converted, nullable
+				var callback       AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg5, nullable
+
+				mount = UnsafeMountFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg3 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
+				}
+				flags = MountUnmountFlags(carg1)
+				if carg2 != nil {
+					mountOperation = UnsafeMountOperationFromGlibNone(unsafe.Pointer(carg2))
+				}
+				if carg4 != nil {
+					_ = callback
+					_ = carg4
+					_ = _
+					_ = carg5
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.EjectWithOperation(mount, cancellable, flags, mountOperation, callback)
+			},
+		)
 	}
 
 	if overrides.EjectWithOperationFinish != nil {
 		pclass.eject_with_operation_finish = (*[0]byte)(C._gotk4_gio2_Mount_eject_with_operation_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Mount_eject_with_operation_finish",
+			func(carg0 *C.GMount, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+				var mount  Instance    // go GMount subclass
+				var result AsyncResult // in, none, converted
+				var goret  bool        // return
+				var _goerr error       // out, full, converted
+
+				mount = UnsafeMountFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.EjectWithOperationFinish(mount, result)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetDefaultLocation != nil {
 		pclass.get_default_location = (*[0]byte)(C._gotk4_gio2_Mount_get_default_location)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Mount_get_default_location",
+			func(carg0 *C.GMount) (cret *C.GFile) {
+				var mount Instance // go GMount subclass
+				var goret File     // return, full, converted
+
+				mount = UnsafeMountFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetDefaultLocation(mount)
+
+				cret = (*C.GFile)(UnsafeFileToGlibFull(goret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetDrive != nil {
 		pclass.get_drive = (*[0]byte)(C._gotk4_gio2_Mount_get_drive)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Mount_get_drive",
+			func(carg0 *C.GMount) (cret *C.GDrive) {
+				var mount Instance // go GMount subclass
+				var goret Drive    // return, full, converted, nullable
+
+				mount = UnsafeMountFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetDrive(mount)
+
+				if goret != nil {
+					cret = (*C.GDrive)(UnsafeDriveToGlibFull(goret))
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetIcon != nil {
 		pclass.get_icon = (*[0]byte)(C._gotk4_gio2_Mount_get_icon)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Mount_get_icon",
+			func(carg0 *C.GMount) (cret *C.GIcon) {
+				var mount Instance // go GMount subclass
+				var goret Icon     // return, full, converted
+
+				mount = UnsafeMountFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetIcon(mount)
+
+				cret = (*C.GIcon)(UnsafeIconToGlibFull(goret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetName != nil {
 		pclass.get_name = (*[0]byte)(C._gotk4_gio2_Mount_get_name)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Mount_get_name",
+			func(carg0 *C.GMount) (cret *C.char) {
+				var mount Instance // go GMount subclass
+				var goret string   // return, full, string, casted *C.gchar
+
+				mount = UnsafeMountFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetName(mount)
+
+				cret = (*C.char)(unsafe.Pointer(C.CString(goret)))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetRoot != nil {
 		pclass.get_root = (*[0]byte)(C._gotk4_gio2_Mount_get_root)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Mount_get_root",
+			func(carg0 *C.GMount) (cret *C.GFile) {
+				var mount Instance // go GMount subclass
+				var goret File     // return, full, converted
+
+				mount = UnsafeMountFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetRoot(mount)
+
+				cret = (*C.GFile)(UnsafeFileToGlibFull(goret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetSortKey != nil {
 		pclass.get_sort_key = (*[0]byte)(C._gotk4_gio2_Mount_get_sort_key)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Mount_get_sort_key",
+			func(carg0 *C.GMount) (cret *C.gchar) {
+				var mount Instance // go GMount subclass
+				var goret string   // return, none, string, nullable-string
+
+				mount = UnsafeMountFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetSortKey(mount)
+
+				if goret != "" {
+					cret = (*C.gchar)(unsafe.Pointer(C.CString(goret)))
+					defer C.free(unsafe.Pointer(cret))
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetSymbolicIcon != nil {
 		pclass.get_symbolic_icon = (*[0]byte)(C._gotk4_gio2_Mount_get_symbolic_icon)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Mount_get_symbolic_icon",
+			func(carg0 *C.GMount) (cret *C.GIcon) {
+				var mount Instance // go GMount subclass
+				var goret Icon     // return, full, converted
+
+				mount = UnsafeMountFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetSymbolicIcon(mount)
+
+				cret = (*C.GIcon)(UnsafeIconToGlibFull(goret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetUUID != nil {
 		pclass.get_uuid = (*[0]byte)(C._gotk4_gio2_Mount_get_uuid)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Mount_get_uuid",
+			func(carg0 *C.GMount) (cret *C.char) {
+				var mount Instance // go GMount subclass
+				var goret string   // return, full, string, nullable-string
+
+				mount = UnsafeMountFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetUUID(mount)
+
+				if goret != "" {
+					cret = (*C.char)(unsafe.Pointer(C.CString(goret)))
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetVolume != nil {
 		pclass.get_volume = (*[0]byte)(C._gotk4_gio2_Mount_get_volume)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Mount_get_volume",
+			func(carg0 *C.GMount) (cret *C.GVolume) {
+				var mount Instance // go GMount subclass
+				var goret Volume   // return, full, converted, nullable
+
+				mount = UnsafeMountFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetVolume(mount)
+
+				if goret != nil {
+					cret = (*C.GVolume)(UnsafeVolumeToGlibFull(goret))
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GuessContentType != nil {
 		pclass.guess_content_type = (*[0]byte)(C._gotk4_gio2_Mount_guess_content_type)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Mount_guess_content_type",
+			func(carg0 *C.GMount, carg1 C.gboolean, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
+				var mount       Instance           // go GMount subclass
+				var cancellable context.Context    // in, none, converted, nullable
+				var forceRescan bool               // in
+				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg4, nullable
+
+				mount = UnsafeMountFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg2 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
+				}
+				if carg1 != 0 {
+					forceRescan = true
+				}
+				if carg3 != nil {
+					_ = callback
+					_ = carg3
+					_ = _
+					_ = carg4
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.GuessContentType(mount, cancellable, forceRescan, callback)
+			},
+		)
 	}
 
 	if overrides.GuessContentTypeFinish != nil {
 		pclass.guess_content_type_finish = (*[0]byte)(C._gotk4_gio2_Mount_guess_content_type_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Mount_guess_content_type_finish",
+			func(carg0 *C.GMount, carg1 *C.GAsyncResult, _cerr **C.GError) (cret **C.gchar) {
+				var mount  Instance    // go GMount subclass
+				var result AsyncResult // in, none, converted
+				var goret  []string    // return, transfer: full, C Pointers: 2, Name: array[utf8], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
+				var _goerr error       // out, full, converted
+
+				mount = UnsafeMountFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.GuessContentTypeFinish(mount, result)
+
+				_ = goret
+				_ = cret
+				panic("unimplemented conversion of []string (gchar**)")
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GuessContentTypeSync != nil {
 		pclass.guess_content_type_sync = (*[0]byte)(C._gotk4_gio2_Mount_guess_content_type_sync)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Mount_guess_content_type_sync",
+			func(carg0 *C.GMount, carg1 C.gboolean, carg2 *C.GCancellable, _cerr **C.GError) (cret **C.gchar) {
+				var mount       Instance        // go GMount subclass
+				var cancellable context.Context // in, none, converted, nullable
+				var forceRescan bool            // in
+				var goret       []string        // return, transfer: full, C Pointers: 2, Name: array[utf8], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
+				var _goerr      error           // out, full, converted
+
+				mount = UnsafeMountFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg2 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
+				}
+				if carg1 != 0 {
+					forceRescan = true
+				}
+
+				goret, _goerr = overrides.GuessContentTypeSync(mount, cancellable, forceRescan)
+
+				_ = goret
+				_ = cret
+				panic("unimplemented conversion of []string (gchar**)")
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.PreUnmount != nil {
 		pclass.pre_unmount = (*[0]byte)(C._gotk4_gio2_Mount_pre_unmount)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Mount_pre_unmount",
+			func(carg0 *C.GMount) {
+				var mount Instance // go GMount subclass
+
+				mount = UnsafeMountFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.PreUnmount(mount)
+			},
+		)
 	}
 
 	if overrides.Remount != nil {
 		pclass.remount = (*[0]byte)(C._gotk4_gio2_Mount_remount)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Mount_remount",
+			func(carg0 *C.GMount, carg1 C.GMountMountFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
+				var mount          Instance           // go GMount subclass
+				var cancellable    context.Context    // in, none, converted, nullable
+				var flags          MountMountFlags    // in, none, casted
+				var mountOperation MountOperation     // in, none, converted, nullable
+				var callback       AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg5, nullable
+
+				mount = UnsafeMountFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg3 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
+				}
+				flags = MountMountFlags(carg1)
+				if carg2 != nil {
+					mountOperation = UnsafeMountOperationFromGlibNone(unsafe.Pointer(carg2))
+				}
+				if carg4 != nil {
+					_ = callback
+					_ = carg4
+					_ = _
+					_ = carg5
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.Remount(mount, cancellable, flags, mountOperation, callback)
+			},
+		)
 	}
 
 	if overrides.RemountFinish != nil {
 		pclass.remount_finish = (*[0]byte)(C._gotk4_gio2_Mount_remount_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Mount_remount_finish",
+			func(carg0 *C.GMount, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+				var mount  Instance    // go GMount subclass
+				var result AsyncResult // in, none, converted
+				var goret  bool        // return
+				var _goerr error       // out, full, converted
+
+				mount = UnsafeMountFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.RemountFinish(mount, result)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.Unmount != nil {
 		pclass.unmount = (*[0]byte)(C._gotk4_gio2_Mount_unmount)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Mount_unmount",
+			func(carg0 *C.GMount, carg1 C.GMountUnmountFlags, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
+				var mount       Instance           // go GMount subclass
+				var cancellable context.Context    // in, none, converted, nullable
+				var flags       MountUnmountFlags  // in, none, casted
+				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg4, nullable
+
+				mount = UnsafeMountFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg2 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
+				}
+				flags = MountUnmountFlags(carg1)
+				if carg3 != nil {
+					_ = callback
+					_ = carg3
+					_ = _
+					_ = carg4
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.Unmount(mount, cancellable, flags, callback)
+			},
+		)
 	}
 
 	if overrides.UnmountFinish != nil {
 		pclass.unmount_finish = (*[0]byte)(C._gotk4_gio2_Mount_unmount_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Mount_unmount_finish",
+			func(carg0 *C.GMount, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+				var mount  Instance    // go GMount subclass
+				var result AsyncResult // in, none, converted
+				var goret  bool        // return
+				var _goerr error       // out, full, converted
+
+				mount = UnsafeMountFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.UnmountFinish(mount, result)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.UnmountWithOperation != nil {
 		pclass.unmount_with_operation = (*[0]byte)(C._gotk4_gio2_Mount_unmount_with_operation)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Mount_unmount_with_operation",
+			func(carg0 *C.GMount, carg1 C.GMountUnmountFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
+				var mount          Instance           // go GMount subclass
+				var cancellable    context.Context    // in, none, converted, nullable
+				var flags          MountUnmountFlags  // in, none, casted
+				var mountOperation MountOperation     // in, none, converted, nullable
+				var callback       AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg5, nullable
+
+				mount = UnsafeMountFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg3 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
+				}
+				flags = MountUnmountFlags(carg1)
+				if carg2 != nil {
+					mountOperation = UnsafeMountOperationFromGlibNone(unsafe.Pointer(carg2))
+				}
+				if carg4 != nil {
+					_ = callback
+					_ = carg4
+					_ = _
+					_ = carg5
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.UnmountWithOperation(mount, cancellable, flags, mountOperation, callback)
+			},
+		)
 	}
 
 	if overrides.UnmountWithOperationFinish != nil {
 		pclass.unmount_with_operation_finish = (*[0]byte)(C._gotk4_gio2_Mount_unmount_with_operation_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Mount_unmount_with_operation_finish",
+			func(carg0 *C.GMount, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+				var mount  Instance    // go GMount subclass
+				var result AsyncResult // in, none, converted
+				var goret  bool        // return
+				var _goerr error       // out, full, converted
+
+				mount = UnsafeMountFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.UnmountWithOperationFinish(mount, result)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.Unmounted != nil {
 		pclass.unmounted = (*[0]byte)(C._gotk4_gio2_Mount_unmounted)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Mount_unmounted",
+			func(carg0 *C.GMount) {
+				var mount Instance // go GMount subclass
+
+				mount = UnsafeMountFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.Unmounted(mount)
+			},
+		)
 	}
 }
 
@@ -32609,18 +37467,106 @@ func UnsafeApplyNetworkMonitorOverrides[Instance NetworkMonitor](gclass unsafe.P
 
 	if overrides.CanReach != nil {
 		pclass.can_reach = (*[0]byte)(C._gotk4_gio2_NetworkMonitor_can_reach)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_NetworkMonitor_can_reach",
+			func(carg0 *C.GNetworkMonitor, carg1 *C.GSocketConnectable, carg2 *C.GCancellable, _cerr **C.GError) (cret C.gboolean) {
+				var monitor     Instance          // go GNetworkMonitor subclass
+				var cancellable context.Context   // in, none, converted, nullable
+				var connectable SocketConnectable // in, none, converted
+				var goret       bool              // return
+				var _goerr      error             // out, full, converted
+
+				monitor = UnsafeNetworkMonitorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg2 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
+				}
+				connectable = UnsafeSocketConnectableFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.CanReach(monitor, cancellable, connectable)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.CanReachAsync != nil {
 		pclass.can_reach_async = (*[0]byte)(C._gotk4_gio2_NetworkMonitor_can_reach_async)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_NetworkMonitor_can_reach_async",
+			func(carg0 *C.GNetworkMonitor, carg1 *C.GSocketConnectable, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
+				var monitor     Instance           // go GNetworkMonitor subclass
+				var cancellable context.Context    // in, none, converted, nullable
+				var connectable SocketConnectable  // in, none, converted
+				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg4, nullable
+
+				monitor = UnsafeNetworkMonitorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg2 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
+				}
+				connectable = UnsafeSocketConnectableFromGlibNone(unsafe.Pointer(carg1))
+				if carg3 != nil {
+					_ = callback
+					_ = carg3
+					_ = _
+					_ = carg4
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.CanReachAsync(monitor, cancellable, connectable, callback)
+			},
+		)
 	}
 
 	if overrides.CanReachFinish != nil {
 		pclass.can_reach_finish = (*[0]byte)(C._gotk4_gio2_NetworkMonitor_can_reach_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_NetworkMonitor_can_reach_finish",
+			func(carg0 *C.GNetworkMonitor, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+				var monitor Instance    // go GNetworkMonitor subclass
+				var result  AsyncResult // in, none, converted
+				var goret   bool        // return
+				var _goerr  error       // out, full, converted
+
+				monitor = UnsafeNetworkMonitorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.CanReachFinish(monitor, result)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.NetworkChanged != nil {
 		pclass.network_changed = (*[0]byte)(C._gotk4_gio2_NetworkMonitor_network_changed)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_NetworkMonitor_network_changed",
+			func(carg0 *C.GNetworkMonitor, carg1 C.gboolean) {
+				var monitor          Instance // go GNetworkMonitor subclass
+				var networkAvailable bool     // in
+
+				monitor = UnsafeNetworkMonitorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg1 != 0 {
+					networkAvailable = true
+				}
+
+				overrides.NetworkChanged(monitor, networkAvailable)
+			},
+		)
 	}
 }
 
@@ -32879,14 +37825,70 @@ func UnsafeApplyPollableInputStreamOverrides[Instance PollableInputStream](gclas
 
 	if overrides.CanPoll != nil {
 		pclass.can_poll = (*[0]byte)(C._gotk4_gio2_PollableInputStream_can_poll)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_PollableInputStream_can_poll",
+			func(carg0 *C.GPollableInputStream) (cret C.gboolean) {
+				var stream Instance // go GPollableInputStream subclass
+				var goret  bool     // return
+
+				stream = UnsafePollableInputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.CanPoll(stream)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.CreateSource != nil {
 		pclass.create_source = (*[0]byte)(C._gotk4_gio2_PollableInputStream_create_source)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_PollableInputStream_create_source",
+			func(carg0 *C.GPollableInputStream, carg1 *C.GCancellable) (cret *C.GSource) {
+				var stream      Instance        // go GPollableInputStream subclass
+				var cancellable context.Context // in, none, converted, nullable
+				var goret       *glib.Source    // return, full, converted
+
+				stream = UnsafePollableInputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg1 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg1))
+				}
+
+				goret = overrides.CreateSource(stream, cancellable)
+
+				cret = (*C.GSource)(glib.UnsafeSourceToGlibFull(goret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.IsReadable != nil {
 		pclass.is_readable = (*[0]byte)(C._gotk4_gio2_PollableInputStream_is_readable)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_PollableInputStream_is_readable",
+			func(carg0 *C.GPollableInputStream) (cret C.gboolean) {
+				var stream Instance // go GPollableInputStream subclass
+				var goret  bool     // return
+
+				stream = UnsafePollableInputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.IsReadable(stream)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 }
 
@@ -33367,22 +38369,126 @@ func UnsafeApplyPollableOutputStreamOverrides[Instance PollableOutputStream](gcl
 
 	if overrides.CanPoll != nil {
 		pclass.can_poll = (*[0]byte)(C._gotk4_gio2_PollableOutputStream_can_poll)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_PollableOutputStream_can_poll",
+			func(carg0 *C.GPollableOutputStream) (cret C.gboolean) {
+				var stream Instance // go GPollableOutputStream subclass
+				var goret  bool     // return
+
+				stream = UnsafePollableOutputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.CanPoll(stream)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.CreateSource != nil {
 		pclass.create_source = (*[0]byte)(C._gotk4_gio2_PollableOutputStream_create_source)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_PollableOutputStream_create_source",
+			func(carg0 *C.GPollableOutputStream, carg1 *C.GCancellable) (cret *C.GSource) {
+				var stream      Instance        // go GPollableOutputStream subclass
+				var cancellable context.Context // in, none, converted, nullable
+				var goret       *glib.Source    // return, full, converted
+
+				stream = UnsafePollableOutputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg1 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg1))
+				}
+
+				goret = overrides.CreateSource(stream, cancellable)
+
+				cret = (*C.GSource)(glib.UnsafeSourceToGlibFull(goret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.IsWritable != nil {
 		pclass.is_writable = (*[0]byte)(C._gotk4_gio2_PollableOutputStream_is_writable)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_PollableOutputStream_is_writable",
+			func(carg0 *C.GPollableOutputStream) (cret C.gboolean) {
+				var stream Instance // go GPollableOutputStream subclass
+				var goret  bool     // return
+
+				stream = UnsafePollableOutputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.IsWritable(stream)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.WriteNonblocking != nil {
 		pclass.write_nonblocking = (*[0]byte)(C._gotk4_gio2_PollableOutputStream_write_nonblocking)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_PollableOutputStream_write_nonblocking",
+			func(carg0 *C.GPollableOutputStream, carg1 unsafe.Pointer, carg2 C.gsize, _cerr **C.GError) (cret C.gssize) {
+				var stream Instance // go GPollableOutputStream subclass
+				var buffer []byte   // in, transfer: none, C Pointers: 1, Name: array[unknown], nullable, array (inner: <nil>, length-by: carg2)
+				var goret  int      // return, none, casted
+				var _goerr error    // out, full, converted
+
+				stream = UnsafePollableOutputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				_ = buffer
+				_ = carg1
+				_ = carg2
+				panic("unimplemented conversion of []byte (void*)")
+
+				goret, _goerr = overrides.WriteNonblocking(stream, buffer)
+
+				cret = C.gssize(goret)
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.WritevNonblocking != nil {
 		pclass.writev_nonblocking = (*[0]byte)(C._gotk4_gio2_PollableOutputStream_writev_nonblocking)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_PollableOutputStream_writev_nonblocking",
+			func(carg0 *C.GPollableOutputStream, carg1 *C.GOutputVector, carg2 C.gsize, carg3 *C.gsize, _cerr **C.GError) (cret C.GPollableReturn) {
+				var stream       Instance       // go GPollableOutputStream subclass
+				var vectors      []OutputVector // in, transfer: none, C Pointers: 1, Name: array[OutputVector], array (inner: *typesystem.Record, length-by: carg2)
+				var bytesWritten uint           // out, full, casted
+				var goret        PollableReturn // return, none, casted
+				var _goerr       error          // out, full, converted
+
+				stream = UnsafePollableOutputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				_ = vectors
+				_ = carg1
+				_ = carg2
+				panic("unimplemented conversion of []OutputVector (const GOutputVector*)")
+
+				bytesWritten, goret, _goerr = overrides.WritevNonblocking(stream, vectors)
+
+				*carg3 = C.gsize(bytesWritten)
+				cret = C.GPollableReturn(goret)
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 }
 
@@ -33878,18 +38984,109 @@ func UnsafeApplyProxyOverrides[Instance Proxy](gclass unsafe.Pointer, overrides 
 
 	if overrides.Connect != nil {
 		pclass.connect = (*[0]byte)(C._gotk4_gio2_Proxy_connect)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Proxy_connect",
+			func(carg0 *C.GProxy, carg1 *C.GIOStream, carg2 *C.GProxyAddress, carg3 *C.GCancellable, _cerr **C.GError) (cret *C.GIOStream) {
+				var proxy        Instance        // go GProxy subclass
+				var cancellable  context.Context // in, none, converted, nullable
+				var connection   IOStream        // in, none, converted
+				var proxyAddress ProxyAddress    // in, none, converted
+				var goret        IOStream        // return, full, converted
+				var _goerr       error           // out, full, converted
+
+				proxy = UnsafeProxyFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg3 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
+				}
+				connection = UnsafeIOStreamFromGlibNone(unsafe.Pointer(carg1))
+				proxyAddress = UnsafeProxyAddressFromGlibNone(unsafe.Pointer(carg2))
+
+				goret, _goerr = overrides.Connect(proxy, cancellable, connection, proxyAddress)
+
+				cret = (*C.GIOStream)(UnsafeIOStreamToGlibFull(goret))
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.ConnectAsync != nil {
 		pclass.connect_async = (*[0]byte)(C._gotk4_gio2_Proxy_connect_async)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Proxy_connect_async",
+			func(carg0 *C.GProxy, carg1 *C.GIOStream, carg2 *C.GProxyAddress, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
+				var proxy        Instance           // go GProxy subclass
+				var cancellable  context.Context    // in, none, converted, nullable
+				var connection   IOStream           // in, none, converted
+				var proxyAddress ProxyAddress       // in, none, converted
+				var callback     AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg5, nullable
+
+				proxy = UnsafeProxyFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg3 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
+				}
+				connection = UnsafeIOStreamFromGlibNone(unsafe.Pointer(carg1))
+				proxyAddress = UnsafeProxyAddressFromGlibNone(unsafe.Pointer(carg2))
+				if carg4 != nil {
+					_ = callback
+					_ = carg4
+					_ = _
+					_ = carg5
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.ConnectAsync(proxy, cancellable, connection, proxyAddress, callback)
+			},
+		)
 	}
 
 	if overrides.ConnectFinish != nil {
 		pclass.connect_finish = (*[0]byte)(C._gotk4_gio2_Proxy_connect_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Proxy_connect_finish",
+			func(carg0 *C.GProxy, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GIOStream) {
+				var proxy  Instance    // go GProxy subclass
+				var result AsyncResult // in, none, converted
+				var goret  IOStream    // return, full, converted
+				var _goerr error       // out, full, converted
+
+				proxy = UnsafeProxyFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.ConnectFinish(proxy, result)
+
+				cret = (*C.GIOStream)(UnsafeIOStreamToGlibFull(goret))
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.SupportsHostname != nil {
 		pclass.supports_hostname = (*[0]byte)(C._gotk4_gio2_Proxy_supports_hostname)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Proxy_supports_hostname",
+			func(carg0 *C.GProxy) (cret C.gboolean) {
+				var proxy Instance // go GProxy subclass
+				var goret bool     // return
+
+				proxy = UnsafeProxyFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.SupportsHostname(proxy)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 }
 
@@ -34243,18 +39440,109 @@ func UnsafeApplyProxyResolverOverrides[Instance ProxyResolver](gclass unsafe.Poi
 
 	if overrides.IsSupported != nil {
 		pclass.is_supported = (*[0]byte)(C._gotk4_gio2_ProxyResolver_is_supported)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_ProxyResolver_is_supported",
+			func(carg0 *C.GProxyResolver) (cret C.gboolean) {
+				var resolver Instance // go GProxyResolver subclass
+				var goret    bool     // return
+
+				resolver = UnsafeProxyResolverFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.IsSupported(resolver)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.Lookup != nil {
 		pclass.lookup = (*[0]byte)(C._gotk4_gio2_ProxyResolver_lookup)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_ProxyResolver_lookup",
+			func(carg0 *C.GProxyResolver, carg1 *C.gchar, carg2 *C.GCancellable, _cerr **C.GError) (cret **C.gchar) {
+				var resolver    Instance        // go GProxyResolver subclass
+				var cancellable context.Context // in, none, converted, nullable
+				var uri         string          // in, none, string
+				var goret       []string        // return, transfer: full, C Pointers: 2, Name: array[utf8], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
+				var _goerr      error           // out, full, converted
+
+				resolver = UnsafeProxyResolverFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg2 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
+				}
+				uri = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+
+				goret, _goerr = overrides.Lookup(resolver, cancellable, uri)
+
+				_ = goret
+				_ = cret
+				panic("unimplemented conversion of []string (gchar**)")
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.LookupAsync != nil {
 		pclass.lookup_async = (*[0]byte)(C._gotk4_gio2_ProxyResolver_lookup_async)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_ProxyResolver_lookup_async",
+			func(carg0 *C.GProxyResolver, carg1 *C.gchar, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
+				var resolver    Instance           // go GProxyResolver subclass
+				var cancellable context.Context    // in, none, converted, nullable
+				var uri         string             // in, none, string
+				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg4, nullable
+
+				resolver = UnsafeProxyResolverFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg2 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
+				}
+				uri = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+				if carg3 != nil {
+					_ = callback
+					_ = carg3
+					_ = _
+					_ = carg4
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.LookupAsync(resolver, cancellable, uri, callback)
+			},
+		)
 	}
 
 	if overrides.LookupFinish != nil {
 		pclass.lookup_finish = (*[0]byte)(C._gotk4_gio2_ProxyResolver_lookup_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_ProxyResolver_lookup_finish",
+			func(carg0 *C.GProxyResolver, carg1 *C.GAsyncResult, _cerr **C.GError) (cret **C.gchar) {
+				var resolver Instance    // go GProxyResolver subclass
+				var result   AsyncResult // in, none, converted
+				var goret    []string    // return, transfer: full, C Pointers: 2, Name: array[utf8], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
+				var _goerr   error       // out, full, converted
+
+				resolver = UnsafeProxyResolverFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.LookupFinish(resolver, result)
+
+				_ = goret
+				_ = cret
+				panic("unimplemented conversion of []string (gchar**)")
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 }
 
@@ -34720,22 +40008,128 @@ func UnsafeApplySeekableOverrides[Instance Seekable](gclass unsafe.Pointer, over
 
 	if overrides.CanSeek != nil {
 		pclass.can_seek = (*[0]byte)(C._gotk4_gio2_Seekable_can_seek)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Seekable_can_seek",
+			func(carg0 *C.GSeekable) (cret C.gboolean) {
+				var seekable Instance // go GSeekable subclass
+				var goret    bool     // return
+
+				seekable = UnsafeSeekableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.CanSeek(seekable)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.CanTruncate != nil {
 		pclass.can_truncate = (*[0]byte)(C._gotk4_gio2_Seekable_can_truncate)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Seekable_can_truncate",
+			func(carg0 *C.GSeekable) (cret C.gboolean) {
+				var seekable Instance // go GSeekable subclass
+				var goret    bool     // return
+
+				seekable = UnsafeSeekableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.CanTruncate(seekable)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.Seek != nil {
 		pclass.seek = (*[0]byte)(C._gotk4_gio2_Seekable_seek)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Seekable_seek",
+			func(carg0 *C.GSeekable, carg1 C.goffset, carg2 C.GSeekType, carg3 *C.GCancellable, _cerr **C.GError) (cret C.gboolean) {
+				var seekable    Instance        // go GSeekable subclass
+				var cancellable context.Context // in, none, converted, nullable
+				var offset      int64           // in, none, casted, casted C.gint64
+				var typ         glib.SeekType   // in, none, casted
+				var goret       bool            // return
+				var _goerr      error           // out, full, converted
+
+				seekable = UnsafeSeekableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg3 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
+				}
+				offset = int64(carg1)
+				typ = glib.SeekType(carg2)
+
+				goret, _goerr = overrides.Seek(seekable, cancellable, offset, typ)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.Tell != nil {
 		pclass.tell = (*[0]byte)(C._gotk4_gio2_Seekable_tell)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Seekable_tell",
+			func(carg0 *C.GSeekable) (cret C.goffset) {
+				var seekable Instance // go GSeekable subclass
+				var goret    int64    // return, none, casted, casted C.gint64
+
+				seekable = UnsafeSeekableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.Tell(seekable)
+
+				cret = C.goffset(goret)
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.TruncateFn != nil {
 		pclass.truncate_fn = (*[0]byte)(C._gotk4_gio2_Seekable_truncate_fn)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Seekable_truncate_fn",
+			func(carg0 *C.GSeekable, carg1 C.goffset, carg2 *C.GCancellable, _cerr **C.GError) (cret C.gboolean) {
+				var seekable    Instance        // go GSeekable subclass
+				var cancellable context.Context // in, none, converted, nullable
+				var offset      int64           // in, none, casted, casted C.gint64
+				var goret       bool            // return
+				var _goerr      error           // out, full, converted
+
+				seekable = UnsafeSeekableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg2 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
+				}
+				offset = int64(carg1)
+
+				goret, _goerr = overrides.TruncateFn(seekable, cancellable, offset)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 }
 
@@ -34994,14 +40388,62 @@ func UnsafeApplySocketConnectableOverrides[Instance SocketConnectable](gclass un
 
 	if overrides.Enumerate != nil {
 		pclass.enumerate = (*[0]byte)(C._gotk4_gio2_SocketConnectable_enumerate)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_SocketConnectable_enumerate",
+			func(carg0 *C.GSocketConnectable) (cret *C.GSocketAddressEnumerator) {
+				var connectable Instance                // go GSocketConnectable subclass
+				var goret       SocketAddressEnumerator // return, full, converted
+
+				connectable = UnsafeSocketConnectableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.Enumerate(connectable)
+
+				cret = (*C.GSocketAddressEnumerator)(UnsafeSocketAddressEnumeratorToGlibFull(goret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.ProxyEnumerate != nil {
 		pclass.proxy_enumerate = (*[0]byte)(C._gotk4_gio2_SocketConnectable_proxy_enumerate)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_SocketConnectable_proxy_enumerate",
+			func(carg0 *C.GSocketConnectable) (cret *C.GSocketAddressEnumerator) {
+				var connectable Instance                // go GSocketConnectable subclass
+				var goret       SocketAddressEnumerator // return, full, converted
+
+				connectable = UnsafeSocketConnectableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.ProxyEnumerate(connectable)
+
+				cret = (*C.GSocketAddressEnumerator)(UnsafeSocketAddressEnumeratorToGlibFull(goret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.ToString != nil {
 		pclass.to_string = (*[0]byte)(C._gotk4_gio2_SocketConnectable_to_string)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_SocketConnectable_to_string",
+			func(carg0 *C.GSocketConnectable) (cret *C.gchar) {
+				var connectable Instance // go GSocketConnectable subclass
+				var goret       string   // return, full, string
+
+				connectable = UnsafeSocketConnectableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.ToString(connectable)
+
+				cret = (*C.gchar)(unsafe.Pointer(C.CString(goret)))
+
+				return cret
+			},
+		)
 	}
 }
 
@@ -35437,14 +40879,66 @@ func UnsafeApplyTlsBackendOverrides[Instance TlsBackend](gclass unsafe.Pointer, 
 
 	if overrides.GetDefaultDatabase != nil {
 		pclass.get_default_database = (*[0]byte)(C._gotk4_gio2_TlsBackend_get_default_database)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_TlsBackend_get_default_database",
+			func(carg0 *C.GTlsBackend) (cret *C.GTlsDatabase) {
+				var backend Instance    // go GTlsBackend subclass
+				var goret   TlsDatabase // return, full, converted
+
+				backend = UnsafeTlsBackendFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetDefaultDatabase(backend)
+
+				cret = (*C.GTlsDatabase)(UnsafeTlsDatabaseToGlibFull(goret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.SupportsDTLS != nil {
 		pclass.supports_dtls = (*[0]byte)(C._gotk4_gio2_TlsBackend_supports_dtls)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_TlsBackend_supports_dtls",
+			func(carg0 *C.GTlsBackend) (cret C.gboolean) {
+				var backend Instance // go GTlsBackend subclass
+				var goret   bool     // return
+
+				backend = UnsafeTlsBackendFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.SupportsDTLS(backend)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.SupportsTLS != nil {
 		pclass.supports_tls = (*[0]byte)(C._gotk4_gio2_TlsBackend_supports_tls)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_TlsBackend_supports_tls",
+			func(carg0 *C.GTlsBackend) (cret C.gboolean) {
+				var backend Instance // go GTlsBackend subclass
+				var goret   bool     // return
+
+				backend = UnsafeTlsBackendFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.SupportsTLS(backend)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 }
 
@@ -35888,6 +41382,19 @@ func UnsafeApplyTlsClientConnectionOverrides[Instance TlsClientConnection](gclas
 
 	if overrides.CopySessionState != nil {
 		pclass.copy_session_state = (*[0]byte)(C._gotk4_gio2_TlsClientConnection_copy_session_state)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_TlsClientConnection_copy_session_state",
+			func(carg0 *C.GTlsClientConnection, carg1 *C.GTlsClientConnection) {
+				var conn   Instance            // go GTlsClientConnection subclass
+				var source TlsClientConnection // in, none, converted
+
+				conn = UnsafeTlsClientConnectionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				source = UnsafeTlsClientConnectionFromGlibNone(unsafe.Pointer(carg1))
+
+				overrides.CopySessionState(conn, source)
+			},
+		)
 	}
 }
 
@@ -37200,86 +42707,488 @@ func UnsafeApplyVolumeOverrides[Instance Volume](gclass unsafe.Pointer, override
 
 	if overrides.CanEject != nil {
 		pclass.can_eject = (*[0]byte)(C._gotk4_gio2_Volume_can_eject)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Volume_can_eject",
+			func(carg0 *C.GVolume) (cret C.gboolean) {
+				var volume Instance // go GVolume subclass
+				var goret  bool     // return
+
+				volume = UnsafeVolumeFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.CanEject(volume)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.CanMount != nil {
 		pclass.can_mount = (*[0]byte)(C._gotk4_gio2_Volume_can_mount)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Volume_can_mount",
+			func(carg0 *C.GVolume) (cret C.gboolean) {
+				var volume Instance // go GVolume subclass
+				var goret  bool     // return
+
+				volume = UnsafeVolumeFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.CanMount(volume)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.Changed != nil {
 		pclass.changed = (*[0]byte)(C._gotk4_gio2_Volume_changed)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Volume_changed",
+			func(carg0 *C.GVolume) {
+				var volume Instance // go GVolume subclass
+
+				volume = UnsafeVolumeFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.Changed(volume)
+			},
+		)
 	}
 
 	if overrides.Eject != nil {
 		pclass.eject = (*[0]byte)(C._gotk4_gio2_Volume_eject)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Volume_eject",
+			func(carg0 *C.GVolume, carg1 C.GMountUnmountFlags, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
+				var volume      Instance           // go GVolume subclass
+				var cancellable context.Context    // in, none, converted, nullable
+				var flags       MountUnmountFlags  // in, none, casted
+				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg4, nullable
+
+				volume = UnsafeVolumeFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg2 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
+				}
+				flags = MountUnmountFlags(carg1)
+				if carg3 != nil {
+					_ = callback
+					_ = carg3
+					_ = _
+					_ = carg4
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.Eject(volume, cancellable, flags, callback)
+			},
+		)
 	}
 
 	if overrides.EjectFinish != nil {
 		pclass.eject_finish = (*[0]byte)(C._gotk4_gio2_Volume_eject_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Volume_eject_finish",
+			func(carg0 *C.GVolume, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+				var volume Instance    // go GVolume subclass
+				var result AsyncResult // in, none, converted
+				var goret  bool        // return
+				var _goerr error       // out, full, converted
+
+				volume = UnsafeVolumeFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.EjectFinish(volume, result)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.EjectWithOperation != nil {
 		pclass.eject_with_operation = (*[0]byte)(C._gotk4_gio2_Volume_eject_with_operation)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Volume_eject_with_operation",
+			func(carg0 *C.GVolume, carg1 C.GMountUnmountFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
+				var volume         Instance           // go GVolume subclass
+				var cancellable    context.Context    // in, none, converted, nullable
+				var flags          MountUnmountFlags  // in, none, casted
+				var mountOperation MountOperation     // in, none, converted, nullable
+				var callback       AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg5, nullable
+
+				volume = UnsafeVolumeFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg3 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
+				}
+				flags = MountUnmountFlags(carg1)
+				if carg2 != nil {
+					mountOperation = UnsafeMountOperationFromGlibNone(unsafe.Pointer(carg2))
+				}
+				if carg4 != nil {
+					_ = callback
+					_ = carg4
+					_ = _
+					_ = carg5
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.EjectWithOperation(volume, cancellable, flags, mountOperation, callback)
+			},
+		)
 	}
 
 	if overrides.EjectWithOperationFinish != nil {
 		pclass.eject_with_operation_finish = (*[0]byte)(C._gotk4_gio2_Volume_eject_with_operation_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Volume_eject_with_operation_finish",
+			func(carg0 *C.GVolume, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+				var volume Instance    // go GVolume subclass
+				var result AsyncResult // in, none, converted
+				var goret  bool        // return
+				var _goerr error       // out, full, converted
+
+				volume = UnsafeVolumeFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.EjectWithOperationFinish(volume, result)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.EnumerateIdentifiers != nil {
 		pclass.enumerate_identifiers = (*[0]byte)(C._gotk4_gio2_Volume_enumerate_identifiers)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Volume_enumerate_identifiers",
+			func(carg0 *C.GVolume) (cret **C.char) {
+				var volume Instance // go GVolume subclass
+				var goret  []string // return, transfer: full, C Pointers: 2, Name: array[utf8], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
+
+				volume = UnsafeVolumeFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.EnumerateIdentifiers(volume)
+
+				_ = goret
+				_ = cret
+				panic("unimplemented conversion of []string (char**)")
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetActivationRoot != nil {
 		pclass.get_activation_root = (*[0]byte)(C._gotk4_gio2_Volume_get_activation_root)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Volume_get_activation_root",
+			func(carg0 *C.GVolume) (cret *C.GFile) {
+				var volume Instance // go GVolume subclass
+				var goret  File     // return, full, converted, nullable
+
+				volume = UnsafeVolumeFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetActivationRoot(volume)
+
+				if goret != nil {
+					cret = (*C.GFile)(UnsafeFileToGlibFull(goret))
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetDrive != nil {
 		pclass.get_drive = (*[0]byte)(C._gotk4_gio2_Volume_get_drive)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Volume_get_drive",
+			func(carg0 *C.GVolume) (cret *C.GDrive) {
+				var volume Instance // go GVolume subclass
+				var goret  Drive    // return, full, converted, nullable
+
+				volume = UnsafeVolumeFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetDrive(volume)
+
+				if goret != nil {
+					cret = (*C.GDrive)(UnsafeDriveToGlibFull(goret))
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetIcon != nil {
 		pclass.get_icon = (*[0]byte)(C._gotk4_gio2_Volume_get_icon)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Volume_get_icon",
+			func(carg0 *C.GVolume) (cret *C.GIcon) {
+				var volume Instance // go GVolume subclass
+				var goret  Icon     // return, full, converted
+
+				volume = UnsafeVolumeFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetIcon(volume)
+
+				cret = (*C.GIcon)(UnsafeIconToGlibFull(goret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetIdentifier != nil {
 		pclass.get_identifier = (*[0]byte)(C._gotk4_gio2_Volume_get_identifier)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Volume_get_identifier",
+			func(carg0 *C.GVolume, carg1 *C.char) (cret *C.char) {
+				var volume Instance // go GVolume subclass
+				var kind   string   // in, none, string, casted *C.gchar
+				var goret  string   // return, full, string, nullable-string
+
+				volume = UnsafeVolumeFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				kind = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+
+				goret = overrides.GetIdentifier(volume, kind)
+
+				if goret != "" {
+					cret = (*C.char)(unsafe.Pointer(C.CString(goret)))
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetMount != nil {
 		pclass.get_mount = (*[0]byte)(C._gotk4_gio2_Volume_get_mount)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Volume_get_mount",
+			func(carg0 *C.GVolume) (cret *C.GMount) {
+				var volume Instance // go GVolume subclass
+				var goret  Mount    // return, full, converted, nullable
+
+				volume = UnsafeVolumeFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetMount(volume)
+
+				if goret != nil {
+					cret = (*C.GMount)(UnsafeMountToGlibFull(goret))
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetName != nil {
 		pclass.get_name = (*[0]byte)(C._gotk4_gio2_Volume_get_name)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Volume_get_name",
+			func(carg0 *C.GVolume) (cret *C.char) {
+				var volume Instance // go GVolume subclass
+				var goret  string   // return, full, string, casted *C.gchar
+
+				volume = UnsafeVolumeFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetName(volume)
+
+				cret = (*C.char)(unsafe.Pointer(C.CString(goret)))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetSortKey != nil {
 		pclass.get_sort_key = (*[0]byte)(C._gotk4_gio2_Volume_get_sort_key)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Volume_get_sort_key",
+			func(carg0 *C.GVolume) (cret *C.gchar) {
+				var volume Instance // go GVolume subclass
+				var goret  string   // return, none, string, nullable-string
+
+				volume = UnsafeVolumeFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetSortKey(volume)
+
+				if goret != "" {
+					cret = (*C.gchar)(unsafe.Pointer(C.CString(goret)))
+					defer C.free(unsafe.Pointer(cret))
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetSymbolicIcon != nil {
 		pclass.get_symbolic_icon = (*[0]byte)(C._gotk4_gio2_Volume_get_symbolic_icon)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Volume_get_symbolic_icon",
+			func(carg0 *C.GVolume) (cret *C.GIcon) {
+				var volume Instance // go GVolume subclass
+				var goret  Icon     // return, full, converted
+
+				volume = UnsafeVolumeFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetSymbolicIcon(volume)
+
+				cret = (*C.GIcon)(UnsafeIconToGlibFull(goret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetUUID != nil {
 		pclass.get_uuid = (*[0]byte)(C._gotk4_gio2_Volume_get_uuid)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Volume_get_uuid",
+			func(carg0 *C.GVolume) (cret *C.char) {
+				var volume Instance // go GVolume subclass
+				var goret  string   // return, full, string, nullable-string
+
+				volume = UnsafeVolumeFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetUUID(volume)
+
+				if goret != "" {
+					cret = (*C.char)(unsafe.Pointer(C.CString(goret)))
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.MountFinish != nil {
 		pclass.mount_finish = (*[0]byte)(C._gotk4_gio2_Volume_mount_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Volume_mount_finish",
+			func(carg0 *C.GVolume, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+				var volume Instance    // go GVolume subclass
+				var result AsyncResult // in, none, converted
+				var goret  bool        // return
+				var _goerr error       // out, full, converted
+
+				volume = UnsafeVolumeFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.MountFinish(volume, result)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.MountFn != nil {
 		pclass.mount_fn = (*[0]byte)(C._gotk4_gio2_Volume_mount_fn)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Volume_mount_fn",
+			func(carg0 *C.GVolume, carg1 C.GMountMountFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
+				var volume         Instance           // go GVolume subclass
+				var cancellable    context.Context    // in, none, converted, nullable
+				var flags          MountMountFlags    // in, none, casted
+				var mountOperation MountOperation     // in, none, converted, nullable
+				var callback       AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg5, nullable
+
+				volume = UnsafeVolumeFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg3 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
+				}
+				flags = MountMountFlags(carg1)
+				if carg2 != nil {
+					mountOperation = UnsafeMountOperationFromGlibNone(unsafe.Pointer(carg2))
+				}
+				if carg4 != nil {
+					_ = callback
+					_ = carg4
+					_ = _
+					_ = carg5
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.MountFn(volume, cancellable, flags, mountOperation, callback)
+			},
+		)
 	}
 
 	if overrides.Removed != nil {
 		pclass.removed = (*[0]byte)(C._gotk4_gio2_Volume_removed)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Volume_removed",
+			func(carg0 *C.GVolume) {
+				var volume Instance // go GVolume subclass
+
+				volume = UnsafeVolumeFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.Removed(volume)
+			},
+		)
 	}
 
 	if overrides.ShouldAutomount != nil {
 		pclass.should_automount = (*[0]byte)(C._gotk4_gio2_Volume_should_automount)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Volume_should_automount",
+			func(carg0 *C.GVolume) (cret C.gboolean) {
+				var volume Instance // go GVolume subclass
+				var goret  bool     // return
+
+				volume = UnsafeVolumeFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.ShouldAutomount(volume)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 }
 
@@ -38071,7 +43980,46 @@ func UnsafeApplyAppLaunchContextOverrides[Instance AppLaunchContext](gclass unsa
 
 	if overrides.LaunchFailed != nil {
 		pclass.launch_failed = (*[0]byte)(C._gotk4_gio2_AppLaunchContext_launch_failed)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_AppLaunchContext_launch_failed",
+			func(carg0 *C.GAppLaunchContext, carg1 *C.char) {
+				var _context        Instance // go GAppLaunchContext subclass
+				var startupNotifyId string   // in, none, string, casted *C.gchar
+
+				_context = UnsafeAppLaunchContextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				startupNotifyId = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+
+				overrides.LaunchFailed(_context, startupNotifyId)
+			},
+		)
 	}
+}
+
+// RegisterAppLaunchContextSubClass is used to register a go subclass of GAppLaunchContext. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterAppLaunchContextSubClass[InstanceT AppLaunchContext](
+		name string,
+		classInit func(class *AppLaunchContextClass),
+		constructor func() InstanceT,
+		overrides AppLaunchContextOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeAppLaunchContext,
+		UnsafeAppLaunchContextClassFromGlibBorrow,
+		UnsafeApplyAppLaunchContextOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapAppLaunchContext(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // ApplicationInstance is the instance type used by all types extending GApplication. It is used internally by the bindings. Users should use the interface [Application] instead.
@@ -40490,51 +46438,256 @@ func UnsafeApplyApplicationOverrides[Instance Application](gclass unsafe.Pointer
 
 	if overrides.Activate != nil {
 		pclass.activate = (*[0]byte)(C._gotk4_gio2_Application_activate)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Application_activate",
+			func(carg0 *C.GApplication) {
+				var application Instance // go GApplication subclass
+
+				application = UnsafeApplicationFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.Activate(application)
+			},
+		)
 	}
 
 	if overrides.AddPlatformData != nil {
 		pclass.add_platform_data = (*[0]byte)(C._gotk4_gio2_Application_add_platform_data)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Application_add_platform_data",
+			func(carg0 *C.GApplication, carg1 *C.GVariantBuilder) {
+				var application Instance             // go GApplication subclass
+				var builder     *glib.VariantBuilder // in, none, converted
+
+				application = UnsafeApplicationFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				builder = glib.UnsafeVariantBuilderFromGlibNone(unsafe.Pointer(carg1))
+
+				overrides.AddPlatformData(application, builder)
+			},
+		)
 	}
 
 	if overrides.CommandLine != nil {
 		pclass.command_line = (*[0]byte)(C._gotk4_gio2_Application_command_line)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Application_command_line",
+			func(carg0 *C.GApplication, carg1 *C.GApplicationCommandLine) (cret C.int) {
+				var application Instance               // go GApplication subclass
+				var commandLine ApplicationCommandLine // in, none, converted
+				var goret       int                    // return, none, casted, casted C.gint
+
+				application = UnsafeApplicationFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				commandLine = UnsafeApplicationCommandLineFromGlibNone(unsafe.Pointer(carg1))
+
+				goret = overrides.CommandLine(application, commandLine)
+
+				cret = C.int(goret)
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.DBusRegister != nil {
 		pclass.dbus_register = (*[0]byte)(C._gotk4_gio2_Application_dbus_register)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Application_dbus_register",
+			func(carg0 *C.GApplication, carg1 *C.GDBusConnection, carg2 *C.gchar, _cerr **C.GError) (cret C.gboolean) {
+				var application Instance       // go GApplication subclass
+				var connection  DBusConnection // in, none, converted
+				var objectPath  string         // in, none, string
+				var goret       bool           // return
+				var _goerr      error          // out, full, converted
+
+				application = UnsafeApplicationFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				connection = UnsafeDBusConnectionFromGlibNone(unsafe.Pointer(carg1))
+				objectPath = C.GoString((*C.char)(unsafe.Pointer(carg2)))
+
+				goret, _goerr = overrides.DBusRegister(application, connection, objectPath)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.DBusUnregister != nil {
 		pclass.dbus_unregister = (*[0]byte)(C._gotk4_gio2_Application_dbus_unregister)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Application_dbus_unregister",
+			func(carg0 *C.GApplication, carg1 *C.GDBusConnection, carg2 *C.gchar) {
+				var application Instance       // go GApplication subclass
+				var connection  DBusConnection // in, none, converted
+				var objectPath  string         // in, none, string
+
+				application = UnsafeApplicationFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				connection = UnsafeDBusConnectionFromGlibNone(unsafe.Pointer(carg1))
+				objectPath = C.GoString((*C.char)(unsafe.Pointer(carg2)))
+
+				overrides.DBusUnregister(application, connection, objectPath)
+			},
+		)
 	}
 
 	if overrides.HandleLocalOptions != nil {
 		pclass.handle_local_options = (*[0]byte)(C._gotk4_gio2_Application_handle_local_options)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Application_handle_local_options",
+			func(carg0 *C.GApplication, carg1 *C.GVariantDict) (cret C.gint) {
+				var application Instance          // go GApplication subclass
+				var options     *glib.VariantDict // in, none, converted
+				var goret       int               // return, none, casted
+
+				application = UnsafeApplicationFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				options = glib.UnsafeVariantDictFromGlibNone(unsafe.Pointer(carg1))
+
+				goret = overrides.HandleLocalOptions(application, options)
+
+				cret = C.gint(goret)
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.NameLost != nil {
 		pclass.name_lost = (*[0]byte)(C._gotk4_gio2_Application_name_lost)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Application_name_lost",
+			func(carg0 *C.GApplication) (cret C.gboolean) {
+				var application Instance // go GApplication subclass
+				var goret       bool     // return
+
+				application = UnsafeApplicationFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.NameLost(application)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.Open != nil {
 		pclass.open = (*[0]byte)(C._gotk4_gio2_Application_open)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Application_open",
+			func(carg0 *C.GApplication, carg1 **C.GFile, carg2 C.gint, carg3 *C.gchar) {
+				var application Instance // go GApplication subclass
+				var files       []File   // in, transfer: none, C Pointers: 2, Name: array[File], array (inner: *typesystem.Interface, length-by: carg2)
+				var hint        string   // in, none, string
+
+				application = UnsafeApplicationFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				_ = files
+				_ = carg1
+				_ = carg2
+				panic("unimplemented conversion of []File (GFile**)")
+				hint = C.GoString((*C.char)(unsafe.Pointer(carg3)))
+
+				overrides.Open(application, files, hint)
+			},
+		)
 	}
 
 	if overrides.QuitMainloop != nil {
 		pclass.quit_mainloop = (*[0]byte)(C._gotk4_gio2_Application_quit_mainloop)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Application_quit_mainloop",
+			func(carg0 *C.GApplication) {
+				var application Instance // go GApplication subclass
+
+				application = UnsafeApplicationFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.QuitMainloop(application)
+			},
+		)
 	}
 
 	if overrides.RunMainloop != nil {
 		pclass.run_mainloop = (*[0]byte)(C._gotk4_gio2_Application_run_mainloop)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Application_run_mainloop",
+			func(carg0 *C.GApplication) {
+				var application Instance // go GApplication subclass
+
+				application = UnsafeApplicationFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.RunMainloop(application)
+			},
+		)
 	}
 
 	if overrides.Shutdown != nil {
 		pclass.shutdown = (*[0]byte)(C._gotk4_gio2_Application_shutdown)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Application_shutdown",
+			func(carg0 *C.GApplication) {
+				var application Instance // go GApplication subclass
+
+				application = UnsafeApplicationFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.Shutdown(application)
+			},
+		)
 	}
 
 	if overrides.Startup != nil {
 		pclass.startup = (*[0]byte)(C._gotk4_gio2_Application_startup)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Application_startup",
+			func(carg0 *C.GApplication) {
+				var application Instance // go GApplication subclass
+
+				application = UnsafeApplicationFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.Startup(application)
+			},
+		)
 	}
+}
+
+// RegisterApplicationSubClass is used to register a go subclass of GApplication. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterApplicationSubClass[InstanceT Application](
+		name string,
+		classInit func(class *ApplicationClass),
+		constructor func() InstanceT,
+		overrides ApplicationOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeApplication,
+		UnsafeApplicationClassFromGlibBorrow,
+		UnsafeApplyApplicationOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapApplication(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // ApplicationCommandLineInstance is the instance type used by all types extending GApplicationCommandLine. It is used internally by the bindings. Users should use the interface [ApplicationCommandLine] instead.
@@ -41432,19 +47585,100 @@ func UnsafeApplyApplicationCommandLineOverrides[Instance ApplicationCommandLine]
 
 	if overrides.Done != nil {
 		pclass.done = (*[0]byte)(C._gotk4_gio2_ApplicationCommandLine_done)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_ApplicationCommandLine_done",
+			func(carg0 *C.GApplicationCommandLine) {
+				var cmdline Instance // go GApplicationCommandLine subclass
+
+				cmdline = UnsafeApplicationCommandLineFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.Done(cmdline)
+			},
+		)
 	}
 
 	if overrides.GetStdin != nil {
 		pclass.get_stdin = (*[0]byte)(C._gotk4_gio2_ApplicationCommandLine_get_stdin)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_ApplicationCommandLine_get_stdin",
+			func(carg0 *C.GApplicationCommandLine) (cret *C.GInputStream) {
+				var cmdline Instance    // go GApplicationCommandLine subclass
+				var goret   InputStream // return, full, converted, nullable
+
+				cmdline = UnsafeApplicationCommandLineFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetStdin(cmdline)
+
+				if goret != nil {
+					cret = (*C.GInputStream)(UnsafeInputStreamToGlibFull(goret))
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.PrintLiteral != nil {
 		pclass.print_literal = (*[0]byte)(C._gotk4_gio2_ApplicationCommandLine_print_literal)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_ApplicationCommandLine_print_literal",
+			func(carg0 *C.GApplicationCommandLine, carg1 *C.gchar) {
+				var cmdline Instance // go GApplicationCommandLine subclass
+				var message string   // in, none, string
+
+				cmdline = UnsafeApplicationCommandLineFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				message = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+
+				overrides.PrintLiteral(cmdline, message)
+			},
+		)
 	}
 
 	if overrides.PrinterrLiteral != nil {
 		pclass.printerr_literal = (*[0]byte)(C._gotk4_gio2_ApplicationCommandLine_printerr_literal)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_ApplicationCommandLine_printerr_literal",
+			func(carg0 *C.GApplicationCommandLine, carg1 *C.gchar) {
+				var cmdline Instance // go GApplicationCommandLine subclass
+				var message string   // in, none, string
+
+				cmdline = UnsafeApplicationCommandLineFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				message = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+
+				overrides.PrinterrLiteral(cmdline, message)
+			},
+		)
 	}
+}
+
+// RegisterApplicationCommandLineSubClass is used to register a go subclass of GApplicationCommandLine. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterApplicationCommandLineSubClass[InstanceT ApplicationCommandLine](
+		name string,
+		classInit func(class *ApplicationCommandLineClass),
+		constructor func() InstanceT,
+		overrides ApplicationCommandLineOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeApplicationCommandLine,
+		UnsafeApplicationCommandLineClassFromGlibBorrow,
+		UnsafeApplyApplicationCommandLineOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapApplicationCommandLine(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // BytesIconInstance is the instance type used by all types extending GBytesIcon. It is used internally by the bindings. Users should use the interface [BytesIcon] instead.
@@ -41756,6 +47990,32 @@ type CharsetConverterOverrides[Instance CharsetConverter] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplyCharsetConverterOverrides[Instance CharsetConverter](gclass unsafe.Pointer, overrides CharsetConverterOverrides[Instance]) {
 	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
+}
+
+// RegisterCharsetConverterSubClass is used to register a go subclass of GCharsetConverter. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterCharsetConverterSubClass[InstanceT CharsetConverter](
+		name string,
+		classInit func(class *CharsetConverterClass),
+		constructor func() InstanceT,
+		overrides CharsetConverterOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeCharsetConverter,
+		UnsafeCharsetConverterClassFromGlibBorrow,
+		UnsafeApplyCharsetConverterOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapCharsetConverter(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // CredentialsInstance is the instance type used by all types extending GCredentials. It is used internally by the bindings. Users should use the interface [Credentials] instead.
@@ -45130,19 +51390,108 @@ func UnsafeApplyDBusInterfaceSkeletonOverrides[Instance DBusInterfaceSkeleton](g
 
 	if overrides.Flush != nil {
 		pclass.flush = (*[0]byte)(C._gotk4_gio2_DBusInterfaceSkeleton_flush)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_DBusInterfaceSkeleton_flush",
+			func(carg0 *C.GDBusInterfaceSkeleton) {
+				var interface_ Instance // go GDBusInterfaceSkeleton subclass
+
+				interface_ = UnsafeDBusInterfaceSkeletonFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.Flush(interface_)
+			},
+		)
 	}
 
 	if overrides.GAuthorizeMethod != nil {
 		pclass.g_authorize_method = (*[0]byte)(C._gotk4_gio2_DBusInterfaceSkeleton_g_authorize_method)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_DBusInterfaceSkeleton_g_authorize_method",
+			func(carg0 *C.GDBusInterfaceSkeleton, carg1 *C.GDBusMethodInvocation) (cret C.gboolean) {
+				var interface_ Instance             // go GDBusInterfaceSkeleton subclass
+				var invocation DBusMethodInvocation // in, none, converted
+				var goret      bool                 // return
+
+				interface_ = UnsafeDBusInterfaceSkeletonFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				invocation = UnsafeDBusMethodInvocationFromGlibNone(unsafe.Pointer(carg1))
+
+				goret = overrides.GAuthorizeMethod(interface_, invocation)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetInfo != nil {
 		pclass.get_info = (*[0]byte)(C._gotk4_gio2_DBusInterfaceSkeleton_get_info)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_DBusInterfaceSkeleton_get_info",
+			func(carg0 *C.GDBusInterfaceSkeleton) (cret *C.GDBusInterfaceInfo) {
+				var interface_ Instance           // go GDBusInterfaceSkeleton subclass
+				var goret      *DBusInterfaceInfo // return, none, converted
+
+				interface_ = UnsafeDBusInterfaceSkeletonFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetInfo(interface_)
+
+				cret = (*C.GDBusInterfaceInfo)(UnsafeDBusInterfaceInfoToGlibNone(goret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetVtable != nil {
 		pclass.get_vtable = (*[0]byte)(C._gotk4_gio2_DBusInterfaceSkeleton_get_vtable)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_DBusInterfaceSkeleton_get_vtable",
+			func(carg0 *C.GDBusInterfaceSkeleton) (cret *C.GDBusInterfaceVTable) {
+				var interface_ Instance             // go GDBusInterfaceSkeleton subclass
+				var goret      *DBusInterfaceVTable // return, none, converted
+
+				interface_ = UnsafeDBusInterfaceSkeletonFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetVtable(interface_)
+
+				cret = (*C.GDBusInterfaceVTable)(UnsafeDBusInterfaceVTableToGlibNone(goret))
+
+				return cret
+			},
+		)
 	}
+}
+
+// RegisterDBusInterfaceSkeletonSubClass is used to register a go subclass of GDBusInterfaceSkeleton. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterDBusInterfaceSkeletonSubClass[InstanceT DBusInterfaceSkeleton](
+		name string,
+		classInit func(class *DBusInterfaceSkeletonClass),
+		constructor func() InstanceT,
+		overrides DBusInterfaceSkeletonOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeDBusInterfaceSkeleton,
+		UnsafeDBusInterfaceSkeletonClassFromGlibBorrow,
+		UnsafeApplyDBusInterfaceSkeletonOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapDBusInterfaceSkeleton(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // DBusMessageInstance is the instance type used by all types extending GDBusMessage. It is used internally by the bindings. Users should use the interface [DBusMessage] instead.
@@ -47455,6 +53804,32 @@ func UnsafeApplyDBusObjectManagerClientOverrides[Instance DBusObjectManagerClien
 	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
 }
 
+// RegisterDBusObjectManagerClientSubClass is used to register a go subclass of GDBusObjectManagerClient. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterDBusObjectManagerClientSubClass[InstanceT DBusObjectManagerClient](
+		name string,
+		classInit func(class *DBusObjectManagerClientClass),
+		constructor func() InstanceT,
+		overrides DBusObjectManagerClientOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeDBusObjectManagerClient,
+		UnsafeDBusObjectManagerClientClassFromGlibBorrow,
+		UnsafeApplyDBusObjectManagerClientOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapDBusObjectManagerClient(obj)
+		},
+		interfaceInits...,
+	)
+}
+
 // DBusObjectManagerServerInstance is the instance type used by all types extending GDBusObjectManagerServer. It is used internally by the bindings. Users should use the interface [DBusObjectManagerServer] instead.
 type DBusObjectManagerServerInstance struct {
 	_ [0]func() // equal guard
@@ -47813,6 +54188,32 @@ func UnsafeApplyDBusObjectManagerServerOverrides[Instance DBusObjectManagerServe
 	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
 }
 
+// RegisterDBusObjectManagerServerSubClass is used to register a go subclass of GDBusObjectManagerServer. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterDBusObjectManagerServerSubClass[InstanceT DBusObjectManagerServer](
+		name string,
+		classInit func(class *DBusObjectManagerServerClass),
+		constructor func() InstanceT,
+		overrides DBusObjectManagerServerOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeDBusObjectManagerServer,
+		UnsafeDBusObjectManagerServerClassFromGlibBorrow,
+		UnsafeApplyDBusObjectManagerServerOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapDBusObjectManagerServer(obj)
+		},
+		interfaceInits...,
+	)
+}
+
 // DBusObjectProxyInstance is the instance type used by all types extending GDBusObjectProxy. It is used internally by the bindings. Users should use the interface [DBusObjectProxy] instead.
 type DBusObjectProxyInstance struct {
 	_ [0]func() // equal guard
@@ -47943,6 +54344,32 @@ type DBusObjectProxyOverrides[Instance DBusObjectProxy] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplyDBusObjectProxyOverrides[Instance DBusObjectProxy](gclass unsafe.Pointer, overrides DBusObjectProxyOverrides[Instance]) {
 	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
+}
+
+// RegisterDBusObjectProxySubClass is used to register a go subclass of GDBusObjectProxy. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterDBusObjectProxySubClass[InstanceT DBusObjectProxy](
+		name string,
+		classInit func(class *DBusObjectProxyClass),
+		constructor func() InstanceT,
+		overrides DBusObjectProxyOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeDBusObjectProxy,
+		UnsafeDBusObjectProxyClassFromGlibBorrow,
+		UnsafeApplyDBusObjectProxyOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapDBusObjectProxy(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // DBusObjectSkeletonInstance is the instance type used by all types extending GDBusObjectSkeleton. It is used internally by the bindings. Users should use the interface [DBusObjectSkeleton] instead.
@@ -48228,7 +54655,55 @@ func UnsafeApplyDBusObjectSkeletonOverrides[Instance DBusObjectSkeleton](gclass 
 
 	if overrides.AuthorizeMethod != nil {
 		pclass.authorize_method = (*[0]byte)(C._gotk4_gio2_DBusObjectSkeleton_authorize_method)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_DBusObjectSkeleton_authorize_method",
+			func(carg0 *C.GDBusObjectSkeleton, carg1 *C.GDBusInterfaceSkeleton, carg2 *C.GDBusMethodInvocation) (cret C.gboolean) {
+				var object     Instance              // go GDBusObjectSkeleton subclass
+				var interface_ DBusInterfaceSkeleton // in, none, converted
+				var invocation DBusMethodInvocation  // in, none, converted
+				var goret      bool                  // return
+
+				object = UnsafeDBusObjectSkeletonFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				interface_ = UnsafeDBusInterfaceSkeletonFromGlibNone(unsafe.Pointer(carg1))
+				invocation = UnsafeDBusMethodInvocationFromGlibNone(unsafe.Pointer(carg2))
+
+				goret = overrides.AuthorizeMethod(object, interface_, invocation)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
+}
+
+// RegisterDBusObjectSkeletonSubClass is used to register a go subclass of GDBusObjectSkeleton. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterDBusObjectSkeletonSubClass[InstanceT DBusObjectSkeleton](
+		name string,
+		classInit func(class *DBusObjectSkeletonClass),
+		constructor func() InstanceT,
+		overrides DBusObjectSkeletonOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeDBusObjectSkeleton,
+		UnsafeDBusObjectSkeletonClassFromGlibBorrow,
+		UnsafeApplyDBusObjectSkeletonOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapDBusObjectSkeleton(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // DBusProxyInstance is the instance type used by all types extending GDBusProxy. It is used internally by the bindings. Users should use the interface [DBusProxy] instead.
@@ -49085,6 +55560,32 @@ func UnsafeApplyDBusProxyOverrides[Instance DBusProxy](gclass unsafe.Pointer, ov
 	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
 }
 
+// RegisterDBusProxySubClass is used to register a go subclass of GDBusProxy. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterDBusProxySubClass[InstanceT DBusProxy](
+		name string,
+		classInit func(class *DBusProxyClass),
+		constructor func() InstanceT,
+		overrides DBusProxyOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeDBusProxy,
+		UnsafeDBusProxyClassFromGlibBorrow,
+		UnsafeApplyDBusProxyOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapDBusProxy(obj)
+		},
+		interfaceInits...,
+	)
+}
+
 // DBusServerInstance is the instance type used by all types extending GDBusServer. It is used internally by the bindings. Users should use the interface [DBusServer] instead.
 type DBusServerInstance struct {
 	_ [0]func() // equal guard
@@ -49768,7 +56269,53 @@ func UnsafeApplyDebugControllerDBusOverrides[Instance DebugControllerDBus](gclas
 
 	if overrides.Authorize != nil {
 		pclass.authorize = (*[0]byte)(C._gotk4_gio2_DebugControllerDBus_authorize)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_DebugControllerDBus_authorize",
+			func(carg0 *C.GDebugControllerDBus, carg1 *C.GDBusMethodInvocation) (cret C.gboolean) {
+				var controller Instance             // go GDebugControllerDBus subclass
+				var invocation DBusMethodInvocation // in, none, converted
+				var goret      bool                 // return
+
+				controller = UnsafeDebugControllerDBusFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				invocation = UnsafeDBusMethodInvocationFromGlibNone(unsafe.Pointer(carg1))
+
+				goret = overrides.Authorize(controller, invocation)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
+}
+
+// RegisterDebugControllerDBusSubClass is used to register a go subclass of GDebugControllerDBus. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterDebugControllerDBusSubClass[InstanceT DebugControllerDBus](
+		name string,
+		classInit func(class *DebugControllerDBusClass),
+		constructor func() InstanceT,
+		overrides DebugControllerDBusOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeDebugControllerDBus,
+		UnsafeDebugControllerDBusClassFromGlibBorrow,
+		UnsafeApplyDebugControllerDBusOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapDebugControllerDBus(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // EmblemInstance is the instance type used by all types extending GEmblem. It is used internally by the bindings. Users should use the interface [Emblem] instead.
@@ -50160,6 +56707,32 @@ type EmblemedIconOverrides[Instance EmblemedIcon] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplyEmblemedIconOverrides[Instance EmblemedIcon](gclass unsafe.Pointer, overrides EmblemedIconOverrides[Instance]) {
 	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
+}
+
+// RegisterEmblemedIconSubClass is used to register a go subclass of GEmblemedIcon. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterEmblemedIconSubClass[InstanceT EmblemedIcon](
+		name string,
+		classInit func(class *EmblemedIconClass),
+		constructor func() InstanceT,
+		overrides EmblemedIconOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeEmblemedIcon,
+		UnsafeEmblemedIconClassFromGlibBorrow,
+		UnsafeApplyEmblemedIconOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapEmblemedIcon(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // FileEnumeratorInstance is the instance type used by all types extending GFileEnumerator. It is used internally by the bindings. Users should use the interface [FileEnumerator] instead.
@@ -51135,27 +57708,197 @@ func UnsafeApplyFileEnumeratorOverrides[Instance FileEnumerator](gclass unsafe.P
 
 	if overrides.CloseAsync != nil {
 		pclass.close_async = (*[0]byte)(C._gotk4_gio2_FileEnumerator_close_async)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_FileEnumerator_close_async",
+			func(carg0 *C.GFileEnumerator, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
+				var enumerator  Instance           // go GFileEnumerator subclass
+				var cancellable context.Context    // in, none, converted, nullable
+				var ioPriority  int                // in, none, casted, casted C.gint
+				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg4, nullable
+
+				enumerator = UnsafeFileEnumeratorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg2 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
+				}
+				ioPriority = int(carg1)
+				if carg3 != nil {
+					_ = callback
+					_ = carg3
+					_ = _
+					_ = carg4
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.CloseAsync(enumerator, cancellable, ioPriority, callback)
+			},
+		)
 	}
 
 	if overrides.CloseFinish != nil {
 		pclass.close_finish = (*[0]byte)(C._gotk4_gio2_FileEnumerator_close_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_FileEnumerator_close_finish",
+			func(carg0 *C.GFileEnumerator, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+				var enumerator Instance    // go GFileEnumerator subclass
+				var result     AsyncResult // in, none, converted
+				var goret      bool        // return
+				var _goerr     error       // out, full, converted
+
+				enumerator = UnsafeFileEnumeratorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.CloseFinish(enumerator, result)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.CloseFn != nil {
 		pclass.close_fn = (*[0]byte)(C._gotk4_gio2_FileEnumerator_close_fn)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_FileEnumerator_close_fn",
+			func(carg0 *C.GFileEnumerator, carg1 *C.GCancellable, _cerr **C.GError) (cret C.gboolean) {
+				var enumerator  Instance        // go GFileEnumerator subclass
+				var cancellable context.Context // in, none, converted, nullable
+				var goret       bool            // return
+				var _goerr      error           // out, full, converted
+
+				enumerator = UnsafeFileEnumeratorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg1 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg1))
+				}
+
+				goret, _goerr = overrides.CloseFn(enumerator, cancellable)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.NextFile != nil {
 		pclass.next_file = (*[0]byte)(C._gotk4_gio2_FileEnumerator_next_file)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_FileEnumerator_next_file",
+			func(carg0 *C.GFileEnumerator, carg1 *C.GCancellable, _cerr **C.GError) (cret *C.GFileInfo) {
+				var enumerator  Instance        // go GFileEnumerator subclass
+				var cancellable context.Context // in, none, converted, nullable
+				var goret       FileInfo        // return, full, converted, nullable
+				var _goerr      error           // out, full, converted
+
+				enumerator = UnsafeFileEnumeratorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg1 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg1))
+				}
+
+				goret, _goerr = overrides.NextFile(enumerator, cancellable)
+
+				if goret != nil {
+					cret = (*C.GFileInfo)(UnsafeFileInfoToGlibFull(goret))
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.NextFilesAsync != nil {
 		pclass.next_files_async = (*[0]byte)(C._gotk4_gio2_FileEnumerator_next_files_async)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_FileEnumerator_next_files_async",
+			func(carg0 *C.GFileEnumerator, carg1 C.int, carg2 C.int, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
+				var enumerator  Instance           // go GFileEnumerator subclass
+				var cancellable context.Context    // in, none, converted, nullable
+				var numFiles    int                // in, none, casted, casted C.gint
+				var ioPriority  int                // in, none, casted, casted C.gint
+				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg5, nullable
+
+				enumerator = UnsafeFileEnumeratorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg3 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
+				}
+				numFiles = int(carg1)
+				ioPriority = int(carg2)
+				if carg4 != nil {
+					_ = callback
+					_ = carg4
+					_ = _
+					_ = carg5
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.NextFilesAsync(enumerator, cancellable, numFiles, ioPriority, callback)
+			},
+		)
 	}
 
 	if overrides.NextFilesFinish != nil {
 		pclass.next_files_finish = (*[0]byte)(C._gotk4_gio2_FileEnumerator_next_files_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_FileEnumerator_next_files_finish",
+			func(carg0 *C.GFileEnumerator, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GList) {
+				var enumerator Instance    // go GFileEnumerator subclass
+				var result     AsyncResult // in, none, converted
+				var goret      []FileInfo  // return, transfer: full, C Pointers: 1, Name: List, scope: 
+				var _goerr     error       // out, full, converted
+
+				enumerator = UnsafeFileEnumeratorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.NextFilesFinish(enumerator, result)
+
+				_ = goret
+				_ = cret
+				panic("unimplemented conversion of []FileInfo (GList*)")
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
+}
+
+// RegisterFileEnumeratorSubClass is used to register a go subclass of GFileEnumerator. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterFileEnumeratorSubClass[InstanceT FileEnumerator](
+		name string,
+		classInit func(class *FileEnumeratorClass),
+		constructor func() InstanceT,
+		overrides FileEnumeratorOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeFileEnumerator,
+		UnsafeFileEnumeratorClassFromGlibBorrow,
+		UnsafeApplyFileEnumeratorOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapFileEnumerator(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // FileIconInstance is the instance type used by all types extending GFileIcon. It is used internally by the bindings. Users should use the interface [FileIcon] instead.
@@ -54207,11 +60950,72 @@ func UnsafeApplyFileMonitorOverrides[Instance FileMonitor](gclass unsafe.Pointer
 
 	if overrides.Cancel != nil {
 		pclass.cancel = (*[0]byte)(C._gotk4_gio2_FileMonitor_cancel)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_FileMonitor_cancel",
+			func(carg0 *C.GFileMonitor) (cret C.gboolean) {
+				var monitor Instance // go GFileMonitor subclass
+				var goret   bool     // return
+
+				monitor = UnsafeFileMonitorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.Cancel(monitor)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.Changed != nil {
 		pclass.changed = (*[0]byte)(C._gotk4_gio2_FileMonitor_changed)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_FileMonitor_changed",
+			func(carg0 *C.GFileMonitor, carg1 *C.GFile, carg2 *C.GFile, carg3 C.GFileMonitorEvent) {
+				var monitor   Instance         // go GFileMonitor subclass
+				var file      File             // in, none, converted
+				var otherFile File             // in, none, converted
+				var eventType FileMonitorEvent // in, none, casted
+
+				monitor = UnsafeFileMonitorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg1))
+				otherFile = UnsafeFileFromGlibNone(unsafe.Pointer(carg2))
+				eventType = FileMonitorEvent(carg3)
+
+				overrides.Changed(monitor, file, otherFile, eventType)
+			},
+		)
 	}
+}
+
+// RegisterFileMonitorSubClass is used to register a go subclass of GFileMonitor. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterFileMonitorSubClass[InstanceT FileMonitor](
+		name string,
+		classInit func(class *FileMonitorClass),
+		constructor func() InstanceT,
+		overrides FileMonitorOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeFileMonitor,
+		UnsafeFileMonitorClassFromGlibBorrow,
+		UnsafeApplyFileMonitorOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapFileMonitor(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // FilenameCompleterInstance is the instance type used by all types extending GFilenameCompleter. It is used internally by the bindings. Users should use the interface [FilenameCompleter] instead.
@@ -54438,7 +61242,44 @@ func UnsafeApplyFilenameCompleterOverrides[Instance FilenameCompleter](gclass un
 
 	if overrides.GotCompletionData != nil {
 		pclass.got_completion_data = (*[0]byte)(C._gotk4_gio2_FilenameCompleter_got_completion_data)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_FilenameCompleter_got_completion_data",
+			func(carg0 *C.GFilenameCompleter) {
+				var filenameCompleter Instance // go GFilenameCompleter subclass
+
+				filenameCompleter = UnsafeFilenameCompleterFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.GotCompletionData(filenameCompleter)
+			},
+		)
 	}
+}
+
+// RegisterFilenameCompleterSubClass is used to register a go subclass of GFilenameCompleter. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterFilenameCompleterSubClass[InstanceT FilenameCompleter](
+		name string,
+		classInit func(class *FilenameCompleterClass),
+		constructor func() InstanceT,
+		overrides FilenameCompleterOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeFilenameCompleter,
+		UnsafeFilenameCompleterClassFromGlibBorrow,
+		UnsafeApplyFilenameCompleterOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapFilenameCompleter(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // IOModuleInstance is the instance type used by all types extending GIOModule. It is used internally by the bindings. Users should use the interface [IOModule] instead.
@@ -55259,23 +62100,152 @@ func UnsafeApplyIOStreamOverrides[Instance IOStream](gclass unsafe.Pointer, over
 
 	if overrides.CloseAsync != nil {
 		pclass.close_async = (*[0]byte)(C._gotk4_gio2_IOStream_close_async)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_IOStream_close_async",
+			func(carg0 *C.GIOStream, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
+				var stream      Instance           // go GIOStream subclass
+				var cancellable context.Context    // in, none, converted, nullable
+				var ioPriority  int                // in, none, casted, casted C.gint
+				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg4, nullable
+
+				stream = UnsafeIOStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg2 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
+				}
+				ioPriority = int(carg1)
+				if carg3 != nil {
+					_ = callback
+					_ = carg3
+					_ = _
+					_ = carg4
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.CloseAsync(stream, cancellable, ioPriority, callback)
+			},
+		)
 	}
 
 	if overrides.CloseFinish != nil {
 		pclass.close_finish = (*[0]byte)(C._gotk4_gio2_IOStream_close_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_IOStream_close_finish",
+			func(carg0 *C.GIOStream, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+				var stream Instance    // go GIOStream subclass
+				var result AsyncResult // in, none, converted
+				var goret  bool        // return
+				var _goerr error       // out, full, converted
+
+				stream = UnsafeIOStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.CloseFinish(stream, result)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.CloseFn != nil {
 		pclass.close_fn = (*[0]byte)(C._gotk4_gio2_IOStream_close_fn)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_IOStream_close_fn",
+			func(carg0 *C.GIOStream, carg1 *C.GCancellable, _cerr **C.GError) (cret C.gboolean) {
+				var stream      Instance        // go GIOStream subclass
+				var cancellable context.Context // in, none, converted, nullable
+				var goret       bool            // return
+				var _goerr      error           // out, full, converted
+
+				stream = UnsafeIOStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg1 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg1))
+				}
+
+				goret, _goerr = overrides.CloseFn(stream, cancellable)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetInputStream != nil {
 		pclass.get_input_stream = (*[0]byte)(C._gotk4_gio2_IOStream_get_input_stream)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_IOStream_get_input_stream",
+			func(carg0 *C.GIOStream) (cret *C.GInputStream) {
+				var stream Instance    // go GIOStream subclass
+				var goret  InputStream // return, none, converted
+
+				stream = UnsafeIOStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetInputStream(stream)
+
+				cret = (*C.GInputStream)(UnsafeInputStreamToGlibNone(goret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetOutputStream != nil {
 		pclass.get_output_stream = (*[0]byte)(C._gotk4_gio2_IOStream_get_output_stream)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_IOStream_get_output_stream",
+			func(carg0 *C.GIOStream) (cret *C.GOutputStream) {
+				var stream Instance     // go GIOStream subclass
+				var goret  OutputStream // return, none, converted
+
+				stream = UnsafeIOStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetOutputStream(stream)
+
+				cret = (*C.GOutputStream)(UnsafeOutputStreamToGlibNone(goret))
+
+				return cret
+			},
+		)
 	}
+}
+
+// RegisterIOStreamSubClass is used to register a go subclass of GIOStream. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterIOStreamSubClass[InstanceT IOStream](
+		name string,
+		classInit func(class *IOStreamClass),
+		constructor func() InstanceT,
+		overrides IOStreamOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeIOStream,
+		UnsafeIOStreamClassFromGlibBorrow,
+		UnsafeApplyIOStreamOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapIOStream(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // InetAddressInstance is the instance type used by all types extending GInetAddress. It is used internally by the bindings. Users should use the interface [InetAddress] instead.
@@ -55925,7 +62895,49 @@ func UnsafeApplyInetAddressOverrides[Instance InetAddress](gclass unsafe.Pointer
 
 	if overrides.ToString != nil {
 		pclass.to_string = (*[0]byte)(C._gotk4_gio2_InetAddress_to_string)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_InetAddress_to_string",
+			func(carg0 *C.GInetAddress) (cret *C.gchar) {
+				var address Instance // go GInetAddress subclass
+				var goret   string   // return, full, string
+
+				address = UnsafeInetAddressFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.ToString(address)
+
+				cret = (*C.gchar)(unsafe.Pointer(C.CString(goret)))
+
+				return cret
+			},
+		)
 	}
+}
+
+// RegisterInetAddressSubClass is used to register a go subclass of GInetAddress. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterInetAddressSubClass[InstanceT InetAddress](
+		name string,
+		classInit func(class *InetAddressClass),
+		constructor func() InstanceT,
+		overrides InetAddressOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeInetAddress,
+		UnsafeInetAddressClassFromGlibBorrow,
+		UnsafeApplyInetAddressOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapInetAddress(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // InetAddressMaskInstance is the instance type used by all types extending GInetAddressMask. It is used internally by the bindings. Users should use the interface [InetAddressMask] instead.
@@ -56282,6 +63294,32 @@ type InetAddressMaskOverrides[Instance InetAddressMask] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplyInetAddressMaskOverrides[Instance InetAddressMask](gclass unsafe.Pointer, overrides InetAddressMaskOverrides[Instance]) {
 	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
+}
+
+// RegisterInetAddressMaskSubClass is used to register a go subclass of GInetAddressMask. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterInetAddressMaskSubClass[InstanceT InetAddressMask](
+		name string,
+		classInit func(class *InetAddressMaskClass),
+		constructor func() InstanceT,
+		overrides InetAddressMaskOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeInetAddressMask,
+		UnsafeInetAddressMaskClassFromGlibBorrow,
+		UnsafeApplyInetAddressMaskOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapInetAddressMask(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // InputStreamInstance is the instance type used by all types extending GInputStream. It is used internally by the bindings. Users should use the interface [InputStream] instead.
@@ -57749,35 +64787,253 @@ func UnsafeApplyInputStreamOverrides[Instance InputStream](gclass unsafe.Pointer
 
 	if overrides.CloseAsync != nil {
 		pclass.close_async = (*[0]byte)(C._gotk4_gio2_InputStream_close_async)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_InputStream_close_async",
+			func(carg0 *C.GInputStream, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
+				var stream      Instance           // go GInputStream subclass
+				var cancellable context.Context    // in, none, converted, nullable
+				var ioPriority  int                // in, none, casted, casted C.gint
+				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg4, nullable
+
+				stream = UnsafeInputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg2 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
+				}
+				ioPriority = int(carg1)
+				if carg3 != nil {
+					_ = callback
+					_ = carg3
+					_ = _
+					_ = carg4
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.CloseAsync(stream, cancellable, ioPriority, callback)
+			},
+		)
 	}
 
 	if overrides.CloseFinish != nil {
 		pclass.close_finish = (*[0]byte)(C._gotk4_gio2_InputStream_close_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_InputStream_close_finish",
+			func(carg0 *C.GInputStream, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+				var stream Instance    // go GInputStream subclass
+				var result AsyncResult // in, none, converted
+				var goret  bool        // return
+				var _goerr error       // out, full, converted
+
+				stream = UnsafeInputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.CloseFinish(stream, result)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.CloseFn != nil {
 		pclass.close_fn = (*[0]byte)(C._gotk4_gio2_InputStream_close_fn)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_InputStream_close_fn",
+			func(carg0 *C.GInputStream, carg1 *C.GCancellable, _cerr **C.GError) (cret C.gboolean) {
+				var stream      Instance        // go GInputStream subclass
+				var cancellable context.Context // in, none, converted, nullable
+				var goret       bool            // return
+				var _goerr      error           // out, full, converted
+
+				stream = UnsafeInputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg1 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg1))
+				}
+
+				goret, _goerr = overrides.CloseFn(stream, cancellable)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.ReadFinish != nil {
 		pclass.read_finish = (*[0]byte)(C._gotk4_gio2_InputStream_read_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_InputStream_read_finish",
+			func(carg0 *C.GInputStream, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gssize) {
+				var stream Instance    // go GInputStream subclass
+				var result AsyncResult // in, none, converted
+				var goret  int         // return, none, casted
+				var _goerr error       // out, full, converted
+
+				stream = UnsafeInputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.ReadFinish(stream, result)
+
+				cret = C.gssize(goret)
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.ReadFn != nil {
 		pclass.read_fn = (*[0]byte)(C._gotk4_gio2_InputStream_read_fn)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_InputStream_read_fn",
+			func(carg0 *C.GInputStream, carg1 *C.void, carg2 C.gsize, carg3 *C.GCancellable, _cerr **C.GError) (cret C.gssize) {
+				var stream      Instance        // go GInputStream subclass
+				var cancellable context.Context // in, none, converted, nullable
+				var buffer      *unsafe.Pointer // in, transfer: none, C Pointers: 1, Name: gpointer, nullable, casted *C.gpointer, nullable
+				var count       uint            // in, none, casted
+				var goret       int             // return, none, casted
+				var _goerr      error           // out, full, converted
+
+				stream = UnsafeInputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg3 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
+				}
+				if carg1 != nil {
+					_ = buffer
+					_ = carg1
+					panic("unimplemented conversion of *unsafe.Pointer (void*)")
+				}
+				count = uint(carg2)
+
+				goret, _goerr = overrides.ReadFn(stream, cancellable, buffer, count)
+
+				cret = C.gssize(goret)
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.Skip != nil {
 		pclass.skip = (*[0]byte)(C._gotk4_gio2_InputStream_skip)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_InputStream_skip",
+			func(carg0 *C.GInputStream, carg1 C.gsize, carg2 *C.GCancellable, _cerr **C.GError) (cret C.gssize) {
+				var stream      Instance        // go GInputStream subclass
+				var cancellable context.Context // in, none, converted, nullable
+				var count       uint            // in, none, casted
+				var goret       int             // return, none, casted
+				var _goerr      error           // out, full, converted
+
+				stream = UnsafeInputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg2 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
+				}
+				count = uint(carg1)
+
+				goret, _goerr = overrides.Skip(stream, cancellable, count)
+
+				cret = C.gssize(goret)
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.SkipAsync != nil {
 		pclass.skip_async = (*[0]byte)(C._gotk4_gio2_InputStream_skip_async)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_InputStream_skip_async",
+			func(carg0 *C.GInputStream, carg1 C.gsize, carg2 C.int, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
+				var stream      Instance           // go GInputStream subclass
+				var cancellable context.Context    // in, none, converted, nullable
+				var count       uint               // in, none, casted
+				var ioPriority  int                // in, none, casted, casted C.gint
+				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg5, nullable
+
+				stream = UnsafeInputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg3 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
+				}
+				count = uint(carg1)
+				ioPriority = int(carg2)
+				if carg4 != nil {
+					_ = callback
+					_ = carg4
+					_ = _
+					_ = carg5
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.SkipAsync(stream, cancellable, count, ioPriority, callback)
+			},
+		)
 	}
 
 	if overrides.SkipFinish != nil {
 		pclass.skip_finish = (*[0]byte)(C._gotk4_gio2_InputStream_skip_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_InputStream_skip_finish",
+			func(carg0 *C.GInputStream, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gssize) {
+				var stream Instance    // go GInputStream subclass
+				var result AsyncResult // in, none, converted
+				var goret  int         // return, none, casted
+				var _goerr error       // out, full, converted
+
+				stream = UnsafeInputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.SkipFinish(stream, result)
+
+				cret = C.gssize(goret)
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
+}
+
+// RegisterInputStreamSubClass is used to register a go subclass of GInputStream. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterInputStreamSubClass[InstanceT InputStream](
+		name string,
+		classInit func(class *InputStreamClass),
+		constructor func() InstanceT,
+		overrides InputStreamOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeInputStream,
+		UnsafeInputStreamClassFromGlibBorrow,
+		UnsafeApplyInputStreamOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapInputStream(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // ListStoreInstance is the instance type used by all types extending GListStore. It is used internally by the bindings. Users should use the interface [ListStore] instead.
@@ -57958,6 +65214,32 @@ func UnsafeApplyListStoreOverrides[Instance ListStore](gclass unsafe.Pointer, ov
 	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
 }
 
+// RegisterListStoreSubClass is used to register a go subclass of GListStore. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterListStoreSubClass[InstanceT ListStore](
+		name string,
+		classInit func(class *ListStoreClass),
+		constructor func() InstanceT,
+		overrides ListStoreOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeListStore,
+		UnsafeListStoreClassFromGlibBorrow,
+		UnsafeApplyListStoreOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapListStore(obj)
+		},
+		interfaceInits...,
+	)
+}
+
 // MemoryInputStreamInstance is the instance type used by all types extending GMemoryInputStream. It is used internally by the bindings. Users should use the interface [MemoryInputStream] instead.
 type MemoryInputStreamInstance struct {
 	_ [0]func() // equal guard
@@ -58100,6 +65382,32 @@ type MemoryInputStreamOverrides[Instance MemoryInputStream] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplyMemoryInputStreamOverrides[Instance MemoryInputStream](gclass unsafe.Pointer, overrides MemoryInputStreamOverrides[Instance]) {
 	UnsafeApplyInputStreamOverrides(gclass, overrides.InputStreamOverrides)
+}
+
+// RegisterMemoryInputStreamSubClass is used to register a go subclass of GMemoryInputStream. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterMemoryInputStreamSubClass[InstanceT MemoryInputStream](
+		name string,
+		classInit func(class *MemoryInputStreamClass),
+		constructor func() InstanceT,
+		overrides MemoryInputStreamOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeMemoryInputStream,
+		UnsafeMemoryInputStreamClassFromGlibBorrow,
+		UnsafeApplyMemoryInputStreamOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapMemoryInputStream(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // MenuAttributeIterInstance is the instance type used by all types extending GMenuAttributeIter. It is used internally by the bindings. Users should use the interface [MenuAttributeIter] instead.
@@ -58252,6 +65560,32 @@ type MenuAttributeIterOverrides[Instance MenuAttributeIter] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplyMenuAttributeIterOverrides[Instance MenuAttributeIter](gclass unsafe.Pointer, overrides MenuAttributeIterOverrides[Instance]) {
 	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
+}
+
+// RegisterMenuAttributeIterSubClass is used to register a go subclass of GMenuAttributeIter. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterMenuAttributeIterSubClass[InstanceT MenuAttributeIter](
+		name string,
+		classInit func(class *MenuAttributeIterClass),
+		constructor func() InstanceT,
+		overrides MenuAttributeIterOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeMenuAttributeIter,
+		UnsafeMenuAttributeIterClassFromGlibBorrow,
+		UnsafeApplyMenuAttributeIterOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapMenuAttributeIter(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // MenuItemInstance is the instance type used by all types extending GMenuItem. It is used internally by the bindings. Users should use the interface [MenuItem] instead.
@@ -59090,7 +66424,56 @@ func UnsafeApplyMenuLinkIterOverrides[Instance MenuLinkIter](gclass unsafe.Point
 
 	if overrides.GetNext != nil {
 		pclass.get_next = (*[0]byte)(C._gotk4_gio2_MenuLinkIter_get_next)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_MenuLinkIter_get_next",
+			func(carg0 *C.GMenuLinkIter, carg1 **C.gchar, carg2 **C.GMenuModel) (cret C.gboolean) {
+				var iter    Instance  // go GMenuLinkIter subclass
+				var outLink string    // out, none, string
+				var value   MenuModel // out, full, converted
+				var goret   bool      // return
+
+				iter = UnsafeMenuLinkIterFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				outLink, value, goret = overrides.GetNext(iter)
+
+				carg1 = (*C.gchar)(unsafe.Pointer(C.CString(outLink)))
+				defer C.free(unsafe.Pointer(carg1))
+				*carg2 = (*C.GMenuModel)(UnsafeMenuModelToGlibFull(value))
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
+}
+
+// RegisterMenuLinkIterSubClass is used to register a go subclass of GMenuLinkIter. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterMenuLinkIterSubClass[InstanceT MenuLinkIter](
+		name string,
+		classInit func(class *MenuLinkIterClass),
+		constructor func() InstanceT,
+		overrides MenuLinkIterOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeMenuLinkIter,
+		UnsafeMenuLinkIterClassFromGlibBorrow,
+		UnsafeApplyMenuLinkIterOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapMenuLinkIter(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // MenuModelInstance is the instance type used by all types extending GMenuModel. It is used internally by the bindings. Users should use the interface [MenuModel] instead.
@@ -59655,23 +67038,141 @@ func UnsafeApplyMenuModelOverrides[Instance MenuModel](gclass unsafe.Pointer, ov
 
 	if overrides.GetItemLink != nil {
 		pclass.get_item_link = (*[0]byte)(C._gotk4_gio2_MenuModel_get_item_link)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_MenuModel_get_item_link",
+			func(carg0 *C.GMenuModel, carg1 C.gint, carg2 *C.gchar) (cret *C.GMenuModel) {
+				var model     Instance  // go GMenuModel subclass
+				var itemIndex int       // in, none, casted
+				var link      string    // in, none, string
+				var goret     MenuModel // return, full, converted, nullable
+
+				model = UnsafeMenuModelFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				itemIndex = int(carg1)
+				link = C.GoString((*C.char)(unsafe.Pointer(carg2)))
+
+				goret = overrides.GetItemLink(model, itemIndex, link)
+
+				if goret != nil {
+					cret = (*C.GMenuModel)(UnsafeMenuModelToGlibFull(goret))
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetNItems != nil {
 		pclass.get_n_items = (*[0]byte)(C._gotk4_gio2_MenuModel_get_n_items)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_MenuModel_get_n_items",
+			func(carg0 *C.GMenuModel) (cret C.gint) {
+				var model Instance // go GMenuModel subclass
+				var goret int      // return, none, casted
+
+				model = UnsafeMenuModelFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetNItems(model)
+
+				cret = C.gint(goret)
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.IsMutable != nil {
 		pclass.is_mutable = (*[0]byte)(C._gotk4_gio2_MenuModel_is_mutable)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_MenuModel_is_mutable",
+			func(carg0 *C.GMenuModel) (cret C.gboolean) {
+				var model Instance // go GMenuModel subclass
+				var goret bool     // return
+
+				model = UnsafeMenuModelFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.IsMutable(model)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.IterateItemAttributes != nil {
 		pclass.iterate_item_attributes = (*[0]byte)(C._gotk4_gio2_MenuModel_iterate_item_attributes)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_MenuModel_iterate_item_attributes",
+			func(carg0 *C.GMenuModel, carg1 C.gint) (cret *C.GMenuAttributeIter) {
+				var model     Instance          // go GMenuModel subclass
+				var itemIndex int               // in, none, casted
+				var goret     MenuAttributeIter // return, full, converted
+
+				model = UnsafeMenuModelFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				itemIndex = int(carg1)
+
+				goret = overrides.IterateItemAttributes(model, itemIndex)
+
+				cret = (*C.GMenuAttributeIter)(UnsafeMenuAttributeIterToGlibFull(goret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.IterateItemLinks != nil {
 		pclass.iterate_item_links = (*[0]byte)(C._gotk4_gio2_MenuModel_iterate_item_links)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_MenuModel_iterate_item_links",
+			func(carg0 *C.GMenuModel, carg1 C.gint) (cret *C.GMenuLinkIter) {
+				var model     Instance     // go GMenuModel subclass
+				var itemIndex int          // in, none, casted
+				var goret     MenuLinkIter // return, full, converted
+
+				model = UnsafeMenuModelFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				itemIndex = int(carg1)
+
+				goret = overrides.IterateItemLinks(model, itemIndex)
+
+				cret = (*C.GMenuLinkIter)(UnsafeMenuLinkIterToGlibFull(goret))
+
+				return cret
+			},
+		)
 	}
+}
+
+// RegisterMenuModelSubClass is used to register a go subclass of GMenuModel. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterMenuModelSubClass[InstanceT MenuModel](
+		name string,
+		classInit func(class *MenuModelClass),
+		constructor func() InstanceT,
+		overrides MenuModelOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeMenuModel,
+		UnsafeMenuModelClassFromGlibBorrow,
+		UnsafeApplyMenuModelOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapMenuModel(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // MountOperationInstance is the instance type used by all types extending GMountOperation. It is used internally by the bindings. Users should use the interface [MountOperation] instead.
@@ -60483,23 +67984,126 @@ func UnsafeApplyMountOperationOverrides[Instance MountOperation](gclass unsafe.P
 
 	if overrides.Aborted != nil {
 		pclass.aborted = (*[0]byte)(C._gotk4_gio2_MountOperation_aborted)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_MountOperation_aborted",
+			func(carg0 *C.GMountOperation) {
+				var op Instance // go GMountOperation subclass
+
+				op = UnsafeMountOperationFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.Aborted(op)
+			},
+		)
 	}
 
 	if overrides.AskPassword != nil {
 		pclass.ask_password = (*[0]byte)(C._gotk4_gio2_MountOperation_ask_password)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_MountOperation_ask_password",
+			func(carg0 *C.GMountOperation, carg1 *C.char, carg2 *C.char, carg3 *C.char, carg4 C.GAskPasswordFlags) {
+				var op            Instance         // go GMountOperation subclass
+				var message       string           // in, none, string, casted *C.gchar
+				var defaultUser   string           // in, none, string, casted *C.gchar
+				var defaultDomain string           // in, none, string, casted *C.gchar
+				var flags         AskPasswordFlags // in, none, casted
+
+				op = UnsafeMountOperationFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				message = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+				defaultUser = C.GoString((*C.char)(unsafe.Pointer(carg2)))
+				defaultDomain = C.GoString((*C.char)(unsafe.Pointer(carg3)))
+				flags = AskPasswordFlags(carg4)
+
+				overrides.AskPassword(op, message, defaultUser, defaultDomain, flags)
+			},
+		)
 	}
 
 	if overrides.AskQuestion != nil {
 		pclass.ask_question = (*[0]byte)(C._gotk4_gio2_MountOperation_ask_question)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_MountOperation_ask_question",
+			func(carg0 *C.GMountOperation, carg1 *C.char, carg2 **C.char) {
+				var op      Instance // go GMountOperation subclass
+				var message string   // in, none, string, casted *C.gchar
+				var choices []string // in, transfer: none, C Pointers: 2, Name: array[utf8], array (inner: *typesystem.StringPrimitive, zero-terminated)
+
+				op = UnsafeMountOperationFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				message = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+				_ = choices
+				_ = carg2
+				panic("unimplemented conversion of []string (const char**)")
+
+				overrides.AskQuestion(op, message, choices)
+			},
+		)
 	}
 
 	if overrides.Reply != nil {
 		pclass.reply = (*[0]byte)(C._gotk4_gio2_MountOperation_reply)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_MountOperation_reply",
+			func(carg0 *C.GMountOperation, carg1 C.GMountOperationResult) {
+				var op     Instance             // go GMountOperation subclass
+				var result MountOperationResult // in, none, casted
+
+				op = UnsafeMountOperationFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = MountOperationResult(carg1)
+
+				overrides.Reply(op, result)
+			},
+		)
 	}
 
 	if overrides.ShowUnmountProgress != nil {
 		pclass.show_unmount_progress = (*[0]byte)(C._gotk4_gio2_MountOperation_show_unmount_progress)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_MountOperation_show_unmount_progress",
+			func(carg0 *C.GMountOperation, carg1 *C.gchar, carg2 C.gint64, carg3 C.gint64) {
+				var op        Instance // go GMountOperation subclass
+				var message   string   // in, none, string
+				var timeLeft  int64    // in, none, casted
+				var bytesLeft int64    // in, none, casted
+
+				op = UnsafeMountOperationFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				message = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+				timeLeft = int64(carg2)
+				bytesLeft = int64(carg3)
+
+				overrides.ShowUnmountProgress(op, message, timeLeft, bytesLeft)
+			},
+		)
 	}
+}
+
+// RegisterMountOperationSubClass is used to register a go subclass of GMountOperation. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterMountOperationSubClass[InstanceT MountOperation](
+		name string,
+		classInit func(class *MountOperationClass),
+		constructor func() InstanceT,
+		overrides MountOperationOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeMountOperation,
+		UnsafeMountOperationClassFromGlibBorrow,
+		UnsafeApplyMountOperationOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapMountOperation(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // NetworkAddressInstance is the instance type used by all types extending GNetworkAddress. It is used internally by the bindings. Users should use the interface [NetworkAddress] instead.
@@ -60851,6 +68455,32 @@ func UnsafeApplyNetworkAddressOverrides[Instance NetworkAddress](gclass unsafe.P
 	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
 }
 
+// RegisterNetworkAddressSubClass is used to register a go subclass of GNetworkAddress. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterNetworkAddressSubClass[InstanceT NetworkAddress](
+		name string,
+		classInit func(class *NetworkAddressClass),
+		constructor func() InstanceT,
+		overrides NetworkAddressOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeNetworkAddress,
+		UnsafeNetworkAddressClassFromGlibBorrow,
+		UnsafeApplyNetworkAddressOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapNetworkAddress(obj)
+		},
+		interfaceInits...,
+	)
+}
+
 // NetworkServiceInstance is the instance type used by all types extending GNetworkService. It is used internally by the bindings. Users should use the interface [NetworkService] instead.
 type NetworkServiceInstance struct {
 	_ [0]func() // equal guard
@@ -61120,6 +68750,32 @@ type NetworkServiceOverrides[Instance NetworkService] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplyNetworkServiceOverrides[Instance NetworkService](gclass unsafe.Pointer, overrides NetworkServiceOverrides[Instance]) {
 	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
+}
+
+// RegisterNetworkServiceSubClass is used to register a go subclass of GNetworkService. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterNetworkServiceSubClass[InstanceT NetworkService](
+		name string,
+		classInit func(class *NetworkServiceClass),
+		constructor func() InstanceT,
+		overrides NetworkServiceOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeNetworkService,
+		UnsafeNetworkServiceClassFromGlibBorrow,
+		UnsafeApplyNetworkServiceOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapNetworkService(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // NotificationInstance is the instance type used by all types extending GNotification. It is used internally by the bindings. Users should use the interface [Notification] instead.
@@ -63791,63 +71447,468 @@ func UnsafeApplyOutputStreamOverrides[Instance OutputStream](gclass unsafe.Point
 
 	if overrides.CloseAsync != nil {
 		pclass.close_async = (*[0]byte)(C._gotk4_gio2_OutputStream_close_async)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_OutputStream_close_async",
+			func(carg0 *C.GOutputStream, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
+				var stream      Instance           // go GOutputStream subclass
+				var cancellable context.Context    // in, none, converted, nullable
+				var ioPriority  int                // in, none, casted, casted C.gint
+				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg4, nullable
+
+				stream = UnsafeOutputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg2 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
+				}
+				ioPriority = int(carg1)
+				if carg3 != nil {
+					_ = callback
+					_ = carg3
+					_ = _
+					_ = carg4
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.CloseAsync(stream, cancellable, ioPriority, callback)
+			},
+		)
 	}
 
 	if overrides.CloseFinish != nil {
 		pclass.close_finish = (*[0]byte)(C._gotk4_gio2_OutputStream_close_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_OutputStream_close_finish",
+			func(carg0 *C.GOutputStream, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+				var stream Instance    // go GOutputStream subclass
+				var result AsyncResult // in, none, converted
+				var goret  bool        // return
+				var _goerr error       // out, full, converted
+
+				stream = UnsafeOutputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.CloseFinish(stream, result)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.CloseFn != nil {
 		pclass.close_fn = (*[0]byte)(C._gotk4_gio2_OutputStream_close_fn)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_OutputStream_close_fn",
+			func(carg0 *C.GOutputStream, carg1 *C.GCancellable, _cerr **C.GError) (cret C.gboolean) {
+				var stream      Instance        // go GOutputStream subclass
+				var cancellable context.Context // in, none, converted, nullable
+				var goret       bool            // return
+				var _goerr      error           // out, full, converted
+
+				stream = UnsafeOutputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg1 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg1))
+				}
+
+				goret, _goerr = overrides.CloseFn(stream, cancellable)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.Flush != nil {
 		pclass.flush = (*[0]byte)(C._gotk4_gio2_OutputStream_flush)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_OutputStream_flush",
+			func(carg0 *C.GOutputStream, carg1 *C.GCancellable, _cerr **C.GError) (cret C.gboolean) {
+				var stream      Instance        // go GOutputStream subclass
+				var cancellable context.Context // in, none, converted, nullable
+				var goret       bool            // return
+				var _goerr      error           // out, full, converted
+
+				stream = UnsafeOutputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg1 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg1))
+				}
+
+				goret, _goerr = overrides.Flush(stream, cancellable)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.FlushAsync != nil {
 		pclass.flush_async = (*[0]byte)(C._gotk4_gio2_OutputStream_flush_async)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_OutputStream_flush_async",
+			func(carg0 *C.GOutputStream, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
+				var stream      Instance           // go GOutputStream subclass
+				var cancellable context.Context    // in, none, converted, nullable
+				var ioPriority  int                // in, none, casted, casted C.gint
+				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg4, nullable
+
+				stream = UnsafeOutputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg2 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
+				}
+				ioPriority = int(carg1)
+				if carg3 != nil {
+					_ = callback
+					_ = carg3
+					_ = _
+					_ = carg4
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.FlushAsync(stream, cancellable, ioPriority, callback)
+			},
+		)
 	}
 
 	if overrides.FlushFinish != nil {
 		pclass.flush_finish = (*[0]byte)(C._gotk4_gio2_OutputStream_flush_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_OutputStream_flush_finish",
+			func(carg0 *C.GOutputStream, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+				var stream Instance    // go GOutputStream subclass
+				var result AsyncResult // in, none, converted
+				var goret  bool        // return
+				var _goerr error       // out, full, converted
+
+				stream = UnsafeOutputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.FlushFinish(stream, result)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.Splice != nil {
 		pclass.splice = (*[0]byte)(C._gotk4_gio2_OutputStream_splice)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_OutputStream_splice",
+			func(carg0 *C.GOutputStream, carg1 *C.GInputStream, carg2 C.GOutputStreamSpliceFlags, carg3 *C.GCancellable, _cerr **C.GError) (cret C.gssize) {
+				var stream      Instance                // go GOutputStream subclass
+				var cancellable context.Context         // in, none, converted, nullable
+				var source      InputStream             // in, none, converted
+				var flags       OutputStreamSpliceFlags // in, none, casted
+				var goret       int                     // return, none, casted
+				var _goerr      error                   // out, full, converted
+
+				stream = UnsafeOutputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg3 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
+				}
+				source = UnsafeInputStreamFromGlibNone(unsafe.Pointer(carg1))
+				flags = OutputStreamSpliceFlags(carg2)
+
+				goret, _goerr = overrides.Splice(stream, cancellable, source, flags)
+
+				cret = C.gssize(goret)
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.SpliceAsync != nil {
 		pclass.splice_async = (*[0]byte)(C._gotk4_gio2_OutputStream_splice_async)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_OutputStream_splice_async",
+			func(carg0 *C.GOutputStream, carg1 *C.GInputStream, carg2 C.GOutputStreamSpliceFlags, carg3 C.int, carg4 *C.GCancellable, carg5 C.GAsyncReadyCallback, carg6 C.gpointer) {
+				var stream      Instance                // go GOutputStream subclass
+				var cancellable context.Context         // in, none, converted, nullable
+				var source      InputStream             // in, none, converted
+				var flags       OutputStreamSpliceFlags // in, none, casted
+				var ioPriority  int                     // in, none, casted, casted C.gint
+				var callback    AsyncReadyCallback      // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg6, nullable
+
+				stream = UnsafeOutputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg4 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg4))
+				}
+				source = UnsafeInputStreamFromGlibNone(unsafe.Pointer(carg1))
+				flags = OutputStreamSpliceFlags(carg2)
+				ioPriority = int(carg3)
+				if carg5 != nil {
+					_ = callback
+					_ = carg5
+					_ = _
+					_ = carg6
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.SpliceAsync(stream, cancellable, source, flags, ioPriority, callback)
+			},
+		)
 	}
 
 	if overrides.SpliceFinish != nil {
 		pclass.splice_finish = (*[0]byte)(C._gotk4_gio2_OutputStream_splice_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_OutputStream_splice_finish",
+			func(carg0 *C.GOutputStream, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gssize) {
+				var stream Instance    // go GOutputStream subclass
+				var result AsyncResult // in, none, converted
+				var goret  int         // return, none, casted
+				var _goerr error       // out, full, converted
+
+				stream = UnsafeOutputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.SpliceFinish(stream, result)
+
+				cret = C.gssize(goret)
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.WriteAsync != nil {
 		pclass.write_async = (*[0]byte)(C._gotk4_gio2_OutputStream_write_async)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_OutputStream_write_async",
+			func(carg0 *C.GOutputStream, carg1 unsafe.Pointer, carg2 C.gsize, carg3 C.int, carg4 *C.GCancellable, carg5 C.GAsyncReadyCallback, carg6 C.gpointer) {
+				var stream      Instance           // go GOutputStream subclass
+				var cancellable context.Context    // in, none, converted, nullable
+				var buffer      []byte             // in, transfer: none, C Pointers: 1, Name: array[unknown], nullable, array (inner: <nil>, length-by: carg2)
+				var ioPriority  int                // in, none, casted, casted C.gint
+				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg6, nullable
+
+				stream = UnsafeOutputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg4 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg4))
+				}
+				_ = buffer
+				_ = carg1
+				_ = carg2
+				panic("unimplemented conversion of []byte (void*)")
+				ioPriority = int(carg3)
+				if carg5 != nil {
+					_ = callback
+					_ = carg5
+					_ = _
+					_ = carg6
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.WriteAsync(stream, cancellable, buffer, ioPriority, callback)
+			},
+		)
 	}
 
 	if overrides.WriteFinish != nil {
 		pclass.write_finish = (*[0]byte)(C._gotk4_gio2_OutputStream_write_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_OutputStream_write_finish",
+			func(carg0 *C.GOutputStream, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gssize) {
+				var stream Instance    // go GOutputStream subclass
+				var result AsyncResult // in, none, converted
+				var goret  int         // return, none, casted
+				var _goerr error       // out, full, converted
+
+				stream = UnsafeOutputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.WriteFinish(stream, result)
+
+				cret = C.gssize(goret)
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.WriteFn != nil {
 		pclass.write_fn = (*[0]byte)(C._gotk4_gio2_OutputStream_write_fn)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_OutputStream_write_fn",
+			func(carg0 *C.GOutputStream, carg1 unsafe.Pointer, carg2 C.gsize, carg3 *C.GCancellable, _cerr **C.GError) (cret C.gssize) {
+				var stream      Instance        // go GOutputStream subclass
+				var cancellable context.Context // in, none, converted, nullable
+				var buffer      []byte          // in, transfer: none, C Pointers: 1, Name: array[unknown], nullable, array (inner: <nil>, length-by: carg2)
+				var goret       int             // return, none, casted
+				var _goerr      error           // out, full, converted
+
+				stream = UnsafeOutputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg3 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
+				}
+				_ = buffer
+				_ = carg1
+				_ = carg2
+				panic("unimplemented conversion of []byte (void*)")
+
+				goret, _goerr = overrides.WriteFn(stream, cancellable, buffer)
+
+				cret = C.gssize(goret)
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.WritevAsync != nil {
 		pclass.writev_async = (*[0]byte)(C._gotk4_gio2_OutputStream_writev_async)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_OutputStream_writev_async",
+			func(carg0 *C.GOutputStream, carg1 *C.GOutputVector, carg2 C.gsize, carg3 C.int, carg4 *C.GCancellable, carg5 C.GAsyncReadyCallback, carg6 C.gpointer) {
+				var stream      Instance           // go GOutputStream subclass
+				var cancellable context.Context    // in, none, converted, nullable
+				var vectors     []OutputVector     // in, transfer: none, C Pointers: 1, Name: array[OutputVector], array (inner: *typesystem.Record, length-by: carg2)
+				var ioPriority  int                // in, none, casted, casted C.gint
+				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg6, nullable
+
+				stream = UnsafeOutputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg4 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg4))
+				}
+				_ = vectors
+				_ = carg1
+				_ = carg2
+				panic("unimplemented conversion of []OutputVector (const GOutputVector*)")
+				ioPriority = int(carg3)
+				if carg5 != nil {
+					_ = callback
+					_ = carg5
+					_ = _
+					_ = carg6
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.WritevAsync(stream, cancellable, vectors, ioPriority, callback)
+			},
+		)
 	}
 
 	if overrides.WritevFinish != nil {
 		pclass.writev_finish = (*[0]byte)(C._gotk4_gio2_OutputStream_writev_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_OutputStream_writev_finish",
+			func(carg0 *C.GOutputStream, carg1 *C.GAsyncResult, carg2 *C.gsize, _cerr **C.GError) (cret C.gboolean) {
+				var stream       Instance    // go GOutputStream subclass
+				var result       AsyncResult // in, none, converted
+				var bytesWritten uint        // out, full, casted
+				var goret        bool        // return
+				var _goerr       error       // out, full, converted
+
+				stream = UnsafeOutputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				bytesWritten, goret, _goerr = overrides.WritevFinish(stream, result)
+
+				*carg2 = C.gsize(bytesWritten)
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.WritevFn != nil {
 		pclass.writev_fn = (*[0]byte)(C._gotk4_gio2_OutputStream_writev_fn)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_OutputStream_writev_fn",
+			func(carg0 *C.GOutputStream, carg1 *C.GOutputVector, carg2 C.gsize, carg3 *C.gsize, carg4 *C.GCancellable, _cerr **C.GError) (cret C.gboolean) {
+				var stream       Instance        // go GOutputStream subclass
+				var cancellable  context.Context // in, none, converted, nullable
+				var vectors      []OutputVector  // in, transfer: none, C Pointers: 1, Name: array[OutputVector], array (inner: *typesystem.Record, length-by: carg2)
+				var bytesWritten uint            // out, full, casted
+				var goret        bool            // return
+				var _goerr       error           // out, full, converted
+
+				stream = UnsafeOutputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg4 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg4))
+				}
+				_ = vectors
+				_ = carg1
+				_ = carg2
+				panic("unimplemented conversion of []OutputVector (const GOutputVector*)")
+
+				bytesWritten, goret, _goerr = overrides.WritevFn(stream, cancellable, vectors)
+
+				*carg3 = C.gsize(bytesWritten)
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
+}
+
+// RegisterOutputStreamSubClass is used to register a go subclass of GOutputStream. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterOutputStreamSubClass[InstanceT OutputStream](
+		name string,
+		classInit func(class *OutputStreamClass),
+		constructor func() InstanceT,
+		overrides OutputStreamOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeOutputStream,
+		UnsafeOutputStreamClassFromGlibBorrow,
+		UnsafeApplyOutputStreamOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapOutputStream(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // PermissionInstance is the instance type used by all types extending GPermission. It is used internally by the bindings. Users should use the interface [Permission] instead.
@@ -64514,27 +72575,191 @@ func UnsafeApplyPermissionOverrides[Instance Permission](gclass unsafe.Pointer, 
 
 	if overrides.Acquire != nil {
 		pclass.acquire = (*[0]byte)(C._gotk4_gio2_Permission_acquire)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Permission_acquire",
+			func(carg0 *C.GPermission, carg1 *C.GCancellable, _cerr **C.GError) (cret C.gboolean) {
+				var permission  Instance        // go GPermission subclass
+				var cancellable context.Context // in, none, converted, nullable
+				var goret       bool            // return
+				var _goerr      error           // out, full, converted
+
+				permission = UnsafePermissionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg1 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg1))
+				}
+
+				goret, _goerr = overrides.Acquire(permission, cancellable)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.AcquireAsync != nil {
 		pclass.acquire_async = (*[0]byte)(C._gotk4_gio2_Permission_acquire_async)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Permission_acquire_async",
+			func(carg0 *C.GPermission, carg1 *C.GCancellable, carg2 C.GAsyncReadyCallback, carg3 C.gpointer) {
+				var permission  Instance           // go GPermission subclass
+				var cancellable context.Context    // in, none, converted, nullable
+				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg3, nullable
+
+				permission = UnsafePermissionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg1 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg1))
+				}
+				if carg2 != nil {
+					_ = callback
+					_ = carg2
+					_ = _
+					_ = carg3
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.AcquireAsync(permission, cancellable, callback)
+			},
+		)
 	}
 
 	if overrides.AcquireFinish != nil {
 		pclass.acquire_finish = (*[0]byte)(C._gotk4_gio2_Permission_acquire_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Permission_acquire_finish",
+			func(carg0 *C.GPermission, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+				var permission Instance    // go GPermission subclass
+				var result     AsyncResult // in, none, converted
+				var goret      bool        // return
+				var _goerr     error       // out, full, converted
+
+				permission = UnsafePermissionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.AcquireFinish(permission, result)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.Release != nil {
 		pclass.release = (*[0]byte)(C._gotk4_gio2_Permission_release)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Permission_release",
+			func(carg0 *C.GPermission, carg1 *C.GCancellable, _cerr **C.GError) (cret C.gboolean) {
+				var permission  Instance        // go GPermission subclass
+				var cancellable context.Context // in, none, converted, nullable
+				var goret       bool            // return
+				var _goerr      error           // out, full, converted
+
+				permission = UnsafePermissionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg1 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg1))
+				}
+
+				goret, _goerr = overrides.Release(permission, cancellable)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.ReleaseAsync != nil {
 		pclass.release_async = (*[0]byte)(C._gotk4_gio2_Permission_release_async)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Permission_release_async",
+			func(carg0 *C.GPermission, carg1 *C.GCancellable, carg2 C.GAsyncReadyCallback, carg3 C.gpointer) {
+				var permission  Instance           // go GPermission subclass
+				var cancellable context.Context    // in, none, converted, nullable
+				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg3, nullable
+
+				permission = UnsafePermissionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg1 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg1))
+				}
+				if carg2 != nil {
+					_ = callback
+					_ = carg2
+					_ = _
+					_ = carg3
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.ReleaseAsync(permission, cancellable, callback)
+			},
+		)
 	}
 
 	if overrides.ReleaseFinish != nil {
 		pclass.release_finish = (*[0]byte)(C._gotk4_gio2_Permission_release_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Permission_release_finish",
+			func(carg0 *C.GPermission, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+				var permission Instance    // go GPermission subclass
+				var result     AsyncResult // in, none, converted
+				var goret      bool        // return
+				var _goerr     error       // out, full, converted
+
+				permission = UnsafePermissionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.ReleaseFinish(permission, result)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
+}
+
+// RegisterPermissionSubClass is used to register a go subclass of GPermission. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterPermissionSubClass[InstanceT Permission](
+		name string,
+		classInit func(class *PermissionClass),
+		constructor func() InstanceT,
+		overrides PermissionOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypePermission,
+		UnsafePermissionClassFromGlibBorrow,
+		UnsafeApplyPermissionOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapPermission(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // PropertyActionInstance is the instance type used by all types extending GPropertyAction. It is used internally by the bindings. Users should use the interface [PropertyAction] instead.
@@ -65860,55 +74085,385 @@ func UnsafeApplyResolverOverrides[Instance Resolver](gclass unsafe.Pointer, over
 
 	if overrides.LookupByAddress != nil {
 		pclass.lookup_by_address = (*[0]byte)(C._gotk4_gio2_Resolver_lookup_by_address)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Resolver_lookup_by_address",
+			func(carg0 *C.GResolver, carg1 *C.GInetAddress, carg2 *C.GCancellable, _cerr **C.GError) (cret *C.gchar) {
+				var resolver    Instance        // go GResolver subclass
+				var cancellable context.Context // in, none, converted, nullable
+				var address     InetAddress     // in, none, converted
+				var goret       string          // return, full, string
+				var _goerr      error           // out, full, converted
+
+				resolver = UnsafeResolverFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg2 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
+				}
+				address = UnsafeInetAddressFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.LookupByAddress(resolver, cancellable, address)
+
+				cret = (*C.gchar)(unsafe.Pointer(C.CString(goret)))
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.LookupByAddressAsync != nil {
 		pclass.lookup_by_address_async = (*[0]byte)(C._gotk4_gio2_Resolver_lookup_by_address_async)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Resolver_lookup_by_address_async",
+			func(carg0 *C.GResolver, carg1 *C.GInetAddress, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
+				var resolver    Instance           // go GResolver subclass
+				var cancellable context.Context    // in, none, converted, nullable
+				var address     InetAddress        // in, none, converted
+				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg4, nullable
+
+				resolver = UnsafeResolverFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg2 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
+				}
+				address = UnsafeInetAddressFromGlibNone(unsafe.Pointer(carg1))
+				if carg3 != nil {
+					_ = callback
+					_ = carg3
+					_ = _
+					_ = carg4
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.LookupByAddressAsync(resolver, cancellable, address, callback)
+			},
+		)
 	}
 
 	if overrides.LookupByAddressFinish != nil {
 		pclass.lookup_by_address_finish = (*[0]byte)(C._gotk4_gio2_Resolver_lookup_by_address_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Resolver_lookup_by_address_finish",
+			func(carg0 *C.GResolver, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.gchar) {
+				var resolver Instance    // go GResolver subclass
+				var result   AsyncResult // in, none, converted
+				var goret    string      // return, full, string
+				var _goerr   error       // out, full, converted
+
+				resolver = UnsafeResolverFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.LookupByAddressFinish(resolver, result)
+
+				cret = (*C.gchar)(unsafe.Pointer(C.CString(goret)))
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.LookupByName != nil {
 		pclass.lookup_by_name = (*[0]byte)(C._gotk4_gio2_Resolver_lookup_by_name)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Resolver_lookup_by_name",
+			func(carg0 *C.GResolver, carg1 *C.gchar, carg2 *C.GCancellable, _cerr **C.GError) (cret *C.GList) {
+				var resolver    Instance        // go GResolver subclass
+				var cancellable context.Context // in, none, converted, nullable
+				var hostname    string          // in, none, string
+				var goret       []InetAddress   // return, transfer: full, C Pointers: 1, Name: List, scope: 
+				var _goerr      error           // out, full, converted
+
+				resolver = UnsafeResolverFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg2 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
+				}
+				hostname = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+
+				goret, _goerr = overrides.LookupByName(resolver, cancellable, hostname)
+
+				_ = goret
+				_ = cret
+				panic("unimplemented conversion of []InetAddress (GList*)")
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.LookupByNameAsync != nil {
 		pclass.lookup_by_name_async = (*[0]byte)(C._gotk4_gio2_Resolver_lookup_by_name_async)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Resolver_lookup_by_name_async",
+			func(carg0 *C.GResolver, carg1 *C.gchar, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
+				var resolver    Instance           // go GResolver subclass
+				var cancellable context.Context    // in, none, converted, nullable
+				var hostname    string             // in, none, string
+				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg4, nullable
+
+				resolver = UnsafeResolverFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg2 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
+				}
+				hostname = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+				if carg3 != nil {
+					_ = callback
+					_ = carg3
+					_ = _
+					_ = carg4
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.LookupByNameAsync(resolver, cancellable, hostname, callback)
+			},
+		)
 	}
 
 	if overrides.LookupByNameFinish != nil {
 		pclass.lookup_by_name_finish = (*[0]byte)(C._gotk4_gio2_Resolver_lookup_by_name_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Resolver_lookup_by_name_finish",
+			func(carg0 *C.GResolver, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GList) {
+				var resolver Instance      // go GResolver subclass
+				var result   AsyncResult   // in, none, converted
+				var goret    []InetAddress // return, transfer: full, C Pointers: 1, Name: List, scope: 
+				var _goerr   error         // out, full, converted
+
+				resolver = UnsafeResolverFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.LookupByNameFinish(resolver, result)
+
+				_ = goret
+				_ = cret
+				panic("unimplemented conversion of []InetAddress (GList*)")
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.LookupByNameWithFlags != nil {
 		pclass.lookup_by_name_with_flags = (*[0]byte)(C._gotk4_gio2_Resolver_lookup_by_name_with_flags)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Resolver_lookup_by_name_with_flags",
+			func(carg0 *C.GResolver, carg1 *C.gchar, carg2 C.GResolverNameLookupFlags, carg3 *C.GCancellable, _cerr **C.GError) (cret *C.GList) {
+				var resolver    Instance                // go GResolver subclass
+				var cancellable context.Context         // in, none, converted, nullable
+				var hostname    string                  // in, none, string
+				var flags       ResolverNameLookupFlags // in, none, casted
+				var goret       []InetAddress           // return, transfer: full, C Pointers: 1, Name: List, scope: 
+				var _goerr      error                   // out, full, converted
+
+				resolver = UnsafeResolverFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg3 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
+				}
+				hostname = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+				flags = ResolverNameLookupFlags(carg2)
+
+				goret, _goerr = overrides.LookupByNameWithFlags(resolver, cancellable, hostname, flags)
+
+				_ = goret
+				_ = cret
+				panic("unimplemented conversion of []InetAddress (GList*)")
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.LookupByNameWithFlagsAsync != nil {
 		pclass.lookup_by_name_with_flags_async = (*[0]byte)(C._gotk4_gio2_Resolver_lookup_by_name_with_flags_async)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Resolver_lookup_by_name_with_flags_async",
+			func(carg0 *C.GResolver, carg1 *C.gchar, carg2 C.GResolverNameLookupFlags, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
+				var resolver    Instance                // go GResolver subclass
+				var cancellable context.Context         // in, none, converted, nullable
+				var hostname    string                  // in, none, string
+				var flags       ResolverNameLookupFlags // in, none, casted
+				var callback    AsyncReadyCallback      // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg5, nullable
+
+				resolver = UnsafeResolverFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg3 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
+				}
+				hostname = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+				flags = ResolverNameLookupFlags(carg2)
+				if carg4 != nil {
+					_ = callback
+					_ = carg4
+					_ = _
+					_ = carg5
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.LookupByNameWithFlagsAsync(resolver, cancellable, hostname, flags, callback)
+			},
+		)
 	}
 
 	if overrides.LookupByNameWithFlagsFinish != nil {
 		pclass.lookup_by_name_with_flags_finish = (*[0]byte)(C._gotk4_gio2_Resolver_lookup_by_name_with_flags_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Resolver_lookup_by_name_with_flags_finish",
+			func(carg0 *C.GResolver, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GList) {
+				var resolver Instance      // go GResolver subclass
+				var result   AsyncResult   // in, none, converted
+				var goret    []InetAddress // return, transfer: full, C Pointers: 1, Name: List, scope: 
+				var _goerr   error         // out, full, converted
+
+				resolver = UnsafeResolverFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.LookupByNameWithFlagsFinish(resolver, result)
+
+				_ = goret
+				_ = cret
+				panic("unimplemented conversion of []InetAddress (GList*)")
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.LookupRecordsAsync != nil {
 		pclass.lookup_records_async = (*[0]byte)(C._gotk4_gio2_Resolver_lookup_records_async)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Resolver_lookup_records_async",
+			func(carg0 *C.GResolver, carg1 *C.gchar, carg2 C.GResolverRecordType, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
+				var resolver    Instance           // go GResolver subclass
+				var cancellable context.Context    // in, none, converted, nullable
+				var rrname      string             // in, none, string
+				var recordType  ResolverRecordType // in, none, casted
+				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg5, nullable
+
+				resolver = UnsafeResolverFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg3 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
+				}
+				rrname = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+				recordType = ResolverRecordType(carg2)
+				if carg4 != nil {
+					_ = callback
+					_ = carg4
+					_ = _
+					_ = carg5
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.LookupRecordsAsync(resolver, cancellable, rrname, recordType, callback)
+			},
+		)
 	}
 
 	if overrides.LookupServiceAsync != nil {
 		pclass.lookup_service_async = (*[0]byte)(C._gotk4_gio2_Resolver_lookup_service_async)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Resolver_lookup_service_async",
+			func(carg0 *C.GResolver, carg1 *C.gchar, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
+				var resolver    Instance           // go GResolver subclass
+				var cancellable context.Context    // in, none, converted, nullable
+				var rrname      string             // in, none, string
+				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg4, nullable
+
+				resolver = UnsafeResolverFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg2 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
+				}
+				rrname = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+				if carg3 != nil {
+					_ = callback
+					_ = carg3
+					_ = _
+					_ = carg4
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.LookupServiceAsync(resolver, cancellable, rrname, callback)
+			},
+		)
 	}
 
 	if overrides.LookupServiceFinish != nil {
 		pclass.lookup_service_finish = (*[0]byte)(C._gotk4_gio2_Resolver_lookup_service_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Resolver_lookup_service_finish",
+			func(carg0 *C.GResolver, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GList) {
+				var resolver Instance     // go GResolver subclass
+				var result   AsyncResult  // in, none, converted
+				var goret    []*SrvTarget // return, transfer: full, C Pointers: 1, Name: List, scope: 
+				var _goerr   error        // out, full, converted
+
+				resolver = UnsafeResolverFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.LookupServiceFinish(resolver, result)
+
+				_ = goret
+				_ = cret
+				panic("unimplemented conversion of []*SrvTarget (GList*)")
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.Reload != nil {
 		pclass.reload = (*[0]byte)(C._gotk4_gio2_Resolver_reload)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Resolver_reload",
+			func(carg0 *C.GResolver) {
+				var resolver Instance // go GResolver subclass
+
+				resolver = UnsafeResolverFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.Reload(resolver)
+			},
+		)
 	}
+}
+
+// RegisterResolverSubClass is used to register a go subclass of GResolver. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterResolverSubClass[InstanceT Resolver](
+		name string,
+		classInit func(class *ResolverClass),
+		constructor func() InstanceT,
+		overrides ResolverOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeResolver,
+		UnsafeResolverClassFromGlibBorrow,
+		UnsafeApplyResolverOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapResolver(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // SettingsInstance is the instance type used by all types extending GSettings. It is used internally by the bindings. Users should use the interface [Settings] instead.
@@ -68187,19 +76742,115 @@ func UnsafeApplySettingsOverrides[Instance Settings](gclass unsafe.Pointer, over
 
 	if overrides.ChangeEvent != nil {
 		pclass.change_event = (*[0]byte)(C._gotk4_gio2_Settings_change_event)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Settings_change_event",
+			func(carg0 *C.GSettings, carg1 *C.GQuark, carg2 C.gint) (cret C.gboolean) {
+				var settings Instance    // go GSettings subclass
+				var keys     *glib.Quark // in, transfer: none, C Pointers: 1, Name: Quark
+				var nKeys    int         // in, none, casted
+				var goret    bool        // return
+
+				settings = UnsafeSettingsFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				_ = keys
+				_ = carg1
+				panic("unimplemented conversion of *glib.Quark (GQuark*)")
+				nKeys = int(carg2)
+
+				goret = overrides.ChangeEvent(settings, keys, nKeys)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.Changed != nil {
 		pclass.changed = (*[0]byte)(C._gotk4_gio2_Settings_changed)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Settings_changed",
+			func(carg0 *C.GSettings, carg1 *C.gchar) {
+				var settings Instance // go GSettings subclass
+				var key      string   // in, none, string
+
+				settings = UnsafeSettingsFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				key = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+
+				overrides.Changed(settings, key)
+			},
+		)
 	}
 
 	if overrides.WritableChangeEvent != nil {
 		pclass.writable_change_event = (*[0]byte)(C._gotk4_gio2_Settings_writable_change_event)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Settings_writable_change_event",
+			func(carg0 *C.GSettings, carg1 C.GQuark) (cret C.gboolean) {
+				var settings Instance   // go GSettings subclass
+				var key      glib.Quark // in, none, casted, alias
+				var goret    bool       // return
+
+				settings = UnsafeSettingsFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				key = glib.Quark(carg1)
+
+				goret = overrides.WritableChangeEvent(settings, key)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.WritableChanged != nil {
 		pclass.writable_changed = (*[0]byte)(C._gotk4_gio2_Settings_writable_changed)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Settings_writable_changed",
+			func(carg0 *C.GSettings, carg1 *C.gchar) {
+				var settings Instance // go GSettings subclass
+				var key      string   // in, none, string
+
+				settings = UnsafeSettingsFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				key = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+
+				overrides.WritableChanged(settings, key)
+			},
+		)
 	}
+}
+
+// RegisterSettingsSubClass is used to register a go subclass of GSettings. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterSettingsSubClass[InstanceT Settings](
+		name string,
+		classInit func(class *SettingsClass),
+		constructor func() InstanceT,
+		overrides SettingsOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeSettings,
+		UnsafeSettingsClassFromGlibBorrow,
+		UnsafeApplySettingsOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapSettings(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // SimpleActionInstance is the instance type used by all types extending GSimpleAction. It is used internally by the bindings. Users should use the interface [SimpleAction] instead.
@@ -68546,6 +77197,32 @@ type SimpleActionGroupOverrides[Instance SimpleActionGroup] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplySimpleActionGroupOverrides[Instance SimpleActionGroup](gclass unsafe.Pointer, overrides SimpleActionGroupOverrides[Instance]) {
 	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
+}
+
+// RegisterSimpleActionGroupSubClass is used to register a go subclass of GSimpleActionGroup. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterSimpleActionGroupSubClass[InstanceT SimpleActionGroup](
+		name string,
+		classInit func(class *SimpleActionGroupClass),
+		constructor func() InstanceT,
+		overrides SimpleActionGroupOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeSimpleActionGroup,
+		UnsafeSimpleActionGroupClassFromGlibBorrow,
+		UnsafeApplySimpleActionGroupOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapSimpleActionGroup(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // SimpleAsyncResultInstance is the instance type used by all types extending GSimpleAsyncResult. It is used internally by the bindings. Users should use the interface [SimpleAsyncResult] instead.
@@ -69614,6 +78291,32 @@ type SimpleProxyResolverOverrides[Instance SimpleProxyResolver] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplySimpleProxyResolverOverrides[Instance SimpleProxyResolver](gclass unsafe.Pointer, overrides SimpleProxyResolverOverrides[Instance]) {
 	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
+}
+
+// RegisterSimpleProxyResolverSubClass is used to register a go subclass of GSimpleProxyResolver. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterSimpleProxyResolverSubClass[InstanceT SimpleProxyResolver](
+		name string,
+		classInit func(class *SimpleProxyResolverClass),
+		constructor func() InstanceT,
+		overrides SimpleProxyResolverOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeSimpleProxyResolver,
+		UnsafeSimpleProxyResolverClassFromGlibBorrow,
+		UnsafeApplySimpleProxyResolverOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapSimpleProxyResolver(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // SocketInstance is the instance type used by all types extending GSocket. It is used internally by the bindings. Users should use the interface [Socket] instead.
@@ -73496,6 +82199,32 @@ func UnsafeApplySocketOverrides[Instance Socket](gclass unsafe.Pointer, override
 	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
 }
 
+// RegisterSocketSubClass is used to register a go subclass of GSocket. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterSocketSubClass[InstanceT Socket](
+		name string,
+		classInit func(class *SocketClass),
+		constructor func() InstanceT,
+		overrides SocketOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeSocket,
+		UnsafeSocketClassFromGlibBorrow,
+		UnsafeApplySocketOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapSocket(obj)
+		},
+		interfaceInits...,
+	)
+}
+
 // SocketAddressInstance is the instance type used by all types extending GSocketAddress. It is used internally by the bindings. Users should use the interface [SocketAddress] instead.
 type SocketAddressInstance struct {
 	_ [0]func() // equal guard
@@ -73643,11 +82372,69 @@ func UnsafeApplySocketAddressOverrides[Instance SocketAddress](gclass unsafe.Poi
 
 	if overrides.GetFamily != nil {
 		pclass.get_family = (*[0]byte)(C._gotk4_gio2_SocketAddress_get_family)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_SocketAddress_get_family",
+			func(carg0 *C.GSocketAddress) (cret C.GSocketFamily) {
+				var address Instance     // go GSocketAddress subclass
+				var goret   SocketFamily // return, none, casted
+
+				address = UnsafeSocketAddressFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetFamily(address)
+
+				cret = C.GSocketFamily(goret)
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetNativeSize != nil {
 		pclass.get_native_size = (*[0]byte)(C._gotk4_gio2_SocketAddress_get_native_size)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_SocketAddress_get_native_size",
+			func(carg0 *C.GSocketAddress) (cret C.gssize) {
+				var address Instance // go GSocketAddress subclass
+				var goret   int      // return, none, casted
+
+				address = UnsafeSocketAddressFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetNativeSize(address)
+
+				cret = C.gssize(goret)
+
+				return cret
+			},
+		)
 	}
+}
+
+// RegisterSocketAddressSubClass is used to register a go subclass of GSocketAddress. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterSocketAddressSubClass[InstanceT SocketAddress](
+		name string,
+		classInit func(class *SocketAddressClass),
+		constructor func() InstanceT,
+		overrides SocketAddressOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeSocketAddress,
+		UnsafeSocketAddressClassFromGlibBorrow,
+		UnsafeApplySocketAddressOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapSocketAddress(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // SocketAddressEnumeratorInstance is the instance type used by all types extending GSocketAddressEnumerator. It is used internally by the bindings. Users should use the interface [SocketAddressEnumerator] instead.
@@ -73941,15 +82728,110 @@ func UnsafeApplySocketAddressEnumeratorOverrides[Instance SocketAddressEnumerato
 
 	if overrides.Next != nil {
 		pclass.next = (*[0]byte)(C._gotk4_gio2_SocketAddressEnumerator_next)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_SocketAddressEnumerator_next",
+			func(carg0 *C.GSocketAddressEnumerator, carg1 *C.GCancellable, _cerr **C.GError) (cret *C.GSocketAddress) {
+				var enumerator  Instance        // go GSocketAddressEnumerator subclass
+				var cancellable context.Context // in, none, converted, nullable
+				var goret       SocketAddress   // return, full, converted, nullable
+				var _goerr      error           // out, full, converted
+
+				enumerator = UnsafeSocketAddressEnumeratorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg1 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg1))
+				}
+
+				goret, _goerr = overrides.Next(enumerator, cancellable)
+
+				if goret != nil {
+					cret = (*C.GSocketAddress)(UnsafeSocketAddressToGlibFull(goret))
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.NextAsync != nil {
 		pclass.next_async = (*[0]byte)(C._gotk4_gio2_SocketAddressEnumerator_next_async)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_SocketAddressEnumerator_next_async",
+			func(carg0 *C.GSocketAddressEnumerator, carg1 *C.GCancellable, carg2 C.GAsyncReadyCallback, carg3 C.gpointer) {
+				var enumerator  Instance           // go GSocketAddressEnumerator subclass
+				var cancellable context.Context    // in, none, converted, nullable
+				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg3, nullable
+
+				enumerator = UnsafeSocketAddressEnumeratorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg1 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg1))
+				}
+				if carg2 != nil {
+					_ = callback
+					_ = carg2
+					_ = _
+					_ = carg3
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.NextAsync(enumerator, cancellable, callback)
+			},
+		)
 	}
 
 	if overrides.NextFinish != nil {
 		pclass.next_finish = (*[0]byte)(C._gotk4_gio2_SocketAddressEnumerator_next_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_SocketAddressEnumerator_next_finish",
+			func(carg0 *C.GSocketAddressEnumerator, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GSocketAddress) {
+				var enumerator Instance      // go GSocketAddressEnumerator subclass
+				var result     AsyncResult   // in, none, converted
+				var goret      SocketAddress // return, full, converted, nullable
+				var _goerr     error         // out, full, converted
+
+				enumerator = UnsafeSocketAddressEnumeratorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.NextFinish(enumerator, result)
+
+				if goret != nil {
+					cret = (*C.GSocketAddress)(UnsafeSocketAddressToGlibFull(goret))
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
+}
+
+// RegisterSocketAddressEnumeratorSubClass is used to register a go subclass of GSocketAddressEnumerator. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterSocketAddressEnumeratorSubClass[InstanceT SocketAddressEnumerator](
+		name string,
+		classInit func(class *SocketAddressEnumeratorClass),
+		constructor func() InstanceT,
+		overrides SocketAddressEnumeratorOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeSocketAddressEnumerator,
+		UnsafeSocketAddressEnumeratorClassFromGlibBorrow,
+		UnsafeApplySocketAddressEnumeratorOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapSocketAddressEnumerator(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // SocketClientInstance is the instance type used by all types extending GSocketClient. It is used internally by the bindings. Users should use the interface [SocketClient] instead.
@@ -75765,7 +84647,50 @@ func UnsafeApplySocketClientOverrides[Instance SocketClient](gclass unsafe.Point
 
 	if overrides.Event != nil {
 		pclass.event = (*[0]byte)(C._gotk4_gio2_SocketClient_event)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_SocketClient_event",
+			func(carg0 *C.GSocketClient, carg1 C.GSocketClientEvent, carg2 *C.GSocketConnectable, carg3 *C.GIOStream) {
+				var client      Instance          // go GSocketClient subclass
+				var event       SocketClientEvent // in, none, casted
+				var connectable SocketConnectable // in, none, converted
+				var connection  IOStream          // in, none, converted
+
+				client = UnsafeSocketClientFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				event = SocketClientEvent(carg1)
+				connectable = UnsafeSocketConnectableFromGlibNone(unsafe.Pointer(carg2))
+				connection = UnsafeIOStreamFromGlibNone(unsafe.Pointer(carg3))
+
+				overrides.Event(client, event, connectable, connection)
+			},
+		)
 	}
+}
+
+// RegisterSocketClientSubClass is used to register a go subclass of GSocketClient. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterSocketClientSubClass[InstanceT SocketClient](
+		name string,
+		classInit func(class *SocketClientClass),
+		constructor func() InstanceT,
+		overrides SocketClientOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeSocketClient,
+		UnsafeSocketClientClassFromGlibBorrow,
+		UnsafeApplySocketClientOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapSocketClient(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // SocketConnectionInstance is the instance type used by all types extending GSocketConnection. It is used internally by the bindings. Users should use the interface [SocketConnection] instead.
@@ -76249,6 +85174,32 @@ func UnsafeApplySocketConnectionOverrides[Instance SocketConnection](gclass unsa
 	UnsafeApplyIOStreamOverrides(gclass, overrides.IOStreamOverrides)
 }
 
+// RegisterSocketConnectionSubClass is used to register a go subclass of GSocketConnection. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterSocketConnectionSubClass[InstanceT SocketConnection](
+		name string,
+		classInit func(class *SocketConnectionClass),
+		constructor func() InstanceT,
+		overrides SocketConnectionOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeSocketConnection,
+		UnsafeSocketConnectionClassFromGlibBorrow,
+		UnsafeApplySocketConnectionOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapSocketConnection(obj)
+		},
+		interfaceInits...,
+	)
+}
+
 // SocketControlMessageInstance is the instance type used by all types extending GSocketControlMessage. It is used internally by the bindings. Users should use the interface [SocketControlMessage] instead.
 type SocketControlMessageInstance struct {
 	_ [0]func() // equal guard
@@ -76450,15 +85401,89 @@ func UnsafeApplySocketControlMessageOverrides[Instance SocketControlMessage](gcl
 
 	if overrides.GetLevel != nil {
 		pclass.get_level = (*[0]byte)(C._gotk4_gio2_SocketControlMessage_get_level)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_SocketControlMessage_get_level",
+			func(carg0 *C.GSocketControlMessage) (cret C.int) {
+				var message Instance // go GSocketControlMessage subclass
+				var goret   int      // return, none, casted, casted C.gint
+
+				message = UnsafeSocketControlMessageFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetLevel(message)
+
+				cret = C.int(goret)
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetSize != nil {
 		pclass.get_size = (*[0]byte)(C._gotk4_gio2_SocketControlMessage_get_size)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_SocketControlMessage_get_size",
+			func(carg0 *C.GSocketControlMessage) (cret C.gsize) {
+				var message Instance // go GSocketControlMessage subclass
+				var goret   uint     // return, none, casted
+
+				message = UnsafeSocketControlMessageFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetSize(message)
+
+				cret = C.gsize(goret)
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetType != nil {
 		pclass.get_type = (*[0]byte)(C._gotk4_gio2_SocketControlMessage_get_type)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_SocketControlMessage_get_type",
+			func(carg0 *C.GSocketControlMessage) (cret C.int) {
+				var message Instance // go GSocketControlMessage subclass
+				var goret   int      // return, none, casted, casted C.gint
+
+				message = UnsafeSocketControlMessageFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetType(message)
+
+				cret = C.int(goret)
+
+				return cret
+			},
+		)
 	}
+}
+
+// RegisterSocketControlMessageSubClass is used to register a go subclass of GSocketControlMessage. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterSocketControlMessageSubClass[InstanceT SocketControlMessage](
+		name string,
+		classInit func(class *SocketControlMessageClass),
+		constructor func() InstanceT,
+		overrides SocketControlMessageOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeSocketControlMessage,
+		UnsafeSocketControlMessageClassFromGlibBorrow,
+		UnsafeApplySocketControlMessageOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapSocketControlMessage(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // SocketListenerInstance is the instance type used by all types extending GSocketListener. It is used internally by the bindings. Users should use the interface [SocketListener] instead.
@@ -77354,11 +86379,63 @@ func UnsafeApplySocketListenerOverrides[Instance SocketListener](gclass unsafe.P
 
 	if overrides.Changed != nil {
 		pclass.changed = (*[0]byte)(C._gotk4_gio2_SocketListener_changed)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_SocketListener_changed",
+			func(carg0 *C.GSocketListener) {
+				var listener Instance // go GSocketListener subclass
+
+				listener = UnsafeSocketListenerFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.Changed(listener)
+			},
+		)
 	}
 
 	if overrides.Event != nil {
 		pclass.event = (*[0]byte)(C._gotk4_gio2_SocketListener_event)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_SocketListener_event",
+			func(carg0 *C.GSocketListener, carg1 C.GSocketListenerEvent, carg2 *C.GSocket) {
+				var listener Instance            // go GSocketListener subclass
+				var event    SocketListenerEvent // in, none, casted
+				var socket   Socket              // in, none, converted
+
+				listener = UnsafeSocketListenerFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				event = SocketListenerEvent(carg1)
+				socket = UnsafeSocketFromGlibNone(unsafe.Pointer(carg2))
+
+				overrides.Event(listener, event, socket)
+			},
+		)
 	}
+}
+
+// RegisterSocketListenerSubClass is used to register a go subclass of GSocketListener. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterSocketListenerSubClass[InstanceT SocketListener](
+		name string,
+		classInit func(class *SocketListenerClass),
+		constructor func() InstanceT,
+		overrides SocketListenerOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeSocketListener,
+		UnsafeSocketListenerClassFromGlibBorrow,
+		UnsafeApplySocketListenerOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapSocketListener(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // SocketServiceInstance is the instance type used by all types extending GSocketService. It is used internally by the bindings. Users should use the interface [SocketService] instead.
@@ -77625,7 +86702,55 @@ func UnsafeApplySocketServiceOverrides[Instance SocketService](gclass unsafe.Poi
 
 	if overrides.Incoming != nil {
 		pclass.incoming = (*[0]byte)(C._gotk4_gio2_SocketService_incoming)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_SocketService_incoming",
+			func(carg0 *C.GSocketService, carg1 *C.GSocketConnection, carg2 *C.GObject) (cret C.gboolean) {
+				var service      Instance         // go GSocketService subclass
+				var connection   SocketConnection // in, none, converted
+				var sourceObject gobject.Object   // in, none, converted
+				var goret        bool             // return
+
+				service = UnsafeSocketServiceFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				connection = UnsafeSocketConnectionFromGlibNone(unsafe.Pointer(carg1))
+				sourceObject = gobject.UnsafeObjectFromGlibNone(unsafe.Pointer(carg2))
+
+				goret = overrides.Incoming(service, connection, sourceObject)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
+}
+
+// RegisterSocketServiceSubClass is used to register a go subclass of GSocketService. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterSocketServiceSubClass[InstanceT SocketService](
+		name string,
+		classInit func(class *SocketServiceClass),
+		constructor func() InstanceT,
+		overrides SocketServiceOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeSocketService,
+		UnsafeSocketServiceClassFromGlibBorrow,
+		UnsafeApplySocketServiceOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapSocketService(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // TaskInstance is the instance type used by all types extending GTask. It is used internally by the bindings. Users should use the interface [Task] instead.
@@ -79324,6 +88449,32 @@ func UnsafeApplyTcpConnectionOverrides[Instance TcpConnection](gclass unsafe.Poi
 	UnsafeApplySocketConnectionOverrides(gclass, overrides.SocketConnectionOverrides)
 }
 
+// RegisterTcpConnectionSubClass is used to register a go subclass of GTcpConnection. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterTcpConnectionSubClass[InstanceT TcpConnection](
+		name string,
+		classInit func(class *TcpConnectionClass),
+		constructor func() InstanceT,
+		overrides TcpConnectionOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeTcpConnection,
+		UnsafeTcpConnectionClassFromGlibBorrow,
+		UnsafeApplyTcpConnectionOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapTcpConnection(obj)
+		},
+		interfaceInits...,
+	)
+}
+
 // TcpWrapperConnectionInstance is the instance type used by all types extending GTcpWrapperConnection. It is used internally by the bindings. Users should use the interface [TcpWrapperConnection] instead.
 type TcpWrapperConnectionInstance struct {
 	_ [0]func() // equal guard
@@ -79460,6 +88611,32 @@ type TcpWrapperConnectionOverrides[Instance TcpWrapperConnection] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplyTcpWrapperConnectionOverrides[Instance TcpWrapperConnection](gclass unsafe.Pointer, overrides TcpWrapperConnectionOverrides[Instance]) {
 	UnsafeApplyTcpConnectionOverrides(gclass, overrides.TcpConnectionOverrides)
+}
+
+// RegisterTcpWrapperConnectionSubClass is used to register a go subclass of GTcpWrapperConnection. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterTcpWrapperConnectionSubClass[InstanceT TcpWrapperConnection](
+		name string,
+		classInit func(class *TcpWrapperConnectionClass),
+		constructor func() InstanceT,
+		overrides TcpWrapperConnectionOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeTcpWrapperConnection,
+		UnsafeTcpWrapperConnectionClassFromGlibBorrow,
+		UnsafeApplyTcpWrapperConnectionOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapTcpWrapperConnection(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // TestDBusInstance is the instance type used by all types extending GTestDBus. It is used internally by the bindings. Users should use the interface [TestDBus] instead.
@@ -80213,7 +89390,55 @@ func UnsafeApplyThreadedSocketServiceOverrides[Instance ThreadedSocketService](g
 
 	if overrides.Run != nil {
 		pclass.run = (*[0]byte)(C._gotk4_gio2_ThreadedSocketService_run)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_ThreadedSocketService_run",
+			func(carg0 *C.GThreadedSocketService, carg1 *C.GSocketConnection, carg2 *C.GObject) (cret C.gboolean) {
+				var service      Instance         // go GThreadedSocketService subclass
+				var connection   SocketConnection // in, none, converted
+				var sourceObject gobject.Object   // in, none, converted
+				var goret        bool             // return
+
+				service = UnsafeThreadedSocketServiceFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				connection = UnsafeSocketConnectionFromGlibNone(unsafe.Pointer(carg1))
+				sourceObject = gobject.UnsafeObjectFromGlibNone(unsafe.Pointer(carg2))
+
+				goret = overrides.Run(service, connection, sourceObject)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
+}
+
+// RegisterThreadedSocketServiceSubClass is used to register a go subclass of GThreadedSocketService. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterThreadedSocketServiceSubClass[InstanceT ThreadedSocketService](
+		name string,
+		classInit func(class *ThreadedSocketServiceClass),
+		constructor func() InstanceT,
+		overrides ThreadedSocketServiceOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeThreadedSocketService,
+		UnsafeThreadedSocketServiceClassFromGlibBorrow,
+		UnsafeApplyThreadedSocketServiceOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapThreadedSocketService(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // TlsCertificateInstance is the instance type used by all types extending GTlsCertificate. It is used internally by the bindings. Users should use the interface [TlsCertificate] instead.
@@ -80994,7 +90219,57 @@ func UnsafeApplyTlsCertificateOverrides[Instance TlsCertificate](gclass unsafe.P
 
 	if overrides.Verify != nil {
 		pclass.verify = (*[0]byte)(C._gotk4_gio2_TlsCertificate_verify)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_TlsCertificate_verify",
+			func(carg0 *C.GTlsCertificate, carg1 *C.GSocketConnectable, carg2 *C.GTlsCertificate) (cret C.GTlsCertificateFlags) {
+				var cert      Instance            // go GTlsCertificate subclass
+				var identity  SocketConnectable   // in, none, converted, nullable
+				var trustedCa TlsCertificate      // in, none, converted, nullable
+				var goret     TLSCertificateFlags // return, none, casted
+
+				cert = UnsafeTlsCertificateFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg1 != nil {
+					identity = UnsafeSocketConnectableFromGlibNone(unsafe.Pointer(carg1))
+				}
+				if carg2 != nil {
+					trustedCa = UnsafeTlsCertificateFromGlibNone(unsafe.Pointer(carg2))
+				}
+
+				goret = overrides.Verify(cert, identity, trustedCa)
+
+				cret = C.GTlsCertificateFlags(goret)
+
+				return cret
+			},
+		)
 	}
+}
+
+// RegisterTlsCertificateSubClass is used to register a go subclass of GTlsCertificate. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterTlsCertificateSubClass[InstanceT TlsCertificate](
+		name string,
+		classInit func(class *TlsCertificateClass),
+		constructor func() InstanceT,
+		overrides TlsCertificateOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeTlsCertificate,
+		UnsafeTlsCertificateClassFromGlibBorrow,
+		UnsafeApplyTlsCertificateOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapTlsCertificate(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // TlsConnectionInstance is the instance type used by all types extending GTlsConnection. It is used internally by the bindings. Users should use the interface [TlsConnection] instead.
@@ -82265,23 +91540,161 @@ func UnsafeApplyTlsConnectionOverrides[Instance TlsConnection](gclass unsafe.Poi
 
 	if overrides.AcceptCertificate != nil {
 		pclass.accept_certificate = (*[0]byte)(C._gotk4_gio2_TlsConnection_accept_certificate)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_TlsConnection_accept_certificate",
+			func(carg0 *C.GTlsConnection, carg1 *C.GTlsCertificate, carg2 C.GTlsCertificateFlags) (cret C.gboolean) {
+				var connection Instance            // go GTlsConnection subclass
+				var peerCert   TlsCertificate      // in, none, converted
+				var errors     TLSCertificateFlags // in, none, casted
+				var goret      bool                // return
+
+				connection = UnsafeTlsConnectionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				peerCert = UnsafeTlsCertificateFromGlibNone(unsafe.Pointer(carg1))
+				errors = TLSCertificateFlags(carg2)
+
+				goret = overrides.AcceptCertificate(connection, peerCert, errors)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetNegotiatedProtocol != nil {
 		pclass.get_negotiated_protocol = (*[0]byte)(C._gotk4_gio2_TlsConnection_get_negotiated_protocol)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_TlsConnection_get_negotiated_protocol",
+			func(carg0 *C.GTlsConnection) (cret *C.gchar) {
+				var conn  Instance // go GTlsConnection subclass
+				var goret string   // return, none, string, nullable-string
+
+				conn = UnsafeTlsConnectionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetNegotiatedProtocol(conn)
+
+				if goret != "" {
+					cret = (*C.gchar)(unsafe.Pointer(C.CString(goret)))
+					defer C.free(unsafe.Pointer(cret))
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.Handshake != nil {
 		pclass.handshake = (*[0]byte)(C._gotk4_gio2_TlsConnection_handshake)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_TlsConnection_handshake",
+			func(carg0 *C.GTlsConnection, carg1 *C.GCancellable, _cerr **C.GError) (cret C.gboolean) {
+				var conn        Instance        // go GTlsConnection subclass
+				var cancellable context.Context // in, none, converted, nullable
+				var goret       bool            // return
+				var _goerr      error           // out, full, converted
+
+				conn = UnsafeTlsConnectionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg1 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg1))
+				}
+
+				goret, _goerr = overrides.Handshake(conn, cancellable)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.HandshakeAsync != nil {
 		pclass.handshake_async = (*[0]byte)(C._gotk4_gio2_TlsConnection_handshake_async)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_TlsConnection_handshake_async",
+			func(carg0 *C.GTlsConnection, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
+				var conn        Instance           // go GTlsConnection subclass
+				var cancellable context.Context    // in, none, converted, nullable
+				var ioPriority  int                // in, none, casted, casted C.gint
+				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg4, nullable
+
+				conn = UnsafeTlsConnectionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg2 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
+				}
+				ioPriority = int(carg1)
+				if carg3 != nil {
+					_ = callback
+					_ = carg3
+					_ = _
+					_ = carg4
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.HandshakeAsync(conn, cancellable, ioPriority, callback)
+			},
+		)
 	}
 
 	if overrides.HandshakeFinish != nil {
 		pclass.handshake_finish = (*[0]byte)(C._gotk4_gio2_TlsConnection_handshake_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_TlsConnection_handshake_finish",
+			func(carg0 *C.GTlsConnection, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
+				var conn   Instance    // go GTlsConnection subclass
+				var result AsyncResult // in, none, converted
+				var goret  bool        // return
+				var _goerr error       // out, full, converted
+
+				conn = UnsafeTlsConnectionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.HandshakeFinish(conn, result)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
+}
+
+// RegisterTlsConnectionSubClass is used to register a go subclass of GTlsConnection. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterTlsConnectionSubClass[InstanceT TlsConnection](
+		name string,
+		classInit func(class *TlsConnectionClass),
+		constructor func() InstanceT,
+		overrides TlsConnectionOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeTlsConnection,
+		UnsafeTlsConnectionClassFromGlibBorrow,
+		UnsafeApplyTlsConnectionOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapTlsConnection(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // TlsDatabaseInstance is the instance type used by all types extending GTlsDatabase. It is used internally by the bindings. Users should use the interface [TlsDatabase] instead.
@@ -83358,47 +92771,372 @@ func UnsafeApplyTlsDatabaseOverrides[Instance TlsDatabase](gclass unsafe.Pointer
 
 	if overrides.CreateCertificateHandle != nil {
 		pclass.create_certificate_handle = (*[0]byte)(C._gotk4_gio2_TlsDatabase_create_certificate_handle)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_TlsDatabase_create_certificate_handle",
+			func(carg0 *C.GTlsDatabase, carg1 *C.GTlsCertificate) (cret *C.gchar) {
+				var self        Instance       // go GTlsDatabase subclass
+				var certificate TlsCertificate // in, none, converted
+				var goret       string         // return, full, string, nullable-string
+
+				self = UnsafeTlsDatabaseFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				certificate = UnsafeTlsCertificateFromGlibNone(unsafe.Pointer(carg1))
+
+				goret = overrides.CreateCertificateHandle(self, certificate)
+
+				if goret != "" {
+					cret = (*C.gchar)(unsafe.Pointer(C.CString(goret)))
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.LookupCertificateForHandle != nil {
 		pclass.lookup_certificate_for_handle = (*[0]byte)(C._gotk4_gio2_TlsDatabase_lookup_certificate_for_handle)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_TlsDatabase_lookup_certificate_for_handle",
+			func(carg0 *C.GTlsDatabase, carg1 *C.gchar, carg2 *C.GTlsInteraction, carg3 C.GTlsDatabaseLookupFlags, carg4 *C.GCancellable, _cerr **C.GError) (cret *C.GTlsCertificate) {
+				var self        Instance               // go GTlsDatabase subclass
+				var cancellable context.Context        // in, none, converted, nullable
+				var handle      string                 // in, none, string
+				var interaction TlsInteraction         // in, none, converted, nullable
+				var flags       TLSDatabaseLookupFlags // in, none, casted
+				var goret       TlsCertificate         // return, full, converted, nullable
+				var _goerr      error                  // out, full, converted
+
+				self = UnsafeTlsDatabaseFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg4 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg4))
+				}
+				handle = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+				if carg2 != nil {
+					interaction = UnsafeTlsInteractionFromGlibNone(unsafe.Pointer(carg2))
+				}
+				flags = TLSDatabaseLookupFlags(carg3)
+
+				goret, _goerr = overrides.LookupCertificateForHandle(self, cancellable, handle, interaction, flags)
+
+				if goret != nil {
+					cret = (*C.GTlsCertificate)(UnsafeTlsCertificateToGlibFull(goret))
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.LookupCertificateForHandleAsync != nil {
 		pclass.lookup_certificate_for_handle_async = (*[0]byte)(C._gotk4_gio2_TlsDatabase_lookup_certificate_for_handle_async)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_TlsDatabase_lookup_certificate_for_handle_async",
+			func(carg0 *C.GTlsDatabase, carg1 *C.gchar, carg2 *C.GTlsInteraction, carg3 C.GTlsDatabaseLookupFlags, carg4 *C.GCancellable, carg5 C.GAsyncReadyCallback, carg6 C.gpointer) {
+				var self        Instance               // go GTlsDatabase subclass
+				var cancellable context.Context        // in, none, converted, nullable
+				var handle      string                 // in, none, string
+				var interaction TlsInteraction         // in, none, converted, nullable
+				var flags       TLSDatabaseLookupFlags // in, none, casted
+				var callback    AsyncReadyCallback     // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg6, nullable
+
+				self = UnsafeTlsDatabaseFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg4 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg4))
+				}
+				handle = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+				if carg2 != nil {
+					interaction = UnsafeTlsInteractionFromGlibNone(unsafe.Pointer(carg2))
+				}
+				flags = TLSDatabaseLookupFlags(carg3)
+				if carg5 != nil {
+					_ = callback
+					_ = carg5
+					_ = _
+					_ = carg6
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.LookupCertificateForHandleAsync(self, cancellable, handle, interaction, flags, callback)
+			},
+		)
 	}
 
 	if overrides.LookupCertificateForHandleFinish != nil {
 		pclass.lookup_certificate_for_handle_finish = (*[0]byte)(C._gotk4_gio2_TlsDatabase_lookup_certificate_for_handle_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_TlsDatabase_lookup_certificate_for_handle_finish",
+			func(carg0 *C.GTlsDatabase, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GTlsCertificate) {
+				var self   Instance       // go GTlsDatabase subclass
+				var result AsyncResult    // in, none, converted
+				var goret  TlsCertificate // return, full, converted
+				var _goerr error          // out, full, converted
+
+				self = UnsafeTlsDatabaseFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.LookupCertificateForHandleFinish(self, result)
+
+				cret = (*C.GTlsCertificate)(UnsafeTlsCertificateToGlibFull(goret))
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.LookupCertificateIssuer != nil {
 		pclass.lookup_certificate_issuer = (*[0]byte)(C._gotk4_gio2_TlsDatabase_lookup_certificate_issuer)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_TlsDatabase_lookup_certificate_issuer",
+			func(carg0 *C.GTlsDatabase, carg1 *C.GTlsCertificate, carg2 *C.GTlsInteraction, carg3 C.GTlsDatabaseLookupFlags, carg4 *C.GCancellable, _cerr **C.GError) (cret *C.GTlsCertificate) {
+				var self        Instance               // go GTlsDatabase subclass
+				var cancellable context.Context        // in, none, converted, nullable
+				var certificate TlsCertificate         // in, none, converted
+				var interaction TlsInteraction         // in, none, converted, nullable
+				var flags       TLSDatabaseLookupFlags // in, none, casted
+				var goret       TlsCertificate         // return, full, converted
+				var _goerr      error                  // out, full, converted
+
+				self = UnsafeTlsDatabaseFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg4 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg4))
+				}
+				certificate = UnsafeTlsCertificateFromGlibNone(unsafe.Pointer(carg1))
+				if carg2 != nil {
+					interaction = UnsafeTlsInteractionFromGlibNone(unsafe.Pointer(carg2))
+				}
+				flags = TLSDatabaseLookupFlags(carg3)
+
+				goret, _goerr = overrides.LookupCertificateIssuer(self, cancellable, certificate, interaction, flags)
+
+				cret = (*C.GTlsCertificate)(UnsafeTlsCertificateToGlibFull(goret))
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.LookupCertificateIssuerAsync != nil {
 		pclass.lookup_certificate_issuer_async = (*[0]byte)(C._gotk4_gio2_TlsDatabase_lookup_certificate_issuer_async)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_TlsDatabase_lookup_certificate_issuer_async",
+			func(carg0 *C.GTlsDatabase, carg1 *C.GTlsCertificate, carg2 *C.GTlsInteraction, carg3 C.GTlsDatabaseLookupFlags, carg4 *C.GCancellable, carg5 C.GAsyncReadyCallback, carg6 C.gpointer) {
+				var self        Instance               // go GTlsDatabase subclass
+				var cancellable context.Context        // in, none, converted, nullable
+				var certificate TlsCertificate         // in, none, converted
+				var interaction TlsInteraction         // in, none, converted, nullable
+				var flags       TLSDatabaseLookupFlags // in, none, casted
+				var callback    AsyncReadyCallback     // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg6, nullable
+
+				self = UnsafeTlsDatabaseFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg4 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg4))
+				}
+				certificate = UnsafeTlsCertificateFromGlibNone(unsafe.Pointer(carg1))
+				if carg2 != nil {
+					interaction = UnsafeTlsInteractionFromGlibNone(unsafe.Pointer(carg2))
+				}
+				flags = TLSDatabaseLookupFlags(carg3)
+				if carg5 != nil {
+					_ = callback
+					_ = carg5
+					_ = _
+					_ = carg6
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.LookupCertificateIssuerAsync(self, cancellable, certificate, interaction, flags, callback)
+			},
+		)
 	}
 
 	if overrides.LookupCertificateIssuerFinish != nil {
 		pclass.lookup_certificate_issuer_finish = (*[0]byte)(C._gotk4_gio2_TlsDatabase_lookup_certificate_issuer_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_TlsDatabase_lookup_certificate_issuer_finish",
+			func(carg0 *C.GTlsDatabase, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GTlsCertificate) {
+				var self   Instance       // go GTlsDatabase subclass
+				var result AsyncResult    // in, none, converted
+				var goret  TlsCertificate // return, full, converted
+				var _goerr error          // out, full, converted
+
+				self = UnsafeTlsDatabaseFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.LookupCertificateIssuerFinish(self, result)
+
+				cret = (*C.GTlsCertificate)(UnsafeTlsCertificateToGlibFull(goret))
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.LookupCertificatesIssuedByFinish != nil {
 		pclass.lookup_certificates_issued_by_finish = (*[0]byte)(C._gotk4_gio2_TlsDatabase_lookup_certificates_issued_by_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_TlsDatabase_lookup_certificates_issued_by_finish",
+			func(carg0 *C.GTlsDatabase, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GList) {
+				var self   Instance         // go GTlsDatabase subclass
+				var result AsyncResult      // in, none, converted
+				var goret  []TlsCertificate // return, transfer: full, C Pointers: 1, Name: List, scope: 
+				var _goerr error            // out, full, converted
+
+				self = UnsafeTlsDatabaseFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.LookupCertificatesIssuedByFinish(self, result)
+
+				_ = goret
+				_ = cret
+				panic("unimplemented conversion of []TlsCertificate (GList*)")
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.VerifyChain != nil {
 		pclass.verify_chain = (*[0]byte)(C._gotk4_gio2_TlsDatabase_verify_chain)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_TlsDatabase_verify_chain",
+			func(carg0 *C.GTlsDatabase, carg1 *C.GTlsCertificate, carg2 *C.gchar, carg3 *C.GSocketConnectable, carg4 *C.GTlsInteraction, carg5 C.GTlsDatabaseVerifyFlags, carg6 *C.GCancellable, _cerr **C.GError) (cret C.GTlsCertificateFlags) {
+				var self        Instance               // go GTlsDatabase subclass
+				var cancellable context.Context        // in, none, converted, nullable
+				var chain       TlsCertificate         // in, none, converted
+				var purpose     string                 // in, none, string
+				var identity    SocketConnectable      // in, none, converted, nullable
+				var interaction TlsInteraction         // in, none, converted, nullable
+				var flags       TLSDatabaseVerifyFlags // in, none, casted
+				var goret       TLSCertificateFlags    // return, none, casted
+				var _goerr      error                  // out, full, converted
+
+				self = UnsafeTlsDatabaseFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg6 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg6))
+				}
+				chain = UnsafeTlsCertificateFromGlibNone(unsafe.Pointer(carg1))
+				purpose = C.GoString((*C.char)(unsafe.Pointer(carg2)))
+				if carg3 != nil {
+					identity = UnsafeSocketConnectableFromGlibNone(unsafe.Pointer(carg3))
+				}
+				if carg4 != nil {
+					interaction = UnsafeTlsInteractionFromGlibNone(unsafe.Pointer(carg4))
+				}
+				flags = TLSDatabaseVerifyFlags(carg5)
+
+				goret, _goerr = overrides.VerifyChain(self, cancellable, chain, purpose, identity, interaction, flags)
+
+				cret = C.GTlsCertificateFlags(goret)
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.VerifyChainAsync != nil {
 		pclass.verify_chain_async = (*[0]byte)(C._gotk4_gio2_TlsDatabase_verify_chain_async)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_TlsDatabase_verify_chain_async",
+			func(carg0 *C.GTlsDatabase, carg1 *C.GTlsCertificate, carg2 *C.gchar, carg3 *C.GSocketConnectable, carg4 *C.GTlsInteraction, carg5 C.GTlsDatabaseVerifyFlags, carg6 *C.GCancellable, carg7 C.GAsyncReadyCallback, carg8 C.gpointer) {
+				var self        Instance               // go GTlsDatabase subclass
+				var cancellable context.Context        // in, none, converted, nullable
+				var chain       TlsCertificate         // in, none, converted
+				var purpose     string                 // in, none, string
+				var identity    SocketConnectable      // in, none, converted, nullable
+				var interaction TlsInteraction         // in, none, converted, nullable
+				var flags       TLSDatabaseVerifyFlags // in, none, casted
+				var callback    AsyncReadyCallback     // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg8, nullable
+
+				self = UnsafeTlsDatabaseFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg6 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg6))
+				}
+				chain = UnsafeTlsCertificateFromGlibNone(unsafe.Pointer(carg1))
+				purpose = C.GoString((*C.char)(unsafe.Pointer(carg2)))
+				if carg3 != nil {
+					identity = UnsafeSocketConnectableFromGlibNone(unsafe.Pointer(carg3))
+				}
+				if carg4 != nil {
+					interaction = UnsafeTlsInteractionFromGlibNone(unsafe.Pointer(carg4))
+				}
+				flags = TLSDatabaseVerifyFlags(carg5)
+				if carg7 != nil {
+					_ = callback
+					_ = carg7
+					_ = _
+					_ = carg8
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.VerifyChainAsync(self, cancellable, chain, purpose, identity, interaction, flags, callback)
+			},
+		)
 	}
 
 	if overrides.VerifyChainFinish != nil {
 		pclass.verify_chain_finish = (*[0]byte)(C._gotk4_gio2_TlsDatabase_verify_chain_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_TlsDatabase_verify_chain_finish",
+			func(carg0 *C.GTlsDatabase, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.GTlsCertificateFlags) {
+				var self   Instance            // go GTlsDatabase subclass
+				var result AsyncResult         // in, none, converted
+				var goret  TLSCertificateFlags // return, none, casted
+				var _goerr error               // out, full, converted
+
+				self = UnsafeTlsDatabaseFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.VerifyChainFinish(self, result)
+
+				cret = C.GTlsCertificateFlags(goret)
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
+}
+
+// RegisterTlsDatabaseSubClass is used to register a go subclass of GTlsDatabase. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterTlsDatabaseSubClass[InstanceT TlsDatabase](
+		name string,
+		classInit func(class *TlsDatabaseClass),
+		constructor func() InstanceT,
+		overrides TlsDatabaseOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeTlsDatabase,
+		UnsafeTlsDatabaseClassFromGlibBorrow,
+		UnsafeApplyTlsDatabaseOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapTlsDatabase(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // TlsInteractionInstance is the instance type used by all types extending GTlsInteraction. It is used internally by the bindings. Users should use the interface [TlsInteraction] instead.
@@ -84173,27 +93911,195 @@ func UnsafeApplyTlsInteractionOverrides[Instance TlsInteraction](gclass unsafe.P
 
 	if overrides.AskPassword != nil {
 		pclass.ask_password = (*[0]byte)(C._gotk4_gio2_TlsInteraction_ask_password)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_TlsInteraction_ask_password",
+			func(carg0 *C.GTlsInteraction, carg1 *C.GTlsPassword, carg2 *C.GCancellable, _cerr **C.GError) (cret C.GTlsInteractionResult) {
+				var interaction Instance             // go GTlsInteraction subclass
+				var cancellable context.Context      // in, none, converted, nullable
+				var password    TlsPassword          // in, none, converted
+				var goret       TLSInteractionResult // return, none, casted
+				var _goerr      error                // out, full, converted
+
+				interaction = UnsafeTlsInteractionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg2 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
+				}
+				password = UnsafeTlsPasswordFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.AskPassword(interaction, cancellable, password)
+
+				cret = C.GTlsInteractionResult(goret)
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.AskPasswordAsync != nil {
 		pclass.ask_password_async = (*[0]byte)(C._gotk4_gio2_TlsInteraction_ask_password_async)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_TlsInteraction_ask_password_async",
+			func(carg0 *C.GTlsInteraction, carg1 *C.GTlsPassword, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
+				var interaction Instance           // go GTlsInteraction subclass
+				var cancellable context.Context    // in, none, converted, nullable
+				var password    TlsPassword        // in, none, converted
+				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg4, nullable
+
+				interaction = UnsafeTlsInteractionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg2 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
+				}
+				password = UnsafeTlsPasswordFromGlibNone(unsafe.Pointer(carg1))
+				if carg3 != nil {
+					_ = callback
+					_ = carg3
+					_ = _
+					_ = carg4
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.AskPasswordAsync(interaction, cancellable, password, callback)
+			},
+		)
 	}
 
 	if overrides.AskPasswordFinish != nil {
 		pclass.ask_password_finish = (*[0]byte)(C._gotk4_gio2_TlsInteraction_ask_password_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_TlsInteraction_ask_password_finish",
+			func(carg0 *C.GTlsInteraction, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.GTlsInteractionResult) {
+				var interaction Instance             // go GTlsInteraction subclass
+				var result      AsyncResult          // in, none, converted
+				var goret       TLSInteractionResult // return, none, casted
+				var _goerr      error                // out, full, converted
+
+				interaction = UnsafeTlsInteractionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.AskPasswordFinish(interaction, result)
+
+				cret = C.GTlsInteractionResult(goret)
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.RequestCertificate != nil {
 		pclass.request_certificate = (*[0]byte)(C._gotk4_gio2_TlsInteraction_request_certificate)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_TlsInteraction_request_certificate",
+			func(carg0 *C.GTlsInteraction, carg1 *C.GTlsConnection, carg2 C.GTlsCertificateRequestFlags, carg3 *C.GCancellable, _cerr **C.GError) (cret C.GTlsInteractionResult) {
+				var interaction Instance                   // go GTlsInteraction subclass
+				var cancellable context.Context            // in, none, converted, nullable
+				var connection  TlsConnection              // in, none, converted
+				var flags       TLSCertificateRequestFlags // in, none, casted
+				var goret       TLSInteractionResult       // return, none, casted
+				var _goerr      error                      // out, full, converted
+
+				interaction = UnsafeTlsInteractionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg3 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
+				}
+				connection = UnsafeTlsConnectionFromGlibNone(unsafe.Pointer(carg1))
+				flags = TLSCertificateRequestFlags(carg2)
+
+				goret, _goerr = overrides.RequestCertificate(interaction, cancellable, connection, flags)
+
+				cret = C.GTlsInteractionResult(goret)
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.RequestCertificateAsync != nil {
 		pclass.request_certificate_async = (*[0]byte)(C._gotk4_gio2_TlsInteraction_request_certificate_async)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_TlsInteraction_request_certificate_async",
+			func(carg0 *C.GTlsInteraction, carg1 *C.GTlsConnection, carg2 C.GTlsCertificateRequestFlags, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
+				var interaction Instance                   // go GTlsInteraction subclass
+				var cancellable context.Context            // in, none, converted, nullable
+				var connection  TlsConnection              // in, none, converted
+				var flags       TLSCertificateRequestFlags // in, none, casted
+				var callback    AsyncReadyCallback         // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg5, nullable
+
+				interaction = UnsafeTlsInteractionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg3 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
+				}
+				connection = UnsafeTlsConnectionFromGlibNone(unsafe.Pointer(carg1))
+				flags = TLSCertificateRequestFlags(carg2)
+				if carg4 != nil {
+					_ = callback
+					_ = carg4
+					_ = _
+					_ = carg5
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.RequestCertificateAsync(interaction, cancellable, connection, flags, callback)
+			},
+		)
 	}
 
 	if overrides.RequestCertificateFinish != nil {
 		pclass.request_certificate_finish = (*[0]byte)(C._gotk4_gio2_TlsInteraction_request_certificate_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_TlsInteraction_request_certificate_finish",
+			func(carg0 *C.GTlsInteraction, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.GTlsInteractionResult) {
+				var interaction Instance             // go GTlsInteraction subclass
+				var result      AsyncResult          // in, none, converted
+				var goret       TLSInteractionResult // return, none, casted
+				var _goerr      error                // out, full, converted
+
+				interaction = UnsafeTlsInteractionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.RequestCertificateFinish(interaction, result)
+
+				cret = C.GTlsInteractionResult(goret)
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
+}
+
+// RegisterTlsInteractionSubClass is used to register a go subclass of GTlsInteraction. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterTlsInteractionSubClass[InstanceT TlsInteraction](
+		name string,
+		classInit func(class *TlsInteractionClass),
+		constructor func() InstanceT,
+		overrides TlsInteractionOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeTlsInteraction,
+		UnsafeTlsInteractionClassFromGlibBorrow,
+		UnsafeApplyTlsInteractionOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapTlsInteraction(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // TlsPasswordInstance is the instance type used by all types extending GTlsPassword. It is used internally by the bindings. Users should use the interface [TlsPassword] instead.
@@ -84583,11 +94489,76 @@ func UnsafeApplyTlsPasswordOverrides[Instance TlsPassword](gclass unsafe.Pointer
 
 	if overrides.GetDefaultWarning != nil {
 		pclass.get_default_warning = (*[0]byte)(C._gotk4_gio2_TlsPassword_get_default_warning)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_TlsPassword_get_default_warning",
+			func(carg0 *C.GTlsPassword) (cret *C.gchar) {
+				var password Instance // go GTlsPassword subclass
+				var goret    string   // return, none, string
+
+				password = UnsafeTlsPasswordFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetDefaultWarning(password)
+
+				cret = (*C.gchar)(unsafe.Pointer(C.CString(goret)))
+				defer C.free(unsafe.Pointer(cret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetValue != nil {
 		pclass.get_value = (*[0]byte)(C._gotk4_gio2_TlsPassword_get_value)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_TlsPassword_get_value",
+			func(carg0 *C.GTlsPassword, carg1 *C.gsize) (cret *C.guchar) {
+				var password Instance // go GTlsPassword subclass
+				var length   uint     // out, transfer: full, C Pointers: 0, Name: gsize, optional, caller-allocates
+				var goret    []byte   // return, transfer: none, C Pointers: 1, Name: array[guchar], scope: , array (inner: *typesystem.CastablePrimitive)
+
+				password = UnsafeTlsPasswordFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				length, goret = overrides.GetValue(password)
+
+				_ = length
+				_ = carg1
+				panic("unimplemented conversion of uint (gsize)")
+				_ = goret
+				_ = cret
+				panic("unimplemented conversion of []byte (const guchar*)")
+
+				return cret
+			},
+		)
 	}
+}
+
+// RegisterTlsPasswordSubClass is used to register a go subclass of GTlsPassword. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterTlsPasswordSubClass[InstanceT TlsPassword](
+		name string,
+		classInit func(class *TlsPasswordClass),
+		constructor func() InstanceT,
+		overrides TlsPasswordOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeTlsPassword,
+		UnsafeTlsPasswordClassFromGlibBorrow,
+		UnsafeApplyTlsPasswordOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapTlsPassword(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // VfsInstance is the instance type used by all types extending GVfs. It is used internally by the bindings. Users should use the interface [Vfs] instead.
@@ -85121,39 +95092,226 @@ func UnsafeApplyVfsOverrides[Instance Vfs](gclass unsafe.Pointer, overrides VfsO
 
 	if overrides.AddWritableNamespaces != nil {
 		pclass.add_writable_namespaces = (*[0]byte)(C._gotk4_gio2_Vfs_add_writable_namespaces)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Vfs_add_writable_namespaces",
+			func(carg0 *C.GVfs, carg1 *C.GFileAttributeInfoList) {
+				var vfs  Instance               // go GVfs subclass
+				var list *FileAttributeInfoList // in, none, converted
+
+				vfs = UnsafeVfsFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				list = UnsafeFileAttributeInfoListFromGlibNone(unsafe.Pointer(carg1))
+
+				overrides.AddWritableNamespaces(vfs, list)
+			},
+		)
 	}
 
 	if overrides.GetFileForPath != nil {
 		pclass.get_file_for_path = (*[0]byte)(C._gotk4_gio2_Vfs_get_file_for_path)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Vfs_get_file_for_path",
+			func(carg0 *C.GVfs, carg1 *C.char) (cret *C.GFile) {
+				var vfs   Instance // go GVfs subclass
+				var path  string   // in, none, string, casted *C.gchar
+				var goret File     // return, full, converted
+
+				vfs = UnsafeVfsFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				path = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+
+				goret = overrides.GetFileForPath(vfs, path)
+
+				cret = (*C.GFile)(UnsafeFileToGlibFull(goret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetFileForURI != nil {
 		pclass.get_file_for_uri = (*[0]byte)(C._gotk4_gio2_Vfs_get_file_for_uri)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Vfs_get_file_for_uri",
+			func(carg0 *C.GVfs, carg1 *C.char) (cret *C.GFile) {
+				var vfs   Instance // go GVfs subclass
+				var uri   string   // in, none, string, casted *C.gchar
+				var goret File     // return, full, converted
+
+				vfs = UnsafeVfsFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				uri = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+
+				goret = overrides.GetFileForURI(vfs, uri)
+
+				cret = (*C.GFile)(UnsafeFileToGlibFull(goret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetSupportedURISchemes != nil {
 		pclass.get_supported_uri_schemes = (*[0]byte)(C._gotk4_gio2_Vfs_get_supported_uri_schemes)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Vfs_get_supported_uri_schemes",
+			func(carg0 *C.GVfs) (cret **C.gchar) {
+				var vfs   Instance // go GVfs subclass
+				var goret []string // return, transfer: none, C Pointers: 2, Name: array[utf8], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
+
+				vfs = UnsafeVfsFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetSupportedURISchemes(vfs)
+
+				_ = goret
+				_ = cret
+				panic("unimplemented conversion of []string (const gchar* const*)")
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.IsActive != nil {
 		pclass.is_active = (*[0]byte)(C._gotk4_gio2_Vfs_is_active)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Vfs_is_active",
+			func(carg0 *C.GVfs) (cret C.gboolean) {
+				var vfs   Instance // go GVfs subclass
+				var goret bool     // return
+
+				vfs = UnsafeVfsFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.IsActive(vfs)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.LocalFileMoved != nil {
 		pclass.local_file_moved = (*[0]byte)(C._gotk4_gio2_Vfs_local_file_moved)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Vfs_local_file_moved",
+			func(carg0 *C.GVfs, carg1 *C.char, carg2 *C.char) {
+				var vfs    Instance // go GVfs subclass
+				var source string   // in, none, string, casted *C.gchar
+				var dest   string   // in, none, string, casted *C.gchar
+
+				vfs = UnsafeVfsFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				source = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+				dest = C.GoString((*C.char)(unsafe.Pointer(carg2)))
+
+				overrides.LocalFileMoved(vfs, source, dest)
+			},
+		)
 	}
 
 	if overrides.LocalFileRemoved != nil {
 		pclass.local_file_removed = (*[0]byte)(C._gotk4_gio2_Vfs_local_file_removed)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Vfs_local_file_removed",
+			func(carg0 *C.GVfs, carg1 *C.char) {
+				var vfs      Instance // go GVfs subclass
+				var filename string   // in, none, string, casted *C.gchar
+
+				vfs = UnsafeVfsFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				filename = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+
+				overrides.LocalFileRemoved(vfs, filename)
+			},
+		)
 	}
 
 	if overrides.LocalFileSetAttributes != nil {
 		pclass.local_file_set_attributes = (*[0]byte)(C._gotk4_gio2_Vfs_local_file_set_attributes)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Vfs_local_file_set_attributes",
+			func(carg0 *C.GVfs, carg1 *C.char, carg2 *C.GFileInfo, carg3 C.GFileQueryInfoFlags, carg4 *C.GCancellable, _cerr **C.GError) (cret C.gboolean) {
+				var vfs         Instance           // go GVfs subclass
+				var cancellable context.Context    // in, none, converted, nullable
+				var filename    string             // in, none, string, casted *C.gchar
+				var info        FileInfo           // in, none, converted
+				var flags       FileQueryInfoFlags // in, none, casted
+				var goret       bool               // return
+				var _goerr      error              // out, full, converted
+
+				vfs = UnsafeVfsFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg4 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg4))
+				}
+				filename = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+				info = UnsafeFileInfoFromGlibNone(unsafe.Pointer(carg2))
+				flags = FileQueryInfoFlags(carg3)
+
+				goret, _goerr = overrides.LocalFileSetAttributes(vfs, cancellable, filename, info, flags)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.ParseName != nil {
 		pclass.parse_name = (*[0]byte)(C._gotk4_gio2_Vfs_parse_name)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_Vfs_parse_name",
+			func(carg0 *C.GVfs, carg1 *C.char) (cret *C.GFile) {
+				var vfs       Instance // go GVfs subclass
+				var parseName string   // in, none, string, casted *C.gchar
+				var goret     File     // return, full, converted
+
+				vfs = UnsafeVfsFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				parseName = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+
+				goret = overrides.ParseName(vfs, parseName)
+
+				cret = (*C.GFile)(UnsafeFileToGlibFull(goret))
+
+				return cret
+			},
+		)
 	}
+}
+
+// RegisterVfsSubClass is used to register a go subclass of GVfs. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterVfsSubClass[InstanceT Vfs](
+		name string,
+		classInit func(class *VfsClass),
+		constructor func() InstanceT,
+		overrides VfsOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeVfs,
+		UnsafeVfsClassFromGlibBorrow,
+		UnsafeApplyVfsOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapVfs(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // VolumeMonitorInstance is the instance type used by all types extending GVolumeMonitor. It is used internally by the bindings. Users should use the interface [VolumeMonitor] instead.
@@ -85766,71 +95924,347 @@ func UnsafeApplyVolumeMonitorOverrides[Instance VolumeMonitor](gclass unsafe.Poi
 
 	if overrides.DriveChanged != nil {
 		pclass.drive_changed = (*[0]byte)(C._gotk4_gio2_VolumeMonitor_drive_changed)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_VolumeMonitor_drive_changed",
+			func(carg0 *C.GVolumeMonitor, carg1 *C.GDrive) {
+				var volumeMonitor Instance // go GVolumeMonitor subclass
+				var drive         Drive    // in, none, converted
+
+				volumeMonitor = UnsafeVolumeMonitorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg1))
+
+				overrides.DriveChanged(volumeMonitor, drive)
+			},
+		)
 	}
 
 	if overrides.DriveConnected != nil {
 		pclass.drive_connected = (*[0]byte)(C._gotk4_gio2_VolumeMonitor_drive_connected)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_VolumeMonitor_drive_connected",
+			func(carg0 *C.GVolumeMonitor, carg1 *C.GDrive) {
+				var volumeMonitor Instance // go GVolumeMonitor subclass
+				var drive         Drive    // in, none, converted
+
+				volumeMonitor = UnsafeVolumeMonitorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg1))
+
+				overrides.DriveConnected(volumeMonitor, drive)
+			},
+		)
 	}
 
 	if overrides.DriveDisconnected != nil {
 		pclass.drive_disconnected = (*[0]byte)(C._gotk4_gio2_VolumeMonitor_drive_disconnected)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_VolumeMonitor_drive_disconnected",
+			func(carg0 *C.GVolumeMonitor, carg1 *C.GDrive) {
+				var volumeMonitor Instance // go GVolumeMonitor subclass
+				var drive         Drive    // in, none, converted
+
+				volumeMonitor = UnsafeVolumeMonitorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg1))
+
+				overrides.DriveDisconnected(volumeMonitor, drive)
+			},
+		)
 	}
 
 	if overrides.DriveEjectButton != nil {
 		pclass.drive_eject_button = (*[0]byte)(C._gotk4_gio2_VolumeMonitor_drive_eject_button)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_VolumeMonitor_drive_eject_button",
+			func(carg0 *C.GVolumeMonitor, carg1 *C.GDrive) {
+				var volumeMonitor Instance // go GVolumeMonitor subclass
+				var drive         Drive    // in, none, converted
+
+				volumeMonitor = UnsafeVolumeMonitorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg1))
+
+				overrides.DriveEjectButton(volumeMonitor, drive)
+			},
+		)
 	}
 
 	if overrides.DriveStopButton != nil {
 		pclass.drive_stop_button = (*[0]byte)(C._gotk4_gio2_VolumeMonitor_drive_stop_button)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_VolumeMonitor_drive_stop_button",
+			func(carg0 *C.GVolumeMonitor, carg1 *C.GDrive) {
+				var volumeMonitor Instance // go GVolumeMonitor subclass
+				var drive         Drive    // in, none, converted
+
+				volumeMonitor = UnsafeVolumeMonitorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg1))
+
+				overrides.DriveStopButton(volumeMonitor, drive)
+			},
+		)
 	}
 
 	if overrides.GetConnectedDrives != nil {
 		pclass.get_connected_drives = (*[0]byte)(C._gotk4_gio2_VolumeMonitor_get_connected_drives)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_VolumeMonitor_get_connected_drives",
+			func(carg0 *C.GVolumeMonitor) (cret *C.GList) {
+				var volumeMonitor Instance // go GVolumeMonitor subclass
+				var goret         []Drive  // return, transfer: full, C Pointers: 1, Name: List, scope: 
+
+				volumeMonitor = UnsafeVolumeMonitorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetConnectedDrives(volumeMonitor)
+
+				_ = goret
+				_ = cret
+				panic("unimplemented conversion of []Drive (GList*)")
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetMountForUUID != nil {
 		pclass.get_mount_for_uuid = (*[0]byte)(C._gotk4_gio2_VolumeMonitor_get_mount_for_uuid)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_VolumeMonitor_get_mount_for_uuid",
+			func(carg0 *C.GVolumeMonitor, carg1 *C.char) (cret *C.GMount) {
+				var volumeMonitor Instance // go GVolumeMonitor subclass
+				var uuid          string   // in, none, string, casted *C.gchar
+				var goret         Mount    // return, full, converted, nullable
+
+				volumeMonitor = UnsafeVolumeMonitorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				uuid = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+
+				goret = overrides.GetMountForUUID(volumeMonitor, uuid)
+
+				if goret != nil {
+					cret = (*C.GMount)(UnsafeMountToGlibFull(goret))
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetMounts != nil {
 		pclass.get_mounts = (*[0]byte)(C._gotk4_gio2_VolumeMonitor_get_mounts)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_VolumeMonitor_get_mounts",
+			func(carg0 *C.GVolumeMonitor) (cret *C.GList) {
+				var volumeMonitor Instance // go GVolumeMonitor subclass
+				var goret         []Mount  // return, transfer: full, C Pointers: 1, Name: List, scope: 
+
+				volumeMonitor = UnsafeVolumeMonitorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetMounts(volumeMonitor)
+
+				_ = goret
+				_ = cret
+				panic("unimplemented conversion of []Mount (GList*)")
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetVolumeForUUID != nil {
 		pclass.get_volume_for_uuid = (*[0]byte)(C._gotk4_gio2_VolumeMonitor_get_volume_for_uuid)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_VolumeMonitor_get_volume_for_uuid",
+			func(carg0 *C.GVolumeMonitor, carg1 *C.char) (cret *C.GVolume) {
+				var volumeMonitor Instance // go GVolumeMonitor subclass
+				var uuid          string   // in, none, string, casted *C.gchar
+				var goret         Volume   // return, full, converted, nullable
+
+				volumeMonitor = UnsafeVolumeMonitorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				uuid = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+
+				goret = overrides.GetVolumeForUUID(volumeMonitor, uuid)
+
+				if goret != nil {
+					cret = (*C.GVolume)(UnsafeVolumeToGlibFull(goret))
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetVolumes != nil {
 		pclass.get_volumes = (*[0]byte)(C._gotk4_gio2_VolumeMonitor_get_volumes)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_VolumeMonitor_get_volumes",
+			func(carg0 *C.GVolumeMonitor) (cret *C.GList) {
+				var volumeMonitor Instance // go GVolumeMonitor subclass
+				var goret         []Volume // return, transfer: full, C Pointers: 1, Name: List, scope: 
+
+				volumeMonitor = UnsafeVolumeMonitorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetVolumes(volumeMonitor)
+
+				_ = goret
+				_ = cret
+				panic("unimplemented conversion of []Volume (GList*)")
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.MountAdded != nil {
 		pclass.mount_added = (*[0]byte)(C._gotk4_gio2_VolumeMonitor_mount_added)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_VolumeMonitor_mount_added",
+			func(carg0 *C.GVolumeMonitor, carg1 *C.GMount) {
+				var volumeMonitor Instance // go GVolumeMonitor subclass
+				var mount         Mount    // in, none, converted
+
+				volumeMonitor = UnsafeVolumeMonitorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				mount = UnsafeMountFromGlibNone(unsafe.Pointer(carg1))
+
+				overrides.MountAdded(volumeMonitor, mount)
+			},
+		)
 	}
 
 	if overrides.MountChanged != nil {
 		pclass.mount_changed = (*[0]byte)(C._gotk4_gio2_VolumeMonitor_mount_changed)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_VolumeMonitor_mount_changed",
+			func(carg0 *C.GVolumeMonitor, carg1 *C.GMount) {
+				var volumeMonitor Instance // go GVolumeMonitor subclass
+				var mount         Mount    // in, none, converted
+
+				volumeMonitor = UnsafeVolumeMonitorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				mount = UnsafeMountFromGlibNone(unsafe.Pointer(carg1))
+
+				overrides.MountChanged(volumeMonitor, mount)
+			},
+		)
 	}
 
 	if overrides.MountPreUnmount != nil {
 		pclass.mount_pre_unmount = (*[0]byte)(C._gotk4_gio2_VolumeMonitor_mount_pre_unmount)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_VolumeMonitor_mount_pre_unmount",
+			func(carg0 *C.GVolumeMonitor, carg1 *C.GMount) {
+				var volumeMonitor Instance // go GVolumeMonitor subclass
+				var mount         Mount    // in, none, converted
+
+				volumeMonitor = UnsafeVolumeMonitorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				mount = UnsafeMountFromGlibNone(unsafe.Pointer(carg1))
+
+				overrides.MountPreUnmount(volumeMonitor, mount)
+			},
+		)
 	}
 
 	if overrides.MountRemoved != nil {
 		pclass.mount_removed = (*[0]byte)(C._gotk4_gio2_VolumeMonitor_mount_removed)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_VolumeMonitor_mount_removed",
+			func(carg0 *C.GVolumeMonitor, carg1 *C.GMount) {
+				var volumeMonitor Instance // go GVolumeMonitor subclass
+				var mount         Mount    // in, none, converted
+
+				volumeMonitor = UnsafeVolumeMonitorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				mount = UnsafeMountFromGlibNone(unsafe.Pointer(carg1))
+
+				overrides.MountRemoved(volumeMonitor, mount)
+			},
+		)
 	}
 
 	if overrides.VolumeAdded != nil {
 		pclass.volume_added = (*[0]byte)(C._gotk4_gio2_VolumeMonitor_volume_added)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_VolumeMonitor_volume_added",
+			func(carg0 *C.GVolumeMonitor, carg1 *C.GVolume) {
+				var volumeMonitor Instance // go GVolumeMonitor subclass
+				var volume        Volume   // in, none, converted
+
+				volumeMonitor = UnsafeVolumeMonitorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				volume = UnsafeVolumeFromGlibNone(unsafe.Pointer(carg1))
+
+				overrides.VolumeAdded(volumeMonitor, volume)
+			},
+		)
 	}
 
 	if overrides.VolumeChanged != nil {
 		pclass.volume_changed = (*[0]byte)(C._gotk4_gio2_VolumeMonitor_volume_changed)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_VolumeMonitor_volume_changed",
+			func(carg0 *C.GVolumeMonitor, carg1 *C.GVolume) {
+				var volumeMonitor Instance // go GVolumeMonitor subclass
+				var volume        Volume   // in, none, converted
+
+				volumeMonitor = UnsafeVolumeMonitorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				volume = UnsafeVolumeFromGlibNone(unsafe.Pointer(carg1))
+
+				overrides.VolumeChanged(volumeMonitor, volume)
+			},
+		)
 	}
 
 	if overrides.VolumeRemoved != nil {
 		pclass.volume_removed = (*[0]byte)(C._gotk4_gio2_VolumeMonitor_volume_removed)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_VolumeMonitor_volume_removed",
+			func(carg0 *C.GVolumeMonitor, carg1 *C.GVolume) {
+				var volumeMonitor Instance // go GVolumeMonitor subclass
+				var volume        Volume   // in, none, converted
+
+				volumeMonitor = UnsafeVolumeMonitorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				volume = UnsafeVolumeFromGlibNone(unsafe.Pointer(carg1))
+
+				overrides.VolumeRemoved(volumeMonitor, volume)
+			},
+		)
 	}
+}
+
+// RegisterVolumeMonitorSubClass is used to register a go subclass of GVolumeMonitor. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterVolumeMonitorSubClass[InstanceT VolumeMonitor](
+		name string,
+		classInit func(class *VolumeMonitorClass),
+		constructor func() InstanceT,
+		overrides VolumeMonitorOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeVolumeMonitor,
+		UnsafeVolumeMonitorClassFromGlibBorrow,
+		UnsafeApplyVolumeMonitorOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapVolumeMonitor(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // ZlibCompressorInstance is the instance type used by all types extending GZlibCompressor. It is used internally by the bindings. Users should use the interface [ZlibCompressor] instead.
@@ -86006,6 +96440,32 @@ func UnsafeApplyZlibCompressorOverrides[Instance ZlibCompressor](gclass unsafe.P
 	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
 }
 
+// RegisterZlibCompressorSubClass is used to register a go subclass of GZlibCompressor. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterZlibCompressorSubClass[InstanceT ZlibCompressor](
+		name string,
+		classInit func(class *ZlibCompressorClass),
+		constructor func() InstanceT,
+		overrides ZlibCompressorOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeZlibCompressor,
+		UnsafeZlibCompressorClassFromGlibBorrow,
+		UnsafeApplyZlibCompressorOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapZlibCompressor(obj)
+		},
+		interfaceInits...,
+	)
+}
+
 // ZlibDecompressorInstance is the instance type used by all types extending GZlibDecompressor. It is used internally by the bindings. Users should use the interface [ZlibDecompressor] instead.
 type ZlibDecompressorInstance struct {
 	_ [0]func() // equal guard
@@ -86138,6 +96598,32 @@ type ZlibDecompressorOverrides[Instance ZlibDecompressor] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplyZlibDecompressorOverrides[Instance ZlibDecompressor](gclass unsafe.Pointer, overrides ZlibDecompressorOverrides[Instance]) {
 	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
+}
+
+// RegisterZlibDecompressorSubClass is used to register a go subclass of GZlibDecompressor. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterZlibDecompressorSubClass[InstanceT ZlibDecompressor](
+		name string,
+		classInit func(class *ZlibDecompressorClass),
+		constructor func() InstanceT,
+		overrides ZlibDecompressorOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeZlibDecompressor,
+		UnsafeZlibDecompressorClassFromGlibBorrow,
+		UnsafeApplyZlibDecompressorOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapZlibDecompressor(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // DBusMenuModelInstance is the instance type used by all types extending GDBusMenuModel. It is used internally by the bindings. Users should use the interface [DBusMenuModel] instead.
@@ -86650,39 +97136,260 @@ func UnsafeApplyFileIOStreamOverrides[Instance FileIOStream](gclass unsafe.Point
 
 	if overrides.CanSeek != nil {
 		pclass.can_seek = (*[0]byte)(C._gotk4_gio2_FileIOStream_can_seek)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_FileIOStream_can_seek",
+			func(carg0 *C.GFileIOStream) (cret C.gboolean) {
+				var stream Instance // go GFileIOStream subclass
+				var goret  bool     // return
+
+				stream = UnsafeFileIOStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.CanSeek(stream)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.CanTruncate != nil {
 		pclass.can_truncate = (*[0]byte)(C._gotk4_gio2_FileIOStream_can_truncate)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_FileIOStream_can_truncate",
+			func(carg0 *C.GFileIOStream) (cret C.gboolean) {
+				var stream Instance // go GFileIOStream subclass
+				var goret  bool     // return
+
+				stream = UnsafeFileIOStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.CanTruncate(stream)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetETag != nil {
 		pclass.get_etag = (*[0]byte)(C._gotk4_gio2_FileIOStream_get_etag)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_FileIOStream_get_etag",
+			func(carg0 *C.GFileIOStream) (cret *C.char) {
+				var stream Instance // go GFileIOStream subclass
+				var goret  string   // return, full, string, nullable-string
+
+				stream = UnsafeFileIOStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetETag(stream)
+
+				if goret != "" {
+					cret = (*C.char)(unsafe.Pointer(C.CString(goret)))
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.QueryInfo != nil {
 		pclass.query_info = (*[0]byte)(C._gotk4_gio2_FileIOStream_query_info)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_FileIOStream_query_info",
+			func(carg0 *C.GFileIOStream, carg1 *C.char, carg2 *C.GCancellable, _cerr **C.GError) (cret *C.GFileInfo) {
+				var stream      Instance        // go GFileIOStream subclass
+				var cancellable context.Context // in, none, converted, nullable
+				var attributes  string          // in, none, string, casted *C.gchar
+				var goret       FileInfo        // return, full, converted
+				var _goerr      error           // out, full, converted
+
+				stream = UnsafeFileIOStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg2 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
+				}
+				attributes = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+
+				goret, _goerr = overrides.QueryInfo(stream, cancellable, attributes)
+
+				cret = (*C.GFileInfo)(UnsafeFileInfoToGlibFull(goret))
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.QueryInfoAsync != nil {
 		pclass.query_info_async = (*[0]byte)(C._gotk4_gio2_FileIOStream_query_info_async)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_FileIOStream_query_info_async",
+			func(carg0 *C.GFileIOStream, carg1 *C.char, carg2 C.int, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
+				var stream      Instance           // go GFileIOStream subclass
+				var cancellable context.Context    // in, none, converted, nullable
+				var attributes  string             // in, none, string, casted *C.gchar
+				var ioPriority  int                // in, none, casted, casted C.gint
+				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg5, nullable
+
+				stream = UnsafeFileIOStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg3 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
+				}
+				attributes = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+				ioPriority = int(carg2)
+				if carg4 != nil {
+					_ = callback
+					_ = carg4
+					_ = _
+					_ = carg5
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.QueryInfoAsync(stream, cancellable, attributes, ioPriority, callback)
+			},
+		)
 	}
 
 	if overrides.QueryInfoFinish != nil {
 		pclass.query_info_finish = (*[0]byte)(C._gotk4_gio2_FileIOStream_query_info_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_FileIOStream_query_info_finish",
+			func(carg0 *C.GFileIOStream, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GFileInfo) {
+				var stream Instance    // go GFileIOStream subclass
+				var result AsyncResult // in, none, converted
+				var goret  FileInfo    // return, full, converted
+				var _goerr error       // out, full, converted
+
+				stream = UnsafeFileIOStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.QueryInfoFinish(stream, result)
+
+				cret = (*C.GFileInfo)(UnsafeFileInfoToGlibFull(goret))
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.Seek != nil {
 		pclass.seek = (*[0]byte)(C._gotk4_gio2_FileIOStream_seek)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_FileIOStream_seek",
+			func(carg0 *C.GFileIOStream, carg1 C.goffset, carg2 C.GSeekType, carg3 *C.GCancellable, _cerr **C.GError) (cret C.gboolean) {
+				var stream      Instance        // go GFileIOStream subclass
+				var cancellable context.Context // in, none, converted, nullable
+				var offset      int64           // in, none, casted, casted C.gint64
+				var typ         glib.SeekType   // in, none, casted
+				var goret       bool            // return
+				var _goerr      error           // out, full, converted
+
+				stream = UnsafeFileIOStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg3 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
+				}
+				offset = int64(carg1)
+				typ = glib.SeekType(carg2)
+
+				goret, _goerr = overrides.Seek(stream, cancellable, offset, typ)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.Tell != nil {
 		pclass.tell = (*[0]byte)(C._gotk4_gio2_FileIOStream_tell)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_FileIOStream_tell",
+			func(carg0 *C.GFileIOStream) (cret C.goffset) {
+				var stream Instance // go GFileIOStream subclass
+				var goret  int64    // return, none, casted, casted C.gint64
+
+				stream = UnsafeFileIOStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.Tell(stream)
+
+				cret = C.goffset(goret)
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.TruncateFn != nil {
 		pclass.truncate_fn = (*[0]byte)(C._gotk4_gio2_FileIOStream_truncate_fn)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_FileIOStream_truncate_fn",
+			func(carg0 *C.GFileIOStream, carg1 C.goffset, carg2 *C.GCancellable, _cerr **C.GError) (cret C.gboolean) {
+				var stream      Instance        // go GFileIOStream subclass
+				var cancellable context.Context // in, none, converted, nullable
+				var size        int64           // in, none, casted, casted C.gint64
+				var goret       bool            // return
+				var _goerr      error           // out, full, converted
+
+				stream = UnsafeFileIOStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg2 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
+				}
+				size = int64(carg1)
+
+				goret, _goerr = overrides.TruncateFn(stream, cancellable, size)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
+}
+
+// RegisterFileIOStreamSubClass is used to register a go subclass of GFileIOStream. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterFileIOStreamSubClass[InstanceT FileIOStream](
+		name string,
+		classInit func(class *FileIOStreamClass),
+		constructor func() InstanceT,
+		overrides FileIOStreamOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeFileIOStream,
+		UnsafeFileIOStreamClassFromGlibBorrow,
+		UnsafeApplyFileIOStreamOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapFileIOStream(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // FileInputStreamInstance is the instance type used by all types extending GFileInputStream. It is used internally by the bindings. Users should use the interface [FileInputStream] instead.
@@ -87006,27 +97713,186 @@ func UnsafeApplyFileInputStreamOverrides[Instance FileInputStream](gclass unsafe
 
 	if overrides.CanSeek != nil {
 		pclass.can_seek = (*[0]byte)(C._gotk4_gio2_FileInputStream_can_seek)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_FileInputStream_can_seek",
+			func(carg0 *C.GFileInputStream) (cret C.gboolean) {
+				var stream Instance // go GFileInputStream subclass
+				var goret  bool     // return
+
+				stream = UnsafeFileInputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.CanSeek(stream)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.QueryInfo != nil {
 		pclass.query_info = (*[0]byte)(C._gotk4_gio2_FileInputStream_query_info)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_FileInputStream_query_info",
+			func(carg0 *C.GFileInputStream, carg1 *C.char, carg2 *C.GCancellable, _cerr **C.GError) (cret *C.GFileInfo) {
+				var stream      Instance        // go GFileInputStream subclass
+				var cancellable context.Context // in, none, converted, nullable
+				var attributes  string          // in, none, string, casted *C.gchar
+				var goret       FileInfo        // return, full, converted
+				var _goerr      error           // out, full, converted
+
+				stream = UnsafeFileInputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg2 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
+				}
+				attributes = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+
+				goret, _goerr = overrides.QueryInfo(stream, cancellable, attributes)
+
+				cret = (*C.GFileInfo)(UnsafeFileInfoToGlibFull(goret))
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.QueryInfoAsync != nil {
 		pclass.query_info_async = (*[0]byte)(C._gotk4_gio2_FileInputStream_query_info_async)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_FileInputStream_query_info_async",
+			func(carg0 *C.GFileInputStream, carg1 *C.char, carg2 C.int, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
+				var stream      Instance           // go GFileInputStream subclass
+				var cancellable context.Context    // in, none, converted, nullable
+				var attributes  string             // in, none, string, casted *C.gchar
+				var ioPriority  int                // in, none, casted, casted C.gint
+				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg5, nullable
+
+				stream = UnsafeFileInputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg3 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
+				}
+				attributes = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+				ioPriority = int(carg2)
+				if carg4 != nil {
+					_ = callback
+					_ = carg4
+					_ = _
+					_ = carg5
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.QueryInfoAsync(stream, cancellable, attributes, ioPriority, callback)
+			},
+		)
 	}
 
 	if overrides.QueryInfoFinish != nil {
 		pclass.query_info_finish = (*[0]byte)(C._gotk4_gio2_FileInputStream_query_info_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_FileInputStream_query_info_finish",
+			func(carg0 *C.GFileInputStream, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GFileInfo) {
+				var stream Instance    // go GFileInputStream subclass
+				var result AsyncResult // in, none, converted
+				var goret  FileInfo    // return, full, converted
+				var _goerr error       // out, full, converted
+
+				stream = UnsafeFileInputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.QueryInfoFinish(stream, result)
+
+				cret = (*C.GFileInfo)(UnsafeFileInfoToGlibFull(goret))
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.Seek != nil {
 		pclass.seek = (*[0]byte)(C._gotk4_gio2_FileInputStream_seek)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_FileInputStream_seek",
+			func(carg0 *C.GFileInputStream, carg1 C.goffset, carg2 C.GSeekType, carg3 *C.GCancellable, _cerr **C.GError) (cret C.gboolean) {
+				var stream      Instance        // go GFileInputStream subclass
+				var cancellable context.Context // in, none, converted, nullable
+				var offset      int64           // in, none, casted, casted C.gint64
+				var typ         glib.SeekType   // in, none, casted
+				var goret       bool            // return
+				var _goerr      error           // out, full, converted
+
+				stream = UnsafeFileInputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg3 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
+				}
+				offset = int64(carg1)
+				typ = glib.SeekType(carg2)
+
+				goret, _goerr = overrides.Seek(stream, cancellable, offset, typ)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.Tell != nil {
 		pclass.tell = (*[0]byte)(C._gotk4_gio2_FileInputStream_tell)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_FileInputStream_tell",
+			func(carg0 *C.GFileInputStream) (cret C.goffset) {
+				var stream Instance // go GFileInputStream subclass
+				var goret  int64    // return, none, casted, casted C.gint64
+
+				stream = UnsafeFileInputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.Tell(stream)
+
+				cret = C.goffset(goret)
+
+				return cret
+			},
+		)
 	}
+}
+
+// RegisterFileInputStreamSubClass is used to register a go subclass of GFileInputStream. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterFileInputStreamSubClass[InstanceT FileInputStream](
+		name string,
+		classInit func(class *FileInputStreamClass),
+		constructor func() InstanceT,
+		overrides FileInputStreamOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeFileInputStream,
+		UnsafeFileInputStreamClassFromGlibBorrow,
+		UnsafeApplyFileInputStreamOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapFileInputStream(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // FileOutputStreamInstance is the instance type used by all types extending GFileOutputStream. It is used internally by the bindings. Users should use the interface [FileOutputStream] instead.
@@ -87430,39 +98296,260 @@ func UnsafeApplyFileOutputStreamOverrides[Instance FileOutputStream](gclass unsa
 
 	if overrides.CanSeek != nil {
 		pclass.can_seek = (*[0]byte)(C._gotk4_gio2_FileOutputStream_can_seek)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_FileOutputStream_can_seek",
+			func(carg0 *C.GFileOutputStream) (cret C.gboolean) {
+				var stream Instance // go GFileOutputStream subclass
+				var goret  bool     // return
+
+				stream = UnsafeFileOutputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.CanSeek(stream)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.CanTruncate != nil {
 		pclass.can_truncate = (*[0]byte)(C._gotk4_gio2_FileOutputStream_can_truncate)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_FileOutputStream_can_truncate",
+			func(carg0 *C.GFileOutputStream) (cret C.gboolean) {
+				var stream Instance // go GFileOutputStream subclass
+				var goret  bool     // return
+
+				stream = UnsafeFileOutputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.CanTruncate(stream)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetETag != nil {
 		pclass.get_etag = (*[0]byte)(C._gotk4_gio2_FileOutputStream_get_etag)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_FileOutputStream_get_etag",
+			func(carg0 *C.GFileOutputStream) (cret *C.char) {
+				var stream Instance // go GFileOutputStream subclass
+				var goret  string   // return, full, string, nullable-string
+
+				stream = UnsafeFileOutputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetETag(stream)
+
+				if goret != "" {
+					cret = (*C.char)(unsafe.Pointer(C.CString(goret)))
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.QueryInfo != nil {
 		pclass.query_info = (*[0]byte)(C._gotk4_gio2_FileOutputStream_query_info)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_FileOutputStream_query_info",
+			func(carg0 *C.GFileOutputStream, carg1 *C.char, carg2 *C.GCancellable, _cerr **C.GError) (cret *C.GFileInfo) {
+				var stream      Instance        // go GFileOutputStream subclass
+				var cancellable context.Context // in, none, converted, nullable
+				var attributes  string          // in, none, string, casted *C.gchar
+				var goret       FileInfo        // return, full, converted
+				var _goerr      error           // out, full, converted
+
+				stream = UnsafeFileOutputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg2 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
+				}
+				attributes = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+
+				goret, _goerr = overrides.QueryInfo(stream, cancellable, attributes)
+
+				cret = (*C.GFileInfo)(UnsafeFileInfoToGlibFull(goret))
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.QueryInfoAsync != nil {
 		pclass.query_info_async = (*[0]byte)(C._gotk4_gio2_FileOutputStream_query_info_async)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_FileOutputStream_query_info_async",
+			func(carg0 *C.GFileOutputStream, carg1 *C.char, carg2 C.int, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
+				var stream      Instance           // go GFileOutputStream subclass
+				var cancellable context.Context    // in, none, converted, nullable
+				var attributes  string             // in, none, string, casted *C.gchar
+				var ioPriority  int                // in, none, casted, casted C.gint
+				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg5, nullable
+
+				stream = UnsafeFileOutputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg3 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
+				}
+				attributes = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+				ioPriority = int(carg2)
+				if carg4 != nil {
+					_ = callback
+					_ = carg4
+					_ = _
+					_ = carg5
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.QueryInfoAsync(stream, cancellable, attributes, ioPriority, callback)
+			},
+		)
 	}
 
 	if overrides.QueryInfoFinish != nil {
 		pclass.query_info_finish = (*[0]byte)(C._gotk4_gio2_FileOutputStream_query_info_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_FileOutputStream_query_info_finish",
+			func(carg0 *C.GFileOutputStream, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GFileInfo) {
+				var stream Instance    // go GFileOutputStream subclass
+				var result AsyncResult // in, none, converted
+				var goret  FileInfo    // return, full, converted
+				var _goerr error       // out, full, converted
+
+				stream = UnsafeFileOutputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.QueryInfoFinish(stream, result)
+
+				cret = (*C.GFileInfo)(UnsafeFileInfoToGlibFull(goret))
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.Seek != nil {
 		pclass.seek = (*[0]byte)(C._gotk4_gio2_FileOutputStream_seek)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_FileOutputStream_seek",
+			func(carg0 *C.GFileOutputStream, carg1 C.goffset, carg2 C.GSeekType, carg3 *C.GCancellable, _cerr **C.GError) (cret C.gboolean) {
+				var stream      Instance        // go GFileOutputStream subclass
+				var cancellable context.Context // in, none, converted, nullable
+				var offset      int64           // in, none, casted, casted C.gint64
+				var typ         glib.SeekType   // in, none, casted
+				var goret       bool            // return
+				var _goerr      error           // out, full, converted
+
+				stream = UnsafeFileOutputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg3 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
+				}
+				offset = int64(carg1)
+				typ = glib.SeekType(carg2)
+
+				goret, _goerr = overrides.Seek(stream, cancellable, offset, typ)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.Tell != nil {
 		pclass.tell = (*[0]byte)(C._gotk4_gio2_FileOutputStream_tell)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_FileOutputStream_tell",
+			func(carg0 *C.GFileOutputStream) (cret C.goffset) {
+				var stream Instance // go GFileOutputStream subclass
+				var goret  int64    // return, none, casted, casted C.gint64
+
+				stream = UnsafeFileOutputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.Tell(stream)
+
+				cret = C.goffset(goret)
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.TruncateFn != nil {
 		pclass.truncate_fn = (*[0]byte)(C._gotk4_gio2_FileOutputStream_truncate_fn)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_FileOutputStream_truncate_fn",
+			func(carg0 *C.GFileOutputStream, carg1 C.goffset, carg2 *C.GCancellable, _cerr **C.GError) (cret C.gboolean) {
+				var stream      Instance        // go GFileOutputStream subclass
+				var cancellable context.Context // in, none, converted, nullable
+				var size        int64           // in, none, casted, casted C.gint64
+				var goret       bool            // return
+				var _goerr      error           // out, full, converted
+
+				stream = UnsafeFileOutputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg2 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
+				}
+				size = int64(carg1)
+
+				goret, _goerr = overrides.TruncateFn(stream, cancellable, size)
+
+				if goret {
+					cret = C.TRUE
+				}
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
+}
+
+// RegisterFileOutputStreamSubClass is used to register a go subclass of GFileOutputStream. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterFileOutputStreamSubClass[InstanceT FileOutputStream](
+		name string,
+		classInit func(class *FileOutputStreamClass),
+		constructor func() InstanceT,
+		overrides FileOutputStreamOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeFileOutputStream,
+		UnsafeFileOutputStreamClassFromGlibBorrow,
+		UnsafeApplyFileOutputStreamOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapFileOutputStream(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // FilterInputStreamInstance is the instance type used by all types extending GFilterInputStream. It is used internally by the bindings. Users should use the interface [FilterInputStream] instead.
@@ -87630,6 +98717,32 @@ func UnsafeApplyFilterInputStreamOverrides[Instance FilterInputStream](gclass un
 	UnsafeApplyInputStreamOverrides(gclass, overrides.InputStreamOverrides)
 }
 
+// RegisterFilterInputStreamSubClass is used to register a go subclass of GFilterInputStream. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterFilterInputStreamSubClass[InstanceT FilterInputStream](
+		name string,
+		classInit func(class *FilterInputStreamClass),
+		constructor func() InstanceT,
+		overrides FilterInputStreamOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeFilterInputStream,
+		UnsafeFilterInputStreamClassFromGlibBorrow,
+		UnsafeApplyFilterInputStreamOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapFilterInputStream(obj)
+		},
+		interfaceInits...,
+	)
+}
+
 // FilterOutputStreamInstance is the instance type used by all types extending GFilterOutputStream. It is used internally by the bindings. Users should use the interface [FilterOutputStream] instead.
 type FilterOutputStreamInstance struct {
 	_ [0]func() // equal guard
@@ -87793,6 +98906,32 @@ type FilterOutputStreamOverrides[Instance FilterOutputStream] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplyFilterOutputStreamOverrides[Instance FilterOutputStream](gclass unsafe.Pointer, overrides FilterOutputStreamOverrides[Instance]) {
 	UnsafeApplyOutputStreamOverrides(gclass, overrides.OutputStreamOverrides)
+}
+
+// RegisterFilterOutputStreamSubClass is used to register a go subclass of GFilterOutputStream. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterFilterOutputStreamSubClass[InstanceT FilterOutputStream](
+		name string,
+		classInit func(class *FilterOutputStreamClass),
+		constructor func() InstanceT,
+		overrides FilterOutputStreamOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeFilterOutputStream,
+		UnsafeFilterOutputStreamClassFromGlibBorrow,
+		UnsafeApplyFilterOutputStreamOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapFilterOutputStream(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // InetSocketAddressInstance is the instance type used by all types extending GInetSocketAddress. It is used internally by the bindings. Users should use the interface [InetSocketAddress] instead.
@@ -88068,6 +99207,32 @@ func UnsafeApplyInetSocketAddressOverrides[Instance InetSocketAddress](gclass un
 	UnsafeApplySocketAddressOverrides(gclass, overrides.SocketAddressOverrides)
 }
 
+// RegisterInetSocketAddressSubClass is used to register a go subclass of GInetSocketAddress. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterInetSocketAddressSubClass[InstanceT InetSocketAddress](
+		name string,
+		classInit func(class *InetSocketAddressClass),
+		constructor func() InstanceT,
+		overrides InetSocketAddressOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeInetSocketAddress,
+		UnsafeInetSocketAddressClassFromGlibBorrow,
+		UnsafeApplyInetSocketAddressOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapInetSocketAddress(obj)
+		},
+		interfaceInits...,
+	)
+}
+
 // MemoryOutputStreamInstance is the instance type used by all types extending GMemoryOutputStream. It is used internally by the bindings. Users should use the interface [MemoryOutputStream] instead.
 type MemoryOutputStreamInstance struct {
 	_ [0]func() // equal guard
@@ -88293,6 +99458,32 @@ type MemoryOutputStreamOverrides[Instance MemoryOutputStream] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplyMemoryOutputStreamOverrides[Instance MemoryOutputStream](gclass unsafe.Pointer, overrides MemoryOutputStreamOverrides[Instance]) {
 	UnsafeApplyOutputStreamOverrides(gclass, overrides.OutputStreamOverrides)
+}
+
+// RegisterMemoryOutputStreamSubClass is used to register a go subclass of GMemoryOutputStream. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterMemoryOutputStreamSubClass[InstanceT MemoryOutputStream](
+		name string,
+		classInit func(class *MemoryOutputStreamClass),
+		constructor func() InstanceT,
+		overrides MemoryOutputStreamOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeMemoryOutputStream,
+		UnsafeMemoryOutputStreamClassFromGlibBorrow,
+		UnsafeApplyMemoryOutputStreamOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapMemoryOutputStream(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // MenuInstance is the instance type used by all types extending GMenu. It is used internally by the bindings. Users should use the interface [Menu] instead.
@@ -89043,6 +100234,32 @@ func UnsafeApplyNativeSocketAddressOverrides[Instance NativeSocketAddress](gclas
 	UnsafeApplySocketAddressOverrides(gclass, overrides.SocketAddressOverrides)
 }
 
+// RegisterNativeSocketAddressSubClass is used to register a go subclass of GNativeSocketAddress. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterNativeSocketAddressSubClass[InstanceT NativeSocketAddress](
+		name string,
+		classInit func(class *NativeSocketAddressClass),
+		constructor func() InstanceT,
+		overrides NativeSocketAddressOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeNativeSocketAddress,
+		UnsafeNativeSocketAddressClassFromGlibBorrow,
+		UnsafeApplyNativeSocketAddressOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapNativeSocketAddress(obj)
+		},
+		interfaceInits...,
+	)
+}
+
 // NativeVolumeMonitorInstance is the instance type used by all types extending GNativeVolumeMonitor. It is used internally by the bindings. Users should use the interface [NativeVolumeMonitor] instead.
 type NativeVolumeMonitorInstance struct {
 	_ [0]func() // equal guard
@@ -89105,6 +100322,32 @@ type NativeVolumeMonitorOverrides[Instance NativeVolumeMonitor] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplyNativeVolumeMonitorOverrides[Instance NativeVolumeMonitor](gclass unsafe.Pointer, overrides NativeVolumeMonitorOverrides[Instance]) {
 	UnsafeApplyVolumeMonitorOverrides(gclass, overrides.VolumeMonitorOverrides)
+}
+
+// RegisterNativeVolumeMonitorSubClass is used to register a go subclass of GNativeVolumeMonitor. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterNativeVolumeMonitorSubClass[InstanceT NativeVolumeMonitor](
+		name string,
+		classInit func(class *NativeVolumeMonitorClass),
+		constructor func() InstanceT,
+		overrides NativeVolumeMonitorOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeNativeVolumeMonitor,
+		UnsafeNativeVolumeMonitorClassFromGlibBorrow,
+		UnsafeApplyNativeVolumeMonitorOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapNativeVolumeMonitor(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // ProxyAddressInstance is the instance type used by all types extending GProxyAddress. It is used internally by the bindings. Users should use the interface [ProxyAddress] instead.
@@ -89478,6 +100721,32 @@ func UnsafeApplyProxyAddressOverrides[Instance ProxyAddress](gclass unsafe.Point
 	UnsafeApplyInetSocketAddressOverrides(gclass, overrides.InetSocketAddressOverrides)
 }
 
+// RegisterProxyAddressSubClass is used to register a go subclass of GProxyAddress. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterProxyAddressSubClass[InstanceT ProxyAddress](
+		name string,
+		classInit func(class *ProxyAddressClass),
+		constructor func() InstanceT,
+		overrides ProxyAddressOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeProxyAddress,
+		UnsafeProxyAddressClassFromGlibBorrow,
+		UnsafeApplyProxyAddressOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapProxyAddress(obj)
+		},
+		interfaceInits...,
+	)
+}
+
 // ProxyAddressEnumeratorInstance is the instance type used by all types extending GProxyAddressEnumerator. It is used internally by the bindings. Users should use the interface [ProxyAddressEnumerator] instead.
 type ProxyAddressEnumeratorInstance struct {
 	_ [0]func() // equal guard
@@ -89551,6 +100820,32 @@ type ProxyAddressEnumeratorOverrides[Instance ProxyAddressEnumerator] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplyProxyAddressEnumeratorOverrides[Instance ProxyAddressEnumerator](gclass unsafe.Pointer, overrides ProxyAddressEnumeratorOverrides[Instance]) {
 	UnsafeApplySocketAddressEnumeratorOverrides(gclass, overrides.SocketAddressEnumeratorOverrides)
+}
+
+// RegisterProxyAddressEnumeratorSubClass is used to register a go subclass of GProxyAddressEnumerator. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterProxyAddressEnumeratorSubClass[InstanceT ProxyAddressEnumerator](
+		name string,
+		classInit func(class *ProxyAddressEnumeratorClass),
+		constructor func() InstanceT,
+		overrides ProxyAddressEnumeratorOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeProxyAddressEnumerator,
+		UnsafeProxyAddressEnumeratorClassFromGlibBorrow,
+		UnsafeApplyProxyAddressEnumeratorOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapProxyAddressEnumerator(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // BufferedInputStreamInstance is the instance type used by all types extending GBufferedInputStream. It is used internally by the bindings. Users should use the interface [BufferedInputStream] instead.
@@ -90208,15 +101503,112 @@ func UnsafeApplyBufferedInputStreamOverrides[Instance BufferedInputStream](gclas
 
 	if overrides.Fill != nil {
 		pclass.fill = (*[0]byte)(C._gotk4_gio2_BufferedInputStream_fill)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_BufferedInputStream_fill",
+			func(carg0 *C.GBufferedInputStream, carg1 C.gssize, carg2 *C.GCancellable, _cerr **C.GError) (cret C.gssize) {
+				var stream      Instance        // go GBufferedInputStream subclass
+				var cancellable context.Context // in, none, converted, nullable
+				var count       int             // in, none, casted
+				var goret       int             // return, none, casted
+				var _goerr      error           // out, full, converted
+
+				stream = UnsafeBufferedInputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg2 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
+				}
+				count = int(carg1)
+
+				goret, _goerr = overrides.Fill(stream, cancellable, count)
+
+				cret = C.gssize(goret)
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.FillAsync != nil {
 		pclass.fill_async = (*[0]byte)(C._gotk4_gio2_BufferedInputStream_fill_async)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_BufferedInputStream_fill_async",
+			func(carg0 *C.GBufferedInputStream, carg1 C.gssize, carg2 C.int, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
+				var stream      Instance           // go GBufferedInputStream subclass
+				var cancellable context.Context    // in, none, converted, nullable
+				var count       int                // in, none, casted
+				var ioPriority  int                // in, none, casted, casted C.gint
+				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg5, nullable
+
+				stream = UnsafeBufferedInputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg3 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
+				}
+				count = int(carg1)
+				ioPriority = int(carg2)
+				if carg4 != nil {
+					_ = callback
+					_ = carg4
+					_ = _
+					_ = carg5
+					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
+				}
+
+				overrides.FillAsync(stream, cancellable, count, ioPriority, callback)
+			},
+		)
 	}
 
 	if overrides.FillFinish != nil {
 		pclass.fill_finish = (*[0]byte)(C._gotk4_gio2_BufferedInputStream_fill_finish)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_BufferedInputStream_fill_finish",
+			func(carg0 *C.GBufferedInputStream, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gssize) {
+				var stream Instance    // go GBufferedInputStream subclass
+				var result AsyncResult // in, none, converted
+				var goret  int         // return, none, casted
+				var _goerr error       // out, full, converted
+
+				stream = UnsafeBufferedInputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
+
+				goret, _goerr = overrides.FillFinish(stream, result)
+
+				cret = C.gssize(goret)
+				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
+
+				return cret
+			},
+		)
 	}
+}
+
+// RegisterBufferedInputStreamSubClass is used to register a go subclass of GBufferedInputStream. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterBufferedInputStreamSubClass[InstanceT BufferedInputStream](
+		name string,
+		classInit func(class *BufferedInputStreamClass),
+		constructor func() InstanceT,
+		overrides BufferedInputStreamOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeBufferedInputStream,
+		UnsafeBufferedInputStreamClassFromGlibBorrow,
+		UnsafeApplyBufferedInputStreamOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapBufferedInputStream(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // BufferedOutputStreamInstance is the instance type used by all types extending GBufferedOutputStream. It is used internally by the bindings. Users should use the interface [BufferedOutputStream] instead.
@@ -90490,6 +101882,32 @@ func UnsafeApplyBufferedOutputStreamOverrides[Instance BufferedOutputStream](gcl
 	UnsafeApplyFilterOutputStreamOverrides(gclass, overrides.FilterOutputStreamOverrides)
 }
 
+// RegisterBufferedOutputStreamSubClass is used to register a go subclass of GBufferedOutputStream. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterBufferedOutputStreamSubClass[InstanceT BufferedOutputStream](
+		name string,
+		classInit func(class *BufferedOutputStreamClass),
+		constructor func() InstanceT,
+		overrides BufferedOutputStreamOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeBufferedOutputStream,
+		UnsafeBufferedOutputStreamClassFromGlibBorrow,
+		UnsafeApplyBufferedOutputStreamOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapBufferedOutputStream(obj)
+		},
+		interfaceInits...,
+	)
+}
+
 // ConverterInputStreamInstance is the instance type used by all types extending GConverterInputStream. It is used internally by the bindings. Users should use the interface [ConverterInputStream] instead.
 type ConverterInputStreamInstance struct {
 	_ [0]func() // equal guard
@@ -90631,6 +102049,32 @@ func UnsafeApplyConverterInputStreamOverrides[Instance ConverterInputStream](gcl
 	UnsafeApplyFilterInputStreamOverrides(gclass, overrides.FilterInputStreamOverrides)
 }
 
+// RegisterConverterInputStreamSubClass is used to register a go subclass of GConverterInputStream. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterConverterInputStreamSubClass[InstanceT ConverterInputStream](
+		name string,
+		classInit func(class *ConverterInputStreamClass),
+		constructor func() InstanceT,
+		overrides ConverterInputStreamOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeConverterInputStream,
+		UnsafeConverterInputStreamClassFromGlibBorrow,
+		UnsafeApplyConverterInputStreamOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapConverterInputStream(obj)
+		},
+		interfaceInits...,
+	)
+}
+
 // ConverterOutputStreamInstance is the instance type used by all types extending GConverterOutputStream. It is used internally by the bindings. Users should use the interface [ConverterOutputStream] instead.
 type ConverterOutputStreamInstance struct {
 	_ [0]func() // equal guard
@@ -90770,6 +102214,32 @@ type ConverterOutputStreamOverrides[Instance ConverterOutputStream] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplyConverterOutputStreamOverrides[Instance ConverterOutputStream](gclass unsafe.Pointer, overrides ConverterOutputStreamOverrides[Instance]) {
 	UnsafeApplyFilterOutputStreamOverrides(gclass, overrides.FilterOutputStreamOverrides)
+}
+
+// RegisterConverterOutputStreamSubClass is used to register a go subclass of GConverterOutputStream. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterConverterOutputStreamSubClass[InstanceT ConverterOutputStream](
+		name string,
+		classInit func(class *ConverterOutputStreamClass),
+		constructor func() InstanceT,
+		overrides ConverterOutputStreamOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeConverterOutputStream,
+		UnsafeConverterOutputStreamClassFromGlibBorrow,
+		UnsafeApplyConverterOutputStreamOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapConverterOutputStream(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // DataInputStreamInstance is the instance type used by all types extending GDataInputStream. It is used internally by the bindings. Users should use the interface [DataInputStream] instead.
@@ -92163,6 +103633,32 @@ func UnsafeApplyDataInputStreamOverrides[Instance DataInputStream](gclass unsafe
 	UnsafeApplyBufferedInputStreamOverrides(gclass, overrides.BufferedInputStreamOverrides)
 }
 
+// RegisterDataInputStreamSubClass is used to register a go subclass of GDataInputStream. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterDataInputStreamSubClass[InstanceT DataInputStream](
+		name string,
+		classInit func(class *DataInputStreamClass),
+		constructor func() InstanceT,
+		overrides DataInputStreamOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeDataInputStream,
+		UnsafeDataInputStreamClassFromGlibBorrow,
+		UnsafeApplyDataInputStreamOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapDataInputStream(obj)
+		},
+		interfaceInits...,
+	)
+}
+
 // DataOutputStreamInstance is the instance type used by all types extending GDataOutputStream. It is used internally by the bindings. Users should use the interface [DataOutputStream] instead.
 type DataOutputStreamInstance struct {
 	_ [0]func() // equal guard
@@ -92787,6 +104283,32 @@ type DataOutputStreamOverrides[Instance DataOutputStream] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplyDataOutputStreamOverrides[Instance DataOutputStream](gclass unsafe.Pointer, overrides DataOutputStreamOverrides[Instance]) {
 	UnsafeApplyFilterOutputStreamOverrides(gclass, overrides.FilterOutputStreamOverrides)
+}
+
+// RegisterDataOutputStreamSubClass is used to register a go subclass of GDataOutputStream. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterDataOutputStreamSubClass[InstanceT DataOutputStream](
+		name string,
+		classInit func(class *DataOutputStreamClass),
+		constructor func() InstanceT,
+		overrides DataOutputStreamOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeDataOutputStream,
+		UnsafeDataOutputStreamClassFromGlibBorrow,
+		UnsafeApplyDataOutputStreamOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapDataOutputStream(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // ActionEntry wraps GActionEntry

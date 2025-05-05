@@ -8,6 +8,7 @@ import (
 	"strings"
 	"unsafe"
 
+	"github.com/diamondburned/gotk4/pkg/core/classdata"
 	"github.com/diamondburned/gotk4/pkg/core/userdata"
 	"github.com/diamondburned/gotk4/pkg/gdk/v4"
 	"github.com/diamondburned/gotk4/pkg/glib/v2"
@@ -1278,6 +1279,32 @@ type GLShaderOverrides[Instance GLShader] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplyGLShaderOverrides[Instance GLShader](gclass unsafe.Pointer, overrides GLShaderOverrides[Instance]) {
 	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
+}
+
+// RegisterGLShaderSubClass is used to register a go subclass of GskGLShader. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterGLShaderSubClass[InstanceT GLShader](
+		name string,
+		classInit func(class *GLShaderClass),
+		constructor func() InstanceT,
+		overrides GLShaderOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeGLShader,
+		UnsafeGLShaderClassFromGlibBorrow,
+		UnsafeApplyGLShaderOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapGLShader(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // RendererInstance is the instance type used by all types extending GskRenderer. It is used internally by the bindings. Users should use the interface [Renderer] instead.

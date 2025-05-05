@@ -2,17 +2,36 @@
 
 package gobject
 
+import (
+	"unsafe"
+
+	"github.com/diamondburned/gotk4/pkg/core/classdata"
+)
 
 // #include <glib-object.h>
 import "C"
 
 //export _gotk4_gobject2_TypeModule_load
 func _gotk4_gobject2_TypeModule_load(carg0 *C.GTypeModule) (cret C.gboolean) {
-	panic("unimplemented")
+	var fn func(carg0 *C.GTypeModule) (cret C.gboolean)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gobject2_TypeModule_load").(func(carg0 *C.GTypeModule) (cret C.gboolean))
+		if fn == nil {
+			panic("_gotk4_gobject2_TypeModule_load: no function pointer found")
+		}
+	}
+	return fn(carg0)
 }
 
 //export _gotk4_gobject2_TypeModule_unload
 func _gotk4_gobject2_TypeModule_unload(carg0 *C.GTypeModule) {
-	panic("unimplemented")
+	var fn func(carg0 *C.GTypeModule)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gobject2_TypeModule_unload").(func(carg0 *C.GTypeModule))
+		if fn == nil {
+			panic("_gotk4_gobject2_TypeModule_unload: no function pointer found")
+		}
+	}
+	fn(carg0)
 }
 

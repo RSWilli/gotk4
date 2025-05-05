@@ -28,7 +28,13 @@ func _gotk4InterfaceInit(instance C.gpointer, ifaceData C.gpointer) {
 //
 //export _gotk4ClassInit
 func _gotk4ClassInit(gclass C.gpointer, classData C.gpointer) {
-	panic("unimplemented")
+	data := userdata.Load(unsafe.Pointer(classData)).(*subClassData)
+
+	if data == nil {
+		panic("classData is nil")
+	}
+
+	data.classInit(unsafe.Pointer(gclass))
 }
 
 // _gotk4InstanceInit is the function that is called by the GObject system when the instance is initialized on
@@ -36,5 +42,11 @@ func _gotk4ClassInit(gclass C.gpointer, classData C.gpointer) {
 //
 //export _gotk4InstanceInit
 func _gotk4InstanceInit(instance *C.GTypeInstance, gclass C.gpointer) {
-	panic("unimplemented")
+	classData := dataFromClass(unsafe.Pointer(gclass))
+
+	if classData == nil {
+		panic("classData is nil")
+	}
+
+	classData.instanceInit(unsafe.Pointer(instance))
 }

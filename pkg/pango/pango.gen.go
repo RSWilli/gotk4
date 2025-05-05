@@ -8,6 +8,7 @@ import (
 	"strings"
 	"unsafe"
 
+	"github.com/diamondburned/gotk4/pkg/core/classdata"
 	"github.com/diamondburned/gotk4/pkg/core/userdata"
 	"github.com/diamondburned/gotk4/pkg/gio/v2"
 	"github.com/diamondburned/gotk4/pkg/glib/v2"
@@ -7328,27 +7329,163 @@ func UnsafeApplyFontOverrides[Instance Font](gclass unsafe.Pointer, overrides Fo
 
 	if overrides.Describe != nil {
 		pclass.describe = (*[0]byte)(C._gotk4_pango1_Font_describe)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_pango1_Font_describe",
+			func(carg0 *C.PangoFont) (cret *C.PangoFontDescription) {
+				var font  Instance         // go PangoFont subclass
+				var goret *FontDescription // return, full, converted
+
+				font = UnsafeFontFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.Describe(font)
+
+				cret = (*C.PangoFontDescription)(UnsafeFontDescriptionToGlibFull(goret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.DescribeAbsolute != nil {
 		pclass.describe_absolute = (*[0]byte)(C._gotk4_pango1_Font_describe_absolute)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_pango1_Font_describe_absolute",
+			func(carg0 *C.PangoFont) (cret *C.PangoFontDescription) {
+				var font  Instance         // go PangoFont subclass
+				var goret *FontDescription // return, full, converted
+
+				font = UnsafeFontFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.DescribeAbsolute(font)
+
+				cret = (*C.PangoFontDescription)(UnsafeFontDescriptionToGlibFull(goret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetCoverage != nil {
 		pclass.get_coverage = (*[0]byte)(C._gotk4_pango1_Font_get_coverage)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_pango1_Font_get_coverage",
+			func(carg0 *C.PangoFont, carg1 *C.PangoLanguage) (cret *C.PangoCoverage) {
+				var font     Instance  // go PangoFont subclass
+				var language *Language // in, none, converted
+				var goret    Coverage  // return, full, converted
+
+				font = UnsafeFontFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				language = UnsafeLanguageFromGlibNone(unsafe.Pointer(carg1))
+
+				goret = overrides.GetCoverage(font, language)
+
+				cret = (*C.PangoCoverage)(UnsafeCoverageToGlibFull(goret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetFontMap != nil {
 		pclass.get_font_map = (*[0]byte)(C._gotk4_pango1_Font_get_font_map)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_pango1_Font_get_font_map",
+			func(carg0 *C.PangoFont) (cret *C.PangoFontMap) {
+				var font  Instance // go PangoFont subclass
+				var goret FontMap  // return, none, converted, nullable
+
+				font = UnsafeFontFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetFontMap(font)
+
+				if goret != nil {
+					cret = (*C.PangoFontMap)(UnsafeFontMapToGlibNone(goret))
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetGlyphExtents != nil {
 		pclass.get_glyph_extents = (*[0]byte)(C._gotk4_pango1_Font_get_glyph_extents)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_pango1_Font_get_glyph_extents",
+			func(carg0 *C.PangoFont, carg1 C.PangoGlyph, carg2 *C.PangoRectangle, carg3 *C.PangoRectangle) {
+				var font        Instance  // go PangoFont subclass
+				var glyph       Glyph     // in, none, casted, alias
+				var inkRect     Rectangle // out, transfer: none, C Pointers: 0, Name: Rectangle, optional, caller-allocates
+				var logicalRect Rectangle // out, transfer: none, C Pointers: 0, Name: Rectangle, optional, caller-allocates
+
+				font = UnsafeFontFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				glyph = Glyph(carg1)
+
+				inkRect, logicalRect = overrides.GetGlyphExtents(font, glyph)
+
+				_ = inkRect
+				_ = carg2
+				panic("unimplemented conversion of Rectangle (PangoRectangle)")
+				_ = logicalRect
+				_ = carg3
+				panic("unimplemented conversion of Rectangle (PangoRectangle)")
+			},
+		)
 	}
 
 	if overrides.GetMetrics != nil {
 		pclass.get_metrics = (*[0]byte)(C._gotk4_pango1_Font_get_metrics)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_pango1_Font_get_metrics",
+			func(carg0 *C.PangoFont, carg1 *C.PangoLanguage) (cret *C.PangoFontMetrics) {
+				var font     Instance     // go PangoFont subclass
+				var language *Language    // in, none, converted, nullable
+				var goret    *FontMetrics // return, full, converted
+
+				font = UnsafeFontFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg1 != nil {
+					language = UnsafeLanguageFromGlibNone(unsafe.Pointer(carg1))
+				}
+
+				goret = overrides.GetMetrics(font, language)
+
+				cret = (*C.PangoFontMetrics)(UnsafeFontMetricsToGlibFull(goret))
+
+				return cret
+			},
+		)
 	}
+}
+
+// RegisterFontSubClass is used to register a go subclass of PangoFont. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterFontSubClass[InstanceT Font](
+		name string,
+		classInit func(class *FontClass),
+		constructor func() InstanceT,
+		overrides FontOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeFont,
+		UnsafeFontClassFromGlibBorrow,
+		UnsafeApplyFontOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapFont(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // FontFaceInstance is the instance type used by all types extending PangoFontFace. It is used internally by the bindings. Users should use the interface [FontFace] instead.
@@ -7590,19 +7727,112 @@ func UnsafeApplyFontFaceOverrides[Instance FontFace](gclass unsafe.Pointer, over
 
 	if overrides.Describe != nil {
 		pclass.describe = (*[0]byte)(C._gotk4_pango1_FontFace_describe)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_pango1_FontFace_describe",
+			func(carg0 *C.PangoFontFace) (cret *C.PangoFontDescription) {
+				var face  Instance         // go PangoFontFace subclass
+				var goret *FontDescription // return, full, converted
+
+				face = UnsafeFontFaceFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.Describe(face)
+
+				cret = (*C.PangoFontDescription)(UnsafeFontDescriptionToGlibFull(goret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetFaceName != nil {
 		pclass.get_face_name = (*[0]byte)(C._gotk4_pango1_FontFace_get_face_name)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_pango1_FontFace_get_face_name",
+			func(carg0 *C.PangoFontFace) (cret *C.char) {
+				var face  Instance // go PangoFontFace subclass
+				var goret string   // return, none, string, casted *C.gchar
+
+				face = UnsafeFontFaceFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetFaceName(face)
+
+				cret = (*C.char)(unsafe.Pointer(C.CString(goret)))
+				defer C.free(unsafe.Pointer(cret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetFamily != nil {
 		pclass.get_family = (*[0]byte)(C._gotk4_pango1_FontFace_get_family)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_pango1_FontFace_get_family",
+			func(carg0 *C.PangoFontFace) (cret *C.PangoFontFamily) {
+				var face  Instance   // go PangoFontFace subclass
+				var goret FontFamily // return, none, converted
+
+				face = UnsafeFontFaceFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetFamily(face)
+
+				cret = (*C.PangoFontFamily)(UnsafeFontFamilyToGlibNone(goret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.IsSynthesized != nil {
 		pclass.is_synthesized = (*[0]byte)(C._gotk4_pango1_FontFace_is_synthesized)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_pango1_FontFace_is_synthesized",
+			func(carg0 *C.PangoFontFace) (cret C.gboolean) {
+				var face  Instance // go PangoFontFace subclass
+				var goret bool     // return
+
+				face = UnsafeFontFaceFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.IsSynthesized(face)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
+}
+
+// RegisterFontFaceSubClass is used to register a go subclass of PangoFontFace. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterFontFaceSubClass[InstanceT FontFace](
+		name string,
+		classInit func(class *FontFaceClass),
+		constructor func() InstanceT,
+		overrides FontFaceOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeFontFace,
+		UnsafeFontFaceClassFromGlibBorrow,
+		UnsafeApplyFontFaceOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapFontFace(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // FontFamilyInstance is the instance type used by all types extending PangoFontFamily. It is used internally by the bindings. Users should use the interface [FontFamily] instead.
@@ -7899,19 +8129,120 @@ func UnsafeApplyFontFamilyOverrides[Instance FontFamily](gclass unsafe.Pointer, 
 
 	if overrides.GetFace != nil {
 		pclass.get_face = (*[0]byte)(C._gotk4_pango1_FontFamily_get_face)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_pango1_FontFamily_get_face",
+			func(carg0 *C.PangoFontFamily, carg1 *C.char) (cret *C.PangoFontFace) {
+				var family Instance // go PangoFontFamily subclass
+				var name   string   // in, none, string, casted *C.gchar, nullable
+				var goret  FontFace // return, none, converted, nullable
+
+				family = UnsafeFontFamilyFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg1 != nil {
+					name = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+				}
+
+				goret = overrides.GetFace(family, name)
+
+				if goret != nil {
+					cret = (*C.PangoFontFace)(UnsafeFontFaceToGlibNone(goret))
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetName != nil {
 		pclass.get_name = (*[0]byte)(C._gotk4_pango1_FontFamily_get_name)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_pango1_FontFamily_get_name",
+			func(carg0 *C.PangoFontFamily) (cret *C.char) {
+				var family Instance // go PangoFontFamily subclass
+				var goret  string   // return, none, string, casted *C.gchar
+
+				family = UnsafeFontFamilyFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetName(family)
+
+				cret = (*C.char)(unsafe.Pointer(C.CString(goret)))
+				defer C.free(unsafe.Pointer(cret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.IsMonospace != nil {
 		pclass.is_monospace = (*[0]byte)(C._gotk4_pango1_FontFamily_is_monospace)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_pango1_FontFamily_is_monospace",
+			func(carg0 *C.PangoFontFamily) (cret C.gboolean) {
+				var family Instance // go PangoFontFamily subclass
+				var goret  bool     // return
+
+				family = UnsafeFontFamilyFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.IsMonospace(family)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.IsVariable != nil {
 		pclass.is_variable = (*[0]byte)(C._gotk4_pango1_FontFamily_is_variable)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_pango1_FontFamily_is_variable",
+			func(carg0 *C.PangoFontFamily) (cret C.gboolean) {
+				var family Instance // go PangoFontFamily subclass
+				var goret  bool     // return
+
+				family = UnsafeFontFamilyFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.IsVariable(family)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
+}
+
+// RegisterFontFamilySubClass is used to register a go subclass of PangoFontFamily. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterFontFamilySubClass[InstanceT FontFamily](
+		name string,
+		classInit func(class *FontFamilyClass),
+		constructor func() InstanceT,
+		overrides FontFamilyOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeFontFamily,
+		UnsafeFontFamilyClassFromGlibBorrow,
+		UnsafeApplyFontFamilyOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapFontFamily(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // FontMapInstance is the instance type used by all types extending PangoFontMap. It is used internally by the bindings. Users should use the interface [FontMap] instead.
@@ -8431,23 +8762,140 @@ func UnsafeApplyFontMapOverrides[Instance FontMap](gclass unsafe.Pointer, overri
 
 	if overrides.Changed != nil {
 		pclass.changed = (*[0]byte)(C._gotk4_pango1_FontMap_changed)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_pango1_FontMap_changed",
+			func(carg0 *C.PangoFontMap) {
+				var fontmap Instance // go PangoFontMap subclass
+
+				fontmap = UnsafeFontMapFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.Changed(fontmap)
+			},
+		)
 	}
 
 	if overrides.GetFamily != nil {
 		pclass.get_family = (*[0]byte)(C._gotk4_pango1_FontMap_get_family)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_pango1_FontMap_get_family",
+			func(carg0 *C.PangoFontMap, carg1 *C.char) (cret *C.PangoFontFamily) {
+				var fontmap Instance   // go PangoFontMap subclass
+				var name    string     // in, none, string, casted *C.gchar
+				var goret   FontFamily // return, none, converted
+
+				fontmap = UnsafeFontMapFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				name = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+
+				goret = overrides.GetFamily(fontmap, name)
+
+				cret = (*C.PangoFontFamily)(UnsafeFontFamilyToGlibNone(goret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetSerial != nil {
 		pclass.get_serial = (*[0]byte)(C._gotk4_pango1_FontMap_get_serial)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_pango1_FontMap_get_serial",
+			func(carg0 *C.PangoFontMap) (cret C.guint) {
+				var fontmap Instance // go PangoFontMap subclass
+				var goret   uint     // return, none, casted
+
+				fontmap = UnsafeFontMapFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetSerial(fontmap)
+
+				cret = C.guint(goret)
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.LoadFont != nil {
 		pclass.load_font = (*[0]byte)(C._gotk4_pango1_FontMap_load_font)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_pango1_FontMap_load_font",
+			func(carg0 *C.PangoFontMap, carg1 *C.PangoContext, carg2 *C.PangoFontDescription) (cret *C.PangoFont) {
+				var fontmap  Instance         // go PangoFontMap subclass
+				var _context Context          // in, none, converted
+				var desc     *FontDescription // in, none, converted
+				var goret    Font             // return, full, converted, nullable
+
+				fontmap = UnsafeFontMapFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				_context = UnsafeContextFromGlibNone(unsafe.Pointer(carg1))
+				desc = UnsafeFontDescriptionFromGlibNone(unsafe.Pointer(carg2))
+
+				goret = overrides.LoadFont(fontmap, _context, desc)
+
+				if goret != nil {
+					cret = (*C.PangoFont)(UnsafeFontToGlibFull(goret))
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.LoadFontset != nil {
 		pclass.load_fontset = (*[0]byte)(C._gotk4_pango1_FontMap_load_fontset)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_pango1_FontMap_load_fontset",
+			func(carg0 *C.PangoFontMap, carg1 *C.PangoContext, carg2 *C.PangoFontDescription, carg3 *C.PangoLanguage) (cret *C.PangoFontset) {
+				var fontmap  Instance         // go PangoFontMap subclass
+				var _context Context          // in, none, converted
+				var desc     *FontDescription // in, none, converted
+				var language *Language        // in, none, converted
+				var goret    Fontset          // return, full, converted, nullable
+
+				fontmap = UnsafeFontMapFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				_context = UnsafeContextFromGlibNone(unsafe.Pointer(carg1))
+				desc = UnsafeFontDescriptionFromGlibNone(unsafe.Pointer(carg2))
+				language = UnsafeLanguageFromGlibNone(unsafe.Pointer(carg3))
+
+				goret = overrides.LoadFontset(fontmap, _context, desc, language)
+
+				if goret != nil {
+					cret = (*C.PangoFontset)(UnsafeFontsetToGlibFull(goret))
+				}
+
+				return cret
+			},
+		)
 	}
+}
+
+// RegisterFontMapSubClass is used to register a go subclass of PangoFontMap. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterFontMapSubClass[InstanceT FontMap](
+		name string,
+		classInit func(class *FontMapClass),
+		constructor func() InstanceT,
+		overrides FontMapOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeFontMap,
+		UnsafeFontMapClassFromGlibBorrow,
+		UnsafeApplyFontMapOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapFontMap(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // FontsetInstance is the instance type used by all types extending PangoFontset. It is used internally by the bindings. Users should use the interface [Fontset] instead.
@@ -8658,19 +9106,112 @@ func UnsafeApplyFontsetOverrides[Instance Fontset](gclass unsafe.Pointer, overri
 
 	if overrides.ForEach != nil {
 		pclass.foreach = (*[0]byte)(C._gotk4_pango1_Fontset_foreach)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_pango1_Fontset_foreach",
+			func(carg0 *C.PangoFontset, carg1 C.PangoFontsetForeachFunc, carg2 C.gpointer) {
+				var fontset Instance           // go PangoFontset subclass
+				var fn      FontsetForEachFunc // in, transfer: none, C Pointers: 0, Name: FontsetForeachFunc, closure: carg2
+
+				fontset = UnsafeFontsetFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				_ = fn
+				_ = carg1
+				_ = data
+				_ = carg2
+				panic("unimplemented conversion of FontsetForEachFunc (PangoFontsetForeachFunc)")
+
+				overrides.ForEach(fontset, fn)
+			},
+		)
 	}
 
 	if overrides.GetFont != nil {
 		pclass.get_font = (*[0]byte)(C._gotk4_pango1_Fontset_get_font)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_pango1_Fontset_get_font",
+			func(carg0 *C.PangoFontset, carg1 C.guint) (cret *C.PangoFont) {
+				var fontset Instance // go PangoFontset subclass
+				var wc      uint     // in, none, casted
+				var goret   Font     // return, full, converted
+
+				fontset = UnsafeFontsetFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				wc = uint(carg1)
+
+				goret = overrides.GetFont(fontset, wc)
+
+				cret = (*C.PangoFont)(UnsafeFontToGlibFull(goret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetLanguage != nil {
 		pclass.get_language = (*[0]byte)(C._gotk4_pango1_Fontset_get_language)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_pango1_Fontset_get_language",
+			func(carg0 *C.PangoFontset) (cret *C.PangoLanguage) {
+				var fontset Instance  // go PangoFontset subclass
+				var goret   *Language // return, full, converted
+
+				fontset = UnsafeFontsetFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetLanguage(fontset)
+
+				cret = (*C.PangoLanguage)(UnsafeLanguageToGlibFull(goret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetMetrics != nil {
 		pclass.get_metrics = (*[0]byte)(C._gotk4_pango1_Fontset_get_metrics)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_pango1_Fontset_get_metrics",
+			func(carg0 *C.PangoFontset) (cret *C.PangoFontMetrics) {
+				var fontset Instance     // go PangoFontset subclass
+				var goret   *FontMetrics // return, full, converted
+
+				fontset = UnsafeFontsetFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetMetrics(fontset)
+
+				cret = (*C.PangoFontMetrics)(UnsafeFontMetricsToGlibFull(goret))
+
+				return cret
+			},
+		)
 	}
+}
+
+// RegisterFontsetSubClass is used to register a go subclass of PangoFontset. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterFontsetSubClass[InstanceT Fontset](
+		name string,
+		classInit func(class *FontsetClass),
+		constructor func() InstanceT,
+		overrides FontsetOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeFontset,
+		UnsafeFontsetClassFromGlibBorrow,
+		UnsafeApplyFontsetOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapFontset(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // FontsetSimpleInstance is the instance type used by all types extending PangoFontsetSimple. It is used internally by the bindings. Users should use the interface [FontsetSimple] instead.
@@ -13012,47 +13553,264 @@ func UnsafeApplyRendererOverrides[Instance Renderer](gclass unsafe.Pointer, over
 
 	if overrides.Begin != nil {
 		pclass.begin = (*[0]byte)(C._gotk4_pango1_Renderer_begin)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_pango1_Renderer_begin",
+			func(carg0 *C.PangoRenderer) {
+				var renderer Instance // go PangoRenderer subclass
+
+				renderer = UnsafeRendererFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.Begin(renderer)
+			},
+		)
 	}
 
 	if overrides.DrawErrorUnderline != nil {
 		pclass.draw_error_underline = (*[0]byte)(C._gotk4_pango1_Renderer_draw_error_underline)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_pango1_Renderer_draw_error_underline",
+			func(carg0 *C.PangoRenderer, carg1 C.int, carg2 C.int, carg3 C.int, carg4 C.int) {
+				var renderer Instance // go PangoRenderer subclass
+				var x        int      // in, none, casted, casted C.gint
+				var y        int      // in, none, casted, casted C.gint
+				var width    int      // in, none, casted, casted C.gint
+				var height   int      // in, none, casted, casted C.gint
+
+				renderer = UnsafeRendererFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				x = int(carg1)
+				y = int(carg2)
+				width = int(carg3)
+				height = int(carg4)
+
+				overrides.DrawErrorUnderline(renderer, x, y, width, height)
+			},
+		)
 	}
 
 	if overrides.DrawGlyph != nil {
 		pclass.draw_glyph = (*[0]byte)(C._gotk4_pango1_Renderer_draw_glyph)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_pango1_Renderer_draw_glyph",
+			func(carg0 *C.PangoRenderer, carg1 *C.PangoFont, carg2 C.PangoGlyph, carg3 C.double, carg4 C.double) {
+				var renderer Instance // go PangoRenderer subclass
+				var font     Font     // in, none, converted
+				var glyph    Glyph    // in, none, casted, alias
+				var x        float64  // in, none, casted, casted C.gdouble
+				var y        float64  // in, none, casted, casted C.gdouble
+
+				renderer = UnsafeRendererFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				font = UnsafeFontFromGlibNone(unsafe.Pointer(carg1))
+				glyph = Glyph(carg2)
+				x = float64(carg3)
+				y = float64(carg4)
+
+				overrides.DrawGlyph(renderer, font, glyph, x, y)
+			},
+		)
 	}
 
 	if overrides.DrawGlyphItem != nil {
 		pclass.draw_glyph_item = (*[0]byte)(C._gotk4_pango1_Renderer_draw_glyph_item)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_pango1_Renderer_draw_glyph_item",
+			func(carg0 *C.PangoRenderer, carg1 *C.char, carg2 *C.PangoGlyphItem, carg3 C.int, carg4 C.int) {
+				var renderer  Instance   // go PangoRenderer subclass
+				var text      string     // in, none, string, casted *C.gchar, nullable
+				var glyphItem *GlyphItem // in, none, converted
+				var x         int        // in, none, casted, casted C.gint
+				var y         int        // in, none, casted, casted C.gint
+
+				renderer = UnsafeRendererFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg1 != nil {
+					text = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+				}
+				glyphItem = UnsafeGlyphItemFromGlibNone(unsafe.Pointer(carg2))
+				x = int(carg3)
+				y = int(carg4)
+
+				overrides.DrawGlyphItem(renderer, text, glyphItem, x, y)
+			},
+		)
 	}
 
 	if overrides.DrawGlyphs != nil {
 		pclass.draw_glyphs = (*[0]byte)(C._gotk4_pango1_Renderer_draw_glyphs)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_pango1_Renderer_draw_glyphs",
+			func(carg0 *C.PangoRenderer, carg1 *C.PangoFont, carg2 *C.PangoGlyphString, carg3 C.int, carg4 C.int) {
+				var renderer Instance     // go PangoRenderer subclass
+				var font     Font         // in, none, converted
+				var glyphs   *GlyphString // in, none, converted
+				var x        int          // in, none, casted, casted C.gint
+				var y        int          // in, none, casted, casted C.gint
+
+				renderer = UnsafeRendererFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				font = UnsafeFontFromGlibNone(unsafe.Pointer(carg1))
+				glyphs = UnsafeGlyphStringFromGlibNone(unsafe.Pointer(carg2))
+				x = int(carg3)
+				y = int(carg4)
+
+				overrides.DrawGlyphs(renderer, font, glyphs, x, y)
+			},
+		)
 	}
 
 	if overrides.DrawRectangle != nil {
 		pclass.draw_rectangle = (*[0]byte)(C._gotk4_pango1_Renderer_draw_rectangle)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_pango1_Renderer_draw_rectangle",
+			func(carg0 *C.PangoRenderer, carg1 C.PangoRenderPart, carg2 C.int, carg3 C.int, carg4 C.int, carg5 C.int) {
+				var renderer Instance   // go PangoRenderer subclass
+				var part     RenderPart // in, none, casted
+				var x        int        // in, none, casted, casted C.gint
+				var y        int        // in, none, casted, casted C.gint
+				var width    int        // in, none, casted, casted C.gint
+				var height   int        // in, none, casted, casted C.gint
+
+				renderer = UnsafeRendererFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				part = RenderPart(carg1)
+				x = int(carg2)
+				y = int(carg3)
+				width = int(carg4)
+				height = int(carg5)
+
+				overrides.DrawRectangle(renderer, part, x, y, width, height)
+			},
+		)
 	}
 
 	if overrides.DrawShape != nil {
 		pclass.draw_shape = (*[0]byte)(C._gotk4_pango1_Renderer_draw_shape)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_pango1_Renderer_draw_shape",
+			func(carg0 *C.PangoRenderer, carg1 *C.PangoAttrShape, carg2 C.int, carg3 C.int) {
+				var renderer Instance   // go PangoRenderer subclass
+				var attr     *AttrShape // in, none, converted
+				var x        int        // in, none, casted, casted C.gint
+				var y        int        // in, none, casted, casted C.gint
+
+				renderer = UnsafeRendererFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				attr = UnsafeAttrShapeFromGlibNone(unsafe.Pointer(carg1))
+				x = int(carg2)
+				y = int(carg3)
+
+				overrides.DrawShape(renderer, attr, x, y)
+			},
+		)
 	}
 
 	if overrides.DrawTrapezoid != nil {
 		pclass.draw_trapezoid = (*[0]byte)(C._gotk4_pango1_Renderer_draw_trapezoid)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_pango1_Renderer_draw_trapezoid",
+			func(carg0 *C.PangoRenderer, carg1 C.PangoRenderPart, carg2 C.double, carg3 C.double, carg4 C.double, carg5 C.double, carg6 C.double, carg7 C.double) {
+				var renderer Instance   // go PangoRenderer subclass
+				var part     RenderPart // in, none, casted
+				var y1       float64    // in, none, casted, casted C.gdouble
+				var x11      float64    // in, none, casted, casted C.gdouble
+				var x21      float64    // in, none, casted, casted C.gdouble
+				var y2       float64    // in, none, casted, casted C.gdouble
+				var x12      float64    // in, none, casted, casted C.gdouble
+				var x22      float64    // in, none, casted, casted C.gdouble
+
+				renderer = UnsafeRendererFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				part = RenderPart(carg1)
+				y1 = float64(carg2)
+				x11 = float64(carg3)
+				x21 = float64(carg4)
+				y2 = float64(carg5)
+				x12 = float64(carg6)
+				x22 = float64(carg7)
+
+				overrides.DrawTrapezoid(renderer, part, y1, x11, x21, y2, x12, x22)
+			},
+		)
 	}
 
 	if overrides.End != nil {
 		pclass.end = (*[0]byte)(C._gotk4_pango1_Renderer_end)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_pango1_Renderer_end",
+			func(carg0 *C.PangoRenderer) {
+				var renderer Instance // go PangoRenderer subclass
+
+				renderer = UnsafeRendererFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.End(renderer)
+			},
+		)
 	}
 
 	if overrides.PartChanged != nil {
 		pclass.part_changed = (*[0]byte)(C._gotk4_pango1_Renderer_part_changed)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_pango1_Renderer_part_changed",
+			func(carg0 *C.PangoRenderer, carg1 C.PangoRenderPart) {
+				var renderer Instance   // go PangoRenderer subclass
+				var part     RenderPart // in, none, casted
+
+				renderer = UnsafeRendererFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				part = RenderPart(carg1)
+
+				overrides.PartChanged(renderer, part)
+			},
+		)
 	}
 
 	if overrides.PrepareRun != nil {
 		pclass.prepare_run = (*[0]byte)(C._gotk4_pango1_Renderer_prepare_run)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_pango1_Renderer_prepare_run",
+			func(carg0 *C.PangoRenderer, carg1 *C.PangoLayoutRun) {
+				var renderer Instance   // go PangoRenderer subclass
+				var run      *LayoutRun // in, transfer: none, C Pointers: 1, Name: LayoutRun
+
+				renderer = UnsafeRendererFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				_ = run
+				_ = carg1
+				panic("unimplemented conversion of *LayoutRun (PangoLayoutRun*)")
+
+				overrides.PrepareRun(renderer, run)
+			},
+		)
 	}
+}
+
+// RegisterRendererSubClass is used to register a go subclass of PangoRenderer. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterRendererSubClass[InstanceT Renderer](
+		name string,
+		classInit func(class *RendererClass),
+		constructor func() InstanceT,
+		overrides RendererOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeRenderer,
+		UnsafeRendererClassFromGlibBorrow,
+		UnsafeApplyRendererOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapRenderer(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // Analysis wraps PangoAnalysis

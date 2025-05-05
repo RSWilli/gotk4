@@ -67,7 +67,11 @@ func (g *GoOverridesGenerator) Generate(w *file.Package) {
 		w.Go().NewSection()
 	}
 
+	w.GoImportCore("classdata")
+
 	for _, virtual := range g.VirtualMethods {
+		overridesFnFieldName := fmt.Sprintf("overrides.%s", virtual.GoName)
+
 		// declare the extern C callback in the C preamble:
 		var cparams []string
 		for _, param := range virtual.CParameters() {
@@ -75,8 +79,18 @@ func (g *GoOverridesGenerator) Generate(w *file.Package) {
 		}
 		fmt.Fprintf(w.C(), "extern %s %s(%s);\n", virtual.CReturn.CType(), virtual.TrampolineName, strings.Join(cparams, ", "))
 
-		fmt.Fprintf(w.Go(), "if overrides.%s != nil {\n", virtual.GoName)
-		fmt.Fprintf(w.Go(), "\tpclass.%s = (*[0]byte)(C.%s)\n", virtual.Invoker.CIndentifier(), virtual.TrampolineName)
+		fmt.Fprintf(w.Go(), "if %s != nil {\n", overridesFnFieldName)
+		w.Go().Indent()
+		fmt.Fprintf(w.Go(), "pclass.%s = (*[0]byte)(C.%s)\n", virtual.Invoker.CIndentifier(), virtual.TrampolineName)
+
+		fmt.Fprintf(w.Go(), "classdata.StoreVirtualMethod(\n")
+		w.Go().Indent()
+		fmt.Fprintf(w.Go(), "unsafe.Pointer(pclass),\n")
+		fmt.Fprintf(w.Go(), "%q,\n", virtual.TrampolineName)
+		virtual.generateTrampoline(w, overridesInstanceGenericType, overridesFnFieldName) // must end with a comma before newline
+		w.Go().Unindent()
+		fmt.Fprintf(w.Go(), ")\n")
+		w.Go().Unindent()
 		fmt.Fprintf(w.Go(), "}\n")
 		w.Go().NewSection()
 	}

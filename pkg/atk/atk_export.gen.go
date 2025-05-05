@@ -5,6 +5,7 @@ package atk
 import (
 	"unsafe"
 
+	"github.com/diamondburned/gotk4/pkg/core/classdata"
 	"github.com/diamondburned/gotk4/pkg/core/userdata"
 )
 
@@ -58,721 +59,1729 @@ func _gotk4_atk1_KeySnoopFunc(carg1 *C.AtkKeyEventStruct, carg2 C.gpointer) (cre
 
 //export _gotk4_atk1_Action_do_action
 func _gotk4_atk1_Action_do_action(carg0 *C.AtkAction, carg1 C.gint) (cret C.gboolean) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkAction, carg1 C.gint) (cret C.gboolean)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Action_do_action").(func(carg0 *C.AtkAction, carg1 C.gint) (cret C.gboolean))
+		if fn == nil {
+			panic("_gotk4_atk1_Action_do_action: no function pointer found")
+		}
+	}
+	return fn(carg0, carg1)
 }
 
 //export _gotk4_atk1_Action_get_description
 func _gotk4_atk1_Action_get_description(carg0 *C.AtkAction, carg1 C.gint) (cret *C.gchar) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkAction, carg1 C.gint) (cret *C.gchar)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Action_get_description").(func(carg0 *C.AtkAction, carg1 C.gint) (cret *C.gchar))
+		if fn == nil {
+			panic("_gotk4_atk1_Action_get_description: no function pointer found")
+		}
+	}
+	return fn(carg0, carg1)
 }
 
 //export _gotk4_atk1_Action_get_keybinding
 func _gotk4_atk1_Action_get_keybinding(carg0 *C.AtkAction, carg1 C.gint) (cret *C.gchar) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkAction, carg1 C.gint) (cret *C.gchar)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Action_get_keybinding").(func(carg0 *C.AtkAction, carg1 C.gint) (cret *C.gchar))
+		if fn == nil {
+			panic("_gotk4_atk1_Action_get_keybinding: no function pointer found")
+		}
+	}
+	return fn(carg0, carg1)
 }
 
 //export _gotk4_atk1_Action_get_localized_name
 func _gotk4_atk1_Action_get_localized_name(carg0 *C.AtkAction, carg1 C.gint) (cret *C.gchar) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkAction, carg1 C.gint) (cret *C.gchar)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Action_get_localized_name").(func(carg0 *C.AtkAction, carg1 C.gint) (cret *C.gchar))
+		if fn == nil {
+			panic("_gotk4_atk1_Action_get_localized_name: no function pointer found")
+		}
+	}
+	return fn(carg0, carg1)
 }
 
 //export _gotk4_atk1_Action_get_n_actions
 func _gotk4_atk1_Action_get_n_actions(carg0 *C.AtkAction) (cret C.gint) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkAction) (cret C.gint)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Action_get_n_actions").(func(carg0 *C.AtkAction) (cret C.gint))
+		if fn == nil {
+			panic("_gotk4_atk1_Action_get_n_actions: no function pointer found")
+		}
+	}
+	return fn(carg0)
 }
 
 //export _gotk4_atk1_Action_get_name
 func _gotk4_atk1_Action_get_name(carg0 *C.AtkAction, carg1 C.gint) (cret *C.gchar) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkAction, carg1 C.gint) (cret *C.gchar)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Action_get_name").(func(carg0 *C.AtkAction, carg1 C.gint) (cret *C.gchar))
+		if fn == nil {
+			panic("_gotk4_atk1_Action_get_name: no function pointer found")
+		}
+	}
+	return fn(carg0, carg1)
 }
 
 //export _gotk4_atk1_Action_set_description
 func _gotk4_atk1_Action_set_description(carg0 *C.AtkAction, carg1 C.gint, carg2 *C.gchar) (cret C.gboolean) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkAction, carg1 C.gint, carg2 *C.gchar) (cret C.gboolean)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Action_set_description").(func(carg0 *C.AtkAction, carg1 C.gint, carg2 *C.gchar) (cret C.gboolean))
+		if fn == nil {
+			panic("_gotk4_atk1_Action_set_description: no function pointer found")
+		}
+	}
+	return fn(carg0, carg1, carg2)
 }
 
 //export _gotk4_atk1_Component_bounds_changed
 func _gotk4_atk1_Component_bounds_changed(carg0 *C.AtkComponent, carg1 *C.AtkRectangle) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkComponent, carg1 *C.AtkRectangle)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Component_bounds_changed").(func(carg0 *C.AtkComponent, carg1 *C.AtkRectangle))
+		if fn == nil {
+			panic("_gotk4_atk1_Component_bounds_changed: no function pointer found")
+		}
+	}
+	fn(carg0, carg1)
 }
 
 //export _gotk4_atk1_Component_contains
 func _gotk4_atk1_Component_contains(carg0 *C.AtkComponent, carg1 C.gint, carg2 C.gint, carg3 C.AtkCoordType) (cret C.gboolean) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkComponent, carg1 C.gint, carg2 C.gint, carg3 C.AtkCoordType) (cret C.gboolean)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Component_contains").(func(carg0 *C.AtkComponent, carg1 C.gint, carg2 C.gint, carg3 C.AtkCoordType) (cret C.gboolean))
+		if fn == nil {
+			panic("_gotk4_atk1_Component_contains: no function pointer found")
+		}
+	}
+	return fn(carg0, carg1, carg2, carg3)
 }
 
 //export _gotk4_atk1_Component_get_alpha
 func _gotk4_atk1_Component_get_alpha(carg0 *C.AtkComponent) (cret C.gdouble) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkComponent) (cret C.gdouble)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Component_get_alpha").(func(carg0 *C.AtkComponent) (cret C.gdouble))
+		if fn == nil {
+			panic("_gotk4_atk1_Component_get_alpha: no function pointer found")
+		}
+	}
+	return fn(carg0)
 }
 
 //export _gotk4_atk1_Component_get_extents
 func _gotk4_atk1_Component_get_extents(carg0 *C.AtkComponent, carg1 *C.gint, carg2 *C.gint, carg3 *C.gint, carg4 *C.gint, carg5 C.AtkCoordType) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkComponent, carg1 *C.gint, carg2 *C.gint, carg3 *C.gint, carg4 *C.gint, carg5 C.AtkCoordType)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Component_get_extents").(func(carg0 *C.AtkComponent, carg1 *C.gint, carg2 *C.gint, carg3 *C.gint, carg4 *C.gint, carg5 C.AtkCoordType))
+		if fn == nil {
+			panic("_gotk4_atk1_Component_get_extents: no function pointer found")
+		}
+	}
+	fn(carg0, carg1, carg2, carg3, carg4, carg5)
 }
 
 //export _gotk4_atk1_Component_get_layer
 func _gotk4_atk1_Component_get_layer(carg0 *C.AtkComponent) (cret C.AtkLayer) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkComponent) (cret C.AtkLayer)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Component_get_layer").(func(carg0 *C.AtkComponent) (cret C.AtkLayer))
+		if fn == nil {
+			panic("_gotk4_atk1_Component_get_layer: no function pointer found")
+		}
+	}
+	return fn(carg0)
 }
 
 //export _gotk4_atk1_Component_get_mdi_zorder
 func _gotk4_atk1_Component_get_mdi_zorder(carg0 *C.AtkComponent) (cret C.gint) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkComponent) (cret C.gint)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Component_get_mdi_zorder").(func(carg0 *C.AtkComponent) (cret C.gint))
+		if fn == nil {
+			panic("_gotk4_atk1_Component_get_mdi_zorder: no function pointer found")
+		}
+	}
+	return fn(carg0)
 }
 
 //export _gotk4_atk1_Component_grab_focus
 func _gotk4_atk1_Component_grab_focus(carg0 *C.AtkComponent) (cret C.gboolean) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkComponent) (cret C.gboolean)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Component_grab_focus").(func(carg0 *C.AtkComponent) (cret C.gboolean))
+		if fn == nil {
+			panic("_gotk4_atk1_Component_grab_focus: no function pointer found")
+		}
+	}
+	return fn(carg0)
 }
 
 //export _gotk4_atk1_Component_ref_accessible_at_point
 func _gotk4_atk1_Component_ref_accessible_at_point(carg0 *C.AtkComponent, carg1 C.gint, carg2 C.gint, carg3 C.AtkCoordType) (cret *C.AtkObject) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkComponent, carg1 C.gint, carg2 C.gint, carg3 C.AtkCoordType) (cret *C.AtkObject)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Component_ref_accessible_at_point").(func(carg0 *C.AtkComponent, carg1 C.gint, carg2 C.gint, carg3 C.AtkCoordType) (cret *C.AtkObject))
+		if fn == nil {
+			panic("_gotk4_atk1_Component_ref_accessible_at_point: no function pointer found")
+		}
+	}
+	return fn(carg0, carg1, carg2, carg3)
 }
 
 //export _gotk4_atk1_Component_scroll_to
 func _gotk4_atk1_Component_scroll_to(carg0 *C.AtkComponent, carg1 C.AtkScrollType) (cret C.gboolean) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkComponent, carg1 C.AtkScrollType) (cret C.gboolean)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Component_scroll_to").(func(carg0 *C.AtkComponent, carg1 C.AtkScrollType) (cret C.gboolean))
+		if fn == nil {
+			panic("_gotk4_atk1_Component_scroll_to: no function pointer found")
+		}
+	}
+	return fn(carg0, carg1)
 }
 
 //export _gotk4_atk1_Component_scroll_to_point
 func _gotk4_atk1_Component_scroll_to_point(carg0 *C.AtkComponent, carg1 C.AtkCoordType, carg2 C.gint, carg3 C.gint) (cret C.gboolean) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkComponent, carg1 C.AtkCoordType, carg2 C.gint, carg3 C.gint) (cret C.gboolean)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Component_scroll_to_point").(func(carg0 *C.AtkComponent, carg1 C.AtkCoordType, carg2 C.gint, carg3 C.gint) (cret C.gboolean))
+		if fn == nil {
+			panic("_gotk4_atk1_Component_scroll_to_point: no function pointer found")
+		}
+	}
+	return fn(carg0, carg1, carg2, carg3)
 }
 
 //export _gotk4_atk1_Component_set_extents
 func _gotk4_atk1_Component_set_extents(carg0 *C.AtkComponent, carg1 C.gint, carg2 C.gint, carg3 C.gint, carg4 C.gint, carg5 C.AtkCoordType) (cret C.gboolean) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkComponent, carg1 C.gint, carg2 C.gint, carg3 C.gint, carg4 C.gint, carg5 C.AtkCoordType) (cret C.gboolean)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Component_set_extents").(func(carg0 *C.AtkComponent, carg1 C.gint, carg2 C.gint, carg3 C.gint, carg4 C.gint, carg5 C.AtkCoordType) (cret C.gboolean))
+		if fn == nil {
+			panic("_gotk4_atk1_Component_set_extents: no function pointer found")
+		}
+	}
+	return fn(carg0, carg1, carg2, carg3, carg4, carg5)
 }
 
 //export _gotk4_atk1_Component_set_position
 func _gotk4_atk1_Component_set_position(carg0 *C.AtkComponent, carg1 C.gint, carg2 C.gint, carg3 C.AtkCoordType) (cret C.gboolean) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkComponent, carg1 C.gint, carg2 C.gint, carg3 C.AtkCoordType) (cret C.gboolean)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Component_set_position").(func(carg0 *C.AtkComponent, carg1 C.gint, carg2 C.gint, carg3 C.AtkCoordType) (cret C.gboolean))
+		if fn == nil {
+			panic("_gotk4_atk1_Component_set_position: no function pointer found")
+		}
+	}
+	return fn(carg0, carg1, carg2, carg3)
 }
 
 //export _gotk4_atk1_Component_set_size
 func _gotk4_atk1_Component_set_size(carg0 *C.AtkComponent, carg1 C.gint, carg2 C.gint) (cret C.gboolean) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkComponent, carg1 C.gint, carg2 C.gint) (cret C.gboolean)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Component_set_size").(func(carg0 *C.AtkComponent, carg1 C.gint, carg2 C.gint) (cret C.gboolean))
+		if fn == nil {
+			panic("_gotk4_atk1_Component_set_size: no function pointer found")
+		}
+	}
+	return fn(carg0, carg1, carg2)
 }
 
 //export _gotk4_atk1_Document_get_current_page_number
 func _gotk4_atk1_Document_get_current_page_number(carg0 *C.AtkDocument) (cret C.gint) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkDocument) (cret C.gint)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Document_get_current_page_number").(func(carg0 *C.AtkDocument) (cret C.gint))
+		if fn == nil {
+			panic("_gotk4_atk1_Document_get_current_page_number: no function pointer found")
+		}
+	}
+	return fn(carg0)
 }
 
 //export _gotk4_atk1_Document_get_document_attribute_value
 func _gotk4_atk1_Document_get_document_attribute_value(carg0 *C.AtkDocument, carg1 *C.gchar) (cret *C.gchar) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkDocument, carg1 *C.gchar) (cret *C.gchar)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Document_get_document_attribute_value").(func(carg0 *C.AtkDocument, carg1 *C.gchar) (cret *C.gchar))
+		if fn == nil {
+			panic("_gotk4_atk1_Document_get_document_attribute_value: no function pointer found")
+		}
+	}
+	return fn(carg0, carg1)
 }
 
 //export _gotk4_atk1_Document_get_page_count
 func _gotk4_atk1_Document_get_page_count(carg0 *C.AtkDocument) (cret C.gint) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkDocument) (cret C.gint)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Document_get_page_count").(func(carg0 *C.AtkDocument) (cret C.gint))
+		if fn == nil {
+			panic("_gotk4_atk1_Document_get_page_count: no function pointer found")
+		}
+	}
+	return fn(carg0)
 }
 
 //export _gotk4_atk1_Document_set_document_attribute
 func _gotk4_atk1_Document_set_document_attribute(carg0 *C.AtkDocument, carg1 *C.gchar, carg2 *C.gchar) (cret C.gboolean) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkDocument, carg1 *C.gchar, carg2 *C.gchar) (cret C.gboolean)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Document_set_document_attribute").(func(carg0 *C.AtkDocument, carg1 *C.gchar, carg2 *C.gchar) (cret C.gboolean))
+		if fn == nil {
+			panic("_gotk4_atk1_Document_set_document_attribute: no function pointer found")
+		}
+	}
+	return fn(carg0, carg1, carg2)
 }
 
 //export _gotk4_atk1_EditableText_copy_text
 func _gotk4_atk1_EditableText_copy_text(carg0 *C.AtkEditableText, carg1 C.gint, carg2 C.gint) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkEditableText, carg1 C.gint, carg2 C.gint)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_EditableText_copy_text").(func(carg0 *C.AtkEditableText, carg1 C.gint, carg2 C.gint))
+		if fn == nil {
+			panic("_gotk4_atk1_EditableText_copy_text: no function pointer found")
+		}
+	}
+	fn(carg0, carg1, carg2)
 }
 
 //export _gotk4_atk1_EditableText_cut_text
 func _gotk4_atk1_EditableText_cut_text(carg0 *C.AtkEditableText, carg1 C.gint, carg2 C.gint) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkEditableText, carg1 C.gint, carg2 C.gint)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_EditableText_cut_text").(func(carg0 *C.AtkEditableText, carg1 C.gint, carg2 C.gint))
+		if fn == nil {
+			panic("_gotk4_atk1_EditableText_cut_text: no function pointer found")
+		}
+	}
+	fn(carg0, carg1, carg2)
 }
 
 //export _gotk4_atk1_EditableText_delete_text
 func _gotk4_atk1_EditableText_delete_text(carg0 *C.AtkEditableText, carg1 C.gint, carg2 C.gint) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkEditableText, carg1 C.gint, carg2 C.gint)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_EditableText_delete_text").(func(carg0 *C.AtkEditableText, carg1 C.gint, carg2 C.gint))
+		if fn == nil {
+			panic("_gotk4_atk1_EditableText_delete_text: no function pointer found")
+		}
+	}
+	fn(carg0, carg1, carg2)
 }
 
 //export _gotk4_atk1_EditableText_insert_text
 func _gotk4_atk1_EditableText_insert_text(carg0 *C.AtkEditableText, carg1 *C.gchar, carg2 C.gint, carg3 *C.gint) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkEditableText, carg1 *C.gchar, carg2 C.gint, carg3 *C.gint)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_EditableText_insert_text").(func(carg0 *C.AtkEditableText, carg1 *C.gchar, carg2 C.gint, carg3 *C.gint))
+		if fn == nil {
+			panic("_gotk4_atk1_EditableText_insert_text: no function pointer found")
+		}
+	}
+	fn(carg0, carg1, carg2, carg3)
 }
 
 //export _gotk4_atk1_EditableText_paste_text
 func _gotk4_atk1_EditableText_paste_text(carg0 *C.AtkEditableText, carg1 C.gint) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkEditableText, carg1 C.gint)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_EditableText_paste_text").(func(carg0 *C.AtkEditableText, carg1 C.gint))
+		if fn == nil {
+			panic("_gotk4_atk1_EditableText_paste_text: no function pointer found")
+		}
+	}
+	fn(carg0, carg1)
 }
 
 //export _gotk4_atk1_EditableText_set_text_contents
 func _gotk4_atk1_EditableText_set_text_contents(carg0 *C.AtkEditableText, carg1 *C.gchar) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkEditableText, carg1 *C.gchar)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_EditableText_set_text_contents").(func(carg0 *C.AtkEditableText, carg1 *C.gchar))
+		if fn == nil {
+			panic("_gotk4_atk1_EditableText_set_text_contents: no function pointer found")
+		}
+	}
+	fn(carg0, carg1)
 }
 
 //export _gotk4_atk1_HyperlinkImpl_get_hyperlink
 func _gotk4_atk1_HyperlinkImpl_get_hyperlink(carg0 *C.AtkHyperlinkImpl) (cret *C.AtkHyperlink) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkHyperlinkImpl) (cret *C.AtkHyperlink)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_HyperlinkImpl_get_hyperlink").(func(carg0 *C.AtkHyperlinkImpl) (cret *C.AtkHyperlink))
+		if fn == nil {
+			panic("_gotk4_atk1_HyperlinkImpl_get_hyperlink: no function pointer found")
+		}
+	}
+	return fn(carg0)
 }
 
 //export _gotk4_atk1_Hypertext_get_link
 func _gotk4_atk1_Hypertext_get_link(carg0 *C.AtkHypertext, carg1 C.gint) (cret *C.AtkHyperlink) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkHypertext, carg1 C.gint) (cret *C.AtkHyperlink)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Hypertext_get_link").(func(carg0 *C.AtkHypertext, carg1 C.gint) (cret *C.AtkHyperlink))
+		if fn == nil {
+			panic("_gotk4_atk1_Hypertext_get_link: no function pointer found")
+		}
+	}
+	return fn(carg0, carg1)
 }
 
 //export _gotk4_atk1_Hypertext_get_link_index
 func _gotk4_atk1_Hypertext_get_link_index(carg0 *C.AtkHypertext, carg1 C.gint) (cret C.gint) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkHypertext, carg1 C.gint) (cret C.gint)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Hypertext_get_link_index").(func(carg0 *C.AtkHypertext, carg1 C.gint) (cret C.gint))
+		if fn == nil {
+			panic("_gotk4_atk1_Hypertext_get_link_index: no function pointer found")
+		}
+	}
+	return fn(carg0, carg1)
 }
 
 //export _gotk4_atk1_Hypertext_get_n_links
 func _gotk4_atk1_Hypertext_get_n_links(carg0 *C.AtkHypertext) (cret C.gint) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkHypertext) (cret C.gint)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Hypertext_get_n_links").(func(carg0 *C.AtkHypertext) (cret C.gint))
+		if fn == nil {
+			panic("_gotk4_atk1_Hypertext_get_n_links: no function pointer found")
+		}
+	}
+	return fn(carg0)
 }
 
 //export _gotk4_atk1_Hypertext_link_selected
 func _gotk4_atk1_Hypertext_link_selected(carg0 *C.AtkHypertext, carg1 C.gint) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkHypertext, carg1 C.gint)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Hypertext_link_selected").(func(carg0 *C.AtkHypertext, carg1 C.gint))
+		if fn == nil {
+			panic("_gotk4_atk1_Hypertext_link_selected: no function pointer found")
+		}
+	}
+	fn(carg0, carg1)
 }
 
 //export _gotk4_atk1_Image_get_image_description
 func _gotk4_atk1_Image_get_image_description(carg0 *C.AtkImage) (cret *C.gchar) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkImage) (cret *C.gchar)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Image_get_image_description").(func(carg0 *C.AtkImage) (cret *C.gchar))
+		if fn == nil {
+			panic("_gotk4_atk1_Image_get_image_description: no function pointer found")
+		}
+	}
+	return fn(carg0)
 }
 
 //export _gotk4_atk1_Image_get_image_locale
 func _gotk4_atk1_Image_get_image_locale(carg0 *C.AtkImage) (cret *C.gchar) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkImage) (cret *C.gchar)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Image_get_image_locale").(func(carg0 *C.AtkImage) (cret *C.gchar))
+		if fn == nil {
+			panic("_gotk4_atk1_Image_get_image_locale: no function pointer found")
+		}
+	}
+	return fn(carg0)
 }
 
 //export _gotk4_atk1_Image_get_image_position
 func _gotk4_atk1_Image_get_image_position(carg0 *C.AtkImage, carg1 *C.gint, carg2 *C.gint, carg3 C.AtkCoordType) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkImage, carg1 *C.gint, carg2 *C.gint, carg3 C.AtkCoordType)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Image_get_image_position").(func(carg0 *C.AtkImage, carg1 *C.gint, carg2 *C.gint, carg3 C.AtkCoordType))
+		if fn == nil {
+			panic("_gotk4_atk1_Image_get_image_position: no function pointer found")
+		}
+	}
+	fn(carg0, carg1, carg2, carg3)
 }
 
 //export _gotk4_atk1_Image_get_image_size
 func _gotk4_atk1_Image_get_image_size(carg0 *C.AtkImage, carg1 *C.gint, carg2 *C.gint) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkImage, carg1 *C.gint, carg2 *C.gint)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Image_get_image_size").(func(carg0 *C.AtkImage, carg1 *C.gint, carg2 *C.gint))
+		if fn == nil {
+			panic("_gotk4_atk1_Image_get_image_size: no function pointer found")
+		}
+	}
+	fn(carg0, carg1, carg2)
 }
 
 //export _gotk4_atk1_Image_set_image_description
 func _gotk4_atk1_Image_set_image_description(carg0 *C.AtkImage, carg1 *C.gchar) (cret C.gboolean) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkImage, carg1 *C.gchar) (cret C.gboolean)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Image_set_image_description").(func(carg0 *C.AtkImage, carg1 *C.gchar) (cret C.gboolean))
+		if fn == nil {
+			panic("_gotk4_atk1_Image_set_image_description: no function pointer found")
+		}
+	}
+	return fn(carg0, carg1)
 }
 
 //export _gotk4_atk1_Selection_add_selection
 func _gotk4_atk1_Selection_add_selection(carg0 *C.AtkSelection, carg1 C.gint) (cret C.gboolean) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkSelection, carg1 C.gint) (cret C.gboolean)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Selection_add_selection").(func(carg0 *C.AtkSelection, carg1 C.gint) (cret C.gboolean))
+		if fn == nil {
+			panic("_gotk4_atk1_Selection_add_selection: no function pointer found")
+		}
+	}
+	return fn(carg0, carg1)
 }
 
 //export _gotk4_atk1_Selection_clear_selection
 func _gotk4_atk1_Selection_clear_selection(carg0 *C.AtkSelection) (cret C.gboolean) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkSelection) (cret C.gboolean)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Selection_clear_selection").(func(carg0 *C.AtkSelection) (cret C.gboolean))
+		if fn == nil {
+			panic("_gotk4_atk1_Selection_clear_selection: no function pointer found")
+		}
+	}
+	return fn(carg0)
 }
 
 //export _gotk4_atk1_Selection_get_selection_count
 func _gotk4_atk1_Selection_get_selection_count(carg0 *C.AtkSelection) (cret C.gint) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkSelection) (cret C.gint)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Selection_get_selection_count").(func(carg0 *C.AtkSelection) (cret C.gint))
+		if fn == nil {
+			panic("_gotk4_atk1_Selection_get_selection_count: no function pointer found")
+		}
+	}
+	return fn(carg0)
 }
 
 //export _gotk4_atk1_Selection_is_child_selected
 func _gotk4_atk1_Selection_is_child_selected(carg0 *C.AtkSelection, carg1 C.gint) (cret C.gboolean) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkSelection, carg1 C.gint) (cret C.gboolean)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Selection_is_child_selected").(func(carg0 *C.AtkSelection, carg1 C.gint) (cret C.gboolean))
+		if fn == nil {
+			panic("_gotk4_atk1_Selection_is_child_selected: no function pointer found")
+		}
+	}
+	return fn(carg0, carg1)
 }
 
 //export _gotk4_atk1_Selection_ref_selection
 func _gotk4_atk1_Selection_ref_selection(carg0 *C.AtkSelection, carg1 C.gint) (cret *C.AtkObject) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkSelection, carg1 C.gint) (cret *C.AtkObject)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Selection_ref_selection").(func(carg0 *C.AtkSelection, carg1 C.gint) (cret *C.AtkObject))
+		if fn == nil {
+			panic("_gotk4_atk1_Selection_ref_selection: no function pointer found")
+		}
+	}
+	return fn(carg0, carg1)
 }
 
 //export _gotk4_atk1_Selection_remove_selection
 func _gotk4_atk1_Selection_remove_selection(carg0 *C.AtkSelection, carg1 C.gint) (cret C.gboolean) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkSelection, carg1 C.gint) (cret C.gboolean)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Selection_remove_selection").(func(carg0 *C.AtkSelection, carg1 C.gint) (cret C.gboolean))
+		if fn == nil {
+			panic("_gotk4_atk1_Selection_remove_selection: no function pointer found")
+		}
+	}
+	return fn(carg0, carg1)
 }
 
 //export _gotk4_atk1_Selection_select_all_selection
 func _gotk4_atk1_Selection_select_all_selection(carg0 *C.AtkSelection) (cret C.gboolean) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkSelection) (cret C.gboolean)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Selection_select_all_selection").(func(carg0 *C.AtkSelection) (cret C.gboolean))
+		if fn == nil {
+			panic("_gotk4_atk1_Selection_select_all_selection: no function pointer found")
+		}
+	}
+	return fn(carg0)
 }
 
 //export _gotk4_atk1_Selection_selection_changed
 func _gotk4_atk1_Selection_selection_changed(carg0 *C.AtkSelection) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkSelection)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Selection_selection_changed").(func(carg0 *C.AtkSelection))
+		if fn == nil {
+			panic("_gotk4_atk1_Selection_selection_changed: no function pointer found")
+		}
+	}
+	fn(carg0)
 }
 
 //export _gotk4_atk1_StreamableContent_get_mime_type
 func _gotk4_atk1_StreamableContent_get_mime_type(carg0 *C.AtkStreamableContent, carg1 C.gint) (cret *C.gchar) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkStreamableContent, carg1 C.gint) (cret *C.gchar)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_StreamableContent_get_mime_type").(func(carg0 *C.AtkStreamableContent, carg1 C.gint) (cret *C.gchar))
+		if fn == nil {
+			panic("_gotk4_atk1_StreamableContent_get_mime_type: no function pointer found")
+		}
+	}
+	return fn(carg0, carg1)
 }
 
 //export _gotk4_atk1_StreamableContent_get_n_mime_types
 func _gotk4_atk1_StreamableContent_get_n_mime_types(carg0 *C.AtkStreamableContent) (cret C.gint) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkStreamableContent) (cret C.gint)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_StreamableContent_get_n_mime_types").(func(carg0 *C.AtkStreamableContent) (cret C.gint))
+		if fn == nil {
+			panic("_gotk4_atk1_StreamableContent_get_n_mime_types: no function pointer found")
+		}
+	}
+	return fn(carg0)
 }
 
 //export _gotk4_atk1_StreamableContent_get_stream
 func _gotk4_atk1_StreamableContent_get_stream(carg0 *C.AtkStreamableContent, carg1 *C.gchar) (cret *C.GIOChannel) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkStreamableContent, carg1 *C.gchar) (cret *C.GIOChannel)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_StreamableContent_get_stream").(func(carg0 *C.AtkStreamableContent, carg1 *C.gchar) (cret *C.GIOChannel))
+		if fn == nil {
+			panic("_gotk4_atk1_StreamableContent_get_stream: no function pointer found")
+		}
+	}
+	return fn(carg0, carg1)
 }
 
 //export _gotk4_atk1_StreamableContent_get_uri
 func _gotk4_atk1_StreamableContent_get_uri(carg0 *C.AtkStreamableContent, carg1 *C.gchar) (cret *C.gchar) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkStreamableContent, carg1 *C.gchar) (cret *C.gchar)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_StreamableContent_get_uri").(func(carg0 *C.AtkStreamableContent, carg1 *C.gchar) (cret *C.gchar))
+		if fn == nil {
+			panic("_gotk4_atk1_StreamableContent_get_uri: no function pointer found")
+		}
+	}
+	return fn(carg0, carg1)
 }
 
 //export _gotk4_atk1_Table_add_column_selection
 func _gotk4_atk1_Table_add_column_selection(carg0 *C.AtkTable, carg1 C.gint) (cret C.gboolean) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkTable, carg1 C.gint) (cret C.gboolean)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Table_add_column_selection").(func(carg0 *C.AtkTable, carg1 C.gint) (cret C.gboolean))
+		if fn == nil {
+			panic("_gotk4_atk1_Table_add_column_selection: no function pointer found")
+		}
+	}
+	return fn(carg0, carg1)
 }
 
 //export _gotk4_atk1_Table_add_row_selection
 func _gotk4_atk1_Table_add_row_selection(carg0 *C.AtkTable, carg1 C.gint) (cret C.gboolean) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkTable, carg1 C.gint) (cret C.gboolean)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Table_add_row_selection").(func(carg0 *C.AtkTable, carg1 C.gint) (cret C.gboolean))
+		if fn == nil {
+			panic("_gotk4_atk1_Table_add_row_selection: no function pointer found")
+		}
+	}
+	return fn(carg0, carg1)
 }
 
 //export _gotk4_atk1_Table_column_deleted
 func _gotk4_atk1_Table_column_deleted(carg0 *C.AtkTable, carg1 C.gint, carg2 C.gint) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkTable, carg1 C.gint, carg2 C.gint)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Table_column_deleted").(func(carg0 *C.AtkTable, carg1 C.gint, carg2 C.gint))
+		if fn == nil {
+			panic("_gotk4_atk1_Table_column_deleted: no function pointer found")
+		}
+	}
+	fn(carg0, carg1, carg2)
 }
 
 //export _gotk4_atk1_Table_column_inserted
 func _gotk4_atk1_Table_column_inserted(carg0 *C.AtkTable, carg1 C.gint, carg2 C.gint) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkTable, carg1 C.gint, carg2 C.gint)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Table_column_inserted").(func(carg0 *C.AtkTable, carg1 C.gint, carg2 C.gint))
+		if fn == nil {
+			panic("_gotk4_atk1_Table_column_inserted: no function pointer found")
+		}
+	}
+	fn(carg0, carg1, carg2)
 }
 
 //export _gotk4_atk1_Table_column_reordered
 func _gotk4_atk1_Table_column_reordered(carg0 *C.AtkTable) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkTable)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Table_column_reordered").(func(carg0 *C.AtkTable))
+		if fn == nil {
+			panic("_gotk4_atk1_Table_column_reordered: no function pointer found")
+		}
+	}
+	fn(carg0)
 }
 
 //export _gotk4_atk1_Table_get_caption
 func _gotk4_atk1_Table_get_caption(carg0 *C.AtkTable) (cret *C.AtkObject) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkTable) (cret *C.AtkObject)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Table_get_caption").(func(carg0 *C.AtkTable) (cret *C.AtkObject))
+		if fn == nil {
+			panic("_gotk4_atk1_Table_get_caption: no function pointer found")
+		}
+	}
+	return fn(carg0)
 }
 
 //export _gotk4_atk1_Table_get_column_description
 func _gotk4_atk1_Table_get_column_description(carg0 *C.AtkTable, carg1 C.gint) (cret *C.gchar) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkTable, carg1 C.gint) (cret *C.gchar)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Table_get_column_description").(func(carg0 *C.AtkTable, carg1 C.gint) (cret *C.gchar))
+		if fn == nil {
+			panic("_gotk4_atk1_Table_get_column_description: no function pointer found")
+		}
+	}
+	return fn(carg0, carg1)
 }
 
 //export _gotk4_atk1_Table_get_column_extent_at
 func _gotk4_atk1_Table_get_column_extent_at(carg0 *C.AtkTable, carg1 C.gint, carg2 C.gint) (cret C.gint) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkTable, carg1 C.gint, carg2 C.gint) (cret C.gint)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Table_get_column_extent_at").(func(carg0 *C.AtkTable, carg1 C.gint, carg2 C.gint) (cret C.gint))
+		if fn == nil {
+			panic("_gotk4_atk1_Table_get_column_extent_at: no function pointer found")
+		}
+	}
+	return fn(carg0, carg1, carg2)
 }
 
 //export _gotk4_atk1_Table_get_column_header
 func _gotk4_atk1_Table_get_column_header(carg0 *C.AtkTable, carg1 C.gint) (cret *C.AtkObject) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkTable, carg1 C.gint) (cret *C.AtkObject)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Table_get_column_header").(func(carg0 *C.AtkTable, carg1 C.gint) (cret *C.AtkObject))
+		if fn == nil {
+			panic("_gotk4_atk1_Table_get_column_header: no function pointer found")
+		}
+	}
+	return fn(carg0, carg1)
 }
 
 //export _gotk4_atk1_Table_get_n_columns
 func _gotk4_atk1_Table_get_n_columns(carg0 *C.AtkTable) (cret C.gint) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkTable) (cret C.gint)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Table_get_n_columns").(func(carg0 *C.AtkTable) (cret C.gint))
+		if fn == nil {
+			panic("_gotk4_atk1_Table_get_n_columns: no function pointer found")
+		}
+	}
+	return fn(carg0)
 }
 
 //export _gotk4_atk1_Table_get_n_rows
 func _gotk4_atk1_Table_get_n_rows(carg0 *C.AtkTable) (cret C.gint) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkTable) (cret C.gint)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Table_get_n_rows").(func(carg0 *C.AtkTable) (cret C.gint))
+		if fn == nil {
+			panic("_gotk4_atk1_Table_get_n_rows: no function pointer found")
+		}
+	}
+	return fn(carg0)
 }
 
 //export _gotk4_atk1_Table_get_row_description
 func _gotk4_atk1_Table_get_row_description(carg0 *C.AtkTable, carg1 C.gint) (cret *C.gchar) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkTable, carg1 C.gint) (cret *C.gchar)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Table_get_row_description").(func(carg0 *C.AtkTable, carg1 C.gint) (cret *C.gchar))
+		if fn == nil {
+			panic("_gotk4_atk1_Table_get_row_description: no function pointer found")
+		}
+	}
+	return fn(carg0, carg1)
 }
 
 //export _gotk4_atk1_Table_get_row_extent_at
 func _gotk4_atk1_Table_get_row_extent_at(carg0 *C.AtkTable, carg1 C.gint, carg2 C.gint) (cret C.gint) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkTable, carg1 C.gint, carg2 C.gint) (cret C.gint)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Table_get_row_extent_at").(func(carg0 *C.AtkTable, carg1 C.gint, carg2 C.gint) (cret C.gint))
+		if fn == nil {
+			panic("_gotk4_atk1_Table_get_row_extent_at: no function pointer found")
+		}
+	}
+	return fn(carg0, carg1, carg2)
 }
 
 //export _gotk4_atk1_Table_get_row_header
 func _gotk4_atk1_Table_get_row_header(carg0 *C.AtkTable, carg1 C.gint) (cret *C.AtkObject) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkTable, carg1 C.gint) (cret *C.AtkObject)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Table_get_row_header").(func(carg0 *C.AtkTable, carg1 C.gint) (cret *C.AtkObject))
+		if fn == nil {
+			panic("_gotk4_atk1_Table_get_row_header: no function pointer found")
+		}
+	}
+	return fn(carg0, carg1)
 }
 
 //export _gotk4_atk1_Table_get_selected_columns
 func _gotk4_atk1_Table_get_selected_columns(carg0 *C.AtkTable, carg1 **C.gint) (cret C.gint) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkTable, carg1 **C.gint) (cret C.gint)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Table_get_selected_columns").(func(carg0 *C.AtkTable, carg1 **C.gint) (cret C.gint))
+		if fn == nil {
+			panic("_gotk4_atk1_Table_get_selected_columns: no function pointer found")
+		}
+	}
+	return fn(carg0, carg1)
 }
 
 //export _gotk4_atk1_Table_get_selected_rows
 func _gotk4_atk1_Table_get_selected_rows(carg0 *C.AtkTable, carg1 **C.gint) (cret C.gint) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkTable, carg1 **C.gint) (cret C.gint)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Table_get_selected_rows").(func(carg0 *C.AtkTable, carg1 **C.gint) (cret C.gint))
+		if fn == nil {
+			panic("_gotk4_atk1_Table_get_selected_rows: no function pointer found")
+		}
+	}
+	return fn(carg0, carg1)
 }
 
 //export _gotk4_atk1_Table_get_summary
 func _gotk4_atk1_Table_get_summary(carg0 *C.AtkTable) (cret *C.AtkObject) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkTable) (cret *C.AtkObject)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Table_get_summary").(func(carg0 *C.AtkTable) (cret *C.AtkObject))
+		if fn == nil {
+			panic("_gotk4_atk1_Table_get_summary: no function pointer found")
+		}
+	}
+	return fn(carg0)
 }
 
 //export _gotk4_atk1_Table_is_column_selected
 func _gotk4_atk1_Table_is_column_selected(carg0 *C.AtkTable, carg1 C.gint) (cret C.gboolean) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkTable, carg1 C.gint) (cret C.gboolean)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Table_is_column_selected").(func(carg0 *C.AtkTable, carg1 C.gint) (cret C.gboolean))
+		if fn == nil {
+			panic("_gotk4_atk1_Table_is_column_selected: no function pointer found")
+		}
+	}
+	return fn(carg0, carg1)
 }
 
 //export _gotk4_atk1_Table_is_row_selected
 func _gotk4_atk1_Table_is_row_selected(carg0 *C.AtkTable, carg1 C.gint) (cret C.gboolean) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkTable, carg1 C.gint) (cret C.gboolean)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Table_is_row_selected").(func(carg0 *C.AtkTable, carg1 C.gint) (cret C.gboolean))
+		if fn == nil {
+			panic("_gotk4_atk1_Table_is_row_selected: no function pointer found")
+		}
+	}
+	return fn(carg0, carg1)
 }
 
 //export _gotk4_atk1_Table_is_selected
 func _gotk4_atk1_Table_is_selected(carg0 *C.AtkTable, carg1 C.gint, carg2 C.gint) (cret C.gboolean) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkTable, carg1 C.gint, carg2 C.gint) (cret C.gboolean)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Table_is_selected").(func(carg0 *C.AtkTable, carg1 C.gint, carg2 C.gint) (cret C.gboolean))
+		if fn == nil {
+			panic("_gotk4_atk1_Table_is_selected: no function pointer found")
+		}
+	}
+	return fn(carg0, carg1, carg2)
 }
 
 //export _gotk4_atk1_Table_model_changed
 func _gotk4_atk1_Table_model_changed(carg0 *C.AtkTable) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkTable)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Table_model_changed").(func(carg0 *C.AtkTable))
+		if fn == nil {
+			panic("_gotk4_atk1_Table_model_changed: no function pointer found")
+		}
+	}
+	fn(carg0)
 }
 
 //export _gotk4_atk1_Table_ref_at
 func _gotk4_atk1_Table_ref_at(carg0 *C.AtkTable, carg1 C.gint, carg2 C.gint) (cret *C.AtkObject) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkTable, carg1 C.gint, carg2 C.gint) (cret *C.AtkObject)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Table_ref_at").(func(carg0 *C.AtkTable, carg1 C.gint, carg2 C.gint) (cret *C.AtkObject))
+		if fn == nil {
+			panic("_gotk4_atk1_Table_ref_at: no function pointer found")
+		}
+	}
+	return fn(carg0, carg1, carg2)
 }
 
 //export _gotk4_atk1_Table_remove_column_selection
 func _gotk4_atk1_Table_remove_column_selection(carg0 *C.AtkTable, carg1 C.gint) (cret C.gboolean) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkTable, carg1 C.gint) (cret C.gboolean)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Table_remove_column_selection").(func(carg0 *C.AtkTable, carg1 C.gint) (cret C.gboolean))
+		if fn == nil {
+			panic("_gotk4_atk1_Table_remove_column_selection: no function pointer found")
+		}
+	}
+	return fn(carg0, carg1)
 }
 
 //export _gotk4_atk1_Table_remove_row_selection
 func _gotk4_atk1_Table_remove_row_selection(carg0 *C.AtkTable, carg1 C.gint) (cret C.gboolean) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkTable, carg1 C.gint) (cret C.gboolean)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Table_remove_row_selection").(func(carg0 *C.AtkTable, carg1 C.gint) (cret C.gboolean))
+		if fn == nil {
+			panic("_gotk4_atk1_Table_remove_row_selection: no function pointer found")
+		}
+	}
+	return fn(carg0, carg1)
 }
 
 //export _gotk4_atk1_Table_row_deleted
 func _gotk4_atk1_Table_row_deleted(carg0 *C.AtkTable, carg1 C.gint, carg2 C.gint) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkTable, carg1 C.gint, carg2 C.gint)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Table_row_deleted").(func(carg0 *C.AtkTable, carg1 C.gint, carg2 C.gint))
+		if fn == nil {
+			panic("_gotk4_atk1_Table_row_deleted: no function pointer found")
+		}
+	}
+	fn(carg0, carg1, carg2)
 }
 
 //export _gotk4_atk1_Table_row_inserted
 func _gotk4_atk1_Table_row_inserted(carg0 *C.AtkTable, carg1 C.gint, carg2 C.gint) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkTable, carg1 C.gint, carg2 C.gint)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Table_row_inserted").(func(carg0 *C.AtkTable, carg1 C.gint, carg2 C.gint))
+		if fn == nil {
+			panic("_gotk4_atk1_Table_row_inserted: no function pointer found")
+		}
+	}
+	fn(carg0, carg1, carg2)
 }
 
 //export _gotk4_atk1_Table_row_reordered
 func _gotk4_atk1_Table_row_reordered(carg0 *C.AtkTable) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkTable)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Table_row_reordered").(func(carg0 *C.AtkTable))
+		if fn == nil {
+			panic("_gotk4_atk1_Table_row_reordered: no function pointer found")
+		}
+	}
+	fn(carg0)
 }
 
 //export _gotk4_atk1_Table_set_caption
 func _gotk4_atk1_Table_set_caption(carg0 *C.AtkTable, carg1 *C.AtkObject) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkTable, carg1 *C.AtkObject)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Table_set_caption").(func(carg0 *C.AtkTable, carg1 *C.AtkObject))
+		if fn == nil {
+			panic("_gotk4_atk1_Table_set_caption: no function pointer found")
+		}
+	}
+	fn(carg0, carg1)
 }
 
 //export _gotk4_atk1_Table_set_column_description
 func _gotk4_atk1_Table_set_column_description(carg0 *C.AtkTable, carg1 C.gint, carg2 *C.gchar) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkTable, carg1 C.gint, carg2 *C.gchar)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Table_set_column_description").(func(carg0 *C.AtkTable, carg1 C.gint, carg2 *C.gchar))
+		if fn == nil {
+			panic("_gotk4_atk1_Table_set_column_description: no function pointer found")
+		}
+	}
+	fn(carg0, carg1, carg2)
 }
 
 //export _gotk4_atk1_Table_set_column_header
 func _gotk4_atk1_Table_set_column_header(carg0 *C.AtkTable, carg1 C.gint, carg2 *C.AtkObject) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkTable, carg1 C.gint, carg2 *C.AtkObject)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Table_set_column_header").(func(carg0 *C.AtkTable, carg1 C.gint, carg2 *C.AtkObject))
+		if fn == nil {
+			panic("_gotk4_atk1_Table_set_column_header: no function pointer found")
+		}
+	}
+	fn(carg0, carg1, carg2)
 }
 
 //export _gotk4_atk1_Table_set_row_description
 func _gotk4_atk1_Table_set_row_description(carg0 *C.AtkTable, carg1 C.gint, carg2 *C.gchar) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkTable, carg1 C.gint, carg2 *C.gchar)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Table_set_row_description").(func(carg0 *C.AtkTable, carg1 C.gint, carg2 *C.gchar))
+		if fn == nil {
+			panic("_gotk4_atk1_Table_set_row_description: no function pointer found")
+		}
+	}
+	fn(carg0, carg1, carg2)
 }
 
 //export _gotk4_atk1_Table_set_row_header
 func _gotk4_atk1_Table_set_row_header(carg0 *C.AtkTable, carg1 C.gint, carg2 *C.AtkObject) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkTable, carg1 C.gint, carg2 *C.AtkObject)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Table_set_row_header").(func(carg0 *C.AtkTable, carg1 C.gint, carg2 *C.AtkObject))
+		if fn == nil {
+			panic("_gotk4_atk1_Table_set_row_header: no function pointer found")
+		}
+	}
+	fn(carg0, carg1, carg2)
 }
 
 //export _gotk4_atk1_Table_set_summary
 func _gotk4_atk1_Table_set_summary(carg0 *C.AtkTable, carg1 *C.AtkObject) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkTable, carg1 *C.AtkObject)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Table_set_summary").(func(carg0 *C.AtkTable, carg1 *C.AtkObject))
+		if fn == nil {
+			panic("_gotk4_atk1_Table_set_summary: no function pointer found")
+		}
+	}
+	fn(carg0, carg1)
 }
 
 //export _gotk4_atk1_TableCell_get_column_span
 func _gotk4_atk1_TableCell_get_column_span(carg0 *C.AtkTableCell) (cret C.gint) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkTableCell) (cret C.gint)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_TableCell_get_column_span").(func(carg0 *C.AtkTableCell) (cret C.gint))
+		if fn == nil {
+			panic("_gotk4_atk1_TableCell_get_column_span: no function pointer found")
+		}
+	}
+	return fn(carg0)
 }
 
 //export _gotk4_atk1_TableCell_get_position
 func _gotk4_atk1_TableCell_get_position(carg0 *C.AtkTableCell, carg1 *C.gint, carg2 *C.gint) (cret C.gboolean) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkTableCell, carg1 *C.gint, carg2 *C.gint) (cret C.gboolean)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_TableCell_get_position").(func(carg0 *C.AtkTableCell, carg1 *C.gint, carg2 *C.gint) (cret C.gboolean))
+		if fn == nil {
+			panic("_gotk4_atk1_TableCell_get_position: no function pointer found")
+		}
+	}
+	return fn(carg0, carg1, carg2)
 }
 
 //export _gotk4_atk1_TableCell_get_row_column_span
 func _gotk4_atk1_TableCell_get_row_column_span(carg0 *C.AtkTableCell, carg1 *C.gint, carg2 *C.gint, carg3 *C.gint, carg4 *C.gint) (cret C.gboolean) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkTableCell, carg1 *C.gint, carg2 *C.gint, carg3 *C.gint, carg4 *C.gint) (cret C.gboolean)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_TableCell_get_row_column_span").(func(carg0 *C.AtkTableCell, carg1 *C.gint, carg2 *C.gint, carg3 *C.gint, carg4 *C.gint) (cret C.gboolean))
+		if fn == nil {
+			panic("_gotk4_atk1_TableCell_get_row_column_span: no function pointer found")
+		}
+	}
+	return fn(carg0, carg1, carg2, carg3, carg4)
 }
 
 //export _gotk4_atk1_TableCell_get_row_span
 func _gotk4_atk1_TableCell_get_row_span(carg0 *C.AtkTableCell) (cret C.gint) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkTableCell) (cret C.gint)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_TableCell_get_row_span").(func(carg0 *C.AtkTableCell) (cret C.gint))
+		if fn == nil {
+			panic("_gotk4_atk1_TableCell_get_row_span: no function pointer found")
+		}
+	}
+	return fn(carg0)
 }
 
 //export _gotk4_atk1_TableCell_get_table
 func _gotk4_atk1_TableCell_get_table(carg0 *C.AtkTableCell) (cret *C.AtkObject) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkTableCell) (cret *C.AtkObject)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_TableCell_get_table").(func(carg0 *C.AtkTableCell) (cret *C.AtkObject))
+		if fn == nil {
+			panic("_gotk4_atk1_TableCell_get_table: no function pointer found")
+		}
+	}
+	return fn(carg0)
 }
 
 //export _gotk4_atk1_Text_add_selection
 func _gotk4_atk1_Text_add_selection(carg0 *C.AtkText, carg1 C.gint, carg2 C.gint) (cret C.gboolean) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkText, carg1 C.gint, carg2 C.gint) (cret C.gboolean)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Text_add_selection").(func(carg0 *C.AtkText, carg1 C.gint, carg2 C.gint) (cret C.gboolean))
+		if fn == nil {
+			panic("_gotk4_atk1_Text_add_selection: no function pointer found")
+		}
+	}
+	return fn(carg0, carg1, carg2)
 }
 
 //export _gotk4_atk1_Text_get_bounded_ranges
 func _gotk4_atk1_Text_get_bounded_ranges(carg0 *C.AtkText, carg1 *C.AtkTextRectangle, carg2 C.AtkCoordType, carg3 C.AtkTextClipType, carg4 C.AtkTextClipType) (cret **C.AtkTextRange) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkText, carg1 *C.AtkTextRectangle, carg2 C.AtkCoordType, carg3 C.AtkTextClipType, carg4 C.AtkTextClipType) (cret **C.AtkTextRange)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Text_get_bounded_ranges").(func(carg0 *C.AtkText, carg1 *C.AtkTextRectangle, carg2 C.AtkCoordType, carg3 C.AtkTextClipType, carg4 C.AtkTextClipType) (cret **C.AtkTextRange))
+		if fn == nil {
+			panic("_gotk4_atk1_Text_get_bounded_ranges: no function pointer found")
+		}
+	}
+	return fn(carg0, carg1, carg2, carg3, carg4)
 }
 
 //export _gotk4_atk1_Text_get_caret_offset
 func _gotk4_atk1_Text_get_caret_offset(carg0 *C.AtkText) (cret C.gint) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkText) (cret C.gint)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Text_get_caret_offset").(func(carg0 *C.AtkText) (cret C.gint))
+		if fn == nil {
+			panic("_gotk4_atk1_Text_get_caret_offset: no function pointer found")
+		}
+	}
+	return fn(carg0)
 }
 
 //export _gotk4_atk1_Text_get_character_at_offset
 func _gotk4_atk1_Text_get_character_at_offset(carg0 *C.AtkText, carg1 C.gint) (cret C.gunichar) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkText, carg1 C.gint) (cret C.gunichar)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Text_get_character_at_offset").(func(carg0 *C.AtkText, carg1 C.gint) (cret C.gunichar))
+		if fn == nil {
+			panic("_gotk4_atk1_Text_get_character_at_offset: no function pointer found")
+		}
+	}
+	return fn(carg0, carg1)
 }
 
 //export _gotk4_atk1_Text_get_character_count
 func _gotk4_atk1_Text_get_character_count(carg0 *C.AtkText) (cret C.gint) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkText) (cret C.gint)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Text_get_character_count").(func(carg0 *C.AtkText) (cret C.gint))
+		if fn == nil {
+			panic("_gotk4_atk1_Text_get_character_count: no function pointer found")
+		}
+	}
+	return fn(carg0)
 }
 
 //export _gotk4_atk1_Text_get_character_extents
 func _gotk4_atk1_Text_get_character_extents(carg0 *C.AtkText, carg1 C.gint, carg2 *C.gint, carg3 *C.gint, carg4 *C.gint, carg5 *C.gint, carg6 C.AtkCoordType) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkText, carg1 C.gint, carg2 *C.gint, carg3 *C.gint, carg4 *C.gint, carg5 *C.gint, carg6 C.AtkCoordType)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Text_get_character_extents").(func(carg0 *C.AtkText, carg1 C.gint, carg2 *C.gint, carg3 *C.gint, carg4 *C.gint, carg5 *C.gint, carg6 C.AtkCoordType))
+		if fn == nil {
+			panic("_gotk4_atk1_Text_get_character_extents: no function pointer found")
+		}
+	}
+	fn(carg0, carg1, carg2, carg3, carg4, carg5, carg6)
 }
 
 //export _gotk4_atk1_Text_get_n_selections
 func _gotk4_atk1_Text_get_n_selections(carg0 *C.AtkText) (cret C.gint) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkText) (cret C.gint)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Text_get_n_selections").(func(carg0 *C.AtkText) (cret C.gint))
+		if fn == nil {
+			panic("_gotk4_atk1_Text_get_n_selections: no function pointer found")
+		}
+	}
+	return fn(carg0)
 }
 
 //export _gotk4_atk1_Text_get_offset_at_point
 func _gotk4_atk1_Text_get_offset_at_point(carg0 *C.AtkText, carg1 C.gint, carg2 C.gint, carg3 C.AtkCoordType) (cret C.gint) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkText, carg1 C.gint, carg2 C.gint, carg3 C.AtkCoordType) (cret C.gint)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Text_get_offset_at_point").(func(carg0 *C.AtkText, carg1 C.gint, carg2 C.gint, carg3 C.AtkCoordType) (cret C.gint))
+		if fn == nil {
+			panic("_gotk4_atk1_Text_get_offset_at_point: no function pointer found")
+		}
+	}
+	return fn(carg0, carg1, carg2, carg3)
 }
 
 //export _gotk4_atk1_Text_get_range_extents
 func _gotk4_atk1_Text_get_range_extents(carg0 *C.AtkText, carg1 C.gint, carg2 C.gint, carg3 C.AtkCoordType, carg4 *C.AtkTextRectangle) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkText, carg1 C.gint, carg2 C.gint, carg3 C.AtkCoordType, carg4 *C.AtkTextRectangle)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Text_get_range_extents").(func(carg0 *C.AtkText, carg1 C.gint, carg2 C.gint, carg3 C.AtkCoordType, carg4 *C.AtkTextRectangle))
+		if fn == nil {
+			panic("_gotk4_atk1_Text_get_range_extents: no function pointer found")
+		}
+	}
+	fn(carg0, carg1, carg2, carg3, carg4)
 }
 
 //export _gotk4_atk1_Text_get_selection
 func _gotk4_atk1_Text_get_selection(carg0 *C.AtkText, carg1 C.gint, carg2 *C.gint, carg3 *C.gint) (cret *C.gchar) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkText, carg1 C.gint, carg2 *C.gint, carg3 *C.gint) (cret *C.gchar)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Text_get_selection").(func(carg0 *C.AtkText, carg1 C.gint, carg2 *C.gint, carg3 *C.gint) (cret *C.gchar))
+		if fn == nil {
+			panic("_gotk4_atk1_Text_get_selection: no function pointer found")
+		}
+	}
+	return fn(carg0, carg1, carg2, carg3)
 }
 
 //export _gotk4_atk1_Text_get_string_at_offset
 func _gotk4_atk1_Text_get_string_at_offset(carg0 *C.AtkText, carg1 C.gint, carg2 C.AtkTextGranularity, carg3 *C.gint, carg4 *C.gint) (cret *C.gchar) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkText, carg1 C.gint, carg2 C.AtkTextGranularity, carg3 *C.gint, carg4 *C.gint) (cret *C.gchar)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Text_get_string_at_offset").(func(carg0 *C.AtkText, carg1 C.gint, carg2 C.AtkTextGranularity, carg3 *C.gint, carg4 *C.gint) (cret *C.gchar))
+		if fn == nil {
+			panic("_gotk4_atk1_Text_get_string_at_offset: no function pointer found")
+		}
+	}
+	return fn(carg0, carg1, carg2, carg3, carg4)
 }
 
 //export _gotk4_atk1_Text_get_text
 func _gotk4_atk1_Text_get_text(carg0 *C.AtkText, carg1 C.gint, carg2 C.gint) (cret *C.gchar) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkText, carg1 C.gint, carg2 C.gint) (cret *C.gchar)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Text_get_text").(func(carg0 *C.AtkText, carg1 C.gint, carg2 C.gint) (cret *C.gchar))
+		if fn == nil {
+			panic("_gotk4_atk1_Text_get_text: no function pointer found")
+		}
+	}
+	return fn(carg0, carg1, carg2)
 }
 
 //export _gotk4_atk1_Text_remove_selection
 func _gotk4_atk1_Text_remove_selection(carg0 *C.AtkText, carg1 C.gint) (cret C.gboolean) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkText, carg1 C.gint) (cret C.gboolean)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Text_remove_selection").(func(carg0 *C.AtkText, carg1 C.gint) (cret C.gboolean))
+		if fn == nil {
+			panic("_gotk4_atk1_Text_remove_selection: no function pointer found")
+		}
+	}
+	return fn(carg0, carg1)
 }
 
 //export _gotk4_atk1_Text_scroll_substring_to
 func _gotk4_atk1_Text_scroll_substring_to(carg0 *C.AtkText, carg1 C.gint, carg2 C.gint, carg3 C.AtkScrollType) (cret C.gboolean) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkText, carg1 C.gint, carg2 C.gint, carg3 C.AtkScrollType) (cret C.gboolean)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Text_scroll_substring_to").(func(carg0 *C.AtkText, carg1 C.gint, carg2 C.gint, carg3 C.AtkScrollType) (cret C.gboolean))
+		if fn == nil {
+			panic("_gotk4_atk1_Text_scroll_substring_to: no function pointer found")
+		}
+	}
+	return fn(carg0, carg1, carg2, carg3)
 }
 
 //export _gotk4_atk1_Text_scroll_substring_to_point
 func _gotk4_atk1_Text_scroll_substring_to_point(carg0 *C.AtkText, carg1 C.gint, carg2 C.gint, carg3 C.AtkCoordType, carg4 C.gint, carg5 C.gint) (cret C.gboolean) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkText, carg1 C.gint, carg2 C.gint, carg3 C.AtkCoordType, carg4 C.gint, carg5 C.gint) (cret C.gboolean)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Text_scroll_substring_to_point").(func(carg0 *C.AtkText, carg1 C.gint, carg2 C.gint, carg3 C.AtkCoordType, carg4 C.gint, carg5 C.gint) (cret C.gboolean))
+		if fn == nil {
+			panic("_gotk4_atk1_Text_scroll_substring_to_point: no function pointer found")
+		}
+	}
+	return fn(carg0, carg1, carg2, carg3, carg4, carg5)
 }
 
 //export _gotk4_atk1_Text_set_caret_offset
 func _gotk4_atk1_Text_set_caret_offset(carg0 *C.AtkText, carg1 C.gint) (cret C.gboolean) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkText, carg1 C.gint) (cret C.gboolean)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Text_set_caret_offset").(func(carg0 *C.AtkText, carg1 C.gint) (cret C.gboolean))
+		if fn == nil {
+			panic("_gotk4_atk1_Text_set_caret_offset: no function pointer found")
+		}
+	}
+	return fn(carg0, carg1)
 }
 
 //export _gotk4_atk1_Text_set_selection
 func _gotk4_atk1_Text_set_selection(carg0 *C.AtkText, carg1 C.gint, carg2 C.gint, carg3 C.gint) (cret C.gboolean) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkText, carg1 C.gint, carg2 C.gint, carg3 C.gint) (cret C.gboolean)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Text_set_selection").(func(carg0 *C.AtkText, carg1 C.gint, carg2 C.gint, carg3 C.gint) (cret C.gboolean))
+		if fn == nil {
+			panic("_gotk4_atk1_Text_set_selection: no function pointer found")
+		}
+	}
+	return fn(carg0, carg1, carg2, carg3)
 }
 
 //export _gotk4_atk1_Text_text_attributes_changed
 func _gotk4_atk1_Text_text_attributes_changed(carg0 *C.AtkText) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkText)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Text_text_attributes_changed").(func(carg0 *C.AtkText))
+		if fn == nil {
+			panic("_gotk4_atk1_Text_text_attributes_changed: no function pointer found")
+		}
+	}
+	fn(carg0)
 }
 
 //export _gotk4_atk1_Text_text_caret_moved
 func _gotk4_atk1_Text_text_caret_moved(carg0 *C.AtkText, carg1 C.gint) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkText, carg1 C.gint)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Text_text_caret_moved").(func(carg0 *C.AtkText, carg1 C.gint))
+		if fn == nil {
+			panic("_gotk4_atk1_Text_text_caret_moved: no function pointer found")
+		}
+	}
+	fn(carg0, carg1)
 }
 
 //export _gotk4_atk1_Text_text_changed
 func _gotk4_atk1_Text_text_changed(carg0 *C.AtkText, carg1 C.gint, carg2 C.gint) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkText, carg1 C.gint, carg2 C.gint)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Text_text_changed").(func(carg0 *C.AtkText, carg1 C.gint, carg2 C.gint))
+		if fn == nil {
+			panic("_gotk4_atk1_Text_text_changed: no function pointer found")
+		}
+	}
+	fn(carg0, carg1, carg2)
 }
 
 //export _gotk4_atk1_Text_text_selection_changed
 func _gotk4_atk1_Text_text_selection_changed(carg0 *C.AtkText) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkText)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Text_text_selection_changed").(func(carg0 *C.AtkText))
+		if fn == nil {
+			panic("_gotk4_atk1_Text_text_selection_changed: no function pointer found")
+		}
+	}
+	fn(carg0)
 }
 
 //export _gotk4_atk1_Value_get_increment
 func _gotk4_atk1_Value_get_increment(carg0 *C.AtkValue) (cret C.gdouble) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkValue) (cret C.gdouble)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Value_get_increment").(func(carg0 *C.AtkValue) (cret C.gdouble))
+		if fn == nil {
+			panic("_gotk4_atk1_Value_get_increment: no function pointer found")
+		}
+	}
+	return fn(carg0)
 }
 
 //export _gotk4_atk1_Value_get_range
 func _gotk4_atk1_Value_get_range(carg0 *C.AtkValue) (cret *C.AtkRange) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkValue) (cret *C.AtkRange)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Value_get_range").(func(carg0 *C.AtkValue) (cret *C.AtkRange))
+		if fn == nil {
+			panic("_gotk4_atk1_Value_get_range: no function pointer found")
+		}
+	}
+	return fn(carg0)
 }
 
 //export _gotk4_atk1_Value_get_sub_ranges
 func _gotk4_atk1_Value_get_sub_ranges(carg0 *C.AtkValue) (cret *C.GSList) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkValue) (cret *C.GSList)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Value_get_sub_ranges").(func(carg0 *C.AtkValue) (cret *C.GSList))
+		if fn == nil {
+			panic("_gotk4_atk1_Value_get_sub_ranges: no function pointer found")
+		}
+	}
+	return fn(carg0)
 }
 
 //export _gotk4_atk1_Value_get_value_and_text
 func _gotk4_atk1_Value_get_value_and_text(carg0 *C.AtkValue, carg1 *C.gdouble, carg2 **C.gchar) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkValue, carg1 *C.gdouble, carg2 **C.gchar)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Value_get_value_and_text").(func(carg0 *C.AtkValue, carg1 *C.gdouble, carg2 **C.gchar))
+		if fn == nil {
+			panic("_gotk4_atk1_Value_get_value_and_text: no function pointer found")
+		}
+	}
+	fn(carg0, carg1, carg2)
 }
 
 //export _gotk4_atk1_Value_set_value
 func _gotk4_atk1_Value_set_value(carg0 *C.AtkValue, carg1 C.gdouble) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkValue, carg1 C.gdouble)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Value_set_value").(func(carg0 *C.AtkValue, carg1 C.gdouble))
+		if fn == nil {
+			panic("_gotk4_atk1_Value_set_value: no function pointer found")
+		}
+	}
+	fn(carg0, carg1)
 }
 
 //export _gotk4_atk1_Hyperlink_get_end_index
 func _gotk4_atk1_Hyperlink_get_end_index(carg0 *C.AtkHyperlink) (cret C.gint) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkHyperlink) (cret C.gint)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Hyperlink_get_end_index").(func(carg0 *C.AtkHyperlink) (cret C.gint))
+		if fn == nil {
+			panic("_gotk4_atk1_Hyperlink_get_end_index: no function pointer found")
+		}
+	}
+	return fn(carg0)
 }
 
 //export _gotk4_atk1_Hyperlink_get_n_anchors
 func _gotk4_atk1_Hyperlink_get_n_anchors(carg0 *C.AtkHyperlink) (cret C.gint) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkHyperlink) (cret C.gint)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Hyperlink_get_n_anchors").(func(carg0 *C.AtkHyperlink) (cret C.gint))
+		if fn == nil {
+			panic("_gotk4_atk1_Hyperlink_get_n_anchors: no function pointer found")
+		}
+	}
+	return fn(carg0)
 }
 
 //export _gotk4_atk1_Hyperlink_get_object
 func _gotk4_atk1_Hyperlink_get_object(carg0 *C.AtkHyperlink, carg1 C.gint) (cret *C.AtkObject) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkHyperlink, carg1 C.gint) (cret *C.AtkObject)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Hyperlink_get_object").(func(carg0 *C.AtkHyperlink, carg1 C.gint) (cret *C.AtkObject))
+		if fn == nil {
+			panic("_gotk4_atk1_Hyperlink_get_object: no function pointer found")
+		}
+	}
+	return fn(carg0, carg1)
 }
 
 //export _gotk4_atk1_Hyperlink_get_start_index
 func _gotk4_atk1_Hyperlink_get_start_index(carg0 *C.AtkHyperlink) (cret C.gint) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkHyperlink) (cret C.gint)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Hyperlink_get_start_index").(func(carg0 *C.AtkHyperlink) (cret C.gint))
+		if fn == nil {
+			panic("_gotk4_atk1_Hyperlink_get_start_index: no function pointer found")
+		}
+	}
+	return fn(carg0)
 }
 
 //export _gotk4_atk1_Hyperlink_get_uri
 func _gotk4_atk1_Hyperlink_get_uri(carg0 *C.AtkHyperlink, carg1 C.gint) (cret *C.gchar) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkHyperlink, carg1 C.gint) (cret *C.gchar)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Hyperlink_get_uri").(func(carg0 *C.AtkHyperlink, carg1 C.gint) (cret *C.gchar))
+		if fn == nil {
+			panic("_gotk4_atk1_Hyperlink_get_uri: no function pointer found")
+		}
+	}
+	return fn(carg0, carg1)
 }
 
 //export _gotk4_atk1_Hyperlink_is_valid
 func _gotk4_atk1_Hyperlink_is_valid(carg0 *C.AtkHyperlink) (cret C.gboolean) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkHyperlink) (cret C.gboolean)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Hyperlink_is_valid").(func(carg0 *C.AtkHyperlink) (cret C.gboolean))
+		if fn == nil {
+			panic("_gotk4_atk1_Hyperlink_is_valid: no function pointer found")
+		}
+	}
+	return fn(carg0)
 }
 
 //export _gotk4_atk1_Hyperlink_link_activated
 func _gotk4_atk1_Hyperlink_link_activated(carg0 *C.AtkHyperlink) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkHyperlink)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Hyperlink_link_activated").(func(carg0 *C.AtkHyperlink))
+		if fn == nil {
+			panic("_gotk4_atk1_Hyperlink_link_activated: no function pointer found")
+		}
+	}
+	fn(carg0)
 }
 
 //export _gotk4_atk1_Hyperlink_link_state
 func _gotk4_atk1_Hyperlink_link_state(carg0 *C.AtkHyperlink) (cret C.guint) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkHyperlink) (cret C.guint)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Hyperlink_link_state").(func(carg0 *C.AtkHyperlink) (cret C.guint))
+		if fn == nil {
+			panic("_gotk4_atk1_Hyperlink_link_state: no function pointer found")
+		}
+	}
+	return fn(carg0)
 }
 
 //export _gotk4_atk1_Object_focus_event
 func _gotk4_atk1_Object_focus_event(carg0 *C.AtkObject, carg1 C.gboolean) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkObject, carg1 C.gboolean)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Object_focus_event").(func(carg0 *C.AtkObject, carg1 C.gboolean))
+		if fn == nil {
+			panic("_gotk4_atk1_Object_focus_event: no function pointer found")
+		}
+	}
+	fn(carg0, carg1)
 }
 
 //export _gotk4_atk1_Object_get_description
 func _gotk4_atk1_Object_get_description(carg0 *C.AtkObject) (cret *C.gchar) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkObject) (cret *C.gchar)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Object_get_description").(func(carg0 *C.AtkObject) (cret *C.gchar))
+		if fn == nil {
+			panic("_gotk4_atk1_Object_get_description: no function pointer found")
+		}
+	}
+	return fn(carg0)
 }
 
 //export _gotk4_atk1_Object_get_index_in_parent
 func _gotk4_atk1_Object_get_index_in_parent(carg0 *C.AtkObject) (cret C.gint) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkObject) (cret C.gint)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Object_get_index_in_parent").(func(carg0 *C.AtkObject) (cret C.gint))
+		if fn == nil {
+			panic("_gotk4_atk1_Object_get_index_in_parent: no function pointer found")
+		}
+	}
+	return fn(carg0)
 }
 
 //export _gotk4_atk1_Object_get_n_children
 func _gotk4_atk1_Object_get_n_children(carg0 *C.AtkObject) (cret C.gint) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkObject) (cret C.gint)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Object_get_n_children").(func(carg0 *C.AtkObject) (cret C.gint))
+		if fn == nil {
+			panic("_gotk4_atk1_Object_get_n_children: no function pointer found")
+		}
+	}
+	return fn(carg0)
 }
 
 //export _gotk4_atk1_Object_get_name
 func _gotk4_atk1_Object_get_name(carg0 *C.AtkObject) (cret *C.gchar) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkObject) (cret *C.gchar)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Object_get_name").(func(carg0 *C.AtkObject) (cret *C.gchar))
+		if fn == nil {
+			panic("_gotk4_atk1_Object_get_name: no function pointer found")
+		}
+	}
+	return fn(carg0)
 }
 
 //export _gotk4_atk1_Object_get_object_locale
 func _gotk4_atk1_Object_get_object_locale(carg0 *C.AtkObject) (cret *C.gchar) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkObject) (cret *C.gchar)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Object_get_object_locale").(func(carg0 *C.AtkObject) (cret *C.gchar))
+		if fn == nil {
+			panic("_gotk4_atk1_Object_get_object_locale: no function pointer found")
+		}
+	}
+	return fn(carg0)
 }
 
 //export _gotk4_atk1_Object_get_parent
 func _gotk4_atk1_Object_get_parent(carg0 *C.AtkObject) (cret *C.AtkObject) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkObject) (cret *C.AtkObject)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Object_get_parent").(func(carg0 *C.AtkObject) (cret *C.AtkObject))
+		if fn == nil {
+			panic("_gotk4_atk1_Object_get_parent: no function pointer found")
+		}
+	}
+	return fn(carg0)
 }
 
 //export _gotk4_atk1_Object_get_role
 func _gotk4_atk1_Object_get_role(carg0 *C.AtkObject) (cret C.AtkRole) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkObject) (cret C.AtkRole)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Object_get_role").(func(carg0 *C.AtkObject) (cret C.AtkRole))
+		if fn == nil {
+			panic("_gotk4_atk1_Object_get_role: no function pointer found")
+		}
+	}
+	return fn(carg0)
 }
 
 //export _gotk4_atk1_Object_property_change
 func _gotk4_atk1_Object_property_change(carg0 *C.AtkObject, carg1 *C.AtkPropertyValues) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkObject, carg1 *C.AtkPropertyValues)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Object_property_change").(func(carg0 *C.AtkObject, carg1 *C.AtkPropertyValues))
+		if fn == nil {
+			panic("_gotk4_atk1_Object_property_change: no function pointer found")
+		}
+	}
+	fn(carg0, carg1)
 }
 
 //export _gotk4_atk1_Object_ref_relation_set
 func _gotk4_atk1_Object_ref_relation_set(carg0 *C.AtkObject) (cret *C.AtkRelationSet) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkObject) (cret *C.AtkRelationSet)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Object_ref_relation_set").(func(carg0 *C.AtkObject) (cret *C.AtkRelationSet))
+		if fn == nil {
+			panic("_gotk4_atk1_Object_ref_relation_set: no function pointer found")
+		}
+	}
+	return fn(carg0)
 }
 
 //export _gotk4_atk1_Object_ref_state_set
 func _gotk4_atk1_Object_ref_state_set(carg0 *C.AtkObject) (cret *C.AtkStateSet) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkObject) (cret *C.AtkStateSet)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Object_ref_state_set").(func(carg0 *C.AtkObject) (cret *C.AtkStateSet))
+		if fn == nil {
+			panic("_gotk4_atk1_Object_ref_state_set: no function pointer found")
+		}
+	}
+	return fn(carg0)
 }
 
 //export _gotk4_atk1_Object_set_description
 func _gotk4_atk1_Object_set_description(carg0 *C.AtkObject, carg1 *C.gchar) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkObject, carg1 *C.gchar)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Object_set_description").(func(carg0 *C.AtkObject, carg1 *C.gchar))
+		if fn == nil {
+			panic("_gotk4_atk1_Object_set_description: no function pointer found")
+		}
+	}
+	fn(carg0, carg1)
 }
 
 //export _gotk4_atk1_Object_set_name
 func _gotk4_atk1_Object_set_name(carg0 *C.AtkObject, carg1 *C.gchar) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkObject, carg1 *C.gchar)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Object_set_name").(func(carg0 *C.AtkObject, carg1 *C.gchar))
+		if fn == nil {
+			panic("_gotk4_atk1_Object_set_name: no function pointer found")
+		}
+	}
+	fn(carg0, carg1)
 }
 
 //export _gotk4_atk1_Object_set_parent
 func _gotk4_atk1_Object_set_parent(carg0 *C.AtkObject, carg1 *C.AtkObject) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkObject, carg1 *C.AtkObject)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Object_set_parent").(func(carg0 *C.AtkObject, carg1 *C.AtkObject))
+		if fn == nil {
+			panic("_gotk4_atk1_Object_set_parent: no function pointer found")
+		}
+	}
+	fn(carg0, carg1)
 }
 
 //export _gotk4_atk1_Object_set_role
 func _gotk4_atk1_Object_set_role(carg0 *C.AtkObject, carg1 C.AtkRole) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkObject, carg1 C.AtkRole)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Object_set_role").(func(carg0 *C.AtkObject, carg1 C.AtkRole))
+		if fn == nil {
+			panic("_gotk4_atk1_Object_set_role: no function pointer found")
+		}
+	}
+	fn(carg0, carg1)
 }
 
 //export _gotk4_atk1_Object_state_change
 func _gotk4_atk1_Object_state_change(carg0 *C.AtkObject, carg1 *C.gchar, carg2 C.gboolean) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkObject, carg1 *C.gchar, carg2 C.gboolean)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Object_state_change").(func(carg0 *C.AtkObject, carg1 *C.gchar, carg2 C.gboolean))
+		if fn == nil {
+			panic("_gotk4_atk1_Object_state_change: no function pointer found")
+		}
+	}
+	fn(carg0, carg1, carg2)
 }
 
 //export _gotk4_atk1_Object_visible_data_changed
 func _gotk4_atk1_Object_visible_data_changed(carg0 *C.AtkObject) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkObject)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Object_visible_data_changed").(func(carg0 *C.AtkObject))
+		if fn == nil {
+			panic("_gotk4_atk1_Object_visible_data_changed: no function pointer found")
+		}
+	}
+	fn(carg0)
 }
 
 //export _gotk4_atk1_ObjectFactory_invalidate
 func _gotk4_atk1_ObjectFactory_invalidate(carg0 *C.AtkObjectFactory) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkObjectFactory)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_ObjectFactory_invalidate").(func(carg0 *C.AtkObjectFactory))
+		if fn == nil {
+			panic("_gotk4_atk1_ObjectFactory_invalidate: no function pointer found")
+		}
+	}
+	fn(carg0)
 }
 
 //export _gotk4_atk1_Plug_get_object_id
 func _gotk4_atk1_Plug_get_object_id(carg0 *C.AtkPlug) (cret *C.gchar) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkPlug) (cret *C.gchar)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Plug_get_object_id").(func(carg0 *C.AtkPlug) (cret *C.gchar))
+		if fn == nil {
+			panic("_gotk4_atk1_Plug_get_object_id: no function pointer found")
+		}
+	}
+	return fn(carg0)
 }
 
 //export _gotk4_atk1_Socket_embed
 func _gotk4_atk1_Socket_embed(carg0 *C.AtkSocket, carg1 *C.gchar) {
-	panic("unimplemented")
+	var fn func(carg0 *C.AtkSocket, carg1 *C.gchar)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_atk1_Socket_embed").(func(carg0 *C.AtkSocket, carg1 *C.gchar))
+		if fn == nil {
+			panic("_gotk4_atk1_Socket_embed: no function pointer found")
+		}
+	}
+	fn(carg0, carg1)
 }
 

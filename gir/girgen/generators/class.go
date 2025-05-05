@@ -107,6 +107,52 @@ func (g *ClassGenerator) Generate(w *file.Package) {
 		g.Methods,
 		g.Overrides,
 	)
+
+	if !g.Final {
+		g.generateRegisterSubclassFunction(w)
+	}
+}
+
+func (g *ClassGenerator) generateRegisterSubclassFunction(w file.File) {
+	w.GoImportType(g.GType)
+
+	gtype := g.GType.NamespacedGoType(0)
+	signalDefinition := g.GType.WithForeignNamespace("SignalDefinition")
+	interfaceInit := g.GType.WithForeignNamespace("SubClassInterfaceInit[InstanceT]")
+	baseRegisterFn := g.GType.WithForeignNamespace("UnsafeRegisterSubClass")
+
+	fmt.Fprintf(w.Go(), "// %s is used to register a go subclass of %s. For this to work safely please implement the\n// virtual methods required by the implementation.\n", g.GoRegisterSubClassName, g.CType(0))
+	fmt.Fprintf(w.Go(), "func %s[InstanceT %s](\n", g.GoRegisterSubClassName, g.GoInterfaceName)
+	w.Go().Indent()
+	fmt.Fprintf(w.Go(), "\tname string,\n")
+	fmt.Fprintf(w.Go(), "\tclassInit func(class %s),\n", g.TypeStruct.GoType(1))
+	fmt.Fprintf(w.Go(), "\tconstructor func() InstanceT,\n")
+	fmt.Fprintf(w.Go(), "\toverrides %s[InstanceT],\n", g.GoExtendOverrideStructName)
+	fmt.Fprintf(w.Go(), "\tsignals map[string]%s,\n", signalDefinition)
+	fmt.Fprintf(w.Go(), "\tinterfaceInits ...%s,\n", interfaceInit)
+	w.Go().Unindent()
+	fmt.Fprintf(w.Go(), ") %s {\n", gtype)
+	w.Go().Indent()
+	fmt.Fprintf(w.Go(), "return %s(\n", baseRegisterFn)
+	w.Go().Indent()
+	fmt.Fprintf(w.Go(), "name,\n")
+	fmt.Fprintf(w.Go(), "classInit,\n")
+	fmt.Fprintf(w.Go(), "constructor,\n")
+	fmt.Fprintf(w.Go(), "overrides,\n")
+	fmt.Fprintf(w.Go(), "signals,\n")
+	fmt.Fprintf(w.Go(), "%s,\n", g.Class.Marshaler.GoTypeName())
+	fmt.Fprintf(w.Go(), "%s,\n", g.TypeStruct.GoUnsafeFromGlibBorrowFunction())
+	fmt.Fprintf(w.Go(), "%s,\n", g.GoUnsafeApplyOverridesName)
+	fmt.Fprintf(w.Go(), "func (obj *%s) %s {\n", g.BaseClass.NamespacedGoType(0), g.BaseClass.NamespacedGoType(1))
+	w.Go().Indent()
+	fmt.Fprintf(w.Go(), "return %s(obj)\n", g.GoWrapBaseClassFunction)
+	w.Go().Unindent()
+	fmt.Fprintf(w.Go(), "},\n")
+	fmt.Fprintf(w.Go(), "interfaceInits...,\n")
+	w.Go().Unindent()
+	fmt.Fprintf(w.Go(), ")\n")
+	w.Go().Unindent()
+	fmt.Fprintf(w.Go(), "}\n\n")
 }
 
 func (g *ClassGenerator) generateWrapFunction(w file.File) {

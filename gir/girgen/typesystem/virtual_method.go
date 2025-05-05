@@ -8,6 +8,9 @@ import (
 )
 
 type VirtualMethod struct {
+	// Parent is the class or interface that this virtual method belongs to.
+	Parent ConvertibleType
+
 	// TrampolineName is the name of the trampoline function that needs to be
 	// called when the virtual function was overridden.
 	TrampolineName string
@@ -29,7 +32,7 @@ type VirtualMethod struct {
 	*Parameters
 }
 
-func NewVirtualMethod(e *env, parent Type, typestruct *Record, v gir.VirtualMethod) *VirtualMethod {
+func NewVirtualMethod(e *env, parent ConvertibleType, typestruct *Record, v gir.VirtualMethod) *VirtualMethod {
 	if !v.IsIntrospectable() {
 		return nil
 	}
@@ -62,6 +65,7 @@ func NewVirtualMethod(e *env, parent Type, typestruct *Record, v gir.VirtualMeth
 	goname := strcases.SnakeToGo(true, field.CIndentifier())
 
 	return &VirtualMethod{
+		Parent:               parent,
 		TrampolineName:       trampoline,
 		ParentTrampolineName: parentTrampoline,
 

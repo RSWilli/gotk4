@@ -542,7 +542,7 @@ func (pl ParamList) CIdentifiers() string {
 	decls := make([]string, 0, len(pl))
 
 	for _, p := range pl {
-		decls = append(decls, p.GoName)
+		decls = append(decls, p.CName)
 	}
 
 	return strings.Join(decls, ", ")

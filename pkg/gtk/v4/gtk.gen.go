@@ -9,6 +9,7 @@ import (
 	"strings"
 	"unsafe"
 
+	"github.com/diamondburned/gotk4/pkg/core/classdata"
 	"github.com/diamondburned/gotk4/pkg/core/userdata"
 	"github.com/diamondburned/gotk4/pkg/gdk/v4"
 	"github.com/diamondburned/gotk4/pkg/gio/v2"
@@ -10869,26 +10870,144 @@ func UnsafeApplyAccessibleOverrides[Instance Accessible](gclass unsafe.Pointer, 
 
 	if overrides.GetAccessibleParent != nil {
 		pclass.get_accessible_parent = (*[0]byte)(C._gotk4_gtk4_Accessible_get_accessible_parent)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_Accessible_get_accessible_parent",
+			func(carg0 *C.GtkAccessible) (cret *C.GtkAccessible) {
+				var self  Instance   // go GtkAccessible subclass
+				var goret Accessible // return, full, converted, nullable
+
+				self = UnsafeAccessibleFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetAccessibleParent(self)
+
+				if goret != nil {
+					cret = (*C.GtkAccessible)(UnsafeAccessibleToGlibFull(goret))
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetAtContext != nil {
 		pclass.get_at_context = (*[0]byte)(C._gotk4_gtk4_Accessible_get_at_context)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_Accessible_get_at_context",
+			func(carg0 *C.GtkAccessible) (cret *C.GtkATContext) {
+				var self  Instance  // go GtkAccessible subclass
+				var goret ATContext // return, full, converted, nullable
+
+				self = UnsafeAccessibleFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetAtContext(self)
+
+				if goret != nil {
+					cret = (*C.GtkATContext)(UnsafeATContextToGlibFull(goret))
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetBounds != nil {
 		pclass.get_bounds = (*[0]byte)(C._gotk4_gtk4_Accessible_get_bounds)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_Accessible_get_bounds",
+			func(carg0 *C.GtkAccessible, carg1 *C.int, carg2 *C.int, carg3 *C.int, carg4 *C.int) (cret C.gboolean) {
+				var self   Instance // go GtkAccessible subclass
+				var x      int      // out, full, casted, casted C.gint
+				var y      int      // out, full, casted, casted C.gint
+				var width  int      // out, full, casted, casted C.gint
+				var height int      // out, full, casted, casted C.gint
+				var goret  bool     // return
+
+				self = UnsafeAccessibleFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				x, y, width, height, goret = overrides.GetBounds(self)
+
+				*carg1 = C.int(x)
+				*carg2 = C.int(y)
+				*carg3 = C.int(width)
+				*carg4 = C.int(height)
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetFirstAccessibleChild != nil {
 		pclass.get_first_accessible_child = (*[0]byte)(C._gotk4_gtk4_Accessible_get_first_accessible_child)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_Accessible_get_first_accessible_child",
+			func(carg0 *C.GtkAccessible) (cret *C.GtkAccessible) {
+				var self  Instance   // go GtkAccessible subclass
+				var goret Accessible // return, full, converted, nullable
+
+				self = UnsafeAccessibleFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetFirstAccessibleChild(self)
+
+				if goret != nil {
+					cret = (*C.GtkAccessible)(UnsafeAccessibleToGlibFull(goret))
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetNextAccessibleSibling != nil {
 		pclass.get_next_accessible_sibling = (*[0]byte)(C._gotk4_gtk4_Accessible_get_next_accessible_sibling)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_Accessible_get_next_accessible_sibling",
+			func(carg0 *C.GtkAccessible) (cret *C.GtkAccessible) {
+				var self  Instance   // go GtkAccessible subclass
+				var goret Accessible // return, full, converted, nullable
+
+				self = UnsafeAccessibleFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetNextAccessibleSibling(self)
+
+				if goret != nil {
+					cret = (*C.GtkAccessible)(UnsafeAccessibleToGlibFull(goret))
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetPlatformState != nil {
 		pclass.get_platform_state = (*[0]byte)(C._gotk4_gtk4_Accessible_get_platform_state)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_Accessible_get_platform_state",
+			func(carg0 *C.GtkAccessible, carg1 C.GtkAccessiblePlatformState) (cret C.gboolean) {
+				var self  Instance                // go GtkAccessible subclass
+				var state AccessiblePlatformState // in, none, casted
+				var goret bool                    // return
+
+				self = UnsafeAccessibleFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				state = AccessiblePlatformState(carg1)
+
+				goret = overrides.GetPlatformState(self, state)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 }
 
@@ -10986,6 +11105,26 @@ func UnsafeApplyAccessibleRangeOverrides[Instance AccessibleRange](gclass unsafe
 
 	if overrides.SetCurrentValue != nil {
 		pclass.set_current_value = (*[0]byte)(C._gotk4_gtk4_AccessibleRange_set_current_value)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_AccessibleRange_set_current_value",
+			func(carg0 *C.GtkAccessibleRange, carg1 C.double) (cret C.gboolean) {
+				var self  Instance // go GtkAccessibleRange subclass
+				var value float64  // in, none, casted, casted C.gdouble
+				var goret bool     // return
+
+				self = UnsafeAccessibleRangeFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				value = float64(carg1)
+
+				goret = overrides.SetCurrentValue(self, value)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 }
 
@@ -11212,22 +11351,128 @@ func UnsafeApplyAccessibleTextOverrides[Instance AccessibleText](gclass unsafe.P
 
 	if overrides.GetCaretPosition != nil {
 		pclass.get_caret_position = (*[0]byte)(C._gotk4_gtk4_AccessibleText_get_caret_position)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_AccessibleText_get_caret_position",
+			func(carg0 *C.GtkAccessibleText) (cret C.uint) {
+				var self  Instance // go GtkAccessibleText subclass
+				var goret uint     // return, none, casted, casted C.guint
+
+				self = UnsafeAccessibleTextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetCaretPosition(self)
+
+				cret = C.uint(goret)
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetContents != nil {
 		pclass.get_contents = (*[0]byte)(C._gotk4_gtk4_AccessibleText_get_contents)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_AccessibleText_get_contents",
+			func(carg0 *C.GtkAccessibleText, carg1 C.uint, carg2 C.uint) (cret *C.GBytes) {
+				var self  Instance    // go GtkAccessibleText subclass
+				var start uint        // in, none, casted, casted C.guint
+				var end   uint        // in, none, casted, casted C.guint
+				var goret *glib.Bytes // return, full, converted
+
+				self = UnsafeAccessibleTextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				start = uint(carg1)
+				end = uint(carg2)
+
+				goret = overrides.GetContents(self, start, end)
+
+				cret = (*C.GBytes)(glib.UnsafeBytesToGlibFull(goret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetContentsAt != nil {
 		pclass.get_contents_at = (*[0]byte)(C._gotk4_gtk4_AccessibleText_get_contents_at)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_AccessibleText_get_contents_at",
+			func(carg0 *C.GtkAccessibleText, carg1 C.uint, carg2 C.GtkAccessibleTextGranularity, carg3 *C.uint, carg4 *C.uint) (cret *C.GBytes) {
+				var self        Instance                  // go GtkAccessibleText subclass
+				var offset      uint                      // in, none, casted, casted C.guint
+				var granularity AccessibleTextGranularity // in, none, casted
+				var start       uint                      // out, full, casted, casted C.guint
+				var end         uint                      // out, full, casted, casted C.guint
+				var goret       *glib.Bytes               // return, full, converted
+
+				self = UnsafeAccessibleTextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				offset = uint(carg1)
+				granularity = AccessibleTextGranularity(carg2)
+
+				start, end, goret = overrides.GetContentsAt(self, offset, granularity)
+
+				*carg3 = C.uint(start)
+				*carg4 = C.uint(end)
+				cret = (*C.GBytes)(glib.UnsafeBytesToGlibFull(goret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetExtents != nil {
 		pclass.get_extents = (*[0]byte)(C._gotk4_gtk4_AccessibleText_get_extents)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_AccessibleText_get_extents",
+			func(carg0 *C.GtkAccessibleText, carg1 C.uint, carg2 C.uint, carg3 *C.graphene_rect_t) (cret C.gboolean) {
+				var self    Instance       // go GtkAccessibleText subclass
+				var start   uint           // in, none, casted, casted C.guint
+				var end     uint           // in, none, casted, casted C.guint
+				var extents *graphene.Rect // in, none, converted
+				var goret   bool           // return
+
+				self = UnsafeAccessibleTextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				start = uint(carg1)
+				end = uint(carg2)
+				extents = graphene.UnsafeRectFromGlibNone(unsafe.Pointer(carg3))
+
+				goret = overrides.GetExtents(self, start, end, extents)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetOffset != nil {
 		pclass.get_offset = (*[0]byte)(C._gotk4_gtk4_AccessibleText_get_offset)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_AccessibleText_get_offset",
+			func(carg0 *C.GtkAccessibleText, carg1 *C.graphene_point_t, carg2 *C.uint) (cret C.gboolean) {
+				var self   Instance        // go GtkAccessibleText subclass
+				var point  *graphene.Point // in, none, converted
+				var offset uint            // out, full, casted, casted C.guint
+				var goret  bool            // return
+
+				self = UnsafeAccessibleTextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				point = graphene.UnsafePointFromGlibNone(unsafe.Pointer(carg1))
+
+				offset, goret = overrides.GetOffset(self, point)
+
+				*carg2 = C.uint(offset)
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 }
 
@@ -11442,10 +11687,44 @@ func UnsafeApplyActionableOverrides[Instance Actionable](gclass unsafe.Pointer, 
 
 	if overrides.GetActionName != nil {
 		pclass.get_action_name = (*[0]byte)(C._gotk4_gtk4_Actionable_get_action_name)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_Actionable_get_action_name",
+			func(carg0 *C.GtkActionable) (cret *C.char) {
+				var actionable Instance // go GtkActionable subclass
+				var goret      string   // return, none, string, nullable-string
+
+				actionable = UnsafeActionableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetActionName(actionable)
+
+				if goret != "" {
+					cret = (*C.char)(unsafe.Pointer(C.CString(goret)))
+					defer C.free(unsafe.Pointer(cret))
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.SetActionName != nil {
 		pclass.set_action_name = (*[0]byte)(C._gotk4_gtk4_Actionable_set_action_name)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_Actionable_set_action_name",
+			func(carg0 *C.GtkActionable, carg1 *C.char) {
+				var actionable Instance // go GtkActionable subclass
+				var actionName string   // in, none, string, casted *C.gchar, nullable
+
+				actionable = UnsafeActionableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg1 != nil {
+					actionName = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+				}
+
+				overrides.SetActionName(actionable, actionName)
+			},
+		)
 	}
 }
 
@@ -11605,26 +11884,125 @@ func UnsafeApplyBuildableOverrides[Instance Buildable](gclass unsafe.Pointer, ov
 
 	if overrides.AddChild != nil {
 		pclass.add_child = (*[0]byte)(C._gotk4_gtk4_Buildable_add_child)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_Buildable_add_child",
+			func(carg0 *C.GtkBuildable, carg1 *C.GtkBuilder, carg2 *C.GObject, carg3 *C.char) {
+				var buildable Instance       // go GtkBuildable subclass
+				var builder   Builder        // in, none, converted
+				var child     gobject.Object // in, none, converted
+				var typ       string         // in, none, string, casted *C.gchar, nullable
+
+				buildable = UnsafeBuildableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				builder = UnsafeBuilderFromGlibNone(unsafe.Pointer(carg1))
+				child = gobject.UnsafeObjectFromGlibNone(unsafe.Pointer(carg2))
+				if carg3 != nil {
+					typ = C.GoString((*C.char)(unsafe.Pointer(carg3)))
+				}
+
+				overrides.AddChild(buildable, builder, child, typ)
+			},
+		)
 	}
 
 	if overrides.GetID != nil {
 		pclass.get_id = (*[0]byte)(C._gotk4_gtk4_Buildable_get_id)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_Buildable_get_id",
+			func(carg0 *C.GtkBuildable) (cret *C.char) {
+				var buildable Instance // go GtkBuildable subclass
+				var goret     string   // return, none, string, casted *C.gchar
+
+				buildable = UnsafeBuildableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetID(buildable)
+
+				cret = (*C.char)(unsafe.Pointer(C.CString(goret)))
+				defer C.free(unsafe.Pointer(cret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetInternalChild != nil {
 		pclass.get_internal_child = (*[0]byte)(C._gotk4_gtk4_Buildable_get_internal_child)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_Buildable_get_internal_child",
+			func(carg0 *C.GtkBuildable, carg1 *C.GtkBuilder, carg2 *C.char) (cret *C.GObject) {
+				var buildable Instance       // go GtkBuildable subclass
+				var builder   Builder        // in, none, converted
+				var childname string         // in, none, string, casted *C.gchar
+				var goret     gobject.Object // return, none, converted
+
+				buildable = UnsafeBuildableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				builder = UnsafeBuilderFromGlibNone(unsafe.Pointer(carg1))
+				childname = C.GoString((*C.char)(unsafe.Pointer(carg2)))
+
+				goret = overrides.GetInternalChild(buildable, builder, childname)
+
+				cret = (*C.GObject)(gobject.UnsafeObjectToGlibNone(goret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.ParserFinished != nil {
 		pclass.parser_finished = (*[0]byte)(C._gotk4_gtk4_Buildable_parser_finished)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_Buildable_parser_finished",
+			func(carg0 *C.GtkBuildable, carg1 *C.GtkBuilder) {
+				var buildable Instance // go GtkBuildable subclass
+				var builder   Builder  // in, none, converted
+
+				buildable = UnsafeBuildableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				builder = UnsafeBuilderFromGlibNone(unsafe.Pointer(carg1))
+
+				overrides.ParserFinished(buildable, builder)
+			},
+		)
 	}
 
 	if overrides.SetBuildableProperty != nil {
 		pclass.set_buildable_property = (*[0]byte)(C._gotk4_gtk4_Buildable_set_buildable_property)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_Buildable_set_buildable_property",
+			func(carg0 *C.GtkBuildable, carg1 *C.GtkBuilder, carg2 *C.char, carg3 *C.GValue) {
+				var buildable Instance       // go GtkBuildable subclass
+				var builder   Builder        // in, none, converted
+				var name      string         // in, none, string, casted *C.gchar
+				var value     *gobject.Value // in, none, converted
+
+				buildable = UnsafeBuildableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				builder = UnsafeBuilderFromGlibNone(unsafe.Pointer(carg1))
+				name = C.GoString((*C.char)(unsafe.Pointer(carg2)))
+				value = gobject.UnsafeValueFromGlibUseAnyInstead(unsafe.Pointer(carg3))
+
+				overrides.SetBuildableProperty(buildable, builder, name, value)
+			},
+		)
 	}
 
 	if overrides.SetID != nil {
 		pclass.set_id = (*[0]byte)(C._gotk4_gtk4_Buildable_set_id)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_Buildable_set_id",
+			func(carg0 *C.GtkBuildable, carg1 *C.char) {
+				var buildable Instance // go GtkBuildable subclass
+				var id        string   // in, none, string, casted *C.gchar
+
+				buildable = UnsafeBuildableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				id = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+
+				overrides.SetID(buildable, id)
+			},
+		)
 	}
 }
 
@@ -11730,10 +12108,50 @@ func UnsafeApplyBuilderScopeOverrides[Instance BuilderScope](gclass unsafe.Point
 
 	if overrides.GetTypeFromFunction != nil {
 		pclass.get_type_from_function = (*[0]byte)(C._gotk4_gtk4_BuilderScope_get_type_from_function)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_BuilderScope_get_type_from_function",
+			func(carg0 *C.GtkBuilderScope, carg1 *C.GtkBuilder, carg2 *C.char) (cret C.GType) {
+				var self         Instance     // go GtkBuilderScope subclass
+				var builder      Builder      // in, none, converted
+				var functionName string       // in, none, string, casted *C.gchar
+				var goret        gobject.Type // return, none, casted, alias
+
+				self = UnsafeBuilderScopeFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				builder = UnsafeBuilderFromGlibNone(unsafe.Pointer(carg1))
+				functionName = C.GoString((*C.char)(unsafe.Pointer(carg2)))
+
+				goret = overrides.GetTypeFromFunction(self, builder, functionName)
+
+				cret = C.GType(goret)
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetTypeFromName != nil {
 		pclass.get_type_from_name = (*[0]byte)(C._gotk4_gtk4_BuilderScope_get_type_from_name)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_BuilderScope_get_type_from_name",
+			func(carg0 *C.GtkBuilderScope, carg1 *C.GtkBuilder, carg2 *C.char) (cret C.GType) {
+				var self     Instance     // go GtkBuilderScope subclass
+				var builder  Builder      // in, none, converted
+				var typeName string       // in, none, string, casted *C.gchar
+				var goret    gobject.Type // return, none, casted, alias
+
+				self = UnsafeBuilderScopeFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				builder = UnsafeBuilderFromGlibNone(unsafe.Pointer(carg1))
+				typeName = C.GoString((*C.char)(unsafe.Pointer(carg2)))
+
+				goret = overrides.GetTypeFromName(self, builder, typeName)
+
+				cret = C.GType(goret)
+
+				return cret
+			},
+		)
 	}
 }
 
@@ -12681,6 +13099,28 @@ func UnsafeApplyScrollableOverrides[Instance Scrollable](gclass unsafe.Pointer, 
 
 	if overrides.GetBorder != nil {
 		pclass.get_border = (*[0]byte)(C._gotk4_gtk4_Scrollable_get_border)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_Scrollable_get_border",
+			func(carg0 *C.GtkScrollable, carg1 *C.GtkBorder) (cret C.gboolean) {
+				var scrollable Instance // go GtkScrollable subclass
+				var border     Border   // out, transfer: none, C Pointers: 0, Name: Border, caller-allocates
+				var goret      bool     // return
+
+				scrollable = UnsafeScrollableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				border, goret = overrides.GetBorder(scrollable)
+
+				_ = border
+				_ = carg1
+				panic("unimplemented conversion of Border (GtkBorder)")
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 }
 
@@ -12921,6 +13361,24 @@ func UnsafeApplySectionModelOverrides[Instance SectionModel](gclass unsafe.Point
 
 	if overrides.GetSection != nil {
 		pclass.get_section = (*[0]byte)(C._gotk4_gtk4_SectionModel_get_section)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_SectionModel_get_section",
+			func(carg0 *C.GtkSectionModel, carg1 C.guint, carg2 *C.guint, carg3 *C.guint) {
+				var self     Instance // go GtkSectionModel subclass
+				var position uint     // in, none, casted
+				var outStart uint     // out, full, casted
+				var outEnd   uint     // out, full, casted
+
+				self = UnsafeSectionModelFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				position = uint(carg1)
+
+				outStart, outEnd = overrides.GetSection(self, position)
+
+				*carg2 = C.guint(outStart)
+				*carg3 = C.guint(outEnd)
+			},
+		)
 	}
 }
 
@@ -13685,38 +14143,228 @@ func UnsafeApplySelectionModelOverrides[Instance SelectionModel](gclass unsafe.P
 
 	if overrides.GetSelectionInRange != nil {
 		pclass.get_selection_in_range = (*[0]byte)(C._gotk4_gtk4_SelectionModel_get_selection_in_range)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_SelectionModel_get_selection_in_range",
+			func(carg0 *C.GtkSelectionModel, carg1 C.guint, carg2 C.guint) (cret *C.GtkBitset) {
+				var model    Instance // go GtkSelectionModel subclass
+				var position uint     // in, none, casted
+				var nItems   uint     // in, none, casted
+				var goret    *Bitset  // return, full, converted
+
+				model = UnsafeSelectionModelFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				position = uint(carg1)
+				nItems = uint(carg2)
+
+				goret = overrides.GetSelectionInRange(model, position, nItems)
+
+				cret = (*C.GtkBitset)(UnsafeBitsetToGlibFull(goret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.IsSelected != nil {
 		pclass.is_selected = (*[0]byte)(C._gotk4_gtk4_SelectionModel_is_selected)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_SelectionModel_is_selected",
+			func(carg0 *C.GtkSelectionModel, carg1 C.guint) (cret C.gboolean) {
+				var model    Instance // go GtkSelectionModel subclass
+				var position uint     // in, none, casted
+				var goret    bool     // return
+
+				model = UnsafeSelectionModelFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				position = uint(carg1)
+
+				goret = overrides.IsSelected(model, position)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.SelectAll != nil {
 		pclass.select_all = (*[0]byte)(C._gotk4_gtk4_SelectionModel_select_all)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_SelectionModel_select_all",
+			func(carg0 *C.GtkSelectionModel) (cret C.gboolean) {
+				var model Instance // go GtkSelectionModel subclass
+				var goret bool     // return
+
+				model = UnsafeSelectionModelFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.SelectAll(model)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.SelectItem != nil {
 		pclass.select_item = (*[0]byte)(C._gotk4_gtk4_SelectionModel_select_item)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_SelectionModel_select_item",
+			func(carg0 *C.GtkSelectionModel, carg1 C.guint, carg2 C.gboolean) (cret C.gboolean) {
+				var model        Instance // go GtkSelectionModel subclass
+				var position     uint     // in, none, casted
+				var unselectRest bool     // in
+				var goret        bool     // return
+
+				model = UnsafeSelectionModelFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				position = uint(carg1)
+				if carg2 != 0 {
+					unselectRest = true
+				}
+
+				goret = overrides.SelectItem(model, position, unselectRest)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.SelectRange != nil {
 		pclass.select_range = (*[0]byte)(C._gotk4_gtk4_SelectionModel_select_range)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_SelectionModel_select_range",
+			func(carg0 *C.GtkSelectionModel, carg1 C.guint, carg2 C.guint, carg3 C.gboolean) (cret C.gboolean) {
+				var model        Instance // go GtkSelectionModel subclass
+				var position     uint     // in, none, casted
+				var nItems       uint     // in, none, casted
+				var unselectRest bool     // in
+				var goret        bool     // return
+
+				model = UnsafeSelectionModelFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				position = uint(carg1)
+				nItems = uint(carg2)
+				if carg3 != 0 {
+					unselectRest = true
+				}
+
+				goret = overrides.SelectRange(model, position, nItems, unselectRest)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.SetSelection != nil {
 		pclass.set_selection = (*[0]byte)(C._gotk4_gtk4_SelectionModel_set_selection)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_SelectionModel_set_selection",
+			func(carg0 *C.GtkSelectionModel, carg1 *C.GtkBitset, carg2 *C.GtkBitset) (cret C.gboolean) {
+				var model    Instance // go GtkSelectionModel subclass
+				var selected *Bitset  // in, none, converted
+				var mask     *Bitset  // in, none, converted
+				var goret    bool     // return
+
+				model = UnsafeSelectionModelFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				selected = UnsafeBitsetFromGlibNone(unsafe.Pointer(carg1))
+				mask = UnsafeBitsetFromGlibNone(unsafe.Pointer(carg2))
+
+				goret = overrides.SetSelection(model, selected, mask)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.UnselectAll != nil {
 		pclass.unselect_all = (*[0]byte)(C._gotk4_gtk4_SelectionModel_unselect_all)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_SelectionModel_unselect_all",
+			func(carg0 *C.GtkSelectionModel) (cret C.gboolean) {
+				var model Instance // go GtkSelectionModel subclass
+				var goret bool     // return
+
+				model = UnsafeSelectionModelFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.UnselectAll(model)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.UnselectItem != nil {
 		pclass.unselect_item = (*[0]byte)(C._gotk4_gtk4_SelectionModel_unselect_item)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_SelectionModel_unselect_item",
+			func(carg0 *C.GtkSelectionModel, carg1 C.guint) (cret C.gboolean) {
+				var model    Instance // go GtkSelectionModel subclass
+				var position uint     // in, none, casted
+				var goret    bool     // return
+
+				model = UnsafeSelectionModelFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				position = uint(carg1)
+
+				goret = overrides.UnselectItem(model, position)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.UnselectRange != nil {
 		pclass.unselect_range = (*[0]byte)(C._gotk4_gtk4_SelectionModel_unselect_range)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_SelectionModel_unselect_range",
+			func(carg0 *C.GtkSelectionModel, carg1 C.guint, carg2 C.guint) (cret C.gboolean) {
+				var model    Instance // go GtkSelectionModel subclass
+				var position uint     // in, none, casted
+				var nItems   uint     // in, none, casted
+				var goret    bool     // return
+
+				model = UnsafeSelectionModelFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				position = uint(carg1)
+				nItems = uint(carg2)
+
+				goret = overrides.UnselectRange(model, position, nItems)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 }
 
@@ -13806,10 +14454,36 @@ func UnsafeApplyShortcutManagerOverrides[Instance ShortcutManager](gclass unsafe
 
 	if overrides.AddController != nil {
 		pclass.add_controller = (*[0]byte)(C._gotk4_gtk4_ShortcutManager_add_controller)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_ShortcutManager_add_controller",
+			func(carg0 *C.GtkShortcutManager, carg1 *C.GtkShortcutController) {
+				var self       Instance           // go GtkShortcutManager subclass
+				var controller ShortcutController // in, none, converted
+
+				self = UnsafeShortcutManagerFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				controller = UnsafeShortcutControllerFromGlibNone(unsafe.Pointer(carg1))
+
+				overrides.AddController(self, controller)
+			},
+		)
 	}
 
 	if overrides.RemoveController != nil {
 		pclass.remove_controller = (*[0]byte)(C._gotk4_gtk4_ShortcutManager_remove_controller)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_ShortcutManager_remove_controller",
+			func(carg0 *C.GtkShortcutManager, carg1 *C.GtkShortcutController) {
+				var self       Instance           // go GtkShortcutManager subclass
+				var controller ShortcutController // in, none, converted
+
+				self = UnsafeShortcutManagerFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				controller = UnsafeShortcutControllerFromGlibNone(unsafe.Pointer(carg1))
+
+				overrides.RemoveController(self, controller)
+			},
+		)
 	}
 }
 
@@ -14029,6 +14703,28 @@ func UnsafeApplySymbolicPaintableOverrides[Instance SymbolicPaintable](gclass un
 
 	if overrides.SnapshotSymbolic != nil {
 		pclass.snapshot_symbolic = (*[0]byte)(C._gotk4_gtk4_SymbolicPaintable_snapshot_symbolic)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_SymbolicPaintable_snapshot_symbolic",
+			func(carg0 *C.GtkSymbolicPaintable, carg1 *C.GdkSnapshot, carg2 C.double, carg3 C.double, carg4 *C.GdkRGBA, carg5 C.gsize) {
+				var paintable Instance     // go GtkSymbolicPaintable subclass
+				var snapshot  gdk.Snapshot // in, none, converted
+				var width     float64      // in, none, casted, casted C.gdouble
+				var height    float64      // in, none, casted, casted C.gdouble
+				var colors    []gdk.RGBA   // in, transfer: none, C Pointers: 1, Name: array[RGBA], array (inner: *typesystem.Record, length-by: carg5)
+
+				paintable = UnsafeSymbolicPaintableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				snapshot = gdk.UnsafeSnapshotFromGlibNone(unsafe.Pointer(carg1))
+				width = float64(carg2)
+				height = float64(carg3)
+				_ = colors
+				_ = carg4
+				_ = carg5
+				panic("unimplemented conversion of []gdk.RGBA (const GdkRGBA*)")
+
+				overrides.SnapshotSymbolic(paintable, snapshot, width, height, colors)
+			},
+		)
 	}
 }
 
@@ -14934,11 +15630,59 @@ func UnsafeApplyAdjustmentOverrides[Instance Adjustment](gclass unsafe.Pointer, 
 
 	if overrides.Changed != nil {
 		pclass.changed = (*[0]byte)(C._gotk4_gtk4_Adjustment_changed)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_Adjustment_changed",
+			func(carg0 *C.GtkAdjustment) {
+				var adjustment Instance // go GtkAdjustment subclass
+
+				adjustment = UnsafeAdjustmentFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.Changed(adjustment)
+			},
+		)
 	}
 
 	if overrides.ValueChanged != nil {
 		pclass.value_changed = (*[0]byte)(C._gotk4_gtk4_Adjustment_value_changed)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_Adjustment_value_changed",
+			func(carg0 *C.GtkAdjustment) {
+				var adjustment Instance // go GtkAdjustment subclass
+
+				adjustment = UnsafeAdjustmentFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.ValueChanged(adjustment)
+			},
+		)
 	}
+}
+
+// RegisterAdjustmentSubClass is used to register a go subclass of GtkAdjustment. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterAdjustmentSubClass[InstanceT Adjustment](
+		name string,
+		classInit func(class *AdjustmentClass),
+		constructor func() InstanceT,
+		overrides AdjustmentOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeAdjustment,
+		UnsafeAdjustmentClassFromGlibBorrow,
+		UnsafeApplyAdjustmentOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapAdjustment(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // AlertDialogInstance is the instance type used by all types extending GtkAlertDialog. It is used internally by the bindings. Users should use the interface [AlertDialog] instead.
@@ -15532,6 +16276,32 @@ type AlertDialogOverrides[Instance AlertDialog] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplyAlertDialogOverrides[Instance AlertDialog](gclass unsafe.Pointer, overrides AlertDialogOverrides[Instance]) {
 	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
+}
+
+// RegisterAlertDialogSubClass is used to register a go subclass of GtkAlertDialog. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterAlertDialogSubClass[InstanceT AlertDialog](
+		name string,
+		classInit func(class *AlertDialogClass),
+		constructor func() InstanceT,
+		overrides AlertDialogOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeAlertDialog,
+		UnsafeAlertDialogClassFromGlibBorrow,
+		UnsafeApplyAlertDialogOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapAlertDialog(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // ApplicationInstance is the instance type used by all types extending GtkApplication. It is used internally by the bindings. Users should use the interface [Application] instead.
@@ -16549,11 +17319,63 @@ func UnsafeApplyApplicationOverrides[Instance Application](gclass unsafe.Pointer
 
 	if overrides.WindowAdded != nil {
 		pclass.window_added = (*[0]byte)(C._gotk4_gtk4_Application_window_added)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_Application_window_added",
+			func(carg0 *C.GtkApplication, carg1 *C.GtkWindow) {
+				var application Instance // go GtkApplication subclass
+				var window      Window   // in, none, converted
+
+				application = UnsafeApplicationFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				window = UnsafeWindowFromGlibNone(unsafe.Pointer(carg1))
+
+				overrides.WindowAdded(application, window)
+			},
+		)
 	}
 
 	if overrides.WindowRemoved != nil {
 		pclass.window_removed = (*[0]byte)(C._gotk4_gtk4_Application_window_removed)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_Application_window_removed",
+			func(carg0 *C.GtkApplication, carg1 *C.GtkWindow) {
+				var application Instance // go GtkApplication subclass
+				var window      Window   // in, none, converted
+
+				application = UnsafeApplicationFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				window = UnsafeWindowFromGlibNone(unsafe.Pointer(carg1))
+
+				overrides.WindowRemoved(application, window)
+			},
+		)
 	}
+}
+
+// RegisterApplicationSubClass is used to register a go subclass of GtkApplication. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterApplicationSubClass[InstanceT Application](
+		name string,
+		classInit func(class *ApplicationClass),
+		constructor func() InstanceT,
+		overrides ApplicationOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeApplication,
+		UnsafeApplicationClassFromGlibBorrow,
+		UnsafeApplyApplicationOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapApplication(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // BookmarkListInstance is the instance type used by all types extending GtkBookmarkList. It is used internally by the bindings. Users should use the interface [BookmarkList] instead.
@@ -16874,6 +17696,32 @@ type BookmarkListOverrides[Instance BookmarkList] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplyBookmarkListOverrides[Instance BookmarkList](gclass unsafe.Pointer, overrides BookmarkListOverrides[Instance]) {
 	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
+}
+
+// RegisterBookmarkListSubClass is used to register a go subclass of GtkBookmarkList. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterBookmarkListSubClass[InstanceT BookmarkList](
+		name string,
+		classInit func(class *BookmarkListClass),
+		constructor func() InstanceT,
+		overrides BookmarkListOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeBookmarkList,
+		UnsafeBookmarkListClassFromGlibBorrow,
+		UnsafeApplyBookmarkListOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapBookmarkList(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // BuilderInstance is the instance type used by all types extending GtkBuilder. It is used internally by the bindings. Users should use the interface [Builder] instead.
@@ -18538,6 +19386,32 @@ func UnsafeApplyBuilderCScopeOverrides[Instance BuilderCScope](gclass unsafe.Poi
 	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
 }
 
+// RegisterBuilderCScopeSubClass is used to register a go subclass of GtkBuilderCScope. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterBuilderCScopeSubClass[InstanceT BuilderCScope](
+		name string,
+		classInit func(class *BuilderCScopeClass),
+		constructor func() InstanceT,
+		overrides BuilderCScopeOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeBuilderCScope,
+		UnsafeBuilderCScopeClassFromGlibBorrow,
+		UnsafeApplyBuilderCScopeOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapBuilderCScope(obj)
+		},
+		interfaceInits...,
+	)
+}
+
 // ColorDialogInstance is the instance type used by all types extending GtkColorDialog. It is used internally by the bindings. Users should use the interface [ColorDialog] instead.
 type ColorDialogInstance struct {
 	_ [0]func() // equal guard
@@ -18933,6 +19807,32 @@ type ColorDialogOverrides[Instance ColorDialog] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplyColorDialogOverrides[Instance ColorDialog](gclass unsafe.Pointer, overrides ColorDialogOverrides[Instance]) {
 	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
+}
+
+// RegisterColorDialogSubClass is used to register a go subclass of GtkColorDialog. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterColorDialogSubClass[InstanceT ColorDialog](
+		name string,
+		classInit func(class *ColorDialogClass),
+		constructor func() InstanceT,
+		overrides ColorDialogOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeColorDialog,
+		UnsafeColorDialogClassFromGlibBorrow,
+		UnsafeApplyColorDialogOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapColorDialog(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // ColumnViewColumnInstance is the instance type used by all types extending GtkColumnViewColumn. It is used internally by the bindings. Users should use the interface [ColumnViewColumn] instead.
@@ -20645,6 +21545,32 @@ func UnsafeApplyConstraintOverrides[Instance Constraint](gclass unsafe.Pointer, 
 	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
 }
 
+// RegisterConstraintSubClass is used to register a go subclass of GtkConstraint. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterConstraintSubClass[InstanceT Constraint](
+		name string,
+		classInit func(class *ConstraintClass),
+		constructor func() InstanceT,
+		overrides ConstraintOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeConstraint,
+		UnsafeConstraintClassFromGlibBorrow,
+		UnsafeApplyConstraintOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapConstraint(obj)
+		},
+		interfaceInits...,
+	)
+}
+
 // ConstraintGuideInstance is the instance type used by all types extending GtkConstraintGuide. It is used internally by the bindings. Users should use the interface [ConstraintGuide] instead.
 type ConstraintGuideInstance struct {
 	_ [0]func() // equal guard
@@ -21087,6 +22013,32 @@ type ConstraintGuideOverrides[Instance ConstraintGuide] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplyConstraintGuideOverrides[Instance ConstraintGuide](gclass unsafe.Pointer, overrides ConstraintGuideOverrides[Instance]) {
 	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
+}
+
+// RegisterConstraintGuideSubClass is used to register a go subclass of GtkConstraintGuide. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterConstraintGuideSubClass[InstanceT ConstraintGuide](
+		name string,
+		classInit func(class *ConstraintGuideClass),
+		constructor func() InstanceT,
+		overrides ConstraintGuideOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeConstraintGuide,
+		UnsafeConstraintGuideClassFromGlibBorrow,
+		UnsafeApplyConstraintGuideOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapConstraintGuide(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // CssProviderInstance is the instance type used by all types extending GtkCssProvider. It is used internally by the bindings. Users should use the interface [CssProvider] instead.
@@ -21998,6 +22950,32 @@ func UnsafeApplyDirectoryListOverrides[Instance DirectoryList](gclass unsafe.Poi
 	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
 }
 
+// RegisterDirectoryListSubClass is used to register a go subclass of GtkDirectoryList. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterDirectoryListSubClass[InstanceT DirectoryList](
+		name string,
+		classInit func(class *DirectoryListClass),
+		constructor func() InstanceT,
+		overrides DirectoryListOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeDirectoryList,
+		UnsafeDirectoryListClassFromGlibBorrow,
+		UnsafeApplyDirectoryListOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapDirectoryList(obj)
+		},
+		interfaceInits...,
+	)
+}
+
 // EntryBufferInstance is the instance type used by all types extending GtkEntryBuffer. It is used internally by the bindings. Users should use the interface [EntryBuffer] instead.
 type EntryBufferInstance struct {
 	_ [0]func() // equal guard
@@ -22609,27 +23587,164 @@ func UnsafeApplyEntryBufferOverrides[Instance EntryBuffer](gclass unsafe.Pointer
 
 	if overrides.DeleteText != nil {
 		pclass.delete_text = (*[0]byte)(C._gotk4_gtk4_EntryBuffer_delete_text)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_EntryBuffer_delete_text",
+			func(carg0 *C.GtkEntryBuffer, carg1 C.guint, carg2 C.guint) (cret C.guint) {
+				var buffer   Instance // go GtkEntryBuffer subclass
+				var position uint     // in, none, casted
+				var nChars   uint     // in, none, casted
+				var goret    uint     // return, none, casted
+
+				buffer = UnsafeEntryBufferFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				position = uint(carg1)
+				nChars = uint(carg2)
+
+				goret = overrides.DeleteText(buffer, position, nChars)
+
+				cret = C.guint(goret)
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.DeletedText != nil {
 		pclass.deleted_text = (*[0]byte)(C._gotk4_gtk4_EntryBuffer_deleted_text)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_EntryBuffer_deleted_text",
+			func(carg0 *C.GtkEntryBuffer, carg1 C.guint, carg2 C.guint) {
+				var buffer   Instance // go GtkEntryBuffer subclass
+				var position uint     // in, none, casted
+				var nChars   uint     // in, none, casted
+
+				buffer = UnsafeEntryBufferFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				position = uint(carg1)
+				nChars = uint(carg2)
+
+				overrides.DeletedText(buffer, position, nChars)
+			},
+		)
 	}
 
 	if overrides.GetLength != nil {
 		pclass.get_length = (*[0]byte)(C._gotk4_gtk4_EntryBuffer_get_length)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_EntryBuffer_get_length",
+			func(carg0 *C.GtkEntryBuffer) (cret C.guint) {
+				var buffer Instance // go GtkEntryBuffer subclass
+				var goret  uint     // return, none, casted
+
+				buffer = UnsafeEntryBufferFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetLength(buffer)
+
+				cret = C.guint(goret)
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetText != nil {
 		pclass.get_text = (*[0]byte)(C._gotk4_gtk4_EntryBuffer_get_text)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_EntryBuffer_get_text",
+			func(carg0 *C.GtkEntryBuffer, carg1 *C.gsize) (cret *C.char) {
+				var buffer Instance // go GtkEntryBuffer subclass
+				var nBytes *uint    // in, transfer: none, C Pointers: 1, Name: gsize
+				var goret  string   // return, none, string, casted *C.gchar
+
+				buffer = UnsafeEntryBufferFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				_ = nBytes
+				_ = carg1
+				panic("unimplemented conversion of *uint (gsize*)")
+
+				goret = overrides.GetText(buffer, nBytes)
+
+				cret = (*C.char)(unsafe.Pointer(C.CString(goret)))
+				defer C.free(unsafe.Pointer(cret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.InsertText != nil {
 		pclass.insert_text = (*[0]byte)(C._gotk4_gtk4_EntryBuffer_insert_text)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_EntryBuffer_insert_text",
+			func(carg0 *C.GtkEntryBuffer, carg1 C.guint, carg2 *C.char, carg3 C.guint) (cret C.guint) {
+				var buffer   Instance // go GtkEntryBuffer subclass
+				var position uint     // in, none, casted
+				var chars    string   // in, none, string, casted *C.gchar
+				var nChars   uint     // in, none, casted
+				var goret    uint     // return, none, casted
+
+				buffer = UnsafeEntryBufferFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				position = uint(carg1)
+				chars = C.GoString((*C.char)(unsafe.Pointer(carg2)))
+				nChars = uint(carg3)
+
+				goret = overrides.InsertText(buffer, position, chars, nChars)
+
+				cret = C.guint(goret)
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.InsertedText != nil {
 		pclass.inserted_text = (*[0]byte)(C._gotk4_gtk4_EntryBuffer_inserted_text)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_EntryBuffer_inserted_text",
+			func(carg0 *C.GtkEntryBuffer, carg1 C.guint, carg2 *C.char, carg3 C.guint) {
+				var buffer   Instance // go GtkEntryBuffer subclass
+				var position uint     // in, none, casted
+				var chars    string   // in, none, string, casted *C.gchar
+				var nChars   uint     // in, none, casted
+
+				buffer = UnsafeEntryBufferFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				position = uint(carg1)
+				chars = C.GoString((*C.char)(unsafe.Pointer(carg2)))
+				nChars = uint(carg3)
+
+				overrides.InsertedText(buffer, position, chars, nChars)
+			},
+		)
 	}
+}
+
+// RegisterEntryBufferSubClass is used to register a go subclass of GtkEntryBuffer. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterEntryBufferSubClass[InstanceT EntryBuffer](
+		name string,
+		classInit func(class *EntryBufferClass),
+		constructor func() InstanceT,
+		overrides EntryBufferOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeEntryBuffer,
+		UnsafeEntryBufferClassFromGlibBorrow,
+		UnsafeApplyEntryBufferOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapEntryBuffer(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // EventControllerInstance is the instance type used by all types extending GtkEventController. It is used internally by the bindings. Users should use the interface [EventController] instead.
@@ -25286,6 +26401,32 @@ func UnsafeApplyFileDialogOverrides[Instance FileDialog](gclass unsafe.Pointer, 
 	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
 }
 
+// RegisterFileDialogSubClass is used to register a go subclass of GtkFileDialog. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterFileDialogSubClass[InstanceT FileDialog](
+		name string,
+		classInit func(class *FileDialogClass),
+		constructor func() InstanceT,
+		overrides FileDialogOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeFileDialog,
+		UnsafeFileDialogClassFromGlibBorrow,
+		UnsafeApplyFileDialogOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapFileDialog(obj)
+		},
+		interfaceInits...,
+	)
+}
+
 // FileLauncherInstance is the instance type used by all types extending GtkFileLauncher. It is used internally by the bindings. Users should use the interface [FileLauncher] instead.
 type FileLauncherInstance struct {
 	_ [0]func() // equal guard
@@ -25787,6 +26928,32 @@ func UnsafeApplyFileLauncherOverrides[Instance FileLauncher](gclass unsafe.Point
 	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
 }
 
+// RegisterFileLauncherSubClass is used to register a go subclass of GtkFileLauncher. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterFileLauncherSubClass[InstanceT FileLauncher](
+		name string,
+		classInit func(class *FileLauncherClass),
+		constructor func() InstanceT,
+		overrides FileLauncherOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeFileLauncher,
+		UnsafeFileLauncherClassFromGlibBorrow,
+		UnsafeApplyFileLauncherOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapFileLauncher(obj)
+		},
+		interfaceInits...,
+	)
+}
+
 // FilterInstance is the instance type used by all types extending GtkFilter. It is used internally by the bindings. Users should use the interface [Filter] instead.
 type FilterInstance struct {
 	_ [0]func() // equal guard
@@ -26002,7 +27169,49 @@ func UnsafeApplyFilterOverrides[Instance Filter](gclass unsafe.Pointer, override
 
 	if overrides.GetStrictness != nil {
 		pclass.get_strictness = (*[0]byte)(C._gotk4_gtk4_Filter_get_strictness)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_Filter_get_strictness",
+			func(carg0 *C.GtkFilter) (cret C.GtkFilterMatch) {
+				var self  Instance    // go GtkFilter subclass
+				var goret FilterMatch // return, none, casted
+
+				self = UnsafeFilterFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetStrictness(self)
+
+				cret = C.GtkFilterMatch(goret)
+
+				return cret
+			},
+		)
 	}
+}
+
+// RegisterFilterSubClass is used to register a go subclass of GtkFilter. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterFilterSubClass[InstanceT Filter](
+		name string,
+		classInit func(class *FilterClass),
+		constructor func() InstanceT,
+		overrides FilterOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeFilter,
+		UnsafeFilterClassFromGlibBorrow,
+		UnsafeApplyFilterOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapFilter(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // FilterListModelInstance is the instance type used by all types extending GtkFilterListModel. It is used internally by the bindings. Users should use the interface [FilterListModel] instead.
@@ -26413,6 +27622,32 @@ func UnsafeApplyFilterListModelOverrides[Instance FilterListModel](gclass unsafe
 	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
 }
 
+// RegisterFilterListModelSubClass is used to register a go subclass of GtkFilterListModel. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterFilterListModelSubClass[InstanceT FilterListModel](
+		name string,
+		classInit func(class *FilterListModelClass),
+		constructor func() InstanceT,
+		overrides FilterListModelOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeFilterListModel,
+		UnsafeFilterListModelClassFromGlibBorrow,
+		UnsafeApplyFilterListModelOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapFilterListModel(obj)
+		},
+		interfaceInits...,
+	)
+}
+
 // FlattenListModelInstance is the instance type used by all types extending GtkFlattenListModel. It is used internally by the bindings. Users should use the interface [FlattenListModel] instead.
 type FlattenListModelInstance struct {
 	_ [0]func() // equal guard
@@ -26620,6 +27855,32 @@ type FlattenListModelOverrides[Instance FlattenListModel] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplyFlattenListModelOverrides[Instance FlattenListModel](gclass unsafe.Pointer, overrides FlattenListModelOverrides[Instance]) {
 	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
+}
+
+// RegisterFlattenListModelSubClass is used to register a go subclass of GtkFlattenListModel. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterFlattenListModelSubClass[InstanceT FlattenListModel](
+		name string,
+		classInit func(class *FlattenListModelClass),
+		constructor func() InstanceT,
+		overrides FlattenListModelOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeFlattenListModel,
+		UnsafeFlattenListModelClassFromGlibBorrow,
+		UnsafeApplyFlattenListModelOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapFlattenListModel(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // FontDialogInstance is the instance type used by all types extending GtkFontDialog. It is used internally by the bindings. Users should use the interface [FontDialog] instead.
@@ -27522,6 +28783,32 @@ type FontDialogOverrides[Instance FontDialog] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplyFontDialogOverrides[Instance FontDialog](gclass unsafe.Pointer, overrides FontDialogOverrides[Instance]) {
 	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
+}
+
+// RegisterFontDialogSubClass is used to register a go subclass of GtkFontDialog. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterFontDialogSubClass[InstanceT FontDialog](
+		name string,
+		classInit func(class *FontDialogClass),
+		constructor func() InstanceT,
+		overrides FontDialogOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeFontDialog,
+		UnsafeFontDialogClassFromGlibBorrow,
+		UnsafeApplyFontDialogOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapFontDialog(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // GestureInstance is the instance type used by all types extending GtkGesture. It is used internally by the bindings. Users should use the interface [Gesture] instead.
@@ -30405,67 +31692,327 @@ func UnsafeApplyIMContextOverrides[Instance IMContext](gclass unsafe.Pointer, ov
 
 	if overrides.ActivateOSK != nil {
 		pclass.activate_osk = (*[0]byte)(C._gotk4_gtk4_IMContext_activate_osk)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_IMContext_activate_osk",
+			func(carg0 *C.GtkIMContext) {
+				var _context Instance // go GtkIMContext subclass
+
+				_context = UnsafeIMContextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.ActivateOSK(_context)
+			},
+		)
 	}
 
 	if overrides.Commit != nil {
 		pclass.commit = (*[0]byte)(C._gotk4_gtk4_IMContext_commit)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_IMContext_commit",
+			func(carg0 *C.GtkIMContext, carg1 *C.char) {
+				var _context Instance // go GtkIMContext subclass
+				var str      string   // in, none, string, casted *C.gchar
+
+				_context = UnsafeIMContextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				str = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+
+				overrides.Commit(_context, str)
+			},
+		)
 	}
 
 	if overrides.DeleteSurrounding != nil {
 		pclass.delete_surrounding = (*[0]byte)(C._gotk4_gtk4_IMContext_delete_surrounding)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_IMContext_delete_surrounding",
+			func(carg0 *C.GtkIMContext, carg1 C.int, carg2 C.int) (cret C.gboolean) {
+				var _context Instance // go GtkIMContext subclass
+				var offset   int      // in, none, casted, casted C.gint
+				var nChars   int      // in, none, casted, casted C.gint
+				var goret    bool     // return
+
+				_context = UnsafeIMContextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				offset = int(carg1)
+				nChars = int(carg2)
+
+				goret = overrides.DeleteSurrounding(_context, offset, nChars)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.FocusIn != nil {
 		pclass.focus_in = (*[0]byte)(C._gotk4_gtk4_IMContext_focus_in)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_IMContext_focus_in",
+			func(carg0 *C.GtkIMContext) {
+				var _context Instance // go GtkIMContext subclass
+
+				_context = UnsafeIMContextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.FocusIn(_context)
+			},
+		)
 	}
 
 	if overrides.FocusOut != nil {
 		pclass.focus_out = (*[0]byte)(C._gotk4_gtk4_IMContext_focus_out)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_IMContext_focus_out",
+			func(carg0 *C.GtkIMContext) {
+				var _context Instance // go GtkIMContext subclass
+
+				_context = UnsafeIMContextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.FocusOut(_context)
+			},
+		)
 	}
 
 	if overrides.GetPreeditString != nil {
 		pclass.get_preedit_string = (*[0]byte)(C._gotk4_gtk4_IMContext_get_preedit_string)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_IMContext_get_preedit_string",
+			func(carg0 *C.GtkIMContext, carg1 **C.char, carg2 **C.PangoAttrList, carg3 *C.int) {
+				var _context  Instance        // go GtkIMContext subclass
+				var str       string          // out, full, string, casted *C.gchar
+				var attrs     *pango.AttrList // out, full, converted
+				var cursorPos int             // out, full, casted, casted C.gint
+
+				_context = UnsafeIMContextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				str, attrs, cursorPos = overrides.GetPreeditString(_context)
+
+				carg1 = (*C.char)(unsafe.Pointer(C.CString(str)))
+				*carg2 = (*C.PangoAttrList)(pango.UnsafeAttrListToGlibFull(attrs))
+				*carg3 = C.int(cursorPos)
+			},
+		)
 	}
 
 	if overrides.GetSurroundingWithSelection != nil {
 		pclass.get_surrounding_with_selection = (*[0]byte)(C._gotk4_gtk4_IMContext_get_surrounding_with_selection)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_IMContext_get_surrounding_with_selection",
+			func(carg0 *C.GtkIMContext, carg1 **C.char, carg2 *C.int, carg3 *C.int) (cret C.gboolean) {
+				var _context    Instance // go GtkIMContext subclass
+				var text        string   // out, full, string, casted *C.gchar
+				var cursorIndex int      // out, full, casted, casted C.gint
+				var anchorIndex int      // out, full, casted, casted C.gint
+				var goret       bool     // return
+
+				_context = UnsafeIMContextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				text, cursorIndex, anchorIndex, goret = overrides.GetSurroundingWithSelection(_context)
+
+				carg1 = (*C.char)(unsafe.Pointer(C.CString(text)))
+				*carg2 = C.int(cursorIndex)
+				*carg3 = C.int(anchorIndex)
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.PreeditChanged != nil {
 		pclass.preedit_changed = (*[0]byte)(C._gotk4_gtk4_IMContext_preedit_changed)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_IMContext_preedit_changed",
+			func(carg0 *C.GtkIMContext) {
+				var _context Instance // go GtkIMContext subclass
+
+				_context = UnsafeIMContextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.PreeditChanged(_context)
+			},
+		)
 	}
 
 	if overrides.PreeditEnd != nil {
 		pclass.preedit_end = (*[0]byte)(C._gotk4_gtk4_IMContext_preedit_end)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_IMContext_preedit_end",
+			func(carg0 *C.GtkIMContext) {
+				var _context Instance // go GtkIMContext subclass
+
+				_context = UnsafeIMContextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.PreeditEnd(_context)
+			},
+		)
 	}
 
 	if overrides.PreeditStart != nil {
 		pclass.preedit_start = (*[0]byte)(C._gotk4_gtk4_IMContext_preedit_start)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_IMContext_preedit_start",
+			func(carg0 *C.GtkIMContext) {
+				var _context Instance // go GtkIMContext subclass
+
+				_context = UnsafeIMContextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.PreeditStart(_context)
+			},
+		)
 	}
 
 	if overrides.Reset != nil {
 		pclass.reset = (*[0]byte)(C._gotk4_gtk4_IMContext_reset)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_IMContext_reset",
+			func(carg0 *C.GtkIMContext) {
+				var _context Instance // go GtkIMContext subclass
+
+				_context = UnsafeIMContextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.Reset(_context)
+			},
+		)
 	}
 
 	if overrides.RetrieveSurrounding != nil {
 		pclass.retrieve_surrounding = (*[0]byte)(C._gotk4_gtk4_IMContext_retrieve_surrounding)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_IMContext_retrieve_surrounding",
+			func(carg0 *C.GtkIMContext) (cret C.gboolean) {
+				var _context Instance // go GtkIMContext subclass
+				var goret    bool     // return
+
+				_context = UnsafeIMContextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.RetrieveSurrounding(_context)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.SetClientWidget != nil {
 		pclass.set_client_widget = (*[0]byte)(C._gotk4_gtk4_IMContext_set_client_widget)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_IMContext_set_client_widget",
+			func(carg0 *C.GtkIMContext, carg1 *C.GtkWidget) {
+				var _context Instance // go GtkIMContext subclass
+				var widget   Widget   // in, none, converted, nullable
+
+				_context = UnsafeIMContextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg1 != nil {
+					widget = UnsafeWidgetFromGlibNone(unsafe.Pointer(carg1))
+				}
+
+				overrides.SetClientWidget(_context, widget)
+			},
+		)
 	}
 
 	if overrides.SetCursorLocation != nil {
 		pclass.set_cursor_location = (*[0]byte)(C._gotk4_gtk4_IMContext_set_cursor_location)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_IMContext_set_cursor_location",
+			func(carg0 *C.GtkIMContext, carg1 *C.GdkRectangle) {
+				var _context Instance       // go GtkIMContext subclass
+				var area     *gdk.Rectangle // in, none, converted
+
+				_context = UnsafeIMContextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				area = gdk.UnsafeRectangleFromGlibNone(unsafe.Pointer(carg1))
+
+				overrides.SetCursorLocation(_context, area)
+			},
+		)
 	}
 
 	if overrides.SetSurroundingWithSelection != nil {
 		pclass.set_surrounding_with_selection = (*[0]byte)(C._gotk4_gtk4_IMContext_set_surrounding_with_selection)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_IMContext_set_surrounding_with_selection",
+			func(carg0 *C.GtkIMContext, carg1 *C.char, carg2 C.int, carg3 C.int, carg4 C.int) {
+				var _context    Instance // go GtkIMContext subclass
+				var text        string   // in, none, string, casted *C.gchar
+				var len         int      // in, none, casted, casted C.gint
+				var cursorIndex int      // in, none, casted, casted C.gint
+				var anchorIndex int      // in, none, casted, casted C.gint
+
+				_context = UnsafeIMContextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				text = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+				len = int(carg2)
+				cursorIndex = int(carg3)
+				anchorIndex = int(carg4)
+
+				overrides.SetSurroundingWithSelection(_context, text, len, cursorIndex, anchorIndex)
+			},
+		)
 	}
 
 	if overrides.SetUsePreedit != nil {
 		pclass.set_use_preedit = (*[0]byte)(C._gotk4_gtk4_IMContext_set_use_preedit)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_IMContext_set_use_preedit",
+			func(carg0 *C.GtkIMContext, carg1 C.gboolean) {
+				var _context   Instance // go GtkIMContext subclass
+				var usePreedit bool     // in
+
+				_context = UnsafeIMContextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg1 != 0 {
+					usePreedit = true
+				}
+
+				overrides.SetUsePreedit(_context, usePreedit)
+			},
+		)
 	}
+}
+
+// RegisterIMContextSubClass is used to register a go subclass of GtkIMContext. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterIMContextSubClass[InstanceT IMContext](
+		name string,
+		classInit func(class *IMContextClass),
+		constructor func() InstanceT,
+		overrides IMContextOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeIMContext,
+		UnsafeIMContextClassFromGlibBorrow,
+		UnsafeApplyIMContextOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapIMContext(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // IMContextSimpleInstance is the instance type used by all types extending GtkIMContextSimple. It is used internally by the bindings. Users should use the interface [IMContextSimple] instead.
@@ -30617,6 +32164,32 @@ type IMContextSimpleOverrides[Instance IMContextSimple] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplyIMContextSimpleOverrides[Instance IMContextSimple](gclass unsafe.Pointer, overrides IMContextSimpleOverrides[Instance]) {
 	UnsafeApplyIMContextOverrides(gclass, overrides.IMContextOverrides)
+}
+
+// RegisterIMContextSimpleSubClass is used to register a go subclass of GtkIMContextSimple. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterIMContextSimpleSubClass[InstanceT IMContextSimple](
+		name string,
+		classInit func(class *IMContextSimpleClass),
+		constructor func() InstanceT,
+		overrides IMContextSimpleOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeIMContextSimple,
+		UnsafeIMContextSimpleClassFromGlibBorrow,
+		UnsafeApplyIMContextSimpleOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapIMContextSimple(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // IMMulticontextInstance is the instance type used by all types extending GtkIMMulticontext. It is used internally by the bindings. Users should use the interface [IMMulticontext] instead.
@@ -30783,6 +32356,32 @@ type IMMulticontextOverrides[Instance IMMulticontext] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplyIMMulticontextOverrides[Instance IMMulticontext](gclass unsafe.Pointer, overrides IMMulticontextOverrides[Instance]) {
 	UnsafeApplyIMContextOverrides(gclass, overrides.IMContextOverrides)
+}
+
+// RegisterIMMulticontextSubClass is used to register a go subclass of GtkIMMulticontext. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterIMMulticontextSubClass[InstanceT IMMulticontext](
+		name string,
+		classInit func(class *IMMulticontextClass),
+		constructor func() InstanceT,
+		overrides IMMulticontextOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeIMMulticontext,
+		UnsafeIMMulticontextClassFromGlibBorrow,
+		UnsafeApplyIMMulticontextOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapIMMulticontext(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // IconPaintableInstance is the instance type used by all types extending GtkIconPaintable. It is used internally by the bindings. Users should use the interface [IconPaintable] instead.
@@ -32020,6 +33619,32 @@ func UnsafeApplyLayoutChildOverrides[Instance LayoutChild](gclass unsafe.Pointer
 	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
 }
 
+// RegisterLayoutChildSubClass is used to register a go subclass of GtkLayoutChild. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterLayoutChildSubClass[InstanceT LayoutChild](
+		name string,
+		classInit func(class *LayoutChildClass),
+		constructor func() InstanceT,
+		overrides LayoutChildOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeLayoutChild,
+		UnsafeLayoutChildClassFromGlibBorrow,
+		UnsafeApplyLayoutChildOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapLayoutChild(obj)
+		},
+		interfaceInits...,
+	)
+}
+
 // LayoutManagerInstance is the instance type used by all types extending GtkLayoutManager. It is used internally by the bindings. Users should use the interface [LayoutManager] instead.
 type LayoutManagerInstance struct {
 	_ [0]func() // equal guard
@@ -32470,27 +34095,158 @@ func UnsafeApplyLayoutManagerOverrides[Instance LayoutManager](gclass unsafe.Poi
 
 	if overrides.Allocate != nil {
 		pclass.allocate = (*[0]byte)(C._gotk4_gtk4_LayoutManager_allocate)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_LayoutManager_allocate",
+			func(carg0 *C.GtkLayoutManager, carg1 *C.GtkWidget, carg2 C.int, carg3 C.int, carg4 C.int) {
+				var manager  Instance // go GtkLayoutManager subclass
+				var widget   Widget   // in, none, converted
+				var width    int      // in, none, casted, casted C.gint
+				var height   int      // in, none, casted, casted C.gint
+				var baseline int      // in, none, casted, casted C.gint
+
+				manager = UnsafeLayoutManagerFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				widget = UnsafeWidgetFromGlibNone(unsafe.Pointer(carg1))
+				width = int(carg2)
+				height = int(carg3)
+				baseline = int(carg4)
+
+				overrides.Allocate(manager, widget, width, height, baseline)
+			},
+		)
 	}
 
 	if overrides.CreateLayoutChild != nil {
 		pclass.create_layout_child = (*[0]byte)(C._gotk4_gtk4_LayoutManager_create_layout_child)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_LayoutManager_create_layout_child",
+			func(carg0 *C.GtkLayoutManager, carg1 *C.GtkWidget, carg2 *C.GtkWidget) (cret *C.GtkLayoutChild) {
+				var manager  Instance    // go GtkLayoutManager subclass
+				var widget   Widget      // in, none, converted
+				var forChild Widget      // in, none, converted
+				var goret    LayoutChild // return, full, converted
+
+				manager = UnsafeLayoutManagerFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				widget = UnsafeWidgetFromGlibNone(unsafe.Pointer(carg1))
+				forChild = UnsafeWidgetFromGlibNone(unsafe.Pointer(carg2))
+
+				goret = overrides.CreateLayoutChild(manager, widget, forChild)
+
+				cret = (*C.GtkLayoutChild)(UnsafeLayoutChildToGlibFull(goret))
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetRequestMode != nil {
 		pclass.get_request_mode = (*[0]byte)(C._gotk4_gtk4_LayoutManager_get_request_mode)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_LayoutManager_get_request_mode",
+			func(carg0 *C.GtkLayoutManager, carg1 *C.GtkWidget) (cret C.GtkSizeRequestMode) {
+				var manager Instance        // go GtkLayoutManager subclass
+				var widget  Widget          // in, none, converted
+				var goret   SizeRequestMode // return, none, casted
+
+				manager = UnsafeLayoutManagerFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				widget = UnsafeWidgetFromGlibNone(unsafe.Pointer(carg1))
+
+				goret = overrides.GetRequestMode(manager, widget)
+
+				cret = C.GtkSizeRequestMode(goret)
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.Measure != nil {
 		pclass.measure = (*[0]byte)(C._gotk4_gtk4_LayoutManager_measure)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_LayoutManager_measure",
+			func(carg0 *C.GtkLayoutManager, carg1 *C.GtkWidget, carg2 C.GtkOrientation, carg3 C.int, carg4 *C.int, carg5 *C.int, carg6 *C.int, carg7 *C.int) {
+				var manager         Instance    // go GtkLayoutManager subclass
+				var widget          Widget      // in, none, converted
+				var orientation     Orientation // in, none, casted
+				var forSize         int         // in, none, casted, casted C.gint
+				var minimum         int         // out, full, casted, casted C.gint
+				var natural         int         // out, full, casted, casted C.gint
+				var minimumBaseline int         // out, full, casted, casted C.gint
+				var naturalBaseline int         // out, full, casted, casted C.gint
+
+				manager = UnsafeLayoutManagerFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				widget = UnsafeWidgetFromGlibNone(unsafe.Pointer(carg1))
+				orientation = Orientation(carg2)
+				forSize = int(carg3)
+
+				minimum, natural, minimumBaseline, naturalBaseline = overrides.Measure(manager, widget, orientation, forSize)
+
+				*carg4 = C.int(minimum)
+				*carg5 = C.int(natural)
+				*carg6 = C.int(minimumBaseline)
+				*carg7 = C.int(naturalBaseline)
+			},
+		)
 	}
 
 	if overrides.Root != nil {
 		pclass.root = (*[0]byte)(C._gotk4_gtk4_LayoutManager_root)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_LayoutManager_root",
+			func(carg0 *C.GtkLayoutManager) {
+				var manager Instance // go GtkLayoutManager subclass
+
+				manager = UnsafeLayoutManagerFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.Root(manager)
+			},
+		)
 	}
 
 	if overrides.Unroot != nil {
 		pclass.unroot = (*[0]byte)(C._gotk4_gtk4_LayoutManager_unroot)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_LayoutManager_unroot",
+			func(carg0 *C.GtkLayoutManager) {
+				var manager Instance // go GtkLayoutManager subclass
+
+				manager = UnsafeLayoutManagerFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.Unroot(manager)
+			},
+		)
 	}
+}
+
+// RegisterLayoutManagerSubClass is used to register a go subclass of GtkLayoutManager. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterLayoutManagerSubClass[InstanceT LayoutManager](
+		name string,
+		classInit func(class *LayoutManagerClass),
+		constructor func() InstanceT,
+		overrides LayoutManagerOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeLayoutManager,
+		UnsafeLayoutManagerClassFromGlibBorrow,
+		UnsafeApplyLayoutManagerOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapLayoutManager(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // ListHeaderInstance is the instance type used by all types extending GtkListHeader. It is used internally by the bindings. Users should use the interface [ListHeader] instead.
@@ -33610,6 +35366,32 @@ type MapListModelOverrides[Instance MapListModel] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplyMapListModelOverrides[Instance MapListModel](gclass unsafe.Pointer, overrides MapListModelOverrides[Instance]) {
 	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
+}
+
+// RegisterMapListModelSubClass is used to register a go subclass of GtkMapListModel. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterMapListModelSubClass[InstanceT MapListModel](
+		name string,
+		classInit func(class *MapListModelClass),
+		constructor func() InstanceT,
+		overrides MapListModelOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeMapListModel,
+		UnsafeMapListModelClassFromGlibBorrow,
+		UnsafeApplyMapListModelOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapMapListModel(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // MediaStreamInstance is the instance type used by all types extending GtkMediaStream. It is used internally by the bindings. Users should use the interface [MediaStream] instead.
@@ -34814,27 +36596,138 @@ func UnsafeApplyMediaStreamOverrides[Instance MediaStream](gclass unsafe.Pointer
 
 	if overrides.Pause != nil {
 		pclass.pause = (*[0]byte)(C._gotk4_gtk4_MediaStream_pause)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_MediaStream_pause",
+			func(carg0 *C.GtkMediaStream) {
+				var self Instance // go GtkMediaStream subclass
+
+				self = UnsafeMediaStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.Pause(self)
+			},
+		)
 	}
 
 	if overrides.Play != nil {
 		pclass.play = (*[0]byte)(C._gotk4_gtk4_MediaStream_play)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_MediaStream_play",
+			func(carg0 *C.GtkMediaStream) (cret C.gboolean) {
+				var self  Instance // go GtkMediaStream subclass
+				var goret bool     // return
+
+				self = UnsafeMediaStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.Play(self)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.Realize != nil {
 		pclass.realize = (*[0]byte)(C._gotk4_gtk4_MediaStream_realize)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_MediaStream_realize",
+			func(carg0 *C.GtkMediaStream, carg1 *C.GdkSurface) {
+				var self    Instance    // go GtkMediaStream subclass
+				var surface gdk.Surface // in, none, converted
+
+				self = UnsafeMediaStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				surface = gdk.UnsafeSurfaceFromGlibNone(unsafe.Pointer(carg1))
+
+				overrides.Realize(self, surface)
+			},
+		)
 	}
 
 	if overrides.Seek != nil {
 		pclass.seek = (*[0]byte)(C._gotk4_gtk4_MediaStream_seek)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_MediaStream_seek",
+			func(carg0 *C.GtkMediaStream, carg1 C.gint64) {
+				var self      Instance // go GtkMediaStream subclass
+				var timestamp int64    // in, none, casted
+
+				self = UnsafeMediaStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				timestamp = int64(carg1)
+
+				overrides.Seek(self, timestamp)
+			},
+		)
 	}
 
 	if overrides.Unrealize != nil {
 		pclass.unrealize = (*[0]byte)(C._gotk4_gtk4_MediaStream_unrealize)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_MediaStream_unrealize",
+			func(carg0 *C.GtkMediaStream, carg1 *C.GdkSurface) {
+				var self    Instance    // go GtkMediaStream subclass
+				var surface gdk.Surface // in, none, converted
+
+				self = UnsafeMediaStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				surface = gdk.UnsafeSurfaceFromGlibNone(unsafe.Pointer(carg1))
+
+				overrides.Unrealize(self, surface)
+			},
+		)
 	}
 
 	if overrides.UpdateAudio != nil {
 		pclass.update_audio = (*[0]byte)(C._gotk4_gtk4_MediaStream_update_audio)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_MediaStream_update_audio",
+			func(carg0 *C.GtkMediaStream, carg1 C.gboolean, carg2 C.double) {
+				var self   Instance // go GtkMediaStream subclass
+				var muted  bool     // in
+				var volume float64  // in, none, casted, casted C.gdouble
+
+				self = UnsafeMediaStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg1 != 0 {
+					muted = true
+				}
+				volume = float64(carg2)
+
+				overrides.UpdateAudio(self, muted, volume)
+			},
+		)
 	}
+}
+
+// RegisterMediaStreamSubClass is used to register a go subclass of GtkMediaStream. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterMediaStreamSubClass[InstanceT MediaStream](
+		name string,
+		classInit func(class *MediaStreamClass),
+		constructor func() InstanceT,
+		overrides MediaStreamOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeMediaStream,
+		UnsafeMediaStreamClassFromGlibBorrow,
+		UnsafeApplyMediaStreamOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapMediaStream(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // MountOperationInstance is the instance type used by all types extending GtkMountOperation. It is used internally by the bindings. Users should use the interface [MountOperation] instead.
@@ -35102,6 +36995,32 @@ type MountOperationOverrides[Instance MountOperation] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplyMountOperationOverrides[Instance MountOperation](gclass unsafe.Pointer, overrides MountOperationOverrides[Instance]) {
 	gio.UnsafeApplyMountOperationOverrides(gclass, overrides.MountOperationOverrides)
+}
+
+// RegisterMountOperationSubClass is used to register a go subclass of GtkMountOperation. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterMountOperationSubClass[InstanceT MountOperation](
+		name string,
+		classInit func(class *MountOperationClass),
+		constructor func() InstanceT,
+		overrides MountOperationOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeMountOperation,
+		UnsafeMountOperationClassFromGlibBorrow,
+		UnsafeApplyMountOperationOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapMountOperation(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // MultiFilterInstance is the instance type used by all types extending GtkMultiFilter. It is used internally by the bindings. Users should use the interface [MultiFilter] instead.
@@ -35390,6 +37309,32 @@ type MultiSelectionOverrides[Instance MultiSelection] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplyMultiSelectionOverrides[Instance MultiSelection](gclass unsafe.Pointer, overrides MultiSelectionOverrides[Instance]) {
 	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
+}
+
+// RegisterMultiSelectionSubClass is used to register a go subclass of GtkMultiSelection. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterMultiSelectionSubClass[InstanceT MultiSelection](
+		name string,
+		classInit func(class *MultiSelectionClass),
+		constructor func() InstanceT,
+		overrides MultiSelectionOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeMultiSelection,
+		UnsafeMultiSelectionClassFromGlibBorrow,
+		UnsafeApplyMultiSelectionOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapMultiSelection(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // NativeDialogInstance is the instance type used by all types extending GtkNativeDialog. It is used internally by the bindings. Users should use the interface [NativeDialog] instead.
@@ -35840,15 +37785,76 @@ func UnsafeApplyNativeDialogOverrides[Instance NativeDialog](gclass unsafe.Point
 
 	if overrides.Hide != nil {
 		pclass.hide = (*[0]byte)(C._gotk4_gtk4_NativeDialog_hide)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_NativeDialog_hide",
+			func(carg0 *C.GtkNativeDialog) {
+				var self Instance // go GtkNativeDialog subclass
+
+				self = UnsafeNativeDialogFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.Hide(self)
+			},
+		)
 	}
 
 	if overrides.Response != nil {
 		pclass.response = (*[0]byte)(C._gotk4_gtk4_NativeDialog_response)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_NativeDialog_response",
+			func(carg0 *C.GtkNativeDialog, carg1 C.int) {
+				var self       Instance // go GtkNativeDialog subclass
+				var responseId int      // in, none, casted, casted C.gint
+
+				self = UnsafeNativeDialogFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				responseId = int(carg1)
+
+				overrides.Response(self, responseId)
+			},
+		)
 	}
 
 	if overrides.Show != nil {
 		pclass.show = (*[0]byte)(C._gotk4_gtk4_NativeDialog_show)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_NativeDialog_show",
+			func(carg0 *C.GtkNativeDialog) {
+				var self Instance // go GtkNativeDialog subclass
+
+				self = UnsafeNativeDialogFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.Show(self)
+			},
+		)
 	}
+}
+
+// RegisterNativeDialogSubClass is used to register a go subclass of GtkNativeDialog. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterNativeDialogSubClass[InstanceT NativeDialog](
+		name string,
+		classInit func(class *NativeDialogClass),
+		constructor func() InstanceT,
+		overrides NativeDialogOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeNativeDialog,
+		UnsafeNativeDialogClassFromGlibBorrow,
+		UnsafeApplyNativeDialogOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapNativeDialog(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // NoSelectionInstance is the instance type used by all types extending GtkNoSelection. It is used internally by the bindings. Users should use the interface [NoSelection] instead.
@@ -36023,6 +38029,32 @@ func UnsafeApplyNoSelectionOverrides[Instance NoSelection](gclass unsafe.Pointer
 	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
 }
 
+// RegisterNoSelectionSubClass is used to register a go subclass of GtkNoSelection. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterNoSelectionSubClass[InstanceT NoSelection](
+		name string,
+		classInit func(class *NoSelectionClass),
+		constructor func() InstanceT,
+		overrides NoSelectionOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeNoSelection,
+		UnsafeNoSelectionClassFromGlibBorrow,
+		UnsafeApplyNoSelectionOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapNoSelection(obj)
+		},
+		interfaceInits...,
+	)
+}
+
 // NotebookPageInstance is the instance type used by all types extending GtkNotebookPage. It is used internally by the bindings. Users should use the interface [NotebookPage] instead.
 type NotebookPageInstance struct {
 	_ [0]func() // equal guard
@@ -36194,6 +38226,32 @@ type OverlayLayoutOverrides[Instance OverlayLayout] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplyOverlayLayoutOverrides[Instance OverlayLayout](gclass unsafe.Pointer, overrides OverlayLayoutOverrides[Instance]) {
 	UnsafeApplyLayoutManagerOverrides(gclass, overrides.LayoutManagerOverrides)
+}
+
+// RegisterOverlayLayoutSubClass is used to register a go subclass of GtkOverlayLayout. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterOverlayLayoutSubClass[InstanceT OverlayLayout](
+		name string,
+		classInit func(class *OverlayLayoutClass),
+		constructor func() InstanceT,
+		overrides OverlayLayoutOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeOverlayLayout,
+		UnsafeOverlayLayoutClassFromGlibBorrow,
+		UnsafeApplyOverlayLayoutOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapOverlayLayout(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // OverlayLayoutChildInstance is the instance type used by all types extending GtkOverlayLayoutChild. It is used internally by the bindings. Users should use the interface [OverlayLayoutChild] instead.
@@ -36385,6 +38443,32 @@ type OverlayLayoutChildOverrides[Instance OverlayLayoutChild] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplyOverlayLayoutChildOverrides[Instance OverlayLayoutChild](gclass unsafe.Pointer, overrides OverlayLayoutChildOverrides[Instance]) {
 	UnsafeApplyLayoutChildOverrides(gclass, overrides.LayoutChildOverrides)
+}
+
+// RegisterOverlayLayoutChildSubClass is used to register a go subclass of GtkOverlayLayoutChild. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterOverlayLayoutChildSubClass[InstanceT OverlayLayoutChild](
+		name string,
+		classInit func(class *OverlayLayoutChildClass),
+		constructor func() InstanceT,
+		overrides OverlayLayoutChildOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeOverlayLayoutChild,
+		UnsafeOverlayLayoutChildClassFromGlibBorrow,
+		UnsafeApplyOverlayLayoutChildOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapOverlayLayoutChild(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // PadControllerInstance is the instance type used by all types extending GtkPadController. It is used internally by the bindings. Users should use the interface [PadController] instead.
@@ -37804,6 +39888,32 @@ func UnsafeApplyPasswordEntryBufferOverrides[Instance PasswordEntryBuffer](gclas
 	UnsafeApplyEntryBufferOverrides(gclass, overrides.EntryBufferOverrides)
 }
 
+// RegisterPasswordEntryBufferSubClass is used to register a go subclass of GtkPasswordEntryBuffer. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterPasswordEntryBufferSubClass[InstanceT PasswordEntryBuffer](
+		name string,
+		classInit func(class *PasswordEntryBufferClass),
+		constructor func() InstanceT,
+		overrides PasswordEntryBufferOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypePasswordEntryBuffer,
+		UnsafePasswordEntryBufferClassFromGlibBorrow,
+		UnsafeApplyPasswordEntryBufferOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapPasswordEntryBuffer(obj)
+		},
+		interfaceInits...,
+	)
+}
+
 // RecentManagerInstance is the instance type used by all types extending GtkRecentManager. It is used internally by the bindings. Users should use the interface [RecentManager] instead.
 type RecentManagerInstance struct {
 	_ [0]func() // equal guard
@@ -38444,7 +40554,44 @@ func UnsafeApplyRecentManagerOverrides[Instance RecentManager](gclass unsafe.Poi
 
 	if overrides.Changed != nil {
 		pclass.changed = (*[0]byte)(C._gotk4_gtk4_RecentManager_changed)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_RecentManager_changed",
+			func(carg0 *C.GtkRecentManager) {
+				var manager Instance // go GtkRecentManager subclass
+
+				manager = UnsafeRecentManagerFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.Changed(manager)
+			},
+		)
 	}
+}
+
+// RegisterRecentManagerSubClass is used to register a go subclass of GtkRecentManager. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterRecentManagerSubClass[InstanceT RecentManager](
+		name string,
+		classInit func(class *RecentManagerClass),
+		constructor func() InstanceT,
+		overrides RecentManagerOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeRecentManager,
+		UnsafeRecentManagerClassFromGlibBorrow,
+		UnsafeApplyRecentManagerOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapRecentManager(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // SelectionFilterModelInstance is the instance type used by all types extending GtkSelectionFilterModel. It is used internally by the bindings. Users should use the interface [SelectionFilterModel] instead.
@@ -38619,6 +40766,32 @@ type SelectionFilterModelOverrides[Instance SelectionFilterModel] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplySelectionFilterModelOverrides[Instance SelectionFilterModel](gclass unsafe.Pointer, overrides SelectionFilterModelOverrides[Instance]) {
 	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
+}
+
+// RegisterSelectionFilterModelSubClass is used to register a go subclass of GtkSelectionFilterModel. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterSelectionFilterModelSubClass[InstanceT SelectionFilterModel](
+		name string,
+		classInit func(class *SelectionFilterModelClass),
+		constructor func() InstanceT,
+		overrides SelectionFilterModelOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeSelectionFilterModel,
+		UnsafeSelectionFilterModelClassFromGlibBorrow,
+		UnsafeApplySelectionFilterModelOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapSelectionFilterModel(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // SettingsInstance is the instance type used by all types extending GtkSettings. It is used internally by the bindings. Users should use the interface [Settings] instead.
@@ -39028,6 +41201,32 @@ type ShortcutOverrides[Instance Shortcut] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplyShortcutOverrides[Instance Shortcut](gclass unsafe.Pointer, overrides ShortcutOverrides[Instance]) {
 	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
+}
+
+// RegisterShortcutSubClass is used to register a go subclass of GtkShortcut. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterShortcutSubClass[InstanceT Shortcut](
+		name string,
+		classInit func(class *ShortcutClass),
+		constructor func() InstanceT,
+		overrides ShortcutOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeShortcut,
+		UnsafeShortcutClassFromGlibBorrow,
+		UnsafeApplyShortcutOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapShortcut(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // ShortcutActionInstance is the instance type used by all types extending GtkShortcutAction. It is used internally by the bindings. Users should use the interface [ShortcutAction] instead.
@@ -40489,6 +42688,32 @@ func UnsafeApplySingleSelectionOverrides[Instance SingleSelection](gclass unsafe
 	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
 }
 
+// RegisterSingleSelectionSubClass is used to register a go subclass of GtkSingleSelection. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterSingleSelectionSubClass[InstanceT SingleSelection](
+		name string,
+		classInit func(class *SingleSelectionClass),
+		constructor func() InstanceT,
+		overrides SingleSelectionOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeSingleSelection,
+		UnsafeSingleSelectionClassFromGlibBorrow,
+		UnsafeApplySingleSelectionOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapSingleSelection(obj)
+		},
+		interfaceInits...,
+	)
+}
+
 // SizeGroupInstance is the instance type used by all types extending GtkSizeGroup. It is used internally by the bindings. Users should use the interface [SizeGroup] instead.
 type SizeGroupInstance struct {
 	_ [0]func() // equal guard
@@ -41123,6 +43348,32 @@ type SliceListModelOverrides[Instance SliceListModel] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplySliceListModelOverrides[Instance SliceListModel](gclass unsafe.Pointer, overrides SliceListModelOverrides[Instance]) {
 	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
+}
+
+// RegisterSliceListModelSubClass is used to register a go subclass of GtkSliceListModel. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterSliceListModelSubClass[InstanceT SliceListModel](
+		name string,
+		classInit func(class *SliceListModelClass),
+		constructor func() InstanceT,
+		overrides SliceListModelOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeSliceListModel,
+		UnsafeSliceListModelClassFromGlibBorrow,
+		UnsafeApplySliceListModelOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapSliceListModel(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // SnapshotInstance is the instance type used by all types extending Snapshot. It is used internally by the bindings. Users should use the interface [Snapshot] instead.
@@ -43267,6 +45518,32 @@ func UnsafeApplySortListModelOverrides[Instance SortListModel](gclass unsafe.Poi
 	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
 }
 
+// RegisterSortListModelSubClass is used to register a go subclass of GtkSortListModel. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterSortListModelSubClass[InstanceT SortListModel](
+		name string,
+		classInit func(class *SortListModelClass),
+		constructor func() InstanceT,
+		overrides SortListModelOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeSortListModel,
+		UnsafeSortListModelClassFromGlibBorrow,
+		UnsafeApplySortListModelOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapSortListModel(obj)
+		},
+		interfaceInits...,
+	)
+}
+
 // SorterInstance is the instance type used by all types extending GtkSorter. It is used internally by the bindings. Users should use the interface [Sorter] instead.
 type SorterInstance struct {
 	_ [0]func() // equal guard
@@ -43478,7 +45755,49 @@ func UnsafeApplySorterOverrides[Instance Sorter](gclass unsafe.Pointer, override
 
 	if overrides.GetOrder != nil {
 		pclass.get_order = (*[0]byte)(C._gotk4_gtk4_Sorter_get_order)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_Sorter_get_order",
+			func(carg0 *C.GtkSorter) (cret C.GtkSorterOrder) {
+				var self  Instance    // go GtkSorter subclass
+				var goret SorterOrder // return, none, casted
+
+				self = UnsafeSorterFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetOrder(self)
+
+				cret = C.GtkSorterOrder(goret)
+
+				return cret
+			},
+		)
 	}
+}
+
+// RegisterSorterSubClass is used to register a go subclass of GtkSorter. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterSorterSubClass[InstanceT Sorter](
+		name string,
+		classInit func(class *SorterClass),
+		constructor func() InstanceT,
+		overrides SorterOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeSorter,
+		UnsafeSorterClassFromGlibBorrow,
+		UnsafeApplySorterOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapSorter(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // StackPageInstance is the instance type used by all types extending GtkStackPage. It is used internally by the bindings. Users should use the interface [StackPage] instead.
@@ -44202,6 +46521,32 @@ func UnsafeApplyStringFilterOverrides[Instance StringFilter](gclass unsafe.Point
 	UnsafeApplyFilterOverrides(gclass, overrides.FilterOverrides)
 }
 
+// RegisterStringFilterSubClass is used to register a go subclass of GtkStringFilter. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterStringFilterSubClass[InstanceT StringFilter](
+		name string,
+		classInit func(class *StringFilterClass),
+		constructor func() InstanceT,
+		overrides StringFilterOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeStringFilter,
+		UnsafeStringFilterClassFromGlibBorrow,
+		UnsafeApplyStringFilterOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapStringFilter(obj)
+		},
+		interfaceInits...,
+	)
+}
+
 // StringListInstance is the instance type used by all types extending GtkStringList. It is used internally by the bindings. Users should use the interface [StringList] instead.
 type StringListInstance struct {
 	_ [0]func() // equal guard
@@ -44553,6 +46898,32 @@ func UnsafeApplyStringListOverrides[Instance StringList](gclass unsafe.Pointer, 
 	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
 }
 
+// RegisterStringListSubClass is used to register a go subclass of GtkStringList. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterStringListSubClass[InstanceT StringList](
+		name string,
+		classInit func(class *StringListClass),
+		constructor func() InstanceT,
+		overrides StringListOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeStringList,
+		UnsafeStringListClassFromGlibBorrow,
+		UnsafeApplyStringListOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapStringList(obj)
+		},
+		interfaceInits...,
+	)
+}
+
 // StringObjectInstance is the instance type used by all types extending GtkStringObject. It is used internally by the bindings. Users should use the interface [StringObject] instead.
 type StringObjectInstance struct {
 	_ [0]func() // equal guard
@@ -44679,6 +47050,32 @@ type StringObjectOverrides[Instance StringObject] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplyStringObjectOverrides[Instance StringObject](gclass unsafe.Pointer, overrides StringObjectOverrides[Instance]) {
 	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
+}
+
+// RegisterStringObjectSubClass is used to register a go subclass of GtkStringObject. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterStringObjectSubClass[InstanceT StringObject](
+		name string,
+		classInit func(class *StringObjectClass),
+		constructor func() InstanceT,
+		overrides StringObjectOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeStringObject,
+		UnsafeStringObjectClassFromGlibBorrow,
+		UnsafeApplyStringObjectOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapStringObject(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // StringSorterInstance is the instance type used by all types extending GtkStringSorter. It is used internally by the bindings. Users should use the interface [StringSorter] instead.
@@ -44873,6 +47270,32 @@ type StringSorterOverrides[Instance StringSorter] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplyStringSorterOverrides[Instance StringSorter](gclass unsafe.Pointer, overrides StringSorterOverrides[Instance]) {
 	UnsafeApplySorterOverrides(gclass, overrides.SorterOverrides)
+}
+
+// RegisterStringSorterSubClass is used to register a go subclass of GtkStringSorter. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterStringSorterSubClass[InstanceT StringSorter](
+		name string,
+		classInit func(class *StringSorterClass),
+		constructor func() InstanceT,
+		overrides StringSorterOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeStringSorter,
+		UnsafeStringSorterClassFromGlibBorrow,
+		UnsafeApplyStringSorterOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapStringSorter(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // TextBufferInstance is the instance type used by all types extending GtkTextBuffer. It is used internally by the bindings. Users should use the interface [TextBuffer] instead.
@@ -48666,63 +51089,292 @@ func UnsafeApplyTextBufferOverrides[Instance TextBuffer](gclass unsafe.Pointer, 
 
 	if overrides.ApplyTag != nil {
 		pclass.apply_tag = (*[0]byte)(C._gotk4_gtk4_TextBuffer_apply_tag)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_TextBuffer_apply_tag",
+			func(carg0 *C.GtkTextBuffer, carg1 *C.GtkTextTag, carg2 *C.GtkTextIter, carg3 *C.GtkTextIter) {
+				var buffer Instance  // go GtkTextBuffer subclass
+				var tag    TextTag   // in, none, converted
+				var start  *TextIter // in, none, converted
+				var end    *TextIter // in, none, converted
+
+				buffer = UnsafeTextBufferFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				tag = UnsafeTextTagFromGlibNone(unsafe.Pointer(carg1))
+				start = UnsafeTextIterFromGlibNone(unsafe.Pointer(carg2))
+				end = UnsafeTextIterFromGlibNone(unsafe.Pointer(carg3))
+
+				overrides.ApplyTag(buffer, tag, start, end)
+			},
+		)
 	}
 
 	if overrides.BeginUserAction != nil {
 		pclass.begin_user_action = (*[0]byte)(C._gotk4_gtk4_TextBuffer_begin_user_action)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_TextBuffer_begin_user_action",
+			func(carg0 *C.GtkTextBuffer) {
+				var buffer Instance // go GtkTextBuffer subclass
+
+				buffer = UnsafeTextBufferFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.BeginUserAction(buffer)
+			},
+		)
 	}
 
 	if overrides.Changed != nil {
 		pclass.changed = (*[0]byte)(C._gotk4_gtk4_TextBuffer_changed)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_TextBuffer_changed",
+			func(carg0 *C.GtkTextBuffer) {
+				var buffer Instance // go GtkTextBuffer subclass
+
+				buffer = UnsafeTextBufferFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.Changed(buffer)
+			},
+		)
 	}
 
 	if overrides.DeleteRange != nil {
 		pclass.delete_range = (*[0]byte)(C._gotk4_gtk4_TextBuffer_delete_range)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_TextBuffer_delete_range",
+			func(carg0 *C.GtkTextBuffer, carg1 *C.GtkTextIter, carg2 *C.GtkTextIter) {
+				var buffer Instance  // go GtkTextBuffer subclass
+				var start  *TextIter // in, none, converted
+				var end    *TextIter // in, none, converted
+
+				buffer = UnsafeTextBufferFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				start = UnsafeTextIterFromGlibNone(unsafe.Pointer(carg1))
+				end = UnsafeTextIterFromGlibNone(unsafe.Pointer(carg2))
+
+				overrides.DeleteRange(buffer, start, end)
+			},
+		)
 	}
 
 	if overrides.EndUserAction != nil {
 		pclass.end_user_action = (*[0]byte)(C._gotk4_gtk4_TextBuffer_end_user_action)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_TextBuffer_end_user_action",
+			func(carg0 *C.GtkTextBuffer) {
+				var buffer Instance // go GtkTextBuffer subclass
+
+				buffer = UnsafeTextBufferFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.EndUserAction(buffer)
+			},
+		)
 	}
 
 	if overrides.InsertChildAnchor != nil {
 		pclass.insert_child_anchor = (*[0]byte)(C._gotk4_gtk4_TextBuffer_insert_child_anchor)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_TextBuffer_insert_child_anchor",
+			func(carg0 *C.GtkTextBuffer, carg1 *C.GtkTextIter, carg2 *C.GtkTextChildAnchor) {
+				var buffer Instance        // go GtkTextBuffer subclass
+				var iter   *TextIter       // in, none, converted
+				var anchor TextChildAnchor // in, none, converted
+
+				buffer = UnsafeTextBufferFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				iter = UnsafeTextIterFromGlibNone(unsafe.Pointer(carg1))
+				anchor = UnsafeTextChildAnchorFromGlibNone(unsafe.Pointer(carg2))
+
+				overrides.InsertChildAnchor(buffer, iter, anchor)
+			},
+		)
 	}
 
 	if overrides.InsertPaintable != nil {
 		pclass.insert_paintable = (*[0]byte)(C._gotk4_gtk4_TextBuffer_insert_paintable)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_TextBuffer_insert_paintable",
+			func(carg0 *C.GtkTextBuffer, carg1 *C.GtkTextIter, carg2 *C.GdkPaintable) {
+				var buffer    Instance      // go GtkTextBuffer subclass
+				var iter      *TextIter     // in, none, converted
+				var paintable gdk.Paintable // in, none, converted
+
+				buffer = UnsafeTextBufferFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				iter = UnsafeTextIterFromGlibNone(unsafe.Pointer(carg1))
+				paintable = gdk.UnsafePaintableFromGlibNone(unsafe.Pointer(carg2))
+
+				overrides.InsertPaintable(buffer, iter, paintable)
+			},
+		)
 	}
 
 	if overrides.InsertText != nil {
 		pclass.insert_text = (*[0]byte)(C._gotk4_gtk4_TextBuffer_insert_text)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_TextBuffer_insert_text",
+			func(carg0 *C.GtkTextBuffer, carg1 *C.GtkTextIter, carg2 *C.char, carg3 C.int) {
+				var buffer        Instance  // go GtkTextBuffer subclass
+				var pos           *TextIter // in, none, converted
+				var newText       string    // in, none, string, casted *C.gchar
+				var newTextLength int       // in, none, casted, casted C.gint
+
+				buffer = UnsafeTextBufferFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				pos = UnsafeTextIterFromGlibNone(unsafe.Pointer(carg1))
+				newText = C.GoString((*C.char)(unsafe.Pointer(carg2)))
+				newTextLength = int(carg3)
+
+				overrides.InsertText(buffer, pos, newText, newTextLength)
+			},
+		)
 	}
 
 	if overrides.MarkDeleted != nil {
 		pclass.mark_deleted = (*[0]byte)(C._gotk4_gtk4_TextBuffer_mark_deleted)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_TextBuffer_mark_deleted",
+			func(carg0 *C.GtkTextBuffer, carg1 *C.GtkTextMark) {
+				var buffer Instance // go GtkTextBuffer subclass
+				var mark   TextMark // in, none, converted
+
+				buffer = UnsafeTextBufferFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				mark = UnsafeTextMarkFromGlibNone(unsafe.Pointer(carg1))
+
+				overrides.MarkDeleted(buffer, mark)
+			},
+		)
 	}
 
 	if overrides.MarkSet != nil {
 		pclass.mark_set = (*[0]byte)(C._gotk4_gtk4_TextBuffer_mark_set)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_TextBuffer_mark_set",
+			func(carg0 *C.GtkTextBuffer, carg1 *C.GtkTextIter, carg2 *C.GtkTextMark) {
+				var buffer   Instance  // go GtkTextBuffer subclass
+				var location *TextIter // in, none, converted
+				var mark     TextMark  // in, none, converted
+
+				buffer = UnsafeTextBufferFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				location = UnsafeTextIterFromGlibNone(unsafe.Pointer(carg1))
+				mark = UnsafeTextMarkFromGlibNone(unsafe.Pointer(carg2))
+
+				overrides.MarkSet(buffer, location, mark)
+			},
+		)
 	}
 
 	if overrides.ModifiedChanged != nil {
 		pclass.modified_changed = (*[0]byte)(C._gotk4_gtk4_TextBuffer_modified_changed)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_TextBuffer_modified_changed",
+			func(carg0 *C.GtkTextBuffer) {
+				var buffer Instance // go GtkTextBuffer subclass
+
+				buffer = UnsafeTextBufferFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.ModifiedChanged(buffer)
+			},
+		)
 	}
 
 	if overrides.PasteDone != nil {
 		pclass.paste_done = (*[0]byte)(C._gotk4_gtk4_TextBuffer_paste_done)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_TextBuffer_paste_done",
+			func(carg0 *C.GtkTextBuffer, carg1 *C.GdkClipboard) {
+				var buffer    Instance      // go GtkTextBuffer subclass
+				var clipboard gdk.Clipboard // in, none, converted
+
+				buffer = UnsafeTextBufferFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				clipboard = gdk.UnsafeClipboardFromGlibNone(unsafe.Pointer(carg1))
+
+				overrides.PasteDone(buffer, clipboard)
+			},
+		)
 	}
 
 	if overrides.Redo != nil {
 		pclass.redo = (*[0]byte)(C._gotk4_gtk4_TextBuffer_redo)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_TextBuffer_redo",
+			func(carg0 *C.GtkTextBuffer) {
+				var buffer Instance // go GtkTextBuffer subclass
+
+				buffer = UnsafeTextBufferFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.Redo(buffer)
+			},
+		)
 	}
 
 	if overrides.RemoveTag != nil {
 		pclass.remove_tag = (*[0]byte)(C._gotk4_gtk4_TextBuffer_remove_tag)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_TextBuffer_remove_tag",
+			func(carg0 *C.GtkTextBuffer, carg1 *C.GtkTextTag, carg2 *C.GtkTextIter, carg3 *C.GtkTextIter) {
+				var buffer Instance  // go GtkTextBuffer subclass
+				var tag    TextTag   // in, none, converted
+				var start  *TextIter // in, none, converted
+				var end    *TextIter // in, none, converted
+
+				buffer = UnsafeTextBufferFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				tag = UnsafeTextTagFromGlibNone(unsafe.Pointer(carg1))
+				start = UnsafeTextIterFromGlibNone(unsafe.Pointer(carg2))
+				end = UnsafeTextIterFromGlibNone(unsafe.Pointer(carg3))
+
+				overrides.RemoveTag(buffer, tag, start, end)
+			},
+		)
 	}
 
 	if overrides.Undo != nil {
 		pclass.undo = (*[0]byte)(C._gotk4_gtk4_TextBuffer_undo)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_TextBuffer_undo",
+			func(carg0 *C.GtkTextBuffer) {
+				var buffer Instance // go GtkTextBuffer subclass
+
+				buffer = UnsafeTextBufferFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.Undo(buffer)
+			},
+		)
 	}
+}
+
+// RegisterTextBufferSubClass is used to register a go subclass of GtkTextBuffer. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterTextBufferSubClass[InstanceT TextBuffer](
+		name string,
+		classInit func(class *TextBufferClass),
+		constructor func() InstanceT,
+		overrides TextBufferOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeTextBuffer,
+		UnsafeTextBufferClassFromGlibBorrow,
+		UnsafeApplyTextBufferOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapTextBuffer(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // TextChildAnchorInstance is the instance type used by all types extending GtkTextChildAnchor. It is used internally by the bindings. Users should use the interface [TextChildAnchor] instead.
@@ -48935,6 +51587,32 @@ type TextChildAnchorOverrides[Instance TextChildAnchor] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplyTextChildAnchorOverrides[Instance TextChildAnchor](gclass unsafe.Pointer, overrides TextChildAnchorOverrides[Instance]) {
 	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
+}
+
+// RegisterTextChildAnchorSubClass is used to register a go subclass of GtkTextChildAnchor. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterTextChildAnchorSubClass[InstanceT TextChildAnchor](
+		name string,
+		classInit func(class *TextChildAnchorClass),
+		constructor func() InstanceT,
+		overrides TextChildAnchorOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeTextChildAnchor,
+		UnsafeTextChildAnchorClassFromGlibBorrow,
+		UnsafeApplyTextChildAnchorOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapTextChildAnchor(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // TextMarkInstance is the instance type used by all types extending GtkTextMark. It is used internally by the bindings. Users should use the interface [TextMark] instead.
@@ -49306,6 +51984,32 @@ func UnsafeApplyTextMarkOverrides[Instance TextMark](gclass unsafe.Pointer, over
 	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
 }
 
+// RegisterTextMarkSubClass is used to register a go subclass of GtkTextMark. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterTextMarkSubClass[InstanceT TextMark](
+		name string,
+		classInit func(class *TextMarkClass),
+		constructor func() InstanceT,
+		overrides TextMarkOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeTextMark,
+		UnsafeTextMarkClassFromGlibBorrow,
+		UnsafeApplyTextMarkOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapTextMark(obj)
+		},
+		interfaceInits...,
+	)
+}
+
 // TextTagInstance is the instance type used by all types extending GtkTextTag. It is used internally by the bindings. Users should use the interface [TextTag] instead.
 type TextTagInstance struct {
 	_ [0]func() // equal guard
@@ -49537,6 +52241,32 @@ type TextTagOverrides[Instance TextTag] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplyTextTagOverrides[Instance TextTag](gclass unsafe.Pointer, overrides TextTagOverrides[Instance]) {
 	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
+}
+
+// RegisterTextTagSubClass is used to register a go subclass of GtkTextTag. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterTextTagSubClass[InstanceT TextTag](
+		name string,
+		classInit func(class *TextTagClass),
+		constructor func() InstanceT,
+		overrides TextTagOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeTextTag,
+		UnsafeTextTagClassFromGlibBorrow,
+		UnsafeApplyTextTagOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapTextTag(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // TextTagTableInstance is the instance type used by all types extending GtkTextTagTable. It is used internally by the bindings. Users should use the interface [TextTagTable] instead.
@@ -50563,6 +53293,32 @@ func UnsafeApplyTreeListModelOverrides[Instance TreeListModel](gclass unsafe.Poi
 	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
 }
 
+// RegisterTreeListModelSubClass is used to register a go subclass of GtkTreeListModel. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterTreeListModelSubClass[InstanceT TreeListModel](
+		name string,
+		classInit func(class *TreeListModelClass),
+		constructor func() InstanceT,
+		overrides TreeListModelOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeTreeListModel,
+		UnsafeTreeListModelClassFromGlibBorrow,
+		UnsafeApplyTreeListModelOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapTreeListModel(obj)
+		},
+		interfaceInits...,
+	)
+}
+
 // TreeListRowInstance is the instance type used by all types extending GtkTreeListRow. It is used internally by the bindings. Users should use the interface [TreeListRow] instead.
 type TreeListRowInstance struct {
 	_ [0]func() // equal guard
@@ -50979,6 +53735,32 @@ func UnsafeApplyTreeListRowOverrides[Instance TreeListRow](gclass unsafe.Pointer
 	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
 }
 
+// RegisterTreeListRowSubClass is used to register a go subclass of GtkTreeListRow. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterTreeListRowSubClass[InstanceT TreeListRow](
+		name string,
+		classInit func(class *TreeListRowClass),
+		constructor func() InstanceT,
+		overrides TreeListRowOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeTreeListRow,
+		UnsafeTreeListRowClassFromGlibBorrow,
+		UnsafeApplyTreeListRowOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapTreeListRow(obj)
+		},
+		interfaceInits...,
+	)
+}
+
 // TreeListRowSorterInstance is the instance type used by all types extending GtkTreeListRowSorter. It is used internally by the bindings. Users should use the interface [TreeListRowSorter] instead.
 type TreeListRowSorterInstance struct {
 	_ [0]func() // equal guard
@@ -51157,6 +53939,32 @@ type TreeListRowSorterOverrides[Instance TreeListRowSorter] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplyTreeListRowSorterOverrides[Instance TreeListRowSorter](gclass unsafe.Pointer, overrides TreeListRowSorterOverrides[Instance]) {
 	UnsafeApplySorterOverrides(gclass, overrides.SorterOverrides)
+}
+
+// RegisterTreeListRowSorterSubClass is used to register a go subclass of GtkTreeListRowSorter. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterTreeListRowSorterSubClass[InstanceT TreeListRowSorter](
+		name string,
+		classInit func(class *TreeListRowSorterClass),
+		constructor func() InstanceT,
+		overrides TreeListRowSorterOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeTreeListRowSorter,
+		UnsafeTreeListRowSorterClassFromGlibBorrow,
+		UnsafeApplyTreeListRowSorterOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapTreeListRowSorter(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // UriLauncherInstance is the instance type used by all types extending GtkUriLauncher. It is used internally by the bindings. Users should use the interface [UriLauncher] instead.
@@ -51428,6 +54236,32 @@ type UriLauncherOverrides[Instance UriLauncher] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplyUriLauncherOverrides[Instance UriLauncher](gclass unsafe.Pointer, overrides UriLauncherOverrides[Instance]) {
 	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
+}
+
+// RegisterUriLauncherSubClass is used to register a go subclass of GtkUriLauncher. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterUriLauncherSubClass[InstanceT UriLauncher](
+		name string,
+		classInit func(class *UriLauncherClass),
+		constructor func() InstanceT,
+		overrides UriLauncherOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeUriLauncher,
+		UnsafeUriLauncherClassFromGlibBorrow,
+		UnsafeApplyUriLauncherOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapUriLauncher(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // WidgetInstance is the instance type used by all types extending GtkWidget. It is used internally by the bindings. Users should use the interface [Widget] instead.
@@ -58917,95 +61751,486 @@ func UnsafeApplyWidgetOverrides[Instance Widget](gclass unsafe.Pointer, override
 
 	if overrides.ComputeExpand != nil {
 		pclass.compute_expand = (*[0]byte)(C._gotk4_gtk4_Widget_compute_expand)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_Widget_compute_expand",
+			func(carg0 *C.GtkWidget, carg1 *C.gboolean, carg2 *C.gboolean) {
+				var widget   Instance // go GtkWidget subclass
+				var hexpandP *bool    // in, transfer: none, C Pointers: 1, Name: gboolean
+				var vexpandP *bool    // in, transfer: none, C Pointers: 1, Name: gboolean
+
+				widget = UnsafeWidgetFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				_ = hexpandP
+				_ = carg1
+				panic("unimplemented conversion of *bool (gboolean*)")
+				_ = vexpandP
+				_ = carg2
+				panic("unimplemented conversion of *bool (gboolean*)")
+
+				overrides.ComputeExpand(widget, hexpandP, vexpandP)
+			},
+		)
 	}
 
 	if overrides.Contains != nil {
 		pclass.contains = (*[0]byte)(C._gotk4_gtk4_Widget_contains)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_Widget_contains",
+			func(carg0 *C.GtkWidget, carg1 C.double, carg2 C.double) (cret C.gboolean) {
+				var widget Instance // go GtkWidget subclass
+				var x      float64  // in, none, casted, casted C.gdouble
+				var y      float64  // in, none, casted, casted C.gdouble
+				var goret  bool     // return
+
+				widget = UnsafeWidgetFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				x = float64(carg1)
+				y = float64(carg2)
+
+				goret = overrides.Contains(widget, x, y)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.CSSChanged != nil {
 		pclass.css_changed = (*[0]byte)(C._gotk4_gtk4_Widget_css_changed)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_Widget_css_changed",
+			func(carg0 *C.GtkWidget, carg1 *C.GtkCssStyleChange) {
+				var widget Instance        // go GtkWidget subclass
+				var change *CssStyleChange // in, none, converted
+
+				widget = UnsafeWidgetFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				change = UnsafeCssStyleChangeFromGlibNone(unsafe.Pointer(carg1))
+
+				overrides.CSSChanged(widget, change)
+			},
+		)
 	}
 
 	if overrides.DirectionChanged != nil {
 		pclass.direction_changed = (*[0]byte)(C._gotk4_gtk4_Widget_direction_changed)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_Widget_direction_changed",
+			func(carg0 *C.GtkWidget, carg1 C.GtkTextDirection) {
+				var widget            Instance      // go GtkWidget subclass
+				var previousDirection TextDirection // in, none, casted
+
+				widget = UnsafeWidgetFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				previousDirection = TextDirection(carg1)
+
+				overrides.DirectionChanged(widget, previousDirection)
+			},
+		)
 	}
 
 	if overrides.Focus != nil {
 		pclass.focus = (*[0]byte)(C._gotk4_gtk4_Widget_focus)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_Widget_focus",
+			func(carg0 *C.GtkWidget, carg1 C.GtkDirectionType) (cret C.gboolean) {
+				var widget    Instance      // go GtkWidget subclass
+				var direction DirectionType // in, none, casted
+				var goret     bool          // return
+
+				widget = UnsafeWidgetFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				direction = DirectionType(carg1)
+
+				goret = overrides.Focus(widget, direction)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetRequestMode != nil {
 		pclass.get_request_mode = (*[0]byte)(C._gotk4_gtk4_Widget_get_request_mode)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_Widget_get_request_mode",
+			func(carg0 *C.GtkWidget) (cret C.GtkSizeRequestMode) {
+				var widget Instance        // go GtkWidget subclass
+				var goret  SizeRequestMode // return, none, casted
+
+				widget = UnsafeWidgetFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GetRequestMode(widget)
+
+				cret = C.GtkSizeRequestMode(goret)
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GrabFocus != nil {
 		pclass.grab_focus = (*[0]byte)(C._gotk4_gtk4_Widget_grab_focus)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_Widget_grab_focus",
+			func(carg0 *C.GtkWidget) (cret C.gboolean) {
+				var widget Instance // go GtkWidget subclass
+				var goret  bool     // return
+
+				widget = UnsafeWidgetFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.GrabFocus(widget)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.KeynavFailed != nil {
 		pclass.keynav_failed = (*[0]byte)(C._gotk4_gtk4_Widget_keynav_failed)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_Widget_keynav_failed",
+			func(carg0 *C.GtkWidget, carg1 C.GtkDirectionType) (cret C.gboolean) {
+				var widget    Instance      // go GtkWidget subclass
+				var direction DirectionType // in, none, casted
+				var goret     bool          // return
+
+				widget = UnsafeWidgetFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				direction = DirectionType(carg1)
+
+				goret = overrides.KeynavFailed(widget, direction)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.Map != nil {
 		pclass.map = (*[0]byte)(C._gotk4_gtk4_Widget_map)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_Widget_map",
+			func(carg0 *C.GtkWidget) {
+				var widget Instance // go GtkWidget subclass
+
+				widget = UnsafeWidgetFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.Map(widget)
+			},
+		)
 	}
 
 	if overrides.Measure != nil {
 		pclass.measure = (*[0]byte)(C._gotk4_gtk4_Widget_measure)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_Widget_measure",
+			func(carg0 *C.GtkWidget, carg1 C.GtkOrientation, carg2 C.int, carg3 *C.int, carg4 *C.int, carg5 *C.int, carg6 *C.int) {
+				var widget          Instance    // go GtkWidget subclass
+				var orientation     Orientation // in, none, casted
+				var forSize         int         // in, none, casted, casted C.gint
+				var minimum         int         // out, full, casted, casted C.gint
+				var natural         int         // out, full, casted, casted C.gint
+				var minimumBaseline int         // out, full, casted, casted C.gint
+				var naturalBaseline int         // out, full, casted, casted C.gint
+
+				widget = UnsafeWidgetFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				orientation = Orientation(carg1)
+				forSize = int(carg2)
+
+				minimum, natural, minimumBaseline, naturalBaseline = overrides.Measure(widget, orientation, forSize)
+
+				*carg3 = C.int(minimum)
+				*carg4 = C.int(natural)
+				*carg5 = C.int(minimumBaseline)
+				*carg6 = C.int(naturalBaseline)
+			},
+		)
 	}
 
 	if overrides.MnemonicActivate != nil {
 		pclass.mnemonic_activate = (*[0]byte)(C._gotk4_gtk4_Widget_mnemonic_activate)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_Widget_mnemonic_activate",
+			func(carg0 *C.GtkWidget, carg1 C.gboolean) (cret C.gboolean) {
+				var widget       Instance // go GtkWidget subclass
+				var groupCycling bool     // in
+				var goret        bool     // return
+
+				widget = UnsafeWidgetFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg1 != 0 {
+					groupCycling = true
+				}
+
+				goret = overrides.MnemonicActivate(widget, groupCycling)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.MoveFocus != nil {
 		pclass.move_focus = (*[0]byte)(C._gotk4_gtk4_Widget_move_focus)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_Widget_move_focus",
+			func(carg0 *C.GtkWidget, carg1 C.GtkDirectionType) {
+				var widget    Instance      // go GtkWidget subclass
+				var direction DirectionType // in, none, casted
+
+				widget = UnsafeWidgetFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				direction = DirectionType(carg1)
+
+				overrides.MoveFocus(widget, direction)
+			},
+		)
 	}
 
 	if overrides.QueryTooltip != nil {
 		pclass.query_tooltip = (*[0]byte)(C._gotk4_gtk4_Widget_query_tooltip)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_Widget_query_tooltip",
+			func(carg0 *C.GtkWidget, carg1 C.int, carg2 C.int, carg3 C.gboolean, carg4 *C.GtkTooltip) (cret C.gboolean) {
+				var widget          Instance // go GtkWidget subclass
+				var x               int      // in, none, casted, casted C.gint
+				var y               int      // in, none, casted, casted C.gint
+				var keyboardTooltip bool     // in
+				var tooltip         Tooltip  // in, none, converted
+				var goret           bool     // return
+
+				widget = UnsafeWidgetFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				x = int(carg1)
+				y = int(carg2)
+				if carg3 != 0 {
+					keyboardTooltip = true
+				}
+				tooltip = UnsafeTooltipFromGlibNone(unsafe.Pointer(carg4))
+
+				goret = overrides.QueryTooltip(widget, x, y, keyboardTooltip, tooltip)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.Realize != nil {
 		pclass.realize = (*[0]byte)(C._gotk4_gtk4_Widget_realize)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_Widget_realize",
+			func(carg0 *C.GtkWidget) {
+				var widget Instance // go GtkWidget subclass
+
+				widget = UnsafeWidgetFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.Realize(widget)
+			},
+		)
 	}
 
 	if overrides.Root != nil {
 		pclass.root = (*[0]byte)(C._gotk4_gtk4_Widget_root)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_Widget_root",
+			func(carg0 *C.GtkWidget) {
+				var widget Instance // go GtkWidget subclass
+
+				widget = UnsafeWidgetFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.Root(widget)
+			},
+		)
 	}
 
 	if overrides.SetFocusChild != nil {
 		pclass.set_focus_child = (*[0]byte)(C._gotk4_gtk4_Widget_set_focus_child)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_Widget_set_focus_child",
+			func(carg0 *C.GtkWidget, carg1 *C.GtkWidget) {
+				var widget Instance // go GtkWidget subclass
+				var child  Widget   // in, none, converted, nullable
+
+				widget = UnsafeWidgetFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg1 != nil {
+					child = UnsafeWidgetFromGlibNone(unsafe.Pointer(carg1))
+				}
+
+				overrides.SetFocusChild(widget, child)
+			},
+		)
 	}
 
 	if overrides.SizeAllocate != nil {
 		pclass.size_allocate = (*[0]byte)(C._gotk4_gtk4_Widget_size_allocate)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_Widget_size_allocate",
+			func(carg0 *C.GtkWidget, carg1 C.int, carg2 C.int, carg3 C.int) {
+				var widget   Instance // go GtkWidget subclass
+				var width    int      // in, none, casted, casted C.gint
+				var height   int      // in, none, casted, casted C.gint
+				var baseline int      // in, none, casted, casted C.gint
+
+				widget = UnsafeWidgetFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				width = int(carg1)
+				height = int(carg2)
+				baseline = int(carg3)
+
+				overrides.SizeAllocate(widget, width, height, baseline)
+			},
+		)
 	}
 
 	if overrides.Snapshot != nil {
 		pclass.snapshot = (*[0]byte)(C._gotk4_gtk4_Widget_snapshot)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_Widget_snapshot",
+			func(carg0 *C.GtkWidget, carg1 *C.GtkSnapshot) {
+				var widget   Instance // go GtkWidget subclass
+				var snapshot Snapshot // in, none, converted, casted *C.Snapshot
+
+				widget = UnsafeWidgetFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				snapshot = UnsafeSnapshotFromGlibNone(unsafe.Pointer(carg1))
+
+				overrides.Snapshot(widget, snapshot)
+			},
+		)
 	}
 
 	if overrides.StateFlagsChanged != nil {
 		pclass.state_flags_changed = (*[0]byte)(C._gotk4_gtk4_Widget_state_flags_changed)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_Widget_state_flags_changed",
+			func(carg0 *C.GtkWidget, carg1 C.GtkStateFlags) {
+				var widget             Instance   // go GtkWidget subclass
+				var previousStateFlags StateFlags // in, none, casted
+
+				widget = UnsafeWidgetFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				previousStateFlags = StateFlags(carg1)
+
+				overrides.StateFlagsChanged(widget, previousStateFlags)
+			},
+		)
 	}
 
 	if overrides.SystemSettingChanged != nil {
 		pclass.system_setting_changed = (*[0]byte)(C._gotk4_gtk4_Widget_system_setting_changed)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_Widget_system_setting_changed",
+			func(carg0 *C.GtkWidget, carg1 C.GtkSystemSetting) {
+				var widget   Instance      // go GtkWidget subclass
+				var settings SystemSetting // in, none, casted
+
+				widget = UnsafeWidgetFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				settings = SystemSetting(carg1)
+
+				overrides.SystemSettingChanged(widget, settings)
+			},
+		)
 	}
 
 	if overrides.Unmap != nil {
 		pclass.unmap = (*[0]byte)(C._gotk4_gtk4_Widget_unmap)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_Widget_unmap",
+			func(carg0 *C.GtkWidget) {
+				var widget Instance // go GtkWidget subclass
+
+				widget = UnsafeWidgetFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.Unmap(widget)
+			},
+		)
 	}
 
 	if overrides.Unrealize != nil {
 		pclass.unrealize = (*[0]byte)(C._gotk4_gtk4_Widget_unrealize)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_Widget_unrealize",
+			func(carg0 *C.GtkWidget) {
+				var widget Instance // go GtkWidget subclass
+
+				widget = UnsafeWidgetFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.Unrealize(widget)
+			},
+		)
 	}
 
 	if overrides.Unroot != nil {
 		pclass.unroot = (*[0]byte)(C._gotk4_gtk4_Widget_unroot)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_Widget_unroot",
+			func(carg0 *C.GtkWidget) {
+				var widget Instance // go GtkWidget subclass
+
+				widget = UnsafeWidgetFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.Unroot(widget)
+			},
+		)
 	}
+}
+
+// RegisterWidgetSubClass is used to register a go subclass of GtkWidget. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterWidgetSubClass[InstanceT Widget](
+		name string,
+		classInit func(class *WidgetClass),
+		constructor func() InstanceT,
+		overrides WidgetOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeWidget,
+		UnsafeWidgetClassFromGlibBorrow,
+		UnsafeApplyWidgetOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapWidget(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // WidgetPaintableInstance is the instance type used by all types extending GtkWidgetPaintable. It is used internally by the bindings. Users should use the interface [WidgetPaintable] instead.
@@ -59187,6 +62412,32 @@ type WidgetPaintableOverrides[Instance WidgetPaintable] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplyWidgetPaintableOverrides[Instance WidgetPaintable](gclass unsafe.Pointer, overrides WidgetPaintableOverrides[Instance]) {
 	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
+}
+
+// RegisterWidgetPaintableSubClass is used to register a go subclass of GtkWidgetPaintable. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterWidgetPaintableSubClass[InstanceT WidgetPaintable](
+		name string,
+		classInit func(class *WidgetPaintableClass),
+		constructor func() InstanceT,
+		overrides WidgetPaintableOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeWidgetPaintable,
+		UnsafeWidgetPaintableClassFromGlibBorrow,
+		UnsafeApplyWidgetPaintableOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapWidgetPaintable(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // WindowInstance is the instance type used by all types extending GtkWindow. It is used internally by the bindings. Users should use the interface [Window] instead.
@@ -61733,23 +64984,122 @@ func UnsafeApplyWindowOverrides[Instance Window](gclass unsafe.Pointer, override
 
 	if overrides.ActivateDefault != nil {
 		pclass.activate_default = (*[0]byte)(C._gotk4_gtk4_Window_activate_default)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_Window_activate_default",
+			func(carg0 *C.GtkWindow) {
+				var window Instance // go GtkWindow subclass
+
+				window = UnsafeWindowFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.ActivateDefault(window)
+			},
+		)
 	}
 
 	if overrides.ActivateFocus != nil {
 		pclass.activate_focus = (*[0]byte)(C._gotk4_gtk4_Window_activate_focus)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_Window_activate_focus",
+			func(carg0 *C.GtkWindow) {
+				var window Instance // go GtkWindow subclass
+
+				window = UnsafeWindowFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.ActivateFocus(window)
+			},
+		)
 	}
 
 	if overrides.CloseRequest != nil {
 		pclass.close_request = (*[0]byte)(C._gotk4_gtk4_Window_close_request)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_Window_close_request",
+			func(carg0 *C.GtkWindow) (cret C.gboolean) {
+				var window Instance // go GtkWindow subclass
+				var goret  bool     // return
+
+				window = UnsafeWindowFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.CloseRequest(window)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.EnableDebugging != nil {
 		pclass.enable_debugging = (*[0]byte)(C._gotk4_gtk4_Window_enable_debugging)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_Window_enable_debugging",
+			func(carg0 *C.GtkWindow, carg1 C.gboolean) (cret C.gboolean) {
+				var window Instance // go GtkWindow subclass
+				var toggle bool     // in
+				var goret  bool     // return
+
+				window = UnsafeWindowFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				if carg1 != 0 {
+					toggle = true
+				}
+
+				goret = overrides.EnableDebugging(window, toggle)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.KeysChanged != nil {
 		pclass.keys_changed = (*[0]byte)(C._gotk4_gtk4_Window_keys_changed)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_Window_keys_changed",
+			func(carg0 *C.GtkWindow) {
+				var window Instance // go GtkWindow subclass
+
+				window = UnsafeWindowFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.KeysChanged(window)
+			},
+		)
 	}
+}
+
+// RegisterWindowSubClass is used to register a go subclass of GtkWindow. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterWindowSubClass[InstanceT Window](
+		name string,
+		classInit func(class *WindowClass),
+		constructor func() InstanceT,
+		overrides WindowOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeWindow,
+		UnsafeWindowClassFromGlibBorrow,
+		UnsafeApplyWindowOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapWindow(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // WindowControlsInstance is the instance type used by all types extending GtkWindowControls. It is used internally by the bindings. Users should use the interface [WindowControls] instead.
@@ -62083,6 +65433,32 @@ func UnsafeApplyWindowControlsOverrides[Instance WindowControls](gclass unsafe.P
 	UnsafeApplyWidgetOverrides(gclass, overrides.WidgetOverrides)
 }
 
+// RegisterWindowControlsSubClass is used to register a go subclass of GtkWindowControls. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterWindowControlsSubClass[InstanceT WindowControls](
+		name string,
+		classInit func(class *WindowControlsClass),
+		constructor func() InstanceT,
+		overrides WindowControlsOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeWindowControls,
+		UnsafeWindowControlsClassFromGlibBorrow,
+		UnsafeApplyWindowControlsOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapWindowControls(obj)
+		},
+		interfaceInits...,
+	)
+}
+
 // WindowGroupInstance is the instance type used by all types extending GtkWindowGroup. It is used internally by the bindings. Users should use the interface [WindowGroup] instead.
 type WindowGroupInstance struct {
 	_ [0]func() // equal guard
@@ -62277,6 +65653,32 @@ func UnsafeApplyWindowGroupOverrides[Instance WindowGroup](gclass unsafe.Pointer
 	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
 }
 
+// RegisterWindowGroupSubClass is used to register a go subclass of GtkWindowGroup. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterWindowGroupSubClass[InstanceT WindowGroup](
+		name string,
+		classInit func(class *WindowGroupClass),
+		constructor func() InstanceT,
+		overrides WindowGroupOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeWindowGroup,
+		UnsafeWindowGroupClassFromGlibBorrow,
+		UnsafeApplyWindowGroupOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapWindowGroup(obj)
+		},
+		interfaceInits...,
+	)
+}
+
 // WindowHandleInstance is the instance type used by all types extending GtkWindowHandle. It is used internally by the bindings. Users should use the interface [WindowHandle] instead.
 type WindowHandleInstance struct {
 	_ [0]func() // equal guard
@@ -62438,6 +65840,32 @@ type WindowHandleOverrides[Instance WindowHandle] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplyWindowHandleOverrides[Instance WindowHandle](gclass unsafe.Pointer, overrides WindowHandleOverrides[Instance]) {
 	UnsafeApplyWidgetOverrides(gclass, overrides.WidgetOverrides)
+}
+
+// RegisterWindowHandleSubClass is used to register a go subclass of GtkWindowHandle. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterWindowHandleSubClass[InstanceT WindowHandle](
+		name string,
+		classInit func(class *WindowHandleClass),
+		constructor func() InstanceT,
+		overrides WindowHandleOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeWindowHandle,
+		UnsafeWindowHandleClassFromGlibBorrow,
+		UnsafeApplyWindowHandleOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapWindowHandle(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // AboutDialogInstance is the instance type used by all types extending GtkAboutDialog. It is used internally by the bindings. Users should use the interface [AboutDialog] instead.
@@ -64787,6 +68215,32 @@ func UnsafeApplyApplicationWindowOverrides[Instance ApplicationWindow](gclass un
 	UnsafeApplyWindowOverrides(gclass, overrides.WindowOverrides)
 }
 
+// RegisterApplicationWindowSubClass is used to register a go subclass of GtkApplicationWindow. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterApplicationWindowSubClass[InstanceT ApplicationWindow](
+		name string,
+		classInit func(class *ApplicationWindowClass),
+		constructor func() InstanceT,
+		overrides ApplicationWindowOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeApplicationWindow,
+		UnsafeApplicationWindowClassFromGlibBorrow,
+		UnsafeApplyApplicationWindowOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapApplicationWindow(obj)
+		},
+		interfaceInits...,
+	)
+}
+
 // AspectFrameInstance is the instance type used by all types extending GtkAspectFrame. It is used internally by the bindings. Users should use the interface [AspectFrame] instead.
 type AspectFrameInstance struct {
 	_ [0]func() // equal guard
@@ -65320,6 +68774,32 @@ func UnsafeApplyBinLayoutOverrides[Instance BinLayout](gclass unsafe.Pointer, ov
 	UnsafeApplyLayoutManagerOverrides(gclass, overrides.LayoutManagerOverrides)
 }
 
+// RegisterBinLayoutSubClass is used to register a go subclass of GtkBinLayout. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterBinLayoutSubClass[InstanceT BinLayout](
+		name string,
+		classInit func(class *BinLayoutClass),
+		constructor func() InstanceT,
+		overrides BinLayoutOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeBinLayout,
+		UnsafeBinLayoutClassFromGlibBorrow,
+		UnsafeApplyBinLayoutOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapBinLayout(obj)
+		},
+		interfaceInits...,
+	)
+}
+
 // BoolFilterInstance is the instance type used by all types extending GtkBoolFilter. It is used internally by the bindings. Users should use the interface [BoolFilter] instead.
 type BoolFilterInstance struct {
 	_ [0]func() // equal guard
@@ -65448,6 +68928,32 @@ type BoolFilterOverrides[Instance BoolFilter] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplyBoolFilterOverrides[Instance BoolFilter](gclass unsafe.Pointer, overrides BoolFilterOverrides[Instance]) {
 	UnsafeApplyFilterOverrides(gclass, overrides.FilterOverrides)
+}
+
+// RegisterBoolFilterSubClass is used to register a go subclass of GtkBoolFilter. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterBoolFilterSubClass[InstanceT BoolFilter](
+		name string,
+		classInit func(class *BoolFilterClass),
+		constructor func() InstanceT,
+		overrides BoolFilterOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeBoolFilter,
+		UnsafeBoolFilterClassFromGlibBorrow,
+		UnsafeApplyBoolFilterOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapBoolFilter(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // BoxInstance is the instance type used by all types extending GtkBox. It is used internally by the bindings. Users should use the interface [Box] instead.
@@ -66031,6 +69537,32 @@ func UnsafeApplyBoxOverrides[Instance Box](gclass unsafe.Pointer, overrides BoxO
 	UnsafeApplyWidgetOverrides(gclass, overrides.WidgetOverrides)
 }
 
+// RegisterBoxSubClass is used to register a go subclass of GtkBox. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterBoxSubClass[InstanceT Box](
+		name string,
+		classInit func(class *BoxClass),
+		constructor func() InstanceT,
+		overrides BoxOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeBox,
+		UnsafeBoxClassFromGlibBorrow,
+		UnsafeApplyBoxOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapBox(obj)
+		},
+		interfaceInits...,
+	)
+}
+
 // BoxLayoutInstance is the instance type used by all types extending GtkBoxLayout. It is used internally by the bindings. Users should use the interface [BoxLayout] instead.
 type BoxLayoutInstance struct {
 	_ [0]func() // equal guard
@@ -66394,6 +69926,32 @@ type BoxLayoutOverrides[Instance BoxLayout] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplyBoxLayoutOverrides[Instance BoxLayout](gclass unsafe.Pointer, overrides BoxLayoutOverrides[Instance]) {
 	UnsafeApplyLayoutManagerOverrides(gclass, overrides.LayoutManagerOverrides)
+}
+
+// RegisterBoxLayoutSubClass is used to register a go subclass of GtkBoxLayout. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterBoxLayoutSubClass[InstanceT BoxLayout](
+		name string,
+		classInit func(class *BoxLayoutClass),
+		constructor func() InstanceT,
+		overrides BoxLayoutOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeBoxLayout,
+		UnsafeBoxLayoutClassFromGlibBorrow,
+		UnsafeApplyBoxLayoutOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapBoxLayout(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // BuilderListItemFactoryInstance is the instance type used by all types extending GtkBuilderListItemFactory. It is used internally by the bindings. Users should use the interface [BuilderListItemFactory] instead.
@@ -67359,11 +70917,59 @@ func UnsafeApplyButtonOverrides[Instance Button](gclass unsafe.Pointer, override
 
 	if overrides.Activate != nil {
 		pclass.activate = (*[0]byte)(C._gotk4_gtk4_Button_activate)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_Button_activate",
+			func(carg0 *C.GtkButton) {
+				var button Instance // go GtkButton subclass
+
+				button = UnsafeButtonFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.Activate(button)
+			},
+		)
 	}
 
 	if overrides.Clicked != nil {
 		pclass.clicked = (*[0]byte)(C._gotk4_gtk4_Button_clicked)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_Button_clicked",
+			func(carg0 *C.GtkButton) {
+				var button Instance // go GtkButton subclass
+
+				button = UnsafeButtonFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.Clicked(button)
+			},
+		)
 	}
+}
+
+// RegisterButtonSubClass is used to register a go subclass of GtkButton. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterButtonSubClass[InstanceT Button](
+		name string,
+		classInit func(class *ButtonClass),
+		constructor func() InstanceT,
+		overrides ButtonOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeButton,
+		UnsafeButtonClassFromGlibBorrow,
+		UnsafeApplyButtonOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapButton(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // CalendarInstance is the instance type used by all types extending GtkCalendar. It is used internally by the bindings. Users should use the interface [Calendar] instead.
@@ -69158,6 +72764,32 @@ func UnsafeApplyCenterLayoutOverrides[Instance CenterLayout](gclass unsafe.Point
 	UnsafeApplyLayoutManagerOverrides(gclass, overrides.LayoutManagerOverrides)
 }
 
+// RegisterCenterLayoutSubClass is used to register a go subclass of GtkCenterLayout. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterCenterLayoutSubClass[InstanceT CenterLayout](
+		name string,
+		classInit func(class *CenterLayoutClass),
+		constructor func() InstanceT,
+		overrides CenterLayoutOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeCenterLayout,
+		UnsafeCenterLayoutClassFromGlibBorrow,
+		UnsafeApplyCenterLayoutOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapCenterLayout(obj)
+		},
+		interfaceInits...,
+	)
+}
+
 // CheckButtonInstance is the instance type used by all types extending GtkCheckButton. It is used internally by the bindings. Users should use the interface [CheckButton] instead.
 type CheckButtonInstance struct {
 	_ [0]func() // equal guard
@@ -69845,11 +73477,59 @@ func UnsafeApplyCheckButtonOverrides[Instance CheckButton](gclass unsafe.Pointer
 
 	if overrides.Activate != nil {
 		pclass.activate = (*[0]byte)(C._gotk4_gtk4_CheckButton_activate)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_CheckButton_activate",
+			func(carg0 *C.GtkCheckButton) {
+				var checkButton Instance // go GtkCheckButton subclass
+
+				checkButton = UnsafeCheckButtonFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.Activate(checkButton)
+			},
+		)
 	}
 
 	if overrides.Toggled != nil {
 		pclass.toggled = (*[0]byte)(C._gotk4_gtk4_CheckButton_toggled)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_CheckButton_toggled",
+			func(carg0 *C.GtkCheckButton) {
+				var checkButton Instance // go GtkCheckButton subclass
+
+				checkButton = UnsafeCheckButtonFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.Toggled(checkButton)
+			},
+		)
 	}
+}
+
+// RegisterCheckButtonSubClass is used to register a go subclass of GtkCheckButton. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterCheckButtonSubClass[InstanceT CheckButton](
+		name string,
+		classInit func(class *CheckButtonClass),
+		constructor func() InstanceT,
+		overrides CheckButtonOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeCheckButton,
+		UnsafeCheckButtonClassFromGlibBorrow,
+		UnsafeApplyCheckButtonOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapCheckButton(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // ColorDialogButtonInstance is the instance type used by all types extending GtkColorDialogButton. It is used internally by the bindings. Users should use the interface [ColorDialogButton] instead.
@@ -70132,6 +73812,32 @@ type ColorDialogButtonOverrides[Instance ColorDialogButton] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplyColorDialogButtonOverrides[Instance ColorDialogButton](gclass unsafe.Pointer, overrides ColorDialogButtonOverrides[Instance]) {
 	UnsafeApplyWidgetOverrides(gclass, overrides.WidgetOverrides)
+}
+
+// RegisterColorDialogButtonSubClass is used to register a go subclass of GtkColorDialogButton. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterColorDialogButtonSubClass[InstanceT ColorDialogButton](
+		name string,
+		classInit func(class *ColorDialogButtonClass),
+		constructor func() InstanceT,
+		overrides ColorDialogButtonOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeColorDialogButton,
+		UnsafeColorDialogButtonClassFromGlibBorrow,
+		UnsafeApplyColorDialogButtonOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapColorDialogButton(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // ColumnViewInstance is the instance type used by all types extending GtkColumnView. It is used internally by the bindings. Users should use the interface [ColumnView] instead.
@@ -71810,6 +75516,32 @@ func UnsafeApplyColumnViewSorterOverrides[Instance ColumnViewSorter](gclass unsa
 	UnsafeApplySorterOverrides(gclass, overrides.SorterOverrides)
 }
 
+// RegisterColumnViewSorterSubClass is used to register a go subclass of GtkColumnViewSorter. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterColumnViewSorterSubClass[InstanceT ColumnViewSorter](
+		name string,
+		classInit func(class *ColumnViewSorterClass),
+		constructor func() InstanceT,
+		overrides ColumnViewSorterOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeColumnViewSorter,
+		UnsafeColumnViewSorterClassFromGlibBorrow,
+		UnsafeApplyColumnViewSorterOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapColumnViewSorter(obj)
+		},
+		interfaceInits...,
+	)
+}
+
 // ConstraintLayoutInstance is the instance type used by all types extending GtkConstraintLayout. It is used internally by the bindings. Users should use the interface [ConstraintLayout] instead.
 type ConstraintLayoutInstance struct {
 	_ [0]func() // equal guard
@@ -72322,6 +76054,32 @@ func UnsafeApplyConstraintLayoutOverrides[Instance ConstraintLayout](gclass unsa
 	UnsafeApplyLayoutManagerOverrides(gclass, overrides.LayoutManagerOverrides)
 }
 
+// RegisterConstraintLayoutSubClass is used to register a go subclass of GtkConstraintLayout. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterConstraintLayoutSubClass[InstanceT ConstraintLayout](
+		name string,
+		classInit func(class *ConstraintLayoutClass),
+		constructor func() InstanceT,
+		overrides ConstraintLayoutOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeConstraintLayout,
+		UnsafeConstraintLayoutClassFromGlibBorrow,
+		UnsafeApplyConstraintLayoutOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapConstraintLayout(obj)
+		},
+		interfaceInits...,
+	)
+}
+
 // ConstraintLayoutChildInstance is the instance type used by all types extending GtkConstraintLayoutChild. It is used internally by the bindings. Users should use the interface [ConstraintLayoutChild] instead.
 type ConstraintLayoutChildInstance struct {
 	_ [0]func() // equal guard
@@ -72388,6 +76146,32 @@ func UnsafeApplyConstraintLayoutChildOverrides[Instance ConstraintLayoutChild](g
 	UnsafeApplyLayoutChildOverrides(gclass, overrides.LayoutChildOverrides)
 }
 
+// RegisterConstraintLayoutChildSubClass is used to register a go subclass of GtkConstraintLayoutChild. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterConstraintLayoutChildSubClass[InstanceT ConstraintLayoutChild](
+		name string,
+		classInit func(class *ConstraintLayoutChildClass),
+		constructor func() InstanceT,
+		overrides ConstraintLayoutChildOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeConstraintLayoutChild,
+		UnsafeConstraintLayoutChildClassFromGlibBorrow,
+		UnsafeApplyConstraintLayoutChildOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapConstraintLayoutChild(obj)
+		},
+		interfaceInits...,
+	)
+}
+
 // CustomFilterInstance is the instance type used by all types extending GtkCustomFilter. It is used internally by the bindings. Users should use the interface [CustomFilter] instead.
 type CustomFilterInstance struct {
 	_ [0]func() // equal guard
@@ -72452,6 +76236,32 @@ type CustomFilterOverrides[Instance CustomFilter] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplyCustomFilterOverrides[Instance CustomFilter](gclass unsafe.Pointer, overrides CustomFilterOverrides[Instance]) {
 	UnsafeApplyFilterOverrides(gclass, overrides.FilterOverrides)
+}
+
+// RegisterCustomFilterSubClass is used to register a go subclass of GtkCustomFilter. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterCustomFilterSubClass[InstanceT CustomFilter](
+		name string,
+		classInit func(class *CustomFilterClass),
+		constructor func() InstanceT,
+		overrides CustomFilterOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeCustomFilter,
+		UnsafeCustomFilterClassFromGlibBorrow,
+		UnsafeApplyCustomFilterOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapCustomFilter(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // CustomLayoutInstance is the instance type used by all types extending GtkCustomLayout. It is used internally by the bindings. Users should use the interface [CustomLayout] instead.
@@ -72523,6 +76333,32 @@ type CustomLayoutOverrides[Instance CustomLayout] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplyCustomLayoutOverrides[Instance CustomLayout](gclass unsafe.Pointer, overrides CustomLayoutOverrides[Instance]) {
 	UnsafeApplyLayoutManagerOverrides(gclass, overrides.LayoutManagerOverrides)
+}
+
+// RegisterCustomLayoutSubClass is used to register a go subclass of GtkCustomLayout. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterCustomLayoutSubClass[InstanceT CustomLayout](
+		name string,
+		classInit func(class *CustomLayoutClass),
+		constructor func() InstanceT,
+		overrides CustomLayoutOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeCustomLayout,
+		UnsafeCustomLayoutClassFromGlibBorrow,
+		UnsafeApplyCustomLayoutOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapCustomLayout(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // CustomSorterInstance is the instance type used by all types extending GtkCustomSorter. It is used internally by the bindings. Users should use the interface [CustomSorter] instead.
@@ -72676,6 +76512,32 @@ type CustomSorterOverrides[Instance CustomSorter] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplyCustomSorterOverrides[Instance CustomSorter](gclass unsafe.Pointer, overrides CustomSorterOverrides[Instance]) {
 	UnsafeApplySorterOverrides(gclass, overrides.SorterOverrides)
+}
+
+// RegisterCustomSorterSubClass is used to register a go subclass of GtkCustomSorter. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterCustomSorterSubClass[InstanceT CustomSorter](
+		name string,
+		classInit func(class *CustomSorterClass),
+		constructor func() InstanceT,
+		overrides CustomSorterOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeCustomSorter,
+		UnsafeCustomSorterClassFromGlibBorrow,
+		UnsafeApplyCustomSorterOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapCustomSorter(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // DragIconInstance is the instance type used by all types extending GtkDragIcon. It is used internally by the bindings. Users should use the interface [DragIcon] instead.
@@ -72933,6 +76795,32 @@ type DragIconOverrides[Instance DragIcon] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplyDragIconOverrides[Instance DragIcon](gclass unsafe.Pointer, overrides DragIconOverrides[Instance]) {
 	UnsafeApplyWidgetOverrides(gclass, overrides.WidgetOverrides)
+}
+
+// RegisterDragIconSubClass is used to register a go subclass of GtkDragIcon. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterDragIconSubClass[InstanceT DragIcon](
+		name string,
+		classInit func(class *DragIconClass),
+		constructor func() InstanceT,
+		overrides DragIconOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeDragIcon,
+		UnsafeDragIconClassFromGlibBorrow,
+		UnsafeApplyDragIconOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapDragIcon(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // DragSourceInstance is the instance type used by all types extending GtkDragSource. It is used internally by the bindings. Users should use the interface [DragSource] instead.
@@ -73775,7 +77663,48 @@ func UnsafeApplyDrawingAreaOverrides[Instance DrawingArea](gclass unsafe.Pointer
 
 	if overrides.Resize != nil {
 		pclass.resize = (*[0]byte)(C._gotk4_gtk4_DrawingArea_resize)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_DrawingArea_resize",
+			func(carg0 *C.GtkDrawingArea, carg1 C.int, carg2 C.int) {
+				var area   Instance // go GtkDrawingArea subclass
+				var width  int      // in, none, casted, casted C.gint
+				var height int      // in, none, casted, casted C.gint
+
+				area = UnsafeDrawingAreaFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				width = int(carg1)
+				height = int(carg2)
+
+				overrides.Resize(area, width, height)
+			},
+		)
 	}
+}
+
+// RegisterDrawingAreaSubClass is used to register a go subclass of GtkDrawingArea. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterDrawingAreaSubClass[InstanceT DrawingArea](
+		name string,
+		classInit func(class *DrawingAreaClass),
+		constructor func() InstanceT,
+		overrides DrawingAreaOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeDrawingArea,
+		UnsafeDrawingAreaClassFromGlibBorrow,
+		UnsafeApplyDrawingAreaOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapDrawingArea(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // DropControllerMotionInstance is the instance type used by all types extending GtkDropControllerMotion. It is used internally by the bindings. Users should use the interface [DropControllerMotion] instead.
@@ -74685,6 +78614,32 @@ type DropDownOverrides[Instance DropDown] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplyDropDownOverrides[Instance DropDown](gclass unsafe.Pointer, overrides DropDownOverrides[Instance]) {
 	UnsafeApplyWidgetOverrides(gclass, overrides.WidgetOverrides)
+}
+
+// RegisterDropDownSubClass is used to register a go subclass of GtkDropDown. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterDropDownSubClass[InstanceT DropDown](
+		name string,
+		classInit func(class *DropDownClass),
+		constructor func() InstanceT,
+		overrides DropDownOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeDropDown,
+		UnsafeDropDownClassFromGlibBorrow,
+		UnsafeApplyDropDownOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapDropDown(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // DropTargetInstance is the instance type used by all types extending GtkDropTarget. It is used internally by the bindings. Users should use the interface [DropTarget] instead.
@@ -75927,6 +79882,32 @@ type EditableLabelOverrides[Instance EditableLabel] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplyEditableLabelOverrides[Instance EditableLabel](gclass unsafe.Pointer, overrides EditableLabelOverrides[Instance]) {
 	UnsafeApplyWidgetOverrides(gclass, overrides.WidgetOverrides)
+}
+
+// RegisterEditableLabelSubClass is used to register a go subclass of GtkEditableLabel. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterEditableLabelSubClass[InstanceT EditableLabel](
+		name string,
+		classInit func(class *EditableLabelClass),
+		constructor func() InstanceT,
+		overrides EditableLabelOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeEditableLabel,
+		UnsafeEditableLabelClassFromGlibBorrow,
+		UnsafeApplyEditableLabelOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapEditableLabel(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // EntryInstance is the instance type used by all types extending GtkEntry. It is used internally by the bindings. Users should use the interface [Entry] instead.
@@ -78351,7 +82332,44 @@ func UnsafeApplyEntryOverrides[Instance Entry](gclass unsafe.Pointer, overrides 
 
 	if overrides.Activate != nil {
 		pclass.activate = (*[0]byte)(C._gotk4_gtk4_Entry_activate)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_Entry_activate",
+			func(carg0 *C.GtkEntry) {
+				var entry Instance // go GtkEntry subclass
+
+				entry = UnsafeEntryFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.Activate(entry)
+			},
+		)
 	}
+}
+
+// RegisterEntrySubClass is used to register a go subclass of GtkEntry. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterEntrySubClass[InstanceT Entry](
+		name string,
+		classInit func(class *EntryClass),
+		constructor func() InstanceT,
+		overrides EntryOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeEntry,
+		UnsafeEntryClassFromGlibBorrow,
+		UnsafeApplyEntryOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapEntry(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // EveryFilterInstance is the instance type used by all types extending GtkEveryFilter. It is used internally by the bindings. Users should use the interface [EveryFilter] instead.
@@ -79924,6 +83942,32 @@ func UnsafeApplyFixedOverrides[Instance Fixed](gclass unsafe.Pointer, overrides 
 	UnsafeApplyWidgetOverrides(gclass, overrides.WidgetOverrides)
 }
 
+// RegisterFixedSubClass is used to register a go subclass of GtkFixed. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterFixedSubClass[InstanceT Fixed](
+		name string,
+		classInit func(class *FixedClass),
+		constructor func() InstanceT,
+		overrides FixedOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeFixed,
+		UnsafeFixedClassFromGlibBorrow,
+		UnsafeApplyFixedOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapFixed(obj)
+		},
+		interfaceInits...,
+	)
+}
+
 // FixedLayoutInstance is the instance type used by all types extending GtkFixedLayout. It is used internally by the bindings. Users should use the interface [FixedLayout] instead.
 type FixedLayoutInstance struct {
 	_ [0]func() // equal guard
@@ -80037,6 +84081,32 @@ type FixedLayoutOverrides[Instance FixedLayout] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplyFixedLayoutOverrides[Instance FixedLayout](gclass unsafe.Pointer, overrides FixedLayoutOverrides[Instance]) {
 	UnsafeApplyLayoutManagerOverrides(gclass, overrides.LayoutManagerOverrides)
+}
+
+// RegisterFixedLayoutSubClass is used to register a go subclass of GtkFixedLayout. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterFixedLayoutSubClass[InstanceT FixedLayout](
+		name string,
+		classInit func(class *FixedLayoutClass),
+		constructor func() InstanceT,
+		overrides FixedLayoutOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeFixedLayout,
+		UnsafeFixedLayoutClassFromGlibBorrow,
+		UnsafeApplyFixedLayoutOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapFixedLayout(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // FixedLayoutChildInstance is the instance type used by all types extending GtkFixedLayoutChild. It is used internally by the bindings. Users should use the interface [FixedLayoutChild] instead.
@@ -80164,6 +84234,32 @@ type FixedLayoutChildOverrides[Instance FixedLayoutChild] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplyFixedLayoutChildOverrides[Instance FixedLayoutChild](gclass unsafe.Pointer, overrides FixedLayoutChildOverrides[Instance]) {
 	UnsafeApplyLayoutChildOverrides(gclass, overrides.LayoutChildOverrides)
+}
+
+// RegisterFixedLayoutChildSubClass is used to register a go subclass of GtkFixedLayoutChild. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterFixedLayoutChildSubClass[InstanceT FixedLayoutChild](
+		name string,
+		classInit func(class *FixedLayoutChildClass),
+		constructor func() InstanceT,
+		overrides FixedLayoutChildOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeFixedLayoutChild,
+		UnsafeFixedLayoutChildClassFromGlibBorrow,
+		UnsafeApplyFixedLayoutChildOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapFixedLayoutChild(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // FlowBoxInstance is the instance type used by all types extending GtkFlowBox. It is used internally by the bindings. Users should use the interface [FlowBox] instead.
@@ -81902,7 +85998,44 @@ func UnsafeApplyFlowBoxChildOverrides[Instance FlowBoxChild](gclass unsafe.Point
 
 	if overrides.Activate != nil {
 		pclass.activate = (*[0]byte)(C._gotk4_gtk4_FlowBoxChild_activate)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_FlowBoxChild_activate",
+			func(carg0 *C.GtkFlowBoxChild) {
+				var child Instance // go GtkFlowBoxChild subclass
+
+				child = UnsafeFlowBoxChildFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.Activate(child)
+			},
+		)
 	}
+}
+
+// RegisterFlowBoxChildSubClass is used to register a go subclass of GtkFlowBoxChild. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterFlowBoxChildSubClass[InstanceT FlowBoxChild](
+		name string,
+		classInit func(class *FlowBoxChildClass),
+		constructor func() InstanceT,
+		overrides FlowBoxChildOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeFlowBoxChild,
+		UnsafeFlowBoxChildClassFromGlibBorrow,
+		UnsafeApplyFlowBoxChildOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapFlowBoxChild(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // FontDialogButtonInstance is the instance type used by all types extending GtkFontDialogButton. It is used internally by the bindings. Users should use the interface [FontDialogButton] instead.
@@ -82523,6 +86656,32 @@ func UnsafeApplyFontDialogButtonOverrides[Instance FontDialogButton](gclass unsa
 	UnsafeApplyWidgetOverrides(gclass, overrides.WidgetOverrides)
 }
 
+// RegisterFontDialogButtonSubClass is used to register a go subclass of GtkFontDialogButton. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterFontDialogButtonSubClass[InstanceT FontDialogButton](
+		name string,
+		classInit func(class *FontDialogButtonClass),
+		constructor func() InstanceT,
+		overrides FontDialogButtonOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeFontDialogButton,
+		UnsafeFontDialogButtonClassFromGlibBorrow,
+		UnsafeApplyFontDialogButtonOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapFontDialogButton(obj)
+		},
+		interfaceInits...,
+	)
+}
+
 // FrameInstance is the instance type used by all types extending GtkFrame. It is used internally by the bindings. Users should use the interface [Frame] instead.
 type FrameInstance struct {
 	_ [0]func() // equal guard
@@ -82960,7 +87119,48 @@ func UnsafeApplyFrameOverrides[Instance Frame](gclass unsafe.Pointer, overrides 
 
 	if overrides.ComputeChildAllocation != nil {
 		pclass.compute_child_allocation = (*[0]byte)(C._gotk4_gtk4_Frame_compute_child_allocation)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_Frame_compute_child_allocation",
+			func(carg0 *C.GtkFrame, carg1 *C.GtkAllocation) {
+				var frame      Instance    // go GtkFrame subclass
+				var allocation *Allocation // in, transfer: none, C Pointers: 1, Name: Allocation
+
+				frame = UnsafeFrameFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				_ = allocation
+				_ = carg1
+				panic("unimplemented conversion of *Allocation (GtkAllocation*)")
+
+				overrides.ComputeChildAllocation(frame, allocation)
+			},
+		)
 	}
+}
+
+// RegisterFrameSubClass is used to register a go subclass of GtkFrame. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterFrameSubClass[InstanceT Frame](
+		name string,
+		classInit func(class *FrameClass),
+		constructor func() InstanceT,
+		overrides FrameOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeFrame,
+		UnsafeFrameClassFromGlibBorrow,
+		UnsafeApplyFrameOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapFrame(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // GLAreaInstance is the instance type used by all types extending GtkGLArea. It is used internally by the bindings. Users should use the interface [GLArea] instead.
@@ -83865,11 +88065,72 @@ func UnsafeApplyGLAreaOverrides[Instance GLArea](gclass unsafe.Pointer, override
 
 	if overrides.Render != nil {
 		pclass.render = (*[0]byte)(C._gotk4_gtk4_GLArea_render)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_GLArea_render",
+			func(carg0 *C.GtkGLArea, carg1 *C.GdkGLContext) (cret C.gboolean) {
+				var area     Instance      // go GtkGLArea subclass
+				var _context gdk.GLContext // in, none, converted
+				var goret    bool          // return
+
+				area = UnsafeGLAreaFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				_context = gdk.UnsafeGLContextFromGlibNone(unsafe.Pointer(carg1))
+
+				goret = overrides.Render(area, _context)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.Resize != nil {
 		pclass.resize = (*[0]byte)(C._gotk4_gtk4_GLArea_resize)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_GLArea_resize",
+			func(carg0 *C.GtkGLArea, carg1 C.int, carg2 C.int) {
+				var area   Instance // go GtkGLArea subclass
+				var width  int      // in, none, casted, casted C.gint
+				var height int      // in, none, casted, casted C.gint
+
+				area = UnsafeGLAreaFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				width = int(carg1)
+				height = int(carg2)
+
+				overrides.Resize(area, width, height)
+			},
+		)
 	}
+}
+
+// RegisterGLAreaSubClass is used to register a go subclass of GtkGLArea. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterGLAreaSubClass[InstanceT GLArea](
+		name string,
+		classInit func(class *GLAreaClass),
+		constructor func() InstanceT,
+		overrides GLAreaOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeGLArea,
+		UnsafeGLAreaClassFromGlibBorrow,
+		UnsafeApplyGLAreaOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapGLArea(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // GestureClickInstance is the instance type used by all types extending GtkGestureClick. It is used internally by the bindings. Users should use the interface [GestureClick] instead.
@@ -84949,6 +89210,32 @@ func UnsafeApplyGraphicsOffloadOverrides[Instance GraphicsOffload](gclass unsafe
 	UnsafeApplyWidgetOverrides(gclass, overrides.WidgetOverrides)
 }
 
+// RegisterGraphicsOffloadSubClass is used to register a go subclass of GtkGraphicsOffload. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterGraphicsOffloadSubClass[InstanceT GraphicsOffload](
+		name string,
+		classInit func(class *GraphicsOffloadClass),
+		constructor func() InstanceT,
+		overrides GraphicsOffloadOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeGraphicsOffload,
+		UnsafeGraphicsOffloadClassFromGlibBorrow,
+		UnsafeApplyGraphicsOffloadOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapGraphicsOffload(obj)
+		},
+		interfaceInits...,
+	)
+}
+
 // GridInstance is the instance type used by all types extending GtkGrid. It is used internally by the bindings. Users should use the interface [Grid] instead.
 type GridInstance struct {
 	_ [0]func() // equal guard
@@ -85982,6 +90269,32 @@ func UnsafeApplyGridOverrides[Instance Grid](gclass unsafe.Pointer, overrides Gr
 	UnsafeApplyWidgetOverrides(gclass, overrides.WidgetOverrides)
 }
 
+// RegisterGridSubClass is used to register a go subclass of GtkGrid. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterGridSubClass[InstanceT Grid](
+		name string,
+		classInit func(class *GridClass),
+		constructor func() InstanceT,
+		overrides GridOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeGrid,
+		UnsafeGridClassFromGlibBorrow,
+		UnsafeApplyGridOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapGrid(obj)
+		},
+		interfaceInits...,
+	)
+}
+
 // GridLayoutInstance is the instance type used by all types extending GtkGridLayout. It is used internally by the bindings. Users should use the interface [GridLayout] instead.
 type GridLayoutInstance struct {
 	_ [0]func() // equal guard
@@ -86473,6 +90786,32 @@ func UnsafeApplyGridLayoutOverrides[Instance GridLayout](gclass unsafe.Pointer, 
 	UnsafeApplyLayoutManagerOverrides(gclass, overrides.LayoutManagerOverrides)
 }
 
+// RegisterGridLayoutSubClass is used to register a go subclass of GtkGridLayout. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterGridLayoutSubClass[InstanceT GridLayout](
+		name string,
+		classInit func(class *GridLayoutClass),
+		constructor func() InstanceT,
+		overrides GridLayoutOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeGridLayout,
+		UnsafeGridLayoutClassFromGlibBorrow,
+		UnsafeApplyGridLayoutOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapGridLayout(obj)
+		},
+		interfaceInits...,
+	)
+}
+
 // GridLayoutChildInstance is the instance type used by all types extending GtkGridLayoutChild. It is used internally by the bindings. Users should use the interface [GridLayoutChild] instead.
 type GridLayoutChildInstance struct {
 	_ [0]func() // equal guard
@@ -86770,6 +91109,32 @@ type GridLayoutChildOverrides[Instance GridLayoutChild] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplyGridLayoutChildOverrides[Instance GridLayoutChild](gclass unsafe.Pointer, overrides GridLayoutChildOverrides[Instance]) {
 	UnsafeApplyLayoutChildOverrides(gclass, overrides.LayoutChildOverrides)
+}
+
+// RegisterGridLayoutChildSubClass is used to register a go subclass of GtkGridLayoutChild. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterGridLayoutChildSubClass[InstanceT GridLayoutChild](
+		name string,
+		classInit func(class *GridLayoutChildClass),
+		constructor func() InstanceT,
+		overrides GridLayoutChildOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeGridLayoutChild,
+		UnsafeGridLayoutChildClassFromGlibBorrow,
+		UnsafeApplyGridLayoutChildOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapGridLayoutChild(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // HeaderBarInstance is the instance type used by all types extending GtkHeaderBar. It is used internally by the bindings. Users should use the interface [HeaderBar] instead.
@@ -88867,6 +93232,32 @@ type InscriptionOverrides[Instance Inscription] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplyInscriptionOverrides[Instance Inscription](gclass unsafe.Pointer, overrides InscriptionOverrides[Instance]) {
 	UnsafeApplyWidgetOverrides(gclass, overrides.WidgetOverrides)
+}
+
+// RegisterInscriptionSubClass is used to register a go subclass of GtkInscription. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterInscriptionSubClass[InstanceT Inscription](
+		name string,
+		classInit func(class *InscriptionClass),
+		constructor func() InstanceT,
+		overrides InscriptionOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeInscription,
+		UnsafeInscriptionClassFromGlibBorrow,
+		UnsafeApplyInscriptionOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapInscription(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // KeyvalTriggerInstance is the instance type used by all types extending GtkKeyvalTrigger. It is used internally by the bindings. Users should use the interface [KeyvalTrigger] instead.
@@ -94425,7 +98816,44 @@ func UnsafeApplyListBoxRowOverrides[Instance ListBoxRow](gclass unsafe.Pointer, 
 
 	if overrides.Activate != nil {
 		pclass.activate = (*[0]byte)(C._gotk4_gtk4_ListBoxRow_activate)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_ListBoxRow_activate",
+			func(carg0 *C.GtkListBoxRow) {
+				var row Instance // go GtkListBoxRow subclass
+
+				row = UnsafeListBoxRowFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.Activate(row)
+			},
+		)
 	}
+}
+
+// RegisterListBoxRowSubClass is used to register a go subclass of GtkListBoxRow. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterListBoxRowSubClass[InstanceT ListBoxRow](
+		name string,
+		classInit func(class *ListBoxRowClass),
+		constructor func() InstanceT,
+		overrides ListBoxRowOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeListBoxRow,
+		UnsafeListBoxRowClassFromGlibBorrow,
+		UnsafeApplyListBoxRowOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapListBoxRow(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // ListViewInstance is the instance type used by all types extending GtkListView. It is used internally by the bindings. Users should use the interface [ListView] instead.
@@ -95346,6 +99774,32 @@ func UnsafeApplyMediaControlsOverrides[Instance MediaControls](gclass unsafe.Poi
 	UnsafeApplyWidgetOverrides(gclass, overrides.WidgetOverrides)
 }
 
+// RegisterMediaControlsSubClass is used to register a go subclass of GtkMediaControls. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterMediaControlsSubClass[InstanceT MediaControls](
+		name string,
+		classInit func(class *MediaControlsClass),
+		constructor func() InstanceT,
+		overrides MediaControlsOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeMediaControls,
+		UnsafeMediaControlsClassFromGlibBorrow,
+		UnsafeApplyMediaControlsOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapMediaControls(obj)
+		},
+		interfaceInits...,
+	)
+}
+
 // MediaFileInstance is the instance type used by all types extending GtkMediaFile. It is used internally by the bindings. Users should use the interface [MediaFile] instead.
 type MediaFileInstance struct {
 	_ [0]func() // equal guard
@@ -95806,11 +100260,59 @@ func UnsafeApplyMediaFileOverrides[Instance MediaFile](gclass unsafe.Pointer, ov
 
 	if overrides.Close != nil {
 		pclass.close = (*[0]byte)(C._gotk4_gtk4_MediaFile_close)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_MediaFile_close",
+			func(carg0 *C.GtkMediaFile) {
+				var self Instance // go GtkMediaFile subclass
+
+				self = UnsafeMediaFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.Close(self)
+			},
+		)
 	}
 
 	if overrides.Open != nil {
 		pclass.open = (*[0]byte)(C._gotk4_gtk4_MediaFile_open)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_MediaFile_open",
+			func(carg0 *C.GtkMediaFile) {
+				var self Instance // go GtkMediaFile subclass
+
+				self = UnsafeMediaFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.Open(self)
+			},
+		)
 	}
+}
+
+// RegisterMediaFileSubClass is used to register a go subclass of GtkMediaFile. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterMediaFileSubClass[InstanceT MediaFile](
+		name string,
+		classInit func(class *MediaFileClass),
+		constructor func() InstanceT,
+		overrides MediaFileOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeMediaFile,
+		UnsafeMediaFileClassFromGlibBorrow,
+		UnsafeApplyMediaFileOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapMediaFile(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // MenuButtonInstance is the instance type used by all types extending GtkMenuButton. It is used internally by the bindings. Users should use the interface [MenuButton] instead.
@@ -97294,6 +101796,32 @@ type MultiSorterOverrides[Instance MultiSorter] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplyMultiSorterOverrides[Instance MultiSorter](gclass unsafe.Pointer, overrides MultiSorterOverrides[Instance]) {
 	UnsafeApplySorterOverrides(gclass, overrides.SorterOverrides)
+}
+
+// RegisterMultiSorterSubClass is used to register a go subclass of GtkMultiSorter. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterMultiSorterSubClass[InstanceT MultiSorter](
+		name string,
+		classInit func(class *MultiSorterClass),
+		constructor func() InstanceT,
+		overrides MultiSorterOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeMultiSorter,
+		UnsafeMultiSorterClassFromGlibBorrow,
+		UnsafeApplyMultiSorterOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapMultiSorter(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // NamedActionInstance is the instance type used by all types extending GtkNamedAction. It is used internally by the bindings. Users should use the interface [NamedAction] instead.
@@ -99891,6 +104419,32 @@ func UnsafeApplyNumericSorterOverrides[Instance NumericSorter](gclass unsafe.Poi
 	UnsafeApplySorterOverrides(gclass, overrides.SorterOverrides)
 }
 
+// RegisterNumericSorterSubClass is used to register a go subclass of GtkNumericSorter. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterNumericSorterSubClass[InstanceT NumericSorter](
+		name string,
+		classInit func(class *NumericSorterClass),
+		constructor func() InstanceT,
+		overrides NumericSorterOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeNumericSorter,
+		UnsafeNumericSorterClassFromGlibBorrow,
+		UnsafeApplyNumericSorterOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapNumericSorter(obj)
+		},
+		interfaceInits...,
+	)
+}
+
 // OverlayInstance is the instance type used by all types extending GtkOverlay. It is used internally by the bindings. Users should use the interface [Overlay] instead.
 type OverlayInstance struct {
 	_ [0]func() // equal guard
@@ -102162,6 +106716,32 @@ func UnsafeApplyPictureOverrides[Instance Picture](gclass unsafe.Pointer, overri
 	UnsafeApplyWidgetOverrides(gclass, overrides.WidgetOverrides)
 }
 
+// RegisterPictureSubClass is used to register a go subclass of GtkPicture. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterPictureSubClass[InstanceT Picture](
+		name string,
+		classInit func(class *PictureClass),
+		constructor func() InstanceT,
+		overrides PictureOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypePicture,
+		UnsafePictureClassFromGlibBorrow,
+		UnsafeApplyPictureOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapPicture(obj)
+		},
+		interfaceInits...,
+	)
+}
+
 // PopoverInstance is the instance type used by all types extending GtkPopover. It is used internally by the bindings. Users should use the interface [Popover] instead.
 type PopoverInstance struct {
 	_ [0]func() // equal guard
@@ -103073,11 +107653,59 @@ func UnsafeApplyPopoverOverrides[Instance Popover](gclass unsafe.Pointer, overri
 
 	if overrides.ActivateDefault != nil {
 		pclass.activate_default = (*[0]byte)(C._gotk4_gtk4_Popover_activate_default)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_Popover_activate_default",
+			func(carg0 *C.GtkPopover) {
+				var popover Instance // go GtkPopover subclass
+
+				popover = UnsafePopoverFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.ActivateDefault(popover)
+			},
+		)
 	}
 
 	if overrides.Closed != nil {
 		pclass.closed = (*[0]byte)(C._gotk4_gtk4_Popover_closed)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_Popover_closed",
+			func(carg0 *C.GtkPopover) {
+				var popover Instance // go GtkPopover subclass
+
+				popover = UnsafePopoverFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.Closed(popover)
+			},
+		)
 	}
+}
+
+// RegisterPopoverSubClass is used to register a go subclass of GtkPopover. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterPopoverSubClass[InstanceT Popover](
+		name string,
+		classInit func(class *PopoverClass),
+		constructor func() InstanceT,
+		overrides PopoverOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypePopover,
+		UnsafePopoverClassFromGlibBorrow,
+		UnsafeApplyPopoverOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapPopover(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // PopoverMenuInstance is the instance type used by all types extending GtkPopoverMenu. It is used internally by the bindings. Users should use the interface [PopoverMenu] instead.
@@ -105516,23 +110144,121 @@ func UnsafeApplyRangeOverrides[Instance Range](gclass unsafe.Pointer, overrides 
 
 	if overrides.AdjustBounds != nil {
 		pclass.adjust_bounds = (*[0]byte)(C._gotk4_gtk4_Range_adjust_bounds)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_Range_adjust_bounds",
+			func(carg0 *C.GtkRange, carg1 C.double) {
+				var _range   Instance // go GtkRange subclass
+				var newValue float64  // in, none, casted, casted C.gdouble
+
+				_range = UnsafeRangeFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				newValue = float64(carg1)
+
+				overrides.AdjustBounds(_range, newValue)
+			},
+		)
 	}
 
 	if overrides.ChangeValue != nil {
 		pclass.change_value = (*[0]byte)(C._gotk4_gtk4_Range_change_value)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_Range_change_value",
+			func(carg0 *C.GtkRange, carg1 C.GtkScrollType, carg2 C.double) (cret C.gboolean) {
+				var _range   Instance   // go GtkRange subclass
+				var scroll   ScrollType // in, none, casted
+				var newValue float64    // in, none, casted, casted C.gdouble
+				var goret    bool       // return
+
+				_range = UnsafeRangeFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				scroll = ScrollType(carg1)
+				newValue = float64(carg2)
+
+				goret = overrides.ChangeValue(_range, scroll, newValue)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.GetRangeBorder != nil {
 		pclass.get_range_border = (*[0]byte)(C._gotk4_gtk4_Range_get_range_border)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_Range_get_range_border",
+			func(carg0 *C.GtkRange, carg1 *C.GtkBorder) {
+				var _range  Instance // go GtkRange subclass
+				var border_ *Border  // in, none, converted
+
+				_range = UnsafeRangeFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				border_ = UnsafeBorderFromGlibNone(unsafe.Pointer(carg1))
+
+				overrides.GetRangeBorder(_range, border_)
+			},
+		)
 	}
 
 	if overrides.MoveSlider != nil {
 		pclass.move_slider = (*[0]byte)(C._gotk4_gtk4_Range_move_slider)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_Range_move_slider",
+			func(carg0 *C.GtkRange, carg1 C.GtkScrollType) {
+				var _range Instance   // go GtkRange subclass
+				var scroll ScrollType // in, none, casted
+
+				_range = UnsafeRangeFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				scroll = ScrollType(carg1)
+
+				overrides.MoveSlider(_range, scroll)
+			},
+		)
 	}
 
 	if overrides.ValueChanged != nil {
 		pclass.value_changed = (*[0]byte)(C._gotk4_gtk4_Range_value_changed)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_Range_value_changed",
+			func(carg0 *C.GtkRange) {
+				var _range Instance // go GtkRange subclass
+
+				_range = UnsafeRangeFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.ValueChanged(_range)
+			},
+		)
 	}
+}
+
+// RegisterRangeSubClass is used to register a go subclass of GtkRange. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterRangeSubClass[InstanceT Range](
+		name string,
+		classInit func(class *RangeClass),
+		constructor func() InstanceT,
+		overrides RangeOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeRange,
+		UnsafeRangeClassFromGlibBorrow,
+		UnsafeApplyRangeOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapRange(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // RevealerInstance is the instance type used by all types extending GtkRevealer. It is used internally by the bindings. Users should use the interface [Revealer] instead.
@@ -106710,7 +111436,49 @@ func UnsafeApplyScaleOverrides[Instance Scale](gclass unsafe.Pointer, overrides 
 
 	if overrides.GetLayoutOffsets != nil {
 		pclass.get_layout_offsets = (*[0]byte)(C._gotk4_gtk4_Scale_get_layout_offsets)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_Scale_get_layout_offsets",
+			func(carg0 *C.GtkScale, carg1 *C.int, carg2 *C.int) {
+				var scale Instance // go GtkScale subclass
+				var x     int      // out, full, casted, casted C.gint
+				var y     int      // out, full, casted, casted C.gint
+
+				scale = UnsafeScaleFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				x, y = overrides.GetLayoutOffsets(scale)
+
+				*carg1 = C.int(x)
+				*carg2 = C.int(y)
+			},
+		)
 	}
+}
+
+// RegisterScaleSubClass is used to register a go subclass of GtkScale. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterScaleSubClass[InstanceT Scale](
+		name string,
+		classInit func(class *ScaleClass),
+		constructor func() InstanceT,
+		overrides ScaleOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeScale,
+		UnsafeScaleClassFromGlibBorrow,
+		UnsafeApplyScaleOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapScale(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // ScaleButtonInstance is the instance type used by all types extending GtkScaleButton. It is used internally by the bindings. Users should use the interface [ScaleButton] instead.
@@ -107296,7 +112064,46 @@ func UnsafeApplyScaleButtonOverrides[Instance ScaleButton](gclass unsafe.Pointer
 
 	if overrides.ValueChanged != nil {
 		pclass.value_changed = (*[0]byte)(C._gotk4_gtk4_ScaleButton_value_changed)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_ScaleButton_value_changed",
+			func(carg0 *C.GtkScaleButton, carg1 C.double) {
+				var button Instance // go GtkScaleButton subclass
+				var value  float64  // in, none, casted, casted C.gdouble
+
+				button = UnsafeScaleButtonFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				value = float64(carg1)
+
+				overrides.ValueChanged(button, value)
+			},
+		)
 	}
+}
+
+// RegisterScaleButtonSubClass is used to register a go subclass of GtkScaleButton. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterScaleButtonSubClass[InstanceT ScaleButton](
+		name string,
+		classInit func(class *ScaleButtonClass),
+		constructor func() InstanceT,
+		overrides ScaleButtonOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeScaleButton,
+		UnsafeScaleButtonClassFromGlibBorrow,
+		UnsafeApplyScaleButtonOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapScaleButton(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // ScrollbarInstance is the instance type used by all types extending GtkScrollbar. It is used internally by the bindings. Users should use the interface [Scrollbar] instead.
@@ -119286,51 +124093,242 @@ func UnsafeApplyTextViewOverrides[Instance TextView](gclass unsafe.Pointer, over
 
 	if overrides.Backspace != nil {
 		pclass.backspace = (*[0]byte)(C._gotk4_gtk4_TextView_backspace)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_TextView_backspace",
+			func(carg0 *C.GtkTextView) {
+				var textView Instance // go GtkTextView subclass
+
+				textView = UnsafeTextViewFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.Backspace(textView)
+			},
+		)
 	}
 
 	if overrides.CopyClipboard != nil {
 		pclass.copy_clipboard = (*[0]byte)(C._gotk4_gtk4_TextView_copy_clipboard)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_TextView_copy_clipboard",
+			func(carg0 *C.GtkTextView) {
+				var textView Instance // go GtkTextView subclass
+
+				textView = UnsafeTextViewFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.CopyClipboard(textView)
+			},
+		)
 	}
 
 	if overrides.CutClipboard != nil {
 		pclass.cut_clipboard = (*[0]byte)(C._gotk4_gtk4_TextView_cut_clipboard)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_TextView_cut_clipboard",
+			func(carg0 *C.GtkTextView) {
+				var textView Instance // go GtkTextView subclass
+
+				textView = UnsafeTextViewFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.CutClipboard(textView)
+			},
+		)
 	}
 
 	if overrides.DeleteFromCursor != nil {
 		pclass.delete_from_cursor = (*[0]byte)(C._gotk4_gtk4_TextView_delete_from_cursor)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_TextView_delete_from_cursor",
+			func(carg0 *C.GtkTextView, carg1 C.GtkDeleteType, carg2 C.int) {
+				var textView Instance   // go GtkTextView subclass
+				var typ      DeleteType // in, none, casted
+				var count    int        // in, none, casted, casted C.gint
+
+				textView = UnsafeTextViewFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				typ = DeleteType(carg1)
+				count = int(carg2)
+
+				overrides.DeleteFromCursor(textView, typ, count)
+			},
+		)
 	}
 
 	if overrides.ExtendSelection != nil {
 		pclass.extend_selection = (*[0]byte)(C._gotk4_gtk4_TextView_extend_selection)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_TextView_extend_selection",
+			func(carg0 *C.GtkTextView, carg1 C.GtkTextExtendSelection, carg2 *C.GtkTextIter, carg3 *C.GtkTextIter, carg4 *C.GtkTextIter) (cret C.gboolean) {
+				var textView    Instance            // go GtkTextView subclass
+				var granularity TextExtendSelection // in, none, casted
+				var location    *TextIter           // in, none, converted
+				var start       *TextIter           // in, none, converted
+				var end         *TextIter           // in, none, converted
+				var goret       bool                // return
+
+				textView = UnsafeTextViewFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				granularity = TextExtendSelection(carg1)
+				location = UnsafeTextIterFromGlibNone(unsafe.Pointer(carg2))
+				start = UnsafeTextIterFromGlibNone(unsafe.Pointer(carg3))
+				end = UnsafeTextIterFromGlibNone(unsafe.Pointer(carg4))
+
+				goret = overrides.ExtendSelection(textView, granularity, location, start, end)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.InsertAtCursor != nil {
 		pclass.insert_at_cursor = (*[0]byte)(C._gotk4_gtk4_TextView_insert_at_cursor)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_TextView_insert_at_cursor",
+			func(carg0 *C.GtkTextView, carg1 *C.char) {
+				var textView Instance // go GtkTextView subclass
+				var str      string   // in, none, string, casted *C.gchar
+
+				textView = UnsafeTextViewFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				str = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+
+				overrides.InsertAtCursor(textView, str)
+			},
+		)
 	}
 
 	if overrides.InsertEmoji != nil {
 		pclass.insert_emoji = (*[0]byte)(C._gotk4_gtk4_TextView_insert_emoji)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_TextView_insert_emoji",
+			func(carg0 *C.GtkTextView) {
+				var textView Instance // go GtkTextView subclass
+
+				textView = UnsafeTextViewFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.InsertEmoji(textView)
+			},
+		)
 	}
 
 	if overrides.MoveCursor != nil {
 		pclass.move_cursor = (*[0]byte)(C._gotk4_gtk4_TextView_move_cursor)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_TextView_move_cursor",
+			func(carg0 *C.GtkTextView, carg1 C.GtkMovementStep, carg2 C.int, carg3 C.gboolean) {
+				var textView        Instance     // go GtkTextView subclass
+				var step            MovementStep // in, none, casted
+				var count           int          // in, none, casted, casted C.gint
+				var extendSelection bool         // in
+
+				textView = UnsafeTextViewFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				step = MovementStep(carg1)
+				count = int(carg2)
+				if carg3 != 0 {
+					extendSelection = true
+				}
+
+				overrides.MoveCursor(textView, step, count, extendSelection)
+			},
+		)
 	}
 
 	if overrides.PasteClipboard != nil {
 		pclass.paste_clipboard = (*[0]byte)(C._gotk4_gtk4_TextView_paste_clipboard)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_TextView_paste_clipboard",
+			func(carg0 *C.GtkTextView) {
+				var textView Instance // go GtkTextView subclass
+
+				textView = UnsafeTextViewFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.PasteClipboard(textView)
+			},
+		)
 	}
 
 	if overrides.SetAnchor != nil {
 		pclass.set_anchor = (*[0]byte)(C._gotk4_gtk4_TextView_set_anchor)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_TextView_set_anchor",
+			func(carg0 *C.GtkTextView) {
+				var textView Instance // go GtkTextView subclass
+
+				textView = UnsafeTextViewFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.SetAnchor(textView)
+			},
+		)
 	}
 
 	if overrides.SnapshotLayer != nil {
 		pclass.snapshot_layer = (*[0]byte)(C._gotk4_gtk4_TextView_snapshot_layer)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_TextView_snapshot_layer",
+			func(carg0 *C.GtkTextView, carg1 C.GtkTextViewLayer, carg2 *C.GtkSnapshot) {
+				var textView Instance      // go GtkTextView subclass
+				var layer    TextViewLayer // in, none, casted
+				var snapshot Snapshot      // in, none, converted, casted *C.Snapshot
+
+				textView = UnsafeTextViewFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				layer = TextViewLayer(carg1)
+				snapshot = UnsafeSnapshotFromGlibNone(unsafe.Pointer(carg2))
+
+				overrides.SnapshotLayer(textView, layer, snapshot)
+			},
+		)
 	}
 
 	if overrides.ToggleOverwrite != nil {
 		pclass.toggle_overwrite = (*[0]byte)(C._gotk4_gtk4_TextView_toggle_overwrite)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk4_TextView_toggle_overwrite",
+			func(carg0 *C.GtkTextView) {
+				var textView Instance // go GtkTextView subclass
+
+				textView = UnsafeTextViewFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.ToggleOverwrite(textView)
+			},
+		)
 	}
+}
+
+// RegisterTextViewSubClass is used to register a go subclass of GtkTextView. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterTextViewSubClass[InstanceT TextView](
+		name string,
+		classInit func(class *TextViewClass),
+		constructor func() InstanceT,
+		overrides TextViewOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeTextView,
+		UnsafeTextViewClassFromGlibBorrow,
+		UnsafeApplyTextViewOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapTextView(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // ToggleButtonInstance is the instance type used by all types extending GtkToggleButton. It is used internally by the bindings. Users should use the interface [ToggleButton] instead.
@@ -119711,6 +124709,32 @@ type ToggleButtonOverrides[Instance ToggleButton] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplyToggleButtonOverrides[Instance ToggleButton](gclass unsafe.Pointer, overrides ToggleButtonOverrides[Instance]) {
 	UnsafeApplyButtonOverrides(gclass, overrides.ButtonOverrides)
+}
+
+// RegisterToggleButtonSubClass is used to register a go subclass of GtkToggleButton. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterToggleButtonSubClass[InstanceT ToggleButton](
+		name string,
+		classInit func(class *ToggleButtonClass),
+		constructor func() InstanceT,
+		overrides ToggleButtonOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeToggleButton,
+		UnsafeToggleButtonClassFromGlibBorrow,
+		UnsafeApplyToggleButtonOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapToggleButton(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // TreeExpanderInstance is the instance type used by all types extending GtkTreeExpander. It is used internally by the bindings. Users should use the interface [TreeExpander] instead.
@@ -120200,6 +125224,32 @@ type TreeExpanderOverrides[Instance TreeExpander] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplyTreeExpanderOverrides[Instance TreeExpander](gclass unsafe.Pointer, overrides TreeExpanderOverrides[Instance]) {
 	UnsafeApplyWidgetOverrides(gclass, overrides.WidgetOverrides)
+}
+
+// RegisterTreeExpanderSubClass is used to register a go subclass of GtkTreeExpander. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterTreeExpanderSubClass[InstanceT TreeExpander](
+		name string,
+		classInit func(class *TreeExpanderClass),
+		constructor func() InstanceT,
+		overrides TreeExpanderOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeTreeExpander,
+		UnsafeTreeExpanderClassFromGlibBorrow,
+		UnsafeApplyTreeExpanderOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapTreeExpander(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // VideoInstance is the instance type used by all types extending GtkVideo. It is used internally by the bindings. Users should use the interface [Video] instead.
@@ -120841,6 +125891,32 @@ type VideoOverrides[Instance Video] struct {
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplyVideoOverrides[Instance Video](gclass unsafe.Pointer, overrides VideoOverrides[Instance]) {
 	UnsafeApplyWidgetOverrides(gclass, overrides.WidgetOverrides)
+}
+
+// RegisterVideoSubClass is used to register a go subclass of GtkVideo. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterVideoSubClass[InstanceT Video](
+		name string,
+		classInit func(class *VideoClass),
+		constructor func() InstanceT,
+		overrides VideoOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeVideo,
+		UnsafeVideoClassFromGlibBorrow,
+		UnsafeApplyVideoOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapVideo(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // ViewportInstance is the instance type used by all types extending GtkViewport. It is used internally by the bindings. Users should use the interface [Viewport] instead.

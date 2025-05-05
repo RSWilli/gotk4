@@ -7,6 +7,7 @@ import (
 	"strings"
 	"unsafe"
 
+	"github.com/diamondburned/gotk4/pkg/core/classdata"
 	"github.com/diamondburned/gotk4/pkg/glib/v2"
 )
 
@@ -2513,6 +2514,32 @@ func UnsafeApplyInitiallyUnownedOverrides[Instance InitiallyUnowned](gclass unsa
 	UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
 }
 
+// RegisterInitiallyUnownedSubClass is used to register a go subclass of GInitiallyUnowned. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterInitiallyUnownedSubClass[InstanceT InitiallyUnowned](
+		name string,
+		classInit func(class *InitiallyUnownedClass),
+		constructor func() InstanceT,
+		overrides InitiallyUnownedOverrides[InstanceT],
+		signals map[string]SignalDefinition,
+		interfaceInits ...SubClassInterfaceInit[InstanceT],
+) Type {
+	return UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeInitiallyUnowned,
+		UnsafeInitiallyUnownedClassFromGlibBorrow,
+		UnsafeApplyInitiallyUnownedOverrides,
+		func (obj *ObjectInstance) Object {
+			return unsafeWrapInitiallyUnowned(obj)
+		},
+		interfaceInits...,
+	)
+}
+
 // TypeModuleInstance is the instance type used by all types extending GTypeModule. It is used internally by the bindings. Users should use the interface [TypeModule] instead.
 type TypeModuleInstance struct {
 	_ [0]func() // equal guard
@@ -2990,11 +3017,66 @@ func UnsafeApplyTypeModuleOverrides[Instance TypeModule](gclass unsafe.Pointer, 
 
 	if overrides.Load != nil {
 		pclass.load = (*[0]byte)(C._gotk4_gobject2_TypeModule_load)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gobject2_TypeModule_load",
+			func(carg0 *C.GTypeModule) (cret C.gboolean) {
+				var module Instance // go GTypeModule subclass
+				var goret  bool     // return
+
+				module = UnsafeTypeModuleFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				goret = overrides.Load(module)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
 	}
 
 	if overrides.Unload != nil {
 		pclass.unload = (*[0]byte)(C._gotk4_gobject2_TypeModule_unload)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gobject2_TypeModule_unload",
+			func(carg0 *C.GTypeModule) {
+				var module Instance // go GTypeModule subclass
+
+				module = UnsafeTypeModuleFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.Unload(module)
+			},
+		)
 	}
+}
+
+// RegisterTypeModuleSubClass is used to register a go subclass of GTypeModule. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterTypeModuleSubClass[InstanceT TypeModule](
+		name string,
+		classInit func(class *TypeModuleClass),
+		constructor func() InstanceT,
+		overrides TypeModuleOverrides[InstanceT],
+		signals map[string]SignalDefinition,
+		interfaceInits ...SubClassInterfaceInit[InstanceT],
+) Type {
+	return UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeTypeModule,
+		UnsafeTypeModuleClassFromGlibBorrow,
+		UnsafeApplyTypeModuleOverrides,
+		func (obj *ObjectInstance) Object {
+			return unsafeWrapTypeModule(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // CClosure wraps GCClosure

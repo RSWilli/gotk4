@@ -8,6 +8,7 @@ import (
 	"strings"
 	"unsafe"
 
+	"github.com/diamondburned/gotk4/pkg/core/classdata"
 	"github.com/diamondburned/gotk4/pkg/core/userdata"
 	"github.com/diamondburned/gotk4/pkg/gdkpixbuf/v2"
 	"github.com/diamondburned/gotk4/pkg/gio/v2"
@@ -23671,11 +23672,83 @@ func UnsafeApplyWindowOverrides[Instance Window](gclass unsafe.Pointer, override
 
 	if overrides.FromEmbedder != nil {
 		pclass.from_embedder = (*[0]byte)(C._gotk4_gdk3_Window_from_embedder)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gdk3_Window_from_embedder",
+			func(carg0 *C.GdkWindow, carg1 C.gdouble, carg2 C.gdouble, carg3 *C.gdouble, carg4 *C.gdouble) {
+				var window     Instance // go GdkWindow subclass
+				var embedderX  float64  // in, none, casted
+				var embedderY  float64  // in, none, casted
+				var offscreenX *float64 // in, transfer: none, C Pointers: 1, Name: gdouble
+				var offscreenY *float64 // in, transfer: none, C Pointers: 1, Name: gdouble
+
+				window = UnsafeWindowFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				embedderX = float64(carg1)
+				embedderY = float64(carg2)
+				_ = offscreenX
+				_ = carg3
+				panic("unimplemented conversion of *float64 (gdouble*)")
+				_ = offscreenY
+				_ = carg4
+				panic("unimplemented conversion of *float64 (gdouble*)")
+
+				overrides.FromEmbedder(window, embedderX, embedderY, offscreenX, offscreenY)
+			},
+		)
 	}
 
 	if overrides.ToEmbedder != nil {
 		pclass.to_embedder = (*[0]byte)(C._gotk4_gdk3_Window_to_embedder)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gdk3_Window_to_embedder",
+			func(carg0 *C.GdkWindow, carg1 C.gdouble, carg2 C.gdouble, carg3 *C.gdouble, carg4 *C.gdouble) {
+				var window     Instance // go GdkWindow subclass
+				var offscreenX float64  // in, none, casted
+				var offscreenY float64  // in, none, casted
+				var embedderX  *float64 // in, transfer: none, C Pointers: 1, Name: gdouble
+				var embedderY  *float64 // in, transfer: none, C Pointers: 1, Name: gdouble
+
+				window = UnsafeWindowFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				offscreenX = float64(carg1)
+				offscreenY = float64(carg2)
+				_ = embedderX
+				_ = carg3
+				panic("unimplemented conversion of *float64 (gdouble*)")
+				_ = embedderY
+				_ = carg4
+				panic("unimplemented conversion of *float64 (gdouble*)")
+
+				overrides.ToEmbedder(window, offscreenX, offscreenY, embedderX, embedderY)
+			},
+		)
 	}
+}
+
+// RegisterWindowSubClass is used to register a go subclass of GdkWindow. For this to work safely please implement the
+// virtual methods required by the implementation.
+func RegisterWindowSubClass[InstanceT Window](
+		name string,
+		classInit func(class *WindowClass),
+		constructor func() InstanceT,
+		overrides WindowOverrides[InstanceT],
+		signals map[string]gobject.SignalDefinition,
+		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
+) gobject.Type {
+	return gobject.UnsafeRegisterSubClass(
+		name,
+		classInit,
+		constructor,
+		overrides,
+		signals,
+		TypeWindow,
+		UnsafeWindowClassFromGlibBorrow,
+		UnsafeApplyWindowOverrides,
+		func (obj *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapWindow(obj)
+		},
+		interfaceInits...,
+	)
 }
 
 // Atom wraps GdkAtom
