@@ -2052,7 +2052,6 @@ var (
 	TypeFileInfo                     = gobject.Type(C.g_file_info_get_type())
 	TypeFileMonitor                  = gobject.Type(C.g_file_monitor_get_type())
 	TypeFilenameCompleter            = gobject.Type(C.g_filename_completer_get_type())
-	TypeIOModule                     = gobject.Type(C.g_io_module_get_type())
 	TypeIOStream                     = gobject.Type(C.g_io_stream_get_type())
 	TypeInetAddress                  = gobject.Type(C.g_inet_address_get_type())
 	TypeInetAddressMask              = gobject.Type(C.g_inet_address_mask_get_type())
@@ -2282,7 +2281,6 @@ func init() {
 		gobject.TypeMarshaler{T: TypeFileInfo, F: marshalFileInfoInstance},
 		gobject.TypeMarshaler{T: TypeFileMonitor, F: marshalFileMonitorInstance},
 		gobject.TypeMarshaler{T: TypeFilenameCompleter, F: marshalFilenameCompleterInstance},
-		gobject.TypeMarshaler{T: TypeIOModule, F: marshalIOModuleInstance},
 		gobject.TypeMarshaler{T: TypeIOStream, F: marshalIOStreamInstance},
 		gobject.TypeMarshaler{T: TypeInetAddress, F: marshalInetAddressInstance},
 		gobject.TypeMarshaler{T: TypeInetAddressMask, F: marshalInetAddressMaskInstance},
@@ -9358,90 +9356,6 @@ func IOErrorQuark() glib.Quark {
 	return goret
 }
 
-// IOModulesLoadAllInDirectory wraps g_io_modules_load_all_in_directory
-// 
-// The function takes the following parameters:
-// 
-// 	- dirname string: pathname for a directory containing modules
-//     to load. 
-// 
-// The function returns the following values:
-// 
-// 	- goret []IOModule 
-//
-// Loads all the modules in the specified directory.
-// 
-// If don't require all modules to be initialized (and thus registering
-// all gtypes) then you can use g_io_modules_scan_all_in_directory()
-// which allows delayed/lazy loading of modules.
-func IOModulesLoadAllInDirectory(dirname string) []IOModule {
-	var carg1 *C.gchar // in, none, string
-	var cret  *C.GList // container, transfer: full
-
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(dirname)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	cret = C.g_io_modules_load_all_in_directory(carg1)
-	runtime.KeepAlive(dirname)
-
-	var goret []IOModule
-
-	goret = glib.UnsafeListFromGlibFull(
-		unsafe.Pointer(cret),
-		func(v unsafe.Pointer) IOModule {
-			var dst IOModule // converted
-			dst = UnsafeIOModuleFromGlibFull(v)
-			return dst
-		},
-	)
-
-	return goret
-}
-
-// IOModulesLoadAllInDirectoryWithScope wraps g_io_modules_load_all_in_directory_with_scope
-// 
-// The function takes the following parameters:
-// 
-// 	- dirname string: pathname for a directory containing modules
-//     to load. 
-// 	- scope *IOModuleScope: a scope to use when scanning the modules. 
-// 
-// The function returns the following values:
-// 
-// 	- goret []IOModule 
-//
-// Loads all the modules in the specified directory.
-// 
-// If don't require all modules to be initialized (and thus registering
-// all gtypes) then you can use g_io_modules_scan_all_in_directory()
-// which allows delayed/lazy loading of modules.
-func IOModulesLoadAllInDirectoryWithScope(dirname string, scope *IOModuleScope) []IOModule {
-	var carg1 *C.gchar          // in, none, string
-	var carg2 *C.GIOModuleScope // in, none, converted
-	var cret  *C.GList          // container, transfer: full
-
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(dirname)))
-	defer C.free(unsafe.Pointer(carg1))
-	carg2 = (*C.GIOModuleScope)(UnsafeIOModuleScopeToGlibNone(scope))
-
-	cret = C.g_io_modules_load_all_in_directory_with_scope(carg1, carg2)
-	runtime.KeepAlive(dirname)
-	runtime.KeepAlive(scope)
-
-	var goret []IOModule
-
-	goret = glib.UnsafeListFromGlibFull(
-		unsafe.Pointer(cret),
-		func(v unsafe.Pointer) IOModule {
-			var dst IOModule // converted
-			dst = UnsafeIOModuleFromGlibFull(v)
-			return dst
-		},
-	)
-
-	return goret
-}
-
 // IOModulesScanAllInDirectory wraps g_io_modules_scan_all_in_directory
 // 
 // The function takes the following parameters:
@@ -14201,7 +14115,6 @@ func UnsafeApplyAsyncInitableOverrides[Instance AsyncInitable](gclass unsafe.Poi
 				if carg3 != nil {
 					_ = callback
 					_ = carg3
-					_ = _
 					_ = carg4
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -18621,7 +18534,6 @@ func UnsafeApplyDriveOverrides[Instance Drive](gclass unsafe.Pointer, overrides 
 				if carg3 != nil {
 					_ = callback
 					_ = carg3
-					_ = _
 					_ = carg4
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -18695,7 +18607,6 @@ func UnsafeApplyDriveOverrides[Instance Drive](gclass unsafe.Pointer, overrides 
 				if carg4 != nil {
 					_ = callback
 					_ = carg4
-					_ = _
 					_ = carg5
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -19029,7 +18940,6 @@ func UnsafeApplyDriveOverrides[Instance Drive](gclass unsafe.Pointer, overrides 
 				if carg2 != nil {
 					_ = callback
 					_ = carg2
-					_ = _
 					_ = carg3
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -19088,7 +18998,6 @@ func UnsafeApplyDriveOverrides[Instance Drive](gclass unsafe.Pointer, overrides 
 				if carg4 != nil {
 					_ = callback
 					_ = carg4
-					_ = _
 					_ = carg5
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -19147,7 +19056,6 @@ func UnsafeApplyDriveOverrides[Instance Drive](gclass unsafe.Pointer, overrides 
 				if carg4 != nil {
 					_ = callback
 					_ = carg4
-					_ = _
 					_ = carg5
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -20902,7 +20810,6 @@ func UnsafeApplyDtlsConnectionOverrides[Instance DtlsConnection](gclass unsafe.P
 				if carg3 != nil {
 					_ = callback
 					_ = carg3
-					_ = _
 					_ = carg4
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -21020,7 +20927,6 @@ func UnsafeApplyDtlsConnectionOverrides[Instance DtlsConnection](gclass unsafe.P
 				if carg5 != nil {
 					_ = callback
 					_ = carg5
-					_ = _
 					_ = carg6
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -30811,7 +30717,6 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				if carg4 != nil {
 					_ = callback
 					_ = carg4
-					_ = _
 					_ = carg5
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -30920,7 +30825,6 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				if carg4 != nil {
 					_ = callback
 					_ = carg4
-					_ = _
 					_ = carg5
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -31003,7 +30907,6 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				if carg4 != nil {
 					_ = callback
 					_ = carg4
-					_ = _
 					_ = carg5
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -31084,7 +30987,6 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				if carg3 != nil {
 					_ = callback
 					_ = carg3
-					_ = _
 					_ = carg4
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -31159,7 +31061,6 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				if carg3 != nil {
 					_ = callback
 					_ = carg3
-					_ = _
 					_ = carg4
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -31218,7 +31119,6 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				if carg4 != nil {
 					_ = callback
 					_ = carg4
-					_ = _
 					_ = carg5
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -31307,7 +31207,6 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				if carg5 != nil {
 					_ = callback
 					_ = carg5
-					_ = _
 					_ = carg6
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -31410,7 +31309,6 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				if carg3 != nil {
 					_ = callback
 					_ = carg3
-					_ = _
 					_ = carg4
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -31733,7 +31631,6 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				if carg3 != nil {
 					_ = callback
 					_ = carg3
-					_ = _
 					_ = carg4
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -31820,7 +31717,6 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				if carg4 != nil {
 					_ = callback
 					_ = carg4
-					_ = _
 					_ = carg5
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -31967,7 +31863,6 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				if carg4 != nil {
 					_ = callback
 					_ = carg4
-					_ = _
 					_ = carg5
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -32026,7 +31921,6 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				if carg4 != nil {
 					_ = callback
 					_ = carg4
-					_ = _
 					_ = carg5
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -32131,7 +32025,6 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				if carg3 != nil {
 					_ = callback
 					_ = carg3
-					_ = _
 					_ = carg4
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -32182,7 +32075,6 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				if carg2 != nil {
 					_ = callback
 					_ = carg2
-					_ = _
 					_ = carg3
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -32291,7 +32183,6 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				if carg4 != nil {
 					_ = callback
 					_ = carg4
-					_ = _
 					_ = carg5
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -32378,7 +32269,6 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				if carg5 != nil {
 					_ = callback
 					_ = carg5
-					_ = _
 					_ = carg6
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -32483,7 +32373,6 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				if carg3 != nil {
 					_ = callback
 					_ = carg3
-					_ = _
 					_ = carg4
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -32608,7 +32497,6 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				if carg6 != nil {
 					_ = callback
 					_ = carg6
-					_ = _
 					_ = carg7
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -32707,7 +32595,6 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				if carg6 != nil {
 					_ = callback
 					_ = carg6
-					_ = _
 					_ = carg7
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -32786,7 +32673,6 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				if carg5 != nil {
 					_ = callback
 					_ = carg5
-					_ = _
 					_ = carg6
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -32905,7 +32791,6 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				if carg4 != nil {
 					_ = callback
 					_ = carg4
-					_ = _
 					_ = carg5
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -32962,7 +32847,6 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				if carg4 != nil {
 					_ = callback
 					_ = carg4
-					_ = _
 					_ = carg5
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -33021,7 +32905,6 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				if carg4 != nil {
 					_ = callback
 					_ = carg4
-					_ = _
 					_ = carg5
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -33104,7 +32987,6 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				if carg3 != nil {
 					_ = callback
 					_ = carg3
-					_ = _
 					_ = carg4
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -33159,7 +33041,6 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				if carg3 != nil {
 					_ = callback
 					_ = carg3
-					_ = _
 					_ = carg4
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -33218,7 +33099,6 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				if carg4 != nil {
 					_ = callback
 					_ = carg4
-					_ = _
 					_ = carg5
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -34557,7 +34437,6 @@ func UnsafeApplyLoadableIconOverrides[Instance LoadableIcon](gclass unsafe.Point
 				if carg3 != nil {
 					_ = callback
 					_ = carg3
-					_ = _
 					_ = carg4
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -36410,7 +36289,6 @@ func UnsafeApplyMountOverrides[Instance Mount](gclass unsafe.Pointer, overrides 
 				if carg3 != nil {
 					_ = callback
 					_ = carg3
-					_ = _
 					_ = carg4
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -36469,7 +36347,6 @@ func UnsafeApplyMountOverrides[Instance Mount](gclass unsafe.Pointer, overrides 
 				if carg4 != nil {
 					_ = callback
 					_ = carg4
-					_ = _
 					_ = carg5
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -36715,7 +36592,6 @@ func UnsafeApplyMountOverrides[Instance Mount](gclass unsafe.Pointer, overrides 
 				if carg3 != nil {
 					_ = callback
 					_ = carg3
-					_ = _
 					_ = carg4
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -36821,7 +36697,6 @@ func UnsafeApplyMountOverrides[Instance Mount](gclass unsafe.Pointer, overrides 
 				if carg4 != nil {
 					_ = callback
 					_ = carg4
-					_ = _
 					_ = carg5
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -36876,7 +36751,6 @@ func UnsafeApplyMountOverrides[Instance Mount](gclass unsafe.Pointer, overrides 
 				if carg3 != nil {
 					_ = callback
 					_ = carg3
-					_ = _
 					_ = carg4
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -36935,7 +36809,6 @@ func UnsafeApplyMountOverrides[Instance Mount](gclass unsafe.Pointer, overrides 
 				if carg4 != nil {
 					_ = callback
 					_ = carg4
-					_ = _
 					_ = carg5
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -37514,7 +37387,6 @@ func UnsafeApplyNetworkMonitorOverrides[Instance NetworkMonitor](gclass unsafe.P
 				if carg3 != nil {
 					_ = callback
 					_ = carg3
-					_ = _
 					_ = carg4
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -39033,7 +38905,6 @@ func UnsafeApplyProxyOverrides[Instance Proxy](gclass unsafe.Pointer, overrides 
 				if carg4 != nil {
 					_ = callback
 					_ = carg4
-					_ = _
 					_ = carg5
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -39509,7 +39380,6 @@ func UnsafeApplyProxyResolverOverrides[Instance ProxyResolver](gclass unsafe.Poi
 				if carg3 != nil {
 					_ = callback
 					_ = carg3
-					_ = _
 					_ = carg4
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -42783,7 +42653,6 @@ func UnsafeApplyVolumeOverrides[Instance Volume](gclass unsafe.Pointer, override
 				if carg3 != nil {
 					_ = callback
 					_ = carg3
-					_ = _
 					_ = carg4
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -42842,7 +42711,6 @@ func UnsafeApplyVolumeOverrides[Instance Volume](gclass unsafe.Pointer, override
 				if carg4 != nil {
 					_ = callback
 					_ = carg4
-					_ = _
 					_ = carg5
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -43144,7 +43012,6 @@ func UnsafeApplyVolumeOverrides[Instance Volume](gclass unsafe.Pointer, override
 				if carg4 != nil {
 					_ = callback
 					_ = carg4
-					_ = _
 					_ = carg5
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -57725,7 +57592,6 @@ func UnsafeApplyFileEnumeratorOverrides[Instance FileEnumerator](gclass unsafe.P
 				if carg3 != nil {
 					_ = callback
 					_ = carg3
-					_ = _
 					_ = carg4
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -57838,7 +57704,6 @@ func UnsafeApplyFileEnumeratorOverrides[Instance FileEnumerator](gclass unsafe.P
 				if carg4 != nil {
 					_ = callback
 					_ = carg4
-					_ = _
 					_ = carg5
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -61282,146 +61147,6 @@ func RegisterFilenameCompleterSubClass[InstanceT FilenameCompleter](
 	)
 }
 
-// IOModuleInstance is the instance type used by all types extending GIOModule. It is used internally by the bindings. Users should use the interface [IOModule] instead.
-type IOModuleInstance struct {
-	_ [0]func() // equal guard
-	gobject.TypeModuleInstance
-	// implemented interfaces:
-	gobject.TypePluginInstance
-}
-
-var _ IOModule = (*IOModuleInstance)(nil)
-
-// IOModule wraps GIOModule
-//
-// Provides an interface and default functions for loading and unloading
-// modules. This is used internally to make GIO extensible, but can also
-// be used by others to implement module loading.
-type IOModule interface {
-	gobject.TypeModule
-	gobject.TypePlugin
-	upcastToGIOModule() *IOModuleInstance
-}
-
-func unsafeWrapIOModule(base *gobject.ObjectInstance) *IOModuleInstance {
-	return &IOModuleInstance{
-		TypeModuleInstance: gobject.TypeModuleInstance{
-			ObjectInstance: *base,
-		},
-		TypePluginInstance: gobject.TypePluginInstance{
-			Instance: *base,
-		},
-	}
-}
-
-func marshalIOModuleInstance(p unsafe.Pointer) (any, error) {
-	return unsafeWrapIOModule(gobject.ValueFromNative(p).Object()), nil
-}
-
-// UnsafeIOModuleFromGlibNone is used to convert raw GIOModule pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
-func UnsafeIOModuleFromGlibNone(c unsafe.Pointer) IOModule {
-	return gobject.UnsafeObjectFromGlibNone(c).(IOModule)
-}
-
-// UnsafeIOModuleFromGlibFull is used to convert raw GIOModule pointers to go while attaching a finalizer. This is used by the bindings internally.
-func UnsafeIOModuleFromGlibFull(c unsafe.Pointer) IOModule {
-	return gobject.UnsafeObjectFromGlibFull(c).(IOModule)
-}
-
-func (i *IOModuleInstance) upcastToGIOModule() *IOModuleInstance {
-	return i
-}
-
-// UnsafeIOModuleToGlibNone is used to convert the instance to it's C value GIOModule. This is used by the bindings internally.
-func UnsafeIOModuleToGlibNone(c IOModule) unsafe.Pointer {
-	return gobject.UnsafeObjectToGlibNone(c)
-}
-
-// UnsafeIOModuleToGlibFull is used to convert the instance to it's C value GIOModule, while removeing the finalizer. This is used by the bindings internally.
-func UnsafeIOModuleToGlibFull(c IOModule) unsafe.Pointer {
-	return gobject.UnsafeObjectToGlibFull(c)
-}
-
-// NewIOModule wraps g_io_module_new
-// 
-// The function takes the following parameters:
-// 
-// 	- filename string: filename of the shared library module. 
-// 
-// The function returns the following values:
-// 
-// 	- goret IOModule 
-//
-// Creates a new GIOModule that will load the specific
-// shared library when in use.
-func NewIOModule(filename string) IOModule {
-	var carg1 *C.gchar     // in, none, string
-	var cret  *C.GIOModule // return, full, converted
-
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(filename)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	cret = C.g_io_module_new(carg1)
-	runtime.KeepAlive(filename)
-
-	var goret IOModule
-
-	goret = UnsafeIOModuleFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// IOModuleQuery wraps g_io_module_query
-// 
-// The function returns the following values:
-// 
-// 	- goret []string 
-//
-// Optional API for GIO modules to implement.
-// 
-// Should return a list of all the extension points that may be
-// implemented in this module.
-// 
-// This method will not be called in normal use, however it may be
-// called when probing existing modules and recording which extension
-// points that this model is used for. This means we won't have to
-// load and initialize this module unless its needed.
-// 
-// If this function is not implemented by the module the module will
-// always be loaded, initialized and then unloaded on application
-// startup so that it can register its extension points during init.
-// 
-// Note that a module need not actually implement all the extension
-// points that g_io_module_query() returns, since the exact list of
-// extension may depend on runtime issues. However all extension
-// points actually implemented must be returned by g_io_module_query()
-// (if defined).
-// 
-// When installing a module that implements g_io_module_query() you must
-// run gio-querymodules in order to build the cache files required for
-// lazy loading.
-// 
-// Since 2.56, this function should be named `g_io_&lt;modulename&gt;_query`, where
-// `modulename` is the plugin’s filename with the `lib` or `libgio` prefix and
-// everything after the first dot removed, and with `-` replaced with `_`
-// throughout. For example, `libgiognutls-helper.so` becomes `gnutls_helper`.
-// Using the new symbol names avoids name clashes when building modules
-// statically. The old symbol names continue to be supported, but cannot be used
-// for static builds.
-func IOModuleQuery() []string {
-	var cret **C.char // return, transfer: full, C Pointers: 2, Name: array[utf8], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
-
-	cret = C.g_io_module_query()
-
-	var goret []string
-
-	_ = goret
-	_ = cret
-	panic("unimplemented conversion of []string (char**)")
-
-	return goret
-}
-
 // IOStreamInstance is the instance type used by all types extending GIOStream. It is used internally by the bindings. Users should use the interface [IOStream] instead.
 type IOStreamInstance struct {
 	_ [0]func() // equal guard
@@ -62117,7 +61842,6 @@ func UnsafeApplyIOStreamOverrides[Instance IOStream](gclass unsafe.Pointer, over
 				if carg3 != nil {
 					_ = callback
 					_ = carg3
-					_ = _
 					_ = carg4
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -64804,7 +64528,6 @@ func UnsafeApplyInputStreamOverrides[Instance InputStream](gclass unsafe.Pointer
 				if carg3 != nil {
 					_ = callback
 					_ = carg3
-					_ = _
 					_ = carg4
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -64975,7 +64698,6 @@ func UnsafeApplyInputStreamOverrides[Instance InputStream](gclass unsafe.Pointer
 				if carg4 != nil {
 					_ = callback
 					_ = carg4
-					_ = _
 					_ = carg5
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -71464,7 +71186,6 @@ func UnsafeApplyOutputStreamOverrides[Instance OutputStream](gclass unsafe.Point
 				if carg3 != nil {
 					_ = callback
 					_ = carg3
-					_ = _
 					_ = carg4
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -71575,7 +71296,6 @@ func UnsafeApplyOutputStreamOverrides[Instance OutputStream](gclass unsafe.Point
 				if carg3 != nil {
 					_ = callback
 					_ = carg3
-					_ = _
 					_ = carg4
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -71664,7 +71384,6 @@ func UnsafeApplyOutputStreamOverrides[Instance OutputStream](gclass unsafe.Point
 				if carg5 != nil {
 					_ = callback
 					_ = carg5
-					_ = _
 					_ = carg6
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -71722,7 +71441,6 @@ func UnsafeApplyOutputStreamOverrides[Instance OutputStream](gclass unsafe.Point
 				if carg5 != nil {
 					_ = callback
 					_ = carg5
-					_ = _
 					_ = carg6
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -71811,7 +71529,6 @@ func UnsafeApplyOutputStreamOverrides[Instance OutputStream](gclass unsafe.Point
 				if carg5 != nil {
 					_ = callback
 					_ = carg5
-					_ = _
 					_ = carg6
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -72618,7 +72335,6 @@ func UnsafeApplyPermissionOverrides[Instance Permission](gclass unsafe.Pointer, 
 				if carg2 != nil {
 					_ = callback
 					_ = carg2
-					_ = _
 					_ = carg3
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -72699,7 +72415,6 @@ func UnsafeApplyPermissionOverrides[Instance Permission](gclass unsafe.Pointer, 
 				if carg2 != nil {
 					_ = callback
 					_ = carg2
-					_ = _
 					_ = carg3
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -74130,7 +73845,6 @@ func UnsafeApplyResolverOverrides[Instance Resolver](gclass unsafe.Pointer, over
 				if carg3 != nil {
 					_ = callback
 					_ = carg3
-					_ = _
 					_ = carg4
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -74213,7 +73927,6 @@ func UnsafeApplyResolverOverrides[Instance Resolver](gclass unsafe.Pointer, over
 				if carg3 != nil {
 					_ = callback
 					_ = carg3
-					_ = _
 					_ = carg4
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -74302,7 +74015,6 @@ func UnsafeApplyResolverOverrides[Instance Resolver](gclass unsafe.Pointer, over
 				if carg4 != nil {
 					_ = callback
 					_ = carg4
-					_ = _
 					_ = carg5
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -74359,7 +74071,6 @@ func UnsafeApplyResolverOverrides[Instance Resolver](gclass unsafe.Pointer, over
 				if carg4 != nil {
 					_ = callback
 					_ = carg4
-					_ = _
 					_ = carg5
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -74388,7 +74099,6 @@ func UnsafeApplyResolverOverrides[Instance Resolver](gclass unsafe.Pointer, over
 				if carg3 != nil {
 					_ = callback
 					_ = carg3
-					_ = _
 					_ = carg4
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -82771,7 +82481,6 @@ func UnsafeApplySocketAddressEnumeratorOverrides[Instance SocketAddressEnumerato
 				if carg2 != nil {
 					_ = callback
 					_ = carg2
-					_ = _
 					_ = carg3
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -91634,7 +91343,6 @@ func UnsafeApplyTlsConnectionOverrides[Instance TlsConnection](gclass unsafe.Poi
 				if carg3 != nil {
 					_ = callback
 					_ = carg3
-					_ = _
 					_ = carg4
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -92854,7 +92562,6 @@ func UnsafeApplyTlsDatabaseOverrides[Instance TlsDatabase](gclass unsafe.Pointer
 				if carg5 != nil {
 					_ = callback
 					_ = carg5
-					_ = _
 					_ = carg6
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -92947,7 +92654,6 @@ func UnsafeApplyTlsDatabaseOverrides[Instance TlsDatabase](gclass unsafe.Pointer
 				if carg5 != nil {
 					_ = callback
 					_ = carg5
-					_ = _
 					_ = carg6
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -93078,7 +92784,6 @@ func UnsafeApplyTlsDatabaseOverrides[Instance TlsDatabase](gclass unsafe.Pointer
 				if carg7 != nil {
 					_ = callback
 					_ = carg7
-					_ = _
 					_ = carg8
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -93956,7 +93661,6 @@ func UnsafeApplyTlsInteractionOverrides[Instance TlsInteraction](gclass unsafe.P
 				if carg3 != nil {
 					_ = callback
 					_ = carg3
-					_ = _
 					_ = carg4
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -94041,7 +93745,6 @@ func UnsafeApplyTlsInteractionOverrides[Instance TlsInteraction](gclass unsafe.P
 				if carg4 != nil {
 					_ = callback
 					_ = carg4
-					_ = _
 					_ = carg5
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -97249,7 +96952,6 @@ func UnsafeApplyFileIOStreamOverrides[Instance FileIOStream](gclass unsafe.Point
 				if carg4 != nil {
 					_ = callback
 					_ = carg4
-					_ = _
 					_ = carg5
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -97782,7 +97484,6 @@ func UnsafeApplyFileInputStreamOverrides[Instance FileInputStream](gclass unsafe
 				if carg4 != nil {
 					_ = callback
 					_ = carg4
-					_ = _
 					_ = carg5
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -98409,7 +98110,6 @@ func UnsafeApplyFileOutputStreamOverrides[Instance FileOutputStream](gclass unsa
 				if carg4 != nil {
 					_ = callback
 					_ = carg4
-					_ = _
 					_ = carg5
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -101550,7 +101250,6 @@ func UnsafeApplyBufferedInputStreamOverrides[Instance BufferedInputStream](gclas
 				if carg4 != nil {
 					_ = callback
 					_ = carg4
-					_ = _
 					_ = carg5
 					panic("unimplemented conversion of AsyncReadyCallback (GAsyncReadyCallback)")
 				}
@@ -108801,15 +108500,6 @@ func UnsafeIOModuleClassFree(i *IOModuleClass) {
 // UnsafeIOModuleClassToGlibNone returns the underlying C pointer. This is used by the bindings internally.
 func UnsafeIOModuleClassToGlibNone(i *IOModuleClass) unsafe.Pointer {
 	return unsafe.Pointer(i.native)
-}
-
-// ParentClass returns the type struct of the parent class of this type struct.
-// This essentially casts the underlying c pointer.
-func (i *IOModuleClass) ParentClass() *gobject.TypeModuleClass {
-	parent := gobject.UnsafeTypeModuleClassFromGlibBorrow(UnsafeIOModuleClassToGlibNone(i))
-	// attach a cleanup to keep the instance alive as long as the parent is referenced
-	runtime.AddCleanup(parent, func(_ *IOModuleClass) {}, i)
-	return parent
 }
 
 // IOModuleScope wraps GIOModuleScope

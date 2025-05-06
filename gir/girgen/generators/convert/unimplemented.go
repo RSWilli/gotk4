@@ -81,11 +81,9 @@ func (n *UnimplementedConverter) Convert(w file.File) {
 
 	// also use referenced implicit params to prevent not used errors:
 	if n.Param.Closure != nil {
-		fmt.Fprintf(w.Go(), "_ = %s\n", n.Param.Closure.GoName)
 		fmt.Fprintf(w.Go(), "_ = %s\n", n.Param.Closure.CName)
 	}
 	if n.Param.Destroy != nil {
-		fmt.Fprintf(w.Go(), "_ = %s\n", n.Param.Destroy.GoName)
 		fmt.Fprintf(w.Go(), "_ = %s\n", n.Param.Destroy.CName)
 	}
 	if arr, ok := n.Param.Type.Type.(*typesystem.Array); ok {
