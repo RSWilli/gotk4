@@ -44,7 +44,14 @@ type GoToCStringConverter struct {
 func (c *GoToCStringConverter) Convert(w file.File) {
 	w.GoImport("unsafe")
 
-	fmt.Fprintf(w.Go(), "%s = (%s)(unsafe.Pointer(C.CString(%s)))\n", c.Param.CName, c.Param.CGoType(), c.Param.GoName)
+	param := c.Param.CName
+
+	if c.Param.Direction == "out" {
+		// this may be needed for other GoToC out conversions as well
+		param = "*" + param
+	}
+
+	fmt.Fprintf(w.Go(), "%s = (%s)(unsafe.Pointer(C.CString(%s)))\n", param, c.Param.CGoType(), c.Param.GoName)
 
 	switch c.Param.TransferOwnership {
 	case typesystem.TransferFull:
