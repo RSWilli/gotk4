@@ -339,6 +339,10 @@ import (
 // gboolean _gotk4_gtk3_Scrollable_virtual_get_border(void* fnptr, GtkScrollable* carg0, GtkBorder* carg1) {
 // 	return ((gboolean (*) (GtkScrollable*, GtkBorder*))(fnptr))(carg0, carg1);
 // }
+// extern gboolean _gotk4_gtk3_StyleProvider_get_style_property(GtkStyleProvider*, GtkWidgetPath*, GtkStateFlags, GParamSpec*, GValue);
+// gboolean _gotk4_gtk3_StyleProvider_virtual_get_style_property(void* fnptr, GtkStyleProvider* carg0, GtkWidgetPath* carg1, GtkStateFlags carg2, GParamSpec* carg3, GValue* carg4) {
+// 	return ((gboolean (*) (GtkStyleProvider*, GtkWidgetPath*, GtkStateFlags, GParamSpec*, GValue*))(fnptr))(carg0, carg1, carg2, carg3, carg4);
+// }
 // extern PangoEllipsizeMode _gotk4_gtk3_ToolShell_get_ellipsize_mode(GtkToolShell*);
 // extern GtkIconSize _gotk4_gtk3_ToolShell_get_icon_size(GtkToolShell*);
 // extern GtkOrientation _gotk4_gtk3_ToolShell_get_orientation(GtkToolShell*);
@@ -535,6 +539,7 @@ import (
 // extern gboolean _gotk4_gtk3_CellArea_focus(GtkCellArea*, GtkDirectionType);
 // extern void _gotk4_gtk3_CellArea_foreach(GtkCellArea*, GtkCellCallback, gpointer);
 // extern void _gotk4_gtk3_CellArea_foreach_alloc(GtkCellArea*, GtkCellAreaContext*, GtkWidget*, GdkRectangle*, GdkRectangle*, GtkCellAllocCallback, gpointer);
+// extern void _gotk4_gtk3_CellArea_get_cell_property(GtkCellArea*, GtkCellRenderer*, guint, GValue*, GParamSpec*);
 // extern void _gotk4_gtk3_CellArea_get_preferred_height(GtkCellArea*, GtkCellAreaContext*, GtkWidget*, gint, gint);
 // extern void _gotk4_gtk3_CellArea_get_preferred_height_for_width(GtkCellArea*, GtkCellAreaContext*, GtkWidget*, gint, gint, gint);
 // extern void _gotk4_gtk3_CellArea_get_preferred_width(GtkCellArea*, GtkCellAreaContext*, GtkWidget*, gint, gint);
@@ -542,6 +547,7 @@ import (
 // extern GtkSizeRequestMode _gotk4_gtk3_CellArea_get_request_mode(GtkCellArea*);
 // extern gboolean _gotk4_gtk3_CellArea_is_activatable(GtkCellArea*);
 // extern void _gotk4_gtk3_CellArea_remove(GtkCellArea*, GtkCellRenderer*);
+// extern void _gotk4_gtk3_CellArea_set_cell_property(GtkCellArea*, GtkCellRenderer*, guint, GValue*, GParamSpec*);
 // gboolean _gotk4_gtk3_CellArea_virtual_activate(void* fnptr, GtkCellArea* carg0, GtkCellAreaContext* carg1, GtkWidget* carg2, GdkRectangle* carg3, GtkCellRendererState carg4, gboolean carg5) {
 // 	return ((gboolean (*) (GtkCellArea*, GtkCellAreaContext*, GtkWidget*, GdkRectangle*, GtkCellRendererState, gboolean))(fnptr))(carg0, carg1, carg2, carg3, carg4, carg5);
 // }
@@ -566,6 +572,9 @@ import (
 // void _gotk4_gtk3_CellArea_virtual_foreach_alloc(void* fnptr, GtkCellArea* carg0, GtkCellAreaContext* carg1, GtkWidget* carg2, GdkRectangle* carg3, GdkRectangle* carg4, GtkCellAllocCallback carg5, gpointer carg6) {
 // 	return ((void (*) (GtkCellArea*, GtkCellAreaContext*, GtkWidget*, GdkRectangle*, GdkRectangle*, GtkCellAllocCallback, gpointer))(fnptr))(carg0, carg1, carg2, carg3, carg4, carg5, carg6);
 // }
+// void _gotk4_gtk3_CellArea_virtual_get_cell_property(void* fnptr, GtkCellArea* carg0, GtkCellRenderer* carg1, guint carg2, GValue* carg3, GParamSpec* carg4) {
+// 	return ((void (*) (GtkCellArea*, GtkCellRenderer*, guint, GValue*, GParamSpec*))(fnptr))(carg0, carg1, carg2, carg3, carg4);
+// }
 // void _gotk4_gtk3_CellArea_virtual_get_preferred_height(void* fnptr, GtkCellArea* carg0, GtkCellAreaContext* carg1, GtkWidget* carg2, gint* carg3, gint* carg4) {
 // 	return ((void (*) (GtkCellArea*, GtkCellAreaContext*, GtkWidget*, gint*, gint*))(fnptr))(carg0, carg1, carg2, carg3, carg4);
 // }
@@ -586,6 +595,9 @@ import (
 // }
 // void _gotk4_gtk3_CellArea_virtual_remove(void* fnptr, GtkCellArea* carg0, GtkCellRenderer* carg1) {
 // 	return ((void (*) (GtkCellArea*, GtkCellRenderer*))(fnptr))(carg0, carg1);
+// }
+// void _gotk4_gtk3_CellArea_virtual_set_cell_property(void* fnptr, GtkCellArea* carg0, GtkCellRenderer* carg1, guint carg2, GValue* carg3, GParamSpec* carg4) {
+// 	return ((void (*) (GtkCellArea*, GtkCellRenderer*, guint, GValue*, GParamSpec*))(fnptr))(carg0, carg1, carg2, carg3, carg4);
 // }
 // extern void _gotk4_gtk3_CellAreaContext_allocate(GtkCellAreaContext*, gint, gint);
 // extern void _gotk4_gtk3_CellAreaContext_get_preferred_height_for_width(GtkCellAreaContext*, gint, gint, gint);
@@ -982,6 +994,7 @@ import (
 // extern gboolean _gotk4_gtk3_Widget_button_press_event(GtkWidget*, GdkEventButton*);
 // extern gboolean _gotk4_gtk3_Widget_button_release_event(GtkWidget*, GdkEventButton*);
 // extern gboolean _gotk4_gtk3_Widget_can_activate_accel(GtkWidget*, guint);
+// extern void _gotk4_gtk3_Widget_child_notify(GtkWidget*, GParamSpec*);
 // extern void _gotk4_gtk3_Widget_composited_changed(GtkWidget*);
 // extern void _gotk4_gtk3_Widget_compute_expand(GtkWidget*, gboolean*, gboolean*);
 // extern gboolean _gotk4_gtk3_Widget_configure_event(GtkWidget*, GdkEventConfigure*);
@@ -1070,6 +1083,9 @@ import (
 // }
 // gboolean _gotk4_gtk3_Widget_virtual_can_activate_accel(void* fnptr, GtkWidget* carg0, guint carg1) {
 // 	return ((gboolean (*) (GtkWidget*, guint))(fnptr))(carg0, carg1);
+// }
+// void _gotk4_gtk3_Widget_virtual_child_notify(void* fnptr, GtkWidget* carg0, GParamSpec* carg1) {
+// 	return ((void (*) (GtkWidget*, GParamSpec*))(fnptr))(carg0, carg1);
 // }
 // void _gotk4_gtk3_Widget_virtual_composited_changed(void* fnptr, GtkWidget* carg0) {
 // 	return ((void (*) (GtkWidget*))(fnptr))(carg0);
@@ -1316,8 +1332,10 @@ import (
 // extern GType _gotk4_gtk3_Container_child_type(GtkContainer*);
 // extern gchar* _gotk4_gtk3_Container_composite_name(GtkContainer*, GtkWidget*);
 // extern void _gotk4_gtk3_Container_forall(GtkContainer*, gboolean, GtkCallback, gpointer);
+// extern void _gotk4_gtk3_Container_get_child_property(GtkContainer*, GtkWidget*, guint, GValue*, GParamSpec*);
 // extern GtkWidgetPath* _gotk4_gtk3_Container_get_path_for_child(GtkContainer*, GtkWidget*);
 // extern void _gotk4_gtk3_Container_remove(GtkContainer*, GtkWidget*);
+// extern void _gotk4_gtk3_Container_set_child_property(GtkContainer*, GtkWidget*, guint, GValue*, GParamSpec*);
 // extern void _gotk4_gtk3_Container_set_focus_child(GtkContainer*, GtkWidget*);
 // void _gotk4_gtk3_Container_virtual_add(void* fnptr, GtkContainer* carg0, GtkWidget* carg1) {
 // 	return ((void (*) (GtkContainer*, GtkWidget*))(fnptr))(carg0, carg1);
@@ -1334,11 +1352,17 @@ import (
 // void _gotk4_gtk3_Container_virtual_forall(void* fnptr, GtkContainer* carg0, gboolean carg1, GtkCallback carg2, gpointer carg3) {
 // 	return ((void (*) (GtkContainer*, gboolean, GtkCallback, gpointer))(fnptr))(carg0, carg1, carg2, carg3);
 // }
+// void _gotk4_gtk3_Container_virtual_get_child_property(void* fnptr, GtkContainer* carg0, GtkWidget* carg1, guint carg2, GValue* carg3, GParamSpec* carg4) {
+// 	return ((void (*) (GtkContainer*, GtkWidget*, guint, GValue*, GParamSpec*))(fnptr))(carg0, carg1, carg2, carg3, carg4);
+// }
 // GtkWidgetPath* _gotk4_gtk3_Container_virtual_get_path_for_child(void* fnptr, GtkContainer* carg0, GtkWidget* carg1) {
 // 	return ((GtkWidgetPath* (*) (GtkContainer*, GtkWidget*))(fnptr))(carg0, carg1);
 // }
 // void _gotk4_gtk3_Container_virtual_remove(void* fnptr, GtkContainer* carg0, GtkWidget* carg1) {
 // 	return ((void (*) (GtkContainer*, GtkWidget*))(fnptr))(carg0, carg1);
+// }
+// void _gotk4_gtk3_Container_virtual_set_child_property(void* fnptr, GtkContainer* carg0, GtkWidget* carg1, guint carg2, GValue* carg3, GParamSpec* carg4) {
+// 	return ((void (*) (GtkContainer*, GtkWidget*, guint, GValue*, GParamSpec*))(fnptr))(carg0, carg1, carg2, carg3, carg4);
 // }
 // void _gotk4_gtk3_Container_virtual_set_focus_child(void* fnptr, GtkContainer* carg0, GtkWidget* carg1) {
 // 	return ((void (*) (GtkContainer*, GtkWidget*))(fnptr))(carg0, carg1);
@@ -14687,9 +14711,7 @@ func UnsafeApplyCellLayoutOverrides[Instance CellLayout](gclass unsafe.Pointer, 
 				if carg2 != nil {
 					_ = fn
 					_ = carg2
-					_ = funcData
 					_ = carg3
-					_ = destroy
 					_ = carg4
 					panic("unimplemented conversion of CellLayoutDataFunc (GtkCellLayoutDataFunc)")
 				}
@@ -20014,9 +20036,7 @@ func UnsafeApplyFontChooserOverrides[Instance FontChooser](gclass unsafe.Pointer
 				if carg1 != nil {
 					_ = filter
 					_ = carg1
-					_ = _
 					_ = carg2
-					_ = destroy
 					_ = carg3
 					panic("unimplemented conversion of FontFilterFunc (GtkFontFilterFunc)")
 				}
@@ -21921,9 +21941,7 @@ func UnsafeApplyRecentChooserOverrides[Instance RecentChooser](gclass unsafe.Poi
 				chooser = UnsafeRecentChooserFromGlibNone(unsafe.Pointer(carg0)).(Instance)
 				_ = sortFunc
 				_ = carg1
-				_ = sortData
 				_ = carg2
-				_ = dataDestroy
 				_ = carg3
 				panic("unimplemented conversion of RecentSortFunc (GtkRecentSortFunc)")
 
@@ -22394,6 +22412,23 @@ var _ StyleProvider = (*StyleProviderInstance)(nil)
 // See gtk_style_context_add_provider() and gtk_style_context_add_provider_for_screen().
 type StyleProvider interface {
 	upcastToGtkStyleProvider() *StyleProviderInstance
+
+	// GetStyleProperty wraps gtk_style_provider_get_style_property
+	// 
+	// The function takes the following parameters:
+	// 
+	// 	- path *WidgetPath: #GtkWidgetPath to query 
+	// 	- state StateFlags: state to query the style property for 
+	// 	- pspec *gobject.ParamSpec: The #GParamSpec to query 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- value gobject.Value: return location for the property value 
+	// 	- goret bool 
+	//
+	// Looks up a widget style property as defined by @provider for
+	// the widget represented by @path.
+	GetStyleProperty(*WidgetPath, StateFlags, *gobject.ParamSpec) (gobject.Value, bool)
 }
 
 var _ StyleProvider = (*StyleProviderInstance)(nil)
@@ -22434,14 +22469,106 @@ func UnsafeStyleProviderToGlibFull(c StyleProvider) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
+// GetStyleProperty wraps gtk_style_provider_get_style_property
+// 
+// The function takes the following parameters:
+// 
+// 	- path *WidgetPath: #GtkWidgetPath to query 
+// 	- state StateFlags: state to query the style property for 
+// 	- pspec *gobject.ParamSpec: The #GParamSpec to query 
+// 
+// The function returns the following values:
+// 
+// 	- value gobject.Value: return location for the property value 
+// 	- goret bool 
+//
+// Looks up a widget style property as defined by @provider for
+// the widget represented by @path.
+func (provider *StyleProviderInstance) GetStyleProperty(path *WidgetPath, state StateFlags, pspec *gobject.ParamSpec) (gobject.Value, bool) {
+	var carg0 *C.GtkStyleProvider // in, none, converted
+	var carg1 *C.GtkWidgetPath    // in, none, converted
+	var carg2 C.GtkStateFlags     // in, none, casted
+	var carg3 *C.GParamSpec       // in, none, converted
+	var carg4 C.GValue            // out, transfer: none, C Pointers: 0, Name: Value, caller-allocates
+	var cret  C.gboolean          // return
+
+	carg0 = (*C.GtkStyleProvider)(UnsafeStyleProviderToGlibNone(provider))
+	carg1 = (*C.GtkWidgetPath)(UnsafeWidgetPathToGlibNone(path))
+	carg2 = C.GtkStateFlags(state)
+	carg3 = (*C.GParamSpec)(gobject.UnsafeParamSpecToGlibNone(pspec))
+
+	cret = C.gtk_style_provider_get_style_property(carg0, carg1, carg2, carg3, &carg4)
+	runtime.KeepAlive(provider)
+	runtime.KeepAlive(path)
+	runtime.KeepAlive(state)
+	runtime.KeepAlive(pspec)
+
+	var value gobject.Value
+	var goret bool
+
+	_ = value
+	_ = carg4
+	panic("unimplemented conversion of gobject.Value (GValue)")
+	if cret != 0 {
+		goret = true
+	}
+
+	return value, goret
+}
+
 // StyleProviderOverrides is the struct used to override the default implementation of virtual methods.
 // it is generic over the extending instance type.
 type StyleProviderOverrides[Instance StyleProvider] struct {
+	// GetStyleProperty allows you to override the implementation of the virtual method get_style_property.
+	// The function takes the following parameters:
+	// 
+	// 	- path *WidgetPath: #GtkWidgetPath to query 
+	// 	- state StateFlags: state to query the style property for 
+	// 	- pspec *gobject.ParamSpec: The #GParamSpec to query 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- value gobject.Value: return location for the property value 
+	// 	- goret bool 
+	GetStyleProperty func(Instance, *WidgetPath, StateFlags, *gobject.ParamSpec) (gobject.Value, bool)
 }
 
 // UnsafeApplyStyleProviderOverrides applies the overrides to init the gclass by setting the trampoline functions.
 // This is used by the bindings internally and only exported for visibility to other bindings code.
 func UnsafeApplyStyleProviderOverrides[Instance StyleProvider](gclass unsafe.Pointer, overrides StyleProviderOverrides[Instance]) {
+	pclass := (*C.GtkStyleProviderIface)(gclass)
+
+	if overrides.GetStyleProperty != nil {
+		pclass.get_style_property = (*[0]byte)(C._gotk4_gtk3_StyleProvider_get_style_property)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk3_StyleProvider_get_style_property",
+			func(carg0 *C.GtkStyleProvider, carg1 *C.GtkWidgetPath, carg2 C.GtkStateFlags, carg3 *C.GParamSpec, carg4 *C.GValue) (cret C.gboolean) {
+				var provider Instance           // go GtkStyleProvider subclass
+				var path     *WidgetPath        // in, none, converted
+				var state    StateFlags         // in, none, casted
+				var pspec    *gobject.ParamSpec // in, none, converted
+				var value    gobject.Value      // out, transfer: none, C Pointers: 0, Name: Value, caller-allocates
+				var goret    bool               // return
+
+				provider = UnsafeStyleProviderFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				path = UnsafeWidgetPathFromGlibNone(unsafe.Pointer(carg1))
+				state = StateFlags(carg2)
+				pspec = gobject.UnsafeParamSpecFromGlibNone(unsafe.Pointer(carg3))
+
+				value, goret = overrides.GetStyleProperty(provider, path, state, pspec)
+
+				_ = value
+				_ = carg4
+				panic("unimplemented conversion of gobject.Value (GValue)")
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
+	}
 }
 
 // ToolShellInstance is the instance type used by all types implementing GtkToolShell. It is used internally by the bindings. Users should use the interface [ToolShell] instead.
@@ -26139,9 +26266,7 @@ func UnsafeApplyTreeSortableOverrides[Instance TreeSortable](gclass unsafe.Point
 				sortable = UnsafeTreeSortableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
 				_ = sortFunc
 				_ = carg1
-				_ = _
 				_ = carg2
-				_ = destroy
 				_ = carg3
 				panic("unimplemented conversion of TreeIterCompareFunc (GtkTreeIterCompareFunc)")
 
@@ -26183,9 +26308,7 @@ func UnsafeApplyTreeSortableOverrides[Instance TreeSortable](gclass unsafe.Point
 				sortColumnId = int(carg1)
 				_ = sortFunc
 				_ = carg2
-				_ = _
 				_ = carg3
-				_ = destroy
 				_ = carg4
 				panic("unimplemented conversion of TreeIterCompareFunc (GtkTreeIterCompareFunc)")
 
@@ -30202,6 +30325,31 @@ type Builder interface {
 	// Sets the translation domain of @builder.
 	// See #GtkBuilder:translation-domain.
 	SetTranslationDomain(string)
+	// ValueFromString wraps gtk_builder_value_from_string
+	// 
+	// The function takes the following parameters:
+	// 
+	// 	- pspec *gobject.ParamSpec: the #GParamSpec for the property 
+	// 	- str string: the string representation of the value 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- value gobject.Value: the #GValue to store the result in 
+	// 	- goret bool 
+	// 	- _goerr error (nullable): an error 
+	//
+	// This function demarshals a value from a string. This function
+	// calls g_value_init() on the @value argument, so it need not be
+	// initialised beforehand.
+	// 
+	// This function can handle char, uchar, boolean, int, uint, long,
+	// ulong, enum, flags, float, double, string, #GdkColor, #GdkRGBA and
+	// #GtkAdjustment type values. Support for #GtkWidget type values is
+	// still to come.
+	// 
+	// Upon errors %FALSE will be returned and @error will be assigned a
+	// #GError from the #GTK_BUILDER_ERROR domain.
+	ValueFromString(*gobject.ParamSpec, string) (gobject.Value, bool, error)
 	// ValueFromStringType wraps gtk_builder_value_from_string_type
 	// 
 	// The function takes the following parameters:
@@ -31003,6 +31151,65 @@ func (builder *BuilderInstance) SetTranslationDomain(domain string) {
 	C.gtk_builder_set_translation_domain(carg0, carg1)
 	runtime.KeepAlive(builder)
 	runtime.KeepAlive(domain)
+}
+
+// ValueFromString wraps gtk_builder_value_from_string
+// 
+// The function takes the following parameters:
+// 
+// 	- pspec *gobject.ParamSpec: the #GParamSpec for the property 
+// 	- str string: the string representation of the value 
+// 
+// The function returns the following values:
+// 
+// 	- value gobject.Value: the #GValue to store the result in 
+// 	- goret bool 
+// 	- _goerr error (nullable): an error 
+//
+// This function demarshals a value from a string. This function
+// calls g_value_init() on the @value argument, so it need not be
+// initialised beforehand.
+// 
+// This function can handle char, uchar, boolean, int, uint, long,
+// ulong, enum, flags, float, double, string, #GdkColor, #GdkRGBA and
+// #GtkAdjustment type values. Support for #GtkWidget type values is
+// still to come.
+// 
+// Upon errors %FALSE will be returned and @error will be assigned a
+// #GError from the #GTK_BUILDER_ERROR domain.
+func (builder *BuilderInstance) ValueFromString(pspec *gobject.ParamSpec, str string) (gobject.Value, bool, error) {
+	var carg0 *C.GtkBuilder // in, none, converted
+	var carg1 *C.GParamSpec // in, none, converted
+	var carg2 *C.gchar      // in, none, string
+	var carg3 C.GValue      // out, transfer: none, C Pointers: 0, Name: Value, caller-allocates
+	var cret  C.gboolean    // return
+	var _cerr *C.GError     // out, full, converted, nullable
+
+	carg0 = (*C.GtkBuilder)(UnsafeBuilderToGlibNone(builder))
+	carg1 = (*C.GParamSpec)(gobject.UnsafeParamSpecToGlibNone(pspec))
+	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
+	defer C.free(unsafe.Pointer(carg2))
+
+	cret = C.gtk_builder_value_from_string(carg0, carg1, carg2, &carg3, &_cerr)
+	runtime.KeepAlive(builder)
+	runtime.KeepAlive(pspec)
+	runtime.KeepAlive(str)
+
+	var value  gobject.Value
+	var goret  bool
+	var _goerr error
+
+	_ = value
+	_ = carg3
+	panic("unimplemented conversion of gobject.Value (GValue)")
+	if cret != 0 {
+		goret = true
+	}
+	if _cerr != nil {
+		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+	}
+
+	return value, goret, _goerr
 }
 
 // ValueFromStringType wraps gtk_builder_value_from_string_type
@@ -33504,6 +33711,14 @@ type CellAreaOverrides[Instance CellArea] struct {
 	// 	- backgroundArea *gdk.Rectangle: the @widget relative coordinates of the background area 
 	// 	- callback CellAllocCallback: the #GtkCellAllocCallback to call 
 	ForEachAlloc func(Instance, CellAreaContext, Widget, *gdk.Rectangle, *gdk.Rectangle, CellAllocCallback)
+	// GetCellProperty allows you to override the implementation of the virtual method get_cell_property.
+	// The function takes the following parameters:
+	// 
+	// 	- renderer CellRenderer 
+	// 	- propertyId uint 
+	// 	- value *gobject.Value 
+	// 	- pspec *gobject.ParamSpec 
+	GetCellProperty func(Instance, CellRenderer, uint, *gobject.Value, *gobject.ParamSpec)
 	// GetPreferredHeight allows you to override the implementation of the virtual method get_preferred_height.
 	// The function takes the following parameters:
 	// 
@@ -33565,6 +33780,14 @@ type CellAreaOverrides[Instance CellArea] struct {
 	// 
 	// 	- renderer CellRenderer: the #GtkCellRenderer to remove from @area 
 	Remove func(Instance, CellRenderer)
+	// SetCellProperty allows you to override the implementation of the virtual method set_cell_property.
+	// The function takes the following parameters:
+	// 
+	// 	- renderer CellRenderer 
+	// 	- propertyId uint 
+	// 	- value *gobject.Value 
+	// 	- pspec *gobject.ParamSpec 
+	SetCellProperty func(Instance, CellRenderer, uint, *gobject.Value, *gobject.ParamSpec)
 }
 
 // UnsafeApplyCellAreaOverrides applies the overrides to init the gclass by setting the trampoline functions.
@@ -33730,7 +33953,6 @@ func UnsafeApplyCellAreaOverrides[Instance CellArea](gclass unsafe.Pointer, over
 				area = UnsafeCellAreaFromGlibNone(unsafe.Pointer(carg0)).(Instance)
 				_ = callback
 				_ = carg1
-				_ = callbackData
 				_ = carg2
 				panic("unimplemented conversion of CellCallback (GtkCellCallback)")
 
@@ -33759,11 +33981,33 @@ func UnsafeApplyCellAreaOverrides[Instance CellArea](gclass unsafe.Pointer, over
 				backgroundArea = gdk.UnsafeRectangleFromGlibNone(unsafe.Pointer(carg4))
 				_ = callback
 				_ = carg5
-				_ = callbackData
 				_ = carg6
 				panic("unimplemented conversion of CellAllocCallback (GtkCellAllocCallback)")
 
 				overrides.ForEachAlloc(area, _context, widget, cellArea, backgroundArea, callback)
+			},
+		)
+	}
+
+	if overrides.GetCellProperty != nil {
+		pclass.get_cell_property = (*[0]byte)(C._gotk4_gtk3_CellArea_get_cell_property)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk3_CellArea_get_cell_property",
+			func(carg0 *C.GtkCellArea, carg1 *C.GtkCellRenderer, carg2 C.guint, carg3 *C.GValue, carg4 *C.GParamSpec) {
+				var area       Instance           // go GtkCellArea subclass
+				var renderer   CellRenderer       // in, none, converted
+				var propertyId uint               // in, none, casted
+				var value      *gobject.Value     // in, none, converted
+				var pspec      *gobject.ParamSpec // in, none, converted
+
+				area = UnsafeCellAreaFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				renderer = UnsafeCellRendererFromGlibNone(unsafe.Pointer(carg1))
+				propertyId = uint(carg2)
+				value = gobject.UnsafeValueFromGlibUseAnyInstead(unsafe.Pointer(carg3))
+				pspec = gobject.UnsafeParamSpecFromGlibNone(unsafe.Pointer(carg4))
+
+				overrides.GetCellProperty(area, renderer, propertyId, value, pspec)
 			},
 		)
 	}
@@ -33923,6 +34167,29 @@ func UnsafeApplyCellAreaOverrides[Instance CellArea](gclass unsafe.Pointer, over
 				renderer = UnsafeCellRendererFromGlibNone(unsafe.Pointer(carg1))
 
 				overrides.Remove(area, renderer)
+			},
+		)
+	}
+
+	if overrides.SetCellProperty != nil {
+		pclass.set_cell_property = (*[0]byte)(C._gotk4_gtk3_CellArea_set_cell_property)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk3_CellArea_set_cell_property",
+			func(carg0 *C.GtkCellArea, carg1 *C.GtkCellRenderer, carg2 C.guint, carg3 *C.GValue, carg4 *C.GParamSpec) {
+				var area       Instance           // go GtkCellArea subclass
+				var renderer   CellRenderer       // in, none, converted
+				var propertyId uint               // in, none, casted
+				var value      *gobject.Value     // in, none, converted
+				var pspec      *gobject.ParamSpec // in, none, converted
+
+				area = UnsafeCellAreaFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				renderer = UnsafeCellRendererFromGlibNone(unsafe.Pointer(carg1))
+				propertyId = uint(carg2)
+				value = gobject.UnsafeValueFromGlibUseAnyInstead(unsafe.Pointer(carg3))
+				pspec = gobject.UnsafeParamSpecFromGlibNone(unsafe.Pointer(carg4))
+
+				overrides.SetCellProperty(area, renderer, propertyId, value, pspec)
 			},
 		)
 	}
@@ -74846,6 +75113,12 @@ type Widget interface {
 	// widgets to override the default #GtkWidget handling
 	// for determining whether an accelerator can be activated.
 	ConnectCanActivateAccel(func(Widget, uint) bool) gobject.SignalHandle
+	// ConnectChildNotify connects the provided callback to the "child-notify" signal
+	//
+	// The ::child-notify signal is emitted for each
+	// [child property][child-properties]  that has
+	// changed on an object. The signal's detail holds the property name.
+	ConnectChildNotify(func(Widget, gobject.ParamSpec)) gobject.SignalHandle
 	// EmitCompositedChanged emits the "composited-changed" signal
 	//
 	// The ::composited-changed signal is emitted when the composited
@@ -81174,6 +81447,15 @@ func (o *WidgetInstance) ConnectCanActivateAccel(fn func(Widget, uint) bool) gob
 	return o.Connect("can-activate-accel", fn)
 }
 
+// ConnectChildNotify connects the provided callback to the "child-notify" signal
+//
+// The ::child-notify signal is emitted for each
+// [child property][child-properties]  that has
+// changed on an object. The signal's detail holds the property name.
+func (o *WidgetInstance) ConnectChildNotify(fn func(Widget, gobject.ParamSpec)) gobject.SignalHandle {
+	return o.Connect("child-notify", fn)
+}
+
 // EmitCompositedChanged emits the "composited-changed" signal
 //
 // The ::composited-changed signal is emitted when the composited
@@ -81945,6 +82227,12 @@ type WidgetOverrides[Instance Widget] struct {
 	// 
 	// 	- goret bool 
 	CanActivateAccel func(Instance, uint) bool
+	// ChildNotify allows you to override the implementation of the virtual method child_notify.
+	// The function takes the following parameters:
+	// 
+	// 	- childProperty *gobject.ParamSpec: the name of a child property installed on the
+	//                  class of @widget’s parent 
+	ChildNotify func(Instance, *gobject.ParamSpec)
 	// CompositedChanged allows you to override the implementation of the virtual method composited_changed.
 	CompositedChanged func(Instance)
 	// ComputeExpand allows you to override the implementation of the virtual method compute_expand.
@@ -82595,6 +82883,23 @@ func UnsafeApplyWidgetOverrides[Instance Widget](gclass unsafe.Pointer, override
 				}
 
 				return cret
+			},
+		)
+	}
+
+	if overrides.ChildNotify != nil {
+		pclass.child_notify = (*[0]byte)(C._gotk4_gtk3_Widget_child_notify)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk3_Widget_child_notify",
+			func(carg0 *C.GtkWidget, carg1 *C.GParamSpec) {
+				var widget        Instance           // go GtkWidget subclass
+				var childProperty *gobject.ParamSpec // in, none, converted
+
+				widget = UnsafeWidgetFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				childProperty = gobject.UnsafeParamSpecFromGlibNone(unsafe.Pointer(carg1))
+
+				overrides.ChildNotify(widget, childProperty)
 			},
 		)
 	}
@@ -86808,6 +87113,20 @@ type Container interface {
 	// 
 	// Also see gtk_widget_child_notify().
 	ChildNotify(Widget, string)
+	// ChildNotifyByPspec wraps gtk_container_child_notify_by_pspec
+	// 
+	// The function takes the following parameters:
+	// 
+	// 	- child Widget: the child widget 
+	// 	- pspec *gobject.ParamSpec: the #GParamSpec of a child property instealled on
+	//     the class of @container 
+	//
+	// Emits a #GtkWidget::child-notify signal for the
+	// [child property][child-properties] specified by
+	// @pspec on the child.
+	// 
+	// This is an analogue of g_object_notify_by_pspec() for child properties.
+	ChildNotifyByPspec(Widget, *gobject.ParamSpec)
 	// ChildSetProperty wraps gtk_container_child_set_property
 	// 
 	// The function takes the following parameters:
@@ -87162,6 +87481,34 @@ func (container *ContainerInstance) ChildNotify(child Widget, childProperty stri
 	runtime.KeepAlive(container)
 	runtime.KeepAlive(child)
 	runtime.KeepAlive(childProperty)
+}
+
+// ChildNotifyByPspec wraps gtk_container_child_notify_by_pspec
+// 
+// The function takes the following parameters:
+// 
+// 	- child Widget: the child widget 
+// 	- pspec *gobject.ParamSpec: the #GParamSpec of a child property instealled on
+//     the class of @container 
+//
+// Emits a #GtkWidget::child-notify signal for the
+// [child property][child-properties] specified by
+// @pspec on the child.
+// 
+// This is an analogue of g_object_notify_by_pspec() for child properties.
+func (container *ContainerInstance) ChildNotifyByPspec(child Widget, pspec *gobject.ParamSpec) {
+	var carg0 *C.GtkContainer // in, none, converted
+	var carg1 *C.GtkWidget    // in, none, converted
+	var carg2 *C.GParamSpec   // in, none, converted
+
+	carg0 = (*C.GtkContainer)(UnsafeContainerToGlibNone(container))
+	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(child))
+	carg2 = (*C.GParamSpec)(gobject.UnsafeParamSpecToGlibNone(pspec))
+
+	C.gtk_container_child_notify_by_pspec(carg0, carg1, carg2)
+	runtime.KeepAlive(container)
+	runtime.KeepAlive(child)
+	runtime.KeepAlive(pspec)
 }
 
 // ChildSetProperty wraps gtk_container_child_set_property
@@ -87652,6 +87999,14 @@ type ContainerOverrides[Instance Container] struct {
 	// 	- includeInternals bool 
 	// 	- callback Callback: a callback 
 	Forall func(Instance, bool, Callback)
+	// GetChildProperty allows you to override the implementation of the virtual method get_child_property.
+	// The function takes the following parameters:
+	// 
+	// 	- child Widget 
+	// 	- propertyId uint 
+	// 	- value *gobject.Value 
+	// 	- pspec *gobject.ParamSpec 
+	GetChildProperty func(Instance, Widget, uint, *gobject.Value, *gobject.ParamSpec)
 	// GetPathForChild allows you to override the implementation of the virtual method get_path_for_child.
 	// The function takes the following parameters:
 	// 
@@ -87666,6 +88021,14 @@ type ContainerOverrides[Instance Container] struct {
 	// 
 	// 	- widget Widget: a current child of @container 
 	Remove func(Instance, Widget)
+	// SetChildProperty allows you to override the implementation of the virtual method set_child_property.
+	// The function takes the following parameters:
+	// 
+	// 	- child Widget 
+	// 	- propertyId uint 
+	// 	- value *gobject.Value 
+	// 	- pspec *gobject.ParamSpec 
+	SetChildProperty func(Instance, Widget, uint, *gobject.Value, *gobject.ParamSpec)
 	// SetFocusChild allows you to override the implementation of the virtual method set_focus_child.
 	// The function takes the following parameters:
 	// 
@@ -87770,11 +88133,33 @@ func UnsafeApplyContainerOverrides[Instance Container](gclass unsafe.Pointer, ov
 				}
 				_ = callback
 				_ = carg2
-				_ = callbackData
 				_ = carg3
 				panic("unimplemented conversion of Callback (GtkCallback)")
 
 				overrides.Forall(container, includeInternals, callback)
+			},
+		)
+	}
+
+	if overrides.GetChildProperty != nil {
+		pclass.get_child_property = (*[0]byte)(C._gotk4_gtk3_Container_get_child_property)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk3_Container_get_child_property",
+			func(carg0 *C.GtkContainer, carg1 *C.GtkWidget, carg2 C.guint, carg3 *C.GValue, carg4 *C.GParamSpec) {
+				var container  Instance           // go GtkContainer subclass
+				var child      Widget             // in, none, converted
+				var propertyId uint               // in, none, casted
+				var value      *gobject.Value     // in, none, converted
+				var pspec      *gobject.ParamSpec // in, none, converted
+
+				container = UnsafeContainerFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				child = UnsafeWidgetFromGlibNone(unsafe.Pointer(carg1))
+				propertyId = uint(carg2)
+				value = gobject.UnsafeValueFromGlibUseAnyInstead(unsafe.Pointer(carg3))
+				pspec = gobject.UnsafeParamSpecFromGlibNone(unsafe.Pointer(carg4))
+
+				overrides.GetChildProperty(container, child, propertyId, value, pspec)
 			},
 		)
 	}
@@ -87814,6 +88199,29 @@ func UnsafeApplyContainerOverrides[Instance Container](gclass unsafe.Pointer, ov
 				widget = UnsafeWidgetFromGlibNone(unsafe.Pointer(carg1))
 
 				overrides.Remove(container, widget)
+			},
+		)
+	}
+
+	if overrides.SetChildProperty != nil {
+		pclass.set_child_property = (*[0]byte)(C._gotk4_gtk3_Container_set_child_property)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gtk3_Container_set_child_property",
+			func(carg0 *C.GtkContainer, carg1 *C.GtkWidget, carg2 C.guint, carg3 *C.GValue, carg4 *C.GParamSpec) {
+				var container  Instance           // go GtkContainer subclass
+				var child      Widget             // in, none, converted
+				var propertyId uint               // in, none, casted
+				var value      *gobject.Value     // in, none, converted
+				var pspec      *gobject.ParamSpec // in, none, converted
+
+				container = UnsafeContainerFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				child = UnsafeWidgetFromGlibNone(unsafe.Pointer(carg1))
+				propertyId = uint(carg2)
+				value = gobject.UnsafeValueFromGlibUseAnyInstead(unsafe.Pointer(carg3))
+				pspec = gobject.UnsafeParamSpecFromGlibNone(unsafe.Pointer(carg4))
+
+				overrides.SetChildProperty(container, child, propertyId, value, pspec)
 			},
 		)
 	}
@@ -174503,6 +174911,89 @@ func (c *CellAreaClass) ParentClass() *gobject.InitiallyUnownedClass {
 	return parent
 }
 
+// FindCellProperty wraps gtk_cell_area_class_find_cell_property
+// 
+// The function takes the following parameters:
+// 
+// 	- propertyName string: the name of the child property to find 
+// 
+// The function returns the following values:
+// 
+// 	- goret *gobject.ParamSpec 
+//
+// Finds a cell property of a cell area class by name.
+func (aclass *CellAreaClass) FindCellProperty(propertyName string) *gobject.ParamSpec {
+	var carg0 *C.GtkCellAreaClass // in, none, converted
+	var carg1 *C.gchar            // in, none, string
+	var cret  *C.GParamSpec       // return, none, converted
+
+	carg0 = (*C.GtkCellAreaClass)(UnsafeCellAreaClassToGlibNone(aclass))
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(propertyName)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	cret = C.gtk_cell_area_class_find_cell_property(carg0, carg1)
+	runtime.KeepAlive(aclass)
+	runtime.KeepAlive(propertyName)
+
+	var goret *gobject.ParamSpec
+
+	goret = gobject.UnsafeParamSpecFromGlibNone(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// InstallCellProperty wraps gtk_cell_area_class_install_cell_property
+// 
+// The function takes the following parameters:
+// 
+// 	- propertyId uint: the id for the property 
+// 	- pspec *gobject.ParamSpec: the #GParamSpec for the property 
+//
+// Installs a cell property on a cell area class.
+func (aclass *CellAreaClass) InstallCellProperty(propertyId uint, pspec *gobject.ParamSpec) {
+	var carg0 *C.GtkCellAreaClass // in, none, converted
+	var carg1 C.guint             // in, none, casted
+	var carg2 *C.GParamSpec       // in, none, converted
+
+	carg0 = (*C.GtkCellAreaClass)(UnsafeCellAreaClassToGlibNone(aclass))
+	carg1 = C.guint(propertyId)
+	carg2 = (*C.GParamSpec)(gobject.UnsafeParamSpecToGlibNone(pspec))
+
+	C.gtk_cell_area_class_install_cell_property(carg0, carg1, carg2)
+	runtime.KeepAlive(aclass)
+	runtime.KeepAlive(propertyId)
+	runtime.KeepAlive(pspec)
+}
+
+// ListCellProperties wraps gtk_cell_area_class_list_cell_properties
+// 
+// The function returns the following values:
+// 
+// 	- nProperties uint: location to return the number of cell properties found 
+// 	- goret []*gobject.ParamSpec 
+//
+// Returns all cell properties of a cell area class.
+func (aclass *CellAreaClass) ListCellProperties() (uint, []*gobject.ParamSpec) {
+	var carg0 *C.GtkCellAreaClass // in, none, converted
+	var carg1 C.guint             // out, full, casted
+	var cret  **C.GParamSpec      // return, transfer: container, C Pointers: 2, Name: array[ParamSpec], scope: , array (inner: *typesystem.Record)
+
+	carg0 = (*C.GtkCellAreaClass)(UnsafeCellAreaClassToGlibNone(aclass))
+
+	cret = C.gtk_cell_area_class_list_cell_properties(carg0, &carg1)
+	runtime.KeepAlive(aclass)
+
+	var nProperties uint
+	var goret       []*gobject.ParamSpec
+
+	nProperties = uint(carg1)
+	_ = goret
+	_ = cret
+	panic("unimplemented conversion of []*gobject.ParamSpec (GParamSpec**)")
+
+	return nProperties, goret
+}
+
 // CellAreaContextClass wraps GtkCellAreaContextClass
 // 
 // CellAreaContextClass is the type struct for [CellAreaContext]
@@ -175663,6 +176154,39 @@ func (c *ContainerClass) ParentClass() *WidgetClass {
 	return parent
 }
 
+// FindChildProperty wraps gtk_container_class_find_child_property
+// 
+// The function takes the following parameters:
+// 
+// 	- propertyName string: the name of the child property to find 
+// 
+// The function returns the following values:
+// 
+// 	- goret *gobject.ParamSpec (nullable) 
+//
+// Finds a child property of a container class by name.
+func (cclass *ContainerClass) FindChildProperty(propertyName string) *gobject.ParamSpec {
+	var carg0 *C.GObjectClass // in, none, converted, casted *C.GtkContainerClass
+	var carg1 *C.gchar        // in, none, string
+	var cret  *C.GParamSpec   // return, none, converted, nullable
+
+	carg0 = (*C.GObjectClass)(UnsafeContainerClassToGlibNone(cclass))
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(propertyName)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	cret = C.gtk_container_class_find_child_property(carg0, carg1)
+	runtime.KeepAlive(cclass)
+	runtime.KeepAlive(propertyName)
+
+	var goret *gobject.ParamSpec
+
+	if cret != nil {
+		goret = gobject.UnsafeParamSpecFromGlibNone(unsafe.Pointer(cret))
+	}
+
+	return goret
+}
+
 // HandleBorderWidth wraps gtk_container_class_handle_border_width
 //
 // Modifies a subclass of #GtkContainerClass to automatically add and
@@ -175682,6 +176206,82 @@ func (klass *ContainerClass) HandleBorderWidth() {
 
 	C.gtk_container_class_handle_border_width(carg0)
 	runtime.KeepAlive(klass)
+}
+
+// InstallChildProperties wraps gtk_container_class_install_child_properties
+// 
+// The function takes the following parameters:
+// 
+// 	- pspecs []*gobject.ParamSpec: the #GParamSpec array defining the new
+//     child properties 
+//
+// Installs child properties on a container class.
+func (cclass *ContainerClass) InstallChildProperties(pspecs []*gobject.ParamSpec) {
+	var carg0 *C.GtkContainerClass // in, none, converted
+	var carg1 C.guint              // implicit
+	var carg2 **C.GParamSpec       // in, transfer: none, C Pointers: 2, Name: array[ParamSpec], array (inner: *typesystem.Record, length-by: carg1)
+
+	carg0 = (*C.GtkContainerClass)(UnsafeContainerClassToGlibNone(cclass))
+	_ = pspecs
+	_ = carg2
+	_ = carg1
+	panic("unimplemented conversion of []*gobject.ParamSpec (GParamSpec**)")
+
+	C.gtk_container_class_install_child_properties(carg0, carg1, carg2)
+	runtime.KeepAlive(cclass)
+	runtime.KeepAlive(pspecs)
+}
+
+// InstallChildProperty wraps gtk_container_class_install_child_property
+// 
+// The function takes the following parameters:
+// 
+// 	- propertyId uint: the id for the property 
+// 	- pspec *gobject.ParamSpec: the #GParamSpec for the property 
+//
+// Installs a child property on a container class.
+func (cclass *ContainerClass) InstallChildProperty(propertyId uint, pspec *gobject.ParamSpec) {
+	var carg0 *C.GtkContainerClass // in, none, converted
+	var carg1 C.guint              // in, none, casted
+	var carg2 *C.GParamSpec        // in, none, converted
+
+	carg0 = (*C.GtkContainerClass)(UnsafeContainerClassToGlibNone(cclass))
+	carg1 = C.guint(propertyId)
+	carg2 = (*C.GParamSpec)(gobject.UnsafeParamSpecToGlibNone(pspec))
+
+	C.gtk_container_class_install_child_property(carg0, carg1, carg2)
+	runtime.KeepAlive(cclass)
+	runtime.KeepAlive(propertyId)
+	runtime.KeepAlive(pspec)
+}
+
+// ListChildProperties wraps gtk_container_class_list_child_properties
+// 
+// The function returns the following values:
+// 
+// 	- nProperties uint: location to return the number of child properties found 
+// 	- goret []*gobject.ParamSpec 
+//
+// Returns all child properties of a container class.
+func (cclass *ContainerClass) ListChildProperties() (uint, []*gobject.ParamSpec) {
+	var carg0 *C.GObjectClass // in, none, converted, casted *C.GtkContainerClass
+	var carg1 C.guint         // out, full, casted
+	var cret  **C.GParamSpec  // return, transfer: container, C Pointers: 2, Name: array[ParamSpec], scope: , array (inner: *typesystem.Record)
+
+	carg0 = (*C.GObjectClass)(UnsafeContainerClassToGlibNone(cclass))
+
+	cret = C.gtk_container_class_list_child_properties(carg0, &carg1)
+	runtime.KeepAlive(cclass)
+
+	var nProperties uint
+	var goret       []*gobject.ParamSpec
+
+	nProperties = uint(carg1)
+	_ = goret
+	_ = cret
+	panic("unimplemented conversion of []*gobject.ParamSpec (GParamSpec**)")
+
+	return nProperties, goret
 }
 
 // CssProviderClass wraps GtkCssProviderClass
@@ -192429,6 +193029,37 @@ func (widgetClass *WidgetClass) BindTemplateChildFull(name string, internalChild
 	runtime.KeepAlive(structOffset)
 }
 
+// FindStyleProperty wraps gtk_widget_class_find_style_property
+// 
+// The function takes the following parameters:
+// 
+// 	- propertyName string: the name of the style property to find 
+// 
+// The function returns the following values:
+// 
+// 	- goret *gobject.ParamSpec 
+//
+// Finds a style property of a widget class by name.
+func (klass *WidgetClass) FindStyleProperty(propertyName string) *gobject.ParamSpec {
+	var carg0 *C.GtkWidgetClass // in, none, converted
+	var carg1 *C.gchar          // in, none, string
+	var cret  *C.GParamSpec     // return, none, converted
+
+	carg0 = (*C.GtkWidgetClass)(UnsafeWidgetClassToGlibNone(klass))
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(propertyName)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	cret = C.gtk_widget_class_find_style_property(carg0, carg1)
+	runtime.KeepAlive(klass)
+	runtime.KeepAlive(propertyName)
+
+	var goret *gobject.ParamSpec
+
+	goret = gobject.UnsafeParamSpecFromGlibNone(unsafe.Pointer(cret))
+
+	return goret
+}
+
 // GetCSSName wraps gtk_widget_class_get_css_name
 // 
 // The function returns the following values:
@@ -192451,6 +193082,55 @@ func (widgetClass *WidgetClass) GetCSSName() string {
 	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return goret
+}
+
+// InstallStyleProperty wraps gtk_widget_class_install_style_property
+// 
+// The function takes the following parameters:
+// 
+// 	- pspec *gobject.ParamSpec: the #GParamSpec for the property 
+//
+// Installs a style property on a widget class. The parser for the
+// style property is determined by the value type of @pspec.
+func (klass *WidgetClass) InstallStyleProperty(pspec *gobject.ParamSpec) {
+	var carg0 *C.GtkWidgetClass // in, none, converted
+	var carg1 *C.GParamSpec     // in, none, converted
+
+	carg0 = (*C.GtkWidgetClass)(UnsafeWidgetClassToGlibNone(klass))
+	carg1 = (*C.GParamSpec)(gobject.UnsafeParamSpecToGlibNone(pspec))
+
+	C.gtk_widget_class_install_style_property(carg0, carg1)
+	runtime.KeepAlive(klass)
+	runtime.KeepAlive(pspec)
+}
+
+// ListStyleProperties wraps gtk_widget_class_list_style_properties
+// 
+// The function returns the following values:
+// 
+// 	- nProperties uint: location to return the number of style properties found 
+// 	- goret []*gobject.ParamSpec 
+//
+// Returns all style properties of a widget class.
+func (klass *WidgetClass) ListStyleProperties() (uint, []*gobject.ParamSpec) {
+	var carg0 *C.GtkWidgetClass // in, none, converted
+	var carg1 C.guint           // out, full, casted
+	var cret  **C.GParamSpec    // return, transfer: container, C Pointers: 2, Name: array[ParamSpec], scope: , array (inner: *typesystem.Record)
+
+	carg0 = (*C.GtkWidgetClass)(UnsafeWidgetClassToGlibNone(klass))
+
+	cret = C.gtk_widget_class_list_style_properties(carg0, &carg1)
+	runtime.KeepAlive(klass)
+
+	var nProperties uint
+	var goret       []*gobject.ParamSpec
+
+	nProperties = uint(carg1)
+	_ = goret
+	_ = cret
+	panic("unimplemented conversion of []*gobject.ParamSpec (GParamSpec**)")
+
+	return nProperties, goret
 }
 
 // SetAccessibleRole wraps gtk_widget_class_set_accessible_role

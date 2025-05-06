@@ -12619,7 +12619,6 @@ func UnsafeApplyContentProviderOverrides[Instance ContentProvider](gclass unsafe
 				if carg5 != nil {
 					_ = callback
 					_ = carg5
-					_ = _
 					_ = carg6
 					panic("unimplemented conversion of gio.AsyncReadyCallback (GAsyncReadyCallback)")
 				}

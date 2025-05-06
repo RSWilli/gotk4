@@ -35,10 +35,10 @@ func dataFromClass(class unsafe.Pointer) *subClassData {
 
 var instanceID uint64 = 0
 var instancesLock sync.RWMutex
-var activeInstances = make(map[uint64]any)
+var activeInstances = make(map[uint64]Object)
 
 // saveInstanceInPrivateData saves the instance in the private data of the given object.
-func saveInstanceInPrivateData(obj Object, instance any) {
+func saveInstanceInPrivateData(obj Object) {
 	instancesLock.Lock()
 	defer instancesLock.Unlock()
 
@@ -55,11 +55,11 @@ func saveInstanceInPrivateData(obj Object, instance any) {
 	private := (*uint64)(privatePtr)
 
 	*private = instanceID
-	activeInstances[instanceID] = instance
+	activeInstances[instanceID] = obj
 }
 
 // loadInstanceFromPrivateData loads the instance from the private data of the given object.
-func loadInstanceFromPrivateData(obj Object) any {
+func loadInstanceFromPrivateData(obj Object) Object {
 	instancesLock.RLock()
 	defer instancesLock.RUnlock()
 

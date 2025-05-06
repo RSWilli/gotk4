@@ -9789,6 +9789,50 @@ func IsInitialized() bool {
 	return goret
 }
 
+// ParamSpecExpression wraps gtk_param_spec_expression
+// 
+// The function takes the following parameters:
+// 
+// 	- name string: canonical name of the property 
+// 	- nick string: a user-readable name for the property 
+// 	- blurb string: a user-readable description of the property 
+// 	- flags gobject.ParamFlags: flags for the property 
+// 
+// The function returns the following values:
+// 
+// 	- goret *gobject.ParamSpec 
+//
+// Creates a new `GParamSpec` instance for a property holding a `GtkExpression`.
+// 
+// See `g_param_spec_internal()` for details on the property strings.
+func ParamSpecExpression(name string, nick string, blurb string, flags gobject.ParamFlags) *gobject.ParamSpec {
+	var carg1 *C.char       // in, none, string, casted *C.gchar
+	var carg2 *C.char       // in, none, string, casted *C.gchar
+	var carg3 *C.char       // in, none, string, casted *C.gchar
+	var carg4 C.GParamFlags // in, none, casted
+	var cret  *C.GParamSpec // return, full, converted
+
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
+	defer C.free(unsafe.Pointer(carg1))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(nick)))
+	defer C.free(unsafe.Pointer(carg2))
+	carg3 = (*C.char)(unsafe.Pointer(C.CString(blurb)))
+	defer C.free(unsafe.Pointer(carg3))
+	carg4 = C.GParamFlags(flags)
+
+	cret = C.gtk_param_spec_expression(carg1, carg2, carg3, carg4)
+	runtime.KeepAlive(name)
+	runtime.KeepAlive(nick)
+	runtime.KeepAlive(blurb)
+	runtime.KeepAlive(flags)
+
+	var goret *gobject.ParamSpec
+
+	goret = gobject.UnsafeParamSpecFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
 // RGBToHSV wraps gtk_rgb_to_hsv
 // 
 // The function takes the following parameters:
@@ -12434,6 +12478,96 @@ func UnsafeEditableTextWidgetToGlibNone(c EditableTextWidget) unsafe.Pointer {
 func UnsafeEditableTextWidgetToGlibFull(c EditableTextWidget) unsafe.Pointer {
 	i := c.upcastToGtkEditable()
 	return gobject.UnsafeObjectToGlibFull(&i.Instance)
+}
+
+// EditableTextWidgetDelegateGetProperty wraps gtk_editable_delegate_get_property
+// 
+// The function takes the following parameters:
+// 
+// 	- object gobject.Object: a `GObject` 
+// 	- propId uint: a property ID 
+// 	- value *gobject.Value: value to set 
+// 	- pspec *gobject.ParamSpec: the `GParamSpec` for the property 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Gets a property of the `GtkEditable` delegate for @object.
+// 
+// This is helper function that should be called in the `get_property`
+// function of your `GtkEditable` implementation, before handling your
+// own properties.
+func EditableTextWidgetDelegateGetProperty(object gobject.Object, propId uint, value *gobject.Value, pspec *gobject.ParamSpec) bool {
+	var carg1 *C.GObject    // in, none, converted
+	var carg2 C.guint       // in, none, casted
+	var carg3 *C.GValue     // in, none, converted
+	var carg4 *C.GParamSpec // in, none, converted
+	var cret  C.gboolean    // return
+
+	carg1 = (*C.GObject)(gobject.UnsafeObjectToGlibNone(object))
+	carg2 = C.guint(propId)
+	carg3 = (*C.GValue)(gobject.UnsafeValueToGlibUseAnyInstead(value))
+	carg4 = (*C.GParamSpec)(gobject.UnsafeParamSpecToGlibNone(pspec))
+
+	cret = C.gtk_editable_delegate_get_property(carg1, carg2, carg3, carg4)
+	runtime.KeepAlive(object)
+	runtime.KeepAlive(propId)
+	runtime.KeepAlive(value)
+	runtime.KeepAlive(pspec)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// EditableTextWidgetDelegateSetProperty wraps gtk_editable_delegate_set_property
+// 
+// The function takes the following parameters:
+// 
+// 	- object gobject.Object: a `GObject` 
+// 	- propId uint: a property ID 
+// 	- value *gobject.Value: value to set 
+// 	- pspec *gobject.ParamSpec: the `GParamSpec` for the property 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Sets a property on the `GtkEditable` delegate for @object.
+// 
+// This is a helper function that should be called in the `set_property`
+// function of your `GtkEditable` implementation, before handling your
+// own properties.
+func EditableTextWidgetDelegateSetProperty(object gobject.Object, propId uint, value *gobject.Value, pspec *gobject.ParamSpec) bool {
+	var carg1 *C.GObject    // in, none, converted
+	var carg2 C.guint       // in, none, casted
+	var carg3 *C.GValue     // in, none, converted
+	var carg4 *C.GParamSpec // in, none, converted
+	var cret  C.gboolean    // return
+
+	carg1 = (*C.GObject)(gobject.UnsafeObjectToGlibNone(object))
+	carg2 = C.guint(propId)
+	carg3 = (*C.GValue)(gobject.UnsafeValueToGlibUseAnyInstead(value))
+	carg4 = (*C.GParamSpec)(gobject.UnsafeParamSpecToGlibNone(pspec))
+
+	cret = C.gtk_editable_delegate_set_property(carg1, carg2, carg3, carg4)
+	runtime.KeepAlive(object)
+	runtime.KeepAlive(propId)
+	runtime.KeepAlive(value)
+	runtime.KeepAlive(pspec)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
 }
 
 // ConnectChanged connects the provided callback to the "changed" signal
@@ -18370,6 +18504,31 @@ type Builder interface {
 	//
 	// Sets the translation domain of @builder.
 	SetTranslationDomain(string)
+	// ValueFromString wraps gtk_builder_value_from_string
+	// 
+	// The function takes the following parameters:
+	// 
+	// 	- pspec *gobject.ParamSpec: the `GParamSpec` for the property 
+	// 	- str string: the string representation of the value 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- value gobject.Value: the `GValue` to store the result in 
+	// 	- goret bool 
+	// 	- _goerr error (nullable): an error 
+	//
+	// Demarshals a value from a string.
+	// 
+	// This function calls g_value_init() on the @value argument,
+	// so it need not be initialised beforehand.
+	// 
+	// Can handle char, uchar, boolean, int, uint, long,
+	// ulong, enum, flags, float, double, string, `GdkRGBA` and
+	// `GtkAdjustment` type values.
+	// 
+	// Upon errors %FALSE will be returned and @error will be
+	// assigned a `GError` from the %GTK_BUILDER_ERROR domain.
+	ValueFromString(*gobject.ParamSpec, string) (gobject.Value, bool, error)
 	// ValueFromStringType wraps gtk_builder_value_from_string_type
 	// 
 	// The function takes the following parameters:
@@ -19224,6 +19383,65 @@ func (builder *BuilderInstance) SetTranslationDomain(domain string) {
 	C.gtk_builder_set_translation_domain(carg0, carg1)
 	runtime.KeepAlive(builder)
 	runtime.KeepAlive(domain)
+}
+
+// ValueFromString wraps gtk_builder_value_from_string
+// 
+// The function takes the following parameters:
+// 
+// 	- pspec *gobject.ParamSpec: the `GParamSpec` for the property 
+// 	- str string: the string representation of the value 
+// 
+// The function returns the following values:
+// 
+// 	- value gobject.Value: the `GValue` to store the result in 
+// 	- goret bool 
+// 	- _goerr error (nullable): an error 
+//
+// Demarshals a value from a string.
+// 
+// This function calls g_value_init() on the @value argument,
+// so it need not be initialised beforehand.
+// 
+// Can handle char, uchar, boolean, int, uint, long,
+// ulong, enum, flags, float, double, string, `GdkRGBA` and
+// `GtkAdjustment` type values.
+// 
+// Upon errors %FALSE will be returned and @error will be
+// assigned a `GError` from the %GTK_BUILDER_ERROR domain.
+func (builder *BuilderInstance) ValueFromString(pspec *gobject.ParamSpec, str string) (gobject.Value, bool, error) {
+	var carg0 *C.GtkBuilder // in, none, converted
+	var carg1 *C.GParamSpec // in, none, converted
+	var carg2 *C.char       // in, none, string, casted *C.gchar
+	var carg3 C.GValue      // out, transfer: none, C Pointers: 0, Name: Value, caller-allocates
+	var cret  C.gboolean    // return
+	var _cerr *C.GError     // out, full, converted, nullable
+
+	carg0 = (*C.GtkBuilder)(UnsafeBuilderToGlibNone(builder))
+	carg1 = (*C.GParamSpec)(gobject.UnsafeParamSpecToGlibNone(pspec))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(str)))
+	defer C.free(unsafe.Pointer(carg2))
+
+	cret = C.gtk_builder_value_from_string(carg0, carg1, carg2, &carg3, &_cerr)
+	runtime.KeepAlive(builder)
+	runtime.KeepAlive(pspec)
+	runtime.KeepAlive(str)
+
+	var value  gobject.Value
+	var goret  bool
+	var _goerr error
+
+	_ = value
+	_ = carg3
+	panic("unimplemented conversion of gobject.Value (GValue)")
+	if cret != 0 {
+		goret = true
+	}
+	if _cerr != nil {
+		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+	}
+
+	return value, goret, _goerr
 }
 
 // ValueFromStringType wraps gtk_builder_value_from_string_type

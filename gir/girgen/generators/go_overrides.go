@@ -67,7 +67,9 @@ func (g *GoOverridesGenerator) Generate(w *file.Package) {
 		w.Go().NewSection()
 	}
 
-	w.GoImportCore("classdata")
+	if len(g.VirtualMethods) > 0 {
+		w.GoImportCore("classdata")
+	}
 
 	for _, virtual := range g.VirtualMethods {
 		overridesFnFieldName := fmt.Sprintf("overrides.%s", virtual.GoName)

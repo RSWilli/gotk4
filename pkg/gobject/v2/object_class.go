@@ -1,10 +1,19 @@
 package gobject
 
-import "unsafe"
+import (
+	"unsafe"
+
+	"github.com/diamondburned/gotk4/pkg/core/classdata"
+)
 
 // #cgo pkg-config: gobject-2.0
 // #cgo CFLAGS: -Wno-deprecated-declarations
 // #include <glib-object.h>
+// extern void _gotk4_gobject2_Object_constructed(GObject *);
+// extern void _gotk4_gobject2_Object_dispose(GObject *);
+// extern void _gotk4_gobject2_Object_get_property(GObject *, guint, GValue *, GParamSpec *);
+// extern void _gotk4_gobject2_Object_set_property(GObject *, guint, GValue *, GParamSpec *);
+// extern void _gotk4_gobject2_Object_finalize(GObject *);
 import "C"
 
 type ObjectClass struct {
@@ -20,6 +29,23 @@ func UnsafeObjectClassFromGlibBorrow(p unsafe.Pointer) *ObjectClass {
 	return &ObjectClass{&objectClass{(*C.GObjectClass)(p)}}
 }
 
+func UnsafeObjectClassToGlibNone(o *ObjectClass) unsafe.Pointer {
+	return unsafe.Pointer(o.native)
+}
+
+// InstallProperties will install the given ParameterSpecs to the object class.
+// They will be IDed in the order they are provided. Note that the first
+// parameter is ID 1, not 0.
+func (o *ObjectClass) InstallProperties(params []*ParamSpec) {
+	for idx, prop := range params {
+		C.g_object_class_install_property(
+			(*C.GObjectClass)(UnsafeObjectClassToGlibNone(o)),
+			C.guint(idx+1),
+			(*C.GParamSpec)(UnsafeParamSpecToGlibNone(prop)),
+		)
+	}
+}
+
 // UnsafeAddPrivateData registers a private structure of the given size for the class
 //
 // this should not be called by user code, but only by the generated bindings
@@ -28,6 +54,134 @@ func (o *ObjectClass) UnsafeAddPrivateData(size uintptr) {
 
 	// FIXME: this is deprecated, but the alternative is a macro?
 	C.g_type_class_add_private(C.gpointer(o.native), C.gsize(size))
+}
+
+type ObjectOverrider[Instance Object] interface {
+	// getObjectOverrides retrieves the object overrides from any extending overrider
+	getObjectOverrides() ObjectOverrides[Instance]
+}
+
+// ObjectOverrides is the struct used to override the default implementation of virtual methods.
+// it is generic over the extending instance type.
+type ObjectOverrides[Instance Object] struct {
+	// The constructed function is called by g_object_new() as the final step of the object creation process.
+	// At the point of the call, all construction properties have been set on the object. The purpose of this
+	// call is to allow for object initialisation steps that can only be performed after construction properties
+	// have been set. constructed implementors should chain up to the constructed call of their parent class to
+	// allow it to complete its initialisation.
+	Constructed func(Instance)
+	// The dispose function is supposed to drop all references to other objects, but keep the instance otherwise intact,
+	// so that client method invocations still work. It may be run multiple times (due to reference loops). Before returning,
+	// dispose should chain up to the dispose method of the parent class.
+	Dispose func(Instance)
+
+	GetProperty func(instance Instance, id uint, pspec *ParamSpec) any
+	SetProperty func(instance Instance, id uint, value any, pspec *ParamSpec)
+
+	// Instance finalization function, should finish the finalization of the instance begun in dispose and chain up to the
+	// finalize method of the parent class.
+	//
+	// This is additionally wrapped by the bindings to clean up the instance data.
+	Finalize func(Instance)
+}
+
+func (o ObjectOverrides[Instance]) getObjectOverrides() ObjectOverrides[Instance] {
+	return o
+}
+
+// UnsafeApplyObjectOverrides applies the overrides to init the gclass by setting the trampoline functions.
+// This is used by the bindings internally and only exported for visibility to other bindings code.
+func UnsafeApplyObjectOverrides[Instance Object](gclass unsafe.Pointer, overrides ObjectOverrides[Instance]) {
+	pclass := (*C.GObjectClass)(gclass)
+
+	if overrides.Constructed != nil {
+		pclass.constructed = (*[0]byte)(C._gotk4_gobject2_Object_constructed)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gobject2_Object_constructed",
+			func(carg0 *C.GObject) {
+				var obj Instance // go GObject subclass
+
+				obj = UnsafeObjectFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.Constructed(obj)
+			},
+		)
+	}
+
+	if overrides.Dispose != nil {
+		pclass.dispose = (*[0]byte)(C._gotk4_gobject2_Object_dispose)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gobject2_Object_dispose",
+			func(carg0 *C.GObject) {
+				var obj Instance // go GObject subclass
+
+				obj = UnsafeObjectFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+				overrides.Dispose(obj)
+			},
+		)
+	}
+
+	if overrides.GetProperty != nil {
+		pclass.get_property = (*[0]byte)(C._gotk4_gobject2_Object_get_property)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gobject2_Object_get_property",
+			func(carg0 *C.GObject, id C.guint, value *C.GValue, pspec *C.GParamSpec) {
+				var obj Instance // go GObject subclass
+				var param *ParamSpec
+
+				obj = UnsafeObjectFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				param = UnsafeParamSpecFromGlibNone(unsafe.Pointer(pspec))
+
+				v := overrides.GetProperty(obj, uint(id), param)
+
+				govalue := ValueFromNative(unsafe.Pointer(value))
+
+				govalue.InitGoValue(v)
+			},
+		)
+	}
+
+	if overrides.SetProperty != nil {
+		pclass.set_property = (*[0]byte)(C._gotk4_gobject2_Object_set_property)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gobject2_Object_set_property",
+			func(carg0 *C.GObject, id C.guint, value *C.GValue, pspec *C.GParamSpec) {
+				var obj Instance // go GObject subclass
+				var param *ParamSpec
+
+				obj = UnsafeObjectFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				param = UnsafeParamSpecFromGlibNone(unsafe.Pointer(pspec))
+
+				v := ValueFromNative(unsafe.Pointer(value))
+
+				overrides.SetProperty(obj, uint(id), v.GoValue(), param)
+			},
+		)
+	}
+
+	// always set the finalize method, because we must clean up the instance data
+	pclass.finalize = (*[0]byte)(C._gotk4_gobject2_Object_finalize)
+	classdata.StoreVirtualMethod(
+		unsafe.Pointer(pclass),
+		"_gotk4_gobject2_Object_finalize",
+		func(carg0 *C.GObject) {
+			var obj Instance // go GObject subclass
+
+			obj = UnsafeObjectFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+
+			removeInstanceFromPrivateData(obj)
+
+			if overrides.Finalize != nil {
+				// call the user's finalize if set
+				overrides.Finalize(obj)
+			}
+		},
+	)
 }
 
 func RegisterObjectSubClass[InstanceT Object](

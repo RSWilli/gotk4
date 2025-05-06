@@ -14,41 +14,6 @@ import (
 	"github.com/diamondburned/gotk4/pkg/core/userdata"
 )
 
-type ObjectOverrider[Instance Object] interface {
-	// getObjectOverrides retrieves the object overrides from any extending overrider
-	getObjectOverrides() ObjectOverrides[Instance]
-}
-
-// ObjectOverrides is the struct used to override the default implementation of virtual methods.
-// it is generic over the extending instance type.
-type ObjectOverrides[Instance Object] struct {
-	// The constructed function is called by g_object_new() as the final step of the object creation process.
-	// At the point of the call, all construction properties have been set on the object. The purpose of this
-	// call is to allow for object initialisation steps that can only be performed after construction properties
-	// have been set. constructed implementors should chain up to the constructed call of their parent class to
-	// allow it to complete its initialisation.
-	Constructed func(Instance)
-	// The dispose function is supposed to drop all references to other objects, but keep the instance otherwise intact,
-	// so that client method invocations still work. It may be run multiple times (due to reference loops). Before returning,
-	// dispose should chain up to the dispose method of the parent class.
-	Dispose func(Instance)
-	// Instance finalization function, should finish the finalization of the instance begun in dispose and chain up to the
-	// finalize method of the parent class.
-	//
-	// This is additionally wrapped by the bindings to clean up the instance data.
-	Finalize func(Instance)
-}
-
-func (o ObjectOverrides[Instance]) getObjectOverrides() ObjectOverrides[Instance] {
-	return o
-}
-
-// UnsafeApplyObjectOverrides applies the overrides to init the gclass by setting the trampoline functions.
-// This is used by the bindings internally and only exported for visibility to other bindings code.
-func UnsafeApplyObjectOverrides[Instance Object](gclass unsafe.Pointer, overrides ObjectOverrides[Instance]) {
-
-}
-
 type subClassData struct {
 	classInit    func(gclass unsafe.Pointer)
 	instanceInit func(instance any)
@@ -162,7 +127,7 @@ func UnsafeRegisterSubClass[InstanceT Object, ClassT any, OverridesT ObjectOverr
 			instanceValue.Field(0).Set(parentInstance)
 
 			// store the instance in the private data of the instance, so we can retrieve it later
-			saveInstanceInPrivateData(instance, instance)
+			saveInstanceInPrivateData(instance)
 
 			return instance
 		},

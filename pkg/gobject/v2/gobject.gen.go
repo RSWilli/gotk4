@@ -7,41 +7,28 @@ import (
 	"strings"
 	"unsafe"
 
-	"github.com/diamondburned/gotk4/pkg/core/classdata"
 	"github.com/diamondburned/gotk4/pkg/glib/v2"
 )
 
 // #cgo pkg-config: gobject-2.0
 // #cgo CFLAGS: -Wno-deprecated-declarations
 // #include <glib-object.h>
-// extern gboolean _gotk4_gobject2_TypeModule_load(GTypeModule*);
-// extern void _gotk4_gobject2_TypeModule_unload(GTypeModule*);
-// gboolean _gotk4_gobject2_TypeModule_virtual_load(void* fnptr, GTypeModule* carg0) {
-// 	return ((gboolean (*) (GTypeModule*))(fnptr))(carg0);
-// }
-// void _gotk4_gobject2_TypeModule_virtual_unload(void* fnptr, GTypeModule* carg0) {
-// 	return ((void (*) (GTypeModule*))(fnptr))(carg0);
-// }
 import "C"
 
 // GType values.
 var (
 	TypeBindingFlags     = Type(C.g_binding_flags_get_type())
 	TypeIOCondition      = Type(C.g_io_condition_get_type())
-	TypeTypePlugin       = Type(C.g_type_plugin_get_type())
 	TypeBindingGroup     = Type(C.g_binding_group_get_type())
 	TypeInitiallyUnowned = Type(C.g_initially_unowned_get_type())
-	TypeTypeModule       = Type(C.g_type_module_get_type())
 )
 
 func init() {
 	RegisterGValueMarshalers([]TypeMarshaler{
 		TypeMarshaler{T: TypeBindingFlags, F: marshalBindingFlags},
 		TypeMarshaler{T: TypeIOCondition, F: marshalIOCondition},
-		TypeMarshaler{T: TypeTypePlugin, F: marshalTypePluginInstance},
 		TypeMarshaler{T: TypeBindingGroup, F: marshalBindingGroupInstance},
 		TypeMarshaler{T: TypeInitiallyUnowned, F: marshalInitiallyUnownedInstance},
-		TypeMarshaler{T: TypeTypeModule, F: marshalTypeModuleInstance},
 	})
 }
 
@@ -300,6 +287,131 @@ func (f IOCondition) String() string {
 		parts = append(parts, "IONval")
 	}
 	return "IOCondition(" + strings.Join(parts, "|") + ")"
+}
+
+// ParamFlags wraps GParamFlags
+//
+// Through the #GParamFlags flag values, certain aspects of parameters
+// can be configured.
+// 
+// See also: %G_PARAM_STATIC_STRINGS
+type ParamFlags C.gint
+
+const (
+	// ParamReadable wraps G_PARAM_READABLE
+	//
+	// the parameter is readable
+	ParamReadable ParamFlags = 1
+	// ParamWritable wraps G_PARAM_WRITABLE
+	//
+	// the parameter is writable
+	ParamWritable ParamFlags = 2
+	// ParamReadwrite wraps G_PARAM_READWRITE
+	//
+	// alias for %G_PARAM_READABLE | %G_PARAM_WRITABLE
+	ParamReadwrite ParamFlags = 3
+	// ParamConstruct wraps G_PARAM_CONSTRUCT
+	//
+	// the parameter will be set upon object construction
+	ParamConstruct ParamFlags = 4
+	// ParamConstructOnly wraps G_PARAM_CONSTRUCT_ONLY
+	//
+	// the parameter can only be set upon object construction
+	ParamConstructOnly ParamFlags = 8
+	// ParamLaxValidation wraps G_PARAM_LAX_VALIDATION
+	//
+	// upon parameter conversion (see g_param_value_convert())
+	//  strict validation is not required
+	ParamLaxValidation ParamFlags = 16
+	// ParamStaticName wraps G_PARAM_STATIC_NAME
+	//
+	// the string used as name when constructing the
+	//  parameter is guaranteed to remain valid and
+	//  unmodified for the lifetime of the parameter.
+	//  Since 2.8
+	ParamStaticName ParamFlags = 32
+	// ParamPrivate wraps G_PARAM_PRIVATE
+	//
+	// internal
+	ParamPrivate ParamFlags = 32
+	// ParamStaticNick wraps G_PARAM_STATIC_NICK
+	//
+	// the string used as nick when constructing the
+	//  parameter is guaranteed to remain valid and
+	//  unmmodified for the lifetime of the parameter.
+	//  Since 2.8
+	ParamStaticNick ParamFlags = 64
+	// ParamStaticBlurb wraps G_PARAM_STATIC_BLURB
+	//
+	// the string used as blurb when constructing the
+	//  parameter is guaranteed to remain valid and
+	//  unmodified for the lifetime of the parameter.
+	//  Since 2.8
+	ParamStaticBlurb ParamFlags = 128
+	// ParamExplicitNotify wraps G_PARAM_EXPLICIT_NOTIFY
+	//
+	// calls to g_object_set_property() for this
+	//   property will not automatically result in a "notify" signal being
+	//   emitted: the implementation must call g_object_notify() themselves
+	//   in case the property actually changes.  Since: 2.42.
+	ParamExplicitNotify ParamFlags = 1073741824
+	// ParamDeprecated wraps G_PARAM_DEPRECATED
+	//
+	// the parameter is deprecated and will be removed
+	//  in a future version. A warning will be generated if it is used
+	//  while running with G_ENABLE_DIAGNOSTIC=1.
+	//  Since 2.26
+	ParamDeprecated ParamFlags = -2147483648
+)
+
+// Has returns true if p contains other
+func (p ParamFlags) Has(other ParamFlags) bool {
+	return (p & other) == other
+}
+
+func (f ParamFlags) String() string {
+	if f == 0 {
+		return "ParamFlags(0)"
+	}
+
+	var parts []string
+	if (f & ParamReadable) != 0 {
+		parts = append(parts, "ParamReadable")
+	}
+	if (f & ParamWritable) != 0 {
+		parts = append(parts, "ParamWritable")
+	}
+	if (f & ParamReadwrite) != 0 {
+		parts = append(parts, "ParamReadwrite")
+	}
+	if (f & ParamConstruct) != 0 {
+		parts = append(parts, "ParamConstruct")
+	}
+	if (f & ParamConstructOnly) != 0 {
+		parts = append(parts, "ParamConstructOnly")
+	}
+	if (f & ParamLaxValidation) != 0 {
+		parts = append(parts, "ParamLaxValidation")
+	}
+	if (f & ParamStaticName) != 0 {
+		parts = append(parts, "ParamStaticName")
+	}
+	if (f & ParamPrivate) != 0 {
+		parts = append(parts, "ParamPrivate")
+	}
+	if (f & ParamStaticNick) != 0 {
+		parts = append(parts, "ParamStaticNick")
+	}
+	if (f & ParamStaticBlurb) != 0 {
+		parts = append(parts, "ParamStaticBlurb")
+	}
+	if (f & ParamExplicitNotify) != 0 {
+		parts = append(parts, "ParamExplicitNotify")
+	}
+	if (f & ParamDeprecated) != 0 {
+		parts = append(parts, "ParamDeprecated")
+	}
+	return "ParamFlags(" + strings.Join(parts, "|") + ")"
 }
 
 // SignalFlags wraps GSignalFlags
@@ -1045,39 +1157,1358 @@ func GTypeGetType() Type {
 	return goret
 }
 
-// ParamTypeRegisterStatic wraps g_param_type_register_static
+// ParamSpecBoolean wraps g_param_spec_boolean
 // 
 // The function takes the following parameters:
 // 
-// 	- name string: 0-terminated string used as the name of the new #GParamSpec type. 
-// 	- pspecInfo *ParamSpecTypeInfo: The #GParamSpecTypeInfo for this #GParamSpec type. 
+// 	- name string: canonical name of the property specified 
+// 	- nick string (nullable): nick name for the property specified 
+// 	- blurb string (nullable): description of the property specified 
+// 	- defaultValue bool: default value for the property specified 
+// 	- flags ParamFlags: flags for the property specified 
 // 
 // The function returns the following values:
 // 
-// 	- goret Type 
+// 	- goret *ParamSpec 
 //
-// Registers @name as the name of a new static type derived
-// from %G_TYPE_PARAM.
+// Creates a new #GParamSpecBoolean instance specifying a %G_TYPE_BOOLEAN
+// property. In many cases, it may be more appropriate to use an enum with
+// g_param_spec_enum(), both to improve code clarity by using explicitly named
+// values, and to allow for more values to be added in future without breaking
+// API.
 // 
-// The type system uses the information contained in the #GParamSpecTypeInfo
-// structure pointed to by @info to manage the #GParamSpec type and its
-// instances.
-func ParamTypeRegisterStatic(name string, pspecInfo *ParamSpecTypeInfo) Type {
-	var carg1 *C.gchar              // in, none, string
-	var carg2 *C.GParamSpecTypeInfo // in, none, converted
-	var cret  C.GType               // return, none, casted, alias
+// See g_param_spec_internal() for details on property names.
+func ParamSpecBoolean(name string, nick string, blurb string, defaultValue bool, flags ParamFlags) *ParamSpec {
+	var carg1 *C.gchar      // in, none, string
+	var carg2 *C.gchar      // in, none, string, nullable-string
+	var carg3 *C.gchar      // in, none, string, nullable-string
+	var carg4 C.gboolean    // in
+	var carg5 C.GParamFlags // in, none, casted
+	var cret  *C.GParamSpec // return, full, converted
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
 	defer C.free(unsafe.Pointer(carg1))
-	carg2 = (*C.GParamSpecTypeInfo)(UnsafeParamSpecTypeInfoToGlibNone(pspecInfo))
+	if nick != "" {
+		carg2 = (*C.gchar)(unsafe.Pointer(C.CString(nick)))
+		defer C.free(unsafe.Pointer(carg2))
+	}
+	if blurb != "" {
+		carg3 = (*C.gchar)(unsafe.Pointer(C.CString(blurb)))
+		defer C.free(unsafe.Pointer(carg3))
+	}
+	if defaultValue {
+		carg4 = C.TRUE
+	}
+	carg5 = C.GParamFlags(flags)
 
-	cret = C.g_param_type_register_static(carg1, carg2)
+	cret = C.g_param_spec_boolean(carg1, carg2, carg3, carg4, carg5)
 	runtime.KeepAlive(name)
-	runtime.KeepAlive(pspecInfo)
+	runtime.KeepAlive(nick)
+	runtime.KeepAlive(blurb)
+	runtime.KeepAlive(defaultValue)
+	runtime.KeepAlive(flags)
 
-	var goret Type
+	var goret *ParamSpec
 
-	goret = Type(cret)
+	goret = UnsafeParamSpecFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// ParamSpecBoxed wraps g_param_spec_boxed
+// 
+// The function takes the following parameters:
+// 
+// 	- name string: canonical name of the property specified 
+// 	- nick string (nullable): nick name for the property specified 
+// 	- blurb string (nullable): description of the property specified 
+// 	- boxedType Type: %G_TYPE_BOXED derived type of this property 
+// 	- flags ParamFlags: flags for the property specified 
+// 
+// The function returns the following values:
+// 
+// 	- goret *ParamSpec 
+//
+// Creates a new #GParamSpecBoxed instance specifying a %G_TYPE_BOXED
+// derived property.
+// 
+// See g_param_spec_internal() for details on property names.
+func ParamSpecBoxed(name string, nick string, blurb string, boxedType Type, flags ParamFlags) *ParamSpec {
+	var carg1 *C.gchar      // in, none, string
+	var carg2 *C.gchar      // in, none, string, nullable-string
+	var carg3 *C.gchar      // in, none, string, nullable-string
+	var carg4 C.GType       // in, none, casted, alias
+	var carg5 C.GParamFlags // in, none, casted
+	var cret  *C.GParamSpec // return, full, converted
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	defer C.free(unsafe.Pointer(carg1))
+	if nick != "" {
+		carg2 = (*C.gchar)(unsafe.Pointer(C.CString(nick)))
+		defer C.free(unsafe.Pointer(carg2))
+	}
+	if blurb != "" {
+		carg3 = (*C.gchar)(unsafe.Pointer(C.CString(blurb)))
+		defer C.free(unsafe.Pointer(carg3))
+	}
+	carg4 = C.GType(boxedType)
+	carg5 = C.GParamFlags(flags)
+
+	cret = C.g_param_spec_boxed(carg1, carg2, carg3, carg4, carg5)
+	runtime.KeepAlive(name)
+	runtime.KeepAlive(nick)
+	runtime.KeepAlive(blurb)
+	runtime.KeepAlive(boxedType)
+	runtime.KeepAlive(flags)
+
+	var goret *ParamSpec
+
+	goret = UnsafeParamSpecFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// ParamSpecChar wraps g_param_spec_char
+// 
+// The function takes the following parameters:
+// 
+// 	- name string: canonical name of the property specified 
+// 	- nick string (nullable): nick name for the property specified 
+// 	- blurb string (nullable): description of the property specified 
+// 	- minimum int8: minimum value for the property specified 
+// 	- maximum int8: maximum value for the property specified 
+// 	- defaultValue int8: default value for the property specified 
+// 	- flags ParamFlags: flags for the property specified 
+// 
+// The function returns the following values:
+// 
+// 	- goret *ParamSpec 
+//
+// Creates a new #GParamSpecChar instance specifying a %G_TYPE_CHAR property.
+func ParamSpecChar(name string, nick string, blurb string, minimum int8, maximum int8, defaultValue int8, flags ParamFlags) *ParamSpec {
+	var carg1 *C.gchar      // in, none, string
+	var carg2 *C.gchar      // in, none, string, nullable-string
+	var carg3 *C.gchar      // in, none, string, nullable-string
+	var carg4 C.gint8       // in, none, casted
+	var carg5 C.gint8       // in, none, casted
+	var carg6 C.gint8       // in, none, casted
+	var carg7 C.GParamFlags // in, none, casted
+	var cret  *C.GParamSpec // return, full, converted
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	defer C.free(unsafe.Pointer(carg1))
+	if nick != "" {
+		carg2 = (*C.gchar)(unsafe.Pointer(C.CString(nick)))
+		defer C.free(unsafe.Pointer(carg2))
+	}
+	if blurb != "" {
+		carg3 = (*C.gchar)(unsafe.Pointer(C.CString(blurb)))
+		defer C.free(unsafe.Pointer(carg3))
+	}
+	carg4 = C.gint8(minimum)
+	carg5 = C.gint8(maximum)
+	carg6 = C.gint8(defaultValue)
+	carg7 = C.GParamFlags(flags)
+
+	cret = C.g_param_spec_char(carg1, carg2, carg3, carg4, carg5, carg6, carg7)
+	runtime.KeepAlive(name)
+	runtime.KeepAlive(nick)
+	runtime.KeepAlive(blurb)
+	runtime.KeepAlive(minimum)
+	runtime.KeepAlive(maximum)
+	runtime.KeepAlive(defaultValue)
+	runtime.KeepAlive(flags)
+
+	var goret *ParamSpec
+
+	goret = UnsafeParamSpecFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// ParamSpecDouble wraps g_param_spec_double
+// 
+// The function takes the following parameters:
+// 
+// 	- name string: canonical name of the property specified 
+// 	- nick string (nullable): nick name for the property specified 
+// 	- blurb string (nullable): description of the property specified 
+// 	- minimum float64: minimum value for the property specified 
+// 	- maximum float64: maximum value for the property specified 
+// 	- defaultValue float64: default value for the property specified 
+// 	- flags ParamFlags: flags for the property specified 
+// 
+// The function returns the following values:
+// 
+// 	- goret *ParamSpec 
+//
+// Creates a new #GParamSpecDouble instance specifying a %G_TYPE_DOUBLE
+// property.
+// 
+// See g_param_spec_internal() for details on property names.
+func ParamSpecDouble(name string, nick string, blurb string, minimum float64, maximum float64, defaultValue float64, flags ParamFlags) *ParamSpec {
+	var carg1 *C.gchar      // in, none, string
+	var carg2 *C.gchar      // in, none, string, nullable-string
+	var carg3 *C.gchar      // in, none, string, nullable-string
+	var carg4 C.gdouble     // in, none, casted
+	var carg5 C.gdouble     // in, none, casted
+	var carg6 C.gdouble     // in, none, casted
+	var carg7 C.GParamFlags // in, none, casted
+	var cret  *C.GParamSpec // return, full, converted
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	defer C.free(unsafe.Pointer(carg1))
+	if nick != "" {
+		carg2 = (*C.gchar)(unsafe.Pointer(C.CString(nick)))
+		defer C.free(unsafe.Pointer(carg2))
+	}
+	if blurb != "" {
+		carg3 = (*C.gchar)(unsafe.Pointer(C.CString(blurb)))
+		defer C.free(unsafe.Pointer(carg3))
+	}
+	carg4 = C.gdouble(minimum)
+	carg5 = C.gdouble(maximum)
+	carg6 = C.gdouble(defaultValue)
+	carg7 = C.GParamFlags(flags)
+
+	cret = C.g_param_spec_double(carg1, carg2, carg3, carg4, carg5, carg6, carg7)
+	runtime.KeepAlive(name)
+	runtime.KeepAlive(nick)
+	runtime.KeepAlive(blurb)
+	runtime.KeepAlive(minimum)
+	runtime.KeepAlive(maximum)
+	runtime.KeepAlive(defaultValue)
+	runtime.KeepAlive(flags)
+
+	var goret *ParamSpec
+
+	goret = UnsafeParamSpecFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// ParamSpecEnum wraps g_param_spec_enum
+// 
+// The function takes the following parameters:
+// 
+// 	- name string: canonical name of the property specified 
+// 	- nick string (nullable): nick name for the property specified 
+// 	- blurb string (nullable): description of the property specified 
+// 	- enumType Type: a #GType derived from %G_TYPE_ENUM 
+// 	- defaultValue int: default value for the property specified 
+// 	- flags ParamFlags: flags for the property specified 
+// 
+// The function returns the following values:
+// 
+// 	- goret *ParamSpec 
+//
+// Creates a new #GParamSpecEnum instance specifying a %G_TYPE_ENUM
+// property.
+// 
+// See g_param_spec_internal() for details on property names.
+func ParamSpecEnum(name string, nick string, blurb string, enumType Type, defaultValue int, flags ParamFlags) *ParamSpec {
+	var carg1 *C.gchar      // in, none, string
+	var carg2 *C.gchar      // in, none, string, nullable-string
+	var carg3 *C.gchar      // in, none, string, nullable-string
+	var carg4 C.GType       // in, none, casted, alias
+	var carg5 C.gint        // in, none, casted
+	var carg6 C.GParamFlags // in, none, casted
+	var cret  *C.GParamSpec // return, full, converted
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	defer C.free(unsafe.Pointer(carg1))
+	if nick != "" {
+		carg2 = (*C.gchar)(unsafe.Pointer(C.CString(nick)))
+		defer C.free(unsafe.Pointer(carg2))
+	}
+	if blurb != "" {
+		carg3 = (*C.gchar)(unsafe.Pointer(C.CString(blurb)))
+		defer C.free(unsafe.Pointer(carg3))
+	}
+	carg4 = C.GType(enumType)
+	carg5 = C.gint(defaultValue)
+	carg6 = C.GParamFlags(flags)
+
+	cret = C.g_param_spec_enum(carg1, carg2, carg3, carg4, carg5, carg6)
+	runtime.KeepAlive(name)
+	runtime.KeepAlive(nick)
+	runtime.KeepAlive(blurb)
+	runtime.KeepAlive(enumType)
+	runtime.KeepAlive(defaultValue)
+	runtime.KeepAlive(flags)
+
+	var goret *ParamSpec
+
+	goret = UnsafeParamSpecFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// ParamSpecFlags wraps g_param_spec_flags
+// 
+// The function takes the following parameters:
+// 
+// 	- name string: canonical name of the property specified 
+// 	- nick string (nullable): nick name for the property specified 
+// 	- blurb string (nullable): description of the property specified 
+// 	- flagsType Type: a #GType derived from %G_TYPE_FLAGS 
+// 	- defaultValue uint: default value for the property specified 
+// 	- flags ParamFlags: flags for the property specified 
+// 
+// The function returns the following values:
+// 
+// 	- goret *ParamSpec 
+//
+// Creates a new #GParamSpecFlags instance specifying a %G_TYPE_FLAGS
+// property.
+// 
+// See g_param_spec_internal() for details on property names.
+func ParamSpecFlags(name string, nick string, blurb string, flagsType Type, defaultValue uint, flags ParamFlags) *ParamSpec {
+	var carg1 *C.gchar      // in, none, string
+	var carg2 *C.gchar      // in, none, string, nullable-string
+	var carg3 *C.gchar      // in, none, string, nullable-string
+	var carg4 C.GType       // in, none, casted, alias
+	var carg5 C.guint       // in, none, casted
+	var carg6 C.GParamFlags // in, none, casted
+	var cret  *C.GParamSpec // return, full, converted
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	defer C.free(unsafe.Pointer(carg1))
+	if nick != "" {
+		carg2 = (*C.gchar)(unsafe.Pointer(C.CString(nick)))
+		defer C.free(unsafe.Pointer(carg2))
+	}
+	if blurb != "" {
+		carg3 = (*C.gchar)(unsafe.Pointer(C.CString(blurb)))
+		defer C.free(unsafe.Pointer(carg3))
+	}
+	carg4 = C.GType(flagsType)
+	carg5 = C.guint(defaultValue)
+	carg6 = C.GParamFlags(flags)
+
+	cret = C.g_param_spec_flags(carg1, carg2, carg3, carg4, carg5, carg6)
+	runtime.KeepAlive(name)
+	runtime.KeepAlive(nick)
+	runtime.KeepAlive(blurb)
+	runtime.KeepAlive(flagsType)
+	runtime.KeepAlive(defaultValue)
+	runtime.KeepAlive(flags)
+
+	var goret *ParamSpec
+
+	goret = UnsafeParamSpecFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// ParamSpecFloat wraps g_param_spec_float
+// 
+// The function takes the following parameters:
+// 
+// 	- name string: canonical name of the property specified 
+// 	- nick string (nullable): nick name for the property specified 
+// 	- blurb string (nullable): description of the property specified 
+// 	- minimum float32: minimum value for the property specified 
+// 	- maximum float32: maximum value for the property specified 
+// 	- defaultValue float32: default value for the property specified 
+// 	- flags ParamFlags: flags for the property specified 
+// 
+// The function returns the following values:
+// 
+// 	- goret *ParamSpec 
+//
+// Creates a new #GParamSpecFloat instance specifying a %G_TYPE_FLOAT property.
+// 
+// See g_param_spec_internal() for details on property names.
+func ParamSpecFloat(name string, nick string, blurb string, minimum float32, maximum float32, defaultValue float32, flags ParamFlags) *ParamSpec {
+	var carg1 *C.gchar      // in, none, string
+	var carg2 *C.gchar      // in, none, string, nullable-string
+	var carg3 *C.gchar      // in, none, string, nullable-string
+	var carg4 C.gfloat      // in, none, casted
+	var carg5 C.gfloat      // in, none, casted
+	var carg6 C.gfloat      // in, none, casted
+	var carg7 C.GParamFlags // in, none, casted
+	var cret  *C.GParamSpec // return, full, converted
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	defer C.free(unsafe.Pointer(carg1))
+	if nick != "" {
+		carg2 = (*C.gchar)(unsafe.Pointer(C.CString(nick)))
+		defer C.free(unsafe.Pointer(carg2))
+	}
+	if blurb != "" {
+		carg3 = (*C.gchar)(unsafe.Pointer(C.CString(blurb)))
+		defer C.free(unsafe.Pointer(carg3))
+	}
+	carg4 = C.gfloat(minimum)
+	carg5 = C.gfloat(maximum)
+	carg6 = C.gfloat(defaultValue)
+	carg7 = C.GParamFlags(flags)
+
+	cret = C.g_param_spec_float(carg1, carg2, carg3, carg4, carg5, carg6, carg7)
+	runtime.KeepAlive(name)
+	runtime.KeepAlive(nick)
+	runtime.KeepAlive(blurb)
+	runtime.KeepAlive(minimum)
+	runtime.KeepAlive(maximum)
+	runtime.KeepAlive(defaultValue)
+	runtime.KeepAlive(flags)
+
+	var goret *ParamSpec
+
+	goret = UnsafeParamSpecFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// ParamSpecGType wraps g_param_spec_gtype
+// 
+// The function takes the following parameters:
+// 
+// 	- name string: canonical name of the property specified 
+// 	- nick string (nullable): nick name for the property specified 
+// 	- blurb string (nullable): description of the property specified 
+// 	- isAType Type: a #GType whose subtypes are allowed as values
+//  of the property (use %G_TYPE_NONE for any type) 
+// 	- flags ParamFlags: flags for the property specified 
+// 
+// The function returns the following values:
+// 
+// 	- goret *ParamSpec 
+//
+// Creates a new #GParamSpecGType instance specifying a
+// %G_TYPE_GTYPE property.
+// 
+// See g_param_spec_internal() for details on property names.
+func ParamSpecGType(name string, nick string, blurb string, isAType Type, flags ParamFlags) *ParamSpec {
+	var carg1 *C.gchar      // in, none, string
+	var carg2 *C.gchar      // in, none, string, nullable-string
+	var carg3 *C.gchar      // in, none, string, nullable-string
+	var carg4 C.GType       // in, none, casted, alias
+	var carg5 C.GParamFlags // in, none, casted
+	var cret  *C.GParamSpec // return, full, converted
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	defer C.free(unsafe.Pointer(carg1))
+	if nick != "" {
+		carg2 = (*C.gchar)(unsafe.Pointer(C.CString(nick)))
+		defer C.free(unsafe.Pointer(carg2))
+	}
+	if blurb != "" {
+		carg3 = (*C.gchar)(unsafe.Pointer(C.CString(blurb)))
+		defer C.free(unsafe.Pointer(carg3))
+	}
+	carg4 = C.GType(isAType)
+	carg5 = C.GParamFlags(flags)
+
+	cret = C.g_param_spec_gtype(carg1, carg2, carg3, carg4, carg5)
+	runtime.KeepAlive(name)
+	runtime.KeepAlive(nick)
+	runtime.KeepAlive(blurb)
+	runtime.KeepAlive(isAType)
+	runtime.KeepAlive(flags)
+
+	var goret *ParamSpec
+
+	goret = UnsafeParamSpecFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// ParamSpecInt wraps g_param_spec_int
+// 
+// The function takes the following parameters:
+// 
+// 	- name string: canonical name of the property specified 
+// 	- nick string (nullable): nick name for the property specified 
+// 	- blurb string (nullable): description of the property specified 
+// 	- minimum int: minimum value for the property specified 
+// 	- maximum int: maximum value for the property specified 
+// 	- defaultValue int: default value for the property specified 
+// 	- flags ParamFlags: flags for the property specified 
+// 
+// The function returns the following values:
+// 
+// 	- goret *ParamSpec 
+//
+// Creates a new #GParamSpecInt instance specifying a %G_TYPE_INT property.
+// 
+// See g_param_spec_internal() for details on property names.
+func ParamSpecInt(name string, nick string, blurb string, minimum int, maximum int, defaultValue int, flags ParamFlags) *ParamSpec {
+	var carg1 *C.gchar      // in, none, string
+	var carg2 *C.gchar      // in, none, string, nullable-string
+	var carg3 *C.gchar      // in, none, string, nullable-string
+	var carg4 C.gint        // in, none, casted
+	var carg5 C.gint        // in, none, casted
+	var carg6 C.gint        // in, none, casted
+	var carg7 C.GParamFlags // in, none, casted
+	var cret  *C.GParamSpec // return, full, converted
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	defer C.free(unsafe.Pointer(carg1))
+	if nick != "" {
+		carg2 = (*C.gchar)(unsafe.Pointer(C.CString(nick)))
+		defer C.free(unsafe.Pointer(carg2))
+	}
+	if blurb != "" {
+		carg3 = (*C.gchar)(unsafe.Pointer(C.CString(blurb)))
+		defer C.free(unsafe.Pointer(carg3))
+	}
+	carg4 = C.gint(minimum)
+	carg5 = C.gint(maximum)
+	carg6 = C.gint(defaultValue)
+	carg7 = C.GParamFlags(flags)
+
+	cret = C.g_param_spec_int(carg1, carg2, carg3, carg4, carg5, carg6, carg7)
+	runtime.KeepAlive(name)
+	runtime.KeepAlive(nick)
+	runtime.KeepAlive(blurb)
+	runtime.KeepAlive(minimum)
+	runtime.KeepAlive(maximum)
+	runtime.KeepAlive(defaultValue)
+	runtime.KeepAlive(flags)
+
+	var goret *ParamSpec
+
+	goret = UnsafeParamSpecFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// ParamSpecInt64 wraps g_param_spec_int64
+// 
+// The function takes the following parameters:
+// 
+// 	- name string: canonical name of the property specified 
+// 	- nick string (nullable): nick name for the property specified 
+// 	- blurb string (nullable): description of the property specified 
+// 	- minimum int64: minimum value for the property specified 
+// 	- maximum int64: maximum value for the property specified 
+// 	- defaultValue int64: default value for the property specified 
+// 	- flags ParamFlags: flags for the property specified 
+// 
+// The function returns the following values:
+// 
+// 	- goret *ParamSpec 
+//
+// Creates a new #GParamSpecInt64 instance specifying a %G_TYPE_INT64 property.
+// 
+// See g_param_spec_internal() for details on property names.
+func ParamSpecInt64(name string, nick string, blurb string, minimum int64, maximum int64, defaultValue int64, flags ParamFlags) *ParamSpec {
+	var carg1 *C.gchar      // in, none, string
+	var carg2 *C.gchar      // in, none, string, nullable-string
+	var carg3 *C.gchar      // in, none, string, nullable-string
+	var carg4 C.gint64      // in, none, casted
+	var carg5 C.gint64      // in, none, casted
+	var carg6 C.gint64      // in, none, casted
+	var carg7 C.GParamFlags // in, none, casted
+	var cret  *C.GParamSpec // return, full, converted
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	defer C.free(unsafe.Pointer(carg1))
+	if nick != "" {
+		carg2 = (*C.gchar)(unsafe.Pointer(C.CString(nick)))
+		defer C.free(unsafe.Pointer(carg2))
+	}
+	if blurb != "" {
+		carg3 = (*C.gchar)(unsafe.Pointer(C.CString(blurb)))
+		defer C.free(unsafe.Pointer(carg3))
+	}
+	carg4 = C.gint64(minimum)
+	carg5 = C.gint64(maximum)
+	carg6 = C.gint64(defaultValue)
+	carg7 = C.GParamFlags(flags)
+
+	cret = C.g_param_spec_int64(carg1, carg2, carg3, carg4, carg5, carg6, carg7)
+	runtime.KeepAlive(name)
+	runtime.KeepAlive(nick)
+	runtime.KeepAlive(blurb)
+	runtime.KeepAlive(minimum)
+	runtime.KeepAlive(maximum)
+	runtime.KeepAlive(defaultValue)
+	runtime.KeepAlive(flags)
+
+	var goret *ParamSpec
+
+	goret = UnsafeParamSpecFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// ParamSpecLong wraps g_param_spec_long
+// 
+// The function takes the following parameters:
+// 
+// 	- name string: canonical name of the property specified 
+// 	- nick string (nullable): nick name for the property specified 
+// 	- blurb string (nullable): description of the property specified 
+// 	- minimum int32: minimum value for the property specified 
+// 	- maximum int32: maximum value for the property specified 
+// 	- defaultValue int32: default value for the property specified 
+// 	- flags ParamFlags: flags for the property specified 
+// 
+// The function returns the following values:
+// 
+// 	- goret *ParamSpec 
+//
+// Creates a new #GParamSpecLong instance specifying a %G_TYPE_LONG property.
+// 
+// See g_param_spec_internal() for details on property names.
+func ParamSpecLong(name string, nick string, blurb string, minimum int32, maximum int32, defaultValue int32, flags ParamFlags) *ParamSpec {
+	var carg1 *C.gchar      // in, none, string
+	var carg2 *C.gchar      // in, none, string, nullable-string
+	var carg3 *C.gchar      // in, none, string, nullable-string
+	var carg4 C.glong       // in, none, casted
+	var carg5 C.glong       // in, none, casted
+	var carg6 C.glong       // in, none, casted
+	var carg7 C.GParamFlags // in, none, casted
+	var cret  *C.GParamSpec // return, full, converted
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	defer C.free(unsafe.Pointer(carg1))
+	if nick != "" {
+		carg2 = (*C.gchar)(unsafe.Pointer(C.CString(nick)))
+		defer C.free(unsafe.Pointer(carg2))
+	}
+	if blurb != "" {
+		carg3 = (*C.gchar)(unsafe.Pointer(C.CString(blurb)))
+		defer C.free(unsafe.Pointer(carg3))
+	}
+	carg4 = C.glong(minimum)
+	carg5 = C.glong(maximum)
+	carg6 = C.glong(defaultValue)
+	carg7 = C.GParamFlags(flags)
+
+	cret = C.g_param_spec_long(carg1, carg2, carg3, carg4, carg5, carg6, carg7)
+	runtime.KeepAlive(name)
+	runtime.KeepAlive(nick)
+	runtime.KeepAlive(blurb)
+	runtime.KeepAlive(minimum)
+	runtime.KeepAlive(maximum)
+	runtime.KeepAlive(defaultValue)
+	runtime.KeepAlive(flags)
+
+	var goret *ParamSpec
+
+	goret = UnsafeParamSpecFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// ParamSpecObject wraps g_param_spec_object
+// 
+// The function takes the following parameters:
+// 
+// 	- name string: canonical name of the property specified 
+// 	- nick string (nullable): nick name for the property specified 
+// 	- blurb string (nullable): description of the property specified 
+// 	- objectType Type: %G_TYPE_OBJECT derived type of this property 
+// 	- flags ParamFlags: flags for the property specified 
+// 
+// The function returns the following values:
+// 
+// 	- goret *ParamSpec 
+//
+// Creates a new #GParamSpecBoxed instance specifying a %G_TYPE_OBJECT
+// derived property.
+// 
+// See g_param_spec_internal() for details on property names.
+func ParamSpecObject(name string, nick string, blurb string, objectType Type, flags ParamFlags) *ParamSpec {
+	var carg1 *C.gchar      // in, none, string
+	var carg2 *C.gchar      // in, none, string, nullable-string
+	var carg3 *C.gchar      // in, none, string, nullable-string
+	var carg4 C.GType       // in, none, casted, alias
+	var carg5 C.GParamFlags // in, none, casted
+	var cret  *C.GParamSpec // return, full, converted
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	defer C.free(unsafe.Pointer(carg1))
+	if nick != "" {
+		carg2 = (*C.gchar)(unsafe.Pointer(C.CString(nick)))
+		defer C.free(unsafe.Pointer(carg2))
+	}
+	if blurb != "" {
+		carg3 = (*C.gchar)(unsafe.Pointer(C.CString(blurb)))
+		defer C.free(unsafe.Pointer(carg3))
+	}
+	carg4 = C.GType(objectType)
+	carg5 = C.GParamFlags(flags)
+
+	cret = C.g_param_spec_object(carg1, carg2, carg3, carg4, carg5)
+	runtime.KeepAlive(name)
+	runtime.KeepAlive(nick)
+	runtime.KeepAlive(blurb)
+	runtime.KeepAlive(objectType)
+	runtime.KeepAlive(flags)
+
+	var goret *ParamSpec
+
+	goret = UnsafeParamSpecFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// ParamSpecParam wraps g_param_spec_param
+// 
+// The function takes the following parameters:
+// 
+// 	- name string: canonical name of the property specified 
+// 	- nick string (nullable): nick name for the property specified 
+// 	- blurb string (nullable): description of the property specified 
+// 	- paramType Type: a #GType derived from %G_TYPE_PARAM 
+// 	- flags ParamFlags: flags for the property specified 
+// 
+// The function returns the following values:
+// 
+// 	- goret *ParamSpec 
+//
+// Creates a new #GParamSpecParam instance specifying a %G_TYPE_PARAM
+// property.
+// 
+// See g_param_spec_internal() for details on property names.
+func ParamSpecParam(name string, nick string, blurb string, paramType Type, flags ParamFlags) *ParamSpec {
+	var carg1 *C.gchar      // in, none, string
+	var carg2 *C.gchar      // in, none, string, nullable-string
+	var carg3 *C.gchar      // in, none, string, nullable-string
+	var carg4 C.GType       // in, none, casted, alias
+	var carg5 C.GParamFlags // in, none, casted
+	var cret  *C.GParamSpec // return, full, converted
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	defer C.free(unsafe.Pointer(carg1))
+	if nick != "" {
+		carg2 = (*C.gchar)(unsafe.Pointer(C.CString(nick)))
+		defer C.free(unsafe.Pointer(carg2))
+	}
+	if blurb != "" {
+		carg3 = (*C.gchar)(unsafe.Pointer(C.CString(blurb)))
+		defer C.free(unsafe.Pointer(carg3))
+	}
+	carg4 = C.GType(paramType)
+	carg5 = C.GParamFlags(flags)
+
+	cret = C.g_param_spec_param(carg1, carg2, carg3, carg4, carg5)
+	runtime.KeepAlive(name)
+	runtime.KeepAlive(nick)
+	runtime.KeepAlive(blurb)
+	runtime.KeepAlive(paramType)
+	runtime.KeepAlive(flags)
+
+	var goret *ParamSpec
+
+	goret = UnsafeParamSpecFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// ParamSpecPointer wraps g_param_spec_pointer
+// 
+// The function takes the following parameters:
+// 
+// 	- name string: canonical name of the property specified 
+// 	- nick string (nullable): nick name for the property specified 
+// 	- blurb string (nullable): description of the property specified 
+// 	- flags ParamFlags: flags for the property specified 
+// 
+// The function returns the following values:
+// 
+// 	- goret *ParamSpec 
+//
+// Creates a new #GParamSpecPointer instance specifying a pointer property.
+// Where possible, it is better to use g_param_spec_object() or
+// g_param_spec_boxed() to expose memory management information.
+// 
+// See g_param_spec_internal() for details on property names.
+func ParamSpecPointer(name string, nick string, blurb string, flags ParamFlags) *ParamSpec {
+	var carg1 *C.gchar      // in, none, string
+	var carg2 *C.gchar      // in, none, string, nullable-string
+	var carg3 *C.gchar      // in, none, string, nullable-string
+	var carg4 C.GParamFlags // in, none, casted
+	var cret  *C.GParamSpec // return, full, converted
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	defer C.free(unsafe.Pointer(carg1))
+	if nick != "" {
+		carg2 = (*C.gchar)(unsafe.Pointer(C.CString(nick)))
+		defer C.free(unsafe.Pointer(carg2))
+	}
+	if blurb != "" {
+		carg3 = (*C.gchar)(unsafe.Pointer(C.CString(blurb)))
+		defer C.free(unsafe.Pointer(carg3))
+	}
+	carg4 = C.GParamFlags(flags)
+
+	cret = C.g_param_spec_pointer(carg1, carg2, carg3, carg4)
+	runtime.KeepAlive(name)
+	runtime.KeepAlive(nick)
+	runtime.KeepAlive(blurb)
+	runtime.KeepAlive(flags)
+
+	var goret *ParamSpec
+
+	goret = UnsafeParamSpecFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// ParamSpecString wraps g_param_spec_string
+// 
+// The function takes the following parameters:
+// 
+// 	- name string: canonical name of the property specified 
+// 	- nick string (nullable): nick name for the property specified 
+// 	- blurb string (nullable): description of the property specified 
+// 	- defaultValue string (nullable): default value for the property specified 
+// 	- flags ParamFlags: flags for the property specified 
+// 
+// The function returns the following values:
+// 
+// 	- goret *ParamSpec 
+//
+// Creates a new #GParamSpecString instance.
+// 
+// See g_param_spec_internal() for details on property names.
+func ParamSpecString(name string, nick string, blurb string, defaultValue string, flags ParamFlags) *ParamSpec {
+	var carg1 *C.gchar      // in, none, string
+	var carg2 *C.gchar      // in, none, string, nullable-string
+	var carg3 *C.gchar      // in, none, string, nullable-string
+	var carg4 *C.gchar      // in, none, string, nullable-string
+	var carg5 C.GParamFlags // in, none, casted
+	var cret  *C.GParamSpec // return, full, converted
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	defer C.free(unsafe.Pointer(carg1))
+	if nick != "" {
+		carg2 = (*C.gchar)(unsafe.Pointer(C.CString(nick)))
+		defer C.free(unsafe.Pointer(carg2))
+	}
+	if blurb != "" {
+		carg3 = (*C.gchar)(unsafe.Pointer(C.CString(blurb)))
+		defer C.free(unsafe.Pointer(carg3))
+	}
+	if defaultValue != "" {
+		carg4 = (*C.gchar)(unsafe.Pointer(C.CString(defaultValue)))
+		defer C.free(unsafe.Pointer(carg4))
+	}
+	carg5 = C.GParamFlags(flags)
+
+	cret = C.g_param_spec_string(carg1, carg2, carg3, carg4, carg5)
+	runtime.KeepAlive(name)
+	runtime.KeepAlive(nick)
+	runtime.KeepAlive(blurb)
+	runtime.KeepAlive(defaultValue)
+	runtime.KeepAlive(flags)
+
+	var goret *ParamSpec
+
+	goret = UnsafeParamSpecFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// ParamSpecUchar wraps g_param_spec_uchar
+// 
+// The function takes the following parameters:
+// 
+// 	- name string: canonical name of the property specified 
+// 	- nick string (nullable): nick name for the property specified 
+// 	- blurb string (nullable): description of the property specified 
+// 	- minimum uint8: minimum value for the property specified 
+// 	- maximum uint8: maximum value for the property specified 
+// 	- defaultValue uint8: default value for the property specified 
+// 	- flags ParamFlags: flags for the property specified 
+// 
+// The function returns the following values:
+// 
+// 	- goret *ParamSpec 
+//
+// Creates a new #GParamSpecUChar instance specifying a %G_TYPE_UCHAR property.
+func ParamSpecUchar(name string, nick string, blurb string, minimum uint8, maximum uint8, defaultValue uint8, flags ParamFlags) *ParamSpec {
+	var carg1 *C.gchar      // in, none, string
+	var carg2 *C.gchar      // in, none, string, nullable-string
+	var carg3 *C.gchar      // in, none, string, nullable-string
+	var carg4 C.guint8      // in, none, casted
+	var carg5 C.guint8      // in, none, casted
+	var carg6 C.guint8      // in, none, casted
+	var carg7 C.GParamFlags // in, none, casted
+	var cret  *C.GParamSpec // return, full, converted
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	defer C.free(unsafe.Pointer(carg1))
+	if nick != "" {
+		carg2 = (*C.gchar)(unsafe.Pointer(C.CString(nick)))
+		defer C.free(unsafe.Pointer(carg2))
+	}
+	if blurb != "" {
+		carg3 = (*C.gchar)(unsafe.Pointer(C.CString(blurb)))
+		defer C.free(unsafe.Pointer(carg3))
+	}
+	carg4 = C.guint8(minimum)
+	carg5 = C.guint8(maximum)
+	carg6 = C.guint8(defaultValue)
+	carg7 = C.GParamFlags(flags)
+
+	cret = C.g_param_spec_uchar(carg1, carg2, carg3, carg4, carg5, carg6, carg7)
+	runtime.KeepAlive(name)
+	runtime.KeepAlive(nick)
+	runtime.KeepAlive(blurb)
+	runtime.KeepAlive(minimum)
+	runtime.KeepAlive(maximum)
+	runtime.KeepAlive(defaultValue)
+	runtime.KeepAlive(flags)
+
+	var goret *ParamSpec
+
+	goret = UnsafeParamSpecFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// ParamSpecUint wraps g_param_spec_uint
+// 
+// The function takes the following parameters:
+// 
+// 	- name string: canonical name of the property specified 
+// 	- nick string (nullable): nick name for the property specified 
+// 	- blurb string (nullable): description of the property specified 
+// 	- minimum uint: minimum value for the property specified 
+// 	- maximum uint: maximum value for the property specified 
+// 	- defaultValue uint: default value for the property specified 
+// 	- flags ParamFlags: flags for the property specified 
+// 
+// The function returns the following values:
+// 
+// 	- goret *ParamSpec 
+//
+// Creates a new #GParamSpecUInt instance specifying a %G_TYPE_UINT property.
+// 
+// See g_param_spec_internal() for details on property names.
+func ParamSpecUint(name string, nick string, blurb string, minimum uint, maximum uint, defaultValue uint, flags ParamFlags) *ParamSpec {
+	var carg1 *C.gchar      // in, none, string
+	var carg2 *C.gchar      // in, none, string, nullable-string
+	var carg3 *C.gchar      // in, none, string, nullable-string
+	var carg4 C.guint       // in, none, casted
+	var carg5 C.guint       // in, none, casted
+	var carg6 C.guint       // in, none, casted
+	var carg7 C.GParamFlags // in, none, casted
+	var cret  *C.GParamSpec // return, full, converted
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	defer C.free(unsafe.Pointer(carg1))
+	if nick != "" {
+		carg2 = (*C.gchar)(unsafe.Pointer(C.CString(nick)))
+		defer C.free(unsafe.Pointer(carg2))
+	}
+	if blurb != "" {
+		carg3 = (*C.gchar)(unsafe.Pointer(C.CString(blurb)))
+		defer C.free(unsafe.Pointer(carg3))
+	}
+	carg4 = C.guint(minimum)
+	carg5 = C.guint(maximum)
+	carg6 = C.guint(defaultValue)
+	carg7 = C.GParamFlags(flags)
+
+	cret = C.g_param_spec_uint(carg1, carg2, carg3, carg4, carg5, carg6, carg7)
+	runtime.KeepAlive(name)
+	runtime.KeepAlive(nick)
+	runtime.KeepAlive(blurb)
+	runtime.KeepAlive(minimum)
+	runtime.KeepAlive(maximum)
+	runtime.KeepAlive(defaultValue)
+	runtime.KeepAlive(flags)
+
+	var goret *ParamSpec
+
+	goret = UnsafeParamSpecFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// ParamSpecUint64 wraps g_param_spec_uint64
+// 
+// The function takes the following parameters:
+// 
+// 	- name string: canonical name of the property specified 
+// 	- nick string (nullable): nick name for the property specified 
+// 	- blurb string (nullable): description of the property specified 
+// 	- minimum uint64: minimum value for the property specified 
+// 	- maximum uint64: maximum value for the property specified 
+// 	- defaultValue uint64: default value for the property specified 
+// 	- flags ParamFlags: flags for the property specified 
+// 
+// The function returns the following values:
+// 
+// 	- goret *ParamSpec 
+//
+// Creates a new #GParamSpecUInt64 instance specifying a %G_TYPE_UINT64
+// property.
+// 
+// See g_param_spec_internal() for details on property names.
+func ParamSpecUint64(name string, nick string, blurb string, minimum uint64, maximum uint64, defaultValue uint64, flags ParamFlags) *ParamSpec {
+	var carg1 *C.gchar      // in, none, string
+	var carg2 *C.gchar      // in, none, string, nullable-string
+	var carg3 *C.gchar      // in, none, string, nullable-string
+	var carg4 C.guint64     // in, none, casted
+	var carg5 C.guint64     // in, none, casted
+	var carg6 C.guint64     // in, none, casted
+	var carg7 C.GParamFlags // in, none, casted
+	var cret  *C.GParamSpec // return, full, converted
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	defer C.free(unsafe.Pointer(carg1))
+	if nick != "" {
+		carg2 = (*C.gchar)(unsafe.Pointer(C.CString(nick)))
+		defer C.free(unsafe.Pointer(carg2))
+	}
+	if blurb != "" {
+		carg3 = (*C.gchar)(unsafe.Pointer(C.CString(blurb)))
+		defer C.free(unsafe.Pointer(carg3))
+	}
+	carg4 = C.guint64(minimum)
+	carg5 = C.guint64(maximum)
+	carg6 = C.guint64(defaultValue)
+	carg7 = C.GParamFlags(flags)
+
+	cret = C.g_param_spec_uint64(carg1, carg2, carg3, carg4, carg5, carg6, carg7)
+	runtime.KeepAlive(name)
+	runtime.KeepAlive(nick)
+	runtime.KeepAlive(blurb)
+	runtime.KeepAlive(minimum)
+	runtime.KeepAlive(maximum)
+	runtime.KeepAlive(defaultValue)
+	runtime.KeepAlive(flags)
+
+	var goret *ParamSpec
+
+	goret = UnsafeParamSpecFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// ParamSpecUlong wraps g_param_spec_ulong
+// 
+// The function takes the following parameters:
+// 
+// 	- name string: canonical name of the property specified 
+// 	- nick string (nullable): nick name for the property specified 
+// 	- blurb string (nullable): description of the property specified 
+// 	- minimum uint32: minimum value for the property specified 
+// 	- maximum uint32: maximum value for the property specified 
+// 	- defaultValue uint32: default value for the property specified 
+// 	- flags ParamFlags: flags for the property specified 
+// 
+// The function returns the following values:
+// 
+// 	- goret *ParamSpec 
+//
+// Creates a new #GParamSpecULong instance specifying a %G_TYPE_ULONG
+// property.
+// 
+// See g_param_spec_internal() for details on property names.
+func ParamSpecUlong(name string, nick string, blurb string, minimum uint32, maximum uint32, defaultValue uint32, flags ParamFlags) *ParamSpec {
+	var carg1 *C.gchar      // in, none, string
+	var carg2 *C.gchar      // in, none, string, nullable-string
+	var carg3 *C.gchar      // in, none, string, nullable-string
+	var carg4 C.gulong      // in, none, casted
+	var carg5 C.gulong      // in, none, casted
+	var carg6 C.gulong      // in, none, casted
+	var carg7 C.GParamFlags // in, none, casted
+	var cret  *C.GParamSpec // return, full, converted
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	defer C.free(unsafe.Pointer(carg1))
+	if nick != "" {
+		carg2 = (*C.gchar)(unsafe.Pointer(C.CString(nick)))
+		defer C.free(unsafe.Pointer(carg2))
+	}
+	if blurb != "" {
+		carg3 = (*C.gchar)(unsafe.Pointer(C.CString(blurb)))
+		defer C.free(unsafe.Pointer(carg3))
+	}
+	carg4 = C.gulong(minimum)
+	carg5 = C.gulong(maximum)
+	carg6 = C.gulong(defaultValue)
+	carg7 = C.GParamFlags(flags)
+
+	cret = C.g_param_spec_ulong(carg1, carg2, carg3, carg4, carg5, carg6, carg7)
+	runtime.KeepAlive(name)
+	runtime.KeepAlive(nick)
+	runtime.KeepAlive(blurb)
+	runtime.KeepAlive(minimum)
+	runtime.KeepAlive(maximum)
+	runtime.KeepAlive(defaultValue)
+	runtime.KeepAlive(flags)
+
+	var goret *ParamSpec
+
+	goret = UnsafeParamSpecFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// ParamSpecUnichar wraps g_param_spec_unichar
+// 
+// The function takes the following parameters:
+// 
+// 	- name string: canonical name of the property specified 
+// 	- nick string (nullable): nick name for the property specified 
+// 	- blurb string (nullable): description of the property specified 
+// 	- defaultValue uint32: default value for the property specified 
+// 	- flags ParamFlags: flags for the property specified 
+// 
+// The function returns the following values:
+// 
+// 	- goret *ParamSpec 
+//
+// Creates a new #GParamSpecUnichar instance specifying a %G_TYPE_UINT
+// property. #GValue structures for this property can be accessed with
+// g_value_set_uint() and g_value_get_uint().
+// 
+// See g_param_spec_internal() for details on property names.
+func ParamSpecUnichar(name string, nick string, blurb string, defaultValue uint32, flags ParamFlags) *ParamSpec {
+	var carg1 *C.gchar      // in, none, string
+	var carg2 *C.gchar      // in, none, string, nullable-string
+	var carg3 *C.gchar      // in, none, string, nullable-string
+	var carg4 C.gunichar    // in, none, casted
+	var carg5 C.GParamFlags // in, none, casted
+	var cret  *C.GParamSpec // return, full, converted
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	defer C.free(unsafe.Pointer(carg1))
+	if nick != "" {
+		carg2 = (*C.gchar)(unsafe.Pointer(C.CString(nick)))
+		defer C.free(unsafe.Pointer(carg2))
+	}
+	if blurb != "" {
+		carg3 = (*C.gchar)(unsafe.Pointer(C.CString(blurb)))
+		defer C.free(unsafe.Pointer(carg3))
+	}
+	carg4 = C.gunichar(defaultValue)
+	carg5 = C.GParamFlags(flags)
+
+	cret = C.g_param_spec_unichar(carg1, carg2, carg3, carg4, carg5)
+	runtime.KeepAlive(name)
+	runtime.KeepAlive(nick)
+	runtime.KeepAlive(blurb)
+	runtime.KeepAlive(defaultValue)
+	runtime.KeepAlive(flags)
+
+	var goret *ParamSpec
+
+	goret = UnsafeParamSpecFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// ParamValueConvert wraps g_param_value_convert
+// 
+// The function takes the following parameters:
+// 
+// 	- pspec *ParamSpec: a valid #GParamSpec 
+// 	- srcValue *Value: source #GValue 
+// 	- destValue *Value: destination #GValue of correct type for @pspec 
+// 	- strictValidation bool: %TRUE requires @dest_value to conform to @pspec
+// without modifications 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Transforms @src_value into @dest_value if possible, and then
+// validates @dest_value, in order for it to conform to @pspec.  If
+// @strict_validation is %TRUE this function will only succeed if the
+// transformed @dest_value complied to @pspec without modifications.
+// 
+// See also g_value_type_transformable(), g_value_transform() and
+// g_param_value_validate().
+func ParamValueConvert(pspec *ParamSpec, srcValue *Value, destValue *Value, strictValidation bool) bool {
+	var carg1 *C.GParamSpec // in, none, converted
+	var carg2 *C.GValue     // in, none, converted
+	var carg3 *C.GValue     // in, none, converted
+	var carg4 C.gboolean    // in
+	var cret  C.gboolean    // return
+
+	carg1 = (*C.GParamSpec)(UnsafeParamSpecToGlibNone(pspec))
+	carg2 = (*C.GValue)(UnsafeValueToGlibUseAnyInstead(srcValue))
+	carg3 = (*C.GValue)(UnsafeValueToGlibUseAnyInstead(destValue))
+	if strictValidation {
+		carg4 = C.TRUE
+	}
+
+	cret = C.g_param_value_convert(carg1, carg2, carg3, carg4)
+	runtime.KeepAlive(pspec)
+	runtime.KeepAlive(srcValue)
+	runtime.KeepAlive(destValue)
+	runtime.KeepAlive(strictValidation)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// ParamValueDefaults wraps g_param_value_defaults
+// 
+// The function takes the following parameters:
+// 
+// 	- pspec *ParamSpec: a valid #GParamSpec 
+// 	- value *Value: a #GValue of correct type for @pspec 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Checks whether @value contains the default value as specified in @pspec.
+func ParamValueDefaults(pspec *ParamSpec, value *Value) bool {
+	var carg1 *C.GParamSpec // in, none, converted
+	var carg2 *C.GValue     // in, none, converted
+	var cret  C.gboolean    // return
+
+	carg1 = (*C.GParamSpec)(UnsafeParamSpecToGlibNone(pspec))
+	carg2 = (*C.GValue)(UnsafeValueToGlibUseAnyInstead(value))
+
+	cret = C.g_param_value_defaults(carg1, carg2)
+	runtime.KeepAlive(pspec)
+	runtime.KeepAlive(value)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// ParamValueIsValid wraps g_param_value_is_valid
+// 
+// The function takes the following parameters:
+// 
+// 	- pspec *ParamSpec: a valid #GParamSpec 
+// 	- value *Value: a #GValue of correct type for @pspec 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Return whether the contents of @value comply with the specifications
+// set out by @pspec.
+func ParamValueIsValid(pspec *ParamSpec, value *Value) bool {
+	var carg1 *C.GParamSpec // in, none, converted
+	var carg2 *C.GValue     // in, none, converted
+	var cret  C.gboolean    // return
+
+	carg1 = (*C.GParamSpec)(UnsafeParamSpecToGlibNone(pspec))
+	carg2 = (*C.GValue)(UnsafeValueToGlibUseAnyInstead(value))
+
+	cret = C.g_param_value_is_valid(carg1, carg2)
+	runtime.KeepAlive(pspec)
+	runtime.KeepAlive(value)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// ParamValueSetDefault wraps g_param_value_set_default
+// 
+// The function takes the following parameters:
+// 
+// 	- pspec *ParamSpec: a valid #GParamSpec 
+// 	- value *Value: a #GValue of correct type for @pspec; since 2.64, you
+//   can also pass an empty #GValue, initialized with %G_VALUE_INIT 
+//
+// Sets @value to its default value as specified in @pspec.
+func ParamValueSetDefault(pspec *ParamSpec, value *Value) {
+	var carg1 *C.GParamSpec // in, none, converted
+	var carg2 *C.GValue     // in, none, converted
+
+	carg1 = (*C.GParamSpec)(UnsafeParamSpecToGlibNone(pspec))
+	carg2 = (*C.GValue)(UnsafeValueToGlibUseAnyInstead(value))
+
+	C.g_param_value_set_default(carg1, carg2)
+	runtime.KeepAlive(pspec)
+	runtime.KeepAlive(value)
+}
+
+// ParamValueValidate wraps g_param_value_validate
+// 
+// The function takes the following parameters:
+// 
+// 	- pspec *ParamSpec: a valid #GParamSpec 
+// 	- value *Value: a #GValue of correct type for @pspec 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Ensures that the contents of @value comply with the specifications
+// set out by @pspec. For example, a #GParamSpecInt might require
+// that integers stored in @value may not be smaller than -42 and not be
+// greater than +42. If @value contains an integer outside of this range,
+// it is modified accordingly, so the resulting value will fit into the
+// range -42 .. +42.
+func ParamValueValidate(pspec *ParamSpec, value *Value) bool {
+	var carg1 *C.GParamSpec // in, none, converted
+	var carg2 *C.GValue     // in, none, converted
+	var cret  C.gboolean    // return
+
+	carg1 = (*C.GParamSpec)(UnsafeParamSpecToGlibNone(pspec))
+	carg2 = (*C.GValue)(UnsafeValueToGlibUseAnyInstead(value))
+
+	cret = C.g_param_value_validate(carg1, carg2)
+	runtime.KeepAlive(pspec)
+	runtime.KeepAlive(value)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// ParamValuesCmp wraps g_param_values_cmp
+// 
+// The function takes the following parameters:
+// 
+// 	- pspec *ParamSpec: a valid #GParamSpec 
+// 	- value1 *Value: a #GValue of correct type for @pspec 
+// 	- value2 *Value: a #GValue of correct type for @pspec 
+// 
+// The function returns the following values:
+// 
+// 	- goret int 
+//
+// Compares @value1 with @value2 according to @pspec, and return -1, 0 or +1,
+// if @value1 is found to be less than, equal to or greater than @value2,
+// respectively.
+func ParamValuesCmp(pspec *ParamSpec, value1 *Value, value2 *Value) int {
+	var carg1 *C.GParamSpec // in, none, converted
+	var carg2 *C.GValue     // in, none, converted
+	var carg3 *C.GValue     // in, none, converted
+	var cret  C.gint        // return, none, casted
+
+	carg1 = (*C.GParamSpec)(UnsafeParamSpecToGlibNone(pspec))
+	carg2 = (*C.GValue)(UnsafeValueToGlibUseAnyInstead(value1))
+	carg3 = (*C.GValue)(UnsafeValueToGlibUseAnyInstead(value2))
+
+	cret = C.g_param_values_cmp(carg1, carg2, carg3)
+	runtime.KeepAlive(pspec)
+	runtime.KeepAlive(value1)
+	runtime.KeepAlive(value2)
+
+	var goret int
+
+	goret = int(cret)
 
 	return goret
 }
@@ -1379,32 +2810,6 @@ func TypeAddInstancePrivate(classType Type, privateSize uint) int {
 	goret = int(cret)
 
 	return goret
-}
-
-// TypeAddInterfaceDynamic wraps g_type_add_interface_dynamic
-// 
-// The function takes the following parameters:
-// 
-// 	- instanceType Type: #GType value of an instantiatable type 
-// 	- interfaceType Type: #GType value of an interface type 
-// 	- plugin TypePlugin: #GTypePlugin structure to retrieve the #GInterfaceInfo from 
-//
-// Adds @interface_type to the dynamic @instance_type. The information
-// contained in the #GTypePlugin structure pointed to by @plugin
-// is used to manage the relationship.
-func TypeAddInterfaceDynamic(instanceType Type, interfaceType Type, plugin TypePlugin) {
-	var carg1 C.GType        // in, none, casted, alias
-	var carg2 C.GType        // in, none, casted, alias
-	var carg3 *C.GTypePlugin // in, none, converted
-
-	carg1 = C.GType(instanceType)
-	carg2 = C.GType(interfaceType)
-	carg3 = (*C.GTypePlugin)(UnsafeTypePluginToGlibNone(plugin))
-
-	C.g_type_add_interface_dynamic(carg1, carg2, carg3)
-	runtime.KeepAlive(instanceType)
-	runtime.KeepAlive(interfaceType)
-	runtime.KeepAlive(plugin)
 }
 
 // TypeAddInterfaceStatic wraps g_type_add_interface_static
@@ -1774,33 +3179,6 @@ func TypeGetInstanceCount(typ Type) int {
 	return goret
 }
 
-// TypeGetPlugin wraps g_type_get_plugin
-// 
-// The function takes the following parameters:
-// 
-// 	- typ Type: #GType to retrieve the plugin for 
-// 
-// The function returns the following values:
-// 
-// 	- goret TypePlugin 
-//
-// Returns the #GTypePlugin structure for @type.
-func TypeGetPlugin(typ Type) TypePlugin {
-	var carg1 C.GType        // in, none, casted, alias
-	var cret  *C.GTypePlugin // return, none, converted
-
-	carg1 = C.GType(typ)
-
-	cret = C.g_type_get_plugin(carg1)
-	runtime.KeepAlive(typ)
-
-	var goret TypePlugin
-
-	goret = UnsafeTypePluginFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
 // TypeGetTypeRegistrationSerial wraps g_type_get_type_registration_serial
 // 
 // The function returns the following values:
@@ -2045,50 +3423,6 @@ func TypeQname(typ Type) glib.Quark {
 	return goret
 }
 
-// TypeRegisterDynamic wraps g_type_register_dynamic
-// 
-// The function takes the following parameters:
-// 
-// 	- parentType Type: type from which this type will be derived 
-// 	- typeName string: 0-terminated string used as the name of the new type 
-// 	- plugin TypePlugin: #GTypePlugin structure to retrieve the #GTypeInfo from 
-// 	- flags TypeFlags: bitwise combination of #GTypeFlags values 
-// 
-// The function returns the following values:
-// 
-// 	- goret Type 
-//
-// Registers @type_name as the name of a new dynamic type derived from
-// @parent_type.  The type system uses the information contained in the
-// #GTypePlugin structure pointed to by @plugin to manage the type and its
-// instances (if not abstract).  The value of @flags determines the nature
-// (e.g. abstract or not) of the type.
-func TypeRegisterDynamic(parentType Type, typeName string, plugin TypePlugin, flags TypeFlags) Type {
-	var carg1 C.GType        // in, none, casted, alias
-	var carg2 *C.gchar       // in, none, string
-	var carg3 *C.GTypePlugin // in, none, converted
-	var carg4 C.GTypeFlags   // in, none, casted
-	var cret  C.GType        // return, none, casted, alias
-
-	carg1 = C.GType(parentType)
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(typeName)))
-	defer C.free(unsafe.Pointer(carg2))
-	carg3 = (*C.GTypePlugin)(UnsafeTypePluginToGlibNone(plugin))
-	carg4 = C.GTypeFlags(flags)
-
-	cret = C.g_type_register_dynamic(carg1, carg2, carg3, carg4)
-	runtime.KeepAlive(parentType)
-	runtime.KeepAlive(typeName)
-	runtime.KeepAlive(plugin)
-	runtime.KeepAlive(flags)
-
-	var goret Type
-
-	goret = Type(cret)
-
-	return goret
-}
-
 // TypeTestFlags wraps g_type_test_flags
 // 
 // The function takes the following parameters:
@@ -2135,241 +3469,6 @@ func VariantGetGType() Type {
 	goret = Type(cret)
 
 	return goret
-}
-
-// TypePluginInstance is the instance type used by all types implementing GTypePlugin. It is used internally by the bindings. Users should use the interface [TypePlugin] instead.
-type TypePluginInstance struct {
-	_ [0]func() // equal guard
-	Instance ObjectInstance
-}
-
-var _ TypePlugin = (*TypePluginInstance)(nil)
-
-// TypePlugin wraps GTypePlugin
-//
-// An interface that handles the lifecycle of dynamically loaded types.
-// 
-// The GObject type system supports dynamic loading of types.
-// It goes as follows:
-// 
-// 1. The type is initially introduced (usually upon loading the module
-//    the first time, or by your main application that knows what modules
-//    introduces what types), like this:
-//    ```c
-//    new_type_id = g_type_register_dynamic (parent_type_id,
-//                                           "TypeName",
-//                                           new_type_plugin,
-//                                           type_flags);
-//    ```
-//    where `new_type_plugin` is an implementation of the
-//    `GTypePlugin` interface.
-// 
-// 2. The type's implementation is referenced, e.g. through
-//    [func@GObject.TypeClass.ref] or through [func@GObject.type_create_instance]
-//    (this is being called by [ctor@GObject.Object.new]) or through one of the above
-//    done on a type derived from `new_type_id`.
-// 
-// 3. This causes the type system to load the type's implementation by calling
-//    [method@GObject.TypePlugin.use] and [method@GObject.TypePlugin.complete_type_info]
-//    on `new_type_plugin`.
-// 
-// 4. At some point the type's implementation isn't required anymore, e.g. after
-//    [method@GObject.TypeClass.unref] or [func@GObject.type_free_instance]
-//    (called when the reference count of an instance drops to zero).
-// 
-// 5. This causes the type system to throw away the information retrieved
-//    from [method@GObject.TypePlugin.complete_type_info] and then it calls
-//    [method@GObject.TypePlugin.unuse] on `new_type_plugin`.
-// 
-// 6. Things may repeat from the second step.
-// 
-// So basically, you need to implement a `GTypePlugin` type that
-// carries a use_count, once use_count goes from zero to one, you need
-// to load the implementation to successfully handle the upcoming
-// [method@GObject.TypePlugin.complete_type_info] call. Later, maybe after
-// succeeding use/unuse calls, once use_count drops to zero, you can
-// unload the implementation again. The type system makes sure to call
-// [method@GObject.TypePlugin.use] and [method@GObject.TypePlugin.complete_type_info]
-// again when the type is needed again.
-// 
-// [class@GObject.TypeModule] is an implementation of `GTypePlugin` that
-// already implements most of this except for the actual module loading and
-// unloading. It even handles multiple registered types per module.
-type TypePlugin interface {
-	upcastToGTypePlugin() *TypePluginInstance
-
-	// CompleteInterfaceInfo wraps g_type_plugin_complete_interface_info
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- instanceType Type: the #GType of an instantiatable type to which the interface
-	//  is added 
-	// 	- interfaceType Type: the #GType of the interface whose info is completed 
-	// 	- info *InterfaceInfo: the #GInterfaceInfo to fill in 
-	//
-	// Calls the @complete_interface_info function from the
-	// #GTypePluginClass of @plugin. There should be no need to use this
-	// function outside of the GObject type system itself.
-	CompleteInterfaceInfo(Type, Type, *InterfaceInfo)
-	// CompleteTypeInfo wraps g_type_plugin_complete_type_info
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- gType Type: the #GType whose info is completed 
-	// 	- info *TypeInfo: the #GTypeInfo struct to fill in 
-	// 	- valueTable *TypeValueTable: the #GTypeValueTable to fill in 
-	//
-	// Calls the @complete_type_info function from the #GTypePluginClass of @plugin.
-	// There should be no need to use this function outside of the GObject
-	// type system itself.
-	CompleteTypeInfo(Type, *TypeInfo, *TypeValueTable)
-	// UnusePlugin wraps g_type_plugin_unuse
-	//
-	// Calls the @unuse_plugin function from the #GTypePluginClass of
-	// @plugin.  There should be no need to use this function outside of
-	// the GObject type system itself.
-	UnusePlugin()
-	// UsePlugin wraps g_type_plugin_use
-	//
-	// Calls the @use_plugin function from the #GTypePluginClass of
-	// @plugin.  There should be no need to use this function outside of
-	// the GObject type system itself.
-	UsePlugin()
-}
-
-var _ TypePlugin = (*TypePluginInstance)(nil)
-
-func unsafeWrapTypePlugin(base *ObjectInstance) *TypePluginInstance {
-	return &TypePluginInstance{
-		Instance: *base,
-	}
-}
-
-func marshalTypePluginInstance(p unsafe.Pointer) (any, error) {
-	return unsafeWrapTypePlugin(ValueFromNative(p).Object()), nil
-}
-
-func (t *TypePluginInstance) upcastToGTypePlugin() *TypePluginInstance {
-	return t
-}
-
-// UnsafeTypePluginFromGlibNone is used to convert raw GTypePlugin pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
-func UnsafeTypePluginFromGlibNone(c unsafe.Pointer) TypePlugin {
-	return UnsafeObjectFromGlibNone(c).(TypePlugin)
-}
-
-// UnsafeTypePluginFromGlibFull is used to convert raw GTypePlugin pointers to go while attaching a finalizer. This is used by the bindings internally.
-func UnsafeTypePluginFromGlibFull(c unsafe.Pointer) TypePlugin {
-	return UnsafeObjectFromGlibFull(c).(TypePlugin)
-}
-
-// UnsafeTypePluginToGlibNone is used to convert the instance to it's C value GTypePlugin. This is used by the bindings internally.
-func UnsafeTypePluginToGlibNone(c TypePlugin) unsafe.Pointer {
-	i := c.upcastToGTypePlugin()
-	return UnsafeObjectToGlibNone(&i.Instance)
-}
-
-// UnsafeTypePluginToGlibFull is used to convert the instance to it's C value GTypePlugin, while removeing the finalizer. This is used by the bindings internally.
-func UnsafeTypePluginToGlibFull(c TypePlugin) unsafe.Pointer {
-	i := c.upcastToGTypePlugin()
-	return UnsafeObjectToGlibFull(&i.Instance)
-}
-
-// CompleteInterfaceInfo wraps g_type_plugin_complete_interface_info
-// 
-// The function takes the following parameters:
-// 
-// 	- instanceType Type: the #GType of an instantiatable type to which the interface
-//  is added 
-// 	- interfaceType Type: the #GType of the interface whose info is completed 
-// 	- info *InterfaceInfo: the #GInterfaceInfo to fill in 
-//
-// Calls the @complete_interface_info function from the
-// #GTypePluginClass of @plugin. There should be no need to use this
-// function outside of the GObject type system itself.
-func (plugin *TypePluginInstance) CompleteInterfaceInfo(instanceType Type, interfaceType Type, info *InterfaceInfo) {
-	var carg0 *C.GTypePlugin    // in, none, converted
-	var carg1 C.GType           // in, none, casted, alias
-	var carg2 C.GType           // in, none, casted, alias
-	var carg3 *C.GInterfaceInfo // in, none, converted
-
-	carg0 = (*C.GTypePlugin)(UnsafeTypePluginToGlibNone(plugin))
-	carg1 = C.GType(instanceType)
-	carg2 = C.GType(interfaceType)
-	carg3 = (*C.GInterfaceInfo)(UnsafeInterfaceInfoToGlibNone(info))
-
-	C.g_type_plugin_complete_interface_info(carg0, carg1, carg2, carg3)
-	runtime.KeepAlive(plugin)
-	runtime.KeepAlive(instanceType)
-	runtime.KeepAlive(interfaceType)
-	runtime.KeepAlive(info)
-}
-
-// CompleteTypeInfo wraps g_type_plugin_complete_type_info
-// 
-// The function takes the following parameters:
-// 
-// 	- gType Type: the #GType whose info is completed 
-// 	- info *TypeInfo: the #GTypeInfo struct to fill in 
-// 	- valueTable *TypeValueTable: the #GTypeValueTable to fill in 
-//
-// Calls the @complete_type_info function from the #GTypePluginClass of @plugin.
-// There should be no need to use this function outside of the GObject
-// type system itself.
-func (plugin *TypePluginInstance) CompleteTypeInfo(gType Type, info *TypeInfo, valueTable *TypeValueTable) {
-	var carg0 *C.GTypePlugin     // in, none, converted
-	var carg1 C.GType            // in, none, casted, alias
-	var carg2 *C.GTypeInfo       // in, none, converted
-	var carg3 *C.GTypeValueTable // in, none, converted
-
-	carg0 = (*C.GTypePlugin)(UnsafeTypePluginToGlibNone(plugin))
-	carg1 = C.GType(gType)
-	carg2 = (*C.GTypeInfo)(UnsafeTypeInfoToGlibNone(info))
-	carg3 = (*C.GTypeValueTable)(UnsafeTypeValueTableToGlibNone(valueTable))
-
-	C.g_type_plugin_complete_type_info(carg0, carg1, carg2, carg3)
-	runtime.KeepAlive(plugin)
-	runtime.KeepAlive(gType)
-	runtime.KeepAlive(info)
-	runtime.KeepAlive(valueTable)
-}
-
-// UnusePlugin wraps g_type_plugin_unuse
-//
-// Calls the @unuse_plugin function from the #GTypePluginClass of
-// @plugin.  There should be no need to use this function outside of
-// the GObject type system itself.
-func (plugin *TypePluginInstance) UnusePlugin() {
-	var carg0 *C.GTypePlugin // in, none, converted
-
-	carg0 = (*C.GTypePlugin)(UnsafeTypePluginToGlibNone(plugin))
-
-	C.g_type_plugin_unuse(carg0)
-	runtime.KeepAlive(plugin)
-}
-
-// UsePlugin wraps g_type_plugin_use
-//
-// Calls the @use_plugin function from the #GTypePluginClass of
-// @plugin.  There should be no need to use this function outside of
-// the GObject type system itself.
-func (plugin *TypePluginInstance) UsePlugin() {
-	var carg0 *C.GTypePlugin // in, none, converted
-
-	carg0 = (*C.GTypePlugin)(UnsafeTypePluginToGlibNone(plugin))
-
-	C.g_type_plugin_use(carg0)
-	runtime.KeepAlive(plugin)
-}
-
-// TypePluginOverrides is the struct used to override the default implementation of virtual methods.
-// it is generic over the extending instance type.
-type TypePluginOverrides[Instance TypePlugin] struct {
-}
-
-// UnsafeApplyTypePluginOverrides applies the overrides to init the gclass by setting the trampoline functions.
-// This is used by the bindings internally and only exported for visibility to other bindings code.
-func UnsafeApplyTypePluginOverrides[Instance TypePlugin](gclass unsafe.Pointer, overrides TypePluginOverrides[Instance]) {
 }
 
 // BindingGroupInstance is the instance type used by all types extending GBindingGroup. It is used internally by the bindings. Users should use the interface [BindingGroup] instead.
@@ -2535,545 +3634,6 @@ func RegisterInitiallyUnownedSubClass[InstanceT InitiallyUnowned](
 		UnsafeApplyInitiallyUnownedOverrides,
 		func (obj *ObjectInstance) Object {
 			return unsafeWrapInitiallyUnowned(obj)
-		},
-		interfaceInits...,
-	)
-}
-
-// TypeModuleInstance is the instance type used by all types extending GTypeModule. It is used internally by the bindings. Users should use the interface [TypeModule] instead.
-type TypeModuleInstance struct {
-	_ [0]func() // equal guard
-	ObjectInstance
-}
-
-var _ TypeModule = (*TypeModuleInstance)(nil)
-
-// TypeModule wraps GTypeModule
-//
-// `GTypeModule` provides a simple implementation of the `GTypePlugin`
-// interface.
-// 
-// The model of `GTypeModule` is a dynamically loaded module which
-// implements some number of types and interface implementations.
-// 
-// When the module is loaded, it registers its types and interfaces
-// using [method@GObject.TypeModule.register_type] and
-// [method@GObject.TypeModule.add_interface].
-// As long as any instances of these types and interface implementations
-// are in use, the module is kept loaded. When the types and interfaces
-// are gone, the module may be unloaded. If the types and interfaces
-// become used again, the module will be reloaded. Note that the last
-// reference cannot be released from within the module code, since that
-// would lead to the caller's code being unloaded before `g_object_unref()`
-// returns to it.
-// 
-// Keeping track of whether the module should be loaded or not is done by
-// using a use count - it starts at zero, and whenever it is greater than
-// zero, the module is loaded. The use count is maintained internally by
-// the type system, but also can be explicitly controlled by
-// [method@GObject.TypeModule.use] and [method@GObject.TypeModule.unuse].
-// Typically, when loading a module for the first type, `g_type_module_use()`
-// will be used to load it so that it can initialize its types. At some later
-// point, when the module no longer needs to be loaded except for the type
-// implementations it contains, `g_type_module_unuse()` is called.
-// 
-// `GTypeModule` does not actually provide any implementation of module
-// loading and unloading. To create a particular module type you must
-// derive from `GTypeModule` and implement the load and unload functions
-// in `GTypeModuleClass`.
-type TypeModule interface {
-	Object
-	upcastToGTypeModule() *TypeModuleInstance
-
-	// AddInterface wraps g_type_module_add_interface
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- instanceType Type: type to which to add the interface. 
-	// 	- interfaceType Type: interface type to add 
-	// 	- interfaceInfo *InterfaceInfo: type information structure 
-	//
-	// Registers an additional interface for a type, whose interface lives
-	// in the given type plugin. If the interface was already registered
-	// for the type in this plugin, nothing will be done.
-	// 
-	// As long as any instances of the type exist, the type plugin will
-	// not be unloaded.
-	// 
-	// Since 2.56 if @module is %NULL this will call g_type_add_interface_static()
-	// instead. This can be used when making a static build of the module.
-	AddInterface(Type, Type, *InterfaceInfo)
-	// RegisterEnum wraps g_type_module_register_enum
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- name string: name for the type 
-	// 	- constStaticValues *EnumValue: an array of #GEnumValue structs for the
-	//                       possible enumeration values. The array is
-	//                       terminated by a struct with all members being
-	//                       0. 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret Type 
-	//
-	// Looks up or registers an enumeration that is implemented with a particular
-	// type plugin. If a type with name @type_name was previously registered,
-	// the #GType identifier for the type is returned, otherwise the type
-	// is newly registered, and the resulting #GType identifier returned.
-	// 
-	// As long as any instances of the type exist, the type plugin will
-	// not be unloaded.
-	// 
-	// Since 2.56 if @module is %NULL this will call g_type_register_static()
-	// instead. This can be used when making a static build of the module.
-	RegisterEnum(string, *EnumValue) Type
-	// RegisterFlags wraps g_type_module_register_flags
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- name string: name for the type 
-	// 	- constStaticValues *FlagsValue: an array of #GFlagsValue structs for the
-	//                       possible flags values. The array is
-	//                       terminated by a struct with all members being
-	//                       0. 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret Type 
-	//
-	// Looks up or registers a flags type that is implemented with a particular
-	// type plugin. If a type with name @type_name was previously registered,
-	// the #GType identifier for the type is returned, otherwise the type
-	// is newly registered, and the resulting #GType identifier returned.
-	// 
-	// As long as any instances of the type exist, the type plugin will
-	// not be unloaded.
-	// 
-	// Since 2.56 if @module is %NULL this will call g_type_register_static()
-	// instead. This can be used when making a static build of the module.
-	RegisterFlags(string, *FlagsValue) Type
-	// RegisterType wraps g_type_module_register_type
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- parentType Type: the type for the parent class 
-	// 	- typeName string: name for the type 
-	// 	- typeInfo *TypeInfo: type information structure 
-	// 	- flags TypeFlags: flags field providing details about the type 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret Type 
-	//
-	// Looks up or registers a type that is implemented with a particular
-	// type plugin. If a type with name @type_name was previously registered,
-	// the #GType identifier for the type is returned, otherwise the type
-	// is newly registered, and the resulting #GType identifier returned.
-	// 
-	// When reregistering a type (typically because a module is unloaded
-	// then reloaded, and reinitialized), @module and @parent_type must
-	// be the same as they were previously.
-	// 
-	// As long as any instances of the type exist, the type plugin will
-	// not be unloaded.
-	// 
-	// Since 2.56 if @module is %NULL this will call g_type_register_static()
-	// instead. This can be used when making a static build of the module.
-	RegisterType(Type, string, *TypeInfo, TypeFlags) Type
-	// SetName wraps g_type_module_set_name
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- name string: a human-readable name to use in error messages. 
-	//
-	// Sets the name for a #GTypeModule
-	SetName(string)
-	// Unuse wraps g_type_module_unuse
-	//
-	// Decreases the use count of a #GTypeModule by one. If the
-	// result is zero, the module will be unloaded. (However, the
-	// #GTypeModule will not be freed, and types associated with the
-	// #GTypeModule are not unregistered. Once a #GTypeModule is
-	// initialized, it must exist forever.)
-	Unuse()
-	// Use wraps g_type_module_use
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// Increases the use count of a #GTypeModule by one. If the
-	// use count was zero before, the plugin will be loaded.
-	// If loading the plugin fails, the use count is reset to
-	// its prior value.
-	Use() bool
-}
-
-func unsafeWrapTypeModule(base *ObjectInstance) *TypeModuleInstance {
-	return &TypeModuleInstance{
-		ObjectInstance: *base,
-	}
-}
-
-func marshalTypeModuleInstance(p unsafe.Pointer) (any, error) {
-	return unsafeWrapTypeModule(ValueFromNative(p).Object()), nil
-}
-
-// UnsafeTypeModuleFromGlibNone is used to convert raw GTypeModule pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
-func UnsafeTypeModuleFromGlibNone(c unsafe.Pointer) TypeModule {
-	return UnsafeObjectFromGlibNone(c).(TypeModule)
-}
-
-// UnsafeTypeModuleFromGlibFull is used to convert raw GTypeModule pointers to go while attaching a finalizer. This is used by the bindings internally.
-func UnsafeTypeModuleFromGlibFull(c unsafe.Pointer) TypeModule {
-	return UnsafeObjectFromGlibFull(c).(TypeModule)
-}
-
-func (t *TypeModuleInstance) upcastToGTypeModule() *TypeModuleInstance {
-	return t
-}
-
-// UnsafeTypeModuleToGlibNone is used to convert the instance to it's C value GTypeModule. This is used by the bindings internally.
-func UnsafeTypeModuleToGlibNone(c TypeModule) unsafe.Pointer {
-	return UnsafeObjectToGlibNone(c)
-}
-
-// UnsafeTypeModuleToGlibFull is used to convert the instance to it's C value GTypeModule, while removeing the finalizer. This is used by the bindings internally.
-func UnsafeTypeModuleToGlibFull(c TypeModule) unsafe.Pointer {
-	return UnsafeObjectToGlibFull(c)
-}
-
-// AddInterface wraps g_type_module_add_interface
-// 
-// The function takes the following parameters:
-// 
-// 	- instanceType Type: type to which to add the interface. 
-// 	- interfaceType Type: interface type to add 
-// 	- interfaceInfo *InterfaceInfo: type information structure 
-//
-// Registers an additional interface for a type, whose interface lives
-// in the given type plugin. If the interface was already registered
-// for the type in this plugin, nothing will be done.
-// 
-// As long as any instances of the type exist, the type plugin will
-// not be unloaded.
-// 
-// Since 2.56 if @module is %NULL this will call g_type_add_interface_static()
-// instead. This can be used when making a static build of the module.
-func (module *TypeModuleInstance) AddInterface(instanceType Type, interfaceType Type, interfaceInfo *InterfaceInfo) {
-	var carg0 *C.GTypeModule    // in, none, converted
-	var carg1 C.GType           // in, none, casted, alias
-	var carg2 C.GType           // in, none, casted, alias
-	var carg3 *C.GInterfaceInfo // in, none, converted
-
-	carg0 = (*C.GTypeModule)(UnsafeTypeModuleToGlibNone(module))
-	carg1 = C.GType(instanceType)
-	carg2 = C.GType(interfaceType)
-	carg3 = (*C.GInterfaceInfo)(UnsafeInterfaceInfoToGlibNone(interfaceInfo))
-
-	C.g_type_module_add_interface(carg0, carg1, carg2, carg3)
-	runtime.KeepAlive(module)
-	runtime.KeepAlive(instanceType)
-	runtime.KeepAlive(interfaceType)
-	runtime.KeepAlive(interfaceInfo)
-}
-
-// RegisterEnum wraps g_type_module_register_enum
-// 
-// The function takes the following parameters:
-// 
-// 	- name string: name for the type 
-// 	- constStaticValues *EnumValue: an array of #GEnumValue structs for the
-//                       possible enumeration values. The array is
-//                       terminated by a struct with all members being
-//                       0. 
-// 
-// The function returns the following values:
-// 
-// 	- goret Type 
-//
-// Looks up or registers an enumeration that is implemented with a particular
-// type plugin. If a type with name @type_name was previously registered,
-// the #GType identifier for the type is returned, otherwise the type
-// is newly registered, and the resulting #GType identifier returned.
-// 
-// As long as any instances of the type exist, the type plugin will
-// not be unloaded.
-// 
-// Since 2.56 if @module is %NULL this will call g_type_register_static()
-// instead. This can be used when making a static build of the module.
-func (module *TypeModuleInstance) RegisterEnum(name string, constStaticValues *EnumValue) Type {
-	var carg0 *C.GTypeModule // in, none, converted
-	var carg1 *C.gchar       // in, none, string
-	var carg2 *C.GEnumValue  // in, none, converted
-	var cret  C.GType        // return, none, casted, alias
-
-	carg0 = (*C.GTypeModule)(UnsafeTypeModuleToGlibNone(module))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
-	defer C.free(unsafe.Pointer(carg1))
-	carg2 = (*C.GEnumValue)(UnsafeEnumValueToGlibNone(constStaticValues))
-
-	cret = C.g_type_module_register_enum(carg0, carg1, carg2)
-	runtime.KeepAlive(module)
-	runtime.KeepAlive(name)
-	runtime.KeepAlive(constStaticValues)
-
-	var goret Type
-
-	goret = Type(cret)
-
-	return goret
-}
-
-// RegisterFlags wraps g_type_module_register_flags
-// 
-// The function takes the following parameters:
-// 
-// 	- name string: name for the type 
-// 	- constStaticValues *FlagsValue: an array of #GFlagsValue structs for the
-//                       possible flags values. The array is
-//                       terminated by a struct with all members being
-//                       0. 
-// 
-// The function returns the following values:
-// 
-// 	- goret Type 
-//
-// Looks up or registers a flags type that is implemented with a particular
-// type plugin. If a type with name @type_name was previously registered,
-// the #GType identifier for the type is returned, otherwise the type
-// is newly registered, and the resulting #GType identifier returned.
-// 
-// As long as any instances of the type exist, the type plugin will
-// not be unloaded.
-// 
-// Since 2.56 if @module is %NULL this will call g_type_register_static()
-// instead. This can be used when making a static build of the module.
-func (module *TypeModuleInstance) RegisterFlags(name string, constStaticValues *FlagsValue) Type {
-	var carg0 *C.GTypeModule // in, none, converted
-	var carg1 *C.gchar       // in, none, string
-	var carg2 *C.GFlagsValue // in, none, converted
-	var cret  C.GType        // return, none, casted, alias
-
-	carg0 = (*C.GTypeModule)(UnsafeTypeModuleToGlibNone(module))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
-	defer C.free(unsafe.Pointer(carg1))
-	carg2 = (*C.GFlagsValue)(UnsafeFlagsValueToGlibNone(constStaticValues))
-
-	cret = C.g_type_module_register_flags(carg0, carg1, carg2)
-	runtime.KeepAlive(module)
-	runtime.KeepAlive(name)
-	runtime.KeepAlive(constStaticValues)
-
-	var goret Type
-
-	goret = Type(cret)
-
-	return goret
-}
-
-// RegisterType wraps g_type_module_register_type
-// 
-// The function takes the following parameters:
-// 
-// 	- parentType Type: the type for the parent class 
-// 	- typeName string: name for the type 
-// 	- typeInfo *TypeInfo: type information structure 
-// 	- flags TypeFlags: flags field providing details about the type 
-// 
-// The function returns the following values:
-// 
-// 	- goret Type 
-//
-// Looks up or registers a type that is implemented with a particular
-// type plugin. If a type with name @type_name was previously registered,
-// the #GType identifier for the type is returned, otherwise the type
-// is newly registered, and the resulting #GType identifier returned.
-// 
-// When reregistering a type (typically because a module is unloaded
-// then reloaded, and reinitialized), @module and @parent_type must
-// be the same as they were previously.
-// 
-// As long as any instances of the type exist, the type plugin will
-// not be unloaded.
-// 
-// Since 2.56 if @module is %NULL this will call g_type_register_static()
-// instead. This can be used when making a static build of the module.
-func (module *TypeModuleInstance) RegisterType(parentType Type, typeName string, typeInfo *TypeInfo, flags TypeFlags) Type {
-	var carg0 *C.GTypeModule // in, none, converted
-	var carg1 C.GType        // in, none, casted, alias
-	var carg2 *C.gchar       // in, none, string
-	var carg3 *C.GTypeInfo   // in, none, converted
-	var carg4 C.GTypeFlags   // in, none, casted
-	var cret  C.GType        // return, none, casted, alias
-
-	carg0 = (*C.GTypeModule)(UnsafeTypeModuleToGlibNone(module))
-	carg1 = C.GType(parentType)
-	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(typeName)))
-	defer C.free(unsafe.Pointer(carg2))
-	carg3 = (*C.GTypeInfo)(UnsafeTypeInfoToGlibNone(typeInfo))
-	carg4 = C.GTypeFlags(flags)
-
-	cret = C.g_type_module_register_type(carg0, carg1, carg2, carg3, carg4)
-	runtime.KeepAlive(module)
-	runtime.KeepAlive(parentType)
-	runtime.KeepAlive(typeName)
-	runtime.KeepAlive(typeInfo)
-	runtime.KeepAlive(flags)
-
-	var goret Type
-
-	goret = Type(cret)
-
-	return goret
-}
-
-// SetName wraps g_type_module_set_name
-// 
-// The function takes the following parameters:
-// 
-// 	- name string: a human-readable name to use in error messages. 
-//
-// Sets the name for a #GTypeModule
-func (module *TypeModuleInstance) SetName(name string) {
-	var carg0 *C.GTypeModule // in, none, converted
-	var carg1 *C.gchar       // in, none, string
-
-	carg0 = (*C.GTypeModule)(UnsafeTypeModuleToGlibNone(module))
-	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	C.g_type_module_set_name(carg0, carg1)
-	runtime.KeepAlive(module)
-	runtime.KeepAlive(name)
-}
-
-// Unuse wraps g_type_module_unuse
-//
-// Decreases the use count of a #GTypeModule by one. If the
-// result is zero, the module will be unloaded. (However, the
-// #GTypeModule will not be freed, and types associated with the
-// #GTypeModule are not unregistered. Once a #GTypeModule is
-// initialized, it must exist forever.)
-func (module *TypeModuleInstance) Unuse() {
-	var carg0 *C.GTypeModule // in, none, converted
-
-	carg0 = (*C.GTypeModule)(UnsafeTypeModuleToGlibNone(module))
-
-	C.g_type_module_unuse(carg0)
-	runtime.KeepAlive(module)
-}
-
-// Use wraps g_type_module_use
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Increases the use count of a #GTypeModule by one. If the
-// use count was zero before, the plugin will be loaded.
-// If loading the plugin fails, the use count is reset to
-// its prior value.
-func (module *TypeModuleInstance) Use() bool {
-	var carg0 *C.GTypeModule // in, none, converted
-	var cret  C.gboolean     // return
-
-	carg0 = (*C.GTypeModule)(UnsafeTypeModuleToGlibNone(module))
-
-	cret = C.g_type_module_use(carg0)
-	runtime.KeepAlive(module)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// TypeModuleOverrides is the struct used to override the default implementation of virtual methods.
-// it is generic over the extending instance type.
-type TypeModuleOverrides[Instance TypeModule] struct {
-	// ObjectOverrides allows you to override virtual methods from the parent class Object
-	ObjectOverrides[Instance]
-
-	// Load allows you to override the implementation of the virtual method load.
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	Load func(Instance) bool
-	// Unload allows you to override the implementation of the virtual method unload.
-	Unload func(Instance)
-}
-
-// UnsafeApplyTypeModuleOverrides applies the overrides to init the gclass by setting the trampoline functions.
-// This is used by the bindings internally and only exported for visibility to other bindings code.
-func UnsafeApplyTypeModuleOverrides[Instance TypeModule](gclass unsafe.Pointer, overrides TypeModuleOverrides[Instance]) {
-	UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
-
-	pclass := (*C.GTypeModuleClass)(gclass)
-
-	if overrides.Load != nil {
-		pclass.load = (*[0]byte)(C._gotk4_gobject2_TypeModule_load)
-		classdata.StoreVirtualMethod(
-			unsafe.Pointer(pclass),
-			"_gotk4_gobject2_TypeModule_load",
-			func(carg0 *C.GTypeModule) (cret C.gboolean) {
-				var module Instance // go GTypeModule subclass
-				var goret  bool     // return
-
-				module = UnsafeTypeModuleFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-
-				goret = overrides.Load(module)
-
-				if goret {
-					cret = C.TRUE
-				}
-
-				return cret
-			},
-		)
-	}
-
-	if overrides.Unload != nil {
-		pclass.unload = (*[0]byte)(C._gotk4_gobject2_TypeModule_unload)
-		classdata.StoreVirtualMethod(
-			unsafe.Pointer(pclass),
-			"_gotk4_gobject2_TypeModule_unload",
-			func(carg0 *C.GTypeModule) {
-				var module Instance // go GTypeModule subclass
-
-				module = UnsafeTypeModuleFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-
-				overrides.Unload(module)
-			},
-		)
-	}
-}
-
-// RegisterTypeModuleSubClass is used to register a go subclass of GTypeModule. For this to work safely please implement the
-// virtual methods required by the implementation.
-func RegisterTypeModuleSubClass[InstanceT TypeModule](
-		name string,
-		classInit func(class *TypeModuleClass),
-		constructor func() InstanceT,
-		overrides TypeModuleOverrides[InstanceT],
-		signals map[string]SignalDefinition,
-		interfaceInits ...SubClassInterfaceInit[InstanceT],
-) Type {
-	return UnsafeRegisterSubClass(
-		name,
-		classInit,
-		constructor,
-		overrides,
-		signals,
-		TypeTypeModule,
-		UnsafeTypeModuleClassFromGlibBorrow,
-		UnsafeApplyTypeModuleOverrides,
-		func (obj *ObjectInstance) Object {
-			return unsafeWrapTypeModule(obj)
 		},
 		interfaceInits...,
 	)
@@ -3627,208 +4187,6 @@ func UnsafeObjectConstructParamToGlibFull(o *ObjectConstructParam) unsafe.Pointe
 	return _p
 }
 
-// ParamSpecClass wraps GParamSpecClass
-//
-// The class structure for the GParamSpec type.
-// Normally, GParamSpec classes are filled by
-// g_param_type_register_static().
-type ParamSpecClass struct {
-	*paramSpecClass
-}
-
-// paramSpecClass is the struct that's finalized
-type paramSpecClass struct {
-	native *C.GParamSpecClass
-}
-
-// UnsafeParamSpecClassFromGlibBorrow is used to convert raw C.GParamSpecClass pointers to go. This is used by the bindings internally.
-func UnsafeParamSpecClassFromGlibBorrow(p unsafe.Pointer) *ParamSpecClass {
-	return &ParamSpecClass{&paramSpecClass{(*C.GParamSpecClass)(p)}}
-}
-
-// UnsafeParamSpecClassFromGlibNone is used to convert raw C.GParamSpecClass pointers to go without transferring ownership. This is used by the bindings internally.
-func UnsafeParamSpecClassFromGlibNone(p unsafe.Pointer) *ParamSpecClass {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeParamSpecClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.paramSpecClass,
-		func (intern *paramSpecClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeParamSpecClassFromGlibFull is used to convert raw C.GParamSpecClass pointers to go while taking ownership. This is used by the bindings internally.
-func UnsafeParamSpecClassFromGlibFull(p unsafe.Pointer) *ParamSpecClass {
-	wrapped := UnsafeParamSpecClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.paramSpecClass,
-		func (intern *paramSpecClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeParamSpecClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
-// 
-// After this is called, no other method on [ParamSpecClass] is expected to work anymore.
-func UnsafeParamSpecClassFree(p *ParamSpecClass) {
-	C.free(unsafe.Pointer(p.native))
-}
-
-// UnsafeParamSpecClassToGlibNone returns the underlying C pointer. This is used by the bindings internally.
-func UnsafeParamSpecClassToGlibNone(p *ParamSpecClass) unsafe.Pointer {
-	return unsafe.Pointer(p.native)
-}
-
-// UnsafeParamSpecClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeParamSpecClassToGlibFull(p *ParamSpecClass) unsafe.Pointer {
-	runtime.SetFinalizer(p.paramSpecClass, nil)
-	_p := unsafe.Pointer(p.native)
-	p.native = nil // ParamSpecClass is invalid from here on
-	return _p
-}
-
-// ParamSpecPool wraps GParamSpecPool
-//
-// A #GParamSpecPool maintains a collection of #GParamSpecs which can be
-// quickly accessed by owner and name.
-// 
-// The implementation of the #GObject property system uses such a pool to
-// store the #GParamSpecs of the properties all object types.
-type ParamSpecPool struct {
-	*paramSpecPool
-}
-
-// paramSpecPool is the struct that's finalized
-type paramSpecPool struct {
-	native *C.GParamSpecPool
-}
-
-// UnsafeParamSpecPoolFromGlibBorrow is used to convert raw C.GParamSpecPool pointers to go. This is used by the bindings internally.
-func UnsafeParamSpecPoolFromGlibBorrow(p unsafe.Pointer) *ParamSpecPool {
-	return &ParamSpecPool{&paramSpecPool{(*C.GParamSpecPool)(p)}}
-}
-
-// UnsafeParamSpecPoolFromGlibNone is used to convert raw C.GParamSpecPool pointers to go without transferring ownership. This is used by the bindings internally.
-func UnsafeParamSpecPoolFromGlibNone(p unsafe.Pointer) *ParamSpecPool {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeParamSpecPoolFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.paramSpecPool,
-		func (intern *paramSpecPool) {
-			C.g_param_spec_pool_free(intern.native)
-		},
-	)
-	return wrapped
-}
-
-// UnsafeParamSpecPoolFromGlibFull is used to convert raw C.GParamSpecPool pointers to go while taking ownership. This is used by the bindings internally.
-func UnsafeParamSpecPoolFromGlibFull(p unsafe.Pointer) *ParamSpecPool {
-	wrapped := UnsafeParamSpecPoolFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.paramSpecPool,
-		func (intern *paramSpecPool) {
-			C.g_param_spec_pool_free(intern.native)
-		},
-	)
-	return wrapped
-}
-
-// UnsafeParamSpecPoolFree unrefs/frees the underlying resource. This is used by the bindings internally.
-// 
-// After this is called, no other method on [ParamSpecPool] is expected to work anymore.
-func UnsafeParamSpecPoolFree(p *ParamSpecPool) {
-	C.g_param_spec_pool_free(p.native)
-}
-
-// UnsafeParamSpecPoolToGlibNone returns the underlying C pointer. This is used by the bindings internally.
-func UnsafeParamSpecPoolToGlibNone(p *ParamSpecPool) unsafe.Pointer {
-	return unsafe.Pointer(p.native)
-}
-
-// UnsafeParamSpecPoolToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeParamSpecPoolToGlibFull(p *ParamSpecPool) unsafe.Pointer {
-	runtime.SetFinalizer(p.paramSpecPool, nil)
-	_p := unsafe.Pointer(p.native)
-	p.native = nil // ParamSpecPool is invalid from here on
-	return _p
-}
-
-// ParamSpecTypeInfo wraps GParamSpecTypeInfo
-//
-// This structure is used to provide the type system with the information
-// required to initialize and destruct (finalize) a parameter's class and
-// instances thereof.
-// 
-// The initialized structure is passed to the g_param_type_register_static()
-// The type system will perform a deep copy of this structure, so its memory
-// does not need to be persistent across invocation of
-// g_param_type_register_static().
-type ParamSpecTypeInfo struct {
-	*paramSpecTypeInfo
-}
-
-// paramSpecTypeInfo is the struct that's finalized
-type paramSpecTypeInfo struct {
-	native *C.GParamSpecTypeInfo
-}
-
-// UnsafeParamSpecTypeInfoFromGlibBorrow is used to convert raw C.GParamSpecTypeInfo pointers to go. This is used by the bindings internally.
-func UnsafeParamSpecTypeInfoFromGlibBorrow(p unsafe.Pointer) *ParamSpecTypeInfo {
-	return &ParamSpecTypeInfo{&paramSpecTypeInfo{(*C.GParamSpecTypeInfo)(p)}}
-}
-
-// UnsafeParamSpecTypeInfoFromGlibNone is used to convert raw C.GParamSpecTypeInfo pointers to go without transferring ownership. This is used by the bindings internally.
-func UnsafeParamSpecTypeInfoFromGlibNone(p unsafe.Pointer) *ParamSpecTypeInfo {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeParamSpecTypeInfoFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.paramSpecTypeInfo,
-		func (intern *paramSpecTypeInfo) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeParamSpecTypeInfoFromGlibFull is used to convert raw C.GParamSpecTypeInfo pointers to go while taking ownership. This is used by the bindings internally.
-func UnsafeParamSpecTypeInfoFromGlibFull(p unsafe.Pointer) *ParamSpecTypeInfo {
-	wrapped := UnsafeParamSpecTypeInfoFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.paramSpecTypeInfo,
-		func (intern *paramSpecTypeInfo) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeParamSpecTypeInfoFree unrefs/frees the underlying resource. This is used by the bindings internally.
-// 
-// After this is called, no other method on [ParamSpecTypeInfo] is expected to work anymore.
-func UnsafeParamSpecTypeInfoFree(p *ParamSpecTypeInfo) {
-	C.free(unsafe.Pointer(p.native))
-}
-
-// UnsafeParamSpecTypeInfoToGlibNone returns the underlying C pointer. This is used by the bindings internally.
-func UnsafeParamSpecTypeInfoToGlibNone(p *ParamSpecTypeInfo) unsafe.Pointer {
-	return unsafe.Pointer(p.native)
-}
-
-// UnsafeParamSpecTypeInfoToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeParamSpecTypeInfoToGlibFull(p *ParamSpecTypeInfo) unsafe.Pointer {
-	runtime.SetFinalizer(p.paramSpecTypeInfo, nil)
-	_p := unsafe.Pointer(p.native)
-	p.native = nil // ParamSpecTypeInfo is invalid from here on
-	return _p
-}
-
 // SignalInvocationHint wraps GSignalInvocationHint
 //
 // The #GSignalInvocationHint structure is used to pass on additional information
@@ -4088,111 +4446,6 @@ func UnsafeTypeInstanceToGlibFull(t *TypeInstance) unsafe.Pointer {
 	runtime.SetFinalizer(t.typeInstance, nil)
 	_p := unsafe.Pointer(t.native)
 	t.native = nil // TypeInstance is invalid from here on
-	return _p
-}
-
-// TypeModuleClass wraps GTypeModuleClass
-//
-// In order to implement dynamic loading of types based on #GTypeModule,
-// the @load and @unload functions in #GTypeModuleClass must be implemented.
-// 
-// TypeModuleClass is the type struct for [TypeModule]
-type TypeModuleClass struct {
-	*typeModuleClass
-}
-
-// typeModuleClass is the struct that's finalized
-type typeModuleClass struct {
-	native *C.GTypeModuleClass
-}
-
-// UnsafeTypeModuleClassFromGlibBorrow is used to convert raw C.GTypeModuleClass pointers to go. This is used by the bindings internally.
-func UnsafeTypeModuleClassFromGlibBorrow(p unsafe.Pointer) *TypeModuleClass {
-	return &TypeModuleClass{&typeModuleClass{(*C.GTypeModuleClass)(p)}}
-}
-
-// UnsafeTypeModuleClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
-// 
-// After this is called, no other method on [TypeModuleClass] is expected to work anymore.
-func UnsafeTypeModuleClassFree(t *TypeModuleClass) {
-	C.free(unsafe.Pointer(t.native))
-}
-
-// UnsafeTypeModuleClassToGlibNone returns the underlying C pointer. This is used by the bindings internally.
-func UnsafeTypeModuleClassToGlibNone(t *TypeModuleClass) unsafe.Pointer {
-	return unsafe.Pointer(t.native)
-}
-
-// ParentClass returns the type struct of the parent class of this type struct.
-// This essentially casts the underlying c pointer.
-func (t *TypeModuleClass) ParentClass() *ObjectClass {
-	parent := UnsafeObjectClassFromGlibBorrow(UnsafeTypeModuleClassToGlibNone(t))
-	// attach a cleanup to keep the instance alive as long as the parent is referenced
-	runtime.AddCleanup(parent, func(_ *TypeModuleClass) {}, t)
-	return parent
-}
-
-// TypePluginClass wraps GTypePluginClass
-//
-// The #GTypePlugin interface is used by the type system in order to handle
-// the lifecycle of dynamically loaded types.
-type TypePluginClass struct {
-	*typePluginClass
-}
-
-// typePluginClass is the struct that's finalized
-type typePluginClass struct {
-	native *C.GTypePluginClass
-}
-
-// UnsafeTypePluginClassFromGlibBorrow is used to convert raw C.GTypePluginClass pointers to go. This is used by the bindings internally.
-func UnsafeTypePluginClassFromGlibBorrow(p unsafe.Pointer) *TypePluginClass {
-	return &TypePluginClass{&typePluginClass{(*C.GTypePluginClass)(p)}}
-}
-
-// UnsafeTypePluginClassFromGlibNone is used to convert raw C.GTypePluginClass pointers to go without transferring ownership. This is used by the bindings internally.
-func UnsafeTypePluginClassFromGlibNone(p unsafe.Pointer) *TypePluginClass {
-	// FIXME: this has no ref function, what should we do here?
-	wrapped := UnsafeTypePluginClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.typePluginClass,
-		func (intern *typePluginClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeTypePluginClassFromGlibFull is used to convert raw C.GTypePluginClass pointers to go while taking ownership. This is used by the bindings internally.
-func UnsafeTypePluginClassFromGlibFull(p unsafe.Pointer) *TypePluginClass {
-	wrapped := UnsafeTypePluginClassFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.typePluginClass,
-		func (intern *typePluginClass) {
-			C.free(unsafe.Pointer(intern.native))
-		},
-	)
-	return wrapped
-}
-
-// UnsafeTypePluginClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
-// 
-// After this is called, no other method on [TypePluginClass] is expected to work anymore.
-func UnsafeTypePluginClassFree(t *TypePluginClass) {
-	C.free(unsafe.Pointer(t.native))
-}
-
-// UnsafeTypePluginClassToGlibNone returns the underlying C pointer. This is used by the bindings internally.
-func UnsafeTypePluginClassToGlibNone(t *TypePluginClass) unsafe.Pointer {
-	return unsafe.Pointer(t.native)
-}
-
-// UnsafeTypePluginClassToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeTypePluginClassToGlibFull(t *TypePluginClass) unsafe.Pointer {
-	runtime.SetFinalizer(t.typePluginClass, nil)
-	_p := unsafe.Pointer(t.native)
-	t.native = nil // TypePluginClass is invalid from here on
 	return _p
 }
 

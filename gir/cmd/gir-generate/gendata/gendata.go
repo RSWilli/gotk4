@@ -283,16 +283,38 @@ var Main = genmain.Data{
 								ToGlibFullFunction:   "UnsafeValueToGlibUseAnyInstead",
 							},
 						},
+						&typesystem.Record{
+							BaseType: typesystem.BaseType{
+								GirName: "ParamSpec",
+								GoTyp:   "ParamSpec",
+								CTyp:    "GParamSpec",
+								CGoTyp:  "C.GParamSpec",
+							},
+							BaseConversions: typesystem.BaseConversions{
+								FromGlibBorrowFunction: "UnsafeParamSpecFromGlibBorrow",
+								FromGlibFullFunction:   "UnsafeParamSpecFromGlibFull",
+								FromGlibNoneFunction:   "UnsafeParamSpecFromGlibNone",
+								ToGlibNoneFunction:     "UnsafeParamSpecToGlibNone",
+								ToGlibFullFunction:     "UnsafeParamSpecToGlibFull",
+							},
+						},
 					}
 				}(),
 				IgnoredDefinitions: []typesystem.IgnoreFunc{
 					// manually implemented, but hidden from the user
-					typesystem.IgnoreMatching("ParamSpec"),
-					typesystem.IgnoreMatching("ParamFlags"),
+					typesystem.IgnoreMatching("ParamSpecClass"),
 					typesystem.IgnoreMatching("Closure"),
 					typesystem.IgnoreMatching("SignalGroup"),
 					typesystem.IgnoreMatching("SignalQuery"),
 					typesystem.IgnoreMatching("TypeQuery"),
+
+					// maybe something for later, not needed now:
+					typesystem.IgnoreMatching("TypeModule"),
+					typesystem.IgnoreMatching("TypeModuleClass"),
+					typesystem.IgnoreMatching("ParamSpecPool"),
+					typesystem.IgnoreMatching("TypePlugin"),
+					typesystem.IgnoreMatching("TypePluginClass"),
+					typesystem.IgnoreMatching("ParamSpecTypeInfo"), // needed for registering param types
 
 					typesystem.IgnoreMatching("Binding"), // is this needed?
 

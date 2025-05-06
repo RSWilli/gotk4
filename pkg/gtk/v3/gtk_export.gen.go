@@ -1958,6 +1958,18 @@ func _gotk4_gtk3_Scrollable_get_border(carg0 *C.GtkScrollable, carg1 *C.GtkBorde
 	return fn(carg0, carg1)
 }
 
+//export _gotk4_gtk3_StyleProvider_get_style_property
+func _gotk4_gtk3_StyleProvider_get_style_property(carg0 *C.GtkStyleProvider, carg1 *C.GtkWidgetPath, carg2 C.GtkStateFlags, carg3 *C.GParamSpec, carg4 *C.GValue) (cret C.gboolean) {
+	var fn func(carg0 *C.GtkStyleProvider, carg1 *C.GtkWidgetPath, carg2 C.GtkStateFlags, carg3 *C.GParamSpec, carg4 *C.GValue) (cret C.gboolean)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gtk3_StyleProvider_get_style_property").(func(carg0 *C.GtkStyleProvider, carg1 *C.GtkWidgetPath, carg2 C.GtkStateFlags, carg3 *C.GParamSpec, carg4 *C.GValue) (cret C.gboolean))
+		if fn == nil {
+			panic("_gotk4_gtk3_StyleProvider_get_style_property: no function pointer found")
+		}
+	}
+	return fn(carg0, carg1, carg2, carg3, carg4)
+}
+
 //export _gotk4_gtk3_ToolShell_get_ellipsize_mode
 func _gotk4_gtk3_ToolShell_get_ellipsize_mode(carg0 *C.GtkToolShell) (cret C.PangoEllipsizeMode) {
 	var fn func(carg0 *C.GtkToolShell) (cret C.PangoEllipsizeMode)
@@ -2618,6 +2630,18 @@ func _gotk4_gtk3_CellArea_foreach_alloc(carg0 *C.GtkCellArea, carg1 *C.GtkCellAr
 	fn(carg0, carg1, carg2, carg3, carg4, carg5, carg6)
 }
 
+//export _gotk4_gtk3_CellArea_get_cell_property
+func _gotk4_gtk3_CellArea_get_cell_property(carg0 *C.GtkCellArea, carg1 *C.GtkCellRenderer, carg2 C.guint, carg3 *C.GValue, carg4 *C.GParamSpec) {
+	var fn func(carg0 *C.GtkCellArea, carg1 *C.GtkCellRenderer, carg2 C.guint, carg3 *C.GValue, carg4 *C.GParamSpec)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gtk3_CellArea_get_cell_property").(func(carg0 *C.GtkCellArea, carg1 *C.GtkCellRenderer, carg2 C.guint, carg3 *C.GValue, carg4 *C.GParamSpec))
+		if fn == nil {
+			panic("_gotk4_gtk3_CellArea_get_cell_property: no function pointer found")
+		}
+	}
+	fn(carg0, carg1, carg2, carg3, carg4)
+}
+
 //export _gotk4_gtk3_CellArea_get_preferred_height
 func _gotk4_gtk3_CellArea_get_preferred_height(carg0 *C.GtkCellArea, carg1 *C.GtkCellAreaContext, carg2 *C.GtkWidget, carg3 *C.gint, carg4 *C.gint) {
 	var fn func(carg0 *C.GtkCellArea, carg1 *C.GtkCellAreaContext, carg2 *C.GtkWidget, carg3 *C.gint, carg4 *C.gint)
@@ -2700,6 +2724,18 @@ func _gotk4_gtk3_CellArea_remove(carg0 *C.GtkCellArea, carg1 *C.GtkCellRenderer)
 		}
 	}
 	fn(carg0, carg1)
+}
+
+//export _gotk4_gtk3_CellArea_set_cell_property
+func _gotk4_gtk3_CellArea_set_cell_property(carg0 *C.GtkCellArea, carg1 *C.GtkCellRenderer, carg2 C.guint, carg3 *C.GValue, carg4 *C.GParamSpec) {
+	var fn func(carg0 *C.GtkCellArea, carg1 *C.GtkCellRenderer, carg2 C.guint, carg3 *C.GValue, carg4 *C.GParamSpec)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gtk3_CellArea_set_cell_property").(func(carg0 *C.GtkCellArea, carg1 *C.GtkCellRenderer, carg2 C.guint, carg3 *C.GValue, carg4 *C.GParamSpec))
+		if fn == nil {
+			panic("_gotk4_gtk3_CellArea_set_cell_property: no function pointer found")
+		}
+	}
+	fn(carg0, carg1, carg2, carg3, carg4)
 }
 
 //export _gotk4_gtk3_CellAreaContext_allocate
@@ -3950,6 +3986,18 @@ func _gotk4_gtk3_Widget_can_activate_accel(carg0 *C.GtkWidget, carg1 C.guint) (c
 	return fn(carg0, carg1)
 }
 
+//export _gotk4_gtk3_Widget_child_notify
+func _gotk4_gtk3_Widget_child_notify(carg0 *C.GtkWidget, carg1 *C.GParamSpec) {
+	var fn func(carg0 *C.GtkWidget, carg1 *C.GParamSpec)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gtk3_Widget_child_notify").(func(carg0 *C.GtkWidget, carg1 *C.GParamSpec))
+		if fn == nil {
+			panic("_gotk4_gtk3_Widget_child_notify: no function pointer found")
+		}
+	}
+	fn(carg0, carg1)
+}
+
 //export _gotk4_gtk3_Widget_composited_changed
 func _gotk4_gtk3_Widget_composited_changed(carg0 *C.GtkWidget) {
 	var fn func(carg0 *C.GtkWidget)
@@ -4934,6 +4982,18 @@ func _gotk4_gtk3_Container_forall(carg0 *C.GtkContainer, carg1 C.gboolean, carg2
 	fn(carg0, carg1, carg2, carg3)
 }
 
+//export _gotk4_gtk3_Container_get_child_property
+func _gotk4_gtk3_Container_get_child_property(carg0 *C.GtkContainer, carg1 *C.GtkWidget, carg2 C.guint, carg3 *C.GValue, carg4 *C.GParamSpec) {
+	var fn func(carg0 *C.GtkContainer, carg1 *C.GtkWidget, carg2 C.guint, carg3 *C.GValue, carg4 *C.GParamSpec)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gtk3_Container_get_child_property").(func(carg0 *C.GtkContainer, carg1 *C.GtkWidget, carg2 C.guint, carg3 *C.GValue, carg4 *C.GParamSpec))
+		if fn == nil {
+			panic("_gotk4_gtk3_Container_get_child_property: no function pointer found")
+		}
+	}
+	fn(carg0, carg1, carg2, carg3, carg4)
+}
+
 //export _gotk4_gtk3_Container_get_path_for_child
 func _gotk4_gtk3_Container_get_path_for_child(carg0 *C.GtkContainer, carg1 *C.GtkWidget) (cret *C.GtkWidgetPath) {
 	var fn func(carg0 *C.GtkContainer, carg1 *C.GtkWidget) (cret *C.GtkWidgetPath)
@@ -4956,6 +5016,18 @@ func _gotk4_gtk3_Container_remove(carg0 *C.GtkContainer, carg1 *C.GtkWidget) {
 		}
 	}
 	fn(carg0, carg1)
+}
+
+//export _gotk4_gtk3_Container_set_child_property
+func _gotk4_gtk3_Container_set_child_property(carg0 *C.GtkContainer, carg1 *C.GtkWidget, carg2 C.guint, carg3 *C.GValue, carg4 *C.GParamSpec) {
+	var fn func(carg0 *C.GtkContainer, carg1 *C.GtkWidget, carg2 C.guint, carg3 *C.GValue, carg4 *C.GParamSpec)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gtk3_Container_set_child_property").(func(carg0 *C.GtkContainer, carg1 *C.GtkWidget, carg2 C.guint, carg3 *C.GValue, carg4 *C.GParamSpec))
+		if fn == nil {
+			panic("_gotk4_gtk3_Container_set_child_property: no function pointer found")
+		}
+	}
+	fn(carg0, carg1, carg2, carg3, carg4)
 }
 
 //export _gotk4_gtk3_Container_set_focus_child

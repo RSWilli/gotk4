@@ -104,6 +104,7 @@ func DeclareClass(e *env, v gir.Class) *Class {
 	if v.Parent == "" {
 		// we can't handle non GObject child classes for now
 		// FIXME: this should instead register a fundamental type in the namespace
+		e.logger.Warn("skipping because it's a fundamental type")
 		return nil
 	}
 

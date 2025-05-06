@@ -9116,7 +9116,6 @@ func UnsafeApplyFontsetOverrides[Instance Fontset](gclass unsafe.Pointer, overri
 				fontset = UnsafeFontsetFromGlibNone(unsafe.Pointer(carg0)).(Instance)
 				_ = fn
 				_ = carg1
-				_ = data
 				_ = carg2
 				panic("unimplemented conversion of FontsetForEachFunc (PangoFontsetForeachFunc)")
 
