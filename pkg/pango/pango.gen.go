@@ -3159,11 +3159,28 @@ func (f ShowFlags) String() string {
 }
 
 // AttrFilterFunc wraps PangoAttrFilterFunc
+// 
+// The function takes the following parameters:
+// 
+// 	- attribute *Attribute: a Pango attribute 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
 //
 // Type of a function filtering a list of attributes.
 type AttrFilterFunc func(attribute *Attribute) (goret bool)
 
 // FontsetForEachFunc wraps PangoFontsetForeachFunc
+// 
+// The function takes the following parameters:
+// 
+// 	- fontset Fontset: a `PangoFontset` 
+// 	- font Font: a font from @fontset 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
 //
 // Callback used when enumerating fonts in a fontset.
 // 
@@ -6782,6 +6799,100 @@ type Font interface {
 	// 
 	// To recreate a font from its serialized form, use [func@Pango.Font.deserialize].
 	Serialize() *glib.Bytes
+
+	// chain up virtual methods:
+
+	// ParentDescribe calls the default implementations of the describe virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret *FontDescription 
+	//
+	// Returns a description of the font, with font size set in points.
+	// 
+	// Use [method@Pango.Font.describe_with_absolute_size] if you want
+	// the font size in device units.
+	ParentDescribe() *FontDescription
+	// ParentDescribeAbsolute calls the default implementations of the describe_absolute virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret *FontDescription 
+	ParentDescribeAbsolute() *FontDescription
+	// ParentGetCoverage calls the default implementations of the get_coverage virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- language *Language: the language tag 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret Coverage 
+	//
+	// Computes the coverage map for a given font and language tag.
+	ParentGetCoverage(language *Language) Coverage
+	// ParentGetFontMap calls the default implementations of the get_font_map virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret FontMap (nullable) 
+	//
+	// Gets the font map for which the font was created.
+	// 
+	// Note that the font maintains a *weak* reference to
+	// the font map, so if all references to font map are
+	// dropped, the font map will be finalized even if there
+	// are fonts created with the font map that are still alive.
+	// In that case this function will return %NULL.
+	// 
+	// It is the responsibility of the user to ensure that the
+	// font map is kept alive. In most uses this is not an issue
+	// as a `PangoContext` holds a reference to the font map.
+	ParentGetFontMap() FontMap
+	// ParentGetGlyphExtents calls the default implementations of the get_glyph_extents virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- glyph Glyph: the glyph index 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- inkRect Rectangle: rectangle used to store the extents of the glyph as drawn 
+	// 	- logicalRect Rectangle: rectangle used to store the logical extents of the glyph 
+	//
+	// Gets the logical and ink extents of a glyph within a font.
+	// 
+	// The coordinate system for each rectangle has its origin at the
+	// base line and horizontal origin of the character with increasing
+	// coordinates extending to the right and down. The macros PANGO_ASCENT(),
+	// PANGO_DESCENT(), PANGO_LBEARING(), and PANGO_RBEARING() can be used to convert
+	// from the extents rectangle to more traditional font metrics. The units
+	// of the rectangles are in 1/PANGO_SCALE of a device unit.
+	// 
+	// If @font is %NULL, this function gracefully sets some sane values in the
+	// output variables and returns.
+	ParentGetGlyphExtents(glyph Glyph) (Rectangle, Rectangle)
+	// ParentGetMetrics calls the default implementations of the get_metrics virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- language *Language (nullable): language tag used to determine which script
+	//   to get the metrics for, or %NULL to indicate to get the metrics for
+	//   the entire font. 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret *FontMetrics 
+	//
+	// Gets overall metric information for a font.
+	// 
+	// Since the metrics may be substantially different for different scripts,
+	// a language tag can be provided to indicate that the metrics should be
+	// retrieved that correspond to the script(s) used by that language.
+	// 
+	// If @font is %NULL, this function gracefully sets some sane values in the
+	// output variables and returns.
+	ParentGetMetrics(language *Language) *FontMetrics
 }
 
 func unsafeWrapFont(base *gobject.ObjectInstance) *FontInstance {
@@ -7191,6 +7302,11 @@ type FontOverrides[Instance Font] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret *FontDescription 
+	//
+	// Returns a description of the font, with font size set in points.
+	// 
+	// Use [method@Pango.Font.describe_with_absolute_size] if you want
+	// the font size in device units.
 	Describe func(Instance) *FontDescription
 	// DescribeAbsolute allows you to override the implementation of the virtual method describe_absolute.
 	// The function returns the following values:
@@ -7205,11 +7321,25 @@ type FontOverrides[Instance Font] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret Coverage 
+	//
+	// Computes the coverage map for a given font and language tag.
 	GetCoverage func(Instance, *Language) Coverage
 	// GetFontMap allows you to override the implementation of the virtual method get_font_map.
 	// The function returns the following values:
 	// 
 	// 	- goret FontMap (nullable) 
+	//
+	// Gets the font map for which the font was created.
+	// 
+	// Note that the font maintains a *weak* reference to
+	// the font map, so if all references to font map are
+	// dropped, the font map will be finalized even if there
+	// are fonts created with the font map that are still alive.
+	// In that case this function will return %NULL.
+	// 
+	// It is the responsibility of the user to ensure that the
+	// font map is kept alive. In most uses this is not an issue
+	// as a `PangoContext` holds a reference to the font map.
 	GetFontMap func(Instance) FontMap
 	// GetGlyphExtents allows you to override the implementation of the virtual method get_glyph_extents.
 	// The function takes the following parameters:
@@ -7220,6 +7350,18 @@ type FontOverrides[Instance Font] struct {
 	// 
 	// 	- inkRect Rectangle: rectangle used to store the extents of the glyph as drawn 
 	// 	- logicalRect Rectangle: rectangle used to store the logical extents of the glyph 
+	//
+	// Gets the logical and ink extents of a glyph within a font.
+	// 
+	// The coordinate system for each rectangle has its origin at the
+	// base line and horizontal origin of the character with increasing
+	// coordinates extending to the right and down. The macros PANGO_ASCENT(),
+	// PANGO_DESCENT(), PANGO_LBEARING(), and PANGO_RBEARING() can be used to convert
+	// from the extents rectangle to more traditional font metrics. The units
+	// of the rectangles are in 1/PANGO_SCALE of a device unit.
+	// 
+	// If @font is %NULL, this function gracefully sets some sane values in the
+	// output variables and returns.
 	GetGlyphExtents func(Instance, Glyph) (Rectangle, Rectangle)
 	// GetMetrics allows you to override the implementation of the virtual method get_metrics.
 	// The function takes the following parameters:
@@ -7231,6 +7373,15 @@ type FontOverrides[Instance Font] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret *FontMetrics 
+	//
+	// Gets overall metric information for a font.
+	// 
+	// Since the metrics may be substantially different for different scripts,
+	// a language tag can be provided to indicate that the metrics should be
+	// retrieved that correspond to the script(s) used by that language.
+	// 
+	// If @font is %NULL, this function gracefully sets some sane values in the
+	// output variables and returns.
 	GetMetrics func(Instance, *Language) *FontMetrics
 }
 
@@ -7376,6 +7527,210 @@ func UnsafeApplyFontOverrides[Instance Font](gclass unsafe.Pointer, overrides Fo
 	}
 }
 
+// ParentDescribe calls the default implementations of the describe virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret *FontDescription 
+//
+// Returns a description of the font, with font size set in points.
+// 
+// Use [method@Pango.Font.describe_with_absolute_size] if you want
+// the font size in device units.
+func (font *FontInstance) ParentDescribe() *FontDescription {
+	var carg0 *C.PangoFont
+	var cret  *C.PangoFontDescription // return, full, converted
+
+	parentclass := (*C.PangoFontClass)(classdata.PeekParentClass(UnsafeFontToGlibNone(font)))
+
+	cret = C._gotk4_pango1_Font_virtual_describe(unsafe.Pointer(parentclass.describe), carg0)
+	runtime.KeepAlive(font)
+
+	var goret *FontDescription
+
+	goret = UnsafeFontDescriptionFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// ParentDescribeAbsolute calls the default implementations of the describe_absolute virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret *FontDescription 
+func (font *FontInstance) ParentDescribeAbsolute() *FontDescription {
+	var carg0 *C.PangoFont
+	var cret  *C.PangoFontDescription // return, full, converted
+
+	parentclass := (*C.PangoFontClass)(classdata.PeekParentClass(UnsafeFontToGlibNone(font)))
+
+	cret = C._gotk4_pango1_Font_virtual_describe_absolute(unsafe.Pointer(parentclass.describe_absolute), carg0)
+	runtime.KeepAlive(font)
+
+	var goret *FontDescription
+
+	goret = UnsafeFontDescriptionFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// ParentGetCoverage calls the default implementations of the get_coverage virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- language *Language: the language tag 
+// 
+// The function returns the following values:
+// 
+// 	- goret Coverage 
+//
+// Computes the coverage map for a given font and language tag.
+func (font *FontInstance) ParentGetCoverage(language *Language) Coverage {
+	var carg0 *C.PangoFont
+	var carg1 *C.PangoLanguage // in, none, converted
+	var cret  *C.PangoCoverage // return, full, converted
+
+	parentclass := (*C.PangoFontClass)(classdata.PeekParentClass(UnsafeFontToGlibNone(font)))
+
+	carg1 = (*C.PangoLanguage)(UnsafeLanguageToGlibNone(language))
+
+	cret = C._gotk4_pango1_Font_virtual_get_coverage(unsafe.Pointer(parentclass.get_coverage), carg0, carg1)
+	runtime.KeepAlive(font)
+	runtime.KeepAlive(language)
+
+	var goret Coverage
+
+	goret = UnsafeCoverageFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// ParentGetFontMap calls the default implementations of the get_font_map virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret FontMap (nullable) 
+//
+// Gets the font map for which the font was created.
+// 
+// Note that the font maintains a *weak* reference to
+// the font map, so if all references to font map are
+// dropped, the font map will be finalized even if there
+// are fonts created with the font map that are still alive.
+// In that case this function will return %NULL.
+// 
+// It is the responsibility of the user to ensure that the
+// font map is kept alive. In most uses this is not an issue
+// as a `PangoContext` holds a reference to the font map.
+func (font *FontInstance) ParentGetFontMap() FontMap {
+	var carg0 *C.PangoFont
+	var cret  *C.PangoFontMap // return, none, converted, nullable
+
+	parentclass := (*C.PangoFontClass)(classdata.PeekParentClass(UnsafeFontToGlibNone(font)))
+
+	cret = C._gotk4_pango1_Font_virtual_get_font_map(unsafe.Pointer(parentclass.get_font_map), carg0)
+	runtime.KeepAlive(font)
+
+	var goret FontMap
+
+	if cret != nil {
+		goret = UnsafeFontMapFromGlibNone(unsafe.Pointer(cret))
+	}
+
+	return goret
+}
+
+// ParentGetGlyphExtents calls the default implementations of the get_glyph_extents virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- glyph Glyph: the glyph index 
+// 
+// The function returns the following values:
+// 
+// 	- inkRect Rectangle: rectangle used to store the extents of the glyph as drawn 
+// 	- logicalRect Rectangle: rectangle used to store the logical extents of the glyph 
+//
+// Gets the logical and ink extents of a glyph within a font.
+// 
+// The coordinate system for each rectangle has its origin at the
+// base line and horizontal origin of the character with increasing
+// coordinates extending to the right and down. The macros PANGO_ASCENT(),
+// PANGO_DESCENT(), PANGO_LBEARING(), and PANGO_RBEARING() can be used to convert
+// from the extents rectangle to more traditional font metrics. The units
+// of the rectangles are in 1/PANGO_SCALE of a device unit.
+// 
+// If @font is %NULL, this function gracefully sets some sane values in the
+// output variables and returns.
+func (font *FontInstance) ParentGetGlyphExtents(glyph Glyph) (Rectangle, Rectangle) {
+	var carg0 *C.PangoFont
+	var carg1 C.PangoGlyph     // in, none, casted, alias
+	var carg2 C.PangoRectangle // out, transfer: none, C Pointers: 0, Name: Rectangle, optional, caller-allocates
+	var carg3 C.PangoRectangle // out, transfer: none, C Pointers: 0, Name: Rectangle, optional, caller-allocates
+
+	parentclass := (*C.PangoFontClass)(classdata.PeekParentClass(UnsafeFontToGlibNone(font)))
+
+	carg1 = C.PangoGlyph(glyph)
+
+	C._gotk4_pango1_Font_virtual_get_glyph_extents(unsafe.Pointer(parentclass.get_glyph_extents), carg0, carg1, &carg2, &carg3)
+	runtime.KeepAlive(font)
+	runtime.KeepAlive(glyph)
+
+	var inkRect     Rectangle
+	var logicalRect Rectangle
+
+	_ = inkRect
+	_ = carg2
+	panic("unimplemented conversion of Rectangle (PangoRectangle)")
+	_ = logicalRect
+	_ = carg3
+	panic("unimplemented conversion of Rectangle (PangoRectangle)")
+
+	return inkRect, logicalRect
+}
+
+// ParentGetMetrics calls the default implementations of the get_metrics virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- language *Language (nullable): language tag used to determine which script
+//   to get the metrics for, or %NULL to indicate to get the metrics for
+//   the entire font. 
+// 
+// The function returns the following values:
+// 
+// 	- goret *FontMetrics 
+//
+// Gets overall metric information for a font.
+// 
+// Since the metrics may be substantially different for different scripts,
+// a language tag can be provided to indicate that the metrics should be
+// retrieved that correspond to the script(s) used by that language.
+// 
+// If @font is %NULL, this function gracefully sets some sane values in the
+// output variables and returns.
+func (font *FontInstance) ParentGetMetrics(language *Language) *FontMetrics {
+	var carg0 *C.PangoFont
+	var carg1 *C.PangoLanguage    // in, none, converted, nullable
+	var cret  *C.PangoFontMetrics // return, full, converted
+
+	parentclass := (*C.PangoFontClass)(classdata.PeekParentClass(UnsafeFontToGlibNone(font)))
+
+	if language != nil {
+		carg1 = (*C.PangoLanguage)(UnsafeLanguageToGlibNone(language))
+	}
+
+	cret = C._gotk4_pango1_Font_virtual_get_metrics(unsafe.Pointer(parentclass.get_metrics), carg0, carg1)
+	runtime.KeepAlive(font)
+	runtime.KeepAlive(language)
+
+	var goret *FontMetrics
+
+	goret = UnsafeFontMetricsFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
 // RegisterFontSubClass is used to register a go subclass of PangoFont. For this to work safely please implement the
 // virtual methods required by the implementation.
 func RegisterFontSubClass[InstanceT Font](
@@ -7462,6 +7817,53 @@ type FontFace interface {
 	// creates this face from another face, by shearing, emboldening,
 	// lightening or modifying it in some other way.
 	IsSynthesized() bool
+
+	// chain up virtual methods:
+
+	// ParentDescribe calls the default implementations of the describe virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret *FontDescription 
+	//
+	// Returns a font description that matches the face.
+	// 
+	// The resulting font description will have the family, style,
+	// variant, weight and stretch of the face, but its size field
+	// will be unset.
+	ParentDescribe() *FontDescription
+	// ParentGetFaceName calls the default implementations of the get_face_name virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret string 
+	//
+	// Gets a name representing the style of this face.
+	// 
+	// Note that a font family may contain multiple faces
+	// with the same name (e.g. a variable and a non-variable
+	// face for the same style).
+	ParentGetFaceName() string
+	// ParentGetFamily calls the default implementations of the get_family virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret FontFamily 
+	//
+	// Gets the `PangoFontFamily` that @face belongs to.
+	ParentGetFamily() FontFamily
+	// ParentIsSynthesized calls the default implementations of the is_synthesized virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	//
+	// Returns whether a `PangoFontFace` is synthesized.
+	// 
+	// This will be the case if the underlying font rendering engine
+	// creates this face from another face, by shearing, emboldening,
+	// lightening or modifying it in some other way.
+	ParentIsSynthesized() bool
 }
 
 func unsafeWrapFontFace(base *gobject.ObjectInstance) *FontFaceInstance {
@@ -7619,21 +8021,41 @@ type FontFaceOverrides[Instance FontFace] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret *FontDescription 
+	//
+	// Returns a font description that matches the face.
+	// 
+	// The resulting font description will have the family, style,
+	// variant, weight and stretch of the face, but its size field
+	// will be unset.
 	Describe func(Instance) *FontDescription
 	// GetFaceName allows you to override the implementation of the virtual method get_face_name.
 	// The function returns the following values:
 	// 
 	// 	- goret string 
+	//
+	// Gets a name representing the style of this face.
+	// 
+	// Note that a font family may contain multiple faces
+	// with the same name (e.g. a variable and a non-variable
+	// face for the same style).
 	GetFaceName func(Instance) string
 	// GetFamily allows you to override the implementation of the virtual method get_family.
 	// The function returns the following values:
 	// 
 	// 	- goret FontFamily 
+	//
+	// Gets the `PangoFontFamily` that @face belongs to.
 	GetFamily func(Instance) FontFamily
 	// IsSynthesized allows you to override the implementation of the virtual method is_synthesized.
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
+	//
+	// Returns whether a `PangoFontFace` is synthesized.
+	// 
+	// This will be the case if the underlying font rendering engine
+	// creates this face from another face, by shearing, emboldening,
+	// lightening or modifying it in some other way.
 	IsSynthesized func(Instance) bool
 }
 
@@ -7726,6 +8148,112 @@ func UnsafeApplyFontFaceOverrides[Instance FontFace](gclass unsafe.Pointer, over
 			},
 		)
 	}
+}
+
+// ParentDescribe calls the default implementations of the describe virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret *FontDescription 
+//
+// Returns a font description that matches the face.
+// 
+// The resulting font description will have the family, style,
+// variant, weight and stretch of the face, but its size field
+// will be unset.
+func (face *FontFaceInstance) ParentDescribe() *FontDescription {
+	var carg0 *C.PangoFontFace
+	var cret  *C.PangoFontDescription // return, full, converted
+
+	parentclass := (*C.PangoFontFaceClass)(classdata.PeekParentClass(UnsafeFontFaceToGlibNone(face)))
+
+	cret = C._gotk4_pango1_FontFace_virtual_describe(unsafe.Pointer(parentclass.describe), carg0)
+	runtime.KeepAlive(face)
+
+	var goret *FontDescription
+
+	goret = UnsafeFontDescriptionFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// ParentGetFaceName calls the default implementations of the get_face_name virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret string 
+//
+// Gets a name representing the style of this face.
+// 
+// Note that a font family may contain multiple faces
+// with the same name (e.g. a variable and a non-variable
+// face for the same style).
+func (face *FontFaceInstance) ParentGetFaceName() string {
+	var carg0 *C.PangoFontFace
+	var cret  *C.char // return, none, string, casted *C.gchar
+
+	parentclass := (*C.PangoFontFaceClass)(classdata.PeekParentClass(UnsafeFontFaceToGlibNone(face)))
+
+	cret = C._gotk4_pango1_FontFace_virtual_get_face_name(unsafe.Pointer(parentclass.get_face_name), carg0)
+	runtime.KeepAlive(face)
+
+	var goret string
+
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+
+	return goret
+}
+
+// ParentGetFamily calls the default implementations of the get_family virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret FontFamily 
+//
+// Gets the `PangoFontFamily` that @face belongs to.
+func (face *FontFaceInstance) ParentGetFamily() FontFamily {
+	var carg0 *C.PangoFontFace
+	var cret  *C.PangoFontFamily // return, none, converted
+
+	parentclass := (*C.PangoFontFaceClass)(classdata.PeekParentClass(UnsafeFontFaceToGlibNone(face)))
+
+	cret = C._gotk4_pango1_FontFace_virtual_get_family(unsafe.Pointer(parentclass.get_family), carg0)
+	runtime.KeepAlive(face)
+
+	var goret FontFamily
+
+	goret = UnsafeFontFamilyFromGlibNone(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// ParentIsSynthesized calls the default implementations of the is_synthesized virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Returns whether a `PangoFontFace` is synthesized.
+// 
+// This will be the case if the underlying font rendering engine
+// creates this face from another face, by shearing, emboldening,
+// lightening or modifying it in some other way.
+func (face *FontFaceInstance) ParentIsSynthesized() bool {
+	var carg0 *C.PangoFontFace
+	var cret  C.gboolean // return
+
+	parentclass := (*C.PangoFontFaceClass)(classdata.PeekParentClass(UnsafeFontFaceToGlibNone(face)))
+
+	cret = C._gotk4_pango1_FontFace_virtual_is_synthesized(unsafe.Pointer(parentclass.is_synthesized), carg0)
+	runtime.KeepAlive(face)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
 }
 
 // RegisterFontFaceSubClass is used to register a go subclass of PangoFontFace. For this to work safely please implement the
@@ -7835,13 +8363,75 @@ type FontFamily interface {
 	// Such axes are also known as _variations_; see
 	// [method@Pango.FontDescription.set_variations] for more information.
 	IsVariable() bool
+
+	// chain up virtual methods:
+
+	// ParentGetFace calls the default implementations of the get_face virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- name string (nullable): the name of a face. If the name is %NULL,
+	//   the family's default face (fontconfig calls it "Regular")
+	//   will be returned. 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret FontFace (nullable) 
+	//
+	// Gets the `PangoFontFace` of @family with the given name.
+	ParentGetFace(name string) FontFace
+	// ParentGetName calls the default implementations of the get_name virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret string 
+	//
+	// Gets the name of the family.
+	// 
+	// The name is unique among all fonts for the font backend and can
+	// be used in a `PangoFontDescription` to specify that a face from
+	// this family is desired.
+	ParentGetName() string
+	// ParentIsMonospace calls the default implementations of the is_monospace virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	//
+	// A monospace font is a font designed for text display where the the
+	// characters form a regular grid.
+	// 
+	// For Western languages this would
+	// mean that the advance width of all characters are the same, but
+	// this categorization also includes Asian fonts which include
+	// double-width characters: characters that occupy two grid cells.
+	// g_unichar_iswide() returns a result that indicates whether a
+	// character is typically double-width in a monospace font.
+	// 
+	// The best way to find out the grid-cell size is to call
+	// [method@Pango.FontMetrics.get_approximate_digit_width], since the
+	// results of [method@Pango.FontMetrics.get_approximate_char_width] may
+	// be affected by double-width characters.
+	ParentIsMonospace() bool
+	// ParentIsVariable calls the default implementations of the is_variable virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	//
+	// A variable font is a font which has axes that can be modified to
+	// produce different faces.
+	// 
+	// Such axes are also known as _variations_; see
+	// [method@Pango.FontDescription.set_variations] for more information.
+	ParentIsVariable() bool
 }
 
 func unsafeWrapFontFamily(base *gobject.ObjectInstance) *FontFamilyInstance {
 	return &FontFamilyInstance{
 		ObjectInstance: *base,
 		ListModelInstance: gio.ListModelInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -8026,21 +8616,50 @@ type FontFamilyOverrides[Instance FontFamily] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret FontFace (nullable) 
+	//
+	// Gets the `PangoFontFace` of @family with the given name.
 	GetFace func(Instance, string) FontFace
 	// GetName allows you to override the implementation of the virtual method get_name.
 	// The function returns the following values:
 	// 
 	// 	- goret string 
+	//
+	// Gets the name of the family.
+	// 
+	// The name is unique among all fonts for the font backend and can
+	// be used in a `PangoFontDescription` to specify that a face from
+	// this family is desired.
 	GetName func(Instance) string
 	// IsMonospace allows you to override the implementation of the virtual method is_monospace.
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
+	//
+	// A monospace font is a font designed for text display where the the
+	// characters form a regular grid.
+	// 
+	// For Western languages this would
+	// mean that the advance width of all characters are the same, but
+	// this categorization also includes Asian fonts which include
+	// double-width characters: characters that occupy two grid cells.
+	// g_unichar_iswide() returns a result that indicates whether a
+	// character is typically double-width in a monospace font.
+	// 
+	// The best way to find out the grid-cell size is to call
+	// [method@Pango.FontMetrics.get_approximate_digit_width], since the
+	// results of [method@Pango.FontMetrics.get_approximate_char_width] may
+	// be affected by double-width characters.
 	IsMonospace func(Instance) bool
 	// IsVariable allows you to override the implementation of the virtual method is_variable.
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
+	//
+	// A variable font is a font which has axes that can be modified to
+	// produce different faces.
+	// 
+	// Such axes are also known as _variations_; see
+	// [method@Pango.FontDescription.set_variations] for more information.
 	IsVariable func(Instance) bool
 }
 
@@ -8141,6 +8760,138 @@ func UnsafeApplyFontFamilyOverrides[Instance FontFamily](gclass unsafe.Pointer, 
 			},
 		)
 	}
+}
+
+// ParentGetFace calls the default implementations of the get_face virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- name string (nullable): the name of a face. If the name is %NULL,
+//   the family's default face (fontconfig calls it "Regular")
+//   will be returned. 
+// 
+// The function returns the following values:
+// 
+// 	- goret FontFace (nullable) 
+//
+// Gets the `PangoFontFace` of @family with the given name.
+func (family *FontFamilyInstance) ParentGetFace(name string) FontFace {
+	var carg0 *C.PangoFontFamily
+	var carg1 *C.char          // in, none, string, nullable-string
+	var cret  *C.PangoFontFace // return, none, converted, nullable
+
+	parentclass := (*C.PangoFontFamilyClass)(classdata.PeekParentClass(UnsafeFontFamilyToGlibNone(family)))
+
+	if name != "" {
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
+		defer C.free(unsafe.Pointer(carg1))
+	}
+
+	cret = C._gotk4_pango1_FontFamily_virtual_get_face(unsafe.Pointer(parentclass.get_face), carg0, carg1)
+	runtime.KeepAlive(family)
+	runtime.KeepAlive(name)
+
+	var goret FontFace
+
+	if cret != nil {
+		goret = UnsafeFontFaceFromGlibNone(unsafe.Pointer(cret))
+	}
+
+	return goret
+}
+
+// ParentGetName calls the default implementations of the get_name virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret string 
+//
+// Gets the name of the family.
+// 
+// The name is unique among all fonts for the font backend and can
+// be used in a `PangoFontDescription` to specify that a face from
+// this family is desired.
+func (family *FontFamilyInstance) ParentGetName() string {
+	var carg0 *C.PangoFontFamily
+	var cret  *C.char // return, none, string, casted *C.gchar
+
+	parentclass := (*C.PangoFontFamilyClass)(classdata.PeekParentClass(UnsafeFontFamilyToGlibNone(family)))
+
+	cret = C._gotk4_pango1_FontFamily_virtual_get_name(unsafe.Pointer(parentclass.get_name), carg0)
+	runtime.KeepAlive(family)
+
+	var goret string
+
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+
+	return goret
+}
+
+// ParentIsMonospace calls the default implementations of the is_monospace virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// A monospace font is a font designed for text display where the the
+// characters form a regular grid.
+// 
+// For Western languages this would
+// mean that the advance width of all characters are the same, but
+// this categorization also includes Asian fonts which include
+// double-width characters: characters that occupy two grid cells.
+// g_unichar_iswide() returns a result that indicates whether a
+// character is typically double-width in a monospace font.
+// 
+// The best way to find out the grid-cell size is to call
+// [method@Pango.FontMetrics.get_approximate_digit_width], since the
+// results of [method@Pango.FontMetrics.get_approximate_char_width] may
+// be affected by double-width characters.
+func (family *FontFamilyInstance) ParentIsMonospace() bool {
+	var carg0 *C.PangoFontFamily
+	var cret  C.gboolean // return
+
+	parentclass := (*C.PangoFontFamilyClass)(classdata.PeekParentClass(UnsafeFontFamilyToGlibNone(family)))
+
+	cret = C._gotk4_pango1_FontFamily_virtual_is_monospace(unsafe.Pointer(parentclass.is_monospace), carg0)
+	runtime.KeepAlive(family)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// ParentIsVariable calls the default implementations of the is_variable virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// A variable font is a font which has axes that can be modified to
+// produce different faces.
+// 
+// Such axes are also known as _variations_; see
+// [method@Pango.FontDescription.set_variations] for more information.
+func (family *FontFamilyInstance) ParentIsVariable() bool {
+	var carg0 *C.PangoFontFamily
+	var cret  C.gboolean // return
+
+	parentclass := (*C.PangoFontFamilyClass)(classdata.PeekParentClass(UnsafeFontFamilyToGlibNone(family)))
+
+	cret = C._gotk4_pango1_FontFamily_virtual_is_variable(unsafe.Pointer(parentclass.is_variable), carg0)
+	runtime.KeepAlive(family)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
 }
 
 // RegisterFontFamilySubClass is used to register a go subclass of PangoFontFamily. For this to work safely please implement the
@@ -8314,13 +9065,86 @@ type FontMap interface {
 	// scaling can be used to render a font on a hi-dpi display
 	// without changing its optical size.
 	ReloadFont(Font, float64, Context, string) Font
+
+	// chain up virtual methods:
+
+	// ParentChanged calls the default implementations of the changed virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	//
+	// Forces a change in the context, which will cause any `PangoContext`
+	// using this fontmap to change.
+	// 
+	// This function is only useful when implementing a new backend
+	// for Pango, something applications won't do. Backends should
+	// call this function if they have attached extra data to the
+	// context and such data is changed.
+	ParentChanged()
+	// ParentGetFamily calls the default implementations of the get_family virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- name string: a family name 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret FontFamily 
+	//
+	// Gets a font family by name.
+	ParentGetFamily(name string) FontFamily
+	// ParentGetSerial calls the default implementations of the get_serial virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret uint 
+	//
+	// Returns the current serial number of @fontmap.
+	// 
+	// The serial number is initialized to an small number larger than zero
+	// when a new fontmap is created and is increased whenever the fontmap
+	// is changed. It may wrap, but will never have the value 0. Since it can
+	// wrap, never compare it with "less than", always use "not equals".
+	// 
+	// The fontmap can only be changed using backend-specific API, like changing
+	// fontmap resolution.
+	// 
+	// This can be used to automatically detect changes to a `PangoFontMap`,
+	// like in `PangoContext`.
+	ParentGetSerial() uint
+	// ParentLoadFont calls the default implementations of the load_font virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- _context Context: the `PangoContext` the font will be used with 
+	// 	- desc *FontDescription: a `PangoFontDescription` describing the font to load 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret Font (nullable) 
+	//
+	// Load the font in the fontmap that is the closest match for @desc.
+	ParentLoadFont(_context Context, desc *FontDescription) Font
+	// ParentLoadFontset calls the default implementations of the load_fontset virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- _context Context: the `PangoContext` the font will be used with 
+	// 	- desc *FontDescription: a `PangoFontDescription` describing the font to load 
+	// 	- language *Language: a `PangoLanguage` the fonts will be used for 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret Fontset (nullable) 
+	//
+	// Load a set of fonts in the fontmap that can be used to render
+	// a font matching @desc.
+	ParentLoadFontset(_context Context, desc *FontDescription, language *Language) Fontset
 }
 
 func unsafeWrapFontMap(base *gobject.ObjectInstance) *FontMapInstance {
 	return &FontMapInstance{
 		ObjectInstance: *base,
 		ListModelInstance: gio.ListModelInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -8652,6 +9476,14 @@ type FontMapOverrides[Instance FontMap] struct {
 	gobject.ObjectOverrides[Instance]
 
 	// Changed allows you to override the implementation of the virtual method changed.
+	//
+	// Forces a change in the context, which will cause any `PangoContext`
+	// using this fontmap to change.
+	// 
+	// This function is only useful when implementing a new backend
+	// for Pango, something applications won't do. Backends should
+	// call this function if they have attached extra data to the
+	// context and such data is changed.
 	Changed func(Instance)
 	// GetFamily allows you to override the implementation of the virtual method get_family.
 	// The function takes the following parameters:
@@ -8661,11 +9493,26 @@ type FontMapOverrides[Instance FontMap] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret FontFamily 
+	//
+	// Gets a font family by name.
 	GetFamily func(Instance, string) FontFamily
 	// GetSerial allows you to override the implementation of the virtual method get_serial.
 	// The function returns the following values:
 	// 
 	// 	- goret uint 
+	//
+	// Returns the current serial number of @fontmap.
+	// 
+	// The serial number is initialized to an small number larger than zero
+	// when a new fontmap is created and is increased whenever the fontmap
+	// is changed. It may wrap, but will never have the value 0. Since it can
+	// wrap, never compare it with "less than", always use "not equals".
+	// 
+	// The fontmap can only be changed using backend-specific API, like changing
+	// fontmap resolution.
+	// 
+	// This can be used to automatically detect changes to a `PangoFontMap`,
+	// like in `PangoContext`.
 	GetSerial func(Instance) uint
 	// LoadFont allows you to override the implementation of the virtual method load_font.
 	// The function takes the following parameters:
@@ -8676,6 +9523,8 @@ type FontMapOverrides[Instance FontMap] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret Font (nullable) 
+	//
+	// Load the font in the fontmap that is the closest match for @desc.
 	LoadFont func(Instance, Context, *FontDescription) Font
 	// LoadFontset allows you to override the implementation of the virtual method load_fontset.
 	// The function takes the following parameters:
@@ -8687,6 +9536,9 @@ type FontMapOverrides[Instance FontMap] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret Fontset (nullable) 
+	//
+	// Load a set of fonts in the fontmap that can be used to render
+	// a font matching @desc.
 	LoadFontset func(Instance, Context, *FontDescription, *Language) Fontset
 }
 
@@ -8809,6 +9661,170 @@ func UnsafeApplyFontMapOverrides[Instance FontMap](gclass unsafe.Pointer, overri
 	}
 }
 
+// ParentChanged calls the default implementations of the changed virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+//
+// Forces a change in the context, which will cause any `PangoContext`
+// using this fontmap to change.
+// 
+// This function is only useful when implementing a new backend
+// for Pango, something applications won't do. Backends should
+// call this function if they have attached extra data to the
+// context and such data is changed.
+func (fontmap *FontMapInstance) ParentChanged() {
+	var carg0 *C.PangoFontMap
+
+	parentclass := (*C.PangoFontMapClass)(classdata.PeekParentClass(UnsafeFontMapToGlibNone(fontmap)))
+
+	C._gotk4_pango1_FontMap_virtual_changed(unsafe.Pointer(parentclass.changed), carg0)
+	runtime.KeepAlive(fontmap)
+}
+
+// ParentGetFamily calls the default implementations of the get_family virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- name string: a family name 
+// 
+// The function returns the following values:
+// 
+// 	- goret FontFamily 
+//
+// Gets a font family by name.
+func (fontmap *FontMapInstance) ParentGetFamily(name string) FontFamily {
+	var carg0 *C.PangoFontMap
+	var carg1 *C.char            // in, none, string, casted *C.gchar
+	var cret  *C.PangoFontFamily // return, none, converted
+
+	parentclass := (*C.PangoFontMapClass)(classdata.PeekParentClass(UnsafeFontMapToGlibNone(fontmap)))
+
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	cret = C._gotk4_pango1_FontMap_virtual_get_family(unsafe.Pointer(parentclass.get_family), carg0, carg1)
+	runtime.KeepAlive(fontmap)
+	runtime.KeepAlive(name)
+
+	var goret FontFamily
+
+	goret = UnsafeFontFamilyFromGlibNone(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// ParentGetSerial calls the default implementations of the get_serial virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret uint 
+//
+// Returns the current serial number of @fontmap.
+// 
+// The serial number is initialized to an small number larger than zero
+// when a new fontmap is created and is increased whenever the fontmap
+// is changed. It may wrap, but will never have the value 0. Since it can
+// wrap, never compare it with "less than", always use "not equals".
+// 
+// The fontmap can only be changed using backend-specific API, like changing
+// fontmap resolution.
+// 
+// This can be used to automatically detect changes to a `PangoFontMap`,
+// like in `PangoContext`.
+func (fontmap *FontMapInstance) ParentGetSerial() uint {
+	var carg0 *C.PangoFontMap
+	var cret  C.guint // return, none, casted
+
+	parentclass := (*C.PangoFontMapClass)(classdata.PeekParentClass(UnsafeFontMapToGlibNone(fontmap)))
+
+	cret = C._gotk4_pango1_FontMap_virtual_get_serial(unsafe.Pointer(parentclass.get_serial), carg0)
+	runtime.KeepAlive(fontmap)
+
+	var goret uint
+
+	goret = uint(cret)
+
+	return goret
+}
+
+// ParentLoadFont calls the default implementations of the load_font virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- _context Context: the `PangoContext` the font will be used with 
+// 	- desc *FontDescription: a `PangoFontDescription` describing the font to load 
+// 
+// The function returns the following values:
+// 
+// 	- goret Font (nullable) 
+//
+// Load the font in the fontmap that is the closest match for @desc.
+func (fontmap *FontMapInstance) ParentLoadFont(_context Context, desc *FontDescription) Font {
+	var carg0 *C.PangoFontMap
+	var carg1 *C.PangoContext         // in, none, converted
+	var carg2 *C.PangoFontDescription // in, none, converted
+	var cret  *C.PangoFont            // return, full, converted, nullable
+
+	parentclass := (*C.PangoFontMapClass)(classdata.PeekParentClass(UnsafeFontMapToGlibNone(fontmap)))
+
+	carg1 = (*C.PangoContext)(UnsafeContextToGlibNone(_context))
+	carg2 = (*C.PangoFontDescription)(UnsafeFontDescriptionToGlibNone(desc))
+
+	cret = C._gotk4_pango1_FontMap_virtual_load_font(unsafe.Pointer(parentclass.load_font), carg0, carg1, carg2)
+	runtime.KeepAlive(fontmap)
+	runtime.KeepAlive(_context)
+	runtime.KeepAlive(desc)
+
+	var goret Font
+
+	if cret != nil {
+		goret = UnsafeFontFromGlibFull(unsafe.Pointer(cret))
+	}
+
+	return goret
+}
+
+// ParentLoadFontset calls the default implementations of the load_fontset virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- _context Context: the `PangoContext` the font will be used with 
+// 	- desc *FontDescription: a `PangoFontDescription` describing the font to load 
+// 	- language *Language: a `PangoLanguage` the fonts will be used for 
+// 
+// The function returns the following values:
+// 
+// 	- goret Fontset (nullable) 
+//
+// Load a set of fonts in the fontmap that can be used to render
+// a font matching @desc.
+func (fontmap *FontMapInstance) ParentLoadFontset(_context Context, desc *FontDescription, language *Language) Fontset {
+	var carg0 *C.PangoFontMap
+	var carg1 *C.PangoContext         // in, none, converted
+	var carg2 *C.PangoFontDescription // in, none, converted
+	var carg3 *C.PangoLanguage        // in, none, converted
+	var cret  *C.PangoFontset         // return, full, converted, nullable
+
+	parentclass := (*C.PangoFontMapClass)(classdata.PeekParentClass(UnsafeFontMapToGlibNone(fontmap)))
+
+	carg1 = (*C.PangoContext)(UnsafeContextToGlibNone(_context))
+	carg2 = (*C.PangoFontDescription)(UnsafeFontDescriptionToGlibNone(desc))
+	carg3 = (*C.PangoLanguage)(UnsafeLanguageToGlibNone(language))
+
+	cret = C._gotk4_pango1_FontMap_virtual_load_fontset(unsafe.Pointer(parentclass.load_fontset), carg0, carg1, carg2, carg3)
+	runtime.KeepAlive(fontmap)
+	runtime.KeepAlive(_context)
+	runtime.KeepAlive(desc)
+	runtime.KeepAlive(language)
+
+	var goret Fontset
+
+	if cret != nil {
+		goret = UnsafeFontsetFromGlibFull(unsafe.Pointer(cret))
+	}
+
+	return goret
+}
+
 // RegisterFontMapSubClass is used to register a go subclass of PangoFontMap. For this to work safely please implement the
 // virtual methods required by the implementation.
 func RegisterFontMapSubClass[InstanceT FontMap](
@@ -8887,6 +9903,49 @@ type Fontset interface {
 	//
 	// Get overall metric information for the fonts in the fontset.
 	GetMetrics() *FontMetrics
+
+	// chain up virtual methods:
+
+	// ParentForEach calls the default implementations of the foreach virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- fn FontsetForEachFunc: Callback function 
+	//
+	// Iterates through all the fonts in a fontset, calling @func for
+	// each one.
+	// 
+	// If @func returns %TRUE, that stops the iteration.
+	ParentForEach(fn FontsetForEachFunc)
+	// ParentGetFont calls the default implementations of the get_font virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- wc uint: a Unicode character 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret Font 
+	//
+	// Returns the font in the fontset that contains the best
+	// glyph for a Unicode character.
+	ParentGetFont(wc uint) Font
+	// ParentGetLanguage calls the default implementations of the get_language virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret *Language 
+	//
+	// a function to get the language of the fontset.
+	ParentGetLanguage() *Language
+	// ParentGetMetrics calls the default implementations of the get_metrics virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret *FontMetrics 
+	//
+	// Get overall metric information for the fonts in the fontset.
+	ParentGetMetrics() *FontMetrics
 }
 
 func unsafeWrapFontset(base *gobject.ObjectInstance) *FontsetInstance {
@@ -9017,6 +10076,11 @@ type FontsetOverrides[Instance Fontset] struct {
 	// The function takes the following parameters:
 	// 
 	// 	- fn FontsetForEachFunc: Callback function 
+	//
+	// Iterates through all the fonts in a fontset, calling @func for
+	// each one.
+	// 
+	// If @func returns %TRUE, that stops the iteration.
 	ForEach func(Instance, FontsetForEachFunc)
 	// GetFont allows you to override the implementation of the virtual method get_font.
 	// The function takes the following parameters:
@@ -9026,16 +10090,23 @@ type FontsetOverrides[Instance Fontset] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret Font 
+	//
+	// Returns the font in the fontset that contains the best
+	// glyph for a Unicode character.
 	GetFont func(Instance, uint) Font
 	// GetLanguage allows you to override the implementation of the virtual method get_language.
 	// The function returns the following values:
 	// 
 	// 	- goret *Language 
+	//
+	// a function to get the language of the fontset.
 	GetLanguage func(Instance) *Language
 	// GetMetrics allows you to override the implementation of the virtual method get_metrics.
 	// The function returns the following values:
 	// 
 	// 	- goret *FontMetrics 
+	//
+	// Get overall metric information for the fonts in the fontset.
 	GetMetrics func(Instance) *FontMetrics
 }
 
@@ -9127,6 +10198,110 @@ func UnsafeApplyFontsetOverrides[Instance Fontset](gclass unsafe.Pointer, overri
 			},
 		)
 	}
+}
+
+// ParentForEach calls the default implementations of the foreach virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- fn FontsetForEachFunc: Callback function 
+//
+// Iterates through all the fonts in a fontset, calling @func for
+// each one.
+// 
+// If @func returns %TRUE, that stops the iteration.
+func (fontset *FontsetInstance) ParentForEach(fn FontsetForEachFunc) {
+	var carg0 *C.PangoFontset
+	var carg1 C.PangoFontsetForeachFunc // callback, scope: call, closure: carg2
+	var carg2 C.gpointer                // implicit
+
+	parentclass := (*C.PangoFontsetClass)(classdata.PeekParentClass(UnsafeFontsetToGlibNone(fontset)))
+
+	carg1 = (*[0]byte)(C._gotk4_pango1_FontsetForEachFunc)
+	carg2 = C.gpointer(userdata.Register(fn))
+	defer userdata.Delete(unsafe.Pointer(carg2))
+
+	C._gotk4_pango1_Fontset_virtual_foreach(unsafe.Pointer(parentclass.foreach), carg0, carg1, carg2)
+	runtime.KeepAlive(fontset)
+	runtime.KeepAlive(fn)
+}
+
+// ParentGetFont calls the default implementations of the get_font virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- wc uint: a Unicode character 
+// 
+// The function returns the following values:
+// 
+// 	- goret Font 
+//
+// Returns the font in the fontset that contains the best
+// glyph for a Unicode character.
+func (fontset *FontsetInstance) ParentGetFont(wc uint) Font {
+	var carg0 *C.PangoFontset
+	var carg1 C.guint      // in, none, casted
+	var cret  *C.PangoFont // return, full, converted
+
+	parentclass := (*C.PangoFontsetClass)(classdata.PeekParentClass(UnsafeFontsetToGlibNone(fontset)))
+
+	carg1 = C.guint(wc)
+
+	cret = C._gotk4_pango1_Fontset_virtual_get_font(unsafe.Pointer(parentclass.get_font), carg0, carg1)
+	runtime.KeepAlive(fontset)
+	runtime.KeepAlive(wc)
+
+	var goret Font
+
+	goret = UnsafeFontFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// ParentGetLanguage calls the default implementations of the get_language virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret *Language 
+//
+// a function to get the language of the fontset.
+func (fontset *FontsetInstance) ParentGetLanguage() *Language {
+	var carg0 *C.PangoFontset
+	var cret  *C.PangoLanguage // return, full, converted
+
+	parentclass := (*C.PangoFontsetClass)(classdata.PeekParentClass(UnsafeFontsetToGlibNone(fontset)))
+
+	cret = C._gotk4_pango1_Fontset_virtual_get_language(unsafe.Pointer(parentclass.get_language), carg0)
+	runtime.KeepAlive(fontset)
+
+	var goret *Language
+
+	goret = UnsafeLanguageFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// ParentGetMetrics calls the default implementations of the get_metrics virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret *FontMetrics 
+//
+// Get overall metric information for the fonts in the fontset.
+func (fontset *FontsetInstance) ParentGetMetrics() *FontMetrics {
+	var carg0 *C.PangoFontset
+	var cret  *C.PangoFontMetrics // return, full, converted
+
+	parentclass := (*C.PangoFontsetClass)(classdata.PeekParentClass(UnsafeFontsetToGlibNone(fontset)))
+
+	cret = C._gotk4_pango1_Fontset_virtual_get_metrics(unsafe.Pointer(parentclass.get_metrics), carg0)
+	runtime.KeepAlive(fontset)
+
+	var goret *FontMetrics
+
+	goret = UnsafeFontMetricsFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
 }
 
 // RegisterFontsetSubClass is used to register a go subclass of PangoFontset. For this to work safely please implement the
@@ -12772,6 +13947,167 @@ type Renderer interface {
 	//
 	// Sets the transformation matrix that will be applied when rendering.
 	SetMatrix(*Matrix)
+
+	// chain up virtual methods:
+
+	// ParentBegin calls the default implementations of the begin virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	//
+	// Do renderer-specific initialization before drawing
+	ParentBegin()
+	// ParentDrawErrorUnderline calls the default implementations of the draw_error_underline virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- x int32: X coordinate of underline, in Pango units in user coordinate system 
+	// 	- y int32: Y coordinate of underline, in Pango units in user coordinate system 
+	// 	- width int32: width of underline, in Pango units in user coordinate system 
+	// 	- height int32: height of underline, in Pango units in user coordinate system 
+	//
+	// Draw a squiggly line that approximately covers the given rectangle
+	// in the style of an underline used to indicate a spelling error.
+	// 
+	// The width of the underline is rounded to an integer number
+	// of up/down segments and the resulting rectangle is centered
+	// in the original rectangle.
+	// 
+	// This should be called while @renderer is already active.
+	// Use [method@Pango.Renderer.activate] to activate a renderer.
+	ParentDrawErrorUnderline(x int32, y int32, width int32, height int32)
+	// ParentDrawGlyph calls the default implementations of the draw_glyph virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- font Font: a `PangoFont` 
+	// 	- glyph Glyph: the glyph index of a single glyph 
+	// 	- x float64: X coordinate of left edge of baseline of glyph 
+	// 	- y float64: Y coordinate of left edge of baseline of glyph 
+	//
+	// Draws a single glyph with coordinates in device space.
+	ParentDrawGlyph(font Font, glyph Glyph, x float64, y float64)
+	// ParentDrawGlyphItem calls the default implementations of the draw_glyph_item virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- text string (nullable): the UTF-8 text that @glyph_item refers to 
+	// 	- glyphItem *GlyphItem: a `PangoGlyphItem` 
+	// 	- x int32: X position of left edge of baseline, in user space coordinates
+	//   in Pango units 
+	// 	- y int32: Y position of left edge of baseline, in user space coordinates
+	//   in Pango units 
+	//
+	// Draws the glyphs in @glyph_item with the specified `PangoRenderer`,
+	// embedding the text associated with the glyphs in the output if the
+	// output format supports it.
+	// 
+	// This is useful for rendering text in PDF.
+	// 
+	// Note that this method does not handle attributes in @glyph_item.
+	// If you want colors, shapes and lines handled automatically according
+	// to those attributes, you need to use pango_renderer_draw_layout_line()
+	// or pango_renderer_draw_layout().
+	// 
+	// Note that @text is the start of the text for layout, which is then
+	// indexed by `glyph_item-&gt;item-&gt;offset`.
+	// 
+	// If @text is %NULL, this simply calls [method@Pango.Renderer.draw_glyphs].
+	// 
+	// The default implementation of this method simply falls back to
+	// [method@Pango.Renderer.draw_glyphs].
+	ParentDrawGlyphItem(text string, glyphItem *GlyphItem, x int32, y int32)
+	// ParentDrawGlyphs calls the default implementations of the draw_glyphs virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- font Font: a `PangoFont` 
+	// 	- glyphs *GlyphString: a `PangoGlyphString` 
+	// 	- x int32: X position of left edge of baseline, in user space coordinates
+	//   in Pango units. 
+	// 	- y int32: Y position of left edge of baseline, in user space coordinates
+	//   in Pango units. 
+	//
+	// Draws the glyphs in @glyphs with the specified `PangoRenderer`.
+	ParentDrawGlyphs(font Font, glyphs *GlyphString, x int32, y int32)
+	// ParentDrawRectangle calls the default implementations of the draw_rectangle virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- part RenderPart: type of object this rectangle is part of 
+	// 	- x int32: X position at which to draw rectangle, in user space coordinates
+	//   in Pango units 
+	// 	- y int32: Y position at which to draw rectangle, in user space coordinates
+	//   in Pango units 
+	// 	- width int32: width of rectangle in Pango units 
+	// 	- height int32: height of rectangle in Pango units 
+	//
+	// Draws an axis-aligned rectangle in user space coordinates with the
+	// specified `PangoRenderer`.
+	// 
+	// This should be called while @renderer is already active.
+	// Use [method@Pango.Renderer.activate] to activate a renderer.
+	ParentDrawRectangle(part RenderPart, x int32, y int32, width int32, height int32)
+	// ParentDrawShape calls the default implementations of the draw_shape virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- attr *AttrShape 
+	// 	- x int32 
+	// 	- y int32 
+	//
+	// draw content for a glyph shaped with `PangoAttrShape`
+	//   @x, @y are the coordinates of the left edge of the baseline,
+	//   in user coordinates.
+	ParentDrawShape(attr *AttrShape, x int32, y int32)
+	// ParentDrawTrapezoid calls the default implementations of the draw_trapezoid virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- part RenderPart: type of object this trapezoid is part of 
+	// 	- y1 float64: Y coordinate of top of trapezoid 
+	// 	- x11 float64: X coordinate of left end of top of trapezoid 
+	// 	- x21 float64: X coordinate of right end of top of trapezoid 
+	// 	- y2 float64: Y coordinate of bottom of trapezoid 
+	// 	- x12 float64: X coordinate of left end of bottom of trapezoid 
+	// 	- x22 float64: X coordinate of right end of bottom of trapezoid 
+	//
+	// Draws a trapezoid with the parallel sides aligned with the X axis
+	// using the given `PangoRenderer`; coordinates are in device space.
+	ParentDrawTrapezoid(part RenderPart, y1 float64, x11 float64, x21 float64, y2 float64, x12 float64, x22 float64)
+	// ParentEnd calls the default implementations of the end virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	//
+	// Do renderer-specific cleanup after drawing
+	ParentEnd()
+	// ParentPartChanged calls the default implementations of the part_changed virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- part RenderPart: the part for which rendering has changed. 
+	//
+	// Informs Pango that the way that the rendering is done
+	// for @part has changed.
+	// 
+	// This should be called if the rendering changes in a way that would
+	// prevent multiple pieces being joined together into one drawing call.
+	// For instance, if a subclass of `PangoRenderer` was to add a stipple
+	// option for drawing underlines, it needs to call
+	// 
+	// ```
+	// pango_renderer_part_changed (render, PANGO_RENDER_PART_UNDERLINE);
+	// ```
+	// 
+	// When the stipple changes or underlines with different stipples
+	// might be joined together. Pango automatically calls this for
+	// changes to colors. (See [method@Pango.Renderer.set_color])
+	ParentPartChanged(part RenderPart)
+	// ParentPrepareRun calls the default implementations of the prepare_run virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- run *LayoutRun 
+	//
+	// updates the renderer for a new run
+	ParentPrepareRun(run *LayoutRun)
 }
 
 func unsafeWrapRenderer(base *gobject.ObjectInstance) *RendererInstance {
@@ -13420,6 +14756,8 @@ type RendererOverrides[Instance Renderer] struct {
 	gobject.ObjectOverrides[Instance]
 
 	// Begin allows you to override the implementation of the virtual method begin.
+	//
+	// Do renderer-specific initialization before drawing
 	Begin func(Instance)
 	// DrawErrorUnderline allows you to override the implementation of the virtual method draw_error_underline.
 	// The function takes the following parameters:
@@ -13428,6 +14766,16 @@ type RendererOverrides[Instance Renderer] struct {
 	// 	- y int32: Y coordinate of underline, in Pango units in user coordinate system 
 	// 	- width int32: width of underline, in Pango units in user coordinate system 
 	// 	- height int32: height of underline, in Pango units in user coordinate system 
+	//
+	// Draw a squiggly line that approximately covers the given rectangle
+	// in the style of an underline used to indicate a spelling error.
+	// 
+	// The width of the underline is rounded to an integer number
+	// of up/down segments and the resulting rectangle is centered
+	// in the original rectangle.
+	// 
+	// This should be called while @renderer is already active.
+	// Use [method@Pango.Renderer.activate] to activate a renderer.
 	DrawErrorUnderline func(Instance, int32, int32, int32, int32)
 	// DrawGlyph allows you to override the implementation of the virtual method draw_glyph.
 	// The function takes the following parameters:
@@ -13436,6 +14784,8 @@ type RendererOverrides[Instance Renderer] struct {
 	// 	- glyph Glyph: the glyph index of a single glyph 
 	// 	- x float64: X coordinate of left edge of baseline of glyph 
 	// 	- y float64: Y coordinate of left edge of baseline of glyph 
+	//
+	// Draws a single glyph with coordinates in device space.
 	DrawGlyph func(Instance, Font, Glyph, float64, float64)
 	// DrawGlyphItem allows you to override the implementation of the virtual method draw_glyph_item.
 	// The function takes the following parameters:
@@ -13446,6 +14796,25 @@ type RendererOverrides[Instance Renderer] struct {
 	//   in Pango units 
 	// 	- y int32: Y position of left edge of baseline, in user space coordinates
 	//   in Pango units 
+	//
+	// Draws the glyphs in @glyph_item with the specified `PangoRenderer`,
+	// embedding the text associated with the glyphs in the output if the
+	// output format supports it.
+	// 
+	// This is useful for rendering text in PDF.
+	// 
+	// Note that this method does not handle attributes in @glyph_item.
+	// If you want colors, shapes and lines handled automatically according
+	// to those attributes, you need to use pango_renderer_draw_layout_line()
+	// or pango_renderer_draw_layout().
+	// 
+	// Note that @text is the start of the text for layout, which is then
+	// indexed by `glyph_item-&gt;item-&gt;offset`.
+	// 
+	// If @text is %NULL, this simply calls [method@Pango.Renderer.draw_glyphs].
+	// 
+	// The default implementation of this method simply falls back to
+	// [method@Pango.Renderer.draw_glyphs].
 	DrawGlyphItem func(Instance, string, *GlyphItem, int32, int32)
 	// DrawGlyphs allows you to override the implementation of the virtual method draw_glyphs.
 	// The function takes the following parameters:
@@ -13456,6 +14825,8 @@ type RendererOverrides[Instance Renderer] struct {
 	//   in Pango units. 
 	// 	- y int32: Y position of left edge of baseline, in user space coordinates
 	//   in Pango units. 
+	//
+	// Draws the glyphs in @glyphs with the specified `PangoRenderer`.
 	DrawGlyphs func(Instance, Font, *GlyphString, int32, int32)
 	// DrawRectangle allows you to override the implementation of the virtual method draw_rectangle.
 	// The function takes the following parameters:
@@ -13467,6 +14838,12 @@ type RendererOverrides[Instance Renderer] struct {
 	//   in Pango units 
 	// 	- width int32: width of rectangle in Pango units 
 	// 	- height int32: height of rectangle in Pango units 
+	//
+	// Draws an axis-aligned rectangle in user space coordinates with the
+	// specified `PangoRenderer`.
+	// 
+	// This should be called while @renderer is already active.
+	// Use [method@Pango.Renderer.activate] to activate a renderer.
 	DrawRectangle func(Instance, RenderPart, int32, int32, int32, int32)
 	// DrawShape allows you to override the implementation of the virtual method draw_shape.
 	// The function takes the following parameters:
@@ -13474,6 +14851,10 @@ type RendererOverrides[Instance Renderer] struct {
 	// 	- attr *AttrShape 
 	// 	- x int32 
 	// 	- y int32 
+	//
+	// draw content for a glyph shaped with `PangoAttrShape`
+	//   @x, @y are the coordinates of the left edge of the baseline,
+	//   in user coordinates.
 	DrawShape func(Instance, *AttrShape, int32, int32)
 	// DrawTrapezoid allows you to override the implementation of the virtual method draw_trapezoid.
 	// The function takes the following parameters:
@@ -13485,18 +14866,41 @@ type RendererOverrides[Instance Renderer] struct {
 	// 	- y2 float64: Y coordinate of bottom of trapezoid 
 	// 	- x12 float64: X coordinate of left end of bottom of trapezoid 
 	// 	- x22 float64: X coordinate of right end of bottom of trapezoid 
+	//
+	// Draws a trapezoid with the parallel sides aligned with the X axis
+	// using the given `PangoRenderer`; coordinates are in device space.
 	DrawTrapezoid func(Instance, RenderPart, float64, float64, float64, float64, float64, float64)
 	// End allows you to override the implementation of the virtual method end.
+	//
+	// Do renderer-specific cleanup after drawing
 	End func(Instance)
 	// PartChanged allows you to override the implementation of the virtual method part_changed.
 	// The function takes the following parameters:
 	// 
 	// 	- part RenderPart: the part for which rendering has changed. 
+	//
+	// Informs Pango that the way that the rendering is done
+	// for @part has changed.
+	// 
+	// This should be called if the rendering changes in a way that would
+	// prevent multiple pieces being joined together into one drawing call.
+	// For instance, if a subclass of `PangoRenderer` was to add a stipple
+	// option for drawing underlines, it needs to call
+	// 
+	// ```
+	// pango_renderer_part_changed (render, PANGO_RENDER_PART_UNDERLINE);
+	// ```
+	// 
+	// When the stipple changes or underlines with different stipples
+	// might be joined together. Pango automatically calls this for
+	// changes to colors. (See [method@Pango.Renderer.set_color])
 	PartChanged func(Instance, RenderPart)
 	// PrepareRun allows you to override the implementation of the virtual method prepare_run.
 	// The function takes the following parameters:
 	// 
 	// 	- run *LayoutRun 
+	//
+	// updates the renderer for a new run
 	PrepareRun func(Instance, *LayoutRun)
 }
 
@@ -13741,6 +15145,365 @@ func UnsafeApplyRendererOverrides[Instance Renderer](gclass unsafe.Pointer, over
 			},
 		)
 	}
+}
+
+// ParentBegin calls the default implementations of the begin virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+//
+// Do renderer-specific initialization before drawing
+func (renderer *RendererInstance) ParentBegin() {
+	var carg0 *C.PangoRenderer
+
+	parentclass := (*C.PangoRendererClass)(classdata.PeekParentClass(UnsafeRendererToGlibNone(renderer)))
+
+	C._gotk4_pango1_Renderer_virtual_begin(unsafe.Pointer(parentclass.begin), carg0)
+	runtime.KeepAlive(renderer)
+}
+
+// ParentDrawErrorUnderline calls the default implementations of the draw_error_underline virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- x int32: X coordinate of underline, in Pango units in user coordinate system 
+// 	- y int32: Y coordinate of underline, in Pango units in user coordinate system 
+// 	- width int32: width of underline, in Pango units in user coordinate system 
+// 	- height int32: height of underline, in Pango units in user coordinate system 
+//
+// Draw a squiggly line that approximately covers the given rectangle
+// in the style of an underline used to indicate a spelling error.
+// 
+// The width of the underline is rounded to an integer number
+// of up/down segments and the resulting rectangle is centered
+// in the original rectangle.
+// 
+// This should be called while @renderer is already active.
+// Use [method@Pango.Renderer.activate] to activate a renderer.
+func (renderer *RendererInstance) ParentDrawErrorUnderline(x int32, y int32, width int32, height int32) {
+	var carg0 *C.PangoRenderer
+	var carg1 C.int // in, none, casted, casted C.gint
+	var carg2 C.int // in, none, casted, casted C.gint
+	var carg3 C.int // in, none, casted, casted C.gint
+	var carg4 C.int // in, none, casted, casted C.gint
+
+	parentclass := (*C.PangoRendererClass)(classdata.PeekParentClass(UnsafeRendererToGlibNone(renderer)))
+
+	carg1 = C.int(x)
+	carg2 = C.int(y)
+	carg3 = C.int(width)
+	carg4 = C.int(height)
+
+	C._gotk4_pango1_Renderer_virtual_draw_error_underline(unsafe.Pointer(parentclass.draw_error_underline), carg0, carg1, carg2, carg3, carg4)
+	runtime.KeepAlive(renderer)
+	runtime.KeepAlive(x)
+	runtime.KeepAlive(y)
+	runtime.KeepAlive(width)
+	runtime.KeepAlive(height)
+}
+
+// ParentDrawGlyph calls the default implementations of the draw_glyph virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- font Font: a `PangoFont` 
+// 	- glyph Glyph: the glyph index of a single glyph 
+// 	- x float64: X coordinate of left edge of baseline of glyph 
+// 	- y float64: Y coordinate of left edge of baseline of glyph 
+//
+// Draws a single glyph with coordinates in device space.
+func (renderer *RendererInstance) ParentDrawGlyph(font Font, glyph Glyph, x float64, y float64) {
+	var carg0 *C.PangoRenderer
+	var carg1 *C.PangoFont // in, none, converted
+	var carg2 C.PangoGlyph // in, none, casted, alias
+	var carg3 C.double     // in, none, casted, casted C.gdouble
+	var carg4 C.double     // in, none, casted, casted C.gdouble
+
+	parentclass := (*C.PangoRendererClass)(classdata.PeekParentClass(UnsafeRendererToGlibNone(renderer)))
+
+	carg1 = (*C.PangoFont)(UnsafeFontToGlibNone(font))
+	carg2 = C.PangoGlyph(glyph)
+	carg3 = C.double(x)
+	carg4 = C.double(y)
+
+	C._gotk4_pango1_Renderer_virtual_draw_glyph(unsafe.Pointer(parentclass.draw_glyph), carg0, carg1, carg2, carg3, carg4)
+	runtime.KeepAlive(renderer)
+	runtime.KeepAlive(font)
+	runtime.KeepAlive(glyph)
+	runtime.KeepAlive(x)
+	runtime.KeepAlive(y)
+}
+
+// ParentDrawGlyphItem calls the default implementations of the draw_glyph_item virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- text string (nullable): the UTF-8 text that @glyph_item refers to 
+// 	- glyphItem *GlyphItem: a `PangoGlyphItem` 
+// 	- x int32: X position of left edge of baseline, in user space coordinates
+//   in Pango units 
+// 	- y int32: Y position of left edge of baseline, in user space coordinates
+//   in Pango units 
+//
+// Draws the glyphs in @glyph_item with the specified `PangoRenderer`,
+// embedding the text associated with the glyphs in the output if the
+// output format supports it.
+// 
+// This is useful for rendering text in PDF.
+// 
+// Note that this method does not handle attributes in @glyph_item.
+// If you want colors, shapes and lines handled automatically according
+// to those attributes, you need to use pango_renderer_draw_layout_line()
+// or pango_renderer_draw_layout().
+// 
+// Note that @text is the start of the text for layout, which is then
+// indexed by `glyph_item-&gt;item-&gt;offset`.
+// 
+// If @text is %NULL, this simply calls [method@Pango.Renderer.draw_glyphs].
+// 
+// The default implementation of this method simply falls back to
+// [method@Pango.Renderer.draw_glyphs].
+func (renderer *RendererInstance) ParentDrawGlyphItem(text string, glyphItem *GlyphItem, x int32, y int32) {
+	var carg0 *C.PangoRenderer
+	var carg1 *C.char           // in, none, string, nullable-string
+	var carg2 *C.PangoGlyphItem // in, none, converted
+	var carg3 C.int             // in, none, casted, casted C.gint
+	var carg4 C.int             // in, none, casted, casted C.gint
+
+	parentclass := (*C.PangoRendererClass)(classdata.PeekParentClass(UnsafeRendererToGlibNone(renderer)))
+
+	if text != "" {
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(text)))
+		defer C.free(unsafe.Pointer(carg1))
+	}
+	carg2 = (*C.PangoGlyphItem)(UnsafeGlyphItemToGlibNone(glyphItem))
+	carg3 = C.int(x)
+	carg4 = C.int(y)
+
+	C._gotk4_pango1_Renderer_virtual_draw_glyph_item(unsafe.Pointer(parentclass.draw_glyph_item), carg0, carg1, carg2, carg3, carg4)
+	runtime.KeepAlive(renderer)
+	runtime.KeepAlive(text)
+	runtime.KeepAlive(glyphItem)
+	runtime.KeepAlive(x)
+	runtime.KeepAlive(y)
+}
+
+// ParentDrawGlyphs calls the default implementations of the draw_glyphs virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- font Font: a `PangoFont` 
+// 	- glyphs *GlyphString: a `PangoGlyphString` 
+// 	- x int32: X position of left edge of baseline, in user space coordinates
+//   in Pango units. 
+// 	- y int32: Y position of left edge of baseline, in user space coordinates
+//   in Pango units. 
+//
+// Draws the glyphs in @glyphs with the specified `PangoRenderer`.
+func (renderer *RendererInstance) ParentDrawGlyphs(font Font, glyphs *GlyphString, x int32, y int32) {
+	var carg0 *C.PangoRenderer
+	var carg1 *C.PangoFont        // in, none, converted
+	var carg2 *C.PangoGlyphString // in, none, converted
+	var carg3 C.int               // in, none, casted, casted C.gint
+	var carg4 C.int               // in, none, casted, casted C.gint
+
+	parentclass := (*C.PangoRendererClass)(classdata.PeekParentClass(UnsafeRendererToGlibNone(renderer)))
+
+	carg1 = (*C.PangoFont)(UnsafeFontToGlibNone(font))
+	carg2 = (*C.PangoGlyphString)(UnsafeGlyphStringToGlibNone(glyphs))
+	carg3 = C.int(x)
+	carg4 = C.int(y)
+
+	C._gotk4_pango1_Renderer_virtual_draw_glyphs(unsafe.Pointer(parentclass.draw_glyphs), carg0, carg1, carg2, carg3, carg4)
+	runtime.KeepAlive(renderer)
+	runtime.KeepAlive(font)
+	runtime.KeepAlive(glyphs)
+	runtime.KeepAlive(x)
+	runtime.KeepAlive(y)
+}
+
+// ParentDrawRectangle calls the default implementations of the draw_rectangle virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- part RenderPart: type of object this rectangle is part of 
+// 	- x int32: X position at which to draw rectangle, in user space coordinates
+//   in Pango units 
+// 	- y int32: Y position at which to draw rectangle, in user space coordinates
+//   in Pango units 
+// 	- width int32: width of rectangle in Pango units 
+// 	- height int32: height of rectangle in Pango units 
+//
+// Draws an axis-aligned rectangle in user space coordinates with the
+// specified `PangoRenderer`.
+// 
+// This should be called while @renderer is already active.
+// Use [method@Pango.Renderer.activate] to activate a renderer.
+func (renderer *RendererInstance) ParentDrawRectangle(part RenderPart, x int32, y int32, width int32, height int32) {
+	var carg0 *C.PangoRenderer
+	var carg1 C.PangoRenderPart // in, none, casted
+	var carg2 C.int             // in, none, casted, casted C.gint
+	var carg3 C.int             // in, none, casted, casted C.gint
+	var carg4 C.int             // in, none, casted, casted C.gint
+	var carg5 C.int             // in, none, casted, casted C.gint
+
+	parentclass := (*C.PangoRendererClass)(classdata.PeekParentClass(UnsafeRendererToGlibNone(renderer)))
+
+	carg1 = C.PangoRenderPart(part)
+	carg2 = C.int(x)
+	carg3 = C.int(y)
+	carg4 = C.int(width)
+	carg5 = C.int(height)
+
+	C._gotk4_pango1_Renderer_virtual_draw_rectangle(unsafe.Pointer(parentclass.draw_rectangle), carg0, carg1, carg2, carg3, carg4, carg5)
+	runtime.KeepAlive(renderer)
+	runtime.KeepAlive(part)
+	runtime.KeepAlive(x)
+	runtime.KeepAlive(y)
+	runtime.KeepAlive(width)
+	runtime.KeepAlive(height)
+}
+
+// ParentDrawShape calls the default implementations of the draw_shape virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- attr *AttrShape 
+// 	- x int32 
+// 	- y int32 
+//
+// draw content for a glyph shaped with `PangoAttrShape`
+//   @x, @y are the coordinates of the left edge of the baseline,
+//   in user coordinates.
+func (renderer *RendererInstance) ParentDrawShape(attr *AttrShape, x int32, y int32) {
+	var carg0 *C.PangoRenderer
+	var carg1 *C.PangoAttrShape // in, none, converted
+	var carg2 C.int             // in, none, casted, casted C.gint
+	var carg3 C.int             // in, none, casted, casted C.gint
+
+	parentclass := (*C.PangoRendererClass)(classdata.PeekParentClass(UnsafeRendererToGlibNone(renderer)))
+
+	carg1 = (*C.PangoAttrShape)(UnsafeAttrShapeToGlibNone(attr))
+	carg2 = C.int(x)
+	carg3 = C.int(y)
+
+	C._gotk4_pango1_Renderer_virtual_draw_shape(unsafe.Pointer(parentclass.draw_shape), carg0, carg1, carg2, carg3)
+	runtime.KeepAlive(renderer)
+	runtime.KeepAlive(attr)
+	runtime.KeepAlive(x)
+	runtime.KeepAlive(y)
+}
+
+// ParentDrawTrapezoid calls the default implementations of the draw_trapezoid virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- part RenderPart: type of object this trapezoid is part of 
+// 	- y1 float64: Y coordinate of top of trapezoid 
+// 	- x11 float64: X coordinate of left end of top of trapezoid 
+// 	- x21 float64: X coordinate of right end of top of trapezoid 
+// 	- y2 float64: Y coordinate of bottom of trapezoid 
+// 	- x12 float64: X coordinate of left end of bottom of trapezoid 
+// 	- x22 float64: X coordinate of right end of bottom of trapezoid 
+//
+// Draws a trapezoid with the parallel sides aligned with the X axis
+// using the given `PangoRenderer`; coordinates are in device space.
+func (renderer *RendererInstance) ParentDrawTrapezoid(part RenderPart, y1 float64, x11 float64, x21 float64, y2 float64, x12 float64, x22 float64) {
+	var carg0 *C.PangoRenderer
+	var carg1 C.PangoRenderPart // in, none, casted
+	var carg2 C.double          // in, none, casted, casted C.gdouble
+	var carg3 C.double          // in, none, casted, casted C.gdouble
+	var carg4 C.double          // in, none, casted, casted C.gdouble
+	var carg5 C.double          // in, none, casted, casted C.gdouble
+	var carg6 C.double          // in, none, casted, casted C.gdouble
+	var carg7 C.double          // in, none, casted, casted C.gdouble
+
+	parentclass := (*C.PangoRendererClass)(classdata.PeekParentClass(UnsafeRendererToGlibNone(renderer)))
+
+	carg1 = C.PangoRenderPart(part)
+	carg2 = C.double(y1)
+	carg3 = C.double(x11)
+	carg4 = C.double(x21)
+	carg5 = C.double(y2)
+	carg6 = C.double(x12)
+	carg7 = C.double(x22)
+
+	C._gotk4_pango1_Renderer_virtual_draw_trapezoid(unsafe.Pointer(parentclass.draw_trapezoid), carg0, carg1, carg2, carg3, carg4, carg5, carg6, carg7)
+	runtime.KeepAlive(renderer)
+	runtime.KeepAlive(part)
+	runtime.KeepAlive(y1)
+	runtime.KeepAlive(x11)
+	runtime.KeepAlive(x21)
+	runtime.KeepAlive(y2)
+	runtime.KeepAlive(x12)
+	runtime.KeepAlive(x22)
+}
+
+// ParentEnd calls the default implementations of the end virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+//
+// Do renderer-specific cleanup after drawing
+func (renderer *RendererInstance) ParentEnd() {
+	var carg0 *C.PangoRenderer
+
+	parentclass := (*C.PangoRendererClass)(classdata.PeekParentClass(UnsafeRendererToGlibNone(renderer)))
+
+	C._gotk4_pango1_Renderer_virtual_end(unsafe.Pointer(parentclass.end), carg0)
+	runtime.KeepAlive(renderer)
+}
+
+// ParentPartChanged calls the default implementations of the part_changed virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- part RenderPart: the part for which rendering has changed. 
+//
+// Informs Pango that the way that the rendering is done
+// for @part has changed.
+// 
+// This should be called if the rendering changes in a way that would
+// prevent multiple pieces being joined together into one drawing call.
+// For instance, if a subclass of `PangoRenderer` was to add a stipple
+// option for drawing underlines, it needs to call
+// 
+// ```
+// pango_renderer_part_changed (render, PANGO_RENDER_PART_UNDERLINE);
+// ```
+// 
+// When the stipple changes or underlines with different stipples
+// might be joined together. Pango automatically calls this for
+// changes to colors. (See [method@Pango.Renderer.set_color])
+func (renderer *RendererInstance) ParentPartChanged(part RenderPart) {
+	var carg0 *C.PangoRenderer
+	var carg1 C.PangoRenderPart // in, none, casted
+
+	parentclass := (*C.PangoRendererClass)(classdata.PeekParentClass(UnsafeRendererToGlibNone(renderer)))
+
+	carg1 = C.PangoRenderPart(part)
+
+	C._gotk4_pango1_Renderer_virtual_part_changed(unsafe.Pointer(parentclass.part_changed), carg0, carg1)
+	runtime.KeepAlive(renderer)
+	runtime.KeepAlive(part)
+}
+
+// ParentPrepareRun calls the default implementations of the prepare_run virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- run *LayoutRun 
+//
+// updates the renderer for a new run
+func (renderer *RendererInstance) ParentPrepareRun(run *LayoutRun) {
+	var carg0 *C.PangoRenderer
+	var carg1 *C.PangoLayoutRun // in, transfer: none, C Pointers: 1, Name: LayoutRun
+
+	parentclass := (*C.PangoRendererClass)(classdata.PeekParentClass(UnsafeRendererToGlibNone(renderer)))
+
+	_ = run
+	_ = carg1
+	panic("unimplemented conversion of *LayoutRun (PangoLayoutRun*)")
+
+	C._gotk4_pango1_Renderer_virtual_prepare_run(unsafe.Pointer(parentclass.prepare_run), carg0, carg1)
+	runtime.KeepAlive(renderer)
+	runtime.KeepAlive(run)
 }
 
 // RegisterRendererSubClass is used to register a go subclass of PangoRenderer. For this to work safely please implement the

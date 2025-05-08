@@ -1,6 +1,7 @@
 package gobject
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/diamondburned/gotk4/pkg/core/classdata"
@@ -14,6 +15,21 @@ import (
 // extern void _gotk4_gobject2_Object_get_property(GObject *, guint, GValue *, GParamSpec *);
 // extern void _gotk4_gobject2_Object_set_property(GObject *, guint, GValue *, GParamSpec *);
 // extern void _gotk4_gobject2_Object_finalize(GObject *);
+// void _gotk4_gobject2_Object_virtual_constructed(void* fnptr, GObject* carg0) {
+// 	return ((void (*) (GObject*))(fnptr))(carg0);
+// }
+// void _gotk4_gobject2_Object_virtual_dispose(void* fnptr, GObject* carg0) {
+// 	return ((void (*) (GObject*))(fnptr))(carg0);
+// }
+// void _gotk4_gobject2_Object_virtual_get_property(void* fnptr, GObject* carg0, guint id, GValue* value, GParamSpec* pspec) {
+// 	return ((void (*) (GObject*, guint, GValue*, GParamSpec*))(fnptr))(carg0, id, value, pspec);
+// }
+// void _gotk4_gobject2_Object_virtual_set_property(void* fnptr, GObject* carg0, guint id, GValue* value, GParamSpec* pspec) {
+// 	return ((void (*) (GObject*, guint, GValue*, GParamSpec*))(fnptr))(carg0, id, value, pspec);
+// }
+// void _gotk4_gobject2_Object_virtual_finalize(void* fnptr, GObject* carg0) {
+// 	return ((void (*) (GObject*))(fnptr))(carg0);
+// }
 import "C"
 
 type ObjectClass struct {
@@ -78,8 +94,9 @@ type ObjectOverrides[Instance Object] struct {
 	// The constructed function is called by g_object_new() as the final step of the object creation process.
 	// At the point of the call, all construction properties have been set on the object. The purpose of this
 	// call is to allow for object initialisation steps that can only be performed after construction properties
-	// have been set. constructed implementors should chain up to the constructed call of their parent class to
-	// allow it to complete its initialisation.
+	// have been set.
+	//
+	// The bindings automatically call the parent class constructed method after this function returns.
 	Constructed func(Instance)
 
 	// The dispose function is supposed to drop all references to other objects, but keep the instance otherwise intact,
@@ -90,10 +107,11 @@ type ObjectOverrides[Instance Object] struct {
 	GetProperty func(instance Instance, id uint, pspec *ParamSpec) any
 	SetProperty func(instance Instance, id uint, value any, pspec *ParamSpec)
 
-	// Instance finalization function, should finish the finalization of the instance begun in dispose and chain up to the
-	// finalize method of the parent class.
+	// Instance finalization function, should finish the finalization of the instance begun in dispose.
 	//
 	// This is additionally wrapped by the bindings to clean up the instance data.
+	//
+	// The bindings automatically call the parent class finalize method after this function returns.
 	Finalize func(Instance)
 }
 
@@ -117,6 +135,8 @@ func UnsafeApplyObjectOverrides[Instance Object](gclass unsafe.Pointer, override
 				obj = UnsafeObjectFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				overrides.Constructed(obj)
+
+				obj.ParentConstructed()
 			},
 		)
 	}
@@ -194,6 +214,8 @@ func UnsafeApplyObjectOverrides[Instance Object](gclass unsafe.Pointer, override
 			}
 
 			removeInstanceFromPrivateData(obj)
+
+			obj.ParentFinalize()
 		},
 	)
 }
@@ -220,4 +242,30 @@ func RegisterObjectSubClass[InstanceT Object](
 		},
 		interfaceInits...,
 	)
+}
+
+// Parent virtual method calls on Object
+
+// ParentConstructed calls the parent's constructed virtual method. This should not be needed in user code,
+// as the bindings will call this automatically when creating a new instance of the object.
+func (obj *ObjectInstance) ParentConstructed() {
+	var carg0 *C.GObject
+
+	parentclass := (*C.GObjectClass)(classdata.PeekParentClass(obj.unsafe()))
+
+	C._gotk4_gobject2_Object_virtual_constructed(unsafe.Pointer(parentclass.constructed), carg0)
+	runtime.KeepAlive(obj)
+}
+
+// TODO: ParentDispose, ParentGetProperty, ParentSetProperty
+
+// ParentFinalize calls the parent's finalize virtual method. This should not be needed in user code,
+// as the bindings will call this automatically when finalizing the object.
+func (obj *ObjectInstance) ParentFinalize() {
+	var carg0 *C.GObject
+
+	parentclass := (*C.GObjectClass)(classdata.PeekParentClass(obj.unsafe()))
+
+	C._gotk4_gobject2_Object_virtual_finalize(unsafe.Pointer(parentclass.finalize), carg0)
+	runtime.KeepAlive(obj)
 }

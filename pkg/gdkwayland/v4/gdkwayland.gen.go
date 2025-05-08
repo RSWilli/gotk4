@@ -44,6 +44,11 @@ func init() {
 }
 
 // WaylandToplevelExported wraps GdkWaylandToplevelExported
+// 
+// The function takes the following parameters:
+// 
+// 	- toplevel WaylandToplevel: the `GdkToplevel` that is exported 
+// 	- handle string: the handle 
 //
 // Callback that gets called when the handle for a surface has been
 // obtained from the Wayland compositor.
@@ -625,7 +630,7 @@ func unsafeWrapWaylandToplevel(base *gobject.ObjectInstance) *WaylandToplevelIns
 			},
 		},
 		ToplevelInstance: gdk.ToplevelInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -831,7 +836,7 @@ func unsafeWrapWaylandPopup(base *gobject.ObjectInstance) *WaylandPopupInstance 
 			},
 		},
 		PopupInstance: gdk.PopupInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }

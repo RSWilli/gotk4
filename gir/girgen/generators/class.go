@@ -21,7 +21,7 @@ type ClassGenerator struct {
 	// This includes generated signal connect and emit methods
 	Methods MethodGeneratorList
 
-	Overrides Generator
+	Overrides *GoOverridesGenerator
 }
 
 func (g *ClassGenerator) Generate(w *file.Package) {
@@ -62,6 +62,14 @@ func (g *ClassGenerator) Generate(w *file.Package) {
 	w.Go().NewSection()
 
 	g.Methods.GenerateInterfaceSignatures(w)
+
+	w.Go().NewSection()
+	if g.Overrides != nil {
+		fmt.Fprintln(w.Go(), "// chain up virtual methods:")
+		w.Go().NewSection()
+
+		g.Overrides.VirtualMethods.GenerateInterfaceSignatures(w)
+	}
 
 	w.Go().Unindent()
 	fmt.Fprintf(w.Go(), "}\n\n")
@@ -108,8 +116,11 @@ func (g *ClassGenerator) Generate(w *file.Package) {
 		w,
 		g.SubGenerators,
 		g.Methods,
-		g.Overrides,
 	)
+
+	if g.Overrides != nil {
+		g.Overrides.Generate(w)
+	}
 
 	if !g.Final {
 		g.generateRegisterSubclassFunction(w)
@@ -190,7 +201,7 @@ func NewClassGenerator(c *typesystem.Class) *ClassGenerator {
 		Class:     c,
 		Marshaler: marshaler,
 
-		Overrides: NoopGenerator{},
+		Overrides: nil,
 	}
 
 	if !c.Final {

@@ -3574,6 +3574,8 @@ var _ InitiallyUnowned = (*InitiallyUnownedInstance)(nil)
 type InitiallyUnowned interface {
 	Object
 	upcastToGInitiallyUnowned() *InitiallyUnownedInstance
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapInitiallyUnowned(base *ObjectInstance) *InitiallyUnownedInstance {

@@ -5254,6 +5254,13 @@ func (f URIParamsFlags) String() string {
 }
 
 // LogFunc wraps GLogFunc
+// 
+// The function takes the following parameters:
+// 
+// 	- logDomain string: the log domain of the message 
+// 	- logLevel LogLevelFlags: the log level of the message (including the
+//   fatal and recursion flags) 
+// 	- message string: the message to process 
 //
 // Specifies the prototype of log handler functions.
 // 
@@ -5268,6 +5275,15 @@ func (f URIParamsFlags) String() string {
 type LogFunc func(logDomain string, logLevel LogLevelFlags, message string)
 
 // LogWriterFunc wraps GLogWriterFunc
+// 
+// The function takes the following parameters:
+// 
+// 	- logLevel LogLevelFlags: log level of the message 
+// 	- fields []LogField: fields forming the message 
+// 
+// The function returns the following values:
+// 
+// 	- goret LogWriterOutput 
 //
 // Writer function for log entries. A log entry is a collection of one or more
 // #GLogFields, using the standard [field names from journal
@@ -5290,6 +5306,13 @@ type LogFunc func(logDomain string, logLevel LogLevelFlags, message string)
 type LogWriterFunc func(logLevel LogLevelFlags, fields []LogField) (goret LogWriterOutput)
 
 // SourceFunc wraps GSourceFunc
+// 
+// The function takes the following parameters:
+// 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
 //
 // Specifies the type of function passed to [func@GLib.timeout_add],
 // [func@GLib.timeout_add_full], [func@GLib.idle_add], and
@@ -5301,6 +5324,9 @@ type LogWriterFunc func(logLevel LogLevelFlags, fields []LogField) (goret LogWri
 type SourceFunc func() (goret bool)
 
 // SourceOnceFunc wraps GSourceOnceFunc
+// 
+// The function takes the following parameters:
+// 
 //
 // A source function that is only called once before being removed from the main
 // context automatically.
@@ -5309,6 +5335,12 @@ type SourceFunc func() (goret bool)
 type SourceOnceFunc func()
 
 // ChildWatchFunc wraps GChildWatchFunc
+// 
+// The function takes the following parameters:
+// 
+// 	- pid Pid: the process id of the child process 
+// 	- waitStatus int32: Status information about the child process, encoded
+//               in a platform-specific manner 
 //
 // Prototype of a #GChildWatchSource callback, called when a child
 // process has exited.

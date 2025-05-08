@@ -25,7 +25,7 @@ type InterfaceGenerator struct {
 	// This includes generated signal connect and emit methods
 	Methods MethodGeneratorList
 
-	Overrides Generator
+	Overrides *GoOverridesGenerator
 }
 
 func (g *InterfaceGenerator) Generate(w *file.Package) {
@@ -38,7 +38,7 @@ func (g *InterfaceGenerator) Generate(w *file.Package) {
 	fmt.Fprintf(w.Go(), "type %s struct {\n", g.GoType(0))
 	fmt.Fprintf(w.Go(), "\t_ [0]func() // equal guard\n")
 
-	fmt.Fprintf(w.Go(), "\tInstance %s\n", g.Parent.NamespacedGoType(0))
+	fmt.Fprintf(w.Go(), "\t%s\n", g.Parent.NamespacedGoType(0))
 
 	// for _, inter := range g.Prerequesite {
 	// 	fmt.Fprintf(w.Go(), "\t*%s\n", inter.GoType(0))
@@ -54,6 +54,8 @@ func (g *InterfaceGenerator) Generate(w *file.Package) {
 		fmt.Fprintf(w.Go(), "%sExtManual // handwritten functions\n", g.GoInterfaceName)
 	}
 
+	fmt.Fprintf(w.Go(), "%s\n", g.Parent.NamespacedGoType(1))
+
 	fmt.Fprintf(w.Go(), "%s() *%s\n", g.GoPrivateUpcastMethod, g.GoType(0))
 	// fmt.Fprintln(w.Go(), g.Parent.WithForeignNamespace(g.Parent.Type.GoInterfaceName))
 	// for inter := range g.PrerequesitesGoInterfaceNames() {
@@ -63,6 +65,14 @@ func (g *InterfaceGenerator) Generate(w *file.Package) {
 	w.Go().NewSection()
 
 	g.Methods.GenerateInterfaceSignatures(w)
+
+	w.Go().NewSection()
+	if g.Overrides != nil {
+		fmt.Fprintln(w.Go(), "// chain up virtual methods:")
+		w.Go().NewSection()
+
+		g.Overrides.VirtualMethods.GenerateInterfaceSignatures(w)
+	}
 
 	w.Go().Unindent()
 	fmt.Fprintf(w.Go(), "}\n\n")
@@ -76,7 +86,7 @@ func (g *InterfaceGenerator) Generate(w *file.Package) {
 	fmt.Fprintf(w.Go(), "return &%s{\n", g.GoType(0))
 	w.Go().Indent()
 
-	fmt.Fprintf(w.Go(), "Instance: *%s,\n", baseClassIdentifier)
+	fmt.Fprintf(w.Go(), "%s: *%s,\n", g.Parent.Type.GoType(0), baseClassIdentifier)
 	w.Go().Unindent()
 
 	fmt.Fprintf(w.Go(), "}\n")
@@ -112,7 +122,7 @@ func (g *InterfaceGenerator) Generate(w *file.Package) {
 	mkTransfer := func(transfername, baseTransferName string) {
 		fmt.Fprintf(w.Go(), "func %s(c %s) unsafe.Pointer {\n", transfername, g.GoInterfaceName)
 		fmt.Fprintf(w.Go(), "\ti := c.%s()\n", g.GoPrivateUpcastMethod)
-		fmt.Fprintf(w.Go(), "\treturn %s(&i.Instance)\n", baseTransferName)
+		fmt.Fprintf(w.Go(), "\treturn %s(i)\n", baseTransferName)
 		fmt.Fprintf(w.Go(), "}\n\n")
 	}
 
@@ -174,7 +184,7 @@ func wrapInterface(w file.CodeWriter, t typesystem.CouldBeForeign[*typesystem.In
 
 	w.Indent()
 
-	fmt.Fprintf(w, "Instance: *%s,\n", baseClassIdentifier)
+	fmt.Fprintf(w, "%s: *%s,\n", t.Type.Parent.Type.GoType(0), baseClassIdentifier)
 
 	w.Unindent()
 

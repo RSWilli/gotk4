@@ -1118,12 +1118,29 @@ func (f PathForEachFlags) String() string {
 }
 
 // ParseErrorFunc wraps GskParseErrorFunc
+// 
+// The function takes the following parameters:
+// 
+// 	- start *ParseLocation: start of the error location 
+// 	- end *ParseLocation: end of the error location 
+// 	- err error: the error 
 //
 // Type of callback that is called when an error occurs
 // during node deserialization.
 type ParseErrorFunc func(start *ParseLocation, end *ParseLocation, err error)
 
 // PathForEachFunc wraps GskPathForeachFunc
+// 
+// The function takes the following parameters:
+// 
+// 	- op PathOperation: The operation 
+// 	- pts *graphene.Point: The points of the operation 
+// 	- nPts uint: The number of points 
+// 	- weight float32: The weight for conic curves, or unused if not a conic curve 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
 //
 // Prototype of the callback to iterate through the operations of
 // a path.
@@ -1272,6 +1289,8 @@ var _ GLShader = (*GLShaderInstance)(nil)
 type GLShader interface {
 	gobject.Object
 	upcastToGskGLShader() *GLShaderInstance
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapGLShader(base *gobject.ObjectInstance) *GLShaderInstance {

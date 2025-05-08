@@ -9197,6 +9197,14 @@ func (f TextSearchFlags) String() string {
 }
 
 // AssistantPageFunc wraps GtkAssistantPageFunc
+// 
+// The function takes the following parameters:
+// 
+// 	- currentPage int32: The page number used to calculate the next page. 
+// 
+// The function returns the following values:
+// 
+// 	- goret int32 
 //
 // Type of callback used to calculate the next page in a `GtkAssistant`.
 // 
@@ -9207,12 +9215,24 @@ func (f TextSearchFlags) String() string {
 type AssistantPageFunc func(currentPage int32) (goret int32)
 
 // ExpressionNotify wraps GtkExpressionNotify
+// 
+// The function takes the following parameters:
+// 
 //
 // Callback called by gtk_expression_watch() when the
 // expression value changes.
 type ExpressionNotify func()
 
 // FontFilterFunc wraps GtkFontFilterFunc
+// 
+// The function takes the following parameters:
+// 
+// 	- family pango.FontFamily: a `PangoFontFamily` 
+// 	- face pango.FontFace: a `PangoFontFace` belonging to @family 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
 //
 // The type of function that is used for deciding what fonts get
 // shown in a `GtkFontChooser`.
@@ -9221,6 +9241,11 @@ type ExpressionNotify func()
 type FontFilterFunc func(family pango.FontFamily, face pango.FontFace) (goret bool)
 
 // PageSetupDoneFunc wraps GtkPageSetupDoneFunc
+// 
+// The function takes the following parameters:
+// 
+// 	- pageSetup PageSetup: the `GtkPageSetup` that has been passed to
+//   gtk_print_run_page_setup_dialog_async() 
 //
 // The type of function that is passed to
 // gtk_print_run_page_setup_dialog_async().
@@ -9230,6 +9255,13 @@ type FontFilterFunc func(family pango.FontFamily, face pango.FontFace) (goret bo
 type PageSetupDoneFunc func(pageSetup PageSetup)
 
 // TextBufferCommitNotify wraps GtkTextBufferCommitNotify
+// 
+// The function takes the following parameters:
+// 
+// 	- buffer TextBuffer: the text buffer being notified 
+// 	- flags TextBufferNotifyFlags: the type of commit notification 
+// 	- position uint: the position of the text operation 
+// 	- length uint: the length of the text operation in characters 
 //
 // A notification callback used by [method@Gtk.TextBuffer.add_commit_notify].
 // 
@@ -9266,23 +9298,52 @@ type PageSetupDoneFunc func(pageSetup PageSetup)
 type TextBufferCommitNotify func(buffer TextBuffer, flags TextBufferNotifyFlags, position uint, length uint)
 
 // TextCharPredicate wraps GtkTextCharPredicate
+// 
+// The function takes the following parameters:
+// 
+// 	- ch uint32: a Unicode code point 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
 //
 // The predicate function used by gtk_text_iter_forward_find_char() and
 // gtk_text_iter_backward_find_char().
 type TextCharPredicate func(ch uint32) (goret bool)
 
 // TextTagTableForEach wraps GtkTextTagTableForeach
+// 
+// The function takes the following parameters:
+// 
+// 	- tag TextTag: the `GtkTextTag` 
 //
 // A function used with gtk_text_tag_table_foreach(),
 // to iterate over every `GtkTextTag` inside a `GtkTextTagTable`.
 type TextTagTableForEach func(tag TextTag)
 
 // TickCallback wraps GtkTickCallback
+// 
+// The function takes the following parameters:
+// 
+// 	- widget Widget: the widget 
+// 	- frameClock gdk.FrameClock: the frame clock for the widget (same as calling gtk_widget_get_frame_clock()) 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
 //
 // Callback type for adding a function to update animations. See gtk_widget_add_tick_callback().
 type TickCallback func(widget Widget, frameClock gdk.FrameClock) (goret bool)
 
 // FlowBoxFilterFunc wraps GtkFlowBoxFilterFunc
+// 
+// The function takes the following parameters:
+// 
+// 	- child FlowBoxChild: a `GtkFlowBoxChild` that may be filtered 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
 //
 // A function that will be called whenever a child changes
 // or is added.
@@ -9291,6 +9352,11 @@ type TickCallback func(widget Widget, frameClock gdk.FrameClock) (goret bool)
 type FlowBoxFilterFunc func(child FlowBoxChild) (goret bool)
 
 // FlowBoxForEachFunc wraps GtkFlowBoxForeachFunc
+// 
+// The function takes the following parameters:
+// 
+// 	- box FlowBox: a `GtkFlowBox` 
+// 	- child FlowBoxChild: a `GtkFlowBoxChild` 
 //
 // A function used by gtk_flow_box_selected_foreach().
 // 
@@ -9298,18 +9364,40 @@ type FlowBoxFilterFunc func(child FlowBoxChild) (goret bool)
 type FlowBoxForEachFunc func(box FlowBox, child FlowBoxChild)
 
 // FlowBoxSortFunc wraps GtkFlowBoxSortFunc
+// 
+// The function takes the following parameters:
+// 
+// 	- child1 FlowBoxChild: the first child 
+// 	- child2 FlowBoxChild: the second child 
+// 
+// The function returns the following values:
+// 
+// 	- goret int32 
 //
 // A function to compare two children to determine which
 // should come first.
 type FlowBoxSortFunc func(child1 FlowBoxChild, child2 FlowBoxChild) (goret int32)
 
 // ListBoxFilterFunc wraps GtkListBoxFilterFunc
+// 
+// The function takes the following parameters:
+// 
+// 	- row ListBoxRow: the row that may be filtered 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
 //
 // Will be called whenever the row changes or is added and lets you control
 // if the row should be visible or not.
 type ListBoxFilterFunc func(row ListBoxRow) (goret bool)
 
 // ListBoxForEachFunc wraps GtkListBoxForeachFunc
+// 
+// The function takes the following parameters:
+// 
+// 	- box ListBox: a `GtkListBox` 
+// 	- row ListBoxRow: a `GtkListBoxRow` 
 //
 // A function used by gtk_list_box_selected_foreach().
 // 
@@ -9317,11 +9405,25 @@ type ListBoxFilterFunc func(row ListBoxRow) (goret bool)
 type ListBoxForEachFunc func(box ListBox, row ListBoxRow)
 
 // ListBoxSortFunc wraps GtkListBoxSortFunc
+// 
+// The function takes the following parameters:
+// 
+// 	- row1 ListBoxRow: the first row 
+// 	- row2 ListBoxRow: the second row 
+// 
+// The function returns the following values:
+// 
+// 	- goret int32 
 //
 // Compare two rows to determine which should be first.
 type ListBoxSortFunc func(row1 ListBoxRow, row2 ListBoxRow) (goret int32)
 
 // ListBoxUpdateHeaderFunc wraps GtkListBoxUpdateHeaderFunc
+// 
+// The function takes the following parameters:
+// 
+// 	- row ListBoxRow: the row to update 
+// 	- before ListBoxRow (nullable): the row before @row, or %NULL if it is first 
 //
 // Whenever @row changes or which row is before @row changes this
 // is called, which lets you update the header on @row.
@@ -9331,6 +9433,10 @@ type ListBoxSortFunc func(row1 ListBoxRow, row2 ListBoxRow) (goret int32)
 type ListBoxUpdateHeaderFunc func(row ListBoxRow, before ListBoxRow)
 
 // MenuButtonCreatePopupFunc wraps GtkMenuButtonCreatePopupFunc
+// 
+// The function takes the following parameters:
+// 
+// 	- menuButton MenuButton: the `GtkMenuButton` 
 //
 // User-provided callback function to create a popup for a
 // `GtkMenuButton` on demand.
@@ -9341,6 +9447,15 @@ type ListBoxUpdateHeaderFunc func(row ListBoxRow, before ListBoxRow)
 type MenuButtonCreatePopupFunc func(menuButton MenuButton)
 
 // ScaleFormatValueFunc wraps GtkScaleFormatValueFunc
+// 
+// The function takes the following parameters:
+// 
+// 	- scale Scale: The `GtkScale` 
+// 	- value float64: The numeric value to format 
+// 
+// The function returns the following values:
+// 
+// 	- goret string 
 //
 // Function that formats the value of a scale.
 // 
@@ -10480,7 +10595,7 @@ func TestWidgetWaitForDraw(widget Widget) {
 // AccessibleInstance is the instance type used by all types implementing GtkAccessible. It is used internally by the bindings. Users should use the interface [Accessible] instead.
 type AccessibleInstance struct {
 	_ [0]func() // equal guard
-	Instance gobject.ObjectInstance
+	gobject.ObjectInstance
 }
 
 var _ Accessible = (*AccessibleInstance)(nil)
@@ -10517,6 +10632,7 @@ var _ Accessible = (*AccessibleInstance)(nil)
 // by calling [method@Gtk.Accessible.set_accessible_parent] and
 // updating the sibling by [method@Gtk.Accessible.update_next_accessible_sibling].
 type Accessible interface {
+	gobject.Object
 	upcastToGtkAccessible() *AccessibleInstance
 
 	// Announce wraps gtk_accessible_announce
@@ -10706,13 +10822,84 @@ type Accessible interface {
 	// 
 	// This function is meant to be used by language bindings.
 	UpdateStateValue([]AccessibleState, []gobject.Value)
+
+	// chain up virtual methods:
+
+	// ParentGetAccessibleParent calls the default implementations of the get_accessible_parent virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret Accessible (nullable) 
+	//
+	// Retrieves the accessible parent for an accessible object.
+	// 
+	// This function returns `NULL` for top level widgets.
+	ParentGetAccessibleParent() Accessible
+	// ParentGetAtContext calls the default implementations of the get_at_context virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret ATContext (nullable) 
+	//
+	// Retrieves the accessible implementation for the given `GtkAccessible`.
+	ParentGetAtContext() ATContext
+	// ParentGetBounds calls the default implementations of the get_bounds virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- x int32: the x coordinate of the top left corner of the accessible 
+	// 	- y int32: the y coordinate of the top left corner of the widget 
+	// 	- width int32: the width of the accessible object 
+	// 	- height int32: the height of the accessible object 
+	// 	- goret bool 
+	//
+	// Queries the coordinates and dimensions of this accessible
+	// 
+	// This functionality can be overridden by `GtkAccessible`
+	// implementations, e.g. to get the bounds from an ignored
+	// child widget.
+	ParentGetBounds() (int32, int32, int32, int32, bool)
+	// ParentGetFirstAccessibleChild calls the default implementations of the get_first_accessible_child virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret Accessible (nullable) 
+	//
+	// Retrieves the first accessible child of an accessible object.
+	ParentGetFirstAccessibleChild() Accessible
+	// ParentGetNextAccessibleSibling calls the default implementations of the get_next_accessible_sibling virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret Accessible (nullable) 
+	//
+	// Retrieves the next accessible sibling of an accessible object
+	ParentGetNextAccessibleSibling() Accessible
+	// ParentGetPlatformState calls the default implementations of the get_platform_state virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- state AccessiblePlatformState: platform state to query 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	//
+	// Query a platform state, such as focus.
+	// 
+	// See gtk_accessible_platform_changed().
+	// 
+	// This functionality can be overridden by `GtkAccessible`
+	// implementations, e.g. to get platform state from an ignored
+	// child widget, as is the case for `GtkText` wrappers.
+	ParentGetPlatformState(state AccessiblePlatformState) bool
 }
 
 var _ Accessible = (*AccessibleInstance)(nil)
 
 func unsafeWrapAccessible(base *gobject.ObjectInstance) *AccessibleInstance {
 	return &AccessibleInstance{
-		Instance: *base,
+		ObjectInstance: *base,
 	}
 }
 
@@ -10742,13 +10929,13 @@ func UnsafeAccessibleFromGlibBorrow(c unsafe.Pointer) Accessible {
 // UnsafeAccessibleToGlibNone is used to convert the instance to it's C value GtkAccessible. This is used by the bindings internally.
 func UnsafeAccessibleToGlibNone(c Accessible) unsafe.Pointer {
 	i := c.upcastToGtkAccessible()
-	return gobject.UnsafeObjectToGlibNone(&i.Instance)
+	return gobject.UnsafeObjectToGlibNone(i)
 }
 
 // UnsafeAccessibleToGlibFull is used to convert the instance to it's C value GtkAccessible, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeAccessibleToGlibFull(c Accessible) unsafe.Pointer {
 	i := c.upcastToGtkAccessible()
-	return gobject.UnsafeObjectToGlibFull(&i.Instance)
+	return gobject.UnsafeObjectToGlibFull(i)
 }
 
 // Announce wraps gtk_accessible_announce
@@ -11217,11 +11404,17 @@ type AccessibleOverrides[Instance Accessible] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret Accessible (nullable) 
+	//
+	// Retrieves the accessible parent for an accessible object.
+	// 
+	// This function returns `NULL` for top level widgets.
 	GetAccessibleParent func(Instance) Accessible
 	// GetAtContext allows you to override the implementation of the virtual method get_at_context.
 	// The function returns the following values:
 	// 
 	// 	- goret ATContext (nullable) 
+	//
+	// Retrieves the accessible implementation for the given `GtkAccessible`.
 	GetAtContext func(Instance) ATContext
 	// GetBounds allows you to override the implementation of the virtual method get_bounds.
 	// The function returns the following values:
@@ -11231,16 +11424,26 @@ type AccessibleOverrides[Instance Accessible] struct {
 	// 	- width int32: the width of the accessible object 
 	// 	- height int32: the height of the accessible object 
 	// 	- goret bool 
+	//
+	// Queries the coordinates and dimensions of this accessible
+	// 
+	// This functionality can be overridden by `GtkAccessible`
+	// implementations, e.g. to get the bounds from an ignored
+	// child widget.
 	GetBounds func(Instance) (int32, int32, int32, int32, bool)
 	// GetFirstAccessibleChild allows you to override the implementation of the virtual method get_first_accessible_child.
 	// The function returns the following values:
 	// 
 	// 	- goret Accessible (nullable) 
+	//
+	// Retrieves the first accessible child of an accessible object.
 	GetFirstAccessibleChild func(Instance) Accessible
 	// GetNextAccessibleSibling allows you to override the implementation of the virtual method get_next_accessible_sibling.
 	// The function returns the following values:
 	// 
 	// 	- goret Accessible (nullable) 
+	//
+	// Retrieves the next accessible sibling of an accessible object
 	GetNextAccessibleSibling func(Instance) Accessible
 	// GetPlatformState allows you to override the implementation of the virtual method get_platform_state.
 	// The function takes the following parameters:
@@ -11250,6 +11453,14 @@ type AccessibleOverrides[Instance Accessible] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
+	//
+	// Query a platform state, such as focus.
+	// 
+	// See gtk_accessible_platform_changed().
+	// 
+	// This functionality can be overridden by `GtkAccessible`
+	// implementations, e.g. to get platform state from an ignored
+	// child widget, as is the case for `GtkText` wrappers.
 	GetPlatformState func(Instance, AccessiblePlatformState) bool
 }
 
@@ -11401,10 +11612,196 @@ func UnsafeApplyAccessibleOverrides[Instance Accessible](gclass unsafe.Pointer, 
 	}
 }
 
+// ParentGetAccessibleParent calls the default implementations of the get_accessible_parent virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret Accessible (nullable) 
+//
+// Retrieves the accessible parent for an accessible object.
+// 
+// This function returns `NULL` for top level widgets.
+func (self *AccessibleInstance) ParentGetAccessibleParent() Accessible {
+	var carg0 *C.GtkAccessible
+	var cret  *C.GtkAccessible // return, full, converted, nullable
+
+	parentclass := (*C.GtkAccessibleInterface)(classdata.PeekParentInterface(UnsafeAccessibleToGlibNone(self), uint64(TypeAccessible)))
+
+	cret = C._gotk4_gtk4_Accessible_virtual_get_accessible_parent(unsafe.Pointer(parentclass.get_accessible_parent), carg0)
+	runtime.KeepAlive(self)
+
+	var goret Accessible
+
+	if cret != nil {
+		goret = UnsafeAccessibleFromGlibFull(unsafe.Pointer(cret))
+	}
+
+	return goret
+}
+
+// ParentGetAtContext calls the default implementations of the get_at_context virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret ATContext (nullable) 
+//
+// Retrieves the accessible implementation for the given `GtkAccessible`.
+func (self *AccessibleInstance) ParentGetAtContext() ATContext {
+	var carg0 *C.GtkAccessible
+	var cret  *C.GtkATContext // return, full, converted, nullable
+
+	parentclass := (*C.GtkAccessibleInterface)(classdata.PeekParentInterface(UnsafeAccessibleToGlibNone(self), uint64(TypeAccessible)))
+
+	cret = C._gotk4_gtk4_Accessible_virtual_get_at_context(unsafe.Pointer(parentclass.get_at_context), carg0)
+	runtime.KeepAlive(self)
+
+	var goret ATContext
+
+	if cret != nil {
+		goret = UnsafeATContextFromGlibFull(unsafe.Pointer(cret))
+	}
+
+	return goret
+}
+
+// ParentGetBounds calls the default implementations of the get_bounds virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- x int32: the x coordinate of the top left corner of the accessible 
+// 	- y int32: the y coordinate of the top left corner of the widget 
+// 	- width int32: the width of the accessible object 
+// 	- height int32: the height of the accessible object 
+// 	- goret bool 
+//
+// Queries the coordinates and dimensions of this accessible
+// 
+// This functionality can be overridden by `GtkAccessible`
+// implementations, e.g. to get the bounds from an ignored
+// child widget.
+func (self *AccessibleInstance) ParentGetBounds() (int32, int32, int32, int32, bool) {
+	var carg0 *C.GtkAccessible
+	var carg1 C.int      // out, full, casted, casted C.gint
+	var carg2 C.int      // out, full, casted, casted C.gint
+	var carg3 C.int      // out, full, casted, casted C.gint
+	var carg4 C.int      // out, full, casted, casted C.gint
+	var cret  C.gboolean // return
+
+	parentclass := (*C.GtkAccessibleInterface)(classdata.PeekParentInterface(UnsafeAccessibleToGlibNone(self), uint64(TypeAccessible)))
+
+	cret = C._gotk4_gtk4_Accessible_virtual_get_bounds(unsafe.Pointer(parentclass.get_bounds), carg0, &carg1, &carg2, &carg3, &carg4)
+	runtime.KeepAlive(self)
+
+	var x      int32
+	var y      int32
+	var width  int32
+	var height int32
+	var goret  bool
+
+	x = int32(carg1)
+	y = int32(carg2)
+	width = int32(carg3)
+	height = int32(carg4)
+	if cret != 0 {
+		goret = true
+	}
+
+	return x, y, width, height, goret
+}
+
+// ParentGetFirstAccessibleChild calls the default implementations of the get_first_accessible_child virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret Accessible (nullable) 
+//
+// Retrieves the first accessible child of an accessible object.
+func (self *AccessibleInstance) ParentGetFirstAccessibleChild() Accessible {
+	var carg0 *C.GtkAccessible
+	var cret  *C.GtkAccessible // return, full, converted, nullable
+
+	parentclass := (*C.GtkAccessibleInterface)(classdata.PeekParentInterface(UnsafeAccessibleToGlibNone(self), uint64(TypeAccessible)))
+
+	cret = C._gotk4_gtk4_Accessible_virtual_get_first_accessible_child(unsafe.Pointer(parentclass.get_first_accessible_child), carg0)
+	runtime.KeepAlive(self)
+
+	var goret Accessible
+
+	if cret != nil {
+		goret = UnsafeAccessibleFromGlibFull(unsafe.Pointer(cret))
+	}
+
+	return goret
+}
+
+// ParentGetNextAccessibleSibling calls the default implementations of the get_next_accessible_sibling virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret Accessible (nullable) 
+//
+// Retrieves the next accessible sibling of an accessible object
+func (self *AccessibleInstance) ParentGetNextAccessibleSibling() Accessible {
+	var carg0 *C.GtkAccessible
+	var cret  *C.GtkAccessible // return, full, converted, nullable
+
+	parentclass := (*C.GtkAccessibleInterface)(classdata.PeekParentInterface(UnsafeAccessibleToGlibNone(self), uint64(TypeAccessible)))
+
+	cret = C._gotk4_gtk4_Accessible_virtual_get_next_accessible_sibling(unsafe.Pointer(parentclass.get_next_accessible_sibling), carg0)
+	runtime.KeepAlive(self)
+
+	var goret Accessible
+
+	if cret != nil {
+		goret = UnsafeAccessibleFromGlibFull(unsafe.Pointer(cret))
+	}
+
+	return goret
+}
+
+// ParentGetPlatformState calls the default implementations of the get_platform_state virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- state AccessiblePlatformState: platform state to query 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Query a platform state, such as focus.
+// 
+// See gtk_accessible_platform_changed().
+// 
+// This functionality can be overridden by `GtkAccessible`
+// implementations, e.g. to get platform state from an ignored
+// child widget, as is the case for `GtkText` wrappers.
+func (self *AccessibleInstance) ParentGetPlatformState(state AccessiblePlatformState) bool {
+	var carg0 *C.GtkAccessible
+	var carg1 C.GtkAccessiblePlatformState // in, none, casted
+	var cret  C.gboolean                   // return
+
+	parentclass := (*C.GtkAccessibleInterface)(classdata.PeekParentInterface(UnsafeAccessibleToGlibNone(self), uint64(TypeAccessible)))
+
+	carg1 = C.GtkAccessiblePlatformState(state)
+
+	cret = C._gotk4_gtk4_Accessible_virtual_get_platform_state(unsafe.Pointer(parentclass.get_platform_state), carg0, carg1)
+	runtime.KeepAlive(self)
+	runtime.KeepAlive(state)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
 // AccessibleRangeInstance is the instance type used by all types implementing GtkAccessibleRange. It is used internally by the bindings. Users should use the interface [AccessibleRange] instead.
 type AccessibleRangeInstance struct {
 	_ [0]func() // equal guard
-	Instance gobject.ObjectInstance
+	gobject.ObjectInstance
 }
 
 var _ AccessibleRange = (*AccessibleRangeInstance)(nil)
@@ -11433,14 +11830,33 @@ var _ AccessibleRange = (*AccessibleRangeInstance)(nil)
 // - `GTK_ACCESSIBLE_PROPERTY_VALUE_NOW`
 // - `GTK_ACCESSIBLE_PROPERTY_VALUE_TEXT`
 type AccessibleRange interface {
+	gobject.Object
 	upcastToGtkAccessibleRange() *AccessibleRangeInstance
+
+	// chain up virtual methods:
+
+	// ParentSetCurrentValue calls the default implementations of the set_current_value virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- value float64: the value to set 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	//
+	// Sets the current value of the accessible range.
+	// 
+	// This operation should behave similarly as if the user performed the
+	// action.
+	ParentSetCurrentValue(value float64) bool
 }
 
 var _ AccessibleRange = (*AccessibleRangeInstance)(nil)
 
 func unsafeWrapAccessibleRange(base *gobject.ObjectInstance) *AccessibleRangeInstance {
 	return &AccessibleRangeInstance{
-		Instance: *base,
+		ObjectInstance: *base,
 	}
 }
 
@@ -11470,13 +11886,13 @@ func UnsafeAccessibleRangeFromGlibBorrow(c unsafe.Pointer) AccessibleRange {
 // UnsafeAccessibleRangeToGlibNone is used to convert the instance to it's C value GtkAccessibleRange. This is used by the bindings internally.
 func UnsafeAccessibleRangeToGlibNone(c AccessibleRange) unsafe.Pointer {
 	i := c.upcastToGtkAccessibleRange()
-	return gobject.UnsafeObjectToGlibNone(&i.Instance)
+	return gobject.UnsafeObjectToGlibNone(i)
 }
 
 // UnsafeAccessibleRangeToGlibFull is used to convert the instance to it's C value GtkAccessibleRange, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeAccessibleRangeToGlibFull(c AccessibleRange) unsafe.Pointer {
 	i := c.upcastToGtkAccessibleRange()
-	return gobject.UnsafeObjectToGlibFull(&i.Instance)
+	return gobject.UnsafeObjectToGlibFull(i)
 }
 
 // AccessibleRangeOverrides is the struct used to override the default implementation of virtual methods.
@@ -11490,6 +11906,11 @@ type AccessibleRangeOverrides[Instance AccessibleRange] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
+	//
+	// Sets the current value of the accessible range.
+	// 
+	// This operation should behave similarly as if the user performed the
+	// action.
 	SetCurrentValue func(Instance, float64) bool
 }
 
@@ -11523,10 +11944,46 @@ func UnsafeApplyAccessibleRangeOverrides[Instance AccessibleRange](gclass unsafe
 	}
 }
 
+// ParentSetCurrentValue calls the default implementations of the set_current_value virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- value float64: the value to set 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Sets the current value of the accessible range.
+// 
+// This operation should behave similarly as if the user performed the
+// action.
+func (self *AccessibleRangeInstance) ParentSetCurrentValue(value float64) bool {
+	var carg0 *C.GtkAccessibleRange
+	var carg1 C.double   // in, none, casted, casted C.gdouble
+	var cret  C.gboolean // return
+
+	parentclass := (*C.GtkAccessibleRangeInterface)(classdata.PeekParentInterface(UnsafeAccessibleRangeToGlibNone(self), uint64(TypeAccessibleRange)))
+
+	carg1 = C.double(value)
+
+	cret = C._gotk4_gtk4_AccessibleRange_virtual_set_current_value(unsafe.Pointer(parentclass.set_current_value), carg0, carg1)
+	runtime.KeepAlive(self)
+	runtime.KeepAlive(value)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
 // AccessibleTextInstance is the instance type used by all types implementing GtkAccessibleText. It is used internally by the bindings. Users should use the interface [AccessibleText] instead.
 type AccessibleTextInstance struct {
 	_ [0]func() // equal guard
-	Instance gobject.ObjectInstance
+	gobject.ObjectInstance
 }
 
 var _ AccessibleText = (*AccessibleTextInstance)(nil)
@@ -11542,6 +11999,7 @@ var _ AccessibleText = (*AccessibleTextInstance)(nil)
 // [enum@Gtk.AccessibleProperty.DESCRIPTION] properties for accessible
 // objects containing simple, unformatted text.
 type AccessibleText interface {
+	gobject.Object
 	upcastToGtkAccessibleText() *AccessibleTextInstance
 
 	// UpdateCaretPosition wraps gtk_accessible_text_update_caret_position
@@ -11578,13 +12036,87 @@ type AccessibleText interface {
 	// function every time the selection has moved, in order to notify assistive
 	// technologies.
 	UpdateSelectionBound()
+
+	// chain up virtual methods:
+
+	// ParentGetCaretPosition calls the default implementations of the get_caret_position virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret uint 
+	//
+	// Retrieves the position of the caret inside the accessible object.
+	ParentGetCaretPosition() uint
+	// ParentGetContents calls the default implementations of the get_contents virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- start uint: the beginning of the range, in characters 
+	// 	- end uint: the end of the range, in characters 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret *glib.Bytes 
+	//
+	// Retrieve the current contents of the accessible object within
+	// the given range.
+	// 
+	// If @end is `G_MAXUINT`, the end of the range is the full content
+	// of the accessible object.
+	ParentGetContents(start uint, end uint) *glib.Bytes
+	// ParentGetContentsAt calls the default implementations of the get_contents_at virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- offset uint: the offset, in characters 
+	// 	- granularity AccessibleTextGranularity: the granularity of the query 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- start uint: the start of the range, in characters 
+	// 	- end uint: the end of the range, in characters 
+	// 	- goret *glib.Bytes 
+	//
+	// Retrieve the current contents of the accessible object starting
+	// from the given offset, and using the given granularity.
+	// 
+	// The @start and @end values contain the boundaries of the text.
+	ParentGetContentsAt(offset uint, granularity AccessibleTextGranularity) (uint, uint, *glib.Bytes)
+	// ParentGetExtents calls the default implementations of the get_extents virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- start uint: the start offset, in characters 
+	// 	- end uint: the end offset, in characters,
+	// @extents (out caller-allocates): return location for the extents 
+	// 	- extents *graphene.Rect 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	//
+	// Obtains the extents of a range of text, in widget coordinates.
+	ParentGetExtents(start uint, end uint, extents *graphene.Rect) bool
+	// ParentGetOffset calls the default implementations of the get_offset virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- point *graphene.Point: a point in widget coordinates of @self 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- offset uint: return location for the text offset at @point 
+	// 	- goret bool 
+	//
+	// Gets the text offset at a given point.
+	ParentGetOffset(point *graphene.Point) (uint, bool)
 }
 
 var _ AccessibleText = (*AccessibleTextInstance)(nil)
 
 func unsafeWrapAccessibleText(base *gobject.ObjectInstance) *AccessibleTextInstance {
 	return &AccessibleTextInstance{
-		Instance: *base,
+		ObjectInstance: *base,
 	}
 }
 
@@ -11614,13 +12146,13 @@ func UnsafeAccessibleTextFromGlibBorrow(c unsafe.Pointer) AccessibleText {
 // UnsafeAccessibleTextToGlibNone is used to convert the instance to it's C value GtkAccessibleText. This is used by the bindings internally.
 func UnsafeAccessibleTextToGlibNone(c AccessibleText) unsafe.Pointer {
 	i := c.upcastToGtkAccessibleText()
-	return gobject.UnsafeObjectToGlibNone(&i.Instance)
+	return gobject.UnsafeObjectToGlibNone(i)
 }
 
 // UnsafeAccessibleTextToGlibFull is used to convert the instance to it's C value GtkAccessibleText, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeAccessibleTextToGlibFull(c AccessibleText) unsafe.Pointer {
 	i := c.upcastToGtkAccessibleText()
-	return gobject.UnsafeObjectToGlibFull(&i.Instance)
+	return gobject.UnsafeObjectToGlibFull(i)
 }
 
 // UpdateCaretPosition wraps gtk_accessible_text_update_caret_position
@@ -11697,6 +12229,8 @@ type AccessibleTextOverrides[Instance AccessibleText] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret uint 
+	//
+	// Retrieves the position of the caret inside the accessible object.
 	GetCaretPosition func(Instance) uint
 	// GetContents allows you to override the implementation of the virtual method get_contents.
 	// The function takes the following parameters:
@@ -11707,6 +12241,12 @@ type AccessibleTextOverrides[Instance AccessibleText] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret *glib.Bytes 
+	//
+	// Retrieve the current contents of the accessible object within
+	// the given range.
+	// 
+	// If @end is `G_MAXUINT`, the end of the range is the full content
+	// of the accessible object.
 	GetContents func(Instance, uint, uint) *glib.Bytes
 	// GetContentsAt allows you to override the implementation of the virtual method get_contents_at.
 	// The function takes the following parameters:
@@ -11719,6 +12259,11 @@ type AccessibleTextOverrides[Instance AccessibleText] struct {
 	// 	- start uint: the start of the range, in characters 
 	// 	- end uint: the end of the range, in characters 
 	// 	- goret *glib.Bytes 
+	//
+	// Retrieve the current contents of the accessible object starting
+	// from the given offset, and using the given granularity.
+	// 
+	// The @start and @end values contain the boundaries of the text.
 	GetContentsAt func(Instance, uint, AccessibleTextGranularity) (uint, uint, *glib.Bytes)
 	// GetExtents allows you to override the implementation of the virtual method get_extents.
 	// The function takes the following parameters:
@@ -11731,6 +12276,8 @@ type AccessibleTextOverrides[Instance AccessibleText] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
+	//
+	// Obtains the extents of a range of text, in widget coordinates.
 	GetExtents func(Instance, uint, uint, *graphene.Rect) bool
 	// GetOffset allows you to override the implementation of the virtual method get_offset.
 	// The function takes the following parameters:
@@ -11741,6 +12288,8 @@ type AccessibleTextOverrides[Instance AccessibleText] struct {
 	// 
 	// 	- offset uint: return location for the text offset at @point 
 	// 	- goret bool 
+	//
+	// Gets the text offset at a given point.
 	GetOffset func(Instance, *graphene.Point) (uint, bool)
 }
 
@@ -11876,10 +12425,197 @@ func UnsafeApplyAccessibleTextOverrides[Instance AccessibleText](gclass unsafe.P
 	}
 }
 
+// ParentGetCaretPosition calls the default implementations of the get_caret_position virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret uint 
+//
+// Retrieves the position of the caret inside the accessible object.
+func (self *AccessibleTextInstance) ParentGetCaretPosition() uint {
+	var carg0 *C.GtkAccessibleText
+	var cret  C.uint // return, none, casted, casted C.guint
+
+	parentclass := (*C.GtkAccessibleTextInterface)(classdata.PeekParentInterface(UnsafeAccessibleTextToGlibNone(self), uint64(TypeAccessibleText)))
+
+	cret = C._gotk4_gtk4_AccessibleText_virtual_get_caret_position(unsafe.Pointer(parentclass.get_caret_position), carg0)
+	runtime.KeepAlive(self)
+
+	var goret uint
+
+	goret = uint(cret)
+
+	return goret
+}
+
+// ParentGetContents calls the default implementations of the get_contents virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- start uint: the beginning of the range, in characters 
+// 	- end uint: the end of the range, in characters 
+// 
+// The function returns the following values:
+// 
+// 	- goret *glib.Bytes 
+//
+// Retrieve the current contents of the accessible object within
+// the given range.
+// 
+// If @end is `G_MAXUINT`, the end of the range is the full content
+// of the accessible object.
+func (self *AccessibleTextInstance) ParentGetContents(start uint, end uint) *glib.Bytes {
+	var carg0 *C.GtkAccessibleText
+	var carg1 C.uint    // in, none, casted, casted C.guint
+	var carg2 C.uint    // in, none, casted, casted C.guint
+	var cret  *C.GBytes // return, full, converted
+
+	parentclass := (*C.GtkAccessibleTextInterface)(classdata.PeekParentInterface(UnsafeAccessibleTextToGlibNone(self), uint64(TypeAccessibleText)))
+
+	carg1 = C.uint(start)
+	carg2 = C.uint(end)
+
+	cret = C._gotk4_gtk4_AccessibleText_virtual_get_contents(unsafe.Pointer(parentclass.get_contents), carg0, carg1, carg2)
+	runtime.KeepAlive(self)
+	runtime.KeepAlive(start)
+	runtime.KeepAlive(end)
+
+	var goret *glib.Bytes
+
+	goret = glib.UnsafeBytesFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// ParentGetContentsAt calls the default implementations of the get_contents_at virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- offset uint: the offset, in characters 
+// 	- granularity AccessibleTextGranularity: the granularity of the query 
+// 
+// The function returns the following values:
+// 
+// 	- start uint: the start of the range, in characters 
+// 	- end uint: the end of the range, in characters 
+// 	- goret *glib.Bytes 
+//
+// Retrieve the current contents of the accessible object starting
+// from the given offset, and using the given granularity.
+// 
+// The @start and @end values contain the boundaries of the text.
+func (self *AccessibleTextInstance) ParentGetContentsAt(offset uint, granularity AccessibleTextGranularity) (uint, uint, *glib.Bytes) {
+	var carg0 *C.GtkAccessibleText
+	var carg1 C.uint                         // in, none, casted, casted C.guint
+	var carg2 C.GtkAccessibleTextGranularity // in, none, casted
+	var carg3 C.uint                         // out, full, casted, casted C.guint
+	var carg4 C.uint                         // out, full, casted, casted C.guint
+	var cret  *C.GBytes                      // return, full, converted
+
+	parentclass := (*C.GtkAccessibleTextInterface)(classdata.PeekParentInterface(UnsafeAccessibleTextToGlibNone(self), uint64(TypeAccessibleText)))
+
+	carg1 = C.uint(offset)
+	carg2 = C.GtkAccessibleTextGranularity(granularity)
+
+	cret = C._gotk4_gtk4_AccessibleText_virtual_get_contents_at(unsafe.Pointer(parentclass.get_contents_at), carg0, carg1, carg2, &carg3, &carg4)
+	runtime.KeepAlive(self)
+	runtime.KeepAlive(offset)
+	runtime.KeepAlive(granularity)
+
+	var start uint
+	var end   uint
+	var goret *glib.Bytes
+
+	start = uint(carg3)
+	end = uint(carg4)
+	goret = glib.UnsafeBytesFromGlibFull(unsafe.Pointer(cret))
+
+	return start, end, goret
+}
+
+// ParentGetExtents calls the default implementations of the get_extents virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- start uint: the start offset, in characters 
+// 	- end uint: the end offset, in characters,
+// @extents (out caller-allocates): return location for the extents 
+// 	- extents *graphene.Rect 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Obtains the extents of a range of text, in widget coordinates.
+func (self *AccessibleTextInstance) ParentGetExtents(start uint, end uint, extents *graphene.Rect) bool {
+	var carg0 *C.GtkAccessibleText
+	var carg1 C.uint             // in, none, casted, casted C.guint
+	var carg2 C.uint             // in, none, casted, casted C.guint
+	var carg3 *C.graphene_rect_t // in, none, converted
+	var cret  C.gboolean         // return
+
+	parentclass := (*C.GtkAccessibleTextInterface)(classdata.PeekParentInterface(UnsafeAccessibleTextToGlibNone(self), uint64(TypeAccessibleText)))
+
+	carg1 = C.uint(start)
+	carg2 = C.uint(end)
+	carg3 = (*C.graphene_rect_t)(graphene.UnsafeRectToGlibNone(extents))
+
+	cret = C._gotk4_gtk4_AccessibleText_virtual_get_extents(unsafe.Pointer(parentclass.get_extents), carg0, carg1, carg2, carg3)
+	runtime.KeepAlive(self)
+	runtime.KeepAlive(start)
+	runtime.KeepAlive(end)
+	runtime.KeepAlive(extents)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// ParentGetOffset calls the default implementations of the get_offset virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- point *graphene.Point: a point in widget coordinates of @self 
+// 
+// The function returns the following values:
+// 
+// 	- offset uint: return location for the text offset at @point 
+// 	- goret bool 
+//
+// Gets the text offset at a given point.
+func (self *AccessibleTextInstance) ParentGetOffset(point *graphene.Point) (uint, bool) {
+	var carg0 *C.GtkAccessibleText
+	var carg1 *C.graphene_point_t // in, none, converted
+	var carg2 C.uint              // out, full, casted, casted C.guint
+	var cret  C.gboolean          // return
+
+	parentclass := (*C.GtkAccessibleTextInterface)(classdata.PeekParentInterface(UnsafeAccessibleTextToGlibNone(self), uint64(TypeAccessibleText)))
+
+	carg1 = (*C.graphene_point_t)(graphene.UnsafePointToGlibNone(point))
+
+	cret = C._gotk4_gtk4_AccessibleText_virtual_get_offset(unsafe.Pointer(parentclass.get_offset), carg0, carg1, &carg2)
+	runtime.KeepAlive(self)
+	runtime.KeepAlive(point)
+
+	var offset uint
+	var goret  bool
+
+	offset = uint(carg2)
+	if cret != 0 {
+		goret = true
+	}
+
+	return offset, goret
+}
+
 // ActionableInstance is the instance type used by all types implementing GtkActionable. It is used internally by the bindings. Users should use the interface [Actionable] instead.
 type ActionableInstance struct {
 	_ [0]func() // equal guard
-	Instance gobject.ObjectInstance
+	gobject.ObjectInstance
 }
 
 var _ Actionable = (*ActionableInstance)(nil)
@@ -11900,6 +12636,7 @@ var _ Actionable = (*ActionableInstance)(nil)
 // are added with [method@Gtk.Widget.insert_action_group] will be consulted
 // as well.
 type Actionable interface {
+	gobject.Object
 	upcastToGtkActionable() *ActionableInstance
 
 	// GetActionName wraps gtk_actionable_get_action_name
@@ -11942,13 +12679,44 @@ type Actionable interface {
 	// @detailed_action_name is a string in the format accepted by
 	// [func@Gio.Action.parse_detailed_name].
 	SetDetailedActionName(string)
+
+	// chain up virtual methods:
+
+	// ParentGetActionName calls the default implementations of the get_action_name virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret string (nullable) 
+	//
+	// Gets the action name for @actionable.
+	ParentGetActionName() string
+	// ParentSetActionName calls the default implementations of the set_action_name virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- actionName string (nullable): an action name 
+	//
+	// Specifies the name of the action with which this widget should be
+	// associated.
+	// 
+	// If @action_name is %NULL then the widget will be unassociated from
+	// any previous action.
+	// 
+	// Usually this function is used when the widget is located (or will be
+	// located) within the hierarchy of a `GtkApplicationWindow`.
+	// 
+	// Names are of the form “win.save” or “app.quit” for actions on the
+	// containing [class@ApplicationWindow] or its associated [class@Application],
+	// respectively. This is the same form used for actions in the [class@Gio.Menu]
+	// associated with the window.
+	ParentSetActionName(actionName string)
 }
 
 var _ Actionable = (*ActionableInstance)(nil)
 
 func unsafeWrapActionable(base *gobject.ObjectInstance) *ActionableInstance {
 	return &ActionableInstance{
-		Instance: *base,
+		ObjectInstance: *base,
 	}
 }
 
@@ -11978,13 +12746,13 @@ func UnsafeActionableFromGlibBorrow(c unsafe.Pointer) Actionable {
 // UnsafeActionableToGlibNone is used to convert the instance to it's C value GtkActionable. This is used by the bindings internally.
 func UnsafeActionableToGlibNone(c Actionable) unsafe.Pointer {
 	i := c.upcastToGtkActionable()
-	return gobject.UnsafeObjectToGlibNone(&i.Instance)
+	return gobject.UnsafeObjectToGlibNone(i)
 }
 
 // UnsafeActionableToGlibFull is used to convert the instance to it's C value GtkActionable, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeActionableToGlibFull(c Actionable) unsafe.Pointer {
 	i := c.upcastToGtkActionable()
-	return gobject.UnsafeObjectToGlibFull(&i.Instance)
+	return gobject.UnsafeObjectToGlibFull(i)
 }
 
 // GetActionName wraps gtk_actionable_get_action_name
@@ -12077,11 +12845,27 @@ type ActionableOverrides[Instance Actionable] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret string (nullable) 
+	//
+	// Gets the action name for @actionable.
 	GetActionName func(Instance) string
 	// SetActionName allows you to override the implementation of the virtual method set_action_name.
 	// The function takes the following parameters:
 	// 
 	// 	- actionName string (nullable): an action name 
+	//
+	// Specifies the name of the action with which this widget should be
+	// associated.
+	// 
+	// If @action_name is %NULL then the widget will be unassociated from
+	// any previous action.
+	// 
+	// Usually this function is used when the widget is located (or will be
+	// located) within the hierarchy of a `GtkApplicationWindow`.
+	// 
+	// Names are of the form “win.save” or “app.quit” for actions on the
+	// containing [class@ApplicationWindow] or its associated [class@Application],
+	// respectively. This is the same form used for actions in the [class@Gio.Menu]
+	// associated with the window.
 	SetActionName func(Instance, string)
 }
 
@@ -12133,10 +12917,70 @@ func UnsafeApplyActionableOverrides[Instance Actionable](gclass unsafe.Pointer, 
 	}
 }
 
+// ParentGetActionName calls the default implementations of the get_action_name virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret string (nullable) 
+//
+// Gets the action name for @actionable.
+func (actionable *ActionableInstance) ParentGetActionName() string {
+	var carg0 *C.GtkActionable
+	var cret  *C.char // return, none, string, casted *C.gchar, nullable
+
+	parentclass := (*C.GtkActionableInterface)(classdata.PeekParentInterface(UnsafeActionableToGlibNone(actionable), uint64(TypeActionable)))
+
+	cret = C._gotk4_gtk4_Actionable_virtual_get_action_name(unsafe.Pointer(parentclass.get_action_name), carg0)
+	runtime.KeepAlive(actionable)
+
+	var goret string
+
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
+
+	return goret
+}
+
+// ParentSetActionName calls the default implementations of the set_action_name virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- actionName string (nullable): an action name 
+//
+// Specifies the name of the action with which this widget should be
+// associated.
+// 
+// If @action_name is %NULL then the widget will be unassociated from
+// any previous action.
+// 
+// Usually this function is used when the widget is located (or will be
+// located) within the hierarchy of a `GtkApplicationWindow`.
+// 
+// Names are of the form “win.save” or “app.quit” for actions on the
+// containing [class@ApplicationWindow] or its associated [class@Application],
+// respectively. This is the same form used for actions in the [class@Gio.Menu]
+// associated with the window.
+func (actionable *ActionableInstance) ParentSetActionName(actionName string) {
+	var carg0 *C.GtkActionable
+	var carg1 *C.char // in, none, string, nullable-string
+
+	parentclass := (*C.GtkActionableInterface)(classdata.PeekParentInterface(UnsafeActionableToGlibNone(actionable), uint64(TypeActionable)))
+
+	if actionName != "" {
+		carg1 = (*C.char)(unsafe.Pointer(C.CString(actionName)))
+		defer C.free(unsafe.Pointer(carg1))
+	}
+
+	C._gotk4_gtk4_Actionable_virtual_set_action_name(unsafe.Pointer(parentclass.set_action_name), carg0, carg1)
+	runtime.KeepAlive(actionable)
+	runtime.KeepAlive(actionName)
+}
+
 // BuildableInstance is the instance type used by all types implementing GtkBuildable. It is used internally by the bindings. Users should use the interface [Buildable] instead.
 type BuildableInstance struct {
 	_ [0]func() // equal guard
-	Instance gobject.ObjectInstance
+	gobject.ObjectInstance
 }
 
 var _ Buildable = (*BuildableInstance)(nil)
@@ -12157,6 +13001,7 @@ var _ Buildable = (*BuildableInstance)(nil)
 // An object only needs to implement this interface if it needs to extend the
 // `GtkBuilder` XML format or run any extra routines at deserialization time.
 type Buildable interface {
+	gobject.Object
 	upcastToGtkBuildable() *BuildableInstance
 
 	// GetBuildableID wraps gtk_buildable_get_buildable_id
@@ -12170,13 +13015,85 @@ type Buildable interface {
 	// `GtkBuilder` sets the name based on the ID attribute
 	// of the `&lt;object&gt;` tag used to construct the @buildable.
 	GetBuildableID() string
+
+	// chain up virtual methods:
+
+	// ParentAddChild calls the default implementations of the add_child virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- builder Builder: a `GtkBuilder` 
+	// 	- child gobject.Object: child to add 
+	// 	- typ string (nullable): kind of child or %NULL 
+	//
+	// Adds a child to @buildable. @type is an optional string
+	// describing how the child should be added.
+	ParentAddChild(builder Builder, child gobject.Object, typ string)
+	// ParentGetID calls the default implementations of the get_id virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret string 
+	//
+	// The getter corresponding to @set_id. Implement this
+	//   if you implement @set_id.
+	ParentGetID() string
+	// ParentGetInternalChild calls the default implementations of the get_internal_child virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- builder Builder: a `GtkBuilder` 
+	// 	- childname string: name of child 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret gobject.Object 
+	//
+	// Retrieves the internal child called @childname of the @buildable object.
+	ParentGetInternalChild(builder Builder, childname string) gobject.Object
+	// ParentParserFinished calls the default implementations of the parser_finished virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- builder Builder 
+	//
+	// Called when a builder finishes the parsing
+	//  of a UI definition. It is normally not necessary to implement this,
+	//  unless you need to perform special cleanup actions. `GtkWindow` sets
+	//  the `GtkWidget:visible` property here.
+	ParentParserFinished(builder Builder)
+	// ParentSetBuildableProperty calls the default implementations of the set_buildable_property virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- builder Builder 
+	// 	- name string 
+	// 	- value *gobject.Value 
+	//
+	// Sets a property of a buildable object.
+	//  It is normally not necessary to implement this, g_object_set_property()
+	//  is used by default. `GtkWindow` implements this to delay showing itself
+	//  (i.e. setting the [property@Gtk.Widget:visible] property) until the whole
+	//  interface is created.
+	ParentSetBuildableProperty(builder Builder, name string, value *gobject.Value)
+	// ParentSetID calls the default implementations of the set_id virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- id string 
+	//
+	// Stores the id attribute given in the `GtkBuilder` UI definition.
+	//   `GtkWidget` stores the name as object data. Implement this method if your
+	//   object has some notion of “ID” and it makes sense to map the XML id
+	//   attribute to it.
+	ParentSetID(id string)
 }
 
 var _ Buildable = (*BuildableInstance)(nil)
 
 func unsafeWrapBuildable(base *gobject.ObjectInstance) *BuildableInstance {
 	return &BuildableInstance{
-		Instance: *base,
+		ObjectInstance: *base,
 	}
 }
 
@@ -12206,13 +13123,13 @@ func UnsafeBuildableFromGlibBorrow(c unsafe.Pointer) Buildable {
 // UnsafeBuildableToGlibNone is used to convert the instance to it's C value GtkBuildable. This is used by the bindings internally.
 func UnsafeBuildableToGlibNone(c Buildable) unsafe.Pointer {
 	i := c.upcastToGtkBuildable()
-	return gobject.UnsafeObjectToGlibNone(&i.Instance)
+	return gobject.UnsafeObjectToGlibNone(i)
 }
 
 // UnsafeBuildableToGlibFull is used to convert the instance to it's C value GtkBuildable, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeBuildableToGlibFull(c Buildable) unsafe.Pointer {
 	i := c.upcastToGtkBuildable()
-	return gobject.UnsafeObjectToGlibFull(&i.Instance)
+	return gobject.UnsafeObjectToGlibFull(i)
 }
 
 // GetBuildableID wraps gtk_buildable_get_buildable_id
@@ -12252,11 +13169,17 @@ type BuildableOverrides[Instance Buildable] struct {
 	// 	- builder Builder: a `GtkBuilder` 
 	// 	- child gobject.Object: child to add 
 	// 	- typ string (nullable): kind of child or %NULL 
+	//
+	// Adds a child to @buildable. @type is an optional string
+	// describing how the child should be added.
 	AddChild func(Instance, Builder, gobject.Object, string)
 	// GetID allows you to override the implementation of the virtual method get_id.
 	// The function returns the following values:
 	// 
 	// 	- goret string 
+	//
+	// The getter corresponding to @set_id. Implement this
+	//   if you implement @set_id.
 	GetID func(Instance) string
 	// GetInternalChild allows you to override the implementation of the virtual method get_internal_child.
 	// The function takes the following parameters:
@@ -12267,11 +13190,18 @@ type BuildableOverrides[Instance Buildable] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret gobject.Object 
+	//
+	// Retrieves the internal child called @childname of the @buildable object.
 	GetInternalChild func(Instance, Builder, string) gobject.Object
 	// ParserFinished allows you to override the implementation of the virtual method parser_finished.
 	// The function takes the following parameters:
 	// 
 	// 	- builder Builder 
+	//
+	// Called when a builder finishes the parsing
+	//  of a UI definition. It is normally not necessary to implement this,
+	//  unless you need to perform special cleanup actions. `GtkWindow` sets
+	//  the `GtkWidget:visible` property here.
 	ParserFinished func(Instance, Builder)
 	// SetBuildableProperty allows you to override the implementation of the virtual method set_buildable_property.
 	// The function takes the following parameters:
@@ -12279,11 +13209,22 @@ type BuildableOverrides[Instance Buildable] struct {
 	// 	- builder Builder 
 	// 	- name string 
 	// 	- value *gobject.Value 
+	//
+	// Sets a property of a buildable object.
+	//  It is normally not necessary to implement this, g_object_set_property()
+	//  is used by default. `GtkWindow` implements this to delay showing itself
+	//  (i.e. setting the [property@Gtk.Widget:visible] property) until the whole
+	//  interface is created.
 	SetBuildableProperty func(Instance, Builder, string, *gobject.Value)
 	// SetID allows you to override the implementation of the virtual method set_id.
 	// The function takes the following parameters:
 	// 
 	// 	- id string 
+	//
+	// Stores the id attribute given in the `GtkBuilder` UI definition.
+	//   `GtkWidget` stores the name as object data. Implement this method if your
+	//   object has some notion of “ID” and it makes sense to map the XML id
+	//   attribute to it.
 	SetID func(Instance, string)
 }
 
@@ -12416,10 +13357,182 @@ func UnsafeApplyBuildableOverrides[Instance Buildable](gclass unsafe.Pointer, ov
 	}
 }
 
+// ParentAddChild calls the default implementations of the add_child virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- builder Builder: a `GtkBuilder` 
+// 	- child gobject.Object: child to add 
+// 	- typ string (nullable): kind of child or %NULL 
+//
+// Adds a child to @buildable. @type is an optional string
+// describing how the child should be added.
+func (buildable *BuildableInstance) ParentAddChild(builder Builder, child gobject.Object, typ string) {
+	var carg0 *C.GtkBuildable
+	var carg1 *C.GtkBuilder // in, none, converted
+	var carg2 *C.GObject    // in, none, converted
+	var carg3 *C.char       // in, none, string, nullable-string
+
+	parentclass := (*C.GtkBuildableIface)(classdata.PeekParentInterface(UnsafeBuildableToGlibNone(buildable), uint64(TypeBuildable)))
+
+	carg1 = (*C.GtkBuilder)(UnsafeBuilderToGlibNone(builder))
+	carg2 = (*C.GObject)(gobject.UnsafeObjectToGlibNone(child))
+	if typ != "" {
+		carg3 = (*C.char)(unsafe.Pointer(C.CString(typ)))
+		defer C.free(unsafe.Pointer(carg3))
+	}
+
+	C._gotk4_gtk4_Buildable_virtual_add_child(unsafe.Pointer(parentclass.add_child), carg0, carg1, carg2, carg3)
+	runtime.KeepAlive(buildable)
+	runtime.KeepAlive(builder)
+	runtime.KeepAlive(child)
+	runtime.KeepAlive(typ)
+}
+
+// ParentGetID calls the default implementations of the get_id virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret string 
+//
+// The getter corresponding to @set_id. Implement this
+//   if you implement @set_id.
+func (buildable *BuildableInstance) ParentGetID() string {
+	var carg0 *C.GtkBuildable
+	var cret  *C.char // return, none, string, casted *C.gchar
+
+	parentclass := (*C.GtkBuildableIface)(classdata.PeekParentInterface(UnsafeBuildableToGlibNone(buildable), uint64(TypeBuildable)))
+
+	cret = C._gotk4_gtk4_Buildable_virtual_get_id(unsafe.Pointer(parentclass.get_id), carg0)
+	runtime.KeepAlive(buildable)
+
+	var goret string
+
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+
+	return goret
+}
+
+// ParentGetInternalChild calls the default implementations of the get_internal_child virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- builder Builder: a `GtkBuilder` 
+// 	- childname string: name of child 
+// 
+// The function returns the following values:
+// 
+// 	- goret gobject.Object 
+//
+// Retrieves the internal child called @childname of the @buildable object.
+func (buildable *BuildableInstance) ParentGetInternalChild(builder Builder, childname string) gobject.Object {
+	var carg0 *C.GtkBuildable
+	var carg1 *C.GtkBuilder // in, none, converted
+	var carg2 *C.char       // in, none, string, casted *C.gchar
+	var cret  *C.GObject    // return, none, converted
+
+	parentclass := (*C.GtkBuildableIface)(classdata.PeekParentInterface(UnsafeBuildableToGlibNone(buildable), uint64(TypeBuildable)))
+
+	carg1 = (*C.GtkBuilder)(UnsafeBuilderToGlibNone(builder))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(childname)))
+	defer C.free(unsafe.Pointer(carg2))
+
+	cret = C._gotk4_gtk4_Buildable_virtual_get_internal_child(unsafe.Pointer(parentclass.get_internal_child), carg0, carg1, carg2)
+	runtime.KeepAlive(buildable)
+	runtime.KeepAlive(builder)
+	runtime.KeepAlive(childname)
+
+	var goret gobject.Object
+
+	goret = gobject.UnsafeObjectFromGlibNone(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// ParentParserFinished calls the default implementations of the parser_finished virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- builder Builder 
+//
+// Called when a builder finishes the parsing
+//  of a UI definition. It is normally not necessary to implement this,
+//  unless you need to perform special cleanup actions. `GtkWindow` sets
+//  the `GtkWidget:visible` property here.
+func (buildable *BuildableInstance) ParentParserFinished(builder Builder) {
+	var carg0 *C.GtkBuildable
+	var carg1 *C.GtkBuilder // in, none, converted
+
+	parentclass := (*C.GtkBuildableIface)(classdata.PeekParentInterface(UnsafeBuildableToGlibNone(buildable), uint64(TypeBuildable)))
+
+	carg1 = (*C.GtkBuilder)(UnsafeBuilderToGlibNone(builder))
+
+	C._gotk4_gtk4_Buildable_virtual_parser_finished(unsafe.Pointer(parentclass.parser_finished), carg0, carg1)
+	runtime.KeepAlive(buildable)
+	runtime.KeepAlive(builder)
+}
+
+// ParentSetBuildableProperty calls the default implementations of the set_buildable_property virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- builder Builder 
+// 	- name string 
+// 	- value *gobject.Value 
+//
+// Sets a property of a buildable object.
+//  It is normally not necessary to implement this, g_object_set_property()
+//  is used by default. `GtkWindow` implements this to delay showing itself
+//  (i.e. setting the [property@Gtk.Widget:visible] property) until the whole
+//  interface is created.
+func (buildable *BuildableInstance) ParentSetBuildableProperty(builder Builder, name string, value *gobject.Value) {
+	var carg0 *C.GtkBuildable
+	var carg1 *C.GtkBuilder // in, none, converted
+	var carg2 *C.char       // in, none, string, casted *C.gchar
+	var carg3 *C.GValue     // in, none, converted
+
+	parentclass := (*C.GtkBuildableIface)(classdata.PeekParentInterface(UnsafeBuildableToGlibNone(buildable), uint64(TypeBuildable)))
+
+	carg1 = (*C.GtkBuilder)(UnsafeBuilderToGlibNone(builder))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(name)))
+	defer C.free(unsafe.Pointer(carg2))
+	carg3 = (*C.GValue)(gobject.UnsafeValueToGlibUseAnyInstead(value))
+
+	C._gotk4_gtk4_Buildable_virtual_set_buildable_property(unsafe.Pointer(parentclass.set_buildable_property), carg0, carg1, carg2, carg3)
+	runtime.KeepAlive(buildable)
+	runtime.KeepAlive(builder)
+	runtime.KeepAlive(name)
+	runtime.KeepAlive(value)
+}
+
+// ParentSetID calls the default implementations of the set_id virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- id string 
+//
+// Stores the id attribute given in the `GtkBuilder` UI definition.
+//   `GtkWidget` stores the name as object data. Implement this method if your
+//   object has some notion of “ID” and it makes sense to map the XML id
+//   attribute to it.
+func (buildable *BuildableInstance) ParentSetID(id string) {
+	var carg0 *C.GtkBuildable
+	var carg1 *C.char // in, none, string, casted *C.gchar
+
+	parentclass := (*C.GtkBuildableIface)(classdata.PeekParentInterface(UnsafeBuildableToGlibNone(buildable), uint64(TypeBuildable)))
+
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(id)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	C._gotk4_gtk4_Buildable_virtual_set_id(unsafe.Pointer(parentclass.set_id), carg0, carg1)
+	runtime.KeepAlive(buildable)
+	runtime.KeepAlive(id)
+}
+
 // BuilderScopeInstance is the instance type used by all types implementing GtkBuilderScope. It is used internally by the bindings. Users should use the interface [BuilderScope] instead.
 type BuilderScopeInstance struct {
 	_ [0]func() // equal guard
-	Instance gobject.ObjectInstance
+	gobject.ObjectInstance
 }
 
 var _ BuilderScope = (*BuilderScopeInstance)(nil)
@@ -12445,14 +13558,52 @@ var _ BuilderScope = (*BuilderScopeInstance)(nil)
 // may want to (partially) derive from or fall back to a [class@Gtk.BuilderCScope],
 // as that class implements support for automatic lookups from C symbols.
 type BuilderScope interface {
+	gobject.Object
 	upcastToGtkBuilderScope() *BuilderScopeInstance
+
+	// chain up virtual methods:
+
+	// ParentGetTypeFromFunction calls the default implementations of the get_type_from_function virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- builder Builder 
+	// 	- functionName string 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret gobject.Type 
+	//
+	// Try to lookup a `GType` via the given function name, specified
+	//   explicitly in a GtkBuilder file, like via the "type-func" attribute in the `&lt;object&gt;` tag.
+	//   This function is very rarely used.
+	//   The C implementation will use dlsym() and call the resulting function as a `GTypeFunc`.
+	//   The default implementation will fail and just return %G_TYPE_INVALID.
+	ParentGetTypeFromFunction(builder Builder, functionName string) gobject.Type
+	// ParentGetTypeFromName calls the default implementations of the get_type_from_name virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- builder Builder 
+	// 	- typeName string 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret gobject.Type 
+	//
+	// Try to lookup a `GType` via the its name. See
+	//   gtk_builder_get_type_from_name() for more details.
+	//   The C implementation will use g_type_from_name() and if that fails try to guess the
+	//   correct function name for registering the type and then use dlsym() to load it.
+	//   The default implementation just tries g_type_from_name() and otherwise fails.
+	ParentGetTypeFromName(builder Builder, typeName string) gobject.Type
 }
 
 var _ BuilderScope = (*BuilderScopeInstance)(nil)
 
 func unsafeWrapBuilderScope(base *gobject.ObjectInstance) *BuilderScopeInstance {
 	return &BuilderScopeInstance{
-		Instance: *base,
+		ObjectInstance: *base,
 	}
 }
 
@@ -12482,13 +13633,13 @@ func UnsafeBuilderScopeFromGlibBorrow(c unsafe.Pointer) BuilderScope {
 // UnsafeBuilderScopeToGlibNone is used to convert the instance to it's C value GtkBuilderScope. This is used by the bindings internally.
 func UnsafeBuilderScopeToGlibNone(c BuilderScope) unsafe.Pointer {
 	i := c.upcastToGtkBuilderScope()
-	return gobject.UnsafeObjectToGlibNone(&i.Instance)
+	return gobject.UnsafeObjectToGlibNone(i)
 }
 
 // UnsafeBuilderScopeToGlibFull is used to convert the instance to it's C value GtkBuilderScope, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeBuilderScopeToGlibFull(c BuilderScope) unsafe.Pointer {
 	i := c.upcastToGtkBuilderScope()
-	return gobject.UnsafeObjectToGlibFull(&i.Instance)
+	return gobject.UnsafeObjectToGlibFull(i)
 }
 
 // BuilderScopeOverrides is the struct used to override the default implementation of virtual methods.
@@ -12503,6 +13654,12 @@ type BuilderScopeOverrides[Instance BuilderScope] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret gobject.Type 
+	//
+	// Try to lookup a `GType` via the given function name, specified
+	//   explicitly in a GtkBuilder file, like via the "type-func" attribute in the `&lt;object&gt;` tag.
+	//   This function is very rarely used.
+	//   The C implementation will use dlsym() and call the resulting function as a `GTypeFunc`.
+	//   The default implementation will fail and just return %G_TYPE_INVALID.
 	GetTypeFromFunction func(Instance, Builder, string) gobject.Type
 	// GetTypeFromName allows you to override the implementation of the virtual method get_type_from_name.
 	// The function takes the following parameters:
@@ -12513,6 +13670,12 @@ type BuilderScopeOverrides[Instance BuilderScope] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret gobject.Type 
+	//
+	// Try to lookup a `GType` via the its name. See
+	//   gtk_builder_get_type_from_name() for more details.
+	//   The C implementation will use g_type_from_name() and if that fails try to guess the
+	//   correct function name for registering the type and then use dlsym() to load it.
+	//   The default implementation just tries g_type_from_name() and otherwise fails.
 	GetTypeFromName func(Instance, Builder, string) gobject.Type
 }
 
@@ -12570,10 +13733,90 @@ func UnsafeApplyBuilderScopeOverrides[Instance BuilderScope](gclass unsafe.Point
 	}
 }
 
+// ParentGetTypeFromFunction calls the default implementations of the get_type_from_function virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- builder Builder 
+// 	- functionName string 
+// 
+// The function returns the following values:
+// 
+// 	- goret gobject.Type 
+//
+// Try to lookup a `GType` via the given function name, specified
+//   explicitly in a GtkBuilder file, like via the "type-func" attribute in the `&lt;object&gt;` tag.
+//   This function is very rarely used.
+//   The C implementation will use dlsym() and call the resulting function as a `GTypeFunc`.
+//   The default implementation will fail and just return %G_TYPE_INVALID.
+func (self *BuilderScopeInstance) ParentGetTypeFromFunction(builder Builder, functionName string) gobject.Type {
+	var carg0 *C.GtkBuilderScope
+	var carg1 *C.GtkBuilder // in, none, converted
+	var carg2 *C.char       // in, none, string, casted *C.gchar
+	var cret  C.GType       // return, none, casted, alias
+
+	parentclass := (*C.GtkBuilderScopeInterface)(classdata.PeekParentInterface(UnsafeBuilderScopeToGlibNone(self), uint64(TypeBuilderScope)))
+
+	carg1 = (*C.GtkBuilder)(UnsafeBuilderToGlibNone(builder))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(functionName)))
+	defer C.free(unsafe.Pointer(carg2))
+
+	cret = C._gotk4_gtk4_BuilderScope_virtual_get_type_from_function(unsafe.Pointer(parentclass.get_type_from_function), carg0, carg1, carg2)
+	runtime.KeepAlive(self)
+	runtime.KeepAlive(builder)
+	runtime.KeepAlive(functionName)
+
+	var goret gobject.Type
+
+	goret = gobject.Type(cret)
+
+	return goret
+}
+
+// ParentGetTypeFromName calls the default implementations of the get_type_from_name virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- builder Builder 
+// 	- typeName string 
+// 
+// The function returns the following values:
+// 
+// 	- goret gobject.Type 
+//
+// Try to lookup a `GType` via the its name. See
+//   gtk_builder_get_type_from_name() for more details.
+//   The C implementation will use g_type_from_name() and if that fails try to guess the
+//   correct function name for registering the type and then use dlsym() to load it.
+//   The default implementation just tries g_type_from_name() and otherwise fails.
+func (self *BuilderScopeInstance) ParentGetTypeFromName(builder Builder, typeName string) gobject.Type {
+	var carg0 *C.GtkBuilderScope
+	var carg1 *C.GtkBuilder // in, none, converted
+	var carg2 *C.char       // in, none, string, casted *C.gchar
+	var cret  C.GType       // return, none, casted, alias
+
+	parentclass := (*C.GtkBuilderScopeInterface)(classdata.PeekParentInterface(UnsafeBuilderScopeToGlibNone(self), uint64(TypeBuilderScope)))
+
+	carg1 = (*C.GtkBuilder)(UnsafeBuilderToGlibNone(builder))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(typeName)))
+	defer C.free(unsafe.Pointer(carg2))
+
+	cret = C._gotk4_gtk4_BuilderScope_virtual_get_type_from_name(unsafe.Pointer(parentclass.get_type_from_name), carg0, carg1, carg2)
+	runtime.KeepAlive(self)
+	runtime.KeepAlive(builder)
+	runtime.KeepAlive(typeName)
+
+	var goret gobject.Type
+
+	goret = gobject.Type(cret)
+
+	return goret
+}
+
 // ConstraintTargetInstance is the instance type used by all types implementing GtkConstraintTarget. It is used internally by the bindings. Users should use the interface [ConstraintTarget] instead.
 type ConstraintTargetInstance struct {
 	_ [0]func() // equal guard
-	Instance gobject.ObjectInstance
+	gobject.ObjectInstance
 }
 
 var _ ConstraintTarget = (*ConstraintTargetInstance)(nil)
@@ -12585,14 +13828,17 @@ var _ ConstraintTarget = (*ConstraintTargetInstance)(nil)
 // 
 // Besides `GtkWidget`, it is also implemented by `GtkConstraintGuide`.
 type ConstraintTarget interface {
+	gobject.Object
 	upcastToGtkConstraintTarget() *ConstraintTargetInstance
+
+	// chain up virtual methods:
 }
 
 var _ ConstraintTarget = (*ConstraintTargetInstance)(nil)
 
 func unsafeWrapConstraintTarget(base *gobject.ObjectInstance) *ConstraintTargetInstance {
 	return &ConstraintTargetInstance{
-		Instance: *base,
+		ObjectInstance: *base,
 	}
 }
 
@@ -12622,13 +13868,13 @@ func UnsafeConstraintTargetFromGlibBorrow(c unsafe.Pointer) ConstraintTarget {
 // UnsafeConstraintTargetToGlibNone is used to convert the instance to it's C value GtkConstraintTarget. This is used by the bindings internally.
 func UnsafeConstraintTargetToGlibNone(c ConstraintTarget) unsafe.Pointer {
 	i := c.upcastToGtkConstraintTarget()
-	return gobject.UnsafeObjectToGlibNone(&i.Instance)
+	return gobject.UnsafeObjectToGlibNone(i)
 }
 
 // UnsafeConstraintTargetToGlibFull is used to convert the instance to it's C value GtkConstraintTarget, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeConstraintTargetToGlibFull(c ConstraintTarget) unsafe.Pointer {
 	i := c.upcastToGtkConstraintTarget()
-	return gobject.UnsafeObjectToGlibFull(&i.Instance)
+	return gobject.UnsafeObjectToGlibFull(i)
 }
 
 // ConstraintTargetOverrides is the struct used to override the default implementation of virtual methods.
@@ -12644,7 +13890,7 @@ func UnsafeApplyConstraintTargetOverrides[Instance ConstraintTarget](gclass unsa
 // EditableTextWidgetInstance is the instance type used by all types implementing GtkEditable. It is used internally by the bindings. Users should use the interface [EditableTextWidget] instead.
 type EditableTextWidgetInstance struct {
 	_ [0]func() // equal guard
-	Instance gobject.ObjectInstance
+	gobject.ObjectInstance
 }
 
 var _ EditableTextWidget = (*EditableTextWidgetInstance)(nil)
@@ -12782,6 +14028,7 @@ var _ EditableTextWidget = (*EditableTextWidgetInstance)(nil)
 // 
 // This type has been renamed from Editable.
 type EditableTextWidget interface {
+	gobject.Object
 	upcastToGtkEditable() *EditableTextWidgetInstance
 
 	// ConnectChanged connects the provided callback to the "changed" signal
@@ -12816,13 +14063,15 @@ type EditableTextWidget interface {
 	// stopping the signal with g_signal_stop_emission(), it is possible
 	// to modify the inserted text, or prevent it from being inserted entirely.
 	ConnectInsertText(func(EditableTextWidget, string, int32, unsafe.Pointer)) gobject.SignalHandle
+
+	// chain up virtual methods:
 }
 
 var _ EditableTextWidget = (*EditableTextWidgetInstance)(nil)
 
 func unsafeWrapEditableTextWidget(base *gobject.ObjectInstance) *EditableTextWidgetInstance {
 	return &EditableTextWidgetInstance{
-		Instance: *base,
+		ObjectInstance: *base,
 	}
 }
 
@@ -12852,13 +14101,13 @@ func UnsafeEditableTextWidgetFromGlibBorrow(c unsafe.Pointer) EditableTextWidget
 // UnsafeEditableTextWidgetToGlibNone is used to convert the instance to it's C value GtkEditable. This is used by the bindings internally.
 func UnsafeEditableTextWidgetToGlibNone(c EditableTextWidget) unsafe.Pointer {
 	i := c.upcastToGtkEditable()
-	return gobject.UnsafeObjectToGlibNone(&i.Instance)
+	return gobject.UnsafeObjectToGlibNone(i)
 }
 
 // UnsafeEditableTextWidgetToGlibFull is used to convert the instance to it's C value GtkEditable, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeEditableTextWidgetToGlibFull(c EditableTextWidget) unsafe.Pointer {
 	i := c.upcastToGtkEditable()
-	return gobject.UnsafeObjectToGlibFull(&i.Instance)
+	return gobject.UnsafeObjectToGlibFull(i)
 }
 
 // EditableTextWidgetDelegateGetProperty wraps gtk_editable_delegate_get_property
@@ -12962,7 +14211,7 @@ func EditableTextWidgetDelegateSetProperty(object gobject.Object, propId uint, v
 // the new content, and may cause multiple ::notify::text signals
 // to be emitted).
 func (o *EditableTextWidgetInstance) ConnectChanged(fn func(EditableTextWidget)) gobject.SignalHandle {
-	return o.Instance.Connect("changed", fn)
+	return o.Connect("changed", fn)
 }
 
 // ConnectDeleteText connects the provided callback to the "delete-text" signal
@@ -12977,7 +14226,7 @@ func (o *EditableTextWidgetInstance) ConnectChanged(fn func(EditableTextWidget))
 // The @start_pos and @end_pos parameters are interpreted as for
 // [method@Gtk.Editable.delete_text].
 func (o *EditableTextWidgetInstance) ConnectDeleteText(fn func(EditableTextWidget, int32, int32)) gobject.SignalHandle {
-	return o.Instance.Connect("delete-text", fn)
+	return o.Connect("delete-text", fn)
 }
 
 // ConnectInsertText connects the provided callback to the "insert-text" signal
@@ -12989,7 +14238,7 @@ func (o *EditableTextWidgetInstance) ConnectDeleteText(fn func(EditableTextWidge
 // stopping the signal with g_signal_stop_emission(), it is possible
 // to modify the inserted text, or prevent it from being inserted entirely.
 func (o *EditableTextWidgetInstance) ConnectInsertText(fn func(EditableTextWidget, string, int32, unsafe.Pointer)) gobject.SignalHandle {
-	return o.Instance.Connect("insert-text", fn)
+	return o.Connect("insert-text", fn)
 }
 
 // EditableTextWidgetOverrides is the struct used to override the default implementation of virtual methods.
@@ -13005,7 +14254,7 @@ func UnsafeApplyEditableTextWidgetOverrides[Instance EditableTextWidget](gclass 
 // NativeSurfaceInstance is the instance type used by all types implementing GtkNative. It is used internally by the bindings. Users should use the interface [NativeSurface] instead.
 type NativeSurfaceInstance struct {
 	_ [0]func() // equal guard
-	Instance gobject.ObjectInstance
+	gobject.ObjectInstance
 }
 
 var _ NativeSurface = (*NativeSurfaceInstance)(nil)
@@ -13030,14 +14279,17 @@ var _ NativeSurface = (*NativeSurfaceInstance)(nil)
 // 
 // This type has been renamed from Native.
 type NativeSurface interface {
+	gobject.Object
 	upcastToGtkNative() *NativeSurfaceInstance
+
+	// chain up virtual methods:
 }
 
 var _ NativeSurface = (*NativeSurfaceInstance)(nil)
 
 func unsafeWrapNativeSurface(base *gobject.ObjectInstance) *NativeSurfaceInstance {
 	return &NativeSurfaceInstance{
-		Instance: *base,
+		ObjectInstance: *base,
 	}
 }
 
@@ -13067,13 +14319,13 @@ func UnsafeNativeSurfaceFromGlibBorrow(c unsafe.Pointer) NativeSurface {
 // UnsafeNativeSurfaceToGlibNone is used to convert the instance to it's C value GtkNative. This is used by the bindings internally.
 func UnsafeNativeSurfaceToGlibNone(c NativeSurface) unsafe.Pointer {
 	i := c.upcastToGtkNative()
-	return gobject.UnsafeObjectToGlibNone(&i.Instance)
+	return gobject.UnsafeObjectToGlibNone(i)
 }
 
 // UnsafeNativeSurfaceToGlibFull is used to convert the instance to it's C value GtkNative, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeNativeSurfaceToGlibFull(c NativeSurface) unsafe.Pointer {
 	i := c.upcastToGtkNative()
-	return gobject.UnsafeObjectToGlibFull(&i.Instance)
+	return gobject.UnsafeObjectToGlibFull(i)
 }
 
 // NativeSurfaceOverrides is the struct used to override the default implementation of virtual methods.
@@ -13089,7 +14341,7 @@ func UnsafeApplyNativeSurfaceOverrides[Instance NativeSurface](gclass unsafe.Poi
 // OrientableInstance is the instance type used by all types implementing GtkOrientable. It is used internally by the bindings. Users should use the interface [Orientable] instead.
 type OrientableInstance struct {
 	_ [0]func() // equal guard
-	Instance gobject.ObjectInstance
+	gobject.ObjectInstance
 }
 
 var _ Orientable = (*OrientableInstance)(nil)
@@ -13108,6 +14360,7 @@ var _ Orientable = (*OrientableInstance)(nil)
 // automatically acquire the `horizontal` or `vertical` CSS class depending on
 // the value of the [property@Gtk.Orientable:orientation] property.
 type Orientable interface {
+	gobject.Object
 	upcastToGtkOrientable() *OrientableInstance
 
 	// GetOrientation wraps gtk_orientable_get_orientation
@@ -13126,13 +14379,15 @@ type Orientable interface {
 	//
 	// Sets the orientation of the @orientable.
 	SetOrientation(Orientation)
+
+	// chain up virtual methods:
 }
 
 var _ Orientable = (*OrientableInstance)(nil)
 
 func unsafeWrapOrientable(base *gobject.ObjectInstance) *OrientableInstance {
 	return &OrientableInstance{
-		Instance: *base,
+		ObjectInstance: *base,
 	}
 }
 
@@ -13162,13 +14417,13 @@ func UnsafeOrientableFromGlibBorrow(c unsafe.Pointer) Orientable {
 // UnsafeOrientableToGlibNone is used to convert the instance to it's C value GtkOrientable. This is used by the bindings internally.
 func UnsafeOrientableToGlibNone(c Orientable) unsafe.Pointer {
 	i := c.upcastToGtkOrientable()
-	return gobject.UnsafeObjectToGlibNone(&i.Instance)
+	return gobject.UnsafeObjectToGlibNone(i)
 }
 
 // UnsafeOrientableToGlibFull is used to convert the instance to it's C value GtkOrientable, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeOrientableToGlibFull(c Orientable) unsafe.Pointer {
 	i := c.upcastToGtkOrientable()
-	return gobject.UnsafeObjectToGlibFull(&i.Instance)
+	return gobject.UnsafeObjectToGlibFull(i)
 }
 
 // GetOrientation wraps gtk_orientable_get_orientation
@@ -13226,7 +14481,7 @@ func UnsafeApplyOrientableOverrides[Instance Orientable](gclass unsafe.Pointer, 
 // ScrollableInstance is the instance type used by all types implementing GtkScrollable. It is used internally by the bindings. Users should use the interface [Scrollable] instead.
 type ScrollableInstance struct {
 	_ [0]func() // equal guard
-	Instance gobject.ObjectInstance
+	gobject.ObjectInstance
 }
 
 var _ Scrollable = (*ScrollableInstance)(nil)
@@ -13262,6 +14517,7 @@ var _ Scrollable = (*ScrollableInstance)(nil)
 // - When any of the adjustments emits the [signal@Gtk.Adjustment::value-changed]
 //   signal, the scrollable widget should scroll its contents.
 type Scrollable interface {
+	gobject.Object
 	upcastToGtkScrollable() *ScrollableInstance
 
 	// GetBorder wraps gtk_scrollable_get_border
@@ -13348,13 +14604,30 @@ type Scrollable interface {
 	// The policy determines whether vertical scrolling should start
 	// below the minimum height or below the natural height.
 	SetVScrollPolicy(ScrollablePolicy)
+
+	// chain up virtual methods:
+
+	// ParentGetBorder calls the default implementations of the get_border virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- border Border: return location for the results 
+	// 	- goret bool 
+	//
+	// Returns the size of a non-scrolling border around the
+	// outside of the scrollable.
+	// 
+	// An example for this would be treeview headers. GTK can use
+	// this information to display overlaid graphics, like the
+	// overshoot indication, at the right position.
+	ParentGetBorder() (Border, bool)
 }
 
 var _ Scrollable = (*ScrollableInstance)(nil)
 
 func unsafeWrapScrollable(base *gobject.ObjectInstance) *ScrollableInstance {
 	return &ScrollableInstance{
-		Instance: *base,
+		ObjectInstance: *base,
 	}
 }
 
@@ -13384,13 +14657,13 @@ func UnsafeScrollableFromGlibBorrow(c unsafe.Pointer) Scrollable {
 // UnsafeScrollableToGlibNone is used to convert the instance to it's C value GtkScrollable. This is used by the bindings internally.
 func UnsafeScrollableToGlibNone(c Scrollable) unsafe.Pointer {
 	i := c.upcastToGtkScrollable()
-	return gobject.UnsafeObjectToGlibNone(&i.Instance)
+	return gobject.UnsafeObjectToGlibNone(i)
 }
 
 // UnsafeScrollableToGlibFull is used to convert the instance to it's C value GtkScrollable, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeScrollableToGlibFull(c Scrollable) unsafe.Pointer {
 	i := c.upcastToGtkScrollable()
-	return gobject.UnsafeObjectToGlibFull(&i.Instance)
+	return gobject.UnsafeObjectToGlibFull(i)
 }
 
 // GetBorder wraps gtk_scrollable_get_border
@@ -13619,6 +14892,13 @@ type ScrollableOverrides[Instance Scrollable] struct {
 	// 
 	// 	- border Border: return location for the results 
 	// 	- goret bool 
+	//
+	// Returns the size of a non-scrolling border around the
+	// outside of the scrollable.
+	// 
+	// An example for this would be treeview headers. GTK can use
+	// this information to display overlaid graphics, like the
+	// overshoot indication, at the right position.
 	GetBorder func(Instance) (Border, bool)
 }
 
@@ -13654,10 +14934,46 @@ func UnsafeApplyScrollableOverrides[Instance Scrollable](gclass unsafe.Pointer, 
 	}
 }
 
+// ParentGetBorder calls the default implementations of the get_border virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- border Border: return location for the results 
+// 	- goret bool 
+//
+// Returns the size of a non-scrolling border around the
+// outside of the scrollable.
+// 
+// An example for this would be treeview headers. GTK can use
+// this information to display overlaid graphics, like the
+// overshoot indication, at the right position.
+func (scrollable *ScrollableInstance) ParentGetBorder() (Border, bool) {
+	var carg0 *C.GtkScrollable
+	var carg1 C.GtkBorder // out, transfer: none, C Pointers: 0, Name: Border, caller-allocates
+	var cret  C.gboolean  // return
+
+	parentclass := (*C.GtkScrollableInterface)(classdata.PeekParentInterface(UnsafeScrollableToGlibNone(scrollable), uint64(TypeScrollable)))
+
+	cret = C._gotk4_gtk4_Scrollable_virtual_get_border(unsafe.Pointer(parentclass.get_border), carg0, &carg1)
+	runtime.KeepAlive(scrollable)
+
+	var border Border
+	var goret  bool
+
+	_ = border
+	_ = carg1
+	panic("unimplemented conversion of Border (GtkBorder)")
+	if cret != 0 {
+		goret = true
+	}
+
+	return border, goret
+}
+
 // SectionModelInstance is the instance type used by all types implementing GtkSectionModel. It is used internally by the bindings. Users should use the interface [SectionModel] instead.
 type SectionModelInstance struct {
 	_ [0]func() // equal guard
-	Instance gobject.ObjectInstance
+	gobject.ObjectInstance
 }
 
 var _ SectionModel = (*SectionModelInstance)(nil)
@@ -13680,6 +14996,7 @@ var _ SectionModel = (*SectionModelInstance)(nil)
 // The [signal@Gio.ListModel::items-changed] signal has the same effect, all sections in
 // that range are invalidated, too.
 type SectionModel interface {
+	gobject.Object
 	upcastToGtkSectionModel() *SectionModelInstance
 
 	// GetSection wraps gtk_section_model_get_section
@@ -13736,13 +15053,34 @@ type SectionModel interface {
 	// [signal@Gtk.SectionModel::sections-changed] signal for all the items
 	// it covers.
 	ConnectSectionsChanged(func(SectionModel, uint, uint)) gobject.SignalHandle
+
+	// chain up virtual methods:
+
+	// ParentGetSection calls the default implementations of the get_section virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- position uint: the position of the item to query 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- outStart uint: the position of the first item in the section 
+	// 	- outEnd uint: the position of the first item not part of the section
+	//   anymore. 
+	//
+	// Query the section that covers the given position. The number of
+	// items in the section can be computed by `out_end - out_start`.
+	// 
+	// If the position is larger than the number of items, a single
+	// range from n_items to G_MAXUINT will be returned.
+	ParentGetSection(position uint) (uint, uint)
 }
 
 var _ SectionModel = (*SectionModelInstance)(nil)
 
 func unsafeWrapSectionModel(base *gobject.ObjectInstance) *SectionModelInstance {
 	return &SectionModelInstance{
-		Instance: *base,
+		ObjectInstance: *base,
 	}
 }
 
@@ -13772,13 +15110,13 @@ func UnsafeSectionModelFromGlibBorrow(c unsafe.Pointer) SectionModel {
 // UnsafeSectionModelToGlibNone is used to convert the instance to it's C value GtkSectionModel. This is used by the bindings internally.
 func UnsafeSectionModelToGlibNone(c SectionModel) unsafe.Pointer {
 	i := c.upcastToGtkSectionModel()
-	return gobject.UnsafeObjectToGlibNone(&i.Instance)
+	return gobject.UnsafeObjectToGlibNone(i)
 }
 
 // UnsafeSectionModelToGlibFull is used to convert the instance to it's C value GtkSectionModel, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeSectionModelToGlibFull(c SectionModel) unsafe.Pointer {
 	i := c.upcastToGtkSectionModel()
-	return gobject.UnsafeObjectToGlibFull(&i.Instance)
+	return gobject.UnsafeObjectToGlibFull(i)
 }
 
 // GetSection wraps gtk_section_model_get_section
@@ -13870,7 +15208,7 @@ func (self *SectionModelInstance) SectionsChanged(position uint, nItems uint) {
 // [signal@Gtk.SectionModel::sections-changed] signal for all the items
 // it covers.
 func (o *SectionModelInstance) ConnectSectionsChanged(fn func(SectionModel, uint, uint)) gobject.SignalHandle {
-	return o.Instance.Connect("sections-changed", fn)
+	return o.Connect("sections-changed", fn)
 }
 
 // SectionModelOverrides is the struct used to override the default implementation of virtual methods.
@@ -13886,6 +15224,12 @@ type SectionModelOverrides[Instance SectionModel] struct {
 	// 	- outStart uint: the position of the first item in the section 
 	// 	- outEnd uint: the position of the first item not part of the section
 	//   anymore. 
+	//
+	// Query the section that covers the given position. The number of
+	// items in the section can be computed by `out_end - out_start`.
+	// 
+	// If the position is larger than the number of items, a single
+	// range from n_items to G_MAXUINT will be returned.
 	GetSection func(Instance, uint) (uint, uint)
 }
 
@@ -13917,10 +15261,50 @@ func UnsafeApplySectionModelOverrides[Instance SectionModel](gclass unsafe.Point
 	}
 }
 
+// ParentGetSection calls the default implementations of the get_section virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- position uint: the position of the item to query 
+// 
+// The function returns the following values:
+// 
+// 	- outStart uint: the position of the first item in the section 
+// 	- outEnd uint: the position of the first item not part of the section
+//   anymore. 
+//
+// Query the section that covers the given position. The number of
+// items in the section can be computed by `out_end - out_start`.
+// 
+// If the position is larger than the number of items, a single
+// range from n_items to G_MAXUINT will be returned.
+func (self *SectionModelInstance) ParentGetSection(position uint) (uint, uint) {
+	var carg0 *C.GtkSectionModel
+	var carg1 C.guint // in, none, casted
+	var carg2 C.guint // out, full, casted
+	var carg3 C.guint // out, full, casted
+
+	parentclass := (*C.GtkSectionModelInterface)(classdata.PeekParentInterface(UnsafeSectionModelToGlibNone(self), uint64(TypeSectionModel)))
+
+	carg1 = C.guint(position)
+
+	C._gotk4_gtk4_SectionModel_virtual_get_section(unsafe.Pointer(parentclass.get_section), carg0, carg1, &carg2, &carg3)
+	runtime.KeepAlive(self)
+	runtime.KeepAlive(position)
+
+	var outStart uint
+	var outEnd   uint
+
+	outStart = uint(carg2)
+	outEnd = uint(carg3)
+
+	return outStart, outEnd
+}
+
 // SelectionModelInstance is the instance type used by all types implementing GtkSelectionModel. It is used internally by the bindings. Users should use the interface [SelectionModel] instead.
 type SelectionModelInstance struct {
 	_ [0]func() // equal guard
-	Instance gobject.ObjectInstance
+	gobject.ObjectInstance
 }
 
 var _ SelectionModel = (*SelectionModelInstance)(nil)
@@ -13965,6 +15349,7 @@ var _ SelectionModel = (*SelectionModelInstance)(nil)
 // Selections may happen asynchronously, so the only reliable way to find out
 // when an item was selected is to listen to the signals that indicate selection.
 type SelectionModel interface {
+	gobject.Object
 	upcastToGtkSelectionModel() *SelectionModelInstance
 
 	// GetSelection wraps gtk_selection_model_get_selection
@@ -14144,13 +15529,160 @@ type SelectionModel interface {
 	// a model to change the selection state of any of the items in the selection
 	// model, though it would be rather useless to emit such a signal.
 	ConnectSelectionChanged(func(SelectionModel, uint, uint)) gobject.SignalHandle
+
+	// chain up virtual methods:
+
+	// ParentGetSelectionInRange calls the default implementations of the get_selection_in_range virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- position uint: start of the queried range 
+	// 	- nItems uint: number of items in the queried range 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret *Bitset 
+	//
+	// Gets the set of selected items in a range.
+	// 
+	// This function is an optimization for
+	// [method@Gtk.SelectionModel.get_selection] when you are only
+	// interested in part of the model's selected state. A common use
+	// case is in response to the [signal@Gtk.SelectionModel::selection-changed]
+	// signal.
+	ParentGetSelectionInRange(position uint, nItems uint) *Bitset
+	// ParentIsSelected calls the default implementations of the is_selected virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- position uint: the position of the item to query 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	//
+	// Checks if the given item is selected.
+	ParentIsSelected(position uint) bool
+	// ParentSelectAll calls the default implementations of the select_all virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	//
+	// Requests to select all items in the model.
+	ParentSelectAll() bool
+	// ParentSelectItem calls the default implementations of the select_item virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- position uint: the position of the item to select 
+	// 	- unselectRest bool: whether previously selected items should be unselected 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	//
+	// Requests to select an item in the model.
+	ParentSelectItem(position uint, unselectRest bool) bool
+	// ParentSelectRange calls the default implementations of the select_range virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- position uint: the first item to select 
+	// 	- nItems uint: the number of items to select 
+	// 	- unselectRest bool: whether previously selected items should be unselected 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	//
+	// Requests to select a range of items in the model.
+	ParentSelectRange(position uint, nItems uint, unselectRest bool) bool
+	// ParentSetSelection calls the default implementations of the set_selection virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- selected *Bitset: bitmask specifying if items should be selected or unselected 
+	// 	- mask *Bitset: bitmask specifying which items should be updated 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	//
+	// Make selection changes.
+	// 
+	// This is the most advanced selection updating method that allows
+	// the most fine-grained control over selection changes. If you can,
+	// you should try the simpler versions, as implementations are more
+	// likely to implement support for those.
+	// 
+	// Requests that the selection state of all positions set in @mask
+	// be updated to the respective value in the @selected bitmask.
+	// 
+	// In pseudocode, it would look something like this:
+	// 
+	// ```c
+	// for (i = 0; i &lt; n_items; i++)
+	//   {
+	//     // don't change values not in the mask
+	//     if (!gtk_bitset_contains (mask, i))
+	//       continue;
+	// 
+	//     if (gtk_bitset_contains (selected, i))
+	//       select_item (i);
+	//     else
+	//       unselect_item (i);
+	//   }
+	// 
+	// gtk_selection_model_selection_changed (model,
+	//                                        first_changed_item,
+	//                                        n_changed_items);
+	// ```
+	// 
+	// @mask and @selected must not be modified. They may refer to the
+	// same bitset, which would mean that every item in the set should
+	// be selected.
+	ParentSetSelection(selected *Bitset, mask *Bitset) bool
+	// ParentUnselectAll calls the default implementations of the unselect_all virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	//
+	// Requests to unselect all items in the model.
+	ParentUnselectAll() bool
+	// ParentUnselectItem calls the default implementations of the unselect_item virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- position uint: the position of the item to unselect 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	//
+	// Requests to unselect an item in the model.
+	ParentUnselectItem(position uint) bool
+	// ParentUnselectRange calls the default implementations of the unselect_range virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- position uint: the first item to unselect 
+	// 	- nItems uint: the number of items to unselect 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	//
+	// Requests to unselect a range of items in the model.
+	ParentUnselectRange(position uint, nItems uint) bool
 }
 
 var _ SelectionModel = (*SelectionModelInstance)(nil)
 
 func unsafeWrapSelectionModel(base *gobject.ObjectInstance) *SelectionModelInstance {
 	return &SelectionModelInstance{
-		Instance: *base,
+		ObjectInstance: *base,
 	}
 }
 
@@ -14180,13 +15712,13 @@ func UnsafeSelectionModelFromGlibBorrow(c unsafe.Pointer) SelectionModel {
 // UnsafeSelectionModelToGlibNone is used to convert the instance to it's C value GtkSelectionModel. This is used by the bindings internally.
 func UnsafeSelectionModelToGlibNone(c SelectionModel) unsafe.Pointer {
 	i := c.upcastToGtkSelectionModel()
-	return gobject.UnsafeObjectToGlibNone(&i.Instance)
+	return gobject.UnsafeObjectToGlibNone(i)
 }
 
 // UnsafeSelectionModelToGlibFull is used to convert the instance to it's C value GtkSelectionModel, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeSelectionModelToGlibFull(c SelectionModel) unsafe.Pointer {
 	i := c.upcastToGtkSelectionModel()
-	return gobject.UnsafeObjectToGlibFull(&i.Instance)
+	return gobject.UnsafeObjectToGlibFull(i)
 }
 
 // GetSelection wraps gtk_selection_model_get_selection
@@ -14589,7 +16121,7 @@ func (model *SelectionModelInstance) UnselectRange(position uint, nItems uint) b
 // a model to change the selection state of any of the items in the selection
 // model, though it would be rather useless to emit such a signal.
 func (o *SelectionModelInstance) ConnectSelectionChanged(fn func(SelectionModel, uint, uint)) gobject.SignalHandle {
-	return o.Instance.Connect("selection-changed", fn)
+	return o.Connect("selection-changed", fn)
 }
 
 // SelectionModelOverrides is the struct used to override the default implementation of virtual methods.
@@ -14604,6 +16136,14 @@ type SelectionModelOverrides[Instance SelectionModel] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret *Bitset 
+	//
+	// Gets the set of selected items in a range.
+	// 
+	// This function is an optimization for
+	// [method@Gtk.SelectionModel.get_selection] when you are only
+	// interested in part of the model's selected state. A common use
+	// case is in response to the [signal@Gtk.SelectionModel::selection-changed]
+	// signal.
 	GetSelectionInRange func(Instance, uint, uint) *Bitset
 	// IsSelected allows you to override the implementation of the virtual method is_selected.
 	// The function takes the following parameters:
@@ -14613,11 +16153,15 @@ type SelectionModelOverrides[Instance SelectionModel] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
+	//
+	// Checks if the given item is selected.
 	IsSelected func(Instance, uint) bool
 	// SelectAll allows you to override the implementation of the virtual method select_all.
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
+	//
+	// Requests to select all items in the model.
 	SelectAll func(Instance) bool
 	// SelectItem allows you to override the implementation of the virtual method select_item.
 	// The function takes the following parameters:
@@ -14628,6 +16172,8 @@ type SelectionModelOverrides[Instance SelectionModel] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
+	//
+	// Requests to select an item in the model.
 	SelectItem func(Instance, uint, bool) bool
 	// SelectRange allows you to override the implementation of the virtual method select_range.
 	// The function takes the following parameters:
@@ -14639,6 +16185,8 @@ type SelectionModelOverrides[Instance SelectionModel] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
+	//
+	// Requests to select a range of items in the model.
 	SelectRange func(Instance, uint, uint, bool) bool
 	// SetSelection allows you to override the implementation of the virtual method set_selection.
 	// The function takes the following parameters:
@@ -14649,11 +16197,47 @@ type SelectionModelOverrides[Instance SelectionModel] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
+	//
+	// Make selection changes.
+	// 
+	// This is the most advanced selection updating method that allows
+	// the most fine-grained control over selection changes. If you can,
+	// you should try the simpler versions, as implementations are more
+	// likely to implement support for those.
+	// 
+	// Requests that the selection state of all positions set in @mask
+	// be updated to the respective value in the @selected bitmask.
+	// 
+	// In pseudocode, it would look something like this:
+	// 
+	// ```c
+	// for (i = 0; i &lt; n_items; i++)
+	//   {
+	//     // don't change values not in the mask
+	//     if (!gtk_bitset_contains (mask, i))
+	//       continue;
+	// 
+	//     if (gtk_bitset_contains (selected, i))
+	//       select_item (i);
+	//     else
+	//       unselect_item (i);
+	//   }
+	// 
+	// gtk_selection_model_selection_changed (model,
+	//                                        first_changed_item,
+	//                                        n_changed_items);
+	// ```
+	// 
+	// @mask and @selected must not be modified. They may refer to the
+	// same bitset, which would mean that every item in the set should
+	// be selected.
 	SetSelection func(Instance, *Bitset, *Bitset) bool
 	// UnselectAll allows you to override the implementation of the virtual method unselect_all.
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
+	//
+	// Requests to unselect all items in the model.
 	UnselectAll func(Instance) bool
 	// UnselectItem allows you to override the implementation of the virtual method unselect_item.
 	// The function takes the following parameters:
@@ -14663,6 +16247,8 @@ type SelectionModelOverrides[Instance SelectionModel] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
+	//
+	// Requests to unselect an item in the model.
 	UnselectItem func(Instance, uint) bool
 	// UnselectRange allows you to override the implementation of the virtual method unselect_range.
 	// The function takes the following parameters:
@@ -14673,6 +16259,8 @@ type SelectionModelOverrides[Instance SelectionModel] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
+	//
+	// Requests to unselect a range of items in the model.
 	UnselectRange func(Instance, uint, uint) bool
 }
 
@@ -14908,10 +16496,355 @@ func UnsafeApplySelectionModelOverrides[Instance SelectionModel](gclass unsafe.P
 	}
 }
 
+// ParentGetSelectionInRange calls the default implementations of the get_selection_in_range virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- position uint: start of the queried range 
+// 	- nItems uint: number of items in the queried range 
+// 
+// The function returns the following values:
+// 
+// 	- goret *Bitset 
+//
+// Gets the set of selected items in a range.
+// 
+// This function is an optimization for
+// [method@Gtk.SelectionModel.get_selection] when you are only
+// interested in part of the model's selected state. A common use
+// case is in response to the [signal@Gtk.SelectionModel::selection-changed]
+// signal.
+func (model *SelectionModelInstance) ParentGetSelectionInRange(position uint, nItems uint) *Bitset {
+	var carg0 *C.GtkSelectionModel
+	var carg1 C.guint      // in, none, casted
+	var carg2 C.guint      // in, none, casted
+	var cret  *C.GtkBitset // return, full, converted
+
+	parentclass := (*C.GtkSelectionModelInterface)(classdata.PeekParentInterface(UnsafeSelectionModelToGlibNone(model), uint64(TypeSelectionModel)))
+
+	carg1 = C.guint(position)
+	carg2 = C.guint(nItems)
+
+	cret = C._gotk4_gtk4_SelectionModel_virtual_get_selection_in_range(unsafe.Pointer(parentclass.get_selection_in_range), carg0, carg1, carg2)
+	runtime.KeepAlive(model)
+	runtime.KeepAlive(position)
+	runtime.KeepAlive(nItems)
+
+	var goret *Bitset
+
+	goret = UnsafeBitsetFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// ParentIsSelected calls the default implementations of the is_selected virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- position uint: the position of the item to query 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Checks if the given item is selected.
+func (model *SelectionModelInstance) ParentIsSelected(position uint) bool {
+	var carg0 *C.GtkSelectionModel
+	var carg1 C.guint    // in, none, casted
+	var cret  C.gboolean // return
+
+	parentclass := (*C.GtkSelectionModelInterface)(classdata.PeekParentInterface(UnsafeSelectionModelToGlibNone(model), uint64(TypeSelectionModel)))
+
+	carg1 = C.guint(position)
+
+	cret = C._gotk4_gtk4_SelectionModel_virtual_is_selected(unsafe.Pointer(parentclass.is_selected), carg0, carg1)
+	runtime.KeepAlive(model)
+	runtime.KeepAlive(position)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// ParentSelectAll calls the default implementations of the select_all virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Requests to select all items in the model.
+func (model *SelectionModelInstance) ParentSelectAll() bool {
+	var carg0 *C.GtkSelectionModel
+	var cret  C.gboolean // return
+
+	parentclass := (*C.GtkSelectionModelInterface)(classdata.PeekParentInterface(UnsafeSelectionModelToGlibNone(model), uint64(TypeSelectionModel)))
+
+	cret = C._gotk4_gtk4_SelectionModel_virtual_select_all(unsafe.Pointer(parentclass.select_all), carg0)
+	runtime.KeepAlive(model)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// ParentSelectItem calls the default implementations of the select_item virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- position uint: the position of the item to select 
+// 	- unselectRest bool: whether previously selected items should be unselected 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Requests to select an item in the model.
+func (model *SelectionModelInstance) ParentSelectItem(position uint, unselectRest bool) bool {
+	var carg0 *C.GtkSelectionModel
+	var carg1 C.guint    // in, none, casted
+	var carg2 C.gboolean // in
+	var cret  C.gboolean // return
+
+	parentclass := (*C.GtkSelectionModelInterface)(classdata.PeekParentInterface(UnsafeSelectionModelToGlibNone(model), uint64(TypeSelectionModel)))
+
+	carg1 = C.guint(position)
+	if unselectRest {
+		carg2 = C.TRUE
+	}
+
+	cret = C._gotk4_gtk4_SelectionModel_virtual_select_item(unsafe.Pointer(parentclass.select_item), carg0, carg1, carg2)
+	runtime.KeepAlive(model)
+	runtime.KeepAlive(position)
+	runtime.KeepAlive(unselectRest)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// ParentSelectRange calls the default implementations of the select_range virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- position uint: the first item to select 
+// 	- nItems uint: the number of items to select 
+// 	- unselectRest bool: whether previously selected items should be unselected 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Requests to select a range of items in the model.
+func (model *SelectionModelInstance) ParentSelectRange(position uint, nItems uint, unselectRest bool) bool {
+	var carg0 *C.GtkSelectionModel
+	var carg1 C.guint    // in, none, casted
+	var carg2 C.guint    // in, none, casted
+	var carg3 C.gboolean // in
+	var cret  C.gboolean // return
+
+	parentclass := (*C.GtkSelectionModelInterface)(classdata.PeekParentInterface(UnsafeSelectionModelToGlibNone(model), uint64(TypeSelectionModel)))
+
+	carg1 = C.guint(position)
+	carg2 = C.guint(nItems)
+	if unselectRest {
+		carg3 = C.TRUE
+	}
+
+	cret = C._gotk4_gtk4_SelectionModel_virtual_select_range(unsafe.Pointer(parentclass.select_range), carg0, carg1, carg2, carg3)
+	runtime.KeepAlive(model)
+	runtime.KeepAlive(position)
+	runtime.KeepAlive(nItems)
+	runtime.KeepAlive(unselectRest)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// ParentSetSelection calls the default implementations of the set_selection virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- selected *Bitset: bitmask specifying if items should be selected or unselected 
+// 	- mask *Bitset: bitmask specifying which items should be updated 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Make selection changes.
+// 
+// This is the most advanced selection updating method that allows
+// the most fine-grained control over selection changes. If you can,
+// you should try the simpler versions, as implementations are more
+// likely to implement support for those.
+// 
+// Requests that the selection state of all positions set in @mask
+// be updated to the respective value in the @selected bitmask.
+// 
+// In pseudocode, it would look something like this:
+// 
+// ```c
+// for (i = 0; i &lt; n_items; i++)
+//   {
+//     // don't change values not in the mask
+//     if (!gtk_bitset_contains (mask, i))
+//       continue;
+// 
+//     if (gtk_bitset_contains (selected, i))
+//       select_item (i);
+//     else
+//       unselect_item (i);
+//   }
+// 
+// gtk_selection_model_selection_changed (model,
+//                                        first_changed_item,
+//                                        n_changed_items);
+// ```
+// 
+// @mask and @selected must not be modified. They may refer to the
+// same bitset, which would mean that every item in the set should
+// be selected.
+func (model *SelectionModelInstance) ParentSetSelection(selected *Bitset, mask *Bitset) bool {
+	var carg0 *C.GtkSelectionModel
+	var carg1 *C.GtkBitset // in, none, converted
+	var carg2 *C.GtkBitset // in, none, converted
+	var cret  C.gboolean   // return
+
+	parentclass := (*C.GtkSelectionModelInterface)(classdata.PeekParentInterface(UnsafeSelectionModelToGlibNone(model), uint64(TypeSelectionModel)))
+
+	carg1 = (*C.GtkBitset)(UnsafeBitsetToGlibNone(selected))
+	carg2 = (*C.GtkBitset)(UnsafeBitsetToGlibNone(mask))
+
+	cret = C._gotk4_gtk4_SelectionModel_virtual_set_selection(unsafe.Pointer(parentclass.set_selection), carg0, carg1, carg2)
+	runtime.KeepAlive(model)
+	runtime.KeepAlive(selected)
+	runtime.KeepAlive(mask)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// ParentUnselectAll calls the default implementations of the unselect_all virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Requests to unselect all items in the model.
+func (model *SelectionModelInstance) ParentUnselectAll() bool {
+	var carg0 *C.GtkSelectionModel
+	var cret  C.gboolean // return
+
+	parentclass := (*C.GtkSelectionModelInterface)(classdata.PeekParentInterface(UnsafeSelectionModelToGlibNone(model), uint64(TypeSelectionModel)))
+
+	cret = C._gotk4_gtk4_SelectionModel_virtual_unselect_all(unsafe.Pointer(parentclass.unselect_all), carg0)
+	runtime.KeepAlive(model)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// ParentUnselectItem calls the default implementations of the unselect_item virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- position uint: the position of the item to unselect 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Requests to unselect an item in the model.
+func (model *SelectionModelInstance) ParentUnselectItem(position uint) bool {
+	var carg0 *C.GtkSelectionModel
+	var carg1 C.guint    // in, none, casted
+	var cret  C.gboolean // return
+
+	parentclass := (*C.GtkSelectionModelInterface)(classdata.PeekParentInterface(UnsafeSelectionModelToGlibNone(model), uint64(TypeSelectionModel)))
+
+	carg1 = C.guint(position)
+
+	cret = C._gotk4_gtk4_SelectionModel_virtual_unselect_item(unsafe.Pointer(parentclass.unselect_item), carg0, carg1)
+	runtime.KeepAlive(model)
+	runtime.KeepAlive(position)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// ParentUnselectRange calls the default implementations of the unselect_range virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- position uint: the first item to unselect 
+// 	- nItems uint: the number of items to unselect 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Requests to unselect a range of items in the model.
+func (model *SelectionModelInstance) ParentUnselectRange(position uint, nItems uint) bool {
+	var carg0 *C.GtkSelectionModel
+	var carg1 C.guint    // in, none, casted
+	var carg2 C.guint    // in, none, casted
+	var cret  C.gboolean // return
+
+	parentclass := (*C.GtkSelectionModelInterface)(classdata.PeekParentInterface(UnsafeSelectionModelToGlibNone(model), uint64(TypeSelectionModel)))
+
+	carg1 = C.guint(position)
+	carg2 = C.guint(nItems)
+
+	cret = C._gotk4_gtk4_SelectionModel_virtual_unselect_range(unsafe.Pointer(parentclass.unselect_range), carg0, carg1, carg2)
+	runtime.KeepAlive(model)
+	runtime.KeepAlive(position)
+	runtime.KeepAlive(nItems)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
 // ShortcutManagerInstance is the instance type used by all types implementing GtkShortcutManager. It is used internally by the bindings. Users should use the interface [ShortcutManager] instead.
 type ShortcutManagerInstance struct {
 	_ [0]func() // equal guard
-	Instance gobject.ObjectInstance
+	gobject.ObjectInstance
 }
 
 var _ ShortcutManager = (*ShortcutManagerInstance)(nil)
@@ -14931,14 +16864,35 @@ var _ ShortcutManager = (*ShortcutManagerInstance)(nil)
 // Every widget that implements `GtkShortcutManager` will be used as a
 // %GTK_SHORTCUT_SCOPE_MANAGED.
 type ShortcutManager interface {
+	gobject.Object
 	upcastToGtkShortcutManager() *ShortcutManagerInstance
+
+	// chain up virtual methods:
+
+	// ParentAddController calls the default implementations of the add_controller virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- controller ShortcutController 
+	//
+	// Add a `GtkShortcutController` to be managed.
+	ParentAddController(controller ShortcutController)
+	// ParentRemoveController calls the default implementations of the remove_controller virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- controller ShortcutController 
+	//
+	// Remove a `GtkShortcutController` that had previously
+	//   been added
+	ParentRemoveController(controller ShortcutController)
 }
 
 var _ ShortcutManager = (*ShortcutManagerInstance)(nil)
 
 func unsafeWrapShortcutManager(base *gobject.ObjectInstance) *ShortcutManagerInstance {
 	return &ShortcutManagerInstance{
-		Instance: *base,
+		ObjectInstance: *base,
 	}
 }
 
@@ -14968,13 +16922,13 @@ func UnsafeShortcutManagerFromGlibBorrow(c unsafe.Pointer) ShortcutManager {
 // UnsafeShortcutManagerToGlibNone is used to convert the instance to it's C value GtkShortcutManager. This is used by the bindings internally.
 func UnsafeShortcutManagerToGlibNone(c ShortcutManager) unsafe.Pointer {
 	i := c.upcastToGtkShortcutManager()
-	return gobject.UnsafeObjectToGlibNone(&i.Instance)
+	return gobject.UnsafeObjectToGlibNone(i)
 }
 
 // UnsafeShortcutManagerToGlibFull is used to convert the instance to it's C value GtkShortcutManager, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeShortcutManagerToGlibFull(c ShortcutManager) unsafe.Pointer {
 	i := c.upcastToGtkShortcutManager()
-	return gobject.UnsafeObjectToGlibFull(&i.Instance)
+	return gobject.UnsafeObjectToGlibFull(i)
 }
 
 // ShortcutManagerOverrides is the struct used to override the default implementation of virtual methods.
@@ -14984,11 +16938,16 @@ type ShortcutManagerOverrides[Instance ShortcutManager] struct {
 	// The function takes the following parameters:
 	// 
 	// 	- controller ShortcutController 
+	//
+	// Add a `GtkShortcutController` to be managed.
 	AddController func(Instance, ShortcutController)
 	// RemoveController allows you to override the implementation of the virtual method remove_controller.
 	// The function takes the following parameters:
 	// 
 	// 	- controller ShortcutController 
+	//
+	// Remove a `GtkShortcutController` that had previously
+	//   been added
 	RemoveController func(Instance, ShortcutController)
 }
 
@@ -15032,10 +16991,51 @@ func UnsafeApplyShortcutManagerOverrides[Instance ShortcutManager](gclass unsafe
 	}
 }
 
+// ParentAddController calls the default implementations of the add_controller virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- controller ShortcutController 
+//
+// Add a `GtkShortcutController` to be managed.
+func (self *ShortcutManagerInstance) ParentAddController(controller ShortcutController) {
+	var carg0 *C.GtkShortcutManager
+	var carg1 *C.GtkShortcutController // in, none, converted
+
+	parentclass := (*C.GtkShortcutManagerInterface)(classdata.PeekParentInterface(UnsafeShortcutManagerToGlibNone(self), uint64(TypeShortcutManager)))
+
+	carg1 = (*C.GtkShortcutController)(UnsafeShortcutControllerToGlibNone(controller))
+
+	C._gotk4_gtk4_ShortcutManager_virtual_add_controller(unsafe.Pointer(parentclass.add_controller), carg0, carg1)
+	runtime.KeepAlive(self)
+	runtime.KeepAlive(controller)
+}
+
+// ParentRemoveController calls the default implementations of the remove_controller virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- controller ShortcutController 
+//
+// Remove a `GtkShortcutController` that had previously
+//   been added
+func (self *ShortcutManagerInstance) ParentRemoveController(controller ShortcutController) {
+	var carg0 *C.GtkShortcutManager
+	var carg1 *C.GtkShortcutController // in, none, converted
+
+	parentclass := (*C.GtkShortcutManagerInterface)(classdata.PeekParentInterface(UnsafeShortcutManagerToGlibNone(self), uint64(TypeShortcutManager)))
+
+	carg1 = (*C.GtkShortcutController)(UnsafeShortcutControllerToGlibNone(controller))
+
+	C._gotk4_gtk4_ShortcutManager_virtual_remove_controller(unsafe.Pointer(parentclass.remove_controller), carg0, carg1)
+	runtime.KeepAlive(self)
+	runtime.KeepAlive(controller)
+}
+
 // StyleProviderInstance is the instance type used by all types implementing GtkStyleProvider. It is used internally by the bindings. Users should use the interface [StyleProvider] instead.
 type StyleProviderInstance struct {
 	_ [0]func() // equal guard
-	Instance gobject.ObjectInstance
+	gobject.ObjectInstance
 }
 
 var _ StyleProvider = (*StyleProviderInstance)(nil)
@@ -15052,17 +17052,20 @@ var _ StyleProvider = (*StyleProviderInstance)(nil)
 // GTK uses the `GtkStyleProvider` implementation for CSS in
 // [class@Gtk.CssProvider].
 type StyleProvider interface {
+	gobject.Object
 	upcastToGtkStyleProvider() *StyleProviderInstance
 
 	// ConnectGTKPrivateChanged connects the provided callback to the "gtk-private-changed" signal
 	ConnectGTKPrivateChanged(func(StyleProvider)) gobject.SignalHandle
+
+	// chain up virtual methods:
 }
 
 var _ StyleProvider = (*StyleProviderInstance)(nil)
 
 func unsafeWrapStyleProvider(base *gobject.ObjectInstance) *StyleProviderInstance {
 	return &StyleProviderInstance{
-		Instance: *base,
+		ObjectInstance: *base,
 	}
 }
 
@@ -15092,18 +17095,18 @@ func UnsafeStyleProviderFromGlibBorrow(c unsafe.Pointer) StyleProvider {
 // UnsafeStyleProviderToGlibNone is used to convert the instance to it's C value GtkStyleProvider. This is used by the bindings internally.
 func UnsafeStyleProviderToGlibNone(c StyleProvider) unsafe.Pointer {
 	i := c.upcastToGtkStyleProvider()
-	return gobject.UnsafeObjectToGlibNone(&i.Instance)
+	return gobject.UnsafeObjectToGlibNone(i)
 }
 
 // UnsafeStyleProviderToGlibFull is used to convert the instance to it's C value GtkStyleProvider, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeStyleProviderToGlibFull(c StyleProvider) unsafe.Pointer {
 	i := c.upcastToGtkStyleProvider()
-	return gobject.UnsafeObjectToGlibFull(&i.Instance)
+	return gobject.UnsafeObjectToGlibFull(i)
 }
 
 // ConnectGTKPrivateChanged connects the provided callback to the "gtk-private-changed" signal
 func (o *StyleProviderInstance) ConnectGTKPrivateChanged(fn func(StyleProvider)) gobject.SignalHandle {
-	return o.Instance.Connect("gtk-private-changed", fn)
+	return o.Connect("gtk-private-changed", fn)
 }
 
 // StyleProviderOverrides is the struct used to override the default implementation of virtual methods.
@@ -15119,7 +17122,7 @@ func UnsafeApplyStyleProviderOverrides[Instance StyleProvider](gclass unsafe.Poi
 // SymbolicPaintableInstance is the instance type used by all types implementing GtkSymbolicPaintable. It is used internally by the bindings. Users should use the interface [SymbolicPaintable] instead.
 type SymbolicPaintableInstance struct {
 	_ [0]func() // equal guard
-	Instance gobject.ObjectInstance
+	gobject.ObjectInstance
 }
 
 var _ SymbolicPaintable = (*SymbolicPaintableInstance)(nil)
@@ -15139,6 +17142,7 @@ var _ SymbolicPaintable = (*SymbolicPaintableInstance)(nil)
 // 
 // More colors may be added in the future.
 type SymbolicPaintable interface {
+	gobject.Object
 	upcastToGtkSymbolicPaintable() *SymbolicPaintableInstance
 
 	// SnapshotSymbolic wraps gtk_symbolic_paintable_snapshot_symbolic
@@ -15155,13 +17159,30 @@ type SymbolicPaintable interface {
 	// If less than 4 colors are provided, GTK will pad the array with default
 	// colors.
 	SnapshotSymbolic(gdk.Snapshot, float64, float64, []gdk.RGBA)
+
+	// chain up virtual methods:
+
+	// ParentSnapshotSymbolic calls the default implementations of the snapshot_symbolic virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- snapshot gdk.Snapshot: a `GdkSnapshot` to snapshot to 
+	// 	- width float64: width to snapshot in 
+	// 	- height float64: height to snapshot in 
+	// 	- colors []gdk.RGBA: a pointer to an array of colors 
+	//
+	// Snapshots the paintable with the given colors.
+	// 
+	// If less than 4 colors are provided, GTK will pad the array with default
+	// colors.
+	ParentSnapshotSymbolic(snapshot gdk.Snapshot, width float64, height float64, colors []gdk.RGBA)
 }
 
 var _ SymbolicPaintable = (*SymbolicPaintableInstance)(nil)
 
 func unsafeWrapSymbolicPaintable(base *gobject.ObjectInstance) *SymbolicPaintableInstance {
 	return &SymbolicPaintableInstance{
-		Instance: *base,
+		ObjectInstance: *base,
 	}
 }
 
@@ -15191,13 +17212,13 @@ func UnsafeSymbolicPaintableFromGlibBorrow(c unsafe.Pointer) SymbolicPaintable {
 // UnsafeSymbolicPaintableToGlibNone is used to convert the instance to it's C value GtkSymbolicPaintable. This is used by the bindings internally.
 func UnsafeSymbolicPaintableToGlibNone(c SymbolicPaintable) unsafe.Pointer {
 	i := c.upcastToGtkSymbolicPaintable()
-	return gobject.UnsafeObjectToGlibNone(&i.Instance)
+	return gobject.UnsafeObjectToGlibNone(i)
 }
 
 // UnsafeSymbolicPaintableToGlibFull is used to convert the instance to it's C value GtkSymbolicPaintable, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeSymbolicPaintableToGlibFull(c SymbolicPaintable) unsafe.Pointer {
 	i := c.upcastToGtkSymbolicPaintable()
-	return gobject.UnsafeObjectToGlibFull(&i.Instance)
+	return gobject.UnsafeObjectToGlibFull(i)
 }
 
 // SnapshotSymbolic wraps gtk_symbolic_paintable_snapshot_symbolic
@@ -15248,6 +17269,11 @@ type SymbolicPaintableOverrides[Instance SymbolicPaintable] struct {
 	// 	- width float64: width to snapshot in 
 	// 	- height float64: height to snapshot in 
 	// 	- colors []gdk.RGBA: a pointer to an array of colors 
+	//
+	// Snapshots the paintable with the given colors.
+	// 
+	// If less than 4 colors are provided, GTK will pad the array with default
+	// colors.
 	SnapshotSymbolic func(Instance, gdk.Snapshot, float64, float64, []gdk.RGBA)
 }
 
@@ -15281,6 +17307,45 @@ func UnsafeApplySymbolicPaintableOverrides[Instance SymbolicPaintable](gclass un
 			},
 		)
 	}
+}
+
+// ParentSnapshotSymbolic calls the default implementations of the snapshot_symbolic virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- snapshot gdk.Snapshot: a `GdkSnapshot` to snapshot to 
+// 	- width float64: width to snapshot in 
+// 	- height float64: height to snapshot in 
+// 	- colors []gdk.RGBA: a pointer to an array of colors 
+//
+// Snapshots the paintable with the given colors.
+// 
+// If less than 4 colors are provided, GTK will pad the array with default
+// colors.
+func (paintable *SymbolicPaintableInstance) ParentSnapshotSymbolic(snapshot gdk.Snapshot, width float64, height float64, colors []gdk.RGBA) {
+	var carg0 *C.GtkSymbolicPaintable
+	var carg1 *C.GdkSnapshot // in, none, converted
+	var carg2 C.double       // in, none, casted, casted C.gdouble
+	var carg3 C.double       // in, none, casted, casted C.gdouble
+	var carg4 *C.GdkRGBA     // in, transfer: none, C Pointers: 1, Name: array[RGBA], array (inner: *typesystem.Record, length-by: carg5)
+	var carg5 C.gsize        // implicit
+
+	parentclass := (*C.GtkSymbolicPaintableInterface)(classdata.PeekParentInterface(UnsafeSymbolicPaintableToGlibNone(paintable), uint64(TypeSymbolicPaintable)))
+
+	carg1 = (*C.GdkSnapshot)(gdk.UnsafeSnapshotToGlibNone(snapshot))
+	carg2 = C.double(width)
+	carg3 = C.double(height)
+	_ = colors
+	_ = carg4
+	_ = carg5
+	panic("unimplemented conversion of []gdk.RGBA (const GdkRGBA*)")
+
+	C._gotk4_gtk4_SymbolicPaintable_virtual_snapshot_symbolic(unsafe.Pointer(parentclass.snapshot_symbolic), carg0, carg1, carg2, carg3, carg4, carg5)
+	runtime.KeepAlive(paintable)
+	runtime.KeepAlive(snapshot)
+	runtime.KeepAlive(width)
+	runtime.KeepAlive(height)
+	runtime.KeepAlive(colors)
 }
 
 // ATContextInstance is the instance type used by all types extending GtkATContext. It is used internally by the bindings. Users should use the interface [ATContext] instead.
@@ -15676,6 +17741,15 @@ type Adjustment interface {
 	//
 	// Emitted when the value has been changed.
 	ConnectValueChanged(func(Adjustment)) gobject.SignalHandle
+
+	// chain up virtual methods:
+
+	// ParentChanged calls the default implementations of the changed virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	ParentChanged()
+	// ParentValueChanged calls the default implementations of the value_changed virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	ParentValueChanged()
 }
 
 func unsafeWrapAdjustment(base *gobject.ObjectInstance) *AdjustmentInstance {
@@ -16224,6 +18298,28 @@ func UnsafeApplyAdjustmentOverrides[Instance Adjustment](gclass unsafe.Pointer, 
 	}
 }
 
+// ParentChanged calls the default implementations of the changed virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+func (adjustment *AdjustmentInstance) ParentChanged() {
+	var carg0 *C.GtkAdjustment
+
+	parentclass := (*C.GtkAdjustmentClass)(classdata.PeekParentClass(UnsafeAdjustmentToGlibNone(adjustment)))
+
+	C._gotk4_gtk4_Adjustment_virtual_changed(unsafe.Pointer(parentclass.changed), carg0)
+	runtime.KeepAlive(adjustment)
+}
+
+// ParentValueChanged calls the default implementations of the value_changed virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+func (adjustment *AdjustmentInstance) ParentValueChanged() {
+	var carg0 *C.GtkAdjustment
+
+	parentclass := (*C.GtkAdjustmentClass)(classdata.PeekParentClass(UnsafeAdjustmentToGlibNone(adjustment)))
+
+	C._gotk4_gtk4_Adjustment_virtual_value_changed(unsafe.Pointer(parentclass.value_changed), carg0)
+	runtime.KeepAlive(adjustment)
+}
+
 // RegisterAdjustmentSubClass is used to register a go subclass of GtkAdjustment. For this to work safely please implement the
 // virtual methods required by the implementation.
 func RegisterAdjustmentSubClass[InstanceT Adjustment](
@@ -16419,6 +18515,8 @@ type AlertDialog interface {
 	// you should use that function instead and provide it with a #GCancellable or
 	// callback respectively.
 	Show(Window)
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapAlertDialog(base *gobject.ObjectInstance) *AlertDialogInstance {
@@ -17237,6 +19335,28 @@ type Application interface {
 	// This can happen as a side-effect of the window being destroyed
 	// or explicitly through [method@Gtk.Application.remove_window].
 	ConnectWindowRemoved(func(Application, Window)) gobject.SignalHandle
+
+	// chain up virtual methods:
+
+	// ParentWindowAdded calls the default implementations of the window_added virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- window Window 
+	//
+	// Signal emitted when a `GtkWindow` is added to
+	//    application through gtk_application_add_window().
+	ParentWindowAdded(window Window)
+	// ParentWindowRemoved calls the default implementations of the window_removed virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- window Window 
+	//
+	// Signal emitted when a `GtkWindow` is removed from
+	//    application, either as a side-effect of being destroyed or
+	//    explicitly through gtk_application_remove_window().
+	ParentWindowRemoved(window Window)
 }
 
 func unsafeWrapApplication(base *gobject.ObjectInstance) *ApplicationInstance {
@@ -17245,10 +19365,10 @@ func unsafeWrapApplication(base *gobject.ObjectInstance) *ApplicationInstance {
 			ObjectInstance: *base,
 		},
 		ActionGroupInstance: gio.ActionGroupInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ActionMapInstance: gio.ActionMapInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -17877,11 +19997,18 @@ type ApplicationOverrides[Instance Application] struct {
 	// The function takes the following parameters:
 	// 
 	// 	- window Window 
+	//
+	// Signal emitted when a `GtkWindow` is added to
+	//    application through gtk_application_add_window().
 	WindowAdded func(Instance, Window)
 	// WindowRemoved allows you to override the implementation of the virtual method window_removed.
 	// The function takes the following parameters:
 	// 
 	// 	- window Window 
+	//
+	// Signal emitted when a `GtkWindow` is removed from
+	//    application, either as a side-effect of being destroyed or
+	//    explicitly through gtk_application_remove_window().
 	WindowRemoved func(Instance, Window)
 }
 
@@ -17925,6 +20052,49 @@ func UnsafeApplyApplicationOverrides[Instance Application](gclass unsafe.Pointer
 			},
 		)
 	}
+}
+
+// ParentWindowAdded calls the default implementations of the window_added virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- window Window 
+//
+// Signal emitted when a `GtkWindow` is added to
+//    application through gtk_application_add_window().
+func (application *ApplicationInstance) ParentWindowAdded(window Window) {
+	var carg0 *C.GtkApplication
+	var carg1 *C.GtkWindow // in, none, converted
+
+	parentclass := (*C.GtkApplicationClass)(classdata.PeekParentClass(UnsafeApplicationToGlibNone(application)))
+
+	carg1 = (*C.GtkWindow)(UnsafeWindowToGlibNone(window))
+
+	C._gotk4_gtk4_Application_virtual_window_added(unsafe.Pointer(parentclass.window_added), carg0, carg1)
+	runtime.KeepAlive(application)
+	runtime.KeepAlive(window)
+}
+
+// ParentWindowRemoved calls the default implementations of the window_removed virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- window Window 
+//
+// Signal emitted when a `GtkWindow` is removed from
+//    application, either as a side-effect of being destroyed or
+//    explicitly through gtk_application_remove_window().
+func (application *ApplicationInstance) ParentWindowRemoved(window Window) {
+	var carg0 *C.GtkApplication
+	var carg1 *C.GtkWindow // in, none, converted
+
+	parentclass := (*C.GtkApplicationClass)(classdata.PeekParentClass(UnsafeApplicationToGlibNone(application)))
+
+	carg1 = (*C.GtkWindow)(UnsafeWindowToGlibNone(window))
+
+	C._gotk4_gtk4_Application_virtual_window_removed(unsafe.Pointer(parentclass.window_removed), carg0, carg1)
+	runtime.KeepAlive(application)
+	runtime.KeepAlive(window)
 }
 
 // RegisterApplicationSubClass is used to register a go subclass of GtkApplication. For this to work safely please implement the
@@ -18036,13 +20206,15 @@ type BookmarkList interface {
 	// 
 	// The default IO priority is %G_PRIORITY_DEFAULT.
 	SetIOPriority(int32)
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapBookmarkList(base *gobject.ObjectInstance) *BookmarkListInstance {
 	return &BookmarkListInstance{
 		ObjectInstance: *base,
 		ListModelInstance: gio.ListModelInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -19982,6 +22154,8 @@ var _ BuilderCScope = (*BuilderCScopeInstance)(nil)
 type BuilderCScope interface {
 	gobject.Object
 	upcastToGtkBuilderCScope() *BuilderCScopeInstance
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapBuilderCScope(base *gobject.ObjectInstance) *BuilderCScopeInstance {
@@ -20191,6 +22365,8 @@ type ColorDialog interface {
 	//
 	// Sets whether colors may have alpha.
 	SetWithAlpha(bool)
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapColorDialog(base *gobject.ObjectInstance) *ColorDialogInstance {
@@ -21909,6 +24085,8 @@ type Constraint interface {
 	// Checks whether the constraint is a required relation for solving the
 	// constraint layout.
 	IsRequired() bool
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapConstraint(base *gobject.ObjectInstance) *ConstraintInstance {
@@ -22389,6 +24567,8 @@ type ConstraintGuide interface {
 	// Sets the strength of the constraint on the natural size of the
 	// given `GtkConstraintGuide`.
 	SetStrength(ConstraintStrength)
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapConstraintGuide(base *gobject.ObjectInstance) *ConstraintGuideInstance {
@@ -23295,13 +25475,15 @@ type DirectoryList interface {
 	// missing files that appeared between the initial loading
 	// and when monitoring was turned on.
 	SetMonitored(bool)
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapDirectoryList(base *gobject.ObjectInstance) *DirectoryListInstance {
 	return &DirectoryListInstance{
 		ObjectInstance: *base,
 		ListModelInstance: gio.ListModelInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -23849,6 +26031,87 @@ type EntryBuffer interface {
 	//
 	// This signal is emitted after text is inserted into the buffer.
 	ConnectInsertedText(func(EntryBuffer, uint, string, uint)) gobject.SignalHandle
+
+	// chain up virtual methods:
+
+	// ParentDeleteText calls the default implementations of the delete_text virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- position uint: position at which to delete text 
+	// 	- nChars uint: number of characters to delete 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret uint 
+	//
+	// Deletes a sequence of characters from the buffer.
+	// 
+	// @n_chars characters are deleted starting at @position.
+	// If @n_chars is negative, then all characters until the
+	// end of the text are deleted.
+	// 
+	// If @position or @n_chars are out of bounds, then they
+	// are coerced to sane values.
+	// 
+	// Note that the positions are specified in characters,
+	// not bytes.
+	ParentDeleteText(position uint, nChars uint) uint
+	// ParentDeletedText calls the default implementations of the deleted_text virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- position uint 
+	// 	- nChars uint 
+	ParentDeletedText(position uint, nChars uint)
+	// ParentGetLength calls the default implementations of the get_length virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret uint 
+	//
+	// Retrieves the length in characters of the buffer.
+	ParentGetLength() uint
+	// ParentGetText calls the default implementations of the get_text virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- nBytes *uint 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret string 
+	ParentGetText(nBytes *uint) string
+	// ParentInsertText calls the default implementations of the insert_text virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- position uint: the position at which to insert text. 
+	// 	- chars string: the text to insert into the buffer. 
+	// 	- nChars uint: the length of the text in characters, or -1 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret uint 
+	//
+	// Inserts @n_chars characters of @chars into the contents of the
+	// buffer, at position @position.
+	// 
+	// If @n_chars is negative, then characters from chars will be inserted
+	// until a null-terminator is found. If @position or @n_chars are out of
+	// bounds, or the maximum buffer text length is exceeded, then they are
+	// coerced to sane values.
+	// 
+	// Note that the position and length are in characters, not in bytes.
+	ParentInsertText(position uint, chars string, nChars uint) uint
+	// ParentInsertedText calls the default implementations of the inserted_text virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- position uint 
+	// 	- chars string 
+	// 	- nChars uint 
+	ParentInsertedText(position uint, chars string, nChars uint)
 }
 
 func unsafeWrapEntryBuffer(base *gobject.ObjectInstance) *EntryBufferInstance {
@@ -24251,6 +26514,18 @@ type EntryBufferOverrides[Instance EntryBuffer] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret uint 
+	//
+	// Deletes a sequence of characters from the buffer.
+	// 
+	// @n_chars characters are deleted starting at @position.
+	// If @n_chars is negative, then all characters until the
+	// end of the text are deleted.
+	// 
+	// If @position or @n_chars are out of bounds, then they
+	// are coerced to sane values.
+	// 
+	// Note that the positions are specified in characters,
+	// not bytes.
 	DeleteText func(Instance, uint, uint) uint
 	// DeletedText allows you to override the implementation of the virtual method deleted_text.
 	// The function takes the following parameters:
@@ -24262,6 +26537,8 @@ type EntryBufferOverrides[Instance EntryBuffer] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret uint 
+	//
+	// Retrieves the length in characters of the buffer.
 	GetLength func(Instance) uint
 	// GetText allows you to override the implementation of the virtual method get_text.
 	// The function takes the following parameters:
@@ -24282,6 +26559,16 @@ type EntryBufferOverrides[Instance EntryBuffer] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret uint 
+	//
+	// Inserts @n_chars characters of @chars into the contents of the
+	// buffer, at position @position.
+	// 
+	// If @n_chars is negative, then characters from chars will be inserted
+	// until a null-terminator is found. If @position or @n_chars are out of
+	// bounds, or the maximum buffer text length is exceeded, then they are
+	// coerced to sane values.
+	// 
+	// Note that the position and length are in characters, not in bytes.
 	InsertText func(Instance, uint, string, uint) uint
 	// InsertedText allows you to override the implementation of the virtual method inserted_text.
 	// The function takes the following parameters:
@@ -24433,6 +26720,202 @@ func UnsafeApplyEntryBufferOverrides[Instance EntryBuffer](gclass unsafe.Pointer
 			},
 		)
 	}
+}
+
+// ParentDeleteText calls the default implementations of the delete_text virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- position uint: position at which to delete text 
+// 	- nChars uint: number of characters to delete 
+// 
+// The function returns the following values:
+// 
+// 	- goret uint 
+//
+// Deletes a sequence of characters from the buffer.
+// 
+// @n_chars characters are deleted starting at @position.
+// If @n_chars is negative, then all characters until the
+// end of the text are deleted.
+// 
+// If @position or @n_chars are out of bounds, then they
+// are coerced to sane values.
+// 
+// Note that the positions are specified in characters,
+// not bytes.
+func (buffer *EntryBufferInstance) ParentDeleteText(position uint, nChars uint) uint {
+	var carg0 *C.GtkEntryBuffer
+	var carg1 C.guint // in, none, casted
+	var carg2 C.guint // in, none, casted
+	var cret  C.guint // return, none, casted
+
+	parentclass := (*C.GtkEntryBufferClass)(classdata.PeekParentClass(UnsafeEntryBufferToGlibNone(buffer)))
+
+	carg1 = C.guint(position)
+	carg2 = C.guint(nChars)
+
+	cret = C._gotk4_gtk4_EntryBuffer_virtual_delete_text(unsafe.Pointer(parentclass.delete_text), carg0, carg1, carg2)
+	runtime.KeepAlive(buffer)
+	runtime.KeepAlive(position)
+	runtime.KeepAlive(nChars)
+
+	var goret uint
+
+	goret = uint(cret)
+
+	return goret
+}
+
+// ParentDeletedText calls the default implementations of the deleted_text virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- position uint 
+// 	- nChars uint 
+func (buffer *EntryBufferInstance) ParentDeletedText(position uint, nChars uint) {
+	var carg0 *C.GtkEntryBuffer
+	var carg1 C.guint // in, none, casted
+	var carg2 C.guint // in, none, casted
+
+	parentclass := (*C.GtkEntryBufferClass)(classdata.PeekParentClass(UnsafeEntryBufferToGlibNone(buffer)))
+
+	carg1 = C.guint(position)
+	carg2 = C.guint(nChars)
+
+	C._gotk4_gtk4_EntryBuffer_virtual_deleted_text(unsafe.Pointer(parentclass.deleted_text), carg0, carg1, carg2)
+	runtime.KeepAlive(buffer)
+	runtime.KeepAlive(position)
+	runtime.KeepAlive(nChars)
+}
+
+// ParentGetLength calls the default implementations of the get_length virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret uint 
+//
+// Retrieves the length in characters of the buffer.
+func (buffer *EntryBufferInstance) ParentGetLength() uint {
+	var carg0 *C.GtkEntryBuffer
+	var cret  C.guint // return, none, casted
+
+	parentclass := (*C.GtkEntryBufferClass)(classdata.PeekParentClass(UnsafeEntryBufferToGlibNone(buffer)))
+
+	cret = C._gotk4_gtk4_EntryBuffer_virtual_get_length(unsafe.Pointer(parentclass.get_length), carg0)
+	runtime.KeepAlive(buffer)
+
+	var goret uint
+
+	goret = uint(cret)
+
+	return goret
+}
+
+// ParentGetText calls the default implementations of the get_text virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- nBytes *uint 
+// 
+// The function returns the following values:
+// 
+// 	- goret string 
+func (buffer *EntryBufferInstance) ParentGetText(nBytes *uint) string {
+	var carg0 *C.GtkEntryBuffer
+	var carg1 *C.gsize // in, transfer: none, C Pointers: 1, Name: gsize
+	var cret  *C.char  // return, none, string, casted *C.gchar
+
+	parentclass := (*C.GtkEntryBufferClass)(classdata.PeekParentClass(UnsafeEntryBufferToGlibNone(buffer)))
+
+	_ = nBytes
+	_ = carg1
+	panic("unimplemented conversion of *uint (gsize*)")
+
+	cret = C._gotk4_gtk4_EntryBuffer_virtual_get_text(unsafe.Pointer(parentclass.get_text), carg0, carg1)
+	runtime.KeepAlive(buffer)
+	runtime.KeepAlive(nBytes)
+
+	var goret string
+
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+
+	return goret
+}
+
+// ParentInsertText calls the default implementations of the insert_text virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- position uint: the position at which to insert text. 
+// 	- chars string: the text to insert into the buffer. 
+// 	- nChars uint: the length of the text in characters, or -1 
+// 
+// The function returns the following values:
+// 
+// 	- goret uint 
+//
+// Inserts @n_chars characters of @chars into the contents of the
+// buffer, at position @position.
+// 
+// If @n_chars is negative, then characters from chars will be inserted
+// until a null-terminator is found. If @position or @n_chars are out of
+// bounds, or the maximum buffer text length is exceeded, then they are
+// coerced to sane values.
+// 
+// Note that the position and length are in characters, not in bytes.
+func (buffer *EntryBufferInstance) ParentInsertText(position uint, chars string, nChars uint) uint {
+	var carg0 *C.GtkEntryBuffer
+	var carg1 C.guint // in, none, casted
+	var carg2 *C.char // in, none, string, casted *C.gchar
+	var carg3 C.guint // in, none, casted
+	var cret  C.guint // return, none, casted
+
+	parentclass := (*C.GtkEntryBufferClass)(classdata.PeekParentClass(UnsafeEntryBufferToGlibNone(buffer)))
+
+	carg1 = C.guint(position)
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(chars)))
+	defer C.free(unsafe.Pointer(carg2))
+	carg3 = C.guint(nChars)
+
+	cret = C._gotk4_gtk4_EntryBuffer_virtual_insert_text(unsafe.Pointer(parentclass.insert_text), carg0, carg1, carg2, carg3)
+	runtime.KeepAlive(buffer)
+	runtime.KeepAlive(position)
+	runtime.KeepAlive(chars)
+	runtime.KeepAlive(nChars)
+
+	var goret uint
+
+	goret = uint(cret)
+
+	return goret
+}
+
+// ParentInsertedText calls the default implementations of the inserted_text virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- position uint 
+// 	- chars string 
+// 	- nChars uint 
+func (buffer *EntryBufferInstance) ParentInsertedText(position uint, chars string, nChars uint) {
+	var carg0 *C.GtkEntryBuffer
+	var carg1 C.guint // in, none, casted
+	var carg2 *C.char // in, none, string, casted *C.gchar
+	var carg3 C.guint // in, none, casted
+
+	parentclass := (*C.GtkEntryBufferClass)(classdata.PeekParentClass(UnsafeEntryBufferToGlibNone(buffer)))
+
+	carg1 = C.guint(position)
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(chars)))
+	defer C.free(unsafe.Pointer(carg2))
+	carg3 = C.guint(nChars)
+
+	C._gotk4_gtk4_EntryBuffer_virtual_inserted_text(unsafe.Pointer(parentclass.inserted_text), carg0, carg1, carg2, carg3)
+	runtime.KeepAlive(buffer)
+	runtime.KeepAlive(position)
+	runtime.KeepAlive(chars)
+	runtime.KeepAlive(nChars)
 }
 
 // RegisterEntryBufferSubClass is used to register a go subclass of GtkEntryBuffer. For this to work safely please implement the
@@ -26279,6 +28762,8 @@ type FileDialog interface {
 	// Sets the title that will be shown on the
 	// file chooser dialog.
 	SetTitle(string)
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapFileDialog(base *gobject.ObjectInstance) *FileDialogInstance {
@@ -27304,6 +29789,8 @@ type FileLauncher interface {
 	//
 	// Sets whether to make the file writable for the handler.
 	SetWritable(bool)
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapFileLauncher(base *gobject.ObjectInstance) *FileLauncherInstance {
@@ -27788,6 +30275,25 @@ type Filter interface {
 	// to be checked, but only some. Refer to the [enum@Gtk.FilterChange]
 	// documentation for details.
 	ConnectChanged(func(Filter, FilterChange)) gobject.SignalHandle
+
+	// chain up virtual methods:
+
+	// ParentGetStrictness calls the default implementations of the get_strictness virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret FilterMatch 
+	//
+	// Gets the known strictness of @filters.
+	// 
+	// If the strictness is not known, %GTK_FILTER_MATCH_SOME is returned.
+	// 
+	// This value may change after emission of the [signal@Gtk.Filter::changed]
+	// signal.
+	// 
+	// This function is meant purely for optimization purposes, filters can
+	// choose to omit implementing it, but `GtkFilterListModel` uses it.
+	ParentGetStrictness() FilterMatch
 }
 
 func unsafeWrapFilter(base *gobject.ObjectInstance) *FilterInstance {
@@ -27916,6 +30422,16 @@ type FilterOverrides[Instance Filter] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret FilterMatch 
+	//
+	// Gets the known strictness of @filters.
+	// 
+	// If the strictness is not known, %GTK_FILTER_MATCH_SOME is returned.
+	// 
+	// This value may change after emission of the [signal@Gtk.Filter::changed]
+	// signal.
+	// 
+	// This function is meant purely for optimization purposes, filters can
+	// choose to omit implementing it, but `GtkFilterListModel` uses it.
 	GetStrictness func(Instance) FilterMatch
 }
 
@@ -27945,6 +30461,37 @@ func UnsafeApplyFilterOverrides[Instance Filter](gclass unsafe.Pointer, override
 			},
 		)
 	}
+}
+
+// ParentGetStrictness calls the default implementations of the get_strictness virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret FilterMatch 
+//
+// Gets the known strictness of @filters.
+// 
+// If the strictness is not known, %GTK_FILTER_MATCH_SOME is returned.
+// 
+// This value may change after emission of the [signal@Gtk.Filter::changed]
+// signal.
+// 
+// This function is meant purely for optimization purposes, filters can
+// choose to omit implementing it, but `GtkFilterListModel` uses it.
+func (self *FilterInstance) ParentGetStrictness() FilterMatch {
+	var carg0 *C.GtkFilter
+	var cret  C.GtkFilterMatch // return, none, casted
+
+	parentclass := (*C.GtkFilterClass)(classdata.PeekParentClass(UnsafeFilterToGlibNone(self)))
+
+	cret = C._gotk4_gtk4_Filter_virtual_get_strictness(unsafe.Pointer(parentclass.get_strictness), carg0)
+	runtime.KeepAlive(self)
+
+	var goret FilterMatch
+
+	goret = FilterMatch(cret)
+
+	return goret
 }
 
 // RegisterFilterSubClass is used to register a go subclass of GtkFilter. For this to work safely please implement the
@@ -28094,13 +30641,15 @@ type FilterListModel interface {
 	// are doing and have set up an appropriate filter to ensure that item
 	// types match.
 	SetModel(gio.ListModel)
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapFilterListModel(base *gobject.ObjectInstance) *FilterListModelInstance {
 	return &FilterListModelInstance{
 		ObjectInstance: *base,
 		ListModelInstance: gio.ListModelInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -28461,13 +31010,15 @@ type FlattenListModel interface {
 	//
 	// Sets a new model to be flattened.
 	SetModel(gio.ListModel)
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapFlattenListModel(base *gobject.ObjectInstance) *FlattenListModelInstance {
 	return &FlattenListModelInstance{
 		ObjectInstance: *base,
 		ListModelInstance: gio.ListModelInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -28893,6 +31444,8 @@ type FontDialog interface {
 	// Sets the title that will be shown on the
 	// font chooser dialog.
 	SetTitle(string)
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapFontDialog(base *gobject.ObjectInstance) *FontDialogInstance {
@@ -31933,6 +34486,200 @@ type IMContext interface {
 	// The callback should set the input method surrounding context by
 	// calling the [method@Gtk.IMContext.set_surrounding] method.
 	ConnectRetrieveSurrounding(func(IMContext) bool) gobject.SignalHandle
+
+	// chain up virtual methods:
+
+	// ParentActivateOSK calls the default implementations of the activate_osk virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	ParentActivateOSK()
+	// ParentCommit calls the default implementations of the commit virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- str string 
+	//
+	// Default handler of the [signal@Gtk.IMContext::commit] signal.
+	ParentCommit(str string)
+	// ParentDeleteSurrounding calls the default implementations of the delete_surrounding virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- offset int32: offset from cursor position in chars;
+	//    a negative value means start before the cursor. 
+	// 	- nChars int32: number of characters to delete. 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	//
+	// Asks the widget that the input context is attached to delete
+	// characters around the cursor position by emitting the
+	// `::delete_surrounding` signal.
+	// 
+	// Note that @offset and @n_chars are in characters not in bytes
+	// which differs from the usage other places in `GtkIMContext`.
+	// 
+	// In order to use this function, you should first call
+	// [method@Gtk.IMContext.get_surrounding] to get the current context,
+	// and call this function immediately afterwards to make sure that you
+	// know what you are deleting. You should also account for the fact
+	// that even if the signal was handled, the input context might not
+	// have deleted all the characters that were requested to be deleted.
+	// 
+	// This function is used by an input method that wants to make
+	// substitutions in the existing text in response to new input.
+	// It is not useful for applications.
+	ParentDeleteSurrounding(offset int32, nChars int32) bool
+	// ParentFocusIn calls the default implementations of the focus_in virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	//
+	// Notify the input method that the widget to which this
+	// input context corresponds has gained focus.
+	// 
+	// The input method may, for example, change the displayed
+	// feedback to reflect this change.
+	ParentFocusIn()
+	// ParentFocusOut calls the default implementations of the focus_out virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	//
+	// Notify the input method that the widget to which this
+	// input context corresponds has lost focus.
+	// 
+	// The input method may, for example, change the displayed
+	// feedback or reset the contexts state to reflect this change.
+	ParentFocusOut()
+	// ParentGetPreeditString calls the default implementations of the get_preedit_string virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- str string: location to store the retrieved
+	//   string. The string retrieved must be freed with g_free(). 
+	// 	- attrs *pango.AttrList: location to store the retrieved
+	//   attribute list. When you are done with this list, you
+	//   must unreference it with [method@Pango.AttrList.unref]. 
+	// 	- cursorPos int32: location to store position of cursor
+	//   (in characters) within the preedit string. 
+	//
+	// Retrieve the current preedit string for the input context,
+	// and a list of attributes to apply to the string.
+	// 
+	// This string should be displayed inserted at the insertion point.
+	ParentGetPreeditString() (string, *pango.AttrList, int32)
+	// ParentGetSurroundingWithSelection calls the default implementations of the get_surrounding_with_selection virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- text string: location to store a UTF-8 encoded
+	//   string of text holding context around the insertion point.
+	//   If the function returns %TRUE, then you must free the result
+	//   stored in this location with g_free(). 
+	// 	- cursorIndex int32: location to store byte index of the insertion
+	//   cursor within @text. 
+	// 	- anchorIndex int32: location to store byte index of the selection
+	//   bound within @text 
+	// 	- goret bool 
+	//
+	// Retrieves context around the insertion point.
+	// 
+	// Input methods typically want context in order to constrain input
+	// text based on existing text; this is important for languages such
+	// as Thai where only some sequences of characters are allowed.
+	// 
+	// This function is implemented by emitting the
+	// [signal@Gtk.IMContext::retrieve-surrounding] signal on the input method;
+	// in response to this signal, a widget should provide as much context as
+	// is available, up to an entire paragraph, by calling
+	// [method@Gtk.IMContext.set_surrounding_with_selection].
+	// 
+	// Note that there is no obligation for a widget to respond to the
+	// `::retrieve-surrounding` signal, so input methods must be prepared to
+	// function without context.
+	ParentGetSurroundingWithSelection() (string, int32, int32, bool)
+	// ParentPreeditChanged calls the default implementations of the preedit_changed virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	//
+	// Default handler of the [signal@Gtk.IMContext::preedit-changed]
+	//   signal.
+	ParentPreeditChanged()
+	// ParentPreeditEnd calls the default implementations of the preedit_end virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	//
+	// Default handler of the [signal@Gtk.IMContext::preedit-end] signal.
+	ParentPreeditEnd()
+	// ParentPreeditStart calls the default implementations of the preedit_start virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	//
+	// Default handler of the [signal@Gtk.IMContext::preedit-start] signal.
+	ParentPreeditStart()
+	// ParentReset calls the default implementations of the reset virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	//
+	// Notify the input method that a change such as a change in cursor
+	// position has been made.
+	// 
+	// This will typically cause the input method to clear the preedit state.
+	ParentReset()
+	// ParentRetrieveSurrounding calls the default implementations of the retrieve_surrounding virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	//
+	// Default handler of the
+	//   [signal@Gtk.IMContext::retrieve-surrounding] signal.
+	ParentRetrieveSurrounding() bool
+	// ParentSetClientWidget calls the default implementations of the set_client_widget virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- widget Widget (nullable): the client widget. This may be %NULL to indicate
+	//   that the previous client widget no longer exists. 
+	//
+	// Set the client widget for the input context.
+	// 
+	// This is the `GtkWidget` holding the input focus. This widget is
+	// used in order to correctly position status windows, and may
+	// also be used for purposes internal to the input method.
+	ParentSetClientWidget(widget Widget)
+	// ParentSetCursorLocation calls the default implementations of the set_cursor_location virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- area *gdk.Rectangle: new location 
+	//
+	// Notify the input method that a change in cursor
+	// position has been made.
+	// 
+	// The location is relative to the client widget.
+	ParentSetCursorLocation(area *gdk.Rectangle)
+	// ParentSetSurroundingWithSelection calls the default implementations of the set_surrounding_with_selection virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- text string: text surrounding the insertion point, as UTF-8.
+	//   the preedit string should not be included within @text 
+	// 	- len int32: the length of @text, or -1 if @text is nul-terminated 
+	// 	- cursorIndex int32: the byte index of the insertion cursor within @text 
+	// 	- anchorIndex int32: the byte index of the selection bound within @text 
+	//
+	// Sets surrounding context around the insertion point and preedit
+	// string. This function is expected to be called in response to the
+	// [signal@Gtk.IMContext::retrieve_surrounding] signal, and will likely
+	// have no effect if called at other times.
+	ParentSetSurroundingWithSelection(text string, len int32, cursorIndex int32, anchorIndex int32)
+	// ParentSetUsePreedit calls the default implementations of the set_use_preedit virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- usePreedit bool: whether the IM context should use the preedit string. 
+	//
+	// Sets whether the IM context should use the preedit string
+	// to display feedback.
+	// 
+	// If @use_preedit is %FALSE (default is %TRUE), then the IM context
+	// may use some other method to display feedback, such as displaying
+	// it in a child of the root window.
+	ParentSetUsePreedit(usePreedit bool)
 }
 
 func unsafeWrapIMContext(base *gobject.ObjectInstance) *IMContextInstance {
@@ -32412,6 +35159,8 @@ type IMContextOverrides[Instance IMContext] struct {
 	// The function takes the following parameters:
 	// 
 	// 	- str string 
+	//
+	// Default handler of the [signal@Gtk.IMContext::commit] signal.
 	Commit func(Instance, string)
 	// DeleteSurrounding allows you to override the implementation of the virtual method delete_surrounding.
 	// The function takes the following parameters:
@@ -32423,10 +35172,40 @@ type IMContextOverrides[Instance IMContext] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
+	//
+	// Asks the widget that the input context is attached to delete
+	// characters around the cursor position by emitting the
+	// `::delete_surrounding` signal.
+	// 
+	// Note that @offset and @n_chars are in characters not in bytes
+	// which differs from the usage other places in `GtkIMContext`.
+	// 
+	// In order to use this function, you should first call
+	// [method@Gtk.IMContext.get_surrounding] to get the current context,
+	// and call this function immediately afterwards to make sure that you
+	// know what you are deleting. You should also account for the fact
+	// that even if the signal was handled, the input context might not
+	// have deleted all the characters that were requested to be deleted.
+	// 
+	// This function is used by an input method that wants to make
+	// substitutions in the existing text in response to new input.
+	// It is not useful for applications.
 	DeleteSurrounding func(Instance, int32, int32) bool
 	// FocusIn allows you to override the implementation of the virtual method focus_in.
+	//
+	// Notify the input method that the widget to which this
+	// input context corresponds has gained focus.
+	// 
+	// The input method may, for example, change the displayed
+	// feedback to reflect this change.
 	FocusIn func(Instance)
 	// FocusOut allows you to override the implementation of the virtual method focus_out.
+	//
+	// Notify the input method that the widget to which this
+	// input context corresponds has lost focus.
+	// 
+	// The input method may, for example, change the displayed
+	// feedback or reset the contexts state to reflect this change.
 	FocusOut func(Instance)
 	// GetPreeditString allows you to override the implementation of the virtual method get_preedit_string.
 	// The function returns the following values:
@@ -32438,6 +35217,11 @@ type IMContextOverrides[Instance IMContext] struct {
 	//   must unreference it with [method@Pango.AttrList.unref]. 
 	// 	- cursorPos int32: location to store position of cursor
 	//   (in characters) within the preedit string. 
+	//
+	// Retrieve the current preedit string for the input context,
+	// and a list of attributes to apply to the string.
+	// 
+	// This string should be displayed inserted at the insertion point.
 	GetPreeditString func(Instance) (string, *pango.AttrList, int32)
 	// GetSurroundingWithSelection allows you to override the implementation of the virtual method get_surrounding_with_selection.
 	// The function returns the following values:
@@ -32451,30 +35235,72 @@ type IMContextOverrides[Instance IMContext] struct {
 	// 	- anchorIndex int32: location to store byte index of the selection
 	//   bound within @text 
 	// 	- goret bool 
+	//
+	// Retrieves context around the insertion point.
+	// 
+	// Input methods typically want context in order to constrain input
+	// text based on existing text; this is important for languages such
+	// as Thai where only some sequences of characters are allowed.
+	// 
+	// This function is implemented by emitting the
+	// [signal@Gtk.IMContext::retrieve-surrounding] signal on the input method;
+	// in response to this signal, a widget should provide as much context as
+	// is available, up to an entire paragraph, by calling
+	// [method@Gtk.IMContext.set_surrounding_with_selection].
+	// 
+	// Note that there is no obligation for a widget to respond to the
+	// `::retrieve-surrounding` signal, so input methods must be prepared to
+	// function without context.
 	GetSurroundingWithSelection func(Instance) (string, int32, int32, bool)
 	// PreeditChanged allows you to override the implementation of the virtual method preedit_changed.
+	//
+	// Default handler of the [signal@Gtk.IMContext::preedit-changed]
+	//   signal.
 	PreeditChanged func(Instance)
 	// PreeditEnd allows you to override the implementation of the virtual method preedit_end.
+	//
+	// Default handler of the [signal@Gtk.IMContext::preedit-end] signal.
 	PreeditEnd func(Instance)
 	// PreeditStart allows you to override the implementation of the virtual method preedit_start.
+	//
+	// Default handler of the [signal@Gtk.IMContext::preedit-start] signal.
 	PreeditStart func(Instance)
 	// Reset allows you to override the implementation of the virtual method reset.
+	//
+	// Notify the input method that a change such as a change in cursor
+	// position has been made.
+	// 
+	// This will typically cause the input method to clear the preedit state.
 	Reset func(Instance)
 	// RetrieveSurrounding allows you to override the implementation of the virtual method retrieve_surrounding.
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
+	//
+	// Default handler of the
+	//   [signal@Gtk.IMContext::retrieve-surrounding] signal.
 	RetrieveSurrounding func(Instance) bool
 	// SetClientWidget allows you to override the implementation of the virtual method set_client_widget.
 	// The function takes the following parameters:
 	// 
 	// 	- widget Widget (nullable): the client widget. This may be %NULL to indicate
 	//   that the previous client widget no longer exists. 
+	//
+	// Set the client widget for the input context.
+	// 
+	// This is the `GtkWidget` holding the input focus. This widget is
+	// used in order to correctly position status windows, and may
+	// also be used for purposes internal to the input method.
 	SetClientWidget func(Instance, Widget)
 	// SetCursorLocation allows you to override the implementation of the virtual method set_cursor_location.
 	// The function takes the following parameters:
 	// 
 	// 	- area *gdk.Rectangle: new location 
+	//
+	// Notify the input method that a change in cursor
+	// position has been made.
+	// 
+	// The location is relative to the client widget.
 	SetCursorLocation func(Instance, *gdk.Rectangle)
 	// SetSurroundingWithSelection allows you to override the implementation of the virtual method set_surrounding_with_selection.
 	// The function takes the following parameters:
@@ -32484,11 +35310,23 @@ type IMContextOverrides[Instance IMContext] struct {
 	// 	- len int32: the length of @text, or -1 if @text is nul-terminated 
 	// 	- cursorIndex int32: the byte index of the insertion cursor within @text 
 	// 	- anchorIndex int32: the byte index of the selection bound within @text 
+	//
+	// Sets surrounding context around the insertion point and preedit
+	// string. This function is expected to be called in response to the
+	// [signal@Gtk.IMContext::retrieve_surrounding] signal, and will likely
+	// have no effect if called at other times.
 	SetSurroundingWithSelection func(Instance, string, int32, int32, int32)
 	// SetUsePreedit allows you to override the implementation of the virtual method set_use_preedit.
 	// The function takes the following parameters:
 	// 
 	// 	- usePreedit bool: whether the IM context should use the preedit string. 
+	//
+	// Sets whether the IM context should use the preedit string
+	// to display feedback.
+	// 
+	// If @use_preedit is %FALSE (default is %TRUE), then the IM context
+	// may use some other method to display feedback, such as displaying
+	// it in a child of the root window.
 	SetUsePreedit func(Instance, bool)
 }
 
@@ -32798,6 +35636,418 @@ func UnsafeApplyIMContextOverrides[Instance IMContext](gclass unsafe.Pointer, ov
 	}
 }
 
+// ParentActivateOSK calls the default implementations of the activate_osk virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+func (_context *IMContextInstance) ParentActivateOSK() {
+	var carg0 *C.GtkIMContext
+
+	parentclass := (*C.GtkIMContextClass)(classdata.PeekParentClass(UnsafeIMContextToGlibNone(_context)))
+
+	C._gotk4_gtk4_IMContext_virtual_activate_osk(unsafe.Pointer(parentclass.activate_osk), carg0)
+	runtime.KeepAlive(_context)
+}
+
+// ParentCommit calls the default implementations of the commit virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- str string 
+//
+// Default handler of the [signal@Gtk.IMContext::commit] signal.
+func (_context *IMContextInstance) ParentCommit(str string) {
+	var carg0 *C.GtkIMContext
+	var carg1 *C.char // in, none, string, casted *C.gchar
+
+	parentclass := (*C.GtkIMContextClass)(classdata.PeekParentClass(UnsafeIMContextToGlibNone(_context)))
+
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(str)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	C._gotk4_gtk4_IMContext_virtual_commit(unsafe.Pointer(parentclass.commit), carg0, carg1)
+	runtime.KeepAlive(_context)
+	runtime.KeepAlive(str)
+}
+
+// ParentDeleteSurrounding calls the default implementations of the delete_surrounding virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- offset int32: offset from cursor position in chars;
+//    a negative value means start before the cursor. 
+// 	- nChars int32: number of characters to delete. 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Asks the widget that the input context is attached to delete
+// characters around the cursor position by emitting the
+// `::delete_surrounding` signal.
+// 
+// Note that @offset and @n_chars are in characters not in bytes
+// which differs from the usage other places in `GtkIMContext`.
+// 
+// In order to use this function, you should first call
+// [method@Gtk.IMContext.get_surrounding] to get the current context,
+// and call this function immediately afterwards to make sure that you
+// know what you are deleting. You should also account for the fact
+// that even if the signal was handled, the input context might not
+// have deleted all the characters that were requested to be deleted.
+// 
+// This function is used by an input method that wants to make
+// substitutions in the existing text in response to new input.
+// It is not useful for applications.
+func (_context *IMContextInstance) ParentDeleteSurrounding(offset int32, nChars int32) bool {
+	var carg0 *C.GtkIMContext
+	var carg1 C.int      // in, none, casted, casted C.gint
+	var carg2 C.int      // in, none, casted, casted C.gint
+	var cret  C.gboolean // return
+
+	parentclass := (*C.GtkIMContextClass)(classdata.PeekParentClass(UnsafeIMContextToGlibNone(_context)))
+
+	carg1 = C.int(offset)
+	carg2 = C.int(nChars)
+
+	cret = C._gotk4_gtk4_IMContext_virtual_delete_surrounding(unsafe.Pointer(parentclass.delete_surrounding), carg0, carg1, carg2)
+	runtime.KeepAlive(_context)
+	runtime.KeepAlive(offset)
+	runtime.KeepAlive(nChars)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// ParentFocusIn calls the default implementations of the focus_in virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+//
+// Notify the input method that the widget to which this
+// input context corresponds has gained focus.
+// 
+// The input method may, for example, change the displayed
+// feedback to reflect this change.
+func (_context *IMContextInstance) ParentFocusIn() {
+	var carg0 *C.GtkIMContext
+
+	parentclass := (*C.GtkIMContextClass)(classdata.PeekParentClass(UnsafeIMContextToGlibNone(_context)))
+
+	C._gotk4_gtk4_IMContext_virtual_focus_in(unsafe.Pointer(parentclass.focus_in), carg0)
+	runtime.KeepAlive(_context)
+}
+
+// ParentFocusOut calls the default implementations of the focus_out virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+//
+// Notify the input method that the widget to which this
+// input context corresponds has lost focus.
+// 
+// The input method may, for example, change the displayed
+// feedback or reset the contexts state to reflect this change.
+func (_context *IMContextInstance) ParentFocusOut() {
+	var carg0 *C.GtkIMContext
+
+	parentclass := (*C.GtkIMContextClass)(classdata.PeekParentClass(UnsafeIMContextToGlibNone(_context)))
+
+	C._gotk4_gtk4_IMContext_virtual_focus_out(unsafe.Pointer(parentclass.focus_out), carg0)
+	runtime.KeepAlive(_context)
+}
+
+// ParentGetPreeditString calls the default implementations of the get_preedit_string virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- str string: location to store the retrieved
+//   string. The string retrieved must be freed with g_free(). 
+// 	- attrs *pango.AttrList: location to store the retrieved
+//   attribute list. When you are done with this list, you
+//   must unreference it with [method@Pango.AttrList.unref]. 
+// 	- cursorPos int32: location to store position of cursor
+//   (in characters) within the preedit string. 
+//
+// Retrieve the current preedit string for the input context,
+// and a list of attributes to apply to the string.
+// 
+// This string should be displayed inserted at the insertion point.
+func (_context *IMContextInstance) ParentGetPreeditString() (string, *pango.AttrList, int32) {
+	var carg0 *C.GtkIMContext
+	var carg1 *C.char          // out, full, string, casted *C.gchar
+	var carg2 *C.PangoAttrList // out, full, converted
+	var carg3 C.int            // out, full, casted, casted C.gint
+
+	parentclass := (*C.GtkIMContextClass)(classdata.PeekParentClass(UnsafeIMContextToGlibNone(_context)))
+
+	C._gotk4_gtk4_IMContext_virtual_get_preedit_string(unsafe.Pointer(parentclass.get_preedit_string), carg0, &carg1, &carg2, &carg3)
+	runtime.KeepAlive(_context)
+
+	var str       string
+	var attrs     *pango.AttrList
+	var cursorPos int32
+
+	str = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+	defer C.free(unsafe.Pointer(carg1))
+	attrs = pango.UnsafeAttrListFromGlibFull(unsafe.Pointer(carg2))
+	cursorPos = int32(carg3)
+
+	return str, attrs, cursorPos
+}
+
+// ParentGetSurroundingWithSelection calls the default implementations of the get_surrounding_with_selection virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- text string: location to store a UTF-8 encoded
+//   string of text holding context around the insertion point.
+//   If the function returns %TRUE, then you must free the result
+//   stored in this location with g_free(). 
+// 	- cursorIndex int32: location to store byte index of the insertion
+//   cursor within @text. 
+// 	- anchorIndex int32: location to store byte index of the selection
+//   bound within @text 
+// 	- goret bool 
+//
+// Retrieves context around the insertion point.
+// 
+// Input methods typically want context in order to constrain input
+// text based on existing text; this is important for languages such
+// as Thai where only some sequences of characters are allowed.
+// 
+// This function is implemented by emitting the
+// [signal@Gtk.IMContext::retrieve-surrounding] signal on the input method;
+// in response to this signal, a widget should provide as much context as
+// is available, up to an entire paragraph, by calling
+// [method@Gtk.IMContext.set_surrounding_with_selection].
+// 
+// Note that there is no obligation for a widget to respond to the
+// `::retrieve-surrounding` signal, so input methods must be prepared to
+// function without context.
+func (_context *IMContextInstance) ParentGetSurroundingWithSelection() (string, int32, int32, bool) {
+	var carg0 *C.GtkIMContext
+	var carg1 *C.char    // out, full, string, casted *C.gchar
+	var carg2 C.int      // out, full, casted, casted C.gint
+	var carg3 C.int      // out, full, casted, casted C.gint
+	var cret  C.gboolean // return
+
+	parentclass := (*C.GtkIMContextClass)(classdata.PeekParentClass(UnsafeIMContextToGlibNone(_context)))
+
+	cret = C._gotk4_gtk4_IMContext_virtual_get_surrounding_with_selection(unsafe.Pointer(parentclass.get_surrounding_with_selection), carg0, &carg1, &carg2, &carg3)
+	runtime.KeepAlive(_context)
+
+	var text        string
+	var cursorIndex int32
+	var anchorIndex int32
+	var goret       bool
+
+	text = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+	defer C.free(unsafe.Pointer(carg1))
+	cursorIndex = int32(carg2)
+	anchorIndex = int32(carg3)
+	if cret != 0 {
+		goret = true
+	}
+
+	return text, cursorIndex, anchorIndex, goret
+}
+
+// ParentPreeditChanged calls the default implementations of the preedit_changed virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+//
+// Default handler of the [signal@Gtk.IMContext::preedit-changed]
+//   signal.
+func (_context *IMContextInstance) ParentPreeditChanged() {
+	var carg0 *C.GtkIMContext
+
+	parentclass := (*C.GtkIMContextClass)(classdata.PeekParentClass(UnsafeIMContextToGlibNone(_context)))
+
+	C._gotk4_gtk4_IMContext_virtual_preedit_changed(unsafe.Pointer(parentclass.preedit_changed), carg0)
+	runtime.KeepAlive(_context)
+}
+
+// ParentPreeditEnd calls the default implementations of the preedit_end virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+//
+// Default handler of the [signal@Gtk.IMContext::preedit-end] signal.
+func (_context *IMContextInstance) ParentPreeditEnd() {
+	var carg0 *C.GtkIMContext
+
+	parentclass := (*C.GtkIMContextClass)(classdata.PeekParentClass(UnsafeIMContextToGlibNone(_context)))
+
+	C._gotk4_gtk4_IMContext_virtual_preedit_end(unsafe.Pointer(parentclass.preedit_end), carg0)
+	runtime.KeepAlive(_context)
+}
+
+// ParentPreeditStart calls the default implementations of the preedit_start virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+//
+// Default handler of the [signal@Gtk.IMContext::preedit-start] signal.
+func (_context *IMContextInstance) ParentPreeditStart() {
+	var carg0 *C.GtkIMContext
+
+	parentclass := (*C.GtkIMContextClass)(classdata.PeekParentClass(UnsafeIMContextToGlibNone(_context)))
+
+	C._gotk4_gtk4_IMContext_virtual_preedit_start(unsafe.Pointer(parentclass.preedit_start), carg0)
+	runtime.KeepAlive(_context)
+}
+
+// ParentReset calls the default implementations of the reset virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+//
+// Notify the input method that a change such as a change in cursor
+// position has been made.
+// 
+// This will typically cause the input method to clear the preedit state.
+func (_context *IMContextInstance) ParentReset() {
+	var carg0 *C.GtkIMContext
+
+	parentclass := (*C.GtkIMContextClass)(classdata.PeekParentClass(UnsafeIMContextToGlibNone(_context)))
+
+	C._gotk4_gtk4_IMContext_virtual_reset(unsafe.Pointer(parentclass.reset), carg0)
+	runtime.KeepAlive(_context)
+}
+
+// ParentRetrieveSurrounding calls the default implementations of the retrieve_surrounding virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Default handler of the
+//   [signal@Gtk.IMContext::retrieve-surrounding] signal.
+func (_context *IMContextInstance) ParentRetrieveSurrounding() bool {
+	var carg0 *C.GtkIMContext
+	var cret  C.gboolean // return
+
+	parentclass := (*C.GtkIMContextClass)(classdata.PeekParentClass(UnsafeIMContextToGlibNone(_context)))
+
+	cret = C._gotk4_gtk4_IMContext_virtual_retrieve_surrounding(unsafe.Pointer(parentclass.retrieve_surrounding), carg0)
+	runtime.KeepAlive(_context)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// ParentSetClientWidget calls the default implementations of the set_client_widget virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- widget Widget (nullable): the client widget. This may be %NULL to indicate
+//   that the previous client widget no longer exists. 
+//
+// Set the client widget for the input context.
+// 
+// This is the `GtkWidget` holding the input focus. This widget is
+// used in order to correctly position status windows, and may
+// also be used for purposes internal to the input method.
+func (_context *IMContextInstance) ParentSetClientWidget(widget Widget) {
+	var carg0 *C.GtkIMContext
+	var carg1 *C.GtkWidget // in, none, converted, nullable
+
+	parentclass := (*C.GtkIMContextClass)(classdata.PeekParentClass(UnsafeIMContextToGlibNone(_context)))
+
+	if widget != nil {
+		carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
+	}
+
+	C._gotk4_gtk4_IMContext_virtual_set_client_widget(unsafe.Pointer(parentclass.set_client_widget), carg0, carg1)
+	runtime.KeepAlive(_context)
+	runtime.KeepAlive(widget)
+}
+
+// ParentSetCursorLocation calls the default implementations of the set_cursor_location virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- area *gdk.Rectangle: new location 
+//
+// Notify the input method that a change in cursor
+// position has been made.
+// 
+// The location is relative to the client widget.
+func (_context *IMContextInstance) ParentSetCursorLocation(area *gdk.Rectangle) {
+	var carg0 *C.GtkIMContext
+	var carg1 *C.GdkRectangle // in, none, converted
+
+	parentclass := (*C.GtkIMContextClass)(classdata.PeekParentClass(UnsafeIMContextToGlibNone(_context)))
+
+	carg1 = (*C.GdkRectangle)(gdk.UnsafeRectangleToGlibNone(area))
+
+	C._gotk4_gtk4_IMContext_virtual_set_cursor_location(unsafe.Pointer(parentclass.set_cursor_location), carg0, carg1)
+	runtime.KeepAlive(_context)
+	runtime.KeepAlive(area)
+}
+
+// ParentSetSurroundingWithSelection calls the default implementations of the set_surrounding_with_selection virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- text string: text surrounding the insertion point, as UTF-8.
+//   the preedit string should not be included within @text 
+// 	- len int32: the length of @text, or -1 if @text is nul-terminated 
+// 	- cursorIndex int32: the byte index of the insertion cursor within @text 
+// 	- anchorIndex int32: the byte index of the selection bound within @text 
+//
+// Sets surrounding context around the insertion point and preedit
+// string. This function is expected to be called in response to the
+// [signal@Gtk.IMContext::retrieve_surrounding] signal, and will likely
+// have no effect if called at other times.
+func (_context *IMContextInstance) ParentSetSurroundingWithSelection(text string, len int32, cursorIndex int32, anchorIndex int32) {
+	var carg0 *C.GtkIMContext
+	var carg1 *C.char // in, none, string, casted *C.gchar
+	var carg2 C.int   // in, none, casted, casted C.gint
+	var carg3 C.int   // in, none, casted, casted C.gint
+	var carg4 C.int   // in, none, casted, casted C.gint
+
+	parentclass := (*C.GtkIMContextClass)(classdata.PeekParentClass(UnsafeIMContextToGlibNone(_context)))
+
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(text)))
+	defer C.free(unsafe.Pointer(carg1))
+	carg2 = C.int(len)
+	carg3 = C.int(cursorIndex)
+	carg4 = C.int(anchorIndex)
+
+	C._gotk4_gtk4_IMContext_virtual_set_surrounding_with_selection(unsafe.Pointer(parentclass.set_surrounding_with_selection), carg0, carg1, carg2, carg3, carg4)
+	runtime.KeepAlive(_context)
+	runtime.KeepAlive(text)
+	runtime.KeepAlive(len)
+	runtime.KeepAlive(cursorIndex)
+	runtime.KeepAlive(anchorIndex)
+}
+
+// ParentSetUsePreedit calls the default implementations of the set_use_preedit virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- usePreedit bool: whether the IM context should use the preedit string. 
+//
+// Sets whether the IM context should use the preedit string
+// to display feedback.
+// 
+// If @use_preedit is %FALSE (default is %TRUE), then the IM context
+// may use some other method to display feedback, such as displaying
+// it in a child of the root window.
+func (_context *IMContextInstance) ParentSetUsePreedit(usePreedit bool) {
+	var carg0 *C.GtkIMContext
+	var carg1 C.gboolean // in
+
+	parentclass := (*C.GtkIMContextClass)(classdata.PeekParentClass(UnsafeIMContextToGlibNone(_context)))
+
+	if usePreedit {
+		carg1 = C.TRUE
+	}
+
+	C._gotk4_gtk4_IMContext_virtual_set_use_preedit(unsafe.Pointer(parentclass.set_use_preedit), carg0, carg1)
+	runtime.KeepAlive(_context)
+	runtime.KeepAlive(usePreedit)
+}
+
 // RegisterIMContextSubClass is used to register a go subclass of GtkIMContext. For this to work safely please implement the
 // virtual methods required by the implementation.
 func RegisterIMContextSubClass[InstanceT IMContext](
@@ -32884,6 +36134,8 @@ type IMContextSimple interface {
 	//
 	// Adds an additional table from the X11 compose file.
 	AddComposeFile(string)
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapIMContextSimple(base *gobject.ObjectInstance) *IMContextSimpleInstance {
@@ -33049,6 +36301,8 @@ type IMMulticontext interface {
 	// IM module setting. See the [property@Gtk.Settings:gtk-im-module]
 	// property.
 	SetContextID(string)
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapIMMulticontext(base *gobject.ObjectInstance) *IMMulticontextInstance {
@@ -33269,7 +36523,7 @@ func unsafeWrapIconPaintable(base *gobject.ObjectInstance) *IconPaintableInstanc
 	return &IconPaintableInstance{
 		ObjectInstance: *base,
 		PaintableInstance: gdk.PaintableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -34351,6 +37605,8 @@ type LayoutChild interface {
 	// Retrieves the `GtkLayoutManager` instance that created the
 	// given @layout_child.
 	GetLayoutManager() LayoutManager
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapLayoutChild(base *gobject.ObjectInstance) *LayoutChildInstance {
@@ -34626,6 +37882,91 @@ type LayoutManager interface {
 	// See the [class@Gtk.Widget] documentation on layout management for
 	// more details.
 	Measure(Widget, Orientation, int32) (int32, int32, int32, int32)
+
+	// chain up virtual methods:
+
+	// ParentAllocate calls the default implementations of the allocate virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- widget Widget: the `GtkWidget` using @manager 
+	// 	- width int32: the new width of the @widget 
+	// 	- height int32: the new height of the @widget 
+	// 	- baseline int32: the baseline position of the @widget, or -1 
+	//
+	// Assigns the given @width, @height, and @baseline to
+	// a @widget, and computes the position and sizes of the children of
+	// the @widget using the layout management policy of @manager.
+	ParentAllocate(widget Widget, width int32, height int32, baseline int32)
+	// ParentCreateLayoutChild calls the default implementations of the create_layout_child virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- widget Widget: the widget using the @manager 
+	// 	- forChild Widget: the child of @widget 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret LayoutChild 
+	//
+	// Create a `GtkLayoutChild` instance for the given @for_child widget.
+	ParentCreateLayoutChild(widget Widget, forChild Widget) LayoutChild
+	// ParentGetRequestMode calls the default implementations of the get_request_mode virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- widget Widget 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret SizeRequestMode 
+	//
+	// a virtual function, used to return the preferred
+	//   request mode for the layout manager; for instance, "width for height"
+	//   or "height for width"; see `GtkSizeRequestMode`
+	ParentGetRequestMode(widget Widget) SizeRequestMode
+	// ParentMeasure calls the default implementations of the measure virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- widget Widget: the `GtkWidget` using @manager 
+	// 	- orientation Orientation: the orientation to measure 
+	// 	- forSize int32: Size for the opposite of @orientation; for instance, if
+	//   the @orientation is %GTK_ORIENTATION_HORIZONTAL, this is the height
+	//   of the widget; if the @orientation is %GTK_ORIENTATION_VERTICAL, this
+	//   is the width of the widget. This allows to measure the height for the
+	//   given width, and the width for the given height. Use -1 if the size
+	//   is not known 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- minimum int32: the minimum size for the given size and
+	//   orientation 
+	// 	- natural int32: the natural, or preferred size for the
+	//   given size and orientation 
+	// 	- minimumBaseline int32: the baseline position for the
+	//   minimum size 
+	// 	- naturalBaseline int32: the baseline position for the
+	//   natural size 
+	//
+	// Measures the size of the @widget using @manager, for the
+	// given @orientation and size.
+	// 
+	// See the [class@Gtk.Widget] documentation on layout management for
+	// more details.
+	ParentMeasure(widget Widget, orientation Orientation, forSize int32) (int32, int32, int32, int32)
+	// ParentRoot calls the default implementations of the root virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	//
+	// a virtual function, called when the widget using the layout
+	//   manager is attached to a `GtkRoot`
+	ParentRoot()
+	// ParentUnroot calls the default implementations of the unroot virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	//
+	// a virtual function, called when the widget using the layout
+	//   manager is detached from a `GtkRoot`
+	ParentUnroot()
 }
 
 func unsafeWrapLayoutManager(base *gobject.ObjectInstance) *LayoutManagerInstance {
@@ -34876,6 +38217,10 @@ type LayoutManagerOverrides[Instance LayoutManager] struct {
 	// 	- width int32: the new width of the @widget 
 	// 	- height int32: the new height of the @widget 
 	// 	- baseline int32: the baseline position of the @widget, or -1 
+	//
+	// Assigns the given @width, @height, and @baseline to
+	// a @widget, and computes the position and sizes of the children of
+	// the @widget using the layout management policy of @manager.
 	Allocate func(Instance, Widget, int32, int32, int32)
 	// CreateLayoutChild allows you to override the implementation of the virtual method create_layout_child.
 	// The function takes the following parameters:
@@ -34886,6 +38231,8 @@ type LayoutManagerOverrides[Instance LayoutManager] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret LayoutChild 
+	//
+	// Create a `GtkLayoutChild` instance for the given @for_child widget.
 	CreateLayoutChild func(Instance, Widget, Widget) LayoutChild
 	// GetRequestMode allows you to override the implementation of the virtual method get_request_mode.
 	// The function takes the following parameters:
@@ -34895,6 +38242,10 @@ type LayoutManagerOverrides[Instance LayoutManager] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret SizeRequestMode 
+	//
+	// a virtual function, used to return the preferred
+	//   request mode for the layout manager; for instance, "width for height"
+	//   or "height for width"; see `GtkSizeRequestMode`
 	GetRequestMode func(Instance, Widget) SizeRequestMode
 	// Measure allows you to override the implementation of the virtual method measure.
 	// The function takes the following parameters:
@@ -34918,10 +38269,22 @@ type LayoutManagerOverrides[Instance LayoutManager] struct {
 	//   minimum size 
 	// 	- naturalBaseline int32: the baseline position for the
 	//   natural size 
+	//
+	// Measures the size of the @widget using @manager, for the
+	// given @orientation and size.
+	// 
+	// See the [class@Gtk.Widget] documentation on layout management for
+	// more details.
 	Measure func(Instance, Widget, Orientation, int32) (int32, int32, int32, int32)
 	// Root allows you to override the implementation of the virtual method root.
+	//
+	// a virtual function, called when the widget using the layout
+	//   manager is attached to a `GtkRoot`
 	Root func(Instance)
 	// Unroot allows you to override the implementation of the virtual method unroot.
+	//
+	// a virtual function, called when the widget using the layout
+	//   manager is detached from a `GtkRoot`
 	Unroot func(Instance)
 }
 
@@ -35060,6 +38423,200 @@ func UnsafeApplyLayoutManagerOverrides[Instance LayoutManager](gclass unsafe.Poi
 			},
 		)
 	}
+}
+
+// ParentAllocate calls the default implementations of the allocate virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- widget Widget: the `GtkWidget` using @manager 
+// 	- width int32: the new width of the @widget 
+// 	- height int32: the new height of the @widget 
+// 	- baseline int32: the baseline position of the @widget, or -1 
+//
+// Assigns the given @width, @height, and @baseline to
+// a @widget, and computes the position and sizes of the children of
+// the @widget using the layout management policy of @manager.
+func (manager *LayoutManagerInstance) ParentAllocate(widget Widget, width int32, height int32, baseline int32) {
+	var carg0 *C.GtkLayoutManager
+	var carg1 *C.GtkWidget // in, none, converted
+	var carg2 C.int        // in, none, casted, casted C.gint
+	var carg3 C.int        // in, none, casted, casted C.gint
+	var carg4 C.int        // in, none, casted, casted C.gint
+
+	parentclass := (*C.GtkLayoutManagerClass)(classdata.PeekParentClass(UnsafeLayoutManagerToGlibNone(manager)))
+
+	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
+	carg2 = C.int(width)
+	carg3 = C.int(height)
+	carg4 = C.int(baseline)
+
+	C._gotk4_gtk4_LayoutManager_virtual_allocate(unsafe.Pointer(parentclass.allocate), carg0, carg1, carg2, carg3, carg4)
+	runtime.KeepAlive(manager)
+	runtime.KeepAlive(widget)
+	runtime.KeepAlive(width)
+	runtime.KeepAlive(height)
+	runtime.KeepAlive(baseline)
+}
+
+// ParentCreateLayoutChild calls the default implementations of the create_layout_child virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- widget Widget: the widget using the @manager 
+// 	- forChild Widget: the child of @widget 
+// 
+// The function returns the following values:
+// 
+// 	- goret LayoutChild 
+//
+// Create a `GtkLayoutChild` instance for the given @for_child widget.
+func (manager *LayoutManagerInstance) ParentCreateLayoutChild(widget Widget, forChild Widget) LayoutChild {
+	var carg0 *C.GtkLayoutManager
+	var carg1 *C.GtkWidget      // in, none, converted
+	var carg2 *C.GtkWidget      // in, none, converted
+	var cret  *C.GtkLayoutChild // return, full, converted
+
+	parentclass := (*C.GtkLayoutManagerClass)(classdata.PeekParentClass(UnsafeLayoutManagerToGlibNone(manager)))
+
+	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
+	carg2 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(forChild))
+
+	cret = C._gotk4_gtk4_LayoutManager_virtual_create_layout_child(unsafe.Pointer(parentclass.create_layout_child), carg0, carg1, carg2)
+	runtime.KeepAlive(manager)
+	runtime.KeepAlive(widget)
+	runtime.KeepAlive(forChild)
+
+	var goret LayoutChild
+
+	goret = UnsafeLayoutChildFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// ParentGetRequestMode calls the default implementations of the get_request_mode virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- widget Widget 
+// 
+// The function returns the following values:
+// 
+// 	- goret SizeRequestMode 
+//
+// a virtual function, used to return the preferred
+//   request mode for the layout manager; for instance, "width for height"
+//   or "height for width"; see `GtkSizeRequestMode`
+func (manager *LayoutManagerInstance) ParentGetRequestMode(widget Widget) SizeRequestMode {
+	var carg0 *C.GtkLayoutManager
+	var carg1 *C.GtkWidget         // in, none, converted
+	var cret  C.GtkSizeRequestMode // return, none, casted
+
+	parentclass := (*C.GtkLayoutManagerClass)(classdata.PeekParentClass(UnsafeLayoutManagerToGlibNone(manager)))
+
+	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
+
+	cret = C._gotk4_gtk4_LayoutManager_virtual_get_request_mode(unsafe.Pointer(parentclass.get_request_mode), carg0, carg1)
+	runtime.KeepAlive(manager)
+	runtime.KeepAlive(widget)
+
+	var goret SizeRequestMode
+
+	goret = SizeRequestMode(cret)
+
+	return goret
+}
+
+// ParentMeasure calls the default implementations of the measure virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- widget Widget: the `GtkWidget` using @manager 
+// 	- orientation Orientation: the orientation to measure 
+// 	- forSize int32: Size for the opposite of @orientation; for instance, if
+//   the @orientation is %GTK_ORIENTATION_HORIZONTAL, this is the height
+//   of the widget; if the @orientation is %GTK_ORIENTATION_VERTICAL, this
+//   is the width of the widget. This allows to measure the height for the
+//   given width, and the width for the given height. Use -1 if the size
+//   is not known 
+// 
+// The function returns the following values:
+// 
+// 	- minimum int32: the minimum size for the given size and
+//   orientation 
+// 	- natural int32: the natural, or preferred size for the
+//   given size and orientation 
+// 	- minimumBaseline int32: the baseline position for the
+//   minimum size 
+// 	- naturalBaseline int32: the baseline position for the
+//   natural size 
+//
+// Measures the size of the @widget using @manager, for the
+// given @orientation and size.
+// 
+// See the [class@Gtk.Widget] documentation on layout management for
+// more details.
+func (manager *LayoutManagerInstance) ParentMeasure(widget Widget, orientation Orientation, forSize int32) (int32, int32, int32, int32) {
+	var carg0 *C.GtkLayoutManager
+	var carg1 *C.GtkWidget     // in, none, converted
+	var carg2 C.GtkOrientation // in, none, casted
+	var carg3 C.int            // in, none, casted, casted C.gint
+	var carg4 C.int            // out, full, casted, casted C.gint
+	var carg5 C.int            // out, full, casted, casted C.gint
+	var carg6 C.int            // out, full, casted, casted C.gint
+	var carg7 C.int            // out, full, casted, casted C.gint
+
+	parentclass := (*C.GtkLayoutManagerClass)(classdata.PeekParentClass(UnsafeLayoutManagerToGlibNone(manager)))
+
+	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
+	carg2 = C.GtkOrientation(orientation)
+	carg3 = C.int(forSize)
+
+	C._gotk4_gtk4_LayoutManager_virtual_measure(unsafe.Pointer(parentclass.measure), carg0, carg1, carg2, carg3, &carg4, &carg5, &carg6, &carg7)
+	runtime.KeepAlive(manager)
+	runtime.KeepAlive(widget)
+	runtime.KeepAlive(orientation)
+	runtime.KeepAlive(forSize)
+
+	var minimum         int32
+	var natural         int32
+	var minimumBaseline int32
+	var naturalBaseline int32
+
+	minimum = int32(carg4)
+	natural = int32(carg5)
+	minimumBaseline = int32(carg6)
+	naturalBaseline = int32(carg7)
+
+	return minimum, natural, minimumBaseline, naturalBaseline
+}
+
+// ParentRoot calls the default implementations of the root virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+//
+// a virtual function, called when the widget using the layout
+//   manager is attached to a `GtkRoot`
+func (manager *LayoutManagerInstance) ParentRoot() {
+	var carg0 *C.GtkLayoutManager
+
+	parentclass := (*C.GtkLayoutManagerClass)(classdata.PeekParentClass(UnsafeLayoutManagerToGlibNone(manager)))
+
+	C._gotk4_gtk4_LayoutManager_virtual_root(unsafe.Pointer(parentclass.root), carg0)
+	runtime.KeepAlive(manager)
+}
+
+// ParentUnroot calls the default implementations of the unroot virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+//
+// a virtual function, called when the widget using the layout
+//   manager is detached from a `GtkRoot`
+func (manager *LayoutManagerInstance) ParentUnroot() {
+	var carg0 *C.GtkLayoutManager
+
+	parentclass := (*C.GtkLayoutManagerClass)(classdata.PeekParentClass(UnsafeLayoutManagerToGlibNone(manager)))
+
+	C._gotk4_gtk4_LayoutManager_virtual_unroot(unsafe.Pointer(parentclass.unroot), carg0)
+	runtime.KeepAlive(manager)
 }
 
 // RegisterLayoutManagerSubClass is used to register a go subclass of GtkLayoutManager. For this to work safely please implement the
@@ -36094,13 +39651,15 @@ type MapListModel interface {
 	// expected by the map function. It assumes that the caller knows what
 	// they are doing and have set up an appropriate map function.
 	SetModel(gio.ListModel)
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapMapListModel(base *gobject.ObjectInstance) *MapListModelInstance {
 	return &MapListModelInstance{
 		ObjectInstance: *base,
 		ListModelInstance: gio.ListModelInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -36632,13 +40191,88 @@ type MediaStream interface {
 	// 
 	// The media stream must be prepared when this function is called.
 	Update(int64)
+
+	// chain up virtual methods:
+
+	// ParentPause calls the default implementations of the pause virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	//
+	// Pauses playback of the stream.
+	// 
+	// If the stream is not playing, do nothing.
+	ParentPause()
+	// ParentPlay calls the default implementations of the play virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	ParentPlay() bool
+	// ParentRealize calls the default implementations of the realize virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- surface gdk.Surface: a `GdkSurface` 
+	//
+	// Called by users to attach the media stream to a `GdkSurface` they manage.
+	// 
+	// The stream can then access the resources of @surface for its
+	// rendering purposes. In particular, media streams might want to
+	// create a `GdkGLContext` or sync to the `GdkFrameClock`.
+	// 
+	// Whoever calls this function is responsible for calling
+	// [method@Gtk.MediaStream.unrealize] before either the stream
+	// or @surface get destroyed.
+	// 
+	// Multiple calls to this function may happen from different
+	// users of the video, even with the same @surface. Each of these
+	// calls must be followed by its own call to
+	// [method@Gtk.MediaStream.unrealize].
+	// 
+	// It is not required to call this function to make a media stream work.
+	ParentRealize(surface gdk.Surface)
+	// ParentSeek calls the default implementations of the seek virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- timestamp int64: timestamp to seek to. 
+	//
+	// Start a seek operation on @self to @timestamp.
+	// 
+	// If @timestamp is out of range, it will be clamped.
+	// 
+	// Seek operations may not finish instantly. While a
+	// seek operation is in process, the [property@Gtk.MediaStream:seeking]
+	// property will be set.
+	// 
+	// When calling gtk_media_stream_seek() during an
+	// ongoing seek operation, the new seek will override
+	// any pending seek.
+	ParentSeek(timestamp int64)
+	// ParentUnrealize calls the default implementations of the unrealize virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- surface gdk.Surface: the `GdkSurface` the stream was realized with 
+	//
+	// Undoes a previous call to gtk_media_stream_realize().
+	// 
+	// This causes the stream to release all resources it had
+	// allocated from @surface.
+	ParentUnrealize(surface gdk.Surface)
+	// ParentUpdateAudio calls the default implementations of the update_audio virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- muted bool 
+	// 	- volume float64 
+	ParentUpdateAudio(muted bool, volume float64)
 }
 
 func unsafeWrapMediaStream(base *gobject.ObjectInstance) *MediaStreamInstance {
 	return &MediaStreamInstance{
 		ObjectInstance: *base,
 		PaintableInstance: gdk.PaintableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -37422,6 +41056,10 @@ type MediaStreamOverrides[Instance MediaStream] struct {
 	gobject.ObjectOverrides[Instance]
 
 	// Pause allows you to override the implementation of the virtual method pause.
+	//
+	// Pauses playback of the stream.
+	// 
+	// If the stream is not playing, do nothing.
 	Pause func(Instance)
 	// Play allows you to override the implementation of the virtual method play.
 	// The function returns the following values:
@@ -37432,16 +41070,50 @@ type MediaStreamOverrides[Instance MediaStream] struct {
 	// The function takes the following parameters:
 	// 
 	// 	- surface gdk.Surface: a `GdkSurface` 
+	//
+	// Called by users to attach the media stream to a `GdkSurface` they manage.
+	// 
+	// The stream can then access the resources of @surface for its
+	// rendering purposes. In particular, media streams might want to
+	// create a `GdkGLContext` or sync to the `GdkFrameClock`.
+	// 
+	// Whoever calls this function is responsible for calling
+	// [method@Gtk.MediaStream.unrealize] before either the stream
+	// or @surface get destroyed.
+	// 
+	// Multiple calls to this function may happen from different
+	// users of the video, even with the same @surface. Each of these
+	// calls must be followed by its own call to
+	// [method@Gtk.MediaStream.unrealize].
+	// 
+	// It is not required to call this function to make a media stream work.
 	Realize func(Instance, gdk.Surface)
 	// Seek allows you to override the implementation of the virtual method seek.
 	// The function takes the following parameters:
 	// 
 	// 	- timestamp int64: timestamp to seek to. 
+	//
+	// Start a seek operation on @self to @timestamp.
+	// 
+	// If @timestamp is out of range, it will be clamped.
+	// 
+	// Seek operations may not finish instantly. While a
+	// seek operation is in process, the [property@Gtk.MediaStream:seeking]
+	// property will be set.
+	// 
+	// When calling gtk_media_stream_seek() during an
+	// ongoing seek operation, the new seek will override
+	// any pending seek.
 	Seek func(Instance, int64)
 	// Unrealize allows you to override the implementation of the virtual method unrealize.
 	// The function takes the following parameters:
 	// 
 	// 	- surface gdk.Surface: the `GdkSurface` the stream was realized with 
+	//
+	// Undoes a previous call to gtk_media_stream_realize().
+	// 
+	// This causes the stream to release all resources it had
+	// allocated from @surface.
 	Unrealize func(Instance, gdk.Surface)
 	// UpdateAudio allows you to override the implementation of the virtual method update_audio.
 	// The function takes the following parameters:
@@ -37568,6 +41240,156 @@ func UnsafeApplyMediaStreamOverrides[Instance MediaStream](gclass unsafe.Pointer
 	}
 }
 
+// ParentPause calls the default implementations of the pause virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+//
+// Pauses playback of the stream.
+// 
+// If the stream is not playing, do nothing.
+func (self *MediaStreamInstance) ParentPause() {
+	var carg0 *C.GtkMediaStream
+
+	parentclass := (*C.GtkMediaStreamClass)(classdata.PeekParentClass(UnsafeMediaStreamToGlibNone(self)))
+
+	C._gotk4_gtk4_MediaStream_virtual_pause(unsafe.Pointer(parentclass.pause), carg0)
+	runtime.KeepAlive(self)
+}
+
+// ParentPlay calls the default implementations of the play virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret bool 
+func (self *MediaStreamInstance) ParentPlay() bool {
+	var carg0 *C.GtkMediaStream
+	var cret  C.gboolean // return
+
+	parentclass := (*C.GtkMediaStreamClass)(classdata.PeekParentClass(UnsafeMediaStreamToGlibNone(self)))
+
+	cret = C._gotk4_gtk4_MediaStream_virtual_play(unsafe.Pointer(parentclass.play), carg0)
+	runtime.KeepAlive(self)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// ParentRealize calls the default implementations of the realize virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- surface gdk.Surface: a `GdkSurface` 
+//
+// Called by users to attach the media stream to a `GdkSurface` they manage.
+// 
+// The stream can then access the resources of @surface for its
+// rendering purposes. In particular, media streams might want to
+// create a `GdkGLContext` or sync to the `GdkFrameClock`.
+// 
+// Whoever calls this function is responsible for calling
+// [method@Gtk.MediaStream.unrealize] before either the stream
+// or @surface get destroyed.
+// 
+// Multiple calls to this function may happen from different
+// users of the video, even with the same @surface. Each of these
+// calls must be followed by its own call to
+// [method@Gtk.MediaStream.unrealize].
+// 
+// It is not required to call this function to make a media stream work.
+func (self *MediaStreamInstance) ParentRealize(surface gdk.Surface) {
+	var carg0 *C.GtkMediaStream
+	var carg1 *C.GdkSurface // in, none, converted
+
+	parentclass := (*C.GtkMediaStreamClass)(classdata.PeekParentClass(UnsafeMediaStreamToGlibNone(self)))
+
+	carg1 = (*C.GdkSurface)(gdk.UnsafeSurfaceToGlibNone(surface))
+
+	C._gotk4_gtk4_MediaStream_virtual_realize(unsafe.Pointer(parentclass.realize), carg0, carg1)
+	runtime.KeepAlive(self)
+	runtime.KeepAlive(surface)
+}
+
+// ParentSeek calls the default implementations of the seek virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- timestamp int64: timestamp to seek to. 
+//
+// Start a seek operation on @self to @timestamp.
+// 
+// If @timestamp is out of range, it will be clamped.
+// 
+// Seek operations may not finish instantly. While a
+// seek operation is in process, the [property@Gtk.MediaStream:seeking]
+// property will be set.
+// 
+// When calling gtk_media_stream_seek() during an
+// ongoing seek operation, the new seek will override
+// any pending seek.
+func (self *MediaStreamInstance) ParentSeek(timestamp int64) {
+	var carg0 *C.GtkMediaStream
+	var carg1 C.gint64 // in, none, casted
+
+	parentclass := (*C.GtkMediaStreamClass)(classdata.PeekParentClass(UnsafeMediaStreamToGlibNone(self)))
+
+	carg1 = C.gint64(timestamp)
+
+	C._gotk4_gtk4_MediaStream_virtual_seek(unsafe.Pointer(parentclass.seek), carg0, carg1)
+	runtime.KeepAlive(self)
+	runtime.KeepAlive(timestamp)
+}
+
+// ParentUnrealize calls the default implementations of the unrealize virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- surface gdk.Surface: the `GdkSurface` the stream was realized with 
+//
+// Undoes a previous call to gtk_media_stream_realize().
+// 
+// This causes the stream to release all resources it had
+// allocated from @surface.
+func (self *MediaStreamInstance) ParentUnrealize(surface gdk.Surface) {
+	var carg0 *C.GtkMediaStream
+	var carg1 *C.GdkSurface // in, none, converted
+
+	parentclass := (*C.GtkMediaStreamClass)(classdata.PeekParentClass(UnsafeMediaStreamToGlibNone(self)))
+
+	carg1 = (*C.GdkSurface)(gdk.UnsafeSurfaceToGlibNone(surface))
+
+	C._gotk4_gtk4_MediaStream_virtual_unrealize(unsafe.Pointer(parentclass.unrealize), carg0, carg1)
+	runtime.KeepAlive(self)
+	runtime.KeepAlive(surface)
+}
+
+// ParentUpdateAudio calls the default implementations of the update_audio virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- muted bool 
+// 	- volume float64 
+func (self *MediaStreamInstance) ParentUpdateAudio(muted bool, volume float64) {
+	var carg0 *C.GtkMediaStream
+	var carg1 C.gboolean // in
+	var carg2 C.double   // in, none, casted, casted C.gdouble
+
+	parentclass := (*C.GtkMediaStreamClass)(classdata.PeekParentClass(UnsafeMediaStreamToGlibNone(self)))
+
+	if muted {
+		carg1 = C.TRUE
+	}
+	carg2 = C.double(volume)
+
+	C._gotk4_gtk4_MediaStream_virtual_update_audio(unsafe.Pointer(parentclass.update_audio), carg0, carg1, carg2)
+	runtime.KeepAlive(self)
+	runtime.KeepAlive(muted)
+	runtime.KeepAlive(volume)
+}
+
 // RegisterMediaStreamSubClass is used to register a go subclass of GtkMediaStream. For this to work safely please implement the
 // virtual methods required by the implementation.
 func RegisterMediaStreamSubClass[InstanceT MediaStream](
@@ -37664,6 +41486,8 @@ type MountOperation interface {
 	// Sets the transient parent for windows shown by the
 	// `GtkMountOperation`.
 	SetParent(Window)
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapMountOperation(base *gobject.ObjectInstance) *MountOperationInstance {
@@ -37938,7 +41762,7 @@ func unsafeWrapMultiFilter(base *gobject.ObjectInstance) *MultiFilterInstance {
 			ObjectInstance: *base,
 		},
 		ListModelInstance: gio.ListModelInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -38055,13 +41879,15 @@ type MultiSelection interface {
 	// 
 	// If @model is %NULL, @self will be empty.
 	SetModel(gio.ListModel)
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapMultiSelection(base *gobject.ObjectInstance) *MultiSelectionInstance {
 	return &MultiSelectionInstance{
 		ObjectInstance: *base,
 		ListModelInstance: gio.ListModelInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -38358,6 +42184,39 @@ type NativeDialog interface {
 	// If you call [method@Gtk.NativeDialog.hide] before the user
 	// responds to the dialog this signal will not be emitted.
 	ConnectResponse(func(NativeDialog, int32)) gobject.SignalHandle
+
+	// chain up virtual methods:
+
+	// ParentHide calls the default implementations of the hide virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	//
+	// Hides the dialog if it is visible, aborting any interaction.
+	// 
+	// Once this is called the [signal@Gtk.NativeDialog::response] signal
+	// will *not* be emitted until after the next call to
+	// [method@Gtk.NativeDialog.show].
+	// 
+	// If the dialog is not visible this does nothing.
+	ParentHide()
+	// ParentResponse calls the default implementations of the response virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- responseId int32 
+	//
+	// class handler for the `GtkNativeDialog::response` signal
+	ParentResponse(responseId int32)
+	// ParentShow calls the default implementations of the show virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	//
+	// Shows the dialog on the display.
+	// 
+	// When the user accepts the state of the dialog the dialog will
+	// be automatically hidden and the [signal@Gtk.NativeDialog::response]
+	// signal will be emitted.
+	// 
+	// Multiple calls while the dialog is visible will be ignored.
+	ParentShow()
 }
 
 func unsafeWrapNativeDialog(base *gobject.ObjectInstance) *NativeDialogInstance {
@@ -38650,13 +42509,31 @@ type NativeDialogOverrides[Instance NativeDialog] struct {
 	gobject.ObjectOverrides[Instance]
 
 	// Hide allows you to override the implementation of the virtual method hide.
+	//
+	// Hides the dialog if it is visible, aborting any interaction.
+	// 
+	// Once this is called the [signal@Gtk.NativeDialog::response] signal
+	// will *not* be emitted until after the next call to
+	// [method@Gtk.NativeDialog.show].
+	// 
+	// If the dialog is not visible this does nothing.
 	Hide func(Instance)
 	// Response allows you to override the implementation of the virtual method response.
 	// The function takes the following parameters:
 	// 
 	// 	- responseId int32 
+	//
+	// class handler for the `GtkNativeDialog::response` signal
 	Response func(Instance, int32)
 	// Show allows you to override the implementation of the virtual method show.
+	//
+	// Shows the dialog on the display.
+	// 
+	// When the user accepts the state of the dialog the dialog will
+	// be automatically hidden and the [signal@Gtk.NativeDialog::response]
+	// signal will be emitted.
+	// 
+	// Multiple calls while the dialog is visible will be ignored.
 	Show func(Instance)
 }
 
@@ -38713,6 +42590,64 @@ func UnsafeApplyNativeDialogOverrides[Instance NativeDialog](gclass unsafe.Point
 			},
 		)
 	}
+}
+
+// ParentHide calls the default implementations of the hide virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+//
+// Hides the dialog if it is visible, aborting any interaction.
+// 
+// Once this is called the [signal@Gtk.NativeDialog::response] signal
+// will *not* be emitted until after the next call to
+// [method@Gtk.NativeDialog.show].
+// 
+// If the dialog is not visible this does nothing.
+func (self *NativeDialogInstance) ParentHide() {
+	var carg0 *C.GtkNativeDialog
+
+	parentclass := (*C.GtkNativeDialogClass)(classdata.PeekParentClass(UnsafeNativeDialogToGlibNone(self)))
+
+	C._gotk4_gtk4_NativeDialog_virtual_hide(unsafe.Pointer(parentclass.hide), carg0)
+	runtime.KeepAlive(self)
+}
+
+// ParentResponse calls the default implementations of the response virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- responseId int32 
+//
+// class handler for the `GtkNativeDialog::response` signal
+func (self *NativeDialogInstance) ParentResponse(responseId int32) {
+	var carg0 *C.GtkNativeDialog
+	var carg1 C.int // in, none, casted, casted C.gint
+
+	parentclass := (*C.GtkNativeDialogClass)(classdata.PeekParentClass(UnsafeNativeDialogToGlibNone(self)))
+
+	carg1 = C.int(responseId)
+
+	C._gotk4_gtk4_NativeDialog_virtual_response(unsafe.Pointer(parentclass.response), carg0, carg1)
+	runtime.KeepAlive(self)
+	runtime.KeepAlive(responseId)
+}
+
+// ParentShow calls the default implementations of the show virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+//
+// Shows the dialog on the display.
+// 
+// When the user accepts the state of the dialog the dialog will
+// be automatically hidden and the [signal@Gtk.NativeDialog::response]
+// signal will be emitted.
+// 
+// Multiple calls while the dialog is visible will be ignored.
+func (self *NativeDialogInstance) ParentShow() {
+	var carg0 *C.GtkNativeDialog
+
+	parentclass := (*C.GtkNativeDialogClass)(classdata.PeekParentClass(UnsafeNativeDialogToGlibNone(self)))
+
+	C._gotk4_gtk4_NativeDialog_virtual_show(unsafe.Pointer(parentclass.show), carg0)
+	runtime.KeepAlive(self)
 }
 
 // RegisterNativeDialogSubClass is used to register a go subclass of GtkNativeDialog. For this to work safely please implement the
@@ -38783,13 +42718,15 @@ type NoSelection interface {
 	// 
 	// If @model is %NULL, this model will be empty.
 	SetModel(gio.ListModel)
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapNoSelection(base *gobject.ObjectInstance) *NoSelectionInstance {
 	return &NoSelectionInstance{
 		ObjectInstance: *base,
 		ListModelInstance: gio.ListModelInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -39051,6 +42988,8 @@ var _ OverlayLayout = (*OverlayLayoutInstance)(nil)
 type OverlayLayout interface {
 	LayoutManager
 	upcastToGtkOverlayLayout() *OverlayLayoutInstance
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapOverlayLayout(base *gobject.ObjectInstance) *OverlayLayoutInstance {
@@ -39200,6 +43139,8 @@ type OverlayLayoutChild interface {
 	//
 	// Sets whether to measure this child.
 	SetMeasure(bool)
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapOverlayLayoutChild(base *gobject.ObjectInstance) *OverlayLayoutChildInstance {
@@ -40731,6 +44672,8 @@ var _ PasswordEntryBuffer = (*PasswordEntryBufferInstance)(nil)
 type PasswordEntryBuffer interface {
 	EntryBuffer
 	upcastToGtkPasswordEntryBuffer() *PasswordEntryBufferInstance
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapPasswordEntryBuffer(base *gobject.ObjectInstance) *PasswordEntryBufferInstance {
@@ -41039,6 +44982,12 @@ type RecentManager interface {
 	// This can happen either by calling [method@Gtk.RecentManager.add_item]
 	// or by another application.
 	ConnectChanged(func(RecentManager)) gobject.SignalHandle
+
+	// chain up virtual methods:
+
+	// ParentChanged calls the default implementations of the changed virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	ParentChanged()
 }
 
 func unsafeWrapRecentManager(base *gobject.ObjectInstance) *RecentManagerInstance {
@@ -41492,6 +45441,17 @@ func UnsafeApplyRecentManagerOverrides[Instance RecentManager](gclass unsafe.Poi
 	}
 }
 
+// ParentChanged calls the default implementations of the changed virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+func (manager *RecentManagerInstance) ParentChanged() {
+	var carg0 *C.GtkRecentManager
+
+	parentclass := (*C.GtkRecentManagerClass)(classdata.PeekParentClass(UnsafeRecentManagerToGlibNone(manager)))
+
+	C._gotk4_gtk4_RecentManager_virtual_changed(unsafe.Pointer(parentclass.changed), carg0)
+	runtime.KeepAlive(manager)
+}
+
 // RegisterRecentManagerSubClass is used to register a go subclass of GtkRecentManager. For this to work safely please implement the
 // virtual methods required by the implementation.
 func RegisterRecentManagerSubClass[InstanceT RecentManager](
@@ -41558,13 +45518,15 @@ type SelectionFilterModel interface {
 	// are doing and have set up an appropriate filter to ensure that item
 	// types match.
 	SetModel(SelectionModel)
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapSelectionFilterModel(base *gobject.ObjectInstance) *SelectionFilterModelInstance {
 	return &SelectionFilterModelInstance{
 		ObjectInstance: *base,
 		ListModelInstance: gio.ListModelInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -41956,6 +45918,8 @@ type Shortcut interface {
 	//
 	// Sets the new trigger for @self to be @trigger.
 	SetTrigger(ShortcutTrigger)
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapShortcut(base *gobject.ObjectInstance) *ShortcutInstance {
@@ -42470,7 +46434,7 @@ func unsafeWrapShortcutController(base *gobject.ObjectInstance) *ShortcutControl
 			ObjectInstance: *base,
 		},
 		ListModelInstance: gio.ListModelInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -43367,13 +47331,15 @@ type SingleSelection interface {
 	// will be selected. This also applies if [property@Gtk.SingleSelection:can-unselect]
 	// is set to %FALSE.
 	SetSelected(uint)
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapSingleSelection(base *gobject.ObjectInstance) *SingleSelectionInstance {
 	return &SingleSelectionInstance{
 		ObjectInstance: *base,
 		ListModelInstance: gio.ListModelInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -44092,13 +48058,15 @@ type SliceListModel interface {
 	// It can however have fewer items if the offset is too large
 	// or the model sliced from doesn't have enough items.
 	SetSize(uint)
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapSliceListModel(base *gobject.ObjectInstance) *SliceListModelInstance {
 	return &SliceListModelInstance{
 		ObjectInstance: *base,
 		ListModelInstance: gio.ListModelInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -46171,13 +50139,15 @@ type SortListModel interface {
 	//
 	// Sets a new sorter on @self.
 	SetSorter(Sorter)
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapSortListModel(base *gobject.ObjectInstance) *SortListModelInstance {
 	return &SortListModelInstance{
 		ObjectInstance: *base,
 		ListModelInstance: gio.ListModelInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -46612,6 +50582,22 @@ type Sorter interface {
 	// the sort order without a full resorting. Refer to the
 	// [enum@Gtk.SorterChange] documentation for details.
 	ConnectChanged(func(Sorter, SorterChange)) gobject.SignalHandle
+
+	// chain up virtual methods:
+
+	// ParentGetOrder calls the default implementations of the get_order virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret SorterOrder 
+	//
+	// Gets the order that @self conforms to.
+	// 
+	// See [enum@Gtk.SorterOrder] for details
+	// of the possible return values.
+	// 
+	// This function is intended to allow optimizations.
+	ParentGetOrder() SorterOrder
 }
 
 func unsafeWrapSorter(base *gobject.ObjectInstance) *SorterInstance {
@@ -46737,6 +50723,13 @@ type SorterOverrides[Instance Sorter] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret SorterOrder 
+	//
+	// Gets the order that @self conforms to.
+	// 
+	// See [enum@Gtk.SorterOrder] for details
+	// of the possible return values.
+	// 
+	// This function is intended to allow optimizations.
 	GetOrder func(Instance) SorterOrder
 }
 
@@ -46766,6 +50759,34 @@ func UnsafeApplySorterOverrides[Instance Sorter](gclass unsafe.Pointer, override
 			},
 		)
 	}
+}
+
+// ParentGetOrder calls the default implementations of the get_order virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret SorterOrder 
+//
+// Gets the order that @self conforms to.
+// 
+// See [enum@Gtk.SorterOrder] for details
+// of the possible return values.
+// 
+// This function is intended to allow optimizations.
+func (self *SorterInstance) ParentGetOrder() SorterOrder {
+	var carg0 *C.GtkSorter
+	var cret  C.GtkSorterOrder // return, none, casted
+
+	parentclass := (*C.GtkSorterClass)(classdata.PeekParentClass(UnsafeSorterToGlibNone(self)))
+
+	cret = C._gotk4_gtk4_Sorter_virtual_get_order(unsafe.Pointer(parentclass.get_order), carg0)
+	runtime.KeepAlive(self)
+
+	var goret SorterOrder
+
+	goret = SorterOrder(cret)
+
+	return goret
 }
 
 // RegisterSorterSubClass is used to register a go subclass of GtkSorter. For this to work safely please implement the
@@ -47332,6 +51353,8 @@ type StringFilter interface {
 	//
 	// Sets the string to search for.
 	SetSearch(string)
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapStringFilter(base *gobject.ObjectInstance) *StringFilterInstance {
@@ -47671,13 +51694,15 @@ type StringList interface {
 	// gtk_string_list_take (self, g_strdup_print ("%d dollars", lots));
 	// ```
 	Take(string)
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapStringList(base *gobject.ObjectInstance) *StringListInstance {
 	return &StringListInstance{
 		ObjectInstance: *base,
 		ListModelInstance: gio.ListModelInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -47960,6 +51985,8 @@ type StringObject interface {
 	//
 	// Returns the string contained in a `GtkStringObject`.
 	GetString() string
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapStringObject(base *gobject.ObjectInstance) *StringObjectInstance {
@@ -48146,6 +52173,8 @@ type StringSorter interface {
 	//
 	// Sets whether the sorter will ignore case differences.
 	SetIgnoreCase(bool)
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapStringSorter(base *gobject.ObjectInstance) *StringSorterInstance {
@@ -49525,6 +53554,170 @@ type TextBuffer interface {
 	// previous operation or set of operations that have
 	// been grouped together.
 	ConnectUndo(func(TextBuffer)) gobject.SignalHandle
+
+	// chain up virtual methods:
+
+	// ParentApplyTag calls the default implementations of the apply_tag virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- tag TextTag: a `GtkTextTag` 
+	// 	- start *TextIter: one bound of range to be tagged 
+	// 	- end *TextIter: other bound of range to be tagged 
+	//
+	// Emits the “apply-tag” signal on @buffer.
+	// 
+	// The default handler for the signal applies
+	// @tag to the given range. @start and @end do
+	// not have to be in order.
+	ParentApplyTag(tag TextTag, start *TextIter, end *TextIter)
+	// ParentBeginUserAction calls the default implementations of the begin_user_action virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	//
+	// Called to indicate that the buffer operations between here and a
+	// call to gtk_text_buffer_end_user_action() are part of a single
+	// user-visible operation.
+	// 
+	// The operations between gtk_text_buffer_begin_user_action() and
+	// gtk_text_buffer_end_user_action() can then be grouped when creating
+	// an undo stack. `GtkTextBuffer` maintains a count of calls to
+	// gtk_text_buffer_begin_user_action() that have not been closed with
+	// a call to gtk_text_buffer_end_user_action(), and emits the
+	// “begin-user-action” and “end-user-action” signals only for the
+	// outermost pair of calls. This allows you to build user actions
+	// from other user actions.
+	// 
+	// The “interactive” buffer mutation functions, such as
+	// [method@Gtk.TextBuffer.insert_interactive], automatically call
+	// begin/end user action around the buffer operations they perform,
+	// so there's no need to add extra calls if you user action consists
+	// solely of a single call to one of those functions.
+	ParentBeginUserAction()
+	// ParentChanged calls the default implementations of the changed virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	//
+	// The class handler for the `GtkTextBuffer::changed` signal.
+	ParentChanged()
+	// ParentDeleteRange calls the default implementations of the delete_range virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- start *TextIter 
+	// 	- end *TextIter 
+	//
+	// The class handler for the `GtkTextBuffer::delete-range` signal.
+	ParentDeleteRange(start *TextIter, end *TextIter)
+	// ParentEndUserAction calls the default implementations of the end_user_action virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	//
+	// Ends a user-visible operation.
+	// 
+	// Should be paired with a call to
+	// [method@Gtk.TextBuffer.begin_user_action].
+	// See that function for a full explanation.
+	ParentEndUserAction()
+	// ParentInsertChildAnchor calls the default implementations of the insert_child_anchor virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- iter *TextIter: location to insert the anchor 
+	// 	- anchor TextChildAnchor: a `GtkTextChildAnchor` 
+	//
+	// Inserts a child widget anchor into the text buffer at @iter.
+	// 
+	// The anchor will be counted as one character in character counts, and
+	// when obtaining the buffer contents as a string, will be represented
+	// by the Unicode “object replacement character” 0xFFFC. Note that the
+	// “slice” variants for obtaining portions of the buffer as a string
+	// include this character for child anchors, but the “text” variants do
+	// not. E.g. see [method@Gtk.TextBuffer.get_slice] and
+	// [method@Gtk.TextBuffer.get_text].
+	// 
+	// Consider [method@Gtk.TextBuffer.create_child_anchor] as a more
+	// convenient alternative to this function. The buffer will add a
+	// reference to the anchor, so you can unref it after insertion.
+	ParentInsertChildAnchor(iter *TextIter, anchor TextChildAnchor)
+	// ParentInsertPaintable calls the default implementations of the insert_paintable virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- iter *TextIter: location to insert the paintable 
+	// 	- paintable gdk.Paintable: a `GdkPaintable` 
+	//
+	// Inserts an image into the text buffer at @iter.
+	// 
+	// The image will be counted as one character in character counts,
+	// and when obtaining the buffer contents as a string, will be
+	// represented by the Unicode “object replacement character” 0xFFFC.
+	// Note that the “slice” variants for obtaining portions of the buffer
+	// as a string include this character for paintable, but the “text”
+	// variants do not. e.g. see [method@Gtk.TextBuffer.get_slice] and
+	// [method@Gtk.TextBuffer.get_text].
+	ParentInsertPaintable(iter *TextIter, paintable gdk.Paintable)
+	// ParentInsertText calls the default implementations of the insert_text virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- pos *TextIter 
+	// 	- newText string 
+	// 	- newTextLength int32 
+	//
+	// The class handler for the `GtkTextBuffer::insert-text` signal.
+	ParentInsertText(pos *TextIter, newText string, newTextLength int32)
+	// ParentMarkDeleted calls the default implementations of the mark_deleted virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- mark TextMark 
+	//
+	// The class handler for the `GtkTextBuffer::mark-deleted` signal.
+	ParentMarkDeleted(mark TextMark)
+	// ParentMarkSet calls the default implementations of the mark_set virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- location *TextIter 
+	// 	- mark TextMark 
+	//
+	// The class handler for the `GtkTextBuffer::mark-set` signal.
+	ParentMarkSet(location *TextIter, mark TextMark)
+	// ParentModifiedChanged calls the default implementations of the modified_changed virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	//
+	// The class handler for the `GtkTextBuffer::modified-changed` signal.
+	ParentModifiedChanged()
+	// ParentPasteDone calls the default implementations of the paste_done virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- clipboard gdk.Clipboard 
+	//
+	// The class handler for the `GtkTextBuffer::paste-done` signal.
+	ParentPasteDone(clipboard gdk.Clipboard)
+	// ParentRedo calls the default implementations of the redo virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	//
+	// Redoes the next redoable action on the buffer, if there is one.
+	ParentRedo()
+	// ParentRemoveTag calls the default implementations of the remove_tag virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- tag TextTag: a `GtkTextTag` 
+	// 	- start *TextIter: one bound of range to be untagged 
+	// 	- end *TextIter: other bound of range to be untagged 
+	//
+	// Emits the “remove-tag” signal.
+	// 
+	// The default handler for the signal removes all occurrences
+	// of @tag from the given range. @start and @end don’t have
+	// to be in order.
+	ParentRemoveTag(tag TextTag, start *TextIter, end *TextIter)
+	// ParentUndo calls the default implementations of the undo virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	//
+	// Undoes the last undoable action on the buffer, if there is one.
+	ParentUndo()
 }
 
 func unsafeWrapTextBuffer(base *gobject.ObjectInstance) *TextBufferInstance {
@@ -52041,30 +56234,89 @@ type TextBufferOverrides[Instance TextBuffer] struct {
 	// 	- tag TextTag: a `GtkTextTag` 
 	// 	- start *TextIter: one bound of range to be tagged 
 	// 	- end *TextIter: other bound of range to be tagged 
+	//
+	// Emits the “apply-tag” signal on @buffer.
+	// 
+	// The default handler for the signal applies
+	// @tag to the given range. @start and @end do
+	// not have to be in order.
 	ApplyTag func(Instance, TextTag, *TextIter, *TextIter)
 	// BeginUserAction allows you to override the implementation of the virtual method begin_user_action.
+	//
+	// Called to indicate that the buffer operations between here and a
+	// call to gtk_text_buffer_end_user_action() are part of a single
+	// user-visible operation.
+	// 
+	// The operations between gtk_text_buffer_begin_user_action() and
+	// gtk_text_buffer_end_user_action() can then be grouped when creating
+	// an undo stack. `GtkTextBuffer` maintains a count of calls to
+	// gtk_text_buffer_begin_user_action() that have not been closed with
+	// a call to gtk_text_buffer_end_user_action(), and emits the
+	// “begin-user-action” and “end-user-action” signals only for the
+	// outermost pair of calls. This allows you to build user actions
+	// from other user actions.
+	// 
+	// The “interactive” buffer mutation functions, such as
+	// [method@Gtk.TextBuffer.insert_interactive], automatically call
+	// begin/end user action around the buffer operations they perform,
+	// so there's no need to add extra calls if you user action consists
+	// solely of a single call to one of those functions.
 	BeginUserAction func(Instance)
 	// Changed allows you to override the implementation of the virtual method changed.
+	//
+	// The class handler for the `GtkTextBuffer::changed` signal.
 	Changed func(Instance)
 	// DeleteRange allows you to override the implementation of the virtual method delete_range.
 	// The function takes the following parameters:
 	// 
 	// 	- start *TextIter 
 	// 	- end *TextIter 
+	//
+	// The class handler for the `GtkTextBuffer::delete-range` signal.
 	DeleteRange func(Instance, *TextIter, *TextIter)
 	// EndUserAction allows you to override the implementation of the virtual method end_user_action.
+	//
+	// Ends a user-visible operation.
+	// 
+	// Should be paired with a call to
+	// [method@Gtk.TextBuffer.begin_user_action].
+	// See that function for a full explanation.
 	EndUserAction func(Instance)
 	// InsertChildAnchor allows you to override the implementation of the virtual method insert_child_anchor.
 	// The function takes the following parameters:
 	// 
 	// 	- iter *TextIter: location to insert the anchor 
 	// 	- anchor TextChildAnchor: a `GtkTextChildAnchor` 
+	//
+	// Inserts a child widget anchor into the text buffer at @iter.
+	// 
+	// The anchor will be counted as one character in character counts, and
+	// when obtaining the buffer contents as a string, will be represented
+	// by the Unicode “object replacement character” 0xFFFC. Note that the
+	// “slice” variants for obtaining portions of the buffer as a string
+	// include this character for child anchors, but the “text” variants do
+	// not. E.g. see [method@Gtk.TextBuffer.get_slice] and
+	// [method@Gtk.TextBuffer.get_text].
+	// 
+	// Consider [method@Gtk.TextBuffer.create_child_anchor] as a more
+	// convenient alternative to this function. The buffer will add a
+	// reference to the anchor, so you can unref it after insertion.
 	InsertChildAnchor func(Instance, *TextIter, TextChildAnchor)
 	// InsertPaintable allows you to override the implementation of the virtual method insert_paintable.
 	// The function takes the following parameters:
 	// 
 	// 	- iter *TextIter: location to insert the paintable 
 	// 	- paintable gdk.Paintable: a `GdkPaintable` 
+	//
+	// Inserts an image into the text buffer at @iter.
+	// 
+	// The image will be counted as one character in character counts,
+	// and when obtaining the buffer contents as a string, will be
+	// represented by the Unicode “object replacement character” 0xFFFC.
+	// Note that the “slice” variants for obtaining portions of the buffer
+	// as a string include this character for paintable, but the “text”
+	// variants do not. e.g. see [method@Gtk.TextBuffer.get_slice] and
+	// [method@Gtk.TextBuffer.get_text].
 	InsertPaintable func(Instance, *TextIter, gdk.Paintable)
 	// InsertText allows you to override the implementation of the virtual method insert_text.
 	// The function takes the following parameters:
@@ -52072,26 +56324,38 @@ type TextBufferOverrides[Instance TextBuffer] struct {
 	// 	- pos *TextIter 
 	// 	- newText string 
 	// 	- newTextLength int32 
+	//
+	// The class handler for the `GtkTextBuffer::insert-text` signal.
 	InsertText func(Instance, *TextIter, string, int32)
 	// MarkDeleted allows you to override the implementation of the virtual method mark_deleted.
 	// The function takes the following parameters:
 	// 
 	// 	- mark TextMark 
+	//
+	// The class handler for the `GtkTextBuffer::mark-deleted` signal.
 	MarkDeleted func(Instance, TextMark)
 	// MarkSet allows you to override the implementation of the virtual method mark_set.
 	// The function takes the following parameters:
 	// 
 	// 	- location *TextIter 
 	// 	- mark TextMark 
+	//
+	// The class handler for the `GtkTextBuffer::mark-set` signal.
 	MarkSet func(Instance, *TextIter, TextMark)
 	// ModifiedChanged allows you to override the implementation of the virtual method modified_changed.
+	//
+	// The class handler for the `GtkTextBuffer::modified-changed` signal.
 	ModifiedChanged func(Instance)
 	// PasteDone allows you to override the implementation of the virtual method paste_done.
 	// The function takes the following parameters:
 	// 
 	// 	- clipboard gdk.Clipboard 
+	//
+	// The class handler for the `GtkTextBuffer::paste-done` signal.
 	PasteDone func(Instance, gdk.Clipboard)
 	// Redo allows you to override the implementation of the virtual method redo.
+	//
+	// Redoes the next redoable action on the buffer, if there is one.
 	Redo func(Instance)
 	// RemoveTag allows you to override the implementation of the virtual method remove_tag.
 	// The function takes the following parameters:
@@ -52099,8 +56363,16 @@ type TextBufferOverrides[Instance TextBuffer] struct {
 	// 	- tag TextTag: a `GtkTextTag` 
 	// 	- start *TextIter: one bound of range to be untagged 
 	// 	- end *TextIter: other bound of range to be untagged 
+	//
+	// Emits the “remove-tag” signal.
+	// 
+	// The default handler for the signal removes all occurrences
+	// of @tag from the given range. @start and @end don’t have
+	// to be in order.
 	RemoveTag func(Instance, TextTag, *TextIter, *TextIter)
 	// Undo allows you to override the implementation of the virtual method undo.
+	//
+	// Undoes the last undoable action on the buffer, if there is one.
 	Undo func(Instance)
 }
 
@@ -52375,6 +56647,354 @@ func UnsafeApplyTextBufferOverrides[Instance TextBuffer](gclass unsafe.Pointer, 
 	}
 }
 
+// ParentApplyTag calls the default implementations of the apply_tag virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- tag TextTag: a `GtkTextTag` 
+// 	- start *TextIter: one bound of range to be tagged 
+// 	- end *TextIter: other bound of range to be tagged 
+//
+// Emits the “apply-tag” signal on @buffer.
+// 
+// The default handler for the signal applies
+// @tag to the given range. @start and @end do
+// not have to be in order.
+func (buffer *TextBufferInstance) ParentApplyTag(tag TextTag, start *TextIter, end *TextIter) {
+	var carg0 *C.GtkTextBuffer
+	var carg1 *C.GtkTextTag  // in, none, converted
+	var carg2 *C.GtkTextIter // in, none, converted
+	var carg3 *C.GtkTextIter // in, none, converted
+
+	parentclass := (*C.GtkTextBufferClass)(classdata.PeekParentClass(UnsafeTextBufferToGlibNone(buffer)))
+
+	carg1 = (*C.GtkTextTag)(UnsafeTextTagToGlibNone(tag))
+	carg2 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(start))
+	carg3 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(end))
+
+	C._gotk4_gtk4_TextBuffer_virtual_apply_tag(unsafe.Pointer(parentclass.apply_tag), carg0, carg1, carg2, carg3)
+	runtime.KeepAlive(buffer)
+	runtime.KeepAlive(tag)
+	runtime.KeepAlive(start)
+	runtime.KeepAlive(end)
+}
+
+// ParentBeginUserAction calls the default implementations of the begin_user_action virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+//
+// Called to indicate that the buffer operations between here and a
+// call to gtk_text_buffer_end_user_action() are part of a single
+// user-visible operation.
+// 
+// The operations between gtk_text_buffer_begin_user_action() and
+// gtk_text_buffer_end_user_action() can then be grouped when creating
+// an undo stack. `GtkTextBuffer` maintains a count of calls to
+// gtk_text_buffer_begin_user_action() that have not been closed with
+// a call to gtk_text_buffer_end_user_action(), and emits the
+// “begin-user-action” and “end-user-action” signals only for the
+// outermost pair of calls. This allows you to build user actions
+// from other user actions.
+// 
+// The “interactive” buffer mutation functions, such as
+// [method@Gtk.TextBuffer.insert_interactive], automatically call
+// begin/end user action around the buffer operations they perform,
+// so there's no need to add extra calls if you user action consists
+// solely of a single call to one of those functions.
+func (buffer *TextBufferInstance) ParentBeginUserAction() {
+	var carg0 *C.GtkTextBuffer
+
+	parentclass := (*C.GtkTextBufferClass)(classdata.PeekParentClass(UnsafeTextBufferToGlibNone(buffer)))
+
+	C._gotk4_gtk4_TextBuffer_virtual_begin_user_action(unsafe.Pointer(parentclass.begin_user_action), carg0)
+	runtime.KeepAlive(buffer)
+}
+
+// ParentChanged calls the default implementations of the changed virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+//
+// The class handler for the `GtkTextBuffer::changed` signal.
+func (buffer *TextBufferInstance) ParentChanged() {
+	var carg0 *C.GtkTextBuffer
+
+	parentclass := (*C.GtkTextBufferClass)(classdata.PeekParentClass(UnsafeTextBufferToGlibNone(buffer)))
+
+	C._gotk4_gtk4_TextBuffer_virtual_changed(unsafe.Pointer(parentclass.changed), carg0)
+	runtime.KeepAlive(buffer)
+}
+
+// ParentDeleteRange calls the default implementations of the delete_range virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- start *TextIter 
+// 	- end *TextIter 
+//
+// The class handler for the `GtkTextBuffer::delete-range` signal.
+func (buffer *TextBufferInstance) ParentDeleteRange(start *TextIter, end *TextIter) {
+	var carg0 *C.GtkTextBuffer
+	var carg1 *C.GtkTextIter // in, none, converted
+	var carg2 *C.GtkTextIter // in, none, converted
+
+	parentclass := (*C.GtkTextBufferClass)(classdata.PeekParentClass(UnsafeTextBufferToGlibNone(buffer)))
+
+	carg1 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(start))
+	carg2 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(end))
+
+	C._gotk4_gtk4_TextBuffer_virtual_delete_range(unsafe.Pointer(parentclass.delete_range), carg0, carg1, carg2)
+	runtime.KeepAlive(buffer)
+	runtime.KeepAlive(start)
+	runtime.KeepAlive(end)
+}
+
+// ParentEndUserAction calls the default implementations of the end_user_action virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+//
+// Ends a user-visible operation.
+// 
+// Should be paired with a call to
+// [method@Gtk.TextBuffer.begin_user_action].
+// See that function for a full explanation.
+func (buffer *TextBufferInstance) ParentEndUserAction() {
+	var carg0 *C.GtkTextBuffer
+
+	parentclass := (*C.GtkTextBufferClass)(classdata.PeekParentClass(UnsafeTextBufferToGlibNone(buffer)))
+
+	C._gotk4_gtk4_TextBuffer_virtual_end_user_action(unsafe.Pointer(parentclass.end_user_action), carg0)
+	runtime.KeepAlive(buffer)
+}
+
+// ParentInsertChildAnchor calls the default implementations of the insert_child_anchor virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- iter *TextIter: location to insert the anchor 
+// 	- anchor TextChildAnchor: a `GtkTextChildAnchor` 
+//
+// Inserts a child widget anchor into the text buffer at @iter.
+// 
+// The anchor will be counted as one character in character counts, and
+// when obtaining the buffer contents as a string, will be represented
+// by the Unicode “object replacement character” 0xFFFC. Note that the
+// “slice” variants for obtaining portions of the buffer as a string
+// include this character for child anchors, but the “text” variants do
+// not. E.g. see [method@Gtk.TextBuffer.get_slice] and
+// [method@Gtk.TextBuffer.get_text].
+// 
+// Consider [method@Gtk.TextBuffer.create_child_anchor] as a more
+// convenient alternative to this function. The buffer will add a
+// reference to the anchor, so you can unref it after insertion.
+func (buffer *TextBufferInstance) ParentInsertChildAnchor(iter *TextIter, anchor TextChildAnchor) {
+	var carg0 *C.GtkTextBuffer
+	var carg1 *C.GtkTextIter        // in, none, converted
+	var carg2 *C.GtkTextChildAnchor // in, none, converted
+
+	parentclass := (*C.GtkTextBufferClass)(classdata.PeekParentClass(UnsafeTextBufferToGlibNone(buffer)))
+
+	carg1 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
+	carg2 = (*C.GtkTextChildAnchor)(UnsafeTextChildAnchorToGlibNone(anchor))
+
+	C._gotk4_gtk4_TextBuffer_virtual_insert_child_anchor(unsafe.Pointer(parentclass.insert_child_anchor), carg0, carg1, carg2)
+	runtime.KeepAlive(buffer)
+	runtime.KeepAlive(iter)
+	runtime.KeepAlive(anchor)
+}
+
+// ParentInsertPaintable calls the default implementations of the insert_paintable virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- iter *TextIter: location to insert the paintable 
+// 	- paintable gdk.Paintable: a `GdkPaintable` 
+//
+// Inserts an image into the text buffer at @iter.
+// 
+// The image will be counted as one character in character counts,
+// and when obtaining the buffer contents as a string, will be
+// represented by the Unicode “object replacement character” 0xFFFC.
+// Note that the “slice” variants for obtaining portions of the buffer
+// as a string include this character for paintable, but the “text”
+// variants do not. e.g. see [method@Gtk.TextBuffer.get_slice] and
+// [method@Gtk.TextBuffer.get_text].
+func (buffer *TextBufferInstance) ParentInsertPaintable(iter *TextIter, paintable gdk.Paintable) {
+	var carg0 *C.GtkTextBuffer
+	var carg1 *C.GtkTextIter  // in, none, converted
+	var carg2 *C.GdkPaintable // in, none, converted
+
+	parentclass := (*C.GtkTextBufferClass)(classdata.PeekParentClass(UnsafeTextBufferToGlibNone(buffer)))
+
+	carg1 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
+	carg2 = (*C.GdkPaintable)(gdk.UnsafePaintableToGlibNone(paintable))
+
+	C._gotk4_gtk4_TextBuffer_virtual_insert_paintable(unsafe.Pointer(parentclass.insert_paintable), carg0, carg1, carg2)
+	runtime.KeepAlive(buffer)
+	runtime.KeepAlive(iter)
+	runtime.KeepAlive(paintable)
+}
+
+// ParentInsertText calls the default implementations of the insert_text virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- pos *TextIter 
+// 	- newText string 
+// 	- newTextLength int32 
+//
+// The class handler for the `GtkTextBuffer::insert-text` signal.
+func (buffer *TextBufferInstance) ParentInsertText(pos *TextIter, newText string, newTextLength int32) {
+	var carg0 *C.GtkTextBuffer
+	var carg1 *C.GtkTextIter // in, none, converted
+	var carg2 *C.char        // in, none, string, casted *C.gchar
+	var carg3 C.int          // in, none, casted, casted C.gint
+
+	parentclass := (*C.GtkTextBufferClass)(classdata.PeekParentClass(UnsafeTextBufferToGlibNone(buffer)))
+
+	carg1 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(pos))
+	carg2 = (*C.char)(unsafe.Pointer(C.CString(newText)))
+	defer C.free(unsafe.Pointer(carg2))
+	carg3 = C.int(newTextLength)
+
+	C._gotk4_gtk4_TextBuffer_virtual_insert_text(unsafe.Pointer(parentclass.insert_text), carg0, carg1, carg2, carg3)
+	runtime.KeepAlive(buffer)
+	runtime.KeepAlive(pos)
+	runtime.KeepAlive(newText)
+	runtime.KeepAlive(newTextLength)
+}
+
+// ParentMarkDeleted calls the default implementations of the mark_deleted virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- mark TextMark 
+//
+// The class handler for the `GtkTextBuffer::mark-deleted` signal.
+func (buffer *TextBufferInstance) ParentMarkDeleted(mark TextMark) {
+	var carg0 *C.GtkTextBuffer
+	var carg1 *C.GtkTextMark // in, none, converted
+
+	parentclass := (*C.GtkTextBufferClass)(classdata.PeekParentClass(UnsafeTextBufferToGlibNone(buffer)))
+
+	carg1 = (*C.GtkTextMark)(UnsafeTextMarkToGlibNone(mark))
+
+	C._gotk4_gtk4_TextBuffer_virtual_mark_deleted(unsafe.Pointer(parentclass.mark_deleted), carg0, carg1)
+	runtime.KeepAlive(buffer)
+	runtime.KeepAlive(mark)
+}
+
+// ParentMarkSet calls the default implementations of the mark_set virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- location *TextIter 
+// 	- mark TextMark 
+//
+// The class handler for the `GtkTextBuffer::mark-set` signal.
+func (buffer *TextBufferInstance) ParentMarkSet(location *TextIter, mark TextMark) {
+	var carg0 *C.GtkTextBuffer
+	var carg1 *C.GtkTextIter // in, none, converted
+	var carg2 *C.GtkTextMark // in, none, converted
+
+	parentclass := (*C.GtkTextBufferClass)(classdata.PeekParentClass(UnsafeTextBufferToGlibNone(buffer)))
+
+	carg1 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(location))
+	carg2 = (*C.GtkTextMark)(UnsafeTextMarkToGlibNone(mark))
+
+	C._gotk4_gtk4_TextBuffer_virtual_mark_set(unsafe.Pointer(parentclass.mark_set), carg0, carg1, carg2)
+	runtime.KeepAlive(buffer)
+	runtime.KeepAlive(location)
+	runtime.KeepAlive(mark)
+}
+
+// ParentModifiedChanged calls the default implementations of the modified_changed virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+//
+// The class handler for the `GtkTextBuffer::modified-changed` signal.
+func (buffer *TextBufferInstance) ParentModifiedChanged() {
+	var carg0 *C.GtkTextBuffer
+
+	parentclass := (*C.GtkTextBufferClass)(classdata.PeekParentClass(UnsafeTextBufferToGlibNone(buffer)))
+
+	C._gotk4_gtk4_TextBuffer_virtual_modified_changed(unsafe.Pointer(parentclass.modified_changed), carg0)
+	runtime.KeepAlive(buffer)
+}
+
+// ParentPasteDone calls the default implementations of the paste_done virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- clipboard gdk.Clipboard 
+//
+// The class handler for the `GtkTextBuffer::paste-done` signal.
+func (buffer *TextBufferInstance) ParentPasteDone(clipboard gdk.Clipboard) {
+	var carg0 *C.GtkTextBuffer
+	var carg1 *C.GdkClipboard // in, none, converted
+
+	parentclass := (*C.GtkTextBufferClass)(classdata.PeekParentClass(UnsafeTextBufferToGlibNone(buffer)))
+
+	carg1 = (*C.GdkClipboard)(gdk.UnsafeClipboardToGlibNone(clipboard))
+
+	C._gotk4_gtk4_TextBuffer_virtual_paste_done(unsafe.Pointer(parentclass.paste_done), carg0, carg1)
+	runtime.KeepAlive(buffer)
+	runtime.KeepAlive(clipboard)
+}
+
+// ParentRedo calls the default implementations of the redo virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+//
+// Redoes the next redoable action on the buffer, if there is one.
+func (buffer *TextBufferInstance) ParentRedo() {
+	var carg0 *C.GtkTextBuffer
+
+	parentclass := (*C.GtkTextBufferClass)(classdata.PeekParentClass(UnsafeTextBufferToGlibNone(buffer)))
+
+	C._gotk4_gtk4_TextBuffer_virtual_redo(unsafe.Pointer(parentclass.redo), carg0)
+	runtime.KeepAlive(buffer)
+}
+
+// ParentRemoveTag calls the default implementations of the remove_tag virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- tag TextTag: a `GtkTextTag` 
+// 	- start *TextIter: one bound of range to be untagged 
+// 	- end *TextIter: other bound of range to be untagged 
+//
+// Emits the “remove-tag” signal.
+// 
+// The default handler for the signal removes all occurrences
+// of @tag from the given range. @start and @end don’t have
+// to be in order.
+func (buffer *TextBufferInstance) ParentRemoveTag(tag TextTag, start *TextIter, end *TextIter) {
+	var carg0 *C.GtkTextBuffer
+	var carg1 *C.GtkTextTag  // in, none, converted
+	var carg2 *C.GtkTextIter // in, none, converted
+	var carg3 *C.GtkTextIter // in, none, converted
+
+	parentclass := (*C.GtkTextBufferClass)(classdata.PeekParentClass(UnsafeTextBufferToGlibNone(buffer)))
+
+	carg1 = (*C.GtkTextTag)(UnsafeTextTagToGlibNone(tag))
+	carg2 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(start))
+	carg3 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(end))
+
+	C._gotk4_gtk4_TextBuffer_virtual_remove_tag(unsafe.Pointer(parentclass.remove_tag), carg0, carg1, carg2, carg3)
+	runtime.KeepAlive(buffer)
+	runtime.KeepAlive(tag)
+	runtime.KeepAlive(start)
+	runtime.KeepAlive(end)
+}
+
+// ParentUndo calls the default implementations of the undo virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+//
+// Undoes the last undoable action on the buffer, if there is one.
+func (buffer *TextBufferInstance) ParentUndo() {
+	var carg0 *C.GtkTextBuffer
+
+	parentclass := (*C.GtkTextBufferClass)(classdata.PeekParentClass(UnsafeTextBufferToGlibNone(buffer)))
+
+	C._gotk4_gtk4_TextBuffer_virtual_undo(unsafe.Pointer(parentclass.undo), carg0)
+	runtime.KeepAlive(buffer)
+}
+
 // RegisterTextBufferSubClass is used to register a go subclass of GtkTextBuffer. For this to work safely please implement the
 // virtual methods required by the implementation.
 func RegisterTextBufferSubClass[InstanceT TextBuffer](
@@ -52445,6 +57065,8 @@ type TextChildAnchor interface {
 	// 
 	// The order in which the widgets are returned is not defined.
 	GetWidgets() (uint, []Widget)
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapTextChildAnchor(base *gobject.ObjectInstance) *TextChildAnchorInstance {
@@ -52755,6 +57377,8 @@ type TextMark interface {
 	// 
 	// Marks are not visible by default.
 	SetVisible(bool)
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapTextMark(base *gobject.ObjectInstance) *TextMarkInstance {
@@ -53117,6 +57741,8 @@ type TextTag interface {
 	// to the table, or created with [method@Gtk.TextBuffer.create_tag],
 	// which adds the tag to the buffer’s table automatically.
 	SetPriority(int32)
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapTextTag(base *gobject.ObjectInstance) *TextTagInstance {
@@ -54092,13 +58718,15 @@ type TreeListModel interface {
 	// get added to the model. This can be either rows added by changes
 	// to the underlying models or via [method@Gtk.TreeListRow.set_expanded].
 	SetAutoexpand(bool)
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapTreeListModel(base *gobject.ObjectInstance) *TreeListModelInstance {
 	return &TreeListModelInstance{
 		ObjectInstance: *base,
 		ListModelInstance: gio.ListModelInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -54503,6 +59131,8 @@ type TreeListRow interface {
 	// 
 	// If the row is not expandable, this function does nothing.
 	SetExpanded(bool)
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapTreeListRow(base *gobject.ObjectInstance) *TreeListRowInstance {
@@ -54866,6 +59496,8 @@ type TreeListRowSorter interface {
 	// This sorter will be passed the [property@Gtk.TreeListRow:item] of
 	// the tree list rows passed to @self.
 	SetSorter(Sorter)
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapTreeListRowSorter(base *gobject.ObjectInstance) *TreeListRowSorterInstance {
@@ -55098,6 +59730,8 @@ type UriLauncher interface {
 	//
 	// Sets the uri that will be opened.
 	SetURI(string)
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapUriLauncher(base *gobject.ObjectInstance) *UriLauncherInstance {
@@ -58008,6 +62642,305 @@ type Widget interface {
 	// This means that [method@Gtk.Widget.unrealize] has been called
 	// or the widget has been unmapped (that is, it is going to be hidden).
 	ConnectUnrealize(func(Widget)) gobject.SignalHandle
+
+	// chain up virtual methods:
+
+	// ParentComputeExpand calls the default implementations of the compute_expand virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- hexpandP *bool 
+	// 	- vexpandP *bool 
+	//
+	// Computes whether a container should give this
+	//   widget extra space when possible.
+	ParentComputeExpand(hexpandP *bool, vexpandP *bool)
+	// ParentContains calls the default implementations of the contains virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- x float64: X coordinate to test, relative to @widget's origin 
+	// 	- y float64: Y coordinate to test, relative to @widget's origin 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	//
+	// Tests if the point at (@x, @y) is contained in @widget.
+	// 
+	// The coordinates for (@x, @y) must be in widget coordinates, so
+	// (0, 0) is assumed to be the top left of @widget's content area.
+	ParentContains(x float64, y float64) bool
+	// ParentCSSChanged calls the default implementations of the css_changed virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- change *CssStyleChange 
+	//
+	// Vfunc called when the CSS used by widget was changed. Widgets
+	//   should then discard their caches that depend on CSS and queue resizes or
+	//   redraws accordingly. The default implementation will take care of this for
+	//   all the default CSS properties, so implementations must chain up.
+	ParentCSSChanged(change *CssStyleChange)
+	// ParentDirectionChanged calls the default implementations of the direction_changed virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- previousDirection TextDirection 
+	//
+	// Signal emitted when the text direction of a
+	//   widget changes.
+	ParentDirectionChanged(previousDirection TextDirection)
+	// ParentFocus calls the default implementations of the focus virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- direction DirectionType 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	//
+	// Vfunc for gtk_widget_child_focus()
+	ParentFocus(direction DirectionType) bool
+	// ParentGetRequestMode calls the default implementations of the get_request_mode virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret SizeRequestMode 
+	//
+	// Gets whether the widget prefers a height-for-width layout
+	// or a width-for-height layout.
+	// 
+	// Single-child widgets generally propagate the preference of
+	// their child, more complex widgets need to request something
+	// either in context of their children or in context of their
+	// allocation capabilities.
+	ParentGetRequestMode() SizeRequestMode
+	// ParentGrabFocus calls the default implementations of the grab_focus virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	//
+	// Causes @widget to have the keyboard focus for the `GtkWindow` it's inside.
+	// 
+	// If @widget is not focusable, or its [vfunc@Gtk.Widget.grab_focus]
+	// implementation cannot transfer the focus to a descendant of @widget
+	// that is focusable, it will not take focus and %FALSE will be returned.
+	// 
+	// Calling [method@Gtk.Widget.grab_focus] on an already focused widget
+	// is allowed, should not have an effect, and return %TRUE.
+	ParentGrabFocus() bool
+	// ParentKeynavFailed calls the default implementations of the keynav_failed virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- direction DirectionType: direction of focus movement 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	//
+	// Emits the `::keynav-failed` signal on the widget.
+	// 
+	// This function should be called whenever keyboard navigation
+	// within a single widget hits a boundary.
+	// 
+	// The return value of this function should be interpreted
+	// in a way similar to the return value of
+	// [method@Gtk.Widget.child_focus]. When %TRUE is returned,
+	// stay in the widget, the failed keyboard  navigation is OK
+	// and/or there is nowhere we can/should move the focus to.
+	// When %FALSE is returned, the caller should continue with
+	// keyboard navigation outside the widget, e.g. by calling
+	// [method@Gtk.Widget.child_focus] on the widget’s toplevel.
+	// 
+	// The default [signal@Gtk.Widget::keynav-failed] handler returns
+	// %FALSE for %GTK_DIR_TAB_FORWARD and %GTK_DIR_TAB_BACKWARD.
+	// For the other values of `GtkDirectionType` it returns %TRUE.
+	// 
+	// Whenever the default handler returns %TRUE, it also calls
+	// [method@Gtk.Widget.error_bell] to notify the user of the
+	// failed keyboard navigation.
+	// 
+	// A use case for providing an own implementation of ::keynav-failed
+	// (either by connecting to it or by overriding it) would be a row of
+	// [class@Gtk.Entry] widgets where the user should be able to navigate
+	// the entire row with the cursor keys, as e.g. known from user
+	// interfaces that require entering license keys.
+	ParentKeynavFailed(direction DirectionType) bool
+	// ParentMap calls the default implementations of the map virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	//
+	// Causes a widget to be mapped if it isn’t already.
+	// 
+	// This function is only for use in widget implementations.
+	ParentMap()
+	// ParentMeasure calls the default implementations of the measure virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- orientation Orientation: the orientation to measure 
+	// 	- forSize int32: Size for the opposite of @orientation, i.e.
+	//   if @orientation is %GTK_ORIENTATION_HORIZONTAL, this is
+	//   the height the widget should be measured with. The %GTK_ORIENTATION_VERTICAL
+	//   case is analogous. This way, both height-for-width and width-for-height
+	//   requests can be implemented. If no size is known, -1 can be passed. 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- minimum int32: location to store the minimum size 
+	// 	- natural int32: location to store the natural size 
+	// 	- minimumBaseline int32: location to store the baseline
+	//   position for the minimum size, or -1 to report no baseline 
+	// 	- naturalBaseline int32: location to store the baseline
+	//   position for the natural size, or -1 to report no baseline 
+	//
+	// Measures @widget in the orientation @orientation and for the given @for_size.
+	// 
+	// As an example, if @orientation is %GTK_ORIENTATION_HORIZONTAL and @for_size
+	// is 300, this functions will compute the minimum and natural width of @widget
+	// if it is allocated at a height of 300 pixels.
+	// 
+	// See [GtkWidget’s geometry management section](class.Widget.html#height-for-width-geometry-management) for
+	// a more details on implementing `GtkWidgetClass.measure()`.
+	ParentMeasure(orientation Orientation, forSize int32) (int32, int32, int32, int32)
+	// ParentMnemonicActivate calls the default implementations of the mnemonic_activate virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- groupCycling bool: %TRUE if there are other widgets with the same mnemonic 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	//
+	// Emits the ::mnemonic-activate signal.
+	// 
+	// See [signal@Gtk.Widget::mnemonic-activate].
+	ParentMnemonicActivate(groupCycling bool) bool
+	// ParentMoveFocus calls the default implementations of the move_focus virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- direction DirectionType 
+	//
+	// Signal emitted when a change of focus is requested
+	ParentMoveFocus(direction DirectionType)
+	// ParentQueryTooltip calls the default implementations of the query_tooltip virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- x int32 
+	// 	- y int32 
+	// 	- keyboardTooltip bool 
+	// 	- tooltip Tooltip 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	//
+	// Signal emitted when “has-tooltip” is %TRUE and the
+	//   hover timeout has expired with the cursor hovering “above”
+	//   widget; or emitted when widget got focus in keyboard mode.
+	ParentQueryTooltip(x int32, y int32, keyboardTooltip bool, tooltip Tooltip) bool
+	// ParentRealize calls the default implementations of the realize virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	//
+	// Creates the GDK resources associated with a widget.
+	// 
+	// Normally realization happens implicitly; if you show a widget
+	// and all its parent containers, then the widget will be realized
+	// and mapped automatically.
+	// 
+	// Realizing a widget requires all the widget’s parent widgets to be
+	// realized; calling this function realizes the widget’s parents
+	// in addition to @widget itself. If a widget is not yet inside a
+	// toplevel window when you realize it, bad things will happen.
+	// 
+	// This function is primarily used in widget implementations, and
+	// isn’t very useful otherwise. Many times when you think you might
+	// need it, a better approach is to connect to a signal that will be
+	// called after the widget is realized automatically, such as
+	// [signal@Gtk.Widget::realize].
+	ParentRealize()
+	// ParentRoot calls the default implementations of the root virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	//
+	// Called when the widget gets added to a `GtkRoot` widget. Must
+	//   chain up
+	ParentRoot()
+	// ParentSetFocusChild calls the default implementations of the set_focus_child virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- child Widget (nullable): a direct child widget of @widget or %NULL
+	//   to unset the focus child of @widget 
+	//
+	// Set @child as the current focus child of @widget.
+	// 
+	// This function is only suitable for widget implementations.
+	// If you want a certain widget to get the input focus, call
+	// [method@Gtk.Widget.grab_focus] on it.
+	ParentSetFocusChild(child Widget)
+	// ParentSizeAllocate calls the default implementations of the size_allocate virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- width int32 
+	// 	- height int32 
+	// 	- baseline int32 
+	//
+	// Called to set the allocation, if the widget does
+	//   not have a layout manager.
+	ParentSizeAllocate(width int32, height int32, baseline int32)
+	// ParentSnapshot calls the default implementations of the snapshot virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- snapshot Snapshot 
+	//
+	// Vfunc called when a new snapshot of the widget has to be taken.
+	ParentSnapshot(snapshot Snapshot)
+	// ParentStateFlagsChanged calls the default implementations of the state_flags_changed virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- previousStateFlags StateFlags 
+	//
+	// Signal emitted when the widget state changes,
+	//   see gtk_widget_get_state_flags().
+	ParentStateFlagsChanged(previousStateFlags StateFlags)
+	// ParentSystemSettingChanged calls the default implementations of the system_setting_changed virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- settings SystemSetting 
+	//
+	// Emitted when a system setting was changed. Must chain up.
+	ParentSystemSettingChanged(settings SystemSetting)
+	// ParentUnmap calls the default implementations of the unmap virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	//
+	// Causes a widget to be unmapped if it’s currently mapped.
+	// 
+	// This function is only for use in widget implementations.
+	ParentUnmap()
+	// ParentUnrealize calls the default implementations of the unrealize virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	//
+	// Causes a widget to be unrealized (frees all GDK resources
+	// associated with the widget).
+	// 
+	// This function is only useful in widget implementations.
+	ParentUnrealize()
+	// ParentUnroot calls the default implementations of the unroot virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	//
+	// Called when the widget is about to be removed from its
+	//   `GtkRoot` widget. Must chain up
+	ParentUnroot()
 }
 
 func unsafeWrapWidget(base *gobject.ObjectInstance) *WidgetInstance {
@@ -62680,6 +67613,9 @@ type WidgetOverrides[Instance Widget] struct {
 	// 
 	// 	- hexpandP *bool 
 	// 	- vexpandP *bool 
+	//
+	// Computes whether a container should give this
+	//   widget extra space when possible.
 	ComputeExpand func(Instance, *bool, *bool)
 	// Contains allows you to override the implementation of the virtual method contains.
 	// The function takes the following parameters:
@@ -62690,16 +67626,29 @@ type WidgetOverrides[Instance Widget] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
+	//
+	// Tests if the point at (@x, @y) is contained in @widget.
+	// 
+	// The coordinates for (@x, @y) must be in widget coordinates, so
+	// (0, 0) is assumed to be the top left of @widget's content area.
 	Contains func(Instance, float64, float64) bool
 	// CSSChanged allows you to override the implementation of the virtual method css_changed.
 	// The function takes the following parameters:
 	// 
 	// 	- change *CssStyleChange 
+	//
+	// Vfunc called when the CSS used by widget was changed. Widgets
+	//   should then discard their caches that depend on CSS and queue resizes or
+	//   redraws accordingly. The default implementation will take care of this for
+	//   all the default CSS properties, so implementations must chain up.
 	CSSChanged func(Instance, *CssStyleChange)
 	// DirectionChanged allows you to override the implementation of the virtual method direction_changed.
 	// The function takes the following parameters:
 	// 
 	// 	- previousDirection TextDirection 
+	//
+	// Signal emitted when the text direction of a
+	//   widget changes.
 	DirectionChanged func(Instance, TextDirection)
 	// Focus allows you to override the implementation of the virtual method focus.
 	// The function takes the following parameters:
@@ -62709,16 +67658,35 @@ type WidgetOverrides[Instance Widget] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
+	//
+	// Vfunc for gtk_widget_child_focus()
 	Focus func(Instance, DirectionType) bool
 	// GetRequestMode allows you to override the implementation of the virtual method get_request_mode.
 	// The function returns the following values:
 	// 
 	// 	- goret SizeRequestMode 
+	//
+	// Gets whether the widget prefers a height-for-width layout
+	// or a width-for-height layout.
+	// 
+	// Single-child widgets generally propagate the preference of
+	// their child, more complex widgets need to request something
+	// either in context of their children or in context of their
+	// allocation capabilities.
 	GetRequestMode func(Instance) SizeRequestMode
 	// GrabFocus allows you to override the implementation of the virtual method grab_focus.
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
+	//
+	// Causes @widget to have the keyboard focus for the `GtkWindow` it's inside.
+	// 
+	// If @widget is not focusable, or its [vfunc@Gtk.Widget.grab_focus]
+	// implementation cannot transfer the focus to a descendant of @widget
+	// that is focusable, it will not take focus and %FALSE will be returned.
+	// 
+	// Calling [method@Gtk.Widget.grab_focus] on an already focused widget
+	// is allowed, should not have an effect, and return %TRUE.
 	GrabFocus func(Instance) bool
 	// KeynavFailed allows you to override the implementation of the virtual method keynav_failed.
 	// The function takes the following parameters:
@@ -62728,8 +67696,40 @@ type WidgetOverrides[Instance Widget] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
+	//
+	// Emits the `::keynav-failed` signal on the widget.
+	// 
+	// This function should be called whenever keyboard navigation
+	// within a single widget hits a boundary.
+	// 
+	// The return value of this function should be interpreted
+	// in a way similar to the return value of
+	// [method@Gtk.Widget.child_focus]. When %TRUE is returned,
+	// stay in the widget, the failed keyboard  navigation is OK
+	// and/or there is nowhere we can/should move the focus to.
+	// When %FALSE is returned, the caller should continue with
+	// keyboard navigation outside the widget, e.g. by calling
+	// [method@Gtk.Widget.child_focus] on the widget’s toplevel.
+	// 
+	// The default [signal@Gtk.Widget::keynav-failed] handler returns
+	// %FALSE for %GTK_DIR_TAB_FORWARD and %GTK_DIR_TAB_BACKWARD.
+	// For the other values of `GtkDirectionType` it returns %TRUE.
+	// 
+	// Whenever the default handler returns %TRUE, it also calls
+	// [method@Gtk.Widget.error_bell] to notify the user of the
+	// failed keyboard navigation.
+	// 
+	// A use case for providing an own implementation of ::keynav-failed
+	// (either by connecting to it or by overriding it) would be a row of
+	// [class@Gtk.Entry] widgets where the user should be able to navigate
+	// the entire row with the cursor keys, as e.g. known from user
+	// interfaces that require entering license keys.
 	KeynavFailed func(Instance, DirectionType) bool
 	// Map allows you to override the implementation of the virtual method map.
+	//
+	// Causes a widget to be mapped if it isn’t already.
+	// 
+	// This function is only for use in widget implementations.
 	Map func(Instance)
 	// Measure allows you to override the implementation of the virtual method measure.
 	// The function takes the following parameters:
@@ -62749,6 +67749,15 @@ type WidgetOverrides[Instance Widget] struct {
 	//   position for the minimum size, or -1 to report no baseline 
 	// 	- naturalBaseline int32: location to store the baseline
 	//   position for the natural size, or -1 to report no baseline 
+	//
+	// Measures @widget in the orientation @orientation and for the given @for_size.
+	// 
+	// As an example, if @orientation is %GTK_ORIENTATION_HORIZONTAL and @for_size
+	// is 300, this functions will compute the minimum and natural width of @widget
+	// if it is allocated at a height of 300 pixels.
+	// 
+	// See [GtkWidget’s geometry management section](class.Widget.html#height-for-width-geometry-management) for
+	// a more details on implementing `GtkWidgetClass.measure()`.
 	Measure func(Instance, Orientation, int32) (int32, int32, int32, int32)
 	// MnemonicActivate allows you to override the implementation of the virtual method mnemonic_activate.
 	// The function takes the following parameters:
@@ -62758,11 +67767,17 @@ type WidgetOverrides[Instance Widget] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
+	//
+	// Emits the ::mnemonic-activate signal.
+	// 
+	// See [signal@Gtk.Widget::mnemonic-activate].
 	MnemonicActivate func(Instance, bool) bool
 	// MoveFocus allows you to override the implementation of the virtual method move_focus.
 	// The function takes the following parameters:
 	// 
 	// 	- direction DirectionType 
+	//
+	// Signal emitted when a change of focus is requested
 	MoveFocus func(Instance, DirectionType)
 	// QueryTooltip allows you to override the implementation of the virtual method query_tooltip.
 	// The function takes the following parameters:
@@ -62775,16 +67790,46 @@ type WidgetOverrides[Instance Widget] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
+	//
+	// Signal emitted when “has-tooltip” is %TRUE and the
+	//   hover timeout has expired with the cursor hovering “above”
+	//   widget; or emitted when widget got focus in keyboard mode.
 	QueryTooltip func(Instance, int32, int32, bool, Tooltip) bool
 	// Realize allows you to override the implementation of the virtual method realize.
+	//
+	// Creates the GDK resources associated with a widget.
+	// 
+	// Normally realization happens implicitly; if you show a widget
+	// and all its parent containers, then the widget will be realized
+	// and mapped automatically.
+	// 
+	// Realizing a widget requires all the widget’s parent widgets to be
+	// realized; calling this function realizes the widget’s parents
+	// in addition to @widget itself. If a widget is not yet inside a
+	// toplevel window when you realize it, bad things will happen.
+	// 
+	// This function is primarily used in widget implementations, and
+	// isn’t very useful otherwise. Many times when you think you might
+	// need it, a better approach is to connect to a signal that will be
+	// called after the widget is realized automatically, such as
+	// [signal@Gtk.Widget::realize].
 	Realize func(Instance)
 	// Root allows you to override the implementation of the virtual method root.
+	//
+	// Called when the widget gets added to a `GtkRoot` widget. Must
+	//   chain up
 	Root func(Instance)
 	// SetFocusChild allows you to override the implementation of the virtual method set_focus_child.
 	// The function takes the following parameters:
 	// 
 	// 	- child Widget (nullable): a direct child widget of @widget or %NULL
 	//   to unset the focus child of @widget 
+	//
+	// Set @child as the current focus child of @widget.
+	// 
+	// This function is only suitable for widget implementations.
+	// If you want a certain widget to get the input focus, call
+	// [method@Gtk.Widget.grab_focus] on it.
 	SetFocusChild func(Instance, Widget)
 	// SizeAllocate allows you to override the implementation of the virtual method size_allocate.
 	// The function takes the following parameters:
@@ -62792,27 +67837,49 @@ type WidgetOverrides[Instance Widget] struct {
 	// 	- width int32 
 	// 	- height int32 
 	// 	- baseline int32 
+	//
+	// Called to set the allocation, if the widget does
+	//   not have a layout manager.
 	SizeAllocate func(Instance, int32, int32, int32)
 	// Snapshot allows you to override the implementation of the virtual method snapshot.
 	// The function takes the following parameters:
 	// 
 	// 	- snapshot Snapshot 
+	//
+	// Vfunc called when a new snapshot of the widget has to be taken.
 	Snapshot func(Instance, Snapshot)
 	// StateFlagsChanged allows you to override the implementation of the virtual method state_flags_changed.
 	// The function takes the following parameters:
 	// 
 	// 	- previousStateFlags StateFlags 
+	//
+	// Signal emitted when the widget state changes,
+	//   see gtk_widget_get_state_flags().
 	StateFlagsChanged func(Instance, StateFlags)
 	// SystemSettingChanged allows you to override the implementation of the virtual method system_setting_changed.
 	// The function takes the following parameters:
 	// 
 	// 	- settings SystemSetting 
+	//
+	// Emitted when a system setting was changed. Must chain up.
 	SystemSettingChanged func(Instance, SystemSetting)
 	// Unmap allows you to override the implementation of the virtual method unmap.
+	//
+	// Causes a widget to be unmapped if it’s currently mapped.
+	// 
+	// This function is only for use in widget implementations.
 	Unmap func(Instance)
 	// Unrealize allows you to override the implementation of the virtual method unrealize.
+	//
+	// Causes a widget to be unrealized (frees all GDK resources
+	// associated with the widget).
+	// 
+	// This function is only useful in widget implementations.
 	Unrealize func(Instance)
 	// Unroot allows you to override the implementation of the virtual method unroot.
+	//
+	// Called when the widget is about to be removed from its
+	//   `GtkRoot` widget. Must chain up
 	Unroot func(Instance)
 }
 
@@ -63281,6 +68348,657 @@ func UnsafeApplyWidgetOverrides[Instance Widget](gclass unsafe.Pointer, override
 	}
 }
 
+// ParentComputeExpand calls the default implementations of the compute_expand virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- hexpandP *bool 
+// 	- vexpandP *bool 
+//
+// Computes whether a container should give this
+//   widget extra space when possible.
+func (widget *WidgetInstance) ParentComputeExpand(hexpandP *bool, vexpandP *bool) {
+	var carg0 *C.GtkWidget
+	var carg1 *C.gboolean // in, transfer: none, C Pointers: 1, Name: gboolean
+	var carg2 *C.gboolean // in, transfer: none, C Pointers: 1, Name: gboolean
+
+	parentclass := (*C.GtkWidgetClass)(classdata.PeekParentClass(UnsafeWidgetToGlibNone(widget)))
+
+	_ = hexpandP
+	_ = carg1
+	panic("unimplemented conversion of *bool (gboolean*)")
+	_ = vexpandP
+	_ = carg2
+	panic("unimplemented conversion of *bool (gboolean*)")
+
+	C._gotk4_gtk4_Widget_virtual_compute_expand(unsafe.Pointer(parentclass.compute_expand), carg0, carg1, carg2)
+	runtime.KeepAlive(widget)
+	runtime.KeepAlive(hexpandP)
+	runtime.KeepAlive(vexpandP)
+}
+
+// ParentContains calls the default implementations of the contains virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- x float64: X coordinate to test, relative to @widget's origin 
+// 	- y float64: Y coordinate to test, relative to @widget's origin 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Tests if the point at (@x, @y) is contained in @widget.
+// 
+// The coordinates for (@x, @y) must be in widget coordinates, so
+// (0, 0) is assumed to be the top left of @widget's content area.
+func (widget *WidgetInstance) ParentContains(x float64, y float64) bool {
+	var carg0 *C.GtkWidget
+	var carg1 C.double   // in, none, casted, casted C.gdouble
+	var carg2 C.double   // in, none, casted, casted C.gdouble
+	var cret  C.gboolean // return
+
+	parentclass := (*C.GtkWidgetClass)(classdata.PeekParentClass(UnsafeWidgetToGlibNone(widget)))
+
+	carg1 = C.double(x)
+	carg2 = C.double(y)
+
+	cret = C._gotk4_gtk4_Widget_virtual_contains(unsafe.Pointer(parentclass.contains), carg0, carg1, carg2)
+	runtime.KeepAlive(widget)
+	runtime.KeepAlive(x)
+	runtime.KeepAlive(y)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// ParentCSSChanged calls the default implementations of the css_changed virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- change *CssStyleChange 
+//
+// Vfunc called when the CSS used by widget was changed. Widgets
+//   should then discard their caches that depend on CSS and queue resizes or
+//   redraws accordingly. The default implementation will take care of this for
+//   all the default CSS properties, so implementations must chain up.
+func (widget *WidgetInstance) ParentCSSChanged(change *CssStyleChange) {
+	var carg0 *C.GtkWidget
+	var carg1 *C.GtkCssStyleChange // in, none, converted
+
+	parentclass := (*C.GtkWidgetClass)(classdata.PeekParentClass(UnsafeWidgetToGlibNone(widget)))
+
+	carg1 = (*C.GtkCssStyleChange)(UnsafeCssStyleChangeToGlibNone(change))
+
+	C._gotk4_gtk4_Widget_virtual_css_changed(unsafe.Pointer(parentclass.css_changed), carg0, carg1)
+	runtime.KeepAlive(widget)
+	runtime.KeepAlive(change)
+}
+
+// ParentDirectionChanged calls the default implementations of the direction_changed virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- previousDirection TextDirection 
+//
+// Signal emitted when the text direction of a
+//   widget changes.
+func (widget *WidgetInstance) ParentDirectionChanged(previousDirection TextDirection) {
+	var carg0 *C.GtkWidget
+	var carg1 C.GtkTextDirection // in, none, casted
+
+	parentclass := (*C.GtkWidgetClass)(classdata.PeekParentClass(UnsafeWidgetToGlibNone(widget)))
+
+	carg1 = C.GtkTextDirection(previousDirection)
+
+	C._gotk4_gtk4_Widget_virtual_direction_changed(unsafe.Pointer(parentclass.direction_changed), carg0, carg1)
+	runtime.KeepAlive(widget)
+	runtime.KeepAlive(previousDirection)
+}
+
+// ParentFocus calls the default implementations of the focus virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- direction DirectionType 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Vfunc for gtk_widget_child_focus()
+func (widget *WidgetInstance) ParentFocus(direction DirectionType) bool {
+	var carg0 *C.GtkWidget
+	var carg1 C.GtkDirectionType // in, none, casted
+	var cret  C.gboolean         // return
+
+	parentclass := (*C.GtkWidgetClass)(classdata.PeekParentClass(UnsafeWidgetToGlibNone(widget)))
+
+	carg1 = C.GtkDirectionType(direction)
+
+	cret = C._gotk4_gtk4_Widget_virtual_focus(unsafe.Pointer(parentclass.focus), carg0, carg1)
+	runtime.KeepAlive(widget)
+	runtime.KeepAlive(direction)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// ParentGetRequestMode calls the default implementations of the get_request_mode virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret SizeRequestMode 
+//
+// Gets whether the widget prefers a height-for-width layout
+// or a width-for-height layout.
+// 
+// Single-child widgets generally propagate the preference of
+// their child, more complex widgets need to request something
+// either in context of their children or in context of their
+// allocation capabilities.
+func (widget *WidgetInstance) ParentGetRequestMode() SizeRequestMode {
+	var carg0 *C.GtkWidget
+	var cret  C.GtkSizeRequestMode // return, none, casted
+
+	parentclass := (*C.GtkWidgetClass)(classdata.PeekParentClass(UnsafeWidgetToGlibNone(widget)))
+
+	cret = C._gotk4_gtk4_Widget_virtual_get_request_mode(unsafe.Pointer(parentclass.get_request_mode), carg0)
+	runtime.KeepAlive(widget)
+
+	var goret SizeRequestMode
+
+	goret = SizeRequestMode(cret)
+
+	return goret
+}
+
+// ParentGrabFocus calls the default implementations of the grab_focus virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Causes @widget to have the keyboard focus for the `GtkWindow` it's inside.
+// 
+// If @widget is not focusable, or its [vfunc@Gtk.Widget.grab_focus]
+// implementation cannot transfer the focus to a descendant of @widget
+// that is focusable, it will not take focus and %FALSE will be returned.
+// 
+// Calling [method@Gtk.Widget.grab_focus] on an already focused widget
+// is allowed, should not have an effect, and return %TRUE.
+func (widget *WidgetInstance) ParentGrabFocus() bool {
+	var carg0 *C.GtkWidget
+	var cret  C.gboolean // return
+
+	parentclass := (*C.GtkWidgetClass)(classdata.PeekParentClass(UnsafeWidgetToGlibNone(widget)))
+
+	cret = C._gotk4_gtk4_Widget_virtual_grab_focus(unsafe.Pointer(parentclass.grab_focus), carg0)
+	runtime.KeepAlive(widget)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// ParentKeynavFailed calls the default implementations of the keynav_failed virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- direction DirectionType: direction of focus movement 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Emits the `::keynav-failed` signal on the widget.
+// 
+// This function should be called whenever keyboard navigation
+// within a single widget hits a boundary.
+// 
+// The return value of this function should be interpreted
+// in a way similar to the return value of
+// [method@Gtk.Widget.child_focus]. When %TRUE is returned,
+// stay in the widget, the failed keyboard  navigation is OK
+// and/or there is nowhere we can/should move the focus to.
+// When %FALSE is returned, the caller should continue with
+// keyboard navigation outside the widget, e.g. by calling
+// [method@Gtk.Widget.child_focus] on the widget’s toplevel.
+// 
+// The default [signal@Gtk.Widget::keynav-failed] handler returns
+// %FALSE for %GTK_DIR_TAB_FORWARD and %GTK_DIR_TAB_BACKWARD.
+// For the other values of `GtkDirectionType` it returns %TRUE.
+// 
+// Whenever the default handler returns %TRUE, it also calls
+// [method@Gtk.Widget.error_bell] to notify the user of the
+// failed keyboard navigation.
+// 
+// A use case for providing an own implementation of ::keynav-failed
+// (either by connecting to it or by overriding it) would be a row of
+// [class@Gtk.Entry] widgets where the user should be able to navigate
+// the entire row with the cursor keys, as e.g. known from user
+// interfaces that require entering license keys.
+func (widget *WidgetInstance) ParentKeynavFailed(direction DirectionType) bool {
+	var carg0 *C.GtkWidget
+	var carg1 C.GtkDirectionType // in, none, casted
+	var cret  C.gboolean         // return
+
+	parentclass := (*C.GtkWidgetClass)(classdata.PeekParentClass(UnsafeWidgetToGlibNone(widget)))
+
+	carg1 = C.GtkDirectionType(direction)
+
+	cret = C._gotk4_gtk4_Widget_virtual_keynav_failed(unsafe.Pointer(parentclass.keynav_failed), carg0, carg1)
+	runtime.KeepAlive(widget)
+	runtime.KeepAlive(direction)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// ParentMap calls the default implementations of the map virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+//
+// Causes a widget to be mapped if it isn’t already.
+// 
+// This function is only for use in widget implementations.
+func (widget *WidgetInstance) ParentMap() {
+	var carg0 *C.GtkWidget
+
+	parentclass := (*C.GtkWidgetClass)(classdata.PeekParentClass(UnsafeWidgetToGlibNone(widget)))
+
+	C._gotk4_gtk4_Widget_virtual_map(unsafe.Pointer(parentclass._map), carg0)
+	runtime.KeepAlive(widget)
+}
+
+// ParentMeasure calls the default implementations of the measure virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- orientation Orientation: the orientation to measure 
+// 	- forSize int32: Size for the opposite of @orientation, i.e.
+//   if @orientation is %GTK_ORIENTATION_HORIZONTAL, this is
+//   the height the widget should be measured with. The %GTK_ORIENTATION_VERTICAL
+//   case is analogous. This way, both height-for-width and width-for-height
+//   requests can be implemented. If no size is known, -1 can be passed. 
+// 
+// The function returns the following values:
+// 
+// 	- minimum int32: location to store the minimum size 
+// 	- natural int32: location to store the natural size 
+// 	- minimumBaseline int32: location to store the baseline
+//   position for the minimum size, or -1 to report no baseline 
+// 	- naturalBaseline int32: location to store the baseline
+//   position for the natural size, or -1 to report no baseline 
+//
+// Measures @widget in the orientation @orientation and for the given @for_size.
+// 
+// As an example, if @orientation is %GTK_ORIENTATION_HORIZONTAL and @for_size
+// is 300, this functions will compute the minimum and natural width of @widget
+// if it is allocated at a height of 300 pixels.
+// 
+// See [GtkWidget’s geometry management section](class.Widget.html#height-for-width-geometry-management) for
+// a more details on implementing `GtkWidgetClass.measure()`.
+func (widget *WidgetInstance) ParentMeasure(orientation Orientation, forSize int32) (int32, int32, int32, int32) {
+	var carg0 *C.GtkWidget
+	var carg1 C.GtkOrientation // in, none, casted
+	var carg2 C.int            // in, none, casted, casted C.gint
+	var carg3 C.int            // out, full, casted, casted C.gint
+	var carg4 C.int            // out, full, casted, casted C.gint
+	var carg5 C.int            // out, full, casted, casted C.gint
+	var carg6 C.int            // out, full, casted, casted C.gint
+
+	parentclass := (*C.GtkWidgetClass)(classdata.PeekParentClass(UnsafeWidgetToGlibNone(widget)))
+
+	carg1 = C.GtkOrientation(orientation)
+	carg2 = C.int(forSize)
+
+	C._gotk4_gtk4_Widget_virtual_measure(unsafe.Pointer(parentclass.measure), carg0, carg1, carg2, &carg3, &carg4, &carg5, &carg6)
+	runtime.KeepAlive(widget)
+	runtime.KeepAlive(orientation)
+	runtime.KeepAlive(forSize)
+
+	var minimum         int32
+	var natural         int32
+	var minimumBaseline int32
+	var naturalBaseline int32
+
+	minimum = int32(carg3)
+	natural = int32(carg4)
+	minimumBaseline = int32(carg5)
+	naturalBaseline = int32(carg6)
+
+	return minimum, natural, minimumBaseline, naturalBaseline
+}
+
+// ParentMnemonicActivate calls the default implementations of the mnemonic_activate virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- groupCycling bool: %TRUE if there are other widgets with the same mnemonic 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Emits the ::mnemonic-activate signal.
+// 
+// See [signal@Gtk.Widget::mnemonic-activate].
+func (widget *WidgetInstance) ParentMnemonicActivate(groupCycling bool) bool {
+	var carg0 *C.GtkWidget
+	var carg1 C.gboolean // in
+	var cret  C.gboolean // return
+
+	parentclass := (*C.GtkWidgetClass)(classdata.PeekParentClass(UnsafeWidgetToGlibNone(widget)))
+
+	if groupCycling {
+		carg1 = C.TRUE
+	}
+
+	cret = C._gotk4_gtk4_Widget_virtual_mnemonic_activate(unsafe.Pointer(parentclass.mnemonic_activate), carg0, carg1)
+	runtime.KeepAlive(widget)
+	runtime.KeepAlive(groupCycling)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// ParentMoveFocus calls the default implementations of the move_focus virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- direction DirectionType 
+//
+// Signal emitted when a change of focus is requested
+func (widget *WidgetInstance) ParentMoveFocus(direction DirectionType) {
+	var carg0 *C.GtkWidget
+	var carg1 C.GtkDirectionType // in, none, casted
+
+	parentclass := (*C.GtkWidgetClass)(classdata.PeekParentClass(UnsafeWidgetToGlibNone(widget)))
+
+	carg1 = C.GtkDirectionType(direction)
+
+	C._gotk4_gtk4_Widget_virtual_move_focus(unsafe.Pointer(parentclass.move_focus), carg0, carg1)
+	runtime.KeepAlive(widget)
+	runtime.KeepAlive(direction)
+}
+
+// ParentQueryTooltip calls the default implementations of the query_tooltip virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- x int32 
+// 	- y int32 
+// 	- keyboardTooltip bool 
+// 	- tooltip Tooltip 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Signal emitted when “has-tooltip” is %TRUE and the
+//   hover timeout has expired with the cursor hovering “above”
+//   widget; or emitted when widget got focus in keyboard mode.
+func (widget *WidgetInstance) ParentQueryTooltip(x int32, y int32, keyboardTooltip bool, tooltip Tooltip) bool {
+	var carg0 *C.GtkWidget
+	var carg1 C.int         // in, none, casted, casted C.gint
+	var carg2 C.int         // in, none, casted, casted C.gint
+	var carg3 C.gboolean    // in
+	var carg4 *C.GtkTooltip // in, none, converted
+	var cret  C.gboolean    // return
+
+	parentclass := (*C.GtkWidgetClass)(classdata.PeekParentClass(UnsafeWidgetToGlibNone(widget)))
+
+	carg1 = C.int(x)
+	carg2 = C.int(y)
+	if keyboardTooltip {
+		carg3 = C.TRUE
+	}
+	carg4 = (*C.GtkTooltip)(UnsafeTooltipToGlibNone(tooltip))
+
+	cret = C._gotk4_gtk4_Widget_virtual_query_tooltip(unsafe.Pointer(parentclass.query_tooltip), carg0, carg1, carg2, carg3, carg4)
+	runtime.KeepAlive(widget)
+	runtime.KeepAlive(x)
+	runtime.KeepAlive(y)
+	runtime.KeepAlive(keyboardTooltip)
+	runtime.KeepAlive(tooltip)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// ParentRealize calls the default implementations of the realize virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+//
+// Creates the GDK resources associated with a widget.
+// 
+// Normally realization happens implicitly; if you show a widget
+// and all its parent containers, then the widget will be realized
+// and mapped automatically.
+// 
+// Realizing a widget requires all the widget’s parent widgets to be
+// realized; calling this function realizes the widget’s parents
+// in addition to @widget itself. If a widget is not yet inside a
+// toplevel window when you realize it, bad things will happen.
+// 
+// This function is primarily used in widget implementations, and
+// isn’t very useful otherwise. Many times when you think you might
+// need it, a better approach is to connect to a signal that will be
+// called after the widget is realized automatically, such as
+// [signal@Gtk.Widget::realize].
+func (widget *WidgetInstance) ParentRealize() {
+	var carg0 *C.GtkWidget
+
+	parentclass := (*C.GtkWidgetClass)(classdata.PeekParentClass(UnsafeWidgetToGlibNone(widget)))
+
+	C._gotk4_gtk4_Widget_virtual_realize(unsafe.Pointer(parentclass.realize), carg0)
+	runtime.KeepAlive(widget)
+}
+
+// ParentRoot calls the default implementations of the root virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+//
+// Called when the widget gets added to a `GtkRoot` widget. Must
+//   chain up
+func (widget *WidgetInstance) ParentRoot() {
+	var carg0 *C.GtkWidget
+
+	parentclass := (*C.GtkWidgetClass)(classdata.PeekParentClass(UnsafeWidgetToGlibNone(widget)))
+
+	C._gotk4_gtk4_Widget_virtual_root(unsafe.Pointer(parentclass.root), carg0)
+	runtime.KeepAlive(widget)
+}
+
+// ParentSetFocusChild calls the default implementations of the set_focus_child virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- child Widget (nullable): a direct child widget of @widget or %NULL
+//   to unset the focus child of @widget 
+//
+// Set @child as the current focus child of @widget.
+// 
+// This function is only suitable for widget implementations.
+// If you want a certain widget to get the input focus, call
+// [method@Gtk.Widget.grab_focus] on it.
+func (widget *WidgetInstance) ParentSetFocusChild(child Widget) {
+	var carg0 *C.GtkWidget
+	var carg1 *C.GtkWidget // in, none, converted, nullable
+
+	parentclass := (*C.GtkWidgetClass)(classdata.PeekParentClass(UnsafeWidgetToGlibNone(widget)))
+
+	if child != nil {
+		carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(child))
+	}
+
+	C._gotk4_gtk4_Widget_virtual_set_focus_child(unsafe.Pointer(parentclass.set_focus_child), carg0, carg1)
+	runtime.KeepAlive(widget)
+	runtime.KeepAlive(child)
+}
+
+// ParentSizeAllocate calls the default implementations of the size_allocate virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- width int32 
+// 	- height int32 
+// 	- baseline int32 
+//
+// Called to set the allocation, if the widget does
+//   not have a layout manager.
+func (widget *WidgetInstance) ParentSizeAllocate(width int32, height int32, baseline int32) {
+	var carg0 *C.GtkWidget
+	var carg1 C.int // in, none, casted, casted C.gint
+	var carg2 C.int // in, none, casted, casted C.gint
+	var carg3 C.int // in, none, casted, casted C.gint
+
+	parentclass := (*C.GtkWidgetClass)(classdata.PeekParentClass(UnsafeWidgetToGlibNone(widget)))
+
+	carg1 = C.int(width)
+	carg2 = C.int(height)
+	carg3 = C.int(baseline)
+
+	C._gotk4_gtk4_Widget_virtual_size_allocate(unsafe.Pointer(parentclass.size_allocate), carg0, carg1, carg2, carg3)
+	runtime.KeepAlive(widget)
+	runtime.KeepAlive(width)
+	runtime.KeepAlive(height)
+	runtime.KeepAlive(baseline)
+}
+
+// ParentSnapshot calls the default implementations of the snapshot virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- snapshot Snapshot 
+//
+// Vfunc called when a new snapshot of the widget has to be taken.
+func (widget *WidgetInstance) ParentSnapshot(snapshot Snapshot) {
+	var carg0 *C.GtkWidget
+	var carg1 *C.GtkSnapshot // in, none, converted, casted *C.Snapshot
+
+	parentclass := (*C.GtkWidgetClass)(classdata.PeekParentClass(UnsafeWidgetToGlibNone(widget)))
+
+	carg1 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
+
+	C._gotk4_gtk4_Widget_virtual_snapshot(unsafe.Pointer(parentclass.snapshot), carg0, carg1)
+	runtime.KeepAlive(widget)
+	runtime.KeepAlive(snapshot)
+}
+
+// ParentStateFlagsChanged calls the default implementations of the state_flags_changed virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- previousStateFlags StateFlags 
+//
+// Signal emitted when the widget state changes,
+//   see gtk_widget_get_state_flags().
+func (widget *WidgetInstance) ParentStateFlagsChanged(previousStateFlags StateFlags) {
+	var carg0 *C.GtkWidget
+	var carg1 C.GtkStateFlags // in, none, casted
+
+	parentclass := (*C.GtkWidgetClass)(classdata.PeekParentClass(UnsafeWidgetToGlibNone(widget)))
+
+	carg1 = C.GtkStateFlags(previousStateFlags)
+
+	C._gotk4_gtk4_Widget_virtual_state_flags_changed(unsafe.Pointer(parentclass.state_flags_changed), carg0, carg1)
+	runtime.KeepAlive(widget)
+	runtime.KeepAlive(previousStateFlags)
+}
+
+// ParentSystemSettingChanged calls the default implementations of the system_setting_changed virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- settings SystemSetting 
+//
+// Emitted when a system setting was changed. Must chain up.
+func (widget *WidgetInstance) ParentSystemSettingChanged(settings SystemSetting) {
+	var carg0 *C.GtkWidget
+	var carg1 C.GtkSystemSetting // in, none, casted
+
+	parentclass := (*C.GtkWidgetClass)(classdata.PeekParentClass(UnsafeWidgetToGlibNone(widget)))
+
+	carg1 = C.GtkSystemSetting(settings)
+
+	C._gotk4_gtk4_Widget_virtual_system_setting_changed(unsafe.Pointer(parentclass.system_setting_changed), carg0, carg1)
+	runtime.KeepAlive(widget)
+	runtime.KeepAlive(settings)
+}
+
+// ParentUnmap calls the default implementations of the unmap virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+//
+// Causes a widget to be unmapped if it’s currently mapped.
+// 
+// This function is only for use in widget implementations.
+func (widget *WidgetInstance) ParentUnmap() {
+	var carg0 *C.GtkWidget
+
+	parentclass := (*C.GtkWidgetClass)(classdata.PeekParentClass(UnsafeWidgetToGlibNone(widget)))
+
+	C._gotk4_gtk4_Widget_virtual_unmap(unsafe.Pointer(parentclass.unmap), carg0)
+	runtime.KeepAlive(widget)
+}
+
+// ParentUnrealize calls the default implementations of the unrealize virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+//
+// Causes a widget to be unrealized (frees all GDK resources
+// associated with the widget).
+// 
+// This function is only useful in widget implementations.
+func (widget *WidgetInstance) ParentUnrealize() {
+	var carg0 *C.GtkWidget
+
+	parentclass := (*C.GtkWidgetClass)(classdata.PeekParentClass(UnsafeWidgetToGlibNone(widget)))
+
+	C._gotk4_gtk4_Widget_virtual_unrealize(unsafe.Pointer(parentclass.unrealize), carg0)
+	runtime.KeepAlive(widget)
+}
+
+// ParentUnroot calls the default implementations of the unroot virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+//
+// Called when the widget is about to be removed from its
+//   `GtkRoot` widget. Must chain up
+func (widget *WidgetInstance) ParentUnroot() {
+	var carg0 *C.GtkWidget
+
+	parentclass := (*C.GtkWidgetClass)(classdata.PeekParentClass(UnsafeWidgetToGlibNone(widget)))
+
+	C._gotk4_gtk4_Widget_virtual_unroot(unsafe.Pointer(parentclass.unroot), carg0)
+	runtime.KeepAlive(widget)
+}
+
 // RegisterWidgetSubClass is used to register a go subclass of GtkWidget. For this to work safely please implement the
 // virtual methods required by the implementation.
 func RegisterWidgetSubClass[InstanceT Widget](
@@ -63360,13 +69078,15 @@ type WidgetPaintable interface {
 	//
 	// Sets the widget that should be observed.
 	SetWidget(Widget)
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapWidgetPaintable(base *gobject.ObjectInstance) *WidgetPaintableInstance {
 	return &WidgetPaintableInstance{
 		ObjectInstance: *base,
 		PaintableInstance: gdk.PaintableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -64318,6 +70038,46 @@ type Window interface {
 	// emitted when the set of accelerators or mnemonics that
 	// are associated with @window changes.
 	ConnectKeysChanged(func(Window)) gobject.SignalHandle
+
+	// chain up virtual methods:
+
+	// ParentActivateDefault calls the default implementations of the activate_default virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	//
+	// Activates the default widget for the window.
+	ParentActivateDefault()
+	// ParentActivateFocus calls the default implementations of the activate_focus virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	//
+	// Activates the current focused widget within the window.
+	ParentActivateFocus()
+	// ParentCloseRequest calls the default implementations of the close_request virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	//
+	// Class handler for the `GtkWindow::close-request` signal.
+	ParentCloseRequest() bool
+	// ParentEnableDebugging calls the default implementations of the enable_debugging virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- toggle bool 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	//
+	// Class handler for the `GtkWindow::enable-debugging`
+	//   keybinding signal.
+	ParentEnableDebugging(toggle bool) bool
+	// ParentKeysChanged calls the default implementations of the keys_changed virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	//
+	// Signal gets emitted when the set of accelerators or
+	//   mnemonics that are associated with window changes.
+	ParentKeysChanged()
 }
 
 func unsafeWrapWindow(base *gobject.ObjectInstance) *WindowInstance {
@@ -66038,13 +71798,19 @@ type WindowOverrides[Instance Window] struct {
 	WidgetOverrides[Instance]
 
 	// ActivateDefault allows you to override the implementation of the virtual method activate_default.
+	//
+	// Activates the default widget for the window.
 	ActivateDefault func(Instance)
 	// ActivateFocus allows you to override the implementation of the virtual method activate_focus.
+	//
+	// Activates the current focused widget within the window.
 	ActivateFocus func(Instance)
 	// CloseRequest allows you to override the implementation of the virtual method close_request.
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
+	//
+	// Class handler for the `GtkWindow::close-request` signal.
 	CloseRequest func(Instance) bool
 	// EnableDebugging allows you to override the implementation of the virtual method enable_debugging.
 	// The function takes the following parameters:
@@ -66054,8 +71820,14 @@ type WindowOverrides[Instance Window] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
+	//
+	// Class handler for the `GtkWindow::enable-debugging`
+	//   keybinding signal.
 	EnableDebugging func(Instance, bool) bool
 	// KeysChanged allows you to override the implementation of the virtual method keys_changed.
+	//
+	// Signal gets emitted when the set of accelerators or
+	//   mnemonics that are associated with window changes.
 	KeysChanged func(Instance)
 }
 
@@ -66158,6 +71930,107 @@ func UnsafeApplyWindowOverrides[Instance Window](gclass unsafe.Pointer, override
 			},
 		)
 	}
+}
+
+// ParentActivateDefault calls the default implementations of the activate_default virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+//
+// Activates the default widget for the window.
+func (window *WindowInstance) ParentActivateDefault() {
+	var carg0 *C.GtkWindow
+
+	parentclass := (*C.GtkWindowClass)(classdata.PeekParentClass(UnsafeWindowToGlibNone(window)))
+
+	C._gotk4_gtk4_Window_virtual_activate_default(unsafe.Pointer(parentclass.activate_default), carg0)
+	runtime.KeepAlive(window)
+}
+
+// ParentActivateFocus calls the default implementations of the activate_focus virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+//
+// Activates the current focused widget within the window.
+func (window *WindowInstance) ParentActivateFocus() {
+	var carg0 *C.GtkWindow
+
+	parentclass := (*C.GtkWindowClass)(classdata.PeekParentClass(UnsafeWindowToGlibNone(window)))
+
+	C._gotk4_gtk4_Window_virtual_activate_focus(unsafe.Pointer(parentclass.activate_focus), carg0)
+	runtime.KeepAlive(window)
+}
+
+// ParentCloseRequest calls the default implementations of the close_request virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Class handler for the `GtkWindow::close-request` signal.
+func (window *WindowInstance) ParentCloseRequest() bool {
+	var carg0 *C.GtkWindow
+	var cret  C.gboolean // return
+
+	parentclass := (*C.GtkWindowClass)(classdata.PeekParentClass(UnsafeWindowToGlibNone(window)))
+
+	cret = C._gotk4_gtk4_Window_virtual_close_request(unsafe.Pointer(parentclass.close_request), carg0)
+	runtime.KeepAlive(window)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// ParentEnableDebugging calls the default implementations of the enable_debugging virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- toggle bool 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Class handler for the `GtkWindow::enable-debugging`
+//   keybinding signal.
+func (window *WindowInstance) ParentEnableDebugging(toggle bool) bool {
+	var carg0 *C.GtkWindow
+	var carg1 C.gboolean // in
+	var cret  C.gboolean // return
+
+	parentclass := (*C.GtkWindowClass)(classdata.PeekParentClass(UnsafeWindowToGlibNone(window)))
+
+	if toggle {
+		carg1 = C.TRUE
+	}
+
+	cret = C._gotk4_gtk4_Window_virtual_enable_debugging(unsafe.Pointer(parentclass.enable_debugging), carg0, carg1)
+	runtime.KeepAlive(window)
+	runtime.KeepAlive(toggle)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// ParentKeysChanged calls the default implementations of the keys_changed virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+//
+// Signal gets emitted when the set of accelerators or
+//   mnemonics that are associated with window changes.
+func (window *WindowInstance) ParentKeysChanged() {
+	var carg0 *C.GtkWindow
+
+	parentclass := (*C.GtkWindowClass)(classdata.PeekParentClass(UnsafeWindowToGlibNone(window)))
+
+	C._gotk4_gtk4_Window_virtual_keys_changed(unsafe.Pointer(parentclass.keys_changed), carg0)
+	runtime.KeepAlive(window)
 }
 
 // RegisterWindowSubClass is used to register a go subclass of GtkWindow. For this to work safely please implement the
@@ -66306,6 +72179,8 @@ type WindowControls interface {
 	// 
 	// See [property@Gtk.WindowControls:decoration-layout].
 	SetSide(PackType)
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapWindowControls(base *gobject.ObjectInstance) *WindowControlsInstance {
@@ -66602,6 +72477,8 @@ type WindowGroup interface {
 	//
 	// Removes a window from a `GtkWindowGroup`.
 	RemoveWindow(Window)
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapWindowGroup(base *gobject.ObjectInstance) *WindowGroupInstance {
@@ -66817,6 +72694,8 @@ type WindowHandle interface {
 	//
 	// Sets the child widget of @self.
 	SetChild(Widget)
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapWindowHandle(base *gobject.ObjectInstance) *WindowHandleInstance {
@@ -67375,16 +73254,16 @@ func unsafeWrapAboutDialog(base *gobject.ObjectInstance) *AboutDialogInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ShortcutManagerInstance: ShortcutManagerInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -68396,13 +74275,13 @@ func unsafeWrapActionBar(base *gobject.ObjectInstance) *ActionBarInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -68896,11 +74775,11 @@ func unsafeWrapAnyFilter(base *gobject.ObjectInstance) *AnyFilterInstance {
 				ObjectInstance: *base,
 			},
 			ListModelInstance: gio.ListModelInstance{
-				Instance: *base,
+				ObjectInstance: *base,
 			},
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -69112,6 +74991,8 @@ type ApplicationWindow interface {
 	// Sets whether the window will display a menubar for the app menu
 	// and menubar as needed.
 	SetShowMenubar(bool)
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapApplicationWindow(base *gobject.ObjectInstance) *ApplicationWindowInstance {
@@ -69124,22 +75005,22 @@ func unsafeWrapApplicationWindow(base *gobject.ObjectInstance) *ApplicationWindo
 			},
 		},
 		ActionGroupInstance: gio.ActionGroupInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ActionMapInstance: gio.ActionMapInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ShortcutManagerInstance: ShortcutManagerInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -69503,13 +75384,13 @@ func unsafeWrapAspectFrame(base *gobject.ObjectInstance) *AspectFrameInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -69837,6 +75718,8 @@ var _ BinLayout = (*BinLayoutInstance)(nil)
 type BinLayout interface {
 	LayoutManager
 	upcastToGtkBinLayout() *BinLayoutInstance
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapBinLayout(base *gobject.ObjectInstance) *BinLayoutInstance {
@@ -69971,6 +75854,8 @@ type BoolFilter interface {
 	//
 	// Sets whether the filter should invert the expression.
 	SetInvert(bool)
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapBoolFilter(base *gobject.ObjectInstance) *BoolFilterInstance {
@@ -70284,6 +76169,8 @@ type Box interface {
 	//
 	// Sets the number of pixels to place between children of @box.
 	SetSpacing(int32)
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapBox(base *gobject.ObjectInstance) *BoxInstance {
@@ -70294,16 +76181,16 @@ func unsafeWrapBox(base *gobject.ObjectInstance) *BoxInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		OrientableInstance: OrientableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -70815,6 +76702,8 @@ type BoxLayout interface {
 	//
 	// Sets how much spacing to put between children.
 	SetSpacing(uint)
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapBoxLayout(base *gobject.ObjectInstance) *BoxLayoutInstance {
@@ -70823,7 +76712,7 @@ func unsafeWrapBoxLayout(base *gobject.ObjectInstance) *BoxLayoutInstance {
 			ObjectInstance: *base,
 		},
 		OrientableInstance: OrientableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -71561,6 +77450,21 @@ type Button interface {
 	//
 	// Emitted when the button has been activated (pressed and released).
 	EmitClicked()
+
+	// chain up virtual methods:
+
+	// ParentActivate calls the default implementations of the activate virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	//
+	// Signal that causes the button to animate press then
+	//    release. Applications should never connect to this signal, but use
+	//    the @clicked signal.
+	ParentActivate()
+	// ParentClicked calls the default implementations of the clicked virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	//
+	// Signal emitted when the button has been activated (pressed and released).
+	ParentClicked()
 }
 
 func unsafeWrapButton(base *gobject.ObjectInstance) *ButtonInstance {
@@ -71571,16 +77475,16 @@ func unsafeWrapButton(base *gobject.ObjectInstance) *ButtonInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ActionableInstance: ActionableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -72067,8 +77971,14 @@ type ButtonOverrides[Instance Button] struct {
 	WidgetOverrides[Instance]
 
 	// Activate allows you to override the implementation of the virtual method activate.
+	//
+	// Signal that causes the button to animate press then
+	//    release. Applications should never connect to this signal, but use
+	//    the @clicked signal.
 	Activate func(Instance)
 	// Clicked allows you to override the implementation of the virtual method clicked.
+	//
+	// Signal emitted when the button has been activated (pressed and released).
 	Clicked func(Instance)
 }
 
@@ -72108,6 +78018,34 @@ func UnsafeApplyButtonOverrides[Instance Button](gclass unsafe.Pointer, override
 			},
 		)
 	}
+}
+
+// ParentActivate calls the default implementations of the activate virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+//
+// Signal that causes the button to animate press then
+//    release. Applications should never connect to this signal, but use
+//    the @clicked signal.
+func (button *ButtonInstance) ParentActivate() {
+	var carg0 *C.GtkButton
+
+	parentclass := (*C.GtkButtonClass)(classdata.PeekParentClass(UnsafeButtonToGlibNone(button)))
+
+	C._gotk4_gtk4_Button_virtual_activate(unsafe.Pointer(parentclass.activate), carg0)
+	runtime.KeepAlive(button)
+}
+
+// ParentClicked calls the default implementations of the clicked virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+//
+// Signal emitted when the button has been activated (pressed and released).
+func (button *ButtonInstance) ParentClicked() {
+	var carg0 *C.GtkButton
+
+	parentclass := (*C.GtkButtonClass)(classdata.PeekParentClass(UnsafeButtonToGlibNone(button)))
+
+	C._gotk4_gtk4_Button_virtual_clicked(unsafe.Pointer(parentclass.clicked), carg0)
+	runtime.KeepAlive(button)
 }
 
 // RegisterButtonSubClass is used to register a go subclass of GtkButton. For this to work safely please implement the
@@ -72414,13 +78352,13 @@ func unsafeWrapCalendar(base *gobject.ObjectInstance) *CalendarInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -73150,16 +79088,16 @@ func unsafeWrapCenterBox(base *gobject.ObjectInstance) *CenterBoxInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		OrientableInstance: OrientableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -73591,6 +79529,8 @@ type CenterLayout interface {
 	// 
 	// To remove the existing start widget, pass %NULL.
 	SetStartWidget(Widget)
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapCenterLayout(base *gobject.ObjectInstance) *CenterLayoutInstance {
@@ -74199,6 +80139,15 @@ type CheckButton interface {
 	// Emitted when the buttons's [property@Gtk.CheckButton:active]
 	// property changes.
 	ConnectToggled(func(CheckButton)) gobject.SignalHandle
+
+	// chain up virtual methods:
+
+	// ParentActivate calls the default implementations of the activate virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	ParentActivate()
+	// ParentToggled calls the default implementations of the toggled virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	ParentToggled()
 }
 
 func unsafeWrapCheckButton(base *gobject.ObjectInstance) *CheckButtonInstance {
@@ -74209,16 +80158,16 @@ func unsafeWrapCheckButton(base *gobject.ObjectInstance) *CheckButtonInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ActionableInstance: ActionableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -74695,6 +80644,28 @@ func UnsafeApplyCheckButtonOverrides[Instance CheckButton](gclass unsafe.Pointer
 	}
 }
 
+// ParentActivate calls the default implementations of the activate virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+func (checkButton *CheckButtonInstance) ParentActivate() {
+	var carg0 *C.GtkCheckButton
+
+	parentclass := (*C.GtkCheckButtonClass)(classdata.PeekParentClass(UnsafeCheckButtonToGlibNone(checkButton)))
+
+	C._gotk4_gtk4_CheckButton_virtual_activate(unsafe.Pointer(parentclass.activate), carg0)
+	runtime.KeepAlive(checkButton)
+}
+
+// ParentToggled calls the default implementations of the toggled virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+func (checkButton *CheckButtonInstance) ParentToggled() {
+	var carg0 *C.GtkCheckButton
+
+	parentclass := (*C.GtkCheckButtonClass)(classdata.PeekParentClass(UnsafeCheckButtonToGlibNone(checkButton)))
+
+	C._gotk4_gtk4_CheckButton_virtual_toggled(unsafe.Pointer(parentclass.toggled), carg0)
+	runtime.KeepAlive(checkButton)
+}
+
 // RegisterCheckButtonSubClass is used to register a go subclass of GtkCheckButton. For this to work safely please implement the
 // virtual methods required by the implementation.
 func RegisterCheckButtonSubClass[InstanceT CheckButton](
@@ -74805,6 +80776,8 @@ type ColorDialogButton interface {
 	// The `::activate` signal on `GtkColorDialogButton` is an action signal
 	// and emitting it causes the button to pop up its dialog.
 	EmitActivate()
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapColorDialogButton(base *gobject.ObjectInstance) *ColorDialogButtonInstance {
@@ -74815,13 +80788,13 @@ func unsafeWrapColorDialogButton(base *gobject.ObjectInstance) *ColorDialogButto
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -75407,16 +81380,16 @@ func unsafeWrapColumnView(base *gobject.ObjectInstance) *ColumnViewInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ScrollableInstance: ScrollableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -76540,6 +82513,8 @@ type ColumnViewSorter interface {
 	// If there is no primary sort column, then this function returns
 	// `GTK_SORT_ASCENDING`.
 	GetPrimarySortOrder() SortType
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapColumnViewSorter(base *gobject.ObjectInstance) *ColumnViewSorterInstance {
@@ -77019,6 +82994,8 @@ type ConstraintLayout interface {
 	// Removes `guide` from the layout manager,
 	// so that it no longer influences the layout.
 	RemoveGuide(ConstraintGuide)
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapConstraintLayout(base *gobject.ObjectInstance) *ConstraintLayoutInstance {
@@ -77027,7 +83004,7 @@ func unsafeWrapConstraintLayout(base *gobject.ObjectInstance) *ConstraintLayoutI
 			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -77308,6 +83285,8 @@ var _ ConstraintLayoutChild = (*ConstraintLayoutChildInstance)(nil)
 type ConstraintLayoutChild interface {
 	LayoutChild
 	upcastToGtkConstraintLayoutChild() *ConstraintLayoutChildInstance
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapConstraintLayoutChild(base *gobject.ObjectInstance) *ConstraintLayoutChildInstance {
@@ -77405,6 +83384,8 @@ var _ CustomFilter = (*CustomFilterInstance)(nil)
 type CustomFilter interface {
 	Filter
 	upcastToGtkCustomFilter() *CustomFilterInstance
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapCustomFilter(base *gobject.ObjectInstance) *CustomFilterInstance {
@@ -77507,6 +83488,8 @@ var _ CustomLayout = (*CustomLayoutInstance)(nil)
 type CustomLayout interface {
 	LayoutManager
 	upcastToGtkCustomLayout() *CustomLayoutInstance
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapCustomLayout(base *gobject.ObjectInstance) *CustomLayoutInstance {
@@ -77605,6 +83588,8 @@ var _ CustomSorter = (*CustomSorterInstance)(nil)
 type CustomSorter interface {
 	Sorter
 	upcastToGtkCustomSorter() *CustomSorterInstance
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapCustomSorter(base *gobject.ObjectInstance) *CustomSorterInstance {
@@ -77736,6 +83721,8 @@ type DragIcon interface {
 	//
 	// Sets the widget to display as the drag icon.
 	SetChild(Widget)
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapDragIcon(base *gobject.ObjectInstance) *DragIconInstance {
@@ -77746,13 +83733,13 @@ func unsafeWrapDragIcon(base *gobject.ObjectInstance) *DragIconInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -78621,6 +84608,16 @@ type DrawingArea interface {
 	// This is useful in order to keep state up to date with the widget size,
 	// like for instance a backing surface.
 	ConnectResize(func(DrawingArea, int32, int32)) gobject.SignalHandle
+
+	// chain up virtual methods:
+
+	// ParentResize calls the default implementations of the resize virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- width int32 
+	// 	- height int32 
+	ParentResize(width int32, height int32)
 }
 
 func unsafeWrapDrawingArea(base *gobject.ObjectInstance) *DrawingAreaInstance {
@@ -78631,13 +84628,13 @@ func unsafeWrapDrawingArea(base *gobject.ObjectInstance) *DrawingAreaInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -78842,6 +84839,28 @@ func UnsafeApplyDrawingAreaOverrides[Instance DrawingArea](gclass unsafe.Pointer
 			},
 		)
 	}
+}
+
+// ParentResize calls the default implementations of the resize virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- width int32 
+// 	- height int32 
+func (area *DrawingAreaInstance) ParentResize(width int32, height int32) {
+	var carg0 *C.GtkDrawingArea
+	var carg1 C.int // in, none, casted, casted C.gint
+	var carg2 C.int // in, none, casted, casted C.gint
+
+	parentclass := (*C.GtkDrawingAreaClass)(classdata.PeekParentClass(UnsafeDrawingAreaToGlibNone(area)))
+
+	carg1 = C.int(width)
+	carg2 = C.int(height)
+
+	C._gotk4_gtk4_DrawingArea_virtual_resize(unsafe.Pointer(parentclass.resize), carg0, carg1, carg2)
+	runtime.KeepAlive(area)
+	runtime.KeepAlive(width)
+	runtime.KeepAlive(height)
 }
 
 // RegisterDrawingAreaSubClass is used to register a go subclass of GtkDrawingArea. For this to work safely please implement the
@@ -79313,6 +85332,8 @@ type DropDown interface {
 	// The `::activate` signal on `GtkDropDown` is an action signal and
 	// emitting it causes the drop down to pop up its dropdown.
 	EmitActivate()
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapDropDown(base *gobject.ObjectInstance) *DropDownInstance {
@@ -79323,13 +85344,13 @@ func unsafeWrapDropDown(base *gobject.ObjectInstance) *DropDownInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -80913,6 +86934,8 @@ type EditableLabel interface {
 	// resulting text is discarded and the label will keep its
 	// previous [property@Gtk.Editable:text] property value.
 	StopEditing(bool)
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapEditableLabel(base *gobject.ObjectInstance) *EditableLabelInstance {
@@ -80923,13 +86946,13 @@ func unsafeWrapEditableLabel(base *gobject.ObjectInstance) *EditableLabelInstanc
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -81876,6 +87899,15 @@ type Entry interface {
 	// Emitted on the button release from a mouse click
 	// over an activatable icon.
 	ConnectIconRelease(func(Entry, EntryIconPosition)) gobject.SignalHandle
+
+	// chain up virtual methods:
+
+	// ParentActivate calls the default implementations of the activate virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	//
+	// Class handler for the `GtkEntry::activate` signal. The default
+	//   implementation activates the gtk.activate-default action.
+	ParentActivate()
 }
 
 func unsafeWrapEntry(base *gobject.ObjectInstance) *EntryInstance {
@@ -81886,13 +87918,13 @@ func unsafeWrapEntry(base *gobject.ObjectInstance) *EntryInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -83513,6 +89545,9 @@ type EntryOverrides[Instance Entry] struct {
 	WidgetOverrides[Instance]
 
 	// Activate allows you to override the implementation of the virtual method activate.
+	//
+	// Class handler for the `GtkEntry::activate` signal. The default
+	//   implementation activates the gtk.activate-default action.
 	Activate func(Instance)
 }
 
@@ -83537,6 +89572,20 @@ func UnsafeApplyEntryOverrides[Instance Entry](gclass unsafe.Pointer, overrides 
 			},
 		)
 	}
+}
+
+// ParentActivate calls the default implementations of the activate virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+//
+// Class handler for the `GtkEntry::activate` signal. The default
+//   implementation activates the gtk.activate-default action.
+func (entry *EntryInstance) ParentActivate() {
+	var carg0 *C.GtkEntry
+
+	parentclass := (*C.GtkEntryClass)(classdata.PeekParentClass(UnsafeEntryToGlibNone(entry)))
+
+	C._gotk4_gtk4_Entry_virtual_activate(unsafe.Pointer(parentclass.activate), carg0)
+	runtime.KeepAlive(entry)
 }
 
 // RegisterEntrySubClass is used to register a go subclass of GtkEntry. For this to work safely please implement the
@@ -83593,11 +89642,11 @@ func unsafeWrapEveryFilter(base *gobject.ObjectInstance) *EveryFilterInstance {
 				ObjectInstance: *base,
 			},
 			ListModelInstance: gio.ListModelInstance{
-				Instance: *base,
+				ObjectInstance: *base,
 			},
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -83917,13 +89966,13 @@ func unsafeWrapExpander(base *gobject.ObjectInstance) *ExpanderInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -84525,7 +90574,7 @@ func unsafeWrapFileFilter(base *gobject.ObjectInstance) *FileFilterInstance {
 			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -84894,6 +90943,8 @@ type Fixed interface {
 	// [class@Gtk.FixedLayoutChild] instance associated to
 	// @widget and calls [method@Gtk.FixedLayoutChild.set_transform].
 	SetChildTransform(Widget, *gsk.Transform)
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapFixed(base *gobject.ObjectInstance) *FixedInstance {
@@ -84904,13 +90955,13 @@ func unsafeWrapFixed(base *gobject.ObjectInstance) *FixedInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -85225,6 +91276,8 @@ var _ FixedLayout = (*FixedLayoutInstance)(nil)
 type FixedLayout interface {
 	LayoutManager
 	upcastToGtkFixedLayout() *FixedLayoutInstance
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapFixedLayout(base *gobject.ObjectInstance) *FixedLayoutInstance {
@@ -85358,6 +91411,8 @@ type FixedLayoutChild interface {
 	//
 	// Sets the transformation of the child of a `GtkFixedLayout`.
 	SetTransform(*gsk.Transform)
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapFixedLayoutChild(base *gobject.ObjectInstance) *FixedLayoutChildInstance {
@@ -85980,16 +92035,16 @@ func unsafeWrapFlowBox(base *gobject.ObjectInstance) *FlowBoxInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		OrientableInstance: OrientableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -86997,6 +93052,12 @@ type FlowBoxChild interface {
 	// 
 	// The default bindings are &lt;kbd&gt;Space&lt;/kbd&gt; and &lt;kbd&gt;Enter&lt;/kbd&gt;.
 	EmitActivate()
+
+	// chain up virtual methods:
+
+	// ParentActivate calls the default implementations of the activate virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	ParentActivate()
 }
 
 func unsafeWrapFlowBoxChild(base *gobject.ObjectInstance) *FlowBoxChildInstance {
@@ -87007,13 +93068,13 @@ func unsafeWrapFlowBoxChild(base *gobject.ObjectInstance) *FlowBoxChildInstance 
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -87245,6 +93306,17 @@ func UnsafeApplyFlowBoxChildOverrides[Instance FlowBoxChild](gclass unsafe.Point
 	}
 }
 
+// ParentActivate calls the default implementations of the activate virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+func (child *FlowBoxChildInstance) ParentActivate() {
+	var carg0 *C.GtkFlowBoxChild
+
+	parentclass := (*C.GtkFlowBoxChildClass)(classdata.PeekParentClass(UnsafeFlowBoxChildToGlibNone(child)))
+
+	C._gotk4_gtk4_FlowBoxChild_virtual_activate(unsafe.Pointer(parentclass.activate), carg0)
+	runtime.KeepAlive(child)
+}
+
 // RegisterFlowBoxChildSubClass is used to register a go subclass of GtkFlowBoxChild. For this to work safely please implement the
 // virtual methods required by the implementation.
 func RegisterFlowBoxChildSubClass[InstanceT FlowBoxChild](
@@ -87448,6 +93520,8 @@ type FontDialogButton interface {
 	// The `::activate` signal on `GtkFontDialogButton` is an action signal
 	// and emitting it causes the button to pop up its dialog.
 	EmitActivate()
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapFontDialogButton(base *gobject.ObjectInstance) *FontDialogButtonInstance {
@@ -87458,13 +93532,13 @@ func unsafeWrapFontDialogButton(base *gobject.ObjectInstance) *FontDialogButtonI
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -88062,6 +94136,15 @@ type Frame interface {
 	// This is the widget that will appear embedded in the top edge
 	// of the frame as a title.
 	SetLabelWidget(Widget)
+
+	// chain up virtual methods:
+
+	// ParentComputeChildAllocation calls the default implementations of the compute_child_allocation virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- allocation *Allocation 
+	ParentComputeChildAllocation(allocation *Allocation)
 }
 
 func unsafeWrapFrame(base *gobject.ObjectInstance) *FrameInstance {
@@ -88072,13 +94155,13 @@ func unsafeWrapFrame(base *gobject.ObjectInstance) *FrameInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -88378,6 +94461,26 @@ func UnsafeApplyFrameOverrides[Instance Frame](gclass unsafe.Pointer, overrides 
 			},
 		)
 	}
+}
+
+// ParentComputeChildAllocation calls the default implementations of the compute_child_allocation virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- allocation *Allocation 
+func (frame *FrameInstance) ParentComputeChildAllocation(allocation *Allocation) {
+	var carg0 *C.GtkFrame
+	var carg1 *C.GtkAllocation // in, transfer: none, C Pointers: 1, Name: Allocation
+
+	parentclass := (*C.GtkFrameClass)(classdata.PeekParentClass(UnsafeFrameToGlibNone(frame)))
+
+	_ = allocation
+	_ = carg1
+	panic("unimplemented conversion of *Allocation (GtkAllocation*)")
+
+	C._gotk4_gtk4_Frame_virtual_compute_child_allocation(unsafe.Pointer(parentclass.compute_child_allocation), carg0, carg1)
+	runtime.KeepAlive(frame)
+	runtime.KeepAlive(allocation)
 }
 
 // RegisterFrameSubClass is used to register a go subclass of GtkFrame. For this to work safely please implement the
@@ -88749,6 +94852,30 @@ type GLArea interface {
 	// 
 	// The default handler sets up the GL viewport.
 	ConnectResize(func(GLArea, int32, int32)) gobject.SignalHandle
+
+	// chain up virtual methods:
+
+	// ParentRender calls the default implementations of the render virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- _context gdk.GLContext 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	//
+	// class closure for the `GtkGLArea::render` signal
+	ParentRender(_context gdk.GLContext) bool
+	// ParentResize calls the default implementations of the resize virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- width int32 
+	// 	- height int32 
+	//
+	// class closeure for the `GtkGLArea::resize` signal
+	ParentResize(width int32, height int32)
 }
 
 func unsafeWrapGLArea(base *gobject.ObjectInstance) *GLAreaInstance {
@@ -88759,13 +94886,13 @@ func unsafeWrapGLArea(base *gobject.ObjectInstance) *GLAreaInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -89295,12 +95422,16 @@ type GLAreaOverrides[Instance GLArea] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
+	//
+	// class closure for the `GtkGLArea::render` signal
 	Render func(Instance, gdk.GLContext) bool
 	// Resize allows you to override the implementation of the virtual method resize.
 	// The function takes the following parameters:
 	// 
 	// 	- width int32 
 	// 	- height int32 
+	//
+	// class closeure for the `GtkGLArea::resize` signal
 	Resize func(Instance, int32, int32)
 }
 
@@ -89353,6 +95484,63 @@ func UnsafeApplyGLAreaOverrides[Instance GLArea](gclass unsafe.Pointer, override
 			},
 		)
 	}
+}
+
+// ParentRender calls the default implementations of the render virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- _context gdk.GLContext 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// class closure for the `GtkGLArea::render` signal
+func (area *GLAreaInstance) ParentRender(_context gdk.GLContext) bool {
+	var carg0 *C.GtkGLArea
+	var carg1 *C.GdkGLContext // in, none, converted
+	var cret  C.gboolean      // return
+
+	parentclass := (*C.GtkGLAreaClass)(classdata.PeekParentClass(UnsafeGLAreaToGlibNone(area)))
+
+	carg1 = (*C.GdkGLContext)(gdk.UnsafeGLContextToGlibNone(_context))
+
+	cret = C._gotk4_gtk4_GLArea_virtual_render(unsafe.Pointer(parentclass.render), carg0, carg1)
+	runtime.KeepAlive(area)
+	runtime.KeepAlive(_context)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// ParentResize calls the default implementations of the resize virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- width int32 
+// 	- height int32 
+//
+// class closeure for the `GtkGLArea::resize` signal
+func (area *GLAreaInstance) ParentResize(width int32, height int32) {
+	var carg0 *C.GtkGLArea
+	var carg1 C.int // in, none, casted, casted C.gint
+	var carg2 C.int // in, none, casted, casted C.gint
+
+	parentclass := (*C.GtkGLAreaClass)(classdata.PeekParentClass(UnsafeGLAreaToGlibNone(area)))
+
+	carg1 = C.int(width)
+	carg2 = C.int(height)
+
+	C._gotk4_gtk4_GLArea_virtual_resize(unsafe.Pointer(parentclass.resize), carg0, carg1, carg2)
+	runtime.KeepAlive(area)
+	runtime.KeepAlive(width)
+	runtime.KeepAlive(height)
 }
 
 // RegisterGLAreaSubClass is used to register a go subclass of GtkGLArea. For this to work safely please implement the
@@ -90236,6 +96424,8 @@ type GraphicsOffload interface {
 	// Sets whether this GtkGraphicsOffload widget will attempt
 	// to offload the content of its child widget.
 	SetEnabled(GraphicsOffloadEnabled)
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapGraphicsOffload(base *gobject.ObjectInstance) *GraphicsOffloadInstance {
@@ -90246,13 +96436,13 @@ func unsafeWrapGraphicsOffload(base *gobject.ObjectInstance) *GraphicsOffloadIns
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -90868,6 +97058,8 @@ type Grid interface {
 	//
 	// Sets the amount of space between rows of @grid.
 	SetRowSpacing(uint)
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapGrid(base *gobject.ObjectInstance) *GridInstance {
@@ -90878,16 +97070,16 @@ func unsafeWrapGrid(base *gobject.ObjectInstance) *GridInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		OrientableInstance: OrientableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -91712,6 +97904,8 @@ type GridLayout interface {
 	//
 	// Sets the amount of space to insert between consecutive rows.
 	SetRowSpacing(uint)
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapGridLayout(base *gobject.ObjectInstance) *GridLayoutInstance {
@@ -92174,6 +98368,8 @@ type GridLayoutChild interface {
 	//
 	// Sets the number of rows @child spans to.
 	SetRowSpan(int32)
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapGridLayoutChild(base *gobject.ObjectInstance) *GridLayoutChildInstance {
@@ -92636,13 +98832,13 @@ func unsafeWrapHeaderBar(base *gobject.ObjectInstance) *HeaderBarInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -93142,13 +99338,13 @@ func unsafeWrapImage(base *gobject.ObjectInstance) *ImageInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -93955,6 +100151,8 @@ type Inscription interface {
 	// 
 	// See the [property@Gtk.Inscription:yalign] property.
 	SetYAlign(float32)
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapInscription(base *gobject.ObjectInstance) *InscriptionInstance {
@@ -93965,16 +100163,16 @@ func unsafeWrapInscription(base *gobject.ObjectInstance) *InscriptionInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		AccessibleTextInstance: AccessibleTextInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -95606,16 +101804,16 @@ func unsafeWrapLabel(base *gobject.ObjectInstance) *LabelInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		AccessibleTextInstance: AccessibleTextInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -97347,19 +103545,19 @@ func unsafeWrapLevelBar(base *gobject.ObjectInstance) *LevelBarInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		AccessibleRangeInstance: AccessibleRangeInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		OrientableInstance: OrientableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -97894,16 +104092,16 @@ func unsafeWrapLinkButton(base *gobject.ObjectInstance) *LinkButtonInstance {
 				},
 			},
 			AccessibleInstance: AccessibleInstance{
-				Instance: *base,
+				ObjectInstance: *base,
 			},
 			ActionableInstance: ActionableInstance{
-				Instance: *base,
+				ObjectInstance: *base,
 			},
 			BuildableInstance: BuildableInstance{
-				Instance: *base,
+				ObjectInstance: *base,
 			},
 			ConstraintTargetInstance: ConstraintTargetInstance{
-				Instance: *base,
+				ObjectInstance: *base,
 			},
 		},
 	}
@@ -98195,19 +104393,19 @@ func unsafeWrapListBase(base *gobject.ObjectInstance) *ListBaseInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		OrientableInstance: OrientableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ScrollableInstance: ScrollableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -98736,13 +104934,13 @@ func unsafeWrapListBox(base *gobject.ObjectInstance) *ListBoxInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -99776,6 +105974,12 @@ type ListBoxRow interface {
 	// use the [signal@Gtk.ListBox::row-activated] signal on the row’s parent
 	// `GtkListBox`.
 	EmitActivate()
+
+	// chain up virtual methods:
+
+	// ParentActivate calls the default implementations of the activate virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	ParentActivate()
 }
 
 func unsafeWrapListBoxRow(base *gobject.ObjectInstance) *ListBoxRowInstance {
@@ -99786,16 +105990,16 @@ func unsafeWrapListBoxRow(base *gobject.ObjectInstance) *ListBoxRowInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ActionableInstance: ActionableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -100168,6 +106372,17 @@ func UnsafeApplyListBoxRowOverrides[Instance ListBoxRow](gclass unsafe.Pointer, 
 	}
 }
 
+// ParentActivate calls the default implementations of the activate virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+func (row *ListBoxRowInstance) ParentActivate() {
+	var carg0 *C.GtkListBoxRow
+
+	parentclass := (*C.GtkListBoxRowClass)(classdata.PeekParentClass(UnsafeListBoxRowToGlibNone(row)))
+
+	C._gotk4_gtk4_ListBoxRow_virtual_activate(unsafe.Pointer(parentclass.activate), carg0)
+	runtime.KeepAlive(row)
+}
+
 // RegisterListBoxRowSubClass is used to register a go subclass of GtkListBoxRow. For this to work safely please implement the
 // virtual methods required by the implementation.
 func RegisterListBoxRowSubClass[InstanceT ListBoxRow](
@@ -100469,19 +106684,19 @@ func unsafeWrapListView(base *gobject.ObjectInstance) *ListViewInstance {
 				},
 			},
 			AccessibleInstance: AccessibleInstance{
-				Instance: *base,
+				ObjectInstance: *base,
 			},
 			BuildableInstance: BuildableInstance{
-				Instance: *base,
+				ObjectInstance: *base,
 			},
 			ConstraintTargetInstance: ConstraintTargetInstance{
-				Instance: *base,
+				ObjectInstance: *base,
 			},
 			OrientableInstance: OrientableInstance{
-				Instance: *base,
+				ObjectInstance: *base,
 			},
 			ScrollableInstance: ScrollableInstance{
-				Instance: *base,
+				ObjectInstance: *base,
 			},
 		},
 	}
@@ -100979,6 +107194,8 @@ type MediaControls interface {
 	//
 	// Sets the stream that is controlled by @controls.
 	SetMediaStream(MediaStream)
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapMediaControls(base *gobject.ObjectInstance) *MediaControlsInstance {
@@ -100989,13 +107206,13 @@ func unsafeWrapMediaControls(base *gobject.ObjectInstance) *MediaControlsInstanc
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -101241,6 +107458,15 @@ type MediaFile interface {
 	// This is a utility function that converts the given @resource_path
 	// to a `GFile` and calls [method@Gtk.MediaFile.set_file].
 	SetResource(string)
+
+	// chain up virtual methods:
+
+	// ParentClose calls the default implementations of the close virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	ParentClose()
+	// ParentOpen calls the default implementations of the open virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	ParentOpen()
 }
 
 func unsafeWrapMediaFile(base *gobject.ObjectInstance) *MediaFileInstance {
@@ -101248,7 +107474,7 @@ func unsafeWrapMediaFile(base *gobject.ObjectInstance) *MediaFileInstance {
 		MediaStreamInstance: MediaStreamInstance{
 			ObjectInstance: *base,
 			PaintableInstance: gdk.PaintableInstance{
-				Instance: *base,
+				ObjectInstance: *base,
 			},
 		},
 	}
@@ -101640,6 +107866,28 @@ func UnsafeApplyMediaFileOverrides[Instance MediaFile](gclass unsafe.Pointer, ov
 			},
 		)
 	}
+}
+
+// ParentClose calls the default implementations of the close virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+func (self *MediaFileInstance) ParentClose() {
+	var carg0 *C.GtkMediaFile
+
+	parentclass := (*C.GtkMediaFileClass)(classdata.PeekParentClass(UnsafeMediaFileToGlibNone(self)))
+
+	C._gotk4_gtk4_MediaFile_virtual_close(unsafe.Pointer(parentclass.close), carg0)
+	runtime.KeepAlive(self)
+}
+
+// ParentOpen calls the default implementations of the open virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+func (self *MediaFileInstance) ParentOpen() {
+	var carg0 *C.GtkMediaFile
+
+	parentclass := (*C.GtkMediaFileClass)(classdata.PeekParentClass(UnsafeMediaFileToGlibNone(self)))
+
+	C._gotk4_gtk4_MediaFile_virtual_open(unsafe.Pointer(parentclass.open), carg0)
+	runtime.KeepAlive(self)
 }
 
 // RegisterMediaFileSubClass is used to register a go subclass of GtkMediaFile. For this to work safely please implement the
@@ -102048,13 +108296,13 @@ func unsafeWrapMenuButton(base *gobject.ObjectInstance) *MenuButtonInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -103040,6 +109288,8 @@ type MultiSorter interface {
 	// 
 	// If @position is larger than the number of sorters, nothing happens.
 	Remove(uint)
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapMultiSorter(base *gobject.ObjectInstance) *MultiSorterInstance {
@@ -103048,10 +109298,10 @@ func unsafeWrapMultiSorter(base *gobject.ObjectInstance) *MultiSorterInstance {
 			ObjectInstance: *base,
 		},
 		ListModelInstance: gio.ListModelInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -104163,13 +110413,13 @@ func unsafeWrapNotebook(base *gobject.ObjectInstance) *NotebookInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -105718,6 +111968,8 @@ type NumericSorter interface {
 	//
 	// Sets whether to sort smaller numbers before larger ones.
 	SetSortOrder(SortType)
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapNumericSorter(base *gobject.ObjectInstance) *NumericSorterInstance {
@@ -106009,13 +112261,13 @@ func unsafeWrapOverlay(base *gobject.ObjectInstance) *OverlayInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -106609,19 +112861,19 @@ func unsafeWrapPaned(base *gobject.ObjectInstance) *PanedInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		AccessibleRangeInstance: AccessibleRangeInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		OrientableInstance: OrientableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -107240,13 +113492,13 @@ func unsafeWrapPasswordEntry(base *gobject.ObjectInstance) *PasswordEntryInstanc
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -107607,6 +113859,8 @@ type Picture interface {
 	// 
 	// This is a utility function that calls [method@Gtk.Picture.set_file].
 	SetResource(string)
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapPicture(base *gobject.ObjectInstance) *PictureInstance {
@@ -107617,13 +113871,13 @@ func unsafeWrapPicture(base *gobject.ObjectInstance) *PictureInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -108482,6 +114736,15 @@ type Popover interface {
 	//
 	// Emitted when the popover is closed.
 	ConnectClosed(func(Popover)) gobject.SignalHandle
+
+	// chain up virtual methods:
+
+	// ParentActivateDefault calls the default implementations of the activate_default virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	ParentActivateDefault()
+	// ParentClosed calls the default implementations of the closed virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	ParentClosed()
 }
 
 func unsafeWrapPopover(base *gobject.ObjectInstance) *PopoverInstance {
@@ -108492,16 +114755,16 @@ func unsafeWrapPopover(base *gobject.ObjectInstance) *PopoverInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ShortcutManagerInstance: ShortcutManagerInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -109105,6 +115368,28 @@ func UnsafeApplyPopoverOverrides[Instance Popover](gclass unsafe.Pointer, overri
 	}
 }
 
+// ParentActivateDefault calls the default implementations of the activate_default virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+func (popover *PopoverInstance) ParentActivateDefault() {
+	var carg0 *C.GtkPopover
+
+	parentclass := (*C.GtkPopoverClass)(classdata.PeekParentClass(UnsafePopoverToGlibNone(popover)))
+
+	C._gotk4_gtk4_Popover_virtual_activate_default(unsafe.Pointer(parentclass.activate_default), carg0)
+	runtime.KeepAlive(popover)
+}
+
+// ParentClosed calls the default implementations of the closed virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+func (popover *PopoverInstance) ParentClosed() {
+	var carg0 *C.GtkPopover
+
+	parentclass := (*C.GtkPopoverClass)(classdata.PeekParentClass(UnsafePopoverToGlibNone(popover)))
+
+	C._gotk4_gtk4_Popover_virtual_closed(unsafe.Pointer(parentclass.closed), carg0)
+	runtime.KeepAlive(popover)
+}
+
 // RegisterPopoverSubClass is used to register a go subclass of GtkPopover. For this to work safely please implement the
 // virtual methods required by the implementation.
 func RegisterPopoverSubClass[InstanceT Popover](
@@ -109340,16 +115625,16 @@ func unsafeWrapPopoverMenu(base *gobject.ObjectInstance) *PopoverMenuInstance {
 				},
 			},
 			AccessibleInstance: AccessibleInstance{
-				Instance: *base,
+				ObjectInstance: *base,
 			},
 			BuildableInstance: BuildableInstance{
-				Instance: *base,
+				ObjectInstance: *base,
 			},
 			ConstraintTargetInstance: ConstraintTargetInstance{
-				Instance: *base,
+				ObjectInstance: *base,
 			},
 			ShortcutManagerInstance: ShortcutManagerInstance{
-				Instance: *base,
+				ObjectInstance: *base,
 			},
 		},
 	}
@@ -109740,13 +116025,13 @@ func unsafeWrapPopoverMenuBar(base *gobject.ObjectInstance) *PopoverMenuBarInsta
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -110159,19 +116444,19 @@ func unsafeWrapProgressBar(base *gobject.ObjectInstance) *ProgressBarInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		AccessibleRangeInstance: AccessibleRangeInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		OrientableInstance: OrientableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -110872,6 +117157,41 @@ type Range interface {
 	//
 	// Emitted when the range value changes.
 	ConnectValueChanged(func(Range)) gobject.SignalHandle
+
+	// chain up virtual methods:
+
+	// ParentAdjustBounds calls the default implementations of the adjust_bounds virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- newValue float64 
+	ParentAdjustBounds(newValue float64)
+	// ParentChangeValue calls the default implementations of the change_value virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- scroll ScrollType 
+	// 	- newValue float64 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	ParentChangeValue(scroll ScrollType, newValue float64) bool
+	// ParentGetRangeBorder calls the default implementations of the get_range_border virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- border_ *Border 
+	ParentGetRangeBorder(border_ *Border)
+	// ParentMoveSlider calls the default implementations of the move_slider virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- scroll ScrollType 
+	ParentMoveSlider(scroll ScrollType)
+	// ParentValueChanged calls the default implementations of the value_changed virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	ParentValueChanged()
 }
 
 func unsafeWrapRange(base *gobject.ObjectInstance) *RangeInstance {
@@ -110882,19 +117202,19 @@ func unsafeWrapRange(base *gobject.ObjectInstance) *RangeInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		AccessibleRangeInstance: AccessibleRangeInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		OrientableInstance: OrientableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -111678,6 +117998,106 @@ func UnsafeApplyRangeOverrides[Instance Range](gclass unsafe.Pointer, overrides 
 	}
 }
 
+// ParentAdjustBounds calls the default implementations of the adjust_bounds virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- newValue float64 
+func (_range *RangeInstance) ParentAdjustBounds(newValue float64) {
+	var carg0 *C.GtkRange
+	var carg1 C.double // in, none, casted, casted C.gdouble
+
+	parentclass := (*C.GtkRangeClass)(classdata.PeekParentClass(UnsafeRangeToGlibNone(_range)))
+
+	carg1 = C.double(newValue)
+
+	C._gotk4_gtk4_Range_virtual_adjust_bounds(unsafe.Pointer(parentclass.adjust_bounds), carg0, carg1)
+	runtime.KeepAlive(_range)
+	runtime.KeepAlive(newValue)
+}
+
+// ParentChangeValue calls the default implementations of the change_value virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- scroll ScrollType 
+// 	- newValue float64 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+func (_range *RangeInstance) ParentChangeValue(scroll ScrollType, newValue float64) bool {
+	var carg0 *C.GtkRange
+	var carg1 C.GtkScrollType // in, none, casted
+	var carg2 C.double        // in, none, casted, casted C.gdouble
+	var cret  C.gboolean      // return
+
+	parentclass := (*C.GtkRangeClass)(classdata.PeekParentClass(UnsafeRangeToGlibNone(_range)))
+
+	carg1 = C.GtkScrollType(scroll)
+	carg2 = C.double(newValue)
+
+	cret = C._gotk4_gtk4_Range_virtual_change_value(unsafe.Pointer(parentclass.change_value), carg0, carg1, carg2)
+	runtime.KeepAlive(_range)
+	runtime.KeepAlive(scroll)
+	runtime.KeepAlive(newValue)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// ParentGetRangeBorder calls the default implementations of the get_range_border virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- border_ *Border 
+func (_range *RangeInstance) ParentGetRangeBorder(border_ *Border) {
+	var carg0 *C.GtkRange
+	var carg1 *C.GtkBorder // in, none, converted
+
+	parentclass := (*C.GtkRangeClass)(classdata.PeekParentClass(UnsafeRangeToGlibNone(_range)))
+
+	carg1 = (*C.GtkBorder)(UnsafeBorderToGlibNone(border_))
+
+	C._gotk4_gtk4_Range_virtual_get_range_border(unsafe.Pointer(parentclass.get_range_border), carg0, carg1)
+	runtime.KeepAlive(_range)
+	runtime.KeepAlive(border_)
+}
+
+// ParentMoveSlider calls the default implementations of the move_slider virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- scroll ScrollType 
+func (_range *RangeInstance) ParentMoveSlider(scroll ScrollType) {
+	var carg0 *C.GtkRange
+	var carg1 C.GtkScrollType // in, none, casted
+
+	parentclass := (*C.GtkRangeClass)(classdata.PeekParentClass(UnsafeRangeToGlibNone(_range)))
+
+	carg1 = C.GtkScrollType(scroll)
+
+	C._gotk4_gtk4_Range_virtual_move_slider(unsafe.Pointer(parentclass.move_slider), carg0, carg1)
+	runtime.KeepAlive(_range)
+	runtime.KeepAlive(scroll)
+}
+
+// ParentValueChanged calls the default implementations of the value_changed virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+func (_range *RangeInstance) ParentValueChanged() {
+	var carg0 *C.GtkRange
+
+	parentclass := (*C.GtkRangeClass)(classdata.PeekParentClass(UnsafeRangeToGlibNone(_range)))
+
+	C._gotk4_gtk4_Range_virtual_value_changed(unsafe.Pointer(parentclass.value_changed), carg0)
+	runtime.KeepAlive(_range)
+}
+
 // RegisterRangeSubClass is used to register a go subclass of GtkRange. For this to work safely please implement the
 // virtual methods required by the implementation.
 func RegisterRangeSubClass[InstanceT Range](
@@ -111844,13 +118264,13 @@ func unsafeWrapRevealer(base *gobject.ObjectInstance) *RevealerInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -112378,6 +118798,25 @@ type Scale interface {
 	//
 	// Sets the position in which the current value is displayed.
 	SetValuePos(PositionType)
+
+	// chain up virtual methods:
+
+	// ParentGetLayoutOffsets calls the default implementations of the get_layout_offsets virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- x int32: location to store X offset of layout 
+	// 	- y int32: location to store Y offset of layout 
+	//
+	// Obtains the coordinates where the scale will draw the
+	// `PangoLayout` representing the text in the scale.
+	// 
+	// Remember when using the `PangoLayout` function you need to
+	// convert to and from pixels using `PANGO_PIXELS()` or `PANGO_SCALE`.
+	// 
+	// If the [property@Gtk.Scale:draw-value] property is %FALSE, the return
+	// values are undefined.
+	ParentGetLayoutOffsets() (int32, int32)
 }
 
 func unsafeWrapScale(base *gobject.ObjectInstance) *ScaleInstance {
@@ -112389,19 +118828,19 @@ func unsafeWrapScale(base *gobject.ObjectInstance) *ScaleInstance {
 				},
 			},
 			AccessibleInstance: AccessibleInstance{
-				Instance: *base,
+				ObjectInstance: *base,
 			},
 			AccessibleRangeInstance: AccessibleRangeInstance{
-				Instance: *base,
+				ObjectInstance: *base,
 			},
 			BuildableInstance: BuildableInstance{
-				Instance: *base,
+				ObjectInstance: *base,
 			},
 			ConstraintTargetInstance: ConstraintTargetInstance{
-				Instance: *base,
+				ObjectInstance: *base,
 			},
 			OrientableInstance: OrientableInstance{
-				Instance: *base,
+				ObjectInstance: *base,
 			},
 		},
 	}
@@ -112877,6 +119316,15 @@ type ScaleOverrides[Instance Scale] struct {
 	// 
 	// 	- x int32: location to store X offset of layout 
 	// 	- y int32: location to store Y offset of layout 
+	//
+	// Obtains the coordinates where the scale will draw the
+	// `PangoLayout` representing the text in the scale.
+	// 
+	// Remember when using the `PangoLayout` function you need to
+	// convert to and from pixels using `PANGO_PIXELS()` or `PANGO_SCALE`.
+	// 
+	// If the [property@Gtk.Scale:draw-value] property is %FALSE, the return
+	// values are undefined.
 	GetLayoutOffsets func(Instance) (int32, int32)
 }
 
@@ -112906,6 +119354,40 @@ func UnsafeApplyScaleOverrides[Instance Scale](gclass unsafe.Pointer, overrides 
 			},
 		)
 	}
+}
+
+// ParentGetLayoutOffsets calls the default implementations of the get_layout_offsets virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- x int32: location to store X offset of layout 
+// 	- y int32: location to store Y offset of layout 
+//
+// Obtains the coordinates where the scale will draw the
+// `PangoLayout` representing the text in the scale.
+// 
+// Remember when using the `PangoLayout` function you need to
+// convert to and from pixels using `PANGO_PIXELS()` or `PANGO_SCALE`.
+// 
+// If the [property@Gtk.Scale:draw-value] property is %FALSE, the return
+// values are undefined.
+func (scale *ScaleInstance) ParentGetLayoutOffsets() (int32, int32) {
+	var carg0 *C.GtkScale
+	var carg1 C.int // out, full, casted, casted C.gint
+	var carg2 C.int // out, full, casted, casted C.gint
+
+	parentclass := (*C.GtkScaleClass)(classdata.PeekParentClass(UnsafeScaleToGlibNone(scale)))
+
+	C._gotk4_gtk4_Scale_virtual_get_layout_offsets(unsafe.Pointer(parentclass.get_layout_offsets), carg0, &carg1, &carg2)
+	runtime.KeepAlive(scale)
+
+	var x int32
+	var y int32
+
+	x = int32(carg1)
+	y = int32(carg2)
+
+	return x, y
 }
 
 // RegisterScaleSubClass is used to register a go subclass of GtkScale. For this to work safely please implement the
@@ -113104,6 +119586,15 @@ type ScaleButton interface {
 	//
 	// Emitted when the value field has changed.
 	ConnectValueChanged(func(ScaleButton, float64)) gobject.SignalHandle
+
+	// chain up virtual methods:
+
+	// ParentValueChanged calls the default implementations of the value_changed virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- value float64 
+	ParentValueChanged(value float64)
 }
 
 func unsafeWrapScaleButton(base *gobject.ObjectInstance) *ScaleButtonInstance {
@@ -113114,19 +119605,19 @@ func unsafeWrapScaleButton(base *gobject.ObjectInstance) *ScaleButtonInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		AccessibleRangeInstance: AccessibleRangeInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		OrientableInstance: OrientableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -113538,6 +120029,24 @@ func UnsafeApplyScaleButtonOverrides[Instance ScaleButton](gclass unsafe.Pointer
 	}
 }
 
+// ParentValueChanged calls the default implementations of the value_changed virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- value float64 
+func (button *ScaleButtonInstance) ParentValueChanged(value float64) {
+	var carg0 *C.GtkScaleButton
+	var carg1 C.double // in, none, casted, casted C.gdouble
+
+	parentclass := (*C.GtkScaleButtonClass)(classdata.PeekParentClass(UnsafeScaleButtonToGlibNone(button)))
+
+	carg1 = C.double(value)
+
+	C._gotk4_gtk4_ScaleButton_virtual_value_changed(unsafe.Pointer(parentclass.value_changed), carg0, carg1)
+	runtime.KeepAlive(button)
+	runtime.KeepAlive(value)
+}
+
 // RegisterScaleButtonSubClass is used to register a go subclass of GtkScaleButton. For this to work safely please implement the
 // virtual methods required by the implementation.
 func RegisterScaleButtonSubClass[InstanceT ScaleButton](
@@ -113657,19 +120166,19 @@ func unsafeWrapScrollbar(base *gobject.ObjectInstance) *ScrollbarInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		AccessibleRangeInstance: AccessibleRangeInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		OrientableInstance: OrientableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -114249,13 +120758,13 @@ func unsafeWrapScrolledWindow(base *gobject.ObjectInstance) *ScrolledWindowInsta
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -115279,13 +121788,13 @@ func unsafeWrapSearchBar(base *gobject.ObjectInstance) *SearchBarInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -115778,13 +122287,13 @@ func unsafeWrapSearchEntry(base *gobject.ObjectInstance) *SearchEntryInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -116196,16 +122705,16 @@ func unsafeWrapSeparator(base *gobject.ObjectInstance) *SeparatorInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		OrientableInstance: OrientableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -116336,13 +122845,13 @@ func unsafeWrapShortcutLabel(base *gobject.ObjectInstance) *ShortcutLabelInstanc
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -116551,16 +123060,16 @@ func unsafeWrapShortcutsGroup(base *gobject.ObjectInstance) *ShortcutsGroupInsta
 				},
 			},
 			AccessibleInstance: AccessibleInstance{
-				Instance: *base,
+				ObjectInstance: *base,
 			},
 			BuildableInstance: BuildableInstance{
-				Instance: *base,
+				ObjectInstance: *base,
 			},
 			ConstraintTargetInstance: ConstraintTargetInstance{
-				Instance: *base,
+				ObjectInstance: *base,
 			},
 			OrientableInstance: OrientableInstance{
-				Instance: *base,
+				ObjectInstance: *base,
 			},
 		},
 	}
@@ -116699,16 +123208,16 @@ func unsafeWrapShortcutsSection(base *gobject.ObjectInstance) *ShortcutsSectionI
 				},
 			},
 			AccessibleInstance: AccessibleInstance{
-				Instance: *base,
+				ObjectInstance: *base,
 			},
 			BuildableInstance: BuildableInstance{
-				Instance: *base,
+				ObjectInstance: *base,
 			},
 			ConstraintTargetInstance: ConstraintTargetInstance{
-				Instance: *base,
+				ObjectInstance: *base,
 			},
 			OrientableInstance: OrientableInstance{
-				Instance: *base,
+				ObjectInstance: *base,
 			},
 		},
 	}
@@ -116817,13 +123326,13 @@ func unsafeWrapShortcutsShortcut(base *gobject.ObjectInstance) *ShortcutsShortcu
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -116984,16 +123493,16 @@ func unsafeWrapShortcutsWindow(base *gobject.ObjectInstance) *ShortcutsWindowIns
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ShortcutManagerInstance: ShortcutManagerInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -117542,19 +124051,19 @@ func unsafeWrapSpinButton(base *gobject.ObjectInstance) *SpinButtonInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		AccessibleRangeInstance: AccessibleRangeInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		OrientableInstance: OrientableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -118446,13 +124955,13 @@ func unsafeWrapSpinner(base *gobject.ObjectInstance) *SpinnerInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -118927,13 +125436,13 @@ func unsafeWrapStack(base *gobject.ObjectInstance) *StackInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -119691,13 +126200,13 @@ func unsafeWrapStackSidebar(base *gobject.ObjectInstance) *StackSidebarInstance 
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -119883,16 +126392,16 @@ func unsafeWrapStackSwitcher(base *gobject.ObjectInstance) *StackSwitcherInstanc
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		OrientableInstance: OrientableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -120123,16 +126632,16 @@ func unsafeWrapSwitch(base *gobject.ObjectInstance) *SwitchInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ActionableInstance: ActionableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -120935,16 +127444,16 @@ func unsafeWrapText(base *gobject.ObjectInstance) *TextInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		AccessibleTextInstance: AccessibleTextInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -123207,6 +129716,108 @@ type TextView interface {
 	// 
 	// The default binding for this signal is &lt;kbd&gt;Insert&lt;/kbd&gt;.
 	EmitToggleOverwrite()
+
+	// chain up virtual methods:
+
+	// ParentBackspace calls the default implementations of the backspace virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	//
+	// The class handler for the `GtkTextView::backspace`
+	//   keybinding signal.
+	ParentBackspace()
+	// ParentCopyClipboard calls the default implementations of the copy_clipboard virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	//
+	// The class handler for the `GtkTextView::copy-clipboard`
+	//   keybinding signal.
+	ParentCopyClipboard()
+	// ParentCutClipboard calls the default implementations of the cut_clipboard virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	//
+	// The class handler for the `GtkTextView::cut-clipboard`
+	//   keybinding signal
+	ParentCutClipboard()
+	// ParentDeleteFromCursor calls the default implementations of the delete_from_cursor virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- typ DeleteType 
+	// 	- count int32 
+	//
+	// The class handler for the `GtkTextView::delete-from-cursor`
+	//   keybinding signal.
+	ParentDeleteFromCursor(typ DeleteType, count int32)
+	// ParentExtendSelection calls the default implementations of the extend_selection virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- granularity TextExtendSelection 
+	// 	- location *TextIter 
+	// 	- start *TextIter 
+	// 	- end *TextIter 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	//
+	// The class handler for the `GtkTextView::extend-selection` signal.
+	ParentExtendSelection(granularity TextExtendSelection, location *TextIter, start *TextIter, end *TextIter) bool
+	// ParentInsertAtCursor calls the default implementations of the insert_at_cursor virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- str string 
+	//
+	// The class handler for the `GtkTextView::insert-at-cursor`
+	//   keybinding signal.
+	ParentInsertAtCursor(str string)
+	// ParentInsertEmoji calls the default implementations of the insert_emoji virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	//
+	// The class handler for the `GtkTextView::insert-emoji` signal.
+	ParentInsertEmoji()
+	// ParentMoveCursor calls the default implementations of the move_cursor virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- step MovementStep 
+	// 	- count int32 
+	// 	- extendSelection bool 
+	//
+	// The class handler for the `GtkTextView::move-cursor`
+	//   keybinding signal.
+	ParentMoveCursor(step MovementStep, count int32, extendSelection bool)
+	// ParentPasteClipboard calls the default implementations of the paste_clipboard virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	//
+	// The class handler for the `GtkTextView::paste-clipboard`
+	//   keybinding signal.
+	ParentPasteClipboard()
+	// ParentSetAnchor calls the default implementations of the set_anchor virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	//
+	// The class handler for the `GtkTextView::set-anchor`
+	//   keybinding signal.
+	ParentSetAnchor()
+	// ParentSnapshotLayer calls the default implementations of the snapshot_layer virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- layer TextViewLayer 
+	// 	- snapshot Snapshot 
+	//
+	// The snapshot_layer vfunc is called before and after the text
+	//   view is drawing its own text. Applications can override this vfunc
+	//   in a subclass to draw customized content underneath or above the
+	//   text. In the %GTK_TEXT_VIEW_LAYER_BELOW_TEXT and %GTK_TEXT_VIEW_LAYER_ABOVE_TEXT
+	//   layers the drawing is done in the buffer coordinate space.
+	ParentSnapshotLayer(layer TextViewLayer, snapshot Snapshot)
+	// ParentToggleOverwrite calls the default implementations of the toggle_overwrite virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	//
+	// The class handler for the `GtkTextView::toggle-overwrite`
+	//   keybinding signal.
+	ParentToggleOverwrite()
 }
 
 func unsafeWrapTextView(base *gobject.ObjectInstance) *TextViewInstance {
@@ -123217,19 +129828,19 @@ func unsafeWrapTextView(base *gobject.ObjectInstance) *TextViewInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		AccessibleTextInstance: AccessibleTextInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ScrollableInstance: ScrollableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -125581,16 +132192,28 @@ type TextViewOverrides[Instance TextView] struct {
 	WidgetOverrides[Instance]
 
 	// Backspace allows you to override the implementation of the virtual method backspace.
+	//
+	// The class handler for the `GtkTextView::backspace`
+	//   keybinding signal.
 	Backspace func(Instance)
 	// CopyClipboard allows you to override the implementation of the virtual method copy_clipboard.
+	//
+	// The class handler for the `GtkTextView::copy-clipboard`
+	//   keybinding signal.
 	CopyClipboard func(Instance)
 	// CutClipboard allows you to override the implementation of the virtual method cut_clipboard.
+	//
+	// The class handler for the `GtkTextView::cut-clipboard`
+	//   keybinding signal
 	CutClipboard func(Instance)
 	// DeleteFromCursor allows you to override the implementation of the virtual method delete_from_cursor.
 	// The function takes the following parameters:
 	// 
 	// 	- typ DeleteType 
 	// 	- count int32 
+	//
+	// The class handler for the `GtkTextView::delete-from-cursor`
+	//   keybinding signal.
 	DeleteFromCursor func(Instance, DeleteType, int32)
 	// ExtendSelection allows you to override the implementation of the virtual method extend_selection.
 	// The function takes the following parameters:
@@ -125603,13 +132226,20 @@ type TextViewOverrides[Instance TextView] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
+	//
+	// The class handler for the `GtkTextView::extend-selection` signal.
 	ExtendSelection func(Instance, TextExtendSelection, *TextIter, *TextIter, *TextIter) bool
 	// InsertAtCursor allows you to override the implementation of the virtual method insert_at_cursor.
 	// The function takes the following parameters:
 	// 
 	// 	- str string 
+	//
+	// The class handler for the `GtkTextView::insert-at-cursor`
+	//   keybinding signal.
 	InsertAtCursor func(Instance, string)
 	// InsertEmoji allows you to override the implementation of the virtual method insert_emoji.
+	//
+	// The class handler for the `GtkTextView::insert-emoji` signal.
 	InsertEmoji func(Instance)
 	// MoveCursor allows you to override the implementation of the virtual method move_cursor.
 	// The function takes the following parameters:
@@ -125617,18 +132247,36 @@ type TextViewOverrides[Instance TextView] struct {
 	// 	- step MovementStep 
 	// 	- count int32 
 	// 	- extendSelection bool 
+	//
+	// The class handler for the `GtkTextView::move-cursor`
+	//   keybinding signal.
 	MoveCursor func(Instance, MovementStep, int32, bool)
 	// PasteClipboard allows you to override the implementation of the virtual method paste_clipboard.
+	//
+	// The class handler for the `GtkTextView::paste-clipboard`
+	//   keybinding signal.
 	PasteClipboard func(Instance)
 	// SetAnchor allows you to override the implementation of the virtual method set_anchor.
+	//
+	// The class handler for the `GtkTextView::set-anchor`
+	//   keybinding signal.
 	SetAnchor func(Instance)
 	// SnapshotLayer allows you to override the implementation of the virtual method snapshot_layer.
 	// The function takes the following parameters:
 	// 
 	// 	- layer TextViewLayer 
 	// 	- snapshot Snapshot 
+	//
+	// The snapshot_layer vfunc is called before and after the text
+	//   view is drawing its own text. Applications can override this vfunc
+	//   in a subclass to draw customized content underneath or above the
+	//   text. In the %GTK_TEXT_VIEW_LAYER_BELOW_TEXT and %GTK_TEXT_VIEW_LAYER_ABOVE_TEXT
+	//   layers the drawing is done in the buffer coordinate space.
 	SnapshotLayer func(Instance, TextViewLayer, Snapshot)
 	// ToggleOverwrite allows you to override the implementation of the virtual method toggle_overwrite.
+	//
+	// The class handler for the `GtkTextView::toggle-overwrite`
+	//   keybinding signal.
 	ToggleOverwrite func(Instance)
 }
 
@@ -125853,6 +132501,254 @@ func UnsafeApplyTextViewOverrides[Instance TextView](gclass unsafe.Pointer, over
 	}
 }
 
+// ParentBackspace calls the default implementations of the backspace virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+//
+// The class handler for the `GtkTextView::backspace`
+//   keybinding signal.
+func (textView *TextViewInstance) ParentBackspace() {
+	var carg0 *C.GtkTextView
+
+	parentclass := (*C.GtkTextViewClass)(classdata.PeekParentClass(UnsafeTextViewToGlibNone(textView)))
+
+	C._gotk4_gtk4_TextView_virtual_backspace(unsafe.Pointer(parentclass.backspace), carg0)
+	runtime.KeepAlive(textView)
+}
+
+// ParentCopyClipboard calls the default implementations of the copy_clipboard virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+//
+// The class handler for the `GtkTextView::copy-clipboard`
+//   keybinding signal.
+func (textView *TextViewInstance) ParentCopyClipboard() {
+	var carg0 *C.GtkTextView
+
+	parentclass := (*C.GtkTextViewClass)(classdata.PeekParentClass(UnsafeTextViewToGlibNone(textView)))
+
+	C._gotk4_gtk4_TextView_virtual_copy_clipboard(unsafe.Pointer(parentclass.copy_clipboard), carg0)
+	runtime.KeepAlive(textView)
+}
+
+// ParentCutClipboard calls the default implementations of the cut_clipboard virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+//
+// The class handler for the `GtkTextView::cut-clipboard`
+//   keybinding signal
+func (textView *TextViewInstance) ParentCutClipboard() {
+	var carg0 *C.GtkTextView
+
+	parentclass := (*C.GtkTextViewClass)(classdata.PeekParentClass(UnsafeTextViewToGlibNone(textView)))
+
+	C._gotk4_gtk4_TextView_virtual_cut_clipboard(unsafe.Pointer(parentclass.cut_clipboard), carg0)
+	runtime.KeepAlive(textView)
+}
+
+// ParentDeleteFromCursor calls the default implementations of the delete_from_cursor virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- typ DeleteType 
+// 	- count int32 
+//
+// The class handler for the `GtkTextView::delete-from-cursor`
+//   keybinding signal.
+func (textView *TextViewInstance) ParentDeleteFromCursor(typ DeleteType, count int32) {
+	var carg0 *C.GtkTextView
+	var carg1 C.GtkDeleteType // in, none, casted
+	var carg2 C.int           // in, none, casted, casted C.gint
+
+	parentclass := (*C.GtkTextViewClass)(classdata.PeekParentClass(UnsafeTextViewToGlibNone(textView)))
+
+	carg1 = C.GtkDeleteType(typ)
+	carg2 = C.int(count)
+
+	C._gotk4_gtk4_TextView_virtual_delete_from_cursor(unsafe.Pointer(parentclass.delete_from_cursor), carg0, carg1, carg2)
+	runtime.KeepAlive(textView)
+	runtime.KeepAlive(typ)
+	runtime.KeepAlive(count)
+}
+
+// ParentExtendSelection calls the default implementations of the extend_selection virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- granularity TextExtendSelection 
+// 	- location *TextIter 
+// 	- start *TextIter 
+// 	- end *TextIter 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// The class handler for the `GtkTextView::extend-selection` signal.
+func (textView *TextViewInstance) ParentExtendSelection(granularity TextExtendSelection, location *TextIter, start *TextIter, end *TextIter) bool {
+	var carg0 *C.GtkTextView
+	var carg1 C.GtkTextExtendSelection // in, none, casted
+	var carg2 *C.GtkTextIter           // in, none, converted
+	var carg3 *C.GtkTextIter           // in, none, converted
+	var carg4 *C.GtkTextIter           // in, none, converted
+	var cret  C.gboolean               // return
+
+	parentclass := (*C.GtkTextViewClass)(classdata.PeekParentClass(UnsafeTextViewToGlibNone(textView)))
+
+	carg1 = C.GtkTextExtendSelection(granularity)
+	carg2 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(location))
+	carg3 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(start))
+	carg4 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(end))
+
+	cret = C._gotk4_gtk4_TextView_virtual_extend_selection(unsafe.Pointer(parentclass.extend_selection), carg0, carg1, carg2, carg3, carg4)
+	runtime.KeepAlive(textView)
+	runtime.KeepAlive(granularity)
+	runtime.KeepAlive(location)
+	runtime.KeepAlive(start)
+	runtime.KeepAlive(end)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// ParentInsertAtCursor calls the default implementations of the insert_at_cursor virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- str string 
+//
+// The class handler for the `GtkTextView::insert-at-cursor`
+//   keybinding signal.
+func (textView *TextViewInstance) ParentInsertAtCursor(str string) {
+	var carg0 *C.GtkTextView
+	var carg1 *C.char // in, none, string, casted *C.gchar
+
+	parentclass := (*C.GtkTextViewClass)(classdata.PeekParentClass(UnsafeTextViewToGlibNone(textView)))
+
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(str)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	C._gotk4_gtk4_TextView_virtual_insert_at_cursor(unsafe.Pointer(parentclass.insert_at_cursor), carg0, carg1)
+	runtime.KeepAlive(textView)
+	runtime.KeepAlive(str)
+}
+
+// ParentInsertEmoji calls the default implementations of the insert_emoji virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+//
+// The class handler for the `GtkTextView::insert-emoji` signal.
+func (textView *TextViewInstance) ParentInsertEmoji() {
+	var carg0 *C.GtkTextView
+
+	parentclass := (*C.GtkTextViewClass)(classdata.PeekParentClass(UnsafeTextViewToGlibNone(textView)))
+
+	C._gotk4_gtk4_TextView_virtual_insert_emoji(unsafe.Pointer(parentclass.insert_emoji), carg0)
+	runtime.KeepAlive(textView)
+}
+
+// ParentMoveCursor calls the default implementations of the move_cursor virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- step MovementStep 
+// 	- count int32 
+// 	- extendSelection bool 
+//
+// The class handler for the `GtkTextView::move-cursor`
+//   keybinding signal.
+func (textView *TextViewInstance) ParentMoveCursor(step MovementStep, count int32, extendSelection bool) {
+	var carg0 *C.GtkTextView
+	var carg1 C.GtkMovementStep // in, none, casted
+	var carg2 C.int             // in, none, casted, casted C.gint
+	var carg3 C.gboolean        // in
+
+	parentclass := (*C.GtkTextViewClass)(classdata.PeekParentClass(UnsafeTextViewToGlibNone(textView)))
+
+	carg1 = C.GtkMovementStep(step)
+	carg2 = C.int(count)
+	if extendSelection {
+		carg3 = C.TRUE
+	}
+
+	C._gotk4_gtk4_TextView_virtual_move_cursor(unsafe.Pointer(parentclass.move_cursor), carg0, carg1, carg2, carg3)
+	runtime.KeepAlive(textView)
+	runtime.KeepAlive(step)
+	runtime.KeepAlive(count)
+	runtime.KeepAlive(extendSelection)
+}
+
+// ParentPasteClipboard calls the default implementations of the paste_clipboard virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+//
+// The class handler for the `GtkTextView::paste-clipboard`
+//   keybinding signal.
+func (textView *TextViewInstance) ParentPasteClipboard() {
+	var carg0 *C.GtkTextView
+
+	parentclass := (*C.GtkTextViewClass)(classdata.PeekParentClass(UnsafeTextViewToGlibNone(textView)))
+
+	C._gotk4_gtk4_TextView_virtual_paste_clipboard(unsafe.Pointer(parentclass.paste_clipboard), carg0)
+	runtime.KeepAlive(textView)
+}
+
+// ParentSetAnchor calls the default implementations of the set_anchor virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+//
+// The class handler for the `GtkTextView::set-anchor`
+//   keybinding signal.
+func (textView *TextViewInstance) ParentSetAnchor() {
+	var carg0 *C.GtkTextView
+
+	parentclass := (*C.GtkTextViewClass)(classdata.PeekParentClass(UnsafeTextViewToGlibNone(textView)))
+
+	C._gotk4_gtk4_TextView_virtual_set_anchor(unsafe.Pointer(parentclass.set_anchor), carg0)
+	runtime.KeepAlive(textView)
+}
+
+// ParentSnapshotLayer calls the default implementations of the snapshot_layer virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- layer TextViewLayer 
+// 	- snapshot Snapshot 
+//
+// The snapshot_layer vfunc is called before and after the text
+//   view is drawing its own text. Applications can override this vfunc
+//   in a subclass to draw customized content underneath or above the
+//   text. In the %GTK_TEXT_VIEW_LAYER_BELOW_TEXT and %GTK_TEXT_VIEW_LAYER_ABOVE_TEXT
+//   layers the drawing is done in the buffer coordinate space.
+func (textView *TextViewInstance) ParentSnapshotLayer(layer TextViewLayer, snapshot Snapshot) {
+	var carg0 *C.GtkTextView
+	var carg1 C.GtkTextViewLayer // in, none, casted
+	var carg2 *C.GtkSnapshot     // in, none, converted, casted *C.Snapshot
+
+	parentclass := (*C.GtkTextViewClass)(classdata.PeekParentClass(UnsafeTextViewToGlibNone(textView)))
+
+	carg1 = C.GtkTextViewLayer(layer)
+	carg2 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
+
+	C._gotk4_gtk4_TextView_virtual_snapshot_layer(unsafe.Pointer(parentclass.snapshot_layer), carg0, carg1, carg2)
+	runtime.KeepAlive(textView)
+	runtime.KeepAlive(layer)
+	runtime.KeepAlive(snapshot)
+}
+
+// ParentToggleOverwrite calls the default implementations of the toggle_overwrite virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+//
+// The class handler for the `GtkTextView::toggle-overwrite`
+//   keybinding signal.
+func (textView *TextViewInstance) ParentToggleOverwrite() {
+	var carg0 *C.GtkTextView
+
+	parentclass := (*C.GtkTextViewClass)(classdata.PeekParentClass(UnsafeTextViewToGlibNone(textView)))
+
+	C._gotk4_gtk4_TextView_virtual_toggle_overwrite(unsafe.Pointer(parentclass.toggle_overwrite), carg0)
+	runtime.KeepAlive(textView)
+}
+
 // RegisterTextViewSubClass is used to register a go subclass of GtkTextView. For this to work safely please implement the
 // virtual methods required by the implementation.
 func RegisterTextViewSubClass[InstanceT TextView](
@@ -126016,6 +132912,8 @@ type ToggleButton interface {
 	//
 	// Emitted whenever the `GtkToggleButton`'s state is changed.
 	ConnectToggled(func(ToggleButton)) gobject.SignalHandle
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapToggleButton(base *gobject.ObjectInstance) *ToggleButtonInstance {
@@ -126027,16 +132925,16 @@ func unsafeWrapToggleButton(base *gobject.ObjectInstance) *ToggleButtonInstance 
 				},
 			},
 			AccessibleInstance: AccessibleInstance{
-				Instance: *base,
+				ObjectInstance: *base,
 			},
 			ActionableInstance: ActionableInstance{
-				Instance: *base,
+				ObjectInstance: *base,
 			},
 			BuildableInstance: BuildableInstance{
-				Instance: *base,
+				ObjectInstance: *base,
 			},
 			ConstraintTargetInstance: ConstraintTargetInstance{
-				Instance: *base,
+				ObjectInstance: *base,
 			},
 		},
 	}
@@ -126467,6 +133365,8 @@ type TreeExpander interface {
 	//
 	// Sets the tree list row that this expander should manage.
 	SetListRow(TreeListRow)
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapTreeExpander(base *gobject.ObjectInstance) *TreeExpanderInstance {
@@ -126477,13 +133377,13 @@ func unsafeWrapTreeExpander(base *gobject.ObjectInstance) *TreeExpanderInstance 
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -126958,6 +133858,8 @@ type Video interface {
 	// 
 	// This is a utility function that calls [method@Gtk.Video.set_file].
 	SetResource(string)
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapVideo(base *gobject.ObjectInstance) *VideoInstance {
@@ -126968,13 +133870,13 @@ func unsafeWrapVideo(base *gobject.ObjectInstance) *VideoInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -127580,16 +134482,16 @@ func unsafeWrapViewport(base *gobject.ObjectInstance) *ViewportInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ScrollableInstance: ScrollableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -127858,16 +134760,16 @@ func unsafeWrapEmojiChooser(base *gobject.ObjectInstance) *EmojiChooserInstance 
 				},
 			},
 			AccessibleInstance: AccessibleInstance{
-				Instance: *base,
+				ObjectInstance: *base,
 			},
 			BuildableInstance: BuildableInstance{
-				Instance: *base,
+				ObjectInstance: *base,
 			},
 			ConstraintTargetInstance: ConstraintTargetInstance{
-				Instance: *base,
+				ObjectInstance: *base,
 			},
 			ShortcutManagerInstance: ShortcutManagerInstance{
-				Instance: *base,
+				ObjectInstance: *base,
 			},
 		},
 	}
@@ -128150,19 +135052,19 @@ func unsafeWrapGridView(base *gobject.ObjectInstance) *GridViewInstance {
 				},
 			},
 			AccessibleInstance: AccessibleInstance{
-				Instance: *base,
+				ObjectInstance: *base,
 			},
 			BuildableInstance: BuildableInstance{
-				Instance: *base,
+				ObjectInstance: *base,
 			},
 			ConstraintTargetInstance: ConstraintTargetInstance{
-				Instance: *base,
+				ObjectInstance: *base,
 			},
 			OrientableInstance: OrientableInstance{
-				Instance: *base,
+				ObjectInstance: *base,
 			},
 			ScrollableInstance: ScrollableInstance{
-				Instance: *base,
+				ObjectInstance: *base,
 			},
 		},
 	}

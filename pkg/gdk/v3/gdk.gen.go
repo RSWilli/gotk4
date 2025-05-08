@@ -8920,6 +8920,11 @@ func (f WindowState) String() string {
 }
 
 // SeatGrabPrepareFunc wraps GdkSeatGrabPrepareFunc
+// 
+// The function takes the following parameters:
+// 
+// 	- seat Seat: the #GdkSeat being grabbed 
+// 	- window Window: the #GdkWindow being grabbed 
 //
 // Type of the callback used to set up @window so it can be
 // grabbed. A typical action would be ensuring the window is
@@ -8928,6 +8933,14 @@ func (f WindowState) String() string {
 type SeatGrabPrepareFunc func(seat Seat, window Window)
 
 // WindowChildFunc wraps GdkWindowChildFunc
+// 
+// The function takes the following parameters:
+// 
+// 	- window Window: a #GdkWindow 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
 //
 // A function of this type is passed to gdk_window_invalidate_maybe_recurse().
 // It gets called for each child of the window to determine whether to
@@ -10525,7 +10538,7 @@ func UTF8ToStringTarget(str string) string {
 // DevicePadInstance is the instance type used by all types implementing GdkDevicePad. It is used internally by the bindings. Users should use the interface [DevicePad] instead.
 type DevicePadInstance struct {
 	_ [0]func() // equal guard
-	Instance gobject.ObjectInstance
+	gobject.ObjectInstance
 }
 
 var _ DevicePad = (*DevicePadInstance)(nil)
@@ -10550,6 +10563,7 @@ var _ DevicePad = (*DevicePadInstance)(nil)
 // mode for a given group will be notified through the #GdkEventPadGroupMode
 // event.
 type DevicePad interface {
+	gobject.Object
 	upcastToGdkDevicePad() *DevicePadInstance
 
 	// GetFeatureGroup wraps gdk_device_pad_get_feature_group
@@ -10601,13 +10615,15 @@ type DevicePad interface {
 	// buttons/strip/rings that is affected collectively by a same
 	// current mode.
 	GetNGroups() int32
+
+	// chain up virtual methods:
 }
 
 var _ DevicePad = (*DevicePadInstance)(nil)
 
 func unsafeWrapDevicePad(base *gobject.ObjectInstance) *DevicePadInstance {
 	return &DevicePadInstance{
-		Instance: *base,
+		ObjectInstance: *base,
 	}
 }
 
@@ -10637,13 +10653,13 @@ func UnsafeDevicePadFromGlibBorrow(c unsafe.Pointer) DevicePad {
 // UnsafeDevicePadToGlibNone is used to convert the instance to it's C value GdkDevicePad. This is used by the bindings internally.
 func UnsafeDevicePadToGlibNone(c DevicePad) unsafe.Pointer {
 	i := c.upcastToGdkDevicePad()
-	return gobject.UnsafeObjectToGlibNone(&i.Instance)
+	return gobject.UnsafeObjectToGlibNone(i)
 }
 
 // UnsafeDevicePadToGlibFull is used to convert the instance to it's C value GdkDevicePad, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeDevicePadToGlibFull(c DevicePad) unsafe.Pointer {
 	i := c.upcastToGdkDevicePad()
-	return gobject.UnsafeObjectToGlibFull(&i.Instance)
+	return gobject.UnsafeObjectToGlibFull(i)
 }
 
 // GetFeatureGroup wraps gdk_device_pad_get_feature_group
@@ -20405,6 +20421,27 @@ type Window interface {
 	// 
 	// See also #GdkWindow::from-embedder.
 	ConnectToEmbedder(func(Window, float64, float64, unsafe.Pointer, unsafe.Pointer)) gobject.SignalHandle
+
+	// chain up virtual methods:
+
+	// ParentFromEmbedder calls the default implementations of the from_embedder virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- embedderX float64 
+	// 	- embedderY float64 
+	// 	- offscreenX *float64 
+	// 	- offscreenY *float64 
+	ParentFromEmbedder(embedderX float64, embedderY float64, offscreenX *float64, offscreenY *float64)
+	// ParentToEmbedder calls the default implementations of the to_embedder virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- offscreenX float64 
+	// 	- offscreenY float64 
+	// 	- embedderX *float64 
+	// 	- embedderY *float64 
+	ParentToEmbedder(offscreenX float64, offscreenY float64, embedderX *float64, embedderY *float64)
 }
 
 func unsafeWrapWindow(base *gobject.ObjectInstance) *WindowInstance {
@@ -23956,6 +23993,74 @@ func UnsafeApplyWindowOverrides[Instance Window](gclass unsafe.Pointer, override
 			},
 		)
 	}
+}
+
+// ParentFromEmbedder calls the default implementations of the from_embedder virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- embedderX float64 
+// 	- embedderY float64 
+// 	- offscreenX *float64 
+// 	- offscreenY *float64 
+func (window *WindowInstance) ParentFromEmbedder(embedderX float64, embedderY float64, offscreenX *float64, offscreenY *float64) {
+	var carg0 *C.GdkWindow
+	var carg1 C.gdouble  // in, none, casted
+	var carg2 C.gdouble  // in, none, casted
+	var carg3 *C.gdouble // in, transfer: none, C Pointers: 1, Name: gdouble
+	var carg4 *C.gdouble // in, transfer: none, C Pointers: 1, Name: gdouble
+
+	parentclass := (*C.GdkWindowClass)(classdata.PeekParentClass(UnsafeWindowToGlibNone(window)))
+
+	carg1 = C.gdouble(embedderX)
+	carg2 = C.gdouble(embedderY)
+	_ = offscreenX
+	_ = carg3
+	panic("unimplemented conversion of *float64 (gdouble*)")
+	_ = offscreenY
+	_ = carg4
+	panic("unimplemented conversion of *float64 (gdouble*)")
+
+	C._gotk4_gdk3_Window_virtual_from_embedder(unsafe.Pointer(parentclass.from_embedder), carg0, carg1, carg2, carg3, carg4)
+	runtime.KeepAlive(window)
+	runtime.KeepAlive(embedderX)
+	runtime.KeepAlive(embedderY)
+	runtime.KeepAlive(offscreenX)
+	runtime.KeepAlive(offscreenY)
+}
+
+// ParentToEmbedder calls the default implementations of the to_embedder virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- offscreenX float64 
+// 	- offscreenY float64 
+// 	- embedderX *float64 
+// 	- embedderY *float64 
+func (window *WindowInstance) ParentToEmbedder(offscreenX float64, offscreenY float64, embedderX *float64, embedderY *float64) {
+	var carg0 *C.GdkWindow
+	var carg1 C.gdouble  // in, none, casted
+	var carg2 C.gdouble  // in, none, casted
+	var carg3 *C.gdouble // in, transfer: none, C Pointers: 1, Name: gdouble
+	var carg4 *C.gdouble // in, transfer: none, C Pointers: 1, Name: gdouble
+
+	parentclass := (*C.GdkWindowClass)(classdata.PeekParentClass(UnsafeWindowToGlibNone(window)))
+
+	carg1 = C.gdouble(offscreenX)
+	carg2 = C.gdouble(offscreenY)
+	_ = embedderX
+	_ = carg3
+	panic("unimplemented conversion of *float64 (gdouble*)")
+	_ = embedderY
+	_ = carg4
+	panic("unimplemented conversion of *float64 (gdouble*)")
+
+	C._gotk4_gdk3_Window_virtual_to_embedder(unsafe.Pointer(parentclass.to_embedder), carg0, carg1, carg2, carg3, carg4)
+	runtime.KeepAlive(window)
+	runtime.KeepAlive(offscreenX)
+	runtime.KeepAlive(offscreenY)
+	runtime.KeepAlive(embedderX)
+	runtime.KeepAlive(embedderY)
 }
 
 // RegisterWindowSubClass is used to register a go subclass of GdkWindow. For this to work safely please implement the

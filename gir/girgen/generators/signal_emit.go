@@ -36,22 +36,13 @@ func (s *SignalEmitGenerator) Generate(w *file.Package) {
 	}
 	params := s.Parameters()
 	if len(params) == 0 {
-		fmt.Fprintf(w.Go(), "%s.Emit(\"%s\")%s\n", s.objectIdentifier(), s.Name, returnCast)
+		fmt.Fprintf(w.Go(), "o.Emit(\"%s\")%s\n", s.Name, returnCast)
 	} else {
-		fmt.Fprintf(w.Go(), "%s.Emit(\"%s\", %s)%s\n", s.objectIdentifier(), s.Name, s.Parameters().GoIdentifiers(), returnCast)
+		fmt.Fprintf(w.Go(), "o.Emit(\"%s\", %s)%s\n", s.Name, s.Parameters().GoIdentifiers(), returnCast)
 	}
 	w.Go().Unindent()
 	fmt.Fprintln(w.Go(), "}")
 	fmt.Fprintln(w.Go(), "")
-}
-
-// objectIdentifier returns the struct field that contains the gobject. This is only needed for interfaces.
-func (s *SignalEmitGenerator) objectIdentifier() string {
-	if _, ok := s.InstanceParam.Type.Type.(*typesystem.Interface); ok {
-		return "o.Instance"
-	}
-
-	return "o"
 }
 
 // GenerateInterfaceSignature implements MethodGenerator.

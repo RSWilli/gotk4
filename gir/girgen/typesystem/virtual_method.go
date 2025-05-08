@@ -8,6 +8,7 @@ import (
 )
 
 type VirtualMethod struct {
+	Doc
 	// Parent is the class or interface that this virtual method belongs to.
 	Parent ConvertibleType
 
@@ -65,6 +66,7 @@ func NewVirtualMethod(e *env, parent ConvertibleType, typestruct *Record, v gir.
 	goname := strcases.SnakeToGo(true, field.CIndentifier())
 
 	return &VirtualMethod{
+		Doc:                  NewDoc(&v.InfoAttrs, &v.InfoElements),
 		Parent:               parent,
 		TrampolineName:       trampoline,
 		ParentTrampolineName: parentTrampoline,

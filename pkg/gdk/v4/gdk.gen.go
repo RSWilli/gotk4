@@ -7973,7 +7973,7 @@ func UnicodeToKeyval(wc uint32) uint {
 // DevicePadInstance is the instance type used by all types implementing GdkDevicePad. It is used internally by the bindings. Users should use the interface [DevicePad] instead.
 type DevicePadInstance struct {
 	_ [0]func() // equal guard
-	Instance gobject.ObjectInstance
+	gobject.ObjectInstance
 }
 
 var _ DevicePad = (*DevicePadInstance)(nil)
@@ -7998,6 +7998,7 @@ var _ DevicePad = (*DevicePadInstance)(nil)
 // out through [method@Gdk.DevicePad.get_group_n_modes], and the current mode
 // for a given group will be notified through events of type `GDK_PAD_GROUP_MODE`.
 type DevicePad interface {
+	gobject.Object
 	upcastToGdkDevicePad() *DevicePadInstance
 
 	// GetFeatureGroup wraps gdk_device_pad_get_feature_group
@@ -8051,13 +8052,15 @@ type DevicePad interface {
 	// buttons/strip/rings that is affected collectively by a same
 	// current mode.
 	GetNGroups() int32
+
+	// chain up virtual methods:
 }
 
 var _ DevicePad = (*DevicePadInstance)(nil)
 
 func unsafeWrapDevicePad(base *gobject.ObjectInstance) *DevicePadInstance {
 	return &DevicePadInstance{
-		Instance: *base,
+		ObjectInstance: *base,
 	}
 }
 
@@ -8087,13 +8090,13 @@ func UnsafeDevicePadFromGlibBorrow(c unsafe.Pointer) DevicePad {
 // UnsafeDevicePadToGlibNone is used to convert the instance to it's C value GdkDevicePad. This is used by the bindings internally.
 func UnsafeDevicePadToGlibNone(c DevicePad) unsafe.Pointer {
 	i := c.upcastToGdkDevicePad()
-	return gobject.UnsafeObjectToGlibNone(&i.Instance)
+	return gobject.UnsafeObjectToGlibNone(i)
 }
 
 // UnsafeDevicePadToGlibFull is used to convert the instance to it's C value GdkDevicePad, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeDevicePadToGlibFull(c DevicePad) unsafe.Pointer {
 	i := c.upcastToGdkDevicePad()
-	return gobject.UnsafeObjectToGlibFull(&i.Instance)
+	return gobject.UnsafeObjectToGlibFull(i)
 }
 
 // GetFeatureGroup wraps gdk_device_pad_get_feature_group
@@ -8232,7 +8235,7 @@ func UnsafeApplyDevicePadOverrides[Instance DevicePad](gclass unsafe.Pointer, ov
 // DragSurfaceInstance is the instance type used by all types implementing GdkDragSurface. It is used internally by the bindings. Users should use the interface [DragSurface] instead.
 type DragSurfaceInstance struct {
 	_ [0]func() // equal guard
-	Instance gobject.ObjectInstance
+	gobject.ObjectInstance
 }
 
 var _ DragSurface = (*DragSurfaceInstance)(nil)
@@ -8241,6 +8244,7 @@ var _ DragSurface = (*DragSurfaceInstance)(nil)
 //
 // A `GdkDragSurface` is an interface for surfaces used during DND.
 type DragSurface interface {
+	gobject.Object
 	upcastToGdkDragSurface() *DragSurfaceInstance
 
 	// Present wraps gdk_drag_surface_present
@@ -8272,13 +8276,15 @@ type DragSurface interface {
 	// Failing to set a size so will result in an arbitrary size being used as
 	// a result.
 	ConnectComputeSize(func(DragSurface, *DragSurfaceSize)) gobject.SignalHandle
+
+	// chain up virtual methods:
 }
 
 var _ DragSurface = (*DragSurfaceInstance)(nil)
 
 func unsafeWrapDragSurface(base *gobject.ObjectInstance) *DragSurfaceInstance {
 	return &DragSurfaceInstance{
-		Instance: *base,
+		ObjectInstance: *base,
 	}
 }
 
@@ -8308,13 +8314,13 @@ func UnsafeDragSurfaceFromGlibBorrow(c unsafe.Pointer) DragSurface {
 // UnsafeDragSurfaceToGlibNone is used to convert the instance to it's C value GdkDragSurface. This is used by the bindings internally.
 func UnsafeDragSurfaceToGlibNone(c DragSurface) unsafe.Pointer {
 	i := c.upcastToGdkDragSurface()
-	return gobject.UnsafeObjectToGlibNone(&i.Instance)
+	return gobject.UnsafeObjectToGlibNone(i)
 }
 
 // UnsafeDragSurfaceToGlibFull is used to convert the instance to it's C value GdkDragSurface, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeDragSurfaceToGlibFull(c DragSurface) unsafe.Pointer {
 	i := c.upcastToGdkDragSurface()
-	return gobject.UnsafeObjectToGlibFull(&i.Instance)
+	return gobject.UnsafeObjectToGlibFull(i)
 }
 
 // Present wraps gdk_drag_surface_present
@@ -8369,7 +8375,7 @@ func (dragSurface *DragSurfaceInstance) Present(width int32, height int32) bool 
 // Failing to set a size so will result in an arbitrary size being used as
 // a result.
 func (o *DragSurfaceInstance) ConnectComputeSize(fn func(DragSurface, *DragSurfaceSize)) gobject.SignalHandle {
-	return o.Instance.Connect("compute-size", fn)
+	return o.Connect("compute-size", fn)
 }
 
 // DragSurfaceOverrides is the struct used to override the default implementation of virtual methods.
@@ -8385,7 +8391,7 @@ func UnsafeApplyDragSurfaceOverrides[Instance DragSurface](gclass unsafe.Pointer
 // PaintableInstance is the instance type used by all types implementing GdkPaintable. It is used internally by the bindings. Users should use the interface [Paintable] instead.
 type PaintableInstance struct {
 	_ [0]func() // equal guard
-	Instance gobject.ObjectInstance
+	gobject.ObjectInstance
 }
 
 var _ Paintable = (*PaintableInstance)(nil)
@@ -8438,6 +8444,7 @@ var _ Paintable = (*PaintableInstance)(nil)
 // [method@Gdk.Paintable.invalidate_size],
 // [func@Gdk.Paintable.new_empty].
 type Paintable interface {
+	gobject.Object
 	upcastToGdkPaintable() *PaintableInstance
 
 	// ComputeConcreteSize wraps gdk_paintable_compute_concrete_size
@@ -8612,13 +8619,113 @@ type Paintable interface {
 	// Examples for such an event would be a paintable displaying
 	// the contents of a toplevel surface being resized.
 	ConnectInvalidateSize(func(Paintable)) gobject.SignalHandle
+
+	// chain up virtual methods:
+
+	// ParentGetCurrentImage calls the default implementations of the get_current_image virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret Paintable 
+	//
+	// Gets an immutable paintable for the current contents displayed by @paintable.
+	// 
+	// This is useful when you want to retain the current state of an animation,
+	// for example to take a screenshot of a running animation.
+	// 
+	// If the @paintable is already immutable, it will return itself.
+	ParentGetCurrentImage() Paintable
+	// ParentGetFlags calls the default implementations of the get_flags virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret PaintableFlags 
+	//
+	// Get flags for the paintable.
+	// 
+	// This is oftentimes useful for optimizations.
+	// 
+	// See [flags@Gdk.PaintableFlags] for the flags and what they mean.
+	ParentGetFlags() PaintableFlags
+	// ParentGetIntrinsicAspectRatio calls the default implementations of the get_intrinsic_aspect_ratio virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret float64 
+	//
+	// Gets the preferred aspect ratio the @paintable would like to be displayed at.
+	// 
+	// The aspect ratio is the width divided by the height, so a value of 0.5
+	// means that the @paintable prefers to be displayed twice as high as it
+	// is wide. Consumers of this interface can use this to preserve aspect
+	// ratio when displaying the paintable.
+	// 
+	// This is a purely informational value and does not in any way limit the
+	// values that may be passed to [method@Gdk.Paintable.snapshot].
+	// 
+	// Usually when a @paintable returns nonzero values from
+	// [method@Gdk.Paintable.get_intrinsic_width] and
+	// [method@Gdk.Paintable.get_intrinsic_height] the aspect ratio
+	// should conform to those values, though that is not required.
+	// 
+	// If the @paintable does not have a preferred aspect ratio,
+	// it returns 0. Negative values are never returned.
+	ParentGetIntrinsicAspectRatio() float64
+	// ParentGetIntrinsicHeight calls the default implementations of the get_intrinsic_height virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret int32 
+	//
+	// Gets the preferred height the @paintable would like to be displayed at.
+	// 
+	// Consumers of this interface can use this to reserve enough space to draw
+	// the paintable.
+	// 
+	// This is a purely informational value and does not in any way limit the
+	// values that may be passed to [method@Gdk.Paintable.snapshot].
+	// 
+	// If the @paintable does not have a preferred height, it returns 0.
+	// Negative values are never returned.
+	ParentGetIntrinsicHeight() int32
+	// ParentGetIntrinsicWidth calls the default implementations of the get_intrinsic_width virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret int32 
+	//
+	// Gets the preferred width the @paintable would like to be displayed at.
+	// 
+	// Consumers of this interface can use this to reserve enough space to draw
+	// the paintable.
+	// 
+	// This is a purely informational value and does not in any way limit the
+	// values that may be passed to [method@Gdk.Paintable.snapshot].
+	// 
+	// If the @paintable does not have a preferred width, it returns 0.
+	// Negative values are never returned.
+	ParentGetIntrinsicWidth() int32
+	// ParentSnapshot calls the default implementations of the snapshot virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- snapshot Snapshot: a `GdkSnapshot` to snapshot to 
+	// 	- width float64: width to snapshot in 
+	// 	- height float64: height to snapshot in 
+	//
+	// Snapshots the given paintable with the given @width and @height.
+	// 
+	// The paintable is drawn at the current (0,0) offset of the @snapshot.
+	// If @width and @height are not larger than zero, this function will
+	// do nothing.
+	ParentSnapshot(snapshot Snapshot, width float64, height float64)
 }
 
 var _ Paintable = (*PaintableInstance)(nil)
 
 func unsafeWrapPaintable(base *gobject.ObjectInstance) *PaintableInstance {
 	return &PaintableInstance{
-		Instance: *base,
+		ObjectInstance: *base,
 	}
 }
 
@@ -8648,13 +8755,13 @@ func UnsafePaintableFromGlibBorrow(c unsafe.Pointer) Paintable {
 // UnsafePaintableToGlibNone is used to convert the instance to it's C value GdkPaintable. This is used by the bindings internally.
 func UnsafePaintableToGlibNone(c Paintable) unsafe.Pointer {
 	i := c.upcastToGdkPaintable()
-	return gobject.UnsafeObjectToGlibNone(&i.Instance)
+	return gobject.UnsafeObjectToGlibNone(i)
 }
 
 // UnsafePaintableToGlibFull is used to convert the instance to it's C value GdkPaintable, while removeing the finalizer. This is used by the bindings internally.
 func UnsafePaintableToGlibFull(c Paintable) unsafe.Pointer {
 	i := c.upcastToGdkPaintable()
-	return gobject.UnsafeObjectToGlibFull(&i.Instance)
+	return gobject.UnsafeObjectToGlibFull(i)
 }
 
 // NewPaintableEmpty wraps gdk_paintable_new_empty
@@ -8991,7 +9098,7 @@ func (paintable *PaintableInstance) Snapshot(snapshot Snapshot, width float64, h
 // Examples for such an event would be videos changing to the next frame or
 // the icon theme for an icon changing.
 func (o *PaintableInstance) ConnectInvalidateContents(fn func(Paintable)) gobject.SignalHandle {
-	return o.Instance.Connect("invalidate-contents", fn)
+	return o.Connect("invalidate-contents", fn)
 }
 
 // ConnectInvalidateSize connects the provided callback to the "invalidate-size" signal
@@ -9007,7 +9114,7 @@ func (o *PaintableInstance) ConnectInvalidateContents(fn func(Paintable)) gobjec
 // Examples for such an event would be a paintable displaying
 // the contents of a toplevel surface being resized.
 func (o *PaintableInstance) ConnectInvalidateSize(fn func(Paintable)) gobject.SignalHandle {
-	return o.Instance.Connect("invalidate-size", fn)
+	return o.Connect("invalidate-size", fn)
 }
 
 // PaintableOverrides is the struct used to override the default implementation of virtual methods.
@@ -9017,26 +9124,79 @@ type PaintableOverrides[Instance Paintable] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret Paintable 
+	//
+	// Gets an immutable paintable for the current contents displayed by @paintable.
+	// 
+	// This is useful when you want to retain the current state of an animation,
+	// for example to take a screenshot of a running animation.
+	// 
+	// If the @paintable is already immutable, it will return itself.
 	GetCurrentImage func(Instance) Paintable
 	// GetFlags allows you to override the implementation of the virtual method get_flags.
 	// The function returns the following values:
 	// 
 	// 	- goret PaintableFlags 
+	//
+	// Get flags for the paintable.
+	// 
+	// This is oftentimes useful for optimizations.
+	// 
+	// See [flags@Gdk.PaintableFlags] for the flags and what they mean.
 	GetFlags func(Instance) PaintableFlags
 	// GetIntrinsicAspectRatio allows you to override the implementation of the virtual method get_intrinsic_aspect_ratio.
 	// The function returns the following values:
 	// 
 	// 	- goret float64 
+	//
+	// Gets the preferred aspect ratio the @paintable would like to be displayed at.
+	// 
+	// The aspect ratio is the width divided by the height, so a value of 0.5
+	// means that the @paintable prefers to be displayed twice as high as it
+	// is wide. Consumers of this interface can use this to preserve aspect
+	// ratio when displaying the paintable.
+	// 
+	// This is a purely informational value and does not in any way limit the
+	// values that may be passed to [method@Gdk.Paintable.snapshot].
+	// 
+	// Usually when a @paintable returns nonzero values from
+	// [method@Gdk.Paintable.get_intrinsic_width] and
+	// [method@Gdk.Paintable.get_intrinsic_height] the aspect ratio
+	// should conform to those values, though that is not required.
+	// 
+	// If the @paintable does not have a preferred aspect ratio,
+	// it returns 0. Negative values are never returned.
 	GetIntrinsicAspectRatio func(Instance) float64
 	// GetIntrinsicHeight allows you to override the implementation of the virtual method get_intrinsic_height.
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
+	//
+	// Gets the preferred height the @paintable would like to be displayed at.
+	// 
+	// Consumers of this interface can use this to reserve enough space to draw
+	// the paintable.
+	// 
+	// This is a purely informational value and does not in any way limit the
+	// values that may be passed to [method@Gdk.Paintable.snapshot].
+	// 
+	// If the @paintable does not have a preferred height, it returns 0.
+	// Negative values are never returned.
 	GetIntrinsicHeight func(Instance) int32
 	// GetIntrinsicWidth allows you to override the implementation of the virtual method get_intrinsic_width.
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
+	//
+	// Gets the preferred width the @paintable would like to be displayed at.
+	// 
+	// Consumers of this interface can use this to reserve enough space to draw
+	// the paintable.
+	// 
+	// This is a purely informational value and does not in any way limit the
+	// values that may be passed to [method@Gdk.Paintable.snapshot].
+	// 
+	// If the @paintable does not have a preferred width, it returns 0.
+	// Negative values are never returned.
 	GetIntrinsicWidth func(Instance) int32
 	// Snapshot allows you to override the implementation of the virtual method snapshot.
 	// The function takes the following parameters:
@@ -9044,6 +9204,12 @@ type PaintableOverrides[Instance Paintable] struct {
 	// 	- snapshot Snapshot: a `GdkSnapshot` to snapshot to 
 	// 	- width float64: width to snapshot in 
 	// 	- height float64: height to snapshot in 
+	//
+	// Snapshots the given paintable with the given @width and @height.
+	// 
+	// The paintable is drawn at the current (0,0) offset of the @snapshot.
+	// If @width and @height are not larger than zero, this function will
+	// do nothing.
 	Snapshot func(Instance, Snapshot, float64, float64)
 }
 
@@ -9174,10 +9340,200 @@ func UnsafeApplyPaintableOverrides[Instance Paintable](gclass unsafe.Pointer, ov
 	}
 }
 
+// ParentGetCurrentImage calls the default implementations of the get_current_image virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret Paintable 
+//
+// Gets an immutable paintable for the current contents displayed by @paintable.
+// 
+// This is useful when you want to retain the current state of an animation,
+// for example to take a screenshot of a running animation.
+// 
+// If the @paintable is already immutable, it will return itself.
+func (paintable *PaintableInstance) ParentGetCurrentImage() Paintable {
+	var carg0 *C.GdkPaintable
+	var cret  *C.GdkPaintable // return, full, converted
+
+	parentclass := (*C.GdkPaintableInterface)(classdata.PeekParentInterface(UnsafePaintableToGlibNone(paintable), uint64(TypePaintable)))
+
+	cret = C._gotk4_gdk4_Paintable_virtual_get_current_image(unsafe.Pointer(parentclass.get_current_image), carg0)
+	runtime.KeepAlive(paintable)
+
+	var goret Paintable
+
+	goret = UnsafePaintableFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// ParentGetFlags calls the default implementations of the get_flags virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret PaintableFlags 
+//
+// Get flags for the paintable.
+// 
+// This is oftentimes useful for optimizations.
+// 
+// See [flags@Gdk.PaintableFlags] for the flags and what they mean.
+func (paintable *PaintableInstance) ParentGetFlags() PaintableFlags {
+	var carg0 *C.GdkPaintable
+	var cret  C.GdkPaintableFlags // return, none, casted
+
+	parentclass := (*C.GdkPaintableInterface)(classdata.PeekParentInterface(UnsafePaintableToGlibNone(paintable), uint64(TypePaintable)))
+
+	cret = C._gotk4_gdk4_Paintable_virtual_get_flags(unsafe.Pointer(parentclass.get_flags), carg0)
+	runtime.KeepAlive(paintable)
+
+	var goret PaintableFlags
+
+	goret = PaintableFlags(cret)
+
+	return goret
+}
+
+// ParentGetIntrinsicAspectRatio calls the default implementations of the get_intrinsic_aspect_ratio virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret float64 
+//
+// Gets the preferred aspect ratio the @paintable would like to be displayed at.
+// 
+// The aspect ratio is the width divided by the height, so a value of 0.5
+// means that the @paintable prefers to be displayed twice as high as it
+// is wide. Consumers of this interface can use this to preserve aspect
+// ratio when displaying the paintable.
+// 
+// This is a purely informational value and does not in any way limit the
+// values that may be passed to [method@Gdk.Paintable.snapshot].
+// 
+// Usually when a @paintable returns nonzero values from
+// [method@Gdk.Paintable.get_intrinsic_width] and
+// [method@Gdk.Paintable.get_intrinsic_height] the aspect ratio
+// should conform to those values, though that is not required.
+// 
+// If the @paintable does not have a preferred aspect ratio,
+// it returns 0. Negative values are never returned.
+func (paintable *PaintableInstance) ParentGetIntrinsicAspectRatio() float64 {
+	var carg0 *C.GdkPaintable
+	var cret  C.double // return, none, casted, casted C.gdouble
+
+	parentclass := (*C.GdkPaintableInterface)(classdata.PeekParentInterface(UnsafePaintableToGlibNone(paintable), uint64(TypePaintable)))
+
+	cret = C._gotk4_gdk4_Paintable_virtual_get_intrinsic_aspect_ratio(unsafe.Pointer(parentclass.get_intrinsic_aspect_ratio), carg0)
+	runtime.KeepAlive(paintable)
+
+	var goret float64
+
+	goret = float64(cret)
+
+	return goret
+}
+
+// ParentGetIntrinsicHeight calls the default implementations of the get_intrinsic_height virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret int32 
+//
+// Gets the preferred height the @paintable would like to be displayed at.
+// 
+// Consumers of this interface can use this to reserve enough space to draw
+// the paintable.
+// 
+// This is a purely informational value and does not in any way limit the
+// values that may be passed to [method@Gdk.Paintable.snapshot].
+// 
+// If the @paintable does not have a preferred height, it returns 0.
+// Negative values are never returned.
+func (paintable *PaintableInstance) ParentGetIntrinsicHeight() int32 {
+	var carg0 *C.GdkPaintable
+	var cret  C.int // return, none, casted, casted C.gint
+
+	parentclass := (*C.GdkPaintableInterface)(classdata.PeekParentInterface(UnsafePaintableToGlibNone(paintable), uint64(TypePaintable)))
+
+	cret = C._gotk4_gdk4_Paintable_virtual_get_intrinsic_height(unsafe.Pointer(parentclass.get_intrinsic_height), carg0)
+	runtime.KeepAlive(paintable)
+
+	var goret int32
+
+	goret = int32(cret)
+
+	return goret
+}
+
+// ParentGetIntrinsicWidth calls the default implementations of the get_intrinsic_width virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret int32 
+//
+// Gets the preferred width the @paintable would like to be displayed at.
+// 
+// Consumers of this interface can use this to reserve enough space to draw
+// the paintable.
+// 
+// This is a purely informational value and does not in any way limit the
+// values that may be passed to [method@Gdk.Paintable.snapshot].
+// 
+// If the @paintable does not have a preferred width, it returns 0.
+// Negative values are never returned.
+func (paintable *PaintableInstance) ParentGetIntrinsicWidth() int32 {
+	var carg0 *C.GdkPaintable
+	var cret  C.int // return, none, casted, casted C.gint
+
+	parentclass := (*C.GdkPaintableInterface)(classdata.PeekParentInterface(UnsafePaintableToGlibNone(paintable), uint64(TypePaintable)))
+
+	cret = C._gotk4_gdk4_Paintable_virtual_get_intrinsic_width(unsafe.Pointer(parentclass.get_intrinsic_width), carg0)
+	runtime.KeepAlive(paintable)
+
+	var goret int32
+
+	goret = int32(cret)
+
+	return goret
+}
+
+// ParentSnapshot calls the default implementations of the snapshot virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- snapshot Snapshot: a `GdkSnapshot` to snapshot to 
+// 	- width float64: width to snapshot in 
+// 	- height float64: height to snapshot in 
+//
+// Snapshots the given paintable with the given @width and @height.
+// 
+// The paintable is drawn at the current (0,0) offset of the @snapshot.
+// If @width and @height are not larger than zero, this function will
+// do nothing.
+func (paintable *PaintableInstance) ParentSnapshot(snapshot Snapshot, width float64, height float64) {
+	var carg0 *C.GdkPaintable
+	var carg1 *C.GdkSnapshot // in, none, converted
+	var carg2 C.double       // in, none, casted, casted C.gdouble
+	var carg3 C.double       // in, none, casted, casted C.gdouble
+
+	parentclass := (*C.GdkPaintableInterface)(classdata.PeekParentInterface(UnsafePaintableToGlibNone(paintable), uint64(TypePaintable)))
+
+	carg1 = (*C.GdkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
+	carg2 = C.double(width)
+	carg3 = C.double(height)
+
+	C._gotk4_gdk4_Paintable_virtual_snapshot(unsafe.Pointer(parentclass.snapshot), carg0, carg1, carg2, carg3)
+	runtime.KeepAlive(paintable)
+	runtime.KeepAlive(snapshot)
+	runtime.KeepAlive(width)
+	runtime.KeepAlive(height)
+}
+
 // PopupInstance is the instance type used by all types implementing GdkPopup. It is used internally by the bindings. Users should use the interface [Popup] instead.
 type PopupInstance struct {
 	_ [0]func() // equal guard
-	Instance gobject.ObjectInstance
+	gobject.ObjectInstance
 }
 
 var _ Popup = (*PopupInstance)(nil)
@@ -9192,6 +9548,7 @@ var _ Popup = (*PopupInstance)(nil)
 // They can be modal, which is indicated by the [property@Gdk.Popup:autohide]
 // property.
 type Popup interface {
+	gobject.Object
 	upcastToGdkPopup() *PopupInstance
 
 	// GetAutohide wraps gdk_popup_get_autohide
@@ -9276,13 +9633,15 @@ type Popup interface {
 	// and is immediately hidden upon being presented. If presenting failed,
 	// the [signal@Gdk.Surface::layout] signal will not me emitted.
 	Present(int32, int32, *PopupLayout) bool
+
+	// chain up virtual methods:
 }
 
 var _ Popup = (*PopupInstance)(nil)
 
 func unsafeWrapPopup(base *gobject.ObjectInstance) *PopupInstance {
 	return &PopupInstance{
-		Instance: *base,
+		ObjectInstance: *base,
 	}
 }
 
@@ -9312,13 +9671,13 @@ func UnsafePopupFromGlibBorrow(c unsafe.Pointer) Popup {
 // UnsafePopupToGlibNone is used to convert the instance to it's C value GdkPopup. This is used by the bindings internally.
 func UnsafePopupToGlibNone(c Popup) unsafe.Pointer {
 	i := c.upcastToGdkPopup()
-	return gobject.UnsafeObjectToGlibNone(&i.Instance)
+	return gobject.UnsafeObjectToGlibNone(i)
 }
 
 // UnsafePopupToGlibFull is used to convert the instance to it's C value GdkPopup, while removeing the finalizer. This is used by the bindings internally.
 func UnsafePopupToGlibFull(c Popup) unsafe.Pointer {
 	i := c.upcastToGdkPopup()
-	return gobject.UnsafeObjectToGlibFull(&i.Instance)
+	return gobject.UnsafeObjectToGlibFull(i)
 }
 
 // GetAutohide wraps gdk_popup_get_autohide
@@ -9536,7 +9895,7 @@ func UnsafeApplyPopupOverrides[Instance Popup](gclass unsafe.Pointer, overrides 
 // ToplevelInstance is the instance type used by all types implementing GdkToplevel. It is used internally by the bindings. Users should use the interface [Toplevel] instead.
 type ToplevelInstance struct {
 	_ [0]func() // equal guard
-	Instance gobject.ObjectInstance
+	gobject.ObjectInstance
 }
 
 var _ Toplevel = (*ToplevelInstance)(nil)
@@ -9549,6 +9908,7 @@ var _ Toplevel = (*ToplevelInstance)(nil)
 // the windowing system, such as controlling maximization and size of the
 // surface, setting icons and transient parents for dialogs.
 type Toplevel interface {
+	gobject.Object
 	upcastToGdkToplevel() *ToplevelInstance
 
 	// BeginMove wraps gdk_toplevel_begin_move
@@ -9763,13 +10123,15 @@ type Toplevel interface {
 	// passed via the [struct@Gdk.ToplevelSize] object. Failing to do so
 	// will result in an arbitrary size being used as a result.
 	ConnectComputeSize(func(Toplevel, *ToplevelSize)) gobject.SignalHandle
+
+	// chain up virtual methods:
 }
 
 var _ Toplevel = (*ToplevelInstance)(nil)
 
 func unsafeWrapToplevel(base *gobject.ObjectInstance) *ToplevelInstance {
 	return &ToplevelInstance{
-		Instance: *base,
+		ObjectInstance: *base,
 	}
 }
 
@@ -9799,13 +10161,13 @@ func UnsafeToplevelFromGlibBorrow(c unsafe.Pointer) Toplevel {
 // UnsafeToplevelToGlibNone is used to convert the instance to it's C value GdkToplevel. This is used by the bindings internally.
 func UnsafeToplevelToGlibNone(c Toplevel) unsafe.Pointer {
 	i := c.upcastToGdkToplevel()
-	return gobject.UnsafeObjectToGlibNone(&i.Instance)
+	return gobject.UnsafeObjectToGlibNone(i)
 }
 
 // UnsafeToplevelToGlibFull is used to convert the instance to it's C value GdkToplevel, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeToplevelToGlibFull(c Toplevel) unsafe.Pointer {
 	i := c.upcastToGdkToplevel()
-	return gobject.UnsafeObjectToGlibFull(&i.Instance)
+	return gobject.UnsafeObjectToGlibFull(i)
 }
 
 // BeginMove wraps gdk_toplevel_begin_move
@@ -10261,7 +10623,7 @@ func (toplevel *ToplevelInstance) TitlebarGesture(gesture TitlebarGesture) bool 
 // passed via the [struct@Gdk.ToplevelSize] object. Failing to do so
 // will result in an arbitrary size being used as a result.
 func (o *ToplevelInstance) ConnectComputeSize(fn func(Toplevel, *ToplevelSize)) gobject.SignalHandle {
-	return o.Instance.Connect("compute-size", fn)
+	return o.Connect("compute-size", fn)
 }
 
 // ToplevelOverrides is the struct used to override the default implementation of virtual methods.
@@ -11917,7 +12279,7 @@ func unsafeWrapContentDeserializer(base *gobject.ObjectInstance) *ContentDeseria
 	return &ContentDeserializerInstance{
 		ObjectInstance: *base,
 		AsyncResultInstance: gio.AsyncResultInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -12213,6 +12575,97 @@ type ContentProvider interface {
 	//
 	// Emitted whenever the content provided by this provider has changed.
 	ConnectContentChanged(func(ContentProvider)) gobject.SignalHandle
+
+	// chain up virtual methods:
+
+	// ParentAttachClipboard calls the default implementations of the attach_clipboard virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- clipboard Clipboard 
+	ParentAttachClipboard(clipboard Clipboard)
+	// ParentContentChanged calls the default implementations of the content_changed virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	//
+	// Emits the ::content-changed signal.
+	ParentContentChanged()
+	// ParentDetachClipboard calls the default implementations of the detach_clipboard virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- clipboard Clipboard 
+	ParentDetachClipboard(clipboard Clipboard)
+	// ParentGetValue calls the default implementations of the get_value virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- value gobject.Value: the `GValue` to fill 
+	// 	- goret bool 
+	// 	- _goerr error (nullable): an error 
+	//
+	// Gets the contents of @provider stored in @value.
+	// 
+	// The @value will have been initialized to the `GType` the value should be
+	// provided in. This given `GType` does not need to be listed in the formats
+	// returned by [method@Gdk.ContentProvider.ref_formats]. However, if the
+	// given `GType` is not supported, this operation can fail and
+	// `G_IO_ERROR_NOT_SUPPORTED` will be reported.
+	ParentGetValue() (gobject.Value, bool, error)
+	// ParentRefFormats calls the default implementations of the ref_formats virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret *ContentFormats 
+	//
+	// Gets the formats that the provider can provide its current contents in.
+	ParentRefFormats() *ContentFormats
+	// ParentRefStorableFormats calls the default implementations of the ref_storable_formats virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret *ContentFormats 
+	//
+	// Gets the formats that the provider suggests other applications to store
+	// the data in.
+	// 
+	// An example of such an application would be a clipboard manager.
+	// 
+	// This can be assumed to be a subset of [method@Gdk.ContentProvider.ref_formats].
+	ParentRefStorableFormats() *ContentFormats
+	// ParentWriteMIMETypeAsync calls the default implementations of the write_mime_type_async virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- cancellable context.Context (nullable): optional `GCancellable` object, %NULL to ignore. 
+	// 	- mimeType string: the mime type to provide the data in 
+	// 	- stream gio.OutputStream: the `GOutputStream` to write to 
+	// 	- ioPriority int32: I/O priority of the request. 
+	// 	- callback gio.AsyncReadyCallback (nullable): callback to call when the request is satisfied 
+	//
+	// Asynchronously writes the contents of @provider to @stream in the given
+	// @mime_type.
+	// 
+	// The given mime type does not need to be listed in the formats returned by
+	// [method@Gdk.ContentProvider.ref_formats]. However, if the given `GType` is
+	// not supported, `G_IO_ERROR_NOT_SUPPORTED` will be reported.
+	// 
+	// The given @stream will not be closed.
+	ParentWriteMIMETypeAsync(cancellable context.Context, mimeType string, stream gio.OutputStream, ioPriority int32, callback gio.AsyncReadyCallback)
+	// ParentWriteMIMETypeFinish calls the default implementations of the write_mime_type_finish virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- result gio.AsyncResult: a `GAsyncResult` 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	// 	- _goerr error (nullable): an error 
+	//
+	// Finishes an asynchronous write operation.
+	// 
+	// See [method@Gdk.ContentProvider.write_mime_type_async].
+	ParentWriteMIMETypeFinish(result gio.AsyncResult) (bool, error)
 }
 
 func unsafeWrapContentProvider(base *gobject.ObjectInstance) *ContentProviderInstance {
@@ -12574,6 +13027,8 @@ type ContentProviderOverrides[Instance ContentProvider] struct {
 	// 	- clipboard Clipboard 
 	AttachClipboard func(Instance, Clipboard)
 	// ContentChanged allows you to override the implementation of the virtual method content_changed.
+	//
+	// Emits the ::content-changed signal.
 	ContentChanged func(Instance)
 	// DetachClipboard allows you to override the implementation of the virtual method detach_clipboard.
 	// The function takes the following parameters:
@@ -12586,16 +13041,33 @@ type ContentProviderOverrides[Instance ContentProvider] struct {
 	// 	- value gobject.Value: the `GValue` to fill 
 	// 	- goret bool 
 	// 	- _goerr error (nullable): an error 
+	//
+	// Gets the contents of @provider stored in @value.
+	// 
+	// The @value will have been initialized to the `GType` the value should be
+	// provided in. This given `GType` does not need to be listed in the formats
+	// returned by [method@Gdk.ContentProvider.ref_formats]. However, if the
+	// given `GType` is not supported, this operation can fail and
+	// `G_IO_ERROR_NOT_SUPPORTED` will be reported.
 	GetValue func(Instance) (gobject.Value, bool, error)
 	// RefFormats allows you to override the implementation of the virtual method ref_formats.
 	// The function returns the following values:
 	// 
 	// 	- goret *ContentFormats 
+	//
+	// Gets the formats that the provider can provide its current contents in.
 	RefFormats func(Instance) *ContentFormats
 	// RefStorableFormats allows you to override the implementation of the virtual method ref_storable_formats.
 	// The function returns the following values:
 	// 
 	// 	- goret *ContentFormats 
+	//
+	// Gets the formats that the provider suggests other applications to store
+	// the data in.
+	// 
+	// An example of such an application would be a clipboard manager.
+	// 
+	// This can be assumed to be a subset of [method@Gdk.ContentProvider.ref_formats].
 	RefStorableFormats func(Instance) *ContentFormats
 	// WriteMIMETypeAsync allows you to override the implementation of the virtual method write_mime_type_async.
 	// The function takes the following parameters:
@@ -12605,6 +13077,15 @@ type ContentProviderOverrides[Instance ContentProvider] struct {
 	// 	- stream gio.OutputStream: the `GOutputStream` to write to 
 	// 	- ioPriority int32: I/O priority of the request. 
 	// 	- callback gio.AsyncReadyCallback (nullable): callback to call when the request is satisfied 
+	//
+	// Asynchronously writes the contents of @provider to @stream in the given
+	// @mime_type.
+	// 
+	// The given mime type does not need to be listed in the formats returned by
+	// [method@Gdk.ContentProvider.ref_formats]. However, if the given `GType` is
+	// not supported, `G_IO_ERROR_NOT_SUPPORTED` will be reported.
+	// 
+	// The given @stream will not be closed.
 	WriteMIMETypeAsync func(Instance, context.Context, string, gio.OutputStream, int32, gio.AsyncReadyCallback)
 	// WriteMIMETypeFinish allows you to override the implementation of the virtual method write_mime_type_finish.
 	// The function takes the following parameters:
@@ -12615,6 +13096,10 @@ type ContentProviderOverrides[Instance ContentProvider] struct {
 	// 
 	// 	- goret bool 
 	// 	- _goerr error (nullable): an error 
+	//
+	// Finishes an asynchronous write operation.
+	// 
+	// See [method@Gdk.ContentProvider.write_mime_type_async].
 	WriteMIMETypeFinish func(Instance, gio.AsyncResult) (bool, error)
 }
 
@@ -12801,6 +13286,240 @@ func UnsafeApplyContentProviderOverrides[Instance ContentProvider](gclass unsafe
 	}
 }
 
+// ParentAttachClipboard calls the default implementations of the attach_clipboard virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- clipboard Clipboard 
+func (provider *ContentProviderInstance) ParentAttachClipboard(clipboard Clipboard) {
+	var carg0 *C.GdkContentProvider
+	var carg1 *C.GdkClipboard // in, none, converted
+
+	parentclass := (*C.GdkContentProviderClass)(classdata.PeekParentClass(UnsafeContentProviderToGlibNone(provider)))
+
+	carg1 = (*C.GdkClipboard)(UnsafeClipboardToGlibNone(clipboard))
+
+	C._gotk4_gdk4_ContentProvider_virtual_attach_clipboard(unsafe.Pointer(parentclass.attach_clipboard), carg0, carg1)
+	runtime.KeepAlive(provider)
+	runtime.KeepAlive(clipboard)
+}
+
+// ParentContentChanged calls the default implementations of the content_changed virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+//
+// Emits the ::content-changed signal.
+func (provider *ContentProviderInstance) ParentContentChanged() {
+	var carg0 *C.GdkContentProvider
+
+	parentclass := (*C.GdkContentProviderClass)(classdata.PeekParentClass(UnsafeContentProviderToGlibNone(provider)))
+
+	C._gotk4_gdk4_ContentProvider_virtual_content_changed(unsafe.Pointer(parentclass.content_changed), carg0)
+	runtime.KeepAlive(provider)
+}
+
+// ParentDetachClipboard calls the default implementations of the detach_clipboard virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- clipboard Clipboard 
+func (provider *ContentProviderInstance) ParentDetachClipboard(clipboard Clipboard) {
+	var carg0 *C.GdkContentProvider
+	var carg1 *C.GdkClipboard // in, none, converted
+
+	parentclass := (*C.GdkContentProviderClass)(classdata.PeekParentClass(UnsafeContentProviderToGlibNone(provider)))
+
+	carg1 = (*C.GdkClipboard)(UnsafeClipboardToGlibNone(clipboard))
+
+	C._gotk4_gdk4_ContentProvider_virtual_detach_clipboard(unsafe.Pointer(parentclass.detach_clipboard), carg0, carg1)
+	runtime.KeepAlive(provider)
+	runtime.KeepAlive(clipboard)
+}
+
+// ParentGetValue calls the default implementations of the get_value virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- value gobject.Value: the `GValue` to fill 
+// 	- goret bool 
+// 	- _goerr error (nullable): an error 
+//
+// Gets the contents of @provider stored in @value.
+// 
+// The @value will have been initialized to the `GType` the value should be
+// provided in. This given `GType` does not need to be listed in the formats
+// returned by [method@Gdk.ContentProvider.ref_formats]. However, if the
+// given `GType` is not supported, this operation can fail and
+// `G_IO_ERROR_NOT_SUPPORTED` will be reported.
+func (provider *ContentProviderInstance) ParentGetValue() (gobject.Value, bool, error) {
+	var carg0 *C.GdkContentProvider
+	var carg1 C.GValue   // out, transfer: none, C Pointers: 0, Name: Value, caller-allocates
+	var cret  C.gboolean // return
+	var _cerr *C.GError  // out, full, converted, nullable
+
+	parentclass := (*C.GdkContentProviderClass)(classdata.PeekParentClass(UnsafeContentProviderToGlibNone(provider)))
+
+	cret = C._gotk4_gdk4_ContentProvider_virtual_get_value(unsafe.Pointer(parentclass.get_value), carg0, &carg1, &_cerr)
+	runtime.KeepAlive(provider)
+
+	var value  gobject.Value
+	var goret  bool
+	var _goerr error
+
+	_ = value
+	_ = carg1
+	panic("unimplemented conversion of gobject.Value (GValue)")
+	if cret != 0 {
+		goret = true
+	}
+	if _cerr != nil {
+		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+	}
+
+	return value, goret, _goerr
+}
+
+// ParentRefFormats calls the default implementations of the ref_formats virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret *ContentFormats 
+//
+// Gets the formats that the provider can provide its current contents in.
+func (provider *ContentProviderInstance) ParentRefFormats() *ContentFormats {
+	var carg0 *C.GdkContentProvider
+	var cret  *C.GdkContentFormats // return, full, converted
+
+	parentclass := (*C.GdkContentProviderClass)(classdata.PeekParentClass(UnsafeContentProviderToGlibNone(provider)))
+
+	cret = C._gotk4_gdk4_ContentProvider_virtual_ref_formats(unsafe.Pointer(parentclass.ref_formats), carg0)
+	runtime.KeepAlive(provider)
+
+	var goret *ContentFormats
+
+	goret = UnsafeContentFormatsFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// ParentRefStorableFormats calls the default implementations of the ref_storable_formats virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret *ContentFormats 
+//
+// Gets the formats that the provider suggests other applications to store
+// the data in.
+// 
+// An example of such an application would be a clipboard manager.
+// 
+// This can be assumed to be a subset of [method@Gdk.ContentProvider.ref_formats].
+func (provider *ContentProviderInstance) ParentRefStorableFormats() *ContentFormats {
+	var carg0 *C.GdkContentProvider
+	var cret  *C.GdkContentFormats // return, full, converted
+
+	parentclass := (*C.GdkContentProviderClass)(classdata.PeekParentClass(UnsafeContentProviderToGlibNone(provider)))
+
+	cret = C._gotk4_gdk4_ContentProvider_virtual_ref_storable_formats(unsafe.Pointer(parentclass.ref_storable_formats), carg0)
+	runtime.KeepAlive(provider)
+
+	var goret *ContentFormats
+
+	goret = UnsafeContentFormatsFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// ParentWriteMIMETypeAsync calls the default implementations of the write_mime_type_async virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- cancellable context.Context (nullable): optional `GCancellable` object, %NULL to ignore. 
+// 	- mimeType string: the mime type to provide the data in 
+// 	- stream gio.OutputStream: the `GOutputStream` to write to 
+// 	- ioPriority int32: I/O priority of the request. 
+// 	- callback gio.AsyncReadyCallback (nullable): callback to call when the request is satisfied 
+//
+// Asynchronously writes the contents of @provider to @stream in the given
+// @mime_type.
+// 
+// The given mime type does not need to be listed in the formats returned by
+// [method@Gdk.ContentProvider.ref_formats]. However, if the given `GType` is
+// not supported, `G_IO_ERROR_NOT_SUPPORTED` will be reported.
+// 
+// The given @stream will not be closed.
+func (provider *ContentProviderInstance) ParentWriteMIMETypeAsync(cancellable context.Context, mimeType string, stream gio.OutputStream, ioPriority int32, callback gio.AsyncReadyCallback) {
+	var carg0 *C.GdkContentProvider
+	var carg4 *C.GCancellable       // in, none, converted, nullable
+	var carg1 *C.char               // in, none, string, casted *C.gchar
+	var carg2 *C.GOutputStream      // in, none, converted
+	var carg3 C.int                 // in, none, casted, casted C.gint
+	var carg5 C.GAsyncReadyCallback // callback, scope: async, closure: carg6, nullable
+	var carg6 C.gpointer            // implicit
+
+	parentclass := (*C.GdkContentProviderClass)(classdata.PeekParentClass(UnsafeContentProviderToGlibNone(provider)))
+
+	if cancellable != nil {
+		carg4 = (*C.GCancellable)(gio.UnsafeGCancellableToGlibNone(cancellable))
+	}
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(mimeType)))
+	defer C.free(unsafe.Pointer(carg1))
+	carg2 = (*C.GOutputStream)(gio.UnsafeOutputStreamToGlibNone(stream))
+	carg3 = C.int(ioPriority)
+	if callback != nil {
+		carg5 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
+		carg6 = C.gpointer(userdata.RegisterOnce(callback))
+	}
+
+	C._gotk4_gdk4_ContentProvider_virtual_write_mime_type_async(unsafe.Pointer(parentclass.write_mime_type_async), carg0, carg1, carg2, carg3, carg4, carg5, carg6)
+	runtime.KeepAlive(provider)
+	runtime.KeepAlive(cancellable)
+	runtime.KeepAlive(mimeType)
+	runtime.KeepAlive(stream)
+	runtime.KeepAlive(ioPriority)
+	runtime.KeepAlive(callback)
+}
+
+// ParentWriteMIMETypeFinish calls the default implementations of the write_mime_type_finish virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- result gio.AsyncResult: a `GAsyncResult` 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+// 	- _goerr error (nullable): an error 
+//
+// Finishes an asynchronous write operation.
+// 
+// See [method@Gdk.ContentProvider.write_mime_type_async].
+func (provider *ContentProviderInstance) ParentWriteMIMETypeFinish(result gio.AsyncResult) (bool, error) {
+	var carg0 *C.GdkContentProvider
+	var carg1 *C.GAsyncResult // in, none, converted
+	var cret  C.gboolean      // return
+	var _cerr *C.GError       // out, full, converted, nullable
+
+	parentclass := (*C.GdkContentProviderClass)(classdata.PeekParentClass(UnsafeContentProviderToGlibNone(provider)))
+
+	carg1 = (*C.GAsyncResult)(gio.UnsafeAsyncResultToGlibNone(result))
+
+	cret = C._gotk4_gdk4_ContentProvider_virtual_write_mime_type_finish(unsafe.Pointer(parentclass.write_mime_type_finish), carg0, carg1, &_cerr)
+	runtime.KeepAlive(provider)
+	runtime.KeepAlive(result)
+
+	var goret  bool
+	var _goerr error
+
+	if cret != 0 {
+		goret = true
+	}
+	if _cerr != nil {
+		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
+	}
+
+	return goret, _goerr
+}
+
 // RegisterContentProviderSubClass is used to register a go subclass of GdkContentProvider. For this to work safely please implement the
 // virtual methods required by the implementation.
 func RegisterContentProviderSubClass[InstanceT ContentProvider](
@@ -12922,7 +13641,7 @@ func unsafeWrapContentSerializer(base *gobject.ObjectInstance) *ContentSerialize
 	return &ContentSerializerInstance{
 		ObjectInstance: *base,
 		AsyncResultInstance: gio.AsyncResultInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -22873,10 +23592,10 @@ func unsafeWrapTexture(base *gobject.ObjectInstance) *TextureInstance {
 	return &TextureInstance{
 		ObjectInstance: *base,
 		IconInstance: gio.IconInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		LoadableIconInstance: gio.LoadableIconInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -23447,14 +24166,14 @@ func unsafeWrapDmabufTexture(base *gobject.ObjectInstance) *DmabufTextureInstanc
 		TextureInstance: TextureInstance{
 			ObjectInstance: *base,
 			IconInstance: gio.IconInstance{
-				Instance: *base,
+				ObjectInstance: *base,
 			},
 			LoadableIconInstance: gio.LoadableIconInstance{
-				Instance: *base,
+				ObjectInstance: *base,
 			},
 		},
 		PaintableInstance: PaintableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -23525,14 +24244,14 @@ func unsafeWrapGLTexture(base *gobject.ObjectInstance) *GLTextureInstance {
 		TextureInstance: TextureInstance{
 			ObjectInstance: *base,
 			IconInstance: gio.IconInstance{
-				Instance: *base,
+				ObjectInstance: *base,
 			},
 			LoadableIconInstance: gio.LoadableIconInstance{
-				Instance: *base,
+				ObjectInstance: *base,
 			},
 		},
 		PaintableInstance: PaintableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -23610,14 +24329,14 @@ func unsafeWrapMemoryTexture(base *gobject.ObjectInstance) *MemoryTextureInstanc
 		TextureInstance: TextureInstance{
 			ObjectInstance: *base,
 			IconInstance: gio.IconInstance{
-				Instance: *base,
+				ObjectInstance: *base,
 			},
 			LoadableIconInstance: gio.LoadableIconInstance{
-				Instance: *base,
+				ObjectInstance: *base,
 			},
 		},
 		PaintableInstance: PaintableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }

@@ -13,23 +13,179 @@ type VirtualMethodGenerator struct {
 	Doc SubGenerator
 	*typesystem.VirtualMethod
 
-	// ParamConverters contains all the c->go in param converters needed for the go call
-	ParamConverters convert.ConverterList
+	// VirtualParamConverters contains all the c->go in param converters needed for the go call
+	// in the virtual method trampoline
+	VirtualParamConverters convert.ConverterList
 
-	// ReturnConverters contains all the go->c converters needed for the returns and out params
-	ReturnConverters convert.ConverterList
+	// VirtualReturnConverters contains all the go->c converters needed for the returns and out params
+	VirtualReturnConverters convert.ConverterList
+
+	// ParentParamConverters contains all the go->c in param converters needed for the cgo call for the parent
+	// virtual method. This does not contain the instance parameter, as we handle it specially in the parent call
+	// block.
+	ParentParamConverters convert.ConverterList
+
+	// ParentReturnConverters contains all the c->go converters needed for the returns and out params for the parent
+	// virtual method.
+	ParentReturnConverters convert.ConverterList
 }
+
+var _ MethodGenerator = (*VirtualMethodGenerator)(nil)
 
 // Generate implements VirtualMethodGenerator.
 func (v *VirtualMethodGenerator) Generate(w *file.Package) {
 	v.generateExport(w)
+
 	v.generateParentCall(w)
+}
+
+func (v *VirtualMethodGenerator) generateParentCallDoc(w file.File) {
+	fmt.Fprintf(w.Go(), "// %s calls the default implementations of the %s virtual method.\n", v.ParentName, v.Invoker.CIndentifier())
+	fmt.Fprintf(w.Go(), "// This functions behavior is not defined when the parent does not implement the virtual method.\n")
+	v.Doc.Generate(w.Go())
 }
 
 func (v *VirtualMethodGenerator) generateParentCall(w *file.Package) {
 	v.generateParentCPreamble(w)
+
+	v.generateParentCallDoc(w)
+
+	// register extern callback types:
+	for _, param := range v.GoParameters {
+		if cb, ok := param.Type.Type.(*typesystem.Callback); ok {
+			w.RegisterExternCallback(cb)
+		}
+	}
+
+	for _, param := range v.CParameters() {
+		if param.Skip || param.Implicit {
+			continue
+		}
+		w.GoImportType(param.Type)
+	}
+
+	if v.CReturn != nil {
+		w.GoImportType(v.CReturn.Type)
+	}
+
+	w.GoImport("runtime")
+
+	fmt.Fprintf(w.Go(), "%s {\n", v.ParentGoSignature())
+	w.Go().Indent()
+
+	var decls file.DeclarationWriter
+
+	if v.InstanceParam != nil {
+		fmt.Fprintf(&decls, "var\t%s\t%s\n", v.InstanceParam.CName, v.InstanceParam.CGoType())
+	}
+	for i, param := range v.GoParameters {
+		conv := v.ParentParamConverters[i]
+		fmt.Fprintf(&decls, "var\t%s\t%s\t// %s\n", param.CName, param.CGoType(), conv.Metadata())
+
+		// w.GoImportType(param.Type) // don't import here, as the CGo type does not reference the namespace
+	}
+
+	// params that are part of the C call still need to be declared
+	for _, v := range v.CParameters() {
+		if v.Skip {
+			fmt.Fprintf(&decls, "var\t%s\t%s\t// skipped\n", v.CName, v.CGoType())
+		}
+	}
+
+	for i, ret := range v.GoReturns {
+		conv := v.ParentReturnConverters[i]
+		fmt.Fprintf(&decls, "var\t%s\t%s\t// %s\n", ret.CName, ret.CGoType(), conv.Metadata())
+
+		// w.GoImportType(ret.Type) // don't import here, as the CGo type does not reference the namespace
+	}
+
+	decls.WriteTo(w.Go())
+
+	w.Go().NewSection()
+
+	if v.isVirtualOnClass() {
+		fmt.Fprintf(w.Go(), "parentclass := (*%s)(classdata.PeekParentClass(%s(%s)))\n", v.parentTypeStruct().CGoType(0), v.Parent.GoUnsafeToGlibNoneFunction(), v.InstanceParam.GoName)
+	} else {
+		fmt.Fprintf(w.Go(), "parentclass := (*%s)(classdata.PeekParentInterface(%s(%s), uint64(%s)))\n", v.parentTypeStruct().CGoType(0), v.Parent.GoUnsafeToGlibNoneFunction(), v.InstanceParam.GoName, v.parentInterfaceGType())
+	}
+
+	w.Go().NewSection()
+	for _, c := range v.ParentParamConverters {
+		c.Convert(w)
+	}
+
+	w.Go().NewSection()
+
+	fmt.Fprintln(w.Go(), v.ParentCGoCall())
+
+	fmt.Fprintf(w.Go(), "runtime.KeepAlive(%s)\n", v.InstanceParam.GoName)
+	for _, param := range v.GoParameters {
+		if param.Implicit || param.Skip {
+			continue
+		}
+		fmt.Fprintf(w.Go(), "runtime.KeepAlive(%s)\n", param.GoName)
+	}
+
+	w.Go().NewSection()
+
+	// declare the go counterpart of the c return if there is one
+	for _, ret := range v.GoReturns {
+		if ret.Implicit || ret.Skip {
+			continue
+		}
+		fmt.Fprintf(&decls, "var\t%s\t%s\n", ret.GoName, ret.GoType())
+	}
+	decls.WriteTo(w.Go())
+
+	w.Go().NewSection()
+
+	for _, c := range v.ParentReturnConverters {
+		c.Convert(w)
+	}
+
+	w.Go().NewSection()
+
+	if len(v.GoReturns) > 0 {
+		fmt.Fprintf(w.Go(), "return %s\n", v.GoReturns.GoIdentifiers())
+	}
+
+	w.Go().Unindent()
+	fmt.Fprintf(w.Go(), "}\n\n")
 }
 
+func (c *VirtualMethodGenerator) isVirtualOnClass() bool {
+	switch c.Parent.(type) {
+	case *typesystem.Class:
+		return true
+	case *typesystem.Interface:
+		return false
+	default:
+		panic(fmt.Sprintf("unexpected parent type %T", c.Parent))
+	}
+}
+
+func (c *VirtualMethodGenerator) parentInterfaceGType() string {
+	switch p := c.Parent.(type) {
+	case *typesystem.Interface:
+		return p.GoTypeName()
+	default:
+		panic(fmt.Sprintf("unexpected parent interface type %T", p))
+	}
+}
+
+func (c *VirtualMethodGenerator) parentTypeStruct() *typesystem.Record {
+	switch p := c.Parent.(type) {
+	case *typesystem.Interface:
+		return p.TypeStruct
+	case *typesystem.Class:
+		return p.TypeStruct
+	default:
+		panic(fmt.Sprintf("unexpected parent type %T", p))
+	}
+}
+
+// generateParentCPreamble generates the C function that is able to call the C function pointer
+// on the parent class.
 func (v *VirtualMethodGenerator) generateParentCPreamble(w *file.Package) {
 
 	var paramDecls []string
@@ -119,7 +275,7 @@ func (vf *VirtualMethodGenerator) generateTrampoline(w file.File, genericType, g
 		if param.Implicit || param.Skip {
 			continue
 		}
-		conv := vf.ParamConverters[i]
+		conv := vf.VirtualParamConverters[i]
 		fmt.Fprintf(&decls, "var\t%s\t%s\t// %s\n", param.GoName, param.GoType(), conv.Metadata())
 
 		w.GoImportType(param.Type)
@@ -130,7 +286,7 @@ func (vf *VirtualMethodGenerator) generateTrampoline(w file.File, genericType, g
 			continue
 		}
 
-		conv := vf.ReturnConverters[i]
+		conv := vf.VirtualReturnConverters[i]
 		fmt.Fprintf(&decls, "var\t%s\t%s\t// %s\n", ret.GoName, ret.GoType(), conv.Metadata())
 
 		w.GoImportType(ret.Type)
@@ -143,7 +299,7 @@ func (vf *VirtualMethodGenerator) generateTrampoline(w file.File, genericType, g
 	// convert the instanceparam manually here, because we need another cast:
 	fmt.Fprintf(w.Go(), "%s = %s(unsafe.Pointer(%s)).(%s)\n", vf.InstanceParam.GoName, vf.Parent.GoUnsafeFromGlibBorrowFunction(), vf.InstanceParam.CName, genericType)
 
-	for _, c := range vf.ParamConverters {
+	for _, c := range vf.VirtualParamConverters {
 		c.Convert(w)
 	}
 
@@ -159,7 +315,7 @@ func (vf *VirtualMethodGenerator) generateTrampoline(w file.File, genericType, g
 
 	w.Go().NewSection()
 
-	for _, c := range vf.ReturnConverters {
+	for _, c := range vf.VirtualReturnConverters {
 		c.Convert(w)
 	}
 
@@ -248,18 +404,75 @@ func (m *VirtualMethodGenerator) GoIdentifiers() string {
 	return strings.Join(params, ", ")
 }
 
+// ParentGoSignature returns a string of the go function signature for the parent call.
+func (m *VirtualMethodGenerator) ParentGoSignature() string {
+	recv := fmt.Sprintf(" (%s *%s)", m.InstanceParam.GoName, m.InstanceParam.Type.NamespacedGoType(0))
+
+	var ret string
+	if len(m.GoReturns) == 1 {
+		ret = " " + m.GoReturns[0].GoType()
+	} else if len(m.GoReturns) > 1 {
+		ret = " (" + m.GoReturns.GoTypes() + ")"
+	}
+
+	return fmt.Sprintf("func%s %s(%s)%s", recv, m.ParentName, m.GoParameters.GoDeclarations(), ret)
+}
+
+// ParentCGoCall returns a string of the cgo function call.
+func (m *VirtualMethodGenerator) ParentCGoCall() string {
+	creturn := m.CGoReturn()
+	var ret string
+	if creturn != nil {
+		ret = fmt.Sprintf("%s = ", creturn.CName)
+	}
+
+	var callExpressions []string
+
+	callExpressions = append(callExpressions, fmt.Sprintf("unsafe.Pointer(parentclass.%s)", m.Invoker.CGoIndentifier()))
+
+	for _, param := range m.CParameters() {
+		if param.Direction == "out" {
+			callExpressions = append(callExpressions, "&"+param.CName)
+		} else {
+			callExpressions = append(callExpressions, param.CName)
+		}
+	}
+
+	return fmt.Sprintf("%sC.%s(%s)", ret, m.ParentTrampolineName, strings.Join(callExpressions, ", "))
+}
+
+// GenerateInterfaceSignature implements MethodGenerator.
+func (v *VirtualMethodGenerator) GenerateInterfaceSignature(w file.File) {
+	v.generateParentCallDoc(w)
+
+	var ret string
+	if len(v.GoReturns) == 1 {
+		ret = " " + v.GoReturns[0].GoType()
+	} else if len(v.GoReturns) > 1 {
+		ret = " (" + v.GoReturns.GoTypes() + ")"
+	}
+
+	fmt.Fprintf(w.Go(), "%s(%s)%s\n", v.ParentName, v.GoParameters.GoDeclarations(), ret)
+}
+
 func NewVirtualMethodGenerator(vfunc *typesystem.VirtualMethod) *VirtualMethodGenerator {
 	g := &VirtualMethodGenerator{
-		Doc:           NewParametersGoDocGenerator(vfunc),
+		Doc:           NewGoDocGenerator(vfunc),
 		VirtualMethod: vfunc,
 	}
 
 	for _, param := range vfunc.GoParameters {
-		g.ParamConverters = append(g.ParamConverters, convert.NewCToGoConverter(param))
+		g.VirtualParamConverters = append(g.VirtualParamConverters, convert.NewCToGoConverter(param))
+	}
+	for _, param := range vfunc.GoReturns {
+		g.VirtualReturnConverters = append(g.VirtualReturnConverters, convert.NewGoToCConverter(param))
 	}
 
+	for _, param := range vfunc.GoParameters {
+		g.ParentParamConverters = append(g.ParentParamConverters, convert.NewGoToCConverter(param))
+	}
 	for _, param := range vfunc.GoReturns {
-		g.ReturnConverters = append(g.ReturnConverters, convert.NewGoToCConverter(param))
+		g.ParentReturnConverters = append(g.ParentReturnConverters, convert.NewCToGoConverter(param))
 	}
 
 	return g

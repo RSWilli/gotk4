@@ -3168,6 +3168,13 @@ func (f HyperlinkStateFlags) String() string {
 }
 
 // Function wraps AtkFunction
+// 
+// The function takes the following parameters:
+// 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
 //
 // An AtkFunction is a function definition used for padding which has
 // been added to class and interface structures to allow for expansion
@@ -3175,6 +3182,15 @@ func (f HyperlinkStateFlags) String() string {
 type Function func() (goret bool)
 
 // KeySnoopFunc wraps AtkKeySnoopFunc
+// 
+// The function takes the following parameters:
+// 
+// 	- event *KeyEventStruct: an AtkKeyEventStruct containing information about the key event for which
+// notification is being given. 
+// 
+// The function returns the following values:
+// 
+// 	- goret int32 
 //
 // An #AtkKeySnoopFunc is a type of callback which is called whenever a key event occurs,
 // if registered via atk_add_key_event_listener.  It allows for pre-emptive
@@ -3464,7 +3480,7 @@ func RemoveKeyEventListener(listenerId uint) {
 // ActionInstance is the instance type used by all types implementing AtkAction. It is used internally by the bindings. Users should use the interface [Action] instead.
 type ActionInstance struct {
 	_ [0]func() // equal guard
-	Instance gobject.ObjectInstance
+	gobject.ObjectInstance
 }
 
 var _ Action = (*ActionInstance)(nil)
@@ -3492,6 +3508,7 @@ var _ Action = (*ActionInstance)(nil)
 // exposing redundant actions if possible.  By convention we have been
 // using "mouse centric" terminology for #AtkAction names.
 type Action interface {
+	gobject.Object
 	upcastToAtkAction() *ActionInstance
 
 	// DoAction wraps atk_action_do_action
@@ -3611,13 +3628,133 @@ type Action interface {
 	//
 	// Sets a description of the specified action of the object.
 	SetActionDescription(int32, string) bool
+
+	// chain up virtual methods:
+
+	// ParentDoAction calls the default implementations of the do_action virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- i int32: the action index corresponding to the action to be performed 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	//
+	// Perform the specified action on the object.
+	ParentDoAction(i int32) bool
+	// ParentGetDescription calls the default implementations of the get_description virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- i int32: the action index corresponding to the action to be performed 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret string (nullable) 
+	//
+	// Returns a description of the specified action of the object.
+	ParentGetDescription(i int32) string
+	// ParentGetKeybinding calls the default implementations of the get_keybinding virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- i int32: the action index corresponding to the action to be performed 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret string (nullable) 
+	//
+	// Gets the keybinding which can be used to activate this action, if one
+	// exists. The string returned should contain localized, human-readable,
+	// key sequences as they would appear when displayed on screen. It must
+	// be in the format "mnemonic;sequence;shortcut".
+	// 
+	// - The mnemonic key activates the object if it is presently enabled onscreen.
+	//   This typically corresponds to the underlined letter within the widget.
+	//   Example: "n" in a traditional "New..." menu item or the "a" in "Apply" for
+	//   a button.
+	// - The sequence is the full list of keys which invoke the action even if the
+	//   relevant element is not currently shown on screen. For instance, for a menu
+	//   item the sequence is the keybindings used to open the parent menus before
+	//   invoking. The sequence string is colon-delimited. Example: "Alt+F:N" in a
+	//   traditional "New..." menu item.
+	// - The shortcut, if it exists, will invoke the same action without showing
+	//   the component or its enclosing menus or dialogs. Example: "Ctrl+N" in a
+	//   traditional "New..." menu item.
+	// 
+	// Example: For a traditional "New..." menu item, the expected return value
+	// would be: "N;Alt+F:N;Ctrl+N" for the English locale and "N;Alt+D:N;Strg+N"
+	// for the German locale. If, hypothetically, this menu item lacked a mnemonic,
+	// it would be represented by ";;Ctrl+N" and ";;Strg+N" respectively.
+	ParentGetKeybinding(i int32) string
+	// ParentGetLocalizedName calls the default implementations of the get_localized_name virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- i int32: the action index corresponding to the action to be performed 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret string (nullable) 
+	//
+	// Returns the localized name of the specified action of the object.
+	ParentGetLocalizedName(i int32) string
+	// ParentGetNActions calls the default implementations of the get_n_actions virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret int32 
+	//
+	// Gets the number of accessible actions available on the object.
+	// If there are more than one, the first one is considered the
+	// "default" action of the object.
+	ParentGetNActions() int32
+	// ParentGetName calls the default implementations of the get_name virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- i int32: the action index corresponding to the action to be performed 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret string (nullable) 
+	//
+	// Returns a non-localized string naming the specified action of the
+	// object. This name is generally not descriptive of the end result
+	// of the action, but instead names the 'interaction type' which the
+	// object supports. By convention, the above strings should be used to
+	// represent the actions which correspond to the common point-and-click
+	// interaction techniques of the same name: i.e.
+	// "click", "press", "release", "drag", "drop", "popup", etc.
+	// The "popup" action should be used to pop up a context menu for the
+	// object, if one exists.
+	// 
+	// For technical reasons, some toolkits cannot guarantee that the
+	// reported action is actually 'bound' to a nontrivial user event;
+	// i.e. the result of some actions via atk_action_do_action() may be
+	// NIL.
+	ParentGetName(i int32) string
+	// ParentSetDescription calls the default implementations of the set_description virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- i int32: the action index corresponding to the action to be performed 
+	// 	- desc string: the description to be assigned to this action 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	//
+	// Sets a description of the specified action of the object.
+	ParentSetDescription(i int32, desc string) bool
 }
 
 var _ Action = (*ActionInstance)(nil)
 
 func unsafeWrapAction(base *gobject.ObjectInstance) *ActionInstance {
 	return &ActionInstance{
-		Instance: *base,
+		ObjectInstance: *base,
 	}
 }
 
@@ -3647,13 +3784,13 @@ func UnsafeActionFromGlibBorrow(c unsafe.Pointer) Action {
 // UnsafeActionToGlibNone is used to convert the instance to it's C value AtkAction. This is used by the bindings internally.
 func UnsafeActionToGlibNone(c Action) unsafe.Pointer {
 	i := c.upcastToAtkAction()
-	return gobject.UnsafeObjectToGlibNone(&i.Instance)
+	return gobject.UnsafeObjectToGlibNone(i)
 }
 
 // UnsafeActionToGlibFull is used to convert the instance to it's C value AtkAction, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeActionToGlibFull(c Action) unsafe.Pointer {
 	i := c.upcastToAtkAction()
-	return gobject.UnsafeObjectToGlibFull(&i.Instance)
+	return gobject.UnsafeObjectToGlibFull(i)
 }
 
 // DoAction wraps atk_action_do_action
@@ -3923,6 +4060,8 @@ type ActionOverrides[Instance Action] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
+	//
+	// Perform the specified action on the object.
 	DoAction func(Instance, int32) bool
 	// GetDescription allows you to override the implementation of the virtual method get_description.
 	// The function takes the following parameters:
@@ -3932,6 +4071,8 @@ type ActionOverrides[Instance Action] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret string (nullable) 
+	//
+	// Returns a description of the specified action of the object.
 	GetDescription func(Instance, int32) string
 	// GetKeybinding allows you to override the implementation of the virtual method get_keybinding.
 	// The function takes the following parameters:
@@ -3941,6 +4082,29 @@ type ActionOverrides[Instance Action] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret string (nullable) 
+	//
+	// Gets the keybinding which can be used to activate this action, if one
+	// exists. The string returned should contain localized, human-readable,
+	// key sequences as they would appear when displayed on screen. It must
+	// be in the format "mnemonic;sequence;shortcut".
+	// 
+	// - The mnemonic key activates the object if it is presently enabled onscreen.
+	//   This typically corresponds to the underlined letter within the widget.
+	//   Example: "n" in a traditional "New..." menu item or the "a" in "Apply" for
+	//   a button.
+	// - The sequence is the full list of keys which invoke the action even if the
+	//   relevant element is not currently shown on screen. For instance, for a menu
+	//   item the sequence is the keybindings used to open the parent menus before
+	//   invoking. The sequence string is colon-delimited. Example: "Alt+F:N" in a
+	//   traditional "New..." menu item.
+	// - The shortcut, if it exists, will invoke the same action without showing
+	//   the component or its enclosing menus or dialogs. Example: "Ctrl+N" in a
+	//   traditional "New..." menu item.
+	// 
+	// Example: For a traditional "New..." menu item, the expected return value
+	// would be: "N;Alt+F:N;Ctrl+N" for the English locale and "N;Alt+D:N;Strg+N"
+	// for the German locale. If, hypothetically, this menu item lacked a mnemonic,
+	// it would be represented by ";;Ctrl+N" and ";;Strg+N" respectively.
 	GetKeybinding func(Instance, int32) string
 	// GetLocalizedName allows you to override the implementation of the virtual method get_localized_name.
 	// The function takes the following parameters:
@@ -3950,11 +4114,17 @@ type ActionOverrides[Instance Action] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret string (nullable) 
+	//
+	// Returns the localized name of the specified action of the object.
 	GetLocalizedName func(Instance, int32) string
 	// GetNActions allows you to override the implementation of the virtual method get_n_actions.
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
+	//
+	// Gets the number of accessible actions available on the object.
+	// If there are more than one, the first one is considered the
+	// "default" action of the object.
 	GetNActions func(Instance) int32
 	// GetName allows you to override the implementation of the virtual method get_name.
 	// The function takes the following parameters:
@@ -3964,6 +4134,21 @@ type ActionOverrides[Instance Action] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret string (nullable) 
+	//
+	// Returns a non-localized string naming the specified action of the
+	// object. This name is generally not descriptive of the end result
+	// of the action, but instead names the 'interaction type' which the
+	// object supports. By convention, the above strings should be used to
+	// represent the actions which correspond to the common point-and-click
+	// interaction techniques of the same name: i.e.
+	// "click", "press", "release", "drag", "drop", "popup", etc.
+	// The "popup" action should be used to pop up a context menu for the
+	// object, if one exists.
+	// 
+	// For technical reasons, some toolkits cannot guarantee that the
+	// reported action is actually 'bound' to a nontrivial user event;
+	// i.e. the result of some actions via atk_action_do_action() may be
+	// NIL.
 	GetName func(Instance, int32) string
 	// SetDescription allows you to override the implementation of the virtual method set_description.
 	// The function takes the following parameters:
@@ -3974,6 +4159,8 @@ type ActionOverrides[Instance Action] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
+	//
+	// Sets a description of the specified action of the object.
 	SetDescription func(Instance, int32, string) bool
 }
 
@@ -4153,10 +4340,272 @@ func UnsafeApplyActionOverrides[Instance Action](gclass unsafe.Pointer, override
 	}
 }
 
+// ParentDoAction calls the default implementations of the do_action virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- i int32: the action index corresponding to the action to be performed 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Perform the specified action on the object.
+func (action *ActionInstance) ParentDoAction(i int32) bool {
+	var carg0 *C.AtkAction
+	var carg1 C.gint     // in, none, casted
+	var cret  C.gboolean // return
+
+	parentclass := (*C.AtkActionIface)(classdata.PeekParentInterface(UnsafeActionToGlibNone(action), uint64(TypeAction)))
+
+	carg1 = C.gint(i)
+
+	cret = C._gotk4_atk1_Action_virtual_do_action(unsafe.Pointer(parentclass.do_action), carg0, carg1)
+	runtime.KeepAlive(action)
+	runtime.KeepAlive(i)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// ParentGetDescription calls the default implementations of the get_description virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- i int32: the action index corresponding to the action to be performed 
+// 
+// The function returns the following values:
+// 
+// 	- goret string (nullable) 
+//
+// Returns a description of the specified action of the object.
+func (action *ActionInstance) ParentGetDescription(i int32) string {
+	var carg0 *C.AtkAction
+	var carg1 C.gint   // in, none, casted
+	var cret  *C.gchar // return, none, string, nullable-string
+
+	parentclass := (*C.AtkActionIface)(classdata.PeekParentInterface(UnsafeActionToGlibNone(action), uint64(TypeAction)))
+
+	carg1 = C.gint(i)
+
+	cret = C._gotk4_atk1_Action_virtual_get_description(unsafe.Pointer(parentclass.get_description), carg0, carg1)
+	runtime.KeepAlive(action)
+	runtime.KeepAlive(i)
+
+	var goret string
+
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
+
+	return goret
+}
+
+// ParentGetKeybinding calls the default implementations of the get_keybinding virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- i int32: the action index corresponding to the action to be performed 
+// 
+// The function returns the following values:
+// 
+// 	- goret string (nullable) 
+//
+// Gets the keybinding which can be used to activate this action, if one
+// exists. The string returned should contain localized, human-readable,
+// key sequences as they would appear when displayed on screen. It must
+// be in the format "mnemonic;sequence;shortcut".
+// 
+// - The mnemonic key activates the object if it is presently enabled onscreen.
+//   This typically corresponds to the underlined letter within the widget.
+//   Example: "n" in a traditional "New..." menu item or the "a" in "Apply" for
+//   a button.
+// - The sequence is the full list of keys which invoke the action even if the
+//   relevant element is not currently shown on screen. For instance, for a menu
+//   item the sequence is the keybindings used to open the parent menus before
+//   invoking. The sequence string is colon-delimited. Example: "Alt+F:N" in a
+//   traditional "New..." menu item.
+// - The shortcut, if it exists, will invoke the same action without showing
+//   the component or its enclosing menus or dialogs. Example: "Ctrl+N" in a
+//   traditional "New..." menu item.
+// 
+// Example: For a traditional "New..." menu item, the expected return value
+// would be: "N;Alt+F:N;Ctrl+N" for the English locale and "N;Alt+D:N;Strg+N"
+// for the German locale. If, hypothetically, this menu item lacked a mnemonic,
+// it would be represented by ";;Ctrl+N" and ";;Strg+N" respectively.
+func (action *ActionInstance) ParentGetKeybinding(i int32) string {
+	var carg0 *C.AtkAction
+	var carg1 C.gint   // in, none, casted
+	var cret  *C.gchar // return, none, string, nullable-string
+
+	parentclass := (*C.AtkActionIface)(classdata.PeekParentInterface(UnsafeActionToGlibNone(action), uint64(TypeAction)))
+
+	carg1 = C.gint(i)
+
+	cret = C._gotk4_atk1_Action_virtual_get_keybinding(unsafe.Pointer(parentclass.get_keybinding), carg0, carg1)
+	runtime.KeepAlive(action)
+	runtime.KeepAlive(i)
+
+	var goret string
+
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
+
+	return goret
+}
+
+// ParentGetLocalizedName calls the default implementations of the get_localized_name virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- i int32: the action index corresponding to the action to be performed 
+// 
+// The function returns the following values:
+// 
+// 	- goret string (nullable) 
+//
+// Returns the localized name of the specified action of the object.
+func (action *ActionInstance) ParentGetLocalizedName(i int32) string {
+	var carg0 *C.AtkAction
+	var carg1 C.gint   // in, none, casted
+	var cret  *C.gchar // return, none, string, nullable-string
+
+	parentclass := (*C.AtkActionIface)(classdata.PeekParentInterface(UnsafeActionToGlibNone(action), uint64(TypeAction)))
+
+	carg1 = C.gint(i)
+
+	cret = C._gotk4_atk1_Action_virtual_get_localized_name(unsafe.Pointer(parentclass.get_localized_name), carg0, carg1)
+	runtime.KeepAlive(action)
+	runtime.KeepAlive(i)
+
+	var goret string
+
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
+
+	return goret
+}
+
+// ParentGetNActions calls the default implementations of the get_n_actions virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret int32 
+//
+// Gets the number of accessible actions available on the object.
+// If there are more than one, the first one is considered the
+// "default" action of the object.
+func (action *ActionInstance) ParentGetNActions() int32 {
+	var carg0 *C.AtkAction
+	var cret  C.gint // return, none, casted
+
+	parentclass := (*C.AtkActionIface)(classdata.PeekParentInterface(UnsafeActionToGlibNone(action), uint64(TypeAction)))
+
+	cret = C._gotk4_atk1_Action_virtual_get_n_actions(unsafe.Pointer(parentclass.get_n_actions), carg0)
+	runtime.KeepAlive(action)
+
+	var goret int32
+
+	goret = int32(cret)
+
+	return goret
+}
+
+// ParentGetName calls the default implementations of the get_name virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- i int32: the action index corresponding to the action to be performed 
+// 
+// The function returns the following values:
+// 
+// 	- goret string (nullable) 
+//
+// Returns a non-localized string naming the specified action of the
+// object. This name is generally not descriptive of the end result
+// of the action, but instead names the 'interaction type' which the
+// object supports. By convention, the above strings should be used to
+// represent the actions which correspond to the common point-and-click
+// interaction techniques of the same name: i.e.
+// "click", "press", "release", "drag", "drop", "popup", etc.
+// The "popup" action should be used to pop up a context menu for the
+// object, if one exists.
+// 
+// For technical reasons, some toolkits cannot guarantee that the
+// reported action is actually 'bound' to a nontrivial user event;
+// i.e. the result of some actions via atk_action_do_action() may be
+// NIL.
+func (action *ActionInstance) ParentGetName(i int32) string {
+	var carg0 *C.AtkAction
+	var carg1 C.gint   // in, none, casted
+	var cret  *C.gchar // return, none, string, nullable-string
+
+	parentclass := (*C.AtkActionIface)(classdata.PeekParentInterface(UnsafeActionToGlibNone(action), uint64(TypeAction)))
+
+	carg1 = C.gint(i)
+
+	cret = C._gotk4_atk1_Action_virtual_get_name(unsafe.Pointer(parentclass.get_name), carg0, carg1)
+	runtime.KeepAlive(action)
+	runtime.KeepAlive(i)
+
+	var goret string
+
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
+
+	return goret
+}
+
+// ParentSetDescription calls the default implementations of the set_description virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- i int32: the action index corresponding to the action to be performed 
+// 	- desc string: the description to be assigned to this action 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Sets a description of the specified action of the object.
+func (action *ActionInstance) ParentSetDescription(i int32, desc string) bool {
+	var carg0 *C.AtkAction
+	var carg1 C.gint     // in, none, casted
+	var carg2 *C.gchar   // in, none, string
+	var cret  C.gboolean // return
+
+	parentclass := (*C.AtkActionIface)(classdata.PeekParentInterface(UnsafeActionToGlibNone(action), uint64(TypeAction)))
+
+	carg1 = C.gint(i)
+	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(desc)))
+	defer C.free(unsafe.Pointer(carg2))
+
+	cret = C._gotk4_atk1_Action_virtual_set_description(unsafe.Pointer(parentclass.set_description), carg0, carg1, carg2)
+	runtime.KeepAlive(action)
+	runtime.KeepAlive(i)
+	runtime.KeepAlive(desc)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
 // ComponentInstance is the instance type used by all types implementing AtkComponent. It is used internally by the bindings. Users should use the interface [Component] instead.
 type ComponentInstance struct {
 	_ [0]func() // equal guard
-	Instance gobject.ObjectInstance
+	gobject.ObjectInstance
 }
 
 var _ Component = (*ComponentInstance)(nil)
@@ -4178,6 +4627,7 @@ var _ Component = (*ComponentInstance)(nil)
 // transparent background, in which case text glyph bounding box
 // information is provided by #AtkText.
 type Component interface {
+	gobject.Object
 	upcastToAtkComponent() *ComponentInstance
 
 	// Contains wraps atk_component_contains
@@ -4354,13 +4804,191 @@ type Component interface {
 	// The 'bounds-changed" signal is emitted when the position or
 	// size of the component changes.
 	ConnectBoundsChanged(func(Component, Rectangle)) gobject.SignalHandle
+
+	// chain up virtual methods:
+
+	// ParentBoundsChanged calls the default implementations of the bounds_changed virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- bounds *Rectangle 
+	ParentBoundsChanged(bounds *Rectangle)
+	// ParentContains calls the default implementations of the contains virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- x int32: x coordinate 
+	// 	- y int32: y coordinate 
+	// 	- coordType CoordType: specifies whether the coordinates are relative to the screen
+	// or to the components top level window 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	//
+	// Checks whether the specified point is within the extent of the @component.
+	// 
+	// Toolkit implementor note: ATK provides a default implementation for
+	// this virtual method. In general there are little reason to
+	// re-implement it.
+	ParentContains(x int32, y int32, coordType CoordType) bool
+	// ParentGetAlpha calls the default implementations of the get_alpha virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret float64 
+	//
+	// Returns the alpha value (i.e. the opacity) for this
+	// @component, on a scale from 0 (fully transparent) to 1.0
+	// (fully opaque).
+	ParentGetAlpha() float64
+	// ParentGetExtents calls the default implementations of the get_extents virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- coordType CoordType: specifies whether the coordinates are relative to the screen
+	// or to the components top level window 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- x int32: address of #gint to put x coordinate 
+	// 	- y int32: address of #gint to put y coordinate 
+	// 	- width int32: address of #gint to put width 
+	// 	- height int32: address of #gint to put height 
+	//
+	// Gets the rectangle which gives the extent of the @component.
+	// 
+	// If the extent can not be obtained (e.g. a non-embedded plug or missing
+	// support), all of x, y, width, height are set to -1.
+	ParentGetExtents(coordType CoordType) (int32, int32, int32, int32)
+	// ParentGetLayer calls the default implementations of the get_layer virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret Layer 
+	//
+	// Gets the layer of the component.
+	ParentGetLayer() Layer
+	// ParentGetMDIZOrder calls the default implementations of the get_mdi_zorder virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret int32 
+	//
+	// Gets the zorder of the component. The value G_MININT will be returned
+	// if the layer of the component is not ATK_LAYER_MDI or ATK_LAYER_WINDOW.
+	ParentGetMDIZOrder() int32
+	// ParentGrabFocus calls the default implementations of the grab_focus virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	//
+	// Grabs focus for this @component.
+	ParentGrabFocus() bool
+	// ParentRefAccessibleAtPoint calls the default implementations of the ref_accessible_at_point virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- x int32: x coordinate 
+	// 	- y int32: y coordinate 
+	// 	- coordType CoordType: specifies whether the coordinates are relative to the screen
+	// or to the components top level window 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret Object (nullable) 
+	//
+	// Gets a reference to the accessible child, if one exists, at the
+	// coordinate point specified by @x and @y.
+	ParentRefAccessibleAtPoint(x int32, y int32, coordType CoordType) Object
+	// ParentScrollTo calls the default implementations of the scroll_to virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- typ ScrollType: specify where the object should be made visible. 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	//
+	// Makes @component visible on the screen by scrolling all necessary parents.
+	// 
+	// Contrary to atk_component_set_position, this does not actually move
+	// @component in its parent, this only makes the parents scroll so that the
+	// object shows up on the screen, given its current position within the parents.
+	ParentScrollTo(typ ScrollType) bool
+	// ParentScrollToPoint calls the default implementations of the scroll_to_point virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- coords CoordType: specify whether coordinates are relative to the screen or to the
+	// parent object. 
+	// 	- x int32: x-position where to scroll to 
+	// 	- y int32: y-position where to scroll to 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	//
+	// Move the top-left of @component to a given position of the screen by
+	// scrolling all necessary parents.
+	ParentScrollToPoint(coords CoordType, x int32, y int32) bool
+	// ParentSetExtents calls the default implementations of the set_extents virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- x int32: x coordinate 
+	// 	- y int32: y coordinate 
+	// 	- width int32: width to set for @component 
+	// 	- height int32: height to set for @component 
+	// 	- coordType CoordType: specifies whether the coordinates are relative to the screen
+	// or to the components top level window 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	//
+	// Sets the extents of @component.
+	ParentSetExtents(x int32, y int32, width int32, height int32, coordType CoordType) bool
+	// ParentSetPosition calls the default implementations of the set_position virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- x int32: x coordinate 
+	// 	- y int32: y coordinate 
+	// 	- coordType CoordType: specifies whether the coordinates are relative to the screen
+	// or to the component's top level window 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	//
+	// Sets the position of @component.
+	// 
+	// Contrary to atk_component_scroll_to, this does not trigger any scrolling,
+	// this just moves @component in its parent.
+	ParentSetPosition(x int32, y int32, coordType CoordType) bool
+	// ParentSetSize calls the default implementations of the set_size virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- width int32: width to set for @component 
+	// 	- height int32: height to set for @component 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	//
+	// Set the size of the @component in terms of width and height.
+	ParentSetSize(width int32, height int32) bool
 }
 
 var _ Component = (*ComponentInstance)(nil)
 
 func unsafeWrapComponent(base *gobject.ObjectInstance) *ComponentInstance {
 	return &ComponentInstance{
-		Instance: *base,
+		ObjectInstance: *base,
 	}
 }
 
@@ -4390,13 +5018,13 @@ func UnsafeComponentFromGlibBorrow(c unsafe.Pointer) Component {
 // UnsafeComponentToGlibNone is used to convert the instance to it's C value AtkComponent. This is used by the bindings internally.
 func UnsafeComponentToGlibNone(c Component) unsafe.Pointer {
 	i := c.upcastToAtkComponent()
-	return gobject.UnsafeObjectToGlibNone(&i.Instance)
+	return gobject.UnsafeObjectToGlibNone(i)
 }
 
 // UnsafeComponentToGlibFull is used to convert the instance to it's C value AtkComponent, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeComponentToGlibFull(c Component) unsafe.Pointer {
 	i := c.upcastToAtkComponent()
-	return gobject.UnsafeObjectToGlibFull(&i.Instance)
+	return gobject.UnsafeObjectToGlibFull(i)
 }
 
 // Contains wraps atk_component_contains
@@ -4841,7 +5469,7 @@ func (component *ComponentInstance) SetSize(width int32, height int32) bool {
 // The 'bounds-changed" signal is emitted when the position or
 // size of the component changes.
 func (o *ComponentInstance) ConnectBoundsChanged(fn func(Component, Rectangle)) gobject.SignalHandle {
-	return o.Instance.Connect("bounds-changed", fn)
+	return o.Connect("bounds-changed", fn)
 }
 
 // ComponentOverrides is the struct used to override the default implementation of virtual methods.
@@ -4863,11 +5491,21 @@ type ComponentOverrides[Instance Component] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
+	//
+	// Checks whether the specified point is within the extent of the @component.
+	// 
+	// Toolkit implementor note: ATK provides a default implementation for
+	// this virtual method. In general there are little reason to
+	// re-implement it.
 	Contains func(Instance, int32, int32, CoordType) bool
 	// GetAlpha allows you to override the implementation of the virtual method get_alpha.
 	// The function returns the following values:
 	// 
 	// 	- goret float64 
+	//
+	// Returns the alpha value (i.e. the opacity) for this
+	// @component, on a scale from 0 (fully transparent) to 1.0
+	// (fully opaque).
 	GetAlpha func(Instance) float64
 	// GetExtents allows you to override the implementation of the virtual method get_extents.
 	// The function takes the following parameters:
@@ -4881,21 +5519,33 @@ type ComponentOverrides[Instance Component] struct {
 	// 	- y int32: address of #gint to put y coordinate 
 	// 	- width int32: address of #gint to put width 
 	// 	- height int32: address of #gint to put height 
+	//
+	// Gets the rectangle which gives the extent of the @component.
+	// 
+	// If the extent can not be obtained (e.g. a non-embedded plug or missing
+	// support), all of x, y, width, height are set to -1.
 	GetExtents func(Instance, CoordType) (int32, int32, int32, int32)
 	// GetLayer allows you to override the implementation of the virtual method get_layer.
 	// The function returns the following values:
 	// 
 	// 	- goret Layer 
+	//
+	// Gets the layer of the component.
 	GetLayer func(Instance) Layer
 	// GetMDIZOrder allows you to override the implementation of the virtual method get_mdi_zorder.
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
+	//
+	// Gets the zorder of the component. The value G_MININT will be returned
+	// if the layer of the component is not ATK_LAYER_MDI or ATK_LAYER_WINDOW.
 	GetMDIZOrder func(Instance) int32
 	// GrabFocus allows you to override the implementation of the virtual method grab_focus.
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
+	//
+	// Grabs focus for this @component.
 	GrabFocus func(Instance) bool
 	// RefAccessibleAtPoint allows you to override the implementation of the virtual method ref_accessible_at_point.
 	// The function takes the following parameters:
@@ -4908,6 +5558,9 @@ type ComponentOverrides[Instance Component] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret Object (nullable) 
+	//
+	// Gets a reference to the accessible child, if one exists, at the
+	// coordinate point specified by @x and @y.
 	RefAccessibleAtPoint func(Instance, int32, int32, CoordType) Object
 	// ScrollTo allows you to override the implementation of the virtual method scroll_to.
 	// The function takes the following parameters:
@@ -4917,6 +5570,12 @@ type ComponentOverrides[Instance Component] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
+	//
+	// Makes @component visible on the screen by scrolling all necessary parents.
+	// 
+	// Contrary to atk_component_set_position, this does not actually move
+	// @component in its parent, this only makes the parents scroll so that the
+	// object shows up on the screen, given its current position within the parents.
 	ScrollTo func(Instance, ScrollType) bool
 	// ScrollToPoint allows you to override the implementation of the virtual method scroll_to_point.
 	// The function takes the following parameters:
@@ -4929,6 +5588,9 @@ type ComponentOverrides[Instance Component] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
+	//
+	// Move the top-left of @component to a given position of the screen by
+	// scrolling all necessary parents.
 	ScrollToPoint func(Instance, CoordType, int32, int32) bool
 	// SetExtents allows you to override the implementation of the virtual method set_extents.
 	// The function takes the following parameters:
@@ -4943,6 +5605,8 @@ type ComponentOverrides[Instance Component] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
+	//
+	// Sets the extents of @component.
 	SetExtents func(Instance, int32, int32, int32, int32, CoordType) bool
 	// SetPosition allows you to override the implementation of the virtual method set_position.
 	// The function takes the following parameters:
@@ -4955,6 +5619,11 @@ type ComponentOverrides[Instance Component] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
+	//
+	// Sets the position of @component.
+	// 
+	// Contrary to atk_component_scroll_to, this does not trigger any scrolling,
+	// this just moves @component in its parent.
 	SetPosition func(Instance, int32, int32, CoordType) bool
 	// SetSize allows you to override the implementation of the virtual method set_size.
 	// The function takes the following parameters:
@@ -4965,6 +5634,8 @@ type ComponentOverrides[Instance Component] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
+	//
+	// Set the size of the @component in terms of width and height.
 	SetSize func(Instance, int32, int32) bool
 }
 
@@ -5293,10 +5964,473 @@ func UnsafeApplyComponentOverrides[Instance Component](gclass unsafe.Pointer, ov
 	}
 }
 
+// ParentBoundsChanged calls the default implementations of the bounds_changed virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- bounds *Rectangle 
+func (component *ComponentInstance) ParentBoundsChanged(bounds *Rectangle) {
+	var carg0 *C.AtkComponent
+	var carg1 *C.AtkRectangle // in, none, converted
+
+	parentclass := (*C.AtkComponentIface)(classdata.PeekParentInterface(UnsafeComponentToGlibNone(component), uint64(TypeComponent)))
+
+	carg1 = (*C.AtkRectangle)(UnsafeRectangleToGlibNone(bounds))
+
+	C._gotk4_atk1_Component_virtual_bounds_changed(unsafe.Pointer(parentclass.bounds_changed), carg0, carg1)
+	runtime.KeepAlive(component)
+	runtime.KeepAlive(bounds)
+}
+
+// ParentContains calls the default implementations of the contains virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- x int32: x coordinate 
+// 	- y int32: y coordinate 
+// 	- coordType CoordType: specifies whether the coordinates are relative to the screen
+// or to the components top level window 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Checks whether the specified point is within the extent of the @component.
+// 
+// Toolkit implementor note: ATK provides a default implementation for
+// this virtual method. In general there are little reason to
+// re-implement it.
+func (component *ComponentInstance) ParentContains(x int32, y int32, coordType CoordType) bool {
+	var carg0 *C.AtkComponent
+	var carg1 C.gint         // in, none, casted
+	var carg2 C.gint         // in, none, casted
+	var carg3 C.AtkCoordType // in, none, casted
+	var cret  C.gboolean     // return
+
+	parentclass := (*C.AtkComponentIface)(classdata.PeekParentInterface(UnsafeComponentToGlibNone(component), uint64(TypeComponent)))
+
+	carg1 = C.gint(x)
+	carg2 = C.gint(y)
+	carg3 = C.AtkCoordType(coordType)
+
+	cret = C._gotk4_atk1_Component_virtual_contains(unsafe.Pointer(parentclass.contains), carg0, carg1, carg2, carg3)
+	runtime.KeepAlive(component)
+	runtime.KeepAlive(x)
+	runtime.KeepAlive(y)
+	runtime.KeepAlive(coordType)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// ParentGetAlpha calls the default implementations of the get_alpha virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret float64 
+//
+// Returns the alpha value (i.e. the opacity) for this
+// @component, on a scale from 0 (fully transparent) to 1.0
+// (fully opaque).
+func (component *ComponentInstance) ParentGetAlpha() float64 {
+	var carg0 *C.AtkComponent
+	var cret  C.gdouble // return, none, casted
+
+	parentclass := (*C.AtkComponentIface)(classdata.PeekParentInterface(UnsafeComponentToGlibNone(component), uint64(TypeComponent)))
+
+	cret = C._gotk4_atk1_Component_virtual_get_alpha(unsafe.Pointer(parentclass.get_alpha), carg0)
+	runtime.KeepAlive(component)
+
+	var goret float64
+
+	goret = float64(cret)
+
+	return goret
+}
+
+// ParentGetExtents calls the default implementations of the get_extents virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- coordType CoordType: specifies whether the coordinates are relative to the screen
+// or to the components top level window 
+// 
+// The function returns the following values:
+// 
+// 	- x int32: address of #gint to put x coordinate 
+// 	- y int32: address of #gint to put y coordinate 
+// 	- width int32: address of #gint to put width 
+// 	- height int32: address of #gint to put height 
+//
+// Gets the rectangle which gives the extent of the @component.
+// 
+// If the extent can not be obtained (e.g. a non-embedded plug or missing
+// support), all of x, y, width, height are set to -1.
+func (component *ComponentInstance) ParentGetExtents(coordType CoordType) (int32, int32, int32, int32) {
+	var carg0 *C.AtkComponent
+	var carg5 C.AtkCoordType // in, none, casted
+	var carg1 C.gint         // out, full, casted
+	var carg2 C.gint         // out, full, casted
+	var carg3 C.gint         // out, full, casted
+	var carg4 C.gint         // out, full, casted
+
+	parentclass := (*C.AtkComponentIface)(classdata.PeekParentInterface(UnsafeComponentToGlibNone(component), uint64(TypeComponent)))
+
+	carg5 = C.AtkCoordType(coordType)
+
+	C._gotk4_atk1_Component_virtual_get_extents(unsafe.Pointer(parentclass.get_extents), carg0, &carg1, &carg2, &carg3, &carg4, carg5)
+	runtime.KeepAlive(component)
+	runtime.KeepAlive(coordType)
+
+	var x      int32
+	var y      int32
+	var width  int32
+	var height int32
+
+	x = int32(carg1)
+	y = int32(carg2)
+	width = int32(carg3)
+	height = int32(carg4)
+
+	return x, y, width, height
+}
+
+// ParentGetLayer calls the default implementations of the get_layer virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret Layer 
+//
+// Gets the layer of the component.
+func (component *ComponentInstance) ParentGetLayer() Layer {
+	var carg0 *C.AtkComponent
+	var cret  C.AtkLayer // return, none, casted
+
+	parentclass := (*C.AtkComponentIface)(classdata.PeekParentInterface(UnsafeComponentToGlibNone(component), uint64(TypeComponent)))
+
+	cret = C._gotk4_atk1_Component_virtual_get_layer(unsafe.Pointer(parentclass.get_layer), carg0)
+	runtime.KeepAlive(component)
+
+	var goret Layer
+
+	goret = Layer(cret)
+
+	return goret
+}
+
+// ParentGetMDIZOrder calls the default implementations of the get_mdi_zorder virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret int32 
+//
+// Gets the zorder of the component. The value G_MININT will be returned
+// if the layer of the component is not ATK_LAYER_MDI or ATK_LAYER_WINDOW.
+func (component *ComponentInstance) ParentGetMDIZOrder() int32 {
+	var carg0 *C.AtkComponent
+	var cret  C.gint // return, none, casted
+
+	parentclass := (*C.AtkComponentIface)(classdata.PeekParentInterface(UnsafeComponentToGlibNone(component), uint64(TypeComponent)))
+
+	cret = C._gotk4_atk1_Component_virtual_get_mdi_zorder(unsafe.Pointer(parentclass.get_mdi_zorder), carg0)
+	runtime.KeepAlive(component)
+
+	var goret int32
+
+	goret = int32(cret)
+
+	return goret
+}
+
+// ParentGrabFocus calls the default implementations of the grab_focus virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Grabs focus for this @component.
+func (component *ComponentInstance) ParentGrabFocus() bool {
+	var carg0 *C.AtkComponent
+	var cret  C.gboolean // return
+
+	parentclass := (*C.AtkComponentIface)(classdata.PeekParentInterface(UnsafeComponentToGlibNone(component), uint64(TypeComponent)))
+
+	cret = C._gotk4_atk1_Component_virtual_grab_focus(unsafe.Pointer(parentclass.grab_focus), carg0)
+	runtime.KeepAlive(component)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// ParentRefAccessibleAtPoint calls the default implementations of the ref_accessible_at_point virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- x int32: x coordinate 
+// 	- y int32: y coordinate 
+// 	- coordType CoordType: specifies whether the coordinates are relative to the screen
+// or to the components top level window 
+// 
+// The function returns the following values:
+// 
+// 	- goret Object (nullable) 
+//
+// Gets a reference to the accessible child, if one exists, at the
+// coordinate point specified by @x and @y.
+func (component *ComponentInstance) ParentRefAccessibleAtPoint(x int32, y int32, coordType CoordType) Object {
+	var carg0 *C.AtkComponent
+	var carg1 C.gint         // in, none, casted
+	var carg2 C.gint         // in, none, casted
+	var carg3 C.AtkCoordType // in, none, casted
+	var cret  *C.AtkObject   // return, full, converted, nullable
+
+	parentclass := (*C.AtkComponentIface)(classdata.PeekParentInterface(UnsafeComponentToGlibNone(component), uint64(TypeComponent)))
+
+	carg1 = C.gint(x)
+	carg2 = C.gint(y)
+	carg3 = C.AtkCoordType(coordType)
+
+	cret = C._gotk4_atk1_Component_virtual_ref_accessible_at_point(unsafe.Pointer(parentclass.ref_accessible_at_point), carg0, carg1, carg2, carg3)
+	runtime.KeepAlive(component)
+	runtime.KeepAlive(x)
+	runtime.KeepAlive(y)
+	runtime.KeepAlive(coordType)
+
+	var goret Object
+
+	if cret != nil {
+		goret = UnsafeObjectFromGlibFull(unsafe.Pointer(cret))
+	}
+
+	return goret
+}
+
+// ParentScrollTo calls the default implementations of the scroll_to virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- typ ScrollType: specify where the object should be made visible. 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Makes @component visible on the screen by scrolling all necessary parents.
+// 
+// Contrary to atk_component_set_position, this does not actually move
+// @component in its parent, this only makes the parents scroll so that the
+// object shows up on the screen, given its current position within the parents.
+func (component *ComponentInstance) ParentScrollTo(typ ScrollType) bool {
+	var carg0 *C.AtkComponent
+	var carg1 C.AtkScrollType // in, none, casted
+	var cret  C.gboolean      // return
+
+	parentclass := (*C.AtkComponentIface)(classdata.PeekParentInterface(UnsafeComponentToGlibNone(component), uint64(TypeComponent)))
+
+	carg1 = C.AtkScrollType(typ)
+
+	cret = C._gotk4_atk1_Component_virtual_scroll_to(unsafe.Pointer(parentclass.scroll_to), carg0, carg1)
+	runtime.KeepAlive(component)
+	runtime.KeepAlive(typ)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// ParentScrollToPoint calls the default implementations of the scroll_to_point virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- coords CoordType: specify whether coordinates are relative to the screen or to the
+// parent object. 
+// 	- x int32: x-position where to scroll to 
+// 	- y int32: y-position where to scroll to 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Move the top-left of @component to a given position of the screen by
+// scrolling all necessary parents.
+func (component *ComponentInstance) ParentScrollToPoint(coords CoordType, x int32, y int32) bool {
+	var carg0 *C.AtkComponent
+	var carg1 C.AtkCoordType // in, none, casted
+	var carg2 C.gint         // in, none, casted
+	var carg3 C.gint         // in, none, casted
+	var cret  C.gboolean     // return
+
+	parentclass := (*C.AtkComponentIface)(classdata.PeekParentInterface(UnsafeComponentToGlibNone(component), uint64(TypeComponent)))
+
+	carg1 = C.AtkCoordType(coords)
+	carg2 = C.gint(x)
+	carg3 = C.gint(y)
+
+	cret = C._gotk4_atk1_Component_virtual_scroll_to_point(unsafe.Pointer(parentclass.scroll_to_point), carg0, carg1, carg2, carg3)
+	runtime.KeepAlive(component)
+	runtime.KeepAlive(coords)
+	runtime.KeepAlive(x)
+	runtime.KeepAlive(y)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// ParentSetExtents calls the default implementations of the set_extents virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- x int32: x coordinate 
+// 	- y int32: y coordinate 
+// 	- width int32: width to set for @component 
+// 	- height int32: height to set for @component 
+// 	- coordType CoordType: specifies whether the coordinates are relative to the screen
+// or to the components top level window 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Sets the extents of @component.
+func (component *ComponentInstance) ParentSetExtents(x int32, y int32, width int32, height int32, coordType CoordType) bool {
+	var carg0 *C.AtkComponent
+	var carg1 C.gint         // in, none, casted
+	var carg2 C.gint         // in, none, casted
+	var carg3 C.gint         // in, none, casted
+	var carg4 C.gint         // in, none, casted
+	var carg5 C.AtkCoordType // in, none, casted
+	var cret  C.gboolean     // return
+
+	parentclass := (*C.AtkComponentIface)(classdata.PeekParentInterface(UnsafeComponentToGlibNone(component), uint64(TypeComponent)))
+
+	carg1 = C.gint(x)
+	carg2 = C.gint(y)
+	carg3 = C.gint(width)
+	carg4 = C.gint(height)
+	carg5 = C.AtkCoordType(coordType)
+
+	cret = C._gotk4_atk1_Component_virtual_set_extents(unsafe.Pointer(parentclass.set_extents), carg0, carg1, carg2, carg3, carg4, carg5)
+	runtime.KeepAlive(component)
+	runtime.KeepAlive(x)
+	runtime.KeepAlive(y)
+	runtime.KeepAlive(width)
+	runtime.KeepAlive(height)
+	runtime.KeepAlive(coordType)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// ParentSetPosition calls the default implementations of the set_position virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- x int32: x coordinate 
+// 	- y int32: y coordinate 
+// 	- coordType CoordType: specifies whether the coordinates are relative to the screen
+// or to the component's top level window 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Sets the position of @component.
+// 
+// Contrary to atk_component_scroll_to, this does not trigger any scrolling,
+// this just moves @component in its parent.
+func (component *ComponentInstance) ParentSetPosition(x int32, y int32, coordType CoordType) bool {
+	var carg0 *C.AtkComponent
+	var carg1 C.gint         // in, none, casted
+	var carg2 C.gint         // in, none, casted
+	var carg3 C.AtkCoordType // in, none, casted
+	var cret  C.gboolean     // return
+
+	parentclass := (*C.AtkComponentIface)(classdata.PeekParentInterface(UnsafeComponentToGlibNone(component), uint64(TypeComponent)))
+
+	carg1 = C.gint(x)
+	carg2 = C.gint(y)
+	carg3 = C.AtkCoordType(coordType)
+
+	cret = C._gotk4_atk1_Component_virtual_set_position(unsafe.Pointer(parentclass.set_position), carg0, carg1, carg2, carg3)
+	runtime.KeepAlive(component)
+	runtime.KeepAlive(x)
+	runtime.KeepAlive(y)
+	runtime.KeepAlive(coordType)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// ParentSetSize calls the default implementations of the set_size virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- width int32: width to set for @component 
+// 	- height int32: height to set for @component 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Set the size of the @component in terms of width and height.
+func (component *ComponentInstance) ParentSetSize(width int32, height int32) bool {
+	var carg0 *C.AtkComponent
+	var carg1 C.gint     // in, none, casted
+	var carg2 C.gint     // in, none, casted
+	var cret  C.gboolean // return
+
+	parentclass := (*C.AtkComponentIface)(classdata.PeekParentInterface(UnsafeComponentToGlibNone(component), uint64(TypeComponent)))
+
+	carg1 = C.gint(width)
+	carg2 = C.gint(height)
+
+	cret = C._gotk4_atk1_Component_virtual_set_size(unsafe.Pointer(parentclass.set_size), carg0, carg1, carg2)
+	runtime.KeepAlive(component)
+	runtime.KeepAlive(width)
+	runtime.KeepAlive(height)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
 // DocumentInstance is the instance type used by all types implementing AtkDocument. It is used internally by the bindings. Users should use the interface [Document] instead.
 type DocumentInstance struct {
 	_ [0]func() // equal guard
-	Instance gobject.ObjectInstance
+	gobject.ObjectInstance
 }
 
 var _ Document = (*DocumentInstance)(nil)
@@ -5314,6 +6448,7 @@ var _ Document = (*DocumentInstance)(nil)
 // cases where one document contains "embedded content" which can
 // reasonably be considered a document in its own right.
 type Document interface {
+	gobject.Object
 	upcastToAtkDocument() *DocumentInstance
 
 	// GetAttributeValue wraps atk_document_get_attribute_value
@@ -5400,13 +6535,59 @@ type Document interface {
 	// signal should follow, which clients may await before
 	// interrogating ATK for the latest document content.
 	ConnectReload(func(Document)) gobject.SignalHandle
+
+	// chain up virtual methods:
+
+	// ParentGetCurrentPageNumber calls the default implementations of the get_current_page_number virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret int32 
+	//
+	// Retrieves the current page number inside @document.
+	ParentGetCurrentPageNumber() int32
+	// ParentGetDocumentAttributeValue calls the default implementations of the get_document_attribute_value virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- attributeName string: a character string representing the name of the attribute
+	//   whose value is being queried. 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret string (nullable) 
+	//
+	// Retrieves the value of the given @attribute_name inside @document.
+	ParentGetDocumentAttributeValue(attributeName string) string
+	// ParentGetPageCount calls the default implementations of the get_page_count virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret int32 
+	//
+	// Retrieves the total number of pages inside @document.
+	ParentGetPageCount() int32
+	// ParentSetDocumentAttribute calls the default implementations of the set_document_attribute virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- attributeName string: a character string representing the name of the attribute
+	//   whose value is being set. 
+	// 	- attributeValue string: a string value to be associated with @attribute_name. 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	//
+	// Sets the value for the given @attribute_name inside @document.
+	ParentSetDocumentAttribute(attributeName string, attributeValue string) bool
 }
 
 var _ Document = (*DocumentInstance)(nil)
 
 func unsafeWrapDocument(base *gobject.ObjectInstance) *DocumentInstance {
 	return &DocumentInstance{
-		Instance: *base,
+		ObjectInstance: *base,
 	}
 }
 
@@ -5436,13 +6617,13 @@ func UnsafeDocumentFromGlibBorrow(c unsafe.Pointer) Document {
 // UnsafeDocumentToGlibNone is used to convert the instance to it's C value AtkDocument. This is used by the bindings internally.
 func UnsafeDocumentToGlibNone(c Document) unsafe.Pointer {
 	i := c.upcastToAtkDocument()
-	return gobject.UnsafeObjectToGlibNone(&i.Instance)
+	return gobject.UnsafeObjectToGlibNone(i)
 }
 
 // UnsafeDocumentToGlibFull is used to convert the instance to it's C value AtkDocument, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeDocumentToGlibFull(c Document) unsafe.Pointer {
 	i := c.upcastToAtkDocument()
-	return gobject.UnsafeObjectToGlibFull(&i.Instance)
+	return gobject.UnsafeObjectToGlibFull(i)
 }
 
 // GetAttributeValue wraps atk_document_get_attribute_value
@@ -5570,7 +6751,7 @@ func (document *DocumentInstance) SetAttributeValue(attributeName string, attrib
 // change to one of the document attributes returned by
 // atk_document_get_attributes.
 func (o *DocumentInstance) ConnectDocumentAttributeChanged(fn func(Document, string, string)) gobject.SignalHandle {
-	return o.Instance.Connect("document-attribute-changed", fn)
+	return o.Connect("document-attribute-changed", fn)
 }
 
 // ConnectLoadComplete connects the provided callback to the "load-complete" signal
@@ -5585,7 +6766,7 @@ func (o *DocumentInstance) ConnectDocumentAttributeChanged(fn func(Document, str
 // (Dynamic document contents should be exposed via other
 // signals.)
 func (o *DocumentInstance) ConnectLoadComplete(fn func(Document)) gobject.SignalHandle {
-	return o.Instance.Connect("load-complete", fn)
+	return o.Connect("load-complete", fn)
 }
 
 // ConnectLoadStopped connects the provided callback to the "load-stopped" signal
@@ -5597,7 +6778,7 @@ func (o *DocumentInstance) ConnectLoadComplete(fn func(Document)) gobject.Signal
 // while blocking on a file or network read) unless a
 // user-significant timeout has occurred.
 func (o *DocumentInstance) ConnectLoadStopped(fn func(Document)) gobject.SignalHandle {
-	return o.Instance.Connect("load-stopped", fn)
+	return o.Connect("load-stopped", fn)
 }
 
 // ConnectPageChanged connects the provided callback to the "page-changed" signal
@@ -5606,7 +6787,7 @@ func (o *DocumentInstance) ConnectLoadStopped(fn func(Document)) gobject.SignalH
 // a document changes, e.g. pressing page up/down in a document
 // viewer.
 func (o *DocumentInstance) ConnectPageChanged(fn func(Document, int32)) gobject.SignalHandle {
-	return o.Instance.Connect("page-changed", fn)
+	return o.Connect("page-changed", fn)
 }
 
 // ConnectReload connects the provided callback to the "reload" signal
@@ -5617,7 +6798,7 @@ func (o *DocumentInstance) ConnectPageChanged(fn func(Document, int32)) gobject.
 // signal should follow, which clients may await before
 // interrogating ATK for the latest document content.
 func (o *DocumentInstance) ConnectReload(fn func(Document)) gobject.SignalHandle {
-	return o.Instance.Connect("reload", fn)
+	return o.Connect("reload", fn)
 }
 
 // DocumentOverrides is the struct used to override the default implementation of virtual methods.
@@ -5627,6 +6808,8 @@ type DocumentOverrides[Instance Document] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
+	//
+	// Retrieves the current page number inside @document.
 	GetCurrentPageNumber func(Instance) int32
 	// GetDocumentAttributeValue allows you to override the implementation of the virtual method get_document_attribute_value.
 	// The function takes the following parameters:
@@ -5637,11 +6820,15 @@ type DocumentOverrides[Instance Document] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret string (nullable) 
+	//
+	// Retrieves the value of the given @attribute_name inside @document.
 	GetDocumentAttributeValue func(Instance, string) string
 	// GetPageCount allows you to override the implementation of the virtual method get_page_count.
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
+	//
+	// Retrieves the total number of pages inside @document.
 	GetPageCount func(Instance) int32
 	// SetDocumentAttribute allows you to override the implementation of the virtual method set_document_attribute.
 	// The function takes the following parameters:
@@ -5653,6 +6840,8 @@ type DocumentOverrides[Instance Document] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
+	//
+	// Sets the value for the given @attribute_name inside @document.
 	SetDocumentAttribute func(Instance, string, string) bool
 }
 
@@ -5753,10 +6942,131 @@ func UnsafeApplyDocumentOverrides[Instance Document](gclass unsafe.Pointer, over
 	}
 }
 
+// ParentGetCurrentPageNumber calls the default implementations of the get_current_page_number virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret int32 
+//
+// Retrieves the current page number inside @document.
+func (document *DocumentInstance) ParentGetCurrentPageNumber() int32 {
+	var carg0 *C.AtkDocument
+	var cret  C.gint // return, none, casted
+
+	parentclass := (*C.AtkDocumentIface)(classdata.PeekParentInterface(UnsafeDocumentToGlibNone(document), uint64(TypeDocument)))
+
+	cret = C._gotk4_atk1_Document_virtual_get_current_page_number(unsafe.Pointer(parentclass.get_current_page_number), carg0)
+	runtime.KeepAlive(document)
+
+	var goret int32
+
+	goret = int32(cret)
+
+	return goret
+}
+
+// ParentGetDocumentAttributeValue calls the default implementations of the get_document_attribute_value virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- attributeName string: a character string representing the name of the attribute
+//   whose value is being queried. 
+// 
+// The function returns the following values:
+// 
+// 	- goret string (nullable) 
+//
+// Retrieves the value of the given @attribute_name inside @document.
+func (document *DocumentInstance) ParentGetDocumentAttributeValue(attributeName string) string {
+	var carg0 *C.AtkDocument
+	var carg1 *C.gchar // in, none, string
+	var cret  *C.gchar // return, none, string, nullable-string
+
+	parentclass := (*C.AtkDocumentIface)(classdata.PeekParentInterface(UnsafeDocumentToGlibNone(document), uint64(TypeDocument)))
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(attributeName)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	cret = C._gotk4_atk1_Document_virtual_get_document_attribute_value(unsafe.Pointer(parentclass.get_document_attribute_value), carg0, carg1)
+	runtime.KeepAlive(document)
+	runtime.KeepAlive(attributeName)
+
+	var goret string
+
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
+
+	return goret
+}
+
+// ParentGetPageCount calls the default implementations of the get_page_count virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret int32 
+//
+// Retrieves the total number of pages inside @document.
+func (document *DocumentInstance) ParentGetPageCount() int32 {
+	var carg0 *C.AtkDocument
+	var cret  C.gint // return, none, casted
+
+	parentclass := (*C.AtkDocumentIface)(classdata.PeekParentInterface(UnsafeDocumentToGlibNone(document), uint64(TypeDocument)))
+
+	cret = C._gotk4_atk1_Document_virtual_get_page_count(unsafe.Pointer(parentclass.get_page_count), carg0)
+	runtime.KeepAlive(document)
+
+	var goret int32
+
+	goret = int32(cret)
+
+	return goret
+}
+
+// ParentSetDocumentAttribute calls the default implementations of the set_document_attribute virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- attributeName string: a character string representing the name of the attribute
+//   whose value is being set. 
+// 	- attributeValue string: a string value to be associated with @attribute_name. 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Sets the value for the given @attribute_name inside @document.
+func (document *DocumentInstance) ParentSetDocumentAttribute(attributeName string, attributeValue string) bool {
+	var carg0 *C.AtkDocument
+	var carg1 *C.gchar   // in, none, string
+	var carg2 *C.gchar   // in, none, string
+	var cret  C.gboolean // return
+
+	parentclass := (*C.AtkDocumentIface)(classdata.PeekParentInterface(UnsafeDocumentToGlibNone(document), uint64(TypeDocument)))
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(attributeName)))
+	defer C.free(unsafe.Pointer(carg1))
+	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(attributeValue)))
+	defer C.free(unsafe.Pointer(carg2))
+
+	cret = C._gotk4_atk1_Document_virtual_set_document_attribute(unsafe.Pointer(parentclass.set_document_attribute), carg0, carg1, carg2)
+	runtime.KeepAlive(document)
+	runtime.KeepAlive(attributeName)
+	runtime.KeepAlive(attributeValue)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
 // EditableTextInstance is the instance type used by all types implementing AtkEditableText. It is used internally by the bindings. Users should use the interface [EditableText] instead.
 type EditableTextInstance struct {
 	_ [0]func() // equal guard
-	Instance gobject.ObjectInstance
+	gobject.ObjectInstance
 }
 
 var _ EditableText = (*EditableTextInstance)(nil)
@@ -5775,6 +7085,7 @@ var _ EditableText = (*EditableTextInstance)(nil)
 // 
 // See [iface@AtkText]
 type EditableText interface {
+	gobject.Object
 	upcastToAtkEditableText() *EditableTextInstance
 
 	// CopyText wraps atk_editable_text_copy_text
@@ -5834,13 +7145,73 @@ type EditableText interface {
 	//
 	// Set text contents of @text.
 	SetTextContents(string)
+
+	// chain up virtual methods:
+
+	// ParentCopyText calls the default implementations of the copy_text virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- startPos int32: start position 
+	// 	- endPos int32: end position 
+	//
+	// Copy text from @start_pos up to, but not including @end_pos
+	// to the clipboard.
+	ParentCopyText(startPos int32, endPos int32)
+	// ParentCutText calls the default implementations of the cut_text virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- startPos int32: start position 
+	// 	- endPos int32: end position 
+	//
+	// Copy text from @start_pos up to, but not including @end_pos
+	// to the clipboard and then delete from the widget.
+	ParentCutText(startPos int32, endPos int32)
+	// ParentDeleteText calls the default implementations of the delete_text virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- startPos int32: start position 
+	// 	- endPos int32: end position 
+	//
+	// Delete text @start_pos up to, but not including @end_pos.
+	ParentDeleteText(startPos int32, endPos int32)
+	// ParentInsertText calls the default implementations of the insert_text virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- str string: the text to insert 
+	// 	- length int32: the length of text to insert, in bytes 
+	// 	- position *int32: The caller initializes this to
+	// the position at which to insert the text. After the call it
+	// points at the position after the newly inserted text. 
+	//
+	// Insert text at a given position.
+	ParentInsertText(str string, length int32, position *int32)
+	// ParentPasteText calls the default implementations of the paste_text virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- position int32: position to paste 
+	//
+	// Paste text from clipboard to specified @position.
+	ParentPasteText(position int32)
+	// ParentSetTextContents calls the default implementations of the set_text_contents virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- str string: string to set for text contents of @text 
+	//
+	// Set text contents of @text.
+	ParentSetTextContents(str string)
 }
 
 var _ EditableText = (*EditableTextInstance)(nil)
 
 func unsafeWrapEditableText(base *gobject.ObjectInstance) *EditableTextInstance {
 	return &EditableTextInstance{
-		Instance: *base,
+		ObjectInstance: *base,
 	}
 }
 
@@ -5870,13 +7241,13 @@ func UnsafeEditableTextFromGlibBorrow(c unsafe.Pointer) EditableText {
 // UnsafeEditableTextToGlibNone is used to convert the instance to it's C value AtkEditableText. This is used by the bindings internally.
 func UnsafeEditableTextToGlibNone(c EditableText) unsafe.Pointer {
 	i := c.upcastToAtkEditableText()
-	return gobject.UnsafeObjectToGlibNone(&i.Instance)
+	return gobject.UnsafeObjectToGlibNone(i)
 }
 
 // UnsafeEditableTextToGlibFull is used to convert the instance to it's C value AtkEditableText, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeEditableTextToGlibFull(c EditableText) unsafe.Pointer {
 	i := c.upcastToAtkEditableText()
-	return gobject.UnsafeObjectToGlibFull(&i.Instance)
+	return gobject.UnsafeObjectToGlibFull(i)
 }
 
 // CopyText wraps atk_editable_text_copy_text
@@ -6029,18 +7400,26 @@ type EditableTextOverrides[Instance EditableText] struct {
 	// 
 	// 	- startPos int32: start position 
 	// 	- endPos int32: end position 
+	//
+	// Copy text from @start_pos up to, but not including @end_pos
+	// to the clipboard.
 	CopyText func(Instance, int32, int32)
 	// CutText allows you to override the implementation of the virtual method cut_text.
 	// The function takes the following parameters:
 	// 
 	// 	- startPos int32: start position 
 	// 	- endPos int32: end position 
+	//
+	// Copy text from @start_pos up to, but not including @end_pos
+	// to the clipboard and then delete from the widget.
 	CutText func(Instance, int32, int32)
 	// DeleteText allows you to override the implementation of the virtual method delete_text.
 	// The function takes the following parameters:
 	// 
 	// 	- startPos int32: start position 
 	// 	- endPos int32: end position 
+	//
+	// Delete text @start_pos up to, but not including @end_pos.
 	DeleteText func(Instance, int32, int32)
 	// InsertText allows you to override the implementation of the virtual method insert_text.
 	// The function takes the following parameters:
@@ -6050,16 +7429,22 @@ type EditableTextOverrides[Instance EditableText] struct {
 	// 	- position *int32: The caller initializes this to
 	// the position at which to insert the text. After the call it
 	// points at the position after the newly inserted text. 
+	//
+	// Insert text at a given position.
 	InsertText func(Instance, string, int32, *int32)
 	// PasteText allows you to override the implementation of the virtual method paste_text.
 	// The function takes the following parameters:
 	// 
 	// 	- position int32: position to paste 
+	//
+	// Paste text from clipboard to specified @position.
 	PasteText func(Instance, int32)
 	// SetTextContents allows you to override the implementation of the virtual method set_text_contents.
 	// The function takes the following parameters:
 	// 
 	// 	- str string: string to set for text contents of @text 
+	//
+	// Set text contents of @text.
 	SetTextContents func(Instance, string)
 }
 
@@ -6183,10 +7568,158 @@ func UnsafeApplyEditableTextOverrides[Instance EditableText](gclass unsafe.Point
 	}
 }
 
+// ParentCopyText calls the default implementations of the copy_text virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- startPos int32: start position 
+// 	- endPos int32: end position 
+//
+// Copy text from @start_pos up to, but not including @end_pos
+// to the clipboard.
+func (text *EditableTextInstance) ParentCopyText(startPos int32, endPos int32) {
+	var carg0 *C.AtkEditableText
+	var carg1 C.gint // in, none, casted
+	var carg2 C.gint // in, none, casted
+
+	parentclass := (*C.AtkEditableTextIface)(classdata.PeekParentInterface(UnsafeEditableTextToGlibNone(text), uint64(TypeEditableText)))
+
+	carg1 = C.gint(startPos)
+	carg2 = C.gint(endPos)
+
+	C._gotk4_atk1_EditableText_virtual_copy_text(unsafe.Pointer(parentclass.copy_text), carg0, carg1, carg2)
+	runtime.KeepAlive(text)
+	runtime.KeepAlive(startPos)
+	runtime.KeepAlive(endPos)
+}
+
+// ParentCutText calls the default implementations of the cut_text virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- startPos int32: start position 
+// 	- endPos int32: end position 
+//
+// Copy text from @start_pos up to, but not including @end_pos
+// to the clipboard and then delete from the widget.
+func (text *EditableTextInstance) ParentCutText(startPos int32, endPos int32) {
+	var carg0 *C.AtkEditableText
+	var carg1 C.gint // in, none, casted
+	var carg2 C.gint // in, none, casted
+
+	parentclass := (*C.AtkEditableTextIface)(classdata.PeekParentInterface(UnsafeEditableTextToGlibNone(text), uint64(TypeEditableText)))
+
+	carg1 = C.gint(startPos)
+	carg2 = C.gint(endPos)
+
+	C._gotk4_atk1_EditableText_virtual_cut_text(unsafe.Pointer(parentclass.cut_text), carg0, carg1, carg2)
+	runtime.KeepAlive(text)
+	runtime.KeepAlive(startPos)
+	runtime.KeepAlive(endPos)
+}
+
+// ParentDeleteText calls the default implementations of the delete_text virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- startPos int32: start position 
+// 	- endPos int32: end position 
+//
+// Delete text @start_pos up to, but not including @end_pos.
+func (text *EditableTextInstance) ParentDeleteText(startPos int32, endPos int32) {
+	var carg0 *C.AtkEditableText
+	var carg1 C.gint // in, none, casted
+	var carg2 C.gint // in, none, casted
+
+	parentclass := (*C.AtkEditableTextIface)(classdata.PeekParentInterface(UnsafeEditableTextToGlibNone(text), uint64(TypeEditableText)))
+
+	carg1 = C.gint(startPos)
+	carg2 = C.gint(endPos)
+
+	C._gotk4_atk1_EditableText_virtual_delete_text(unsafe.Pointer(parentclass.delete_text), carg0, carg1, carg2)
+	runtime.KeepAlive(text)
+	runtime.KeepAlive(startPos)
+	runtime.KeepAlive(endPos)
+}
+
+// ParentInsertText calls the default implementations of the insert_text virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- str string: the text to insert 
+// 	- length int32: the length of text to insert, in bytes 
+// 	- position *int32: The caller initializes this to
+// the position at which to insert the text. After the call it
+// points at the position after the newly inserted text. 
+//
+// Insert text at a given position.
+func (text *EditableTextInstance) ParentInsertText(str string, length int32, position *int32) {
+	var carg0 *C.AtkEditableText
+	var carg1 *C.gchar // in, none, string
+	var carg2 C.gint   // in, none, casted
+	var carg3 *C.gint  // in, transfer: none, C Pointers: 1, Name: gint
+
+	parentclass := (*C.AtkEditableTextIface)(classdata.PeekParentInterface(UnsafeEditableTextToGlibNone(text), uint64(TypeEditableText)))
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
+	defer C.free(unsafe.Pointer(carg1))
+	carg2 = C.gint(length)
+	_ = position
+	_ = carg3
+	panic("unimplemented conversion of *int32 (gint*)")
+
+	C._gotk4_atk1_EditableText_virtual_insert_text(unsafe.Pointer(parentclass.insert_text), carg0, carg1, carg2, carg3)
+	runtime.KeepAlive(text)
+	runtime.KeepAlive(str)
+	runtime.KeepAlive(length)
+	runtime.KeepAlive(position)
+}
+
+// ParentPasteText calls the default implementations of the paste_text virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- position int32: position to paste 
+//
+// Paste text from clipboard to specified @position.
+func (text *EditableTextInstance) ParentPasteText(position int32) {
+	var carg0 *C.AtkEditableText
+	var carg1 C.gint // in, none, casted
+
+	parentclass := (*C.AtkEditableTextIface)(classdata.PeekParentInterface(UnsafeEditableTextToGlibNone(text), uint64(TypeEditableText)))
+
+	carg1 = C.gint(position)
+
+	C._gotk4_atk1_EditableText_virtual_paste_text(unsafe.Pointer(parentclass.paste_text), carg0, carg1)
+	runtime.KeepAlive(text)
+	runtime.KeepAlive(position)
+}
+
+// ParentSetTextContents calls the default implementations of the set_text_contents virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- str string: string to set for text contents of @text 
+//
+// Set text contents of @text.
+func (text *EditableTextInstance) ParentSetTextContents(str string) {
+	var carg0 *C.AtkEditableText
+	var carg1 *C.gchar // in, none, string
+
+	parentclass := (*C.AtkEditableTextIface)(classdata.PeekParentInterface(UnsafeEditableTextToGlibNone(text), uint64(TypeEditableText)))
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	C._gotk4_atk1_EditableText_virtual_set_text_contents(unsafe.Pointer(parentclass.set_text_contents), carg0, carg1)
+	runtime.KeepAlive(text)
+	runtime.KeepAlive(str)
+}
+
 // HyperlinkImplInstance is the instance type used by all types implementing AtkHyperlinkImpl. It is used internally by the bindings. Users should use the interface [HyperlinkImpl] instead.
 type HyperlinkImplInstance struct {
 	_ [0]func() // equal guard
-	Instance gobject.ObjectInstance
+	gobject.ObjectInstance
 }
 
 var _ HyperlinkImpl = (*HyperlinkImplInstance)(nil)
@@ -6199,6 +7732,7 @@ var _ HyperlinkImpl = (*HyperlinkImplInstance)(nil)
 // AtkHyperlink in that AtkHyperlink is an object type, rather than an
 // interface, and thus cannot be directly queried. FTW
 type HyperlinkImpl interface {
+	gobject.Object
 	upcastToAtkHyperlinkImpl() *HyperlinkImplInstance
 
 	// GetHyperlink wraps atk_hyperlink_impl_get_hyperlink
@@ -6209,13 +7743,24 @@ type HyperlinkImpl interface {
 	//
 	// Gets the hyperlink associated with this object.
 	GetHyperlink() Hyperlink
+
+	// chain up virtual methods:
+
+	// ParentGetHyperlink calls the default implementations of the get_hyperlink virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret Hyperlink 
+	//
+	// Gets the hyperlink associated with this object.
+	ParentGetHyperlink() Hyperlink
 }
 
 var _ HyperlinkImpl = (*HyperlinkImplInstance)(nil)
 
 func unsafeWrapHyperlinkImpl(base *gobject.ObjectInstance) *HyperlinkImplInstance {
 	return &HyperlinkImplInstance{
-		Instance: *base,
+		ObjectInstance: *base,
 	}
 }
 
@@ -6245,13 +7790,13 @@ func UnsafeHyperlinkImplFromGlibBorrow(c unsafe.Pointer) HyperlinkImpl {
 // UnsafeHyperlinkImplToGlibNone is used to convert the instance to it's C value AtkHyperlinkImpl. This is used by the bindings internally.
 func UnsafeHyperlinkImplToGlibNone(c HyperlinkImpl) unsafe.Pointer {
 	i := c.upcastToAtkHyperlinkImpl()
-	return gobject.UnsafeObjectToGlibNone(&i.Instance)
+	return gobject.UnsafeObjectToGlibNone(i)
 }
 
 // UnsafeHyperlinkImplToGlibFull is used to convert the instance to it's C value AtkHyperlinkImpl, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeHyperlinkImplToGlibFull(c HyperlinkImpl) unsafe.Pointer {
 	i := c.upcastToAtkHyperlinkImpl()
-	return gobject.UnsafeObjectToGlibFull(&i.Instance)
+	return gobject.UnsafeObjectToGlibFull(i)
 }
 
 // GetHyperlink wraps atk_hyperlink_impl_get_hyperlink
@@ -6284,6 +7829,8 @@ type HyperlinkImplOverrides[Instance HyperlinkImpl] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret Hyperlink 
+	//
+	// Gets the hyperlink associated with this object.
 	GetHyperlink func(Instance) Hyperlink
 }
 
@@ -6313,10 +7860,33 @@ func UnsafeApplyHyperlinkImplOverrides[Instance HyperlinkImpl](gclass unsafe.Poi
 	}
 }
 
+// ParentGetHyperlink calls the default implementations of the get_hyperlink virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret Hyperlink 
+//
+// Gets the hyperlink associated with this object.
+func (impl *HyperlinkImplInstance) ParentGetHyperlink() Hyperlink {
+	var carg0 *C.AtkHyperlinkImpl
+	var cret  *C.AtkHyperlink // return, full, converted
+
+	parentclass := (*C.AtkHyperlinkImplIface)(classdata.PeekParentInterface(UnsafeHyperlinkImplToGlibNone(impl), uint64(TypeHyperlinkImpl)))
+
+	cret = C._gotk4_atk1_HyperlinkImpl_virtual_get_hyperlink(unsafe.Pointer(parentclass.get_hyperlink), carg0)
+	runtime.KeepAlive(impl)
+
+	var goret Hyperlink
+
+	goret = UnsafeHyperlinkFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
 // HypertextInstance is the instance type used by all types implementing AtkHypertext. It is used internally by the bindings. Users should use the interface [Hypertext] instead.
 type HypertextInstance struct {
 	_ [0]func() // equal guard
-	Instance gobject.ObjectInstance
+	gobject.ObjectInstance
 }
 
 var _ Hypertext = (*HypertextInstance)(nil)
@@ -6334,6 +7904,7 @@ var _ Hypertext = (*HypertextInstance)(nil)
 // Hypertext instances have textual content; they may implement Image
 // as well, and Hyperlinks need not have non-zero text offsets.
 type Hypertext interface {
+	gobject.Object
 	upcastToAtkHypertext() *HypertextInstance
 
 	// GetLink wraps atk_hypertext_get_link
@@ -6376,13 +7947,56 @@ type Hypertext interface {
 	// object when one of the hyperlinks associated with the object
 	// is selected.
 	ConnectLinkSelected(func(Hypertext, int32)) gobject.SignalHandle
+
+	// chain up virtual methods:
+
+	// ParentGetLink calls the default implementations of the get_link virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- linkIndex int32: an integer specifying the desired link 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret Hyperlink 
+	//
+	// Gets the link in this hypertext document at index
+	// @link_index
+	ParentGetLink(linkIndex int32) Hyperlink
+	// ParentGetLinkIndex calls the default implementations of the get_link_index virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- charIndex int32: a character index 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret int32 
+	//
+	// Gets the index into the array of hyperlinks that is associated with
+	// the character specified by @char_index.
+	ParentGetLinkIndex(charIndex int32) int32
+	// ParentGetNLinks calls the default implementations of the get_n_links virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret int32 
+	//
+	// Gets the number of links within this hypertext document.
+	ParentGetNLinks() int32
+	// ParentLinkSelected calls the default implementations of the link_selected virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- linkIndex int32 
+	ParentLinkSelected(linkIndex int32)
 }
 
 var _ Hypertext = (*HypertextInstance)(nil)
 
 func unsafeWrapHypertext(base *gobject.ObjectInstance) *HypertextInstance {
 	return &HypertextInstance{
-		Instance: *base,
+		ObjectInstance: *base,
 	}
 }
 
@@ -6412,13 +8026,13 @@ func UnsafeHypertextFromGlibBorrow(c unsafe.Pointer) Hypertext {
 // UnsafeHypertextToGlibNone is used to convert the instance to it's C value AtkHypertext. This is used by the bindings internally.
 func UnsafeHypertextToGlibNone(c Hypertext) unsafe.Pointer {
 	i := c.upcastToAtkHypertext()
-	return gobject.UnsafeObjectToGlibNone(&i.Instance)
+	return gobject.UnsafeObjectToGlibNone(i)
 }
 
 // UnsafeHypertextToGlibFull is used to convert the instance to it's C value AtkHypertext, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeHypertextToGlibFull(c Hypertext) unsafe.Pointer {
 	i := c.upcastToAtkHypertext()
-	return gobject.UnsafeObjectToGlibFull(&i.Instance)
+	return gobject.UnsafeObjectToGlibFull(i)
 }
 
 // GetLink wraps atk_hypertext_get_link
@@ -6512,7 +8126,7 @@ func (hypertext *HypertextInstance) GetNLinks() int32 {
 // object when one of the hyperlinks associated with the object
 // is selected.
 func (o *HypertextInstance) ConnectLinkSelected(fn func(Hypertext, int32)) gobject.SignalHandle {
-	return o.Instance.Connect("link-selected", fn)
+	return o.Connect("link-selected", fn)
 }
 
 // HypertextOverrides is the struct used to override the default implementation of virtual methods.
@@ -6526,6 +8140,9 @@ type HypertextOverrides[Instance Hypertext] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret Hyperlink 
+	//
+	// Gets the link in this hypertext document at index
+	// @link_index
 	GetLink func(Instance, int32) Hyperlink
 	// GetLinkIndex allows you to override the implementation of the virtual method get_link_index.
 	// The function takes the following parameters:
@@ -6535,11 +8152,16 @@ type HypertextOverrides[Instance Hypertext] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
+	//
+	// Gets the index into the array of hyperlinks that is associated with
+	// the character specified by @char_index.
 	GetLinkIndex func(Instance, int32) int32
 	// GetNLinks allows you to override the implementation of the virtual method get_n_links.
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
+	//
+	// Gets the number of links within this hypertext document.
 	GetNLinks func(Instance) int32
 	// LinkSelected allows you to override the implementation of the virtual method link_selected.
 	// The function takes the following parameters:
@@ -6635,10 +8257,115 @@ func UnsafeApplyHypertextOverrides[Instance Hypertext](gclass unsafe.Pointer, ov
 	}
 }
 
+// ParentGetLink calls the default implementations of the get_link virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- linkIndex int32: an integer specifying the desired link 
+// 
+// The function returns the following values:
+// 
+// 	- goret Hyperlink 
+//
+// Gets the link in this hypertext document at index
+// @link_index
+func (hypertext *HypertextInstance) ParentGetLink(linkIndex int32) Hyperlink {
+	var carg0 *C.AtkHypertext
+	var carg1 C.gint          // in, none, casted
+	var cret  *C.AtkHyperlink // return, none, converted
+
+	parentclass := (*C.AtkHypertextIface)(classdata.PeekParentInterface(UnsafeHypertextToGlibNone(hypertext), uint64(TypeHypertext)))
+
+	carg1 = C.gint(linkIndex)
+
+	cret = C._gotk4_atk1_Hypertext_virtual_get_link(unsafe.Pointer(parentclass.get_link), carg0, carg1)
+	runtime.KeepAlive(hypertext)
+	runtime.KeepAlive(linkIndex)
+
+	var goret Hyperlink
+
+	goret = UnsafeHyperlinkFromGlibNone(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// ParentGetLinkIndex calls the default implementations of the get_link_index virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- charIndex int32: a character index 
+// 
+// The function returns the following values:
+// 
+// 	- goret int32 
+//
+// Gets the index into the array of hyperlinks that is associated with
+// the character specified by @char_index.
+func (hypertext *HypertextInstance) ParentGetLinkIndex(charIndex int32) int32 {
+	var carg0 *C.AtkHypertext
+	var carg1 C.gint // in, none, casted
+	var cret  C.gint // return, none, casted
+
+	parentclass := (*C.AtkHypertextIface)(classdata.PeekParentInterface(UnsafeHypertextToGlibNone(hypertext), uint64(TypeHypertext)))
+
+	carg1 = C.gint(charIndex)
+
+	cret = C._gotk4_atk1_Hypertext_virtual_get_link_index(unsafe.Pointer(parentclass.get_link_index), carg0, carg1)
+	runtime.KeepAlive(hypertext)
+	runtime.KeepAlive(charIndex)
+
+	var goret int32
+
+	goret = int32(cret)
+
+	return goret
+}
+
+// ParentGetNLinks calls the default implementations of the get_n_links virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret int32 
+//
+// Gets the number of links within this hypertext document.
+func (hypertext *HypertextInstance) ParentGetNLinks() int32 {
+	var carg0 *C.AtkHypertext
+	var cret  C.gint // return, none, casted
+
+	parentclass := (*C.AtkHypertextIface)(classdata.PeekParentInterface(UnsafeHypertextToGlibNone(hypertext), uint64(TypeHypertext)))
+
+	cret = C._gotk4_atk1_Hypertext_virtual_get_n_links(unsafe.Pointer(parentclass.get_n_links), carg0)
+	runtime.KeepAlive(hypertext)
+
+	var goret int32
+
+	goret = int32(cret)
+
+	return goret
+}
+
+// ParentLinkSelected calls the default implementations of the link_selected virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- linkIndex int32 
+func (hypertext *HypertextInstance) ParentLinkSelected(linkIndex int32) {
+	var carg0 *C.AtkHypertext
+	var carg1 C.gint // in, none, casted
+
+	parentclass := (*C.AtkHypertextIface)(classdata.PeekParentInterface(UnsafeHypertextToGlibNone(hypertext), uint64(TypeHypertext)))
+
+	carg1 = C.gint(linkIndex)
+
+	C._gotk4_atk1_Hypertext_virtual_link_selected(unsafe.Pointer(parentclass.link_selected), carg0, carg1)
+	runtime.KeepAlive(hypertext)
+	runtime.KeepAlive(linkIndex)
+}
+
 // ImageInstance is the instance type used by all types implementing AtkImage. It is used internally by the bindings. Users should use the interface [Image] instead.
 type ImageInstance struct {
 	_ [0]func() // equal guard
-	Instance gobject.ObjectInstance
+	gobject.ObjectInstance
 }
 
 var _ Image = (*ImageInstance)(nil)
@@ -6662,6 +8389,7 @@ var _ Image = (*ImageInstance)(nil)
 // presentation of the most significant information present in the
 // image.
 type Image interface {
+	gobject.Object
 	upcastToAtkImage() *ImageInstance
 
 	// GetImageDescription wraps atk_image_get_image_description
@@ -6724,13 +8452,76 @@ type Image interface {
 	//
 	// Sets the textual description for this image.
 	SetImageDescription(string) bool
+
+	// chain up virtual methods:
+
+	// ParentGetImageDescription calls the default implementations of the get_image_description virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret string 
+	//
+	// Get a textual description of this image.
+	ParentGetImageDescription() string
+	// ParentGetImageLocale calls the default implementations of the get_image_locale virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret string (nullable) 
+	//
+	// Retrieves the locale identifier associated to the #AtkImage.
+	ParentGetImageLocale() string
+	// ParentGetImagePosition calls the default implementations of the get_image_position virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- coordType CoordType: specifies whether the coordinates are relative to the screen
+	// or to the components top level window 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- x int32: address of #gint to put x coordinate position; otherwise, -1 if value cannot be obtained. 
+	// 	- y int32: address of #gint to put y coordinate position; otherwise, -1 if value cannot be obtained. 
+	//
+	// Gets the position of the image in the form of a point specifying the
+	// images top-left corner.
+	// 
+	// If the position can not be obtained (e.g. missing support), x and y are set
+	// to -1.
+	ParentGetImagePosition(coordType CoordType) (int32, int32)
+	// ParentGetImageSize calls the default implementations of the get_image_size virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- width int32: filled with the image width, or -1 if the value cannot be obtained. 
+	// 	- height int32: filled with the image height, or -1 if the value cannot be obtained. 
+	//
+	// Get the width and height in pixels for the specified image.
+	// The values of @width and @height are returned as -1 if the
+	// values cannot be obtained (for instance, if the object is not onscreen).
+	// 
+	// If the size can not be obtained (e.g. missing support), x and y are set
+	// to -1.
+	ParentGetImageSize() (int32, int32)
+	// ParentSetImageDescription calls the default implementations of the set_image_description virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- description string: a string description to set for @image 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	//
+	// Sets the textual description for this image.
+	ParentSetImageDescription(description string) bool
 }
 
 var _ Image = (*ImageInstance)(nil)
 
 func unsafeWrapImage(base *gobject.ObjectInstance) *ImageInstance {
 	return &ImageInstance{
-		Instance: *base,
+		ObjectInstance: *base,
 	}
 }
 
@@ -6760,13 +8551,13 @@ func UnsafeImageFromGlibBorrow(c unsafe.Pointer) Image {
 // UnsafeImageToGlibNone is used to convert the instance to it's C value AtkImage. This is used by the bindings internally.
 func UnsafeImageToGlibNone(c Image) unsafe.Pointer {
 	i := c.upcastToAtkImage()
-	return gobject.UnsafeObjectToGlibNone(&i.Instance)
+	return gobject.UnsafeObjectToGlibNone(i)
 }
 
 // UnsafeImageToGlibFull is used to convert the instance to it's C value AtkImage, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeImageToGlibFull(c Image) unsafe.Pointer {
 	i := c.upcastToAtkImage()
-	return gobject.UnsafeObjectToGlibFull(&i.Instance)
+	return gobject.UnsafeObjectToGlibFull(i)
 }
 
 // GetImageDescription wraps atk_image_get_image_description
@@ -6928,11 +8719,15 @@ type ImageOverrides[Instance Image] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret string 
+	//
+	// Get a textual description of this image.
 	GetImageDescription func(Instance) string
 	// GetImageLocale allows you to override the implementation of the virtual method get_image_locale.
 	// The function returns the following values:
 	// 
 	// 	- goret string (nullable) 
+	//
+	// Retrieves the locale identifier associated to the #AtkImage.
 	GetImageLocale func(Instance) string
 	// GetImagePosition allows you to override the implementation of the virtual method get_image_position.
 	// The function takes the following parameters:
@@ -6944,12 +8739,25 @@ type ImageOverrides[Instance Image] struct {
 	// 
 	// 	- x int32: address of #gint to put x coordinate position; otherwise, -1 if value cannot be obtained. 
 	// 	- y int32: address of #gint to put y coordinate position; otherwise, -1 if value cannot be obtained. 
+	//
+	// Gets the position of the image in the form of a point specifying the
+	// images top-left corner.
+	// 
+	// If the position can not be obtained (e.g. missing support), x and y are set
+	// to -1.
 	GetImagePosition func(Instance, CoordType) (int32, int32)
 	// GetImageSize allows you to override the implementation of the virtual method get_image_size.
 	// The function returns the following values:
 	// 
 	// 	- width int32: filled with the image width, or -1 if the value cannot be obtained. 
 	// 	- height int32: filled with the image height, or -1 if the value cannot be obtained. 
+	//
+	// Get the width and height in pixels for the specified image.
+	// The values of @width and @height are returned as -1 if the
+	// values cannot be obtained (for instance, if the object is not onscreen).
+	// 
+	// If the size can not be obtained (e.g. missing support), x and y are set
+	// to -1.
 	GetImageSize func(Instance) (int32, int32)
 	// SetImageDescription allows you to override the implementation of the virtual method set_image_description.
 	// The function takes the following parameters:
@@ -6959,6 +8767,8 @@ type ImageOverrides[Instance Image] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
+	//
+	// Sets the textual description for this image.
 	SetImageDescription func(Instance, string) bool
 }
 
@@ -7078,10 +8888,164 @@ func UnsafeApplyImageOverrides[Instance Image](gclass unsafe.Pointer, overrides 
 	}
 }
 
+// ParentGetImageDescription calls the default implementations of the get_image_description virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret string 
+//
+// Get a textual description of this image.
+func (image *ImageInstance) ParentGetImageDescription() string {
+	var carg0 *C.AtkImage
+	var cret  *C.gchar // return, none, string
+
+	parentclass := (*C.AtkImageIface)(classdata.PeekParentInterface(UnsafeImageToGlibNone(image), uint64(TypeImage)))
+
+	cret = C._gotk4_atk1_Image_virtual_get_image_description(unsafe.Pointer(parentclass.get_image_description), carg0)
+	runtime.KeepAlive(image)
+
+	var goret string
+
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+
+	return goret
+}
+
+// ParentGetImageLocale calls the default implementations of the get_image_locale virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret string (nullable) 
+//
+// Retrieves the locale identifier associated to the #AtkImage.
+func (image *ImageInstance) ParentGetImageLocale() string {
+	var carg0 *C.AtkImage
+	var cret  *C.gchar // return, none, string, nullable-string
+
+	parentclass := (*C.AtkImageIface)(classdata.PeekParentInterface(UnsafeImageToGlibNone(image), uint64(TypeImage)))
+
+	cret = C._gotk4_atk1_Image_virtual_get_image_locale(unsafe.Pointer(parentclass.get_image_locale), carg0)
+	runtime.KeepAlive(image)
+
+	var goret string
+
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
+
+	return goret
+}
+
+// ParentGetImagePosition calls the default implementations of the get_image_position virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- coordType CoordType: specifies whether the coordinates are relative to the screen
+// or to the components top level window 
+// 
+// The function returns the following values:
+// 
+// 	- x int32: address of #gint to put x coordinate position; otherwise, -1 if value cannot be obtained. 
+// 	- y int32: address of #gint to put y coordinate position; otherwise, -1 if value cannot be obtained. 
+//
+// Gets the position of the image in the form of a point specifying the
+// images top-left corner.
+// 
+// If the position can not be obtained (e.g. missing support), x and y are set
+// to -1.
+func (image *ImageInstance) ParentGetImagePosition(coordType CoordType) (int32, int32) {
+	var carg0 *C.AtkImage
+	var carg3 C.AtkCoordType // in, none, casted
+	var carg1 C.gint         // out, full, casted
+	var carg2 C.gint         // out, full, casted
+
+	parentclass := (*C.AtkImageIface)(classdata.PeekParentInterface(UnsafeImageToGlibNone(image), uint64(TypeImage)))
+
+	carg3 = C.AtkCoordType(coordType)
+
+	C._gotk4_atk1_Image_virtual_get_image_position(unsafe.Pointer(parentclass.get_image_position), carg0, &carg1, &carg2, carg3)
+	runtime.KeepAlive(image)
+	runtime.KeepAlive(coordType)
+
+	var x int32
+	var y int32
+
+	x = int32(carg1)
+	y = int32(carg2)
+
+	return x, y
+}
+
+// ParentGetImageSize calls the default implementations of the get_image_size virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- width int32: filled with the image width, or -1 if the value cannot be obtained. 
+// 	- height int32: filled with the image height, or -1 if the value cannot be obtained. 
+//
+// Get the width and height in pixels for the specified image.
+// The values of @width and @height are returned as -1 if the
+// values cannot be obtained (for instance, if the object is not onscreen).
+// 
+// If the size can not be obtained (e.g. missing support), x and y are set
+// to -1.
+func (image *ImageInstance) ParentGetImageSize() (int32, int32) {
+	var carg0 *C.AtkImage
+	var carg1 C.gint // out, full, casted
+	var carg2 C.gint // out, full, casted
+
+	parentclass := (*C.AtkImageIface)(classdata.PeekParentInterface(UnsafeImageToGlibNone(image), uint64(TypeImage)))
+
+	C._gotk4_atk1_Image_virtual_get_image_size(unsafe.Pointer(parentclass.get_image_size), carg0, &carg1, &carg2)
+	runtime.KeepAlive(image)
+
+	var width  int32
+	var height int32
+
+	width = int32(carg1)
+	height = int32(carg2)
+
+	return width, height
+}
+
+// ParentSetImageDescription calls the default implementations of the set_image_description virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- description string: a string description to set for @image 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Sets the textual description for this image.
+func (image *ImageInstance) ParentSetImageDescription(description string) bool {
+	var carg0 *C.AtkImage
+	var carg1 *C.gchar   // in, none, string
+	var cret  C.gboolean // return
+
+	parentclass := (*C.AtkImageIface)(classdata.PeekParentInterface(UnsafeImageToGlibNone(image), uint64(TypeImage)))
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(description)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	cret = C._gotk4_atk1_Image_virtual_set_image_description(unsafe.Pointer(parentclass.set_image_description), carg0, carg1)
+	runtime.KeepAlive(image)
+	runtime.KeepAlive(description)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
 // ImplementorIfaceInstance is the instance type used by all types implementing AtkImplementorIface. It is used internally by the bindings. Users should use the interface [ImplementorIface] instead.
 type ImplementorIfaceInstance struct {
 	_ [0]func() // equal guard
-	Instance gobject.ObjectInstance
+	gobject.ObjectInstance
 }
 
 var _ ImplementorIface = (*ImplementorIfaceInstance)(nil)
@@ -7092,14 +9056,17 @@ var _ ImplementorIface = (*ImplementorIfaceInstance)(nil)
 // AtkObject peers may be obtained via calls to
 // iface-&gt;(ref_accessible)(implementor);
 type ImplementorIface interface {
+	gobject.Object
 	upcastToAtkImplementorIface() *ImplementorIfaceInstance
+
+	// chain up virtual methods:
 }
 
 var _ ImplementorIface = (*ImplementorIfaceInstance)(nil)
 
 func unsafeWrapImplementorIface(base *gobject.ObjectInstance) *ImplementorIfaceInstance {
 	return &ImplementorIfaceInstance{
-		Instance: *base,
+		ObjectInstance: *base,
 	}
 }
 
@@ -7129,13 +9096,13 @@ func UnsafeImplementorIfaceFromGlibBorrow(c unsafe.Pointer) ImplementorIface {
 // UnsafeImplementorIfaceToGlibNone is used to convert the instance to it's C value AtkImplementorIface. This is used by the bindings internally.
 func UnsafeImplementorIfaceToGlibNone(c ImplementorIface) unsafe.Pointer {
 	i := c.upcastToAtkImplementorIface()
-	return gobject.UnsafeObjectToGlibNone(&i.Instance)
+	return gobject.UnsafeObjectToGlibNone(i)
 }
 
 // UnsafeImplementorIfaceToGlibFull is used to convert the instance to it's C value AtkImplementorIface, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeImplementorIfaceToGlibFull(c ImplementorIface) unsafe.Pointer {
 	i := c.upcastToAtkImplementorIface()
-	return gobject.UnsafeObjectToGlibFull(&i.Instance)
+	return gobject.UnsafeObjectToGlibFull(i)
 }
 
 // ImplementorIfaceOverrides is the struct used to override the default implementation of virtual methods.
@@ -7151,7 +9118,7 @@ func UnsafeApplyImplementorIfaceOverrides[Instance ImplementorIface](gclass unsa
 // SelectionInstance is the instance type used by all types implementing AtkSelection. It is used internally by the bindings. Users should use the interface [Selection] instead.
 type SelectionInstance struct {
 	_ [0]func() // equal guard
-	Instance gobject.ObjectInstance
+	gobject.ObjectInstance
 }
 
 var _ Selection = (*SelectionInstance)(nil)
@@ -7171,6 +9138,7 @@ var _ Selection = (*SelectionInstance)(nil)
 // are accomplished a other ATK interfaces - #AtkSelection is limited
 // to the selection/deselection of children.
 type Selection interface {
+	gobject.Object
 	upcastToAtkSelection() *SelectionInstance
 
 	// AddSelection wraps atk_selection_add_selection
@@ -7268,13 +9236,109 @@ type Selection interface {
 	// The "selection-changed" signal is emitted by an object which
 	// implements AtkSelection interface when the selection changes.
 	ConnectSelectionChanged(func(Selection)) gobject.SignalHandle
+
+	// chain up virtual methods:
+
+	// ParentAddSelection calls the default implementations of the add_selection virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- i int32: a #gint specifying the child index. 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	//
+	// Adds the specified accessible child of the object to the
+	// object's selection.
+	ParentAddSelection(i int32) bool
+	// ParentClearSelection calls the default implementations of the clear_selection virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	//
+	// Clears the selection in the object so that no children in the object
+	// are selected.
+	ParentClearSelection() bool
+	// ParentGetSelectionCount calls the default implementations of the get_selection_count virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret int32 
+	//
+	// Gets the number of accessible children currently selected.
+	// Note: callers should not rely on %NULL or on a zero value for
+	// indication of whether AtkSelectionIface is implemented, they should
+	// use type checking/interface checking macros or the
+	// atk_get_accessible_value() convenience method.
+	ParentGetSelectionCount() int32
+	// ParentIsChildSelected calls the default implementations of the is_child_selected virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- i int32: a #gint specifying the child index. 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	//
+	// Determines if the current child of this object is selected
+	// Note: callers should not rely on %NULL or on a zero value for
+	// indication of whether AtkSelectionIface is implemented, they should
+	// use type checking/interface checking macros or the
+	// atk_get_accessible_value() convenience method.
+	ParentIsChildSelected(i int32) bool
+	// ParentRefSelection calls the default implementations of the ref_selection virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- i int32: a #gint specifying the index in the selection set.  (e.g. the
+	// ith selection as opposed to the ith child). 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret Object (nullable) 
+	//
+	// Gets a reference to the accessible object representing the specified
+	// selected child of the object.
+	// Note: callers should not rely on %NULL or on a zero value for
+	// indication of whether AtkSelectionIface is implemented, they should
+	// use type checking/interface checking macros or the
+	// atk_get_accessible_value() convenience method.
+	ParentRefSelection(i int32) Object
+	// ParentRemoveSelection calls the default implementations of the remove_selection virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- i int32: a #gint specifying the index in the selection set.  (e.g. the
+	// ith selection as opposed to the ith child). 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	//
+	// Removes the specified child of the object from the object's selection.
+	ParentRemoveSelection(i int32) bool
+	// ParentSelectAllSelection calls the default implementations of the select_all_selection virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	//
+	// Causes every child of the object to be selected if the object
+	// supports multiple selections.
+	ParentSelectAllSelection() bool
+	// ParentSelectionChanged calls the default implementations of the selection_changed virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	ParentSelectionChanged()
 }
 
 var _ Selection = (*SelectionInstance)(nil)
 
 func unsafeWrapSelection(base *gobject.ObjectInstance) *SelectionInstance {
 	return &SelectionInstance{
-		Instance: *base,
+		ObjectInstance: *base,
 	}
 }
 
@@ -7304,13 +9368,13 @@ func UnsafeSelectionFromGlibBorrow(c unsafe.Pointer) Selection {
 // UnsafeSelectionToGlibNone is used to convert the instance to it's C value AtkSelection. This is used by the bindings internally.
 func UnsafeSelectionToGlibNone(c Selection) unsafe.Pointer {
 	i := c.upcastToAtkSelection()
-	return gobject.UnsafeObjectToGlibNone(&i.Instance)
+	return gobject.UnsafeObjectToGlibNone(i)
 }
 
 // UnsafeSelectionToGlibFull is used to convert the instance to it's C value AtkSelection, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeSelectionToGlibFull(c Selection) unsafe.Pointer {
 	i := c.upcastToAtkSelection()
-	return gobject.UnsafeObjectToGlibFull(&i.Instance)
+	return gobject.UnsafeObjectToGlibFull(i)
 }
 
 // AddSelection wraps atk_selection_add_selection
@@ -7537,7 +9601,7 @@ func (selection *SelectionInstance) SelectAllSelection() bool {
 // The "selection-changed" signal is emitted by an object which
 // implements AtkSelection interface when the selection changes.
 func (o *SelectionInstance) ConnectSelectionChanged(fn func(Selection)) gobject.SignalHandle {
-	return o.Instance.Connect("selection-changed", fn)
+	return o.Connect("selection-changed", fn)
 }
 
 // SelectionOverrides is the struct used to override the default implementation of virtual methods.
@@ -7551,16 +9615,28 @@ type SelectionOverrides[Instance Selection] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
+	//
+	// Adds the specified accessible child of the object to the
+	// object's selection.
 	AddSelection func(Instance, int32) bool
 	// ClearSelection allows you to override the implementation of the virtual method clear_selection.
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
+	//
+	// Clears the selection in the object so that no children in the object
+	// are selected.
 	ClearSelection func(Instance) bool
 	// GetSelectionCount allows you to override the implementation of the virtual method get_selection_count.
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
+	//
+	// Gets the number of accessible children currently selected.
+	// Note: callers should not rely on %NULL or on a zero value for
+	// indication of whether AtkSelectionIface is implemented, they should
+	// use type checking/interface checking macros or the
+	// atk_get_accessible_value() convenience method.
 	GetSelectionCount func(Instance) int32
 	// IsChildSelected allows you to override the implementation of the virtual method is_child_selected.
 	// The function takes the following parameters:
@@ -7570,6 +9646,12 @@ type SelectionOverrides[Instance Selection] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
+	//
+	// Determines if the current child of this object is selected
+	// Note: callers should not rely on %NULL or on a zero value for
+	// indication of whether AtkSelectionIface is implemented, they should
+	// use type checking/interface checking macros or the
+	// atk_get_accessible_value() convenience method.
 	IsChildSelected func(Instance, int32) bool
 	// RefSelection allows you to override the implementation of the virtual method ref_selection.
 	// The function takes the following parameters:
@@ -7580,6 +9662,13 @@ type SelectionOverrides[Instance Selection] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret Object (nullable) 
+	//
+	// Gets a reference to the accessible object representing the specified
+	// selected child of the object.
+	// Note: callers should not rely on %NULL or on a zero value for
+	// indication of whether AtkSelectionIface is implemented, they should
+	// use type checking/interface checking macros or the
+	// atk_get_accessible_value() convenience method.
 	RefSelection func(Instance, int32) Object
 	// RemoveSelection allows you to override the implementation of the virtual method remove_selection.
 	// The function takes the following parameters:
@@ -7590,11 +9679,16 @@ type SelectionOverrides[Instance Selection] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
+	//
+	// Removes the specified child of the object from the object's selection.
 	RemoveSelection func(Instance, int32) bool
 	// SelectAllSelection allows you to override the implementation of the virtual method select_all_selection.
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
+	//
+	// Causes every child of the object to be selected if the object
+	// supports multiple selections.
 	SelectAllSelection func(Instance) bool
 	// SelectionChanged allows you to override the implementation of the virtual method selection_changed.
 	SelectionChanged func(Instance)
@@ -7781,10 +9875,244 @@ func UnsafeApplySelectionOverrides[Instance Selection](gclass unsafe.Pointer, ov
 	}
 }
 
+// ParentAddSelection calls the default implementations of the add_selection virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- i int32: a #gint specifying the child index. 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Adds the specified accessible child of the object to the
+// object's selection.
+func (selection *SelectionInstance) ParentAddSelection(i int32) bool {
+	var carg0 *C.AtkSelection
+	var carg1 C.gint     // in, none, casted
+	var cret  C.gboolean // return
+
+	parentclass := (*C.AtkSelectionIface)(classdata.PeekParentInterface(UnsafeSelectionToGlibNone(selection), uint64(TypeSelection)))
+
+	carg1 = C.gint(i)
+
+	cret = C._gotk4_atk1_Selection_virtual_add_selection(unsafe.Pointer(parentclass.add_selection), carg0, carg1)
+	runtime.KeepAlive(selection)
+	runtime.KeepAlive(i)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// ParentClearSelection calls the default implementations of the clear_selection virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Clears the selection in the object so that no children in the object
+// are selected.
+func (selection *SelectionInstance) ParentClearSelection() bool {
+	var carg0 *C.AtkSelection
+	var cret  C.gboolean // return
+
+	parentclass := (*C.AtkSelectionIface)(classdata.PeekParentInterface(UnsafeSelectionToGlibNone(selection), uint64(TypeSelection)))
+
+	cret = C._gotk4_atk1_Selection_virtual_clear_selection(unsafe.Pointer(parentclass.clear_selection), carg0)
+	runtime.KeepAlive(selection)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// ParentGetSelectionCount calls the default implementations of the get_selection_count virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret int32 
+//
+// Gets the number of accessible children currently selected.
+// Note: callers should not rely on %NULL or on a zero value for
+// indication of whether AtkSelectionIface is implemented, they should
+// use type checking/interface checking macros or the
+// atk_get_accessible_value() convenience method.
+func (selection *SelectionInstance) ParentGetSelectionCount() int32 {
+	var carg0 *C.AtkSelection
+	var cret  C.gint // return, none, casted
+
+	parentclass := (*C.AtkSelectionIface)(classdata.PeekParentInterface(UnsafeSelectionToGlibNone(selection), uint64(TypeSelection)))
+
+	cret = C._gotk4_atk1_Selection_virtual_get_selection_count(unsafe.Pointer(parentclass.get_selection_count), carg0)
+	runtime.KeepAlive(selection)
+
+	var goret int32
+
+	goret = int32(cret)
+
+	return goret
+}
+
+// ParentIsChildSelected calls the default implementations of the is_child_selected virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- i int32: a #gint specifying the child index. 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Determines if the current child of this object is selected
+// Note: callers should not rely on %NULL or on a zero value for
+// indication of whether AtkSelectionIface is implemented, they should
+// use type checking/interface checking macros or the
+// atk_get_accessible_value() convenience method.
+func (selection *SelectionInstance) ParentIsChildSelected(i int32) bool {
+	var carg0 *C.AtkSelection
+	var carg1 C.gint     // in, none, casted
+	var cret  C.gboolean // return
+
+	parentclass := (*C.AtkSelectionIface)(classdata.PeekParentInterface(UnsafeSelectionToGlibNone(selection), uint64(TypeSelection)))
+
+	carg1 = C.gint(i)
+
+	cret = C._gotk4_atk1_Selection_virtual_is_child_selected(unsafe.Pointer(parentclass.is_child_selected), carg0, carg1)
+	runtime.KeepAlive(selection)
+	runtime.KeepAlive(i)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// ParentRefSelection calls the default implementations of the ref_selection virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- i int32: a #gint specifying the index in the selection set.  (e.g. the
+// ith selection as opposed to the ith child). 
+// 
+// The function returns the following values:
+// 
+// 	- goret Object (nullable) 
+//
+// Gets a reference to the accessible object representing the specified
+// selected child of the object.
+// Note: callers should not rely on %NULL or on a zero value for
+// indication of whether AtkSelectionIface is implemented, they should
+// use type checking/interface checking macros or the
+// atk_get_accessible_value() convenience method.
+func (selection *SelectionInstance) ParentRefSelection(i int32) Object {
+	var carg0 *C.AtkSelection
+	var carg1 C.gint       // in, none, casted
+	var cret  *C.AtkObject // return, full, converted, nullable
+
+	parentclass := (*C.AtkSelectionIface)(classdata.PeekParentInterface(UnsafeSelectionToGlibNone(selection), uint64(TypeSelection)))
+
+	carg1 = C.gint(i)
+
+	cret = C._gotk4_atk1_Selection_virtual_ref_selection(unsafe.Pointer(parentclass.ref_selection), carg0, carg1)
+	runtime.KeepAlive(selection)
+	runtime.KeepAlive(i)
+
+	var goret Object
+
+	if cret != nil {
+		goret = UnsafeObjectFromGlibFull(unsafe.Pointer(cret))
+	}
+
+	return goret
+}
+
+// ParentRemoveSelection calls the default implementations of the remove_selection virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- i int32: a #gint specifying the index in the selection set.  (e.g. the
+// ith selection as opposed to the ith child). 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Removes the specified child of the object from the object's selection.
+func (selection *SelectionInstance) ParentRemoveSelection(i int32) bool {
+	var carg0 *C.AtkSelection
+	var carg1 C.gint     // in, none, casted
+	var cret  C.gboolean // return
+
+	parentclass := (*C.AtkSelectionIface)(classdata.PeekParentInterface(UnsafeSelectionToGlibNone(selection), uint64(TypeSelection)))
+
+	carg1 = C.gint(i)
+
+	cret = C._gotk4_atk1_Selection_virtual_remove_selection(unsafe.Pointer(parentclass.remove_selection), carg0, carg1)
+	runtime.KeepAlive(selection)
+	runtime.KeepAlive(i)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// ParentSelectAllSelection calls the default implementations of the select_all_selection virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Causes every child of the object to be selected if the object
+// supports multiple selections.
+func (selection *SelectionInstance) ParentSelectAllSelection() bool {
+	var carg0 *C.AtkSelection
+	var cret  C.gboolean // return
+
+	parentclass := (*C.AtkSelectionIface)(classdata.PeekParentInterface(UnsafeSelectionToGlibNone(selection), uint64(TypeSelection)))
+
+	cret = C._gotk4_atk1_Selection_virtual_select_all_selection(unsafe.Pointer(parentclass.select_all_selection), carg0)
+	runtime.KeepAlive(selection)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// ParentSelectionChanged calls the default implementations of the selection_changed virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+func (selection *SelectionInstance) ParentSelectionChanged() {
+	var carg0 *C.AtkSelection
+
+	parentclass := (*C.AtkSelectionIface)(classdata.PeekParentInterface(UnsafeSelectionToGlibNone(selection), uint64(TypeSelection)))
+
+	C._gotk4_atk1_Selection_virtual_selection_changed(unsafe.Pointer(parentclass.selection_changed), carg0)
+	runtime.KeepAlive(selection)
+}
+
 // StreamableContentInstance is the instance type used by all types implementing AtkStreamableContent. It is used internally by the bindings. Users should use the interface [StreamableContent] instead.
 type StreamableContentInstance struct {
 	_ [0]func() // equal guard
-	Instance gobject.ObjectInstance
+	gobject.ObjectInstance
 }
 
 var _ StreamableContent = (*StreamableContentInstance)(nil)
@@ -7810,6 +10138,7 @@ var _ StreamableContent = (*StreamableContentInstance)(nil)
 // tied to the current user-agent view of the a particular document,
 // but may in some cases give access to the underlying model data.
 type StreamableContent interface {
+	gobject.Object
 	upcastToAtkStreamableContent() *StreamableContentInstance
 
 	// GetMIMEType wraps atk_streamable_content_get_mime_type
@@ -7865,13 +10194,69 @@ type StreamableContent interface {
 	// Note that it is possible for get_uri to return NULL but for
 	// get_stream to work nonetheless, since not all GIOChannels connect to URIs.
 	GetURI(string) string
+
+	// chain up virtual methods:
+
+	// ParentGetMIMEType calls the default implementations of the get_mime_type virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- i int32: a gint representing the position of the mime type starting from 0 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret string 
+	//
+	// Gets the character string of the specified mime type. The first mime
+	// type is at position 0, the second at position 1, and so on.
+	ParentGetMIMEType(i int32) string
+	// ParentGetNMIMETypes calls the default implementations of the get_n_mime_types virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret int32 
+	//
+	// Gets the number of mime types supported by this object.
+	ParentGetNMIMETypes() int32
+	// ParentGetStream calls the default implementations of the get_stream virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- mimeType string: a gchar* representing the mime type 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret *glib.IOChannel 
+	//
+	// Gets the content in the specified mime type.
+	ParentGetStream(mimeType string) *glib.IOChannel
+	// ParentGetURI calls the default implementations of the get_uri virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- mimeType string: a gchar* representing the mime type, or NULL to request a URI
+	// for the default mime type. 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret string (nullable) 
+	//
+	// Get a string representing a URI in IETF standard format
+	// (see http://www.ietf.org/rfc/rfc2396.txt) from which the object's content
+	// may be streamed in the specified mime-type, if one is available.
+	// If mime_type is NULL, the URI for the default (and possibly only) mime-type is
+	// returned.
+	// 
+	// Note that it is possible for get_uri to return NULL but for
+	// get_stream to work nonetheless, since not all GIOChannels connect to URIs.
+	ParentGetURI(mimeType string) string
 }
 
 var _ StreamableContent = (*StreamableContentInstance)(nil)
 
 func unsafeWrapStreamableContent(base *gobject.ObjectInstance) *StreamableContentInstance {
 	return &StreamableContentInstance{
-		Instance: *base,
+		ObjectInstance: *base,
 	}
 }
 
@@ -7901,13 +10286,13 @@ func UnsafeStreamableContentFromGlibBorrow(c unsafe.Pointer) StreamableContent {
 // UnsafeStreamableContentToGlibNone is used to convert the instance to it's C value AtkStreamableContent. This is used by the bindings internally.
 func UnsafeStreamableContentToGlibNone(c StreamableContent) unsafe.Pointer {
 	i := c.upcastToAtkStreamableContent()
-	return gobject.UnsafeObjectToGlibNone(&i.Instance)
+	return gobject.UnsafeObjectToGlibNone(i)
 }
 
 // UnsafeStreamableContentToGlibFull is used to convert the instance to it's C value AtkStreamableContent, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeStreamableContentToGlibFull(c StreamableContent) unsafe.Pointer {
 	i := c.upcastToAtkStreamableContent()
-	return gobject.UnsafeObjectToGlibFull(&i.Instance)
+	return gobject.UnsafeObjectToGlibFull(i)
 }
 
 // GetMIMEType wraps atk_streamable_content_get_mime_type
@@ -8047,11 +10432,16 @@ type StreamableContentOverrides[Instance StreamableContent] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret string 
+	//
+	// Gets the character string of the specified mime type. The first mime
+	// type is at position 0, the second at position 1, and so on.
 	GetMIMEType func(Instance, int32) string
 	// GetNMIMETypes allows you to override the implementation of the virtual method get_n_mime_types.
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
+	//
+	// Gets the number of mime types supported by this object.
 	GetNMIMETypes func(Instance) int32
 	// GetStream allows you to override the implementation of the virtual method get_stream.
 	// The function takes the following parameters:
@@ -8061,6 +10451,8 @@ type StreamableContentOverrides[Instance StreamableContent] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret *glib.IOChannel 
+	//
+	// Gets the content in the specified mime type.
 	GetStream func(Instance, string) *glib.IOChannel
 	// GetURI allows you to override the implementation of the virtual method get_uri.
 	// The function takes the following parameters:
@@ -8071,6 +10463,15 @@ type StreamableContentOverrides[Instance StreamableContent] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret string (nullable) 
+	//
+	// Get a string representing a URI in IETF standard format
+	// (see http://www.ietf.org/rfc/rfc2396.txt) from which the object's content
+	// may be streamed in the specified mime-type, if one is available.
+	// If mime_type is NULL, the URI for the default (and possibly only) mime-type is
+	// returned.
+	// 
+	// Note that it is possible for get_uri to return NULL but for
+	// get_stream to work nonetheless, since not all GIOChannels connect to URIs.
 	GetURI func(Instance, string) string
 }
 
@@ -8170,10 +10571,139 @@ func UnsafeApplyStreamableContentOverrides[Instance StreamableContent](gclass un
 	}
 }
 
+// ParentGetMIMEType calls the default implementations of the get_mime_type virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- i int32: a gint representing the position of the mime type starting from 0 
+// 
+// The function returns the following values:
+// 
+// 	- goret string 
+//
+// Gets the character string of the specified mime type. The first mime
+// type is at position 0, the second at position 1, and so on.
+func (streamable *StreamableContentInstance) ParentGetMIMEType(i int32) string {
+	var carg0 *C.AtkStreamableContent
+	var carg1 C.gint   // in, none, casted
+	var cret  *C.gchar // return, none, string
+
+	parentclass := (*C.AtkStreamableContentIface)(classdata.PeekParentInterface(UnsafeStreamableContentToGlibNone(streamable), uint64(TypeStreamableContent)))
+
+	carg1 = C.gint(i)
+
+	cret = C._gotk4_atk1_StreamableContent_virtual_get_mime_type(unsafe.Pointer(parentclass.get_mime_type), carg0, carg1)
+	runtime.KeepAlive(streamable)
+	runtime.KeepAlive(i)
+
+	var goret string
+
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+
+	return goret
+}
+
+// ParentGetNMIMETypes calls the default implementations of the get_n_mime_types virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret int32 
+//
+// Gets the number of mime types supported by this object.
+func (streamable *StreamableContentInstance) ParentGetNMIMETypes() int32 {
+	var carg0 *C.AtkStreamableContent
+	var cret  C.gint // return, none, casted
+
+	parentclass := (*C.AtkStreamableContentIface)(classdata.PeekParentInterface(UnsafeStreamableContentToGlibNone(streamable), uint64(TypeStreamableContent)))
+
+	cret = C._gotk4_atk1_StreamableContent_virtual_get_n_mime_types(unsafe.Pointer(parentclass.get_n_mime_types), carg0)
+	runtime.KeepAlive(streamable)
+
+	var goret int32
+
+	goret = int32(cret)
+
+	return goret
+}
+
+// ParentGetStream calls the default implementations of the get_stream virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- mimeType string: a gchar* representing the mime type 
+// 
+// The function returns the following values:
+// 
+// 	- goret *glib.IOChannel 
+//
+// Gets the content in the specified mime type.
+func (streamable *StreamableContentInstance) ParentGetStream(mimeType string) *glib.IOChannel {
+	var carg0 *C.AtkStreamableContent
+	var carg1 *C.gchar      // in, none, string
+	var cret  *C.GIOChannel // return, full, converted
+
+	parentclass := (*C.AtkStreamableContentIface)(classdata.PeekParentInterface(UnsafeStreamableContentToGlibNone(streamable), uint64(TypeStreamableContent)))
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(mimeType)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	cret = C._gotk4_atk1_StreamableContent_virtual_get_stream(unsafe.Pointer(parentclass.get_stream), carg0, carg1)
+	runtime.KeepAlive(streamable)
+	runtime.KeepAlive(mimeType)
+
+	var goret *glib.IOChannel
+
+	goret = glib.UnsafeIOChannelFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// ParentGetURI calls the default implementations of the get_uri virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- mimeType string: a gchar* representing the mime type, or NULL to request a URI
+// for the default mime type. 
+// 
+// The function returns the following values:
+// 
+// 	- goret string (nullable) 
+//
+// Get a string representing a URI in IETF standard format
+// (see http://www.ietf.org/rfc/rfc2396.txt) from which the object's content
+// may be streamed in the specified mime-type, if one is available.
+// If mime_type is NULL, the URI for the default (and possibly only) mime-type is
+// returned.
+// 
+// Note that it is possible for get_uri to return NULL but for
+// get_stream to work nonetheless, since not all GIOChannels connect to URIs.
+func (streamable *StreamableContentInstance) ParentGetURI(mimeType string) string {
+	var carg0 *C.AtkStreamableContent
+	var carg1 *C.gchar // in, none, string
+	var cret  *C.gchar // return, none, string, nullable-string
+
+	parentclass := (*C.AtkStreamableContentIface)(classdata.PeekParentInterface(UnsafeStreamableContentToGlibNone(streamable), uint64(TypeStreamableContent)))
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(mimeType)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	cret = C._gotk4_atk1_StreamableContent_virtual_get_uri(unsafe.Pointer(parentclass.get_uri), carg0, carg1)
+	runtime.KeepAlive(streamable)
+	runtime.KeepAlive(mimeType)
+
+	var goret string
+
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
+
+	return goret
+}
+
 // TableInstance is the instance type used by all types implementing AtkTable. It is used internally by the bindings. Users should use the interface [Table] instead.
 type TableInstance struct {
 	_ [0]func() // equal guard
-	Instance gobject.ObjectInstance
+	gobject.ObjectInstance
 }
 
 var _ Table = (*TableInstance)(nil)
@@ -8211,6 +10741,7 @@ var _ Table = (*TableInstance)(nil)
 // expose other kind of children, like rows or captions. Right now,
 // index-based methods are deprecated.
 type Table interface {
+	gobject.Object
 	upcastToAtkTable() *TableInstance
 
 	// AddColumnSelection wraps atk_table_add_column_selection
@@ -8542,13 +11073,344 @@ type Table interface {
 	// implements the AtkTable interface when the rows are
 	// reordered.
 	ConnectRowReordered(func(Table)) gobject.SignalHandle
+
+	// chain up virtual methods:
+
+	// ParentAddColumnSelection calls the default implementations of the add_column_selection virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- column int32: a #gint representing a column in @table 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	//
+	// Adds the specified @column to the selection.
+	ParentAddColumnSelection(column int32) bool
+	// ParentAddRowSelection calls the default implementations of the add_row_selection virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- row int32: a #gint representing a row in @table 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	//
+	// Adds the specified @row to the selection.
+	ParentAddRowSelection(row int32) bool
+	// ParentColumnDeleted calls the default implementations of the column_deleted virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- column int32 
+	// 	- numDeleted int32 
+	ParentColumnDeleted(column int32, numDeleted int32)
+	// ParentColumnInserted calls the default implementations of the column_inserted virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- column int32 
+	// 	- numInserted int32 
+	ParentColumnInserted(column int32, numInserted int32)
+	// ParentColumnReordered calls the default implementations of the column_reordered virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	ParentColumnReordered()
+	// ParentGetCaption calls the default implementations of the get_caption virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret Object (nullable) 
+	//
+	// Gets the caption for the @table.
+	ParentGetCaption() Object
+	// ParentGetColumnDescription calls the default implementations of the get_column_description virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- column int32: a #gint representing a column in @table 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret string 
+	//
+	// Gets the description text of the specified @column in the table
+	ParentGetColumnDescription(column int32) string
+	// ParentGetColumnExtentAt calls the default implementations of the get_column_extent_at virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- row int32: a #gint representing a row in @table 
+	// 	- column int32: a #gint representing a column in @table 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret int32 
+	//
+	// Gets the number of columns occupied by the accessible object
+	// at the specified @row and @column in the @table.
+	ParentGetColumnExtentAt(row int32, column int32) int32
+	// ParentGetColumnHeader calls the default implementations of the get_column_header virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- column int32: a #gint representing a column in the table 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret Object (nullable) 
+	//
+	// Gets the column header of a specified column in an accessible table.
+	ParentGetColumnHeader(column int32) Object
+	// ParentGetNColumns calls the default implementations of the get_n_columns virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret int32 
+	//
+	// Gets the number of columns in the table.
+	ParentGetNColumns() int32
+	// ParentGetNRows calls the default implementations of the get_n_rows virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret int32 
+	//
+	// Gets the number of rows in the table.
+	ParentGetNRows() int32
+	// ParentGetRowDescription calls the default implementations of the get_row_description virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- row int32: a #gint representing a row in @table 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret string (nullable) 
+	//
+	// Gets the description text of the specified row in the table
+	ParentGetRowDescription(row int32) string
+	// ParentGetRowExtentAt calls the default implementations of the get_row_extent_at virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- row int32: a #gint representing a row in @table 
+	// 	- column int32: a #gint representing a column in @table 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret int32 
+	//
+	// Gets the number of rows occupied by the accessible object
+	// at a specified @row and @column in the @table.
+	ParentGetRowExtentAt(row int32, column int32) int32
+	// ParentGetRowHeader calls the default implementations of the get_row_header virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- row int32: a #gint representing a row in the table 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret Object (nullable) 
+	//
+	// Gets the row header of a specified row in an accessible table.
+	ParentGetRowHeader(row int32) Object
+	// ParentGetSelectedColumns calls the default implementations of the get_selected_columns virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- selected **int32: a #gint** that is to contain the selected columns numbers 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret int32 
+	//
+	// Gets the selected columns of the table by initializing **selected with
+	// the selected column numbers. This array should be freed by the caller.
+	ParentGetSelectedColumns(selected **int32) int32
+	// ParentGetSelectedRows calls the default implementations of the get_selected_rows virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- selected **int32: a #gint** that is to contain the selected row numbers 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret int32 
+	//
+	// Gets the selected rows of the table by initializing **selected with
+	// the selected row numbers. This array should be freed by the caller.
+	ParentGetSelectedRows(selected **int32) int32
+	// ParentGetSummary calls the default implementations of the get_summary virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret Object 
+	//
+	// Gets the summary description of the table.
+	ParentGetSummary() Object
+	// ParentIsColumnSelected calls the default implementations of the is_column_selected virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- column int32: a #gint representing a column in @table 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	//
+	// Gets a boolean value indicating whether the specified @column
+	// is selected
+	ParentIsColumnSelected(column int32) bool
+	// ParentIsRowSelected calls the default implementations of the is_row_selected virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- row int32: a #gint representing a row in @table 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	//
+	// Gets a boolean value indicating whether the specified @row
+	// is selected
+	ParentIsRowSelected(row int32) bool
+	// ParentIsSelected calls the default implementations of the is_selected virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- row int32: a #gint representing a row in @table 
+	// 	- column int32: a #gint representing a column in @table 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	//
+	// Gets a boolean value indicating whether the accessible object
+	// at the specified @row and @column is selected
+	ParentIsSelected(row int32, column int32) bool
+	// ParentModelChanged calls the default implementations of the model_changed virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	ParentModelChanged()
+	// ParentRefAt calls the default implementations of the ref_at virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- row int32: a #gint representing a row in @table 
+	// 	- column int32: a #gint representing a column in @table 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret Object 
+	//
+	// Get a reference to the table cell at @row, @column. This cell
+	// should implement the interface #AtkTableCell
+	ParentRefAt(row int32, column int32) Object
+	// ParentRemoveColumnSelection calls the default implementations of the remove_column_selection virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- column int32: a #gint representing a column in @table 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	//
+	// Adds the specified @column to the selection.
+	ParentRemoveColumnSelection(column int32) bool
+	// ParentRemoveRowSelection calls the default implementations of the remove_row_selection virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- row int32: a #gint representing a row in @table 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	//
+	// Removes the specified @row from the selection.
+	ParentRemoveRowSelection(row int32) bool
+	// ParentRowDeleted calls the default implementations of the row_deleted virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- row int32 
+	// 	- numDeleted int32 
+	ParentRowDeleted(row int32, numDeleted int32)
+	// ParentRowInserted calls the default implementations of the row_inserted virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- row int32 
+	// 	- numInserted int32 
+	ParentRowInserted(row int32, numInserted int32)
+	// ParentRowReordered calls the default implementations of the row_reordered virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	ParentRowReordered()
+	// ParentSetCaption calls the default implementations of the set_caption virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- caption Object: a #AtkObject representing the caption to set for @table 
+	//
+	// Sets the caption for the table.
+	ParentSetCaption(caption Object)
+	// ParentSetColumnDescription calls the default implementations of the set_column_description virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- column int32: a #gint representing a column in @table 
+	// 	- description string: a #gchar representing the description text
+	// to set for the specified @column of the @table 
+	//
+	// Sets the description text for the specified @column of the @table.
+	ParentSetColumnDescription(column int32, description string)
+	// ParentSetColumnHeader calls the default implementations of the set_column_header virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- column int32: a #gint representing a column in @table 
+	// 	- header Object: an #AtkTable 
+	//
+	// Sets the specified column header to @header.
+	ParentSetColumnHeader(column int32, header Object)
+	// ParentSetRowDescription calls the default implementations of the set_row_description virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- row int32: a #gint representing a row in @table 
+	// 	- description string: a #gchar representing the description text
+	// to set for the specified @row of @table 
+	//
+	// Sets the description text for the specified @row of @table.
+	ParentSetRowDescription(row int32, description string)
+	// ParentSetRowHeader calls the default implementations of the set_row_header virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- row int32: a #gint representing a row in @table 
+	// 	- header Object: an #AtkTable 
+	//
+	// Sets the specified row header to @header.
+	ParentSetRowHeader(row int32, header Object)
+	// ParentSetSummary calls the default implementations of the set_summary virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- accessible Object: an #AtkObject representing the summary description
+	// to set for @table 
+	//
+	// Sets the summary description of the table.
+	ParentSetSummary(accessible Object)
 }
 
 var _ Table = (*TableInstance)(nil)
 
 func unsafeWrapTable(base *gobject.ObjectInstance) *TableInstance {
 	return &TableInstance{
-		Instance: *base,
+		ObjectInstance: *base,
 	}
 }
 
@@ -8578,13 +11440,13 @@ func UnsafeTableFromGlibBorrow(c unsafe.Pointer) Table {
 // UnsafeTableToGlibNone is used to convert the instance to it's C value AtkTable. This is used by the bindings internally.
 func UnsafeTableToGlibNone(c Table) unsafe.Pointer {
 	i := c.upcastToAtkTable()
-	return gobject.UnsafeObjectToGlibNone(&i.Instance)
+	return gobject.UnsafeObjectToGlibNone(i)
 }
 
 // UnsafeTableToGlibFull is used to convert the instance to it's C value AtkTable, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeTableToGlibFull(c Table) unsafe.Pointer {
 	i := c.upcastToAtkTable()
-	return gobject.UnsafeObjectToGlibFull(&i.Instance)
+	return gobject.UnsafeObjectToGlibFull(i)
 }
 
 // AddColumnSelection wraps atk_table_add_column_selection
@@ -9349,7 +12211,7 @@ func (table *TableInstance) SetSummary(accessible Object) {
 // The "column-deleted" signal is emitted by an object which
 // implements the AtkTable interface when a column is deleted.
 func (o *TableInstance) ConnectColumnDeleted(fn func(Table, int32, int32)) gobject.SignalHandle {
-	return o.Instance.Connect("column-deleted", fn)
+	return o.Connect("column-deleted", fn)
 }
 
 // ConnectColumnInserted connects the provided callback to the "column-inserted" signal
@@ -9357,7 +12219,7 @@ func (o *TableInstance) ConnectColumnDeleted(fn func(Table, int32, int32)) gobje
 // The "column-inserted" signal is emitted by an object which
 // implements the AtkTable interface when a column is inserted.
 func (o *TableInstance) ConnectColumnInserted(fn func(Table, int32, int32)) gobject.SignalHandle {
-	return o.Instance.Connect("column-inserted", fn)
+	return o.Connect("column-inserted", fn)
 }
 
 // ConnectColumnReordered connects the provided callback to the "column-reordered" signal
@@ -9366,7 +12228,7 @@ func (o *TableInstance) ConnectColumnInserted(fn func(Table, int32, int32)) gobj
 // implements the AtkTable interface when the columns are
 // reordered.
 func (o *TableInstance) ConnectColumnReordered(fn func(Table)) gobject.SignalHandle {
-	return o.Instance.Connect("column-reordered", fn)
+	return o.Connect("column-reordered", fn)
 }
 
 // ConnectModelChanged connects the provided callback to the "model-changed" signal
@@ -9375,7 +12237,7 @@ func (o *TableInstance) ConnectColumnReordered(fn func(Table)) gobject.SignalHan
 // implements the AtkTable interface when the model displayed by
 // the table changes.
 func (o *TableInstance) ConnectModelChanged(fn func(Table)) gobject.SignalHandle {
-	return o.Instance.Connect("model-changed", fn)
+	return o.Connect("model-changed", fn)
 }
 
 // ConnectRowDeleted connects the provided callback to the "row-deleted" signal
@@ -9383,7 +12245,7 @@ func (o *TableInstance) ConnectModelChanged(fn func(Table)) gobject.SignalHandle
 // The "row-deleted" signal is emitted by an object which
 // implements the AtkTable interface when a row is deleted.
 func (o *TableInstance) ConnectRowDeleted(fn func(Table, int32, int32)) gobject.SignalHandle {
-	return o.Instance.Connect("row-deleted", fn)
+	return o.Connect("row-deleted", fn)
 }
 
 // ConnectRowInserted connects the provided callback to the "row-inserted" signal
@@ -9391,7 +12253,7 @@ func (o *TableInstance) ConnectRowDeleted(fn func(Table, int32, int32)) gobject.
 // The "row-inserted" signal is emitted by an object which
 // implements the AtkTable interface when a row is inserted.
 func (o *TableInstance) ConnectRowInserted(fn func(Table, int32, int32)) gobject.SignalHandle {
-	return o.Instance.Connect("row-inserted", fn)
+	return o.Connect("row-inserted", fn)
 }
 
 // ConnectRowReordered connects the provided callback to the "row-reordered" signal
@@ -9400,7 +12262,7 @@ func (o *TableInstance) ConnectRowInserted(fn func(Table, int32, int32)) gobject
 // implements the AtkTable interface when the rows are
 // reordered.
 func (o *TableInstance) ConnectRowReordered(fn func(Table)) gobject.SignalHandle {
-	return o.Instance.Connect("row-reordered", fn)
+	return o.Connect("row-reordered", fn)
 }
 
 // TableOverrides is the struct used to override the default implementation of virtual methods.
@@ -9414,6 +12276,8 @@ type TableOverrides[Instance Table] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
+	//
+	// Adds the specified @column to the selection.
 	AddColumnSelection func(Instance, int32) bool
 	// AddRowSelection allows you to override the implementation of the virtual method add_row_selection.
 	// The function takes the following parameters:
@@ -9423,6 +12287,8 @@ type TableOverrides[Instance Table] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
+	//
+	// Adds the specified @row to the selection.
 	AddRowSelection func(Instance, int32) bool
 	// ColumnDeleted allows you to override the implementation of the virtual method column_deleted.
 	// The function takes the following parameters:
@@ -9442,6 +12308,8 @@ type TableOverrides[Instance Table] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret Object (nullable) 
+	//
+	// Gets the caption for the @table.
 	GetCaption func(Instance) Object
 	// GetColumnDescription allows you to override the implementation of the virtual method get_column_description.
 	// The function takes the following parameters:
@@ -9451,6 +12319,8 @@ type TableOverrides[Instance Table] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret string 
+	//
+	// Gets the description text of the specified @column in the table
 	GetColumnDescription func(Instance, int32) string
 	// GetColumnExtentAt allows you to override the implementation of the virtual method get_column_extent_at.
 	// The function takes the following parameters:
@@ -9461,6 +12331,9 @@ type TableOverrides[Instance Table] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
+	//
+	// Gets the number of columns occupied by the accessible object
+	// at the specified @row and @column in the @table.
 	GetColumnExtentAt func(Instance, int32, int32) int32
 	// GetColumnHeader allows you to override the implementation of the virtual method get_column_header.
 	// The function takes the following parameters:
@@ -9470,16 +12343,22 @@ type TableOverrides[Instance Table] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret Object (nullable) 
+	//
+	// Gets the column header of a specified column in an accessible table.
 	GetColumnHeader func(Instance, int32) Object
 	// GetNColumns allows you to override the implementation of the virtual method get_n_columns.
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
+	//
+	// Gets the number of columns in the table.
 	GetNColumns func(Instance) int32
 	// GetNRows allows you to override the implementation of the virtual method get_n_rows.
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
+	//
+	// Gets the number of rows in the table.
 	GetNRows func(Instance) int32
 	// GetRowDescription allows you to override the implementation of the virtual method get_row_description.
 	// The function takes the following parameters:
@@ -9489,6 +12368,8 @@ type TableOverrides[Instance Table] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret string (nullable) 
+	//
+	// Gets the description text of the specified row in the table
 	GetRowDescription func(Instance, int32) string
 	// GetRowExtentAt allows you to override the implementation of the virtual method get_row_extent_at.
 	// The function takes the following parameters:
@@ -9499,6 +12380,9 @@ type TableOverrides[Instance Table] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
+	//
+	// Gets the number of rows occupied by the accessible object
+	// at a specified @row and @column in the @table.
 	GetRowExtentAt func(Instance, int32, int32) int32
 	// GetRowHeader allows you to override the implementation of the virtual method get_row_header.
 	// The function takes the following parameters:
@@ -9508,6 +12392,8 @@ type TableOverrides[Instance Table] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret Object (nullable) 
+	//
+	// Gets the row header of a specified row in an accessible table.
 	GetRowHeader func(Instance, int32) Object
 	// GetSelectedColumns allows you to override the implementation of the virtual method get_selected_columns.
 	// The function takes the following parameters:
@@ -9517,6 +12403,9 @@ type TableOverrides[Instance Table] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
+	//
+	// Gets the selected columns of the table by initializing **selected with
+	// the selected column numbers. This array should be freed by the caller.
 	GetSelectedColumns func(Instance, **int32) int32
 	// GetSelectedRows allows you to override the implementation of the virtual method get_selected_rows.
 	// The function takes the following parameters:
@@ -9526,11 +12415,16 @@ type TableOverrides[Instance Table] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
+	//
+	// Gets the selected rows of the table by initializing **selected with
+	// the selected row numbers. This array should be freed by the caller.
 	GetSelectedRows func(Instance, **int32) int32
 	// GetSummary allows you to override the implementation of the virtual method get_summary.
 	// The function returns the following values:
 	// 
 	// 	- goret Object 
+	//
+	// Gets the summary description of the table.
 	GetSummary func(Instance) Object
 	// IsColumnSelected allows you to override the implementation of the virtual method is_column_selected.
 	// The function takes the following parameters:
@@ -9540,6 +12434,9 @@ type TableOverrides[Instance Table] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
+	//
+	// Gets a boolean value indicating whether the specified @column
+	// is selected
 	IsColumnSelected func(Instance, int32) bool
 	// IsRowSelected allows you to override the implementation of the virtual method is_row_selected.
 	// The function takes the following parameters:
@@ -9549,6 +12446,9 @@ type TableOverrides[Instance Table] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
+	//
+	// Gets a boolean value indicating whether the specified @row
+	// is selected
 	IsRowSelected func(Instance, int32) bool
 	// IsSelected allows you to override the implementation of the virtual method is_selected.
 	// The function takes the following parameters:
@@ -9559,6 +12459,9 @@ type TableOverrides[Instance Table] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
+	//
+	// Gets a boolean value indicating whether the accessible object
+	// at the specified @row and @column is selected
 	IsSelected func(Instance, int32, int32) bool
 	// ModelChanged allows you to override the implementation of the virtual method model_changed.
 	ModelChanged func(Instance)
@@ -9571,6 +12474,9 @@ type TableOverrides[Instance Table] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret Object 
+	//
+	// Get a reference to the table cell at @row, @column. This cell
+	// should implement the interface #AtkTableCell
 	RefAt func(Instance, int32, int32) Object
 	// RemoveColumnSelection allows you to override the implementation of the virtual method remove_column_selection.
 	// The function takes the following parameters:
@@ -9580,6 +12486,8 @@ type TableOverrides[Instance Table] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
+	//
+	// Adds the specified @column to the selection.
 	RemoveColumnSelection func(Instance, int32) bool
 	// RemoveRowSelection allows you to override the implementation of the virtual method remove_row_selection.
 	// The function takes the following parameters:
@@ -9589,6 +12497,8 @@ type TableOverrides[Instance Table] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
+	//
+	// Removes the specified @row from the selection.
 	RemoveRowSelection func(Instance, int32) bool
 	// RowDeleted allows you to override the implementation of the virtual method row_deleted.
 	// The function takes the following parameters:
@@ -9608,6 +12518,8 @@ type TableOverrides[Instance Table] struct {
 	// The function takes the following parameters:
 	// 
 	// 	- caption Object: a #AtkObject representing the caption to set for @table 
+	//
+	// Sets the caption for the table.
 	SetCaption func(Instance, Object)
 	// SetColumnDescription allows you to override the implementation of the virtual method set_column_description.
 	// The function takes the following parameters:
@@ -9615,12 +12527,16 @@ type TableOverrides[Instance Table] struct {
 	// 	- column int32: a #gint representing a column in @table 
 	// 	- description string: a #gchar representing the description text
 	// to set for the specified @column of the @table 
+	//
+	// Sets the description text for the specified @column of the @table.
 	SetColumnDescription func(Instance, int32, string)
 	// SetColumnHeader allows you to override the implementation of the virtual method set_column_header.
 	// The function takes the following parameters:
 	// 
 	// 	- column int32: a #gint representing a column in @table 
 	// 	- header Object: an #AtkTable 
+	//
+	// Sets the specified column header to @header.
 	SetColumnHeader func(Instance, int32, Object)
 	// SetRowDescription allows you to override the implementation of the virtual method set_row_description.
 	// The function takes the following parameters:
@@ -9628,18 +12544,24 @@ type TableOverrides[Instance Table] struct {
 	// 	- row int32: a #gint representing a row in @table 
 	// 	- description string: a #gchar representing the description text
 	// to set for the specified @row of @table 
+	//
+	// Sets the description text for the specified @row of @table.
 	SetRowDescription func(Instance, int32, string)
 	// SetRowHeader allows you to override the implementation of the virtual method set_row_header.
 	// The function takes the following parameters:
 	// 
 	// 	- row int32: a #gint representing a row in @table 
 	// 	- header Object: an #AtkTable 
+	//
+	// Sets the specified row header to @header.
 	SetRowHeader func(Instance, int32, Object)
 	// SetSummary allows you to override the implementation of the virtual method set_summary.
 	// The function takes the following parameters:
 	// 
 	// 	- accessible Object: an #AtkObject representing the summary description
 	// to set for @table 
+	//
+	// Sets the summary description of the table.
 	SetSummary func(Instance, Object)
 }
 
@@ -10348,10 +13270,910 @@ func UnsafeApplyTableOverrides[Instance Table](gclass unsafe.Pointer, overrides 
 	}
 }
 
+// ParentAddColumnSelection calls the default implementations of the add_column_selection virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- column int32: a #gint representing a column in @table 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Adds the specified @column to the selection.
+func (table *TableInstance) ParentAddColumnSelection(column int32) bool {
+	var carg0 *C.AtkTable
+	var carg1 C.gint     // in, none, casted
+	var cret  C.gboolean // return
+
+	parentclass := (*C.AtkTableIface)(classdata.PeekParentInterface(UnsafeTableToGlibNone(table), uint64(TypeTable)))
+
+	carg1 = C.gint(column)
+
+	cret = C._gotk4_atk1_Table_virtual_add_column_selection(unsafe.Pointer(parentclass.add_column_selection), carg0, carg1)
+	runtime.KeepAlive(table)
+	runtime.KeepAlive(column)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// ParentAddRowSelection calls the default implementations of the add_row_selection virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- row int32: a #gint representing a row in @table 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Adds the specified @row to the selection.
+func (table *TableInstance) ParentAddRowSelection(row int32) bool {
+	var carg0 *C.AtkTable
+	var carg1 C.gint     // in, none, casted
+	var cret  C.gboolean // return
+
+	parentclass := (*C.AtkTableIface)(classdata.PeekParentInterface(UnsafeTableToGlibNone(table), uint64(TypeTable)))
+
+	carg1 = C.gint(row)
+
+	cret = C._gotk4_atk1_Table_virtual_add_row_selection(unsafe.Pointer(parentclass.add_row_selection), carg0, carg1)
+	runtime.KeepAlive(table)
+	runtime.KeepAlive(row)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// ParentColumnDeleted calls the default implementations of the column_deleted virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- column int32 
+// 	- numDeleted int32 
+func (table *TableInstance) ParentColumnDeleted(column int32, numDeleted int32) {
+	var carg0 *C.AtkTable
+	var carg1 C.gint // in, none, casted
+	var carg2 C.gint // in, none, casted
+
+	parentclass := (*C.AtkTableIface)(classdata.PeekParentInterface(UnsafeTableToGlibNone(table), uint64(TypeTable)))
+
+	carg1 = C.gint(column)
+	carg2 = C.gint(numDeleted)
+
+	C._gotk4_atk1_Table_virtual_column_deleted(unsafe.Pointer(parentclass.column_deleted), carg0, carg1, carg2)
+	runtime.KeepAlive(table)
+	runtime.KeepAlive(column)
+	runtime.KeepAlive(numDeleted)
+}
+
+// ParentColumnInserted calls the default implementations of the column_inserted virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- column int32 
+// 	- numInserted int32 
+func (table *TableInstance) ParentColumnInserted(column int32, numInserted int32) {
+	var carg0 *C.AtkTable
+	var carg1 C.gint // in, none, casted
+	var carg2 C.gint // in, none, casted
+
+	parentclass := (*C.AtkTableIface)(classdata.PeekParentInterface(UnsafeTableToGlibNone(table), uint64(TypeTable)))
+
+	carg1 = C.gint(column)
+	carg2 = C.gint(numInserted)
+
+	C._gotk4_atk1_Table_virtual_column_inserted(unsafe.Pointer(parentclass.column_inserted), carg0, carg1, carg2)
+	runtime.KeepAlive(table)
+	runtime.KeepAlive(column)
+	runtime.KeepAlive(numInserted)
+}
+
+// ParentColumnReordered calls the default implementations of the column_reordered virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+func (table *TableInstance) ParentColumnReordered() {
+	var carg0 *C.AtkTable
+
+	parentclass := (*C.AtkTableIface)(classdata.PeekParentInterface(UnsafeTableToGlibNone(table), uint64(TypeTable)))
+
+	C._gotk4_atk1_Table_virtual_column_reordered(unsafe.Pointer(parentclass.column_reordered), carg0)
+	runtime.KeepAlive(table)
+}
+
+// ParentGetCaption calls the default implementations of the get_caption virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret Object (nullable) 
+//
+// Gets the caption for the @table.
+func (table *TableInstance) ParentGetCaption() Object {
+	var carg0 *C.AtkTable
+	var cret  *C.AtkObject // return, none, converted, nullable
+
+	parentclass := (*C.AtkTableIface)(classdata.PeekParentInterface(UnsafeTableToGlibNone(table), uint64(TypeTable)))
+
+	cret = C._gotk4_atk1_Table_virtual_get_caption(unsafe.Pointer(parentclass.get_caption), carg0)
+	runtime.KeepAlive(table)
+
+	var goret Object
+
+	if cret != nil {
+		goret = UnsafeObjectFromGlibNone(unsafe.Pointer(cret))
+	}
+
+	return goret
+}
+
+// ParentGetColumnDescription calls the default implementations of the get_column_description virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- column int32: a #gint representing a column in @table 
+// 
+// The function returns the following values:
+// 
+// 	- goret string 
+//
+// Gets the description text of the specified @column in the table
+func (table *TableInstance) ParentGetColumnDescription(column int32) string {
+	var carg0 *C.AtkTable
+	var carg1 C.gint   // in, none, casted
+	var cret  *C.gchar // return, none, string
+
+	parentclass := (*C.AtkTableIface)(classdata.PeekParentInterface(UnsafeTableToGlibNone(table), uint64(TypeTable)))
+
+	carg1 = C.gint(column)
+
+	cret = C._gotk4_atk1_Table_virtual_get_column_description(unsafe.Pointer(parentclass.get_column_description), carg0, carg1)
+	runtime.KeepAlive(table)
+	runtime.KeepAlive(column)
+
+	var goret string
+
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+
+	return goret
+}
+
+// ParentGetColumnExtentAt calls the default implementations of the get_column_extent_at virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- row int32: a #gint representing a row in @table 
+// 	- column int32: a #gint representing a column in @table 
+// 
+// The function returns the following values:
+// 
+// 	- goret int32 
+//
+// Gets the number of columns occupied by the accessible object
+// at the specified @row and @column in the @table.
+func (table *TableInstance) ParentGetColumnExtentAt(row int32, column int32) int32 {
+	var carg0 *C.AtkTable
+	var carg1 C.gint // in, none, casted
+	var carg2 C.gint // in, none, casted
+	var cret  C.gint // return, none, casted
+
+	parentclass := (*C.AtkTableIface)(classdata.PeekParentInterface(UnsafeTableToGlibNone(table), uint64(TypeTable)))
+
+	carg1 = C.gint(row)
+	carg2 = C.gint(column)
+
+	cret = C._gotk4_atk1_Table_virtual_get_column_extent_at(unsafe.Pointer(parentclass.get_column_extent_at), carg0, carg1, carg2)
+	runtime.KeepAlive(table)
+	runtime.KeepAlive(row)
+	runtime.KeepAlive(column)
+
+	var goret int32
+
+	goret = int32(cret)
+
+	return goret
+}
+
+// ParentGetColumnHeader calls the default implementations of the get_column_header virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- column int32: a #gint representing a column in the table 
+// 
+// The function returns the following values:
+// 
+// 	- goret Object (nullable) 
+//
+// Gets the column header of a specified column in an accessible table.
+func (table *TableInstance) ParentGetColumnHeader(column int32) Object {
+	var carg0 *C.AtkTable
+	var carg1 C.gint       // in, none, casted
+	var cret  *C.AtkObject // return, none, converted, nullable
+
+	parentclass := (*C.AtkTableIface)(classdata.PeekParentInterface(UnsafeTableToGlibNone(table), uint64(TypeTable)))
+
+	carg1 = C.gint(column)
+
+	cret = C._gotk4_atk1_Table_virtual_get_column_header(unsafe.Pointer(parentclass.get_column_header), carg0, carg1)
+	runtime.KeepAlive(table)
+	runtime.KeepAlive(column)
+
+	var goret Object
+
+	if cret != nil {
+		goret = UnsafeObjectFromGlibNone(unsafe.Pointer(cret))
+	}
+
+	return goret
+}
+
+// ParentGetNColumns calls the default implementations of the get_n_columns virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret int32 
+//
+// Gets the number of columns in the table.
+func (table *TableInstance) ParentGetNColumns() int32 {
+	var carg0 *C.AtkTable
+	var cret  C.gint // return, none, casted
+
+	parentclass := (*C.AtkTableIface)(classdata.PeekParentInterface(UnsafeTableToGlibNone(table), uint64(TypeTable)))
+
+	cret = C._gotk4_atk1_Table_virtual_get_n_columns(unsafe.Pointer(parentclass.get_n_columns), carg0)
+	runtime.KeepAlive(table)
+
+	var goret int32
+
+	goret = int32(cret)
+
+	return goret
+}
+
+// ParentGetNRows calls the default implementations of the get_n_rows virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret int32 
+//
+// Gets the number of rows in the table.
+func (table *TableInstance) ParentGetNRows() int32 {
+	var carg0 *C.AtkTable
+	var cret  C.gint // return, none, casted
+
+	parentclass := (*C.AtkTableIface)(classdata.PeekParentInterface(UnsafeTableToGlibNone(table), uint64(TypeTable)))
+
+	cret = C._gotk4_atk1_Table_virtual_get_n_rows(unsafe.Pointer(parentclass.get_n_rows), carg0)
+	runtime.KeepAlive(table)
+
+	var goret int32
+
+	goret = int32(cret)
+
+	return goret
+}
+
+// ParentGetRowDescription calls the default implementations of the get_row_description virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- row int32: a #gint representing a row in @table 
+// 
+// The function returns the following values:
+// 
+// 	- goret string (nullable) 
+//
+// Gets the description text of the specified row in the table
+func (table *TableInstance) ParentGetRowDescription(row int32) string {
+	var carg0 *C.AtkTable
+	var carg1 C.gint   // in, none, casted
+	var cret  *C.gchar // return, none, string, nullable-string
+
+	parentclass := (*C.AtkTableIface)(classdata.PeekParentInterface(UnsafeTableToGlibNone(table), uint64(TypeTable)))
+
+	carg1 = C.gint(row)
+
+	cret = C._gotk4_atk1_Table_virtual_get_row_description(unsafe.Pointer(parentclass.get_row_description), carg0, carg1)
+	runtime.KeepAlive(table)
+	runtime.KeepAlive(row)
+
+	var goret string
+
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
+
+	return goret
+}
+
+// ParentGetRowExtentAt calls the default implementations of the get_row_extent_at virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- row int32: a #gint representing a row in @table 
+// 	- column int32: a #gint representing a column in @table 
+// 
+// The function returns the following values:
+// 
+// 	- goret int32 
+//
+// Gets the number of rows occupied by the accessible object
+// at a specified @row and @column in the @table.
+func (table *TableInstance) ParentGetRowExtentAt(row int32, column int32) int32 {
+	var carg0 *C.AtkTable
+	var carg1 C.gint // in, none, casted
+	var carg2 C.gint // in, none, casted
+	var cret  C.gint // return, none, casted
+
+	parentclass := (*C.AtkTableIface)(classdata.PeekParentInterface(UnsafeTableToGlibNone(table), uint64(TypeTable)))
+
+	carg1 = C.gint(row)
+	carg2 = C.gint(column)
+
+	cret = C._gotk4_atk1_Table_virtual_get_row_extent_at(unsafe.Pointer(parentclass.get_row_extent_at), carg0, carg1, carg2)
+	runtime.KeepAlive(table)
+	runtime.KeepAlive(row)
+	runtime.KeepAlive(column)
+
+	var goret int32
+
+	goret = int32(cret)
+
+	return goret
+}
+
+// ParentGetRowHeader calls the default implementations of the get_row_header virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- row int32: a #gint representing a row in the table 
+// 
+// The function returns the following values:
+// 
+// 	- goret Object (nullable) 
+//
+// Gets the row header of a specified row in an accessible table.
+func (table *TableInstance) ParentGetRowHeader(row int32) Object {
+	var carg0 *C.AtkTable
+	var carg1 C.gint       // in, none, casted
+	var cret  *C.AtkObject // return, none, converted, nullable
+
+	parentclass := (*C.AtkTableIface)(classdata.PeekParentInterface(UnsafeTableToGlibNone(table), uint64(TypeTable)))
+
+	carg1 = C.gint(row)
+
+	cret = C._gotk4_atk1_Table_virtual_get_row_header(unsafe.Pointer(parentclass.get_row_header), carg0, carg1)
+	runtime.KeepAlive(table)
+	runtime.KeepAlive(row)
+
+	var goret Object
+
+	if cret != nil {
+		goret = UnsafeObjectFromGlibNone(unsafe.Pointer(cret))
+	}
+
+	return goret
+}
+
+// ParentGetSelectedColumns calls the default implementations of the get_selected_columns virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- selected **int32: a #gint** that is to contain the selected columns numbers 
+// 
+// The function returns the following values:
+// 
+// 	- goret int32 
+//
+// Gets the selected columns of the table by initializing **selected with
+// the selected column numbers. This array should be freed by the caller.
+func (table *TableInstance) ParentGetSelectedColumns(selected **int32) int32 {
+	var carg0 *C.AtkTable
+	var carg1 **C.gint // in, transfer: none, C Pointers: 2, Name: gint
+	var cret  C.gint   // return, none, casted
+
+	parentclass := (*C.AtkTableIface)(classdata.PeekParentInterface(UnsafeTableToGlibNone(table), uint64(TypeTable)))
+
+	_ = selected
+	_ = carg1
+	panic("unimplemented conversion of **int32 (gint**)")
+
+	cret = C._gotk4_atk1_Table_virtual_get_selected_columns(unsafe.Pointer(parentclass.get_selected_columns), carg0, carg1)
+	runtime.KeepAlive(table)
+	runtime.KeepAlive(selected)
+
+	var goret int32
+
+	goret = int32(cret)
+
+	return goret
+}
+
+// ParentGetSelectedRows calls the default implementations of the get_selected_rows virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- selected **int32: a #gint** that is to contain the selected row numbers 
+// 
+// The function returns the following values:
+// 
+// 	- goret int32 
+//
+// Gets the selected rows of the table by initializing **selected with
+// the selected row numbers. This array should be freed by the caller.
+func (table *TableInstance) ParentGetSelectedRows(selected **int32) int32 {
+	var carg0 *C.AtkTable
+	var carg1 **C.gint // in, transfer: none, C Pointers: 2, Name: gint
+	var cret  C.gint   // return, none, casted
+
+	parentclass := (*C.AtkTableIface)(classdata.PeekParentInterface(UnsafeTableToGlibNone(table), uint64(TypeTable)))
+
+	_ = selected
+	_ = carg1
+	panic("unimplemented conversion of **int32 (gint**)")
+
+	cret = C._gotk4_atk1_Table_virtual_get_selected_rows(unsafe.Pointer(parentclass.get_selected_rows), carg0, carg1)
+	runtime.KeepAlive(table)
+	runtime.KeepAlive(selected)
+
+	var goret int32
+
+	goret = int32(cret)
+
+	return goret
+}
+
+// ParentGetSummary calls the default implementations of the get_summary virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret Object 
+//
+// Gets the summary description of the table.
+func (table *TableInstance) ParentGetSummary() Object {
+	var carg0 *C.AtkTable
+	var cret  *C.AtkObject // return, full, converted
+
+	parentclass := (*C.AtkTableIface)(classdata.PeekParentInterface(UnsafeTableToGlibNone(table), uint64(TypeTable)))
+
+	cret = C._gotk4_atk1_Table_virtual_get_summary(unsafe.Pointer(parentclass.get_summary), carg0)
+	runtime.KeepAlive(table)
+
+	var goret Object
+
+	goret = UnsafeObjectFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// ParentIsColumnSelected calls the default implementations of the is_column_selected virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- column int32: a #gint representing a column in @table 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Gets a boolean value indicating whether the specified @column
+// is selected
+func (table *TableInstance) ParentIsColumnSelected(column int32) bool {
+	var carg0 *C.AtkTable
+	var carg1 C.gint     // in, none, casted
+	var cret  C.gboolean // return
+
+	parentclass := (*C.AtkTableIface)(classdata.PeekParentInterface(UnsafeTableToGlibNone(table), uint64(TypeTable)))
+
+	carg1 = C.gint(column)
+
+	cret = C._gotk4_atk1_Table_virtual_is_column_selected(unsafe.Pointer(parentclass.is_column_selected), carg0, carg1)
+	runtime.KeepAlive(table)
+	runtime.KeepAlive(column)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// ParentIsRowSelected calls the default implementations of the is_row_selected virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- row int32: a #gint representing a row in @table 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Gets a boolean value indicating whether the specified @row
+// is selected
+func (table *TableInstance) ParentIsRowSelected(row int32) bool {
+	var carg0 *C.AtkTable
+	var carg1 C.gint     // in, none, casted
+	var cret  C.gboolean // return
+
+	parentclass := (*C.AtkTableIface)(classdata.PeekParentInterface(UnsafeTableToGlibNone(table), uint64(TypeTable)))
+
+	carg1 = C.gint(row)
+
+	cret = C._gotk4_atk1_Table_virtual_is_row_selected(unsafe.Pointer(parentclass.is_row_selected), carg0, carg1)
+	runtime.KeepAlive(table)
+	runtime.KeepAlive(row)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// ParentIsSelected calls the default implementations of the is_selected virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- row int32: a #gint representing a row in @table 
+// 	- column int32: a #gint representing a column in @table 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Gets a boolean value indicating whether the accessible object
+// at the specified @row and @column is selected
+func (table *TableInstance) ParentIsSelected(row int32, column int32) bool {
+	var carg0 *C.AtkTable
+	var carg1 C.gint     // in, none, casted
+	var carg2 C.gint     // in, none, casted
+	var cret  C.gboolean // return
+
+	parentclass := (*C.AtkTableIface)(classdata.PeekParentInterface(UnsafeTableToGlibNone(table), uint64(TypeTable)))
+
+	carg1 = C.gint(row)
+	carg2 = C.gint(column)
+
+	cret = C._gotk4_atk1_Table_virtual_is_selected(unsafe.Pointer(parentclass.is_selected), carg0, carg1, carg2)
+	runtime.KeepAlive(table)
+	runtime.KeepAlive(row)
+	runtime.KeepAlive(column)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// ParentModelChanged calls the default implementations of the model_changed virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+func (table *TableInstance) ParentModelChanged() {
+	var carg0 *C.AtkTable
+
+	parentclass := (*C.AtkTableIface)(classdata.PeekParentInterface(UnsafeTableToGlibNone(table), uint64(TypeTable)))
+
+	C._gotk4_atk1_Table_virtual_model_changed(unsafe.Pointer(parentclass.model_changed), carg0)
+	runtime.KeepAlive(table)
+}
+
+// ParentRefAt calls the default implementations of the ref_at virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- row int32: a #gint representing a row in @table 
+// 	- column int32: a #gint representing a column in @table 
+// 
+// The function returns the following values:
+// 
+// 	- goret Object 
+//
+// Get a reference to the table cell at @row, @column. This cell
+// should implement the interface #AtkTableCell
+func (table *TableInstance) ParentRefAt(row int32, column int32) Object {
+	var carg0 *C.AtkTable
+	var carg1 C.gint       // in, none, casted
+	var carg2 C.gint       // in, none, casted
+	var cret  *C.AtkObject // return, full, converted
+
+	parentclass := (*C.AtkTableIface)(classdata.PeekParentInterface(UnsafeTableToGlibNone(table), uint64(TypeTable)))
+
+	carg1 = C.gint(row)
+	carg2 = C.gint(column)
+
+	cret = C._gotk4_atk1_Table_virtual_ref_at(unsafe.Pointer(parentclass.ref_at), carg0, carg1, carg2)
+	runtime.KeepAlive(table)
+	runtime.KeepAlive(row)
+	runtime.KeepAlive(column)
+
+	var goret Object
+
+	goret = UnsafeObjectFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// ParentRemoveColumnSelection calls the default implementations of the remove_column_selection virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- column int32: a #gint representing a column in @table 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Adds the specified @column to the selection.
+func (table *TableInstance) ParentRemoveColumnSelection(column int32) bool {
+	var carg0 *C.AtkTable
+	var carg1 C.gint     // in, none, casted
+	var cret  C.gboolean // return
+
+	parentclass := (*C.AtkTableIface)(classdata.PeekParentInterface(UnsafeTableToGlibNone(table), uint64(TypeTable)))
+
+	carg1 = C.gint(column)
+
+	cret = C._gotk4_atk1_Table_virtual_remove_column_selection(unsafe.Pointer(parentclass.remove_column_selection), carg0, carg1)
+	runtime.KeepAlive(table)
+	runtime.KeepAlive(column)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// ParentRemoveRowSelection calls the default implementations of the remove_row_selection virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- row int32: a #gint representing a row in @table 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Removes the specified @row from the selection.
+func (table *TableInstance) ParentRemoveRowSelection(row int32) bool {
+	var carg0 *C.AtkTable
+	var carg1 C.gint     // in, none, casted
+	var cret  C.gboolean // return
+
+	parentclass := (*C.AtkTableIface)(classdata.PeekParentInterface(UnsafeTableToGlibNone(table), uint64(TypeTable)))
+
+	carg1 = C.gint(row)
+
+	cret = C._gotk4_atk1_Table_virtual_remove_row_selection(unsafe.Pointer(parentclass.remove_row_selection), carg0, carg1)
+	runtime.KeepAlive(table)
+	runtime.KeepAlive(row)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// ParentRowDeleted calls the default implementations of the row_deleted virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- row int32 
+// 	- numDeleted int32 
+func (table *TableInstance) ParentRowDeleted(row int32, numDeleted int32) {
+	var carg0 *C.AtkTable
+	var carg1 C.gint // in, none, casted
+	var carg2 C.gint // in, none, casted
+
+	parentclass := (*C.AtkTableIface)(classdata.PeekParentInterface(UnsafeTableToGlibNone(table), uint64(TypeTable)))
+
+	carg1 = C.gint(row)
+	carg2 = C.gint(numDeleted)
+
+	C._gotk4_atk1_Table_virtual_row_deleted(unsafe.Pointer(parentclass.row_deleted), carg0, carg1, carg2)
+	runtime.KeepAlive(table)
+	runtime.KeepAlive(row)
+	runtime.KeepAlive(numDeleted)
+}
+
+// ParentRowInserted calls the default implementations of the row_inserted virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- row int32 
+// 	- numInserted int32 
+func (table *TableInstance) ParentRowInserted(row int32, numInserted int32) {
+	var carg0 *C.AtkTable
+	var carg1 C.gint // in, none, casted
+	var carg2 C.gint // in, none, casted
+
+	parentclass := (*C.AtkTableIface)(classdata.PeekParentInterface(UnsafeTableToGlibNone(table), uint64(TypeTable)))
+
+	carg1 = C.gint(row)
+	carg2 = C.gint(numInserted)
+
+	C._gotk4_atk1_Table_virtual_row_inserted(unsafe.Pointer(parentclass.row_inserted), carg0, carg1, carg2)
+	runtime.KeepAlive(table)
+	runtime.KeepAlive(row)
+	runtime.KeepAlive(numInserted)
+}
+
+// ParentRowReordered calls the default implementations of the row_reordered virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+func (table *TableInstance) ParentRowReordered() {
+	var carg0 *C.AtkTable
+
+	parentclass := (*C.AtkTableIface)(classdata.PeekParentInterface(UnsafeTableToGlibNone(table), uint64(TypeTable)))
+
+	C._gotk4_atk1_Table_virtual_row_reordered(unsafe.Pointer(parentclass.row_reordered), carg0)
+	runtime.KeepAlive(table)
+}
+
+// ParentSetCaption calls the default implementations of the set_caption virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- caption Object: a #AtkObject representing the caption to set for @table 
+//
+// Sets the caption for the table.
+func (table *TableInstance) ParentSetCaption(caption Object) {
+	var carg0 *C.AtkTable
+	var carg1 *C.AtkObject // in, none, converted
+
+	parentclass := (*C.AtkTableIface)(classdata.PeekParentInterface(UnsafeTableToGlibNone(table), uint64(TypeTable)))
+
+	carg1 = (*C.AtkObject)(UnsafeObjectToGlibNone(caption))
+
+	C._gotk4_atk1_Table_virtual_set_caption(unsafe.Pointer(parentclass.set_caption), carg0, carg1)
+	runtime.KeepAlive(table)
+	runtime.KeepAlive(caption)
+}
+
+// ParentSetColumnDescription calls the default implementations of the set_column_description virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- column int32: a #gint representing a column in @table 
+// 	- description string: a #gchar representing the description text
+// to set for the specified @column of the @table 
+//
+// Sets the description text for the specified @column of the @table.
+func (table *TableInstance) ParentSetColumnDescription(column int32, description string) {
+	var carg0 *C.AtkTable
+	var carg1 C.gint   // in, none, casted
+	var carg2 *C.gchar // in, none, string
+
+	parentclass := (*C.AtkTableIface)(classdata.PeekParentInterface(UnsafeTableToGlibNone(table), uint64(TypeTable)))
+
+	carg1 = C.gint(column)
+	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(description)))
+	defer C.free(unsafe.Pointer(carg2))
+
+	C._gotk4_atk1_Table_virtual_set_column_description(unsafe.Pointer(parentclass.set_column_description), carg0, carg1, carg2)
+	runtime.KeepAlive(table)
+	runtime.KeepAlive(column)
+	runtime.KeepAlive(description)
+}
+
+// ParentSetColumnHeader calls the default implementations of the set_column_header virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- column int32: a #gint representing a column in @table 
+// 	- header Object: an #AtkTable 
+//
+// Sets the specified column header to @header.
+func (table *TableInstance) ParentSetColumnHeader(column int32, header Object) {
+	var carg0 *C.AtkTable
+	var carg1 C.gint       // in, none, casted
+	var carg2 *C.AtkObject // in, none, converted
+
+	parentclass := (*C.AtkTableIface)(classdata.PeekParentInterface(UnsafeTableToGlibNone(table), uint64(TypeTable)))
+
+	carg1 = C.gint(column)
+	carg2 = (*C.AtkObject)(UnsafeObjectToGlibNone(header))
+
+	C._gotk4_atk1_Table_virtual_set_column_header(unsafe.Pointer(parentclass.set_column_header), carg0, carg1, carg2)
+	runtime.KeepAlive(table)
+	runtime.KeepAlive(column)
+	runtime.KeepAlive(header)
+}
+
+// ParentSetRowDescription calls the default implementations of the set_row_description virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- row int32: a #gint representing a row in @table 
+// 	- description string: a #gchar representing the description text
+// to set for the specified @row of @table 
+//
+// Sets the description text for the specified @row of @table.
+func (table *TableInstance) ParentSetRowDescription(row int32, description string) {
+	var carg0 *C.AtkTable
+	var carg1 C.gint   // in, none, casted
+	var carg2 *C.gchar // in, none, string
+
+	parentclass := (*C.AtkTableIface)(classdata.PeekParentInterface(UnsafeTableToGlibNone(table), uint64(TypeTable)))
+
+	carg1 = C.gint(row)
+	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(description)))
+	defer C.free(unsafe.Pointer(carg2))
+
+	C._gotk4_atk1_Table_virtual_set_row_description(unsafe.Pointer(parentclass.set_row_description), carg0, carg1, carg2)
+	runtime.KeepAlive(table)
+	runtime.KeepAlive(row)
+	runtime.KeepAlive(description)
+}
+
+// ParentSetRowHeader calls the default implementations of the set_row_header virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- row int32: a #gint representing a row in @table 
+// 	- header Object: an #AtkTable 
+//
+// Sets the specified row header to @header.
+func (table *TableInstance) ParentSetRowHeader(row int32, header Object) {
+	var carg0 *C.AtkTable
+	var carg1 C.gint       // in, none, casted
+	var carg2 *C.AtkObject // in, none, converted
+
+	parentclass := (*C.AtkTableIface)(classdata.PeekParentInterface(UnsafeTableToGlibNone(table), uint64(TypeTable)))
+
+	carg1 = C.gint(row)
+	carg2 = (*C.AtkObject)(UnsafeObjectToGlibNone(header))
+
+	C._gotk4_atk1_Table_virtual_set_row_header(unsafe.Pointer(parentclass.set_row_header), carg0, carg1, carg2)
+	runtime.KeepAlive(table)
+	runtime.KeepAlive(row)
+	runtime.KeepAlive(header)
+}
+
+// ParentSetSummary calls the default implementations of the set_summary virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- accessible Object: an #AtkObject representing the summary description
+// to set for @table 
+//
+// Sets the summary description of the table.
+func (table *TableInstance) ParentSetSummary(accessible Object) {
+	var carg0 *C.AtkTable
+	var carg1 *C.AtkObject // in, none, converted
+
+	parentclass := (*C.AtkTableIface)(classdata.PeekParentInterface(UnsafeTableToGlibNone(table), uint64(TypeTable)))
+
+	carg1 = (*C.AtkObject)(UnsafeObjectToGlibNone(accessible))
+
+	C._gotk4_atk1_Table_virtual_set_summary(unsafe.Pointer(parentclass.set_summary), carg0, carg1)
+	runtime.KeepAlive(table)
+	runtime.KeepAlive(accessible)
+}
+
 // TableCellInstance is the instance type used by all types implementing AtkTableCell. It is used internally by the bindings. Users should use the interface [TableCell] instead.
 type TableCellInstance struct {
 	_ [0]func() // equal guard
-	Instance gobject.ObjectInstance
+	gobject.ObjectInstance
 }
 
 var _ TableCell = (*TableCellInstance)(nil)
@@ -10366,6 +14188,7 @@ var _ TableCell = (*TableCellInstance)(nil)
 // 
 // See [iface@AtkTable]
 type TableCell interface {
+	gobject.Object
 	upcastToAtkTableCell() *TableCellInstance
 
 	// GetColumnSpan wraps atk_table_cell_get_column_span
@@ -10418,13 +14241,66 @@ type TableCell interface {
 	//
 	// Returns a reference to the accessible of the containing table.
 	GetTable() Object
+
+	// chain up virtual methods:
+
+	// ParentGetColumnSpan calls the default implementations of the get_column_span virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret int32 
+	//
+	// Returns the number of columns occupied by this cell accessible.
+	ParentGetColumnSpan() int32
+	// ParentGetPosition calls the default implementations of the get_position virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- row int32: the row of the given cell. 
+	// 	- column int32: the column of the given cell. 
+	// 	- goret bool 
+	//
+	// Retrieves the tabular position of this cell.
+	ParentGetPosition() (int32, int32, bool)
+	// ParentGetRowColumnSpan calls the default implementations of the get_row_column_span virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- row int32: the row index of the given cell. 
+	// 	- column int32: the column index of the given cell. 
+	// 	- rowSpan int32: the number of rows occupied by this cell. 
+	// 	- columnSpan int32: the number of columns occupied by this cell. 
+	// 	- goret bool 
+	//
+	// Gets the row and column indexes and span of this cell accessible.
+	// 
+	// Note: If the object does not implement this function, then, by default, atk
+	// will implement this function by calling get_row_span and get_column_span
+	// on the object.
+	ParentGetRowColumnSpan() (int32, int32, int32, int32, bool)
+	// ParentGetRowSpan calls the default implementations of the get_row_span virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret int32 
+	//
+	// Returns the number of rows occupied by this cell accessible.
+	ParentGetRowSpan() int32
+	// ParentGetTable calls the default implementations of the get_table virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret Object 
+	//
+	// Returns a reference to the accessible of the containing table.
+	ParentGetTable() Object
 }
 
 var _ TableCell = (*TableCellInstance)(nil)
 
 func unsafeWrapTableCell(base *gobject.ObjectInstance) *TableCellInstance {
 	return &TableCellInstance{
-		Instance: *base,
+		ObjectInstance: *base,
 	}
 }
 
@@ -10454,13 +14330,13 @@ func UnsafeTableCellFromGlibBorrow(c unsafe.Pointer) TableCell {
 // UnsafeTableCellToGlibNone is used to convert the instance to it's C value AtkTableCell. This is used by the bindings internally.
 func UnsafeTableCellToGlibNone(c TableCell) unsafe.Pointer {
 	i := c.upcastToAtkTableCell()
-	return gobject.UnsafeObjectToGlibNone(&i.Instance)
+	return gobject.UnsafeObjectToGlibNone(i)
 }
 
 // UnsafeTableCellToGlibFull is used to convert the instance to it's C value AtkTableCell, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeTableCellToGlibFull(c TableCell) unsafe.Pointer {
 	i := c.upcastToAtkTableCell()
-	return gobject.UnsafeObjectToGlibFull(&i.Instance)
+	return gobject.UnsafeObjectToGlibFull(i)
 }
 
 // GetColumnSpan wraps atk_table_cell_get_column_span
@@ -10617,6 +14493,8 @@ type TableCellOverrides[Instance TableCell] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
+	//
+	// Returns the number of columns occupied by this cell accessible.
 	GetColumnSpan func(Instance) int32
 	// GetPosition allows you to override the implementation of the virtual method get_position.
 	// The function returns the following values:
@@ -10624,6 +14502,8 @@ type TableCellOverrides[Instance TableCell] struct {
 	// 	- row int32: the row of the given cell. 
 	// 	- column int32: the column of the given cell. 
 	// 	- goret bool 
+	//
+	// Retrieves the tabular position of this cell.
 	GetPosition func(Instance) (int32, int32, bool)
 	// GetRowColumnSpan allows you to override the implementation of the virtual method get_row_column_span.
 	// The function returns the following values:
@@ -10633,16 +14513,26 @@ type TableCellOverrides[Instance TableCell] struct {
 	// 	- rowSpan int32: the number of rows occupied by this cell. 
 	// 	- columnSpan int32: the number of columns occupied by this cell. 
 	// 	- goret bool 
+	//
+	// Gets the row and column indexes and span of this cell accessible.
+	// 
+	// Note: If the object does not implement this function, then, by default, atk
+	// will implement this function by calling get_row_span and get_column_span
+	// on the object.
 	GetRowColumnSpan func(Instance) (int32, int32, int32, int32, bool)
 	// GetRowSpan allows you to override the implementation of the virtual method get_row_span.
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
+	//
+	// Returns the number of rows occupied by this cell accessible.
 	GetRowSpan func(Instance) int32
 	// GetTable allows you to override the implementation of the virtual method get_table.
 	// The function returns the following values:
 	// 
 	// 	- goret Object 
+	//
+	// Returns a reference to the accessible of the containing table.
 	GetTable func(Instance) Object
 }
 
@@ -10768,10 +14658,157 @@ func UnsafeApplyTableCellOverrides[Instance TableCell](gclass unsafe.Pointer, ov
 	}
 }
 
+// ParentGetColumnSpan calls the default implementations of the get_column_span virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret int32 
+//
+// Returns the number of columns occupied by this cell accessible.
+func (cell *TableCellInstance) ParentGetColumnSpan() int32 {
+	var carg0 *C.AtkTableCell
+	var cret  C.gint // return, none, casted
+
+	parentclass := (*C.AtkTableCellIface)(classdata.PeekParentInterface(UnsafeTableCellToGlibNone(cell), uint64(TypeTableCell)))
+
+	cret = C._gotk4_atk1_TableCell_virtual_get_column_span(unsafe.Pointer(parentclass.get_column_span), carg0)
+	runtime.KeepAlive(cell)
+
+	var goret int32
+
+	goret = int32(cret)
+
+	return goret
+}
+
+// ParentGetPosition calls the default implementations of the get_position virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- row int32: the row of the given cell. 
+// 	- column int32: the column of the given cell. 
+// 	- goret bool 
+//
+// Retrieves the tabular position of this cell.
+func (cell *TableCellInstance) ParentGetPosition() (int32, int32, bool) {
+	var carg0 *C.AtkTableCell
+	var carg1 C.gint     // out, full, casted
+	var carg2 C.gint     // out, full, casted
+	var cret  C.gboolean // return
+
+	parentclass := (*C.AtkTableCellIface)(classdata.PeekParentInterface(UnsafeTableCellToGlibNone(cell), uint64(TypeTableCell)))
+
+	cret = C._gotk4_atk1_TableCell_virtual_get_position(unsafe.Pointer(parentclass.get_position), carg0, &carg1, &carg2)
+	runtime.KeepAlive(cell)
+
+	var row    int32
+	var column int32
+	var goret  bool
+
+	row = int32(carg1)
+	column = int32(carg2)
+	if cret != 0 {
+		goret = true
+	}
+
+	return row, column, goret
+}
+
+// ParentGetRowColumnSpan calls the default implementations of the get_row_column_span virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- row int32: the row index of the given cell. 
+// 	- column int32: the column index of the given cell. 
+// 	- rowSpan int32: the number of rows occupied by this cell. 
+// 	- columnSpan int32: the number of columns occupied by this cell. 
+// 	- goret bool 
+//
+// Gets the row and column indexes and span of this cell accessible.
+// 
+// Note: If the object does not implement this function, then, by default, atk
+// will implement this function by calling get_row_span and get_column_span
+// on the object.
+func (cell *TableCellInstance) ParentGetRowColumnSpan() (int32, int32, int32, int32, bool) {
+	var carg0 *C.AtkTableCell
+	var carg1 C.gint     // out, full, casted
+	var carg2 C.gint     // out, full, casted
+	var carg3 C.gint     // out, full, casted
+	var carg4 C.gint     // out, full, casted
+	var cret  C.gboolean // return
+
+	parentclass := (*C.AtkTableCellIface)(classdata.PeekParentInterface(UnsafeTableCellToGlibNone(cell), uint64(TypeTableCell)))
+
+	cret = C._gotk4_atk1_TableCell_virtual_get_row_column_span(unsafe.Pointer(parentclass.get_row_column_span), carg0, &carg1, &carg2, &carg3, &carg4)
+	runtime.KeepAlive(cell)
+
+	var row        int32
+	var column     int32
+	var rowSpan    int32
+	var columnSpan int32
+	var goret      bool
+
+	row = int32(carg1)
+	column = int32(carg2)
+	rowSpan = int32(carg3)
+	columnSpan = int32(carg4)
+	if cret != 0 {
+		goret = true
+	}
+
+	return row, column, rowSpan, columnSpan, goret
+}
+
+// ParentGetRowSpan calls the default implementations of the get_row_span virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret int32 
+//
+// Returns the number of rows occupied by this cell accessible.
+func (cell *TableCellInstance) ParentGetRowSpan() int32 {
+	var carg0 *C.AtkTableCell
+	var cret  C.gint // return, none, casted
+
+	parentclass := (*C.AtkTableCellIface)(classdata.PeekParentInterface(UnsafeTableCellToGlibNone(cell), uint64(TypeTableCell)))
+
+	cret = C._gotk4_atk1_TableCell_virtual_get_row_span(unsafe.Pointer(parentclass.get_row_span), carg0)
+	runtime.KeepAlive(cell)
+
+	var goret int32
+
+	goret = int32(cret)
+
+	return goret
+}
+
+// ParentGetTable calls the default implementations of the get_table virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret Object 
+//
+// Returns a reference to the accessible of the containing table.
+func (cell *TableCellInstance) ParentGetTable() Object {
+	var carg0 *C.AtkTableCell
+	var cret  *C.AtkObject // return, full, converted
+
+	parentclass := (*C.AtkTableCellIface)(classdata.PeekParentInterface(UnsafeTableCellToGlibNone(cell), uint64(TypeTableCell)))
+
+	cret = C._gotk4_atk1_TableCell_virtual_get_table(unsafe.Pointer(parentclass.get_table), carg0)
+	runtime.KeepAlive(cell)
+
+	var goret Object
+
+	goret = UnsafeObjectFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
 // TextInstance is the instance type used by all types implementing AtkText. It is used internally by the bindings. Users should use the interface [Text] instead.
 type TextInstance struct {
 	_ [0]func() // equal guard
-	Instance gobject.ObjectInstance
+	gobject.ObjectInstance
 }
 
 var _ Text = (*TextInstance)(nil)
@@ -10800,6 +14837,7 @@ var _ Text = (*TextInstance)(nil)
 // character length; also bounding box glyph-to-offset mapping may be
 // complex for languages which use ligatures.
 type Text interface {
+	gobject.Object
 	upcastToAtkText() *TextInstance
 
 	// AddTextSelection wraps atk_text_add_selection
@@ -11134,13 +15172,332 @@ type Text interface {
 	// The "text-selection-changed" signal is emitted when the
 	// selected text of an object which implements AtkText changes.
 	ConnectTextSelectionChanged(func(Text)) gobject.SignalHandle
+
+	// chain up virtual methods:
+
+	// ParentAddSelection calls the default implementations of the add_selection virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- startOffset int32: the starting character offset of the selected region 
+	// 	- endOffset int32: the offset of the first character after the selected region. 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	//
+	// Adds a selection bounded by the specified offsets.
+	ParentAddSelection(startOffset int32, endOffset int32) bool
+	// ParentGetBoundedRanges calls the default implementations of the get_bounded_ranges virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- rect *TextRectangle: An AtkTextRectangle giving the dimensions of the bounding box. 
+	// 	- coordType CoordType: Specify whether coordinates are relative to the screen or widget window. 
+	// 	- xClipType TextClipType: Specify the horizontal clip type. 
+	// 	- yClipType TextClipType: Specify the vertical clip type. 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret []*TextRange 
+	//
+	// Get the ranges of text in the specified bounding box.
+	ParentGetBoundedRanges(rect *TextRectangle, coordType CoordType, xClipType TextClipType, yClipType TextClipType) []*TextRange
+	// ParentGetCaretOffset calls the default implementations of the get_caret_offset virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret int32 
+	//
+	// Gets the offset of the position of the caret (cursor).
+	ParentGetCaretOffset() int32
+	// ParentGetCharacterAtOffset calls the default implementations of the get_character_at_offset virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- offset int32: a character offset within @text 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret uint32 
+	//
+	// Gets the specified text.
+	ParentGetCharacterAtOffset(offset int32) uint32
+	// ParentGetCharacterCount calls the default implementations of the get_character_count virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret int32 
+	//
+	// Gets the character count.
+	ParentGetCharacterCount() int32
+	// ParentGetCharacterExtents calls the default implementations of the get_character_extents virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- offset int32: The offset of the text character for which bounding information is required. 
+	// 	- coords CoordType: specify whether coordinates are relative to the screen or widget window 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- x int32: Pointer for the x coordinate of the bounding box 
+	// 	- y int32: Pointer for the y coordinate of the bounding box 
+	// 	- width int32: Pointer for the width of the bounding box 
+	// 	- height int32: Pointer for the height of the bounding box 
+	//
+	// If the extent can not be obtained (e.g. missing support), all of x, y, width,
+	// height are set to -1.
+	// 
+	// Get the bounding box containing the glyph representing the character at
+	//     a particular text offset.
+	ParentGetCharacterExtents(offset int32, coords CoordType) (int32, int32, int32, int32)
+	// ParentGetNSelections calls the default implementations of the get_n_selections virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret int32 
+	//
+	// Gets the number of selected regions.
+	ParentGetNSelections() int32
+	// ParentGetOffsetAtPoint calls the default implementations of the get_offset_at_point virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- x int32: screen x-position of character 
+	// 	- y int32: screen y-position of character 
+	// 	- coords CoordType: specify whether coordinates are relative to the screen or
+	// widget window 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret int32 
+	//
+	// Gets the offset of the character located at coordinates @x and @y. @x and @y
+	// are interpreted as being relative to the screen or this widget's window
+	// depending on @coords.
+	ParentGetOffsetAtPoint(x int32, y int32, coords CoordType) int32
+	// ParentGetRangeExtents calls the default implementations of the get_range_extents virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- startOffset int32: The offset of the first text character for which boundary
+	//        information is required. 
+	// 	- endOffset int32: The offset of the text character after the last character
+	//        for which boundary information is required. 
+	// 	- coordType CoordType: Specify whether coordinates are relative to the screen or widget window. 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- rect TextRectangle: A pointer to a AtkTextRectangle which is filled in by this function. 
+	//
+	// Get the bounding box for text within the specified range.
+	// 
+	// If the extents can not be obtained (e.g. or missing support), the rectangle
+	// fields are set to -1.
+	ParentGetRangeExtents(startOffset int32, endOffset int32, coordType CoordType) TextRectangle
+	// ParentGetSelection calls the default implementations of the get_selection virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- selectionNum int32: The selection number.  The selected regions are
+	// assigned numbers that correspond to how far the region is from the
+	// start of the text.  The selected region closest to the beginning
+	// of the text region is assigned the number 0, etc.  Note that adding,
+	// moving or deleting a selected region can change the numbering. 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- startOffset int32: passes back the starting character offset of the selected region 
+	// 	- endOffset int32: passes back the ending character offset (offset immediately past)
+	// of the selected region 
+	// 	- goret string 
+	//
+	// Gets the text from the specified selection.
+	ParentGetSelection(selectionNum int32) (int32, int32, string)
+	// ParentGetStringAtOffset calls the default implementations of the get_string_at_offset virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- offset int32: position 
+	// 	- granularity TextGranularity: An #AtkTextGranularity 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- startOffset int32: the starting character offset of the returned string, or -1
+	//                in the case of error (e.g. invalid offset, not implemented) 
+	// 	- endOffset int32: the offset of the first character after the returned string,
+	//              or -1 in the case of error (e.g. invalid offset, not implemented) 
+	// 	- goret string (nullable) 
+	//
+	// Gets a portion of the text exposed through an #AtkText according to a given @offset
+	// and a specific @granularity, along with the start and end offsets defining the
+	// boundaries of such a portion of text.
+	// 
+	// If @granularity is ATK_TEXT_GRANULARITY_CHAR the character at the
+	// offset is returned.
+	// 
+	// If @granularity is ATK_TEXT_GRANULARITY_WORD the returned string
+	// is from the word start at or before the offset to the word start after
+	// the offset.
+	// 
+	// The returned string will contain the word at the offset if the offset
+	// is inside a word and will contain the word before the offset if the
+	// offset is not inside a word.
+	// 
+	// If @granularity is ATK_TEXT_GRANULARITY_SENTENCE the returned string
+	// is from the sentence start at or before the offset to the sentence
+	// start after the offset.
+	// 
+	// The returned string will contain the sentence at the offset if the offset
+	// is inside a sentence and will contain the sentence before the offset
+	// if the offset is not inside a sentence.
+	// 
+	// If @granularity is ATK_TEXT_GRANULARITY_LINE the returned string
+	// is from the line start at or before the offset to the line
+	// start after the offset.
+	// 
+	// If @granularity is ATK_TEXT_GRANULARITY_PARAGRAPH the returned string
+	// is from the start of the paragraph at or before the offset to the start
+	// of the following paragraph after the offset.
+	ParentGetStringAtOffset(offset int32, granularity TextGranularity) (int32, int32, string)
+	// ParentGetText calls the default implementations of the get_text virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- startOffset int32: a starting character offset within @text 
+	// 	- endOffset int32: an ending character offset within @text, or -1 for the end of the string. 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret string 
+	//
+	// Gets the specified text.
+	ParentGetText(startOffset int32, endOffset int32) string
+	// ParentRemoveSelection calls the default implementations of the remove_selection virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- selectionNum int32: The selection number.  The selected regions are
+	// assigned numbers that correspond to how far the region is from the
+	// start of the text.  The selected region closest to the beginning
+	// of the text region is assigned the number 0, etc.  Note that adding,
+	// moving or deleting a selected region can change the numbering. 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	//
+	// Removes the specified selection.
+	ParentRemoveSelection(selectionNum int32) bool
+	// ParentScrollSubstringTo calls the default implementations of the scroll_substring_to virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- startOffset int32: start offset in the @text 
+	// 	- endOffset int32: end offset in the @text, or -1 for the end of the text. 
+	// 	- typ ScrollType: specify where the object should be made visible. 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	//
+	// Makes a substring of @text visible on the screen by scrolling all necessary parents.
+	ParentScrollSubstringTo(startOffset int32, endOffset int32, typ ScrollType) bool
+	// ParentScrollSubstringToPoint calls the default implementations of the scroll_substring_to_point virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- startOffset int32: start offset in the @text 
+	// 	- endOffset int32: end offset in the @text, or -1 for the end of the text. 
+	// 	- coords CoordType: specify whether coordinates are relative to the screen or to the
+	// parent object. 
+	// 	- x int32: x-position where to scroll to 
+	// 	- y int32: y-position where to scroll to 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	//
+	// Move the top-left of a substring of @text to a given position of the screen
+	// by scrolling all necessary parents.
+	ParentScrollSubstringToPoint(startOffset int32, endOffset int32, coords CoordType, x int32, y int32) bool
+	// ParentSetCaretOffset calls the default implementations of the set_caret_offset virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- offset int32: the character offset of the new caret position 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	//
+	// Sets the caret (cursor) position to the specified @offset.
+	// 
+	// In the case of rich-text content, this method should either grab focus
+	// or move the sequential focus navigation starting point (if the application
+	// supports this concept) as if the user had clicked on the new caret position.
+	// Typically, this means that the target of this operation is the node containing
+	// the new caret position or one of its ancestors. In other words, after this
+	// method is called, if the user advances focus, it should move to the first
+	// focusable node following the new caret position.
+	// 
+	// Calling this method should also scroll the application viewport in a way
+	// that matches the behavior of the application's typical caret motion or tab
+	// navigation as closely as possible. This also means that if the application's
+	// caret motion or focus navigation does not trigger a scroll operation, this
+	// method should not trigger one either. If the application does not have a caret
+	// motion or focus navigation operation, this method should try to scroll the new
+	// caret position into view while minimizing unnecessary scroll motion.
+	ParentSetCaretOffset(offset int32) bool
+	// ParentSetSelection calls the default implementations of the set_selection virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- selectionNum int32: The selection number.  The selected regions are
+	// assigned numbers that correspond to how far the region is from the
+	// start of the text.  The selected region closest to the beginning
+	// of the text region is assigned the number 0, etc.  Note that adding,
+	// moving or deleting a selected region can change the numbering. 
+	// 	- startOffset int32: the new starting character offset of the selection 
+	// 	- endOffset int32: the new end position of (e.g. offset immediately past)
+	// the selection 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	//
+	// Changes the start and end offset of the specified selection.
+	ParentSetSelection(selectionNum int32, startOffset int32, endOffset int32) bool
+	// ParentTextAttributesChanged calls the default implementations of the text_attributes_changed virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	ParentTextAttributesChanged()
+	// ParentTextCaretMoved calls the default implementations of the text_caret_moved virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- location int32 
+	ParentTextCaretMoved(location int32)
+	// ParentTextChanged calls the default implementations of the text_changed virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- position int32 
+	// 	- length int32 
+	//
+	// the signal handler which is executed when there is a
+	//   text change. This virtual function is deprecated sice 2.9.4 and
+	//   it should not be overriden.
+	ParentTextChanged(position int32, length int32)
+	// ParentTextSelectionChanged calls the default implementations of the text_selection_changed virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	ParentTextSelectionChanged()
 }
 
 var _ Text = (*TextInstance)(nil)
 
 func unsafeWrapText(base *gobject.ObjectInstance) *TextInstance {
 	return &TextInstance{
-		Instance: *base,
+		ObjectInstance: *base,
 	}
 }
 
@@ -11170,13 +15527,13 @@ func UnsafeTextFromGlibBorrow(c unsafe.Pointer) Text {
 // UnsafeTextToGlibNone is used to convert the instance to it's C value AtkText. This is used by the bindings internally.
 func UnsafeTextToGlibNone(c Text) unsafe.Pointer {
 	i := c.upcastToAtkText()
-	return gobject.UnsafeObjectToGlibNone(&i.Instance)
+	return gobject.UnsafeObjectToGlibNone(i)
 }
 
 // UnsafeTextToGlibFull is used to convert the instance to it's C value AtkText, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeTextToGlibFull(c Text) unsafe.Pointer {
 	i := c.upcastToAtkText()
-	return gobject.UnsafeObjectToGlibFull(&i.Instance)
+	return gobject.UnsafeObjectToGlibFull(i)
 }
 
 // AddTextSelection wraps atk_text_add_selection
@@ -11874,7 +16231,7 @@ func (text *TextInstance) SetSelection(selectionNum int32, startOffset int32, en
 // attributes of the text of an object which implements AtkText
 // changes.
 func (o *TextInstance) ConnectTextAttributesChanged(fn func(Text)) gobject.SignalHandle {
-	return o.Instance.Connect("text-attributes-changed", fn)
+	return o.Connect("text-attributes-changed", fn)
 }
 
 // ConnectTextCaretMoved connects the provided callback to the "text-caret-moved" signal
@@ -11883,7 +16240,7 @@ func (o *TextInstance) ConnectTextAttributesChanged(fn func(Text)) gobject.Signa
 // position of the text of an object which implements AtkText
 // changes.
 func (o *TextInstance) ConnectTextCaretMoved(fn func(Text, int32)) gobject.SignalHandle {
-	return o.Instance.Connect("text-caret-moved", fn)
+	return o.Connect("text-caret-moved", fn)
 }
 
 // ConnectTextChanged connects the provided callback to the "text-changed" signal
@@ -11894,7 +16251,7 @@ func (o *TextInstance) ConnectTextCaretMoved(fn func(Text, int32)) gobject.Signa
 // "delete" which identifies whether the text change was an
 // insertion or a deletion.
 func (o *TextInstance) ConnectTextChanged(fn func(Text, int32, int32)) gobject.SignalHandle {
-	return o.Instance.Connect("text-changed", fn)
+	return o.Connect("text-changed", fn)
 }
 
 // ConnectTextInsert connects the provided callback to the "text-insert" signal
@@ -11904,7 +16261,7 @@ func (o *TextInstance) ConnectTextChanged(fn func(Text, int32, int32)) gobject.S
 // (e.g. typing or pasting text), the "system" detail should be
 // included.
 func (o *TextInstance) ConnectTextInsert(fn func(Text, int32, int32, string)) gobject.SignalHandle {
-	return o.Instance.Connect("text-insert", fn)
+	return o.Connect("text-insert", fn)
 }
 
 // ConnectTextRemove connects the provided callback to the "text-remove" signal
@@ -11914,7 +16271,7 @@ func (o *TextInstance) ConnectTextInsert(fn func(Text, int32, int32, string)) go
 // (e.g. typing or pasting text), the "system" detail should be
 // included.
 func (o *TextInstance) ConnectTextRemove(fn func(Text, int32, int32, string)) gobject.SignalHandle {
-	return o.Instance.Connect("text-remove", fn)
+	return o.Connect("text-remove", fn)
 }
 
 // ConnectTextSelectionChanged connects the provided callback to the "text-selection-changed" signal
@@ -11922,7 +16279,7 @@ func (o *TextInstance) ConnectTextRemove(fn func(Text, int32, int32, string)) go
 // The "text-selection-changed" signal is emitted when the
 // selected text of an object which implements AtkText changes.
 func (o *TextInstance) ConnectTextSelectionChanged(fn func(Text)) gobject.SignalHandle {
-	return o.Instance.Connect("text-selection-changed", fn)
+	return o.Connect("text-selection-changed", fn)
 }
 
 // TextOverrides is the struct used to override the default implementation of virtual methods.
@@ -11937,6 +16294,8 @@ type TextOverrides[Instance Text] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
+	//
+	// Adds a selection bounded by the specified offsets.
 	AddSelection func(Instance, int32, int32) bool
 	// GetBoundedRanges allows you to override the implementation of the virtual method get_bounded_ranges.
 	// The function takes the following parameters:
@@ -11949,11 +16308,15 @@ type TextOverrides[Instance Text] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret []*TextRange 
+	//
+	// Get the ranges of text in the specified bounding box.
 	GetBoundedRanges func(Instance, *TextRectangle, CoordType, TextClipType, TextClipType) []*TextRange
 	// GetCaretOffset allows you to override the implementation of the virtual method get_caret_offset.
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
+	//
+	// Gets the offset of the position of the caret (cursor).
 	GetCaretOffset func(Instance) int32
 	// GetCharacterAtOffset allows you to override the implementation of the virtual method get_character_at_offset.
 	// The function takes the following parameters:
@@ -11963,11 +16326,15 @@ type TextOverrides[Instance Text] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret uint32 
+	//
+	// Gets the specified text.
 	GetCharacterAtOffset func(Instance, int32) uint32
 	// GetCharacterCount allows you to override the implementation of the virtual method get_character_count.
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
+	//
+	// Gets the character count.
 	GetCharacterCount func(Instance) int32
 	// GetCharacterExtents allows you to override the implementation of the virtual method get_character_extents.
 	// The function takes the following parameters:
@@ -11981,11 +16348,19 @@ type TextOverrides[Instance Text] struct {
 	// 	- y int32: Pointer for the y coordinate of the bounding box 
 	// 	- width int32: Pointer for the width of the bounding box 
 	// 	- height int32: Pointer for the height of the bounding box 
+	//
+	// If the extent can not be obtained (e.g. missing support), all of x, y, width,
+	// height are set to -1.
+	// 
+	// Get the bounding box containing the glyph representing the character at
+	//     a particular text offset.
 	GetCharacterExtents func(Instance, int32, CoordType) (int32, int32, int32, int32)
 	// GetNSelections allows you to override the implementation of the virtual method get_n_selections.
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
+	//
+	// Gets the number of selected regions.
 	GetNSelections func(Instance) int32
 	// GetOffsetAtPoint allows you to override the implementation of the virtual method get_offset_at_point.
 	// The function takes the following parameters:
@@ -11998,6 +16373,10 @@ type TextOverrides[Instance Text] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
+	//
+	// Gets the offset of the character located at coordinates @x and @y. @x and @y
+	// are interpreted as being relative to the screen or this widget's window
+	// depending on @coords.
 	GetOffsetAtPoint func(Instance, int32, int32, CoordType) int32
 	// GetRangeExtents allows you to override the implementation of the virtual method get_range_extents.
 	// The function takes the following parameters:
@@ -12011,6 +16390,11 @@ type TextOverrides[Instance Text] struct {
 	// The function returns the following values:
 	// 
 	// 	- rect TextRectangle: A pointer to a AtkTextRectangle which is filled in by this function. 
+	//
+	// Get the bounding box for text within the specified range.
+	// 
+	// If the extents can not be obtained (e.g. or missing support), the rectangle
+	// fields are set to -1.
 	GetRangeExtents func(Instance, int32, int32, CoordType) TextRectangle
 	// GetSelection allows you to override the implementation of the virtual method get_selection.
 	// The function takes the following parameters:
@@ -12027,6 +16411,8 @@ type TextOverrides[Instance Text] struct {
 	// 	- endOffset int32: passes back the ending character offset (offset immediately past)
 	// of the selected region 
 	// 	- goret string 
+	//
+	// Gets the text from the specified selection.
 	GetSelection func(Instance, int32) (int32, int32, string)
 	// GetStringAtOffset allows you to override the implementation of the virtual method get_string_at_offset.
 	// The function takes the following parameters:
@@ -12041,6 +16427,37 @@ type TextOverrides[Instance Text] struct {
 	// 	- endOffset int32: the offset of the first character after the returned string,
 	//              or -1 in the case of error (e.g. invalid offset, not implemented) 
 	// 	- goret string (nullable) 
+	//
+	// Gets a portion of the text exposed through an #AtkText according to a given @offset
+	// and a specific @granularity, along with the start and end offsets defining the
+	// boundaries of such a portion of text.
+	// 
+	// If @granularity is ATK_TEXT_GRANULARITY_CHAR the character at the
+	// offset is returned.
+	// 
+	// If @granularity is ATK_TEXT_GRANULARITY_WORD the returned string
+	// is from the word start at or before the offset to the word start after
+	// the offset.
+	// 
+	// The returned string will contain the word at the offset if the offset
+	// is inside a word and will contain the word before the offset if the
+	// offset is not inside a word.
+	// 
+	// If @granularity is ATK_TEXT_GRANULARITY_SENTENCE the returned string
+	// is from the sentence start at or before the offset to the sentence
+	// start after the offset.
+	// 
+	// The returned string will contain the sentence at the offset if the offset
+	// is inside a sentence and will contain the sentence before the offset
+	// if the offset is not inside a sentence.
+	// 
+	// If @granularity is ATK_TEXT_GRANULARITY_LINE the returned string
+	// is from the line start at or before the offset to the line
+	// start after the offset.
+	// 
+	// If @granularity is ATK_TEXT_GRANULARITY_PARAGRAPH the returned string
+	// is from the start of the paragraph at or before the offset to the start
+	// of the following paragraph after the offset.
 	GetStringAtOffset func(Instance, int32, TextGranularity) (int32, int32, string)
 	// GetText allows you to override the implementation of the virtual method get_text.
 	// The function takes the following parameters:
@@ -12051,6 +16468,8 @@ type TextOverrides[Instance Text] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret string 
+	//
+	// Gets the specified text.
 	GetText func(Instance, int32, int32) string
 	// RemoveSelection allows you to override the implementation of the virtual method remove_selection.
 	// The function takes the following parameters:
@@ -12064,6 +16483,8 @@ type TextOverrides[Instance Text] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
+	//
+	// Removes the specified selection.
 	RemoveSelection func(Instance, int32) bool
 	// ScrollSubstringTo allows you to override the implementation of the virtual method scroll_substring_to.
 	// The function takes the following parameters:
@@ -12075,6 +16496,8 @@ type TextOverrides[Instance Text] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
+	//
+	// Makes a substring of @text visible on the screen by scrolling all necessary parents.
 	ScrollSubstringTo func(Instance, int32, int32, ScrollType) bool
 	// ScrollSubstringToPoint allows you to override the implementation of the virtual method scroll_substring_to_point.
 	// The function takes the following parameters:
@@ -12089,6 +16512,9 @@ type TextOverrides[Instance Text] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
+	//
+	// Move the top-left of a substring of @text to a given position of the screen
+	// by scrolling all necessary parents.
 	ScrollSubstringToPoint func(Instance, int32, int32, CoordType, int32, int32) bool
 	// SetCaretOffset allows you to override the implementation of the virtual method set_caret_offset.
 	// The function takes the following parameters:
@@ -12098,6 +16524,24 @@ type TextOverrides[Instance Text] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
+	//
+	// Sets the caret (cursor) position to the specified @offset.
+	// 
+	// In the case of rich-text content, this method should either grab focus
+	// or move the sequential focus navigation starting point (if the application
+	// supports this concept) as if the user had clicked on the new caret position.
+	// Typically, this means that the target of this operation is the node containing
+	// the new caret position or one of its ancestors. In other words, after this
+	// method is called, if the user advances focus, it should move to the first
+	// focusable node following the new caret position.
+	// 
+	// Calling this method should also scroll the application viewport in a way
+	// that matches the behavior of the application's typical caret motion or tab
+	// navigation as closely as possible. This also means that if the application's
+	// caret motion or focus navigation does not trigger a scroll operation, this
+	// method should not trigger one either. If the application does not have a caret
+	// motion or focus navigation operation, this method should try to scroll the new
+	// caret position into view while minimizing unnecessary scroll motion.
 	SetCaretOffset func(Instance, int32) bool
 	// SetSelection allows you to override the implementation of the virtual method set_selection.
 	// The function takes the following parameters:
@@ -12114,6 +16558,8 @@ type TextOverrides[Instance Text] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
+	//
+	// Changes the start and end offset of the specified selection.
 	SetSelection func(Instance, int32, int32, int32) bool
 	// TextAttributesChanged allows you to override the implementation of the virtual method text_attributes_changed.
 	TextAttributesChanged func(Instance)
@@ -12127,6 +16573,10 @@ type TextOverrides[Instance Text] struct {
 	// 
 	// 	- position int32 
 	// 	- length int32 
+	//
+	// the signal handler which is executed when there is a
+	//   text change. This virtual function is deprecated sice 2.9.4 and
+	//   it should not be overriden.
 	TextChanged func(Instance, int32, int32)
 	// TextSelectionChanged allows you to override the implementation of the virtual method text_selection_changed.
 	TextSelectionChanged func(Instance)
@@ -12638,10 +17088,779 @@ func UnsafeApplyTextOverrides[Instance Text](gclass unsafe.Pointer, overrides Te
 	}
 }
 
+// ParentAddSelection calls the default implementations of the add_selection virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- startOffset int32: the starting character offset of the selected region 
+// 	- endOffset int32: the offset of the first character after the selected region. 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Adds a selection bounded by the specified offsets.
+func (text *TextInstance) ParentAddSelection(startOffset int32, endOffset int32) bool {
+	var carg0 *C.AtkText
+	var carg1 C.gint     // in, none, casted
+	var carg2 C.gint     // in, none, casted
+	var cret  C.gboolean // return
+
+	parentclass := (*C.AtkTextIface)(classdata.PeekParentInterface(UnsafeTextToGlibNone(text), uint64(TypeText)))
+
+	carg1 = C.gint(startOffset)
+	carg2 = C.gint(endOffset)
+
+	cret = C._gotk4_atk1_Text_virtual_add_selection(unsafe.Pointer(parentclass.add_selection), carg0, carg1, carg2)
+	runtime.KeepAlive(text)
+	runtime.KeepAlive(startOffset)
+	runtime.KeepAlive(endOffset)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// ParentGetBoundedRanges calls the default implementations of the get_bounded_ranges virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- rect *TextRectangle: An AtkTextRectangle giving the dimensions of the bounding box. 
+// 	- coordType CoordType: Specify whether coordinates are relative to the screen or widget window. 
+// 	- xClipType TextClipType: Specify the horizontal clip type. 
+// 	- yClipType TextClipType: Specify the vertical clip type. 
+// 
+// The function returns the following values:
+// 
+// 	- goret []*TextRange 
+//
+// Get the ranges of text in the specified bounding box.
+func (text *TextInstance) ParentGetBoundedRanges(rect *TextRectangle, coordType CoordType, xClipType TextClipType, yClipType TextClipType) []*TextRange {
+	var carg0 *C.AtkText
+	var carg1 *C.AtkTextRectangle // in, none, converted
+	var carg2 C.AtkCoordType      // in, none, casted
+	var carg3 C.AtkTextClipType   // in, none, casted
+	var carg4 C.AtkTextClipType   // in, none, casted
+	var cret  **C.AtkTextRange    // return, transfer: full, C Pointers: 2, Name: array[TextRange], scope: , array (inner: *typesystem.Record, zero-terminated)
+
+	parentclass := (*C.AtkTextIface)(classdata.PeekParentInterface(UnsafeTextToGlibNone(text), uint64(TypeText)))
+
+	carg1 = (*C.AtkTextRectangle)(UnsafeTextRectangleToGlibNone(rect))
+	carg2 = C.AtkCoordType(coordType)
+	carg3 = C.AtkTextClipType(xClipType)
+	carg4 = C.AtkTextClipType(yClipType)
+
+	cret = C._gotk4_atk1_Text_virtual_get_bounded_ranges(unsafe.Pointer(parentclass.get_bounded_ranges), carg0, carg1, carg2, carg3, carg4)
+	runtime.KeepAlive(text)
+	runtime.KeepAlive(rect)
+	runtime.KeepAlive(coordType)
+	runtime.KeepAlive(xClipType)
+	runtime.KeepAlive(yClipType)
+
+	var goret []*TextRange
+
+	_ = goret
+	_ = cret
+	panic("unimplemented conversion of []*TextRange (AtkTextRange**)")
+
+	return goret
+}
+
+// ParentGetCaretOffset calls the default implementations of the get_caret_offset virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret int32 
+//
+// Gets the offset of the position of the caret (cursor).
+func (text *TextInstance) ParentGetCaretOffset() int32 {
+	var carg0 *C.AtkText
+	var cret  C.gint // return, none, casted
+
+	parentclass := (*C.AtkTextIface)(classdata.PeekParentInterface(UnsafeTextToGlibNone(text), uint64(TypeText)))
+
+	cret = C._gotk4_atk1_Text_virtual_get_caret_offset(unsafe.Pointer(parentclass.get_caret_offset), carg0)
+	runtime.KeepAlive(text)
+
+	var goret int32
+
+	goret = int32(cret)
+
+	return goret
+}
+
+// ParentGetCharacterAtOffset calls the default implementations of the get_character_at_offset virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- offset int32: a character offset within @text 
+// 
+// The function returns the following values:
+// 
+// 	- goret uint32 
+//
+// Gets the specified text.
+func (text *TextInstance) ParentGetCharacterAtOffset(offset int32) uint32 {
+	var carg0 *C.AtkText
+	var carg1 C.gint     // in, none, casted
+	var cret  C.gunichar // return, none, casted
+
+	parentclass := (*C.AtkTextIface)(classdata.PeekParentInterface(UnsafeTextToGlibNone(text), uint64(TypeText)))
+
+	carg1 = C.gint(offset)
+
+	cret = C._gotk4_atk1_Text_virtual_get_character_at_offset(unsafe.Pointer(parentclass.get_character_at_offset), carg0, carg1)
+	runtime.KeepAlive(text)
+	runtime.KeepAlive(offset)
+
+	var goret uint32
+
+	goret = uint32(cret)
+
+	return goret
+}
+
+// ParentGetCharacterCount calls the default implementations of the get_character_count virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret int32 
+//
+// Gets the character count.
+func (text *TextInstance) ParentGetCharacterCount() int32 {
+	var carg0 *C.AtkText
+	var cret  C.gint // return, none, casted
+
+	parentclass := (*C.AtkTextIface)(classdata.PeekParentInterface(UnsafeTextToGlibNone(text), uint64(TypeText)))
+
+	cret = C._gotk4_atk1_Text_virtual_get_character_count(unsafe.Pointer(parentclass.get_character_count), carg0)
+	runtime.KeepAlive(text)
+
+	var goret int32
+
+	goret = int32(cret)
+
+	return goret
+}
+
+// ParentGetCharacterExtents calls the default implementations of the get_character_extents virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- offset int32: The offset of the text character for which bounding information is required. 
+// 	- coords CoordType: specify whether coordinates are relative to the screen or widget window 
+// 
+// The function returns the following values:
+// 
+// 	- x int32: Pointer for the x coordinate of the bounding box 
+// 	- y int32: Pointer for the y coordinate of the bounding box 
+// 	- width int32: Pointer for the width of the bounding box 
+// 	- height int32: Pointer for the height of the bounding box 
+//
+// If the extent can not be obtained (e.g. missing support), all of x, y, width,
+// height are set to -1.
+// 
+// Get the bounding box containing the glyph representing the character at
+//     a particular text offset.
+func (text *TextInstance) ParentGetCharacterExtents(offset int32, coords CoordType) (int32, int32, int32, int32) {
+	var carg0 *C.AtkText
+	var carg1 C.gint         // in, none, casted
+	var carg6 C.AtkCoordType // in, none, casted
+	var carg2 C.gint         // out, full, casted
+	var carg3 C.gint         // out, full, casted
+	var carg4 C.gint         // out, full, casted
+	var carg5 C.gint         // out, full, casted
+
+	parentclass := (*C.AtkTextIface)(classdata.PeekParentInterface(UnsafeTextToGlibNone(text), uint64(TypeText)))
+
+	carg1 = C.gint(offset)
+	carg6 = C.AtkCoordType(coords)
+
+	C._gotk4_atk1_Text_virtual_get_character_extents(unsafe.Pointer(parentclass.get_character_extents), carg0, carg1, &carg2, &carg3, &carg4, &carg5, carg6)
+	runtime.KeepAlive(text)
+	runtime.KeepAlive(offset)
+	runtime.KeepAlive(coords)
+
+	var x      int32
+	var y      int32
+	var width  int32
+	var height int32
+
+	x = int32(carg2)
+	y = int32(carg3)
+	width = int32(carg4)
+	height = int32(carg5)
+
+	return x, y, width, height
+}
+
+// ParentGetNSelections calls the default implementations of the get_n_selections virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret int32 
+//
+// Gets the number of selected regions.
+func (text *TextInstance) ParentGetNSelections() int32 {
+	var carg0 *C.AtkText
+	var cret  C.gint // return, none, casted
+
+	parentclass := (*C.AtkTextIface)(classdata.PeekParentInterface(UnsafeTextToGlibNone(text), uint64(TypeText)))
+
+	cret = C._gotk4_atk1_Text_virtual_get_n_selections(unsafe.Pointer(parentclass.get_n_selections), carg0)
+	runtime.KeepAlive(text)
+
+	var goret int32
+
+	goret = int32(cret)
+
+	return goret
+}
+
+// ParentGetOffsetAtPoint calls the default implementations of the get_offset_at_point virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- x int32: screen x-position of character 
+// 	- y int32: screen y-position of character 
+// 	- coords CoordType: specify whether coordinates are relative to the screen or
+// widget window 
+// 
+// The function returns the following values:
+// 
+// 	- goret int32 
+//
+// Gets the offset of the character located at coordinates @x and @y. @x and @y
+// are interpreted as being relative to the screen or this widget's window
+// depending on @coords.
+func (text *TextInstance) ParentGetOffsetAtPoint(x int32, y int32, coords CoordType) int32 {
+	var carg0 *C.AtkText
+	var carg1 C.gint         // in, none, casted
+	var carg2 C.gint         // in, none, casted
+	var carg3 C.AtkCoordType // in, none, casted
+	var cret  C.gint         // return, none, casted
+
+	parentclass := (*C.AtkTextIface)(classdata.PeekParentInterface(UnsafeTextToGlibNone(text), uint64(TypeText)))
+
+	carg1 = C.gint(x)
+	carg2 = C.gint(y)
+	carg3 = C.AtkCoordType(coords)
+
+	cret = C._gotk4_atk1_Text_virtual_get_offset_at_point(unsafe.Pointer(parentclass.get_offset_at_point), carg0, carg1, carg2, carg3)
+	runtime.KeepAlive(text)
+	runtime.KeepAlive(x)
+	runtime.KeepAlive(y)
+	runtime.KeepAlive(coords)
+
+	var goret int32
+
+	goret = int32(cret)
+
+	return goret
+}
+
+// ParentGetRangeExtents calls the default implementations of the get_range_extents virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- startOffset int32: The offset of the first text character for which boundary
+//        information is required. 
+// 	- endOffset int32: The offset of the text character after the last character
+//        for which boundary information is required. 
+// 	- coordType CoordType: Specify whether coordinates are relative to the screen or widget window. 
+// 
+// The function returns the following values:
+// 
+// 	- rect TextRectangle: A pointer to a AtkTextRectangle which is filled in by this function. 
+//
+// Get the bounding box for text within the specified range.
+// 
+// If the extents can not be obtained (e.g. or missing support), the rectangle
+// fields are set to -1.
+func (text *TextInstance) ParentGetRangeExtents(startOffset int32, endOffset int32, coordType CoordType) TextRectangle {
+	var carg0 *C.AtkText
+	var carg1 C.gint             // in, none, casted
+	var carg2 C.gint             // in, none, casted
+	var carg3 C.AtkCoordType     // in, none, casted
+	var carg4 C.AtkTextRectangle // out, transfer: none, C Pointers: 0, Name: TextRectangle, caller-allocates
+
+	parentclass := (*C.AtkTextIface)(classdata.PeekParentInterface(UnsafeTextToGlibNone(text), uint64(TypeText)))
+
+	carg1 = C.gint(startOffset)
+	carg2 = C.gint(endOffset)
+	carg3 = C.AtkCoordType(coordType)
+
+	C._gotk4_atk1_Text_virtual_get_range_extents(unsafe.Pointer(parentclass.get_range_extents), carg0, carg1, carg2, carg3, &carg4)
+	runtime.KeepAlive(text)
+	runtime.KeepAlive(startOffset)
+	runtime.KeepAlive(endOffset)
+	runtime.KeepAlive(coordType)
+
+	var rect TextRectangle
+
+	_ = rect
+	_ = carg4
+	panic("unimplemented conversion of TextRectangle (AtkTextRectangle)")
+
+	return rect
+}
+
+// ParentGetSelection calls the default implementations of the get_selection virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- selectionNum int32: The selection number.  The selected regions are
+// assigned numbers that correspond to how far the region is from the
+// start of the text.  The selected region closest to the beginning
+// of the text region is assigned the number 0, etc.  Note that adding,
+// moving or deleting a selected region can change the numbering. 
+// 
+// The function returns the following values:
+// 
+// 	- startOffset int32: passes back the starting character offset of the selected region 
+// 	- endOffset int32: passes back the ending character offset (offset immediately past)
+// of the selected region 
+// 	- goret string 
+//
+// Gets the text from the specified selection.
+func (text *TextInstance) ParentGetSelection(selectionNum int32) (int32, int32, string) {
+	var carg0 *C.AtkText
+	var carg1 C.gint   // in, none, casted
+	var carg2 C.gint   // out, full, casted
+	var carg3 C.gint   // out, full, casted
+	var cret  *C.gchar // return, full, string
+
+	parentclass := (*C.AtkTextIface)(classdata.PeekParentInterface(UnsafeTextToGlibNone(text), uint64(TypeText)))
+
+	carg1 = C.gint(selectionNum)
+
+	cret = C._gotk4_atk1_Text_virtual_get_selection(unsafe.Pointer(parentclass.get_selection), carg0, carg1, &carg2, &carg3)
+	runtime.KeepAlive(text)
+	runtime.KeepAlive(selectionNum)
+
+	var startOffset int32
+	var endOffset   int32
+	var goret       string
+
+	startOffset = int32(carg2)
+	endOffset = int32(carg3)
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	defer C.free(unsafe.Pointer(cret))
+
+	return startOffset, endOffset, goret
+}
+
+// ParentGetStringAtOffset calls the default implementations of the get_string_at_offset virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- offset int32: position 
+// 	- granularity TextGranularity: An #AtkTextGranularity 
+// 
+// The function returns the following values:
+// 
+// 	- startOffset int32: the starting character offset of the returned string, or -1
+//                in the case of error (e.g. invalid offset, not implemented) 
+// 	- endOffset int32: the offset of the first character after the returned string,
+//              or -1 in the case of error (e.g. invalid offset, not implemented) 
+// 	- goret string (nullable) 
+//
+// Gets a portion of the text exposed through an #AtkText according to a given @offset
+// and a specific @granularity, along with the start and end offsets defining the
+// boundaries of such a portion of text.
+// 
+// If @granularity is ATK_TEXT_GRANULARITY_CHAR the character at the
+// offset is returned.
+// 
+// If @granularity is ATK_TEXT_GRANULARITY_WORD the returned string
+// is from the word start at or before the offset to the word start after
+// the offset.
+// 
+// The returned string will contain the word at the offset if the offset
+// is inside a word and will contain the word before the offset if the
+// offset is not inside a word.
+// 
+// If @granularity is ATK_TEXT_GRANULARITY_SENTENCE the returned string
+// is from the sentence start at or before the offset to the sentence
+// start after the offset.
+// 
+// The returned string will contain the sentence at the offset if the offset
+// is inside a sentence and will contain the sentence before the offset
+// if the offset is not inside a sentence.
+// 
+// If @granularity is ATK_TEXT_GRANULARITY_LINE the returned string
+// is from the line start at or before the offset to the line
+// start after the offset.
+// 
+// If @granularity is ATK_TEXT_GRANULARITY_PARAGRAPH the returned string
+// is from the start of the paragraph at or before the offset to the start
+// of the following paragraph after the offset.
+func (text *TextInstance) ParentGetStringAtOffset(offset int32, granularity TextGranularity) (int32, int32, string) {
+	var carg0 *C.AtkText
+	var carg1 C.gint               // in, none, casted
+	var carg2 C.AtkTextGranularity // in, none, casted
+	var carg3 C.gint               // out, full, casted
+	var carg4 C.gint               // out, full, casted
+	var cret  *C.gchar             // return, full, string, nullable-string
+
+	parentclass := (*C.AtkTextIface)(classdata.PeekParentInterface(UnsafeTextToGlibNone(text), uint64(TypeText)))
+
+	carg1 = C.gint(offset)
+	carg2 = C.AtkTextGranularity(granularity)
+
+	cret = C._gotk4_atk1_Text_virtual_get_string_at_offset(unsafe.Pointer(parentclass.get_string_at_offset), carg0, carg1, carg2, &carg3, &carg4)
+	runtime.KeepAlive(text)
+	runtime.KeepAlive(offset)
+	runtime.KeepAlive(granularity)
+
+	var startOffset int32
+	var endOffset   int32
+	var goret       string
+
+	startOffset = int32(carg3)
+	endOffset = int32(carg4)
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+		defer C.free(unsafe.Pointer(cret))
+	}
+
+	return startOffset, endOffset, goret
+}
+
+// ParentGetText calls the default implementations of the get_text virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- startOffset int32: a starting character offset within @text 
+// 	- endOffset int32: an ending character offset within @text, or -1 for the end of the string. 
+// 
+// The function returns the following values:
+// 
+// 	- goret string 
+//
+// Gets the specified text.
+func (text *TextInstance) ParentGetText(startOffset int32, endOffset int32) string {
+	var carg0 *C.AtkText
+	var carg1 C.gint   // in, none, casted
+	var carg2 C.gint   // in, none, casted
+	var cret  *C.gchar // return, full, string
+
+	parentclass := (*C.AtkTextIface)(classdata.PeekParentInterface(UnsafeTextToGlibNone(text), uint64(TypeText)))
+
+	carg1 = C.gint(startOffset)
+	carg2 = C.gint(endOffset)
+
+	cret = C._gotk4_atk1_Text_virtual_get_text(unsafe.Pointer(parentclass.get_text), carg0, carg1, carg2)
+	runtime.KeepAlive(text)
+	runtime.KeepAlive(startOffset)
+	runtime.KeepAlive(endOffset)
+
+	var goret string
+
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	defer C.free(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// ParentRemoveSelection calls the default implementations of the remove_selection virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- selectionNum int32: The selection number.  The selected regions are
+// assigned numbers that correspond to how far the region is from the
+// start of the text.  The selected region closest to the beginning
+// of the text region is assigned the number 0, etc.  Note that adding,
+// moving or deleting a selected region can change the numbering. 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Removes the specified selection.
+func (text *TextInstance) ParentRemoveSelection(selectionNum int32) bool {
+	var carg0 *C.AtkText
+	var carg1 C.gint     // in, none, casted
+	var cret  C.gboolean // return
+
+	parentclass := (*C.AtkTextIface)(classdata.PeekParentInterface(UnsafeTextToGlibNone(text), uint64(TypeText)))
+
+	carg1 = C.gint(selectionNum)
+
+	cret = C._gotk4_atk1_Text_virtual_remove_selection(unsafe.Pointer(parentclass.remove_selection), carg0, carg1)
+	runtime.KeepAlive(text)
+	runtime.KeepAlive(selectionNum)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// ParentScrollSubstringTo calls the default implementations of the scroll_substring_to virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- startOffset int32: start offset in the @text 
+// 	- endOffset int32: end offset in the @text, or -1 for the end of the text. 
+// 	- typ ScrollType: specify where the object should be made visible. 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Makes a substring of @text visible on the screen by scrolling all necessary parents.
+func (text *TextInstance) ParentScrollSubstringTo(startOffset int32, endOffset int32, typ ScrollType) bool {
+	var carg0 *C.AtkText
+	var carg1 C.gint          // in, none, casted
+	var carg2 C.gint          // in, none, casted
+	var carg3 C.AtkScrollType // in, none, casted
+	var cret  C.gboolean      // return
+
+	parentclass := (*C.AtkTextIface)(classdata.PeekParentInterface(UnsafeTextToGlibNone(text), uint64(TypeText)))
+
+	carg1 = C.gint(startOffset)
+	carg2 = C.gint(endOffset)
+	carg3 = C.AtkScrollType(typ)
+
+	cret = C._gotk4_atk1_Text_virtual_scroll_substring_to(unsafe.Pointer(parentclass.scroll_substring_to), carg0, carg1, carg2, carg3)
+	runtime.KeepAlive(text)
+	runtime.KeepAlive(startOffset)
+	runtime.KeepAlive(endOffset)
+	runtime.KeepAlive(typ)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// ParentScrollSubstringToPoint calls the default implementations of the scroll_substring_to_point virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- startOffset int32: start offset in the @text 
+// 	- endOffset int32: end offset in the @text, or -1 for the end of the text. 
+// 	- coords CoordType: specify whether coordinates are relative to the screen or to the
+// parent object. 
+// 	- x int32: x-position where to scroll to 
+// 	- y int32: y-position where to scroll to 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Move the top-left of a substring of @text to a given position of the screen
+// by scrolling all necessary parents.
+func (text *TextInstance) ParentScrollSubstringToPoint(startOffset int32, endOffset int32, coords CoordType, x int32, y int32) bool {
+	var carg0 *C.AtkText
+	var carg1 C.gint         // in, none, casted
+	var carg2 C.gint         // in, none, casted
+	var carg3 C.AtkCoordType // in, none, casted
+	var carg4 C.gint         // in, none, casted
+	var carg5 C.gint         // in, none, casted
+	var cret  C.gboolean     // return
+
+	parentclass := (*C.AtkTextIface)(classdata.PeekParentInterface(UnsafeTextToGlibNone(text), uint64(TypeText)))
+
+	carg1 = C.gint(startOffset)
+	carg2 = C.gint(endOffset)
+	carg3 = C.AtkCoordType(coords)
+	carg4 = C.gint(x)
+	carg5 = C.gint(y)
+
+	cret = C._gotk4_atk1_Text_virtual_scroll_substring_to_point(unsafe.Pointer(parentclass.scroll_substring_to_point), carg0, carg1, carg2, carg3, carg4, carg5)
+	runtime.KeepAlive(text)
+	runtime.KeepAlive(startOffset)
+	runtime.KeepAlive(endOffset)
+	runtime.KeepAlive(coords)
+	runtime.KeepAlive(x)
+	runtime.KeepAlive(y)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// ParentSetCaretOffset calls the default implementations of the set_caret_offset virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- offset int32: the character offset of the new caret position 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Sets the caret (cursor) position to the specified @offset.
+// 
+// In the case of rich-text content, this method should either grab focus
+// or move the sequential focus navigation starting point (if the application
+// supports this concept) as if the user had clicked on the new caret position.
+// Typically, this means that the target of this operation is the node containing
+// the new caret position or one of its ancestors. In other words, after this
+// method is called, if the user advances focus, it should move to the first
+// focusable node following the new caret position.
+// 
+// Calling this method should also scroll the application viewport in a way
+// that matches the behavior of the application's typical caret motion or tab
+// navigation as closely as possible. This also means that if the application's
+// caret motion or focus navigation does not trigger a scroll operation, this
+// method should not trigger one either. If the application does not have a caret
+// motion or focus navigation operation, this method should try to scroll the new
+// caret position into view while minimizing unnecessary scroll motion.
+func (text *TextInstance) ParentSetCaretOffset(offset int32) bool {
+	var carg0 *C.AtkText
+	var carg1 C.gint     // in, none, casted
+	var cret  C.gboolean // return
+
+	parentclass := (*C.AtkTextIface)(classdata.PeekParentInterface(UnsafeTextToGlibNone(text), uint64(TypeText)))
+
+	carg1 = C.gint(offset)
+
+	cret = C._gotk4_atk1_Text_virtual_set_caret_offset(unsafe.Pointer(parentclass.set_caret_offset), carg0, carg1)
+	runtime.KeepAlive(text)
+	runtime.KeepAlive(offset)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// ParentSetSelection calls the default implementations of the set_selection virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- selectionNum int32: The selection number.  The selected regions are
+// assigned numbers that correspond to how far the region is from the
+// start of the text.  The selected region closest to the beginning
+// of the text region is assigned the number 0, etc.  Note that adding,
+// moving or deleting a selected region can change the numbering. 
+// 	- startOffset int32: the new starting character offset of the selection 
+// 	- endOffset int32: the new end position of (e.g. offset immediately past)
+// the selection 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Changes the start and end offset of the specified selection.
+func (text *TextInstance) ParentSetSelection(selectionNum int32, startOffset int32, endOffset int32) bool {
+	var carg0 *C.AtkText
+	var carg1 C.gint     // in, none, casted
+	var carg2 C.gint     // in, none, casted
+	var carg3 C.gint     // in, none, casted
+	var cret  C.gboolean // return
+
+	parentclass := (*C.AtkTextIface)(classdata.PeekParentInterface(UnsafeTextToGlibNone(text), uint64(TypeText)))
+
+	carg1 = C.gint(selectionNum)
+	carg2 = C.gint(startOffset)
+	carg3 = C.gint(endOffset)
+
+	cret = C._gotk4_atk1_Text_virtual_set_selection(unsafe.Pointer(parentclass.set_selection), carg0, carg1, carg2, carg3)
+	runtime.KeepAlive(text)
+	runtime.KeepAlive(selectionNum)
+	runtime.KeepAlive(startOffset)
+	runtime.KeepAlive(endOffset)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// ParentTextAttributesChanged calls the default implementations of the text_attributes_changed virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+func (text *TextInstance) ParentTextAttributesChanged() {
+	var carg0 *C.AtkText
+
+	parentclass := (*C.AtkTextIface)(classdata.PeekParentInterface(UnsafeTextToGlibNone(text), uint64(TypeText)))
+
+	C._gotk4_atk1_Text_virtual_text_attributes_changed(unsafe.Pointer(parentclass.text_attributes_changed), carg0)
+	runtime.KeepAlive(text)
+}
+
+// ParentTextCaretMoved calls the default implementations of the text_caret_moved virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- location int32 
+func (text *TextInstance) ParentTextCaretMoved(location int32) {
+	var carg0 *C.AtkText
+	var carg1 C.gint // in, none, casted
+
+	parentclass := (*C.AtkTextIface)(classdata.PeekParentInterface(UnsafeTextToGlibNone(text), uint64(TypeText)))
+
+	carg1 = C.gint(location)
+
+	C._gotk4_atk1_Text_virtual_text_caret_moved(unsafe.Pointer(parentclass.text_caret_moved), carg0, carg1)
+	runtime.KeepAlive(text)
+	runtime.KeepAlive(location)
+}
+
+// ParentTextChanged calls the default implementations of the text_changed virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- position int32 
+// 	- length int32 
+//
+// the signal handler which is executed when there is a
+//   text change. This virtual function is deprecated sice 2.9.4 and
+//   it should not be overriden.
+func (text *TextInstance) ParentTextChanged(position int32, length int32) {
+	var carg0 *C.AtkText
+	var carg1 C.gint // in, none, casted
+	var carg2 C.gint // in, none, casted
+
+	parentclass := (*C.AtkTextIface)(classdata.PeekParentInterface(UnsafeTextToGlibNone(text), uint64(TypeText)))
+
+	carg1 = C.gint(position)
+	carg2 = C.gint(length)
+
+	C._gotk4_atk1_Text_virtual_text_changed(unsafe.Pointer(parentclass.text_changed), carg0, carg1, carg2)
+	runtime.KeepAlive(text)
+	runtime.KeepAlive(position)
+	runtime.KeepAlive(length)
+}
+
+// ParentTextSelectionChanged calls the default implementations of the text_selection_changed virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+func (text *TextInstance) ParentTextSelectionChanged() {
+	var carg0 *C.AtkText
+
+	parentclass := (*C.AtkTextIface)(classdata.PeekParentInterface(UnsafeTextToGlibNone(text), uint64(TypeText)))
+
+	C._gotk4_atk1_Text_virtual_text_selection_changed(unsafe.Pointer(parentclass.text_selection_changed), carg0)
+	runtime.KeepAlive(text)
+}
+
 // ValueInstance is the instance type used by all types implementing AtkValue. It is used internally by the bindings. Users should use the interface [Value] instead.
 type ValueInstance struct {
 	_ [0]func() // equal guard
-	Instance gobject.ObjectInstance
+	gobject.ObjectInstance
 }
 
 var _ Value = (*ValueInstance)(nil)
@@ -12791,6 +18010,7 @@ var _ Value = (*ValueInstance)(nil)
 // &lt;/para&gt;
 // &lt;/refsect1&gt;
 type Value interface {
+	gobject.Object
 	upcastToAtkValue() *ValueInstance
 
 	// GetIncrement wraps atk_value_get_increment
@@ -12869,13 +18089,77 @@ type Value interface {
 	// types their new password. Appropiate value text would be
 	// "weak", "acceptable" and "strong".
 	ConnectValueChanged(func(Value, float64, string)) gobject.SignalHandle
+
+	// chain up virtual methods:
+
+	// ParentGetIncrement calls the default implementations of the get_increment virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret float64 
+	//
+	// Gets the minimum increment by which the value of this object may be
+	// changed.  If zero, the minimum increment is undefined, which may
+	// mean that it is limited only by the floating point precision of the
+	// platform.
+	ParentGetIncrement() float64
+	// ParentGetRange calls the default implementations of the get_range virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret *Range (nullable) 
+	//
+	// Gets the range of this object.
+	ParentGetRange() *Range
+	// ParentGetSubRanges calls the default implementations of the get_sub_ranges virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret []*Range 
+	//
+	// Gets the list of subranges defined for this object. See #AtkValue
+	// introduction for examples of subranges and when to expose them.
+	ParentGetSubRanges() []*Range
+	// ParentGetValueAndText calls the default implementations of the get_value_and_text virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- value float64: address of #gdouble to put the current value of @obj 
+	// 	- text string: address of #gchar to put the human
+	// readable text alternative for @value 
+	//
+	// Gets the current value and the human readable text alternative of
+	// @obj. @text is a newly created string, that must be freed by the
+	// caller. Can be NULL if no descriptor is available.
+	ParentGetValueAndText() (float64, string)
+	// ParentSetValue calls the default implementations of the set_value virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- newValue float64: a double which is the desired new accessible value. 
+	//
+	// Sets the value of this object.
+	// 
+	// This method is intended to provide a way to change the value of the
+	// object. In any case, it is possible that the value can't be
+	// modified (ie: a read-only component). If the value changes due this
+	// call, it is possible that the text could change, and will trigger
+	// an #AtkValue::value-changed signal emission.
+	// 
+	// Note for implementors: the deprecated atk_value_set_current_value()
+	// method returned TRUE or FALSE depending if the value was assigned
+	// or not. In the practice several implementors were not able to
+	// decide it, and returned TRUE in any case. For that reason it is not
+	// required anymore to return if the value was properly assigned or
+	// not.
+	ParentSetValue(newValue float64)
 }
 
 var _ Value = (*ValueInstance)(nil)
 
 func unsafeWrapValue(base *gobject.ObjectInstance) *ValueInstance {
 	return &ValueInstance{
-		Instance: *base,
+		ObjectInstance: *base,
 	}
 }
 
@@ -12905,13 +18189,13 @@ func UnsafeValueFromGlibBorrow(c unsafe.Pointer) Value {
 // UnsafeValueToGlibNone is used to convert the instance to it's C value AtkValue. This is used by the bindings internally.
 func UnsafeValueToGlibNone(c Value) unsafe.Pointer {
 	i := c.upcastToAtkValue()
-	return gobject.UnsafeObjectToGlibNone(&i.Instance)
+	return gobject.UnsafeObjectToGlibNone(i)
 }
 
 // UnsafeValueToGlibFull is used to convert the instance to it's C value AtkValue, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeValueToGlibFull(c Value) unsafe.Pointer {
 	i := c.upcastToAtkValue()
-	return gobject.UnsafeObjectToGlibFull(&i.Instance)
+	return gobject.UnsafeObjectToGlibFull(i)
 }
 
 // GetIncrement wraps atk_value_get_increment
@@ -13074,7 +18358,7 @@ func (obj *ValueInstance) SetValue(newValue float64) {
 // types their new password. Appropiate value text would be
 // "weak", "acceptable" and "strong".
 func (o *ValueInstance) ConnectValueChanged(fn func(Value, float64, string)) gobject.SignalHandle {
-	return o.Instance.Connect("value-changed", fn)
+	return o.Connect("value-changed", fn)
 }
 
 // ValueOverrides is the struct used to override the default implementation of virtual methods.
@@ -13084,16 +18368,26 @@ type ValueOverrides[Instance Value] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret float64 
+	//
+	// Gets the minimum increment by which the value of this object may be
+	// changed.  If zero, the minimum increment is undefined, which may
+	// mean that it is limited only by the floating point precision of the
+	// platform.
 	GetIncrement func(Instance) float64
 	// GetRange allows you to override the implementation of the virtual method get_range.
 	// The function returns the following values:
 	// 
 	// 	- goret *Range (nullable) 
+	//
+	// Gets the range of this object.
 	GetRange func(Instance) *Range
 	// GetSubRanges allows you to override the implementation of the virtual method get_sub_ranges.
 	// The function returns the following values:
 	// 
 	// 	- goret []*Range 
+	//
+	// Gets the list of subranges defined for this object. See #AtkValue
+	// introduction for examples of subranges and when to expose them.
 	GetSubRanges func(Instance) []*Range
 	// GetValueAndText allows you to override the implementation of the virtual method get_value_and_text.
 	// The function returns the following values:
@@ -13101,11 +18395,30 @@ type ValueOverrides[Instance Value] struct {
 	// 	- value float64: address of #gdouble to put the current value of @obj 
 	// 	- text string: address of #gchar to put the human
 	// readable text alternative for @value 
+	//
+	// Gets the current value and the human readable text alternative of
+	// @obj. @text is a newly created string, that must be freed by the
+	// caller. Can be NULL if no descriptor is available.
 	GetValueAndText func(Instance) (float64, string)
 	// SetValue allows you to override the implementation of the virtual method set_value.
 	// The function takes the following parameters:
 	// 
 	// 	- newValue float64: a double which is the desired new accessible value. 
+	//
+	// Sets the value of this object.
+	// 
+	// This method is intended to provide a way to change the value of the
+	// object. In any case, it is possible that the value can't be
+	// modified (ie: a read-only component). If the value changes due this
+	// call, it is possible that the text could change, and will trigger
+	// an #AtkValue::value-changed signal emission.
+	// 
+	// Note for implementors: the deprecated atk_value_set_current_value()
+	// method returned TRUE or FALSE depending if the value was assigned
+	// or not. In the practice several implementors were not able to
+	// decide it, and returned TRUE in any case. For that reason it is not
+	// required anymore to return if the value was properly assigned or
+	// not.
 	SetValue func(Instance, float64)
 }
 
@@ -13216,10 +18529,156 @@ func UnsafeApplyValueOverrides[Instance Value](gclass unsafe.Pointer, overrides 
 	}
 }
 
+// ParentGetIncrement calls the default implementations of the get_increment virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret float64 
+//
+// Gets the minimum increment by which the value of this object may be
+// changed.  If zero, the minimum increment is undefined, which may
+// mean that it is limited only by the floating point precision of the
+// platform.
+func (obj *ValueInstance) ParentGetIncrement() float64 {
+	var carg0 *C.AtkValue
+	var cret  C.gdouble // return, none, casted
+
+	parentclass := (*C.AtkValueIface)(classdata.PeekParentInterface(UnsafeValueToGlibNone(obj), uint64(TypeValue)))
+
+	cret = C._gotk4_atk1_Value_virtual_get_increment(unsafe.Pointer(parentclass.get_increment), carg0)
+	runtime.KeepAlive(obj)
+
+	var goret float64
+
+	goret = float64(cret)
+
+	return goret
+}
+
+// ParentGetRange calls the default implementations of the get_range virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret *Range (nullable) 
+//
+// Gets the range of this object.
+func (obj *ValueInstance) ParentGetRange() *Range {
+	var carg0 *C.AtkValue
+	var cret  *C.AtkRange // return, full, converted, nullable
+
+	parentclass := (*C.AtkValueIface)(classdata.PeekParentInterface(UnsafeValueToGlibNone(obj), uint64(TypeValue)))
+
+	cret = C._gotk4_atk1_Value_virtual_get_range(unsafe.Pointer(parentclass.get_range), carg0)
+	runtime.KeepAlive(obj)
+
+	var goret *Range
+
+	if cret != nil {
+		goret = UnsafeRangeFromGlibFull(unsafe.Pointer(cret))
+	}
+
+	return goret
+}
+
+// ParentGetSubRanges calls the default implementations of the get_sub_ranges virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret []*Range 
+//
+// Gets the list of subranges defined for this object. See #AtkValue
+// introduction for examples of subranges and when to expose them.
+func (obj *ValueInstance) ParentGetSubRanges() []*Range {
+	var carg0 *C.AtkValue
+	var cret  *C.GSList // container, transfer: full
+
+	parentclass := (*C.AtkValueIface)(classdata.PeekParentInterface(UnsafeValueToGlibNone(obj), uint64(TypeValue)))
+
+	cret = C._gotk4_atk1_Value_virtual_get_sub_ranges(unsafe.Pointer(parentclass.get_sub_ranges), carg0)
+	runtime.KeepAlive(obj)
+
+	var goret []*Range
+
+	goret = glib.UnsafeSListFromGlibFull(
+		unsafe.Pointer(cret),
+		func(v unsafe.Pointer) *Range {
+			var dst *Range // converted
+			dst = UnsafeRangeFromGlibFull(v)
+			return dst
+		},
+	)
+
+	return goret
+}
+
+// ParentGetValueAndText calls the default implementations of the get_value_and_text virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- value float64: address of #gdouble to put the current value of @obj 
+// 	- text string: address of #gchar to put the human
+// readable text alternative for @value 
+//
+// Gets the current value and the human readable text alternative of
+// @obj. @text is a newly created string, that must be freed by the
+// caller. Can be NULL if no descriptor is available.
+func (obj *ValueInstance) ParentGetValueAndText() (float64, string) {
+	var carg0 *C.AtkValue
+	var carg1 C.gdouble // out, full, casted
+	var carg2 *C.gchar  // out, full, string
+
+	parentclass := (*C.AtkValueIface)(classdata.PeekParentInterface(UnsafeValueToGlibNone(obj), uint64(TypeValue)))
+
+	C._gotk4_atk1_Value_virtual_get_value_and_text(unsafe.Pointer(parentclass.get_value_and_text), carg0, &carg1, &carg2)
+	runtime.KeepAlive(obj)
+
+	var value float64
+	var text  string
+
+	value = float64(carg1)
+	text = C.GoString((*C.char)(unsafe.Pointer(carg2)))
+	defer C.free(unsafe.Pointer(carg2))
+
+	return value, text
+}
+
+// ParentSetValue calls the default implementations of the set_value virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- newValue float64: a double which is the desired new accessible value. 
+//
+// Sets the value of this object.
+// 
+// This method is intended to provide a way to change the value of the
+// object. In any case, it is possible that the value can't be
+// modified (ie: a read-only component). If the value changes due this
+// call, it is possible that the text could change, and will trigger
+// an #AtkValue::value-changed signal emission.
+// 
+// Note for implementors: the deprecated atk_value_set_current_value()
+// method returned TRUE or FALSE depending if the value was assigned
+// or not. In the practice several implementors were not able to
+// decide it, and returned TRUE in any case. For that reason it is not
+// required anymore to return if the value was properly assigned or
+// not.
+func (obj *ValueInstance) ParentSetValue(newValue float64) {
+	var carg0 *C.AtkValue
+	var carg1 C.gdouble // in, none, casted
+
+	parentclass := (*C.AtkValueIface)(classdata.PeekParentInterface(UnsafeValueToGlibNone(obj), uint64(TypeValue)))
+
+	carg1 = C.gdouble(newValue)
+
+	C._gotk4_atk1_Value_virtual_set_value(unsafe.Pointer(parentclass.set_value), carg0, carg1)
+	runtime.KeepAlive(obj)
+	runtime.KeepAlive(newValue)
+}
+
 // WindowInstance is the instance type used by all types implementing AtkWindow. It is used internally by the bindings. Users should use the interface [Window] instead.
 type WindowInstance struct {
 	_ [0]func() // equal guard
-	Instance gobject.ObjectInstance
+	gobject.ObjectInstance
 }
 
 var _ Window = (*WindowInstance)(nil)
@@ -13234,6 +18693,7 @@ var _ Window = (*WindowInstance)(nil)
 // 
 // See [class@AtkObject]
 type Window interface {
+	gobject.Object
 	upcastToAtkWindow() *WindowInstance
 
 	// ConnectActivate connects the provided callback to the "activate" signal
@@ -13281,13 +18741,15 @@ type Window interface {
 	// The signal #AtkWindow::restore is emitted when a window
 	// is restored.
 	ConnectRestore(func(Window)) gobject.SignalHandle
+
+	// chain up virtual methods:
 }
 
 var _ Window = (*WindowInstance)(nil)
 
 func unsafeWrapWindow(base *gobject.ObjectInstance) *WindowInstance {
 	return &WindowInstance{
-		Instance: *base,
+		ObjectInstance: *base,
 	}
 }
 
@@ -13317,13 +18779,13 @@ func UnsafeWindowFromGlibBorrow(c unsafe.Pointer) Window {
 // UnsafeWindowToGlibNone is used to convert the instance to it's C value AtkWindow. This is used by the bindings internally.
 func UnsafeWindowToGlibNone(c Window) unsafe.Pointer {
 	i := c.upcastToAtkWindow()
-	return gobject.UnsafeObjectToGlibNone(&i.Instance)
+	return gobject.UnsafeObjectToGlibNone(i)
 }
 
 // UnsafeWindowToGlibFull is used to convert the instance to it's C value AtkWindow, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeWindowToGlibFull(c Window) unsafe.Pointer {
 	i := c.upcastToAtkWindow()
-	return gobject.UnsafeObjectToGlibFull(&i.Instance)
+	return gobject.UnsafeObjectToGlibFull(i)
 }
 
 // ConnectActivate connects the provided callback to the "activate" signal
@@ -13331,7 +18793,7 @@ func UnsafeWindowToGlibFull(c Window) unsafe.Pointer {
 // The signal #AtkWindow::activate is emitted when a window
 // becomes the active window of the application or session.
 func (o *WindowInstance) ConnectActivate(fn func(Window)) gobject.SignalHandle {
-	return o.Instance.Connect("activate", fn)
+	return o.Connect("activate", fn)
 }
 
 // ConnectCreate connects the provided callback to the "create" signal
@@ -13339,7 +18801,7 @@ func (o *WindowInstance) ConnectActivate(fn func(Window)) gobject.SignalHandle {
 // The signal #AtkWindow::create is emitted when a new window
 // is created.
 func (o *WindowInstance) ConnectCreate(fn func(Window)) gobject.SignalHandle {
-	return o.Instance.Connect("create", fn)
+	return o.Connect("create", fn)
 }
 
 // ConnectDeactivate connects the provided callback to the "deactivate" signal
@@ -13347,7 +18809,7 @@ func (o *WindowInstance) ConnectCreate(fn func(Window)) gobject.SignalHandle {
 // The signal #AtkWindow::deactivate is emitted when a window is
 // no longer the active window of the application or session.
 func (o *WindowInstance) ConnectDeactivate(fn func(Window)) gobject.SignalHandle {
-	return o.Instance.Connect("deactivate", fn)
+	return o.Connect("deactivate", fn)
 }
 
 // ConnectDestroy connects the provided callback to the "destroy" signal
@@ -13355,7 +18817,7 @@ func (o *WindowInstance) ConnectDeactivate(fn func(Window)) gobject.SignalHandle
 // The signal #AtkWindow::destroy is emitted when a window is
 // destroyed.
 func (o *WindowInstance) ConnectDestroy(fn func(Window)) gobject.SignalHandle {
-	return o.Instance.Connect("destroy", fn)
+	return o.Connect("destroy", fn)
 }
 
 // ConnectMaximize connects the provided callback to the "maximize" signal
@@ -13363,7 +18825,7 @@ func (o *WindowInstance) ConnectDestroy(fn func(Window)) gobject.SignalHandle {
 // The signal #AtkWindow::maximize is emitted when a window
 // is maximized.
 func (o *WindowInstance) ConnectMaximize(fn func(Window)) gobject.SignalHandle {
-	return o.Instance.Connect("maximize", fn)
+	return o.Connect("maximize", fn)
 }
 
 // ConnectMinimize connects the provided callback to the "minimize" signal
@@ -13371,7 +18833,7 @@ func (o *WindowInstance) ConnectMaximize(fn func(Window)) gobject.SignalHandle {
 // The signal #AtkWindow::minimize is emitted when a window
 // is minimized.
 func (o *WindowInstance) ConnectMinimize(fn func(Window)) gobject.SignalHandle {
-	return o.Instance.Connect("minimize", fn)
+	return o.Connect("minimize", fn)
 }
 
 // ConnectMove connects the provided callback to the "move" signal
@@ -13379,7 +18841,7 @@ func (o *WindowInstance) ConnectMinimize(fn func(Window)) gobject.SignalHandle {
 // The signal #AtkWindow::move is emitted when a window
 // is moved.
 func (o *WindowInstance) ConnectMove(fn func(Window)) gobject.SignalHandle {
-	return o.Instance.Connect("move", fn)
+	return o.Connect("move", fn)
 }
 
 // ConnectResize connects the provided callback to the "resize" signal
@@ -13387,7 +18849,7 @@ func (o *WindowInstance) ConnectMove(fn func(Window)) gobject.SignalHandle {
 // The signal #AtkWindow::resize is emitted when a window
 // is resized.
 func (o *WindowInstance) ConnectResize(fn func(Window)) gobject.SignalHandle {
-	return o.Instance.Connect("resize", fn)
+	return o.Connect("resize", fn)
 }
 
 // ConnectRestore connects the provided callback to the "restore" signal
@@ -13395,7 +18857,7 @@ func (o *WindowInstance) ConnectResize(fn func(Window)) gobject.SignalHandle {
 // The signal #AtkWindow::restore is emitted when a window
 // is restored.
 func (o *WindowInstance) ConnectRestore(fn func(Window)) gobject.SignalHandle {
-	return o.Instance.Connect("restore", fn)
+	return o.Connect("restore", fn)
 }
 
 // WindowOverrides is the struct used to override the default implementation of virtual methods.
@@ -13511,6 +18973,84 @@ type Hyperlink interface {
 	//
 	// The signal link-activated is emitted when a link is activated.
 	ConnectLinkActivated(func(Hyperlink)) gobject.SignalHandle
+
+	// chain up virtual methods:
+
+	// ParentGetEndIndex calls the default implementations of the get_end_index virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret int32 
+	//
+	// Gets the index with the hypertext document at which this link ends.
+	ParentGetEndIndex() int32
+	// ParentGetNAnchors calls the default implementations of the get_n_anchors virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret int32 
+	//
+	// Gets the number of anchors associated with this hyperlink.
+	ParentGetNAnchors() int32
+	// ParentGetObject calls the default implementations of the get_object virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- i int32: a (zero-index) integer specifying the desired anchor 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret Object 
+	//
+	// Returns the item associated with this hyperlinks nth anchor.
+	// For instance, the returned #AtkObject will implement #AtkText
+	// if @link_ is a text hyperlink, #AtkImage if @link_ is an image
+	// hyperlink etc.
+	// 
+	// Multiple anchors are primarily used by client-side image maps.
+	ParentGetObject(i int32) Object
+	// ParentGetStartIndex calls the default implementations of the get_start_index virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret int32 
+	//
+	// Gets the index with the hypertext document at which this link begins.
+	ParentGetStartIndex() int32
+	// ParentGetURI calls the default implementations of the get_uri virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- i int32: a (zero-index) integer specifying the desired anchor 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret string 
+	//
+	// Get a the URI associated with the anchor specified
+	// by @i of @link_.
+	// 
+	// Multiple anchors are primarily used by client-side image maps.
+	ParentGetURI(i int32) string
+	// ParentIsValid calls the default implementations of the is_valid virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	//
+	// Since the document that a link is associated with may have changed
+	// this method returns %TRUE if the link is still valid (with
+	// respect to the document it references) and %FALSE otherwise.
+	ParentIsValid() bool
+	// ParentLinkActivated calls the default implementations of the link_activated virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	ParentLinkActivated()
+	// ParentLinkState calls the default implementations of the link_state virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret uint 
+	ParentLinkState() uint
 }
 
 func unsafeWrapHyperlink(base *gobject.ObjectInstance) *HyperlinkInstance {
@@ -13762,11 +19302,15 @@ type HyperlinkOverrides[Instance Hyperlink] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
+	//
+	// Gets the index with the hypertext document at which this link ends.
 	GetEndIndex func(Instance) int32
 	// GetNAnchors allows you to override the implementation of the virtual method get_n_anchors.
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
+	//
+	// Gets the number of anchors associated with this hyperlink.
 	GetNAnchors func(Instance) int32
 	// GetObject allows you to override the implementation of the virtual method get_object.
 	// The function takes the following parameters:
@@ -13776,11 +19320,20 @@ type HyperlinkOverrides[Instance Hyperlink] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret Object 
+	//
+	// Returns the item associated with this hyperlinks nth anchor.
+	// For instance, the returned #AtkObject will implement #AtkText
+	// if @link_ is a text hyperlink, #AtkImage if @link_ is an image
+	// hyperlink etc.
+	// 
+	// Multiple anchors are primarily used by client-side image maps.
 	GetObject func(Instance, int32) Object
 	// GetStartIndex allows you to override the implementation of the virtual method get_start_index.
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
+	//
+	// Gets the index with the hypertext document at which this link begins.
 	GetStartIndex func(Instance) int32
 	// GetURI allows you to override the implementation of the virtual method get_uri.
 	// The function takes the following parameters:
@@ -13790,11 +19343,20 @@ type HyperlinkOverrides[Instance Hyperlink] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret string 
+	//
+	// Get a the URI associated with the anchor specified
+	// by @i of @link_.
+	// 
+	// Multiple anchors are primarily used by client-side image maps.
 	GetURI func(Instance, int32) string
 	// IsValid allows you to override the implementation of the virtual method is_valid.
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
+	//
+	// Since the document that a link is associated with may have changed
+	// this method returns %TRUE if the link is still valid (with
+	// respect to the document it references) and %FALSE otherwise.
 	IsValid func(Instance) bool
 	// LinkActivated allows you to override the implementation of the virtual method link_activated.
 	LinkActivated func(Instance)
@@ -13974,6 +19536,205 @@ func UnsafeApplyHyperlinkOverrides[Instance Hyperlink](gclass unsafe.Pointer, ov
 	}
 }
 
+// ParentGetEndIndex calls the default implementations of the get_end_index virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret int32 
+//
+// Gets the index with the hypertext document at which this link ends.
+func (link_ *HyperlinkInstance) ParentGetEndIndex() int32 {
+	var carg0 *C.AtkHyperlink
+	var cret  C.gint // return, none, casted
+
+	parentclass := (*C.AtkHyperlinkClass)(classdata.PeekParentClass(UnsafeHyperlinkToGlibNone(link_)))
+
+	cret = C._gotk4_atk1_Hyperlink_virtual_get_end_index(unsafe.Pointer(parentclass.get_end_index), carg0)
+	runtime.KeepAlive(link_)
+
+	var goret int32
+
+	goret = int32(cret)
+
+	return goret
+}
+
+// ParentGetNAnchors calls the default implementations of the get_n_anchors virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret int32 
+//
+// Gets the number of anchors associated with this hyperlink.
+func (link_ *HyperlinkInstance) ParentGetNAnchors() int32 {
+	var carg0 *C.AtkHyperlink
+	var cret  C.gint // return, none, casted
+
+	parentclass := (*C.AtkHyperlinkClass)(classdata.PeekParentClass(UnsafeHyperlinkToGlibNone(link_)))
+
+	cret = C._gotk4_atk1_Hyperlink_virtual_get_n_anchors(unsafe.Pointer(parentclass.get_n_anchors), carg0)
+	runtime.KeepAlive(link_)
+
+	var goret int32
+
+	goret = int32(cret)
+
+	return goret
+}
+
+// ParentGetObject calls the default implementations of the get_object virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- i int32: a (zero-index) integer specifying the desired anchor 
+// 
+// The function returns the following values:
+// 
+// 	- goret Object 
+//
+// Returns the item associated with this hyperlinks nth anchor.
+// For instance, the returned #AtkObject will implement #AtkText
+// if @link_ is a text hyperlink, #AtkImage if @link_ is an image
+// hyperlink etc.
+// 
+// Multiple anchors are primarily used by client-side image maps.
+func (link_ *HyperlinkInstance) ParentGetObject(i int32) Object {
+	var carg0 *C.AtkHyperlink
+	var carg1 C.gint       // in, none, casted
+	var cret  *C.AtkObject // return, none, converted
+
+	parentclass := (*C.AtkHyperlinkClass)(classdata.PeekParentClass(UnsafeHyperlinkToGlibNone(link_)))
+
+	carg1 = C.gint(i)
+
+	cret = C._gotk4_atk1_Hyperlink_virtual_get_object(unsafe.Pointer(parentclass.get_object), carg0, carg1)
+	runtime.KeepAlive(link_)
+	runtime.KeepAlive(i)
+
+	var goret Object
+
+	goret = UnsafeObjectFromGlibNone(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// ParentGetStartIndex calls the default implementations of the get_start_index virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret int32 
+//
+// Gets the index with the hypertext document at which this link begins.
+func (link_ *HyperlinkInstance) ParentGetStartIndex() int32 {
+	var carg0 *C.AtkHyperlink
+	var cret  C.gint // return, none, casted
+
+	parentclass := (*C.AtkHyperlinkClass)(classdata.PeekParentClass(UnsafeHyperlinkToGlibNone(link_)))
+
+	cret = C._gotk4_atk1_Hyperlink_virtual_get_start_index(unsafe.Pointer(parentclass.get_start_index), carg0)
+	runtime.KeepAlive(link_)
+
+	var goret int32
+
+	goret = int32(cret)
+
+	return goret
+}
+
+// ParentGetURI calls the default implementations of the get_uri virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- i int32: a (zero-index) integer specifying the desired anchor 
+// 
+// The function returns the following values:
+// 
+// 	- goret string 
+//
+// Get a the URI associated with the anchor specified
+// by @i of @link_.
+// 
+// Multiple anchors are primarily used by client-side image maps.
+func (link_ *HyperlinkInstance) ParentGetURI(i int32) string {
+	var carg0 *C.AtkHyperlink
+	var carg1 C.gint   // in, none, casted
+	var cret  *C.gchar // return, full, string
+
+	parentclass := (*C.AtkHyperlinkClass)(classdata.PeekParentClass(UnsafeHyperlinkToGlibNone(link_)))
+
+	carg1 = C.gint(i)
+
+	cret = C._gotk4_atk1_Hyperlink_virtual_get_uri(unsafe.Pointer(parentclass.get_uri), carg0, carg1)
+	runtime.KeepAlive(link_)
+	runtime.KeepAlive(i)
+
+	var goret string
+
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	defer C.free(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// ParentIsValid calls the default implementations of the is_valid virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Since the document that a link is associated with may have changed
+// this method returns %TRUE if the link is still valid (with
+// respect to the document it references) and %FALSE otherwise.
+func (link_ *HyperlinkInstance) ParentIsValid() bool {
+	var carg0 *C.AtkHyperlink
+	var cret  C.gboolean // return
+
+	parentclass := (*C.AtkHyperlinkClass)(classdata.PeekParentClass(UnsafeHyperlinkToGlibNone(link_)))
+
+	cret = C._gotk4_atk1_Hyperlink_virtual_is_valid(unsafe.Pointer(parentclass.is_valid), carg0)
+	runtime.KeepAlive(link_)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// ParentLinkActivated calls the default implementations of the link_activated virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+func (link_ *HyperlinkInstance) ParentLinkActivated() {
+	var carg0 *C.AtkHyperlink
+
+	parentclass := (*C.AtkHyperlinkClass)(classdata.PeekParentClass(UnsafeHyperlinkToGlibNone(link_)))
+
+	C._gotk4_atk1_Hyperlink_virtual_link_activated(unsafe.Pointer(parentclass.link_activated), carg0)
+	runtime.KeepAlive(link_)
+}
+
+// ParentLinkState calls the default implementations of the link_state virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret uint 
+func (link_ *HyperlinkInstance) ParentLinkState() uint {
+	var carg0 *C.AtkHyperlink
+	var cret  C.guint // return, none, casted
+
+	parentclass := (*C.AtkHyperlinkClass)(classdata.PeekParentClass(UnsafeHyperlinkToGlibNone(link_)))
+
+	cret = C._gotk4_atk1_Hyperlink_virtual_link_state(unsafe.Pointer(parentclass.link_state), carg0)
+	runtime.KeepAlive(link_)
+
+	var goret uint
+
+	goret = uint(cret)
+
+	return goret
+}
+
 // RegisterHyperlinkSubClass is used to register a go subclass of AtkHyperlink. For this to work safely please implement the
 // virtual methods required by the implementation.
 func RegisterHyperlinkSubClass[InstanceT Hyperlink](
@@ -14017,6 +19778,8 @@ var _ Misc = (*MiscInstance)(nil)
 type Misc interface {
 	gobject.Object
 	upcastToAtkMisc() *MiscInstance
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapMisc(base *gobject.ObjectInstance) *MiscInstance {
@@ -14422,6 +20185,154 @@ type Object interface {
 	// The "visible-data-changed" signal is emitted when the visual
 	// appearance of the object changed.
 	ConnectVisibleDataChanged(func(Object)) gobject.SignalHandle
+
+	// chain up virtual methods:
+
+	// ParentFocusEvent calls the default implementations of the focus_event virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- focusIn bool 
+	//
+	// The signal handler which is executed when there is a
+	//   focus event for an object. This virtual function is deprecated
+	//   since 2.9.4 and it should not be overriden. Use
+	//   the #AtkObject::state-change "focused" signal instead.
+	ParentFocusEvent(focusIn bool)
+	// ParentGetDescription calls the default implementations of the get_description virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret string 
+	//
+	// Gets the accessible description of the accessible.
+	ParentGetDescription() string
+	// ParentGetIndexInParent calls the default implementations of the get_index_in_parent virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret int32 
+	//
+	// Gets the 0-based index of this accessible in its parent; returns -1 if the
+	// accessible does not have an accessible parent.
+	ParentGetIndexInParent() int32
+	// ParentGetNChildren calls the default implementations of the get_n_children virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret int32 
+	ParentGetNChildren() int32
+	// ParentGetName calls the default implementations of the get_name virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret string 
+	//
+	// Gets the accessible name of the accessible.
+	ParentGetName() string
+	// ParentGetObjectLocale calls the default implementations of the get_object_locale virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret string 
+	//
+	// Gets a UTF-8 string indicating the POSIX-style LC_MESSAGES locale
+	// of @accessible.
+	ParentGetObjectLocale() string
+	// ParentGetParent calls the default implementations of the get_parent virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret Object 
+	//
+	// Gets the accessible parent of the accessible. By default this is
+	// the one assigned with atk_object_set_parent(), but it is assumed
+	// that ATK implementors have ways to get the parent of the object
+	// without the need of assigning it manually with
+	// atk_object_set_parent(), and will return it with this method.
+	// 
+	// If you are only interested on the parent assigned with
+	// atk_object_set_parent(), use atk_object_peek_parent().
+	ParentGetParent() Object
+	// ParentGetRole calls the default implementations of the get_role virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret Role 
+	//
+	// Gets the role of the accessible.
+	ParentGetRole() Role
+	// ParentPropertyChange calls the default implementations of the property_change virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- values *PropertyValues 
+	ParentPropertyChange(values *PropertyValues)
+	// ParentRefRelationSet calls the default implementations of the ref_relation_set virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret RelationSet 
+	//
+	// Gets the #AtkRelationSet associated with the object.
+	ParentRefRelationSet() RelationSet
+	// ParentRefStateSet calls the default implementations of the ref_state_set virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret StateSet 
+	//
+	// Gets a reference to the state set of the accessible; the caller must
+	// unreference it when it is no longer needed.
+	ParentRefStateSet() StateSet
+	// ParentSetDescription calls the default implementations of the set_description virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- description string: a character string to be set as the accessible description 
+	//
+	// Sets the accessible description of the accessible. You can't set
+	// the description to NULL. This is reserved for the initial value. In
+	// this aspect NULL is similar to ATK_ROLE_UNKNOWN. If you want to set
+	// the name to a empty value you can use "".
+	ParentSetDescription(description string)
+	// ParentSetName calls the default implementations of the set_name virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- name string: a character string to be set as the accessible name 
+	//
+	// Sets the accessible name of the accessible. You can't set the name
+	// to NULL. This is reserved for the initial value. In this aspect
+	// NULL is similar to ATK_ROLE_UNKNOWN. If you want to set the name to
+	// a empty value you can use "".
+	ParentSetName(name string)
+	// ParentSetParent calls the default implementations of the set_parent virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- parent Object: an #AtkObject to be set as the accessible parent 
+	//
+	// Sets the accessible parent of the accessible. @parent can be NULL.
+	ParentSetParent(parent Object)
+	// ParentSetRole calls the default implementations of the set_role virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- role Role: an #AtkRole to be set as the role 
+	//
+	// Sets the role of the accessible.
+	ParentSetRole(role Role)
+	// ParentStateChange calls the default implementations of the state_change virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- name string 
+	// 	- stateSet bool 
+	ParentStateChange(name string, stateSet bool)
+	// ParentVisibleDataChanged calls the default implementations of the visible_data_changed virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	ParentVisibleDataChanged()
 }
 
 func unsafeWrapObject(base *gobject.ObjectInstance) *ObjectInstance {
@@ -15118,16 +21029,26 @@ type ObjectOverrides[Instance Object] struct {
 	// The function takes the following parameters:
 	// 
 	// 	- focusIn bool 
+	//
+	// The signal handler which is executed when there is a
+	//   focus event for an object. This virtual function is deprecated
+	//   since 2.9.4 and it should not be overriden. Use
+	//   the #AtkObject::state-change "focused" signal instead.
 	FocusEvent func(Instance, bool)
 	// GetDescription allows you to override the implementation of the virtual method get_description.
 	// The function returns the following values:
 	// 
 	// 	- goret string 
+	//
+	// Gets the accessible description of the accessible.
 	GetDescription func(Instance) string
 	// GetIndexInParent allows you to override the implementation of the virtual method get_index_in_parent.
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
+	//
+	// Gets the 0-based index of this accessible in its parent; returns -1 if the
+	// accessible does not have an accessible parent.
 	GetIndexInParent func(Instance) int32
 	// GetNChildren allows you to override the implementation of the virtual method get_n_children.
 	// The function returns the following values:
@@ -15138,21 +21059,37 @@ type ObjectOverrides[Instance Object] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret string 
+	//
+	// Gets the accessible name of the accessible.
 	GetName func(Instance) string
 	// GetObjectLocale allows you to override the implementation of the virtual method get_object_locale.
 	// The function returns the following values:
 	// 
 	// 	- goret string 
+	//
+	// Gets a UTF-8 string indicating the POSIX-style LC_MESSAGES locale
+	// of @accessible.
 	GetObjectLocale func(Instance) string
 	// GetParent allows you to override the implementation of the virtual method get_parent.
 	// The function returns the following values:
 	// 
 	// 	- goret Object 
+	//
+	// Gets the accessible parent of the accessible. By default this is
+	// the one assigned with atk_object_set_parent(), but it is assumed
+	// that ATK implementors have ways to get the parent of the object
+	// without the need of assigning it manually with
+	// atk_object_set_parent(), and will return it with this method.
+	// 
+	// If you are only interested on the parent assigned with
+	// atk_object_set_parent(), use atk_object_peek_parent().
 	GetParent func(Instance) Object
 	// GetRole allows you to override the implementation of the virtual method get_role.
 	// The function returns the following values:
 	// 
 	// 	- goret Role 
+	//
+	// Gets the role of the accessible.
 	GetRole func(Instance) Role
 	// PropertyChange allows you to override the implementation of the virtual method property_change.
 	// The function takes the following parameters:
@@ -15163,31 +21100,50 @@ type ObjectOverrides[Instance Object] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret RelationSet 
+	//
+	// Gets the #AtkRelationSet associated with the object.
 	RefRelationSet func(Instance) RelationSet
 	// RefStateSet allows you to override the implementation of the virtual method ref_state_set.
 	// The function returns the following values:
 	// 
 	// 	- goret StateSet 
+	//
+	// Gets a reference to the state set of the accessible; the caller must
+	// unreference it when it is no longer needed.
 	RefStateSet func(Instance) StateSet
 	// SetDescription allows you to override the implementation of the virtual method set_description.
 	// The function takes the following parameters:
 	// 
 	// 	- description string: a character string to be set as the accessible description 
+	//
+	// Sets the accessible description of the accessible. You can't set
+	// the description to NULL. This is reserved for the initial value. In
+	// this aspect NULL is similar to ATK_ROLE_UNKNOWN. If you want to set
+	// the name to a empty value you can use "".
 	SetDescription func(Instance, string)
 	// SetName allows you to override the implementation of the virtual method set_name.
 	// The function takes the following parameters:
 	// 
 	// 	- name string: a character string to be set as the accessible name 
+	//
+	// Sets the accessible name of the accessible. You can't set the name
+	// to NULL. This is reserved for the initial value. In this aspect
+	// NULL is similar to ATK_ROLE_UNKNOWN. If you want to set the name to
+	// a empty value you can use "".
 	SetName func(Instance, string)
 	// SetParent allows you to override the implementation of the virtual method set_parent.
 	// The function takes the following parameters:
 	// 
 	// 	- parent Object: an #AtkObject to be set as the accessible parent 
+	//
+	// Sets the accessible parent of the accessible. @parent can be NULL.
 	SetParent func(Instance, Object)
 	// SetRole allows you to override the implementation of the virtual method set_role.
 	// The function takes the following parameters:
 	// 
 	// 	- role Role: an #AtkRole to be set as the role 
+	//
+	// Sets the role of the accessible.
 	SetRole func(Instance, Role)
 	// StateChange allows you to override the implementation of the virtual method state_change.
 	// The function takes the following parameters:
@@ -15530,6 +21486,388 @@ func UnsafeApplyObjectOverrides[Instance Object](gclass unsafe.Pointer, override
 	}
 }
 
+// ParentFocusEvent calls the default implementations of the focus_event virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- focusIn bool 
+//
+// The signal handler which is executed when there is a
+//   focus event for an object. This virtual function is deprecated
+//   since 2.9.4 and it should not be overriden. Use
+//   the #AtkObject::state-change "focused" signal instead.
+func (accessible *ObjectInstance) ParentFocusEvent(focusIn bool) {
+	var carg0 *C.AtkObject
+	var carg1 C.gboolean // in
+
+	parentclass := (*C.AtkObjectClass)(classdata.PeekParentClass(UnsafeObjectToGlibNone(accessible)))
+
+	if focusIn {
+		carg1 = C.TRUE
+	}
+
+	C._gotk4_atk1_Object_virtual_focus_event(unsafe.Pointer(parentclass.focus_event), carg0, carg1)
+	runtime.KeepAlive(accessible)
+	runtime.KeepAlive(focusIn)
+}
+
+// ParentGetDescription calls the default implementations of the get_description virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret string 
+//
+// Gets the accessible description of the accessible.
+func (accessible *ObjectInstance) ParentGetDescription() string {
+	var carg0 *C.AtkObject
+	var cret  *C.gchar // return, none, string
+
+	parentclass := (*C.AtkObjectClass)(classdata.PeekParentClass(UnsafeObjectToGlibNone(accessible)))
+
+	cret = C._gotk4_atk1_Object_virtual_get_description(unsafe.Pointer(parentclass.get_description), carg0)
+	runtime.KeepAlive(accessible)
+
+	var goret string
+
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+
+	return goret
+}
+
+// ParentGetIndexInParent calls the default implementations of the get_index_in_parent virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret int32 
+//
+// Gets the 0-based index of this accessible in its parent; returns -1 if the
+// accessible does not have an accessible parent.
+func (accessible *ObjectInstance) ParentGetIndexInParent() int32 {
+	var carg0 *C.AtkObject
+	var cret  C.gint // return, none, casted
+
+	parentclass := (*C.AtkObjectClass)(classdata.PeekParentClass(UnsafeObjectToGlibNone(accessible)))
+
+	cret = C._gotk4_atk1_Object_virtual_get_index_in_parent(unsafe.Pointer(parentclass.get_index_in_parent), carg0)
+	runtime.KeepAlive(accessible)
+
+	var goret int32
+
+	goret = int32(cret)
+
+	return goret
+}
+
+// ParentGetNChildren calls the default implementations of the get_n_children virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret int32 
+func (accessible *ObjectInstance) ParentGetNChildren() int32 {
+	var carg0 *C.AtkObject
+	var cret  C.gint // return, none, casted
+
+	parentclass := (*C.AtkObjectClass)(classdata.PeekParentClass(UnsafeObjectToGlibNone(accessible)))
+
+	cret = C._gotk4_atk1_Object_virtual_get_n_children(unsafe.Pointer(parentclass.get_n_children), carg0)
+	runtime.KeepAlive(accessible)
+
+	var goret int32
+
+	goret = int32(cret)
+
+	return goret
+}
+
+// ParentGetName calls the default implementations of the get_name virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret string 
+//
+// Gets the accessible name of the accessible.
+func (accessible *ObjectInstance) ParentGetName() string {
+	var carg0 *C.AtkObject
+	var cret  *C.gchar // return, none, string
+
+	parentclass := (*C.AtkObjectClass)(classdata.PeekParentClass(UnsafeObjectToGlibNone(accessible)))
+
+	cret = C._gotk4_atk1_Object_virtual_get_name(unsafe.Pointer(parentclass.get_name), carg0)
+	runtime.KeepAlive(accessible)
+
+	var goret string
+
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+
+	return goret
+}
+
+// ParentGetObjectLocale calls the default implementations of the get_object_locale virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret string 
+//
+// Gets a UTF-8 string indicating the POSIX-style LC_MESSAGES locale
+// of @accessible.
+func (accessible *ObjectInstance) ParentGetObjectLocale() string {
+	var carg0 *C.AtkObject
+	var cret  *C.gchar // return, none, string
+
+	parentclass := (*C.AtkObjectClass)(classdata.PeekParentClass(UnsafeObjectToGlibNone(accessible)))
+
+	cret = C._gotk4_atk1_Object_virtual_get_object_locale(unsafe.Pointer(parentclass.get_object_locale), carg0)
+	runtime.KeepAlive(accessible)
+
+	var goret string
+
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+
+	return goret
+}
+
+// ParentGetParent calls the default implementations of the get_parent virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret Object 
+//
+// Gets the accessible parent of the accessible. By default this is
+// the one assigned with atk_object_set_parent(), but it is assumed
+// that ATK implementors have ways to get the parent of the object
+// without the need of assigning it manually with
+// atk_object_set_parent(), and will return it with this method.
+// 
+// If you are only interested on the parent assigned with
+// atk_object_set_parent(), use atk_object_peek_parent().
+func (accessible *ObjectInstance) ParentGetParent() Object {
+	var carg0 *C.AtkObject
+	var cret  *C.AtkObject // return, none, converted
+
+	parentclass := (*C.AtkObjectClass)(classdata.PeekParentClass(UnsafeObjectToGlibNone(accessible)))
+
+	cret = C._gotk4_atk1_Object_virtual_get_parent(unsafe.Pointer(parentclass.get_parent), carg0)
+	runtime.KeepAlive(accessible)
+
+	var goret Object
+
+	goret = UnsafeObjectFromGlibNone(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// ParentGetRole calls the default implementations of the get_role virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret Role 
+//
+// Gets the role of the accessible.
+func (accessible *ObjectInstance) ParentGetRole() Role {
+	var carg0 *C.AtkObject
+	var cret  C.AtkRole // return, none, casted
+
+	parentclass := (*C.AtkObjectClass)(classdata.PeekParentClass(UnsafeObjectToGlibNone(accessible)))
+
+	cret = C._gotk4_atk1_Object_virtual_get_role(unsafe.Pointer(parentclass.get_role), carg0)
+	runtime.KeepAlive(accessible)
+
+	var goret Role
+
+	goret = Role(cret)
+
+	return goret
+}
+
+// ParentPropertyChange calls the default implementations of the property_change virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- values *PropertyValues 
+func (accessible *ObjectInstance) ParentPropertyChange(values *PropertyValues) {
+	var carg0 *C.AtkObject
+	var carg1 *C.AtkPropertyValues // in, none, converted
+
+	parentclass := (*C.AtkObjectClass)(classdata.PeekParentClass(UnsafeObjectToGlibNone(accessible)))
+
+	carg1 = (*C.AtkPropertyValues)(UnsafePropertyValuesToGlibNone(values))
+
+	C._gotk4_atk1_Object_virtual_property_change(unsafe.Pointer(parentclass.property_change), carg0, carg1)
+	runtime.KeepAlive(accessible)
+	runtime.KeepAlive(values)
+}
+
+// ParentRefRelationSet calls the default implementations of the ref_relation_set virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret RelationSet 
+//
+// Gets the #AtkRelationSet associated with the object.
+func (accessible *ObjectInstance) ParentRefRelationSet() RelationSet {
+	var carg0 *C.AtkObject
+	var cret  *C.AtkRelationSet // return, full, converted
+
+	parentclass := (*C.AtkObjectClass)(classdata.PeekParentClass(UnsafeObjectToGlibNone(accessible)))
+
+	cret = C._gotk4_atk1_Object_virtual_ref_relation_set(unsafe.Pointer(parentclass.ref_relation_set), carg0)
+	runtime.KeepAlive(accessible)
+
+	var goret RelationSet
+
+	goret = UnsafeRelationSetFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// ParentRefStateSet calls the default implementations of the ref_state_set virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret StateSet 
+//
+// Gets a reference to the state set of the accessible; the caller must
+// unreference it when it is no longer needed.
+func (accessible *ObjectInstance) ParentRefStateSet() StateSet {
+	var carg0 *C.AtkObject
+	var cret  *C.AtkStateSet // return, full, converted
+
+	parentclass := (*C.AtkObjectClass)(classdata.PeekParentClass(UnsafeObjectToGlibNone(accessible)))
+
+	cret = C._gotk4_atk1_Object_virtual_ref_state_set(unsafe.Pointer(parentclass.ref_state_set), carg0)
+	runtime.KeepAlive(accessible)
+
+	var goret StateSet
+
+	goret = UnsafeStateSetFromGlibFull(unsafe.Pointer(cret))
+
+	return goret
+}
+
+// ParentSetDescription calls the default implementations of the set_description virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- description string: a character string to be set as the accessible description 
+//
+// Sets the accessible description of the accessible. You can't set
+// the description to NULL. This is reserved for the initial value. In
+// this aspect NULL is similar to ATK_ROLE_UNKNOWN. If you want to set
+// the name to a empty value you can use "".
+func (accessible *ObjectInstance) ParentSetDescription(description string) {
+	var carg0 *C.AtkObject
+	var carg1 *C.gchar // in, none, string
+
+	parentclass := (*C.AtkObjectClass)(classdata.PeekParentClass(UnsafeObjectToGlibNone(accessible)))
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(description)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	C._gotk4_atk1_Object_virtual_set_description(unsafe.Pointer(parentclass.set_description), carg0, carg1)
+	runtime.KeepAlive(accessible)
+	runtime.KeepAlive(description)
+}
+
+// ParentSetName calls the default implementations of the set_name virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- name string: a character string to be set as the accessible name 
+//
+// Sets the accessible name of the accessible. You can't set the name
+// to NULL. This is reserved for the initial value. In this aspect
+// NULL is similar to ATK_ROLE_UNKNOWN. If you want to set the name to
+// a empty value you can use "".
+func (accessible *ObjectInstance) ParentSetName(name string) {
+	var carg0 *C.AtkObject
+	var carg1 *C.gchar // in, none, string
+
+	parentclass := (*C.AtkObjectClass)(classdata.PeekParentClass(UnsafeObjectToGlibNone(accessible)))
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	C._gotk4_atk1_Object_virtual_set_name(unsafe.Pointer(parentclass.set_name), carg0, carg1)
+	runtime.KeepAlive(accessible)
+	runtime.KeepAlive(name)
+}
+
+// ParentSetParent calls the default implementations of the set_parent virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- parent Object: an #AtkObject to be set as the accessible parent 
+//
+// Sets the accessible parent of the accessible. @parent can be NULL.
+func (accessible *ObjectInstance) ParentSetParent(parent Object) {
+	var carg0 *C.AtkObject
+	var carg1 *C.AtkObject // in, none, converted
+
+	parentclass := (*C.AtkObjectClass)(classdata.PeekParentClass(UnsafeObjectToGlibNone(accessible)))
+
+	carg1 = (*C.AtkObject)(UnsafeObjectToGlibNone(parent))
+
+	C._gotk4_atk1_Object_virtual_set_parent(unsafe.Pointer(parentclass.set_parent), carg0, carg1)
+	runtime.KeepAlive(accessible)
+	runtime.KeepAlive(parent)
+}
+
+// ParentSetRole calls the default implementations of the set_role virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- role Role: an #AtkRole to be set as the role 
+//
+// Sets the role of the accessible.
+func (accessible *ObjectInstance) ParentSetRole(role Role) {
+	var carg0 *C.AtkObject
+	var carg1 C.AtkRole // in, none, casted
+
+	parentclass := (*C.AtkObjectClass)(classdata.PeekParentClass(UnsafeObjectToGlibNone(accessible)))
+
+	carg1 = C.AtkRole(role)
+
+	C._gotk4_atk1_Object_virtual_set_role(unsafe.Pointer(parentclass.set_role), carg0, carg1)
+	runtime.KeepAlive(accessible)
+	runtime.KeepAlive(role)
+}
+
+// ParentStateChange calls the default implementations of the state_change virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- name string 
+// 	- stateSet bool 
+func (accessible *ObjectInstance) ParentStateChange(name string, stateSet bool) {
+	var carg0 *C.AtkObject
+	var carg1 *C.gchar   // in, none, string
+	var carg2 C.gboolean // in
+
+	parentclass := (*C.AtkObjectClass)(classdata.PeekParentClass(UnsafeObjectToGlibNone(accessible)))
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
+	defer C.free(unsafe.Pointer(carg1))
+	if stateSet {
+		carg2 = C.TRUE
+	}
+
+	C._gotk4_atk1_Object_virtual_state_change(unsafe.Pointer(parentclass.state_change), carg0, carg1, carg2)
+	runtime.KeepAlive(accessible)
+	runtime.KeepAlive(name)
+	runtime.KeepAlive(stateSet)
+}
+
+// ParentVisibleDataChanged calls the default implementations of the visible_data_changed virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+func (accessible *ObjectInstance) ParentVisibleDataChanged() {
+	var carg0 *C.AtkObject
+
+	parentclass := (*C.AtkObjectClass)(classdata.PeekParentClass(UnsafeObjectToGlibNone(accessible)))
+
+	C._gotk4_atk1_Object_virtual_visible_data_changed(unsafe.Pointer(parentclass.visible_data_changed), carg0)
+	runtime.KeepAlive(accessible)
+}
+
 // RegisterObjectSubClass is used to register a go subclass of AtkObject. For this to work safely please implement the
 // virtual methods required by the implementation.
 func RegisterObjectSubClass[InstanceT Object](
@@ -15607,6 +21945,18 @@ type ObjectFactory interface {
 	// Note: primarily used for runtime replacement of #AtkObjectFactorys
 	// in object registries.
 	Invalidate()
+
+	// chain up virtual methods:
+
+	// ParentInvalidate calls the default implementations of the invalidate virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	//
+	// Inform @factory that it is no longer being used to create
+	// accessibles. When called, @factory may need to inform
+	// #AtkObjects which it has created that they need to be re-instantiated.
+	// Note: primarily used for runtime replacement of #AtkObjectFactorys
+	// in object registries.
+	ParentInvalidate()
 }
 
 func unsafeWrapObjectFactory(base *gobject.ObjectInstance) *ObjectFactoryInstance {
@@ -15725,6 +22075,12 @@ type ObjectFactoryOverrides[Instance ObjectFactory] struct {
 	gobject.ObjectOverrides[Instance]
 
 	// Invalidate allows you to override the implementation of the virtual method invalidate.
+	//
+	// Inform @factory that it is no longer being used to create
+	// accessibles. When called, @factory may need to inform
+	// #AtkObjects which it has created that they need to be re-instantiated.
+	// Note: primarily used for runtime replacement of #AtkObjectFactorys
+	// in object registries.
 	Invalidate func(Instance)
 }
 
@@ -15749,6 +22105,23 @@ func UnsafeApplyObjectFactoryOverrides[Instance ObjectFactory](gclass unsafe.Poi
 			},
 		)
 	}
+}
+
+// ParentInvalidate calls the default implementations of the invalidate virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+//
+// Inform @factory that it is no longer being used to create
+// accessibles. When called, @factory may need to inform
+// #AtkObjects which it has created that they need to be re-instantiated.
+// Note: primarily used for runtime replacement of #AtkObjectFactorys
+// in object registries.
+func (factory *ObjectFactoryInstance) ParentInvalidate() {
+	var carg0 *C.AtkObjectFactory
+
+	parentclass := (*C.AtkObjectFactoryClass)(classdata.PeekParentClass(UnsafeObjectFactoryToGlibNone(factory)))
+
+	C._gotk4_atk1_ObjectFactory_virtual_invalidate(unsafe.Pointer(parentclass.invalidate), carg0)
+	runtime.KeepAlive(factory)
 }
 
 // RegisterObjectFactorySubClass is used to register a go subclass of AtkObjectFactory. For this to work safely please implement the
@@ -15825,6 +22198,15 @@ type Plug interface {
 	// accessible object for the toplevel widget, an AtkPlug object, and make the
 	// former the child of the latter by calling atk_plug_set_child().
 	SetChild(Object)
+
+	// chain up virtual methods:
+
+	// ParentGetObjectID calls the default implementations of the get_object_id virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function returns the following values:
+	// 
+	// 	- goret string 
+	ParentGetObjectID() string
 }
 
 func unsafeWrapPlug(base *gobject.ObjectInstance) *PlugInstance {
@@ -15986,6 +22368,28 @@ func UnsafeApplyPlugOverrides[Instance Plug](gclass unsafe.Pointer, overrides Pl
 	}
 }
 
+// ParentGetObjectID calls the default implementations of the get_object_id virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function returns the following values:
+// 
+// 	- goret string 
+func (obj *PlugInstance) ParentGetObjectID() string {
+	var carg0 *C.AtkPlug
+	var cret  *C.gchar // return, full, string
+
+	parentclass := (*C.AtkPlugClass)(classdata.PeekParentClass(UnsafePlugToGlibNone(obj)))
+
+	cret = C._gotk4_atk1_Plug_virtual_get_object_id(unsafe.Pointer(parentclass.get_object_id), carg0)
+	runtime.KeepAlive(obj)
+
+	var goret string
+
+	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	defer C.free(unsafe.Pointer(cret))
+
+	return goret
+}
+
 // RegisterPlugSubClass is used to register a go subclass of AtkPlug. For this to work safely please implement the
 // virtual methods required by the implementation.
 func RegisterPlugSubClass[InstanceT Plug](
@@ -16076,6 +22480,8 @@ type Registry interface {
 	// the creation of new #AtkObject implementations for instances
 	// appropriate for @type.
 	SetFactoryType(gobject.Type, gobject.Type)
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapRegistry(base *gobject.ObjectInstance) *RegistryInstance {
@@ -16297,6 +22703,8 @@ type Relation interface {
 	//
 	// Remove the specified AtkObject from the target for the relation.
 	RemoveTarget(Object) bool
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapRelation(base *gobject.ObjectInstance) *RelationInstance {
@@ -16610,6 +23018,8 @@ type RelationSet interface {
 	// This function unref's the #AtkRelation so it will be deleted unless there
 	// is another reference to it.
 	Remove(Relation)
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapRelationSet(base *gobject.ObjectInstance) *RelationSetInstance {
@@ -16999,6 +23409,26 @@ type Socket interface {
 	//
 	// Determines whether or not the socket has an embedded plug.
 	IsOccupied() bool
+
+	// chain up virtual methods:
+
+	// ParentEmbed calls the default implementations of the embed virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- plugId string: the ID of an #AtkPlug 
+	//
+	// Embeds the children of an #AtkPlug as the children of the
+	// #AtkSocket. The plug may be in the same process or in a different
+	// process.
+	// 
+	// The class item used by this function should be filled in by the IPC
+	// layer (usually at-spi2-atk). The implementor of the AtkSocket
+	// should call this function and pass the id for the plug as returned
+	// by atk_plug_get_id().  It is the responsibility of the application
+	// to pass the plug id on to the process implementing the #AtkSocket
+	// as needed.
+	ParentEmbed(plugId string)
 }
 
 func unsafeWrapSocket(base *gobject.ObjectInstance) *SocketInstance {
@@ -17125,6 +23555,17 @@ type SocketOverrides[Instance Socket] struct {
 	// The function takes the following parameters:
 	// 
 	// 	- plugId string: the ID of an #AtkPlug 
+	//
+	// Embeds the children of an #AtkPlug as the children of the
+	// #AtkSocket. The plug may be in the same process or in a different
+	// process.
+	// 
+	// The class item used by this function should be filled in by the IPC
+	// layer (usually at-spi2-atk). The implementor of the AtkSocket
+	// should call this function and pass the id for the plug as returned
+	// by atk_plug_get_id().  It is the responsibility of the application
+	// to pass the plug id on to the process implementing the #AtkSocket
+	// as needed.
 	Embed func(Instance, string)
 }
 
@@ -17151,6 +23592,36 @@ func UnsafeApplySocketOverrides[Instance Socket](gclass unsafe.Pointer, override
 			},
 		)
 	}
+}
+
+// ParentEmbed calls the default implementations of the embed virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- plugId string: the ID of an #AtkPlug 
+//
+// Embeds the children of an #AtkPlug as the children of the
+// #AtkSocket. The plug may be in the same process or in a different
+// process.
+// 
+// The class item used by this function should be filled in by the IPC
+// layer (usually at-spi2-atk). The implementor of the AtkSocket
+// should call this function and pass the id for the plug as returned
+// by atk_plug_get_id().  It is the responsibility of the application
+// to pass the plug id on to the process implementing the #AtkSocket
+// as needed.
+func (obj *SocketInstance) ParentEmbed(plugId string) {
+	var carg0 *C.AtkSocket
+	var carg1 *C.gchar // in, none, string
+
+	parentclass := (*C.AtkSocketClass)(classdata.PeekParentClass(UnsafeSocketToGlibNone(obj)))
+
+	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(plugId)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	C._gotk4_atk1_Socket_virtual_embed(unsafe.Pointer(parentclass.embed), carg0, carg1)
+	runtime.KeepAlive(obj)
+	runtime.KeepAlive(plugId)
 }
 
 // RegisterSocketSubClass is used to register a go subclass of AtkSocket. For this to work safely please implement the
@@ -17322,6 +23793,8 @@ type StateSet interface {
 	// The set returned by this operation contains the states in exactly
 	// one of the two sets.
 	XorSets(StateSet) StateSet
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapStateSet(base *gobject.ObjectInstance) *StateSetInstance {
@@ -17745,6 +24218,8 @@ var _ Util = (*UtilInstance)(nil)
 type Util interface {
 	gobject.Object
 	upcastToAtkUtil() *UtilInstance
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapUtil(base *gobject.ObjectInstance) *UtilInstance {
@@ -17854,6 +24329,8 @@ type GObjectAccessible interface {
 	//
 	// Gets the GObject for which @obj is the accessible object.
 	GetObject() gobject.Object
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapGObjectAccessible(base *gobject.ObjectInstance) *GObjectAccessibleInstance {
@@ -18031,6 +24508,8 @@ type NoOpObject interface {
 	Value
 	Window
 	upcastToAtkNoOpObject() *NoOpObjectInstance
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapNoOpObject(base *gobject.ObjectInstance) *NoOpObjectInstance {
@@ -18039,40 +24518,40 @@ func unsafeWrapNoOpObject(base *gobject.ObjectInstance) *NoOpObjectInstance {
 			ObjectInstance: *base,
 		},
 		ActionInstance: ActionInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ComponentInstance: ComponentInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		DocumentInstance: DocumentInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		EditableTextInstance: EditableTextInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		HypertextInstance: HypertextInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ImageInstance: ImageInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		SelectionInstance: SelectionInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		TableInstance: TableInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		TableCellInstance: TableCellInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		TextInstance: TextInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		ValueInstance: ValueInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		WindowInstance: WindowInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -18196,6 +24675,8 @@ var _ NoOpObjectFactory = (*NoOpObjectFactoryInstance)(nil)
 type NoOpObjectFactory interface {
 	ObjectFactory
 	upcastToAtkNoOpObjectFactory() *NoOpObjectFactoryInstance
+
+	// chain up virtual methods:
 }
 
 func unsafeWrapNoOpObjectFactory(base *gobject.ObjectInstance) *NoOpObjectFactoryInstance {

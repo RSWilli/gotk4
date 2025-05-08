@@ -167,6 +167,11 @@ func UnsafeRegisterSubClass[InstanceT Object, ClassT any, OverridesT ObjectOverr
 
 	// register the interfaces
 	for _, iface := range interfaceInits {
+		panic("TODO: interface init is not implemented")
+
+		// TODO: we need to set the interface Instance types in the class init function as well and require that
+		// the interfaces are registered in the same order as the user provided embedded interfaces
+
 		ifaceInfo := iface.toInterfaceInfo()
 		C.g_type_add_interface_static(gtype, C.GType(iface.InterfaceType), ifaceInfo)
 	}

@@ -66,3 +66,13 @@ func (list VirtualMethodGeneratorList) GenerateClassOverrideFields(w file.File) 
 		g.GenerateClassOverrideField(w)
 	}
 }
+
+func (list VirtualMethodGeneratorList) GenerateInterfaceSignatures(w file.File) {
+	for _, g := range list {
+		if g == nil {
+			continue
+		}
+
+		g.GenerateInterfaceSignature(w)
+	}
+}

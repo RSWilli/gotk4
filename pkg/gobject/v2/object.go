@@ -38,6 +38,13 @@ type Object interface {
 	ThawNotify()
 	StopEmission(string)
 
+	// Parent virtual methods:
+
+	ParentConstructed()
+	ParentFinalize()
+
+	// internal methods:
+
 	isFloating() bool
 
 	unsafeForceFloating()
@@ -154,6 +161,11 @@ type ObjectInstance struct {
 	*objectInstance
 }
 
+// objectInstance is the object that is finalized
+type objectInstance struct {
+	native *C.GObject
+}
+
 // unsafeForceFloating implements Object.
 func (v *ObjectInstance) unsafeForceFloating() {
 	C.g_object_force_floating(v.native)
@@ -175,11 +187,6 @@ func (obj *ObjectInstance) GoValueType() Type {
 // SetGoValue implements GoValueInitializer.
 func (obj *ObjectInstance) SetGoValue(v *Value) {
 	v.SetObject(obj)
-}
-
-// objectInstance is the object that is finalized
-type objectInstance struct {
-	native *C.GObject
 }
 
 func (v *ObjectInstance) unsafe() unsafe.Pointer {

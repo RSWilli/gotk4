@@ -425,6 +425,11 @@ func (f PixbufFormatFlags) String() string {
 }
 
 // PixbufModuleSizeFunc wraps GdkPixbufModuleSizeFunc
+// 
+// The function takes the following parameters:
+// 
+// 	- width *int32: pointer to a location containing the current image width 
+// 	- height *int32: pointer to a location containing the current image height 
 //
 // Defines the type of the function that gets called once the size
 // of the loaded image is known.
@@ -442,6 +447,14 @@ func (f PixbufFormatFlags) String() string {
 type PixbufModuleSizeFunc func(width *int32, height *int32)
 
 // PixbufModuleUpdatedFunc wraps GdkPixbufModuleUpdatedFunc
+// 
+// The function takes the following parameters:
+// 
+// 	- pixbuf Pixbuf: the #GdkPixbuf that is currently being loaded. 
+// 	- x int32: the X origin of the updated area. 
+// 	- y int32: the Y origin of the updated area. 
+// 	- width int32: the width of the updated area. 
+// 	- height int32: the height of the updated area. 
 //
 // Defines the type of the function that gets called every time a region
 // of @pixbuf is updated.
@@ -452,6 +465,15 @@ type PixbufModuleSizeFunc func(width *int32, height *int32)
 type PixbufModuleUpdatedFunc func(pixbuf Pixbuf, x int32, y int32, width int32, height int32)
 
 // PixbufSaveFunc wraps GdkPixbufSaveFunc
+// 
+// The function takes the following parameters:
+// 
+// 	- buf string: bytes to be written. 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+// 	- err error: A location to return an error. 
 //
 // Save functions used by [method@GdkPixbuf.Pixbuf.save_to_callback].
 // 
@@ -1216,10 +1238,10 @@ func unsafeWrapPixbuf(base *gobject.ObjectInstance) *PixbufInstance {
 	return &PixbufInstance{
 		ObjectInstance: *base,
 		IconInstance: gio.IconInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 		LoadableIconInstance: gio.LoadableIconInstance{
-			Instance: *base,
+			ObjectInstance: *base,
 		},
 	}
 }
@@ -3860,6 +3882,31 @@ type PixbufLoader interface {
 	// to this signal to set the desired size to which the image
 	// should be scaled.
 	ConnectSizePrepared(func(PixbufLoader, int32, int32)) gobject.SignalHandle
+
+	// chain up virtual methods:
+
+	// ParentAreaPrepared calls the default implementations of the area_prepared virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	ParentAreaPrepared()
+	// ParentAreaUpdated calls the default implementations of the area_updated virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- x int32 
+	// 	- y int32 
+	// 	- width int32 
+	// 	- height int32 
+	ParentAreaUpdated(x int32, y int32, width int32, height int32)
+	// ParentClosed calls the default implementations of the closed virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	ParentClosed()
+	// ParentSizePrepared calls the default implementations of the size_prepared virtual method.
+	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// The function takes the following parameters:
+	// 
+	// 	- width int32 
+	// 	- height int32 
+	ParentSizePrepared(width int32, height int32)
 }
 
 func unsafeWrapPixbufLoader(base *gobject.ObjectInstance) *PixbufLoaderInstance {
@@ -4389,6 +4436,80 @@ func UnsafeApplyPixbufLoaderOverrides[Instance PixbufLoader](gclass unsafe.Point
 			},
 		)
 	}
+}
+
+// ParentAreaPrepared calls the default implementations of the area_prepared virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+func (loader *PixbufLoaderInstance) ParentAreaPrepared() {
+	var carg0 *C.GdkPixbufLoader
+
+	parentclass := (*C.GdkPixbufLoaderClass)(classdata.PeekParentClass(UnsafePixbufLoaderToGlibNone(loader)))
+
+	C._gotk4_gdkpixbuf2_PixbufLoader_virtual_area_prepared(unsafe.Pointer(parentclass.area_prepared), carg0)
+	runtime.KeepAlive(loader)
+}
+
+// ParentAreaUpdated calls the default implementations of the area_updated virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- x int32 
+// 	- y int32 
+// 	- width int32 
+// 	- height int32 
+func (loader *PixbufLoaderInstance) ParentAreaUpdated(x int32, y int32, width int32, height int32) {
+	var carg0 *C.GdkPixbufLoader
+	var carg1 C.int // in, none, casted, casted C.gint
+	var carg2 C.int // in, none, casted, casted C.gint
+	var carg3 C.int // in, none, casted, casted C.gint
+	var carg4 C.int // in, none, casted, casted C.gint
+
+	parentclass := (*C.GdkPixbufLoaderClass)(classdata.PeekParentClass(UnsafePixbufLoaderToGlibNone(loader)))
+
+	carg1 = C.int(x)
+	carg2 = C.int(y)
+	carg3 = C.int(width)
+	carg4 = C.int(height)
+
+	C._gotk4_gdkpixbuf2_PixbufLoader_virtual_area_updated(unsafe.Pointer(parentclass.area_updated), carg0, carg1, carg2, carg3, carg4)
+	runtime.KeepAlive(loader)
+	runtime.KeepAlive(x)
+	runtime.KeepAlive(y)
+	runtime.KeepAlive(width)
+	runtime.KeepAlive(height)
+}
+
+// ParentClosed calls the default implementations of the closed virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+func (loader *PixbufLoaderInstance) ParentClosed() {
+	var carg0 *C.GdkPixbufLoader
+
+	parentclass := (*C.GdkPixbufLoaderClass)(classdata.PeekParentClass(UnsafePixbufLoaderToGlibNone(loader)))
+
+	C._gotk4_gdkpixbuf2_PixbufLoader_virtual_closed(unsafe.Pointer(parentclass.closed), carg0)
+	runtime.KeepAlive(loader)
+}
+
+// ParentSizePrepared calls the default implementations of the size_prepared virtual method.
+// This functions behavior is not defined when the parent does not implement the virtual method.
+// The function takes the following parameters:
+// 
+// 	- width int32 
+// 	- height int32 
+func (loader *PixbufLoaderInstance) ParentSizePrepared(width int32, height int32) {
+	var carg0 *C.GdkPixbufLoader
+	var carg1 C.int // in, none, casted, casted C.gint
+	var carg2 C.int // in, none, casted, casted C.gint
+
+	parentclass := (*C.GdkPixbufLoaderClass)(classdata.PeekParentClass(UnsafePixbufLoaderToGlibNone(loader)))
+
+	carg1 = C.int(width)
+	carg2 = C.int(height)
+
+	C._gotk4_gdkpixbuf2_PixbufLoader_virtual_size_prepared(unsafe.Pointer(parentclass.size_prepared), carg0, carg1, carg2)
+	runtime.KeepAlive(loader)
+	runtime.KeepAlive(width)
+	runtime.KeepAlive(height)
 }
 
 // RegisterPixbufLoaderSubClass is used to register a go subclass of GdkPixbufLoader. For this to work safely please implement the
