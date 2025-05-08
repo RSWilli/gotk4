@@ -740,7 +740,7 @@ func (g *RecordGenerator) unrefCall(w file.CodeWriter, variable string) {
 
 func NewRecordGenerator(r *typesystem.Record) *RecordGenerator {
 	g := &RecordGenerator{
-		Doc:               NewTypeGoDocGenerator(r),
+		Doc:               NewGoDocGenerator(r),
 		Record:            r,
 		GenerateMarshaler: r.GLibGetType() != "",
 

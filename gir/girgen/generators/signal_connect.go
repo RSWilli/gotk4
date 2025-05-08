@@ -59,7 +59,7 @@ func (s *SignalConnectGenerator) GenerateInterfaceSignature(w file.File) {
 
 func NewSignalConnectGenerator(sig *typesystem.Signal) *SignalConnectGenerator {
 	return &SignalConnectGenerator{
-		Doc:    NewSignalGoDocGenerator(sig),
+		Doc:    NewGoDocGenerator(sig),
 		Signal: sig,
 	}
 }

@@ -190,7 +190,7 @@ func NewCallbackGenerator(cb *typesystem.Callback) *CallbackGenerator {
 	}
 
 	g := &CallbackGenerator{
-		Doc:      NewTypeGoDocGenerator(cb),
+		Doc:      NewGoDocGenerator(cb),
 		Callback: cb,
 	}
 

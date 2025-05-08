@@ -16,7 +16,7 @@ const (
 )
 
 type Signal struct {
-	Doc       Doc
+	Doc
 	Name      string
 	GoName    string
 	Detailed  bool

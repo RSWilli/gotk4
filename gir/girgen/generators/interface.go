@@ -138,7 +138,7 @@ func NewInterfaceGenerator(c *typesystem.Interface) *InterfaceGenerator {
 	}
 
 	g := &InterfaceGenerator{
-		Doc:       NewTypeGoDocGenerator(c),
+		Doc:       NewGoDocGenerator(c),
 		Interface: c,
 		Marshaler: marshaler,
 

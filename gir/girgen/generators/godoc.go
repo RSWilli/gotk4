@@ -72,44 +72,43 @@ func (docg *GoDocGenerator) Generate(w file.CodeWriter) {
 	}
 }
 
-type DocumentedType interface {
-	typesystem.Type
-	typesystem.Documented
+func NewGoDocGenerator(documented typesystem.Documented) *GoDocGenerator {
+	gen := &GoDocGenerator{
+		GIRDoc: documented.Documentation(),
+	}
+
+	if sig, ok := documented.(*typesystem.Signal); ok {
+		gen.DocParagraphs = append(gen.DocParagraphs, documentSignal(sig))
+	}
+
+	if identifier, ok := documented.(typesystem.Identifier); ok {
+		gen.DocParagraphs = append(gen.DocParagraphs, documentIdentifier(identifier))
+	}
+
+	if typ, ok := documented.(typesystem.Type); ok {
+		gen.DocParagraphs = append(gen.DocParagraphs, documentType(typ))
+	}
+
+	if callable, ok := documented.(typesystem.Callable); ok {
+		gen.DocParagraphs = append(gen.DocParagraphs, documentCallable(callable)...)
+	}
+
+	return gen
 }
 
-type DocumentedIdentifier interface {
-	typesystem.Identifier
-	typesystem.Documented
-}
-
-type DocumentedCallable interface {
-	DocumentedIdentifier
-	typesystem.Callable
-}
-
-func NewSignalGoDocGenerator(sig *typesystem.Signal) *GoDocGenerator {
-	var docstring string
-
+func documentSignal(sig *typesystem.Signal) string {
 	if sig.Action {
-		docstring = fmt.Sprintf("%s emits the \"%s\" signal", sig.GoName, sig.Name)
+		return fmt.Sprintf("%s emits the \"%s\" signal", sig.GoName, sig.Name)
 	} else {
-		docstring = fmt.Sprintf("%s connects the provided callback to the \"%s\" signal", sig.GoName, sig.Name)
-	}
-
-	return &GoDocGenerator{
-		DocParagraphs: []string{docstring},
-		GIRDoc:        sig.Doc,
+		return fmt.Sprintf("%s connects the provided callback to the \"%s\" signal", sig.GoName, sig.Name)
 	}
 }
 
-func NewIdentifierGoDocGenerator(identifier DocumentedIdentifier) *GoDocGenerator {
-	return &GoDocGenerator{
-		DocParagraphs: []string{fmt.Sprintf("%s wraps %s", identifier.GoIndentifier(), identifier.CIndentifier())},
-		GIRDoc:        identifier.Documentation(),
-	}
+func documentIdentifier(identifier typesystem.Identifier) string {
+	return fmt.Sprintf("%s wraps %s", identifier.GoIndentifier(), identifier.CIndentifier())
 }
 
-func NewTypeGoDocGenerator(typ DocumentedType) *GoDocGenerator {
+func documentType(typ typesystem.Type) string {
 	gotype := typ.GoType(0)
 
 	switch t := typ.(type) {
@@ -119,28 +118,16 @@ func NewTypeGoDocGenerator(typ DocumentedType) *GoDocGenerator {
 		gotype = t.GoInterfaceName
 	}
 
-	return &GoDocGenerator{
-		DocParagraphs: []string{fmt.Sprintf("%s wraps %s", gotype, typ.CType(0))},
-		GIRDoc:        typ.Documentation(),
-	}
+	return fmt.Sprintf("%s wraps %s", gotype, typ.CType(0))
 }
 
-func NewCallableGoDocGenerator(callable DocumentedCallable) *GoDocGenerator {
-	g := NewIdentifierGoDocGenerator(callable)
-	g2 := NewParametersGoDocGenerator(callable)
-
-	g.DocParagraphs = append(g.DocParagraphs, g2.DocParagraphs...)
-
-	return g
-}
-
-func NewParametersGoDocGenerator(callable typesystem.Callable) *GoDocGenerator {
-	g := &GoDocGenerator{}
+func documentCallable(callable typesystem.Callable) []string {
+	var docParagraphs []string
 
 	params := callable.CallableParameters()
 
 	if len(params.GoParameters) > 0 {
-		g.DocParagraphs = append(g.DocParagraphs, "The function takes the following parameters:\n")
+		docParagraphs = append(docParagraphs, "The function takes the following parameters:\n")
 
 		var paramDoc strings.Builder
 
@@ -151,11 +138,11 @@ func NewParametersGoDocGenerator(callable typesystem.Callable) *GoDocGenerator {
 			fmt.Fprintf(&paramDoc, "\t- %s \n", paramDocListItem(param))
 		}
 
-		g.DocParagraphs = append(g.DocParagraphs, paramDoc.String())
+		docParagraphs = append(docParagraphs, paramDoc.String())
 	}
 
 	if len(params.GoReturns) > 0 {
-		g.DocParagraphs = append(g.DocParagraphs, "The function returns the following values:\n")
+		docParagraphs = append(docParagraphs, "The function returns the following values:\n")
 
 		var returnDoc strings.Builder
 
@@ -163,10 +150,10 @@ func NewParametersGoDocGenerator(callable typesystem.Callable) *GoDocGenerator {
 			fmt.Fprintf(&returnDoc, "\t- %s \n", paramDocListItem(rv))
 		}
 
-		g.DocParagraphs = append(g.DocParagraphs, returnDoc.String())
+		docParagraphs = append(docParagraphs, returnDoc.String())
 	}
 
-	return g
+	return docParagraphs
 }
 
 func paramDocListItem(p *typesystem.Param) string {

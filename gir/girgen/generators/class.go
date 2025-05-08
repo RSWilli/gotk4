@@ -186,7 +186,7 @@ func NewClassGenerator(c *typesystem.Class) *ClassGenerator {
 	}
 
 	g := &ClassGenerator{
-		Doc:       NewTypeGoDocGenerator(c),
+		Doc:       NewGoDocGenerator(c),
 		Class:     c,
 		Marshaler: marshaler,
 

@@ -78,9 +78,9 @@ type CallableGenerator struct {
 	Signature *typesystem.CallableSignature
 }
 
-func (m *CallableGenerator) importReferencedTypes(w file.File, allowSkipped bool) {
+func (m *CallableGenerator) importReferencedTypes(w file.File) {
 	for _, param := range m.Signature.CParameters() {
-		if (param.Skip || param.Implicit) && !allowSkipped {
+		if param.Skip || param.Implicit {
 			continue
 		}
 		w.GoImportType(param.Type)
@@ -95,7 +95,7 @@ func (m *CallableGenerator) importReferencedTypes(w file.File, allowSkipped bool
 func (m *CallableGenerator) GenerateInterfaceSignature(w file.File) {
 	m.Doc.Generate(w.Go())
 
-	m.importReferencedTypes(w, false)
+	m.importReferencedTypes(w)
 
 	fmt.Fprintln(w.Go(), m.GoInterfaceDeclaration())
 }
@@ -111,7 +111,7 @@ func (m *CallableGenerator) Generate(w *file.Package) {
 		}
 	}
 
-	m.importReferencedTypes(w, false)
+	m.importReferencedTypes(w)
 
 	w.GoImport("runtime")
 
@@ -198,7 +198,7 @@ func (m *CallableGenerator) Generate(w *file.Package) {
 
 func NewCallableGenerator(f *typesystem.CallableSignature) *CallableGenerator {
 	gen := &CallableGenerator{
-		Doc:              NewCallableGoDocGenerator(f),
+		Doc:              NewGoDocGenerator(f),
 		Signature:        f,
 		ParamConverters:  nil,
 		ReturnConverters: nil,
@@ -248,7 +248,7 @@ func (m *CallableGenerator) GoInterfaceDeclaration() string {
 	return fmt.Sprintf("%s(%s)%s", m.Signature.GoIndentifier(), m.Signature.GoParameters.GoTypes(), ret)
 }
 
-// GoSignature returns a string of the go function signature.
+// CGoCall returns a string of the cgo function call.
 func (m *CallableGenerator) CGoCall() string {
 	creturn := m.Signature.CGoReturn()
 	var ret string

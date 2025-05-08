@@ -254,7 +254,7 @@ func NewEnumGenerator(enum *typesystem.Enum) *EnumGenerator {
 
 	for _, member := range enum.Members {
 		members = append(members, EnumMember{
-			Doc: NewIdentifierGoDocGenerator(member),
+			Doc: NewGoDocGenerator(member),
 
 			Member: member,
 		})
@@ -267,7 +267,7 @@ func NewEnumGenerator(enum *typesystem.Enum) *EnumGenerator {
 	}
 
 	gen := &EnumGenerator{
-		Doc:       NewTypeGoDocGenerator(enum),
+		Doc:       NewGoDocGenerator(enum),
 		Enum:      enum,
 		Members:   members,
 		Marshaler: marshalGen,

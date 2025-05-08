@@ -246,7 +246,7 @@ func NewBitfieldGenerator(bf *typesystem.Bitfield) *BitfieldGenerator {
 
 	for _, m := range bf.Members {
 		mm := BitfieldMember{
-			Doc:    NewIdentifierGoDocGenerator(m),
+			Doc:    NewGoDocGenerator(m),
 			Member: m,
 		}
 		members = append(members, mm)
@@ -259,7 +259,7 @@ func NewBitfieldGenerator(bf *typesystem.Bitfield) *BitfieldGenerator {
 	}
 
 	gen := &BitfieldGenerator{
-		Doc:      NewTypeGoDocGenerator(bf),
+		Doc:      NewGoDocGenerator(bf),
 		Bitfield: bf,
 
 		Members:        members,

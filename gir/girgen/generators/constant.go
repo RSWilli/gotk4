@@ -66,7 +66,7 @@ func (g *ConstantGenerator) Generate(w *file.Package) {
 
 func NewConstantGenerator(constant *typesystem.Constant) *ConstantGenerator {
 	return &ConstantGenerator{
-		Doc:      NewIdentifierGoDocGenerator(constant),
+		Doc:      NewGoDocGenerator(constant),
 		Constant: constant,
 	}
 }

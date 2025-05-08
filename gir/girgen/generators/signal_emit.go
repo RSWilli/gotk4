@@ -68,7 +68,7 @@ func (s *SignalEmitGenerator) GenerateInterfaceSignature(w file.File) {
 
 func NewSignalEmitGenerator(sig *typesystem.Signal) *SignalEmitGenerator {
 	return &SignalEmitGenerator{
-		Doc:    NewSignalGoDocGenerator(sig),
+		Doc:    NewGoDocGenerator(sig),
 		Signal: sig,
 	}
 }
