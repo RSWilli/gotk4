@@ -152,32 +152,36 @@ func UnsafeValueToGlibFull(v *Value) unsafe.Pointer {
 
 // NewValue converts a Go type to a comparable GValue. It will panic if the
 // given type is unknown. Most Go primitive types and all Object types are
-// supported.
+// supported. Additionaly the value can implement the [GoValueInitializer] interface
+// to override the
 func NewValue(v interface{}) *Value {
 	val := AllocateValue()
 	val.InitGoValue(v)
+	val.SetGoValue(v)
 	return val
 }
 
 // GoValueInitializer is the interface that is implemented by
 // all go types that need to initialize a GValue differently than reflect can know. See any enum/flag/object
 type GoValueInitializer interface {
-	// InitGoValue takes an uninitialised Value and initialises and sets it.
-	InitGoValue(v *Value)
+	// GoValueType returns the GType needed to initialize the a GValue
+	GoValueType() Type
+	// SetGoValue sets the Go value of the GValue. The value must have been initialised
+	// already
+	SetGoValue(v *Value)
 }
 
 // InitGoValue sets the Go value of the GValue. The GValue MUST NOT HAVE BEEN
 // INITIALIZED ALREADY!
 func (v *Value) InitGoValue(goValue any) {
-	if goValue == nil {
-		v.Init(TypePointer)
-		v.SetPointer(nil)
+	// check for overridden init first
+	if initter, ok := goValue.(GoValueInitializer); ok {
+		v.Init(initter.GoValueType())
 		return
 	}
 
-	// check for overridden init first
-	if initter, ok := goValue.(GoValueInitializer); ok {
-		initter.InitGoValue(v)
+	if goValue == nil {
+		v.Init(TypePointer)
 		return
 	}
 
@@ -228,45 +232,137 @@ func (v *Value) InitGoValue(goValue any) {
 	log.Panicf("type %T not implemented", goValue)
 }
 
+// SetGoValue sets the Go value of the GValue. The GValue MUST HAVE BEEN
+// INITIALIZED ALREADY!
+func (v *Value) SetGoValue(goValue any) {
+	// check for overridden init first
+	if initter, ok := goValue.(GoValueInitializer); ok {
+		v.AssertCanHold(initter.GoValueType())
+		initter.SetGoValue(v)
+		return
+	}
+
+	if goValue == nil {
+		v.AssertCanHold(TypePointer)
+		v.SetPointer(nil)
+		return
+	}
+
+	if setValuePrimitive(v, goValue) {
+		return
+	}
+
+	if goValue == InvalidValue {
+		return
+	}
+
+	// Try this since above doesn't catch constants under other types.
+	rval := reflect.Indirect(reflect.ValueOf(goValue))
+
+	var ok bool
+	switch rval.Kind() {
+	case reflect.Bool:
+		ok = setValuePrimitive(v, rval.Bool())
+	case reflect.Int8:
+		ok = setValuePrimitive(v, int8(rval.Int()))
+	case reflect.Int32:
+		ok = setValuePrimitive(v, int32(rval.Int()))
+	case reflect.Int64:
+		ok = setValuePrimitive(v, int64(rval.Int()))
+	case reflect.Int:
+		ok = setValuePrimitive(v, int(rval.Int()))
+	case reflect.Uint8:
+		ok = setValuePrimitive(v, uint8(rval.Uint()))
+	case reflect.Uint32:
+		ok = setValuePrimitive(v, uint32(rval.Uint()))
+	case reflect.Uint64:
+		ok = setValuePrimitive(v, uint64(rval.Uint()))
+	case reflect.Uint:
+		ok = setValuePrimitive(v, uint(rval.Uint()))
+	case reflect.Float32:
+		ok = setValuePrimitive(v, float32(rval.Float()))
+	case reflect.Float64:
+		ok = setValuePrimitive(v, float64(rval.Float()))
+	case reflect.String:
+		ok = setValuePrimitive(v, rval.String())
+	}
+
+	if ok {
+		return
+	}
+
+	log.Panicf("type %T not implemented", goValue)
+}
+
 func initValuePrimitive(val *Value, v interface{}) bool {
-	switch e := v.(type) {
-	case *Value:
-		*val = *e
+	switch v.(type) {
 	case bool:
 		val.Init(TypeBoolean)
-		val.SetBool(e)
 	case int8:
 		val.Init(TypeChar)
-		val.SetSchar(e)
 	case int32:
 		val.Init(TypeInt) // C int is 32-bit
-		val.SetInt(int(e))
 	case int64:
 		val.Init(TypeInt64)
-		val.SetInt64(e)
 	case int:
 		val.Init(TypeInt64)
-		val.SetInt64(int64(e))
 	case uint8:
 		val.Init(TypeUchar)
-		val.SetUchar(e)
 	case uint32:
 		val.Init(TypeUint)
-		val.SetUint(uint(e))
 	case uint64:
 		val.Init(TypeUint64)
-		val.SetUint64(e)
 	case uint:
 		val.Init(TypeUint64)
-		val.SetUint64(uint64(e))
 	case float32:
 		val.Init(TypeFloat)
-		val.SetFloat(e)
 	case float64:
 		val.Init(TypeDouble)
-		val.SetDouble(e)
 	case string:
 		val.Init(TypeString)
+	default:
+		return false
+	}
+	return true
+}
+
+func setValuePrimitive(val *Value, v interface{}) bool {
+	switch e := v.(type) {
+	case bool:
+		val.AssertCanHold(TypeBoolean)
+		val.SetBool(e)
+	case int8:
+		val.AssertCanHold(TypeChar)
+		val.SetSchar(e)
+	case int32:
+		val.AssertCanHold(TypeInt)
+		val.SetInt(int(e))
+	case int64:
+		val.AssertCanHold(TypeInt64)
+		val.SetInt64(e)
+	case int:
+		val.AssertCanHold(TypeInt64)
+		val.SetInt64(int64(e))
+	case uint8:
+		val.AssertCanHold(TypeUchar)
+		val.SetUchar(e)
+	case uint32:
+		val.AssertCanHold(TypeUint)
+		val.SetUint(uint(e))
+	case uint64:
+		val.AssertCanHold(TypeUint64)
+		val.SetUint64(e)
+	case uint:
+		val.AssertCanHold(TypeUint64)
+		val.SetUint64(uint64(e))
+	case float32:
+		val.AssertCanHold(TypeFloat)
+		val.SetFloat(e)
+	case float64:
+		val.AssertCanHold(TypeDouble)
+		val.SetDouble(e)
+	case string:
+		val.AssertCanHold(TypeString)
 		val.SetString(e)
 	default:
 		return false
@@ -487,4 +583,21 @@ func (v *Value) Type() (actual Type) {
 	actual = Type(C._g_value_type(v.native()))
 	runtime.KeepAlive(v)
 	return
+}
+
+func (v *Value) AssertCanHold(typ Type) {
+	valueType := v.Type()
+
+	if valueType == typ {
+		return
+	}
+
+	valueFundamental := FundamentalType(valueType)
+	typFundamental := FundamentalType(typ)
+
+	if valueFundamental == typFundamental {
+		return
+	}
+
+	log.Panicf("gobject.Value type assertion failed: value is initialized for %s (%s) and not %s (%s)", valueType, valueFundamental, typ, typFundamental)
 }

@@ -226,7 +226,7 @@ var Main = genmain.Data{
 						GoInterfaceName: "Object",
 						Doc:             typesystem.Doc{},
 						BaseConversions: typesystem.BaseConversions{
-							FromGlibBorrowFunction: "", // borrow is not needed
+							FromGlibBorrowFunction: "UnsafeObjectFromGlibBorrow", // borrow is needed for subclassing
 							FromGlibFullFunction:   "UnsafeObjectFromGlibFull",
 							FromGlibNoneFunction:   "UnsafeObjectFromGlibNone",
 							ToGlibNoneFunction:     "UnsafeObjectToGlibNone",
@@ -596,6 +596,9 @@ var Preprocessors = []Preprocessor{
 	RenameCallable("Gio-2.SocketClient.connect", "connect_socket_client"),
 	RenameCallable("Gio-2.SocketConnection.connect", "connect_socket_connection"),
 	RenameCallable("Gio-2.Proxy.connect", "connect_proxy"),
+
+	// Less confusing because C.int differs from int in Go.
+	RenameCallable("GObject-2.param_spec_int", "param_spec_int32"),
 }
 
 // FIXME: override or manually implement this

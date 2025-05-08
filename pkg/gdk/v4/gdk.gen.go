@@ -4929,8 +4929,11 @@ func marshalAxisUse(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = AxisUse(0)
 
-func (e AxisUse) InitGoValue(v *gobject.Value) {
-	v.Init(TypeAxisUse)
+func (e AxisUse) GoValueType() gobject.Type {
+	return TypeAxisUse
+}
+
+func (e AxisUse) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -4980,8 +4983,11 @@ func marshalCicpRange(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = CicpRange(0)
 
-func (e CicpRange) InitGoValue(v *gobject.Value) {
-	v.Init(TypeCicpRange)
+func (e CicpRange) GoValueType() gobject.Type {
+	return TypeCicpRange
+}
+
+func (e CicpRange) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -5048,8 +5054,11 @@ func marshalCrossingMode(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = CrossingMode(0)
 
-func (e CrossingMode) InitGoValue(v *gobject.Value) {
-	v.Init(TypeCrossingMode)
+func (e CrossingMode) GoValueType() gobject.Type {
+	return TypeCrossingMode
+}
+
+func (e CrossingMode) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -5094,8 +5103,11 @@ func marshalDevicePadFeature(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = DevicePadFeature(0)
 
-func (e DevicePadFeature) InitGoValue(v *gobject.Value) {
-	v.Init(TypeDevicePadFeature)
+func (e DevicePadFeature) GoValueType() gobject.Type {
+	return TypeDevicePadFeature
+}
+
+func (e DevicePadFeature) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -5155,8 +5167,11 @@ func marshalDeviceToolType(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = DeviceToolType(0)
 
-func (e DeviceToolType) InitGoValue(v *gobject.Value) {
-	v.Init(TypeDeviceToolType)
+func (e DeviceToolType) GoValueType() gobject.Type {
+	return TypeDeviceToolType
+}
+
+func (e DeviceToolType) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -5202,8 +5217,11 @@ func marshalDmabufError(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = DmabufError(0)
 
-func (e DmabufError) InitGoValue(v *gobject.Value) {
-	v.Init(TypeDmabufError)
+func (e DmabufError) GoValueType() gobject.Type {
+	return TypeDmabufError
+}
+
+func (e DmabufError) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -5261,8 +5279,11 @@ func marshalDragCancelReason(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = DragCancelReason(0)
 
-func (e DragCancelReason) InitGoValue(v *gobject.Value) {
-	v.Init(TypeDragCancelReason)
+func (e DragCancelReason) GoValueType() gobject.Type {
+	return TypeDragCancelReason
+}
+
+func (e DragCancelReason) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -5417,8 +5438,11 @@ func marshalEventType(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = EventType(0)
 
-func (e EventType) InitGoValue(v *gobject.Value) {
-	v.Init(TypeEventType)
+func (e EventType) GoValueType() gobject.Type {
+	return TypeEventType
+}
+
+func (e EventType) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -5480,8 +5504,11 @@ func marshalFullscreenMode(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = FullscreenMode(0)
 
-func (e FullscreenMode) InitGoValue(v *gobject.Value) {
-	v.Init(TypeFullscreenMode)
+func (e FullscreenMode) GoValueType() gobject.Type {
+	return TypeFullscreenMode
+}
+
+func (e FullscreenMode) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -5527,8 +5554,11 @@ func marshalGLError(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = GLError(0)
 
-func (e GLError) InitGoValue(v *gobject.Value) {
-	v.Init(TypeGLError)
+func (e GLError) GoValueType() gobject.Type {
+	return TypeGLError
+}
+
+func (e GLError) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -5617,8 +5647,11 @@ func marshalGravity(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = Gravity(0)
 
-func (e Gravity) InitGoValue(v *gobject.Value) {
-	v.Init(TypeGravity)
+func (e Gravity) GoValueType() gobject.Type {
+	return TypeGravity
+}
+
+func (e Gravity) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -5684,8 +5717,11 @@ func marshalInputSource(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = InputSource(0)
 
-func (e InputSource) InitGoValue(v *gobject.Value) {
-	v.Init(TypeInputSource)
+func (e InputSource) GoValueType() gobject.Type {
+	return TypeInputSource
+}
+
+func (e InputSource) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -5731,8 +5767,11 @@ func marshalKeyMatch(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = KeyMatch(0)
 
-func (e KeyMatch) InitGoValue(v *gobject.Value) {
-	v.Init(TypeKeyMatch)
+func (e KeyMatch) GoValueType() gobject.Type {
+	return TypeKeyMatch
+}
+
+func (e KeyMatch) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -5915,8 +5954,11 @@ func marshalMemoryFormat(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = MemoryFormat(0)
 
-func (e MemoryFormat) InitGoValue(v *gobject.Value) {
-	v.Init(TypeMemoryFormat)
+func (e MemoryFormat) GoValueType() gobject.Type {
+	return TypeMemoryFormat
+}
+
+func (e MemoryFormat) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -6008,8 +6050,11 @@ func marshalNotifyType(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = NotifyType(0)
 
-func (e NotifyType) InitGoValue(v *gobject.Value) {
-	v.Init(TypeNotifyType)
+func (e NotifyType) GoValueType() gobject.Type {
+	return TypeNotifyType
+}
+
+func (e NotifyType) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -6060,8 +6105,11 @@ func marshalScrollDirection(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = ScrollDirection(0)
 
-func (e ScrollDirection) InitGoValue(v *gobject.Value) {
-	v.Init(TypeScrollDirection)
+func (e ScrollDirection) GoValueType() gobject.Type {
+	return TypeScrollDirection
+}
+
+func (e ScrollDirection) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -6114,8 +6162,11 @@ func marshalScrollUnit(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = ScrollUnit(0)
 
-func (e ScrollUnit) InitGoValue(v *gobject.Value) {
-	v.Init(TypeScrollUnit)
+func (e ScrollUnit) GoValueType() gobject.Type {
+	return TypeScrollUnit
+}
+
+func (e ScrollUnit) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -6166,8 +6217,11 @@ func marshalSubpixelLayout(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = SubpixelLayout(0)
 
-func (e SubpixelLayout) InitGoValue(v *gobject.Value) {
-	v.Init(TypeSubpixelLayout)
+func (e SubpixelLayout) GoValueType() gobject.Type {
+	return TypeSubpixelLayout
+}
+
+func (e SubpixelLayout) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -6229,8 +6283,11 @@ func marshalSurfaceEdge(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = SurfaceEdge(0)
 
-func (e SurfaceEdge) InitGoValue(v *gobject.Value) {
-	v.Init(TypeSurfaceEdge)
+func (e SurfaceEdge) GoValueType() gobject.Type {
+	return TypeSurfaceEdge
+}
+
+func (e SurfaceEdge) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -6279,8 +6336,11 @@ func marshalTextureError(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = TextureError(0)
 
-func (e TextureError) InitGoValue(v *gobject.Value) {
-	v.Init(TypeTextureError)
+func (e TextureError) GoValueType() gobject.Type {
+	return TypeTextureError
+}
+
+func (e TextureError) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -6340,8 +6400,11 @@ func marshalTitlebarGesture(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = TitlebarGesture(0)
 
-func (e TitlebarGesture) InitGoValue(v *gobject.Value) {
-	v.Init(TypeTitlebarGesture)
+func (e TitlebarGesture) GoValueType() gobject.Type {
+	return TypeTitlebarGesture
+}
+
+func (e TitlebarGesture) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -6403,8 +6466,11 @@ func marshalTouchpadGesturePhase(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = TouchpadGesturePhase(0)
 
-func (e TouchpadGesturePhase) InitGoValue(v *gobject.Value) {
-	v.Init(TypeTouchpadGesturePhase)
+func (e TouchpadGesturePhase) GoValueType() gobject.Type {
+	return TypeTouchpadGesturePhase
+}
+
+func (e TouchpadGesturePhase) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -6441,8 +6507,11 @@ func marshalVulkanError(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = VulkanError(0)
 
-func (e VulkanError) InitGoValue(v *gobject.Value) {
-	v.Init(TypeVulkanError)
+func (e VulkanError) GoValueType() gobject.Type {
+	return TypeVulkanError
+}
+
+func (e VulkanError) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -6541,8 +6610,11 @@ func (a AnchorHints) Has(other AnchorHints) bool {
 
 var _ gobject.GoValueInitializer = AnchorHints(0)
 
-func (f AnchorHints) InitGoValue(v *gobject.Value) {
-	v.Init(TypeAnchorHints)
+func (f AnchorHints) GoValueType() gobject.Type {
+	return TypeAnchorHints
+}
+
+func (f AnchorHints) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
@@ -6644,8 +6716,11 @@ func (a AxisFlags) Has(other AxisFlags) bool {
 
 var _ gobject.GoValueInitializer = AxisFlags(0)
 
-func (f AxisFlags) InitGoValue(v *gobject.Value) {
-	v.Init(TypeAxisFlags)
+func (f AxisFlags) GoValueType() gobject.Type {
+	return TypeAxisFlags
+}
+
+func (f AxisFlags) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
@@ -6729,8 +6804,11 @@ func (d DragAction) Has(other DragAction) bool {
 
 var _ gobject.GoValueInitializer = DragAction(0)
 
-func (f DragAction) InitGoValue(v *gobject.Value) {
-	v.Init(TypeDragAction)
+func (f DragAction) GoValueType() gobject.Type {
+	return TypeDragAction
+}
+
+func (f DragAction) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
@@ -6840,8 +6918,11 @@ func (f FrameClockPhase) Has(other FrameClockPhase) bool {
 
 var _ gobject.GoValueInitializer = FrameClockPhase(0)
 
-func (f FrameClockPhase) InitGoValue(v *gobject.Value) {
-	v.Init(TypeFrameClockPhase)
+func (f FrameClockPhase) GoValueType() gobject.Type {
+	return TypeFrameClockPhase
+}
+
+func (f FrameClockPhase) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
@@ -6904,8 +6985,11 @@ func (g GLAPI) Has(other GLAPI) bool {
 
 var _ gobject.GoValueInitializer = GLAPI(0)
 
-func (f GLAPI) InitGoValue(v *gobject.Value) {
-	v.Init(TypeGLAPI)
+func (f GLAPI) GoValueType() gobject.Type {
+	return TypeGLAPI
+}
+
+func (f GLAPI) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
@@ -7005,8 +7089,11 @@ func (m ModifierType) Has(other ModifierType) bool {
 
 var _ gobject.GoValueInitializer = ModifierType(0)
 
-func (f ModifierType) InitGoValue(v *gobject.Value) {
-	v.Init(TypeModifierType)
+func (f ModifierType) GoValueType() gobject.Type {
+	return TypeModifierType
+}
+
+func (f ModifierType) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
@@ -7090,8 +7177,11 @@ func (p PaintableFlags) Has(other PaintableFlags) bool {
 
 var _ gobject.GoValueInitializer = PaintableFlags(0)
 
-func (f PaintableFlags) InitGoValue(v *gobject.Value) {
-	v.Init(TypePaintableFlags)
+func (f PaintableFlags) GoValueType() gobject.Type {
+	return TypePaintableFlags
+}
+
+func (f PaintableFlags) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
@@ -7160,8 +7250,11 @@ func (s SeatCapabilities) Has(other SeatCapabilities) bool {
 
 var _ gobject.GoValueInitializer = SeatCapabilities(0)
 
-func (f SeatCapabilities) InitGoValue(v *gobject.Value) {
-	v.Init(TypeSeatCapabilities)
+func (f SeatCapabilities) GoValueType() gobject.Type {
+	return TypeSeatCapabilities
+}
+
+func (f SeatCapabilities) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
@@ -7290,8 +7383,11 @@ func (t ToplevelState) Has(other ToplevelState) bool {
 
 var _ gobject.GoValueInitializer = ToplevelState(0)
 
-func (f ToplevelState) InitGoValue(v *gobject.Value) {
-	v.Init(TypeToplevelState)
+func (f ToplevelState) GoValueType() gobject.Type {
+	return TypeToplevelState
+}
+
+func (f ToplevelState) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
@@ -7363,14 +7459,14 @@ func (f ToplevelState) String() string {
 // 	- stream gio.InputStream: a `GInputStream` to read the serialized content from 
 // 	- mimeType string: the mime type to deserialize from 
 // 	- typ gobject.Type: the GType to deserialize from 
-// 	- ioPriority int: the I/O priority of the operation 
+// 	- ioPriority int32: the I/O priority of the operation 
 // 	- callback gio.AsyncReadyCallback (nullable): callback to call when the operation is done 
 //
 // Read content from the given input stream and deserialize it, asynchronously.
 // 
 // The default I/O priority is %G_PRIORITY_DEFAULT (i.e. 0), and lower numbers
 // indicate a higher priority.
-func ContentDeserializeAsync(cancellable context.Context, stream gio.InputStream, mimeType string, typ gobject.Type, ioPriority int, callback gio.AsyncReadyCallback) {
+func ContentDeserializeAsync(cancellable context.Context, stream gio.InputStream, mimeType string, typ gobject.Type, ioPriority int32, callback gio.AsyncReadyCallback) {
 	var carg5 *C.GCancellable       // in, none, converted, nullable
 	var carg1 *C.GInputStream       // in, none, converted
 	var carg2 *C.char               // in, none, string, casted *C.gchar
@@ -7450,14 +7546,14 @@ func ContentDeserializeFinish(result gio.AsyncResult) (gobject.Value, bool, erro
 // 	- stream gio.OutputStream: a `GOutputStream` to write the serialized content to 
 // 	- mimeType string: the mime type to serialize to 
 // 	- value *gobject.Value: the content to serialize 
-// 	- ioPriority int: the I/O priority of the operation 
+// 	- ioPriority int32: the I/O priority of the operation 
 // 	- callback gio.AsyncReadyCallback (nullable): callback to call when the operation is done 
 //
 // Serialize content and write it to the given output stream, asynchronously.
 // 
 // The default I/O priority is %G_PRIORITY_DEFAULT (i.e. 0), and lower numbers
 // indicate a higher priority.
-func ContentSerializeAsync(cancellable context.Context, stream gio.OutputStream, mimeType string, value *gobject.Value, ioPriority int, callback gio.AsyncReadyCallback) {
+func ContentSerializeAsync(cancellable context.Context, stream gio.OutputStream, mimeType string, value *gobject.Value, ioPriority int32, callback gio.AsyncReadyCallback) {
 	var carg5 *C.GCancellable       // in, none, converted, nullable
 	var carg1 *C.GOutputStream      // in, none, converted
 	var carg2 *C.char               // in, none, string, casted *C.gchar
@@ -7909,28 +8005,28 @@ type DevicePad interface {
 	// The function takes the following parameters:
 	// 
 	// 	- feature DevicePadFeature: the feature type to get the group from 
-	// 	- featureIdx int: the index of the feature to get the group from 
+	// 	- featureIdx int32: the index of the feature to get the group from 
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Returns the group the given @feature and @idx belong to.
 	// 
 	// f the feature or index do not exist in @pad, -1 is returned.
-	GetFeatureGroup(DevicePadFeature, int) int
+	GetFeatureGroup(DevicePadFeature, int32) int32
 	// GetGroupNModes wraps gdk_device_pad_get_group_n_modes
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- groupIdx int: group to get the number of available modes from 
+	// 	- groupIdx int32: group to get the number of available modes from 
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Returns the number of modes that @group may have.
-	GetGroupNModes(int) int
+	GetGroupNModes(int32) int32
 	// GetNFeatures wraps gdk_device_pad_get_n_features
 	// 
 	// The function takes the following parameters:
@@ -7939,22 +8035,22 @@ type DevicePad interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Returns the number of features a tablet pad has.
-	GetNFeatures(DevicePadFeature) int
+	GetNFeatures(DevicePadFeature) int32
 	// GetNGroups wraps gdk_device_pad_get_n_groups
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Returns the number of groups this pad device has.
 	// 
 	// Pads have at least one group. A pad group is a subcollection of
 	// buttons/strip/rings that is affected collectively by a same
 	// current mode.
-	GetNGroups() int
+	GetNGroups() int32
 }
 
 var _ DevicePad = (*DevicePadInstance)(nil)
@@ -7983,6 +8079,11 @@ func UnsafeDevicePadFromGlibFull(c unsafe.Pointer) DevicePad {
 	return gobject.UnsafeObjectFromGlibFull(c).(DevicePad)
 }
 
+// UnsafeDevicePadFromGlibBorrow is used to convert raw GdkDevicePad pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeDevicePadFromGlibBorrow(c unsafe.Pointer) DevicePad {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(DevicePad)
+}
+
 // UnsafeDevicePadToGlibNone is used to convert the instance to it's C value GdkDevicePad. This is used by the bindings internally.
 func UnsafeDevicePadToGlibNone(c DevicePad) unsafe.Pointer {
 	i := c.upcastToGdkDevicePad()
@@ -8000,16 +8101,16 @@ func UnsafeDevicePadToGlibFull(c DevicePad) unsafe.Pointer {
 // The function takes the following parameters:
 // 
 // 	- feature DevicePadFeature: the feature type to get the group from 
-// 	- featureIdx int: the index of the feature to get the group from 
+// 	- featureIdx int32: the index of the feature to get the group from 
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Returns the group the given @feature and @idx belong to.
 // 
 // f the feature or index do not exist in @pad, -1 is returned.
-func (pad *DevicePadInstance) GetFeatureGroup(feature DevicePadFeature, featureIdx int) int {
+func (pad *DevicePadInstance) GetFeatureGroup(feature DevicePadFeature, featureIdx int32) int32 {
 	var carg0 *C.GdkDevicePad       // in, none, converted
 	var carg1 C.GdkDevicePadFeature // in, none, casted
 	var carg2 C.int                 // in, none, casted, casted C.gint
@@ -8024,9 +8125,9 @@ func (pad *DevicePadInstance) GetFeatureGroup(feature DevicePadFeature, featureI
 	runtime.KeepAlive(feature)
 	runtime.KeepAlive(featureIdx)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -8035,14 +8136,14 @@ func (pad *DevicePadInstance) GetFeatureGroup(feature DevicePadFeature, featureI
 // 
 // The function takes the following parameters:
 // 
-// 	- groupIdx int: group to get the number of available modes from 
+// 	- groupIdx int32: group to get the number of available modes from 
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Returns the number of modes that @group may have.
-func (pad *DevicePadInstance) GetGroupNModes(groupIdx int) int {
+func (pad *DevicePadInstance) GetGroupNModes(groupIdx int32) int32 {
 	var carg0 *C.GdkDevicePad // in, none, converted
 	var carg1 C.int           // in, none, casted, casted C.gint
 	var cret  C.int           // return, none, casted, casted C.gint
@@ -8054,9 +8155,9 @@ func (pad *DevicePadInstance) GetGroupNModes(groupIdx int) int {
 	runtime.KeepAlive(pad)
 	runtime.KeepAlive(groupIdx)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -8069,10 +8170,10 @@ func (pad *DevicePadInstance) GetGroupNModes(groupIdx int) int {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Returns the number of features a tablet pad has.
-func (pad *DevicePadInstance) GetNFeatures(feature DevicePadFeature) int {
+func (pad *DevicePadInstance) GetNFeatures(feature DevicePadFeature) int32 {
 	var carg0 *C.GdkDevicePad       // in, none, converted
 	var carg1 C.GdkDevicePadFeature // in, none, casted
 	var cret  C.int                 // return, none, casted, casted C.gint
@@ -8084,9 +8185,9 @@ func (pad *DevicePadInstance) GetNFeatures(feature DevicePadFeature) int {
 	runtime.KeepAlive(pad)
 	runtime.KeepAlive(feature)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -8095,14 +8196,14 @@ func (pad *DevicePadInstance) GetNFeatures(feature DevicePadFeature) int {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Returns the number of groups this pad device has.
 // 
 // Pads have at least one group. A pad group is a subcollection of
 // buttons/strip/rings that is affected collectively by a same
 // current mode.
-func (pad *DevicePadInstance) GetNGroups() int {
+func (pad *DevicePadInstance) GetNGroups() int32 {
 	var carg0 *C.GdkDevicePad // in, none, converted
 	var cret  C.int           // return, none, casted, casted C.gint
 
@@ -8111,9 +8212,9 @@ func (pad *DevicePadInstance) GetNGroups() int {
 	cret = C.gdk_device_pad_get_n_groups(carg0)
 	runtime.KeepAlive(pad)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -8146,15 +8247,15 @@ type DragSurface interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- width int: the unconstrained drag_surface width to layout 
-	// 	- height int: the unconstrained drag_surface height to layout 
+	// 	- width int32: the unconstrained drag_surface width to layout 
+	// 	- height int32: the unconstrained drag_surface height to layout 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
 	//
 	// Present @drag_surface.
-	Present(int, int) bool
+	Present(int32, int32) bool
 	// ConnectComputeSize connects the provided callback to the "compute-size" signal
 	//
 	// Emitted when the size for the surface needs to be computed, when it is
@@ -8199,6 +8300,11 @@ func UnsafeDragSurfaceFromGlibFull(c unsafe.Pointer) DragSurface {
 	return gobject.UnsafeObjectFromGlibFull(c).(DragSurface)
 }
 
+// UnsafeDragSurfaceFromGlibBorrow is used to convert raw GdkDragSurface pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeDragSurfaceFromGlibBorrow(c unsafe.Pointer) DragSurface {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(DragSurface)
+}
+
 // UnsafeDragSurfaceToGlibNone is used to convert the instance to it's C value GdkDragSurface. This is used by the bindings internally.
 func UnsafeDragSurfaceToGlibNone(c DragSurface) unsafe.Pointer {
 	i := c.upcastToGdkDragSurface()
@@ -8215,15 +8321,15 @@ func UnsafeDragSurfaceToGlibFull(c DragSurface) unsafe.Pointer {
 // 
 // The function takes the following parameters:
 // 
-// 	- width int: the unconstrained drag_surface width to layout 
-// 	- height int: the unconstrained drag_surface height to layout 
+// 	- width int32: the unconstrained drag_surface width to layout 
+// 	- height int32: the unconstrained drag_surface height to layout 
 // 
 // The function returns the following values:
 // 
 // 	- goret bool 
 //
 // Present @drag_surface.
-func (dragSurface *DragSurfaceInstance) Present(width int, height int) bool {
+func (dragSurface *DragSurfaceInstance) Present(width int32, height int32) bool {
 	var carg0 *C.GdkDragSurface // in, none, converted
 	var carg1 C.int             // in, none, casted, casted C.gint
 	var carg2 C.int             // in, none, casted, casted C.gint
@@ -8416,7 +8522,7 @@ type Paintable interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Gets the preferred height the @paintable would like to be displayed at.
 	// 
@@ -8428,12 +8534,12 @@ type Paintable interface {
 	// 
 	// If the @paintable does not have a preferred height, it returns 0.
 	// Negative values are never returned.
-	GetIntrinsicHeight() int
+	GetIntrinsicHeight() int32
 	// GetIntrinsicWidth wraps gdk_paintable_get_intrinsic_width
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Gets the preferred width the @paintable would like to be displayed at.
 	// 
@@ -8445,7 +8551,7 @@ type Paintable interface {
 	// 
 	// If the @paintable does not have a preferred width, it returns 0.
 	// Negative values are never returned.
-	GetIntrinsicWidth() int
+	GetIntrinsicWidth() int32
 	// InvalidateContents wraps gdk_paintable_invalidate_contents
 	//
 	// Called by implementations of `GdkPaintable` to invalidate their contents.
@@ -8534,6 +8640,11 @@ func UnsafePaintableFromGlibFull(c unsafe.Pointer) Paintable {
 	return gobject.UnsafeObjectFromGlibFull(c).(Paintable)
 }
 
+// UnsafePaintableFromGlibBorrow is used to convert raw GdkPaintable pointers to go without touching any references. This is used by the bindings internally.
+func UnsafePaintableFromGlibBorrow(c unsafe.Pointer) Paintable {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Paintable)
+}
+
 // UnsafePaintableToGlibNone is used to convert the instance to it's C value GdkPaintable. This is used by the bindings internally.
 func UnsafePaintableToGlibNone(c Paintable) unsafe.Pointer {
 	i := c.upcastToGdkPaintable()
@@ -8550,8 +8661,8 @@ func UnsafePaintableToGlibFull(c Paintable) unsafe.Pointer {
 // 
 // The function takes the following parameters:
 // 
-// 	- intrinsicWidth int: The intrinsic width to report. Can be 0 for no width. 
-// 	- intrinsicHeight int: The intrinsic height to report. Can be 0 for no height. 
+// 	- intrinsicWidth int32: The intrinsic width to report. Can be 0 for no width. 
+// 	- intrinsicHeight int32: The intrinsic height to report. Can be 0 for no height. 
 // 
 // The function returns the following values:
 // 
@@ -8564,7 +8675,7 @@ func UnsafePaintableToGlibFull(c Paintable) unsafe.Pointer {
 // when the paintable is in an incomplete state (like a
 // [GtkMediaStream](../gtk4/class.MediaStream.html) before receiving
 // the first frame).
-func NewPaintableEmpty(intrinsicWidth int, intrinsicHeight int) Paintable {
+func NewPaintableEmpty(intrinsicWidth int32, intrinsicHeight int32) Paintable {
 	var carg1 C.int           // in, none, casted, casted C.gint
 	var carg2 C.int           // in, none, casted, casted C.gint
 	var cret  *C.GdkPaintable // return, full, converted
@@ -8740,7 +8851,7 @@ func (paintable *PaintableInstance) GetIntrinsicAspectRatio() float64 {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Gets the preferred height the @paintable would like to be displayed at.
 // 
@@ -8752,7 +8863,7 @@ func (paintable *PaintableInstance) GetIntrinsicAspectRatio() float64 {
 // 
 // If the @paintable does not have a preferred height, it returns 0.
 // Negative values are never returned.
-func (paintable *PaintableInstance) GetIntrinsicHeight() int {
+func (paintable *PaintableInstance) GetIntrinsicHeight() int32 {
 	var carg0 *C.GdkPaintable // in, none, converted
 	var cret  C.int           // return, none, casted, casted C.gint
 
@@ -8761,9 +8872,9 @@ func (paintable *PaintableInstance) GetIntrinsicHeight() int {
 	cret = C.gdk_paintable_get_intrinsic_height(carg0)
 	runtime.KeepAlive(paintable)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -8772,7 +8883,7 @@ func (paintable *PaintableInstance) GetIntrinsicHeight() int {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Gets the preferred width the @paintable would like to be displayed at.
 // 
@@ -8784,7 +8895,7 @@ func (paintable *PaintableInstance) GetIntrinsicHeight() int {
 // 
 // If the @paintable does not have a preferred width, it returns 0.
 // Negative values are never returned.
-func (paintable *PaintableInstance) GetIntrinsicWidth() int {
+func (paintable *PaintableInstance) GetIntrinsicWidth() int32 {
 	var carg0 *C.GdkPaintable // in, none, converted
 	var cret  C.int           // return, none, casted, casted C.gint
 
@@ -8793,9 +8904,9 @@ func (paintable *PaintableInstance) GetIntrinsicWidth() int {
 	cret = C.gdk_paintable_get_intrinsic_width(carg0)
 	runtime.KeepAlive(paintable)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -8920,13 +9031,13 @@ type PaintableOverrides[Instance Paintable] struct {
 	// GetIntrinsicHeight allows you to override the implementation of the virtual method get_intrinsic_height.
 	// The function returns the following values:
 	// 
-	// 	- goret int 
-	GetIntrinsicHeight func(Instance) int
+	// 	- goret int32 
+	GetIntrinsicHeight func(Instance) int32
 	// GetIntrinsicWidth allows you to override the implementation of the virtual method get_intrinsic_width.
 	// The function returns the following values:
 	// 
-	// 	- goret int 
-	GetIntrinsicWidth func(Instance) int
+	// 	- goret int32 
+	GetIntrinsicWidth func(Instance) int32
 	// Snapshot allows you to override the implementation of the virtual method snapshot.
 	// The function takes the following parameters:
 	// 
@@ -8950,7 +9061,7 @@ func UnsafeApplyPaintableOverrides[Instance Paintable](gclass unsafe.Pointer, ov
 				var paintable Instance  // go GdkPaintable subclass
 				var goret     Paintable // return, full, converted
 
-				paintable = UnsafePaintableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				paintable = UnsafePaintableFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetCurrentImage(paintable)
 
@@ -8970,7 +9081,7 @@ func UnsafeApplyPaintableOverrides[Instance Paintable](gclass unsafe.Pointer, ov
 				var paintable Instance       // go GdkPaintable subclass
 				var goret     PaintableFlags // return, none, casted
 
-				paintable = UnsafePaintableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				paintable = UnsafePaintableFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetFlags(paintable)
 
@@ -8990,7 +9101,7 @@ func UnsafeApplyPaintableOverrides[Instance Paintable](gclass unsafe.Pointer, ov
 				var paintable Instance // go GdkPaintable subclass
 				var goret     float64  // return, none, casted, casted C.gdouble
 
-				paintable = UnsafePaintableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				paintable = UnsafePaintableFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetIntrinsicAspectRatio(paintable)
 
@@ -9008,9 +9119,9 @@ func UnsafeApplyPaintableOverrides[Instance Paintable](gclass unsafe.Pointer, ov
 			"_gotk4_gdk4_Paintable_get_intrinsic_height",
 			func(carg0 *C.GdkPaintable) (cret C.int) {
 				var paintable Instance // go GdkPaintable subclass
-				var goret     int      // return, none, casted, casted C.gint
+				var goret     int32    // return, none, casted, casted C.gint
 
-				paintable = UnsafePaintableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				paintable = UnsafePaintableFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetIntrinsicHeight(paintable)
 
@@ -9028,9 +9139,9 @@ func UnsafeApplyPaintableOverrides[Instance Paintable](gclass unsafe.Pointer, ov
 			"_gotk4_gdk4_Paintable_get_intrinsic_width",
 			func(carg0 *C.GdkPaintable) (cret C.int) {
 				var paintable Instance // go GdkPaintable subclass
-				var goret     int      // return, none, casted, casted C.gint
+				var goret     int32    // return, none, casted, casted C.gint
 
-				paintable = UnsafePaintableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				paintable = UnsafePaintableFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetIntrinsicWidth(paintable)
 
@@ -9052,7 +9163,7 @@ func UnsafeApplyPaintableOverrides[Instance Paintable](gclass unsafe.Pointer, ov
 				var width     float64  // in, none, casted, casted C.gdouble
 				var height    float64  // in, none, casted, casted C.gdouble
 
-				paintable = UnsafePaintableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				paintable = UnsafePaintableFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				snapshot = UnsafeSnapshotFromGlibNone(unsafe.Pointer(carg1))
 				width = float64(carg2)
 				height = float64(carg3)
@@ -9103,18 +9214,18 @@ type Popup interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Obtains the position of the popup relative to its parent.
-	GetPositionX() int
+	GetPositionX() int32
 	// GetPositionY wraps gdk_popup_get_position_y
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Obtains the position of the popup relative to its parent.
-	GetPositionY() int
+	GetPositionY() int32
 	// GetRectAnchor wraps gdk_popup_get_rect_anchor
 	// 
 	// The function returns the following values:
@@ -9141,8 +9252,8 @@ type Popup interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- width int: the unconstrained popup width to layout 
-	// 	- height int: the unconstrained popup height to layout 
+	// 	- width int32: the unconstrained popup width to layout 
+	// 	- height int32: the unconstrained popup height to layout 
 	// 	- layout *PopupLayout: the `GdkPopupLayout` object used to layout 
 	// 
 	// The function returns the following values:
@@ -9164,7 +9275,7 @@ type Popup interface {
 	// Presenting may fail, for example if the @popup is set to autohide
 	// and is immediately hidden upon being presented. If presenting failed,
 	// the [signal@Gdk.Surface::layout] signal will not me emitted.
-	Present(int, int, *PopupLayout) bool
+	Present(int32, int32, *PopupLayout) bool
 }
 
 var _ Popup = (*PopupInstance)(nil)
@@ -9191,6 +9302,11 @@ func UnsafePopupFromGlibNone(c unsafe.Pointer) Popup {
 // UnsafePopupFromGlibFull is used to convert raw GdkPopup pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafePopupFromGlibFull(c unsafe.Pointer) Popup {
 	return gobject.UnsafeObjectFromGlibFull(c).(Popup)
+}
+
+// UnsafePopupFromGlibBorrow is used to convert raw GdkPopup pointers to go without touching any references. This is used by the bindings internally.
+func UnsafePopupFromGlibBorrow(c unsafe.Pointer) Popup {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Popup)
 }
 
 // UnsafePopupToGlibNone is used to convert the instance to it's C value GdkPopup. This is used by the bindings internally.
@@ -9259,10 +9375,10 @@ func (popup *PopupInstance) GetParent() Surface {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Obtains the position of the popup relative to its parent.
-func (popup *PopupInstance) GetPositionX() int {
+func (popup *PopupInstance) GetPositionX() int32 {
 	var carg0 *C.GdkPopup // in, none, converted
 	var cret  C.int       // return, none, casted, casted C.gint
 
@@ -9271,9 +9387,9 @@ func (popup *PopupInstance) GetPositionX() int {
 	cret = C.gdk_popup_get_position_x(carg0)
 	runtime.KeepAlive(popup)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -9282,10 +9398,10 @@ func (popup *PopupInstance) GetPositionX() int {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Obtains the position of the popup relative to its parent.
-func (popup *PopupInstance) GetPositionY() int {
+func (popup *PopupInstance) GetPositionY() int32 {
 	var carg0 *C.GdkPopup // in, none, converted
 	var cret  C.int       // return, none, casted, casted C.gint
 
@@ -9294,9 +9410,9 @@ func (popup *PopupInstance) GetPositionY() int {
 	cret = C.gdk_popup_get_position_y(carg0)
 	runtime.KeepAlive(popup)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -9357,8 +9473,8 @@ func (popup *PopupInstance) GetSurfaceAnchor() Gravity {
 // 
 // The function takes the following parameters:
 // 
-// 	- width int: the unconstrained popup width to layout 
-// 	- height int: the unconstrained popup height to layout 
+// 	- width int32: the unconstrained popup width to layout 
+// 	- height int32: the unconstrained popup height to layout 
 // 	- layout *PopupLayout: the `GdkPopupLayout` object used to layout 
 // 
 // The function returns the following values:
@@ -9380,7 +9496,7 @@ func (popup *PopupInstance) GetSurfaceAnchor() Gravity {
 // Presenting may fail, for example if the @popup is set to autohide
 // and is immediately hidden upon being presented. If presenting failed,
 // the [signal@Gdk.Surface::layout] signal will not me emitted.
-func (popup *PopupInstance) Present(width int, height int, layout *PopupLayout) bool {
+func (popup *PopupInstance) Present(width int32, height int32, layout *PopupLayout) bool {
 	var carg0 *C.GdkPopup       // in, none, converted
 	var carg1 C.int             // in, none, casted, casted C.gint
 	var carg2 C.int             // in, none, casted, casted C.gint
@@ -9440,7 +9556,7 @@ type Toplevel interface {
 	// The function takes the following parameters:
 	// 
 	// 	- device Device: the device used for the operation 
-	// 	- button int: the button being used to drag, or 0 for a keyboard-initiated drag 
+	// 	- button int32: the button being used to drag, or 0 for a keyboard-initiated drag 
 	// 	- x float64: surface X coordinate of mouse click that began the drag 
 	// 	- y float64: surface Y coordinate of mouse click that began the drag 
 	// 	- timestamp uint32: timestamp of mouse click that began the drag (use
@@ -9449,14 +9565,14 @@ type Toplevel interface {
 	// Begins an interactive move operation.
 	// 
 	// You might use this function to implement draggable titlebars.
-	BeginMove(Device, int, float64, float64, uint32)
+	BeginMove(Device, int32, float64, float64, uint32)
 	// BeginResize wraps gdk_toplevel_begin_resize
 	// 
 	// The function takes the following parameters:
 	// 
 	// 	- edge SurfaceEdge: the edge or corner from which the drag is started 
 	// 	- device Device (nullable): the device used for the operation 
-	// 	- button int: the button being used to drag, or 0 for a keyboard-initiated drag 
+	// 	- button int32: the button being used to drag, or 0 for a keyboard-initiated drag 
 	// 	- x float64: surface X coordinate of mouse click that began the drag 
 	// 	- y float64: surface Y coordinate of mouse click that began the drag 
 	// 	- timestamp uint32: timestamp of mouse click that began the drag (use
@@ -9465,7 +9581,7 @@ type Toplevel interface {
 	// Begins an interactive resize operation.
 	// 
 	// You might use this function to implement a “window resize grip.”
-	BeginResize(SurfaceEdge, Device, int, float64, float64, uint32)
+	BeginResize(SurfaceEdge, Device, int32, float64, float64, uint32)
 	// Focus wraps gdk_toplevel_focus
 	// 
 	// The function takes the following parameters:
@@ -9675,6 +9791,11 @@ func UnsafeToplevelFromGlibFull(c unsafe.Pointer) Toplevel {
 	return gobject.UnsafeObjectFromGlibFull(c).(Toplevel)
 }
 
+// UnsafeToplevelFromGlibBorrow is used to convert raw GdkToplevel pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeToplevelFromGlibBorrow(c unsafe.Pointer) Toplevel {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Toplevel)
+}
+
 // UnsafeToplevelToGlibNone is used to convert the instance to it's C value GdkToplevel. This is used by the bindings internally.
 func UnsafeToplevelToGlibNone(c Toplevel) unsafe.Pointer {
 	i := c.upcastToGdkToplevel()
@@ -9692,7 +9813,7 @@ func UnsafeToplevelToGlibFull(c Toplevel) unsafe.Pointer {
 // The function takes the following parameters:
 // 
 // 	- device Device: the device used for the operation 
-// 	- button int: the button being used to drag, or 0 for a keyboard-initiated drag 
+// 	- button int32: the button being used to drag, or 0 for a keyboard-initiated drag 
 // 	- x float64: surface X coordinate of mouse click that began the drag 
 // 	- y float64: surface Y coordinate of mouse click that began the drag 
 // 	- timestamp uint32: timestamp of mouse click that began the drag (use
@@ -9701,7 +9822,7 @@ func UnsafeToplevelToGlibFull(c Toplevel) unsafe.Pointer {
 // Begins an interactive move operation.
 // 
 // You might use this function to implement draggable titlebars.
-func (toplevel *ToplevelInstance) BeginMove(device Device, button int, x float64, y float64, timestamp uint32) {
+func (toplevel *ToplevelInstance) BeginMove(device Device, button int32, x float64, y float64, timestamp uint32) {
 	var carg0 *C.GdkToplevel // in, none, converted
 	var carg1 *C.GdkDevice   // in, none, converted
 	var carg2 C.int          // in, none, casted, casted C.gint
@@ -9731,7 +9852,7 @@ func (toplevel *ToplevelInstance) BeginMove(device Device, button int, x float64
 // 
 // 	- edge SurfaceEdge: the edge or corner from which the drag is started 
 // 	- device Device (nullable): the device used for the operation 
-// 	- button int: the button being used to drag, or 0 for a keyboard-initiated drag 
+// 	- button int32: the button being used to drag, or 0 for a keyboard-initiated drag 
 // 	- x float64: surface X coordinate of mouse click that began the drag 
 // 	- y float64: surface Y coordinate of mouse click that began the drag 
 // 	- timestamp uint32: timestamp of mouse click that began the drag (use
@@ -9740,7 +9861,7 @@ func (toplevel *ToplevelInstance) BeginMove(device Device, button int, x float64
 // Begins an interactive resize operation.
 // 
 // You might use this function to implement a “window resize grip.”
-func (toplevel *ToplevelInstance) BeginResize(edge SurfaceEdge, device Device, button int, x float64, y float64, timestamp uint32) {
+func (toplevel *ToplevelInstance) BeginResize(edge SurfaceEdge, device Device, button int32, x float64, y float64, timestamp uint32) {
 	var carg0 *C.GdkToplevel   // in, none, converted
 	var carg1 C.GdkSurfaceEdge // in, none, casted
 	var carg2 *C.GdkDevice     // in, none, converted, nullable
@@ -10198,7 +10319,7 @@ type AppLaunchContext interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- desktop int: the number of a workspace, or -1 
+	// 	- desktop int32: the number of a workspace, or -1 
 	//
 	// Sets the workspace on which applications will be launched.
 	// 
@@ -10213,7 +10334,7 @@ type AppLaunchContext interface {
 	// When the workspace is not specified or @desktop is set to -1,
 	// it is up to the window manager to pick one, typically it will
 	// be the current workspace.
-	SetDesktop(int)
+	SetDesktop(int32)
 	// SetIcon wraps gdk_app_launch_context_set_icon
 	// 
 	// The function takes the following parameters:
@@ -10284,6 +10405,11 @@ func UnsafeAppLaunchContextFromGlibFull(c unsafe.Pointer) AppLaunchContext {
 	return gobject.UnsafeObjectFromGlibFull(c).(AppLaunchContext)
 }
 
+// UnsafeAppLaunchContextFromGlibBorrow is used to convert raw GdkAppLaunchContext pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeAppLaunchContextFromGlibBorrow(c unsafe.Pointer) AppLaunchContext {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(AppLaunchContext)
+}
+
 func (a *AppLaunchContextInstance) upcastToGdkAppLaunchContext() *AppLaunchContextInstance {
 	return a
 }
@@ -10325,7 +10451,7 @@ func (_context *AppLaunchContextInstance) GetDisplay() Display {
 // 
 // The function takes the following parameters:
 // 
-// 	- desktop int: the number of a workspace, or -1 
+// 	- desktop int32: the number of a workspace, or -1 
 //
 // Sets the workspace on which applications will be launched.
 // 
@@ -10340,7 +10466,7 @@ func (_context *AppLaunchContextInstance) GetDisplay() Display {
 // When the workspace is not specified or @desktop is set to -1,
 // it is up to the window manager to pick one, typically it will
 // be the current workspace.
-func (_context *AppLaunchContextInstance) SetDesktop(desktop int) {
+func (_context *AppLaunchContextInstance) SetDesktop(desktop int32) {
 	var carg0 *C.GdkAppLaunchContext // in, none, converted
 	var carg1 C.int                  // in, none, casted, casted C.gint
 
@@ -10567,6 +10693,11 @@ func UnsafeCicpParamsFromGlibNone(c unsafe.Pointer) CicpParams {
 // UnsafeCicpParamsFromGlibFull is used to convert raw GdkCicpParams pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeCicpParamsFromGlibFull(c unsafe.Pointer) CicpParams {
 	return gobject.UnsafeObjectFromGlibFull(c).(CicpParams)
+}
+
+// UnsafeCicpParamsFromGlibBorrow is used to convert raw GdkCicpParams pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeCicpParamsFromGlibBorrow(c unsafe.Pointer) CicpParams {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(CicpParams)
 }
 
 func (c *CicpParamsInstance) upcastToGdkCicpParams() *CicpParamsInstance {
@@ -10888,7 +11019,7 @@ type Clipboard interface {
 	// 
 	// 	- cancellable context.Context (nullable): optional `GCancellable` object 
 	// 	- mimeTypes []string: a %NULL-terminated array of mime types to choose from 
-	// 	- ioPriority int: the I/O priority of the request 
+	// 	- ioPriority int32: the I/O priority of the request 
 	// 	- callback gio.AsyncReadyCallback (nullable): callback to call when the request is satisfied 
 	//
 	// Asynchronously requests an input stream to read the @clipboard's
@@ -10896,7 +11027,7 @@ type Clipboard interface {
 	// 
 	// The clipboard will choose the most suitable mime type from the given list
 	// to fulfill the request, preferring the ones listed first.
-	ReadAsync(context.Context, []string, int, gio.AsyncReadyCallback)
+	ReadAsync(context.Context, []string, int32, gio.AsyncReadyCallback)
 	// ReadFinish wraps gdk_clipboard_read_finish
 	// 
 	// The function takes the following parameters:
@@ -10976,7 +11107,7 @@ type Clipboard interface {
 	// 
 	// 	- cancellable context.Context (nullable): optional `GCancellable` object 
 	// 	- typ gobject.Type: a `GType` to read 
-	// 	- ioPriority int: the I/O priority of the request 
+	// 	- ioPriority int32: the I/O priority of the request 
 	// 	- callback gio.AsyncReadyCallback (nullable): callback to call when the request is satisfied 
 	//
 	// Asynchronously request the @clipboard contents converted to the given
@@ -10985,7 +11116,7 @@ type Clipboard interface {
 	// For local clipboard contents that are available in the given `GType`,
 	// the value will be copied directly. Otherwise, GDK will try to use
 	// [func@content_deserialize_async] to convert the clipboard's data.
-	ReadValueAsync(context.Context, gobject.Type, int, gio.AsyncReadyCallback)
+	ReadValueAsync(context.Context, gobject.Type, int32, gio.AsyncReadyCallback)
 	// SetContent wraps gdk_clipboard_set_content
 	// 
 	// The function takes the following parameters:
@@ -11039,7 +11170,7 @@ type Clipboard interface {
 	// The function takes the following parameters:
 	// 
 	// 	- cancellable context.Context (nullable): optional `GCancellable` object 
-	// 	- ioPriority int: the I/O priority of the request 
+	// 	- ioPriority int32: the I/O priority of the request 
 	// 	- callback gio.AsyncReadyCallback (nullable): callback to call when the request is satisfied 
 	//
 	// Asynchronously instructs the @clipboard to store its contents remotely.
@@ -11054,7 +11185,7 @@ type Clipboard interface {
 	// This function is called automatically when a
 	// [GtkApplication](../gtk4/class.Application.html)
 	// is shut down, so you likely don't need to call it.
-	StoreAsync(context.Context, int, gio.AsyncReadyCallback)
+	StoreAsync(context.Context, int32, gio.AsyncReadyCallback)
 	// StoreFinish wraps gdk_clipboard_store_finish
 	// 
 	// The function takes the following parameters:
@@ -11094,6 +11225,11 @@ func UnsafeClipboardFromGlibNone(c unsafe.Pointer) Clipboard {
 // UnsafeClipboardFromGlibFull is used to convert raw GdkClipboard pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeClipboardFromGlibFull(c unsafe.Pointer) Clipboard {
 	return gobject.UnsafeObjectFromGlibFull(c).(Clipboard)
+}
+
+// UnsafeClipboardFromGlibBorrow is used to convert raw GdkClipboard pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeClipboardFromGlibBorrow(c unsafe.Pointer) Clipboard {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Clipboard)
 }
 
 func (c *ClipboardInstance) upcastToGdkClipboard() *ClipboardInstance {
@@ -11221,7 +11357,7 @@ func (clipboard *ClipboardInstance) IsLocal() bool {
 // 
 // 	- cancellable context.Context (nullable): optional `GCancellable` object 
 // 	- mimeTypes []string: a %NULL-terminated array of mime types to choose from 
-// 	- ioPriority int: the I/O priority of the request 
+// 	- ioPriority int32: the I/O priority of the request 
 // 	- callback gio.AsyncReadyCallback (nullable): callback to call when the request is satisfied 
 //
 // Asynchronously requests an input stream to read the @clipboard's
@@ -11229,7 +11365,7 @@ func (clipboard *ClipboardInstance) IsLocal() bool {
 // 
 // The clipboard will choose the most suitable mime type from the given list
 // to fulfill the request, preferring the ones listed first.
-func (clipboard *ClipboardInstance) ReadAsync(cancellable context.Context, mimeTypes []string, ioPriority int, callback gio.AsyncReadyCallback) {
+func (clipboard *ClipboardInstance) ReadAsync(cancellable context.Context, mimeTypes []string, ioPriority int32, callback gio.AsyncReadyCallback) {
 	var carg0 *C.GdkClipboard       // in, none, converted
 	var carg3 *C.GCancellable       // in, none, converted, nullable
 	var carg1 **C.char              // in, transfer: none, C Pointers: 2, Name: array[utf8], array (inner: *typesystem.StringPrimitive, zero-terminated)
@@ -11456,7 +11592,7 @@ func (clipboard *ClipboardInstance) ReadTextureFinish(result gio.AsyncResult) (T
 // 
 // 	- cancellable context.Context (nullable): optional `GCancellable` object 
 // 	- typ gobject.Type: a `GType` to read 
-// 	- ioPriority int: the I/O priority of the request 
+// 	- ioPriority int32: the I/O priority of the request 
 // 	- callback gio.AsyncReadyCallback (nullable): callback to call when the request is satisfied 
 //
 // Asynchronously request the @clipboard contents converted to the given
@@ -11465,7 +11601,7 @@ func (clipboard *ClipboardInstance) ReadTextureFinish(result gio.AsyncResult) (T
 // For local clipboard contents that are available in the given `GType`,
 // the value will be copied directly. Otherwise, GDK will try to use
 // [func@content_deserialize_async] to convert the clipboard's data.
-func (clipboard *ClipboardInstance) ReadValueAsync(cancellable context.Context, typ gobject.Type, ioPriority int, callback gio.AsyncReadyCallback) {
+func (clipboard *ClipboardInstance) ReadValueAsync(cancellable context.Context, typ gobject.Type, ioPriority int32, callback gio.AsyncReadyCallback) {
 	var carg0 *C.GdkClipboard       // in, none, converted
 	var carg3 *C.GCancellable       // in, none, converted, nullable
 	var carg1 C.GType               // in, none, casted, alias
@@ -11601,7 +11737,7 @@ func (clipboard *ClipboardInstance) SetValue(value *gobject.Value) {
 // The function takes the following parameters:
 // 
 // 	- cancellable context.Context (nullable): optional `GCancellable` object 
-// 	- ioPriority int: the I/O priority of the request 
+// 	- ioPriority int32: the I/O priority of the request 
 // 	- callback gio.AsyncReadyCallback (nullable): callback to call when the request is satisfied 
 //
 // Asynchronously instructs the @clipboard to store its contents remotely.
@@ -11616,7 +11752,7 @@ func (clipboard *ClipboardInstance) SetValue(value *gobject.Value) {
 // This function is called automatically when a
 // [GtkApplication](../gtk4/class.Application.html)
 // is shut down, so you likely don't need to call it.
-func (clipboard *ClipboardInstance) StoreAsync(cancellable context.Context, ioPriority int, callback gio.AsyncReadyCallback) {
+func (clipboard *ClipboardInstance) StoreAsync(cancellable context.Context, ioPriority int32, callback gio.AsyncReadyCallback) {
 	var carg0 *C.GdkClipboard       // in, none, converted
 	var carg2 *C.GCancellable       // in, none, converted, nullable
 	var carg1 C.int                 // in, none, casted, casted C.gint
@@ -11755,12 +11891,12 @@ type ContentDeserializer interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Gets the I/O priority for the current operation.
 	// 
 	// This is the priority that was passed to [func@Gdk.content_deserialize_async].
-	GetPriority() int
+	GetPriority() int32
 	// ReturnError wraps gdk_content_deserializer_return_error
 	// 
 	// The function takes the following parameters:
@@ -11798,6 +11934,11 @@ func UnsafeContentDeserializerFromGlibNone(c unsafe.Pointer) ContentDeserializer
 // UnsafeContentDeserializerFromGlibFull is used to convert raw GdkContentDeserializer pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeContentDeserializerFromGlibFull(c unsafe.Pointer) ContentDeserializer {
 	return gobject.UnsafeObjectFromGlibFull(c).(ContentDeserializer)
+}
+
+// UnsafeContentDeserializerFromGlibBorrow is used to convert raw GdkContentDeserializer pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeContentDeserializerFromGlibBorrow(c unsafe.Pointer) ContentDeserializer {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(ContentDeserializer)
 }
 
 func (c *ContentDeserializerInstance) upcastToGdkContentDeserializer() *ContentDeserializerInstance {
@@ -11916,12 +12057,12 @@ func (deserializer *ContentDeserializerInstance) GetMIMEType() string {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Gets the I/O priority for the current operation.
 // 
 // This is the priority that was passed to [func@Gdk.content_deserialize_async].
-func (deserializer *ContentDeserializerInstance) GetPriority() int {
+func (deserializer *ContentDeserializerInstance) GetPriority() int32 {
 	var carg0 *C.GdkContentDeserializer // in, none, converted
 	var cret  C.int                     // return, none, casted, casted C.gint
 
@@ -11930,9 +12071,9 @@ func (deserializer *ContentDeserializerInstance) GetPriority() int {
 	cret = C.gdk_content_deserializer_get_priority(carg0)
 	runtime.KeepAlive(deserializer)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -12041,7 +12182,7 @@ type ContentProvider interface {
 	// 	- cancellable context.Context (nullable): optional `GCancellable` object, %NULL to ignore. 
 	// 	- mimeType string: the mime type to provide the data in 
 	// 	- stream gio.OutputStream: the `GOutputStream` to write to 
-	// 	- ioPriority int: I/O priority of the request. 
+	// 	- ioPriority int32: I/O priority of the request. 
 	// 	- callback gio.AsyncReadyCallback (nullable): callback to call when the request is satisfied 
 	//
 	// Asynchronously writes the contents of @provider to @stream in the given
@@ -12052,7 +12193,7 @@ type ContentProvider interface {
 	// not supported, `G_IO_ERROR_NOT_SUPPORTED` will be reported.
 	// 
 	// The given @stream will not be closed.
-	WriteMIMETypeAsync(context.Context, string, gio.OutputStream, int, gio.AsyncReadyCallback)
+	WriteMIMETypeAsync(context.Context, string, gio.OutputStream, int32, gio.AsyncReadyCallback)
 	// WriteMIMETypeFinish wraps gdk_content_provider_write_mime_type_finish
 	// 
 	// The function takes the following parameters:
@@ -12092,6 +12233,11 @@ func UnsafeContentProviderFromGlibNone(c unsafe.Pointer) ContentProvider {
 // UnsafeContentProviderFromGlibFull is used to convert raw GdkContentProvider pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeContentProviderFromGlibFull(c unsafe.Pointer) ContentProvider {
 	return gobject.UnsafeObjectFromGlibFull(c).(ContentProvider)
+}
+
+// UnsafeContentProviderFromGlibBorrow is used to convert raw GdkContentProvider pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeContentProviderFromGlibBorrow(c unsafe.Pointer) ContentProvider {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(ContentProvider)
 }
 
 func (c *ContentProviderInstance) upcastToGdkContentProvider() *ContentProviderInstance {
@@ -12327,7 +12473,7 @@ func (provider *ContentProviderInstance) RefStorableFormats() *ContentFormats {
 // 	- cancellable context.Context (nullable): optional `GCancellable` object, %NULL to ignore. 
 // 	- mimeType string: the mime type to provide the data in 
 // 	- stream gio.OutputStream: the `GOutputStream` to write to 
-// 	- ioPriority int: I/O priority of the request. 
+// 	- ioPriority int32: I/O priority of the request. 
 // 	- callback gio.AsyncReadyCallback (nullable): callback to call when the request is satisfied 
 //
 // Asynchronously writes the contents of @provider to @stream in the given
@@ -12338,7 +12484,7 @@ func (provider *ContentProviderInstance) RefStorableFormats() *ContentFormats {
 // not supported, `G_IO_ERROR_NOT_SUPPORTED` will be reported.
 // 
 // The given @stream will not be closed.
-func (provider *ContentProviderInstance) WriteMIMETypeAsync(cancellable context.Context, mimeType string, stream gio.OutputStream, ioPriority int, callback gio.AsyncReadyCallback) {
+func (provider *ContentProviderInstance) WriteMIMETypeAsync(cancellable context.Context, mimeType string, stream gio.OutputStream, ioPriority int32, callback gio.AsyncReadyCallback) {
 	var carg0 *C.GdkContentProvider // in, none, converted
 	var carg4 *C.GCancellable       // in, none, converted, nullable
 	var carg1 *C.char               // in, none, string, casted *C.gchar
@@ -12457,9 +12603,9 @@ type ContentProviderOverrides[Instance ContentProvider] struct {
 	// 	- cancellable context.Context (nullable): optional `GCancellable` object, %NULL to ignore. 
 	// 	- mimeType string: the mime type to provide the data in 
 	// 	- stream gio.OutputStream: the `GOutputStream` to write to 
-	// 	- ioPriority int: I/O priority of the request. 
+	// 	- ioPriority int32: I/O priority of the request. 
 	// 	- callback gio.AsyncReadyCallback (nullable): callback to call when the request is satisfied 
-	WriteMIMETypeAsync func(Instance, context.Context, string, gio.OutputStream, int, gio.AsyncReadyCallback)
+	WriteMIMETypeAsync func(Instance, context.Context, string, gio.OutputStream, int32, gio.AsyncReadyCallback)
 	// WriteMIMETypeFinish allows you to override the implementation of the virtual method write_mime_type_finish.
 	// The function takes the following parameters:
 	// 
@@ -12488,7 +12634,7 @@ func UnsafeApplyContentProviderOverrides[Instance ContentProvider](gclass unsafe
 				var provider  Instance  // go GdkContentProvider subclass
 				var clipboard Clipboard // in, none, converted
 
-				provider = UnsafeContentProviderFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				provider = UnsafeContentProviderFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				clipboard = UnsafeClipboardFromGlibNone(unsafe.Pointer(carg1))
 
 				overrides.AttachClipboard(provider, clipboard)
@@ -12504,7 +12650,7 @@ func UnsafeApplyContentProviderOverrides[Instance ContentProvider](gclass unsafe
 			func(carg0 *C.GdkContentProvider) {
 				var provider Instance // go GdkContentProvider subclass
 
-				provider = UnsafeContentProviderFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				provider = UnsafeContentProviderFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				overrides.ContentChanged(provider)
 			},
@@ -12520,7 +12666,7 @@ func UnsafeApplyContentProviderOverrides[Instance ContentProvider](gclass unsafe
 				var provider  Instance  // go GdkContentProvider subclass
 				var clipboard Clipboard // in, none, converted
 
-				provider = UnsafeContentProviderFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				provider = UnsafeContentProviderFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				clipboard = UnsafeClipboardFromGlibNone(unsafe.Pointer(carg1))
 
 				overrides.DetachClipboard(provider, clipboard)
@@ -12539,7 +12685,7 @@ func UnsafeApplyContentProviderOverrides[Instance ContentProvider](gclass unsafe
 				var goret    bool          // return
 				var _goerr   error         // out, full, converted
 
-				provider = UnsafeContentProviderFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				provider = UnsafeContentProviderFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				value, goret, _goerr = overrides.GetValue(provider)
 
@@ -12565,7 +12711,7 @@ func UnsafeApplyContentProviderOverrides[Instance ContentProvider](gclass unsafe
 				var provider Instance        // go GdkContentProvider subclass
 				var goret    *ContentFormats // return, full, converted
 
-				provider = UnsafeContentProviderFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				provider = UnsafeContentProviderFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.RefFormats(provider)
 
@@ -12585,7 +12731,7 @@ func UnsafeApplyContentProviderOverrides[Instance ContentProvider](gclass unsafe
 				var provider Instance        // go GdkContentProvider subclass
 				var goret    *ContentFormats // return, full, converted
 
-				provider = UnsafeContentProviderFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				provider = UnsafeContentProviderFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.RefStorableFormats(provider)
 
@@ -12606,16 +12752,16 @@ func UnsafeApplyContentProviderOverrides[Instance ContentProvider](gclass unsafe
 				var cancellable context.Context        // in, none, converted, nullable
 				var mimeType    string                 // in, none, string, casted *C.gchar
 				var stream      gio.OutputStream       // in, none, converted
-				var ioPriority  int                    // in, none, casted, casted C.gint
+				var ioPriority  int32                  // in, none, casted, casted C.gint
 				var callback    gio.AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg6, nullable
 
-				provider = UnsafeContentProviderFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				provider = UnsafeContentProviderFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg4 != nil {
 					cancellable = gio.NewCancellableContext(unsafe.Pointer(carg4))
 				}
 				mimeType = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 				stream = gio.UnsafeOutputStreamFromGlibNone(unsafe.Pointer(carg2))
-				ioPriority = int(carg3)
+				ioPriority = int32(carg3)
 				if carg5 != nil {
 					_ = callback
 					_ = carg5
@@ -12639,7 +12785,7 @@ func UnsafeApplyContentProviderOverrides[Instance ContentProvider](gclass unsafe
 				var goret    bool            // return
 				var _goerr   error           // out, full, converted
 
-				provider = UnsafeContentProviderFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				provider = UnsafeContentProviderFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = gio.UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.WriteMIMETypeFinish(provider, result)
@@ -12750,12 +12896,12 @@ type ContentSerializer interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Gets the I/O priority for the current operation.
 	// 
 	// This is the priority that was passed to [func@content_serialize_async].
-	GetPriority() int
+	GetPriority() int32
 	// ReturnError wraps gdk_content_serializer_return_error
 	// 
 	// The function takes the following parameters:
@@ -12793,6 +12939,11 @@ func UnsafeContentSerializerFromGlibNone(c unsafe.Pointer) ContentSerializer {
 // UnsafeContentSerializerFromGlibFull is used to convert raw GdkContentSerializer pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeContentSerializerFromGlibFull(c unsafe.Pointer) ContentSerializer {
 	return gobject.UnsafeObjectFromGlibFull(c).(ContentSerializer)
+}
+
+// UnsafeContentSerializerFromGlibBorrow is used to convert raw GdkContentSerializer pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeContentSerializerFromGlibBorrow(c unsafe.Pointer) ContentSerializer {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(ContentSerializer)
 }
 
 func (c *ContentSerializerInstance) upcastToGdkContentSerializer() *ContentSerializerInstance {
@@ -12911,12 +13062,12 @@ func (serializer *ContentSerializerInstance) GetOutputStream() gio.OutputStream 
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Gets the I/O priority for the current operation.
 // 
 // This is the priority that was passed to [func@content_serialize_async].
-func (serializer *ContentSerializerInstance) GetPriority() int {
+func (serializer *ContentSerializerInstance) GetPriority() int32 {
 	var carg0 *C.GdkContentSerializer // in, none, converted
 	var cret  C.int                   // return, none, casted, casted C.gint
 
@@ -12925,9 +13076,9 @@ func (serializer *ContentSerializerInstance) GetPriority() int {
 	cret = C.gdk_content_serializer_get_priority(carg0)
 	runtime.KeepAlive(serializer)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -13031,7 +13182,7 @@ type Cursor interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Returns the horizontal offset of the hotspot.
 	// 
@@ -13040,12 +13191,12 @@ type Cursor interface {
 	// Note that named cursors may have a nonzero hotspot, but this function
 	// will only return the hotspot position for cursors created with
 	// [ctor@Gdk.Cursor.new_from_texture].
-	GetHotspotX() int
+	GetHotspotX() int32
 	// GetHotspotY wraps gdk_cursor_get_hotspot_y
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Returns the vertical offset of the hotspot.
 	// 
@@ -13054,7 +13205,7 @@ type Cursor interface {
 	// Note that named cursors may have a nonzero hotspot, but this function
 	// will only return the hotspot position for cursors created with
 	// [ctor@Gdk.Cursor.new_from_texture].
-	GetHotspotY() int
+	GetHotspotY() int32
 	// GetName wraps gdk_cursor_get_name
 	// 
 	// The function returns the following values:
@@ -13095,6 +13246,11 @@ func UnsafeCursorFromGlibNone(c unsafe.Pointer) Cursor {
 // UnsafeCursorFromGlibFull is used to convert raw GdkCursor pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeCursorFromGlibFull(c unsafe.Pointer) Cursor {
 	return gobject.UnsafeObjectFromGlibFull(c).(Cursor)
+}
+
+// UnsafeCursorFromGlibBorrow is used to convert raw GdkCursor pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeCursorFromGlibBorrow(c unsafe.Pointer) Cursor {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Cursor)
 }
 
 func (c *CursorInstance) upcastToGdkCursor() *CursorInstance {
@@ -13169,8 +13325,8 @@ func NewCursorFromName(name string, fallback Cursor) Cursor {
 // The function takes the following parameters:
 // 
 // 	- texture Texture: the texture providing the pixel data 
-// 	- hotspotX int: the horizontal offset of the “hotspot” of the cursor 
-// 	- hotspotY int: the vertical offset of the “hotspot” of the cursor 
+// 	- hotspotX int32: the horizontal offset of the “hotspot” of the cursor 
+// 	- hotspotY int32: the vertical offset of the “hotspot” of the cursor 
 // 	- fallback Cursor (nullable): the `GdkCursor` to fall back to when
 //   this one cannot be supported 
 // 
@@ -13179,7 +13335,7 @@ func NewCursorFromName(name string, fallback Cursor) Cursor {
 // 	- goret Cursor 
 //
 // Creates a new cursor from a `GdkTexture`.
-func NewCursorFromTexture(texture Texture, hotspotX int, hotspotY int, fallback Cursor) Cursor {
+func NewCursorFromTexture(texture Texture, hotspotX int32, hotspotY int32, fallback Cursor) Cursor {
 	var carg1 *C.GdkTexture // in, none, converted
 	var carg2 C.int         // in, none, casted, casted C.gint
 	var carg3 C.int         // in, none, casted, casted C.gint
@@ -13241,7 +13397,7 @@ func (cursor *CursorInstance) GetFallback() Cursor {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Returns the horizontal offset of the hotspot.
 // 
@@ -13250,7 +13406,7 @@ func (cursor *CursorInstance) GetFallback() Cursor {
 // Note that named cursors may have a nonzero hotspot, but this function
 // will only return the hotspot position for cursors created with
 // [ctor@Gdk.Cursor.new_from_texture].
-func (cursor *CursorInstance) GetHotspotX() int {
+func (cursor *CursorInstance) GetHotspotX() int32 {
 	var carg0 *C.GdkCursor // in, none, converted
 	var cret  C.int        // return, none, casted, casted C.gint
 
@@ -13259,9 +13415,9 @@ func (cursor *CursorInstance) GetHotspotX() int {
 	cret = C.gdk_cursor_get_hotspot_x(carg0)
 	runtime.KeepAlive(cursor)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -13270,7 +13426,7 @@ func (cursor *CursorInstance) GetHotspotX() int {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Returns the vertical offset of the hotspot.
 // 
@@ -13279,7 +13435,7 @@ func (cursor *CursorInstance) GetHotspotX() int {
 // Note that named cursors may have a nonzero hotspot, but this function
 // will only return the hotspot position for cursors created with
 // [ctor@Gdk.Cursor.new_from_texture].
-func (cursor *CursorInstance) GetHotspotY() int {
+func (cursor *CursorInstance) GetHotspotY() int32 {
 	var carg0 *C.GdkCursor // in, none, converted
 	var cret  C.int        // return, none, casted, casted C.gint
 
@@ -13288,9 +13444,9 @@ func (cursor *CursorInstance) GetHotspotY() int {
 	cret = C.gdk_cursor_get_hotspot_y(carg0)
 	runtime.KeepAlive(cursor)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -13599,6 +13755,11 @@ func UnsafeDeviceFromGlibNone(c unsafe.Pointer) Device {
 // UnsafeDeviceFromGlibFull is used to convert raw GdkDevice pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeDeviceFromGlibFull(c unsafe.Pointer) Device {
 	return gobject.UnsafeObjectFromGlibFull(c).(Device)
+}
+
+// UnsafeDeviceFromGlibBorrow is used to convert raw GdkDevice pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeDeviceFromGlibBorrow(c unsafe.Pointer) Device {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Device)
 }
 
 func (d *DeviceInstance) upcastToGdkDevice() *DeviceInstance {
@@ -14193,6 +14354,11 @@ func UnsafeDeviceToolFromGlibFull(c unsafe.Pointer) DeviceTool {
 	return gobject.UnsafeObjectFromGlibFull(c).(DeviceTool)
 }
 
+// UnsafeDeviceToolFromGlibBorrow is used to convert raw GdkDeviceTool pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeDeviceToolFromGlibBorrow(c unsafe.Pointer) DeviceTool {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(DeviceTool)
+}
+
 func (d *DeviceToolInstance) upcastToGdkDeviceTool() *DeviceToolInstance {
 	return d
 }
@@ -14612,13 +14778,13 @@ type Display interface {
 	// 
 	// 	- keycode uint: a keycode 
 	// 	- state ModifierType: a modifier state 
-	// 	- group int: active keyboard group 
+	// 	- group int32: active keyboard group 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- keyval uint: return location for keyval 
-	// 	- effectiveGroup int: return location for effective group 
-	// 	- level int: return location for level 
+	// 	- effectiveGroup int32: return location for effective group 
+	// 	- level int32: return location for level 
 	// 	- consumed ModifierType: return location for modifiers that were used
 	//   to determine the group or level 
 	// 	- goret bool 
@@ -14642,7 +14808,7 @@ type Display interface {
 	// This function should rarely be needed, since `GdkEventKey` already
 	// contains the translated keyval. It is exported for the benefit of
 	// virtualized test environments.
-	TranslateKey(uint, ModifierType, int) (uint, int, int, ModifierType, bool)
+	TranslateKey(uint, ModifierType, int32) (uint, int32, int32, ModifierType, bool)
 	// ConnectClosed connects the provided callback to the "closed" signal
 	//
 	// Emitted when the connection to the windowing system for @display is closed.
@@ -14683,6 +14849,11 @@ func UnsafeDisplayFromGlibNone(c unsafe.Pointer) Display {
 // UnsafeDisplayFromGlibFull is used to convert raw GdkDisplay pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeDisplayFromGlibFull(c unsafe.Pointer) Display {
 	return gobject.UnsafeObjectFromGlibFull(c).(Display)
+}
+
+// UnsafeDisplayFromGlibBorrow is used to convert raw GdkDisplay pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeDisplayFromGlibBorrow(c unsafe.Pointer) Display {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Display)
 }
 
 func (d *DisplayInstance) upcastToGdkDisplay() *DisplayInstance {
@@ -15382,13 +15553,13 @@ func (display *DisplayInstance) Sync() {
 // 
 // 	- keycode uint: a keycode 
 // 	- state ModifierType: a modifier state 
-// 	- group int: active keyboard group 
+// 	- group int32: active keyboard group 
 // 
 // The function returns the following values:
 // 
 // 	- keyval uint: return location for keyval 
-// 	- effectiveGroup int: return location for effective group 
-// 	- level int: return location for level 
+// 	- effectiveGroup int32: return location for effective group 
+// 	- level int32: return location for level 
 // 	- consumed ModifierType: return location for modifiers that were used
 //   to determine the group or level 
 // 	- goret bool 
@@ -15412,7 +15583,7 @@ func (display *DisplayInstance) Sync() {
 // This function should rarely be needed, since `GdkEventKey` already
 // contains the translated keyval. It is exported for the benefit of
 // virtualized test environments.
-func (display *DisplayInstance) TranslateKey(keycode uint, state ModifierType, group int) (uint, int, int, ModifierType, bool) {
+func (display *DisplayInstance) TranslateKey(keycode uint, state ModifierType, group int32) (uint, int32, int32, ModifierType, bool) {
 	var carg0 *C.GdkDisplay     // in, none, converted
 	var carg1 C.guint           // in, none, casted
 	var carg2 C.GdkModifierType // in, none, casted
@@ -15435,14 +15606,14 @@ func (display *DisplayInstance) TranslateKey(keycode uint, state ModifierType, g
 	runtime.KeepAlive(group)
 
 	var keyval         uint
-	var effectiveGroup int
-	var level          int
+	var effectiveGroup int32
+	var level          int32
 	var consumed       ModifierType
 	var goret          bool
 
 	keyval = uint(carg4)
-	effectiveGroup = int(carg5)
-	level = int(carg6)
+	effectiveGroup = int32(carg5)
+	level = int32(carg6)
 	consumed = ModifierType(carg7)
 	if cret != 0 {
 		goret = true
@@ -15602,6 +15773,11 @@ func UnsafeDisplayManagerFromGlibNone(c unsafe.Pointer) DisplayManager {
 // UnsafeDisplayManagerFromGlibFull is used to convert raw GdkDisplayManager pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeDisplayManagerFromGlibFull(c unsafe.Pointer) DisplayManager {
 	return gobject.UnsafeObjectFromGlibFull(c).(DisplayManager)
+}
+
+// UnsafeDisplayManagerFromGlibBorrow is used to convert raw GdkDisplayManager pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeDisplayManagerFromGlibBorrow(c unsafe.Pointer) DisplayManager {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(DisplayManager)
 }
 
 func (d *DisplayManagerInstance) upcastToGdkDisplayManager() *DisplayManagerInstance {
@@ -15857,10 +16033,10 @@ type DmabufTextureBuilder interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Gets the file descriptor for a plane.
-	GetFd(uint) int
+	GetFd(uint) int32
 	// GetFourcc wraps gdk_dmabuf_texture_builder_get_fourcc
 	// 
 	// The function returns the following values:
@@ -15976,10 +16152,10 @@ type DmabufTextureBuilder interface {
 	// The function takes the following parameters:
 	// 
 	// 	- plane uint: the plane to set the fd for 
-	// 	- fd int: the file descriptor 
+	// 	- fd int32: the file descriptor 
 	//
 	// Sets the file descriptor for a plane.
-	SetFd(uint, int)
+	SetFd(uint, int32)
 	// SetFourcc wraps gdk_dmabuf_texture_builder_set_fourcc
 	// 
 	// The function takes the following parameters:
@@ -16090,6 +16266,11 @@ func UnsafeDmabufTextureBuilderFromGlibFull(c unsafe.Pointer) DmabufTextureBuild
 	return gobject.UnsafeObjectFromGlibFull(c).(DmabufTextureBuilder)
 }
 
+// UnsafeDmabufTextureBuilderFromGlibBorrow is used to convert raw GdkDmabufTextureBuilder pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeDmabufTextureBuilderFromGlibBorrow(c unsafe.Pointer) DmabufTextureBuilder {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(DmabufTextureBuilder)
+}
+
 func (d *DmabufTextureBuilderInstance) upcastToGdkDmabufTextureBuilder() *DmabufTextureBuilderInstance {
 	return d
 }
@@ -16180,10 +16361,10 @@ func (self *DmabufTextureBuilderInstance) GetDisplay() Display {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Gets the file descriptor for a plane.
-func (self *DmabufTextureBuilderInstance) GetFd(plane uint) int {
+func (self *DmabufTextureBuilderInstance) GetFd(plane uint) int32 {
 	var carg0 *C.GdkDmabufTextureBuilder // in, none, converted
 	var carg1 C.uint                     // in, none, casted, casted C.guint
 	var cret  C.int                      // return, none, casted, casted C.gint
@@ -16195,9 +16376,9 @@ func (self *DmabufTextureBuilderInstance) GetFd(plane uint) int {
 	runtime.KeepAlive(self)
 	runtime.KeepAlive(plane)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -16486,10 +16667,10 @@ func (self *DmabufTextureBuilderInstance) SetDisplay(display Display) {
 // The function takes the following parameters:
 // 
 // 	- plane uint: the plane to set the fd for 
-// 	- fd int: the file descriptor 
+// 	- fd int32: the file descriptor 
 //
 // Sets the file descriptor for a plane.
-func (self *DmabufTextureBuilderInstance) SetFd(plane uint, fd int) {
+func (self *DmabufTextureBuilderInstance) SetFd(plane uint, fd int32) {
 	var carg0 *C.GdkDmabufTextureBuilder // in, none, converted
 	var carg1 C.uint                     // in, none, casted, casted C.guint
 	var carg2 C.int                      // in, none, casted, casted C.gint
@@ -16817,14 +16998,14 @@ type Drag interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- hotX int: x coordinate of the drag surface hotspot 
-	// 	- hotY int: y coordinate of the drag surface hotspot 
+	// 	- hotX int32: x coordinate of the drag surface hotspot 
+	// 	- hotY int32: y coordinate of the drag surface hotspot 
 	//
 	// Sets the position of the drag surface that will be kept
 	// under the cursor hotspot.
 	// 
 	// Initially, the hotspot is at the top left corner of the drag surface.
-	SetHotspot(int, int)
+	SetHotspot(int32, int32)
 	// ConnectCancel connects the provided callback to the "cancel" signal
 	//
 	// Emitted when the drag operation is cancelled.
@@ -16859,6 +17040,11 @@ func UnsafeDragFromGlibNone(c unsafe.Pointer) Drag {
 // UnsafeDragFromGlibFull is used to convert raw GdkDrag pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeDragFromGlibFull(c unsafe.Pointer) Drag {
 	return gobject.UnsafeObjectFromGlibFull(c).(Drag)
+}
+
+// UnsafeDragFromGlibBorrow is used to convert raw GdkDrag pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeDragFromGlibBorrow(c unsafe.Pointer) Drag {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Drag)
 }
 
 func (d *DragInstance) upcastToGdkDrag() *DragInstance {
@@ -17164,14 +17350,14 @@ func (drag *DragInstance) GetSurface() Surface {
 // 
 // The function takes the following parameters:
 // 
-// 	- hotX int: x coordinate of the drag surface hotspot 
-// 	- hotY int: y coordinate of the drag surface hotspot 
+// 	- hotX int32: x coordinate of the drag surface hotspot 
+// 	- hotY int32: y coordinate of the drag surface hotspot 
 //
 // Sets the position of the drag surface that will be kept
 // under the cursor hotspot.
 // 
 // Initially, the hotspot is at the top left corner of the drag surface.
-func (drag *DragInstance) SetHotspot(hotX int, hotY int) {
+func (drag *DragInstance) SetHotspot(hotX int32, hotY int32) {
 	var carg0 *C.GdkDrag // in, none, converted
 	var carg1 C.int      // in, none, casted, casted C.gint
 	var carg2 C.int      // in, none, casted, casted C.gint
@@ -17268,6 +17454,11 @@ func UnsafeDrawContextFromGlibNone(c unsafe.Pointer) DrawContext {
 // UnsafeDrawContextFromGlibFull is used to convert raw GdkDrawContext pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeDrawContextFromGlibFull(c unsafe.Pointer) DrawContext {
 	return gobject.UnsafeObjectFromGlibFull(c).(DrawContext)
+}
+
+// UnsafeDrawContextFromGlibBorrow is used to convert raw GdkDrawContext pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeDrawContextFromGlibBorrow(c unsafe.Pointer) DrawContext {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(DrawContext)
 }
 
 func (d *DrawContextInstance) upcastToGdkDrawContext() *DrawContextInstance {
@@ -17445,13 +17636,13 @@ type Drop interface {
 	// 	- cancellable context.Context (nullable): optional `GCancellable` object 
 	// 	- mimeTypes []string: 
 	//   pointer to an array of mime types 
-	// 	- ioPriority int: the I/O priority for the read operation 
+	// 	- ioPriority int32: the I/O priority for the read operation 
 	// 	- callback gio.AsyncReadyCallback (nullable): a `GAsyncReadyCallback` to call when
 	//   the request is satisfied 
 	//
 	// Asynchronously read the dropped data from a `GdkDrop`
 	// in a format that complies with one of the mime types.
-	ReadAsync(context.Context, []string, int, gio.AsyncReadyCallback)
+	ReadAsync(context.Context, []string, int32, gio.AsyncReadyCallback)
 	// ReadFinish wraps gdk_drop_read_finish
 	// 
 	// The function takes the following parameters:
@@ -17479,7 +17670,7 @@ type Drop interface {
 	// 
 	// 	- cancellable context.Context (nullable): optional `GCancellable` object, %NULL to ignore. 
 	// 	- typ gobject.Type: a `GType` to read 
-	// 	- ioPriority int: the I/O priority of the request. 
+	// 	- ioPriority int32: the I/O priority of the request. 
 	// 	- callback gio.AsyncReadyCallback (nullable): callback to call when the request is satisfied 
 	//
 	// Asynchronously request the drag operation's contents converted
@@ -17488,7 +17679,7 @@ type Drop interface {
 	// For local drag-and-drop operations that are available in the given
 	// `GType`, the value will be copied directly. Otherwise, GDK will
 	// try to use [func@Gdk.content_deserialize_async] to convert the data.
-	ReadValueAsync(context.Context, gobject.Type, int, gio.AsyncReadyCallback)
+	ReadValueAsync(context.Context, gobject.Type, int32, gio.AsyncReadyCallback)
 	// Status wraps gdk_drop_status
 	// 
 	// The function takes the following parameters:
@@ -17532,6 +17723,11 @@ func UnsafeDropFromGlibNone(c unsafe.Pointer) Drop {
 // UnsafeDropFromGlibFull is used to convert raw GdkDrop pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeDropFromGlibFull(c unsafe.Pointer) Drop {
 	return gobject.UnsafeObjectFromGlibFull(c).(Drop)
+}
+
+// UnsafeDropFromGlibBorrow is used to convert raw GdkDrop pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeDropFromGlibBorrow(c unsafe.Pointer) Drop {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Drop)
 }
 
 func (d *DropInstance) upcastToGdkDrop() *DropInstance {
@@ -17734,13 +17930,13 @@ func (self *DropInstance) GetSurface() Surface {
 // 	- cancellable context.Context (nullable): optional `GCancellable` object 
 // 	- mimeTypes []string: 
 //   pointer to an array of mime types 
-// 	- ioPriority int: the I/O priority for the read operation 
+// 	- ioPriority int32: the I/O priority for the read operation 
 // 	- callback gio.AsyncReadyCallback (nullable): a `GAsyncReadyCallback` to call when
 //   the request is satisfied 
 //
 // Asynchronously read the dropped data from a `GdkDrop`
 // in a format that complies with one of the mime types.
-func (self *DropInstance) ReadAsync(cancellable context.Context, mimeTypes []string, ioPriority int, callback gio.AsyncReadyCallback) {
+func (self *DropInstance) ReadAsync(cancellable context.Context, mimeTypes []string, ioPriority int32, callback gio.AsyncReadyCallback) {
 	var carg0 *C.GdkDrop            // in, none, converted
 	var carg3 *C.GCancellable       // in, none, converted, nullable
 	var carg1 **C.char              // in, transfer: none, C Pointers: 2, Name: array[utf8], array (inner: *typesystem.StringPrimitive, zero-terminated)
@@ -17824,7 +18020,7 @@ func (self *DropInstance) ReadFinish(result gio.AsyncResult) (string, gio.InputS
 // 
 // 	- cancellable context.Context (nullable): optional `GCancellable` object, %NULL to ignore. 
 // 	- typ gobject.Type: a `GType` to read 
-// 	- ioPriority int: the I/O priority of the request. 
+// 	- ioPriority int32: the I/O priority of the request. 
 // 	- callback gio.AsyncReadyCallback (nullable): callback to call when the request is satisfied 
 //
 // Asynchronously request the drag operation's contents converted
@@ -17833,7 +18029,7 @@ func (self *DropInstance) ReadFinish(result gio.AsyncResult) (string, gio.InputS
 // For local drag-and-drop operations that are available in the given
 // `GType`, the value will be copied directly. Otherwise, GDK will
 // try to use [func@Gdk.content_deserialize_async] to convert the data.
-func (self *DropInstance) ReadValueAsync(cancellable context.Context, typ gobject.Type, ioPriority int, callback gio.AsyncReadyCallback) {
+func (self *DropInstance) ReadValueAsync(cancellable context.Context, typ gobject.Type, ioPriority int32, callback gio.AsyncReadyCallback) {
 	var carg0 *C.GdkDrop            // in, none, converted
 	var carg3 *C.GCancellable       // in, none, converted, nullable
 	var carg1 C.GType               // in, none, casted, alias
@@ -18148,6 +18344,11 @@ func UnsafeFrameClockFromGlibNone(c unsafe.Pointer) FrameClock {
 // UnsafeFrameClockFromGlibFull is used to convert raw GdkFrameClock pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeFrameClockFromGlibFull(c unsafe.Pointer) FrameClock {
 	return gobject.UnsafeObjectFromGlibFull(c).(FrameClock)
+}
+
+// UnsafeFrameClockFromGlibBorrow is used to convert raw GdkFrameClock pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeFrameClockFromGlibBorrow(c unsafe.Pointer) FrameClock {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(FrameClock)
 }
 
 func (f *FrameClockInstance) upcastToGdkFrameClock() *FrameClockInstance {
@@ -18627,8 +18828,8 @@ type GLContext interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- major int: return location for the major version to request 
-	// 	- minor int: return location for the minor version to request 
+	// 	- major int32: return location for the major version to request 
+	// 	- minor int32: return location for the minor version to request 
 	//
 	// Retrieves required OpenGL version set as a requirement for the @context
 	// realization. It will not change even if a greater OpenGL version is supported
@@ -18636,7 +18837,7 @@ type GLContext interface {
 	// [method@Gdk.GLContext.get_version] for the real version in use.
 	// 
 	// See [method@Gdk.GLContext.set_required_version].
-	GetRequiredVersion() (int, int)
+	GetRequiredVersion() (int32, int32)
 	// GetSurface wraps gdk_gl_context_get_surface
 	// 
 	// The function returns the following values:
@@ -18657,13 +18858,13 @@ type GLContext interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- major int: return location for the major version 
-	// 	- minor int: return location for the minor version 
+	// 	- major int32: return location for the major version 
+	// 	- minor int32: return location for the minor version 
 	//
 	// Retrieves the OpenGL version of the @context.
 	// 
 	// The @context must be realized prior to calling this function.
-	GetVersion() (int, int)
+	GetVersion() (int32, int32)
 	// IsLegacy wraps gdk_gl_context_is_legacy
 	// 
 	// The function returns the following values:
@@ -18773,8 +18974,8 @@ type GLContext interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- major int: the major version to request 
-	// 	- minor int: the minor version to request 
+	// 	- major int32: the major version to request 
+	// 	- minor int32: the minor version to request 
 	//
 	// Sets the major and minor version of OpenGL to request.
 	// 
@@ -18785,12 +18986,12 @@ type GLContext interface {
 	// 
 	// The @context must not be realized or made current prior to calling
 	// this function.
-	SetRequiredVersion(int, int)
+	SetRequiredVersion(int32, int32)
 	// SetUseES wraps gdk_gl_context_set_use_es
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- useEs int: whether the context should use OpenGL ES instead of OpenGL,
+	// 	- useEs int32: whether the context should use OpenGL ES instead of OpenGL,
 	//   or -1 to allow auto-detection 
 	//
 	// Requests that GDK create an OpenGL ES context instead of an OpenGL one.
@@ -18806,7 +19007,7 @@ type GLContext interface {
 	// You should check the return value of [method@Gdk.GLContext.get_use_es]
 	// after calling [method@Gdk.GLContext.realize] to decide whether to use
 	// the OpenGL or OpenGL ES API, extensions, or shaders.
-	SetUseES(int)
+	SetUseES(int32)
 }
 
 func unsafeWrapGLContext(base *gobject.ObjectInstance) *GLContextInstance {
@@ -18829,6 +19030,11 @@ func UnsafeGLContextFromGlibNone(c unsafe.Pointer) GLContext {
 // UnsafeGLContextFromGlibFull is used to convert raw GdkGLContext pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeGLContextFromGlibFull(c unsafe.Pointer) GLContext {
 	return gobject.UnsafeObjectFromGlibFull(c).(GLContext)
+}
+
+// UnsafeGLContextFromGlibBorrow is used to convert raw GdkGLContext pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeGLContextFromGlibBorrow(c unsafe.Pointer) GLContext {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(GLContext)
 }
 
 func (g *GLContextInstance) upcastToGdkGLContext() *GLContextInstance {
@@ -19008,8 +19214,8 @@ func (_context *GLContextInstance) GetForwardCompatible() bool {
 // 
 // The function returns the following values:
 // 
-// 	- major int: return location for the major version to request 
-// 	- minor int: return location for the minor version to request 
+// 	- major int32: return location for the major version to request 
+// 	- minor int32: return location for the minor version to request 
 //
 // Retrieves required OpenGL version set as a requirement for the @context
 // realization. It will not change even if a greater OpenGL version is supported
@@ -19017,7 +19223,7 @@ func (_context *GLContextInstance) GetForwardCompatible() bool {
 // [method@Gdk.GLContext.get_version] for the real version in use.
 // 
 // See [method@Gdk.GLContext.set_required_version].
-func (_context *GLContextInstance) GetRequiredVersion() (int, int) {
+func (_context *GLContextInstance) GetRequiredVersion() (int32, int32) {
 	var carg0 *C.GdkGLContext // in, none, converted
 	var carg1 C.int           // out, full, casted, casted C.gint
 	var carg2 C.int           // out, full, casted, casted C.gint
@@ -19027,11 +19233,11 @@ func (_context *GLContextInstance) GetRequiredVersion() (int, int) {
 	C.gdk_gl_context_get_required_version(carg0, &carg1, &carg2)
 	runtime.KeepAlive(_context)
 
-	var major int
-	var minor int
+	var major int32
+	var minor int32
 
-	major = int(carg1)
-	minor = int(carg2)
+	major = int32(carg1)
+	minor = int32(carg2)
 
 	return major, minor
 }
@@ -19090,13 +19296,13 @@ func (_context *GLContextInstance) GetUseES() bool {
 // 
 // The function returns the following values:
 // 
-// 	- major int: return location for the major version 
-// 	- minor int: return location for the minor version 
+// 	- major int32: return location for the major version 
+// 	- minor int32: return location for the minor version 
 //
 // Retrieves the OpenGL version of the @context.
 // 
 // The @context must be realized prior to calling this function.
-func (_context *GLContextInstance) GetVersion() (int, int) {
+func (_context *GLContextInstance) GetVersion() (int32, int32) {
 	var carg0 *C.GdkGLContext // in, none, converted
 	var carg1 C.int           // out, full, casted, casted C.gint
 	var carg2 C.int           // out, full, casted, casted C.gint
@@ -19106,11 +19312,11 @@ func (_context *GLContextInstance) GetVersion() (int, int) {
 	C.gdk_gl_context_get_version(carg0, &carg1, &carg2)
 	runtime.KeepAlive(_context)
 
-	var major int
-	var minor int
+	var major int32
+	var minor int32
 
-	major = int(carg1)
-	minor = int(carg2)
+	major = int32(carg1)
+	minor = int32(carg2)
 
 	return major, minor
 }
@@ -19328,8 +19534,8 @@ func (_context *GLContextInstance) SetForwardCompatible(compatible bool) {
 // 
 // The function takes the following parameters:
 // 
-// 	- major int: the major version to request 
-// 	- minor int: the minor version to request 
+// 	- major int32: the major version to request 
+// 	- minor int32: the minor version to request 
 //
 // Sets the major and minor version of OpenGL to request.
 // 
@@ -19340,7 +19546,7 @@ func (_context *GLContextInstance) SetForwardCompatible(compatible bool) {
 // 
 // The @context must not be realized or made current prior to calling
 // this function.
-func (_context *GLContextInstance) SetRequiredVersion(major int, minor int) {
+func (_context *GLContextInstance) SetRequiredVersion(major int32, minor int32) {
 	var carg0 *C.GdkGLContext // in, none, converted
 	var carg1 C.int           // in, none, casted, casted C.gint
 	var carg2 C.int           // in, none, casted, casted C.gint
@@ -19359,7 +19565,7 @@ func (_context *GLContextInstance) SetRequiredVersion(major int, minor int) {
 // 
 // The function takes the following parameters:
 // 
-// 	- useEs int: whether the context should use OpenGL ES instead of OpenGL,
+// 	- useEs int32: whether the context should use OpenGL ES instead of OpenGL,
 //   or -1 to allow auto-detection 
 //
 // Requests that GDK create an OpenGL ES context instead of an OpenGL one.
@@ -19375,7 +19581,7 @@ func (_context *GLContextInstance) SetRequiredVersion(major int, minor int) {
 // You should check the return value of [method@Gdk.GLContext.get_use_es]
 // after calling [method@Gdk.GLContext.realize] to decide whether to use
 // the OpenGL or OpenGL ES API, extensions, or shaders.
-func (_context *GLContextInstance) SetUseES(useEs int) {
+func (_context *GLContextInstance) SetUseES(useEs int32) {
 	var carg0 *C.GdkGLContext // in, none, converted
 	var carg1 C.int           // in, none, casted, casted C.gint
 
@@ -19449,11 +19655,11 @@ type GLTextureBuilder interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Gets the height previously set via gdk_gl_texture_builder_set_height() or
 	// 0 if the height wasn't set.
-	GetHeight() int
+	GetHeight() int32
 	// GetID wraps gdk_gl_texture_builder_get_id
 	// 
 	// The function returns the following values:
@@ -19476,11 +19682,11 @@ type GLTextureBuilder interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Gets the width previously set via gdk_gl_texture_builder_set_width() or
 	// 0 if the width wasn't set.
-	GetWidth() int
+	GetWidth() int32
 	// SetColorState wraps gdk_gl_texture_builder_set_color_state
 	// 
 	// The function takes the following parameters:
@@ -19541,12 +19747,12 @@ type GLTextureBuilder interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- height int: The texture's height or 0 to unset 
+	// 	- height int32: The texture's height or 0 to unset 
 	//
 	// Sets the height of the texture.
 	// 
 	// The height must be set before calling [method@Gdk.GLTextureBuilder.build].
-	SetHeight(int)
+	SetHeight(int32)
 	// SetID wraps gdk_gl_texture_builder_set_id
 	// 
 	// The function takes the following parameters:
@@ -19572,12 +19778,12 @@ type GLTextureBuilder interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- width int: The texture's width or 0 to unset 
+	// 	- width int32: The texture's width or 0 to unset 
 	//
 	// Sets the width of the texture.
 	// 
 	// The width must be set before calling [method@Gdk.GLTextureBuilder.build].
-	SetWidth(int)
+	SetWidth(int32)
 }
 
 func unsafeWrapGLTextureBuilder(base *gobject.ObjectInstance) *GLTextureBuilderInstance {
@@ -19598,6 +19804,11 @@ func UnsafeGLTextureBuilderFromGlibNone(c unsafe.Pointer) GLTextureBuilder {
 // UnsafeGLTextureBuilderFromGlibFull is used to convert raw GdkGLTextureBuilder pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeGLTextureBuilderFromGlibFull(c unsafe.Pointer) GLTextureBuilder {
 	return gobject.UnsafeObjectFromGlibFull(c).(GLTextureBuilder)
+}
+
+// UnsafeGLTextureBuilderFromGlibBorrow is used to convert raw GdkGLTextureBuilder pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeGLTextureBuilderFromGlibBorrow(c unsafe.Pointer) GLTextureBuilder {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(GLTextureBuilder)
 }
 
 func (g *GLTextureBuilderInstance) upcastToGdkGLTextureBuilder() *GLTextureBuilderInstance {
@@ -19734,11 +19945,11 @@ func (self *GLTextureBuilderInstance) GetHasMipmap() bool {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Gets the height previously set via gdk_gl_texture_builder_set_height() or
 // 0 if the height wasn't set.
-func (self *GLTextureBuilderInstance) GetHeight() int {
+func (self *GLTextureBuilderInstance) GetHeight() int32 {
 	var carg0 *C.GdkGLTextureBuilder // in, none, converted
 	var cret  C.int                  // return, none, casted, casted C.gint
 
@@ -19747,9 +19958,9 @@ func (self *GLTextureBuilderInstance) GetHeight() int {
 	cret = C.gdk_gl_texture_builder_get_height(carg0)
 	runtime.KeepAlive(self)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -19808,11 +20019,11 @@ func (self *GLTextureBuilderInstance) GetUpdateTexture() Texture {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Gets the width previously set via gdk_gl_texture_builder_set_width() or
 // 0 if the width wasn't set.
-func (self *GLTextureBuilderInstance) GetWidth() int {
+func (self *GLTextureBuilderInstance) GetWidth() int32 {
 	var carg0 *C.GdkGLTextureBuilder // in, none, converted
 	var cret  C.int                  // return, none, casted, casted C.gint
 
@@ -19821,9 +20032,9 @@ func (self *GLTextureBuilderInstance) GetWidth() int {
 	cret = C.gdk_gl_texture_builder_get_width(carg0)
 	runtime.KeepAlive(self)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -19936,12 +20147,12 @@ func (self *GLTextureBuilderInstance) SetHasMipmap(hasMipmap bool) {
 // 
 // The function takes the following parameters:
 // 
-// 	- height int: The texture's height or 0 to unset 
+// 	- height int32: The texture's height or 0 to unset 
 //
 // Sets the height of the texture.
 // 
 // The height must be set before calling [method@Gdk.GLTextureBuilder.build].
-func (self *GLTextureBuilderInstance) SetHeight(height int) {
+func (self *GLTextureBuilderInstance) SetHeight(height int32) {
 	var carg0 *C.GdkGLTextureBuilder // in, none, converted
 	var carg1 C.int                  // in, none, casted, casted C.gint
 
@@ -20002,12 +20213,12 @@ func (self *GLTextureBuilderInstance) SetUpdateTexture(texture Texture) {
 // 
 // The function takes the following parameters:
 // 
-// 	- width int: The texture's width or 0 to unset 
+// 	- width int32: The texture's width or 0 to unset 
 //
 // Sets the width of the texture.
 // 
 // The width must be set before calling [method@Gdk.GLTextureBuilder.build].
-func (self *GLTextureBuilderInstance) SetWidth(width int) {
+func (self *GLTextureBuilderInstance) SetWidth(width int32) {
 	var carg0 *C.GdkGLTextureBuilder // in, none, converted
 	var carg1 C.int                  // in, none, casted, casted C.gint
 
@@ -20087,11 +20298,11 @@ type MemoryTextureBuilder interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Gets the height previously set via gdk_memory_texture_builder_set_height()
 	// or 0 if the height wasn't set.
-	GetHeight() int
+	GetHeight() int32
 	// GetStride wraps gdk_memory_texture_builder_get_stride
 	// 
 	// The function returns the following values:
@@ -20113,11 +20324,11 @@ type MemoryTextureBuilder interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Gets the width previously set via gdk_memory_texture_builder_set_width()
 	// or 0 if the width wasn't set.
-	GetWidth() int
+	GetWidth() int32
 	// SetBytes wraps gdk_memory_texture_builder_set_bytes
 	// 
 	// The function takes the following parameters:
@@ -20153,12 +20364,12 @@ type MemoryTextureBuilder interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- height int: The texture's height or 0 to unset 
+	// 	- height int32: The texture's height or 0 to unset 
 	//
 	// Sets the height of the texture.
 	// 
 	// The height must be set before calling [method@Gdk.MemoryTextureBuilder.build].
-	SetHeight(int)
+	SetHeight(int32)
 	// SetStride wraps gdk_memory_texture_builder_set_stride
 	// 
 	// The function takes the following parameters:
@@ -20183,12 +20394,12 @@ type MemoryTextureBuilder interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- width int: The texture's width or 0 to unset 
+	// 	- width int32: The texture's width or 0 to unset 
 	//
 	// Sets the width of the texture.
 	// 
 	// The width must be set before calling [method@Gdk.MemoryTextureBuilder.build].
-	SetWidth(int)
+	SetWidth(int32)
 }
 
 func unsafeWrapMemoryTextureBuilder(base *gobject.ObjectInstance) *MemoryTextureBuilderInstance {
@@ -20209,6 +20420,11 @@ func UnsafeMemoryTextureBuilderFromGlibNone(c unsafe.Pointer) MemoryTextureBuild
 // UnsafeMemoryTextureBuilderFromGlibFull is used to convert raw GdkMemoryTextureBuilder pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeMemoryTextureBuilderFromGlibFull(c unsafe.Pointer) MemoryTextureBuilder {
 	return gobject.UnsafeObjectFromGlibFull(c).(MemoryTextureBuilder)
+}
+
+// UnsafeMemoryTextureBuilderFromGlibBorrow is used to convert raw GdkMemoryTextureBuilder pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeMemoryTextureBuilderFromGlibBorrow(c unsafe.Pointer) MemoryTextureBuilder {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(MemoryTextureBuilder)
 }
 
 func (m *MemoryTextureBuilderInstance) upcastToGdkMemoryTextureBuilder() *MemoryTextureBuilderInstance {
@@ -20349,11 +20565,11 @@ func (self *MemoryTextureBuilderInstance) GetFormat() MemoryFormat {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Gets the height previously set via gdk_memory_texture_builder_set_height()
 // or 0 if the height wasn't set.
-func (self *MemoryTextureBuilderInstance) GetHeight() int {
+func (self *MemoryTextureBuilderInstance) GetHeight() int32 {
 	var carg0 *C.GdkMemoryTextureBuilder // in, none, converted
 	var cret  C.int                      // return, none, casted, casted C.gint
 
@@ -20362,9 +20578,9 @@ func (self *MemoryTextureBuilderInstance) GetHeight() int {
 	cret = C.gdk_memory_texture_builder_get_height(carg0)
 	runtime.KeepAlive(self)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -20422,11 +20638,11 @@ func (self *MemoryTextureBuilderInstance) GetUpdateTexture() Texture {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Gets the width previously set via gdk_memory_texture_builder_set_width()
 // or 0 if the width wasn't set.
-func (self *MemoryTextureBuilderInstance) GetWidth() int {
+func (self *MemoryTextureBuilderInstance) GetWidth() int32 {
 	var carg0 *C.GdkMemoryTextureBuilder // in, none, converted
 	var cret  C.int                      // return, none, casted, casted C.gint
 
@@ -20435,9 +20651,9 @@ func (self *MemoryTextureBuilderInstance) GetWidth() int {
 	cret = C.gdk_memory_texture_builder_get_width(carg0)
 	runtime.KeepAlive(self)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -20514,12 +20730,12 @@ func (self *MemoryTextureBuilderInstance) SetFormat(format MemoryFormat) {
 // 
 // The function takes the following parameters:
 // 
-// 	- height int: The texture's height or 0 to unset 
+// 	- height int32: The texture's height or 0 to unset 
 //
 // Sets the height of the texture.
 // 
 // The height must be set before calling [method@Gdk.MemoryTextureBuilder.build].
-func (self *MemoryTextureBuilderInstance) SetHeight(height int) {
+func (self *MemoryTextureBuilderInstance) SetHeight(height int32) {
 	var carg0 *C.GdkMemoryTextureBuilder // in, none, converted
 	var carg1 C.int                      // in, none, casted, casted C.gint
 
@@ -20579,12 +20795,12 @@ func (self *MemoryTextureBuilderInstance) SetUpdateTexture(texture Texture) {
 // 
 // The function takes the following parameters:
 // 
-// 	- width int: The texture's width or 0 to unset 
+// 	- width int32: The texture's width or 0 to unset 
 //
 // Sets the width of the texture.
 // 
 // The width must be set before calling [method@Gdk.MemoryTextureBuilder.build].
-func (self *MemoryTextureBuilderInstance) SetWidth(width int) {
+func (self *MemoryTextureBuilderInstance) SetWidth(width int32) {
 	var carg0 *C.GdkMemoryTextureBuilder // in, none, converted
 	var carg1 C.int                      // in, none, casted, casted C.gint
 
@@ -20663,10 +20879,10 @@ type Monitor interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Gets the height in millimeters of the monitor.
-	GetHeightMm() int
+	GetHeightMm() int32
 	// GetManufacturer wraps gdk_monitor_get_manufacturer
 	// 
 	// The function returns the following values:
@@ -20693,13 +20909,13 @@ type Monitor interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Gets the refresh rate of the monitor, if available.
 	// 
 	// The value is in milli-Hertz, so a refresh rate of 60Hz
 	// is returned as 60000.
-	GetRefreshRate() int
+	GetRefreshRate() int32
 	// GetScale wraps gdk_monitor_get_scale
 	// 
 	// The function returns the following values:
@@ -20717,7 +20933,7 @@ type Monitor interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Gets the internal scale factor that maps from monitor coordinates
 	// to device pixels.
@@ -20728,7 +20944,7 @@ type Monitor interface {
 	// This can be used if you want to create pixel based data for a
 	// particular monitor, but most of the time you’re drawing to a surface
 	// where it is better to use [method@Gdk.Surface.get_scale_factor] instead.
-	GetScaleFactor() int
+	GetScaleFactor() int32
 	// GetSubpixelLayout wraps gdk_monitor_get_subpixel_layout
 	// 
 	// The function returns the following values:
@@ -20742,10 +20958,10 @@ type Monitor interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Gets the width in millimeters of the monitor.
-	GetWidthMm() int
+	GetWidthMm() int32
 	// IsValid wraps gdk_monitor_is_valid
 	// 
 	// The function returns the following values:
@@ -20782,6 +20998,11 @@ func UnsafeMonitorFromGlibNone(c unsafe.Pointer) Monitor {
 // UnsafeMonitorFromGlibFull is used to convert raw GdkMonitor pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeMonitorFromGlibFull(c unsafe.Pointer) Monitor {
 	return gobject.UnsafeObjectFromGlibFull(c).(Monitor)
+}
+
+// UnsafeMonitorFromGlibBorrow is used to convert raw GdkMonitor pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeMonitorFromGlibBorrow(c unsafe.Pointer) Monitor {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Monitor)
 }
 
 func (m *MonitorInstance) upcastToGdkMonitor() *MonitorInstance {
@@ -20910,10 +21131,10 @@ func (monitor *MonitorInstance) GetGeometry() Rectangle {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Gets the height in millimeters of the monitor.
-func (monitor *MonitorInstance) GetHeightMm() int {
+func (monitor *MonitorInstance) GetHeightMm() int32 {
 	var carg0 *C.GdkMonitor // in, none, converted
 	var cret  C.int         // return, none, casted, casted C.gint
 
@@ -20922,9 +21143,9 @@ func (monitor *MonitorInstance) GetHeightMm() int {
 	cret = C.gdk_monitor_get_height_mm(carg0)
 	runtime.KeepAlive(monitor)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -20989,13 +21210,13 @@ func (monitor *MonitorInstance) GetModel() string {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Gets the refresh rate of the monitor, if available.
 // 
 // The value is in milli-Hertz, so a refresh rate of 60Hz
 // is returned as 60000.
-func (monitor *MonitorInstance) GetRefreshRate() int {
+func (monitor *MonitorInstance) GetRefreshRate() int32 {
 	var carg0 *C.GdkMonitor // in, none, converted
 	var cret  C.int         // return, none, casted, casted C.gint
 
@@ -21004,9 +21225,9 @@ func (monitor *MonitorInstance) GetRefreshRate() int {
 	cret = C.gdk_monitor_get_refresh_rate(carg0)
 	runtime.KeepAlive(monitor)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -21043,7 +21264,7 @@ func (monitor *MonitorInstance) GetScale() float64 {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Gets the internal scale factor that maps from monitor coordinates
 // to device pixels.
@@ -21054,7 +21275,7 @@ func (monitor *MonitorInstance) GetScale() float64 {
 // This can be used if you want to create pixel based data for a
 // particular monitor, but most of the time you’re drawing to a surface
 // where it is better to use [method@Gdk.Surface.get_scale_factor] instead.
-func (monitor *MonitorInstance) GetScaleFactor() int {
+func (monitor *MonitorInstance) GetScaleFactor() int32 {
 	var carg0 *C.GdkMonitor // in, none, converted
 	var cret  C.int         // return, none, casted, casted C.gint
 
@@ -21063,9 +21284,9 @@ func (monitor *MonitorInstance) GetScaleFactor() int {
 	cret = C.gdk_monitor_get_scale_factor(carg0)
 	runtime.KeepAlive(monitor)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -21098,10 +21319,10 @@ func (monitor *MonitorInstance) GetSubpixelLayout() SubpixelLayout {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Gets the width in millimeters of the monitor.
-func (monitor *MonitorInstance) GetWidthMm() int {
+func (monitor *MonitorInstance) GetWidthMm() int32 {
 	var carg0 *C.GdkMonitor // in, none, converted
 	var cret  C.int         // return, none, casted, casted C.gint
 
@@ -21110,9 +21331,9 @@ func (monitor *MonitorInstance) GetWidthMm() int {
 	cret = C.gdk_monitor_get_width_mm(carg0)
 	runtime.KeepAlive(monitor)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -21263,6 +21484,11 @@ func UnsafeSeatFromGlibNone(c unsafe.Pointer) Seat {
 // UnsafeSeatFromGlibFull is used to convert raw GdkSeat pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeSeatFromGlibFull(c unsafe.Pointer) Seat {
 	return gobject.UnsafeObjectFromGlibFull(c).(Seat)
+}
+
+// UnsafeSeatFromGlibBorrow is used to convert raw GdkSeat pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeSeatFromGlibBorrow(c unsafe.Pointer) Seat {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Seat)
 }
 
 func (s *SeatInstance) upcastToGdkSeat() *SeatInstance {
@@ -21514,6 +21740,11 @@ func UnsafeSnapshotFromGlibFull(c unsafe.Pointer) Snapshot {
 	return gobject.UnsafeObjectFromGlibFull(c).(Snapshot)
 }
 
+// UnsafeSnapshotFromGlibBorrow is used to convert raw GdkSnapshot pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeSnapshotFromGlibBorrow(c unsafe.Pointer) Snapshot {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Snapshot)
+}
+
 func (s *SnapshotInstance) upcastToGdkSnapshot() *SnapshotInstance {
 	return s
 }
@@ -21665,13 +21896,13 @@ type Surface interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Returns the height of the given @surface.
 	// 
 	// Surface size is reported in ”application pixels”, not
 	// ”device pixels” (see [method@Gdk.Surface.get_scale_factor]).
-	GetHeight() int
+	GetHeight() int32
 	// GetMapped wraps gdk_surface_get_mapped
 	// 
 	// The function returns the following values:
@@ -21705,7 +21936,7 @@ type Surface interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Returns the internal scale factor that maps from surface coordinates
 	// to the actual device pixels.
@@ -21718,18 +21949,18 @@ type Surface interface {
 	// use a pixel resource with higher resolution data.
 	// 
 	// The scale factor may change during the lifetime of the surface.
-	GetScaleFactor() int
+	GetScaleFactor() int32
 	// GetWidth wraps gdk_surface_get_width
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Returns the width of the given @surface.
 	// 
 	// Surface size is reported in ”application pixels”, not
 	// ”device pixels” (see [method@Gdk.Surface.get_scale_factor]).
-	GetWidth() int
+	GetWidth() int32
 	// Hide wraps gdk_surface_hide
 	//
 	// Hide the surface.
@@ -21806,7 +22037,7 @@ type Surface interface {
 	// 
 	// Surface size is reported in ”application pixels”, not
 	// ”device pixels” (see gdk_surface_get_scale_factor()).
-	ConnectLayout(func(Surface, int, int)) gobject.SignalHandle
+	ConnectLayout(func(Surface, int32, int32)) gobject.SignalHandle
 	// ConnectLeaveMonitor connects the provided callback to the "leave-monitor" signal
 	//
 	// Emitted when @surface stops being present on the monitor.
@@ -21831,6 +22062,11 @@ func UnsafeSurfaceFromGlibNone(c unsafe.Pointer) Surface {
 // UnsafeSurfaceFromGlibFull is used to convert raw GdkSurface pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeSurfaceFromGlibFull(c unsafe.Pointer) Surface {
 	return gobject.UnsafeObjectFromGlibFull(c).(Surface)
+}
+
+// UnsafeSurfaceFromGlibBorrow is used to convert raw GdkSurface pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeSurfaceFromGlibBorrow(c unsafe.Pointer) Surface {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Surface)
 }
 
 func (s *SurfaceInstance) upcastToGdkSurface() *SurfaceInstance {
@@ -22171,13 +22407,13 @@ func (surface *SurfaceInstance) GetFrameClock() FrameClock {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Returns the height of the given @surface.
 // 
 // Surface size is reported in ”application pixels”, not
 // ”device pixels” (see [method@Gdk.Surface.get_scale_factor]).
-func (surface *SurfaceInstance) GetHeight() int {
+func (surface *SurfaceInstance) GetHeight() int32 {
 	var carg0 *C.GdkSurface // in, none, converted
 	var cret  C.int         // return, none, casted, casted C.gint
 
@@ -22186,9 +22422,9 @@ func (surface *SurfaceInstance) GetHeight() int {
 	cret = C.gdk_surface_get_height(carg0)
 	runtime.KeepAlive(surface)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -22258,7 +22494,7 @@ func (surface *SurfaceInstance) GetScale() float64 {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Returns the internal scale factor that maps from surface coordinates
 // to the actual device pixels.
@@ -22271,7 +22507,7 @@ func (surface *SurfaceInstance) GetScale() float64 {
 // use a pixel resource with higher resolution data.
 // 
 // The scale factor may change during the lifetime of the surface.
-func (surface *SurfaceInstance) GetScaleFactor() int {
+func (surface *SurfaceInstance) GetScaleFactor() int32 {
 	var carg0 *C.GdkSurface // in, none, converted
 	var cret  C.int         // return, none, casted, casted C.gint
 
@@ -22280,9 +22516,9 @@ func (surface *SurfaceInstance) GetScaleFactor() int {
 	cret = C.gdk_surface_get_scale_factor(carg0)
 	runtime.KeepAlive(surface)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -22291,13 +22527,13 @@ func (surface *SurfaceInstance) GetScaleFactor() int {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Returns the width of the given @surface.
 // 
 // Surface size is reported in ”application pixels”, not
 // ”device pixels” (see [method@Gdk.Surface.get_scale_factor]).
-func (surface *SurfaceInstance) GetWidth() int {
+func (surface *SurfaceInstance) GetWidth() int32 {
 	var carg0 *C.GdkSurface // in, none, converted
 	var cret  C.int         // return, none, casted, casted C.gint
 
@@ -22306,9 +22542,9 @@ func (surface *SurfaceInstance) GetWidth() int {
 	cret = C.gdk_surface_get_width(carg0)
 	runtime.KeepAlive(surface)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -22463,7 +22699,7 @@ func (o *SurfaceInstance) ConnectEvent(fn func(Surface, unsafe.Pointer) bool) go
 // 
 // Surface size is reported in ”application pixels”, not
 // ”device pixels” (see gdk_surface_get_scale_factor()).
-func (o *SurfaceInstance) ConnectLayout(fn func(Surface, int, int)) gobject.SignalHandle {
+func (o *SurfaceInstance) ConnectLayout(fn func(Surface, int32, int32)) gobject.SignalHandle {
 	return o.Connect("layout", fn)
 }
 
@@ -22547,18 +22783,18 @@ type Texture interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Returns the height of the @texture, in pixels.
-	GetHeight() int
+	GetHeight() int32
 	// GetWidth wraps gdk_texture_get_width
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Returns the width of @texture, in pixels.
-	GetWidth() int
+	GetWidth() int32
 	// SaveToPNG wraps gdk_texture_save_to_png
 	// 
 	// The function takes the following parameters:
@@ -22657,6 +22893,11 @@ func UnsafeTextureFromGlibNone(c unsafe.Pointer) Texture {
 // UnsafeTextureFromGlibFull is used to convert raw GdkTexture pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeTextureFromGlibFull(c unsafe.Pointer) Texture {
 	return gobject.UnsafeObjectFromGlibFull(c).(Texture)
+}
+
+// UnsafeTextureFromGlibBorrow is used to convert raw GdkTexture pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeTextureFromGlibBorrow(c unsafe.Pointer) Texture {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Texture)
 }
 
 func (t *TextureInstance) upcastToGdkTexture() *TextureInstance {
@@ -22929,10 +23170,10 @@ func (self *TextureInstance) GetFormat() MemoryFormat {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Returns the height of the @texture, in pixels.
-func (texture *TextureInstance) GetHeight() int {
+func (texture *TextureInstance) GetHeight() int32 {
 	var carg0 *C.GdkTexture // in, none, converted
 	var cret  C.int         // return, none, casted, casted C.gint
 
@@ -22941,9 +23182,9 @@ func (texture *TextureInstance) GetHeight() int {
 	cret = C.gdk_texture_get_height(carg0)
 	runtime.KeepAlive(texture)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -22952,10 +23193,10 @@ func (texture *TextureInstance) GetHeight() int {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Returns the width of @texture, in pixels.
-func (texture *TextureInstance) GetWidth() int {
+func (texture *TextureInstance) GetWidth() int32 {
 	var carg0 *C.GdkTexture // in, none, converted
 	var cret  C.int         // return, none, casted, casted C.gint
 
@@ -22964,9 +23205,9 @@ func (texture *TextureInstance) GetWidth() int {
 	cret = C.gdk_texture_get_width(carg0)
 	runtime.KeepAlive(texture)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -23158,6 +23399,11 @@ func UnsafeCairoContextFromGlibFull(c unsafe.Pointer) CairoContext {
 	return gobject.UnsafeObjectFromGlibFull(c).(CairoContext)
 }
 
+// UnsafeCairoContextFromGlibBorrow is used to convert raw GdkCairoContext pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeCairoContextFromGlibBorrow(c unsafe.Pointer) CairoContext {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(CairoContext)
+}
+
 func (c *CairoContextInstance) upcastToGdkCairoContext() *CairoContextInstance {
 	return c
 }
@@ -23225,6 +23471,11 @@ func UnsafeDmabufTextureFromGlibNone(c unsafe.Pointer) DmabufTexture {
 // UnsafeDmabufTextureFromGlibFull is used to convert raw GdkDmabufTexture pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeDmabufTextureFromGlibFull(c unsafe.Pointer) DmabufTexture {
 	return gobject.UnsafeObjectFromGlibFull(c).(DmabufTexture)
+}
+
+// UnsafeDmabufTextureFromGlibBorrow is used to convert raw GdkDmabufTexture pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeDmabufTextureFromGlibBorrow(c unsafe.Pointer) DmabufTexture {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(DmabufTexture)
 }
 
 func (d *DmabufTextureInstance) upcastToGdkDmabufTexture() *DmabufTextureInstance {
@@ -23298,6 +23549,11 @@ func UnsafeGLTextureFromGlibNone(c unsafe.Pointer) GLTexture {
 // UnsafeGLTextureFromGlibFull is used to convert raw GdkGLTexture pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeGLTextureFromGlibFull(c unsafe.Pointer) GLTexture {
 	return gobject.UnsafeObjectFromGlibFull(c).(GLTexture)
+}
+
+// UnsafeGLTextureFromGlibBorrow is used to convert raw GdkGLTexture pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeGLTextureFromGlibBorrow(c unsafe.Pointer) GLTexture {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(GLTexture)
 }
 
 func (g *GLTextureInstance) upcastToGdkGLTexture() *GLTextureInstance {
@@ -23380,6 +23636,11 @@ func UnsafeMemoryTextureFromGlibFull(c unsafe.Pointer) MemoryTexture {
 	return gobject.UnsafeObjectFromGlibFull(c).(MemoryTexture)
 }
 
+// UnsafeMemoryTextureFromGlibBorrow is used to convert raw GdkMemoryTexture pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeMemoryTextureFromGlibBorrow(c unsafe.Pointer) MemoryTexture {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(MemoryTexture)
+}
+
 func (m *MemoryTextureInstance) upcastToGdkMemoryTexture() *MemoryTextureInstance {
 	return m
 }
@@ -23398,8 +23659,8 @@ func UnsafeMemoryTextureToGlibFull(c MemoryTexture) unsafe.Pointer {
 // 
 // The function takes the following parameters:
 // 
-// 	- width int: the width of the texture 
-// 	- height int: the height of the texture 
+// 	- width int32: the width of the texture 
+// 	- height int32: the height of the texture 
 // 	- format MemoryFormat: the format of the data 
 // 	- bytes *glib.Bytes: the `GBytes` containing the pixel data 
 // 	- stride uint: rowstride for the data 
@@ -23412,7 +23673,7 @@ func UnsafeMemoryTextureToGlibFull(c MemoryTexture) unsafe.Pointer {
 // 
 // The `GBytes` must contain @stride × @height pixels
 // in the given format.
-func NewMemoryTexture(width int, height int, format MemoryFormat, bytes *glib.Bytes, stride uint) MemoryTexture {
+func NewMemoryTexture(width int32, height int32, format MemoryFormat, bytes *glib.Bytes, stride uint) MemoryTexture {
 	var carg1 C.int             // in, none, casted, casted C.gint
 	var carg2 C.int             // in, none, casted, casted C.gint
 	var carg3 C.GdkMemoryFormat // in, none, casted
@@ -23506,8 +23767,11 @@ func marshalColorState(p unsafe.Pointer) (interface{}, error) {
 	return UnsafeColorStateFromGlibBorrow(b), nil
 }
 
-func (r *ColorState) InitGoValue(v *gobject.Value) {
-	v.Init(TypeColorState)
+func (r *ColorState) GoValueType() gobject.Type {
+	return TypeColorState
+}
+
+func (r *ColorState) SetGoValue(v *gobject.Value) {
 	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
@@ -23791,8 +24055,11 @@ func marshalContentFormats(p unsafe.Pointer) (interface{}, error) {
 	return UnsafeContentFormatsFromGlibBorrow(b), nil
 }
 
-func (r *ContentFormats) InitGoValue(v *gobject.Value) {
-	v.Init(TypeContentFormats)
+func (r *ContentFormats) GoValueType() gobject.Type {
+	return TypeContentFormats
+}
+
+func (r *ContentFormats) SetGoValue(v *gobject.Value) {
 	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
@@ -24361,8 +24628,11 @@ func marshalContentFormatsBuilder(p unsafe.Pointer) (interface{}, error) {
 	return UnsafeContentFormatsBuilderFromGlibBorrow(b), nil
 }
 
-func (r *ContentFormatsBuilder) InitGoValue(v *gobject.Value) {
-	v.Init(TypeContentFormatsBuilder)
+func (r *ContentFormatsBuilder) GoValueType() gobject.Type {
+	return TypeContentFormatsBuilder
+}
+
+func (r *ContentFormatsBuilder) SetGoValue(v *gobject.Value) {
 	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
@@ -24673,8 +24943,11 @@ func marshalDmabufFormats(p unsafe.Pointer) (interface{}, error) {
 	return UnsafeDmabufFormatsFromGlibBorrow(b), nil
 }
 
-func (r *DmabufFormats) InitGoValue(v *gobject.Value) {
-	v.Init(TypeDmabufFormats)
+func (r *DmabufFormats) GoValueType() gobject.Type {
+	return TypeDmabufFormats
+}
+
+func (r *DmabufFormats) SetGoValue(v *gobject.Value) {
 	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
@@ -25029,8 +25302,11 @@ func marshalDragSurfaceSize(p unsafe.Pointer) (interface{}, error) {
 	return UnsafeDragSurfaceSizeFromGlibBorrow(b), nil
 }
 
-func (r *DragSurfaceSize) InitGoValue(v *gobject.Value) {
-	v.Init(TypeDragSurfaceSize)
+func (r *DragSurfaceSize) GoValueType() gobject.Type {
+	return TypeDragSurfaceSize
+}
+
+func (r *DragSurfaceSize) SetGoValue(v *gobject.Value) {
 	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
@@ -25089,11 +25365,11 @@ func UnsafeDragSurfaceSizeToGlibFull(d *DragSurfaceSize) unsafe.Pointer {
 // 
 // The function takes the following parameters:
 // 
-// 	- width int: the width 
-// 	- height int: the height 
+// 	- width int32: the width 
+// 	- height int32: the height 
 //
 // Sets the size the drag surface prefers to be resized to.
-func (size *DragSurfaceSize) SetSize(width int, height int) {
+func (size *DragSurfaceSize) SetSize(width int32, height int32) {
 	var carg0 *C.GdkDragSurfaceSize // in, none, converted
 	var carg1 C.int                 // in, none, casted, casted C.gint
 	var carg2 C.int                 // in, none, casted, casted C.gint
@@ -25128,8 +25404,11 @@ func marshalEventSequence(p unsafe.Pointer) (interface{}, error) {
 	return UnsafeEventSequenceFromGlibBorrow(b), nil
 }
 
-func (r *EventSequence) InitGoValue(v *gobject.Value) {
-	v.Init(TypeEventSequence)
+func (r *EventSequence) GoValueType() gobject.Type {
+	return TypeEventSequence
+}
+
+func (r *EventSequence) SetGoValue(v *gobject.Value) {
 	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
@@ -25203,8 +25482,11 @@ func marshalFileList(p unsafe.Pointer) (interface{}, error) {
 	return UnsafeFileListFromGlibBorrow(b), nil
 }
 
-func (r *FileList) InitGoValue(v *gobject.Value) {
-	v.Init(TypeFileList)
+func (r *FileList) GoValueType() gobject.Type {
+	return TypeFileList
+}
+
+func (r *FileList) SetGoValue(v *gobject.Value) {
 	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
@@ -25388,8 +25670,11 @@ func marshalFrameTimings(p unsafe.Pointer) (interface{}, error) {
 	return UnsafeFrameTimingsFromGlibBorrow(b), nil
 }
 
-func (r *FrameTimings) InitGoValue(v *gobject.Value) {
-	v.Init(TypeFrameTimings)
+func (r *FrameTimings) GoValueType() gobject.Type {
+	return TypeFrameTimings
+}
+
+func (r *FrameTimings) SetGoValue(v *gobject.Value) {
 	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
@@ -26060,8 +26345,11 @@ func marshalPopupLayout(p unsafe.Pointer) (interface{}, error) {
 	return UnsafePopupLayoutFromGlibBorrow(b), nil
 }
 
-func (r *PopupLayout) InitGoValue(v *gobject.Value) {
-	v.Init(TypePopupLayout)
+func (r *PopupLayout) GoValueType() gobject.Type {
+	return TypePopupLayout
+}
+
+func (r *PopupLayout) SetGoValue(v *gobject.Value) {
 	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
@@ -26274,11 +26562,11 @@ func (layout *PopupLayout) GetAnchorRect() *Rectangle {
 // 
 // The function returns the following values:
 // 
-// 	- dx int: return location for the delta X coordinate 
-// 	- dy int: return location for the delta Y coordinate 
+// 	- dx int32: return location for the delta X coordinate 
+// 	- dy int32: return location for the delta Y coordinate 
 //
 // Retrieves the offset for the anchor rectangle.
-func (layout *PopupLayout) GetOffset() (int, int) {
+func (layout *PopupLayout) GetOffset() (int32, int32) {
 	var carg0 *C.GdkPopupLayout // in, none, converted
 	var carg1 C.int             // out, full, casted, casted C.gint
 	var carg2 C.int             // out, full, casted, casted C.gint
@@ -26288,11 +26576,11 @@ func (layout *PopupLayout) GetOffset() (int, int) {
 	C.gdk_popup_layout_get_offset(carg0, &carg1, &carg2)
 	runtime.KeepAlive(layout)
 
-	var dx int
-	var dy int
+	var dx int32
+	var dy int32
 
-	dx = int(carg1)
-	dy = int(carg2)
+	dx = int32(carg1)
+	dy = int32(carg2)
 
 	return dx, dy
 }
@@ -26324,13 +26612,13 @@ func (layout *PopupLayout) GetRectAnchor() Gravity {
 // 
 // The function returns the following values:
 // 
-// 	- left int: return location for the left shadow width 
-// 	- right int: return location for the right shadow width 
-// 	- top int: return location for the top shadow width 
-// 	- bottom int: return location for the bottom shadow width 
+// 	- left int32: return location for the left shadow width 
+// 	- right int32: return location for the right shadow width 
+// 	- top int32: return location for the top shadow width 
+// 	- bottom int32: return location for the bottom shadow width 
 //
 // Obtains the shadow widths of this layout.
-func (layout *PopupLayout) GetShadowWidth() (int, int, int, int) {
+func (layout *PopupLayout) GetShadowWidth() (int32, int32, int32, int32) {
 	var carg0 *C.GdkPopupLayout // in, none, converted
 	var carg1 C.int             // out, full, casted, casted C.gint
 	var carg2 C.int             // out, full, casted, casted C.gint
@@ -26342,15 +26630,15 @@ func (layout *PopupLayout) GetShadowWidth() (int, int, int, int) {
 	C.gdk_popup_layout_get_shadow_width(carg0, &carg1, &carg2, &carg3, &carg4)
 	runtime.KeepAlive(layout)
 
-	var left   int
-	var right  int
-	var top    int
-	var bottom int
+	var left   int32
+	var right  int32
+	var top    int32
+	var bottom int32
 
-	left = int(carg1)
-	right = int(carg2)
-	top = int(carg3)
-	bottom = int(carg4)
+	left = int32(carg1)
+	right = int32(carg2)
+	top = int32(carg3)
+	bottom = int32(carg4)
 
 	return left, right, top, bottom
 }
@@ -26426,11 +26714,11 @@ func (layout *PopupLayout) SetAnchorRect(anchorRect *Rectangle) {
 // 
 // The function takes the following parameters:
 // 
-// 	- dx int: x delta to offset the anchor rectangle with 
-// 	- dy int: y delta to offset the anchor rectangle with 
+// 	- dx int32: x delta to offset the anchor rectangle with 
+// 	- dy int32: y delta to offset the anchor rectangle with 
 //
 // Offset the position of the anchor rectangle with the given delta.
-func (layout *PopupLayout) SetOffset(dx int, dy int) {
+func (layout *PopupLayout) SetOffset(dx int32, dy int32) {
 	var carg0 *C.GdkPopupLayout // in, none, converted
 	var carg1 C.int             // in, none, casted, casted C.gint
 	var carg2 C.int             // in, none, casted, casted C.gint
@@ -26468,17 +26756,17 @@ func (layout *PopupLayout) SetRectAnchor(anchor Gravity) {
 // 
 // The function takes the following parameters:
 // 
-// 	- left int: width of the left part of the shadow 
-// 	- right int: width of the right part of the shadow 
-// 	- top int: height of the top part of the shadow 
-// 	- bottom int: height of the bottom part of the shadow 
+// 	- left int32: width of the left part of the shadow 
+// 	- right int32: width of the right part of the shadow 
+// 	- top int32: height of the top part of the shadow 
+// 	- bottom int32: height of the bottom part of the shadow 
 //
 // Sets the shadow width of the popup.
 // 
 // The shadow width corresponds to the part of the computed
 // surface size that would consist of the shadow margin
 // surrounding the window, would there be any.
-func (layout *PopupLayout) SetShadowWidth(left int, right int, top int, bottom int) {
+func (layout *PopupLayout) SetShadowWidth(left int32, right int32, top int32, bottom int32) {
 	var carg0 *C.GdkPopupLayout // in, none, converted
 	var carg1 C.int             // in, none, casted, casted C.gint
 	var carg2 C.int             // in, none, casted, casted C.gint
@@ -26545,8 +26833,11 @@ func marshalRGBA(p unsafe.Pointer) (interface{}, error) {
 	return UnsafeRGBAFromGlibBorrow(b), nil
 }
 
-func (r *RGBA) InitGoValue(v *gobject.Value) {
-	v.Init(TypeRGBA)
+func (r *RGBA) GoValueType() gobject.Type {
+	return TypeRGBA
+}
+
+func (r *RGBA) SetGoValue(v *gobject.Value) {
 	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
@@ -26802,8 +27093,11 @@ func marshalRectangle(p unsafe.Pointer) (interface{}, error) {
 	return UnsafeRectangleFromGlibBorrow(b), nil
 }
 
-func (r *Rectangle) InitGoValue(v *gobject.Value) {
-	v.Init(TypeRectangle)
+func (r *Rectangle) GoValueType() gobject.Type {
+	return TypeRectangle
+}
+
+func (r *Rectangle) SetGoValue(v *gobject.Value) {
 	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
@@ -26862,15 +27156,15 @@ func UnsafeRectangleToGlibFull(r *Rectangle) unsafe.Pointer {
 // 
 // The function takes the following parameters:
 // 
-// 	- x int: X coordinate 
-// 	- y int: Y coordinate 
+// 	- x int32: X coordinate 
+// 	- y int32: Y coordinate 
 // 
 // The function returns the following values:
 // 
 // 	- goret bool 
 //
 // Returns %TRUE if @rect contains the point described by @x and @y.
-func (rect *Rectangle) ContainsPoint(x int, y int) bool {
+func (rect *Rectangle) ContainsPoint(x int32, y int32) bool {
 	var carg0 *C.GdkRectangle // in, none, converted
 	var carg1 C.int           // in, none, casted, casted C.gint
 	var carg2 C.int           // in, none, casted, casted C.gint
@@ -27152,8 +27446,11 @@ func marshalTextureDownloader(p unsafe.Pointer) (interface{}, error) {
 	return UnsafeTextureDownloaderFromGlibBorrow(b), nil
 }
 
-func (r *TextureDownloader) InitGoValue(v *gobject.Value) {
-	v.Init(TypeTextureDownloader)
+func (r *TextureDownloader) GoValueType() gobject.Type {
+	return TypeTextureDownloader
+}
+
+func (r *TextureDownloader) SetGoValue(v *gobject.Value) {
 	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
@@ -27583,8 +27880,11 @@ func marshalToplevelLayout(p unsafe.Pointer) (interface{}, error) {
 	return UnsafeToplevelLayoutFromGlibBorrow(b), nil
 }
 
-func (r *ToplevelLayout) InitGoValue(v *gobject.Value) {
-	v.Init(TypeToplevelLayout)
+func (r *ToplevelLayout) GoValueType() gobject.Type {
+	return TypeToplevelLayout
+}
+
+func (r *ToplevelLayout) SetGoValue(v *gobject.Value) {
 	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
@@ -27936,8 +28236,11 @@ func marshalToplevelSize(p unsafe.Pointer) (interface{}, error) {
 	return UnsafeToplevelSizeFromGlibBorrow(b), nil
 }
 
-func (r *ToplevelSize) InitGoValue(v *gobject.Value) {
-	v.Init(TypeToplevelSize)
+func (r *ToplevelSize) GoValueType() gobject.Type {
+	return TypeToplevelSize
+}
+
+func (r *ToplevelSize) SetGoValue(v *gobject.Value) {
 	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
@@ -27996,8 +28299,8 @@ func UnsafeToplevelSizeToGlibFull(t *ToplevelSize) unsafe.Pointer {
 // 
 // The function returns the following values:
 // 
-// 	- boundsWidth int: return location for width 
-// 	- boundsHeight int: return location for height 
+// 	- boundsWidth int32: return location for width 
+// 	- boundsHeight int32: return location for height 
 //
 // Retrieves the bounds the toplevel is placed within.
 // 
@@ -28006,7 +28309,7 @@ func UnsafeToplevelSizeToGlibFull(t *ToplevelSize) unsafe.Pointer {
 // be equivalent to the dimensions of the work area or the monitor on which the
 // window is being presented on, or something else that limits the way a
 // toplevel can be presented.
-func (size *ToplevelSize) GetBounds() (int, int) {
+func (size *ToplevelSize) GetBounds() (int32, int32) {
 	var carg0 *C.GdkToplevelSize // in, none, converted
 	var carg1 C.int              // out, full, casted, casted C.gint
 	var carg2 C.int              // out, full, casted, casted C.gint
@@ -28016,11 +28319,11 @@ func (size *ToplevelSize) GetBounds() (int, int) {
 	C.gdk_toplevel_size_get_bounds(carg0, &carg1, &carg2)
 	runtime.KeepAlive(size)
 
-	var boundsWidth  int
-	var boundsHeight int
+	var boundsWidth  int32
+	var boundsHeight int32
 
-	boundsWidth = int(carg1)
-	boundsHeight = int(carg2)
+	boundsWidth = int32(carg1)
+	boundsHeight = int32(carg2)
 
 	return boundsWidth, boundsHeight
 }
@@ -28029,8 +28332,8 @@ func (size *ToplevelSize) GetBounds() (int, int) {
 // 
 // The function takes the following parameters:
 // 
-// 	- minWidth int: the minimum width 
-// 	- minHeight int: the minimum height 
+// 	- minWidth int32: the minimum width 
+// 	- minHeight int32: the minimum height 
 //
 // Sets the minimum size of the toplevel.
 // 
@@ -28041,7 +28344,7 @@ func (size *ToplevelSize) GetBounds() (int, int) {
 // 
 // The minimum size should be within the bounds (see
 // [method@Gdk.ToplevelSize.get_bounds]).
-func (size *ToplevelSize) SetMinSize(minWidth int, minHeight int) {
+func (size *ToplevelSize) SetMinSize(minWidth int32, minHeight int32) {
 	var carg0 *C.GdkToplevelSize // in, none, converted
 	var carg1 C.int              // in, none, casted, casted C.gint
 	var carg2 C.int              // in, none, casted, casted C.gint
@@ -28060,10 +28363,10 @@ func (size *ToplevelSize) SetMinSize(minWidth int, minHeight int) {
 // 
 // The function takes the following parameters:
 // 
-// 	- left int: width of the left part of the shadow 
-// 	- right int: width of the right part of the shadow 
-// 	- top int: height of the top part of the shadow 
-// 	- bottom int: height of the bottom part of the shadow 
+// 	- left int32: width of the left part of the shadow 
+// 	- right int32: width of the right part of the shadow 
+// 	- top int32: height of the top part of the shadow 
+// 	- bottom int32: height of the bottom part of the shadow 
 //
 // Sets the shadows size of the toplevel.
 // 
@@ -28073,7 +28376,7 @@ func (size *ToplevelSize) SetMinSize(minWidth int, minHeight int) {
 // 
 // Shadow width should only be set if
 // [method@Gtk.Display.supports_shadow_width] is %TRUE.
-func (size *ToplevelSize) SetShadowWidth(left int, right int, top int, bottom int) {
+func (size *ToplevelSize) SetShadowWidth(left int32, right int32, top int32, bottom int32) {
 	var carg0 *C.GdkToplevelSize // in, none, converted
 	var carg1 C.int              // in, none, casted, casted C.gint
 	var carg2 C.int              // in, none, casted, casted C.gint
@@ -28098,8 +28401,8 @@ func (size *ToplevelSize) SetShadowWidth(left int, right int, top int, bottom in
 // 
 // The function takes the following parameters:
 // 
-// 	- width int: the width 
-// 	- height int: the height 
+// 	- width int32: the width 
+// 	- height int32: the height 
 //
 // Sets the size the toplevel prefers to be resized to.
 // 
@@ -28107,7 +28410,7 @@ func (size *ToplevelSize) SetShadowWidth(left int, right int, top int, bottom in
 // [method@Gdk.ToplevelSize.get_bounds]). The set size should
 // be considered as a hint, and should not be assumed to be
 // respected by the windowing system, or backend.
-func (size *ToplevelSize) SetSize(width int, height int) {
+func (size *ToplevelSize) SetSize(width int32, height int32) {
 	var carg0 *C.GdkToplevelSize // in, none, converted
 	var carg1 C.int              // in, none, casted, casted C.gint
 	var carg2 C.int              // in, none, casted, casted C.gint

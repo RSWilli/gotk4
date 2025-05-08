@@ -11,66 +11,6 @@ import (
 // #include <glib.h>
 import "C"
 
-//export _gotk4_glib2_CompareDataFunc
-func _gotk4_glib2_CompareDataFunc(carg1 C.gconstpointer, carg2 C.gconstpointer, carg3 C.gpointer) (cret C.gint) {
-	var fn CompareDataFunc
-	{
-		v := userdata.Load(unsafe.Pointer(carg3))
-		if v == nil {
-			panic(`callback not found`)
-		}
-		fn = v.(CompareDataFunc)
-	}
-
-	var a     unsafe.Pointer // in, none, casted, nullable
-	var b     unsafe.Pointer // in, none, casted, nullable
-	var goret int            // return, none, casted
-
-	if carg1 != nil {
-		a = unsafe.Pointer(carg1)
-	}
-	if carg2 != nil {
-		b = unsafe.Pointer(carg2)
-	}
-
-	goret = fn(a, b)
-
-	cret = C.gint(goret)
-
-	return cret
-}
-
-//export _gotk4_glib2_EqualFuncFull
-func _gotk4_glib2_EqualFuncFull(carg1 C.gconstpointer, carg2 C.gconstpointer, carg3 C.gpointer) (cret C.gboolean) {
-	var fn EqualFuncFull
-	{
-		v := userdata.Load(unsafe.Pointer(carg3))
-		if v == nil {
-			panic(`callback not found`)
-		}
-		fn = v.(EqualFuncFull)
-	}
-
-	var a     unsafe.Pointer // in, none, casted, nullable
-	var b     unsafe.Pointer // in, none, casted, nullable
-	var goret bool           // return
-
-	if carg1 != nil {
-		a = unsafe.Pointer(carg1)
-	}
-	if carg2 != nil {
-		b = unsafe.Pointer(carg2)
-	}
-
-	goret = fn(a, b)
-
-	if goret {
-		cret = C.TRUE
-	}
-
-	return cret
-}
-
 //export _gotk4_glib2_LogFunc
 func _gotk4_glib2_LogFunc(carg1 *C.gchar, carg2 C.GLogLevelFlags, carg3 *C.gchar, carg4 C.gpointer) {
 	var fn LogFunc
@@ -168,11 +108,11 @@ func _gotk4_glib2_ChildWatchFunc(carg1 C.GPid, carg2 C.gint, carg3 C.gpointer) {
 		fn = v.(ChildWatchFunc)
 	}
 
-	var pid        Pid // in, none, casted, alias
-	var waitStatus int // in, none, casted
+	var pid        Pid   // in, none, casted, alias
+	var waitStatus int32 // in, none, casted
 
 	pid = Pid(carg1)
-	waitStatus = int(carg2)
+	waitStatus = int32(carg2)
 
 	fn(pid, waitStatus)
 }

@@ -156,8 +156,11 @@ func (b BindingFlags) Has(other BindingFlags) bool {
 
 var _ GoValueInitializer = BindingFlags(0)
 
-func (f BindingFlags) InitGoValue(v *Value) {
-	v.Init(TypeBindingFlags)
+func (f BindingFlags) GoValueType() Type {
+	return TypeBindingFlags
+}
+
+func (f BindingFlags) SetGoValue(v *Value) {
 	v.SetFlags(int(f))
 }
 
@@ -257,8 +260,11 @@ func (i IOCondition) Has(other IOCondition) bool {
 
 var _ GoValueInitializer = IOCondition(0)
 
-func (f IOCondition) InitGoValue(v *Value) {
-	v.Init(TypeIOCondition)
+func (f IOCondition) GoValueType() Type {
+	return TypeIOCondition
+}
+
+func (f IOCondition) SetGoValue(v *Value) {
 	v.SetFlags(int(f))
 }
 
@@ -758,14 +764,14 @@ func EnumCompleteTypeInfo(gEnumType Type, constValues *EnumValue) TypeInfo {
 // The function takes the following parameters:
 // 
 // 	- enumClass *EnumClass: a #GEnumClass 
-// 	- value int: the value to look up 
+// 	- value int32: the value to look up 
 // 
 // The function returns the following values:
 // 
 // 	- goret *EnumValue (nullable) 
 //
 // Returns the #GEnumValue for a value.
-func EnumGetValue(enumClass *EnumClass, value int) *EnumValue {
+func EnumGetValue(enumClass *EnumClass, value int32) *EnumValue {
 	var carg1 *C.GEnumClass // in, none, converted
 	var carg2 C.gint        // in, none, casted
 	var cret  *C.GEnumValue // return, none, converted, nullable
@@ -898,7 +904,7 @@ func EnumRegisterStatic(name string, constStaticValues *EnumValue) Type {
 // The function takes the following parameters:
 // 
 // 	- gEnumType Type: the type identifier of a #GEnumClass type 
-// 	- value int: the value 
+// 	- value int32: the value 
 // 
 // The function returns the following values:
 // 
@@ -908,7 +914,7 @@ func EnumRegisterStatic(name string, constStaticValues *EnumValue) Type {
 // 
 // This is intended to be used for debugging purposes. The format of the output
 // may change in the future.
-func EnumToString(gEnumType Type, value int) string {
+func EnumToString(gEnumType Type, value int32) string {
 	var carg1 C.GType  // in, none, casted, alias
 	var carg2 C.gint   // in, none, casted
 	var cret  *C.gchar // return, full, string
@@ -1395,7 +1401,7 @@ func ParamSpecDouble(name string, nick string, blurb string, minimum float64, ma
 // 	- nick string (nullable): nick name for the property specified 
 // 	- blurb string (nullable): description of the property specified 
 // 	- enumType Type: a #GType derived from %G_TYPE_ENUM 
-// 	- defaultValue int: default value for the property specified 
+// 	- defaultValue int32: default value for the property specified 
 // 	- flags ParamFlags: flags for the property specified 
 // 
 // The function returns the following values:
@@ -1406,7 +1412,7 @@ func ParamSpecDouble(name string, nick string, blurb string, minimum float64, ma
 // property.
 // 
 // See g_param_spec_internal() for details on property names.
-func ParamSpecEnum(name string, nick string, blurb string, enumType Type, defaultValue int, flags ParamFlags) *ParamSpec {
+func ParamSpecEnum(name string, nick string, blurb string, enumType Type, defaultValue int32, flags ParamFlags) *ParamSpec {
 	var carg1 *C.gchar      // in, none, string
 	var carg2 *C.gchar      // in, none, string, nullable-string
 	var carg3 *C.gchar      // in, none, string, nullable-string
@@ -1615,16 +1621,16 @@ func ParamSpecGType(name string, nick string, blurb string, isAType Type, flags 
 	return goret
 }
 
-// ParamSpecInt wraps g_param_spec_int
+// ParamSpecInt32 wraps g_param_spec_int
 // 
 // The function takes the following parameters:
 // 
 // 	- name string: canonical name of the property specified 
 // 	- nick string (nullable): nick name for the property specified 
 // 	- blurb string (nullable): description of the property specified 
-// 	- minimum int: minimum value for the property specified 
-// 	- maximum int: maximum value for the property specified 
-// 	- defaultValue int: default value for the property specified 
+// 	- minimum int32: minimum value for the property specified 
+// 	- maximum int32: maximum value for the property specified 
+// 	- defaultValue int32: default value for the property specified 
 // 	- flags ParamFlags: flags for the property specified 
 // 
 // The function returns the following values:
@@ -1634,7 +1640,7 @@ func ParamSpecGType(name string, nick string, blurb string, isAType Type, flags 
 // Creates a new #GParamSpecInt instance specifying a %G_TYPE_INT property.
 // 
 // See g_param_spec_internal() for details on property names.
-func ParamSpecInt(name string, nick string, blurb string, minimum int, maximum int, defaultValue int, flags ParamFlags) *ParamSpec {
+func ParamSpecInt32(name string, nick string, blurb string, minimum int32, maximum int32, defaultValue int32, flags ParamFlags) *ParamSpec {
 	var carg1 *C.gchar      // in, none, string
 	var carg2 *C.gchar      // in, none, string, nullable-string
 	var carg3 *C.gchar      // in, none, string, nullable-string
@@ -2486,12 +2492,12 @@ func ParamValueValidate(pspec *ParamSpec, value *Value) bool {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Compares @value1 with @value2 according to @pspec, and return -1, 0 or +1,
 // if @value1 is found to be less than, equal to or greater than @value2,
 // respectively.
-func ParamValuesCmp(pspec *ParamSpec, value1 *Value, value2 *Value) int {
+func ParamValuesCmp(pspec *ParamSpec, value1 *Value, value2 *Value) int32 {
 	var carg1 *C.GParamSpec // in, none, converted
 	var carg2 *C.GValue     // in, none, converted
 	var carg3 *C.GValue     // in, none, converted
@@ -2506,9 +2512,9 @@ func ParamValuesCmp(pspec *ParamSpec, value1 *Value, value2 *Value) int {
 	runtime.KeepAlive(value1)
 	runtime.KeepAlive(value2)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -2792,8 +2798,8 @@ func TypeAddClassPrivate(classType Type, privateSize uint) {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
-func TypeAddInstancePrivate(classType Type, privateSize uint) int {
+// 	- goret int32 
+func TypeAddInstancePrivate(classType Type, privateSize uint) int32 {
 	var carg1 C.GType // in, none, casted, alias
 	var carg2 C.gsize // in, none, casted
 	var cret  C.gint  // return, none, casted
@@ -2805,9 +2811,9 @@ func TypeAddInstancePrivate(classType Type, privateSize uint) int {
 	runtime.KeepAlive(classType)
 	runtime.KeepAlive(privateSize)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -3157,13 +3163,13 @@ func TypeFundamentalNext() Type {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Returns the number of instances allocated of the particular type;
 // this is only available if GLib is built with debugging support and
 // the `instance-count` debug flag is set (by setting the `GOBJECT_DEBUG`
 // variable to include `instance-count`).
-func TypeGetInstanceCount(typ Type) int {
+func TypeGetInstanceCount(typ Type) int32 {
 	var carg1 C.GType // in, none, casted, alias
 	var cret  C.int   // return, none, casted, casted C.gint
 
@@ -3172,9 +3178,9 @@ func TypeGetInstanceCount(typ Type) int {
 	cret = C.g_type_get_instance_count(carg1)
 	runtime.KeepAlive(typ)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -3513,6 +3519,11 @@ func UnsafeBindingGroupFromGlibFull(c unsafe.Pointer) BindingGroup {
 	return UnsafeObjectFromGlibFull(c).(BindingGroup)
 }
 
+// UnsafeBindingGroupFromGlibBorrow is used to convert raw GBindingGroup pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeBindingGroupFromGlibBorrow(c unsafe.Pointer) BindingGroup {
+	return UnsafeObjectFromGlibBorrow(c).(BindingGroup)
+}
+
 func (b *BindingGroupInstance) upcastToGBindingGroup() *BindingGroupInstance {
 	return b
 }
@@ -3583,6 +3594,11 @@ func UnsafeInitiallyUnownedFromGlibNone(c unsafe.Pointer) InitiallyUnowned {
 // UnsafeInitiallyUnownedFromGlibFull is used to convert raw GInitiallyUnowned pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeInitiallyUnownedFromGlibFull(c unsafe.Pointer) InitiallyUnowned {
 	return UnsafeObjectFromGlibFull(c).(InitiallyUnowned)
+}
+
+// UnsafeInitiallyUnownedFromGlibBorrow is used to convert raw GInitiallyUnowned pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeInitiallyUnownedFromGlibBorrow(c unsafe.Pointer) InitiallyUnowned {
+	return UnsafeObjectFromGlibBorrow(c).(InitiallyUnowned)
 }
 
 func (i *InitiallyUnownedInstance) upcastToGInitiallyUnowned() *InitiallyUnownedInstance {

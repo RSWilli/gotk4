@@ -114,6 +114,11 @@ func UnsafeWaylandDeviceFromGlibFull(c unsafe.Pointer) WaylandDevice {
 	return gobject.UnsafeObjectFromGlibFull(c).(WaylandDevice)
 }
 
+// UnsafeWaylandDeviceFromGlibBorrow is used to convert raw GdkWaylandDevice pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeWaylandDeviceFromGlibBorrow(c unsafe.Pointer) WaylandDevice {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(WaylandDevice)
+}
+
 func (w *WaylandDeviceInstance) upcastToGdkWaylandDevice() *WaylandDeviceInstance {
 	return w
 }
@@ -220,6 +225,11 @@ func UnsafeWaylandDisplayFromGlibFull(c unsafe.Pointer) WaylandDisplay {
 	return gobject.UnsafeObjectFromGlibFull(c).(WaylandDisplay)
 }
 
+// UnsafeWaylandDisplayFromGlibBorrow is used to convert raw GdkWaylandDisplay pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeWaylandDisplayFromGlibBorrow(c unsafe.Pointer) WaylandDisplay {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(WaylandDisplay)
+}
+
 func (w *WaylandDisplayInstance) upcastToGdkWaylandDisplay() *WaylandDisplayInstance {
 	return w
 }
@@ -308,6 +318,11 @@ func UnsafeWaylandGLContextFromGlibFull(c unsafe.Pointer) WaylandGLContext {
 	return gobject.UnsafeObjectFromGlibFull(c).(WaylandGLContext)
 }
 
+// UnsafeWaylandGLContextFromGlibBorrow is used to convert raw GdkWaylandGLContext pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeWaylandGLContextFromGlibBorrow(c unsafe.Pointer) WaylandGLContext {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(WaylandGLContext)
+}
+
 func (w *WaylandGLContextInstance) upcastToGdkWaylandGLContext() *WaylandGLContextInstance {
 	return w
 }
@@ -362,6 +377,11 @@ func UnsafeWaylandMonitorFromGlibNone(c unsafe.Pointer) WaylandMonitor {
 // UnsafeWaylandMonitorFromGlibFull is used to convert raw GdkWaylandMonitor pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeWaylandMonitorFromGlibFull(c unsafe.Pointer) WaylandMonitor {
 	return gobject.UnsafeObjectFromGlibFull(c).(WaylandMonitor)
+}
+
+// UnsafeWaylandMonitorFromGlibBorrow is used to convert raw GdkWaylandMonitor pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeWaylandMonitorFromGlibBorrow(c unsafe.Pointer) WaylandMonitor {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(WaylandMonitor)
 }
 
 func (w *WaylandMonitorInstance) upcastToGdkWaylandMonitor() *WaylandMonitorInstance {
@@ -420,6 +440,11 @@ func UnsafeWaylandSeatFromGlibFull(c unsafe.Pointer) WaylandSeat {
 	return gobject.UnsafeObjectFromGlibFull(c).(WaylandSeat)
 }
 
+// UnsafeWaylandSeatFromGlibBorrow is used to convert raw GdkWaylandSeat pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeWaylandSeatFromGlibBorrow(c unsafe.Pointer) WaylandSeat {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(WaylandSeat)
+}
+
 func (w *WaylandSeatInstance) upcastToGdkWaylandSeat() *WaylandSeatInstance {
 	return w
 }
@@ -474,6 +499,11 @@ func UnsafeWaylandSurfaceFromGlibNone(c unsafe.Pointer) WaylandSurface {
 // UnsafeWaylandSurfaceFromGlibFull is used to convert raw GdkWaylandSurface pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeWaylandSurfaceFromGlibFull(c unsafe.Pointer) WaylandSurface {
 	return gobject.UnsafeObjectFromGlibFull(c).(WaylandSurface)
+}
+
+// UnsafeWaylandSurfaceFromGlibBorrow is used to convert raw GdkWaylandSurface pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeWaylandSurfaceFromGlibBorrow(c unsafe.Pointer) WaylandSurface {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(WaylandSurface)
 }
 
 func (w *WaylandSurfaceInstance) upcastToGdkWaylandSurface() *WaylandSurfaceInstance {
@@ -612,6 +642,11 @@ func UnsafeWaylandToplevelFromGlibNone(c unsafe.Pointer) WaylandToplevel {
 // UnsafeWaylandToplevelFromGlibFull is used to convert raw GdkWaylandToplevel pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeWaylandToplevelFromGlibFull(c unsafe.Pointer) WaylandToplevel {
 	return gobject.UnsafeObjectFromGlibFull(c).(WaylandToplevel)
+}
+
+// UnsafeWaylandToplevelFromGlibBorrow is used to convert raw GdkWaylandToplevel pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeWaylandToplevelFromGlibBorrow(c unsafe.Pointer) WaylandToplevel {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(WaylandToplevel)
 }
 
 func (w *WaylandToplevelInstance) upcastToGdkWaylandToplevel() *WaylandToplevelInstance {
@@ -813,6 +848,11 @@ func UnsafeWaylandPopupFromGlibNone(c unsafe.Pointer) WaylandPopup {
 // UnsafeWaylandPopupFromGlibFull is used to convert raw GdkWaylandPopup pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeWaylandPopupFromGlibFull(c unsafe.Pointer) WaylandPopup {
 	return gobject.UnsafeObjectFromGlibFull(c).(WaylandPopup)
+}
+
+// UnsafeWaylandPopupFromGlibBorrow is used to convert raw GdkWaylandPopup pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeWaylandPopupFromGlibBorrow(c unsafe.Pointer) WaylandPopup {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(WaylandPopup)
 }
 
 func (w *WaylandPopupInstance) upcastToGdkWaylandPopup() *WaylandPopupInstance {

@@ -16,7 +16,6 @@ import (
 // #include <glib.h>
 // extern GLogWriterOutput _gotk4_glib2_LogWriterFunc(GLogLevelFlags, const GLogField*, gsize, gpointer);
 // extern gboolean _gotk4_glib2_SourceFunc(gpointer);
-// extern gint _gotk4_glib2_CompareDataFunc(gconstpointer, gconstpointer, gpointer);
 // extern void _gotk4_glib2_ChildWatchFunc(GPid, gint, gpointer);
 // extern void _gotk4_glib2_LogFunc(gchar*, GLogLevelFlags, gchar*, gpointer);
 // extern void destroyUserdata(gpointer);
@@ -306,7 +305,7 @@ const WIN32_MSG_HANDLE = 19981206
 // 
 // GPid is used in GLib only for descendant processes spawned with
 // the g_spawn functions.
-type Pid = int
+type Pid = int32
 // Quark wraps GQuark
 //
 // A GQuark is a non-zero integer which uniquely identifies a
@@ -5254,24 +5253,6 @@ func (f URIParamsFlags) String() string {
 	return "URIParamsFlags(" + strings.Join(parts, "|") + ")"
 }
 
-// CompareDataFunc wraps GCompareDataFunc
-//
-// Specifies the type of a comparison function used to compare two
-// values.  The function should return a negative integer if the first
-// value comes before the second, 0 if they are equal, or a positive
-// integer if the first value comes after the second.
-type CompareDataFunc func(a unsafe.Pointer, b unsafe.Pointer) (goret int)
-
-// EqualFuncFull wraps GEqualFuncFull
-//
-// Specifies the type of a function used to test two values for
-// equality. The function should return %TRUE if both values are equal
-// and %FALSE otherwise.
-// 
-// This is a version of #GEqualFunc which provides a @user_data closure from
-// the caller.
-type EqualFuncFull func(a unsafe.Pointer, b unsafe.Pointer) (goret bool)
-
 // LogFunc wraps GLogFunc
 //
 // Specifies the prototype of log handler functions.
@@ -5336,7 +5317,7 @@ type SourceOnceFunc func()
 // [func@GLib.spawn_check_wait_status]. In particular,
 // on Unix platforms, note that it is usually not equal
 // to the integer passed to `exit()` or returned from `main()`.
-type ChildWatchFunc func(pid Pid, waitStatus int)
+type ChildWatchFunc func(pid Pid, waitStatus int32)
 
 // AssertWarning wraps g_assert_warning
 // 
@@ -5344,10 +5325,10 @@ type ChildWatchFunc func(pid Pid, waitStatus int)
 // 
 // 	- logDomain string 
 // 	- file string 
-// 	- line int 
+// 	- line int32 
 // 	- prettyFunction string 
 // 	- expression string 
-func AssertWarning(logDomain string, file string, line int, prettyFunction string, expression string) {
+func AssertWarning(logDomain string, file string, line int32, prettyFunction string, expression string) {
 	var carg1 *C.char // in, none, string, casted *C.gchar
 	var carg2 *C.char // in, none, string, casted *C.gchar
 	var carg3 C.int   // in, none, casted, casted C.gint
@@ -5377,17 +5358,17 @@ func AssertWarning(logDomain string, file string, line int, prettyFunction strin
 // The function takes the following parameters:
 // 
 // 	- mask uint32: a #gulong containing flags 
-// 	- nthBit int: the index of the bit to start the search from 
+// 	- nthBit int32: the index of the bit to start the search from 
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Find the position of the first bit set in @mask, searching
 // from (but not including) @nth_bit upwards. Bits are numbered
 // from 0 (least significant) to sizeof(#gulong) * 8 - 1 (31 or 63,
 // usually). To start searching from the 0th bit, set @nth_bit to -1.
-func BitNthLSF(mask uint32, nthBit int) int {
+func BitNthLSF(mask uint32, nthBit int32) int32 {
 	var carg1 C.gulong // in, none, casted
 	var carg2 C.gint   // in, none, casted
 	var cret  C.gint   // return, none, casted
@@ -5399,9 +5380,9 @@ func BitNthLSF(mask uint32, nthBit int) int {
 	runtime.KeepAlive(mask)
 	runtime.KeepAlive(nthBit)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -5411,18 +5392,18 @@ func BitNthLSF(mask uint32, nthBit int) int {
 // The function takes the following parameters:
 // 
 // 	- mask uint32: a #gulong containing flags 
-// 	- nthBit int: the index of the bit to start the search from 
+// 	- nthBit int32: the index of the bit to start the search from 
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Find the position of the first bit set in @mask, searching
 // from (but not including) @nth_bit downwards. Bits are numbered
 // from 0 (least significant) to sizeof(#gulong) * 8 - 1 (31 or 63,
 // usually). To start searching from the last bit, set @nth_bit to
 // -1 or GLIB_SIZEOF_LONG * 8.
-func BitNthMSF(mask uint32, nthBit int) int {
+func BitNthMSF(mask uint32, nthBit int32) int32 {
 	var carg1 C.gulong // in, none, casted
 	var carg2 C.gint   // in, none, casted
 	var cret  C.gint   // return, none, casted
@@ -5434,9 +5415,9 @@ func BitNthMSF(mask uint32, nthBit int) int {
 	runtime.KeepAlive(mask)
 	runtime.KeepAlive(nthBit)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -5652,7 +5633,7 @@ func CheckVersion(requiredMajor uint, requiredMinor uint, requiredMicro uint) st
 // 
 // The function takes the following parameters:
 // 
-// 	- priority int: the priority of the idle source. Typically this will be in the
+// 	- priority int32: the priority of the idle source. Typically this will be in the
 //   range between [const@GLib.PRIORITY_DEFAULT_IDLE] and
 //   [const@GLib.PRIORITY_HIGH_IDLE]. 
 // 	- pid Pid: process to watch. On POSIX the positive pid of a child process. On
@@ -5688,7 +5669,7 @@ func CheckVersion(requiredMajor uint, requiredMinor uint, requiredMicro uint) st
 // [func@GLib.child_watch_source_new] and attaches it to the main loop context
 // using [method@GLib.Source.attach]. You can do these steps manually if you
 // need greater control.
-func ChildWatchAddFull(priority int, pid Pid, function ChildWatchFunc) uint {
+func ChildWatchAddFull(priority int32, pid Pid, function ChildWatchFunc) uint {
 	var carg1 C.gint            // in, none, casted
 	var carg2 C.GPid            // in, none, casted, alias
 	var carg3 C.GChildWatchFunc // callback, scope: notified, closure: carg4, destroy: carg5
@@ -6228,7 +6209,7 @@ func ConvertWithFallback(str string, toCodeset string, fromCodeset string, fallb
 // 	- domain string (nullable): the translation domain to use, or %NULL to use
 //   the domain set with textdomain() 
 // 	- msgid string: message to translate 
-// 	- category int: a locale category 
+// 	- category int32: a locale category 
 // 
 // The function returns the following values:
 // 
@@ -6238,7 +6219,7 @@ func ConvertWithFallback(str string, toCodeset string, fromCodeset string, fallb
 // category instead of always using `LC_MESSAGES`. See g_dgettext() for
 // more information about how this functions differs from calling
 // dcgettext() directly.
-func Dcgettext(domain string, msgid string, category int) string {
+func Dcgettext(domain string, msgid string, category int32) string {
 	var carg1 *C.gchar // in, none, string, nullable-string
 	var carg2 *C.gchar // in, none, string
 	var carg3 C.gint   // in, none, casted
@@ -6331,84 +6312,6 @@ func Dgettext(domain string, msgid string) string {
 	return goret
 }
 
-// DirectEqual wraps g_direct_equal
-// 
-// The function takes the following parameters:
-// 
-// 	- v1 unsafe.Pointer (nullable): a key 
-// 	- v2 unsafe.Pointer (nullable): a key to compare with @v1 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Compares two #gpointer arguments and returns %TRUE if they are equal.
-// It can be passed to g_hash_table_new() as the @key_equal_func
-// parameter, when using opaque pointers compared by pointer value as
-// keys in a #GHashTable.
-// 
-// This equality function is also appropriate for keys that are integers
-// stored in pointers, such as `GINT_TO_POINTER (n)`.
-func DirectEqual(v1 unsafe.Pointer, v2 unsafe.Pointer) bool {
-	var carg1 C.gconstpointer // in, none, casted, nullable
-	var carg2 C.gconstpointer // in, none, casted, nullable
-	var cret  C.gboolean      // return
-
-	if v1 != nil {
-		carg1 = C.gconstpointer(v1)
-	}
-	if v2 != nil {
-		carg2 = C.gconstpointer(v2)
-	}
-
-	cret = C.g_direct_equal(carg1, carg2)
-	runtime.KeepAlive(v1)
-	runtime.KeepAlive(v2)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// DirectHash wraps g_direct_hash
-// 
-// The function takes the following parameters:
-// 
-// 	- v unsafe.Pointer (nullable): a #gpointer key 
-// 
-// The function returns the following values:
-// 
-// 	- goret uint 
-//
-// Converts a gpointer to a hash value.
-// It can be passed to g_hash_table_new() as the @hash_func parameter,
-// when using opaque pointers compared by pointer value as keys in a
-// #GHashTable.
-// 
-// This hash function is also appropriate for keys that are integers
-// stored in pointers, such as `GINT_TO_POINTER (n)`.
-func DirectHash(v unsafe.Pointer) uint {
-	var carg1 C.gconstpointer // in, none, casted, nullable
-	var cret  C.guint         // return, none, casted
-
-	if v != nil {
-		carg1 = C.gconstpointer(v)
-	}
-
-	cret = C.g_direct_hash(carg1)
-	runtime.KeepAlive(v)
-
-	var goret uint
-
-	goret = uint(cret)
-
-	return goret
-}
-
 // Dngettext wraps g_dngettext
 // 
 // The function takes the following parameters:
@@ -6455,73 +6358,6 @@ func Dngettext(domain string, msgid string, msgidPlural string, n uint32) string
 	var goret string
 
 	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-
-	return goret
-}
-
-// DoubleEqual wraps g_double_equal
-// 
-// The function takes the following parameters:
-// 
-// 	- v1 unsafe.Pointer: a pointer to a #gdouble key 
-// 	- v2 unsafe.Pointer: a pointer to a #gdouble key to compare with @v1 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Compares the two #gdouble values being pointed to and returns
-// %TRUE if they are equal.
-// It can be passed to g_hash_table_new() as the @key_equal_func
-// parameter, when using non-%NULL pointers to doubles as keys in a
-// #GHashTable.
-func DoubleEqual(v1 unsafe.Pointer, v2 unsafe.Pointer) bool {
-	var carg1 C.gconstpointer // in, none, casted
-	var carg2 C.gconstpointer // in, none, casted
-	var cret  C.gboolean      // return
-
-	carg1 = C.gconstpointer(v1)
-	carg2 = C.gconstpointer(v2)
-
-	cret = C.g_double_equal(carg1, carg2)
-	runtime.KeepAlive(v1)
-	runtime.KeepAlive(v2)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// DoubleHash wraps g_double_hash
-// 
-// The function takes the following parameters:
-// 
-// 	- v unsafe.Pointer: a pointer to a #gdouble key 
-// 
-// The function returns the following values:
-// 
-// 	- goret uint 
-//
-// Converts a pointer to a #gdouble to a hash value.
-// It can be passed to g_hash_table_new() as the @hash_func parameter,
-// It can be passed to g_hash_table_new() as the @hash_func parameter,
-// when using non-%NULL pointers to doubles as keys in a #GHashTable.
-func DoubleHash(v unsafe.Pointer) uint {
-	var carg1 C.gconstpointer // in, none, casted
-	var cret  C.guint         // return, none, casted
-
-	carg1 = C.gconstpointer(v)
-
-	cret = C.g_double_hash(carg1)
-	runtime.KeepAlive(v)
-
-	var goret uint
-
-	goret = uint(cret)
 
 	return goret
 }
@@ -6764,7 +6600,7 @@ func EnvironUnsetenv(envp []string, variable string) []string {
 // 
 // The function takes the following parameters:
 // 
-// 	- errNo int: an "errno" value 
+// 	- errNo int32: an "errno" value 
 // 
 // The function returns the following values:
 // 
@@ -6779,7 +6615,7 @@ func EnvironUnsetenv(envp []string, variable string) []string {
 // Normally a #GFileError value goes into a #GError returned
 // from a function that manipulates files. So you would use
 // g_file_error_from_errno() when constructing a #GError.
-func FileErrorFromErrno(errNo int) FileError {
+func FileErrorFromErrno(errNo int32) FileError {
 	var carg1 C.gint       // in, none, casted
 	var cret  C.GFileError // return, none, casted
 
@@ -6878,7 +6714,7 @@ func FileGetContents(filename string) (string, bool, error) {
 // 
 // 	- nameUsed string: location to store actual name used,
 //   or %NULL 
-// 	- goret int 
+// 	- goret int32 
 // 	- _goerr error (nullable): an error 
 //
 // Opens a file for writing in the preferred directory for temporary
@@ -6897,7 +6733,7 @@ func FileGetContents(filename string) (string, bool, error) {
 // is returned in @name_used. This string should be freed with g_free()
 // when not needed any longer. The returned name is in the GLib file
 // name encoding.
-func FileOpenTmp(tmpl string) (string, int, error) {
+func FileOpenTmp(tmpl string) (string, int32, error) {
 	var carg1 *C.gchar  // in, none, string, nullable-string
 	var carg2 *C.gchar  // out, full, string
 	var cret  C.gint    // return, none, casted
@@ -6912,12 +6748,12 @@ func FileOpenTmp(tmpl string) (string, int, error) {
 	runtime.KeepAlive(tmpl)
 
 	var nameUsed string
-	var goret    int
+	var goret    int32
 	var _goerr   error
 
 	nameUsed = C.GoString((*C.char)(unsafe.Pointer(carg2)))
 	defer C.free(unsafe.Pointer(carg2))
-	goret = int(cret)
+	goret = int32(cret)
 	if _cerr != nil {
 		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -7038,7 +6874,7 @@ func FileSetContents(filename string, contents string) (bool, error) {
 //   encoding 
 // 	- contents string: string to write to the file 
 // 	- flags FileSetContentsFlags: flags controlling the safety vs speed of the operation 
-// 	- mode int: file mode, as passed to `open()`; typically this will be `0666` 
+// 	- mode int32: file mode, as passed to `open()`; typically this will be `0666` 
 // 
 // The function returns the following values:
 // 
@@ -7099,7 +6935,7 @@ func FileSetContents(filename string, contents string) (bool, error) {
 // If the file didn’t exist before and is created, it will be given the
 // permissions from @mode. Otherwise, the permissions of the existing file may
 // be changed to @mode depending on @flags, or they may remain unchanged.
-func FileSetContentsFull(filename string, contents string, flags FileSetContentsFlags, mode int) (bool, error) {
+func FileSetContentsFull(filename string, contents string, flags FileSetContentsFlags, mode int32) (bool, error) {
 	var carg1 *C.gchar                // in, none, string
 	var carg2 *C.gchar                // in, transfer: none, C Pointers: 1, Name: array[unknown], array (inner: <nil>, length-by: carg3)
 	var carg3 C.gssize                // implicit
@@ -8765,7 +8601,7 @@ func HostnameToUnicode(hostname string) string {
 // 
 // The function takes the following parameters:
 // 
-// 	- priority int: the priority of the idle source. Typically this will be in the
+// 	- priority int32: the priority of the idle source. Typically this will be in the
 //   range between [const@GLib.PRIORITY_DEFAULT_IDLE] and
 //   [const@GLib.PRIORITY_HIGH_IDLE]. 
 // 	- function SourceFunc: function to call 
@@ -8788,7 +8624,7 @@ func HostnameToUnicode(hostname string) string {
 // [method@GLib.Source.attach], so the callback will be invoked in whichever
 // thread is running that main context. You can do these steps manually if you
 // need greater control or to use a custom main context.
-func IdleAddFull(priority int, function SourceFunc) uint {
+func IdleAddFull(priority int32, function SourceFunc) uint {
 	var carg1 C.gint           // in, none, casted
 	var carg2 C.GSourceFunc    // callback, scope: notified, closure: carg3, destroy: carg4
 	var carg3 C.gpointer       // implicit
@@ -8833,148 +8669,6 @@ func NewIdleSource() *Source {
 	var goret *Source
 
 	goret = UnsafeSourceFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// Int64Equal wraps g_int64_equal
-// 
-// The function takes the following parameters:
-// 
-// 	- v1 unsafe.Pointer: a pointer to a #gint64 key 
-// 	- v2 unsafe.Pointer: a pointer to a #gint64 key to compare with @v1 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Compares the two #gint64 values being pointed to and returns
-// %TRUE if they are equal.
-// It can be passed to g_hash_table_new() as the @key_equal_func
-// parameter, when using non-%NULL pointers to 64-bit integers as keys in a
-// #GHashTable.
-func Int64Equal(v1 unsafe.Pointer, v2 unsafe.Pointer) bool {
-	var carg1 C.gconstpointer // in, none, casted
-	var carg2 C.gconstpointer // in, none, casted
-	var cret  C.gboolean      // return
-
-	carg1 = C.gconstpointer(v1)
-	carg2 = C.gconstpointer(v2)
-
-	cret = C.g_int64_equal(carg1, carg2)
-	runtime.KeepAlive(v1)
-	runtime.KeepAlive(v2)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// Int64Hash wraps g_int64_hash
-// 
-// The function takes the following parameters:
-// 
-// 	- v unsafe.Pointer: a pointer to a #gint64 key 
-// 
-// The function returns the following values:
-// 
-// 	- goret uint 
-//
-// Converts a pointer to a #gint64 to a hash value.
-// 
-// It can be passed to g_hash_table_new() as the @hash_func parameter,
-// when using non-%NULL pointers to 64-bit integer values as keys in a
-// #GHashTable.
-func Int64Hash(v unsafe.Pointer) uint {
-	var carg1 C.gconstpointer // in, none, casted
-	var cret  C.guint         // return, none, casted
-
-	carg1 = C.gconstpointer(v)
-
-	cret = C.g_int64_hash(carg1)
-	runtime.KeepAlive(v)
-
-	var goret uint
-
-	goret = uint(cret)
-
-	return goret
-}
-
-// IntEqual wraps g_int_equal
-// 
-// The function takes the following parameters:
-// 
-// 	- v1 unsafe.Pointer: a pointer to a #gint key 
-// 	- v2 unsafe.Pointer: a pointer to a #gint key to compare with @v1 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Compares the two #gint values being pointed to and returns
-// %TRUE if they are equal.
-// It can be passed to g_hash_table_new() as the @key_equal_func
-// parameter, when using non-%NULL pointers to integers as keys in a
-// #GHashTable.
-// 
-// Note that this function acts on pointers to #gint, not on #gint
-// directly: if your hash table's keys are of the form
-// `GINT_TO_POINTER (n)`, use g_direct_equal() instead.
-func IntEqual(v1 unsafe.Pointer, v2 unsafe.Pointer) bool {
-	var carg1 C.gconstpointer // in, none, casted
-	var carg2 C.gconstpointer // in, none, casted
-	var cret  C.gboolean      // return
-
-	carg1 = C.gconstpointer(v1)
-	carg2 = C.gconstpointer(v2)
-
-	cret = C.g_int_equal(carg1, carg2)
-	runtime.KeepAlive(v1)
-	runtime.KeepAlive(v2)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// IntHash wraps g_int_hash
-// 
-// The function takes the following parameters:
-// 
-// 	- v unsafe.Pointer: a pointer to a #gint key 
-// 
-// The function returns the following values:
-// 
-// 	- goret uint 
-//
-// Converts a pointer to a #gint to a hash value.
-// It can be passed to g_hash_table_new() as the @hash_func parameter,
-// when using non-%NULL pointers to integer values as keys in a #GHashTable.
-// 
-// Note that this function acts on pointers to #gint, not on #gint
-// directly: if your hash table's keys are of the form
-// `GINT_TO_POINTER (n)`, use g_direct_hash() instead.
-func IntHash(v unsafe.Pointer) uint {
-	var carg1 C.gconstpointer // in, none, casted
-	var cret  C.guint         // return, none, casted
-
-	carg1 = C.gconstpointer(v)
-
-	cret = C.g_int_hash(carg1)
-	runtime.KeepAlive(v)
-
-	var goret uint
-
-	goret = uint(cret)
 
 	return goret
 }
@@ -9686,7 +9380,7 @@ func LogWriterFormatFields(logLevel LogLevelFlags, fields []LogField, useColor b
 // 
 // The function takes the following parameters:
 // 
-// 	- outputFd int: output file descriptor to check 
+// 	- outputFd int32: output file descriptor to check 
 // 
 // The function returns the following values:
 // 
@@ -9701,7 +9395,7 @@ func LogWriterFormatFields(logLevel LogLevelFlags, fields []LogField, useColor b
 // ```c
 // is_journald = g_log_writer_is_journald (fileno (stderr));
 // ```
-func LogWriterIsJournald(outputFd int) bool {
+func LogWriterIsJournald(outputFd int32) bool {
 	var carg1 C.gint     // in, none, casted
 	var cret  C.gboolean // return
 
@@ -9723,7 +9417,7 @@ func LogWriterIsJournald(outputFd int) bool {
 // 
 // The function takes the following parameters:
 // 
-// 	- outputFd int: output file descriptor to check 
+// 	- outputFd int32: output file descriptor to check 
 // 
 // The function returns the following values:
 // 
@@ -9733,7 +9427,7 @@ func LogWriterIsJournald(outputFd int) bool {
 // [ANSI color escape sequences](https://en.wikipedia.org/wiki/ANSI_escape_code).
 // 
 // If so, they can safely be used when formatting log messages.
-func LogWriterSupportsColor(outputFd int) bool {
+func LogWriterSupportsColor(outputFd int32) bool {
 	var carg1 C.gint     // in, none, casted
 	var cret  C.gboolean // return
 
@@ -9776,7 +9470,7 @@ func MainCurrentSource() *Source {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Returns the depth of the stack of calls to
 // [method@GLib.MainContext.dispatch] on any #GMainContext in the current thread.
@@ -9879,14 +9573,14 @@ func MainCurrentSource() *Source {
 //    arbitrary  callbacks. Instead, structure your code so that you
 //    simply return to the main loop and then get called again when
 //    there is more work to do.
-func MainDepth() int {
+func MainDepth() int32 {
 	var cret C.gint // return, none, casted
 
 	cret = C.g_main_depth()
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -9959,15 +9653,15 @@ func MarkupEscapeText(text string, length int) string {
 // The function takes the following parameters:
 // 
 // 	- pathname string: a pathname in the GLib file name encoding 
-// 	- mode int: permissions to use for newly created directories 
+// 	- mode int32: permissions to use for newly created directories 
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Create a directory if it doesn't already exist. Create intermediate
 // parent directories as needed, too.
-func MkdirWithParents(pathname string, mode int) int {
+func MkdirWithParents(pathname string, mode int32) int32 {
 	var carg1 *C.gchar // in, none, string
 	var carg2 C.gint   // in, none, casted
 	var cret  C.gint   // return, none, casted
@@ -9980,9 +9674,9 @@ func MkdirWithParents(pathname string, mode int) int {
 	runtime.KeepAlive(pathname)
 	runtime.KeepAlive(mode)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -10271,11 +9965,11 @@ func PatternMatchSimple(pattern string, str string) bool {
 // 
 // 	- fds *PollFD: file descriptors to poll 
 // 	- nfds uint: the number of file descriptors in @fds 
-// 	- timeout int: amount of time to wait, in milliseconds, or -1 to wait forever 
+// 	- timeout int32: amount of time to wait, in milliseconds, or -1 to wait forever 
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Polls @fds, as with the poll() system call, but portably. (On
 // systems that don't have poll(), it is emulated using select().)
@@ -10294,7 +9988,7 @@ func PatternMatchSimple(pattern string, str string) bool {
 // Windows. If you need to use g_poll() in code that has to run on
 // Windows, the easiest solution is to construct all of your
 // #GPollFDs with g_io_channel_win32_make_pollfd().
-func Poll(fds *PollFD, nfds uint, timeout int) int {
+func Poll(fds *PollFD, nfds uint, timeout int32) int32 {
 	var carg1 *C.GPollFD // in, none, converted
 	var carg2 C.guint    // in, none, casted
 	var carg3 C.gint     // in, none, casted
@@ -10309,49 +10003,11 @@ func Poll(fds *PollFD, nfds uint, timeout int) int {
 	runtime.KeepAlive(nfds)
 	runtime.KeepAlive(timeout)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
-}
-
-// QsortWithData wraps g_qsort_with_data
-// 
-// The function takes the following parameters:
-// 
-// 	- pbase unsafe.Pointer: start of array to sort 
-// 	- totalElems int: elements in the array 
-// 	- size uint: size of each element 
-// 	- compareFunc CompareDataFunc: function to compare elements 
-//
-// This is just like the standard C [`qsort()`](man:qsort(3)) function, but
-// the comparison routine accepts a user data argument
-// (like [`qsort_r()`](man:qsort_r(3))).
-// 
-// Unlike `qsort()`, this is guaranteed to be a stable sort (since GLib 2.32).
-//
-// Deprecated: (since 2.82.0) `total_elems` is too small to represent larger arrays; use
-//   [func@GLib.sort_array] instead
-func QsortWithData(pbase unsafe.Pointer, totalElems int, size uint, compareFunc CompareDataFunc) {
-	var carg1 C.gconstpointer    // in, none, casted
-	var carg2 C.gint             // in, none, casted
-	var carg3 C.gsize            // in, none, casted
-	var carg4 C.GCompareDataFunc // callback, scope: call, closure: carg5
-	var carg5 C.gpointer         // implicit
-
-	carg1 = C.gconstpointer(pbase)
-	carg2 = C.gint(totalElems)
-	carg3 = C.gsize(size)
-	carg4 = (*[0]byte)(C._gotk4_glib2_CompareDataFunc)
-	carg5 = C.gpointer(userdata.Register(compareFunc))
-	defer userdata.Delete(unsafe.Pointer(carg5))
-
-	C.g_qsort_with_data(carg1, carg2, carg3, carg4, carg5)
-	runtime.KeepAlive(pbase)
-	runtime.KeepAlive(totalElems)
-	runtime.KeepAlive(size)
-	runtime.KeepAlive(compareFunc)
 }
 
 // QuarkFromStaticString wraps g_quark_from_static_string
@@ -10774,7 +10430,7 @@ func ShellErrorQuark() Quark {
 // 
 // The function returns the following values:
 // 
-// 	- argcp int: return location for number of args 
+// 	- argcp int32: return location for number of args 
 // 	- argvp []string: 
 //   return location for array of args 
 // 	- goret bool 
@@ -10964,7 +10620,7 @@ func SpacedPrimesClosest(num uint) uint {
 // 
 // The function takes the following parameters:
 // 
-// 	- waitStatus int: A platform-specific wait status as returned from g_spawn_sync() 
+// 	- waitStatus int32: A platform-specific wait status as returned from g_spawn_sync() 
 // 
 // The function returns the following values:
 // 
@@ -11010,7 +10666,7 @@ func SpacedPrimesClosest(num uint) uint {
 // 
 // Prior to version 2.70, g_spawn_check_exit_status() provides the same
 // functionality, although under a misleading name.
-func SpawnCheckWaitStatus(waitStatus int) (bool, error) {
+func SpawnCheckWaitStatus(waitStatus int32) (bool, error) {
 	var carg1 C.gint     // in, none, casted
 	var cret  C.gboolean // return
 	var _cerr *C.GError  // out, full, converted, nullable
@@ -11107,7 +10763,7 @@ func SpawnCommandLineAsync(commandLine string) (bool, error) {
 // 
 // 	- standardOutput string: return location for child output 
 // 	- standardError string: return location for child errors 
-// 	- waitStatus int: return location for child wait status, as returned by waitpid() 
+// 	- waitStatus int32: return location for child wait status, as returned by waitpid() 
 // 	- goret bool 
 // 	- _goerr error (nullable): an error 
 //
@@ -11140,7 +10796,7 @@ func SpawnCommandLineAsync(commandLine string) (bool, error) {
 // the backslashes will be eaten, and the space will act as a
 // separator. You need to enclose such paths with single quotes, like
 // "'c:\\program files\\app\\app.exe' 'e:\\folder\\argument.txt'".
-func SpawnCommandLineSync(commandLine string) (string, string, int, bool, error) {
+func SpawnCommandLineSync(commandLine string) (string, string, int32, bool, error) {
 	var carg1 *C.gchar   // in, none, string
 	var carg2 *C.gchar   // out, transfer: full, C Pointers: 1, Name: array[unknown], optional, array (inner: <nil>, zero-terminated)
 	var carg3 *C.gchar   // out, transfer: full, C Pointers: 1, Name: array[unknown], optional, array (inner: <nil>, zero-terminated)
@@ -11156,7 +10812,7 @@ func SpawnCommandLineSync(commandLine string) (string, string, int, bool, error)
 
 	var standardOutput string
 	var standardError  string
-	var waitStatus     int
+	var waitStatus     int32
 	var goret          bool
 	var _goerr         error
 
@@ -11166,7 +10822,7 @@ func SpawnCommandLineSync(commandLine string) (string, string, int, bool, error)
 	_ = standardError
 	_ = carg3
 	panic("unimplemented conversion of string (gchar*)")
-	waitStatus = int(carg4)
+	waitStatus = int32(carg4)
 	if cret != 0 {
 		goret = true
 	}
@@ -11211,86 +10867,6 @@ func SpawnExitErrorQuark() Quark {
 	return goret
 }
 
-// StrEqual wraps g_str_equal
-// 
-// The function takes the following parameters:
-// 
-// 	- v1 unsafe.Pointer: a key 
-// 	- v2 unsafe.Pointer: a key to compare with @v1 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Compares two strings for byte-by-byte equality and returns %TRUE
-// if they are equal. It can be passed to g_hash_table_new() as the
-// @key_equal_func parameter, when using non-%NULL strings as keys in a
-// #GHashTable.
-// 
-// This function is typically used for hash table comparisons, but can be used
-// for general purpose comparisons of non-%NULL strings. For a %NULL-safe string
-// comparison function, see g_strcmp0().
-func StrEqual(v1 unsafe.Pointer, v2 unsafe.Pointer) bool {
-	var carg1 C.gconstpointer // in, none, casted
-	var carg2 C.gconstpointer // in, none, casted
-	var cret  C.gboolean      // return
-
-	carg1 = C.gconstpointer(v1)
-	carg2 = C.gconstpointer(v2)
-
-	cret = C.g_str_equal(carg1, carg2)
-	runtime.KeepAlive(v1)
-	runtime.KeepAlive(v2)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
-// StrHash wraps g_str_hash
-// 
-// The function takes the following parameters:
-// 
-// 	- v unsafe.Pointer: a string key 
-// 
-// The function returns the following values:
-// 
-// 	- goret uint 
-//
-// Converts a string to a hash value.
-// 
-// This function implements the widely used "djb" hash apparently
-// posted by Daniel Bernstein to comp.lang.c some time ago.  The 32
-// bit unsigned hash value starts at 5381 and for each byte 'c' in
-// the string, is updated: `hash = hash * 33 + c`. This function
-// uses the signed value of each byte.
-// 
-// It can be passed to g_hash_table_new() as the @hash_func parameter,
-// when using non-%NULL strings as keys in a #GHashTable.
-// 
-// Note that this function may not be a perfect fit for all use cases.
-// For example, it produces some hash collisions with strings as short
-// as 2.
-func StrHash(v unsafe.Pointer) uint {
-	var carg1 C.gconstpointer // in, none, casted
-	var cret  C.guint         // return, none, casted
-
-	carg1 = C.gconstpointer(v)
-
-	cret = C.g_str_hash(carg1)
-	runtime.KeepAlive(v)
-
-	var goret uint
-
-	goret = uint(cret)
-
-	return goret
-}
-
 // StripContext wraps g_strip_context
 // 
 // The function takes the following parameters:
@@ -11328,7 +10904,7 @@ func StripContext(msgid string, msgval string) string {
 // 
 // The function takes the following parameters:
 // 
-// 	- priority int: the priority of the timeout source. Typically this will be in
+// 	- priority int32: the priority of the timeout source. Typically this will be in
 //   the range between [const@GLib.PRIORITY_DEFAULT] and
 //   [const@GLib.PRIORITY_HIGH]. 
 // 	- interval uint: the time between calls to the function, in milliseconds
@@ -11364,7 +10940,7 @@ func StripContext(msgid string, msgval string) string {
 // 
 // The interval given is in terms of monotonic time, not wall clock time.
 // See [func@GLib.get_monotonic_time].
-func TimeoutAddFull(priority int, interval uint, function SourceFunc) uint {
+func TimeoutAddFull(priority int32, interval uint, function SourceFunc) uint {
 	var carg1 C.gint           // in, none, casted
 	var carg2 C.guint          // in, none, casted
 	var carg3 C.GSourceFunc    // callback, scope: notified, closure: carg4, destroy: carg5
@@ -11394,7 +10970,7 @@ func TimeoutAddFull(priority int, interval uint, function SourceFunc) uint {
 // 
 // The function takes the following parameters:
 // 
-// 	- priority int: the priority of the timeout source. Typically this will be in
+// 	- priority int32: the priority of the timeout source. Typically this will be in
 //   the range between [const@GLib.PRIORITY_DEFAULT] and
 //   [const@GLib.PRIORITY_HIGH]. 
 // 	- interval uint: the time between calls to the function, in seconds 
@@ -11444,7 +11020,7 @@ func TimeoutAddFull(priority int, interval uint, function SourceFunc) uint {
 // 
 // The interval given is in terms of monotonic time, not wall clock
 // time. See [func@GLib.get_monotonic_time].
-func TimeoutAddSecondsFull(priority int, interval uint, function SourceFunc) uint {
+func TimeoutAddSecondsFull(priority int32, interval uint, function SourceFunc) uint {
 	var carg1 C.gint           // in, none, casted
 	var carg2 C.guint          // in, none, casted
 	var carg3 C.GSourceFunc    // callback, scope: notified, closure: carg4, destroy: carg5
@@ -11631,10 +11207,10 @@ func UnicharBreakType(c uint32) UnicodeBreakType {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Determines the canonical combining class of a Unicode character.
-func UnicharCombiningClass(uc uint32) int {
+func UnicharCombiningClass(uc uint32) int32 {
 	var carg1 C.gunichar // in, none, casted
 	var cret  C.gint     // return, none, casted
 
@@ -11643,9 +11219,9 @@ func UnicharCombiningClass(uc uint32) int {
 	cret = C.g_unichar_combining_class(carg1)
 	runtime.KeepAlive(uc)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -11769,11 +11345,11 @@ func UnicharDecompose(ch uint32) (uint32, uint32, bool) {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Determines the numeric value of a character as a decimal
 // digit.
-func UnicharDigitValue(c uint32) int {
+func UnicharDigitValue(c uint32) int32 {
 	var carg1 C.gunichar // in, none, casted
 	var cret  C.gint     // return, none, casted
 
@@ -11782,9 +11358,9 @@ func UnicharDigitValue(c uint32) int {
 	cret = C.g_unichar_digit_value(carg1)
 	runtime.KeepAlive(c)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -12485,10 +12061,10 @@ func UnicharIszerowidth(c uint32) bool {
 // 	- outbuf byte: output buffer, must have at
 //       least 6 bytes of space. If %NULL, the length will be computed and
 //       returned and nothing will be written to @outbuf. 
-// 	- goret int 
+// 	- goret int32 
 //
 // Converts a single character to UTF-8.
-func UnicharToUTF8(c uint32) (byte, int) {
+func UnicharToUTF8(c uint32) (byte, int32) {
 	var carg1 C.gunichar // in, none, casted
 	var carg2 C.char     // out, transfer: none, C Pointers: 0, Name: gchar, optional, caller-allocates
 	var cret  C.gint     // return, none, casted
@@ -12499,12 +12075,12 @@ func UnicharToUTF8(c uint32) (byte, int) {
 	runtime.KeepAlive(c)
 
 	var outbuf byte
-	var goret  int
+	var goret  int32
 
 	_ = outbuf
 	_ = carg2
 	panic("unimplemented conversion of byte (gchar)")
-	goret = int(cret)
+	goret = int32(cret)
 
 	return outbuf, goret
 }
@@ -12656,11 +12232,11 @@ func UnicharValidate(ch uint32) bool {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Determines the numeric value of a character as a hexadecimal
 // digit.
-func UnicharXDigitValue(c uint32) int {
+func UnicharXDigitValue(c uint32) int32 {
 	var carg1 C.gunichar // in, none, casted
 	var cret  C.gint     // return, none, casted
 
@@ -12669,9 +12245,9 @@ func UnicharXDigitValue(c uint32) int {
 	cret = C.g_unichar_xdigit_value(carg1)
 	runtime.KeepAlive(c)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -12923,7 +12499,7 @@ func UTF8Casefold(str string, len int) string {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Compares two strings for ordering using the linguistically
 // correct rules for the [current locale][setlocale].
@@ -12935,7 +12511,7 @@ func UTF8Casefold(str string, len int) string {
 // If the two strings are not comparable due to being in different collation
 // sequences, the result is undefined. This can happen if the strings are in
 // different language scripts, for example.
-func UTF8Collate(str1 string, str2 string) int {
+func UTF8Collate(str1 string, str2 string) int32 {
 	var carg1 *C.gchar // in, none, string
 	var carg2 *C.gchar // in, none, string
 	var cret  C.gint   // return, none, casted
@@ -12949,9 +12525,9 @@ func UTF8Collate(str1 string, str2 string) int {
 	runtime.KeepAlive(str1)
 	runtime.KeepAlive(str2)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -14760,10 +14336,10 @@ func (bookmark *BookmarkFile) GetModifiedDateTime(uri string) (*DateTime, error)
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Gets the number of bookmarks inside @bookmark.
-func (bookmark *BookmarkFile) GetSize() int {
+func (bookmark *BookmarkFile) GetSize() int32 {
 	var carg0 *C.GBookmarkFile // in, none, converted
 	var cret  C.gint           // return, none, casted
 
@@ -14772,9 +14348,9 @@ func (bookmark *BookmarkFile) GetSize() int {
 	cret = C.g_bookmark_file_get_size(carg0)
 	runtime.KeepAlive(bookmark)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -15384,7 +14960,7 @@ func (bookmark *BookmarkFile) SetAddedDateTime(uri string, added *DateTime) {
 // 	- uri string: a valid URI 
 // 	- name string: an application's name 
 // 	- exec string: an application's command line 
-// 	- count int: the number of registrations done for this application 
+// 	- count int32: the number of registrations done for this application 
 // 	- stamp *DateTime (nullable): the time of the last registration for this application,
 //    which may be %NULL if @count is 0 
 // 
@@ -15420,7 +14996,7 @@ func (bookmark *BookmarkFile) SetAddedDateTime(uri string, added *DateTime) {
 // for @uri,  %FALSE is returned and error is set to
 // %G_BOOKMARK_FILE_ERROR_APP_NOT_REGISTERED.  Otherwise, if no bookmark
 // for @uri is found, one is created.
-func (bookmark *BookmarkFile) SetApplicationInfo(uri string, name string, exec string, count int, stamp *DateTime) (bool, error) {
+func (bookmark *BookmarkFile) SetApplicationInfo(uri string, name string, exec string, count int32, stamp *DateTime) (bool, error) {
 	var carg0 *C.GBookmarkFile // in, none, converted
 	var carg1 *C.char          // in, none, string, casted *C.gchar
 	var carg2 *C.char          // in, none, string, casted *C.gchar
@@ -15943,65 +15519,6 @@ func UnsafeBytesToGlibFull(b *Bytes) unsafe.Pointer {
 	return _p
 }
 
-// GetRegion wraps g_bytes_get_region
-// 
-// The function takes the following parameters:
-// 
-// 	- elementSize uint: a non-zero element size 
-// 	- offset uint: an offset to the start of the region within the @bytes 
-// 	- nElements uint: the number of elements in the region 
-// 
-// The function returns the following values:
-// 
-// 	- goret unsafe.Pointer (nullable) 
-//
-// Gets a pointer to a region in @bytes.
-// 
-// The region starts at @offset many bytes from the start of the data
-// and contains @n_elements many elements of @element_size size.
-// 
-// @n_elements may be zero, but @element_size must always be non-zero.
-// Ideally, @element_size is a static constant (eg: sizeof a struct).
-// 
-// This function does careful bounds checking (including checking for
-// arithmetic overflows) and returns a non-%NULL pointer if the
-// specified region lies entirely within the @bytes. If the region is
-// in some way out of range, or if an overflow has occurred, then %NULL
-// is returned.
-// 
-// Note: it is possible to have a valid zero-size region. In this case,
-// the returned pointer will be equal to the base pointer of the data of
-// @bytes, plus @offset.  This will be non-%NULL except for the case
-// where @bytes itself was a zero-sized region.  Since it is unlikely
-// that you will be using this function to check for a zero-sized region
-// in a zero-sized @bytes, %NULL effectively always means "error".
-func (bytes *Bytes) GetRegion(elementSize uint, offset uint, nElements uint) unsafe.Pointer {
-	var carg0 *C.GBytes       // in, none, converted
-	var carg1 C.gsize         // in, none, casted
-	var carg2 C.gsize         // in, none, casted
-	var carg3 C.gsize         // in, none, casted
-	var cret  C.gconstpointer // return, none, casted, nullable
-
-	carg0 = (*C.GBytes)(UnsafeBytesToGlibNone(bytes))
-	carg1 = C.gsize(elementSize)
-	carg2 = C.gsize(offset)
-	carg3 = C.gsize(nElements)
-
-	cret = C.g_bytes_get_region(carg0, carg1, carg2, carg3)
-	runtime.KeepAlive(bytes)
-	runtime.KeepAlive(elementSize)
-	runtime.KeepAlive(offset)
-	runtime.KeepAlive(nElements)
-
-	var goret unsafe.Pointer
-
-	if cret != nil {
-		goret = unsafe.Pointer(cret)
-	}
-
-	return goret
-}
-
 // GetSize wraps g_bytes_get_size
 // 
 // The function returns the following values:
@@ -16406,11 +15923,11 @@ func UnsafeDateTimeToGlibFull(d *DateTime) unsafe.Pointer {
 // The function takes the following parameters:
 // 
 // 	- tz *TimeZone: a #GTimeZone 
-// 	- year int: the year component of the date 
-// 	- month int: the month component of the date 
-// 	- day int: the day component of the date 
-// 	- hour int: the hour component of the date 
-// 	- minute int: the minute component of the date 
+// 	- year int32: the year component of the date 
+// 	- month int32: the month component of the date 
+// 	- day int32: the day component of the date 
+// 	- hour int32: the hour component of the date 
+// 	- minute int32: the minute component of the date 
 // 	- seconds float64: the number of seconds past the minute 
 // 
 // The function returns the following values:
@@ -16445,7 +15962,7 @@ func UnsafeDateTimeToGlibFull(d *DateTime) unsafe.Pointer {
 // 
 // You should release the return value by calling g_date_time_unref()
 // when you are done with it.
-func NewDateTime(tz *TimeZone, year int, month int, day int, hour int, minute int, seconds float64) *DateTime {
+func NewDateTime(tz *TimeZone, year int32, month int32, day int32, hour int32, minute int32, seconds float64) *DateTime {
 	var carg1 *C.GTimeZone // in, none, converted
 	var carg2 C.gint       // in, none, casted
 	var carg3 C.gint       // in, none, casted
@@ -16564,11 +16081,11 @@ func NewDateTimeFromISO8601(text string, defaultTz *TimeZone) *DateTime {
 // 
 // The function takes the following parameters:
 // 
-// 	- year int: the year component of the date 
-// 	- month int: the month component of the date 
-// 	- day int: the day component of the date 
-// 	- hour int: the hour component of the date 
-// 	- minute int: the minute component of the date 
+// 	- year int32: the year component of the date 
+// 	- month int32: the month component of the date 
+// 	- day int32: the day component of the date 
+// 	- hour int32: the hour component of the date 
+// 	- minute int32: the minute component of the date 
 // 	- seconds float64: the number of seconds past the minute 
 // 
 // The function returns the following values:
@@ -16580,7 +16097,7 @@ func NewDateTimeFromISO8601(text string, defaultTz *TimeZone) *DateTime {
 // 
 // This call is equivalent to calling g_date_time_new() with the time
 // zone returned by g_time_zone_new_local().
-func NewDateTimeLocal(year int, month int, day int, hour int, minute int, seconds float64) *DateTime {
+func NewDateTimeLocal(year int32, month int32, day int32, hour int32, minute int32, seconds float64) *DateTime {
 	var carg1 C.gint       // in, none, casted
 	var carg2 C.gint       // in, none, casted
 	var carg3 C.gint       // in, none, casted
@@ -16703,11 +16220,11 @@ func NewDateTimeNowUTC() *DateTime {
 // 
 // The function takes the following parameters:
 // 
-// 	- year int: the year component of the date 
-// 	- month int: the month component of the date 
-// 	- day int: the day component of the date 
-// 	- hour int: the hour component of the date 
-// 	- minute int: the minute component of the date 
+// 	- year int32: the year component of the date 
+// 	- month int32: the month component of the date 
+// 	- day int32: the day component of the date 
+// 	- hour int32: the hour component of the date 
+// 	- minute int32: the minute component of the date 
 // 	- seconds float64: the number of seconds past the minute 
 // 
 // The function returns the following values:
@@ -16719,7 +16236,7 @@ func NewDateTimeNowUTC() *DateTime {
 // 
 // This call is equivalent to calling g_date_time_new() with the time
 // zone returned by g_time_zone_new_utc().
-func NewDateTimeUTC(year int, month int, day int, hour int, minute int, seconds float64) *DateTime {
+func NewDateTimeUTC(year int32, month int32, day int32, hour int32, minute int32, seconds float64) *DateTime {
 	var carg1 C.gint       // in, none, casted
 	var carg2 C.gint       // in, none, casted
 	var carg3 C.gint       // in, none, casted
@@ -16788,7 +16305,7 @@ func (datetime *DateTime) Add(timespan TimeSpan) *DateTime {
 // 
 // The function takes the following parameters:
 // 
-// 	- days int: the number of days 
+// 	- days int32: the number of days 
 // 
 // The function returns the following values:
 // 
@@ -16796,7 +16313,7 @@ func (datetime *DateTime) Add(timespan TimeSpan) *DateTime {
 //
 // Creates a copy of @datetime and adds the specified number of days to the
 // copy. Add negative values to subtract days.
-func (datetime *DateTime) AddDays(days int) *DateTime {
+func (datetime *DateTime) AddDays(days int32) *DateTime {
 	var carg0 *C.GDateTime // in, none, converted
 	var carg1 C.gint       // in, none, casted
 	var cret  *C.GDateTime // return, full, converted, nullable
@@ -16821,11 +16338,11 @@ func (datetime *DateTime) AddDays(days int) *DateTime {
 // 
 // The function takes the following parameters:
 // 
-// 	- years int: the number of years to add 
-// 	- months int: the number of months to add 
-// 	- days int: the number of days to add 
-// 	- hours int: the number of hours to add 
-// 	- minutes int: the number of minutes to add 
+// 	- years int32: the number of years to add 
+// 	- months int32: the number of months to add 
+// 	- days int32: the number of days to add 
+// 	- hours int32: the number of hours to add 
+// 	- minutes int32: the number of minutes to add 
 // 	- seconds float64: the number of seconds to add 
 // 
 // The function returns the following values:
@@ -16834,7 +16351,7 @@ func (datetime *DateTime) AddDays(days int) *DateTime {
 //
 // Creates a new #GDateTime adding the specified values to the current date and
 // time in @datetime. Add negative values to subtract.
-func (datetime *DateTime) AddFull(years int, months int, days int, hours int, minutes int, seconds float64) *DateTime {
+func (datetime *DateTime) AddFull(years int32, months int32, days int32, hours int32, minutes int32, seconds float64) *DateTime {
 	var carg0 *C.GDateTime // in, none, converted
 	var carg1 C.gint       // in, none, casted
 	var carg2 C.gint       // in, none, casted
@@ -16874,7 +16391,7 @@ func (datetime *DateTime) AddFull(years int, months int, days int, hours int, mi
 // 
 // The function takes the following parameters:
 // 
-// 	- hours int: the number of hours to add 
+// 	- hours int32: the number of hours to add 
 // 
 // The function returns the following values:
 // 
@@ -16882,7 +16399,7 @@ func (datetime *DateTime) AddFull(years int, months int, days int, hours int, mi
 //
 // Creates a copy of @datetime and adds the specified number of hours.
 // Add negative values to subtract hours.
-func (datetime *DateTime) AddHours(hours int) *DateTime {
+func (datetime *DateTime) AddHours(hours int32) *DateTime {
 	var carg0 *C.GDateTime // in, none, converted
 	var carg1 C.gint       // in, none, casted
 	var cret  *C.GDateTime // return, full, converted, nullable
@@ -16907,7 +16424,7 @@ func (datetime *DateTime) AddHours(hours int) *DateTime {
 // 
 // The function takes the following parameters:
 // 
-// 	- minutes int: the number of minutes to add 
+// 	- minutes int32: the number of minutes to add 
 // 
 // The function returns the following values:
 // 
@@ -16915,7 +16432,7 @@ func (datetime *DateTime) AddHours(hours int) *DateTime {
 //
 // Creates a copy of @datetime adding the specified number of minutes.
 // Add negative values to subtract minutes.
-func (datetime *DateTime) AddMinutes(minutes int) *DateTime {
+func (datetime *DateTime) AddMinutes(minutes int32) *DateTime {
 	var carg0 *C.GDateTime // in, none, converted
 	var carg1 C.gint       // in, none, casted
 	var cret  *C.GDateTime // return, full, converted, nullable
@@ -16940,7 +16457,7 @@ func (datetime *DateTime) AddMinutes(minutes int) *DateTime {
 // 
 // The function takes the following parameters:
 // 
-// 	- months int: the number of months 
+// 	- months int32: the number of months 
 // 
 // The function returns the following values:
 // 
@@ -16953,7 +16470,7 @@ func (datetime *DateTime) AddMinutes(minutes int) *DateTime {
 // of days in the updated calendar month. For example, if adding 1 month to
 // 31st January 2018, the result would be 28th February 2018. In 2020 (a leap
 // year), the result would be 29th February.
-func (datetime *DateTime) AddMonths(months int) *DateTime {
+func (datetime *DateTime) AddMonths(months int32) *DateTime {
 	var carg0 *C.GDateTime // in, none, converted
 	var carg1 C.gint       // in, none, casted
 	var cret  *C.GDateTime // return, full, converted, nullable
@@ -17011,7 +16528,7 @@ func (datetime *DateTime) AddSeconds(seconds float64) *DateTime {
 // 
 // The function takes the following parameters:
 // 
-// 	- weeks int: the number of weeks 
+// 	- weeks int32: the number of weeks 
 // 
 // The function returns the following values:
 // 
@@ -17019,7 +16536,7 @@ func (datetime *DateTime) AddSeconds(seconds float64) *DateTime {
 //
 // Creates a copy of @datetime and adds the specified number of weeks to the
 // copy. Add negative values to subtract weeks.
-func (datetime *DateTime) AddWeeks(weeks int) *DateTime {
+func (datetime *DateTime) AddWeeks(weeks int32) *DateTime {
 	var carg0 *C.GDateTime // in, none, converted
 	var carg1 C.gint       // in, none, casted
 	var cret  *C.GDateTime // return, full, converted, nullable
@@ -17044,7 +16561,7 @@ func (datetime *DateTime) AddWeeks(weeks int) *DateTime {
 // 
 // The function takes the following parameters:
 // 
-// 	- years int: the number of years 
+// 	- years int32: the number of years 
 // 
 // The function returns the following values:
 // 
@@ -17055,7 +16572,7 @@ func (datetime *DateTime) AddWeeks(weeks int) *DateTime {
 // 
 // As with g_date_time_add_months(), if the resulting date would be 29th
 // February on a non-leap year, the day will be clamped to 28th February.
-func (datetime *DateTime) AddYears(years int) *DateTime {
+func (datetime *DateTime) AddYears(years int32) *DateTime {
 	var carg0 *C.GDateTime // in, none, converted
 	var carg1 C.gint       // in, none, casted
 	var cret  *C.GDateTime // return, full, converted, nullable
@@ -17300,11 +16817,11 @@ func (datetime *DateTime) FormatISO8601() string {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Retrieves the day of the month represented by @datetime in the gregorian
 // calendar.
-func (datetime *DateTime) GetDayOfMonth() int {
+func (datetime *DateTime) GetDayOfMonth() int32 {
 	var carg0 *C.GDateTime // in, none, converted
 	var cret  C.gint       // return, none, casted
 
@@ -17313,9 +16830,9 @@ func (datetime *DateTime) GetDayOfMonth() int {
 	cret = C.g_date_time_get_day_of_month(carg0)
 	runtime.KeepAlive(datetime)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -17324,11 +16841,11 @@ func (datetime *DateTime) GetDayOfMonth() int {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Retrieves the ISO 8601 day of the week on which @datetime falls (1 is
 // Monday, 2 is Tuesday... 7 is Sunday).
-func (datetime *DateTime) GetDayOfWeek() int {
+func (datetime *DateTime) GetDayOfWeek() int32 {
 	var carg0 *C.GDateTime // in, none, converted
 	var cret  C.gint       // return, none, casted
 
@@ -17337,9 +16854,9 @@ func (datetime *DateTime) GetDayOfWeek() int {
 	cret = C.g_date_time_get_day_of_week(carg0)
 	runtime.KeepAlive(datetime)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -17348,11 +16865,11 @@ func (datetime *DateTime) GetDayOfWeek() int {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Retrieves the day of the year represented by @datetime in the Gregorian
 // calendar.
-func (datetime *DateTime) GetDayOfYear() int {
+func (datetime *DateTime) GetDayOfYear() int32 {
 	var carg0 *C.GDateTime // in, none, converted
 	var cret  C.gint       // return, none, casted
 
@@ -17361,9 +16878,9 @@ func (datetime *DateTime) GetDayOfYear() int {
 	cret = C.g_date_time_get_day_of_year(carg0)
 	runtime.KeepAlive(datetime)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -17372,10 +16889,10 @@ func (datetime *DateTime) GetDayOfYear() int {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Retrieves the hour of the day represented by @datetime
-func (datetime *DateTime) GetHour() int {
+func (datetime *DateTime) GetHour() int32 {
 	var carg0 *C.GDateTime // in, none, converted
 	var cret  C.gint       // return, none, casted
 
@@ -17384,9 +16901,9 @@ func (datetime *DateTime) GetHour() int {
 	cret = C.g_date_time_get_hour(carg0)
 	runtime.KeepAlive(datetime)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -17395,10 +16912,10 @@ func (datetime *DateTime) GetHour() int {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Retrieves the microsecond of the date represented by @datetime
-func (datetime *DateTime) GetMicrosecond() int {
+func (datetime *DateTime) GetMicrosecond() int32 {
 	var carg0 *C.GDateTime // in, none, converted
 	var cret  C.gint       // return, none, casted
 
@@ -17407,9 +16924,9 @@ func (datetime *DateTime) GetMicrosecond() int {
 	cret = C.g_date_time_get_microsecond(carg0)
 	runtime.KeepAlive(datetime)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -17418,10 +16935,10 @@ func (datetime *DateTime) GetMicrosecond() int {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Retrieves the minute of the hour represented by @datetime
-func (datetime *DateTime) GetMinute() int {
+func (datetime *DateTime) GetMinute() int32 {
 	var carg0 *C.GDateTime // in, none, converted
 	var cret  C.gint       // return, none, casted
 
@@ -17430,9 +16947,9 @@ func (datetime *DateTime) GetMinute() int {
 	cret = C.g_date_time_get_minute(carg0)
 	runtime.KeepAlive(datetime)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -17441,11 +16958,11 @@ func (datetime *DateTime) GetMinute() int {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Retrieves the month of the year represented by @datetime in the Gregorian
 // calendar.
-func (datetime *DateTime) GetMonth() int {
+func (datetime *DateTime) GetMonth() int32 {
 	var carg0 *C.GDateTime // in, none, converted
 	var cret  C.gint       // return, none, casted
 
@@ -17454,9 +16971,9 @@ func (datetime *DateTime) GetMonth() int {
 	cret = C.g_date_time_get_month(carg0)
 	runtime.KeepAlive(datetime)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -17465,10 +16982,10 @@ func (datetime *DateTime) GetMonth() int {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Retrieves the second of the minute represented by @datetime
-func (datetime *DateTime) GetSecond() int {
+func (datetime *DateTime) GetSecond() int32 {
 	var carg0 *C.GDateTime // in, none, converted
 	var cret  C.gint       // return, none, casted
 
@@ -17477,9 +16994,9 @@ func (datetime *DateTime) GetSecond() int {
 	cret = C.g_date_time_get_second(carg0)
 	runtime.KeepAlive(datetime)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -17593,7 +17110,7 @@ func (datetime *DateTime) GetUTCOffset() TimeSpan {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Returns the ISO 8601 week-numbering year in which the week containing
 // @datetime falls.
@@ -17626,7 +17143,7 @@ func (datetime *DateTime) GetUTCOffset() TimeSpan {
 // 
 // Note that January 1 0001 in the proleptic Gregorian calendar is a
 // Monday, so this function never returns 0.
-func (datetime *DateTime) GetWeekNumberingYear() int {
+func (datetime *DateTime) GetWeekNumberingYear() int32 {
 	var carg0 *C.GDateTime // in, none, converted
 	var cret  C.gint       // return, none, casted
 
@@ -17635,9 +17152,9 @@ func (datetime *DateTime) GetWeekNumberingYear() int {
 	cret = C.g_date_time_get_week_numbering_year(carg0)
 	runtime.KeepAlive(datetime)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -17646,7 +17163,7 @@ func (datetime *DateTime) GetWeekNumberingYear() int {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Returns the ISO 8601 week number for the week containing @datetime.
 // The ISO 8601 week number is the same for every day of the week (from
@@ -17663,7 +17180,7 @@ func (datetime *DateTime) GetWeekNumberingYear() int {
 // previous year.  Similarly, the final days of a calendar year may be
 // considered as being part of the first ISO 8601 week of the next year
 // if 4 or more days of that week are contained within the new year.
-func (datetime *DateTime) GetWeekOfYear() int {
+func (datetime *DateTime) GetWeekOfYear() int32 {
 	var carg0 *C.GDateTime // in, none, converted
 	var cret  C.gint       // return, none, casted
 
@@ -17672,9 +17189,9 @@ func (datetime *DateTime) GetWeekOfYear() int {
 	cret = C.g_date_time_get_week_of_year(carg0)
 	runtime.KeepAlive(datetime)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -17683,10 +17200,10 @@ func (datetime *DateTime) GetWeekOfYear() int {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Retrieves the year represented by @datetime in the Gregorian calendar.
-func (datetime *DateTime) GetYear() int {
+func (datetime *DateTime) GetYear() int32 {
 	var carg0 *C.GDateTime // in, none, converted
 	var cret  C.gint       // return, none, casted
 
@@ -17695,9 +17212,9 @@ func (datetime *DateTime) GetYear() int {
 	cret = C.g_date_time_get_year(carg0)
 	runtime.KeepAlive(datetime)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -17706,12 +17223,12 @@ func (datetime *DateTime) GetYear() int {
 // 
 // The function returns the following values:
 // 
-// 	- year int: the return location for the gregorian year, or %NULL. 
-// 	- month int: the return location for the month of the year, or %NULL. 
-// 	- day int: the return location for the day of the month, or %NULL. 
+// 	- year int32: the return location for the gregorian year, or %NULL. 
+// 	- month int32: the return location for the month of the year, or %NULL. 
+// 	- day int32: the return location for the day of the month, or %NULL. 
 //
 // Retrieves the Gregorian day, month, and year of a given #GDateTime.
-func (datetime *DateTime) GetYmd() (int, int, int) {
+func (datetime *DateTime) GetYmd() (int32, int32, int32) {
 	var carg0 *C.GDateTime // in, none, converted
 	var carg1 C.gint       // out, full, casted
 	var carg2 C.gint       // out, full, casted
@@ -17722,13 +17239,13 @@ func (datetime *DateTime) GetYmd() (int, int, int) {
 	C.g_date_time_get_ymd(carg0, &carg1, &carg2, &carg3)
 	runtime.KeepAlive(datetime)
 
-	var year  int
-	var month int
-	var day   int
+	var year  int32
+	var month int32
+	var day   int32
 
-	year = int(carg1)
-	month = int(carg2)
-	day = int(carg3)
+	year = int32(carg1)
+	month = int32(carg2)
+	day = int32(carg3)
 
 	return year, month, day
 }
@@ -18626,14 +18143,14 @@ func NewIOChannelFile(filename string, mode string) (*IOChannel, error) {
 // 
 // The function takes the following parameters:
 // 
-// 	- en int: an `errno` error number, e.g. `EINVAL` 
+// 	- en int32: an `errno` error number, e.g. `EINVAL` 
 // 
 // The function returns the following values:
 // 
 // 	- goret IOChannelError 
 //
 // Converts an `errno` error number to a #GIOChannelError.
-func IOChannelErrorFromErrno(en int) IOChannelError {
+func IOChannelErrorFromErrno(en int32) IOChannelError {
 	var carg1 C.gint            // in, none, casted
 	var cret  C.GIOChannelError // return, none, casted
 
@@ -18856,13 +18373,13 @@ func (channel *IOChannel) GetFlags() IOFlags {
 // 
 // The function returns the following values:
 // 
-// 	- length int: a location to return the length of the line terminator 
+// 	- length int32: a location to return the length of the line terminator 
 // 	- goret string 
 //
 // This returns the string that #GIOChannel uses to determine
 // where in the file a line break occurs. A value of %NULL
 // indicates autodetection.
-func (channel *IOChannel) GetLineTerm() (int, string) {
+func (channel *IOChannel) GetLineTerm() (int32, string) {
 	var carg0 *C.GIOChannel // in, none, converted
 	var carg1 C.gint        // out, full, casted
 	var cret  *C.gchar      // return, none, string
@@ -18872,10 +18389,10 @@ func (channel *IOChannel) GetLineTerm() (int, string) {
 	cret = C.g_io_channel_get_line_term(carg0, &carg1)
 	runtime.KeepAlive(channel)
 
-	var length int
+	var length int32
 	var goret  string
 
-	length = int(carg1)
+	length = int32(carg1)
 	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 
 	return length, goret
@@ -19265,13 +18782,13 @@ func (channel *IOChannel) SetFlags(flags IOFlags) (IOStatus, error) {
 //             autodetect.  Autodetection breaks on "\n", "\r\n", "\r", "\0",
 //             and the Unicode paragraph separator. Autodetection should not be
 //             used for anything other than file-based channels. 
-// 	- length int: The length of the termination string. If -1 is passed, the
+// 	- length int32: The length of the termination string. If -1 is passed, the
 //          string is assumed to be nul-terminated. This option allows
 //          termination strings with embedded nuls. 
 //
 // This sets the string that #GIOChannel uses to determine
 // where in the file a line break occurs.
-func (channel *IOChannel) SetLineTerm(lineTerm string, length int) {
+func (channel *IOChannel) SetLineTerm(lineTerm string, length int32) {
 	var carg0 *C.GIOChannel // in, none, converted
 	var carg1 *C.gchar      // in, none, string, nullable-string
 	var carg2 C.gint        // in, none, casted
@@ -20013,7 +19530,7 @@ func (keyFile *KeyFile) GetInt64(groupName string, key string) (int64, error) {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 // 	- _goerr error (nullable): an error 
 //
 // Returns the value associated with @key under @group_name as an
@@ -20024,7 +19541,7 @@ func (keyFile *KeyFile) GetInt64(groupName string, key string) (int64, error) {
 // with @key cannot be interpreted as an integer, or is out of range
 // for a #gint, then 0 is returned
 // and @error is set to %G_KEY_FILE_ERROR_INVALID_VALUE.
-func (keyFile *KeyFile) GetInteger(groupName string, key string) (int, error) {
+func (keyFile *KeyFile) GetInteger(groupName string, key string) (int32, error) {
 	var carg0 *C.GKeyFile // in, none, converted
 	var carg1 *C.gchar    // in, none, string
 	var carg2 *C.gchar    // in, none, string
@@ -20042,10 +19559,10 @@ func (keyFile *KeyFile) GetInteger(groupName string, key string) (int, error) {
 	runtime.KeepAlive(groupName)
 	runtime.KeepAlive(key)
 
-	var goret  int
+	var goret  int32
 	var _goerr error
 
-	goret = int(cret)
+	goret = int32(cret)
 	if _cerr != nil {
 		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -20063,7 +19580,7 @@ func (keyFile *KeyFile) GetInteger(groupName string, key string) (int, error) {
 // The function returns the following values:
 // 
 // 	- length uint: the number of integers returned 
-// 	- goret []int 
+// 	- goret []int32 
 // 	- _goerr error (nullable): an error 
 //
 // Returns the values associated with @key under @group_name as
@@ -20074,7 +19591,7 @@ func (keyFile *KeyFile) GetInteger(groupName string, key string) (int, error) {
 // with @key cannot be interpreted as integers, or are out of range for
 // #gint, then %NULL is returned
 // and @error is set to %G_KEY_FILE_ERROR_INVALID_VALUE.
-func (keyFile *KeyFile) GetIntegerList(groupName string, key string) (uint, []int, error) {
+func (keyFile *KeyFile) GetIntegerList(groupName string, key string) (uint, []int32, error) {
 	var carg0 *C.GKeyFile // in, none, converted
 	var carg1 *C.gchar    // in, none, string
 	var carg2 *C.gchar    // in, none, string
@@ -20094,13 +19611,13 @@ func (keyFile *KeyFile) GetIntegerList(groupName string, key string) (uint, []in
 	runtime.KeepAlive(key)
 
 	var length uint
-	var goret  []int
+	var goret  []int32
 	var _goerr error
 
 	length = uint(carg3)
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []int (gint*)")
+	panic("unimplemented conversion of []int32 (gint*)")
 	if _cerr != nil {
 		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -21257,11 +20774,11 @@ func (keyFile *KeyFile) SetInt64(groupName string, key string, value int64) {
 // 
 // 	- groupName string: a group name 
 // 	- key string: a key 
-// 	- value int: an integer value 
+// 	- value int32: an integer value 
 //
 // Associates a new integer value with @key under @group_name.
 // If @key cannot be found then it is created.
-func (keyFile *KeyFile) SetInteger(groupName string, key string, value int) {
+func (keyFile *KeyFile) SetInteger(groupName string, key string, value int32) {
 	var carg0 *C.GKeyFile // in, none, converted
 	var carg1 *C.gchar    // in, none, string
 	var carg2 *C.gchar    // in, none, string
@@ -21287,11 +20804,11 @@ func (keyFile *KeyFile) SetInteger(groupName string, key string, value int) {
 // 
 // 	- groupName string: a group name 
 // 	- key string: a key 
-// 	- list []int: an array of integer values 
+// 	- list []int32: an array of integer values 
 //
 // Associates a list of integer values with @key under @group_name.
 // If @key cannot be found then it is created.
-func (keyFile *KeyFile) SetIntegerList(groupName string, key string, list []int) {
+func (keyFile *KeyFile) SetIntegerList(groupName string, key string, list []int32) {
 	var carg0 *C.GKeyFile // in, none, converted
 	var carg1 *C.gchar    // in, none, string
 	var carg2 *C.gchar    // in, none, string
@@ -21306,7 +20823,7 @@ func (keyFile *KeyFile) SetIntegerList(groupName string, key string, list []int)
 	_ = list
 	_ = carg3
 	_ = carg4
-	panic("unimplemented conversion of []int (gint*)")
+	panic("unimplemented conversion of []int32 (gint*)")
 
 	C.g_key_file_set_integer_list(carg0, carg1, carg2, carg3, carg4)
 	runtime.KeepAlive(keyFile)
@@ -21893,14 +21410,14 @@ func (_context *MainContext) Acquire() bool {
 // 
 // 	- fd *PollFD: a #GPollFD structure holding information about a file
 //      descriptor to watch. 
-// 	- priority int: the priority for this file descriptor which should be
+// 	- priority int32: the priority for this file descriptor which should be
 //      the same as the priority used for [method@GLib.Source.attach] to ensure
 //      that the file descriptor is polled whenever the results may be needed. 
 //
 // Adds a file descriptor to the set of file descriptors polled for
 // this context. This will very seldom be used directly. Instead
 // a typical event source will use `g_source_add_unix_fd` instead.
-func (_context *MainContext) AddPoll(fd *PollFD, priority int) {
+func (_context *MainContext) AddPoll(fd *PollFD, priority int32) {
 	var carg0 *C.GMainContext // in, none, converted
 	var carg1 *C.GPollFD      // in, none, converted
 	var carg2 C.gint          // in, none, casted
@@ -21919,7 +21436,7 @@ func (_context *MainContext) AddPoll(fd *PollFD, priority int) {
 // 
 // The function takes the following parameters:
 // 
-// 	- maxPriority int: the maximum numerical priority of sources to check 
+// 	- maxPriority int32: the maximum numerical priority of sources to check 
 // 	- fds []PollFD: array of #GPollFD's that was passed to
 //       the last call to [method@GLib.MainContext.query] 
 // 
@@ -21937,7 +21454,7 @@ func (_context *MainContext) AddPoll(fd *PollFD, priority int) {
 // 
 // Since 2.76 @context can be %NULL to use the global-default
 // main context.
-func (_context *MainContext) Check(maxPriority int, fds []PollFD) bool {
+func (_context *MainContext) Check(maxPriority int32, fds []PollFD) bool {
 	var carg0 *C.GMainContext // in, none, converted
 	var carg1 C.gint          // in, none, casted
 	var carg2 *C.GPollFD      // in, transfer: none, C Pointers: 1, Name: array[PollFD], array (inner: *typesystem.Record, length-by: carg3)
@@ -22028,7 +21545,7 @@ func (_context *MainContext) FindSourceByID(sourceId uint) *Source {
 // 
 // The function takes the following parameters:
 // 
-// 	- priority int: the priority at which to run @function 
+// 	- priority int32: the priority at which to run @function 
 // 	- function SourceFunc: function to call 
 //
 // Invokes a function in such a way that @context is owned during the
@@ -22040,7 +21557,7 @@ func (_context *MainContext) FindSourceByID(sourceId uint) *Source {
 // 
 // @notify should not assume that it is called from any particular
 // thread or with any particular context acquired.
-func (_context *MainContext) InvokeFull(priority int, function SourceFunc) {
+func (_context *MainContext) InvokeFull(priority int32, function SourceFunc) {
 	var carg0 *C.GMainContext  // in, none, converted
 	var carg1 C.gint           // in, none, casted
 	var carg2 C.GSourceFunc    // callback, scope: notified, closure: carg3, destroy: carg4
@@ -22174,7 +21691,7 @@ func (_context *MainContext) PopThreadDefault() {
 // 
 // The function returns the following values:
 // 
-// 	- priority int: location to store priority of highest priority
+// 	- priority int32: location to store priority of highest priority
 //            source already ready. 
 // 	- goret bool 
 //
@@ -22183,7 +21700,7 @@ func (_context *MainContext) PopThreadDefault() {
 // 
 // You must have successfully acquired the context with
 // [method@GLib.MainContext.acquire] before you may call this function.
-func (_context *MainContext) Prepare() (int, bool) {
+func (_context *MainContext) Prepare() (int32, bool) {
 	var carg0 *C.GMainContext // in, none, converted
 	var carg1 C.gint          // out, full, casted
 	var cret  C.gboolean      // return
@@ -22193,10 +21710,10 @@ func (_context *MainContext) Prepare() (int, bool) {
 	cret = C.g_main_context_prepare(carg0, &carg1)
 	runtime.KeepAlive(_context)
 
-	var priority int
+	var priority int32
 	var goret    bool
 
-	priority = int(carg1)
+	priority = int32(carg1)
 	if cret != 0 {
 		goret = true
 	}
@@ -22653,7 +22170,7 @@ func NewMappedFile(filename string, writable bool) (*MappedFile, error) {
 // 
 // The function takes the following parameters:
 // 
-// 	- fd int: The file descriptor of the file to load 
+// 	- fd int32: The file descriptor of the file to load 
 // 	- writable bool: whether the mapping should be writable 
 // 
 // The function returns the following values:
@@ -22672,7 +22189,7 @@ func NewMappedFile(filename string, writable bool) (*MappedFile, error) {
 // of the #GMappedFile. Therefore, mapping should only be used if the file
 // will not be modified, or if all modifications of the file are done
 // atomically (e.g. using g_file_set_contents()).
-func NewMappedFileFromFd(fd int, writable bool) (*MappedFile, error) {
+func NewMappedFileFromFd(fd int32, writable bool) (*MappedFile, error) {
 	var carg1 C.gint         // in, none, casted
 	var carg2 C.gboolean     // in
 	var cret  *C.GMappedFile // return, full, converted
@@ -22956,14 +22473,14 @@ func (_context *MarkupParseContext) GetElementStack() []string {
 // 
 // The function returns the following values:
 // 
-// 	- lineNumber int: return location for a line number, or %NULL 
-// 	- charNumber int: return location for a char-on-line number, or %NULL 
+// 	- lineNumber int32: return location for a line number, or %NULL 
+// 	- charNumber int32: return location for a char-on-line number, or %NULL 
 //
 // Retrieves the current line number and the number of the character on
 // that line. Intended for use in error messages; there are no strict
 // semantics for what constitutes the "current" line number other than
 // "the best number we could come up with for error messages."
-func (_context *MarkupParseContext) GetPosition() (int, int) {
+func (_context *MarkupParseContext) GetPosition() (int32, int32) {
 	var carg0 *C.GMarkupParseContext // in, none, converted
 	var carg1 C.gint                 // out, full, casted
 	var carg2 C.gint                 // out, full, casted
@@ -22973,11 +22490,11 @@ func (_context *MarkupParseContext) GetPosition() (int, int) {
 	C.g_markup_parse_context_get_position(carg0, &carg1, &carg2)
 	runtime.KeepAlive(_context)
 
-	var lineNumber int
-	var charNumber int
+	var lineNumber int32
+	var charNumber int32
 
-	lineNumber = int(carg1)
-	charNumber = int(carg2)
+	lineNumber = int32(carg1)
+	charNumber = int32(carg2)
 
 	return lineNumber, charNumber
 }
@@ -23234,7 +22751,7 @@ func (matchInfo *MatchInfo) ExpandReferences(stringToExpand string) (string, err
 // 
 // The function takes the following parameters:
 // 
-// 	- matchNum int: number of the sub expression 
+// 	- matchNum int32: number of the sub expression 
 // 
 // The function returns the following values:
 // 
@@ -23256,7 +22773,7 @@ func (matchInfo *MatchInfo) ExpandReferences(stringToExpand string) (string, err
 // 
 // The string is fetched from the string passed to the match function,
 // so you cannot call this function after freeing the string.
-func (matchInfo *MatchInfo) Fetch(matchNum int) string {
+func (matchInfo *MatchInfo) Fetch(matchNum int32) string {
 	var carg0 *C.GMatchInfo // in, none, converted
 	var carg1 C.gint        // in, none, casted
 	var cret  *C.gchar      // return, full, string, nullable-string
@@ -23367,9 +22884,9 @@ func (matchInfo *MatchInfo) FetchNamed(name string) string {
 // 
 // The function returns the following values:
 // 
-// 	- startPos int: pointer to location where to store
+// 	- startPos int32: pointer to location where to store
 //     the start position, or %NULL 
-// 	- endPos int: pointer to location where to store
+// 	- endPos int32: pointer to location where to store
 //     the end position, or %NULL 
 // 	- goret bool 
 //
@@ -23378,7 +22895,7 @@ func (matchInfo *MatchInfo) FetchNamed(name string) string {
 // If @name is a valid sub pattern name but it didn't match anything
 // (e.g. sub pattern `"X"`, matching `"b"` against `"(?P&lt;X&gt;a)?b"`)
 // then @start_pos and @end_pos are set to -1 and %TRUE is returned.
-func (matchInfo *MatchInfo) FetchNamedPos(name string) (int, int, bool) {
+func (matchInfo *MatchInfo) FetchNamedPos(name string) (int32, int32, bool) {
 	var carg0 *C.GMatchInfo // in, none, converted
 	var carg1 *C.gchar      // in, none, string
 	var carg2 C.gint        // out, full, casted
@@ -23393,12 +22910,12 @@ func (matchInfo *MatchInfo) FetchNamedPos(name string) (int, int, bool) {
 	runtime.KeepAlive(matchInfo)
 	runtime.KeepAlive(name)
 
-	var startPos int
-	var endPos   int
+	var startPos int32
+	var endPos   int32
 	var goret    bool
 
-	startPos = int(carg2)
-	endPos = int(carg3)
+	startPos = int32(carg2)
+	endPos = int32(carg3)
 	if cret != 0 {
 		goret = true
 	}
@@ -23410,13 +22927,13 @@ func (matchInfo *MatchInfo) FetchNamedPos(name string) (int, int, bool) {
 // 
 // The function takes the following parameters:
 // 
-// 	- matchNum int: number of the sub expression 
+// 	- matchNum int32: number of the sub expression 
 // 
 // The function returns the following values:
 // 
-// 	- startPos int: pointer to location where to store
+// 	- startPos int32: pointer to location where to store
 //     the start position, or %NULL 
-// 	- endPos int: pointer to location where to store
+// 	- endPos int32: pointer to location where to store
 //     the end position, or %NULL 
 // 	- goret bool 
 //
@@ -23433,7 +22950,7 @@ func (matchInfo *MatchInfo) FetchNamedPos(name string) (int, int, bool) {
 // position is not that of a set of parentheses but that of a matched
 // substring. Substrings are matched in reverse order of length, so
 // 0 is the longest match.
-func (matchInfo *MatchInfo) FetchPos(matchNum int) (int, int, bool) {
+func (matchInfo *MatchInfo) FetchPos(matchNum int32) (int32, int32, bool) {
 	var carg0 *C.GMatchInfo // in, none, converted
 	var carg1 C.gint        // in, none, casted
 	var carg2 C.gint        // out, full, casted
@@ -23447,12 +22964,12 @@ func (matchInfo *MatchInfo) FetchPos(matchNum int) (int, int, bool) {
 	runtime.KeepAlive(matchInfo)
 	runtime.KeepAlive(matchNum)
 
-	var startPos int
-	var endPos   int
+	var startPos int32
+	var endPos   int32
 	var goret    bool
 
-	startPos = int(carg2)
-	endPos = int(carg3)
+	startPos = int32(carg2)
+	endPos = int32(carg3)
 	if cret != 0 {
 		goret = true
 	}
@@ -23464,7 +22981,7 @@ func (matchInfo *MatchInfo) FetchPos(matchNum int) (int, int, bool) {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Retrieves the number of matched substrings (including substring 0,
 // that is the whole matched text), so 1 is returned if the pattern
@@ -23474,7 +22991,7 @@ func (matchInfo *MatchInfo) FetchPos(matchNum int) (int, int, bool) {
 // using g_regex_match_all() or g_regex_match_all_full(), the retrieved
 // count is not that of the number of capturing parentheses but that of
 // the number of matched substrings.
-func (matchInfo *MatchInfo) GetMatchCount() int {
+func (matchInfo *MatchInfo) GetMatchCount() int32 {
 	var carg0 *C.GMatchInfo // in, none, converted
 	var cret  C.gint        // return, none, casted
 
@@ -23483,9 +23000,9 @@ func (matchInfo *MatchInfo) GetMatchCount() int {
 	cret = C.g_match_info_get_match_count(carg0)
 	runtime.KeepAlive(matchInfo)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -23729,12 +23246,12 @@ func UnsafeNodeToGlibFull(n *Node) unsafe.Pointer {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Gets the position of a #GNode with respect to its siblings.
 // @child must be a child of @node. The first child is numbered 0,
 // the second 1, and so on.
-func (node *Node) ChildPosition(child *Node) int {
+func (node *Node) ChildPosition(child *Node) int32 {
 	var carg0 *C.GNode // in, none, converted
 	var carg1 *C.GNode // in, none, converted
 	var cret  C.gint   // return, none, casted
@@ -23746,9 +23263,9 @@ func (node *Node) ChildPosition(child *Node) int {
 	runtime.KeepAlive(node)
 	runtime.KeepAlive(child)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -24696,47 +24213,6 @@ func UnsafePathBufToGlibFull(p *PathBuf) unsafe.Pointer {
 	_p := unsafe.Pointer(p.native)
 	p.native = nil // PathBuf is invalid from here on
 	return _p
-}
-
-// PathBufEqual wraps g_path_buf_equal
-// 
-// The function takes the following parameters:
-// 
-// 	- v1 unsafe.Pointer: a path buffer to compare 
-// 	- v2 unsafe.Pointer: a path buffer to compare 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Compares two path buffers for equality and returns `TRUE`
-// if they are equal.
-// 
-// The path inside the paths buffers are not going to be normalized,
-// so `X/Y/Z/A/..`, `X/./Y/Z` and `X/Y/Z` are not going to be considered
-// equal.
-// 
-// This function can be passed to g_hash_table_new() as the
-// `key_equal_func` parameter.
-func PathBufEqual(v1 unsafe.Pointer, v2 unsafe.Pointer) bool {
-	var carg1 C.gconstpointer // in, none, casted
-	var carg2 C.gconstpointer // in, none, casted
-	var cret  C.gboolean      // return
-
-	carg1 = C.gconstpointer(v1)
-	carg2 = C.gconstpointer(v2)
-
-	cret = C.g_path_buf_equal(carg1, carg2)
-	runtime.KeepAlive(v1)
-	runtime.KeepAlive(v2)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
 }
 
 // Clear wraps g_path_buf_clear
@@ -26014,7 +25490,7 @@ func RegexErrorQuark() Quark {
 // The function takes the following parameters:
 // 
 // 	- str string: the string to escape 
-// 	- length int: the length of @string 
+// 	- length int32: the length of @string 
 // 
 // The function returns the following values:
 // 
@@ -26025,7 +25501,7 @@ func RegexErrorQuark() Quark {
 // 
 // For completeness, @length can be -1 for a nul-terminated string.
 // In this case the output string will be of course equal to @string.
-func RegexEscapeNUL(str string, length int) string {
+func RegexEscapeNUL(str string, length int32) string {
 	var carg1 *C.gchar // in, none, string
 	var carg2 C.gint   // in, none, casted
 	var cret  *C.gchar // return, full, string
@@ -26051,7 +25527,7 @@ func RegexEscapeNUL(str string, length int) string {
 // The function takes the following parameters:
 // 
 // 	- str string: the string to escape 
-// 	- length int: the length of @string, in bytes, or -1 if @string is nul-terminated 
+// 	- length int32: the length of @string, in bytes, or -1 if @string is nul-terminated 
 // 
 // The function returns the following values:
 // 
@@ -26064,7 +25540,7 @@ func RegexEscapeNUL(str string, length int) string {
 // @string can contain nul characters that are replaced with "\0",
 // in this case remember to specify the correct length of @string
 // in @length.
-func RegexEscapeString(str string, length int) string {
+func RegexEscapeString(str string, length int32) string {
 	var carg1 *C.gchar // in, none, string
 	var carg2 C.gint   // in, none, casted
 	var cret  *C.gchar // return, full, string
@@ -26210,10 +25686,10 @@ func RegexSplitSimple(pattern string, str string, compileOptions RegexCompileFla
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Returns the number of capturing subpatterns in the pattern.
-func (regex *Regex) GetCaptureCount() int {
+func (regex *Regex) GetCaptureCount() int32 {
 	var carg0 *C.GRegex // in, none, converted
 	var cret  C.gint    // return, none, casted
 
@@ -26222,9 +25698,9 @@ func (regex *Regex) GetCaptureCount() int {
 	cret = C.g_regex_get_capture_count(carg0)
 	runtime.KeepAlive(regex)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -26308,12 +25784,12 @@ func (regex *Regex) GetMatchFlags() RegexMatchFlags {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Returns the number of the highest back reference
 // in the pattern, or 0 if the pattern does not contain
 // back references.
-func (regex *Regex) GetMaxBackref() int {
+func (regex *Regex) GetMaxBackref() int32 {
 	var carg0 *C.GRegex // in, none, converted
 	var cret  C.gint    // return, none, casted
 
@@ -26322,9 +25798,9 @@ func (regex *Regex) GetMaxBackref() int {
 	cret = C.g_regex_get_max_backref(carg0)
 	runtime.KeepAlive(regex)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -26333,12 +25809,12 @@ func (regex *Regex) GetMaxBackref() int {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Gets the number of characters in the longest lookbehind assertion in the
 // pattern. This information is useful when doing multi-segment matching using
 // the partial matching facilities.
-func (regex *Regex) GetMaxLookbehind() int {
+func (regex *Regex) GetMaxLookbehind() int32 {
 	var carg0 *C.GRegex // in, none, converted
 	var cret  C.gint    // return, none, casted
 
@@ -26347,9 +25823,9 @@ func (regex *Regex) GetMaxLookbehind() int {
 	cret = C.g_regex_get_max_lookbehind(carg0)
 	runtime.KeepAlive(regex)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -26386,10 +25862,10 @@ func (regex *Regex) GetPattern() string {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Retrieves the number of the subexpression named @name.
-func (regex *Regex) GetStringNumber(name string) int {
+func (regex *Regex) GetStringNumber(name string) int32 {
 	var carg0 *C.GRegex // in, none, converted
 	var carg1 *C.gchar  // in, none, string
 	var cret  C.gint    // return, none, casted
@@ -26402,9 +25878,9 @@ func (regex *Regex) GetStringNumber(name string) int {
 	runtime.KeepAlive(regex)
 	runtime.KeepAlive(name)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -26550,7 +26026,7 @@ func (regex *Regex) MatchAll(str string, matchOptions RegexMatchFlags) (*MatchIn
 // The function takes the following parameters:
 // 
 // 	- str string: the string to scan for matches 
-// 	- startPosition int: starting index of the string to match, in bytes 
+// 	- startPosition int32: starting index of the string to match, in bytes 
 // 	- matchOptions RegexMatchFlags: match options 
 // 
 // The function returns the following values:
@@ -26598,7 +26074,7 @@ func (regex *Regex) MatchAll(str string, matchOptions RegexMatchFlags) (*MatchIn
 // @string is not copied and is used in #GMatchInfo internally. If
 // you use any #GMatchInfo method (except g_match_info_free()) after
 // freeing or modifying @string then the behaviour is undefined.
-func (regex *Regex) MatchAllFull(str string, startPosition int, matchOptions RegexMatchFlags) (*MatchInfo, bool, error) {
+func (regex *Regex) MatchAllFull(str string, startPosition int32, matchOptions RegexMatchFlags) (*MatchInfo, bool, error) {
 	var carg0 *C.GRegex          // in, none, converted
 	var carg1 *C.gchar           // in, transfer: none, C Pointers: 1, Name: array[unknown], array (inner: <nil>, length-by: carg2)
 	var carg2 C.gssize           // implicit
@@ -26642,7 +26118,7 @@ func (regex *Regex) MatchAllFull(str string, startPosition int, matchOptions Reg
 // The function takes the following parameters:
 // 
 // 	- str string: the string to scan for matches 
-// 	- startPosition int: starting index of the string to match, in bytes 
+// 	- startPosition int32: starting index of the string to match, in bytes 
 // 	- matchOptions RegexMatchFlags: match options 
 // 
 // The function returns the following values:
@@ -26703,7 +26179,7 @@ func (regex *Regex) MatchAllFull(str string, startPosition int, matchOptions Reg
 //     }
 // }
 // ]|
-func (regex *Regex) MatchFull(str string, startPosition int, matchOptions RegexMatchFlags) (*MatchInfo, bool, error) {
+func (regex *Regex) MatchFull(str string, startPosition int32, matchOptions RegexMatchFlags) (*MatchInfo, bool, error) {
 	var carg0 *C.GRegex          // in, none, converted
 	var carg1 *C.gchar           // in, transfer: none, C Pointers: 1, Name: array[unknown], array (inner: <nil>, length-by: carg2)
 	var carg2 C.gssize           // implicit
@@ -26747,7 +26223,7 @@ func (regex *Regex) MatchFull(str string, startPosition int, matchOptions RegexM
 // The function takes the following parameters:
 // 
 // 	- str string: the string to perform matches against 
-// 	- startPosition int: starting index of the string to match, in bytes 
+// 	- startPosition int32: starting index of the string to match, in bytes 
 // 	- replacement string: text to replace each match with 
 // 	- matchOptions RegexMatchFlags: options for the match 
 // 
@@ -26782,7 +26258,7 @@ func (regex *Regex) MatchFull(str string, startPosition int, matchOptions RegexM
 // Setting @start_position differs from just passing over a shortened
 // string and setting %G_REGEX_MATCH_NOTBOL in the case of a pattern that
 // begins with any kind of lookbehind assertion, such as "\b".
-func (regex *Regex) Replace(str string, startPosition int, replacement string, matchOptions RegexMatchFlags) (string, error) {
+func (regex *Regex) Replace(str string, startPosition int32, replacement string, matchOptions RegexMatchFlags) (string, error) {
 	var carg0 *C.GRegex          // in, none, converted
 	var carg1 *C.gchar           // in, transfer: none, C Pointers: 1, Name: array[unknown], array (inner: <nil>, length-by: carg2)
 	var carg2 C.gssize           // implicit
@@ -26826,7 +26302,7 @@ func (regex *Regex) Replace(str string, startPosition int, replacement string, m
 // The function takes the following parameters:
 // 
 // 	- str string: the string to perform matches against 
-// 	- startPosition int: starting index of the string to match, in bytes 
+// 	- startPosition int32: starting index of the string to match, in bytes 
 // 	- replacement string: text to replace each match with 
 // 	- matchOptions RegexMatchFlags: options for the match 
 // 
@@ -26843,7 +26319,7 @@ func (regex *Regex) Replace(str string, startPosition int, replacement string, m
 // shortened string and setting %G_REGEX_MATCH_NOTBOL in the
 // case of a pattern that begins with any kind of lookbehind
 // assertion, such as "\b".
-func (regex *Regex) ReplaceLiteral(str string, startPosition int, replacement string, matchOptions RegexMatchFlags) (string, error) {
+func (regex *Regex) ReplaceLiteral(str string, startPosition int32, replacement string, matchOptions RegexMatchFlags) (string, error) {
 	var carg0 *C.GRegex          // in, none, converted
 	var carg1 *C.gchar           // in, transfer: none, C Pointers: 1, Name: array[unknown], array (inner: <nil>, length-by: carg2)
 	var carg2 C.gssize           // implicit
@@ -26940,9 +26416,9 @@ func (regex *Regex) Split(str string, matchOptions RegexMatchFlags) []string {
 // The function takes the following parameters:
 // 
 // 	- str string: the string to split with the pattern 
-// 	- startPosition int: starting index of the string to match, in bytes 
+// 	- startPosition int32: starting index of the string to match, in bytes 
 // 	- matchOptions RegexMatchFlags: match time option flags 
-// 	- maxTokens int: the maximum number of tokens to split @string into.
+// 	- maxTokens int32: the maximum number of tokens to split @string into.
 //   If this is less than 1, the string is split completely 
 // 
 // The function returns the following values:
@@ -26971,7 +26447,7 @@ func (regex *Regex) Split(str string, matchOptions RegexMatchFlags) []string {
 // Setting @start_position differs from just passing over a shortened
 // string and setting %G_REGEX_MATCH_NOTBOL in the case of a pattern
 // that begins with any kind of lookbehind assertion, such as "\b".
-func (regex *Regex) SplitFull(str string, startPosition int, matchOptions RegexMatchFlags, maxTokens int) ([]string, error) {
+func (regex *Regex) SplitFull(str string, startPosition int32, matchOptions RegexMatchFlags, maxTokens int32) ([]string, error) {
 	var carg0 *C.GRegex          // in, none, converted
 	var carg1 *C.gchar           // in, transfer: none, C Pointers: 1, Name: array[unknown], array (inner: <nil>, length-by: carg2)
 	var carg2 C.gssize           // implicit
@@ -27216,10 +26692,10 @@ func (scanner *Scanner) GetNextToken() TokenType {
 // 
 // The function takes the following parameters:
 // 
-// 	- inputFd int: a file descriptor 
+// 	- inputFd int32: a file descriptor 
 //
 // Prepares to scan a file.
-func (scanner *Scanner) InputFile(inputFd int) {
+func (scanner *Scanner) InputFile(inputFd int32) {
 	var carg0 *C.GScanner // in, none, converted
 	var carg1 C.gint      // in, none, casted
 
@@ -27374,7 +26850,7 @@ func (scanner *Scanner) SyncFileOffset() {
 //     token is a symbol. 
 // 	- message string: a message string to output at the end of the
 //     warning/error, or %NULL. 
-// 	- isError int: if %TRUE it is output as an error. If %FALSE it is
+// 	- isError int32: if %TRUE it is output as an error. If %FALSE it is
 //     output as a warning. 
 //
 // Outputs a message through the scanner's msg_handler,
@@ -27384,7 +26860,7 @@ func (scanner *Scanner) SyncFileOffset() {
 // call to g_scanner_get_next_token(), as g_scanner_unexp_token()
 // evaluates the scanner's current token (not the peeked token)
 // to construct part of the message.
-func (scanner *Scanner) UnexpToken(expectedToken TokenType, identifierSpec string, symbolSpec string, symbolName string, message string, isError int) {
+func (scanner *Scanner) UnexpToken(expectedToken TokenType, identifierSpec string, symbolSpec string, symbolName string, message string, isError int32) {
 	var carg0 *C.GScanner  // in, none, converted
 	var carg1 C.GTokenType // in, none, casted
 	var carg2 *C.gchar     // in, none, string
@@ -27678,38 +27154,6 @@ func SequenceRemoveRange(begin *SequenceIter, end *SequenceIter) {
 	runtime.KeepAlive(end)
 }
 
-// SequenceSortChanged wraps g_sequence_sort_changed
-// 
-// The function takes the following parameters:
-// 
-// 	- iter *SequenceIter: A #GSequenceIter 
-// 	- cmpFunc CompareDataFunc: the function used to compare items in the sequence 
-//
-// Moves the data pointed to by @iter to a new position as indicated by
-// @cmp_func. This
-// function should be called for items in a sequence already sorted according
-// to @cmp_func whenever some aspect of an item changes so that @cmp_func
-// may return different values for that item.
-// 
-// @cmp_func is called with two items of the @seq, and @cmp_data.
-// It should return 0 if the items are equal, a negative value if
-// the first item comes before the second, and a positive value if
-// the second item comes before the first.
-func SequenceSortChanged(iter *SequenceIter, cmpFunc CompareDataFunc) {
-	var carg1 *C.GSequenceIter   // in, none, converted
-	var carg2 C.GCompareDataFunc // callback, scope: call, closure: carg3
-	var carg3 C.gpointer         // implicit
-
-	carg1 = (*C.GSequenceIter)(UnsafeSequenceIterToGlibNone(iter))
-	carg2 = (*[0]byte)(C._gotk4_glib2_CompareDataFunc)
-	carg3 = C.gpointer(userdata.Register(cmpFunc))
-	defer userdata.Delete(unsafe.Pointer(carg3))
-
-	C.g_sequence_sort_changed(carg1, carg2, carg3)
-	runtime.KeepAlive(iter)
-	runtime.KeepAlive(cmpFunc)
-}
-
 // SequenceSwap wraps g_sequence_swap
 // 
 // The function takes the following parameters:
@@ -27781,7 +27225,7 @@ func (seq *Sequence) GetEndIter() *SequenceIter {
 // 
 // The function takes the following parameters:
 // 
-// 	- pos int: a position in @seq, or -1 for the end 
+// 	- pos int32: a position in @seq, or -1 for the end 
 // 
 // The function returns the following values:
 // 
@@ -27789,7 +27233,7 @@ func (seq *Sequence) GetEndIter() *SequenceIter {
 //
 // Returns the iterator at position @pos. If @pos is negative or larger
 // than the number of items in @seq, the end iterator is returned.
-func (seq *Sequence) GetIterAtPos(pos int) *SequenceIter {
+func (seq *Sequence) GetIterAtPos(pos int32) *SequenceIter {
 	var carg0 *C.GSequence     // in, none, converted
 	var carg1 C.gint           // in, none, casted
 	var cret  *C.GSequenceIter // return, none, converted
@@ -27812,12 +27256,12 @@ func (seq *Sequence) GetIterAtPos(pos int) *SequenceIter {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Returns the positive length (&gt;= 0) of @seq. Note that this method is
 // O(h) where `h' is the height of the tree. It is thus more efficient
 // to use g_sequence_is_empty() when comparing the length to zero.
-func (seq *Sequence) GetLength() int {
+func (seq *Sequence) GetLength() int32 {
 	var carg0 *C.GSequence // in, none, converted
 	var cret  C.gint       // return, none, casted
 
@@ -27826,9 +27270,9 @@ func (seq *Sequence) GetLength() int {
 	cret = C.g_sequence_get_length(carg0)
 	runtime.KeepAlive(seq)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -27860,33 +27304,6 @@ func (seq *Sequence) IsEmpty() bool {
 	}
 
 	return goret
-}
-
-// Sort wraps g_sequence_sort
-// 
-// The function takes the following parameters:
-// 
-// 	- cmpFunc CompareDataFunc: the function used to sort the sequence 
-//
-// Sorts @seq using @cmp_func.
-// 
-// @cmp_func is passed two items of @seq and should
-// return 0 if they are equal, a negative value if the
-// first comes before the second, and a positive value
-// if the second comes before the first.
-func (seq *Sequence) Sort(cmpFunc CompareDataFunc) {
-	var carg0 *C.GSequence       // in, none, converted
-	var carg1 C.GCompareDataFunc // callback, scope: call, closure: carg2
-	var carg2 C.gpointer         // implicit
-
-	carg0 = (*C.GSequence)(UnsafeSequenceToGlibNone(seq))
-	carg1 = (*[0]byte)(C._gotk4_glib2_CompareDataFunc)
-	carg2 = C.gpointer(userdata.Register(cmpFunc))
-	defer userdata.Delete(unsafe.Pointer(carg2))
-
-	C.g_sequence_sort(carg0, carg1, carg2)
-	runtime.KeepAlive(seq)
-	runtime.KeepAlive(cmpFunc)
 }
 
 // SequenceIter wraps GSequenceIter
@@ -27961,13 +27378,13 @@ func UnsafeSequenceIterToGlibFull(s *SequenceIter) unsafe.Pointer {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Returns a negative number if @a comes before @b, 0 if they are equal,
 // and a positive number if @a comes after @b.
 // 
 // The @a and @b iterators must point into the same sequence.
-func (a *SequenceIter) Compare(b *SequenceIter) int {
+func (a *SequenceIter) Compare(b *SequenceIter) int32 {
 	var carg0 *C.GSequenceIter // in, none, converted
 	var carg1 *C.GSequenceIter // in, none, converted
 	var cret  C.gint           // return, none, casted
@@ -27979,9 +27396,9 @@ func (a *SequenceIter) Compare(b *SequenceIter) int {
 	runtime.KeepAlive(a)
 	runtime.KeepAlive(b)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -27990,10 +27407,10 @@ func (a *SequenceIter) Compare(b *SequenceIter) int {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Returns the position of @iter
-func (iter *SequenceIter) GetPosition() int {
+func (iter *SequenceIter) GetPosition() int32 {
 	var carg0 *C.GSequenceIter // in, none, converted
 	var cret  C.gint           // return, none, casted
 
@@ -28002,9 +27419,9 @@ func (iter *SequenceIter) GetPosition() int {
 	cret = C.g_sequence_iter_get_position(carg0)
 	runtime.KeepAlive(iter)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -28086,7 +27503,7 @@ func (iter *SequenceIter) IsEnd() bool {
 // 
 // The function takes the following parameters:
 // 
-// 	- delta int: A positive or negative number indicating how many positions away
+// 	- delta int32: A positive or negative number indicating how many positions away
 //    from @iter the returned #GSequenceIter will be 
 // 
 // The function returns the following values:
@@ -28097,7 +27514,7 @@ func (iter *SequenceIter) IsEnd() bool {
 // If @iter is closer than -@delta positions to the beginning of the sequence,
 // the begin iterator is returned. If @iter is closer than @delta positions
 // to the end of the sequence, the end iterator is returned.
-func (iter *SequenceIter) Move(delta int) *SequenceIter {
+func (iter *SequenceIter) Move(delta int32) *SequenceIter {
 	var carg0 *C.GSequenceIter // in, none, converted
 	var carg1 C.gint           // in, none, casted
 	var cret  *C.GSequenceIter // return, none, converted
@@ -28582,10 +27999,10 @@ func (source *Source) GetName() string {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Gets the priority of a source.
-func (source *Source) GetPriority() int {
+func (source *Source) GetPriority() int32 {
 	var carg0 *C.GSource // in, none, converted
 	var cret  C.gint     // return, none, casted
 
@@ -28594,9 +28011,9 @@ func (source *Source) GetPriority() int {
 	cret = C.g_source_get_priority(carg0)
 	runtime.KeepAlive(source)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -28933,7 +28350,7 @@ func (source *Source) SetName(name string) {
 // 
 // The function takes the following parameters:
 // 
-// 	- priority int: the new priority. 
+// 	- priority int32: the new priority. 
 //
 // Sets the priority of a source. While the main loop is being run, a
 // source will be dispatched if it is ready to be dispatched and no
@@ -28943,7 +28360,7 @@ func (source *Source) SetName(name string) {
 // A child source always has the same priority as its parent.  It is not
 // permitted to change the priority of a source once it has been added
 // as a child of another source.
-func (source *Source) SetPriority(priority int) {
+func (source *Source) SetPriority(priority int32) {
 	var carg0 *C.GSource // in, none, converted
 	var carg1 C.gint     // in, none, casted
 
@@ -29452,7 +28869,7 @@ func NewTimeZoneUTC() *TimeZone {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Finds an interval within @tz that corresponds to the given @time_.
 // The meaning of @time_ depends on @type.
@@ -29472,7 +28889,7 @@ func NewTimeZoneUTC() *TimeZone {
 // example, 02:00 on March 14th 2010 does not exist (due to the leap
 // forward to begin daylight savings time).  -1 is returned in that
 // case.
-func (tz *TimeZone) FindInterval(typ TimeType, time_ int64) int {
+func (tz *TimeZone) FindInterval(typ TimeType, time_ int64) int32 {
 	var carg0 *C.GTimeZone // in, none, converted
 	var carg1 C.GTimeType  // in, none, casted
 	var carg2 C.gint64     // in, none, casted
@@ -29487,9 +28904,9 @@ func (tz *TimeZone) FindInterval(typ TimeType, time_ int64) int {
 	runtime.KeepAlive(typ)
 	runtime.KeepAlive(time_)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -29498,7 +28915,7 @@ func (tz *TimeZone) FindInterval(typ TimeType, time_ int64) int {
 // 
 // The function takes the following parameters:
 // 
-// 	- interval int: an interval within the timezone 
+// 	- interval int32: an interval within the timezone 
 // 
 // The function returns the following values:
 // 
@@ -29510,7 +28927,7 @@ func (tz *TimeZone) FindInterval(typ TimeType, time_ int64) int {
 // For example, in Toronto this is currently "EST" during the winter
 // months and "EDT" during the summer months when daylight savings time
 // is in effect.
-func (tz *TimeZone) GetAbbreviation(interval int) string {
+func (tz *TimeZone) GetAbbreviation(interval int32) string {
 	var carg0 *C.GTimeZone // in, none, converted
 	var carg1 C.gint       // in, none, casted
 	var cret  *C.gchar     // return, none, string
@@ -29563,7 +28980,7 @@ func (tz *TimeZone) GetIdentifier() string {
 // 
 // The function takes the following parameters:
 // 
-// 	- interval int: an interval within the timezone 
+// 	- interval int32: an interval within the timezone 
 // 
 // The function returns the following values:
 // 
@@ -29575,7 +28992,7 @@ func (tz *TimeZone) GetIdentifier() string {
 // The offset is the number of seconds that you add to UTC time to
 // arrive at local time for @tz (ie: negative numbers for time zones
 // west of GMT, positive numbers for east).
-func (tz *TimeZone) GetOffset(interval int) int32 {
+func (tz *TimeZone) GetOffset(interval int32) int32 {
 	var carg0 *C.GTimeZone // in, none, converted
 	var carg1 C.gint       // in, none, casted
 	var cret  C.gint32     // return, none, casted
@@ -29598,7 +29015,7 @@ func (tz *TimeZone) GetOffset(interval int) int32 {
 // 
 // The function takes the following parameters:
 // 
-// 	- interval int: an interval within the timezone 
+// 	- interval int32: an interval within the timezone 
 // 
 // The function returns the following values:
 // 
@@ -29606,7 +29023,7 @@ func (tz *TimeZone) GetOffset(interval int) int32 {
 //
 // Determines if daylight savings time is in effect during a particular
 // @interval of time in the time zone @tz.
-func (tz *TimeZone) IsDst(interval int) bool {
+func (tz *TimeZone) IsDst(interval int32) bool {
 	var carg0 *C.GTimeZone // in, none, converted
 	var carg1 C.gint       // in, none, casted
 	var cret  C.gboolean   // return
@@ -30167,7 +29584,7 @@ func UnsafeUriToGlibFull(u *Uri) unsafe.Pointer {
 // 	- scheme string: the URI scheme 
 // 	- userinfo string (nullable): the userinfo component, or %NULL 
 // 	- host string (nullable): the host component, or %NULL 
-// 	- port int: the port, or `-1` 
+// 	- port int32: the port, or `-1` 
 // 	- path string: the path component 
 // 	- query string (nullable): the query component, or %NULL 
 // 	- fragment string (nullable): the fragment, or %NULL 
@@ -30180,7 +29597,7 @@ func UnsafeUriToGlibFull(u *Uri) unsafe.Pointer {
 // 
 // See also g_uri_build_with_user(), which allows specifying the
 // components of the "userinfo" separately.
-func UriBuild(flags URIFlags, scheme string, userinfo string, host string, port int, path string, query string, fragment string) *Uri {
+func UriBuild(flags URIFlags, scheme string, userinfo string, host string, port int32, path string, query string, fragment string) *Uri {
 	var carg1 C.GUriFlags // in, none, casted
 	var carg2 *C.gchar    // in, none, string
 	var carg3 *C.gchar    // in, none, string, nullable-string
@@ -30241,7 +29658,7 @@ func UriBuild(flags URIFlags, scheme string, userinfo string, host string, port 
 // 	- password string (nullable): the password component of the userinfo, or %NULL 
 // 	- authParams string (nullable): the auth params of the userinfo, or %NULL 
 // 	- host string (nullable): the host component, or %NULL 
-// 	- port int: the port, or `-1` 
+// 	- port int32: the port, or `-1` 
 // 	- path string: the path component 
 // 	- query string (nullable): the query component, or %NULL 
 // 	- fragment string (nullable): the fragment, or %NULL 
@@ -30258,7 +29675,7 @@ func UriBuild(flags URIFlags, scheme string, userinfo string, host string, port 
 // In contrast to g_uri_build(), this allows specifying the components
 // of the ‘userinfo’ field separately. Note that @user must be non-%NULL
 // if either @password or @auth_params is non-%NULL.
-func UriBuildWithUser(flags URIFlags, scheme string, user string, password string, authParams string, host string, port int, path string, query string, fragment string) *Uri {
+func UriBuildWithUser(flags URIFlags, scheme string, user string, password string, authParams string, host string, port int32, path string, query string, fragment string) *Uri {
 	var carg1  C.GUriFlags // in, none, casted
 	var carg2  *C.gchar    // in, none, string
 	var carg3  *C.gchar    // in, none, string, nullable-string
@@ -30493,7 +29910,7 @@ func UriIsValid(uriString string, flags URIFlags) (bool, error) {
 // 	- scheme string (nullable): the URI scheme, or %NULL 
 // 	- userinfo string (nullable): the userinfo component, or %NULL 
 // 	- host string (nullable): the host component, or %NULL 
-// 	- port int: the port, or `-1` 
+// 	- port int32: the port, or `-1` 
 // 	- path string: the path component 
 // 	- query string (nullable): the query component, or %NULL 
 // 	- fragment string (nullable): the fragment, or %NULL 
@@ -30516,7 +29933,7 @@ func UriIsValid(uriString string, flags URIFlags) (bool, error) {
 // 
 // %G_URI_FLAGS_HAS_PASSWORD and %G_URI_FLAGS_HAS_AUTH_PARAMS are ignored if set
 // in @flags.
-func UriJoin(flags URIFlags, scheme string, userinfo string, host string, port int, path string, query string, fragment string) string {
+func UriJoin(flags URIFlags, scheme string, userinfo string, host string, port int32, path string, query string, fragment string) string {
 	var carg1 C.GUriFlags // in, none, casted
 	var carg2 *C.gchar    // in, none, string, nullable-string
 	var carg3 *C.gchar    // in, none, string, nullable-string
@@ -30582,7 +29999,7 @@ func UriJoin(flags URIFlags, scheme string, userinfo string, host string, port i
 // 	- authParams string (nullable): the auth params of the userinfo, or
 //   %NULL 
 // 	- host string (nullable): the host component, or %NULL 
-// 	- port int: the port, or `-1` 
+// 	- port int32: the port, or `-1` 
 // 	- path string: the path component 
 // 	- query string (nullable): the query component, or %NULL 
 // 	- fragment string (nullable): the fragment, or %NULL 
@@ -30600,7 +30017,7 @@ func UriJoin(flags URIFlags, scheme string, userinfo string, host string, port i
 // 
 // %G_URI_FLAGS_HAS_PASSWORD and %G_URI_FLAGS_HAS_AUTH_PARAMS are ignored if set
 // in @flags.
-func UriJoinWithUser(flags URIFlags, scheme string, user string, password string, authParams string, host string, port int, path string, query string, fragment string) string {
+func UriJoinWithUser(flags URIFlags, scheme string, user string, password string, authParams string, host string, port int32, path string, query string, fragment string) string {
 	var carg1  C.GUriFlags // in, none, casted
 	var carg2  *C.gchar    // in, none, string, nullable-string
 	var carg3  *C.gchar    // in, none, string, nullable-string
@@ -30881,7 +30298,7 @@ func UriResolveRelative(baseUriString string, uriRef string, flags URIFlags) (st
 //    the userinfo, or %NULL 
 // 	- host string (nullable): on return, contains the
 //    host, or %NULL 
-// 	- port int: on return, contains the
+// 	- port int32: on return, contains the
 //    port, or `-1` 
 // 	- path string: on return, contains the
 //    path 
@@ -30908,7 +30325,7 @@ func UriResolveRelative(baseUriString string, uriRef string, flags URIFlags) (st
 // %G_URI_FLAGS_HAS_AUTH_PARAMS @flags are ignored by g_uri_split(),
 // since it always returns only the full userinfo; use
 // g_uri_split_with_user() if you want it split up.
-func UriSplit(uriRef string, flags URIFlags) (string, string, string, int, string, string, string, bool, error) {
+func UriSplit(uriRef string, flags URIFlags) (string, string, string, int32, string, string, string, bool, error) {
 	var carg1 *C.gchar    // in, none, string
 	var carg2 C.GUriFlags // in, none, casted
 	var carg3 *C.gchar    // out, full, string, nullable-string
@@ -30932,7 +30349,7 @@ func UriSplit(uriRef string, flags URIFlags) (string, string, string, int, strin
 	var scheme   string
 	var userinfo string
 	var host     string
-	var port     int
+	var port     int32
 	var path     string
 	var query    string
 	var fragment string
@@ -30951,7 +30368,7 @@ func UriSplit(uriRef string, flags URIFlags) (string, string, string, int, strin
 		host = C.GoString((*C.char)(unsafe.Pointer(carg5)))
 		defer C.free(unsafe.Pointer(carg5))
 	}
-	port = int(carg6)
+	port = int32(carg6)
 	path = C.GoString((*C.char)(unsafe.Pointer(carg7)))
 	defer C.free(unsafe.Pointer(carg7))
 	if carg8 != nil {
@@ -30985,7 +30402,7 @@ func UriSplit(uriRef string, flags URIFlags) (string, string, string, int, strin
 //    the scheme (converted to lowercase), or %NULL 
 // 	- host string (nullable): on return, contains the
 //    host, or %NULL 
-// 	- port int: on return, contains the
+// 	- port int32: on return, contains the
 //    port, or `-1` 
 // 	- goret bool 
 // 	- _goerr error (nullable): an error 
@@ -30996,7 +30413,7 @@ func UriSplit(uriRef string, flags URIFlags) (string, string, string, int, strin
 // mostly a wrapper around that function with simpler arguments.
 // However, it will return an error if @uri_string is a relative URI,
 // or does not contain a hostname component.
-func UriSplitNetwork(uriString string, flags URIFlags) (string, string, int, bool, error) {
+func UriSplitNetwork(uriString string, flags URIFlags) (string, string, int32, bool, error) {
 	var carg1 *C.gchar    // in, none, string
 	var carg2 C.GUriFlags // in, none, casted
 	var carg3 *C.gchar    // out, full, string, nullable-string
@@ -31015,7 +30432,7 @@ func UriSplitNetwork(uriString string, flags URIFlags) (string, string, int, boo
 
 	var scheme string
 	var host   string
-	var port   int
+	var port   int32
 	var goret  bool
 	var _goerr error
 
@@ -31027,7 +30444,7 @@ func UriSplitNetwork(uriString string, flags URIFlags) (string, string, int, boo
 		host = C.GoString((*C.char)(unsafe.Pointer(carg4)))
 		defer C.free(unsafe.Pointer(carg4))
 	}
-	port = int(carg5)
+	port = int32(carg5)
 	if cret != 0 {
 		goret = true
 	}
@@ -31057,7 +30474,7 @@ func UriSplitNetwork(uriString string, flags URIFlags) (string, string, int, boo
 //    the auth_params, or %NULL 
 // 	- host string (nullable): on return, contains the
 //    host, or %NULL 
-// 	- port int: on return, contains the
+// 	- port int32: on return, contains the
 //    port, or `-1` 
 // 	- path string: on return, contains the
 //    path 
@@ -31079,7 +30496,7 @@ func UriSplitNetwork(uriString string, flags URIFlags) (string, string, int, boo
 // be parsed out if @flags contains %G_URI_FLAGS_HAS_PASSWORD, and
 // @auth_params will only be parsed out if @flags contains
 // %G_URI_FLAGS_HAS_AUTH_PARAMS.
-func UriSplitWithUser(uriRef string, flags URIFlags) (string, string, string, string, string, int, string, string, string, bool, error) {
+func UriSplitWithUser(uriRef string, flags URIFlags) (string, string, string, string, string, int32, string, string, string, bool, error) {
 	var carg1  *C.gchar    // in, none, string
 	var carg2  C.GUriFlags // in, none, casted
 	var carg3  *C.gchar    // out, full, string, nullable-string
@@ -31107,7 +30524,7 @@ func UriSplitWithUser(uriRef string, flags URIFlags) (string, string, string, st
 	var password   string
 	var authParams string
 	var host       string
-	var port       int
+	var port       int32
 	var path       string
 	var query      string
 	var fragment   string
@@ -31134,7 +30551,7 @@ func UriSplitWithUser(uriRef string, flags URIFlags) (string, string, string, st
 		host = C.GoString((*C.char)(unsafe.Pointer(carg7)))
 		defer C.free(unsafe.Pointer(carg7))
 	}
-	port = int(carg8)
+	port = int32(carg8)
 	path = C.GoString((*C.char)(unsafe.Pointer(carg9)))
 	defer C.free(unsafe.Pointer(carg9))
 	if carg10 != nil {
@@ -31482,10 +30899,10 @@ func (uri *Uri) GetPath() string {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Gets @uri's port.
-func (uri *Uri) GetPort() int {
+func (uri *Uri) GetPort() int32 {
 	var carg0 *C.GUri // in, none, converted
 	var cret  C.gint  // return, none, casted
 
@@ -31494,9 +30911,9 @@ func (uri *Uri) GetPort() int {
 	cret = C.g_uri_get_port(carg0)
 	runtime.KeepAlive(uri)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }

@@ -778,8 +778,11 @@ func marshalCoordType(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = CoordType(0)
 
-func (e CoordType) InitGoValue(v *gobject.Value) {
-	v.Init(TypeCoordType)
+func (e CoordType) GoValueType() gobject.Type {
+	return TypeCoordType
+}
+
+func (e CoordType) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -818,8 +821,11 @@ func marshalKeyEventType(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = KeyEventType(0)
 
-func (e KeyEventType) InitGoValue(v *gobject.Value) {
-	v.Init(TypeKeyEventType)
+func (e KeyEventType) GoValueType() gobject.Type {
+	return TypeKeyEventType
+}
+
+func (e KeyEventType) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -882,8 +888,11 @@ func marshalLayer(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = Layer(0)
 
-func (e Layer) InitGoValue(v *gobject.Value) {
-	v.Init(TypeLayer)
+func (e Layer) GoValueType() gobject.Type {
+	return TypeLayer
+}
+
+func (e Layer) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -930,8 +939,11 @@ func marshalLive(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = Live(0)
 
-func (e Live) InitGoValue(v *gobject.Value) {
-	v.Init(TypeLive)
+func (e Live) GoValueType() gobject.Type {
+	return TypeLive
+}
+
+func (e Live) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -1075,8 +1087,11 @@ func marshalRelationType(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = RelationType(0)
 
-func (e RelationType) InitGoValue(v *gobject.Value) {
-	v.Init(TypeRelationType)
+func (e RelationType) GoValueType() gobject.Type {
+	return TypeRelationType
+}
+
+func (e RelationType) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -1802,8 +1817,11 @@ func marshalRole(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = Role(0)
 
-func (e Role) InitGoValue(v *gobject.Value) {
-	v.Init(TypeRole)
+func (e Role) GoValueType() gobject.Type {
+	return TypeRole
+}
+
+func (e Role) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -2074,8 +2092,11 @@ func marshalScrollType(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = ScrollType(0)
 
-func (e ScrollType) InitGoValue(v *gobject.Value) {
-	v.Init(TypeScrollType)
+func (e ScrollType) GoValueType() gobject.Type {
+	return TypeScrollType
+}
+
+func (e ScrollType) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -2353,8 +2374,11 @@ func marshalStateType(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = StateType(0)
 
-func (e StateType) InitGoValue(v *gobject.Value) {
-	v.Init(TypeStateType)
+func (e StateType) GoValueType() gobject.Type {
+	return TypeStateType
+}
+
+func (e StateType) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -2626,8 +2650,11 @@ func marshalTextAttribute(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = TextAttribute(0)
 
-func (e TextAttribute) InitGoValue(v *gobject.Value) {
-	v.Init(TypeTextAttribute)
+func (e TextAttribute) GoValueType() gobject.Type {
+	return TypeTextAttribute
+}
+
+func (e TextAttribute) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -2727,14 +2754,14 @@ func TextAttributeGetName(attr TextAttribute) string {
 // The function takes the following parameters:
 // 
 // 	- attr TextAttribute: The #AtkTextAttribute for which a value is required 
-// 	- index_ int: The index of the required value 
+// 	- index_ int32: The index of the required value 
 // 
 // The function returns the following values:
 // 
 // 	- goret string (nullable) 
 //
 // Gets the value for the index of the #AtkTextAttribute
-func TextAttributeGetValue(attr TextAttribute, index_ int) string {
+func TextAttributeGetValue(attr TextAttribute, index_ int32) string {
 	var carg1 C.AtkTextAttribute // in, none, casted
 	var carg2 C.gint             // in, none, casted
 	var cret  *C.gchar           // return, none, string, nullable-string
@@ -2834,8 +2861,11 @@ func marshalTextBoundary(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = TextBoundary(0)
 
-func (e TextBoundary) InitGoValue(v *gobject.Value) {
-	v.Init(TypeTextBoundary)
+func (e TextBoundary) GoValueType() gobject.Type {
+	return TypeTextBoundary
+}
+
+func (e TextBoundary) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -2882,8 +2912,11 @@ func marshalTextClipType(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = TextClipType(0)
 
-func (e TextClipType) InitGoValue(v *gobject.Value) {
-	v.Init(TypeTextClipType)
+func (e TextClipType) GoValueType() gobject.Type {
+	return TypeTextClipType
+}
+
+func (e TextClipType) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -2941,8 +2974,11 @@ func marshalTextGranularity(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = TextGranularity(0)
 
-func (e TextGranularity) InitGoValue(v *gobject.Value) {
-	v.Init(TypeTextGranularity)
+func (e TextGranularity) GoValueType() gobject.Type {
+	return TypeTextGranularity
+}
+
+func (e TextGranularity) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -3005,8 +3041,11 @@ func marshalValueType(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = ValueType(0)
 
-func (e ValueType) InitGoValue(v *gobject.Value) {
-	v.Init(TypeValueType)
+func (e ValueType) GoValueType() gobject.Type {
+	return TypeValueType
+}
+
+func (e ValueType) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -3108,8 +3147,11 @@ func (h HyperlinkStateFlags) Has(other HyperlinkStateFlags) bool {
 
 var _ gobject.GoValueInitializer = HyperlinkStateFlags(0)
 
-func (f HyperlinkStateFlags) InitGoValue(v *gobject.Value) {
-	v.Init(TypeHyperlinkStateFlags)
+func (f HyperlinkStateFlags) GoValueType() gobject.Type {
+	return TypeHyperlinkStateFlags
+}
+
+func (f HyperlinkStateFlags) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
@@ -3137,7 +3179,7 @@ type Function func() (goret bool)
 // An #AtkKeySnoopFunc is a type of callback which is called whenever a key event occurs,
 // if registered via atk_add_key_event_listener.  It allows for pre-emptive
 // interception of key events via the return code as described below.
-type KeySnoopFunc func(event *KeyEventStruct) (goret int)
+type KeySnoopFunc func(event *KeyEventStruct) (goret int32)
 
 // GetBinaryAge wraps atk_get_binary_age
 // 
@@ -3456,31 +3498,31 @@ type Action interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- i int: the action index corresponding to the action to be performed 
+	// 	- i int32: the action index corresponding to the action to be performed 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
 	//
 	// Perform the specified action on the object.
-	DoAction(int) bool
+	DoAction(int32) bool
 	// GetActionDescription wraps atk_action_get_description
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- i int: the action index corresponding to the action to be performed 
+	// 	- i int32: the action index corresponding to the action to be performed 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret string (nullable) 
 	//
 	// Returns a description of the specified action of the object.
-	GetActionDescription(int) string
+	GetActionDescription(int32) string
 	// GetKeybinding wraps atk_action_get_keybinding
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- i int: the action index corresponding to the action to be performed 
+	// 	- i int32: the action index corresponding to the action to be performed 
 	// 
 	// The function returns the following values:
 	// 
@@ -3508,34 +3550,34 @@ type Action interface {
 	// would be: "N;Alt+F:N;Ctrl+N" for the English locale and "N;Alt+D:N;Strg+N"
 	// for the German locale. If, hypothetically, this menu item lacked a mnemonic,
 	// it would be represented by ";;Ctrl+N" and ";;Strg+N" respectively.
-	GetKeybinding(int) string
+	GetKeybinding(int32) string
 	// GetLocalizedName wraps atk_action_get_localized_name
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- i int: the action index corresponding to the action to be performed 
+	// 	- i int32: the action index corresponding to the action to be performed 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret string (nullable) 
 	//
 	// Returns the localized name of the specified action of the object.
-	GetLocalizedName(int) string
+	GetLocalizedName(int32) string
 	// GetNActions wraps atk_action_get_n_actions
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Gets the number of accessible actions available on the object.
 	// If there are more than one, the first one is considered the
 	// "default" action of the object.
-	GetNActions() int
+	GetNActions() int32
 	// GetActionName wraps atk_action_get_name
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- i int: the action index corresponding to the action to be performed 
+	// 	- i int32: the action index corresponding to the action to be performed 
 	// 
 	// The function returns the following values:
 	// 
@@ -3555,12 +3597,12 @@ type Action interface {
 	// reported action is actually 'bound' to a nontrivial user event;
 	// i.e. the result of some actions via atk_action_do_action() may be
 	// NIL.
-	GetActionName(int) string
+	GetActionName(int32) string
 	// SetActionDescription wraps atk_action_set_description
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- i int: the action index corresponding to the action to be performed 
+	// 	- i int32: the action index corresponding to the action to be performed 
 	// 	- desc string: the description to be assigned to this action 
 	// 
 	// The function returns the following values:
@@ -3568,7 +3610,7 @@ type Action interface {
 	// 	- goret bool 
 	//
 	// Sets a description of the specified action of the object.
-	SetActionDescription(int, string) bool
+	SetActionDescription(int32, string) bool
 }
 
 var _ Action = (*ActionInstance)(nil)
@@ -3597,6 +3639,11 @@ func UnsafeActionFromGlibFull(c unsafe.Pointer) Action {
 	return gobject.UnsafeObjectFromGlibFull(c).(Action)
 }
 
+// UnsafeActionFromGlibBorrow is used to convert raw AtkAction pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeActionFromGlibBorrow(c unsafe.Pointer) Action {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Action)
+}
+
 // UnsafeActionToGlibNone is used to convert the instance to it's C value AtkAction. This is used by the bindings internally.
 func UnsafeActionToGlibNone(c Action) unsafe.Pointer {
 	i := c.upcastToAtkAction()
@@ -3613,14 +3660,14 @@ func UnsafeActionToGlibFull(c Action) unsafe.Pointer {
 // 
 // The function takes the following parameters:
 // 
-// 	- i int: the action index corresponding to the action to be performed 
+// 	- i int32: the action index corresponding to the action to be performed 
 // 
 // The function returns the following values:
 // 
 // 	- goret bool 
 //
 // Perform the specified action on the object.
-func (action *ActionInstance) DoAction(i int) bool {
+func (action *ActionInstance) DoAction(i int32) bool {
 	var carg0 *C.AtkAction // in, none, converted
 	var carg1 C.gint       // in, none, casted
 	var cret  C.gboolean   // return
@@ -3645,14 +3692,14 @@ func (action *ActionInstance) DoAction(i int) bool {
 // 
 // The function takes the following parameters:
 // 
-// 	- i int: the action index corresponding to the action to be performed 
+// 	- i int32: the action index corresponding to the action to be performed 
 // 
 // The function returns the following values:
 // 
 // 	- goret string (nullable) 
 //
 // Returns a description of the specified action of the object.
-func (action *ActionInstance) GetActionDescription(i int) string {
+func (action *ActionInstance) GetActionDescription(i int32) string {
 	var carg0 *C.AtkAction // in, none, converted
 	var carg1 C.gint       // in, none, casted
 	var cret  *C.gchar     // return, none, string, nullable-string
@@ -3677,7 +3724,7 @@ func (action *ActionInstance) GetActionDescription(i int) string {
 // 
 // The function takes the following parameters:
 // 
-// 	- i int: the action index corresponding to the action to be performed 
+// 	- i int32: the action index corresponding to the action to be performed 
 // 
 // The function returns the following values:
 // 
@@ -3705,7 +3752,7 @@ func (action *ActionInstance) GetActionDescription(i int) string {
 // would be: "N;Alt+F:N;Ctrl+N" for the English locale and "N;Alt+D:N;Strg+N"
 // for the German locale. If, hypothetically, this menu item lacked a mnemonic,
 // it would be represented by ";;Ctrl+N" and ";;Strg+N" respectively.
-func (action *ActionInstance) GetKeybinding(i int) string {
+func (action *ActionInstance) GetKeybinding(i int32) string {
 	var carg0 *C.AtkAction // in, none, converted
 	var carg1 C.gint       // in, none, casted
 	var cret  *C.gchar     // return, none, string, nullable-string
@@ -3730,14 +3777,14 @@ func (action *ActionInstance) GetKeybinding(i int) string {
 // 
 // The function takes the following parameters:
 // 
-// 	- i int: the action index corresponding to the action to be performed 
+// 	- i int32: the action index corresponding to the action to be performed 
 // 
 // The function returns the following values:
 // 
 // 	- goret string (nullable) 
 //
 // Returns the localized name of the specified action of the object.
-func (action *ActionInstance) GetLocalizedName(i int) string {
+func (action *ActionInstance) GetLocalizedName(i int32) string {
 	var carg0 *C.AtkAction // in, none, converted
 	var carg1 C.gint       // in, none, casted
 	var cret  *C.gchar     // return, none, string, nullable-string
@@ -3762,12 +3809,12 @@ func (action *ActionInstance) GetLocalizedName(i int) string {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Gets the number of accessible actions available on the object.
 // If there are more than one, the first one is considered the
 // "default" action of the object.
-func (action *ActionInstance) GetNActions() int {
+func (action *ActionInstance) GetNActions() int32 {
 	var carg0 *C.AtkAction // in, none, converted
 	var cret  C.gint       // return, none, casted
 
@@ -3776,9 +3823,9 @@ func (action *ActionInstance) GetNActions() int {
 	cret = C.atk_action_get_n_actions(carg0)
 	runtime.KeepAlive(action)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -3787,7 +3834,7 @@ func (action *ActionInstance) GetNActions() int {
 // 
 // The function takes the following parameters:
 // 
-// 	- i int: the action index corresponding to the action to be performed 
+// 	- i int32: the action index corresponding to the action to be performed 
 // 
 // The function returns the following values:
 // 
@@ -3807,7 +3854,7 @@ func (action *ActionInstance) GetNActions() int {
 // reported action is actually 'bound' to a nontrivial user event;
 // i.e. the result of some actions via atk_action_do_action() may be
 // NIL.
-func (action *ActionInstance) GetActionName(i int) string {
+func (action *ActionInstance) GetActionName(i int32) string {
 	var carg0 *C.AtkAction // in, none, converted
 	var carg1 C.gint       // in, none, casted
 	var cret  *C.gchar     // return, none, string, nullable-string
@@ -3832,7 +3879,7 @@ func (action *ActionInstance) GetActionName(i int) string {
 // 
 // The function takes the following parameters:
 // 
-// 	- i int: the action index corresponding to the action to be performed 
+// 	- i int32: the action index corresponding to the action to be performed 
 // 	- desc string: the description to be assigned to this action 
 // 
 // The function returns the following values:
@@ -3840,7 +3887,7 @@ func (action *ActionInstance) GetActionName(i int) string {
 // 	- goret bool 
 //
 // Sets a description of the specified action of the object.
-func (action *ActionInstance) SetActionDescription(i int, desc string) bool {
+func (action *ActionInstance) SetActionDescription(i int32, desc string) bool {
 	var carg0 *C.AtkAction // in, none, converted
 	var carg1 C.gint       // in, none, casted
 	var carg2 *C.gchar     // in, none, string
@@ -3871,63 +3918,63 @@ type ActionOverrides[Instance Action] struct {
 	// DoAction allows you to override the implementation of the virtual method do_action.
 	// The function takes the following parameters:
 	// 
-	// 	- i int: the action index corresponding to the action to be performed 
+	// 	- i int32: the action index corresponding to the action to be performed 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
-	DoAction func(Instance, int) bool
+	DoAction func(Instance, int32) bool
 	// GetDescription allows you to override the implementation of the virtual method get_description.
 	// The function takes the following parameters:
 	// 
-	// 	- i int: the action index corresponding to the action to be performed 
+	// 	- i int32: the action index corresponding to the action to be performed 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret string (nullable) 
-	GetDescription func(Instance, int) string
+	GetDescription func(Instance, int32) string
 	// GetKeybinding allows you to override the implementation of the virtual method get_keybinding.
 	// The function takes the following parameters:
 	// 
-	// 	- i int: the action index corresponding to the action to be performed 
+	// 	- i int32: the action index corresponding to the action to be performed 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret string (nullable) 
-	GetKeybinding func(Instance, int) string
+	GetKeybinding func(Instance, int32) string
 	// GetLocalizedName allows you to override the implementation of the virtual method get_localized_name.
 	// The function takes the following parameters:
 	// 
-	// 	- i int: the action index corresponding to the action to be performed 
+	// 	- i int32: the action index corresponding to the action to be performed 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret string (nullable) 
-	GetLocalizedName func(Instance, int) string
+	GetLocalizedName func(Instance, int32) string
 	// GetNActions allows you to override the implementation of the virtual method get_n_actions.
 	// The function returns the following values:
 	// 
-	// 	- goret int 
-	GetNActions func(Instance) int
+	// 	- goret int32 
+	GetNActions func(Instance) int32
 	// GetName allows you to override the implementation of the virtual method get_name.
 	// The function takes the following parameters:
 	// 
-	// 	- i int: the action index corresponding to the action to be performed 
+	// 	- i int32: the action index corresponding to the action to be performed 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret string (nullable) 
-	GetName func(Instance, int) string
+	GetName func(Instance, int32) string
 	// SetDescription allows you to override the implementation of the virtual method set_description.
 	// The function takes the following parameters:
 	// 
-	// 	- i int: the action index corresponding to the action to be performed 
+	// 	- i int32: the action index corresponding to the action to be performed 
 	// 	- desc string: the description to be assigned to this action 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
-	SetDescription func(Instance, int, string) bool
+	SetDescription func(Instance, int32, string) bool
 }
 
 // UnsafeApplyActionOverrides applies the overrides to init the gclass by setting the trampoline functions.
@@ -3942,11 +3989,11 @@ func UnsafeApplyActionOverrides[Instance Action](gclass unsafe.Pointer, override
 			"_gotk4_atk1_Action_do_action",
 			func(carg0 *C.AtkAction, carg1 C.gint) (cret C.gboolean) {
 				var action Instance // go AtkAction subclass
-				var i      int      // in, none, casted
+				var i      int32    // in, none, casted
 				var goret  bool     // return
 
-				action = UnsafeActionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				i = int(carg1)
+				action = UnsafeActionFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				i = int32(carg1)
 
 				goret = overrides.DoAction(action, i)
 
@@ -3966,11 +4013,11 @@ func UnsafeApplyActionOverrides[Instance Action](gclass unsafe.Pointer, override
 			"_gotk4_atk1_Action_get_description",
 			func(carg0 *C.AtkAction, carg1 C.gint) (cret *C.gchar) {
 				var action Instance // go AtkAction subclass
-				var i      int      // in, none, casted
+				var i      int32    // in, none, casted
 				var goret  string   // return, none, string, nullable-string
 
-				action = UnsafeActionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				i = int(carg1)
+				action = UnsafeActionFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				i = int32(carg1)
 
 				goret = overrides.GetDescription(action, i)
 
@@ -3991,11 +4038,11 @@ func UnsafeApplyActionOverrides[Instance Action](gclass unsafe.Pointer, override
 			"_gotk4_atk1_Action_get_keybinding",
 			func(carg0 *C.AtkAction, carg1 C.gint) (cret *C.gchar) {
 				var action Instance // go AtkAction subclass
-				var i      int      // in, none, casted
+				var i      int32    // in, none, casted
 				var goret  string   // return, none, string, nullable-string
 
-				action = UnsafeActionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				i = int(carg1)
+				action = UnsafeActionFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				i = int32(carg1)
 
 				goret = overrides.GetKeybinding(action, i)
 
@@ -4016,11 +4063,11 @@ func UnsafeApplyActionOverrides[Instance Action](gclass unsafe.Pointer, override
 			"_gotk4_atk1_Action_get_localized_name",
 			func(carg0 *C.AtkAction, carg1 C.gint) (cret *C.gchar) {
 				var action Instance // go AtkAction subclass
-				var i      int      // in, none, casted
+				var i      int32    // in, none, casted
 				var goret  string   // return, none, string, nullable-string
 
-				action = UnsafeActionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				i = int(carg1)
+				action = UnsafeActionFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				i = int32(carg1)
 
 				goret = overrides.GetLocalizedName(action, i)
 
@@ -4041,9 +4088,9 @@ func UnsafeApplyActionOverrides[Instance Action](gclass unsafe.Pointer, override
 			"_gotk4_atk1_Action_get_n_actions",
 			func(carg0 *C.AtkAction) (cret C.gint) {
 				var action Instance // go AtkAction subclass
-				var goret  int      // return, none, casted
+				var goret  int32    // return, none, casted
 
-				action = UnsafeActionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				action = UnsafeActionFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetNActions(action)
 
@@ -4061,11 +4108,11 @@ func UnsafeApplyActionOverrides[Instance Action](gclass unsafe.Pointer, override
 			"_gotk4_atk1_Action_get_name",
 			func(carg0 *C.AtkAction, carg1 C.gint) (cret *C.gchar) {
 				var action Instance // go AtkAction subclass
-				var i      int      // in, none, casted
+				var i      int32    // in, none, casted
 				var goret  string   // return, none, string, nullable-string
 
-				action = UnsafeActionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				i = int(carg1)
+				action = UnsafeActionFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				i = int32(carg1)
 
 				goret = overrides.GetName(action, i)
 
@@ -4086,12 +4133,12 @@ func UnsafeApplyActionOverrides[Instance Action](gclass unsafe.Pointer, override
 			"_gotk4_atk1_Action_set_description",
 			func(carg0 *C.AtkAction, carg1 C.gint, carg2 *C.gchar) (cret C.gboolean) {
 				var action Instance // go AtkAction subclass
-				var i      int      // in, none, casted
+				var i      int32    // in, none, casted
 				var desc   string   // in, none, string
 				var goret  bool     // return
 
-				action = UnsafeActionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				i = int(carg1)
+				action = UnsafeActionFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				i = int32(carg1)
 				desc = C.GoString((*C.char)(unsafe.Pointer(carg2)))
 
 				goret = overrides.SetDescription(action, i, desc)
@@ -4137,8 +4184,8 @@ type Component interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- x int: x coordinate 
-	// 	- y int: y coordinate 
+	// 	- x int32: x coordinate 
+	// 	- y int32: y coordinate 
 	// 	- coordType CoordType: specifies whether the coordinates are relative to the screen
 	// or to the components top level window 
 	// 
@@ -4151,7 +4198,7 @@ type Component interface {
 	// Toolkit implementor note: ATK provides a default implementation for
 	// this virtual method. In general there are little reason to
 	// re-implement it.
-	Contains(int, int, CoordType) bool
+	Contains(int32, int32, CoordType) bool
 	// GetAlpha wraps atk_component_get_alpha
 	// 
 	// The function returns the following values:
@@ -4171,16 +4218,16 @@ type Component interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- x int: address of #gint to put x coordinate 
-	// 	- y int: address of #gint to put y coordinate 
-	// 	- width int: address of #gint to put width 
-	// 	- height int: address of #gint to put height 
+	// 	- x int32: address of #gint to put x coordinate 
+	// 	- y int32: address of #gint to put y coordinate 
+	// 	- width int32: address of #gint to put width 
+	// 	- height int32: address of #gint to put height 
 	//
 	// Gets the rectangle which gives the extent of the @component.
 	// 
 	// If the extent can not be obtained (e.g. a non-embedded plug or missing
 	// support), all of x, y, width, height are set to -1.
-	GetExtents(CoordType) (int, int, int, int)
+	GetExtents(CoordType) (int32, int32, int32, int32)
 	// GetLayer wraps atk_component_get_layer
 	// 
 	// The function returns the following values:
@@ -4193,11 +4240,11 @@ type Component interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Gets the zorder of the component. The value G_MININT will be returned
 	// if the layer of the component is not ATK_LAYER_MDI or ATK_LAYER_WINDOW.
-	GetMDIZOrder() int
+	GetMDIZOrder() int32
 	// GrabFocus wraps atk_component_grab_focus
 	// 
 	// The function returns the following values:
@@ -4210,8 +4257,8 @@ type Component interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- x int: x coordinate 
-	// 	- y int: y coordinate 
+	// 	- x int32: x coordinate 
+	// 	- y int32: y coordinate 
 	// 	- coordType CoordType: specifies whether the coordinates are relative to the screen
 	// or to the components top level window 
 	// 
@@ -4221,7 +4268,7 @@ type Component interface {
 	//
 	// Gets a reference to the accessible child, if one exists, at the
 	// coordinate point specified by @x and @y.
-	RefAccessibleAtPoint(int, int, CoordType) Object
+	RefAccessibleAtPoint(int32, int32, CoordType) Object
 	// ScrollTo wraps atk_component_scroll_to
 	// 
 	// The function takes the following parameters:
@@ -4244,8 +4291,8 @@ type Component interface {
 	// 
 	// 	- coords CoordType: specify whether coordinates are relative to the screen or to the
 	// parent object. 
-	// 	- x int: x-position where to scroll to 
-	// 	- y int: y-position where to scroll to 
+	// 	- x int32: x-position where to scroll to 
+	// 	- y int32: y-position where to scroll to 
 	// 
 	// The function returns the following values:
 	// 
@@ -4253,15 +4300,15 @@ type Component interface {
 	//
 	// Move the top-left of @component to a given position of the screen by
 	// scrolling all necessary parents.
-	ScrollToPoint(CoordType, int, int) bool
+	ScrollToPoint(CoordType, int32, int32) bool
 	// SetExtents wraps atk_component_set_extents
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- x int: x coordinate 
-	// 	- y int: y coordinate 
-	// 	- width int: width to set for @component 
-	// 	- height int: height to set for @component 
+	// 	- x int32: x coordinate 
+	// 	- y int32: y coordinate 
+	// 	- width int32: width to set for @component 
+	// 	- height int32: height to set for @component 
 	// 	- coordType CoordType: specifies whether the coordinates are relative to the screen
 	// or to the components top level window 
 	// 
@@ -4270,13 +4317,13 @@ type Component interface {
 	// 	- goret bool 
 	//
 	// Sets the extents of @component.
-	SetExtents(int, int, int, int, CoordType) bool
+	SetExtents(int32, int32, int32, int32, CoordType) bool
 	// SetPosition wraps atk_component_set_position
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- x int: x coordinate 
-	// 	- y int: y coordinate 
+	// 	- x int32: x coordinate 
+	// 	- y int32: y coordinate 
 	// 	- coordType CoordType: specifies whether the coordinates are relative to the screen
 	// or to the component's top level window 
 	// 
@@ -4288,20 +4335,20 @@ type Component interface {
 	// 
 	// Contrary to atk_component_scroll_to, this does not trigger any scrolling,
 	// this just moves @component in its parent.
-	SetPosition(int, int, CoordType) bool
+	SetPosition(int32, int32, CoordType) bool
 	// SetSize wraps atk_component_set_size
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- width int: width to set for @component 
-	// 	- height int: height to set for @component 
+	// 	- width int32: width to set for @component 
+	// 	- height int32: height to set for @component 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
 	//
 	// Set the size of the @component in terms of width and height.
-	SetSize(int, int) bool
+	SetSize(int32, int32) bool
 	// ConnectBoundsChanged connects the provided callback to the "bounds-changed" signal
 	//
 	// The 'bounds-changed" signal is emitted when the position or
@@ -4335,6 +4382,11 @@ func UnsafeComponentFromGlibFull(c unsafe.Pointer) Component {
 	return gobject.UnsafeObjectFromGlibFull(c).(Component)
 }
 
+// UnsafeComponentFromGlibBorrow is used to convert raw AtkComponent pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeComponentFromGlibBorrow(c unsafe.Pointer) Component {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Component)
+}
+
 // UnsafeComponentToGlibNone is used to convert the instance to it's C value AtkComponent. This is used by the bindings internally.
 func UnsafeComponentToGlibNone(c Component) unsafe.Pointer {
 	i := c.upcastToAtkComponent()
@@ -4351,8 +4403,8 @@ func UnsafeComponentToGlibFull(c Component) unsafe.Pointer {
 // 
 // The function takes the following parameters:
 // 
-// 	- x int: x coordinate 
-// 	- y int: y coordinate 
+// 	- x int32: x coordinate 
+// 	- y int32: y coordinate 
 // 	- coordType CoordType: specifies whether the coordinates are relative to the screen
 // or to the components top level window 
 // 
@@ -4365,7 +4417,7 @@ func UnsafeComponentToGlibFull(c Component) unsafe.Pointer {
 // Toolkit implementor note: ATK provides a default implementation for
 // this virtual method. In general there are little reason to
 // re-implement it.
-func (component *ComponentInstance) Contains(x int, y int, coordType CoordType) bool {
+func (component *ComponentInstance) Contains(x int32, y int32, coordType CoordType) bool {
 	var carg0 *C.AtkComponent // in, none, converted
 	var carg1 C.gint          // in, none, casted
 	var carg2 C.gint          // in, none, casted
@@ -4426,16 +4478,16 @@ func (component *ComponentInstance) GetAlpha() float64 {
 // 
 // The function returns the following values:
 // 
-// 	- x int: address of #gint to put x coordinate 
-// 	- y int: address of #gint to put y coordinate 
-// 	- width int: address of #gint to put width 
-// 	- height int: address of #gint to put height 
+// 	- x int32: address of #gint to put x coordinate 
+// 	- y int32: address of #gint to put y coordinate 
+// 	- width int32: address of #gint to put width 
+// 	- height int32: address of #gint to put height 
 //
 // Gets the rectangle which gives the extent of the @component.
 // 
 // If the extent can not be obtained (e.g. a non-embedded plug or missing
 // support), all of x, y, width, height are set to -1.
-func (component *ComponentInstance) GetExtents(coordType CoordType) (int, int, int, int) {
+func (component *ComponentInstance) GetExtents(coordType CoordType) (int32, int32, int32, int32) {
 	var carg0 *C.AtkComponent // in, none, converted
 	var carg5 C.AtkCoordType  // in, none, casted
 	var carg1 C.gint          // out, full, casted
@@ -4450,15 +4502,15 @@ func (component *ComponentInstance) GetExtents(coordType CoordType) (int, int, i
 	runtime.KeepAlive(component)
 	runtime.KeepAlive(coordType)
 
-	var x      int
-	var y      int
-	var width  int
-	var height int
+	var x      int32
+	var y      int32
+	var width  int32
+	var height int32
 
-	x = int(carg1)
-	y = int(carg2)
-	width = int(carg3)
-	height = int(carg4)
+	x = int32(carg1)
+	y = int32(carg2)
+	width = int32(carg3)
+	height = int32(carg4)
 
 	return x, y, width, height
 }
@@ -4490,11 +4542,11 @@ func (component *ComponentInstance) GetLayer() Layer {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Gets the zorder of the component. The value G_MININT will be returned
 // if the layer of the component is not ATK_LAYER_MDI or ATK_LAYER_WINDOW.
-func (component *ComponentInstance) GetMDIZOrder() int {
+func (component *ComponentInstance) GetMDIZOrder() int32 {
 	var carg0 *C.AtkComponent // in, none, converted
 	var cret  C.gint          // return, none, casted
 
@@ -4503,9 +4555,9 @@ func (component *ComponentInstance) GetMDIZOrder() int {
 	cret = C.atk_component_get_mdi_zorder(carg0)
 	runtime.KeepAlive(component)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -4539,8 +4591,8 @@ func (component *ComponentInstance) GrabFocus() bool {
 // 
 // The function takes the following parameters:
 // 
-// 	- x int: x coordinate 
-// 	- y int: y coordinate 
+// 	- x int32: x coordinate 
+// 	- y int32: y coordinate 
 // 	- coordType CoordType: specifies whether the coordinates are relative to the screen
 // or to the components top level window 
 // 
@@ -4550,7 +4602,7 @@ func (component *ComponentInstance) GrabFocus() bool {
 //
 // Gets a reference to the accessible child, if one exists, at the
 // coordinate point specified by @x and @y.
-func (component *ComponentInstance) RefAccessibleAtPoint(x int, y int, coordType CoordType) Object {
+func (component *ComponentInstance) RefAccessibleAtPoint(x int32, y int32, coordType CoordType) Object {
 	var carg0 *C.AtkComponent // in, none, converted
 	var carg1 C.gint          // in, none, casted
 	var carg2 C.gint          // in, none, casted
@@ -4619,8 +4671,8 @@ func (component *ComponentInstance) ScrollTo(typ ScrollType) bool {
 // 
 // 	- coords CoordType: specify whether coordinates are relative to the screen or to the
 // parent object. 
-// 	- x int: x-position where to scroll to 
-// 	- y int: y-position where to scroll to 
+// 	- x int32: x-position where to scroll to 
+// 	- y int32: y-position where to scroll to 
 // 
 // The function returns the following values:
 // 
@@ -4628,7 +4680,7 @@ func (component *ComponentInstance) ScrollTo(typ ScrollType) bool {
 //
 // Move the top-left of @component to a given position of the screen by
 // scrolling all necessary parents.
-func (component *ComponentInstance) ScrollToPoint(coords CoordType, x int, y int) bool {
+func (component *ComponentInstance) ScrollToPoint(coords CoordType, x int32, y int32) bool {
 	var carg0 *C.AtkComponent // in, none, converted
 	var carg1 C.AtkCoordType  // in, none, casted
 	var carg2 C.gint          // in, none, casted
@@ -4659,10 +4711,10 @@ func (component *ComponentInstance) ScrollToPoint(coords CoordType, x int, y int
 // 
 // The function takes the following parameters:
 // 
-// 	- x int: x coordinate 
-// 	- y int: y coordinate 
-// 	- width int: width to set for @component 
-// 	- height int: height to set for @component 
+// 	- x int32: x coordinate 
+// 	- y int32: y coordinate 
+// 	- width int32: width to set for @component 
+// 	- height int32: height to set for @component 
 // 	- coordType CoordType: specifies whether the coordinates are relative to the screen
 // or to the components top level window 
 // 
@@ -4671,7 +4723,7 @@ func (component *ComponentInstance) ScrollToPoint(coords CoordType, x int, y int
 // 	- goret bool 
 //
 // Sets the extents of @component.
-func (component *ComponentInstance) SetExtents(x int, y int, width int, height int, coordType CoordType) bool {
+func (component *ComponentInstance) SetExtents(x int32, y int32, width int32, height int32, coordType CoordType) bool {
 	var carg0 *C.AtkComponent // in, none, converted
 	var carg1 C.gint          // in, none, casted
 	var carg2 C.gint          // in, none, casted
@@ -4708,8 +4760,8 @@ func (component *ComponentInstance) SetExtents(x int, y int, width int, height i
 // 
 // The function takes the following parameters:
 // 
-// 	- x int: x coordinate 
-// 	- y int: y coordinate 
+// 	- x int32: x coordinate 
+// 	- y int32: y coordinate 
 // 	- coordType CoordType: specifies whether the coordinates are relative to the screen
 // or to the component's top level window 
 // 
@@ -4721,7 +4773,7 @@ func (component *ComponentInstance) SetExtents(x int, y int, width int, height i
 // 
 // Contrary to atk_component_scroll_to, this does not trigger any scrolling,
 // this just moves @component in its parent.
-func (component *ComponentInstance) SetPosition(x int, y int, coordType CoordType) bool {
+func (component *ComponentInstance) SetPosition(x int32, y int32, coordType CoordType) bool {
 	var carg0 *C.AtkComponent // in, none, converted
 	var carg1 C.gint          // in, none, casted
 	var carg2 C.gint          // in, none, casted
@@ -4752,15 +4804,15 @@ func (component *ComponentInstance) SetPosition(x int, y int, coordType CoordTyp
 // 
 // The function takes the following parameters:
 // 
-// 	- width int: width to set for @component 
-// 	- height int: height to set for @component 
+// 	- width int32: width to set for @component 
+// 	- height int32: height to set for @component 
 // 
 // The function returns the following values:
 // 
 // 	- goret bool 
 //
 // Set the size of the @component in terms of width and height.
-func (component *ComponentInstance) SetSize(width int, height int) bool {
+func (component *ComponentInstance) SetSize(width int32, height int32) bool {
 	var carg0 *C.AtkComponent // in, none, converted
 	var carg1 C.gint          // in, none, casted
 	var carg2 C.gint          // in, none, casted
@@ -4803,15 +4855,15 @@ type ComponentOverrides[Instance Component] struct {
 	// Contains allows you to override the implementation of the virtual method contains.
 	// The function takes the following parameters:
 	// 
-	// 	- x int: x coordinate 
-	// 	- y int: y coordinate 
+	// 	- x int32: x coordinate 
+	// 	- y int32: y coordinate 
 	// 	- coordType CoordType: specifies whether the coordinates are relative to the screen
 	// or to the components top level window 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
-	Contains func(Instance, int, int, CoordType) bool
+	Contains func(Instance, int32, int32, CoordType) bool
 	// GetAlpha allows you to override the implementation of the virtual method get_alpha.
 	// The function returns the following values:
 	// 
@@ -4825,11 +4877,11 @@ type ComponentOverrides[Instance Component] struct {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- x int: address of #gint to put x coordinate 
-	// 	- y int: address of #gint to put y coordinate 
-	// 	- width int: address of #gint to put width 
-	// 	- height int: address of #gint to put height 
-	GetExtents func(Instance, CoordType) (int, int, int, int)
+	// 	- x int32: address of #gint to put x coordinate 
+	// 	- y int32: address of #gint to put y coordinate 
+	// 	- width int32: address of #gint to put width 
+	// 	- height int32: address of #gint to put height 
+	GetExtents func(Instance, CoordType) (int32, int32, int32, int32)
 	// GetLayer allows you to override the implementation of the virtual method get_layer.
 	// The function returns the following values:
 	// 
@@ -4838,8 +4890,8 @@ type ComponentOverrides[Instance Component] struct {
 	// GetMDIZOrder allows you to override the implementation of the virtual method get_mdi_zorder.
 	// The function returns the following values:
 	// 
-	// 	- goret int 
-	GetMDIZOrder func(Instance) int
+	// 	- goret int32 
+	GetMDIZOrder func(Instance) int32
 	// GrabFocus allows you to override the implementation of the virtual method grab_focus.
 	// The function returns the following values:
 	// 
@@ -4848,15 +4900,15 @@ type ComponentOverrides[Instance Component] struct {
 	// RefAccessibleAtPoint allows you to override the implementation of the virtual method ref_accessible_at_point.
 	// The function takes the following parameters:
 	// 
-	// 	- x int: x coordinate 
-	// 	- y int: y coordinate 
+	// 	- x int32: x coordinate 
+	// 	- y int32: y coordinate 
 	// 	- coordType CoordType: specifies whether the coordinates are relative to the screen
 	// or to the components top level window 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Object (nullable) 
-	RefAccessibleAtPoint func(Instance, int, int, CoordType) Object
+	RefAccessibleAtPoint func(Instance, int32, int32, CoordType) Object
 	// ScrollTo allows you to override the implementation of the virtual method scroll_to.
 	// The function takes the following parameters:
 	// 
@@ -4871,49 +4923,49 @@ type ComponentOverrides[Instance Component] struct {
 	// 
 	// 	- coords CoordType: specify whether coordinates are relative to the screen or to the
 	// parent object. 
-	// 	- x int: x-position where to scroll to 
-	// 	- y int: y-position where to scroll to 
+	// 	- x int32: x-position where to scroll to 
+	// 	- y int32: y-position where to scroll to 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
-	ScrollToPoint func(Instance, CoordType, int, int) bool
+	ScrollToPoint func(Instance, CoordType, int32, int32) bool
 	// SetExtents allows you to override the implementation of the virtual method set_extents.
 	// The function takes the following parameters:
 	// 
-	// 	- x int: x coordinate 
-	// 	- y int: y coordinate 
-	// 	- width int: width to set for @component 
-	// 	- height int: height to set for @component 
+	// 	- x int32: x coordinate 
+	// 	- y int32: y coordinate 
+	// 	- width int32: width to set for @component 
+	// 	- height int32: height to set for @component 
 	// 	- coordType CoordType: specifies whether the coordinates are relative to the screen
 	// or to the components top level window 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
-	SetExtents func(Instance, int, int, int, int, CoordType) bool
+	SetExtents func(Instance, int32, int32, int32, int32, CoordType) bool
 	// SetPosition allows you to override the implementation of the virtual method set_position.
 	// The function takes the following parameters:
 	// 
-	// 	- x int: x coordinate 
-	// 	- y int: y coordinate 
+	// 	- x int32: x coordinate 
+	// 	- y int32: y coordinate 
 	// 	- coordType CoordType: specifies whether the coordinates are relative to the screen
 	// or to the component's top level window 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
-	SetPosition func(Instance, int, int, CoordType) bool
+	SetPosition func(Instance, int32, int32, CoordType) bool
 	// SetSize allows you to override the implementation of the virtual method set_size.
 	// The function takes the following parameters:
 	// 
-	// 	- width int: width to set for @component 
-	// 	- height int: height to set for @component 
+	// 	- width int32: width to set for @component 
+	// 	- height int32: height to set for @component 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
-	SetSize func(Instance, int, int) bool
+	SetSize func(Instance, int32, int32) bool
 }
 
 // UnsafeApplyComponentOverrides applies the overrides to init the gclass by setting the trampoline functions.
@@ -4930,7 +4982,7 @@ func UnsafeApplyComponentOverrides[Instance Component](gclass unsafe.Pointer, ov
 				var component Instance   // go AtkComponent subclass
 				var bounds    *Rectangle // in, none, converted
 
-				component = UnsafeComponentFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				component = UnsafeComponentFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				bounds = UnsafeRectangleFromGlibNone(unsafe.Pointer(carg1))
 
 				overrides.BoundsChanged(component, bounds)
@@ -4945,14 +4997,14 @@ func UnsafeApplyComponentOverrides[Instance Component](gclass unsafe.Pointer, ov
 			"_gotk4_atk1_Component_contains",
 			func(carg0 *C.AtkComponent, carg1 C.gint, carg2 C.gint, carg3 C.AtkCoordType) (cret C.gboolean) {
 				var component Instance  // go AtkComponent subclass
-				var x         int       // in, none, casted
-				var y         int       // in, none, casted
+				var x         int32     // in, none, casted
+				var y         int32     // in, none, casted
 				var coordType CoordType // in, none, casted
 				var goret     bool      // return
 
-				component = UnsafeComponentFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				x = int(carg1)
-				y = int(carg2)
+				component = UnsafeComponentFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				x = int32(carg1)
+				y = int32(carg2)
 				coordType = CoordType(carg3)
 
 				goret = overrides.Contains(component, x, y, coordType)
@@ -4975,7 +5027,7 @@ func UnsafeApplyComponentOverrides[Instance Component](gclass unsafe.Pointer, ov
 				var component Instance // go AtkComponent subclass
 				var goret     float64  // return, none, casted
 
-				component = UnsafeComponentFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				component = UnsafeComponentFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetAlpha(component)
 
@@ -4994,12 +5046,12 @@ func UnsafeApplyComponentOverrides[Instance Component](gclass unsafe.Pointer, ov
 			func(carg0 *C.AtkComponent, carg1 *C.gint, carg2 *C.gint, carg3 *C.gint, carg4 *C.gint, carg5 C.AtkCoordType) {
 				var component Instance  // go AtkComponent subclass
 				var coordType CoordType // in, none, casted
-				var x         int       // out, full, casted
-				var y         int       // out, full, casted
-				var width     int       // out, full, casted
-				var height    int       // out, full, casted
+				var x         int32     // out, full, casted
+				var y         int32     // out, full, casted
+				var width     int32     // out, full, casted
+				var height    int32     // out, full, casted
 
-				component = UnsafeComponentFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				component = UnsafeComponentFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				coordType = CoordType(carg5)
 
 				x, y, width, height = overrides.GetExtents(component, coordType)
@@ -5021,7 +5073,7 @@ func UnsafeApplyComponentOverrides[Instance Component](gclass unsafe.Pointer, ov
 				var component Instance // go AtkComponent subclass
 				var goret     Layer    // return, none, casted
 
-				component = UnsafeComponentFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				component = UnsafeComponentFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetLayer(component)
 
@@ -5039,9 +5091,9 @@ func UnsafeApplyComponentOverrides[Instance Component](gclass unsafe.Pointer, ov
 			"_gotk4_atk1_Component_get_mdi_zorder",
 			func(carg0 *C.AtkComponent) (cret C.gint) {
 				var component Instance // go AtkComponent subclass
-				var goret     int      // return, none, casted
+				var goret     int32    // return, none, casted
 
-				component = UnsafeComponentFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				component = UnsafeComponentFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetMDIZOrder(component)
 
@@ -5061,7 +5113,7 @@ func UnsafeApplyComponentOverrides[Instance Component](gclass unsafe.Pointer, ov
 				var component Instance // go AtkComponent subclass
 				var goret     bool     // return
 
-				component = UnsafeComponentFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				component = UnsafeComponentFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GrabFocus(component)
 
@@ -5081,14 +5133,14 @@ func UnsafeApplyComponentOverrides[Instance Component](gclass unsafe.Pointer, ov
 			"_gotk4_atk1_Component_ref_accessible_at_point",
 			func(carg0 *C.AtkComponent, carg1 C.gint, carg2 C.gint, carg3 C.AtkCoordType) (cret *C.AtkObject) {
 				var component Instance  // go AtkComponent subclass
-				var x         int       // in, none, casted
-				var y         int       // in, none, casted
+				var x         int32     // in, none, casted
+				var y         int32     // in, none, casted
 				var coordType CoordType // in, none, casted
 				var goret     Object    // return, full, converted, nullable
 
-				component = UnsafeComponentFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				x = int(carg1)
-				y = int(carg2)
+				component = UnsafeComponentFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				x = int32(carg1)
+				y = int32(carg2)
 				coordType = CoordType(carg3)
 
 				goret = overrides.RefAccessibleAtPoint(component, x, y, coordType)
@@ -5112,7 +5164,7 @@ func UnsafeApplyComponentOverrides[Instance Component](gclass unsafe.Pointer, ov
 				var typ       ScrollType // in, none, casted
 				var goret     bool       // return
 
-				component = UnsafeComponentFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				component = UnsafeComponentFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				typ = ScrollType(carg1)
 
 				goret = overrides.ScrollTo(component, typ)
@@ -5134,14 +5186,14 @@ func UnsafeApplyComponentOverrides[Instance Component](gclass unsafe.Pointer, ov
 			func(carg0 *C.AtkComponent, carg1 C.AtkCoordType, carg2 C.gint, carg3 C.gint) (cret C.gboolean) {
 				var component Instance  // go AtkComponent subclass
 				var coords    CoordType // in, none, casted
-				var x         int       // in, none, casted
-				var y         int       // in, none, casted
+				var x         int32     // in, none, casted
+				var y         int32     // in, none, casted
 				var goret     bool      // return
 
-				component = UnsafeComponentFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				component = UnsafeComponentFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				coords = CoordType(carg1)
-				x = int(carg2)
-				y = int(carg3)
+				x = int32(carg2)
+				y = int32(carg3)
 
 				goret = overrides.ScrollToPoint(component, coords, x, y)
 
@@ -5161,18 +5213,18 @@ func UnsafeApplyComponentOverrides[Instance Component](gclass unsafe.Pointer, ov
 			"_gotk4_atk1_Component_set_extents",
 			func(carg0 *C.AtkComponent, carg1 C.gint, carg2 C.gint, carg3 C.gint, carg4 C.gint, carg5 C.AtkCoordType) (cret C.gboolean) {
 				var component Instance  // go AtkComponent subclass
-				var x         int       // in, none, casted
-				var y         int       // in, none, casted
-				var width     int       // in, none, casted
-				var height    int       // in, none, casted
+				var x         int32     // in, none, casted
+				var y         int32     // in, none, casted
+				var width     int32     // in, none, casted
+				var height    int32     // in, none, casted
 				var coordType CoordType // in, none, casted
 				var goret     bool      // return
 
-				component = UnsafeComponentFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				x = int(carg1)
-				y = int(carg2)
-				width = int(carg3)
-				height = int(carg4)
+				component = UnsafeComponentFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				x = int32(carg1)
+				y = int32(carg2)
+				width = int32(carg3)
+				height = int32(carg4)
 				coordType = CoordType(carg5)
 
 				goret = overrides.SetExtents(component, x, y, width, height, coordType)
@@ -5193,14 +5245,14 @@ func UnsafeApplyComponentOverrides[Instance Component](gclass unsafe.Pointer, ov
 			"_gotk4_atk1_Component_set_position",
 			func(carg0 *C.AtkComponent, carg1 C.gint, carg2 C.gint, carg3 C.AtkCoordType) (cret C.gboolean) {
 				var component Instance  // go AtkComponent subclass
-				var x         int       // in, none, casted
-				var y         int       // in, none, casted
+				var x         int32     // in, none, casted
+				var y         int32     // in, none, casted
 				var coordType CoordType // in, none, casted
 				var goret     bool      // return
 
-				component = UnsafeComponentFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				x = int(carg1)
-				y = int(carg2)
+				component = UnsafeComponentFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				x = int32(carg1)
+				y = int32(carg2)
 				coordType = CoordType(carg3)
 
 				goret = overrides.SetPosition(component, x, y, coordType)
@@ -5221,13 +5273,13 @@ func UnsafeApplyComponentOverrides[Instance Component](gclass unsafe.Pointer, ov
 			"_gotk4_atk1_Component_set_size",
 			func(carg0 *C.AtkComponent, carg1 C.gint, carg2 C.gint) (cret C.gboolean) {
 				var component Instance // go AtkComponent subclass
-				var width     int      // in, none, casted
-				var height    int      // in, none, casted
+				var width     int32    // in, none, casted
+				var height    int32    // in, none, casted
 				var goret     bool     // return
 
-				component = UnsafeComponentFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				width = int(carg1)
-				height = int(carg2)
+				component = UnsafeComponentFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				width = int32(carg1)
+				height = int32(carg2)
 
 				goret = overrides.SetSize(component, width, height)
 
@@ -5281,18 +5333,18 @@ type Document interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Retrieves the current page number inside @document.
-	GetCurrentPageNumber() int
+	GetCurrentPageNumber() int32
 	// GetPageCount wraps atk_document_get_page_count
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Retrieves the total number of pages inside @document.
-	GetPageCount() int
+	GetPageCount() int32
 	// SetAttributeValue wraps atk_document_set_attribute_value
 	// 
 	// The function takes the following parameters:
@@ -5339,7 +5391,7 @@ type Document interface {
 	// The 'page-changed' signal is emitted when the current page of
 	// a document changes, e.g. pressing page up/down in a document
 	// viewer.
-	ConnectPageChanged(func(Document, int)) gobject.SignalHandle
+	ConnectPageChanged(func(Document, int32)) gobject.SignalHandle
 	// ConnectReload connects the provided callback to the "reload" signal
 	//
 	// The 'reload' signal is emitted when the contents of a
@@ -5374,6 +5426,11 @@ func UnsafeDocumentFromGlibNone(c unsafe.Pointer) Document {
 // UnsafeDocumentFromGlibFull is used to convert raw AtkDocument pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeDocumentFromGlibFull(c unsafe.Pointer) Document {
 	return gobject.UnsafeObjectFromGlibFull(c).(Document)
+}
+
+// UnsafeDocumentFromGlibBorrow is used to convert raw AtkDocument pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeDocumentFromGlibBorrow(c unsafe.Pointer) Document {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Document)
 }
 
 // UnsafeDocumentToGlibNone is used to convert the instance to it's C value AtkDocument. This is used by the bindings internally.
@@ -5426,10 +5483,10 @@ func (document *DocumentInstance) GetAttributeValue(attributeName string) string
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Retrieves the current page number inside @document.
-func (document *DocumentInstance) GetCurrentPageNumber() int {
+func (document *DocumentInstance) GetCurrentPageNumber() int32 {
 	var carg0 *C.AtkDocument // in, none, converted
 	var cret  C.gint         // return, none, casted
 
@@ -5438,9 +5495,9 @@ func (document *DocumentInstance) GetCurrentPageNumber() int {
 	cret = C.atk_document_get_current_page_number(carg0)
 	runtime.KeepAlive(document)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -5449,10 +5506,10 @@ func (document *DocumentInstance) GetCurrentPageNumber() int {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Retrieves the total number of pages inside @document.
-func (document *DocumentInstance) GetPageCount() int {
+func (document *DocumentInstance) GetPageCount() int32 {
 	var carg0 *C.AtkDocument // in, none, converted
 	var cret  C.gint         // return, none, casted
 
@@ -5461,9 +5518,9 @@ func (document *DocumentInstance) GetPageCount() int {
 	cret = C.atk_document_get_page_count(carg0)
 	runtime.KeepAlive(document)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -5548,7 +5605,7 @@ func (o *DocumentInstance) ConnectLoadStopped(fn func(Document)) gobject.SignalH
 // The 'page-changed' signal is emitted when the current page of
 // a document changes, e.g. pressing page up/down in a document
 // viewer.
-func (o *DocumentInstance) ConnectPageChanged(fn func(Document, int)) gobject.SignalHandle {
+func (o *DocumentInstance) ConnectPageChanged(fn func(Document, int32)) gobject.SignalHandle {
 	return o.Instance.Connect("page-changed", fn)
 }
 
@@ -5569,8 +5626,8 @@ type DocumentOverrides[Instance Document] struct {
 	// GetCurrentPageNumber allows you to override the implementation of the virtual method get_current_page_number.
 	// The function returns the following values:
 	// 
-	// 	- goret int 
-	GetCurrentPageNumber func(Instance) int
+	// 	- goret int32 
+	GetCurrentPageNumber func(Instance) int32
 	// GetDocumentAttributeValue allows you to override the implementation of the virtual method get_document_attribute_value.
 	// The function takes the following parameters:
 	// 
@@ -5584,8 +5641,8 @@ type DocumentOverrides[Instance Document] struct {
 	// GetPageCount allows you to override the implementation of the virtual method get_page_count.
 	// The function returns the following values:
 	// 
-	// 	- goret int 
-	GetPageCount func(Instance) int
+	// 	- goret int32 
+	GetPageCount func(Instance) int32
 	// SetDocumentAttribute allows you to override the implementation of the virtual method set_document_attribute.
 	// The function takes the following parameters:
 	// 
@@ -5611,9 +5668,9 @@ func UnsafeApplyDocumentOverrides[Instance Document](gclass unsafe.Pointer, over
 			"_gotk4_atk1_Document_get_current_page_number",
 			func(carg0 *C.AtkDocument) (cret C.gint) {
 				var document Instance // go AtkDocument subclass
-				var goret    int      // return, none, casted
+				var goret    int32    // return, none, casted
 
-				document = UnsafeDocumentFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				document = UnsafeDocumentFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetCurrentPageNumber(document)
 
@@ -5634,7 +5691,7 @@ func UnsafeApplyDocumentOverrides[Instance Document](gclass unsafe.Pointer, over
 				var attributeName string   // in, none, string
 				var goret         string   // return, none, string, nullable-string
 
-				document = UnsafeDocumentFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				document = UnsafeDocumentFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				attributeName = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 
 				goret = overrides.GetDocumentAttributeValue(document, attributeName)
@@ -5656,9 +5713,9 @@ func UnsafeApplyDocumentOverrides[Instance Document](gclass unsafe.Pointer, over
 			"_gotk4_atk1_Document_get_page_count",
 			func(carg0 *C.AtkDocument) (cret C.gint) {
 				var document Instance // go AtkDocument subclass
-				var goret    int      // return, none, casted
+				var goret    int32    // return, none, casted
 
-				document = UnsafeDocumentFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				document = UnsafeDocumentFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetPageCount(document)
 
@@ -5680,7 +5737,7 @@ func UnsafeApplyDocumentOverrides[Instance Document](gclass unsafe.Pointer, over
 				var attributeValue string   // in, none, string
 				var goret          bool     // return
 
-				document = UnsafeDocumentFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				document = UnsafeDocumentFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				attributeName = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 				attributeValue = C.GoString((*C.char)(unsafe.Pointer(carg2)))
 
@@ -5724,51 +5781,51 @@ type EditableText interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- startPos int: start position 
-	// 	- endPos int: end position 
+	// 	- startPos int32: start position 
+	// 	- endPos int32: end position 
 	//
 	// Copy text from @start_pos up to, but not including @end_pos
 	// to the clipboard.
-	CopyText(int, int)
+	CopyText(int32, int32)
 	// CutText wraps atk_editable_text_cut_text
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- startPos int: start position 
-	// 	- endPos int: end position 
+	// 	- startPos int32: start position 
+	// 	- endPos int32: end position 
 	//
 	// Copy text from @start_pos up to, but not including @end_pos
 	// to the clipboard and then delete from the widget.
-	CutText(int, int)
+	CutText(int32, int32)
 	// DeleteText wraps atk_editable_text_delete_text
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- startPos int: start position 
-	// 	- endPos int: end position 
+	// 	- startPos int32: start position 
+	// 	- endPos int32: end position 
 	//
 	// Delete text @start_pos up to, but not including @end_pos.
-	DeleteText(int, int)
+	DeleteText(int32, int32)
 	// InsertText wraps atk_editable_text_insert_text
 	// 
 	// The function takes the following parameters:
 	// 
 	// 	- str string: the text to insert 
-	// 	- length int: the length of text to insert, in bytes 
-	// 	- position *int: The caller initializes this to
+	// 	- length int32: the length of text to insert, in bytes 
+	// 	- position *int32: The caller initializes this to
 	// the position at which to insert the text. After the call it
 	// points at the position after the newly inserted text. 
 	//
 	// Insert text at a given position.
-	InsertText(string, int, *int)
+	InsertText(string, int32, *int32)
 	// PasteText wraps atk_editable_text_paste_text
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- position int: position to paste 
+	// 	- position int32: position to paste 
 	//
 	// Paste text from clipboard to specified @position.
-	PasteText(int)
+	PasteText(int32)
 	// SetTextContents wraps atk_editable_text_set_text_contents
 	// 
 	// The function takes the following parameters:
@@ -5805,6 +5862,11 @@ func UnsafeEditableTextFromGlibFull(c unsafe.Pointer) EditableText {
 	return gobject.UnsafeObjectFromGlibFull(c).(EditableText)
 }
 
+// UnsafeEditableTextFromGlibBorrow is used to convert raw AtkEditableText pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeEditableTextFromGlibBorrow(c unsafe.Pointer) EditableText {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(EditableText)
+}
+
 // UnsafeEditableTextToGlibNone is used to convert the instance to it's C value AtkEditableText. This is used by the bindings internally.
 func UnsafeEditableTextToGlibNone(c EditableText) unsafe.Pointer {
 	i := c.upcastToAtkEditableText()
@@ -5821,12 +5883,12 @@ func UnsafeEditableTextToGlibFull(c EditableText) unsafe.Pointer {
 // 
 // The function takes the following parameters:
 // 
-// 	- startPos int: start position 
-// 	- endPos int: end position 
+// 	- startPos int32: start position 
+// 	- endPos int32: end position 
 //
 // Copy text from @start_pos up to, but not including @end_pos
 // to the clipboard.
-func (text *EditableTextInstance) CopyText(startPos int, endPos int) {
+func (text *EditableTextInstance) CopyText(startPos int32, endPos int32) {
 	var carg0 *C.AtkEditableText // in, none, converted
 	var carg1 C.gint             // in, none, casted
 	var carg2 C.gint             // in, none, casted
@@ -5845,12 +5907,12 @@ func (text *EditableTextInstance) CopyText(startPos int, endPos int) {
 // 
 // The function takes the following parameters:
 // 
-// 	- startPos int: start position 
-// 	- endPos int: end position 
+// 	- startPos int32: start position 
+// 	- endPos int32: end position 
 //
 // Copy text from @start_pos up to, but not including @end_pos
 // to the clipboard and then delete from the widget.
-func (text *EditableTextInstance) CutText(startPos int, endPos int) {
+func (text *EditableTextInstance) CutText(startPos int32, endPos int32) {
 	var carg0 *C.AtkEditableText // in, none, converted
 	var carg1 C.gint             // in, none, casted
 	var carg2 C.gint             // in, none, casted
@@ -5869,11 +5931,11 @@ func (text *EditableTextInstance) CutText(startPos int, endPos int) {
 // 
 // The function takes the following parameters:
 // 
-// 	- startPos int: start position 
-// 	- endPos int: end position 
+// 	- startPos int32: start position 
+// 	- endPos int32: end position 
 //
 // Delete text @start_pos up to, but not including @end_pos.
-func (text *EditableTextInstance) DeleteText(startPos int, endPos int) {
+func (text *EditableTextInstance) DeleteText(startPos int32, endPos int32) {
 	var carg0 *C.AtkEditableText // in, none, converted
 	var carg1 C.gint             // in, none, casted
 	var carg2 C.gint             // in, none, casted
@@ -5893,13 +5955,13 @@ func (text *EditableTextInstance) DeleteText(startPos int, endPos int) {
 // The function takes the following parameters:
 // 
 // 	- str string: the text to insert 
-// 	- length int: the length of text to insert, in bytes 
-// 	- position *int: The caller initializes this to
+// 	- length int32: the length of text to insert, in bytes 
+// 	- position *int32: The caller initializes this to
 // the position at which to insert the text. After the call it
 // points at the position after the newly inserted text. 
 //
 // Insert text at a given position.
-func (text *EditableTextInstance) InsertText(str string, length int, position *int) {
+func (text *EditableTextInstance) InsertText(str string, length int32, position *int32) {
 	var carg0 *C.AtkEditableText // in, none, converted
 	var carg1 *C.gchar           // in, none, string
 	var carg2 C.gint             // in, none, casted
@@ -5911,7 +5973,7 @@ func (text *EditableTextInstance) InsertText(str string, length int, position *i
 	carg2 = C.gint(length)
 	_ = position
 	_ = carg3
-	panic("unimplemented conversion of *int (gint*)")
+	panic("unimplemented conversion of *int32 (gint*)")
 
 	C.atk_editable_text_insert_text(carg0, carg1, carg2, carg3)
 	runtime.KeepAlive(text)
@@ -5924,10 +5986,10 @@ func (text *EditableTextInstance) InsertText(str string, length int, position *i
 // 
 // The function takes the following parameters:
 // 
-// 	- position int: position to paste 
+// 	- position int32: position to paste 
 //
 // Paste text from clipboard to specified @position.
-func (text *EditableTextInstance) PasteText(position int) {
+func (text *EditableTextInstance) PasteText(position int32) {
 	var carg0 *C.AtkEditableText // in, none, converted
 	var carg1 C.gint             // in, none, casted
 
@@ -5965,35 +6027,35 @@ type EditableTextOverrides[Instance EditableText] struct {
 	// CopyText allows you to override the implementation of the virtual method copy_text.
 	// The function takes the following parameters:
 	// 
-	// 	- startPos int: start position 
-	// 	- endPos int: end position 
-	CopyText func(Instance, int, int)
+	// 	- startPos int32: start position 
+	// 	- endPos int32: end position 
+	CopyText func(Instance, int32, int32)
 	// CutText allows you to override the implementation of the virtual method cut_text.
 	// The function takes the following parameters:
 	// 
-	// 	- startPos int: start position 
-	// 	- endPos int: end position 
-	CutText func(Instance, int, int)
+	// 	- startPos int32: start position 
+	// 	- endPos int32: end position 
+	CutText func(Instance, int32, int32)
 	// DeleteText allows you to override the implementation of the virtual method delete_text.
 	// The function takes the following parameters:
 	// 
-	// 	- startPos int: start position 
-	// 	- endPos int: end position 
-	DeleteText func(Instance, int, int)
+	// 	- startPos int32: start position 
+	// 	- endPos int32: end position 
+	DeleteText func(Instance, int32, int32)
 	// InsertText allows you to override the implementation of the virtual method insert_text.
 	// The function takes the following parameters:
 	// 
 	// 	- str string: the text to insert 
-	// 	- length int: the length of text to insert, in bytes 
-	// 	- position *int: The caller initializes this to
+	// 	- length int32: the length of text to insert, in bytes 
+	// 	- position *int32: The caller initializes this to
 	// the position at which to insert the text. After the call it
 	// points at the position after the newly inserted text. 
-	InsertText func(Instance, string, int, *int)
+	InsertText func(Instance, string, int32, *int32)
 	// PasteText allows you to override the implementation of the virtual method paste_text.
 	// The function takes the following parameters:
 	// 
-	// 	- position int: position to paste 
-	PasteText func(Instance, int)
+	// 	- position int32: position to paste 
+	PasteText func(Instance, int32)
 	// SetTextContents allows you to override the implementation of the virtual method set_text_contents.
 	// The function takes the following parameters:
 	// 
@@ -6013,12 +6075,12 @@ func UnsafeApplyEditableTextOverrides[Instance EditableText](gclass unsafe.Point
 			"_gotk4_atk1_EditableText_copy_text",
 			func(carg0 *C.AtkEditableText, carg1 C.gint, carg2 C.gint) {
 				var text     Instance // go AtkEditableText subclass
-				var startPos int      // in, none, casted
-				var endPos   int      // in, none, casted
+				var startPos int32    // in, none, casted
+				var endPos   int32    // in, none, casted
 
-				text = UnsafeEditableTextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				startPos = int(carg1)
-				endPos = int(carg2)
+				text = UnsafeEditableTextFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				startPos = int32(carg1)
+				endPos = int32(carg2)
 
 				overrides.CopyText(text, startPos, endPos)
 			},
@@ -6032,12 +6094,12 @@ func UnsafeApplyEditableTextOverrides[Instance EditableText](gclass unsafe.Point
 			"_gotk4_atk1_EditableText_cut_text",
 			func(carg0 *C.AtkEditableText, carg1 C.gint, carg2 C.gint) {
 				var text     Instance // go AtkEditableText subclass
-				var startPos int      // in, none, casted
-				var endPos   int      // in, none, casted
+				var startPos int32    // in, none, casted
+				var endPos   int32    // in, none, casted
 
-				text = UnsafeEditableTextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				startPos = int(carg1)
-				endPos = int(carg2)
+				text = UnsafeEditableTextFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				startPos = int32(carg1)
+				endPos = int32(carg2)
 
 				overrides.CutText(text, startPos, endPos)
 			},
@@ -6051,12 +6113,12 @@ func UnsafeApplyEditableTextOverrides[Instance EditableText](gclass unsafe.Point
 			"_gotk4_atk1_EditableText_delete_text",
 			func(carg0 *C.AtkEditableText, carg1 C.gint, carg2 C.gint) {
 				var text     Instance // go AtkEditableText subclass
-				var startPos int      // in, none, casted
-				var endPos   int      // in, none, casted
+				var startPos int32    // in, none, casted
+				var endPos   int32    // in, none, casted
 
-				text = UnsafeEditableTextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				startPos = int(carg1)
-				endPos = int(carg2)
+				text = UnsafeEditableTextFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				startPos = int32(carg1)
+				endPos = int32(carg2)
 
 				overrides.DeleteText(text, startPos, endPos)
 			},
@@ -6071,15 +6133,15 @@ func UnsafeApplyEditableTextOverrides[Instance EditableText](gclass unsafe.Point
 			func(carg0 *C.AtkEditableText, carg1 *C.gchar, carg2 C.gint, carg3 *C.gint) {
 				var text     Instance // go AtkEditableText subclass
 				var str      string   // in, none, string
-				var length   int      // in, none, casted
-				var position *int     // in, transfer: none, C Pointers: 1, Name: gint
+				var length   int32    // in, none, casted
+				var position *int32   // in, transfer: none, C Pointers: 1, Name: gint
 
-				text = UnsafeEditableTextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				text = UnsafeEditableTextFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				str = C.GoString((*C.char)(unsafe.Pointer(carg1)))
-				length = int(carg2)
+				length = int32(carg2)
 				_ = position
 				_ = carg3
-				panic("unimplemented conversion of *int (gint*)")
+				panic("unimplemented conversion of *int32 (gint*)")
 
 				overrides.InsertText(text, str, length, position)
 			},
@@ -6093,10 +6155,10 @@ func UnsafeApplyEditableTextOverrides[Instance EditableText](gclass unsafe.Point
 			"_gotk4_atk1_EditableText_paste_text",
 			func(carg0 *C.AtkEditableText, carg1 C.gint) {
 				var text     Instance // go AtkEditableText subclass
-				var position int      // in, none, casted
+				var position int32    // in, none, casted
 
-				text = UnsafeEditableTextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				position = int(carg1)
+				text = UnsafeEditableTextFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				position = int32(carg1)
 
 				overrides.PasteText(text, position)
 			},
@@ -6112,7 +6174,7 @@ func UnsafeApplyEditableTextOverrides[Instance EditableText](gclass unsafe.Point
 				var text Instance // go AtkEditableText subclass
 				var str  string   // in, none, string
 
-				text = UnsafeEditableTextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				text = UnsafeEditableTextFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				str = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 
 				overrides.SetTextContents(text, str)
@@ -6175,6 +6237,11 @@ func UnsafeHyperlinkImplFromGlibFull(c unsafe.Pointer) HyperlinkImpl {
 	return gobject.UnsafeObjectFromGlibFull(c).(HyperlinkImpl)
 }
 
+// UnsafeHyperlinkImplFromGlibBorrow is used to convert raw AtkHyperlinkImpl pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeHyperlinkImplFromGlibBorrow(c unsafe.Pointer) HyperlinkImpl {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(HyperlinkImpl)
+}
+
 // UnsafeHyperlinkImplToGlibNone is used to convert the instance to it's C value AtkHyperlinkImpl. This is used by the bindings internally.
 func UnsafeHyperlinkImplToGlibNone(c HyperlinkImpl) unsafe.Pointer {
 	i := c.upcastToAtkHyperlinkImpl()
@@ -6234,7 +6301,7 @@ func UnsafeApplyHyperlinkImplOverrides[Instance HyperlinkImpl](gclass unsafe.Poi
 				var impl  Instance  // go AtkHyperlinkImpl subclass
 				var goret Hyperlink // return, full, converted
 
-				impl = UnsafeHyperlinkImplFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				impl = UnsafeHyperlinkImplFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetHyperlink(impl)
 
@@ -6273,7 +6340,7 @@ type Hypertext interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- linkIndex int: an integer specifying the desired link 
+	// 	- linkIndex int32: an integer specifying the desired link 
 	// 
 	// The function returns the following values:
 	// 
@@ -6281,34 +6348,34 @@ type Hypertext interface {
 	//
 	// Gets the link in this hypertext document at index
 	// @link_index
-	GetLink(int) Hyperlink
+	GetLink(int32) Hyperlink
 	// GetLinkIndex wraps atk_hypertext_get_link_index
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- charIndex int: a character index 
+	// 	- charIndex int32: a character index 
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Gets the index into the array of hyperlinks that is associated with
 	// the character specified by @char_index.
-	GetLinkIndex(int) int
+	GetLinkIndex(int32) int32
 	// GetNLinks wraps atk_hypertext_get_n_links
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Gets the number of links within this hypertext document.
-	GetNLinks() int
+	GetNLinks() int32
 	// ConnectLinkSelected connects the provided callback to the "link-selected" signal
 	//
 	// The "link-selected" signal is emitted by an AtkHyperText
 	// object when one of the hyperlinks associated with the object
 	// is selected.
-	ConnectLinkSelected(func(Hypertext, int)) gobject.SignalHandle
+	ConnectLinkSelected(func(Hypertext, int32)) gobject.SignalHandle
 }
 
 var _ Hypertext = (*HypertextInstance)(nil)
@@ -6337,6 +6404,11 @@ func UnsafeHypertextFromGlibFull(c unsafe.Pointer) Hypertext {
 	return gobject.UnsafeObjectFromGlibFull(c).(Hypertext)
 }
 
+// UnsafeHypertextFromGlibBorrow is used to convert raw AtkHypertext pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeHypertextFromGlibBorrow(c unsafe.Pointer) Hypertext {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Hypertext)
+}
+
 // UnsafeHypertextToGlibNone is used to convert the instance to it's C value AtkHypertext. This is used by the bindings internally.
 func UnsafeHypertextToGlibNone(c Hypertext) unsafe.Pointer {
 	i := c.upcastToAtkHypertext()
@@ -6353,7 +6425,7 @@ func UnsafeHypertextToGlibFull(c Hypertext) unsafe.Pointer {
 // 
 // The function takes the following parameters:
 // 
-// 	- linkIndex int: an integer specifying the desired link 
+// 	- linkIndex int32: an integer specifying the desired link 
 // 
 // The function returns the following values:
 // 
@@ -6361,7 +6433,7 @@ func UnsafeHypertextToGlibFull(c Hypertext) unsafe.Pointer {
 //
 // Gets the link in this hypertext document at index
 // @link_index
-func (hypertext *HypertextInstance) GetLink(linkIndex int) Hyperlink {
+func (hypertext *HypertextInstance) GetLink(linkIndex int32) Hyperlink {
 	var carg0 *C.AtkHypertext // in, none, converted
 	var carg1 C.gint          // in, none, casted
 	var cret  *C.AtkHyperlink // return, none, converted
@@ -6384,15 +6456,15 @@ func (hypertext *HypertextInstance) GetLink(linkIndex int) Hyperlink {
 // 
 // The function takes the following parameters:
 // 
-// 	- charIndex int: a character index 
+// 	- charIndex int32: a character index 
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Gets the index into the array of hyperlinks that is associated with
 // the character specified by @char_index.
-func (hypertext *HypertextInstance) GetLinkIndex(charIndex int) int {
+func (hypertext *HypertextInstance) GetLinkIndex(charIndex int32) int32 {
 	var carg0 *C.AtkHypertext // in, none, converted
 	var carg1 C.gint          // in, none, casted
 	var cret  C.gint          // return, none, casted
@@ -6404,9 +6476,9 @@ func (hypertext *HypertextInstance) GetLinkIndex(charIndex int) int {
 	runtime.KeepAlive(hypertext)
 	runtime.KeepAlive(charIndex)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -6415,10 +6487,10 @@ func (hypertext *HypertextInstance) GetLinkIndex(charIndex int) int {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Gets the number of links within this hypertext document.
-func (hypertext *HypertextInstance) GetNLinks() int {
+func (hypertext *HypertextInstance) GetNLinks() int32 {
 	var carg0 *C.AtkHypertext // in, none, converted
 	var cret  C.gint          // return, none, casted
 
@@ -6427,9 +6499,9 @@ func (hypertext *HypertextInstance) GetNLinks() int {
 	cret = C.atk_hypertext_get_n_links(carg0)
 	runtime.KeepAlive(hypertext)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -6439,7 +6511,7 @@ func (hypertext *HypertextInstance) GetNLinks() int {
 // The "link-selected" signal is emitted by an AtkHyperText
 // object when one of the hyperlinks associated with the object
 // is selected.
-func (o *HypertextInstance) ConnectLinkSelected(fn func(Hypertext, int)) gobject.SignalHandle {
+func (o *HypertextInstance) ConnectLinkSelected(fn func(Hypertext, int32)) gobject.SignalHandle {
 	return o.Instance.Connect("link-selected", fn)
 }
 
@@ -6449,31 +6521,31 @@ type HypertextOverrides[Instance Hypertext] struct {
 	// GetLink allows you to override the implementation of the virtual method get_link.
 	// The function takes the following parameters:
 	// 
-	// 	- linkIndex int: an integer specifying the desired link 
+	// 	- linkIndex int32: an integer specifying the desired link 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Hyperlink 
-	GetLink func(Instance, int) Hyperlink
+	GetLink func(Instance, int32) Hyperlink
 	// GetLinkIndex allows you to override the implementation of the virtual method get_link_index.
 	// The function takes the following parameters:
 	// 
-	// 	- charIndex int: a character index 
+	// 	- charIndex int32: a character index 
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
-	GetLinkIndex func(Instance, int) int
+	// 	- goret int32 
+	GetLinkIndex func(Instance, int32) int32
 	// GetNLinks allows you to override the implementation of the virtual method get_n_links.
 	// The function returns the following values:
 	// 
-	// 	- goret int 
-	GetNLinks func(Instance) int
+	// 	- goret int32 
+	GetNLinks func(Instance) int32
 	// LinkSelected allows you to override the implementation of the virtual method link_selected.
 	// The function takes the following parameters:
 	// 
-	// 	- linkIndex int 
-	LinkSelected func(Instance, int)
+	// 	- linkIndex int32 
+	LinkSelected func(Instance, int32)
 }
 
 // UnsafeApplyHypertextOverrides applies the overrides to init the gclass by setting the trampoline functions.
@@ -6488,11 +6560,11 @@ func UnsafeApplyHypertextOverrides[Instance Hypertext](gclass unsafe.Pointer, ov
 			"_gotk4_atk1_Hypertext_get_link",
 			func(carg0 *C.AtkHypertext, carg1 C.gint) (cret *C.AtkHyperlink) {
 				var hypertext Instance  // go AtkHypertext subclass
-				var linkIndex int       // in, none, casted
+				var linkIndex int32     // in, none, casted
 				var goret     Hyperlink // return, none, converted
 
-				hypertext = UnsafeHypertextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				linkIndex = int(carg1)
+				hypertext = UnsafeHypertextFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				linkIndex = int32(carg1)
 
 				goret = overrides.GetLink(hypertext, linkIndex)
 
@@ -6510,11 +6582,11 @@ func UnsafeApplyHypertextOverrides[Instance Hypertext](gclass unsafe.Pointer, ov
 			"_gotk4_atk1_Hypertext_get_link_index",
 			func(carg0 *C.AtkHypertext, carg1 C.gint) (cret C.gint) {
 				var hypertext Instance // go AtkHypertext subclass
-				var charIndex int      // in, none, casted
-				var goret     int      // return, none, casted
+				var charIndex int32    // in, none, casted
+				var goret     int32    // return, none, casted
 
-				hypertext = UnsafeHypertextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				charIndex = int(carg1)
+				hypertext = UnsafeHypertextFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				charIndex = int32(carg1)
 
 				goret = overrides.GetLinkIndex(hypertext, charIndex)
 
@@ -6532,9 +6604,9 @@ func UnsafeApplyHypertextOverrides[Instance Hypertext](gclass unsafe.Pointer, ov
 			"_gotk4_atk1_Hypertext_get_n_links",
 			func(carg0 *C.AtkHypertext) (cret C.gint) {
 				var hypertext Instance // go AtkHypertext subclass
-				var goret     int      // return, none, casted
+				var goret     int32    // return, none, casted
 
-				hypertext = UnsafeHypertextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				hypertext = UnsafeHypertextFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetNLinks(hypertext)
 
@@ -6552,10 +6624,10 @@ func UnsafeApplyHypertextOverrides[Instance Hypertext](gclass unsafe.Pointer, ov
 			"_gotk4_atk1_Hypertext_link_selected",
 			func(carg0 *C.AtkHypertext, carg1 C.gint) {
 				var hypertext Instance // go AtkHypertext subclass
-				var linkIndex int      // in, none, casted
+				var linkIndex int32    // in, none, casted
 
-				hypertext = UnsafeHypertextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				linkIndex = int(carg1)
+				hypertext = UnsafeHypertextFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				linkIndex = int32(carg1)
 
 				overrides.LinkSelected(hypertext, linkIndex)
 			},
@@ -6617,21 +6689,21 @@ type Image interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- x int: address of #gint to put x coordinate position; otherwise, -1 if value cannot be obtained. 
-	// 	- y int: address of #gint to put y coordinate position; otherwise, -1 if value cannot be obtained. 
+	// 	- x int32: address of #gint to put x coordinate position; otherwise, -1 if value cannot be obtained. 
+	// 	- y int32: address of #gint to put y coordinate position; otherwise, -1 if value cannot be obtained. 
 	//
 	// Gets the position of the image in the form of a point specifying the
 	// images top-left corner.
 	// 
 	// If the position can not be obtained (e.g. missing support), x and y are set
 	// to -1.
-	GetImagePosition(CoordType) (int, int)
+	GetImagePosition(CoordType) (int32, int32)
 	// GetImageSize wraps atk_image_get_image_size
 	// 
 	// The function returns the following values:
 	// 
-	// 	- width int: filled with the image width, or -1 if the value cannot be obtained. 
-	// 	- height int: filled with the image height, or -1 if the value cannot be obtained. 
+	// 	- width int32: filled with the image width, or -1 if the value cannot be obtained. 
+	// 	- height int32: filled with the image height, or -1 if the value cannot be obtained. 
 	//
 	// Get the width and height in pixels for the specified image.
 	// The values of @width and @height are returned as -1 if the
@@ -6639,7 +6711,7 @@ type Image interface {
 	// 
 	// If the size can not be obtained (e.g. missing support), x and y are set
 	// to -1.
-	GetImageSize() (int, int)
+	GetImageSize() (int32, int32)
 	// SetImageDescription wraps atk_image_set_image_description
 	// 
 	// The function takes the following parameters:
@@ -6678,6 +6750,11 @@ func UnsafeImageFromGlibNone(c unsafe.Pointer) Image {
 // UnsafeImageFromGlibFull is used to convert raw AtkImage pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeImageFromGlibFull(c unsafe.Pointer) Image {
 	return gobject.UnsafeObjectFromGlibFull(c).(Image)
+}
+
+// UnsafeImageFromGlibBorrow is used to convert raw AtkImage pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeImageFromGlibBorrow(c unsafe.Pointer) Image {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Image)
 }
 
 // UnsafeImageToGlibNone is used to convert the instance to it's C value AtkImage. This is used by the bindings internally.
@@ -6749,15 +6826,15 @@ func (image *ImageInstance) GetImageLocale() string {
 // 
 // The function returns the following values:
 // 
-// 	- x int: address of #gint to put x coordinate position; otherwise, -1 if value cannot be obtained. 
-// 	- y int: address of #gint to put y coordinate position; otherwise, -1 if value cannot be obtained. 
+// 	- x int32: address of #gint to put x coordinate position; otherwise, -1 if value cannot be obtained. 
+// 	- y int32: address of #gint to put y coordinate position; otherwise, -1 if value cannot be obtained. 
 //
 // Gets the position of the image in the form of a point specifying the
 // images top-left corner.
 // 
 // If the position can not be obtained (e.g. missing support), x and y are set
 // to -1.
-func (image *ImageInstance) GetImagePosition(coordType CoordType) (int, int) {
+func (image *ImageInstance) GetImagePosition(coordType CoordType) (int32, int32) {
 	var carg0 *C.AtkImage    // in, none, converted
 	var carg3 C.AtkCoordType // in, none, casted
 	var carg1 C.gint         // out, full, casted
@@ -6770,11 +6847,11 @@ func (image *ImageInstance) GetImagePosition(coordType CoordType) (int, int) {
 	runtime.KeepAlive(image)
 	runtime.KeepAlive(coordType)
 
-	var x int
-	var y int
+	var x int32
+	var y int32
 
-	x = int(carg1)
-	y = int(carg2)
+	x = int32(carg1)
+	y = int32(carg2)
 
 	return x, y
 }
@@ -6783,8 +6860,8 @@ func (image *ImageInstance) GetImagePosition(coordType CoordType) (int, int) {
 // 
 // The function returns the following values:
 // 
-// 	- width int: filled with the image width, or -1 if the value cannot be obtained. 
-// 	- height int: filled with the image height, or -1 if the value cannot be obtained. 
+// 	- width int32: filled with the image width, or -1 if the value cannot be obtained. 
+// 	- height int32: filled with the image height, or -1 if the value cannot be obtained. 
 //
 // Get the width and height in pixels for the specified image.
 // The values of @width and @height are returned as -1 if the
@@ -6792,7 +6869,7 @@ func (image *ImageInstance) GetImagePosition(coordType CoordType) (int, int) {
 // 
 // If the size can not be obtained (e.g. missing support), x and y are set
 // to -1.
-func (image *ImageInstance) GetImageSize() (int, int) {
+func (image *ImageInstance) GetImageSize() (int32, int32) {
 	var carg0 *C.AtkImage // in, none, converted
 	var carg1 C.gint      // out, full, casted
 	var carg2 C.gint      // out, full, casted
@@ -6802,11 +6879,11 @@ func (image *ImageInstance) GetImageSize() (int, int) {
 	C.atk_image_get_image_size(carg0, &carg1, &carg2)
 	runtime.KeepAlive(image)
 
-	var width  int
-	var height int
+	var width  int32
+	var height int32
 
-	width = int(carg1)
-	height = int(carg2)
+	width = int32(carg1)
+	height = int32(carg2)
 
 	return width, height
 }
@@ -6865,15 +6942,15 @@ type ImageOverrides[Instance Image] struct {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- x int: address of #gint to put x coordinate position; otherwise, -1 if value cannot be obtained. 
-	// 	- y int: address of #gint to put y coordinate position; otherwise, -1 if value cannot be obtained. 
-	GetImagePosition func(Instance, CoordType) (int, int)
+	// 	- x int32: address of #gint to put x coordinate position; otherwise, -1 if value cannot be obtained. 
+	// 	- y int32: address of #gint to put y coordinate position; otherwise, -1 if value cannot be obtained. 
+	GetImagePosition func(Instance, CoordType) (int32, int32)
 	// GetImageSize allows you to override the implementation of the virtual method get_image_size.
 	// The function returns the following values:
 	// 
-	// 	- width int: filled with the image width, or -1 if the value cannot be obtained. 
-	// 	- height int: filled with the image height, or -1 if the value cannot be obtained. 
-	GetImageSize func(Instance) (int, int)
+	// 	- width int32: filled with the image width, or -1 if the value cannot be obtained. 
+	// 	- height int32: filled with the image height, or -1 if the value cannot be obtained. 
+	GetImageSize func(Instance) (int32, int32)
 	// SetImageDescription allows you to override the implementation of the virtual method set_image_description.
 	// The function takes the following parameters:
 	// 
@@ -6899,7 +6976,7 @@ func UnsafeApplyImageOverrides[Instance Image](gclass unsafe.Pointer, overrides 
 				var image Instance // go AtkImage subclass
 				var goret string   // return, none, string
 
-				image = UnsafeImageFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				image = UnsafeImageFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetImageDescription(image)
 
@@ -6920,7 +6997,7 @@ func UnsafeApplyImageOverrides[Instance Image](gclass unsafe.Pointer, overrides 
 				var image Instance // go AtkImage subclass
 				var goret string   // return, none, string, nullable-string
 
-				image = UnsafeImageFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				image = UnsafeImageFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetImageLocale(image)
 
@@ -6942,10 +7019,10 @@ func UnsafeApplyImageOverrides[Instance Image](gclass unsafe.Pointer, overrides 
 			func(carg0 *C.AtkImage, carg1 *C.gint, carg2 *C.gint, carg3 C.AtkCoordType) {
 				var image     Instance  // go AtkImage subclass
 				var coordType CoordType // in, none, casted
-				var x         int       // out, full, casted
-				var y         int       // out, full, casted
+				var x         int32     // out, full, casted
+				var y         int32     // out, full, casted
 
-				image = UnsafeImageFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				image = UnsafeImageFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				coordType = CoordType(carg3)
 
 				x, y = overrides.GetImagePosition(image, coordType)
@@ -6963,10 +7040,10 @@ func UnsafeApplyImageOverrides[Instance Image](gclass unsafe.Pointer, overrides 
 			"_gotk4_atk1_Image_get_image_size",
 			func(carg0 *C.AtkImage, carg1 *C.gint, carg2 *C.gint) {
 				var image  Instance // go AtkImage subclass
-				var width  int      // out, full, casted
-				var height int      // out, full, casted
+				var width  int32    // out, full, casted
+				var height int32    // out, full, casted
 
-				image = UnsafeImageFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				image = UnsafeImageFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				width, height = overrides.GetImageSize(image)
 
@@ -6986,7 +7063,7 @@ func UnsafeApplyImageOverrides[Instance Image](gclass unsafe.Pointer, overrides 
 				var description string   // in, none, string
 				var goret       bool     // return
 
-				image = UnsafeImageFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				image = UnsafeImageFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				description = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 
 				goret = overrides.SetImageDescription(image, description)
@@ -7044,6 +7121,11 @@ func UnsafeImplementorIfaceFromGlibFull(c unsafe.Pointer) ImplementorIface {
 	return gobject.UnsafeObjectFromGlibFull(c).(ImplementorIface)
 }
 
+// UnsafeImplementorIfaceFromGlibBorrow is used to convert raw AtkImplementorIface pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeImplementorIfaceFromGlibBorrow(c unsafe.Pointer) ImplementorIface {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(ImplementorIface)
+}
+
 // UnsafeImplementorIfaceToGlibNone is used to convert the instance to it's C value AtkImplementorIface. This is used by the bindings internally.
 func UnsafeImplementorIfaceToGlibNone(c ImplementorIface) unsafe.Pointer {
 	i := c.upcastToAtkImplementorIface()
@@ -7095,7 +7177,7 @@ type Selection interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- i int: a #gint specifying the child index. 
+	// 	- i int32: a #gint specifying the child index. 
 	// 
 	// The function returns the following values:
 	// 
@@ -7103,7 +7185,7 @@ type Selection interface {
 	//
 	// Adds the specified accessible child of the object to the
 	// object's selection.
-	AddSelection(int) bool
+	AddSelection(int32) bool
 	// ClearSelection wraps atk_selection_clear_selection
 	// 
 	// The function returns the following values:
@@ -7117,19 +7199,19 @@ type Selection interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Gets the number of accessible children currently selected.
 	// Note: callers should not rely on %NULL or on a zero value for
 	// indication of whether AtkSelectionIface is implemented, they should
 	// use type checking/interface checking macros or the
 	// atk_get_accessible_value() convenience method.
-	GetSelectionCount() int
+	GetSelectionCount() int32
 	// IsChildSelected wraps atk_selection_is_child_selected
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- i int: a #gint specifying the child index. 
+	// 	- i int32: a #gint specifying the child index. 
 	// 
 	// The function returns the following values:
 	// 
@@ -7140,12 +7222,12 @@ type Selection interface {
 	// indication of whether AtkSelectionIface is implemented, they should
 	// use type checking/interface checking macros or the
 	// atk_get_accessible_value() convenience method.
-	IsChildSelected(int) bool
+	IsChildSelected(int32) bool
 	// RefSelection wraps atk_selection_ref_selection
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- i int: a #gint specifying the index in the selection set.  (e.g. the
+	// 	- i int32: a #gint specifying the index in the selection set.  (e.g. the
 	// ith selection as opposed to the ith child). 
 	// 
 	// The function returns the following values:
@@ -7158,12 +7240,12 @@ type Selection interface {
 	// indication of whether AtkSelectionIface is implemented, they should
 	// use type checking/interface checking macros or the
 	// atk_get_accessible_value() convenience method.
-	RefSelection(int) Object
+	RefSelection(int32) Object
 	// RemoveSelection wraps atk_selection_remove_selection
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- i int: a #gint specifying the index in the selection set.  (e.g. the
+	// 	- i int32: a #gint specifying the index in the selection set.  (e.g. the
 	// ith selection as opposed to the ith child). 
 	// 
 	// The function returns the following values:
@@ -7171,7 +7253,7 @@ type Selection interface {
 	// 	- goret bool 
 	//
 	// Removes the specified child of the object from the object's selection.
-	RemoveSelection(int) bool
+	RemoveSelection(int32) bool
 	// SelectAllSelection wraps atk_selection_select_all_selection
 	// 
 	// The function returns the following values:
@@ -7214,6 +7296,11 @@ func UnsafeSelectionFromGlibFull(c unsafe.Pointer) Selection {
 	return gobject.UnsafeObjectFromGlibFull(c).(Selection)
 }
 
+// UnsafeSelectionFromGlibBorrow is used to convert raw AtkSelection pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeSelectionFromGlibBorrow(c unsafe.Pointer) Selection {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Selection)
+}
+
 // UnsafeSelectionToGlibNone is used to convert the instance to it's C value AtkSelection. This is used by the bindings internally.
 func UnsafeSelectionToGlibNone(c Selection) unsafe.Pointer {
 	i := c.upcastToAtkSelection()
@@ -7230,7 +7317,7 @@ func UnsafeSelectionToGlibFull(c Selection) unsafe.Pointer {
 // 
 // The function takes the following parameters:
 // 
-// 	- i int: a #gint specifying the child index. 
+// 	- i int32: a #gint specifying the child index. 
 // 
 // The function returns the following values:
 // 
@@ -7238,7 +7325,7 @@ func UnsafeSelectionToGlibFull(c Selection) unsafe.Pointer {
 //
 // Adds the specified accessible child of the object to the
 // object's selection.
-func (selection *SelectionInstance) AddSelection(i int) bool {
+func (selection *SelectionInstance) AddSelection(i int32) bool {
 	var carg0 *C.AtkSelection // in, none, converted
 	var carg1 C.gint          // in, none, casted
 	var cret  C.gboolean      // return
@@ -7289,14 +7376,14 @@ func (selection *SelectionInstance) ClearSelection() bool {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Gets the number of accessible children currently selected.
 // Note: callers should not rely on %NULL or on a zero value for
 // indication of whether AtkSelectionIface is implemented, they should
 // use type checking/interface checking macros or the
 // atk_get_accessible_value() convenience method.
-func (selection *SelectionInstance) GetSelectionCount() int {
+func (selection *SelectionInstance) GetSelectionCount() int32 {
 	var carg0 *C.AtkSelection // in, none, converted
 	var cret  C.gint          // return, none, casted
 
@@ -7305,9 +7392,9 @@ func (selection *SelectionInstance) GetSelectionCount() int {
 	cret = C.atk_selection_get_selection_count(carg0)
 	runtime.KeepAlive(selection)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -7316,7 +7403,7 @@ func (selection *SelectionInstance) GetSelectionCount() int {
 // 
 // The function takes the following parameters:
 // 
-// 	- i int: a #gint specifying the child index. 
+// 	- i int32: a #gint specifying the child index. 
 // 
 // The function returns the following values:
 // 
@@ -7327,7 +7414,7 @@ func (selection *SelectionInstance) GetSelectionCount() int {
 // indication of whether AtkSelectionIface is implemented, they should
 // use type checking/interface checking macros or the
 // atk_get_accessible_value() convenience method.
-func (selection *SelectionInstance) IsChildSelected(i int) bool {
+func (selection *SelectionInstance) IsChildSelected(i int32) bool {
 	var carg0 *C.AtkSelection // in, none, converted
 	var carg1 C.gint          // in, none, casted
 	var cret  C.gboolean      // return
@@ -7352,7 +7439,7 @@ func (selection *SelectionInstance) IsChildSelected(i int) bool {
 // 
 // The function takes the following parameters:
 // 
-// 	- i int: a #gint specifying the index in the selection set.  (e.g. the
+// 	- i int32: a #gint specifying the index in the selection set.  (e.g. the
 // ith selection as opposed to the ith child). 
 // 
 // The function returns the following values:
@@ -7365,7 +7452,7 @@ func (selection *SelectionInstance) IsChildSelected(i int) bool {
 // indication of whether AtkSelectionIface is implemented, they should
 // use type checking/interface checking macros or the
 // atk_get_accessible_value() convenience method.
-func (selection *SelectionInstance) RefSelection(i int) Object {
+func (selection *SelectionInstance) RefSelection(i int32) Object {
 	var carg0 *C.AtkSelection // in, none, converted
 	var carg1 C.gint          // in, none, casted
 	var cret  *C.AtkObject    // return, full, converted, nullable
@@ -7390,7 +7477,7 @@ func (selection *SelectionInstance) RefSelection(i int) Object {
 // 
 // The function takes the following parameters:
 // 
-// 	- i int: a #gint specifying the index in the selection set.  (e.g. the
+// 	- i int32: a #gint specifying the index in the selection set.  (e.g. the
 // ith selection as opposed to the ith child). 
 // 
 // The function returns the following values:
@@ -7398,7 +7485,7 @@ func (selection *SelectionInstance) RefSelection(i int) Object {
 // 	- goret bool 
 //
 // Removes the specified child of the object from the object's selection.
-func (selection *SelectionInstance) RemoveSelection(i int) bool {
+func (selection *SelectionInstance) RemoveSelection(i int32) bool {
 	var carg0 *C.AtkSelection // in, none, converted
 	var carg1 C.gint          // in, none, casted
 	var cret  C.gboolean      // return
@@ -7459,12 +7546,12 @@ type SelectionOverrides[Instance Selection] struct {
 	// AddSelection allows you to override the implementation of the virtual method add_selection.
 	// The function takes the following parameters:
 	// 
-	// 	- i int: a #gint specifying the child index. 
+	// 	- i int32: a #gint specifying the child index. 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
-	AddSelection func(Instance, int) bool
+	AddSelection func(Instance, int32) bool
 	// ClearSelection allows you to override the implementation of the virtual method clear_selection.
 	// The function returns the following values:
 	// 
@@ -7473,37 +7560,37 @@ type SelectionOverrides[Instance Selection] struct {
 	// GetSelectionCount allows you to override the implementation of the virtual method get_selection_count.
 	// The function returns the following values:
 	// 
-	// 	- goret int 
-	GetSelectionCount func(Instance) int
+	// 	- goret int32 
+	GetSelectionCount func(Instance) int32
 	// IsChildSelected allows you to override the implementation of the virtual method is_child_selected.
 	// The function takes the following parameters:
 	// 
-	// 	- i int: a #gint specifying the child index. 
+	// 	- i int32: a #gint specifying the child index. 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
-	IsChildSelected func(Instance, int) bool
+	IsChildSelected func(Instance, int32) bool
 	// RefSelection allows you to override the implementation of the virtual method ref_selection.
 	// The function takes the following parameters:
 	// 
-	// 	- i int: a #gint specifying the index in the selection set.  (e.g. the
+	// 	- i int32: a #gint specifying the index in the selection set.  (e.g. the
 	// ith selection as opposed to the ith child). 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Object (nullable) 
-	RefSelection func(Instance, int) Object
+	RefSelection func(Instance, int32) Object
 	// RemoveSelection allows you to override the implementation of the virtual method remove_selection.
 	// The function takes the following parameters:
 	// 
-	// 	- i int: a #gint specifying the index in the selection set.  (e.g. the
+	// 	- i int32: a #gint specifying the index in the selection set.  (e.g. the
 	// ith selection as opposed to the ith child). 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
-	RemoveSelection func(Instance, int) bool
+	RemoveSelection func(Instance, int32) bool
 	// SelectAllSelection allows you to override the implementation of the virtual method select_all_selection.
 	// The function returns the following values:
 	// 
@@ -7525,11 +7612,11 @@ func UnsafeApplySelectionOverrides[Instance Selection](gclass unsafe.Pointer, ov
 			"_gotk4_atk1_Selection_add_selection",
 			func(carg0 *C.AtkSelection, carg1 C.gint) (cret C.gboolean) {
 				var selection Instance // go AtkSelection subclass
-				var i         int      // in, none, casted
+				var i         int32    // in, none, casted
 				var goret     bool     // return
 
-				selection = UnsafeSelectionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				i = int(carg1)
+				selection = UnsafeSelectionFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				i = int32(carg1)
 
 				goret = overrides.AddSelection(selection, i)
 
@@ -7551,7 +7638,7 @@ func UnsafeApplySelectionOverrides[Instance Selection](gclass unsafe.Pointer, ov
 				var selection Instance // go AtkSelection subclass
 				var goret     bool     // return
 
-				selection = UnsafeSelectionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				selection = UnsafeSelectionFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.ClearSelection(selection)
 
@@ -7571,9 +7658,9 @@ func UnsafeApplySelectionOverrides[Instance Selection](gclass unsafe.Pointer, ov
 			"_gotk4_atk1_Selection_get_selection_count",
 			func(carg0 *C.AtkSelection) (cret C.gint) {
 				var selection Instance // go AtkSelection subclass
-				var goret     int      // return, none, casted
+				var goret     int32    // return, none, casted
 
-				selection = UnsafeSelectionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				selection = UnsafeSelectionFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetSelectionCount(selection)
 
@@ -7591,11 +7678,11 @@ func UnsafeApplySelectionOverrides[Instance Selection](gclass unsafe.Pointer, ov
 			"_gotk4_atk1_Selection_is_child_selected",
 			func(carg0 *C.AtkSelection, carg1 C.gint) (cret C.gboolean) {
 				var selection Instance // go AtkSelection subclass
-				var i         int      // in, none, casted
+				var i         int32    // in, none, casted
 				var goret     bool     // return
 
-				selection = UnsafeSelectionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				i = int(carg1)
+				selection = UnsafeSelectionFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				i = int32(carg1)
 
 				goret = overrides.IsChildSelected(selection, i)
 
@@ -7615,11 +7702,11 @@ func UnsafeApplySelectionOverrides[Instance Selection](gclass unsafe.Pointer, ov
 			"_gotk4_atk1_Selection_ref_selection",
 			func(carg0 *C.AtkSelection, carg1 C.gint) (cret *C.AtkObject) {
 				var selection Instance // go AtkSelection subclass
-				var i         int      // in, none, casted
+				var i         int32    // in, none, casted
 				var goret     Object   // return, full, converted, nullable
 
-				selection = UnsafeSelectionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				i = int(carg1)
+				selection = UnsafeSelectionFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				i = int32(carg1)
 
 				goret = overrides.RefSelection(selection, i)
 
@@ -7639,11 +7726,11 @@ func UnsafeApplySelectionOverrides[Instance Selection](gclass unsafe.Pointer, ov
 			"_gotk4_atk1_Selection_remove_selection",
 			func(carg0 *C.AtkSelection, carg1 C.gint) (cret C.gboolean) {
 				var selection Instance // go AtkSelection subclass
-				var i         int      // in, none, casted
+				var i         int32    // in, none, casted
 				var goret     bool     // return
 
-				selection = UnsafeSelectionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				i = int(carg1)
+				selection = UnsafeSelectionFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				i = int32(carg1)
 
 				goret = overrides.RemoveSelection(selection, i)
 
@@ -7665,7 +7752,7 @@ func UnsafeApplySelectionOverrides[Instance Selection](gclass unsafe.Pointer, ov
 				var selection Instance // go AtkSelection subclass
 				var goret     bool     // return
 
-				selection = UnsafeSelectionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				selection = UnsafeSelectionFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.SelectAllSelection(selection)
 
@@ -7686,7 +7773,7 @@ func UnsafeApplySelectionOverrides[Instance Selection](gclass unsafe.Pointer, ov
 			func(carg0 *C.AtkSelection) {
 				var selection Instance // go AtkSelection subclass
 
-				selection = UnsafeSelectionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				selection = UnsafeSelectionFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				overrides.SelectionChanged(selection)
 			},
@@ -7729,7 +7816,7 @@ type StreamableContent interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- i int: a gint representing the position of the mime type starting from 0 
+	// 	- i int32: a gint representing the position of the mime type starting from 0 
 	// 
 	// The function returns the following values:
 	// 
@@ -7737,15 +7824,15 @@ type StreamableContent interface {
 	//
 	// Gets the character string of the specified mime type. The first mime
 	// type is at position 0, the second at position 1, and so on.
-	GetMIMEType(int) string
+	GetMIMEType(int32) string
 	// GetNMIMETypes wraps atk_streamable_content_get_n_mime_types
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Gets the number of mime types supported by this object.
-	GetNMIMETypes() int
+	GetNMIMETypes() int32
 	// GetStream wraps atk_streamable_content_get_stream
 	// 
 	// The function takes the following parameters:
@@ -7806,6 +7893,11 @@ func UnsafeStreamableContentFromGlibFull(c unsafe.Pointer) StreamableContent {
 	return gobject.UnsafeObjectFromGlibFull(c).(StreamableContent)
 }
 
+// UnsafeStreamableContentFromGlibBorrow is used to convert raw AtkStreamableContent pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeStreamableContentFromGlibBorrow(c unsafe.Pointer) StreamableContent {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(StreamableContent)
+}
+
 // UnsafeStreamableContentToGlibNone is used to convert the instance to it's C value AtkStreamableContent. This is used by the bindings internally.
 func UnsafeStreamableContentToGlibNone(c StreamableContent) unsafe.Pointer {
 	i := c.upcastToAtkStreamableContent()
@@ -7822,7 +7914,7 @@ func UnsafeStreamableContentToGlibFull(c StreamableContent) unsafe.Pointer {
 // 
 // The function takes the following parameters:
 // 
-// 	- i int: a gint representing the position of the mime type starting from 0 
+// 	- i int32: a gint representing the position of the mime type starting from 0 
 // 
 // The function returns the following values:
 // 
@@ -7830,7 +7922,7 @@ func UnsafeStreamableContentToGlibFull(c StreamableContent) unsafe.Pointer {
 //
 // Gets the character string of the specified mime type. The first mime
 // type is at position 0, the second at position 1, and so on.
-func (streamable *StreamableContentInstance) GetMIMEType(i int) string {
+func (streamable *StreamableContentInstance) GetMIMEType(i int32) string {
 	var carg0 *C.AtkStreamableContent // in, none, converted
 	var carg1 C.gint                  // in, none, casted
 	var cret  *C.gchar                // return, none, string
@@ -7853,10 +7945,10 @@ func (streamable *StreamableContentInstance) GetMIMEType(i int) string {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Gets the number of mime types supported by this object.
-func (streamable *StreamableContentInstance) GetNMIMETypes() int {
+func (streamable *StreamableContentInstance) GetNMIMETypes() int32 {
 	var carg0 *C.AtkStreamableContent // in, none, converted
 	var cret  C.gint                  // return, none, casted
 
@@ -7865,9 +7957,9 @@ func (streamable *StreamableContentInstance) GetNMIMETypes() int {
 	cret = C.atk_streamable_content_get_n_mime_types(carg0)
 	runtime.KeepAlive(streamable)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -7950,17 +8042,17 @@ type StreamableContentOverrides[Instance StreamableContent] struct {
 	// GetMIMEType allows you to override the implementation of the virtual method get_mime_type.
 	// The function takes the following parameters:
 	// 
-	// 	- i int: a gint representing the position of the mime type starting from 0 
+	// 	- i int32: a gint representing the position of the mime type starting from 0 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret string 
-	GetMIMEType func(Instance, int) string
+	GetMIMEType func(Instance, int32) string
 	// GetNMIMETypes allows you to override the implementation of the virtual method get_n_mime_types.
 	// The function returns the following values:
 	// 
-	// 	- goret int 
-	GetNMIMETypes func(Instance) int
+	// 	- goret int32 
+	GetNMIMETypes func(Instance) int32
 	// GetStream allows you to override the implementation of the virtual method get_stream.
 	// The function takes the following parameters:
 	// 
@@ -7994,11 +8086,11 @@ func UnsafeApplyStreamableContentOverrides[Instance StreamableContent](gclass un
 			"_gotk4_atk1_StreamableContent_get_mime_type",
 			func(carg0 *C.AtkStreamableContent, carg1 C.gint) (cret *C.gchar) {
 				var streamable Instance // go AtkStreamableContent subclass
-				var i          int      // in, none, casted
+				var i          int32    // in, none, casted
 				var goret      string   // return, none, string
 
-				streamable = UnsafeStreamableContentFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				i = int(carg1)
+				streamable = UnsafeStreamableContentFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				i = int32(carg1)
 
 				goret = overrides.GetMIMEType(streamable, i)
 
@@ -8017,9 +8109,9 @@ func UnsafeApplyStreamableContentOverrides[Instance StreamableContent](gclass un
 			"_gotk4_atk1_StreamableContent_get_n_mime_types",
 			func(carg0 *C.AtkStreamableContent) (cret C.gint) {
 				var streamable Instance // go AtkStreamableContent subclass
-				var goret      int      // return, none, casted
+				var goret      int32    // return, none, casted
 
-				streamable = UnsafeStreamableContentFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				streamable = UnsafeStreamableContentFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetNMIMETypes(streamable)
 
@@ -8040,7 +8132,7 @@ func UnsafeApplyStreamableContentOverrides[Instance StreamableContent](gclass un
 				var mimeType   string          // in, none, string
 				var goret      *glib.IOChannel // return, full, converted
 
-				streamable = UnsafeStreamableContentFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				streamable = UnsafeStreamableContentFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				mimeType = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 
 				goret = overrides.GetStream(streamable, mimeType)
@@ -8062,7 +8154,7 @@ func UnsafeApplyStreamableContentOverrides[Instance StreamableContent](gclass un
 				var mimeType   string   // in, none, string
 				var goret      string   // return, none, string, nullable-string
 
-				streamable = UnsafeStreamableContentFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				streamable = UnsafeStreamableContentFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				mimeType = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 
 				goret = overrides.GetURI(streamable, mimeType)
@@ -8125,26 +8217,26 @@ type Table interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- column int: a #gint representing a column in @table 
+	// 	- column int32: a #gint representing a column in @table 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
 	//
 	// Adds the specified @column to the selection.
-	AddColumnSelection(int) bool
+	AddColumnSelection(int32) bool
 	// AddRowSelection wraps atk_table_add_row_selection
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- row int: a #gint representing a row in @table 
+	// 	- row int32: a #gint representing a row in @table 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
 	//
 	// Adds the specified @row to the selection.
-	AddRowSelection(int) bool
+	AddRowSelection(int32) bool
 	// GetCaption wraps atk_table_get_caption
 	// 
 	// The function returns the following values:
@@ -8157,120 +8249,120 @@ type Table interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- column int: a #gint representing a column in @table 
+	// 	- column int32: a #gint representing a column in @table 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret string 
 	//
 	// Gets the description text of the specified @column in the table
-	GetColumnDescription(int) string
+	GetColumnDescription(int32) string
 	// GetColumnExtentAt wraps atk_table_get_column_extent_at
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- row int: a #gint representing a row in @table 
-	// 	- column int: a #gint representing a column in @table 
+	// 	- row int32: a #gint representing a row in @table 
+	// 	- column int32: a #gint representing a column in @table 
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Gets the number of columns occupied by the accessible object
 	// at the specified @row and @column in the @table.
-	GetColumnExtentAt(int, int) int
+	GetColumnExtentAt(int32, int32) int32
 	// GetColumnHeader wraps atk_table_get_column_header
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- column int: a #gint representing a column in the table 
+	// 	- column int32: a #gint representing a column in the table 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Object (nullable) 
 	//
 	// Gets the column header of a specified column in an accessible table.
-	GetColumnHeader(int) Object
+	GetColumnHeader(int32) Object
 	// GetNColumns wraps atk_table_get_n_columns
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Gets the number of columns in the table.
-	GetNColumns() int
+	GetNColumns() int32
 	// GetNRows wraps atk_table_get_n_rows
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Gets the number of rows in the table.
-	GetNRows() int
+	GetNRows() int32
 	// GetRowDescription wraps atk_table_get_row_description
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- row int: a #gint representing a row in @table 
+	// 	- row int32: a #gint representing a row in @table 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret string (nullable) 
 	//
 	// Gets the description text of the specified row in the table
-	GetRowDescription(int) string
+	GetRowDescription(int32) string
 	// GetRowExtentAt wraps atk_table_get_row_extent_at
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- row int: a #gint representing a row in @table 
-	// 	- column int: a #gint representing a column in @table 
+	// 	- row int32: a #gint representing a row in @table 
+	// 	- column int32: a #gint representing a column in @table 
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Gets the number of rows occupied by the accessible object
 	// at a specified @row and @column in the @table.
-	GetRowExtentAt(int, int) int
+	GetRowExtentAt(int32, int32) int32
 	// GetRowHeader wraps atk_table_get_row_header
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- row int: a #gint representing a row in the table 
+	// 	- row int32: a #gint representing a row in the table 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Object (nullable) 
 	//
 	// Gets the row header of a specified row in an accessible table.
-	GetRowHeader(int) Object
+	GetRowHeader(int32) Object
 	// GetSelectedColumns wraps atk_table_get_selected_columns
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- selected **int: a #gint** that is to contain the selected columns numbers 
+	// 	- selected **int32: a #gint** that is to contain the selected columns numbers 
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Gets the selected columns of the table by initializing **selected with
 	// the selected column numbers. This array should be freed by the caller.
-	GetSelectedColumns(**int) int
+	GetSelectedColumns(**int32) int32
 	// GetSelectedRows wraps atk_table_get_selected_rows
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- selected **int: a #gint** that is to contain the selected row numbers 
+	// 	- selected **int32: a #gint** that is to contain the selected row numbers 
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Gets the selected rows of the table by initializing **selected with
 	// the selected row numbers. This array should be freed by the caller.
-	GetSelectedRows(**int) int
+	GetSelectedRows(**int32) int32
 	// GetSummary wraps atk_table_get_summary
 	// 
 	// The function returns the following values:
@@ -8283,7 +8375,7 @@ type Table interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- column int: a #gint representing a column in @table 
+	// 	- column int32: a #gint representing a column in @table 
 	// 
 	// The function returns the following values:
 	// 
@@ -8291,12 +8383,12 @@ type Table interface {
 	//
 	// Gets a boolean value indicating whether the specified @column
 	// is selected
-	IsColumnSelected(int) bool
+	IsColumnSelected(int32) bool
 	// IsRowSelected wraps atk_table_is_row_selected
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- row int: a #gint representing a row in @table 
+	// 	- row int32: a #gint representing a row in @table 
 	// 
 	// The function returns the following values:
 	// 
@@ -8304,13 +8396,13 @@ type Table interface {
 	//
 	// Gets a boolean value indicating whether the specified @row
 	// is selected
-	IsRowSelected(int) bool
+	IsRowSelected(int32) bool
 	// IsSelected wraps atk_table_is_selected
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- row int: a #gint representing a row in @table 
-	// 	- column int: a #gint representing a column in @table 
+	// 	- row int32: a #gint representing a row in @table 
+	// 	- column int32: a #gint representing a column in @table 
 	// 
 	// The function returns the following values:
 	// 
@@ -8318,13 +8410,13 @@ type Table interface {
 	//
 	// Gets a boolean value indicating whether the accessible object
 	// at the specified @row and @column is selected
-	IsSelected(int, int) bool
+	IsSelected(int32, int32) bool
 	// RefAt wraps atk_table_ref_at
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- row int: a #gint representing a row in @table 
-	// 	- column int: a #gint representing a column in @table 
+	// 	- row int32: a #gint representing a row in @table 
+	// 	- column int32: a #gint representing a column in @table 
 	// 
 	// The function returns the following values:
 	// 
@@ -8332,31 +8424,31 @@ type Table interface {
 	//
 	// Get a reference to the table cell at @row, @column. This cell
 	// should implement the interface #AtkTableCell
-	RefAt(int, int) Object
+	RefAt(int32, int32) Object
 	// RemoveColumnSelection wraps atk_table_remove_column_selection
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- column int: a #gint representing a column in @table 
+	// 	- column int32: a #gint representing a column in @table 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
 	//
 	// Adds the specified @column to the selection.
-	RemoveColumnSelection(int) bool
+	RemoveColumnSelection(int32) bool
 	// RemoveRowSelection wraps atk_table_remove_row_selection
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- row int: a #gint representing a row in @table 
+	// 	- row int32: a #gint representing a row in @table 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
 	//
 	// Removes the specified @row from the selection.
-	RemoveRowSelection(int) bool
+	RemoveRowSelection(int32) bool
 	// SetCaption wraps atk_table_set_caption
 	// 
 	// The function takes the following parameters:
@@ -8369,40 +8461,40 @@ type Table interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- column int: a #gint representing a column in @table 
+	// 	- column int32: a #gint representing a column in @table 
 	// 	- description string: a #gchar representing the description text
 	// to set for the specified @column of the @table 
 	//
 	// Sets the description text for the specified @column of the @table.
-	SetColumnDescription(int, string)
+	SetColumnDescription(int32, string)
 	// SetColumnHeader wraps atk_table_set_column_header
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- column int: a #gint representing a column in @table 
+	// 	- column int32: a #gint representing a column in @table 
 	// 	- header Object: an #AtkTable 
 	//
 	// Sets the specified column header to @header.
-	SetColumnHeader(int, Object)
+	SetColumnHeader(int32, Object)
 	// SetRowDescription wraps atk_table_set_row_description
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- row int: a #gint representing a row in @table 
+	// 	- row int32: a #gint representing a row in @table 
 	// 	- description string: a #gchar representing the description text
 	// to set for the specified @row of @table 
 	//
 	// Sets the description text for the specified @row of @table.
-	SetRowDescription(int, string)
+	SetRowDescription(int32, string)
 	// SetRowHeader wraps atk_table_set_row_header
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- row int: a #gint representing a row in @table 
+	// 	- row int32: a #gint representing a row in @table 
 	// 	- header Object: an #AtkTable 
 	//
 	// Sets the specified row header to @header.
-	SetRowHeader(int, Object)
+	SetRowHeader(int32, Object)
 	// SetSummary wraps atk_table_set_summary
 	// 
 	// The function takes the following parameters:
@@ -8416,12 +8508,12 @@ type Table interface {
 	//
 	// The "column-deleted" signal is emitted by an object which
 	// implements the AtkTable interface when a column is deleted.
-	ConnectColumnDeleted(func(Table, int, int)) gobject.SignalHandle
+	ConnectColumnDeleted(func(Table, int32, int32)) gobject.SignalHandle
 	// ConnectColumnInserted connects the provided callback to the "column-inserted" signal
 	//
 	// The "column-inserted" signal is emitted by an object which
 	// implements the AtkTable interface when a column is inserted.
-	ConnectColumnInserted(func(Table, int, int)) gobject.SignalHandle
+	ConnectColumnInserted(func(Table, int32, int32)) gobject.SignalHandle
 	// ConnectColumnReordered connects the provided callback to the "column-reordered" signal
 	//
 	// The "column-reordered" signal is emitted by an object which
@@ -8438,12 +8530,12 @@ type Table interface {
 	//
 	// The "row-deleted" signal is emitted by an object which
 	// implements the AtkTable interface when a row is deleted.
-	ConnectRowDeleted(func(Table, int, int)) gobject.SignalHandle
+	ConnectRowDeleted(func(Table, int32, int32)) gobject.SignalHandle
 	// ConnectRowInserted connects the provided callback to the "row-inserted" signal
 	//
 	// The "row-inserted" signal is emitted by an object which
 	// implements the AtkTable interface when a row is inserted.
-	ConnectRowInserted(func(Table, int, int)) gobject.SignalHandle
+	ConnectRowInserted(func(Table, int32, int32)) gobject.SignalHandle
 	// ConnectRowReordered connects the provided callback to the "row-reordered" signal
 	//
 	// The "row-reordered" signal is emitted by an object which
@@ -8478,6 +8570,11 @@ func UnsafeTableFromGlibFull(c unsafe.Pointer) Table {
 	return gobject.UnsafeObjectFromGlibFull(c).(Table)
 }
 
+// UnsafeTableFromGlibBorrow is used to convert raw AtkTable pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeTableFromGlibBorrow(c unsafe.Pointer) Table {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Table)
+}
+
 // UnsafeTableToGlibNone is used to convert the instance to it's C value AtkTable. This is used by the bindings internally.
 func UnsafeTableToGlibNone(c Table) unsafe.Pointer {
 	i := c.upcastToAtkTable()
@@ -8494,14 +8591,14 @@ func UnsafeTableToGlibFull(c Table) unsafe.Pointer {
 // 
 // The function takes the following parameters:
 // 
-// 	- column int: a #gint representing a column in @table 
+// 	- column int32: a #gint representing a column in @table 
 // 
 // The function returns the following values:
 // 
 // 	- goret bool 
 //
 // Adds the specified @column to the selection.
-func (table *TableInstance) AddColumnSelection(column int) bool {
+func (table *TableInstance) AddColumnSelection(column int32) bool {
 	var carg0 *C.AtkTable // in, none, converted
 	var carg1 C.gint      // in, none, casted
 	var cret  C.gboolean  // return
@@ -8526,14 +8623,14 @@ func (table *TableInstance) AddColumnSelection(column int) bool {
 // 
 // The function takes the following parameters:
 // 
-// 	- row int: a #gint representing a row in @table 
+// 	- row int32: a #gint representing a row in @table 
 // 
 // The function returns the following values:
 // 
 // 	- goret bool 
 //
 // Adds the specified @row to the selection.
-func (table *TableInstance) AddRowSelection(row int) bool {
+func (table *TableInstance) AddRowSelection(row int32) bool {
 	var carg0 *C.AtkTable // in, none, converted
 	var carg1 C.gint      // in, none, casted
 	var cret  C.gboolean  // return
@@ -8583,14 +8680,14 @@ func (table *TableInstance) GetCaption() Object {
 // 
 // The function takes the following parameters:
 // 
-// 	- column int: a #gint representing a column in @table 
+// 	- column int32: a #gint representing a column in @table 
 // 
 // The function returns the following values:
 // 
 // 	- goret string 
 //
 // Gets the description text of the specified @column in the table
-func (table *TableInstance) GetColumnDescription(column int) string {
+func (table *TableInstance) GetColumnDescription(column int32) string {
 	var carg0 *C.AtkTable // in, none, converted
 	var carg1 C.gint      // in, none, casted
 	var cret  *C.gchar    // return, none, string
@@ -8613,16 +8710,16 @@ func (table *TableInstance) GetColumnDescription(column int) string {
 // 
 // The function takes the following parameters:
 // 
-// 	- row int: a #gint representing a row in @table 
-// 	- column int: a #gint representing a column in @table 
+// 	- row int32: a #gint representing a row in @table 
+// 	- column int32: a #gint representing a column in @table 
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Gets the number of columns occupied by the accessible object
 // at the specified @row and @column in the @table.
-func (table *TableInstance) GetColumnExtentAt(row int, column int) int {
+func (table *TableInstance) GetColumnExtentAt(row int32, column int32) int32 {
 	var carg0 *C.AtkTable // in, none, converted
 	var carg1 C.gint      // in, none, casted
 	var carg2 C.gint      // in, none, casted
@@ -8637,9 +8734,9 @@ func (table *TableInstance) GetColumnExtentAt(row int, column int) int {
 	runtime.KeepAlive(row)
 	runtime.KeepAlive(column)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -8648,14 +8745,14 @@ func (table *TableInstance) GetColumnExtentAt(row int, column int) int {
 // 
 // The function takes the following parameters:
 // 
-// 	- column int: a #gint representing a column in the table 
+// 	- column int32: a #gint representing a column in the table 
 // 
 // The function returns the following values:
 // 
 // 	- goret Object (nullable) 
 //
 // Gets the column header of a specified column in an accessible table.
-func (table *TableInstance) GetColumnHeader(column int) Object {
+func (table *TableInstance) GetColumnHeader(column int32) Object {
 	var carg0 *C.AtkTable  // in, none, converted
 	var carg1 C.gint       // in, none, casted
 	var cret  *C.AtkObject // return, none, converted, nullable
@@ -8680,10 +8777,10 @@ func (table *TableInstance) GetColumnHeader(column int) Object {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Gets the number of columns in the table.
-func (table *TableInstance) GetNColumns() int {
+func (table *TableInstance) GetNColumns() int32 {
 	var carg0 *C.AtkTable // in, none, converted
 	var cret  C.gint      // return, none, casted
 
@@ -8692,9 +8789,9 @@ func (table *TableInstance) GetNColumns() int {
 	cret = C.atk_table_get_n_columns(carg0)
 	runtime.KeepAlive(table)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -8703,10 +8800,10 @@ func (table *TableInstance) GetNColumns() int {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Gets the number of rows in the table.
-func (table *TableInstance) GetNRows() int {
+func (table *TableInstance) GetNRows() int32 {
 	var carg0 *C.AtkTable // in, none, converted
 	var cret  C.gint      // return, none, casted
 
@@ -8715,9 +8812,9 @@ func (table *TableInstance) GetNRows() int {
 	cret = C.atk_table_get_n_rows(carg0)
 	runtime.KeepAlive(table)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -8726,14 +8823,14 @@ func (table *TableInstance) GetNRows() int {
 // 
 // The function takes the following parameters:
 // 
-// 	- row int: a #gint representing a row in @table 
+// 	- row int32: a #gint representing a row in @table 
 // 
 // The function returns the following values:
 // 
 // 	- goret string (nullable) 
 //
 // Gets the description text of the specified row in the table
-func (table *TableInstance) GetRowDescription(row int) string {
+func (table *TableInstance) GetRowDescription(row int32) string {
 	var carg0 *C.AtkTable // in, none, converted
 	var carg1 C.gint      // in, none, casted
 	var cret  *C.gchar    // return, none, string, nullable-string
@@ -8758,16 +8855,16 @@ func (table *TableInstance) GetRowDescription(row int) string {
 // 
 // The function takes the following parameters:
 // 
-// 	- row int: a #gint representing a row in @table 
-// 	- column int: a #gint representing a column in @table 
+// 	- row int32: a #gint representing a row in @table 
+// 	- column int32: a #gint representing a column in @table 
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Gets the number of rows occupied by the accessible object
 // at a specified @row and @column in the @table.
-func (table *TableInstance) GetRowExtentAt(row int, column int) int {
+func (table *TableInstance) GetRowExtentAt(row int32, column int32) int32 {
 	var carg0 *C.AtkTable // in, none, converted
 	var carg1 C.gint      // in, none, casted
 	var carg2 C.gint      // in, none, casted
@@ -8782,9 +8879,9 @@ func (table *TableInstance) GetRowExtentAt(row int, column int) int {
 	runtime.KeepAlive(row)
 	runtime.KeepAlive(column)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -8793,14 +8890,14 @@ func (table *TableInstance) GetRowExtentAt(row int, column int) int {
 // 
 // The function takes the following parameters:
 // 
-// 	- row int: a #gint representing a row in the table 
+// 	- row int32: a #gint representing a row in the table 
 // 
 // The function returns the following values:
 // 
 // 	- goret Object (nullable) 
 //
 // Gets the row header of a specified row in an accessible table.
-func (table *TableInstance) GetRowHeader(row int) Object {
+func (table *TableInstance) GetRowHeader(row int32) Object {
 	var carg0 *C.AtkTable  // in, none, converted
 	var carg1 C.gint       // in, none, casted
 	var cret  *C.AtkObject // return, none, converted, nullable
@@ -8825,15 +8922,15 @@ func (table *TableInstance) GetRowHeader(row int) Object {
 // 
 // The function takes the following parameters:
 // 
-// 	- selected **int: a #gint** that is to contain the selected columns numbers 
+// 	- selected **int32: a #gint** that is to contain the selected columns numbers 
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Gets the selected columns of the table by initializing **selected with
 // the selected column numbers. This array should be freed by the caller.
-func (table *TableInstance) GetSelectedColumns(selected **int) int {
+func (table *TableInstance) GetSelectedColumns(selected **int32) int32 {
 	var carg0 *C.AtkTable // in, none, converted
 	var carg1 **C.gint    // in, transfer: none, C Pointers: 2, Name: gint
 	var cret  C.gint      // return, none, casted
@@ -8841,15 +8938,15 @@ func (table *TableInstance) GetSelectedColumns(selected **int) int {
 	carg0 = (*C.AtkTable)(UnsafeTableToGlibNone(table))
 	_ = selected
 	_ = carg1
-	panic("unimplemented conversion of **int (gint**)")
+	panic("unimplemented conversion of **int32 (gint**)")
 
 	cret = C.atk_table_get_selected_columns(carg0, carg1)
 	runtime.KeepAlive(table)
 	runtime.KeepAlive(selected)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -8858,15 +8955,15 @@ func (table *TableInstance) GetSelectedColumns(selected **int) int {
 // 
 // The function takes the following parameters:
 // 
-// 	- selected **int: a #gint** that is to contain the selected row numbers 
+// 	- selected **int32: a #gint** that is to contain the selected row numbers 
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Gets the selected rows of the table by initializing **selected with
 // the selected row numbers. This array should be freed by the caller.
-func (table *TableInstance) GetSelectedRows(selected **int) int {
+func (table *TableInstance) GetSelectedRows(selected **int32) int32 {
 	var carg0 *C.AtkTable // in, none, converted
 	var carg1 **C.gint    // in, transfer: none, C Pointers: 2, Name: gint
 	var cret  C.gint      // return, none, casted
@@ -8874,15 +8971,15 @@ func (table *TableInstance) GetSelectedRows(selected **int) int {
 	carg0 = (*C.AtkTable)(UnsafeTableToGlibNone(table))
 	_ = selected
 	_ = carg1
-	panic("unimplemented conversion of **int (gint**)")
+	panic("unimplemented conversion of **int32 (gint**)")
 
 	cret = C.atk_table_get_selected_rows(carg0, carg1)
 	runtime.KeepAlive(table)
 	runtime.KeepAlive(selected)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -8914,7 +9011,7 @@ func (table *TableInstance) GetSummary() Object {
 // 
 // The function takes the following parameters:
 // 
-// 	- column int: a #gint representing a column in @table 
+// 	- column int32: a #gint representing a column in @table 
 // 
 // The function returns the following values:
 // 
@@ -8922,7 +9019,7 @@ func (table *TableInstance) GetSummary() Object {
 //
 // Gets a boolean value indicating whether the specified @column
 // is selected
-func (table *TableInstance) IsColumnSelected(column int) bool {
+func (table *TableInstance) IsColumnSelected(column int32) bool {
 	var carg0 *C.AtkTable // in, none, converted
 	var carg1 C.gint      // in, none, casted
 	var cret  C.gboolean  // return
@@ -8947,7 +9044,7 @@ func (table *TableInstance) IsColumnSelected(column int) bool {
 // 
 // The function takes the following parameters:
 // 
-// 	- row int: a #gint representing a row in @table 
+// 	- row int32: a #gint representing a row in @table 
 // 
 // The function returns the following values:
 // 
@@ -8955,7 +9052,7 @@ func (table *TableInstance) IsColumnSelected(column int) bool {
 //
 // Gets a boolean value indicating whether the specified @row
 // is selected
-func (table *TableInstance) IsRowSelected(row int) bool {
+func (table *TableInstance) IsRowSelected(row int32) bool {
 	var carg0 *C.AtkTable // in, none, converted
 	var carg1 C.gint      // in, none, casted
 	var cret  C.gboolean  // return
@@ -8980,8 +9077,8 @@ func (table *TableInstance) IsRowSelected(row int) bool {
 // 
 // The function takes the following parameters:
 // 
-// 	- row int: a #gint representing a row in @table 
-// 	- column int: a #gint representing a column in @table 
+// 	- row int32: a #gint representing a row in @table 
+// 	- column int32: a #gint representing a column in @table 
 // 
 // The function returns the following values:
 // 
@@ -8989,7 +9086,7 @@ func (table *TableInstance) IsRowSelected(row int) bool {
 //
 // Gets a boolean value indicating whether the accessible object
 // at the specified @row and @column is selected
-func (table *TableInstance) IsSelected(row int, column int) bool {
+func (table *TableInstance) IsSelected(row int32, column int32) bool {
 	var carg0 *C.AtkTable // in, none, converted
 	var carg1 C.gint      // in, none, casted
 	var carg2 C.gint      // in, none, casted
@@ -9017,8 +9114,8 @@ func (table *TableInstance) IsSelected(row int, column int) bool {
 // 
 // The function takes the following parameters:
 // 
-// 	- row int: a #gint representing a row in @table 
-// 	- column int: a #gint representing a column in @table 
+// 	- row int32: a #gint representing a row in @table 
+// 	- column int32: a #gint representing a column in @table 
 // 
 // The function returns the following values:
 // 
@@ -9026,7 +9123,7 @@ func (table *TableInstance) IsSelected(row int, column int) bool {
 //
 // Get a reference to the table cell at @row, @column. This cell
 // should implement the interface #AtkTableCell
-func (table *TableInstance) RefAt(row int, column int) Object {
+func (table *TableInstance) RefAt(row int32, column int32) Object {
 	var carg0 *C.AtkTable  // in, none, converted
 	var carg1 C.gint       // in, none, casted
 	var carg2 C.gint       // in, none, casted
@@ -9052,14 +9149,14 @@ func (table *TableInstance) RefAt(row int, column int) Object {
 // 
 // The function takes the following parameters:
 // 
-// 	- column int: a #gint representing a column in @table 
+// 	- column int32: a #gint representing a column in @table 
 // 
 // The function returns the following values:
 // 
 // 	- goret bool 
 //
 // Adds the specified @column to the selection.
-func (table *TableInstance) RemoveColumnSelection(column int) bool {
+func (table *TableInstance) RemoveColumnSelection(column int32) bool {
 	var carg0 *C.AtkTable // in, none, converted
 	var carg1 C.gint      // in, none, casted
 	var cret  C.gboolean  // return
@@ -9084,14 +9181,14 @@ func (table *TableInstance) RemoveColumnSelection(column int) bool {
 // 
 // The function takes the following parameters:
 // 
-// 	- row int: a #gint representing a row in @table 
+// 	- row int32: a #gint representing a row in @table 
 // 
 // The function returns the following values:
 // 
 // 	- goret bool 
 //
 // Removes the specified @row from the selection.
-func (table *TableInstance) RemoveRowSelection(row int) bool {
+func (table *TableInstance) RemoveRowSelection(row int32) bool {
 	var carg0 *C.AtkTable // in, none, converted
 	var carg1 C.gint      // in, none, casted
 	var cret  C.gboolean  // return
@@ -9135,12 +9232,12 @@ func (table *TableInstance) SetCaption(caption Object) {
 // 
 // The function takes the following parameters:
 // 
-// 	- column int: a #gint representing a column in @table 
+// 	- column int32: a #gint representing a column in @table 
 // 	- description string: a #gchar representing the description text
 // to set for the specified @column of the @table 
 //
 // Sets the description text for the specified @column of the @table.
-func (table *TableInstance) SetColumnDescription(column int, description string) {
+func (table *TableInstance) SetColumnDescription(column int32, description string) {
 	var carg0 *C.AtkTable // in, none, converted
 	var carg1 C.gint      // in, none, casted
 	var carg2 *C.gchar    // in, none, string
@@ -9160,11 +9257,11 @@ func (table *TableInstance) SetColumnDescription(column int, description string)
 // 
 // The function takes the following parameters:
 // 
-// 	- column int: a #gint representing a column in @table 
+// 	- column int32: a #gint representing a column in @table 
 // 	- header Object: an #AtkTable 
 //
 // Sets the specified column header to @header.
-func (table *TableInstance) SetColumnHeader(column int, header Object) {
+func (table *TableInstance) SetColumnHeader(column int32, header Object) {
 	var carg0 *C.AtkTable  // in, none, converted
 	var carg1 C.gint       // in, none, casted
 	var carg2 *C.AtkObject // in, none, converted
@@ -9183,12 +9280,12 @@ func (table *TableInstance) SetColumnHeader(column int, header Object) {
 // 
 // The function takes the following parameters:
 // 
-// 	- row int: a #gint representing a row in @table 
+// 	- row int32: a #gint representing a row in @table 
 // 	- description string: a #gchar representing the description text
 // to set for the specified @row of @table 
 //
 // Sets the description text for the specified @row of @table.
-func (table *TableInstance) SetRowDescription(row int, description string) {
+func (table *TableInstance) SetRowDescription(row int32, description string) {
 	var carg0 *C.AtkTable // in, none, converted
 	var carg1 C.gint      // in, none, casted
 	var carg2 *C.gchar    // in, none, string
@@ -9208,11 +9305,11 @@ func (table *TableInstance) SetRowDescription(row int, description string) {
 // 
 // The function takes the following parameters:
 // 
-// 	- row int: a #gint representing a row in @table 
+// 	- row int32: a #gint representing a row in @table 
 // 	- header Object: an #AtkTable 
 //
 // Sets the specified row header to @header.
-func (table *TableInstance) SetRowHeader(row int, header Object) {
+func (table *TableInstance) SetRowHeader(row int32, header Object) {
 	var carg0 *C.AtkTable  // in, none, converted
 	var carg1 C.gint       // in, none, casted
 	var carg2 *C.AtkObject // in, none, converted
@@ -9251,7 +9348,7 @@ func (table *TableInstance) SetSummary(accessible Object) {
 //
 // The "column-deleted" signal is emitted by an object which
 // implements the AtkTable interface when a column is deleted.
-func (o *TableInstance) ConnectColumnDeleted(fn func(Table, int, int)) gobject.SignalHandle {
+func (o *TableInstance) ConnectColumnDeleted(fn func(Table, int32, int32)) gobject.SignalHandle {
 	return o.Instance.Connect("column-deleted", fn)
 }
 
@@ -9259,7 +9356,7 @@ func (o *TableInstance) ConnectColumnDeleted(fn func(Table, int, int)) gobject.S
 //
 // The "column-inserted" signal is emitted by an object which
 // implements the AtkTable interface when a column is inserted.
-func (o *TableInstance) ConnectColumnInserted(fn func(Table, int, int)) gobject.SignalHandle {
+func (o *TableInstance) ConnectColumnInserted(fn func(Table, int32, int32)) gobject.SignalHandle {
 	return o.Instance.Connect("column-inserted", fn)
 }
 
@@ -9285,7 +9382,7 @@ func (o *TableInstance) ConnectModelChanged(fn func(Table)) gobject.SignalHandle
 //
 // The "row-deleted" signal is emitted by an object which
 // implements the AtkTable interface when a row is deleted.
-func (o *TableInstance) ConnectRowDeleted(fn func(Table, int, int)) gobject.SignalHandle {
+func (o *TableInstance) ConnectRowDeleted(fn func(Table, int32, int32)) gobject.SignalHandle {
 	return o.Instance.Connect("row-deleted", fn)
 }
 
@@ -9293,7 +9390,7 @@ func (o *TableInstance) ConnectRowDeleted(fn func(Table, int, int)) gobject.Sign
 //
 // The "row-inserted" signal is emitted by an object which
 // implements the AtkTable interface when a row is inserted.
-func (o *TableInstance) ConnectRowInserted(fn func(Table, int, int)) gobject.SignalHandle {
+func (o *TableInstance) ConnectRowInserted(fn func(Table, int32, int32)) gobject.SignalHandle {
 	return o.Instance.Connect("row-inserted", fn)
 }
 
@@ -9312,33 +9409,33 @@ type TableOverrides[Instance Table] struct {
 	// AddColumnSelection allows you to override the implementation of the virtual method add_column_selection.
 	// The function takes the following parameters:
 	// 
-	// 	- column int: a #gint representing a column in @table 
+	// 	- column int32: a #gint representing a column in @table 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
-	AddColumnSelection func(Instance, int) bool
+	AddColumnSelection func(Instance, int32) bool
 	// AddRowSelection allows you to override the implementation of the virtual method add_row_selection.
 	// The function takes the following parameters:
 	// 
-	// 	- row int: a #gint representing a row in @table 
+	// 	- row int32: a #gint representing a row in @table 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
-	AddRowSelection func(Instance, int) bool
+	AddRowSelection func(Instance, int32) bool
 	// ColumnDeleted allows you to override the implementation of the virtual method column_deleted.
 	// The function takes the following parameters:
 	// 
-	// 	- column int 
-	// 	- numDeleted int 
-	ColumnDeleted func(Instance, int, int)
+	// 	- column int32 
+	// 	- numDeleted int32 
+	ColumnDeleted func(Instance, int32, int32)
 	// ColumnInserted allows you to override the implementation of the virtual method column_inserted.
 	// The function takes the following parameters:
 	// 
-	// 	- column int 
-	// 	- numInserted int 
-	ColumnInserted func(Instance, int, int)
+	// 	- column int32 
+	// 	- numInserted int32 
+	ColumnInserted func(Instance, int32, int32)
 	// ColumnReordered allows you to override the implementation of the virtual method column_reordered.
 	ColumnReordered func(Instance)
 	// GetCaption allows you to override the implementation of the virtual method get_caption.
@@ -9349,87 +9446,87 @@ type TableOverrides[Instance Table] struct {
 	// GetColumnDescription allows you to override the implementation of the virtual method get_column_description.
 	// The function takes the following parameters:
 	// 
-	// 	- column int: a #gint representing a column in @table 
+	// 	- column int32: a #gint representing a column in @table 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret string 
-	GetColumnDescription func(Instance, int) string
+	GetColumnDescription func(Instance, int32) string
 	// GetColumnExtentAt allows you to override the implementation of the virtual method get_column_extent_at.
 	// The function takes the following parameters:
 	// 
-	// 	- row int: a #gint representing a row in @table 
-	// 	- column int: a #gint representing a column in @table 
+	// 	- row int32: a #gint representing a row in @table 
+	// 	- column int32: a #gint representing a column in @table 
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
-	GetColumnExtentAt func(Instance, int, int) int
+	// 	- goret int32 
+	GetColumnExtentAt func(Instance, int32, int32) int32
 	// GetColumnHeader allows you to override the implementation of the virtual method get_column_header.
 	// The function takes the following parameters:
 	// 
-	// 	- column int: a #gint representing a column in the table 
+	// 	- column int32: a #gint representing a column in the table 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Object (nullable) 
-	GetColumnHeader func(Instance, int) Object
+	GetColumnHeader func(Instance, int32) Object
 	// GetNColumns allows you to override the implementation of the virtual method get_n_columns.
 	// The function returns the following values:
 	// 
-	// 	- goret int 
-	GetNColumns func(Instance) int
+	// 	- goret int32 
+	GetNColumns func(Instance) int32
 	// GetNRows allows you to override the implementation of the virtual method get_n_rows.
 	// The function returns the following values:
 	// 
-	// 	- goret int 
-	GetNRows func(Instance) int
+	// 	- goret int32 
+	GetNRows func(Instance) int32
 	// GetRowDescription allows you to override the implementation of the virtual method get_row_description.
 	// The function takes the following parameters:
 	// 
-	// 	- row int: a #gint representing a row in @table 
+	// 	- row int32: a #gint representing a row in @table 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret string (nullable) 
-	GetRowDescription func(Instance, int) string
+	GetRowDescription func(Instance, int32) string
 	// GetRowExtentAt allows you to override the implementation of the virtual method get_row_extent_at.
 	// The function takes the following parameters:
 	// 
-	// 	- row int: a #gint representing a row in @table 
-	// 	- column int: a #gint representing a column in @table 
+	// 	- row int32: a #gint representing a row in @table 
+	// 	- column int32: a #gint representing a column in @table 
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
-	GetRowExtentAt func(Instance, int, int) int
+	// 	- goret int32 
+	GetRowExtentAt func(Instance, int32, int32) int32
 	// GetRowHeader allows you to override the implementation of the virtual method get_row_header.
 	// The function takes the following parameters:
 	// 
-	// 	- row int: a #gint representing a row in the table 
+	// 	- row int32: a #gint representing a row in the table 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Object (nullable) 
-	GetRowHeader func(Instance, int) Object
+	GetRowHeader func(Instance, int32) Object
 	// GetSelectedColumns allows you to override the implementation of the virtual method get_selected_columns.
 	// The function takes the following parameters:
 	// 
-	// 	- selected **int: a #gint** that is to contain the selected columns numbers 
+	// 	- selected **int32: a #gint** that is to contain the selected columns numbers 
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
-	GetSelectedColumns func(Instance, **int) int
+	// 	- goret int32 
+	GetSelectedColumns func(Instance, **int32) int32
 	// GetSelectedRows allows you to override the implementation of the virtual method get_selected_rows.
 	// The function takes the following parameters:
 	// 
-	// 	- selected **int: a #gint** that is to contain the selected row numbers 
+	// 	- selected **int32: a #gint** that is to contain the selected row numbers 
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
-	GetSelectedRows func(Instance, **int) int
+	// 	- goret int32 
+	GetSelectedRows func(Instance, **int32) int32
 	// GetSummary allows you to override the implementation of the virtual method get_summary.
 	// The function returns the following values:
 	// 
@@ -9438,73 +9535,73 @@ type TableOverrides[Instance Table] struct {
 	// IsColumnSelected allows you to override the implementation of the virtual method is_column_selected.
 	// The function takes the following parameters:
 	// 
-	// 	- column int: a #gint representing a column in @table 
+	// 	- column int32: a #gint representing a column in @table 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
-	IsColumnSelected func(Instance, int) bool
+	IsColumnSelected func(Instance, int32) bool
 	// IsRowSelected allows you to override the implementation of the virtual method is_row_selected.
 	// The function takes the following parameters:
 	// 
-	// 	- row int: a #gint representing a row in @table 
+	// 	- row int32: a #gint representing a row in @table 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
-	IsRowSelected func(Instance, int) bool
+	IsRowSelected func(Instance, int32) bool
 	// IsSelected allows you to override the implementation of the virtual method is_selected.
 	// The function takes the following parameters:
 	// 
-	// 	- row int: a #gint representing a row in @table 
-	// 	- column int: a #gint representing a column in @table 
+	// 	- row int32: a #gint representing a row in @table 
+	// 	- column int32: a #gint representing a column in @table 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
-	IsSelected func(Instance, int, int) bool
+	IsSelected func(Instance, int32, int32) bool
 	// ModelChanged allows you to override the implementation of the virtual method model_changed.
 	ModelChanged func(Instance)
 	// RefAt allows you to override the implementation of the virtual method ref_at.
 	// The function takes the following parameters:
 	// 
-	// 	- row int: a #gint representing a row in @table 
-	// 	- column int: a #gint representing a column in @table 
+	// 	- row int32: a #gint representing a row in @table 
+	// 	- column int32: a #gint representing a column in @table 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Object 
-	RefAt func(Instance, int, int) Object
+	RefAt func(Instance, int32, int32) Object
 	// RemoveColumnSelection allows you to override the implementation of the virtual method remove_column_selection.
 	// The function takes the following parameters:
 	// 
-	// 	- column int: a #gint representing a column in @table 
+	// 	- column int32: a #gint representing a column in @table 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
-	RemoveColumnSelection func(Instance, int) bool
+	RemoveColumnSelection func(Instance, int32) bool
 	// RemoveRowSelection allows you to override the implementation of the virtual method remove_row_selection.
 	// The function takes the following parameters:
 	// 
-	// 	- row int: a #gint representing a row in @table 
+	// 	- row int32: a #gint representing a row in @table 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
-	RemoveRowSelection func(Instance, int) bool
+	RemoveRowSelection func(Instance, int32) bool
 	// RowDeleted allows you to override the implementation of the virtual method row_deleted.
 	// The function takes the following parameters:
 	// 
-	// 	- row int 
-	// 	- numDeleted int 
-	RowDeleted func(Instance, int, int)
+	// 	- row int32 
+	// 	- numDeleted int32 
+	RowDeleted func(Instance, int32, int32)
 	// RowInserted allows you to override the implementation of the virtual method row_inserted.
 	// The function takes the following parameters:
 	// 
-	// 	- row int 
-	// 	- numInserted int 
-	RowInserted func(Instance, int, int)
+	// 	- row int32 
+	// 	- numInserted int32 
+	RowInserted func(Instance, int32, int32)
 	// RowReordered allows you to override the implementation of the virtual method row_reordered.
 	RowReordered func(Instance)
 	// SetCaption allows you to override the implementation of the virtual method set_caption.
@@ -9515,29 +9612,29 @@ type TableOverrides[Instance Table] struct {
 	// SetColumnDescription allows you to override the implementation of the virtual method set_column_description.
 	// The function takes the following parameters:
 	// 
-	// 	- column int: a #gint representing a column in @table 
+	// 	- column int32: a #gint representing a column in @table 
 	// 	- description string: a #gchar representing the description text
 	// to set for the specified @column of the @table 
-	SetColumnDescription func(Instance, int, string)
+	SetColumnDescription func(Instance, int32, string)
 	// SetColumnHeader allows you to override the implementation of the virtual method set_column_header.
 	// The function takes the following parameters:
 	// 
-	// 	- column int: a #gint representing a column in @table 
+	// 	- column int32: a #gint representing a column in @table 
 	// 	- header Object: an #AtkTable 
-	SetColumnHeader func(Instance, int, Object)
+	SetColumnHeader func(Instance, int32, Object)
 	// SetRowDescription allows you to override the implementation of the virtual method set_row_description.
 	// The function takes the following parameters:
 	// 
-	// 	- row int: a #gint representing a row in @table 
+	// 	- row int32: a #gint representing a row in @table 
 	// 	- description string: a #gchar representing the description text
 	// to set for the specified @row of @table 
-	SetRowDescription func(Instance, int, string)
+	SetRowDescription func(Instance, int32, string)
 	// SetRowHeader allows you to override the implementation of the virtual method set_row_header.
 	// The function takes the following parameters:
 	// 
-	// 	- row int: a #gint representing a row in @table 
+	// 	- row int32: a #gint representing a row in @table 
 	// 	- header Object: an #AtkTable 
-	SetRowHeader func(Instance, int, Object)
+	SetRowHeader func(Instance, int32, Object)
 	// SetSummary allows you to override the implementation of the virtual method set_summary.
 	// The function takes the following parameters:
 	// 
@@ -9558,11 +9655,11 @@ func UnsafeApplyTableOverrides[Instance Table](gclass unsafe.Pointer, overrides 
 			"_gotk4_atk1_Table_add_column_selection",
 			func(carg0 *C.AtkTable, carg1 C.gint) (cret C.gboolean) {
 				var table  Instance // go AtkTable subclass
-				var column int      // in, none, casted
+				var column int32    // in, none, casted
 				var goret  bool     // return
 
-				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				column = int(carg1)
+				table = UnsafeTableFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				column = int32(carg1)
 
 				goret = overrides.AddColumnSelection(table, column)
 
@@ -9582,11 +9679,11 @@ func UnsafeApplyTableOverrides[Instance Table](gclass unsafe.Pointer, overrides 
 			"_gotk4_atk1_Table_add_row_selection",
 			func(carg0 *C.AtkTable, carg1 C.gint) (cret C.gboolean) {
 				var table Instance // go AtkTable subclass
-				var row   int      // in, none, casted
+				var row   int32    // in, none, casted
 				var goret bool     // return
 
-				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				row = int(carg1)
+				table = UnsafeTableFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				row = int32(carg1)
 
 				goret = overrides.AddRowSelection(table, row)
 
@@ -9606,12 +9703,12 @@ func UnsafeApplyTableOverrides[Instance Table](gclass unsafe.Pointer, overrides 
 			"_gotk4_atk1_Table_column_deleted",
 			func(carg0 *C.AtkTable, carg1 C.gint, carg2 C.gint) {
 				var table      Instance // go AtkTable subclass
-				var column     int      // in, none, casted
-				var numDeleted int      // in, none, casted
+				var column     int32    // in, none, casted
+				var numDeleted int32    // in, none, casted
 
-				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				column = int(carg1)
-				numDeleted = int(carg2)
+				table = UnsafeTableFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				column = int32(carg1)
+				numDeleted = int32(carg2)
 
 				overrides.ColumnDeleted(table, column, numDeleted)
 			},
@@ -9625,12 +9722,12 @@ func UnsafeApplyTableOverrides[Instance Table](gclass unsafe.Pointer, overrides 
 			"_gotk4_atk1_Table_column_inserted",
 			func(carg0 *C.AtkTable, carg1 C.gint, carg2 C.gint) {
 				var table       Instance // go AtkTable subclass
-				var column      int      // in, none, casted
-				var numInserted int      // in, none, casted
+				var column      int32    // in, none, casted
+				var numInserted int32    // in, none, casted
 
-				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				column = int(carg1)
-				numInserted = int(carg2)
+				table = UnsafeTableFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				column = int32(carg1)
+				numInserted = int32(carg2)
 
 				overrides.ColumnInserted(table, column, numInserted)
 			},
@@ -9645,7 +9742,7 @@ func UnsafeApplyTableOverrides[Instance Table](gclass unsafe.Pointer, overrides 
 			func(carg0 *C.AtkTable) {
 				var table Instance // go AtkTable subclass
 
-				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				table = UnsafeTableFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				overrides.ColumnReordered(table)
 			},
@@ -9661,7 +9758,7 @@ func UnsafeApplyTableOverrides[Instance Table](gclass unsafe.Pointer, overrides 
 				var table Instance // go AtkTable subclass
 				var goret Object   // return, none, converted, nullable
 
-				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				table = UnsafeTableFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetCaption(table)
 
@@ -9681,11 +9778,11 @@ func UnsafeApplyTableOverrides[Instance Table](gclass unsafe.Pointer, overrides 
 			"_gotk4_atk1_Table_get_column_description",
 			func(carg0 *C.AtkTable, carg1 C.gint) (cret *C.gchar) {
 				var table  Instance // go AtkTable subclass
-				var column int      // in, none, casted
+				var column int32    // in, none, casted
 				var goret  string   // return, none, string
 
-				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				column = int(carg1)
+				table = UnsafeTableFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				column = int32(carg1)
 
 				goret = overrides.GetColumnDescription(table, column)
 
@@ -9704,13 +9801,13 @@ func UnsafeApplyTableOverrides[Instance Table](gclass unsafe.Pointer, overrides 
 			"_gotk4_atk1_Table_get_column_extent_at",
 			func(carg0 *C.AtkTable, carg1 C.gint, carg2 C.gint) (cret C.gint) {
 				var table  Instance // go AtkTable subclass
-				var row    int      // in, none, casted
-				var column int      // in, none, casted
-				var goret  int      // return, none, casted
+				var row    int32    // in, none, casted
+				var column int32    // in, none, casted
+				var goret  int32    // return, none, casted
 
-				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				row = int(carg1)
-				column = int(carg2)
+				table = UnsafeTableFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				row = int32(carg1)
+				column = int32(carg2)
 
 				goret = overrides.GetColumnExtentAt(table, row, column)
 
@@ -9728,11 +9825,11 @@ func UnsafeApplyTableOverrides[Instance Table](gclass unsafe.Pointer, overrides 
 			"_gotk4_atk1_Table_get_column_header",
 			func(carg0 *C.AtkTable, carg1 C.gint) (cret *C.AtkObject) {
 				var table  Instance // go AtkTable subclass
-				var column int      // in, none, casted
+				var column int32    // in, none, casted
 				var goret  Object   // return, none, converted, nullable
 
-				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				column = int(carg1)
+				table = UnsafeTableFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				column = int32(carg1)
 
 				goret = overrides.GetColumnHeader(table, column)
 
@@ -9752,9 +9849,9 @@ func UnsafeApplyTableOverrides[Instance Table](gclass unsafe.Pointer, overrides 
 			"_gotk4_atk1_Table_get_n_columns",
 			func(carg0 *C.AtkTable) (cret C.gint) {
 				var table Instance // go AtkTable subclass
-				var goret int      // return, none, casted
+				var goret int32    // return, none, casted
 
-				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				table = UnsafeTableFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetNColumns(table)
 
@@ -9772,9 +9869,9 @@ func UnsafeApplyTableOverrides[Instance Table](gclass unsafe.Pointer, overrides 
 			"_gotk4_atk1_Table_get_n_rows",
 			func(carg0 *C.AtkTable) (cret C.gint) {
 				var table Instance // go AtkTable subclass
-				var goret int      // return, none, casted
+				var goret int32    // return, none, casted
 
-				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				table = UnsafeTableFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetNRows(table)
 
@@ -9792,11 +9889,11 @@ func UnsafeApplyTableOverrides[Instance Table](gclass unsafe.Pointer, overrides 
 			"_gotk4_atk1_Table_get_row_description",
 			func(carg0 *C.AtkTable, carg1 C.gint) (cret *C.gchar) {
 				var table Instance // go AtkTable subclass
-				var row   int      // in, none, casted
+				var row   int32    // in, none, casted
 				var goret string   // return, none, string, nullable-string
 
-				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				row = int(carg1)
+				table = UnsafeTableFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				row = int32(carg1)
 
 				goret = overrides.GetRowDescription(table, row)
 
@@ -9817,13 +9914,13 @@ func UnsafeApplyTableOverrides[Instance Table](gclass unsafe.Pointer, overrides 
 			"_gotk4_atk1_Table_get_row_extent_at",
 			func(carg0 *C.AtkTable, carg1 C.gint, carg2 C.gint) (cret C.gint) {
 				var table  Instance // go AtkTable subclass
-				var row    int      // in, none, casted
-				var column int      // in, none, casted
-				var goret  int      // return, none, casted
+				var row    int32    // in, none, casted
+				var column int32    // in, none, casted
+				var goret  int32    // return, none, casted
 
-				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				row = int(carg1)
-				column = int(carg2)
+				table = UnsafeTableFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				row = int32(carg1)
+				column = int32(carg2)
 
 				goret = overrides.GetRowExtentAt(table, row, column)
 
@@ -9841,11 +9938,11 @@ func UnsafeApplyTableOverrides[Instance Table](gclass unsafe.Pointer, overrides 
 			"_gotk4_atk1_Table_get_row_header",
 			func(carg0 *C.AtkTable, carg1 C.gint) (cret *C.AtkObject) {
 				var table Instance // go AtkTable subclass
-				var row   int      // in, none, casted
+				var row   int32    // in, none, casted
 				var goret Object   // return, none, converted, nullable
 
-				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				row = int(carg1)
+				table = UnsafeTableFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				row = int32(carg1)
 
 				goret = overrides.GetRowHeader(table, row)
 
@@ -9865,13 +9962,13 @@ func UnsafeApplyTableOverrides[Instance Table](gclass unsafe.Pointer, overrides 
 			"_gotk4_atk1_Table_get_selected_columns",
 			func(carg0 *C.AtkTable, carg1 **C.gint) (cret C.gint) {
 				var table    Instance // go AtkTable subclass
-				var selected **int    // in, transfer: none, C Pointers: 2, Name: gint
-				var goret    int      // return, none, casted
+				var selected **int32  // in, transfer: none, C Pointers: 2, Name: gint
+				var goret    int32    // return, none, casted
 
-				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				table = UnsafeTableFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				_ = selected
 				_ = carg1
-				panic("unimplemented conversion of **int (gint**)")
+				panic("unimplemented conversion of **int32 (gint**)")
 
 				goret = overrides.GetSelectedColumns(table, selected)
 
@@ -9889,13 +9986,13 @@ func UnsafeApplyTableOverrides[Instance Table](gclass unsafe.Pointer, overrides 
 			"_gotk4_atk1_Table_get_selected_rows",
 			func(carg0 *C.AtkTable, carg1 **C.gint) (cret C.gint) {
 				var table    Instance // go AtkTable subclass
-				var selected **int    // in, transfer: none, C Pointers: 2, Name: gint
-				var goret    int      // return, none, casted
+				var selected **int32  // in, transfer: none, C Pointers: 2, Name: gint
+				var goret    int32    // return, none, casted
 
-				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				table = UnsafeTableFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				_ = selected
 				_ = carg1
-				panic("unimplemented conversion of **int (gint**)")
+				panic("unimplemented conversion of **int32 (gint**)")
 
 				goret = overrides.GetSelectedRows(table, selected)
 
@@ -9915,7 +10012,7 @@ func UnsafeApplyTableOverrides[Instance Table](gclass unsafe.Pointer, overrides 
 				var table Instance // go AtkTable subclass
 				var goret Object   // return, full, converted
 
-				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				table = UnsafeTableFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetSummary(table)
 
@@ -9933,11 +10030,11 @@ func UnsafeApplyTableOverrides[Instance Table](gclass unsafe.Pointer, overrides 
 			"_gotk4_atk1_Table_is_column_selected",
 			func(carg0 *C.AtkTable, carg1 C.gint) (cret C.gboolean) {
 				var table  Instance // go AtkTable subclass
-				var column int      // in, none, casted
+				var column int32    // in, none, casted
 				var goret  bool     // return
 
-				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				column = int(carg1)
+				table = UnsafeTableFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				column = int32(carg1)
 
 				goret = overrides.IsColumnSelected(table, column)
 
@@ -9957,11 +10054,11 @@ func UnsafeApplyTableOverrides[Instance Table](gclass unsafe.Pointer, overrides 
 			"_gotk4_atk1_Table_is_row_selected",
 			func(carg0 *C.AtkTable, carg1 C.gint) (cret C.gboolean) {
 				var table Instance // go AtkTable subclass
-				var row   int      // in, none, casted
+				var row   int32    // in, none, casted
 				var goret bool     // return
 
-				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				row = int(carg1)
+				table = UnsafeTableFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				row = int32(carg1)
 
 				goret = overrides.IsRowSelected(table, row)
 
@@ -9981,13 +10078,13 @@ func UnsafeApplyTableOverrides[Instance Table](gclass unsafe.Pointer, overrides 
 			"_gotk4_atk1_Table_is_selected",
 			func(carg0 *C.AtkTable, carg1 C.gint, carg2 C.gint) (cret C.gboolean) {
 				var table  Instance // go AtkTable subclass
-				var row    int      // in, none, casted
-				var column int      // in, none, casted
+				var row    int32    // in, none, casted
+				var column int32    // in, none, casted
 				var goret  bool     // return
 
-				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				row = int(carg1)
-				column = int(carg2)
+				table = UnsafeTableFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				row = int32(carg1)
+				column = int32(carg2)
 
 				goret = overrides.IsSelected(table, row, column)
 
@@ -10008,7 +10105,7 @@ func UnsafeApplyTableOverrides[Instance Table](gclass unsafe.Pointer, overrides 
 			func(carg0 *C.AtkTable) {
 				var table Instance // go AtkTable subclass
 
-				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				table = UnsafeTableFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				overrides.ModelChanged(table)
 			},
@@ -10022,13 +10119,13 @@ func UnsafeApplyTableOverrides[Instance Table](gclass unsafe.Pointer, overrides 
 			"_gotk4_atk1_Table_ref_at",
 			func(carg0 *C.AtkTable, carg1 C.gint, carg2 C.gint) (cret *C.AtkObject) {
 				var table  Instance // go AtkTable subclass
-				var row    int      // in, none, casted
-				var column int      // in, none, casted
+				var row    int32    // in, none, casted
+				var column int32    // in, none, casted
 				var goret  Object   // return, full, converted
 
-				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				row = int(carg1)
-				column = int(carg2)
+				table = UnsafeTableFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				row = int32(carg1)
+				column = int32(carg2)
 
 				goret = overrides.RefAt(table, row, column)
 
@@ -10046,11 +10143,11 @@ func UnsafeApplyTableOverrides[Instance Table](gclass unsafe.Pointer, overrides 
 			"_gotk4_atk1_Table_remove_column_selection",
 			func(carg0 *C.AtkTable, carg1 C.gint) (cret C.gboolean) {
 				var table  Instance // go AtkTable subclass
-				var column int      // in, none, casted
+				var column int32    // in, none, casted
 				var goret  bool     // return
 
-				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				column = int(carg1)
+				table = UnsafeTableFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				column = int32(carg1)
 
 				goret = overrides.RemoveColumnSelection(table, column)
 
@@ -10070,11 +10167,11 @@ func UnsafeApplyTableOverrides[Instance Table](gclass unsafe.Pointer, overrides 
 			"_gotk4_atk1_Table_remove_row_selection",
 			func(carg0 *C.AtkTable, carg1 C.gint) (cret C.gboolean) {
 				var table Instance // go AtkTable subclass
-				var row   int      // in, none, casted
+				var row   int32    // in, none, casted
 				var goret bool     // return
 
-				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				row = int(carg1)
+				table = UnsafeTableFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				row = int32(carg1)
 
 				goret = overrides.RemoveRowSelection(table, row)
 
@@ -10094,12 +10191,12 @@ func UnsafeApplyTableOverrides[Instance Table](gclass unsafe.Pointer, overrides 
 			"_gotk4_atk1_Table_row_deleted",
 			func(carg0 *C.AtkTable, carg1 C.gint, carg2 C.gint) {
 				var table      Instance // go AtkTable subclass
-				var row        int      // in, none, casted
-				var numDeleted int      // in, none, casted
+				var row        int32    // in, none, casted
+				var numDeleted int32    // in, none, casted
 
-				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				row = int(carg1)
-				numDeleted = int(carg2)
+				table = UnsafeTableFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				row = int32(carg1)
+				numDeleted = int32(carg2)
 
 				overrides.RowDeleted(table, row, numDeleted)
 			},
@@ -10113,12 +10210,12 @@ func UnsafeApplyTableOverrides[Instance Table](gclass unsafe.Pointer, overrides 
 			"_gotk4_atk1_Table_row_inserted",
 			func(carg0 *C.AtkTable, carg1 C.gint, carg2 C.gint) {
 				var table       Instance // go AtkTable subclass
-				var row         int      // in, none, casted
-				var numInserted int      // in, none, casted
+				var row         int32    // in, none, casted
+				var numInserted int32    // in, none, casted
 
-				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				row = int(carg1)
-				numInserted = int(carg2)
+				table = UnsafeTableFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				row = int32(carg1)
+				numInserted = int32(carg2)
 
 				overrides.RowInserted(table, row, numInserted)
 			},
@@ -10133,7 +10230,7 @@ func UnsafeApplyTableOverrides[Instance Table](gclass unsafe.Pointer, overrides 
 			func(carg0 *C.AtkTable) {
 				var table Instance // go AtkTable subclass
 
-				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				table = UnsafeTableFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				overrides.RowReordered(table)
 			},
@@ -10149,7 +10246,7 @@ func UnsafeApplyTableOverrides[Instance Table](gclass unsafe.Pointer, overrides 
 				var table   Instance // go AtkTable subclass
 				var caption Object   // in, none, converted
 
-				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				table = UnsafeTableFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				caption = UnsafeObjectFromGlibNone(unsafe.Pointer(carg1))
 
 				overrides.SetCaption(table, caption)
@@ -10164,11 +10261,11 @@ func UnsafeApplyTableOverrides[Instance Table](gclass unsafe.Pointer, overrides 
 			"_gotk4_atk1_Table_set_column_description",
 			func(carg0 *C.AtkTable, carg1 C.gint, carg2 *C.gchar) {
 				var table       Instance // go AtkTable subclass
-				var column      int      // in, none, casted
+				var column      int32    // in, none, casted
 				var description string   // in, none, string
 
-				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				column = int(carg1)
+				table = UnsafeTableFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				column = int32(carg1)
 				description = C.GoString((*C.char)(unsafe.Pointer(carg2)))
 
 				overrides.SetColumnDescription(table, column, description)
@@ -10183,11 +10280,11 @@ func UnsafeApplyTableOverrides[Instance Table](gclass unsafe.Pointer, overrides 
 			"_gotk4_atk1_Table_set_column_header",
 			func(carg0 *C.AtkTable, carg1 C.gint, carg2 *C.AtkObject) {
 				var table  Instance // go AtkTable subclass
-				var column int      // in, none, casted
+				var column int32    // in, none, casted
 				var header Object   // in, none, converted
 
-				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				column = int(carg1)
+				table = UnsafeTableFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				column = int32(carg1)
 				header = UnsafeObjectFromGlibNone(unsafe.Pointer(carg2))
 
 				overrides.SetColumnHeader(table, column, header)
@@ -10202,11 +10299,11 @@ func UnsafeApplyTableOverrides[Instance Table](gclass unsafe.Pointer, overrides 
 			"_gotk4_atk1_Table_set_row_description",
 			func(carg0 *C.AtkTable, carg1 C.gint, carg2 *C.gchar) {
 				var table       Instance // go AtkTable subclass
-				var row         int      // in, none, casted
+				var row         int32    // in, none, casted
 				var description string   // in, none, string
 
-				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				row = int(carg1)
+				table = UnsafeTableFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				row = int32(carg1)
 				description = C.GoString((*C.char)(unsafe.Pointer(carg2)))
 
 				overrides.SetRowDescription(table, row, description)
@@ -10221,11 +10318,11 @@ func UnsafeApplyTableOverrides[Instance Table](gclass unsafe.Pointer, overrides 
 			"_gotk4_atk1_Table_set_row_header",
 			func(carg0 *C.AtkTable, carg1 C.gint, carg2 *C.AtkObject) {
 				var table  Instance // go AtkTable subclass
-				var row    int      // in, none, casted
+				var row    int32    // in, none, casted
 				var header Object   // in, none, converted
 
-				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				row = int(carg1)
+				table = UnsafeTableFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				row = int32(carg1)
 				header = UnsafeObjectFromGlibNone(unsafe.Pointer(carg2))
 
 				overrides.SetRowHeader(table, row, header)
@@ -10242,7 +10339,7 @@ func UnsafeApplyTableOverrides[Instance Table](gclass unsafe.Pointer, overrides 
 				var table      Instance // go AtkTable subclass
 				var accessible Object   // in, none, converted
 
-				table = UnsafeTableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				table = UnsafeTableFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				accessible = UnsafeObjectFromGlibNone(unsafe.Pointer(carg1))
 
 				overrides.SetSummary(table, accessible)
@@ -10275,28 +10372,28 @@ type TableCell interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Returns the number of columns occupied by this cell accessible.
-	GetColumnSpan() int
+	GetColumnSpan() int32
 	// GetPosition wraps atk_table_cell_get_position
 	// 
 	// The function returns the following values:
 	// 
-	// 	- row int: the row of the given cell. 
-	// 	- column int: the column of the given cell. 
+	// 	- row int32: the row of the given cell. 
+	// 	- column int32: the column of the given cell. 
 	// 	- goret bool 
 	//
 	// Retrieves the tabular position of this cell.
-	GetPosition() (int, int, bool)
+	GetPosition() (int32, int32, bool)
 	// GetRowColumnSpan wraps atk_table_cell_get_row_column_span
 	// 
 	// The function returns the following values:
 	// 
-	// 	- row int: the row index of the given cell. 
-	// 	- column int: the column index of the given cell. 
-	// 	- rowSpan int: the number of rows occupied by this cell. 
-	// 	- columnSpan int: the number of columns occupied by this cell. 
+	// 	- row int32: the row index of the given cell. 
+	// 	- column int32: the column index of the given cell. 
+	// 	- rowSpan int32: the number of rows occupied by this cell. 
+	// 	- columnSpan int32: the number of columns occupied by this cell. 
 	// 	- goret bool 
 	//
 	// Gets the row and column indexes and span of this cell accessible.
@@ -10304,15 +10401,15 @@ type TableCell interface {
 	// Note: If the object does not implement this function, then, by default, atk
 	// will implement this function by calling get_row_span and get_column_span
 	// on the object.
-	GetRowColumnSpan() (int, int, int, int, bool)
+	GetRowColumnSpan() (int32, int32, int32, int32, bool)
 	// GetRowSpan wraps atk_table_cell_get_row_span
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Returns the number of rows occupied by this cell accessible.
-	GetRowSpan() int
+	GetRowSpan() int32
 	// GetTable wraps atk_table_cell_get_table
 	// 
 	// The function returns the following values:
@@ -10349,6 +10446,11 @@ func UnsafeTableCellFromGlibFull(c unsafe.Pointer) TableCell {
 	return gobject.UnsafeObjectFromGlibFull(c).(TableCell)
 }
 
+// UnsafeTableCellFromGlibBorrow is used to convert raw AtkTableCell pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeTableCellFromGlibBorrow(c unsafe.Pointer) TableCell {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(TableCell)
+}
+
 // UnsafeTableCellToGlibNone is used to convert the instance to it's C value AtkTableCell. This is used by the bindings internally.
 func UnsafeTableCellToGlibNone(c TableCell) unsafe.Pointer {
 	i := c.upcastToAtkTableCell()
@@ -10365,10 +10467,10 @@ func UnsafeTableCellToGlibFull(c TableCell) unsafe.Pointer {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Returns the number of columns occupied by this cell accessible.
-func (cell *TableCellInstance) GetColumnSpan() int {
+func (cell *TableCellInstance) GetColumnSpan() int32 {
 	var carg0 *C.AtkTableCell // in, none, converted
 	var cret  C.gint          // return, none, casted
 
@@ -10377,9 +10479,9 @@ func (cell *TableCellInstance) GetColumnSpan() int {
 	cret = C.atk_table_cell_get_column_span(carg0)
 	runtime.KeepAlive(cell)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -10388,12 +10490,12 @@ func (cell *TableCellInstance) GetColumnSpan() int {
 // 
 // The function returns the following values:
 // 
-// 	- row int: the row of the given cell. 
-// 	- column int: the column of the given cell. 
+// 	- row int32: the row of the given cell. 
+// 	- column int32: the column of the given cell. 
 // 	- goret bool 
 //
 // Retrieves the tabular position of this cell.
-func (cell *TableCellInstance) GetPosition() (int, int, bool) {
+func (cell *TableCellInstance) GetPosition() (int32, int32, bool) {
 	var carg0 *C.AtkTableCell // in, none, converted
 	var carg1 C.gint          // out, full, casted
 	var carg2 C.gint          // out, full, casted
@@ -10404,12 +10506,12 @@ func (cell *TableCellInstance) GetPosition() (int, int, bool) {
 	cret = C.atk_table_cell_get_position(carg0, &carg1, &carg2)
 	runtime.KeepAlive(cell)
 
-	var row    int
-	var column int
+	var row    int32
+	var column int32
 	var goret  bool
 
-	row = int(carg1)
-	column = int(carg2)
+	row = int32(carg1)
+	column = int32(carg2)
 	if cret != 0 {
 		goret = true
 	}
@@ -10421,10 +10523,10 @@ func (cell *TableCellInstance) GetPosition() (int, int, bool) {
 // 
 // The function returns the following values:
 // 
-// 	- row int: the row index of the given cell. 
-// 	- column int: the column index of the given cell. 
-// 	- rowSpan int: the number of rows occupied by this cell. 
-// 	- columnSpan int: the number of columns occupied by this cell. 
+// 	- row int32: the row index of the given cell. 
+// 	- column int32: the column index of the given cell. 
+// 	- rowSpan int32: the number of rows occupied by this cell. 
+// 	- columnSpan int32: the number of columns occupied by this cell. 
 // 	- goret bool 
 //
 // Gets the row and column indexes and span of this cell accessible.
@@ -10432,7 +10534,7 @@ func (cell *TableCellInstance) GetPosition() (int, int, bool) {
 // Note: If the object does not implement this function, then, by default, atk
 // will implement this function by calling get_row_span and get_column_span
 // on the object.
-func (cell *TableCellInstance) GetRowColumnSpan() (int, int, int, int, bool) {
+func (cell *TableCellInstance) GetRowColumnSpan() (int32, int32, int32, int32, bool) {
 	var carg0 *C.AtkTableCell // in, none, converted
 	var carg1 C.gint          // out, full, casted
 	var carg2 C.gint          // out, full, casted
@@ -10445,16 +10547,16 @@ func (cell *TableCellInstance) GetRowColumnSpan() (int, int, int, int, bool) {
 	cret = C.atk_table_cell_get_row_column_span(carg0, &carg1, &carg2, &carg3, &carg4)
 	runtime.KeepAlive(cell)
 
-	var row        int
-	var column     int
-	var rowSpan    int
-	var columnSpan int
+	var row        int32
+	var column     int32
+	var rowSpan    int32
+	var columnSpan int32
 	var goret      bool
 
-	row = int(carg1)
-	column = int(carg2)
-	rowSpan = int(carg3)
-	columnSpan = int(carg4)
+	row = int32(carg1)
+	column = int32(carg2)
+	rowSpan = int32(carg3)
+	columnSpan = int32(carg4)
 	if cret != 0 {
 		goret = true
 	}
@@ -10466,10 +10568,10 @@ func (cell *TableCellInstance) GetRowColumnSpan() (int, int, int, int, bool) {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Returns the number of rows occupied by this cell accessible.
-func (cell *TableCellInstance) GetRowSpan() int {
+func (cell *TableCellInstance) GetRowSpan() int32 {
 	var carg0 *C.AtkTableCell // in, none, converted
 	var cret  C.gint          // return, none, casted
 
@@ -10478,9 +10580,9 @@ func (cell *TableCellInstance) GetRowSpan() int {
 	cret = C.atk_table_cell_get_row_span(carg0)
 	runtime.KeepAlive(cell)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -10514,29 +10616,29 @@ type TableCellOverrides[Instance TableCell] struct {
 	// GetColumnSpan allows you to override the implementation of the virtual method get_column_span.
 	// The function returns the following values:
 	// 
-	// 	- goret int 
-	GetColumnSpan func(Instance) int
+	// 	- goret int32 
+	GetColumnSpan func(Instance) int32
 	// GetPosition allows you to override the implementation of the virtual method get_position.
 	// The function returns the following values:
 	// 
-	// 	- row int: the row of the given cell. 
-	// 	- column int: the column of the given cell. 
+	// 	- row int32: the row of the given cell. 
+	// 	- column int32: the column of the given cell. 
 	// 	- goret bool 
-	GetPosition func(Instance) (int, int, bool)
+	GetPosition func(Instance) (int32, int32, bool)
 	// GetRowColumnSpan allows you to override the implementation of the virtual method get_row_column_span.
 	// The function returns the following values:
 	// 
-	// 	- row int: the row index of the given cell. 
-	// 	- column int: the column index of the given cell. 
-	// 	- rowSpan int: the number of rows occupied by this cell. 
-	// 	- columnSpan int: the number of columns occupied by this cell. 
+	// 	- row int32: the row index of the given cell. 
+	// 	- column int32: the column index of the given cell. 
+	// 	- rowSpan int32: the number of rows occupied by this cell. 
+	// 	- columnSpan int32: the number of columns occupied by this cell. 
 	// 	- goret bool 
-	GetRowColumnSpan func(Instance) (int, int, int, int, bool)
+	GetRowColumnSpan func(Instance) (int32, int32, int32, int32, bool)
 	// GetRowSpan allows you to override the implementation of the virtual method get_row_span.
 	// The function returns the following values:
 	// 
-	// 	- goret int 
-	GetRowSpan func(Instance) int
+	// 	- goret int32 
+	GetRowSpan func(Instance) int32
 	// GetTable allows you to override the implementation of the virtual method get_table.
 	// The function returns the following values:
 	// 
@@ -10556,9 +10658,9 @@ func UnsafeApplyTableCellOverrides[Instance TableCell](gclass unsafe.Pointer, ov
 			"_gotk4_atk1_TableCell_get_column_span",
 			func(carg0 *C.AtkTableCell) (cret C.gint) {
 				var cell  Instance // go AtkTableCell subclass
-				var goret int      // return, none, casted
+				var goret int32    // return, none, casted
 
-				cell = UnsafeTableCellFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				cell = UnsafeTableCellFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetColumnSpan(cell)
 
@@ -10576,11 +10678,11 @@ func UnsafeApplyTableCellOverrides[Instance TableCell](gclass unsafe.Pointer, ov
 			"_gotk4_atk1_TableCell_get_position",
 			func(carg0 *C.AtkTableCell, carg1 *C.gint, carg2 *C.gint) (cret C.gboolean) {
 				var cell   Instance // go AtkTableCell subclass
-				var row    int      // out, full, casted
-				var column int      // out, full, casted
+				var row    int32    // out, full, casted
+				var column int32    // out, full, casted
 				var goret  bool     // return
 
-				cell = UnsafeTableCellFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				cell = UnsafeTableCellFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				row, column, goret = overrides.GetPosition(cell)
 
@@ -10602,13 +10704,13 @@ func UnsafeApplyTableCellOverrides[Instance TableCell](gclass unsafe.Pointer, ov
 			"_gotk4_atk1_TableCell_get_row_column_span",
 			func(carg0 *C.AtkTableCell, carg1 *C.gint, carg2 *C.gint, carg3 *C.gint, carg4 *C.gint) (cret C.gboolean) {
 				var cell       Instance // go AtkTableCell subclass
-				var row        int      // out, full, casted
-				var column     int      // out, full, casted
-				var rowSpan    int      // out, full, casted
-				var columnSpan int      // out, full, casted
+				var row        int32    // out, full, casted
+				var column     int32    // out, full, casted
+				var rowSpan    int32    // out, full, casted
+				var columnSpan int32    // out, full, casted
 				var goret      bool     // return
 
-				cell = UnsafeTableCellFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				cell = UnsafeTableCellFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				row, column, rowSpan, columnSpan, goret = overrides.GetRowColumnSpan(cell)
 
@@ -10632,9 +10734,9 @@ func UnsafeApplyTableCellOverrides[Instance TableCell](gclass unsafe.Pointer, ov
 			"_gotk4_atk1_TableCell_get_row_span",
 			func(carg0 *C.AtkTableCell) (cret C.gint) {
 				var cell  Instance // go AtkTableCell subclass
-				var goret int      // return, none, casted
+				var goret int32    // return, none, casted
 
-				cell = UnsafeTableCellFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				cell = UnsafeTableCellFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetRowSpan(cell)
 
@@ -10654,7 +10756,7 @@ func UnsafeApplyTableCellOverrides[Instance TableCell](gclass unsafe.Pointer, ov
 				var cell  Instance // go AtkTableCell subclass
 				var goret Object   // return, full, converted
 
-				cell = UnsafeTableCellFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				cell = UnsafeTableCellFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetTable(cell)
 
@@ -10704,15 +10806,15 @@ type Text interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- startOffset int: the starting character offset of the selected region 
-	// 	- endOffset int: the offset of the first character after the selected region. 
+	// 	- startOffset int32: the starting character offset of the selected region 
+	// 	- endOffset int32: the offset of the first character after the selected region. 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
 	//
 	// Adds a selection bounded by the specified offsets.
-	AddTextSelection(int, int) bool
+	AddTextSelection(int32, int32) bool
 	// GetBoundedRanges wraps atk_text_get_bounded_ranges
 	// 
 	// The function takes the following parameters:
@@ -10732,82 +10834,82 @@ type Text interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Gets the offset of the position of the caret (cursor).
-	GetCaretOffset() int
+	GetCaretOffset() int32
 	// GetCharacterAtOffset wraps atk_text_get_character_at_offset
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- offset int: a character offset within @text 
+	// 	- offset int32: a character offset within @text 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret uint32 
 	//
 	// Gets the specified text.
-	GetCharacterAtOffset(int) uint32
+	GetCharacterAtOffset(int32) uint32
 	// GetCharacterCount wraps atk_text_get_character_count
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Gets the character count.
-	GetCharacterCount() int
+	GetCharacterCount() int32
 	// GetCharacterExtents wraps atk_text_get_character_extents
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- offset int: The offset of the text character for which bounding information is required. 
+	// 	- offset int32: The offset of the text character for which bounding information is required. 
 	// 	- coords CoordType: specify whether coordinates are relative to the screen or widget window 
 	// 
 	// The function returns the following values:
 	// 
-	// 	- x int: Pointer for the x coordinate of the bounding box 
-	// 	- y int: Pointer for the y coordinate of the bounding box 
-	// 	- width int: Pointer for the width of the bounding box 
-	// 	- height int: Pointer for the height of the bounding box 
+	// 	- x int32: Pointer for the x coordinate of the bounding box 
+	// 	- y int32: Pointer for the y coordinate of the bounding box 
+	// 	- width int32: Pointer for the width of the bounding box 
+	// 	- height int32: Pointer for the height of the bounding box 
 	//
 	// If the extent can not be obtained (e.g. missing support), all of x, y, width,
 	// height are set to -1.
 	// 
 	// Get the bounding box containing the glyph representing the character at
 	//     a particular text offset.
-	GetCharacterExtents(int, CoordType) (int, int, int, int)
+	GetCharacterExtents(int32, CoordType) (int32, int32, int32, int32)
 	// GetNSelections wraps atk_text_get_n_selections
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Gets the number of selected regions.
-	GetNSelections() int
+	GetNSelections() int32
 	// GetOffsetAtPoint wraps atk_text_get_offset_at_point
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- x int: screen x-position of character 
-	// 	- y int: screen y-position of character 
+	// 	- x int32: screen x-position of character 
+	// 	- y int32: screen y-position of character 
 	// 	- coords CoordType: specify whether coordinates are relative to the screen or
 	// widget window 
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Gets the offset of the character located at coordinates @x and @y. @x and @y
 	// are interpreted as being relative to the screen or this widget's window
 	// depending on @coords.
-	GetOffsetAtPoint(int, int, CoordType) int
+	GetOffsetAtPoint(int32, int32, CoordType) int32
 	// GetRangeExtents wraps atk_text_get_range_extents
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- startOffset int: The offset of the first text character for which boundary
+	// 	- startOffset int32: The offset of the first text character for which boundary
 	//        information is required. 
-	// 	- endOffset int: The offset of the text character after the last character
+	// 	- endOffset int32: The offset of the text character after the last character
 	//        for which boundary information is required. 
 	// 	- coordType CoordType: Specify whether coordinates are relative to the screen or widget window. 
 	// 
@@ -10819,12 +10921,12 @@ type Text interface {
 	// 
 	// If the extents can not be obtained (e.g. or missing support), the rectangle
 	// fields are set to -1.
-	GetRangeExtents(int, int, CoordType) TextRectangle
+	GetRangeExtents(int32, int32, CoordType) TextRectangle
 	// GetSelection wraps atk_text_get_selection
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- selectionNum int: The selection number.  The selected regions are
+	// 	- selectionNum int32: The selection number.  The selected regions are
 	// assigned numbers that correspond to how far the region is from the
 	// start of the text.  The selected region closest to the beginning
 	// of the text region is assigned the number 0, etc.  Note that adding,
@@ -10832,25 +10934,25 @@ type Text interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- startOffset int: passes back the starting character offset of the selected region 
-	// 	- endOffset int: passes back the ending character offset (offset immediately past)
+	// 	- startOffset int32: passes back the starting character offset of the selected region 
+	// 	- endOffset int32: passes back the ending character offset (offset immediately past)
 	// of the selected region 
 	// 	- goret string 
 	//
 	// Gets the text from the specified selection.
-	GetSelection(int) (int, int, string)
+	GetSelection(int32) (int32, int32, string)
 	// GetStringAtOffset wraps atk_text_get_string_at_offset
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- offset int: position 
+	// 	- offset int32: position 
 	// 	- granularity TextGranularity: An #AtkTextGranularity 
 	// 
 	// The function returns the following values:
 	// 
-	// 	- startOffset int: the starting character offset of the returned string, or -1
+	// 	- startOffset int32: the starting character offset of the returned string, or -1
 	//                in the case of error (e.g. invalid offset, not implemented) 
-	// 	- endOffset int: the offset of the first character after the returned string,
+	// 	- endOffset int32: the offset of the first character after the returned string,
 	//              or -1 in the case of error (e.g. invalid offset, not implemented) 
 	// 	- goret string (nullable) 
 	//
@@ -10884,25 +10986,25 @@ type Text interface {
 	// If @granularity is ATK_TEXT_GRANULARITY_PARAGRAPH the returned string
 	// is from the start of the paragraph at or before the offset to the start
 	// of the following paragraph after the offset.
-	GetStringAtOffset(int, TextGranularity) (int, int, string)
+	GetStringAtOffset(int32, TextGranularity) (int32, int32, string)
 	// GetText wraps atk_text_get_text
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- startOffset int: a starting character offset within @text 
-	// 	- endOffset int: an ending character offset within @text, or -1 for the end of the string. 
+	// 	- startOffset int32: a starting character offset within @text 
+	// 	- endOffset int32: an ending character offset within @text, or -1 for the end of the string. 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret string 
 	//
 	// Gets the specified text.
-	GetText(int, int) string
+	GetText(int32, int32) string
 	// RemoveTextSelection wraps atk_text_remove_selection
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- selectionNum int: The selection number.  The selected regions are
+	// 	- selectionNum int32: The selection number.  The selected regions are
 	// assigned numbers that correspond to how far the region is from the
 	// start of the text.  The selected region closest to the beginning
 	// of the text region is assigned the number 0, etc.  Note that adding,
@@ -10913,13 +11015,13 @@ type Text interface {
 	// 	- goret bool 
 	//
 	// Removes the specified selection.
-	RemoveTextSelection(int) bool
+	RemoveTextSelection(int32) bool
 	// ScrollSubstringTo wraps atk_text_scroll_substring_to
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- startOffset int: start offset in the @text 
-	// 	- endOffset int: end offset in the @text, or -1 for the end of the text. 
+	// 	- startOffset int32: start offset in the @text 
+	// 	- endOffset int32: end offset in the @text, or -1 for the end of the text. 
 	// 	- typ ScrollType: specify where the object should be made visible. 
 	// 
 	// The function returns the following values:
@@ -10927,17 +11029,17 @@ type Text interface {
 	// 	- goret bool 
 	//
 	// Makes a substring of @text visible on the screen by scrolling all necessary parents.
-	ScrollSubstringTo(int, int, ScrollType) bool
+	ScrollSubstringTo(int32, int32, ScrollType) bool
 	// ScrollSubstringToPoint wraps atk_text_scroll_substring_to_point
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- startOffset int: start offset in the @text 
-	// 	- endOffset int: end offset in the @text, or -1 for the end of the text. 
+	// 	- startOffset int32: start offset in the @text 
+	// 	- endOffset int32: end offset in the @text, or -1 for the end of the text. 
 	// 	- coords CoordType: specify whether coordinates are relative to the screen or to the
 	// parent object. 
-	// 	- x int: x-position where to scroll to 
-	// 	- y int: y-position where to scroll to 
+	// 	- x int32: x-position where to scroll to 
+	// 	- y int32: y-position where to scroll to 
 	// 
 	// The function returns the following values:
 	// 
@@ -10945,12 +11047,12 @@ type Text interface {
 	//
 	// Move the top-left of a substring of @text to a given position of the screen
 	// by scrolling all necessary parents.
-	ScrollSubstringToPoint(int, int, CoordType, int, int) bool
+	ScrollSubstringToPoint(int32, int32, CoordType, int32, int32) bool
 	// SetCaretOffset wraps atk_text_set_caret_offset
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- offset int: the character offset of the new caret position 
+	// 	- offset int32: the character offset of the new caret position 
 	// 
 	// The function returns the following values:
 	// 
@@ -10973,18 +11075,18 @@ type Text interface {
 	// method should not trigger one either. If the application does not have a caret
 	// motion or focus navigation operation, this method should try to scroll the new
 	// caret position into view while minimizing unnecessary scroll motion.
-	SetCaretOffset(int) bool
+	SetCaretOffset(int32) bool
 	// SetSelection wraps atk_text_set_selection
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- selectionNum int: The selection number.  The selected regions are
+	// 	- selectionNum int32: The selection number.  The selected regions are
 	// assigned numbers that correspond to how far the region is from the
 	// start of the text.  The selected region closest to the beginning
 	// of the text region is assigned the number 0, etc.  Note that adding,
 	// moving or deleting a selected region can change the numbering. 
-	// 	- startOffset int: the new starting character offset of the selection 
-	// 	- endOffset int: the new end position of (e.g. offset immediately past)
+	// 	- startOffset int32: the new starting character offset of the selection 
+	// 	- endOffset int32: the new end position of (e.g. offset immediately past)
 	// the selection 
 	// 
 	// The function returns the following values:
@@ -10992,7 +11094,7 @@ type Text interface {
 	// 	- goret bool 
 	//
 	// Changes the start and end offset of the specified selection.
-	SetSelection(int, int, int) bool
+	SetSelection(int32, int32, int32) bool
 	// ConnectTextAttributesChanged connects the provided callback to the "text-attributes-changed" signal
 	//
 	// The "text-attributes-changed" signal is emitted when the text
@@ -11004,7 +11106,7 @@ type Text interface {
 	// The "text-caret-moved" signal is emitted when the caret
 	// position of the text of an object which implements AtkText
 	// changes.
-	ConnectTextCaretMoved(func(Text, int)) gobject.SignalHandle
+	ConnectTextCaretMoved(func(Text, int32)) gobject.SignalHandle
 	// ConnectTextChanged connects the provided callback to the "text-changed" signal
 	//
 	// The "text-changed" signal is emitted when the text of the
@@ -11012,21 +11114,21 @@ type Text interface {
 	// signal will have a detail which is either "insert" or
 	// "delete" which identifies whether the text change was an
 	// insertion or a deletion.
-	ConnectTextChanged(func(Text, int, int)) gobject.SignalHandle
+	ConnectTextChanged(func(Text, int32, int32)) gobject.SignalHandle
 	// ConnectTextInsert connects the provided callback to the "text-insert" signal
 	//
 	// The "text-insert" signal is emitted when a new text is
 	// inserted. If the signal was not triggered by the user
 	// (e.g. typing or pasting text), the "system" detail should be
 	// included.
-	ConnectTextInsert(func(Text, int, int, string)) gobject.SignalHandle
+	ConnectTextInsert(func(Text, int32, int32, string)) gobject.SignalHandle
 	// ConnectTextRemove connects the provided callback to the "text-remove" signal
 	//
 	// The "text-remove" signal is emitted when a new text is
 	// removed. If the signal was not triggered by the user
 	// (e.g. typing or pasting text), the "system" detail should be
 	// included.
-	ConnectTextRemove(func(Text, int, int, string)) gobject.SignalHandle
+	ConnectTextRemove(func(Text, int32, int32, string)) gobject.SignalHandle
 	// ConnectTextSelectionChanged connects the provided callback to the "text-selection-changed" signal
 	//
 	// The "text-selection-changed" signal is emitted when the
@@ -11060,6 +11162,11 @@ func UnsafeTextFromGlibFull(c unsafe.Pointer) Text {
 	return gobject.UnsafeObjectFromGlibFull(c).(Text)
 }
 
+// UnsafeTextFromGlibBorrow is used to convert raw AtkText pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeTextFromGlibBorrow(c unsafe.Pointer) Text {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Text)
+}
+
 // UnsafeTextToGlibNone is used to convert the instance to it's C value AtkText. This is used by the bindings internally.
 func UnsafeTextToGlibNone(c Text) unsafe.Pointer {
 	i := c.upcastToAtkText()
@@ -11076,15 +11183,15 @@ func UnsafeTextToGlibFull(c Text) unsafe.Pointer {
 // 
 // The function takes the following parameters:
 // 
-// 	- startOffset int: the starting character offset of the selected region 
-// 	- endOffset int: the offset of the first character after the selected region. 
+// 	- startOffset int32: the starting character offset of the selected region 
+// 	- endOffset int32: the offset of the first character after the selected region. 
 // 
 // The function returns the following values:
 // 
 // 	- goret bool 
 //
 // Adds a selection bounded by the specified offsets.
-func (text *TextInstance) AddTextSelection(startOffset int, endOffset int) bool {
+func (text *TextInstance) AddTextSelection(startOffset int32, endOffset int32) bool {
 	var carg0 *C.AtkText // in, none, converted
 	var carg1 C.gint     // in, none, casted
 	var carg2 C.gint     // in, none, casted
@@ -11156,10 +11263,10 @@ func (text *TextInstance) GetBoundedRanges(rect *TextRectangle, coordType CoordT
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Gets the offset of the position of the caret (cursor).
-func (text *TextInstance) GetCaretOffset() int {
+func (text *TextInstance) GetCaretOffset() int32 {
 	var carg0 *C.AtkText // in, none, converted
 	var cret  C.gint     // return, none, casted
 
@@ -11168,9 +11275,9 @@ func (text *TextInstance) GetCaretOffset() int {
 	cret = C.atk_text_get_caret_offset(carg0)
 	runtime.KeepAlive(text)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -11179,14 +11286,14 @@ func (text *TextInstance) GetCaretOffset() int {
 // 
 // The function takes the following parameters:
 // 
-// 	- offset int: a character offset within @text 
+// 	- offset int32: a character offset within @text 
 // 
 // The function returns the following values:
 // 
 // 	- goret uint32 
 //
 // Gets the specified text.
-func (text *TextInstance) GetCharacterAtOffset(offset int) uint32 {
+func (text *TextInstance) GetCharacterAtOffset(offset int32) uint32 {
 	var carg0 *C.AtkText // in, none, converted
 	var carg1 C.gint     // in, none, casted
 	var cret  C.gunichar // return, none, casted
@@ -11209,10 +11316,10 @@ func (text *TextInstance) GetCharacterAtOffset(offset int) uint32 {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Gets the character count.
-func (text *TextInstance) GetCharacterCount() int {
+func (text *TextInstance) GetCharacterCount() int32 {
 	var carg0 *C.AtkText // in, none, converted
 	var cret  C.gint     // return, none, casted
 
@@ -11221,9 +11328,9 @@ func (text *TextInstance) GetCharacterCount() int {
 	cret = C.atk_text_get_character_count(carg0)
 	runtime.KeepAlive(text)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -11232,22 +11339,22 @@ func (text *TextInstance) GetCharacterCount() int {
 // 
 // The function takes the following parameters:
 // 
-// 	- offset int: The offset of the text character for which bounding information is required. 
+// 	- offset int32: The offset of the text character for which bounding information is required. 
 // 	- coords CoordType: specify whether coordinates are relative to the screen or widget window 
 // 
 // The function returns the following values:
 // 
-// 	- x int: Pointer for the x coordinate of the bounding box 
-// 	- y int: Pointer for the y coordinate of the bounding box 
-// 	- width int: Pointer for the width of the bounding box 
-// 	- height int: Pointer for the height of the bounding box 
+// 	- x int32: Pointer for the x coordinate of the bounding box 
+// 	- y int32: Pointer for the y coordinate of the bounding box 
+// 	- width int32: Pointer for the width of the bounding box 
+// 	- height int32: Pointer for the height of the bounding box 
 //
 // If the extent can not be obtained (e.g. missing support), all of x, y, width,
 // height are set to -1.
 // 
 // Get the bounding box containing the glyph representing the character at
 //     a particular text offset.
-func (text *TextInstance) GetCharacterExtents(offset int, coords CoordType) (int, int, int, int) {
+func (text *TextInstance) GetCharacterExtents(offset int32, coords CoordType) (int32, int32, int32, int32) {
 	var carg0 *C.AtkText     // in, none, converted
 	var carg1 C.gint         // in, none, casted
 	var carg6 C.AtkCoordType // in, none, casted
@@ -11265,15 +11372,15 @@ func (text *TextInstance) GetCharacterExtents(offset int, coords CoordType) (int
 	runtime.KeepAlive(offset)
 	runtime.KeepAlive(coords)
 
-	var x      int
-	var y      int
-	var width  int
-	var height int
+	var x      int32
+	var y      int32
+	var width  int32
+	var height int32
 
-	x = int(carg2)
-	y = int(carg3)
-	width = int(carg4)
-	height = int(carg5)
+	x = int32(carg2)
+	y = int32(carg3)
+	width = int32(carg4)
+	height = int32(carg5)
 
 	return x, y, width, height
 }
@@ -11282,10 +11389,10 @@ func (text *TextInstance) GetCharacterExtents(offset int, coords CoordType) (int
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Gets the number of selected regions.
-func (text *TextInstance) GetNSelections() int {
+func (text *TextInstance) GetNSelections() int32 {
 	var carg0 *C.AtkText // in, none, converted
 	var cret  C.gint     // return, none, casted
 
@@ -11294,9 +11401,9 @@ func (text *TextInstance) GetNSelections() int {
 	cret = C.atk_text_get_n_selections(carg0)
 	runtime.KeepAlive(text)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -11305,19 +11412,19 @@ func (text *TextInstance) GetNSelections() int {
 // 
 // The function takes the following parameters:
 // 
-// 	- x int: screen x-position of character 
-// 	- y int: screen y-position of character 
+// 	- x int32: screen x-position of character 
+// 	- y int32: screen y-position of character 
 // 	- coords CoordType: specify whether coordinates are relative to the screen or
 // widget window 
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Gets the offset of the character located at coordinates @x and @y. @x and @y
 // are interpreted as being relative to the screen or this widget's window
 // depending on @coords.
-func (text *TextInstance) GetOffsetAtPoint(x int, y int, coords CoordType) int {
+func (text *TextInstance) GetOffsetAtPoint(x int32, y int32, coords CoordType) int32 {
 	var carg0 *C.AtkText     // in, none, converted
 	var carg1 C.gint         // in, none, casted
 	var carg2 C.gint         // in, none, casted
@@ -11335,9 +11442,9 @@ func (text *TextInstance) GetOffsetAtPoint(x int, y int, coords CoordType) int {
 	runtime.KeepAlive(y)
 	runtime.KeepAlive(coords)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -11346,9 +11453,9 @@ func (text *TextInstance) GetOffsetAtPoint(x int, y int, coords CoordType) int {
 // 
 // The function takes the following parameters:
 // 
-// 	- startOffset int: The offset of the first text character for which boundary
+// 	- startOffset int32: The offset of the first text character for which boundary
 //        information is required. 
-// 	- endOffset int: The offset of the text character after the last character
+// 	- endOffset int32: The offset of the text character after the last character
 //        for which boundary information is required. 
 // 	- coordType CoordType: Specify whether coordinates are relative to the screen or widget window. 
 // 
@@ -11360,7 +11467,7 @@ func (text *TextInstance) GetOffsetAtPoint(x int, y int, coords CoordType) int {
 // 
 // If the extents can not be obtained (e.g. or missing support), the rectangle
 // fields are set to -1.
-func (text *TextInstance) GetRangeExtents(startOffset int, endOffset int, coordType CoordType) TextRectangle {
+func (text *TextInstance) GetRangeExtents(startOffset int32, endOffset int32, coordType CoordType) TextRectangle {
 	var carg0 *C.AtkText         // in, none, converted
 	var carg1 C.gint             // in, none, casted
 	var carg2 C.gint             // in, none, casted
@@ -11391,7 +11498,7 @@ func (text *TextInstance) GetRangeExtents(startOffset int, endOffset int, coordT
 // 
 // The function takes the following parameters:
 // 
-// 	- selectionNum int: The selection number.  The selected regions are
+// 	- selectionNum int32: The selection number.  The selected regions are
 // assigned numbers that correspond to how far the region is from the
 // start of the text.  The selected region closest to the beginning
 // of the text region is assigned the number 0, etc.  Note that adding,
@@ -11399,13 +11506,13 @@ func (text *TextInstance) GetRangeExtents(startOffset int, endOffset int, coordT
 // 
 // The function returns the following values:
 // 
-// 	- startOffset int: passes back the starting character offset of the selected region 
-// 	- endOffset int: passes back the ending character offset (offset immediately past)
+// 	- startOffset int32: passes back the starting character offset of the selected region 
+// 	- endOffset int32: passes back the ending character offset (offset immediately past)
 // of the selected region 
 // 	- goret string 
 //
 // Gets the text from the specified selection.
-func (text *TextInstance) GetSelection(selectionNum int) (int, int, string) {
+func (text *TextInstance) GetSelection(selectionNum int32) (int32, int32, string) {
 	var carg0 *C.AtkText // in, none, converted
 	var carg1 C.gint     // in, none, casted
 	var carg2 C.gint     // out, full, casted
@@ -11419,12 +11526,12 @@ func (text *TextInstance) GetSelection(selectionNum int) (int, int, string) {
 	runtime.KeepAlive(text)
 	runtime.KeepAlive(selectionNum)
 
-	var startOffset int
-	var endOffset   int
+	var startOffset int32
+	var endOffset   int32
 	var goret       string
 
-	startOffset = int(carg2)
-	endOffset = int(carg3)
+	startOffset = int32(carg2)
+	endOffset = int32(carg3)
 	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 	defer C.free(unsafe.Pointer(cret))
 
@@ -11435,14 +11542,14 @@ func (text *TextInstance) GetSelection(selectionNum int) (int, int, string) {
 // 
 // The function takes the following parameters:
 // 
-// 	- offset int: position 
+// 	- offset int32: position 
 // 	- granularity TextGranularity: An #AtkTextGranularity 
 // 
 // The function returns the following values:
 // 
-// 	- startOffset int: the starting character offset of the returned string, or -1
+// 	- startOffset int32: the starting character offset of the returned string, or -1
 //                in the case of error (e.g. invalid offset, not implemented) 
-// 	- endOffset int: the offset of the first character after the returned string,
+// 	- endOffset int32: the offset of the first character after the returned string,
 //              or -1 in the case of error (e.g. invalid offset, not implemented) 
 // 	- goret string (nullable) 
 //
@@ -11476,7 +11583,7 @@ func (text *TextInstance) GetSelection(selectionNum int) (int, int, string) {
 // If @granularity is ATK_TEXT_GRANULARITY_PARAGRAPH the returned string
 // is from the start of the paragraph at or before the offset to the start
 // of the following paragraph after the offset.
-func (text *TextInstance) GetStringAtOffset(offset int, granularity TextGranularity) (int, int, string) {
+func (text *TextInstance) GetStringAtOffset(offset int32, granularity TextGranularity) (int32, int32, string) {
 	var carg0 *C.AtkText           // in, none, converted
 	var carg1 C.gint               // in, none, casted
 	var carg2 C.AtkTextGranularity // in, none, casted
@@ -11493,12 +11600,12 @@ func (text *TextInstance) GetStringAtOffset(offset int, granularity TextGranular
 	runtime.KeepAlive(offset)
 	runtime.KeepAlive(granularity)
 
-	var startOffset int
-	var endOffset   int
+	var startOffset int32
+	var endOffset   int32
 	var goret       string
 
-	startOffset = int(carg3)
-	endOffset = int(carg4)
+	startOffset = int32(carg3)
+	endOffset = int32(carg4)
 	if cret != nil {
 		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
 		defer C.free(unsafe.Pointer(cret))
@@ -11511,15 +11618,15 @@ func (text *TextInstance) GetStringAtOffset(offset int, granularity TextGranular
 // 
 // The function takes the following parameters:
 // 
-// 	- startOffset int: a starting character offset within @text 
-// 	- endOffset int: an ending character offset within @text, or -1 for the end of the string. 
+// 	- startOffset int32: a starting character offset within @text 
+// 	- endOffset int32: an ending character offset within @text, or -1 for the end of the string. 
 // 
 // The function returns the following values:
 // 
 // 	- goret string 
 //
 // Gets the specified text.
-func (text *TextInstance) GetText(startOffset int, endOffset int) string {
+func (text *TextInstance) GetText(startOffset int32, endOffset int32) string {
 	var carg0 *C.AtkText // in, none, converted
 	var carg1 C.gint     // in, none, casted
 	var carg2 C.gint     // in, none, casted
@@ -11546,7 +11653,7 @@ func (text *TextInstance) GetText(startOffset int, endOffset int) string {
 // 
 // The function takes the following parameters:
 // 
-// 	- selectionNum int: The selection number.  The selected regions are
+// 	- selectionNum int32: The selection number.  The selected regions are
 // assigned numbers that correspond to how far the region is from the
 // start of the text.  The selected region closest to the beginning
 // of the text region is assigned the number 0, etc.  Note that adding,
@@ -11557,7 +11664,7 @@ func (text *TextInstance) GetText(startOffset int, endOffset int) string {
 // 	- goret bool 
 //
 // Removes the specified selection.
-func (text *TextInstance) RemoveTextSelection(selectionNum int) bool {
+func (text *TextInstance) RemoveTextSelection(selectionNum int32) bool {
 	var carg0 *C.AtkText // in, none, converted
 	var carg1 C.gint     // in, none, casted
 	var cret  C.gboolean // return
@@ -11582,8 +11689,8 @@ func (text *TextInstance) RemoveTextSelection(selectionNum int) bool {
 // 
 // The function takes the following parameters:
 // 
-// 	- startOffset int: start offset in the @text 
-// 	- endOffset int: end offset in the @text, or -1 for the end of the text. 
+// 	- startOffset int32: start offset in the @text 
+// 	- endOffset int32: end offset in the @text, or -1 for the end of the text. 
 // 	- typ ScrollType: specify where the object should be made visible. 
 // 
 // The function returns the following values:
@@ -11591,7 +11698,7 @@ func (text *TextInstance) RemoveTextSelection(selectionNum int) bool {
 // 	- goret bool 
 //
 // Makes a substring of @text visible on the screen by scrolling all necessary parents.
-func (text *TextInstance) ScrollSubstringTo(startOffset int, endOffset int, typ ScrollType) bool {
+func (text *TextInstance) ScrollSubstringTo(startOffset int32, endOffset int32, typ ScrollType) bool {
 	var carg0 *C.AtkText      // in, none, converted
 	var carg1 C.gint          // in, none, casted
 	var carg2 C.gint          // in, none, casted
@@ -11622,12 +11729,12 @@ func (text *TextInstance) ScrollSubstringTo(startOffset int, endOffset int, typ 
 // 
 // The function takes the following parameters:
 // 
-// 	- startOffset int: start offset in the @text 
-// 	- endOffset int: end offset in the @text, or -1 for the end of the text. 
+// 	- startOffset int32: start offset in the @text 
+// 	- endOffset int32: end offset in the @text, or -1 for the end of the text. 
 // 	- coords CoordType: specify whether coordinates are relative to the screen or to the
 // parent object. 
-// 	- x int: x-position where to scroll to 
-// 	- y int: y-position where to scroll to 
+// 	- x int32: x-position where to scroll to 
+// 	- y int32: y-position where to scroll to 
 // 
 // The function returns the following values:
 // 
@@ -11635,7 +11742,7 @@ func (text *TextInstance) ScrollSubstringTo(startOffset int, endOffset int, typ 
 //
 // Move the top-left of a substring of @text to a given position of the screen
 // by scrolling all necessary parents.
-func (text *TextInstance) ScrollSubstringToPoint(startOffset int, endOffset int, coords CoordType, x int, y int) bool {
+func (text *TextInstance) ScrollSubstringToPoint(startOffset int32, endOffset int32, coords CoordType, x int32, y int32) bool {
 	var carg0 *C.AtkText     // in, none, converted
 	var carg1 C.gint         // in, none, casted
 	var carg2 C.gint         // in, none, casted
@@ -11672,7 +11779,7 @@ func (text *TextInstance) ScrollSubstringToPoint(startOffset int, endOffset int,
 // 
 // The function takes the following parameters:
 // 
-// 	- offset int: the character offset of the new caret position 
+// 	- offset int32: the character offset of the new caret position 
 // 
 // The function returns the following values:
 // 
@@ -11695,7 +11802,7 @@ func (text *TextInstance) ScrollSubstringToPoint(startOffset int, endOffset int,
 // method should not trigger one either. If the application does not have a caret
 // motion or focus navigation operation, this method should try to scroll the new
 // caret position into view while minimizing unnecessary scroll motion.
-func (text *TextInstance) SetCaretOffset(offset int) bool {
+func (text *TextInstance) SetCaretOffset(offset int32) bool {
 	var carg0 *C.AtkText // in, none, converted
 	var carg1 C.gint     // in, none, casted
 	var cret  C.gboolean // return
@@ -11720,13 +11827,13 @@ func (text *TextInstance) SetCaretOffset(offset int) bool {
 // 
 // The function takes the following parameters:
 // 
-// 	- selectionNum int: The selection number.  The selected regions are
+// 	- selectionNum int32: The selection number.  The selected regions are
 // assigned numbers that correspond to how far the region is from the
 // start of the text.  The selected region closest to the beginning
 // of the text region is assigned the number 0, etc.  Note that adding,
 // moving or deleting a selected region can change the numbering. 
-// 	- startOffset int: the new starting character offset of the selection 
-// 	- endOffset int: the new end position of (e.g. offset immediately past)
+// 	- startOffset int32: the new starting character offset of the selection 
+// 	- endOffset int32: the new end position of (e.g. offset immediately past)
 // the selection 
 // 
 // The function returns the following values:
@@ -11734,7 +11841,7 @@ func (text *TextInstance) SetCaretOffset(offset int) bool {
 // 	- goret bool 
 //
 // Changes the start and end offset of the specified selection.
-func (text *TextInstance) SetSelection(selectionNum int, startOffset int, endOffset int) bool {
+func (text *TextInstance) SetSelection(selectionNum int32, startOffset int32, endOffset int32) bool {
 	var carg0 *C.AtkText // in, none, converted
 	var carg1 C.gint     // in, none, casted
 	var carg2 C.gint     // in, none, casted
@@ -11775,7 +11882,7 @@ func (o *TextInstance) ConnectTextAttributesChanged(fn func(Text)) gobject.Signa
 // The "text-caret-moved" signal is emitted when the caret
 // position of the text of an object which implements AtkText
 // changes.
-func (o *TextInstance) ConnectTextCaretMoved(fn func(Text, int)) gobject.SignalHandle {
+func (o *TextInstance) ConnectTextCaretMoved(fn func(Text, int32)) gobject.SignalHandle {
 	return o.Instance.Connect("text-caret-moved", fn)
 }
 
@@ -11786,7 +11893,7 @@ func (o *TextInstance) ConnectTextCaretMoved(fn func(Text, int)) gobject.SignalH
 // signal will have a detail which is either "insert" or
 // "delete" which identifies whether the text change was an
 // insertion or a deletion.
-func (o *TextInstance) ConnectTextChanged(fn func(Text, int, int)) gobject.SignalHandle {
+func (o *TextInstance) ConnectTextChanged(fn func(Text, int32, int32)) gobject.SignalHandle {
 	return o.Instance.Connect("text-changed", fn)
 }
 
@@ -11796,7 +11903,7 @@ func (o *TextInstance) ConnectTextChanged(fn func(Text, int, int)) gobject.Signa
 // inserted. If the signal was not triggered by the user
 // (e.g. typing or pasting text), the "system" detail should be
 // included.
-func (o *TextInstance) ConnectTextInsert(fn func(Text, int, int, string)) gobject.SignalHandle {
+func (o *TextInstance) ConnectTextInsert(fn func(Text, int32, int32, string)) gobject.SignalHandle {
 	return o.Instance.Connect("text-insert", fn)
 }
 
@@ -11806,7 +11913,7 @@ func (o *TextInstance) ConnectTextInsert(fn func(Text, int, int, string)) gobjec
 // removed. If the signal was not triggered by the user
 // (e.g. typing or pasting text), the "system" detail should be
 // included.
-func (o *TextInstance) ConnectTextRemove(fn func(Text, int, int, string)) gobject.SignalHandle {
+func (o *TextInstance) ConnectTextRemove(fn func(Text, int32, int32, string)) gobject.SignalHandle {
 	return o.Instance.Connect("text-remove", fn)
 }
 
@@ -11824,13 +11931,13 @@ type TextOverrides[Instance Text] struct {
 	// AddSelection allows you to override the implementation of the virtual method add_selection.
 	// The function takes the following parameters:
 	// 
-	// 	- startOffset int: the starting character offset of the selected region 
-	// 	- endOffset int: the offset of the first character after the selected region. 
+	// 	- startOffset int32: the starting character offset of the selected region 
+	// 	- endOffset int32: the offset of the first character after the selected region. 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
-	AddSelection func(Instance, int, int) bool
+	AddSelection func(Instance, int32, int32) bool
 	// GetBoundedRanges allows you to override the implementation of the virtual method get_bounded_ranges.
 	// The function takes the following parameters:
 	// 
@@ -11846,69 +11953,69 @@ type TextOverrides[Instance Text] struct {
 	// GetCaretOffset allows you to override the implementation of the virtual method get_caret_offset.
 	// The function returns the following values:
 	// 
-	// 	- goret int 
-	GetCaretOffset func(Instance) int
+	// 	- goret int32 
+	GetCaretOffset func(Instance) int32
 	// GetCharacterAtOffset allows you to override the implementation of the virtual method get_character_at_offset.
 	// The function takes the following parameters:
 	// 
-	// 	- offset int: a character offset within @text 
+	// 	- offset int32: a character offset within @text 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret uint32 
-	GetCharacterAtOffset func(Instance, int) uint32
+	GetCharacterAtOffset func(Instance, int32) uint32
 	// GetCharacterCount allows you to override the implementation of the virtual method get_character_count.
 	// The function returns the following values:
 	// 
-	// 	- goret int 
-	GetCharacterCount func(Instance) int
+	// 	- goret int32 
+	GetCharacterCount func(Instance) int32
 	// GetCharacterExtents allows you to override the implementation of the virtual method get_character_extents.
 	// The function takes the following parameters:
 	// 
-	// 	- offset int: The offset of the text character for which bounding information is required. 
+	// 	- offset int32: The offset of the text character for which bounding information is required. 
 	// 	- coords CoordType: specify whether coordinates are relative to the screen or widget window 
 	// 
 	// The function returns the following values:
 	// 
-	// 	- x int: Pointer for the x coordinate of the bounding box 
-	// 	- y int: Pointer for the y coordinate of the bounding box 
-	// 	- width int: Pointer for the width of the bounding box 
-	// 	- height int: Pointer for the height of the bounding box 
-	GetCharacterExtents func(Instance, int, CoordType) (int, int, int, int)
+	// 	- x int32: Pointer for the x coordinate of the bounding box 
+	// 	- y int32: Pointer for the y coordinate of the bounding box 
+	// 	- width int32: Pointer for the width of the bounding box 
+	// 	- height int32: Pointer for the height of the bounding box 
+	GetCharacterExtents func(Instance, int32, CoordType) (int32, int32, int32, int32)
 	// GetNSelections allows you to override the implementation of the virtual method get_n_selections.
 	// The function returns the following values:
 	// 
-	// 	- goret int 
-	GetNSelections func(Instance) int
+	// 	- goret int32 
+	GetNSelections func(Instance) int32
 	// GetOffsetAtPoint allows you to override the implementation of the virtual method get_offset_at_point.
 	// The function takes the following parameters:
 	// 
-	// 	- x int: screen x-position of character 
-	// 	- y int: screen y-position of character 
+	// 	- x int32: screen x-position of character 
+	// 	- y int32: screen y-position of character 
 	// 	- coords CoordType: specify whether coordinates are relative to the screen or
 	// widget window 
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
-	GetOffsetAtPoint func(Instance, int, int, CoordType) int
+	// 	- goret int32 
+	GetOffsetAtPoint func(Instance, int32, int32, CoordType) int32
 	// GetRangeExtents allows you to override the implementation of the virtual method get_range_extents.
 	// The function takes the following parameters:
 	// 
-	// 	- startOffset int: The offset of the first text character for which boundary
+	// 	- startOffset int32: The offset of the first text character for which boundary
 	//        information is required. 
-	// 	- endOffset int: The offset of the text character after the last character
+	// 	- endOffset int32: The offset of the text character after the last character
 	//        for which boundary information is required. 
 	// 	- coordType CoordType: Specify whether coordinates are relative to the screen or widget window. 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- rect TextRectangle: A pointer to a AtkTextRectangle which is filled in by this function. 
-	GetRangeExtents func(Instance, int, int, CoordType) TextRectangle
+	GetRangeExtents func(Instance, int32, int32, CoordType) TextRectangle
 	// GetSelection allows you to override the implementation of the virtual method get_selection.
 	// The function takes the following parameters:
 	// 
-	// 	- selectionNum int: The selection number.  The selected regions are
+	// 	- selectionNum int32: The selection number.  The selected regions are
 	// assigned numbers that correspond to how far the region is from the
 	// start of the text.  The selected region closest to the beginning
 	// of the text region is assigned the number 0, etc.  Note that adding,
@@ -11916,39 +12023,39 @@ type TextOverrides[Instance Text] struct {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- startOffset int: passes back the starting character offset of the selected region 
-	// 	- endOffset int: passes back the ending character offset (offset immediately past)
+	// 	- startOffset int32: passes back the starting character offset of the selected region 
+	// 	- endOffset int32: passes back the ending character offset (offset immediately past)
 	// of the selected region 
 	// 	- goret string 
-	GetSelection func(Instance, int) (int, int, string)
+	GetSelection func(Instance, int32) (int32, int32, string)
 	// GetStringAtOffset allows you to override the implementation of the virtual method get_string_at_offset.
 	// The function takes the following parameters:
 	// 
-	// 	- offset int: position 
+	// 	- offset int32: position 
 	// 	- granularity TextGranularity: An #AtkTextGranularity 
 	// 
 	// The function returns the following values:
 	// 
-	// 	- startOffset int: the starting character offset of the returned string, or -1
+	// 	- startOffset int32: the starting character offset of the returned string, or -1
 	//                in the case of error (e.g. invalid offset, not implemented) 
-	// 	- endOffset int: the offset of the first character after the returned string,
+	// 	- endOffset int32: the offset of the first character after the returned string,
 	//              or -1 in the case of error (e.g. invalid offset, not implemented) 
 	// 	- goret string (nullable) 
-	GetStringAtOffset func(Instance, int, TextGranularity) (int, int, string)
+	GetStringAtOffset func(Instance, int32, TextGranularity) (int32, int32, string)
 	// GetText allows you to override the implementation of the virtual method get_text.
 	// The function takes the following parameters:
 	// 
-	// 	- startOffset int: a starting character offset within @text 
-	// 	- endOffset int: an ending character offset within @text, or -1 for the end of the string. 
+	// 	- startOffset int32: a starting character offset within @text 
+	// 	- endOffset int32: an ending character offset within @text, or -1 for the end of the string. 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret string 
-	GetText func(Instance, int, int) string
+	GetText func(Instance, int32, int32) string
 	// RemoveSelection allows you to override the implementation of the virtual method remove_selection.
 	// The function takes the following parameters:
 	// 
-	// 	- selectionNum int: The selection number.  The selected regions are
+	// 	- selectionNum int32: The selection number.  The selected regions are
 	// assigned numbers that correspond to how far the region is from the
 	// start of the text.  The selected region closest to the beginning
 	// of the text region is assigned the number 0, etc.  Note that adding,
@@ -11957,70 +12064,70 @@ type TextOverrides[Instance Text] struct {
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
-	RemoveSelection func(Instance, int) bool
+	RemoveSelection func(Instance, int32) bool
 	// ScrollSubstringTo allows you to override the implementation of the virtual method scroll_substring_to.
 	// The function takes the following parameters:
 	// 
-	// 	- startOffset int: start offset in the @text 
-	// 	- endOffset int: end offset in the @text, or -1 for the end of the text. 
+	// 	- startOffset int32: start offset in the @text 
+	// 	- endOffset int32: end offset in the @text, or -1 for the end of the text. 
 	// 	- typ ScrollType: specify where the object should be made visible. 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
-	ScrollSubstringTo func(Instance, int, int, ScrollType) bool
+	ScrollSubstringTo func(Instance, int32, int32, ScrollType) bool
 	// ScrollSubstringToPoint allows you to override the implementation of the virtual method scroll_substring_to_point.
 	// The function takes the following parameters:
 	// 
-	// 	- startOffset int: start offset in the @text 
-	// 	- endOffset int: end offset in the @text, or -1 for the end of the text. 
+	// 	- startOffset int32: start offset in the @text 
+	// 	- endOffset int32: end offset in the @text, or -1 for the end of the text. 
 	// 	- coords CoordType: specify whether coordinates are relative to the screen or to the
 	// parent object. 
-	// 	- x int: x-position where to scroll to 
-	// 	- y int: y-position where to scroll to 
+	// 	- x int32: x-position where to scroll to 
+	// 	- y int32: y-position where to scroll to 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
-	ScrollSubstringToPoint func(Instance, int, int, CoordType, int, int) bool
+	ScrollSubstringToPoint func(Instance, int32, int32, CoordType, int32, int32) bool
 	// SetCaretOffset allows you to override the implementation of the virtual method set_caret_offset.
 	// The function takes the following parameters:
 	// 
-	// 	- offset int: the character offset of the new caret position 
+	// 	- offset int32: the character offset of the new caret position 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
-	SetCaretOffset func(Instance, int) bool
+	SetCaretOffset func(Instance, int32) bool
 	// SetSelection allows you to override the implementation of the virtual method set_selection.
 	// The function takes the following parameters:
 	// 
-	// 	- selectionNum int: The selection number.  The selected regions are
+	// 	- selectionNum int32: The selection number.  The selected regions are
 	// assigned numbers that correspond to how far the region is from the
 	// start of the text.  The selected region closest to the beginning
 	// of the text region is assigned the number 0, etc.  Note that adding,
 	// moving or deleting a selected region can change the numbering. 
-	// 	- startOffset int: the new starting character offset of the selection 
-	// 	- endOffset int: the new end position of (e.g. offset immediately past)
+	// 	- startOffset int32: the new starting character offset of the selection 
+	// 	- endOffset int32: the new end position of (e.g. offset immediately past)
 	// the selection 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
-	SetSelection func(Instance, int, int, int) bool
+	SetSelection func(Instance, int32, int32, int32) bool
 	// TextAttributesChanged allows you to override the implementation of the virtual method text_attributes_changed.
 	TextAttributesChanged func(Instance)
 	// TextCaretMoved allows you to override the implementation of the virtual method text_caret_moved.
 	// The function takes the following parameters:
 	// 
-	// 	- location int 
-	TextCaretMoved func(Instance, int)
+	// 	- location int32 
+	TextCaretMoved func(Instance, int32)
 	// TextChanged allows you to override the implementation of the virtual method text_changed.
 	// The function takes the following parameters:
 	// 
-	// 	- position int 
-	// 	- length int 
-	TextChanged func(Instance, int, int)
+	// 	- position int32 
+	// 	- length int32 
+	TextChanged func(Instance, int32, int32)
 	// TextSelectionChanged allows you to override the implementation of the virtual method text_selection_changed.
 	TextSelectionChanged func(Instance)
 }
@@ -12037,13 +12144,13 @@ func UnsafeApplyTextOverrides[Instance Text](gclass unsafe.Pointer, overrides Te
 			"_gotk4_atk1_Text_add_selection",
 			func(carg0 *C.AtkText, carg1 C.gint, carg2 C.gint) (cret C.gboolean) {
 				var text        Instance // go AtkText subclass
-				var startOffset int      // in, none, casted
-				var endOffset   int      // in, none, casted
+				var startOffset int32    // in, none, casted
+				var endOffset   int32    // in, none, casted
 				var goret       bool     // return
 
-				text = UnsafeTextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				startOffset = int(carg1)
-				endOffset = int(carg2)
+				text = UnsafeTextFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				startOffset = int32(carg1)
+				endOffset = int32(carg2)
 
 				goret = overrides.AddSelection(text, startOffset, endOffset)
 
@@ -12069,7 +12176,7 @@ func UnsafeApplyTextOverrides[Instance Text](gclass unsafe.Pointer, overrides Te
 				var yClipType TextClipType   // in, none, casted
 				var goret     []*TextRange   // return, transfer: full, C Pointers: 2, Name: array[TextRange], scope: , array (inner: *typesystem.Record, zero-terminated)
 
-				text = UnsafeTextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				text = UnsafeTextFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				rect = UnsafeTextRectangleFromGlibNone(unsafe.Pointer(carg1))
 				coordType = CoordType(carg2)
 				xClipType = TextClipType(carg3)
@@ -12093,9 +12200,9 @@ func UnsafeApplyTextOverrides[Instance Text](gclass unsafe.Pointer, overrides Te
 			"_gotk4_atk1_Text_get_caret_offset",
 			func(carg0 *C.AtkText) (cret C.gint) {
 				var text  Instance // go AtkText subclass
-				var goret int      // return, none, casted
+				var goret int32    // return, none, casted
 
-				text = UnsafeTextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				text = UnsafeTextFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetCaretOffset(text)
 
@@ -12113,11 +12220,11 @@ func UnsafeApplyTextOverrides[Instance Text](gclass unsafe.Pointer, overrides Te
 			"_gotk4_atk1_Text_get_character_at_offset",
 			func(carg0 *C.AtkText, carg1 C.gint) (cret C.gunichar) {
 				var text   Instance // go AtkText subclass
-				var offset int      // in, none, casted
+				var offset int32    // in, none, casted
 				var goret  uint32   // return, none, casted
 
-				text = UnsafeTextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				offset = int(carg1)
+				text = UnsafeTextFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				offset = int32(carg1)
 
 				goret = overrides.GetCharacterAtOffset(text, offset)
 
@@ -12135,9 +12242,9 @@ func UnsafeApplyTextOverrides[Instance Text](gclass unsafe.Pointer, overrides Te
 			"_gotk4_atk1_Text_get_character_count",
 			func(carg0 *C.AtkText) (cret C.gint) {
 				var text  Instance // go AtkText subclass
-				var goret int      // return, none, casted
+				var goret int32    // return, none, casted
 
-				text = UnsafeTextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				text = UnsafeTextFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetCharacterCount(text)
 
@@ -12155,15 +12262,15 @@ func UnsafeApplyTextOverrides[Instance Text](gclass unsafe.Pointer, overrides Te
 			"_gotk4_atk1_Text_get_character_extents",
 			func(carg0 *C.AtkText, carg1 C.gint, carg2 *C.gint, carg3 *C.gint, carg4 *C.gint, carg5 *C.gint, carg6 C.AtkCoordType) {
 				var text   Instance  // go AtkText subclass
-				var offset int       // in, none, casted
+				var offset int32     // in, none, casted
 				var coords CoordType // in, none, casted
-				var x      int       // out, full, casted
-				var y      int       // out, full, casted
-				var width  int       // out, full, casted
-				var height int       // out, full, casted
+				var x      int32     // out, full, casted
+				var y      int32     // out, full, casted
+				var width  int32     // out, full, casted
+				var height int32     // out, full, casted
 
-				text = UnsafeTextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				offset = int(carg1)
+				text = UnsafeTextFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				offset = int32(carg1)
 				coords = CoordType(carg6)
 
 				x, y, width, height = overrides.GetCharacterExtents(text, offset, coords)
@@ -12183,9 +12290,9 @@ func UnsafeApplyTextOverrides[Instance Text](gclass unsafe.Pointer, overrides Te
 			"_gotk4_atk1_Text_get_n_selections",
 			func(carg0 *C.AtkText) (cret C.gint) {
 				var text  Instance // go AtkText subclass
-				var goret int      // return, none, casted
+				var goret int32    // return, none, casted
 
-				text = UnsafeTextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				text = UnsafeTextFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetNSelections(text)
 
@@ -12203,14 +12310,14 @@ func UnsafeApplyTextOverrides[Instance Text](gclass unsafe.Pointer, overrides Te
 			"_gotk4_atk1_Text_get_offset_at_point",
 			func(carg0 *C.AtkText, carg1 C.gint, carg2 C.gint, carg3 C.AtkCoordType) (cret C.gint) {
 				var text   Instance  // go AtkText subclass
-				var x      int       // in, none, casted
-				var y      int       // in, none, casted
+				var x      int32     // in, none, casted
+				var y      int32     // in, none, casted
 				var coords CoordType // in, none, casted
-				var goret  int       // return, none, casted
+				var goret  int32     // return, none, casted
 
-				text = UnsafeTextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				x = int(carg1)
-				y = int(carg2)
+				text = UnsafeTextFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				x = int32(carg1)
+				y = int32(carg2)
 				coords = CoordType(carg3)
 
 				goret = overrides.GetOffsetAtPoint(text, x, y, coords)
@@ -12229,14 +12336,14 @@ func UnsafeApplyTextOverrides[Instance Text](gclass unsafe.Pointer, overrides Te
 			"_gotk4_atk1_Text_get_range_extents",
 			func(carg0 *C.AtkText, carg1 C.gint, carg2 C.gint, carg3 C.AtkCoordType, carg4 *C.AtkTextRectangle) {
 				var text        Instance      // go AtkText subclass
-				var startOffset int           // in, none, casted
-				var endOffset   int           // in, none, casted
+				var startOffset int32         // in, none, casted
+				var endOffset   int32         // in, none, casted
 				var coordType   CoordType     // in, none, casted
 				var rect        TextRectangle // out, transfer: none, C Pointers: 0, Name: TextRectangle, caller-allocates
 
-				text = UnsafeTextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				startOffset = int(carg1)
-				endOffset = int(carg2)
+				text = UnsafeTextFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				startOffset = int32(carg1)
+				endOffset = int32(carg2)
 				coordType = CoordType(carg3)
 
 				rect = overrides.GetRangeExtents(text, startOffset, endOffset, coordType)
@@ -12255,13 +12362,13 @@ func UnsafeApplyTextOverrides[Instance Text](gclass unsafe.Pointer, overrides Te
 			"_gotk4_atk1_Text_get_selection",
 			func(carg0 *C.AtkText, carg1 C.gint, carg2 *C.gint, carg3 *C.gint) (cret *C.gchar) {
 				var text         Instance // go AtkText subclass
-				var selectionNum int      // in, none, casted
-				var startOffset  int      // out, full, casted
-				var endOffset    int      // out, full, casted
+				var selectionNum int32    // in, none, casted
+				var startOffset  int32    // out, full, casted
+				var endOffset    int32    // out, full, casted
 				var goret        string   // return, full, string
 
-				text = UnsafeTextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				selectionNum = int(carg1)
+				text = UnsafeTextFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				selectionNum = int32(carg1)
 
 				startOffset, endOffset, goret = overrides.GetSelection(text, selectionNum)
 
@@ -12281,14 +12388,14 @@ func UnsafeApplyTextOverrides[Instance Text](gclass unsafe.Pointer, overrides Te
 			"_gotk4_atk1_Text_get_string_at_offset",
 			func(carg0 *C.AtkText, carg1 C.gint, carg2 C.AtkTextGranularity, carg3 *C.gint, carg4 *C.gint) (cret *C.gchar) {
 				var text        Instance        // go AtkText subclass
-				var offset      int             // in, none, casted
+				var offset      int32           // in, none, casted
 				var granularity TextGranularity // in, none, casted
-				var startOffset int             // out, full, casted
-				var endOffset   int             // out, full, casted
+				var startOffset int32           // out, full, casted
+				var endOffset   int32           // out, full, casted
 				var goret       string          // return, full, string, nullable-string
 
-				text = UnsafeTextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				offset = int(carg1)
+				text = UnsafeTextFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				offset = int32(carg1)
 				granularity = TextGranularity(carg2)
 
 				startOffset, endOffset, goret = overrides.GetStringAtOffset(text, offset, granularity)
@@ -12311,13 +12418,13 @@ func UnsafeApplyTextOverrides[Instance Text](gclass unsafe.Pointer, overrides Te
 			"_gotk4_atk1_Text_get_text",
 			func(carg0 *C.AtkText, carg1 C.gint, carg2 C.gint) (cret *C.gchar) {
 				var text        Instance // go AtkText subclass
-				var startOffset int      // in, none, casted
-				var endOffset   int      // in, none, casted
+				var startOffset int32    // in, none, casted
+				var endOffset   int32    // in, none, casted
 				var goret       string   // return, full, string
 
-				text = UnsafeTextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				startOffset = int(carg1)
-				endOffset = int(carg2)
+				text = UnsafeTextFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				startOffset = int32(carg1)
+				endOffset = int32(carg2)
 
 				goret = overrides.GetText(text, startOffset, endOffset)
 
@@ -12335,11 +12442,11 @@ func UnsafeApplyTextOverrides[Instance Text](gclass unsafe.Pointer, overrides Te
 			"_gotk4_atk1_Text_remove_selection",
 			func(carg0 *C.AtkText, carg1 C.gint) (cret C.gboolean) {
 				var text         Instance // go AtkText subclass
-				var selectionNum int      // in, none, casted
+				var selectionNum int32    // in, none, casted
 				var goret        bool     // return
 
-				text = UnsafeTextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				selectionNum = int(carg1)
+				text = UnsafeTextFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				selectionNum = int32(carg1)
 
 				goret = overrides.RemoveSelection(text, selectionNum)
 
@@ -12359,14 +12466,14 @@ func UnsafeApplyTextOverrides[Instance Text](gclass unsafe.Pointer, overrides Te
 			"_gotk4_atk1_Text_scroll_substring_to",
 			func(carg0 *C.AtkText, carg1 C.gint, carg2 C.gint, carg3 C.AtkScrollType) (cret C.gboolean) {
 				var text        Instance   // go AtkText subclass
-				var startOffset int        // in, none, casted
-				var endOffset   int        // in, none, casted
+				var startOffset int32      // in, none, casted
+				var endOffset   int32      // in, none, casted
 				var typ         ScrollType // in, none, casted
 				var goret       bool       // return
 
-				text = UnsafeTextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				startOffset = int(carg1)
-				endOffset = int(carg2)
+				text = UnsafeTextFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				startOffset = int32(carg1)
+				endOffset = int32(carg2)
 				typ = ScrollType(carg3)
 
 				goret = overrides.ScrollSubstringTo(text, startOffset, endOffset, typ)
@@ -12387,19 +12494,19 @@ func UnsafeApplyTextOverrides[Instance Text](gclass unsafe.Pointer, overrides Te
 			"_gotk4_atk1_Text_scroll_substring_to_point",
 			func(carg0 *C.AtkText, carg1 C.gint, carg2 C.gint, carg3 C.AtkCoordType, carg4 C.gint, carg5 C.gint) (cret C.gboolean) {
 				var text        Instance  // go AtkText subclass
-				var startOffset int       // in, none, casted
-				var endOffset   int       // in, none, casted
+				var startOffset int32     // in, none, casted
+				var endOffset   int32     // in, none, casted
 				var coords      CoordType // in, none, casted
-				var x           int       // in, none, casted
-				var y           int       // in, none, casted
+				var x           int32     // in, none, casted
+				var y           int32     // in, none, casted
 				var goret       bool      // return
 
-				text = UnsafeTextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				startOffset = int(carg1)
-				endOffset = int(carg2)
+				text = UnsafeTextFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				startOffset = int32(carg1)
+				endOffset = int32(carg2)
 				coords = CoordType(carg3)
-				x = int(carg4)
-				y = int(carg5)
+				x = int32(carg4)
+				y = int32(carg5)
 
 				goret = overrides.ScrollSubstringToPoint(text, startOffset, endOffset, coords, x, y)
 
@@ -12419,11 +12526,11 @@ func UnsafeApplyTextOverrides[Instance Text](gclass unsafe.Pointer, overrides Te
 			"_gotk4_atk1_Text_set_caret_offset",
 			func(carg0 *C.AtkText, carg1 C.gint) (cret C.gboolean) {
 				var text   Instance // go AtkText subclass
-				var offset int      // in, none, casted
+				var offset int32    // in, none, casted
 				var goret  bool     // return
 
-				text = UnsafeTextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				offset = int(carg1)
+				text = UnsafeTextFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				offset = int32(carg1)
 
 				goret = overrides.SetCaretOffset(text, offset)
 
@@ -12443,15 +12550,15 @@ func UnsafeApplyTextOverrides[Instance Text](gclass unsafe.Pointer, overrides Te
 			"_gotk4_atk1_Text_set_selection",
 			func(carg0 *C.AtkText, carg1 C.gint, carg2 C.gint, carg3 C.gint) (cret C.gboolean) {
 				var text         Instance // go AtkText subclass
-				var selectionNum int      // in, none, casted
-				var startOffset  int      // in, none, casted
-				var endOffset    int      // in, none, casted
+				var selectionNum int32    // in, none, casted
+				var startOffset  int32    // in, none, casted
+				var endOffset    int32    // in, none, casted
 				var goret        bool     // return
 
-				text = UnsafeTextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				selectionNum = int(carg1)
-				startOffset = int(carg2)
-				endOffset = int(carg3)
+				text = UnsafeTextFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				selectionNum = int32(carg1)
+				startOffset = int32(carg2)
+				endOffset = int32(carg3)
 
 				goret = overrides.SetSelection(text, selectionNum, startOffset, endOffset)
 
@@ -12472,7 +12579,7 @@ func UnsafeApplyTextOverrides[Instance Text](gclass unsafe.Pointer, overrides Te
 			func(carg0 *C.AtkText) {
 				var text Instance // go AtkText subclass
 
-				text = UnsafeTextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				text = UnsafeTextFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				overrides.TextAttributesChanged(text)
 			},
@@ -12486,10 +12593,10 @@ func UnsafeApplyTextOverrides[Instance Text](gclass unsafe.Pointer, overrides Te
 			"_gotk4_atk1_Text_text_caret_moved",
 			func(carg0 *C.AtkText, carg1 C.gint) {
 				var text     Instance // go AtkText subclass
-				var location int      // in, none, casted
+				var location int32    // in, none, casted
 
-				text = UnsafeTextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				location = int(carg1)
+				text = UnsafeTextFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				location = int32(carg1)
 
 				overrides.TextCaretMoved(text, location)
 			},
@@ -12503,12 +12610,12 @@ func UnsafeApplyTextOverrides[Instance Text](gclass unsafe.Pointer, overrides Te
 			"_gotk4_atk1_Text_text_changed",
 			func(carg0 *C.AtkText, carg1 C.gint, carg2 C.gint) {
 				var text     Instance // go AtkText subclass
-				var position int      // in, none, casted
-				var length   int      // in, none, casted
+				var position int32    // in, none, casted
+				var length   int32    // in, none, casted
 
-				text = UnsafeTextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				position = int(carg1)
-				length = int(carg2)
+				text = UnsafeTextFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				position = int32(carg1)
+				length = int32(carg2)
 
 				overrides.TextChanged(text, position, length)
 			},
@@ -12523,7 +12630,7 @@ func UnsafeApplyTextOverrides[Instance Text](gclass unsafe.Pointer, overrides Te
 			func(carg0 *C.AtkText) {
 				var text Instance // go AtkText subclass
 
-				text = UnsafeTextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				text = UnsafeTextFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				overrides.TextSelectionChanged(text)
 			},
@@ -12790,6 +12897,11 @@ func UnsafeValueFromGlibFull(c unsafe.Pointer) Value {
 	return gobject.UnsafeObjectFromGlibFull(c).(Value)
 }
 
+// UnsafeValueFromGlibBorrow is used to convert raw AtkValue pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeValueFromGlibBorrow(c unsafe.Pointer) Value {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Value)
+}
+
 // UnsafeValueToGlibNone is used to convert the instance to it's C value AtkValue. This is used by the bindings internally.
 func UnsafeValueToGlibNone(c Value) unsafe.Pointer {
 	i := c.upcastToAtkValue()
@@ -13011,7 +13123,7 @@ func UnsafeApplyValueOverrides[Instance Value](gclass unsafe.Pointer, overrides 
 				var obj   Instance // go AtkValue subclass
 				var goret float64  // return, none, casted
 
-				obj = UnsafeValueFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				obj = UnsafeValueFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetIncrement(obj)
 
@@ -13031,7 +13143,7 @@ func UnsafeApplyValueOverrides[Instance Value](gclass unsafe.Pointer, overrides 
 				var obj   Instance // go AtkValue subclass
 				var goret *Range   // return, full, converted, nullable
 
-				obj = UnsafeValueFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				obj = UnsafeValueFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetRange(obj)
 
@@ -13053,7 +13165,7 @@ func UnsafeApplyValueOverrides[Instance Value](gclass unsafe.Pointer, overrides 
 				var obj   Instance // go AtkValue subclass
 				var goret []*Range // return, transfer: full, C Pointers: 1, Name: SList, scope: 
 
-				obj = UnsafeValueFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				obj = UnsafeValueFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetSubRanges(obj)
 
@@ -13076,12 +13188,12 @@ func UnsafeApplyValueOverrides[Instance Value](gclass unsafe.Pointer, overrides 
 				var value float64  // out, full, casted
 				var text  string   // out, full, string
 
-				obj = UnsafeValueFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				obj = UnsafeValueFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				value, text = overrides.GetValueAndText(obj)
 
 				*carg1 = C.gdouble(value)
-				carg2 = (*C.gchar)(unsafe.Pointer(C.CString(text)))
+				*carg2 = (*C.gchar)(unsafe.Pointer(C.CString(text)))
 			},
 		)
 	}
@@ -13095,7 +13207,7 @@ func UnsafeApplyValueOverrides[Instance Value](gclass unsafe.Pointer, overrides 
 				var obj      Instance // go AtkValue subclass
 				var newValue float64  // in, none, casted
 
-				obj = UnsafeValueFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				obj = UnsafeValueFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				newValue = float64(carg1)
 
 				overrides.SetValue(obj, newValue)
@@ -13195,6 +13307,11 @@ func UnsafeWindowFromGlibNone(c unsafe.Pointer) Window {
 // UnsafeWindowFromGlibFull is used to convert raw AtkWindow pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeWindowFromGlibFull(c unsafe.Pointer) Window {
 	return gobject.UnsafeObjectFromGlibFull(c).(Window)
+}
+
+// UnsafeWindowFromGlibBorrow is used to convert raw AtkWindow pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeWindowFromGlibBorrow(c unsafe.Pointer) Window {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Window)
 }
 
 // UnsafeWindowToGlibNone is used to convert the instance to it's C value AtkWindow. This is used by the bindings internally.
@@ -13317,23 +13434,23 @@ type Hyperlink interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Gets the index with the hypertext document at which this link ends.
-	GetEndIndex() int
+	GetEndIndex() int32
 	// GetNAnchors wraps atk_hyperlink_get_n_anchors
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Gets the number of anchors associated with this hyperlink.
-	GetNAnchors() int
+	GetNAnchors() int32
 	// GetObject wraps atk_hyperlink_get_object
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- i int: a (zero-index) integer specifying the desired anchor 
+	// 	- i int32: a (zero-index) integer specifying the desired anchor 
 	// 
 	// The function returns the following values:
 	// 
@@ -13345,20 +13462,20 @@ type Hyperlink interface {
 	// hyperlink etc.
 	// 
 	// Multiple anchors are primarily used by client-side image maps.
-	GetObject(int) Object
+	GetObject(int32) Object
 	// GetStartIndex wraps atk_hyperlink_get_start_index
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Gets the index with the hypertext document at which this link begins.
-	GetStartIndex() int
+	GetStartIndex() int32
 	// GetURI wraps atk_hyperlink_get_uri
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- i int: a (zero-index) integer specifying the desired anchor 
+	// 	- i int32: a (zero-index) integer specifying the desired anchor 
 	// 
 	// The function returns the following values:
 	// 
@@ -13368,7 +13485,7 @@ type Hyperlink interface {
 	// by @i of @link_.
 	// 
 	// Multiple anchors are primarily used by client-side image maps.
-	GetURI(int) string
+	GetURI(int32) string
 	// IsInline wraps atk_hyperlink_is_inline
 	// 
 	// The function returns the following values:
@@ -13416,6 +13533,11 @@ func UnsafeHyperlinkFromGlibFull(c unsafe.Pointer) Hyperlink {
 	return gobject.UnsafeObjectFromGlibFull(c).(Hyperlink)
 }
 
+// UnsafeHyperlinkFromGlibBorrow is used to convert raw AtkHyperlink pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeHyperlinkFromGlibBorrow(c unsafe.Pointer) Hyperlink {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Hyperlink)
+}
+
 func (h *HyperlinkInstance) upcastToAtkHyperlink() *HyperlinkInstance {
 	return h
 }
@@ -13434,10 +13556,10 @@ func UnsafeHyperlinkToGlibFull(c Hyperlink) unsafe.Pointer {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Gets the index with the hypertext document at which this link ends.
-func (link_ *HyperlinkInstance) GetEndIndex() int {
+func (link_ *HyperlinkInstance) GetEndIndex() int32 {
 	var carg0 *C.AtkHyperlink // in, none, converted
 	var cret  C.gint          // return, none, casted
 
@@ -13446,9 +13568,9 @@ func (link_ *HyperlinkInstance) GetEndIndex() int {
 	cret = C.atk_hyperlink_get_end_index(carg0)
 	runtime.KeepAlive(link_)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -13457,10 +13579,10 @@ func (link_ *HyperlinkInstance) GetEndIndex() int {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Gets the number of anchors associated with this hyperlink.
-func (link_ *HyperlinkInstance) GetNAnchors() int {
+func (link_ *HyperlinkInstance) GetNAnchors() int32 {
 	var carg0 *C.AtkHyperlink // in, none, converted
 	var cret  C.gint          // return, none, casted
 
@@ -13469,9 +13591,9 @@ func (link_ *HyperlinkInstance) GetNAnchors() int {
 	cret = C.atk_hyperlink_get_n_anchors(carg0)
 	runtime.KeepAlive(link_)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -13480,7 +13602,7 @@ func (link_ *HyperlinkInstance) GetNAnchors() int {
 // 
 // The function takes the following parameters:
 // 
-// 	- i int: a (zero-index) integer specifying the desired anchor 
+// 	- i int32: a (zero-index) integer specifying the desired anchor 
 // 
 // The function returns the following values:
 // 
@@ -13492,7 +13614,7 @@ func (link_ *HyperlinkInstance) GetNAnchors() int {
 // hyperlink etc.
 // 
 // Multiple anchors are primarily used by client-side image maps.
-func (link_ *HyperlinkInstance) GetObject(i int) Object {
+func (link_ *HyperlinkInstance) GetObject(i int32) Object {
 	var carg0 *C.AtkHyperlink // in, none, converted
 	var carg1 C.gint          // in, none, casted
 	var cret  *C.AtkObject    // return, none, converted
@@ -13515,10 +13637,10 @@ func (link_ *HyperlinkInstance) GetObject(i int) Object {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Gets the index with the hypertext document at which this link begins.
-func (link_ *HyperlinkInstance) GetStartIndex() int {
+func (link_ *HyperlinkInstance) GetStartIndex() int32 {
 	var carg0 *C.AtkHyperlink // in, none, converted
 	var cret  C.gint          // return, none, casted
 
@@ -13527,9 +13649,9 @@ func (link_ *HyperlinkInstance) GetStartIndex() int {
 	cret = C.atk_hyperlink_get_start_index(carg0)
 	runtime.KeepAlive(link_)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -13538,7 +13660,7 @@ func (link_ *HyperlinkInstance) GetStartIndex() int {
 // 
 // The function takes the following parameters:
 // 
-// 	- i int: a (zero-index) integer specifying the desired anchor 
+// 	- i int32: a (zero-index) integer specifying the desired anchor 
 // 
 // The function returns the following values:
 // 
@@ -13548,7 +13670,7 @@ func (link_ *HyperlinkInstance) GetStartIndex() int {
 // by @i of @link_.
 // 
 // Multiple anchors are primarily used by client-side image maps.
-func (link_ *HyperlinkInstance) GetURI(i int) string {
+func (link_ *HyperlinkInstance) GetURI(i int32) string {
 	var carg0 *C.AtkHyperlink // in, none, converted
 	var carg1 C.gint          // in, none, casted
 	var cret  *C.gchar        // return, full, string
@@ -13639,36 +13761,36 @@ type HyperlinkOverrides[Instance Hyperlink] struct {
 	// GetEndIndex allows you to override the implementation of the virtual method get_end_index.
 	// The function returns the following values:
 	// 
-	// 	- goret int 
-	GetEndIndex func(Instance) int
+	// 	- goret int32 
+	GetEndIndex func(Instance) int32
 	// GetNAnchors allows you to override the implementation of the virtual method get_n_anchors.
 	// The function returns the following values:
 	// 
-	// 	- goret int 
-	GetNAnchors func(Instance) int
+	// 	- goret int32 
+	GetNAnchors func(Instance) int32
 	// GetObject allows you to override the implementation of the virtual method get_object.
 	// The function takes the following parameters:
 	// 
-	// 	- i int: a (zero-index) integer specifying the desired anchor 
+	// 	- i int32: a (zero-index) integer specifying the desired anchor 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Object 
-	GetObject func(Instance, int) Object
+	GetObject func(Instance, int32) Object
 	// GetStartIndex allows you to override the implementation of the virtual method get_start_index.
 	// The function returns the following values:
 	// 
-	// 	- goret int 
-	GetStartIndex func(Instance) int
+	// 	- goret int32 
+	GetStartIndex func(Instance) int32
 	// GetURI allows you to override the implementation of the virtual method get_uri.
 	// The function takes the following parameters:
 	// 
-	// 	- i int: a (zero-index) integer specifying the desired anchor 
+	// 	- i int32: a (zero-index) integer specifying the desired anchor 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret string 
-	GetURI func(Instance, int) string
+	GetURI func(Instance, int32) string
 	// IsValid allows you to override the implementation of the virtual method is_valid.
 	// The function returns the following values:
 	// 
@@ -13697,9 +13819,9 @@ func UnsafeApplyHyperlinkOverrides[Instance Hyperlink](gclass unsafe.Pointer, ov
 			"_gotk4_atk1_Hyperlink_get_end_index",
 			func(carg0 *C.AtkHyperlink) (cret C.gint) {
 				var link_ Instance // go AtkHyperlink subclass
-				var goret int      // return, none, casted
+				var goret int32    // return, none, casted
 
-				link_ = UnsafeHyperlinkFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				link_ = UnsafeHyperlinkFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetEndIndex(link_)
 
@@ -13717,9 +13839,9 @@ func UnsafeApplyHyperlinkOverrides[Instance Hyperlink](gclass unsafe.Pointer, ov
 			"_gotk4_atk1_Hyperlink_get_n_anchors",
 			func(carg0 *C.AtkHyperlink) (cret C.gint) {
 				var link_ Instance // go AtkHyperlink subclass
-				var goret int      // return, none, casted
+				var goret int32    // return, none, casted
 
-				link_ = UnsafeHyperlinkFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				link_ = UnsafeHyperlinkFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetNAnchors(link_)
 
@@ -13737,11 +13859,11 @@ func UnsafeApplyHyperlinkOverrides[Instance Hyperlink](gclass unsafe.Pointer, ov
 			"_gotk4_atk1_Hyperlink_get_object",
 			func(carg0 *C.AtkHyperlink, carg1 C.gint) (cret *C.AtkObject) {
 				var link_ Instance // go AtkHyperlink subclass
-				var i     int      // in, none, casted
+				var i     int32    // in, none, casted
 				var goret Object   // return, none, converted
 
-				link_ = UnsafeHyperlinkFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				i = int(carg1)
+				link_ = UnsafeHyperlinkFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				i = int32(carg1)
 
 				goret = overrides.GetObject(link_, i)
 
@@ -13759,9 +13881,9 @@ func UnsafeApplyHyperlinkOverrides[Instance Hyperlink](gclass unsafe.Pointer, ov
 			"_gotk4_atk1_Hyperlink_get_start_index",
 			func(carg0 *C.AtkHyperlink) (cret C.gint) {
 				var link_ Instance // go AtkHyperlink subclass
-				var goret int      // return, none, casted
+				var goret int32    // return, none, casted
 
-				link_ = UnsafeHyperlinkFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				link_ = UnsafeHyperlinkFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetStartIndex(link_)
 
@@ -13779,11 +13901,11 @@ func UnsafeApplyHyperlinkOverrides[Instance Hyperlink](gclass unsafe.Pointer, ov
 			"_gotk4_atk1_Hyperlink_get_uri",
 			func(carg0 *C.AtkHyperlink, carg1 C.gint) (cret *C.gchar) {
 				var link_ Instance // go AtkHyperlink subclass
-				var i     int      // in, none, casted
+				var i     int32    // in, none, casted
 				var goret string   // return, full, string
 
-				link_ = UnsafeHyperlinkFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				i = int(carg1)
+				link_ = UnsafeHyperlinkFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				i = int32(carg1)
 
 				goret = overrides.GetURI(link_, i)
 
@@ -13803,7 +13925,7 @@ func UnsafeApplyHyperlinkOverrides[Instance Hyperlink](gclass unsafe.Pointer, ov
 				var link_ Instance // go AtkHyperlink subclass
 				var goret bool     // return
 
-				link_ = UnsafeHyperlinkFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				link_ = UnsafeHyperlinkFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.IsValid(link_)
 
@@ -13824,7 +13946,7 @@ func UnsafeApplyHyperlinkOverrides[Instance Hyperlink](gclass unsafe.Pointer, ov
 			func(carg0 *C.AtkHyperlink) {
 				var link_ Instance // go AtkHyperlink subclass
 
-				link_ = UnsafeHyperlinkFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				link_ = UnsafeHyperlinkFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				overrides.LinkActivated(link_)
 			},
@@ -13840,7 +13962,7 @@ func UnsafeApplyHyperlinkOverrides[Instance Hyperlink](gclass unsafe.Pointer, ov
 				var link_ Instance // go AtkHyperlink subclass
 				var goret uint     // return, none, casted
 
-				link_ = UnsafeHyperlinkFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				link_ = UnsafeHyperlinkFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.LinkState(link_)
 
@@ -13915,6 +14037,11 @@ func UnsafeMiscFromGlibNone(c unsafe.Pointer) Misc {
 // UnsafeMiscFromGlibFull is used to convert raw AtkMisc pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeMiscFromGlibFull(c unsafe.Pointer) Misc {
 	return gobject.UnsafeObjectFromGlibFull(c).(Misc)
+}
+
+// UnsafeMiscFromGlibBorrow is used to convert raw AtkMisc pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeMiscFromGlibBorrow(c unsafe.Pointer) Misc {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Misc)
 }
 
 func (m *MiscInstance) upcastToAtkMisc() *MiscInstance {
@@ -14048,19 +14175,19 @@ type Object interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Gets the 0-based index of this accessible in its parent; returns -1 if the
 	// accessible does not have an accessible parent.
-	GetIndexInParent() int
+	GetIndexInParent() int32
 	// GetNAccessibleChildren wraps atk_object_get_n_accessible_children
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Gets the number of accessible children of the accessible.
-	GetNAccessibleChildren() int
+	GetNAccessibleChildren() int32
 	// GetName wraps atk_object_get_name
 	// 
 	// The function returns the following values:
@@ -14131,7 +14258,7 @@ type Object interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- i int: a gint representing the position of the child, starting from 0 
+	// 	- i int32: a gint representing the position of the child, starting from 0 
 	// 
 	// The function returns the following values:
 	// 
@@ -14140,7 +14267,7 @@ type Object interface {
 	// Gets a reference to the specified accessible child of the object.
 	// The accessible children are 0-based so the first accessible child is
 	// at index 0, the second at index 1 and so on.
-	RefAccessibleChild(int) Object
+	RefAccessibleChild(int32) Object
 	// RefRelationSet wraps atk_object_ref_relation_set
 	// 
 	// The function returns the following values:
@@ -14267,7 +14394,7 @@ type Object interface {
 	//
 	// The "notification" signal can be emitted to pass an announcement on to
 	// be read by a screen reader.
-	ConnectNotification(func(Object, string, int)) gobject.SignalHandle
+	ConnectNotification(func(Object, string, int32)) gobject.SignalHandle
 	// ConnectPropertyChange connects the provided callback to the "property-change" signal
 	//
 	// The signal "property-change" is emitted when an object's property
@@ -14315,6 +14442,11 @@ func UnsafeObjectFromGlibNone(c unsafe.Pointer) Object {
 // UnsafeObjectFromGlibFull is used to convert raw AtkObject pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeObjectFromGlibFull(c unsafe.Pointer) Object {
 	return gobject.UnsafeObjectFromGlibFull(c).(Object)
+}
+
+// UnsafeObjectFromGlibBorrow is used to convert raw AtkObject pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeObjectFromGlibBorrow(c unsafe.Pointer) Object {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Object)
 }
 
 func (o *ObjectInstance) upcastToAtkObject() *ObjectInstance {
@@ -14440,11 +14572,11 @@ func (accessible *ObjectInstance) GetHelpText() string {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Gets the 0-based index of this accessible in its parent; returns -1 if the
 // accessible does not have an accessible parent.
-func (accessible *ObjectInstance) GetIndexInParent() int {
+func (accessible *ObjectInstance) GetIndexInParent() int32 {
 	var carg0 *C.AtkObject // in, none, converted
 	var cret  C.gint       // return, none, casted
 
@@ -14453,9 +14585,9 @@ func (accessible *ObjectInstance) GetIndexInParent() int {
 	cret = C.atk_object_get_index_in_parent(carg0)
 	runtime.KeepAlive(accessible)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -14464,10 +14596,10 @@ func (accessible *ObjectInstance) GetIndexInParent() int {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Gets the number of accessible children of the accessible.
-func (accessible *ObjectInstance) GetNAccessibleChildren() int {
+func (accessible *ObjectInstance) GetNAccessibleChildren() int32 {
 	var carg0 *C.AtkObject // in, none, converted
 	var cret  C.gint       // return, none, casted
 
@@ -14476,9 +14608,9 @@ func (accessible *ObjectInstance) GetNAccessibleChildren() int {
 	cret = C.atk_object_get_n_accessible_children(carg0)
 	runtime.KeepAlive(accessible)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -14644,7 +14776,7 @@ func (accessible *ObjectInstance) PeekParent() Object {
 // 
 // The function takes the following parameters:
 // 
-// 	- i int: a gint representing the position of the child, starting from 0 
+// 	- i int32: a gint representing the position of the child, starting from 0 
 // 
 // The function returns the following values:
 // 
@@ -14653,7 +14785,7 @@ func (accessible *ObjectInstance) PeekParent() Object {
 // Gets a reference to the specified accessible child of the object.
 // The accessible children are 0-based so the first accessible child is
 // at index 0, the second at index 1 and so on.
-func (accessible *ObjectInstance) RefAccessibleChild(i int) Object {
+func (accessible *ObjectInstance) RefAccessibleChild(i int32) Object {
 	var carg0 *C.AtkObject // in, none, converted
 	var carg1 C.gint       // in, none, casted
 	var cret  *C.AtkObject // return, full, converted
@@ -14936,7 +15068,7 @@ func (o *ObjectInstance) ConnectFocusEvent(fn func(Object, bool)) gobject.Signal
 //
 // The "notification" signal can be emitted to pass an announcement on to
 // be read by a screen reader.
-func (o *ObjectInstance) ConnectNotification(fn func(Object, string, int)) gobject.SignalHandle {
+func (o *ObjectInstance) ConnectNotification(fn func(Object, string, int32)) gobject.SignalHandle {
 	return o.Connect("notification", fn)
 }
 
@@ -14995,13 +15127,13 @@ type ObjectOverrides[Instance Object] struct {
 	// GetIndexInParent allows you to override the implementation of the virtual method get_index_in_parent.
 	// The function returns the following values:
 	// 
-	// 	- goret int 
-	GetIndexInParent func(Instance) int
+	// 	- goret int32 
+	GetIndexInParent func(Instance) int32
 	// GetNChildren allows you to override the implementation of the virtual method get_n_children.
 	// The function returns the following values:
 	// 
-	// 	- goret int 
-	GetNChildren func(Instance) int
+	// 	- goret int32 
+	GetNChildren func(Instance) int32
 	// GetName allows you to override the implementation of the virtual method get_name.
 	// The function returns the following values:
 	// 
@@ -15083,7 +15215,7 @@ func UnsafeApplyObjectOverrides[Instance Object](gclass unsafe.Pointer, override
 				var accessible Instance // go AtkObject subclass
 				var focusIn    bool     // in
 
-				accessible = UnsafeObjectFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				accessible = UnsafeObjectFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg1 != 0 {
 					focusIn = true
 				}
@@ -15102,7 +15234,7 @@ func UnsafeApplyObjectOverrides[Instance Object](gclass unsafe.Pointer, override
 				var accessible Instance // go AtkObject subclass
 				var goret      string   // return, none, string
 
-				accessible = UnsafeObjectFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				accessible = UnsafeObjectFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetDescription(accessible)
 
@@ -15121,9 +15253,9 @@ func UnsafeApplyObjectOverrides[Instance Object](gclass unsafe.Pointer, override
 			"_gotk4_atk1_Object_get_index_in_parent",
 			func(carg0 *C.AtkObject) (cret C.gint) {
 				var accessible Instance // go AtkObject subclass
-				var goret      int      // return, none, casted
+				var goret      int32    // return, none, casted
 
-				accessible = UnsafeObjectFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				accessible = UnsafeObjectFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetIndexInParent(accessible)
 
@@ -15141,9 +15273,9 @@ func UnsafeApplyObjectOverrides[Instance Object](gclass unsafe.Pointer, override
 			"_gotk4_atk1_Object_get_n_children",
 			func(carg0 *C.AtkObject) (cret C.gint) {
 				var accessible Instance // go AtkObject subclass
-				var goret      int      // return, none, casted
+				var goret      int32    // return, none, casted
 
-				accessible = UnsafeObjectFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				accessible = UnsafeObjectFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetNChildren(accessible)
 
@@ -15163,7 +15295,7 @@ func UnsafeApplyObjectOverrides[Instance Object](gclass unsafe.Pointer, override
 				var accessible Instance // go AtkObject subclass
 				var goret      string   // return, none, string
 
-				accessible = UnsafeObjectFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				accessible = UnsafeObjectFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetName(accessible)
 
@@ -15184,7 +15316,7 @@ func UnsafeApplyObjectOverrides[Instance Object](gclass unsafe.Pointer, override
 				var accessible Instance // go AtkObject subclass
 				var goret      string   // return, none, string
 
-				accessible = UnsafeObjectFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				accessible = UnsafeObjectFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetObjectLocale(accessible)
 
@@ -15205,7 +15337,7 @@ func UnsafeApplyObjectOverrides[Instance Object](gclass unsafe.Pointer, override
 				var accessible Instance // go AtkObject subclass
 				var goret      Object   // return, none, converted
 
-				accessible = UnsafeObjectFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				accessible = UnsafeObjectFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetParent(accessible)
 
@@ -15225,7 +15357,7 @@ func UnsafeApplyObjectOverrides[Instance Object](gclass unsafe.Pointer, override
 				var accessible Instance // go AtkObject subclass
 				var goret      Role     // return, none, casted
 
-				accessible = UnsafeObjectFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				accessible = UnsafeObjectFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetRole(accessible)
 
@@ -15245,7 +15377,7 @@ func UnsafeApplyObjectOverrides[Instance Object](gclass unsafe.Pointer, override
 				var accessible Instance        // go AtkObject subclass
 				var values     *PropertyValues // in, none, converted
 
-				accessible = UnsafeObjectFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				accessible = UnsafeObjectFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				values = UnsafePropertyValuesFromGlibNone(unsafe.Pointer(carg1))
 
 				overrides.PropertyChange(accessible, values)
@@ -15262,7 +15394,7 @@ func UnsafeApplyObjectOverrides[Instance Object](gclass unsafe.Pointer, override
 				var accessible Instance    // go AtkObject subclass
 				var goret      RelationSet // return, full, converted
 
-				accessible = UnsafeObjectFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				accessible = UnsafeObjectFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.RefRelationSet(accessible)
 
@@ -15282,7 +15414,7 @@ func UnsafeApplyObjectOverrides[Instance Object](gclass unsafe.Pointer, override
 				var accessible Instance // go AtkObject subclass
 				var goret      StateSet // return, full, converted
 
-				accessible = UnsafeObjectFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				accessible = UnsafeObjectFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.RefStateSet(accessible)
 
@@ -15302,7 +15434,7 @@ func UnsafeApplyObjectOverrides[Instance Object](gclass unsafe.Pointer, override
 				var accessible  Instance // go AtkObject subclass
 				var description string   // in, none, string
 
-				accessible = UnsafeObjectFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				accessible = UnsafeObjectFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				description = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 
 				overrides.SetDescription(accessible, description)
@@ -15319,7 +15451,7 @@ func UnsafeApplyObjectOverrides[Instance Object](gclass unsafe.Pointer, override
 				var accessible Instance // go AtkObject subclass
 				var name       string   // in, none, string
 
-				accessible = UnsafeObjectFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				accessible = UnsafeObjectFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				name = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 
 				overrides.SetName(accessible, name)
@@ -15336,7 +15468,7 @@ func UnsafeApplyObjectOverrides[Instance Object](gclass unsafe.Pointer, override
 				var accessible Instance // go AtkObject subclass
 				var parent     Object   // in, none, converted
 
-				accessible = UnsafeObjectFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				accessible = UnsafeObjectFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				parent = UnsafeObjectFromGlibNone(unsafe.Pointer(carg1))
 
 				overrides.SetParent(accessible, parent)
@@ -15353,7 +15485,7 @@ func UnsafeApplyObjectOverrides[Instance Object](gclass unsafe.Pointer, override
 				var accessible Instance // go AtkObject subclass
 				var role       Role     // in, none, casted
 
-				accessible = UnsafeObjectFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				accessible = UnsafeObjectFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				role = Role(carg1)
 
 				overrides.SetRole(accessible, role)
@@ -15371,7 +15503,7 @@ func UnsafeApplyObjectOverrides[Instance Object](gclass unsafe.Pointer, override
 				var name       string   // in, none, string
 				var stateSet   bool     // in
 
-				accessible = UnsafeObjectFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				accessible = UnsafeObjectFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				name = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 				if carg2 != 0 {
 					stateSet = true
@@ -15390,7 +15522,7 @@ func UnsafeApplyObjectOverrides[Instance Object](gclass unsafe.Pointer, override
 			func(carg0 *C.AtkObject) {
 				var accessible Instance // go AtkObject subclass
 
-				accessible = UnsafeObjectFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				accessible = UnsafeObjectFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				overrides.VisibleDataChanged(accessible)
 			},
@@ -15495,6 +15627,11 @@ func UnsafeObjectFactoryFromGlibNone(c unsafe.Pointer) ObjectFactory {
 // UnsafeObjectFactoryFromGlibFull is used to convert raw AtkObjectFactory pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeObjectFactoryFromGlibFull(c unsafe.Pointer) ObjectFactory {
 	return gobject.UnsafeObjectFromGlibFull(c).(ObjectFactory)
+}
+
+// UnsafeObjectFactoryFromGlibBorrow is used to convert raw AtkObjectFactory pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeObjectFactoryFromGlibBorrow(c unsafe.Pointer) ObjectFactory {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(ObjectFactory)
 }
 
 func (o *ObjectFactoryInstance) upcastToAtkObjectFactory() *ObjectFactoryInstance {
@@ -15606,7 +15743,7 @@ func UnsafeApplyObjectFactoryOverrides[Instance ObjectFactory](gclass unsafe.Poi
 			func(carg0 *C.AtkObjectFactory) {
 				var factory Instance // go AtkObjectFactory subclass
 
-				factory = UnsafeObjectFactoryFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				factory = UnsafeObjectFactoryFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				overrides.Invalidate(factory)
 			},
@@ -15710,6 +15847,11 @@ func UnsafePlugFromGlibNone(c unsafe.Pointer) Plug {
 // UnsafePlugFromGlibFull is used to convert raw AtkPlug pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafePlugFromGlibFull(c unsafe.Pointer) Plug {
 	return gobject.UnsafeObjectFromGlibFull(c).(Plug)
+}
+
+// UnsafePlugFromGlibBorrow is used to convert raw AtkPlug pointers to go without touching any references. This is used by the bindings internally.
+func UnsafePlugFromGlibBorrow(c unsafe.Pointer) Plug {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Plug)
 }
 
 func (p *PlugInstance) upcastToAtkPlug() *PlugInstance {
@@ -15832,7 +15974,7 @@ func UnsafeApplyPlugOverrides[Instance Plug](gclass unsafe.Pointer, overrides Pl
 				var obj   Instance // go AtkPlug subclass
 				var goret string   // return, full, string
 
-				obj = UnsafePlugFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				obj = UnsafePlugFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetObjectID(obj)
 
@@ -15954,6 +16096,11 @@ func UnsafeRegistryFromGlibNone(c unsafe.Pointer) Registry {
 // UnsafeRegistryFromGlibFull is used to convert raw AtkRegistry pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeRegistryFromGlibFull(c unsafe.Pointer) Registry {
 	return gobject.UnsafeObjectFromGlibFull(c).(Registry)
+}
+
+// UnsafeRegistryFromGlibBorrow is used to convert raw AtkRegistry pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeRegistryFromGlibBorrow(c unsafe.Pointer) Registry {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Registry)
 }
 
 func (r *RegistryInstance) upcastToAtkRegistry() *RegistryInstance {
@@ -16170,6 +16317,11 @@ func UnsafeRelationFromGlibNone(c unsafe.Pointer) Relation {
 // UnsafeRelationFromGlibFull is used to convert raw AtkRelation pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeRelationFromGlibFull(c unsafe.Pointer) Relation {
 	return gobject.UnsafeObjectFromGlibFull(c).(Relation)
+}
+
+// UnsafeRelationFromGlibBorrow is used to convert raw AtkRelation pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeRelationFromGlibBorrow(c unsafe.Pointer) Relation {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Relation)
 }
 
 func (r *RelationInstance) upcastToAtkRelation() *RelationInstance {
@@ -16420,22 +16572,22 @@ type RelationSet interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Determines the number of relations in a relation set.
-	GetNRelations() int
+	GetNRelations() int32
 	// GetRelation wraps atk_relation_set_get_relation
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- i int: a gint representing a position in the set, starting from 0. 
+	// 	- i int32: a gint representing a position in the set, starting from 0. 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Relation 
 	//
 	// Determines the relation at the specified position in the relation set.
-	GetRelation(int) Relation
+	GetRelation(int32) Relation
 	// GetRelationByType wraps atk_relation_set_get_relation_by_type
 	// 
 	// The function takes the following parameters:
@@ -16478,6 +16630,11 @@ func UnsafeRelationSetFromGlibNone(c unsafe.Pointer) RelationSet {
 // UnsafeRelationSetFromGlibFull is used to convert raw AtkRelationSet pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeRelationSetFromGlibFull(c unsafe.Pointer) RelationSet {
 	return gobject.UnsafeObjectFromGlibFull(c).(RelationSet)
+}
+
+// UnsafeRelationSetFromGlibBorrow is used to convert raw AtkRelationSet pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeRelationSetFromGlibBorrow(c unsafe.Pointer) RelationSet {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(RelationSet)
 }
 
 func (r *RelationSetInstance) upcastToAtkRelationSet() *RelationSetInstance {
@@ -16637,10 +16794,10 @@ func (set *RelationSetInstance) ContainsTarget(relationship RelationType, target
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Determines the number of relations in a relation set.
-func (set *RelationSetInstance) GetNRelations() int {
+func (set *RelationSetInstance) GetNRelations() int32 {
 	var carg0 *C.AtkRelationSet // in, none, converted
 	var cret  C.gint            // return, none, casted
 
@@ -16649,9 +16806,9 @@ func (set *RelationSetInstance) GetNRelations() int {
 	cret = C.atk_relation_set_get_n_relations(carg0)
 	runtime.KeepAlive(set)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -16660,14 +16817,14 @@ func (set *RelationSetInstance) GetNRelations() int {
 // 
 // The function takes the following parameters:
 // 
-// 	- i int: a gint representing a position in the set, starting from 0. 
+// 	- i int32: a gint representing a position in the set, starting from 0. 
 // 
 // The function returns the following values:
 // 
 // 	- goret Relation 
 //
 // Determines the relation at the specified position in the relation set.
-func (set *RelationSetInstance) GetRelation(i int) Relation {
+func (set *RelationSetInstance) GetRelation(i int32) Relation {
 	var carg0 *C.AtkRelationSet // in, none, converted
 	var carg1 C.gint            // in, none, casted
 	var cret  *C.AtkRelation    // return, none, converted
@@ -16866,6 +17023,11 @@ func UnsafeSocketFromGlibFull(c unsafe.Pointer) Socket {
 	return gobject.UnsafeObjectFromGlibFull(c).(Socket)
 }
 
+// UnsafeSocketFromGlibBorrow is used to convert raw AtkSocket pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeSocketFromGlibBorrow(c unsafe.Pointer) Socket {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Socket)
+}
+
 func (s *SocketInstance) upcastToAtkSocket() *SocketInstance {
 	return s
 }
@@ -16982,7 +17144,7 @@ func UnsafeApplySocketOverrides[Instance Socket](gclass unsafe.Pointer, override
 				var obj    Instance // go AtkSocket subclass
 				var plugId string   // in, none, string
 
-				obj = UnsafeSocketFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				obj = UnsafeSocketFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				plugId = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 
 				overrides.Embed(obj, plugId)
@@ -17180,6 +17342,11 @@ func UnsafeStateSetFromGlibNone(c unsafe.Pointer) StateSet {
 // UnsafeStateSetFromGlibFull is used to convert raw AtkStateSet pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeStateSetFromGlibFull(c unsafe.Pointer) StateSet {
 	return gobject.UnsafeObjectFromGlibFull(c).(StateSet)
+}
+
+// UnsafeStateSetFromGlibBorrow is used to convert raw AtkStateSet pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeStateSetFromGlibBorrow(c unsafe.Pointer) StateSet {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(StateSet)
 }
 
 func (s *StateSetInstance) upcastToAtkStateSet() *StateSetInstance {
@@ -17600,6 +17767,11 @@ func UnsafeUtilFromGlibFull(c unsafe.Pointer) Util {
 	return gobject.UnsafeObjectFromGlibFull(c).(Util)
 }
 
+// UnsafeUtilFromGlibBorrow is used to convert raw AtkUtil pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeUtilFromGlibBorrow(c unsafe.Pointer) Util {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Util)
+}
+
 func (u *UtilInstance) upcastToAtkUtil() *UtilInstance {
 	return u
 }
@@ -17704,6 +17876,11 @@ func UnsafeGObjectAccessibleFromGlibNone(c unsafe.Pointer) GObjectAccessible {
 // UnsafeGObjectAccessibleFromGlibFull is used to convert raw AtkGObjectAccessible pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeGObjectAccessibleFromGlibFull(c unsafe.Pointer) GObjectAccessible {
 	return gobject.UnsafeObjectFromGlibFull(c).(GObjectAccessible)
+}
+
+// UnsafeGObjectAccessibleFromGlibBorrow is used to convert raw AtkGObjectAccessible pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeGObjectAccessibleFromGlibBorrow(c unsafe.Pointer) GObjectAccessible {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(GObjectAccessible)
 }
 
 func (g *GObjectAccessibleInstance) upcastToAtkGObjectAccessible() *GObjectAccessibleInstance {
@@ -17914,6 +18091,11 @@ func UnsafeNoOpObjectFromGlibFull(c unsafe.Pointer) NoOpObject {
 	return gobject.UnsafeObjectFromGlibFull(c).(NoOpObject)
 }
 
+// UnsafeNoOpObjectFromGlibBorrow is used to convert raw AtkNoOpObject pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeNoOpObjectFromGlibBorrow(c unsafe.Pointer) NoOpObject {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(NoOpObject)
+}
+
 func (n *NoOpObjectInstance) upcastToAtkNoOpObject() *NoOpObjectInstance {
 	return n
 }
@@ -18036,6 +18218,11 @@ func UnsafeNoOpObjectFactoryFromGlibNone(c unsafe.Pointer) NoOpObjectFactory {
 // UnsafeNoOpObjectFactoryFromGlibFull is used to convert raw AtkNoOpObjectFactory pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeNoOpObjectFactoryFromGlibFull(c unsafe.Pointer) NoOpObjectFactory {
 	return gobject.UnsafeObjectFromGlibFull(c).(NoOpObjectFactory)
+}
+
+// UnsafeNoOpObjectFactoryFromGlibBorrow is used to convert raw AtkNoOpObjectFactory pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeNoOpObjectFactoryFromGlibBorrow(c unsafe.Pointer) NoOpObjectFactory {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(NoOpObjectFactory)
 }
 
 func (n *NoOpObjectFactoryInstance) upcastToAtkNoOpObjectFactory() *NoOpObjectFactoryInstance {
@@ -19167,8 +19354,11 @@ func marshalRange(p unsafe.Pointer) (interface{}, error) {
 	return UnsafeRangeFromGlibBorrow(b), nil
 }
 
-func (r *Range) InitGoValue(v *gobject.Value) {
-	v.Init(TypeRange)
+func (r *Range) GoValueType() gobject.Type {
+	return TypeRange
+}
+
+func (r *Range) SetGoValue(v *gobject.Value) {
 	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
@@ -19371,8 +19561,11 @@ func marshalRectangle(p unsafe.Pointer) (interface{}, error) {
 	return UnsafeRectangleFromGlibBorrow(b), nil
 }
 
-func (r *Rectangle) InitGoValue(v *gobject.Value) {
-	v.Init(TypeRectangle)
+func (r *Rectangle) GoValueType() gobject.Type {
+	return TypeRectangle
+}
+
+func (r *Rectangle) SetGoValue(v *gobject.Value) {
 	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
@@ -19943,8 +20136,11 @@ func marshalTextRange(p unsafe.Pointer) (interface{}, error) {
 	return UnsafeTextRangeFromGlibBorrow(b), nil
 }
 
-func (r *TextRange) InitGoValue(v *gobject.Value) {
-	v.Init(TypeTextRange)
+func (r *TextRange) GoValueType() gobject.Type {
+	return TypeTextRange
+}
+
+func (r *TextRange) SetGoValue(v *gobject.Value) {
 	v.SetBoxed(unsafe.Pointer(r.native))
 }
 

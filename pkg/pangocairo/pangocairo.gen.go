@@ -128,6 +128,11 @@ func UnsafeFontFromGlibFull(c unsafe.Pointer) Font {
 	return gobject.UnsafeObjectFromGlibFull(c).(Font)
 }
 
+// UnsafeFontFromGlibBorrow is used to convert raw PangoCairoFont pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeFontFromGlibBorrow(c unsafe.Pointer) Font {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Font)
+}
+
 // UnsafeFontToGlibNone is used to convert the instance to it's C value PangoCairoFont. This is used by the bindings internally.
 func UnsafeFontToGlibNone(c Font) unsafe.Pointer {
 	i := c.upcastToPangoCairoFont()
@@ -236,6 +241,11 @@ func UnsafeFontMapFromGlibNone(c unsafe.Pointer) FontMap {
 // UnsafeFontMapFromGlibFull is used to convert raw PangoCairoFontMap pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeFontMapFromGlibFull(c unsafe.Pointer) FontMap {
 	return gobject.UnsafeObjectFromGlibFull(c).(FontMap)
+}
+
+// UnsafeFontMapFromGlibBorrow is used to convert raw PangoCairoFontMap pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeFontMapFromGlibBorrow(c unsafe.Pointer) FontMap {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(FontMap)
 }
 
 // UnsafeFontMapToGlibNone is used to convert the instance to it's C value PangoCairoFontMap. This is used by the bindings internally.

@@ -24,15 +24,15 @@ func _gotk4_gdkpixbuf2_PixbufModuleSizeFunc(carg1 *C.gint, carg2 *C.gint, carg3 
 		fn = v.(PixbufModuleSizeFunc)
 	}
 
-	var width  *int // in, transfer: none, C Pointers: 1, Name: gint
-	var height *int // in, transfer: none, C Pointers: 1, Name: gint
+	var width  *int32 // in, transfer: none, C Pointers: 1, Name: gint
+	var height *int32 // in, transfer: none, C Pointers: 1, Name: gint
 
 	_ = width
 	_ = carg1
-	panic("unimplemented conversion of *int (gint*)")
+	panic("unimplemented conversion of *int32 (gint*)")
 	_ = height
 	_ = carg2
-	panic("unimplemented conversion of *int (gint*)")
+	panic("unimplemented conversion of *int32 (gint*)")
 
 	fn(width, height)
 }
@@ -49,16 +49,16 @@ func _gotk4_gdkpixbuf2_PixbufModuleUpdatedFunc(carg1 *C.GdkPixbuf, carg2 C.int, 
 	}
 
 	var pixbuf Pixbuf // in, none, converted
-	var x      int    // in, none, casted, casted C.gint
-	var y      int    // in, none, casted, casted C.gint
-	var width  int    // in, none, casted, casted C.gint
-	var height int    // in, none, casted, casted C.gint
+	var x      int32  // in, none, casted, casted C.gint
+	var y      int32  // in, none, casted, casted C.gint
+	var width  int32  // in, none, casted, casted C.gint
+	var height int32  // in, none, casted, casted C.gint
 
 	pixbuf = UnsafePixbufFromGlibNone(unsafe.Pointer(carg1))
-	x = int(carg2)
-	y = int(carg3)
-	width = int(carg4)
-	height = int(carg5)
+	x = int32(carg2)
+	y = int32(carg3)
+	width = int32(carg4)
+	height = int32(carg5)
 
 	fn(pixbuf, x, y, width, height)
 }

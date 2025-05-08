@@ -25,10 +25,10 @@ func _gotk4_gtk4_AssistantPageFunc(carg1 C.int, carg2 C.gpointer) (cret C.int) {
 		fn = v.(AssistantPageFunc)
 	}
 
-	var currentPage int // in, none, casted, casted C.gint
-	var goret       int // return, none, casted, casted C.gint
+	var currentPage int32 // in, none, casted, casted C.gint
+	var goret       int32 // return, none, casted, casted C.gint
 
-	currentPage = int(carg1)
+	currentPage = int32(carg1)
 
 	goret = fn(currentPage)
 
@@ -248,7 +248,7 @@ func _gotk4_gtk4_FlowBoxSortFunc(carg1 *C.GtkFlowBoxChild, carg2 *C.GtkFlowBoxCh
 
 	var child1 FlowBoxChild // in, none, converted
 	var child2 FlowBoxChild // in, none, converted
-	var goret  int          // return, none, casted, casted C.gint
+	var goret  int32        // return, none, casted, casted C.gint
 
 	child1 = UnsafeFlowBoxChildFromGlibNone(unsafe.Pointer(carg1))
 	child2 = UnsafeFlowBoxChildFromGlibNone(unsafe.Pointer(carg2))
@@ -318,7 +318,7 @@ func _gotk4_gtk4_ListBoxSortFunc(carg1 *C.GtkListBoxRow, carg2 *C.GtkListBoxRow,
 
 	var row1  ListBoxRow // in, none, converted
 	var row2  ListBoxRow // in, none, converted
-	var goret int        // return, none, casted, casted C.gint
+	var goret int32      // return, none, casted, casted C.gint
 
 	row1 = UnsafeListBoxRowFromGlibNone(unsafe.Pointer(carg1))
 	row2 = UnsafeListBoxRowFromGlibNone(unsafe.Pointer(carg2))

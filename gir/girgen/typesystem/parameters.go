@@ -177,7 +177,7 @@ func (param *Param) valid(e *env) bool {
 		}
 	}
 
-	if param.Type.Type == Gpointer || param.Type.Type == Guintptr {
+	if param.Type.Type == Gpointer || param.Type.Type == Guintptr || param.Type.Type == Gconstpointer {
 		e.logger.Warn("unsafe pointer is not a valid param type", "ctype", param.Type.Type.GIRName(), "gotype", param.GoType(), "ctype", param.CType())
 		return false
 	}

@@ -85,6 +85,9 @@ func (g *ClassGenerator) Generate(w *file.Package) {
 	fmt.Fprintf(w.Go(), "// %s is used to convert raw %s pointers to go while attaching a finalizer. This is used by the bindings internally.\n", g.GoUnsafeFromGlibFullFunction(), g.CType(0))
 	mkConstructor(g.GoUnsafeFromGlibFullFunction(), g.BaseClassGoUnsafeFromGlibFullFunction())
 
+	fmt.Fprintf(w.Go(), "// %s is used to convert raw %s pointers to go without touching any references. This is used by the bindings internally.\n", g.GoUnsafeFromGlibBorrowFunction(), g.CType(0))
+	mkConstructor(g.GoUnsafeFromGlibBorrowFunction(), g.BaseClass.WithForeignNamespace(g.BaseClass.Type.GoUnsafeFromGlibBorrowFunction()))
+
 	fmt.Fprintf(w.Go(), "func (%s *%s) %s() *%s {\n", strcases.ReceiverName(g.GoType(0)), g.GoType(0), g.GoPrivateUpcastMethod, g.GoType(0))
 	fmt.Fprintf(w.Go(), "\treturn %s\n", strcases.ReceiverName(g.GoType(0)))
 	fmt.Fprintf(w.Go(), "}\n\n")

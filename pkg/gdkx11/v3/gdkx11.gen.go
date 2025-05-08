@@ -63,7 +63,7 @@ func init() {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Returns the device ID as seen by XInput2.
 // 
@@ -72,7 +72,7 @@ func init() {
 // &gt; (matching the IDs for the Virtual Core Pointer and Keyboard in
 // &gt; XInput 2), but calling this function on any slave devices (i.e.
 // &gt; those managed via XInput 1.x), will return 0.
-func X11DeviceGetID(device X11DeviceCore) int {
+func X11DeviceGetID(device X11DeviceCore) int32 {
 	var carg1 *C.GdkDevice // in, none, converted, casted *C.GdkX11DeviceCore
 	var cret  C.gint       // return, none, casted
 
@@ -81,9 +81,9 @@ func X11DeviceGetID(device X11DeviceCore) int {
 	cret = C.gdk_x11_device_get_id(carg1)
 	runtime.KeepAlive(device)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -93,14 +93,14 @@ func X11DeviceGetID(device X11DeviceCore) int {
 // The function takes the following parameters:
 // 
 // 	- deviceManager X11DeviceManagerCore: a #GdkDeviceManager 
-// 	- deviceId int: a device ID, as understood by the XInput2 protocol 
+// 	- deviceId int32: a device ID, as understood by the XInput2 protocol 
 // 
 // The function returns the following values:
 // 
 // 	- goret X11DeviceCore (nullable) 
 //
 // Returns the #GdkDevice that wraps the given device ID.
-func X11DeviceManagerLookup(deviceManager X11DeviceManagerCore, deviceId int) X11DeviceCore {
+func X11DeviceManagerLookup(deviceManager X11DeviceManagerCore, deviceId int32) X11DeviceCore {
 	var carg1 *C.GdkDeviceManager // in, none, converted, casted *C.GdkX11DeviceManagerCore
 	var carg2 C.gint              // in, none, casted
 	var cret  *C.GdkDevice        // return, none, converted, casted *C.GdkX11DeviceCore, nullable
@@ -144,17 +144,17 @@ func X11FreeCompoundText(ctext *uint8) {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Gets the default GTK+ screen number.
-func X11GetDefaultScreen() int {
+func X11GetDefaultScreen() int32 {
 	var cret C.gint // return, none, casted
 
 	cret = C.gdk_x11_get_default_screen()
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -205,8 +205,8 @@ func X11GrabServer() {
 // The function takes the following parameters:
 // 
 // 	- display X11Display: a #GdkDisplay 
-// 	- eventBase int: first event type code to register 
-// 	- nEvents int: number of event type codes to register 
+// 	- eventBase int32: first event type code to register 
+// 	- nEvents int32: number of event type codes to register 
 //
 // Registers interest in receiving extension events with type codes
 // between @event_base and `event_base + n_events - 1`.
@@ -220,7 +220,7 @@ func X11GrabServer() {
 // 
 // This function should only be needed in unusual circumstances, e.g.
 // when filtering XInput extension events on the root window.
-func X11RegisterStandardEventType(display X11Display, eventBase int, nEvents int) {
+func X11RegisterStandardEventType(display X11Display, eventBase int32, nEvents int32) {
 	var carg1 *C.GdkDisplay // in, none, converted, casted *C.GdkX11Display
 	var carg2 C.gint        // in, none, casted
 	var carg3 C.gint        // in, none, casted
@@ -307,6 +307,11 @@ func UnsafeX11AppLaunchContextFromGlibFull(c unsafe.Pointer) X11AppLaunchContext
 	return gobject.UnsafeObjectFromGlibFull(c).(X11AppLaunchContext)
 }
 
+// UnsafeX11AppLaunchContextFromGlibBorrow is used to convert raw GdkX11AppLaunchContext pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeX11AppLaunchContextFromGlibBorrow(c unsafe.Pointer) X11AppLaunchContext {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(X11AppLaunchContext)
+}
+
 func (x *X11AppLaunchContextInstance) upcastToGdkX11AppLaunchContext() *X11AppLaunchContextInstance {
 	return x
 }
@@ -355,6 +360,11 @@ func UnsafeX11CursorFromGlibNone(c unsafe.Pointer) X11Cursor {
 // UnsafeX11CursorFromGlibFull is used to convert raw GdkX11Cursor pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeX11CursorFromGlibFull(c unsafe.Pointer) X11Cursor {
 	return gobject.UnsafeObjectFromGlibFull(c).(X11Cursor)
+}
+
+// UnsafeX11CursorFromGlibBorrow is used to convert raw GdkX11Cursor pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeX11CursorFromGlibBorrow(c unsafe.Pointer) X11Cursor {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(X11Cursor)
 }
 
 func (x *X11CursorInstance) upcastToGdkX11Cursor() *X11CursorInstance {
@@ -407,6 +417,11 @@ func UnsafeX11DeviceCoreFromGlibFull(c unsafe.Pointer) X11DeviceCore {
 	return gobject.UnsafeObjectFromGlibFull(c).(X11DeviceCore)
 }
 
+// UnsafeX11DeviceCoreFromGlibBorrow is used to convert raw GdkX11DeviceCore pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeX11DeviceCoreFromGlibBorrow(c unsafe.Pointer) X11DeviceCore {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(X11DeviceCore)
+}
+
 func (x *X11DeviceCoreInstance) upcastToGdkX11DeviceCore() *X11DeviceCoreInstance {
 	return x
 }
@@ -455,6 +470,11 @@ func UnsafeX11DeviceManagerCoreFromGlibNone(c unsafe.Pointer) X11DeviceManagerCo
 // UnsafeX11DeviceManagerCoreFromGlibFull is used to convert raw GdkX11DeviceManagerCore pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeX11DeviceManagerCoreFromGlibFull(c unsafe.Pointer) X11DeviceManagerCore {
 	return gobject.UnsafeObjectFromGlibFull(c).(X11DeviceManagerCore)
+}
+
+// UnsafeX11DeviceManagerCoreFromGlibBorrow is used to convert raw GdkX11DeviceManagerCore pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeX11DeviceManagerCoreFromGlibBorrow(c unsafe.Pointer) X11DeviceManagerCore {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(X11DeviceManagerCore)
 }
 
 func (x *X11DeviceManagerCoreInstance) upcastToGdkX11DeviceManagerCore() *X11DeviceManagerCoreInstance {
@@ -509,6 +529,11 @@ func UnsafeX11DeviceManagerXI2FromGlibFull(c unsafe.Pointer) X11DeviceManagerXI2
 	return gobject.UnsafeObjectFromGlibFull(c).(X11DeviceManagerXI2)
 }
 
+// UnsafeX11DeviceManagerXI2FromGlibBorrow is used to convert raw GdkX11DeviceManagerXI2 pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeX11DeviceManagerXI2FromGlibBorrow(c unsafe.Pointer) X11DeviceManagerXI2 {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(X11DeviceManagerXI2)
+}
+
 func (x *X11DeviceManagerXI2Instance) upcastToGdkX11DeviceManagerXI2() *X11DeviceManagerXI2Instance {
 	return x
 }
@@ -559,6 +584,11 @@ func UnsafeX11DeviceXI2FromGlibFull(c unsafe.Pointer) X11DeviceXI2 {
 	return gobject.UnsafeObjectFromGlibFull(c).(X11DeviceXI2)
 }
 
+// UnsafeX11DeviceXI2FromGlibBorrow is used to convert raw GdkX11DeviceXI2 pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeX11DeviceXI2FromGlibBorrow(c unsafe.Pointer) X11DeviceXI2 {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(X11DeviceXI2)
+}
+
 func (x *X11DeviceXI2Instance) upcastToGdkX11DeviceXI2() *X11DeviceXI2Instance {
 	return x
 }
@@ -590,7 +620,7 @@ type X11Display interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Pops the error trap pushed by gdk_x11_display_error_trap_push().
 	// Will XSync() if necessary and will always block until
@@ -602,7 +632,7 @@ type X11Display interface {
 	// 
 	// See gdk_error_trap_pop() for the all-displays-at-once
 	// equivalent.
-	ErrorTrapPop() int
+	ErrorTrapPop() int32
 	// ErrorTrapPopIgnored wraps gdk_x11_display_error_trap_pop_ignored
 	//
 	// Pops the error trap pushed by gdk_x11_display_error_trap_push().
@@ -655,7 +685,7 @@ type X11Display interface {
 	// 
 	// 	- theme string (nullable): the name of the cursor theme to use, or %NULL to unset
 	//         a previously set value 
-	// 	- size int: the cursor size to use, or 0 to keep the previous size 
+	// 	- size int32: the cursor size to use, or 0 to keep the previous size 
 	//
 	// Sets the cursor theme from which the images for cursor
 	// should be taken.
@@ -668,7 +698,7 @@ type X11Display interface {
 	// by the application (GTK+ applications can learn about
 	// cursor theme changes by listening for change notification
 	// for the corresponding #GtkSetting).
-	SetCursorTheme(string, int)
+	SetCursorTheme(string, int32)
 	// SetStartupNotificationID wraps gdk_x11_display_set_startup_notification_id
 	// 
 	// The function takes the following parameters:
@@ -694,7 +724,7 @@ type X11Display interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- scale int: The new scale value 
+	// 	- scale int32: The new scale value 
 	//
 	// Forces a specific window scale for all windows on this display,
 	// instead of using the default or user configured scale. This
@@ -703,7 +733,7 @@ type X11Display interface {
 	// 
 	// Once the scale is set by this call it will not change in response
 	// to later user configuration changes.
-	SetWindowScale(int)
+	SetWindowScale(int32)
 	// Ungrab wraps gdk_x11_display_ungrab
 	//
 	// Ungrab @display after it has been grabbed with
@@ -733,6 +763,11 @@ func UnsafeX11DisplayFromGlibFull(c unsafe.Pointer) X11Display {
 	return gobject.UnsafeObjectFromGlibFull(c).(X11Display)
 }
 
+// UnsafeX11DisplayFromGlibBorrow is used to convert raw GdkX11Display pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeX11DisplayFromGlibBorrow(c unsafe.Pointer) X11Display {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(X11Display)
+}
+
 func (x *X11DisplayInstance) upcastToGdkX11Display() *X11DisplayInstance {
 	return x
 }
@@ -755,12 +790,12 @@ func UnsafeX11DisplayToGlibFull(c X11Display) unsafe.Pointer {
 // 
 // The function returns the following values:
 // 
-// 	- major int: return location for the GLX major version 
-// 	- minor int: return location for the GLX minor version 
+// 	- major int32: return location for the GLX major version 
+// 	- minor int32: return location for the GLX minor version 
 // 	- goret bool 
 //
 // Retrieves the version of the GLX implementation.
-func X11DisplayGetGLXVersion(display gdk.Display) (int, int, bool) {
+func X11DisplayGetGLXVersion(display gdk.Display) (int32, int32, bool) {
 	var carg1 *C.GdkDisplay // in, none, converted
 	var carg2 C.gint        // out, full, casted
 	var carg3 C.gint        // out, full, casted
@@ -771,12 +806,12 @@ func X11DisplayGetGLXVersion(display gdk.Display) (int, int, bool) {
 	cret = C.gdk_x11_display_get_glx_version(carg1, &carg2, &carg3)
 	runtime.KeepAlive(display)
 
-	var major int
-	var minor int
+	var major int32
+	var minor int32
 	var goret bool
 
-	major = int(carg2)
-	minor = int(carg3)
+	major = int32(carg2)
+	minor = int32(carg3)
 	if cret != 0 {
 		goret = true
 	}
@@ -788,7 +823,7 @@ func X11DisplayGetGLXVersion(display gdk.Display) (int, int, bool) {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Pops the error trap pushed by gdk_x11_display_error_trap_push().
 // Will XSync() if necessary and will always block until
@@ -800,7 +835,7 @@ func X11DisplayGetGLXVersion(display gdk.Display) (int, int, bool) {
 // 
 // See gdk_error_trap_pop() for the all-displays-at-once
 // equivalent.
-func (display *X11DisplayInstance) ErrorTrapPop() int {
+func (display *X11DisplayInstance) ErrorTrapPop() int32 {
 	var carg0 *C.GdkDisplay // in, none, converted, casted *C.GdkX11Display
 	var cret  C.gint        // return, none, casted
 
@@ -809,9 +844,9 @@ func (display *X11DisplayInstance) ErrorTrapPop() int {
 	cret = C.gdk_x11_display_error_trap_pop(carg0)
 	runtime.KeepAlive(display)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -922,7 +957,7 @@ func (display *X11DisplayInstance) Grab() {
 // 
 // 	- theme string (nullable): the name of the cursor theme to use, or %NULL to unset
 //         a previously set value 
-// 	- size int: the cursor size to use, or 0 to keep the previous size 
+// 	- size int32: the cursor size to use, or 0 to keep the previous size 
 //
 // Sets the cursor theme from which the images for cursor
 // should be taken.
@@ -935,7 +970,7 @@ func (display *X11DisplayInstance) Grab() {
 // by the application (GTK+ applications can learn about
 // cursor theme changes by listening for change notification
 // for the corresponding #GtkSetting).
-func (display *X11DisplayInstance) SetCursorTheme(theme string, size int) {
+func (display *X11DisplayInstance) SetCursorTheme(theme string, size int32) {
 	var carg0 *C.GdkDisplay // in, none, converted, casted *C.GdkX11Display
 	var carg1 *C.gchar      // in, none, string, nullable-string
 	var carg2 C.gint        // in, none, casted
@@ -990,7 +1025,7 @@ func (display *X11DisplayInstance) SetStartupNotificationID(startupId string) {
 // 
 // The function takes the following parameters:
 // 
-// 	- scale int: The new scale value 
+// 	- scale int32: The new scale value 
 //
 // Forces a specific window scale for all windows on this display,
 // instead of using the default or user configured scale. This
@@ -999,7 +1034,7 @@ func (display *X11DisplayInstance) SetStartupNotificationID(startupId string) {
 // 
 // Once the scale is set by this call it will not change in response
 // to later user configuration changes.
-func (display *X11DisplayInstance) SetWindowScale(scale int) {
+func (display *X11DisplayInstance) SetWindowScale(scale int32) {
 	var carg0 *C.GdkDisplay // in, none, converted, casted *C.GdkX11Display
 	var carg1 C.gint        // in, none, casted
 
@@ -1060,6 +1095,11 @@ func UnsafeX11DisplayManagerFromGlibFull(c unsafe.Pointer) X11DisplayManager {
 	return gobject.UnsafeObjectFromGlibFull(c).(X11DisplayManager)
 }
 
+// UnsafeX11DisplayManagerFromGlibBorrow is used to convert raw GdkX11DisplayManager pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeX11DisplayManagerFromGlibBorrow(c unsafe.Pointer) X11DisplayManager {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(X11DisplayManager)
+}
+
 func (x *X11DisplayManagerInstance) upcastToGdkX11DisplayManager() *X11DisplayManagerInstance {
 	return x
 }
@@ -1108,6 +1148,11 @@ func UnsafeX11DragContextFromGlibNone(c unsafe.Pointer) X11DragContext {
 // UnsafeX11DragContextFromGlibFull is used to convert raw GdkX11DragContext pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeX11DragContextFromGlibFull(c unsafe.Pointer) X11DragContext {
 	return gobject.UnsafeObjectFromGlibFull(c).(X11DragContext)
+}
+
+// UnsafeX11DragContextFromGlibBorrow is used to convert raw GdkX11DragContext pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeX11DragContextFromGlibBorrow(c unsafe.Pointer) X11DragContext {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(X11DragContext)
 }
 
 func (x *X11DragContextInstance) upcastToGdkX11DragContext() *X11DragContextInstance {
@@ -1160,6 +1205,11 @@ func UnsafeX11GLContextFromGlibFull(c unsafe.Pointer) X11GLContext {
 	return gobject.UnsafeObjectFromGlibFull(c).(X11GLContext)
 }
 
+// UnsafeX11GLContextFromGlibBorrow is used to convert raw GdkX11GLContext pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeX11GLContextFromGlibBorrow(c unsafe.Pointer) X11GLContext {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(X11GLContext)
+}
+
 func (x *X11GLContextInstance) upcastToGdkX11GLContext() *X11GLContextInstance {
 	return x
 }
@@ -1195,12 +1245,12 @@ type X11Keymap interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Extracts the group from the state field sent in an X Key event.
 	// This is only needed for code processing raw X events, since #GdkEventKey
 	// directly includes an is_modifier field.
-	GetGroupForState(uint) int
+	GetGroupForState(uint) int32
 	// KeyIsModifier wraps gdk_x11_keymap_key_is_modifier
 	// 
 	// The function takes the following parameters:
@@ -1242,6 +1292,11 @@ func UnsafeX11KeymapFromGlibFull(c unsafe.Pointer) X11Keymap {
 	return gobject.UnsafeObjectFromGlibFull(c).(X11Keymap)
 }
 
+// UnsafeX11KeymapFromGlibBorrow is used to convert raw GdkX11Keymap pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeX11KeymapFromGlibBorrow(c unsafe.Pointer) X11Keymap {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(X11Keymap)
+}
+
 func (x *X11KeymapInstance) upcastToGdkX11Keymap() *X11KeymapInstance {
 	return x
 }
@@ -1264,12 +1319,12 @@ func UnsafeX11KeymapToGlibFull(c X11Keymap) unsafe.Pointer {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Extracts the group from the state field sent in an X Key event.
 // This is only needed for code processing raw X events, since #GdkEventKey
 // directly includes an is_modifier field.
-func (keymap *X11KeymapInstance) GetGroupForState(state uint) int {
+func (keymap *X11KeymapInstance) GetGroupForState(state uint) int32 {
 	var carg0 *C.GdkKeymap // in, none, converted, casted *C.GdkX11Keymap
 	var carg1 C.guint      // in, none, casted
 	var cret  C.gint       // return, none, casted
@@ -1281,9 +1336,9 @@ func (keymap *X11KeymapInstance) GetGroupForState(state uint) int {
 	runtime.KeepAlive(keymap)
 	runtime.KeepAlive(state)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -1361,6 +1416,11 @@ func UnsafeX11MonitorFromGlibFull(c unsafe.Pointer) X11Monitor {
 	return gobject.UnsafeObjectFromGlibFull(c).(X11Monitor)
 }
 
+// UnsafeX11MonitorFromGlibBorrow is used to convert raw GdkX11Monitor pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeX11MonitorFromGlibBorrow(c unsafe.Pointer) X11Monitor {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(X11Monitor)
+}
+
 func (x *X11MonitorInstance) upcastToGdkX11Monitor() *X11MonitorInstance {
 	return x
 }
@@ -1414,10 +1474,10 @@ type X11Screen interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Returns the index of a #GdkScreen.
-	GetScreenNumber() int
+	GetScreenNumber() int32
 	// GetWindowManagerName wraps gdk_x11_screen_get_window_manager_name
 	// 
 	// The function returns the following values:
@@ -1450,6 +1510,11 @@ func UnsafeX11ScreenFromGlibNone(c unsafe.Pointer) X11Screen {
 // UnsafeX11ScreenFromGlibFull is used to convert raw GdkX11Screen pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeX11ScreenFromGlibFull(c unsafe.Pointer) X11Screen {
 	return gobject.UnsafeObjectFromGlibFull(c).(X11Screen)
+}
+
+// UnsafeX11ScreenFromGlibBorrow is used to convert raw GdkX11Screen pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeX11ScreenFromGlibBorrow(c unsafe.Pointer) X11Screen {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(X11Screen)
 }
 
 func (x *X11ScreenInstance) upcastToGdkX11Screen() *X11ScreenInstance {
@@ -1522,10 +1587,10 @@ func (screen *X11ScreenInstance) GetNumberOfDesktops() uint32 {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Returns the index of a #GdkScreen.
-func (screen *X11ScreenInstance) GetScreenNumber() int {
+func (screen *X11ScreenInstance) GetScreenNumber() int32 {
 	var carg0 *C.GdkScreen // in, none, converted, casted *C.GdkX11Screen
 	var cret  C.int        // return, none, casted, casted C.gint
 
@@ -1534,9 +1599,9 @@ func (screen *X11ScreenInstance) GetScreenNumber() int {
 	cret = C.gdk_x11_screen_get_screen_number(carg0)
 	runtime.KeepAlive(screen)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -1605,6 +1670,11 @@ func UnsafeX11VisualFromGlibFull(c unsafe.Pointer) X11Visual {
 	return gobject.UnsafeObjectFromGlibFull(c).(X11Visual)
 }
 
+// UnsafeX11VisualFromGlibBorrow is used to convert raw GdkX11Visual pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeX11VisualFromGlibBorrow(c unsafe.Pointer) X11Visual {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(X11Visual)
+}
+
 func (x *X11VisualInstance) upcastToGdkX11Visual() *X11VisualInstance {
 	return x
 }
@@ -1661,16 +1731,16 @@ type X11Window interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- left int: The left extent 
-	// 	- right int: The right extent 
-	// 	- top int: The top extent 
-	// 	- bottom int: The bottom extent 
+	// 	- left int32: The left extent 
+	// 	- right int32: The right extent 
+	// 	- top int32: The top extent 
+	// 	- bottom int32: The bottom extent 
 	//
 	// This is the same as gdk_window_set_shadow_width() but it only works
 	// on GdkX11Window.
 	//
 	// Deprecated: (since 3.12.0) Use gdk_window_set_shadow_width() instead.
-	SetFrameExtents(int, int, int, int)
+	SetFrameExtents(int32, int32, int32, int32)
 	// SetFrameSyncEnabled wraps gdk_x11_window_set_frame_sync_enabled
 	// 
 	// The function takes the following parameters:
@@ -1768,6 +1838,11 @@ func UnsafeX11WindowFromGlibFull(c unsafe.Pointer) X11Window {
 	return gobject.UnsafeObjectFromGlibFull(c).(X11Window)
 }
 
+// UnsafeX11WindowFromGlibBorrow is used to convert raw GdkX11Window pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeX11WindowFromGlibBorrow(c unsafe.Pointer) X11Window {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(X11Window)
+}
+
 func (x *X11WindowInstance) upcastToGdkX11Window() *X11WindowInstance {
 	return x
 }
@@ -1845,16 +1920,16 @@ func (window *X11WindowInstance) MoveToDesktop(desktop uint32) {
 // 
 // The function takes the following parameters:
 // 
-// 	- left int: The left extent 
-// 	- right int: The right extent 
-// 	- top int: The top extent 
-// 	- bottom int: The bottom extent 
+// 	- left int32: The left extent 
+// 	- right int32: The right extent 
+// 	- top int32: The top extent 
+// 	- bottom int32: The bottom extent 
 //
 // This is the same as gdk_window_set_shadow_width() but it only works
 // on GdkX11Window.
 //
 // Deprecated: (since 3.12.0) Use gdk_window_set_shadow_width() instead.
-func (window *X11WindowInstance) SetFrameExtents(left int, right int, top int, bottom int) {
+func (window *X11WindowInstance) SetFrameExtents(left int32, right int32, top int32, bottom int32) {
 	var carg0 *C.GdkWindow // in, none, converted, casted *C.GdkX11Window
 	var carg1 C.int        // in, none, casted, casted C.gint
 	var carg2 C.int        // in, none, casted, casted C.gint

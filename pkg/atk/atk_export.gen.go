@@ -46,7 +46,7 @@ func _gotk4_atk1_KeySnoopFunc(carg1 *C.AtkKeyEventStruct, carg2 C.gpointer) (cre
 	}
 
 	var event *KeyEventStruct // in, none, converted
-	var goret int             // return, none, casted
+	var goret int32           // return, none, casted
 
 	event = UnsafeKeyEventStructFromGlibNone(unsafe.Pointer(carg1))
 

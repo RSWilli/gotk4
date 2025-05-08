@@ -209,9 +209,14 @@ func (g *BitfieldGenerator) Generate(w *file.Package) {
 		// GoValueInitializer assertion:
 		fmt.Fprintf(w.Go(), "var _ %s = %s(0)\n\n", g.Value().WithForeignNamespace("GoValueInitializer"), g.GoType(0))
 
-		fmt.Fprintf(w.Go(), "func (f %s) InitGoValue(v *%s) {\n", g.GoType(0), g.Value().NamespacedGoType(0))
+		fmt.Fprintf(w.Go(), "func (f %s) GoValueType() %s {\n", g.GoType(0), g.Type().NamespacedGoType(0))
 		w.Go().Indent()
-		fmt.Fprintf(w.Go(), "v.Init(%s)\n", g.GoTypeName())
+		fmt.Fprintf(w.Go(), "return %s\n", g.GoTypeName())
+		w.Go().Unindent()
+		fmt.Fprintf(w.Go(), "}\n\n")
+
+		fmt.Fprintf(w.Go(), "func (f %s) SetGoValue(v *%s) {\n", g.GoType(0), g.Value().NamespacedGoType(0))
+		w.Go().Indent()
 		fmt.Fprintf(w.Go(), "v.SetFlags(int(f))\n")
 		w.Go().Unindent()
 		fmt.Fprintf(w.Go(), "}\n\n")

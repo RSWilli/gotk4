@@ -64,12 +64,24 @@ type ObjectOverrider[Instance Object] interface {
 // ObjectOverrides is the struct used to override the default implementation of virtual methods.
 // it is generic over the extending instance type.
 type ObjectOverrides[Instance Object] struct {
+	// A callback function used by the type system to initialize a new instance of a type.
+	// This function initializes all instance members and allocates any resources required by it.
+	// Initialization of a derived instance involves calling all its parent types instance initializers,
+	// so the class member of the instance is altered during its initialization to always point to the class that belongs to the type the current initializer was introduced for.
+	//
+	// The extended members of instance are guaranteed to have been filled with zeros before this function is called.
+	//
+	// Note: In GObject terms this is not a virtual function on GObject, but instead a function pointer in the GTypeInfo struct.
+	// in gotk4 we put it here to be able to supply more type information to the user.
+	InstanceInit func(instance Instance)
+
 	// The constructed function is called by g_object_new() as the final step of the object creation process.
 	// At the point of the call, all construction properties have been set on the object. The purpose of this
 	// call is to allow for object initialisation steps that can only be performed after construction properties
 	// have been set. constructed implementors should chain up to the constructed call of their parent class to
 	// allow it to complete its initialisation.
 	Constructed func(Instance)
+
 	// The dispose function is supposed to drop all references to other objects, but keep the instance otherwise intact,
 	// so that client method invocations still work. It may be run multiple times (due to reference loops). Before returning,
 	// dispose should chain up to the dispose method of the parent class.
@@ -102,7 +114,7 @@ func UnsafeApplyObjectOverrides[Instance Object](gclass unsafe.Pointer, override
 			func(carg0 *C.GObject) {
 				var obj Instance // go GObject subclass
 
-				obj = UnsafeObjectFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				obj = UnsafeObjectFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				overrides.Constructed(obj)
 			},
@@ -117,7 +129,7 @@ func UnsafeApplyObjectOverrides[Instance Object](gclass unsafe.Pointer, override
 			func(carg0 *C.GObject) {
 				var obj Instance // go GObject subclass
 
-				obj = UnsafeObjectFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				obj = UnsafeObjectFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				overrides.Dispose(obj)
 			},
@@ -133,14 +145,14 @@ func UnsafeApplyObjectOverrides[Instance Object](gclass unsafe.Pointer, override
 				var obj Instance // go GObject subclass
 				var param *ParamSpec
 
-				obj = UnsafeObjectFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				obj = UnsafeObjectFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				param = UnsafeParamSpecFromGlibNone(unsafe.Pointer(pspec))
 
 				v := overrides.GetProperty(obj, uint(id), param)
 
 				govalue := ValueFromNative(unsafe.Pointer(value))
 
-				govalue.InitGoValue(v)
+				govalue.SetGoValue(v)
 			},
 		)
 	}
@@ -154,7 +166,7 @@ func UnsafeApplyObjectOverrides[Instance Object](gclass unsafe.Pointer, override
 				var obj Instance // go GObject subclass
 				var param *ParamSpec
 
-				obj = UnsafeObjectFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				obj = UnsafeObjectFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				param = UnsafeParamSpecFromGlibNone(unsafe.Pointer(pspec))
 
 				v := ValueFromNative(unsafe.Pointer(value))
@@ -172,14 +184,16 @@ func UnsafeApplyObjectOverrides[Instance Object](gclass unsafe.Pointer, override
 		func(carg0 *C.GObject) {
 			var obj Instance // go GObject subclass
 
-			obj = UnsafeObjectFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-
-			removeInstanceFromPrivateData(obj)
+			obj = UnsafeObjectFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 			if overrides.Finalize != nil {
-				// call the user's finalize if set
+				// call the user's finalize first if set.
+				// this allows the user to block the finalization of the instance
+				// by blocking this call.
 				overrides.Finalize(obj)
 			}
+
+			removeInstanceFromPrivateData(obj)
 		},
 	)
 }

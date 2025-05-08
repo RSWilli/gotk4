@@ -90,7 +90,7 @@ var (
 	Guint16       = prim("guint16", "guint16", "C.guint16", "uint16")
 	Guint32       = prim("guint32", "guint32", "C.guint32", "uint32")
 	Guint64       = prim("guint64", "guint64", "C.guint64", "uint64")
-	Gint          = prim("gint", "gint", "C.gint", "int")
+	Gint          = prim("gint", "gint", "C.gint", "int32") // C int is 32 bit
 	Gint8         = prim("gint8", "gint8", "C.gint8", "int8")
 	Gint16        = prim("gint16", "gint16", "C.gint16", "int16")
 	Gint32        = prim("gint32", "gint32", "C.gint32", "int32")

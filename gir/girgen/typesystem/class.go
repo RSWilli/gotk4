@@ -127,7 +127,7 @@ func DeclareClass(e *env, v gir.Class) *Class {
 		GoRegisterSubClassName:     fmt.Sprintf("Register%sSubClass", v.Name),
 
 		BaseConversions: BaseConversions{
-			FromGlibBorrowFunction: "", // no borrow function for classes
+			FromGlibBorrowFunction: fmt.Sprintf("Unsafe%sFromGlibBorrow", v.Name), // borrow function is used for subclassing
 			FromGlibNoneFunction:   fmt.Sprintf("Unsafe%sFromGlibNone", v.Name),
 			FromGlibFullFunction:   fmt.Sprintf("Unsafe%sFromGlibFull", v.Name),
 

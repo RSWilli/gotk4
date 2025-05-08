@@ -172,8 +172,11 @@ func marshalBlendMode(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = BlendMode(0)
 
-func (e BlendMode) InitGoValue(v *gobject.Value) {
-	v.Init(TypeBlendMode)
+func (e BlendMode) GoValueType() gobject.Type {
+	return TypeBlendMode
+}
+
+func (e BlendMode) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -229,8 +232,11 @@ func marshalCorner(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = Corner(0)
 
-func (e Corner) InitGoValue(v *gobject.Value) {
-	v.Init(TypeCorner)
+func (e Corner) GoValueType() gobject.Type {
+	return TypeCorner
+}
+
+func (e Corner) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -284,8 +290,11 @@ func marshalFillRule(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = FillRule(0)
 
-func (e FillRule) InitGoValue(v *gobject.Value) {
-	v.Init(TypeFillRule)
+func (e FillRule) GoValueType() gobject.Type {
+	return TypeFillRule
+}
+
+func (e FillRule) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -347,8 +356,11 @@ func marshalGLUniformType(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = GLUniformType(0)
 
-func (e GLUniformType) InitGoValue(v *gobject.Value) {
-	v.Init(TypeGLUniformType)
+func (e GLUniformType) GoValueType() gobject.Type {
+	return TypeGLUniformType
+}
+
+func (e GLUniformType) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -408,8 +420,11 @@ func marshalLineCap(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = LineCap(0)
 
-func (e LineCap) InitGoValue(v *gobject.Value) {
-	v.Init(TypeLineCap)
+func (e LineCap) GoValueType() gobject.Type {
+	return TypeLineCap
+}
+
+func (e LineCap) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -462,8 +477,11 @@ func marshalLineJoin(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = LineJoin(0)
 
-func (e LineJoin) InitGoValue(v *gobject.Value) {
-	v.Init(TypeLineJoin)
+func (e LineJoin) GoValueType() gobject.Type {
+	return TypeLineJoin
+}
+
+func (e LineJoin) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -508,8 +526,11 @@ func marshalMaskMode(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = MaskMode(0)
 
-func (e MaskMode) InitGoValue(v *gobject.Value) {
-	v.Init(TypeMaskMode)
+func (e MaskMode) GoValueType() gobject.Type {
+	return TypeMaskMode
+}
+
+func (e MaskMode) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -567,8 +588,11 @@ func marshalPathDirection(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = PathDirection(0)
 
-func (e PathDirection) InitGoValue(v *gobject.Value) {
-	v.Init(TypePathDirection)
+func (e PathDirection) GoValueType() gobject.Type {
+	return TypePathDirection
+}
+
+func (e PathDirection) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -630,8 +654,11 @@ func marshalPathOperation(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = PathOperation(0)
 
-func (e PathOperation) InitGoValue(v *gobject.Value) {
-	v.Init(TypePathOperation)
+func (e PathOperation) GoValueType() gobject.Type {
+	return TypePathOperation
+}
+
+func (e PathOperation) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -785,8 +812,11 @@ func marshalRenderNodeType(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = RenderNodeType(0)
 
-func (e RenderNodeType) InitGoValue(v *gobject.Value) {
-	v.Init(TypeRenderNodeType)
+func (e RenderNodeType) GoValueType() gobject.Type {
+	return TypeRenderNodeType
+}
+
+func (e RenderNodeType) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -858,8 +888,11 @@ func marshalScalingFilter(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = ScalingFilter(0)
 
-func (e ScalingFilter) InitGoValue(v *gobject.Value) {
-	v.Init(TypeScalingFilter)
+func (e ScalingFilter) GoValueType() gobject.Type {
+	return TypeScalingFilter
+}
+
+func (e ScalingFilter) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -900,8 +933,11 @@ func marshalSerializationError(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = SerializationError(0)
 
-func (e SerializationError) InitGoValue(v *gobject.Value) {
-	v.Init(TypeSerializationError)
+func (e SerializationError) GoValueType() gobject.Type {
+	return TypeSerializationError
+}
+
+func (e SerializationError) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -991,8 +1027,11 @@ func marshalTransformCategory(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = TransformCategory(0)
 
-func (e TransformCategory) InitGoValue(v *gobject.Value) {
-	v.Init(TypeTransformCategory)
+func (e TransformCategory) GoValueType() gobject.Type {
+	return TypeTransformCategory
+}
+
+func (e TransformCategory) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -1049,8 +1088,11 @@ func (p PathForEachFlags) Has(other PathForEachFlags) bool {
 
 var _ gobject.GoValueInitializer = PathForEachFlags(0)
 
-func (f PathForEachFlags) InitGoValue(v *gobject.Value) {
-	v.Init(TypePathForeachFlags)
+func (f PathForEachFlags) GoValueType() gobject.Type {
+	return TypePathForeachFlags
+}
+
+func (f PathForEachFlags) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
@@ -1252,6 +1294,11 @@ func UnsafeGLShaderFromGlibFull(c unsafe.Pointer) GLShader {
 	return gobject.UnsafeObjectFromGlibFull(c).(GLShader)
 }
 
+// UnsafeGLShaderFromGlibBorrow is used to convert raw GskGLShader pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeGLShaderFromGlibBorrow(c unsafe.Pointer) GLShader {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(GLShader)
+}
+
 func (g *GLShaderInstance) upcastToGskGLShader() *GLShaderInstance {
 	return g
 }
@@ -1412,6 +1459,11 @@ func UnsafeRendererFromGlibNone(c unsafe.Pointer) Renderer {
 // UnsafeRendererFromGlibFull is used to convert raw GskRenderer pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeRendererFromGlibFull(c unsafe.Pointer) Renderer {
 	return gobject.UnsafeObjectFromGlibFull(c).(Renderer)
+}
+
+// UnsafeRendererFromGlibBorrow is used to convert raw GskRenderer pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeRendererFromGlibBorrow(c unsafe.Pointer) Renderer {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Renderer)
 }
 
 func (r *RendererInstance) upcastToGskRenderer() *RendererInstance {
@@ -1658,6 +1710,11 @@ func UnsafeVulkanRendererFromGlibFull(c unsafe.Pointer) VulkanRenderer {
 	return gobject.UnsafeObjectFromGlibFull(c).(VulkanRenderer)
 }
 
+// UnsafeVulkanRendererFromGlibBorrow is used to convert raw GskVulkanRenderer pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeVulkanRendererFromGlibBorrow(c unsafe.Pointer) VulkanRenderer {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(VulkanRenderer)
+}
+
 func (v *VulkanRendererInstance) upcastToGskVulkanRenderer() *VulkanRendererInstance {
 	return v
 }
@@ -1736,6 +1793,11 @@ func UnsafeCairoRendererFromGlibNone(c unsafe.Pointer) CairoRenderer {
 // UnsafeCairoRendererFromGlibFull is used to convert raw GskCairoRenderer pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeCairoRendererFromGlibFull(c unsafe.Pointer) CairoRenderer {
 	return gobject.UnsafeObjectFromGlibFull(c).(CairoRenderer)
+}
+
+// UnsafeCairoRendererFromGlibBorrow is used to convert raw GskCairoRenderer pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeCairoRendererFromGlibBorrow(c unsafe.Pointer) CairoRenderer {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(CairoRenderer)
 }
 
 func (c *CairoRendererInstance) upcastToGskCairoRenderer() *CairoRendererInstance {
@@ -1818,6 +1880,11 @@ func UnsafeGLRendererFromGlibFull(c unsafe.Pointer) GLRenderer {
 	return gobject.UnsafeObjectFromGlibFull(c).(GLRenderer)
 }
 
+// UnsafeGLRendererFromGlibBorrow is used to convert raw GskGLRenderer pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeGLRendererFromGlibBorrow(c unsafe.Pointer) GLRenderer {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(GLRenderer)
+}
+
 func (g *GLRendererInstance) upcastToGskGLRenderer() *GLRendererInstance {
 	return g
 }
@@ -1889,6 +1956,11 @@ func UnsafeNglRendererFromGlibNone(c unsafe.Pointer) NglRenderer {
 // UnsafeNglRendererFromGlibFull is used to convert raw NglRenderer pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeNglRendererFromGlibFull(c unsafe.Pointer) NglRenderer {
 	return gobject.UnsafeObjectFromGlibFull(c).(NglRenderer)
+}
+
+// UnsafeNglRendererFromGlibBorrow is used to convert raw NglRenderer pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeNglRendererFromGlibBorrow(c unsafe.Pointer) NglRenderer {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(NglRenderer)
 }
 
 func (n *NglRendererInstance) upcastTo() *NglRendererInstance {
@@ -2201,8 +2273,11 @@ func marshalPath(p unsafe.Pointer) (interface{}, error) {
 	return UnsafePathFromGlibBorrow(b), nil
 }
 
-func (r *Path) InitGoValue(v *gobject.Value) {
-	v.Init(TypePath)
+func (r *Path) GoValueType() gobject.Type {
+	return TypePath
+}
+
+func (r *Path) SetGoValue(v *gobject.Value) {
 	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
@@ -2755,8 +2830,11 @@ func marshalPathBuilder(p unsafe.Pointer) (interface{}, error) {
 	return UnsafePathBuilderFromGlibBorrow(b), nil
 }
 
-func (r *PathBuilder) InitGoValue(v *gobject.Value) {
-	v.Init(TypePathBuilder)
+func (r *PathBuilder) GoValueType() gobject.Type {
+	return TypePathBuilder
+}
+
+func (r *PathBuilder) SetGoValue(v *gobject.Value) {
 	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
@@ -3743,8 +3821,11 @@ func marshalPathMeasure(p unsafe.Pointer) (interface{}, error) {
 	return UnsafePathMeasureFromGlibBorrow(b), nil
 }
 
-func (r *PathMeasure) InitGoValue(v *gobject.Value) {
-	v.Init(TypePathMeasure)
+func (r *PathMeasure) GoValueType() gobject.Type {
+	return TypePathMeasure
+}
+
+func (r *PathMeasure) SetGoValue(v *gobject.Value) {
 	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
@@ -4007,8 +4088,11 @@ func marshalPathPoint(p unsafe.Pointer) (interface{}, error) {
 	return UnsafePathPointFromGlibBorrow(b), nil
 }
 
-func (r *PathPoint) InitGoValue(v *gobject.Value) {
-	v.Init(TypePathPoint)
+func (r *PathPoint) GoValueType() gobject.Type {
+	return TypePathPoint
+}
+
+func (r *PathPoint) SetGoValue(v *gobject.Value) {
 	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
@@ -4071,10 +4155,10 @@ func UnsafePathPointToGlibFull(p *PathPoint) unsafe.Pointer {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Returns whether @point1 is before or after @point2.
-func (point1 *PathPoint) Compare(point2 *PathPoint) int {
+func (point1 *PathPoint) Compare(point2 *PathPoint) int32 {
 	var carg0 *C.GskPathPoint // in, none, converted
 	var carg1 *C.GskPathPoint // in, none, converted
 	var cret  C.int           // return, none, casted, casted C.gint
@@ -4086,9 +4170,9 @@ func (point1 *PathPoint) Compare(point2 *PathPoint) int {
 	runtime.KeepAlive(point1)
 	runtime.KeepAlive(point2)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -4854,8 +4938,11 @@ func marshalShaderArgsBuilder(p unsafe.Pointer) (interface{}, error) {
 	return UnsafeShaderArgsBuilderFromGlibBorrow(b), nil
 }
 
-func (r *ShaderArgsBuilder) InitGoValue(v *gobject.Value) {
-	v.Init(TypeShaderArgsBuilder)
+func (r *ShaderArgsBuilder) GoValueType() gobject.Type {
+	return TypeShaderArgsBuilder
+}
+
+func (r *ShaderArgsBuilder) SetGoValue(v *gobject.Value) {
 	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
@@ -4921,13 +5008,13 @@ func UnsafeShaderArgsBuilderToGlibFull(s *ShaderArgsBuilder) unsafe.Pointer {
 // 
 // The function takes the following parameters:
 // 
-// 	- idx int: index of the uniform 
+// 	- idx int32: index of the uniform 
 // 	- value float32: value to set the uniform to 
 //
 // Sets the value of the uniform @idx.
 // 
 // The uniform must be of float type.
-func (builder *ShaderArgsBuilder) SetFloat(idx int, value float32) {
+func (builder *ShaderArgsBuilder) SetFloat(idx int32, value float32) {
 	var carg0 *C.GskShaderArgsBuilder // in, none, converted
 	var carg1 C.int                   // in, none, casted, casted C.gint
 	var carg2 C.float                 // in, none, casted, casted C.gfloat
@@ -5025,8 +5112,11 @@ func marshalStroke(p unsafe.Pointer) (interface{}, error) {
 	return UnsafeStrokeFromGlibBorrow(b), nil
 }
 
-func (r *Stroke) InitGoValue(v *gobject.Value) {
-	v.Init(TypeStroke)
+func (r *Stroke) GoValueType() gobject.Type {
+	return TypeStroke
+}
+
+func (r *Stroke) SetGoValue(v *gobject.Value) {
 	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
@@ -5104,43 +5194,6 @@ func NewStroke(lineWidth float32) *Stroke {
 	var goret *Stroke
 
 	goret = UnsafeStrokeFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
-}
-
-// StrokeEqual wraps gsk_stroke_equal
-// 
-// The function takes the following parameters:
-// 
-// 	- stroke1 unsafe.Pointer (nullable): the first `GskStroke` 
-// 	- stroke2 unsafe.Pointer (nullable): the second `GskStroke` 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// Checks if 2 strokes are identical.
-func StrokeEqual(stroke1 unsafe.Pointer, stroke2 unsafe.Pointer) bool {
-	var carg1 C.gconstpointer // in, none, casted, nullable
-	var carg2 C.gconstpointer // in, none, casted, nullable
-	var cret  C.gboolean      // return
-
-	if stroke1 != nil {
-		carg1 = C.gconstpointer(stroke1)
-	}
-	if stroke2 != nil {
-		carg2 = C.gconstpointer(stroke2)
-	}
-
-	cret = C.gsk_stroke_equal(carg1, carg2)
-	runtime.KeepAlive(stroke1)
-	runtime.KeepAlive(stroke2)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
 
 	return goret
 }
@@ -5502,8 +5555,11 @@ func marshalTransform(p unsafe.Pointer) (interface{}, error) {
 	return UnsafeTransformFromGlibBorrow(b), nil
 }
 
-func (r *Transform) InitGoValue(v *gobject.Value) {
-	v.Init(TypeTransform)
+func (r *Transform) GoValueType() gobject.Type {
+	return TypeTransform
+}
+
+func (r *Transform) SetGoValue(v *gobject.Value) {
 	v.SetBoxed(unsafe.Pointer(r.native))
 }
 

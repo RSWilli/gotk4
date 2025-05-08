@@ -621,9 +621,14 @@ func (g *RecordGenerator) Generate(w *file.Package) {
 		fmt.Fprintf(w.Go(), "\treturn %s(b), nil\n", g.GoUnsafeFromGlibBorrowFunction())
 		fmt.Fprintf(w.Go(), "}\n\n")
 
-		fmt.Fprintf(w.Go(), "func (r *%s) InitGoValue(v *%s) {\n", g.GoType(0), g.Value().NamespacedGoType(0))
+		fmt.Fprintf(w.Go(), "func (r *%s) GoValueType() %s {\n", g.GoType(0), g.Type().NamespacedGoType(0))
 		w.Go().Indent()
-		fmt.Fprintf(w.Go(), "v.Init(%s)\n", g.GoTypeName())
+		fmt.Fprintf(w.Go(), "return %s\n", g.GoTypeName())
+		w.Go().Unindent()
+		fmt.Fprintf(w.Go(), "}\n\n")
+
+		fmt.Fprintf(w.Go(), "func (r *%s) SetGoValue(v *%s) {\n", g.GoType(0), g.Value().NamespacedGoType(0))
+		w.Go().Indent()
 		fmt.Fprintf(w.Go(), "v.SetBoxed(unsafe.Pointer(r.native))\n")
 		w.Go().Unindent()
 		fmt.Fprintf(w.Go(), "}\n\n")

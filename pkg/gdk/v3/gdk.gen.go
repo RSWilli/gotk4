@@ -4756,7 +4756,7 @@ const MAJOR_VERSION = 3
 // MAX_TIMECOORD_AXES wraps GDK_MAX_TIMECOORD_AXES
 const MAX_TIMECOORD_AXES = 128
 // MICRO_VERSION wraps GDK_MICRO_VERSION
-const MICRO_VERSION = 48
+const MICRO_VERSION = 49
 // MINOR_VERSION wraps GDK_MINOR_VERSION
 const MINOR_VERSION = 24
 // PARENT_RELATIVE wraps GDK_PARENT_RELATIVE
@@ -4834,8 +4834,11 @@ func marshalAxisUse(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = AxisUse(0)
 
-func (e AxisUse) InitGoValue(v *gobject.Value) {
-	v.Init(TypeAxisUse)
+func (e AxisUse) GoValueType() gobject.Type {
+	return TypeAxisUse
+}
+
+func (e AxisUse) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -4883,8 +4886,11 @@ func marshalByteOrder(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = ByteOrder(0)
 
-func (e ByteOrder) InitGoValue(v *gobject.Value) {
-	v.Init(TypeByteOrder)
+func (e ByteOrder) GoValueType() gobject.Type {
+	return TypeByteOrder
+}
+
+func (e ByteOrder) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -4951,8 +4957,11 @@ func marshalCrossingMode(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = CrossingMode(0)
 
-func (e CrossingMode) InitGoValue(v *gobject.Value) {
-	v.Init(TypeCrossingMode)
+func (e CrossingMode) GoValueType() gobject.Type {
+	return TypeCrossingMode
+}
+
+func (e CrossingMode) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -5311,8 +5320,11 @@ func marshalCursorType(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = CursorType(0)
 
-func (e CursorType) InitGoValue(v *gobject.Value) {
-	v.Init(TypeCursorType)
+func (e CursorType) GoValueType() gobject.Type {
+	return TypeCursorType
+}
+
+func (e CursorType) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -5428,8 +5440,11 @@ func marshalDevicePadFeature(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = DevicePadFeature(0)
 
-func (e DevicePadFeature) InitGoValue(v *gobject.Value) {
-	v.Init(TypeDevicePadFeature)
+func (e DevicePadFeature) GoValueType() gobject.Type {
+	return TypeDevicePadFeature
+}
+
+func (e DevicePadFeature) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -5489,8 +5504,11 @@ func marshalDeviceToolType(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = DeviceToolType(0)
 
-func (e DeviceToolType) InitGoValue(v *gobject.Value) {
-	v.Init(TypeDeviceToolType)
+func (e DeviceToolType) GoValueType() gobject.Type {
+	return TypeDeviceToolType
+}
+
+func (e DeviceToolType) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -5537,8 +5555,11 @@ func marshalDeviceType(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = DeviceType(0)
 
-func (e DeviceType) InitGoValue(v *gobject.Value) {
-	v.Init(TypeDeviceType)
+func (e DeviceType) GoValueType() gobject.Type {
+	return TypeDeviceType
+}
+
+func (e DeviceType) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -5577,8 +5598,11 @@ func marshalDragCancelReason(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = DragCancelReason(0)
 
-func (e DragCancelReason) InitGoValue(v *gobject.Value) {
-	v.Init(TypeDragCancelReason)
+func (e DragCancelReason) GoValueType() gobject.Type {
+	return TypeDragCancelReason
+}
+
+func (e DragCancelReason) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -5639,8 +5663,11 @@ func marshalDragProtocol(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = DragProtocol(0)
 
-func (e DragProtocol) InitGoValue(v *gobject.Value) {
-	v.Init(TypeDragProtocol)
+func (e DragProtocol) GoValueType() gobject.Type {
+	return TypeDragProtocol
+}
+
+func (e DragProtocol) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -5913,8 +5940,11 @@ func marshalEventType(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = EventType(0)
 
-func (e EventType) InitGoValue(v *gobject.Value) {
-	v.Init(TypeEventType)
+func (e EventType) GoValueType() gobject.Type {
+	return TypeEventType
+}
+
+func (e EventType) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -6000,8 +6030,11 @@ func marshalFilterReturn(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = FilterReturn(0)
 
-func (e FilterReturn) InitGoValue(v *gobject.Value) {
-	v.Init(TypeFilterReturn)
+func (e FilterReturn) GoValueType() gobject.Type {
+	return TypeFilterReturn
+}
+
+func (e FilterReturn) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -6037,8 +6070,11 @@ func marshalFullscreenMode(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = FullscreenMode(0)
 
-func (e FullscreenMode) InitGoValue(v *gobject.Value) {
-	v.Init(TypeFullscreenMode)
+func (e FullscreenMode) GoValueType() gobject.Type {
+	return TypeFullscreenMode
+}
+
+func (e FullscreenMode) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -6076,8 +6112,11 @@ func marshalGLError(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = GLError(0)
 
-func (e GLError) InitGoValue(v *gobject.Value) {
-	v.Init(TypeGLError)
+func (e GLError) GoValueType() gobject.Type {
+	return TypeGLError
+}
+
+func (e GLError) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -6133,8 +6172,11 @@ func marshalGrabOwnership(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = GrabOwnership(0)
 
-func (e GrabOwnership) InitGoValue(v *gobject.Value) {
-	v.Init(TypeGrabOwnership)
+func (e GrabOwnership) GoValueType() gobject.Type {
+	return TypeGrabOwnership
+}
+
+func (e GrabOwnership) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -6188,8 +6230,11 @@ func marshalGrabStatus(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = GrabStatus(0)
 
-func (e GrabStatus) InitGoValue(v *gobject.Value) {
-	v.Init(TypeGrabStatus)
+func (e GrabStatus) GoValueType() gobject.Type {
+	return TypeGrabStatus
+}
+
+func (e GrabStatus) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -6264,8 +6309,11 @@ func marshalGravity(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = Gravity(0)
 
-func (e Gravity) InitGoValue(v *gobject.Value) {
-	v.Init(TypeGravity)
+func (e Gravity) GoValueType() gobject.Type {
+	return TypeGravity
+}
+
+func (e Gravity) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -6315,8 +6363,11 @@ func marshalInputMode(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = InputMode(0)
 
-func (e InputMode) InitGoValue(v *gobject.Value) {
-	v.Init(TypeInputMode)
+func (e InputMode) GoValueType() gobject.Type {
+	return TypeInputMode
+}
+
+func (e InputMode) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -6386,8 +6437,11 @@ func marshalInputSource(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = InputSource(0)
 
-func (e InputSource) InitGoValue(v *gobject.Value) {
-	v.Init(TypeInputSource)
+func (e InputSource) GoValueType() gobject.Type {
+	return TypeInputSource
+}
+
+func (e InputSource) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -6466,8 +6520,11 @@ func marshalModifierIntent(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = ModifierIntent(0)
 
-func (e ModifierIntent) InitGoValue(v *gobject.Value) {
-	v.Init(TypeModifierIntent)
+func (e ModifierIntent) GoValueType() gobject.Type {
+	return TypeModifierIntent
+}
+
+func (e ModifierIntent) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -6532,8 +6589,11 @@ func marshalNotifyType(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = NotifyType(0)
 
-func (e NotifyType) InitGoValue(v *gobject.Value) {
-	v.Init(TypeNotifyType)
+func (e NotifyType) GoValueType() gobject.Type {
+	return TypeNotifyType
+}
+
+func (e NotifyType) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -6575,8 +6635,11 @@ func marshalOwnerChange(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = OwnerChange(0)
 
-func (e OwnerChange) InitGoValue(v *gobject.Value) {
-	v.Init(TypeOwnerChange)
+func (e OwnerChange) GoValueType() gobject.Type {
+	return TypeOwnerChange
+}
+
+func (e OwnerChange) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -6616,8 +6679,11 @@ func marshalPropMode(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = PropMode(0)
 
-func (e PropMode) InitGoValue(v *gobject.Value) {
-	v.Init(TypePropMode)
+func (e PropMode) GoValueType() gobject.Type {
+	return TypePropMode
+}
+
+func (e PropMode) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -6652,8 +6718,11 @@ func marshalPropertyState(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = PropertyState(0)
 
-func (e PropertyState) InitGoValue(v *gobject.Value) {
-	v.Init(TypePropertyState)
+func (e PropertyState) GoValueType() gobject.Type {
+	return TypePropertyState
+}
+
+func (e PropertyState) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -6700,8 +6769,11 @@ func marshalScrollDirection(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = ScrollDirection(0)
 
-func (e ScrollDirection) InitGoValue(v *gobject.Value) {
-	v.Init(TypeScrollDirection)
+func (e ScrollDirection) GoValueType() gobject.Type {
+	return TypeScrollDirection
+}
+
+func (e ScrollDirection) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -6743,8 +6815,11 @@ func marshalSettingAction(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = SettingAction(0)
 
-func (e SettingAction) InitGoValue(v *gobject.Value) {
-	v.Init(TypeSettingAction)
+func (e SettingAction) GoValueType() gobject.Type {
+	return TypeSettingAction
+}
+
+func (e SettingAction) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -6779,8 +6854,11 @@ func marshalStatus(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = Status(0)
 
-func (e Status) InitGoValue(v *gobject.Value) {
-	v.Init(TypeStatus)
+func (e Status) GoValueType() gobject.Type {
+	return TypeStatus
+}
+
+func (e Status) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -6834,8 +6912,11 @@ func marshalSubpixelLayout(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = SubpixelLayout(0)
 
-func (e SubpixelLayout) InitGoValue(v *gobject.Value) {
-	v.Init(TypeSubpixelLayout)
+func (e SubpixelLayout) GoValueType() gobject.Type {
+	return TypeSubpixelLayout
+}
+
+func (e SubpixelLayout) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -6900,8 +6981,11 @@ func marshalTouchpadGesturePhase(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = TouchpadGesturePhase(0)
 
-func (e TouchpadGesturePhase) InitGoValue(v *gobject.Value) {
-	v.Init(TypeTouchpadGesturePhase)
+func (e TouchpadGesturePhase) GoValueType() gobject.Type {
+	return TypeTouchpadGesturePhase
+}
+
+func (e TouchpadGesturePhase) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -6941,8 +7025,11 @@ func marshalVisibilityState(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = VisibilityState(0)
 
-func (e VisibilityState) InitGoValue(v *gobject.Value) {
-	v.Init(TypeVisibilityState)
+func (e VisibilityState) GoValueType() gobject.Type {
+	return TypeVisibilityState
+}
+
+func (e VisibilityState) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -7006,8 +7093,11 @@ func marshalVisualType(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = VisualType(0)
 
-func (e VisualType) InitGoValue(v *gobject.Value) {
-	v.Init(TypeVisualType)
+func (e VisualType) GoValueType() gobject.Type {
+	return TypeVisualType
+}
+
+func (e VisualType) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -7069,8 +7159,11 @@ func marshalWindowEdge(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = WindowEdge(0)
 
-func (e WindowEdge) InitGoValue(v *gobject.Value) {
-	v.Init(TypeWindowEdge)
+func (e WindowEdge) GoValueType() gobject.Type {
+	return TypeWindowEdge
+}
+
+func (e WindowEdge) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -7135,8 +7228,11 @@ func marshalWindowType(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = WindowType(0)
 
-func (e WindowType) InitGoValue(v *gobject.Value) {
-	v.Init(TypeWindowType)
+func (e WindowType) GoValueType() gobject.Type {
+	return TypeWindowType
+}
+
+func (e WindowType) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -7234,8 +7330,11 @@ func marshalWindowTypeHint(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = WindowTypeHint(0)
 
-func (e WindowTypeHint) InitGoValue(v *gobject.Value) {
-	v.Init(TypeWindowTypeHint)
+func (e WindowTypeHint) GoValueType() gobject.Type {
+	return TypeWindowTypeHint
+}
+
+func (e WindowTypeHint) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -7285,8 +7384,11 @@ func marshalWindowWindowClass(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = WindowWindowClass(0)
 
-func (e WindowWindowClass) InitGoValue(v *gobject.Value) {
-	v.Init(TypeWindowWindowClass)
+func (e WindowWindowClass) GoValueType() gobject.Type {
+	return TypeWindowWindowClass
+}
+
+func (e WindowWindowClass) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -7366,8 +7468,11 @@ func (a AnchorHints) Has(other AnchorHints) bool {
 
 var _ gobject.GoValueInitializer = AnchorHints(0)
 
-func (f AnchorHints) InitGoValue(v *gobject.Value) {
-	v.Init(TypeAnchorHints)
+func (f AnchorHints) GoValueType() gobject.Type {
+	return TypeAnchorHints
+}
+
+func (f AnchorHints) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
@@ -7461,8 +7566,11 @@ func (a AxisFlags) Has(other AxisFlags) bool {
 
 var _ gobject.GoValueInitializer = AxisFlags(0)
 
-func (f AxisFlags) InitGoValue(v *gobject.Value) {
-	v.Init(TypeAxisFlags)
+func (f AxisFlags) GoValueType() gobject.Type {
+	return TypeAxisFlags
+}
+
+func (f AxisFlags) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
@@ -7548,8 +7656,11 @@ func (d DragAction) Has(other DragAction) bool {
 
 var _ gobject.GoValueInitializer = DragAction(0)
 
-func (f DragAction) InitGoValue(v *gobject.Value) {
-	v.Init(TypeDragAction)
+func (f DragAction) GoValueType() gobject.Type {
+	return TypeDragAction
+}
+
+func (f DragAction) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
@@ -7728,8 +7839,11 @@ func (e EventMask) Has(other EventMask) bool {
 
 var _ gobject.GoValueInitializer = EventMask(0)
 
-func (f EventMask) InitGoValue(v *gobject.Value) {
-	v.Init(TypeEventMask)
+func (f EventMask) GoValueType() gobject.Type {
+	return TypeEventMask
+}
+
+func (f EventMask) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
@@ -7872,8 +7986,11 @@ func (f FrameClockPhase) Has(other FrameClockPhase) bool {
 
 var _ gobject.GoValueInitializer = FrameClockPhase(0)
 
-func (f FrameClockPhase) InitGoValue(v *gobject.Value) {
-	v.Init(TypeFrameClockPhase)
+func (f FrameClockPhase) GoValueType() gobject.Type {
+	return TypeFrameClockPhase
+}
+
+func (f FrameClockPhase) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
@@ -8081,8 +8198,11 @@ func (m ModifierType) Has(other ModifierType) bool {
 
 var _ gobject.GoValueInitializer = ModifierType(0)
 
-func (f ModifierType) InitGoValue(v *gobject.Value) {
-	v.Init(TypeModifierType)
+func (f ModifierType) GoValueType() gobject.Type {
+	return TypeModifierType
+}
+
+func (f ModifierType) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
@@ -8237,8 +8357,11 @@ func (s SeatCapabilities) Has(other SeatCapabilities) bool {
 
 var _ gobject.GoValueInitializer = SeatCapabilities(0)
 
-func (f SeatCapabilities) InitGoValue(v *gobject.Value) {
-	v.Init(TypeSeatCapabilities)
+func (f SeatCapabilities) GoValueType() gobject.Type {
+	return TypeSeatCapabilities
+}
+
+func (f SeatCapabilities) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
@@ -8320,8 +8443,11 @@ func (w WMDecoration) Has(other WMDecoration) bool {
 
 var _ gobject.GoValueInitializer = WMDecoration(0)
 
-func (f WMDecoration) InitGoValue(v *gobject.Value) {
-	v.Init(TypeWMDecoration)
+func (f WMDecoration) GoValueType() gobject.Type {
+	return TypeWMDecoration
+}
+
+func (f WMDecoration) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
@@ -8399,8 +8525,11 @@ func (w WMFunction) Has(other WMFunction) bool {
 
 var _ gobject.GoValueInitializer = WMFunction(0)
 
-func (f WMFunction) InitGoValue(v *gobject.Value) {
-	v.Init(TypeWMFunction)
+func (f WMFunction) GoValueType() gobject.Type {
+	return TypeWMFunction
+}
+
+func (f WMFunction) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
@@ -8486,8 +8615,11 @@ func (w WindowAttributesType) Has(other WindowAttributesType) bool {
 
 var _ gobject.GoValueInitializer = WindowAttributesType(0)
 
-func (f WindowAttributesType) InitGoValue(v *gobject.Value) {
-	v.Init(TypeWindowAttributesType)
+func (f WindowAttributesType) GoValueType() gobject.Type {
+	return TypeWindowAttributesType
+}
+
+func (f WindowAttributesType) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
@@ -8587,8 +8719,11 @@ func (w WindowHints) Has(other WindowHints) bool {
 
 var _ gobject.GoValueInitializer = WindowHints(0)
 
-func (f WindowHints) InitGoValue(v *gobject.Value) {
-	v.Init(TypeWindowHints)
+func (f WindowHints) GoValueType() gobject.Type {
+	return TypeWindowHints
+}
+
+func (f WindowHints) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
@@ -8716,8 +8851,11 @@ func (w WindowState) Has(other WindowState) bool {
 
 var _ gobject.GoValueInitializer = WindowState(0)
 
-func (f WindowState) InitGoValue(v *gobject.Value) {
-	v.Init(TypeWindowState)
+func (f WindowState) GoValueType() gobject.Type {
+	return TypeWindowState
+}
+
+func (f WindowState) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
@@ -8940,8 +9078,8 @@ func DragDropSucceeded(_context DragContext) bool {
 // 	- dragWindow Window: a window which may be at the pointer position, but
 //     should be ignored, since it is put up by the drag source as an icon 
 // 	- screen Screen: the screen where the destination window is sought 
-// 	- xRoot int: the x position of the pointer in root coordinates 
-// 	- yRoot int: the y position of the pointer in root coordinates 
+// 	- xRoot int32: the x position of the pointer in root coordinates 
+// 	- yRoot int32: the y position of the pointer in root coordinates 
 // 
 // The function returns the following values:
 // 
@@ -8953,7 +9091,7 @@ func DragDropSucceeded(_context DragContext) bool {
 // 
 // This function is called by the drag source to obtain the
 // @dest_window and @protocol parameters for gdk_drag_motion().
-func DragFindWindowForScreen(_context DragContext, dragWindow Window, screen Screen, xRoot int, yRoot int) (Window, DragProtocol) {
+func DragFindWindowForScreen(_context DragContext, dragWindow Window, screen Screen, xRoot int32, yRoot int32) (Window, DragProtocol) {
 	var carg1 *C.GdkDragContext // in, none, converted
 	var carg2 *C.GdkWindow      // in, none, converted
 	var carg3 *C.GdkScreen      // in, none, converted
@@ -8992,8 +9130,8 @@ func DragFindWindowForScreen(_context DragContext, dragWindow Window, screen Scr
 // 	- destWindow Window: the new destination window, obtained by
 //     gdk_drag_find_window() 
 // 	- protocol DragProtocol: the DND protocol in use, obtained by gdk_drag_find_window() 
-// 	- xRoot int: the x position of the pointer in root coordinates 
-// 	- yRoot int: the y position of the pointer in root coordinates 
+// 	- xRoot int32: the x position of the pointer in root coordinates 
+// 	- yRoot int32: the y position of the pointer in root coordinates 
 // 	- suggestedAction DragAction: the suggested action 
 // 	- possibleActions DragAction: the possible actions 
 // 	- time_ uint32: the timestamp for this operation 
@@ -9009,7 +9147,7 @@ func DragFindWindowForScreen(_context DragContext, dragWindow Window, screen Scr
 // 
 // This function does not need to be called in managed drag and drop
 // operations. See gdk_drag_context_manage_dnd() for more information.
-func DragMotion(_context DragContext, destWindow Window, protocol DragProtocol, xRoot int, yRoot int, suggestedAction DragAction, possibleActions DragAction, time_ uint32) bool {
+func DragMotion(_context DragContext, destWindow Window, protocol DragProtocol, xRoot int32, yRoot int32, suggestedAction DragAction, possibleActions DragAction, time_ uint32) bool {
 	var carg1 *C.GdkDragContext // in, none, converted
 	var carg2 *C.GdkWindow      // in, none, converted
 	var carg3 C.GdkDragProtocol // in, none, casted
@@ -9137,7 +9275,7 @@ func DropReply(_context DragContext, accepted bool, time_ uint32) {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Removes an error trap pushed with gdk_error_trap_push().
 // May block until an error has been definitively received
@@ -9150,14 +9288,14 @@ func DropReply(_context DragContext, accepted bool, time_ uint32) {
 // Prior to GDK 3.0, this function would not automatically
 // sync for you, so you had to gdk_flush() if your last
 // call to Xlib was not a blocking round trip.
-func ErrorTrapPop() int {
+func ErrorTrapPop() int32 {
 	var cret C.gint // return, none, casted
 
 	cret = C.gdk_error_trap_pop()
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -9767,10 +9905,10 @@ func PangoContextGetForScreen(screen Screen) pango.Context {
 // The function takes the following parameters:
 // 
 // 	- window Window: Source window 
-// 	- srcX int: Source X coordinate within @window 
-// 	- srcY int: Source Y coordinate within @window 
-// 	- width int: Width in pixels of region to get 
-// 	- height int: Height in pixels of region to get 
+// 	- srcX int32: Source X coordinate within @window 
+// 	- srcY int32: Source Y coordinate within @window 
+// 	- width int32: Width in pixels of region to get 
+// 	- height int32: Height in pixels of region to get 
 // 
 // The function returns the following values:
 // 
@@ -9807,7 +9945,7 @@ func PangoContextGetForScreen(screen Screen) pango.Context {
 // it returns %NULL; so check the return value.
 // 
 // You should rarely, if ever, need to call this function.
-func PixbufGetFromWindow(window Window, srcX int, srcY int, width int, height int) gdkpixbuf.Pixbuf {
+func PixbufGetFromWindow(window Window, srcX int32, srcY int32, width int32, height int32) gdkpixbuf.Pixbuf {
 	var carg1 *C.GdkWindow // in, none, converted
 	var carg2 C.gint       // in, none, casted
 	var carg3 C.gint       // in, none, casted
@@ -10003,8 +10141,8 @@ func TestRenderSync(window Window) {
 // The function takes the following parameters:
 // 
 // 	- window Window: a #GdkWindow to simulate a button event for 
-// 	- x int: x coordinate within @window for the button event 
-// 	- y int: y coordinate within @window for the button event 
+// 	- x int32: x coordinate within @window for the button event 
+// 	- y int32: y coordinate within @window for the button event 
 // 	- button uint: Number of the pointer button for the event, usually 1, 2 or 3 
 // 	- modifiers ModifierType: Keyboard modifiers the event is setup with 
 // 	- buttonPressrelease EventType: either %GDK_BUTTON_PRESS or %GDK_BUTTON_RELEASE 
@@ -10025,7 +10163,7 @@ func TestRenderSync(window Window) {
 // for most testing purposes, gtk_test_widget_click() is the right
 // function to call which will generate a button press event followed
 // by its accompanying button release event.
-func TestSimulateButton(window Window, x int, y int, button uint, modifiers ModifierType, buttonPressrelease EventType) bool {
+func TestSimulateButton(window Window, x int32, y int32, button uint, modifiers ModifierType, buttonPressrelease EventType) bool {
 	var carg1 *C.GdkWindow      // in, none, converted
 	var carg2 C.gint            // in, none, casted
 	var carg3 C.gint            // in, none, casted
@@ -10063,8 +10201,8 @@ func TestSimulateButton(window Window, x int, y int, button uint, modifiers Modi
 // The function takes the following parameters:
 // 
 // 	- window Window: a #GdkWindow to simulate a key event for 
-// 	- x int: x coordinate within @window for the key event 
-// 	- y int: y coordinate within @window for the key event 
+// 	- x int32: x coordinate within @window for the key event 
+// 	- y int32: y coordinate within @window for the key event 
 // 	- keyval uint: A GDK keyboard value 
 // 	- modifiers ModifierType: Keyboard modifiers the event is setup with 
 // 	- keyPressrelease EventType: either %GDK_KEY_PRESS or %GDK_KEY_RELEASE 
@@ -10089,7 +10227,7 @@ func TestSimulateButton(window Window, x int, y int, button uint, modifiers Modi
 // for most testing purposes, gtk_test_widget_send_key() is the
 // right function to call which will generate a key press event
 // followed by its accompanying key release event.
-func TestSimulateKey(window Window, x int, y int, keyval uint, modifiers ModifierType, keyPressrelease EventType) bool {
+func TestSimulateKey(window Window, x int32, y int32, keyval uint, modifiers ModifierType, keyPressrelease EventType) bool {
 	var carg1 *C.GdkWindow      // in, none, converted
 	var carg2 C.gint            // in, none, casted
 	var carg3 C.gint            // in, none, casted
@@ -10126,7 +10264,7 @@ func TestSimulateKey(window Window, x int, y int, keyval uint, modifiers Modifie
 // 
 // The function takes the following parameters:
 // 
-// 	- priority int: the priority of the idle source. Typically this will be in the
+// 	- priority int32: the priority of the idle source. Typically this will be in the
 //            range between #G_PRIORITY_DEFAULT_IDLE and #G_PRIORITY_HIGH_IDLE 
 // 	- function glib.SourceFunc: function to call 
 // 
@@ -10175,7 +10313,7 @@ func TestSimulateKey(window Window, x int, y int, keyval uint, modifiers Modifie
 //    G_OBJECT_CLASS (parent_class)-&gt;finalize (object);
 // }
 // ]|
-func ThreadsAddIdleFull(priority int, function glib.SourceFunc) uint {
+func ThreadsAddIdleFull(priority int32, function glib.SourceFunc) uint {
 	var carg1 C.gint           // in, none, casted
 	var carg2 C.GSourceFunc    // callback, scope: notified, closure: carg3, destroy: carg4
 	var carg3 C.gpointer       // implicit
@@ -10202,7 +10340,7 @@ func ThreadsAddIdleFull(priority int, function glib.SourceFunc) uint {
 // 
 // The function takes the following parameters:
 // 
-// 	- priority int: the priority of the timeout source. Typically this will be in the
+// 	- priority int32: the priority of the timeout source. Typically this will be in the
 //            range between #G_PRIORITY_DEFAULT_IDLE and #G_PRIORITY_HIGH_IDLE. 
 // 	- interval uint: the time between calls to the function, in milliseconds
 //             (1/1000ths of a second) 
@@ -10255,7 +10393,7 @@ func ThreadsAddIdleFull(priority int, function glib.SourceFunc) uint {
 //    G_OBJECT_CLASS (parent_class)-&gt;finalize (object);
 // }
 // ]|
-func ThreadsAddTimeoutFull(priority int, interval uint, function glib.SourceFunc) uint {
+func ThreadsAddTimeoutFull(priority int32, interval uint, function glib.SourceFunc) uint {
 	var carg1 C.gint           // in, none, casted
 	var carg2 C.guint          // in, none, casted
 	var carg3 C.GSourceFunc    // callback, scope: notified, closure: carg4, destroy: carg5
@@ -10285,7 +10423,7 @@ func ThreadsAddTimeoutFull(priority int, interval uint, function glib.SourceFunc
 // 
 // The function takes the following parameters:
 // 
-// 	- priority int: the priority of the timeout source. Typically this will be in the
+// 	- priority int32: the priority of the timeout source. Typically this will be in the
 //            range between #G_PRIORITY_DEFAULT_IDLE and #G_PRIORITY_HIGH_IDLE. 
 // 	- interval uint: the time between calls to the function, in seconds 
 // 	- function glib.SourceFunc: function to call 
@@ -10297,7 +10435,7 @@ func ThreadsAddTimeoutFull(priority int, interval uint, function glib.SourceFunc
 // A variant of gdk_threads_add_timeout_full() with second-granularity.
 // See g_timeout_add_seconds_full() for a discussion of why it is
 // a good idea to use this function if you don’t need finer granularity.
-func ThreadsAddTimeoutSecondsFull(priority int, interval uint, function glib.SourceFunc) uint {
+func ThreadsAddTimeoutSecondsFull(priority int32, interval uint, function glib.SourceFunc) uint {
 	var carg1 C.gint           // in, none, casted
 	var carg2 C.guint          // in, none, casted
 	var carg3 C.GSourceFunc    // callback, scope: notified, closure: carg4, destroy: carg5
@@ -10419,27 +10557,27 @@ type DevicePad interface {
 	// The function takes the following parameters:
 	// 
 	// 	- feature DevicePadFeature: the feature type to get the group from 
-	// 	- featureIdx int: the index of the feature to get the group from 
+	// 	- featureIdx int32: the index of the feature to get the group from 
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Returns the group the given @feature and @idx belong to,
 	// or -1 if feature/index do not exist in @pad.
-	GetFeatureGroup(DevicePadFeature, int) int
+	GetFeatureGroup(DevicePadFeature, int32) int32
 	// GetGroupNModes wraps gdk_device_pad_get_group_n_modes
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- groupIdx int: group to get the number of available modes from 
+	// 	- groupIdx int32: group to get the number of available modes from 
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Returns the number of modes that @group may have.
-	GetGroupNModes(int) int
+	GetGroupNModes(int32) int32
 	// GetNFeatures wraps gdk_device_pad_get_n_features
 	// 
 	// The function takes the following parameters:
@@ -10448,21 +10586,21 @@ type DevicePad interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Returns the number of features a tablet pad has.
-	GetNFeatures(DevicePadFeature) int
+	GetNFeatures(DevicePadFeature) int32
 	// GetNGroups wraps gdk_device_pad_get_n_groups
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Returns the number of groups this pad device has. Pads have
 	// at least one group. A pad group is a subcollection of
 	// buttons/strip/rings that is affected collectively by a same
 	// current mode.
-	GetNGroups() int
+	GetNGroups() int32
 }
 
 var _ DevicePad = (*DevicePadInstance)(nil)
@@ -10491,6 +10629,11 @@ func UnsafeDevicePadFromGlibFull(c unsafe.Pointer) DevicePad {
 	return gobject.UnsafeObjectFromGlibFull(c).(DevicePad)
 }
 
+// UnsafeDevicePadFromGlibBorrow is used to convert raw GdkDevicePad pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeDevicePadFromGlibBorrow(c unsafe.Pointer) DevicePad {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(DevicePad)
+}
+
 // UnsafeDevicePadToGlibNone is used to convert the instance to it's C value GdkDevicePad. This is used by the bindings internally.
 func UnsafeDevicePadToGlibNone(c DevicePad) unsafe.Pointer {
 	i := c.upcastToGdkDevicePad()
@@ -10508,15 +10651,15 @@ func UnsafeDevicePadToGlibFull(c DevicePad) unsafe.Pointer {
 // The function takes the following parameters:
 // 
 // 	- feature DevicePadFeature: the feature type to get the group from 
-// 	- featureIdx int: the index of the feature to get the group from 
+// 	- featureIdx int32: the index of the feature to get the group from 
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Returns the group the given @feature and @idx belong to,
 // or -1 if feature/index do not exist in @pad.
-func (pad *DevicePadInstance) GetFeatureGroup(feature DevicePadFeature, featureIdx int) int {
+func (pad *DevicePadInstance) GetFeatureGroup(feature DevicePadFeature, featureIdx int32) int32 {
 	var carg0 *C.GdkDevicePad       // in, none, converted
 	var carg1 C.GdkDevicePadFeature // in, none, casted
 	var carg2 C.gint                // in, none, casted
@@ -10531,9 +10674,9 @@ func (pad *DevicePadInstance) GetFeatureGroup(feature DevicePadFeature, featureI
 	runtime.KeepAlive(feature)
 	runtime.KeepAlive(featureIdx)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -10542,14 +10685,14 @@ func (pad *DevicePadInstance) GetFeatureGroup(feature DevicePadFeature, featureI
 // 
 // The function takes the following parameters:
 // 
-// 	- groupIdx int: group to get the number of available modes from 
+// 	- groupIdx int32: group to get the number of available modes from 
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Returns the number of modes that @group may have.
-func (pad *DevicePadInstance) GetGroupNModes(groupIdx int) int {
+func (pad *DevicePadInstance) GetGroupNModes(groupIdx int32) int32 {
 	var carg0 *C.GdkDevicePad // in, none, converted
 	var carg1 C.gint          // in, none, casted
 	var cret  C.gint          // return, none, casted
@@ -10561,9 +10704,9 @@ func (pad *DevicePadInstance) GetGroupNModes(groupIdx int) int {
 	runtime.KeepAlive(pad)
 	runtime.KeepAlive(groupIdx)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -10576,10 +10719,10 @@ func (pad *DevicePadInstance) GetGroupNModes(groupIdx int) int {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Returns the number of features a tablet pad has.
-func (pad *DevicePadInstance) GetNFeatures(feature DevicePadFeature) int {
+func (pad *DevicePadInstance) GetNFeatures(feature DevicePadFeature) int32 {
 	var carg0 *C.GdkDevicePad       // in, none, converted
 	var carg1 C.GdkDevicePadFeature // in, none, casted
 	var cret  C.gint                // return, none, casted
@@ -10591,9 +10734,9 @@ func (pad *DevicePadInstance) GetNFeatures(feature DevicePadFeature) int {
 	runtime.KeepAlive(pad)
 	runtime.KeepAlive(feature)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -10602,13 +10745,13 @@ func (pad *DevicePadInstance) GetNFeatures(feature DevicePadFeature) int {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Returns the number of groups this pad device has. Pads have
 // at least one group. A pad group is a subcollection of
 // buttons/strip/rings that is affected collectively by a same
 // current mode.
-func (pad *DevicePadInstance) GetNGroups() int {
+func (pad *DevicePadInstance) GetNGroups() int32 {
 	var carg0 *C.GdkDevicePad // in, none, converted
 	var cret  C.gint          // return, none, casted
 
@@ -10617,9 +10760,9 @@ func (pad *DevicePadInstance) GetNGroups() int {
 	cret = C.gdk_device_pad_get_n_groups(carg0)
 	runtime.KeepAlive(pad)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -10672,7 +10815,7 @@ type AppLaunchContext interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- desktop int: the number of a workspace, or -1 
+	// 	- desktop int32: the number of a workspace, or -1 
 	//
 	// Sets the workspace on which applications will be launched when
 	// using this context when running under a window manager that
@@ -10682,7 +10825,7 @@ type AppLaunchContext interface {
 	// When the workspace is not specified or @desktop is set to -1,
 	// it is up to the window manager to pick one, typically it will
 	// be the current workspace.
-	SetDesktop(int)
+	SetDesktop(int32)
 	// SetIcon wraps gdk_app_launch_context_set_icon
 	// 
 	// The function takes the following parameters:
@@ -10766,6 +10909,11 @@ func UnsafeAppLaunchContextFromGlibFull(c unsafe.Pointer) AppLaunchContext {
 	return gobject.UnsafeObjectFromGlibFull(c).(AppLaunchContext)
 }
 
+// UnsafeAppLaunchContextFromGlibBorrow is used to convert raw GdkAppLaunchContext pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeAppLaunchContextFromGlibBorrow(c unsafe.Pointer) AppLaunchContext {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(AppLaunchContext)
+}
+
 func (a *AppLaunchContextInstance) upcastToGdkAppLaunchContext() *AppLaunchContextInstance {
 	return a
 }
@@ -10784,7 +10932,7 @@ func UnsafeAppLaunchContextToGlibFull(c AppLaunchContext) unsafe.Pointer {
 // 
 // The function takes the following parameters:
 // 
-// 	- desktop int: the number of a workspace, or -1 
+// 	- desktop int32: the number of a workspace, or -1 
 //
 // Sets the workspace on which applications will be launched when
 // using this context when running under a window manager that
@@ -10794,7 +10942,7 @@ func UnsafeAppLaunchContextToGlibFull(c AppLaunchContext) unsafe.Pointer {
 // When the workspace is not specified or @desktop is set to -1,
 // it is up to the window manager to pick one, typically it will
 // be the current workspace.
-func (_context *AppLaunchContextInstance) SetDesktop(desktop int) {
+func (_context *AppLaunchContextInstance) SetDesktop(desktop int32) {
 	var carg0 *C.GdkAppLaunchContext // in, none, converted
 	var carg1 C.gint                 // in, none, casted
 
@@ -10979,6 +11127,11 @@ func UnsafeCursorFromGlibFull(c unsafe.Pointer) Cursor {
 	return gobject.UnsafeObjectFromGlibFull(c).(Cursor)
 }
 
+// UnsafeCursorFromGlibBorrow is used to convert raw GdkCursor pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeCursorFromGlibBorrow(c unsafe.Pointer) Cursor {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Cursor)
+}
+
 func (c *CursorInstance) upcastToGdkCursor() *CursorInstance {
 	return c
 }
@@ -11077,6 +11230,11 @@ func NewCursorForDisplay(display Display, cursorType CursorType) Cursor {
 // - ![](nwse_resize_cursor.png) "nwse-resize"
 // - ![](zoom_in_cursor.png) "zoom-in"
 // - ![](zoom_out_cursor.png) "zoom-out"
+// 
+// Additionally, the following cursor names are supported, which are
+// not in the CSS specification:
+// - ![](dnd_ask_cursor.png) "dnd-ask"
+// - ![](all_resize_cursor.png) "all-resize"
 func NewCursorFromName(display Display, name string) Cursor {
 	var carg1 *C.GdkDisplay // in, none, converted
 	var carg2 *C.gchar      // in, none, string
@@ -11105,8 +11263,8 @@ func NewCursorFromName(display Display, name string) Cursor {
 // 
 // 	- display Display: the #GdkDisplay for which the cursor will be created 
 // 	- pixbuf gdkpixbuf.Pixbuf: the #GdkPixbuf containing the cursor image 
-// 	- x int: the horizontal offset of the “hotspot” of the cursor. 
-// 	- y int: the vertical offset of the “hotspot” of the cursor. 
+// 	- x int32: the horizontal offset of the “hotspot” of the cursor. 
+// 	- y int32: the vertical offset of the “hotspot” of the cursor. 
 // 
 // The function returns the following values:
 // 
@@ -11130,7 +11288,7 @@ func NewCursorFromName(display Display, name string) Cursor {
 // 
 // On the X backend, support for RGBA cursors requires a
 // sufficently new version of the X Render extension.
-func NewCursorFromPixbuf(display Display, pixbuf gdkpixbuf.Pixbuf, x int, y int) Cursor {
+func NewCursorFromPixbuf(display Display, pixbuf gdkpixbuf.Pixbuf, x int32, y int32) Cursor {
 	var carg1 *C.GdkDisplay // in, none, converted
 	var carg2 *C.GdkPixbuf  // in, none, converted
 	var carg3 C.gint        // in, none, casted
@@ -11350,18 +11508,18 @@ type Device interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Returns the number of axes the device currently has.
-	GetNAxes() int
+	GetNAxes() int32
 	// GetNKeys wraps gdk_device_get_n_keys
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Returns the number of keys the device currently has.
-	GetNKeys() int
+	GetNKeys() int32
 	// GetName wraps gdk_device_get_name
 	// 
 	// The function returns the following values:
@@ -11376,14 +11534,14 @@ type Device interface {
 	// 
 	// 	- screen Screen: location to store the #GdkScreen
 	//          the @device is on, or %NULL. 
-	// 	- x int: location to store root window X coordinate of @device, or %NULL. 
-	// 	- y int: location to store root window Y coordinate of @device, or %NULL. 
+	// 	- x int32: location to store root window X coordinate of @device, or %NULL. 
+	// 	- y int32: location to store root window Y coordinate of @device, or %NULL. 
 	//
 	// Gets the current location of @device. As a slave device
 	// coordinates are those of its master pointer, This function
 	// may not be called on devices of type %GDK_DEVICE_TYPE_SLAVE,
 	// unless there is an ongoing grab on them, see gdk_device_grab().
-	GetPosition() (Screen, int, int)
+	GetPosition() (Screen, int32, int32)
 	// GetPositionDouble wraps gdk_device_get_position_double
 	// 
 	// The function returns the following values:
@@ -11461,9 +11619,9 @@ type Device interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- winX int: return location for the X coordinate of the device location,
+	// 	- winX int32: return location for the X coordinate of the device location,
 	//         relative to the window origin, or %NULL. 
-	// 	- winY int: return location for the Y coordinate of the device location,
+	// 	- winY int32: return location for the Y coordinate of the device location,
 	//         relative to the window origin, or %NULL. 
 	// 	- goret Window (nullable) 
 	//
@@ -11473,7 +11631,7 @@ type Device interface {
 	// As a slave device coordinates are those of its master pointer, This
 	// function may not be called on devices of type %GDK_DEVICE_TYPE_SLAVE,
 	// unless there is an ongoing grab on them, see gdk_device_grab().
-	GetWindowAtPosition() (int, int, Window)
+	GetWindowAtPosition() (int32, int32, Window)
 	// GetWindowAtPositionDouble wraps gdk_device_get_window_at_position_double
 	// 
 	// The function returns the following values:
@@ -11554,8 +11712,8 @@ type Device interface {
 	// The function takes the following parameters:
 	// 
 	// 	- screen Screen: the screen to warp @device to. 
-	// 	- x int: the X coordinate of the destination. 
-	// 	- y int: the Y coordinate of the destination. 
+	// 	- x int32: the X coordinate of the destination. 
+	// 	- y int32: the Y coordinate of the destination. 
 	//
 	// Warps @device in @display to the point @x,@y on
 	// the screen @screen, unless the device is confined
@@ -11568,7 +11726,7 @@ type Device interface {
 	// control of the user. This function was added to cover
 	// some rare use cases like keyboard navigation support
 	// for the color picker in the #GtkColorSelectionDialog.
-	Warp(Screen, int, int)
+	Warp(Screen, int32, int32)
 	// ConnectChanged connects the provided callback to the "changed" signal
 	//
 	// The ::changed signal is emitted either when the #GdkDevice
@@ -11604,6 +11762,11 @@ func UnsafeDeviceFromGlibNone(c unsafe.Pointer) Device {
 // UnsafeDeviceFromGlibFull is used to convert raw GdkDevice pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeDeviceFromGlibFull(c unsafe.Pointer) Device {
 	return gobject.UnsafeObjectFromGlibFull(c).(Device)
+}
+
+// UnsafeDeviceFromGlibBorrow is used to convert raw GdkDevice pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeDeviceFromGlibBorrow(c unsafe.Pointer) Device {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Device)
 }
 
 func (d *DeviceInstance) upcastToGdkDevice() *DeviceInstance {
@@ -11875,10 +12038,10 @@ func (device *DeviceInstance) GetMode() InputMode {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Returns the number of axes the device currently has.
-func (device *DeviceInstance) GetNAxes() int {
+func (device *DeviceInstance) GetNAxes() int32 {
 	var carg0 *C.GdkDevice // in, none, converted
 	var cret  C.gint       // return, none, casted
 
@@ -11887,9 +12050,9 @@ func (device *DeviceInstance) GetNAxes() int {
 	cret = C.gdk_device_get_n_axes(carg0)
 	runtime.KeepAlive(device)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -11898,10 +12061,10 @@ func (device *DeviceInstance) GetNAxes() int {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Returns the number of keys the device currently has.
-func (device *DeviceInstance) GetNKeys() int {
+func (device *DeviceInstance) GetNKeys() int32 {
 	var carg0 *C.GdkDevice // in, none, converted
 	var cret  C.gint       // return, none, casted
 
@@ -11910,9 +12073,9 @@ func (device *DeviceInstance) GetNKeys() int {
 	cret = C.gdk_device_get_n_keys(carg0)
 	runtime.KeepAlive(device)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -11946,14 +12109,14 @@ func (device *DeviceInstance) GetName() string {
 // 
 // 	- screen Screen: location to store the #GdkScreen
 //          the @device is on, or %NULL. 
-// 	- x int: location to store root window X coordinate of @device, or %NULL. 
-// 	- y int: location to store root window Y coordinate of @device, or %NULL. 
+// 	- x int32: location to store root window X coordinate of @device, or %NULL. 
+// 	- y int32: location to store root window Y coordinate of @device, or %NULL. 
 //
 // Gets the current location of @device. As a slave device
 // coordinates are those of its master pointer, This function
 // may not be called on devices of type %GDK_DEVICE_TYPE_SLAVE,
 // unless there is an ongoing grab on them, see gdk_device_grab().
-func (device *DeviceInstance) GetPosition() (Screen, int, int) {
+func (device *DeviceInstance) GetPosition() (Screen, int32, int32) {
 	var carg0 *C.GdkDevice // in, none, converted
 	var carg1 *C.GdkScreen // out, none, converted
 	var carg2 C.gint       // out, full, casted
@@ -11965,12 +12128,12 @@ func (device *DeviceInstance) GetPosition() (Screen, int, int) {
 	runtime.KeepAlive(device)
 
 	var screen Screen
-	var x      int
-	var y      int
+	var x      int32
+	var y      int32
 
 	screen = UnsafeScreenFromGlibNone(unsafe.Pointer(carg1))
-	x = int(carg2)
-	y = int(carg3)
+	x = int32(carg2)
+	y = int32(carg3)
 
 	return screen, x, y
 }
@@ -12137,9 +12300,9 @@ func (device *DeviceInstance) GetVendorID() string {
 // 
 // The function returns the following values:
 // 
-// 	- winX int: return location for the X coordinate of the device location,
+// 	- winX int32: return location for the X coordinate of the device location,
 //         relative to the window origin, or %NULL. 
-// 	- winY int: return location for the Y coordinate of the device location,
+// 	- winY int32: return location for the Y coordinate of the device location,
 //         relative to the window origin, or %NULL. 
 // 	- goret Window (nullable) 
 //
@@ -12149,7 +12312,7 @@ func (device *DeviceInstance) GetVendorID() string {
 // As a slave device coordinates are those of its master pointer, This
 // function may not be called on devices of type %GDK_DEVICE_TYPE_SLAVE,
 // unless there is an ongoing grab on them, see gdk_device_grab().
-func (device *DeviceInstance) GetWindowAtPosition() (int, int, Window) {
+func (device *DeviceInstance) GetWindowAtPosition() (int32, int32, Window) {
 	var carg0 *C.GdkDevice // in, none, converted
 	var carg1 C.gint       // out, full, casted
 	var carg2 C.gint       // out, full, casted
@@ -12160,12 +12323,12 @@ func (device *DeviceInstance) GetWindowAtPosition() (int, int, Window) {
 	cret = C.gdk_device_get_window_at_position(carg0, &carg1, &carg2)
 	runtime.KeepAlive(device)
 
-	var winX  int
-	var winY  int
+	var winX  int32
+	var winY  int32
 	var goret Window
 
-	winX = int(carg1)
-	winY = int(carg2)
+	winX = int32(carg1)
+	winY = int32(carg2)
 	if cret != nil {
 		goret = UnsafeWindowFromGlibNone(unsafe.Pointer(cret))
 	}
@@ -12371,8 +12534,8 @@ func (device *DeviceInstance) SetMode(mode InputMode) bool {
 // The function takes the following parameters:
 // 
 // 	- screen Screen: the screen to warp @device to. 
-// 	- x int: the X coordinate of the destination. 
-// 	- y int: the Y coordinate of the destination. 
+// 	- x int32: the X coordinate of the destination. 
+// 	- y int32: the Y coordinate of the destination. 
 //
 // Warps @device in @display to the point @x,@y on
 // the screen @screen, unless the device is confined
@@ -12385,7 +12548,7 @@ func (device *DeviceInstance) SetMode(mode InputMode) bool {
 // control of the user. This function was added to cover
 // some rare use cases like keyboard navigation support
 // for the color picker in the #GtkColorSelectionDialog.
-func (device *DeviceInstance) Warp(screen Screen, x int, y int) {
+func (device *DeviceInstance) Warp(screen Screen, x int32, y int32) {
 	var carg0 *C.GdkDevice // in, none, converted
 	var carg1 *C.GdkScreen // in, none, converted
 	var carg2 C.gint       // in, none, casted
@@ -12607,6 +12770,11 @@ func UnsafeDeviceManagerFromGlibFull(c unsafe.Pointer) DeviceManager {
 	return gobject.UnsafeObjectFromGlibFull(c).(DeviceManager)
 }
 
+// UnsafeDeviceManagerFromGlibBorrow is used to convert raw GdkDeviceManager pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeDeviceManagerFromGlibBorrow(c unsafe.Pointer) DeviceManager {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(DeviceManager)
+}
+
 func (d *DeviceManagerInstance) upcastToGdkDeviceManager() *DeviceManagerInstance {
 	return d
 }
@@ -12746,6 +12914,11 @@ func UnsafeDeviceToolFromGlibNone(c unsafe.Pointer) DeviceTool {
 // UnsafeDeviceToolFromGlibFull is used to convert raw GdkDeviceTool pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeDeviceToolFromGlibFull(c unsafe.Pointer) DeviceTool {
 	return gobject.UnsafeObjectFromGlibFull(c).(DeviceTool)
+}
+
+// UnsafeDeviceToolFromGlibBorrow is used to convert raw GdkDeviceTool pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeDeviceToolFromGlibBorrow(c unsafe.Pointer) DeviceTool {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(DeviceTool)
 }
 
 func (d *DeviceToolInstance) upcastToGdkDeviceTool() *DeviceToolInstance {
@@ -12961,20 +13134,20 @@ type Display interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- monitorNum int: number of the monitor 
+	// 	- monitorNum int32: number of the monitor 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Monitor (nullable) 
 	//
 	// Gets a monitor associated with this display.
-	GetMonitor(int) Monitor
+	GetMonitor(int32) Monitor
 	// GetMonitorAtPoint wraps gdk_display_get_monitor_at_point
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- x int: the x coordinate of the point 
-	// 	- y int: the y coordinate of the point 
+	// 	- x int32: the x coordinate of the point 
+	// 	- y int32: the y coordinate of the point 
 	// 
 	// The function returns the following values:
 	// 
@@ -12982,7 +13155,7 @@ type Display interface {
 	//
 	// Gets the monitor in which the point (@x, @y) is located,
 	// or a nearby monitor if the point is not in any monitor.
-	GetMonitorAtPoint(int, int) Monitor
+	GetMonitorAtPoint(int32, int32) Monitor
 	// GetMonitorAtWindow wraps gdk_display_get_monitor_at_window
 	// 
 	// The function takes the following parameters:
@@ -13001,13 +13174,13 @@ type Display interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Gets the number of monitors that belong to @display.
 	// 
 	// The returned number is valid until the next emission of the
 	// #GdkDisplay::monitor-added or #GdkDisplay::monitor-removed signal.
-	GetNMonitors() int
+	GetNMonitors() int32
 	// GetName wraps gdk_display_get_name
 	// 
 	// The function returns the following values:
@@ -13212,6 +13385,11 @@ func UnsafeDisplayFromGlibNone(c unsafe.Pointer) Display {
 // UnsafeDisplayFromGlibFull is used to convert raw GdkDisplay pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeDisplayFromGlibFull(c unsafe.Pointer) Display {
 	return gobject.UnsafeObjectFromGlibFull(c).(Display)
+}
+
+// UnsafeDisplayFromGlibBorrow is used to convert raw GdkDisplay pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeDisplayFromGlibBorrow(c unsafe.Pointer) Display {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Display)
 }
 
 func (d *DisplayInstance) upcastToGdkDisplay() *DisplayInstance {
@@ -13507,14 +13685,14 @@ func (display *DisplayInstance) GetMaximalCursorSize() (uint, uint) {
 // 
 // The function takes the following parameters:
 // 
-// 	- monitorNum int: number of the monitor 
+// 	- monitorNum int32: number of the monitor 
 // 
 // The function returns the following values:
 // 
 // 	- goret Monitor (nullable) 
 //
 // Gets a monitor associated with this display.
-func (display *DisplayInstance) GetMonitor(monitorNum int) Monitor {
+func (display *DisplayInstance) GetMonitor(monitorNum int32) Monitor {
 	var carg0 *C.GdkDisplay // in, none, converted
 	var carg1 C.int         // in, none, casted, casted C.gint
 	var cret  *C.GdkMonitor // return, none, converted, nullable
@@ -13539,8 +13717,8 @@ func (display *DisplayInstance) GetMonitor(monitorNum int) Monitor {
 // 
 // The function takes the following parameters:
 // 
-// 	- x int: the x coordinate of the point 
-// 	- y int: the y coordinate of the point 
+// 	- x int32: the x coordinate of the point 
+// 	- y int32: the y coordinate of the point 
 // 
 // The function returns the following values:
 // 
@@ -13548,7 +13726,7 @@ func (display *DisplayInstance) GetMonitor(monitorNum int) Monitor {
 //
 // Gets the monitor in which the point (@x, @y) is located,
 // or a nearby monitor if the point is not in any monitor.
-func (display *DisplayInstance) GetMonitorAtPoint(x int, y int) Monitor {
+func (display *DisplayInstance) GetMonitorAtPoint(x int32, y int32) Monitor {
 	var carg0 *C.GdkDisplay // in, none, converted
 	var carg1 C.int         // in, none, casted, casted C.gint
 	var carg2 C.int         // in, none, casted, casted C.gint
@@ -13606,13 +13784,13 @@ func (display *DisplayInstance) GetMonitorAtWindow(window Window) Monitor {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Gets the number of monitors that belong to @display.
 // 
 // The returned number is valid until the next emission of the
 // #GdkDisplay::monitor-added or #GdkDisplay::monitor-removed signal.
-func (display *DisplayInstance) GetNMonitors() int {
+func (display *DisplayInstance) GetNMonitors() int32 {
 	var carg0 *C.GdkDisplay // in, none, converted
 	var cret  C.int         // return, none, casted, casted C.gint
 
@@ -13621,9 +13799,9 @@ func (display *DisplayInstance) GetNMonitors() int {
 	cret = C.gdk_display_get_n_monitors(carg0)
 	runtime.KeepAlive(display)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -14177,6 +14355,11 @@ func UnsafeDisplayManagerFromGlibFull(c unsafe.Pointer) DisplayManager {
 	return gobject.UnsafeObjectFromGlibFull(c).(DisplayManager)
 }
 
+// UnsafeDisplayManagerFromGlibBorrow is used to convert raw GdkDisplayManager pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeDisplayManagerFromGlibBorrow(c unsafe.Pointer) DisplayManager {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(DisplayManager)
+}
+
 func (d *DisplayManagerInstance) upcastToGdkDisplayManager() *DisplayManagerInstance {
 	return d
 }
@@ -14462,13 +14645,13 @@ type DragContext interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- hotX int: x coordinate of the drag window hotspot 
-	// 	- hotY int: y coordinate of the drag window hotspot 
+	// 	- hotX int32: x coordinate of the drag window hotspot 
+	// 	- hotY int32: y coordinate of the drag window hotspot 
 	//
 	// Sets the position of the drag window that will be kept
 	// under the cursor hotspot. Initially, the hotspot is at the
 	// top left corner of the drag window.
-	SetHotspot(int, int)
+	SetHotspot(int32, int32)
 	// ConnectActionChanged connects the provided callback to the "action-changed" signal
 	//
 	// A new action is being chosen for the drag and drop operation.
@@ -14502,7 +14685,7 @@ type DragContext interface {
 	// This signal will only be emitted if the #GdkDragContext manages
 	// the drag and drop operation. See gdk_drag_context_manage_dnd()
 	// for more information.
-	ConnectDropPerformed(func(DragContext, int)) gobject.SignalHandle
+	ConnectDropPerformed(func(DragContext, int32)) gobject.SignalHandle
 }
 
 func unsafeWrapDragContext(base *gobject.ObjectInstance) *DragContextInstance {
@@ -14523,6 +14706,11 @@ func UnsafeDragContextFromGlibNone(c unsafe.Pointer) DragContext {
 // UnsafeDragContextFromGlibFull is used to convert raw GdkDragContext pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeDragContextFromGlibFull(c unsafe.Pointer) DragContext {
 	return gobject.UnsafeObjectFromGlibFull(c).(DragContext)
+}
+
+// UnsafeDragContextFromGlibBorrow is used to convert raw GdkDragContext pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeDragContextFromGlibBorrow(c unsafe.Pointer) DragContext {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(DragContext)
 }
 
 func (d *DragContextInstance) upcastToGdkDragContext() *DragContextInstance {
@@ -14836,13 +15024,13 @@ func (_context *DragContextInstance) SetDevice(device Device) {
 // 
 // The function takes the following parameters:
 // 
-// 	- hotX int: x coordinate of the drag window hotspot 
-// 	- hotY int: y coordinate of the drag window hotspot 
+// 	- hotX int32: x coordinate of the drag window hotspot 
+// 	- hotY int32: y coordinate of the drag window hotspot 
 //
 // Sets the position of the drag window that will be kept
 // under the cursor hotspot. Initially, the hotspot is at the
 // top left corner of the drag window.
-func (_context *DragContextInstance) SetHotspot(hotX int, hotY int) {
+func (_context *DragContextInstance) SetHotspot(hotX int32, hotY int32) {
 	var carg0 *C.GdkDragContext // in, none, converted
 	var carg1 C.gint            // in, none, casted
 	var carg2 C.gint            // in, none, casted
@@ -14899,7 +15087,7 @@ func (o *DragContextInstance) ConnectDNDFinished(fn func(DragContext)) gobject.S
 // This signal will only be emitted if the #GdkDragContext manages
 // the drag and drop operation. See gdk_drag_context_manage_dnd()
 // for more information.
-func (o *DragContextInstance) ConnectDropPerformed(fn func(DragContext, int)) gobject.SignalHandle {
+func (o *DragContextInstance) ConnectDropPerformed(fn func(DragContext, int32)) gobject.SignalHandle {
 	return o.Connect("drop-performed", fn)
 }
 
@@ -14963,6 +15151,11 @@ func UnsafeDrawingContextFromGlibNone(c unsafe.Pointer) DrawingContext {
 // UnsafeDrawingContextFromGlibFull is used to convert raw GdkDrawingContext pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeDrawingContextFromGlibFull(c unsafe.Pointer) DrawingContext {
 	return gobject.UnsafeObjectFromGlibFull(c).(DrawingContext)
+}
+
+// UnsafeDrawingContextFromGlibBorrow is used to convert raw GdkDrawingContext pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeDrawingContextFromGlibBorrow(c unsafe.Pointer) DrawingContext {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(DrawingContext)
 }
 
 func (d *DrawingContextInstance) upcastToGdkDrawingContext() *DrawingContextInstance {
@@ -15250,6 +15443,11 @@ func UnsafeFrameClockFromGlibNone(c unsafe.Pointer) FrameClock {
 // UnsafeFrameClockFromGlibFull is used to convert raw GdkFrameClock pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeFrameClockFromGlibFull(c unsafe.Pointer) FrameClock {
 	return gobject.UnsafeObjectFromGlibFull(c).(FrameClock)
+}
+
+// UnsafeFrameClockFromGlibBorrow is used to convert raw GdkFrameClock pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeFrameClockFromGlibBorrow(c unsafe.Pointer) FrameClock {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(FrameClock)
 }
 
 func (f *FrameClockInstance) upcastToGdkFrameClock() *FrameClockInstance {
@@ -15666,12 +15864,12 @@ type GLContext interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- major int: return location for the major version to request 
-	// 	- minor int: return location for the minor version to request 
+	// 	- major int32: return location for the major version to request 
+	// 	- minor int32: return location for the minor version to request 
 	//
 	// Retrieves the major and minor version requested by calling
 	// gdk_gl_context_set_required_version().
-	GetRequiredVersion() (int, int)
+	GetRequiredVersion() (int32, int32)
 	// GetSharedContext wraps gdk_gl_context_get_shared_context
 	// 
 	// The function returns the following values:
@@ -15692,13 +15890,13 @@ type GLContext interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- major int: return location for the major version 
-	// 	- minor int: return location for the minor version 
+	// 	- major int32: return location for the major version 
+	// 	- minor int32: return location for the minor version 
 	//
 	// Retrieves the OpenGL version of the @context.
 	// 
 	// The @context must be realized prior to calling this function.
-	GetVersion() (int, int)
+	GetVersion() (int32, int32)
 	// GetWindow wraps gdk_gl_context_get_window
 	// 
 	// The function returns the following values:
@@ -15778,8 +15976,8 @@ type GLContext interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- major int: the major version to request 
-	// 	- minor int: the minor version to request 
+	// 	- major int32: the major version to request 
+	// 	- minor int32: the minor version to request 
 	//
 	// Sets the major and minor version of OpenGL to request.
 	// 
@@ -15787,12 +15985,12 @@ type GLContext interface {
 	// 
 	// The #GdkGLContext must not be realized or made current prior to calling
 	// this function.
-	SetRequiredVersion(int, int)
+	SetRequiredVersion(int32, int32)
 	// SetUseES wraps gdk_gl_context_set_use_es
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- useEs int: whether the context should use OpenGL ES instead of OpenGL,
+	// 	- useEs int32: whether the context should use OpenGL ES instead of OpenGL,
 	//   or -1 to allow auto-detection 
 	//
 	// Requests that GDK create a OpenGL ES context instead of an OpenGL one,
@@ -15807,7 +16005,7 @@ type GLContext interface {
 	// You should check the return value of gdk_gl_context_get_use_es() after
 	// calling gdk_gl_context_realize() to decide whether to use the OpenGL or
 	// OpenGL ES API, extensions, or shaders.
-	SetUseES(int)
+	SetUseES(int32)
 }
 
 func unsafeWrapGLContext(base *gobject.ObjectInstance) *GLContextInstance {
@@ -15828,6 +16026,11 @@ func UnsafeGLContextFromGlibNone(c unsafe.Pointer) GLContext {
 // UnsafeGLContextFromGlibFull is used to convert raw GdkGLContext pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeGLContextFromGlibFull(c unsafe.Pointer) GLContext {
 	return gobject.UnsafeObjectFromGlibFull(c).(GLContext)
+}
+
+// UnsafeGLContextFromGlibBorrow is used to convert raw GdkGLContext pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeGLContextFromGlibBorrow(c unsafe.Pointer) GLContext {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(GLContext)
 }
 
 func (g *GLContextInstance) upcastToGdkGLContext() *GLContextInstance {
@@ -15955,12 +16158,12 @@ func (_context *GLContextInstance) GetForwardCompatible() bool {
 // 
 // The function returns the following values:
 // 
-// 	- major int: return location for the major version to request 
-// 	- minor int: return location for the minor version to request 
+// 	- major int32: return location for the major version to request 
+// 	- minor int32: return location for the minor version to request 
 //
 // Retrieves the major and minor version requested by calling
 // gdk_gl_context_set_required_version().
-func (_context *GLContextInstance) GetRequiredVersion() (int, int) {
+func (_context *GLContextInstance) GetRequiredVersion() (int32, int32) {
 	var carg0 *C.GdkGLContext // in, none, converted
 	var carg1 C.int           // out, full, casted, casted C.gint
 	var carg2 C.int           // out, full, casted, casted C.gint
@@ -15970,11 +16173,11 @@ func (_context *GLContextInstance) GetRequiredVersion() (int, int) {
 	C.gdk_gl_context_get_required_version(carg0, &carg1, &carg2)
 	runtime.KeepAlive(_context)
 
-	var major int
-	var minor int
+	var major int32
+	var minor int32
 
-	major = int(carg1)
-	minor = int(carg2)
+	major = int32(carg1)
+	minor = int32(carg2)
 
 	return major, minor
 }
@@ -16033,13 +16236,13 @@ func (_context *GLContextInstance) GetUseES() bool {
 // 
 // The function returns the following values:
 // 
-// 	- major int: return location for the major version 
-// 	- minor int: return location for the minor version 
+// 	- major int32: return location for the major version 
+// 	- minor int32: return location for the minor version 
 //
 // Retrieves the OpenGL version of the @context.
 // 
 // The @context must be realized prior to calling this function.
-func (_context *GLContextInstance) GetVersion() (int, int) {
+func (_context *GLContextInstance) GetVersion() (int32, int32) {
 	var carg0 *C.GdkGLContext // in, none, converted
 	var carg1 C.int           // out, full, casted, casted C.gint
 	var carg2 C.int           // out, full, casted, casted C.gint
@@ -16049,11 +16252,11 @@ func (_context *GLContextInstance) GetVersion() (int, int) {
 	C.gdk_gl_context_get_version(carg0, &carg1, &carg2)
 	runtime.KeepAlive(_context)
 
-	var major int
-	var minor int
+	var major int32
+	var minor int32
 
-	major = int(carg1)
-	minor = int(carg2)
+	major = int32(carg1)
+	minor = int32(carg2)
 
 	return major, minor
 }
@@ -16227,8 +16430,8 @@ func (_context *GLContextInstance) SetForwardCompatible(compatible bool) {
 // 
 // The function takes the following parameters:
 // 
-// 	- major int: the major version to request 
-// 	- minor int: the minor version to request 
+// 	- major int32: the major version to request 
+// 	- minor int32: the minor version to request 
 //
 // Sets the major and minor version of OpenGL to request.
 // 
@@ -16236,7 +16439,7 @@ func (_context *GLContextInstance) SetForwardCompatible(compatible bool) {
 // 
 // The #GdkGLContext must not be realized or made current prior to calling
 // this function.
-func (_context *GLContextInstance) SetRequiredVersion(major int, minor int) {
+func (_context *GLContextInstance) SetRequiredVersion(major int32, minor int32) {
 	var carg0 *C.GdkGLContext // in, none, converted
 	var carg1 C.int           // in, none, casted, casted C.gint
 	var carg2 C.int           // in, none, casted, casted C.gint
@@ -16255,7 +16458,7 @@ func (_context *GLContextInstance) SetRequiredVersion(major int, minor int) {
 // 
 // The function takes the following parameters:
 // 
-// 	- useEs int: whether the context should use OpenGL ES instead of OpenGL,
+// 	- useEs int32: whether the context should use OpenGL ES instead of OpenGL,
 //   or -1 to allow auto-detection 
 //
 // Requests that GDK create a OpenGL ES context instead of an OpenGL one,
@@ -16270,7 +16473,7 @@ func (_context *GLContextInstance) SetRequiredVersion(major int, minor int) {
 // You should check the return value of gdk_gl_context_get_use_es() after
 // calling gdk_gl_context_realize() to decide whether to use the OpenGL or
 // OpenGL ES API, extensions, or shaders.
-func (_context *GLContextInstance) SetUseES(useEs int) {
+func (_context *GLContextInstance) SetUseES(useEs int32) {
 	var carg0 *C.GdkGLContext // in, none, converted
 	var carg1 C.int           // in, none, casted, casted C.gint
 
@@ -16393,14 +16596,14 @@ type Keymap interface {
 	// 
 	// 	- hardwareKeycode uint: a keycode 
 	// 	- state ModifierType: a modifier state 
-	// 	- group int: active keyboard group 
+	// 	- group int32: active keyboard group 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- keyval uint: return location for keyval, or %NULL 
-	// 	- effectiveGroup int: return location for effective
+	// 	- effectiveGroup int32: return location for effective
 	//     group, or %NULL 
-	// 	- level int: return location for level, or %NULL 
+	// 	- level int32: return location for level, or %NULL 
 	// 	- consumedModifiers ModifierType: return location for modifiers
 	//     that were used to determine the group or level, or %NULL 
 	// 	- goret bool 
@@ -16452,7 +16655,7 @@ type Keymap interface {
 	// combinations are returned only when actually found in @state. When
 	// you store accelerators, you should always store them with consumed
 	// modifiers removed. Store `&lt;Control&gt;plus`, not `&lt;Control&gt;&lt;Shift&gt;plus`,
-	TranslateKeyboardState(uint, ModifierType, int) (uint, int, int, ModifierType, bool)
+	TranslateKeyboardState(uint, ModifierType, int32) (uint, int32, int32, ModifierType, bool)
 	// ConnectDirectionChanged connects the provided callback to the "direction-changed" signal
 	//
 	// The ::direction-changed signal gets emitted when the direction of
@@ -16489,6 +16692,11 @@ func UnsafeKeymapFromGlibNone(c unsafe.Pointer) Keymap {
 // UnsafeKeymapFromGlibFull is used to convert raw GdkKeymap pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeKeymapFromGlibFull(c unsafe.Pointer) Keymap {
 	return gobject.UnsafeObjectFromGlibFull(c).(Keymap)
+}
+
+// UnsafeKeymapFromGlibBorrow is used to convert raw GdkKeymap pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeKeymapFromGlibBorrow(c unsafe.Pointer) Keymap {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Keymap)
 }
 
 func (k *KeymapInstance) upcastToGdkKeymap() *KeymapInstance {
@@ -16757,14 +16965,14 @@ func (keymap *KeymapInstance) LookupKey(key *KeymapKey) uint {
 // 
 // 	- hardwareKeycode uint: a keycode 
 // 	- state ModifierType: a modifier state 
-// 	- group int: active keyboard group 
+// 	- group int32: active keyboard group 
 // 
 // The function returns the following values:
 // 
 // 	- keyval uint: return location for keyval, or %NULL 
-// 	- effectiveGroup int: return location for effective
+// 	- effectiveGroup int32: return location for effective
 //     group, or %NULL 
-// 	- level int: return location for level, or %NULL 
+// 	- level int32: return location for level, or %NULL 
 // 	- consumedModifiers ModifierType: return location for modifiers
 //     that were used to determine the group or level, or %NULL 
 // 	- goret bool 
@@ -16816,7 +17024,7 @@ func (keymap *KeymapInstance) LookupKey(key *KeymapKey) uint {
 // combinations are returned only when actually found in @state. When
 // you store accelerators, you should always store them with consumed
 // modifiers removed. Store `&lt;Control&gt;plus`, not `&lt;Control&gt;&lt;Shift&gt;plus`,
-func (keymap *KeymapInstance) TranslateKeyboardState(hardwareKeycode uint, state ModifierType, group int) (uint, int, int, ModifierType, bool) {
+func (keymap *KeymapInstance) TranslateKeyboardState(hardwareKeycode uint, state ModifierType, group int32) (uint, int32, int32, ModifierType, bool) {
 	var carg0 *C.GdkKeymap      // in, none, converted
 	var carg1 C.guint           // in, none, casted
 	var carg2 C.GdkModifierType // in, none, casted
@@ -16839,14 +17047,14 @@ func (keymap *KeymapInstance) TranslateKeyboardState(hardwareKeycode uint, state
 	runtime.KeepAlive(group)
 
 	var keyval            uint
-	var effectiveGroup    int
-	var level             int
+	var effectiveGroup    int32
+	var level             int32
 	var consumedModifiers ModifierType
 	var goret             bool
 
 	keyval = uint(carg4)
-	effectiveGroup = int(carg5)
-	level = int(carg6)
+	effectiveGroup = int32(carg5)
+	level = int32(carg6)
 	consumedModifiers = ModifierType(carg7)
 	if cret != 0 {
 		goret = true
@@ -16924,10 +17132,10 @@ type Monitor interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Gets the height in millimeters of the monitor.
-	GetHeightMm() int
+	GetHeightMm() int32
 	// GetManufacturer wraps gdk_monitor_get_manufacturer
 	// 
 	// The function returns the following values:
@@ -16953,18 +17161,18 @@ type Monitor interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Gets the refresh rate of the monitor, if available.
 	// 
 	// The value is in milli-Hertz, so a refresh rate of 60Hz
 	// is returned as 60000.
-	GetRefreshRate() int
+	GetRefreshRate() int32
 	// GetScaleFactor wraps gdk_monitor_get_scale_factor
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Gets the internal scale factor that maps from monitor coordinates
 	// to the actual device pixels. On traditional systems this is 1, but
@@ -16973,7 +17181,7 @@ type Monitor interface {
 	// This can be used if you want to create pixel based data for a
 	// particular monitor, but most of the time you’re drawing to a window
 	// where it is better to use gdk_window_get_scale_factor() instead.
-	GetScaleFactor() int
+	GetScaleFactor() int32
 	// GetSubpixelLayout wraps gdk_monitor_get_subpixel_layout
 	// 
 	// The function returns the following values:
@@ -16987,10 +17195,10 @@ type Monitor interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Gets the width in millimeters of the monitor.
-	GetWidthMm() int
+	GetWidthMm() int32
 	// GetWorkarea wraps gdk_monitor_get_workarea
 	// 
 	// The function returns the following values:
@@ -17042,6 +17250,11 @@ func UnsafeMonitorFromGlibNone(c unsafe.Pointer) Monitor {
 // UnsafeMonitorFromGlibFull is used to convert raw GdkMonitor pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeMonitorFromGlibFull(c unsafe.Pointer) Monitor {
 	return gobject.UnsafeObjectFromGlibFull(c).(Monitor)
+}
+
+// UnsafeMonitorFromGlibBorrow is used to convert raw GdkMonitor pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeMonitorFromGlibBorrow(c unsafe.Pointer) Monitor {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Monitor)
 }
 
 func (m *MonitorInstance) upcastToGdkMonitor() *MonitorInstance {
@@ -17112,10 +17325,10 @@ func (monitor *MonitorInstance) GetGeometry() Rectangle {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Gets the height in millimeters of the monitor.
-func (monitor *MonitorInstance) GetHeightMm() int {
+func (monitor *MonitorInstance) GetHeightMm() int32 {
 	var carg0 *C.GdkMonitor // in, none, converted
 	var cret  C.int         // return, none, casted, casted C.gint
 
@@ -17124,9 +17337,9 @@ func (monitor *MonitorInstance) GetHeightMm() int {
 	cret = C.gdk_monitor_get_height_mm(carg0)
 	runtime.KeepAlive(monitor)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -17190,13 +17403,13 @@ func (monitor *MonitorInstance) GetModel() string {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Gets the refresh rate of the monitor, if available.
 // 
 // The value is in milli-Hertz, so a refresh rate of 60Hz
 // is returned as 60000.
-func (monitor *MonitorInstance) GetRefreshRate() int {
+func (monitor *MonitorInstance) GetRefreshRate() int32 {
 	var carg0 *C.GdkMonitor // in, none, converted
 	var cret  C.int         // return, none, casted, casted C.gint
 
@@ -17205,9 +17418,9 @@ func (monitor *MonitorInstance) GetRefreshRate() int {
 	cret = C.gdk_monitor_get_refresh_rate(carg0)
 	runtime.KeepAlive(monitor)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -17216,7 +17429,7 @@ func (monitor *MonitorInstance) GetRefreshRate() int {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Gets the internal scale factor that maps from monitor coordinates
 // to the actual device pixels. On traditional systems this is 1, but
@@ -17225,7 +17438,7 @@ func (monitor *MonitorInstance) GetRefreshRate() int {
 // This can be used if you want to create pixel based data for a
 // particular monitor, but most of the time you’re drawing to a window
 // where it is better to use gdk_window_get_scale_factor() instead.
-func (monitor *MonitorInstance) GetScaleFactor() int {
+func (monitor *MonitorInstance) GetScaleFactor() int32 {
 	var carg0 *C.GdkMonitor // in, none, converted
 	var cret  C.int         // return, none, casted, casted C.gint
 
@@ -17234,9 +17447,9 @@ func (monitor *MonitorInstance) GetScaleFactor() int {
 	cret = C.gdk_monitor_get_scale_factor(carg0)
 	runtime.KeepAlive(monitor)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -17269,10 +17482,10 @@ func (monitor *MonitorInstance) GetSubpixelLayout() SubpixelLayout {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Gets the width in millimeters of the monitor.
-func (monitor *MonitorInstance) GetWidthMm() int {
+func (monitor *MonitorInstance) GetWidthMm() int32 {
 	var carg0 *C.GdkMonitor // in, none, converted
 	var cret  C.int         // return, none, casted, casted C.gint
 
@@ -17281,9 +17494,9 @@ func (monitor *MonitorInstance) GetWidthMm() int {
 	cret = C.gdk_monitor_get_width_mm(carg0)
 	runtime.KeepAlive(monitor)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -17564,6 +17777,11 @@ func UnsafeScreenFromGlibNone(c unsafe.Pointer) Screen {
 // UnsafeScreenFromGlibFull is used to convert raw GdkScreen pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeScreenFromGlibFull(c unsafe.Pointer) Screen {
 	return gobject.UnsafeObjectFromGlibFull(c).(Screen)
+}
+
+// UnsafeScreenFromGlibBorrow is used to convert raw GdkScreen pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeScreenFromGlibBorrow(c unsafe.Pointer) Screen {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Screen)
 }
 
 func (s *ScreenInstance) upcastToGdkScreen() *ScreenInstance {
@@ -18079,6 +18297,11 @@ func UnsafeSeatFromGlibFull(c unsafe.Pointer) Seat {
 	return gobject.UnsafeObjectFromGlibFull(c).(Seat)
 }
 
+// UnsafeSeatFromGlibBorrow is used to convert raw GdkSeat pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeSeatFromGlibBorrow(c unsafe.Pointer) Seat {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Seat)
+}
+
 func (s *SeatInstance) upcastToGdkSeat() *SeatInstance {
 	return s
 }
@@ -18295,51 +18518,51 @@ type Visual interface {
 	// The function returns the following values:
 	// 
 	// 	- mask uint32: A pointer to a #guint32 to be filled in, or %NULL 
-	// 	- shift int: A pointer to a #gint to be filled in, or %NULL 
-	// 	- precision int: A pointer to a #gint to be filled in, or %NULL 
+	// 	- shift int32: A pointer to a #gint to be filled in, or %NULL 
+	// 	- precision int32: A pointer to a #gint to be filled in, or %NULL 
 	//
 	// Obtains values that are needed to calculate blue pixel values in TrueColor
 	// and DirectColor. The “mask” is the significant bits within the pixel.
 	// The “shift” is the number of bits left we must shift a primary for it
 	// to be in position (according to the "mask"). Finally, "precision" refers
 	// to how much precision the pixel value contains for a particular primary.
-	GetBluePixelDetails() (uint32, int, int)
+	GetBluePixelDetails() (uint32, int32, int32)
 	// GetDepth wraps gdk_visual_get_depth
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Returns the bit depth of this visual.
-	GetDepth() int
+	GetDepth() int32
 	// GetGreenPixelDetails wraps gdk_visual_get_green_pixel_details
 	// 
 	// The function returns the following values:
 	// 
 	// 	- mask uint32: A pointer to a #guint32 to be filled in, or %NULL 
-	// 	- shift int: A pointer to a #gint to be filled in, or %NULL 
-	// 	- precision int: A pointer to a #gint to be filled in, or %NULL 
+	// 	- shift int32: A pointer to a #gint to be filled in, or %NULL 
+	// 	- precision int32: A pointer to a #gint to be filled in, or %NULL 
 	//
 	// Obtains values that are needed to calculate green pixel values in TrueColor
 	// and DirectColor. The “mask” is the significant bits within the pixel.
 	// The “shift” is the number of bits left we must shift a primary for it
 	// to be in position (according to the "mask"). Finally, "precision" refers
 	// to how much precision the pixel value contains for a particular primary.
-	GetGreenPixelDetails() (uint32, int, int)
+	GetGreenPixelDetails() (uint32, int32, int32)
 	// GetRedPixelDetails wraps gdk_visual_get_red_pixel_details
 	// 
 	// The function returns the following values:
 	// 
 	// 	- mask uint32: A pointer to a #guint32 to be filled in, or %NULL 
-	// 	- shift int: A pointer to a #gint to be filled in, or %NULL 
-	// 	- precision int: A pointer to a #gint to be filled in, or %NULL 
+	// 	- shift int32: A pointer to a #gint to be filled in, or %NULL 
+	// 	- precision int32: A pointer to a #gint to be filled in, or %NULL 
 	//
 	// Obtains values that are needed to calculate red pixel values in TrueColor
 	// and DirectColor. The “mask” is the significant bits within the pixel.
 	// The “shift” is the number of bits left we must shift a primary for it
 	// to be in position (according to the "mask"). Finally, "precision" refers
 	// to how much precision the pixel value contains for a particular primary.
-	GetRedPixelDetails() (uint32, int, int)
+	GetRedPixelDetails() (uint32, int32, int32)
 	// GetScreen wraps gdk_visual_get_screen
 	// 
 	// The function returns the following values:
@@ -18378,6 +18601,11 @@ func UnsafeVisualFromGlibFull(c unsafe.Pointer) Visual {
 	return gobject.UnsafeObjectFromGlibFull(c).(Visual)
 }
 
+// UnsafeVisualFromGlibBorrow is used to convert raw GdkVisual pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeVisualFromGlibBorrow(c unsafe.Pointer) Visual {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Visual)
+}
+
 func (v *VisualInstance) upcastToGdkVisual() *VisualInstance {
 	return v
 }
@@ -18397,15 +18625,15 @@ func UnsafeVisualToGlibFull(c Visual) unsafe.Pointer {
 // The function returns the following values:
 // 
 // 	- mask uint32: A pointer to a #guint32 to be filled in, or %NULL 
-// 	- shift int: A pointer to a #gint to be filled in, or %NULL 
-// 	- precision int: A pointer to a #gint to be filled in, or %NULL 
+// 	- shift int32: A pointer to a #gint to be filled in, or %NULL 
+// 	- precision int32: A pointer to a #gint to be filled in, or %NULL 
 //
 // Obtains values that are needed to calculate blue pixel values in TrueColor
 // and DirectColor. The “mask” is the significant bits within the pixel.
 // The “shift” is the number of bits left we must shift a primary for it
 // to be in position (according to the "mask"). Finally, "precision" refers
 // to how much precision the pixel value contains for a particular primary.
-func (visual *VisualInstance) GetBluePixelDetails() (uint32, int, int) {
+func (visual *VisualInstance) GetBluePixelDetails() (uint32, int32, int32) {
 	var carg0 *C.GdkVisual // in, none, converted
 	var carg1 C.guint32    // out, full, casted
 	var carg2 C.gint       // out, full, casted
@@ -18417,12 +18645,12 @@ func (visual *VisualInstance) GetBluePixelDetails() (uint32, int, int) {
 	runtime.KeepAlive(visual)
 
 	var mask      uint32
-	var shift     int
-	var precision int
+	var shift     int32
+	var precision int32
 
 	mask = uint32(carg1)
-	shift = int(carg2)
-	precision = int(carg3)
+	shift = int32(carg2)
+	precision = int32(carg3)
 
 	return mask, shift, precision
 }
@@ -18431,10 +18659,10 @@ func (visual *VisualInstance) GetBluePixelDetails() (uint32, int, int) {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Returns the bit depth of this visual.
-func (visual *VisualInstance) GetDepth() int {
+func (visual *VisualInstance) GetDepth() int32 {
 	var carg0 *C.GdkVisual // in, none, converted
 	var cret  C.gint       // return, none, casted
 
@@ -18443,9 +18671,9 @@ func (visual *VisualInstance) GetDepth() int {
 	cret = C.gdk_visual_get_depth(carg0)
 	runtime.KeepAlive(visual)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -18455,15 +18683,15 @@ func (visual *VisualInstance) GetDepth() int {
 // The function returns the following values:
 // 
 // 	- mask uint32: A pointer to a #guint32 to be filled in, or %NULL 
-// 	- shift int: A pointer to a #gint to be filled in, or %NULL 
-// 	- precision int: A pointer to a #gint to be filled in, or %NULL 
+// 	- shift int32: A pointer to a #gint to be filled in, or %NULL 
+// 	- precision int32: A pointer to a #gint to be filled in, or %NULL 
 //
 // Obtains values that are needed to calculate green pixel values in TrueColor
 // and DirectColor. The “mask” is the significant bits within the pixel.
 // The “shift” is the number of bits left we must shift a primary for it
 // to be in position (according to the "mask"). Finally, "precision" refers
 // to how much precision the pixel value contains for a particular primary.
-func (visual *VisualInstance) GetGreenPixelDetails() (uint32, int, int) {
+func (visual *VisualInstance) GetGreenPixelDetails() (uint32, int32, int32) {
 	var carg0 *C.GdkVisual // in, none, converted
 	var carg1 C.guint32    // out, full, casted
 	var carg2 C.gint       // out, full, casted
@@ -18475,12 +18703,12 @@ func (visual *VisualInstance) GetGreenPixelDetails() (uint32, int, int) {
 	runtime.KeepAlive(visual)
 
 	var mask      uint32
-	var shift     int
-	var precision int
+	var shift     int32
+	var precision int32
 
 	mask = uint32(carg1)
-	shift = int(carg2)
-	precision = int(carg3)
+	shift = int32(carg2)
+	precision = int32(carg3)
 
 	return mask, shift, precision
 }
@@ -18490,15 +18718,15 @@ func (visual *VisualInstance) GetGreenPixelDetails() (uint32, int, int) {
 // The function returns the following values:
 // 
 // 	- mask uint32: A pointer to a #guint32 to be filled in, or %NULL 
-// 	- shift int: A pointer to a #gint to be filled in, or %NULL 
-// 	- precision int: A pointer to a #gint to be filled in, or %NULL 
+// 	- shift int32: A pointer to a #gint to be filled in, or %NULL 
+// 	- precision int32: A pointer to a #gint to be filled in, or %NULL 
 //
 // Obtains values that are needed to calculate red pixel values in TrueColor
 // and DirectColor. The “mask” is the significant bits within the pixel.
 // The “shift” is the number of bits left we must shift a primary for it
 // to be in position (according to the "mask"). Finally, "precision" refers
 // to how much precision the pixel value contains for a particular primary.
-func (visual *VisualInstance) GetRedPixelDetails() (uint32, int, int) {
+func (visual *VisualInstance) GetRedPixelDetails() (uint32, int32, int32) {
 	var carg0 *C.GdkVisual // in, none, converted
 	var carg1 C.guint32    // out, full, casted
 	var carg2 C.gint       // out, full, casted
@@ -18510,12 +18738,12 @@ func (visual *VisualInstance) GetRedPixelDetails() (uint32, int, int) {
 	runtime.KeepAlive(visual)
 
 	var mask      uint32
-	var shift     int
-	var precision int
+	var shift     int32
+	var precision int32
 
 	mask = uint32(carg1)
-	shift = int(carg2)
-	precision = int(carg3)
+	shift = int32(carg2)
+	precision = int32(carg3)
 
 	return mask, shift, precision
 }
@@ -18589,9 +18817,9 @@ type Window interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- button int: the button being used to drag, or 0 for a keyboard-initiated drag 
-	// 	- rootX int: root window X coordinate of mouse click that began the drag 
-	// 	- rootY int: root window Y coordinate of mouse click that began the drag 
+	// 	- button int32: the button being used to drag, or 0 for a keyboard-initiated drag 
+	// 	- rootX int32: root window X coordinate of mouse click that began the drag 
+	// 	- rootY int32: root window Y coordinate of mouse click that began the drag 
 	// 	- timestamp uint32: timestamp of mouse click that began the drag 
 	//
 	// Begins a window move operation (for a toplevel window).
@@ -18599,15 +18827,15 @@ type Window interface {
 	// This function assumes that the drag is controlled by the
 	// client pointer device, use gdk_window_begin_move_drag_for_device()
 	// to begin a drag with a different device.
-	BeginMoveDrag(int, int, int, uint32)
+	BeginMoveDrag(int32, int32, int32, uint32)
 	// BeginMoveDragForDevice wraps gdk_window_begin_move_drag_for_device
 	// 
 	// The function takes the following parameters:
 	// 
 	// 	- device Device: the device used for the operation 
-	// 	- button int: the button being used to drag, or 0 for a keyboard-initiated drag 
-	// 	- rootX int: root window X coordinate of mouse click that began the drag 
-	// 	- rootY int: root window Y coordinate of mouse click that began the drag 
+	// 	- button int32: the button being used to drag, or 0 for a keyboard-initiated drag 
+	// 	- rootX int32: root window X coordinate of mouse click that began the drag 
+	// 	- rootY int32: root window Y coordinate of mouse click that began the drag 
 	// 	- timestamp uint32: timestamp of mouse click that began the drag 
 	//
 	// Begins a window move operation (for a toplevel window).
@@ -18615,15 +18843,15 @@ type Window interface {
 	// example. The function works best with window managers that support the
 	// [Extended Window Manager Hints](http://www.freedesktop.org/Standards/wm-spec)
 	// but has a fallback implementation for other window managers.
-	BeginMoveDragForDevice(Device, int, int, int, uint32)
+	BeginMoveDragForDevice(Device, int32, int32, int32, uint32)
 	// BeginResizeDrag wraps gdk_window_begin_resize_drag
 	// 
 	// The function takes the following parameters:
 	// 
 	// 	- edge WindowEdge: the edge or corner from which the drag is started 
-	// 	- button int: the button being used to drag, or 0 for a keyboard-initiated drag 
-	// 	- rootX int: root window X coordinate of mouse click that began the drag 
-	// 	- rootY int: root window Y coordinate of mouse click that began the drag 
+	// 	- button int32: the button being used to drag, or 0 for a keyboard-initiated drag 
+	// 	- rootX int32: root window X coordinate of mouse click that began the drag 
+	// 	- rootY int32: root window Y coordinate of mouse click that began the drag 
 	// 	- timestamp uint32: timestamp of mouse click that began the drag (use gdk_event_get_time()) 
 	//
 	// Begins a window resize operation (for a toplevel window).
@@ -18631,16 +18859,16 @@ type Window interface {
 	// This function assumes that the drag is controlled by the
 	// client pointer device, use gdk_window_begin_resize_drag_for_device()
 	// to begin a drag with a different device.
-	BeginResizeDrag(WindowEdge, int, int, int, uint32)
+	BeginResizeDrag(WindowEdge, int32, int32, int32, uint32)
 	// BeginResizeDragForDevice wraps gdk_window_begin_resize_drag_for_device
 	// 
 	// The function takes the following parameters:
 	// 
 	// 	- edge WindowEdge: the edge or corner from which the drag is started 
 	// 	- device Device: the device used for the operation 
-	// 	- button int: the button being used to drag, or 0 for a keyboard-initiated drag 
-	// 	- rootX int: root window X coordinate of mouse click that began the drag 
-	// 	- rootY int: root window Y coordinate of mouse click that began the drag 
+	// 	- button int32: the button being used to drag, or 0 for a keyboard-initiated drag 
+	// 	- rootX int32: root window X coordinate of mouse click that began the drag 
+	// 	- rootY int32: root window Y coordinate of mouse click that began the drag 
 	// 	- timestamp uint32: timestamp of mouse click that began the drag (use gdk_event_get_time()) 
 	//
 	// Begins a window resize operation (for a toplevel window).
@@ -18649,7 +18877,7 @@ type Window interface {
 	// with window managers that support the
 	// [Extended Window Manager Hints](http://www.freedesktop.org/Standards/wm-spec)
 	// but has a fallback implementation for other window managers.
-	BeginResizeDragForDevice(WindowEdge, Device, int, int, int, uint32)
+	BeginResizeDragForDevice(WindowEdge, Device, int32, int32, int32, uint32)
 	// CoordsFromParent wraps gdk_window_coords_from_parent
 	// 
 	// The function takes the following parameters:
@@ -18818,13 +19046,13 @@ type Window interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- monitor int: Which monitor to display fullscreen on. 
+	// 	- monitor int32: Which monitor to display fullscreen on. 
 	//
 	// Moves the window into fullscreen mode on the given monitor. This means
 	// the window covers the entire screen and is above any panels or task bars.
 	// 
 	// If the window was already fullscreen, then this function does nothing.
-	FullscreenOnMonitor(int)
+	FullscreenOnMonitor(int32)
 	// GeometryChanged wraps gdk_window_geometry_changed
 	//
 	// This function informs GDK that the geometry of an embedded
@@ -18910,8 +19138,8 @@ type Window interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- x int: return location for the X coordinate of @device, or %NULL. 
-	// 	- y int: return location for the Y coordinate of @device, or %NULL. 
+	// 	- x int32: return location for the X coordinate of @device, or %NULL. 
+	// 	- y int32: return location for the Y coordinate of @device, or %NULL. 
 	// 	- mask ModifierType: return location for the modifier mask, or %NULL. 
 	// 	- goret Window (nullable) 
 	//
@@ -18920,7 +19148,7 @@ type Window interface {
 	// corner of @window.
 	// 
 	// Use gdk_window_get_device_position_double() if you need subpixel precision.
-	GetDevicePosition(Device) (int, int, ModifierType, Window)
+	GetDevicePosition(Device) (int32, int32, ModifierType, Window)
 	// GetDevicePositionDouble wraps gdk_window_get_device_position_double
 	// 
 	// The function takes the following parameters:
@@ -19041,10 +19269,10 @@ type Window interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- x int: return location for X coordinate of window (relative to its parent) 
-	// 	- y int: return location for Y coordinate of window (relative to its parent) 
-	// 	- width int: return location for width of window 
-	// 	- height int: return location for height of window 
+	// 	- x int32: return location for X coordinate of window (relative to its parent) 
+	// 	- y int32: return location for Y coordinate of window (relative to its parent) 
+	// 	- width int32: return location for width of window 
+	// 	- height int32: return location for height of window 
 	//
 	// Any of the return location arguments to this function may be %NULL,
 	// if you aren’t interested in getting the value of that field.
@@ -19066,7 +19294,7 @@ type Window interface {
 	// the X server and because these functions support the full 32-bit
 	// coordinate space, whereas gdk_window_get_geometry() is restricted to
 	// the 16-bit coordinates of X11.
-	GetGeometry() (int, int, int, int)
+	GetGeometry() (int32, int32, int32, int32)
 	// GetGroup wraps gdk_window_get_group
 	// 
 	// The function returns the following values:
@@ -19079,14 +19307,14 @@ type Window interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Returns the height of the given @window.
 	// 
 	// On the X11 platform the returned size is the size reported in the
 	// most-recently-processed configure event, rather than the current
 	// size on the X server.
-	GetHeight() int
+	GetHeight() int32
 	// GetModalHint wraps gdk_window_get_modal_hint
 	// 
 	// The function returns the following values:
@@ -19100,15 +19328,15 @@ type Window interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- x int: return location for X coordinate 
-	// 	- y int: return location for Y coordinate 
-	// 	- goret int 
+	// 	- x int32: return location for X coordinate 
+	// 	- y int32: return location for Y coordinate 
+	// 	- goret int32 
 	//
 	// Obtains the position of a window in root window coordinates.
 	// (Compare with gdk_window_get_position() and
 	// gdk_window_get_geometry() which return the position of a window
 	// relative to its parent window.)
-	GetOrigin() (int, int, int)
+	GetOrigin() (int32, int32, int32)
 	// GetParent wraps gdk_window_get_parent
 	// 
 	// The function returns the following values:
@@ -19142,8 +19370,8 @@ type Window interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- x int: X coordinate of window 
-	// 	- y int: Y coordinate of window 
+	// 	- x int32: X coordinate of window 
+	// 	- y int32: Y coordinate of window 
 	//
 	// Obtains the position of the window as reported in the
 	// most-recently-processed #GdkEventConfigure. Contrast with
@@ -19152,39 +19380,39 @@ type Window interface {
 	// received or processed.
 	// 
 	// The position coordinates are relative to the window’s parent window.
-	GetPosition() (int, int)
+	GetPosition() (int32, int32)
 	// GetRootCoords wraps gdk_window_get_root_coords
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- x int: X coordinate in window 
-	// 	- y int: Y coordinate in window 
+	// 	- x int32: X coordinate in window 
+	// 	- y int32: Y coordinate in window 
 	// 
 	// The function returns the following values:
 	// 
-	// 	- rootX int: return location for X coordinate 
-	// 	- rootY int: return location for Y coordinate 
+	// 	- rootX int32: return location for X coordinate 
+	// 	- rootY int32: return location for Y coordinate 
 	//
 	// Obtains the position of a window position in root
 	// window coordinates. This is similar to
 	// gdk_window_get_origin() but allows you to pass
 	// in any position in the window, not just the origin.
-	GetRootCoords(int, int) (int, int)
+	GetRootCoords(int32, int32) (int32, int32)
 	// GetRootOrigin wraps gdk_window_get_root_origin
 	// 
 	// The function returns the following values:
 	// 
-	// 	- x int: return location for X position of window frame 
-	// 	- y int: return location for Y position of window frame 
+	// 	- x int32: return location for X position of window frame 
+	// 	- y int32: return location for Y position of window frame 
 	//
 	// Obtains the top-left corner of the window manager frame in root
 	// window coordinates.
-	GetRootOrigin() (int, int)
+	GetRootOrigin() (int32, int32)
 	// GetScaleFactor wraps gdk_window_get_scale_factor
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Returns the internal scale factor that maps from window coordiantes
 	// to the actual device pixels. On traditional systems this is 1, but
@@ -19198,7 +19426,7 @@ type Window interface {
 	// 
 	// The scale of a window may change during runtime, if this happens
 	// a configure event will be sent to the toplevel window.
-	GetScaleFactor() int
+	GetScaleFactor() int32
 	// GetScreen wraps gdk_window_get_screen
 	// 
 	// The function returns the following values:
@@ -19275,14 +19503,14 @@ type Window interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Returns the width of the given @window.
 	// 
 	// On the X11 platform the returned size is the size reported in the
 	// most-recently-processed configure event, rather than the current
 	// size on the X server.
-	GetWidth() int
+	GetWidth() int32
 	// GetWindowType wraps gdk_window_get_window_type
 	// 
 	// The function returns the following values:
@@ -19424,8 +19652,8 @@ type Window interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- x int: X coordinate relative to window’s parent 
-	// 	- y int: Y coordinate relative to window’s parent 
+	// 	- x int32: X coordinate relative to window’s parent 
+	// 	- y int32: Y coordinate relative to window’s parent 
 	//
 	// Repositions a window relative to its parent window.
 	// For toplevel windows, window managers may ignore or modify the move;
@@ -19435,21 +19663,21 @@ type Window interface {
 	// 
 	// If you’re also planning to resize the window, use gdk_window_move_resize()
 	// to both move and resize simultaneously, for a nicer visual effect.
-	Move(int, int)
+	Move(int32, int32)
 	// MoveResize wraps gdk_window_move_resize
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- x int: new X position relative to window’s parent 
-	// 	- y int: new Y position relative to window’s parent 
-	// 	- width int: new width 
-	// 	- height int: new height 
+	// 	- x int32: new X position relative to window’s parent 
+	// 	- y int32: new Y position relative to window’s parent 
+	// 	- width int32: new width 
+	// 	- height int32: new height 
 	//
 	// Equivalent to calling gdk_window_move() and gdk_window_resize(),
 	// except that both operations are performed at once, avoiding strange
 	// visual effects. (i.e. the user may be able to see the window first
 	// move, then resize, if you don’t use gdk_window_move_resize().)
-	MoveResize(int, int, int, int)
+	MoveResize(int32, int32, int32, int32)
 	// MoveToRect wraps gdk_window_move_to_rect
 	// 
 	// The function takes the following parameters:
@@ -19458,9 +19686,9 @@ type Window interface {
 	// 	- rectAnchor Gravity: the point on @rect to align with @window's anchor point 
 	// 	- windowAnchor Gravity: the point on @window to align with @rect's anchor point 
 	// 	- anchorHints AnchorHints: positioning hints to use when limited on space 
-	// 	- rectAnchorDx int: horizontal offset to shift @window, i.e. @rect's anchor
+	// 	- rectAnchorDx int32: horizontal offset to shift @window, i.e. @rect's anchor
 	//                  point 
-	// 	- rectAnchorDy int: vertical offset to shift @window, i.e. @rect's anchor point 
+	// 	- rectAnchorDy int32: vertical offset to shift @window, i.e. @rect's anchor point 
 	//
 	// Moves @window to @rect, aligning their anchor points.
 	// 
@@ -19477,7 +19705,7 @@ type Window interface {
 	// 
 	// Connect to the #GdkWindow::moved-to-rect signal to find out how it was
 	// actually positioned.
-	MoveToRect(*Rectangle, Gravity, Gravity, AnchorHints, int, int)
+	MoveToRect(*Rectangle, Gravity, Gravity, AnchorHints, int32, int32)
 	// PeekChildren wraps gdk_window_peek_children
 	// 
 	// The function returns the following values:
@@ -19506,18 +19734,18 @@ type Window interface {
 	// The function takes the following parameters:
 	// 
 	// 	- newParent Window: new parent to move @window into 
-	// 	- x int: X location inside the new parent 
-	// 	- y int: Y location inside the new parent 
+	// 	- x int32: X location inside the new parent 
+	// 	- y int32: Y location inside the new parent 
 	//
 	// Reparents @window into the given @new_parent. The window being
 	// reparented will be unmapped as a side effect.
-	Reparent(Window, int, int)
+	Reparent(Window, int32, int32)
 	// Resize wraps gdk_window_resize
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- width int: new width of the window 
-	// 	- height int: new height of the window 
+	// 	- width int32: new width of the window 
+	// 	- height int32: new height of the window 
 	//
 	// Resizes @window; for toplevel windows, asks the window manager to resize
 	// the window. The window manager may not allow the resize. When using GTK+,
@@ -19527,7 +19755,7 @@ type Window interface {
 	// 
 	// If you’re also planning to move the window, use gdk_window_move_resize()
 	// to both move and resize simultaneously, for a nicer visual effect.
-	Resize(int, int)
+	Resize(int32, int32)
 	// Restack wraps gdk_window_restack
 	// 
 	// The function takes the following parameters:
@@ -19550,8 +19778,8 @@ type Window interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- dx int: Amount to scroll in the X direction 
-	// 	- dy int: Amount to scroll in the Y direction 
+	// 	- dx int32: Amount to scroll in the X direction 
+	// 	- dy int32: Amount to scroll in the Y direction 
 	//
 	// Scroll the contents of @window, both pixels and children, by the
 	// given amount. @window itself does not move. Portions of the window
@@ -19564,7 +19792,7 @@ type Window interface {
 	// beyond the edges of the window. In other cases, a multi-step process
 	// is used to scroll the window which may produce temporary visual
 	// artifacts and unnecessary invalidations.
-	Scroll(int, int)
+	Scroll(int32, int32)
 	// SetAcceptFocus wraps gdk_window_set_accept_focus
 	// 
 	// The function takes the following parameters:
@@ -19945,10 +20173,10 @@ type Window interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- left int: The left extent 
-	// 	- right int: The right extent 
-	// 	- top int: The top extent 
-	// 	- bottom int: The bottom extent 
+	// 	- left int32: The left extent 
+	// 	- right int32: The right extent 
+	// 	- top int32: The top extent 
+	// 	- bottom int32: The bottom extent 
 	//
 	// Newer GTK+ windows using client-side decorations use extra geometry
 	// around their frames for effects like shadows and invisible borders.
@@ -19959,7 +20187,7 @@ type Window interface {
 	// Note that this property is automatically updated by GTK+, so this
 	// function should only be used by applications which do not use GTK+
 	// to create toplevel windows.
-	SetShadowWidth(int, int, int, int)
+	SetShadowWidth(int32, int32, int32, int32)
 	// SetSkipPagerHint wraps gdk_window_set_skip_pager_hint
 	// 
 	// The function takes the following parameters:
@@ -20199,6 +20427,11 @@ func UnsafeWindowFromGlibFull(c unsafe.Pointer) Window {
 	return gobject.UnsafeObjectFromGlibFull(c).(Window)
 }
 
+// UnsafeWindowFromGlibBorrow is used to convert raw GdkWindow pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeWindowFromGlibBorrow(c unsafe.Pointer) Window {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Window)
+}
+
 func (w *WindowInstance) upcastToGdkWindow() *WindowInstance {
 	return w
 }
@@ -20220,7 +20453,7 @@ func UnsafeWindowToGlibFull(c Window) unsafe.Pointer {
 // 	- parent Window (nullable): a #GdkWindow, or %NULL to create the window as a child of
 //   the default root window for the default display. 
 // 	- attributes *WindowAttr: attributes of the new window 
-// 	- attributesMask int: mask indicating which
+// 	- attributesMask int32: mask indicating which
 //   fields in @attributes are valid 
 // 
 // The function returns the following values:
@@ -20231,7 +20464,7 @@ func UnsafeWindowToGlibFull(c Window) unsafe.Pointer {
 // @attributes. See #GdkWindowAttr and #GdkWindowAttributesType for
 // more details.  Note: to use this on displays other than the default
 // display, @parent must be specified.
-func NewWindow(parent Window, attributes *WindowAttr, attributesMask int) Window {
+func NewWindow(parent Window, attributes *WindowAttr, attributesMask int32) Window {
 	var carg1 *C.GdkWindow     // in, none, converted, nullable
 	var carg2 *C.GdkWindowAttr // in, none, converted
 	var carg3 C.gint           // in, none, casted
@@ -20261,17 +20494,17 @@ func NewWindow(parent Window, attributes *WindowAttr, attributesMask int) Window
 // 
 // 	- geometry *Geometry: a #GdkGeometry structure 
 // 	- flags WindowHints: a mask indicating what portions of @geometry are set 
-// 	- width int: desired width of window 
-// 	- height int: desired height of the window 
+// 	- width int32: desired width of window 
+// 	- height int32: desired height of the window 
 // 
 // The function returns the following values:
 // 
-// 	- newWidth int: location to store resulting width 
-// 	- newHeight int: location to store resulting height 
+// 	- newWidth int32: location to store resulting width 
+// 	- newHeight int32: location to store resulting height 
 //
 // Constrains a desired width and height according to a
 // set of geometry hints (such as minimum and maximum size).
-func WindowConstrainSize(geometry *Geometry, flags WindowHints, width int, height int) (int, int) {
+func WindowConstrainSize(geometry *Geometry, flags WindowHints, width int32, height int32) (int32, int32) {
 	var carg1 *C.GdkGeometry   // in, none, converted
 	var carg2 C.GdkWindowHints // in, none, casted
 	var carg3 C.gint           // in, none, casted
@@ -20290,11 +20523,11 @@ func WindowConstrainSize(geometry *Geometry, flags WindowHints, width int, heigh
 	runtime.KeepAlive(width)
 	runtime.KeepAlive(height)
 
-	var newWidth  int
-	var newHeight int
+	var newWidth  int32
+	var newHeight int32
 
-	newWidth = int(carg5)
-	newHeight = int(carg6)
+	newWidth = int32(carg5)
+	newHeight = int32(carg6)
 
 	return newWidth, newHeight
 }
@@ -20317,9 +20550,9 @@ func (window *WindowInstance) Beep() {
 // 
 // The function takes the following parameters:
 // 
-// 	- button int: the button being used to drag, or 0 for a keyboard-initiated drag 
-// 	- rootX int: root window X coordinate of mouse click that began the drag 
-// 	- rootY int: root window Y coordinate of mouse click that began the drag 
+// 	- button int32: the button being used to drag, or 0 for a keyboard-initiated drag 
+// 	- rootX int32: root window X coordinate of mouse click that began the drag 
+// 	- rootY int32: root window Y coordinate of mouse click that began the drag 
 // 	- timestamp uint32: timestamp of mouse click that began the drag 
 //
 // Begins a window move operation (for a toplevel window).
@@ -20327,7 +20560,7 @@ func (window *WindowInstance) Beep() {
 // This function assumes that the drag is controlled by the
 // client pointer device, use gdk_window_begin_move_drag_for_device()
 // to begin a drag with a different device.
-func (window *WindowInstance) BeginMoveDrag(button int, rootX int, rootY int, timestamp uint32) {
+func (window *WindowInstance) BeginMoveDrag(button int32, rootX int32, rootY int32, timestamp uint32) {
 	var carg0 *C.GdkWindow // in, none, converted
 	var carg1 C.gint       // in, none, casted
 	var carg2 C.gint       // in, none, casted
@@ -20353,9 +20586,9 @@ func (window *WindowInstance) BeginMoveDrag(button int, rootX int, rootY int, ti
 // The function takes the following parameters:
 // 
 // 	- device Device: the device used for the operation 
-// 	- button int: the button being used to drag, or 0 for a keyboard-initiated drag 
-// 	- rootX int: root window X coordinate of mouse click that began the drag 
-// 	- rootY int: root window Y coordinate of mouse click that began the drag 
+// 	- button int32: the button being used to drag, or 0 for a keyboard-initiated drag 
+// 	- rootX int32: root window X coordinate of mouse click that began the drag 
+// 	- rootY int32: root window Y coordinate of mouse click that began the drag 
 // 	- timestamp uint32: timestamp of mouse click that began the drag 
 //
 // Begins a window move operation (for a toplevel window).
@@ -20363,7 +20596,7 @@ func (window *WindowInstance) BeginMoveDrag(button int, rootX int, rootY int, ti
 // example. The function works best with window managers that support the
 // [Extended Window Manager Hints](http://www.freedesktop.org/Standards/wm-spec)
 // but has a fallback implementation for other window managers.
-func (window *WindowInstance) BeginMoveDragForDevice(device Device, button int, rootX int, rootY int, timestamp uint32) {
+func (window *WindowInstance) BeginMoveDragForDevice(device Device, button int32, rootX int32, rootY int32, timestamp uint32) {
 	var carg0 *C.GdkWindow // in, none, converted
 	var carg1 *C.GdkDevice // in, none, converted
 	var carg2 C.gint       // in, none, casted
@@ -20392,9 +20625,9 @@ func (window *WindowInstance) BeginMoveDragForDevice(device Device, button int, 
 // The function takes the following parameters:
 // 
 // 	- edge WindowEdge: the edge or corner from which the drag is started 
-// 	- button int: the button being used to drag, or 0 for a keyboard-initiated drag 
-// 	- rootX int: root window X coordinate of mouse click that began the drag 
-// 	- rootY int: root window Y coordinate of mouse click that began the drag 
+// 	- button int32: the button being used to drag, or 0 for a keyboard-initiated drag 
+// 	- rootX int32: root window X coordinate of mouse click that began the drag 
+// 	- rootY int32: root window Y coordinate of mouse click that began the drag 
 // 	- timestamp uint32: timestamp of mouse click that began the drag (use gdk_event_get_time()) 
 //
 // Begins a window resize operation (for a toplevel window).
@@ -20402,7 +20635,7 @@ func (window *WindowInstance) BeginMoveDragForDevice(device Device, button int, 
 // This function assumes that the drag is controlled by the
 // client pointer device, use gdk_window_begin_resize_drag_for_device()
 // to begin a drag with a different device.
-func (window *WindowInstance) BeginResizeDrag(edge WindowEdge, button int, rootX int, rootY int, timestamp uint32) {
+func (window *WindowInstance) BeginResizeDrag(edge WindowEdge, button int32, rootX int32, rootY int32, timestamp uint32) {
 	var carg0 *C.GdkWindow    // in, none, converted
 	var carg1 C.GdkWindowEdge // in, none, casted
 	var carg2 C.gint          // in, none, casted
@@ -20432,9 +20665,9 @@ func (window *WindowInstance) BeginResizeDrag(edge WindowEdge, button int, rootX
 // 
 // 	- edge WindowEdge: the edge or corner from which the drag is started 
 // 	- device Device: the device used for the operation 
-// 	- button int: the button being used to drag, or 0 for a keyboard-initiated drag 
-// 	- rootX int: root window X coordinate of mouse click that began the drag 
-// 	- rootY int: root window Y coordinate of mouse click that began the drag 
+// 	- button int32: the button being used to drag, or 0 for a keyboard-initiated drag 
+// 	- rootX int32: root window X coordinate of mouse click that began the drag 
+// 	- rootY int32: root window Y coordinate of mouse click that began the drag 
 // 	- timestamp uint32: timestamp of mouse click that began the drag (use gdk_event_get_time()) 
 //
 // Begins a window resize operation (for a toplevel window).
@@ -20443,7 +20676,7 @@ func (window *WindowInstance) BeginResizeDrag(edge WindowEdge, button int, rootX
 // with window managers that support the
 // [Extended Window Manager Hints](http://www.freedesktop.org/Standards/wm-spec)
 // but has a fallback implementation for other window managers.
-func (window *WindowInstance) BeginResizeDragForDevice(edge WindowEdge, device Device, button int, rootX int, rootY int, timestamp uint32) {
+func (window *WindowInstance) BeginResizeDragForDevice(edge WindowEdge, device Device, button int32, rootX int32, rootY int32, timestamp uint32) {
 	var carg0 *C.GdkWindow    // in, none, converted
 	var carg1 C.GdkWindowEdge // in, none, casted
 	var carg2 *C.GdkDevice    // in, none, converted
@@ -20785,13 +21018,13 @@ func (window *WindowInstance) Fullscreen() {
 // 
 // The function takes the following parameters:
 // 
-// 	- monitor int: Which monitor to display fullscreen on. 
+// 	- monitor int32: Which monitor to display fullscreen on. 
 //
 // Moves the window into fullscreen mode on the given monitor. This means
 // the window covers the entire screen and is above any panels or task bars.
 // 
 // If the window was already fullscreen, then this function does nothing.
-func (window *WindowInstance) FullscreenOnMonitor(monitor int) {
+func (window *WindowInstance) FullscreenOnMonitor(monitor int32) {
 	var carg0 *C.GdkWindow // in, none, converted
 	var carg1 C.gint       // in, none, casted
 
@@ -21010,8 +21243,8 @@ func (window *WindowInstance) GetDeviceEvents(device Device) EventMask {
 // 
 // The function returns the following values:
 // 
-// 	- x int: return location for the X coordinate of @device, or %NULL. 
-// 	- y int: return location for the Y coordinate of @device, or %NULL. 
+// 	- x int32: return location for the X coordinate of @device, or %NULL. 
+// 	- y int32: return location for the Y coordinate of @device, or %NULL. 
 // 	- mask ModifierType: return location for the modifier mask, or %NULL. 
 // 	- goret Window (nullable) 
 //
@@ -21020,7 +21253,7 @@ func (window *WindowInstance) GetDeviceEvents(device Device) EventMask {
 // corner of @window.
 // 
 // Use gdk_window_get_device_position_double() if you need subpixel precision.
-func (window *WindowInstance) GetDevicePosition(device Device) (int, int, ModifierType, Window) {
+func (window *WindowInstance) GetDevicePosition(device Device) (int32, int32, ModifierType, Window) {
 	var carg0 *C.GdkWindow      // in, none, converted
 	var carg1 *C.GdkDevice      // in, none, converted
 	var carg2 C.gint            // out, full, casted
@@ -21035,13 +21268,13 @@ func (window *WindowInstance) GetDevicePosition(device Device) (int, int, Modifi
 	runtime.KeepAlive(window)
 	runtime.KeepAlive(device)
 
-	var x     int
-	var y     int
+	var x     int32
+	var y     int32
 	var mask  ModifierType
 	var goret Window
 
-	x = int(carg2)
-	y = int(carg3)
+	x = int32(carg2)
+	y = int32(carg3)
 	mask = ModifierType(carg4)
 	if cret != nil {
 		goret = UnsafeWindowFromGlibNone(unsafe.Pointer(cret))
@@ -21358,10 +21591,10 @@ func (window *WindowInstance) GetFullscreenMode() FullscreenMode {
 // 
 // The function returns the following values:
 // 
-// 	- x int: return location for X coordinate of window (relative to its parent) 
-// 	- y int: return location for Y coordinate of window (relative to its parent) 
-// 	- width int: return location for width of window 
-// 	- height int: return location for height of window 
+// 	- x int32: return location for X coordinate of window (relative to its parent) 
+// 	- y int32: return location for Y coordinate of window (relative to its parent) 
+// 	- width int32: return location for width of window 
+// 	- height int32: return location for height of window 
 //
 // Any of the return location arguments to this function may be %NULL,
 // if you aren’t interested in getting the value of that field.
@@ -21383,7 +21616,7 @@ func (window *WindowInstance) GetFullscreenMode() FullscreenMode {
 // the X server and because these functions support the full 32-bit
 // coordinate space, whereas gdk_window_get_geometry() is restricted to
 // the 16-bit coordinates of X11.
-func (window *WindowInstance) GetGeometry() (int, int, int, int) {
+func (window *WindowInstance) GetGeometry() (int32, int32, int32, int32) {
 	var carg0 *C.GdkWindow // in, none, converted
 	var carg1 C.gint       // out, full, casted
 	var carg2 C.gint       // out, full, casted
@@ -21395,15 +21628,15 @@ func (window *WindowInstance) GetGeometry() (int, int, int, int) {
 	C.gdk_window_get_geometry(carg0, &carg1, &carg2, &carg3, &carg4)
 	runtime.KeepAlive(window)
 
-	var x      int
-	var y      int
-	var width  int
-	var height int
+	var x      int32
+	var y      int32
+	var width  int32
+	var height int32
 
-	x = int(carg1)
-	y = int(carg2)
-	width = int(carg3)
-	height = int(carg4)
+	x = int32(carg1)
+	y = int32(carg2)
+	width = int32(carg3)
+	height = int32(carg4)
 
 	return x, y, width, height
 }
@@ -21435,14 +21668,14 @@ func (window *WindowInstance) GetGroup() Window {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Returns the height of the given @window.
 // 
 // On the X11 platform the returned size is the size reported in the
 // most-recently-processed configure event, rather than the current
 // size on the X server.
-func (window *WindowInstance) GetHeight() int {
+func (window *WindowInstance) GetHeight() int32 {
 	var carg0 *C.GdkWindow // in, none, converted
 	var cret  C.int        // return, none, casted, casted C.gint
 
@@ -21451,9 +21684,9 @@ func (window *WindowInstance) GetHeight() int {
 	cret = C.gdk_window_get_height(carg0)
 	runtime.KeepAlive(window)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -21488,15 +21721,15 @@ func (window *WindowInstance) GetModalHint() bool {
 // 
 // The function returns the following values:
 // 
-// 	- x int: return location for X coordinate 
-// 	- y int: return location for Y coordinate 
-// 	- goret int 
+// 	- x int32: return location for X coordinate 
+// 	- y int32: return location for Y coordinate 
+// 	- goret int32 
 //
 // Obtains the position of a window in root window coordinates.
 // (Compare with gdk_window_get_position() and
 // gdk_window_get_geometry() which return the position of a window
 // relative to its parent window.)
-func (window *WindowInstance) GetOrigin() (int, int, int) {
+func (window *WindowInstance) GetOrigin() (int32, int32, int32) {
 	var carg0 *C.GdkWindow // in, none, converted
 	var carg1 C.gint       // out, full, casted
 	var carg2 C.gint       // out, full, casted
@@ -21507,13 +21740,13 @@ func (window *WindowInstance) GetOrigin() (int, int, int) {
 	cret = C.gdk_window_get_origin(carg0, &carg1, &carg2)
 	runtime.KeepAlive(window)
 
-	var x     int
-	var y     int
-	var goret int
+	var x     int32
+	var y     int32
+	var goret int32
 
-	x = int(carg1)
-	y = int(carg2)
-	goret = int(cret)
+	x = int32(carg1)
+	y = int32(carg2)
+	goret = int32(cret)
 
 	return x, y, goret
 }
@@ -21583,8 +21816,8 @@ func (window *WindowInstance) GetPassThrough() bool {
 // 
 // The function returns the following values:
 // 
-// 	- x int: X coordinate of window 
-// 	- y int: Y coordinate of window 
+// 	- x int32: X coordinate of window 
+// 	- y int32: Y coordinate of window 
 //
 // Obtains the position of the window as reported in the
 // most-recently-processed #GdkEventConfigure. Contrast with
@@ -21593,7 +21826,7 @@ func (window *WindowInstance) GetPassThrough() bool {
 // received or processed.
 // 
 // The position coordinates are relative to the window’s parent window.
-func (window *WindowInstance) GetPosition() (int, int) {
+func (window *WindowInstance) GetPosition() (int32, int32) {
 	var carg0 *C.GdkWindow // in, none, converted
 	var carg1 C.gint       // out, full, casted
 	var carg2 C.gint       // out, full, casted
@@ -21603,11 +21836,11 @@ func (window *WindowInstance) GetPosition() (int, int) {
 	C.gdk_window_get_position(carg0, &carg1, &carg2)
 	runtime.KeepAlive(window)
 
-	var x int
-	var y int
+	var x int32
+	var y int32
 
-	x = int(carg1)
-	y = int(carg2)
+	x = int32(carg1)
+	y = int32(carg2)
 
 	return x, y
 }
@@ -21616,19 +21849,19 @@ func (window *WindowInstance) GetPosition() (int, int) {
 // 
 // The function takes the following parameters:
 // 
-// 	- x int: X coordinate in window 
-// 	- y int: Y coordinate in window 
+// 	- x int32: X coordinate in window 
+// 	- y int32: Y coordinate in window 
 // 
 // The function returns the following values:
 // 
-// 	- rootX int: return location for X coordinate 
-// 	- rootY int: return location for Y coordinate 
+// 	- rootX int32: return location for X coordinate 
+// 	- rootY int32: return location for Y coordinate 
 //
 // Obtains the position of a window position in root
 // window coordinates. This is similar to
 // gdk_window_get_origin() but allows you to pass
 // in any position in the window, not just the origin.
-func (window *WindowInstance) GetRootCoords(x int, y int) (int, int) {
+func (window *WindowInstance) GetRootCoords(x int32, y int32) (int32, int32) {
 	var carg0 *C.GdkWindow // in, none, converted
 	var carg1 C.gint       // in, none, casted
 	var carg2 C.gint       // in, none, casted
@@ -21644,11 +21877,11 @@ func (window *WindowInstance) GetRootCoords(x int, y int) (int, int) {
 	runtime.KeepAlive(x)
 	runtime.KeepAlive(y)
 
-	var rootX int
-	var rootY int
+	var rootX int32
+	var rootY int32
 
-	rootX = int(carg3)
-	rootY = int(carg4)
+	rootX = int32(carg3)
+	rootY = int32(carg4)
 
 	return rootX, rootY
 }
@@ -21657,12 +21890,12 @@ func (window *WindowInstance) GetRootCoords(x int, y int) (int, int) {
 // 
 // The function returns the following values:
 // 
-// 	- x int: return location for X position of window frame 
-// 	- y int: return location for Y position of window frame 
+// 	- x int32: return location for X position of window frame 
+// 	- y int32: return location for Y position of window frame 
 //
 // Obtains the top-left corner of the window manager frame in root
 // window coordinates.
-func (window *WindowInstance) GetRootOrigin() (int, int) {
+func (window *WindowInstance) GetRootOrigin() (int32, int32) {
 	var carg0 *C.GdkWindow // in, none, converted
 	var carg1 C.gint       // out, full, casted
 	var carg2 C.gint       // out, full, casted
@@ -21672,11 +21905,11 @@ func (window *WindowInstance) GetRootOrigin() (int, int) {
 	C.gdk_window_get_root_origin(carg0, &carg1, &carg2)
 	runtime.KeepAlive(window)
 
-	var x int
-	var y int
+	var x int32
+	var y int32
 
-	x = int(carg1)
-	y = int(carg2)
+	x = int32(carg1)
+	y = int32(carg2)
 
 	return x, y
 }
@@ -21685,7 +21918,7 @@ func (window *WindowInstance) GetRootOrigin() (int, int) {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Returns the internal scale factor that maps from window coordiantes
 // to the actual device pixels. On traditional systems this is 1, but
@@ -21699,7 +21932,7 @@ func (window *WindowInstance) GetRootOrigin() (int, int) {
 // 
 // The scale of a window may change during runtime, if this happens
 // a configure event will be sent to the toplevel window.
-func (window *WindowInstance) GetScaleFactor() int {
+func (window *WindowInstance) GetScaleFactor() int32 {
 	var carg0 *C.GdkWindow // in, none, converted
 	var cret  C.gint       // return, none, casted
 
@@ -21708,9 +21941,9 @@ func (window *WindowInstance) GetScaleFactor() int {
 	cret = C.gdk_window_get_scale_factor(carg0)
 	runtime.KeepAlive(window)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -21901,14 +22134,14 @@ func (window *WindowInstance) GetVisual() Visual {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Returns the width of the given @window.
 // 
 // On the X11 platform the returned size is the size reported in the
 // most-recently-processed configure event, rather than the current
 // size on the X server.
-func (window *WindowInstance) GetWidth() int {
+func (window *WindowInstance) GetWidth() int32 {
 	var carg0 *C.GdkWindow // in, none, converted
 	var cret  C.int        // return, none, casted, casted C.gint
 
@@ -21917,9 +22150,9 @@ func (window *WindowInstance) GetWidth() int {
 	cret = C.gdk_window_get_width(carg0)
 	runtime.KeepAlive(window)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -22248,8 +22481,8 @@ func (window *WindowInstance) MergeChildShapes() {
 // 
 // The function takes the following parameters:
 // 
-// 	- x int: X coordinate relative to window’s parent 
-// 	- y int: Y coordinate relative to window’s parent 
+// 	- x int32: X coordinate relative to window’s parent 
+// 	- y int32: Y coordinate relative to window’s parent 
 //
 // Repositions a window relative to its parent window.
 // For toplevel windows, window managers may ignore or modify the move;
@@ -22259,7 +22492,7 @@ func (window *WindowInstance) MergeChildShapes() {
 // 
 // If you’re also planning to resize the window, use gdk_window_move_resize()
 // to both move and resize simultaneously, for a nicer visual effect.
-func (window *WindowInstance) Move(x int, y int) {
+func (window *WindowInstance) Move(x int32, y int32) {
 	var carg0 *C.GdkWindow // in, none, converted
 	var carg1 C.gint       // in, none, casted
 	var carg2 C.gint       // in, none, casted
@@ -22278,16 +22511,16 @@ func (window *WindowInstance) Move(x int, y int) {
 // 
 // The function takes the following parameters:
 // 
-// 	- x int: new X position relative to window’s parent 
-// 	- y int: new Y position relative to window’s parent 
-// 	- width int: new width 
-// 	- height int: new height 
+// 	- x int32: new X position relative to window’s parent 
+// 	- y int32: new Y position relative to window’s parent 
+// 	- width int32: new width 
+// 	- height int32: new height 
 //
 // Equivalent to calling gdk_window_move() and gdk_window_resize(),
 // except that both operations are performed at once, avoiding strange
 // visual effects. (i.e. the user may be able to see the window first
 // move, then resize, if you don’t use gdk_window_move_resize().)
-func (window *WindowInstance) MoveResize(x int, y int, width int, height int) {
+func (window *WindowInstance) MoveResize(x int32, y int32, width int32, height int32) {
 	var carg0 *C.GdkWindow // in, none, converted
 	var carg1 C.gint       // in, none, casted
 	var carg2 C.gint       // in, none, casted
@@ -22316,9 +22549,9 @@ func (window *WindowInstance) MoveResize(x int, y int, width int, height int) {
 // 	- rectAnchor Gravity: the point on @rect to align with @window's anchor point 
 // 	- windowAnchor Gravity: the point on @window to align with @rect's anchor point 
 // 	- anchorHints AnchorHints: positioning hints to use when limited on space 
-// 	- rectAnchorDx int: horizontal offset to shift @window, i.e. @rect's anchor
+// 	- rectAnchorDx int32: horizontal offset to shift @window, i.e. @rect's anchor
 //                  point 
-// 	- rectAnchorDy int: vertical offset to shift @window, i.e. @rect's anchor point 
+// 	- rectAnchorDy int32: vertical offset to shift @window, i.e. @rect's anchor point 
 //
 // Moves @window to @rect, aligning their anchor points.
 // 
@@ -22335,7 +22568,7 @@ func (window *WindowInstance) MoveResize(x int, y int, width int, height int) {
 // 
 // Connect to the #GdkWindow::moved-to-rect signal to find out how it was
 // actually positioned.
-func (window *WindowInstance) MoveToRect(rect *Rectangle, rectAnchor Gravity, windowAnchor Gravity, anchorHints AnchorHints, rectAnchorDx int, rectAnchorDy int) {
+func (window *WindowInstance) MoveToRect(rect *Rectangle, rectAnchor Gravity, windowAnchor Gravity, anchorHints AnchorHints, rectAnchorDx int32, rectAnchorDy int32) {
 	var carg0 *C.GdkWindow     // in, none, converted
 	var carg1 *C.GdkRectangle  // in, none, converted
 	var carg2 C.GdkGravity     // in, none, casted
@@ -22428,12 +22661,12 @@ func (window *WindowInstance) RegisterDND() {
 // The function takes the following parameters:
 // 
 // 	- newParent Window: new parent to move @window into 
-// 	- x int: X location inside the new parent 
-// 	- y int: Y location inside the new parent 
+// 	- x int32: X location inside the new parent 
+// 	- y int32: Y location inside the new parent 
 //
 // Reparents @window into the given @new_parent. The window being
 // reparented will be unmapped as a side effect.
-func (window *WindowInstance) Reparent(newParent Window, x int, y int) {
+func (window *WindowInstance) Reparent(newParent Window, x int32, y int32) {
 	var carg0 *C.GdkWindow // in, none, converted
 	var carg1 *C.GdkWindow // in, none, converted
 	var carg2 C.gint       // in, none, casted
@@ -22455,8 +22688,8 @@ func (window *WindowInstance) Reparent(newParent Window, x int, y int) {
 // 
 // The function takes the following parameters:
 // 
-// 	- width int: new width of the window 
-// 	- height int: new height of the window 
+// 	- width int32: new width of the window 
+// 	- height int32: new height of the window 
 //
 // Resizes @window; for toplevel windows, asks the window manager to resize
 // the window. The window manager may not allow the resize. When using GTK+,
@@ -22466,7 +22699,7 @@ func (window *WindowInstance) Reparent(newParent Window, x int, y int) {
 // 
 // If you’re also planning to move the window, use gdk_window_move_resize()
 // to both move and resize simultaneously, for a nicer visual effect.
-func (window *WindowInstance) Resize(width int, height int) {
+func (window *WindowInstance) Resize(width int32, height int32) {
 	var carg0 *C.GdkWindow // in, none, converted
 	var carg1 C.gint       // in, none, casted
 	var carg2 C.gint       // in, none, casted
@@ -22521,8 +22754,8 @@ func (window *WindowInstance) Restack(sibling Window, above bool) {
 // 
 // The function takes the following parameters:
 // 
-// 	- dx int: Amount to scroll in the X direction 
-// 	- dy int: Amount to scroll in the Y direction 
+// 	- dx int32: Amount to scroll in the X direction 
+// 	- dy int32: Amount to scroll in the Y direction 
 //
 // Scroll the contents of @window, both pixels and children, by the
 // given amount. @window itself does not move. Portions of the window
@@ -22535,7 +22768,7 @@ func (window *WindowInstance) Restack(sibling Window, above bool) {
 // beyond the edges of the window. In other cases, a multi-step process
 // is used to scroll the window which may produce temporary visual
 // artifacts and unnecessary invalidations.
-func (window *WindowInstance) Scroll(dx int, dy int) {
+func (window *WindowInstance) Scroll(dx int32, dy int32) {
 	var carg0 *C.GdkWindow // in, none, converted
 	var carg1 C.gint       // in, none, casted
 	var carg2 C.gint       // in, none, casted
@@ -23199,10 +23432,10 @@ func (window *WindowInstance) SetRole(role string) {
 // 
 // The function takes the following parameters:
 // 
-// 	- left int: The left extent 
-// 	- right int: The right extent 
-// 	- top int: The top extent 
-// 	- bottom int: The bottom extent 
+// 	- left int32: The left extent 
+// 	- right int32: The right extent 
+// 	- top int32: The top extent 
+// 	- bottom int32: The bottom extent 
 //
 // Newer GTK+ windows using client-side decorations use extra geometry
 // around their frames for effects like shadows and invisible borders.
@@ -23213,7 +23446,7 @@ func (window *WindowInstance) SetRole(role string) {
 // Note that this property is automatically updated by GTK+, so this
 // function should only be used by applications which do not use GTK+
 // to create toplevel windows.
-func (window *WindowInstance) SetShadowWidth(left int, right int, top int, bottom int) {
+func (window *WindowInstance) SetShadowWidth(left int32, right int32, top int32, bottom int32) {
 	var carg0 *C.GdkWindow // in, none, converted
 	var carg1 C.gint       // in, none, casted
 	var carg2 C.gint       // in, none, casted
@@ -23682,7 +23915,7 @@ func UnsafeApplyWindowOverrides[Instance Window](gclass unsafe.Pointer, override
 				var offscreenX *float64 // in, transfer: none, C Pointers: 1, Name: gdouble
 				var offscreenY *float64 // in, transfer: none, C Pointers: 1, Name: gdouble
 
-				window = UnsafeWindowFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				window = UnsafeWindowFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				embedderX = float64(carg1)
 				embedderY = float64(carg2)
 				_ = offscreenX
@@ -23709,7 +23942,7 @@ func UnsafeApplyWindowOverrides[Instance Window](gclass unsafe.Pointer, override
 				var embedderX  *float64 // in, transfer: none, C Pointers: 1, Name: gdouble
 				var embedderY  *float64 // in, transfer: none, C Pointers: 1, Name: gdouble
 
-				window = UnsafeWindowFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				window = UnsafeWindowFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				offscreenX = float64(carg1)
 				offscreenY = float64(carg2)
 				_ = embedderX
@@ -25122,8 +25355,11 @@ func marshalEventSequence(p unsafe.Pointer) (interface{}, error) {
 	return UnsafeEventSequenceFromGlibBorrow(b), nil
 }
 
-func (r *EventSequence) InitGoValue(v *gobject.Value) {
-	v.Init(TypeEventSequence)
+func (r *EventSequence) GoValueType() gobject.Type {
+	return TypeEventSequence
+}
+
+func (r *EventSequence) SetGoValue(v *gobject.Value) {
 	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
@@ -25564,8 +25800,11 @@ func marshalFrameTimings(p unsafe.Pointer) (interface{}, error) {
 	return UnsafeFrameTimingsFromGlibBorrow(b), nil
 }
 
-func (r *FrameTimings) InitGoValue(v *gobject.Value) {
-	v.Init(TypeFrameTimings)
+func (r *FrameTimings) GoValueType() gobject.Type {
+	return TypeFrameTimings
+}
+
+func (r *FrameTimings) SetGoValue(v *gobject.Value) {
 	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
@@ -26090,8 +26329,11 @@ func marshalRGBA(p unsafe.Pointer) (interface{}, error) {
 	return UnsafeRGBAFromGlibBorrow(b), nil
 }
 
-func (r *RGBA) InitGoValue(v *gobject.Value) {
-	v.Init(TypeRGBA)
+func (r *RGBA) GoValueType() gobject.Type {
+	return TypeRGBA
+}
+
+func (r *RGBA) SetGoValue(v *gobject.Value) {
 	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
@@ -26276,8 +26518,11 @@ func marshalRectangle(p unsafe.Pointer) (interface{}, error) {
 	return UnsafeRectangleFromGlibBorrow(b), nil
 }
 
-func (r *Rectangle) InitGoValue(v *gobject.Value) {
-	v.Init(TypeRectangle)
+func (r *Rectangle) GoValueType() gobject.Type {
+	return TypeRectangle
+}
+
+func (r *Rectangle) SetGoValue(v *gobject.Value) {
 	v.SetBoxed(unsafe.Pointer(r.native))
 }
 

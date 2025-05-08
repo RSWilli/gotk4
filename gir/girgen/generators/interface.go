@@ -106,6 +106,8 @@ func (g *InterfaceGenerator) Generate(w *file.Package) {
 	mkConstructor(g.GoUnsafeFromGlibNoneFunction(), g.Parent.WithForeignNamespace(g.Parent.Type.GoUnsafeFromGlibNoneFunction()))
 	fmt.Fprintf(w.Go(), "// %s is used to convert raw %s pointers to go while attaching a finalizer. This is used by the bindings internally.\n", g.GoUnsafeFromGlibFullFunction(), g.CType(0))
 	mkConstructor(g.GoUnsafeFromGlibFullFunction(), g.Parent.WithForeignNamespace(g.Parent.Type.GoUnsafeFromGlibFullFunction()))
+	fmt.Fprintf(w.Go(), "// %s is used to convert raw %s pointers to go without touching any references. This is used by the bindings internally.\n", g.GoUnsafeFromGlibBorrowFunction(), g.CType(0))
+	mkConstructor(g.GoUnsafeFromGlibBorrowFunction(), g.Parent.WithForeignNamespace(g.Parent.Type.GoUnsafeFromGlibBorrowFunction()))
 
 	mkTransfer := func(transfername, baseTransferName string) {
 		fmt.Fprintf(w.Go(), "func %s(c %s) unsafe.Pointer {\n", transfername, g.GoInterfaceName)

@@ -38,6 +38,10 @@ type Object interface {
 	ThawNotify()
 	StopEmission(string)
 
+	isFloating() bool
+
+	unsafeForceFloating()
+
 	baseObject() *ObjectInstance
 }
 
@@ -68,6 +72,29 @@ func UnsafeObjectFromGlibNone(p unsafe.Pointer) Object {
 	obj := newObject(p, true)
 
 	return obj.cast()
+}
+
+// UnsafeObjectFromGlibBorrow is used to convert raw C object pointers to go without taking a reference or touching the
+// floating reference. The returned Object is casted correctly and needs a manual cast by the user to the correct extending interface
+//
+// This will call the type marshalers internally for conversion. DO NOT call it from any of the marshalers to avoid
+// infinite recursion.
+// This is used by the bindings internally.
+func UnsafeObjectFromGlibBorrow(p unsafe.Pointer) Object {
+	obj := wrapObject(p)
+
+	// this is not entirely race condition free, but cast() takes a reference
+	// on the object which we need to release again
+
+	wasFloating := obj.isFloating()
+
+	casted := obj.cast()
+
+	if wasFloating {
+		casted.unsafeForceFloating()
+	}
+
+	return casted
 }
 
 // UnsafeObjectFromGlibFull is used to convert raw C object pointers to go.
@@ -127,11 +154,26 @@ type ObjectInstance struct {
 	*objectInstance
 }
 
-// InitGoValue implements GoValueInitializer.
-func (obj *ObjectInstance) InitGoValue(v *Value) {
+// unsafeForceFloating implements Object.
+func (v *ObjectInstance) unsafeForceFloating() {
+	C.g_object_force_floating(v.native)
+	runtime.KeepAlive(v)
+}
+
+// isFloating implements Object.
+func (v *ObjectInstance) isFloating() bool {
+	return C.g_object_is_floating(C.gpointer(v.unsafe())) != 0
+}
+
+// GoValueType implements GoValueInitializer.
+func (obj *ObjectInstance) GoValueType() Type {
 	// always use the type from the object instance, instead of the base type,
 	// since this is inherited by all extending types
-	v.Init(obj.typeFromInstance())
+	return obj.typeFromInstance()
+}
+
+// SetGoValue implements GoValueInitializer.
+func (obj *ObjectInstance) SetGoValue(v *Value) {
 	v.SetObject(obj)
 }
 
@@ -181,6 +223,7 @@ func (v *ObjectInstance) SetObjectProperty(name string, value interface{}) {
 
 	p := allocateValue()
 	p.InitGoValue(value)
+	p.SetGoValue(value)
 	defer p.unset()
 
 	C.g_object_set_property(v.native, (*C.gchar)(cstr), p.native())

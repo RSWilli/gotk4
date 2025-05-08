@@ -16,10 +16,7 @@ import (
 
 type subClassData struct {
 	classInit    func(gclass unsafe.Pointer)
-	instanceInit func(instance any)
-
-	// newFromGlib is the function to create a new instance from the glib pointer in the instance init function.
-	newFromGlib func(unsafe.Pointer) any
+	instanceInit func(instance unsafe.Pointer)
 }
 
 // UnsafeRegisterSubClass registers a new subclass of the given parentGtype. This is wrapped by the generated bindings
@@ -41,10 +38,11 @@ func UnsafeRegisterSubClass[InstanceT Object, ClassT any, OverridesT ObjectOverr
 	// user supplied interfaces:
 	interfaceInits ...SubClassInterfaceInit[InstanceT],
 ) Type {
+	instanceType := getInstanceType[InstanceT]()
+
 	if constructor == nil {
 		constructor = func() InstanceT {
-			var instance InstanceT
-			return instance
+			return reflect.New(instanceType).Interface().(InstanceT)
 		}
 	}
 	if classInit == nil {
@@ -56,6 +54,8 @@ func UnsafeRegisterSubClass[InstanceT Object, ClassT any, OverridesT ObjectOverr
 	if typeQuery._type == 0 {
 		log.Panicln("GType", parentGtype, "is is unknown")
 	}
+
+	baseOverrides := overrides.getObjectOverrides()
 
 	var data *subClassData
 	data = &subClassData{
@@ -83,7 +83,7 @@ func UnsafeRegisterSubClass[InstanceT Object, ClassT any, OverridesT ObjectOverr
 			// then allow the user to call some methods on the class, e.g. to supply metadata
 			classInit(class)
 		},
-		newFromGlib: func(cInstance unsafe.Pointer) any {
+		instanceInit: func(cInstance unsafe.Pointer) {
 			obj := wrapObject(cInstance)
 			// parent is the pointer to the parent instance
 			parent := parentWrapObject(obj)
@@ -94,14 +94,16 @@ func UnsafeRegisterSubClass[InstanceT Object, ClassT any, OverridesT ObjectOverr
 			// the embedded field is not the parent interface though, but instead the instance struct
 			// so we need to deref the pointer and set the first field
 
-			parentInstance := reflect.ValueOf(parent).Elem()
+			parentInstance := reflect.ValueOf(parent)
 
-			if parentInstance.Kind() == reflect.Ptr {
-				parentInstance = parentInstance.Elem()
+			if parentInstance.Kind() != reflect.Ptr {
+				panic("parent instance is not a pointer to a struct")
 			}
 
+			parentInstance = parentInstance.Elem()
+
 			if parentInstance.Kind() != reflect.Struct {
-				log.Panicln("parent instance is not a struct")
+				log.Panicln("parent instance is not pointer to a struct")
 			}
 
 			instanceValue := reflect.ValueOf(instance).Elem()
@@ -129,7 +131,9 @@ func UnsafeRegisterSubClass[InstanceT Object, ClassT any, OverridesT ObjectOverr
 			// store the instance in the private data of the instance, so we can retrieve it later
 			saveInstanceInPrivateData(instance)
 
-			return instance
+			if baseOverrides.InstanceInit != nil {
+				baseOverrides.InstanceInit(instance)
+			}
 		},
 	}
 
@@ -144,8 +148,7 @@ func UnsafeRegisterSubClass[InstanceT Object, ClassT any, OverridesT ObjectOverr
 		n_preallocs:    0,
 		class_finalize: nil,
 
-		instance_size: 0, // not required
-
+		instance_size: C.guint16(typeQuery.instance_size),
 		class_size:    C.guint16(typeQuery.class_size),
 		class_init:    C.GClassInitFunc(C._gotk4ClassInit),
 		instance_init: C.GInstanceInitFunc(C._gotk4InstanceInit),
@@ -174,9 +177,9 @@ func UnsafeRegisterSubClass[InstanceT Object, ClassT any, OverridesT ObjectOverr
 	RegisterGValueMarshaler(t, func(p unsafe.Pointer) (any, error) {
 		obj := ValueFromNative(p).Object()
 
-		loadInstanceFromPrivateData(obj)
+		instance := loadInstanceFromPrivateData(obj)
 
-		return obj, nil
+		return instance, nil
 	})
 
 	return t
@@ -216,4 +219,16 @@ func (i SubClassInterfaceInit[InstanceT]) toInterfaceInfo() *C.GInterfaceInfo {
 		interface_finalize: nil,
 		interface_data:     C.gpointer(applyOverridesData),
 	}
+}
+
+func getInstanceType[T any]() reflect.Type {
+	var zero T
+
+	typ := reflect.TypeOf(zero)
+
+	if typ.Kind() == reflect.Ptr {
+		typ = typ.Elem()
+	}
+
+	return typ
 }

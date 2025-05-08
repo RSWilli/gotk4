@@ -100,8 +100,11 @@ func marshalColorspace(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = Colorspace(0)
 
-func (e Colorspace) InitGoValue(v *gobject.Value) {
-	v.Init(TypeColorspace)
+func (e Colorspace) GoValueType() gobject.Type {
+	return TypeColorspace
+}
+
+func (e Colorspace) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -167,8 +170,11 @@ func marshalInterpType(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = InterpType(0)
 
-func (e InterpType) InitGoValue(v *gobject.Value) {
-	v.Init(TypeInterpType)
+func (e InterpType) GoValueType() gobject.Type {
+	return TypeInterpType
+}
+
+func (e InterpType) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -223,8 +229,11 @@ func marshalPixbufAlphaMode(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = PixbufAlphaMode(0)
 
-func (e PixbufAlphaMode) InitGoValue(v *gobject.Value) {
-	v.Init(TypePixbufAlphaMode)
+func (e PixbufAlphaMode) GoValueType() gobject.Type {
+	return TypePixbufAlphaMode
+}
+
+func (e PixbufAlphaMode) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -282,8 +291,11 @@ func marshalPixbufError(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = PixbufError(0)
 
-func (e PixbufError) InitGoValue(v *gobject.Value) {
-	v.Init(TypePixbufError)
+func (e PixbufError) GoValueType() gobject.Type {
+	return TypePixbufError
+}
+
+func (e PixbufError) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -349,8 +361,11 @@ func marshalPixbufRotation(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = PixbufRotation(0)
 
-func (e PixbufRotation) InitGoValue(v *gobject.Value) {
-	v.Init(TypePixbufRotation)
+func (e PixbufRotation) GoValueType() gobject.Type {
+	return TypePixbufRotation
+}
+
+func (e PixbufRotation) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -424,7 +439,7 @@ func (f PixbufFormatFlags) String() string {
 // this as a hint that it will be closed soon and shouldn't allocate further
 // resources. This convention is used to implement gdk_pixbuf_get_file_info()
 // efficiently.
-type PixbufModuleSizeFunc func(width *int, height *int)
+type PixbufModuleSizeFunc func(width *int32, height *int32)
 
 // PixbufModuleUpdatedFunc wraps GdkPixbufModuleUpdatedFunc
 //
@@ -434,7 +449,7 @@ type PixbufModuleSizeFunc func(width *int, height *int)
 // #GdkPixbufLoader uses a function of this type to emit the
 // "&lt;link linkend="GdkPixbufLoader-area-updated"&gt;area_updated&lt;/link&gt;"
 // signal.
-type PixbufModuleUpdatedFunc func(pixbuf Pixbuf, x int, y int, width int, height int)
+type PixbufModuleUpdatedFunc func(pixbuf Pixbuf, x int32, y int32, width int32, height int32)
 
 // PixbufSaveFunc wraps GdkPixbufSaveFunc
 //
@@ -651,16 +666,16 @@ type Pixbuf interface {
 	// The function takes the following parameters:
 	// 
 	// 	- dest Pixbuf: the #GdkPixbuf into which to render the results 
-	// 	- destX int: the left coordinate for region to render 
-	// 	- destY int: the top coordinate for region to render 
-	// 	- destWidth int: the width of the region to render 
-	// 	- destHeight int: the height of the region to render 
+	// 	- destX int32: the left coordinate for region to render 
+	// 	- destY int32: the top coordinate for region to render 
+	// 	- destWidth int32: the width of the region to render 
+	// 	- destHeight int32: the height of the region to render 
 	// 	- offsetX float64: the offset in the X direction (currently rounded to an integer) 
 	// 	- offsetY float64: the offset in the Y direction (currently rounded to an integer) 
 	// 	- scaleX float64: the scale factor in the X direction 
 	// 	- scaleY float64: the scale factor in the Y direction 
 	// 	- interpType InterpType: the interpolation type for the transformation. 
-	// 	- overallAlpha int: overall alpha for source image (0..255) 
+	// 	- overallAlpha int32: overall alpha for source image (0..255) 
 	//
 	// Creates a transformation of the source image @src by scaling by
 	// @scale_x and @scale_y then translating by @offset_x and @offset_y.
@@ -675,25 +690,25 @@ type Pixbuf interface {
 	// to infinity.
 	// 
 	// ![](composite.png)
-	Composite(Pixbuf, int, int, int, int, float64, float64, float64, float64, InterpType, int)
+	Composite(Pixbuf, int32, int32, int32, int32, float64, float64, float64, float64, InterpType, int32)
 	// CompositeColor wraps gdk_pixbuf_composite_color
 	// 
 	// The function takes the following parameters:
 	// 
 	// 	- dest Pixbuf: the #GdkPixbuf into which to render the results 
-	// 	- destX int: the left coordinate for region to render 
-	// 	- destY int: the top coordinate for region to render 
-	// 	- destWidth int: the width of the region to render 
-	// 	- destHeight int: the height of the region to render 
+	// 	- destX int32: the left coordinate for region to render 
+	// 	- destY int32: the top coordinate for region to render 
+	// 	- destWidth int32: the width of the region to render 
+	// 	- destHeight int32: the height of the region to render 
 	// 	- offsetX float64: the offset in the X direction (currently rounded to an integer) 
 	// 	- offsetY float64: the offset in the Y direction (currently rounded to an integer) 
 	// 	- scaleX float64: the scale factor in the X direction 
 	// 	- scaleY float64: the scale factor in the Y direction 
 	// 	- interpType InterpType: the interpolation type for the transformation. 
-	// 	- overallAlpha int: overall alpha for source image (0..255) 
-	// 	- checkX int: the X offset for the checkboard (origin of checkboard is at -@check_x, -@check_y) 
-	// 	- checkY int: the Y offset for the checkboard 
-	// 	- checkSize int: the size of checks in the checkboard (must be a power of two) 
+	// 	- overallAlpha int32: overall alpha for source image (0..255) 
+	// 	- checkX int32: the X offset for the checkboard (origin of checkboard is at -@check_x, -@check_y) 
+	// 	- checkY int32: the Y offset for the checkboard 
+	// 	- checkSize int32: the size of checks in the checkboard (must be a power of two) 
 	// 	- color1 uint32: the color of check at upper left 
 	// 	- color2 uint32: the color of the other check 
 	//
@@ -709,16 +724,16 @@ type Pixbuf interface {
 	// 
 	// See gdk_pixbuf_composite_color_simple() for a simpler variant of this
 	// function suitable for many tasks.
-	CompositeColor(Pixbuf, int, int, int, int, float64, float64, float64, float64, InterpType, int, int, int, int, uint32, uint32)
+	CompositeColor(Pixbuf, int32, int32, int32, int32, float64, float64, float64, float64, InterpType, int32, int32, int32, int32, uint32, uint32)
 	// CompositeColorSimple wraps gdk_pixbuf_composite_color_simple
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- destWidth int: the width of destination image 
-	// 	- destHeight int: the height of destination image 
+	// 	- destWidth int32: the width of destination image 
+	// 	- destHeight int32: the height of destination image 
 	// 	- interpType InterpType: the interpolation type for the transformation. 
-	// 	- overallAlpha int: overall alpha for source image (0..255) 
-	// 	- checkSize int: the size of checks in the checkboard (must be a power of two) 
+	// 	- overallAlpha int32: overall alpha for source image (0..255) 
+	// 	- checkSize int32: the size of checks in the checkboard (must be a power of two) 
 	// 	- color1 uint32: the color of check at upper left 
 	// 	- color2 uint32: the color of the other check 
 	// 
@@ -729,7 +744,7 @@ type Pixbuf interface {
 	// Creates a new pixbuf by scaling `src` to `dest_width` x `dest_height`
 	// and alpha blending the result with a checkboard of colors `color1`
 	// and `color2`.
-	CompositeColorSimple(int, int, InterpType, int, int, uint32, uint32) Pixbuf
+	CompositeColorSimple(int32, int32, InterpType, int32, int32, uint32, uint32) Pixbuf
 	// Copy wraps gdk_pixbuf_copy
 	// 
 	// The function returns the following values:
@@ -746,13 +761,13 @@ type Pixbuf interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- srcX int: Source X coordinate within @src_pixbuf. 
-	// 	- srcY int: Source Y coordinate within @src_pixbuf. 
-	// 	- width int: Width of the area to copy. 
-	// 	- height int: Height of the area to copy. 
+	// 	- srcX int32: Source X coordinate within @src_pixbuf. 
+	// 	- srcY int32: Source Y coordinate within @src_pixbuf. 
+	// 	- width int32: Width of the area to copy. 
+	// 	- height int32: Height of the area to copy. 
 	// 	- destPixbuf Pixbuf: Destination pixbuf. 
-	// 	- destX int: X coordinate within @dest_pixbuf. 
-	// 	- destY int: Y coordinate within @dest_pixbuf. 
+	// 	- destX int32: X coordinate within @dest_pixbuf. 
+	// 	- destY int32: Y coordinate within @dest_pixbuf. 
 	//
 	// Copies a rectangular area from `src_pixbuf` to `dest_pixbuf`.
 	// 
@@ -761,7 +776,7 @@ type Pixbuf interface {
 	// If the source rectangle overlaps the destination rectangle on the
 	// same pixbuf, it will be overwritten during the copy operation.
 	// Therefore, you can not use this function to scroll a pixbuf.
-	CopyArea(int, int, int, int, Pixbuf, int, int)
+	CopyArea(int32, int32, int32, int32, Pixbuf, int32, int32)
 	// CopyOptions wraps gdk_pixbuf_copy_options
 	// 
 	// The function takes the following parameters:
@@ -809,10 +824,10 @@ type Pixbuf interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Queries the number of bits per color sample in a pixbuf.
-	GetBitsPerSample() int
+	GetBitsPerSample() int32
 	// GetByteLength wraps gdk_pixbuf_get_byte_length
 	// 
 	// The function returns the following values:
@@ -841,18 +856,18 @@ type Pixbuf interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Queries the height of a pixbuf.
-	GetHeight() int
+	GetHeight() int32
 	// GetNChannels wraps gdk_pixbuf_get_n_channels
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Queries the number of channels of a pixbuf.
-	GetNChannels() int
+	GetNChannels() int32
 	// GetOption wraps gdk_pixbuf_get_option
 	// 
 	// The function takes the following parameters:
@@ -898,27 +913,27 @@ type Pixbuf interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Queries the rowstride of a pixbuf, which is the number of bytes between
 	// the start of a row and the start of the next row.
-	GetRowstride() int
+	GetRowstride() int32
 	// GetWidth wraps gdk_pixbuf_get_width
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Queries the width of a pixbuf.
-	GetWidth() int
+	GetWidth() int32
 	// NewSubpixbuf wraps gdk_pixbuf_new_subpixbuf
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- srcX int: X coord in @src_pixbuf 
-	// 	- srcY int: Y coord in @src_pixbuf 
-	// 	- width int: width of region in @src_pixbuf 
-	// 	- height int: height of region in @src_pixbuf 
+	// 	- srcX int32: X coord in @src_pixbuf 
+	// 	- srcY int32: Y coord in @src_pixbuf 
+	// 	- width int32: width of region in @src_pixbuf 
+	// 	- height int32: height of region in @src_pixbuf 
 	// 
 	// The function returns the following values:
 	// 
@@ -933,7 +948,7 @@ type Pixbuf interface {
 	// 
 	// Note that if `src_pixbuf` is read-only, this function will force it
 	// to be mutable.
-	NewSubpixbuf(int, int, int, int) Pixbuf
+	NewSubpixbuf(int32, int32, int32, int32) Pixbuf
 	// ReadPixelBytes wraps gdk_pixbuf_read_pixel_bytes
 	// 
 	// The function returns the following values:
@@ -1124,10 +1139,10 @@ type Pixbuf interface {
 	// The function takes the following parameters:
 	// 
 	// 	- dest Pixbuf: the #GdkPixbuf into which to render the results 
-	// 	- destX int: the left coordinate for region to render 
-	// 	- destY int: the top coordinate for region to render 
-	// 	- destWidth int: the width of the region to render 
-	// 	- destHeight int: the height of the region to render 
+	// 	- destX int32: the left coordinate for region to render 
+	// 	- destY int32: the top coordinate for region to render 
+	// 	- destWidth int32: the width of the region to render 
+	// 	- destHeight int32: the height of the region to render 
 	// 	- offsetX float64: the offset in the X direction (currently rounded to an integer) 
 	// 	- offsetY float64: the offset in the Y direction (currently rounded to an integer) 
 	// 	- scaleX float64: the scale factor in the X direction 
@@ -1147,13 +1162,13 @@ type Pixbuf interface {
 	// If the source rectangle overlaps the destination rectangle on the
 	// same pixbuf, it will be overwritten during the scaling which
 	// results in rendering artifacts.
-	Scale(Pixbuf, int, int, int, int, float64, float64, float64, float64, InterpType)
+	Scale(Pixbuf, int32, int32, int32, int32, float64, float64, float64, float64, InterpType)
 	// ScaleSimple wraps gdk_pixbuf_scale_simple
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- destWidth int: the width of destination image 
-	// 	- destHeight int: the height of destination image 
+	// 	- destWidth int32: the width of destination image 
+	// 	- destHeight int32: the height of destination image 
 	// 	- interpType InterpType: the interpolation type for the transformation. 
 	// 
 	// The function returns the following values:
@@ -1178,7 +1193,7 @@ type Pixbuf interface {
 	// 
 	// For more complicated scaling/alpha blending see [method@GdkPixbuf.Pixbuf.scale]
 	// and [method@GdkPixbuf.Pixbuf.composite].
-	ScaleSimple(int, int, InterpType) Pixbuf
+	ScaleSimple(int32, int32, InterpType) Pixbuf
 	// SetOption wraps gdk_pixbuf_set_option
 	// 
 	// The function takes the following parameters:
@@ -1223,6 +1238,11 @@ func UnsafePixbufFromGlibFull(c unsafe.Pointer) Pixbuf {
 	return gobject.UnsafeObjectFromGlibFull(c).(Pixbuf)
 }
 
+// UnsafePixbufFromGlibBorrow is used to convert raw GdkPixbuf pointers to go without touching any references. This is used by the bindings internally.
+func UnsafePixbufFromGlibBorrow(c unsafe.Pointer) Pixbuf {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Pixbuf)
+}
+
 func (p *PixbufInstance) upcastToGdkPixbuf() *PixbufInstance {
 	return p
 }
@@ -1243,9 +1263,9 @@ func UnsafePixbufToGlibFull(c Pixbuf) unsafe.Pointer {
 // 
 // 	- colorspace Colorspace: Color space for image 
 // 	- hasAlpha bool: Whether the image should have transparency information 
-// 	- bitsPerSample int: Number of bits per color sample 
-// 	- width int: Width of image in pixels, must be &gt; 0 
-// 	- height int: Height of image in pixels, must be &gt; 0 
+// 	- bitsPerSample int32: Number of bits per color sample 
+// 	- width int32: Width of image in pixels, must be &gt; 0 
+// 	- height int32: Height of image in pixels, must be &gt; 0 
 // 
 // The function returns the following values:
 // 
@@ -1257,7 +1277,7 @@ func UnsafePixbufToGlibFull(c Pixbuf) unsafe.Pointer {
 // 
 // The buffer has an optimal rowstride. Note that the buffer is not cleared;
 // you will have to fill it completely yourself.
-func NewPixbuf(colorspace Colorspace, hasAlpha bool, bitsPerSample int, width int, height int) Pixbuf {
+func NewPixbuf(colorspace Colorspace, hasAlpha bool, bitsPerSample int32, width int32, height int32) Pixbuf {
 	var carg1 C.GdkColorspace // in, none, casted
 	var carg2 C.gboolean      // in
 	var carg3 C.int           // in, none, casted, casted C.gint
@@ -1296,10 +1316,10 @@ func NewPixbuf(colorspace Colorspace, hasAlpha bool, bitsPerSample int, width in
 // 	- data *glib.Bytes: Image data in 8-bit/sample packed format inside a #GBytes 
 // 	- colorspace Colorspace: Colorspace for the image data 
 // 	- hasAlpha bool: Whether the data has an opacity channel 
-// 	- bitsPerSample int: Number of bits per sample 
-// 	- width int: Width of the image in pixels, must be &gt; 0 
-// 	- height int: Height of the image in pixels, must be &gt; 0 
-// 	- rowstride int: Distance in bytes between row starts 
+// 	- bitsPerSample int32: Number of bits per sample 
+// 	- width int32: Width of the image in pixels, must be &gt; 0 
+// 	- height int32: Height of the image in pixels, must be &gt; 0 
+// 	- rowstride int32: Distance in bytes between row starts 
 // 
 // The function returns the following values:
 // 
@@ -1311,7 +1331,7 @@ func NewPixbuf(colorspace Colorspace, hasAlpha bool, bitsPerSample int, width in
 // 
 // This is the `GBytes` variant of gdk_pixbuf_new_from_data(), useful
 // for language bindings.
-func NewPixbufFromBytes(data *glib.Bytes, colorspace Colorspace, hasAlpha bool, bitsPerSample int, width int, height int, rowstride int) Pixbuf {
+func NewPixbufFromBytes(data *glib.Bytes, colorspace Colorspace, hasAlpha bool, bitsPerSample int32, width int32, height int32, rowstride int32) Pixbuf {
 	var carg1 *C.GBytes       // in, none, converted
 	var carg2 C.GdkColorspace // in, none, casted
 	var carg3 C.gboolean      // in
@@ -1401,8 +1421,8 @@ func NewPixbufFromFile(filename string) (Pixbuf, error) {
 // 
 // 	- filename string: Name of file to load, in the GLib file
 //     name encoding 
-// 	- width int: The width the image should have or -1 to not constrain the width 
-// 	- height int: The height the image should have or -1 to not constrain the height 
+// 	- width int32: The width the image should have or -1 to not constrain the width 
+// 	- height int32: The height the image should have or -1 to not constrain the height 
 // 	- preserveAspectRatio bool: `TRUE` to preserve the image's aspect ratio 
 // 
 // The function returns the following values:
@@ -1432,7 +1452,7 @@ func NewPixbufFromFile(filename string) (Pixbuf, error) {
 // aspect ratio, a `width` or `height` of -1 means to not scale the image
 // at all in that dimension. Negative values for `width` and `height` are
 // allowed since 2.8.
-func NewPixbufFromFileAtScale(filename string, width int, height int, preserveAspectRatio bool) (Pixbuf, error) {
+func NewPixbufFromFileAtScale(filename string, width int32, height int32, preserveAspectRatio bool) (Pixbuf, error) {
 	var carg1 *C.char      // in, none, string, casted *C.gchar
 	var carg2 C.int        // in, none, casted, casted C.gint
 	var carg3 C.int        // in, none, casted, casted C.gint
@@ -1473,8 +1493,8 @@ func NewPixbufFromFileAtScale(filename string, width int, height int, preserveAs
 // 
 // 	- filename string: Name of file to load, in the GLib file
 //     name encoding 
-// 	- width int: The width the image should have or -1 to not constrain the width 
-// 	- height int: The height the image should have or -1 to not constrain the height 
+// 	- width int32: The width the image should have or -1 to not constrain the width 
+// 	- height int32: The height the image should have or -1 to not constrain the height 
 // 
 // The function returns the following values:
 // 
@@ -1499,7 +1519,7 @@ func NewPixbufFromFileAtScale(filename string, width int, height int, preserveAs
 // than `width` x `height`, if the aspect ratio requires it. To load
 // and image at the requested size, regardless of aspect ratio, use
 // [ctor@GdkPixbuf.Pixbuf.new_from_file_at_scale].
-func NewPixbufFromFileAtSize(filename string, width int, height int) (Pixbuf, error) {
+func NewPixbufFromFileAtSize(filename string, width int32, height int32) (Pixbuf, error) {
 	var carg1 *C.char      // in, none, string, casted *C.gchar
 	var carg2 C.int        // in, none, casted, casted C.gint
 	var carg3 C.int        // in, none, casted, casted C.gint
@@ -1573,8 +1593,8 @@ func NewPixbufFromResource(resourcePath string) (Pixbuf, error) {
 // The function takes the following parameters:
 // 
 // 	- resourcePath string: the path of the resource file 
-// 	- width int: The width the image should have or -1 to not constrain the width 
-// 	- height int: The height the image should have or -1 to not constrain the height 
+// 	- width int32: The width the image should have or -1 to not constrain the width 
+// 	- height int32: The height the image should have or -1 to not constrain the height 
 // 	- preserveAspectRatio bool: `TRUE` to preserve the image's aspect ratio 
 // 
 // The function returns the following values:
@@ -1595,7 +1615,7 @@ func NewPixbufFromResource(resourcePath string) (Pixbuf, error) {
 // @height of -1 means to not scale the image at all in that dimension.
 // 
 // The stream is not closed.
-func NewPixbufFromResourceAtScale(resourcePath string, width int, height int, preserveAspectRatio bool) (Pixbuf, error) {
+func NewPixbufFromResourceAtScale(resourcePath string, width int32, height int32, preserveAspectRatio bool) (Pixbuf, error) {
 	var carg1 *C.char      // in, none, string, casted *C.gchar
 	var carg2 C.int        // in, none, casted, casted C.gint
 	var carg3 C.int        // in, none, casted, casted C.gint
@@ -1688,8 +1708,8 @@ func NewPixbufFromStream(cancellable context.Context, stream gio.InputStream) (P
 // 
 // 	- cancellable context.Context (nullable): optional `GCancellable` object, `NULL` to ignore 
 // 	- stream gio.InputStream: a `GInputStream` to load the pixbuf from 
-// 	- width int: The width the image should have or -1 to not constrain the width 
-// 	- height int: The height the image should have or -1 to not constrain the height 
+// 	- width int32: The width the image should have or -1 to not constrain the width 
+// 	- height int32: The height the image should have or -1 to not constrain the height 
 // 	- preserveAspectRatio bool: `TRUE` to preserve the image's aspect ratio 
 // 
 // The function returns the following values:
@@ -1718,7 +1738,7 @@ func NewPixbufFromStream(cancellable context.Context, stream gio.InputStream) (P
 // scale the image at all in that dimension.
 // 
 // The stream is not closed.
-func NewPixbufFromStreamAtScale(cancellable context.Context, stream gio.InputStream, width int, height int, preserveAspectRatio bool) (Pixbuf, error) {
+func NewPixbufFromStreamAtScale(cancellable context.Context, stream gio.InputStream, width int32, height int32, preserveAspectRatio bool) (Pixbuf, error) {
 	var carg5 *C.GCancellable // in, none, converted, nullable
 	var carg1 *C.GInputStream // in, none, converted
 	var carg2 C.gint          // in, none, casted
@@ -1833,20 +1853,20 @@ func NewPixbufFromXPMData(data []string) Pixbuf {
 // 
 // 	- colorspace Colorspace: Color space for image 
 // 	- hasAlpha bool: Whether the image should have transparency information 
-// 	- bitsPerSample int: Number of bits per color sample 
-// 	- width int: Width of image in pixels, must be &gt; 0 
-// 	- height int: Height of image in pixels, must be &gt; 0 
+// 	- bitsPerSample int32: Number of bits per color sample 
+// 	- width int32: Width of image in pixels, must be &gt; 0 
+// 	- height int32: Height of image in pixels, must be &gt; 0 
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Calculates the rowstride that an image created with those values would
 // have.
 // 
 // This function is useful for front-ends and backends that want to check
 // image values without needing to create a `GdkPixbuf`.
-func PixbufCalculateRowstride(colorspace Colorspace, hasAlpha bool, bitsPerSample int, width int, height int) int {
+func PixbufCalculateRowstride(colorspace Colorspace, hasAlpha bool, bitsPerSample int32, width int32, height int32) int32 {
 	var carg1 C.GdkColorspace // in, none, casted
 	var carg2 C.gboolean      // in
 	var carg3 C.int           // in, none, casted, casted C.gint
@@ -1869,9 +1889,9 @@ func PixbufCalculateRowstride(colorspace Colorspace, hasAlpha bool, bitsPerSampl
 	runtime.KeepAlive(width)
 	runtime.KeepAlive(height)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -1884,12 +1904,12 @@ func PixbufCalculateRowstride(colorspace Colorspace, hasAlpha bool, bitsPerSampl
 // 
 // The function returns the following values:
 // 
-// 	- width int: Return location for the width of the image 
-// 	- height int: Return location for the height of the image 
+// 	- width int32: Return location for the width of the image 
+// 	- height int32: Return location for the height of the image 
 // 	- goret *PixbufFormat (nullable) 
 //
 // Parses an image file far enough to determine its format and size.
-func PixbufGetFileInfo(filename string) (int, int, *PixbufFormat) {
+func PixbufGetFileInfo(filename string) (int32, int32, *PixbufFormat) {
 	var carg1 *C.gchar           // in, none, string
 	var carg2 C.gint             // out, full, casted
 	var carg3 C.gint             // out, full, casted
@@ -1901,12 +1921,12 @@ func PixbufGetFileInfo(filename string) (int, int, *PixbufFormat) {
 	cret = C.gdk_pixbuf_get_file_info(carg1, &carg2, &carg3)
 	runtime.KeepAlive(filename)
 
-	var width  int
-	var height int
+	var width  int32
+	var height int32
 	var goret  *PixbufFormat
 
-	width = int(carg2)
-	height = int(carg3)
+	width = int32(carg2)
+	height = int32(carg3)
 	if cret != nil {
 		goret = UnsafePixbufFormatFromGlibNone(unsafe.Pointer(cret))
 	}
@@ -1961,14 +1981,14 @@ func PixbufGetFileInfoAsync(cancellable context.Context, filename string, callba
 // 
 // The function returns the following values:
 // 
-// 	- width int: Return location for the width of the image, or `NULL` 
-// 	- height int: Return location for the height of the image, or `NULL` 
+// 	- width int32: Return location for the width of the image, or `NULL` 
+// 	- height int32: Return location for the height of the image, or `NULL` 
 // 	- goret *PixbufFormat (nullable) 
 // 	- _goerr error (nullable): an error 
 //
 // Finishes an asynchronous pixbuf parsing operation started with
 // gdk_pixbuf_get_file_info_async().
-func PixbufGetFileInfoFinish(asyncResult gio.AsyncResult) (int, int, *PixbufFormat, error) {
+func PixbufGetFileInfoFinish(asyncResult gio.AsyncResult) (int32, int32, *PixbufFormat, error) {
 	var carg1 *C.GAsyncResult    // in, none, converted
 	var carg2 C.gint             // out, full, casted
 	var carg3 C.gint             // out, full, casted
@@ -1980,13 +2000,13 @@ func PixbufGetFileInfoFinish(asyncResult gio.AsyncResult) (int, int, *PixbufForm
 	cret = C.gdk_pixbuf_get_file_info_finish(carg1, &carg2, &carg3, &_cerr)
 	runtime.KeepAlive(asyncResult)
 
-	var width  int
-	var height int
+	var width  int32
+	var height int32
 	var goret  *PixbufFormat
 	var _goerr error
 
-	width = int(carg2)
-	height = int(carg3)
+	width = int32(carg2)
+	height = int32(carg3)
 	if cret != nil {
 		goret = UnsafePixbufFormatFromGlibNone(unsafe.Pointer(cret))
 	}
@@ -2115,8 +2135,8 @@ func NewPixbufFromStreamAsync(cancellable context.Context, stream gio.InputStrea
 // 
 // 	- cancellable context.Context (nullable): optional `GCancellable` object, `NULL` to ignore 
 // 	- stream gio.InputStream: a `GInputStream` from which to load the pixbuf 
-// 	- width int: the width the image should have or -1 to not constrain the width 
-// 	- height int: the height the image should have or -1 to not constrain the height 
+// 	- width int32: the width the image should have or -1 to not constrain the width 
+// 	- height int32: the height the image should have or -1 to not constrain the height 
 // 	- preserveAspectRatio bool: `TRUE` to preserve the image's aspect ratio 
 // 	- callback gio.AsyncReadyCallback (nullable): a `GAsyncReadyCallback` to call when the pixbuf is loaded 
 //
@@ -2127,7 +2147,7 @@ func NewPixbufFromStreamAsync(cancellable context.Context, stream gio.InputStrea
 // 
 // When the operation is finished, @callback will be called in the main thread.
 // You can then call gdk_pixbuf_new_from_stream_finish() to get the result of the operation.
-func NewPixbufFromStreamAtScaleAsync(cancellable context.Context, stream gio.InputStream, width int, height int, preserveAspectRatio bool, callback gio.AsyncReadyCallback) {
+func NewPixbufFromStreamAtScaleAsync(cancellable context.Context, stream gio.InputStream, width int32, height int32, preserveAspectRatio bool, callback gio.AsyncReadyCallback) {
 	var carg5 *C.GCancellable       // in, none, converted, nullable
 	var carg1 *C.GInputStream       // in, none, converted
 	var carg2 C.gint                // in, none, casted
@@ -2292,16 +2312,16 @@ func (src *PixbufInstance) ApplyEmbeddedOrientation() Pixbuf {
 // The function takes the following parameters:
 // 
 // 	- dest Pixbuf: the #GdkPixbuf into which to render the results 
-// 	- destX int: the left coordinate for region to render 
-// 	- destY int: the top coordinate for region to render 
-// 	- destWidth int: the width of the region to render 
-// 	- destHeight int: the height of the region to render 
+// 	- destX int32: the left coordinate for region to render 
+// 	- destY int32: the top coordinate for region to render 
+// 	- destWidth int32: the width of the region to render 
+// 	- destHeight int32: the height of the region to render 
 // 	- offsetX float64: the offset in the X direction (currently rounded to an integer) 
 // 	- offsetY float64: the offset in the Y direction (currently rounded to an integer) 
 // 	- scaleX float64: the scale factor in the X direction 
 // 	- scaleY float64: the scale factor in the Y direction 
 // 	- interpType InterpType: the interpolation type for the transformation. 
-// 	- overallAlpha int: overall alpha for source image (0..255) 
+// 	- overallAlpha int32: overall alpha for source image (0..255) 
 //
 // Creates a transformation of the source image @src by scaling by
 // @scale_x and @scale_y then translating by @offset_x and @offset_y.
@@ -2316,7 +2336,7 @@ func (src *PixbufInstance) ApplyEmbeddedOrientation() Pixbuf {
 // to infinity.
 // 
 // ![](composite.png)
-func (src *PixbufInstance) Composite(dest Pixbuf, destX int, destY int, destWidth int, destHeight int, offsetX float64, offsetY float64, scaleX float64, scaleY float64, interpType InterpType, overallAlpha int) {
+func (src *PixbufInstance) Composite(dest Pixbuf, destX int32, destY int32, destWidth int32, destHeight int32, offsetX float64, offsetY float64, scaleX float64, scaleY float64, interpType InterpType, overallAlpha int32) {
 	var carg0  *C.GdkPixbuf    // in, none, converted
 	var carg1  *C.GdkPixbuf    // in, none, converted
 	var carg2  C.int           // in, none, casted, casted C.gint
@@ -2363,19 +2383,19 @@ func (src *PixbufInstance) Composite(dest Pixbuf, destX int, destY int, destWidt
 // The function takes the following parameters:
 // 
 // 	- dest Pixbuf: the #GdkPixbuf into which to render the results 
-// 	- destX int: the left coordinate for region to render 
-// 	- destY int: the top coordinate for region to render 
-// 	- destWidth int: the width of the region to render 
-// 	- destHeight int: the height of the region to render 
+// 	- destX int32: the left coordinate for region to render 
+// 	- destY int32: the top coordinate for region to render 
+// 	- destWidth int32: the width of the region to render 
+// 	- destHeight int32: the height of the region to render 
 // 	- offsetX float64: the offset in the X direction (currently rounded to an integer) 
 // 	- offsetY float64: the offset in the Y direction (currently rounded to an integer) 
 // 	- scaleX float64: the scale factor in the X direction 
 // 	- scaleY float64: the scale factor in the Y direction 
 // 	- interpType InterpType: the interpolation type for the transformation. 
-// 	- overallAlpha int: overall alpha for source image (0..255) 
-// 	- checkX int: the X offset for the checkboard (origin of checkboard is at -@check_x, -@check_y) 
-// 	- checkY int: the Y offset for the checkboard 
-// 	- checkSize int: the size of checks in the checkboard (must be a power of two) 
+// 	- overallAlpha int32: overall alpha for source image (0..255) 
+// 	- checkX int32: the X offset for the checkboard (origin of checkboard is at -@check_x, -@check_y) 
+// 	- checkY int32: the Y offset for the checkboard 
+// 	- checkSize int32: the size of checks in the checkboard (must be a power of two) 
 // 	- color1 uint32: the color of check at upper left 
 // 	- color2 uint32: the color of the other check 
 //
@@ -2391,7 +2411,7 @@ func (src *PixbufInstance) Composite(dest Pixbuf, destX int, destY int, destWidt
 // 
 // See gdk_pixbuf_composite_color_simple() for a simpler variant of this
 // function suitable for many tasks.
-func (src *PixbufInstance) CompositeColor(dest Pixbuf, destX int, destY int, destWidth int, destHeight int, offsetX float64, offsetY float64, scaleX float64, scaleY float64, interpType InterpType, overallAlpha int, checkX int, checkY int, checkSize int, color1 uint32, color2 uint32) {
+func (src *PixbufInstance) CompositeColor(dest Pixbuf, destX int32, destY int32, destWidth int32, destHeight int32, offsetX float64, offsetY float64, scaleX float64, scaleY float64, interpType InterpType, overallAlpha int32, checkX int32, checkY int32, checkSize int32, color1 uint32, color2 uint32) {
 	var carg0  *C.GdkPixbuf    // in, none, converted
 	var carg1  *C.GdkPixbuf    // in, none, converted
 	var carg2  C.int           // in, none, casted, casted C.gint
@@ -2452,11 +2472,11 @@ func (src *PixbufInstance) CompositeColor(dest Pixbuf, destX int, destY int, des
 // 
 // The function takes the following parameters:
 // 
-// 	- destWidth int: the width of destination image 
-// 	- destHeight int: the height of destination image 
+// 	- destWidth int32: the width of destination image 
+// 	- destHeight int32: the height of destination image 
 // 	- interpType InterpType: the interpolation type for the transformation. 
-// 	- overallAlpha int: overall alpha for source image (0..255) 
-// 	- checkSize int: the size of checks in the checkboard (must be a power of two) 
+// 	- overallAlpha int32: overall alpha for source image (0..255) 
+// 	- checkSize int32: the size of checks in the checkboard (must be a power of two) 
 // 	- color1 uint32: the color of check at upper left 
 // 	- color2 uint32: the color of the other check 
 // 
@@ -2467,7 +2487,7 @@ func (src *PixbufInstance) CompositeColor(dest Pixbuf, destX int, destY int, des
 // Creates a new pixbuf by scaling `src` to `dest_width` x `dest_height`
 // and alpha blending the result with a checkboard of colors `color1`
 // and `color2`.
-func (src *PixbufInstance) CompositeColorSimple(destWidth int, destHeight int, interpType InterpType, overallAlpha int, checkSize int, color1 uint32, color2 uint32) Pixbuf {
+func (src *PixbufInstance) CompositeColorSimple(destWidth int32, destHeight int32, interpType InterpType, overallAlpha int32, checkSize int32, color1 uint32, color2 uint32) Pixbuf {
 	var carg0 *C.GdkPixbuf    // in, none, converted
 	var carg1 C.int           // in, none, casted, casted C.gint
 	var carg2 C.int           // in, none, casted, casted C.gint
@@ -2539,13 +2559,13 @@ func (pixbuf *PixbufInstance) Copy() Pixbuf {
 // 
 // The function takes the following parameters:
 // 
-// 	- srcX int: Source X coordinate within @src_pixbuf. 
-// 	- srcY int: Source Y coordinate within @src_pixbuf. 
-// 	- width int: Width of the area to copy. 
-// 	- height int: Height of the area to copy. 
+// 	- srcX int32: Source X coordinate within @src_pixbuf. 
+// 	- srcY int32: Source Y coordinate within @src_pixbuf. 
+// 	- width int32: Width of the area to copy. 
+// 	- height int32: Height of the area to copy. 
 // 	- destPixbuf Pixbuf: Destination pixbuf. 
-// 	- destX int: X coordinate within @dest_pixbuf. 
-// 	- destY int: Y coordinate within @dest_pixbuf. 
+// 	- destX int32: X coordinate within @dest_pixbuf. 
+// 	- destY int32: Y coordinate within @dest_pixbuf. 
 //
 // Copies a rectangular area from `src_pixbuf` to `dest_pixbuf`.
 // 
@@ -2554,7 +2574,7 @@ func (pixbuf *PixbufInstance) Copy() Pixbuf {
 // If the source rectangle overlaps the destination rectangle on the
 // same pixbuf, it will be overwritten during the copy operation.
 // Therefore, you can not use this function to scroll a pixbuf.
-func (srcPixbuf *PixbufInstance) CopyArea(srcX int, srcY int, width int, height int, destPixbuf Pixbuf, destX int, destY int) {
+func (srcPixbuf *PixbufInstance) CopyArea(srcX int32, srcY int32, width int32, height int32, destPixbuf Pixbuf, destX int32, destY int32) {
 	var carg0 *C.GdkPixbuf // in, none, converted
 	var carg1 C.int        // in, none, casted, casted C.gint
 	var carg2 C.int        // in, none, casted, casted C.gint
@@ -2684,10 +2704,10 @@ func (src *PixbufInstance) Flip(horizontal bool) Pixbuf {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Queries the number of bits per color sample in a pixbuf.
-func (pixbuf *PixbufInstance) GetBitsPerSample() int {
+func (pixbuf *PixbufInstance) GetBitsPerSample() int32 {
 	var carg0 *C.GdkPixbuf // in, none, converted
 	var cret  C.int        // return, none, casted, casted C.gint
 
@@ -2696,9 +2716,9 @@ func (pixbuf *PixbufInstance) GetBitsPerSample() int {
 	cret = C.gdk_pixbuf_get_bits_per_sample(carg0)
 	runtime.KeepAlive(pixbuf)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -2778,10 +2798,10 @@ func (pixbuf *PixbufInstance) GetHasAlpha() bool {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Queries the height of a pixbuf.
-func (pixbuf *PixbufInstance) GetHeight() int {
+func (pixbuf *PixbufInstance) GetHeight() int32 {
 	var carg0 *C.GdkPixbuf // in, none, converted
 	var cret  C.int        // return, none, casted, casted C.gint
 
@@ -2790,9 +2810,9 @@ func (pixbuf *PixbufInstance) GetHeight() int {
 	cret = C.gdk_pixbuf_get_height(carg0)
 	runtime.KeepAlive(pixbuf)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -2801,10 +2821,10 @@ func (pixbuf *PixbufInstance) GetHeight() int {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Queries the number of channels of a pixbuf.
-func (pixbuf *PixbufInstance) GetNChannels() int {
+func (pixbuf *PixbufInstance) GetNChannels() int32 {
 	var carg0 *C.GdkPixbuf // in, none, converted
 	var cret  C.int        // return, none, casted, casted C.gint
 
@@ -2813,9 +2833,9 @@ func (pixbuf *PixbufInstance) GetNChannels() int {
 	cret = C.gdk_pixbuf_get_n_channels(carg0)
 	runtime.KeepAlive(pixbuf)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -2906,11 +2926,11 @@ func (pixbuf *PixbufInstance) GetPixelsWithLength() (uint, []byte) {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Queries the rowstride of a pixbuf, which is the number of bytes between
 // the start of a row and the start of the next row.
-func (pixbuf *PixbufInstance) GetRowstride() int {
+func (pixbuf *PixbufInstance) GetRowstride() int32 {
 	var carg0 *C.GdkPixbuf // in, none, converted
 	var cret  C.int        // return, none, casted, casted C.gint
 
@@ -2919,9 +2939,9 @@ func (pixbuf *PixbufInstance) GetRowstride() int {
 	cret = C.gdk_pixbuf_get_rowstride(carg0)
 	runtime.KeepAlive(pixbuf)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -2930,10 +2950,10 @@ func (pixbuf *PixbufInstance) GetRowstride() int {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Queries the width of a pixbuf.
-func (pixbuf *PixbufInstance) GetWidth() int {
+func (pixbuf *PixbufInstance) GetWidth() int32 {
 	var carg0 *C.GdkPixbuf // in, none, converted
 	var cret  C.int        // return, none, casted, casted C.gint
 
@@ -2942,9 +2962,9 @@ func (pixbuf *PixbufInstance) GetWidth() int {
 	cret = C.gdk_pixbuf_get_width(carg0)
 	runtime.KeepAlive(pixbuf)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -2953,10 +2973,10 @@ func (pixbuf *PixbufInstance) GetWidth() int {
 // 
 // The function takes the following parameters:
 // 
-// 	- srcX int: X coord in @src_pixbuf 
-// 	- srcY int: Y coord in @src_pixbuf 
-// 	- width int: width of region in @src_pixbuf 
-// 	- height int: height of region in @src_pixbuf 
+// 	- srcX int32: X coord in @src_pixbuf 
+// 	- srcY int32: Y coord in @src_pixbuf 
+// 	- width int32: width of region in @src_pixbuf 
+// 	- height int32: height of region in @src_pixbuf 
 // 
 // The function returns the following values:
 // 
@@ -2971,7 +2991,7 @@ func (pixbuf *PixbufInstance) GetWidth() int {
 // 
 // Note that if `src_pixbuf` is read-only, this function will force it
 // to be mutable.
-func (srcPixbuf *PixbufInstance) NewSubpixbuf(srcX int, srcY int, width int, height int) Pixbuf {
+func (srcPixbuf *PixbufInstance) NewSubpixbuf(srcX int32, srcY int32, width int32, height int32) Pixbuf {
 	var carg0 *C.GdkPixbuf // in, none, converted
 	var carg1 C.int        // in, none, casted, casted C.gint
 	var carg2 C.int        // in, none, casted, casted C.gint
@@ -3487,10 +3507,10 @@ func (pixbuf *PixbufInstance) Savev(filename string, typ string, optionKeys []st
 // The function takes the following parameters:
 // 
 // 	- dest Pixbuf: the #GdkPixbuf into which to render the results 
-// 	- destX int: the left coordinate for region to render 
-// 	- destY int: the top coordinate for region to render 
-// 	- destWidth int: the width of the region to render 
-// 	- destHeight int: the height of the region to render 
+// 	- destX int32: the left coordinate for region to render 
+// 	- destY int32: the top coordinate for region to render 
+// 	- destWidth int32: the width of the region to render 
+// 	- destHeight int32: the height of the region to render 
 // 	- offsetX float64: the offset in the X direction (currently rounded to an integer) 
 // 	- offsetY float64: the offset in the Y direction (currently rounded to an integer) 
 // 	- scaleX float64: the scale factor in the X direction 
@@ -3510,7 +3530,7 @@ func (pixbuf *PixbufInstance) Savev(filename string, typ string, optionKeys []st
 // If the source rectangle overlaps the destination rectangle on the
 // same pixbuf, it will be overwritten during the scaling which
 // results in rendering artifacts.
-func (src *PixbufInstance) Scale(dest Pixbuf, destX int, destY int, destWidth int, destHeight int, offsetX float64, offsetY float64, scaleX float64, scaleY float64, interpType InterpType) {
+func (src *PixbufInstance) Scale(dest Pixbuf, destX int32, destY int32, destWidth int32, destHeight int32, offsetX float64, offsetY float64, scaleX float64, scaleY float64, interpType InterpType) {
 	var carg0  *C.GdkPixbuf    // in, none, converted
 	var carg1  *C.GdkPixbuf    // in, none, converted
 	var carg2  C.int           // in, none, casted, casted C.gint
@@ -3553,8 +3573,8 @@ func (src *PixbufInstance) Scale(dest Pixbuf, destX int, destY int, destWidth in
 // 
 // The function takes the following parameters:
 // 
-// 	- destWidth int: the width of destination image 
-// 	- destHeight int: the height of destination image 
+// 	- destWidth int32: the width of destination image 
+// 	- destHeight int32: the height of destination image 
 // 	- interpType InterpType: the interpolation type for the transformation. 
 // 
 // The function returns the following values:
@@ -3579,7 +3599,7 @@ func (src *PixbufInstance) Scale(dest Pixbuf, destX int, destY int, destWidth in
 // 
 // For more complicated scaling/alpha blending see [method@GdkPixbuf.Pixbuf.scale]
 // and [method@GdkPixbuf.Pixbuf.composite].
-func (src *PixbufInstance) ScaleSimple(destWidth int, destHeight int, interpType InterpType) Pixbuf {
+func (src *PixbufInstance) ScaleSimple(destWidth int32, destHeight int32, interpType InterpType) Pixbuf {
 	var carg0 *C.GdkPixbuf    // in, none, converted
 	var carg1 C.int           // in, none, casted, casted C.gint
 	var carg2 C.int           // in, none, casted, casted C.gint
@@ -3764,8 +3784,8 @@ type PixbufLoader interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- width int: The desired width of the image being loaded. 
-	// 	- height int: The desired height of the image being loaded. 
+	// 	- width int32: The desired width of the image being loaded. 
+	// 	- height int32: The desired height of the image being loaded. 
 	//
 	// Causes the image to be scaled while it is loaded.
 	// 
@@ -3775,7 +3795,7 @@ type PixbufLoader interface {
 	// 
 	// Attempts to set the desired image size  are ignored after the
 	// emission of the ::size-prepared signal.
-	SetSize(int, int)
+	SetSize(int32, int32)
 	// Write wraps gdk_pixbuf_loader_write
 	// 
 	// The function takes the following parameters:
@@ -3821,7 +3841,7 @@ type PixbufLoader interface {
 	// 
 	// Applications can use this signal to know when to repaint
 	// areas of an image that is being loaded.
-	ConnectAreaUpdated(func(PixbufLoader, int, int, int, int)) gobject.SignalHandle
+	ConnectAreaUpdated(func(PixbufLoader, int32, int32, int32, int32)) gobject.SignalHandle
 	// ConnectClosed connects the provided callback to the "closed" signal
 	//
 	// This signal is emitted when gdk_pixbuf_loader_close() is called.
@@ -3839,7 +3859,7 @@ type PixbufLoader interface {
 	// Applications can call gdk_pixbuf_loader_set_size() in response
 	// to this signal to set the desired size to which the image
 	// should be scaled.
-	ConnectSizePrepared(func(PixbufLoader, int, int)) gobject.SignalHandle
+	ConnectSizePrepared(func(PixbufLoader, int32, int32)) gobject.SignalHandle
 }
 
 func unsafeWrapPixbufLoader(base *gobject.ObjectInstance) *PixbufLoaderInstance {
@@ -3860,6 +3880,11 @@ func UnsafePixbufLoaderFromGlibNone(c unsafe.Pointer) PixbufLoader {
 // UnsafePixbufLoaderFromGlibFull is used to convert raw GdkPixbufLoader pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafePixbufLoaderFromGlibFull(c unsafe.Pointer) PixbufLoader {
 	return gobject.UnsafeObjectFromGlibFull(c).(PixbufLoader)
+}
+
+// UnsafePixbufLoaderFromGlibBorrow is used to convert raw GdkPixbufLoader pointers to go without touching any references. This is used by the bindings internally.
+func UnsafePixbufLoaderFromGlibBorrow(c unsafe.Pointer) PixbufLoader {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(PixbufLoader)
 }
 
 func (p *PixbufLoaderInstance) upcastToGdkPixbufLoader() *PixbufLoaderInstance {
@@ -4104,8 +4129,8 @@ func (loader *PixbufLoaderInstance) GetPixbuf() Pixbuf {
 // 
 // The function takes the following parameters:
 // 
-// 	- width int: The desired width of the image being loaded. 
-// 	- height int: The desired height of the image being loaded. 
+// 	- width int32: The desired width of the image being loaded. 
+// 	- height int32: The desired height of the image being loaded. 
 //
 // Causes the image to be scaled while it is loaded.
 // 
@@ -4115,7 +4140,7 @@ func (loader *PixbufLoaderInstance) GetPixbuf() Pixbuf {
 // 
 // Attempts to set the desired image size  are ignored after the
 // emission of the ::size-prepared signal.
-func (loader *PixbufLoaderInstance) SetSize(width int, height int) {
+func (loader *PixbufLoaderInstance) SetSize(width int32, height int32) {
 	var carg0 *C.GdkPixbufLoader // in, none, converted
 	var carg1 C.int              // in, none, casted, casted C.gint
 	var carg2 C.int              // in, none, casted, casted C.gint
@@ -4232,7 +4257,7 @@ func (o *PixbufLoaderInstance) ConnectAreaPrepared(fn func(PixbufLoader)) gobjec
 // 
 // Applications can use this signal to know when to repaint
 // areas of an image that is being loaded.
-func (o *PixbufLoaderInstance) ConnectAreaUpdated(fn func(PixbufLoader, int, int, int, int)) gobject.SignalHandle {
+func (o *PixbufLoaderInstance) ConnectAreaUpdated(fn func(PixbufLoader, int32, int32, int32, int32)) gobject.SignalHandle {
 	return o.Connect("area-updated", fn)
 }
 
@@ -4256,7 +4281,7 @@ func (o *PixbufLoaderInstance) ConnectClosed(fn func(PixbufLoader)) gobject.Sign
 // Applications can call gdk_pixbuf_loader_set_size() in response
 // to this signal to set the desired size to which the image
 // should be scaled.
-func (o *PixbufLoaderInstance) ConnectSizePrepared(fn func(PixbufLoader, int, int)) gobject.SignalHandle {
+func (o *PixbufLoaderInstance) ConnectSizePrepared(fn func(PixbufLoader, int32, int32)) gobject.SignalHandle {
 	return o.Connect("size-prepared", fn)
 }
 
@@ -4271,19 +4296,19 @@ type PixbufLoaderOverrides[Instance PixbufLoader] struct {
 	// AreaUpdated allows you to override the implementation of the virtual method area_updated.
 	// The function takes the following parameters:
 	// 
-	// 	- x int 
-	// 	- y int 
-	// 	- width int 
-	// 	- height int 
-	AreaUpdated func(Instance, int, int, int, int)
+	// 	- x int32 
+	// 	- y int32 
+	// 	- width int32 
+	// 	- height int32 
+	AreaUpdated func(Instance, int32, int32, int32, int32)
 	// Closed allows you to override the implementation of the virtual method closed.
 	Closed func(Instance)
 	// SizePrepared allows you to override the implementation of the virtual method size_prepared.
 	// The function takes the following parameters:
 	// 
-	// 	- width int 
-	// 	- height int 
-	SizePrepared func(Instance, int, int)
+	// 	- width int32 
+	// 	- height int32 
+	SizePrepared func(Instance, int32, int32)
 }
 
 // UnsafeApplyPixbufLoaderOverrides applies the overrides to init the gclass by setting the trampoline functions.
@@ -4301,7 +4326,7 @@ func UnsafeApplyPixbufLoaderOverrides[Instance PixbufLoader](gclass unsafe.Point
 			func(carg0 *C.GdkPixbufLoader) {
 				var loader Instance // go GdkPixbufLoader subclass
 
-				loader = UnsafePixbufLoaderFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				loader = UnsafePixbufLoaderFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				overrides.AreaPrepared(loader)
 			},
@@ -4315,16 +4340,16 @@ func UnsafeApplyPixbufLoaderOverrides[Instance PixbufLoader](gclass unsafe.Point
 			"_gotk4_gdkpixbuf2_PixbufLoader_area_updated",
 			func(carg0 *C.GdkPixbufLoader, carg1 C.int, carg2 C.int, carg3 C.int, carg4 C.int) {
 				var loader Instance // go GdkPixbufLoader subclass
-				var x      int      // in, none, casted, casted C.gint
-				var y      int      // in, none, casted, casted C.gint
-				var width  int      // in, none, casted, casted C.gint
-				var height int      // in, none, casted, casted C.gint
+				var x      int32    // in, none, casted, casted C.gint
+				var y      int32    // in, none, casted, casted C.gint
+				var width  int32    // in, none, casted, casted C.gint
+				var height int32    // in, none, casted, casted C.gint
 
-				loader = UnsafePixbufLoaderFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				x = int(carg1)
-				y = int(carg2)
-				width = int(carg3)
-				height = int(carg4)
+				loader = UnsafePixbufLoaderFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				x = int32(carg1)
+				y = int32(carg2)
+				width = int32(carg3)
+				height = int32(carg4)
 
 				overrides.AreaUpdated(loader, x, y, width, height)
 			},
@@ -4339,7 +4364,7 @@ func UnsafeApplyPixbufLoaderOverrides[Instance PixbufLoader](gclass unsafe.Point
 			func(carg0 *C.GdkPixbufLoader) {
 				var loader Instance // go GdkPixbufLoader subclass
 
-				loader = UnsafePixbufLoaderFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				loader = UnsafePixbufLoaderFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				overrides.Closed(loader)
 			},
@@ -4353,12 +4378,12 @@ func UnsafeApplyPixbufLoaderOverrides[Instance PixbufLoader](gclass unsafe.Point
 			"_gotk4_gdkpixbuf2_PixbufLoader_size_prepared",
 			func(carg0 *C.GdkPixbufLoader, carg1 C.int, carg2 C.int) {
 				var loader Instance // go GdkPixbufLoader subclass
-				var width  int      // in, none, casted, casted C.gint
-				var height int      // in, none, casted, casted C.gint
+				var width  int32    // in, none, casted, casted C.gint
+				var height int32    // in, none, casted, casted C.gint
 
-				loader = UnsafePixbufLoaderFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				width = int(carg1)
-				height = int(carg2)
+				loader = UnsafePixbufLoaderFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				width = int32(carg1)
+				height = int32(carg2)
 
 				overrides.SizePrepared(loader, width, height)
 			},
@@ -4415,8 +4440,11 @@ func marshalPixbufFormat(p unsafe.Pointer) (interface{}, error) {
 	return UnsafePixbufFormatFromGlibBorrow(b), nil
 }
 
-func (r *PixbufFormat) InitGoValue(v *gobject.Value) {
-	v.Init(TypePixbufFormat)
+func (r *PixbufFormat) GoValueType() gobject.Type {
+	return TypePixbufFormat
+}
+
+func (r *PixbufFormat) SetGoValue(v *gobject.Value) {
 	v.SetBoxed(unsafe.Pointer(r.native))
 }
 

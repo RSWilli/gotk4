@@ -21,7 +21,6 @@ import (
 // extern GDBusMessage* _gotk4_gio2_DBusMessageFilterFunction(GDBusConnection*, GDBusMessage*, gboolean, gpointer);
 // extern GFile* _gotk4_gio2_VFSFileLookupFunc(GVfs*, char*, gpointer);
 // extern gboolean _gotk4_glib2_SourceFunc(gpointer);
-// extern gint _gotk4_glib2_CompareDataFunc(gconstpointer, gconstpointer, gpointer);
 // extern void _gotk4_gio2_AsyncReadyCallback(GObject*, GAsyncResult*, gpointer);
 // extern void destroyUserdata(gpointer);
 // extern gboolean _gotk4_gio2_Action_get_enabled(GAction*);
@@ -2402,8 +2401,11 @@ func marshalBusType(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = BusType(0)
 
-func (e BusType) InitGoValue(v *gobject.Value) {
-	v.Init(TypeBusType)
+func (e BusType) GoValueType() gobject.Type {
+	return TypeBusType
+}
+
+func (e BusType) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -2447,8 +2449,11 @@ func marshalConverterResult(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = ConverterResult(0)
 
-func (e ConverterResult) InitGoValue(v *gobject.Value) {
-	v.Init(TypeConverterResult)
+func (e ConverterResult) GoValueType() gobject.Type {
+	return TypeConverterResult
+}
+
+func (e ConverterResult) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -2508,8 +2513,11 @@ func marshalCredentialsType(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = CredentialsType(0)
 
-func (e CredentialsType) InitGoValue(v *gobject.Value) {
-	v.Init(TypeCredentialsType)
+func (e CredentialsType) GoValueType() gobject.Type {
+	return TypeCredentialsType
+}
+
+func (e CredentialsType) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -2727,8 +2735,11 @@ func marshalDBusError(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = DBusError(0)
 
-func (e DBusError) InitGoValue(v *gobject.Value) {
-	v.Init(TypeDBusError)
+func (e DBusError) GoValueType() gobject.Type {
+	return TypeDBusError
+}
+
+func (e DBusError) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -2965,7 +2976,7 @@ func DBusErrorQuark() glib.Quark {
 // The function takes the following parameters:
 // 
 // 	- errorDomain glib.Quark: A #GQuark for an error domain. 
-// 	- errorCode int: An error code. 
+// 	- errorCode int32: An error code. 
 // 	- dbusErrorName string: A D-Bus error name. 
 // 
 // The function returns the following values:
@@ -2977,7 +2988,7 @@ func DBusErrorQuark() glib.Quark {
 // 
 // This is typically done in the routine that returns the #GQuark for
 // an error domain.
-func DBusErrorRegisterError(errorDomain glib.Quark, errorCode int, dbusErrorName string) bool {
+func DBusErrorRegisterError(errorDomain glib.Quark, errorCode int32, dbusErrorName string) bool {
 	var carg1 C.GQuark   // in, none, casted, alias
 	var carg2 C.gint     // in, none, casted
 	var carg3 *C.gchar   // in, none, string
@@ -3075,7 +3086,7 @@ func DBusErrorStripRemoteError(err error) bool {
 // The function takes the following parameters:
 // 
 // 	- errorDomain glib.Quark: A #GQuark for an error domain. 
-// 	- errorCode int: An error code. 
+// 	- errorCode int32: An error code. 
 // 	- dbusErrorName string: A D-Bus error name. 
 // 
 // The function returns the following values:
@@ -3083,7 +3094,7 @@ func DBusErrorStripRemoteError(err error) bool {
 // 	- goret bool 
 //
 // Destroys an association previously set up with g_dbus_error_register_error().
-func DBusErrorUnregisterError(errorDomain glib.Quark, errorCode int, dbusErrorName string) bool {
+func DBusErrorUnregisterError(errorDomain glib.Quark, errorCode int32, dbusErrorName string) bool {
 	var carg1 C.GQuark   // in, none, casted, alias
 	var carg2 C.gint     // in, none, casted
 	var carg3 *C.gchar   // in, none, string
@@ -3130,8 +3141,11 @@ func marshalDBusMessageByteOrder(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = DBusMessageByteOrder(0)
 
-func (e DBusMessageByteOrder) InitGoValue(v *gobject.Value) {
-	v.Init(TypeDBusMessageByteOrder)
+func (e DBusMessageByteOrder) GoValueType() gobject.Type {
+	return TypeDBusMessageByteOrder
+}
+
+func (e DBusMessageByteOrder) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -3193,8 +3207,11 @@ func marshalDBusMessageHeaderField(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = DBusMessageHeaderField(0)
 
-func (e DBusMessageHeaderField) InitGoValue(v *gobject.Value) {
-	v.Init(TypeDBusMessageHeaderField)
+func (e DBusMessageHeaderField) GoValueType() gobject.Type {
+	return TypeDBusMessageHeaderField
+}
+
+func (e DBusMessageHeaderField) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -3247,8 +3264,11 @@ func marshalDBusMessageType(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = DBusMessageType(0)
 
-func (e DBusMessageType) InitGoValue(v *gobject.Value) {
-	v.Init(TypeDBusMessageType)
+func (e DBusMessageType) GoValueType() gobject.Type {
+	return TypeDBusMessageType
+}
+
+func (e DBusMessageType) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -3290,8 +3310,11 @@ func marshalDataStreamByteOrder(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = DataStreamByteOrder(0)
 
-func (e DataStreamByteOrder) InitGoValue(v *gobject.Value) {
-	v.Init(TypeDataStreamByteOrder)
+func (e DataStreamByteOrder) GoValueType() gobject.Type {
+	return TypeDataStreamByteOrder
+}
+
+func (e DataStreamByteOrder) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -3334,8 +3357,11 @@ func marshalDataStreamNewlineType(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = DataStreamNewlineType(0)
 
-func (e DataStreamNewlineType) InitGoValue(v *gobject.Value) {
-	v.Init(TypeDataStreamNewlineType)
+func (e DataStreamNewlineType) GoValueType() gobject.Type {
+	return TypeDataStreamNewlineType
+}
+
+func (e DataStreamNewlineType) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -3391,8 +3417,11 @@ func marshalDriveStartStopType(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = DriveStartStopType(0)
 
-func (e DriveStartStopType) InitGoValue(v *gobject.Value) {
-	v.Init(TypeDriveStartStopType)
+func (e DriveStartStopType) GoValueType() gobject.Type {
+	return TypeDriveStartStopType
+}
+
+func (e DriveStartStopType) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -3438,8 +3467,11 @@ func marshalEmblemOrigin(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = EmblemOrigin(0)
 
-func (e EmblemOrigin) InitGoValue(v *gobject.Value) {
-	v.Init(TypeEmblemOrigin)
+func (e EmblemOrigin) GoValueType() gobject.Type {
+	return TypeEmblemOrigin
+}
+
+func (e EmblemOrigin) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -3479,8 +3511,11 @@ func marshalFileAttributeStatus(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = FileAttributeStatus(0)
 
-func (e FileAttributeStatus) InitGoValue(v *gobject.Value) {
-	v.Init(TypeFileAttributeStatus)
+func (e FileAttributeStatus) GoValueType() gobject.Type {
+	return TypeFileAttributeStatus
+}
+
+func (e FileAttributeStatus) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -3547,8 +3582,11 @@ func marshalFileAttributeType(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = FileAttributeType(0)
 
-func (e FileAttributeType) InitGoValue(v *gobject.Value) {
-	v.Init(TypeFileAttributeType)
+func (e FileAttributeType) GoValueType() gobject.Type {
+	return TypeFileAttributeType
+}
+
+func (e FileAttributeType) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -3633,8 +3671,11 @@ func marshalFileMonitorEvent(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = FileMonitorEvent(0)
 
-func (e FileMonitorEvent) InitGoValue(v *gobject.Value) {
-	v.Init(TypeFileMonitorEvent)
+func (e FileMonitorEvent) GoValueType() gobject.Type {
+	return TypeFileMonitorEvent
+}
+
+func (e FileMonitorEvent) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -3708,8 +3749,11 @@ func marshalFileType(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = FileType(0)
 
-func (e FileType) InitGoValue(v *gobject.Value) {
-	v.Init(TypeFileType)
+func (e FileType) GoValueType() gobject.Type {
+	return TypeFileType
+}
+
+func (e FileType) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -3754,8 +3798,11 @@ func marshalFilesystemPreviewType(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = FilesystemPreviewType(0)
 
-func (e FilesystemPreviewType) InitGoValue(v *gobject.Value) {
-	v.Init(TypeFilesystemPreviewType)
+func (e FilesystemPreviewType) GoValueType() gobject.Type {
+	return TypeFilesystemPreviewType
+}
+
+func (e FilesystemPreviewType) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -4012,8 +4059,11 @@ func marshalIOErrorEnum(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = IOErrorEnum(0)
 
-func (e IOErrorEnum) InitGoValue(v *gobject.Value) {
-	v.Init(TypeIOErrorEnum)
+func (e IOErrorEnum) GoValueType() gobject.Type {
+	return TypeIOErrorEnum
+}
+
+func (e IOErrorEnum) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -4096,8 +4146,11 @@ func marshalIOModuleScopeFlags(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = IOModuleScopeFlags(0)
 
-func (e IOModuleScopeFlags) InitGoValue(v *gobject.Value) {
-	v.Init(TypeIOModuleScopeFlags)
+func (e IOModuleScopeFlags) GoValueType() gobject.Type {
+	return TypeIOModuleScopeFlags
+}
+
+func (e IOModuleScopeFlags) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -4148,8 +4201,11 @@ func marshalMemoryMonitorWarningLevel(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = MemoryMonitorWarningLevel(0)
 
-func (e MemoryMonitorWarningLevel) InitGoValue(v *gobject.Value) {
-	v.Init(TypeMemoryMonitorWarningLevel)
+func (e MemoryMonitorWarningLevel) GoValueType() gobject.Type {
+	return TypeMemoryMonitorWarningLevel
+}
+
+func (e MemoryMonitorWarningLevel) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -4192,8 +4248,11 @@ func marshalMountOperationResult(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = MountOperationResult(0)
 
-func (e MountOperationResult) InitGoValue(v *gobject.Value) {
-	v.Init(TypeMountOperationResult)
+func (e MountOperationResult) GoValueType() gobject.Type {
+	return TypeMountOperationResult
+}
+
+func (e MountOperationResult) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -4242,8 +4301,11 @@ func marshalNetworkConnectivity(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = NetworkConnectivity(0)
 
-func (e NetworkConnectivity) InitGoValue(v *gobject.Value) {
-	v.Init(TypeNetworkConnectivity)
+func (e NetworkConnectivity) GoValueType() gobject.Type {
+	return TypeNetworkConnectivity
+}
+
+func (e NetworkConnectivity) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -4295,8 +4357,11 @@ func marshalNotificationPriority(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = NotificationPriority(0)
 
-func (e NotificationPriority) InitGoValue(v *gobject.Value) {
-	v.Init(TypeNotificationPriority)
+func (e NotificationPriority) GoValueType() gobject.Type {
+	return TypeNotificationPriority
+}
+
+func (e NotificationPriority) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -4339,8 +4404,11 @@ func marshalPasswordSave(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = PasswordSave(0)
 
-func (e PasswordSave) InitGoValue(v *gobject.Value) {
-	v.Init(TypePasswordSave)
+func (e PasswordSave) GoValueType() gobject.Type {
+	return TypePasswordSave
+}
+
+func (e PasswordSave) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -4387,8 +4455,11 @@ func marshalPollableReturn(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = PollableReturn(0)
 
-func (e PollableReturn) InitGoValue(v *gobject.Value) {
-	v.Init(TypePollableReturn)
+func (e PollableReturn) GoValueType() gobject.Type {
+	return TypePollableReturn
+}
+
+func (e PollableReturn) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -4430,8 +4501,11 @@ func marshalResolverError(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = ResolverError(0)
 
-func (e ResolverError) InitGoValue(v *gobject.Value) {
-	v.Init(TypeResolverError)
+func (e ResolverError) GoValueType() gobject.Type {
+	return TypeResolverError
+}
+
+func (e ResolverError) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -4526,8 +4600,11 @@ func marshalResolverRecordType(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = ResolverRecordType(0)
 
-func (e ResolverRecordType) InitGoValue(v *gobject.Value) {
-	v.Init(TypeResolverRecordType)
+func (e ResolverRecordType) GoValueType() gobject.Type {
+	return TypeResolverRecordType
+}
+
+func (e ResolverRecordType) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -4565,8 +4642,11 @@ func marshalResourceError(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = ResourceError(0)
 
-func (e ResourceError) InitGoValue(v *gobject.Value) {
-	v.Init(TypeResourceError)
+func (e ResourceError) GoValueType() gobject.Type {
+	return TypeResourceError
+}
+
+func (e ResourceError) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -4657,8 +4737,11 @@ func marshalSocketClientEvent(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = SocketClientEvent(0)
 
-func (e SocketClientEvent) InitGoValue(v *gobject.Value) {
-	v.Init(TypeSocketClientEvent)
+func (e SocketClientEvent) GoValueType() gobject.Type {
+	return TypeSocketClientEvent
+}
+
+func (e SocketClientEvent) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -4705,8 +4788,11 @@ func marshalSocketFamily(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = SocketFamily(0)
 
-func (e SocketFamily) InitGoValue(v *gobject.Value) {
-	v.Init(TypeSocketFamily)
+func (e SocketFamily) GoValueType() gobject.Type {
+	return TypeSocketFamily
+}
+
+func (e SocketFamily) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -4754,8 +4840,11 @@ func marshalSocketListenerEvent(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = SocketListenerEvent(0)
 
-func (e SocketListenerEvent) InitGoValue(v *gobject.Value) {
-	v.Init(TypeSocketListenerEvent)
+func (e SocketListenerEvent) GoValueType() gobject.Type {
+	return TypeSocketListenerEvent
+}
+
+func (e SocketListenerEvent) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -4809,8 +4898,11 @@ func marshalSocketProtocol(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = SocketProtocol(0)
 
-func (e SocketProtocol) InitGoValue(v *gobject.Value) {
-	v.Init(TypeSocketProtocol)
+func (e SocketProtocol) GoValueType() gobject.Type {
+	return TypeSocketProtocol
+}
+
+func (e SocketProtocol) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -4858,8 +4950,11 @@ func marshalSocketType(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = SocketType(0)
 
-func (e SocketType) InitGoValue(v *gobject.Value) {
-	v.Init(TypeSocketType)
+func (e SocketType) GoValueType() gobject.Type {
+	return TypeSocketType
+}
+
+func (e SocketType) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -4899,8 +4994,11 @@ func marshalTLSAuthenticationMode(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = TLSAuthenticationMode(0)
 
-func (e TLSAuthenticationMode) InitGoValue(v *gobject.Value) {
-	v.Init(TypeTlsAuthenticationMode)
+func (e TLSAuthenticationMode) GoValueType() gobject.Type {
+	return TypeTlsAuthenticationMode
+}
+
+func (e TLSAuthenticationMode) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -4933,8 +5031,11 @@ func marshalTLSCertificateRequestFlags(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = TLSCertificateRequestFlags(0)
 
-func (e TLSCertificateRequestFlags) InitGoValue(v *gobject.Value) {
-	v.Init(TypeTlsCertificateRequestFlags)
+func (e TLSCertificateRequestFlags) GoValueType() gobject.Type {
+	return TypeTlsCertificateRequestFlags
+}
+
+func (e TLSCertificateRequestFlags) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -4991,8 +5092,11 @@ func marshalTLSChannelBindingError(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = TLSChannelBindingError(0)
 
-func (e TLSChannelBindingError) InitGoValue(v *gobject.Value) {
-	v.Init(TypeTlsChannelBindingError)
+func (e TLSChannelBindingError) GoValueType() gobject.Type {
+	return TypeTlsChannelBindingError
+}
+
+func (e TLSChannelBindingError) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -5058,8 +5162,11 @@ func marshalTLSChannelBindingType(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = TLSChannelBindingType(0)
 
-func (e TLSChannelBindingType) InitGoValue(v *gobject.Value) {
-	v.Init(TypeTlsChannelBindingType)
+func (e TLSChannelBindingType) GoValueType() gobject.Type {
+	return TypeTlsChannelBindingType
+}
+
+func (e TLSChannelBindingType) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -5097,8 +5204,11 @@ func marshalTLSDatabaseLookupFlags(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = TLSDatabaseLookupFlags(0)
 
-func (e TLSDatabaseLookupFlags) InitGoValue(v *gobject.Value) {
-	v.Init(TypeTlsDatabaseLookupFlags)
+func (e TLSDatabaseLookupFlags) GoValueType() gobject.Type {
+	return TypeTlsDatabaseLookupFlags
+}
+
+func (e TLSDatabaseLookupFlags) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -5171,8 +5281,11 @@ func marshalTLSError(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = TLSError(0)
 
-func (e TLSError) InitGoValue(v *gobject.Value) {
-	v.Init(TypeTlsError)
+func (e TLSError) GoValueType() gobject.Type {
+	return TypeTlsError
+}
+
+func (e TLSError) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -5240,8 +5353,11 @@ func marshalTLSInteractionResult(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = TLSInteractionResult(0)
 
-func (e TLSInteractionResult) InitGoValue(v *gobject.Value) {
-	v.Init(TypeTlsInteractionResult)
+func (e TLSInteractionResult) GoValueType() gobject.Type {
+	return TypeTlsInteractionResult
+}
+
+func (e TLSInteractionResult) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -5308,8 +5424,11 @@ func marshalTLSProtocolVersion(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = TLSProtocolVersion(0)
 
-func (e TLSProtocolVersion) InitGoValue(v *gobject.Value) {
-	v.Init(TypeTlsProtocolVersion)
+func (e TLSProtocolVersion) GoValueType() gobject.Type {
+	return TypeTlsProtocolVersion
+}
+
+func (e TLSProtocolVersion) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -5358,8 +5477,11 @@ func marshalTLSRehandshakeMode(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = TLSRehandshakeMode(0)
 
-func (e TLSRehandshakeMode) InitGoValue(v *gobject.Value) {
-	v.Init(TypeTlsRehandshakeMode)
+func (e TLSRehandshakeMode) GoValueType() gobject.Type {
+	return TypeTlsRehandshakeMode
+}
+
+func (e TLSRehandshakeMode) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -5399,8 +5521,11 @@ func marshalZlibCompressorFormat(p unsafe.Pointer) (any, error) {
 
 var _ gobject.GoValueInitializer = ZlibCompressorFormat(0)
 
-func (e ZlibCompressorFormat) InitGoValue(v *gobject.Value) {
-	v.Init(TypeZlibCompressorFormat)
+func (e ZlibCompressorFormat) GoValueType() gobject.Type {
+	return TypeZlibCompressorFormat
+}
+
+func (e ZlibCompressorFormat) SetGoValue(v *gobject.Value) {
 	v.SetEnum(int(e))
 }
 
@@ -5447,8 +5572,11 @@ func (a AppInfoCreateFlags) Has(other AppInfoCreateFlags) bool {
 
 var _ gobject.GoValueInitializer = AppInfoCreateFlags(0)
 
-func (f AppInfoCreateFlags) InitGoValue(v *gobject.Value) {
-	v.Init(TypeAppInfoCreateFlags)
+func (f AppInfoCreateFlags) GoValueType() gobject.Type {
+	return TypeAppInfoCreateFlags
+}
+
+func (f AppInfoCreateFlags) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
@@ -5563,8 +5691,11 @@ func (a ApplicationFlags) Has(other ApplicationFlags) bool {
 
 var _ gobject.GoValueInitializer = ApplicationFlags(0)
 
-func (f ApplicationFlags) InitGoValue(v *gobject.Value) {
-	v.Init(TypeApplicationFlags)
+func (f ApplicationFlags) GoValueType() gobject.Type {
+	return TypeApplicationFlags
+}
+
+func (f ApplicationFlags) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
@@ -5654,8 +5785,11 @@ func (a AskPasswordFlags) Has(other AskPasswordFlags) bool {
 
 var _ gobject.GoValueInitializer = AskPasswordFlags(0)
 
-func (f AskPasswordFlags) InitGoValue(v *gobject.Value) {
-	v.Init(TypeAskPasswordFlags)
+func (f AskPasswordFlags) GoValueType() gobject.Type {
+	return TypeAskPasswordFlags
+}
+
+func (f AskPasswordFlags) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
@@ -5722,8 +5856,11 @@ func (b BusNameOwnerFlags) Has(other BusNameOwnerFlags) bool {
 
 var _ gobject.GoValueInitializer = BusNameOwnerFlags(0)
 
-func (f BusNameOwnerFlags) InitGoValue(v *gobject.Value) {
-	v.Init(TypeBusNameOwnerFlags)
+func (f BusNameOwnerFlags) GoValueType() gobject.Type {
+	return TypeBusNameOwnerFlags
+}
+
+func (f BusNameOwnerFlags) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
@@ -5776,8 +5913,11 @@ func (b BusNameWatcherFlags) Has(other BusNameWatcherFlags) bool {
 
 var _ gobject.GoValueInitializer = BusNameWatcherFlags(0)
 
-func (f BusNameWatcherFlags) InitGoValue(v *gobject.Value) {
-	v.Init(TypeBusNameWatcherFlags)
+func (f BusNameWatcherFlags) GoValueType() gobject.Type {
+	return TypeBusNameWatcherFlags
+}
+
+func (f BusNameWatcherFlags) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
@@ -5826,8 +5966,11 @@ func (c ConverterFlags) Has(other ConverterFlags) bool {
 
 var _ gobject.GoValueInitializer = ConverterFlags(0)
 
-func (f ConverterFlags) InitGoValue(v *gobject.Value) {
-	v.Init(TypeConverterFlags)
+func (f ConverterFlags) GoValueType() gobject.Type {
+	return TypeConverterFlags
+}
+
+func (f ConverterFlags) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
@@ -5882,8 +6025,11 @@ func (d DBusCallFlags) Has(other DBusCallFlags) bool {
 
 var _ gobject.GoValueInitializer = DBusCallFlags(0)
 
-func (f DBusCallFlags) InitGoValue(v *gobject.Value) {
-	v.Init(TypeDBusCallFlags)
+func (f DBusCallFlags) GoValueType() gobject.Type {
+	return TypeDBusCallFlags
+}
+
+func (f DBusCallFlags) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
@@ -5927,8 +6073,11 @@ func (d DBusCapabilityFlags) Has(other DBusCapabilityFlags) bool {
 
 var _ gobject.GoValueInitializer = DBusCapabilityFlags(0)
 
-func (f DBusCapabilityFlags) InitGoValue(v *gobject.Value) {
-	v.Init(TypeDBusCapabilityFlags)
+func (f DBusCapabilityFlags) GoValueType() gobject.Type {
+	return TypeDBusCapabilityFlags
+}
+
+func (f DBusCapabilityFlags) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
@@ -6004,8 +6153,11 @@ func (d DBusConnectionFlags) Has(other DBusConnectionFlags) bool {
 
 var _ gobject.GoValueInitializer = DBusConnectionFlags(0)
 
-func (f DBusConnectionFlags) InitGoValue(v *gobject.Value) {
-	v.Init(TypeDBusConnectionFlags)
+func (f DBusConnectionFlags) GoValueType() gobject.Type {
+	return TypeDBusConnectionFlags
+}
+
+func (f DBusConnectionFlags) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
@@ -6071,8 +6223,11 @@ func (d DBusInterfaceSkeletonFlags) Has(other DBusInterfaceSkeletonFlags) bool {
 
 var _ gobject.GoValueInitializer = DBusInterfaceSkeletonFlags(0)
 
-func (f DBusInterfaceSkeletonFlags) InitGoValue(v *gobject.Value) {
-	v.Init(TypeDBusInterfaceSkeletonFlags)
+func (f DBusInterfaceSkeletonFlags) GoValueType() gobject.Type {
+	return TypeDBusInterfaceSkeletonFlags
+}
+
+func (f DBusInterfaceSkeletonFlags) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
@@ -6128,8 +6283,11 @@ func (d DBusMessageFlags) Has(other DBusMessageFlags) bool {
 
 var _ gobject.GoValueInitializer = DBusMessageFlags(0)
 
-func (f DBusMessageFlags) InitGoValue(v *gobject.Value) {
-	v.Init(TypeDBusMessageFlags)
+func (f DBusMessageFlags) GoValueType() gobject.Type {
+	return TypeDBusMessageFlags
+}
+
+func (f DBusMessageFlags) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
@@ -6183,8 +6341,11 @@ func (d DBusObjectManagerClientFlags) Has(other DBusObjectManagerClientFlags) bo
 
 var _ gobject.GoValueInitializer = DBusObjectManagerClientFlags(0)
 
-func (f DBusObjectManagerClientFlags) InitGoValue(v *gobject.Value) {
-	v.Init(TypeDBusObjectManagerClientFlags)
+func (f DBusObjectManagerClientFlags) GoValueType() gobject.Type {
+	return TypeDBusObjectManagerClientFlags
+}
+
+func (f DBusObjectManagerClientFlags) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
@@ -6233,8 +6394,11 @@ func (d DBusPropertyInfoFlags) Has(other DBusPropertyInfoFlags) bool {
 
 var _ gobject.GoValueInitializer = DBusPropertyInfoFlags(0)
 
-func (f DBusPropertyInfoFlags) InitGoValue(v *gobject.Value) {
-	v.Init(TypeDBusPropertyInfoFlags)
+func (f DBusPropertyInfoFlags) GoValueType() gobject.Type {
+	return TypeDBusPropertyInfoFlags
+}
+
+func (f DBusPropertyInfoFlags) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
@@ -6309,8 +6473,11 @@ func (d DBusProxyFlags) Has(other DBusProxyFlags) bool {
 
 var _ gobject.GoValueInitializer = DBusProxyFlags(0)
 
-func (f DBusProxyFlags) InitGoValue(v *gobject.Value) {
-	v.Init(TypeDBusProxyFlags)
+func (f DBusProxyFlags) GoValueType() gobject.Type {
+	return TypeDBusProxyFlags
+}
+
+func (f DBusProxyFlags) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
@@ -6372,8 +6539,11 @@ func (d DBusSendMessageFlags) Has(other DBusSendMessageFlags) bool {
 
 var _ gobject.GoValueInitializer = DBusSendMessageFlags(0)
 
-func (f DBusSendMessageFlags) InitGoValue(v *gobject.Value) {
-	v.Init(TypeDBusSendMessageFlags)
+func (f DBusSendMessageFlags) GoValueType() gobject.Type {
+	return TypeDBusSendMessageFlags
+}
+
+func (f DBusSendMessageFlags) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
@@ -6430,8 +6600,11 @@ func (d DBusServerFlags) Has(other DBusServerFlags) bool {
 
 var _ gobject.GoValueInitializer = DBusServerFlags(0)
 
-func (f DBusServerFlags) InitGoValue(v *gobject.Value) {
-	v.Init(TypeDBusServerFlags)
+func (f DBusServerFlags) GoValueType() gobject.Type {
+	return TypeDBusServerFlags
+}
+
+func (f DBusServerFlags) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
@@ -6495,8 +6668,11 @@ func (d DBusSignalFlags) Has(other DBusSignalFlags) bool {
 
 var _ gobject.GoValueInitializer = DBusSignalFlags(0)
 
-func (f DBusSignalFlags) InitGoValue(v *gobject.Value) {
-	v.Init(TypeDBusSignalFlags)
+func (f DBusSignalFlags) GoValueType() gobject.Type {
+	return TypeDBusSignalFlags
+}
+
+func (f DBusSignalFlags) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
@@ -6549,8 +6725,11 @@ func (d DBusSubtreeFlags) Has(other DBusSubtreeFlags) bool {
 
 var _ gobject.GoValueInitializer = DBusSubtreeFlags(0)
 
-func (f DBusSubtreeFlags) InitGoValue(v *gobject.Value) {
-	v.Init(TypeDBusSubtreeFlags)
+func (f DBusSubtreeFlags) GoValueType() gobject.Type {
+	return TypeDBusSubtreeFlags
+}
+
+func (f DBusSubtreeFlags) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
@@ -6591,8 +6770,11 @@ func (d DriveStartFlags) Has(other DriveStartFlags) bool {
 
 var _ gobject.GoValueInitializer = DriveStartFlags(0)
 
-func (f DriveStartFlags) InitGoValue(v *gobject.Value) {
-	v.Init(TypeDriveStartFlags)
+func (f DriveStartFlags) GoValueType() gobject.Type {
+	return TypeDriveStartFlags
+}
+
+func (f DriveStartFlags) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
@@ -6638,8 +6820,11 @@ func (f FileAttributeInfoFlags) Has(other FileAttributeInfoFlags) bool {
 
 var _ gobject.GoValueInitializer = FileAttributeInfoFlags(0)
 
-func (f FileAttributeInfoFlags) InitGoValue(v *gobject.Value) {
-	v.Init(TypeFileAttributeInfoFlags)
+func (f FileAttributeInfoFlags) GoValueType() gobject.Type {
+	return TypeFileAttributeInfoFlags
+}
+
+func (f FileAttributeInfoFlags) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
@@ -6712,8 +6897,11 @@ func (f FileCopyFlags) Has(other FileCopyFlags) bool {
 
 var _ gobject.GoValueInitializer = FileCopyFlags(0)
 
-func (f FileCopyFlags) InitGoValue(v *gobject.Value) {
-	v.Init(TypeFileCopyFlags)
+func (f FileCopyFlags) GoValueType() gobject.Type {
+	return TypeFileCopyFlags
+}
+
+func (f FileCopyFlags) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
@@ -6790,8 +6978,11 @@ func (f FileCreateFlags) Has(other FileCreateFlags) bool {
 
 var _ gobject.GoValueInitializer = FileCreateFlags(0)
 
-func (f FileCreateFlags) InitGoValue(v *gobject.Value) {
-	v.Init(TypeFileCreateFlags)
+func (f FileCreateFlags) GoValueType() gobject.Type {
+	return TypeFileCreateFlags
+}
+
+func (f FileCreateFlags) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
@@ -6856,8 +7047,11 @@ func (f FileMeasureFlags) Has(other FileMeasureFlags) bool {
 
 var _ gobject.GoValueInitializer = FileMeasureFlags(0)
 
-func (f FileMeasureFlags) InitGoValue(v *gobject.Value) {
-	v.Init(TypeFileMeasureFlags)
+func (f FileMeasureFlags) GoValueType() gobject.Type {
+	return TypeFileMeasureFlags
+}
+
+func (f FileMeasureFlags) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
@@ -6929,8 +7123,11 @@ func (f FileMonitorFlags) Has(other FileMonitorFlags) bool {
 
 var _ gobject.GoValueInitializer = FileMonitorFlags(0)
 
-func (f FileMonitorFlags) InitGoValue(v *gobject.Value) {
-	v.Init(TypeFileMonitorFlags)
+func (f FileMonitorFlags) GoValueType() gobject.Type {
+	return TypeFileMonitorFlags
+}
+
+func (f FileMonitorFlags) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
@@ -6984,8 +7181,11 @@ func (f FileQueryInfoFlags) Has(other FileQueryInfoFlags) bool {
 
 var _ gobject.GoValueInitializer = FileQueryInfoFlags(0)
 
-func (f FileQueryInfoFlags) InitGoValue(v *gobject.Value) {
-	v.Init(TypeFileQueryInfoFlags)
+func (f FileQueryInfoFlags) GoValueType() gobject.Type {
+	return TypeFileQueryInfoFlags
+}
+
+func (f FileQueryInfoFlags) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
@@ -7041,8 +7241,11 @@ func (i IOStreamSpliceFlags) Has(other IOStreamSpliceFlags) bool {
 
 var _ gobject.GoValueInitializer = IOStreamSpliceFlags(0)
 
-func (f IOStreamSpliceFlags) InitGoValue(v *gobject.Value) {
-	v.Init(TypeIOStreamSpliceFlags)
+func (f IOStreamSpliceFlags) GoValueType() gobject.Type {
+	return TypeIOStreamSpliceFlags
+}
+
+func (f IOStreamSpliceFlags) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
@@ -7089,8 +7292,11 @@ func (m MountMountFlags) Has(other MountMountFlags) bool {
 
 var _ gobject.GoValueInitializer = MountMountFlags(0)
 
-func (f MountMountFlags) InitGoValue(v *gobject.Value) {
-	v.Init(TypeMountMountFlags)
+func (f MountMountFlags) GoValueType() gobject.Type {
+	return TypeMountMountFlags
+}
+
+func (f MountMountFlags) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
@@ -7133,8 +7339,11 @@ func (m MountUnmountFlags) Has(other MountUnmountFlags) bool {
 
 var _ gobject.GoValueInitializer = MountUnmountFlags(0)
 
-func (f MountUnmountFlags) InitGoValue(v *gobject.Value) {
-	v.Init(TypeMountUnmountFlags)
+func (f MountUnmountFlags) GoValueType() gobject.Type {
+	return TypeMountUnmountFlags
+}
+
+func (f MountUnmountFlags) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
@@ -7185,8 +7394,11 @@ func (o OutputStreamSpliceFlags) Has(other OutputStreamSpliceFlags) bool {
 
 var _ gobject.GoValueInitializer = OutputStreamSpliceFlags(0)
 
-func (f OutputStreamSpliceFlags) InitGoValue(v *gobject.Value) {
-	v.Init(TypeOutputStreamSpliceFlags)
+func (f OutputStreamSpliceFlags) GoValueType() gobject.Type {
+	return TypeOutputStreamSpliceFlags
+}
+
+func (f OutputStreamSpliceFlags) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
@@ -7238,8 +7450,11 @@ func (r ResolverNameLookupFlags) Has(other ResolverNameLookupFlags) bool {
 
 var _ gobject.GoValueInitializer = ResolverNameLookupFlags(0)
 
-func (f ResolverNameLookupFlags) InitGoValue(v *gobject.Value) {
-	v.Init(TypeResolverNameLookupFlags)
+func (f ResolverNameLookupFlags) GoValueType() gobject.Type {
+	return TypeResolverNameLookupFlags
+}
+
+func (f ResolverNameLookupFlags) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
@@ -7288,8 +7503,11 @@ func (r ResourceFlags) Has(other ResourceFlags) bool {
 
 var _ gobject.GoValueInitializer = ResourceFlags(0)
 
-func (f ResourceFlags) InitGoValue(v *gobject.Value) {
-	v.Init(TypeResourceFlags)
+func (f ResourceFlags) GoValueType() gobject.Type {
+	return TypeResourceFlags
+}
+
+func (f ResourceFlags) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
@@ -7330,8 +7548,11 @@ func (r ResourceLookupFlags) Has(other ResourceLookupFlags) bool {
 
 var _ gobject.GoValueInitializer = ResourceLookupFlags(0)
 
-func (f ResourceLookupFlags) InitGoValue(v *gobject.Value) {
-	v.Init(TypeResourceLookupFlags)
+func (f ResourceLookupFlags) GoValueType() gobject.Type {
+	return TypeResourceLookupFlags
+}
+
+func (f ResourceLookupFlags) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
@@ -7396,8 +7617,11 @@ func (s SettingsBindFlags) Has(other SettingsBindFlags) bool {
 
 var _ gobject.GoValueInitializer = SettingsBindFlags(0)
 
-func (f SettingsBindFlags) InitGoValue(v *gobject.Value) {
-	v.Init(TypeSettingsBindFlags)
+func (f SettingsBindFlags) GoValueType() gobject.Type {
+	return TypeSettingsBindFlags
+}
+
+func (f SettingsBindFlags) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
@@ -7468,8 +7692,11 @@ func (s SocketMsgFlags) Has(other SocketMsgFlags) bool {
 
 var _ gobject.GoValueInitializer = SocketMsgFlags(0)
 
-func (f SocketMsgFlags) InitGoValue(v *gobject.Value) {
-	v.Init(TypeSocketMsgFlags)
+func (f SocketMsgFlags) GoValueType() gobject.Type {
+	return TypeSocketMsgFlags
+}
+
+func (f SocketMsgFlags) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
@@ -7516,8 +7743,11 @@ func (t TestDBusFlags) Has(other TestDBusFlags) bool {
 
 var _ gobject.GoValueInitializer = TestDBusFlags(0)
 
-func (f TestDBusFlags) InitGoValue(v *gobject.Value) {
-	v.Init(TypeTestDBusFlags)
+func (f TestDBusFlags) GoValueType() gobject.Type {
+	return TypeTestDBusFlags
+}
+
+func (f TestDBusFlags) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
@@ -7604,8 +7834,11 @@ func (t TLSCertificateFlags) Has(other TLSCertificateFlags) bool {
 
 var _ gobject.GoValueInitializer = TLSCertificateFlags(0)
 
-func (f TLSCertificateFlags) InitGoValue(v *gobject.Value) {
-	v.Init(TypeTlsCertificateFlags)
+func (f TLSCertificateFlags) GoValueType() gobject.Type {
+	return TypeTlsCertificateFlags
+}
+
+func (f TLSCertificateFlags) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
@@ -7667,8 +7900,11 @@ func (t TLSDatabaseVerifyFlags) Has(other TLSDatabaseVerifyFlags) bool {
 
 var _ gobject.GoValueInitializer = TLSDatabaseVerifyFlags(0)
 
-func (f TLSDatabaseVerifyFlags) InitGoValue(v *gobject.Value) {
-	v.Init(TypeTlsDatabaseVerifyFlags)
+func (f TLSDatabaseVerifyFlags) GoValueType() gobject.Type {
+	return TypeTlsDatabaseVerifyFlags
+}
+
+func (f TLSDatabaseVerifyFlags) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
@@ -7735,8 +7971,11 @@ func (t TLSPasswordFlags) Has(other TLSPasswordFlags) bool {
 
 var _ gobject.GoValueInitializer = TLSPasswordFlags(0)
 
-func (f TLSPasswordFlags) InitGoValue(v *gobject.Value) {
-	v.Init(TypeTlsPasswordFlags)
+func (f TLSPasswordFlags) GoValueType() gobject.Type {
+	return TypeTlsPasswordFlags
+}
+
+func (f TLSPasswordFlags) SetGoValue(v *gobject.Value) {
 	v.SetFlags(int(f))
 }
 
@@ -9269,7 +9508,7 @@ func DBusUnescapeObjectPath(s string) []uint8 {
 // 
 // The function takes the following parameters:
 // 
-// 	- errNo int: Error number as defined in errno.h. 
+// 	- errNo int32: Error number as defined in errno.h. 
 // 
 // The function returns the following values:
 // 
@@ -9294,7 +9533,7 @@ func DBusUnescapeObjectPath(s string) []uint8 {
 // 
 //   g_io_error_from_errno (saved_errno);
 // ]|
-func IOErrorFromErrno(errNo int) IOErrorEnum {
+func IOErrorFromErrno(errNo int32) IOErrorEnum {
 	var carg1 C.gint         // in, none, casted
 	var cret  C.GIOErrorEnum // return, none, casted
 
@@ -10048,6 +10287,11 @@ func UnsafeActionFromGlibFull(c unsafe.Pointer) Action {
 	return gobject.UnsafeObjectFromGlibFull(c).(Action)
 }
 
+// UnsafeActionFromGlibBorrow is used to convert raw GAction pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeActionFromGlibBorrow(c unsafe.Pointer) Action {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Action)
+}
+
 // UnsafeActionToGlibNone is used to convert the instance to it's C value GAction. This is used by the bindings internally.
 func UnsafeActionToGlibNone(c Action) unsafe.Pointer {
 	i := c.upcastToGAction()
@@ -10255,7 +10499,7 @@ func UnsafeApplyActionOverrides[Instance Action](gclass unsafe.Pointer, override
 				var action Instance // go GAction subclass
 				var goret  bool     // return
 
-				action = UnsafeActionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				action = UnsafeActionFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetEnabled(action)
 
@@ -10277,7 +10521,7 @@ func UnsafeApplyActionOverrides[Instance Action](gclass unsafe.Pointer, override
 				var action Instance // go GAction subclass
 				var goret  string   // return, none, string
 
-				action = UnsafeActionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				action = UnsafeActionFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetName(action)
 
@@ -10298,7 +10542,7 @@ func UnsafeApplyActionOverrides[Instance Action](gclass unsafe.Pointer, override
 				var action Instance          // go GAction subclass
 				var goret  *glib.VariantType // return, none, converted, nullable
 
-				action = UnsafeActionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				action = UnsafeActionFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetParameterType(action)
 
@@ -10320,7 +10564,7 @@ func UnsafeApplyActionOverrides[Instance Action](gclass unsafe.Pointer, override
 				var action Instance          // go GAction subclass
 				var goret  *glib.VariantType // return, none, converted, nullable
 
-				action = UnsafeActionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				action = UnsafeActionFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetStateType(action)
 
@@ -10555,6 +10799,11 @@ func UnsafeActionGroupFromGlibNone(c unsafe.Pointer) ActionGroup {
 // UnsafeActionGroupFromGlibFull is used to convert raw GActionGroup pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeActionGroupFromGlibFull(c unsafe.Pointer) ActionGroup {
 	return gobject.UnsafeObjectFromGlibFull(c).(ActionGroup)
+}
+
+// UnsafeActionGroupFromGlibBorrow is used to convert raw GActionGroup pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeActionGroupFromGlibBorrow(c unsafe.Pointer) ActionGroup {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(ActionGroup)
 }
 
 // UnsafeActionGroupToGlibNone is used to convert the instance to it's C value GActionGroup. This is used by the bindings internally.
@@ -10934,7 +11183,7 @@ func UnsafeApplyActionGroupOverrides[Instance ActionGroup](gclass unsafe.Pointer
 				var actionGroup Instance // go GActionGroup subclass
 				var actionName  string   // in, none, string
 
-				actionGroup = UnsafeActionGroupFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				actionGroup = UnsafeActionGroupFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				actionName = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 
 				overrides.ActionAdded(actionGroup, actionName)
@@ -10952,7 +11201,7 @@ func UnsafeApplyActionGroupOverrides[Instance ActionGroup](gclass unsafe.Pointer
 				var actionName  string   // in, none, string
 				var enabled     bool     // in
 
-				actionGroup = UnsafeActionGroupFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				actionGroup = UnsafeActionGroupFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				actionName = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 				if carg2 != 0 {
 					enabled = true
@@ -10972,7 +11221,7 @@ func UnsafeApplyActionGroupOverrides[Instance ActionGroup](gclass unsafe.Pointer
 				var actionGroup Instance // go GActionGroup subclass
 				var actionName  string   // in, none, string
 
-				actionGroup = UnsafeActionGroupFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				actionGroup = UnsafeActionGroupFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				actionName = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 
 				overrides.ActionRemoved(actionGroup, actionName)
@@ -10990,7 +11239,7 @@ func UnsafeApplyActionGroupOverrides[Instance ActionGroup](gclass unsafe.Pointer
 				var actionName  string   // in, none, string
 				var goret       bool     // return
 
-				actionGroup = UnsafeActionGroupFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				actionGroup = UnsafeActionGroupFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				actionName = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 
 				goret = overrides.GetActionEnabled(actionGroup, actionName)
@@ -11014,7 +11263,7 @@ func UnsafeApplyActionGroupOverrides[Instance ActionGroup](gclass unsafe.Pointer
 				var actionName  string            // in, none, string
 				var goret       *glib.VariantType // return, none, converted, nullable
 
-				actionGroup = UnsafeActionGroupFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				actionGroup = UnsafeActionGroupFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				actionName = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 
 				goret = overrides.GetActionParameterType(actionGroup, actionName)
@@ -11038,7 +11287,7 @@ func UnsafeApplyActionGroupOverrides[Instance ActionGroup](gclass unsafe.Pointer
 				var actionName  string            // in, none, string
 				var goret       *glib.VariantType // return, none, converted, nullable
 
-				actionGroup = UnsafeActionGroupFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				actionGroup = UnsafeActionGroupFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				actionName = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 
 				goret = overrides.GetActionStateType(actionGroup, actionName)
@@ -11062,7 +11311,7 @@ func UnsafeApplyActionGroupOverrides[Instance ActionGroup](gclass unsafe.Pointer
 				var actionName  string   // in, none, string
 				var goret       bool     // return
 
-				actionGroup = UnsafeActionGroupFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				actionGroup = UnsafeActionGroupFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				actionName = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 
 				goret = overrides.HasAction(actionGroup, actionName)
@@ -11085,7 +11334,7 @@ func UnsafeApplyActionGroupOverrides[Instance ActionGroup](gclass unsafe.Pointer
 				var actionGroup Instance // go GActionGroup subclass
 				var goret       []string // return, transfer: full, C Pointers: 2, Name: array[utf8], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
 
-				actionGroup = UnsafeActionGroupFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				actionGroup = UnsafeActionGroupFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.ListActions(actionGroup)
 
@@ -11216,6 +11465,11 @@ func UnsafeActionMapFromGlibNone(c unsafe.Pointer) ActionMap {
 // UnsafeActionMapFromGlibFull is used to convert raw GActionMap pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeActionMapFromGlibFull(c unsafe.Pointer) ActionMap {
 	return gobject.UnsafeObjectFromGlibFull(c).(ActionMap)
+}
+
+// UnsafeActionMapFromGlibBorrow is used to convert raw GActionMap pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeActionMapFromGlibBorrow(c unsafe.Pointer) ActionMap {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(ActionMap)
 }
 
 // UnsafeActionMapToGlibNone is used to convert the instance to it's C value GActionMap. This is used by the bindings internally.
@@ -11394,7 +11648,7 @@ func UnsafeApplyActionMapOverrides[Instance ActionMap](gclass unsafe.Pointer, ov
 				var actionMap Instance // go GActionMap subclass
 				var action    Action   // in, none, converted
 
-				actionMap = UnsafeActionMapFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				actionMap = UnsafeActionMapFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				action = UnsafeActionFromGlibNone(unsafe.Pointer(carg1))
 
 				overrides.AddAction(actionMap, action)
@@ -11412,7 +11666,7 @@ func UnsafeApplyActionMapOverrides[Instance ActionMap](gclass unsafe.Pointer, ov
 				var actionName string   // in, none, string
 				var goret      Action   // return, none, converted, nullable
 
-				actionMap = UnsafeActionMapFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				actionMap = UnsafeActionMapFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				actionName = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 
 				goret = overrides.LookupAction(actionMap, actionName)
@@ -11435,7 +11689,7 @@ func UnsafeApplyActionMapOverrides[Instance ActionMap](gclass unsafe.Pointer, ov
 				var actionMap  Instance // go GActionMap subclass
 				var actionName string   // in, none, string
 
-				actionMap = UnsafeActionMapFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				actionMap = UnsafeActionMapFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				actionName = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 
 				overrides.RemoveAction(actionMap, actionName)
@@ -11780,6 +12034,11 @@ func UnsafeAppInfoFromGlibNone(c unsafe.Pointer) AppInfo {
 // UnsafeAppInfoFromGlibFull is used to convert raw GAppInfo pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeAppInfoFromGlibFull(c unsafe.Pointer) AppInfo {
 	return gobject.UnsafeObjectFromGlibFull(c).(AppInfo)
+}
+
+// UnsafeAppInfoFromGlibBorrow is used to convert raw GAppInfo pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeAppInfoFromGlibBorrow(c unsafe.Pointer) AppInfo {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(AppInfo)
 }
 
 // UnsafeAppInfoToGlibNone is used to convert the instance to it's C value GAppInfo. This is used by the bindings internally.
@@ -13200,7 +13459,7 @@ func UnsafeApplyAppInfoOverrides[Instance AppInfo](gclass unsafe.Pointer, overri
 				var goret       bool     // return
 				var _goerr      error    // out, full, converted
 
-				appinfo = UnsafeAppInfoFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				appinfo = UnsafeAppInfoFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				contentType = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 
 				goret, _goerr = overrides.AddSupportsType(appinfo, contentType)
@@ -13224,7 +13483,7 @@ func UnsafeApplyAppInfoOverrides[Instance AppInfo](gclass unsafe.Pointer, overri
 				var appinfo Instance // go GAppInfo subclass
 				var goret   bool     // return
 
-				appinfo = UnsafeAppInfoFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				appinfo = UnsafeAppInfoFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.CanDelete(appinfo)
 
@@ -13246,7 +13505,7 @@ func UnsafeApplyAppInfoOverrides[Instance AppInfo](gclass unsafe.Pointer, overri
 				var appinfo Instance // go GAppInfo subclass
 				var goret   bool     // return
 
-				appinfo = UnsafeAppInfoFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				appinfo = UnsafeAppInfoFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.CanRemoveSupportsType(appinfo)
 
@@ -13268,7 +13527,7 @@ func UnsafeApplyAppInfoOverrides[Instance AppInfo](gclass unsafe.Pointer, overri
 				var appinfo Instance // go GAppInfo subclass
 				var goret   bool     // return
 
-				appinfo = UnsafeAppInfoFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				appinfo = UnsafeAppInfoFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.DoDelete(appinfo)
 
@@ -13290,7 +13549,7 @@ func UnsafeApplyAppInfoOverrides[Instance AppInfo](gclass unsafe.Pointer, overri
 				var appinfo Instance // go GAppInfo subclass
 				var goret   AppInfo  // return, full, converted
 
-				appinfo = UnsafeAppInfoFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				appinfo = UnsafeAppInfoFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.Dup(appinfo)
 
@@ -13311,7 +13570,7 @@ func UnsafeApplyAppInfoOverrides[Instance AppInfo](gclass unsafe.Pointer, overri
 				var appinfo2 AppInfo  // in, none, converted
 				var goret    bool     // return
 
-				appinfo1 = UnsafeAppInfoFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				appinfo1 = UnsafeAppInfoFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				appinfo2 = UnsafeAppInfoFromGlibNone(unsafe.Pointer(carg1))
 
 				goret = overrides.Equal(appinfo1, appinfo2)
@@ -13334,7 +13593,7 @@ func UnsafeApplyAppInfoOverrides[Instance AppInfo](gclass unsafe.Pointer, overri
 				var appinfo Instance // go GAppInfo subclass
 				var goret   string   // return, none, string, nullable-string
 
-				appinfo = UnsafeAppInfoFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				appinfo = UnsafeAppInfoFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetCommandline(appinfo)
 
@@ -13357,7 +13616,7 @@ func UnsafeApplyAppInfoOverrides[Instance AppInfo](gclass unsafe.Pointer, overri
 				var appinfo Instance // go GAppInfo subclass
 				var goret   string   // return, none, string, nullable-string
 
-				appinfo = UnsafeAppInfoFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				appinfo = UnsafeAppInfoFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetDescription(appinfo)
 
@@ -13380,7 +13639,7 @@ func UnsafeApplyAppInfoOverrides[Instance AppInfo](gclass unsafe.Pointer, overri
 				var appinfo Instance // go GAppInfo subclass
 				var goret   string   // return, none, string, casted *C.gchar
 
-				appinfo = UnsafeAppInfoFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				appinfo = UnsafeAppInfoFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetDisplayName(appinfo)
 
@@ -13401,7 +13660,7 @@ func UnsafeApplyAppInfoOverrides[Instance AppInfo](gclass unsafe.Pointer, overri
 				var appinfo Instance // go GAppInfo subclass
 				var goret   string   // return, none, string, casted *C.gchar
 
-				appinfo = UnsafeAppInfoFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				appinfo = UnsafeAppInfoFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetExecutable(appinfo)
 
@@ -13422,7 +13681,7 @@ func UnsafeApplyAppInfoOverrides[Instance AppInfo](gclass unsafe.Pointer, overri
 				var appinfo Instance // go GAppInfo subclass
 				var goret   Icon     // return, none, converted, nullable
 
-				appinfo = UnsafeAppInfoFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				appinfo = UnsafeAppInfoFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetIcon(appinfo)
 
@@ -13444,7 +13703,7 @@ func UnsafeApplyAppInfoOverrides[Instance AppInfo](gclass unsafe.Pointer, overri
 				var appinfo Instance // go GAppInfo subclass
 				var goret   string   // return, none, string, nullable-string
 
-				appinfo = UnsafeAppInfoFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				appinfo = UnsafeAppInfoFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetID(appinfo)
 
@@ -13467,7 +13726,7 @@ func UnsafeApplyAppInfoOverrides[Instance AppInfo](gclass unsafe.Pointer, overri
 				var appinfo Instance // go GAppInfo subclass
 				var goret   string   // return, none, string, casted *C.gchar
 
-				appinfo = UnsafeAppInfoFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				appinfo = UnsafeAppInfoFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetName(appinfo)
 
@@ -13488,7 +13747,7 @@ func UnsafeApplyAppInfoOverrides[Instance AppInfo](gclass unsafe.Pointer, overri
 				var appinfo Instance // go GAppInfo subclass
 				var goret   []string // return, transfer: none, C Pointers: 2, Name: array[utf8], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
 
-				appinfo = UnsafeAppInfoFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				appinfo = UnsafeAppInfoFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetSupportedTypes(appinfo)
 
@@ -13512,7 +13771,7 @@ func UnsafeApplyAppInfoOverrides[Instance AppInfo](gclass unsafe.Pointer, overri
 				var goret   bool        // return
 				var _goerr  error       // out, full, converted
 
-				appinfo = UnsafeAppInfoFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				appinfo = UnsafeAppInfoFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.LaunchURIsFinish(appinfo, result)
@@ -13538,7 +13797,7 @@ func UnsafeApplyAppInfoOverrides[Instance AppInfo](gclass unsafe.Pointer, overri
 				var goret       bool     // return
 				var _goerr      error    // out, full, converted
 
-				appinfo = UnsafeAppInfoFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				appinfo = UnsafeAppInfoFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				contentType = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 
 				goret, _goerr = overrides.RemoveSupportsType(appinfo, contentType)
@@ -13564,7 +13823,7 @@ func UnsafeApplyAppInfoOverrides[Instance AppInfo](gclass unsafe.Pointer, overri
 				var goret     bool     // return
 				var _goerr    error    // out, full, converted
 
-				appinfo = UnsafeAppInfoFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				appinfo = UnsafeAppInfoFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				extension = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 
 				goret, _goerr = overrides.SetAsDefaultForExtension(appinfo, extension)
@@ -13590,7 +13849,7 @@ func UnsafeApplyAppInfoOverrides[Instance AppInfo](gclass unsafe.Pointer, overri
 				var goret       bool     // return
 				var _goerr      error    // out, full, converted
 
-				appinfo = UnsafeAppInfoFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				appinfo = UnsafeAppInfoFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				contentType = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 
 				goret, _goerr = overrides.SetAsDefaultForType(appinfo, contentType)
@@ -13616,7 +13875,7 @@ func UnsafeApplyAppInfoOverrides[Instance AppInfo](gclass unsafe.Pointer, overri
 				var goret       bool     // return
 				var _goerr      error    // out, full, converted
 
-				appinfo = UnsafeAppInfoFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				appinfo = UnsafeAppInfoFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				contentType = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 
 				goret, _goerr = overrides.SetAsLastUsedForType(appinfo, contentType)
@@ -13640,7 +13899,7 @@ func UnsafeApplyAppInfoOverrides[Instance AppInfo](gclass unsafe.Pointer, overri
 				var appinfo Instance // go GAppInfo subclass
 				var goret   bool     // return
 
-				appinfo = UnsafeAppInfoFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				appinfo = UnsafeAppInfoFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.ShouldShow(appinfo)
 
@@ -13662,7 +13921,7 @@ func UnsafeApplyAppInfoOverrides[Instance AppInfo](gclass unsafe.Pointer, overri
 				var appinfo Instance // go GAppInfo subclass
 				var goret   bool     // return
 
-				appinfo = UnsafeAppInfoFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				appinfo = UnsafeAppInfoFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.SupportsFiles(appinfo)
 
@@ -13684,7 +13943,7 @@ func UnsafeApplyAppInfoOverrides[Instance AppInfo](gclass unsafe.Pointer, overri
 				var appinfo Instance // go GAppInfo subclass
 				var goret   bool     // return
 
-				appinfo = UnsafeAppInfoFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				appinfo = UnsafeAppInfoFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.SupportsURIs(appinfo)
 
@@ -13817,7 +14076,7 @@ type AsyncInitable interface {
 	// The function takes the following parameters:
 	// 
 	// 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore. 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the operation 
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the operation 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback to call when the request is satisfied 
 	//
 	// Starts asynchronous initialization of the object implementing the
@@ -13856,7 +14115,7 @@ type AsyncInitable interface {
 	// in a thread, so if you want to support asynchronous initialization via
 	// threads, just implement the #GAsyncInitable interface without overriding
 	// any interface methods.
-	InitAsync(context.Context, int, AsyncReadyCallback)
+	InitAsync(context.Context, int32, AsyncReadyCallback)
 	// InitFinish wraps g_async_initable_init_finish
 	// 
 	// The function takes the following parameters:
@@ -13913,6 +14172,11 @@ func UnsafeAsyncInitableFromGlibFull(c unsafe.Pointer) AsyncInitable {
 	return gobject.UnsafeObjectFromGlibFull(c).(AsyncInitable)
 }
 
+// UnsafeAsyncInitableFromGlibBorrow is used to convert raw GAsyncInitable pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeAsyncInitableFromGlibBorrow(c unsafe.Pointer) AsyncInitable {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(AsyncInitable)
+}
+
 // UnsafeAsyncInitableToGlibNone is used to convert the instance to it's C value GAsyncInitable. This is used by the bindings internally.
 func UnsafeAsyncInitableToGlibNone(c AsyncInitable) unsafe.Pointer {
 	i := c.upcastToGAsyncInitable()
@@ -13930,7 +14194,7 @@ func UnsafeAsyncInitableToGlibFull(c AsyncInitable) unsafe.Pointer {
 // The function takes the following parameters:
 // 
 // 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore. 
-// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the operation 
+// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the operation 
 // 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback to call when the request is satisfied 
 //
 // Starts asynchronous initialization of the object implementing the
@@ -13969,7 +14233,7 @@ func UnsafeAsyncInitableToGlibFull(c AsyncInitable) unsafe.Pointer {
 // in a thread, so if you want to support asynchronous initialization via
 // threads, just implement the #GAsyncInitable interface without overriding
 // any interface methods.
-func (initable *AsyncInitableInstance) InitAsync(cancellable context.Context, ioPriority int, callback AsyncReadyCallback) {
+func (initable *AsyncInitableInstance) InitAsync(cancellable context.Context, ioPriority int32, callback AsyncReadyCallback) {
 	var carg0 *C.GAsyncInitable     // in, none, converted
 	var carg2 *C.GCancellable       // in, none, converted, nullable
 	var carg1 C.int                 // in, none, casted, casted C.gint
@@ -14076,9 +14340,9 @@ type AsyncInitableOverrides[Instance AsyncInitable] struct {
 	// The function takes the following parameters:
 	// 
 	// 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore. 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the operation 
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the operation 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback to call when the request is satisfied 
-	InitAsync func(Instance, context.Context, int, AsyncReadyCallback)
+	InitAsync func(Instance, context.Context, int32, AsyncReadyCallback)
 	// InitFinish allows you to override the implementation of the virtual method init_finish.
 	// The function takes the following parameters:
 	// 
@@ -14104,14 +14368,14 @@ func UnsafeApplyAsyncInitableOverrides[Instance AsyncInitable](gclass unsafe.Poi
 			func(carg0 *C.GAsyncInitable, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
 				var initable    Instance           // go GAsyncInitable subclass
 				var cancellable context.Context    // in, none, converted, nullable
-				var ioPriority  int                // in, none, casted, casted C.gint
+				var ioPriority  int32              // in, none, casted, casted C.gint
 				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg4, nullable
 
-				initable = UnsafeAsyncInitableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				initable = UnsafeAsyncInitableFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg2 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
 				}
-				ioPriority = int(carg1)
+				ioPriority = int32(carg1)
 				if carg3 != nil {
 					_ = callback
 					_ = carg3
@@ -14135,7 +14399,7 @@ func UnsafeApplyAsyncInitableOverrides[Instance AsyncInitable](gclass unsafe.Poi
 				var goret    bool        // return
 				var _goerr   error       // out, full, converted
 
-				initable = UnsafeAsyncInitableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				initable = UnsafeAsyncInitableFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				res = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.InitFinish(initable, res)
@@ -14303,6 +14567,11 @@ func UnsafeAsyncResultFromGlibFull(c unsafe.Pointer) AsyncResult {
 	return gobject.UnsafeObjectFromGlibFull(c).(AsyncResult)
 }
 
+// UnsafeAsyncResultFromGlibBorrow is used to convert raw GAsyncResult pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeAsyncResultFromGlibBorrow(c unsafe.Pointer) AsyncResult {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(AsyncResult)
+}
+
 // UnsafeAsyncResultToGlibNone is used to convert the instance to it's C value GAsyncResult. This is used by the bindings internally.
 func UnsafeAsyncResultToGlibNone(c AsyncResult) unsafe.Pointer {
 	i := c.upcastToGAsyncResult()
@@ -14404,7 +14673,7 @@ func UnsafeApplyAsyncResultOverrides[Instance AsyncResult](gclass unsafe.Pointer
 				var res   Instance       // go GAsyncResult subclass
 				var goret gobject.Object // return, full, converted, nullable
 
-				res = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				res = UnsafeAsyncResultFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetSourceObject(res)
 
@@ -14587,6 +14856,11 @@ func UnsafeConverterFromGlibNone(c unsafe.Pointer) Converter {
 // UnsafeConverterFromGlibFull is used to convert raw GConverter pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeConverterFromGlibFull(c unsafe.Pointer) Converter {
 	return gobject.UnsafeObjectFromGlibFull(c).(Converter)
+}
+
+// UnsafeConverterFromGlibBorrow is used to convert raw GConverter pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeConverterFromGlibBorrow(c unsafe.Pointer) Converter {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Converter)
 }
 
 // UnsafeConverterToGlibNone is used to convert the instance to it's C value GConverter. This is used by the bindings internally.
@@ -14841,7 +15115,7 @@ func UnsafeApplyConverterOverrides[Instance Converter](gclass unsafe.Pointer, ov
 				var goret        ConverterResult // return, none, casted
 				var _goerr       error           // out, full, converted
 
-				converter = UnsafeConverterFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				converter = UnsafeConverterFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				_ = inbuf
 				_ = carg1
 				_ = carg2
@@ -14872,7 +15146,7 @@ func UnsafeApplyConverterOverrides[Instance Converter](gclass unsafe.Pointer, ov
 			func(carg0 *C.GConverter) {
 				var converter Instance // go GConverter subclass
 
-				converter = UnsafeConverterFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				converter = UnsafeConverterFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				overrides.Reset(converter)
 			},
@@ -14951,6 +15225,11 @@ func UnsafeDBusInterfaceFromGlibNone(c unsafe.Pointer) DBusInterface {
 // UnsafeDBusInterfaceFromGlibFull is used to convert raw GDBusInterface pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeDBusInterfaceFromGlibFull(c unsafe.Pointer) DBusInterface {
 	return gobject.UnsafeObjectFromGlibFull(c).(DBusInterface)
+}
+
+// UnsafeDBusInterfaceFromGlibBorrow is used to convert raw GDBusInterface pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeDBusInterfaceFromGlibBorrow(c unsafe.Pointer) DBusInterface {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(DBusInterface)
 }
 
 // UnsafeDBusInterfaceToGlibNone is used to convert the instance to it's C value GDBusInterface. This is used by the bindings internally.
@@ -15071,7 +15350,7 @@ func UnsafeApplyDBusInterfaceOverrides[Instance DBusInterface](gclass unsafe.Poi
 				var interface_ Instance   // go GDBusInterface subclass
 				var goret      DBusObject // return, full, converted, nullable
 
-				interface_ = UnsafeDBusInterfaceFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				interface_ = UnsafeDBusInterfaceFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.DupObject(interface_)
 
@@ -15093,7 +15372,7 @@ func UnsafeApplyDBusInterfaceOverrides[Instance DBusInterface](gclass unsafe.Poi
 				var interface_ Instance           // go GDBusInterface subclass
 				var goret      *DBusInterfaceInfo // return, none, converted
 
-				interface_ = UnsafeDBusInterfaceFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				interface_ = UnsafeDBusInterfaceFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetInfo(interface_)
 
@@ -15113,7 +15392,7 @@ func UnsafeApplyDBusInterfaceOverrides[Instance DBusInterface](gclass unsafe.Poi
 				var interface_ Instance   // go GDBusInterface subclass
 				var object     DBusObject // in, none, converted, nullable
 
-				interface_ = UnsafeDBusInterfaceFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				interface_ = UnsafeDBusInterfaceFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg1 != nil {
 					object = UnsafeDBusObjectFromGlibNone(unsafe.Pointer(carg1))
 				}
@@ -15204,6 +15483,11 @@ func UnsafeDBusObjectFromGlibNone(c unsafe.Pointer) DBusObject {
 // UnsafeDBusObjectFromGlibFull is used to convert raw GDBusObject pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeDBusObjectFromGlibFull(c unsafe.Pointer) DBusObject {
 	return gobject.UnsafeObjectFromGlibFull(c).(DBusObject)
+}
+
+// UnsafeDBusObjectFromGlibBorrow is used to convert raw GDBusObject pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeDBusObjectFromGlibBorrow(c unsafe.Pointer) DBusObject {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(DBusObject)
 }
 
 // UnsafeDBusObjectToGlibNone is used to convert the instance to it's C value GDBusObject. This is used by the bindings internally.
@@ -15368,7 +15652,7 @@ func UnsafeApplyDBusObjectOverrides[Instance DBusObject](gclass unsafe.Pointer, 
 				var interfaceName string        // in, none, string
 				var goret         DBusInterface // return, full, converted, nullable
 
-				object = UnsafeDBusObjectFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				object = UnsafeDBusObjectFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				interfaceName = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 
 				goret = overrides.GetInterface(object, interfaceName)
@@ -15391,7 +15675,7 @@ func UnsafeApplyDBusObjectOverrides[Instance DBusObject](gclass unsafe.Pointer, 
 				var object Instance        // go GDBusObject subclass
 				var goret  []DBusInterface // return, transfer: full, C Pointers: 1, Name: List, scope: 
 
-				object = UnsafeDBusObjectFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				object = UnsafeDBusObjectFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetInterfaces(object)
 
@@ -15413,7 +15697,7 @@ func UnsafeApplyDBusObjectOverrides[Instance DBusObject](gclass unsafe.Pointer, 
 				var object Instance // go GDBusObject subclass
 				var goret  string   // return, none, string
 
-				object = UnsafeDBusObjectFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				object = UnsafeDBusObjectFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetObjectPath(object)
 
@@ -15434,7 +15718,7 @@ func UnsafeApplyDBusObjectOverrides[Instance DBusObject](gclass unsafe.Pointer, 
 				var object     Instance      // go GDBusObject subclass
 				var interface_ DBusInterface // in, none, converted
 
-				object = UnsafeDBusObjectFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				object = UnsafeDBusObjectFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				interface_ = UnsafeDBusInterfaceFromGlibNone(unsafe.Pointer(carg1))
 
 				overrides.InterfaceAdded(object, interface_)
@@ -15451,7 +15735,7 @@ func UnsafeApplyDBusObjectOverrides[Instance DBusObject](gclass unsafe.Pointer, 
 				var object     Instance      // go GDBusObject subclass
 				var interface_ DBusInterface // in, none, converted
 
-				object = UnsafeDBusObjectFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				object = UnsafeDBusObjectFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				interface_ = UnsafeDBusInterfaceFromGlibNone(unsafe.Pointer(carg1))
 
 				overrides.InterfaceRemoved(object, interface_)
@@ -15570,6 +15854,11 @@ func UnsafeDBusObjectManagerFromGlibNone(c unsafe.Pointer) DBusObjectManager {
 // UnsafeDBusObjectManagerFromGlibFull is used to convert raw GDBusObjectManager pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeDBusObjectManagerFromGlibFull(c unsafe.Pointer) DBusObjectManager {
 	return gobject.UnsafeObjectFromGlibFull(c).(DBusObjectManager)
+}
+
+// UnsafeDBusObjectManagerFromGlibBorrow is used to convert raw GDBusObjectManager pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeDBusObjectManagerFromGlibBorrow(c unsafe.Pointer) DBusObjectManager {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(DBusObjectManager)
 }
 
 // UnsafeDBusObjectManagerToGlibNone is used to convert the instance to it's C value GDBusObjectManager. This is used by the bindings internally.
@@ -15815,7 +16104,7 @@ func UnsafeApplyDBusObjectManagerOverrides[Instance DBusObjectManager](gclass un
 				var interfaceName string        // in, none, string
 				var goret         DBusInterface // return, full, converted, nullable
 
-				manager = UnsafeDBusObjectManagerFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				manager = UnsafeDBusObjectManagerFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				objectPath = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 				interfaceName = C.GoString((*C.char)(unsafe.Pointer(carg2)))
 
@@ -15840,7 +16129,7 @@ func UnsafeApplyDBusObjectManagerOverrides[Instance DBusObjectManager](gclass un
 				var objectPath string     // in, none, string
 				var goret      DBusObject // return, full, converted, nullable
 
-				manager = UnsafeDBusObjectManagerFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				manager = UnsafeDBusObjectManagerFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				objectPath = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 
 				goret = overrides.GetObject(manager, objectPath)
@@ -15863,7 +16152,7 @@ func UnsafeApplyDBusObjectManagerOverrides[Instance DBusObjectManager](gclass un
 				var manager Instance // go GDBusObjectManager subclass
 				var goret   string   // return, none, string
 
-				manager = UnsafeDBusObjectManagerFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				manager = UnsafeDBusObjectManagerFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetObjectPath(manager)
 
@@ -15884,7 +16173,7 @@ func UnsafeApplyDBusObjectManagerOverrides[Instance DBusObjectManager](gclass un
 				var manager Instance     // go GDBusObjectManager subclass
 				var goret   []DBusObject // return, transfer: full, C Pointers: 1, Name: List, scope: 
 
-				manager = UnsafeDBusObjectManagerFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				manager = UnsafeDBusObjectManagerFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetObjects(manager)
 
@@ -15907,7 +16196,7 @@ func UnsafeApplyDBusObjectManagerOverrides[Instance DBusObjectManager](gclass un
 				var object     DBusObject    // in, none, converted
 				var interface_ DBusInterface // in, none, converted
 
-				manager = UnsafeDBusObjectManagerFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				manager = UnsafeDBusObjectManagerFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				object = UnsafeDBusObjectFromGlibNone(unsafe.Pointer(carg1))
 				interface_ = UnsafeDBusInterfaceFromGlibNone(unsafe.Pointer(carg2))
 
@@ -15926,7 +16215,7 @@ func UnsafeApplyDBusObjectManagerOverrides[Instance DBusObjectManager](gclass un
 				var object     DBusObject    // in, none, converted
 				var interface_ DBusInterface // in, none, converted
 
-				manager = UnsafeDBusObjectManagerFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				manager = UnsafeDBusObjectManagerFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				object = UnsafeDBusObjectFromGlibNone(unsafe.Pointer(carg1))
 				interface_ = UnsafeDBusInterfaceFromGlibNone(unsafe.Pointer(carg2))
 
@@ -15944,7 +16233,7 @@ func UnsafeApplyDBusObjectManagerOverrides[Instance DBusObjectManager](gclass un
 				var manager Instance   // go GDBusObjectManager subclass
 				var object  DBusObject // in, none, converted
 
-				manager = UnsafeDBusObjectManagerFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				manager = UnsafeDBusObjectManagerFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				object = UnsafeDBusObjectFromGlibNone(unsafe.Pointer(carg1))
 
 				overrides.ObjectAdded(manager, object)
@@ -15961,7 +16250,7 @@ func UnsafeApplyDBusObjectManagerOverrides[Instance DBusObjectManager](gclass un
 				var manager Instance   // go GDBusObjectManager subclass
 				var object  DBusObject // in, none, converted
 
-				manager = UnsafeDBusObjectManagerFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				manager = UnsafeDBusObjectManagerFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				object = UnsafeDBusObjectFromGlibNone(unsafe.Pointer(carg1))
 
 				overrides.ObjectRemoved(manager, object)
@@ -16132,13 +16421,13 @@ type DatagramBased interface {
 	// 
 	// 	- cancellable context.Context (nullable): a %GCancellable 
 	// 	- messages []InputMessage: an array of #GInputMessage structs 
-	// 	- flags int: an int containing #GSocketMsgFlags flags for the overall operation 
+	// 	- flags int32: an int containing #GSocketMsgFlags flags for the overall operation 
 	// 	- timeout int64: the maximum time (in microseconds) to wait, 0 to not block, or -1
 	//   to block indefinitely 
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Receive one or more data messages from @datagram_based in one go.
@@ -16191,20 +16480,20 @@ type DatagramBased interface {
 	// messages successfully received before the error will be returned. If
 	// @cancellable is cancelled, %G_IO_ERROR_CANCELLED is returned as with any
 	// other error.
-	ReceiveMessages(context.Context, []InputMessage, int, int64) (int, error)
+	ReceiveMessages(context.Context, []InputMessage, int32, int64) (int32, error)
 	// SendMessages wraps g_datagram_based_send_messages
 	// 
 	// The function takes the following parameters:
 	// 
 	// 	- cancellable context.Context (nullable): a %GCancellable 
 	// 	- messages []OutputMessage: an array of #GOutputMessage structs 
-	// 	- flags int: an int containing #GSocketMsgFlags flags 
+	// 	- flags int32: an int containing #GSocketMsgFlags flags 
 	// 	- timeout int64: the maximum time (in microseconds) to wait, 0 to not block, or -1
 	//   to block indefinitely 
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Send one or more data messages from @datagram_based in one go.
@@ -16248,7 +16537,7 @@ type DatagramBased interface {
 	// be returned if zero messages could be sent; otherwise the number of messages
 	// successfully sent before the error will be returned. If @cancellable is
 	// cancelled, %G_IO_ERROR_CANCELLED is returned as with any other error.
-	SendMessages(context.Context, []OutputMessage, int, int64) (int, error)
+	SendMessages(context.Context, []OutputMessage, int32, int64) (int32, error)
 }
 
 var _ DatagramBased = (*DatagramBasedInstance)(nil)
@@ -16275,6 +16564,11 @@ func UnsafeDatagramBasedFromGlibNone(c unsafe.Pointer) DatagramBased {
 // UnsafeDatagramBasedFromGlibFull is used to convert raw GDatagramBased pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeDatagramBasedFromGlibFull(c unsafe.Pointer) DatagramBased {
 	return gobject.UnsafeObjectFromGlibFull(c).(DatagramBased)
+}
+
+// UnsafeDatagramBasedFromGlibBorrow is used to convert raw GDatagramBased pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeDatagramBasedFromGlibBorrow(c unsafe.Pointer) DatagramBased {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(DatagramBased)
 }
 
 // UnsafeDatagramBasedToGlibNone is used to convert the instance to it's C value GDatagramBased. This is used by the bindings internally.
@@ -16463,13 +16757,13 @@ func (datagramBased *DatagramBasedInstance) CreateSource(cancellable context.Con
 // 
 // 	- cancellable context.Context (nullable): a %GCancellable 
 // 	- messages []InputMessage: an array of #GInputMessage structs 
-// 	- flags int: an int containing #GSocketMsgFlags flags for the overall operation 
+// 	- flags int32: an int containing #GSocketMsgFlags flags for the overall operation 
 // 	- timeout int64: the maximum time (in microseconds) to wait, 0 to not block, or -1
 //   to block indefinitely 
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 // 	- _goerr error (nullable): an error 
 //
 // Receive one or more data messages from @datagram_based in one go.
@@ -16522,7 +16816,7 @@ func (datagramBased *DatagramBasedInstance) CreateSource(cancellable context.Con
 // messages successfully received before the error will be returned. If
 // @cancellable is cancelled, %G_IO_ERROR_CANCELLED is returned as with any
 // other error.
-func (datagramBased *DatagramBasedInstance) ReceiveMessages(cancellable context.Context, messages []InputMessage, flags int, timeout int64) (int, error) {
+func (datagramBased *DatagramBasedInstance) ReceiveMessages(cancellable context.Context, messages []InputMessage, flags int32, timeout int64) (int32, error) {
 	var carg0 *C.GDatagramBased // in, none, converted
 	var carg5 *C.GCancellable   // in, none, converted, nullable
 	var carg1 *C.GInputMessage  // in, transfer: none, C Pointers: 1, Name: array[InputMessage], array (inner: *typesystem.Record, length-by: carg2)
@@ -16550,10 +16844,10 @@ func (datagramBased *DatagramBasedInstance) ReceiveMessages(cancellable context.
 	runtime.KeepAlive(flags)
 	runtime.KeepAlive(timeout)
 
-	var goret  int
+	var goret  int32
 	var _goerr error
 
-	goret = int(cret)
+	goret = int32(cret)
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -16567,13 +16861,13 @@ func (datagramBased *DatagramBasedInstance) ReceiveMessages(cancellable context.
 // 
 // 	- cancellable context.Context (nullable): a %GCancellable 
 // 	- messages []OutputMessage: an array of #GOutputMessage structs 
-// 	- flags int: an int containing #GSocketMsgFlags flags 
+// 	- flags int32: an int containing #GSocketMsgFlags flags 
 // 	- timeout int64: the maximum time (in microseconds) to wait, 0 to not block, or -1
 //   to block indefinitely 
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 // 	- _goerr error (nullable): an error 
 //
 // Send one or more data messages from @datagram_based in one go.
@@ -16617,7 +16911,7 @@ func (datagramBased *DatagramBasedInstance) ReceiveMessages(cancellable context.
 // be returned if zero messages could be sent; otherwise the number of messages
 // successfully sent before the error will be returned. If @cancellable is
 // cancelled, %G_IO_ERROR_CANCELLED is returned as with any other error.
-func (datagramBased *DatagramBasedInstance) SendMessages(cancellable context.Context, messages []OutputMessage, flags int, timeout int64) (int, error) {
+func (datagramBased *DatagramBasedInstance) SendMessages(cancellable context.Context, messages []OutputMessage, flags int32, timeout int64) (int32, error) {
 	var carg0 *C.GDatagramBased // in, none, converted
 	var carg5 *C.GCancellable   // in, none, converted, nullable
 	var carg1 *C.GOutputMessage // in, transfer: none, C Pointers: 1, Name: array[OutputMessage], array (inner: *typesystem.Record, length-by: carg2)
@@ -16645,10 +16939,10 @@ func (datagramBased *DatagramBasedInstance) SendMessages(cancellable context.Con
 	runtime.KeepAlive(flags)
 	runtime.KeepAlive(timeout)
 
-	var goret  int
+	var goret  int32
 	var _goerr error
 
-	goret = int(cret)
+	goret = int32(cret)
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -16696,29 +16990,29 @@ type DatagramBasedOverrides[Instance DatagramBased] struct {
 	// 
 	// 	- cancellable context.Context (nullable): a %GCancellable 
 	// 	- messages []InputMessage: an array of #GInputMessage structs 
-	// 	- flags int: an int containing #GSocketMsgFlags flags for the overall operation 
+	// 	- flags int32: an int containing #GSocketMsgFlags flags for the overall operation 
 	// 	- timeout int64: the maximum time (in microseconds) to wait, 0 to not block, or -1
 	//   to block indefinitely 
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	// 	- _goerr error (nullable): an error 
-	ReceiveMessages func(Instance, context.Context, []InputMessage, int, int64) (int, error)
+	ReceiveMessages func(Instance, context.Context, []InputMessage, int32, int64) (int32, error)
 	// SendMessages allows you to override the implementation of the virtual method send_messages.
 	// The function takes the following parameters:
 	// 
 	// 	- cancellable context.Context (nullable): a %GCancellable 
 	// 	- messages []OutputMessage: an array of #GOutputMessage structs 
-	// 	- flags int: an int containing #GSocketMsgFlags flags 
+	// 	- flags int32: an int containing #GSocketMsgFlags flags 
 	// 	- timeout int64: the maximum time (in microseconds) to wait, 0 to not block, or -1
 	//   to block indefinitely 
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	// 	- _goerr error (nullable): an error 
-	SendMessages func(Instance, context.Context, []OutputMessage, int, int64) (int, error)
+	SendMessages func(Instance, context.Context, []OutputMessage, int32, int64) (int32, error)
 }
 
 // UnsafeApplyDatagramBasedOverrides applies the overrides to init the gclass by setting the trampoline functions.
@@ -16736,7 +17030,7 @@ func UnsafeApplyDatagramBasedOverrides[Instance DatagramBased](gclass unsafe.Poi
 				var condition     glib.IOCondition // in, none, casted
 				var goret         glib.IOCondition // return, none, casted
 
-				datagramBased = UnsafeDatagramBasedFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				datagramBased = UnsafeDatagramBasedFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				condition = glib.IOCondition(carg1)
 
 				goret = overrides.ConditionCheck(datagramBased, condition)
@@ -16761,7 +17055,7 @@ func UnsafeApplyDatagramBasedOverrides[Instance DatagramBased](gclass unsafe.Poi
 				var goret         bool             // return
 				var _goerr        error            // out, full, converted
 
-				datagramBased = UnsafeDatagramBasedFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				datagramBased = UnsafeDatagramBasedFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg3 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
 				}
@@ -16791,7 +17085,7 @@ func UnsafeApplyDatagramBasedOverrides[Instance DatagramBased](gclass unsafe.Poi
 				var condition     glib.IOCondition // in, none, casted
 				var goret         *glib.Source     // return, full, converted
 
-				datagramBased = UnsafeDatagramBasedFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				datagramBased = UnsafeDatagramBasedFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg2 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
 				}
@@ -16815,12 +17109,12 @@ func UnsafeApplyDatagramBasedOverrides[Instance DatagramBased](gclass unsafe.Poi
 				var datagramBased Instance        // go GDatagramBased subclass
 				var cancellable   context.Context // in, none, converted, nullable
 				var messages      []InputMessage  // in, transfer: none, C Pointers: 1, Name: array[InputMessage], array (inner: *typesystem.Record, length-by: carg2)
-				var flags         int             // in, none, casted
+				var flags         int32           // in, none, casted
 				var timeout       int64           // in, none, casted
-				var goret         int             // return, none, casted
+				var goret         int32           // return, none, casted
 				var _goerr        error           // out, full, converted
 
-				datagramBased = UnsafeDatagramBasedFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				datagramBased = UnsafeDatagramBasedFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg5 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg5))
 				}
@@ -16828,7 +17122,7 @@ func UnsafeApplyDatagramBasedOverrides[Instance DatagramBased](gclass unsafe.Poi
 				_ = carg1
 				_ = carg2
 				panic("unimplemented conversion of []InputMessage (GInputMessage*)")
-				flags = int(carg3)
+				flags = int32(carg3)
 				timeout = int64(carg4)
 
 				goret, _goerr = overrides.ReceiveMessages(datagramBased, cancellable, messages, flags, timeout)
@@ -16850,12 +17144,12 @@ func UnsafeApplyDatagramBasedOverrides[Instance DatagramBased](gclass unsafe.Poi
 				var datagramBased Instance        // go GDatagramBased subclass
 				var cancellable   context.Context // in, none, converted, nullable
 				var messages      []OutputMessage // in, transfer: none, C Pointers: 1, Name: array[OutputMessage], array (inner: *typesystem.Record, length-by: carg2)
-				var flags         int             // in, none, casted
+				var flags         int32           // in, none, casted
 				var timeout       int64           // in, none, casted
-				var goret         int             // return, none, casted
+				var goret         int32           // return, none, casted
 				var _goerr        error           // out, full, converted
 
-				datagramBased = UnsafeDatagramBasedFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				datagramBased = UnsafeDatagramBasedFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg5 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg5))
 				}
@@ -16863,7 +17157,7 @@ func UnsafeApplyDatagramBasedOverrides[Instance DatagramBased](gclass unsafe.Poi
 				_ = carg1
 				_ = carg2
 				panic("unimplemented conversion of []OutputMessage (GOutputMessage*)")
-				flags = int(carg3)
+				flags = int32(carg3)
 				timeout = int64(carg4)
 
 				goret, _goerr = overrides.SendMessages(datagramBased, cancellable, messages, flags, timeout)
@@ -17264,6 +17558,11 @@ func UnsafeDriveFromGlibNone(c unsafe.Pointer) Drive {
 // UnsafeDriveFromGlibFull is used to convert raw GDrive pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeDriveFromGlibFull(c unsafe.Pointer) Drive {
 	return gobject.UnsafeObjectFromGlibFull(c).(Drive)
+}
+
+// UnsafeDriveFromGlibBorrow is used to convert raw GDrive pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeDriveFromGlibBorrow(c unsafe.Pointer) Drive {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Drive)
 }
 
 // UnsafeDriveToGlibNone is used to convert the instance to it's C value GDrive. This is used by the bindings internally.
@@ -18384,7 +18683,7 @@ func UnsafeApplyDriveOverrides[Instance Drive](gclass unsafe.Pointer, overrides 
 				var drive Instance // go GDrive subclass
 				var goret bool     // return
 
-				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				drive = UnsafeDriveFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.CanEject(drive)
 
@@ -18406,7 +18705,7 @@ func UnsafeApplyDriveOverrides[Instance Drive](gclass unsafe.Pointer, overrides 
 				var drive Instance // go GDrive subclass
 				var goret bool     // return
 
-				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				drive = UnsafeDriveFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.CanPollForMedia(drive)
 
@@ -18428,7 +18727,7 @@ func UnsafeApplyDriveOverrides[Instance Drive](gclass unsafe.Pointer, overrides 
 				var drive Instance // go GDrive subclass
 				var goret bool     // return
 
-				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				drive = UnsafeDriveFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.CanStart(drive)
 
@@ -18450,7 +18749,7 @@ func UnsafeApplyDriveOverrides[Instance Drive](gclass unsafe.Pointer, overrides 
 				var drive Instance // go GDrive subclass
 				var goret bool     // return
 
-				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				drive = UnsafeDriveFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.CanStartDegraded(drive)
 
@@ -18472,7 +18771,7 @@ func UnsafeApplyDriveOverrides[Instance Drive](gclass unsafe.Pointer, overrides 
 				var drive Instance // go GDrive subclass
 				var goret bool     // return
 
-				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				drive = UnsafeDriveFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.CanStop(drive)
 
@@ -18493,7 +18792,7 @@ func UnsafeApplyDriveOverrides[Instance Drive](gclass unsafe.Pointer, overrides 
 			func(carg0 *C.GDrive) {
 				var drive Instance // go GDrive subclass
 
-				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				drive = UnsafeDriveFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				overrides.Changed(drive)
 			},
@@ -18508,7 +18807,7 @@ func UnsafeApplyDriveOverrides[Instance Drive](gclass unsafe.Pointer, overrides 
 			func(carg0 *C.GDrive) {
 				var drive Instance // go GDrive subclass
 
-				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				drive = UnsafeDriveFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				overrides.Disconnected(drive)
 			},
@@ -18526,7 +18825,7 @@ func UnsafeApplyDriveOverrides[Instance Drive](gclass unsafe.Pointer, overrides 
 				var flags       MountUnmountFlags  // in, none, casted
 				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg4, nullable
 
-				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				drive = UnsafeDriveFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg2 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
 				}
@@ -18551,7 +18850,7 @@ func UnsafeApplyDriveOverrides[Instance Drive](gclass unsafe.Pointer, overrides 
 			func(carg0 *C.GDrive) {
 				var drive Instance // go GDrive subclass
 
-				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				drive = UnsafeDriveFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				overrides.EjectButton(drive)
 			},
@@ -18569,7 +18868,7 @@ func UnsafeApplyDriveOverrides[Instance Drive](gclass unsafe.Pointer, overrides 
 				var goret  bool        // return
 				var _goerr error       // out, full, converted
 
-				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				drive = UnsafeDriveFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.EjectFinish(drive, result)
@@ -18596,7 +18895,7 @@ func UnsafeApplyDriveOverrides[Instance Drive](gclass unsafe.Pointer, overrides 
 				var mountOperation MountOperation     // in, none, converted, nullable
 				var callback       AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg5, nullable
 
-				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				drive = UnsafeDriveFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg3 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
 				}
@@ -18627,7 +18926,7 @@ func UnsafeApplyDriveOverrides[Instance Drive](gclass unsafe.Pointer, overrides 
 				var goret  bool        // return
 				var _goerr error       // out, full, converted
 
-				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				drive = UnsafeDriveFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.EjectWithOperationFinish(drive, result)
@@ -18651,7 +18950,7 @@ func UnsafeApplyDriveOverrides[Instance Drive](gclass unsafe.Pointer, overrides 
 				var drive Instance // go GDrive subclass
 				var goret []string // return, transfer: full, C Pointers: 2, Name: array[utf8], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
 
-				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				drive = UnsafeDriveFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.EnumerateIdentifiers(drive)
 
@@ -18673,7 +18972,7 @@ func UnsafeApplyDriveOverrides[Instance Drive](gclass unsafe.Pointer, overrides 
 				var drive Instance // go GDrive subclass
 				var goret Icon     // return, full, converted
 
-				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				drive = UnsafeDriveFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetIcon(drive)
 
@@ -18694,7 +18993,7 @@ func UnsafeApplyDriveOverrides[Instance Drive](gclass unsafe.Pointer, overrides 
 				var kind  string   // in, none, string, casted *C.gchar
 				var goret string   // return, full, string, nullable-string
 
-				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				drive = UnsafeDriveFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				kind = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 
 				goret = overrides.GetIdentifier(drive, kind)
@@ -18717,7 +19016,7 @@ func UnsafeApplyDriveOverrides[Instance Drive](gclass unsafe.Pointer, overrides 
 				var drive Instance // go GDrive subclass
 				var goret string   // return, full, string, casted *C.gchar
 
-				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				drive = UnsafeDriveFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetName(drive)
 
@@ -18737,7 +19036,7 @@ func UnsafeApplyDriveOverrides[Instance Drive](gclass unsafe.Pointer, overrides 
 				var drive Instance // go GDrive subclass
 				var goret string   // return, none, string, nullable-string
 
-				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				drive = UnsafeDriveFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetSortKey(drive)
 
@@ -18760,7 +19059,7 @@ func UnsafeApplyDriveOverrides[Instance Drive](gclass unsafe.Pointer, overrides 
 				var drive Instance           // go GDrive subclass
 				var goret DriveStartStopType // return, none, casted
 
-				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				drive = UnsafeDriveFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetStartStopType(drive)
 
@@ -18780,7 +19079,7 @@ func UnsafeApplyDriveOverrides[Instance Drive](gclass unsafe.Pointer, overrides 
 				var drive Instance // go GDrive subclass
 				var goret Icon     // return, full, converted
 
-				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				drive = UnsafeDriveFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetSymbolicIcon(drive)
 
@@ -18800,7 +19099,7 @@ func UnsafeApplyDriveOverrides[Instance Drive](gclass unsafe.Pointer, overrides 
 				var drive Instance // go GDrive subclass
 				var goret []Volume // return, transfer: full, C Pointers: 1, Name: List, scope: 
 
-				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				drive = UnsafeDriveFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetVolumes(drive)
 
@@ -18822,7 +19121,7 @@ func UnsafeApplyDriveOverrides[Instance Drive](gclass unsafe.Pointer, overrides 
 				var drive Instance // go GDrive subclass
 				var goret bool     // return
 
-				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				drive = UnsafeDriveFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.HasMedia(drive)
 
@@ -18844,7 +19143,7 @@ func UnsafeApplyDriveOverrides[Instance Drive](gclass unsafe.Pointer, overrides 
 				var drive Instance // go GDrive subclass
 				var goret bool     // return
 
-				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				drive = UnsafeDriveFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.HasVolumes(drive)
 
@@ -18866,7 +19165,7 @@ func UnsafeApplyDriveOverrides[Instance Drive](gclass unsafe.Pointer, overrides 
 				var drive Instance // go GDrive subclass
 				var goret bool     // return
 
-				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				drive = UnsafeDriveFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.IsMediaCheckAutomatic(drive)
 
@@ -18888,7 +19187,7 @@ func UnsafeApplyDriveOverrides[Instance Drive](gclass unsafe.Pointer, overrides 
 				var drive Instance // go GDrive subclass
 				var goret bool     // return
 
-				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				drive = UnsafeDriveFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.IsMediaRemovable(drive)
 
@@ -18910,7 +19209,7 @@ func UnsafeApplyDriveOverrides[Instance Drive](gclass unsafe.Pointer, overrides 
 				var drive Instance // go GDrive subclass
 				var goret bool     // return
 
-				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				drive = UnsafeDriveFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.IsRemovable(drive)
 
@@ -18933,7 +19232,7 @@ func UnsafeApplyDriveOverrides[Instance Drive](gclass unsafe.Pointer, overrides 
 				var cancellable context.Context    // in, none, converted, nullable
 				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg3, nullable
 
-				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				drive = UnsafeDriveFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg1 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg1))
 				}
@@ -18960,7 +19259,7 @@ func UnsafeApplyDriveOverrides[Instance Drive](gclass unsafe.Pointer, overrides 
 				var goret  bool        // return
 				var _goerr error       // out, full, converted
 
-				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				drive = UnsafeDriveFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.PollForMediaFinish(drive, result)
@@ -18987,7 +19286,7 @@ func UnsafeApplyDriveOverrides[Instance Drive](gclass unsafe.Pointer, overrides 
 				var mountOperation MountOperation     // in, none, converted, nullable
 				var callback       AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg5, nullable
 
-				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				drive = UnsafeDriveFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg3 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
 				}
@@ -19018,7 +19317,7 @@ func UnsafeApplyDriveOverrides[Instance Drive](gclass unsafe.Pointer, overrides 
 				var goret  bool        // return
 				var _goerr error       // out, full, converted
 
-				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				drive = UnsafeDriveFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.StartFinish(drive, result)
@@ -19045,7 +19344,7 @@ func UnsafeApplyDriveOverrides[Instance Drive](gclass unsafe.Pointer, overrides 
 				var mountOperation MountOperation     // in, none, converted, nullable
 				var callback       AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg5, nullable
 
-				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				drive = UnsafeDriveFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg3 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
 				}
@@ -19073,7 +19372,7 @@ func UnsafeApplyDriveOverrides[Instance Drive](gclass unsafe.Pointer, overrides 
 			func(carg0 *C.GDrive) {
 				var drive Instance // go GDrive subclass
 
-				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				drive = UnsafeDriveFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				overrides.StopButton(drive)
 			},
@@ -19091,7 +19390,7 @@ func UnsafeApplyDriveOverrides[Instance Drive](gclass unsafe.Pointer, overrides 
 				var goret  bool        // return
 				var _goerr error       // out, full, converted
 
-				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				drive = UnsafeDriveFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.StopFinish(drive, result)
@@ -19177,12 +19476,12 @@ type DtlsConnection interface {
 	// The function takes the following parameters:
 	// 
 	// 	- cancellable context.Context (nullable): a #GCancellable, or %NULL 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 	// 	- callback AsyncReadyCallback (nullable): callback to call when the close operation is complete 
 	//
 	// Asynchronously close the DTLS connection. See g_dtls_connection_close() for
 	// more information.
-	CloseAsync(context.Context, int, AsyncReadyCallback)
+	CloseAsync(context.Context, int32, AsyncReadyCallback)
 	// CloseFinish wraps g_dtls_connection_close_finish
 	// 
 	// The function takes the following parameters:
@@ -19365,12 +19664,12 @@ type DtlsConnection interface {
 	// The function takes the following parameters:
 	// 
 	// 	- cancellable context.Context (nullable): a #GCancellable, or %NULL 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 	// 	- callback AsyncReadyCallback (nullable): callback to call when the handshake is complete 
 	//
 	// Asynchronously performs a TLS handshake on @conn. See
 	// g_dtls_connection_handshake() for more information.
-	HandshakeAsync(context.Context, int, AsyncReadyCallback)
+	HandshakeAsync(context.Context, int32, AsyncReadyCallback)
 	// HandshakeFinish wraps g_dtls_connection_handshake_finish
 	// 
 	// The function takes the following parameters:
@@ -19543,12 +19842,12 @@ type DtlsConnection interface {
 	// 	- cancellable context.Context (nullable): a #GCancellable, or %NULL 
 	// 	- shutdownRead bool: %TRUE to stop reception of incoming datagrams 
 	// 	- shutdownWrite bool: %TRUE to stop sending outgoing datagrams 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 	// 	- callback AsyncReadyCallback (nullable): callback to call when the shutdown operation is complete 
 	//
 	// Asynchronously shut down part or all of the DTLS connection. See
 	// g_dtls_connection_shutdown() for more information.
-	ShutdownAsync(context.Context, bool, bool, int, AsyncReadyCallback)
+	ShutdownAsync(context.Context, bool, bool, int32, AsyncReadyCallback)
 	// ShutdownFinish wraps g_dtls_connection_shutdown_finish
 	// 
 	// The function takes the following parameters:
@@ -19636,6 +19935,11 @@ func UnsafeDtlsConnectionFromGlibFull(c unsafe.Pointer) DtlsConnection {
 	return gobject.UnsafeObjectFromGlibFull(c).(DtlsConnection)
 }
 
+// UnsafeDtlsConnectionFromGlibBorrow is used to convert raw GDtlsConnection pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeDtlsConnectionFromGlibBorrow(c unsafe.Pointer) DtlsConnection {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(DtlsConnection)
+}
+
 // UnsafeDtlsConnectionToGlibNone is used to convert the instance to it's C value GDtlsConnection. This is used by the bindings internally.
 func UnsafeDtlsConnectionToGlibNone(c DtlsConnection) unsafe.Pointer {
 	i := c.upcastToGDtlsConnection()
@@ -19711,12 +20015,12 @@ func (conn *DtlsConnectionInstance) Close(cancellable context.Context) (bool, er
 // The function takes the following parameters:
 // 
 // 	- cancellable context.Context (nullable): a #GCancellable, or %NULL 
-// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 // 	- callback AsyncReadyCallback (nullable): callback to call when the close operation is complete 
 //
 // Asynchronously close the DTLS connection. See g_dtls_connection_close() for
 // more information.
-func (conn *DtlsConnectionInstance) CloseAsync(cancellable context.Context, ioPriority int, callback AsyncReadyCallback) {
+func (conn *DtlsConnectionInstance) CloseAsync(cancellable context.Context, ioPriority int32, callback AsyncReadyCallback) {
 	var carg0 *C.GDtlsConnection    // in, none, converted
 	var carg2 *C.GCancellable       // in, none, converted, nullable
 	var carg1 C.int                 // in, none, casted, casted C.gint
@@ -20162,12 +20466,12 @@ func (conn *DtlsConnectionInstance) Handshake(cancellable context.Context) (bool
 // The function takes the following parameters:
 // 
 // 	- cancellable context.Context (nullable): a #GCancellable, or %NULL 
-// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 // 	- callback AsyncReadyCallback (nullable): callback to call when the handshake is complete 
 //
 // Asynchronously performs a TLS handshake on @conn. See
 // g_dtls_connection_handshake() for more information.
-func (conn *DtlsConnectionInstance) HandshakeAsync(cancellable context.Context, ioPriority int, callback AsyncReadyCallback) {
+func (conn *DtlsConnectionInstance) HandshakeAsync(cancellable context.Context, ioPriority int32, callback AsyncReadyCallback) {
 	var carg0 *C.GDtlsConnection    // in, none, converted
 	var carg2 *C.GCancellable       // in, none, converted, nullable
 	var carg1 C.int                 // in, none, casted, casted C.gint
@@ -20499,12 +20803,12 @@ func (conn *DtlsConnectionInstance) Shutdown(cancellable context.Context, shutdo
 // 	- cancellable context.Context (nullable): a #GCancellable, or %NULL 
 // 	- shutdownRead bool: %TRUE to stop reception of incoming datagrams 
 // 	- shutdownWrite bool: %TRUE to stop sending outgoing datagrams 
-// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 // 	- callback AsyncReadyCallback (nullable): callback to call when the shutdown operation is complete 
 //
 // Asynchronously shut down part or all of the DTLS connection. See
 // g_dtls_connection_shutdown() for more information.
-func (conn *DtlsConnectionInstance) ShutdownAsync(cancellable context.Context, shutdownRead bool, shutdownWrite bool, ioPriority int, callback AsyncReadyCallback) {
+func (conn *DtlsConnectionInstance) ShutdownAsync(cancellable context.Context, shutdownRead bool, shutdownWrite bool, ioPriority int32, callback AsyncReadyCallback) {
 	var carg0 *C.GDtlsConnection    // in, none, converted
 	var carg4 *C.GCancellable       // in, none, converted, nullable
 	var carg1 C.gboolean            // in
@@ -20657,9 +20961,9 @@ type DtlsConnectionOverrides[Instance DtlsConnection] struct {
 	// The function takes the following parameters:
 	// 
 	// 	- cancellable context.Context (nullable): a #GCancellable, or %NULL 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 	// 	- callback AsyncReadyCallback (nullable): callback to call when the handshake is complete 
-	HandshakeAsync func(Instance, context.Context, int, AsyncReadyCallback)
+	HandshakeAsync func(Instance, context.Context, int32, AsyncReadyCallback)
 	// HandshakeFinish allows you to override the implementation of the virtual method handshake_finish.
 	// The function takes the following parameters:
 	// 
@@ -20694,9 +20998,9 @@ type DtlsConnectionOverrides[Instance DtlsConnection] struct {
 	// 	- cancellable context.Context (nullable): a #GCancellable, or %NULL 
 	// 	- shutdownRead bool: %TRUE to stop reception of incoming datagrams 
 	// 	- shutdownWrite bool: %TRUE to stop sending outgoing datagrams 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 	// 	- callback AsyncReadyCallback (nullable): callback to call when the shutdown operation is complete 
-	ShutdownAsync func(Instance, context.Context, bool, bool, int, AsyncReadyCallback)
+	ShutdownAsync func(Instance, context.Context, bool, bool, int32, AsyncReadyCallback)
 	// ShutdownFinish allows you to override the implementation of the virtual method shutdown_finish.
 	// The function takes the following parameters:
 	// 
@@ -20725,7 +21029,7 @@ func UnsafeApplyDtlsConnectionOverrides[Instance DtlsConnection](gclass unsafe.P
 				var errors     TLSCertificateFlags // in, none, casted
 				var goret      bool                // return
 
-				connection = UnsafeDtlsConnectionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				connection = UnsafeDtlsConnectionFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				peerCert = UnsafeTlsCertificateFromGlibNone(unsafe.Pointer(carg1))
 				errors = TLSCertificateFlags(carg2)
 
@@ -20749,7 +21053,7 @@ func UnsafeApplyDtlsConnectionOverrides[Instance DtlsConnection](gclass unsafe.P
 				var conn  Instance // go GDtlsConnection subclass
 				var goret string   // return, none, string, nullable-string
 
-				conn = UnsafeDtlsConnectionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				conn = UnsafeDtlsConnectionFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetNegotiatedProtocol(conn)
 
@@ -20774,7 +21078,7 @@ func UnsafeApplyDtlsConnectionOverrides[Instance DtlsConnection](gclass unsafe.P
 				var goret       bool            // return
 				var _goerr      error           // out, full, converted
 
-				conn = UnsafeDtlsConnectionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				conn = UnsafeDtlsConnectionFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg1 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg1))
 				}
@@ -20799,14 +21103,14 @@ func UnsafeApplyDtlsConnectionOverrides[Instance DtlsConnection](gclass unsafe.P
 			func(carg0 *C.GDtlsConnection, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
 				var conn        Instance           // go GDtlsConnection subclass
 				var cancellable context.Context    // in, none, converted, nullable
-				var ioPriority  int                // in, none, casted, casted C.gint
+				var ioPriority  int32              // in, none, casted, casted C.gint
 				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg4, nullable
 
-				conn = UnsafeDtlsConnectionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				conn = UnsafeDtlsConnectionFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg2 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
 				}
-				ioPriority = int(carg1)
+				ioPriority = int32(carg1)
 				if carg3 != nil {
 					_ = callback
 					_ = carg3
@@ -20830,7 +21134,7 @@ func UnsafeApplyDtlsConnectionOverrides[Instance DtlsConnection](gclass unsafe.P
 				var goret  bool        // return
 				var _goerr error       // out, full, converted
 
-				conn = UnsafeDtlsConnectionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				conn = UnsafeDtlsConnectionFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.HandshakeFinish(conn, result)
@@ -20854,7 +21158,7 @@ func UnsafeApplyDtlsConnectionOverrides[Instance DtlsConnection](gclass unsafe.P
 				var conn      Instance // go GDtlsConnection subclass
 				var protocols []string // in, transfer: none, C Pointers: 2, Name: array[utf8], nullable, array (inner: *typesystem.StringPrimitive, zero-terminated)
 
-				conn = UnsafeDtlsConnectionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				conn = UnsafeDtlsConnectionFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				_ = protocols
 				_ = carg1
 				panic("unimplemented conversion of []string (const gchar* const*)")
@@ -20877,7 +21181,7 @@ func UnsafeApplyDtlsConnectionOverrides[Instance DtlsConnection](gclass unsafe.P
 				var goret         bool            // return
 				var _goerr        error           // out, full, converted
 
-				conn = UnsafeDtlsConnectionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				conn = UnsafeDtlsConnectionFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg3 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
 				}
@@ -20910,10 +21214,10 @@ func UnsafeApplyDtlsConnectionOverrides[Instance DtlsConnection](gclass unsafe.P
 				var cancellable   context.Context    // in, none, converted, nullable
 				var shutdownRead  bool               // in
 				var shutdownWrite bool               // in
-				var ioPriority    int                // in, none, casted, casted C.gint
+				var ioPriority    int32              // in, none, casted, casted C.gint
 				var callback      AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg6, nullable
 
-				conn = UnsafeDtlsConnectionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				conn = UnsafeDtlsConnectionFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg4 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg4))
 				}
@@ -20923,7 +21227,7 @@ func UnsafeApplyDtlsConnectionOverrides[Instance DtlsConnection](gclass unsafe.P
 				if carg2 != 0 {
 					shutdownWrite = true
 				}
-				ioPriority = int(carg3)
+				ioPriority = int32(carg3)
 				if carg5 != nil {
 					_ = callback
 					_ = carg5
@@ -20947,7 +21251,7 @@ func UnsafeApplyDtlsConnectionOverrides[Instance DtlsConnection](gclass unsafe.P
 				var goret  bool        // return
 				var _goerr error       // out, full, converted
 
-				conn = UnsafeDtlsConnectionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				conn = UnsafeDtlsConnectionFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.ShutdownFinish(conn, result)
@@ -21003,6 +21307,11 @@ func UnsafeDtlsServerConnectionFromGlibNone(c unsafe.Pointer) DtlsServerConnecti
 // UnsafeDtlsServerConnectionFromGlibFull is used to convert raw GDtlsServerConnection pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeDtlsServerConnectionFromGlibFull(c unsafe.Pointer) DtlsServerConnection {
 	return gobject.UnsafeObjectFromGlibFull(c).(DtlsServerConnection)
+}
+
+// UnsafeDtlsServerConnectionFromGlibBorrow is used to convert raw GDtlsServerConnection pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeDtlsServerConnectionFromGlibBorrow(c unsafe.Pointer) DtlsServerConnection {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(DtlsServerConnection)
 }
 
 // UnsafeDtlsServerConnectionToGlibNone is used to convert the instance to it's C value GDtlsServerConnection. This is used by the bindings internally.
@@ -21208,7 +21517,7 @@ type File interface {
 	// 	- cancellable context.Context (nullable): optional #GCancellable object,
 	//   %NULL to ignore 
 	// 	- flags FileCreateFlags: a set of #GFileCreateFlags 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 	//   to call when the request is satisfied 
 	//
@@ -21220,7 +21529,7 @@ type File interface {
 	// When the operation is finished, @callback will be called.
 	// You can then call g_file_append_to_finish() to get the result
 	// of the operation.
-	AppendToAsync(context.Context, FileCreateFlags, int, AsyncReadyCallback)
+	AppendToAsync(context.Context, FileCreateFlags, int32, AsyncReadyCallback)
 	// AppendToFinish wraps g_file_append_to_finish
 	// 
 	// The function takes the following parameters:
@@ -21334,7 +21643,7 @@ type File interface {
 	// 	- cancellable context.Context (nullable): optional #GCancellable object,
 	//   %NULL to ignore 
 	// 	- flags FileCreateFlags: a set of #GFileCreateFlags 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 	//   to call when the request is satisfied 
 	//
@@ -21347,7 +21656,7 @@ type File interface {
 	// When the operation is finished, @callback will be called.
 	// You can then call g_file_create_finish() to get the result
 	// of the operation.
-	CreateAsync(context.Context, FileCreateFlags, int, AsyncReadyCallback)
+	CreateAsync(context.Context, FileCreateFlags, int32, AsyncReadyCallback)
 	// CreateFinish wraps g_file_create_finish
 	// 
 	// The function takes the following parameters:
@@ -21406,7 +21715,7 @@ type File interface {
 	// 	- cancellable context.Context (nullable): optional #GCancellable object,
 	//   %NULL to ignore 
 	// 	- flags FileCreateFlags: a set of #GFileCreateFlags 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 	//   to call when the request is satisfied 
 	//
@@ -21419,7 +21728,7 @@ type File interface {
 	// When the operation is finished, @callback will be called.
 	// You can then call g_file_create_readwrite_finish() to get
 	// the result of the operation.
-	CreateReadwriteAsync(context.Context, FileCreateFlags, int, AsyncReadyCallback)
+	CreateReadwriteAsync(context.Context, FileCreateFlags, int32, AsyncReadyCallback)
 	// CreateReadwriteFinish wraps g_file_create_readwrite_finish
 	// 
 	// The function takes the following parameters:
@@ -21474,14 +21783,14 @@ type File interface {
 	// 
 	// 	- cancellable context.Context (nullable): optional #GCancellable object,
 	//   %NULL to ignore 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback to call
 	//   when the request is satisfied 
 	//
 	// Asynchronously delete a file. If the @file is a directory, it will
 	// only be deleted if it is empty.  This has the same semantics as
 	// g_unlink().
-	DeleteAsync(context.Context, int, AsyncReadyCallback)
+	DeleteAsync(context.Context, int32, AsyncReadyCallback)
 	// DeleteFinish wraps g_file_delete_finish
 	// 
 	// The function takes the following parameters:
@@ -21633,7 +21942,7 @@ type File interface {
 	//   %NULL to ignore 
 	// 	- attributes string: an attribute query string 
 	// 	- flags FileQueryInfoFlags: a set of #GFileQueryInfoFlags 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 	//   to call when the request is satisfied 
 	//
@@ -21647,7 +21956,7 @@ type File interface {
 	// When the operation is finished, @callback will be called. You can
 	// then call g_file_enumerate_children_finish() to get the result of
 	// the operation.
-	EnumerateChildrenAsync(context.Context, string, FileQueryInfoFlags, int, AsyncReadyCallback)
+	EnumerateChildrenAsync(context.Context, string, FileQueryInfoFlags, int32, AsyncReadyCallback)
 	// EnumerateChildrenFinish wraps g_file_enumerate_children_finish
 	// 
 	// The function takes the following parameters:
@@ -21708,7 +22017,7 @@ type File interface {
 	// 
 	// 	- cancellable context.Context (nullable): optional #GCancellable object,
 	//   %NULL to ignore 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 	//   to call when the request is satisfied 
 	//
@@ -21720,7 +22029,7 @@ type File interface {
 	// When the operation is finished, @callback will be called.
 	// You can then call g_file_find_enclosing_mount_finish() to
 	// get the result of the operation.
-	FindEnclosingMountAsync(context.Context, int, AsyncReadyCallback)
+	FindEnclosingMountAsync(context.Context, int32, AsyncReadyCallback)
 	// FindEnclosingMountFinish wraps g_file_find_enclosing_mount_finish
 	// 
 	// The function takes the following parameters:
@@ -22142,12 +22451,12 @@ type File interface {
 	// 
 	// 	- cancellable context.Context (nullable): optional #GCancellable object,
 	//   %NULL to ignore 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback to call
 	//   when the request is satisfied 
 	//
 	// Asynchronously creates a directory.
-	MakeDirectoryAsync(context.Context, int, AsyncReadyCallback)
+	MakeDirectoryAsync(context.Context, int32, AsyncReadyCallback)
 	// MakeDirectoryFinish wraps g_file_make_directory_finish
 	// 
 	// The function takes the following parameters:
@@ -22217,13 +22526,13 @@ type File interface {
 	//   %NULL to ignore 
 	// 	- symlinkValue string: a string with the path for the target
 	//   of the new symlink 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback to call
 	//   when the request is satisfied 
 	//
 	// Asynchronously creates a symbolic link named @file which contains the
 	// string @symlink_value.
-	MakeSymbolicLinkAsync(context.Context, string, int, AsyncReadyCallback)
+	MakeSymbolicLinkAsync(context.Context, string, int32, AsyncReadyCallback)
 	// MakeSymbolicLinkFinish wraps g_file_make_symbolic_link_finish
 	// 
 	// The function takes the following parameters:
@@ -22454,7 +22763,7 @@ type File interface {
 	// 
 	// 	- cancellable context.Context (nullable): optional #GCancellable object,
 	//   %NULL to ignore 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 	//   to call when the request is satisfied 
 	//
@@ -22466,7 +22775,7 @@ type File interface {
 	// When the operation is finished, @callback will be called.
 	// You can then call g_file_open_readwrite_finish() to get
 	// the result of the operation.
-	OpenReadwriteAsync(context.Context, int, AsyncReadyCallback)
+	OpenReadwriteAsync(context.Context, int32, AsyncReadyCallback)
 	// OpenReadwriteFinish wraps g_file_open_readwrite_finish
 	// 
 	// The function takes the following parameters:
@@ -22552,11 +22861,11 @@ type File interface {
 	// The function takes the following parameters:
 	// 
 	// 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback to call when the request is done 
 	//
 	// Async version of g_file_query_default_handler().
-	QueryDefaultHandlerAsync(context.Context, int, AsyncReadyCallback)
+	QueryDefaultHandlerAsync(context.Context, int32, AsyncReadyCallback)
 	// QueryDefaultHandlerFinish wraps g_file_query_default_handler_finish
 	// 
 	// The function takes the following parameters:
@@ -22668,7 +22977,7 @@ type File interface {
 	// 	- cancellable context.Context (nullable): optional #GCancellable object,
 	//   %NULL to ignore 
 	// 	- attributes string: an attribute query string 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 	//   to call when the request is satisfied 
 	//
@@ -22683,7 +22992,7 @@ type File interface {
 	// When the operation is finished, @callback will be called. You can
 	// then call g_file_query_info_finish() to get the result of the
 	// operation.
-	QueryFilesystemInfoAsync(context.Context, string, int, AsyncReadyCallback)
+	QueryFilesystemInfoAsync(context.Context, string, int32, AsyncReadyCallback)
 	// QueryFilesystemInfoFinish wraps g_file_query_filesystem_info_finish
 	// 
 	// The function takes the following parameters:
@@ -22751,7 +23060,7 @@ type File interface {
 	//   %NULL to ignore 
 	// 	- attributes string: an attribute query string 
 	// 	- flags FileQueryInfoFlags: a set of #GFileQueryInfoFlags 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 	//   to call when the request is satisfied 
 	//
@@ -22764,7 +23073,7 @@ type File interface {
 	// 
 	// When the operation is finished, @callback will be called. You can
 	// then call g_file_query_info_finish() to get the result of the operation.
-	QueryInfoAsync(context.Context, string, FileQueryInfoFlags, int, AsyncReadyCallback)
+	QueryInfoAsync(context.Context, string, FileQueryInfoFlags, int32, AsyncReadyCallback)
 	// QueryInfoFinish wraps g_file_query_info_finish
 	// 
 	// The function takes the following parameters:
@@ -22851,7 +23160,7 @@ type File interface {
 	// 
 	// 	- cancellable context.Context (nullable): optional #GCancellable object,
 	//   %NULL to ignore 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 	//   to call when the request is satisfied 
 	//
@@ -22863,7 +23172,7 @@ type File interface {
 	// When the operation is finished, @callback will be called.
 	// You can then call g_file_read_finish() to get the result
 	// of the operation.
-	ReadAsync(context.Context, int, AsyncReadyCallback)
+	ReadAsync(context.Context, int32, AsyncReadyCallback)
 	// ReadFinish wraps g_file_read_finish
 	// 
 	// The function takes the following parameters:
@@ -22946,7 +23255,7 @@ type File interface {
 	//   or %NULL to ignore 
 	// 	- makeBackup bool: %TRUE if a backup should be created 
 	// 	- flags FileCreateFlags: a set of #GFileCreateFlags 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 	//   to call when the request is satisfied 
 	//
@@ -22959,7 +23268,7 @@ type File interface {
 	// When the operation is finished, @callback will be called.
 	// You can then call g_file_replace_finish() to get the result
 	// of the operation.
-	ReplaceAsync(context.Context, string, bool, FileCreateFlags, int, AsyncReadyCallback)
+	ReplaceAsync(context.Context, string, bool, FileCreateFlags, int32, AsyncReadyCallback)
 	// ReplaceContents wraps g_file_replace_contents
 	// 
 	// The function takes the following parameters:
@@ -23116,7 +23425,7 @@ type File interface {
 	//   or %NULL to ignore 
 	// 	- makeBackup bool: %TRUE if a backup should be created 
 	// 	- flags FileCreateFlags: a set of #GFileCreateFlags 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 	//   to call when the request is satisfied 
 	//
@@ -23130,7 +23439,7 @@ type File interface {
 	// When the operation is finished, @callback will be called.
 	// You can then call g_file_replace_readwrite_finish() to get
 	// the result of the operation.
-	ReplaceReadwriteAsync(context.Context, string, bool, FileCreateFlags, int, AsyncReadyCallback)
+	ReplaceReadwriteAsync(context.Context, string, bool, FileCreateFlags, int32, AsyncReadyCallback)
 	// ReplaceReadwriteFinish wraps g_file_replace_readwrite_finish
 	// 
 	// The function takes the following parameters:
@@ -23303,7 +23612,7 @@ type File interface {
 	//   %NULL to ignore 
 	// 	- info FileInfo: a #GFileInfo 
 	// 	- flags FileQueryInfoFlags: a #GFileQueryInfoFlags 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 	//   to call when the request is satisfied 
 	//
@@ -23315,7 +23624,7 @@ type File interface {
 	// When the operation is finished, @callback will be called.
 	// You can then call g_file_set_attributes_finish() to get
 	// the result of the operation.
-	SetAttributesAsync(context.Context, FileInfo, FileQueryInfoFlags, int, AsyncReadyCallback)
+	SetAttributesAsync(context.Context, FileInfo, FileQueryInfoFlags, int32, AsyncReadyCallback)
 	// SetAttributesFinish wraps g_file_set_attributes_finish
 	// 
 	// The function takes the following parameters:
@@ -23393,7 +23702,7 @@ type File interface {
 	// 	- cancellable context.Context (nullable): optional #GCancellable object,
 	//   %NULL to ignore 
 	// 	- displayName string: a string 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 	//   to call when the request is satisfied 
 	//
@@ -23405,7 +23714,7 @@ type File interface {
 	// When the operation is finished, @callback will be called.
 	// You can then call g_file_set_display_name_finish() to get
 	// the result of the operation.
-	SetDisplayNameAsync(context.Context, string, int, AsyncReadyCallback)
+	SetDisplayNameAsync(context.Context, string, int32, AsyncReadyCallback)
 	// SetDisplayNameFinish wraps g_file_set_display_name_finish
 	// 
 	// The function takes the following parameters:
@@ -23538,12 +23847,12 @@ type File interface {
 	// 
 	// 	- cancellable context.Context (nullable): optional #GCancellable object,
 	//   %NULL to ignore 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback to call
 	//   when the request is satisfied 
 	//
 	// Asynchronously sends @file to the Trash location, if possible.
-	TrashAsync(context.Context, int, AsyncReadyCallback)
+	TrashAsync(context.Context, int32, AsyncReadyCallback)
 	// TrashFinish wraps g_file_trash_finish
 	// 
 	// The function takes the following parameters:
@@ -23664,6 +23973,11 @@ func UnsafeFileFromGlibNone(c unsafe.Pointer) File {
 // UnsafeFileFromGlibFull is used to convert raw GFile pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeFileFromGlibFull(c unsafe.Pointer) File {
 	return gobject.UnsafeObjectFromGlibFull(c).(File)
+}
+
+// UnsafeFileFromGlibBorrow is used to convert raw GFile pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeFileFromGlibBorrow(c unsafe.Pointer) File {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(File)
 }
 
 // UnsafeFileToGlibNone is used to convert the instance to it's C value GFile. This is used by the bindings internally.
@@ -23915,7 +24229,7 @@ func NewFileTmp(tmpl string) (FileIOStream, File, error) {
 // 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore 
 // 	- tmpl string (nullable): Template for the file
 //   name, as in g_file_open_tmp(), or %NULL for a default template 
-// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 // 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback to call when the request is done 
 //
 // Asynchronously opens a file in the preferred directory for temporary files
@@ -23924,7 +24238,7 @@ func NewFileTmp(tmpl string) (FileIOStream, File, error) {
 // @tmpl should be a string in the GLib file name encoding
 // containing a sequence of six 'X' characters, and containing no
 // directory components. If it is %NULL, a default template is used.
-func NewFileTmpAsync(cancellable context.Context, tmpl string, ioPriority int, callback AsyncReadyCallback) {
+func NewFileTmpAsync(cancellable context.Context, tmpl string, ioPriority int32, callback AsyncReadyCallback) {
 	var carg3 *C.GCancellable       // in, none, converted, nullable
 	var carg1 *C.char               // in, none, string, nullable-string
 	var carg2 C.int                 // in, none, casted, casted C.gint
@@ -23958,7 +24272,7 @@ func NewFileTmpAsync(cancellable context.Context, tmpl string, ioPriority int, c
 // 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore 
 // 	- tmpl string (nullable): Template for the file
 //   name, as in g_dir_make_tmp(), or %NULL for a default template 
-// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 // 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback to call when the request is done 
 //
 // Asynchronously creates a directory in the preferred directory for
@@ -23967,7 +24281,7 @@ func NewFileTmpAsync(cancellable context.Context, tmpl string, ioPriority int, c
 // @tmpl should be a string in the GLib file name encoding
 // containing a sequence of six 'X' characters, and containing no
 // directory components. If it is %NULL, a default template is used.
-func NewFileTmpDirAsync(cancellable context.Context, tmpl string, ioPriority int, callback AsyncReadyCallback) {
+func NewFileTmpDirAsync(cancellable context.Context, tmpl string, ioPriority int32, callback AsyncReadyCallback) {
 	var carg3 *C.GCancellable       // in, none, converted, nullable
 	var carg1 *C.char               // in, none, string, nullable-string
 	var carg2 C.int                 // in, none, casted, casted C.gint
@@ -24162,7 +24476,7 @@ func (file *FileInstance) AppendTo(cancellable context.Context, flags FileCreate
 // 	- cancellable context.Context (nullable): optional #GCancellable object,
 //   %NULL to ignore 
 // 	- flags FileCreateFlags: a set of #GFileCreateFlags 
-// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 // 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 //   to call when the request is satisfied 
 //
@@ -24174,7 +24488,7 @@ func (file *FileInstance) AppendTo(cancellable context.Context, flags FileCreate
 // When the operation is finished, @callback will be called.
 // You can then call g_file_append_to_finish() to get the result
 // of the operation.
-func (file *FileInstance) AppendToAsync(cancellable context.Context, flags FileCreateFlags, ioPriority int, callback AsyncReadyCallback) {
+func (file *FileInstance) AppendToAsync(cancellable context.Context, flags FileCreateFlags, ioPriority int32, callback AsyncReadyCallback) {
 	var carg0 *C.GFile              // in, none, converted
 	var carg3 *C.GCancellable       // in, none, converted, nullable
 	var carg1 C.GFileCreateFlags    // in, none, casted
@@ -24452,7 +24766,7 @@ func (file *FileInstance) Create(cancellable context.Context, flags FileCreateFl
 // 	- cancellable context.Context (nullable): optional #GCancellable object,
 //   %NULL to ignore 
 // 	- flags FileCreateFlags: a set of #GFileCreateFlags 
-// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 // 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 //   to call when the request is satisfied 
 //
@@ -24465,7 +24779,7 @@ func (file *FileInstance) Create(cancellable context.Context, flags FileCreateFl
 // When the operation is finished, @callback will be called.
 // You can then call g_file_create_finish() to get the result
 // of the operation.
-func (file *FileInstance) CreateAsync(cancellable context.Context, flags FileCreateFlags, ioPriority int, callback AsyncReadyCallback) {
+func (file *FileInstance) CreateAsync(cancellable context.Context, flags FileCreateFlags, ioPriority int32, callback AsyncReadyCallback) {
 	var carg0 *C.GFile              // in, none, converted
 	var carg3 *C.GCancellable       // in, none, converted, nullable
 	var carg1 C.GFileCreateFlags    // in, none, casted
@@ -24601,7 +24915,7 @@ func (file *FileInstance) CreateReadwrite(cancellable context.Context, flags Fil
 // 	- cancellable context.Context (nullable): optional #GCancellable object,
 //   %NULL to ignore 
 // 	- flags FileCreateFlags: a set of #GFileCreateFlags 
-// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 // 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 //   to call when the request is satisfied 
 //
@@ -24614,7 +24928,7 @@ func (file *FileInstance) CreateReadwrite(cancellable context.Context, flags Fil
 // When the operation is finished, @callback will be called.
 // You can then call g_file_create_readwrite_finish() to get
 // the result of the operation.
-func (file *FileInstance) CreateReadwriteAsync(cancellable context.Context, flags FileCreateFlags, ioPriority int, callback AsyncReadyCallback) {
+func (file *FileInstance) CreateReadwriteAsync(cancellable context.Context, flags FileCreateFlags, ioPriority int32, callback AsyncReadyCallback) {
 	var carg0 *C.GFile              // in, none, converted
 	var carg3 *C.GCancellable       // in, none, converted, nullable
 	var carg1 C.GFileCreateFlags    // in, none, casted
@@ -24745,14 +25059,14 @@ func (file *FileInstance) Delete(cancellable context.Context) (bool, error) {
 // 
 // 	- cancellable context.Context (nullable): optional #GCancellable object,
 //   %NULL to ignore 
-// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 // 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback to call
 //   when the request is satisfied 
 //
 // Asynchronously delete a file. If the @file is a directory, it will
 // only be deleted if it is empty.  This has the same semantics as
 // g_unlink().
-func (file *FileInstance) DeleteAsync(cancellable context.Context, ioPriority int, callback AsyncReadyCallback) {
+func (file *FileInstance) DeleteAsync(cancellable context.Context, ioPriority int32, callback AsyncReadyCallback) {
 	var carg0 *C.GFile              // in, none, converted
 	var carg2 *C.GCancellable       // in, none, converted, nullable
 	var carg1 C.int                 // in, none, casted, casted C.gint
@@ -25100,7 +25414,7 @@ func (file *FileInstance) EnumerateChildren(cancellable context.Context, attribu
 //   %NULL to ignore 
 // 	- attributes string: an attribute query string 
 // 	- flags FileQueryInfoFlags: a set of #GFileQueryInfoFlags 
-// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 // 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 //   to call when the request is satisfied 
 //
@@ -25114,7 +25428,7 @@ func (file *FileInstance) EnumerateChildren(cancellable context.Context, attribu
 // When the operation is finished, @callback will be called. You can
 // then call g_file_enumerate_children_finish() to get the result of
 // the operation.
-func (file *FileInstance) EnumerateChildrenAsync(cancellable context.Context, attributes string, flags FileQueryInfoFlags, ioPriority int, callback AsyncReadyCallback) {
+func (file *FileInstance) EnumerateChildrenAsync(cancellable context.Context, attributes string, flags FileQueryInfoFlags, ioPriority int32, callback AsyncReadyCallback) {
 	var carg0 *C.GFile              // in, none, converted
 	var carg4 *C.GCancellable       // in, none, converted, nullable
 	var carg1 *C.char               // in, none, string, casted *C.gchar
@@ -25273,7 +25587,7 @@ func (file *FileInstance) FindEnclosingMount(cancellable context.Context) (Mount
 // 
 // 	- cancellable context.Context (nullable): optional #GCancellable object,
 //   %NULL to ignore 
-// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 // 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 //   to call when the request is satisfied 
 //
@@ -25285,7 +25599,7 @@ func (file *FileInstance) FindEnclosingMount(cancellable context.Context) (Mount
 // When the operation is finished, @callback will be called.
 // You can then call g_file_find_enclosing_mount_finish() to
 // get the result of the operation.
-func (file *FileInstance) FindEnclosingMountAsync(cancellable context.Context, ioPriority int, callback AsyncReadyCallback) {
+func (file *FileInstance) FindEnclosingMountAsync(cancellable context.Context, ioPriority int32, callback AsyncReadyCallback) {
 	var carg0 *C.GFile              // in, none, converted
 	var carg2 *C.GCancellable       // in, none, converted, nullable
 	var carg1 C.int                 // in, none, casted, casted C.gint
@@ -26243,12 +26557,12 @@ func (file *FileInstance) MakeDirectory(cancellable context.Context) (bool, erro
 // 
 // 	- cancellable context.Context (nullable): optional #GCancellable object,
 //   %NULL to ignore 
-// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 // 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback to call
 //   when the request is satisfied 
 //
 // Asynchronously creates a directory.
-func (file *FileInstance) MakeDirectoryAsync(cancellable context.Context, ioPriority int, callback AsyncReadyCallback) {
+func (file *FileInstance) MakeDirectoryAsync(cancellable context.Context, ioPriority int32, callback AsyncReadyCallback) {
 	var carg0 *C.GFile              // in, none, converted
 	var carg2 *C.GCancellable       // in, none, converted, nullable
 	var carg1 C.int                 // in, none, casted, casted C.gint
@@ -26424,13 +26738,13 @@ func (file *FileInstance) MakeSymbolicLink(cancellable context.Context, symlinkV
 //   %NULL to ignore 
 // 	- symlinkValue string: a string with the path for the target
 //   of the new symlink 
-// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 // 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback to call
 //   when the request is satisfied 
 //
 // Asynchronously creates a symbolic link named @file which contains the
 // string @symlink_value.
-func (file *FileInstance) MakeSymbolicLinkAsync(cancellable context.Context, symlinkValue string, ioPriority int, callback AsyncReadyCallback) {
+func (file *FileInstance) MakeSymbolicLinkAsync(cancellable context.Context, symlinkValue string, ioPriority int32, callback AsyncReadyCallback) {
 	var carg0 *C.GFile              // in, none, converted
 	var carg3 *C.GCancellable       // in, none, converted, nullable
 	var carg1 *C.char               // in, none, string, casted *C.gchar
@@ -26985,7 +27299,7 @@ func (file *FileInstance) OpenReadwrite(cancellable context.Context) (FileIOStre
 // 
 // 	- cancellable context.Context (nullable): optional #GCancellable object,
 //   %NULL to ignore 
-// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 // 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 //   to call when the request is satisfied 
 //
@@ -26997,7 +27311,7 @@ func (file *FileInstance) OpenReadwrite(cancellable context.Context) (FileIOStre
 // When the operation is finished, @callback will be called.
 // You can then call g_file_open_readwrite_finish() to get
 // the result of the operation.
-func (file *FileInstance) OpenReadwriteAsync(cancellable context.Context, ioPriority int, callback AsyncReadyCallback) {
+func (file *FileInstance) OpenReadwriteAsync(cancellable context.Context, ioPriority int32, callback AsyncReadyCallback) {
 	var carg0 *C.GFile              // in, none, converted
 	var carg2 *C.GCancellable       // in, none, converted, nullable
 	var carg1 C.int                 // in, none, casted, casted C.gint
@@ -27216,11 +27530,11 @@ func (file *FileInstance) QueryDefaultHandler(cancellable context.Context) (AppI
 // The function takes the following parameters:
 // 
 // 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore 
-// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 // 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback to call when the request is done 
 //
 // Async version of g_file_query_default_handler().
-func (file *FileInstance) QueryDefaultHandlerAsync(cancellable context.Context, ioPriority int, callback AsyncReadyCallback) {
+func (file *FileInstance) QueryDefaultHandlerAsync(cancellable context.Context, ioPriority int32, callback AsyncReadyCallback) {
 	var carg0 *C.GFile              // in, none, converted
 	var carg2 *C.GCancellable       // in, none, converted, nullable
 	var carg1 C.int                 // in, none, casted, casted C.gint
@@ -27452,7 +27766,7 @@ func (file *FileInstance) QueryFilesystemInfo(cancellable context.Context, attri
 // 	- cancellable context.Context (nullable): optional #GCancellable object,
 //   %NULL to ignore 
 // 	- attributes string: an attribute query string 
-// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 // 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 //   to call when the request is satisfied 
 //
@@ -27467,7 +27781,7 @@ func (file *FileInstance) QueryFilesystemInfo(cancellable context.Context, attri
 // When the operation is finished, @callback will be called. You can
 // then call g_file_query_info_finish() to get the result of the
 // operation.
-func (file *FileInstance) QueryFilesystemInfoAsync(cancellable context.Context, attributes string, ioPriority int, callback AsyncReadyCallback) {
+func (file *FileInstance) QueryFilesystemInfoAsync(cancellable context.Context, attributes string, ioPriority int32, callback AsyncReadyCallback) {
 	var carg0 *C.GFile              // in, none, converted
 	var carg3 *C.GCancellable       // in, none, converted, nullable
 	var carg1 *C.char               // in, none, string, casted *C.gchar
@@ -27617,7 +27931,7 @@ func (file *FileInstance) QueryInfo(cancellable context.Context, attributes stri
 //   %NULL to ignore 
 // 	- attributes string: an attribute query string 
 // 	- flags FileQueryInfoFlags: a set of #GFileQueryInfoFlags 
-// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 // 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 //   to call when the request is satisfied 
 //
@@ -27630,7 +27944,7 @@ func (file *FileInstance) QueryInfo(cancellable context.Context, attributes stri
 // 
 // When the operation is finished, @callback will be called. You can
 // then call g_file_query_info_finish() to get the result of the operation.
-func (file *FileInstance) QueryInfoAsync(cancellable context.Context, attributes string, flags FileQueryInfoFlags, ioPriority int, callback AsyncReadyCallback) {
+func (file *FileInstance) QueryInfoAsync(cancellable context.Context, attributes string, flags FileQueryInfoFlags, ioPriority int32, callback AsyncReadyCallback) {
 	var carg0 *C.GFile              // in, none, converted
 	var carg4 *C.GCancellable       // in, none, converted, nullable
 	var carg1 *C.char               // in, none, string, casted *C.gchar
@@ -27845,7 +28159,7 @@ func (file *FileInstance) Read(cancellable context.Context) (FileInputStream, er
 // 
 // 	- cancellable context.Context (nullable): optional #GCancellable object,
 //   %NULL to ignore 
-// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 // 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 //   to call when the request is satisfied 
 //
@@ -27857,7 +28171,7 @@ func (file *FileInstance) Read(cancellable context.Context) (FileInputStream, er
 // When the operation is finished, @callback will be called.
 // You can then call g_file_read_finish() to get the result
 // of the operation.
-func (file *FileInstance) ReadAsync(cancellable context.Context, ioPriority int, callback AsyncReadyCallback) {
+func (file *FileInstance) ReadAsync(cancellable context.Context, ioPriority int32, callback AsyncReadyCallback) {
 	var carg0 *C.GFile              // in, none, converted
 	var carg2 *C.GCancellable       // in, none, converted, nullable
 	var carg1 C.int                 // in, none, casted, casted C.gint
@@ -28025,7 +28339,7 @@ func (file *FileInstance) Replace(cancellable context.Context, etag string, make
 //   or %NULL to ignore 
 // 	- makeBackup bool: %TRUE if a backup should be created 
 // 	- flags FileCreateFlags: a set of #GFileCreateFlags 
-// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 // 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 //   to call when the request is satisfied 
 //
@@ -28038,7 +28352,7 @@ func (file *FileInstance) Replace(cancellable context.Context, etag string, make
 // When the operation is finished, @callback will be called.
 // You can then call g_file_replace_finish() to get the result
 // of the operation.
-func (file *FileInstance) ReplaceAsync(cancellable context.Context, etag string, makeBackup bool, flags FileCreateFlags, ioPriority int, callback AsyncReadyCallback) {
+func (file *FileInstance) ReplaceAsync(cancellable context.Context, etag string, makeBackup bool, flags FileCreateFlags, ioPriority int32, callback AsyncReadyCallback) {
 	var carg0 *C.GFile              // in, none, converted
 	var carg5 *C.GCancellable       // in, none, converted, nullable
 	var carg1 *C.char               // in, none, string, nullable-string
@@ -28457,7 +28771,7 @@ func (file *FileInstance) ReplaceReadwrite(cancellable context.Context, etag str
 //   or %NULL to ignore 
 // 	- makeBackup bool: %TRUE if a backup should be created 
 // 	- flags FileCreateFlags: a set of #GFileCreateFlags 
-// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 // 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 //   to call when the request is satisfied 
 //
@@ -28471,7 +28785,7 @@ func (file *FileInstance) ReplaceReadwrite(cancellable context.Context, etag str
 // When the operation is finished, @callback will be called.
 // You can then call g_file_replace_readwrite_finish() to get
 // the result of the operation.
-func (file *FileInstance) ReplaceReadwriteAsync(cancellable context.Context, etag string, makeBackup bool, flags FileCreateFlags, ioPriority int, callback AsyncReadyCallback) {
+func (file *FileInstance) ReplaceReadwriteAsync(cancellable context.Context, etag string, makeBackup bool, flags FileCreateFlags, ioPriority int32, callback AsyncReadyCallback) {
 	var carg0 *C.GFile              // in, none, converted
 	var carg5 *C.GCancellable       // in, none, converted, nullable
 	var carg1 *C.char               // in, none, string, nullable-string
@@ -28947,7 +29261,7 @@ func (file *FileInstance) SetAttributeUint64(cancellable context.Context, attrib
 //   %NULL to ignore 
 // 	- info FileInfo: a #GFileInfo 
 // 	- flags FileQueryInfoFlags: a #GFileQueryInfoFlags 
-// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 // 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 //   to call when the request is satisfied 
 //
@@ -28959,7 +29273,7 @@ func (file *FileInstance) SetAttributeUint64(cancellable context.Context, attrib
 // When the operation is finished, @callback will be called.
 // You can then call g_file_set_attributes_finish() to get
 // the result of the operation.
-func (file *FileInstance) SetAttributesAsync(cancellable context.Context, info FileInfo, flags FileQueryInfoFlags, ioPriority int, callback AsyncReadyCallback) {
+func (file *FileInstance) SetAttributesAsync(cancellable context.Context, info FileInfo, flags FileQueryInfoFlags, ioPriority int32, callback AsyncReadyCallback) {
 	var carg0 *C.GFile              // in, none, converted
 	var carg4 *C.GCancellable       // in, none, converted, nullable
 	var carg1 *C.GFileInfo          // in, none, converted
@@ -29156,7 +29470,7 @@ func (file *FileInstance) SetDisplayName(cancellable context.Context, displayNam
 // 	- cancellable context.Context (nullable): optional #GCancellable object,
 //   %NULL to ignore 
 // 	- displayName string: a string 
-// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 // 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 //   to call when the request is satisfied 
 //
@@ -29168,7 +29482,7 @@ func (file *FileInstance) SetDisplayName(cancellable context.Context, displayNam
 // When the operation is finished, @callback will be called.
 // You can then call g_file_set_display_name_finish() to get
 // the result of the operation.
-func (file *FileInstance) SetDisplayNameAsync(cancellable context.Context, displayName string, ioPriority int, callback AsyncReadyCallback) {
+func (file *FileInstance) SetDisplayNameAsync(cancellable context.Context, displayName string, ioPriority int32, callback AsyncReadyCallback) {
 	var carg0 *C.GFile              // in, none, converted
 	var carg3 *C.GCancellable       // in, none, converted, nullable
 	var carg1 *C.char               // in, none, string, casted *C.gchar
@@ -29501,12 +29815,12 @@ func (file *FileInstance) Trash(cancellable context.Context) (bool, error) {
 // 
 // 	- cancellable context.Context (nullable): optional #GCancellable object,
 //   %NULL to ignore 
-// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 // 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback to call
 //   when the request is satisfied 
 //
 // Asynchronously sends @file to the Trash location, if possible.
-func (file *FileInstance) TrashAsync(cancellable context.Context, ioPriority int, callback AsyncReadyCallback) {
+func (file *FileInstance) TrashAsync(cancellable context.Context, ioPriority int32, callback AsyncReadyCallback) {
 	var carg0 *C.GFile              // in, none, converted
 	var carg2 *C.GCancellable       // in, none, converted, nullable
 	var carg1 C.int                 // in, none, casted, casted C.gint
@@ -29771,10 +30085,10 @@ type FileOverrides[Instance File] struct {
 	// 	- cancellable context.Context (nullable): optional #GCancellable object,
 	//   %NULL to ignore 
 	// 	- flags FileCreateFlags: a set of #GFileCreateFlags 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 	//   to call when the request is satisfied 
-	AppendToAsync func(Instance, context.Context, FileCreateFlags, int, AsyncReadyCallback)
+	AppendToAsync func(Instance, context.Context, FileCreateFlags, int32, AsyncReadyCallback)
 	// AppendToFinish allows you to override the implementation of the virtual method append_to_finish.
 	// The function takes the following parameters:
 	// 
@@ -29813,10 +30127,10 @@ type FileOverrides[Instance File] struct {
 	// 	- cancellable context.Context (nullable): optional #GCancellable object,
 	//   %NULL to ignore 
 	// 	- flags FileCreateFlags: a set of #GFileCreateFlags 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 	//   to call when the request is satisfied 
-	CreateAsync func(Instance, context.Context, FileCreateFlags, int, AsyncReadyCallback)
+	CreateAsync func(Instance, context.Context, FileCreateFlags, int32, AsyncReadyCallback)
 	// CreateFinish allows you to override the implementation of the virtual method create_finish.
 	// The function takes the following parameters:
 	// 
@@ -29845,10 +30159,10 @@ type FileOverrides[Instance File] struct {
 	// 	- cancellable context.Context (nullable): optional #GCancellable object,
 	//   %NULL to ignore 
 	// 	- flags FileCreateFlags: a set of #GFileCreateFlags 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 	//   to call when the request is satisfied 
-	CreateReadwriteAsync func(Instance, context.Context, FileCreateFlags, int, AsyncReadyCallback)
+	CreateReadwriteAsync func(Instance, context.Context, FileCreateFlags, int32, AsyncReadyCallback)
 	// CreateReadwriteFinish allows you to override the implementation of the virtual method create_readwrite_finish.
 	// The function takes the following parameters:
 	// 
@@ -29875,10 +30189,10 @@ type FileOverrides[Instance File] struct {
 	// 
 	// 	- cancellable context.Context (nullable): optional #GCancellable object,
 	//   %NULL to ignore 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback to call
 	//   when the request is satisfied 
-	DeleteFileAsync func(Instance, context.Context, int, AsyncReadyCallback)
+	DeleteFileAsync func(Instance, context.Context, int32, AsyncReadyCallback)
 	// DeleteFileFinish allows you to override the implementation of the virtual method delete_file_finish.
 	// The function takes the following parameters:
 	// 
@@ -29954,10 +30268,10 @@ type FileOverrides[Instance File] struct {
 	//   %NULL to ignore 
 	// 	- attributes string: an attribute query string 
 	// 	- flags FileQueryInfoFlags: a set of #GFileQueryInfoFlags 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 	//   to call when the request is satisfied 
-	EnumerateChildrenAsync func(Instance, context.Context, string, FileQueryInfoFlags, int, AsyncReadyCallback)
+	EnumerateChildrenAsync func(Instance, context.Context, string, FileQueryInfoFlags, int32, AsyncReadyCallback)
 	// EnumerateChildrenFinish allows you to override the implementation of the virtual method enumerate_children_finish.
 	// The function takes the following parameters:
 	// 
@@ -29993,10 +30307,10 @@ type FileOverrides[Instance File] struct {
 	// 
 	// 	- cancellable context.Context (nullable): optional #GCancellable object,
 	//   %NULL to ignore 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 	//   to call when the request is satisfied 
-	FindEnclosingMountAsync func(Instance, context.Context, int, AsyncReadyCallback)
+	FindEnclosingMountAsync func(Instance, context.Context, int32, AsyncReadyCallback)
 	// FindEnclosingMountFinish allows you to override the implementation of the virtual method find_enclosing_mount_finish.
 	// The function takes the following parameters:
 	// 
@@ -30091,10 +30405,10 @@ type FileOverrides[Instance File] struct {
 	// 
 	// 	- cancellable context.Context (nullable): optional #GCancellable object,
 	//   %NULL to ignore 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback to call
 	//   when the request is satisfied 
-	MakeDirectoryAsync func(Instance, context.Context, int, AsyncReadyCallback)
+	MakeDirectoryAsync func(Instance, context.Context, int32, AsyncReadyCallback)
 	// MakeDirectoryFinish allows you to override the implementation of the virtual method make_directory_finish.
 	// The function takes the following parameters:
 	// 
@@ -30125,10 +30439,10 @@ type FileOverrides[Instance File] struct {
 	//   %NULL to ignore 
 	// 	- symlinkValue string: a string with the path for the target
 	//   of the new symlink 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback to call
 	//   when the request is satisfied 
-	MakeSymbolicLinkAsync func(Instance, context.Context, string, int, AsyncReadyCallback)
+	MakeSymbolicLinkAsync func(Instance, context.Context, string, int32, AsyncReadyCallback)
 	// MakeSymbolicLinkFinish allows you to override the implementation of the virtual method make_symbolic_link_finish.
 	// The function takes the following parameters:
 	// 
@@ -30243,10 +30557,10 @@ type FileOverrides[Instance File] struct {
 	// 
 	// 	- cancellable context.Context (nullable): optional #GCancellable object,
 	//   %NULL to ignore 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 	//   to call when the request is satisfied 
-	OpenReadwriteAsync func(Instance, context.Context, int, AsyncReadyCallback)
+	OpenReadwriteAsync func(Instance, context.Context, int32, AsyncReadyCallback)
 	// OpenReadwriteFinish allows you to override the implementation of the virtual method open_readwrite_finish.
 	// The function takes the following parameters:
 	// 
@@ -30301,10 +30615,10 @@ type FileOverrides[Instance File] struct {
 	// 	- cancellable context.Context (nullable): optional #GCancellable object,
 	//   %NULL to ignore 
 	// 	- attributes string: an attribute query string 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 	//   to call when the request is satisfied 
-	QueryFilesystemInfoAsync func(Instance, context.Context, string, int, AsyncReadyCallback)
+	QueryFilesystemInfoAsync func(Instance, context.Context, string, int32, AsyncReadyCallback)
 	// QueryFilesystemInfoFinish allows you to override the implementation of the virtual method query_filesystem_info_finish.
 	// The function takes the following parameters:
 	// 
@@ -30335,10 +30649,10 @@ type FileOverrides[Instance File] struct {
 	//   %NULL to ignore 
 	// 	- attributes string: an attribute query string 
 	// 	- flags FileQueryInfoFlags: a set of #GFileQueryInfoFlags 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 	//   to call when the request is satisfied 
-	QueryInfoAsync func(Instance, context.Context, string, FileQueryInfoFlags, int, AsyncReadyCallback)
+	QueryInfoAsync func(Instance, context.Context, string, FileQueryInfoFlags, int32, AsyncReadyCallback)
 	// QueryInfoFinish allows you to override the implementation of the virtual method query_info_finish.
 	// The function takes the following parameters:
 	// 
@@ -30376,10 +30690,10 @@ type FileOverrides[Instance File] struct {
 	// 
 	// 	- cancellable context.Context (nullable): optional #GCancellable object,
 	//   %NULL to ignore 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 	//   to call when the request is satisfied 
-	ReadAsync func(Instance, context.Context, int, AsyncReadyCallback)
+	ReadAsync func(Instance, context.Context, int32, AsyncReadyCallback)
 	// ReadFinish allows you to override the implementation of the virtual method read_finish.
 	// The function takes the following parameters:
 	// 
@@ -30424,10 +30738,10 @@ type FileOverrides[Instance File] struct {
 	//   or %NULL to ignore 
 	// 	- makeBackup bool: %TRUE if a backup should be created 
 	// 	- flags FileCreateFlags: a set of #GFileCreateFlags 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 	//   to call when the request is satisfied 
-	ReplaceAsync func(Instance, context.Context, string, bool, FileCreateFlags, int, AsyncReadyCallback)
+	ReplaceAsync func(Instance, context.Context, string, bool, FileCreateFlags, int32, AsyncReadyCallback)
 	// ReplaceFinish allows you to override the implementation of the virtual method replace_finish.
 	// The function takes the following parameters:
 	// 
@@ -30462,10 +30776,10 @@ type FileOverrides[Instance File] struct {
 	//   or %NULL to ignore 
 	// 	- makeBackup bool: %TRUE if a backup should be created 
 	// 	- flags FileCreateFlags: a set of #GFileCreateFlags 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 	//   to call when the request is satisfied 
-	ReplaceReadwriteAsync func(Instance, context.Context, string, bool, FileCreateFlags, int, AsyncReadyCallback)
+	ReplaceReadwriteAsync func(Instance, context.Context, string, bool, FileCreateFlags, int32, AsyncReadyCallback)
 	// ReplaceReadwriteFinish allows you to override the implementation of the virtual method replace_readwrite_finish.
 	// The function takes the following parameters:
 	// 
@@ -30492,10 +30806,10 @@ type FileOverrides[Instance File] struct {
 	//   %NULL to ignore 
 	// 	- info FileInfo: a #GFileInfo 
 	// 	- flags FileQueryInfoFlags: a #GFileQueryInfoFlags 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 	//   to call when the request is satisfied 
-	SetAttributesAsync func(Instance, context.Context, FileInfo, FileQueryInfoFlags, int, AsyncReadyCallback)
+	SetAttributesAsync func(Instance, context.Context, FileInfo, FileQueryInfoFlags, int32, AsyncReadyCallback)
 	// SetAttributesFinish allows you to override the implementation of the virtual method set_attributes_finish.
 	// The function takes the following parameters:
 	// 
@@ -30538,10 +30852,10 @@ type FileOverrides[Instance File] struct {
 	// 	- cancellable context.Context (nullable): optional #GCancellable object,
 	//   %NULL to ignore 
 	// 	- displayName string: a string 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 	//   to call when the request is satisfied 
-	SetDisplayNameAsync func(Instance, context.Context, string, int, AsyncReadyCallback)
+	SetDisplayNameAsync func(Instance, context.Context, string, int32, AsyncReadyCallback)
 	// SetDisplayNameFinish allows you to override the implementation of the virtual method set_display_name_finish.
 	// The function takes the following parameters:
 	// 
@@ -30607,10 +30921,10 @@ type FileOverrides[Instance File] struct {
 	// 
 	// 	- cancellable context.Context (nullable): optional #GCancellable object,
 	//   %NULL to ignore 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback to call
 	//   when the request is satisfied 
-	TrashAsync func(Instance, context.Context, int, AsyncReadyCallback)
+	TrashAsync func(Instance, context.Context, int32, AsyncReadyCallback)
 	// TrashFinish allows you to override the implementation of the virtual method trash_finish.
 	// The function takes the following parameters:
 	// 
@@ -30680,7 +30994,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var goret       FileOutputStream // return, full, converted
 				var _goerr      error            // out, full, converted
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg2 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
 				}
@@ -30705,15 +31019,15 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var file        Instance           // go GFile subclass
 				var cancellable context.Context    // in, none, converted, nullable
 				var flags       FileCreateFlags    // in, none, casted
-				var ioPriority  int                // in, none, casted, casted C.gint
+				var ioPriority  int32              // in, none, casted, casted C.gint
 				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg5, nullable
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg3 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
 				}
 				flags = FileCreateFlags(carg1)
-				ioPriority = int(carg2)
+				ioPriority = int32(carg2)
 				if carg4 != nil {
 					_ = callback
 					_ = carg4
@@ -30737,7 +31051,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var goret  FileOutputStream // return, full, converted
 				var _goerr error            // out, full, converted
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				res = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.AppendToFinish(file, res)
@@ -30761,7 +31075,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var goret  bool        // return
 				var _goerr error       // out, full, converted
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				res = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.CopyFinish(file, res)
@@ -30788,7 +31102,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var goret       FileOutputStream // return, full, converted
 				var _goerr      error            // out, full, converted
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg2 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
 				}
@@ -30813,15 +31127,15 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var file        Instance           // go GFile subclass
 				var cancellable context.Context    // in, none, converted, nullable
 				var flags       FileCreateFlags    // in, none, casted
-				var ioPriority  int                // in, none, casted, casted C.gint
+				var ioPriority  int32              // in, none, casted, casted C.gint
 				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg5, nullable
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg3 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
 				}
 				flags = FileCreateFlags(carg1)
-				ioPriority = int(carg2)
+				ioPriority = int32(carg2)
 				if carg4 != nil {
 					_ = callback
 					_ = carg4
@@ -30845,7 +31159,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var goret  FileOutputStream // return, full, converted
 				var _goerr error            // out, full, converted
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				res = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.CreateFinish(file, res)
@@ -30870,7 +31184,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var goret       FileIOStream    // return, full, converted
 				var _goerr      error           // out, full, converted
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg2 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
 				}
@@ -30895,15 +31209,15 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var file        Instance           // go GFile subclass
 				var cancellable context.Context    // in, none, converted, nullable
 				var flags       FileCreateFlags    // in, none, casted
-				var ioPriority  int                // in, none, casted, casted C.gint
+				var ioPriority  int32              // in, none, casted, casted C.gint
 				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg5, nullable
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg3 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
 				}
 				flags = FileCreateFlags(carg1)
-				ioPriority = int(carg2)
+				ioPriority = int32(carg2)
 				if carg4 != nil {
 					_ = callback
 					_ = carg4
@@ -30927,7 +31241,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var goret  FileIOStream // return, full, converted
 				var _goerr error        // out, full, converted
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				res = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.CreateReadwriteFinish(file, res)
@@ -30951,7 +31265,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var goret       bool            // return
 				var _goerr      error           // out, full, converted
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg1 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg1))
 				}
@@ -30976,14 +31290,14 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 			func(carg0 *C.GFile, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
 				var file        Instance           // go GFile subclass
 				var cancellable context.Context    // in, none, converted, nullable
-				var ioPriority  int                // in, none, casted, casted C.gint
+				var ioPriority  int32              // in, none, casted, casted C.gint
 				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg4, nullable
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg2 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
 				}
-				ioPriority = int(carg1)
+				ioPriority = int32(carg1)
 				if carg3 != nil {
 					_ = callback
 					_ = carg3
@@ -31007,7 +31321,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var goret  bool        // return
 				var _goerr error       // out, full, converted
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.DeleteFileFinish(file, result)
@@ -31031,7 +31345,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var file  Instance // go GFile subclass
 				var goret File     // return, full, converted
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.Dup(file)
 
@@ -31053,7 +31367,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var flags       MountUnmountFlags  // in, none, casted
 				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg4, nullable
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg2 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
 				}
@@ -31081,7 +31395,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var goret  bool        // return
 				var _goerr error       // out, full, converted
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.EjectMountableFinish(file, result)
@@ -31108,7 +31422,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var mountOperation MountOperation     // in, none, converted, nullable
 				var callback       AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg5, nullable
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg3 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
 				}
@@ -31139,7 +31453,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var goret  bool        // return
 				var _goerr error       // out, full, converted
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.EjectMountableWithOperationFinish(file, result)
@@ -31167,7 +31481,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var goret       FileEnumerator     // return, full, converted
 				var _goerr      error              // out, full, converted
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg3 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
 				}
@@ -31194,16 +31508,16 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var cancellable context.Context    // in, none, converted, nullable
 				var attributes  string             // in, none, string, casted *C.gchar
 				var flags       FileQueryInfoFlags // in, none, casted
-				var ioPriority  int                // in, none, casted, casted C.gint
+				var ioPriority  int32              // in, none, casted, casted C.gint
 				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg6, nullable
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg4 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg4))
 				}
 				attributes = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 				flags = FileQueryInfoFlags(carg2)
-				ioPriority = int(carg3)
+				ioPriority = int32(carg3)
 				if carg5 != nil {
 					_ = callback
 					_ = carg5
@@ -31227,7 +31541,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var goret  FileEnumerator // return, full, converted
 				var _goerr error          // out, full, converted
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				res = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.EnumerateChildrenFinish(file, res)
@@ -31250,7 +31564,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var file2 File     // in, none, converted
 				var goret bool     // return
 
-				file1 = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file1 = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				file2 = UnsafeFileFromGlibNone(unsafe.Pointer(carg1))
 
 				goret = overrides.Equal(file1, file2)
@@ -31275,7 +31589,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var goret       Mount           // return, full, converted
 				var _goerr      error           // out, full, converted
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg1 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg1))
 				}
@@ -31298,14 +31612,14 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 			func(carg0 *C.GFile, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
 				var file        Instance           // go GFile subclass
 				var cancellable context.Context    // in, none, converted, nullable
-				var ioPriority  int                // in, none, casted, casted C.gint
+				var ioPriority  int32              // in, none, casted, casted C.gint
 				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg4, nullable
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg2 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
 				}
-				ioPriority = int(carg1)
+				ioPriority = int32(carg1)
 				if carg3 != nil {
 					_ = callback
 					_ = carg3
@@ -31329,7 +31643,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var goret  Mount       // return, full, converted
 				var _goerr error       // out, full, converted
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				res = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.FindEnclosingMountFinish(file, res)
@@ -31351,7 +31665,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var file  Instance // go GFile subclass
 				var goret string   // return, full, string, nullable-string
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetBasename(file)
 
@@ -31375,7 +31689,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var goret       File     // return, full, converted
 				var _goerr      error    // out, full, converted
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				displayName = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 
 				goret, _goerr = overrides.GetChildForDisplayName(file, displayName)
@@ -31397,7 +31711,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var file  Instance // go GFile subclass
 				var goret File     // return, full, converted, nullable
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetParent(file)
 
@@ -31419,7 +31733,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var file  Instance // go GFile subclass
 				var goret string   // return, full, string, casted *C.gchar
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetParseName(file)
 
@@ -31439,7 +31753,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var file  Instance // go GFile subclass
 				var goret string   // return, full, string, nullable-string
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetPath(file)
 
@@ -31462,7 +31776,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var descendant File     // in, none, converted
 				var goret      string   // return, full, string, nullable-string
 
-				parent = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				parent = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				descendant = UnsafeFileFromGlibNone(unsafe.Pointer(carg1))
 
 				goret = overrides.GetRelativePath(parent, descendant)
@@ -31485,7 +31799,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var file  Instance // go GFile subclass
 				var goret string   // return, full, string, casted *C.gchar
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetURI(file)
 
@@ -31505,7 +31819,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var file  Instance // go GFile subclass
 				var goret string   // return, full, string, nullable-string
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetURIScheme(file)
 
@@ -31528,7 +31842,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var uriScheme string   // in, none, string, casted *C.gchar
 				var goret     bool     // return
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				uriScheme = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 
 				goret = overrides.HasURIScheme(file, uriScheme)
@@ -31551,7 +31865,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var file  Instance // go GFile subclass
 				var goret uint     // return, none, casted
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.Hash(file)
 
@@ -31571,7 +31885,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var file  Instance // go GFile subclass
 				var goret bool     // return
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.IsNative(file)
 
@@ -31595,7 +31909,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var goret       bool            // return
 				var _goerr      error           // out, full, converted
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg1 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg1))
 				}
@@ -31620,14 +31934,14 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 			func(carg0 *C.GFile, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
 				var file        Instance           // go GFile subclass
 				var cancellable context.Context    // in, none, converted, nullable
-				var ioPriority  int                // in, none, casted, casted C.gint
+				var ioPriority  int32              // in, none, casted, casted C.gint
 				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg4, nullable
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg2 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
 				}
-				ioPriority = int(carg1)
+				ioPriority = int32(carg1)
 				if carg3 != nil {
 					_ = callback
 					_ = carg3
@@ -31651,7 +31965,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var goret  bool        // return
 				var _goerr error       // out, full, converted
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.MakeDirectoryFinish(file, result)
@@ -31678,7 +31992,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var goret        bool            // return
 				var _goerr       error           // out, full, converted
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg2 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
 				}
@@ -31705,15 +32019,15 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var file         Instance           // go GFile subclass
 				var cancellable  context.Context    // in, none, converted, nullable
 				var symlinkValue string             // in, none, string, casted *C.gchar
-				var ioPriority   int                // in, none, casted, casted C.gint
+				var ioPriority   int32              // in, none, casted, casted C.gint
 				var callback     AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg5, nullable
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg3 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
 				}
 				symlinkValue = C.GoString((*C.char)(unsafe.Pointer(carg1)))
-				ioPriority = int(carg2)
+				ioPriority = int32(carg2)
 				if carg4 != nil {
 					_ = callback
 					_ = carg4
@@ -31737,7 +32051,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var goret  bool        // return
 				var _goerr error       // out, full, converted
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.MakeSymbolicLinkFinish(file, result)
@@ -31766,7 +32080,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var goret     bool        // return
 				var _goerr    error       // out, full, converted
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				diskUsage, numDirs, numFiles, goret, _goerr = overrides.MeasureDiskUsageFinish(file, result)
@@ -31796,7 +32110,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var goret       FileMonitor      // return, full, converted
 				var _goerr      error            // out, full, converted
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg2 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
 				}
@@ -31824,7 +32138,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var goret       FileMonitor      // return, full, converted
 				var _goerr      error            // out, full, converted
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg2 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
 				}
@@ -31852,7 +32166,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var mountOperation MountOperation     // in, none, converted, nullable
 				var callback       AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg5, nullable
 
-				location = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				location = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg3 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
 				}
@@ -31883,7 +32197,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var goret    bool        // return
 				var _goerr   error       // out, full, converted
 
-				location = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				location = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.MountEnclosingVolumeFinish(location, result)
@@ -31910,7 +32224,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var mountOperation MountOperation     // in, none, converted, nullable
 				var callback       AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg5, nullable
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg3 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
 				}
@@ -31941,7 +32255,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var goret  File        // return, full, converted
 				var _goerr error       // out, full, converted
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.MountMountableFinish(file, result)
@@ -31965,7 +32279,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var goret  bool        // return
 				var _goerr error       // out, full, converted
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.MoveFinish(file, result)
@@ -31991,7 +32305,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var goret       FileIOStream    // return, full, converted
 				var _goerr      error           // out, full, converted
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg1 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg1))
 				}
@@ -32014,14 +32328,14 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 			func(carg0 *C.GFile, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
 				var file        Instance           // go GFile subclass
 				var cancellable context.Context    // in, none, converted, nullable
-				var ioPriority  int                // in, none, casted, casted C.gint
+				var ioPriority  int32              // in, none, casted, casted C.gint
 				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg4, nullable
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg2 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
 				}
-				ioPriority = int(carg1)
+				ioPriority = int32(carg1)
 				if carg3 != nil {
 					_ = callback
 					_ = carg3
@@ -32045,7 +32359,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var goret  FileIOStream // return, full, converted
 				var _goerr error        // out, full, converted
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				res = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.OpenReadwriteFinish(file, res)
@@ -32068,7 +32382,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var cancellable context.Context    // in, none, converted, nullable
 				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg3, nullable
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg1 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg1))
 				}
@@ -32095,7 +32409,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var goret  bool        // return
 				var _goerr error       // out, full, converted
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.PollMountableFinish(file, result)
@@ -32120,7 +32434,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var file   File     // in, none, converted
 				var goret  bool     // return
 
-				prefix = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				prefix = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg1))
 
 				goret = overrides.PrefixMatches(prefix, file)
@@ -32146,7 +32460,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var goret       FileInfo        // return, full, converted
 				var _goerr      error           // out, full, converted
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg2 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
 				}
@@ -32171,15 +32485,15 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var file        Instance           // go GFile subclass
 				var cancellable context.Context    // in, none, converted, nullable
 				var attributes  string             // in, none, string, casted *C.gchar
-				var ioPriority  int                // in, none, casted, casted C.gint
+				var ioPriority  int32              // in, none, casted, casted C.gint
 				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg5, nullable
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg3 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
 				}
 				attributes = C.GoString((*C.char)(unsafe.Pointer(carg1)))
-				ioPriority = int(carg2)
+				ioPriority = int32(carg2)
 				if carg4 != nil {
 					_ = callback
 					_ = carg4
@@ -32203,7 +32517,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var goret  FileInfo    // return, full, converted
 				var _goerr error       // out, full, converted
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				res = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.QueryFilesystemInfoFinish(file, res)
@@ -32229,7 +32543,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var goret       FileInfo           // return, full, converted
 				var _goerr      error              // out, full, converted
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg3 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
 				}
@@ -32256,16 +32570,16 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var cancellable context.Context    // in, none, converted, nullable
 				var attributes  string             // in, none, string, casted *C.gchar
 				var flags       FileQueryInfoFlags // in, none, casted
-				var ioPriority  int                // in, none, casted, casted C.gint
+				var ioPriority  int32              // in, none, casted, casted C.gint
 				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg6, nullable
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg4 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg4))
 				}
 				attributes = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 				flags = FileQueryInfoFlags(carg2)
-				ioPriority = int(carg3)
+				ioPriority = int32(carg3)
 				if carg5 != nil {
 					_ = callback
 					_ = carg5
@@ -32289,7 +32603,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var goret  FileInfo    // return, full, converted
 				var _goerr error       // out, full, converted
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				res = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.QueryInfoFinish(file, res)
@@ -32313,7 +32627,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var goret       *FileAttributeInfoList // return, full, converted
 				var _goerr      error                  // out, full, converted
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg1 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg1))
 				}
@@ -32339,7 +32653,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var goret       *FileAttributeInfoList // return, full, converted
 				var _goerr      error                  // out, full, converted
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg1 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg1))
 				}
@@ -32362,14 +32676,14 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 			func(carg0 *C.GFile, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
 				var file        Instance           // go GFile subclass
 				var cancellable context.Context    // in, none, converted, nullable
-				var ioPriority  int                // in, none, casted, casted C.gint
+				var ioPriority  int32              // in, none, casted, casted C.gint
 				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg4, nullable
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg2 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
 				}
-				ioPriority = int(carg1)
+				ioPriority = int32(carg1)
 				if carg3 != nil {
 					_ = callback
 					_ = carg3
@@ -32393,7 +32707,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var goret  FileInputStream // return, full, converted
 				var _goerr error           // out, full, converted
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				res = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.ReadFinish(file, res)
@@ -32417,7 +32731,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var goret       FileInputStream // return, full, converted
 				var _goerr      error           // out, full, converted
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg1 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg1))
 				}
@@ -32446,7 +32760,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var goret       FileOutputStream // return, full, converted
 				var _goerr      error            // out, full, converted
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg4 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg4))
 				}
@@ -32479,10 +32793,10 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var etag        string             // in, none, string, casted *C.gchar, nullable
 				var makeBackup  bool               // in
 				var flags       FileCreateFlags    // in, none, casted
-				var ioPriority  int                // in, none, casted, casted C.gint
+				var ioPriority  int32              // in, none, casted, casted C.gint
 				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg7, nullable
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg5 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg5))
 				}
@@ -32493,7 +32807,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 					makeBackup = true
 				}
 				flags = FileCreateFlags(carg3)
-				ioPriority = int(carg4)
+				ioPriority = int32(carg4)
 				if carg6 != nil {
 					_ = callback
 					_ = carg6
@@ -32517,7 +32831,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var goret  FileOutputStream // return, full, converted
 				var _goerr error            // out, full, converted
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				res = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.ReplaceFinish(file, res)
@@ -32544,7 +32858,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var goret       FileIOStream    // return, full, converted
 				var _goerr      error           // out, full, converted
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg4 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg4))
 				}
@@ -32577,10 +32891,10 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var etag        string             // in, none, string, casted *C.gchar, nullable
 				var makeBackup  bool               // in
 				var flags       FileCreateFlags    // in, none, casted
-				var ioPriority  int                // in, none, casted, casted C.gint
+				var ioPriority  int32              // in, none, casted, casted C.gint
 				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg7, nullable
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg5 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg5))
 				}
@@ -32591,7 +32905,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 					makeBackup = true
 				}
 				flags = FileCreateFlags(carg3)
-				ioPriority = int(carg4)
+				ioPriority = int32(carg4)
 				if carg6 != nil {
 					_ = callback
 					_ = carg6
@@ -32615,7 +32929,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var goret  FileIOStream // return, full, converted
 				var _goerr error        // out, full, converted
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				res = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.ReplaceReadwriteFinish(file, res)
@@ -32638,7 +32952,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var relativePath string   // in, none, string, casted *C.gchar
 				var goret        File     // return, full, converted
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				relativePath = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 
 				goret = overrides.ResolveRelativePath(file, relativePath)
@@ -32660,16 +32974,16 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var cancellable context.Context    // in, none, converted, nullable
 				var info        FileInfo           // in, none, converted
 				var flags       FileQueryInfoFlags // in, none, casted
-				var ioPriority  int                // in, none, casted, casted C.gint
+				var ioPriority  int32              // in, none, casted, casted C.gint
 				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg6, nullable
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg4 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg4))
 				}
 				info = UnsafeFileInfoFromGlibNone(unsafe.Pointer(carg1))
 				flags = FileQueryInfoFlags(carg2)
-				ioPriority = int(carg3)
+				ioPriority = int32(carg3)
 				if carg5 != nil {
 					_ = callback
 					_ = carg5
@@ -32694,7 +33008,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var goret  bool        // return
 				var _goerr error       // out, full, converted
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				info, goret, _goerr = overrides.SetAttributesFinish(file, result)
@@ -32723,7 +33037,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var goret       bool               // return
 				var _goerr      error              // out, full, converted
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg3 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
 				}
@@ -32754,7 +33068,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var goret       File            // return, full, converted
 				var _goerr      error           // out, full, converted
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg2 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
 				}
@@ -32779,15 +33093,15 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var file        Instance           // go GFile subclass
 				var cancellable context.Context    // in, none, converted, nullable
 				var displayName string             // in, none, string, casted *C.gchar
-				var ioPriority  int                // in, none, casted, casted C.gint
+				var ioPriority  int32              // in, none, casted, casted C.gint
 				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg5, nullable
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg3 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
 				}
 				displayName = C.GoString((*C.char)(unsafe.Pointer(carg1)))
-				ioPriority = int(carg2)
+				ioPriority = int32(carg2)
 				if carg4 != nil {
 					_ = callback
 					_ = carg4
@@ -32811,7 +33125,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var goret  File        // return, full, converted
 				var _goerr error       // out, full, converted
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				res = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.SetDisplayNameFinish(file, res)
@@ -32836,7 +33150,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var startOperation MountOperation     // in, none, converted, nullable
 				var callback       AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg5, nullable
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg3 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
 				}
@@ -32867,7 +33181,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var goret  bool        // return
 				var _goerr error       // out, full, converted
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.StartMountableFinish(file, result)
@@ -32894,7 +33208,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var mountOperation MountOperation     // in, none, converted, nullable
 				var callback       AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg5, nullable
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg3 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
 				}
@@ -32925,7 +33239,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var goret  bool        // return
 				var _goerr error       // out, full, converted
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.StopMountableFinish(file, result)
@@ -32951,7 +33265,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var goret       bool            // return
 				var _goerr      error           // out, full, converted
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg1 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg1))
 				}
@@ -32976,14 +33290,14 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 			func(carg0 *C.GFile, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
 				var file        Instance           // go GFile subclass
 				var cancellable context.Context    // in, none, converted, nullable
-				var ioPriority  int                // in, none, casted, casted C.gint
+				var ioPriority  int32              // in, none, casted, casted C.gint
 				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg4, nullable
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg2 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
 				}
-				ioPriority = int(carg1)
+				ioPriority = int32(carg1)
 				if carg3 != nil {
 					_ = callback
 					_ = carg3
@@ -33007,7 +33321,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var goret  bool        // return
 				var _goerr error       // out, full, converted
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.TrashFinish(file, result)
@@ -33033,7 +33347,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var flags       MountUnmountFlags  // in, none, casted
 				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg4, nullable
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg2 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
 				}
@@ -33061,7 +33375,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var goret  bool        // return
 				var _goerr error       // out, full, converted
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.UnmountMountableFinish(file, result)
@@ -33088,7 +33402,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var mountOperation MountOperation     // in, none, converted, nullable
 				var callback       AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg5, nullable
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg3 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
 				}
@@ -33119,7 +33433,7 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				var goret  bool        // return
 				var _goerr error       // out, full, converted
 
-				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.UnmountMountableWithOperationFinish(file, result)
@@ -33239,6 +33553,11 @@ func UnsafeIconFromGlibNone(c unsafe.Pointer) Icon {
 // UnsafeIconFromGlibFull is used to convert raw GIcon pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeIconFromGlibFull(c unsafe.Pointer) Icon {
 	return gobject.UnsafeObjectFromGlibFull(c).(Icon)
+}
+
+// UnsafeIconFromGlibBorrow is used to convert raw GIcon pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeIconFromGlibBorrow(c unsafe.Pointer) Icon {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Icon)
 }
 
 // UnsafeIconToGlibNone is used to convert the instance to it's C value GIcon. This is used by the bindings internally.
@@ -33401,7 +33720,7 @@ func UnsafeApplyIconOverrides[Instance Icon](gclass unsafe.Pointer, overrides Ic
 				var icon2 Icon     // in, none, converted, nullable
 				var goret bool     // return
 
-				icon1 = UnsafeIconFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				icon1 = UnsafeIconFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg1 != nil {
 					icon2 = UnsafeIconFromGlibNone(unsafe.Pointer(carg1))
 				}
@@ -33426,7 +33745,7 @@ func UnsafeApplyIconOverrides[Instance Icon](gclass unsafe.Pointer, overrides Ic
 				var icon  Instance // go GIcon subclass
 				var goret uint     // return, none, casted
 
-				icon = UnsafeIconFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				icon = UnsafeIconFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.Hash(icon)
 
@@ -33553,6 +33872,11 @@ func UnsafeInitableFromGlibFull(c unsafe.Pointer) Initable {
 	return gobject.UnsafeObjectFromGlibFull(c).(Initable)
 }
 
+// UnsafeInitableFromGlibBorrow is used to convert raw GInitable pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeInitableFromGlibBorrow(c unsafe.Pointer) Initable {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Initable)
+}
+
 // UnsafeInitableToGlibNone is used to convert the instance to it's C value GInitable. This is used by the bindings internally.
 func UnsafeInitableToGlibNone(c Initable) unsafe.Pointer {
 	i := c.upcastToGInitable()
@@ -33673,7 +33997,7 @@ func UnsafeApplyInitableOverrides[Instance Initable](gclass unsafe.Pointer, over
 				var goret       bool            // return
 				var _goerr      error           // out, full, converted
 
-				initable = UnsafeInitableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				initable = UnsafeInitableFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg1 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg1))
 				}
@@ -33884,6 +34208,11 @@ func UnsafeListModelFromGlibFull(c unsafe.Pointer) ListModel {
 	return gobject.UnsafeObjectFromGlibFull(c).(ListModel)
 }
 
+// UnsafeListModelFromGlibBorrow is used to convert raw GListModel pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeListModelFromGlibBorrow(c unsafe.Pointer) ListModel {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(ListModel)
+}
+
 // UnsafeListModelToGlibNone is used to convert the instance to it's C value GListModel. This is used by the bindings internally.
 func UnsafeListModelToGlibNone(c ListModel) unsafe.Pointer {
 	i := c.upcastToGListModel()
@@ -34083,7 +34412,7 @@ func UnsafeApplyListModelOverrides[Instance ListModel](gclass unsafe.Pointer, ov
 				var list  Instance     // go GListModel subclass
 				var goret gobject.Type // return, none, casted, alias
 
-				list = UnsafeListModelFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				list = UnsafeListModelFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetItemType(list)
 
@@ -34103,7 +34432,7 @@ func UnsafeApplyListModelOverrides[Instance ListModel](gclass unsafe.Pointer, ov
 				var list  Instance // go GListModel subclass
 				var goret uint     // return, none, casted
 
-				list = UnsafeListModelFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				list = UnsafeListModelFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetNItems(list)
 
@@ -34136,7 +34465,7 @@ type LoadableIcon interface {
 	// 
 	// 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to
 	// ignore. 
-	// 	- size int: an integer. 
+	// 	- size int32: an integer. 
 	// 
 	// The function returns the following values:
 	// 
@@ -34147,20 +34476,20 @@ type LoadableIcon interface {
 	//
 	// Loads a loadable icon. For the asynchronous version of this function,
 	// see g_loadable_icon_load_async().
-	Load(context.Context, int) (string, InputStream, error)
+	Load(context.Context, int32) (string, InputStream, error)
 	// LoadAsync wraps g_loadable_icon_load_async
 	// 
 	// The function takes the following parameters:
 	// 
 	// 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore. 
-	// 	- size int: an integer. 
+	// 	- size int32: an integer. 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 	//   to call when the request is satisfied 
 	//
 	// Loads an icon asynchronously. To finish this function, see
 	// g_loadable_icon_load_finish(). For the synchronous, blocking
 	// version of this function, see g_loadable_icon_load().
-	LoadAsync(context.Context, int, AsyncReadyCallback)
+	LoadAsync(context.Context, int32, AsyncReadyCallback)
 	// LoadFinish wraps g_loadable_icon_load_finish
 	// 
 	// The function takes the following parameters:
@@ -34204,6 +34533,11 @@ func UnsafeLoadableIconFromGlibFull(c unsafe.Pointer) LoadableIcon {
 	return gobject.UnsafeObjectFromGlibFull(c).(LoadableIcon)
 }
 
+// UnsafeLoadableIconFromGlibBorrow is used to convert raw GLoadableIcon pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeLoadableIconFromGlibBorrow(c unsafe.Pointer) LoadableIcon {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(LoadableIcon)
+}
+
 // UnsafeLoadableIconToGlibNone is used to convert the instance to it's C value GLoadableIcon. This is used by the bindings internally.
 func UnsafeLoadableIconToGlibNone(c LoadableIcon) unsafe.Pointer {
 	i := c.upcastToGLoadableIcon()
@@ -34222,7 +34556,7 @@ func UnsafeLoadableIconToGlibFull(c LoadableIcon) unsafe.Pointer {
 // 
 // 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to
 // ignore. 
-// 	- size int: an integer. 
+// 	- size int32: an integer. 
 // 
 // The function returns the following values:
 // 
@@ -34233,7 +34567,7 @@ func UnsafeLoadableIconToGlibFull(c LoadableIcon) unsafe.Pointer {
 //
 // Loads a loadable icon. For the asynchronous version of this function,
 // see g_loadable_icon_load_async().
-func (icon *LoadableIconInstance) Load(cancellable context.Context, size int) (string, InputStream, error) {
+func (icon *LoadableIconInstance) Load(cancellable context.Context, size int32) (string, InputStream, error) {
 	var carg0 *C.GLoadableIcon // in, none, converted
 	var carg3 *C.GCancellable  // in, none, converted, nullable
 	var carg1 C.int            // in, none, casted, casted C.gint
@@ -34271,14 +34605,14 @@ func (icon *LoadableIconInstance) Load(cancellable context.Context, size int) (s
 // The function takes the following parameters:
 // 
 // 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore. 
-// 	- size int: an integer. 
+// 	- size int32: an integer. 
 // 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 //   to call when the request is satisfied 
 //
 // Loads an icon asynchronously. To finish this function, see
 // g_loadable_icon_load_finish(). For the synchronous, blocking
 // version of this function, see g_loadable_icon_load().
-func (icon *LoadableIconInstance) LoadAsync(cancellable context.Context, size int, callback AsyncReadyCallback) {
+func (icon *LoadableIconInstance) LoadAsync(cancellable context.Context, size int32, callback AsyncReadyCallback) {
 	var carg0 *C.GLoadableIcon      // in, none, converted
 	var carg2 *C.GCancellable       // in, none, converted, nullable
 	var carg1 C.int                 // in, none, casted, casted C.gint
@@ -34352,7 +34686,7 @@ type LoadableIconOverrides[Instance LoadableIcon] struct {
 	// 
 	// 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to
 	// ignore. 
-	// 	- size int: an integer. 
+	// 	- size int32: an integer. 
 	// 
 	// The function returns the following values:
 	// 
@@ -34360,15 +34694,15 @@ type LoadableIconOverrides[Instance LoadableIcon] struct {
 	// icon, %NULL to ignore. 
 	// 	- goret InputStream 
 	// 	- _goerr error (nullable): an error 
-	Load func(Instance, context.Context, int) (string, InputStream, error)
+	Load func(Instance, context.Context, int32) (string, InputStream, error)
 	// LoadAsync allows you to override the implementation of the virtual method load_async.
 	// The function takes the following parameters:
 	// 
 	// 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore. 
-	// 	- size int: an integer. 
+	// 	- size int32: an integer. 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 	//   to call when the request is satisfied 
-	LoadAsync func(Instance, context.Context, int, AsyncReadyCallback)
+	LoadAsync func(Instance, context.Context, int32, AsyncReadyCallback)
 	// LoadFinish allows you to override the implementation of the virtual method load_finish.
 	// The function takes the following parameters:
 	// 
@@ -34396,20 +34730,20 @@ func UnsafeApplyLoadableIconOverrides[Instance LoadableIcon](gclass unsafe.Point
 			func(carg0 *C.GLoadableIcon, carg1 C.int, carg2 **C.char, carg3 *C.GCancellable, _cerr **C.GError) (cret *C.GInputStream) {
 				var icon        Instance        // go GLoadableIcon subclass
 				var cancellable context.Context // in, none, converted, nullable
-				var size        int             // in, none, casted, casted C.gint
+				var size        int32           // in, none, casted, casted C.gint
 				var typ         string          // out, full, string, casted *C.gchar
 				var goret       InputStream     // return, full, converted
 				var _goerr      error           // out, full, converted
 
-				icon = UnsafeLoadableIconFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				icon = UnsafeLoadableIconFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg3 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
 				}
-				size = int(carg1)
+				size = int32(carg1)
 
 				typ, goret, _goerr = overrides.Load(icon, cancellable, size)
 
-				carg2 = (*C.char)(unsafe.Pointer(C.CString(typ)))
+				*carg2 = (*C.char)(unsafe.Pointer(C.CString(typ)))
 				cret = (*C.GInputStream)(UnsafeInputStreamToGlibFull(goret))
 				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
 
@@ -34426,14 +34760,14 @@ func UnsafeApplyLoadableIconOverrides[Instance LoadableIcon](gclass unsafe.Point
 			func(carg0 *C.GLoadableIcon, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
 				var icon        Instance           // go GLoadableIcon subclass
 				var cancellable context.Context    // in, none, converted, nullable
-				var size        int                // in, none, casted, casted C.gint
+				var size        int32              // in, none, casted, casted C.gint
 				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg4, nullable
 
-				icon = UnsafeLoadableIconFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				icon = UnsafeLoadableIconFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg2 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
 				}
-				size = int(carg1)
+				size = int32(carg1)
 				if carg3 != nil {
 					_ = callback
 					_ = carg3
@@ -34458,12 +34792,12 @@ func UnsafeApplyLoadableIconOverrides[Instance LoadableIcon](gclass unsafe.Point
 				var goret  InputStream // return, full, converted
 				var _goerr error       // out, full, converted
 
-				icon = UnsafeLoadableIconFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				icon = UnsafeLoadableIconFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				res = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				typ, goret, _goerr = overrides.LoadFinish(icon, res)
 
-				carg2 = (*C.char)(unsafe.Pointer(C.CString(typ)))
+				*carg2 = (*C.char)(unsafe.Pointer(C.CString(typ)))
 				cret = (*C.GInputStream)(UnsafeInputStreamToGlibFull(goret))
 				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
 
@@ -34569,6 +34903,11 @@ func UnsafeMemoryMonitorFromGlibFull(c unsafe.Pointer) MemoryMonitor {
 	return gobject.UnsafeObjectFromGlibFull(c).(MemoryMonitor)
 }
 
+// UnsafeMemoryMonitorFromGlibBorrow is used to convert raw GMemoryMonitor pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeMemoryMonitorFromGlibBorrow(c unsafe.Pointer) MemoryMonitor {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(MemoryMonitor)
+}
+
 // UnsafeMemoryMonitorToGlibNone is used to convert the instance to it's C value GMemoryMonitor. This is used by the bindings internally.
 func UnsafeMemoryMonitorToGlibNone(c MemoryMonitor) unsafe.Pointer {
 	i := c.upcastToGMemoryMonitor()
@@ -34634,7 +34973,7 @@ func UnsafeApplyMemoryMonitorOverrides[Instance MemoryMonitor](gclass unsafe.Poi
 				var monitor Instance                  // go GMemoryMonitor subclass
 				var level   MemoryMonitorWarningLevel // in, none, casted
 
-				monitor = UnsafeMemoryMonitorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				monitor = UnsafeMemoryMonitorFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				level = MemoryMonitorWarningLevel(carg1)
 
 				overrides.LowMemoryWarning(monitor, level)
@@ -35077,6 +35416,11 @@ func UnsafeMountFromGlibNone(c unsafe.Pointer) Mount {
 // UnsafeMountFromGlibFull is used to convert raw GMount pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeMountFromGlibFull(c unsafe.Pointer) Mount {
 	return gobject.UnsafeObjectFromGlibFull(c).(Mount)
+}
+
+// UnsafeMountFromGlibBorrow is used to convert raw GMount pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeMountFromGlibBorrow(c unsafe.Pointer) Mount {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Mount)
 }
 
 // UnsafeMountToGlibNone is used to convert the instance to it's C value GMount. This is used by the bindings internally.
@@ -36220,7 +36564,7 @@ func UnsafeApplyMountOverrides[Instance Mount](gclass unsafe.Pointer, overrides 
 				var mount Instance // go GMount subclass
 				var goret bool     // return
 
-				mount = UnsafeMountFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				mount = UnsafeMountFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.CanEject(mount)
 
@@ -36242,7 +36586,7 @@ func UnsafeApplyMountOverrides[Instance Mount](gclass unsafe.Pointer, overrides 
 				var mount Instance // go GMount subclass
 				var goret bool     // return
 
-				mount = UnsafeMountFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				mount = UnsafeMountFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.CanUnmount(mount)
 
@@ -36263,7 +36607,7 @@ func UnsafeApplyMountOverrides[Instance Mount](gclass unsafe.Pointer, overrides 
 			func(carg0 *C.GMount) {
 				var mount Instance // go GMount subclass
 
-				mount = UnsafeMountFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				mount = UnsafeMountFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				overrides.Changed(mount)
 			},
@@ -36281,7 +36625,7 @@ func UnsafeApplyMountOverrides[Instance Mount](gclass unsafe.Pointer, overrides 
 				var flags       MountUnmountFlags  // in, none, casted
 				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg4, nullable
 
-				mount = UnsafeMountFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				mount = UnsafeMountFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg2 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
 				}
@@ -36309,7 +36653,7 @@ func UnsafeApplyMountOverrides[Instance Mount](gclass unsafe.Pointer, overrides 
 				var goret  bool        // return
 				var _goerr error       // out, full, converted
 
-				mount = UnsafeMountFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				mount = UnsafeMountFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.EjectFinish(mount, result)
@@ -36336,7 +36680,7 @@ func UnsafeApplyMountOverrides[Instance Mount](gclass unsafe.Pointer, overrides 
 				var mountOperation MountOperation     // in, none, converted, nullable
 				var callback       AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg5, nullable
 
-				mount = UnsafeMountFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				mount = UnsafeMountFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg3 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
 				}
@@ -36367,7 +36711,7 @@ func UnsafeApplyMountOverrides[Instance Mount](gclass unsafe.Pointer, overrides 
 				var goret  bool        // return
 				var _goerr error       // out, full, converted
 
-				mount = UnsafeMountFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				mount = UnsafeMountFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.EjectWithOperationFinish(mount, result)
@@ -36391,7 +36735,7 @@ func UnsafeApplyMountOverrides[Instance Mount](gclass unsafe.Pointer, overrides 
 				var mount Instance // go GMount subclass
 				var goret File     // return, full, converted
 
-				mount = UnsafeMountFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				mount = UnsafeMountFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetDefaultLocation(mount)
 
@@ -36411,7 +36755,7 @@ func UnsafeApplyMountOverrides[Instance Mount](gclass unsafe.Pointer, overrides 
 				var mount Instance // go GMount subclass
 				var goret Drive    // return, full, converted, nullable
 
-				mount = UnsafeMountFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				mount = UnsafeMountFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetDrive(mount)
 
@@ -36433,7 +36777,7 @@ func UnsafeApplyMountOverrides[Instance Mount](gclass unsafe.Pointer, overrides 
 				var mount Instance // go GMount subclass
 				var goret Icon     // return, full, converted
 
-				mount = UnsafeMountFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				mount = UnsafeMountFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetIcon(mount)
 
@@ -36453,7 +36797,7 @@ func UnsafeApplyMountOverrides[Instance Mount](gclass unsafe.Pointer, overrides 
 				var mount Instance // go GMount subclass
 				var goret string   // return, full, string, casted *C.gchar
 
-				mount = UnsafeMountFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				mount = UnsafeMountFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetName(mount)
 
@@ -36473,7 +36817,7 @@ func UnsafeApplyMountOverrides[Instance Mount](gclass unsafe.Pointer, overrides 
 				var mount Instance // go GMount subclass
 				var goret File     // return, full, converted
 
-				mount = UnsafeMountFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				mount = UnsafeMountFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetRoot(mount)
 
@@ -36493,7 +36837,7 @@ func UnsafeApplyMountOverrides[Instance Mount](gclass unsafe.Pointer, overrides 
 				var mount Instance // go GMount subclass
 				var goret string   // return, none, string, nullable-string
 
-				mount = UnsafeMountFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				mount = UnsafeMountFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetSortKey(mount)
 
@@ -36516,7 +36860,7 @@ func UnsafeApplyMountOverrides[Instance Mount](gclass unsafe.Pointer, overrides 
 				var mount Instance // go GMount subclass
 				var goret Icon     // return, full, converted
 
-				mount = UnsafeMountFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				mount = UnsafeMountFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetSymbolicIcon(mount)
 
@@ -36536,7 +36880,7 @@ func UnsafeApplyMountOverrides[Instance Mount](gclass unsafe.Pointer, overrides 
 				var mount Instance // go GMount subclass
 				var goret string   // return, full, string, nullable-string
 
-				mount = UnsafeMountFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				mount = UnsafeMountFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetUUID(mount)
 
@@ -36558,7 +36902,7 @@ func UnsafeApplyMountOverrides[Instance Mount](gclass unsafe.Pointer, overrides 
 				var mount Instance // go GMount subclass
 				var goret Volume   // return, full, converted, nullable
 
-				mount = UnsafeMountFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				mount = UnsafeMountFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetVolume(mount)
 
@@ -36582,7 +36926,7 @@ func UnsafeApplyMountOverrides[Instance Mount](gclass unsafe.Pointer, overrides 
 				var forceRescan bool               // in
 				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg4, nullable
 
-				mount = UnsafeMountFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				mount = UnsafeMountFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg2 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
 				}
@@ -36612,7 +36956,7 @@ func UnsafeApplyMountOverrides[Instance Mount](gclass unsafe.Pointer, overrides 
 				var goret  []string    // return, transfer: full, C Pointers: 2, Name: array[utf8], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
 				var _goerr error       // out, full, converted
 
-				mount = UnsafeMountFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				mount = UnsafeMountFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.GuessContentTypeFinish(mount, result)
@@ -36639,7 +36983,7 @@ func UnsafeApplyMountOverrides[Instance Mount](gclass unsafe.Pointer, overrides 
 				var goret       []string        // return, transfer: full, C Pointers: 2, Name: array[utf8], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
 				var _goerr      error           // out, full, converted
 
-				mount = UnsafeMountFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				mount = UnsafeMountFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg2 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
 				}
@@ -36667,7 +37011,7 @@ func UnsafeApplyMountOverrides[Instance Mount](gclass unsafe.Pointer, overrides 
 			func(carg0 *C.GMount) {
 				var mount Instance // go GMount subclass
 
-				mount = UnsafeMountFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				mount = UnsafeMountFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				overrides.PreUnmount(mount)
 			},
@@ -36686,7 +37030,7 @@ func UnsafeApplyMountOverrides[Instance Mount](gclass unsafe.Pointer, overrides 
 				var mountOperation MountOperation     // in, none, converted, nullable
 				var callback       AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg5, nullable
 
-				mount = UnsafeMountFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				mount = UnsafeMountFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg3 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
 				}
@@ -36717,7 +37061,7 @@ func UnsafeApplyMountOverrides[Instance Mount](gclass unsafe.Pointer, overrides 
 				var goret  bool        // return
 				var _goerr error       // out, full, converted
 
-				mount = UnsafeMountFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				mount = UnsafeMountFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.RemountFinish(mount, result)
@@ -36743,7 +37087,7 @@ func UnsafeApplyMountOverrides[Instance Mount](gclass unsafe.Pointer, overrides 
 				var flags       MountUnmountFlags  // in, none, casted
 				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg4, nullable
 
-				mount = UnsafeMountFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				mount = UnsafeMountFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg2 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
 				}
@@ -36771,7 +37115,7 @@ func UnsafeApplyMountOverrides[Instance Mount](gclass unsafe.Pointer, overrides 
 				var goret  bool        // return
 				var _goerr error       // out, full, converted
 
-				mount = UnsafeMountFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				mount = UnsafeMountFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.UnmountFinish(mount, result)
@@ -36798,7 +37142,7 @@ func UnsafeApplyMountOverrides[Instance Mount](gclass unsafe.Pointer, overrides 
 				var mountOperation MountOperation     // in, none, converted, nullable
 				var callback       AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg5, nullable
 
-				mount = UnsafeMountFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				mount = UnsafeMountFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg3 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
 				}
@@ -36829,7 +37173,7 @@ func UnsafeApplyMountOverrides[Instance Mount](gclass unsafe.Pointer, overrides 
 				var goret  bool        // return
 				var _goerr error       // out, full, converted
 
-				mount = UnsafeMountFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				mount = UnsafeMountFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.UnmountWithOperationFinish(mount, result)
@@ -36852,7 +37196,7 @@ func UnsafeApplyMountOverrides[Instance Mount](gclass unsafe.Pointer, overrides 
 			func(carg0 *C.GMount) {
 				var mount Instance // go GMount subclass
 
-				mount = UnsafeMountFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				mount = UnsafeMountFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				overrides.Unmounted(mount)
 			},
@@ -37018,6 +37362,11 @@ func UnsafeNetworkMonitorFromGlibNone(c unsafe.Pointer) NetworkMonitor {
 // UnsafeNetworkMonitorFromGlibFull is used to convert raw GNetworkMonitor pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeNetworkMonitorFromGlibFull(c unsafe.Pointer) NetworkMonitor {
 	return gobject.UnsafeObjectFromGlibFull(c).(NetworkMonitor)
+}
+
+// UnsafeNetworkMonitorFromGlibBorrow is used to convert raw GNetworkMonitor pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeNetworkMonitorFromGlibBorrow(c unsafe.Pointer) NetworkMonitor {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(NetworkMonitor)
 }
 
 // UnsafeNetworkMonitorToGlibNone is used to convert the instance to it's C value GNetworkMonitor. This is used by the bindings internally.
@@ -37350,7 +37699,7 @@ func UnsafeApplyNetworkMonitorOverrides[Instance NetworkMonitor](gclass unsafe.P
 				var goret       bool              // return
 				var _goerr      error             // out, full, converted
 
-				monitor = UnsafeNetworkMonitorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				monitor = UnsafeNetworkMonitorFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg2 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
 				}
@@ -37379,7 +37728,7 @@ func UnsafeApplyNetworkMonitorOverrides[Instance NetworkMonitor](gclass unsafe.P
 				var connectable SocketConnectable  // in, none, converted
 				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg4, nullable
 
-				monitor = UnsafeNetworkMonitorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				monitor = UnsafeNetworkMonitorFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg2 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
 				}
@@ -37407,7 +37756,7 @@ func UnsafeApplyNetworkMonitorOverrides[Instance NetworkMonitor](gclass unsafe.P
 				var goret   bool        // return
 				var _goerr  error       // out, full, converted
 
-				monitor = UnsafeNetworkMonitorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				monitor = UnsafeNetworkMonitorFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.CanReachFinish(monitor, result)
@@ -37431,7 +37780,7 @@ func UnsafeApplyNetworkMonitorOverrides[Instance NetworkMonitor](gclass unsafe.P
 				var monitor          Instance // go GNetworkMonitor subclass
 				var networkAvailable bool     // in
 
-				monitor = UnsafeNetworkMonitorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				monitor = UnsafeNetworkMonitorFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg1 != 0 {
 					networkAvailable = true
 				}
@@ -37544,6 +37893,11 @@ func UnsafePollableInputStreamFromGlibNone(c unsafe.Pointer) PollableInputStream
 // UnsafePollableInputStreamFromGlibFull is used to convert raw GPollableInputStream pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafePollableInputStreamFromGlibFull(c unsafe.Pointer) PollableInputStream {
 	return gobject.UnsafeObjectFromGlibFull(c).(PollableInputStream)
+}
+
+// UnsafePollableInputStreamFromGlibBorrow is used to convert raw GPollableInputStream pointers to go without touching any references. This is used by the bindings internally.
+func UnsafePollableInputStreamFromGlibBorrow(c unsafe.Pointer) PollableInputStream {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(PollableInputStream)
 }
 
 // UnsafePollableInputStreamToGlibNone is used to convert the instance to it's C value GPollableInputStream. This is used by the bindings internally.
@@ -37704,7 +38058,7 @@ func UnsafeApplyPollableInputStreamOverrides[Instance PollableInputStream](gclas
 				var stream Instance // go GPollableInputStream subclass
 				var goret  bool     // return
 
-				stream = UnsafePollableInputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafePollableInputStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.CanPoll(stream)
 
@@ -37727,7 +38081,7 @@ func UnsafeApplyPollableInputStreamOverrides[Instance PollableInputStream](gclas
 				var cancellable context.Context // in, none, converted, nullable
 				var goret       *glib.Source    // return, full, converted
 
-				stream = UnsafePollableInputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafePollableInputStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg1 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg1))
 				}
@@ -37750,7 +38104,7 @@ func UnsafeApplyPollableInputStreamOverrides[Instance PollableInputStream](gclas
 				var stream Instance // go GPollableInputStream subclass
 				var goret  bool     // return
 
-				stream = UnsafePollableInputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafePollableInputStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.IsReadable(stream)
 
@@ -37932,6 +38286,11 @@ func UnsafePollableOutputStreamFromGlibNone(c unsafe.Pointer) PollableOutputStre
 // UnsafePollableOutputStreamFromGlibFull is used to convert raw GPollableOutputStream pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafePollableOutputStreamFromGlibFull(c unsafe.Pointer) PollableOutputStream {
 	return gobject.UnsafeObjectFromGlibFull(c).(PollableOutputStream)
+}
+
+// UnsafePollableOutputStreamFromGlibBorrow is used to convert raw GPollableOutputStream pointers to go without touching any references. This is used by the bindings internally.
+func UnsafePollableOutputStreamFromGlibBorrow(c unsafe.Pointer) PollableOutputStream {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(PollableOutputStream)
 }
 
 // UnsafePollableOutputStreamToGlibNone is used to convert the instance to it's C value GPollableOutputStream. This is used by the bindings internally.
@@ -38248,7 +38607,7 @@ func UnsafeApplyPollableOutputStreamOverrides[Instance PollableOutputStream](gcl
 				var stream Instance // go GPollableOutputStream subclass
 				var goret  bool     // return
 
-				stream = UnsafePollableOutputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafePollableOutputStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.CanPoll(stream)
 
@@ -38271,7 +38630,7 @@ func UnsafeApplyPollableOutputStreamOverrides[Instance PollableOutputStream](gcl
 				var cancellable context.Context // in, none, converted, nullable
 				var goret       *glib.Source    // return, full, converted
 
-				stream = UnsafePollableOutputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafePollableOutputStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg1 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg1))
 				}
@@ -38294,7 +38653,7 @@ func UnsafeApplyPollableOutputStreamOverrides[Instance PollableOutputStream](gcl
 				var stream Instance // go GPollableOutputStream subclass
 				var goret  bool     // return
 
-				stream = UnsafePollableOutputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafePollableOutputStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.IsWritable(stream)
 
@@ -38318,7 +38677,7 @@ func UnsafeApplyPollableOutputStreamOverrides[Instance PollableOutputStream](gcl
 				var goret  int      // return, none, casted
 				var _goerr error    // out, full, converted
 
-				stream = UnsafePollableOutputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafePollableOutputStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				_ = buffer
 				_ = carg1
 				_ = carg2
@@ -38346,7 +38705,7 @@ func UnsafeApplyPollableOutputStreamOverrides[Instance PollableOutputStream](gcl
 				var goret        PollableReturn // return, none, casted
 				var _goerr       error          // out, full, converted
 
-				stream = UnsafePollableOutputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafePollableOutputStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				_ = vectors
 				_ = carg1
 				_ = carg2
@@ -38438,6 +38797,11 @@ func UnsafePowerProfileMonitorFromGlibNone(c unsafe.Pointer) PowerProfileMonitor
 // UnsafePowerProfileMonitorFromGlibFull is used to convert raw GPowerProfileMonitor pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafePowerProfileMonitorFromGlibFull(c unsafe.Pointer) PowerProfileMonitor {
 	return gobject.UnsafeObjectFromGlibFull(c).(PowerProfileMonitor)
+}
+
+// UnsafePowerProfileMonitorFromGlibBorrow is used to convert raw GPowerProfileMonitor pointers to go without touching any references. This is used by the bindings internally.
+func UnsafePowerProfileMonitorFromGlibBorrow(c unsafe.Pointer) PowerProfileMonitor {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(PowerProfileMonitor)
 }
 
 // UnsafePowerProfileMonitorToGlibNone is used to convert the instance to it's C value GPowerProfileMonitor. This is used by the bindings internally.
@@ -38611,6 +38975,11 @@ func UnsafeProxyFromGlibNone(c unsafe.Pointer) Proxy {
 // UnsafeProxyFromGlibFull is used to convert raw GProxy pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeProxyFromGlibFull(c unsafe.Pointer) Proxy {
 	return gobject.UnsafeObjectFromGlibFull(c).(Proxy)
+}
+
+// UnsafeProxyFromGlibBorrow is used to convert raw GProxy pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeProxyFromGlibBorrow(c unsafe.Pointer) Proxy {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Proxy)
 }
 
 // UnsafeProxyToGlibNone is used to convert the instance to it's C value GProxy. This is used by the bindings internally.
@@ -38867,7 +39236,7 @@ func UnsafeApplyProxyOverrides[Instance Proxy](gclass unsafe.Pointer, overrides 
 				var goret        IOStream        // return, full, converted
 				var _goerr       error           // out, full, converted
 
-				proxy = UnsafeProxyFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				proxy = UnsafeProxyFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg3 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
 				}
@@ -38896,7 +39265,7 @@ func UnsafeApplyProxyOverrides[Instance Proxy](gclass unsafe.Pointer, overrides 
 				var proxyAddress ProxyAddress       // in, none, converted
 				var callback     AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg5, nullable
 
-				proxy = UnsafeProxyFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				proxy = UnsafeProxyFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg3 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
 				}
@@ -38925,7 +39294,7 @@ func UnsafeApplyProxyOverrides[Instance Proxy](gclass unsafe.Pointer, overrides 
 				var goret  IOStream    // return, full, converted
 				var _goerr error       // out, full, converted
 
-				proxy = UnsafeProxyFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				proxy = UnsafeProxyFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.ConnectFinish(proxy, result)
@@ -38947,7 +39316,7 @@ func UnsafeApplyProxyOverrides[Instance Proxy](gclass unsafe.Pointer, overrides 
 				var proxy Instance // go GProxy subclass
 				var goret bool     // return
 
-				proxy = UnsafeProxyFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				proxy = UnsafeProxyFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.SupportsHostname(proxy)
 
@@ -39072,6 +39441,11 @@ func UnsafeProxyResolverFromGlibNone(c unsafe.Pointer) ProxyResolver {
 // UnsafeProxyResolverFromGlibFull is used to convert raw GProxyResolver pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeProxyResolverFromGlibFull(c unsafe.Pointer) ProxyResolver {
 	return gobject.UnsafeObjectFromGlibFull(c).(ProxyResolver)
+}
+
+// UnsafeProxyResolverFromGlibBorrow is used to convert raw GProxyResolver pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeProxyResolverFromGlibBorrow(c unsafe.Pointer) ProxyResolver {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(ProxyResolver)
 }
 
 // UnsafeProxyResolverToGlibNone is used to convert the instance to it's C value GProxyResolver. This is used by the bindings internally.
@@ -39318,7 +39692,7 @@ func UnsafeApplyProxyResolverOverrides[Instance ProxyResolver](gclass unsafe.Poi
 				var resolver Instance // go GProxyResolver subclass
 				var goret    bool     // return
 
-				resolver = UnsafeProxyResolverFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				resolver = UnsafeProxyResolverFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.IsSupported(resolver)
 
@@ -39343,7 +39717,7 @@ func UnsafeApplyProxyResolverOverrides[Instance ProxyResolver](gclass unsafe.Poi
 				var goret       []string        // return, transfer: full, C Pointers: 2, Name: array[utf8], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
 				var _goerr      error           // out, full, converted
 
-				resolver = UnsafeProxyResolverFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				resolver = UnsafeProxyResolverFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg2 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
 				}
@@ -39372,7 +39746,7 @@ func UnsafeApplyProxyResolverOverrides[Instance ProxyResolver](gclass unsafe.Poi
 				var uri         string             // in, none, string
 				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg4, nullable
 
-				resolver = UnsafeProxyResolverFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				resolver = UnsafeProxyResolverFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg2 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
 				}
@@ -39400,7 +39774,7 @@ func UnsafeApplyProxyResolverOverrides[Instance ProxyResolver](gclass unsafe.Poi
 				var goret    []string    // return, transfer: full, C Pointers: 2, Name: array[utf8], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
 				var _goerr   error       // out, full, converted
 
-				resolver = UnsafeProxyResolverFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				resolver = UnsafeProxyResolverFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.LookupFinish(resolver, result)
@@ -39475,6 +39849,11 @@ func UnsafeRemoteActionGroupFromGlibNone(c unsafe.Pointer) RemoteActionGroup {
 // UnsafeRemoteActionGroupFromGlibFull is used to convert raw GRemoteActionGroup pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeRemoteActionGroupFromGlibFull(c unsafe.Pointer) RemoteActionGroup {
 	return gobject.UnsafeObjectFromGlibFull(c).(RemoteActionGroup)
+}
+
+// UnsafeRemoteActionGroupFromGlibBorrow is used to convert raw GRemoteActionGroup pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeRemoteActionGroupFromGlibBorrow(c unsafe.Pointer) RemoteActionGroup {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(RemoteActionGroup)
 }
 
 // UnsafeRemoteActionGroupToGlibNone is used to convert the instance to it's C value GRemoteActionGroup. This is used by the bindings internally.
@@ -39627,6 +40006,11 @@ func UnsafeSeekableFromGlibNone(c unsafe.Pointer) Seekable {
 // UnsafeSeekableFromGlibFull is used to convert raw GSeekable pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeSeekableFromGlibFull(c unsafe.Pointer) Seekable {
 	return gobject.UnsafeObjectFromGlibFull(c).(Seekable)
+}
+
+// UnsafeSeekableFromGlibBorrow is used to convert raw GSeekable pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeSeekableFromGlibBorrow(c unsafe.Pointer) Seekable {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Seekable)
 }
 
 // UnsafeSeekableToGlibNone is used to convert the instance to it's C value GSeekable. This is used by the bindings internally.
@@ -39885,7 +40269,7 @@ func UnsafeApplySeekableOverrides[Instance Seekable](gclass unsafe.Pointer, over
 				var seekable Instance // go GSeekable subclass
 				var goret    bool     // return
 
-				seekable = UnsafeSeekableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				seekable = UnsafeSeekableFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.CanSeek(seekable)
 
@@ -39907,7 +40291,7 @@ func UnsafeApplySeekableOverrides[Instance Seekable](gclass unsafe.Pointer, over
 				var seekable Instance // go GSeekable subclass
 				var goret    bool     // return
 
-				seekable = UnsafeSeekableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				seekable = UnsafeSeekableFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.CanTruncate(seekable)
 
@@ -39933,7 +40317,7 @@ func UnsafeApplySeekableOverrides[Instance Seekable](gclass unsafe.Pointer, over
 				var goret       bool            // return
 				var _goerr      error           // out, full, converted
 
-				seekable = UnsafeSeekableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				seekable = UnsafeSeekableFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg3 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
 				}
@@ -39961,7 +40345,7 @@ func UnsafeApplySeekableOverrides[Instance Seekable](gclass unsafe.Pointer, over
 				var seekable Instance // go GSeekable subclass
 				var goret    int64    // return, none, casted, casted C.gint64
 
-				seekable = UnsafeSeekableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				seekable = UnsafeSeekableFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.Tell(seekable)
 
@@ -39984,7 +40368,7 @@ func UnsafeApplySeekableOverrides[Instance Seekable](gclass unsafe.Pointer, over
 				var goret       bool            // return
 				var _goerr      error           // out, full, converted
 
-				seekable = UnsafeSeekableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				seekable = UnsafeSeekableFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg2 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
 				}
@@ -40137,6 +40521,11 @@ func UnsafeSocketConnectableFromGlibFull(c unsafe.Pointer) SocketConnectable {
 	return gobject.UnsafeObjectFromGlibFull(c).(SocketConnectable)
 }
 
+// UnsafeSocketConnectableFromGlibBorrow is used to convert raw GSocketConnectable pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeSocketConnectableFromGlibBorrow(c unsafe.Pointer) SocketConnectable {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(SocketConnectable)
+}
+
 // UnsafeSocketConnectableToGlibNone is used to convert the instance to it's C value GSocketConnectable. This is used by the bindings internally.
 func UnsafeSocketConnectableToGlibNone(c SocketConnectable) unsafe.Pointer {
 	i := c.upcastToGSocketConnectable()
@@ -40265,7 +40654,7 @@ func UnsafeApplySocketConnectableOverrides[Instance SocketConnectable](gclass un
 				var connectable Instance                // go GSocketConnectable subclass
 				var goret       SocketAddressEnumerator // return, full, converted
 
-				connectable = UnsafeSocketConnectableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				connectable = UnsafeSocketConnectableFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.Enumerate(connectable)
 
@@ -40285,7 +40674,7 @@ func UnsafeApplySocketConnectableOverrides[Instance SocketConnectable](gclass un
 				var connectable Instance                // go GSocketConnectable subclass
 				var goret       SocketAddressEnumerator // return, full, converted
 
-				connectable = UnsafeSocketConnectableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				connectable = UnsafeSocketConnectableFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.ProxyEnumerate(connectable)
 
@@ -40305,7 +40694,7 @@ func UnsafeApplySocketConnectableOverrides[Instance SocketConnectable](gclass un
 				var connectable Instance // go GSocketConnectable subclass
 				var goret       string   // return, full, string
 
-				connectable = UnsafeSocketConnectableFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				connectable = UnsafeSocketConnectableFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.ToString(connectable)
 
@@ -40448,6 +40837,11 @@ func UnsafeTlsBackendFromGlibNone(c unsafe.Pointer) TlsBackend {
 // UnsafeTlsBackendFromGlibFull is used to convert raw GTlsBackend pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeTlsBackendFromGlibFull(c unsafe.Pointer) TlsBackend {
 	return gobject.UnsafeObjectFromGlibFull(c).(TlsBackend)
+}
+
+// UnsafeTlsBackendFromGlibBorrow is used to convert raw GTlsBackend pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeTlsBackendFromGlibBorrow(c unsafe.Pointer) TlsBackend {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(TlsBackend)
 }
 
 // UnsafeTlsBackendToGlibNone is used to convert the instance to it's C value GTlsBackend. This is used by the bindings internally.
@@ -40756,7 +41150,7 @@ func UnsafeApplyTlsBackendOverrides[Instance TlsBackend](gclass unsafe.Pointer, 
 				var backend Instance    // go GTlsBackend subclass
 				var goret   TlsDatabase // return, full, converted
 
-				backend = UnsafeTlsBackendFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				backend = UnsafeTlsBackendFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetDefaultDatabase(backend)
 
@@ -40776,7 +41170,7 @@ func UnsafeApplyTlsBackendOverrides[Instance TlsBackend](gclass unsafe.Pointer, 
 				var backend Instance // go GTlsBackend subclass
 				var goret   bool     // return
 
-				backend = UnsafeTlsBackendFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				backend = UnsafeTlsBackendFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.SupportsDTLS(backend)
 
@@ -40798,7 +41192,7 @@ func UnsafeApplyTlsBackendOverrides[Instance TlsBackend](gclass unsafe.Pointer, 
 				var backend Instance // go GTlsBackend subclass
 				var goret   bool     // return
 
-				backend = UnsafeTlsBackendFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				backend = UnsafeTlsBackendFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.SupportsTLS(backend)
 
@@ -40967,6 +41361,11 @@ func UnsafeTlsClientConnectionFromGlibNone(c unsafe.Pointer) TlsClientConnection
 // UnsafeTlsClientConnectionFromGlibFull is used to convert raw GTlsClientConnection pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeTlsClientConnectionFromGlibFull(c unsafe.Pointer) TlsClientConnection {
 	return gobject.UnsafeObjectFromGlibFull(c).(TlsClientConnection)
+}
+
+// UnsafeTlsClientConnectionFromGlibBorrow is used to convert raw GTlsClientConnection pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeTlsClientConnectionFromGlibBorrow(c unsafe.Pointer) TlsClientConnection {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(TlsClientConnection)
 }
 
 // UnsafeTlsClientConnectionToGlibNone is used to convert the instance to it's C value GTlsClientConnection. This is used by the bindings internally.
@@ -41259,7 +41658,7 @@ func UnsafeApplyTlsClientConnectionOverrides[Instance TlsClientConnection](gclas
 				var conn   Instance            // go GTlsClientConnection subclass
 				var source TlsClientConnection // in, none, converted
 
-				conn = UnsafeTlsClientConnectionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				conn = UnsafeTlsClientConnectionFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				source = UnsafeTlsClientConnectionFromGlibNone(unsafe.Pointer(carg1))
 
 				overrides.CopySessionState(conn, source)
@@ -41309,6 +41708,11 @@ func UnsafeTlsFileDatabaseFromGlibNone(c unsafe.Pointer) TlsFileDatabase {
 // UnsafeTlsFileDatabaseFromGlibFull is used to convert raw GTlsFileDatabase pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeTlsFileDatabaseFromGlibFull(c unsafe.Pointer) TlsFileDatabase {
 	return gobject.UnsafeObjectFromGlibFull(c).(TlsFileDatabase)
+}
+
+// UnsafeTlsFileDatabaseFromGlibBorrow is used to convert raw GTlsFileDatabase pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeTlsFileDatabaseFromGlibBorrow(c unsafe.Pointer) TlsFileDatabase {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(TlsFileDatabase)
 }
 
 // UnsafeTlsFileDatabaseToGlibNone is used to convert the instance to it's C value GTlsFileDatabase. This is used by the bindings internally.
@@ -41410,6 +41814,11 @@ func UnsafeTlsServerConnectionFromGlibNone(c unsafe.Pointer) TlsServerConnection
 // UnsafeTlsServerConnectionFromGlibFull is used to convert raw GTlsServerConnection pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeTlsServerConnectionFromGlibFull(c unsafe.Pointer) TlsServerConnection {
 	return gobject.UnsafeObjectFromGlibFull(c).(TlsServerConnection)
+}
+
+// UnsafeTlsServerConnectionFromGlibBorrow is used to convert raw GTlsServerConnection pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeTlsServerConnectionFromGlibBorrow(c unsafe.Pointer) TlsServerConnection {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(TlsServerConnection)
 }
 
 // UnsafeTlsServerConnectionToGlibNone is used to convert the instance to it's C value GTlsServerConnection. This is used by the bindings internally.
@@ -41803,6 +42212,11 @@ func UnsafeVolumeFromGlibNone(c unsafe.Pointer) Volume {
 // UnsafeVolumeFromGlibFull is used to convert raw GVolume pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeVolumeFromGlibFull(c unsafe.Pointer) Volume {
 	return gobject.UnsafeObjectFromGlibFull(c).(Volume)
+}
+
+// UnsafeVolumeFromGlibBorrow is used to convert raw GVolume pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeVolumeFromGlibBorrow(c unsafe.Pointer) Volume {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Volume)
 }
 
 // UnsafeVolumeToGlibNone is used to convert the instance to it's C value GVolume. This is used by the bindings internally.
@@ -42584,7 +42998,7 @@ func UnsafeApplyVolumeOverrides[Instance Volume](gclass unsafe.Pointer, override
 				var volume Instance // go GVolume subclass
 				var goret  bool     // return
 
-				volume = UnsafeVolumeFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				volume = UnsafeVolumeFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.CanEject(volume)
 
@@ -42606,7 +43020,7 @@ func UnsafeApplyVolumeOverrides[Instance Volume](gclass unsafe.Pointer, override
 				var volume Instance // go GVolume subclass
 				var goret  bool     // return
 
-				volume = UnsafeVolumeFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				volume = UnsafeVolumeFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.CanMount(volume)
 
@@ -42627,7 +43041,7 @@ func UnsafeApplyVolumeOverrides[Instance Volume](gclass unsafe.Pointer, override
 			func(carg0 *C.GVolume) {
 				var volume Instance // go GVolume subclass
 
-				volume = UnsafeVolumeFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				volume = UnsafeVolumeFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				overrides.Changed(volume)
 			},
@@ -42645,7 +43059,7 @@ func UnsafeApplyVolumeOverrides[Instance Volume](gclass unsafe.Pointer, override
 				var flags       MountUnmountFlags  // in, none, casted
 				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg4, nullable
 
-				volume = UnsafeVolumeFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				volume = UnsafeVolumeFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg2 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
 				}
@@ -42673,7 +43087,7 @@ func UnsafeApplyVolumeOverrides[Instance Volume](gclass unsafe.Pointer, override
 				var goret  bool        // return
 				var _goerr error       // out, full, converted
 
-				volume = UnsafeVolumeFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				volume = UnsafeVolumeFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.EjectFinish(volume, result)
@@ -42700,7 +43114,7 @@ func UnsafeApplyVolumeOverrides[Instance Volume](gclass unsafe.Pointer, override
 				var mountOperation MountOperation     // in, none, converted, nullable
 				var callback       AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg5, nullable
 
-				volume = UnsafeVolumeFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				volume = UnsafeVolumeFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg3 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
 				}
@@ -42731,7 +43145,7 @@ func UnsafeApplyVolumeOverrides[Instance Volume](gclass unsafe.Pointer, override
 				var goret  bool        // return
 				var _goerr error       // out, full, converted
 
-				volume = UnsafeVolumeFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				volume = UnsafeVolumeFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.EjectWithOperationFinish(volume, result)
@@ -42755,7 +43169,7 @@ func UnsafeApplyVolumeOverrides[Instance Volume](gclass unsafe.Pointer, override
 				var volume Instance // go GVolume subclass
 				var goret  []string // return, transfer: full, C Pointers: 2, Name: array[utf8], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
 
-				volume = UnsafeVolumeFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				volume = UnsafeVolumeFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.EnumerateIdentifiers(volume)
 
@@ -42777,7 +43191,7 @@ func UnsafeApplyVolumeOverrides[Instance Volume](gclass unsafe.Pointer, override
 				var volume Instance // go GVolume subclass
 				var goret  File     // return, full, converted, nullable
 
-				volume = UnsafeVolumeFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				volume = UnsafeVolumeFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetActivationRoot(volume)
 
@@ -42799,7 +43213,7 @@ func UnsafeApplyVolumeOverrides[Instance Volume](gclass unsafe.Pointer, override
 				var volume Instance // go GVolume subclass
 				var goret  Drive    // return, full, converted, nullable
 
-				volume = UnsafeVolumeFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				volume = UnsafeVolumeFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetDrive(volume)
 
@@ -42821,7 +43235,7 @@ func UnsafeApplyVolumeOverrides[Instance Volume](gclass unsafe.Pointer, override
 				var volume Instance // go GVolume subclass
 				var goret  Icon     // return, full, converted
 
-				volume = UnsafeVolumeFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				volume = UnsafeVolumeFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetIcon(volume)
 
@@ -42842,7 +43256,7 @@ func UnsafeApplyVolumeOverrides[Instance Volume](gclass unsafe.Pointer, override
 				var kind   string   // in, none, string, casted *C.gchar
 				var goret  string   // return, full, string, nullable-string
 
-				volume = UnsafeVolumeFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				volume = UnsafeVolumeFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				kind = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 
 				goret = overrides.GetIdentifier(volume, kind)
@@ -42865,7 +43279,7 @@ func UnsafeApplyVolumeOverrides[Instance Volume](gclass unsafe.Pointer, override
 				var volume Instance // go GVolume subclass
 				var goret  Mount    // return, full, converted, nullable
 
-				volume = UnsafeVolumeFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				volume = UnsafeVolumeFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetMount(volume)
 
@@ -42887,7 +43301,7 @@ func UnsafeApplyVolumeOverrides[Instance Volume](gclass unsafe.Pointer, override
 				var volume Instance // go GVolume subclass
 				var goret  string   // return, full, string, casted *C.gchar
 
-				volume = UnsafeVolumeFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				volume = UnsafeVolumeFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetName(volume)
 
@@ -42907,7 +43321,7 @@ func UnsafeApplyVolumeOverrides[Instance Volume](gclass unsafe.Pointer, override
 				var volume Instance // go GVolume subclass
 				var goret  string   // return, none, string, nullable-string
 
-				volume = UnsafeVolumeFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				volume = UnsafeVolumeFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetSortKey(volume)
 
@@ -42930,7 +43344,7 @@ func UnsafeApplyVolumeOverrides[Instance Volume](gclass unsafe.Pointer, override
 				var volume Instance // go GVolume subclass
 				var goret  Icon     // return, full, converted
 
-				volume = UnsafeVolumeFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				volume = UnsafeVolumeFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetSymbolicIcon(volume)
 
@@ -42950,7 +43364,7 @@ func UnsafeApplyVolumeOverrides[Instance Volume](gclass unsafe.Pointer, override
 				var volume Instance // go GVolume subclass
 				var goret  string   // return, full, string, nullable-string
 
-				volume = UnsafeVolumeFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				volume = UnsafeVolumeFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetUUID(volume)
 
@@ -42974,7 +43388,7 @@ func UnsafeApplyVolumeOverrides[Instance Volume](gclass unsafe.Pointer, override
 				var goret  bool        // return
 				var _goerr error       // out, full, converted
 
-				volume = UnsafeVolumeFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				volume = UnsafeVolumeFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.MountFinish(volume, result)
@@ -43001,7 +43415,7 @@ func UnsafeApplyVolumeOverrides[Instance Volume](gclass unsafe.Pointer, override
 				var mountOperation MountOperation     // in, none, converted, nullable
 				var callback       AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg5, nullable
 
-				volume = UnsafeVolumeFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				volume = UnsafeVolumeFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg3 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
 				}
@@ -43029,7 +43443,7 @@ func UnsafeApplyVolumeOverrides[Instance Volume](gclass unsafe.Pointer, override
 			func(carg0 *C.GVolume) {
 				var volume Instance // go GVolume subclass
 
-				volume = UnsafeVolumeFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				volume = UnsafeVolumeFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				overrides.Removed(volume)
 			},
@@ -43045,7 +43459,7 @@ func UnsafeApplyVolumeOverrides[Instance Volume](gclass unsafe.Pointer, override
 				var volume Instance // go GVolume subclass
 				var goret  bool     // return
 
-				volume = UnsafeVolumeFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				volume = UnsafeVolumeFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.ShouldAutomount(volume)
 
@@ -43130,6 +43544,11 @@ func UnsafeDebugControllerFromGlibNone(c unsafe.Pointer) DebugController {
 // UnsafeDebugControllerFromGlibFull is used to convert raw GDebugController pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeDebugControllerFromGlibFull(c unsafe.Pointer) DebugController {
 	return gobject.UnsafeObjectFromGlibFull(c).(DebugController)
+}
+
+// UnsafeDebugControllerFromGlibBorrow is used to convert raw GDebugController pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeDebugControllerFromGlibBorrow(c unsafe.Pointer) DebugController {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(DebugController)
 }
 
 // UnsafeDebugControllerToGlibNone is used to convert the instance to it's C value GDebugController. This is used by the bindings internally.
@@ -43290,6 +43709,11 @@ func UnsafeDtlsClientConnectionFromGlibNone(c unsafe.Pointer) DtlsClientConnecti
 // UnsafeDtlsClientConnectionFromGlibFull is used to convert raw GDtlsClientConnection pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeDtlsClientConnectionFromGlibFull(c unsafe.Pointer) DtlsClientConnection {
 	return gobject.UnsafeObjectFromGlibFull(c).(DtlsClientConnection)
+}
+
+// UnsafeDtlsClientConnectionFromGlibBorrow is used to convert raw GDtlsClientConnection pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeDtlsClientConnectionFromGlibBorrow(c unsafe.Pointer) DtlsClientConnection {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(DtlsClientConnection)
 }
 
 // UnsafeDtlsClientConnectionToGlibNone is used to convert the instance to it's C value GDtlsClientConnection. This is used by the bindings internally.
@@ -43535,6 +43959,11 @@ func UnsafeAppInfoMonitorFromGlibFull(c unsafe.Pointer) AppInfoMonitor {
 	return gobject.UnsafeObjectFromGlibFull(c).(AppInfoMonitor)
 }
 
+// UnsafeAppInfoMonitorFromGlibBorrow is used to convert raw GAppInfoMonitor pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeAppInfoMonitorFromGlibBorrow(c unsafe.Pointer) AppInfoMonitor {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(AppInfoMonitor)
+}
+
 func (a *AppInfoMonitorInstance) upcastToGAppInfoMonitor() *AppInfoMonitorInstance {
 	return a
 }
@@ -43676,6 +44105,11 @@ func UnsafeAppLaunchContextFromGlibNone(c unsafe.Pointer) AppLaunchContext {
 // UnsafeAppLaunchContextFromGlibFull is used to convert raw GAppLaunchContext pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeAppLaunchContextFromGlibFull(c unsafe.Pointer) AppLaunchContext {
 	return gobject.UnsafeObjectFromGlibFull(c).(AppLaunchContext)
+}
+
+// UnsafeAppLaunchContextFromGlibBorrow is used to convert raw GAppLaunchContext pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeAppLaunchContextFromGlibBorrow(c unsafe.Pointer) AppLaunchContext {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(AppLaunchContext)
 }
 
 func (a *AppLaunchContextInstance) upcastToGAppLaunchContext() *AppLaunchContextInstance {
@@ -43854,7 +44288,7 @@ func UnsafeApplyAppLaunchContextOverrides[Instance AppLaunchContext](gclass unsa
 				var _context        Instance // go GAppLaunchContext subclass
 				var startupNotifyId string   // in, none, string, casted *C.gchar
 
-				_context = UnsafeAppLaunchContextFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				_context = UnsafeAppLaunchContextFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				startupNotifyId = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 
 				overrides.LaunchFailed(_context, startupNotifyId)
@@ -44405,7 +44839,7 @@ type Application interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Runs the application.
 	// 
@@ -44482,7 +44916,7 @@ type Application interface {
 	// should not be used from applications like editors that need precise
 	// control over when processes invoked via the commandline will exit and
 	// what their exit status will be.
-	Run([]string) int
+	Run([]string) int32
 	// SendNotification wraps g_application_send_notification
 	// 
 	// The function takes the following parameters:
@@ -44714,7 +45148,7 @@ type Application interface {
 	// The ::command-line signal is emitted on the primary instance when
 	// a commandline is not handled locally. See g_application_run() and
 	// the #GApplicationCommandLine documentation for more information.
-	ConnectCommandLine(func(Application, ApplicationCommandLine) int) gobject.SignalHandle
+	ConnectCommandLine(func(Application, ApplicationCommandLine) int32) gobject.SignalHandle
 	// ConnectHandleLocalOptions connects the provided callback to the "handle-local-options" signal
 	//
 	// The ::handle-local-options signal is emitted on the local instance
@@ -44758,7 +45192,7 @@ type Application interface {
 	// You can override local_command_line() if you need more powerful
 	// capabilities than what is provided here, but this should not
 	// normally be required.
-	ConnectHandleLocalOptions(func(Application, glib.VariantDict) int) gobject.SignalHandle
+	ConnectHandleLocalOptions(func(Application, glib.VariantDict) int32) gobject.SignalHandle
 	// ConnectNameLost connects the provided callback to the "name-lost" signal
 	//
 	// The ::name-lost signal is emitted only on the registered primary instance
@@ -44771,7 +45205,7 @@ type Application interface {
 	//
 	// The ::open signal is emitted on the primary instance when there are
 	// files to open. See g_application_open() for more information.
-	ConnectOpen(func(Application, []File, int, string)) gobject.SignalHandle
+	ConnectOpen(func(Application, []File, int32, string)) gobject.SignalHandle
 	// ConnectShutdown connects the provided callback to the "shutdown" signal
 	//
 	// The ::shutdown signal is emitted only on the registered primary instance
@@ -44802,6 +45236,11 @@ func UnsafeApplicationFromGlibNone(c unsafe.Pointer) Application {
 // UnsafeApplicationFromGlibFull is used to convert raw GApplication pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeApplicationFromGlibFull(c unsafe.Pointer) Application {
 	return gobject.UnsafeObjectFromGlibFull(c).(Application)
+}
+
+// UnsafeApplicationFromGlibBorrow is used to convert raw GApplication pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeApplicationFromGlibBorrow(c unsafe.Pointer) Application {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Application)
 }
 
 func (a *ApplicationInstance) upcastToGApplication() *ApplicationInstance {
@@ -45645,7 +46084,7 @@ func (application *ApplicationInstance) Release() {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Runs the application.
 // 
@@ -45722,7 +46161,7 @@ func (application *ApplicationInstance) Release() {
 // should not be used from applications like editors that need precise
 // control over when processes invoked via the commandline will exit and
 // what their exit status will be.
-func (application *ApplicationInstance) Run(argv []string) int {
+func (application *ApplicationInstance) Run(argv []string) int32 {
 	var carg0 *C.GApplication // in, none, converted
 	var carg1 C.int           // implicit
 	var carg2 **C.char        // in, transfer: none, C Pointers: 2, Name: array[filename], nullable, array (inner: *typesystem.StringPrimitive, length-by: carg1)
@@ -45738,9 +46177,9 @@ func (application *ApplicationInstance) Run(argv []string) int {
 	runtime.KeepAlive(application)
 	runtime.KeepAlive(argv)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -46141,7 +46580,7 @@ func (o *ApplicationInstance) ConnectActivate(fn func(Application)) gobject.Sign
 // The ::command-line signal is emitted on the primary instance when
 // a commandline is not handled locally. See g_application_run() and
 // the #GApplicationCommandLine documentation for more information.
-func (o *ApplicationInstance) ConnectCommandLine(fn func(Application, ApplicationCommandLine) int) gobject.SignalHandle {
+func (o *ApplicationInstance) ConnectCommandLine(fn func(Application, ApplicationCommandLine) int32) gobject.SignalHandle {
 	return o.Connect("command-line", fn)
 }
 
@@ -46188,7 +46627,7 @@ func (o *ApplicationInstance) ConnectCommandLine(fn func(Application, Applicatio
 // You can override local_command_line() if you need more powerful
 // capabilities than what is provided here, but this should not
 // normally be required.
-func (o *ApplicationInstance) ConnectHandleLocalOptions(fn func(Application, glib.VariantDict) int) gobject.SignalHandle {
+func (o *ApplicationInstance) ConnectHandleLocalOptions(fn func(Application, glib.VariantDict) int32) gobject.SignalHandle {
 	return o.Connect("handle-local-options", fn)
 }
 
@@ -46207,7 +46646,7 @@ func (o *ApplicationInstance) ConnectNameLost(fn func(Application) bool) gobject
 //
 // The ::open signal is emitted on the primary instance when there are
 // files to open. See g_application_open() for more information.
-func (o *ApplicationInstance) ConnectOpen(fn func(Application, []File, int, string)) gobject.SignalHandle {
+func (o *ApplicationInstance) ConnectOpen(fn func(Application, []File, int32, string)) gobject.SignalHandle {
 	return o.Connect("open", fn)
 }
 
@@ -46247,8 +46686,8 @@ type ApplicationOverrides[Instance Application] struct {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
-	CommandLine func(Instance, ApplicationCommandLine) int
+	// 	- goret int32 
+	CommandLine func(Instance, ApplicationCommandLine) int32
 	// DBusRegister allows you to override the implementation of the virtual method dbus_register.
 	// The function takes the following parameters:
 	// 
@@ -46273,8 +46712,8 @@ type ApplicationOverrides[Instance Application] struct {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
-	HandleLocalOptions func(Instance, *glib.VariantDict) int
+	// 	- goret int32 
+	HandleLocalOptions func(Instance, *glib.VariantDict) int32
 	// NameLost allows you to override the implementation of the virtual method name_lost.
 	// The function returns the following values:
 	// 
@@ -46311,7 +46750,7 @@ func UnsafeApplyApplicationOverrides[Instance Application](gclass unsafe.Pointer
 			func(carg0 *C.GApplication) {
 				var application Instance // go GApplication subclass
 
-				application = UnsafeApplicationFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				application = UnsafeApplicationFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				overrides.Activate(application)
 			},
@@ -46327,7 +46766,7 @@ func UnsafeApplyApplicationOverrides[Instance Application](gclass unsafe.Pointer
 				var application Instance             // go GApplication subclass
 				var builder     *glib.VariantBuilder // in, none, converted
 
-				application = UnsafeApplicationFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				application = UnsafeApplicationFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				builder = glib.UnsafeVariantBuilderFromGlibNone(unsafe.Pointer(carg1))
 
 				overrides.AddPlatformData(application, builder)
@@ -46343,9 +46782,9 @@ func UnsafeApplyApplicationOverrides[Instance Application](gclass unsafe.Pointer
 			func(carg0 *C.GApplication, carg1 *C.GApplicationCommandLine) (cret C.int) {
 				var application Instance               // go GApplication subclass
 				var commandLine ApplicationCommandLine // in, none, converted
-				var goret       int                    // return, none, casted, casted C.gint
+				var goret       int32                  // return, none, casted, casted C.gint
 
-				application = UnsafeApplicationFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				application = UnsafeApplicationFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				commandLine = UnsafeApplicationCommandLineFromGlibNone(unsafe.Pointer(carg1))
 
 				goret = overrides.CommandLine(application, commandLine)
@@ -46369,7 +46808,7 @@ func UnsafeApplyApplicationOverrides[Instance Application](gclass unsafe.Pointer
 				var goret       bool           // return
 				var _goerr      error          // out, full, converted
 
-				application = UnsafeApplicationFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				application = UnsafeApplicationFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				connection = UnsafeDBusConnectionFromGlibNone(unsafe.Pointer(carg1))
 				objectPath = C.GoString((*C.char)(unsafe.Pointer(carg2)))
 
@@ -46395,7 +46834,7 @@ func UnsafeApplyApplicationOverrides[Instance Application](gclass unsafe.Pointer
 				var connection  DBusConnection // in, none, converted
 				var objectPath  string         // in, none, string
 
-				application = UnsafeApplicationFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				application = UnsafeApplicationFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				connection = UnsafeDBusConnectionFromGlibNone(unsafe.Pointer(carg1))
 				objectPath = C.GoString((*C.char)(unsafe.Pointer(carg2)))
 
@@ -46412,9 +46851,9 @@ func UnsafeApplyApplicationOverrides[Instance Application](gclass unsafe.Pointer
 			func(carg0 *C.GApplication, carg1 *C.GVariantDict) (cret C.gint) {
 				var application Instance          // go GApplication subclass
 				var options     *glib.VariantDict // in, none, converted
-				var goret       int               // return, none, casted
+				var goret       int32             // return, none, casted
 
-				application = UnsafeApplicationFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				application = UnsafeApplicationFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				options = glib.UnsafeVariantDictFromGlibNone(unsafe.Pointer(carg1))
 
 				goret = overrides.HandleLocalOptions(application, options)
@@ -46435,7 +46874,7 @@ func UnsafeApplyApplicationOverrides[Instance Application](gclass unsafe.Pointer
 				var application Instance // go GApplication subclass
 				var goret       bool     // return
 
-				application = UnsafeApplicationFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				application = UnsafeApplicationFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.NameLost(application)
 
@@ -46458,7 +46897,7 @@ func UnsafeApplyApplicationOverrides[Instance Application](gclass unsafe.Pointer
 				var files       []File   // in, transfer: none, C Pointers: 2, Name: array[File], array (inner: *typesystem.Interface, length-by: carg2)
 				var hint        string   // in, none, string
 
-				application = UnsafeApplicationFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				application = UnsafeApplicationFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				_ = files
 				_ = carg1
 				_ = carg2
@@ -46478,7 +46917,7 @@ func UnsafeApplyApplicationOverrides[Instance Application](gclass unsafe.Pointer
 			func(carg0 *C.GApplication) {
 				var application Instance // go GApplication subclass
 
-				application = UnsafeApplicationFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				application = UnsafeApplicationFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				overrides.QuitMainloop(application)
 			},
@@ -46493,7 +46932,7 @@ func UnsafeApplyApplicationOverrides[Instance Application](gclass unsafe.Pointer
 			func(carg0 *C.GApplication) {
 				var application Instance // go GApplication subclass
 
-				application = UnsafeApplicationFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				application = UnsafeApplicationFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				overrides.RunMainloop(application)
 			},
@@ -46508,7 +46947,7 @@ func UnsafeApplyApplicationOverrides[Instance Application](gclass unsafe.Pointer
 			func(carg0 *C.GApplication) {
 				var application Instance // go GApplication subclass
 
-				application = UnsafeApplicationFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				application = UnsafeApplicationFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				overrides.Shutdown(application)
 			},
@@ -46523,7 +46962,7 @@ func UnsafeApplyApplicationOverrides[Instance Application](gclass unsafe.Pointer
 			func(carg0 *C.GApplication) {
 				var application Instance // go GApplication subclass
 
-				application = UnsafeApplicationFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				application = UnsafeApplicationFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				overrides.Startup(application)
 			},
@@ -46778,7 +47217,7 @@ type ApplicationCommandLine interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- argc int: the length of the arguments array, or %NULL 
+	// 	- argc int32: the length of the arguments array, or %NULL 
 	// 	- goret []string 
 	//
 	// Gets the list of arguments that was passed on the command line.
@@ -46792,7 +47231,7 @@ type ApplicationCommandLine interface {
 	// 
 	// The return value is %NULL-terminated and should be freed using
 	// g_strfreev().
-	GetArguments() (int, []string)
+	GetArguments() (int32, []string)
 	// GetCwd wraps g_application_command_line_get_cwd
 	// 
 	// The function returns the following values:
@@ -46834,11 +47273,11 @@ type ApplicationCommandLine interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Gets the exit status of @cmdline.  See
 	// g_application_command_line_set_exit_status() for more information.
-	GetExitStatus() int
+	GetExitStatus() int32
 	// GetIsRemote wraps g_application_command_line_get_is_remote
 	// 
 	// The function returns the following values:
@@ -46933,7 +47372,7 @@ type ApplicationCommandLine interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- exitStatus int: the exit status 
+	// 	- exitStatus int32: the exit status 
 	//
 	// Sets the exit status that will be used when the invoking process
 	// exits.
@@ -46959,7 +47398,7 @@ type ApplicationCommandLine interface {
 	// 
 	// This method is a no-op if g_application_command_line_done() has
 	// been called.
-	SetExitStatus(int)
+	SetExitStatus(int32)
 }
 
 func unsafeWrapApplicationCommandLine(base *gobject.ObjectInstance) *ApplicationCommandLineInstance {
@@ -46980,6 +47419,11 @@ func UnsafeApplicationCommandLineFromGlibNone(c unsafe.Pointer) ApplicationComma
 // UnsafeApplicationCommandLineFromGlibFull is used to convert raw GApplicationCommandLine pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeApplicationCommandLineFromGlibFull(c unsafe.Pointer) ApplicationCommandLine {
 	return gobject.UnsafeObjectFromGlibFull(c).(ApplicationCommandLine)
+}
+
+// UnsafeApplicationCommandLineFromGlibBorrow is used to convert raw GApplicationCommandLine pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeApplicationCommandLineFromGlibBorrow(c unsafe.Pointer) ApplicationCommandLine {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(ApplicationCommandLine)
 }
 
 func (a *ApplicationCommandLineInstance) upcastToGApplicationCommandLine() *ApplicationCommandLineInstance {
@@ -47062,7 +47506,7 @@ func (cmdline *ApplicationCommandLineInstance) Done() {
 // 
 // The function returns the following values:
 // 
-// 	- argc int: the length of the arguments array, or %NULL 
+// 	- argc int32: the length of the arguments array, or %NULL 
 // 	- goret []string 
 //
 // Gets the list of arguments that was passed on the command line.
@@ -47076,7 +47520,7 @@ func (cmdline *ApplicationCommandLineInstance) Done() {
 // 
 // The return value is %NULL-terminated and should be freed using
 // g_strfreev().
-func (cmdline *ApplicationCommandLineInstance) GetArguments() (int, []string) {
+func (cmdline *ApplicationCommandLineInstance) GetArguments() (int32, []string) {
 	var carg0 *C.GApplicationCommandLine // in, none, converted
 	var carg1 C.int                      // out, full, casted, casted C.gint
 	var cret  **C.gchar                  // return, transfer: full, C Pointers: 2, Name: array[filename], scope: , array (inner: *typesystem.StringPrimitive)
@@ -47086,10 +47530,10 @@ func (cmdline *ApplicationCommandLineInstance) GetArguments() (int, []string) {
 	cret = C.g_application_command_line_get_arguments(carg0, &carg1)
 	runtime.KeepAlive(cmdline)
 
-	var argc  int
+	var argc  int32
 	var goret []string
 
-	argc = int(carg1)
+	argc = int32(carg1)
 	_ = goret
 	_ = cret
 	panic("unimplemented conversion of []string (gchar**)")
@@ -47172,11 +47616,11 @@ func (cmdline *ApplicationCommandLineInstance) GetEnviron() []string {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Gets the exit status of @cmdline.  See
 // g_application_command_line_set_exit_status() for more information.
-func (cmdline *ApplicationCommandLineInstance) GetExitStatus() int {
+func (cmdline *ApplicationCommandLineInstance) GetExitStatus() int32 {
 	var carg0 *C.GApplicationCommandLine // in, none, converted
 	var cret  C.int                      // return, none, casted, casted C.gint
 
@@ -47185,9 +47629,9 @@ func (cmdline *ApplicationCommandLineInstance) GetExitStatus() int {
 	cret = C.g_application_command_line_get_exit_status(carg0)
 	runtime.KeepAlive(cmdline)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -47380,7 +47824,7 @@ func (cmdline *ApplicationCommandLineInstance) PrinterrLiteral(message string) {
 // 
 // The function takes the following parameters:
 // 
-// 	- exitStatus int: the exit status 
+// 	- exitStatus int32: the exit status 
 //
 // Sets the exit status that will be used when the invoking process
 // exits.
@@ -47406,7 +47850,7 @@ func (cmdline *ApplicationCommandLineInstance) PrinterrLiteral(message string) {
 // 
 // This method is a no-op if g_application_command_line_done() has
 // been called.
-func (cmdline *ApplicationCommandLineInstance) SetExitStatus(exitStatus int) {
+func (cmdline *ApplicationCommandLineInstance) SetExitStatus(exitStatus int32) {
 	var carg0 *C.GApplicationCommandLine // in, none, converted
 	var carg1 C.int                      // in, none, casted, casted C.gint
 
@@ -47458,7 +47902,7 @@ func UnsafeApplyApplicationCommandLineOverrides[Instance ApplicationCommandLine]
 			func(carg0 *C.GApplicationCommandLine) {
 				var cmdline Instance // go GApplicationCommandLine subclass
 
-				cmdline = UnsafeApplicationCommandLineFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				cmdline = UnsafeApplicationCommandLineFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				overrides.Done(cmdline)
 			},
@@ -47474,7 +47918,7 @@ func UnsafeApplyApplicationCommandLineOverrides[Instance ApplicationCommandLine]
 				var cmdline Instance    // go GApplicationCommandLine subclass
 				var goret   InputStream // return, full, converted, nullable
 
-				cmdline = UnsafeApplicationCommandLineFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				cmdline = UnsafeApplicationCommandLineFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetStdin(cmdline)
 
@@ -47496,7 +47940,7 @@ func UnsafeApplyApplicationCommandLineOverrides[Instance ApplicationCommandLine]
 				var cmdline Instance // go GApplicationCommandLine subclass
 				var message string   // in, none, string
 
-				cmdline = UnsafeApplicationCommandLineFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				cmdline = UnsafeApplicationCommandLineFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				message = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 
 				overrides.PrintLiteral(cmdline, message)
@@ -47513,7 +47957,7 @@ func UnsafeApplyApplicationCommandLineOverrides[Instance ApplicationCommandLine]
 				var cmdline Instance // go GApplicationCommandLine subclass
 				var message string   // in, none, string
 
-				cmdline = UnsafeApplicationCommandLineFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				cmdline = UnsafeApplicationCommandLineFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				message = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 
 				overrides.PrinterrLiteral(cmdline, message)
@@ -47592,6 +48036,11 @@ func UnsafeBytesIconFromGlibNone(c unsafe.Pointer) BytesIcon {
 // UnsafeBytesIconFromGlibFull is used to convert raw GBytesIcon pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeBytesIconFromGlibFull(c unsafe.Pointer) BytesIcon {
 	return gobject.UnsafeObjectFromGlibFull(c).(BytesIcon)
+}
+
+// UnsafeBytesIconFromGlibBorrow is used to convert raw GBytesIcon pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeBytesIconFromGlibBorrow(c unsafe.Pointer) BytesIcon {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(BytesIcon)
 }
 
 func (b *BytesIconInstance) upcastToGBytesIcon() *BytesIconInstance {
@@ -47721,6 +48170,11 @@ func UnsafeCharsetConverterFromGlibNone(c unsafe.Pointer) CharsetConverter {
 // UnsafeCharsetConverterFromGlibFull is used to convert raw GCharsetConverter pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeCharsetConverterFromGlibFull(c unsafe.Pointer) CharsetConverter {
 	return gobject.UnsafeObjectFromGlibFull(c).(CharsetConverter)
+}
+
+// UnsafeCharsetConverterFromGlibBorrow is used to convert raw GCharsetConverter pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeCharsetConverterFromGlibBorrow(c unsafe.Pointer) CharsetConverter {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(CharsetConverter)
 }
 
 func (c *CharsetConverterInstance) upcastToGCharsetConverter() *CharsetConverterInstance {
@@ -47982,6 +48436,11 @@ func UnsafeCredentialsFromGlibFull(c unsafe.Pointer) Credentials {
 	return gobject.UnsafeObjectFromGlibFull(c).(Credentials)
 }
 
+// UnsafeCredentialsFromGlibBorrow is used to convert raw GCredentials pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeCredentialsFromGlibBorrow(c unsafe.Pointer) Credentials {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Credentials)
+}
+
 func (c *CredentialsInstance) upcastToGCredentials() *CredentialsInstance {
 	return c
 }
@@ -48121,6 +48580,11 @@ func UnsafeDBusActionGroupFromGlibNone(c unsafe.Pointer) DBusActionGroup {
 // UnsafeDBusActionGroupFromGlibFull is used to convert raw GDBusActionGroup pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeDBusActionGroupFromGlibFull(c unsafe.Pointer) DBusActionGroup {
 	return gobject.UnsafeObjectFromGlibFull(c).(DBusActionGroup)
+}
+
+// UnsafeDBusActionGroupFromGlibBorrow is used to convert raw GDBusActionGroup pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeDBusActionGroupFromGlibBorrow(c unsafe.Pointer) DBusActionGroup {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(DBusActionGroup)
 }
 
 func (d *DBusActionGroupInstance) upcastToGDBusActionGroup() *DBusActionGroupInstance {
@@ -48320,6 +48784,11 @@ func UnsafeDBusAuthObserverFromGlibNone(c unsafe.Pointer) DBusAuthObserver {
 // UnsafeDBusAuthObserverFromGlibFull is used to convert raw GDBusAuthObserver pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeDBusAuthObserverFromGlibFull(c unsafe.Pointer) DBusAuthObserver {
 	return gobject.UnsafeObjectFromGlibFull(c).(DBusAuthObserver)
+}
+
+// UnsafeDBusAuthObserverFromGlibBorrow is used to convert raw GDBusAuthObserver pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeDBusAuthObserverFromGlibBorrow(c unsafe.Pointer) DBusAuthObserver {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(DBusAuthObserver)
 }
 
 func (d *DBusAuthObserverInstance) upcastToGDBusAuthObserver() *DBusAuthObserverInstance {
@@ -48875,7 +49344,7 @@ type DBusConnection interface {
 	// 	- cancellable context.Context (nullable): a #GCancellable or %NULL 
 	// 	- message DBusMessage: a #GDBusMessage 
 	// 	- flags DBusSendMessageFlags: flags affecting how the message is sent 
-	// 	- timeoutMsec int: the timeout in milliseconds, -1 to use the default
+	// 	- timeoutMsec int32: the timeout in milliseconds, -1 to use the default
 	//     timeout or %G_MAXINT for no timeout 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback to call when the request
 	//     is satisfied or %NULL if you don't care about the result 
@@ -48914,7 +49383,7 @@ type DBusConnection interface {
 	// See this [server][gdbus-server] and [client][gdbus-unix-fd-client]
 	// for an example of how to use this low-level API to send and receive
 	// UNIX file descriptors.
-	SendMessageWithReply(context.Context, DBusMessage, DBusSendMessageFlags, int, AsyncReadyCallback) uint32
+	SendMessageWithReply(context.Context, DBusMessage, DBusSendMessageFlags, int32, AsyncReadyCallback) uint32
 	// SendMessageWithReplyFinish wraps g_dbus_connection_send_message_with_reply_finish
 	// 
 	// The function takes the following parameters:
@@ -48945,7 +49414,7 @@ type DBusConnection interface {
 	// 	- cancellable context.Context (nullable): a #GCancellable or %NULL 
 	// 	- message DBusMessage: a #GDBusMessage 
 	// 	- flags DBusSendMessageFlags: flags affecting how the message is sent. 
-	// 	- timeoutMsec int: the timeout in milliseconds, -1 to use the default
+	// 	- timeoutMsec int32: the timeout in milliseconds, -1 to use the default
 	//     timeout or %G_MAXINT for no timeout 
 	// 
 	// The function returns the following values:
@@ -48985,7 +49454,7 @@ type DBusConnection interface {
 	// 
 	// Note that @message must be unlocked, unless @flags contain the
 	// %G_DBUS_SEND_MESSAGE_FLAGS_PRESERVE_SERIAL flag.
-	SendMessageWithReplySync(context.Context, DBusMessage, DBusSendMessageFlags, int) (uint32, DBusMessage, error)
+	SendMessageWithReplySync(context.Context, DBusMessage, DBusSendMessageFlags, int32) (uint32, DBusMessage, error)
 	// SetExitOnClose wraps g_dbus_connection_set_exit_on_close
 	// 
 	// The function takes the following parameters:
@@ -49122,6 +49591,11 @@ func UnsafeDBusConnectionFromGlibNone(c unsafe.Pointer) DBusConnection {
 // UnsafeDBusConnectionFromGlibFull is used to convert raw GDBusConnection pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeDBusConnectionFromGlibFull(c unsafe.Pointer) DBusConnection {
 	return gobject.UnsafeObjectFromGlibFull(c).(DBusConnection)
+}
+
+// UnsafeDBusConnectionFromGlibBorrow is used to convert raw GDBusConnection pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeDBusConnectionFromGlibBorrow(c unsafe.Pointer) DBusConnection {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(DBusConnection)
 }
 
 func (d *DBusConnectionInstance) upcastToGDBusConnection() *DBusConnectionInstance {
@@ -50243,7 +50717,7 @@ func (connection *DBusConnectionInstance) SendMessage(message DBusMessage, flags
 // 	- cancellable context.Context (nullable): a #GCancellable or %NULL 
 // 	- message DBusMessage: a #GDBusMessage 
 // 	- flags DBusSendMessageFlags: flags affecting how the message is sent 
-// 	- timeoutMsec int: the timeout in milliseconds, -1 to use the default
+// 	- timeoutMsec int32: the timeout in milliseconds, -1 to use the default
 //     timeout or %G_MAXINT for no timeout 
 // 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback to call when the request
 //     is satisfied or %NULL if you don't care about the result 
@@ -50282,7 +50756,7 @@ func (connection *DBusConnectionInstance) SendMessage(message DBusMessage, flags
 // See this [server][gdbus-server] and [client][gdbus-unix-fd-client]
 // for an example of how to use this low-level API to send and receive
 // UNIX file descriptors.
-func (connection *DBusConnectionInstance) SendMessageWithReply(cancellable context.Context, message DBusMessage, flags DBusSendMessageFlags, timeoutMsec int, callback AsyncReadyCallback) uint32 {
+func (connection *DBusConnectionInstance) SendMessageWithReply(cancellable context.Context, message DBusMessage, flags DBusSendMessageFlags, timeoutMsec int32, callback AsyncReadyCallback) uint32 {
 	var carg0 *C.GDBusConnection      // in, none, converted
 	var carg5 *C.GCancellable         // in, none, converted, nullable
 	var carg1 *C.GDBusMessage         // in, none, converted
@@ -50372,7 +50846,7 @@ func (connection *DBusConnectionInstance) SendMessageWithReplyFinish(res AsyncRe
 // 	- cancellable context.Context (nullable): a #GCancellable or %NULL 
 // 	- message DBusMessage: a #GDBusMessage 
 // 	- flags DBusSendMessageFlags: flags affecting how the message is sent. 
-// 	- timeoutMsec int: the timeout in milliseconds, -1 to use the default
+// 	- timeoutMsec int32: the timeout in milliseconds, -1 to use the default
 //     timeout or %G_MAXINT for no timeout 
 // 
 // The function returns the following values:
@@ -50412,7 +50886,7 @@ func (connection *DBusConnectionInstance) SendMessageWithReplyFinish(res AsyncRe
 // 
 // Note that @message must be unlocked, unless @flags contain the
 // %G_DBUS_SEND_MESSAGE_FLAGS_PRESERVE_SERIAL flag.
-func (connection *DBusConnectionInstance) SendMessageWithReplySync(cancellable context.Context, message DBusMessage, flags DBusSendMessageFlags, timeoutMsec int) (uint32, DBusMessage, error) {
+func (connection *DBusConnectionInstance) SendMessageWithReplySync(cancellable context.Context, message DBusMessage, flags DBusSendMessageFlags, timeoutMsec int32) (uint32, DBusMessage, error) {
 	var carg0 *C.GDBusConnection      // in, none, converted
 	var carg5 *C.GCancellable         // in, none, converted, nullable
 	var carg1 *C.GDBusMessage         // in, none, converted
@@ -50857,6 +51331,11 @@ func UnsafeDBusInterfaceSkeletonFromGlibFull(c unsafe.Pointer) DBusInterfaceSkel
 	return gobject.UnsafeObjectFromGlibFull(c).(DBusInterfaceSkeleton)
 }
 
+// UnsafeDBusInterfaceSkeletonFromGlibBorrow is used to convert raw GDBusInterfaceSkeleton pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeDBusInterfaceSkeletonFromGlibBorrow(c unsafe.Pointer) DBusInterfaceSkeleton {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(DBusInterfaceSkeleton)
+}
+
 func (d *DBusInterfaceSkeletonInstance) upcastToGDBusInterfaceSkeleton() *DBusInterfaceSkeletonInstance {
 	return d
 }
@@ -51263,7 +51742,7 @@ func UnsafeApplyDBusInterfaceSkeletonOverrides[Instance DBusInterfaceSkeleton](g
 			func(carg0 *C.GDBusInterfaceSkeleton) {
 				var interface_ Instance // go GDBusInterfaceSkeleton subclass
 
-				interface_ = UnsafeDBusInterfaceSkeletonFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				interface_ = UnsafeDBusInterfaceSkeletonFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				overrides.Flush(interface_)
 			},
@@ -51280,7 +51759,7 @@ func UnsafeApplyDBusInterfaceSkeletonOverrides[Instance DBusInterfaceSkeleton](g
 				var invocation DBusMethodInvocation // in, none, converted
 				var goret      bool                 // return
 
-				interface_ = UnsafeDBusInterfaceSkeletonFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				interface_ = UnsafeDBusInterfaceSkeletonFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				invocation = UnsafeDBusMethodInvocationFromGlibNone(unsafe.Pointer(carg1))
 
 				goret = overrides.GAuthorizeMethod(interface_, invocation)
@@ -51303,7 +51782,7 @@ func UnsafeApplyDBusInterfaceSkeletonOverrides[Instance DBusInterfaceSkeleton](g
 				var interface_ Instance           // go GDBusInterfaceSkeleton subclass
 				var goret      *DBusInterfaceInfo // return, none, converted
 
-				interface_ = UnsafeDBusInterfaceSkeletonFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				interface_ = UnsafeDBusInterfaceSkeletonFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetInfo(interface_)
 
@@ -51323,7 +51802,7 @@ func UnsafeApplyDBusInterfaceSkeletonOverrides[Instance DBusInterfaceSkeleton](g
 				var interface_ Instance             // go GDBusInterfaceSkeleton subclass
 				var goret      *DBusInterfaceVTable // return, none, converted
 
-				interface_ = UnsafeDBusInterfaceSkeletonFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				interface_ = UnsafeDBusInterfaceSkeletonFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetVtable(interface_)
 
@@ -51743,6 +52222,11 @@ func UnsafeDBusMessageFromGlibNone(c unsafe.Pointer) DBusMessage {
 // UnsafeDBusMessageFromGlibFull is used to convert raw GDBusMessage pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeDBusMessageFromGlibFull(c unsafe.Pointer) DBusMessage {
 	return gobject.UnsafeObjectFromGlibFull(c).(DBusMessage)
+}
+
+// UnsafeDBusMessageFromGlibBorrow is used to convert raw GDBusMessage pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeDBusMessageFromGlibBorrow(c unsafe.Pointer) DBusMessage {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(DBusMessage)
 }
 
 func (d *DBusMessageInstance) upcastToGDBusMessage() *DBusMessageInstance {
@@ -52970,7 +53454,7 @@ type DBusMethodInvocation interface {
 	// The function takes the following parameters:
 	// 
 	// 	- domain glib.Quark: A #GQuark for the #GError error domain. 
-	// 	- code int: The error code. 
+	// 	- code int32: The error code. 
 	// 	- message string: The error message. 
 	//
 	// Like g_dbus_method_invocation_return_error() but without printf()-style formatting.
@@ -52978,7 +53462,7 @@ type DBusMethodInvocation interface {
 	// This method will take ownership of @invocation. See
 	// #GDBusInterfaceVTable for more information about the ownership of
 	// @invocation.
-	ReturnErrorLiteral(glib.Quark, int, string)
+	ReturnErrorLiteral(glib.Quark, int32, string)
 	// ReturnGError wraps g_dbus_method_invocation_return_gerror
 	// 
 	// The function takes the following parameters:
@@ -53012,6 +53496,11 @@ func UnsafeDBusMethodInvocationFromGlibNone(c unsafe.Pointer) DBusMethodInvocati
 // UnsafeDBusMethodInvocationFromGlibFull is used to convert raw GDBusMethodInvocation pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeDBusMethodInvocationFromGlibFull(c unsafe.Pointer) DBusMethodInvocation {
 	return gobject.UnsafeObjectFromGlibFull(c).(DBusMethodInvocation)
+}
+
+// UnsafeDBusMethodInvocationFromGlibBorrow is used to convert raw GDBusMethodInvocation pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeDBusMethodInvocationFromGlibBorrow(c unsafe.Pointer) DBusMethodInvocation {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(DBusMethodInvocation)
 }
 
 func (d *DBusMethodInvocationInstance) upcastToGDBusMethodInvocation() *DBusMethodInvocationInstance {
@@ -53277,7 +53766,7 @@ func (invocation *DBusMethodInvocationInstance) ReturnDBusError(errorName string
 // The function takes the following parameters:
 // 
 // 	- domain glib.Quark: A #GQuark for the #GError error domain. 
-// 	- code int: The error code. 
+// 	- code int32: The error code. 
 // 	- message string: The error message. 
 //
 // Like g_dbus_method_invocation_return_error() but without printf()-style formatting.
@@ -53285,7 +53774,7 @@ func (invocation *DBusMethodInvocationInstance) ReturnDBusError(errorName string
 // This method will take ownership of @invocation. See
 // #GDBusInterfaceVTable for more information about the ownership of
 // @invocation.
-func (invocation *DBusMethodInvocationInstance) ReturnErrorLiteral(domain glib.Quark, code int, message string) {
+func (invocation *DBusMethodInvocationInstance) ReturnErrorLiteral(domain glib.Quark, code int32, message string) {
 	var carg0 *C.GDBusMethodInvocation // in, none, converted
 	var carg1 C.GQuark                 // in, none, casted, alias
 	var carg2 C.gint                   // in, none, casted
@@ -53476,6 +53965,11 @@ func UnsafeDBusObjectManagerClientFromGlibNone(c unsafe.Pointer) DBusObjectManag
 // UnsafeDBusObjectManagerClientFromGlibFull is used to convert raw GDBusObjectManagerClient pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeDBusObjectManagerClientFromGlibFull(c unsafe.Pointer) DBusObjectManagerClient {
 	return gobject.UnsafeObjectFromGlibFull(c).(DBusObjectManagerClient)
+}
+
+// UnsafeDBusObjectManagerClientFromGlibBorrow is used to convert raw GDBusObjectManagerClient pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeDBusObjectManagerClientFromGlibBorrow(c unsafe.Pointer) DBusObjectManagerClient {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(DBusObjectManagerClient)
 }
 
 func (d *DBusObjectManagerClientInstance) upcastToGDBusObjectManagerClient() *DBusObjectManagerClientInstance {
@@ -53827,6 +54321,11 @@ func UnsafeDBusObjectManagerServerFromGlibFull(c unsafe.Pointer) DBusObjectManag
 	return gobject.UnsafeObjectFromGlibFull(c).(DBusObjectManagerServer)
 }
 
+// UnsafeDBusObjectManagerServerFromGlibBorrow is used to convert raw GDBusObjectManagerServer pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeDBusObjectManagerServerFromGlibBorrow(c unsafe.Pointer) DBusObjectManagerServer {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(DBusObjectManagerServer)
+}
+
 func (d *DBusObjectManagerServerInstance) upcastToGDBusObjectManagerServer() *DBusObjectManagerServerInstance {
 	return d
 }
@@ -54129,6 +54628,11 @@ func UnsafeDBusObjectProxyFromGlibFull(c unsafe.Pointer) DBusObjectProxy {
 	return gobject.UnsafeObjectFromGlibFull(c).(DBusObjectProxy)
 }
 
+// UnsafeDBusObjectProxyFromGlibBorrow is used to convert raw GDBusObjectProxy pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeDBusObjectProxyFromGlibBorrow(c unsafe.Pointer) DBusObjectProxy {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(DBusObjectProxy)
+}
+
 func (d *DBusObjectProxyInstance) upcastToGDBusObjectProxy() *DBusObjectProxyInstance {
 	return d
 }
@@ -54338,6 +54842,11 @@ func UnsafeDBusObjectSkeletonFromGlibFull(c unsafe.Pointer) DBusObjectSkeleton {
 	return gobject.UnsafeObjectFromGlibFull(c).(DBusObjectSkeleton)
 }
 
+// UnsafeDBusObjectSkeletonFromGlibBorrow is used to convert raw GDBusObjectSkeleton pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeDBusObjectSkeletonFromGlibBorrow(c unsafe.Pointer) DBusObjectSkeleton {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(DBusObjectSkeleton)
+}
+
 func (d *DBusObjectSkeletonInstance) upcastToGDBusObjectSkeleton() *DBusObjectSkeletonInstance {
 	return d
 }
@@ -54531,7 +55040,7 @@ func UnsafeApplyDBusObjectSkeletonOverrides[Instance DBusObjectSkeleton](gclass 
 				var invocation DBusMethodInvocation  // in, none, converted
 				var goret      bool                  // return
 
-				object = UnsafeDBusObjectSkeletonFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				object = UnsafeDBusObjectSkeletonFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				interface_ = UnsafeDBusInterfaceSkeletonFromGlibNone(unsafe.Pointer(carg1))
 				invocation = UnsafeDBusMethodInvocationFromGlibNone(unsafe.Pointer(carg2))
 
@@ -54653,14 +55162,14 @@ type DBusProxy interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Gets the timeout to use if -1 (specifying default timeout) is
 	// passed as @timeout_msec in the g_dbus_proxy_call() and
 	// g_dbus_proxy_call_sync() functions.
 	// 
 	// See the #GDBusProxy:g-default-timeout property for more details.
-	GetDefaultTimeout() int
+	GetDefaultTimeout() int32
 	// GetFlags wraps g_dbus_proxy_get_flags
 	// 
 	// The function returns the following values:
@@ -54722,14 +55231,14 @@ type DBusProxy interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- timeoutMsec int: Timeout in milliseconds. 
+	// 	- timeoutMsec int32: Timeout in milliseconds. 
 	//
 	// Sets the timeout to use if -1 (specifying default timeout) is
 	// passed as @timeout_msec in the g_dbus_proxy_call() and
 	// g_dbus_proxy_call_sync() functions.
 	// 
 	// See the #GDBusProxy:g-default-timeout property for more details.
-	SetDefaultTimeout(int)
+	SetDefaultTimeout(int32)
 	// SetInterfaceInfo wraps g_dbus_proxy_set_interface_info
 	// 
 	// The function takes the following parameters:
@@ -54761,6 +55270,11 @@ func UnsafeDBusProxyFromGlibNone(c unsafe.Pointer) DBusProxy {
 // UnsafeDBusProxyFromGlibFull is used to convert raw GDBusProxy pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeDBusProxyFromGlibFull(c unsafe.Pointer) DBusProxy {
 	return gobject.UnsafeObjectFromGlibFull(c).(DBusProxy)
+}
+
+// UnsafeDBusProxyFromGlibBorrow is used to convert raw GDBusProxy pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeDBusProxyFromGlibBorrow(c unsafe.Pointer) DBusProxy {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(DBusProxy)
 }
 
 func (d *DBusProxyInstance) upcastToGDBusProxy() *DBusProxyInstance {
@@ -55189,14 +55703,14 @@ func (proxy *DBusProxyInstance) GetConnection() DBusConnection {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Gets the timeout to use if -1 (specifying default timeout) is
 // passed as @timeout_msec in the g_dbus_proxy_call() and
 // g_dbus_proxy_call_sync() functions.
 // 
 // See the #GDBusProxy:g-default-timeout property for more details.
-func (proxy *DBusProxyInstance) GetDefaultTimeout() int {
+func (proxy *DBusProxyInstance) GetDefaultTimeout() int32 {
 	var carg0 *C.GDBusProxy // in, none, converted
 	var cret  C.gint        // return, none, casted
 
@@ -55205,9 +55719,9 @@ func (proxy *DBusProxyInstance) GetDefaultTimeout() int {
 	cret = C.g_dbus_proxy_get_default_timeout(carg0)
 	runtime.KeepAlive(proxy)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -55370,14 +55884,14 @@ func (proxy *DBusProxyInstance) GetObjectPath() string {
 // 
 // The function takes the following parameters:
 // 
-// 	- timeoutMsec int: Timeout in milliseconds. 
+// 	- timeoutMsec int32: Timeout in milliseconds. 
 //
 // Sets the timeout to use if -1 (specifying default timeout) is
 // passed as @timeout_msec in the g_dbus_proxy_call() and
 // g_dbus_proxy_call_sync() functions.
 // 
 // See the #GDBusProxy:g-default-timeout property for more details.
-func (proxy *DBusProxyInstance) SetDefaultTimeout(timeoutMsec int) {
+func (proxy *DBusProxyInstance) SetDefaultTimeout(timeoutMsec int32) {
 	var carg0 *C.GDBusProxy // in, none, converted
 	var carg1 C.gint        // in, none, casted
 
@@ -55575,6 +56089,11 @@ func UnsafeDBusServerFromGlibNone(c unsafe.Pointer) DBusServer {
 // UnsafeDBusServerFromGlibFull is used to convert raw GDBusServer pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeDBusServerFromGlibFull(c unsafe.Pointer) DBusServer {
 	return gobject.UnsafeObjectFromGlibFull(c).(DBusServer)
+}
+
+// UnsafeDBusServerFromGlibBorrow is used to convert raw GDBusServer pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeDBusServerFromGlibBorrow(c unsafe.Pointer) DBusServer {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(DBusServer)
 }
 
 func (d *DBusServerInstance) upcastToGDBusServer() *DBusServerInstance {
@@ -55999,6 +56518,11 @@ func UnsafeDebugControllerDBusFromGlibFull(c unsafe.Pointer) DebugControllerDBus
 	return gobject.UnsafeObjectFromGlibFull(c).(DebugControllerDBus)
 }
 
+// UnsafeDebugControllerDBusFromGlibBorrow is used to convert raw GDebugControllerDBus pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeDebugControllerDBusFromGlibBorrow(c unsafe.Pointer) DebugControllerDBus {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(DebugControllerDBus)
+}
+
 func (d *DebugControllerDBusInstance) upcastToGDebugControllerDBus() *DebugControllerDBusInstance {
 	return d
 }
@@ -56144,7 +56668,7 @@ func UnsafeApplyDebugControllerDBusOverrides[Instance DebugControllerDBus](gclas
 				var invocation DBusMethodInvocation // in, none, converted
 				var goret      bool                 // return
 
-				controller = UnsafeDebugControllerDBusFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				controller = UnsafeDebugControllerDBusFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				invocation = UnsafeDBusMethodInvocationFromGlibNone(unsafe.Pointer(carg1))
 
 				goret = overrides.Authorize(controller, invocation)
@@ -56241,6 +56765,11 @@ func UnsafeEmblemFromGlibNone(c unsafe.Pointer) Emblem {
 // UnsafeEmblemFromGlibFull is used to convert raw GEmblem pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeEmblemFromGlibFull(c unsafe.Pointer) Emblem {
 	return gobject.UnsafeObjectFromGlibFull(c).(Emblem)
+}
+
+// UnsafeEmblemFromGlibBorrow is used to convert raw GEmblem pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeEmblemFromGlibBorrow(c unsafe.Pointer) Emblem {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Emblem)
 }
 
 func (e *EmblemInstance) upcastToGEmblem() *EmblemInstance {
@@ -56429,6 +56958,11 @@ func UnsafeEmblemedIconFromGlibNone(c unsafe.Pointer) EmblemedIcon {
 // UnsafeEmblemedIconFromGlibFull is used to convert raw GEmblemedIcon pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeEmblemedIconFromGlibFull(c unsafe.Pointer) EmblemedIcon {
 	return gobject.UnsafeObjectFromGlibFull(c).(EmblemedIcon)
+}
+
+// UnsafeEmblemedIconFromGlibBorrow is used to convert raw GEmblemedIcon pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeEmblemedIconFromGlibBorrow(c unsafe.Pointer) EmblemedIcon {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(EmblemedIcon)
 }
 
 func (e *EmblemedIconInstance) upcastToGEmblemedIcon() *EmblemedIconInstance {
@@ -56665,7 +57199,7 @@ type FileEnumerator interface {
 	// The function takes the following parameters:
 	// 
 	// 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore. 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 	//   to call when the request is satisfied 
 	//
@@ -56675,7 +57209,7 @@ type FileEnumerator interface {
 	// triggering the cancellable object from another thread. If the operation
 	// was cancelled, the error %G_IO_ERROR_CANCELLED will be returned in
 	// g_file_enumerator_close_finish().
-	CloseAsync(context.Context, int, AsyncReadyCallback)
+	CloseAsync(context.Context, int32, AsyncReadyCallback)
 	// CloseFinish wraps g_file_enumerator_close_finish
 	// 
 	// The function takes the following parameters:
@@ -56827,8 +57361,8 @@ type FileEnumerator interface {
 	// The function takes the following parameters:
 	// 
 	// 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore. 
-	// 	- numFiles int: the number of file info objects to request 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+	// 	- numFiles int32: the number of file info objects to request 
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 	//   to call when the request is satisfied 
 	//
@@ -56896,7 +57430,7 @@ type FileEnumerator interface {
 	// Any outstanding I/O request with higher priority (lower numerical value) will
 	// be executed before an outstanding request with lower priority. Default
 	// priority is %G_PRIORITY_DEFAULT.
-	NextFilesAsync(context.Context, int, int, AsyncReadyCallback)
+	NextFilesAsync(context.Context, int32, int32, AsyncReadyCallback)
 	// NextFilesFinish wraps g_file_enumerator_next_files_finish
 	// 
 	// The function takes the following parameters:
@@ -56938,6 +57472,11 @@ func UnsafeFileEnumeratorFromGlibNone(c unsafe.Pointer) FileEnumerator {
 // UnsafeFileEnumeratorFromGlibFull is used to convert raw GFileEnumerator pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeFileEnumeratorFromGlibFull(c unsafe.Pointer) FileEnumerator {
 	return gobject.UnsafeObjectFromGlibFull(c).(FileEnumerator)
+}
+
+// UnsafeFileEnumeratorFromGlibBorrow is used to convert raw GFileEnumerator pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeFileEnumeratorFromGlibBorrow(c unsafe.Pointer) FileEnumerator {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(FileEnumerator)
 }
 
 func (f *FileEnumeratorInstance) upcastToGFileEnumerator() *FileEnumeratorInstance {
@@ -57004,7 +57543,7 @@ func (enumerator *FileEnumeratorInstance) Close(cancellable context.Context) (bo
 // The function takes the following parameters:
 // 
 // 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore. 
-// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 // 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 //   to call when the request is satisfied 
 //
@@ -57014,7 +57553,7 @@ func (enumerator *FileEnumeratorInstance) Close(cancellable context.Context) (bo
 // triggering the cancellable object from another thread. If the operation
 // was cancelled, the error %G_IO_ERROR_CANCELLED will be returned in
 // g_file_enumerator_close_finish().
-func (enumerator *FileEnumeratorInstance) CloseAsync(cancellable context.Context, ioPriority int, callback AsyncReadyCallback) {
+func (enumerator *FileEnumeratorInstance) CloseAsync(cancellable context.Context, ioPriority int32, callback AsyncReadyCallback) {
 	var carg0 *C.GFileEnumerator    // in, none, converted
 	var carg2 *C.GCancellable       // in, none, converted, nullable
 	var carg1 C.int                 // in, none, casted, casted C.gint
@@ -57341,8 +57880,8 @@ func (enumerator *FileEnumeratorInstance) NextFile(cancellable context.Context) 
 // The function takes the following parameters:
 // 
 // 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore. 
-// 	- numFiles int: the number of file info objects to request 
-// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+// 	- numFiles int32: the number of file info objects to request 
+// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 // 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 //   to call when the request is satisfied 
 //
@@ -57410,7 +57949,7 @@ func (enumerator *FileEnumeratorInstance) NextFile(cancellable context.Context) 
 // Any outstanding I/O request with higher priority (lower numerical value) will
 // be executed before an outstanding request with lower priority. Default
 // priority is %G_PRIORITY_DEFAULT.
-func (enumerator *FileEnumeratorInstance) NextFilesAsync(cancellable context.Context, numFiles int, ioPriority int, callback AsyncReadyCallback) {
+func (enumerator *FileEnumeratorInstance) NextFilesAsync(cancellable context.Context, numFiles int32, ioPriority int32, callback AsyncReadyCallback) {
 	var carg0 *C.GFileEnumerator    // in, none, converted
 	var carg3 *C.GCancellable       // in, none, converted, nullable
 	var carg1 C.int                 // in, none, casted, casted C.gint
@@ -57511,10 +58050,10 @@ type FileEnumeratorOverrides[Instance FileEnumerator] struct {
 	// The function takes the following parameters:
 	// 
 	// 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore. 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 	//   to call when the request is satisfied 
-	CloseAsync func(Instance, context.Context, int, AsyncReadyCallback)
+	CloseAsync func(Instance, context.Context, int32, AsyncReadyCallback)
 	// CloseFinish allows you to override the implementation of the virtual method close_finish.
 	// The function takes the following parameters:
 	// 
@@ -57549,11 +58088,11 @@ type FileEnumeratorOverrides[Instance FileEnumerator] struct {
 	// The function takes the following parameters:
 	// 
 	// 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore. 
-	// 	- numFiles int: the number of file info objects to request 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+	// 	- numFiles int32: the number of file info objects to request 
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 	//   to call when the request is satisfied 
-	NextFilesAsync func(Instance, context.Context, int, int, AsyncReadyCallback)
+	NextFilesAsync func(Instance, context.Context, int32, int32, AsyncReadyCallback)
 	// NextFilesFinish allows you to override the implementation of the virtual method next_files_finish.
 	// The function takes the following parameters:
 	// 
@@ -57581,14 +58120,14 @@ func UnsafeApplyFileEnumeratorOverrides[Instance FileEnumerator](gclass unsafe.P
 			func(carg0 *C.GFileEnumerator, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
 				var enumerator  Instance           // go GFileEnumerator subclass
 				var cancellable context.Context    // in, none, converted, nullable
-				var ioPriority  int                // in, none, casted, casted C.gint
+				var ioPriority  int32              // in, none, casted, casted C.gint
 				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg4, nullable
 
-				enumerator = UnsafeFileEnumeratorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				enumerator = UnsafeFileEnumeratorFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg2 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
 				}
-				ioPriority = int(carg1)
+				ioPriority = int32(carg1)
 				if carg3 != nil {
 					_ = callback
 					_ = carg3
@@ -57612,7 +58151,7 @@ func UnsafeApplyFileEnumeratorOverrides[Instance FileEnumerator](gclass unsafe.P
 				var goret      bool        // return
 				var _goerr     error       // out, full, converted
 
-				enumerator = UnsafeFileEnumeratorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				enumerator = UnsafeFileEnumeratorFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.CloseFinish(enumerator, result)
@@ -57638,7 +58177,7 @@ func UnsafeApplyFileEnumeratorOverrides[Instance FileEnumerator](gclass unsafe.P
 				var goret       bool            // return
 				var _goerr      error           // out, full, converted
 
-				enumerator = UnsafeFileEnumeratorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				enumerator = UnsafeFileEnumeratorFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg1 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg1))
 				}
@@ -57666,7 +58205,7 @@ func UnsafeApplyFileEnumeratorOverrides[Instance FileEnumerator](gclass unsafe.P
 				var goret       FileInfo        // return, full, converted, nullable
 				var _goerr      error           // out, full, converted
 
-				enumerator = UnsafeFileEnumeratorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				enumerator = UnsafeFileEnumeratorFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg1 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg1))
 				}
@@ -57691,16 +58230,16 @@ func UnsafeApplyFileEnumeratorOverrides[Instance FileEnumerator](gclass unsafe.P
 			func(carg0 *C.GFileEnumerator, carg1 C.int, carg2 C.int, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
 				var enumerator  Instance           // go GFileEnumerator subclass
 				var cancellable context.Context    // in, none, converted, nullable
-				var numFiles    int                // in, none, casted, casted C.gint
-				var ioPriority  int                // in, none, casted, casted C.gint
+				var numFiles    int32              // in, none, casted, casted C.gint
+				var ioPriority  int32              // in, none, casted, casted C.gint
 				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg5, nullable
 
-				enumerator = UnsafeFileEnumeratorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				enumerator = UnsafeFileEnumeratorFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg3 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
 				}
-				numFiles = int(carg1)
-				ioPriority = int(carg2)
+				numFiles = int32(carg1)
+				ioPriority = int32(carg2)
 				if carg4 != nil {
 					_ = callback
 					_ = carg4
@@ -57724,7 +58263,7 @@ func UnsafeApplyFileEnumeratorOverrides[Instance FileEnumerator](gclass unsafe.P
 				var goret      []FileInfo  // return, transfer: full, C Pointers: 1, Name: List, scope: 
 				var _goerr     error       // out, full, converted
 
-				enumerator = UnsafeFileEnumeratorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				enumerator = UnsafeFileEnumeratorFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.NextFilesFinish(enumerator, result)
@@ -57812,6 +58351,11 @@ func UnsafeFileIconFromGlibNone(c unsafe.Pointer) FileIcon {
 // UnsafeFileIconFromGlibFull is used to convert raw GFileIcon pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeFileIconFromGlibFull(c unsafe.Pointer) FileIcon {
 	return gobject.UnsafeObjectFromGlibFull(c).(FileIcon)
+}
+
+// UnsafeFileIconFromGlibBorrow is used to convert raw GFileIcon pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeFileIconFromGlibBorrow(c unsafe.Pointer) FileIcon {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(FileIcon)
 }
 
 func (f *FileIconInstance) upcastToGFileIcon() *FileIconInstance {
@@ -58692,6 +59236,11 @@ func UnsafeFileInfoFromGlibNone(c unsafe.Pointer) FileInfo {
 // UnsafeFileInfoFromGlibFull is used to convert raw GFileInfo pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeFileInfoFromGlibFull(c unsafe.Pointer) FileInfo {
 	return gobject.UnsafeObjectFromGlibFull(c).(FileInfo)
+}
+
+// UnsafeFileInfoFromGlibBorrow is used to convert raw GFileInfo pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeFileInfoFromGlibBorrow(c unsafe.Pointer) FileInfo {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(FileInfo)
 }
 
 func (f *FileInfoInstance) upcastToGFileInfo() *FileInfoInstance {
@@ -60575,12 +61124,12 @@ type FileMonitor interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- limitMsecs int: a non-negative integer with the limit in milliseconds
+	// 	- limitMsecs int32: a non-negative integer with the limit in milliseconds
 	//     to poll for changes 
 	//
 	// Sets the rate limit to which the @monitor will report
 	// consecutive change events to the same file.
-	SetRateLimit(int)
+	SetRateLimit(int32)
 	// ConnectChanged connects the provided callback to the "changed" signal
 	//
 	// Emitted when @file has been changed.
@@ -60632,6 +61181,11 @@ func UnsafeFileMonitorFromGlibNone(c unsafe.Pointer) FileMonitor {
 // UnsafeFileMonitorFromGlibFull is used to convert raw GFileMonitor pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeFileMonitorFromGlibFull(c unsafe.Pointer) FileMonitor {
 	return gobject.UnsafeObjectFromGlibFull(c).(FileMonitor)
+}
+
+// UnsafeFileMonitorFromGlibBorrow is used to convert raw GFileMonitor pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeFileMonitorFromGlibBorrow(c unsafe.Pointer) FileMonitor {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(FileMonitor)
 }
 
 func (f *FileMonitorInstance) upcastToGFileMonitor() *FileMonitorInstance {
@@ -60735,12 +61289,12 @@ func (monitor *FileMonitorInstance) IsCancelled() bool {
 // 
 // The function takes the following parameters:
 // 
-// 	- limitMsecs int: a non-negative integer with the limit in milliseconds
+// 	- limitMsecs int32: a non-negative integer with the limit in milliseconds
 //     to poll for changes 
 //
 // Sets the rate limit to which the @monitor will report
 // consecutive change events to the same file.
-func (monitor *FileMonitorInstance) SetRateLimit(limitMsecs int) {
+func (monitor *FileMonitorInstance) SetRateLimit(limitMsecs int32) {
 	var carg0 *C.GFileMonitor // in, none, converted
 	var carg1 C.gint          // in, none, casted
 
@@ -60822,7 +61376,7 @@ func UnsafeApplyFileMonitorOverrides[Instance FileMonitor](gclass unsafe.Pointer
 				var monitor Instance // go GFileMonitor subclass
 				var goret   bool     // return
 
-				monitor = UnsafeFileMonitorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				monitor = UnsafeFileMonitorFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.Cancel(monitor)
 
@@ -60846,7 +61400,7 @@ func UnsafeApplyFileMonitorOverrides[Instance FileMonitor](gclass unsafe.Pointer
 				var otherFile File             // in, none, converted
 				var eventType FileMonitorEvent // in, none, casted
 
-				monitor = UnsafeFileMonitorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				monitor = UnsafeFileMonitorFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg1))
 				otherFile = UnsafeFileFromGlibNone(unsafe.Pointer(carg2))
 				eventType = FileMonitorEvent(carg3)
@@ -60957,6 +61511,11 @@ func UnsafeFilenameCompleterFromGlibNone(c unsafe.Pointer) FilenameCompleter {
 // UnsafeFilenameCompleterFromGlibFull is used to convert raw GFilenameCompleter pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeFilenameCompleterFromGlibFull(c unsafe.Pointer) FilenameCompleter {
 	return gobject.UnsafeObjectFromGlibFull(c).(FilenameCompleter)
+}
+
+// UnsafeFilenameCompleterFromGlibBorrow is used to convert raw GFilenameCompleter pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeFilenameCompleterFromGlibBorrow(c unsafe.Pointer) FilenameCompleter {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(FilenameCompleter)
 }
 
 func (f *FilenameCompleterInstance) upcastToGFilenameCompleter() *FilenameCompleterInstance {
@@ -61113,7 +61672,7 @@ func UnsafeApplyFilenameCompleterOverrides[Instance FilenameCompleter](gclass un
 			func(carg0 *C.GFilenameCompleter) {
 				var filenameCompleter Instance // go GFilenameCompleter subclass
 
-				filenameCompleter = UnsafeFilenameCompleterFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				filenameCompleter = UnsafeFilenameCompleterFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				overrides.GotCompletionData(filenameCompleter)
 			},
@@ -61263,7 +61822,7 @@ type IOStream interface {
 	// The function takes the following parameters:
 	// 
 	// 	- cancellable context.Context (nullable): optional cancellable object 
-	// 	- ioPriority int: the io priority of the request 
+	// 	- ioPriority int32: the io priority of the request 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 	//   to call when the request is satisfied 
 	//
@@ -61277,7 +61836,7 @@ type IOStream interface {
 	// The asynchronous methods have a default fallback that uses threads
 	// to implement asynchronicity, so they are optional for inheriting
 	// classes. However, if you override one you must override all.
-	CloseAsync(context.Context, int, AsyncReadyCallback)
+	CloseAsync(context.Context, int32, AsyncReadyCallback)
 	// CloseFinish wraps g_io_stream_close_finish
 	// 
 	// The function takes the following parameters:
@@ -61343,7 +61902,7 @@ type IOStream interface {
 	// 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore. 
 	// 	- stream2 IOStream: a #GIOStream. 
 	// 	- flags IOStreamSpliceFlags: a set of #GIOStreamSpliceFlags. 
-	// 	- ioPriority int: the io priority of the request. 
+	// 	- ioPriority int32: the io priority of the request. 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 	//   to call when the request is satisfied 
 	//
@@ -61354,7 +61913,7 @@ type IOStream interface {
 	// When the operation is finished @callback will be called.
 	// You can then call g_io_stream_splice_finish() to get the
 	// result of the operation.
-	SpliceAsync(context.Context, IOStream, IOStreamSpliceFlags, int, AsyncReadyCallback)
+	SpliceAsync(context.Context, IOStream, IOStreamSpliceFlags, int32, AsyncReadyCallback)
 }
 
 func unsafeWrapIOStream(base *gobject.ObjectInstance) *IOStreamInstance {
@@ -61375,6 +61934,11 @@ func UnsafeIOStreamFromGlibNone(c unsafe.Pointer) IOStream {
 // UnsafeIOStreamFromGlibFull is used to convert raw GIOStream pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeIOStreamFromGlibFull(c unsafe.Pointer) IOStream {
 	return gobject.UnsafeObjectFromGlibFull(c).(IOStream)
+}
+
+// UnsafeIOStreamFromGlibBorrow is used to convert raw GIOStream pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeIOStreamFromGlibBorrow(c unsafe.Pointer) IOStream {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(IOStream)
 }
 
 func (i *IOStreamInstance) upcastToGIOStream() *IOStreamInstance {
@@ -61515,7 +62079,7 @@ func (stream *IOStreamInstance) Close(cancellable context.Context) (bool, error)
 // The function takes the following parameters:
 // 
 // 	- cancellable context.Context (nullable): optional cancellable object 
-// 	- ioPriority int: the io priority of the request 
+// 	- ioPriority int32: the io priority of the request 
 // 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 //   to call when the request is satisfied 
 //
@@ -61529,7 +62093,7 @@ func (stream *IOStreamInstance) Close(cancellable context.Context) (bool, error)
 // The asynchronous methods have a default fallback that uses threads
 // to implement asynchronicity, so they are optional for inheriting
 // classes. However, if you override one you must override all.
-func (stream *IOStreamInstance) CloseAsync(cancellable context.Context, ioPriority int, callback AsyncReadyCallback) {
+func (stream *IOStreamInstance) CloseAsync(cancellable context.Context, ioPriority int32, callback AsyncReadyCallback) {
 	var carg0 *C.GIOStream          // in, none, converted
 	var carg2 *C.GCancellable       // in, none, converted, nullable
 	var carg1 C.int                 // in, none, casted, casted C.gint
@@ -61729,7 +62293,7 @@ func (stream *IOStreamInstance) SetPending() (bool, error) {
 // 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore. 
 // 	- stream2 IOStream: a #GIOStream. 
 // 	- flags IOStreamSpliceFlags: a set of #GIOStreamSpliceFlags. 
-// 	- ioPriority int: the io priority of the request. 
+// 	- ioPriority int32: the io priority of the request. 
 // 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 //   to call when the request is satisfied 
 //
@@ -61740,7 +62304,7 @@ func (stream *IOStreamInstance) SetPending() (bool, error) {
 // When the operation is finished @callback will be called.
 // You can then call g_io_stream_splice_finish() to get the
 // result of the operation.
-func (stream1 *IOStreamInstance) SpliceAsync(cancellable context.Context, stream2 IOStream, flags IOStreamSpliceFlags, ioPriority int, callback AsyncReadyCallback) {
+func (stream1 *IOStreamInstance) SpliceAsync(cancellable context.Context, stream2 IOStream, flags IOStreamSpliceFlags, ioPriority int32, callback AsyncReadyCallback) {
 	var carg0 *C.GIOStream           // in, none, converted
 	var carg4 *C.GCancellable        // in, none, converted, nullable
 	var carg1 *C.GIOStream           // in, none, converted
@@ -61780,10 +62344,10 @@ type IOStreamOverrides[Instance IOStream] struct {
 	// The function takes the following parameters:
 	// 
 	// 	- cancellable context.Context (nullable): optional cancellable object 
-	// 	- ioPriority int: the io priority of the request 
+	// 	- ioPriority int32: the io priority of the request 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 	//   to call when the request is satisfied 
-	CloseAsync func(Instance, context.Context, int, AsyncReadyCallback)
+	CloseAsync func(Instance, context.Context, int32, AsyncReadyCallback)
 	// CloseFinish allows you to override the implementation of the virtual method close_finish.
 	// The function takes the following parameters:
 	// 
@@ -61831,14 +62395,14 @@ func UnsafeApplyIOStreamOverrides[Instance IOStream](gclass unsafe.Pointer, over
 			func(carg0 *C.GIOStream, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
 				var stream      Instance           // go GIOStream subclass
 				var cancellable context.Context    // in, none, converted, nullable
-				var ioPriority  int                // in, none, casted, casted C.gint
+				var ioPriority  int32              // in, none, casted, casted C.gint
 				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg4, nullable
 
-				stream = UnsafeIOStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafeIOStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg2 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
 				}
-				ioPriority = int(carg1)
+				ioPriority = int32(carg1)
 				if carg3 != nil {
 					_ = callback
 					_ = carg3
@@ -61862,7 +62426,7 @@ func UnsafeApplyIOStreamOverrides[Instance IOStream](gclass unsafe.Pointer, over
 				var goret  bool        // return
 				var _goerr error       // out, full, converted
 
-				stream = UnsafeIOStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafeIOStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.CloseFinish(stream, result)
@@ -61888,7 +62452,7 @@ func UnsafeApplyIOStreamOverrides[Instance IOStream](gclass unsafe.Pointer, over
 				var goret       bool            // return
 				var _goerr      error           // out, full, converted
 
-				stream = UnsafeIOStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafeIOStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg1 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg1))
 				}
@@ -61914,7 +62478,7 @@ func UnsafeApplyIOStreamOverrides[Instance IOStream](gclass unsafe.Pointer, over
 				var stream Instance    // go GIOStream subclass
 				var goret  InputStream // return, none, converted
 
-				stream = UnsafeIOStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafeIOStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetInputStream(stream)
 
@@ -61934,7 +62498,7 @@ func UnsafeApplyIOStreamOverrides[Instance IOStream](gclass unsafe.Pointer, over
 				var stream Instance     // go GIOStream subclass
 				var goret  OutputStream // return, none, converted
 
-				stream = UnsafeIOStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafeIOStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetOutputStream(stream)
 
@@ -62138,6 +62702,11 @@ func UnsafeInetAddressFromGlibNone(c unsafe.Pointer) InetAddress {
 // UnsafeInetAddressFromGlibFull is used to convert raw GInetAddress pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeInetAddressFromGlibFull(c unsafe.Pointer) InetAddress {
 	return gobject.UnsafeObjectFromGlibFull(c).(InetAddress)
+}
+
+// UnsafeInetAddressFromGlibBorrow is used to convert raw GInetAddress pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeInetAddressFromGlibBorrow(c unsafe.Pointer) InetAddress {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(InetAddress)
 }
 
 func (i *InetAddressInstance) upcastToGInetAddress() *InetAddressInstance {
@@ -62626,7 +63195,7 @@ func UnsafeApplyInetAddressOverrides[Instance InetAddress](gclass unsafe.Pointer
 				var address Instance // go GInetAddress subclass
 				var goret   string   // return, full, string
 
-				address = UnsafeInetAddressFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				address = UnsafeInetAddressFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.ToString(address)
 
@@ -62758,6 +63327,11 @@ func UnsafeInetAddressMaskFromGlibNone(c unsafe.Pointer) InetAddressMask {
 // UnsafeInetAddressMaskFromGlibFull is used to convert raw GInetAddressMask pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeInetAddressMaskFromGlibFull(c unsafe.Pointer) InetAddressMask {
 	return gobject.UnsafeObjectFromGlibFull(c).(InetAddressMask)
+}
+
+// UnsafeInetAddressMaskFromGlibBorrow is used to convert raw GInetAddressMask pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeInetAddressMaskFromGlibBorrow(c unsafe.Pointer) InetAddressMask {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(InetAddressMask)
 }
 
 func (i *InetAddressMaskInstance) upcastToGInetAddressMask() *InetAddressMaskInstance {
@@ -63117,7 +63691,7 @@ type InputStream interface {
 	// The function takes the following parameters:
 	// 
 	// 	- cancellable context.Context (nullable): optional cancellable object 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 	//   to call when the request is satisfied 
 	//
@@ -63131,7 +63705,7 @@ type InputStream interface {
 	// The asynchronous methods have a default fallback that uses threads to implement
 	// asynchronicity, so they are optional for inheriting classes. However, if you
 	// override one you must override all.
-	CloseAsync(context.Context, int, AsyncReadyCallback)
+	CloseAsync(context.Context, int32, AsyncReadyCallback)
 	// CloseFinish wraps g_input_stream_close_finish
 	// 
 	// The function takes the following parameters:
@@ -63237,7 +63811,7 @@ type InputStream interface {
 	// 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore 
 	// 	- buffer []byte: 
 	//     a buffer to read data into (which should be at least count bytes long) 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 	//   to call when the request is satisfied 
 	//
@@ -63251,7 +63825,7 @@ type InputStream interface {
 	// Any outstanding I/O request with higher priority (lower numerical
 	// value) will be executed before an outstanding request with lower
 	// priority. Default priority is %G_PRIORITY_DEFAULT.
-	ReadAllAsync(context.Context, []byte, int, AsyncReadyCallback)
+	ReadAllAsync(context.Context, []byte, int32, AsyncReadyCallback)
 	// ReadAllFinish wraps g_input_stream_read_all_finish
 	// 
 	// The function takes the following parameters:
@@ -63281,7 +63855,7 @@ type InputStream interface {
 	// 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore. 
 	// 	- buffer []byte: 
 	//     a buffer to read data into (which should be at least count bytes long). 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority)
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority)
 	// of the request. 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 	//   to call when the request is satisfied 
@@ -63309,7 +63883,7 @@ type InputStream interface {
 	// The asynchronous methods have a default fallback that uses threads to implement
 	// asynchronicity, so they are optional for inheriting classes. However, if you
 	// override one you must override all.
-	ReadAsync(context.Context, []byte, int, AsyncReadyCallback)
+	ReadAsync(context.Context, []byte, int32, AsyncReadyCallback)
 	// ReadBytes wraps g_input_stream_read_bytes
 	// 
 	// The function takes the following parameters:
@@ -63353,7 +63927,7 @@ type InputStream interface {
 	// 
 	// 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore. 
 	// 	- count uint: the number of bytes that will be read from the stream 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 	//   to call when the request is satisfied 
 	//
@@ -63377,7 +63951,7 @@ type InputStream interface {
 	// Any outstanding I/O request with higher priority (lower numerical
 	// value) will be executed before an outstanding request with lower
 	// priority. Default priority is %G_PRIORITY_DEFAULT.
-	ReadBytesAsync(context.Context, uint, int, AsyncReadyCallback)
+	ReadBytesAsync(context.Context, uint, int32, AsyncReadyCallback)
 	// ReadBytesFinish wraps g_input_stream_read_bytes_finish
 	// 
 	// The function takes the following parameters:
@@ -63448,7 +64022,7 @@ type InputStream interface {
 	// 
 	// 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore. 
 	// 	- count uint: the number of bytes that will be skipped from the stream 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 	//   to call when the request is satisfied 
 	//
@@ -63475,7 +64049,7 @@ type InputStream interface {
 	// The asynchronous methods have a default fallback that uses threads to
 	// implement asynchronicity, so they are optional for inheriting classes.
 	// However, if you override one, you must override all.
-	SkipAsync(context.Context, uint, int, AsyncReadyCallback)
+	SkipAsync(context.Context, uint, int32, AsyncReadyCallback)
 	// SkipFinish wraps g_input_stream_skip_finish
 	// 
 	// The function takes the following parameters:
@@ -63509,6 +64083,11 @@ func UnsafeInputStreamFromGlibNone(c unsafe.Pointer) InputStream {
 // UnsafeInputStreamFromGlibFull is used to convert raw GInputStream pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeInputStreamFromGlibFull(c unsafe.Pointer) InputStream {
 	return gobject.UnsafeObjectFromGlibFull(c).(InputStream)
+}
+
+// UnsafeInputStreamFromGlibBorrow is used to convert raw GInputStream pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeInputStreamFromGlibBorrow(c unsafe.Pointer) InputStream {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(InputStream)
 }
 
 func (i *InputStreamInstance) upcastToGInputStream() *InputStreamInstance {
@@ -63604,7 +64183,7 @@ func (stream *InputStreamInstance) Close(cancellable context.Context) (bool, err
 // The function takes the following parameters:
 // 
 // 	- cancellable context.Context (nullable): optional cancellable object 
-// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 // 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 //   to call when the request is satisfied 
 //
@@ -63618,7 +64197,7 @@ func (stream *InputStreamInstance) Close(cancellable context.Context) (bool, err
 // The asynchronous methods have a default fallback that uses threads to implement
 // asynchronicity, so they are optional for inheriting classes. However, if you
 // override one you must override all.
-func (stream *InputStreamInstance) CloseAsync(cancellable context.Context, ioPriority int, callback AsyncReadyCallback) {
+func (stream *InputStreamInstance) CloseAsync(cancellable context.Context, ioPriority int32, callback AsyncReadyCallback) {
 	var carg0 *C.GInputStream       // in, none, converted
 	var carg2 *C.GCancellable       // in, none, converted, nullable
 	var carg1 C.int                 // in, none, casted, casted C.gint
@@ -63875,7 +64454,7 @@ func (stream *InputStreamInstance) ReadAll(cancellable context.Context, buffer [
 // 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore 
 // 	- buffer []byte: 
 //     a buffer to read data into (which should be at least count bytes long) 
-// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 // 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 //   to call when the request is satisfied 
 //
@@ -63889,7 +64468,7 @@ func (stream *InputStreamInstance) ReadAll(cancellable context.Context, buffer [
 // Any outstanding I/O request with higher priority (lower numerical
 // value) will be executed before an outstanding request with lower
 // priority. Default priority is %G_PRIORITY_DEFAULT.
-func (stream *InputStreamInstance) ReadAllAsync(cancellable context.Context, buffer []byte, ioPriority int, callback AsyncReadyCallback) {
+func (stream *InputStreamInstance) ReadAllAsync(cancellable context.Context, buffer []byte, ioPriority int32, callback AsyncReadyCallback) {
 	var carg0 *C.GInputStream       // in, none, converted
 	var carg4 *C.GCancellable       // in, none, converted, nullable
 	var carg1 unsafe.Pointer        // in, transfer: none, C Pointers: 1, Name: array[unknown], caller-allocates, array (inner: <nil>, length-by: carg2)
@@ -63977,7 +64556,7 @@ func (stream *InputStreamInstance) ReadAllFinish(result AsyncResult) (uint, bool
 // 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore. 
 // 	- buffer []byte: 
 //     a buffer to read data into (which should be at least count bytes long). 
-// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority)
+// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority)
 // of the request. 
 // 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 //   to call when the request is satisfied 
@@ -64005,7 +64584,7 @@ func (stream *InputStreamInstance) ReadAllFinish(result AsyncResult) (uint, bool
 // The asynchronous methods have a default fallback that uses threads to implement
 // asynchronicity, so they are optional for inheriting classes. However, if you
 // override one you must override all.
-func (stream *InputStreamInstance) ReadAsync(cancellable context.Context, buffer []byte, ioPriority int, callback AsyncReadyCallback) {
+func (stream *InputStreamInstance) ReadAsync(cancellable context.Context, buffer []byte, ioPriority int32, callback AsyncReadyCallback) {
 	var carg0 *C.GInputStream       // in, none, converted
 	var carg4 *C.GCancellable       // in, none, converted, nullable
 	var carg1 unsafe.Pointer        // in, transfer: none, C Pointers: 1, Name: array[unknown], caller-allocates, array (inner: <nil>, length-by: carg2)
@@ -64107,7 +64686,7 @@ func (stream *InputStreamInstance) ReadBytes(cancellable context.Context, count 
 // 
 // 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore. 
 // 	- count uint: the number of bytes that will be read from the stream 
-// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 // 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 //   to call when the request is satisfied 
 //
@@ -64131,7 +64710,7 @@ func (stream *InputStreamInstance) ReadBytes(cancellable context.Context, count 
 // Any outstanding I/O request with higher priority (lower numerical
 // value) will be executed before an outstanding request with lower
 // priority. Default priority is %G_PRIORITY_DEFAULT.
-func (stream *InputStreamInstance) ReadBytesAsync(cancellable context.Context, count uint, ioPriority int, callback AsyncReadyCallback) {
+func (stream *InputStreamInstance) ReadBytesAsync(cancellable context.Context, count uint, ioPriority int32, callback AsyncReadyCallback) {
 	var carg0 *C.GInputStream       // in, none, converted
 	var carg3 *C.GCancellable       // in, none, converted, nullable
 	var carg1 C.gsize               // in, none, casted
@@ -64324,7 +64903,7 @@ func (stream *InputStreamInstance) Skip(cancellable context.Context, count uint)
 // 
 // 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore. 
 // 	- count uint: the number of bytes that will be skipped from the stream 
-// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 // 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 //   to call when the request is satisfied 
 //
@@ -64351,7 +64930,7 @@ func (stream *InputStreamInstance) Skip(cancellable context.Context, count uint)
 // The asynchronous methods have a default fallback that uses threads to
 // implement asynchronicity, so they are optional for inheriting classes.
 // However, if you override one, you must override all.
-func (stream *InputStreamInstance) SkipAsync(cancellable context.Context, count uint, ioPriority int, callback AsyncReadyCallback) {
+func (stream *InputStreamInstance) SkipAsync(cancellable context.Context, count uint, ioPriority int32, callback AsyncReadyCallback) {
 	var carg0 *C.GInputStream       // in, none, converted
 	var carg3 *C.GCancellable       // in, none, converted, nullable
 	var carg1 C.gsize               // in, none, casted
@@ -64424,10 +65003,10 @@ type InputStreamOverrides[Instance InputStream] struct {
 	// The function takes the following parameters:
 	// 
 	// 	- cancellable context.Context (nullable): optional cancellable object 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 	//   to call when the request is satisfied 
-	CloseAsync func(Instance, context.Context, int, AsyncReadyCallback)
+	CloseAsync func(Instance, context.Context, int32, AsyncReadyCallback)
 	// CloseFinish allows you to override the implementation of the virtual method close_finish.
 	// The function takes the following parameters:
 	// 
@@ -64486,10 +65065,10 @@ type InputStreamOverrides[Instance InputStream] struct {
 	// 
 	// 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore. 
 	// 	- count uint: the number of bytes that will be skipped from the stream 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 	//   to call when the request is satisfied 
-	SkipAsync func(Instance, context.Context, uint, int, AsyncReadyCallback)
+	SkipAsync func(Instance, context.Context, uint, int32, AsyncReadyCallback)
 	// SkipFinish allows you to override the implementation of the virtual method skip_finish.
 	// The function takes the following parameters:
 	// 
@@ -64517,14 +65096,14 @@ func UnsafeApplyInputStreamOverrides[Instance InputStream](gclass unsafe.Pointer
 			func(carg0 *C.GInputStream, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
 				var stream      Instance           // go GInputStream subclass
 				var cancellable context.Context    // in, none, converted, nullable
-				var ioPriority  int                // in, none, casted, casted C.gint
+				var ioPriority  int32              // in, none, casted, casted C.gint
 				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg4, nullable
 
-				stream = UnsafeInputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafeInputStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg2 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
 				}
-				ioPriority = int(carg1)
+				ioPriority = int32(carg1)
 				if carg3 != nil {
 					_ = callback
 					_ = carg3
@@ -64548,7 +65127,7 @@ func UnsafeApplyInputStreamOverrides[Instance InputStream](gclass unsafe.Pointer
 				var goret  bool        // return
 				var _goerr error       // out, full, converted
 
-				stream = UnsafeInputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafeInputStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.CloseFinish(stream, result)
@@ -64574,7 +65153,7 @@ func UnsafeApplyInputStreamOverrides[Instance InputStream](gclass unsafe.Pointer
 				var goret       bool            // return
 				var _goerr      error           // out, full, converted
 
-				stream = UnsafeInputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafeInputStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg1 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg1))
 				}
@@ -64602,7 +65181,7 @@ func UnsafeApplyInputStreamOverrides[Instance InputStream](gclass unsafe.Pointer
 				var goret  int         // return, none, casted
 				var _goerr error       // out, full, converted
 
-				stream = UnsafeInputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafeInputStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.ReadFinish(stream, result)
@@ -64628,7 +65207,7 @@ func UnsafeApplyInputStreamOverrides[Instance InputStream](gclass unsafe.Pointer
 				var goret       int             // return, none, casted
 				var _goerr      error           // out, full, converted
 
-				stream = UnsafeInputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafeInputStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg3 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
 				}
@@ -64661,7 +65240,7 @@ func UnsafeApplyInputStreamOverrides[Instance InputStream](gclass unsafe.Pointer
 				var goret       int             // return, none, casted
 				var _goerr      error           // out, full, converted
 
-				stream = UnsafeInputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafeInputStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg2 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
 				}
@@ -64686,15 +65265,15 @@ func UnsafeApplyInputStreamOverrides[Instance InputStream](gclass unsafe.Pointer
 				var stream      Instance           // go GInputStream subclass
 				var cancellable context.Context    // in, none, converted, nullable
 				var count       uint               // in, none, casted
-				var ioPriority  int                // in, none, casted, casted C.gint
+				var ioPriority  int32              // in, none, casted, casted C.gint
 				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg5, nullable
 
-				stream = UnsafeInputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafeInputStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg3 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
 				}
 				count = uint(carg1)
-				ioPriority = int(carg2)
+				ioPriority = int32(carg2)
 				if carg4 != nil {
 					_ = callback
 					_ = carg4
@@ -64718,7 +65297,7 @@ func UnsafeApplyInputStreamOverrides[Instance InputStream](gclass unsafe.Pointer
 				var goret  int         // return, none, casted
 				var _goerr error       // out, full, converted
 
-				stream = UnsafeInputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafeInputStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.SkipFinish(stream, result)
@@ -64793,14 +65372,6 @@ type ListStore interface {
 	//
 	// Removes all items from @store.
 	RemoveAll()
-	// Sort wraps g_list_store_sort
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- compareFunc glib.CompareDataFunc: pairwise comparison function for sorting 
-	//
-	// Sort the items in @store according to @compare_func.
-	Sort(glib.CompareDataFunc)
 }
 
 func unsafeWrapListStore(base *gobject.ObjectInstance) *ListStoreInstance {
@@ -64821,6 +65392,11 @@ func UnsafeListStoreFromGlibNone(c unsafe.Pointer) ListStore {
 // UnsafeListStoreFromGlibFull is used to convert raw GListStore pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeListStoreFromGlibFull(c unsafe.Pointer) ListStore {
 	return gobject.UnsafeObjectFromGlibFull(c).(ListStore)
+}
+
+// UnsafeListStoreFromGlibBorrow is used to convert raw GListStore pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeListStoreFromGlibBorrow(c unsafe.Pointer) ListStore {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(ListStore)
 }
 
 func (l *ListStoreInstance) upcastToGListStore() *ListStoreInstance {
@@ -64898,28 +65474,6 @@ func (store *ListStoreInstance) RemoveAll() {
 
 	C.g_list_store_remove_all(carg0)
 	runtime.KeepAlive(store)
-}
-
-// Sort wraps g_list_store_sort
-// 
-// The function takes the following parameters:
-// 
-// 	- compareFunc glib.CompareDataFunc: pairwise comparison function for sorting 
-//
-// Sort the items in @store according to @compare_func.
-func (store *ListStoreInstance) Sort(compareFunc glib.CompareDataFunc) {
-	var carg0 *C.GListStore      // in, none, converted
-	var carg1 C.GCompareDataFunc // callback, scope: call, closure: carg2
-	var carg2 C.gpointer         // implicit
-
-	carg0 = (*C.GListStore)(UnsafeListStoreToGlibNone(store))
-	carg1 = (*[0]byte)(C._gotk4_glib2_CompareDataFunc)
-	carg2 = C.gpointer(userdata.Register(compareFunc))
-	defer userdata.Delete(unsafe.Pointer(carg2))
-
-	C.g_list_store_sort(carg0, carg1, carg2)
-	runtime.KeepAlive(store)
-	runtime.KeepAlive(compareFunc)
 }
 
 // ListStoreOverrides is the struct used to override the default implementation of virtual methods.
@@ -65011,6 +65565,11 @@ func UnsafeMemoryInputStreamFromGlibNone(c unsafe.Pointer) MemoryInputStream {
 // UnsafeMemoryInputStreamFromGlibFull is used to convert raw GMemoryInputStream pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeMemoryInputStreamFromGlibFull(c unsafe.Pointer) MemoryInputStream {
 	return gobject.UnsafeObjectFromGlibFull(c).(MemoryInputStream)
+}
+
+// UnsafeMemoryInputStreamFromGlibBorrow is used to convert raw GMemoryInputStream pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeMemoryInputStreamFromGlibBorrow(c unsafe.Pointer) MemoryInputStream {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(MemoryInputStream)
 }
 
 func (m *MemoryInputStreamInstance) upcastToGMemoryInputStream() *MemoryInputStreamInstance {
@@ -65195,6 +65754,11 @@ func UnsafeMenuAttributeIterFromGlibNone(c unsafe.Pointer) MenuAttributeIter {
 // UnsafeMenuAttributeIterFromGlibFull is used to convert raw GMenuAttributeIter pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeMenuAttributeIterFromGlibFull(c unsafe.Pointer) MenuAttributeIter {
 	return gobject.UnsafeObjectFromGlibFull(c).(MenuAttributeIter)
+}
+
+// UnsafeMenuAttributeIterFromGlibBorrow is used to convert raw GMenuAttributeIter pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeMenuAttributeIterFromGlibBorrow(c unsafe.Pointer) MenuAttributeIter {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(MenuAttributeIter)
 }
 
 func (m *MenuAttributeIterInstance) upcastToGMenuAttributeIter() *MenuAttributeIterInstance {
@@ -65454,6 +66018,11 @@ func UnsafeMenuItemFromGlibFull(c unsafe.Pointer) MenuItem {
 	return gobject.UnsafeObjectFromGlibFull(c).(MenuItem)
 }
 
+// UnsafeMenuItemFromGlibBorrow is used to convert raw GMenuItem pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeMenuItemFromGlibBorrow(c unsafe.Pointer) MenuItem {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(MenuItem)
+}
+
 func (m *MenuItemInstance) upcastToGMenuItem() *MenuItemInstance {
 	return m
 }
@@ -65517,7 +66086,7 @@ func NewMenuItem(label string, detailedAction string) MenuItem {
 // The function takes the following parameters:
 // 
 // 	- model MenuModel: a #GMenuModel 
-// 	- itemIndex int: the index of an item in @model 
+// 	- itemIndex int32: the index of an item in @model 
 // 
 // The function returns the following values:
 // 
@@ -65528,7 +66097,7 @@ func NewMenuItem(label string, detailedAction string) MenuItem {
 // 
 // @item_index must be valid (ie: be sure to call
 // g_menu_model_get_n_items() first).
-func NewMenuItemFromModel(model MenuModel, itemIndex int) MenuItem {
+func NewMenuItemFromModel(model MenuModel, itemIndex int32) MenuItem {
 	var carg1 *C.GMenuModel // in, none, converted
 	var carg2 C.gint        // in, none, casted
 	var cret  *C.GMenuItem  // return, full, converted
@@ -65980,6 +66549,11 @@ func UnsafeMenuLinkIterFromGlibFull(c unsafe.Pointer) MenuLinkIter {
 	return gobject.UnsafeObjectFromGlibFull(c).(MenuLinkIter)
 }
 
+// UnsafeMenuLinkIterFromGlibBorrow is used to convert raw GMenuLinkIter pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeMenuLinkIterFromGlibBorrow(c unsafe.Pointer) MenuLinkIter {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(MenuLinkIter)
+}
+
 func (m *MenuLinkIterInstance) upcastToGMenuLinkIter() *MenuLinkIterInstance {
 	return m
 }
@@ -66155,11 +66729,11 @@ func UnsafeApplyMenuLinkIterOverrides[Instance MenuLinkIter](gclass unsafe.Point
 				var value   MenuModel // out, full, converted
 				var goret   bool      // return
 
-				iter = UnsafeMenuLinkIterFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				iter = UnsafeMenuLinkIterFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				outLink, value, goret = overrides.GetNext(iter)
 
-				carg1 = (*C.gchar)(unsafe.Pointer(C.CString(outLink)))
+				*carg1 = (*C.gchar)(unsafe.Pointer(C.CString(outLink)))
 				defer C.free(unsafe.Pointer(carg1))
 				*carg2 = (*C.GMenuModel)(UnsafeMenuModelToGlibFull(value))
 				if goret {
@@ -66335,7 +66909,7 @@ type MenuModel interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- itemIndex int: the index of the item 
+	// 	- itemIndex int32: the index of the item 
 	// 	- link string: the link to query 
 	// 
 	// The function returns the following values:
@@ -66347,15 +66921,15 @@ type MenuModel interface {
 	// 
 	// If the link exists, the linked #GMenuModel is returned.  If the link
 	// does not exist, %NULL is returned.
-	GetItemLink(int, string) MenuModel
+	GetItemLink(int32, string) MenuModel
 	// GetNItems wraps g_menu_model_get_n_items
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Query the number of items in @model.
-	GetNItems() int
+	GetNItems() int32
 	// IsMutable wraps g_menu_model_is_mutable
 	// 
 	// The function returns the following values:
@@ -66371,9 +66945,9 @@ type MenuModel interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- position int: the position of the change 
-	// 	- removed int: the number of items removed 
-	// 	- added int: the number of items added 
+	// 	- position int32: the position of the change 
+	// 	- removed int32: the number of items removed 
+	// 	- added int32: the number of items added 
 	//
 	// Requests emission of the #GMenuModel::items-changed signal on @model.
 	// 
@@ -66390,12 +66964,12 @@ type MenuModel interface {
 	// entry and not in response to calls -- particularly those from the
 	// #GMenuModel API.  Said another way: the menu must not change while
 	// user code is running without returning to the mainloop.
-	ItemsChanged(int, int, int)
+	ItemsChanged(int32, int32, int32)
 	// IterateItemAttributes wraps g_menu_model_iterate_item_attributes
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- itemIndex int: the index of the item 
+	// 	- itemIndex int32: the index of the item 
 	// 
 	// The function returns the following values:
 	// 
@@ -66405,12 +66979,12 @@ type MenuModel interface {
 	// the item at position @item_index in @model.
 	// 
 	// You must free the iterator with g_object_unref() when you are done.
-	IterateItemAttributes(int) MenuAttributeIter
+	IterateItemAttributes(int32) MenuAttributeIter
 	// IterateItemLinks wraps g_menu_model_iterate_item_links
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- itemIndex int: the index of the item 
+	// 	- itemIndex int32: the index of the item 
 	// 
 	// The function returns the following values:
 	// 
@@ -66420,7 +66994,7 @@ type MenuModel interface {
 	// position @item_index in @model.
 	// 
 	// You must free the iterator with g_object_unref() when you are done.
-	IterateItemLinks(int) MenuLinkIter
+	IterateItemLinks(int32) MenuLinkIter
 	// ConnectItemsChanged connects the provided callback to the "items-changed" signal
 	//
 	// Emitted when a change has occurred to the menu.
@@ -66443,7 +67017,7 @@ type MenuModel interface {
 	// Signal handlers may query the model (particularly the added items)
 	// and expect to see the results of the modification that is being
 	// reported.  The signal is emitted after the modification.
-	ConnectItemsChanged(func(MenuModel, int, int, int)) gobject.SignalHandle
+	ConnectItemsChanged(func(MenuModel, int32, int32, int32)) gobject.SignalHandle
 }
 
 func unsafeWrapMenuModel(base *gobject.ObjectInstance) *MenuModelInstance {
@@ -66466,6 +67040,11 @@ func UnsafeMenuModelFromGlibFull(c unsafe.Pointer) MenuModel {
 	return gobject.UnsafeObjectFromGlibFull(c).(MenuModel)
 }
 
+// UnsafeMenuModelFromGlibBorrow is used to convert raw GMenuModel pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeMenuModelFromGlibBorrow(c unsafe.Pointer) MenuModel {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(MenuModel)
+}
+
 func (m *MenuModelInstance) upcastToGMenuModel() *MenuModelInstance {
 	return m
 }
@@ -66484,7 +67063,7 @@ func UnsafeMenuModelToGlibFull(c MenuModel) unsafe.Pointer {
 // 
 // The function takes the following parameters:
 // 
-// 	- itemIndex int: the index of the item 
+// 	- itemIndex int32: the index of the item 
 // 	- link string: the link to query 
 // 
 // The function returns the following values:
@@ -66496,7 +67075,7 @@ func UnsafeMenuModelToGlibFull(c MenuModel) unsafe.Pointer {
 // 
 // If the link exists, the linked #GMenuModel is returned.  If the link
 // does not exist, %NULL is returned.
-func (model *MenuModelInstance) GetItemLink(itemIndex int, link string) MenuModel {
+func (model *MenuModelInstance) GetItemLink(itemIndex int32, link string) MenuModel {
 	var carg0 *C.GMenuModel // in, none, converted
 	var carg1 C.gint        // in, none, casted
 	var carg2 *C.gchar      // in, none, string
@@ -66525,10 +67104,10 @@ func (model *MenuModelInstance) GetItemLink(itemIndex int, link string) MenuMode
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Query the number of items in @model.
-func (model *MenuModelInstance) GetNItems() int {
+func (model *MenuModelInstance) GetNItems() int32 {
 	var carg0 *C.GMenuModel // in, none, converted
 	var cret  C.gint        // return, none, casted
 
@@ -66537,9 +67116,9 @@ func (model *MenuModelInstance) GetNItems() int {
 	cret = C.g_menu_model_get_n_items(carg0)
 	runtime.KeepAlive(model)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -66576,9 +67155,9 @@ func (model *MenuModelInstance) IsMutable() bool {
 // 
 // The function takes the following parameters:
 // 
-// 	- position int: the position of the change 
-// 	- removed int: the number of items removed 
-// 	- added int: the number of items added 
+// 	- position int32: the position of the change 
+// 	- removed int32: the number of items removed 
+// 	- added int32: the number of items added 
 //
 // Requests emission of the #GMenuModel::items-changed signal on @model.
 // 
@@ -66595,7 +67174,7 @@ func (model *MenuModelInstance) IsMutable() bool {
 // entry and not in response to calls -- particularly those from the
 // #GMenuModel API.  Said another way: the menu must not change while
 // user code is running without returning to the mainloop.
-func (model *MenuModelInstance) ItemsChanged(position int, removed int, added int) {
+func (model *MenuModelInstance) ItemsChanged(position int32, removed int32, added int32) {
 	var carg0 *C.GMenuModel // in, none, converted
 	var carg1 C.gint        // in, none, casted
 	var carg2 C.gint        // in, none, casted
@@ -66617,7 +67196,7 @@ func (model *MenuModelInstance) ItemsChanged(position int, removed int, added in
 // 
 // The function takes the following parameters:
 // 
-// 	- itemIndex int: the index of the item 
+// 	- itemIndex int32: the index of the item 
 // 
 // The function returns the following values:
 // 
@@ -66627,7 +67206,7 @@ func (model *MenuModelInstance) ItemsChanged(position int, removed int, added in
 // the item at position @item_index in @model.
 // 
 // You must free the iterator with g_object_unref() when you are done.
-func (model *MenuModelInstance) IterateItemAttributes(itemIndex int) MenuAttributeIter {
+func (model *MenuModelInstance) IterateItemAttributes(itemIndex int32) MenuAttributeIter {
 	var carg0 *C.GMenuModel         // in, none, converted
 	var carg1 C.gint                // in, none, casted
 	var cret  *C.GMenuAttributeIter // return, full, converted
@@ -66650,7 +67229,7 @@ func (model *MenuModelInstance) IterateItemAttributes(itemIndex int) MenuAttribu
 // 
 // The function takes the following parameters:
 // 
-// 	- itemIndex int: the index of the item 
+// 	- itemIndex int32: the index of the item 
 // 
 // The function returns the following values:
 // 
@@ -66660,7 +67239,7 @@ func (model *MenuModelInstance) IterateItemAttributes(itemIndex int) MenuAttribu
 // position @item_index in @model.
 // 
 // You must free the iterator with g_object_unref() when you are done.
-func (model *MenuModelInstance) IterateItemLinks(itemIndex int) MenuLinkIter {
+func (model *MenuModelInstance) IterateItemLinks(itemIndex int32) MenuLinkIter {
 	var carg0 *C.GMenuModel    // in, none, converted
 	var carg1 C.gint           // in, none, casted
 	var cret  *C.GMenuLinkIter // return, full, converted
@@ -66701,7 +67280,7 @@ func (model *MenuModelInstance) IterateItemLinks(itemIndex int) MenuLinkIter {
 // Signal handlers may query the model (particularly the added items)
 // and expect to see the results of the modification that is being
 // reported.  The signal is emitted after the modification.
-func (o *MenuModelInstance) ConnectItemsChanged(fn func(MenuModel, int, int, int)) gobject.SignalHandle {
+func (o *MenuModelInstance) ConnectItemsChanged(fn func(MenuModel, int32, int32, int32)) gobject.SignalHandle {
 	return o.Connect("items-changed", fn)
 }
 
@@ -66714,18 +67293,18 @@ type MenuModelOverrides[Instance MenuModel] struct {
 	// GetItemLink allows you to override the implementation of the virtual method get_item_link.
 	// The function takes the following parameters:
 	// 
-	// 	- itemIndex int: the index of the item 
+	// 	- itemIndex int32: the index of the item 
 	// 	- link string: the link to query 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret MenuModel (nullable) 
-	GetItemLink func(Instance, int, string) MenuModel
+	GetItemLink func(Instance, int32, string) MenuModel
 	// GetNItems allows you to override the implementation of the virtual method get_n_items.
 	// The function returns the following values:
 	// 
-	// 	- goret int 
-	GetNItems func(Instance) int
+	// 	- goret int32 
+	GetNItems func(Instance) int32
 	// IsMutable allows you to override the implementation of the virtual method is_mutable.
 	// The function returns the following values:
 	// 
@@ -66734,21 +67313,21 @@ type MenuModelOverrides[Instance MenuModel] struct {
 	// IterateItemAttributes allows you to override the implementation of the virtual method iterate_item_attributes.
 	// The function takes the following parameters:
 	// 
-	// 	- itemIndex int: the index of the item 
+	// 	- itemIndex int32: the index of the item 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret MenuAttributeIter 
-	IterateItemAttributes func(Instance, int) MenuAttributeIter
+	IterateItemAttributes func(Instance, int32) MenuAttributeIter
 	// IterateItemLinks allows you to override the implementation of the virtual method iterate_item_links.
 	// The function takes the following parameters:
 	// 
-	// 	- itemIndex int: the index of the item 
+	// 	- itemIndex int32: the index of the item 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret MenuLinkIter 
-	IterateItemLinks func(Instance, int) MenuLinkIter
+	IterateItemLinks func(Instance, int32) MenuLinkIter
 }
 
 // UnsafeApplyMenuModelOverrides applies the overrides to init the gclass by setting the trampoline functions.
@@ -66765,12 +67344,12 @@ func UnsafeApplyMenuModelOverrides[Instance MenuModel](gclass unsafe.Pointer, ov
 			"_gotk4_gio2_MenuModel_get_item_link",
 			func(carg0 *C.GMenuModel, carg1 C.gint, carg2 *C.gchar) (cret *C.GMenuModel) {
 				var model     Instance  // go GMenuModel subclass
-				var itemIndex int       // in, none, casted
+				var itemIndex int32     // in, none, casted
 				var link      string    // in, none, string
 				var goret     MenuModel // return, full, converted, nullable
 
-				model = UnsafeMenuModelFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				itemIndex = int(carg1)
+				model = UnsafeMenuModelFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				itemIndex = int32(carg1)
 				link = C.GoString((*C.char)(unsafe.Pointer(carg2)))
 
 				goret = overrides.GetItemLink(model, itemIndex, link)
@@ -66791,9 +67370,9 @@ func UnsafeApplyMenuModelOverrides[Instance MenuModel](gclass unsafe.Pointer, ov
 			"_gotk4_gio2_MenuModel_get_n_items",
 			func(carg0 *C.GMenuModel) (cret C.gint) {
 				var model Instance // go GMenuModel subclass
-				var goret int      // return, none, casted
+				var goret int32    // return, none, casted
 
-				model = UnsafeMenuModelFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				model = UnsafeMenuModelFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetNItems(model)
 
@@ -66813,7 +67392,7 @@ func UnsafeApplyMenuModelOverrides[Instance MenuModel](gclass unsafe.Pointer, ov
 				var model Instance // go GMenuModel subclass
 				var goret bool     // return
 
-				model = UnsafeMenuModelFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				model = UnsafeMenuModelFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.IsMutable(model)
 
@@ -66833,11 +67412,11 @@ func UnsafeApplyMenuModelOverrides[Instance MenuModel](gclass unsafe.Pointer, ov
 			"_gotk4_gio2_MenuModel_iterate_item_attributes",
 			func(carg0 *C.GMenuModel, carg1 C.gint) (cret *C.GMenuAttributeIter) {
 				var model     Instance          // go GMenuModel subclass
-				var itemIndex int               // in, none, casted
+				var itemIndex int32             // in, none, casted
 				var goret     MenuAttributeIter // return, full, converted
 
-				model = UnsafeMenuModelFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				itemIndex = int(carg1)
+				model = UnsafeMenuModelFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				itemIndex = int32(carg1)
 
 				goret = overrides.IterateItemAttributes(model, itemIndex)
 
@@ -66855,11 +67434,11 @@ func UnsafeApplyMenuModelOverrides[Instance MenuModel](gclass unsafe.Pointer, ov
 			"_gotk4_gio2_MenuModel_iterate_item_links",
 			func(carg0 *C.GMenuModel, carg1 C.gint) (cret *C.GMenuLinkIter) {
 				var model     Instance     // go GMenuModel subclass
-				var itemIndex int          // in, none, casted
+				var itemIndex int32        // in, none, casted
 				var goret     MenuLinkIter // return, full, converted
 
-				model = UnsafeMenuModelFromGlibNone(unsafe.Pointer(carg0)).(Instance)
-				itemIndex = int(carg1)
+				model = UnsafeMenuModelFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				itemIndex = int32(carg1)
 
 				goret = overrides.IterateItemLinks(model, itemIndex)
 
@@ -66946,10 +67525,10 @@ type MountOperation interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Gets a choice from the mount operation.
-	GetChoice() int
+	GetChoice() int32
 	// GetDomain wraps g_mount_operation_get_domain
 	// 
 	// The function returns the following values:
@@ -67028,10 +67607,10 @@ type MountOperation interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- choice int: an integer. 
+	// 	- choice int32: an integer. 
 	//
 	// Sets a default choice for the mount operation.
-	SetChoice(int)
+	SetChoice(int32)
 	// SetDomain wraps g_mount_operation_set_domain
 	// 
 	// The function takes the following parameters:
@@ -67149,6 +67728,11 @@ func UnsafeMountOperationFromGlibFull(c unsafe.Pointer) MountOperation {
 	return gobject.UnsafeObjectFromGlibFull(c).(MountOperation)
 }
 
+// UnsafeMountOperationFromGlibBorrow is used to convert raw GMountOperation pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeMountOperationFromGlibBorrow(c unsafe.Pointer) MountOperation {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(MountOperation)
+}
+
 func (m *MountOperationInstance) upcastToGMountOperation() *MountOperationInstance {
 	return m
 }
@@ -67212,10 +67796,10 @@ func (op *MountOperationInstance) GetAnonymous() bool {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Gets a choice from the mount operation.
-func (op *MountOperationInstance) GetChoice() int {
+func (op *MountOperationInstance) GetChoice() int32 {
 	var carg0 *C.GMountOperation // in, none, converted
 	var cret  C.int              // return, none, casted, casted C.gint
 
@@ -67224,9 +67808,9 @@ func (op *MountOperationInstance) GetChoice() int {
 	cret = C.g_mount_operation_get_choice(carg0)
 	runtime.KeepAlive(op)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -67448,10 +68032,10 @@ func (op *MountOperationInstance) SetAnonymous(anonymous bool) {
 // 
 // The function takes the following parameters:
 // 
-// 	- choice int: an integer. 
+// 	- choice int32: an integer. 
 //
 // Sets a default choice for the mount operation.
-func (op *MountOperationInstance) SetChoice(choice int) {
+func (op *MountOperationInstance) SetChoice(choice int32) {
 	var carg0 *C.GMountOperation // in, none, converted
 	var carg1 C.int              // in, none, casted, casted C.gint
 
@@ -67712,7 +68296,7 @@ func UnsafeApplyMountOperationOverrides[Instance MountOperation](gclass unsafe.P
 			func(carg0 *C.GMountOperation) {
 				var op Instance // go GMountOperation subclass
 
-				op = UnsafeMountOperationFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				op = UnsafeMountOperationFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				overrides.Aborted(op)
 			},
@@ -67731,7 +68315,7 @@ func UnsafeApplyMountOperationOverrides[Instance MountOperation](gclass unsafe.P
 				var defaultDomain string           // in, none, string, casted *C.gchar
 				var flags         AskPasswordFlags // in, none, casted
 
-				op = UnsafeMountOperationFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				op = UnsafeMountOperationFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				message = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 				defaultUser = C.GoString((*C.char)(unsafe.Pointer(carg2)))
 				defaultDomain = C.GoString((*C.char)(unsafe.Pointer(carg3)))
@@ -67752,7 +68336,7 @@ func UnsafeApplyMountOperationOverrides[Instance MountOperation](gclass unsafe.P
 				var message string   // in, none, string, casted *C.gchar
 				var choices []string // in, transfer: none, C Pointers: 2, Name: array[utf8], array (inner: *typesystem.StringPrimitive, zero-terminated)
 
-				op = UnsafeMountOperationFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				op = UnsafeMountOperationFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				message = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 				_ = choices
 				_ = carg2
@@ -67772,7 +68356,7 @@ func UnsafeApplyMountOperationOverrides[Instance MountOperation](gclass unsafe.P
 				var op     Instance             // go GMountOperation subclass
 				var result MountOperationResult // in, none, casted
 
-				op = UnsafeMountOperationFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				op = UnsafeMountOperationFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = MountOperationResult(carg1)
 
 				overrides.Reply(op, result)
@@ -67791,7 +68375,7 @@ func UnsafeApplyMountOperationOverrides[Instance MountOperation](gclass unsafe.P
 				var timeLeft  int64    // in, none, casted
 				var bytesLeft int64    // in, none, casted
 
-				op = UnsafeMountOperationFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				op = UnsafeMountOperationFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				message = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 				timeLeft = int64(carg2)
 				bytesLeft = int64(carg3)
@@ -67897,6 +68481,11 @@ func UnsafeNetworkAddressFromGlibNone(c unsafe.Pointer) NetworkAddress {
 // UnsafeNetworkAddressFromGlibFull is used to convert raw GNetworkAddress pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeNetworkAddressFromGlibFull(c unsafe.Pointer) NetworkAddress {
 	return gobject.UnsafeObjectFromGlibFull(c).(NetworkAddress)
+}
+
+// UnsafeNetworkAddressFromGlibBorrow is used to convert raw GNetworkAddress pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeNetworkAddressFromGlibBorrow(c unsafe.Pointer) NetworkAddress {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(NetworkAddress)
 }
 
 func (n *NetworkAddressInstance) upcastToGNetworkAddress() *NetworkAddressInstance {
@@ -68291,6 +68880,11 @@ func UnsafeNetworkServiceFromGlibFull(c unsafe.Pointer) NetworkService {
 	return gobject.UnsafeObjectFromGlibFull(c).(NetworkService)
 }
 
+// UnsafeNetworkServiceFromGlibBorrow is used to convert raw GNetworkService pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeNetworkServiceFromGlibBorrow(c unsafe.Pointer) NetworkService {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(NetworkService)
+}
+
 func (n *NetworkServiceInstance) upcastToGNetworkService() *NetworkServiceInstance {
 	return n
 }
@@ -68672,6 +69266,11 @@ func UnsafeNotificationFromGlibFull(c unsafe.Pointer) Notification {
 	return gobject.UnsafeObjectFromGlibFull(c).(Notification)
 }
 
+// UnsafeNotificationFromGlibBorrow is used to convert raw GNotification pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeNotificationFromGlibBorrow(c unsafe.Pointer) Notification {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Notification)
+}
+
 func (n *NotificationInstance) upcastToGNotification() *NotificationInstance {
 	return n
 }
@@ -68994,7 +69593,7 @@ type OutputStream interface {
 	// The function takes the following parameters:
 	// 
 	// 	- cancellable context.Context (nullable): optional cancellable object 
-	// 	- ioPriority int: the io priority of the request. 
+	// 	- ioPriority int32: the io priority of the request. 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 	//   to call when the request is satisfied 
 	//
@@ -69008,7 +69607,7 @@ type OutputStream interface {
 	// The asynchronous methods have a default fallback that uses threads
 	// to implement asynchronicity, so they are optional for inheriting
 	// classes. However, if you override one you must override all.
-	CloseAsync(context.Context, int, AsyncReadyCallback)
+	CloseAsync(context.Context, int32, AsyncReadyCallback)
 	// CloseFinish wraps g_output_stream_close_finish
 	// 
 	// The function takes the following parameters:
@@ -69048,7 +69647,7 @@ type OutputStream interface {
 	// The function takes the following parameters:
 	// 
 	// 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore. 
-	// 	- ioPriority int: the io priority of the request. 
+	// 	- ioPriority int32: the io priority of the request. 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 	//   to call when the request is satisfied 
 	//
@@ -69059,7 +69658,7 @@ type OutputStream interface {
 	// When the operation is finished @callback will be
 	// called. You can then call g_output_stream_flush_finish() to get the
 	// result of the operation.
-	FlushAsync(context.Context, int, AsyncReadyCallback)
+	FlushAsync(context.Context, int32, AsyncReadyCallback)
 	// FlushFinish wraps g_output_stream_flush_finish
 	// 
 	// The function takes the following parameters:
@@ -69133,7 +69732,7 @@ type OutputStream interface {
 	// 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore. 
 	// 	- source InputStream: a #GInputStream. 
 	// 	- flags OutputStreamSpliceFlags: a set of #GOutputStreamSpliceFlags. 
-	// 	- ioPriority int: the io priority of the request. 
+	// 	- ioPriority int32: the io priority of the request. 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 	//   to call when the request is satisfied 
 	//
@@ -69144,7 +69743,7 @@ type OutputStream interface {
 	// 
 	// For the synchronous, blocking version of this function, see
 	// g_output_stream_splice().
-	SpliceAsync(context.Context, InputStream, OutputStreamSpliceFlags, int, AsyncReadyCallback)
+	SpliceAsync(context.Context, InputStream, OutputStreamSpliceFlags, int32, AsyncReadyCallback)
 	// SpliceFinish wraps g_output_stream_splice_finish
 	// 
 	// The function takes the following parameters:
@@ -69231,7 +69830,7 @@ type OutputStream interface {
 	// 
 	// 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore 
 	// 	- buffer []byte: the buffer containing the data to write 
-	// 	- ioPriority int: the io priority of the request 
+	// 	- ioPriority int32: the io priority of the request 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 	//     to call when the request is satisfied 
 	//
@@ -69250,7 +69849,7 @@ type OutputStream interface {
 	// 
 	// Note that no copy of @buffer will be made, so it must stay valid
 	// until @callback is called.
-	WriteAllAsync(context.Context, []byte, int, AsyncReadyCallback)
+	WriteAllAsync(context.Context, []byte, int32, AsyncReadyCallback)
 	// WriteAllFinish wraps g_output_stream_write_all_finish
 	// 
 	// The function takes the following parameters:
@@ -69280,7 +69879,7 @@ type OutputStream interface {
 	// 
 	// 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore. 
 	// 	- buffer []byte: the buffer containing the data to write. 
-	// 	- ioPriority int: the io priority of the request. 
+	// 	- ioPriority int32: the io priority of the request. 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 	//     to call when the request is satisfied 
 	//
@@ -69319,7 +69918,7 @@ type OutputStream interface {
 	// until @callback is called. See g_output_stream_write_bytes_async()
 	// for a #GBytes version that will automatically hold a reference to
 	// the contents (without copying) for the duration of the call.
-	WriteAsync(context.Context, []byte, int, AsyncReadyCallback)
+	WriteAsync(context.Context, []byte, int32, AsyncReadyCallback)
 	// WriteBytes wraps g_output_stream_write_bytes
 	// 
 	// The function takes the following parameters:
@@ -69350,7 +69949,7 @@ type OutputStream interface {
 	// 
 	// 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore. 
 	// 	- bytes *glib.Bytes: The bytes to write 
-	// 	- ioPriority int: the io priority of the request. 
+	// 	- ioPriority int32: the io priority of the request. 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 	//   to call when the request is satisfied 
 	//
@@ -69367,7 +69966,7 @@ type OutputStream interface {
 	// 
 	// For the synchronous, blocking version of this function, see
 	// g_output_stream_write_bytes().
-	WriteBytesAsync(context.Context, *glib.Bytes, int, AsyncReadyCallback)
+	WriteBytesAsync(context.Context, *glib.Bytes, int32, AsyncReadyCallback)
 	// WriteBytesFinish wraps g_output_stream_write_bytes_finish
 	// 
 	// The function takes the following parameters:
@@ -69475,7 +70074,7 @@ type OutputStream interface {
 	// 
 	// 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore 
 	// 	- vectors []OutputVector: the buffer containing the #GOutputVectors to write. 
-	// 	- ioPriority int: the I/O priority of the request 
+	// 	- ioPriority int32: the I/O priority of the request 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 	//     to call when the request is satisfied 
 	//
@@ -69495,7 +70094,7 @@ type OutputStream interface {
 	// Note that no copy of @vectors will be made, so it must stay valid
 	// until @callback is called. The content of the individual elements
 	// of @vectors might be changed by this function.
-	WritevAllAsync(context.Context, []OutputVector, int, AsyncReadyCallback)
+	WritevAllAsync(context.Context, []OutputVector, int32, AsyncReadyCallback)
 	// WritevAllFinish wraps g_output_stream_writev_all_finish
 	// 
 	// The function takes the following parameters:
@@ -69525,7 +70124,7 @@ type OutputStream interface {
 	// 
 	// 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore. 
 	// 	- vectors []OutputVector: the buffer containing the #GOutputVectors to write. 
-	// 	- ioPriority int: the I/O priority of the request. 
+	// 	- ioPriority int32: the I/O priority of the request. 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 	//     to call when the request is satisfied 
 	//
@@ -69559,7 +70158,7 @@ type OutputStream interface {
 	// 
 	// Note that no copy of @vectors will be made, so it must stay valid
 	// until @callback is called.
-	WritevAsync(context.Context, []OutputVector, int, AsyncReadyCallback)
+	WritevAsync(context.Context, []OutputVector, int32, AsyncReadyCallback)
 	// WritevFinish wraps g_output_stream_writev_finish
 	// 
 	// The function takes the following parameters:
@@ -69594,6 +70193,11 @@ func UnsafeOutputStreamFromGlibNone(c unsafe.Pointer) OutputStream {
 // UnsafeOutputStreamFromGlibFull is used to convert raw GOutputStream pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeOutputStreamFromGlibFull(c unsafe.Pointer) OutputStream {
 	return gobject.UnsafeObjectFromGlibFull(c).(OutputStream)
+}
+
+// UnsafeOutputStreamFromGlibBorrow is used to convert raw GOutputStream pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeOutputStreamFromGlibBorrow(c unsafe.Pointer) OutputStream {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(OutputStream)
 }
 
 func (o *OutputStreamInstance) upcastToGOutputStream() *OutputStreamInstance {
@@ -69695,7 +70299,7 @@ func (stream *OutputStreamInstance) Close(cancellable context.Context) (bool, er
 // The function takes the following parameters:
 // 
 // 	- cancellable context.Context (nullable): optional cancellable object 
-// 	- ioPriority int: the io priority of the request. 
+// 	- ioPriority int32: the io priority of the request. 
 // 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 //   to call when the request is satisfied 
 //
@@ -69709,7 +70313,7 @@ func (stream *OutputStreamInstance) Close(cancellable context.Context) (bool, er
 // The asynchronous methods have a default fallback that uses threads
 // to implement asynchronicity, so they are optional for inheriting
 // classes. However, if you override one you must override all.
-func (stream *OutputStreamInstance) CloseAsync(cancellable context.Context, ioPriority int, callback AsyncReadyCallback) {
+func (stream *OutputStreamInstance) CloseAsync(cancellable context.Context, ioPriority int32, callback AsyncReadyCallback) {
 	var carg0 *C.GOutputStream      // in, none, converted
 	var carg2 *C.GCancellable       // in, none, converted, nullable
 	var carg1 C.int                 // in, none, casted, casted C.gint
@@ -69824,7 +70428,7 @@ func (stream *OutputStreamInstance) Flush(cancellable context.Context) (bool, er
 // The function takes the following parameters:
 // 
 // 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore. 
-// 	- ioPriority int: the io priority of the request. 
+// 	- ioPriority int32: the io priority of the request. 
 // 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 //   to call when the request is satisfied 
 //
@@ -69835,7 +70439,7 @@ func (stream *OutputStreamInstance) Flush(cancellable context.Context) (bool, er
 // When the operation is finished @callback will be
 // called. You can then call g_output_stream_flush_finish() to get the
 // result of the operation.
-func (stream *OutputStreamInstance) FlushAsync(cancellable context.Context, ioPriority int, callback AsyncReadyCallback) {
+func (stream *OutputStreamInstance) FlushAsync(cancellable context.Context, ioPriority int32, callback AsyncReadyCallback) {
 	var carg0 *C.GOutputStream      // in, none, converted
 	var carg2 *C.GCancellable       // in, none, converted, nullable
 	var carg1 C.int                 // in, none, casted, casted C.gint
@@ -70061,7 +70665,7 @@ func (stream *OutputStreamInstance) Splice(cancellable context.Context, source I
 // 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore. 
 // 	- source InputStream: a #GInputStream. 
 // 	- flags OutputStreamSpliceFlags: a set of #GOutputStreamSpliceFlags. 
-// 	- ioPriority int: the io priority of the request. 
+// 	- ioPriority int32: the io priority of the request. 
 // 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 //   to call when the request is satisfied 
 //
@@ -70072,7 +70676,7 @@ func (stream *OutputStreamInstance) Splice(cancellable context.Context, source I
 // 
 // For the synchronous, blocking version of this function, see
 // g_output_stream_splice().
-func (stream *OutputStreamInstance) SpliceAsync(cancellable context.Context, source InputStream, flags OutputStreamSpliceFlags, ioPriority int, callback AsyncReadyCallback) {
+func (stream *OutputStreamInstance) SpliceAsync(cancellable context.Context, source InputStream, flags OutputStreamSpliceFlags, ioPriority int32, callback AsyncReadyCallback) {
 	var carg0 *C.GOutputStream           // in, none, converted
 	var carg4 *C.GCancellable            // in, none, converted, nullable
 	var carg1 *C.GInputStream            // in, none, converted
@@ -70280,7 +70884,7 @@ func (stream *OutputStreamInstance) WriteAll(cancellable context.Context, buffer
 // 
 // 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore 
 // 	- buffer []byte: the buffer containing the data to write 
-// 	- ioPriority int: the io priority of the request 
+// 	- ioPriority int32: the io priority of the request 
 // 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 //     to call when the request is satisfied 
 //
@@ -70299,7 +70903,7 @@ func (stream *OutputStreamInstance) WriteAll(cancellable context.Context, buffer
 // 
 // Note that no copy of @buffer will be made, so it must stay valid
 // until @callback is called.
-func (stream *OutputStreamInstance) WriteAllAsync(cancellable context.Context, buffer []byte, ioPriority int, callback AsyncReadyCallback) {
+func (stream *OutputStreamInstance) WriteAllAsync(cancellable context.Context, buffer []byte, ioPriority int32, callback AsyncReadyCallback) {
 	var carg0 *C.GOutputStream      // in, none, converted
 	var carg4 *C.GCancellable       // in, none, converted, nullable
 	var carg1 unsafe.Pointer        // in, transfer: none, C Pointers: 1, Name: array[unknown], array (inner: <nil>, length-by: carg2)
@@ -70387,7 +70991,7 @@ func (stream *OutputStreamInstance) WriteAllFinish(result AsyncResult) (uint, bo
 // 
 // 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore. 
 // 	- buffer []byte: the buffer containing the data to write. 
-// 	- ioPriority int: the io priority of the request. 
+// 	- ioPriority int32: the io priority of the request. 
 // 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 //     to call when the request is satisfied 
 //
@@ -70426,7 +71030,7 @@ func (stream *OutputStreamInstance) WriteAllFinish(result AsyncResult) (uint, bo
 // until @callback is called. See g_output_stream_write_bytes_async()
 // for a #GBytes version that will automatically hold a reference to
 // the contents (without copying) for the duration of the call.
-func (stream *OutputStreamInstance) WriteAsync(cancellable context.Context, buffer []byte, ioPriority int, callback AsyncReadyCallback) {
+func (stream *OutputStreamInstance) WriteAsync(cancellable context.Context, buffer []byte, ioPriority int32, callback AsyncReadyCallback) {
 	var carg0 *C.GOutputStream      // in, none, converted
 	var carg4 *C.GCancellable       // in, none, converted, nullable
 	var carg1 unsafe.Pointer        // in, transfer: none, C Pointers: 1, Name: array[unknown], array (inner: <nil>, length-by: carg2)
@@ -70515,7 +71119,7 @@ func (stream *OutputStreamInstance) WriteBytes(cancellable context.Context, byte
 // 
 // 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore. 
 // 	- bytes *glib.Bytes: The bytes to write 
-// 	- ioPriority int: the io priority of the request. 
+// 	- ioPriority int32: the io priority of the request. 
 // 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 //   to call when the request is satisfied 
 //
@@ -70532,7 +71136,7 @@ func (stream *OutputStreamInstance) WriteBytes(cancellable context.Context, byte
 // 
 // For the synchronous, blocking version of this function, see
 // g_output_stream_write_bytes().
-func (stream *OutputStreamInstance) WriteBytesAsync(cancellable context.Context, bytes *glib.Bytes, ioPriority int, callback AsyncReadyCallback) {
+func (stream *OutputStreamInstance) WriteBytesAsync(cancellable context.Context, bytes *glib.Bytes, ioPriority int32, callback AsyncReadyCallback) {
 	var carg0 *C.GOutputStream      // in, none, converted
 	var carg3 *C.GCancellable       // in, none, converted, nullable
 	var carg1 *C.GBytes             // in, none, converted
@@ -70786,7 +71390,7 @@ func (stream *OutputStreamInstance) WritevAll(cancellable context.Context, vecto
 // 
 // 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore 
 // 	- vectors []OutputVector: the buffer containing the #GOutputVectors to write. 
-// 	- ioPriority int: the I/O priority of the request 
+// 	- ioPriority int32: the I/O priority of the request 
 // 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 //     to call when the request is satisfied 
 //
@@ -70806,7 +71410,7 @@ func (stream *OutputStreamInstance) WritevAll(cancellable context.Context, vecto
 // Note that no copy of @vectors will be made, so it must stay valid
 // until @callback is called. The content of the individual elements
 // of @vectors might be changed by this function.
-func (stream *OutputStreamInstance) WritevAllAsync(cancellable context.Context, vectors []OutputVector, ioPriority int, callback AsyncReadyCallback) {
+func (stream *OutputStreamInstance) WritevAllAsync(cancellable context.Context, vectors []OutputVector, ioPriority int32, callback AsyncReadyCallback) {
 	var carg0 *C.GOutputStream      // in, none, converted
 	var carg4 *C.GCancellable       // in, none, converted, nullable
 	var carg1 *C.GOutputVector      // in, transfer: none, C Pointers: 1, Name: array[OutputVector], array (inner: *typesystem.Record, length-by: carg2)
@@ -70894,7 +71498,7 @@ func (stream *OutputStreamInstance) WritevAllFinish(result AsyncResult) (uint, b
 // 
 // 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore. 
 // 	- vectors []OutputVector: the buffer containing the #GOutputVectors to write. 
-// 	- ioPriority int: the I/O priority of the request. 
+// 	- ioPriority int32: the I/O priority of the request. 
 // 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 //     to call when the request is satisfied 
 //
@@ -70928,7 +71532,7 @@ func (stream *OutputStreamInstance) WritevAllFinish(result AsyncResult) (uint, b
 // 
 // Note that no copy of @vectors will be made, so it must stay valid
 // until @callback is called.
-func (stream *OutputStreamInstance) WritevAsync(cancellable context.Context, vectors []OutputVector, ioPriority int, callback AsyncReadyCallback) {
+func (stream *OutputStreamInstance) WritevAsync(cancellable context.Context, vectors []OutputVector, ioPriority int32, callback AsyncReadyCallback) {
 	var carg0 *C.GOutputStream      // in, none, converted
 	var carg4 *C.GCancellable       // in, none, converted, nullable
 	var carg1 *C.GOutputVector      // in, transfer: none, C Pointers: 1, Name: array[OutputVector], array (inner: *typesystem.Record, length-by: carg2)
@@ -71011,10 +71615,10 @@ type OutputStreamOverrides[Instance OutputStream] struct {
 	// The function takes the following parameters:
 	// 
 	// 	- cancellable context.Context (nullable): optional cancellable object 
-	// 	- ioPriority int: the io priority of the request. 
+	// 	- ioPriority int32: the io priority of the request. 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 	//   to call when the request is satisfied 
-	CloseAsync func(Instance, context.Context, int, AsyncReadyCallback)
+	CloseAsync func(Instance, context.Context, int32, AsyncReadyCallback)
 	// CloseFinish allows you to override the implementation of the virtual method close_finish.
 	// The function takes the following parameters:
 	// 
@@ -71049,10 +71653,10 @@ type OutputStreamOverrides[Instance OutputStream] struct {
 	// The function takes the following parameters:
 	// 
 	// 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore. 
-	// 	- ioPriority int: the io priority of the request. 
+	// 	- ioPriority int32: the io priority of the request. 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 	//   to call when the request is satisfied 
-	FlushAsync func(Instance, context.Context, int, AsyncReadyCallback)
+	FlushAsync func(Instance, context.Context, int32, AsyncReadyCallback)
 	// FlushFinish allows you to override the implementation of the virtual method flush_finish.
 	// The function takes the following parameters:
 	// 
@@ -71081,10 +71685,10 @@ type OutputStreamOverrides[Instance OutputStream] struct {
 	// 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore. 
 	// 	- source InputStream: a #GInputStream. 
 	// 	- flags OutputStreamSpliceFlags: a set of #GOutputStreamSpliceFlags. 
-	// 	- ioPriority int: the io priority of the request. 
+	// 	- ioPriority int32: the io priority of the request. 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 	//   to call when the request is satisfied 
-	SpliceAsync func(Instance, context.Context, InputStream, OutputStreamSpliceFlags, int, AsyncReadyCallback)
+	SpliceAsync func(Instance, context.Context, InputStream, OutputStreamSpliceFlags, int32, AsyncReadyCallback)
 	// SpliceFinish allows you to override the implementation of the virtual method splice_finish.
 	// The function takes the following parameters:
 	// 
@@ -71100,10 +71704,10 @@ type OutputStreamOverrides[Instance OutputStream] struct {
 	// 
 	// 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore. 
 	// 	- buffer []byte (nullable): the buffer containing the data to write. 
-	// 	- ioPriority int: the io priority of the request. 
+	// 	- ioPriority int32: the io priority of the request. 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 	//     to call when the request is satisfied 
-	WriteAsync func(Instance, context.Context, []byte, int, AsyncReadyCallback)
+	WriteAsync func(Instance, context.Context, []byte, int32, AsyncReadyCallback)
 	// WriteFinish allows you to override the implementation of the virtual method write_finish.
 	// The function takes the following parameters:
 	// 
@@ -71130,10 +71734,10 @@ type OutputStreamOverrides[Instance OutputStream] struct {
 	// 
 	// 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore. 
 	// 	- vectors []OutputVector: the buffer containing the #GOutputVectors to write. 
-	// 	- ioPriority int: the I/O priority of the request. 
+	// 	- ioPriority int32: the I/O priority of the request. 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 	//     to call when the request is satisfied 
-	WritevAsync func(Instance, context.Context, []OutputVector, int, AsyncReadyCallback)
+	WritevAsync func(Instance, context.Context, []OutputVector, int32, AsyncReadyCallback)
 	// WritevFinish allows you to override the implementation of the virtual method writev_finish.
 	// The function takes the following parameters:
 	// 
@@ -71175,14 +71779,14 @@ func UnsafeApplyOutputStreamOverrides[Instance OutputStream](gclass unsafe.Point
 			func(carg0 *C.GOutputStream, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
 				var stream      Instance           // go GOutputStream subclass
 				var cancellable context.Context    // in, none, converted, nullable
-				var ioPriority  int                // in, none, casted, casted C.gint
+				var ioPriority  int32              // in, none, casted, casted C.gint
 				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg4, nullable
 
-				stream = UnsafeOutputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafeOutputStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg2 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
 				}
-				ioPriority = int(carg1)
+				ioPriority = int32(carg1)
 				if carg3 != nil {
 					_ = callback
 					_ = carg3
@@ -71206,7 +71810,7 @@ func UnsafeApplyOutputStreamOverrides[Instance OutputStream](gclass unsafe.Point
 				var goret  bool        // return
 				var _goerr error       // out, full, converted
 
-				stream = UnsafeOutputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafeOutputStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.CloseFinish(stream, result)
@@ -71232,7 +71836,7 @@ func UnsafeApplyOutputStreamOverrides[Instance OutputStream](gclass unsafe.Point
 				var goret       bool            // return
 				var _goerr      error           // out, full, converted
 
-				stream = UnsafeOutputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafeOutputStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg1 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg1))
 				}
@@ -71260,7 +71864,7 @@ func UnsafeApplyOutputStreamOverrides[Instance OutputStream](gclass unsafe.Point
 				var goret       bool            // return
 				var _goerr      error           // out, full, converted
 
-				stream = UnsafeOutputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafeOutputStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg1 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg1))
 				}
@@ -71285,14 +71889,14 @@ func UnsafeApplyOutputStreamOverrides[Instance OutputStream](gclass unsafe.Point
 			func(carg0 *C.GOutputStream, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
 				var stream      Instance           // go GOutputStream subclass
 				var cancellable context.Context    // in, none, converted, nullable
-				var ioPriority  int                // in, none, casted, casted C.gint
+				var ioPriority  int32              // in, none, casted, casted C.gint
 				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg4, nullable
 
-				stream = UnsafeOutputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafeOutputStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg2 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
 				}
-				ioPriority = int(carg1)
+				ioPriority = int32(carg1)
 				if carg3 != nil {
 					_ = callback
 					_ = carg3
@@ -71316,7 +71920,7 @@ func UnsafeApplyOutputStreamOverrides[Instance OutputStream](gclass unsafe.Point
 				var goret  bool        // return
 				var _goerr error       // out, full, converted
 
-				stream = UnsafeOutputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafeOutputStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.FlushFinish(stream, result)
@@ -71344,7 +71948,7 @@ func UnsafeApplyOutputStreamOverrides[Instance OutputStream](gclass unsafe.Point
 				var goret       int                     // return, none, casted
 				var _goerr      error                   // out, full, converted
 
-				stream = UnsafeOutputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafeOutputStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg3 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
 				}
@@ -71371,16 +71975,16 @@ func UnsafeApplyOutputStreamOverrides[Instance OutputStream](gclass unsafe.Point
 				var cancellable context.Context         // in, none, converted, nullable
 				var source      InputStream             // in, none, converted
 				var flags       OutputStreamSpliceFlags // in, none, casted
-				var ioPriority  int                     // in, none, casted, casted C.gint
+				var ioPriority  int32                   // in, none, casted, casted C.gint
 				var callback    AsyncReadyCallback      // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg6, nullable
 
-				stream = UnsafeOutputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafeOutputStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg4 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg4))
 				}
 				source = UnsafeInputStreamFromGlibNone(unsafe.Pointer(carg1))
 				flags = OutputStreamSpliceFlags(carg2)
-				ioPriority = int(carg3)
+				ioPriority = int32(carg3)
 				if carg5 != nil {
 					_ = callback
 					_ = carg5
@@ -71404,7 +72008,7 @@ func UnsafeApplyOutputStreamOverrides[Instance OutputStream](gclass unsafe.Point
 				var goret  int         // return, none, casted
 				var _goerr error       // out, full, converted
 
-				stream = UnsafeOutputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafeOutputStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.SpliceFinish(stream, result)
@@ -71426,10 +72030,10 @@ func UnsafeApplyOutputStreamOverrides[Instance OutputStream](gclass unsafe.Point
 				var stream      Instance           // go GOutputStream subclass
 				var cancellable context.Context    // in, none, converted, nullable
 				var buffer      []byte             // in, transfer: none, C Pointers: 1, Name: array[unknown], nullable, array (inner: <nil>, length-by: carg2)
-				var ioPriority  int                // in, none, casted, casted C.gint
+				var ioPriority  int32              // in, none, casted, casted C.gint
 				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg6, nullable
 
-				stream = UnsafeOutputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafeOutputStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg4 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg4))
 				}
@@ -71437,7 +72041,7 @@ func UnsafeApplyOutputStreamOverrides[Instance OutputStream](gclass unsafe.Point
 				_ = carg1
 				_ = carg2
 				panic("unimplemented conversion of []byte (void*)")
-				ioPriority = int(carg3)
+				ioPriority = int32(carg3)
 				if carg5 != nil {
 					_ = callback
 					_ = carg5
@@ -71461,7 +72065,7 @@ func UnsafeApplyOutputStreamOverrides[Instance OutputStream](gclass unsafe.Point
 				var goret  int         // return, none, casted
 				var _goerr error       // out, full, converted
 
-				stream = UnsafeOutputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafeOutputStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.WriteFinish(stream, result)
@@ -71486,7 +72090,7 @@ func UnsafeApplyOutputStreamOverrides[Instance OutputStream](gclass unsafe.Point
 				var goret       int             // return, none, casted
 				var _goerr      error           // out, full, converted
 
-				stream = UnsafeOutputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafeOutputStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg3 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
 				}
@@ -71514,10 +72118,10 @@ func UnsafeApplyOutputStreamOverrides[Instance OutputStream](gclass unsafe.Point
 				var stream      Instance           // go GOutputStream subclass
 				var cancellable context.Context    // in, none, converted, nullable
 				var vectors     []OutputVector     // in, transfer: none, C Pointers: 1, Name: array[OutputVector], array (inner: *typesystem.Record, length-by: carg2)
-				var ioPriority  int                // in, none, casted, casted C.gint
+				var ioPriority  int32              // in, none, casted, casted C.gint
 				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg6, nullable
 
-				stream = UnsafeOutputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafeOutputStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg4 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg4))
 				}
@@ -71525,7 +72129,7 @@ func UnsafeApplyOutputStreamOverrides[Instance OutputStream](gclass unsafe.Point
 				_ = carg1
 				_ = carg2
 				panic("unimplemented conversion of []OutputVector (const GOutputVector*)")
-				ioPriority = int(carg3)
+				ioPriority = int32(carg3)
 				if carg5 != nil {
 					_ = callback
 					_ = carg5
@@ -71550,7 +72154,7 @@ func UnsafeApplyOutputStreamOverrides[Instance OutputStream](gclass unsafe.Point
 				var goret        bool        // return
 				var _goerr       error       // out, full, converted
 
-				stream = UnsafeOutputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafeOutputStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				bytesWritten, goret, _goerr = overrides.WritevFinish(stream, result)
@@ -71579,7 +72183,7 @@ func UnsafeApplyOutputStreamOverrides[Instance OutputStream](gclass unsafe.Point
 				var goret        bool            // return
 				var _goerr       error           // out, full, converted
 
-				stream = UnsafeOutputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafeOutputStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg4 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg4))
 				}
@@ -71833,6 +72437,11 @@ func UnsafePermissionFromGlibNone(c unsafe.Pointer) Permission {
 // UnsafePermissionFromGlibFull is used to convert raw GPermission pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafePermissionFromGlibFull(c unsafe.Pointer) Permission {
 	return gobject.UnsafeObjectFromGlibFull(c).(Permission)
+}
+
+// UnsafePermissionFromGlibBorrow is used to convert raw GPermission pointers to go without touching any references. This is used by the bindings internally.
+func UnsafePermissionFromGlibBorrow(c unsafe.Pointer) Permission {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Permission)
 }
 
 func (p *PermissionInstance) upcastToGPermission() *PermissionInstance {
@@ -72301,7 +72910,7 @@ func UnsafeApplyPermissionOverrides[Instance Permission](gclass unsafe.Pointer, 
 				var goret       bool            // return
 				var _goerr      error           // out, full, converted
 
-				permission = UnsafePermissionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				permission = UnsafePermissionFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg1 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg1))
 				}
@@ -72328,7 +72937,7 @@ func UnsafeApplyPermissionOverrides[Instance Permission](gclass unsafe.Pointer, 
 				var cancellable context.Context    // in, none, converted, nullable
 				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg3, nullable
 
-				permission = UnsafePermissionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				permission = UnsafePermissionFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg1 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg1))
 				}
@@ -72355,7 +72964,7 @@ func UnsafeApplyPermissionOverrides[Instance Permission](gclass unsafe.Pointer, 
 				var goret      bool        // return
 				var _goerr     error       // out, full, converted
 
-				permission = UnsafePermissionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				permission = UnsafePermissionFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.AcquireFinish(permission, result)
@@ -72381,7 +72990,7 @@ func UnsafeApplyPermissionOverrides[Instance Permission](gclass unsafe.Pointer, 
 				var goret       bool            // return
 				var _goerr      error           // out, full, converted
 
-				permission = UnsafePermissionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				permission = UnsafePermissionFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg1 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg1))
 				}
@@ -72408,7 +73017,7 @@ func UnsafeApplyPermissionOverrides[Instance Permission](gclass unsafe.Pointer, 
 				var cancellable context.Context    // in, none, converted, nullable
 				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg3, nullable
 
-				permission = UnsafePermissionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				permission = UnsafePermissionFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg1 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg1))
 				}
@@ -72435,7 +73044,7 @@ func UnsafeApplyPermissionOverrides[Instance Permission](gclass unsafe.Pointer, 
 				var goret      bool        // return
 				var _goerr     error       // out, full, converted
 
-				permission = UnsafePermissionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				permission = UnsafePermissionFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.ReleaseFinish(permission, result)
@@ -72562,6 +73171,11 @@ func UnsafePropertyActionFromGlibNone(c unsafe.Pointer) PropertyAction {
 // UnsafePropertyActionFromGlibFull is used to convert raw GPropertyAction pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafePropertyActionFromGlibFull(c unsafe.Pointer) PropertyAction {
 	return gobject.UnsafeObjectFromGlibFull(c).(PropertyAction)
+}
+
+// UnsafePropertyActionFromGlibBorrow is used to convert raw GPropertyAction pointers to go without touching any references. This is used by the bindings internally.
+func UnsafePropertyActionFromGlibBorrow(c unsafe.Pointer) PropertyAction {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(PropertyAction)
 }
 
 func (p *PropertyActionInstance) upcastToGPropertyAction() *PropertyActionInstance {
@@ -72916,6 +73530,11 @@ func UnsafeResolverFromGlibNone(c unsafe.Pointer) Resolver {
 // UnsafeResolverFromGlibFull is used to convert raw GResolver pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeResolverFromGlibFull(c unsafe.Pointer) Resolver {
 	return gobject.UnsafeObjectFromGlibFull(c).(Resolver)
+}
+
+// UnsafeResolverFromGlibBorrow is used to convert raw GResolver pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeResolverFromGlibBorrow(c unsafe.Pointer) Resolver {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Resolver)
 }
 
 func (r *ResolverInstance) upcastToGResolver() *ResolverInstance {
@@ -73810,7 +74429,7 @@ func UnsafeApplyResolverOverrides[Instance Resolver](gclass unsafe.Pointer, over
 				var goret       string          // return, full, string
 				var _goerr      error           // out, full, converted
 
-				resolver = UnsafeResolverFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				resolver = UnsafeResolverFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg2 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
 				}
@@ -73837,7 +74456,7 @@ func UnsafeApplyResolverOverrides[Instance Resolver](gclass unsafe.Pointer, over
 				var address     InetAddress        // in, none, converted
 				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg4, nullable
 
-				resolver = UnsafeResolverFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				resolver = UnsafeResolverFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg2 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
 				}
@@ -73865,7 +74484,7 @@ func UnsafeApplyResolverOverrides[Instance Resolver](gclass unsafe.Pointer, over
 				var goret    string      // return, full, string
 				var _goerr   error       // out, full, converted
 
-				resolver = UnsafeResolverFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				resolver = UnsafeResolverFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.LookupByAddressFinish(resolver, result)
@@ -73890,7 +74509,7 @@ func UnsafeApplyResolverOverrides[Instance Resolver](gclass unsafe.Pointer, over
 				var goret       []InetAddress   // return, transfer: full, C Pointers: 1, Name: List, scope: 
 				var _goerr      error           // out, full, converted
 
-				resolver = UnsafeResolverFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				resolver = UnsafeResolverFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg2 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
 				}
@@ -73919,7 +74538,7 @@ func UnsafeApplyResolverOverrides[Instance Resolver](gclass unsafe.Pointer, over
 				var hostname    string             // in, none, string
 				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg4, nullable
 
-				resolver = UnsafeResolverFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				resolver = UnsafeResolverFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg2 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
 				}
@@ -73947,7 +74566,7 @@ func UnsafeApplyResolverOverrides[Instance Resolver](gclass unsafe.Pointer, over
 				var goret    []InetAddress // return, transfer: full, C Pointers: 1, Name: List, scope: 
 				var _goerr   error         // out, full, converted
 
-				resolver = UnsafeResolverFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				resolver = UnsafeResolverFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.LookupByNameFinish(resolver, result)
@@ -73975,7 +74594,7 @@ func UnsafeApplyResolverOverrides[Instance Resolver](gclass unsafe.Pointer, over
 				var goret       []InetAddress           // return, transfer: full, C Pointers: 1, Name: List, scope: 
 				var _goerr      error                   // out, full, converted
 
-				resolver = UnsafeResolverFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				resolver = UnsafeResolverFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg3 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
 				}
@@ -74006,7 +74625,7 @@ func UnsafeApplyResolverOverrides[Instance Resolver](gclass unsafe.Pointer, over
 				var flags       ResolverNameLookupFlags // in, none, casted
 				var callback    AsyncReadyCallback      // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg5, nullable
 
-				resolver = UnsafeResolverFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				resolver = UnsafeResolverFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg3 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
 				}
@@ -74035,7 +74654,7 @@ func UnsafeApplyResolverOverrides[Instance Resolver](gclass unsafe.Pointer, over
 				var goret    []InetAddress // return, transfer: full, C Pointers: 1, Name: List, scope: 
 				var _goerr   error         // out, full, converted
 
-				resolver = UnsafeResolverFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				resolver = UnsafeResolverFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.LookupByNameWithFlagsFinish(resolver, result)
@@ -74062,7 +74681,7 @@ func UnsafeApplyResolverOverrides[Instance Resolver](gclass unsafe.Pointer, over
 				var recordType  ResolverRecordType // in, none, casted
 				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg5, nullable
 
-				resolver = UnsafeResolverFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				resolver = UnsafeResolverFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg3 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
 				}
@@ -74091,7 +74710,7 @@ func UnsafeApplyResolverOverrides[Instance Resolver](gclass unsafe.Pointer, over
 				var rrname      string             // in, none, string
 				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg4, nullable
 
-				resolver = UnsafeResolverFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				resolver = UnsafeResolverFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg2 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
 				}
@@ -74119,7 +74738,7 @@ func UnsafeApplyResolverOverrides[Instance Resolver](gclass unsafe.Pointer, over
 				var goret    []*SrvTarget // return, transfer: full, C Pointers: 1, Name: List, scope: 
 				var _goerr   error        // out, full, converted
 
-				resolver = UnsafeResolverFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				resolver = UnsafeResolverFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.LookupServiceFinish(resolver, result)
@@ -74142,7 +74761,7 @@ func UnsafeApplyResolverOverrides[Instance Resolver](gclass unsafe.Pointer, over
 			func(carg0 *C.GResolver) {
 				var resolver Instance // go GResolver subclass
 
-				resolver = UnsafeResolverFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				resolver = UnsafeResolverFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				overrides.Reload(resolver)
 			},
@@ -74579,7 +75198,7 @@ type Settings interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Gets the value that is stored in @settings for @key and converts it
 	// to the enum value that it represents.
@@ -74593,7 +75212,7 @@ type Settings interface {
 	// If the value stored in the configuration database is not a valid
 	// value for the enumerated type then this function will return the
 	// default value.
-	GetEnum(string) int
+	GetEnum(string) int32
 	// GetFlags wraps g_settings_get_flags
 	// 
 	// The function takes the following parameters:
@@ -74634,7 +75253,7 @@ type Settings interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Gets the value that is stored at @key in @settings.
 	// 
@@ -74642,7 +75261,7 @@ type Settings interface {
 	// 
 	// It is a programmer error to give a @key that isn't specified as
 	// having a int32 type in the schema for @settings.
-	GetInt(string) int
+	GetInt(string) int32
 	// GetInt64 wraps g_settings_get_int64
 	// 
 	// The function takes the following parameters:
@@ -74837,7 +75456,7 @@ type Settings interface {
 	// The function takes the following parameters:
 	// 
 	// 	- key string: a key, within @settings 
-	// 	- value int: an enumerated value 
+	// 	- value int32: an enumerated value 
 	// 
 	// The function returns the following values:
 	// 
@@ -74853,7 +75472,7 @@ type Settings interface {
 	// After performing the write, accessing @key directly with
 	// g_settings_get_string() will return the 'nick' associated with
 	// @value.
-	SetEnum(string, int) bool
+	SetEnum(string, int32) bool
 	// SetFlags wraps g_settings_set_flags
 	// 
 	// The function takes the following parameters:
@@ -74882,7 +75501,7 @@ type Settings interface {
 	// The function takes the following parameters:
 	// 
 	// 	- key string: the name of the key to set 
-	// 	- value int: the value to set it to 
+	// 	- value int32: the value to set it to 
 	// 
 	// The function returns the following values:
 	// 
@@ -74894,7 +75513,7 @@ type Settings interface {
 	// 
 	// It is a programmer error to give a @key that isn't specified as
 	// having a int32 type in the schema for @settings.
-	SetInt(string, int) bool
+	SetInt(string, int32) bool
 	// SetInt64 wraps g_settings_set_int64
 	// 
 	// The function takes the following parameters:
@@ -75005,7 +75624,7 @@ type Settings interface {
 	// The default handler for this signal invokes the "changed" signal
 	// for each affected key.  If any other connected handler returns
 	// %TRUE then this default functionality will be suppressed.
-	ConnectChangeEvent(func(Settings, []byte, int) bool) gobject.SignalHandle
+	ConnectChangeEvent(func(Settings, []byte, int32) bool) gobject.SignalHandle
 	// ConnectChanged connects the provided callback to the "changed" signal
 	//
 	// The "changed" signal is emitted when a key has potentially changed.
@@ -75070,6 +75689,11 @@ func UnsafeSettingsFromGlibNone(c unsafe.Pointer) Settings {
 // UnsafeSettingsFromGlibFull is used to convert raw GSettings pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeSettingsFromGlibFull(c unsafe.Pointer) Settings {
 	return gobject.UnsafeObjectFromGlibFull(c).(Settings)
+}
+
+// UnsafeSettingsFromGlibBorrow is used to convert raw GSettings pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeSettingsFromGlibBorrow(c unsafe.Pointer) Settings {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Settings)
 }
 
 func (s *SettingsInstance) upcastToGSettings() *SettingsInstance {
@@ -75431,7 +76055,7 @@ func (settings *SettingsInstance) GetDouble(key string) float64 {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Gets the value that is stored in @settings for @key and converts it
 // to the enum value that it represents.
@@ -75445,7 +76069,7 @@ func (settings *SettingsInstance) GetDouble(key string) float64 {
 // If the value stored in the configuration database is not a valid
 // value for the enumerated type then this function will return the
 // default value.
-func (settings *SettingsInstance) GetEnum(key string) int {
+func (settings *SettingsInstance) GetEnum(key string) int32 {
 	var carg0 *C.GSettings // in, none, converted
 	var carg1 *C.gchar     // in, none, string
 	var cret  C.gint       // return, none, casted
@@ -75458,9 +76082,9 @@ func (settings *SettingsInstance) GetEnum(key string) int {
 	runtime.KeepAlive(settings)
 	runtime.KeepAlive(key)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -75541,7 +76165,7 @@ func (settings *SettingsInstance) GetHasUnapplied() bool {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Gets the value that is stored at @key in @settings.
 // 
@@ -75549,7 +76173,7 @@ func (settings *SettingsInstance) GetHasUnapplied() bool {
 // 
 // It is a programmer error to give a @key that isn't specified as
 // having a int32 type in the schema for @settings.
-func (settings *SettingsInstance) GetInt(key string) int {
+func (settings *SettingsInstance) GetInt(key string) int32 {
 	var carg0 *C.GSettings // in, none, converted
 	var carg1 *C.gchar     // in, none, string
 	var cret  C.gint       // return, none, casted
@@ -75562,9 +76186,9 @@ func (settings *SettingsInstance) GetInt(key string) int {
 	runtime.KeepAlive(settings)
 	runtime.KeepAlive(key)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -75986,7 +76610,7 @@ func (settings *SettingsInstance) SetDouble(key string, value float64) bool {
 // The function takes the following parameters:
 // 
 // 	- key string: a key, within @settings 
-// 	- value int: an enumerated value 
+// 	- value int32: an enumerated value 
 // 
 // The function returns the following values:
 // 
@@ -76002,7 +76626,7 @@ func (settings *SettingsInstance) SetDouble(key string, value float64) bool {
 // After performing the write, accessing @key directly with
 // g_settings_get_string() will return the 'nick' associated with
 // @value.
-func (settings *SettingsInstance) SetEnum(key string, value int) bool {
+func (settings *SettingsInstance) SetEnum(key string, value int32) bool {
 	var carg0 *C.GSettings // in, none, converted
 	var carg1 *C.gchar     // in, none, string
 	var carg2 C.gint       // in, none, casted
@@ -76079,7 +76703,7 @@ func (settings *SettingsInstance) SetFlags(key string, value uint) bool {
 // The function takes the following parameters:
 // 
 // 	- key string: the name of the key to set 
-// 	- value int: the value to set it to 
+// 	- value int32: the value to set it to 
 // 
 // The function returns the following values:
 // 
@@ -76091,7 +76715,7 @@ func (settings *SettingsInstance) SetFlags(key string, value uint) bool {
 // 
 // It is a programmer error to give a @key that isn't specified as
 // having a int32 type in the schema for @settings.
-func (settings *SettingsInstance) SetInt(key string, value int) bool {
+func (settings *SettingsInstance) SetInt(key string, value int32) bool {
 	var carg0 *C.GSettings // in, none, converted
 	var carg1 *C.gchar     // in, none, string
 	var carg2 C.gint       // in, none, casted
@@ -76349,7 +76973,7 @@ func (settings *SettingsInstance) SetUint64(key string, value uint64) bool {
 // The default handler for this signal invokes the "changed" signal
 // for each affected key.  If any other connected handler returns
 // %TRUE then this default functionality will be suppressed.
-func (o *SettingsInstance) ConnectChangeEvent(fn func(Settings, []byte, int) bool) gobject.SignalHandle {
+func (o *SettingsInstance) ConnectChangeEvent(fn func(Settings, []byte, int32) bool) gobject.SignalHandle {
 	return o.Connect("change-event", fn)
 }
 
@@ -76416,12 +77040,12 @@ type SettingsOverrides[Instance Settings] struct {
 	// The function takes the following parameters:
 	// 
 	// 	- keys *glib.Quark 
-	// 	- nKeys int 
+	// 	- nKeys int32 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
-	ChangeEvent func(Instance, *glib.Quark, int) bool
+	ChangeEvent func(Instance, *glib.Quark, int32) bool
 	// Changed allows you to override the implementation of the virtual method changed.
 	// The function takes the following parameters:
 	// 
@@ -76458,14 +77082,14 @@ func UnsafeApplySettingsOverrides[Instance Settings](gclass unsafe.Pointer, over
 			func(carg0 *C.GSettings, carg1 *C.GQuark, carg2 C.gint) (cret C.gboolean) {
 				var settings Instance    // go GSettings subclass
 				var keys     *glib.Quark // in, transfer: none, C Pointers: 1, Name: Quark
-				var nKeys    int         // in, none, casted
+				var nKeys    int32       // in, none, casted
 				var goret    bool        // return
 
-				settings = UnsafeSettingsFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				settings = UnsafeSettingsFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				_ = keys
 				_ = carg1
 				panic("unimplemented conversion of *glib.Quark (GQuark*)")
-				nKeys = int(carg2)
+				nKeys = int32(carg2)
 
 				goret = overrides.ChangeEvent(settings, keys, nKeys)
 
@@ -76487,7 +77111,7 @@ func UnsafeApplySettingsOverrides[Instance Settings](gclass unsafe.Pointer, over
 				var settings Instance // go GSettings subclass
 				var key      string   // in, none, string
 
-				settings = UnsafeSettingsFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				settings = UnsafeSettingsFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				key = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 
 				overrides.Changed(settings, key)
@@ -76505,7 +77129,7 @@ func UnsafeApplySettingsOverrides[Instance Settings](gclass unsafe.Pointer, over
 				var key      glib.Quark // in, none, casted, alias
 				var goret    bool       // return
 
-				settings = UnsafeSettingsFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				settings = UnsafeSettingsFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				key = glib.Quark(carg1)
 
 				goret = overrides.WritableChangeEvent(settings, key)
@@ -76528,7 +77152,7 @@ func UnsafeApplySettingsOverrides[Instance Settings](gclass unsafe.Pointer, over
 				var settings Instance // go GSettings subclass
 				var key      string   // in, none, string
 
-				settings = UnsafeSettingsFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				settings = UnsafeSettingsFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				key = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 
 				overrides.WritableChanged(settings, key)
@@ -76614,6 +77238,11 @@ func UnsafeSimpleActionFromGlibNone(c unsafe.Pointer) SimpleAction {
 // UnsafeSimpleActionFromGlibFull is used to convert raw GSimpleAction pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeSimpleActionFromGlibFull(c unsafe.Pointer) SimpleAction {
 	return gobject.UnsafeObjectFromGlibFull(c).(SimpleAction)
+}
+
+// UnsafeSimpleActionFromGlibBorrow is used to convert raw GSimpleAction pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeSimpleActionFromGlibBorrow(c unsafe.Pointer) SimpleAction {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(SimpleAction)
 }
 
 func (s *SimpleActionInstance) upcastToGSimpleAction() *SimpleActionInstance {
@@ -76775,6 +77404,11 @@ func UnsafeSimpleActionGroupFromGlibNone(c unsafe.Pointer) SimpleActionGroup {
 // UnsafeSimpleActionGroupFromGlibFull is used to convert raw GSimpleActionGroup pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeSimpleActionGroupFromGlibFull(c unsafe.Pointer) SimpleActionGroup {
 	return gobject.UnsafeObjectFromGlibFull(c).(SimpleActionGroup)
+}
+
+// UnsafeSimpleActionGroupFromGlibBorrow is used to convert raw GSimpleActionGroup pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeSimpleActionGroupFromGlibBorrow(c unsafe.Pointer) SimpleActionGroup {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(SimpleActionGroup)
 }
 
 func (s *SimpleActionGroupInstance) upcastToGSimpleActionGroup() *SimpleActionGroupInstance {
@@ -77266,6 +77900,11 @@ func UnsafeSimpleAsyncResultFromGlibFull(c unsafe.Pointer) SimpleAsyncResult {
 	return gobject.UnsafeObjectFromGlibFull(c).(SimpleAsyncResult)
 }
 
+// UnsafeSimpleAsyncResultFromGlibBorrow is used to convert raw GSimpleAsyncResult pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeSimpleAsyncResultFromGlibBorrow(c unsafe.Pointer) SimpleAsyncResult {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(SimpleAsyncResult)
+}
+
 func (s *SimpleAsyncResultInstance) upcastToGSimpleAsyncResult() *SimpleAsyncResultInstance {
 	return s
 }
@@ -77630,6 +78269,11 @@ func UnsafeSimpleIOStreamFromGlibFull(c unsafe.Pointer) SimpleIOStream {
 	return gobject.UnsafeObjectFromGlibFull(c).(SimpleIOStream)
 }
 
+// UnsafeSimpleIOStreamFromGlibBorrow is used to convert raw GSimpleIOStream pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeSimpleIOStreamFromGlibBorrow(c unsafe.Pointer) SimpleIOStream {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(SimpleIOStream)
+}
+
 func (s *SimpleIOStreamInstance) upcastToGSimpleIOStream() *SimpleIOStreamInstance {
 	return s
 }
@@ -77717,6 +78361,11 @@ func UnsafeSimplePermissionFromGlibNone(c unsafe.Pointer) SimplePermission {
 // UnsafeSimplePermissionFromGlibFull is used to convert raw GSimplePermission pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeSimplePermissionFromGlibFull(c unsafe.Pointer) SimplePermission {
 	return gobject.UnsafeObjectFromGlibFull(c).(SimplePermission)
+}
+
+// UnsafeSimplePermissionFromGlibBorrow is used to convert raw GSimplePermission pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeSimplePermissionFromGlibBorrow(c unsafe.Pointer) SimplePermission {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(SimplePermission)
 }
 
 func (s *SimplePermissionInstance) upcastToGSimplePermission() *SimplePermissionInstance {
@@ -77847,6 +78496,11 @@ func UnsafeSimpleProxyResolverFromGlibNone(c unsafe.Pointer) SimpleProxyResolver
 // UnsafeSimpleProxyResolverFromGlibFull is used to convert raw GSimpleProxyResolver pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeSimpleProxyResolverFromGlibFull(c unsafe.Pointer) SimpleProxyResolver {
 	return gobject.UnsafeObjectFromGlibFull(c).(SimpleProxyResolver)
+}
+
+// UnsafeSimpleProxyResolverFromGlibBorrow is used to convert raw GSimpleProxyResolver pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeSimpleProxyResolverFromGlibBorrow(c unsafe.Pointer) SimpleProxyResolver {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(SimpleProxyResolver)
 }
 
 func (s *SimpleProxyResolverInstance) upcastToGSimpleProxyResolver() *SimpleProxyResolverInstance {
@@ -78416,14 +79070,14 @@ type Socket interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Returns the underlying OS socket object. On unix this
 	// is a socket file descriptor, and on Windows this is
 	// a Winsock2 SOCKET handle. This may be useful for
 	// doing platform specific or otherwise unusual operations
 	// on the socket.
-	GetFd() int
+	GetFd() int32
 	// GetKeepalive wraps g_socket_get_keepalive
 	// 
 	// The function returns the following values:
@@ -78437,11 +79091,11 @@ type Socket interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Gets the listen backlog setting of the socket. For details on this,
 	// see g_socket_set_listen_backlog().
-	GetListenBacklog() int
+	GetListenBacklog() int32
 	// GetLocalAddress wraps g_socket_get_local_address
 	// 
 	// The function returns the following values:
@@ -78476,12 +79130,12 @@ type Socket interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- level int: the "API level" of the option (eg, `SOL_SOCKET`) 
-	// 	- optname int: the "name" of the option (eg, `SO_BROADCAST`) 
+	// 	- level int32: the "API level" of the option (eg, `SOL_SOCKET`) 
+	// 	- optname int32: the "name" of the option (eg, `SO_BROADCAST`) 
 	// 
 	// The function returns the following values:
 	// 
-	// 	- value int: return location for the option value 
+	// 	- value int32: return location for the option value 
 	// 	- goret bool 
 	// 	- _goerr error (nullable): an error 
 	//
@@ -78498,7 +79152,7 @@ type Socket interface {
 	// Note that even for socket options that are a single byte in size,
 	// @value is still a pointer to a #gint variable, not a #guchar;
 	// g_socket_get_option() will handle the conversion internally.
-	GetOption(int, int) (int, bool, error)
+	GetOption(int32, int32) (int32, bool, error)
 	// GetProtocol wraps g_socket_get_protocol
 	// 
 	// The function returns the following values:
@@ -78804,13 +79458,13 @@ type Socket interface {
 	// 
 	// 	- cancellable context.Context (nullable): a %GCancellable or %NULL 
 	// 	- messages []InputMessage: an array of #GInputMessage structs 
-	// 	- flags int: an int containing #GSocketMsgFlags flags for the overall operation,
+	// 	- flags int32: an int containing #GSocketMsgFlags flags for the overall operation,
 	//    which may additionally contain
 	//    [other platform specific flags](http://man7.org/linux/man-pages/man2/recv.2.html) 
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Receive multiple data messages from @socket in one go.  This is the most
@@ -78861,7 +79515,7 @@ type Socket interface {
 	// On error -1 is returned and @error is set accordingly. An error will only
 	// be returned if zero messages could be received; otherwise the number of
 	// messages successfully received before the error will be returned.
-	ReceiveMessages(context.Context, []InputMessage, int) (int, error)
+	ReceiveMessages(context.Context, []InputMessage, int32) (int32, error)
 	// ReceiveWithBlocking wraps g_socket_receive_with_blocking
 	// 
 	// The function takes the following parameters:
@@ -78917,7 +79571,7 @@ type Socket interface {
 	// 	- vectors []OutputVector: an array of #GOutputVector structs 
 	// 	- messages []SocketControlMessage (nullable): a pointer to an
 	//   array of #GSocketControlMessages, or %NULL. 
-	// 	- flags int: an int containing #GSocketMsgFlags flags, which may additionally
+	// 	- flags int32: an int containing #GSocketMsgFlags flags, which may additionally
 	//    contain [other platform specific flags](http://man7.org/linux/man-pages/man2/recv.2.html) 
 	// 
 	// The function returns the following values:
@@ -78967,7 +79621,7 @@ type Socket interface {
 	// function.
 	// 
 	// On error -1 is returned and @error is set accordingly.
-	SendMessage(context.Context, SocketAddress, []OutputVector, []SocketControlMessage, int) (int, error)
+	SendMessage(context.Context, SocketAddress, []OutputVector, []SocketControlMessage, int32) (int, error)
 	// SendMessageWithTimeout wraps g_socket_send_message_with_timeout
 	// 
 	// The function takes the following parameters:
@@ -78977,7 +79631,7 @@ type Socket interface {
 	// 	- vectors []OutputVector: an array of #GOutputVector structs 
 	// 	- messages []SocketControlMessage (nullable): a pointer to an
 	//   array of #GSocketControlMessages, or %NULL. 
-	// 	- flags int: an int containing #GSocketMsgFlags flags, which may additionally
+	// 	- flags int32: an int containing #GSocketMsgFlags flags, which may additionally
 	//    contain [other platform specific flags](http://man7.org/linux/man-pages/man2/recv.2.html) 
 	// 	- timeoutUs int64: the maximum time (in microseconds) to wait, or -1 
 	// 
@@ -78994,19 +79648,19 @@ type Socket interface {
 	// On error %G_POLLABLE_RETURN_FAILED is returned and @error is set accordingly, or
 	// if the socket is currently not writable %G_POLLABLE_RETURN_WOULD_BLOCK is
 	// returned. @bytes_written will contain 0 in both cases.
-	SendMessageWithTimeout(context.Context, SocketAddress, []OutputVector, []SocketControlMessage, int, int64) (uint, PollableReturn, error)
+	SendMessageWithTimeout(context.Context, SocketAddress, []OutputVector, []SocketControlMessage, int32, int64) (uint, PollableReturn, error)
 	// SendMessages wraps g_socket_send_messages
 	// 
 	// The function takes the following parameters:
 	// 
 	// 	- cancellable context.Context (nullable): a %GCancellable or %NULL 
 	// 	- messages []OutputMessage: an array of #GOutputMessage structs 
-	// 	- flags int: an int containing #GSocketMsgFlags flags, which may additionally
+	// 	- flags int32: an int containing #GSocketMsgFlags flags, which may additionally
 	//    contain [other platform specific flags](http://man7.org/linux/man-pages/man2/recv.2.html) 
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Send multiple data messages from @socket in one go.  This is the most
@@ -79043,7 +79697,7 @@ type Socket interface {
 	// On error -1 is returned and @error is set accordingly. An error will only
 	// be returned if zero messages could be sent; otherwise the number of messages
 	// successfully sent before the error will be returned.
-	SendMessages(context.Context, []OutputMessage, int) (int, error)
+	SendMessages(context.Context, []OutputMessage, int32) (int32, error)
 	// SendTo wraps g_socket_send_to
 	// 
 	// The function takes the following parameters:
@@ -79134,7 +79788,7 @@ type Socket interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- backlog int: the maximum number of pending connections. 
+	// 	- backlog int32: the maximum number of pending connections. 
 	//
 	// Sets the maximum number of outstanding connections allowed
 	// when listening on this socket. If more clients than this are
@@ -79143,7 +79797,7 @@ type Socket interface {
 	// 
 	// Note that this must be called before g_socket_listen() and has no
 	// effect if called after that.
-	SetListenBacklog(int)
+	SetListenBacklog(int32)
 	// SetMulticastLoopback wraps g_socket_set_multicast_loopback
 	// 
 	// The function takes the following parameters:
@@ -79169,9 +79823,9 @@ type Socket interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- level int: the "API level" of the option (eg, `SOL_SOCKET`) 
-	// 	- optname int: the "name" of the option (eg, `SO_BROADCAST`) 
-	// 	- value int: the value to set the option to 
+	// 	- level int32: the "API level" of the option (eg, `SOL_SOCKET`) 
+	// 	- optname int32: the "name" of the option (eg, `SO_BROADCAST`) 
+	// 	- value int32: the value to set the option to 
 	// 
 	// The function returns the following values:
 	// 
@@ -79187,7 +79841,7 @@ type Socket interface {
 	// standard/portable socket options. For unusual socket protocols or
 	// platform-dependent options, you may need to include additional
 	// headers.
-	SetOption(int, int, int) (bool, error)
+	SetOption(int32, int32, int32) (bool, error)
 	// SetTimeout wraps g_socket_set_timeout
 	// 
 	// The function takes the following parameters:
@@ -79289,6 +79943,11 @@ func UnsafeSocketFromGlibFull(c unsafe.Pointer) Socket {
 	return gobject.UnsafeObjectFromGlibFull(c).(Socket)
 }
 
+// UnsafeSocketFromGlibBorrow is used to convert raw GSocket pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeSocketFromGlibBorrow(c unsafe.Pointer) Socket {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Socket)
+}
+
 func (s *SocketInstance) upcastToGSocket() *SocketInstance {
 	return s
 }
@@ -79360,7 +80019,7 @@ func NewSocket(family SocketFamily, typ SocketType, protocol SocketProtocol) (So
 // 
 // The function takes the following parameters:
 // 
-// 	- fd int: a native socket file descriptor. 
+// 	- fd int32: a native socket file descriptor. 
 // 
 // The function returns the following values:
 // 
@@ -79380,7 +80039,7 @@ func NewSocket(family SocketFamily, typ SocketType, protocol SocketProtocol) (So
 // 
 // Since GLib 2.46, it is no longer a fatal error to call this on a non-socket
 // descriptor.  Instead, a GError will be set with code %G_IO_ERROR_FAILED
-func NewSocketFromFd(fd int) (Socket, error) {
+func NewSocketFromFd(fd int32) (Socket, error) {
 	var carg1 C.gint     // in, none, casted
 	var cret  *C.GSocket // return, full, converted
 	var _cerr *C.GError  // out, full, converted, nullable
@@ -80013,14 +80672,14 @@ func (socket *SocketInstance) GetFamily() SocketFamily {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Returns the underlying OS socket object. On unix this
 // is a socket file descriptor, and on Windows this is
 // a Winsock2 SOCKET handle. This may be useful for
 // doing platform specific or otherwise unusual operations
 // on the socket.
-func (socket *SocketInstance) GetFd() int {
+func (socket *SocketInstance) GetFd() int32 {
 	var carg0 *C.GSocket // in, none, converted
 	var cret  C.int      // return, none, casted, casted C.gint
 
@@ -80029,9 +80688,9 @@ func (socket *SocketInstance) GetFd() int {
 	cret = C.g_socket_get_fd(carg0)
 	runtime.KeepAlive(socket)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -80066,11 +80725,11 @@ func (socket *SocketInstance) GetKeepalive() bool {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Gets the listen backlog setting of the socket. For details on this,
 // see g_socket_set_listen_backlog().
-func (socket *SocketInstance) GetListenBacklog() int {
+func (socket *SocketInstance) GetListenBacklog() int32 {
 	var carg0 *C.GSocket // in, none, converted
 	var cret  C.gint     // return, none, casted
 
@@ -80079,9 +80738,9 @@ func (socket *SocketInstance) GetListenBacklog() int {
 	cret = C.g_socket_get_listen_backlog(carg0)
 	runtime.KeepAlive(socket)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -80172,12 +80831,12 @@ func (socket *SocketInstance) GetMulticastTTL() uint {
 // 
 // The function takes the following parameters:
 // 
-// 	- level int: the "API level" of the option (eg, `SOL_SOCKET`) 
-// 	- optname int: the "name" of the option (eg, `SO_BROADCAST`) 
+// 	- level int32: the "API level" of the option (eg, `SOL_SOCKET`) 
+// 	- optname int32: the "name" of the option (eg, `SO_BROADCAST`) 
 // 
 // The function returns the following values:
 // 
-// 	- value int: return location for the option value 
+// 	- value int32: return location for the option value 
 // 	- goret bool 
 // 	- _goerr error (nullable): an error 
 //
@@ -80194,7 +80853,7 @@ func (socket *SocketInstance) GetMulticastTTL() uint {
 // Note that even for socket options that are a single byte in size,
 // @value is still a pointer to a #gint variable, not a #guchar;
 // g_socket_get_option() will handle the conversion internally.
-func (socket *SocketInstance) GetOption(level int, optname int) (int, bool, error) {
+func (socket *SocketInstance) GetOption(level int32, optname int32) (int32, bool, error) {
 	var carg0 *C.GSocket // in, none, converted
 	var carg1 C.gint     // in, none, casted
 	var carg2 C.gint     // in, none, casted
@@ -80211,11 +80870,11 @@ func (socket *SocketInstance) GetOption(level int, optname int) (int, bool, erro
 	runtime.KeepAlive(level)
 	runtime.KeepAlive(optname)
 
-	var value  int
+	var value  int32
 	var goret  bool
 	var _goerr error
 
-	value = int(carg3)
+	value = int32(carg3)
 	if cret != 0 {
 		goret = true
 	}
@@ -80943,13 +81602,13 @@ func (socket *SocketInstance) ReceiveFrom(cancellable context.Context, buffer st
 // 
 // 	- cancellable context.Context (nullable): a %GCancellable or %NULL 
 // 	- messages []InputMessage: an array of #GInputMessage structs 
-// 	- flags int: an int containing #GSocketMsgFlags flags for the overall operation,
+// 	- flags int32: an int containing #GSocketMsgFlags flags for the overall operation,
 //    which may additionally contain
 //    [other platform specific flags](http://man7.org/linux/man-pages/man2/recv.2.html) 
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 // 	- _goerr error (nullable): an error 
 //
 // Receive multiple data messages from @socket in one go.  This is the most
@@ -81000,7 +81659,7 @@ func (socket *SocketInstance) ReceiveFrom(cancellable context.Context, buffer st
 // On error -1 is returned and @error is set accordingly. An error will only
 // be returned if zero messages could be received; otherwise the number of
 // messages successfully received before the error will be returned.
-func (socket *SocketInstance) ReceiveMessages(cancellable context.Context, messages []InputMessage, flags int) (int, error) {
+func (socket *SocketInstance) ReceiveMessages(cancellable context.Context, messages []InputMessage, flags int32) (int32, error) {
 	var carg0 *C.GSocket       // in, none, converted
 	var carg4 *C.GCancellable  // in, none, converted, nullable
 	var carg1 *C.GInputMessage // in, transfer: none, C Pointers: 1, Name: array[InputMessage], array (inner: *typesystem.Record, length-by: carg2)
@@ -81025,10 +81684,10 @@ func (socket *SocketInstance) ReceiveMessages(cancellable context.Context, messa
 	runtime.KeepAlive(messages)
 	runtime.KeepAlive(flags)
 
-	var goret  int
+	var goret  int32
 	var _goerr error
 
-	goret = int(cret)
+	goret = int32(cret)
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -81160,7 +81819,7 @@ func (socket *SocketInstance) Send(cancellable context.Context, buffer string) (
 // 	- vectors []OutputVector: an array of #GOutputVector structs 
 // 	- messages []SocketControlMessage (nullable): a pointer to an
 //   array of #GSocketControlMessages, or %NULL. 
-// 	- flags int: an int containing #GSocketMsgFlags flags, which may additionally
+// 	- flags int32: an int containing #GSocketMsgFlags flags, which may additionally
 //    contain [other platform specific flags](http://man7.org/linux/man-pages/man2/recv.2.html) 
 // 
 // The function returns the following values:
@@ -81210,7 +81869,7 @@ func (socket *SocketInstance) Send(cancellable context.Context, buffer string) (
 // function.
 // 
 // On error -1 is returned and @error is set accordingly.
-func (socket *SocketInstance) SendMessage(cancellable context.Context, address SocketAddress, vectors []OutputVector, messages []SocketControlMessage, flags int) (int, error) {
+func (socket *SocketInstance) SendMessage(cancellable context.Context, address SocketAddress, vectors []OutputVector, messages []SocketControlMessage, flags int32) (int, error) {
 	var carg0 *C.GSocket                // in, none, converted
 	var carg7 *C.GCancellable           // in, none, converted, nullable
 	var carg1 *C.GSocketAddress         // in, none, converted, nullable
@@ -81267,7 +81926,7 @@ func (socket *SocketInstance) SendMessage(cancellable context.Context, address S
 // 	- vectors []OutputVector: an array of #GOutputVector structs 
 // 	- messages []SocketControlMessage (nullable): a pointer to an
 //   array of #GSocketControlMessages, or %NULL. 
-// 	- flags int: an int containing #GSocketMsgFlags flags, which may additionally
+// 	- flags int32: an int containing #GSocketMsgFlags flags, which may additionally
 //    contain [other platform specific flags](http://man7.org/linux/man-pages/man2/recv.2.html) 
 // 	- timeoutUs int64: the maximum time (in microseconds) to wait, or -1 
 // 
@@ -81284,7 +81943,7 @@ func (socket *SocketInstance) SendMessage(cancellable context.Context, address S
 // On error %G_POLLABLE_RETURN_FAILED is returned and @error is set accordingly, or
 // if the socket is currently not writable %G_POLLABLE_RETURN_WOULD_BLOCK is
 // returned. @bytes_written will contain 0 in both cases.
-func (socket *SocketInstance) SendMessageWithTimeout(cancellable context.Context, address SocketAddress, vectors []OutputVector, messages []SocketControlMessage, flags int, timeoutUs int64) (uint, PollableReturn, error) {
+func (socket *SocketInstance) SendMessageWithTimeout(cancellable context.Context, address SocketAddress, vectors []OutputVector, messages []SocketControlMessage, flags int32, timeoutUs int64) (uint, PollableReturn, error) {
 	var carg0 *C.GSocket                // in, none, converted
 	var carg9 *C.GCancellable           // in, none, converted, nullable
 	var carg1 *C.GSocketAddress         // in, none, converted, nullable
@@ -81344,12 +82003,12 @@ func (socket *SocketInstance) SendMessageWithTimeout(cancellable context.Context
 // 
 // 	- cancellable context.Context (nullable): a %GCancellable or %NULL 
 // 	- messages []OutputMessage: an array of #GOutputMessage structs 
-// 	- flags int: an int containing #GSocketMsgFlags flags, which may additionally
+// 	- flags int32: an int containing #GSocketMsgFlags flags, which may additionally
 //    contain [other platform specific flags](http://man7.org/linux/man-pages/man2/recv.2.html) 
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 // 	- _goerr error (nullable): an error 
 //
 // Send multiple data messages from @socket in one go.  This is the most
@@ -81386,7 +82045,7 @@ func (socket *SocketInstance) SendMessageWithTimeout(cancellable context.Context
 // On error -1 is returned and @error is set accordingly. An error will only
 // be returned if zero messages could be sent; otherwise the number of messages
 // successfully sent before the error will be returned.
-func (socket *SocketInstance) SendMessages(cancellable context.Context, messages []OutputMessage, flags int) (int, error) {
+func (socket *SocketInstance) SendMessages(cancellable context.Context, messages []OutputMessage, flags int32) (int32, error) {
 	var carg0 *C.GSocket        // in, none, converted
 	var carg4 *C.GCancellable   // in, none, converted, nullable
 	var carg1 *C.GOutputMessage // in, transfer: none, C Pointers: 1, Name: array[OutputMessage], array (inner: *typesystem.Record, length-by: carg2)
@@ -81411,10 +82070,10 @@ func (socket *SocketInstance) SendMessages(cancellable context.Context, messages
 	runtime.KeepAlive(messages)
 	runtime.KeepAlive(flags)
 
-	var goret  int
+	var goret  int32
 	var _goerr error
 
-	goret = int(cret)
+	goret = int32(cret)
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -81625,7 +82284,7 @@ func (socket *SocketInstance) SetKeepalive(keepalive bool) {
 // 
 // The function takes the following parameters:
 // 
-// 	- backlog int: the maximum number of pending connections. 
+// 	- backlog int32: the maximum number of pending connections. 
 //
 // Sets the maximum number of outstanding connections allowed
 // when listening on this socket. If more clients than this are
@@ -81634,7 +82293,7 @@ func (socket *SocketInstance) SetKeepalive(keepalive bool) {
 // 
 // Note that this must be called before g_socket_listen() and has no
 // effect if called after that.
-func (socket *SocketInstance) SetListenBacklog(backlog int) {
+func (socket *SocketInstance) SetListenBacklog(backlog int32) {
 	var carg0 *C.GSocket // in, none, converted
 	var carg1 C.gint     // in, none, casted
 
@@ -81695,9 +82354,9 @@ func (socket *SocketInstance) SetMulticastTTL(ttl uint) {
 // 
 // The function takes the following parameters:
 // 
-// 	- level int: the "API level" of the option (eg, `SOL_SOCKET`) 
-// 	- optname int: the "name" of the option (eg, `SO_BROADCAST`) 
-// 	- value int: the value to set the option to 
+// 	- level int32: the "API level" of the option (eg, `SOL_SOCKET`) 
+// 	- optname int32: the "name" of the option (eg, `SO_BROADCAST`) 
+// 	- value int32: the value to set the option to 
 // 
 // The function returns the following values:
 // 
@@ -81713,7 +82372,7 @@ func (socket *SocketInstance) SetMulticastTTL(ttl uint) {
 // standard/portable socket options. For unusual socket protocols or
 // platform-dependent options, you may need to include additional
 // headers.
-func (socket *SocketInstance) SetOption(level int, optname int, value int) (bool, error) {
+func (socket *SocketInstance) SetOption(level int32, optname int32, value int32) (bool, error) {
 	var carg0 *C.GSocket // in, none, converted
 	var carg1 C.gint     // in, none, casted
 	var carg2 C.gint     // in, none, casted
@@ -81993,6 +82652,11 @@ func UnsafeSocketAddressFromGlibFull(c unsafe.Pointer) SocketAddress {
 	return gobject.UnsafeObjectFromGlibFull(c).(SocketAddress)
 }
 
+// UnsafeSocketAddressFromGlibBorrow is used to convert raw GSocketAddress pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeSocketAddressFromGlibBorrow(c unsafe.Pointer) SocketAddress {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(SocketAddress)
+}
+
 func (s *SocketAddressInstance) upcastToGSocketAddress() *SocketAddressInstance {
 	return s
 }
@@ -82089,7 +82753,7 @@ func UnsafeApplySocketAddressOverrides[Instance SocketAddress](gclass unsafe.Poi
 				var address Instance     // go GSocketAddress subclass
 				var goret   SocketFamily // return, none, casted
 
-				address = UnsafeSocketAddressFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				address = UnsafeSocketAddressFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetFamily(address)
 
@@ -82109,7 +82773,7 @@ func UnsafeApplySocketAddressOverrides[Instance SocketAddress](gclass unsafe.Poi
 				var address Instance // go GSocketAddress subclass
 				var goret   int      // return, none, casted
 
-				address = UnsafeSocketAddressFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				address = UnsafeSocketAddressFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetNativeSize(address)
 
@@ -82251,6 +82915,11 @@ func UnsafeSocketAddressEnumeratorFromGlibNone(c unsafe.Pointer) SocketAddressEn
 // UnsafeSocketAddressEnumeratorFromGlibFull is used to convert raw GSocketAddressEnumerator pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeSocketAddressEnumeratorFromGlibFull(c unsafe.Pointer) SocketAddressEnumerator {
 	return gobject.UnsafeObjectFromGlibFull(c).(SocketAddressEnumerator)
+}
+
+// UnsafeSocketAddressEnumeratorFromGlibBorrow is used to convert raw GSocketAddressEnumerator pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeSocketAddressEnumeratorFromGlibBorrow(c unsafe.Pointer) SocketAddressEnumerator {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(SocketAddressEnumerator)
 }
 
 func (s *SocketAddressEnumeratorInstance) upcastToGSocketAddressEnumerator() *SocketAddressEnumeratorInstance {
@@ -82447,7 +83116,7 @@ func UnsafeApplySocketAddressEnumeratorOverrides[Instance SocketAddressEnumerato
 				var goret       SocketAddress   // return, full, converted, nullable
 				var _goerr      error           // out, full, converted
 
-				enumerator = UnsafeSocketAddressEnumeratorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				enumerator = UnsafeSocketAddressEnumeratorFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg1 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg1))
 				}
@@ -82474,7 +83143,7 @@ func UnsafeApplySocketAddressEnumeratorOverrides[Instance SocketAddressEnumerato
 				var cancellable context.Context    // in, none, converted, nullable
 				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg3, nullable
 
-				enumerator = UnsafeSocketAddressEnumeratorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				enumerator = UnsafeSocketAddressEnumeratorFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg1 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg1))
 				}
@@ -82501,7 +83170,7 @@ func UnsafeApplySocketAddressEnumeratorOverrides[Instance SocketAddressEnumerato
 				var goret      SocketAddress // return, full, converted, nullable
 				var _goerr     error         // out, full, converted
 
-				enumerator = UnsafeSocketAddressEnumeratorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				enumerator = UnsafeSocketAddressEnumeratorFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.NextFinish(enumerator, result)
@@ -83151,6 +83820,11 @@ func UnsafeSocketClientFromGlibNone(c unsafe.Pointer) SocketClient {
 // UnsafeSocketClientFromGlibFull is used to convert raw GSocketClient pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeSocketClientFromGlibFull(c unsafe.Pointer) SocketClient {
 	return gobject.UnsafeObjectFromGlibFull(c).(SocketClient)
+}
+
+// UnsafeSocketClientFromGlibBorrow is used to convert raw GSocketClient pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeSocketClientFromGlibBorrow(c unsafe.Pointer) SocketClient {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(SocketClient)
 }
 
 func (s *SocketClientInstance) upcastToGSocketClient() *SocketClientInstance {
@@ -84365,7 +85039,7 @@ func UnsafeApplySocketClientOverrides[Instance SocketClient](gclass unsafe.Point
 				var connectable SocketConnectable // in, none, converted
 				var connection  IOStream          // in, none, converted
 
-				client = UnsafeSocketClientFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				client = UnsafeSocketClientFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				event = SocketClientEvent(carg1)
 				connectable = UnsafeSocketConnectableFromGlibNone(unsafe.Pointer(carg2))
 				connection = UnsafeIOStreamFromGlibNone(unsafe.Pointer(carg3))
@@ -84546,6 +85220,11 @@ func UnsafeSocketConnectionFromGlibFull(c unsafe.Pointer) SocketConnection {
 	return gobject.UnsafeObjectFromGlibFull(c).(SocketConnection)
 }
 
+// UnsafeSocketConnectionFromGlibBorrow is used to convert raw GSocketConnection pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeSocketConnectionFromGlibBorrow(c unsafe.Pointer) SocketConnection {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(SocketConnection)
+}
+
 func (s *SocketConnectionInstance) upcastToGSocketConnection() *SocketConnectionInstance {
 	return s
 }
@@ -84566,7 +85245,7 @@ func UnsafeSocketConnectionToGlibFull(c SocketConnection) unsafe.Pointer {
 // 
 // 	- family SocketFamily: a #GSocketFamily 
 // 	- typ SocketType: a #GSocketType 
-// 	- protocolId int: a protocol id 
+// 	- protocolId int32: a protocol id 
 // 
 // The function returns the following values:
 // 
@@ -84576,7 +85255,7 @@ func UnsafeSocketConnectionToGlibFull(c SocketConnection) unsafe.Pointer {
 // sockets with the specified @family, @type and @protocol_id.
 // 
 // If no type is registered, the #GSocketConnection base type is returned.
-func SocketConnectionFactoryLookupType(family SocketFamily, typ SocketType, protocolId int) gobject.Type {
+func SocketConnectionFactoryLookupType(family SocketFamily, typ SocketType, protocolId int32) gobject.Type {
 	var carg1 C.GSocketFamily // in, none, casted
 	var carg2 C.GSocketType   // in, none, casted
 	var carg3 C.gint          // in, none, casted
@@ -84605,13 +85284,13 @@ func SocketConnectionFactoryLookupType(family SocketFamily, typ SocketType, prot
 // 	- gType gobject.Type: a #GType, inheriting from %G_TYPE_SOCKET_CONNECTION 
 // 	- family SocketFamily: a #GSocketFamily 
 // 	- typ SocketType: a #GSocketType 
-// 	- protocol int: a protocol id 
+// 	- protocol int32: a protocol id 
 //
 // Looks up the #GType to be used when creating socket connections on
 // sockets with the specified @family, @type and @protocol.
 // 
 // If no type is registered, the #GSocketConnection base type is returned.
-func SocketConnectionFactoryRegisterType(gType gobject.Type, family SocketFamily, typ SocketType, protocol int) {
+func SocketConnectionFactoryRegisterType(gType gobject.Type, family SocketFamily, typ SocketType, protocol int32) {
 	var carg1 C.GType         // in, none, casted, alias
 	var carg2 C.GSocketFamily // in, none, casted
 	var carg3 C.GSocketType   // in, none, casted
@@ -84947,20 +85626,20 @@ type SocketControlMessage interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Returns the "level" (i.e. the originating protocol) of the control message.
 	// This is often SOL_SOCKET.
-	GetLevel() int
+	GetLevel() int32
 	// GetMsgType wraps g_socket_control_message_get_msg_type
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Returns the protocol specific type of the control message.
 	// For instance, for UNIX fd passing this would be SCM_RIGHTS.
-	GetMsgType() int
+	GetMsgType() int32
 	// GetSize wraps g_socket_control_message_get_size
 	// 
 	// The function returns the following values:
@@ -84992,6 +85671,11 @@ func UnsafeSocketControlMessageFromGlibFull(c unsafe.Pointer) SocketControlMessa
 	return gobject.UnsafeObjectFromGlibFull(c).(SocketControlMessage)
 }
 
+// UnsafeSocketControlMessageFromGlibBorrow is used to convert raw GSocketControlMessage pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeSocketControlMessageFromGlibBorrow(c unsafe.Pointer) SocketControlMessage {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(SocketControlMessage)
+}
+
 func (s *SocketControlMessageInstance) upcastToGSocketControlMessage() *SocketControlMessageInstance {
 	return s
 }
@@ -85010,11 +85694,11 @@ func UnsafeSocketControlMessageToGlibFull(c SocketControlMessage) unsafe.Pointer
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Returns the "level" (i.e. the originating protocol) of the control message.
 // This is often SOL_SOCKET.
-func (message *SocketControlMessageInstance) GetLevel() int {
+func (message *SocketControlMessageInstance) GetLevel() int32 {
 	var carg0 *C.GSocketControlMessage // in, none, converted
 	var cret  C.int                    // return, none, casted, casted C.gint
 
@@ -85023,9 +85707,9 @@ func (message *SocketControlMessageInstance) GetLevel() int {
 	cret = C.g_socket_control_message_get_level(carg0)
 	runtime.KeepAlive(message)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -85034,11 +85718,11 @@ func (message *SocketControlMessageInstance) GetLevel() int {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Returns the protocol specific type of the control message.
 // For instance, for UNIX fd passing this would be SCM_RIGHTS.
-func (message *SocketControlMessageInstance) GetMsgType() int {
+func (message *SocketControlMessageInstance) GetMsgType() int32 {
 	var carg0 *C.GSocketControlMessage // in, none, converted
 	var cret  C.int                    // return, none, casted, casted C.gint
 
@@ -85047,9 +85731,9 @@ func (message *SocketControlMessageInstance) GetMsgType() int {
 	cret = C.g_socket_control_message_get_msg_type(carg0)
 	runtime.KeepAlive(message)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -85087,8 +85771,8 @@ type SocketControlMessageOverrides[Instance SocketControlMessage] struct {
 	// GetLevel allows you to override the implementation of the virtual method get_level.
 	// The function returns the following values:
 	// 
-	// 	- goret int 
-	GetLevel func(Instance) int
+	// 	- goret int32 
+	GetLevel func(Instance) int32
 	// GetSize allows you to override the implementation of the virtual method get_size.
 	// The function returns the following values:
 	// 
@@ -85097,8 +85781,8 @@ type SocketControlMessageOverrides[Instance SocketControlMessage] struct {
 	// GetType allows you to override the implementation of the virtual method get_type.
 	// The function returns the following values:
 	// 
-	// 	- goret int 
-	GetType func(Instance) int
+	// 	- goret int32 
+	GetType func(Instance) int32
 }
 
 // UnsafeApplySocketControlMessageOverrides applies the overrides to init the gclass by setting the trampoline functions.
@@ -85115,9 +85799,9 @@ func UnsafeApplySocketControlMessageOverrides[Instance SocketControlMessage](gcl
 			"_gotk4_gio2_SocketControlMessage_get_level",
 			func(carg0 *C.GSocketControlMessage) (cret C.int) {
 				var message Instance // go GSocketControlMessage subclass
-				var goret   int      // return, none, casted, casted C.gint
+				var goret   int32    // return, none, casted, casted C.gint
 
-				message = UnsafeSocketControlMessageFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				message = UnsafeSocketControlMessageFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetLevel(message)
 
@@ -85137,7 +85821,7 @@ func UnsafeApplySocketControlMessageOverrides[Instance SocketControlMessage](gcl
 				var message Instance // go GSocketControlMessage subclass
 				var goret   uint     // return, none, casted
 
-				message = UnsafeSocketControlMessageFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				message = UnsafeSocketControlMessageFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetSize(message)
 
@@ -85155,9 +85839,9 @@ func UnsafeApplySocketControlMessageOverrides[Instance SocketControlMessage](gcl
 			"_gotk4_gio2_SocketControlMessage_get_type",
 			func(carg0 *C.GSocketControlMessage) (cret C.int) {
 				var message Instance // go GSocketControlMessage subclass
-				var goret   int      // return, none, casted, casted C.gint
+				var goret   int32    // return, none, casted, casted C.gint
 
-				message = UnsafeSocketControlMessageFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				message = UnsafeSocketControlMessageFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetType(message)
 
@@ -85449,14 +86133,14 @@ type SocketListener interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- listenBacklog int: an integer 
+	// 	- listenBacklog int32: an integer 
 	//
 	// Sets the listen backlog on the sockets in the listener. This must be called
 	// before adding any sockets, addresses or ports to the #GSocketListener (for
 	// example, by calling g_socket_listener_add_inet_port()) to be effective.
 	// 
 	// See g_socket_set_listen_backlog() for details
-	SetBacklog(int)
+	SetBacklog(int32)
 	// ConnectEvent connects the provided callback to the "event" signal
 	//
 	// Emitted when @listener's activity on @socket changes state.
@@ -85484,6 +86168,11 @@ func UnsafeSocketListenerFromGlibNone(c unsafe.Pointer) SocketListener {
 // UnsafeSocketListenerFromGlibFull is used to convert raw GSocketListener pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeSocketListenerFromGlibFull(c unsafe.Pointer) SocketListener {
 	return gobject.UnsafeObjectFromGlibFull(c).(SocketListener)
+}
+
+// UnsafeSocketListenerFromGlibBorrow is used to convert raw GSocketListener pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeSocketListenerFromGlibBorrow(c unsafe.Pointer) SocketListener {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(SocketListener)
 }
 
 func (s *SocketListenerInstance) upcastToGSocketListener() *SocketListenerInstance {
@@ -86034,14 +86723,14 @@ func (listener *SocketListenerInstance) Close() {
 // 
 // The function takes the following parameters:
 // 
-// 	- listenBacklog int: an integer 
+// 	- listenBacklog int32: an integer 
 //
 // Sets the listen backlog on the sockets in the listener. This must be called
 // before adding any sockets, addresses or ports to the #GSocketListener (for
 // example, by calling g_socket_listener_add_inet_port()) to be effective.
 // 
 // See g_socket_set_listen_backlog() for details
-func (listener *SocketListenerInstance) SetBacklog(listenBacklog int) {
+func (listener *SocketListenerInstance) SetBacklog(listenBacklog int32) {
 	var carg0 *C.GSocketListener // in, none, converted
 	var carg1 C.int              // in, none, casted, casted C.gint
 
@@ -86094,7 +86783,7 @@ func UnsafeApplySocketListenerOverrides[Instance SocketListener](gclass unsafe.P
 			func(carg0 *C.GSocketListener) {
 				var listener Instance // go GSocketListener subclass
 
-				listener = UnsafeSocketListenerFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				listener = UnsafeSocketListenerFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				overrides.Changed(listener)
 			},
@@ -86111,7 +86800,7 @@ func UnsafeApplySocketListenerOverrides[Instance SocketListener](gclass unsafe.P
 				var event    SocketListenerEvent // in, none, casted
 				var socket   Socket              // in, none, converted
 
-				listener = UnsafeSocketListenerFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				listener = UnsafeSocketListenerFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				event = SocketListenerEvent(carg1)
 				socket = UnsafeSocketFromGlibNone(unsafe.Pointer(carg2))
 
@@ -86258,6 +86947,11 @@ func UnsafeSocketServiceFromGlibNone(c unsafe.Pointer) SocketService {
 // UnsafeSocketServiceFromGlibFull is used to convert raw GSocketService pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeSocketServiceFromGlibFull(c unsafe.Pointer) SocketService {
 	return gobject.UnsafeObjectFromGlibFull(c).(SocketService)
+}
+
+// UnsafeSocketServiceFromGlibBorrow is used to convert raw GSocketService pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeSocketServiceFromGlibBorrow(c unsafe.Pointer) SocketService {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(SocketService)
 }
 
 func (s *SocketServiceInstance) upcastToGSocketService() *SocketServiceInstance {
@@ -86420,7 +87114,7 @@ func UnsafeApplySocketServiceOverrides[Instance SocketService](gclass unsafe.Poi
 				var sourceObject gobject.Object   // in, none, converted
 				var goret        bool             // return
 
-				service = UnsafeSocketServiceFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				service = UnsafeSocketServiceFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				connection = UnsafeSocketConnectionFromGlibNone(unsafe.Pointer(carg1))
 				sourceObject = gobject.UnsafeObjectFromGlibNone(unsafe.Pointer(carg2))
 
@@ -87051,10 +87745,10 @@ type Task interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	//
 	// Gets @task's priority
-	GetPriority() int
+	GetPriority() int32
 	// GetReturnOnCancel wraps g_task_get_return_on_cancel
 	// 
 	// The function returns the following values:
@@ -87176,7 +87870,7 @@ type Task interface {
 	// The function takes the following parameters:
 	// 
 	// 	- domain glib.Quark: a #GQuark. 
-	// 	- code int: an error code. 
+	// 	- code int32: an error code. 
 	// 	- message string: an error message 
 	//
 	// Sets @task’s result to a new [type@GLib.Error] created from @domain, @code,
@@ -87186,7 +87880,7 @@ type Task interface {
 	// ‘completing the task’ means.
 	// 
 	// See also [method@Gio.Task.return_new_error].
-	ReturnNewErrorLiteral(glib.Quark, int, string)
+	ReturnNewErrorLiteral(glib.Quark, int32, string)
 	// ReturnValue wraps g_task_return_value
 	// 
 	// The function takes the following parameters:
@@ -87246,7 +87940,7 @@ type Task interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- priority int: the [priority](iface.AsyncResult.html#io-priority) of the request 
+	// 	- priority int32: the [priority](iface.AsyncResult.html#io-priority) of the request 
 	//
 	// Sets @task's priority. If you do not call this, it will default to
 	// %G_PRIORITY_DEFAULT.
@@ -87255,7 +87949,7 @@ type Task interface {
 	// g_task_attach_source() and the scheduling of tasks run in threads,
 	// and can also be explicitly retrieved later via
 	// g_task_get_priority().
-	SetPriority(int)
+	SetPriority(int32)
 	// SetReturnOnCancel wraps g_task_set_return_on_cancel
 	// 
 	// The function takes the following parameters:
@@ -87326,6 +88020,11 @@ func UnsafeTaskFromGlibNone(c unsafe.Pointer) Task {
 // UnsafeTaskFromGlibFull is used to convert raw GTask pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeTaskFromGlibFull(c unsafe.Pointer) Task {
 	return gobject.UnsafeObjectFromGlibFull(c).(Task)
+}
+
+// UnsafeTaskFromGlibBorrow is used to convert raw GTask pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeTaskFromGlibBorrow(c unsafe.Pointer) Task {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Task)
 }
 
 func (t *TaskInstance) upcastToGTask() *TaskInstance {
@@ -87478,10 +88177,10 @@ func (task *TaskInstance) GetName() string {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Gets @task's priority
-func (task *TaskInstance) GetPriority() int {
+func (task *TaskInstance) GetPriority() int32 {
 	var carg0 *C.GTask // in, none, converted
 	var cret  C.gint   // return, none, casted
 
@@ -87490,9 +88189,9 @@ func (task *TaskInstance) GetPriority() int {
 	cret = C.g_task_get_priority(carg0)
 	runtime.KeepAlive(task)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -87773,7 +88472,7 @@ func (task *TaskInstance) ReturnInt(result int) {
 // The function takes the following parameters:
 // 
 // 	- domain glib.Quark: a #GQuark. 
-// 	- code int: an error code. 
+// 	- code int32: an error code. 
 // 	- message string: an error message 
 //
 // Sets @task’s result to a new [type@GLib.Error] created from @domain, @code,
@@ -87783,7 +88482,7 @@ func (task *TaskInstance) ReturnInt(result int) {
 // ‘completing the task’ means.
 // 
 // See also [method@Gio.Task.return_new_error].
-func (task *TaskInstance) ReturnNewErrorLiteral(domain glib.Quark, code int, message string) {
+func (task *TaskInstance) ReturnNewErrorLiteral(domain glib.Quark, code int32, message string) {
 	var carg0 *C.GTask // in, none, converted
 	var carg1 C.GQuark // in, none, casted, alias
 	var carg2 C.gint   // in, none, casted
@@ -87901,7 +88600,7 @@ func (task *TaskInstance) SetName(name string) {
 // 
 // The function takes the following parameters:
 // 
-// 	- priority int: the [priority](iface.AsyncResult.html#io-priority) of the request 
+// 	- priority int32: the [priority](iface.AsyncResult.html#io-priority) of the request 
 //
 // Sets @task's priority. If you do not call this, it will default to
 // %G_PRIORITY_DEFAULT.
@@ -87910,7 +88609,7 @@ func (task *TaskInstance) SetName(name string) {
 // g_task_attach_source() and the scheduling of tasks run in threads,
 // and can also be explicitly retrieved later via
 // g_task_get_priority().
-func (task *TaskInstance) SetPriority(priority int) {
+func (task *TaskInstance) SetPriority(priority int32) {
 	var carg0 *C.GTask // in, none, converted
 	var carg1 C.gint   // in, none, casted
 
@@ -88073,6 +88772,11 @@ func UnsafeTcpConnectionFromGlibNone(c unsafe.Pointer) TcpConnection {
 // UnsafeTcpConnectionFromGlibFull is used to convert raw GTcpConnection pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeTcpConnectionFromGlibFull(c unsafe.Pointer) TcpConnection {
 	return gobject.UnsafeObjectFromGlibFull(c).(TcpConnection)
+}
+
+// UnsafeTcpConnectionFromGlibBorrow is used to convert raw GTcpConnection pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeTcpConnectionFromGlibBorrow(c unsafe.Pointer) TcpConnection {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(TcpConnection)
 }
 
 func (t *TcpConnectionInstance) upcastToGTcpConnection() *TcpConnectionInstance {
@@ -88238,6 +88942,11 @@ func UnsafeTcpWrapperConnectionFromGlibNone(c unsafe.Pointer) TcpWrapperConnecti
 // UnsafeTcpWrapperConnectionFromGlibFull is used to convert raw GTcpWrapperConnection pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeTcpWrapperConnectionFromGlibFull(c unsafe.Pointer) TcpWrapperConnection {
 	return gobject.UnsafeObjectFromGlibFull(c).(TcpWrapperConnection)
+}
+
+// UnsafeTcpWrapperConnectionFromGlibBorrow is used to convert raw GTcpWrapperConnection pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeTcpWrapperConnectionFromGlibBorrow(c unsafe.Pointer) TcpWrapperConnection {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(TcpWrapperConnection)
 }
 
 func (t *TcpWrapperConnectionInstance) upcastToGTcpWrapperConnection() *TcpWrapperConnectionInstance {
@@ -88518,6 +89227,11 @@ func UnsafeTestDBusFromGlibFull(c unsafe.Pointer) TestDBus {
 	return gobject.UnsafeObjectFromGlibFull(c).(TestDBus)
 }
 
+// UnsafeTestDBusFromGlibBorrow is used to convert raw GTestDBus pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeTestDBusFromGlibBorrow(c unsafe.Pointer) TestDBus {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(TestDBus)
+}
+
 func (t *TestDBusInstance) upcastToGTestDBus() *TestDBusInstance {
 	return t
 }
@@ -88770,6 +89484,11 @@ func UnsafeThemedIconFromGlibFull(c unsafe.Pointer) ThemedIcon {
 	return gobject.UnsafeObjectFromGlibFull(c).(ThemedIcon)
 }
 
+// UnsafeThemedIconFromGlibBorrow is used to convert raw GThemedIcon pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeThemedIconFromGlibBorrow(c unsafe.Pointer) ThemedIcon {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(ThemedIcon)
+}
+
 func (t *ThemedIconInstance) upcastToGThemedIcon() *ThemedIconInstance {
 	return t
 }
@@ -89019,6 +89738,11 @@ func UnsafeThreadedSocketServiceFromGlibFull(c unsafe.Pointer) ThreadedSocketSer
 	return gobject.UnsafeObjectFromGlibFull(c).(ThreadedSocketService)
 }
 
+// UnsafeThreadedSocketServiceFromGlibBorrow is used to convert raw GThreadedSocketService pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeThreadedSocketServiceFromGlibBorrow(c unsafe.Pointer) ThreadedSocketService {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(ThreadedSocketService)
+}
+
 func (t *ThreadedSocketServiceInstance) upcastToGThreadedSocketService() *ThreadedSocketServiceInstance {
 	return t
 }
@@ -89037,7 +89761,7 @@ func UnsafeThreadedSocketServiceToGlibFull(c ThreadedSocketService) unsafe.Point
 // 
 // The function takes the following parameters:
 // 
-// 	- maxThreads int: the maximal number of threads to execute concurrently
+// 	- maxThreads int32: the maximal number of threads to execute concurrently
 //   handling incoming clients, -1 means no limit 
 // 
 // The function returns the following values:
@@ -89046,7 +89770,7 @@ func UnsafeThreadedSocketServiceToGlibFull(c ThreadedSocketService) unsafe.Point
 //
 // Creates a new #GThreadedSocketService with no listeners. Listeners
 // must be added with one of the #GSocketListener "add" methods.
-func NewThreadedSocketService(maxThreads int) SocketService {
+func NewThreadedSocketService(maxThreads int32) SocketService {
 	var carg1 C.int             // in, none, casted, casted C.gint
 	var cret  *C.GSocketService // return, full, converted
 
@@ -89108,7 +89832,7 @@ func UnsafeApplyThreadedSocketServiceOverrides[Instance ThreadedSocketService](g
 				var sourceObject gobject.Object   // in, none, converted
 				var goret        bool             // return
 
-				service = UnsafeThreadedSocketServiceFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				service = UnsafeThreadedSocketServiceFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				connection = UnsafeSocketConnectionFromGlibNone(unsafe.Pointer(carg1))
 				sourceObject = gobject.UnsafeObjectFromGlibNone(unsafe.Pointer(carg2))
 
@@ -89290,6 +90014,11 @@ func UnsafeTlsCertificateFromGlibNone(c unsafe.Pointer) TlsCertificate {
 // UnsafeTlsCertificateFromGlibFull is used to convert raw GTlsCertificate pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeTlsCertificateFromGlibFull(c unsafe.Pointer) TlsCertificate {
 	return gobject.UnsafeObjectFromGlibFull(c).(TlsCertificate)
+}
+
+// UnsafeTlsCertificateFromGlibBorrow is used to convert raw GTlsCertificate pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeTlsCertificateFromGlibBorrow(c unsafe.Pointer) TlsCertificate {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(TlsCertificate)
 }
 
 func (t *TlsCertificateInstance) upcastToGTlsCertificate() *TlsCertificateInstance {
@@ -89937,7 +90666,7 @@ func UnsafeApplyTlsCertificateOverrides[Instance TlsCertificate](gclass unsafe.P
 				var trustedCa TlsCertificate      // in, none, converted, nullable
 				var goret     TLSCertificateFlags // return, none, casted
 
-				cert = UnsafeTlsCertificateFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				cert = UnsafeTlsCertificateFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg1 != nil {
 					identity = UnsafeSocketConnectableFromGlibNone(unsafe.Pointer(carg1))
 				}
@@ -90188,12 +90917,12 @@ type TlsConnection interface {
 	// The function takes the following parameters:
 	// 
 	// 	- cancellable context.Context (nullable): a #GCancellable, or %NULL 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 	// 	- callback AsyncReadyCallback (nullable): callback to call when the handshake is complete 
 	//
 	// Asynchronously performs a TLS handshake on @conn. See
 	// g_tls_connection_handshake() for more information.
-	HandshakeAsync(context.Context, int, AsyncReadyCallback)
+	HandshakeAsync(context.Context, int32, AsyncReadyCallback)
 	// HandshakeFinish wraps g_tls_connection_handshake_finish
 	// 
 	// The function takes the following parameters:
@@ -90414,6 +91143,11 @@ func UnsafeTlsConnectionFromGlibNone(c unsafe.Pointer) TlsConnection {
 // UnsafeTlsConnectionFromGlibFull is used to convert raw GTlsConnection pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeTlsConnectionFromGlibFull(c unsafe.Pointer) TlsConnection {
 	return gobject.UnsafeObjectFromGlibFull(c).(TlsConnection)
+}
+
+// UnsafeTlsConnectionFromGlibBorrow is used to convert raw GTlsConnection pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeTlsConnectionFromGlibBorrow(c unsafe.Pointer) TlsConnection {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(TlsConnection)
 }
 
 func (t *TlsConnectionInstance) upcastToGTlsConnection() *TlsConnectionInstance {
@@ -90848,12 +91582,12 @@ func (conn *TlsConnectionInstance) Handshake(cancellable context.Context) (bool,
 // The function takes the following parameters:
 // 
 // 	- cancellable context.Context (nullable): a #GCancellable, or %NULL 
-// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 // 	- callback AsyncReadyCallback (nullable): callback to call when the handshake is complete 
 //
 // Asynchronously performs a TLS handshake on @conn. See
 // g_tls_connection_handshake() for more information.
-func (conn *TlsConnectionInstance) HandshakeAsync(cancellable context.Context, ioPriority int, callback AsyncReadyCallback) {
+func (conn *TlsConnectionInstance) HandshakeAsync(cancellable context.Context, ioPriority int32, callback AsyncReadyCallback) {
 	var carg0 *C.GTlsConnection     // in, none, converted
 	var carg2 *C.GCancellable       // in, none, converted, nullable
 	var carg1 C.int                 // in, none, casted, casted C.gint
@@ -91225,9 +91959,9 @@ type TlsConnectionOverrides[Instance TlsConnection] struct {
 	// The function takes the following parameters:
 	// 
 	// 	- cancellable context.Context (nullable): a #GCancellable, or %NULL 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 	// 	- callback AsyncReadyCallback (nullable): callback to call when the handshake is complete 
-	HandshakeAsync func(Instance, context.Context, int, AsyncReadyCallback)
+	HandshakeAsync func(Instance, context.Context, int32, AsyncReadyCallback)
 	// HandshakeFinish allows you to override the implementation of the virtual method handshake_finish.
 	// The function takes the following parameters:
 	// 
@@ -91258,7 +91992,7 @@ func UnsafeApplyTlsConnectionOverrides[Instance TlsConnection](gclass unsafe.Poi
 				var errors     TLSCertificateFlags // in, none, casted
 				var goret      bool                // return
 
-				connection = UnsafeTlsConnectionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				connection = UnsafeTlsConnectionFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				peerCert = UnsafeTlsCertificateFromGlibNone(unsafe.Pointer(carg1))
 				errors = TLSCertificateFlags(carg2)
 
@@ -91282,7 +92016,7 @@ func UnsafeApplyTlsConnectionOverrides[Instance TlsConnection](gclass unsafe.Poi
 				var conn  Instance // go GTlsConnection subclass
 				var goret string   // return, none, string, nullable-string
 
-				conn = UnsafeTlsConnectionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				conn = UnsafeTlsConnectionFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetNegotiatedProtocol(conn)
 
@@ -91307,7 +92041,7 @@ func UnsafeApplyTlsConnectionOverrides[Instance TlsConnection](gclass unsafe.Poi
 				var goret       bool            // return
 				var _goerr      error           // out, full, converted
 
-				conn = UnsafeTlsConnectionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				conn = UnsafeTlsConnectionFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg1 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg1))
 				}
@@ -91332,14 +92066,14 @@ func UnsafeApplyTlsConnectionOverrides[Instance TlsConnection](gclass unsafe.Poi
 			func(carg0 *C.GTlsConnection, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
 				var conn        Instance           // go GTlsConnection subclass
 				var cancellable context.Context    // in, none, converted, nullable
-				var ioPriority  int                // in, none, casted, casted C.gint
+				var ioPriority  int32              // in, none, casted, casted C.gint
 				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg4, nullable
 
-				conn = UnsafeTlsConnectionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				conn = UnsafeTlsConnectionFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg2 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
 				}
-				ioPriority = int(carg1)
+				ioPriority = int32(carg1)
 				if carg3 != nil {
 					_ = callback
 					_ = carg3
@@ -91363,7 +92097,7 @@ func UnsafeApplyTlsConnectionOverrides[Instance TlsConnection](gclass unsafe.Poi
 				var goret  bool        // return
 				var _goerr error       // out, full, converted
 
-				conn = UnsafeTlsConnectionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				conn = UnsafeTlsConnectionFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.HandshakeFinish(conn, result)
@@ -91716,6 +92450,11 @@ func UnsafeTlsDatabaseFromGlibNone(c unsafe.Pointer) TlsDatabase {
 // UnsafeTlsDatabaseFromGlibFull is used to convert raw GTlsDatabase pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeTlsDatabaseFromGlibFull(c unsafe.Pointer) TlsDatabase {
 	return gobject.UnsafeObjectFromGlibFull(c).(TlsDatabase)
+}
+
+// UnsafeTlsDatabaseFromGlibBorrow is used to convert raw GTlsDatabase pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeTlsDatabaseFromGlibBorrow(c unsafe.Pointer) TlsDatabase {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(TlsDatabase)
 }
 
 func (t *TlsDatabaseInstance) upcastToGTlsDatabase() *TlsDatabaseInstance {
@@ -92487,7 +93226,7 @@ func UnsafeApplyTlsDatabaseOverrides[Instance TlsDatabase](gclass unsafe.Pointer
 				var certificate TlsCertificate // in, none, converted
 				var goret       string         // return, full, string, nullable-string
 
-				self = UnsafeTlsDatabaseFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				self = UnsafeTlsDatabaseFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				certificate = UnsafeTlsCertificateFromGlibNone(unsafe.Pointer(carg1))
 
 				goret = overrides.CreateCertificateHandle(self, certificate)
@@ -92515,7 +93254,7 @@ func UnsafeApplyTlsDatabaseOverrides[Instance TlsDatabase](gclass unsafe.Pointer
 				var goret       TlsCertificate         // return, full, converted, nullable
 				var _goerr      error                  // out, full, converted
 
-				self = UnsafeTlsDatabaseFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				self = UnsafeTlsDatabaseFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg4 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg4))
 				}
@@ -92550,7 +93289,7 @@ func UnsafeApplyTlsDatabaseOverrides[Instance TlsDatabase](gclass unsafe.Pointer
 				var flags       TLSDatabaseLookupFlags // in, none, casted
 				var callback    AsyncReadyCallback     // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg6, nullable
 
-				self = UnsafeTlsDatabaseFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				self = UnsafeTlsDatabaseFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg4 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg4))
 				}
@@ -92582,7 +93321,7 @@ func UnsafeApplyTlsDatabaseOverrides[Instance TlsDatabase](gclass unsafe.Pointer
 				var goret  TlsCertificate // return, full, converted
 				var _goerr error          // out, full, converted
 
-				self = UnsafeTlsDatabaseFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				self = UnsafeTlsDatabaseFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.LookupCertificateForHandleFinish(self, result)
@@ -92609,7 +93348,7 @@ func UnsafeApplyTlsDatabaseOverrides[Instance TlsDatabase](gclass unsafe.Pointer
 				var goret       TlsCertificate         // return, full, converted
 				var _goerr      error                  // out, full, converted
 
-				self = UnsafeTlsDatabaseFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				self = UnsafeTlsDatabaseFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg4 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg4))
 				}
@@ -92642,7 +93381,7 @@ func UnsafeApplyTlsDatabaseOverrides[Instance TlsDatabase](gclass unsafe.Pointer
 				var flags       TLSDatabaseLookupFlags // in, none, casted
 				var callback    AsyncReadyCallback     // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg6, nullable
 
-				self = UnsafeTlsDatabaseFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				self = UnsafeTlsDatabaseFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg4 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg4))
 				}
@@ -92674,7 +93413,7 @@ func UnsafeApplyTlsDatabaseOverrides[Instance TlsDatabase](gclass unsafe.Pointer
 				var goret  TlsCertificate // return, full, converted
 				var _goerr error          // out, full, converted
 
-				self = UnsafeTlsDatabaseFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				self = UnsafeTlsDatabaseFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.LookupCertificateIssuerFinish(self, result)
@@ -92698,7 +93437,7 @@ func UnsafeApplyTlsDatabaseOverrides[Instance TlsDatabase](gclass unsafe.Pointer
 				var goret  []TlsCertificate // return, transfer: full, C Pointers: 1, Name: List, scope: 
 				var _goerr error            // out, full, converted
 
-				self = UnsafeTlsDatabaseFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				self = UnsafeTlsDatabaseFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.LookupCertificatesIssuedByFinish(self, result)
@@ -92729,7 +93468,7 @@ func UnsafeApplyTlsDatabaseOverrides[Instance TlsDatabase](gclass unsafe.Pointer
 				var goret       TLSCertificateFlags    // return, none, casted
 				var _goerr      error                  // out, full, converted
 
-				self = UnsafeTlsDatabaseFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				self = UnsafeTlsDatabaseFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg6 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg6))
 				}
@@ -92768,7 +93507,7 @@ func UnsafeApplyTlsDatabaseOverrides[Instance TlsDatabase](gclass unsafe.Pointer
 				var flags       TLSDatabaseVerifyFlags // in, none, casted
 				var callback    AsyncReadyCallback     // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg8, nullable
 
-				self = UnsafeTlsDatabaseFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				self = UnsafeTlsDatabaseFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg6 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg6))
 				}
@@ -92804,7 +93543,7 @@ func UnsafeApplyTlsDatabaseOverrides[Instance TlsDatabase](gclass unsafe.Pointer
 				var goret  TLSCertificateFlags // return, none, casted
 				var _goerr error               // out, full, converted
 
-				self = UnsafeTlsDatabaseFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				self = UnsafeTlsDatabaseFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.VerifyChainFinish(self, result)
@@ -93105,6 +93844,11 @@ func UnsafeTlsInteractionFromGlibNone(c unsafe.Pointer) TlsInteraction {
 // UnsafeTlsInteractionFromGlibFull is used to convert raw GTlsInteraction pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeTlsInteractionFromGlibFull(c unsafe.Pointer) TlsInteraction {
 	return gobject.UnsafeObjectFromGlibFull(c).(TlsInteraction)
+}
+
+// UnsafeTlsInteractionFromGlibBorrow is used to convert raw GTlsInteraction pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeTlsInteractionFromGlibBorrow(c unsafe.Pointer) TlsInteraction {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(TlsInteraction)
 }
 
 func (t *TlsInteractionInstance) upcastToGTlsInteraction() *TlsInteractionInstance {
@@ -93626,7 +94370,7 @@ func UnsafeApplyTlsInteractionOverrides[Instance TlsInteraction](gclass unsafe.P
 				var goret       TLSInteractionResult // return, none, casted
 				var _goerr      error                // out, full, converted
 
-				interaction = UnsafeTlsInteractionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				interaction = UnsafeTlsInteractionFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg2 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
 				}
@@ -93653,7 +94397,7 @@ func UnsafeApplyTlsInteractionOverrides[Instance TlsInteraction](gclass unsafe.P
 				var password    TlsPassword        // in, none, converted
 				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg4, nullable
 
-				interaction = UnsafeTlsInteractionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				interaction = UnsafeTlsInteractionFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg2 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
 				}
@@ -93681,7 +94425,7 @@ func UnsafeApplyTlsInteractionOverrides[Instance TlsInteraction](gclass unsafe.P
 				var goret       TLSInteractionResult // return, none, casted
 				var _goerr      error                // out, full, converted
 
-				interaction = UnsafeTlsInteractionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				interaction = UnsafeTlsInteractionFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.AskPasswordFinish(interaction, result)
@@ -93707,7 +94451,7 @@ func UnsafeApplyTlsInteractionOverrides[Instance TlsInteraction](gclass unsafe.P
 				var goret       TLSInteractionResult       // return, none, casted
 				var _goerr      error                      // out, full, converted
 
-				interaction = UnsafeTlsInteractionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				interaction = UnsafeTlsInteractionFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg3 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
 				}
@@ -93736,7 +94480,7 @@ func UnsafeApplyTlsInteractionOverrides[Instance TlsInteraction](gclass unsafe.P
 				var flags       TLSCertificateRequestFlags // in, none, casted
 				var callback    AsyncReadyCallback         // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg5, nullable
 
-				interaction = UnsafeTlsInteractionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				interaction = UnsafeTlsInteractionFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg3 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
 				}
@@ -93765,7 +94509,7 @@ func UnsafeApplyTlsInteractionOverrides[Instance TlsInteraction](gclass unsafe.P
 				var goret       TLSInteractionResult // return, none, casted
 				var _goerr      error                // out, full, converted
 
-				interaction = UnsafeTlsInteractionFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				interaction = UnsafeTlsInteractionFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.RequestCertificateFinish(interaction, result)
@@ -93920,6 +94664,11 @@ func UnsafeTlsPasswordFromGlibNone(c unsafe.Pointer) TlsPassword {
 // UnsafeTlsPasswordFromGlibFull is used to convert raw GTlsPassword pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeTlsPasswordFromGlibFull(c unsafe.Pointer) TlsPassword {
 	return gobject.UnsafeObjectFromGlibFull(c).(TlsPassword)
+}
+
+// UnsafeTlsPasswordFromGlibBorrow is used to convert raw GTlsPassword pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeTlsPasswordFromGlibBorrow(c unsafe.Pointer) TlsPassword {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(TlsPassword)
 }
 
 func (t *TlsPasswordInstance) upcastToGTlsPassword() *TlsPasswordInstance {
@@ -94199,7 +94948,7 @@ func UnsafeApplyTlsPasswordOverrides[Instance TlsPassword](gclass unsafe.Pointer
 				var password Instance // go GTlsPassword subclass
 				var goret    string   // return, none, string
 
-				password = UnsafeTlsPasswordFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				password = UnsafeTlsPasswordFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetDefaultWarning(password)
 
@@ -94221,7 +94970,7 @@ func UnsafeApplyTlsPasswordOverrides[Instance TlsPassword](gclass unsafe.Pointer
 				var length   uint     // out, transfer: full, C Pointers: 0, Name: gsize, optional, caller-allocates
 				var goret    []byte   // return, transfer: none, C Pointers: 1, Name: array[guchar], scope: , array (inner: *typesystem.CastablePrimitive)
 
-				password = UnsafeTlsPasswordFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				password = UnsafeTlsPasswordFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				length, goret = overrides.GetValue(password)
 
@@ -94403,6 +95152,11 @@ func UnsafeVfsFromGlibNone(c unsafe.Pointer) Vfs {
 // UnsafeVfsFromGlibFull is used to convert raw GVfs pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeVfsFromGlibFull(c unsafe.Pointer) Vfs {
 	return gobject.UnsafeObjectFromGlibFull(c).(Vfs)
+}
+
+// UnsafeVfsFromGlibBorrow is used to convert raw GVfs pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeVfsFromGlibBorrow(c unsafe.Pointer) Vfs {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Vfs)
 }
 
 func (v *VfsInstance) upcastToGVfs() *VfsInstance {
@@ -94802,7 +95556,7 @@ func UnsafeApplyVfsOverrides[Instance Vfs](gclass unsafe.Pointer, overrides VfsO
 				var vfs  Instance               // go GVfs subclass
 				var list *FileAttributeInfoList // in, none, converted
 
-				vfs = UnsafeVfsFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				vfs = UnsafeVfsFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				list = UnsafeFileAttributeInfoListFromGlibNone(unsafe.Pointer(carg1))
 
 				overrides.AddWritableNamespaces(vfs, list)
@@ -94820,7 +95574,7 @@ func UnsafeApplyVfsOverrides[Instance Vfs](gclass unsafe.Pointer, overrides VfsO
 				var path  string   // in, none, string, casted *C.gchar
 				var goret File     // return, full, converted
 
-				vfs = UnsafeVfsFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				vfs = UnsafeVfsFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				path = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 
 				goret = overrides.GetFileForPath(vfs, path)
@@ -94842,7 +95596,7 @@ func UnsafeApplyVfsOverrides[Instance Vfs](gclass unsafe.Pointer, overrides VfsO
 				var uri   string   // in, none, string, casted *C.gchar
 				var goret File     // return, full, converted
 
-				vfs = UnsafeVfsFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				vfs = UnsafeVfsFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				uri = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 
 				goret = overrides.GetFileForURI(vfs, uri)
@@ -94863,7 +95617,7 @@ func UnsafeApplyVfsOverrides[Instance Vfs](gclass unsafe.Pointer, overrides VfsO
 				var vfs   Instance // go GVfs subclass
 				var goret []string // return, transfer: none, C Pointers: 2, Name: array[utf8], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
 
-				vfs = UnsafeVfsFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				vfs = UnsafeVfsFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetSupportedURISchemes(vfs)
 
@@ -94885,7 +95639,7 @@ func UnsafeApplyVfsOverrides[Instance Vfs](gclass unsafe.Pointer, overrides VfsO
 				var vfs   Instance // go GVfs subclass
 				var goret bool     // return
 
-				vfs = UnsafeVfsFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				vfs = UnsafeVfsFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.IsActive(vfs)
 
@@ -94908,7 +95662,7 @@ func UnsafeApplyVfsOverrides[Instance Vfs](gclass unsafe.Pointer, overrides VfsO
 				var source string   // in, none, string, casted *C.gchar
 				var dest   string   // in, none, string, casted *C.gchar
 
-				vfs = UnsafeVfsFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				vfs = UnsafeVfsFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				source = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 				dest = C.GoString((*C.char)(unsafe.Pointer(carg2)))
 
@@ -94926,7 +95680,7 @@ func UnsafeApplyVfsOverrides[Instance Vfs](gclass unsafe.Pointer, overrides VfsO
 				var vfs      Instance // go GVfs subclass
 				var filename string   // in, none, string, casted *C.gchar
 
-				vfs = UnsafeVfsFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				vfs = UnsafeVfsFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				filename = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 
 				overrides.LocalFileRemoved(vfs, filename)
@@ -94948,7 +95702,7 @@ func UnsafeApplyVfsOverrides[Instance Vfs](gclass unsafe.Pointer, overrides VfsO
 				var goret       bool               // return
 				var _goerr      error              // out, full, converted
 
-				vfs = UnsafeVfsFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				vfs = UnsafeVfsFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg4 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg4))
 				}
@@ -94978,7 +95732,7 @@ func UnsafeApplyVfsOverrides[Instance Vfs](gclass unsafe.Pointer, overrides VfsO
 				var parseName string   // in, none, string, casted *C.gchar
 				var goret     File     // return, full, converted
 
-				vfs = UnsafeVfsFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				vfs = UnsafeVfsFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				parseName = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 
 				goret = overrides.ParseName(vfs, parseName)
@@ -95170,6 +95924,11 @@ func UnsafeVolumeMonitorFromGlibNone(c unsafe.Pointer) VolumeMonitor {
 // UnsafeVolumeMonitorFromGlibFull is used to convert raw GVolumeMonitor pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeVolumeMonitorFromGlibFull(c unsafe.Pointer) VolumeMonitor {
 	return gobject.UnsafeObjectFromGlibFull(c).(VolumeMonitor)
+}
+
+// UnsafeVolumeMonitorFromGlibBorrow is used to convert raw GVolumeMonitor pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeVolumeMonitorFromGlibBorrow(c unsafe.Pointer) VolumeMonitor {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(VolumeMonitor)
 }
 
 func (v *VolumeMonitorInstance) upcastToGVolumeMonitor() *VolumeMonitorInstance {
@@ -95634,7 +96393,7 @@ func UnsafeApplyVolumeMonitorOverrides[Instance VolumeMonitor](gclass unsafe.Poi
 				var volumeMonitor Instance // go GVolumeMonitor subclass
 				var drive         Drive    // in, none, converted
 
-				volumeMonitor = UnsafeVolumeMonitorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				volumeMonitor = UnsafeVolumeMonitorFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg1))
 
 				overrides.DriveChanged(volumeMonitor, drive)
@@ -95651,7 +96410,7 @@ func UnsafeApplyVolumeMonitorOverrides[Instance VolumeMonitor](gclass unsafe.Poi
 				var volumeMonitor Instance // go GVolumeMonitor subclass
 				var drive         Drive    // in, none, converted
 
-				volumeMonitor = UnsafeVolumeMonitorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				volumeMonitor = UnsafeVolumeMonitorFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg1))
 
 				overrides.DriveConnected(volumeMonitor, drive)
@@ -95668,7 +96427,7 @@ func UnsafeApplyVolumeMonitorOverrides[Instance VolumeMonitor](gclass unsafe.Poi
 				var volumeMonitor Instance // go GVolumeMonitor subclass
 				var drive         Drive    // in, none, converted
 
-				volumeMonitor = UnsafeVolumeMonitorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				volumeMonitor = UnsafeVolumeMonitorFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg1))
 
 				overrides.DriveDisconnected(volumeMonitor, drive)
@@ -95685,7 +96444,7 @@ func UnsafeApplyVolumeMonitorOverrides[Instance VolumeMonitor](gclass unsafe.Poi
 				var volumeMonitor Instance // go GVolumeMonitor subclass
 				var drive         Drive    // in, none, converted
 
-				volumeMonitor = UnsafeVolumeMonitorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				volumeMonitor = UnsafeVolumeMonitorFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg1))
 
 				overrides.DriveEjectButton(volumeMonitor, drive)
@@ -95702,7 +96461,7 @@ func UnsafeApplyVolumeMonitorOverrides[Instance VolumeMonitor](gclass unsafe.Poi
 				var volumeMonitor Instance // go GVolumeMonitor subclass
 				var drive         Drive    // in, none, converted
 
-				volumeMonitor = UnsafeVolumeMonitorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				volumeMonitor = UnsafeVolumeMonitorFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				drive = UnsafeDriveFromGlibNone(unsafe.Pointer(carg1))
 
 				overrides.DriveStopButton(volumeMonitor, drive)
@@ -95719,7 +96478,7 @@ func UnsafeApplyVolumeMonitorOverrides[Instance VolumeMonitor](gclass unsafe.Poi
 				var volumeMonitor Instance // go GVolumeMonitor subclass
 				var goret         []Drive  // return, transfer: full, C Pointers: 1, Name: List, scope: 
 
-				volumeMonitor = UnsafeVolumeMonitorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				volumeMonitor = UnsafeVolumeMonitorFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetConnectedDrives(volumeMonitor)
 
@@ -95742,7 +96501,7 @@ func UnsafeApplyVolumeMonitorOverrides[Instance VolumeMonitor](gclass unsafe.Poi
 				var uuid          string   // in, none, string, casted *C.gchar
 				var goret         Mount    // return, full, converted, nullable
 
-				volumeMonitor = UnsafeVolumeMonitorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				volumeMonitor = UnsafeVolumeMonitorFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				uuid = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 
 				goret = overrides.GetMountForUUID(volumeMonitor, uuid)
@@ -95765,7 +96524,7 @@ func UnsafeApplyVolumeMonitorOverrides[Instance VolumeMonitor](gclass unsafe.Poi
 				var volumeMonitor Instance // go GVolumeMonitor subclass
 				var goret         []Mount  // return, transfer: full, C Pointers: 1, Name: List, scope: 
 
-				volumeMonitor = UnsafeVolumeMonitorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				volumeMonitor = UnsafeVolumeMonitorFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetMounts(volumeMonitor)
 
@@ -95788,7 +96547,7 @@ func UnsafeApplyVolumeMonitorOverrides[Instance VolumeMonitor](gclass unsafe.Poi
 				var uuid          string   // in, none, string, casted *C.gchar
 				var goret         Volume   // return, full, converted, nullable
 
-				volumeMonitor = UnsafeVolumeMonitorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				volumeMonitor = UnsafeVolumeMonitorFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				uuid = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 
 				goret = overrides.GetVolumeForUUID(volumeMonitor, uuid)
@@ -95811,7 +96570,7 @@ func UnsafeApplyVolumeMonitorOverrides[Instance VolumeMonitor](gclass unsafe.Poi
 				var volumeMonitor Instance // go GVolumeMonitor subclass
 				var goret         []Volume // return, transfer: full, C Pointers: 1, Name: List, scope: 
 
-				volumeMonitor = UnsafeVolumeMonitorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				volumeMonitor = UnsafeVolumeMonitorFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetVolumes(volumeMonitor)
 
@@ -95833,7 +96592,7 @@ func UnsafeApplyVolumeMonitorOverrides[Instance VolumeMonitor](gclass unsafe.Poi
 				var volumeMonitor Instance // go GVolumeMonitor subclass
 				var mount         Mount    // in, none, converted
 
-				volumeMonitor = UnsafeVolumeMonitorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				volumeMonitor = UnsafeVolumeMonitorFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				mount = UnsafeMountFromGlibNone(unsafe.Pointer(carg1))
 
 				overrides.MountAdded(volumeMonitor, mount)
@@ -95850,7 +96609,7 @@ func UnsafeApplyVolumeMonitorOverrides[Instance VolumeMonitor](gclass unsafe.Poi
 				var volumeMonitor Instance // go GVolumeMonitor subclass
 				var mount         Mount    // in, none, converted
 
-				volumeMonitor = UnsafeVolumeMonitorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				volumeMonitor = UnsafeVolumeMonitorFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				mount = UnsafeMountFromGlibNone(unsafe.Pointer(carg1))
 
 				overrides.MountChanged(volumeMonitor, mount)
@@ -95867,7 +96626,7 @@ func UnsafeApplyVolumeMonitorOverrides[Instance VolumeMonitor](gclass unsafe.Poi
 				var volumeMonitor Instance // go GVolumeMonitor subclass
 				var mount         Mount    // in, none, converted
 
-				volumeMonitor = UnsafeVolumeMonitorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				volumeMonitor = UnsafeVolumeMonitorFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				mount = UnsafeMountFromGlibNone(unsafe.Pointer(carg1))
 
 				overrides.MountPreUnmount(volumeMonitor, mount)
@@ -95884,7 +96643,7 @@ func UnsafeApplyVolumeMonitorOverrides[Instance VolumeMonitor](gclass unsafe.Poi
 				var volumeMonitor Instance // go GVolumeMonitor subclass
 				var mount         Mount    // in, none, converted
 
-				volumeMonitor = UnsafeVolumeMonitorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				volumeMonitor = UnsafeVolumeMonitorFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				mount = UnsafeMountFromGlibNone(unsafe.Pointer(carg1))
 
 				overrides.MountRemoved(volumeMonitor, mount)
@@ -95901,7 +96660,7 @@ func UnsafeApplyVolumeMonitorOverrides[Instance VolumeMonitor](gclass unsafe.Poi
 				var volumeMonitor Instance // go GVolumeMonitor subclass
 				var volume        Volume   // in, none, converted
 
-				volumeMonitor = UnsafeVolumeMonitorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				volumeMonitor = UnsafeVolumeMonitorFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				volume = UnsafeVolumeFromGlibNone(unsafe.Pointer(carg1))
 
 				overrides.VolumeAdded(volumeMonitor, volume)
@@ -95918,7 +96677,7 @@ func UnsafeApplyVolumeMonitorOverrides[Instance VolumeMonitor](gclass unsafe.Poi
 				var volumeMonitor Instance // go GVolumeMonitor subclass
 				var volume        Volume   // in, none, converted
 
-				volumeMonitor = UnsafeVolumeMonitorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				volumeMonitor = UnsafeVolumeMonitorFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				volume = UnsafeVolumeFromGlibNone(unsafe.Pointer(carg1))
 
 				overrides.VolumeChanged(volumeMonitor, volume)
@@ -95935,7 +96694,7 @@ func UnsafeApplyVolumeMonitorOverrides[Instance VolumeMonitor](gclass unsafe.Poi
 				var volumeMonitor Instance // go GVolumeMonitor subclass
 				var volume        Volume   // in, none, converted
 
-				volumeMonitor = UnsafeVolumeMonitorFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				volumeMonitor = UnsafeVolumeMonitorFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				volume = UnsafeVolumeFromGlibNone(unsafe.Pointer(carg1))
 
 				overrides.VolumeRemoved(volumeMonitor, volume)
@@ -96031,6 +96790,11 @@ func UnsafeZlibCompressorFromGlibFull(c unsafe.Pointer) ZlibCompressor {
 	return gobject.UnsafeObjectFromGlibFull(c).(ZlibCompressor)
 }
 
+// UnsafeZlibCompressorFromGlibBorrow is used to convert raw GZlibCompressor pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeZlibCompressorFromGlibBorrow(c unsafe.Pointer) ZlibCompressor {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(ZlibCompressor)
+}
+
 func (z *ZlibCompressorInstance) upcastToGZlibCompressor() *ZlibCompressorInstance {
 	return z
 }
@@ -96050,14 +96814,14 @@ func UnsafeZlibCompressorToGlibFull(c ZlibCompressor) unsafe.Pointer {
 // The function takes the following parameters:
 // 
 // 	- format ZlibCompressorFormat: The format to use for the compressed data 
-// 	- level int: compression level (0-9), -1 for default 
+// 	- level int32: compression level (0-9), -1 for default 
 // 
 // The function returns the following values:
 // 
 // 	- goret ZlibCompressor 
 //
 // Creates a new #GZlibCompressor.
-func NewZlibCompressor(format ZlibCompressorFormat, level int) ZlibCompressor {
+func NewZlibCompressor(format ZlibCompressorFormat, level int32) ZlibCompressor {
 	var carg1 C.GZlibCompressorFormat // in, none, casted
 	var carg2 C.int                   // in, none, casted, casted C.gint
 	var cret  *C.GZlibCompressor      // return, full, converted
@@ -96219,6 +96983,11 @@ func UnsafeZlibDecompressorFromGlibFull(c unsafe.Pointer) ZlibDecompressor {
 	return gobject.UnsafeObjectFromGlibFull(c).(ZlibDecompressor)
 }
 
+// UnsafeZlibDecompressorFromGlibBorrow is used to convert raw GZlibDecompressor pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeZlibDecompressorFromGlibBorrow(c unsafe.Pointer) ZlibDecompressor {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(ZlibDecompressor)
+}
+
 func (z *ZlibDecompressorInstance) upcastToGZlibDecompressor() *ZlibDecompressorInstance {
 	return z
 }
@@ -96369,6 +97138,11 @@ func UnsafeDBusMenuModelFromGlibFull(c unsafe.Pointer) DBusMenuModel {
 	return gobject.UnsafeObjectFromGlibFull(c).(DBusMenuModel)
 }
 
+// UnsafeDBusMenuModelFromGlibBorrow is used to convert raw GDBusMenuModel pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeDBusMenuModelFromGlibBorrow(c unsafe.Pointer) DBusMenuModel {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(DBusMenuModel)
+}
+
 func (d *DBusMenuModelInstance) upcastToGDBusMenuModel() *DBusMenuModelInstance {
 	return d
 }
@@ -96512,7 +97286,7 @@ type FileIOStream interface {
 	// 
 	// 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore. 
 	// 	- attributes string: a file attribute query string. 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the
 	//   request 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 	//   to call when the request is satisfied 
@@ -96523,7 +97297,7 @@ type FileIOStream interface {
 	// 
 	// For the synchronous version of this function, see
 	// g_file_io_stream_query_info().
-	QueryInfoAsync(context.Context, string, int, AsyncReadyCallback)
+	QueryInfoAsync(context.Context, string, int32, AsyncReadyCallback)
 	// QueryInfoFinish wraps g_file_io_stream_query_info_finish
 	// 
 	// The function takes the following parameters:
@@ -96563,6 +97337,11 @@ func UnsafeFileIOStreamFromGlibNone(c unsafe.Pointer) FileIOStream {
 // UnsafeFileIOStreamFromGlibFull is used to convert raw GFileIOStream pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeFileIOStreamFromGlibFull(c unsafe.Pointer) FileIOStream {
 	return gobject.UnsafeObjectFromGlibFull(c).(FileIOStream)
+}
+
+// UnsafeFileIOStreamFromGlibBorrow is used to convert raw GFileIOStream pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeFileIOStreamFromGlibBorrow(c unsafe.Pointer) FileIOStream {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(FileIOStream)
 }
 
 func (f *FileIOStreamInstance) upcastToGFileIOStream() *FileIOStreamInstance {
@@ -96672,7 +97451,7 @@ func (stream *FileIOStreamInstance) QueryInfo(cancellable context.Context, attri
 // 
 // 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore. 
 // 	- attributes string: a file attribute query string. 
-// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the
+// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the
 //   request 
 // 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 //   to call when the request is satisfied 
@@ -96683,7 +97462,7 @@ func (stream *FileIOStreamInstance) QueryInfo(cancellable context.Context, attri
 // 
 // For the synchronous version of this function, see
 // g_file_io_stream_query_info().
-func (stream *FileIOStreamInstance) QueryInfoAsync(cancellable context.Context, attributes string, ioPriority int, callback AsyncReadyCallback) {
+func (stream *FileIOStreamInstance) QueryInfoAsync(cancellable context.Context, attributes string, ioPriority int32, callback AsyncReadyCallback) {
 	var carg0 *C.GFileIOStream      // in, none, converted
 	var carg3 *C.GCancellable       // in, none, converted, nullable
 	var carg1 *C.char               // in, none, string, casted *C.gchar
@@ -96785,11 +97564,11 @@ type FileIOStreamOverrides[Instance FileIOStream] struct {
 	// 
 	// 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore. 
 	// 	- attributes string: a file attribute query string. 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the
 	//   request 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 	//   to call when the request is satisfied 
-	QueryInfoAsync func(Instance, context.Context, string, int, AsyncReadyCallback)
+	QueryInfoAsync func(Instance, context.Context, string, int32, AsyncReadyCallback)
 	// QueryInfoFinish allows you to override the implementation of the virtual method query_info_finish.
 	// The function takes the following parameters:
 	// 
@@ -96846,7 +97625,7 @@ func UnsafeApplyFileIOStreamOverrides[Instance FileIOStream](gclass unsafe.Point
 				var stream Instance // go GFileIOStream subclass
 				var goret  bool     // return
 
-				stream = UnsafeFileIOStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafeFileIOStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.CanSeek(stream)
 
@@ -96868,7 +97647,7 @@ func UnsafeApplyFileIOStreamOverrides[Instance FileIOStream](gclass unsafe.Point
 				var stream Instance // go GFileIOStream subclass
 				var goret  bool     // return
 
-				stream = UnsafeFileIOStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafeFileIOStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.CanTruncate(stream)
 
@@ -96890,7 +97669,7 @@ func UnsafeApplyFileIOStreamOverrides[Instance FileIOStream](gclass unsafe.Point
 				var stream Instance // go GFileIOStream subclass
 				var goret  string   // return, full, string, nullable-string
 
-				stream = UnsafeFileIOStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafeFileIOStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetETag(stream)
 
@@ -96915,7 +97694,7 @@ func UnsafeApplyFileIOStreamOverrides[Instance FileIOStream](gclass unsafe.Point
 				var goret       FileInfo        // return, full, converted
 				var _goerr      error           // out, full, converted
 
-				stream = UnsafeFileIOStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafeFileIOStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg2 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
 				}
@@ -96940,15 +97719,15 @@ func UnsafeApplyFileIOStreamOverrides[Instance FileIOStream](gclass unsafe.Point
 				var stream      Instance           // go GFileIOStream subclass
 				var cancellable context.Context    // in, none, converted, nullable
 				var attributes  string             // in, none, string, casted *C.gchar
-				var ioPriority  int                // in, none, casted, casted C.gint
+				var ioPriority  int32              // in, none, casted, casted C.gint
 				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg5, nullable
 
-				stream = UnsafeFileIOStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafeFileIOStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg3 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
 				}
 				attributes = C.GoString((*C.char)(unsafe.Pointer(carg1)))
-				ioPriority = int(carg2)
+				ioPriority = int32(carg2)
 				if carg4 != nil {
 					_ = callback
 					_ = carg4
@@ -96972,7 +97751,7 @@ func UnsafeApplyFileIOStreamOverrides[Instance FileIOStream](gclass unsafe.Point
 				var goret  FileInfo    // return, full, converted
 				var _goerr error       // out, full, converted
 
-				stream = UnsafeFileIOStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafeFileIOStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.QueryInfoFinish(stream, result)
@@ -96998,7 +97777,7 @@ func UnsafeApplyFileIOStreamOverrides[Instance FileIOStream](gclass unsafe.Point
 				var goret       bool            // return
 				var _goerr      error           // out, full, converted
 
-				stream = UnsafeFileIOStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafeFileIOStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg3 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
 				}
@@ -97026,7 +97805,7 @@ func UnsafeApplyFileIOStreamOverrides[Instance FileIOStream](gclass unsafe.Point
 				var stream Instance // go GFileIOStream subclass
 				var goret  int64    // return, none, casted, casted C.gint64
 
-				stream = UnsafeFileIOStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafeFileIOStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.Tell(stream)
 
@@ -97049,7 +97828,7 @@ func UnsafeApplyFileIOStreamOverrides[Instance FileIOStream](gclass unsafe.Point
 				var goret       bool            // return
 				var _goerr      error           // out, full, converted
 
-				stream = UnsafeFileIOStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafeFileIOStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg2 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
 				}
@@ -97144,7 +97923,7 @@ type FileInputStream interface {
 	// 
 	// 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore. 
 	// 	- attributes string: a file attribute query string. 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 	//   to call when the request is satisfied 
 	//
@@ -97159,7 +97938,7 @@ type FileInputStream interface {
 	// If @cancellable is not %NULL, then the operation can be cancelled by
 	// triggering the cancellable object from another thread. If the operation
 	// was cancelled, the error %G_IO_ERROR_CANCELLED will be set
-	QueryInfoAsync(context.Context, string, int, AsyncReadyCallback)
+	QueryInfoAsync(context.Context, string, int32, AsyncReadyCallback)
 	// QueryInfoFinish wraps g_file_input_stream_query_info_finish
 	// 
 	// The function takes the following parameters:
@@ -97198,6 +97977,11 @@ func UnsafeFileInputStreamFromGlibNone(c unsafe.Pointer) FileInputStream {
 // UnsafeFileInputStreamFromGlibFull is used to convert raw GFileInputStream pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeFileInputStreamFromGlibFull(c unsafe.Pointer) FileInputStream {
 	return gobject.UnsafeObjectFromGlibFull(c).(FileInputStream)
+}
+
+// UnsafeFileInputStreamFromGlibBorrow is used to convert raw GFileInputStream pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeFileInputStreamFromGlibBorrow(c unsafe.Pointer) FileInputStream {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(FileInputStream)
 }
 
 func (f *FileInputStreamInstance) upcastToGFileInputStream() *FileInputStreamInstance {
@@ -97267,7 +98051,7 @@ func (stream *FileInputStreamInstance) QueryInfo(cancellable context.Context, at
 // 
 // 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore. 
 // 	- attributes string: a file attribute query string. 
-// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 // 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 //   to call when the request is satisfied 
 //
@@ -97282,7 +98066,7 @@ func (stream *FileInputStreamInstance) QueryInfo(cancellable context.Context, at
 // If @cancellable is not %NULL, then the operation can be cancelled by
 // triggering the cancellable object from another thread. If the operation
 // was cancelled, the error %G_IO_ERROR_CANCELLED will be set
-func (stream *FileInputStreamInstance) QueryInfoAsync(cancellable context.Context, attributes string, ioPriority int, callback AsyncReadyCallback) {
+func (stream *FileInputStreamInstance) QueryInfoAsync(cancellable context.Context, attributes string, ioPriority int32, callback AsyncReadyCallback) {
 	var carg0 *C.GFileInputStream   // in, none, converted
 	var carg3 *C.GCancellable       // in, none, converted, nullable
 	var carg1 *C.char               // in, none, string, casted *C.gchar
@@ -97373,10 +98157,10 @@ type FileInputStreamOverrides[Instance FileInputStream] struct {
 	// 
 	// 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore. 
 	// 	- attributes string: a file attribute query string. 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 	//   to call when the request is satisfied 
-	QueryInfoAsync func(Instance, context.Context, string, int, AsyncReadyCallback)
+	QueryInfoAsync func(Instance, context.Context, string, int32, AsyncReadyCallback)
 	// QueryInfoFinish allows you to override the implementation of the virtual method query_info_finish.
 	// The function takes the following parameters:
 	// 
@@ -97422,7 +98206,7 @@ func UnsafeApplyFileInputStreamOverrides[Instance FileInputStream](gclass unsafe
 				var stream Instance // go GFileInputStream subclass
 				var goret  bool     // return
 
-				stream = UnsafeFileInputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafeFileInputStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.CanSeek(stream)
 
@@ -97447,7 +98231,7 @@ func UnsafeApplyFileInputStreamOverrides[Instance FileInputStream](gclass unsafe
 				var goret       FileInfo        // return, full, converted
 				var _goerr      error           // out, full, converted
 
-				stream = UnsafeFileInputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafeFileInputStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg2 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
 				}
@@ -97472,15 +98256,15 @@ func UnsafeApplyFileInputStreamOverrides[Instance FileInputStream](gclass unsafe
 				var stream      Instance           // go GFileInputStream subclass
 				var cancellable context.Context    // in, none, converted, nullable
 				var attributes  string             // in, none, string, casted *C.gchar
-				var ioPriority  int                // in, none, casted, casted C.gint
+				var ioPriority  int32              // in, none, casted, casted C.gint
 				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg5, nullable
 
-				stream = UnsafeFileInputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafeFileInputStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg3 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
 				}
 				attributes = C.GoString((*C.char)(unsafe.Pointer(carg1)))
-				ioPriority = int(carg2)
+				ioPriority = int32(carg2)
 				if carg4 != nil {
 					_ = callback
 					_ = carg4
@@ -97504,7 +98288,7 @@ func UnsafeApplyFileInputStreamOverrides[Instance FileInputStream](gclass unsafe
 				var goret  FileInfo    // return, full, converted
 				var _goerr error       // out, full, converted
 
-				stream = UnsafeFileInputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafeFileInputStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.QueryInfoFinish(stream, result)
@@ -97530,7 +98314,7 @@ func UnsafeApplyFileInputStreamOverrides[Instance FileInputStream](gclass unsafe
 				var goret       bool            // return
 				var _goerr      error           // out, full, converted
 
-				stream = UnsafeFileInputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafeFileInputStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg3 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
 				}
@@ -97558,7 +98342,7 @@ func UnsafeApplyFileInputStreamOverrides[Instance FileInputStream](gclass unsafe
 				var stream Instance // go GFileInputStream subclass
 				var goret  int64    // return, none, casted, casted C.gint64
 
-				stream = UnsafeFileInputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafeFileInputStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.Tell(stream)
 
@@ -97673,7 +98457,7 @@ type FileOutputStream interface {
 	// 
 	// 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore. 
 	// 	- attributes string: a file attribute query string. 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the
 	//   request 
 	// 	- callback AsyncReadyCallback (nullable): callback to call when the request is satisfied 
 	//
@@ -97683,7 +98467,7 @@ type FileOutputStream interface {
 	// 
 	// For the synchronous version of this function, see
 	// g_file_output_stream_query_info().
-	QueryInfoAsync(context.Context, string, int, AsyncReadyCallback)
+	QueryInfoAsync(context.Context, string, int32, AsyncReadyCallback)
 	// QueryInfoFinish wraps g_file_output_stream_query_info_finish
 	// 
 	// The function takes the following parameters:
@@ -97723,6 +98507,11 @@ func UnsafeFileOutputStreamFromGlibNone(c unsafe.Pointer) FileOutputStream {
 // UnsafeFileOutputStreamFromGlibFull is used to convert raw GFileOutputStream pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeFileOutputStreamFromGlibFull(c unsafe.Pointer) FileOutputStream {
 	return gobject.UnsafeObjectFromGlibFull(c).(FileOutputStream)
+}
+
+// UnsafeFileOutputStreamFromGlibBorrow is used to convert raw GFileOutputStream pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeFileOutputStreamFromGlibBorrow(c unsafe.Pointer) FileOutputStream {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(FileOutputStream)
 }
 
 func (f *FileOutputStreamInstance) upcastToGFileOutputStream() *FileOutputStreamInstance {
@@ -97832,7 +98621,7 @@ func (stream *FileOutputStreamInstance) QueryInfo(cancellable context.Context, a
 // 
 // 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore. 
 // 	- attributes string: a file attribute query string. 
-// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the
+// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the
 //   request 
 // 	- callback AsyncReadyCallback (nullable): callback to call when the request is satisfied 
 //
@@ -97842,7 +98631,7 @@ func (stream *FileOutputStreamInstance) QueryInfo(cancellable context.Context, a
 // 
 // For the synchronous version of this function, see
 // g_file_output_stream_query_info().
-func (stream *FileOutputStreamInstance) QueryInfoAsync(cancellable context.Context, attributes string, ioPriority int, callback AsyncReadyCallback) {
+func (stream *FileOutputStreamInstance) QueryInfoAsync(cancellable context.Context, attributes string, ioPriority int32, callback AsyncReadyCallback) {
 	var carg0 *C.GFileOutputStream  // in, none, converted
 	var carg3 *C.GCancellable       // in, none, converted, nullable
 	var carg1 *C.char               // in, none, string, casted *C.gchar
@@ -97944,10 +98733,10 @@ type FileOutputStreamOverrides[Instance FileOutputStream] struct {
 	// 
 	// 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore. 
 	// 	- attributes string: a file attribute query string. 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the
 	//   request 
 	// 	- callback AsyncReadyCallback (nullable): callback to call when the request is satisfied 
-	QueryInfoAsync func(Instance, context.Context, string, int, AsyncReadyCallback)
+	QueryInfoAsync func(Instance, context.Context, string, int32, AsyncReadyCallback)
 	// QueryInfoFinish allows you to override the implementation of the virtual method query_info_finish.
 	// The function takes the following parameters:
 	// 
@@ -98004,7 +98793,7 @@ func UnsafeApplyFileOutputStreamOverrides[Instance FileOutputStream](gclass unsa
 				var stream Instance // go GFileOutputStream subclass
 				var goret  bool     // return
 
-				stream = UnsafeFileOutputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafeFileOutputStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.CanSeek(stream)
 
@@ -98026,7 +98815,7 @@ func UnsafeApplyFileOutputStreamOverrides[Instance FileOutputStream](gclass unsa
 				var stream Instance // go GFileOutputStream subclass
 				var goret  bool     // return
 
-				stream = UnsafeFileOutputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafeFileOutputStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.CanTruncate(stream)
 
@@ -98048,7 +98837,7 @@ func UnsafeApplyFileOutputStreamOverrides[Instance FileOutputStream](gclass unsa
 				var stream Instance // go GFileOutputStream subclass
 				var goret  string   // return, full, string, nullable-string
 
-				stream = UnsafeFileOutputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafeFileOutputStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetETag(stream)
 
@@ -98073,7 +98862,7 @@ func UnsafeApplyFileOutputStreamOverrides[Instance FileOutputStream](gclass unsa
 				var goret       FileInfo        // return, full, converted
 				var _goerr      error           // out, full, converted
 
-				stream = UnsafeFileOutputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafeFileOutputStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg2 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
 				}
@@ -98098,15 +98887,15 @@ func UnsafeApplyFileOutputStreamOverrides[Instance FileOutputStream](gclass unsa
 				var stream      Instance           // go GFileOutputStream subclass
 				var cancellable context.Context    // in, none, converted, nullable
 				var attributes  string             // in, none, string, casted *C.gchar
-				var ioPriority  int                // in, none, casted, casted C.gint
+				var ioPriority  int32              // in, none, casted, casted C.gint
 				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg5, nullable
 
-				stream = UnsafeFileOutputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafeFileOutputStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg3 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
 				}
 				attributes = C.GoString((*C.char)(unsafe.Pointer(carg1)))
-				ioPriority = int(carg2)
+				ioPriority = int32(carg2)
 				if carg4 != nil {
 					_ = callback
 					_ = carg4
@@ -98130,7 +98919,7 @@ func UnsafeApplyFileOutputStreamOverrides[Instance FileOutputStream](gclass unsa
 				var goret  FileInfo    // return, full, converted
 				var _goerr error       // out, full, converted
 
-				stream = UnsafeFileOutputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafeFileOutputStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.QueryInfoFinish(stream, result)
@@ -98156,7 +98945,7 @@ func UnsafeApplyFileOutputStreamOverrides[Instance FileOutputStream](gclass unsa
 				var goret       bool            // return
 				var _goerr      error           // out, full, converted
 
-				stream = UnsafeFileOutputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafeFileOutputStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg3 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
 				}
@@ -98184,7 +98973,7 @@ func UnsafeApplyFileOutputStreamOverrides[Instance FileOutputStream](gclass unsa
 				var stream Instance // go GFileOutputStream subclass
 				var goret  int64    // return, none, casted, casted C.gint64
 
-				stream = UnsafeFileOutputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafeFileOutputStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.Tell(stream)
 
@@ -98207,7 +98996,7 @@ func UnsafeApplyFileOutputStreamOverrides[Instance FileOutputStream](gclass unsa
 				var goret       bool            // return
 				var _goerr      error           // out, full, converted
 
-				stream = UnsafeFileOutputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafeFileOutputStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg2 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
 				}
@@ -98317,6 +99106,11 @@ func UnsafeFilterInputStreamFromGlibNone(c unsafe.Pointer) FilterInputStream {
 // UnsafeFilterInputStreamFromGlibFull is used to convert raw GFilterInputStream pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeFilterInputStreamFromGlibFull(c unsafe.Pointer) FilterInputStream {
 	return gobject.UnsafeObjectFromGlibFull(c).(FilterInputStream)
+}
+
+// UnsafeFilterInputStreamFromGlibBorrow is used to convert raw GFilterInputStream pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeFilterInputStreamFromGlibBorrow(c unsafe.Pointer) FilterInputStream {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(FilterInputStream)
 }
 
 func (f *FilterInputStreamInstance) upcastToGFilterInputStream() *FilterInputStreamInstance {
@@ -98508,6 +99302,11 @@ func UnsafeFilterOutputStreamFromGlibNone(c unsafe.Pointer) FilterOutputStream {
 // UnsafeFilterOutputStreamFromGlibFull is used to convert raw GFilterOutputStream pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeFilterOutputStreamFromGlibFull(c unsafe.Pointer) FilterOutputStream {
 	return gobject.UnsafeObjectFromGlibFull(c).(FilterOutputStream)
+}
+
+// UnsafeFilterOutputStreamFromGlibBorrow is used to convert raw GFilterOutputStream pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeFilterOutputStreamFromGlibBorrow(c unsafe.Pointer) FilterOutputStream {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(FilterOutputStream)
 }
 
 func (f *FilterOutputStreamInstance) upcastToGFilterOutputStream() *FilterOutputStreamInstance {
@@ -98715,6 +99514,11 @@ func UnsafeInetSocketAddressFromGlibNone(c unsafe.Pointer) InetSocketAddress {
 // UnsafeInetSocketAddressFromGlibFull is used to convert raw GInetSocketAddress pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeInetSocketAddressFromGlibFull(c unsafe.Pointer) InetSocketAddress {
 	return gobject.UnsafeObjectFromGlibFull(c).(InetSocketAddress)
+}
+
+// UnsafeInetSocketAddressFromGlibBorrow is used to convert raw GInetSocketAddress pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeInetSocketAddressFromGlibBorrow(c unsafe.Pointer) InetSocketAddress {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(InetSocketAddress)
 }
 
 func (i *InetSocketAddressInstance) upcastToGInetSocketAddress() *InetSocketAddressInstance {
@@ -99027,6 +99831,11 @@ func UnsafeMemoryOutputStreamFromGlibFull(c unsafe.Pointer) MemoryOutputStream {
 	return gobject.UnsafeObjectFromGlibFull(c).(MemoryOutputStream)
 }
 
+// UnsafeMemoryOutputStreamFromGlibBorrow is used to convert raw GMemoryOutputStream pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeMemoryOutputStreamFromGlibBorrow(c unsafe.Pointer) MemoryOutputStream {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(MemoryOutputStream)
+}
+
 func (m *MemoryOutputStreamInstance) upcastToGMemoryOutputStream() *MemoryOutputStreamInstance {
 	return m
 }
@@ -99266,19 +100075,19 @@ type Menu interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- position int: the position at which to insert the item 
+	// 	- position int32: the position at which to insert the item 
 	// 	- label string (nullable): the section label, or %NULL 
 	// 	- detailedAction string (nullable): the detailed action string, or %NULL 
 	//
 	// Convenience function for inserting a normal menu item into @menu.
 	// Combine g_menu_item_new() and g_menu_insert_item() for a more flexible
 	// alternative.
-	Insert(int, string, string)
+	Insert(int32, string, string)
 	// InsertItem wraps g_menu_insert_item
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- position int: the position at which to insert the item 
+	// 	- position int32: the position at which to insert the item 
 	// 	- item MenuItem: the #GMenuItem to insert 
 	//
 	// Inserts @item into @menu.
@@ -99298,31 +100107,31 @@ type Menu interface {
 	// See g_menu_insert(), g_menu_insert_section() and
 	// g_menu_insert_submenu() as well as "prepend" and "append" variants of
 	// each of these functions.
-	InsertItem(int, MenuItem)
+	InsertItem(int32, MenuItem)
 	// InsertSection wraps g_menu_insert_section
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- position int: the position at which to insert the item 
+	// 	- position int32: the position at which to insert the item 
 	// 	- label string (nullable): the section label, or %NULL 
 	// 	- section MenuModel: a #GMenuModel with the items of the section 
 	//
 	// Convenience function for inserting a section menu item into @menu.
 	// Combine g_menu_item_new_section() and g_menu_insert_item() for a more
 	// flexible alternative.
-	InsertSection(int, string, MenuModel)
+	InsertSection(int32, string, MenuModel)
 	// InsertSubmenu wraps g_menu_insert_submenu
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- position int: the position at which to insert the item 
+	// 	- position int32: the position at which to insert the item 
 	// 	- label string (nullable): the section label, or %NULL 
 	// 	- submenu MenuModel: a #GMenuModel with the items of the submenu 
 	//
 	// Convenience function for inserting a submenu menu item into @menu.
 	// Combine g_menu_item_new_submenu() and g_menu_insert_item() for a more
 	// flexible alternative.
-	InsertSubmenu(int, string, MenuModel)
+	InsertSubmenu(int32, string, MenuModel)
 	// Prepend wraps g_menu_prepend
 	// 
 	// The function takes the following parameters:
@@ -99370,7 +100179,7 @@ type Menu interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- position int: the position of the item to remove 
+	// 	- position int32: the position of the item to remove 
 	//
 	// Removes an item from the menu.
 	// 
@@ -99382,7 +100191,7 @@ type Menu interface {
 	// It is not possible to remove items by identity since items are added
 	// to the menu simply by copying their links and attributes (ie:
 	// identity of the item itself is not preserved).
-	Remove(int)
+	Remove(int32)
 	// RemoveAll wraps g_menu_remove_all
 	//
 	// Removes all items in the menu.
@@ -99409,6 +100218,11 @@ func UnsafeMenuFromGlibNone(c unsafe.Pointer) Menu {
 // UnsafeMenuFromGlibFull is used to convert raw GMenu pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeMenuFromGlibFull(c unsafe.Pointer) Menu {
 	return gobject.UnsafeObjectFromGlibFull(c).(Menu)
+}
+
+// UnsafeMenuFromGlibBorrow is used to convert raw GMenu pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeMenuFromGlibBorrow(c unsafe.Pointer) Menu {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(Menu)
 }
 
 func (m *MenuInstance) upcastToGMenu() *MenuInstance {
@@ -99577,14 +100391,14 @@ func (menu *MenuInstance) Freeze() {
 // 
 // The function takes the following parameters:
 // 
-// 	- position int: the position at which to insert the item 
+// 	- position int32: the position at which to insert the item 
 // 	- label string (nullable): the section label, or %NULL 
 // 	- detailedAction string (nullable): the detailed action string, or %NULL 
 //
 // Convenience function for inserting a normal menu item into @menu.
 // Combine g_menu_item_new() and g_menu_insert_item() for a more flexible
 // alternative.
-func (menu *MenuInstance) Insert(position int, label string, detailedAction string) {
+func (menu *MenuInstance) Insert(position int32, label string, detailedAction string) {
 	var carg0 *C.GMenu // in, none, converted
 	var carg1 C.gint   // in, none, casted
 	var carg2 *C.gchar // in, none, string, nullable-string
@@ -99612,7 +100426,7 @@ func (menu *MenuInstance) Insert(position int, label string, detailedAction stri
 // 
 // The function takes the following parameters:
 // 
-// 	- position int: the position at which to insert the item 
+// 	- position int32: the position at which to insert the item 
 // 	- item MenuItem: the #GMenuItem to insert 
 //
 // Inserts @item into @menu.
@@ -99632,7 +100446,7 @@ func (menu *MenuInstance) Insert(position int, label string, detailedAction stri
 // See g_menu_insert(), g_menu_insert_section() and
 // g_menu_insert_submenu() as well as "prepend" and "append" variants of
 // each of these functions.
-func (menu *MenuInstance) InsertItem(position int, item MenuItem) {
+func (menu *MenuInstance) InsertItem(position int32, item MenuItem) {
 	var carg0 *C.GMenu     // in, none, converted
 	var carg1 C.gint       // in, none, casted
 	var carg2 *C.GMenuItem // in, none, converted
@@ -99651,14 +100465,14 @@ func (menu *MenuInstance) InsertItem(position int, item MenuItem) {
 // 
 // The function takes the following parameters:
 // 
-// 	- position int: the position at which to insert the item 
+// 	- position int32: the position at which to insert the item 
 // 	- label string (nullable): the section label, or %NULL 
 // 	- section MenuModel: a #GMenuModel with the items of the section 
 //
 // Convenience function for inserting a section menu item into @menu.
 // Combine g_menu_item_new_section() and g_menu_insert_item() for a more
 // flexible alternative.
-func (menu *MenuInstance) InsertSection(position int, label string, section MenuModel) {
+func (menu *MenuInstance) InsertSection(position int32, label string, section MenuModel) {
 	var carg0 *C.GMenu      // in, none, converted
 	var carg1 C.gint        // in, none, casted
 	var carg2 *C.gchar      // in, none, string, nullable-string
@@ -99683,14 +100497,14 @@ func (menu *MenuInstance) InsertSection(position int, label string, section Menu
 // 
 // The function takes the following parameters:
 // 
-// 	- position int: the position at which to insert the item 
+// 	- position int32: the position at which to insert the item 
 // 	- label string (nullable): the section label, or %NULL 
 // 	- submenu MenuModel: a #GMenuModel with the items of the submenu 
 //
 // Convenience function for inserting a submenu menu item into @menu.
 // Combine g_menu_item_new_submenu() and g_menu_insert_item() for a more
 // flexible alternative.
-func (menu *MenuInstance) InsertSubmenu(position int, label string, submenu MenuModel) {
+func (menu *MenuInstance) InsertSubmenu(position int32, label string, submenu MenuModel) {
 	var carg0 *C.GMenu      // in, none, converted
 	var carg1 C.gint        // in, none, casted
 	var carg2 *C.gchar      // in, none, string, nullable-string
@@ -99823,7 +100637,7 @@ func (menu *MenuInstance) PrependSubmenu(label string, submenu MenuModel) {
 // 
 // The function takes the following parameters:
 // 
-// 	- position int: the position of the item to remove 
+// 	- position int32: the position of the item to remove 
 //
 // Removes an item from the menu.
 // 
@@ -99835,7 +100649,7 @@ func (menu *MenuInstance) PrependSubmenu(label string, submenu MenuModel) {
 // It is not possible to remove items by identity since items are added
 // to the menu simply by copying their links and attributes (ie:
 // identity of the item itself is not preserved).
-func (menu *MenuInstance) Remove(position int) {
+func (menu *MenuInstance) Remove(position int32) {
 	var carg0 *C.GMenu // in, none, converted
 	var carg1 C.gint   // in, none, casted
 
@@ -99904,6 +100718,11 @@ func UnsafeNativeSocketAddressFromGlibNone(c unsafe.Pointer) NativeSocketAddress
 // UnsafeNativeSocketAddressFromGlibFull is used to convert raw GNativeSocketAddress pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeNativeSocketAddressFromGlibFull(c unsafe.Pointer) NativeSocketAddress {
 	return gobject.UnsafeObjectFromGlibFull(c).(NativeSocketAddress)
+}
+
+// UnsafeNativeSocketAddressFromGlibBorrow is used to convert raw GNativeSocketAddress pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeNativeSocketAddressFromGlibBorrow(c unsafe.Pointer) NativeSocketAddress {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(NativeSocketAddress)
 }
 
 func (n *NativeSocketAddressInstance) upcastToGNativeSocketAddress() *NativeSocketAddressInstance {
@@ -99994,6 +100813,11 @@ func UnsafeNativeVolumeMonitorFromGlibNone(c unsafe.Pointer) NativeVolumeMonitor
 // UnsafeNativeVolumeMonitorFromGlibFull is used to convert raw GNativeVolumeMonitor pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeNativeVolumeMonitorFromGlibFull(c unsafe.Pointer) NativeVolumeMonitor {
 	return gobject.UnsafeObjectFromGlibFull(c).(NativeVolumeMonitor)
+}
+
+// UnsafeNativeVolumeMonitorFromGlibBorrow is used to convert raw GNativeVolumeMonitor pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeNativeVolumeMonitorFromGlibBorrow(c unsafe.Pointer) NativeVolumeMonitor {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(NativeVolumeMonitor)
 }
 
 func (n *NativeVolumeMonitorInstance) upcastToGNativeVolumeMonitor() *NativeVolumeMonitorInstance {
@@ -100153,6 +100977,11 @@ func UnsafeProxyAddressFromGlibNone(c unsafe.Pointer) ProxyAddress {
 // UnsafeProxyAddressFromGlibFull is used to convert raw GProxyAddress pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeProxyAddressFromGlibFull(c unsafe.Pointer) ProxyAddress {
 	return gobject.UnsafeObjectFromGlibFull(c).(ProxyAddress)
+}
+
+// UnsafeProxyAddressFromGlibBorrow is used to convert raw GProxyAddress pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeProxyAddressFromGlibBorrow(c unsafe.Pointer) ProxyAddress {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(ProxyAddress)
 }
 
 func (p *ProxyAddressInstance) upcastToGProxyAddress() *ProxyAddressInstance {
@@ -100494,6 +101323,11 @@ func UnsafeProxyAddressEnumeratorFromGlibFull(c unsafe.Pointer) ProxyAddressEnum
 	return gobject.UnsafeObjectFromGlibFull(c).(ProxyAddressEnumerator)
 }
 
+// UnsafeProxyAddressEnumeratorFromGlibBorrow is used to convert raw GProxyAddressEnumerator pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeProxyAddressEnumeratorFromGlibBorrow(c unsafe.Pointer) ProxyAddressEnumerator {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(ProxyAddressEnumerator)
+}
+
 func (p *ProxyAddressEnumeratorInstance) upcastToGProxyAddressEnumerator() *ProxyAddressEnumeratorInstance {
 	return p
 }
@@ -100622,7 +101456,7 @@ type BufferedInputStream interface {
 	// 
 	// 	- cancellable context.Context (nullable): optional [class@Gio.Cancellable] object 
 	// 	- count int: the number of bytes that will be read from the stream 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 	// 	- callback AsyncReadyCallback (nullable): a [callback@Gio.AsyncReadyCallback] 
 	//
 	// Reads data into @stream's buffer asynchronously, up to @count size.
@@ -100631,7 +101465,7 @@ type BufferedInputStream interface {
 	// 
 	// If @count is `-1` then the attempted read size is equal to the number
 	// of bytes that are required to fill the buffer.
-	FillAsync(context.Context, int, int, AsyncReadyCallback)
+	FillAsync(context.Context, int, int32, AsyncReadyCallback)
 	// FillFinish wraps g_buffered_input_stream_fill_finish
 	// 
 	// The function takes the following parameters:
@@ -100695,7 +101529,7 @@ type BufferedInputStream interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret int 
+	// 	- goret int32 
 	// 	- _goerr error (nullable): an error 
 	//
 	// Tries to read a single byte from the stream or the buffer. Will block
@@ -100711,7 +101545,7 @@ type BufferedInputStream interface {
 	// partial result will be returned, without an error.
 	// 
 	// On error `-1` is returned and @error is set accordingly.
-	ReadByte(context.Context) (int, error)
+	ReadByte(context.Context) (int32, error)
 	// SetBufferSize wraps g_buffered_input_stream_set_buffer_size
 	// 
 	// The function takes the following parameters:
@@ -100749,6 +101583,11 @@ func UnsafeBufferedInputStreamFromGlibNone(c unsafe.Pointer) BufferedInputStream
 // UnsafeBufferedInputStreamFromGlibFull is used to convert raw GBufferedInputStream pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeBufferedInputStreamFromGlibFull(c unsafe.Pointer) BufferedInputStream {
 	return gobject.UnsafeObjectFromGlibFull(c).(BufferedInputStream)
+}
+
+// UnsafeBufferedInputStreamFromGlibBorrow is used to convert raw GBufferedInputStream pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeBufferedInputStreamFromGlibBorrow(c unsafe.Pointer) BufferedInputStream {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(BufferedInputStream)
 }
 
 func (b *BufferedInputStreamInstance) upcastToGBufferedInputStream() *BufferedInputStreamInstance {
@@ -100897,7 +101736,7 @@ func (stream *BufferedInputStreamInstance) Fill(cancellable context.Context, cou
 // 
 // 	- cancellable context.Context (nullable): optional [class@Gio.Cancellable] object 
 // 	- count int: the number of bytes that will be read from the stream 
-// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 // 	- callback AsyncReadyCallback (nullable): a [callback@Gio.AsyncReadyCallback] 
 //
 // Reads data into @stream's buffer asynchronously, up to @count size.
@@ -100906,7 +101745,7 @@ func (stream *BufferedInputStreamInstance) Fill(cancellable context.Context, cou
 // 
 // If @count is `-1` then the attempted read size is equal to the number
 // of bytes that are required to fill the buffer.
-func (stream *BufferedInputStreamInstance) FillAsync(cancellable context.Context, count int, ioPriority int, callback AsyncReadyCallback) {
+func (stream *BufferedInputStreamInstance) FillAsync(cancellable context.Context, count int, ioPriority int32, callback AsyncReadyCallback) {
 	var carg0 *C.GBufferedInputStream // in, none, converted
 	var carg3 *C.GCancellable         // in, none, converted, nullable
 	var carg1 C.gssize                // in, none, casted
@@ -101094,7 +101933,7 @@ func (stream *BufferedInputStreamInstance) PeekBuffer() (uint, []byte) {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 // 	- _goerr error (nullable): an error 
 //
 // Tries to read a single byte from the stream or the buffer. Will block
@@ -101110,7 +101949,7 @@ func (stream *BufferedInputStreamInstance) PeekBuffer() (uint, []byte) {
 // partial result will be returned, without an error.
 // 
 // On error `-1` is returned and @error is set accordingly.
-func (stream *BufferedInputStreamInstance) ReadByte(cancellable context.Context) (int, error) {
+func (stream *BufferedInputStreamInstance) ReadByte(cancellable context.Context) (int32, error) {
 	var carg0 *C.GBufferedInputStream // in, none, converted
 	var carg1 *C.GCancellable         // in, none, converted, nullable
 	var cret  C.int                   // return, none, casted, casted C.gint
@@ -101125,10 +101964,10 @@ func (stream *BufferedInputStreamInstance) ReadByte(cancellable context.Context)
 	runtime.KeepAlive(stream)
 	runtime.KeepAlive(cancellable)
 
-	var goret  int
+	var goret  int32
 	var _goerr error
 
-	goret = int(cret)
+	goret = int32(cret)
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -101179,9 +102018,9 @@ type BufferedInputStreamOverrides[Instance BufferedInputStream] struct {
 	// 
 	// 	- cancellable context.Context (nullable): optional [class@Gio.Cancellable] object 
 	// 	- count int: the number of bytes that will be read from the stream 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 	// 	- callback AsyncReadyCallback (nullable): a [callback@Gio.AsyncReadyCallback] 
-	FillAsync func(Instance, context.Context, int, int, AsyncReadyCallback)
+	FillAsync func(Instance, context.Context, int, int32, AsyncReadyCallback)
 	// FillFinish allows you to override the implementation of the virtual method fill_finish.
 	// The function takes the following parameters:
 	// 
@@ -101213,7 +102052,7 @@ func UnsafeApplyBufferedInputStreamOverrides[Instance BufferedInputStream](gclas
 				var goret       int             // return, none, casted
 				var _goerr      error           // out, full, converted
 
-				stream = UnsafeBufferedInputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafeBufferedInputStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg2 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg2))
 				}
@@ -101238,15 +102077,15 @@ func UnsafeApplyBufferedInputStreamOverrides[Instance BufferedInputStream](gclas
 				var stream      Instance           // go GBufferedInputStream subclass
 				var cancellable context.Context    // in, none, converted, nullable
 				var count       int                // in, none, casted
-				var ioPriority  int                // in, none, casted, casted C.gint
+				var ioPriority  int32              // in, none, casted, casted C.gint
 				var callback    AsyncReadyCallback // in, transfer: none, C Pointers: 0, Name: AsyncReadyCallback, scope: async, nullable, closure: carg5, nullable
 
-				stream = UnsafeBufferedInputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafeBufferedInputStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg3 != nil {
 					cancellable = NewCancellableContext(unsafe.Pointer(carg3))
 				}
 				count = int(carg1)
-				ioPriority = int(carg2)
+				ioPriority = int32(carg2)
 				if carg4 != nil {
 					_ = callback
 					_ = carg4
@@ -101270,7 +102109,7 @@ func UnsafeApplyBufferedInputStreamOverrides[Instance BufferedInputStream](gclas
 				var goret  int         // return, none, casted
 				var _goerr error       // out, full, converted
 
-				stream = UnsafeBufferedInputStreamFromGlibNone(unsafe.Pointer(carg0)).(Instance)
+				stream = UnsafeBufferedInputStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				result = UnsafeAsyncResultFromGlibNone(unsafe.Pointer(carg1))
 
 				goret, _goerr = overrides.FillFinish(stream, result)
@@ -101402,6 +102241,11 @@ func UnsafeBufferedOutputStreamFromGlibNone(c unsafe.Pointer) BufferedOutputStre
 // UnsafeBufferedOutputStreamFromGlibFull is used to convert raw GBufferedOutputStream pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeBufferedOutputStreamFromGlibFull(c unsafe.Pointer) BufferedOutputStream {
 	return gobject.UnsafeObjectFromGlibFull(c).(BufferedOutputStream)
+}
+
+// UnsafeBufferedOutputStreamFromGlibBorrow is used to convert raw GBufferedOutputStream pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeBufferedOutputStreamFromGlibBorrow(c unsafe.Pointer) BufferedOutputStream {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(BufferedOutputStream)
 }
 
 func (b *BufferedOutputStreamInstance) upcastToGBufferedOutputStream() *BufferedOutputStreamInstance {
@@ -101666,6 +102510,11 @@ func UnsafeConverterInputStreamFromGlibFull(c unsafe.Pointer) ConverterInputStre
 	return gobject.UnsafeObjectFromGlibFull(c).(ConverterInputStream)
 }
 
+// UnsafeConverterInputStreamFromGlibBorrow is used to convert raw GConverterInputStream pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeConverterInputStreamFromGlibBorrow(c unsafe.Pointer) ConverterInputStream {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(ConverterInputStream)
+}
+
 func (c *ConverterInputStreamInstance) upcastToGConverterInputStream() *ConverterInputStreamInstance {
 	return c
 }
@@ -101831,6 +102680,11 @@ func UnsafeConverterOutputStreamFromGlibNone(c unsafe.Pointer) ConverterOutputSt
 // UnsafeConverterOutputStreamFromGlibFull is used to convert raw GConverterOutputStream pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeConverterOutputStreamFromGlibFull(c unsafe.Pointer) ConverterOutputStream {
 	return gobject.UnsafeObjectFromGlibFull(c).(ConverterOutputStream)
+}
+
+// UnsafeConverterOutputStreamFromGlibBorrow is used to convert raw GConverterOutputStream pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeConverterOutputStreamFromGlibBorrow(c unsafe.Pointer) ConverterOutputStream {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(ConverterOutputStream)
 }
 
 func (c *ConverterOutputStreamInstance) upcastToGConverterOutputStream() *ConverterOutputStreamInstance {
@@ -102054,7 +102908,7 @@ type DataInputStream interface {
 	// The function takes the following parameters:
 	// 
 	// 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore. 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 	// 	- callback AsyncReadyCallback (nullable): callback to call when the request is satisfied. 
 	//
 	// The asynchronous version of g_data_input_stream_read_line().  It is
@@ -102063,7 +102917,7 @@ type DataInputStream interface {
 	// When the operation is finished, @callback will be called. You
 	// can then call g_data_input_stream_read_line_finish() to get
 	// the result of the operation.
-	ReadLineAsync(context.Context, int, AsyncReadyCallback)
+	ReadLineAsync(context.Context, int32, AsyncReadyCallback)
 	// ReadLineFinish wraps g_data_input_stream_read_line_finish
 	// 
 	// The function takes the following parameters:
@@ -102204,7 +103058,7 @@ type DataInputStream interface {
 	// 
 	// 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore. 
 	// 	- stopChars string: characters to terminate the read. 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 	// 	- callback AsyncReadyCallback (nullable): callback to call when the request is satisfied. 
 	//
 	// The asynchronous version of g_data_input_stream_read_until().
@@ -102225,7 +103079,7 @@ type DataInputStream interface {
 	//
 	// Deprecated: (since 2.56.0) Use g_data_input_stream_read_upto_async() instead, which
 	//     has more consistent behaviour regarding the stop character.
-	ReadUntilAsync(context.Context, string, int, AsyncReadyCallback)
+	ReadUntilAsync(context.Context, string, int32, AsyncReadyCallback)
 	// ReadUntilFinish wraps g_data_input_stream_read_until_finish
 	// 
 	// The function takes the following parameters:
@@ -102280,7 +103134,7 @@ type DataInputStream interface {
 	// 	- stopChars string: characters to terminate the read 
 	// 	- stopCharsLen int: length of @stop_chars. May be -1 if @stop_chars is
 	//     nul-terminated 
-	// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 	// 	- callback AsyncReadyCallback (nullable): callback to call when the request is satisfied 
 	//
 	// The asynchronous version of g_data_input_stream_read_upto().
@@ -102297,7 +103151,7 @@ type DataInputStream interface {
 	// When the operation is finished, @callback will be called. You
 	// can then call g_data_input_stream_read_upto_finish() to get
 	// the result of the operation.
-	ReadUptoAsync(context.Context, string, int, int, AsyncReadyCallback)
+	ReadUptoAsync(context.Context, string, int, int32, AsyncReadyCallback)
 	// ReadUptoFinish wraps g_data_input_stream_read_upto_finish
 	// 
 	// The function takes the following parameters:
@@ -102369,6 +103223,11 @@ func UnsafeDataInputStreamFromGlibNone(c unsafe.Pointer) DataInputStream {
 // UnsafeDataInputStreamFromGlibFull is used to convert raw GDataInputStream pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeDataInputStreamFromGlibFull(c unsafe.Pointer) DataInputStream {
 	return gobject.UnsafeObjectFromGlibFull(c).(DataInputStream)
+}
+
+// UnsafeDataInputStreamFromGlibBorrow is used to convert raw GDataInputStream pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeDataInputStreamFromGlibBorrow(c unsafe.Pointer) DataInputStream {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(DataInputStream)
 }
 
 func (d *DataInputStreamInstance) upcastToGDataInputStream() *DataInputStreamInstance {
@@ -102644,7 +103503,7 @@ func (stream *DataInputStreamInstance) ReadLine(cancellable context.Context) (ui
 // The function takes the following parameters:
 // 
 // 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore. 
-// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 // 	- callback AsyncReadyCallback (nullable): callback to call when the request is satisfied. 
 //
 // The asynchronous version of g_data_input_stream_read_line().  It is
@@ -102653,7 +103512,7 @@ func (stream *DataInputStreamInstance) ReadLine(cancellable context.Context) (ui
 // When the operation is finished, @callback will be called. You
 // can then call g_data_input_stream_read_line_finish() to get
 // the result of the operation.
-func (stream *DataInputStreamInstance) ReadLineAsync(cancellable context.Context, ioPriority int, callback AsyncReadyCallback) {
+func (stream *DataInputStreamInstance) ReadLineAsync(cancellable context.Context, ioPriority int32, callback AsyncReadyCallback) {
 	var carg0 *C.GDataInputStream   // in, none, converted
 	var carg2 *C.GCancellable       // in, none, converted, nullable
 	var carg1 C.gint                // in, none, casted
@@ -103013,7 +103872,7 @@ func (stream *DataInputStreamInstance) ReadUntil(cancellable context.Context, st
 // 
 // 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore. 
 // 	- stopChars string: characters to terminate the read. 
-// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 // 	- callback AsyncReadyCallback (nullable): callback to call when the request is satisfied. 
 //
 // The asynchronous version of g_data_input_stream_read_until().
@@ -103034,7 +103893,7 @@ func (stream *DataInputStreamInstance) ReadUntil(cancellable context.Context, st
 //
 // Deprecated: (since 2.56.0) Use g_data_input_stream_read_upto_async() instead, which
 //     has more consistent behaviour regarding the stop character.
-func (stream *DataInputStreamInstance) ReadUntilAsync(cancellable context.Context, stopChars string, ioPriority int, callback AsyncReadyCallback) {
+func (stream *DataInputStreamInstance) ReadUntilAsync(cancellable context.Context, stopChars string, ioPriority int32, callback AsyncReadyCallback) {
 	var carg0 *C.GDataInputStream   // in, none, converted
 	var carg3 *C.GCancellable       // in, none, converted, nullable
 	var carg1 *C.gchar              // in, none, string
@@ -103179,7 +104038,7 @@ func (stream *DataInputStreamInstance) ReadUpto(cancellable context.Context, sto
 // 	- stopChars string: characters to terminate the read 
 // 	- stopCharsLen int: length of @stop_chars. May be -1 if @stop_chars is
 //     nul-terminated 
-// 	- ioPriority int: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
+// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 // 	- callback AsyncReadyCallback (nullable): callback to call when the request is satisfied 
 //
 // The asynchronous version of g_data_input_stream_read_upto().
@@ -103196,7 +104055,7 @@ func (stream *DataInputStreamInstance) ReadUpto(cancellable context.Context, sto
 // When the operation is finished, @callback will be called. You
 // can then call g_data_input_stream_read_upto_finish() to get
 // the result of the operation.
-func (stream *DataInputStreamInstance) ReadUptoAsync(cancellable context.Context, stopChars string, stopCharsLen int, ioPriority int, callback AsyncReadyCallback) {
+func (stream *DataInputStreamInstance) ReadUptoAsync(cancellable context.Context, stopChars string, stopCharsLen int, ioPriority int32, callback AsyncReadyCallback) {
 	var carg0 *C.GDataInputStream   // in, none, converted
 	var carg4 *C.GCancellable       // in, none, converted, nullable
 	var carg1 *C.gchar              // in, none, string
@@ -103532,6 +104391,11 @@ func UnsafeDataOutputStreamFromGlibNone(c unsafe.Pointer) DataOutputStream {
 // UnsafeDataOutputStreamFromGlibFull is used to convert raw GDataOutputStream pointers to go while attaching a finalizer. This is used by the bindings internally.
 func UnsafeDataOutputStreamFromGlibFull(c unsafe.Pointer) DataOutputStream {
 	return gobject.UnsafeObjectFromGlibFull(c).(DataOutputStream)
+}
+
+// UnsafeDataOutputStreamFromGlibBorrow is used to convert raw GDataOutputStream pointers to go without touching any references. This is used by the bindings internally.
+func UnsafeDataOutputStreamFromGlibBorrow(c unsafe.Pointer) DataOutputStream {
+	return gobject.UnsafeObjectFromGlibBorrow(c).(DataOutputStream)
 }
 
 func (d *DataOutputStreamInstance) upcastToGDataOutputStream() *DataOutputStreamInstance {
@@ -104955,8 +105819,11 @@ func marshalDBusAnnotationInfo(p unsafe.Pointer) (interface{}, error) {
 	return UnsafeDBusAnnotationInfoFromGlibBorrow(b), nil
 }
 
-func (r *DBusAnnotationInfo) InitGoValue(v *gobject.Value) {
-	v.Init(TypeDBusAnnotationInfo)
+func (r *DBusAnnotationInfo) GoValueType() gobject.Type {
+	return TypeDBusAnnotationInfo
+}
+
+func (r *DBusAnnotationInfo) SetGoValue(v *gobject.Value) {
 	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
@@ -105075,8 +105942,11 @@ func marshalDBusArgInfo(p unsafe.Pointer) (interface{}, error) {
 	return UnsafeDBusArgInfoFromGlibBorrow(b), nil
 }
 
-func (r *DBusArgInfo) InitGoValue(v *gobject.Value) {
-	v.Init(TypeDBusArgInfo)
+func (r *DBusArgInfo) GoValueType() gobject.Type {
+	return TypeDBusArgInfo
+}
+
+func (r *DBusArgInfo) SetGoValue(v *gobject.Value) {
 	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
@@ -105283,8 +106153,11 @@ func marshalDBusInterfaceInfo(p unsafe.Pointer) (interface{}, error) {
 	return UnsafeDBusInterfaceInfoFromGlibBorrow(b), nil
 }
 
-func (r *DBusInterfaceInfo) InitGoValue(v *gobject.Value) {
-	v.Init(TypeDBusInterfaceInfo)
+func (r *DBusInterfaceInfo) GoValueType() gobject.Type {
+	return TypeDBusInterfaceInfo
+}
+
+func (r *DBusInterfaceInfo) SetGoValue(v *gobject.Value) {
 	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
@@ -105651,8 +106524,11 @@ func marshalDBusMethodInfo(p unsafe.Pointer) (interface{}, error) {
 	return UnsafeDBusMethodInfoFromGlibBorrow(b), nil
 }
 
-func (r *DBusMethodInfo) InitGoValue(v *gobject.Value) {
-	v.Init(TypeDBusMethodInfo)
+func (r *DBusMethodInfo) GoValueType() gobject.Type {
+	return TypeDBusMethodInfo
+}
+
+func (r *DBusMethodInfo) SetGoValue(v *gobject.Value) {
 	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
@@ -105733,8 +106609,11 @@ func marshalDBusNodeInfo(p unsafe.Pointer) (interface{}, error) {
 	return UnsafeDBusNodeInfoFromGlibBorrow(b), nil
 }
 
-func (r *DBusNodeInfo) InitGoValue(v *gobject.Value) {
-	v.Init(TypeDBusNodeInfo)
+func (r *DBusNodeInfo) GoValueType() gobject.Type {
+	return TypeDBusNodeInfo
+}
+
+func (r *DBusNodeInfo) SetGoValue(v *gobject.Value) {
 	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
@@ -106177,8 +107056,11 @@ func marshalDBusPropertyInfo(p unsafe.Pointer) (interface{}, error) {
 	return UnsafeDBusPropertyInfoFromGlibBorrow(b), nil
 }
 
-func (r *DBusPropertyInfo) InitGoValue(v *gobject.Value) {
-	v.Init(TypeDBusPropertyInfo)
+func (r *DBusPropertyInfo) GoValueType() gobject.Type {
+	return TypeDBusPropertyInfo
+}
+
+func (r *DBusPropertyInfo) SetGoValue(v *gobject.Value) {
 	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
@@ -106299,8 +107181,11 @@ func marshalDBusSignalInfo(p unsafe.Pointer) (interface{}, error) {
 	return UnsafeDBusSignalInfoFromGlibBorrow(b), nil
 }
 
-func (r *DBusSignalInfo) InitGoValue(v *gobject.Value) {
-	v.Init(TypeDBusSignalInfo)
+func (r *DBusSignalInfo) GoValueType() gobject.Type {
+	return TypeDBusSignalInfo
+}
+
+func (r *DBusSignalInfo) SetGoValue(v *gobject.Value) {
 	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
@@ -107082,8 +107967,11 @@ func marshalFileAttributeInfoList(p unsafe.Pointer) (interface{}, error) {
 	return UnsafeFileAttributeInfoListFromGlibBorrow(b), nil
 }
 
-func (r *FileAttributeInfoList) InitGoValue(v *gobject.Value) {
-	v.Init(TypeFileAttributeInfoList)
+func (r *FileAttributeInfoList) GoValueType() gobject.Type {
+	return TypeFileAttributeInfoList
+}
+
+func (r *FileAttributeInfoList) SetGoValue(v *gobject.Value) {
 	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
@@ -107266,8 +108154,11 @@ func marshalFileAttributeMatcher(p unsafe.Pointer) (interface{}, error) {
 	return UnsafeFileAttributeMatcherFromGlibBorrow(b), nil
 }
 
-func (r *FileAttributeMatcher) InitGoValue(v *gobject.Value) {
-	v.Init(TypeFileAttributeMatcher)
+func (r *FileAttributeMatcher) GoValueType() gobject.Type {
+	return TypeFileAttributeMatcher
+}
+
+func (r *FileAttributeMatcher) SetGoValue(v *gobject.Value) {
 	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
@@ -108112,10 +109003,10 @@ func (extension *IOExtension) GetName() string {
 // 
 // The function returns the following values:
 // 
-// 	- goret int 
+// 	- goret int32 
 //
 // Gets the priority with which @extension was registered.
-func (extension *IOExtension) GetPriority() int {
+func (extension *IOExtension) GetPriority() int32 {
 	var carg0 *C.GIOExtension // in, none, converted
 	var cret  C.gint          // return, none, casted
 
@@ -108124,9 +109015,9 @@ func (extension *IOExtension) GetPriority() int {
 	cret = C.g_io_extension_get_priority(carg0)
 	runtime.KeepAlive(extension)
 
-	var goret int
+	var goret int32
 
-	goret = int(cret)
+	goret = int32(cret)
 
 	return goret
 }
@@ -108274,7 +109165,7 @@ func UnsafeIOExtensionPointToGlibFull(i *IOExtensionPoint) unsafe.Pointer {
 // 	- extensionPointName string: the name of the extension point 
 // 	- typ gobject.Type: the #GType to register as extension 
 // 	- extensionName string: the name for the extension 
-// 	- priority int: the priority for the extension 
+// 	- priority int32: the priority for the extension 
 // 
 // The function returns the following values:
 // 
@@ -108285,7 +109176,7 @@ func UnsafeIOExtensionPointToGlibFull(i *IOExtensionPoint) unsafe.Pointer {
 // 
 // If @type has already been registered as an extension for this
 // extension point, the existing #GIOExtension object is returned.
-func IOExtensionPointImplement(extensionPointName string, typ gobject.Type, extensionName string, priority int) *IOExtension {
+func IOExtensionPointImplement(extensionPointName string, typ gobject.Type, extensionName string, priority int32) *IOExtension {
 	var carg1 *C.char         // in, none, string, casted *C.gchar
 	var carg2 C.GType         // in, none, casted, alias
 	var carg3 *C.char         // in, none, string, casted *C.gchar
@@ -110900,8 +111791,11 @@ func marshalResource(p unsafe.Pointer) (interface{}, error) {
 	return UnsafeResourceFromGlibBorrow(b), nil
 }
 
-func (r *Resource) InitGoValue(v *gobject.Value) {
-	v.Init(TypeResource)
+func (r *Resource) GoValueType() gobject.Type {
+	return TypeResource
+}
+
+func (r *Resource) SetGoValue(v *gobject.Value) {
 	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
@@ -111463,8 +112357,11 @@ func marshalSettingsSchema(p unsafe.Pointer) (interface{}, error) {
 	return UnsafeSettingsSchemaFromGlibBorrow(b), nil
 }
 
-func (r *SettingsSchema) InitGoValue(v *gobject.Value) {
-	v.Init(TypeSettingsSchema)
+func (r *SettingsSchema) GoValueType() gobject.Type {
+	return TypeSettingsSchema
+}
+
+func (r *SettingsSchema) SetGoValue(v *gobject.Value) {
 	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
@@ -111726,8 +112623,11 @@ func marshalSettingsSchemaKey(p unsafe.Pointer) (interface{}, error) {
 	return UnsafeSettingsSchemaKeyFromGlibBorrow(b), nil
 }
 
-func (r *SettingsSchemaKey) InitGoValue(v *gobject.Value) {
-	v.Init(TypeSettingsSchemaKey)
+func (r *SettingsSchemaKey) GoValueType() gobject.Type {
+	return TypeSettingsSchemaKey
+}
+
+func (r *SettingsSchemaKey) SetGoValue(v *gobject.Value) {
 	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
@@ -111929,8 +112829,11 @@ func marshalSettingsSchemaSource(p unsafe.Pointer) (interface{}, error) {
 	return UnsafeSettingsSchemaSourceFromGlibBorrow(b), nil
 }
 
-func (r *SettingsSchemaSource) InitGoValue(v *gobject.Value) {
-	v.Init(TypeSettingsSchemaSource)
+func (r *SettingsSchemaSource) GoValueType() gobject.Type {
+	return TypeSettingsSchemaSource
+}
+
+func (r *SettingsSchemaSource) SetGoValue(v *gobject.Value) {
 	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
@@ -112673,8 +113576,11 @@ func marshalSrvTarget(p unsafe.Pointer) (interface{}, error) {
 	return UnsafeSrvTargetFromGlibBorrow(b), nil
 }
 
-func (r *SrvTarget) InitGoValue(v *gobject.Value) {
-	v.Init(TypeSrvTarget)
+func (r *SrvTarget) GoValueType() gobject.Type {
+	return TypeSrvTarget
+}
+
+func (r *SrvTarget) SetGoValue(v *gobject.Value) {
 	v.SetBoxed(unsafe.Pointer(r.native))
 }
 

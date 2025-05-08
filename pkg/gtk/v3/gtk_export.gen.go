@@ -30,10 +30,10 @@ func _gotk4_gtk3_AssistantPageFunc(carg1 C.gint, carg2 C.gpointer) (cret C.gint)
 		fn = v.(AssistantPageFunc)
 	}
 
-	var currentPage int // in, none, casted
-	var goret       int // return, none, casted
+	var currentPage int32 // in, none, casted
+	var goret       int32 // return, none, casted
 
-	currentPage = int(carg1)
+	currentPage = int32(carg1)
 
 	goret = fn(currentPage)
 
@@ -346,7 +346,7 @@ func _gotk4_gtk3_KeySnoopFunc(carg1 *C.GtkWidget, carg2 *C.GdkEventKey, carg3 C.
 
 	var grabWidget Widget        // in, none, converted
 	var event      *gdk.EventKey // in, none, converted
-	var goret      int           // return, none, casted
+	var goret      int32         // return, none, casted
 
 	grabWidget = UnsafeWidgetFromGlibNone(unsafe.Pointer(carg1))
 	event = gdk.UnsafeEventKeyFromGlibNone(unsafe.Pointer(carg2))
@@ -434,7 +434,7 @@ func _gotk4_gtk3_RecentSortFunc(carg1 *C.GtkRecentInfo, carg2 *C.GtkRecentInfo, 
 
 	var a     *RecentInfo // in, none, converted
 	var b     *RecentInfo // in, none, converted
-	var goret int         // return, none, casted
+	var goret int32       // return, none, casted
 
 	a = UnsafeRecentInfoFromGlibNone(unsafe.Pointer(carg1))
 	b = UnsafeRecentInfoFromGlibNone(unsafe.Pointer(carg2))
@@ -627,7 +627,7 @@ func _gotk4_gtk3_TreeIterCompareFunc(carg1 *C.GtkTreeModel, carg2 *C.GtkTreeIter
 	var model TreeModel // in, none, converted
 	var a     *TreeIter // in, none, converted
 	var b     *TreeIter // in, none, converted
-	var goret int       // return, none, casted
+	var goret int32     // return, none, casted
 
 	model = UnsafeTreeModelFromGlibNone(unsafe.Pointer(carg1))
 	a = UnsafeTreeIterFromGlibNone(unsafe.Pointer(carg2))
@@ -653,12 +653,12 @@ func _gotk4_gtk3_TreeModelFilterModifyFunc(carg1 *C.GtkTreeModel, carg2 *C.GtkTr
 
 	var model  TreeModel     // in, none, converted
 	var iter   *TreeIter     // in, none, converted
-	var column int           // in, none, casted
+	var column int32         // in, none, casted
 	var value  gobject.Value // out, transfer: none, C Pointers: 0, Name: Value, caller-allocates
 
 	model = UnsafeTreeModelFromGlibNone(unsafe.Pointer(carg1))
 	iter = UnsafeTreeIterFromGlibNone(unsafe.Pointer(carg2))
-	column = int(carg4)
+	column = int32(carg4)
 
 	value = fn(model, iter, column)
 
@@ -817,13 +817,13 @@ func _gotk4_gtk3_TreeViewSearchEqualFunc(carg1 *C.GtkTreeModel, carg2 C.gint, ca
 	}
 
 	var model  TreeModel // in, none, converted
-	var column int       // in, none, casted
+	var column int32     // in, none, casted
 	var key    string    // in, none, string
 	var iter   *TreeIter // in, none, converted
 	var goret  bool      // return
 
 	model = UnsafeTreeModelFromGlibNone(unsafe.Pointer(carg1))
-	column = int(carg2)
+	column = int32(carg2)
 	key = C.GoString((*C.char)(unsafe.Pointer(carg3)))
 	iter = UnsafeTreeIterFromGlibNone(unsafe.Pointer(carg4))
 
@@ -900,11 +900,11 @@ func _gotk4_gtk3_TreeDestroyCountFunc(carg1 *C.GtkTreeView, carg2 *C.GtkTreePath
 
 	var treeView TreeView  // in, none, converted
 	var path     *TreePath // in, none, converted
-	var children int       // in, none, casted
+	var children int32     // in, none, casted
 
 	treeView = UnsafeTreeViewFromGlibNone(unsafe.Pointer(carg1))
 	path = UnsafeTreePathFromGlibNone(unsafe.Pointer(carg2))
-	children = int(carg3)
+	children = int32(carg3)
 
 	fn(treeView, path, children)
 }
@@ -1038,7 +1038,7 @@ func _gotk4_gtk3_FlowBoxSortFunc(carg1 *C.GtkFlowBoxChild, carg2 *C.GtkFlowBoxCh
 
 	var child1 FlowBoxChild // in, none, converted
 	var child2 FlowBoxChild // in, none, converted
-	var goret  int          // return, none, casted
+	var goret  int32        // return, none, casted
 
 	child1 = UnsafeFlowBoxChildFromGlibNone(unsafe.Pointer(carg1))
 	child2 = UnsafeFlowBoxChildFromGlibNone(unsafe.Pointer(carg2))
@@ -1108,7 +1108,7 @@ func _gotk4_gtk3_ListBoxSortFunc(carg1 *C.GtkListBoxRow, carg2 *C.GtkListBoxRow,
 
 	var row1  ListBoxRow // in, none, converted
 	var row2  ListBoxRow // in, none, converted
-	var goret int        // return, none, casted
+	var goret int32      // return, none, casted
 
 	row1 = UnsafeListBoxRowFromGlibNone(unsafe.Pointer(carg1))
 	row2 = UnsafeListBoxRowFromGlibNone(unsafe.Pointer(carg2))

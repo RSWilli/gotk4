@@ -348,8 +348,11 @@ func marshalBox(p unsafe.Pointer) (interface{}, error) {
 	return UnsafeBoxFromGlibBorrow(b), nil
 }
 
-func (r *Box) InitGoValue(v *gobject.Value) {
-	v.Init(TypeBox)
+func (r *Box) GoValueType() gobject.Type {
+	return TypeBox
+}
+
+func (r *Box) SetGoValue(v *gobject.Value) {
 	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
@@ -1221,8 +1224,11 @@ func marshalEuler(p unsafe.Pointer) (interface{}, error) {
 	return UnsafeEulerFromGlibBorrow(b), nil
 }
 
-func (r *Euler) InitGoValue(v *gobject.Value) {
-	v.Init(TypeEuler)
+func (r *Euler) GoValueType() gobject.Type {
+	return TypeEuler
+}
+
+func (r *Euler) SetGoValue(v *gobject.Value) {
 	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
@@ -1934,8 +1940,11 @@ func marshalFrustum(p unsafe.Pointer) (interface{}, error) {
 	return UnsafeFrustumFromGlibBorrow(b), nil
 }
 
-func (r *Frustum) InitGoValue(v *gobject.Value) {
-	v.Init(TypeFrustum)
+func (r *Frustum) GoValueType() gobject.Type {
+	return TypeFrustum
+}
+
+func (r *Frustum) SetGoValue(v *gobject.Value) {
 	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
@@ -2268,8 +2277,11 @@ func marshalMatrix(p unsafe.Pointer) (interface{}, error) {
 	return UnsafeMatrixFromGlibBorrow(b), nil
 }
 
-func (r *Matrix) InitGoValue(v *gobject.Value) {
-	v.Init(TypeMatrix)
+func (r *Matrix) GoValueType() gobject.Type {
+	return TypeMatrix
+}
+
+func (r *Matrix) SetGoValue(v *gobject.Value) {
 	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
@@ -4456,8 +4468,11 @@ func marshalPlane(p unsafe.Pointer) (interface{}, error) {
 	return UnsafePlaneFromGlibBorrow(b), nil
 }
 
-func (r *Plane) InitGoValue(v *gobject.Value) {
-	v.Init(TypePlane)
+func (r *Plane) GoValueType() gobject.Type {
+	return TypePlane
+}
+
+func (r *Plane) SetGoValue(v *gobject.Value) {
 	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
@@ -4939,8 +4954,11 @@ func marshalPoint(p unsafe.Pointer) (interface{}, error) {
 	return UnsafePointFromGlibBorrow(b), nil
 }
 
-func (r *Point) InitGoValue(v *gobject.Value) {
-	v.Init(TypePoint)
+func (r *Point) GoValueType() gobject.Type {
+	return TypePoint
+}
+
+func (r *Point) SetGoValue(v *gobject.Value) {
 	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
@@ -5339,8 +5357,11 @@ func marshalPoint3D(p unsafe.Pointer) (interface{}, error) {
 	return UnsafePoint3DFromGlibBorrow(b), nil
 }
 
-func (r *Point3D) InitGoValue(v *gobject.Value) {
-	v.Init(TypePoint3D)
+func (r *Point3D) GoValueType() gobject.Type {
+	return TypePoint3D
+}
+
+func (r *Point3D) SetGoValue(v *gobject.Value) {
 	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
@@ -5915,8 +5936,11 @@ func marshalQuad(p unsafe.Pointer) (interface{}, error) {
 	return UnsafeQuadFromGlibBorrow(b), nil
 }
 
-func (r *Quad) InitGoValue(v *gobject.Value) {
-	v.Init(TypeQuad)
+func (r *Quad) GoValueType() gobject.Type {
+	return TypeQuad
+}
+
+func (r *Quad) SetGoValue(v *gobject.Value) {
 	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
@@ -6204,8 +6228,11 @@ func marshalQuaternion(p unsafe.Pointer) (interface{}, error) {
 	return UnsafeQuaternionFromGlibBorrow(b), nil
 }
 
-func (r *Quaternion) InitGoValue(v *gobject.Value) {
-	v.Init(TypeQuaternion)
+func (r *Quaternion) GoValueType() gobject.Type {
+	return TypeQuaternion
+}
+
+func (r *Quaternion) SetGoValue(v *gobject.Value) {
 	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
@@ -7012,8 +7039,11 @@ func marshalRay(p unsafe.Pointer) (interface{}, error) {
 	return UnsafeRayFromGlibBorrow(b), nil
 }
 
-func (r *Ray) InitGoValue(v *gobject.Value) {
-	v.Init(TypeRay)
+func (r *Ray) GoValueType() gobject.Type {
+	return TypeRay
+}
+
+func (r *Ray) SetGoValue(v *gobject.Value) {
 	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
@@ -7645,8 +7675,11 @@ func marshalRect(p unsafe.Pointer) (interface{}, error) {
 	return UnsafeRectFromGlibBorrow(b), nil
 }
 
-func (r *Rect) InitGoValue(v *gobject.Value) {
-	v.Init(TypeRect)
+func (r *Rect) GoValueType() gobject.Type {
+	return TypeRect
+}
+
+func (r *Rect) SetGoValue(v *gobject.Value) {
 	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
@@ -8819,8 +8852,11 @@ func marshalSize(p unsafe.Pointer) (interface{}, error) {
 	return UnsafeSizeFromGlibBorrow(b), nil
 }
 
-func (r *Size) InitGoValue(v *gobject.Value) {
-	v.Init(TypeSize)
+func (r *Size) GoValueType() gobject.Type {
+	return TypeSize
+}
+
+func (r *Size) SetGoValue(v *gobject.Value) {
 	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
@@ -9099,8 +9135,11 @@ func marshalSphere(p unsafe.Pointer) (interface{}, error) {
 	return UnsafeSphereFromGlibBorrow(b), nil
 }
 
-func (r *Sphere) InitGoValue(v *gobject.Value) {
-	v.Init(TypeSphere)
+func (r *Sphere) GoValueType() gobject.Type {
+	return TypeSphere
+}
+
+func (r *Sphere) SetGoValue(v *gobject.Value) {
 	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
@@ -9543,8 +9582,11 @@ func marshalTriangle(p unsafe.Pointer) (interface{}, error) {
 	return UnsafeTriangleFromGlibBorrow(b), nil
 }
 
-func (r *Triangle) InitGoValue(v *gobject.Value) {
-	v.Init(TypeTriangle)
+func (r *Triangle) GoValueType() gobject.Type {
+	return TypeTriangle
+}
+
+func (r *Triangle) SetGoValue(v *gobject.Value) {
 	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
@@ -10157,8 +10199,11 @@ func marshalVec2(p unsafe.Pointer) (interface{}, error) {
 	return UnsafeVec2FromGlibBorrow(b), nil
 }
 
-func (r *Vec2) InitGoValue(v *gobject.Value) {
-	v.Init(TypeVec2)
+func (r *Vec2) GoValueType() gobject.Type {
+	return TypeVec2
+}
+
+func (r *Vec2) SetGoValue(v *gobject.Value) {
 	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
@@ -10916,8 +10961,11 @@ func marshalVec3(p unsafe.Pointer) (interface{}, error) {
 	return UnsafeVec3FromGlibBorrow(b), nil
 }
 
-func (r *Vec3) InitGoValue(v *gobject.Value) {
-	v.Init(TypeVec3)
+func (r *Vec3) GoValueType() gobject.Type {
+	return TypeVec3
+}
+
+func (r *Vec3) SetGoValue(v *gobject.Value) {
 	v.SetBoxed(unsafe.Pointer(r.native))
 }
 
@@ -11892,8 +11940,11 @@ func marshalVec4(p unsafe.Pointer) (interface{}, error) {
 	return UnsafeVec4FromGlibBorrow(b), nil
 }
 
-func (r *Vec4) InitGoValue(v *gobject.Value) {
-	v.Init(TypeVec4)
+func (r *Vec4) GoValueType() gobject.Type {
+	return TypeVec4
+}
+
+func (r *Vec4) SetGoValue(v *gobject.Value) {
 	v.SetBoxed(unsafe.Pointer(r.native))
 }
 

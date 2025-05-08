@@ -105,7 +105,7 @@ func DeclareInterface(e *env, v gir.Interface) *Interface {
 		GoUnsafeApplyOverridesName: fmt.Sprintf("UnsafeApply%sOverrides", v.Name),
 
 		BaseConversions: BaseConversions{
-			FromGlibBorrowFunction: "", // no borrow function for interfaces
+			FromGlibBorrowFunction: fmt.Sprintf("Unsafe%sFromGlibBorrow", v.Name), // borrow is needed for subclassing
 			FromGlibNoneFunction:   fmt.Sprintf("Unsafe%sFromGlibNone", v.Name),
 			FromGlibFullFunction:   fmt.Sprintf("Unsafe%sFromGlibFull", v.Name),
 
