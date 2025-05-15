@@ -348,6 +348,18 @@ func (c *Class) BaseClassGoUnsafeToGlibNoneFunction() string {
 	return base.WithForeignNamespace(base.Type.GoUnsafeToGlibNoneFunction())
 }
 
+// FindVirtualMethod returns the virtual method with the given C identifier. It is primarily useful for user
+// code post processors that need to modify the virtual method names.
+func (c *Class) FindVirtualMethod(cidentifier string) *VirtualMethod {
+	for _, v := range c.VirtualMethods {
+		if v.Invoker.CIndentifier() == cidentifier {
+			return v
+		}
+	}
+
+	return nil
+}
+
 // // AllParents returns a list of parents. Note that the list is relative to the current namespace,
 // // meaning that foreign types will be labeled as such.
 // //
