@@ -33,8 +33,15 @@ type GoToCBooleanConverter struct {
 
 // Convert implements Converter.
 func (c *GoToCBooleanConverter) Convert(w file.File) {
+	param := c.Param.CName
+
+	if c.Param.Direction == "out" {
+		// this may be needed for other GoToC out conversions as well
+		param = "*" + param
+	}
+
 	fmt.Fprintf(w.Go(), "if %s {\n", c.Param.GoName)
-	fmt.Fprintf(w.Go(), "\t%s = C.TRUE\n", c.Param.CName)
+	fmt.Fprintf(w.Go(), "\t%s = C.TRUE\n", param)
 	fmt.Fprintf(w.Go(), "}\n")
 }
 
