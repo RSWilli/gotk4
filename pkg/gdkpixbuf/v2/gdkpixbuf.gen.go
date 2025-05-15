@@ -19,23 +19,23 @@ import (
 // #cgo pkg-config: gdk-pixbuf-2.0
 // #cgo CFLAGS: -Wno-deprecated-declarations
 // #include <gdk-pixbuf/gdk-pixbuf.h>
-// extern C.gboolean _gotk4_gdkpixbuf2_PixbufSaveFunc(*C.gchar, C.gsize, *C.GError, C.gpointer);
-// extern C.void _gotk4_gio2_AsyncReadyCallback(*C.GObject, *C.GAsyncResult, C.gpointer);
-// extern C.void _gotk4_gdkpixbuf2_PixbufLoader_area_prepared(*C.GdkPixbufLoader);
-// extern C.void _gotk4_gdkpixbuf2_PixbufLoader_area_updated(*C.GdkPixbufLoader, C.int, C.int, C.int, C.int);
-// extern C.void _gotk4_gdkpixbuf2_PixbufLoader_closed(*C.GdkPixbufLoader);
-// extern C.void _gotk4_gdkpixbuf2_PixbufLoader_size_prepared(*C.GdkPixbufLoader, C.int, C.int);
-// C.void _gotk4_gdkpixbuf2_PixbufLoader_virtual_area_prepared(void* fnptr, *C.GdkPixbufLoader carg0) {
-// 	return ((C.void (*) (*C.GdkPixbufLoader))(fnptr))(carg0);
+// extern gboolean _gotk4_gdkpixbuf2_PixbufSaveFunc(const gchar*, gsize, GError*, gpointer);
+// extern void _gotk4_gio2_AsyncReadyCallback(GObject*, GAsyncResult*, gpointer);
+// extern void _gotk4_gdkpixbuf2_PixbufLoader_area_prepared(GdkPixbufLoader*);
+// extern void _gotk4_gdkpixbuf2_PixbufLoader_area_updated(GdkPixbufLoader*, int, int, int, int);
+// extern void _gotk4_gdkpixbuf2_PixbufLoader_closed(GdkPixbufLoader*);
+// extern void _gotk4_gdkpixbuf2_PixbufLoader_size_prepared(GdkPixbufLoader*, int, int);
+// void _gotk4_gdkpixbuf2_PixbufLoader_virtual_area_prepared(void* fnptr, GdkPixbufLoader* carg0) {
+// 	return ((void (*) (GdkPixbufLoader*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gdkpixbuf2_PixbufLoader_virtual_area_updated(void* fnptr, *C.GdkPixbufLoader carg0, C.int carg1, C.int carg2, C.int carg3, C.int carg4) {
-// 	return ((C.void (*) (*C.GdkPixbufLoader, C.int, C.int, C.int, C.int))(fnptr))(carg0, carg1, carg2, carg3, carg4);
+// void _gotk4_gdkpixbuf2_PixbufLoader_virtual_area_updated(void* fnptr, GdkPixbufLoader* carg0, int carg1, int carg2, int carg3, int carg4) {
+// 	return ((void (*) (GdkPixbufLoader*, int, int, int, int))(fnptr))(carg0, carg1, carg2, carg3, carg4);
 // }
-// C.void _gotk4_gdkpixbuf2_PixbufLoader_virtual_closed(void* fnptr, *C.GdkPixbufLoader carg0) {
-// 	return ((C.void (*) (*C.GdkPixbufLoader))(fnptr))(carg0);
+// void _gotk4_gdkpixbuf2_PixbufLoader_virtual_closed(void* fnptr, GdkPixbufLoader* carg0) {
+// 	return ((void (*) (GdkPixbufLoader*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gdkpixbuf2_PixbufLoader_virtual_size_prepared(void* fnptr, *C.GdkPixbufLoader carg0, C.int carg1, C.int carg2) {
-// 	return ((C.void (*) (*C.GdkPixbufLoader, C.int, C.int))(fnptr))(carg0, carg1, carg2);
+// void _gotk4_gdkpixbuf2_PixbufLoader_virtual_size_prepared(void* fnptr, GdkPixbufLoader* carg0, int carg1, int carg2) {
+// 	return ((void (*) (GdkPixbufLoader*, int, int))(fnptr))(carg0, carg1, carg2);
 // }
 import "C"
 
@@ -1855,7 +1855,7 @@ func NewPixbufFromXPMData(data []string) Pixbuf {
 
 	_ = data
 	_ = carg1
-	panic("unimplemented conversion of []string (**C.char)")
+	panic("unimplemented conversion of []string (const char**)")
 
 	cret = C.gdk_pixbuf_new_from_xpm_data(carg1)
 	runtime.KeepAlive(data)
@@ -2939,7 +2939,7 @@ func (pixbuf *PixbufInstance) GetPixelsWithLength() (uint, []byte) {
 	length = uint(carg1)
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []byte (*C.guchar)")
+	panic("unimplemented conversion of []byte (guchar*)")
 
 	return length, goret
 }
@@ -3091,7 +3091,7 @@ func (pixbuf *PixbufInstance) ReadPixels() *uint8 {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of *uint8 (*C.guint8)")
+	panic("unimplemented conversion of *uint8 (const guint8*)")
 
 	return goret
 }
@@ -3243,10 +3243,10 @@ func (pixbuf *PixbufInstance) SaveToBufferv(typ string, optionKeys []string, opt
 	defer C.free(unsafe.Pointer(carg3))
 	_ = optionKeys
 	_ = carg4
-	panic("unimplemented conversion of []string (**C.char)")
+	panic("unimplemented conversion of []string (char**)")
 	_ = optionValues
 	_ = carg5
-	panic("unimplemented conversion of []string (**C.char)")
+	panic("unimplemented conversion of []string (char**)")
 
 	cret = C.gdk_pixbuf_save_to_bufferv(carg0, &carg1, &carg2, carg3, carg4, carg5, &_cerr)
 	runtime.KeepAlive(pixbuf)
@@ -3261,7 +3261,7 @@ func (pixbuf *PixbufInstance) SaveToBufferv(typ string, optionKeys []string, opt
 	_ = buffer
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of string (*C.gchar)")
+	panic("unimplemented conversion of string (gchar*)")
 	if cret != 0 {
 		goret = true
 	}
@@ -3313,10 +3313,10 @@ func (pixbuf *PixbufInstance) SaveToCallbackv(saveFunc PixbufSaveFunc, typ strin
 	defer C.free(unsafe.Pointer(carg3))
 	_ = optionKeys
 	_ = carg4
-	panic("unimplemented conversion of []string (**C.char)")
+	panic("unimplemented conversion of []string (char**)")
 	_ = optionValues
 	_ = carg5
-	panic("unimplemented conversion of []string (**C.char)")
+	panic("unimplemented conversion of []string (char**)")
 
 	cret = C.gdk_pixbuf_save_to_callbackv(carg0, carg1, carg2, carg3, carg4, carg5, &_cerr)
 	runtime.KeepAlive(pixbuf)
@@ -3378,10 +3378,10 @@ func (pixbuf *PixbufInstance) SaveToStreamv(cancellable context.Context, stream 
 	defer C.free(unsafe.Pointer(carg2))
 	_ = optionKeys
 	_ = carg3
-	panic("unimplemented conversion of []string (**C.char)")
+	panic("unimplemented conversion of []string (char**)")
 	_ = optionValues
 	_ = carg4
-	panic("unimplemented conversion of []string (**C.char)")
+	panic("unimplemented conversion of []string (char**)")
 
 	cret = C.gdk_pixbuf_save_to_streamv(carg0, carg1, carg2, carg3, carg4, carg5, &_cerr)
 	runtime.KeepAlive(pixbuf)
@@ -3443,10 +3443,10 @@ func (pixbuf *PixbufInstance) SaveToStreamvAsync(cancellable context.Context, st
 	defer C.free(unsafe.Pointer(carg2))
 	_ = optionKeys
 	_ = carg3
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (gchar**)")
 	_ = optionValues
 	_ = carg4
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (gchar**)")
 	if callback != nil {
 		carg6 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
 		carg7 = C.gpointer(userdata.RegisterOnce(callback))
@@ -3499,10 +3499,10 @@ func (pixbuf *PixbufInstance) Savev(filename string, typ string, optionKeys []st
 	defer C.free(unsafe.Pointer(carg2))
 	_ = optionKeys
 	_ = carg3
-	panic("unimplemented conversion of []string (**C.char)")
+	panic("unimplemented conversion of []string (char**)")
 	_ = optionValues
 	_ = carg4
-	panic("unimplemented conversion of []string (**C.char)")
+	panic("unimplemented conversion of []string (char**)")
 
 	cret = C.gdk_pixbuf_savev(carg0, carg1, carg2, carg3, carg4, &_cerr)
 	runtime.KeepAlive(pixbuf)
@@ -4227,7 +4227,7 @@ func (loader *PixbufLoaderInstance) Write(buf []byte) (bool, error) {
 	_ = buf
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []byte (*C.guchar)")
+	panic("unimplemented conversion of []byte (const guchar*)")
 
 	cret = C.gdk_pixbuf_loader_write(carg0, carg1, carg2, &_cerr)
 	runtime.KeepAlive(loader)
@@ -4698,7 +4698,7 @@ func (format *PixbufFormat) GetExtensions() []string {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (gchar**)")
 
 	return goret
 }
@@ -4752,7 +4752,7 @@ func (format *PixbufFormat) GetMIMETypes() []string {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (gchar**)")
 
 	return goret
 }

@@ -134,7 +134,7 @@ func X11FreeCompoundText(ctext *uint8) {
 
 	_ = ctext
 	_ = carg1
-	panic("unimplemented conversion of *uint8 (*C.guchar)")
+	panic("unimplemented conversion of *uint8 (guchar*)")
 
 	C.gdk_x11_free_compound_text(carg1)
 	runtime.KeepAlive(ctext)

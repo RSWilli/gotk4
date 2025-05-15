@@ -25,2047 +25,2047 @@ import (
 // #include <gtk/gtk-a11y.h>
 // #include <gtk/gtk.h>
 // #include <gtk/gtkx.h>
-// extern *C.gchar _gotk4_gtk3_CalendarDetailFunc(*C.GtkCalendar, C.guint, C.guint, C.guint, C.gpointer);
-// extern C.gboolean _gotk4_gtk3_CellAllocCallback(*C.GtkCellRenderer, *C.GdkRectangle, *C.GdkRectangle, C.gpointer);
-// extern C.gboolean _gotk4_gtk3_CellCallback(*C.GtkCellRenderer, C.gpointer);
-// extern C.gboolean _gotk4_gtk3_EntryCompletionMatchFunc(*C.GtkEntryCompletion, *C.gchar, *C.GtkTreeIter, C.gpointer);
-// extern C.gboolean _gotk4_gtk3_FileFilterFunc(*C.GtkFileFilterInfo, C.gpointer);
-// extern C.gboolean _gotk4_gtk3_FlowBoxFilterFunc(*C.GtkFlowBoxChild, C.gpointer);
-// extern C.gboolean _gotk4_gtk3_FontFilterFunc(*C.PangoFontFamily, *C.PangoFontFace, C.gpointer);
-// extern C.gboolean _gotk4_gtk3_ListBoxFilterFunc(*C.GtkListBoxRow, C.gpointer);
-// extern C.gboolean _gotk4_gtk3_RecentFilterFunc(*C.GtkRecentFilterInfo, C.gpointer);
-// extern C.gboolean _gotk4_gtk3_TextCharPredicate(C.gunichar, C.gpointer);
-// extern C.gboolean _gotk4_gtk3_TickCallback(*C.GtkWidget, *C.GdkFrameClock, C.gpointer);
-// extern C.gboolean _gotk4_gtk3_TreeModelFilterVisibleFunc(*C.GtkTreeModel, *C.GtkTreeIter, C.gpointer);
-// extern C.gboolean _gotk4_gtk3_TreeModelForEachFunc(*C.GtkTreeModel, *C.GtkTreePath, *C.GtkTreeIter, C.gpointer);
-// extern C.gboolean _gotk4_gtk3_TreeSelectionFunc(*C.GtkTreeSelection, *C.GtkTreeModel, *C.GtkTreePath, C.gboolean, C.gpointer);
-// extern C.gboolean _gotk4_gtk3_TreeViewColumnDropFunc(*C.GtkTreeView, *C.GtkTreeViewColumn, *C.GtkTreeViewColumn, *C.GtkTreeViewColumn, C.gpointer);
-// extern C.gboolean _gotk4_gtk3_TreeViewRowSeparatorFunc(*C.GtkTreeModel, *C.GtkTreeIter, C.gpointer);
-// extern C.gboolean _gotk4_gtk3_TreeViewSearchEqualFunc(*C.GtkTreeModel, C.gint, *C.gchar, *C.GtkTreeIter, C.gpointer);
-// extern C.gint _gotk4_gtk3_AssistantPageFunc(C.gint, C.gpointer);
-// extern C.gint _gotk4_gtk3_FlowBoxSortFunc(*C.GtkFlowBoxChild, *C.GtkFlowBoxChild, C.gpointer);
-// extern C.gint _gotk4_gtk3_ListBoxSortFunc(*C.GtkListBoxRow, *C.GtkListBoxRow, C.gpointer);
-// extern C.gint _gotk4_gtk3_RecentSortFunc(*C.GtkRecentInfo, *C.GtkRecentInfo, C.gpointer);
-// extern C.gint _gotk4_gtk3_TreeIterCompareFunc(*C.GtkTreeModel, *C.GtkTreeIter, *C.GtkTreeIter, C.gpointer);
-// extern C.void _gotk4_gio2_AsyncReadyCallback(*C.GObject, *C.GAsyncResult, C.gpointer);
-// extern C.void _gotk4_gtk3_BuilderConnectFunc(*C.GtkBuilder, *C.GObject, *C.gchar, *C.gchar, *C.GObject, C.GConnectFlags, C.gpointer);
-// extern C.void _gotk4_gtk3_Callback(*C.GtkWidget, C.gpointer);
-// extern C.void _gotk4_gtk3_CellLayoutDataFunc(*C.GtkCellLayout, *C.GtkCellRenderer, *C.GtkTreeModel, *C.GtkTreeIter, C.gpointer);
-// extern C.void _gotk4_gtk3_ClipboardImageReceivedFunc(*C.GtkClipboard, *C.GdkPixbuf, C.gpointer);
-// extern C.void _gotk4_gtk3_ClipboardTextReceivedFunc(*C.GtkClipboard, *C.gchar, C.gpointer);
-// extern C.void _gotk4_gtk3_ClipboardURIReceivedFunc(*C.GtkClipboard, **C.gchar, C.gpointer);
-// extern C.void _gotk4_gtk3_FlowBoxForEachFunc(*C.GtkFlowBox, *C.GtkFlowBoxChild, C.gpointer);
-// extern C.void _gotk4_gtk3_IconViewForEachFunc(*C.GtkIconView, *C.GtkTreePath, C.gpointer);
-// extern C.void _gotk4_gtk3_ListBoxForEachFunc(*C.GtkListBox, *C.GtkListBoxRow, C.gpointer);
-// extern C.void _gotk4_gtk3_ListBoxUpdateHeaderFunc(*C.GtkListBoxRow, *C.GtkListBoxRow, C.gpointer);
-// extern C.void _gotk4_gtk3_PageSetupDoneFunc(*C.GtkPageSetup, C.gpointer);
-// extern C.void _gotk4_gtk3_PrintSettingsFunc(*C.gchar, *C.gchar, C.gpointer);
-// extern C.void _gotk4_gtk3_TextTagTableForEach(*C.GtkTextTag, C.gpointer);
-// extern C.void _gotk4_gtk3_TreeCellDataFunc(*C.GtkTreeViewColumn, *C.GtkCellRenderer, *C.GtkTreeModel, *C.GtkTreeIter, C.gpointer);
-// extern C.void _gotk4_gtk3_TreeModelFilterModifyFunc(*C.GtkTreeModel, *C.GtkTreeIter, C.GValue, C.gint, C.gpointer);
-// extern C.void _gotk4_gtk3_TreeSelectionForEachFunc(*C.GtkTreeModel, *C.GtkTreePath, *C.GtkTreeIter, C.gpointer);
-// extern C.void _gotk4_gtk3_TreeViewMappingFunc(*C.GtkTreeView, *C.GtkTreePath, C.gpointer);
-// extern C.void _gotk4_gtk3_TreeViewSearchPositionFunc(*C.GtkTreeView, *C.GtkWidget, C.gpointer);
+// extern gboolean _gotk4_gtk3_CellAllocCallback(GtkCellRenderer*, const GdkRectangle*, const GdkRectangle*, gpointer);
+// extern gboolean _gotk4_gtk3_CellCallback(GtkCellRenderer*, gpointer);
+// extern gboolean _gotk4_gtk3_EntryCompletionMatchFunc(GtkEntryCompletion*, const gchar*, GtkTreeIter*, gpointer);
+// extern gboolean _gotk4_gtk3_FileFilterFunc(const GtkFileFilterInfo*, gpointer);
+// extern gboolean _gotk4_gtk3_FlowBoxFilterFunc(GtkFlowBoxChild*, gpointer);
+// extern gboolean _gotk4_gtk3_FontFilterFunc(const PangoFontFamily*, const PangoFontFace*, gpointer);
+// extern gboolean _gotk4_gtk3_ListBoxFilterFunc(GtkListBoxRow*, gpointer);
+// extern gboolean _gotk4_gtk3_RecentFilterFunc(const GtkRecentFilterInfo*, gpointer);
+// extern gboolean _gotk4_gtk3_TextCharPredicate(gunichar, gpointer);
+// extern gboolean _gotk4_gtk3_TickCallback(GtkWidget*, GdkFrameClock*, gpointer);
+// extern gboolean _gotk4_gtk3_TreeModelFilterVisibleFunc(GtkTreeModel*, GtkTreeIter*, gpointer);
+// extern gboolean _gotk4_gtk3_TreeModelForEachFunc(GtkTreeModel*, GtkTreePath*, GtkTreeIter*, gpointer);
+// extern gboolean _gotk4_gtk3_TreeSelectionFunc(GtkTreeSelection*, GtkTreeModel*, GtkTreePath*, gboolean, gpointer);
+// extern gboolean _gotk4_gtk3_TreeViewColumnDropFunc(GtkTreeView*, GtkTreeViewColumn*, GtkTreeViewColumn*, GtkTreeViewColumn*, gpointer);
+// extern gboolean _gotk4_gtk3_TreeViewRowSeparatorFunc(GtkTreeModel*, GtkTreeIter*, gpointer);
+// extern gboolean _gotk4_gtk3_TreeViewSearchEqualFunc(GtkTreeModel*, gint, const gchar*, GtkTreeIter*, gpointer);
+// extern gchar* _gotk4_gtk3_CalendarDetailFunc(GtkCalendar*, guint, guint, guint, gpointer);
+// extern gint _gotk4_gtk3_AssistantPageFunc(gint, gpointer);
+// extern gint _gotk4_gtk3_FlowBoxSortFunc(GtkFlowBoxChild*, GtkFlowBoxChild*, gpointer);
+// extern gint _gotk4_gtk3_ListBoxSortFunc(GtkListBoxRow*, GtkListBoxRow*, gpointer);
+// extern gint _gotk4_gtk3_RecentSortFunc(GtkRecentInfo*, GtkRecentInfo*, gpointer);
+// extern gint _gotk4_gtk3_TreeIterCompareFunc(GtkTreeModel*, GtkTreeIter*, GtkTreeIter*, gpointer);
+// extern void _gotk4_gio2_AsyncReadyCallback(GObject*, GAsyncResult*, gpointer);
+// extern void _gotk4_gtk3_BuilderConnectFunc(GtkBuilder*, GObject*, const gchar*, const gchar*, GObject*, GConnectFlags, gpointer);
+// extern void _gotk4_gtk3_Callback(GtkWidget*, gpointer);
+// extern void _gotk4_gtk3_CellLayoutDataFunc(GtkCellLayout*, GtkCellRenderer*, GtkTreeModel*, GtkTreeIter*, gpointer);
+// extern void _gotk4_gtk3_ClipboardImageReceivedFunc(GtkClipboard*, GdkPixbuf*, gpointer);
+// extern void _gotk4_gtk3_ClipboardTextReceivedFunc(GtkClipboard*, const gchar*, gpointer);
+// extern void _gotk4_gtk3_ClipboardURIReceivedFunc(GtkClipboard*, gchar**, gpointer);
+// extern void _gotk4_gtk3_FlowBoxForEachFunc(GtkFlowBox*, GtkFlowBoxChild*, gpointer);
+// extern void _gotk4_gtk3_IconViewForEachFunc(GtkIconView*, GtkTreePath*, gpointer);
+// extern void _gotk4_gtk3_ListBoxForEachFunc(GtkListBox*, GtkListBoxRow*, gpointer);
+// extern void _gotk4_gtk3_ListBoxUpdateHeaderFunc(GtkListBoxRow*, GtkListBoxRow*, gpointer);
+// extern void _gotk4_gtk3_PageSetupDoneFunc(GtkPageSetup*, gpointer);
+// extern void _gotk4_gtk3_PrintSettingsFunc(const gchar*, const gchar*, gpointer);
+// extern void _gotk4_gtk3_TextTagTableForEach(GtkTextTag*, gpointer);
+// extern void _gotk4_gtk3_TreeCellDataFunc(GtkTreeViewColumn*, GtkCellRenderer*, GtkTreeModel*, GtkTreeIter*, gpointer);
+// extern void _gotk4_gtk3_TreeModelFilterModifyFunc(GtkTreeModel*, GtkTreeIter*, GValue, gint, gpointer);
+// extern void _gotk4_gtk3_TreeSelectionForEachFunc(GtkTreeModel*, GtkTreePath*, GtkTreeIter*, gpointer);
+// extern void _gotk4_gtk3_TreeViewMappingFunc(GtkTreeView*, GtkTreePath*, gpointer);
+// extern void _gotk4_gtk3_TreeViewSearchPositionFunc(GtkTreeView*, GtkWidget*, gpointer);
 // extern void destroyUserdata(gpointer);
-// extern *C.gchar _gotk4_gtk3_Actionable_get_action_name(*C.GtkActionable);
-// extern C.void _gotk4_gtk3_Actionable_set_action_name(*C.GtkActionable, *C.gchar);
-// *C.gchar _gotk4_gtk3_Actionable_virtual_get_action_name(void* fnptr, *C.GtkActionable carg0) {
-// 	return ((*C.gchar (*) (*C.GtkActionable))(fnptr))(carg0);
-// }
-// C.void _gotk4_gtk3_Actionable_virtual_set_action_name(void* fnptr, *C.GtkActionable carg0, *C.gchar carg1) {
-// 	return ((C.void (*) (*C.GtkActionable, *C.gchar))(fnptr))(carg0, carg1);
-// }
-// extern C.void _gotk4_gtk3_Buildable_add_child(*C.GtkBuildable, *C.GtkBuilder, *C.GObject, *C.gchar);
-// extern *C.GObject _gotk4_gtk3_Buildable_construct_child(*C.GtkBuildable, *C.GtkBuilder, *C.gchar);
-// extern *C.GObject _gotk4_gtk3_Buildable_get_internal_child(*C.GtkBuildable, *C.GtkBuilder, *C.gchar);
-// extern *C.gchar _gotk4_gtk3_Buildable_get_name(*C.GtkBuildable);
-// extern C.void _gotk4_gtk3_Buildable_parser_finished(*C.GtkBuildable, *C.GtkBuilder);
-// extern C.void _gotk4_gtk3_Buildable_set_buildable_property(*C.GtkBuildable, *C.GtkBuilder, *C.gchar, *C.GValue);
-// extern C.void _gotk4_gtk3_Buildable_set_name(*C.GtkBuildable, *C.gchar);
-// C.void _gotk4_gtk3_Buildable_virtual_add_child(void* fnptr, *C.GtkBuildable carg0, *C.GtkBuilder carg1, *C.GObject carg2, *C.gchar carg3) {
-// 	return ((C.void (*) (*C.GtkBuildable, *C.GtkBuilder, *C.GObject, *C.gchar))(fnptr))(carg0, carg1, carg2, carg3);
-// }
-// *C.GObject _gotk4_gtk3_Buildable_virtual_construct_child(void* fnptr, *C.GtkBuildable carg0, *C.GtkBuilder carg1, *C.gchar carg2) {
-// 	return ((*C.GObject (*) (*C.GtkBuildable, *C.GtkBuilder, *C.gchar))(fnptr))(carg0, carg1, carg2);
-// }
-// *C.GObject _gotk4_gtk3_Buildable_virtual_get_internal_child(void* fnptr, *C.GtkBuildable carg0, *C.GtkBuilder carg1, *C.gchar carg2) {
-// 	return ((*C.GObject (*) (*C.GtkBuildable, *C.GtkBuilder, *C.gchar))(fnptr))(carg0, carg1, carg2);
-// }
-// *C.gchar _gotk4_gtk3_Buildable_virtual_get_name(void* fnptr, *C.GtkBuildable carg0) {
-// 	return ((*C.gchar (*) (*C.GtkBuildable))(fnptr))(carg0);
-// }
-// C.void _gotk4_gtk3_Buildable_virtual_parser_finished(void* fnptr, *C.GtkBuildable carg0, *C.GtkBuilder carg1) {
-// 	return ((C.void (*) (*C.GtkBuildable, *C.GtkBuilder))(fnptr))(carg0, carg1);
-// }
-// C.void _gotk4_gtk3_Buildable_virtual_set_buildable_property(void* fnptr, *C.GtkBuildable carg0, *C.GtkBuilder carg1, *C.gchar carg2, *C.GValue carg3) {
-// 	return ((C.void (*) (*C.GtkBuildable, *C.GtkBuilder, *C.gchar, *C.GValue))(fnptr))(carg0, carg1, carg2, carg3);
+// extern const gchar* _gotk4_gtk3_Actionable_get_action_name(GtkActionable*);
+// extern void _gotk4_gtk3_Actionable_set_action_name(GtkActionable*, const gchar*);
+// const gchar* _gotk4_gtk3_Actionable_virtual_get_action_name(void* fnptr, GtkActionable* carg0) {
+// 	return ((const gchar* (*) (GtkActionable*))(fnptr))(carg0);
+// }
+// void _gotk4_gtk3_Actionable_virtual_set_action_name(void* fnptr, GtkActionable* carg0, const gchar* carg1) {
+// 	return ((void (*) (GtkActionable*, const gchar*))(fnptr))(carg0, carg1);
+// }
+// extern void _gotk4_gtk3_Buildable_add_child(GtkBuildable*, GtkBuilder*, GObject*, const gchar*);
+// extern GObject* _gotk4_gtk3_Buildable_construct_child(GtkBuildable*, GtkBuilder*, const gchar*);
+// extern GObject* _gotk4_gtk3_Buildable_get_internal_child(GtkBuildable*, GtkBuilder*, const gchar*);
+// extern const gchar* _gotk4_gtk3_Buildable_get_name(GtkBuildable*);
+// extern void _gotk4_gtk3_Buildable_parser_finished(GtkBuildable*, GtkBuilder*);
+// extern void _gotk4_gtk3_Buildable_set_buildable_property(GtkBuildable*, GtkBuilder*, const gchar*, const GValue*);
+// extern void _gotk4_gtk3_Buildable_set_name(GtkBuildable*, const gchar*);
+// void _gotk4_gtk3_Buildable_virtual_add_child(void* fnptr, GtkBuildable* carg0, GtkBuilder* carg1, GObject* carg2, const gchar* carg3) {
+// 	return ((void (*) (GtkBuildable*, GtkBuilder*, GObject*, const gchar*))(fnptr))(carg0, carg1, carg2, carg3);
+// }
+// GObject* _gotk4_gtk3_Buildable_virtual_construct_child(void* fnptr, GtkBuildable* carg0, GtkBuilder* carg1, const gchar* carg2) {
+// 	return ((GObject* (*) (GtkBuildable*, GtkBuilder*, const gchar*))(fnptr))(carg0, carg1, carg2);
+// }
+// GObject* _gotk4_gtk3_Buildable_virtual_get_internal_child(void* fnptr, GtkBuildable* carg0, GtkBuilder* carg1, const gchar* carg2) {
+// 	return ((GObject* (*) (GtkBuildable*, GtkBuilder*, const gchar*))(fnptr))(carg0, carg1, carg2);
+// }
+// const gchar* _gotk4_gtk3_Buildable_virtual_get_name(void* fnptr, GtkBuildable* carg0) {
+// 	return ((const gchar* (*) (GtkBuildable*))(fnptr))(carg0);
+// }
+// void _gotk4_gtk3_Buildable_virtual_parser_finished(void* fnptr, GtkBuildable* carg0, GtkBuilder* carg1) {
+// 	return ((void (*) (GtkBuildable*, GtkBuilder*))(fnptr))(carg0, carg1);
+// }
+// void _gotk4_gtk3_Buildable_virtual_set_buildable_property(void* fnptr, GtkBuildable* carg0, GtkBuilder* carg1, const gchar* carg2, const GValue* carg3) {
+// 	return ((void (*) (GtkBuildable*, GtkBuilder*, const gchar*, const GValue*))(fnptr))(carg0, carg1, carg2, carg3);
 // }
-// C.void _gotk4_gtk3_Buildable_virtual_set_name(void* fnptr, *C.GtkBuildable carg0, *C.gchar carg1) {
-// 	return ((C.void (*) (*C.GtkBuildable, *C.gchar))(fnptr))(carg0, carg1);
-// }
-// extern C.void _gotk4_gtk3_CellAccessibleParent_activate(*C.GtkCellAccessibleParent, *C.GtkCellAccessible);
-// extern C.void _gotk4_gtk3_CellAccessibleParent_edit(*C.GtkCellAccessibleParent, *C.GtkCellAccessible);
-// extern C.void _gotk4_gtk3_CellAccessibleParent_expand_collapse(*C.GtkCellAccessibleParent, *C.GtkCellAccessible);
-// extern C.void _gotk4_gtk3_CellAccessibleParent_get_cell_area(*C.GtkCellAccessibleParent, *C.GtkCellAccessible, C.GdkRectangle);
-// extern C.void _gotk4_gtk3_CellAccessibleParent_get_cell_extents(*C.GtkCellAccessibleParent, *C.GtkCellAccessible, C.gint, C.gint, C.gint, C.gint, C.AtkCoordType);
-// extern C.void _gotk4_gtk3_CellAccessibleParent_get_cell_position(*C.GtkCellAccessibleParent, *C.GtkCellAccessible, C.gint, C.gint);
-// extern C.int _gotk4_gtk3_CellAccessibleParent_get_child_index(*C.GtkCellAccessibleParent, *C.GtkCellAccessible);
-// extern C.GtkCellRendererState _gotk4_gtk3_CellAccessibleParent_get_renderer_state(*C.GtkCellAccessibleParent, *C.GtkCellAccessible);
-// extern C.gboolean _gotk4_gtk3_CellAccessibleParent_grab_focus(*C.GtkCellAccessibleParent, *C.GtkCellAccessible);
-// extern C.void _gotk4_gtk3_CellAccessibleParent_update_relationset(*C.GtkCellAccessibleParent, *C.GtkCellAccessible, *C.AtkRelationSet);
-// C.void _gotk4_gtk3_CellAccessibleParent_virtual_activate(void* fnptr, *C.GtkCellAccessibleParent carg0, *C.GtkCellAccessible carg1) {
-// 	return ((C.void (*) (*C.GtkCellAccessibleParent, *C.GtkCellAccessible))(fnptr))(carg0, carg1);
-// }
-// C.void _gotk4_gtk3_CellAccessibleParent_virtual_edit(void* fnptr, *C.GtkCellAccessibleParent carg0, *C.GtkCellAccessible carg1) {
-// 	return ((C.void (*) (*C.GtkCellAccessibleParent, *C.GtkCellAccessible))(fnptr))(carg0, carg1);
-// }
-// C.void _gotk4_gtk3_CellAccessibleParent_virtual_expand_collapse(void* fnptr, *C.GtkCellAccessibleParent carg0, *C.GtkCellAccessible carg1) {
-// 	return ((C.void (*) (*C.GtkCellAccessibleParent, *C.GtkCellAccessible))(fnptr))(carg0, carg1);
-// }
-// C.void _gotk4_gtk3_CellAccessibleParent_virtual_get_cell_area(void* fnptr, *C.GtkCellAccessibleParent carg0, *C.GtkCellAccessible carg1, C.GdkRectangle* carg2) {
-// 	return ((C.void (*) (*C.GtkCellAccessibleParent, *C.GtkCellAccessible, C.GdkRectangle*))(fnptr))(carg0, carg1, carg2);
-// }
-// C.void _gotk4_gtk3_CellAccessibleParent_virtual_get_cell_extents(void* fnptr, *C.GtkCellAccessibleParent carg0, *C.GtkCellAccessible carg1, C.gint* carg2, C.gint* carg3, C.gint* carg4, C.gint* carg5, C.AtkCoordType carg6) {
-// 	return ((C.void (*) (*C.GtkCellAccessibleParent, *C.GtkCellAccessible, C.gint*, C.gint*, C.gint*, C.gint*, C.AtkCoordType))(fnptr))(carg0, carg1, carg2, carg3, carg4, carg5, carg6);
-// }
-// C.void _gotk4_gtk3_CellAccessibleParent_virtual_get_cell_position(void* fnptr, *C.GtkCellAccessibleParent carg0, *C.GtkCellAccessible carg1, C.gint* carg2, C.gint* carg3) {
-// 	return ((C.void (*) (*C.GtkCellAccessibleParent, *C.GtkCellAccessible, C.gint*, C.gint*))(fnptr))(carg0, carg1, carg2, carg3);
-// }
-// C.int _gotk4_gtk3_CellAccessibleParent_virtual_get_child_index(void* fnptr, *C.GtkCellAccessibleParent carg0, *C.GtkCellAccessible carg1) {
-// 	return ((C.int (*) (*C.GtkCellAccessibleParent, *C.GtkCellAccessible))(fnptr))(carg0, carg1);
-// }
-// C.GtkCellRendererState _gotk4_gtk3_CellAccessibleParent_virtual_get_renderer_state(void* fnptr, *C.GtkCellAccessibleParent carg0, *C.GtkCellAccessible carg1) {
-// 	return ((C.GtkCellRendererState (*) (*C.GtkCellAccessibleParent, *C.GtkCellAccessible))(fnptr))(carg0, carg1);
-// }
-// C.gboolean _gotk4_gtk3_CellAccessibleParent_virtual_grab_focus(void* fnptr, *C.GtkCellAccessibleParent carg0, *C.GtkCellAccessible carg1) {
-// 	return ((C.gboolean (*) (*C.GtkCellAccessibleParent, *C.GtkCellAccessible))(fnptr))(carg0, carg1);
-// }
-// C.void _gotk4_gtk3_CellAccessibleParent_virtual_update_relationset(void* fnptr, *C.GtkCellAccessibleParent carg0, *C.GtkCellAccessible carg1, *C.AtkRelationSet carg2) {
-// 	return ((C.void (*) (*C.GtkCellAccessibleParent, *C.GtkCellAccessible, *C.AtkRelationSet))(fnptr))(carg0, carg1, carg2);
-// }
-// extern C.void _gotk4_gtk3_CellEditable_editing_done(*C.GtkCellEditable);
-// extern C.void _gotk4_gtk3_CellEditable_remove_widget(*C.GtkCellEditable);
-// C.void _gotk4_gtk3_CellEditable_virtual_editing_done(void* fnptr, *C.GtkCellEditable carg0) {
-// 	return ((C.void (*) (*C.GtkCellEditable))(fnptr))(carg0);
-// }
-// C.void _gotk4_gtk3_CellEditable_virtual_remove_widget(void* fnptr, *C.GtkCellEditable carg0) {
-// 	return ((C.void (*) (*C.GtkCellEditable))(fnptr))(carg0);
-// }
-// extern C.void _gotk4_gtk3_CellLayout_add_attribute(*C.GtkCellLayout, *C.GtkCellRenderer, *C.gchar, C.gint);
-// extern C.void _gotk4_gtk3_CellLayout_clear(*C.GtkCellLayout);
-// extern C.void _gotk4_gtk3_CellLayout_clear_attributes(*C.GtkCellLayout, *C.GtkCellRenderer);
-// extern *C.GtkCellArea _gotk4_gtk3_CellLayout_get_area(*C.GtkCellLayout);
-// extern *C.GList _gotk4_gtk3_CellLayout_get_cells(*C.GtkCellLayout);
-// extern C.void _gotk4_gtk3_CellLayout_pack_end(*C.GtkCellLayout, *C.GtkCellRenderer, C.gboolean);
-// extern C.void _gotk4_gtk3_CellLayout_pack_start(*C.GtkCellLayout, *C.GtkCellRenderer, C.gboolean);
-// extern C.void _gotk4_gtk3_CellLayout_reorder(*C.GtkCellLayout, *C.GtkCellRenderer, C.gint);
-// C.void _gotk4_gtk3_CellLayout_virtual_add_attribute(void* fnptr, *C.GtkCellLayout carg0, *C.GtkCellRenderer carg1, *C.gchar carg2, C.gint carg3) {
-// 	return ((C.void (*) (*C.GtkCellLayout, *C.GtkCellRenderer, *C.gchar, C.gint))(fnptr))(carg0, carg1, carg2, carg3);
-// }
-// C.void _gotk4_gtk3_CellLayout_virtual_clear(void* fnptr, *C.GtkCellLayout carg0) {
-// 	return ((C.void (*) (*C.GtkCellLayout))(fnptr))(carg0);
-// }
-// C.void _gotk4_gtk3_CellLayout_virtual_clear_attributes(void* fnptr, *C.GtkCellLayout carg0, *C.GtkCellRenderer carg1) {
-// 	return ((C.void (*) (*C.GtkCellLayout, *C.GtkCellRenderer))(fnptr))(carg0, carg1);
-// }
-// *C.GtkCellArea _gotk4_gtk3_CellLayout_virtual_get_area(void* fnptr, *C.GtkCellLayout carg0) {
-// 	return ((*C.GtkCellArea (*) (*C.GtkCellLayout))(fnptr))(carg0);
+// void _gotk4_gtk3_Buildable_virtual_set_name(void* fnptr, GtkBuildable* carg0, const gchar* carg1) {
+// 	return ((void (*) (GtkBuildable*, const gchar*))(fnptr))(carg0, carg1);
+// }
+// extern void _gotk4_gtk3_CellAccessibleParent_activate(GtkCellAccessibleParent*, GtkCellAccessible*);
+// extern void _gotk4_gtk3_CellAccessibleParent_edit(GtkCellAccessibleParent*, GtkCellAccessible*);
+// extern void _gotk4_gtk3_CellAccessibleParent_expand_collapse(GtkCellAccessibleParent*, GtkCellAccessible*);
+// extern void _gotk4_gtk3_CellAccessibleParent_get_cell_area(GtkCellAccessibleParent*, GtkCellAccessible*, GdkRectangle);
+// extern void _gotk4_gtk3_CellAccessibleParent_get_cell_extents(GtkCellAccessibleParent*, GtkCellAccessible*, gint, gint, gint, gint, AtkCoordType);
+// extern void _gotk4_gtk3_CellAccessibleParent_get_cell_position(GtkCellAccessibleParent*, GtkCellAccessible*, gint, gint);
+// extern int _gotk4_gtk3_CellAccessibleParent_get_child_index(GtkCellAccessibleParent*, GtkCellAccessible*);
+// extern GtkCellRendererState _gotk4_gtk3_CellAccessibleParent_get_renderer_state(GtkCellAccessibleParent*, GtkCellAccessible*);
+// extern gboolean _gotk4_gtk3_CellAccessibleParent_grab_focus(GtkCellAccessibleParent*, GtkCellAccessible*);
+// extern void _gotk4_gtk3_CellAccessibleParent_update_relationset(GtkCellAccessibleParent*, GtkCellAccessible*, AtkRelationSet*);
+// void _gotk4_gtk3_CellAccessibleParent_virtual_activate(void* fnptr, GtkCellAccessibleParent* carg0, GtkCellAccessible* carg1) {
+// 	return ((void (*) (GtkCellAccessibleParent*, GtkCellAccessible*))(fnptr))(carg0, carg1);
+// }
+// void _gotk4_gtk3_CellAccessibleParent_virtual_edit(void* fnptr, GtkCellAccessibleParent* carg0, GtkCellAccessible* carg1) {
+// 	return ((void (*) (GtkCellAccessibleParent*, GtkCellAccessible*))(fnptr))(carg0, carg1);
+// }
+// void _gotk4_gtk3_CellAccessibleParent_virtual_expand_collapse(void* fnptr, GtkCellAccessibleParent* carg0, GtkCellAccessible* carg1) {
+// 	return ((void (*) (GtkCellAccessibleParent*, GtkCellAccessible*))(fnptr))(carg0, carg1);
+// }
+// void _gotk4_gtk3_CellAccessibleParent_virtual_get_cell_area(void* fnptr, GtkCellAccessibleParent* carg0, GtkCellAccessible* carg1, GdkRectangle* carg2) {
+// 	return ((void (*) (GtkCellAccessibleParent*, GtkCellAccessible*, GdkRectangle*))(fnptr))(carg0, carg1, carg2);
+// }
+// void _gotk4_gtk3_CellAccessibleParent_virtual_get_cell_extents(void* fnptr, GtkCellAccessibleParent* carg0, GtkCellAccessible* carg1, gint* carg2, gint* carg3, gint* carg4, gint* carg5, AtkCoordType carg6) {
+// 	return ((void (*) (GtkCellAccessibleParent*, GtkCellAccessible*, gint*, gint*, gint*, gint*, AtkCoordType))(fnptr))(carg0, carg1, carg2, carg3, carg4, carg5, carg6);
+// }
+// void _gotk4_gtk3_CellAccessibleParent_virtual_get_cell_position(void* fnptr, GtkCellAccessibleParent* carg0, GtkCellAccessible* carg1, gint* carg2, gint* carg3) {
+// 	return ((void (*) (GtkCellAccessibleParent*, GtkCellAccessible*, gint*, gint*))(fnptr))(carg0, carg1, carg2, carg3);
+// }
+// int _gotk4_gtk3_CellAccessibleParent_virtual_get_child_index(void* fnptr, GtkCellAccessibleParent* carg0, GtkCellAccessible* carg1) {
+// 	return ((int (*) (GtkCellAccessibleParent*, GtkCellAccessible*))(fnptr))(carg0, carg1);
+// }
+// GtkCellRendererState _gotk4_gtk3_CellAccessibleParent_virtual_get_renderer_state(void* fnptr, GtkCellAccessibleParent* carg0, GtkCellAccessible* carg1) {
+// 	return ((GtkCellRendererState (*) (GtkCellAccessibleParent*, GtkCellAccessible*))(fnptr))(carg0, carg1);
+// }
+// gboolean _gotk4_gtk3_CellAccessibleParent_virtual_grab_focus(void* fnptr, GtkCellAccessibleParent* carg0, GtkCellAccessible* carg1) {
+// 	return ((gboolean (*) (GtkCellAccessibleParent*, GtkCellAccessible*))(fnptr))(carg0, carg1);
+// }
+// void _gotk4_gtk3_CellAccessibleParent_virtual_update_relationset(void* fnptr, GtkCellAccessibleParent* carg0, GtkCellAccessible* carg1, AtkRelationSet* carg2) {
+// 	return ((void (*) (GtkCellAccessibleParent*, GtkCellAccessible*, AtkRelationSet*))(fnptr))(carg0, carg1, carg2);
+// }
+// extern void _gotk4_gtk3_CellEditable_editing_done(GtkCellEditable*);
+// extern void _gotk4_gtk3_CellEditable_remove_widget(GtkCellEditable*);
+// void _gotk4_gtk3_CellEditable_virtual_editing_done(void* fnptr, GtkCellEditable* carg0) {
+// 	return ((void (*) (GtkCellEditable*))(fnptr))(carg0);
+// }
+// void _gotk4_gtk3_CellEditable_virtual_remove_widget(void* fnptr, GtkCellEditable* carg0) {
+// 	return ((void (*) (GtkCellEditable*))(fnptr))(carg0);
+// }
+// extern void _gotk4_gtk3_CellLayout_add_attribute(GtkCellLayout*, GtkCellRenderer*, const gchar*, gint);
+// extern void _gotk4_gtk3_CellLayout_clear(GtkCellLayout*);
+// extern void _gotk4_gtk3_CellLayout_clear_attributes(GtkCellLayout*, GtkCellRenderer*);
+// extern GtkCellArea* _gotk4_gtk3_CellLayout_get_area(GtkCellLayout*);
+// extern GList* _gotk4_gtk3_CellLayout_get_cells(GtkCellLayout*);
+// extern void _gotk4_gtk3_CellLayout_pack_end(GtkCellLayout*, GtkCellRenderer*, gboolean);
+// extern void _gotk4_gtk3_CellLayout_pack_start(GtkCellLayout*, GtkCellRenderer*, gboolean);
+// extern void _gotk4_gtk3_CellLayout_reorder(GtkCellLayout*, GtkCellRenderer*, gint);
+// void _gotk4_gtk3_CellLayout_virtual_add_attribute(void* fnptr, GtkCellLayout* carg0, GtkCellRenderer* carg1, const gchar* carg2, gint carg3) {
+// 	return ((void (*) (GtkCellLayout*, GtkCellRenderer*, const gchar*, gint))(fnptr))(carg0, carg1, carg2, carg3);
+// }
+// void _gotk4_gtk3_CellLayout_virtual_clear(void* fnptr, GtkCellLayout* carg0) {
+// 	return ((void (*) (GtkCellLayout*))(fnptr))(carg0);
+// }
+// void _gotk4_gtk3_CellLayout_virtual_clear_attributes(void* fnptr, GtkCellLayout* carg0, GtkCellRenderer* carg1) {
+// 	return ((void (*) (GtkCellLayout*, GtkCellRenderer*))(fnptr))(carg0, carg1);
+// }
+// GtkCellArea* _gotk4_gtk3_CellLayout_virtual_get_area(void* fnptr, GtkCellLayout* carg0) {
+// 	return ((GtkCellArea* (*) (GtkCellLayout*))(fnptr))(carg0);
 // }
-// *C.GList _gotk4_gtk3_CellLayout_virtual_get_cells(void* fnptr, *C.GtkCellLayout carg0) {
-// 	return ((*C.GList (*) (*C.GtkCellLayout))(fnptr))(carg0);
+// GList* _gotk4_gtk3_CellLayout_virtual_get_cells(void* fnptr, GtkCellLayout* carg0) {
+// 	return ((GList* (*) (GtkCellLayout*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_CellLayout_virtual_pack_end(void* fnptr, *C.GtkCellLayout carg0, *C.GtkCellRenderer carg1, C.gboolean carg2) {
-// 	return ((C.void (*) (*C.GtkCellLayout, *C.GtkCellRenderer, C.gboolean))(fnptr))(carg0, carg1, carg2);
+// void _gotk4_gtk3_CellLayout_virtual_pack_end(void* fnptr, GtkCellLayout* carg0, GtkCellRenderer* carg1, gboolean carg2) {
+// 	return ((void (*) (GtkCellLayout*, GtkCellRenderer*, gboolean))(fnptr))(carg0, carg1, carg2);
 // }
-// C.void _gotk4_gtk3_CellLayout_virtual_pack_start(void* fnptr, *C.GtkCellLayout carg0, *C.GtkCellRenderer carg1, C.gboolean carg2) {
-// 	return ((C.void (*) (*C.GtkCellLayout, *C.GtkCellRenderer, C.gboolean))(fnptr))(carg0, carg1, carg2);
+// void _gotk4_gtk3_CellLayout_virtual_pack_start(void* fnptr, GtkCellLayout* carg0, GtkCellRenderer* carg1, gboolean carg2) {
+// 	return ((void (*) (GtkCellLayout*, GtkCellRenderer*, gboolean))(fnptr))(carg0, carg1, carg2);
 // }
-// C.void _gotk4_gtk3_CellLayout_virtual_reorder(void* fnptr, *C.GtkCellLayout carg0, *C.GtkCellRenderer carg1, C.gint carg2) {
-// 	return ((C.void (*) (*C.GtkCellLayout, *C.GtkCellRenderer, C.gint))(fnptr))(carg0, carg1, carg2);
+// void _gotk4_gtk3_CellLayout_virtual_reorder(void* fnptr, GtkCellLayout* carg0, GtkCellRenderer* carg1, gint carg2) {
+// 	return ((void (*) (GtkCellLayout*, GtkCellRenderer*, gint))(fnptr))(carg0, carg1, carg2);
 // }
-// extern C.void _gotk4_gtk3_ColorChooser_add_palette(*C.GtkColorChooser, C.GtkOrientation, C.gint, C.gint, *C.GdkRGBA);
-// extern C.void _gotk4_gtk3_ColorChooser_color_activated(*C.GtkColorChooser, *C.GdkRGBA);
-// extern C.void _gotk4_gtk3_ColorChooser_get_rgba(*C.GtkColorChooser, C.GdkRGBA);
-// extern C.void _gotk4_gtk3_ColorChooser_set_rgba(*C.GtkColorChooser, *C.GdkRGBA);
-// C.void _gotk4_gtk3_ColorChooser_virtual_add_palette(void* fnptr, *C.GtkColorChooser carg0, C.GtkOrientation carg1, C.gint carg2, C.gint carg3, *C.GdkRGBA carg4) {
-// 	return ((C.void (*) (*C.GtkColorChooser, C.GtkOrientation, C.gint, C.gint, *C.GdkRGBA))(fnptr))(carg0, carg1, carg2, carg3, carg4);
-// }
-// C.void _gotk4_gtk3_ColorChooser_virtual_color_activated(void* fnptr, *C.GtkColorChooser carg0, *C.GdkRGBA carg1) {
-// 	return ((C.void (*) (*C.GtkColorChooser, *C.GdkRGBA))(fnptr))(carg0, carg1);
-// }
-// C.void _gotk4_gtk3_ColorChooser_virtual_get_rgba(void* fnptr, *C.GtkColorChooser carg0, C.GdkRGBA* carg1) {
-// 	return ((C.void (*) (*C.GtkColorChooser, C.GdkRGBA*))(fnptr))(carg0, carg1);
-// }
-// C.void _gotk4_gtk3_ColorChooser_virtual_set_rgba(void* fnptr, *C.GtkColorChooser carg0, *C.GdkRGBA carg1) {
-// 	return ((C.void (*) (*C.GtkColorChooser, *C.GdkRGBA))(fnptr))(carg0, carg1);
-// }
-// extern C.void _gotk4_gtk3_Editable_changed(*C.GtkEditable);
-// extern C.void _gotk4_gtk3_Editable_delete_text(*C.GtkEditable, C.gint, C.gint);
-// extern C.void _gotk4_gtk3_Editable_do_delete_text(*C.GtkEditable, C.gint, C.gint);
-// extern *C.gchar _gotk4_gtk3_Editable_get_chars(*C.GtkEditable, C.gint, C.gint);
-// extern C.gint _gotk4_gtk3_Editable_get_position(*C.GtkEditable);
-// extern C.gboolean _gotk4_gtk3_Editable_get_selection_bounds(*C.GtkEditable, C.gint, C.gint);
-// extern C.void _gotk4_gtk3_Editable_set_position(*C.GtkEditable, C.gint);
-// extern C.void _gotk4_gtk3_Editable_set_selection_bounds(*C.GtkEditable, C.gint, C.gint);
-// C.void _gotk4_gtk3_Editable_virtual_changed(void* fnptr, *C.GtkEditable carg0) {
-// 	return ((C.void (*) (*C.GtkEditable))(fnptr))(carg0);
+// extern void _gotk4_gtk3_ColorChooser_add_palette(GtkColorChooser*, GtkOrientation, gint, gint, GdkRGBA*);
+// extern void _gotk4_gtk3_ColorChooser_color_activated(GtkColorChooser*, const GdkRGBA*);
+// extern void _gotk4_gtk3_ColorChooser_get_rgba(GtkColorChooser*, GdkRGBA);
+// extern void _gotk4_gtk3_ColorChooser_set_rgba(GtkColorChooser*, const GdkRGBA*);
+// void _gotk4_gtk3_ColorChooser_virtual_add_palette(void* fnptr, GtkColorChooser* carg0, GtkOrientation carg1, gint carg2, gint carg3, GdkRGBA* carg4) {
+// 	return ((void (*) (GtkColorChooser*, GtkOrientation, gint, gint, GdkRGBA*))(fnptr))(carg0, carg1, carg2, carg3, carg4);
+// }
+// void _gotk4_gtk3_ColorChooser_virtual_color_activated(void* fnptr, GtkColorChooser* carg0, const GdkRGBA* carg1) {
+// 	return ((void (*) (GtkColorChooser*, const GdkRGBA*))(fnptr))(carg0, carg1);
+// }
+// void _gotk4_gtk3_ColorChooser_virtual_get_rgba(void* fnptr, GtkColorChooser* carg0, GdkRGBA* carg1) {
+// 	return ((void (*) (GtkColorChooser*, GdkRGBA*))(fnptr))(carg0, carg1);
+// }
+// void _gotk4_gtk3_ColorChooser_virtual_set_rgba(void* fnptr, GtkColorChooser* carg0, const GdkRGBA* carg1) {
+// 	return ((void (*) (GtkColorChooser*, const GdkRGBA*))(fnptr))(carg0, carg1);
+// }
+// extern void _gotk4_gtk3_Editable_changed(GtkEditable*);
+// extern void _gotk4_gtk3_Editable_delete_text(GtkEditable*, gint, gint);
+// extern void _gotk4_gtk3_Editable_do_delete_text(GtkEditable*, gint, gint);
+// extern gchar* _gotk4_gtk3_Editable_get_chars(GtkEditable*, gint, gint);
+// extern gint _gotk4_gtk3_Editable_get_position(GtkEditable*);
+// extern gboolean _gotk4_gtk3_Editable_get_selection_bounds(GtkEditable*, gint, gint);
+// extern void _gotk4_gtk3_Editable_set_position(GtkEditable*, gint);
+// extern void _gotk4_gtk3_Editable_set_selection_bounds(GtkEditable*, gint, gint);
+// void _gotk4_gtk3_Editable_virtual_changed(void* fnptr, GtkEditable* carg0) {
+// 	return ((void (*) (GtkEditable*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_Editable_virtual_delete_text(void* fnptr, *C.GtkEditable carg0, C.gint carg1, C.gint carg2) {
-// 	return ((C.void (*) (*C.GtkEditable, C.gint, C.gint))(fnptr))(carg0, carg1, carg2);
+// void _gotk4_gtk3_Editable_virtual_delete_text(void* fnptr, GtkEditable* carg0, gint carg1, gint carg2) {
+// 	return ((void (*) (GtkEditable*, gint, gint))(fnptr))(carg0, carg1, carg2);
 // }
-// C.void _gotk4_gtk3_Editable_virtual_do_delete_text(void* fnptr, *C.GtkEditable carg0, C.gint carg1, C.gint carg2) {
-// 	return ((C.void (*) (*C.GtkEditable, C.gint, C.gint))(fnptr))(carg0, carg1, carg2);
+// void _gotk4_gtk3_Editable_virtual_do_delete_text(void* fnptr, GtkEditable* carg0, gint carg1, gint carg2) {
+// 	return ((void (*) (GtkEditable*, gint, gint))(fnptr))(carg0, carg1, carg2);
 // }
-// *C.gchar _gotk4_gtk3_Editable_virtual_get_chars(void* fnptr, *C.GtkEditable carg0, C.gint carg1, C.gint carg2) {
-// 	return ((*C.gchar (*) (*C.GtkEditable, C.gint, C.gint))(fnptr))(carg0, carg1, carg2);
+// gchar* _gotk4_gtk3_Editable_virtual_get_chars(void* fnptr, GtkEditable* carg0, gint carg1, gint carg2) {
+// 	return ((gchar* (*) (GtkEditable*, gint, gint))(fnptr))(carg0, carg1, carg2);
 // }
-// C.gint _gotk4_gtk3_Editable_virtual_get_position(void* fnptr, *C.GtkEditable carg0) {
-// 	return ((C.gint (*) (*C.GtkEditable))(fnptr))(carg0);
+// gint _gotk4_gtk3_Editable_virtual_get_position(void* fnptr, GtkEditable* carg0) {
+// 	return ((gint (*) (GtkEditable*))(fnptr))(carg0);
 // }
-// C.gboolean _gotk4_gtk3_Editable_virtual_get_selection_bounds(void* fnptr, *C.GtkEditable carg0, C.gint* carg1, C.gint* carg2) {
-// 	return ((C.gboolean (*) (*C.GtkEditable, C.gint*, C.gint*))(fnptr))(carg0, carg1, carg2);
+// gboolean _gotk4_gtk3_Editable_virtual_get_selection_bounds(void* fnptr, GtkEditable* carg0, gint* carg1, gint* carg2) {
+// 	return ((gboolean (*) (GtkEditable*, gint*, gint*))(fnptr))(carg0, carg1, carg2);
 // }
-// C.void _gotk4_gtk3_Editable_virtual_set_position(void* fnptr, *C.GtkEditable carg0, C.gint carg1) {
-// 	return ((C.void (*) (*C.GtkEditable, C.gint))(fnptr))(carg0, carg1);
+// void _gotk4_gtk3_Editable_virtual_set_position(void* fnptr, GtkEditable* carg0, gint carg1) {
+// 	return ((void (*) (GtkEditable*, gint))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gtk3_Editable_virtual_set_selection_bounds(void* fnptr, *C.GtkEditable carg0, C.gint carg1, C.gint carg2) {
-// 	return ((C.void (*) (*C.GtkEditable, C.gint, C.gint))(fnptr))(carg0, carg1, carg2);
+// void _gotk4_gtk3_Editable_virtual_set_selection_bounds(void* fnptr, GtkEditable* carg0, gint carg1, gint carg2) {
+// 	return ((void (*) (GtkEditable*, gint, gint))(fnptr))(carg0, carg1, carg2);
 // }
-// extern C.void _gotk4_gtk3_FontChooser_font_activated(*C.GtkFontChooser, *C.gchar);
-// extern *C.PangoFontFace _gotk4_gtk3_FontChooser_get_font_face(*C.GtkFontChooser);
-// extern *C.PangoFontFamily _gotk4_gtk3_FontChooser_get_font_family(*C.GtkFontChooser);
-// extern *C.PangoFontMap _gotk4_gtk3_FontChooser_get_font_map(*C.GtkFontChooser);
-// extern C.gint _gotk4_gtk3_FontChooser_get_font_size(*C.GtkFontChooser);
-// extern C.void _gotk4_gtk3_FontChooser_set_font_map(*C.GtkFontChooser, *C.PangoFontMap);
-// C.void _gotk4_gtk3_FontChooser_virtual_font_activated(void* fnptr, *C.GtkFontChooser carg0, *C.gchar carg1) {
-// 	return ((C.void (*) (*C.GtkFontChooser, *C.gchar))(fnptr))(carg0, carg1);
+// extern void _gotk4_gtk3_FontChooser_font_activated(GtkFontChooser*, const gchar*);
+// extern PangoFontFace* _gotk4_gtk3_FontChooser_get_font_face(GtkFontChooser*);
+// extern PangoFontFamily* _gotk4_gtk3_FontChooser_get_font_family(GtkFontChooser*);
+// extern PangoFontMap* _gotk4_gtk3_FontChooser_get_font_map(GtkFontChooser*);
+// extern gint _gotk4_gtk3_FontChooser_get_font_size(GtkFontChooser*);
+// extern void _gotk4_gtk3_FontChooser_set_font_map(GtkFontChooser*, PangoFontMap*);
+// void _gotk4_gtk3_FontChooser_virtual_font_activated(void* fnptr, GtkFontChooser* carg0, const gchar* carg1) {
+// 	return ((void (*) (GtkFontChooser*, const gchar*))(fnptr))(carg0, carg1);
 // }
-// *C.PangoFontFace _gotk4_gtk3_FontChooser_virtual_get_font_face(void* fnptr, *C.GtkFontChooser carg0) {
-// 	return ((*C.PangoFontFace (*) (*C.GtkFontChooser))(fnptr))(carg0);
-// }
-// *C.PangoFontFamily _gotk4_gtk3_FontChooser_virtual_get_font_family(void* fnptr, *C.GtkFontChooser carg0) {
-// 	return ((*C.PangoFontFamily (*) (*C.GtkFontChooser))(fnptr))(carg0);
-// }
-// *C.PangoFontMap _gotk4_gtk3_FontChooser_virtual_get_font_map(void* fnptr, *C.GtkFontChooser carg0) {
-// 	return ((*C.PangoFontMap (*) (*C.GtkFontChooser))(fnptr))(carg0);
-// }
-// C.gint _gotk4_gtk3_FontChooser_virtual_get_font_size(void* fnptr, *C.GtkFontChooser carg0) {
-// 	return ((C.gint (*) (*C.GtkFontChooser))(fnptr))(carg0);
+// PangoFontFace* _gotk4_gtk3_FontChooser_virtual_get_font_face(void* fnptr, GtkFontChooser* carg0) {
+// 	return ((PangoFontFace* (*) (GtkFontChooser*))(fnptr))(carg0);
+// }
+// PangoFontFamily* _gotk4_gtk3_FontChooser_virtual_get_font_family(void* fnptr, GtkFontChooser* carg0) {
+// 	return ((PangoFontFamily* (*) (GtkFontChooser*))(fnptr))(carg0);
+// }
+// PangoFontMap* _gotk4_gtk3_FontChooser_virtual_get_font_map(void* fnptr, GtkFontChooser* carg0) {
+// 	return ((PangoFontMap* (*) (GtkFontChooser*))(fnptr))(carg0);
+// }
+// gint _gotk4_gtk3_FontChooser_virtual_get_font_size(void* fnptr, GtkFontChooser* carg0) {
+// 	return ((gint (*) (GtkFontChooser*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_FontChooser_virtual_set_font_map(void* fnptr, *C.GtkFontChooser carg0, *C.PangoFontMap carg1) {
-// 	return ((C.void (*) (*C.GtkFontChooser, *C.PangoFontMap))(fnptr))(carg0, carg1);
+// void _gotk4_gtk3_FontChooser_virtual_set_font_map(void* fnptr, GtkFontChooser* carg0, PangoFontMap* carg1) {
+// 	return ((void (*) (GtkFontChooser*, PangoFontMap*))(fnptr))(carg0, carg1);
 // }
-// extern C.void _gotk4_gtk3_PrintOperationPreview_end_preview(*C.GtkPrintOperationPreview);
-// extern C.void _gotk4_gtk3_PrintOperationPreview_got_page_size(*C.GtkPrintOperationPreview, *C.GtkPrintContext, *C.GtkPageSetup);
-// extern C.gboolean _gotk4_gtk3_PrintOperationPreview_is_selected(*C.GtkPrintOperationPreview, C.gint);
-// extern C.void _gotk4_gtk3_PrintOperationPreview_ready(*C.GtkPrintOperationPreview, *C.GtkPrintContext);
-// extern C.void _gotk4_gtk3_PrintOperationPreview_render_page(*C.GtkPrintOperationPreview, C.gint);
-// C.void _gotk4_gtk3_PrintOperationPreview_virtual_end_preview(void* fnptr, *C.GtkPrintOperationPreview carg0) {
-// 	return ((C.void (*) (*C.GtkPrintOperationPreview))(fnptr))(carg0);
+// extern void _gotk4_gtk3_PrintOperationPreview_end_preview(GtkPrintOperationPreview*);
+// extern void _gotk4_gtk3_PrintOperationPreview_got_page_size(GtkPrintOperationPreview*, GtkPrintContext*, GtkPageSetup*);
+// extern gboolean _gotk4_gtk3_PrintOperationPreview_is_selected(GtkPrintOperationPreview*, gint);
+// extern void _gotk4_gtk3_PrintOperationPreview_ready(GtkPrintOperationPreview*, GtkPrintContext*);
+// extern void _gotk4_gtk3_PrintOperationPreview_render_page(GtkPrintOperationPreview*, gint);
+// void _gotk4_gtk3_PrintOperationPreview_virtual_end_preview(void* fnptr, GtkPrintOperationPreview* carg0) {
+// 	return ((void (*) (GtkPrintOperationPreview*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_PrintOperationPreview_virtual_got_page_size(void* fnptr, *C.GtkPrintOperationPreview carg0, *C.GtkPrintContext carg1, *C.GtkPageSetup carg2) {
-// 	return ((C.void (*) (*C.GtkPrintOperationPreview, *C.GtkPrintContext, *C.GtkPageSetup))(fnptr))(carg0, carg1, carg2);
+// void _gotk4_gtk3_PrintOperationPreview_virtual_got_page_size(void* fnptr, GtkPrintOperationPreview* carg0, GtkPrintContext* carg1, GtkPageSetup* carg2) {
+// 	return ((void (*) (GtkPrintOperationPreview*, GtkPrintContext*, GtkPageSetup*))(fnptr))(carg0, carg1, carg2);
 // }
-// C.gboolean _gotk4_gtk3_PrintOperationPreview_virtual_is_selected(void* fnptr, *C.GtkPrintOperationPreview carg0, C.gint carg1) {
-// 	return ((C.gboolean (*) (*C.GtkPrintOperationPreview, C.gint))(fnptr))(carg0, carg1);
+// gboolean _gotk4_gtk3_PrintOperationPreview_virtual_is_selected(void* fnptr, GtkPrintOperationPreview* carg0, gint carg1) {
+// 	return ((gboolean (*) (GtkPrintOperationPreview*, gint))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gtk3_PrintOperationPreview_virtual_ready(void* fnptr, *C.GtkPrintOperationPreview carg0, *C.GtkPrintContext carg1) {
-// 	return ((C.void (*) (*C.GtkPrintOperationPreview, *C.GtkPrintContext))(fnptr))(carg0, carg1);
+// void _gotk4_gtk3_PrintOperationPreview_virtual_ready(void* fnptr, GtkPrintOperationPreview* carg0, GtkPrintContext* carg1) {
+// 	return ((void (*) (GtkPrintOperationPreview*, GtkPrintContext*))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gtk3_PrintOperationPreview_virtual_render_page(void* fnptr, *C.GtkPrintOperationPreview carg0, C.gint carg1) {
-// 	return ((C.void (*) (*C.GtkPrintOperationPreview, C.gint))(fnptr))(carg0, carg1);
+// void _gotk4_gtk3_PrintOperationPreview_virtual_render_page(void* fnptr, GtkPrintOperationPreview* carg0, gint carg1) {
+// 	return ((void (*) (GtkPrintOperationPreview*, gint))(fnptr))(carg0, carg1);
 // }
-// extern C.void _gotk4_gtk3_RecentChooser_add_filter(*C.GtkRecentChooser, *C.GtkRecentFilter);
-// extern *C.gchar _gotk4_gtk3_RecentChooser_get_current_uri(*C.GtkRecentChooser);
-// extern *C.GList _gotk4_gtk3_RecentChooser_get_items(*C.GtkRecentChooser);
-// extern C.void _gotk4_gtk3_RecentChooser_item_activated(*C.GtkRecentChooser);
-// extern *C.GSList _gotk4_gtk3_RecentChooser_list_filters(*C.GtkRecentChooser);
-// extern C.void _gotk4_gtk3_RecentChooser_remove_filter(*C.GtkRecentChooser, *C.GtkRecentFilter);
-// extern C.void _gotk4_gtk3_RecentChooser_select_all(*C.GtkRecentChooser);
-// extern C.gboolean _gotk4_gtk3_RecentChooser_select_uri(*C.GtkRecentChooser, *C.gchar, GError*);
-// extern C.void _gotk4_gtk3_RecentChooser_selection_changed(*C.GtkRecentChooser);
-// extern C.gboolean _gotk4_gtk3_RecentChooser_set_current_uri(*C.GtkRecentChooser, *C.gchar, GError*);
-// extern C.void _gotk4_gtk3_RecentChooser_unselect_all(*C.GtkRecentChooser);
-// extern C.void _gotk4_gtk3_RecentChooser_unselect_uri(*C.GtkRecentChooser, *C.gchar);
-// C.void _gotk4_gtk3_RecentChooser_virtual_add_filter(void* fnptr, *C.GtkRecentChooser carg0, *C.GtkRecentFilter carg1) {
-// 	return ((C.void (*) (*C.GtkRecentChooser, *C.GtkRecentFilter))(fnptr))(carg0, carg1);
+// extern void _gotk4_gtk3_RecentChooser_add_filter(GtkRecentChooser*, GtkRecentFilter*);
+// extern gchar* _gotk4_gtk3_RecentChooser_get_current_uri(GtkRecentChooser*);
+// extern GList* _gotk4_gtk3_RecentChooser_get_items(GtkRecentChooser*);
+// extern void _gotk4_gtk3_RecentChooser_item_activated(GtkRecentChooser*);
+// extern GSList* _gotk4_gtk3_RecentChooser_list_filters(GtkRecentChooser*);
+// extern void _gotk4_gtk3_RecentChooser_remove_filter(GtkRecentChooser*, GtkRecentFilter*);
+// extern void _gotk4_gtk3_RecentChooser_select_all(GtkRecentChooser*);
+// extern gboolean _gotk4_gtk3_RecentChooser_select_uri(GtkRecentChooser*, const gchar*, GError*);
+// extern void _gotk4_gtk3_RecentChooser_selection_changed(GtkRecentChooser*);
+// extern gboolean _gotk4_gtk3_RecentChooser_set_current_uri(GtkRecentChooser*, const gchar*, GError*);
+// extern void _gotk4_gtk3_RecentChooser_unselect_all(GtkRecentChooser*);
+// extern void _gotk4_gtk3_RecentChooser_unselect_uri(GtkRecentChooser*, const gchar*);
+// void _gotk4_gtk3_RecentChooser_virtual_add_filter(void* fnptr, GtkRecentChooser* carg0, GtkRecentFilter* carg1) {
+// 	return ((void (*) (GtkRecentChooser*, GtkRecentFilter*))(fnptr))(carg0, carg1);
 // }
-// *C.gchar _gotk4_gtk3_RecentChooser_virtual_get_current_uri(void* fnptr, *C.GtkRecentChooser carg0) {
-// 	return ((*C.gchar (*) (*C.GtkRecentChooser))(fnptr))(carg0);
+// gchar* _gotk4_gtk3_RecentChooser_virtual_get_current_uri(void* fnptr, GtkRecentChooser* carg0) {
+// 	return ((gchar* (*) (GtkRecentChooser*))(fnptr))(carg0);
 // }
-// *C.GList _gotk4_gtk3_RecentChooser_virtual_get_items(void* fnptr, *C.GtkRecentChooser carg0) {
-// 	return ((*C.GList (*) (*C.GtkRecentChooser))(fnptr))(carg0);
+// GList* _gotk4_gtk3_RecentChooser_virtual_get_items(void* fnptr, GtkRecentChooser* carg0) {
+// 	return ((GList* (*) (GtkRecentChooser*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_RecentChooser_virtual_item_activated(void* fnptr, *C.GtkRecentChooser carg0) {
-// 	return ((C.void (*) (*C.GtkRecentChooser))(fnptr))(carg0);
-// }
-// *C.GSList _gotk4_gtk3_RecentChooser_virtual_list_filters(void* fnptr, *C.GtkRecentChooser carg0) {
-// 	return ((*C.GSList (*) (*C.GtkRecentChooser))(fnptr))(carg0);
-// }
-// C.void _gotk4_gtk3_RecentChooser_virtual_remove_filter(void* fnptr, *C.GtkRecentChooser carg0, *C.GtkRecentFilter carg1) {
-// 	return ((C.void (*) (*C.GtkRecentChooser, *C.GtkRecentFilter))(fnptr))(carg0, carg1);
-// }
-// C.void _gotk4_gtk3_RecentChooser_virtual_select_all(void* fnptr, *C.GtkRecentChooser carg0) {
-// 	return ((C.void (*) (*C.GtkRecentChooser))(fnptr))(carg0);
-// }
-// C.gboolean _gotk4_gtk3_RecentChooser_virtual_select_uri(void* fnptr, *C.GtkRecentChooser carg0, *C.gchar carg1, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GtkRecentChooser, *C.gchar, GError**))(fnptr))(carg0, carg1, _cerr);
-// }
-// C.void _gotk4_gtk3_RecentChooser_virtual_selection_changed(void* fnptr, *C.GtkRecentChooser carg0) {
-// 	return ((C.void (*) (*C.GtkRecentChooser))(fnptr))(carg0);
-// }
-// C.gboolean _gotk4_gtk3_RecentChooser_virtual_set_current_uri(void* fnptr, *C.GtkRecentChooser carg0, *C.gchar carg1, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GtkRecentChooser, *C.gchar, GError**))(fnptr))(carg0, carg1, _cerr);
-// }
-// C.void _gotk4_gtk3_RecentChooser_virtual_unselect_all(void* fnptr, *C.GtkRecentChooser carg0) {
-// 	return ((C.void (*) (*C.GtkRecentChooser))(fnptr))(carg0);
-// }
-// C.void _gotk4_gtk3_RecentChooser_virtual_unselect_uri(void* fnptr, *C.GtkRecentChooser carg0, *C.gchar carg1) {
-// 	return ((C.void (*) (*C.GtkRecentChooser, *C.gchar))(fnptr))(carg0, carg1);
-// }
-// extern C.gboolean _gotk4_gtk3_Scrollable_get_border(*C.GtkScrollable, C.GtkBorder);
-// C.gboolean _gotk4_gtk3_Scrollable_virtual_get_border(void* fnptr, *C.GtkScrollable carg0, C.GtkBorder* carg1) {
-// 	return ((C.gboolean (*) (*C.GtkScrollable, C.GtkBorder*))(fnptr))(carg0, carg1);
-// }
-// extern C.gboolean _gotk4_gtk3_StyleProvider_get_style_property(*C.GtkStyleProvider, *C.GtkWidgetPath, C.GtkStateFlags, *C.GParamSpec, C.GValue);
-// C.gboolean _gotk4_gtk3_StyleProvider_virtual_get_style_property(void* fnptr, *C.GtkStyleProvider carg0, *C.GtkWidgetPath carg1, C.GtkStateFlags carg2, *C.GParamSpec carg3, C.GValue* carg4) {
-// 	return ((C.gboolean (*) (*C.GtkStyleProvider, *C.GtkWidgetPath, C.GtkStateFlags, *C.GParamSpec, C.GValue*))(fnptr))(carg0, carg1, carg2, carg3, carg4);
-// }
-// extern C.PangoEllipsizeMode _gotk4_gtk3_ToolShell_get_ellipsize_mode(*C.GtkToolShell);
-// extern C.GtkIconSize _gotk4_gtk3_ToolShell_get_icon_size(*C.GtkToolShell);
-// extern C.GtkOrientation _gotk4_gtk3_ToolShell_get_orientation(*C.GtkToolShell);
-// extern C.GtkReliefStyle _gotk4_gtk3_ToolShell_get_relief_style(*C.GtkToolShell);
-// extern C.GtkToolbarStyle _gotk4_gtk3_ToolShell_get_style(*C.GtkToolShell);
-// extern C.gfloat _gotk4_gtk3_ToolShell_get_text_alignment(*C.GtkToolShell);
-// extern C.GtkOrientation _gotk4_gtk3_ToolShell_get_text_orientation(*C.GtkToolShell);
-// extern *C.GtkSizeGroup _gotk4_gtk3_ToolShell_get_text_size_group(*C.GtkToolShell);
-// extern C.void _gotk4_gtk3_ToolShell_rebuild_menu(*C.GtkToolShell);
-// C.PangoEllipsizeMode _gotk4_gtk3_ToolShell_virtual_get_ellipsize_mode(void* fnptr, *C.GtkToolShell carg0) {
-// 	return ((C.PangoEllipsizeMode (*) (*C.GtkToolShell))(fnptr))(carg0);
+// void _gotk4_gtk3_RecentChooser_virtual_item_activated(void* fnptr, GtkRecentChooser* carg0) {
+// 	return ((void (*) (GtkRecentChooser*))(fnptr))(carg0);
+// }
+// GSList* _gotk4_gtk3_RecentChooser_virtual_list_filters(void* fnptr, GtkRecentChooser* carg0) {
+// 	return ((GSList* (*) (GtkRecentChooser*))(fnptr))(carg0);
+// }
+// void _gotk4_gtk3_RecentChooser_virtual_remove_filter(void* fnptr, GtkRecentChooser* carg0, GtkRecentFilter* carg1) {
+// 	return ((void (*) (GtkRecentChooser*, GtkRecentFilter*))(fnptr))(carg0, carg1);
+// }
+// void _gotk4_gtk3_RecentChooser_virtual_select_all(void* fnptr, GtkRecentChooser* carg0) {
+// 	return ((void (*) (GtkRecentChooser*))(fnptr))(carg0);
+// }
+// gboolean _gotk4_gtk3_RecentChooser_virtual_select_uri(void* fnptr, GtkRecentChooser* carg0, const gchar* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GtkRecentChooser*, const gchar*, GError**))(fnptr))(carg0, carg1, _cerr);
+// }
+// void _gotk4_gtk3_RecentChooser_virtual_selection_changed(void* fnptr, GtkRecentChooser* carg0) {
+// 	return ((void (*) (GtkRecentChooser*))(fnptr))(carg0);
+// }
+// gboolean _gotk4_gtk3_RecentChooser_virtual_set_current_uri(void* fnptr, GtkRecentChooser* carg0, const gchar* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GtkRecentChooser*, const gchar*, GError**))(fnptr))(carg0, carg1, _cerr);
+// }
+// void _gotk4_gtk3_RecentChooser_virtual_unselect_all(void* fnptr, GtkRecentChooser* carg0) {
+// 	return ((void (*) (GtkRecentChooser*))(fnptr))(carg0);
+// }
+// void _gotk4_gtk3_RecentChooser_virtual_unselect_uri(void* fnptr, GtkRecentChooser* carg0, const gchar* carg1) {
+// 	return ((void (*) (GtkRecentChooser*, const gchar*))(fnptr))(carg0, carg1);
+// }
+// extern gboolean _gotk4_gtk3_Scrollable_get_border(GtkScrollable*, GtkBorder);
+// gboolean _gotk4_gtk3_Scrollable_virtual_get_border(void* fnptr, GtkScrollable* carg0, GtkBorder* carg1) {
+// 	return ((gboolean (*) (GtkScrollable*, GtkBorder*))(fnptr))(carg0, carg1);
+// }
+// extern gboolean _gotk4_gtk3_StyleProvider_get_style_property(GtkStyleProvider*, GtkWidgetPath*, GtkStateFlags, GParamSpec*, GValue);
+// gboolean _gotk4_gtk3_StyleProvider_virtual_get_style_property(void* fnptr, GtkStyleProvider* carg0, GtkWidgetPath* carg1, GtkStateFlags carg2, GParamSpec* carg3, GValue* carg4) {
+// 	return ((gboolean (*) (GtkStyleProvider*, GtkWidgetPath*, GtkStateFlags, GParamSpec*, GValue*))(fnptr))(carg0, carg1, carg2, carg3, carg4);
+// }
+// extern PangoEllipsizeMode _gotk4_gtk3_ToolShell_get_ellipsize_mode(GtkToolShell*);
+// extern GtkIconSize _gotk4_gtk3_ToolShell_get_icon_size(GtkToolShell*);
+// extern GtkOrientation _gotk4_gtk3_ToolShell_get_orientation(GtkToolShell*);
+// extern GtkReliefStyle _gotk4_gtk3_ToolShell_get_relief_style(GtkToolShell*);
+// extern GtkToolbarStyle _gotk4_gtk3_ToolShell_get_style(GtkToolShell*);
+// extern gfloat _gotk4_gtk3_ToolShell_get_text_alignment(GtkToolShell*);
+// extern GtkOrientation _gotk4_gtk3_ToolShell_get_text_orientation(GtkToolShell*);
+// extern GtkSizeGroup* _gotk4_gtk3_ToolShell_get_text_size_group(GtkToolShell*);
+// extern void _gotk4_gtk3_ToolShell_rebuild_menu(GtkToolShell*);
+// PangoEllipsizeMode _gotk4_gtk3_ToolShell_virtual_get_ellipsize_mode(void* fnptr, GtkToolShell* carg0) {
+// 	return ((PangoEllipsizeMode (*) (GtkToolShell*))(fnptr))(carg0);
 // }
-// C.GtkIconSize _gotk4_gtk3_ToolShell_virtual_get_icon_size(void* fnptr, *C.GtkToolShell carg0) {
-// 	return ((C.GtkIconSize (*) (*C.GtkToolShell))(fnptr))(carg0);
+// GtkIconSize _gotk4_gtk3_ToolShell_virtual_get_icon_size(void* fnptr, GtkToolShell* carg0) {
+// 	return ((GtkIconSize (*) (GtkToolShell*))(fnptr))(carg0);
 // }
-// C.GtkOrientation _gotk4_gtk3_ToolShell_virtual_get_orientation(void* fnptr, *C.GtkToolShell carg0) {
-// 	return ((C.GtkOrientation (*) (*C.GtkToolShell))(fnptr))(carg0);
+// GtkOrientation _gotk4_gtk3_ToolShell_virtual_get_orientation(void* fnptr, GtkToolShell* carg0) {
+// 	return ((GtkOrientation (*) (GtkToolShell*))(fnptr))(carg0);
 // }
-// C.GtkReliefStyle _gotk4_gtk3_ToolShell_virtual_get_relief_style(void* fnptr, *C.GtkToolShell carg0) {
-// 	return ((C.GtkReliefStyle (*) (*C.GtkToolShell))(fnptr))(carg0);
+// GtkReliefStyle _gotk4_gtk3_ToolShell_virtual_get_relief_style(void* fnptr, GtkToolShell* carg0) {
+// 	return ((GtkReliefStyle (*) (GtkToolShell*))(fnptr))(carg0);
 // }
-// C.GtkToolbarStyle _gotk4_gtk3_ToolShell_virtual_get_style(void* fnptr, *C.GtkToolShell carg0) {
-// 	return ((C.GtkToolbarStyle (*) (*C.GtkToolShell))(fnptr))(carg0);
+// GtkToolbarStyle _gotk4_gtk3_ToolShell_virtual_get_style(void* fnptr, GtkToolShell* carg0) {
+// 	return ((GtkToolbarStyle (*) (GtkToolShell*))(fnptr))(carg0);
 // }
-// C.gfloat _gotk4_gtk3_ToolShell_virtual_get_text_alignment(void* fnptr, *C.GtkToolShell carg0) {
-// 	return ((C.gfloat (*) (*C.GtkToolShell))(fnptr))(carg0);
+// gfloat _gotk4_gtk3_ToolShell_virtual_get_text_alignment(void* fnptr, GtkToolShell* carg0) {
+// 	return ((gfloat (*) (GtkToolShell*))(fnptr))(carg0);
 // }
-// C.GtkOrientation _gotk4_gtk3_ToolShell_virtual_get_text_orientation(void* fnptr, *C.GtkToolShell carg0) {
-// 	return ((C.GtkOrientation (*) (*C.GtkToolShell))(fnptr))(carg0);
+// GtkOrientation _gotk4_gtk3_ToolShell_virtual_get_text_orientation(void* fnptr, GtkToolShell* carg0) {
+// 	return ((GtkOrientation (*) (GtkToolShell*))(fnptr))(carg0);
 // }
-// *C.GtkSizeGroup _gotk4_gtk3_ToolShell_virtual_get_text_size_group(void* fnptr, *C.GtkToolShell carg0) {
-// 	return ((*C.GtkSizeGroup (*) (*C.GtkToolShell))(fnptr))(carg0);
+// GtkSizeGroup* _gotk4_gtk3_ToolShell_virtual_get_text_size_group(void* fnptr, GtkToolShell* carg0) {
+// 	return ((GtkSizeGroup* (*) (GtkToolShell*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_ToolShell_virtual_rebuild_menu(void* fnptr, *C.GtkToolShell carg0) {
-// 	return ((C.void (*) (*C.GtkToolShell))(fnptr))(carg0);
+// void _gotk4_gtk3_ToolShell_virtual_rebuild_menu(void* fnptr, GtkToolShell* carg0) {
+// 	return ((void (*) (GtkToolShell*))(fnptr))(carg0);
 // }
-// extern C.gboolean _gotk4_gtk3_TreeDragDest_drag_data_received(*C.GtkTreeDragDest, *C.GtkTreePath, *C.GtkSelectionData);
-// extern C.gboolean _gotk4_gtk3_TreeDragDest_row_drop_possible(*C.GtkTreeDragDest, *C.GtkTreePath, *C.GtkSelectionData);
-// C.gboolean _gotk4_gtk3_TreeDragDest_virtual_drag_data_received(void* fnptr, *C.GtkTreeDragDest carg0, *C.GtkTreePath carg1, *C.GtkSelectionData carg2) {
-// 	return ((C.gboolean (*) (*C.GtkTreeDragDest, *C.GtkTreePath, *C.GtkSelectionData))(fnptr))(carg0, carg1, carg2);
+// extern gboolean _gotk4_gtk3_TreeDragDest_drag_data_received(GtkTreeDragDest*, GtkTreePath*, GtkSelectionData*);
+// extern gboolean _gotk4_gtk3_TreeDragDest_row_drop_possible(GtkTreeDragDest*, GtkTreePath*, GtkSelectionData*);
+// gboolean _gotk4_gtk3_TreeDragDest_virtual_drag_data_received(void* fnptr, GtkTreeDragDest* carg0, GtkTreePath* carg1, GtkSelectionData* carg2) {
+// 	return ((gboolean (*) (GtkTreeDragDest*, GtkTreePath*, GtkSelectionData*))(fnptr))(carg0, carg1, carg2);
 // }
-// C.gboolean _gotk4_gtk3_TreeDragDest_virtual_row_drop_possible(void* fnptr, *C.GtkTreeDragDest carg0, *C.GtkTreePath carg1, *C.GtkSelectionData carg2) {
-// 	return ((C.gboolean (*) (*C.GtkTreeDragDest, *C.GtkTreePath, *C.GtkSelectionData))(fnptr))(carg0, carg1, carg2);
+// gboolean _gotk4_gtk3_TreeDragDest_virtual_row_drop_possible(void* fnptr, GtkTreeDragDest* carg0, GtkTreePath* carg1, GtkSelectionData* carg2) {
+// 	return ((gboolean (*) (GtkTreeDragDest*, GtkTreePath*, GtkSelectionData*))(fnptr))(carg0, carg1, carg2);
 // }
-// extern C.gboolean _gotk4_gtk3_TreeDragSource_drag_data_delete(*C.GtkTreeDragSource, *C.GtkTreePath);
-// extern C.gboolean _gotk4_gtk3_TreeDragSource_drag_data_get(*C.GtkTreeDragSource, *C.GtkTreePath, *C.GtkSelectionData);
-// extern C.gboolean _gotk4_gtk3_TreeDragSource_row_draggable(*C.GtkTreeDragSource, *C.GtkTreePath);
-// C.gboolean _gotk4_gtk3_TreeDragSource_virtual_drag_data_delete(void* fnptr, *C.GtkTreeDragSource carg0, *C.GtkTreePath carg1) {
-// 	return ((C.gboolean (*) (*C.GtkTreeDragSource, *C.GtkTreePath))(fnptr))(carg0, carg1);
+// extern gboolean _gotk4_gtk3_TreeDragSource_drag_data_delete(GtkTreeDragSource*, GtkTreePath*);
+// extern gboolean _gotk4_gtk3_TreeDragSource_drag_data_get(GtkTreeDragSource*, GtkTreePath*, GtkSelectionData*);
+// extern gboolean _gotk4_gtk3_TreeDragSource_row_draggable(GtkTreeDragSource*, GtkTreePath*);
+// gboolean _gotk4_gtk3_TreeDragSource_virtual_drag_data_delete(void* fnptr, GtkTreeDragSource* carg0, GtkTreePath* carg1) {
+// 	return ((gboolean (*) (GtkTreeDragSource*, GtkTreePath*))(fnptr))(carg0, carg1);
 // }
-// C.gboolean _gotk4_gtk3_TreeDragSource_virtual_drag_data_get(void* fnptr, *C.GtkTreeDragSource carg0, *C.GtkTreePath carg1, *C.GtkSelectionData carg2) {
-// 	return ((C.gboolean (*) (*C.GtkTreeDragSource, *C.GtkTreePath, *C.GtkSelectionData))(fnptr))(carg0, carg1, carg2);
+// gboolean _gotk4_gtk3_TreeDragSource_virtual_drag_data_get(void* fnptr, GtkTreeDragSource* carg0, GtkTreePath* carg1, GtkSelectionData* carg2) {
+// 	return ((gboolean (*) (GtkTreeDragSource*, GtkTreePath*, GtkSelectionData*))(fnptr))(carg0, carg1, carg2);
 // }
-// C.gboolean _gotk4_gtk3_TreeDragSource_virtual_row_draggable(void* fnptr, *C.GtkTreeDragSource carg0, *C.GtkTreePath carg1) {
-// 	return ((C.gboolean (*) (*C.GtkTreeDragSource, *C.GtkTreePath))(fnptr))(carg0, carg1);
+// gboolean _gotk4_gtk3_TreeDragSource_virtual_row_draggable(void* fnptr, GtkTreeDragSource* carg0, GtkTreePath* carg1) {
+// 	return ((gboolean (*) (GtkTreeDragSource*, GtkTreePath*))(fnptr))(carg0, carg1);
 // }
-// extern C.GType _gotk4_gtk3_TreeModel_get_column_type(*C.GtkTreeModel, C.gint);
-// extern C.GtkTreeModelFlags _gotk4_gtk3_TreeModel_get_flags(*C.GtkTreeModel);
-// extern C.gboolean _gotk4_gtk3_TreeModel_get_iter(*C.GtkTreeModel, C.GtkTreeIter, *C.GtkTreePath);
-// extern C.gint _gotk4_gtk3_TreeModel_get_n_columns(*C.GtkTreeModel);
-// extern *C.GtkTreePath _gotk4_gtk3_TreeModel_get_path(*C.GtkTreeModel, *C.GtkTreeIter);
-// extern C.void _gotk4_gtk3_TreeModel_get_value(*C.GtkTreeModel, *C.GtkTreeIter, C.gint, C.GValue);
-// extern C.gboolean _gotk4_gtk3_TreeModel_iter_children(*C.GtkTreeModel, C.GtkTreeIter, *C.GtkTreeIter);
-// extern C.gboolean _gotk4_gtk3_TreeModel_iter_has_child(*C.GtkTreeModel, *C.GtkTreeIter);
-// extern C.gint _gotk4_gtk3_TreeModel_iter_n_children(*C.GtkTreeModel, *C.GtkTreeIter);
-// extern C.gboolean _gotk4_gtk3_TreeModel_iter_next(*C.GtkTreeModel, *C.GtkTreeIter);
-// extern C.gboolean _gotk4_gtk3_TreeModel_iter_nth_child(*C.GtkTreeModel, C.GtkTreeIter, *C.GtkTreeIter, C.gint);
-// extern C.gboolean _gotk4_gtk3_TreeModel_iter_parent(*C.GtkTreeModel, C.GtkTreeIter, *C.GtkTreeIter);
-// extern C.gboolean _gotk4_gtk3_TreeModel_iter_previous(*C.GtkTreeModel, *C.GtkTreeIter);
-// extern C.void _gotk4_gtk3_TreeModel_ref_node(*C.GtkTreeModel, *C.GtkTreeIter);
-// extern C.void _gotk4_gtk3_TreeModel_row_changed(*C.GtkTreeModel, *C.GtkTreePath, *C.GtkTreeIter);
-// extern C.void _gotk4_gtk3_TreeModel_row_deleted(*C.GtkTreeModel, *C.GtkTreePath);
-// extern C.void _gotk4_gtk3_TreeModel_row_has_child_toggled(*C.GtkTreeModel, *C.GtkTreePath, *C.GtkTreeIter);
-// extern C.void _gotk4_gtk3_TreeModel_row_inserted(*C.GtkTreeModel, *C.GtkTreePath, *C.GtkTreeIter);
-// extern C.void _gotk4_gtk3_TreeModel_unref_node(*C.GtkTreeModel, *C.GtkTreeIter);
-// C.GType _gotk4_gtk3_TreeModel_virtual_get_column_type(void* fnptr, *C.GtkTreeModel carg0, C.gint carg1) {
-// 	return ((C.GType (*) (*C.GtkTreeModel, C.gint))(fnptr))(carg0, carg1);
+// extern GType _gotk4_gtk3_TreeModel_get_column_type(GtkTreeModel*, gint);
+// extern GtkTreeModelFlags _gotk4_gtk3_TreeModel_get_flags(GtkTreeModel*);
+// extern gboolean _gotk4_gtk3_TreeModel_get_iter(GtkTreeModel*, GtkTreeIter, GtkTreePath*);
+// extern gint _gotk4_gtk3_TreeModel_get_n_columns(GtkTreeModel*);
+// extern GtkTreePath* _gotk4_gtk3_TreeModel_get_path(GtkTreeModel*, GtkTreeIter*);
+// extern void _gotk4_gtk3_TreeModel_get_value(GtkTreeModel*, GtkTreeIter*, gint, GValue);
+// extern gboolean _gotk4_gtk3_TreeModel_iter_children(GtkTreeModel*, GtkTreeIter, GtkTreeIter*);
+// extern gboolean _gotk4_gtk3_TreeModel_iter_has_child(GtkTreeModel*, GtkTreeIter*);
+// extern gint _gotk4_gtk3_TreeModel_iter_n_children(GtkTreeModel*, GtkTreeIter*);
+// extern gboolean _gotk4_gtk3_TreeModel_iter_next(GtkTreeModel*, GtkTreeIter*);
+// extern gboolean _gotk4_gtk3_TreeModel_iter_nth_child(GtkTreeModel*, GtkTreeIter, GtkTreeIter*, gint);
+// extern gboolean _gotk4_gtk3_TreeModel_iter_parent(GtkTreeModel*, GtkTreeIter, GtkTreeIter*);
+// extern gboolean _gotk4_gtk3_TreeModel_iter_previous(GtkTreeModel*, GtkTreeIter*);
+// extern void _gotk4_gtk3_TreeModel_ref_node(GtkTreeModel*, GtkTreeIter*);
+// extern void _gotk4_gtk3_TreeModel_row_changed(GtkTreeModel*, GtkTreePath*, GtkTreeIter*);
+// extern void _gotk4_gtk3_TreeModel_row_deleted(GtkTreeModel*, GtkTreePath*);
+// extern void _gotk4_gtk3_TreeModel_row_has_child_toggled(GtkTreeModel*, GtkTreePath*, GtkTreeIter*);
+// extern void _gotk4_gtk3_TreeModel_row_inserted(GtkTreeModel*, GtkTreePath*, GtkTreeIter*);
+// extern void _gotk4_gtk3_TreeModel_unref_node(GtkTreeModel*, GtkTreeIter*);
+// GType _gotk4_gtk3_TreeModel_virtual_get_column_type(void* fnptr, GtkTreeModel* carg0, gint carg1) {
+// 	return ((GType (*) (GtkTreeModel*, gint))(fnptr))(carg0, carg1);
 // }
-// C.GtkTreeModelFlags _gotk4_gtk3_TreeModel_virtual_get_flags(void* fnptr, *C.GtkTreeModel carg0) {
-// 	return ((C.GtkTreeModelFlags (*) (*C.GtkTreeModel))(fnptr))(carg0);
+// GtkTreeModelFlags _gotk4_gtk3_TreeModel_virtual_get_flags(void* fnptr, GtkTreeModel* carg0) {
+// 	return ((GtkTreeModelFlags (*) (GtkTreeModel*))(fnptr))(carg0);
 // }
-// C.gboolean _gotk4_gtk3_TreeModel_virtual_get_iter(void* fnptr, *C.GtkTreeModel carg0, C.GtkTreeIter* carg1, *C.GtkTreePath carg2) {
-// 	return ((C.gboolean (*) (*C.GtkTreeModel, C.GtkTreeIter*, *C.GtkTreePath))(fnptr))(carg0, carg1, carg2);
+// gboolean _gotk4_gtk3_TreeModel_virtual_get_iter(void* fnptr, GtkTreeModel* carg0, GtkTreeIter* carg1, GtkTreePath* carg2) {
+// 	return ((gboolean (*) (GtkTreeModel*, GtkTreeIter*, GtkTreePath*))(fnptr))(carg0, carg1, carg2);
 // }
-// C.gint _gotk4_gtk3_TreeModel_virtual_get_n_columns(void* fnptr, *C.GtkTreeModel carg0) {
-// 	return ((C.gint (*) (*C.GtkTreeModel))(fnptr))(carg0);
+// gint _gotk4_gtk3_TreeModel_virtual_get_n_columns(void* fnptr, GtkTreeModel* carg0) {
+// 	return ((gint (*) (GtkTreeModel*))(fnptr))(carg0);
 // }
-// *C.GtkTreePath _gotk4_gtk3_TreeModel_virtual_get_path(void* fnptr, *C.GtkTreeModel carg0, *C.GtkTreeIter carg1) {
-// 	return ((*C.GtkTreePath (*) (*C.GtkTreeModel, *C.GtkTreeIter))(fnptr))(carg0, carg1);
-// }
-// C.void _gotk4_gtk3_TreeModel_virtual_get_value(void* fnptr, *C.GtkTreeModel carg0, *C.GtkTreeIter carg1, C.gint carg2, C.GValue* carg3) {
-// 	return ((C.void (*) (*C.GtkTreeModel, *C.GtkTreeIter, C.gint, C.GValue*))(fnptr))(carg0, carg1, carg2, carg3);
-// }
-// C.gboolean _gotk4_gtk3_TreeModel_virtual_iter_children(void* fnptr, *C.GtkTreeModel carg0, C.GtkTreeIter* carg1, *C.GtkTreeIter carg2) {
-// 	return ((C.gboolean (*) (*C.GtkTreeModel, C.GtkTreeIter*, *C.GtkTreeIter))(fnptr))(carg0, carg1, carg2);
-// }
-// C.gboolean _gotk4_gtk3_TreeModel_virtual_iter_has_child(void* fnptr, *C.GtkTreeModel carg0, *C.GtkTreeIter carg1) {
-// 	return ((C.gboolean (*) (*C.GtkTreeModel, *C.GtkTreeIter))(fnptr))(carg0, carg1);
-// }
-// C.gint _gotk4_gtk3_TreeModel_virtual_iter_n_children(void* fnptr, *C.GtkTreeModel carg0, *C.GtkTreeIter carg1) {
-// 	return ((C.gint (*) (*C.GtkTreeModel, *C.GtkTreeIter))(fnptr))(carg0, carg1);
-// }
-// C.gboolean _gotk4_gtk3_TreeModel_virtual_iter_next(void* fnptr, *C.GtkTreeModel carg0, *C.GtkTreeIter carg1) {
-// 	return ((C.gboolean (*) (*C.GtkTreeModel, *C.GtkTreeIter))(fnptr))(carg0, carg1);
-// }
-// C.gboolean _gotk4_gtk3_TreeModel_virtual_iter_nth_child(void* fnptr, *C.GtkTreeModel carg0, C.GtkTreeIter* carg1, *C.GtkTreeIter carg2, C.gint carg3) {
-// 	return ((C.gboolean (*) (*C.GtkTreeModel, C.GtkTreeIter*, *C.GtkTreeIter, C.gint))(fnptr))(carg0, carg1, carg2, carg3);
-// }
-// C.gboolean _gotk4_gtk3_TreeModel_virtual_iter_parent(void* fnptr, *C.GtkTreeModel carg0, C.GtkTreeIter* carg1, *C.GtkTreeIter carg2) {
-// 	return ((C.gboolean (*) (*C.GtkTreeModel, C.GtkTreeIter*, *C.GtkTreeIter))(fnptr))(carg0, carg1, carg2);
-// }
-// C.gboolean _gotk4_gtk3_TreeModel_virtual_iter_previous(void* fnptr, *C.GtkTreeModel carg0, *C.GtkTreeIter carg1) {
-// 	return ((C.gboolean (*) (*C.GtkTreeModel, *C.GtkTreeIter))(fnptr))(carg0, carg1);
-// }
-// C.void _gotk4_gtk3_TreeModel_virtual_ref_node(void* fnptr, *C.GtkTreeModel carg0, *C.GtkTreeIter carg1) {
-// 	return ((C.void (*) (*C.GtkTreeModel, *C.GtkTreeIter))(fnptr))(carg0, carg1);
+// GtkTreePath* _gotk4_gtk3_TreeModel_virtual_get_path(void* fnptr, GtkTreeModel* carg0, GtkTreeIter* carg1) {
+// 	return ((GtkTreePath* (*) (GtkTreeModel*, GtkTreeIter*))(fnptr))(carg0, carg1);
+// }
+// void _gotk4_gtk3_TreeModel_virtual_get_value(void* fnptr, GtkTreeModel* carg0, GtkTreeIter* carg1, gint carg2, GValue* carg3) {
+// 	return ((void (*) (GtkTreeModel*, GtkTreeIter*, gint, GValue*))(fnptr))(carg0, carg1, carg2, carg3);
+// }
+// gboolean _gotk4_gtk3_TreeModel_virtual_iter_children(void* fnptr, GtkTreeModel* carg0, GtkTreeIter* carg1, GtkTreeIter* carg2) {
+// 	return ((gboolean (*) (GtkTreeModel*, GtkTreeIter*, GtkTreeIter*))(fnptr))(carg0, carg1, carg2);
+// }
+// gboolean _gotk4_gtk3_TreeModel_virtual_iter_has_child(void* fnptr, GtkTreeModel* carg0, GtkTreeIter* carg1) {
+// 	return ((gboolean (*) (GtkTreeModel*, GtkTreeIter*))(fnptr))(carg0, carg1);
+// }
+// gint _gotk4_gtk3_TreeModel_virtual_iter_n_children(void* fnptr, GtkTreeModel* carg0, GtkTreeIter* carg1) {
+// 	return ((gint (*) (GtkTreeModel*, GtkTreeIter*))(fnptr))(carg0, carg1);
+// }
+// gboolean _gotk4_gtk3_TreeModel_virtual_iter_next(void* fnptr, GtkTreeModel* carg0, GtkTreeIter* carg1) {
+// 	return ((gboolean (*) (GtkTreeModel*, GtkTreeIter*))(fnptr))(carg0, carg1);
+// }
+// gboolean _gotk4_gtk3_TreeModel_virtual_iter_nth_child(void* fnptr, GtkTreeModel* carg0, GtkTreeIter* carg1, GtkTreeIter* carg2, gint carg3) {
+// 	return ((gboolean (*) (GtkTreeModel*, GtkTreeIter*, GtkTreeIter*, gint))(fnptr))(carg0, carg1, carg2, carg3);
+// }
+// gboolean _gotk4_gtk3_TreeModel_virtual_iter_parent(void* fnptr, GtkTreeModel* carg0, GtkTreeIter* carg1, GtkTreeIter* carg2) {
+// 	return ((gboolean (*) (GtkTreeModel*, GtkTreeIter*, GtkTreeIter*))(fnptr))(carg0, carg1, carg2);
+// }
+// gboolean _gotk4_gtk3_TreeModel_virtual_iter_previous(void* fnptr, GtkTreeModel* carg0, GtkTreeIter* carg1) {
+// 	return ((gboolean (*) (GtkTreeModel*, GtkTreeIter*))(fnptr))(carg0, carg1);
+// }
+// void _gotk4_gtk3_TreeModel_virtual_ref_node(void* fnptr, GtkTreeModel* carg0, GtkTreeIter* carg1) {
+// 	return ((void (*) (GtkTreeModel*, GtkTreeIter*))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gtk3_TreeModel_virtual_row_changed(void* fnptr, *C.GtkTreeModel carg0, *C.GtkTreePath carg1, *C.GtkTreeIter carg2) {
-// 	return ((C.void (*) (*C.GtkTreeModel, *C.GtkTreePath, *C.GtkTreeIter))(fnptr))(carg0, carg1, carg2);
+// void _gotk4_gtk3_TreeModel_virtual_row_changed(void* fnptr, GtkTreeModel* carg0, GtkTreePath* carg1, GtkTreeIter* carg2) {
+// 	return ((void (*) (GtkTreeModel*, GtkTreePath*, GtkTreeIter*))(fnptr))(carg0, carg1, carg2);
 // }
-// C.void _gotk4_gtk3_TreeModel_virtual_row_deleted(void* fnptr, *C.GtkTreeModel carg0, *C.GtkTreePath carg1) {
-// 	return ((C.void (*) (*C.GtkTreeModel, *C.GtkTreePath))(fnptr))(carg0, carg1);
+// void _gotk4_gtk3_TreeModel_virtual_row_deleted(void* fnptr, GtkTreeModel* carg0, GtkTreePath* carg1) {
+// 	return ((void (*) (GtkTreeModel*, GtkTreePath*))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gtk3_TreeModel_virtual_row_has_child_toggled(void* fnptr, *C.GtkTreeModel carg0, *C.GtkTreePath carg1, *C.GtkTreeIter carg2) {
-// 	return ((C.void (*) (*C.GtkTreeModel, *C.GtkTreePath, *C.GtkTreeIter))(fnptr))(carg0, carg1, carg2);
+// void _gotk4_gtk3_TreeModel_virtual_row_has_child_toggled(void* fnptr, GtkTreeModel* carg0, GtkTreePath* carg1, GtkTreeIter* carg2) {
+// 	return ((void (*) (GtkTreeModel*, GtkTreePath*, GtkTreeIter*))(fnptr))(carg0, carg1, carg2);
 // }
-// C.void _gotk4_gtk3_TreeModel_virtual_row_inserted(void* fnptr, *C.GtkTreeModel carg0, *C.GtkTreePath carg1, *C.GtkTreeIter carg2) {
-// 	return ((C.void (*) (*C.GtkTreeModel, *C.GtkTreePath, *C.GtkTreeIter))(fnptr))(carg0, carg1, carg2);
+// void _gotk4_gtk3_TreeModel_virtual_row_inserted(void* fnptr, GtkTreeModel* carg0, GtkTreePath* carg1, GtkTreeIter* carg2) {
+// 	return ((void (*) (GtkTreeModel*, GtkTreePath*, GtkTreeIter*))(fnptr))(carg0, carg1, carg2);
 // }
-// C.void _gotk4_gtk3_TreeModel_virtual_unref_node(void* fnptr, *C.GtkTreeModel carg0, *C.GtkTreeIter carg1) {
-// 	return ((C.void (*) (*C.GtkTreeModel, *C.GtkTreeIter))(fnptr))(carg0, carg1);
+// void _gotk4_gtk3_TreeModel_virtual_unref_node(void* fnptr, GtkTreeModel* carg0, GtkTreeIter* carg1) {
+// 	return ((void (*) (GtkTreeModel*, GtkTreeIter*))(fnptr))(carg0, carg1);
 // }
-// extern C.gboolean _gotk4_gtk3_TreeSortable_get_sort_column_id(*C.GtkTreeSortable, C.gint, C.GtkSortType);
-// extern C.gboolean _gotk4_gtk3_TreeSortable_has_default_sort_func(*C.GtkTreeSortable);
-// extern C.void _gotk4_gtk3_TreeSortable_set_sort_column_id(*C.GtkTreeSortable, C.gint, C.GtkSortType);
-// extern C.void _gotk4_gtk3_TreeSortable_sort_column_changed(*C.GtkTreeSortable);
-// C.gboolean _gotk4_gtk3_TreeSortable_virtual_get_sort_column_id(void* fnptr, *C.GtkTreeSortable carg0, C.gint* carg1, C.GtkSortType* carg2) {
-// 	return ((C.gboolean (*) (*C.GtkTreeSortable, C.gint*, C.GtkSortType*))(fnptr))(carg0, carg1, carg2);
+// extern gboolean _gotk4_gtk3_TreeSortable_get_sort_column_id(GtkTreeSortable*, gint, GtkSortType);
+// extern gboolean _gotk4_gtk3_TreeSortable_has_default_sort_func(GtkTreeSortable*);
+// extern void _gotk4_gtk3_TreeSortable_set_sort_column_id(GtkTreeSortable*, gint, GtkSortType);
+// extern void _gotk4_gtk3_TreeSortable_sort_column_changed(GtkTreeSortable*);
+// gboolean _gotk4_gtk3_TreeSortable_virtual_get_sort_column_id(void* fnptr, GtkTreeSortable* carg0, gint* carg1, GtkSortType* carg2) {
+// 	return ((gboolean (*) (GtkTreeSortable*, gint*, GtkSortType*))(fnptr))(carg0, carg1, carg2);
 // }
-// C.gboolean _gotk4_gtk3_TreeSortable_virtual_has_default_sort_func(void* fnptr, *C.GtkTreeSortable carg0) {
-// 	return ((C.gboolean (*) (*C.GtkTreeSortable))(fnptr))(carg0);
+// gboolean _gotk4_gtk3_TreeSortable_virtual_has_default_sort_func(void* fnptr, GtkTreeSortable* carg0) {
+// 	return ((gboolean (*) (GtkTreeSortable*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_TreeSortable_virtual_set_sort_column_id(void* fnptr, *C.GtkTreeSortable carg0, C.gint carg1, C.GtkSortType carg2) {
-// 	return ((C.void (*) (*C.GtkTreeSortable, C.gint, C.GtkSortType))(fnptr))(carg0, carg1, carg2);
+// void _gotk4_gtk3_TreeSortable_virtual_set_sort_column_id(void* fnptr, GtkTreeSortable* carg0, gint carg1, GtkSortType carg2) {
+// 	return ((void (*) (GtkTreeSortable*, gint, GtkSortType))(fnptr))(carg0, carg1, carg2);
 // }
-// C.void _gotk4_gtk3_TreeSortable_virtual_sort_column_changed(void* fnptr, *C.GtkTreeSortable carg0) {
-// 	return ((C.void (*) (*C.GtkTreeSortable))(fnptr))(carg0);
+// void _gotk4_gtk3_TreeSortable_virtual_sort_column_changed(void* fnptr, GtkTreeSortable* carg0) {
+// 	return ((void (*) (GtkTreeSortable*))(fnptr))(carg0);
 // }
-// extern C.void _gotk4_gtk3_Accessible_widget_set(*C.GtkAccessible);
-// extern C.void _gotk4_gtk3_Accessible_widget_unset(*C.GtkAccessible);
-// C.void _gotk4_gtk3_Accessible_virtual_widget_set(void* fnptr, *C.GtkAccessible carg0) {
-// 	return ((C.void (*) (*C.GtkAccessible))(fnptr))(carg0);
+// extern void _gotk4_gtk3_Accessible_widget_set(GtkAccessible*);
+// extern void _gotk4_gtk3_Accessible_widget_unset(GtkAccessible*);
+// void _gotk4_gtk3_Accessible_virtual_widget_set(void* fnptr, GtkAccessible* carg0) {
+// 	return ((void (*) (GtkAccessible*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_Accessible_virtual_widget_unset(void* fnptr, *C.GtkAccessible carg0) {
-// 	return ((C.void (*) (*C.GtkAccessible))(fnptr))(carg0);
+// void _gotk4_gtk3_Accessible_virtual_widget_unset(void* fnptr, GtkAccessible* carg0) {
+// 	return ((void (*) (GtkAccessible*))(fnptr))(carg0);
 // }
-// extern C.void _gotk4_gtk3_Action_connect_proxy(*C.GtkAction, *C.GtkWidget);
-// extern C.void _gotk4_gtk3_Action_disconnect_proxy(*C.GtkAction, *C.GtkWidget);
-// C.void _gotk4_gtk3_Action_virtual_connect_proxy(void* fnptr, *C.GtkAction carg0, *C.GtkWidget carg1) {
-// 	return ((C.void (*) (*C.GtkAction, *C.GtkWidget))(fnptr))(carg0, carg1);
+// extern void _gotk4_gtk3_Action_connect_proxy(GtkAction*, GtkWidget*);
+// extern void _gotk4_gtk3_Action_disconnect_proxy(GtkAction*, GtkWidget*);
+// void _gotk4_gtk3_Action_virtual_connect_proxy(void* fnptr, GtkAction* carg0, GtkWidget* carg1) {
+// 	return ((void (*) (GtkAction*, GtkWidget*))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gtk3_Action_virtual_disconnect_proxy(void* fnptr, *C.GtkAction carg0, *C.GtkWidget carg1) {
-// 	return ((C.void (*) (*C.GtkAction, *C.GtkWidget))(fnptr))(carg0, carg1);
+// void _gotk4_gtk3_Action_virtual_disconnect_proxy(void* fnptr, GtkAction* carg0, GtkWidget* carg1) {
+// 	return ((void (*) (GtkAction*, GtkWidget*))(fnptr))(carg0, carg1);
 // }
-// extern C.void _gotk4_gtk3_Application_window_added(*C.GtkApplication, *C.GtkWindow);
-// extern C.void _gotk4_gtk3_Application_window_removed(*C.GtkApplication, *C.GtkWindow);
-// C.void _gotk4_gtk3_Application_virtual_window_added(void* fnptr, *C.GtkApplication carg0, *C.GtkWindow carg1) {
-// 	return ((C.void (*) (*C.GtkApplication, *C.GtkWindow))(fnptr))(carg0, carg1);
+// extern void _gotk4_gtk3_Application_window_added(GtkApplication*, GtkWindow*);
+// extern void _gotk4_gtk3_Application_window_removed(GtkApplication*, GtkWindow*);
+// void _gotk4_gtk3_Application_virtual_window_added(void* fnptr, GtkApplication* carg0, GtkWindow* carg1) {
+// 	return ((void (*) (GtkApplication*, GtkWindow*))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gtk3_Application_virtual_window_removed(void* fnptr, *C.GtkApplication carg0, *C.GtkWindow carg1) {
-// 	return ((C.void (*) (*C.GtkApplication, *C.GtkWindow))(fnptr))(carg0, carg1);
+// void _gotk4_gtk3_Application_virtual_window_removed(void* fnptr, GtkApplication* carg0, GtkWindow* carg1) {
+// 	return ((void (*) (GtkApplication*, GtkWindow*))(fnptr))(carg0, carg1);
 // }
-// extern C.GType _gotk4_gtk3_Builder_get_type_from_name(*C.GtkBuilder, *C.char);
-// C.GType _gotk4_gtk3_Builder_virtual_get_type_from_name(void* fnptr, *C.GtkBuilder carg0, *C.char carg1) {
-// 	return ((C.GType (*) (*C.GtkBuilder, *C.char))(fnptr))(carg0, carg1);
+// extern GType _gotk4_gtk3_Builder_get_type_from_name(GtkBuilder*, const char*);
+// GType _gotk4_gtk3_Builder_virtual_get_type_from_name(void* fnptr, GtkBuilder* carg0, const char* carg1) {
+// 	return ((GType (*) (GtkBuilder*, const char*))(fnptr))(carg0, carg1);
 // }
-// extern C.void _gotk4_gtk3_CellAccessible_update_cache(*C.GtkCellAccessible, C.gboolean);
-// C.void _gotk4_gtk3_CellAccessible_virtual_update_cache(void* fnptr, *C.GtkCellAccessible carg0, C.gboolean carg1) {
-// 	return ((C.void (*) (*C.GtkCellAccessible, C.gboolean))(fnptr))(carg0, carg1);
+// extern void _gotk4_gtk3_CellAccessible_update_cache(GtkCellAccessible*, gboolean);
+// void _gotk4_gtk3_CellAccessible_virtual_update_cache(void* fnptr, GtkCellAccessible* carg0, gboolean carg1) {
+// 	return ((void (*) (GtkCellAccessible*, gboolean))(fnptr))(carg0, carg1);
 // }
-// extern C.gboolean _gotk4_gtk3_CellArea_activate(*C.GtkCellArea, *C.GtkCellAreaContext, *C.GtkWidget, *C.GdkRectangle, C.GtkCellRendererState, C.gboolean);
-// extern C.void _gotk4_gtk3_CellArea_add(*C.GtkCellArea, *C.GtkCellRenderer);
-// extern C.void _gotk4_gtk3_CellArea_apply_attributes(*C.GtkCellArea, *C.GtkTreeModel, *C.GtkTreeIter, C.gboolean, C.gboolean);
-// extern *C.GtkCellAreaContext _gotk4_gtk3_CellArea_copy_context(*C.GtkCellArea, *C.GtkCellAreaContext);
-// extern *C.GtkCellAreaContext _gotk4_gtk3_CellArea_create_context(*C.GtkCellArea);
-// extern C.gboolean _gotk4_gtk3_CellArea_focus(*C.GtkCellArea, C.GtkDirectionType);
-// extern C.void _gotk4_gtk3_CellArea_get_cell_property(*C.GtkCellArea, *C.GtkCellRenderer, C.guint, *C.GValue, *C.GParamSpec);
-// extern C.void _gotk4_gtk3_CellArea_get_preferred_height(*C.GtkCellArea, *C.GtkCellAreaContext, *C.GtkWidget, C.gint, C.gint);
-// extern C.void _gotk4_gtk3_CellArea_get_preferred_height_for_width(*C.GtkCellArea, *C.GtkCellAreaContext, *C.GtkWidget, C.gint, C.gint, C.gint);
-// extern C.void _gotk4_gtk3_CellArea_get_preferred_width(*C.GtkCellArea, *C.GtkCellAreaContext, *C.GtkWidget, C.gint, C.gint);
-// extern C.void _gotk4_gtk3_CellArea_get_preferred_width_for_height(*C.GtkCellArea, *C.GtkCellAreaContext, *C.GtkWidget, C.gint, C.gint, C.gint);
-// extern C.GtkSizeRequestMode _gotk4_gtk3_CellArea_get_request_mode(*C.GtkCellArea);
-// extern C.gboolean _gotk4_gtk3_CellArea_is_activatable(*C.GtkCellArea);
-// extern C.void _gotk4_gtk3_CellArea_remove(*C.GtkCellArea, *C.GtkCellRenderer);
-// extern C.void _gotk4_gtk3_CellArea_set_cell_property(*C.GtkCellArea, *C.GtkCellRenderer, C.guint, *C.GValue, *C.GParamSpec);
-// C.gboolean _gotk4_gtk3_CellArea_virtual_activate(void* fnptr, *C.GtkCellArea carg0, *C.GtkCellAreaContext carg1, *C.GtkWidget carg2, *C.GdkRectangle carg3, C.GtkCellRendererState carg4, C.gboolean carg5) {
-// 	return ((C.gboolean (*) (*C.GtkCellArea, *C.GtkCellAreaContext, *C.GtkWidget, *C.GdkRectangle, C.GtkCellRendererState, C.gboolean))(fnptr))(carg0, carg1, carg2, carg3, carg4, carg5);
+// extern gboolean _gotk4_gtk3_CellArea_activate(GtkCellArea*, GtkCellAreaContext*, GtkWidget*, const GdkRectangle*, GtkCellRendererState, gboolean);
+// extern void _gotk4_gtk3_CellArea_add(GtkCellArea*, GtkCellRenderer*);
+// extern void _gotk4_gtk3_CellArea_apply_attributes(GtkCellArea*, GtkTreeModel*, GtkTreeIter*, gboolean, gboolean);
+// extern GtkCellAreaContext* _gotk4_gtk3_CellArea_copy_context(GtkCellArea*, GtkCellAreaContext*);
+// extern GtkCellAreaContext* _gotk4_gtk3_CellArea_create_context(GtkCellArea*);
+// extern gboolean _gotk4_gtk3_CellArea_focus(GtkCellArea*, GtkDirectionType);
+// extern void _gotk4_gtk3_CellArea_get_cell_property(GtkCellArea*, GtkCellRenderer*, guint, GValue*, GParamSpec*);
+// extern void _gotk4_gtk3_CellArea_get_preferred_height(GtkCellArea*, GtkCellAreaContext*, GtkWidget*, gint, gint);
+// extern void _gotk4_gtk3_CellArea_get_preferred_height_for_width(GtkCellArea*, GtkCellAreaContext*, GtkWidget*, gint, gint, gint);
+// extern void _gotk4_gtk3_CellArea_get_preferred_width(GtkCellArea*, GtkCellAreaContext*, GtkWidget*, gint, gint);
+// extern void _gotk4_gtk3_CellArea_get_preferred_width_for_height(GtkCellArea*, GtkCellAreaContext*, GtkWidget*, gint, gint, gint);
+// extern GtkSizeRequestMode _gotk4_gtk3_CellArea_get_request_mode(GtkCellArea*);
+// extern gboolean _gotk4_gtk3_CellArea_is_activatable(GtkCellArea*);
+// extern void _gotk4_gtk3_CellArea_remove(GtkCellArea*, GtkCellRenderer*);
+// extern void _gotk4_gtk3_CellArea_set_cell_property(GtkCellArea*, GtkCellRenderer*, guint, const GValue*, GParamSpec*);
+// gboolean _gotk4_gtk3_CellArea_virtual_activate(void* fnptr, GtkCellArea* carg0, GtkCellAreaContext* carg1, GtkWidget* carg2, const GdkRectangle* carg3, GtkCellRendererState carg4, gboolean carg5) {
+// 	return ((gboolean (*) (GtkCellArea*, GtkCellAreaContext*, GtkWidget*, const GdkRectangle*, GtkCellRendererState, gboolean))(fnptr))(carg0, carg1, carg2, carg3, carg4, carg5);
 // }
-// C.void _gotk4_gtk3_CellArea_virtual_add(void* fnptr, *C.GtkCellArea carg0, *C.GtkCellRenderer carg1) {
-// 	return ((C.void (*) (*C.GtkCellArea, *C.GtkCellRenderer))(fnptr))(carg0, carg1);
+// void _gotk4_gtk3_CellArea_virtual_add(void* fnptr, GtkCellArea* carg0, GtkCellRenderer* carg1) {
+// 	return ((void (*) (GtkCellArea*, GtkCellRenderer*))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gtk3_CellArea_virtual_apply_attributes(void* fnptr, *C.GtkCellArea carg0, *C.GtkTreeModel carg1, *C.GtkTreeIter carg2, C.gboolean carg3, C.gboolean carg4) {
-// 	return ((C.void (*) (*C.GtkCellArea, *C.GtkTreeModel, *C.GtkTreeIter, C.gboolean, C.gboolean))(fnptr))(carg0, carg1, carg2, carg3, carg4);
+// void _gotk4_gtk3_CellArea_virtual_apply_attributes(void* fnptr, GtkCellArea* carg0, GtkTreeModel* carg1, GtkTreeIter* carg2, gboolean carg3, gboolean carg4) {
+// 	return ((void (*) (GtkCellArea*, GtkTreeModel*, GtkTreeIter*, gboolean, gboolean))(fnptr))(carg0, carg1, carg2, carg3, carg4);
 // }
-// *C.GtkCellAreaContext _gotk4_gtk3_CellArea_virtual_copy_context(void* fnptr, *C.GtkCellArea carg0, *C.GtkCellAreaContext carg1) {
-// 	return ((*C.GtkCellAreaContext (*) (*C.GtkCellArea, *C.GtkCellAreaContext))(fnptr))(carg0, carg1);
+// GtkCellAreaContext* _gotk4_gtk3_CellArea_virtual_copy_context(void* fnptr, GtkCellArea* carg0, GtkCellAreaContext* carg1) {
+// 	return ((GtkCellAreaContext* (*) (GtkCellArea*, GtkCellAreaContext*))(fnptr))(carg0, carg1);
 // }
-// *C.GtkCellAreaContext _gotk4_gtk3_CellArea_virtual_create_context(void* fnptr, *C.GtkCellArea carg0) {
-// 	return ((*C.GtkCellAreaContext (*) (*C.GtkCellArea))(fnptr))(carg0);
+// GtkCellAreaContext* _gotk4_gtk3_CellArea_virtual_create_context(void* fnptr, GtkCellArea* carg0) {
+// 	return ((GtkCellAreaContext* (*) (GtkCellArea*))(fnptr))(carg0);
 // }
-// C.gboolean _gotk4_gtk3_CellArea_virtual_focus(void* fnptr, *C.GtkCellArea carg0, C.GtkDirectionType carg1) {
-// 	return ((C.gboolean (*) (*C.GtkCellArea, C.GtkDirectionType))(fnptr))(carg0, carg1);
+// gboolean _gotk4_gtk3_CellArea_virtual_focus(void* fnptr, GtkCellArea* carg0, GtkDirectionType carg1) {
+// 	return ((gboolean (*) (GtkCellArea*, GtkDirectionType))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gtk3_CellArea_virtual_get_cell_property(void* fnptr, *C.GtkCellArea carg0, *C.GtkCellRenderer carg1, C.guint carg2, *C.GValue carg3, *C.GParamSpec carg4) {
-// 	return ((C.void (*) (*C.GtkCellArea, *C.GtkCellRenderer, C.guint, *C.GValue, *C.GParamSpec))(fnptr))(carg0, carg1, carg2, carg3, carg4);
+// void _gotk4_gtk3_CellArea_virtual_get_cell_property(void* fnptr, GtkCellArea* carg0, GtkCellRenderer* carg1, guint carg2, GValue* carg3, GParamSpec* carg4) {
+// 	return ((void (*) (GtkCellArea*, GtkCellRenderer*, guint, GValue*, GParamSpec*))(fnptr))(carg0, carg1, carg2, carg3, carg4);
 // }
-// C.void _gotk4_gtk3_CellArea_virtual_get_preferred_height(void* fnptr, *C.GtkCellArea carg0, *C.GtkCellAreaContext carg1, *C.GtkWidget carg2, C.gint* carg3, C.gint* carg4) {
-// 	return ((C.void (*) (*C.GtkCellArea, *C.GtkCellAreaContext, *C.GtkWidget, C.gint*, C.gint*))(fnptr))(carg0, carg1, carg2, carg3, carg4);
+// void _gotk4_gtk3_CellArea_virtual_get_preferred_height(void* fnptr, GtkCellArea* carg0, GtkCellAreaContext* carg1, GtkWidget* carg2, gint* carg3, gint* carg4) {
+// 	return ((void (*) (GtkCellArea*, GtkCellAreaContext*, GtkWidget*, gint*, gint*))(fnptr))(carg0, carg1, carg2, carg3, carg4);
 // }
-// C.void _gotk4_gtk3_CellArea_virtual_get_preferred_height_for_width(void* fnptr, *C.GtkCellArea carg0, *C.GtkCellAreaContext carg1, *C.GtkWidget carg2, C.gint carg3, C.gint* carg4, C.gint* carg5) {
-// 	return ((C.void (*) (*C.GtkCellArea, *C.GtkCellAreaContext, *C.GtkWidget, C.gint, C.gint*, C.gint*))(fnptr))(carg0, carg1, carg2, carg3, carg4, carg5);
+// void _gotk4_gtk3_CellArea_virtual_get_preferred_height_for_width(void* fnptr, GtkCellArea* carg0, GtkCellAreaContext* carg1, GtkWidget* carg2, gint carg3, gint* carg4, gint* carg5) {
+// 	return ((void (*) (GtkCellArea*, GtkCellAreaContext*, GtkWidget*, gint, gint*, gint*))(fnptr))(carg0, carg1, carg2, carg3, carg4, carg5);
 // }
-// C.void _gotk4_gtk3_CellArea_virtual_get_preferred_width(void* fnptr, *C.GtkCellArea carg0, *C.GtkCellAreaContext carg1, *C.GtkWidget carg2, C.gint* carg3, C.gint* carg4) {
-// 	return ((C.void (*) (*C.GtkCellArea, *C.GtkCellAreaContext, *C.GtkWidget, C.gint*, C.gint*))(fnptr))(carg0, carg1, carg2, carg3, carg4);
+// void _gotk4_gtk3_CellArea_virtual_get_preferred_width(void* fnptr, GtkCellArea* carg0, GtkCellAreaContext* carg1, GtkWidget* carg2, gint* carg3, gint* carg4) {
+// 	return ((void (*) (GtkCellArea*, GtkCellAreaContext*, GtkWidget*, gint*, gint*))(fnptr))(carg0, carg1, carg2, carg3, carg4);
 // }
-// C.void _gotk4_gtk3_CellArea_virtual_get_preferred_width_for_height(void* fnptr, *C.GtkCellArea carg0, *C.GtkCellAreaContext carg1, *C.GtkWidget carg2, C.gint carg3, C.gint* carg4, C.gint* carg5) {
-// 	return ((C.void (*) (*C.GtkCellArea, *C.GtkCellAreaContext, *C.GtkWidget, C.gint, C.gint*, C.gint*))(fnptr))(carg0, carg1, carg2, carg3, carg4, carg5);
+// void _gotk4_gtk3_CellArea_virtual_get_preferred_width_for_height(void* fnptr, GtkCellArea* carg0, GtkCellAreaContext* carg1, GtkWidget* carg2, gint carg3, gint* carg4, gint* carg5) {
+// 	return ((void (*) (GtkCellArea*, GtkCellAreaContext*, GtkWidget*, gint, gint*, gint*))(fnptr))(carg0, carg1, carg2, carg3, carg4, carg5);
 // }
-// C.GtkSizeRequestMode _gotk4_gtk3_CellArea_virtual_get_request_mode(void* fnptr, *C.GtkCellArea carg0) {
-// 	return ((C.GtkSizeRequestMode (*) (*C.GtkCellArea))(fnptr))(carg0);
+// GtkSizeRequestMode _gotk4_gtk3_CellArea_virtual_get_request_mode(void* fnptr, GtkCellArea* carg0) {
+// 	return ((GtkSizeRequestMode (*) (GtkCellArea*))(fnptr))(carg0);
 // }
-// C.gboolean _gotk4_gtk3_CellArea_virtual_is_activatable(void* fnptr, *C.GtkCellArea carg0) {
-// 	return ((C.gboolean (*) (*C.GtkCellArea))(fnptr))(carg0);
+// gboolean _gotk4_gtk3_CellArea_virtual_is_activatable(void* fnptr, GtkCellArea* carg0) {
+// 	return ((gboolean (*) (GtkCellArea*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_CellArea_virtual_remove(void* fnptr, *C.GtkCellArea carg0, *C.GtkCellRenderer carg1) {
-// 	return ((C.void (*) (*C.GtkCellArea, *C.GtkCellRenderer))(fnptr))(carg0, carg1);
+// void _gotk4_gtk3_CellArea_virtual_remove(void* fnptr, GtkCellArea* carg0, GtkCellRenderer* carg1) {
+// 	return ((void (*) (GtkCellArea*, GtkCellRenderer*))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gtk3_CellArea_virtual_set_cell_property(void* fnptr, *C.GtkCellArea carg0, *C.GtkCellRenderer carg1, C.guint carg2, *C.GValue carg3, *C.GParamSpec carg4) {
-// 	return ((C.void (*) (*C.GtkCellArea, *C.GtkCellRenderer, C.guint, *C.GValue, *C.GParamSpec))(fnptr))(carg0, carg1, carg2, carg3, carg4);
+// void _gotk4_gtk3_CellArea_virtual_set_cell_property(void* fnptr, GtkCellArea* carg0, GtkCellRenderer* carg1, guint carg2, const GValue* carg3, GParamSpec* carg4) {
+// 	return ((void (*) (GtkCellArea*, GtkCellRenderer*, guint, const GValue*, GParamSpec*))(fnptr))(carg0, carg1, carg2, carg3, carg4);
 // }
-// extern C.void _gotk4_gtk3_CellAreaContext_allocate(*C.GtkCellAreaContext, C.gint, C.gint);
-// extern C.void _gotk4_gtk3_CellAreaContext_get_preferred_height_for_width(*C.GtkCellAreaContext, C.gint, C.gint, C.gint);
-// extern C.void _gotk4_gtk3_CellAreaContext_get_preferred_width_for_height(*C.GtkCellAreaContext, C.gint, C.gint, C.gint);
-// extern C.void _gotk4_gtk3_CellAreaContext_reset(*C.GtkCellAreaContext);
-// C.void _gotk4_gtk3_CellAreaContext_virtual_allocate(void* fnptr, *C.GtkCellAreaContext carg0, C.gint carg1, C.gint carg2) {
-// 	return ((C.void (*) (*C.GtkCellAreaContext, C.gint, C.gint))(fnptr))(carg0, carg1, carg2);
+// extern void _gotk4_gtk3_CellAreaContext_allocate(GtkCellAreaContext*, gint, gint);
+// extern void _gotk4_gtk3_CellAreaContext_get_preferred_height_for_width(GtkCellAreaContext*, gint, gint, gint);
+// extern void _gotk4_gtk3_CellAreaContext_get_preferred_width_for_height(GtkCellAreaContext*, gint, gint, gint);
+// extern void _gotk4_gtk3_CellAreaContext_reset(GtkCellAreaContext*);
+// void _gotk4_gtk3_CellAreaContext_virtual_allocate(void* fnptr, GtkCellAreaContext* carg0, gint carg1, gint carg2) {
+// 	return ((void (*) (GtkCellAreaContext*, gint, gint))(fnptr))(carg0, carg1, carg2);
 // }
-// C.void _gotk4_gtk3_CellAreaContext_virtual_get_preferred_height_for_width(void* fnptr, *C.GtkCellAreaContext carg0, C.gint carg1, C.gint* carg2, C.gint* carg3) {
-// 	return ((C.void (*) (*C.GtkCellAreaContext, C.gint, C.gint*, C.gint*))(fnptr))(carg0, carg1, carg2, carg3);
+// void _gotk4_gtk3_CellAreaContext_virtual_get_preferred_height_for_width(void* fnptr, GtkCellAreaContext* carg0, gint carg1, gint* carg2, gint* carg3) {
+// 	return ((void (*) (GtkCellAreaContext*, gint, gint*, gint*))(fnptr))(carg0, carg1, carg2, carg3);
 // }
-// C.void _gotk4_gtk3_CellAreaContext_virtual_get_preferred_width_for_height(void* fnptr, *C.GtkCellAreaContext carg0, C.gint carg1, C.gint* carg2, C.gint* carg3) {
-// 	return ((C.void (*) (*C.GtkCellAreaContext, C.gint, C.gint*, C.gint*))(fnptr))(carg0, carg1, carg2, carg3);
+// void _gotk4_gtk3_CellAreaContext_virtual_get_preferred_width_for_height(void* fnptr, GtkCellAreaContext* carg0, gint carg1, gint* carg2, gint* carg3) {
+// 	return ((void (*) (GtkCellAreaContext*, gint, gint*, gint*))(fnptr))(carg0, carg1, carg2, carg3);
 // }
-// C.void _gotk4_gtk3_CellAreaContext_virtual_reset(void* fnptr, *C.GtkCellAreaContext carg0) {
-// 	return ((C.void (*) (*C.GtkCellAreaContext))(fnptr))(carg0);
-// }
-// extern C.void _gotk4_gtk3_CellRenderer_editing_canceled(*C.GtkCellRenderer);
-// extern C.void _gotk4_gtk3_CellRenderer_editing_started(*C.GtkCellRenderer, *C.GtkCellEditable, *C.gchar);
-// extern C.void _gotk4_gtk3_CellRenderer_get_aligned_area(*C.GtkCellRenderer, *C.GtkWidget, C.GtkCellRendererState, *C.GdkRectangle, C.GdkRectangle);
-// extern C.void _gotk4_gtk3_CellRenderer_get_preferred_height(*C.GtkCellRenderer, *C.GtkWidget, C.gint, C.gint);
-// extern C.void _gotk4_gtk3_CellRenderer_get_preferred_height_for_width(*C.GtkCellRenderer, *C.GtkWidget, C.gint, C.gint, C.gint);
-// extern C.void _gotk4_gtk3_CellRenderer_get_preferred_width(*C.GtkCellRenderer, *C.GtkWidget, C.gint, C.gint);
-// extern C.void _gotk4_gtk3_CellRenderer_get_preferred_width_for_height(*C.GtkCellRenderer, *C.GtkWidget, C.gint, C.gint, C.gint);
-// extern C.GtkSizeRequestMode _gotk4_gtk3_CellRenderer_get_request_mode(*C.GtkCellRenderer);
-// C.void _gotk4_gtk3_CellRenderer_virtual_editing_canceled(void* fnptr, *C.GtkCellRenderer carg0) {
-// 	return ((C.void (*) (*C.GtkCellRenderer))(fnptr))(carg0);
-// }
-// C.void _gotk4_gtk3_CellRenderer_virtual_editing_started(void* fnptr, *C.GtkCellRenderer carg0, *C.GtkCellEditable carg1, *C.gchar carg2) {
-// 	return ((C.void (*) (*C.GtkCellRenderer, *C.GtkCellEditable, *C.gchar))(fnptr))(carg0, carg1, carg2);
-// }
-// C.void _gotk4_gtk3_CellRenderer_virtual_get_aligned_area(void* fnptr, *C.GtkCellRenderer carg0, *C.GtkWidget carg1, C.GtkCellRendererState carg2, *C.GdkRectangle carg3, C.GdkRectangle* carg4) {
-// 	return ((C.void (*) (*C.GtkCellRenderer, *C.GtkWidget, C.GtkCellRendererState, *C.GdkRectangle, C.GdkRectangle*))(fnptr))(carg0, carg1, carg2, carg3, carg4);
-// }
-// C.void _gotk4_gtk3_CellRenderer_virtual_get_preferred_height(void* fnptr, *C.GtkCellRenderer carg0, *C.GtkWidget carg1, C.gint* carg2, C.gint* carg3) {
-// 	return ((C.void (*) (*C.GtkCellRenderer, *C.GtkWidget, C.gint*, C.gint*))(fnptr))(carg0, carg1, carg2, carg3);
-// }
-// C.void _gotk4_gtk3_CellRenderer_virtual_get_preferred_height_for_width(void* fnptr, *C.GtkCellRenderer carg0, *C.GtkWidget carg1, C.gint carg2, C.gint* carg3, C.gint* carg4) {
-// 	return ((C.void (*) (*C.GtkCellRenderer, *C.GtkWidget, C.gint, C.gint*, C.gint*))(fnptr))(carg0, carg1, carg2, carg3, carg4);
-// }
-// C.void _gotk4_gtk3_CellRenderer_virtual_get_preferred_width(void* fnptr, *C.GtkCellRenderer carg0, *C.GtkWidget carg1, C.gint* carg2, C.gint* carg3) {
-// 	return ((C.void (*) (*C.GtkCellRenderer, *C.GtkWidget, C.gint*, C.gint*))(fnptr))(carg0, carg1, carg2, carg3);
-// }
-// C.void _gotk4_gtk3_CellRenderer_virtual_get_preferred_width_for_height(void* fnptr, *C.GtkCellRenderer carg0, *C.GtkWidget carg1, C.gint carg2, C.gint* carg3, C.gint* carg4) {
-// 	return ((C.void (*) (*C.GtkCellRenderer, *C.GtkWidget, C.gint, C.gint*, C.gint*))(fnptr))(carg0, carg1, carg2, carg3, carg4);
+// void _gotk4_gtk3_CellAreaContext_virtual_reset(void* fnptr, GtkCellAreaContext* carg0) {
+// 	return ((void (*) (GtkCellAreaContext*))(fnptr))(carg0);
+// }
+// extern void _gotk4_gtk3_CellRenderer_editing_canceled(GtkCellRenderer*);
+// extern void _gotk4_gtk3_CellRenderer_editing_started(GtkCellRenderer*, GtkCellEditable*, const gchar*);
+// extern void _gotk4_gtk3_CellRenderer_get_aligned_area(GtkCellRenderer*, GtkWidget*, GtkCellRendererState, const GdkRectangle*, GdkRectangle);
+// extern void _gotk4_gtk3_CellRenderer_get_preferred_height(GtkCellRenderer*, GtkWidget*, gint, gint);
+// extern void _gotk4_gtk3_CellRenderer_get_preferred_height_for_width(GtkCellRenderer*, GtkWidget*, gint, gint, gint);
+// extern void _gotk4_gtk3_CellRenderer_get_preferred_width(GtkCellRenderer*, GtkWidget*, gint, gint);
+// extern void _gotk4_gtk3_CellRenderer_get_preferred_width_for_height(GtkCellRenderer*, GtkWidget*, gint, gint, gint);
+// extern GtkSizeRequestMode _gotk4_gtk3_CellRenderer_get_request_mode(GtkCellRenderer*);
+// void _gotk4_gtk3_CellRenderer_virtual_editing_canceled(void* fnptr, GtkCellRenderer* carg0) {
+// 	return ((void (*) (GtkCellRenderer*))(fnptr))(carg0);
+// }
+// void _gotk4_gtk3_CellRenderer_virtual_editing_started(void* fnptr, GtkCellRenderer* carg0, GtkCellEditable* carg1, const gchar* carg2) {
+// 	return ((void (*) (GtkCellRenderer*, GtkCellEditable*, const gchar*))(fnptr))(carg0, carg1, carg2);
+// }
+// void _gotk4_gtk3_CellRenderer_virtual_get_aligned_area(void* fnptr, GtkCellRenderer* carg0, GtkWidget* carg1, GtkCellRendererState carg2, const GdkRectangle* carg3, GdkRectangle* carg4) {
+// 	return ((void (*) (GtkCellRenderer*, GtkWidget*, GtkCellRendererState, const GdkRectangle*, GdkRectangle*))(fnptr))(carg0, carg1, carg2, carg3, carg4);
+// }
+// void _gotk4_gtk3_CellRenderer_virtual_get_preferred_height(void* fnptr, GtkCellRenderer* carg0, GtkWidget* carg1, gint* carg2, gint* carg3) {
+// 	return ((void (*) (GtkCellRenderer*, GtkWidget*, gint*, gint*))(fnptr))(carg0, carg1, carg2, carg3);
+// }
+// void _gotk4_gtk3_CellRenderer_virtual_get_preferred_height_for_width(void* fnptr, GtkCellRenderer* carg0, GtkWidget* carg1, gint carg2, gint* carg3, gint* carg4) {
+// 	return ((void (*) (GtkCellRenderer*, GtkWidget*, gint, gint*, gint*))(fnptr))(carg0, carg1, carg2, carg3, carg4);
+// }
+// void _gotk4_gtk3_CellRenderer_virtual_get_preferred_width(void* fnptr, GtkCellRenderer* carg0, GtkWidget* carg1, gint* carg2, gint* carg3) {
+// 	return ((void (*) (GtkCellRenderer*, GtkWidget*, gint*, gint*))(fnptr))(carg0, carg1, carg2, carg3);
+// }
+// void _gotk4_gtk3_CellRenderer_virtual_get_preferred_width_for_height(void* fnptr, GtkCellRenderer* carg0, GtkWidget* carg1, gint carg2, gint* carg3, gint* carg4) {
+// 	return ((void (*) (GtkCellRenderer*, GtkWidget*, gint, gint*, gint*))(fnptr))(carg0, carg1, carg2, carg3, carg4);
 // }
-// C.GtkSizeRequestMode _gotk4_gtk3_CellRenderer_virtual_get_request_mode(void* fnptr, *C.GtkCellRenderer carg0) {
-// 	return ((C.GtkSizeRequestMode (*) (*C.GtkCellRenderer))(fnptr))(carg0);
+// GtkSizeRequestMode _gotk4_gtk3_CellRenderer_virtual_get_request_mode(void* fnptr, GtkCellRenderer* carg0) {
+// 	return ((GtkSizeRequestMode (*) (GtkCellRenderer*))(fnptr))(carg0);
 // }
-// extern C.void _gotk4_gtk3_CellRendererText_edited(*C.GtkCellRendererText, *C.gchar, *C.gchar);
-// C.void _gotk4_gtk3_CellRendererText_virtual_edited(void* fnptr, *C.GtkCellRendererText carg0, *C.gchar carg1, *C.gchar carg2) {
-// 	return ((C.void (*) (*C.GtkCellRendererText, *C.gchar, *C.gchar))(fnptr))(carg0, carg1, carg2);
+// extern void _gotk4_gtk3_CellRendererText_edited(GtkCellRendererText*, const gchar*, const gchar*);
+// void _gotk4_gtk3_CellRendererText_virtual_edited(void* fnptr, GtkCellRendererText* carg0, const gchar* carg1, const gchar* carg2) {
+// 	return ((void (*) (GtkCellRendererText*, const gchar*, const gchar*))(fnptr))(carg0, carg1, carg2);
 // }
-// extern C.void _gotk4_gtk3_CellRendererToggle_toggled(*C.GtkCellRendererToggle, *C.gchar);
-// C.void _gotk4_gtk3_CellRendererToggle_virtual_toggled(void* fnptr, *C.GtkCellRendererToggle carg0, *C.gchar carg1) {
-// 	return ((C.void (*) (*C.GtkCellRendererToggle, *C.gchar))(fnptr))(carg0, carg1);
+// extern void _gotk4_gtk3_CellRendererToggle_toggled(GtkCellRendererToggle*, const gchar*);
+// void _gotk4_gtk3_CellRendererToggle_virtual_toggled(void* fnptr, GtkCellRendererToggle* carg0, const gchar* carg1) {
+// 	return ((void (*) (GtkCellRendererToggle*, const gchar*))(fnptr))(carg0, carg1);
 // }
-// extern C.void _gotk4_gtk3_CssProvider_parsing_error(*C.GtkCssProvider, *C.GtkCssSection, *C.GError);
-// C.void _gotk4_gtk3_CssProvider_virtual_parsing_error(void* fnptr, *C.GtkCssProvider carg0, *C.GtkCssSection carg1, *C.GError carg2) {
-// 	return ((C.void (*) (*C.GtkCssProvider, *C.GtkCssSection, *C.GError))(fnptr))(carg0, carg1, carg2);
+// extern void _gotk4_gtk3_CssProvider_parsing_error(GtkCssProvider*, GtkCssSection*, const GError*);
+// void _gotk4_gtk3_CssProvider_virtual_parsing_error(void* fnptr, GtkCssProvider* carg0, GtkCssSection* carg1, const GError* carg2) {
+// 	return ((void (*) (GtkCssProvider*, GtkCssSection*, const GError*))(fnptr))(carg0, carg1, carg2);
 // }
-// extern C.guint _gotk4_gtk3_EntryBuffer_delete_text(*C.GtkEntryBuffer, C.guint, C.guint);
-// extern C.void _gotk4_gtk3_EntryBuffer_deleted_text(*C.GtkEntryBuffer, C.guint, C.guint);
-// extern C.guint _gotk4_gtk3_EntryBuffer_get_length(*C.GtkEntryBuffer);
-// extern *C.gchar _gotk4_gtk3_EntryBuffer_get_text(*C.GtkEntryBuffer, *C.gsize);
-// extern C.guint _gotk4_gtk3_EntryBuffer_insert_text(*C.GtkEntryBuffer, C.guint, *C.gchar, C.guint);
-// extern C.void _gotk4_gtk3_EntryBuffer_inserted_text(*C.GtkEntryBuffer, C.guint, *C.gchar, C.guint);
-// C.guint _gotk4_gtk3_EntryBuffer_virtual_delete_text(void* fnptr, *C.GtkEntryBuffer carg0, C.guint carg1, C.guint carg2) {
-// 	return ((C.guint (*) (*C.GtkEntryBuffer, C.guint, C.guint))(fnptr))(carg0, carg1, carg2);
+// extern guint _gotk4_gtk3_EntryBuffer_delete_text(GtkEntryBuffer*, guint, guint);
+// extern void _gotk4_gtk3_EntryBuffer_deleted_text(GtkEntryBuffer*, guint, guint);
+// extern guint _gotk4_gtk3_EntryBuffer_get_length(GtkEntryBuffer*);
+// extern const gchar* _gotk4_gtk3_EntryBuffer_get_text(GtkEntryBuffer*, gsize*);
+// extern guint _gotk4_gtk3_EntryBuffer_insert_text(GtkEntryBuffer*, guint, const gchar*, guint);
+// extern void _gotk4_gtk3_EntryBuffer_inserted_text(GtkEntryBuffer*, guint, const gchar*, guint);
+// guint _gotk4_gtk3_EntryBuffer_virtual_delete_text(void* fnptr, GtkEntryBuffer* carg0, guint carg1, guint carg2) {
+// 	return ((guint (*) (GtkEntryBuffer*, guint, guint))(fnptr))(carg0, carg1, carg2);
 // }
-// C.void _gotk4_gtk3_EntryBuffer_virtual_deleted_text(void* fnptr, *C.GtkEntryBuffer carg0, C.guint carg1, C.guint carg2) {
-// 	return ((C.void (*) (*C.GtkEntryBuffer, C.guint, C.guint))(fnptr))(carg0, carg1, carg2);
+// void _gotk4_gtk3_EntryBuffer_virtual_deleted_text(void* fnptr, GtkEntryBuffer* carg0, guint carg1, guint carg2) {
+// 	return ((void (*) (GtkEntryBuffer*, guint, guint))(fnptr))(carg0, carg1, carg2);
 // }
-// C.guint _gotk4_gtk3_EntryBuffer_virtual_get_length(void* fnptr, *C.GtkEntryBuffer carg0) {
-// 	return ((C.guint (*) (*C.GtkEntryBuffer))(fnptr))(carg0);
+// guint _gotk4_gtk3_EntryBuffer_virtual_get_length(void* fnptr, GtkEntryBuffer* carg0) {
+// 	return ((guint (*) (GtkEntryBuffer*))(fnptr))(carg0);
 // }
-// *C.gchar _gotk4_gtk3_EntryBuffer_virtual_get_text(void* fnptr, *C.GtkEntryBuffer carg0, *C.gsize carg1) {
-// 	return ((*C.gchar (*) (*C.GtkEntryBuffer, *C.gsize))(fnptr))(carg0, carg1);
+// const gchar* _gotk4_gtk3_EntryBuffer_virtual_get_text(void* fnptr, GtkEntryBuffer* carg0, gsize* carg1) {
+// 	return ((const gchar* (*) (GtkEntryBuffer*, gsize*))(fnptr))(carg0, carg1);
 // }
-// C.guint _gotk4_gtk3_EntryBuffer_virtual_insert_text(void* fnptr, *C.GtkEntryBuffer carg0, C.guint carg1, *C.gchar carg2, C.guint carg3) {
-// 	return ((C.guint (*) (*C.GtkEntryBuffer, C.guint, *C.gchar, C.guint))(fnptr))(carg0, carg1, carg2, carg3);
+// guint _gotk4_gtk3_EntryBuffer_virtual_insert_text(void* fnptr, GtkEntryBuffer* carg0, guint carg1, const gchar* carg2, guint carg3) {
+// 	return ((guint (*) (GtkEntryBuffer*, guint, const gchar*, guint))(fnptr))(carg0, carg1, carg2, carg3);
 // }
-// C.void _gotk4_gtk3_EntryBuffer_virtual_inserted_text(void* fnptr, *C.GtkEntryBuffer carg0, C.guint carg1, *C.gchar carg2, C.guint carg3) {
-// 	return ((C.void (*) (*C.GtkEntryBuffer, C.guint, *C.gchar, C.guint))(fnptr))(carg0, carg1, carg2, carg3);
+// void _gotk4_gtk3_EntryBuffer_virtual_inserted_text(void* fnptr, GtkEntryBuffer* carg0, guint carg1, const gchar* carg2, guint carg3) {
+// 	return ((void (*) (GtkEntryBuffer*, guint, const gchar*, guint))(fnptr))(carg0, carg1, carg2, carg3);
 // }
-// extern C.void _gotk4_gtk3_EntryCompletion_action_activated(*C.GtkEntryCompletion, C.gint);
-// extern C.gboolean _gotk4_gtk3_EntryCompletion_cursor_on_match(*C.GtkEntryCompletion, *C.GtkTreeModel, *C.GtkTreeIter);
-// extern C.gboolean _gotk4_gtk3_EntryCompletion_insert_prefix(*C.GtkEntryCompletion, *C.gchar);
-// extern C.gboolean _gotk4_gtk3_EntryCompletion_match_selected(*C.GtkEntryCompletion, *C.GtkTreeModel, *C.GtkTreeIter);
-// extern C.void _gotk4_gtk3_EntryCompletion_no_matches(*C.GtkEntryCompletion);
-// C.void _gotk4_gtk3_EntryCompletion_virtual_action_activated(void* fnptr, *C.GtkEntryCompletion carg0, C.gint carg1) {
-// 	return ((C.void (*) (*C.GtkEntryCompletion, C.gint))(fnptr))(carg0, carg1);
+// extern void _gotk4_gtk3_EntryCompletion_action_activated(GtkEntryCompletion*, gint);
+// extern gboolean _gotk4_gtk3_EntryCompletion_cursor_on_match(GtkEntryCompletion*, GtkTreeModel*, GtkTreeIter*);
+// extern gboolean _gotk4_gtk3_EntryCompletion_insert_prefix(GtkEntryCompletion*, const gchar*);
+// extern gboolean _gotk4_gtk3_EntryCompletion_match_selected(GtkEntryCompletion*, GtkTreeModel*, GtkTreeIter*);
+// extern void _gotk4_gtk3_EntryCompletion_no_matches(GtkEntryCompletion*);
+// void _gotk4_gtk3_EntryCompletion_virtual_action_activated(void* fnptr, GtkEntryCompletion* carg0, gint carg1) {
+// 	return ((void (*) (GtkEntryCompletion*, gint))(fnptr))(carg0, carg1);
 // }
-// C.gboolean _gotk4_gtk3_EntryCompletion_virtual_cursor_on_match(void* fnptr, *C.GtkEntryCompletion carg0, *C.GtkTreeModel carg1, *C.GtkTreeIter carg2) {
-// 	return ((C.gboolean (*) (*C.GtkEntryCompletion, *C.GtkTreeModel, *C.GtkTreeIter))(fnptr))(carg0, carg1, carg2);
-// }
-// C.gboolean _gotk4_gtk3_EntryCompletion_virtual_insert_prefix(void* fnptr, *C.GtkEntryCompletion carg0, *C.gchar carg1) {
-// 	return ((C.gboolean (*) (*C.GtkEntryCompletion, *C.gchar))(fnptr))(carg0, carg1);
-// }
-// C.gboolean _gotk4_gtk3_EntryCompletion_virtual_match_selected(void* fnptr, *C.GtkEntryCompletion carg0, *C.GtkTreeModel carg1, *C.GtkTreeIter carg2) {
-// 	return ((C.gboolean (*) (*C.GtkEntryCompletion, *C.GtkTreeModel, *C.GtkTreeIter))(fnptr))(carg0, carg1, carg2);
+// gboolean _gotk4_gtk3_EntryCompletion_virtual_cursor_on_match(void* fnptr, GtkEntryCompletion* carg0, GtkTreeModel* carg1, GtkTreeIter* carg2) {
+// 	return ((gboolean (*) (GtkEntryCompletion*, GtkTreeModel*, GtkTreeIter*))(fnptr))(carg0, carg1, carg2);
+// }
+// gboolean _gotk4_gtk3_EntryCompletion_virtual_insert_prefix(void* fnptr, GtkEntryCompletion* carg0, const gchar* carg1) {
+// 	return ((gboolean (*) (GtkEntryCompletion*, const gchar*))(fnptr))(carg0, carg1);
+// }
+// gboolean _gotk4_gtk3_EntryCompletion_virtual_match_selected(void* fnptr, GtkEntryCompletion* carg0, GtkTreeModel* carg1, GtkTreeIter* carg2) {
+// 	return ((gboolean (*) (GtkEntryCompletion*, GtkTreeModel*, GtkTreeIter*))(fnptr))(carg0, carg1, carg2);
 // }
-// C.void _gotk4_gtk3_EntryCompletion_virtual_no_matches(void* fnptr, *C.GtkEntryCompletion carg0) {
-// 	return ((C.void (*) (*C.GtkEntryCompletion))(fnptr))(carg0);
+// void _gotk4_gtk3_EntryCompletion_virtual_no_matches(void* fnptr, GtkEntryCompletion* carg0) {
+// 	return ((void (*) (GtkEntryCompletion*))(fnptr))(carg0);
 // }
-// extern C.void _gotk4_gtk3_IMContext_commit(*C.GtkIMContext, *C.gchar);
-// extern C.gboolean _gotk4_gtk3_IMContext_delete_surrounding(*C.GtkIMContext, C.gint, C.gint);
-// extern C.gboolean _gotk4_gtk3_IMContext_filter_keypress(*C.GtkIMContext, *C.GdkEventKey);
-// extern C.void _gotk4_gtk3_IMContext_focus_in(*C.GtkIMContext);
-// extern C.void _gotk4_gtk3_IMContext_focus_out(*C.GtkIMContext);
-// extern C.void _gotk4_gtk3_IMContext_get_preedit_string(*C.GtkIMContext, *C.gchar, *C.PangoAttrList, C.gint);
-// extern C.gboolean _gotk4_gtk3_IMContext_get_surrounding(*C.GtkIMContext, *C.gchar, C.gint);
-// extern C.void _gotk4_gtk3_IMContext_preedit_changed(*C.GtkIMContext);
-// extern C.void _gotk4_gtk3_IMContext_preedit_end(*C.GtkIMContext);
-// extern C.void _gotk4_gtk3_IMContext_preedit_start(*C.GtkIMContext);
-// extern C.void _gotk4_gtk3_IMContext_reset(*C.GtkIMContext);
-// extern C.gboolean _gotk4_gtk3_IMContext_retrieve_surrounding(*C.GtkIMContext);
-// extern C.void _gotk4_gtk3_IMContext_set_client_window(*C.GtkIMContext, *C.GdkWindow);
-// extern C.void _gotk4_gtk3_IMContext_set_cursor_location(*C.GtkIMContext, *C.GdkRectangle);
-// extern C.void _gotk4_gtk3_IMContext_set_surrounding(*C.GtkIMContext, *C.gchar, C.gint, C.gint);
-// extern C.void _gotk4_gtk3_IMContext_set_use_preedit(*C.GtkIMContext, C.gboolean);
-// C.void _gotk4_gtk3_IMContext_virtual_commit(void* fnptr, *C.GtkIMContext carg0, *C.gchar carg1) {
-// 	return ((C.void (*) (*C.GtkIMContext, *C.gchar))(fnptr))(carg0, carg1);
+// extern void _gotk4_gtk3_IMContext_commit(GtkIMContext*, const gchar*);
+// extern gboolean _gotk4_gtk3_IMContext_delete_surrounding(GtkIMContext*, gint, gint);
+// extern gboolean _gotk4_gtk3_IMContext_filter_keypress(GtkIMContext*, GdkEventKey*);
+// extern void _gotk4_gtk3_IMContext_focus_in(GtkIMContext*);
+// extern void _gotk4_gtk3_IMContext_focus_out(GtkIMContext*);
+// extern void _gotk4_gtk3_IMContext_get_preedit_string(GtkIMContext*, gchar*, PangoAttrList*, gint);
+// extern gboolean _gotk4_gtk3_IMContext_get_surrounding(GtkIMContext*, gchar*, gint);
+// extern void _gotk4_gtk3_IMContext_preedit_changed(GtkIMContext*);
+// extern void _gotk4_gtk3_IMContext_preedit_end(GtkIMContext*);
+// extern void _gotk4_gtk3_IMContext_preedit_start(GtkIMContext*);
+// extern void _gotk4_gtk3_IMContext_reset(GtkIMContext*);
+// extern gboolean _gotk4_gtk3_IMContext_retrieve_surrounding(GtkIMContext*);
+// extern void _gotk4_gtk3_IMContext_set_client_window(GtkIMContext*, GdkWindow*);
+// extern void _gotk4_gtk3_IMContext_set_cursor_location(GtkIMContext*, GdkRectangle*);
+// extern void _gotk4_gtk3_IMContext_set_surrounding(GtkIMContext*, const gchar*, gint, gint);
+// extern void _gotk4_gtk3_IMContext_set_use_preedit(GtkIMContext*, gboolean);
+// void _gotk4_gtk3_IMContext_virtual_commit(void* fnptr, GtkIMContext* carg0, const gchar* carg1) {
+// 	return ((void (*) (GtkIMContext*, const gchar*))(fnptr))(carg0, carg1);
 // }
-// C.gboolean _gotk4_gtk3_IMContext_virtual_delete_surrounding(void* fnptr, *C.GtkIMContext carg0, C.gint carg1, C.gint carg2) {
-// 	return ((C.gboolean (*) (*C.GtkIMContext, C.gint, C.gint))(fnptr))(carg0, carg1, carg2);
+// gboolean _gotk4_gtk3_IMContext_virtual_delete_surrounding(void* fnptr, GtkIMContext* carg0, gint carg1, gint carg2) {
+// 	return ((gboolean (*) (GtkIMContext*, gint, gint))(fnptr))(carg0, carg1, carg2);
 // }
-// C.gboolean _gotk4_gtk3_IMContext_virtual_filter_keypress(void* fnptr, *C.GtkIMContext carg0, *C.GdkEventKey carg1) {
-// 	return ((C.gboolean (*) (*C.GtkIMContext, *C.GdkEventKey))(fnptr))(carg0, carg1);
+// gboolean _gotk4_gtk3_IMContext_virtual_filter_keypress(void* fnptr, GtkIMContext* carg0, GdkEventKey* carg1) {
+// 	return ((gboolean (*) (GtkIMContext*, GdkEventKey*))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gtk3_IMContext_virtual_focus_in(void* fnptr, *C.GtkIMContext carg0) {
-// 	return ((C.void (*) (*C.GtkIMContext))(fnptr))(carg0);
+// void _gotk4_gtk3_IMContext_virtual_focus_in(void* fnptr, GtkIMContext* carg0) {
+// 	return ((void (*) (GtkIMContext*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_IMContext_virtual_focus_out(void* fnptr, *C.GtkIMContext carg0) {
-// 	return ((C.void (*) (*C.GtkIMContext))(fnptr))(carg0);
+// void _gotk4_gtk3_IMContext_virtual_focus_out(void* fnptr, GtkIMContext* carg0) {
+// 	return ((void (*) (GtkIMContext*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_IMContext_virtual_get_preedit_string(void* fnptr, *C.GtkIMContext carg0, *C.gchar* carg1, *C.PangoAttrList* carg2, C.gint* carg3) {
-// 	return ((C.void (*) (*C.GtkIMContext, *C.gchar*, *C.PangoAttrList*, C.gint*))(fnptr))(carg0, carg1, carg2, carg3);
+// void _gotk4_gtk3_IMContext_virtual_get_preedit_string(void* fnptr, GtkIMContext* carg0, gchar** carg1, PangoAttrList** carg2, gint* carg3) {
+// 	return ((void (*) (GtkIMContext*, gchar**, PangoAttrList**, gint*))(fnptr))(carg0, carg1, carg2, carg3);
 // }
-// C.gboolean _gotk4_gtk3_IMContext_virtual_get_surrounding(void* fnptr, *C.GtkIMContext carg0, *C.gchar* carg1, C.gint* carg2) {
-// 	return ((C.gboolean (*) (*C.GtkIMContext, *C.gchar*, C.gint*))(fnptr))(carg0, carg1, carg2);
+// gboolean _gotk4_gtk3_IMContext_virtual_get_surrounding(void* fnptr, GtkIMContext* carg0, gchar** carg1, gint* carg2) {
+// 	return ((gboolean (*) (GtkIMContext*, gchar**, gint*))(fnptr))(carg0, carg1, carg2);
 // }
-// C.void _gotk4_gtk3_IMContext_virtual_preedit_changed(void* fnptr, *C.GtkIMContext carg0) {
-// 	return ((C.void (*) (*C.GtkIMContext))(fnptr))(carg0);
+// void _gotk4_gtk3_IMContext_virtual_preedit_changed(void* fnptr, GtkIMContext* carg0) {
+// 	return ((void (*) (GtkIMContext*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_IMContext_virtual_preedit_end(void* fnptr, *C.GtkIMContext carg0) {
-// 	return ((C.void (*) (*C.GtkIMContext))(fnptr))(carg0);
+// void _gotk4_gtk3_IMContext_virtual_preedit_end(void* fnptr, GtkIMContext* carg0) {
+// 	return ((void (*) (GtkIMContext*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_IMContext_virtual_preedit_start(void* fnptr, *C.GtkIMContext carg0) {
-// 	return ((C.void (*) (*C.GtkIMContext))(fnptr))(carg0);
+// void _gotk4_gtk3_IMContext_virtual_preedit_start(void* fnptr, GtkIMContext* carg0) {
+// 	return ((void (*) (GtkIMContext*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_IMContext_virtual_reset(void* fnptr, *C.GtkIMContext carg0) {
-// 	return ((C.void (*) (*C.GtkIMContext))(fnptr))(carg0);
+// void _gotk4_gtk3_IMContext_virtual_reset(void* fnptr, GtkIMContext* carg0) {
+// 	return ((void (*) (GtkIMContext*))(fnptr))(carg0);
 // }
-// C.gboolean _gotk4_gtk3_IMContext_virtual_retrieve_surrounding(void* fnptr, *C.GtkIMContext carg0) {
-// 	return ((C.gboolean (*) (*C.GtkIMContext))(fnptr))(carg0);
+// gboolean _gotk4_gtk3_IMContext_virtual_retrieve_surrounding(void* fnptr, GtkIMContext* carg0) {
+// 	return ((gboolean (*) (GtkIMContext*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_IMContext_virtual_set_client_window(void* fnptr, *C.GtkIMContext carg0, *C.GdkWindow carg1) {
-// 	return ((C.void (*) (*C.GtkIMContext, *C.GdkWindow))(fnptr))(carg0, carg1);
+// void _gotk4_gtk3_IMContext_virtual_set_client_window(void* fnptr, GtkIMContext* carg0, GdkWindow* carg1) {
+// 	return ((void (*) (GtkIMContext*, GdkWindow*))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gtk3_IMContext_virtual_set_cursor_location(void* fnptr, *C.GtkIMContext carg0, *C.GdkRectangle carg1) {
-// 	return ((C.void (*) (*C.GtkIMContext, *C.GdkRectangle))(fnptr))(carg0, carg1);
+// void _gotk4_gtk3_IMContext_virtual_set_cursor_location(void* fnptr, GtkIMContext* carg0, GdkRectangle* carg1) {
+// 	return ((void (*) (GtkIMContext*, GdkRectangle*))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gtk3_IMContext_virtual_set_surrounding(void* fnptr, *C.GtkIMContext carg0, *C.gchar carg1, C.gint carg2, C.gint carg3) {
-// 	return ((C.void (*) (*C.GtkIMContext, *C.gchar, C.gint, C.gint))(fnptr))(carg0, carg1, carg2, carg3);
+// void _gotk4_gtk3_IMContext_virtual_set_surrounding(void* fnptr, GtkIMContext* carg0, const gchar* carg1, gint carg2, gint carg3) {
+// 	return ((void (*) (GtkIMContext*, const gchar*, gint, gint))(fnptr))(carg0, carg1, carg2, carg3);
 // }
-// C.void _gotk4_gtk3_IMContext_virtual_set_use_preedit(void* fnptr, *C.GtkIMContext carg0, C.gboolean carg1) {
-// 	return ((C.void (*) (*C.GtkIMContext, C.gboolean))(fnptr))(carg0, carg1);
+// void _gotk4_gtk3_IMContext_virtual_set_use_preedit(void* fnptr, GtkIMContext* carg0, gboolean carg1) {
+// 	return ((void (*) (GtkIMContext*, gboolean))(fnptr))(carg0, carg1);
 // }
-// extern C.void _gotk4_gtk3_IconTheme_changed(*C.GtkIconTheme);
-// C.void _gotk4_gtk3_IconTheme_virtual_changed(void* fnptr, *C.GtkIconTheme carg0) {
-// 	return ((C.void (*) (*C.GtkIconTheme))(fnptr))(carg0);
+// extern void _gotk4_gtk3_IconTheme_changed(GtkIconTheme*);
+// void _gotk4_gtk3_IconTheme_virtual_changed(void* fnptr, GtkIconTheme* carg0) {
+// 	return ((void (*) (GtkIconTheme*))(fnptr))(carg0);
 // }
-// extern C.void _gotk4_gtk3_NativeDialog_hide(*C.GtkNativeDialog);
-// extern C.void _gotk4_gtk3_NativeDialog_response(*C.GtkNativeDialog, C.gint);
-// extern C.void _gotk4_gtk3_NativeDialog_show(*C.GtkNativeDialog);
-// C.void _gotk4_gtk3_NativeDialog_virtual_hide(void* fnptr, *C.GtkNativeDialog carg0) {
-// 	return ((C.void (*) (*C.GtkNativeDialog))(fnptr))(carg0);
+// extern void _gotk4_gtk3_NativeDialog_hide(GtkNativeDialog*);
+// extern void _gotk4_gtk3_NativeDialog_response(GtkNativeDialog*, gint);
+// extern void _gotk4_gtk3_NativeDialog_show(GtkNativeDialog*);
+// void _gotk4_gtk3_NativeDialog_virtual_hide(void* fnptr, GtkNativeDialog* carg0) {
+// 	return ((void (*) (GtkNativeDialog*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_NativeDialog_virtual_response(void* fnptr, *C.GtkNativeDialog carg0, C.gint carg1) {
-// 	return ((C.void (*) (*C.GtkNativeDialog, C.gint))(fnptr))(carg0, carg1);
+// void _gotk4_gtk3_NativeDialog_virtual_response(void* fnptr, GtkNativeDialog* carg0, gint carg1) {
+// 	return ((void (*) (GtkNativeDialog*, gint))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gtk3_NativeDialog_virtual_show(void* fnptr, *C.GtkNativeDialog carg0) {
-// 	return ((C.void (*) (*C.GtkNativeDialog))(fnptr))(carg0);
+// void _gotk4_gtk3_NativeDialog_virtual_show(void* fnptr, GtkNativeDialog* carg0) {
+// 	return ((void (*) (GtkNativeDialog*))(fnptr))(carg0);
 // }
-// extern C.void _gotk4_gtk3_PrintOperation_begin_print(*C.GtkPrintOperation, *C.GtkPrintContext);
-// extern C.void _gotk4_gtk3_PrintOperation_custom_widget_apply(*C.GtkPrintOperation, *C.GtkWidget);
-// extern C.void _gotk4_gtk3_PrintOperation_done(*C.GtkPrintOperation, C.GtkPrintOperationResult);
-// extern C.void _gotk4_gtk3_PrintOperation_draw_page(*C.GtkPrintOperation, *C.GtkPrintContext, C.gint);
-// extern C.void _gotk4_gtk3_PrintOperation_end_print(*C.GtkPrintOperation, *C.GtkPrintContext);
-// extern C.gboolean _gotk4_gtk3_PrintOperation_paginate(*C.GtkPrintOperation, *C.GtkPrintContext);
-// extern C.gboolean _gotk4_gtk3_PrintOperation_preview(*C.GtkPrintOperation, *C.GtkPrintOperationPreview, *C.GtkPrintContext, *C.GtkWindow);
-// extern C.void _gotk4_gtk3_PrintOperation_request_page_setup(*C.GtkPrintOperation, *C.GtkPrintContext, C.gint, *C.GtkPageSetup);
-// extern C.void _gotk4_gtk3_PrintOperation_status_changed(*C.GtkPrintOperation);
-// extern C.void _gotk4_gtk3_PrintOperation_update_custom_widget(*C.GtkPrintOperation, *C.GtkWidget, *C.GtkPageSetup, *C.GtkPrintSettings);
-// C.void _gotk4_gtk3_PrintOperation_virtual_begin_print(void* fnptr, *C.GtkPrintOperation carg0, *C.GtkPrintContext carg1) {
-// 	return ((C.void (*) (*C.GtkPrintOperation, *C.GtkPrintContext))(fnptr))(carg0, carg1);
-// }
-// C.void _gotk4_gtk3_PrintOperation_virtual_custom_widget_apply(void* fnptr, *C.GtkPrintOperation carg0, *C.GtkWidget carg1) {
-// 	return ((C.void (*) (*C.GtkPrintOperation, *C.GtkWidget))(fnptr))(carg0, carg1);
-// }
-// C.void _gotk4_gtk3_PrintOperation_virtual_done(void* fnptr, *C.GtkPrintOperation carg0, C.GtkPrintOperationResult carg1) {
-// 	return ((C.void (*) (*C.GtkPrintOperation, C.GtkPrintOperationResult))(fnptr))(carg0, carg1);
-// }
-// C.void _gotk4_gtk3_PrintOperation_virtual_draw_page(void* fnptr, *C.GtkPrintOperation carg0, *C.GtkPrintContext carg1, C.gint carg2) {
-// 	return ((C.void (*) (*C.GtkPrintOperation, *C.GtkPrintContext, C.gint))(fnptr))(carg0, carg1, carg2);
-// }
-// C.void _gotk4_gtk3_PrintOperation_virtual_end_print(void* fnptr, *C.GtkPrintOperation carg0, *C.GtkPrintContext carg1) {
-// 	return ((C.void (*) (*C.GtkPrintOperation, *C.GtkPrintContext))(fnptr))(carg0, carg1);
-// }
-// C.gboolean _gotk4_gtk3_PrintOperation_virtual_paginate(void* fnptr, *C.GtkPrintOperation carg0, *C.GtkPrintContext carg1) {
-// 	return ((C.gboolean (*) (*C.GtkPrintOperation, *C.GtkPrintContext))(fnptr))(carg0, carg1);
-// }
-// C.gboolean _gotk4_gtk3_PrintOperation_virtual_preview(void* fnptr, *C.GtkPrintOperation carg0, *C.GtkPrintOperationPreview carg1, *C.GtkPrintContext carg2, *C.GtkWindow carg3) {
-// 	return ((C.gboolean (*) (*C.GtkPrintOperation, *C.GtkPrintOperationPreview, *C.GtkPrintContext, *C.GtkWindow))(fnptr))(carg0, carg1, carg2, carg3);
-// }
-// C.void _gotk4_gtk3_PrintOperation_virtual_request_page_setup(void* fnptr, *C.GtkPrintOperation carg0, *C.GtkPrintContext carg1, C.gint carg2, *C.GtkPageSetup carg3) {
-// 	return ((C.void (*) (*C.GtkPrintOperation, *C.GtkPrintContext, C.gint, *C.GtkPageSetup))(fnptr))(carg0, carg1, carg2, carg3);
-// }
-// C.void _gotk4_gtk3_PrintOperation_virtual_status_changed(void* fnptr, *C.GtkPrintOperation carg0) {
-// 	return ((C.void (*) (*C.GtkPrintOperation))(fnptr))(carg0);
+// extern void _gotk4_gtk3_PrintOperation_begin_print(GtkPrintOperation*, GtkPrintContext*);
+// extern void _gotk4_gtk3_PrintOperation_custom_widget_apply(GtkPrintOperation*, GtkWidget*);
+// extern void _gotk4_gtk3_PrintOperation_done(GtkPrintOperation*, GtkPrintOperationResult);
+// extern void _gotk4_gtk3_PrintOperation_draw_page(GtkPrintOperation*, GtkPrintContext*, gint);
+// extern void _gotk4_gtk3_PrintOperation_end_print(GtkPrintOperation*, GtkPrintContext*);
+// extern gboolean _gotk4_gtk3_PrintOperation_paginate(GtkPrintOperation*, GtkPrintContext*);
+// extern gboolean _gotk4_gtk3_PrintOperation_preview(GtkPrintOperation*, GtkPrintOperationPreview*, GtkPrintContext*, GtkWindow*);
+// extern void _gotk4_gtk3_PrintOperation_request_page_setup(GtkPrintOperation*, GtkPrintContext*, gint, GtkPageSetup*);
+// extern void _gotk4_gtk3_PrintOperation_status_changed(GtkPrintOperation*);
+// extern void _gotk4_gtk3_PrintOperation_update_custom_widget(GtkPrintOperation*, GtkWidget*, GtkPageSetup*, GtkPrintSettings*);
+// void _gotk4_gtk3_PrintOperation_virtual_begin_print(void* fnptr, GtkPrintOperation* carg0, GtkPrintContext* carg1) {
+// 	return ((void (*) (GtkPrintOperation*, GtkPrintContext*))(fnptr))(carg0, carg1);
+// }
+// void _gotk4_gtk3_PrintOperation_virtual_custom_widget_apply(void* fnptr, GtkPrintOperation* carg0, GtkWidget* carg1) {
+// 	return ((void (*) (GtkPrintOperation*, GtkWidget*))(fnptr))(carg0, carg1);
+// }
+// void _gotk4_gtk3_PrintOperation_virtual_done(void* fnptr, GtkPrintOperation* carg0, GtkPrintOperationResult carg1) {
+// 	return ((void (*) (GtkPrintOperation*, GtkPrintOperationResult))(fnptr))(carg0, carg1);
+// }
+// void _gotk4_gtk3_PrintOperation_virtual_draw_page(void* fnptr, GtkPrintOperation* carg0, GtkPrintContext* carg1, gint carg2) {
+// 	return ((void (*) (GtkPrintOperation*, GtkPrintContext*, gint))(fnptr))(carg0, carg1, carg2);
+// }
+// void _gotk4_gtk3_PrintOperation_virtual_end_print(void* fnptr, GtkPrintOperation* carg0, GtkPrintContext* carg1) {
+// 	return ((void (*) (GtkPrintOperation*, GtkPrintContext*))(fnptr))(carg0, carg1);
+// }
+// gboolean _gotk4_gtk3_PrintOperation_virtual_paginate(void* fnptr, GtkPrintOperation* carg0, GtkPrintContext* carg1) {
+// 	return ((gboolean (*) (GtkPrintOperation*, GtkPrintContext*))(fnptr))(carg0, carg1);
+// }
+// gboolean _gotk4_gtk3_PrintOperation_virtual_preview(void* fnptr, GtkPrintOperation* carg0, GtkPrintOperationPreview* carg1, GtkPrintContext* carg2, GtkWindow* carg3) {
+// 	return ((gboolean (*) (GtkPrintOperation*, GtkPrintOperationPreview*, GtkPrintContext*, GtkWindow*))(fnptr))(carg0, carg1, carg2, carg3);
+// }
+// void _gotk4_gtk3_PrintOperation_virtual_request_page_setup(void* fnptr, GtkPrintOperation* carg0, GtkPrintContext* carg1, gint carg2, GtkPageSetup* carg3) {
+// 	return ((void (*) (GtkPrintOperation*, GtkPrintContext*, gint, GtkPageSetup*))(fnptr))(carg0, carg1, carg2, carg3);
+// }
+// void _gotk4_gtk3_PrintOperation_virtual_status_changed(void* fnptr, GtkPrintOperation* carg0) {
+// 	return ((void (*) (GtkPrintOperation*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_PrintOperation_virtual_update_custom_widget(void* fnptr, *C.GtkPrintOperation carg0, *C.GtkWidget carg1, *C.GtkPageSetup carg2, *C.GtkPrintSettings carg3) {
-// 	return ((C.void (*) (*C.GtkPrintOperation, *C.GtkWidget, *C.GtkPageSetup, *C.GtkPrintSettings))(fnptr))(carg0, carg1, carg2, carg3);
+// void _gotk4_gtk3_PrintOperation_virtual_update_custom_widget(void* fnptr, GtkPrintOperation* carg0, GtkWidget* carg1, GtkPageSetup* carg2, GtkPrintSettings* carg3) {
+// 	return ((void (*) (GtkPrintOperation*, GtkWidget*, GtkPageSetup*, GtkPrintSettings*))(fnptr))(carg0, carg1, carg2, carg3);
 // }
-// extern C.void _gotk4_gtk3_RcStyle_merge(*C.GtkRcStyle, *C.GtkRcStyle);
-// extern C.guint _gotk4_gtk3_RcStyle_parse(*C.GtkRcStyle, *C.GtkSettings, *C.GScanner);
-// C.void _gotk4_gtk3_RcStyle_virtual_merge(void* fnptr, *C.GtkRcStyle carg0, *C.GtkRcStyle carg1) {
-// 	return ((C.void (*) (*C.GtkRcStyle, *C.GtkRcStyle))(fnptr))(carg0, carg1);
+// extern void _gotk4_gtk3_RcStyle_merge(GtkRcStyle*, GtkRcStyle*);
+// extern guint _gotk4_gtk3_RcStyle_parse(GtkRcStyle*, GtkSettings*, GScanner*);
+// void _gotk4_gtk3_RcStyle_virtual_merge(void* fnptr, GtkRcStyle* carg0, GtkRcStyle* carg1) {
+// 	return ((void (*) (GtkRcStyle*, GtkRcStyle*))(fnptr))(carg0, carg1);
 // }
-// C.guint _gotk4_gtk3_RcStyle_virtual_parse(void* fnptr, *C.GtkRcStyle carg0, *C.GtkSettings carg1, *C.GScanner carg2) {
-// 	return ((C.guint (*) (*C.GtkRcStyle, *C.GtkSettings, *C.GScanner))(fnptr))(carg0, carg1, carg2);
+// guint _gotk4_gtk3_RcStyle_virtual_parse(void* fnptr, GtkRcStyle* carg0, GtkSettings* carg1, GScanner* carg2) {
+// 	return ((guint (*) (GtkRcStyle*, GtkSettings*, GScanner*))(fnptr))(carg0, carg1, carg2);
 // }
-// extern C.void _gotk4_gtk3_RecentManager_changed(*C.GtkRecentManager);
-// C.void _gotk4_gtk3_RecentManager_virtual_changed(void* fnptr, *C.GtkRecentManager carg0) {
-// 	return ((C.void (*) (*C.GtkRecentManager))(fnptr))(carg0);
+// extern void _gotk4_gtk3_RecentManager_changed(GtkRecentManager*);
+// void _gotk4_gtk3_RecentManager_virtual_changed(void* fnptr, GtkRecentManager* carg0) {
+// 	return ((void (*) (GtkRecentManager*))(fnptr))(carg0);
 // }
-// extern C.void _gotk4_gtk3_StatusIcon_activate(*C.GtkStatusIcon);
-// extern C.gboolean _gotk4_gtk3_StatusIcon_button_press_event(*C.GtkStatusIcon, *C.GdkEventButton);
-// extern C.gboolean _gotk4_gtk3_StatusIcon_button_release_event(*C.GtkStatusIcon, *C.GdkEventButton);
-// extern C.void _gotk4_gtk3_StatusIcon_popup_menu(*C.GtkStatusIcon, C.guint, C.guint32);
-// extern C.gboolean _gotk4_gtk3_StatusIcon_query_tooltip(*C.GtkStatusIcon, C.gint, C.gint, C.gboolean, *C.GtkTooltip);
-// extern C.gboolean _gotk4_gtk3_StatusIcon_scroll_event(*C.GtkStatusIcon, *C.GdkEventScroll);
-// extern C.gboolean _gotk4_gtk3_StatusIcon_size_changed(*C.GtkStatusIcon, C.gint);
-// C.void _gotk4_gtk3_StatusIcon_virtual_activate(void* fnptr, *C.GtkStatusIcon carg0) {
-// 	return ((C.void (*) (*C.GtkStatusIcon))(fnptr))(carg0);
+// extern void _gotk4_gtk3_StatusIcon_activate(GtkStatusIcon*);
+// extern gboolean _gotk4_gtk3_StatusIcon_button_press_event(GtkStatusIcon*, GdkEventButton*);
+// extern gboolean _gotk4_gtk3_StatusIcon_button_release_event(GtkStatusIcon*, GdkEventButton*);
+// extern void _gotk4_gtk3_StatusIcon_popup_menu(GtkStatusIcon*, guint, guint32);
+// extern gboolean _gotk4_gtk3_StatusIcon_query_tooltip(GtkStatusIcon*, gint, gint, gboolean, GtkTooltip*);
+// extern gboolean _gotk4_gtk3_StatusIcon_scroll_event(GtkStatusIcon*, GdkEventScroll*);
+// extern gboolean _gotk4_gtk3_StatusIcon_size_changed(GtkStatusIcon*, gint);
+// void _gotk4_gtk3_StatusIcon_virtual_activate(void* fnptr, GtkStatusIcon* carg0) {
+// 	return ((void (*) (GtkStatusIcon*))(fnptr))(carg0);
 // }
-// C.gboolean _gotk4_gtk3_StatusIcon_virtual_button_press_event(void* fnptr, *C.GtkStatusIcon carg0, *C.GdkEventButton carg1) {
-// 	return ((C.gboolean (*) (*C.GtkStatusIcon, *C.GdkEventButton))(fnptr))(carg0, carg1);
+// gboolean _gotk4_gtk3_StatusIcon_virtual_button_press_event(void* fnptr, GtkStatusIcon* carg0, GdkEventButton* carg1) {
+// 	return ((gboolean (*) (GtkStatusIcon*, GdkEventButton*))(fnptr))(carg0, carg1);
 // }
-// C.gboolean _gotk4_gtk3_StatusIcon_virtual_button_release_event(void* fnptr, *C.GtkStatusIcon carg0, *C.GdkEventButton carg1) {
-// 	return ((C.gboolean (*) (*C.GtkStatusIcon, *C.GdkEventButton))(fnptr))(carg0, carg1);
+// gboolean _gotk4_gtk3_StatusIcon_virtual_button_release_event(void* fnptr, GtkStatusIcon* carg0, GdkEventButton* carg1) {
+// 	return ((gboolean (*) (GtkStatusIcon*, GdkEventButton*))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gtk3_StatusIcon_virtual_popup_menu(void* fnptr, *C.GtkStatusIcon carg0, C.guint carg1, C.guint32 carg2) {
-// 	return ((C.void (*) (*C.GtkStatusIcon, C.guint, C.guint32))(fnptr))(carg0, carg1, carg2);
+// void _gotk4_gtk3_StatusIcon_virtual_popup_menu(void* fnptr, GtkStatusIcon* carg0, guint carg1, guint32 carg2) {
+// 	return ((void (*) (GtkStatusIcon*, guint, guint32))(fnptr))(carg0, carg1, carg2);
 // }
-// C.gboolean _gotk4_gtk3_StatusIcon_virtual_query_tooltip(void* fnptr, *C.GtkStatusIcon carg0, C.gint carg1, C.gint carg2, C.gboolean carg3, *C.GtkTooltip carg4) {
-// 	return ((C.gboolean (*) (*C.GtkStatusIcon, C.gint, C.gint, C.gboolean, *C.GtkTooltip))(fnptr))(carg0, carg1, carg2, carg3, carg4);
+// gboolean _gotk4_gtk3_StatusIcon_virtual_query_tooltip(void* fnptr, GtkStatusIcon* carg0, gint carg1, gint carg2, gboolean carg3, GtkTooltip* carg4) {
+// 	return ((gboolean (*) (GtkStatusIcon*, gint, gint, gboolean, GtkTooltip*))(fnptr))(carg0, carg1, carg2, carg3, carg4);
 // }
-// C.gboolean _gotk4_gtk3_StatusIcon_virtual_scroll_event(void* fnptr, *C.GtkStatusIcon carg0, *C.GdkEventScroll carg1) {
-// 	return ((C.gboolean (*) (*C.GtkStatusIcon, *C.GdkEventScroll))(fnptr))(carg0, carg1);
+// gboolean _gotk4_gtk3_StatusIcon_virtual_scroll_event(void* fnptr, GtkStatusIcon* carg0, GdkEventScroll* carg1) {
+// 	return ((gboolean (*) (GtkStatusIcon*, GdkEventScroll*))(fnptr))(carg0, carg1);
 // }
-// C.gboolean _gotk4_gtk3_StatusIcon_virtual_size_changed(void* fnptr, *C.GtkStatusIcon carg0, C.gint carg1) {
-// 	return ((C.gboolean (*) (*C.GtkStatusIcon, C.gint))(fnptr))(carg0, carg1);
+// gboolean _gotk4_gtk3_StatusIcon_virtual_size_changed(void* fnptr, GtkStatusIcon* carg0, gint carg1) {
+// 	return ((gboolean (*) (GtkStatusIcon*, gint))(fnptr))(carg0, carg1);
 // }
-// extern C.void _gotk4_gtk3_Style_copy(*C.GtkStyle, *C.GtkStyle);
-// extern C.void _gotk4_gtk3_Style_init_from_rc(*C.GtkStyle, *C.GtkRcStyle);
-// extern C.void _gotk4_gtk3_Style_realize(*C.GtkStyle);
-// extern C.void _gotk4_gtk3_Style_unrealize(*C.GtkStyle);
-// C.void _gotk4_gtk3_Style_virtual_copy(void* fnptr, *C.GtkStyle carg0, *C.GtkStyle carg1) {
-// 	return ((C.void (*) (*C.GtkStyle, *C.GtkStyle))(fnptr))(carg0, carg1);
+// extern void _gotk4_gtk3_Style_copy(GtkStyle*, GtkStyle*);
+// extern void _gotk4_gtk3_Style_init_from_rc(GtkStyle*, GtkRcStyle*);
+// extern void _gotk4_gtk3_Style_realize(GtkStyle*);
+// extern void _gotk4_gtk3_Style_unrealize(GtkStyle*);
+// void _gotk4_gtk3_Style_virtual_copy(void* fnptr, GtkStyle* carg0, GtkStyle* carg1) {
+// 	return ((void (*) (GtkStyle*, GtkStyle*))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gtk3_Style_virtual_init_from_rc(void* fnptr, *C.GtkStyle carg0, *C.GtkRcStyle carg1) {
-// 	return ((C.void (*) (*C.GtkStyle, *C.GtkRcStyle))(fnptr))(carg0, carg1);
+// void _gotk4_gtk3_Style_virtual_init_from_rc(void* fnptr, GtkStyle* carg0, GtkRcStyle* carg1) {
+// 	return ((void (*) (GtkStyle*, GtkRcStyle*))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gtk3_Style_virtual_realize(void* fnptr, *C.GtkStyle carg0) {
-// 	return ((C.void (*) (*C.GtkStyle))(fnptr))(carg0);
+// void _gotk4_gtk3_Style_virtual_realize(void* fnptr, GtkStyle* carg0) {
+// 	return ((void (*) (GtkStyle*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_Style_virtual_unrealize(void* fnptr, *C.GtkStyle carg0) {
-// 	return ((C.void (*) (*C.GtkStyle))(fnptr))(carg0);
+// void _gotk4_gtk3_Style_virtual_unrealize(void* fnptr, GtkStyle* carg0) {
+// 	return ((void (*) (GtkStyle*))(fnptr))(carg0);
 // }
-// extern C.void _gotk4_gtk3_StyleContext_changed(*C.GtkStyleContext);
-// C.void _gotk4_gtk3_StyleContext_virtual_changed(void* fnptr, *C.GtkStyleContext carg0) {
-// 	return ((C.void (*) (*C.GtkStyleContext))(fnptr))(carg0);
+// extern void _gotk4_gtk3_StyleContext_changed(GtkStyleContext*);
+// void _gotk4_gtk3_StyleContext_virtual_changed(void* fnptr, GtkStyleContext* carg0) {
+// 	return ((void (*) (GtkStyleContext*))(fnptr))(carg0);
 // }
-// extern C.void _gotk4_gtk3_TextBuffer_apply_tag(*C.GtkTextBuffer, *C.GtkTextTag, *C.GtkTextIter, *C.GtkTextIter);
-// extern C.void _gotk4_gtk3_TextBuffer_begin_user_action(*C.GtkTextBuffer);
-// extern C.void _gotk4_gtk3_TextBuffer_changed(*C.GtkTextBuffer);
-// extern C.void _gotk4_gtk3_TextBuffer_delete_range(*C.GtkTextBuffer, *C.GtkTextIter, *C.GtkTextIter);
-// extern C.void _gotk4_gtk3_TextBuffer_end_user_action(*C.GtkTextBuffer);
-// extern C.void _gotk4_gtk3_TextBuffer_insert_child_anchor(*C.GtkTextBuffer, *C.GtkTextIter, *C.GtkTextChildAnchor);
-// extern C.void _gotk4_gtk3_TextBuffer_insert_pixbuf(*C.GtkTextBuffer, *C.GtkTextIter, *C.GdkPixbuf);
-// extern C.void _gotk4_gtk3_TextBuffer_insert_text(*C.GtkTextBuffer, *C.GtkTextIter, *C.gchar, C.gint);
-// extern C.void _gotk4_gtk3_TextBuffer_mark_deleted(*C.GtkTextBuffer, *C.GtkTextMark);
-// extern C.void _gotk4_gtk3_TextBuffer_mark_set(*C.GtkTextBuffer, *C.GtkTextIter, *C.GtkTextMark);
-// extern C.void _gotk4_gtk3_TextBuffer_modified_changed(*C.GtkTextBuffer);
-// extern C.void _gotk4_gtk3_TextBuffer_paste_done(*C.GtkTextBuffer, *C.GtkClipboard);
-// extern C.void _gotk4_gtk3_TextBuffer_remove_tag(*C.GtkTextBuffer, *C.GtkTextTag, *C.GtkTextIter, *C.GtkTextIter);
-// C.void _gotk4_gtk3_TextBuffer_virtual_apply_tag(void* fnptr, *C.GtkTextBuffer carg0, *C.GtkTextTag carg1, *C.GtkTextIter carg2, *C.GtkTextIter carg3) {
-// 	return ((C.void (*) (*C.GtkTextBuffer, *C.GtkTextTag, *C.GtkTextIter, *C.GtkTextIter))(fnptr))(carg0, carg1, carg2, carg3);
-// }
-// C.void _gotk4_gtk3_TextBuffer_virtual_begin_user_action(void* fnptr, *C.GtkTextBuffer carg0) {
-// 	return ((C.void (*) (*C.GtkTextBuffer))(fnptr))(carg0);
-// }
-// C.void _gotk4_gtk3_TextBuffer_virtual_changed(void* fnptr, *C.GtkTextBuffer carg0) {
-// 	return ((C.void (*) (*C.GtkTextBuffer))(fnptr))(carg0);
-// }
-// C.void _gotk4_gtk3_TextBuffer_virtual_delete_range(void* fnptr, *C.GtkTextBuffer carg0, *C.GtkTextIter carg1, *C.GtkTextIter carg2) {
-// 	return ((C.void (*) (*C.GtkTextBuffer, *C.GtkTextIter, *C.GtkTextIter))(fnptr))(carg0, carg1, carg2);
-// }
-// C.void _gotk4_gtk3_TextBuffer_virtual_end_user_action(void* fnptr, *C.GtkTextBuffer carg0) {
-// 	return ((C.void (*) (*C.GtkTextBuffer))(fnptr))(carg0);
-// }
-// C.void _gotk4_gtk3_TextBuffer_virtual_insert_child_anchor(void* fnptr, *C.GtkTextBuffer carg0, *C.GtkTextIter carg1, *C.GtkTextChildAnchor carg2) {
-// 	return ((C.void (*) (*C.GtkTextBuffer, *C.GtkTextIter, *C.GtkTextChildAnchor))(fnptr))(carg0, carg1, carg2);
-// }
-// C.void _gotk4_gtk3_TextBuffer_virtual_insert_pixbuf(void* fnptr, *C.GtkTextBuffer carg0, *C.GtkTextIter carg1, *C.GdkPixbuf carg2) {
-// 	return ((C.void (*) (*C.GtkTextBuffer, *C.GtkTextIter, *C.GdkPixbuf))(fnptr))(carg0, carg1, carg2);
-// }
-// C.void _gotk4_gtk3_TextBuffer_virtual_insert_text(void* fnptr, *C.GtkTextBuffer carg0, *C.GtkTextIter carg1, *C.gchar carg2, C.gint carg3) {
-// 	return ((C.void (*) (*C.GtkTextBuffer, *C.GtkTextIter, *C.gchar, C.gint))(fnptr))(carg0, carg1, carg2, carg3);
-// }
-// C.void _gotk4_gtk3_TextBuffer_virtual_mark_deleted(void* fnptr, *C.GtkTextBuffer carg0, *C.GtkTextMark carg1) {
-// 	return ((C.void (*) (*C.GtkTextBuffer, *C.GtkTextMark))(fnptr))(carg0, carg1);
-// }
-// C.void _gotk4_gtk3_TextBuffer_virtual_mark_set(void* fnptr, *C.GtkTextBuffer carg0, *C.GtkTextIter carg1, *C.GtkTextMark carg2) {
-// 	return ((C.void (*) (*C.GtkTextBuffer, *C.GtkTextIter, *C.GtkTextMark))(fnptr))(carg0, carg1, carg2);
-// }
-// C.void _gotk4_gtk3_TextBuffer_virtual_modified_changed(void* fnptr, *C.GtkTextBuffer carg0) {
-// 	return ((C.void (*) (*C.GtkTextBuffer))(fnptr))(carg0);
-// }
-// C.void _gotk4_gtk3_TextBuffer_virtual_paste_done(void* fnptr, *C.GtkTextBuffer carg0, *C.GtkClipboard carg1) {
-// 	return ((C.void (*) (*C.GtkTextBuffer, *C.GtkClipboard))(fnptr))(carg0, carg1);
-// }
-// C.void _gotk4_gtk3_TextBuffer_virtual_remove_tag(void* fnptr, *C.GtkTextBuffer carg0, *C.GtkTextTag carg1, *C.GtkTextIter carg2, *C.GtkTextIter carg3) {
-// 	return ((C.void (*) (*C.GtkTextBuffer, *C.GtkTextTag, *C.GtkTextIter, *C.GtkTextIter))(fnptr))(carg0, carg1, carg2, carg3);
-// }
-// extern C.void _gotk4_gtk3_TextTagTable_tag_added(*C.GtkTextTagTable, *C.GtkTextTag);
-// extern C.void _gotk4_gtk3_TextTagTable_tag_changed(*C.GtkTextTagTable, *C.GtkTextTag, C.gboolean);
-// extern C.void _gotk4_gtk3_TextTagTable_tag_removed(*C.GtkTextTagTable, *C.GtkTextTag);
-// C.void _gotk4_gtk3_TextTagTable_virtual_tag_added(void* fnptr, *C.GtkTextTagTable carg0, *C.GtkTextTag carg1) {
-// 	return ((C.void (*) (*C.GtkTextTagTable, *C.GtkTextTag))(fnptr))(carg0, carg1);
-// }
-// C.void _gotk4_gtk3_TextTagTable_virtual_tag_changed(void* fnptr, *C.GtkTextTagTable carg0, *C.GtkTextTag carg1, C.gboolean carg2) {
-// 	return ((C.void (*) (*C.GtkTextTagTable, *C.GtkTextTag, C.gboolean))(fnptr))(carg0, carg1, carg2);
-// }
-// C.void _gotk4_gtk3_TextTagTable_virtual_tag_removed(void* fnptr, *C.GtkTextTagTable carg0, *C.GtkTextTag carg1) {
-// 	return ((C.void (*) (*C.GtkTextTagTable, *C.GtkTextTag))(fnptr))(carg0, carg1);
-// }
-// extern C.void _gotk4_gtk3_TreeModelFilter_modify(*C.GtkTreeModelFilter, *C.GtkTreeModel, *C.GtkTreeIter, *C.GValue, C.gint);
-// extern C.gboolean _gotk4_gtk3_TreeModelFilter_visible(*C.GtkTreeModelFilter, *C.GtkTreeModel, *C.GtkTreeIter);
-// C.void _gotk4_gtk3_TreeModelFilter_virtual_modify(void* fnptr, *C.GtkTreeModelFilter carg0, *C.GtkTreeModel carg1, *C.GtkTreeIter carg2, *C.GValue carg3, C.gint carg4) {
-// 	return ((C.void (*) (*C.GtkTreeModelFilter, *C.GtkTreeModel, *C.GtkTreeIter, *C.GValue, C.gint))(fnptr))(carg0, carg1, carg2, carg3, carg4);
-// }
-// C.gboolean _gotk4_gtk3_TreeModelFilter_virtual_visible(void* fnptr, *C.GtkTreeModelFilter carg0, *C.GtkTreeModel carg1, *C.GtkTreeIter carg2) {
-// 	return ((C.gboolean (*) (*C.GtkTreeModelFilter, *C.GtkTreeModel, *C.GtkTreeIter))(fnptr))(carg0, carg1, carg2);
-// }
-// extern C.void _gotk4_gtk3_TreeSelection_changed(*C.GtkTreeSelection);
-// C.void _gotk4_gtk3_TreeSelection_virtual_changed(void* fnptr, *C.GtkTreeSelection carg0) {
-// 	return ((C.void (*) (*C.GtkTreeSelection))(fnptr))(carg0);
-// }
-// extern C.void _gotk4_gtk3_TreeViewColumn_clicked(*C.GtkTreeViewColumn);
-// C.void _gotk4_gtk3_TreeViewColumn_virtual_clicked(void* fnptr, *C.GtkTreeViewColumn carg0) {
-// 	return ((C.void (*) (*C.GtkTreeViewColumn))(fnptr))(carg0);
-// }
-// extern C.void _gotk4_gtk3_UIManager_actions_changed(*C.GtkUIManager);
-// extern C.void _gotk4_gtk3_UIManager_add_widget(*C.GtkUIManager, *C.GtkWidget);
-// extern C.void _gotk4_gtk3_UIManager_connect_proxy(*C.GtkUIManager, *C.GtkAction, *C.GtkWidget);
-// extern C.void _gotk4_gtk3_UIManager_disconnect_proxy(*C.GtkUIManager, *C.GtkAction, *C.GtkWidget);
-// extern C.void _gotk4_gtk3_UIManager_post_activate(*C.GtkUIManager, *C.GtkAction);
-// extern C.void _gotk4_gtk3_UIManager_pre_activate(*C.GtkUIManager, *C.GtkAction);
-// C.void _gotk4_gtk3_UIManager_virtual_actions_changed(void* fnptr, *C.GtkUIManager carg0) {
-// 	return ((C.void (*) (*C.GtkUIManager))(fnptr))(carg0);
-// }
-// C.void _gotk4_gtk3_UIManager_virtual_add_widget(void* fnptr, *C.GtkUIManager carg0, *C.GtkWidget carg1) {
-// 	return ((C.void (*) (*C.GtkUIManager, *C.GtkWidget))(fnptr))(carg0, carg1);
-// }
-// C.void _gotk4_gtk3_UIManager_virtual_connect_proxy(void* fnptr, *C.GtkUIManager carg0, *C.GtkAction carg1, *C.GtkWidget carg2) {
-// 	return ((C.void (*) (*C.GtkUIManager, *C.GtkAction, *C.GtkWidget))(fnptr))(carg0, carg1, carg2);
-// }
-// C.void _gotk4_gtk3_UIManager_virtual_disconnect_proxy(void* fnptr, *C.GtkUIManager carg0, *C.GtkAction carg1, *C.GtkWidget carg2) {
-// 	return ((C.void (*) (*C.GtkUIManager, *C.GtkAction, *C.GtkWidget))(fnptr))(carg0, carg1, carg2);
-// }
-// C.void _gotk4_gtk3_UIManager_virtual_post_activate(void* fnptr, *C.GtkUIManager carg0, *C.GtkAction carg1) {
-// 	return ((C.void (*) (*C.GtkUIManager, *C.GtkAction))(fnptr))(carg0, carg1);
-// }
-// C.void _gotk4_gtk3_UIManager_virtual_pre_activate(void* fnptr, *C.GtkUIManager carg0, *C.GtkAction carg1) {
-// 	return ((C.void (*) (*C.GtkUIManager, *C.GtkAction))(fnptr))(carg0, carg1);
-// }
-// extern C.void _gotk4_gtk3_Widget_adjust_baseline_allocation(*C.GtkWidget, *C.gint);
-// extern C.void _gotk4_gtk3_Widget_adjust_baseline_request(*C.GtkWidget, *C.gint, *C.gint);
-// extern C.void _gotk4_gtk3_Widget_adjust_size_allocation(*C.GtkWidget, C.GtkOrientation, *C.gint, *C.gint, *C.gint, *C.gint);
-// extern C.void _gotk4_gtk3_Widget_adjust_size_request(*C.GtkWidget, C.GtkOrientation, *C.gint, *C.gint);
-// extern C.gboolean _gotk4_gtk3_Widget_button_press_event(*C.GtkWidget, *C.GdkEventButton);
-// extern C.gboolean _gotk4_gtk3_Widget_button_release_event(*C.GtkWidget, *C.GdkEventButton);
-// extern C.gboolean _gotk4_gtk3_Widget_can_activate_accel(*C.GtkWidget, C.guint);
-// extern C.void _gotk4_gtk3_Widget_child_notify(*C.GtkWidget, *C.GParamSpec);
-// extern C.void _gotk4_gtk3_Widget_composited_changed(*C.GtkWidget);
-// extern C.void _gotk4_gtk3_Widget_compute_expand(*C.GtkWidget, *C.gboolean, *C.gboolean);
-// extern C.gboolean _gotk4_gtk3_Widget_configure_event(*C.GtkWidget, *C.GdkEventConfigure);
-// extern C.gboolean _gotk4_gtk3_Widget_damage_event(*C.GtkWidget, *C.GdkEventExpose);
-// extern C.gboolean _gotk4_gtk3_Widget_delete_event(*C.GtkWidget, *C.GdkEventAny);
-// extern C.void _gotk4_gtk3_Widget_destroy(*C.GtkWidget);
-// extern C.gboolean _gotk4_gtk3_Widget_destroy_event(*C.GtkWidget, *C.GdkEventAny);
-// extern C.void _gotk4_gtk3_Widget_direction_changed(*C.GtkWidget, C.GtkTextDirection);
-// extern C.void _gotk4_gtk3_Widget_drag_begin(*C.GtkWidget, *C.GdkDragContext);
-// extern C.void _gotk4_gtk3_Widget_drag_data_delete(*C.GtkWidget, *C.GdkDragContext);
-// extern C.void _gotk4_gtk3_Widget_drag_data_get(*C.GtkWidget, *C.GdkDragContext, *C.GtkSelectionData, C.guint, C.guint);
-// extern C.void _gotk4_gtk3_Widget_drag_data_received(*C.GtkWidget, *C.GdkDragContext, C.gint, C.gint, *C.GtkSelectionData, C.guint, C.guint);
-// extern C.gboolean _gotk4_gtk3_Widget_drag_drop(*C.GtkWidget, *C.GdkDragContext, C.gint, C.gint, C.guint);
-// extern C.void _gotk4_gtk3_Widget_drag_end(*C.GtkWidget, *C.GdkDragContext);
-// extern C.gboolean _gotk4_gtk3_Widget_drag_failed(*C.GtkWidget, *C.GdkDragContext, C.GtkDragResult);
-// extern C.void _gotk4_gtk3_Widget_drag_leave(*C.GtkWidget, *C.GdkDragContext, C.guint);
-// extern C.gboolean _gotk4_gtk3_Widget_drag_motion(*C.GtkWidget, *C.GdkDragContext, C.gint, C.gint, C.guint);
-// extern C.gboolean _gotk4_gtk3_Widget_enter_notify_event(*C.GtkWidget, *C.GdkEventCrossing);
-// extern C.gboolean _gotk4_gtk3_Widget_focus(*C.GtkWidget, C.GtkDirectionType);
-// extern C.gboolean _gotk4_gtk3_Widget_focus_in_event(*C.GtkWidget, *C.GdkEventFocus);
-// extern C.gboolean _gotk4_gtk3_Widget_focus_out_event(*C.GtkWidget, *C.GdkEventFocus);
-// extern *C.AtkObject _gotk4_gtk3_Widget_get_accessible(*C.GtkWidget);
-// extern C.void _gotk4_gtk3_Widget_get_preferred_height(*C.GtkWidget, C.gint, C.gint);
-// extern C.void _gotk4_gtk3_Widget_get_preferred_height_and_baseline_for_width(*C.GtkWidget, C.gint, C.gint, C.gint, C.gint, C.gint);
-// extern C.void _gotk4_gtk3_Widget_get_preferred_height_for_width(*C.GtkWidget, C.gint, C.gint, C.gint);
-// extern C.void _gotk4_gtk3_Widget_get_preferred_width(*C.GtkWidget, C.gint, C.gint);
-// extern C.void _gotk4_gtk3_Widget_get_preferred_width_for_height(*C.GtkWidget, C.gint, C.gint, C.gint);
-// extern C.GtkSizeRequestMode _gotk4_gtk3_Widget_get_request_mode(*C.GtkWidget);
-// extern C.gboolean _gotk4_gtk3_Widget_grab_broken_event(*C.GtkWidget, *C.GdkEventGrabBroken);
-// extern C.void _gotk4_gtk3_Widget_grab_focus(*C.GtkWidget);
-// extern C.void _gotk4_gtk3_Widget_grab_notify(*C.GtkWidget, C.gboolean);
-// extern C.void _gotk4_gtk3_Widget_hide(*C.GtkWidget);
-// extern C.void _gotk4_gtk3_Widget_hierarchy_changed(*C.GtkWidget, *C.GtkWidget);
-// extern C.gboolean _gotk4_gtk3_Widget_key_press_event(*C.GtkWidget, *C.GdkEventKey);
-// extern C.gboolean _gotk4_gtk3_Widget_key_release_event(*C.GtkWidget, *C.GdkEventKey);
-// extern C.gboolean _gotk4_gtk3_Widget_keynav_failed(*C.GtkWidget, C.GtkDirectionType);
-// extern C.gboolean _gotk4_gtk3_Widget_leave_notify_event(*C.GtkWidget, *C.GdkEventCrossing);
-// extern C.void _gotk4_gtk3_Widget_map(*C.GtkWidget);
-// extern C.gboolean _gotk4_gtk3_Widget_map_event(*C.GtkWidget, *C.GdkEventAny);
-// extern C.gboolean _gotk4_gtk3_Widget_mnemonic_activate(*C.GtkWidget, C.gboolean);
-// extern C.gboolean _gotk4_gtk3_Widget_motion_notify_event(*C.GtkWidget, *C.GdkEventMotion);
-// extern C.void _gotk4_gtk3_Widget_move_focus(*C.GtkWidget, C.GtkDirectionType);
-// extern C.void _gotk4_gtk3_Widget_parent_set(*C.GtkWidget, *C.GtkWidget);
-// extern C.gboolean _gotk4_gtk3_Widget_popup_menu(*C.GtkWidget);
-// extern C.gboolean _gotk4_gtk3_Widget_property_notify_event(*C.GtkWidget, *C.GdkEventProperty);
-// extern C.gboolean _gotk4_gtk3_Widget_proximity_in_event(*C.GtkWidget, *C.GdkEventProximity);
-// extern C.gboolean _gotk4_gtk3_Widget_proximity_out_event(*C.GtkWidget, *C.GdkEventProximity);
-// extern C.gboolean _gotk4_gtk3_Widget_query_tooltip(*C.GtkWidget, C.gint, C.gint, C.gboolean, *C.GtkTooltip);
-// extern C.void _gotk4_gtk3_Widget_realize(*C.GtkWidget);
-// extern C.void _gotk4_gtk3_Widget_screen_changed(*C.GtkWidget, *C.GdkScreen);
-// extern C.gboolean _gotk4_gtk3_Widget_scroll_event(*C.GtkWidget, *C.GdkEventScroll);
-// extern C.gboolean _gotk4_gtk3_Widget_selection_clear_event(*C.GtkWidget, *C.GdkEventSelection);
-// extern C.void _gotk4_gtk3_Widget_selection_get(*C.GtkWidget, *C.GtkSelectionData, C.guint, C.guint);
-// extern C.gboolean _gotk4_gtk3_Widget_selection_notify_event(*C.GtkWidget, *C.GdkEventSelection);
-// extern C.void _gotk4_gtk3_Widget_selection_received(*C.GtkWidget, *C.GtkSelectionData, C.guint);
-// extern C.gboolean _gotk4_gtk3_Widget_selection_request_event(*C.GtkWidget, *C.GdkEventSelection);
-// extern C.void _gotk4_gtk3_Widget_show(*C.GtkWidget);
-// extern C.void _gotk4_gtk3_Widget_show_all(*C.GtkWidget);
-// extern C.gboolean _gotk4_gtk3_Widget_show_help(*C.GtkWidget, C.GtkWidgetHelpType);
-// extern C.void _gotk4_gtk3_Widget_size_allocate(*C.GtkWidget, *C.GtkAllocation);
-// extern C.void _gotk4_gtk3_Widget_state_flags_changed(*C.GtkWidget, C.GtkStateFlags);
-// extern C.void _gotk4_gtk3_Widget_style_set(*C.GtkWidget, *C.GtkStyle);
-// extern C.void _gotk4_gtk3_Widget_style_updated(*C.GtkWidget);
-// extern C.gboolean _gotk4_gtk3_Widget_touch_event(*C.GtkWidget, *C.GdkEventTouch);
-// extern C.void _gotk4_gtk3_Widget_unmap(*C.GtkWidget);
-// extern C.gboolean _gotk4_gtk3_Widget_unmap_event(*C.GtkWidget, *C.GdkEventAny);
-// extern C.void _gotk4_gtk3_Widget_unrealize(*C.GtkWidget);
-// extern C.gboolean _gotk4_gtk3_Widget_window_state_event(*C.GtkWidget, *C.GdkEventWindowState);
-// C.void _gotk4_gtk3_Widget_virtual_adjust_baseline_allocation(void* fnptr, *C.GtkWidget carg0, *C.gint carg1) {
-// 	return ((C.void (*) (*C.GtkWidget, *C.gint))(fnptr))(carg0, carg1);
-// }
-// C.void _gotk4_gtk3_Widget_virtual_adjust_baseline_request(void* fnptr, *C.GtkWidget carg0, *C.gint carg1, *C.gint carg2) {
-// 	return ((C.void (*) (*C.GtkWidget, *C.gint, *C.gint))(fnptr))(carg0, carg1, carg2);
-// }
-// C.void _gotk4_gtk3_Widget_virtual_adjust_size_allocation(void* fnptr, *C.GtkWidget carg0, C.GtkOrientation carg1, *C.gint carg2, *C.gint carg3, *C.gint carg4, *C.gint carg5) {
-// 	return ((C.void (*) (*C.GtkWidget, C.GtkOrientation, *C.gint, *C.gint, *C.gint, *C.gint))(fnptr))(carg0, carg1, carg2, carg3, carg4, carg5);
-// }
-// C.void _gotk4_gtk3_Widget_virtual_adjust_size_request(void* fnptr, *C.GtkWidget carg0, C.GtkOrientation carg1, *C.gint carg2, *C.gint carg3) {
-// 	return ((C.void (*) (*C.GtkWidget, C.GtkOrientation, *C.gint, *C.gint))(fnptr))(carg0, carg1, carg2, carg3);
-// }
-// C.gboolean _gotk4_gtk3_Widget_virtual_button_press_event(void* fnptr, *C.GtkWidget carg0, *C.GdkEventButton carg1) {
-// 	return ((C.gboolean (*) (*C.GtkWidget, *C.GdkEventButton))(fnptr))(carg0, carg1);
-// }
-// C.gboolean _gotk4_gtk3_Widget_virtual_button_release_event(void* fnptr, *C.GtkWidget carg0, *C.GdkEventButton carg1) {
-// 	return ((C.gboolean (*) (*C.GtkWidget, *C.GdkEventButton))(fnptr))(carg0, carg1);
-// }
-// C.gboolean _gotk4_gtk3_Widget_virtual_can_activate_accel(void* fnptr, *C.GtkWidget carg0, C.guint carg1) {
-// 	return ((C.gboolean (*) (*C.GtkWidget, C.guint))(fnptr))(carg0, carg1);
-// }
-// C.void _gotk4_gtk3_Widget_virtual_child_notify(void* fnptr, *C.GtkWidget carg0, *C.GParamSpec carg1) {
-// 	return ((C.void (*) (*C.GtkWidget, *C.GParamSpec))(fnptr))(carg0, carg1);
-// }
-// C.void _gotk4_gtk3_Widget_virtual_composited_changed(void* fnptr, *C.GtkWidget carg0) {
-// 	return ((C.void (*) (*C.GtkWidget))(fnptr))(carg0);
-// }
-// C.void _gotk4_gtk3_Widget_virtual_compute_expand(void* fnptr, *C.GtkWidget carg0, *C.gboolean carg1, *C.gboolean carg2) {
-// 	return ((C.void (*) (*C.GtkWidget, *C.gboolean, *C.gboolean))(fnptr))(carg0, carg1, carg2);
-// }
-// C.gboolean _gotk4_gtk3_Widget_virtual_configure_event(void* fnptr, *C.GtkWidget carg0, *C.GdkEventConfigure carg1) {
-// 	return ((C.gboolean (*) (*C.GtkWidget, *C.GdkEventConfigure))(fnptr))(carg0, carg1);
-// }
-// C.gboolean _gotk4_gtk3_Widget_virtual_damage_event(void* fnptr, *C.GtkWidget carg0, *C.GdkEventExpose carg1) {
-// 	return ((C.gboolean (*) (*C.GtkWidget, *C.GdkEventExpose))(fnptr))(carg0, carg1);
-// }
-// C.gboolean _gotk4_gtk3_Widget_virtual_delete_event(void* fnptr, *C.GtkWidget carg0, *C.GdkEventAny carg1) {
-// 	return ((C.gboolean (*) (*C.GtkWidget, *C.GdkEventAny))(fnptr))(carg0, carg1);
-// }
-// C.void _gotk4_gtk3_Widget_virtual_destroy(void* fnptr, *C.GtkWidget carg0) {
-// 	return ((C.void (*) (*C.GtkWidget))(fnptr))(carg0);
-// }
-// C.gboolean _gotk4_gtk3_Widget_virtual_destroy_event(void* fnptr, *C.GtkWidget carg0, *C.GdkEventAny carg1) {
-// 	return ((C.gboolean (*) (*C.GtkWidget, *C.GdkEventAny))(fnptr))(carg0, carg1);
-// }
-// C.void _gotk4_gtk3_Widget_virtual_direction_changed(void* fnptr, *C.GtkWidget carg0, C.GtkTextDirection carg1) {
-// 	return ((C.void (*) (*C.GtkWidget, C.GtkTextDirection))(fnptr))(carg0, carg1);
-// }
-// C.void _gotk4_gtk3_Widget_virtual_drag_begin(void* fnptr, *C.GtkWidget carg0, *C.GdkDragContext carg1) {
-// 	return ((C.void (*) (*C.GtkWidget, *C.GdkDragContext))(fnptr))(carg0, carg1);
-// }
-// C.void _gotk4_gtk3_Widget_virtual_drag_data_delete(void* fnptr, *C.GtkWidget carg0, *C.GdkDragContext carg1) {
-// 	return ((C.void (*) (*C.GtkWidget, *C.GdkDragContext))(fnptr))(carg0, carg1);
-// }
-// C.void _gotk4_gtk3_Widget_virtual_drag_data_get(void* fnptr, *C.GtkWidget carg0, *C.GdkDragContext carg1, *C.GtkSelectionData carg2, C.guint carg3, C.guint carg4) {
-// 	return ((C.void (*) (*C.GtkWidget, *C.GdkDragContext, *C.GtkSelectionData, C.guint, C.guint))(fnptr))(carg0, carg1, carg2, carg3, carg4);
-// }
-// C.void _gotk4_gtk3_Widget_virtual_drag_data_received(void* fnptr, *C.GtkWidget carg0, *C.GdkDragContext carg1, C.gint carg2, C.gint carg3, *C.GtkSelectionData carg4, C.guint carg5, C.guint carg6) {
-// 	return ((C.void (*) (*C.GtkWidget, *C.GdkDragContext, C.gint, C.gint, *C.GtkSelectionData, C.guint, C.guint))(fnptr))(carg0, carg1, carg2, carg3, carg4, carg5, carg6);
-// }
-// C.gboolean _gotk4_gtk3_Widget_virtual_drag_drop(void* fnptr, *C.GtkWidget carg0, *C.GdkDragContext carg1, C.gint carg2, C.gint carg3, C.guint carg4) {
-// 	return ((C.gboolean (*) (*C.GtkWidget, *C.GdkDragContext, C.gint, C.gint, C.guint))(fnptr))(carg0, carg1, carg2, carg3, carg4);
-// }
-// C.void _gotk4_gtk3_Widget_virtual_drag_end(void* fnptr, *C.GtkWidget carg0, *C.GdkDragContext carg1) {
-// 	return ((C.void (*) (*C.GtkWidget, *C.GdkDragContext))(fnptr))(carg0, carg1);
-// }
-// C.gboolean _gotk4_gtk3_Widget_virtual_drag_failed(void* fnptr, *C.GtkWidget carg0, *C.GdkDragContext carg1, C.GtkDragResult carg2) {
-// 	return ((C.gboolean (*) (*C.GtkWidget, *C.GdkDragContext, C.GtkDragResult))(fnptr))(carg0, carg1, carg2);
-// }
-// C.void _gotk4_gtk3_Widget_virtual_drag_leave(void* fnptr, *C.GtkWidget carg0, *C.GdkDragContext carg1, C.guint carg2) {
-// 	return ((C.void (*) (*C.GtkWidget, *C.GdkDragContext, C.guint))(fnptr))(carg0, carg1, carg2);
-// }
-// C.gboolean _gotk4_gtk3_Widget_virtual_drag_motion(void* fnptr, *C.GtkWidget carg0, *C.GdkDragContext carg1, C.gint carg2, C.gint carg3, C.guint carg4) {
-// 	return ((C.gboolean (*) (*C.GtkWidget, *C.GdkDragContext, C.gint, C.gint, C.guint))(fnptr))(carg0, carg1, carg2, carg3, carg4);
-// }
-// C.gboolean _gotk4_gtk3_Widget_virtual_enter_notify_event(void* fnptr, *C.GtkWidget carg0, *C.GdkEventCrossing carg1) {
-// 	return ((C.gboolean (*) (*C.GtkWidget, *C.GdkEventCrossing))(fnptr))(carg0, carg1);
-// }
-// C.gboolean _gotk4_gtk3_Widget_virtual_focus(void* fnptr, *C.GtkWidget carg0, C.GtkDirectionType carg1) {
-// 	return ((C.gboolean (*) (*C.GtkWidget, C.GtkDirectionType))(fnptr))(carg0, carg1);
-// }
-// C.gboolean _gotk4_gtk3_Widget_virtual_focus_in_event(void* fnptr, *C.GtkWidget carg0, *C.GdkEventFocus carg1) {
-// 	return ((C.gboolean (*) (*C.GtkWidget, *C.GdkEventFocus))(fnptr))(carg0, carg1);
-// }
-// C.gboolean _gotk4_gtk3_Widget_virtual_focus_out_event(void* fnptr, *C.GtkWidget carg0, *C.GdkEventFocus carg1) {
-// 	return ((C.gboolean (*) (*C.GtkWidget, *C.GdkEventFocus))(fnptr))(carg0, carg1);
-// }
-// *C.AtkObject _gotk4_gtk3_Widget_virtual_get_accessible(void* fnptr, *C.GtkWidget carg0) {
-// 	return ((*C.AtkObject (*) (*C.GtkWidget))(fnptr))(carg0);
-// }
-// C.void _gotk4_gtk3_Widget_virtual_get_preferred_height(void* fnptr, *C.GtkWidget carg0, C.gint* carg1, C.gint* carg2) {
-// 	return ((C.void (*) (*C.GtkWidget, C.gint*, C.gint*))(fnptr))(carg0, carg1, carg2);
-// }
-// C.void _gotk4_gtk3_Widget_virtual_get_preferred_height_and_baseline_for_width(void* fnptr, *C.GtkWidget carg0, C.gint carg1, C.gint* carg2, C.gint* carg3, C.gint* carg4, C.gint* carg5) {
-// 	return ((C.void (*) (*C.GtkWidget, C.gint, C.gint*, C.gint*, C.gint*, C.gint*))(fnptr))(carg0, carg1, carg2, carg3, carg4, carg5);
-// }
-// C.void _gotk4_gtk3_Widget_virtual_get_preferred_height_for_width(void* fnptr, *C.GtkWidget carg0, C.gint carg1, C.gint* carg2, C.gint* carg3) {
-// 	return ((C.void (*) (*C.GtkWidget, C.gint, C.gint*, C.gint*))(fnptr))(carg0, carg1, carg2, carg3);
-// }
-// C.void _gotk4_gtk3_Widget_virtual_get_preferred_width(void* fnptr, *C.GtkWidget carg0, C.gint* carg1, C.gint* carg2) {
-// 	return ((C.void (*) (*C.GtkWidget, C.gint*, C.gint*))(fnptr))(carg0, carg1, carg2);
-// }
-// C.void _gotk4_gtk3_Widget_virtual_get_preferred_width_for_height(void* fnptr, *C.GtkWidget carg0, C.gint carg1, C.gint* carg2, C.gint* carg3) {
-// 	return ((C.void (*) (*C.GtkWidget, C.gint, C.gint*, C.gint*))(fnptr))(carg0, carg1, carg2, carg3);
+// extern void _gotk4_gtk3_TextBuffer_apply_tag(GtkTextBuffer*, GtkTextTag*, const GtkTextIter*, const GtkTextIter*);
+// extern void _gotk4_gtk3_TextBuffer_begin_user_action(GtkTextBuffer*);
+// extern void _gotk4_gtk3_TextBuffer_changed(GtkTextBuffer*);
+// extern void _gotk4_gtk3_TextBuffer_delete_range(GtkTextBuffer*, GtkTextIter*, GtkTextIter*);
+// extern void _gotk4_gtk3_TextBuffer_end_user_action(GtkTextBuffer*);
+// extern void _gotk4_gtk3_TextBuffer_insert_child_anchor(GtkTextBuffer*, GtkTextIter*, GtkTextChildAnchor*);
+// extern void _gotk4_gtk3_TextBuffer_insert_pixbuf(GtkTextBuffer*, GtkTextIter*, GdkPixbuf*);
+// extern void _gotk4_gtk3_TextBuffer_insert_text(GtkTextBuffer*, GtkTextIter*, const gchar*, gint);
+// extern void _gotk4_gtk3_TextBuffer_mark_deleted(GtkTextBuffer*, GtkTextMark*);
+// extern void _gotk4_gtk3_TextBuffer_mark_set(GtkTextBuffer*, const GtkTextIter*, GtkTextMark*);
+// extern void _gotk4_gtk3_TextBuffer_modified_changed(GtkTextBuffer*);
+// extern void _gotk4_gtk3_TextBuffer_paste_done(GtkTextBuffer*, GtkClipboard*);
+// extern void _gotk4_gtk3_TextBuffer_remove_tag(GtkTextBuffer*, GtkTextTag*, const GtkTextIter*, const GtkTextIter*);
+// void _gotk4_gtk3_TextBuffer_virtual_apply_tag(void* fnptr, GtkTextBuffer* carg0, GtkTextTag* carg1, const GtkTextIter* carg2, const GtkTextIter* carg3) {
+// 	return ((void (*) (GtkTextBuffer*, GtkTextTag*, const GtkTextIter*, const GtkTextIter*))(fnptr))(carg0, carg1, carg2, carg3);
+// }
+// void _gotk4_gtk3_TextBuffer_virtual_begin_user_action(void* fnptr, GtkTextBuffer* carg0) {
+// 	return ((void (*) (GtkTextBuffer*))(fnptr))(carg0);
+// }
+// void _gotk4_gtk3_TextBuffer_virtual_changed(void* fnptr, GtkTextBuffer* carg0) {
+// 	return ((void (*) (GtkTextBuffer*))(fnptr))(carg0);
+// }
+// void _gotk4_gtk3_TextBuffer_virtual_delete_range(void* fnptr, GtkTextBuffer* carg0, GtkTextIter* carg1, GtkTextIter* carg2) {
+// 	return ((void (*) (GtkTextBuffer*, GtkTextIter*, GtkTextIter*))(fnptr))(carg0, carg1, carg2);
+// }
+// void _gotk4_gtk3_TextBuffer_virtual_end_user_action(void* fnptr, GtkTextBuffer* carg0) {
+// 	return ((void (*) (GtkTextBuffer*))(fnptr))(carg0);
+// }
+// void _gotk4_gtk3_TextBuffer_virtual_insert_child_anchor(void* fnptr, GtkTextBuffer* carg0, GtkTextIter* carg1, GtkTextChildAnchor* carg2) {
+// 	return ((void (*) (GtkTextBuffer*, GtkTextIter*, GtkTextChildAnchor*))(fnptr))(carg0, carg1, carg2);
+// }
+// void _gotk4_gtk3_TextBuffer_virtual_insert_pixbuf(void* fnptr, GtkTextBuffer* carg0, GtkTextIter* carg1, GdkPixbuf* carg2) {
+// 	return ((void (*) (GtkTextBuffer*, GtkTextIter*, GdkPixbuf*))(fnptr))(carg0, carg1, carg2);
+// }
+// void _gotk4_gtk3_TextBuffer_virtual_insert_text(void* fnptr, GtkTextBuffer* carg0, GtkTextIter* carg1, const gchar* carg2, gint carg3) {
+// 	return ((void (*) (GtkTextBuffer*, GtkTextIter*, const gchar*, gint))(fnptr))(carg0, carg1, carg2, carg3);
+// }
+// void _gotk4_gtk3_TextBuffer_virtual_mark_deleted(void* fnptr, GtkTextBuffer* carg0, GtkTextMark* carg1) {
+// 	return ((void (*) (GtkTextBuffer*, GtkTextMark*))(fnptr))(carg0, carg1);
+// }
+// void _gotk4_gtk3_TextBuffer_virtual_mark_set(void* fnptr, GtkTextBuffer* carg0, const GtkTextIter* carg1, GtkTextMark* carg2) {
+// 	return ((void (*) (GtkTextBuffer*, const GtkTextIter*, GtkTextMark*))(fnptr))(carg0, carg1, carg2);
+// }
+// void _gotk4_gtk3_TextBuffer_virtual_modified_changed(void* fnptr, GtkTextBuffer* carg0) {
+// 	return ((void (*) (GtkTextBuffer*))(fnptr))(carg0);
+// }
+// void _gotk4_gtk3_TextBuffer_virtual_paste_done(void* fnptr, GtkTextBuffer* carg0, GtkClipboard* carg1) {
+// 	return ((void (*) (GtkTextBuffer*, GtkClipboard*))(fnptr))(carg0, carg1);
+// }
+// void _gotk4_gtk3_TextBuffer_virtual_remove_tag(void* fnptr, GtkTextBuffer* carg0, GtkTextTag* carg1, const GtkTextIter* carg2, const GtkTextIter* carg3) {
+// 	return ((void (*) (GtkTextBuffer*, GtkTextTag*, const GtkTextIter*, const GtkTextIter*))(fnptr))(carg0, carg1, carg2, carg3);
+// }
+// extern void _gotk4_gtk3_TextTagTable_tag_added(GtkTextTagTable*, GtkTextTag*);
+// extern void _gotk4_gtk3_TextTagTable_tag_changed(GtkTextTagTable*, GtkTextTag*, gboolean);
+// extern void _gotk4_gtk3_TextTagTable_tag_removed(GtkTextTagTable*, GtkTextTag*);
+// void _gotk4_gtk3_TextTagTable_virtual_tag_added(void* fnptr, GtkTextTagTable* carg0, GtkTextTag* carg1) {
+// 	return ((void (*) (GtkTextTagTable*, GtkTextTag*))(fnptr))(carg0, carg1);
+// }
+// void _gotk4_gtk3_TextTagTable_virtual_tag_changed(void* fnptr, GtkTextTagTable* carg0, GtkTextTag* carg1, gboolean carg2) {
+// 	return ((void (*) (GtkTextTagTable*, GtkTextTag*, gboolean))(fnptr))(carg0, carg1, carg2);
+// }
+// void _gotk4_gtk3_TextTagTable_virtual_tag_removed(void* fnptr, GtkTextTagTable* carg0, GtkTextTag* carg1) {
+// 	return ((void (*) (GtkTextTagTable*, GtkTextTag*))(fnptr))(carg0, carg1);
+// }
+// extern void _gotk4_gtk3_TreeModelFilter_modify(GtkTreeModelFilter*, GtkTreeModel*, GtkTreeIter*, GValue*, gint);
+// extern gboolean _gotk4_gtk3_TreeModelFilter_visible(GtkTreeModelFilter*, GtkTreeModel*, GtkTreeIter*);
+// void _gotk4_gtk3_TreeModelFilter_virtual_modify(void* fnptr, GtkTreeModelFilter* carg0, GtkTreeModel* carg1, GtkTreeIter* carg2, GValue* carg3, gint carg4) {
+// 	return ((void (*) (GtkTreeModelFilter*, GtkTreeModel*, GtkTreeIter*, GValue*, gint))(fnptr))(carg0, carg1, carg2, carg3, carg4);
+// }
+// gboolean _gotk4_gtk3_TreeModelFilter_virtual_visible(void* fnptr, GtkTreeModelFilter* carg0, GtkTreeModel* carg1, GtkTreeIter* carg2) {
+// 	return ((gboolean (*) (GtkTreeModelFilter*, GtkTreeModel*, GtkTreeIter*))(fnptr))(carg0, carg1, carg2);
+// }
+// extern void _gotk4_gtk3_TreeSelection_changed(GtkTreeSelection*);
+// void _gotk4_gtk3_TreeSelection_virtual_changed(void* fnptr, GtkTreeSelection* carg0) {
+// 	return ((void (*) (GtkTreeSelection*))(fnptr))(carg0);
+// }
+// extern void _gotk4_gtk3_TreeViewColumn_clicked(GtkTreeViewColumn*);
+// void _gotk4_gtk3_TreeViewColumn_virtual_clicked(void* fnptr, GtkTreeViewColumn* carg0) {
+// 	return ((void (*) (GtkTreeViewColumn*))(fnptr))(carg0);
+// }
+// extern void _gotk4_gtk3_UIManager_actions_changed(GtkUIManager*);
+// extern void _gotk4_gtk3_UIManager_add_widget(GtkUIManager*, GtkWidget*);
+// extern void _gotk4_gtk3_UIManager_connect_proxy(GtkUIManager*, GtkAction*, GtkWidget*);
+// extern void _gotk4_gtk3_UIManager_disconnect_proxy(GtkUIManager*, GtkAction*, GtkWidget*);
+// extern void _gotk4_gtk3_UIManager_post_activate(GtkUIManager*, GtkAction*);
+// extern void _gotk4_gtk3_UIManager_pre_activate(GtkUIManager*, GtkAction*);
+// void _gotk4_gtk3_UIManager_virtual_actions_changed(void* fnptr, GtkUIManager* carg0) {
+// 	return ((void (*) (GtkUIManager*))(fnptr))(carg0);
+// }
+// void _gotk4_gtk3_UIManager_virtual_add_widget(void* fnptr, GtkUIManager* carg0, GtkWidget* carg1) {
+// 	return ((void (*) (GtkUIManager*, GtkWidget*))(fnptr))(carg0, carg1);
+// }
+// void _gotk4_gtk3_UIManager_virtual_connect_proxy(void* fnptr, GtkUIManager* carg0, GtkAction* carg1, GtkWidget* carg2) {
+// 	return ((void (*) (GtkUIManager*, GtkAction*, GtkWidget*))(fnptr))(carg0, carg1, carg2);
+// }
+// void _gotk4_gtk3_UIManager_virtual_disconnect_proxy(void* fnptr, GtkUIManager* carg0, GtkAction* carg1, GtkWidget* carg2) {
+// 	return ((void (*) (GtkUIManager*, GtkAction*, GtkWidget*))(fnptr))(carg0, carg1, carg2);
+// }
+// void _gotk4_gtk3_UIManager_virtual_post_activate(void* fnptr, GtkUIManager* carg0, GtkAction* carg1) {
+// 	return ((void (*) (GtkUIManager*, GtkAction*))(fnptr))(carg0, carg1);
+// }
+// void _gotk4_gtk3_UIManager_virtual_pre_activate(void* fnptr, GtkUIManager* carg0, GtkAction* carg1) {
+// 	return ((void (*) (GtkUIManager*, GtkAction*))(fnptr))(carg0, carg1);
+// }
+// extern void _gotk4_gtk3_Widget_adjust_baseline_allocation(GtkWidget*, gint*);
+// extern void _gotk4_gtk3_Widget_adjust_baseline_request(GtkWidget*, gint*, gint*);
+// extern void _gotk4_gtk3_Widget_adjust_size_allocation(GtkWidget*, GtkOrientation, gint*, gint*, gint*, gint*);
+// extern void _gotk4_gtk3_Widget_adjust_size_request(GtkWidget*, GtkOrientation, gint*, gint*);
+// extern gboolean _gotk4_gtk3_Widget_button_press_event(GtkWidget*, GdkEventButton*);
+// extern gboolean _gotk4_gtk3_Widget_button_release_event(GtkWidget*, GdkEventButton*);
+// extern gboolean _gotk4_gtk3_Widget_can_activate_accel(GtkWidget*, guint);
+// extern void _gotk4_gtk3_Widget_child_notify(GtkWidget*, GParamSpec*);
+// extern void _gotk4_gtk3_Widget_composited_changed(GtkWidget*);
+// extern void _gotk4_gtk3_Widget_compute_expand(GtkWidget*, gboolean*, gboolean*);
+// extern gboolean _gotk4_gtk3_Widget_configure_event(GtkWidget*, GdkEventConfigure*);
+// extern gboolean _gotk4_gtk3_Widget_damage_event(GtkWidget*, GdkEventExpose*);
+// extern gboolean _gotk4_gtk3_Widget_delete_event(GtkWidget*, GdkEventAny*);
+// extern void _gotk4_gtk3_Widget_destroy(GtkWidget*);
+// extern gboolean _gotk4_gtk3_Widget_destroy_event(GtkWidget*, GdkEventAny*);
+// extern void _gotk4_gtk3_Widget_direction_changed(GtkWidget*, GtkTextDirection);
+// extern void _gotk4_gtk3_Widget_drag_begin(GtkWidget*, GdkDragContext*);
+// extern void _gotk4_gtk3_Widget_drag_data_delete(GtkWidget*, GdkDragContext*);
+// extern void _gotk4_gtk3_Widget_drag_data_get(GtkWidget*, GdkDragContext*, GtkSelectionData*, guint, guint);
+// extern void _gotk4_gtk3_Widget_drag_data_received(GtkWidget*, GdkDragContext*, gint, gint, GtkSelectionData*, guint, guint);
+// extern gboolean _gotk4_gtk3_Widget_drag_drop(GtkWidget*, GdkDragContext*, gint, gint, guint);
+// extern void _gotk4_gtk3_Widget_drag_end(GtkWidget*, GdkDragContext*);
+// extern gboolean _gotk4_gtk3_Widget_drag_failed(GtkWidget*, GdkDragContext*, GtkDragResult);
+// extern void _gotk4_gtk3_Widget_drag_leave(GtkWidget*, GdkDragContext*, guint);
+// extern gboolean _gotk4_gtk3_Widget_drag_motion(GtkWidget*, GdkDragContext*, gint, gint, guint);
+// extern gboolean _gotk4_gtk3_Widget_enter_notify_event(GtkWidget*, GdkEventCrossing*);
+// extern gboolean _gotk4_gtk3_Widget_focus(GtkWidget*, GtkDirectionType);
+// extern gboolean _gotk4_gtk3_Widget_focus_in_event(GtkWidget*, GdkEventFocus*);
+// extern gboolean _gotk4_gtk3_Widget_focus_out_event(GtkWidget*, GdkEventFocus*);
+// extern AtkObject* _gotk4_gtk3_Widget_get_accessible(GtkWidget*);
+// extern void _gotk4_gtk3_Widget_get_preferred_height(GtkWidget*, gint, gint);
+// extern void _gotk4_gtk3_Widget_get_preferred_height_and_baseline_for_width(GtkWidget*, gint, gint, gint, gint, gint);
+// extern void _gotk4_gtk3_Widget_get_preferred_height_for_width(GtkWidget*, gint, gint, gint);
+// extern void _gotk4_gtk3_Widget_get_preferred_width(GtkWidget*, gint, gint);
+// extern void _gotk4_gtk3_Widget_get_preferred_width_for_height(GtkWidget*, gint, gint, gint);
+// extern GtkSizeRequestMode _gotk4_gtk3_Widget_get_request_mode(GtkWidget*);
+// extern gboolean _gotk4_gtk3_Widget_grab_broken_event(GtkWidget*, GdkEventGrabBroken*);
+// extern void _gotk4_gtk3_Widget_grab_focus(GtkWidget*);
+// extern void _gotk4_gtk3_Widget_grab_notify(GtkWidget*, gboolean);
+// extern void _gotk4_gtk3_Widget_hide(GtkWidget*);
+// extern void _gotk4_gtk3_Widget_hierarchy_changed(GtkWidget*, GtkWidget*);
+// extern gboolean _gotk4_gtk3_Widget_key_press_event(GtkWidget*, GdkEventKey*);
+// extern gboolean _gotk4_gtk3_Widget_key_release_event(GtkWidget*, GdkEventKey*);
+// extern gboolean _gotk4_gtk3_Widget_keynav_failed(GtkWidget*, GtkDirectionType);
+// extern gboolean _gotk4_gtk3_Widget_leave_notify_event(GtkWidget*, GdkEventCrossing*);
+// extern void _gotk4_gtk3_Widget_map(GtkWidget*);
+// extern gboolean _gotk4_gtk3_Widget_map_event(GtkWidget*, GdkEventAny*);
+// extern gboolean _gotk4_gtk3_Widget_mnemonic_activate(GtkWidget*, gboolean);
+// extern gboolean _gotk4_gtk3_Widget_motion_notify_event(GtkWidget*, GdkEventMotion*);
+// extern void _gotk4_gtk3_Widget_move_focus(GtkWidget*, GtkDirectionType);
+// extern void _gotk4_gtk3_Widget_parent_set(GtkWidget*, GtkWidget*);
+// extern gboolean _gotk4_gtk3_Widget_popup_menu(GtkWidget*);
+// extern gboolean _gotk4_gtk3_Widget_property_notify_event(GtkWidget*, GdkEventProperty*);
+// extern gboolean _gotk4_gtk3_Widget_proximity_in_event(GtkWidget*, GdkEventProximity*);
+// extern gboolean _gotk4_gtk3_Widget_proximity_out_event(GtkWidget*, GdkEventProximity*);
+// extern gboolean _gotk4_gtk3_Widget_query_tooltip(GtkWidget*, gint, gint, gboolean, GtkTooltip*);
+// extern void _gotk4_gtk3_Widget_realize(GtkWidget*);
+// extern void _gotk4_gtk3_Widget_screen_changed(GtkWidget*, GdkScreen*);
+// extern gboolean _gotk4_gtk3_Widget_scroll_event(GtkWidget*, GdkEventScroll*);
+// extern gboolean _gotk4_gtk3_Widget_selection_clear_event(GtkWidget*, GdkEventSelection*);
+// extern void _gotk4_gtk3_Widget_selection_get(GtkWidget*, GtkSelectionData*, guint, guint);
+// extern gboolean _gotk4_gtk3_Widget_selection_notify_event(GtkWidget*, GdkEventSelection*);
+// extern void _gotk4_gtk3_Widget_selection_received(GtkWidget*, GtkSelectionData*, guint);
+// extern gboolean _gotk4_gtk3_Widget_selection_request_event(GtkWidget*, GdkEventSelection*);
+// extern void _gotk4_gtk3_Widget_show(GtkWidget*);
+// extern void _gotk4_gtk3_Widget_show_all(GtkWidget*);
+// extern gboolean _gotk4_gtk3_Widget_show_help(GtkWidget*, GtkWidgetHelpType);
+// extern void _gotk4_gtk3_Widget_size_allocate(GtkWidget*, GtkAllocation*);
+// extern void _gotk4_gtk3_Widget_state_flags_changed(GtkWidget*, GtkStateFlags);
+// extern void _gotk4_gtk3_Widget_style_set(GtkWidget*, GtkStyle*);
+// extern void _gotk4_gtk3_Widget_style_updated(GtkWidget*);
+// extern gboolean _gotk4_gtk3_Widget_touch_event(GtkWidget*, GdkEventTouch*);
+// extern void _gotk4_gtk3_Widget_unmap(GtkWidget*);
+// extern gboolean _gotk4_gtk3_Widget_unmap_event(GtkWidget*, GdkEventAny*);
+// extern void _gotk4_gtk3_Widget_unrealize(GtkWidget*);
+// extern gboolean _gotk4_gtk3_Widget_window_state_event(GtkWidget*, GdkEventWindowState*);
+// void _gotk4_gtk3_Widget_virtual_adjust_baseline_allocation(void* fnptr, GtkWidget* carg0, gint* carg1) {
+// 	return ((void (*) (GtkWidget*, gint*))(fnptr))(carg0, carg1);
+// }
+// void _gotk4_gtk3_Widget_virtual_adjust_baseline_request(void* fnptr, GtkWidget* carg0, gint* carg1, gint* carg2) {
+// 	return ((void (*) (GtkWidget*, gint*, gint*))(fnptr))(carg0, carg1, carg2);
+// }
+// void _gotk4_gtk3_Widget_virtual_adjust_size_allocation(void* fnptr, GtkWidget* carg0, GtkOrientation carg1, gint* carg2, gint* carg3, gint* carg4, gint* carg5) {
+// 	return ((void (*) (GtkWidget*, GtkOrientation, gint*, gint*, gint*, gint*))(fnptr))(carg0, carg1, carg2, carg3, carg4, carg5);
+// }
+// void _gotk4_gtk3_Widget_virtual_adjust_size_request(void* fnptr, GtkWidget* carg0, GtkOrientation carg1, gint* carg2, gint* carg3) {
+// 	return ((void (*) (GtkWidget*, GtkOrientation, gint*, gint*))(fnptr))(carg0, carg1, carg2, carg3);
+// }
+// gboolean _gotk4_gtk3_Widget_virtual_button_press_event(void* fnptr, GtkWidget* carg0, GdkEventButton* carg1) {
+// 	return ((gboolean (*) (GtkWidget*, GdkEventButton*))(fnptr))(carg0, carg1);
+// }
+// gboolean _gotk4_gtk3_Widget_virtual_button_release_event(void* fnptr, GtkWidget* carg0, GdkEventButton* carg1) {
+// 	return ((gboolean (*) (GtkWidget*, GdkEventButton*))(fnptr))(carg0, carg1);
+// }
+// gboolean _gotk4_gtk3_Widget_virtual_can_activate_accel(void* fnptr, GtkWidget* carg0, guint carg1) {
+// 	return ((gboolean (*) (GtkWidget*, guint))(fnptr))(carg0, carg1);
+// }
+// void _gotk4_gtk3_Widget_virtual_child_notify(void* fnptr, GtkWidget* carg0, GParamSpec* carg1) {
+// 	return ((void (*) (GtkWidget*, GParamSpec*))(fnptr))(carg0, carg1);
+// }
+// void _gotk4_gtk3_Widget_virtual_composited_changed(void* fnptr, GtkWidget* carg0) {
+// 	return ((void (*) (GtkWidget*))(fnptr))(carg0);
+// }
+// void _gotk4_gtk3_Widget_virtual_compute_expand(void* fnptr, GtkWidget* carg0, gboolean* carg1, gboolean* carg2) {
+// 	return ((void (*) (GtkWidget*, gboolean*, gboolean*))(fnptr))(carg0, carg1, carg2);
+// }
+// gboolean _gotk4_gtk3_Widget_virtual_configure_event(void* fnptr, GtkWidget* carg0, GdkEventConfigure* carg1) {
+// 	return ((gboolean (*) (GtkWidget*, GdkEventConfigure*))(fnptr))(carg0, carg1);
+// }
+// gboolean _gotk4_gtk3_Widget_virtual_damage_event(void* fnptr, GtkWidget* carg0, GdkEventExpose* carg1) {
+// 	return ((gboolean (*) (GtkWidget*, GdkEventExpose*))(fnptr))(carg0, carg1);
+// }
+// gboolean _gotk4_gtk3_Widget_virtual_delete_event(void* fnptr, GtkWidget* carg0, GdkEventAny* carg1) {
+// 	return ((gboolean (*) (GtkWidget*, GdkEventAny*))(fnptr))(carg0, carg1);
+// }
+// void _gotk4_gtk3_Widget_virtual_destroy(void* fnptr, GtkWidget* carg0) {
+// 	return ((void (*) (GtkWidget*))(fnptr))(carg0);
+// }
+// gboolean _gotk4_gtk3_Widget_virtual_destroy_event(void* fnptr, GtkWidget* carg0, GdkEventAny* carg1) {
+// 	return ((gboolean (*) (GtkWidget*, GdkEventAny*))(fnptr))(carg0, carg1);
+// }
+// void _gotk4_gtk3_Widget_virtual_direction_changed(void* fnptr, GtkWidget* carg0, GtkTextDirection carg1) {
+// 	return ((void (*) (GtkWidget*, GtkTextDirection))(fnptr))(carg0, carg1);
+// }
+// void _gotk4_gtk3_Widget_virtual_drag_begin(void* fnptr, GtkWidget* carg0, GdkDragContext* carg1) {
+// 	return ((void (*) (GtkWidget*, GdkDragContext*))(fnptr))(carg0, carg1);
+// }
+// void _gotk4_gtk3_Widget_virtual_drag_data_delete(void* fnptr, GtkWidget* carg0, GdkDragContext* carg1) {
+// 	return ((void (*) (GtkWidget*, GdkDragContext*))(fnptr))(carg0, carg1);
+// }
+// void _gotk4_gtk3_Widget_virtual_drag_data_get(void* fnptr, GtkWidget* carg0, GdkDragContext* carg1, GtkSelectionData* carg2, guint carg3, guint carg4) {
+// 	return ((void (*) (GtkWidget*, GdkDragContext*, GtkSelectionData*, guint, guint))(fnptr))(carg0, carg1, carg2, carg3, carg4);
+// }
+// void _gotk4_gtk3_Widget_virtual_drag_data_received(void* fnptr, GtkWidget* carg0, GdkDragContext* carg1, gint carg2, gint carg3, GtkSelectionData* carg4, guint carg5, guint carg6) {
+// 	return ((void (*) (GtkWidget*, GdkDragContext*, gint, gint, GtkSelectionData*, guint, guint))(fnptr))(carg0, carg1, carg2, carg3, carg4, carg5, carg6);
+// }
+// gboolean _gotk4_gtk3_Widget_virtual_drag_drop(void* fnptr, GtkWidget* carg0, GdkDragContext* carg1, gint carg2, gint carg3, guint carg4) {
+// 	return ((gboolean (*) (GtkWidget*, GdkDragContext*, gint, gint, guint))(fnptr))(carg0, carg1, carg2, carg3, carg4);
+// }
+// void _gotk4_gtk3_Widget_virtual_drag_end(void* fnptr, GtkWidget* carg0, GdkDragContext* carg1) {
+// 	return ((void (*) (GtkWidget*, GdkDragContext*))(fnptr))(carg0, carg1);
+// }
+// gboolean _gotk4_gtk3_Widget_virtual_drag_failed(void* fnptr, GtkWidget* carg0, GdkDragContext* carg1, GtkDragResult carg2) {
+// 	return ((gboolean (*) (GtkWidget*, GdkDragContext*, GtkDragResult))(fnptr))(carg0, carg1, carg2);
+// }
+// void _gotk4_gtk3_Widget_virtual_drag_leave(void* fnptr, GtkWidget* carg0, GdkDragContext* carg1, guint carg2) {
+// 	return ((void (*) (GtkWidget*, GdkDragContext*, guint))(fnptr))(carg0, carg1, carg2);
+// }
+// gboolean _gotk4_gtk3_Widget_virtual_drag_motion(void* fnptr, GtkWidget* carg0, GdkDragContext* carg1, gint carg2, gint carg3, guint carg4) {
+// 	return ((gboolean (*) (GtkWidget*, GdkDragContext*, gint, gint, guint))(fnptr))(carg0, carg1, carg2, carg3, carg4);
+// }
+// gboolean _gotk4_gtk3_Widget_virtual_enter_notify_event(void* fnptr, GtkWidget* carg0, GdkEventCrossing* carg1) {
+// 	return ((gboolean (*) (GtkWidget*, GdkEventCrossing*))(fnptr))(carg0, carg1);
+// }
+// gboolean _gotk4_gtk3_Widget_virtual_focus(void* fnptr, GtkWidget* carg0, GtkDirectionType carg1) {
+// 	return ((gboolean (*) (GtkWidget*, GtkDirectionType))(fnptr))(carg0, carg1);
+// }
+// gboolean _gotk4_gtk3_Widget_virtual_focus_in_event(void* fnptr, GtkWidget* carg0, GdkEventFocus* carg1) {
+// 	return ((gboolean (*) (GtkWidget*, GdkEventFocus*))(fnptr))(carg0, carg1);
+// }
+// gboolean _gotk4_gtk3_Widget_virtual_focus_out_event(void* fnptr, GtkWidget* carg0, GdkEventFocus* carg1) {
+// 	return ((gboolean (*) (GtkWidget*, GdkEventFocus*))(fnptr))(carg0, carg1);
+// }
+// AtkObject* _gotk4_gtk3_Widget_virtual_get_accessible(void* fnptr, GtkWidget* carg0) {
+// 	return ((AtkObject* (*) (GtkWidget*))(fnptr))(carg0);
+// }
+// void _gotk4_gtk3_Widget_virtual_get_preferred_height(void* fnptr, GtkWidget* carg0, gint* carg1, gint* carg2) {
+// 	return ((void (*) (GtkWidget*, gint*, gint*))(fnptr))(carg0, carg1, carg2);
+// }
+// void _gotk4_gtk3_Widget_virtual_get_preferred_height_and_baseline_for_width(void* fnptr, GtkWidget* carg0, gint carg1, gint* carg2, gint* carg3, gint* carg4, gint* carg5) {
+// 	return ((void (*) (GtkWidget*, gint, gint*, gint*, gint*, gint*))(fnptr))(carg0, carg1, carg2, carg3, carg4, carg5);
+// }
+// void _gotk4_gtk3_Widget_virtual_get_preferred_height_for_width(void* fnptr, GtkWidget* carg0, gint carg1, gint* carg2, gint* carg3) {
+// 	return ((void (*) (GtkWidget*, gint, gint*, gint*))(fnptr))(carg0, carg1, carg2, carg3);
+// }
+// void _gotk4_gtk3_Widget_virtual_get_preferred_width(void* fnptr, GtkWidget* carg0, gint* carg1, gint* carg2) {
+// 	return ((void (*) (GtkWidget*, gint*, gint*))(fnptr))(carg0, carg1, carg2);
+// }
+// void _gotk4_gtk3_Widget_virtual_get_preferred_width_for_height(void* fnptr, GtkWidget* carg0, gint carg1, gint* carg2, gint* carg3) {
+// 	return ((void (*) (GtkWidget*, gint, gint*, gint*))(fnptr))(carg0, carg1, carg2, carg3);
 // }
-// C.GtkSizeRequestMode _gotk4_gtk3_Widget_virtual_get_request_mode(void* fnptr, *C.GtkWidget carg0) {
-// 	return ((C.GtkSizeRequestMode (*) (*C.GtkWidget))(fnptr))(carg0);
+// GtkSizeRequestMode _gotk4_gtk3_Widget_virtual_get_request_mode(void* fnptr, GtkWidget* carg0) {
+// 	return ((GtkSizeRequestMode (*) (GtkWidget*))(fnptr))(carg0);
 // }
-// C.gboolean _gotk4_gtk3_Widget_virtual_grab_broken_event(void* fnptr, *C.GtkWidget carg0, *C.GdkEventGrabBroken carg1) {
-// 	return ((C.gboolean (*) (*C.GtkWidget, *C.GdkEventGrabBroken))(fnptr))(carg0, carg1);
+// gboolean _gotk4_gtk3_Widget_virtual_grab_broken_event(void* fnptr, GtkWidget* carg0, GdkEventGrabBroken* carg1) {
+// 	return ((gboolean (*) (GtkWidget*, GdkEventGrabBroken*))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gtk3_Widget_virtual_grab_focus(void* fnptr, *C.GtkWidget carg0) {
-// 	return ((C.void (*) (*C.GtkWidget))(fnptr))(carg0);
+// void _gotk4_gtk3_Widget_virtual_grab_focus(void* fnptr, GtkWidget* carg0) {
+// 	return ((void (*) (GtkWidget*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_Widget_virtual_grab_notify(void* fnptr, *C.GtkWidget carg0, C.gboolean carg1) {
-// 	return ((C.void (*) (*C.GtkWidget, C.gboolean))(fnptr))(carg0, carg1);
+// void _gotk4_gtk3_Widget_virtual_grab_notify(void* fnptr, GtkWidget* carg0, gboolean carg1) {
+// 	return ((void (*) (GtkWidget*, gboolean))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gtk3_Widget_virtual_hide(void* fnptr, *C.GtkWidget carg0) {
-// 	return ((C.void (*) (*C.GtkWidget))(fnptr))(carg0);
+// void _gotk4_gtk3_Widget_virtual_hide(void* fnptr, GtkWidget* carg0) {
+// 	return ((void (*) (GtkWidget*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_Widget_virtual_hierarchy_changed(void* fnptr, *C.GtkWidget carg0, *C.GtkWidget carg1) {
-// 	return ((C.void (*) (*C.GtkWidget, *C.GtkWidget))(fnptr))(carg0, carg1);
+// void _gotk4_gtk3_Widget_virtual_hierarchy_changed(void* fnptr, GtkWidget* carg0, GtkWidget* carg1) {
+// 	return ((void (*) (GtkWidget*, GtkWidget*))(fnptr))(carg0, carg1);
 // }
-// C.gboolean _gotk4_gtk3_Widget_virtual_key_press_event(void* fnptr, *C.GtkWidget carg0, *C.GdkEventKey carg1) {
-// 	return ((C.gboolean (*) (*C.GtkWidget, *C.GdkEventKey))(fnptr))(carg0, carg1);
+// gboolean _gotk4_gtk3_Widget_virtual_key_press_event(void* fnptr, GtkWidget* carg0, GdkEventKey* carg1) {
+// 	return ((gboolean (*) (GtkWidget*, GdkEventKey*))(fnptr))(carg0, carg1);
 // }
-// C.gboolean _gotk4_gtk3_Widget_virtual_key_release_event(void* fnptr, *C.GtkWidget carg0, *C.GdkEventKey carg1) {
-// 	return ((C.gboolean (*) (*C.GtkWidget, *C.GdkEventKey))(fnptr))(carg0, carg1);
+// gboolean _gotk4_gtk3_Widget_virtual_key_release_event(void* fnptr, GtkWidget* carg0, GdkEventKey* carg1) {
+// 	return ((gboolean (*) (GtkWidget*, GdkEventKey*))(fnptr))(carg0, carg1);
 // }
-// C.gboolean _gotk4_gtk3_Widget_virtual_keynav_failed(void* fnptr, *C.GtkWidget carg0, C.GtkDirectionType carg1) {
-// 	return ((C.gboolean (*) (*C.GtkWidget, C.GtkDirectionType))(fnptr))(carg0, carg1);
+// gboolean _gotk4_gtk3_Widget_virtual_keynav_failed(void* fnptr, GtkWidget* carg0, GtkDirectionType carg1) {
+// 	return ((gboolean (*) (GtkWidget*, GtkDirectionType))(fnptr))(carg0, carg1);
 // }
-// C.gboolean _gotk4_gtk3_Widget_virtual_leave_notify_event(void* fnptr, *C.GtkWidget carg0, *C.GdkEventCrossing carg1) {
-// 	return ((C.gboolean (*) (*C.GtkWidget, *C.GdkEventCrossing))(fnptr))(carg0, carg1);
+// gboolean _gotk4_gtk3_Widget_virtual_leave_notify_event(void* fnptr, GtkWidget* carg0, GdkEventCrossing* carg1) {
+// 	return ((gboolean (*) (GtkWidget*, GdkEventCrossing*))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gtk3_Widget_virtual_map(void* fnptr, *C.GtkWidget carg0) {
-// 	return ((C.void (*) (*C.GtkWidget))(fnptr))(carg0);
-// }
-// C.gboolean _gotk4_gtk3_Widget_virtual_map_event(void* fnptr, *C.GtkWidget carg0, *C.GdkEventAny carg1) {
-// 	return ((C.gboolean (*) (*C.GtkWidget, *C.GdkEventAny))(fnptr))(carg0, carg1);
+// void _gotk4_gtk3_Widget_virtual_map(void* fnptr, GtkWidget* carg0) {
+// 	return ((void (*) (GtkWidget*))(fnptr))(carg0);
+// }
+// gboolean _gotk4_gtk3_Widget_virtual_map_event(void* fnptr, GtkWidget* carg0, GdkEventAny* carg1) {
+// 	return ((gboolean (*) (GtkWidget*, GdkEventAny*))(fnptr))(carg0, carg1);
 // }
-// C.gboolean _gotk4_gtk3_Widget_virtual_mnemonic_activate(void* fnptr, *C.GtkWidget carg0, C.gboolean carg1) {
-// 	return ((C.gboolean (*) (*C.GtkWidget, C.gboolean))(fnptr))(carg0, carg1);
+// gboolean _gotk4_gtk3_Widget_virtual_mnemonic_activate(void* fnptr, GtkWidget* carg0, gboolean carg1) {
+// 	return ((gboolean (*) (GtkWidget*, gboolean))(fnptr))(carg0, carg1);
 // }
-// C.gboolean _gotk4_gtk3_Widget_virtual_motion_notify_event(void* fnptr, *C.GtkWidget carg0, *C.GdkEventMotion carg1) {
-// 	return ((C.gboolean (*) (*C.GtkWidget, *C.GdkEventMotion))(fnptr))(carg0, carg1);
+// gboolean _gotk4_gtk3_Widget_virtual_motion_notify_event(void* fnptr, GtkWidget* carg0, GdkEventMotion* carg1) {
+// 	return ((gboolean (*) (GtkWidget*, GdkEventMotion*))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gtk3_Widget_virtual_move_focus(void* fnptr, *C.GtkWidget carg0, C.GtkDirectionType carg1) {
-// 	return ((C.void (*) (*C.GtkWidget, C.GtkDirectionType))(fnptr))(carg0, carg1);
+// void _gotk4_gtk3_Widget_virtual_move_focus(void* fnptr, GtkWidget* carg0, GtkDirectionType carg1) {
+// 	return ((void (*) (GtkWidget*, GtkDirectionType))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gtk3_Widget_virtual_parent_set(void* fnptr, *C.GtkWidget carg0, *C.GtkWidget carg1) {
-// 	return ((C.void (*) (*C.GtkWidget, *C.GtkWidget))(fnptr))(carg0, carg1);
+// void _gotk4_gtk3_Widget_virtual_parent_set(void* fnptr, GtkWidget* carg0, GtkWidget* carg1) {
+// 	return ((void (*) (GtkWidget*, GtkWidget*))(fnptr))(carg0, carg1);
 // }
-// C.gboolean _gotk4_gtk3_Widget_virtual_popup_menu(void* fnptr, *C.GtkWidget carg0) {
-// 	return ((C.gboolean (*) (*C.GtkWidget))(fnptr))(carg0);
+// gboolean _gotk4_gtk3_Widget_virtual_popup_menu(void* fnptr, GtkWidget* carg0) {
+// 	return ((gboolean (*) (GtkWidget*))(fnptr))(carg0);
 // }
-// C.gboolean _gotk4_gtk3_Widget_virtual_property_notify_event(void* fnptr, *C.GtkWidget carg0, *C.GdkEventProperty carg1) {
-// 	return ((C.gboolean (*) (*C.GtkWidget, *C.GdkEventProperty))(fnptr))(carg0, carg1);
+// gboolean _gotk4_gtk3_Widget_virtual_property_notify_event(void* fnptr, GtkWidget* carg0, GdkEventProperty* carg1) {
+// 	return ((gboolean (*) (GtkWidget*, GdkEventProperty*))(fnptr))(carg0, carg1);
 // }
-// C.gboolean _gotk4_gtk3_Widget_virtual_proximity_in_event(void* fnptr, *C.GtkWidget carg0, *C.GdkEventProximity carg1) {
-// 	return ((C.gboolean (*) (*C.GtkWidget, *C.GdkEventProximity))(fnptr))(carg0, carg1);
+// gboolean _gotk4_gtk3_Widget_virtual_proximity_in_event(void* fnptr, GtkWidget* carg0, GdkEventProximity* carg1) {
+// 	return ((gboolean (*) (GtkWidget*, GdkEventProximity*))(fnptr))(carg0, carg1);
 // }
-// C.gboolean _gotk4_gtk3_Widget_virtual_proximity_out_event(void* fnptr, *C.GtkWidget carg0, *C.GdkEventProximity carg1) {
-// 	return ((C.gboolean (*) (*C.GtkWidget, *C.GdkEventProximity))(fnptr))(carg0, carg1);
+// gboolean _gotk4_gtk3_Widget_virtual_proximity_out_event(void* fnptr, GtkWidget* carg0, GdkEventProximity* carg1) {
+// 	return ((gboolean (*) (GtkWidget*, GdkEventProximity*))(fnptr))(carg0, carg1);
 // }
-// C.gboolean _gotk4_gtk3_Widget_virtual_query_tooltip(void* fnptr, *C.GtkWidget carg0, C.gint carg1, C.gint carg2, C.gboolean carg3, *C.GtkTooltip carg4) {
-// 	return ((C.gboolean (*) (*C.GtkWidget, C.gint, C.gint, C.gboolean, *C.GtkTooltip))(fnptr))(carg0, carg1, carg2, carg3, carg4);
+// gboolean _gotk4_gtk3_Widget_virtual_query_tooltip(void* fnptr, GtkWidget* carg0, gint carg1, gint carg2, gboolean carg3, GtkTooltip* carg4) {
+// 	return ((gboolean (*) (GtkWidget*, gint, gint, gboolean, GtkTooltip*))(fnptr))(carg0, carg1, carg2, carg3, carg4);
 // }
-// C.void _gotk4_gtk3_Widget_virtual_realize(void* fnptr, *C.GtkWidget carg0) {
-// 	return ((C.void (*) (*C.GtkWidget))(fnptr))(carg0);
+// void _gotk4_gtk3_Widget_virtual_realize(void* fnptr, GtkWidget* carg0) {
+// 	return ((void (*) (GtkWidget*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_Widget_virtual_screen_changed(void* fnptr, *C.GtkWidget carg0, *C.GdkScreen carg1) {
-// 	return ((C.void (*) (*C.GtkWidget, *C.GdkScreen))(fnptr))(carg0, carg1);
-// }
-// C.gboolean _gotk4_gtk3_Widget_virtual_scroll_event(void* fnptr, *C.GtkWidget carg0, *C.GdkEventScroll carg1) {
-// 	return ((C.gboolean (*) (*C.GtkWidget, *C.GdkEventScroll))(fnptr))(carg0, carg1);
+// void _gotk4_gtk3_Widget_virtual_screen_changed(void* fnptr, GtkWidget* carg0, GdkScreen* carg1) {
+// 	return ((void (*) (GtkWidget*, GdkScreen*))(fnptr))(carg0, carg1);
+// }
+// gboolean _gotk4_gtk3_Widget_virtual_scroll_event(void* fnptr, GtkWidget* carg0, GdkEventScroll* carg1) {
+// 	return ((gboolean (*) (GtkWidget*, GdkEventScroll*))(fnptr))(carg0, carg1);
 // }
-// C.gboolean _gotk4_gtk3_Widget_virtual_selection_clear_event(void* fnptr, *C.GtkWidget carg0, *C.GdkEventSelection carg1) {
-// 	return ((C.gboolean (*) (*C.GtkWidget, *C.GdkEventSelection))(fnptr))(carg0, carg1);
+// gboolean _gotk4_gtk3_Widget_virtual_selection_clear_event(void* fnptr, GtkWidget* carg0, GdkEventSelection* carg1) {
+// 	return ((gboolean (*) (GtkWidget*, GdkEventSelection*))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gtk3_Widget_virtual_selection_get(void* fnptr, *C.GtkWidget carg0, *C.GtkSelectionData carg1, C.guint carg2, C.guint carg3) {
-// 	return ((C.void (*) (*C.GtkWidget, *C.GtkSelectionData, C.guint, C.guint))(fnptr))(carg0, carg1, carg2, carg3);
+// void _gotk4_gtk3_Widget_virtual_selection_get(void* fnptr, GtkWidget* carg0, GtkSelectionData* carg1, guint carg2, guint carg3) {
+// 	return ((void (*) (GtkWidget*, GtkSelectionData*, guint, guint))(fnptr))(carg0, carg1, carg2, carg3);
 // }
-// C.gboolean _gotk4_gtk3_Widget_virtual_selection_notify_event(void* fnptr, *C.GtkWidget carg0, *C.GdkEventSelection carg1) {
-// 	return ((C.gboolean (*) (*C.GtkWidget, *C.GdkEventSelection))(fnptr))(carg0, carg1);
+// gboolean _gotk4_gtk3_Widget_virtual_selection_notify_event(void* fnptr, GtkWidget* carg0, GdkEventSelection* carg1) {
+// 	return ((gboolean (*) (GtkWidget*, GdkEventSelection*))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gtk3_Widget_virtual_selection_received(void* fnptr, *C.GtkWidget carg0, *C.GtkSelectionData carg1, C.guint carg2) {
-// 	return ((C.void (*) (*C.GtkWidget, *C.GtkSelectionData, C.guint))(fnptr))(carg0, carg1, carg2);
+// void _gotk4_gtk3_Widget_virtual_selection_received(void* fnptr, GtkWidget* carg0, GtkSelectionData* carg1, guint carg2) {
+// 	return ((void (*) (GtkWidget*, GtkSelectionData*, guint))(fnptr))(carg0, carg1, carg2);
 // }
-// C.gboolean _gotk4_gtk3_Widget_virtual_selection_request_event(void* fnptr, *C.GtkWidget carg0, *C.GdkEventSelection carg1) {
-// 	return ((C.gboolean (*) (*C.GtkWidget, *C.GdkEventSelection))(fnptr))(carg0, carg1);
+// gboolean _gotk4_gtk3_Widget_virtual_selection_request_event(void* fnptr, GtkWidget* carg0, GdkEventSelection* carg1) {
+// 	return ((gboolean (*) (GtkWidget*, GdkEventSelection*))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gtk3_Widget_virtual_show(void* fnptr, *C.GtkWidget carg0) {
-// 	return ((C.void (*) (*C.GtkWidget))(fnptr))(carg0);
+// void _gotk4_gtk3_Widget_virtual_show(void* fnptr, GtkWidget* carg0) {
+// 	return ((void (*) (GtkWidget*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_Widget_virtual_show_all(void* fnptr, *C.GtkWidget carg0) {
-// 	return ((C.void (*) (*C.GtkWidget))(fnptr))(carg0);
+// void _gotk4_gtk3_Widget_virtual_show_all(void* fnptr, GtkWidget* carg0) {
+// 	return ((void (*) (GtkWidget*))(fnptr))(carg0);
 // }
-// C.gboolean _gotk4_gtk3_Widget_virtual_show_help(void* fnptr, *C.GtkWidget carg0, C.GtkWidgetHelpType carg1) {
-// 	return ((C.gboolean (*) (*C.GtkWidget, C.GtkWidgetHelpType))(fnptr))(carg0, carg1);
+// gboolean _gotk4_gtk3_Widget_virtual_show_help(void* fnptr, GtkWidget* carg0, GtkWidgetHelpType carg1) {
+// 	return ((gboolean (*) (GtkWidget*, GtkWidgetHelpType))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gtk3_Widget_virtual_size_allocate(void* fnptr, *C.GtkWidget carg0, *C.GtkAllocation carg1) {
-// 	return ((C.void (*) (*C.GtkWidget, *C.GtkAllocation))(fnptr))(carg0, carg1);
+// void _gotk4_gtk3_Widget_virtual_size_allocate(void* fnptr, GtkWidget* carg0, GtkAllocation* carg1) {
+// 	return ((void (*) (GtkWidget*, GtkAllocation*))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gtk3_Widget_virtual_state_flags_changed(void* fnptr, *C.GtkWidget carg0, C.GtkStateFlags carg1) {
-// 	return ((C.void (*) (*C.GtkWidget, C.GtkStateFlags))(fnptr))(carg0, carg1);
+// void _gotk4_gtk3_Widget_virtual_state_flags_changed(void* fnptr, GtkWidget* carg0, GtkStateFlags carg1) {
+// 	return ((void (*) (GtkWidget*, GtkStateFlags))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gtk3_Widget_virtual_style_set(void* fnptr, *C.GtkWidget carg0, *C.GtkStyle carg1) {
-// 	return ((C.void (*) (*C.GtkWidget, *C.GtkStyle))(fnptr))(carg0, carg1);
-// }
-// C.void _gotk4_gtk3_Widget_virtual_style_updated(void* fnptr, *C.GtkWidget carg0) {
-// 	return ((C.void (*) (*C.GtkWidget))(fnptr))(carg0);
-// }
-// C.gboolean _gotk4_gtk3_Widget_virtual_touch_event(void* fnptr, *C.GtkWidget carg0, *C.GdkEventTouch carg1) {
-// 	return ((C.gboolean (*) (*C.GtkWidget, *C.GdkEventTouch))(fnptr))(carg0, carg1);
-// }
-// C.void _gotk4_gtk3_Widget_virtual_unmap(void* fnptr, *C.GtkWidget carg0) {
-// 	return ((C.void (*) (*C.GtkWidget))(fnptr))(carg0);
-// }
-// C.gboolean _gotk4_gtk3_Widget_virtual_unmap_event(void* fnptr, *C.GtkWidget carg0, *C.GdkEventAny carg1) {
-// 	return ((C.gboolean (*) (*C.GtkWidget, *C.GdkEventAny))(fnptr))(carg0, carg1);
-// }
-// C.void _gotk4_gtk3_Widget_virtual_unrealize(void* fnptr, *C.GtkWidget carg0) {
-// 	return ((C.void (*) (*C.GtkWidget))(fnptr))(carg0);
-// }
-// C.gboolean _gotk4_gtk3_Widget_virtual_window_state_event(void* fnptr, *C.GtkWidget carg0, *C.GdkEventWindowState carg1) {
-// 	return ((C.gboolean (*) (*C.GtkWidget, *C.GdkEventWindowState))(fnptr))(carg0, carg1);
-// }
-// extern C.void _gotk4_gtk3_Calendar_day_selected(*C.GtkCalendar);
-// extern C.void _gotk4_gtk3_Calendar_day_selected_double_click(*C.GtkCalendar);
-// extern C.void _gotk4_gtk3_Calendar_month_changed(*C.GtkCalendar);
-// extern C.void _gotk4_gtk3_Calendar_next_month(*C.GtkCalendar);
-// extern C.void _gotk4_gtk3_Calendar_next_year(*C.GtkCalendar);
-// extern C.void _gotk4_gtk3_Calendar_prev_month(*C.GtkCalendar);
-// extern C.void _gotk4_gtk3_Calendar_prev_year(*C.GtkCalendar);
-// C.void _gotk4_gtk3_Calendar_virtual_day_selected(void* fnptr, *C.GtkCalendar carg0) {
-// 	return ((C.void (*) (*C.GtkCalendar))(fnptr))(carg0);
-// }
-// C.void _gotk4_gtk3_Calendar_virtual_day_selected_double_click(void* fnptr, *C.GtkCalendar carg0) {
-// 	return ((C.void (*) (*C.GtkCalendar))(fnptr))(carg0);
+// void _gotk4_gtk3_Widget_virtual_style_set(void* fnptr, GtkWidget* carg0, GtkStyle* carg1) {
+// 	return ((void (*) (GtkWidget*, GtkStyle*))(fnptr))(carg0, carg1);
+// }
+// void _gotk4_gtk3_Widget_virtual_style_updated(void* fnptr, GtkWidget* carg0) {
+// 	return ((void (*) (GtkWidget*))(fnptr))(carg0);
+// }
+// gboolean _gotk4_gtk3_Widget_virtual_touch_event(void* fnptr, GtkWidget* carg0, GdkEventTouch* carg1) {
+// 	return ((gboolean (*) (GtkWidget*, GdkEventTouch*))(fnptr))(carg0, carg1);
+// }
+// void _gotk4_gtk3_Widget_virtual_unmap(void* fnptr, GtkWidget* carg0) {
+// 	return ((void (*) (GtkWidget*))(fnptr))(carg0);
+// }
+// gboolean _gotk4_gtk3_Widget_virtual_unmap_event(void* fnptr, GtkWidget* carg0, GdkEventAny* carg1) {
+// 	return ((gboolean (*) (GtkWidget*, GdkEventAny*))(fnptr))(carg0, carg1);
+// }
+// void _gotk4_gtk3_Widget_virtual_unrealize(void* fnptr, GtkWidget* carg0) {
+// 	return ((void (*) (GtkWidget*))(fnptr))(carg0);
+// }
+// gboolean _gotk4_gtk3_Widget_virtual_window_state_event(void* fnptr, GtkWidget* carg0, GdkEventWindowState* carg1) {
+// 	return ((gboolean (*) (GtkWidget*, GdkEventWindowState*))(fnptr))(carg0, carg1);
+// }
+// extern void _gotk4_gtk3_Calendar_day_selected(GtkCalendar*);
+// extern void _gotk4_gtk3_Calendar_day_selected_double_click(GtkCalendar*);
+// extern void _gotk4_gtk3_Calendar_month_changed(GtkCalendar*);
+// extern void _gotk4_gtk3_Calendar_next_month(GtkCalendar*);
+// extern void _gotk4_gtk3_Calendar_next_year(GtkCalendar*);
+// extern void _gotk4_gtk3_Calendar_prev_month(GtkCalendar*);
+// extern void _gotk4_gtk3_Calendar_prev_year(GtkCalendar*);
+// void _gotk4_gtk3_Calendar_virtual_day_selected(void* fnptr, GtkCalendar* carg0) {
+// 	return ((void (*) (GtkCalendar*))(fnptr))(carg0);
+// }
+// void _gotk4_gtk3_Calendar_virtual_day_selected_double_click(void* fnptr, GtkCalendar* carg0) {
+// 	return ((void (*) (GtkCalendar*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_Calendar_virtual_month_changed(void* fnptr, *C.GtkCalendar carg0) {
-// 	return ((C.void (*) (*C.GtkCalendar))(fnptr))(carg0);
+// void _gotk4_gtk3_Calendar_virtual_month_changed(void* fnptr, GtkCalendar* carg0) {
+// 	return ((void (*) (GtkCalendar*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_Calendar_virtual_next_month(void* fnptr, *C.GtkCalendar carg0) {
-// 	return ((C.void (*) (*C.GtkCalendar))(fnptr))(carg0);
+// void _gotk4_gtk3_Calendar_virtual_next_month(void* fnptr, GtkCalendar* carg0) {
+// 	return ((void (*) (GtkCalendar*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_Calendar_virtual_next_year(void* fnptr, *C.GtkCalendar carg0) {
-// 	return ((C.void (*) (*C.GtkCalendar))(fnptr))(carg0);
+// void _gotk4_gtk3_Calendar_virtual_next_year(void* fnptr, GtkCalendar* carg0) {
+// 	return ((void (*) (GtkCalendar*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_Calendar_virtual_prev_month(void* fnptr, *C.GtkCalendar carg0) {
-// 	return ((C.void (*) (*C.GtkCalendar))(fnptr))(carg0);
+// void _gotk4_gtk3_Calendar_virtual_prev_month(void* fnptr, GtkCalendar* carg0) {
+// 	return ((void (*) (GtkCalendar*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_Calendar_virtual_prev_year(void* fnptr, *C.GtkCalendar carg0) {
-// 	return ((C.void (*) (*C.GtkCalendar))(fnptr))(carg0);
+// void _gotk4_gtk3_Calendar_virtual_prev_year(void* fnptr, GtkCalendar* carg0) {
+// 	return ((void (*) (GtkCalendar*))(fnptr))(carg0);
 // }
-// extern C.void _gotk4_gtk3_CellRendererAccel_accel_cleared(*C.GtkCellRendererAccel, *C.gchar);
-// extern C.void _gotk4_gtk3_CellRendererAccel_accel_edited(*C.GtkCellRendererAccel, *C.gchar, C.guint, C.GdkModifierType, C.guint);
-// C.void _gotk4_gtk3_CellRendererAccel_virtual_accel_cleared(void* fnptr, *C.GtkCellRendererAccel carg0, *C.gchar carg1) {
-// 	return ((C.void (*) (*C.GtkCellRendererAccel, *C.gchar))(fnptr))(carg0, carg1);
+// extern void _gotk4_gtk3_CellRendererAccel_accel_cleared(GtkCellRendererAccel*, const gchar*);
+// extern void _gotk4_gtk3_CellRendererAccel_accel_edited(GtkCellRendererAccel*, const gchar*, guint, GdkModifierType, guint);
+// void _gotk4_gtk3_CellRendererAccel_virtual_accel_cleared(void* fnptr, GtkCellRendererAccel* carg0, const gchar* carg1) {
+// 	return ((void (*) (GtkCellRendererAccel*, const gchar*))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gtk3_CellRendererAccel_virtual_accel_edited(void* fnptr, *C.GtkCellRendererAccel carg0, *C.gchar carg1, C.guint carg2, C.GdkModifierType carg3, C.guint carg4) {
-// 	return ((C.void (*) (*C.GtkCellRendererAccel, *C.gchar, C.guint, C.GdkModifierType, C.guint))(fnptr))(carg0, carg1, carg2, carg3, carg4);
+// void _gotk4_gtk3_CellRendererAccel_virtual_accel_edited(void* fnptr, GtkCellRendererAccel* carg0, const gchar* carg1, guint carg2, GdkModifierType carg3, guint carg4) {
+// 	return ((void (*) (GtkCellRendererAccel*, const gchar*, guint, GdkModifierType, guint))(fnptr))(carg0, carg1, carg2, carg3, carg4);
 // }
-// extern C.void _gotk4_gtk3_Container_add(*C.GtkContainer, *C.GtkWidget);
-// extern C.void _gotk4_gtk3_Container_check_resize(*C.GtkContainer);
-// extern C.GType _gotk4_gtk3_Container_child_type(*C.GtkContainer);
-// extern *C.gchar _gotk4_gtk3_Container_composite_name(*C.GtkContainer, *C.GtkWidget);
-// extern C.void _gotk4_gtk3_Container_get_child_property(*C.GtkContainer, *C.GtkWidget, C.guint, *C.GValue, *C.GParamSpec);
-// extern *C.GtkWidgetPath _gotk4_gtk3_Container_get_path_for_child(*C.GtkContainer, *C.GtkWidget);
-// extern C.void _gotk4_gtk3_Container_remove(*C.GtkContainer, *C.GtkWidget);
-// extern C.void _gotk4_gtk3_Container_set_child_property(*C.GtkContainer, *C.GtkWidget, C.guint, *C.GValue, *C.GParamSpec);
-// extern C.void _gotk4_gtk3_Container_set_focus_child(*C.GtkContainer, *C.GtkWidget);
-// C.void _gotk4_gtk3_Container_virtual_add(void* fnptr, *C.GtkContainer carg0, *C.GtkWidget carg1) {
-// 	return ((C.void (*) (*C.GtkContainer, *C.GtkWidget))(fnptr))(carg0, carg1);
+// extern void _gotk4_gtk3_Container_add(GtkContainer*, GtkWidget*);
+// extern void _gotk4_gtk3_Container_check_resize(GtkContainer*);
+// extern GType _gotk4_gtk3_Container_child_type(GtkContainer*);
+// extern gchar* _gotk4_gtk3_Container_composite_name(GtkContainer*, GtkWidget*);
+// extern void _gotk4_gtk3_Container_get_child_property(GtkContainer*, GtkWidget*, guint, GValue*, GParamSpec*);
+// extern GtkWidgetPath* _gotk4_gtk3_Container_get_path_for_child(GtkContainer*, GtkWidget*);
+// extern void _gotk4_gtk3_Container_remove(GtkContainer*, GtkWidget*);
+// extern void _gotk4_gtk3_Container_set_child_property(GtkContainer*, GtkWidget*, guint, const GValue*, GParamSpec*);
+// extern void _gotk4_gtk3_Container_set_focus_child(GtkContainer*, GtkWidget*);
+// void _gotk4_gtk3_Container_virtual_add(void* fnptr, GtkContainer* carg0, GtkWidget* carg1) {
+// 	return ((void (*) (GtkContainer*, GtkWidget*))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gtk3_Container_virtual_check_resize(void* fnptr, *C.GtkContainer carg0) {
-// 	return ((C.void (*) (*C.GtkContainer))(fnptr))(carg0);
+// void _gotk4_gtk3_Container_virtual_check_resize(void* fnptr, GtkContainer* carg0) {
+// 	return ((void (*) (GtkContainer*))(fnptr))(carg0);
 // }
-// C.GType _gotk4_gtk3_Container_virtual_child_type(void* fnptr, *C.GtkContainer carg0) {
-// 	return ((C.GType (*) (*C.GtkContainer))(fnptr))(carg0);
+// GType _gotk4_gtk3_Container_virtual_child_type(void* fnptr, GtkContainer* carg0) {
+// 	return ((GType (*) (GtkContainer*))(fnptr))(carg0);
 // }
-// *C.gchar _gotk4_gtk3_Container_virtual_composite_name(void* fnptr, *C.GtkContainer carg0, *C.GtkWidget carg1) {
-// 	return ((*C.gchar (*) (*C.GtkContainer, *C.GtkWidget))(fnptr))(carg0, carg1);
+// gchar* _gotk4_gtk3_Container_virtual_composite_name(void* fnptr, GtkContainer* carg0, GtkWidget* carg1) {
+// 	return ((gchar* (*) (GtkContainer*, GtkWidget*))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gtk3_Container_virtual_get_child_property(void* fnptr, *C.GtkContainer carg0, *C.GtkWidget carg1, C.guint carg2, *C.GValue carg3, *C.GParamSpec carg4) {
-// 	return ((C.void (*) (*C.GtkContainer, *C.GtkWidget, C.guint, *C.GValue, *C.GParamSpec))(fnptr))(carg0, carg1, carg2, carg3, carg4);
+// void _gotk4_gtk3_Container_virtual_get_child_property(void* fnptr, GtkContainer* carg0, GtkWidget* carg1, guint carg2, GValue* carg3, GParamSpec* carg4) {
+// 	return ((void (*) (GtkContainer*, GtkWidget*, guint, GValue*, GParamSpec*))(fnptr))(carg0, carg1, carg2, carg3, carg4);
 // }
-// *C.GtkWidgetPath _gotk4_gtk3_Container_virtual_get_path_for_child(void* fnptr, *C.GtkContainer carg0, *C.GtkWidget carg1) {
-// 	return ((*C.GtkWidgetPath (*) (*C.GtkContainer, *C.GtkWidget))(fnptr))(carg0, carg1);
+// GtkWidgetPath* _gotk4_gtk3_Container_virtual_get_path_for_child(void* fnptr, GtkContainer* carg0, GtkWidget* carg1) {
+// 	return ((GtkWidgetPath* (*) (GtkContainer*, GtkWidget*))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gtk3_Container_virtual_remove(void* fnptr, *C.GtkContainer carg0, *C.GtkWidget carg1) {
-// 	return ((C.void (*) (*C.GtkContainer, *C.GtkWidget))(fnptr))(carg0, carg1);
+// void _gotk4_gtk3_Container_virtual_remove(void* fnptr, GtkContainer* carg0, GtkWidget* carg1) {
+// 	return ((void (*) (GtkContainer*, GtkWidget*))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gtk3_Container_virtual_set_child_property(void* fnptr, *C.GtkContainer carg0, *C.GtkWidget carg1, C.guint carg2, *C.GValue carg3, *C.GParamSpec carg4) {
-// 	return ((C.void (*) (*C.GtkContainer, *C.GtkWidget, C.guint, *C.GValue, *C.GParamSpec))(fnptr))(carg0, carg1, carg2, carg3, carg4);
+// void _gotk4_gtk3_Container_virtual_set_child_property(void* fnptr, GtkContainer* carg0, GtkWidget* carg1, guint carg2, const GValue* carg3, GParamSpec* carg4) {
+// 	return ((void (*) (GtkContainer*, GtkWidget*, guint, const GValue*, GParamSpec*))(fnptr))(carg0, carg1, carg2, carg3, carg4);
 // }
-// C.void _gotk4_gtk3_Container_virtual_set_focus_child(void* fnptr, *C.GtkContainer carg0, *C.GtkWidget carg1) {
-// 	return ((C.void (*) (*C.GtkContainer, *C.GtkWidget))(fnptr))(carg0, carg1);
+// void _gotk4_gtk3_Container_virtual_set_focus_child(void* fnptr, GtkContainer* carg0, GtkWidget* carg1) {
+// 	return ((void (*) (GtkContainer*, GtkWidget*))(fnptr))(carg0, carg1);
 // }
-// extern C.void _gotk4_gtk3_Entry_activate(*C.GtkEntry);
-// extern C.void _gotk4_gtk3_Entry_backspace(*C.GtkEntry);
-// extern C.void _gotk4_gtk3_Entry_copy_clipboard(*C.GtkEntry);
-// extern C.void _gotk4_gtk3_Entry_cut_clipboard(*C.GtkEntry);
-// extern C.void _gotk4_gtk3_Entry_delete_from_cursor(*C.GtkEntry, C.GtkDeleteType, C.gint);
-// extern C.void _gotk4_gtk3_Entry_get_frame_size(*C.GtkEntry, *C.gint, *C.gint, *C.gint, *C.gint);
-// extern C.void _gotk4_gtk3_Entry_get_text_area_size(*C.GtkEntry, *C.gint, *C.gint, *C.gint, *C.gint);
-// extern C.void _gotk4_gtk3_Entry_insert_at_cursor(*C.GtkEntry, *C.gchar);
-// extern C.void _gotk4_gtk3_Entry_insert_emoji(*C.GtkEntry);
-// extern C.void _gotk4_gtk3_Entry_move_cursor(*C.GtkEntry, C.GtkMovementStep, C.gint, C.gboolean);
-// extern C.void _gotk4_gtk3_Entry_paste_clipboard(*C.GtkEntry);
-// extern C.void _gotk4_gtk3_Entry_populate_popup(*C.GtkEntry, *C.GtkWidget);
-// extern C.void _gotk4_gtk3_Entry_toggle_direction(*C.GtkEntry);
-// extern C.void _gotk4_gtk3_Entry_toggle_overwrite(*C.GtkEntry);
-// C.void _gotk4_gtk3_Entry_virtual_activate(void* fnptr, *C.GtkEntry carg0) {
-// 	return ((C.void (*) (*C.GtkEntry))(fnptr))(carg0);
+// extern void _gotk4_gtk3_Entry_activate(GtkEntry*);
+// extern void _gotk4_gtk3_Entry_backspace(GtkEntry*);
+// extern void _gotk4_gtk3_Entry_copy_clipboard(GtkEntry*);
+// extern void _gotk4_gtk3_Entry_cut_clipboard(GtkEntry*);
+// extern void _gotk4_gtk3_Entry_delete_from_cursor(GtkEntry*, GtkDeleteType, gint);
+// extern void _gotk4_gtk3_Entry_get_frame_size(GtkEntry*, gint*, gint*, gint*, gint*);
+// extern void _gotk4_gtk3_Entry_get_text_area_size(GtkEntry*, gint*, gint*, gint*, gint*);
+// extern void _gotk4_gtk3_Entry_insert_at_cursor(GtkEntry*, const gchar*);
+// extern void _gotk4_gtk3_Entry_insert_emoji(GtkEntry*);
+// extern void _gotk4_gtk3_Entry_move_cursor(GtkEntry*, GtkMovementStep, gint, gboolean);
+// extern void _gotk4_gtk3_Entry_paste_clipboard(GtkEntry*);
+// extern void _gotk4_gtk3_Entry_populate_popup(GtkEntry*, GtkWidget*);
+// extern void _gotk4_gtk3_Entry_toggle_direction(GtkEntry*);
+// extern void _gotk4_gtk3_Entry_toggle_overwrite(GtkEntry*);
+// void _gotk4_gtk3_Entry_virtual_activate(void* fnptr, GtkEntry* carg0) {
+// 	return ((void (*) (GtkEntry*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_Entry_virtual_backspace(void* fnptr, *C.GtkEntry carg0) {
-// 	return ((C.void (*) (*C.GtkEntry))(fnptr))(carg0);
+// void _gotk4_gtk3_Entry_virtual_backspace(void* fnptr, GtkEntry* carg0) {
+// 	return ((void (*) (GtkEntry*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_Entry_virtual_copy_clipboard(void* fnptr, *C.GtkEntry carg0) {
-// 	return ((C.void (*) (*C.GtkEntry))(fnptr))(carg0);
+// void _gotk4_gtk3_Entry_virtual_copy_clipboard(void* fnptr, GtkEntry* carg0) {
+// 	return ((void (*) (GtkEntry*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_Entry_virtual_cut_clipboard(void* fnptr, *C.GtkEntry carg0) {
-// 	return ((C.void (*) (*C.GtkEntry))(fnptr))(carg0);
+// void _gotk4_gtk3_Entry_virtual_cut_clipboard(void* fnptr, GtkEntry* carg0) {
+// 	return ((void (*) (GtkEntry*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_Entry_virtual_delete_from_cursor(void* fnptr, *C.GtkEntry carg0, C.GtkDeleteType carg1, C.gint carg2) {
-// 	return ((C.void (*) (*C.GtkEntry, C.GtkDeleteType, C.gint))(fnptr))(carg0, carg1, carg2);
+// void _gotk4_gtk3_Entry_virtual_delete_from_cursor(void* fnptr, GtkEntry* carg0, GtkDeleteType carg1, gint carg2) {
+// 	return ((void (*) (GtkEntry*, GtkDeleteType, gint))(fnptr))(carg0, carg1, carg2);
 // }
-// C.void _gotk4_gtk3_Entry_virtual_get_frame_size(void* fnptr, *C.GtkEntry carg0, *C.gint carg1, *C.gint carg2, *C.gint carg3, *C.gint carg4) {
-// 	return ((C.void (*) (*C.GtkEntry, *C.gint, *C.gint, *C.gint, *C.gint))(fnptr))(carg0, carg1, carg2, carg3, carg4);
+// void _gotk4_gtk3_Entry_virtual_get_frame_size(void* fnptr, GtkEntry* carg0, gint* carg1, gint* carg2, gint* carg3, gint* carg4) {
+// 	return ((void (*) (GtkEntry*, gint*, gint*, gint*, gint*))(fnptr))(carg0, carg1, carg2, carg3, carg4);
 // }
-// C.void _gotk4_gtk3_Entry_virtual_get_text_area_size(void* fnptr, *C.GtkEntry carg0, *C.gint carg1, *C.gint carg2, *C.gint carg3, *C.gint carg4) {
-// 	return ((C.void (*) (*C.GtkEntry, *C.gint, *C.gint, *C.gint, *C.gint))(fnptr))(carg0, carg1, carg2, carg3, carg4);
+// void _gotk4_gtk3_Entry_virtual_get_text_area_size(void* fnptr, GtkEntry* carg0, gint* carg1, gint* carg2, gint* carg3, gint* carg4) {
+// 	return ((void (*) (GtkEntry*, gint*, gint*, gint*, gint*))(fnptr))(carg0, carg1, carg2, carg3, carg4);
 // }
-// C.void _gotk4_gtk3_Entry_virtual_insert_at_cursor(void* fnptr, *C.GtkEntry carg0, *C.gchar carg1) {
-// 	return ((C.void (*) (*C.GtkEntry, *C.gchar))(fnptr))(carg0, carg1);
+// void _gotk4_gtk3_Entry_virtual_insert_at_cursor(void* fnptr, GtkEntry* carg0, const gchar* carg1) {
+// 	return ((void (*) (GtkEntry*, const gchar*))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gtk3_Entry_virtual_insert_emoji(void* fnptr, *C.GtkEntry carg0) {
-// 	return ((C.void (*) (*C.GtkEntry))(fnptr))(carg0);
+// void _gotk4_gtk3_Entry_virtual_insert_emoji(void* fnptr, GtkEntry* carg0) {
+// 	return ((void (*) (GtkEntry*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_Entry_virtual_move_cursor(void* fnptr, *C.GtkEntry carg0, C.GtkMovementStep carg1, C.gint carg2, C.gboolean carg3) {
-// 	return ((C.void (*) (*C.GtkEntry, C.GtkMovementStep, C.gint, C.gboolean))(fnptr))(carg0, carg1, carg2, carg3);
+// void _gotk4_gtk3_Entry_virtual_move_cursor(void* fnptr, GtkEntry* carg0, GtkMovementStep carg1, gint carg2, gboolean carg3) {
+// 	return ((void (*) (GtkEntry*, GtkMovementStep, gint, gboolean))(fnptr))(carg0, carg1, carg2, carg3);
 // }
-// C.void _gotk4_gtk3_Entry_virtual_paste_clipboard(void* fnptr, *C.GtkEntry carg0) {
-// 	return ((C.void (*) (*C.GtkEntry))(fnptr))(carg0);
-// }
-// C.void _gotk4_gtk3_Entry_virtual_populate_popup(void* fnptr, *C.GtkEntry carg0, *C.GtkWidget carg1) {
-// 	return ((C.void (*) (*C.GtkEntry, *C.GtkWidget))(fnptr))(carg0, carg1);
-// }
-// C.void _gotk4_gtk3_Entry_virtual_toggle_direction(void* fnptr, *C.GtkEntry carg0) {
-// 	return ((C.void (*) (*C.GtkEntry))(fnptr))(carg0);
+// void _gotk4_gtk3_Entry_virtual_paste_clipboard(void* fnptr, GtkEntry* carg0) {
+// 	return ((void (*) (GtkEntry*))(fnptr))(carg0);
+// }
+// void _gotk4_gtk3_Entry_virtual_populate_popup(void* fnptr, GtkEntry* carg0, GtkWidget* carg1) {
+// 	return ((void (*) (GtkEntry*, GtkWidget*))(fnptr))(carg0, carg1);
+// }
+// void _gotk4_gtk3_Entry_virtual_toggle_direction(void* fnptr, GtkEntry* carg0) {
+// 	return ((void (*) (GtkEntry*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_Entry_virtual_toggle_overwrite(void* fnptr, *C.GtkEntry carg0) {
-// 	return ((C.void (*) (*C.GtkEntry))(fnptr))(carg0);
+// void _gotk4_gtk3_Entry_virtual_toggle_overwrite(void* fnptr, GtkEntry* carg0) {
+// 	return ((void (*) (GtkEntry*))(fnptr))(carg0);
 // }
-// extern C.void _gotk4_gtk3_FlowBox_activate_cursor_child(*C.GtkFlowBox);
-// extern C.void _gotk4_gtk3_FlowBox_child_activated(*C.GtkFlowBox, *C.GtkFlowBoxChild);
-// extern C.gboolean _gotk4_gtk3_FlowBox_move_cursor(*C.GtkFlowBox, C.GtkMovementStep, C.gint);
-// extern C.void _gotk4_gtk3_FlowBox_select_all(*C.GtkFlowBox);
-// extern C.void _gotk4_gtk3_FlowBox_selected_children_changed(*C.GtkFlowBox);
-// extern C.void _gotk4_gtk3_FlowBox_toggle_cursor_child(*C.GtkFlowBox);
-// extern C.void _gotk4_gtk3_FlowBox_unselect_all(*C.GtkFlowBox);
-// C.void _gotk4_gtk3_FlowBox_virtual_activate_cursor_child(void* fnptr, *C.GtkFlowBox carg0) {
-// 	return ((C.void (*) (*C.GtkFlowBox))(fnptr))(carg0);
+// extern void _gotk4_gtk3_FlowBox_activate_cursor_child(GtkFlowBox*);
+// extern void _gotk4_gtk3_FlowBox_child_activated(GtkFlowBox*, GtkFlowBoxChild*);
+// extern gboolean _gotk4_gtk3_FlowBox_move_cursor(GtkFlowBox*, GtkMovementStep, gint);
+// extern void _gotk4_gtk3_FlowBox_select_all(GtkFlowBox*);
+// extern void _gotk4_gtk3_FlowBox_selected_children_changed(GtkFlowBox*);
+// extern void _gotk4_gtk3_FlowBox_toggle_cursor_child(GtkFlowBox*);
+// extern void _gotk4_gtk3_FlowBox_unselect_all(GtkFlowBox*);
+// void _gotk4_gtk3_FlowBox_virtual_activate_cursor_child(void* fnptr, GtkFlowBox* carg0) {
+// 	return ((void (*) (GtkFlowBox*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_FlowBox_virtual_child_activated(void* fnptr, *C.GtkFlowBox carg0, *C.GtkFlowBoxChild carg1) {
-// 	return ((C.void (*) (*C.GtkFlowBox, *C.GtkFlowBoxChild))(fnptr))(carg0, carg1);
+// void _gotk4_gtk3_FlowBox_virtual_child_activated(void* fnptr, GtkFlowBox* carg0, GtkFlowBoxChild* carg1) {
+// 	return ((void (*) (GtkFlowBox*, GtkFlowBoxChild*))(fnptr))(carg0, carg1);
 // }
-// C.gboolean _gotk4_gtk3_FlowBox_virtual_move_cursor(void* fnptr, *C.GtkFlowBox carg0, C.GtkMovementStep carg1, C.gint carg2) {
-// 	return ((C.gboolean (*) (*C.GtkFlowBox, C.GtkMovementStep, C.gint))(fnptr))(carg0, carg1, carg2);
+// gboolean _gotk4_gtk3_FlowBox_virtual_move_cursor(void* fnptr, GtkFlowBox* carg0, GtkMovementStep carg1, gint carg2) {
+// 	return ((gboolean (*) (GtkFlowBox*, GtkMovementStep, gint))(fnptr))(carg0, carg1, carg2);
 // }
-// C.void _gotk4_gtk3_FlowBox_virtual_select_all(void* fnptr, *C.GtkFlowBox carg0) {
-// 	return ((C.void (*) (*C.GtkFlowBox))(fnptr))(carg0);
+// void _gotk4_gtk3_FlowBox_virtual_select_all(void* fnptr, GtkFlowBox* carg0) {
+// 	return ((void (*) (GtkFlowBox*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_FlowBox_virtual_selected_children_changed(void* fnptr, *C.GtkFlowBox carg0) {
-// 	return ((C.void (*) (*C.GtkFlowBox))(fnptr))(carg0);
-// }
-// C.void _gotk4_gtk3_FlowBox_virtual_toggle_cursor_child(void* fnptr, *C.GtkFlowBox carg0) {
-// 	return ((C.void (*) (*C.GtkFlowBox))(fnptr))(carg0);
+// void _gotk4_gtk3_FlowBox_virtual_selected_children_changed(void* fnptr, GtkFlowBox* carg0) {
+// 	return ((void (*) (GtkFlowBox*))(fnptr))(carg0);
+// }
+// void _gotk4_gtk3_FlowBox_virtual_toggle_cursor_child(void* fnptr, GtkFlowBox* carg0) {
+// 	return ((void (*) (GtkFlowBox*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_FlowBox_virtual_unselect_all(void* fnptr, *C.GtkFlowBox carg0) {
-// 	return ((C.void (*) (*C.GtkFlowBox))(fnptr))(carg0);
+// void _gotk4_gtk3_FlowBox_virtual_unselect_all(void* fnptr, GtkFlowBox* carg0) {
+// 	return ((void (*) (GtkFlowBox*))(fnptr))(carg0);
 // }
-// extern C.gboolean _gotk4_gtk3_GLArea_render(*C.GtkGLArea, *C.GdkGLContext);
-// extern C.void _gotk4_gtk3_GLArea_resize(*C.GtkGLArea, C.int, C.int);
-// C.gboolean _gotk4_gtk3_GLArea_virtual_render(void* fnptr, *C.GtkGLArea carg0, *C.GdkGLContext carg1) {
-// 	return ((C.gboolean (*) (*C.GtkGLArea, *C.GdkGLContext))(fnptr))(carg0, carg1);
+// extern gboolean _gotk4_gtk3_GLArea_render(GtkGLArea*, GdkGLContext*);
+// extern void _gotk4_gtk3_GLArea_resize(GtkGLArea*, int, int);
+// gboolean _gotk4_gtk3_GLArea_virtual_render(void* fnptr, GtkGLArea* carg0, GdkGLContext* carg1) {
+// 	return ((gboolean (*) (GtkGLArea*, GdkGLContext*))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gtk3_GLArea_virtual_resize(void* fnptr, *C.GtkGLArea carg0, C.int carg1, C.int carg2) {
-// 	return ((C.void (*) (*C.GtkGLArea, C.int, C.int))(fnptr))(carg0, carg1, carg2);
+// void _gotk4_gtk3_GLArea_virtual_resize(void* fnptr, GtkGLArea* carg0, int carg1, int carg2) {
+// 	return ((void (*) (GtkGLArea*, int, int))(fnptr))(carg0, carg1, carg2);
 // }
-// extern C.void _gotk4_gtk3_HSV_changed(*C.GtkHSV);
-// extern C.void _gotk4_gtk3_HSV_move(*C.GtkHSV, C.GtkDirectionType);
-// C.void _gotk4_gtk3_HSV_virtual_changed(void* fnptr, *C.GtkHSV carg0) {
-// 	return ((C.void (*) (*C.GtkHSV))(fnptr))(carg0);
+// extern void _gotk4_gtk3_HSV_changed(GtkHSV*);
+// extern void _gotk4_gtk3_HSV_move(GtkHSV*, GtkDirectionType);
+// void _gotk4_gtk3_HSV_virtual_changed(void* fnptr, GtkHSV* carg0) {
+// 	return ((void (*) (GtkHSV*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_HSV_virtual_move(void* fnptr, *C.GtkHSV carg0, C.GtkDirectionType carg1) {
-// 	return ((C.void (*) (*C.GtkHSV, C.GtkDirectionType))(fnptr))(carg0, carg1);
+// void _gotk4_gtk3_HSV_virtual_move(void* fnptr, GtkHSV* carg0, GtkDirectionType carg1) {
+// 	return ((void (*) (GtkHSV*, GtkDirectionType))(fnptr))(carg0, carg1);
 // }
-// extern C.gboolean _gotk4_gtk3_IconView_activate_cursor_item(*C.GtkIconView);
-// extern C.void _gotk4_gtk3_IconView_item_activated(*C.GtkIconView, *C.GtkTreePath);
-// extern C.gboolean _gotk4_gtk3_IconView_move_cursor(*C.GtkIconView, C.GtkMovementStep, C.gint);
-// extern C.void _gotk4_gtk3_IconView_select_all(*C.GtkIconView);
-// extern C.void _gotk4_gtk3_IconView_select_cursor_item(*C.GtkIconView);
-// extern C.void _gotk4_gtk3_IconView_selection_changed(*C.GtkIconView);
-// extern C.void _gotk4_gtk3_IconView_toggle_cursor_item(*C.GtkIconView);
-// extern C.void _gotk4_gtk3_IconView_unselect_all(*C.GtkIconView);
-// C.gboolean _gotk4_gtk3_IconView_virtual_activate_cursor_item(void* fnptr, *C.GtkIconView carg0) {
-// 	return ((C.gboolean (*) (*C.GtkIconView))(fnptr))(carg0);
+// extern gboolean _gotk4_gtk3_IconView_activate_cursor_item(GtkIconView*);
+// extern void _gotk4_gtk3_IconView_item_activated(GtkIconView*, GtkTreePath*);
+// extern gboolean _gotk4_gtk3_IconView_move_cursor(GtkIconView*, GtkMovementStep, gint);
+// extern void _gotk4_gtk3_IconView_select_all(GtkIconView*);
+// extern void _gotk4_gtk3_IconView_select_cursor_item(GtkIconView*);
+// extern void _gotk4_gtk3_IconView_selection_changed(GtkIconView*);
+// extern void _gotk4_gtk3_IconView_toggle_cursor_item(GtkIconView*);
+// extern void _gotk4_gtk3_IconView_unselect_all(GtkIconView*);
+// gboolean _gotk4_gtk3_IconView_virtual_activate_cursor_item(void* fnptr, GtkIconView* carg0) {
+// 	return ((gboolean (*) (GtkIconView*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_IconView_virtual_item_activated(void* fnptr, *C.GtkIconView carg0, *C.GtkTreePath carg1) {
-// 	return ((C.void (*) (*C.GtkIconView, *C.GtkTreePath))(fnptr))(carg0, carg1);
-// }
-// C.gboolean _gotk4_gtk3_IconView_virtual_move_cursor(void* fnptr, *C.GtkIconView carg0, C.GtkMovementStep carg1, C.gint carg2) {
-// 	return ((C.gboolean (*) (*C.GtkIconView, C.GtkMovementStep, C.gint))(fnptr))(carg0, carg1, carg2);
-// }
-// C.void _gotk4_gtk3_IconView_virtual_select_all(void* fnptr, *C.GtkIconView carg0) {
-// 	return ((C.void (*) (*C.GtkIconView))(fnptr))(carg0);
-// }
-// C.void _gotk4_gtk3_IconView_virtual_select_cursor_item(void* fnptr, *C.GtkIconView carg0) {
-// 	return ((C.void (*) (*C.GtkIconView))(fnptr))(carg0);
-// }
-// C.void _gotk4_gtk3_IconView_virtual_selection_changed(void* fnptr, *C.GtkIconView carg0) {
-// 	return ((C.void (*) (*C.GtkIconView))(fnptr))(carg0);
-// }
-// C.void _gotk4_gtk3_IconView_virtual_toggle_cursor_item(void* fnptr, *C.GtkIconView carg0) {
-// 	return ((C.void (*) (*C.GtkIconView))(fnptr))(carg0);
+// void _gotk4_gtk3_IconView_virtual_item_activated(void* fnptr, GtkIconView* carg0, GtkTreePath* carg1) {
+// 	return ((void (*) (GtkIconView*, GtkTreePath*))(fnptr))(carg0, carg1);
+// }
+// gboolean _gotk4_gtk3_IconView_virtual_move_cursor(void* fnptr, GtkIconView* carg0, GtkMovementStep carg1, gint carg2) {
+// 	return ((gboolean (*) (GtkIconView*, GtkMovementStep, gint))(fnptr))(carg0, carg1, carg2);
+// }
+// void _gotk4_gtk3_IconView_virtual_select_all(void* fnptr, GtkIconView* carg0) {
+// 	return ((void (*) (GtkIconView*))(fnptr))(carg0);
+// }
+// void _gotk4_gtk3_IconView_virtual_select_cursor_item(void* fnptr, GtkIconView* carg0) {
+// 	return ((void (*) (GtkIconView*))(fnptr))(carg0);
+// }
+// void _gotk4_gtk3_IconView_virtual_selection_changed(void* fnptr, GtkIconView* carg0) {
+// 	return ((void (*) (GtkIconView*))(fnptr))(carg0);
+// }
+// void _gotk4_gtk3_IconView_virtual_toggle_cursor_item(void* fnptr, GtkIconView* carg0) {
+// 	return ((void (*) (GtkIconView*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_IconView_virtual_unselect_all(void* fnptr, *C.GtkIconView carg0) {
-// 	return ((C.void (*) (*C.GtkIconView))(fnptr))(carg0);
+// void _gotk4_gtk3_IconView_virtual_unselect_all(void* fnptr, GtkIconView* carg0) {
+// 	return ((void (*) (GtkIconView*))(fnptr))(carg0);
 // }
-// extern C.void _gotk4_gtk3_LevelBar_offset_changed(*C.GtkLevelBar, *C.gchar);
-// C.void _gotk4_gtk3_LevelBar_virtual_offset_changed(void* fnptr, *C.GtkLevelBar carg0, *C.gchar carg1) {
-// 	return ((C.void (*) (*C.GtkLevelBar, *C.gchar))(fnptr))(carg0, carg1);
+// extern void _gotk4_gtk3_LevelBar_offset_changed(GtkLevelBar*, const gchar*);
+// void _gotk4_gtk3_LevelBar_virtual_offset_changed(void* fnptr, GtkLevelBar* carg0, const gchar* carg1) {
+// 	return ((void (*) (GtkLevelBar*, const gchar*))(fnptr))(carg0, carg1);
 // }
-// extern C.void _gotk4_gtk3_ListBox_activate_cursor_row(*C.GtkListBox);
-// extern C.void _gotk4_gtk3_ListBox_move_cursor(*C.GtkListBox, C.GtkMovementStep, C.gint);
-// extern C.void _gotk4_gtk3_ListBox_row_activated(*C.GtkListBox, *C.GtkListBoxRow);
-// extern C.void _gotk4_gtk3_ListBox_row_selected(*C.GtkListBox, *C.GtkListBoxRow);
-// extern C.void _gotk4_gtk3_ListBox_select_all(*C.GtkListBox);
-// extern C.void _gotk4_gtk3_ListBox_selected_rows_changed(*C.GtkListBox);
-// extern C.void _gotk4_gtk3_ListBox_toggle_cursor_row(*C.GtkListBox);
-// extern C.void _gotk4_gtk3_ListBox_unselect_all(*C.GtkListBox);
-// C.void _gotk4_gtk3_ListBox_virtual_activate_cursor_row(void* fnptr, *C.GtkListBox carg0) {
-// 	return ((C.void (*) (*C.GtkListBox))(fnptr))(carg0);
+// extern void _gotk4_gtk3_ListBox_activate_cursor_row(GtkListBox*);
+// extern void _gotk4_gtk3_ListBox_move_cursor(GtkListBox*, GtkMovementStep, gint);
+// extern void _gotk4_gtk3_ListBox_row_activated(GtkListBox*, GtkListBoxRow*);
+// extern void _gotk4_gtk3_ListBox_row_selected(GtkListBox*, GtkListBoxRow*);
+// extern void _gotk4_gtk3_ListBox_select_all(GtkListBox*);
+// extern void _gotk4_gtk3_ListBox_selected_rows_changed(GtkListBox*);
+// extern void _gotk4_gtk3_ListBox_toggle_cursor_row(GtkListBox*);
+// extern void _gotk4_gtk3_ListBox_unselect_all(GtkListBox*);
+// void _gotk4_gtk3_ListBox_virtual_activate_cursor_row(void* fnptr, GtkListBox* carg0) {
+// 	return ((void (*) (GtkListBox*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_ListBox_virtual_move_cursor(void* fnptr, *C.GtkListBox carg0, C.GtkMovementStep carg1, C.gint carg2) {
-// 	return ((C.void (*) (*C.GtkListBox, C.GtkMovementStep, C.gint))(fnptr))(carg0, carg1, carg2);
+// void _gotk4_gtk3_ListBox_virtual_move_cursor(void* fnptr, GtkListBox* carg0, GtkMovementStep carg1, gint carg2) {
+// 	return ((void (*) (GtkListBox*, GtkMovementStep, gint))(fnptr))(carg0, carg1, carg2);
 // }
-// C.void _gotk4_gtk3_ListBox_virtual_row_activated(void* fnptr, *C.GtkListBox carg0, *C.GtkListBoxRow carg1) {
-// 	return ((C.void (*) (*C.GtkListBox, *C.GtkListBoxRow))(fnptr))(carg0, carg1);
+// void _gotk4_gtk3_ListBox_virtual_row_activated(void* fnptr, GtkListBox* carg0, GtkListBoxRow* carg1) {
+// 	return ((void (*) (GtkListBox*, GtkListBoxRow*))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gtk3_ListBox_virtual_row_selected(void* fnptr, *C.GtkListBox carg0, *C.GtkListBoxRow carg1) {
-// 	return ((C.void (*) (*C.GtkListBox, *C.GtkListBoxRow))(fnptr))(carg0, carg1);
+// void _gotk4_gtk3_ListBox_virtual_row_selected(void* fnptr, GtkListBox* carg0, GtkListBoxRow* carg1) {
+// 	return ((void (*) (GtkListBox*, GtkListBoxRow*))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gtk3_ListBox_virtual_select_all(void* fnptr, *C.GtkListBox carg0) {
-// 	return ((C.void (*) (*C.GtkListBox))(fnptr))(carg0);
+// void _gotk4_gtk3_ListBox_virtual_select_all(void* fnptr, GtkListBox* carg0) {
+// 	return ((void (*) (GtkListBox*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_ListBox_virtual_selected_rows_changed(void* fnptr, *C.GtkListBox carg0) {
-// 	return ((C.void (*) (*C.GtkListBox))(fnptr))(carg0);
+// void _gotk4_gtk3_ListBox_virtual_selected_rows_changed(void* fnptr, GtkListBox* carg0) {
+// 	return ((void (*) (GtkListBox*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_ListBox_virtual_toggle_cursor_row(void* fnptr, *C.GtkListBox carg0) {
-// 	return ((C.void (*) (*C.GtkListBox))(fnptr))(carg0);
+// void _gotk4_gtk3_ListBox_virtual_toggle_cursor_row(void* fnptr, GtkListBox* carg0) {
+// 	return ((void (*) (GtkListBox*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_ListBox_virtual_unselect_all(void* fnptr, *C.GtkListBox carg0) {
-// 	return ((C.void (*) (*C.GtkListBox))(fnptr))(carg0);
+// void _gotk4_gtk3_ListBox_virtual_unselect_all(void* fnptr, GtkListBox* carg0) {
+// 	return ((void (*) (GtkListBox*))(fnptr))(carg0);
 // }
-// extern C.void _gotk4_gtk3_MenuShell_activate_current(*C.GtkMenuShell, C.gboolean);
-// extern C.void _gotk4_gtk3_MenuShell_cancel(*C.GtkMenuShell);
-// extern C.void _gotk4_gtk3_MenuShell_deactivate(*C.GtkMenuShell);
-// extern C.gint _gotk4_gtk3_MenuShell_get_popup_delay(*C.GtkMenuShell);
-// extern C.void _gotk4_gtk3_MenuShell_insert(*C.GtkMenuShell, *C.GtkWidget, C.gint);
-// extern C.void _gotk4_gtk3_MenuShell_move_current(*C.GtkMenuShell, C.GtkMenuDirectionType);
-// extern C.gboolean _gotk4_gtk3_MenuShell_move_selected(*C.GtkMenuShell, C.gint);
-// extern C.void _gotk4_gtk3_MenuShell_select_item(*C.GtkMenuShell, *C.GtkWidget);
-// extern C.void _gotk4_gtk3_MenuShell_selection_done(*C.GtkMenuShell);
-// C.void _gotk4_gtk3_MenuShell_virtual_activate_current(void* fnptr, *C.GtkMenuShell carg0, C.gboolean carg1) {
-// 	return ((C.void (*) (*C.GtkMenuShell, C.gboolean))(fnptr))(carg0, carg1);
+// extern void _gotk4_gtk3_MenuShell_activate_current(GtkMenuShell*, gboolean);
+// extern void _gotk4_gtk3_MenuShell_cancel(GtkMenuShell*);
+// extern void _gotk4_gtk3_MenuShell_deactivate(GtkMenuShell*);
+// extern gint _gotk4_gtk3_MenuShell_get_popup_delay(GtkMenuShell*);
+// extern void _gotk4_gtk3_MenuShell_insert(GtkMenuShell*, GtkWidget*, gint);
+// extern void _gotk4_gtk3_MenuShell_move_current(GtkMenuShell*, GtkMenuDirectionType);
+// extern gboolean _gotk4_gtk3_MenuShell_move_selected(GtkMenuShell*, gint);
+// extern void _gotk4_gtk3_MenuShell_select_item(GtkMenuShell*, GtkWidget*);
+// extern void _gotk4_gtk3_MenuShell_selection_done(GtkMenuShell*);
+// void _gotk4_gtk3_MenuShell_virtual_activate_current(void* fnptr, GtkMenuShell* carg0, gboolean carg1) {
+// 	return ((void (*) (GtkMenuShell*, gboolean))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gtk3_MenuShell_virtual_cancel(void* fnptr, *C.GtkMenuShell carg0) {
-// 	return ((C.void (*) (*C.GtkMenuShell))(fnptr))(carg0);
+// void _gotk4_gtk3_MenuShell_virtual_cancel(void* fnptr, GtkMenuShell* carg0) {
+// 	return ((void (*) (GtkMenuShell*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_MenuShell_virtual_deactivate(void* fnptr, *C.GtkMenuShell carg0) {
-// 	return ((C.void (*) (*C.GtkMenuShell))(fnptr))(carg0);
+// void _gotk4_gtk3_MenuShell_virtual_deactivate(void* fnptr, GtkMenuShell* carg0) {
+// 	return ((void (*) (GtkMenuShell*))(fnptr))(carg0);
 // }
-// C.gint _gotk4_gtk3_MenuShell_virtual_get_popup_delay(void* fnptr, *C.GtkMenuShell carg0) {
-// 	return ((C.gint (*) (*C.GtkMenuShell))(fnptr))(carg0);
+// gint _gotk4_gtk3_MenuShell_virtual_get_popup_delay(void* fnptr, GtkMenuShell* carg0) {
+// 	return ((gint (*) (GtkMenuShell*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_MenuShell_virtual_insert(void* fnptr, *C.GtkMenuShell carg0, *C.GtkWidget carg1, C.gint carg2) {
-// 	return ((C.void (*) (*C.GtkMenuShell, *C.GtkWidget, C.gint))(fnptr))(carg0, carg1, carg2);
+// void _gotk4_gtk3_MenuShell_virtual_insert(void* fnptr, GtkMenuShell* carg0, GtkWidget* carg1, gint carg2) {
+// 	return ((void (*) (GtkMenuShell*, GtkWidget*, gint))(fnptr))(carg0, carg1, carg2);
 // }
-// C.void _gotk4_gtk3_MenuShell_virtual_move_current(void* fnptr, *C.GtkMenuShell carg0, C.GtkMenuDirectionType carg1) {
-// 	return ((C.void (*) (*C.GtkMenuShell, C.GtkMenuDirectionType))(fnptr))(carg0, carg1);
+// void _gotk4_gtk3_MenuShell_virtual_move_current(void* fnptr, GtkMenuShell* carg0, GtkMenuDirectionType carg1) {
+// 	return ((void (*) (GtkMenuShell*, GtkMenuDirectionType))(fnptr))(carg0, carg1);
 // }
-// C.gboolean _gotk4_gtk3_MenuShell_virtual_move_selected(void* fnptr, *C.GtkMenuShell carg0, C.gint carg1) {
-// 	return ((C.gboolean (*) (*C.GtkMenuShell, C.gint))(fnptr))(carg0, carg1);
+// gboolean _gotk4_gtk3_MenuShell_virtual_move_selected(void* fnptr, GtkMenuShell* carg0, gint carg1) {
+// 	return ((gboolean (*) (GtkMenuShell*, gint))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gtk3_MenuShell_virtual_select_item(void* fnptr, *C.GtkMenuShell carg0, *C.GtkWidget carg1) {
-// 	return ((C.void (*) (*C.GtkMenuShell, *C.GtkWidget))(fnptr))(carg0, carg1);
+// void _gotk4_gtk3_MenuShell_virtual_select_item(void* fnptr, GtkMenuShell* carg0, GtkWidget* carg1) {
+// 	return ((void (*) (GtkMenuShell*, GtkWidget*))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gtk3_MenuShell_virtual_selection_done(void* fnptr, *C.GtkMenuShell carg0) {
-// 	return ((C.void (*) (*C.GtkMenuShell))(fnptr))(carg0);
+// void _gotk4_gtk3_MenuShell_virtual_selection_done(void* fnptr, GtkMenuShell* carg0) {
+// 	return ((void (*) (GtkMenuShell*))(fnptr))(carg0);
 // }
-// extern C.gboolean _gotk4_gtk3_Notebook_change_current_page(*C.GtkNotebook, C.gint);
-// extern C.gboolean _gotk4_gtk3_Notebook_focus_tab(*C.GtkNotebook, C.GtkNotebookTab);
-// extern C.gint _gotk4_gtk3_Notebook_insert_page(*C.GtkNotebook, *C.GtkWidget, *C.GtkWidget, *C.GtkWidget, C.gint);
-// extern C.void _gotk4_gtk3_Notebook_move_focus_out(*C.GtkNotebook, C.GtkDirectionType);
-// extern C.void _gotk4_gtk3_Notebook_page_added(*C.GtkNotebook, *C.GtkWidget, C.guint);
-// extern C.void _gotk4_gtk3_Notebook_page_removed(*C.GtkNotebook, *C.GtkWidget, C.guint);
-// extern C.void _gotk4_gtk3_Notebook_page_reordered(*C.GtkNotebook, *C.GtkWidget, C.guint);
-// extern C.gboolean _gotk4_gtk3_Notebook_reorder_tab(*C.GtkNotebook, C.GtkDirectionType, C.gboolean);
-// extern C.gboolean _gotk4_gtk3_Notebook_select_page(*C.GtkNotebook, C.gboolean);
-// extern C.void _gotk4_gtk3_Notebook_switch_page(*C.GtkNotebook, *C.GtkWidget, C.guint);
-// C.gboolean _gotk4_gtk3_Notebook_virtual_change_current_page(void* fnptr, *C.GtkNotebook carg0, C.gint carg1) {
-// 	return ((C.gboolean (*) (*C.GtkNotebook, C.gint))(fnptr))(carg0, carg1);
+// extern gboolean _gotk4_gtk3_Notebook_change_current_page(GtkNotebook*, gint);
+// extern gboolean _gotk4_gtk3_Notebook_focus_tab(GtkNotebook*, GtkNotebookTab);
+// extern gint _gotk4_gtk3_Notebook_insert_page(GtkNotebook*, GtkWidget*, GtkWidget*, GtkWidget*, gint);
+// extern void _gotk4_gtk3_Notebook_move_focus_out(GtkNotebook*, GtkDirectionType);
+// extern void _gotk4_gtk3_Notebook_page_added(GtkNotebook*, GtkWidget*, guint);
+// extern void _gotk4_gtk3_Notebook_page_removed(GtkNotebook*, GtkWidget*, guint);
+// extern void _gotk4_gtk3_Notebook_page_reordered(GtkNotebook*, GtkWidget*, guint);
+// extern gboolean _gotk4_gtk3_Notebook_reorder_tab(GtkNotebook*, GtkDirectionType, gboolean);
+// extern gboolean _gotk4_gtk3_Notebook_select_page(GtkNotebook*, gboolean);
+// extern void _gotk4_gtk3_Notebook_switch_page(GtkNotebook*, GtkWidget*, guint);
+// gboolean _gotk4_gtk3_Notebook_virtual_change_current_page(void* fnptr, GtkNotebook* carg0, gint carg1) {
+// 	return ((gboolean (*) (GtkNotebook*, gint))(fnptr))(carg0, carg1);
 // }
-// C.gboolean _gotk4_gtk3_Notebook_virtual_focus_tab(void* fnptr, *C.GtkNotebook carg0, C.GtkNotebookTab carg1) {
-// 	return ((C.gboolean (*) (*C.GtkNotebook, C.GtkNotebookTab))(fnptr))(carg0, carg1);
+// gboolean _gotk4_gtk3_Notebook_virtual_focus_tab(void* fnptr, GtkNotebook* carg0, GtkNotebookTab carg1) {
+// 	return ((gboolean (*) (GtkNotebook*, GtkNotebookTab))(fnptr))(carg0, carg1);
 // }
-// C.gint _gotk4_gtk3_Notebook_virtual_insert_page(void* fnptr, *C.GtkNotebook carg0, *C.GtkWidget carg1, *C.GtkWidget carg2, *C.GtkWidget carg3, C.gint carg4) {
-// 	return ((C.gint (*) (*C.GtkNotebook, *C.GtkWidget, *C.GtkWidget, *C.GtkWidget, C.gint))(fnptr))(carg0, carg1, carg2, carg3, carg4);
+// gint _gotk4_gtk3_Notebook_virtual_insert_page(void* fnptr, GtkNotebook* carg0, GtkWidget* carg1, GtkWidget* carg2, GtkWidget* carg3, gint carg4) {
+// 	return ((gint (*) (GtkNotebook*, GtkWidget*, GtkWidget*, GtkWidget*, gint))(fnptr))(carg0, carg1, carg2, carg3, carg4);
 // }
-// C.void _gotk4_gtk3_Notebook_virtual_move_focus_out(void* fnptr, *C.GtkNotebook carg0, C.GtkDirectionType carg1) {
-// 	return ((C.void (*) (*C.GtkNotebook, C.GtkDirectionType))(fnptr))(carg0, carg1);
+// void _gotk4_gtk3_Notebook_virtual_move_focus_out(void* fnptr, GtkNotebook* carg0, GtkDirectionType carg1) {
+// 	return ((void (*) (GtkNotebook*, GtkDirectionType))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gtk3_Notebook_virtual_page_added(void* fnptr, *C.GtkNotebook carg0, *C.GtkWidget carg1, C.guint carg2) {
-// 	return ((C.void (*) (*C.GtkNotebook, *C.GtkWidget, C.guint))(fnptr))(carg0, carg1, carg2);
+// void _gotk4_gtk3_Notebook_virtual_page_added(void* fnptr, GtkNotebook* carg0, GtkWidget* carg1, guint carg2) {
+// 	return ((void (*) (GtkNotebook*, GtkWidget*, guint))(fnptr))(carg0, carg1, carg2);
 // }
-// C.void _gotk4_gtk3_Notebook_virtual_page_removed(void* fnptr, *C.GtkNotebook carg0, *C.GtkWidget carg1, C.guint carg2) {
-// 	return ((C.void (*) (*C.GtkNotebook, *C.GtkWidget, C.guint))(fnptr))(carg0, carg1, carg2);
+// void _gotk4_gtk3_Notebook_virtual_page_removed(void* fnptr, GtkNotebook* carg0, GtkWidget* carg1, guint carg2) {
+// 	return ((void (*) (GtkNotebook*, GtkWidget*, guint))(fnptr))(carg0, carg1, carg2);
 // }
-// C.void _gotk4_gtk3_Notebook_virtual_page_reordered(void* fnptr, *C.GtkNotebook carg0, *C.GtkWidget carg1, C.guint carg2) {
-// 	return ((C.void (*) (*C.GtkNotebook, *C.GtkWidget, C.guint))(fnptr))(carg0, carg1, carg2);
+// void _gotk4_gtk3_Notebook_virtual_page_reordered(void* fnptr, GtkNotebook* carg0, GtkWidget* carg1, guint carg2) {
+// 	return ((void (*) (GtkNotebook*, GtkWidget*, guint))(fnptr))(carg0, carg1, carg2);
 // }
-// C.gboolean _gotk4_gtk3_Notebook_virtual_reorder_tab(void* fnptr, *C.GtkNotebook carg0, C.GtkDirectionType carg1, C.gboolean carg2) {
-// 	return ((C.gboolean (*) (*C.GtkNotebook, C.GtkDirectionType, C.gboolean))(fnptr))(carg0, carg1, carg2);
+// gboolean _gotk4_gtk3_Notebook_virtual_reorder_tab(void* fnptr, GtkNotebook* carg0, GtkDirectionType carg1, gboolean carg2) {
+// 	return ((gboolean (*) (GtkNotebook*, GtkDirectionType, gboolean))(fnptr))(carg0, carg1, carg2);
 // }
-// C.gboolean _gotk4_gtk3_Notebook_virtual_select_page(void* fnptr, *C.GtkNotebook carg0, C.gboolean carg1) {
-// 	return ((C.gboolean (*) (*C.GtkNotebook, C.gboolean))(fnptr))(carg0, carg1);
+// gboolean _gotk4_gtk3_Notebook_virtual_select_page(void* fnptr, GtkNotebook* carg0, gboolean carg1) {
+// 	return ((gboolean (*) (GtkNotebook*, gboolean))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gtk3_Notebook_virtual_switch_page(void* fnptr, *C.GtkNotebook carg0, *C.GtkWidget carg1, C.guint carg2) {
-// 	return ((C.void (*) (*C.GtkNotebook, *C.GtkWidget, C.guint))(fnptr))(carg0, carg1, carg2);
+// void _gotk4_gtk3_Notebook_virtual_switch_page(void* fnptr, GtkNotebook* carg0, GtkWidget* carg1, guint carg2) {
+// 	return ((void (*) (GtkNotebook*, GtkWidget*, guint))(fnptr))(carg0, carg1, carg2);
 // }
-// extern C.gboolean _gotk4_gtk3_Paned_accept_position(*C.GtkPaned);
-// extern C.gboolean _gotk4_gtk3_Paned_cancel_position(*C.GtkPaned);
-// extern C.gboolean _gotk4_gtk3_Paned_cycle_child_focus(*C.GtkPaned, C.gboolean);
-// extern C.gboolean _gotk4_gtk3_Paned_cycle_handle_focus(*C.GtkPaned, C.gboolean);
-// extern C.gboolean _gotk4_gtk3_Paned_move_handle(*C.GtkPaned, C.GtkScrollType);
-// extern C.gboolean _gotk4_gtk3_Paned_toggle_handle_focus(*C.GtkPaned);
-// C.gboolean _gotk4_gtk3_Paned_virtual_accept_position(void* fnptr, *C.GtkPaned carg0) {
-// 	return ((C.gboolean (*) (*C.GtkPaned))(fnptr))(carg0);
+// extern gboolean _gotk4_gtk3_Paned_accept_position(GtkPaned*);
+// extern gboolean _gotk4_gtk3_Paned_cancel_position(GtkPaned*);
+// extern gboolean _gotk4_gtk3_Paned_cycle_child_focus(GtkPaned*, gboolean);
+// extern gboolean _gotk4_gtk3_Paned_cycle_handle_focus(GtkPaned*, gboolean);
+// extern gboolean _gotk4_gtk3_Paned_move_handle(GtkPaned*, GtkScrollType);
+// extern gboolean _gotk4_gtk3_Paned_toggle_handle_focus(GtkPaned*);
+// gboolean _gotk4_gtk3_Paned_virtual_accept_position(void* fnptr, GtkPaned* carg0) {
+// 	return ((gboolean (*) (GtkPaned*))(fnptr))(carg0);
 // }
-// C.gboolean _gotk4_gtk3_Paned_virtual_cancel_position(void* fnptr, *C.GtkPaned carg0) {
-// 	return ((C.gboolean (*) (*C.GtkPaned))(fnptr))(carg0);
+// gboolean _gotk4_gtk3_Paned_virtual_cancel_position(void* fnptr, GtkPaned* carg0) {
+// 	return ((gboolean (*) (GtkPaned*))(fnptr))(carg0);
 // }
-// C.gboolean _gotk4_gtk3_Paned_virtual_cycle_child_focus(void* fnptr, *C.GtkPaned carg0, C.gboolean carg1) {
-// 	return ((C.gboolean (*) (*C.GtkPaned, C.gboolean))(fnptr))(carg0, carg1);
+// gboolean _gotk4_gtk3_Paned_virtual_cycle_child_focus(void* fnptr, GtkPaned* carg0, gboolean carg1) {
+// 	return ((gboolean (*) (GtkPaned*, gboolean))(fnptr))(carg0, carg1);
 // }
-// C.gboolean _gotk4_gtk3_Paned_virtual_cycle_handle_focus(void* fnptr, *C.GtkPaned carg0, C.gboolean carg1) {
-// 	return ((C.gboolean (*) (*C.GtkPaned, C.gboolean))(fnptr))(carg0, carg1);
+// gboolean _gotk4_gtk3_Paned_virtual_cycle_handle_focus(void* fnptr, GtkPaned* carg0, gboolean carg1) {
+// 	return ((gboolean (*) (GtkPaned*, gboolean))(fnptr))(carg0, carg1);
 // }
-// C.gboolean _gotk4_gtk3_Paned_virtual_move_handle(void* fnptr, *C.GtkPaned carg0, C.GtkScrollType carg1) {
-// 	return ((C.gboolean (*) (*C.GtkPaned, C.GtkScrollType))(fnptr))(carg0, carg1);
+// gboolean _gotk4_gtk3_Paned_virtual_move_handle(void* fnptr, GtkPaned* carg0, GtkScrollType carg1) {
+// 	return ((gboolean (*) (GtkPaned*, GtkScrollType))(fnptr))(carg0, carg1);
 // }
-// C.gboolean _gotk4_gtk3_Paned_virtual_toggle_handle_focus(void* fnptr, *C.GtkPaned carg0) {
-// 	return ((C.gboolean (*) (*C.GtkPaned))(fnptr))(carg0);
+// gboolean _gotk4_gtk3_Paned_virtual_toggle_handle_focus(void* fnptr, GtkPaned* carg0) {
+// 	return ((gboolean (*) (GtkPaned*))(fnptr))(carg0);
 // }
-// extern C.void _gotk4_gtk3_RadioAction_changed(*C.GtkRadioAction, *C.GtkRadioAction);
-// C.void _gotk4_gtk3_RadioAction_virtual_changed(void* fnptr, *C.GtkRadioAction carg0, *C.GtkRadioAction carg1) {
-// 	return ((C.void (*) (*C.GtkRadioAction, *C.GtkRadioAction))(fnptr))(carg0, carg1);
-// }
-// extern C.void _gotk4_gtk3_Range_adjust_bounds(*C.GtkRange, C.gdouble);
-// extern C.gboolean _gotk4_gtk3_Range_change_value(*C.GtkRange, C.GtkScrollType, C.gdouble);
-// extern C.void _gotk4_gtk3_Range_get_range_border(*C.GtkRange, *C.GtkBorder);
-// extern C.void _gotk4_gtk3_Range_get_range_size_request(*C.GtkRange, C.GtkOrientation, *C.gint, *C.gint);
-// extern C.void _gotk4_gtk3_Range_move_slider(*C.GtkRange, C.GtkScrollType);
-// extern C.void _gotk4_gtk3_Range_value_changed(*C.GtkRange);
-// C.void _gotk4_gtk3_Range_virtual_adjust_bounds(void* fnptr, *C.GtkRange carg0, C.gdouble carg1) {
-// 	return ((C.void (*) (*C.GtkRange, C.gdouble))(fnptr))(carg0, carg1);
-// }
-// C.gboolean _gotk4_gtk3_Range_virtual_change_value(void* fnptr, *C.GtkRange carg0, C.GtkScrollType carg1, C.gdouble carg2) {
-// 	return ((C.gboolean (*) (*C.GtkRange, C.GtkScrollType, C.gdouble))(fnptr))(carg0, carg1, carg2);
-// }
-// C.void _gotk4_gtk3_Range_virtual_get_range_border(void* fnptr, *C.GtkRange carg0, *C.GtkBorder carg1) {
-// 	return ((C.void (*) (*C.GtkRange, *C.GtkBorder))(fnptr))(carg0, carg1);
-// }
-// C.void _gotk4_gtk3_Range_virtual_get_range_size_request(void* fnptr, *C.GtkRange carg0, C.GtkOrientation carg1, *C.gint carg2, *C.gint carg3) {
-// 	return ((C.void (*) (*C.GtkRange, C.GtkOrientation, *C.gint, *C.gint))(fnptr))(carg0, carg1, carg2, carg3);
-// }
-// C.void _gotk4_gtk3_Range_virtual_move_slider(void* fnptr, *C.GtkRange carg0, C.GtkScrollType carg1) {
-// 	return ((C.void (*) (*C.GtkRange, C.GtkScrollType))(fnptr))(carg0, carg1);
+// extern void _gotk4_gtk3_RadioAction_changed(GtkRadioAction*, GtkRadioAction*);
+// void _gotk4_gtk3_RadioAction_virtual_changed(void* fnptr, GtkRadioAction* carg0, GtkRadioAction* carg1) {
+// 	return ((void (*) (GtkRadioAction*, GtkRadioAction*))(fnptr))(carg0, carg1);
+// }
+// extern void _gotk4_gtk3_Range_adjust_bounds(GtkRange*, gdouble);
+// extern gboolean _gotk4_gtk3_Range_change_value(GtkRange*, GtkScrollType, gdouble);
+// extern void _gotk4_gtk3_Range_get_range_border(GtkRange*, GtkBorder*);
+// extern void _gotk4_gtk3_Range_get_range_size_request(GtkRange*, GtkOrientation, gint*, gint*);
+// extern void _gotk4_gtk3_Range_move_slider(GtkRange*, GtkScrollType);
+// extern void _gotk4_gtk3_Range_value_changed(GtkRange*);
+// void _gotk4_gtk3_Range_virtual_adjust_bounds(void* fnptr, GtkRange* carg0, gdouble carg1) {
+// 	return ((void (*) (GtkRange*, gdouble))(fnptr))(carg0, carg1);
+// }
+// gboolean _gotk4_gtk3_Range_virtual_change_value(void* fnptr, GtkRange* carg0, GtkScrollType carg1, gdouble carg2) {
+// 	return ((gboolean (*) (GtkRange*, GtkScrollType, gdouble))(fnptr))(carg0, carg1, carg2);
+// }
+// void _gotk4_gtk3_Range_virtual_get_range_border(void* fnptr, GtkRange* carg0, GtkBorder* carg1) {
+// 	return ((void (*) (GtkRange*, GtkBorder*))(fnptr))(carg0, carg1);
+// }
+// void _gotk4_gtk3_Range_virtual_get_range_size_request(void* fnptr, GtkRange* carg0, GtkOrientation carg1, gint* carg2, gint* carg3) {
+// 	return ((void (*) (GtkRange*, GtkOrientation, gint*, gint*))(fnptr))(carg0, carg1, carg2, carg3);
+// }
+// void _gotk4_gtk3_Range_virtual_move_slider(void* fnptr, GtkRange* carg0, GtkScrollType carg1) {
+// 	return ((void (*) (GtkRange*, GtkScrollType))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gtk3_Range_virtual_value_changed(void* fnptr, *C.GtkRange carg0) {
-// 	return ((C.void (*) (*C.GtkRange))(fnptr))(carg0);
+// void _gotk4_gtk3_Range_virtual_value_changed(void* fnptr, GtkRange* carg0) {
+// 	return ((void (*) (GtkRange*))(fnptr))(carg0);
 // }
-// extern C.void _gotk4_gtk3_Scale_draw_value(*C.GtkScale);
-// extern *C.gchar _gotk4_gtk3_Scale_format_value(*C.GtkScale, C.gdouble);
-// extern C.void _gotk4_gtk3_Scale_get_layout_offsets(*C.GtkScale, C.gint, C.gint);
-// C.void _gotk4_gtk3_Scale_virtual_draw_value(void* fnptr, *C.GtkScale carg0) {
-// 	return ((C.void (*) (*C.GtkScale))(fnptr))(carg0);
+// extern void _gotk4_gtk3_Scale_draw_value(GtkScale*);
+// extern gchar* _gotk4_gtk3_Scale_format_value(GtkScale*, gdouble);
+// extern void _gotk4_gtk3_Scale_get_layout_offsets(GtkScale*, gint, gint);
+// void _gotk4_gtk3_Scale_virtual_draw_value(void* fnptr, GtkScale* carg0) {
+// 	return ((void (*) (GtkScale*))(fnptr))(carg0);
 // }
-// *C.gchar _gotk4_gtk3_Scale_virtual_format_value(void* fnptr, *C.GtkScale carg0, C.gdouble carg1) {
-// 	return ((*C.gchar (*) (*C.GtkScale, C.gdouble))(fnptr))(carg0, carg1);
+// gchar* _gotk4_gtk3_Scale_virtual_format_value(void* fnptr, GtkScale* carg0, gdouble carg1) {
+// 	return ((gchar* (*) (GtkScale*, gdouble))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gtk3_Scale_virtual_get_layout_offsets(void* fnptr, *C.GtkScale carg0, C.gint* carg1, C.gint* carg2) {
-// 	return ((C.void (*) (*C.GtkScale, C.gint*, C.gint*))(fnptr))(carg0, carg1, carg2);
+// void _gotk4_gtk3_Scale_virtual_get_layout_offsets(void* fnptr, GtkScale* carg0, gint* carg1, gint* carg2) {
+// 	return ((void (*) (GtkScale*, gint*, gint*))(fnptr))(carg0, carg1, carg2);
 // }
-// extern C.void _gotk4_gtk3_SearchEntry_next_match(*C.GtkSearchEntry);
-// extern C.void _gotk4_gtk3_SearchEntry_previous_match(*C.GtkSearchEntry);
-// extern C.void _gotk4_gtk3_SearchEntry_search_changed(*C.GtkSearchEntry);
-// extern C.void _gotk4_gtk3_SearchEntry_stop_search(*C.GtkSearchEntry);
-// C.void _gotk4_gtk3_SearchEntry_virtual_next_match(void* fnptr, *C.GtkSearchEntry carg0) {
-// 	return ((C.void (*) (*C.GtkSearchEntry))(fnptr))(carg0);
+// extern void _gotk4_gtk3_SearchEntry_next_match(GtkSearchEntry*);
+// extern void _gotk4_gtk3_SearchEntry_previous_match(GtkSearchEntry*);
+// extern void _gotk4_gtk3_SearchEntry_search_changed(GtkSearchEntry*);
+// extern void _gotk4_gtk3_SearchEntry_stop_search(GtkSearchEntry*);
+// void _gotk4_gtk3_SearchEntry_virtual_next_match(void* fnptr, GtkSearchEntry* carg0) {
+// 	return ((void (*) (GtkSearchEntry*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_SearchEntry_virtual_previous_match(void* fnptr, *C.GtkSearchEntry carg0) {
-// 	return ((C.void (*) (*C.GtkSearchEntry))(fnptr))(carg0);
+// void _gotk4_gtk3_SearchEntry_virtual_previous_match(void* fnptr, GtkSearchEntry* carg0) {
+// 	return ((void (*) (GtkSearchEntry*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_SearchEntry_virtual_search_changed(void* fnptr, *C.GtkSearchEntry carg0) {
-// 	return ((C.void (*) (*C.GtkSearchEntry))(fnptr))(carg0);
+// void _gotk4_gtk3_SearchEntry_virtual_search_changed(void* fnptr, GtkSearchEntry* carg0) {
+// 	return ((void (*) (GtkSearchEntry*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_SearchEntry_virtual_stop_search(void* fnptr, *C.GtkSearchEntry carg0) {
-// 	return ((C.void (*) (*C.GtkSearchEntry))(fnptr))(carg0);
+// void _gotk4_gtk3_SearchEntry_virtual_stop_search(void* fnptr, GtkSearchEntry* carg0) {
+// 	return ((void (*) (GtkSearchEntry*))(fnptr))(carg0);
 // }
-// extern C.void _gotk4_gtk3_Socket_plug_added(*C.GtkSocket);
-// extern C.gboolean _gotk4_gtk3_Socket_plug_removed(*C.GtkSocket);
-// C.void _gotk4_gtk3_Socket_virtual_plug_added(void* fnptr, *C.GtkSocket carg0) {
-// 	return ((C.void (*) (*C.GtkSocket))(fnptr))(carg0);
+// extern void _gotk4_gtk3_Socket_plug_added(GtkSocket*);
+// extern gboolean _gotk4_gtk3_Socket_plug_removed(GtkSocket*);
+// void _gotk4_gtk3_Socket_virtual_plug_added(void* fnptr, GtkSocket* carg0) {
+// 	return ((void (*) (GtkSocket*))(fnptr))(carg0);
 // }
-// C.gboolean _gotk4_gtk3_Socket_virtual_plug_removed(void* fnptr, *C.GtkSocket carg0) {
-// 	return ((C.gboolean (*) (*C.GtkSocket))(fnptr))(carg0);
-// }
-// extern C.void _gotk4_gtk3_SpinButton_change_value(*C.GtkSpinButton, C.GtkScrollType);
-// extern C.gint _gotk4_gtk3_SpinButton_input(*C.GtkSpinButton, *C.gdouble);
-// extern C.gint _gotk4_gtk3_SpinButton_output(*C.GtkSpinButton);
-// extern C.void _gotk4_gtk3_SpinButton_value_changed(*C.GtkSpinButton);
-// extern C.void _gotk4_gtk3_SpinButton_wrapped(*C.GtkSpinButton);
-// C.void _gotk4_gtk3_SpinButton_virtual_change_value(void* fnptr, *C.GtkSpinButton carg0, C.GtkScrollType carg1) {
-// 	return ((C.void (*) (*C.GtkSpinButton, C.GtkScrollType))(fnptr))(carg0, carg1);
-// }
-// C.gint _gotk4_gtk3_SpinButton_virtual_input(void* fnptr, *C.GtkSpinButton carg0, *C.gdouble carg1) {
-// 	return ((C.gint (*) (*C.GtkSpinButton, *C.gdouble))(fnptr))(carg0, carg1);
-// }
-// C.gint _gotk4_gtk3_SpinButton_virtual_output(void* fnptr, *C.GtkSpinButton carg0) {
-// 	return ((C.gint (*) (*C.GtkSpinButton))(fnptr))(carg0);
-// }
-// C.void _gotk4_gtk3_SpinButton_virtual_value_changed(void* fnptr, *C.GtkSpinButton carg0) {
-// 	return ((C.void (*) (*C.GtkSpinButton))(fnptr))(carg0);
-// }
-// C.void _gotk4_gtk3_SpinButton_virtual_wrapped(void* fnptr, *C.GtkSpinButton carg0) {
-// 	return ((C.void (*) (*C.GtkSpinButton))(fnptr))(carg0);
-// }
-// extern C.void _gotk4_gtk3_Switch_activate(*C.GtkSwitch);
-// extern C.gboolean _gotk4_gtk3_Switch_state_set(*C.GtkSwitch, C.gboolean);
-// C.void _gotk4_gtk3_Switch_virtual_activate(void* fnptr, *C.GtkSwitch carg0) {
-// 	return ((C.void (*) (*C.GtkSwitch))(fnptr))(carg0);
+// gboolean _gotk4_gtk3_Socket_virtual_plug_removed(void* fnptr, GtkSocket* carg0) {
+// 	return ((gboolean (*) (GtkSocket*))(fnptr))(carg0);
+// }
+// extern void _gotk4_gtk3_SpinButton_change_value(GtkSpinButton*, GtkScrollType);
+// extern gint _gotk4_gtk3_SpinButton_input(GtkSpinButton*, gdouble*);
+// extern gint _gotk4_gtk3_SpinButton_output(GtkSpinButton*);
+// extern void _gotk4_gtk3_SpinButton_value_changed(GtkSpinButton*);
+// extern void _gotk4_gtk3_SpinButton_wrapped(GtkSpinButton*);
+// void _gotk4_gtk3_SpinButton_virtual_change_value(void* fnptr, GtkSpinButton* carg0, GtkScrollType carg1) {
+// 	return ((void (*) (GtkSpinButton*, GtkScrollType))(fnptr))(carg0, carg1);
+// }
+// gint _gotk4_gtk3_SpinButton_virtual_input(void* fnptr, GtkSpinButton* carg0, gdouble* carg1) {
+// 	return ((gint (*) (GtkSpinButton*, gdouble*))(fnptr))(carg0, carg1);
+// }
+// gint _gotk4_gtk3_SpinButton_virtual_output(void* fnptr, GtkSpinButton* carg0) {
+// 	return ((gint (*) (GtkSpinButton*))(fnptr))(carg0);
+// }
+// void _gotk4_gtk3_SpinButton_virtual_value_changed(void* fnptr, GtkSpinButton* carg0) {
+// 	return ((void (*) (GtkSpinButton*))(fnptr))(carg0);
+// }
+// void _gotk4_gtk3_SpinButton_virtual_wrapped(void* fnptr, GtkSpinButton* carg0) {
+// 	return ((void (*) (GtkSpinButton*))(fnptr))(carg0);
+// }
+// extern void _gotk4_gtk3_Switch_activate(GtkSwitch*);
+// extern gboolean _gotk4_gtk3_Switch_state_set(GtkSwitch*, gboolean);
+// void _gotk4_gtk3_Switch_virtual_activate(void* fnptr, GtkSwitch* carg0) {
+// 	return ((void (*) (GtkSwitch*))(fnptr))(carg0);
 // }
-// C.gboolean _gotk4_gtk3_Switch_virtual_state_set(void* fnptr, *C.GtkSwitch carg0, C.gboolean carg1) {
-// 	return ((C.gboolean (*) (*C.GtkSwitch, C.gboolean))(fnptr))(carg0, carg1);
+// gboolean _gotk4_gtk3_Switch_virtual_state_set(void* fnptr, GtkSwitch* carg0, gboolean carg1) {
+// 	return ((gboolean (*) (GtkSwitch*, gboolean))(fnptr))(carg0, carg1);
 // }
-// extern C.void _gotk4_gtk3_TextView_backspace(*C.GtkTextView);
-// extern C.void _gotk4_gtk3_TextView_copy_clipboard(*C.GtkTextView);
-// extern C.void _gotk4_gtk3_TextView_cut_clipboard(*C.GtkTextView);
-// extern C.void _gotk4_gtk3_TextView_delete_from_cursor(*C.GtkTextView, C.GtkDeleteType, C.gint);
-// extern C.gboolean _gotk4_gtk3_TextView_extend_selection(*C.GtkTextView, C.GtkTextExtendSelection, *C.GtkTextIter, *C.GtkTextIter, *C.GtkTextIter);
-// extern C.void _gotk4_gtk3_TextView_insert_at_cursor(*C.GtkTextView, *C.gchar);
-// extern C.void _gotk4_gtk3_TextView_insert_emoji(*C.GtkTextView);
-// extern C.void _gotk4_gtk3_TextView_move_cursor(*C.GtkTextView, C.GtkMovementStep, C.gint, C.gboolean);
-// extern C.void _gotk4_gtk3_TextView_paste_clipboard(*C.GtkTextView);
-// extern C.void _gotk4_gtk3_TextView_populate_popup(*C.GtkTextView, *C.GtkWidget);
-// extern C.void _gotk4_gtk3_TextView_set_anchor(*C.GtkTextView);
-// extern C.void _gotk4_gtk3_TextView_toggle_overwrite(*C.GtkTextView);
-// C.void _gotk4_gtk3_TextView_virtual_backspace(void* fnptr, *C.GtkTextView carg0) {
-// 	return ((C.void (*) (*C.GtkTextView))(fnptr))(carg0);
+// extern void _gotk4_gtk3_TextView_backspace(GtkTextView*);
+// extern void _gotk4_gtk3_TextView_copy_clipboard(GtkTextView*);
+// extern void _gotk4_gtk3_TextView_cut_clipboard(GtkTextView*);
+// extern void _gotk4_gtk3_TextView_delete_from_cursor(GtkTextView*, GtkDeleteType, gint);
+// extern gboolean _gotk4_gtk3_TextView_extend_selection(GtkTextView*, GtkTextExtendSelection, const GtkTextIter*, GtkTextIter*, GtkTextIter*);
+// extern void _gotk4_gtk3_TextView_insert_at_cursor(GtkTextView*, const gchar*);
+// extern void _gotk4_gtk3_TextView_insert_emoji(GtkTextView*);
+// extern void _gotk4_gtk3_TextView_move_cursor(GtkTextView*, GtkMovementStep, gint, gboolean);
+// extern void _gotk4_gtk3_TextView_paste_clipboard(GtkTextView*);
+// extern void _gotk4_gtk3_TextView_populate_popup(GtkTextView*, GtkWidget*);
+// extern void _gotk4_gtk3_TextView_set_anchor(GtkTextView*);
+// extern void _gotk4_gtk3_TextView_toggle_overwrite(GtkTextView*);
+// void _gotk4_gtk3_TextView_virtual_backspace(void* fnptr, GtkTextView* carg0) {
+// 	return ((void (*) (GtkTextView*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_TextView_virtual_copy_clipboard(void* fnptr, *C.GtkTextView carg0) {
-// 	return ((C.void (*) (*C.GtkTextView))(fnptr))(carg0);
+// void _gotk4_gtk3_TextView_virtual_copy_clipboard(void* fnptr, GtkTextView* carg0) {
+// 	return ((void (*) (GtkTextView*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_TextView_virtual_cut_clipboard(void* fnptr, *C.GtkTextView carg0) {
-// 	return ((C.void (*) (*C.GtkTextView))(fnptr))(carg0);
+// void _gotk4_gtk3_TextView_virtual_cut_clipboard(void* fnptr, GtkTextView* carg0) {
+// 	return ((void (*) (GtkTextView*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_TextView_virtual_delete_from_cursor(void* fnptr, *C.GtkTextView carg0, C.GtkDeleteType carg1, C.gint carg2) {
-// 	return ((C.void (*) (*C.GtkTextView, C.GtkDeleteType, C.gint))(fnptr))(carg0, carg1, carg2);
+// void _gotk4_gtk3_TextView_virtual_delete_from_cursor(void* fnptr, GtkTextView* carg0, GtkDeleteType carg1, gint carg2) {
+// 	return ((void (*) (GtkTextView*, GtkDeleteType, gint))(fnptr))(carg0, carg1, carg2);
 // }
-// C.gboolean _gotk4_gtk3_TextView_virtual_extend_selection(void* fnptr, *C.GtkTextView carg0, C.GtkTextExtendSelection carg1, *C.GtkTextIter carg2, *C.GtkTextIter carg3, *C.GtkTextIter carg4) {
-// 	return ((C.gboolean (*) (*C.GtkTextView, C.GtkTextExtendSelection, *C.GtkTextIter, *C.GtkTextIter, *C.GtkTextIter))(fnptr))(carg0, carg1, carg2, carg3, carg4);
+// gboolean _gotk4_gtk3_TextView_virtual_extend_selection(void* fnptr, GtkTextView* carg0, GtkTextExtendSelection carg1, const GtkTextIter* carg2, GtkTextIter* carg3, GtkTextIter* carg4) {
+// 	return ((gboolean (*) (GtkTextView*, GtkTextExtendSelection, const GtkTextIter*, GtkTextIter*, GtkTextIter*))(fnptr))(carg0, carg1, carg2, carg3, carg4);
 // }
-// C.void _gotk4_gtk3_TextView_virtual_insert_at_cursor(void* fnptr, *C.GtkTextView carg0, *C.gchar carg1) {
-// 	return ((C.void (*) (*C.GtkTextView, *C.gchar))(fnptr))(carg0, carg1);
+// void _gotk4_gtk3_TextView_virtual_insert_at_cursor(void* fnptr, GtkTextView* carg0, const gchar* carg1) {
+// 	return ((void (*) (GtkTextView*, const gchar*))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gtk3_TextView_virtual_insert_emoji(void* fnptr, *C.GtkTextView carg0) {
-// 	return ((C.void (*) (*C.GtkTextView))(fnptr))(carg0);
+// void _gotk4_gtk3_TextView_virtual_insert_emoji(void* fnptr, GtkTextView* carg0) {
+// 	return ((void (*) (GtkTextView*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_TextView_virtual_move_cursor(void* fnptr, *C.GtkTextView carg0, C.GtkMovementStep carg1, C.gint carg2, C.gboolean carg3) {
-// 	return ((C.void (*) (*C.GtkTextView, C.GtkMovementStep, C.gint, C.gboolean))(fnptr))(carg0, carg1, carg2, carg3);
+// void _gotk4_gtk3_TextView_virtual_move_cursor(void* fnptr, GtkTextView* carg0, GtkMovementStep carg1, gint carg2, gboolean carg3) {
+// 	return ((void (*) (GtkTextView*, GtkMovementStep, gint, gboolean))(fnptr))(carg0, carg1, carg2, carg3);
 // }
-// C.void _gotk4_gtk3_TextView_virtual_paste_clipboard(void* fnptr, *C.GtkTextView carg0) {
-// 	return ((C.void (*) (*C.GtkTextView))(fnptr))(carg0);
+// void _gotk4_gtk3_TextView_virtual_paste_clipboard(void* fnptr, GtkTextView* carg0) {
+// 	return ((void (*) (GtkTextView*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_TextView_virtual_populate_popup(void* fnptr, *C.GtkTextView carg0, *C.GtkWidget carg1) {
-// 	return ((C.void (*) (*C.GtkTextView, *C.GtkWidget))(fnptr))(carg0, carg1);
+// void _gotk4_gtk3_TextView_virtual_populate_popup(void* fnptr, GtkTextView* carg0, GtkWidget* carg1) {
+// 	return ((void (*) (GtkTextView*, GtkWidget*))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gtk3_TextView_virtual_set_anchor(void* fnptr, *C.GtkTextView carg0) {
-// 	return ((C.void (*) (*C.GtkTextView))(fnptr))(carg0);
+// void _gotk4_gtk3_TextView_virtual_set_anchor(void* fnptr, GtkTextView* carg0) {
+// 	return ((void (*) (GtkTextView*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_TextView_virtual_toggle_overwrite(void* fnptr, *C.GtkTextView carg0) {
-// 	return ((C.void (*) (*C.GtkTextView))(fnptr))(carg0);
+// void _gotk4_gtk3_TextView_virtual_toggle_overwrite(void* fnptr, GtkTextView* carg0) {
+// 	return ((void (*) (GtkTextView*))(fnptr))(carg0);
 // }
-// extern C.void _gotk4_gtk3_Toolbar_orientation_changed(*C.GtkToolbar, C.GtkOrientation);
-// extern C.gboolean _gotk4_gtk3_Toolbar_popup_context_menu(*C.GtkToolbar, C.gint, C.gint, C.gint);
-// extern C.void _gotk4_gtk3_Toolbar_style_changed(*C.GtkToolbar, C.GtkToolbarStyle);
-// C.void _gotk4_gtk3_Toolbar_virtual_orientation_changed(void* fnptr, *C.GtkToolbar carg0, C.GtkOrientation carg1) {
-// 	return ((C.void (*) (*C.GtkToolbar, C.GtkOrientation))(fnptr))(carg0, carg1);
+// extern void _gotk4_gtk3_Toolbar_orientation_changed(GtkToolbar*, GtkOrientation);
+// extern gboolean _gotk4_gtk3_Toolbar_popup_context_menu(GtkToolbar*, gint, gint, gint);
+// extern void _gotk4_gtk3_Toolbar_style_changed(GtkToolbar*, GtkToolbarStyle);
+// void _gotk4_gtk3_Toolbar_virtual_orientation_changed(void* fnptr, GtkToolbar* carg0, GtkOrientation carg1) {
+// 	return ((void (*) (GtkToolbar*, GtkOrientation))(fnptr))(carg0, carg1);
 // }
-// C.gboolean _gotk4_gtk3_Toolbar_virtual_popup_context_menu(void* fnptr, *C.GtkToolbar carg0, C.gint carg1, C.gint carg2, C.gint carg3) {
-// 	return ((C.gboolean (*) (*C.GtkToolbar, C.gint, C.gint, C.gint))(fnptr))(carg0, carg1, carg2, carg3);
+// gboolean _gotk4_gtk3_Toolbar_virtual_popup_context_menu(void* fnptr, GtkToolbar* carg0, gint carg1, gint carg2, gint carg3) {
+// 	return ((gboolean (*) (GtkToolbar*, gint, gint, gint))(fnptr))(carg0, carg1, carg2, carg3);
 // }
-// C.void _gotk4_gtk3_Toolbar_virtual_style_changed(void* fnptr, *C.GtkToolbar carg0, C.GtkToolbarStyle carg1) {
-// 	return ((C.void (*) (*C.GtkToolbar, C.GtkToolbarStyle))(fnptr))(carg0, carg1);
+// void _gotk4_gtk3_Toolbar_virtual_style_changed(void* fnptr, GtkToolbar* carg0, GtkToolbarStyle carg1) {
+// 	return ((void (*) (GtkToolbar*, GtkToolbarStyle))(fnptr))(carg0, carg1);
 // }
-// extern C.void _gotk4_gtk3_TreeView_columns_changed(*C.GtkTreeView);
-// extern C.void _gotk4_gtk3_TreeView_cursor_changed(*C.GtkTreeView);
-// extern C.gboolean _gotk4_gtk3_TreeView_expand_collapse_cursor_row(*C.GtkTreeView, C.gboolean, C.gboolean, C.gboolean);
-// extern C.gboolean _gotk4_gtk3_TreeView_move_cursor(*C.GtkTreeView, C.GtkMovementStep, C.gint);
-// extern C.void _gotk4_gtk3_TreeView_row_activated(*C.GtkTreeView, *C.GtkTreePath, *C.GtkTreeViewColumn);
-// extern C.void _gotk4_gtk3_TreeView_row_collapsed(*C.GtkTreeView, *C.GtkTreeIter, *C.GtkTreePath);
-// extern C.void _gotk4_gtk3_TreeView_row_expanded(*C.GtkTreeView, *C.GtkTreeIter, *C.GtkTreePath);
-// extern C.gboolean _gotk4_gtk3_TreeView_select_all(*C.GtkTreeView);
-// extern C.gboolean _gotk4_gtk3_TreeView_select_cursor_parent(*C.GtkTreeView);
-// extern C.gboolean _gotk4_gtk3_TreeView_select_cursor_row(*C.GtkTreeView, C.gboolean);
-// extern C.gboolean _gotk4_gtk3_TreeView_start_interactive_search(*C.GtkTreeView);
-// extern C.gboolean _gotk4_gtk3_TreeView_test_collapse_row(*C.GtkTreeView, *C.GtkTreeIter, *C.GtkTreePath);
-// extern C.gboolean _gotk4_gtk3_TreeView_test_expand_row(*C.GtkTreeView, *C.GtkTreeIter, *C.GtkTreePath);
-// extern C.gboolean _gotk4_gtk3_TreeView_toggle_cursor_row(*C.GtkTreeView);
-// extern C.gboolean _gotk4_gtk3_TreeView_unselect_all(*C.GtkTreeView);
-// C.void _gotk4_gtk3_TreeView_virtual_columns_changed(void* fnptr, *C.GtkTreeView carg0) {
-// 	return ((C.void (*) (*C.GtkTreeView))(fnptr))(carg0);
+// extern void _gotk4_gtk3_TreeView_columns_changed(GtkTreeView*);
+// extern void _gotk4_gtk3_TreeView_cursor_changed(GtkTreeView*);
+// extern gboolean _gotk4_gtk3_TreeView_expand_collapse_cursor_row(GtkTreeView*, gboolean, gboolean, gboolean);
+// extern gboolean _gotk4_gtk3_TreeView_move_cursor(GtkTreeView*, GtkMovementStep, gint);
+// extern void _gotk4_gtk3_TreeView_row_activated(GtkTreeView*, GtkTreePath*, GtkTreeViewColumn*);
+// extern void _gotk4_gtk3_TreeView_row_collapsed(GtkTreeView*, GtkTreeIter*, GtkTreePath*);
+// extern void _gotk4_gtk3_TreeView_row_expanded(GtkTreeView*, GtkTreeIter*, GtkTreePath*);
+// extern gboolean _gotk4_gtk3_TreeView_select_all(GtkTreeView*);
+// extern gboolean _gotk4_gtk3_TreeView_select_cursor_parent(GtkTreeView*);
+// extern gboolean _gotk4_gtk3_TreeView_select_cursor_row(GtkTreeView*, gboolean);
+// extern gboolean _gotk4_gtk3_TreeView_start_interactive_search(GtkTreeView*);
+// extern gboolean _gotk4_gtk3_TreeView_test_collapse_row(GtkTreeView*, GtkTreeIter*, GtkTreePath*);
+// extern gboolean _gotk4_gtk3_TreeView_test_expand_row(GtkTreeView*, GtkTreeIter*, GtkTreePath*);
+// extern gboolean _gotk4_gtk3_TreeView_toggle_cursor_row(GtkTreeView*);
+// extern gboolean _gotk4_gtk3_TreeView_unselect_all(GtkTreeView*);
+// void _gotk4_gtk3_TreeView_virtual_columns_changed(void* fnptr, GtkTreeView* carg0) {
+// 	return ((void (*) (GtkTreeView*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_TreeView_virtual_cursor_changed(void* fnptr, *C.GtkTreeView carg0) {
-// 	return ((C.void (*) (*C.GtkTreeView))(fnptr))(carg0);
+// void _gotk4_gtk3_TreeView_virtual_cursor_changed(void* fnptr, GtkTreeView* carg0) {
+// 	return ((void (*) (GtkTreeView*))(fnptr))(carg0);
 // }
-// C.gboolean _gotk4_gtk3_TreeView_virtual_expand_collapse_cursor_row(void* fnptr, *C.GtkTreeView carg0, C.gboolean carg1, C.gboolean carg2, C.gboolean carg3) {
-// 	return ((C.gboolean (*) (*C.GtkTreeView, C.gboolean, C.gboolean, C.gboolean))(fnptr))(carg0, carg1, carg2, carg3);
+// gboolean _gotk4_gtk3_TreeView_virtual_expand_collapse_cursor_row(void* fnptr, GtkTreeView* carg0, gboolean carg1, gboolean carg2, gboolean carg3) {
+// 	return ((gboolean (*) (GtkTreeView*, gboolean, gboolean, gboolean))(fnptr))(carg0, carg1, carg2, carg3);
 // }
-// C.gboolean _gotk4_gtk3_TreeView_virtual_move_cursor(void* fnptr, *C.GtkTreeView carg0, C.GtkMovementStep carg1, C.gint carg2) {
-// 	return ((C.gboolean (*) (*C.GtkTreeView, C.GtkMovementStep, C.gint))(fnptr))(carg0, carg1, carg2);
+// gboolean _gotk4_gtk3_TreeView_virtual_move_cursor(void* fnptr, GtkTreeView* carg0, GtkMovementStep carg1, gint carg2) {
+// 	return ((gboolean (*) (GtkTreeView*, GtkMovementStep, gint))(fnptr))(carg0, carg1, carg2);
 // }
-// C.void _gotk4_gtk3_TreeView_virtual_row_activated(void* fnptr, *C.GtkTreeView carg0, *C.GtkTreePath carg1, *C.GtkTreeViewColumn carg2) {
-// 	return ((C.void (*) (*C.GtkTreeView, *C.GtkTreePath, *C.GtkTreeViewColumn))(fnptr))(carg0, carg1, carg2);
+// void _gotk4_gtk3_TreeView_virtual_row_activated(void* fnptr, GtkTreeView* carg0, GtkTreePath* carg1, GtkTreeViewColumn* carg2) {
+// 	return ((void (*) (GtkTreeView*, GtkTreePath*, GtkTreeViewColumn*))(fnptr))(carg0, carg1, carg2);
 // }
-// C.void _gotk4_gtk3_TreeView_virtual_row_collapsed(void* fnptr, *C.GtkTreeView carg0, *C.GtkTreeIter carg1, *C.GtkTreePath carg2) {
-// 	return ((C.void (*) (*C.GtkTreeView, *C.GtkTreeIter, *C.GtkTreePath))(fnptr))(carg0, carg1, carg2);
+// void _gotk4_gtk3_TreeView_virtual_row_collapsed(void* fnptr, GtkTreeView* carg0, GtkTreeIter* carg1, GtkTreePath* carg2) {
+// 	return ((void (*) (GtkTreeView*, GtkTreeIter*, GtkTreePath*))(fnptr))(carg0, carg1, carg2);
 // }
-// C.void _gotk4_gtk3_TreeView_virtual_row_expanded(void* fnptr, *C.GtkTreeView carg0, *C.GtkTreeIter carg1, *C.GtkTreePath carg2) {
-// 	return ((C.void (*) (*C.GtkTreeView, *C.GtkTreeIter, *C.GtkTreePath))(fnptr))(carg0, carg1, carg2);
+// void _gotk4_gtk3_TreeView_virtual_row_expanded(void* fnptr, GtkTreeView* carg0, GtkTreeIter* carg1, GtkTreePath* carg2) {
+// 	return ((void (*) (GtkTreeView*, GtkTreeIter*, GtkTreePath*))(fnptr))(carg0, carg1, carg2);
 // }
-// C.gboolean _gotk4_gtk3_TreeView_virtual_select_all(void* fnptr, *C.GtkTreeView carg0) {
-// 	return ((C.gboolean (*) (*C.GtkTreeView))(fnptr))(carg0);
+// gboolean _gotk4_gtk3_TreeView_virtual_select_all(void* fnptr, GtkTreeView* carg0) {
+// 	return ((gboolean (*) (GtkTreeView*))(fnptr))(carg0);
 // }
-// C.gboolean _gotk4_gtk3_TreeView_virtual_select_cursor_parent(void* fnptr, *C.GtkTreeView carg0) {
-// 	return ((C.gboolean (*) (*C.GtkTreeView))(fnptr))(carg0);
+// gboolean _gotk4_gtk3_TreeView_virtual_select_cursor_parent(void* fnptr, GtkTreeView* carg0) {
+// 	return ((gboolean (*) (GtkTreeView*))(fnptr))(carg0);
 // }
-// C.gboolean _gotk4_gtk3_TreeView_virtual_select_cursor_row(void* fnptr, *C.GtkTreeView carg0, C.gboolean carg1) {
-// 	return ((C.gboolean (*) (*C.GtkTreeView, C.gboolean))(fnptr))(carg0, carg1);
+// gboolean _gotk4_gtk3_TreeView_virtual_select_cursor_row(void* fnptr, GtkTreeView* carg0, gboolean carg1) {
+// 	return ((gboolean (*) (GtkTreeView*, gboolean))(fnptr))(carg0, carg1);
 // }
-// C.gboolean _gotk4_gtk3_TreeView_virtual_start_interactive_search(void* fnptr, *C.GtkTreeView carg0) {
-// 	return ((C.gboolean (*) (*C.GtkTreeView))(fnptr))(carg0);
+// gboolean _gotk4_gtk3_TreeView_virtual_start_interactive_search(void* fnptr, GtkTreeView* carg0) {
+// 	return ((gboolean (*) (GtkTreeView*))(fnptr))(carg0);
 // }
-// C.gboolean _gotk4_gtk3_TreeView_virtual_test_collapse_row(void* fnptr, *C.GtkTreeView carg0, *C.GtkTreeIter carg1, *C.GtkTreePath carg2) {
-// 	return ((C.gboolean (*) (*C.GtkTreeView, *C.GtkTreeIter, *C.GtkTreePath))(fnptr))(carg0, carg1, carg2);
+// gboolean _gotk4_gtk3_TreeView_virtual_test_collapse_row(void* fnptr, GtkTreeView* carg0, GtkTreeIter* carg1, GtkTreePath* carg2) {
+// 	return ((gboolean (*) (GtkTreeView*, GtkTreeIter*, GtkTreePath*))(fnptr))(carg0, carg1, carg2);
 // }
-// C.gboolean _gotk4_gtk3_TreeView_virtual_test_expand_row(void* fnptr, *C.GtkTreeView carg0, *C.GtkTreeIter carg1, *C.GtkTreePath carg2) {
-// 	return ((C.gboolean (*) (*C.GtkTreeView, *C.GtkTreeIter, *C.GtkTreePath))(fnptr))(carg0, carg1, carg2);
-// }
-// C.gboolean _gotk4_gtk3_TreeView_virtual_toggle_cursor_row(void* fnptr, *C.GtkTreeView carg0) {
-// 	return ((C.gboolean (*) (*C.GtkTreeView))(fnptr))(carg0);
+// gboolean _gotk4_gtk3_TreeView_virtual_test_expand_row(void* fnptr, GtkTreeView* carg0, GtkTreeIter* carg1, GtkTreePath* carg2) {
+// 	return ((gboolean (*) (GtkTreeView*, GtkTreeIter*, GtkTreePath*))(fnptr))(carg0, carg1, carg2);
+// }
+// gboolean _gotk4_gtk3_TreeView_virtual_toggle_cursor_row(void* fnptr, GtkTreeView* carg0) {
+// 	return ((gboolean (*) (GtkTreeView*))(fnptr))(carg0);
 // }
-// C.gboolean _gotk4_gtk3_TreeView_virtual_unselect_all(void* fnptr, *C.GtkTreeView carg0) {
-// 	return ((C.gboolean (*) (*C.GtkTreeView))(fnptr))(carg0);
+// gboolean _gotk4_gtk3_TreeView_virtual_unselect_all(void* fnptr, GtkTreeView* carg0) {
+// 	return ((gboolean (*) (GtkTreeView*))(fnptr))(carg0);
 // }
-// extern C.void _gotk4_gtk3_Button_activate(*C.GtkButton);
-// extern C.void _gotk4_gtk3_Button_clicked(*C.GtkButton);
-// C.void _gotk4_gtk3_Button_virtual_activate(void* fnptr, *C.GtkButton carg0) {
-// 	return ((C.void (*) (*C.GtkButton))(fnptr))(carg0);
+// extern void _gotk4_gtk3_Button_activate(GtkButton*);
+// extern void _gotk4_gtk3_Button_clicked(GtkButton*);
+// void _gotk4_gtk3_Button_virtual_activate(void* fnptr, GtkButton* carg0) {
+// 	return ((void (*) (GtkButton*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_Button_virtual_clicked(void* fnptr, *C.GtkButton carg0) {
-// 	return ((C.void (*) (*C.GtkButton))(fnptr))(carg0);
+// void _gotk4_gtk3_Button_virtual_clicked(void* fnptr, GtkButton* carg0) {
+// 	return ((void (*) (GtkButton*))(fnptr))(carg0);
 // }
-// extern C.void _gotk4_gtk3_ColorButton_color_set(*C.GtkColorButton);
-// C.void _gotk4_gtk3_ColorButton_virtual_color_set(void* fnptr, *C.GtkColorButton carg0) {
-// 	return ((C.void (*) (*C.GtkColorButton))(fnptr))(carg0);
+// extern void _gotk4_gtk3_ColorButton_color_set(GtkColorButton*);
+// void _gotk4_gtk3_ColorButton_virtual_color_set(void* fnptr, GtkColorButton* carg0) {
+// 	return ((void (*) (GtkColorButton*))(fnptr))(carg0);
 // }
-// extern C.void _gotk4_gtk3_ColorSelection_color_changed(*C.GtkColorSelection);
-// C.void _gotk4_gtk3_ColorSelection_virtual_color_changed(void* fnptr, *C.GtkColorSelection carg0) {
-// 	return ((C.void (*) (*C.GtkColorSelection))(fnptr))(carg0);
+// extern void _gotk4_gtk3_ColorSelection_color_changed(GtkColorSelection*);
+// void _gotk4_gtk3_ColorSelection_virtual_color_changed(void* fnptr, GtkColorSelection* carg0) {
+// 	return ((void (*) (GtkColorSelection*))(fnptr))(carg0);
 // }
-// extern C.void _gotk4_gtk3_ComboBox_changed(*C.GtkComboBox);
-// extern *C.gchar _gotk4_gtk3_ComboBox_format_entry_text(*C.GtkComboBox, *C.gchar);
-// C.void _gotk4_gtk3_ComboBox_virtual_changed(void* fnptr, *C.GtkComboBox carg0) {
-// 	return ((C.void (*) (*C.GtkComboBox))(fnptr))(carg0);
+// extern void _gotk4_gtk3_ComboBox_changed(GtkComboBox*);
+// extern gchar* _gotk4_gtk3_ComboBox_format_entry_text(GtkComboBox*, const gchar*);
+// void _gotk4_gtk3_ComboBox_virtual_changed(void* fnptr, GtkComboBox* carg0) {
+// 	return ((void (*) (GtkComboBox*))(fnptr))(carg0);
 // }
-// *C.gchar _gotk4_gtk3_ComboBox_virtual_format_entry_text(void* fnptr, *C.GtkComboBox carg0, *C.gchar carg1) {
-// 	return ((*C.gchar (*) (*C.GtkComboBox, *C.gchar))(fnptr))(carg0, carg1);
+// gchar* _gotk4_gtk3_ComboBox_virtual_format_entry_text(void* fnptr, GtkComboBox* carg0, const gchar* carg1) {
+// 	return ((gchar* (*) (GtkComboBox*, const gchar*))(fnptr))(carg0, carg1);
 // }
-// extern C.void _gotk4_gtk3_Expander_activate(*C.GtkExpander);
-// C.void _gotk4_gtk3_Expander_virtual_activate(void* fnptr, *C.GtkExpander carg0) {
-// 	return ((C.void (*) (*C.GtkExpander))(fnptr))(carg0);
+// extern void _gotk4_gtk3_Expander_activate(GtkExpander*);
+// void _gotk4_gtk3_Expander_virtual_activate(void* fnptr, GtkExpander* carg0) {
+// 	return ((void (*) (GtkExpander*))(fnptr))(carg0);
 // }
-// extern C.void _gotk4_gtk3_FileChooserButton_file_set(*C.GtkFileChooserButton);
-// C.void _gotk4_gtk3_FileChooserButton_virtual_file_set(void* fnptr, *C.GtkFileChooserButton carg0) {
-// 	return ((C.void (*) (*C.GtkFileChooserButton))(fnptr))(carg0);
+// extern void _gotk4_gtk3_FileChooserButton_file_set(GtkFileChooserButton*);
+// void _gotk4_gtk3_FileChooserButton_virtual_file_set(void* fnptr, GtkFileChooserButton* carg0) {
+// 	return ((void (*) (GtkFileChooserButton*))(fnptr))(carg0);
 // }
-// extern C.void _gotk4_gtk3_FlowBoxChild_activate(*C.GtkFlowBoxChild);
-// C.void _gotk4_gtk3_FlowBoxChild_virtual_activate(void* fnptr, *C.GtkFlowBoxChild carg0) {
-// 	return ((C.void (*) (*C.GtkFlowBoxChild))(fnptr))(carg0);
+// extern void _gotk4_gtk3_FlowBoxChild_activate(GtkFlowBoxChild*);
+// void _gotk4_gtk3_FlowBoxChild_virtual_activate(void* fnptr, GtkFlowBoxChild* carg0) {
+// 	return ((void (*) (GtkFlowBoxChild*))(fnptr))(carg0);
 // }
-// extern C.void _gotk4_gtk3_FontButton_font_set(*C.GtkFontButton);
-// C.void _gotk4_gtk3_FontButton_virtual_font_set(void* fnptr, *C.GtkFontButton carg0) {
-// 	return ((C.void (*) (*C.GtkFontButton))(fnptr))(carg0);
+// extern void _gotk4_gtk3_FontButton_font_set(GtkFontButton*);
+// void _gotk4_gtk3_FontButton_virtual_font_set(void* fnptr, GtkFontButton* carg0) {
+// 	return ((void (*) (GtkFontButton*))(fnptr))(carg0);
 // }
-// extern C.void _gotk4_gtk3_Frame_compute_child_allocation(*C.GtkFrame, *C.GtkAllocation);
-// C.void _gotk4_gtk3_Frame_virtual_compute_child_allocation(void* fnptr, *C.GtkFrame carg0, *C.GtkAllocation carg1) {
-// 	return ((C.void (*) (*C.GtkFrame, *C.GtkAllocation))(fnptr))(carg0, carg1);
+// extern void _gotk4_gtk3_Frame_compute_child_allocation(GtkFrame*, GtkAllocation*);
+// void _gotk4_gtk3_Frame_virtual_compute_child_allocation(void* fnptr, GtkFrame* carg0, GtkAllocation* carg1) {
+// 	return ((void (*) (GtkFrame*, GtkAllocation*))(fnptr))(carg0, carg1);
 // }
-// extern C.void _gotk4_gtk3_HandleBox_child_attached(*C.GtkHandleBox, *C.GtkWidget);
-// extern C.void _gotk4_gtk3_HandleBox_child_detached(*C.GtkHandleBox, *C.GtkWidget);
-// C.void _gotk4_gtk3_HandleBox_virtual_child_attached(void* fnptr, *C.GtkHandleBox carg0, *C.GtkWidget carg1) {
-// 	return ((C.void (*) (*C.GtkHandleBox, *C.GtkWidget))(fnptr))(carg0, carg1);
+// extern void _gotk4_gtk3_HandleBox_child_attached(GtkHandleBox*, GtkWidget*);
+// extern void _gotk4_gtk3_HandleBox_child_detached(GtkHandleBox*, GtkWidget*);
+// void _gotk4_gtk3_HandleBox_virtual_child_attached(void* fnptr, GtkHandleBox* carg0, GtkWidget* carg1) {
+// 	return ((void (*) (GtkHandleBox*, GtkWidget*))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gtk3_HandleBox_virtual_child_detached(void* fnptr, *C.GtkHandleBox carg0, *C.GtkWidget carg1) {
-// 	return ((C.void (*) (*C.GtkHandleBox, *C.GtkWidget))(fnptr))(carg0, carg1);
+// void _gotk4_gtk3_HandleBox_virtual_child_detached(void* fnptr, GtkHandleBox* carg0, GtkWidget* carg1) {
+// 	return ((void (*) (GtkHandleBox*, GtkWidget*))(fnptr))(carg0, carg1);
 // }
-// extern C.void _gotk4_gtk3_InfoBar_close(*C.GtkInfoBar);
-// extern C.void _gotk4_gtk3_InfoBar_response(*C.GtkInfoBar, C.gint);
-// C.void _gotk4_gtk3_InfoBar_virtual_close(void* fnptr, *C.GtkInfoBar carg0) {
-// 	return ((C.void (*) (*C.GtkInfoBar))(fnptr))(carg0);
+// extern void _gotk4_gtk3_InfoBar_close(GtkInfoBar*);
+// extern void _gotk4_gtk3_InfoBar_response(GtkInfoBar*, gint);
+// void _gotk4_gtk3_InfoBar_virtual_close(void* fnptr, GtkInfoBar* carg0) {
+// 	return ((void (*) (GtkInfoBar*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_InfoBar_virtual_response(void* fnptr, *C.GtkInfoBar carg0, C.gint carg1) {
-// 	return ((C.void (*) (*C.GtkInfoBar, C.gint))(fnptr))(carg0, carg1);
+// void _gotk4_gtk3_InfoBar_virtual_response(void* fnptr, GtkInfoBar* carg0, gint carg1) {
+// 	return ((void (*) (GtkInfoBar*, gint))(fnptr))(carg0, carg1);
 // }
-// extern C.gboolean _gotk4_gtk3_Label_activate_link(*C.GtkLabel, *C.gchar);
-// extern C.void _gotk4_gtk3_Label_copy_clipboard(*C.GtkLabel);
-// extern C.void _gotk4_gtk3_Label_move_cursor(*C.GtkLabel, C.GtkMovementStep, C.gint, C.gboolean);
-// extern C.void _gotk4_gtk3_Label_populate_popup(*C.GtkLabel, *C.GtkMenu);
-// C.gboolean _gotk4_gtk3_Label_virtual_activate_link(void* fnptr, *C.GtkLabel carg0, *C.gchar carg1) {
-// 	return ((C.gboolean (*) (*C.GtkLabel, *C.gchar))(fnptr))(carg0, carg1);
+// extern gboolean _gotk4_gtk3_Label_activate_link(GtkLabel*, const gchar*);
+// extern void _gotk4_gtk3_Label_copy_clipboard(GtkLabel*);
+// extern void _gotk4_gtk3_Label_move_cursor(GtkLabel*, GtkMovementStep, gint, gboolean);
+// extern void _gotk4_gtk3_Label_populate_popup(GtkLabel*, GtkMenu*);
+// gboolean _gotk4_gtk3_Label_virtual_activate_link(void* fnptr, GtkLabel* carg0, const gchar* carg1) {
+// 	return ((gboolean (*) (GtkLabel*, const gchar*))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gtk3_Label_virtual_copy_clipboard(void* fnptr, *C.GtkLabel carg0) {
-// 	return ((C.void (*) (*C.GtkLabel))(fnptr))(carg0);
+// void _gotk4_gtk3_Label_virtual_copy_clipboard(void* fnptr, GtkLabel* carg0) {
+// 	return ((void (*) (GtkLabel*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_Label_virtual_move_cursor(void* fnptr, *C.GtkLabel carg0, C.GtkMovementStep carg1, C.gint carg2, C.gboolean carg3) {
-// 	return ((C.void (*) (*C.GtkLabel, C.GtkMovementStep, C.gint, C.gboolean))(fnptr))(carg0, carg1, carg2, carg3);
+// void _gotk4_gtk3_Label_virtual_move_cursor(void* fnptr, GtkLabel* carg0, GtkMovementStep carg1, gint carg2, gboolean carg3) {
+// 	return ((void (*) (GtkLabel*, GtkMovementStep, gint, gboolean))(fnptr))(carg0, carg1, carg2, carg3);
 // }
-// C.void _gotk4_gtk3_Label_virtual_populate_popup(void* fnptr, *C.GtkLabel carg0, *C.GtkMenu carg1) {
-// 	return ((C.void (*) (*C.GtkLabel, *C.GtkMenu))(fnptr))(carg0, carg1);
+// void _gotk4_gtk3_Label_virtual_populate_popup(void* fnptr, GtkLabel* carg0, GtkMenu* carg1) {
+// 	return ((void (*) (GtkLabel*, GtkMenu*))(fnptr))(carg0, carg1);
 // }
-// extern C.gboolean _gotk4_gtk3_LinkButton_activate_link(*C.GtkLinkButton);
-// C.gboolean _gotk4_gtk3_LinkButton_virtual_activate_link(void* fnptr, *C.GtkLinkButton carg0) {
-// 	return ((C.gboolean (*) (*C.GtkLinkButton))(fnptr))(carg0);
+// extern gboolean _gotk4_gtk3_LinkButton_activate_link(GtkLinkButton*);
+// gboolean _gotk4_gtk3_LinkButton_virtual_activate_link(void* fnptr, GtkLinkButton* carg0) {
+// 	return ((gboolean (*) (GtkLinkButton*))(fnptr))(carg0);
 // }
-// extern C.void _gotk4_gtk3_ListBoxRow_activate(*C.GtkListBoxRow);
-// C.void _gotk4_gtk3_ListBoxRow_virtual_activate(void* fnptr, *C.GtkListBoxRow carg0) {
-// 	return ((C.void (*) (*C.GtkListBoxRow))(fnptr))(carg0);
+// extern void _gotk4_gtk3_ListBoxRow_activate(GtkListBoxRow*);
+// void _gotk4_gtk3_ListBoxRow_virtual_activate(void* fnptr, GtkListBoxRow* carg0) {
+// 	return ((void (*) (GtkListBoxRow*))(fnptr))(carg0);
 // }
-// extern C.void _gotk4_gtk3_MenuItem_activate(*C.GtkMenuItem);
-// extern C.void _gotk4_gtk3_MenuItem_activate_item(*C.GtkMenuItem);
-// extern C.void _gotk4_gtk3_MenuItem_deselect(*C.GtkMenuItem);
-// extern *C.gchar _gotk4_gtk3_MenuItem_get_label(*C.GtkMenuItem);
-// extern C.void _gotk4_gtk3_MenuItem_select(*C.GtkMenuItem);
-// extern C.void _gotk4_gtk3_MenuItem_set_label(*C.GtkMenuItem, *C.gchar);
-// extern C.void _gotk4_gtk3_MenuItem_toggle_size_allocate(*C.GtkMenuItem, C.gint);
-// C.void _gotk4_gtk3_MenuItem_virtual_activate(void* fnptr, *C.GtkMenuItem carg0) {
-// 	return ((C.void (*) (*C.GtkMenuItem))(fnptr))(carg0);
+// extern void _gotk4_gtk3_MenuItem_activate(GtkMenuItem*);
+// extern void _gotk4_gtk3_MenuItem_activate_item(GtkMenuItem*);
+// extern void _gotk4_gtk3_MenuItem_deselect(GtkMenuItem*);
+// extern const gchar* _gotk4_gtk3_MenuItem_get_label(GtkMenuItem*);
+// extern void _gotk4_gtk3_MenuItem_select(GtkMenuItem*);
+// extern void _gotk4_gtk3_MenuItem_set_label(GtkMenuItem*, const gchar*);
+// extern void _gotk4_gtk3_MenuItem_toggle_size_allocate(GtkMenuItem*, gint);
+// void _gotk4_gtk3_MenuItem_virtual_activate(void* fnptr, GtkMenuItem* carg0) {
+// 	return ((void (*) (GtkMenuItem*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_MenuItem_virtual_activate_item(void* fnptr, *C.GtkMenuItem carg0) {
-// 	return ((C.void (*) (*C.GtkMenuItem))(fnptr))(carg0);
+// void _gotk4_gtk3_MenuItem_virtual_activate_item(void* fnptr, GtkMenuItem* carg0) {
+// 	return ((void (*) (GtkMenuItem*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_MenuItem_virtual_deselect(void* fnptr, *C.GtkMenuItem carg0) {
-// 	return ((C.void (*) (*C.GtkMenuItem))(fnptr))(carg0);
+// void _gotk4_gtk3_MenuItem_virtual_deselect(void* fnptr, GtkMenuItem* carg0) {
+// 	return ((void (*) (GtkMenuItem*))(fnptr))(carg0);
 // }
-// *C.gchar _gotk4_gtk3_MenuItem_virtual_get_label(void* fnptr, *C.GtkMenuItem carg0) {
-// 	return ((*C.gchar (*) (*C.GtkMenuItem))(fnptr))(carg0);
+// const gchar* _gotk4_gtk3_MenuItem_virtual_get_label(void* fnptr, GtkMenuItem* carg0) {
+// 	return ((const gchar* (*) (GtkMenuItem*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_MenuItem_virtual_select(void* fnptr, *C.GtkMenuItem carg0) {
-// 	return ((C.void (*) (*C.GtkMenuItem))(fnptr))(carg0);
+// void _gotk4_gtk3_MenuItem_virtual_select(void* fnptr, GtkMenuItem* carg0) {
+// 	return ((void (*) (GtkMenuItem*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_MenuItem_virtual_set_label(void* fnptr, *C.GtkMenuItem carg0, *C.gchar carg1) {
-// 	return ((C.void (*) (*C.GtkMenuItem, *C.gchar))(fnptr))(carg0, carg1);
+// void _gotk4_gtk3_MenuItem_virtual_set_label(void* fnptr, GtkMenuItem* carg0, const gchar* carg1) {
+// 	return ((void (*) (GtkMenuItem*, const gchar*))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gtk3_MenuItem_virtual_toggle_size_allocate(void* fnptr, *C.GtkMenuItem carg0, C.gint carg1) {
-// 	return ((C.void (*) (*C.GtkMenuItem, C.gint))(fnptr))(carg0, carg1);
+// void _gotk4_gtk3_MenuItem_virtual_toggle_size_allocate(void* fnptr, GtkMenuItem* carg0, gint carg1) {
+// 	return ((void (*) (GtkMenuItem*, gint))(fnptr))(carg0, carg1);
 // }
-// extern C.gboolean _gotk4_gtk3_Overlay_get_child_position(*C.GtkOverlay, *C.GtkWidget, *C.GtkAllocation);
-// C.gboolean _gotk4_gtk3_Overlay_virtual_get_child_position(void* fnptr, *C.GtkOverlay carg0, *C.GtkWidget carg1, *C.GtkAllocation carg2) {
-// 	return ((C.gboolean (*) (*C.GtkOverlay, *C.GtkWidget, *C.GtkAllocation))(fnptr))(carg0, carg1, carg2);
+// extern gboolean _gotk4_gtk3_Overlay_get_child_position(GtkOverlay*, GtkWidget*, GtkAllocation*);
+// gboolean _gotk4_gtk3_Overlay_virtual_get_child_position(void* fnptr, GtkOverlay* carg0, GtkWidget* carg1, GtkAllocation* carg2) {
+// 	return ((gboolean (*) (GtkOverlay*, GtkWidget*, GtkAllocation*))(fnptr))(carg0, carg1, carg2);
 // }
-// extern C.void _gotk4_gtk3_Popover_closed(*C.GtkPopover);
-// C.void _gotk4_gtk3_Popover_virtual_closed(void* fnptr, *C.GtkPopover carg0) {
-// 	return ((C.void (*) (*C.GtkPopover))(fnptr))(carg0);
+// extern void _gotk4_gtk3_Popover_closed(GtkPopover*);
+// void _gotk4_gtk3_Popover_virtual_closed(void* fnptr, GtkPopover* carg0) {
+// 	return ((void (*) (GtkPopover*))(fnptr))(carg0);
 // }
-// extern C.void _gotk4_gtk3_ScaleButton_value_changed(*C.GtkScaleButton, C.gdouble);
-// C.void _gotk4_gtk3_ScaleButton_virtual_value_changed(void* fnptr, *C.GtkScaleButton carg0, C.gdouble carg1) {
-// 	return ((C.void (*) (*C.GtkScaleButton, C.gdouble))(fnptr))(carg0, carg1);
+// extern void _gotk4_gtk3_ScaleButton_value_changed(GtkScaleButton*, gdouble);
+// void _gotk4_gtk3_ScaleButton_virtual_value_changed(void* fnptr, GtkScaleButton* carg0, gdouble carg1) {
+// 	return ((void (*) (GtkScaleButton*, gdouble))(fnptr))(carg0, carg1);
 // }
-// extern C.void _gotk4_gtk3_ScrolledWindow_move_focus_out(*C.GtkScrolledWindow, C.GtkDirectionType);
-// extern C.gboolean _gotk4_gtk3_ScrolledWindow_scroll_child(*C.GtkScrolledWindow, C.GtkScrollType, C.gboolean);
-// C.void _gotk4_gtk3_ScrolledWindow_virtual_move_focus_out(void* fnptr, *C.GtkScrolledWindow carg0, C.GtkDirectionType carg1) {
-// 	return ((C.void (*) (*C.GtkScrolledWindow, C.GtkDirectionType))(fnptr))(carg0, carg1);
+// extern void _gotk4_gtk3_ScrolledWindow_move_focus_out(GtkScrolledWindow*, GtkDirectionType);
+// extern gboolean _gotk4_gtk3_ScrolledWindow_scroll_child(GtkScrolledWindow*, GtkScrollType, gboolean);
+// void _gotk4_gtk3_ScrolledWindow_virtual_move_focus_out(void* fnptr, GtkScrolledWindow* carg0, GtkDirectionType carg1) {
+// 	return ((void (*) (GtkScrolledWindow*, GtkDirectionType))(fnptr))(carg0, carg1);
 // }
-// C.gboolean _gotk4_gtk3_ScrolledWindow_virtual_scroll_child(void* fnptr, *C.GtkScrolledWindow carg0, C.GtkScrollType carg1, C.gboolean carg2) {
-// 	return ((C.gboolean (*) (*C.GtkScrolledWindow, C.GtkScrollType, C.gboolean))(fnptr))(carg0, carg1, carg2);
+// gboolean _gotk4_gtk3_ScrolledWindow_virtual_scroll_child(void* fnptr, GtkScrolledWindow* carg0, GtkScrollType carg1, gboolean carg2) {
+// 	return ((gboolean (*) (GtkScrolledWindow*, GtkScrollType, gboolean))(fnptr))(carg0, carg1, carg2);
 // }
-// extern C.void _gotk4_gtk3_Statusbar_text_popped(*C.GtkStatusbar, C.guint, *C.gchar);
-// extern C.void _gotk4_gtk3_Statusbar_text_pushed(*C.GtkStatusbar, C.guint, *C.gchar);
-// C.void _gotk4_gtk3_Statusbar_virtual_text_popped(void* fnptr, *C.GtkStatusbar carg0, C.guint carg1, *C.gchar carg2) {
-// 	return ((C.void (*) (*C.GtkStatusbar, C.guint, *C.gchar))(fnptr))(carg0, carg1, carg2);
+// extern void _gotk4_gtk3_Statusbar_text_popped(GtkStatusbar*, guint, const gchar*);
+// extern void _gotk4_gtk3_Statusbar_text_pushed(GtkStatusbar*, guint, const gchar*);
+// void _gotk4_gtk3_Statusbar_virtual_text_popped(void* fnptr, GtkStatusbar* carg0, guint carg1, const gchar* carg2) {
+// 	return ((void (*) (GtkStatusbar*, guint, const gchar*))(fnptr))(carg0, carg1, carg2);
 // }
-// C.void _gotk4_gtk3_Statusbar_virtual_text_pushed(void* fnptr, *C.GtkStatusbar carg0, C.guint carg1, *C.gchar carg2) {
-// 	return ((C.void (*) (*C.GtkStatusbar, C.guint, *C.gchar))(fnptr))(carg0, carg1, carg2);
+// void _gotk4_gtk3_Statusbar_virtual_text_pushed(void* fnptr, GtkStatusbar* carg0, guint carg1, const gchar* carg2) {
+// 	return ((void (*) (GtkStatusbar*, guint, const gchar*))(fnptr))(carg0, carg1, carg2);
 // }
-// extern C.void _gotk4_gtk3_ToggleButton_toggled(*C.GtkToggleButton);
-// C.void _gotk4_gtk3_ToggleButton_virtual_toggled(void* fnptr, *C.GtkToggleButton carg0) {
-// 	return ((C.void (*) (*C.GtkToggleButton))(fnptr))(carg0);
+// extern void _gotk4_gtk3_ToggleButton_toggled(GtkToggleButton*);
+// void _gotk4_gtk3_ToggleButton_virtual_toggled(void* fnptr, GtkToggleButton* carg0) {
+// 	return ((void (*) (GtkToggleButton*))(fnptr))(carg0);
 // }
-// extern C.gboolean _gotk4_gtk3_ToolItem_create_menu_proxy(*C.GtkToolItem);
-// extern C.void _gotk4_gtk3_ToolItem_toolbar_reconfigured(*C.GtkToolItem);
-// C.gboolean _gotk4_gtk3_ToolItem_virtual_create_menu_proxy(void* fnptr, *C.GtkToolItem carg0) {
-// 	return ((C.gboolean (*) (*C.GtkToolItem))(fnptr))(carg0);
+// extern gboolean _gotk4_gtk3_ToolItem_create_menu_proxy(GtkToolItem*);
+// extern void _gotk4_gtk3_ToolItem_toolbar_reconfigured(GtkToolItem*);
+// gboolean _gotk4_gtk3_ToolItem_virtual_create_menu_proxy(void* fnptr, GtkToolItem* carg0) {
+// 	return ((gboolean (*) (GtkToolItem*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_ToolItem_virtual_toolbar_reconfigured(void* fnptr, *C.GtkToolItem carg0) {
-// 	return ((C.void (*) (*C.GtkToolItem))(fnptr))(carg0);
+// void _gotk4_gtk3_ToolItem_virtual_toolbar_reconfigured(void* fnptr, GtkToolItem* carg0) {
+// 	return ((void (*) (GtkToolItem*))(fnptr))(carg0);
 // }
-// extern C.void _gotk4_gtk3_Window_activate_default(*C.GtkWindow);
-// extern C.void _gotk4_gtk3_Window_activate_focus(*C.GtkWindow);
-// extern C.gboolean _gotk4_gtk3_Window_enable_debugging(*C.GtkWindow, C.gboolean);
-// extern C.void _gotk4_gtk3_Window_keys_changed(*C.GtkWindow);
-// extern C.void _gotk4_gtk3_Window_set_focus(*C.GtkWindow, *C.GtkWidget);
-// C.void _gotk4_gtk3_Window_virtual_activate_default(void* fnptr, *C.GtkWindow carg0) {
-// 	return ((C.void (*) (*C.GtkWindow))(fnptr))(carg0);
+// extern void _gotk4_gtk3_Window_activate_default(GtkWindow*);
+// extern void _gotk4_gtk3_Window_activate_focus(GtkWindow*);
+// extern gboolean _gotk4_gtk3_Window_enable_debugging(GtkWindow*, gboolean);
+// extern void _gotk4_gtk3_Window_keys_changed(GtkWindow*);
+// extern void _gotk4_gtk3_Window_set_focus(GtkWindow*, GtkWidget*);
+// void _gotk4_gtk3_Window_virtual_activate_default(void* fnptr, GtkWindow* carg0) {
+// 	return ((void (*) (GtkWindow*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_Window_virtual_activate_focus(void* fnptr, *C.GtkWindow carg0) {
-// 	return ((C.void (*) (*C.GtkWindow))(fnptr))(carg0);
+// void _gotk4_gtk3_Window_virtual_activate_focus(void* fnptr, GtkWindow* carg0) {
+// 	return ((void (*) (GtkWindow*))(fnptr))(carg0);
 // }
-// C.gboolean _gotk4_gtk3_Window_virtual_enable_debugging(void* fnptr, *C.GtkWindow carg0, C.gboolean carg1) {
-// 	return ((C.gboolean (*) (*C.GtkWindow, C.gboolean))(fnptr))(carg0, carg1);
+// gboolean _gotk4_gtk3_Window_virtual_enable_debugging(void* fnptr, GtkWindow* carg0, gboolean carg1) {
+// 	return ((gboolean (*) (GtkWindow*, gboolean))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gtk3_Window_virtual_keys_changed(void* fnptr, *C.GtkWindow carg0) {
-// 	return ((C.void (*) (*C.GtkWindow))(fnptr))(carg0);
+// void _gotk4_gtk3_Window_virtual_keys_changed(void* fnptr, GtkWindow* carg0) {
+// 	return ((void (*) (GtkWindow*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_Window_virtual_set_focus(void* fnptr, *C.GtkWindow carg0, *C.GtkWidget carg1) {
-// 	return ((C.void (*) (*C.GtkWindow, *C.GtkWidget))(fnptr))(carg0, carg1);
+// void _gotk4_gtk3_Window_virtual_set_focus(void* fnptr, GtkWindow* carg0, GtkWidget* carg1) {
+// 	return ((void (*) (GtkWindow*, GtkWidget*))(fnptr))(carg0, carg1);
 // }
-// extern C.void _gotk4_gtk3_AppChooserButton_custom_item_activated(*C.GtkAppChooserButton, *C.gchar);
-// C.void _gotk4_gtk3_AppChooserButton_virtual_custom_item_activated(void* fnptr, *C.GtkAppChooserButton carg0, *C.gchar carg1) {
-// 	return ((C.void (*) (*C.GtkAppChooserButton, *C.gchar))(fnptr))(carg0, carg1);
+// extern void _gotk4_gtk3_AppChooserButton_custom_item_activated(GtkAppChooserButton*, const gchar*);
+// void _gotk4_gtk3_AppChooserButton_virtual_custom_item_activated(void* fnptr, GtkAppChooserButton* carg0, const gchar* carg1) {
+// 	return ((void (*) (GtkAppChooserButton*, const gchar*))(fnptr))(carg0, carg1);
 // }
-// extern C.void _gotk4_gtk3_AppChooserWidget_application_activated(*C.GtkAppChooserWidget, *C.GAppInfo);
-// extern C.void _gotk4_gtk3_AppChooserWidget_application_selected(*C.GtkAppChooserWidget, *C.GAppInfo);
-// extern C.void _gotk4_gtk3_AppChooserWidget_populate_popup(*C.GtkAppChooserWidget, *C.GtkMenu, *C.GAppInfo);
-// C.void _gotk4_gtk3_AppChooserWidget_virtual_application_activated(void* fnptr, *C.GtkAppChooserWidget carg0, *C.GAppInfo carg1) {
-// 	return ((C.void (*) (*C.GtkAppChooserWidget, *C.GAppInfo))(fnptr))(carg0, carg1);
+// extern void _gotk4_gtk3_AppChooserWidget_application_activated(GtkAppChooserWidget*, GAppInfo*);
+// extern void _gotk4_gtk3_AppChooserWidget_application_selected(GtkAppChooserWidget*, GAppInfo*);
+// extern void _gotk4_gtk3_AppChooserWidget_populate_popup(GtkAppChooserWidget*, GtkMenu*, GAppInfo*);
+// void _gotk4_gtk3_AppChooserWidget_virtual_application_activated(void* fnptr, GtkAppChooserWidget* carg0, GAppInfo* carg1) {
+// 	return ((void (*) (GtkAppChooserWidget*, GAppInfo*))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gtk3_AppChooserWidget_virtual_application_selected(void* fnptr, *C.GtkAppChooserWidget carg0, *C.GAppInfo carg1) {
-// 	return ((C.void (*) (*C.GtkAppChooserWidget, *C.GAppInfo))(fnptr))(carg0, carg1);
+// void _gotk4_gtk3_AppChooserWidget_virtual_application_selected(void* fnptr, GtkAppChooserWidget* carg0, GAppInfo* carg1) {
+// 	return ((void (*) (GtkAppChooserWidget*, GAppInfo*))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gtk3_AppChooserWidget_virtual_populate_popup(void* fnptr, *C.GtkAppChooserWidget carg0, *C.GtkMenu carg1, *C.GAppInfo carg2) {
-// 	return ((C.void (*) (*C.GtkAppChooserWidget, *C.GtkMenu, *C.GAppInfo))(fnptr))(carg0, carg1, carg2);
+// void _gotk4_gtk3_AppChooserWidget_virtual_populate_popup(void* fnptr, GtkAppChooserWidget* carg0, GtkMenu* carg1, GAppInfo* carg2) {
+// 	return ((void (*) (GtkAppChooserWidget*, GtkMenu*, GAppInfo*))(fnptr))(carg0, carg1, carg2);
 // }
-// extern C.void _gotk4_gtk3_Assistant_apply(*C.GtkAssistant);
-// extern C.void _gotk4_gtk3_Assistant_cancel(*C.GtkAssistant);
-// extern C.void _gotk4_gtk3_Assistant_close(*C.GtkAssistant);
-// extern C.void _gotk4_gtk3_Assistant_prepare(*C.GtkAssistant, *C.GtkWidget);
-// C.void _gotk4_gtk3_Assistant_virtual_apply(void* fnptr, *C.GtkAssistant carg0) {
-// 	return ((C.void (*) (*C.GtkAssistant))(fnptr))(carg0);
+// extern void _gotk4_gtk3_Assistant_apply(GtkAssistant*);
+// extern void _gotk4_gtk3_Assistant_cancel(GtkAssistant*);
+// extern void _gotk4_gtk3_Assistant_close(GtkAssistant*);
+// extern void _gotk4_gtk3_Assistant_prepare(GtkAssistant*, GtkWidget*);
+// void _gotk4_gtk3_Assistant_virtual_apply(void* fnptr, GtkAssistant* carg0) {
+// 	return ((void (*) (GtkAssistant*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_Assistant_virtual_cancel(void* fnptr, *C.GtkAssistant carg0) {
-// 	return ((C.void (*) (*C.GtkAssistant))(fnptr))(carg0);
+// void _gotk4_gtk3_Assistant_virtual_cancel(void* fnptr, GtkAssistant* carg0) {
+// 	return ((void (*) (GtkAssistant*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_Assistant_virtual_close(void* fnptr, *C.GtkAssistant carg0) {
-// 	return ((C.void (*) (*C.GtkAssistant))(fnptr))(carg0);
+// void _gotk4_gtk3_Assistant_virtual_close(void* fnptr, GtkAssistant* carg0) {
+// 	return ((void (*) (GtkAssistant*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_Assistant_virtual_prepare(void* fnptr, *C.GtkAssistant carg0, *C.GtkWidget carg1) {
-// 	return ((C.void (*) (*C.GtkAssistant, *C.GtkWidget))(fnptr))(carg0, carg1);
+// void _gotk4_gtk3_Assistant_virtual_prepare(void* fnptr, GtkAssistant* carg0, GtkWidget* carg1) {
+// 	return ((void (*) (GtkAssistant*, GtkWidget*))(fnptr))(carg0, carg1);
 // }
-// extern C.void _gotk4_gtk3_CheckMenuItem_toggled(*C.GtkCheckMenuItem);
-// C.void _gotk4_gtk3_CheckMenuItem_virtual_toggled(void* fnptr, *C.GtkCheckMenuItem carg0) {
-// 	return ((C.void (*) (*C.GtkCheckMenuItem))(fnptr))(carg0);
+// extern void _gotk4_gtk3_CheckMenuItem_toggled(GtkCheckMenuItem*);
+// void _gotk4_gtk3_CheckMenuItem_virtual_toggled(void* fnptr, GtkCheckMenuItem* carg0) {
+// 	return ((void (*) (GtkCheckMenuItem*))(fnptr))(carg0);
 // }
-// extern C.void _gotk4_gtk3_Dialog_close(*C.GtkDialog);
-// extern C.void _gotk4_gtk3_Dialog_response(*C.GtkDialog, C.gint);
-// C.void _gotk4_gtk3_Dialog_virtual_close(void* fnptr, *C.GtkDialog carg0) {
-// 	return ((C.void (*) (*C.GtkDialog))(fnptr))(carg0);
+// extern void _gotk4_gtk3_Dialog_close(GtkDialog*);
+// extern void _gotk4_gtk3_Dialog_response(GtkDialog*, gint);
+// void _gotk4_gtk3_Dialog_virtual_close(void* fnptr, GtkDialog* carg0) {
+// 	return ((void (*) (GtkDialog*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_Dialog_virtual_response(void* fnptr, *C.GtkDialog carg0, C.gint carg1) {
-// 	return ((C.void (*) (*C.GtkDialog, C.gint))(fnptr))(carg0, carg1);
+// void _gotk4_gtk3_Dialog_virtual_response(void* fnptr, GtkDialog* carg0, gint carg1) {
+// 	return ((void (*) (GtkDialog*, gint))(fnptr))(carg0, carg1);
 // }
-// extern C.void _gotk4_gtk3_Plug_embedded(*C.GtkPlug);
-// C.void _gotk4_gtk3_Plug_virtual_embedded(void* fnptr, *C.GtkPlug carg0) {
-// 	return ((C.void (*) (*C.GtkPlug))(fnptr))(carg0);
+// extern void _gotk4_gtk3_Plug_embedded(GtkPlug*);
+// void _gotk4_gtk3_Plug_virtual_embedded(void* fnptr, GtkPlug* carg0) {
+// 	return ((void (*) (GtkPlug*))(fnptr))(carg0);
 // }
-// extern C.void _gotk4_gtk3_RadioButton_group_changed(*C.GtkRadioButton);
-// C.void _gotk4_gtk3_RadioButton_virtual_group_changed(void* fnptr, *C.GtkRadioButton carg0) {
-// 	return ((C.void (*) (*C.GtkRadioButton))(fnptr))(carg0);
+// extern void _gotk4_gtk3_RadioButton_group_changed(GtkRadioButton*);
+// void _gotk4_gtk3_RadioButton_virtual_group_changed(void* fnptr, GtkRadioButton* carg0) {
+// 	return ((void (*) (GtkRadioButton*))(fnptr))(carg0);
 // }
-// extern C.void _gotk4_gtk3_RadioMenuItem_group_changed(*C.GtkRadioMenuItem);
-// C.void _gotk4_gtk3_RadioMenuItem_virtual_group_changed(void* fnptr, *C.GtkRadioMenuItem carg0) {
-// 	return ((C.void (*) (*C.GtkRadioMenuItem))(fnptr))(carg0);
+// extern void _gotk4_gtk3_RadioMenuItem_group_changed(GtkRadioMenuItem*);
+// void _gotk4_gtk3_RadioMenuItem_virtual_group_changed(void* fnptr, GtkRadioMenuItem* carg0) {
+// 	return ((void (*) (GtkRadioMenuItem*))(fnptr))(carg0);
 // }
-// extern C.void _gotk4_gtk3_ShortcutsWindow_close(*C.GtkShortcutsWindow);
-// extern C.void _gotk4_gtk3_ShortcutsWindow_search(*C.GtkShortcutsWindow);
-// C.void _gotk4_gtk3_ShortcutsWindow_virtual_close(void* fnptr, *C.GtkShortcutsWindow carg0) {
-// 	return ((C.void (*) (*C.GtkShortcutsWindow))(fnptr))(carg0);
+// extern void _gotk4_gtk3_ShortcutsWindow_close(GtkShortcutsWindow*);
+// extern void _gotk4_gtk3_ShortcutsWindow_search(GtkShortcutsWindow*);
+// void _gotk4_gtk3_ShortcutsWindow_virtual_close(void* fnptr, GtkShortcutsWindow* carg0) {
+// 	return ((void (*) (GtkShortcutsWindow*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gtk3_ShortcutsWindow_virtual_search(void* fnptr, *C.GtkShortcutsWindow carg0) {
-// 	return ((C.void (*) (*C.GtkShortcutsWindow))(fnptr))(carg0);
+// void _gotk4_gtk3_ShortcutsWindow_virtual_search(void* fnptr, GtkShortcutsWindow* carg0) {
+// 	return ((void (*) (GtkShortcutsWindow*))(fnptr))(carg0);
 // }
-// extern C.void _gotk4_gtk3_ToolButton_clicked(*C.GtkToolButton);
-// C.void _gotk4_gtk3_ToolButton_virtual_clicked(void* fnptr, *C.GtkToolButton carg0) {
-// 	return ((C.void (*) (*C.GtkToolButton))(fnptr))(carg0);
+// extern void _gotk4_gtk3_ToolButton_clicked(GtkToolButton*);
+// void _gotk4_gtk3_ToolButton_virtual_clicked(void* fnptr, GtkToolButton* carg0) {
+// 	return ((void (*) (GtkToolButton*))(fnptr))(carg0);
 // }
-// extern C.gboolean _gotk4_gtk3_AboutDialog_activate_link(*C.GtkAboutDialog, *C.gchar);
-// C.gboolean _gotk4_gtk3_AboutDialog_virtual_activate_link(void* fnptr, *C.GtkAboutDialog carg0, *C.gchar carg1) {
-// 	return ((C.gboolean (*) (*C.GtkAboutDialog, *C.gchar))(fnptr))(carg0, carg1);
+// extern gboolean _gotk4_gtk3_AboutDialog_activate_link(GtkAboutDialog*, const gchar*);
+// gboolean _gotk4_gtk3_AboutDialog_virtual_activate_link(void* fnptr, GtkAboutDialog* carg0, const gchar* carg1) {
+// 	return ((gboolean (*) (GtkAboutDialog*, const gchar*))(fnptr))(carg0, carg1);
 // }
-// extern C.void _gotk4_gtk3_MenuToolButton_show_menu(*C.GtkMenuToolButton);
-// C.void _gotk4_gtk3_MenuToolButton_virtual_show_menu(void* fnptr, *C.GtkMenuToolButton carg0) {
-// 	return ((C.void (*) (*C.GtkMenuToolButton))(fnptr))(carg0);
+// extern void _gotk4_gtk3_MenuToolButton_show_menu(GtkMenuToolButton*);
+// void _gotk4_gtk3_MenuToolButton_virtual_show_menu(void* fnptr, GtkMenuToolButton* carg0) {
+// 	return ((void (*) (GtkMenuToolButton*))(fnptr))(carg0);
 // }
-// extern C.void _gotk4_gtk3_ToggleToolButton_toggled(*C.GtkToggleToolButton);
-// C.void _gotk4_gtk3_ToggleToolButton_virtual_toggled(void* fnptr, *C.GtkToggleToolButton carg0) {
-// 	return ((C.void (*) (*C.GtkToggleToolButton))(fnptr))(carg0);
+// extern void _gotk4_gtk3_ToggleToolButton_toggled(GtkToggleToolButton*);
+// void _gotk4_gtk3_ToggleToolButton_virtual_toggled(void* fnptr, GtkToggleToolButton* carg0) {
+// 	return ((void (*) (GtkToggleToolButton*))(fnptr))(carg0);
 // }
 import "C"
 
@@ -12191,7 +12191,7 @@ func RenderBackgroundGetClip(_context StyleContext, x float64, y float64, width 
 
 	_ = outClip
 	_ = carg6
-	panic("unimplemented conversion of gdk.Rectangle (C.GdkRectangle)")
+	panic("unimplemented conversion of gdk.Rectangle (GdkRectangle)")
 
 	return outClip
 }
@@ -12352,7 +12352,7 @@ func TargetTableFree(targets []TargetEntry) {
 	_ = targets
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []TargetEntry (*C.GtkTargetEntry)")
+	panic("unimplemented conversion of []TargetEntry (GtkTargetEntry*)")
 
 	C.gtk_target_table_free(carg1, carg2)
 	runtime.KeepAlive(targets)
@@ -12389,7 +12389,7 @@ func TargetTableNewFromList(list *TargetList) (int32, []TargetEntry) {
 	nTargets = int32(carg2)
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []TargetEntry (*C.GtkTargetEntry)")
+	panic("unimplemented conversion of []TargetEntry (GtkTargetEntry*)")
 
 	return nTargets, goret
 }
@@ -12534,7 +12534,7 @@ func TestListAllTypes() (uint, []gobject.Type) {
 	nTypes = uint(carg1)
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []gobject.Type (*C.GType)")
+	panic("unimplemented conversion of []gobject.Type (const GType*)")
 
 	return nTypes, goret
 }
@@ -14539,7 +14539,7 @@ func (parent *CellAccessibleParentInstance) GetCellArea(cell CellAccessible) gdk
 
 	_ = cellRect
 	_ = carg2
-	panic("unimplemented conversion of gdk.Rectangle (C.GdkRectangle)")
+	panic("unimplemented conversion of gdk.Rectangle (GdkRectangle)")
 
 	return cellRect
 }
@@ -14895,7 +14895,7 @@ func UnsafeApplyCellAccessibleParentOverrides[Instance CellAccessibleParent](gcl
 
 				_ = cellRect
 				_ = carg2
-				panic("unimplemented conversion of gdk.Rectangle (C.GdkRectangle)")
+				panic("unimplemented conversion of gdk.Rectangle (GdkRectangle)")
 			},
 		)
 	}
@@ -15122,7 +15122,7 @@ func (parent *CellAccessibleParentInstance) ParentGetCellArea(cell CellAccessibl
 
 	_ = cellRect
 	_ = carg2
-	panic("unimplemented conversion of gdk.Rectangle (C.GdkRectangle)")
+	panic("unimplemented conversion of gdk.Rectangle (GdkRectangle)")
 
 	return cellRect
 }
@@ -16352,7 +16352,7 @@ func UnsafeApplyCellLayoutOverrides[Instance CellLayout](gclass unsafe.Pointer, 
 
 				_ = goret
 				_ = cret
-				panic("unimplemented conversion of []CellRenderer (*C.GList)")
+				panic("unimplemented conversion of []CellRenderer (GList*)")
 
 				return cret
 			},
@@ -16866,7 +16866,7 @@ func (chooser *ColorChooserInstance) AddPalette(orientation Orientation, colorsP
 	_ = colors
 	_ = carg4
 	_ = carg3
-	panic("unimplemented conversion of []gdk.RGBA (*C.GdkRGBA)")
+	panic("unimplemented conversion of []gdk.RGBA (GdkRGBA*)")
 
 	C.gtk_color_chooser_add_palette(carg0, carg1, carg2, carg3, carg4)
 	runtime.KeepAlive(chooser)
@@ -16895,7 +16895,7 @@ func (chooser *ColorChooserInstance) GetRGBA() gdk.RGBA {
 
 	_ = color
 	_ = carg1
-	panic("unimplemented conversion of gdk.RGBA (C.GdkRGBA)")
+	panic("unimplemented conversion of gdk.RGBA (GdkRGBA)")
 
 	return color
 }
@@ -17051,7 +17051,7 @@ func UnsafeApplyColorChooserOverrides[Instance ColorChooser](gclass unsafe.Point
 				_ = colors
 				_ = carg4
 				_ = carg3
-				panic("unimplemented conversion of []gdk.RGBA (*C.GdkRGBA)")
+				panic("unimplemented conversion of []gdk.RGBA (GdkRGBA*)")
 
 				overrides.AddPalette(chooser, orientation, colorsPerLine, colors)
 			},
@@ -17090,7 +17090,7 @@ func UnsafeApplyColorChooserOverrides[Instance ColorChooser](gclass unsafe.Point
 
 				_ = color
 				_ = carg1
-				panic("unimplemented conversion of gdk.RGBA (C.GdkRGBA)")
+				panic("unimplemented conversion of gdk.RGBA (GdkRGBA)")
 			},
 		)
 	}
@@ -17154,7 +17154,7 @@ func (chooser *ColorChooserInstance) ParentAddPalette(orientation Orientation, c
 	_ = colors
 	_ = carg4
 	_ = carg3
-	panic("unimplemented conversion of []gdk.RGBA (*C.GdkRGBA)")
+	panic("unimplemented conversion of []gdk.RGBA (GdkRGBA*)")
 
 	C._gotk4_gtk3_ColorChooser_virtual_add_palette(unsafe.Pointer(parentclass.add_palette), carg0, carg1, carg2, carg3, carg4)
 	runtime.KeepAlive(chooser)
@@ -17203,7 +17203,7 @@ func (chooser *ColorChooserInstance) ParentGetRGBA() gdk.RGBA {
 
 	_ = color
 	_ = carg1
-	panic("unimplemented conversion of gdk.RGBA (C.GdkRGBA)")
+	panic("unimplemented conversion of gdk.RGBA (GdkRGBA)")
 
 	return color
 }
@@ -19604,10 +19604,10 @@ func (chooser *FileChooserInstance) AddChoice(id string, label string, options [
 	defer C.free(unsafe.Pointer(carg2))
 	_ = options
 	_ = carg3
-	panic("unimplemented conversion of []string (**C.char)")
+	panic("unimplemented conversion of []string (const char**)")
 	_ = optionLabels
 	_ = carg4
-	panic("unimplemented conversion of []string (**C.char)")
+	panic("unimplemented conversion of []string (const char**)")
 
 	C.gtk_file_chooser_add_choice(carg0, carg1, carg2, carg3, carg4)
 	runtime.KeepAlive(chooser)
@@ -24390,7 +24390,7 @@ func (chooser *RecentChooserInstance) GetURIs() (uint, []string) {
 	length = uint(carg1)
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (gchar**)")
 
 	return length, goret
 }
@@ -24972,7 +24972,7 @@ func UnsafeApplyRecentChooserOverrides[Instance RecentChooser](gclass unsafe.Poi
 
 				_ = goret
 				_ = cret
-				panic("unimplemented conversion of []*RecentInfo (*C.GList)")
+				panic("unimplemented conversion of []*RecentInfo (GList*)")
 
 				return cret
 			},
@@ -25009,7 +25009,7 @@ func UnsafeApplyRecentChooserOverrides[Instance RecentChooser](gclass unsafe.Poi
 
 				_ = goret
 				_ = cret
-				panic("unimplemented conversion of []RecentFilter (*C.GSList)")
+				panic("unimplemented conversion of []RecentFilter (GSList*)")
 
 				return cret
 			},
@@ -25652,7 +25652,7 @@ func (scrollable *ScrollableInstance) GetBorder() (Border, bool) {
 
 	_ = border
 	_ = carg1
-	panic("unimplemented conversion of Border (C.GtkBorder)")
+	panic("unimplemented conversion of Border (GtkBorder)")
 	if cret != 0 {
 		goret = true
 	}
@@ -25875,7 +25875,7 @@ func UnsafeApplyScrollableOverrides[Instance Scrollable](gclass unsafe.Pointer, 
 
 				_ = border
 				_ = carg1
-				panic("unimplemented conversion of Border (C.GtkBorder)")
+				panic("unimplemented conversion of Border (GtkBorder)")
 				if goret {
 					cret = C.TRUE
 				}
@@ -25914,7 +25914,7 @@ func (scrollable *ScrollableInstance) ParentGetBorder() (Border, bool) {
 
 	_ = border
 	_ = carg1
-	panic("unimplemented conversion of Border (C.GtkBorder)")
+	panic("unimplemented conversion of Border (GtkBorder)")
 	if cret != 0 {
 		goret = true
 	}
@@ -26057,7 +26057,7 @@ func (provider *StyleProviderInstance) GetStyleProperty(path *WidgetPath, state 
 
 	_ = value
 	_ = carg4
-	panic("unimplemented conversion of gobject.Value (C.GValue)")
+	panic("unimplemented conversion of gobject.Value (GValue)")
 	if cret != 0 {
 		goret = true
 	}
@@ -26113,7 +26113,7 @@ func UnsafeApplyStyleProviderOverrides[Instance StyleProvider](gclass unsafe.Poi
 
 				_ = value
 				_ = carg4
-				panic("unimplemented conversion of gobject.Value (C.GValue)")
+				panic("unimplemented conversion of gobject.Value (GValue)")
 				if goret {
 					cret = C.TRUE
 				}
@@ -26165,7 +26165,7 @@ func (provider *StyleProviderInstance) ParentGetStyleProperty(path *WidgetPath, 
 
 	_ = value
 	_ = carg4
-	panic("unimplemented conversion of gobject.Value (C.GValue)")
+	panic("unimplemented conversion of gobject.Value (GValue)")
 	if cret != 0 {
 		goret = true
 	}
@@ -29137,7 +29137,7 @@ func (treeModel *TreeModelInstance) GetIter(path *TreePath) (TreeIter, bool) {
 
 	_ = iter
 	_ = carg1
-	panic("unimplemented conversion of TreeIter (C.GtkTreeIter)")
+	panic("unimplemented conversion of TreeIter (GtkTreeIter)")
 	if cret != 0 {
 		goret = true
 	}
@@ -29170,7 +29170,7 @@ func (treeModel *TreeModelInstance) GetIterFirst() (TreeIter, bool) {
 
 	_ = iter
 	_ = carg1
-	panic("unimplemented conversion of TreeIter (C.GtkTreeIter)")
+	panic("unimplemented conversion of TreeIter (GtkTreeIter)")
 	if cret != 0 {
 		goret = true
 	}
@@ -29210,7 +29210,7 @@ func (treeModel *TreeModelInstance) GetIterFromString(pathString string) (TreeIt
 
 	_ = iter
 	_ = carg1
-	panic("unimplemented conversion of TreeIter (C.GtkTreeIter)")
+	panic("unimplemented conversion of TreeIter (GtkTreeIter)")
 	if cret != 0 {
 		goret = true
 	}
@@ -29342,7 +29342,7 @@ func (treeModel *TreeModelInstance) GetValue(iter *TreeIter, column int32) gobje
 
 	_ = value
 	_ = carg3
-	panic("unimplemented conversion of gobject.Value (C.GValue)")
+	panic("unimplemented conversion of gobject.Value (GValue)")
 
 	return value
 }
@@ -29386,7 +29386,7 @@ func (treeModel *TreeModelInstance) IterChildren(parent *TreeIter) (TreeIter, bo
 
 	_ = iter
 	_ = carg1
-	panic("unimplemented conversion of TreeIter (C.GtkTreeIter)")
+	panic("unimplemented conversion of TreeIter (GtkTreeIter)")
 	if cret != 0 {
 		goret = true
 	}
@@ -29538,7 +29538,7 @@ func (treeModel *TreeModelInstance) IterNthChild(parent *TreeIter, n int32) (Tre
 
 	_ = iter
 	_ = carg1
-	panic("unimplemented conversion of TreeIter (C.GtkTreeIter)")
+	panic("unimplemented conversion of TreeIter (GtkTreeIter)")
 	if cret != 0 {
 		goret = true
 	}
@@ -29584,7 +29584,7 @@ func (treeModel *TreeModelInstance) IterParent(child *TreeIter) (TreeIter, bool)
 
 	_ = iter
 	_ = carg1
-	panic("unimplemented conversion of TreeIter (C.GtkTreeIter)")
+	panic("unimplemented conversion of TreeIter (GtkTreeIter)")
 	if cret != 0 {
 		goret = true
 	}
@@ -29793,7 +29793,7 @@ func (treeModel *TreeModelInstance) RowsReorderedWithLength(path *TreePath, iter
 	_ = newOrder
 	_ = carg3
 	_ = carg4
-	panic("unimplemented conversion of []int32 (*C.gint)")
+	panic("unimplemented conversion of []int32 (gint*)")
 
 	C.gtk_tree_model_rows_reordered_with_length(carg0, carg1, carg2, carg3, carg4)
 	runtime.KeepAlive(treeModel)
@@ -30229,7 +30229,7 @@ func UnsafeApplyTreeModelOverrides[Instance TreeModel](gclass unsafe.Pointer, ov
 
 				_ = iter
 				_ = carg1
-				panic("unimplemented conversion of TreeIter (C.GtkTreeIter)")
+				panic("unimplemented conversion of TreeIter (GtkTreeIter)")
 				if goret {
 					cret = C.TRUE
 				}
@@ -30300,7 +30300,7 @@ func UnsafeApplyTreeModelOverrides[Instance TreeModel](gclass unsafe.Pointer, ov
 
 				_ = value
 				_ = carg3
-				panic("unimplemented conversion of gobject.Value (C.GValue)")
+				panic("unimplemented conversion of gobject.Value (GValue)")
 			},
 		)
 	}
@@ -30325,7 +30325,7 @@ func UnsafeApplyTreeModelOverrides[Instance TreeModel](gclass unsafe.Pointer, ov
 
 				_ = iter
 				_ = carg1
-				panic("unimplemented conversion of TreeIter (C.GtkTreeIter)")
+				panic("unimplemented conversion of TreeIter (GtkTreeIter)")
 				if goret {
 					cret = C.TRUE
 				}
@@ -30429,7 +30429,7 @@ func UnsafeApplyTreeModelOverrides[Instance TreeModel](gclass unsafe.Pointer, ov
 
 				_ = iter
 				_ = carg1
-				panic("unimplemented conversion of TreeIter (C.GtkTreeIter)")
+				panic("unimplemented conversion of TreeIter (GtkTreeIter)")
 				if goret {
 					cret = C.TRUE
 				}
@@ -30457,7 +30457,7 @@ func UnsafeApplyTreeModelOverrides[Instance TreeModel](gclass unsafe.Pointer, ov
 
 				_ = iter
 				_ = carg1
-				panic("unimplemented conversion of TreeIter (C.GtkTreeIter)")
+				panic("unimplemented conversion of TreeIter (GtkTreeIter)")
 				if goret {
 					cret = C.TRUE
 				}
@@ -30693,7 +30693,7 @@ func (treeModel *TreeModelInstance) ParentGetIter(path *TreePath) (TreeIter, boo
 
 	_ = iter
 	_ = carg1
-	panic("unimplemented conversion of TreeIter (C.GtkTreeIter)")
+	panic("unimplemented conversion of TreeIter (GtkTreeIter)")
 	if cret != 0 {
 		goret = true
 	}
@@ -30795,7 +30795,7 @@ func (treeModel *TreeModelInstance) ParentGetValue(iter *TreeIter, column int32)
 
 	_ = value
 	_ = carg3
-	panic("unimplemented conversion of gobject.Value (C.GValue)")
+	panic("unimplemented conversion of gobject.Value (GValue)")
 
 	return value
 }
@@ -30841,7 +30841,7 @@ func (treeModel *TreeModelInstance) ParentIterChildren(parent *TreeIter) (TreeIt
 
 	_ = iter
 	_ = carg1
-	panic("unimplemented conversion of TreeIter (C.GtkTreeIter)")
+	panic("unimplemented conversion of TreeIter (GtkTreeIter)")
 	if cret != 0 {
 		goret = true
 	}
@@ -31001,7 +31001,7 @@ func (treeModel *TreeModelInstance) ParentIterNthChild(parent *TreeIter, n int32
 
 	_ = iter
 	_ = carg1
-	panic("unimplemented conversion of TreeIter (C.GtkTreeIter)")
+	panic("unimplemented conversion of TreeIter (GtkTreeIter)")
 	if cret != 0 {
 		goret = true
 	}
@@ -31049,7 +31049,7 @@ func (treeModel *TreeModelInstance) ParentIterParent(child *TreeIter) (TreeIter,
 
 	_ = iter
 	_ = carg1
-	panic("unimplemented conversion of TreeIter (C.GtkTreeIter)")
+	panic("unimplemented conversion of TreeIter (GtkTreeIter)")
 	if cret != 0 {
 		goret = true
 	}
@@ -32244,7 +32244,7 @@ func (accelGroup *AccelGroupInstance) Query(accelKey uint, accelMods gdk.Modifie
 	nEntries = uint(carg3)
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []AccelGroupEntry (*C.GtkAccelGroupEntry)")
+	panic("unimplemented conversion of []AccelGroupEntry (GtkAccelGroupEntry*)")
 
 	return nEntries, goret
 }
@@ -32672,7 +32672,7 @@ func AccelMapLookupEntry(accelPath string) (AccelKey, bool) {
 
 	_ = key
 	_ = carg2
-	panic("unimplemented conversion of AccelKey (C.GtkAccelKey)")
+	panic("unimplemented conversion of AccelKey (GtkAccelKey)")
 	if cret != 0 {
 		goret = true
 	}
@@ -34865,7 +34865,7 @@ func (application *ApplicationInstance) GetAccelsForAction(detailedActionName st
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (gchar**)")
 
 	return goret
 }
@@ -34912,7 +34912,7 @@ func (application *ApplicationInstance) GetActionsForAccel(accel string) []strin
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (gchar**)")
 
 	return goret
 }
@@ -35224,7 +35224,7 @@ func (application *ApplicationInstance) ListActionDescriptions() []string {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (gchar**)")
 
 	return goret
 }
@@ -35341,7 +35341,7 @@ func (application *ApplicationInstance) SetAccelsForAction(detailedActionName st
 	defer C.free(unsafe.Pointer(carg1))
 	_ = accels
 	_ = carg2
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (const gchar* const*)")
 
 	C.gtk_application_set_accels_for_action(carg0, carg1, carg2)
 	runtime.KeepAlive(application)
@@ -36499,7 +36499,7 @@ func (builder *BuilderInstance) AddObjectsFromFile(filename string, objectIds []
 	defer C.free(unsafe.Pointer(carg1))
 	_ = objectIds
 	_ = carg2
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (gchar**)")
 
 	cret = C.gtk_builder_add_objects_from_file(carg0, carg1, carg2, &_cerr)
 	runtime.KeepAlive(builder)
@@ -36552,7 +36552,7 @@ func (builder *BuilderInstance) AddObjectsFromResource(resourcePath string, obje
 	defer C.free(unsafe.Pointer(carg1))
 	_ = objectIds
 	_ = carg2
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (gchar**)")
 
 	cret = C.gtk_builder_add_objects_from_resource(carg0, carg1, carg2, &_cerr)
 	runtime.KeepAlive(builder)
@@ -36607,7 +36607,7 @@ func (builder *BuilderInstance) AddObjectsFromString(buffer string, length uint,
 	carg2 = C.gsize(length)
 	_ = objectIds
 	_ = carg3
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (gchar**)")
 
 	cret = C.gtk_builder_add_objects_from_string(carg0, carg1, carg2, carg3, &_cerr)
 	runtime.KeepAlive(builder)
@@ -36975,7 +36975,7 @@ func (builder *BuilderInstance) ValueFromString(pspec *gobject.ParamSpec, str st
 
 	_ = value
 	_ = carg3
-	panic("unimplemented conversion of gobject.Value (C.GValue)")
+	panic("unimplemented conversion of gobject.Value (GValue)")
 	if cret != 0 {
 		goret = true
 	}
@@ -37030,7 +37030,7 @@ func (builder *BuilderInstance) ValueFromStringType(typ gobject.Type, str string
 
 	_ = value
 	_ = carg3
-	panic("unimplemented conversion of gobject.Value (C.GValue)")
+	panic("unimplemented conversion of gobject.Value (GValue)")
 	if cret != 0 {
 		goret = true
 	}
@@ -38982,7 +38982,7 @@ func (area *CellAreaInstance) GetCellAllocation(_context CellAreaContext, widget
 
 	_ = allocation
 	_ = carg5
-	panic("unimplemented conversion of gdk.Rectangle (C.GdkRectangle)")
+	panic("unimplemented conversion of gdk.Rectangle (GdkRectangle)")
 
 	return allocation
 }
@@ -39036,7 +39036,7 @@ func (area *CellAreaInstance) GetCellAtPosition(_context CellAreaContext, widget
 
 	_ = allocArea
 	_ = carg6
-	panic("unimplemented conversion of gdk.Rectangle (C.GdkRectangle)")
+	panic("unimplemented conversion of gdk.Rectangle (GdkRectangle)")
 	goret = UnsafeCellRendererFromGlibNone(unsafe.Pointer(cret))
 
 	return allocArea, goret
@@ -39503,7 +39503,7 @@ func (area *CellAreaInstance) InnerCellArea(widget Widget, cellArea *gdk.Rectang
 
 	_ = innerArea
 	_ = carg3
-	panic("unimplemented conversion of gdk.Rectangle (C.GdkRectangle)")
+	panic("unimplemented conversion of gdk.Rectangle (GdkRectangle)")
 
 	return innerArea
 }
@@ -42797,7 +42797,7 @@ func (cell *CellRendererInstance) GetAlignedArea(widget Widget, flags CellRender
 
 	_ = alignedArea
 	_ = carg4
-	panic("unimplemented conversion of gdk.Rectangle (C.GdkRectangle)")
+	panic("unimplemented conversion of gdk.Rectangle (GdkRectangle)")
 
 	return alignedArea
 }
@@ -42987,10 +42987,10 @@ func (cell *CellRendererInstance) GetPreferredSize(widget Widget) (Requisition, 
 
 	_ = minimumSize
 	_ = carg2
-	panic("unimplemented conversion of Requisition (C.GtkRequisition)")
+	panic("unimplemented conversion of Requisition (GtkRequisition)")
 	_ = naturalSize
 	_ = carg3
-	panic("unimplemented conversion of Requisition (C.GtkRequisition)")
+	panic("unimplemented conversion of Requisition (GtkRequisition)")
 
 	return minimumSize, naturalSize
 }
@@ -43553,7 +43553,7 @@ func UnsafeApplyCellRendererOverrides[Instance CellRenderer](gclass unsafe.Point
 
 				_ = alignedArea
 				_ = carg4
-				panic("unimplemented conversion of gdk.Rectangle (C.GdkRectangle)")
+				panic("unimplemented conversion of gdk.Rectangle (GdkRectangle)")
 			},
 		)
 	}
@@ -43749,7 +43749,7 @@ func (cell *CellRendererInstance) ParentGetAlignedArea(widget Widget, flags Cell
 
 	_ = alignedArea
 	_ = carg4
-	panic("unimplemented conversion of gdk.Rectangle (C.GdkRectangle)")
+	panic("unimplemented conversion of gdk.Rectangle (GdkRectangle)")
 
 	return alignedArea
 }
@@ -45545,7 +45545,7 @@ func (clipboard *ClipboardInstance) SetCanStore(targets []TargetEntry) {
 	_ = targets
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []TargetEntry (*C.GtkTargetEntry)")
+	panic("unimplemented conversion of []TargetEntry (const GtkTargetEntry*)")
 
 	C.gtk_clipboard_set_can_store(carg0, carg1, carg2)
 	runtime.KeepAlive(clipboard)
@@ -45694,7 +45694,7 @@ func (clipboard *ClipboardInstance) WaitForURIs() []string {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (gchar**)")
 
 	return goret
 }
@@ -46331,7 +46331,7 @@ func (cssProvider *CssProviderInstance) LoadFromData(data string) (bool, error) 
 	_ = data
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of string (*C.gchar)")
+	panic("unimplemented conversion of string (const gchar*)")
 
 	cret = C.gtk_css_provider_load_from_data(carg0, carg1, carg2, &_cerr)
 	runtime.KeepAlive(cssProvider)
@@ -47377,7 +47377,7 @@ func UnsafeApplyEntryBufferOverrides[Instance EntryBuffer](gclass unsafe.Pointer
 				buffer = UnsafeEntryBufferFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				_ = nBytes
 				_ = carg1
-				panic("unimplemented conversion of *uint (*C.gsize)")
+				panic("unimplemented conversion of *uint (gsize*)")
 
 				goret = overrides.GetText(buffer, nBytes)
 
@@ -47546,7 +47546,7 @@ func (buffer *EntryBufferInstance) ParentGetText(nBytes *uint) string {
 
 	_ = nBytes
 	_ = carg1
-	panic("unimplemented conversion of *uint (*C.gsize)")
+	panic("unimplemented conversion of *uint (gsize*)")
 
 	cret = C._gotk4_gtk3_EntryBuffer_virtual_get_text(unsafe.Pointer(parentclass.get_text), carg0, carg1)
 	runtime.KeepAlive(buffer)
@@ -50850,7 +50850,7 @@ func (gesture *GestureInstance) GetBoundingBox() (gdk.Rectangle, bool) {
 
 	_ = rect
 	_ = carg1
-	panic("unimplemented conversion of gdk.Rectangle (C.GdkRectangle)")
+	panic("unimplemented conversion of gdk.Rectangle (GdkRectangle)")
 	if cret != 0 {
 		goret = true
 	}
@@ -56313,7 +56313,7 @@ func (iconTheme *IconThemeInstance) ChooseIcon(iconNames []string, size int32, f
 	carg0 = (*C.GtkIconTheme)(UnsafeIconThemeToGlibNone(iconTheme))
 	_ = iconNames
 	_ = carg1
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (const gchar**)")
 	carg2 = C.gint(size)
 	carg3 = C.GtkIconLookupFlags(flags)
 
@@ -56366,7 +56366,7 @@ func (iconTheme *IconThemeInstance) ChooseIconForScale(iconNames []string, size 
 	carg0 = (*C.GtkIconTheme)(UnsafeIconThemeToGlibNone(iconTheme))
 	_ = iconNames
 	_ = carg1
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (const gchar**)")
 	carg2 = C.gint(size)
 	carg3 = C.gint(scale)
 	carg4 = C.GtkIconLookupFlags(flags)
@@ -56446,7 +56446,7 @@ func (iconTheme *IconThemeInstance) GetIconSizes(iconName string) []int32 {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []int32 (*C.gint)")
+	panic("unimplemented conversion of []int32 (gint*)")
 
 	return goret
 }
@@ -56476,7 +56476,7 @@ func (iconTheme *IconThemeInstance) GetSearchPath() ([]string) {
 	_ = path
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (gchar**)")
 
 	return path
 }
@@ -57040,7 +57040,7 @@ func (iconTheme *IconThemeInstance) SetSearchPath(path []string) {
 	_ = path
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (const gchar**)")
 
 	C.gtk_icon_theme_set_search_path(carg0, carg1, carg2)
 	runtime.KeepAlive(iconTheme)
@@ -57544,7 +57544,7 @@ func NewListStorev(types []gobject.Type) ListStore {
 	_ = types
 	_ = carg2
 	_ = carg1
-	panic("unimplemented conversion of []gobject.Type (*C.GType)")
+	panic("unimplemented conversion of []gobject.Type (GType*)")
 
 	cret = C.gtk_list_store_newv(carg1, carg2)
 	runtime.KeepAlive(types)
@@ -57578,7 +57578,7 @@ func (listStore *ListStoreInstance) Append() TreeIter {
 
 	_ = iter
 	_ = carg1
-	panic("unimplemented conversion of TreeIter (C.GtkTreeIter)")
+	panic("unimplemented conversion of TreeIter (GtkTreeIter)")
 
 	return iter
 }
@@ -57626,7 +57626,7 @@ func (listStore *ListStoreInstance) Insert(position int32) TreeIter {
 
 	_ = iter
 	_ = carg1
-	panic("unimplemented conversion of TreeIter (C.GtkTreeIter)")
+	panic("unimplemented conversion of TreeIter (GtkTreeIter)")
 
 	return iter
 }
@@ -57663,7 +57663,7 @@ func (listStore *ListStoreInstance) InsertAfter(sibling *TreeIter) TreeIter {
 
 	_ = iter
 	_ = carg1
-	panic("unimplemented conversion of TreeIter (C.GtkTreeIter)")
+	panic("unimplemented conversion of TreeIter (GtkTreeIter)")
 
 	return iter
 }
@@ -57700,7 +57700,7 @@ func (listStore *ListStoreInstance) InsertBefore(sibling *TreeIter) TreeIter {
 
 	_ = iter
 	_ = carg1
-	panic("unimplemented conversion of TreeIter (C.GtkTreeIter)")
+	panic("unimplemented conversion of TreeIter (GtkTreeIter)")
 
 	return iter
 }
@@ -57734,11 +57734,11 @@ func (listStore *ListStoreInstance) InsertWithValuesv(position int32, columns []
 	_ = columns
 	_ = carg3
 	_ = carg5
-	panic("unimplemented conversion of []int32 (*C.gint)")
+	panic("unimplemented conversion of []int32 (gint*)")
 	_ = values
 	_ = carg4
 	_ = carg5
-	panic("unimplemented conversion of []gobject.Value (*C.GValue)")
+	panic("unimplemented conversion of []gobject.Value (GValue*)")
 
 	C.gtk_list_store_insert_with_valuesv(carg0, &carg1, carg2, carg3, carg4, carg5)
 	runtime.KeepAlive(listStore)
@@ -57750,7 +57750,7 @@ func (listStore *ListStoreInstance) InsertWithValuesv(position int32, columns []
 
 	_ = iter
 	_ = carg1
-	panic("unimplemented conversion of TreeIter (C.GtkTreeIter)")
+	panic("unimplemented conversion of TreeIter (GtkTreeIter)")
 
 	return iter
 }
@@ -57866,7 +57866,7 @@ func (listStore *ListStoreInstance) Prepend() TreeIter {
 
 	_ = iter
 	_ = carg1
-	panic("unimplemented conversion of TreeIter (C.GtkTreeIter)")
+	panic("unimplemented conversion of TreeIter (GtkTreeIter)")
 
 	return iter
 }
@@ -57923,7 +57923,7 @@ func (store *ListStoreInstance) Reorder(newOrder []int32) {
 	carg0 = (*C.GtkListStore)(UnsafeListStoreToGlibNone(store))
 	_ = newOrder
 	_ = carg1
-	panic("unimplemented conversion of []int32 (*C.gint)")
+	panic("unimplemented conversion of []int32 (gint*)")
 
 	C.gtk_list_store_reorder(carg0, carg1)
 	runtime.KeepAlive(store)
@@ -57949,7 +57949,7 @@ func (listStore *ListStoreInstance) SetColumnTypes(types []gobject.Type) {
 	_ = types
 	_ = carg2
 	_ = carg1
-	panic("unimplemented conversion of []gobject.Type (*C.GType)")
+	panic("unimplemented conversion of []gobject.Type (GType*)")
 
 	C.gtk_list_store_set_column_types(carg0, carg1, carg2)
 	runtime.KeepAlive(listStore)
@@ -58010,11 +58010,11 @@ func (listStore *ListStoreInstance) SetValuesv(iter *TreeIter, columns []int32, 
 	_ = columns
 	_ = carg2
 	_ = carg4
-	panic("unimplemented conversion of []int32 (*C.gint)")
+	panic("unimplemented conversion of []int32 (gint*)")
 	_ = values
 	_ = carg3
 	_ = carg4
-	panic("unimplemented conversion of []gobject.Value (*C.GValue)")
+	panic("unimplemented conversion of []gobject.Value (GValue*)")
 
 	C.gtk_list_store_set_valuesv(carg0, carg1, carg2, carg3, carg4)
 	runtime.KeepAlive(listStore)
@@ -59565,7 +59565,7 @@ func (controller *PadControllerInstance) SetActionEntries(entries []PadActionEnt
 	_ = entries
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []PadActionEntry (*C.GtkPadActionEntry)")
+	panic("unimplemented conversion of []PadActionEntry (const GtkPadActionEntry*)")
 
 	C.gtk_pad_controller_set_action_entries(carg0, carg1, carg2)
 	runtime.KeepAlive(controller)
@@ -64829,7 +64829,7 @@ func (settings *PrintSettingsInstance) GetPageRanges() (int32, []PageRange) {
 	numRanges = int32(carg1)
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []PageRange (*C.GtkPageRange)")
+	panic("unimplemented conversion of []PageRange (GtkPageRange*)")
 
 	return numRanges, goret
 }
@@ -65663,7 +65663,7 @@ func (settings *PrintSettingsInstance) SetPageRanges(pageRanges []PageRange) {
 	_ = pageRanges
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []PageRange (*C.GtkPageRange)")
+	panic("unimplemented conversion of []PageRange (GtkPageRange*)")
 
 	C.gtk_print_settings_set_page_ranges(carg0, carg1, carg2)
 	runtime.KeepAlive(settings)
@@ -69253,7 +69253,7 @@ func (style *StyleInstance) GetStyleProperty(widgetType gobject.Type, propertyNa
 
 	_ = value
 	_ = carg3
-	panic("unimplemented conversion of gobject.Value (C.GValue)")
+	panic("unimplemented conversion of gobject.Value (GValue)")
 
 	return value
 }
@@ -70212,7 +70212,7 @@ func (_context *StyleContextInstance) GetBorder(state StateFlags) Border {
 
 	_ = border
 	_ = carg2
-	panic("unimplemented conversion of Border (C.GtkBorder)")
+	panic("unimplemented conversion of Border (GtkBorder)")
 
 	return border
 }
@@ -70247,7 +70247,7 @@ func (_context *StyleContextInstance) GetColor(state StateFlags) gdk.RGBA {
 
 	_ = color
 	_ = carg2
-	panic("unimplemented conversion of gdk.RGBA (C.GdkRGBA)")
+	panic("unimplemented conversion of gdk.RGBA (GdkRGBA)")
 
 	return color
 }
@@ -70329,7 +70329,7 @@ func (_context *StyleContextInstance) GetMargin(state StateFlags) Border {
 
 	_ = margin
 	_ = carg2
-	panic("unimplemented conversion of Border (C.GtkBorder)")
+	panic("unimplemented conversion of Border (GtkBorder)")
 
 	return margin
 }
@@ -70363,7 +70363,7 @@ func (_context *StyleContextInstance) GetPadding(state StateFlags) Border {
 
 	_ = padding
 	_ = carg2
-	panic("unimplemented conversion of Border (C.GtkBorder)")
+	panic("unimplemented conversion of Border (GtkBorder)")
 
 	return padding
 }
@@ -70461,7 +70461,7 @@ func (_context *StyleContextInstance) GetProperty(property string, state StateFl
 
 	_ = value
 	_ = carg3
-	panic("unimplemented conversion of gobject.Value (C.GValue)")
+	panic("unimplemented conversion of gobject.Value (GValue)")
 
 	return value
 }
@@ -70706,7 +70706,7 @@ func (_context *StyleContextInstance) LookupColor(colorName string) (gdk.RGBA, b
 
 	_ = color
 	_ = carg2
-	panic("unimplemented conversion of gdk.RGBA (C.GdkRGBA)")
+	panic("unimplemented conversion of gdk.RGBA (GdkRGBA)")
 	if cret != 0 {
 		goret = true
 	}
@@ -72915,10 +72915,10 @@ func (buffer *TextBufferInstance) GetBounds() (TextIter, TextIter) {
 
 	_ = start
 	_ = carg1
-	panic("unimplemented conversion of TextIter (C.GtkTextIter)")
+	panic("unimplemented conversion of TextIter (GtkTextIter)")
 	_ = end
 	_ = carg2
-	panic("unimplemented conversion of TextIter (C.GtkTextIter)")
+	panic("unimplemented conversion of TextIter (GtkTextIter)")
 
 	return start, end
 }
@@ -73001,7 +73001,7 @@ func (buffer *TextBufferInstance) GetEndIter() TextIter {
 
 	_ = iter
 	_ = carg1
-	panic("unimplemented conversion of TextIter (C.GtkTextIter)")
+	panic("unimplemented conversion of TextIter (GtkTextIter)")
 
 	return iter
 }
@@ -73084,7 +73084,7 @@ func (buffer *TextBufferInstance) GetIterAtChildAnchor(anchor TextChildAnchor) T
 
 	_ = iter
 	_ = carg1
-	panic("unimplemented conversion of TextIter (C.GtkTextIter)")
+	panic("unimplemented conversion of TextIter (GtkTextIter)")
 
 	return iter
 }
@@ -73117,7 +73117,7 @@ func (buffer *TextBufferInstance) GetIterAtLine(lineNumber int32) TextIter {
 
 	_ = iter
 	_ = carg1
-	panic("unimplemented conversion of TextIter (C.GtkTextIter)")
+	panic("unimplemented conversion of TextIter (GtkTextIter)")
 
 	return iter
 }
@@ -73161,7 +73161,7 @@ func (buffer *TextBufferInstance) GetIterAtLineIndex(lineNumber int32, byteIndex
 
 	_ = iter
 	_ = carg1
-	panic("unimplemented conversion of TextIter (C.GtkTextIter)")
+	panic("unimplemented conversion of TextIter (GtkTextIter)")
 
 	return iter
 }
@@ -73204,7 +73204,7 @@ func (buffer *TextBufferInstance) GetIterAtLineOffset(lineNumber int32, charOffs
 
 	_ = iter
 	_ = carg1
-	panic("unimplemented conversion of TextIter (C.GtkTextIter)")
+	panic("unimplemented conversion of TextIter (GtkTextIter)")
 
 	return iter
 }
@@ -73236,7 +73236,7 @@ func (buffer *TextBufferInstance) GetIterAtMark(mark TextMark) TextIter {
 
 	_ = iter
 	_ = carg1
-	panic("unimplemented conversion of TextIter (C.GtkTextIter)")
+	panic("unimplemented conversion of TextIter (GtkTextIter)")
 
 	return iter
 }
@@ -73271,7 +73271,7 @@ func (buffer *TextBufferInstance) GetIterAtOffset(charOffset int32) TextIter {
 
 	_ = iter
 	_ = carg1
-	panic("unimplemented conversion of TextIter (C.GtkTextIter)")
+	panic("unimplemented conversion of TextIter (GtkTextIter)")
 
 	return iter
 }
@@ -73453,10 +73453,10 @@ func (buffer *TextBufferInstance) GetSelectionBounds() (TextIter, TextIter, bool
 
 	_ = start
 	_ = carg1
-	panic("unimplemented conversion of TextIter (C.GtkTextIter)")
+	panic("unimplemented conversion of TextIter (GtkTextIter)")
 	_ = end
 	_ = carg2
-	panic("unimplemented conversion of TextIter (C.GtkTextIter)")
+	panic("unimplemented conversion of TextIter (GtkTextIter)")
 	if cret != 0 {
 		goret = true
 	}
@@ -73536,7 +73536,7 @@ func (buffer *TextBufferInstance) GetStartIter() TextIter {
 
 	_ = iter
 	_ = carg1
-	panic("unimplemented conversion of TextIter (C.GtkTextIter)")
+	panic("unimplemented conversion of TextIter (GtkTextIter)")
 
 	return iter
 }
@@ -77697,7 +77697,7 @@ func (filter *TreeModelFilterInstance) ConvertChildIterToIter(childIter *TreeIte
 
 	_ = filterIter
 	_ = carg1
-	panic("unimplemented conversion of TreeIter (C.GtkTreeIter)")
+	panic("unimplemented conversion of TreeIter (GtkTreeIter)")
 	if cret != 0 {
 		goret = true
 	}
@@ -77768,7 +77768,7 @@ func (filter *TreeModelFilterInstance) ConvertIterToChildIter(filterIter *TreeIt
 
 	_ = childIter
 	_ = carg1
-	panic("unimplemented conversion of TreeIter (C.GtkTreeIter)")
+	panic("unimplemented conversion of TreeIter (GtkTreeIter)")
 
 	return childIter
 }
@@ -77873,7 +77873,7 @@ func (filter *TreeModelFilterInstance) SetModifyFunc(types []gobject.Type, fn Tr
 	_ = types
 	_ = carg2
 	_ = carg1
-	panic("unimplemented conversion of []gobject.Type (*C.GType)")
+	panic("unimplemented conversion of []gobject.Type (GType*)")
 	carg3 = (*[0]byte)(C._gotk4_gtk3_TreeModelFilterModifyFunc)
 	carg4 = C.gpointer(userdata.Register(fn))
 	carg5 = (C.GDestroyNotify)((*[0]byte)(C.destroyUserdata))
@@ -78469,7 +78469,7 @@ func (treeModelSort *TreeModelSortInstance) ConvertChildIterToIter(childIter *Tr
 
 	_ = sortIter
 	_ = carg1
-	panic("unimplemented conversion of TreeIter (C.GtkTreeIter)")
+	panic("unimplemented conversion of TreeIter (GtkTreeIter)")
 	if cret != 0 {
 		goret = true
 	}
@@ -78539,7 +78539,7 @@ func (treeModelSort *TreeModelSortInstance) ConvertIterToChildIter(sortedIter *T
 
 	_ = childIter
 	_ = carg1
-	panic("unimplemented conversion of TreeIter (C.GtkTreeIter)")
+	panic("unimplemented conversion of TreeIter (GtkTreeIter)")
 
 	return childIter
 }
@@ -79053,7 +79053,7 @@ func (selection *TreeSelectionInstance) GetSelected() (TreeModel, TreeIter, bool
 	model = UnsafeTreeModelFromGlibNone(unsafe.Pointer(carg1))
 	_ = iter
 	_ = carg2
-	panic("unimplemented conversion of TreeIter (C.GtkTreeIter)")
+	panic("unimplemented conversion of TreeIter (GtkTreeIter)")
 	if cret != 0 {
 		goret = true
 	}
@@ -79845,7 +79845,7 @@ func NewTreeStorev(types []gobject.Type) TreeStore {
 	_ = types
 	_ = carg2
 	_ = carg1
-	panic("unimplemented conversion of []gobject.Type (*C.GType)")
+	panic("unimplemented conversion of []gobject.Type (GType*)")
 
 	cret = C.gtk_tree_store_newv(carg1, carg2)
 	runtime.KeepAlive(types)
@@ -79890,7 +79890,7 @@ func (treeStore *TreeStoreInstance) Append(parent *TreeIter) TreeIter {
 
 	_ = iter
 	_ = carg1
-	panic("unimplemented conversion of TreeIter (C.GtkTreeIter)")
+	panic("unimplemented conversion of TreeIter (GtkTreeIter)")
 
 	return iter
 }
@@ -79946,7 +79946,7 @@ func (treeStore *TreeStoreInstance) Insert(parent *TreeIter, position int32) Tre
 
 	_ = iter
 	_ = carg1
-	panic("unimplemented conversion of TreeIter (C.GtkTreeIter)")
+	panic("unimplemented conversion of TreeIter (GtkTreeIter)")
 
 	return iter
 }
@@ -79994,7 +79994,7 @@ func (treeStore *TreeStoreInstance) InsertAfter(parent *TreeIter, sibling *TreeI
 
 	_ = iter
 	_ = carg1
-	panic("unimplemented conversion of TreeIter (C.GtkTreeIter)")
+	panic("unimplemented conversion of TreeIter (GtkTreeIter)")
 
 	return iter
 }
@@ -80042,7 +80042,7 @@ func (treeStore *TreeStoreInstance) InsertBefore(parent *TreeIter, sibling *Tree
 
 	_ = iter
 	_ = carg1
-	panic("unimplemented conversion of TreeIter (C.GtkTreeIter)")
+	panic("unimplemented conversion of TreeIter (GtkTreeIter)")
 
 	return iter
 }
@@ -80080,11 +80080,11 @@ func (treeStore *TreeStoreInstance) InsertWithValuesv(parent *TreeIter, position
 	_ = columns
 	_ = carg4
 	_ = carg6
-	panic("unimplemented conversion of []int32 (*C.gint)")
+	panic("unimplemented conversion of []int32 (gint*)")
 	_ = values
 	_ = carg5
 	_ = carg6
-	panic("unimplemented conversion of []gobject.Value (*C.GValue)")
+	panic("unimplemented conversion of []gobject.Value (GValue*)")
 
 	C.gtk_tree_store_insert_with_valuesv(carg0, &carg1, carg2, carg3, carg4, carg5, carg6)
 	runtime.KeepAlive(treeStore)
@@ -80097,7 +80097,7 @@ func (treeStore *TreeStoreInstance) InsertWithValuesv(parent *TreeIter, position
 
 	_ = iter
 	_ = carg1
-	panic("unimplemented conversion of TreeIter (C.GtkTreeIter)")
+	panic("unimplemented conversion of TreeIter (GtkTreeIter)")
 
 	return iter
 }
@@ -80294,7 +80294,7 @@ func (treeStore *TreeStoreInstance) Prepend(parent *TreeIter) TreeIter {
 
 	_ = iter
 	_ = carg1
-	panic("unimplemented conversion of TreeIter (C.GtkTreeIter)")
+	panic("unimplemented conversion of TreeIter (GtkTreeIter)")
 
 	return iter
 }
@@ -80352,7 +80352,7 @@ func (treeStore *TreeStoreInstance) SetColumnTypes(types []gobject.Type) {
 	_ = types
 	_ = carg2
 	_ = carg1
-	panic("unimplemented conversion of []gobject.Type (*C.GType)")
+	panic("unimplemented conversion of []gobject.Type (GType*)")
 
 	C.gtk_tree_store_set_column_types(carg0, carg1, carg2)
 	runtime.KeepAlive(treeStore)
@@ -80412,11 +80412,11 @@ func (treeStore *TreeStoreInstance) SetValuesv(iter *TreeIter, columns []int32, 
 	_ = columns
 	_ = carg2
 	_ = carg4
-	panic("unimplemented conversion of []int32 (*C.gint)")
+	panic("unimplemented conversion of []int32 (gint*)")
 	_ = values
 	_ = carg3
 	_ = carg4
-	panic("unimplemented conversion of []gobject.Value (*C.GValue)")
+	panic("unimplemented conversion of []gobject.Value (GValue*)")
 
 	C.gtk_tree_store_set_valuesv(carg0, carg1, carg2, carg3, carg4)
 	runtime.KeepAlive(treeStore)
@@ -88616,7 +88616,7 @@ func (widget *WidgetInstance) DragDestSet(flags DestDefaults, targets []TargetEn
 	_ = targets
 	_ = carg2
 	_ = carg3
-	panic("unimplemented conversion of []TargetEntry (*C.GtkTargetEntry)")
+	panic("unimplemented conversion of []TargetEntry (const GtkTargetEntry*)")
 	carg4 = C.GdkDragAction(actions)
 
 	C.gtk_drag_dest_set(carg0, carg1, carg2, carg3, carg4)
@@ -88800,7 +88800,7 @@ func (widget *WidgetInstance) DragSourceSet(startButtonMask gdk.ModifierType, ta
 	_ = targets
 	_ = carg2
 	_ = carg3
-	panic("unimplemented conversion of []TargetEntry (*C.GtkTargetEntry)")
+	panic("unimplemented conversion of []TargetEntry (const GtkTargetEntry*)")
 	carg4 = C.GdkDragAction(actions)
 
 	C.gtk_drag_source_set(carg0, carg1, carg2, carg3, carg4)
@@ -89107,7 +89107,7 @@ func (widget *WidgetInstance) GetAllocatedSize() (Allocation, int32) {
 
 	_ = allocation
 	_ = carg1
-	panic("unimplemented conversion of Allocation (C.GtkAllocation)")
+	panic("unimplemented conversion of Allocation (GtkAllocation)")
 	baseline = int32(carg2)
 
 	return allocation, baseline
@@ -89173,7 +89173,7 @@ func (widget *WidgetInstance) GetAllocation() Allocation {
 
 	_ = allocation
 	_ = carg1
-	panic("unimplemented conversion of Allocation (C.GtkAllocation)")
+	panic("unimplemented conversion of Allocation (GtkAllocation)")
 
 	return allocation
 }
@@ -89354,7 +89354,7 @@ func (widget *WidgetInstance) GetClip() Allocation {
 
 	_ = clip
 	_ = carg1
-	panic("unimplemented conversion of Allocation (C.GtkAllocation)")
+	panic("unimplemented conversion of Allocation (GtkAllocation)")
 
 	return clip
 }
@@ -90272,10 +90272,10 @@ func (widget *WidgetInstance) GetPreferredSize() (Requisition, Requisition) {
 
 	_ = minimumSize
 	_ = carg1
-	panic("unimplemented conversion of Requisition (C.GtkRequisition)")
+	panic("unimplemented conversion of Requisition (GtkRequisition)")
 	_ = naturalSize
 	_ = carg2
-	panic("unimplemented conversion of Requisition (C.GtkRequisition)")
+	panic("unimplemented conversion of Requisition (GtkRequisition)")
 
 	return minimumSize, naturalSize
 }
@@ -91409,7 +91409,7 @@ func (widget *WidgetInstance) Intersect(area *gdk.Rectangle) (gdk.Rectangle, boo
 
 	_ = intersection
 	_ = carg2
-	panic("unimplemented conversion of gdk.Rectangle (C.GdkRectangle)")
+	panic("unimplemented conversion of gdk.Rectangle (GdkRectangle)")
 	if cret != 0 {
 		goret = true
 	}
@@ -91668,7 +91668,7 @@ func (widget *WidgetInstance) ListActionPrefixes() []string {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (const gchar**)")
 
 	return goret
 }
@@ -92106,7 +92106,7 @@ func (widget *WidgetInstance) SetAllocation(allocation *Allocation) {
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 	_ = allocation
 	_ = carg1
-	panic("unimplemented conversion of *Allocation (*C.GtkAllocation)")
+	panic("unimplemented conversion of *Allocation (const GtkAllocation*)")
 
 	C.gtk_widget_set_allocation(carg0, carg1)
 	runtime.KeepAlive(widget)
@@ -92250,7 +92250,7 @@ func (widget *WidgetInstance) SetClip(clip *Allocation) {
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 	_ = clip
 	_ = carg1
-	panic("unimplemented conversion of *Allocation (*C.GtkAllocation)")
+	panic("unimplemented conversion of *Allocation (const GtkAllocation*)")
 
 	C.gtk_widget_set_clip(carg0, carg1)
 	runtime.KeepAlive(widget)
@@ -93349,7 +93349,7 @@ func (widget *WidgetInstance) SizeAllocate(allocation *Allocation) {
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 	_ = allocation
 	_ = carg1
-	panic("unimplemented conversion of *Allocation (*C.GtkAllocation)")
+	panic("unimplemented conversion of *Allocation (GtkAllocation*)")
 
 	C.gtk_widget_size_allocate(carg0, carg1)
 	runtime.KeepAlive(widget)
@@ -93384,7 +93384,7 @@ func (widget *WidgetInstance) SizeAllocateWithBaseline(allocation *Allocation, b
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 	_ = allocation
 	_ = carg1
-	panic("unimplemented conversion of *Allocation (*C.GtkAllocation)")
+	panic("unimplemented conversion of *Allocation (GtkAllocation*)")
 	carg2 = C.gint(baseline)
 
 	C.gtk_widget_size_allocate_with_baseline(carg0, carg1, carg2)
@@ -95344,7 +95344,7 @@ func UnsafeApplyWidgetOverrides[Instance Widget](gclass unsafe.Pointer, override
 				widget = UnsafeWidgetFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				_ = baseline
 				_ = carg1
-				panic("unimplemented conversion of *int32 (*C.gint)")
+				panic("unimplemented conversion of *int32 (gint*)")
 
 				overrides.AdjustBaselineAllocation(widget, baseline)
 			},
@@ -95364,10 +95364,10 @@ func UnsafeApplyWidgetOverrides[Instance Widget](gclass unsafe.Pointer, override
 				widget = UnsafeWidgetFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				_ = minimumBaseline
 				_ = carg1
-				panic("unimplemented conversion of *int32 (*C.gint)")
+				panic("unimplemented conversion of *int32 (gint*)")
 				_ = naturalBaseline
 				_ = carg2
-				panic("unimplemented conversion of *int32 (*C.gint)")
+				panic("unimplemented conversion of *int32 (gint*)")
 
 				overrides.AdjustBaselineRequest(widget, minimumBaseline, naturalBaseline)
 			},
@@ -95391,16 +95391,16 @@ func UnsafeApplyWidgetOverrides[Instance Widget](gclass unsafe.Pointer, override
 				orientation = Orientation(carg1)
 				_ = minimumSize
 				_ = carg2
-				panic("unimplemented conversion of *int32 (*C.gint)")
+				panic("unimplemented conversion of *int32 (gint*)")
 				_ = naturalSize
 				_ = carg3
-				panic("unimplemented conversion of *int32 (*C.gint)")
+				panic("unimplemented conversion of *int32 (gint*)")
 				_ = allocatedPos
 				_ = carg4
-				panic("unimplemented conversion of *int32 (*C.gint)")
+				panic("unimplemented conversion of *int32 (gint*)")
 				_ = allocatedSize
 				_ = carg5
-				panic("unimplemented conversion of *int32 (*C.gint)")
+				panic("unimplemented conversion of *int32 (gint*)")
 
 				overrides.AdjustSizeAllocation(widget, orientation, minimumSize, naturalSize, allocatedPos, allocatedSize)
 			},
@@ -95422,10 +95422,10 @@ func UnsafeApplyWidgetOverrides[Instance Widget](gclass unsafe.Pointer, override
 				orientation = Orientation(carg1)
 				_ = minimumSize
 				_ = carg2
-				panic("unimplemented conversion of *int32 (*C.gint)")
+				panic("unimplemented conversion of *int32 (gint*)")
 				_ = naturalSize
 				_ = carg3
-				panic("unimplemented conversion of *int32 (*C.gint)")
+				panic("unimplemented conversion of *int32 (gint*)")
 
 				overrides.AdjustSizeRequest(widget, orientation, minimumSize, naturalSize)
 			},
@@ -95549,10 +95549,10 @@ func UnsafeApplyWidgetOverrides[Instance Widget](gclass unsafe.Pointer, override
 				widget = UnsafeWidgetFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				_ = hexpandP
 				_ = carg1
-				panic("unimplemented conversion of *bool (*C.gboolean)")
+				panic("unimplemented conversion of *bool (gboolean*)")
 				_ = vexpandP
 				_ = carg2
-				panic("unimplemented conversion of *bool (*C.gboolean)")
+				panic("unimplemented conversion of *bool (gboolean*)")
 
 				overrides.ComputeExpand(widget, hexpandP, vexpandP)
 			},
@@ -96808,7 +96808,7 @@ func UnsafeApplyWidgetOverrides[Instance Widget](gclass unsafe.Pointer, override
 				widget = UnsafeWidgetFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				_ = allocation
 				_ = carg1
-				panic("unimplemented conversion of *Allocation (*C.GtkAllocation)")
+				panic("unimplemented conversion of *Allocation (GtkAllocation*)")
 
 				overrides.SizeAllocate(widget, allocation)
 			},
@@ -96981,7 +96981,7 @@ func (widget *WidgetInstance) ParentAdjustBaselineAllocation(baseline *int32) {
 
 	_ = baseline
 	_ = carg1
-	panic("unimplemented conversion of *int32 (*C.gint)")
+	panic("unimplemented conversion of *int32 (gint*)")
 
 	C._gotk4_gtk3_Widget_virtual_adjust_baseline_allocation(unsafe.Pointer(parentclass.adjust_baseline_allocation), carg0, carg1)
 	runtime.KeepAlive(widget)
@@ -97004,10 +97004,10 @@ func (widget *WidgetInstance) ParentAdjustBaselineRequest(minimumBaseline *int32
 
 	_ = minimumBaseline
 	_ = carg1
-	panic("unimplemented conversion of *int32 (*C.gint)")
+	panic("unimplemented conversion of *int32 (gint*)")
 	_ = naturalBaseline
 	_ = carg2
-	panic("unimplemented conversion of *int32 (*C.gint)")
+	panic("unimplemented conversion of *int32 (gint*)")
 
 	C._gotk4_gtk3_Widget_virtual_adjust_baseline_request(unsafe.Pointer(parentclass.adjust_baseline_request), carg0, carg1, carg2)
 	runtime.KeepAlive(widget)
@@ -97054,16 +97054,16 @@ func (widget *WidgetInstance) ParentAdjustSizeAllocation(orientation Orientation
 	carg1 = C.GtkOrientation(orientation)
 	_ = minimumSize
 	_ = carg2
-	panic("unimplemented conversion of *int32 (*C.gint)")
+	panic("unimplemented conversion of *int32 (gint*)")
 	_ = naturalSize
 	_ = carg3
-	panic("unimplemented conversion of *int32 (*C.gint)")
+	panic("unimplemented conversion of *int32 (gint*)")
 	_ = allocatedPos
 	_ = carg4
-	panic("unimplemented conversion of *int32 (*C.gint)")
+	panic("unimplemented conversion of *int32 (gint*)")
 	_ = allocatedSize
 	_ = carg5
-	panic("unimplemented conversion of *int32 (*C.gint)")
+	panic("unimplemented conversion of *int32 (gint*)")
 
 	C._gotk4_gtk3_Widget_virtual_adjust_size_allocation(unsafe.Pointer(parentclass.adjust_size_allocation), carg0, carg1, carg2, carg3, carg4, carg5)
 	runtime.KeepAlive(widget)
@@ -97109,10 +97109,10 @@ func (widget *WidgetInstance) ParentAdjustSizeRequest(orientation Orientation, m
 	carg1 = C.GtkOrientation(orientation)
 	_ = minimumSize
 	_ = carg2
-	panic("unimplemented conversion of *int32 (*C.gint)")
+	panic("unimplemented conversion of *int32 (gint*)")
 	_ = naturalSize
 	_ = carg3
-	panic("unimplemented conversion of *int32 (*C.gint)")
+	panic("unimplemented conversion of *int32 (gint*)")
 
 	C._gotk4_gtk3_Widget_virtual_adjust_size_request(unsafe.Pointer(parentclass.adjust_size_request), carg0, carg1, carg2, carg3)
 	runtime.KeepAlive(widget)
@@ -97292,10 +97292,10 @@ func (widget *WidgetInstance) ParentComputeExpand(hexpandP *bool, vexpandP *bool
 
 	_ = hexpandP
 	_ = carg1
-	panic("unimplemented conversion of *bool (*C.gboolean)")
+	panic("unimplemented conversion of *bool (gboolean*)")
 	_ = vexpandP
 	_ = carg2
-	panic("unimplemented conversion of *bool (*C.gboolean)")
+	panic("unimplemented conversion of *bool (gboolean*)")
 
 	C._gotk4_gtk3_Widget_virtual_compute_expand(unsafe.Pointer(parentclass.compute_expand), carg0, carg1, carg2)
 	runtime.KeepAlive(widget)
@@ -99174,7 +99174,7 @@ func (widget *WidgetInstance) ParentSizeAllocate(allocation *Allocation) {
 
 	_ = allocation
 	_ = carg1
-	panic("unimplemented conversion of *Allocation (*C.GtkAllocation)")
+	panic("unimplemented conversion of *Allocation (GtkAllocation*)")
 
 	C._gotk4_gtk3_Widget_virtual_size_allocate(unsafe.Pointer(parentclass.size_allocate), carg0, carg1)
 	runtime.KeepAlive(widget)
@@ -105812,7 +105812,7 @@ func (entry *EntryInstance) GetIconArea(iconPos EntryIconPosition) gdk.Rectangle
 
 	_ = iconArea
 	_ = carg2
-	panic("unimplemented conversion of gdk.Rectangle (C.GdkRectangle)")
+	panic("unimplemented conversion of gdk.Rectangle (GdkRectangle)")
 
 	return iconArea
 }
@@ -106462,7 +106462,7 @@ func (entry *EntryInstance) GetTextArea() gdk.Rectangle {
 
 	_ = textArea
 	_ = carg1
-	panic("unimplemented conversion of gdk.Rectangle (C.GdkRectangle)")
+	panic("unimplemented conversion of gdk.Rectangle (GdkRectangle)")
 
 	return textArea
 }
@@ -107814,16 +107814,16 @@ func UnsafeApplyEntryOverrides[Instance Entry](gclass unsafe.Pointer, overrides 
 				entry = UnsafeEntryFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				_ = x
 				_ = carg1
-				panic("unimplemented conversion of *int32 (*C.gint)")
+				panic("unimplemented conversion of *int32 (gint*)")
 				_ = y
 				_ = carg2
-				panic("unimplemented conversion of *int32 (*C.gint)")
+				panic("unimplemented conversion of *int32 (gint*)")
 				_ = width
 				_ = carg3
-				panic("unimplemented conversion of *int32 (*C.gint)")
+				panic("unimplemented conversion of *int32 (gint*)")
 				_ = height
 				_ = carg4
-				panic("unimplemented conversion of *int32 (*C.gint)")
+				panic("unimplemented conversion of *int32 (gint*)")
 
 				overrides.GetFrameSize(entry, x, y, width, height)
 			},
@@ -107845,16 +107845,16 @@ func UnsafeApplyEntryOverrides[Instance Entry](gclass unsafe.Pointer, overrides 
 				entry = UnsafeEntryFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				_ = x
 				_ = carg1
-				panic("unimplemented conversion of *int32 (*C.gint)")
+				panic("unimplemented conversion of *int32 (gint*)")
 				_ = y
 				_ = carg2
-				panic("unimplemented conversion of *int32 (*C.gint)")
+				panic("unimplemented conversion of *int32 (gint*)")
 				_ = width
 				_ = carg3
-				panic("unimplemented conversion of *int32 (*C.gint)")
+				panic("unimplemented conversion of *int32 (gint*)")
 				_ = height
 				_ = carg4
-				panic("unimplemented conversion of *int32 (*C.gint)")
+				panic("unimplemented conversion of *int32 (gint*)")
 
 				overrides.GetTextAreaSize(entry, x, y, width, height)
 			},
@@ -108088,16 +108088,16 @@ func (entry *EntryInstance) ParentGetFrameSize(x *int32, y *int32, width *int32,
 
 	_ = x
 	_ = carg1
-	panic("unimplemented conversion of *int32 (*C.gint)")
+	panic("unimplemented conversion of *int32 (gint*)")
 	_ = y
 	_ = carg2
-	panic("unimplemented conversion of *int32 (*C.gint)")
+	panic("unimplemented conversion of *int32 (gint*)")
 	_ = width
 	_ = carg3
-	panic("unimplemented conversion of *int32 (*C.gint)")
+	panic("unimplemented conversion of *int32 (gint*)")
 	_ = height
 	_ = carg4
-	panic("unimplemented conversion of *int32 (*C.gint)")
+	panic("unimplemented conversion of *int32 (gint*)")
 
 	C._gotk4_gtk3_Entry_virtual_get_frame_size(unsafe.Pointer(parentclass.get_frame_size), carg0, carg1, carg2, carg3, carg4)
 	runtime.KeepAlive(entry)
@@ -108131,16 +108131,16 @@ func (entry *EntryInstance) ParentGetTextAreaSize(x *int32, y *int32, width *int
 
 	_ = x
 	_ = carg1
-	panic("unimplemented conversion of *int32 (*C.gint)")
+	panic("unimplemented conversion of *int32 (gint*)")
 	_ = y
 	_ = carg2
-	panic("unimplemented conversion of *int32 (*C.gint)")
+	panic("unimplemented conversion of *int32 (gint*)")
 	_ = width
 	_ = carg3
-	panic("unimplemented conversion of *int32 (*C.gint)")
+	panic("unimplemented conversion of *int32 (gint*)")
 	_ = height
 	_ = carg4
-	panic("unimplemented conversion of *int32 (*C.gint)")
+	panic("unimplemented conversion of *int32 (gint*)")
 
 	C._gotk4_gtk3_Entry_virtual_get_text_area_size(unsafe.Pointer(parentclass.get_text_area_size), carg0, carg1, carg2, carg3, carg4)
 	runtime.KeepAlive(entry)
@@ -112772,7 +112772,7 @@ func (gesture *GestureMultiPressInstance) GetArea() (gdk.Rectangle, bool) {
 
 	_ = rect
 	_ = carg1
-	panic("unimplemented conversion of gdk.Rectangle (C.GdkRectangle)")
+	panic("unimplemented conversion of gdk.Rectangle (GdkRectangle)")
 	if cret != 0 {
 		goret = true
 	}
@@ -116039,7 +116039,7 @@ func (iconView *IconViewInstance) EnableModelDragDest(targets []TargetEntry, act
 	_ = targets
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []TargetEntry (*C.GtkTargetEntry)")
+	panic("unimplemented conversion of []TargetEntry (const GtkTargetEntry*)")
 	carg3 = C.GdkDragAction(actions)
 
 	C.gtk_icon_view_enable_model_drag_dest(carg0, carg1, carg2, carg3)
@@ -116072,7 +116072,7 @@ func (iconView *IconViewInstance) EnableModelDragSource(startButtonMask gdk.Modi
 	_ = targets
 	_ = carg2
 	_ = carg3
-	panic("unimplemented conversion of []TargetEntry (*C.GtkTargetEntry)")
+	panic("unimplemented conversion of []TargetEntry (const GtkTargetEntry*)")
 	carg4 = C.GdkDragAction(actions)
 
 	C.gtk_icon_view_enable_model_drag_source(carg0, carg1, carg2, carg3, carg4)
@@ -116146,7 +116146,7 @@ func (iconView *IconViewInstance) GetCellRect(path *TreePath, cell CellRenderer)
 
 	_ = rect
 	_ = carg3
-	panic("unimplemented conversion of gdk.Rectangle (C.GdkRectangle)")
+	panic("unimplemented conversion of gdk.Rectangle (GdkRectangle)")
 	if cret != 0 {
 		goret = true
 	}
@@ -128942,7 +128942,7 @@ func (_range *RangeInstance) GetRangeRect() gdk.Rectangle {
 
 	_ = rangeRect
 	_ = carg1
-	panic("unimplemented conversion of gdk.Rectangle (C.GdkRectangle)")
+	panic("unimplemented conversion of gdk.Rectangle (GdkRectangle)")
 
 	return rangeRect
 }
@@ -129607,10 +129607,10 @@ func UnsafeApplyRangeOverrides[Instance Range](gclass unsafe.Pointer, overrides 
 				orientation = Orientation(carg1)
 				_ = minimum
 				_ = carg2
-				panic("unimplemented conversion of *int32 (*C.gint)")
+				panic("unimplemented conversion of *int32 (gint*)")
 				_ = natural
 				_ = carg3
-				panic("unimplemented conversion of *int32 (*C.gint)")
+				panic("unimplemented conversion of *int32 (gint*)")
 
 				overrides.GetRangeSizeRequest(_range, orientation, minimum, natural)
 			},
@@ -129743,10 +129743,10 @@ func (_range *RangeInstance) ParentGetRangeSizeRequest(orientation Orientation, 
 	carg1 = C.GtkOrientation(orientation)
 	_ = minimum
 	_ = carg2
-	panic("unimplemented conversion of *int32 (*C.gint)")
+	panic("unimplemented conversion of *int32 (gint*)")
 	_ = natural
 	_ = carg3
-	panic("unimplemented conversion of *int32 (*C.gint)")
+	panic("unimplemented conversion of *int32 (gint*)")
 
 	C._gotk4_gtk3_Range_virtual_get_range_size_request(unsafe.Pointer(parentclass.get_range_size_request), carg0, carg1, carg2, carg3)
 	runtime.KeepAlive(_range)
@@ -133455,7 +133455,7 @@ func UnsafeApplySpinButtonOverrides[Instance SpinButton](gclass unsafe.Pointer, 
 				spinButton = UnsafeSpinButtonFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				_ = newValue
 				_ = carg1
-				panic("unimplemented conversion of *float64 (*C.gdouble)")
+				panic("unimplemented conversion of *float64 (gdouble*)")
 
 				goret = overrides.Input(spinButton, newValue)
 
@@ -133555,7 +133555,7 @@ func (spinButton *SpinButtonInstance) ParentInput(newValue *float64) int32 {
 
 	_ = newValue
 	_ = carg1
-	panic("unimplemented conversion of *float64 (*C.gdouble)")
+	panic("unimplemented conversion of *float64 (gdouble*)")
 
 	cret = C._gotk4_gtk3_SpinButton_virtual_input(unsafe.Pointer(parentclass.input), carg0, carg1)
 	runtime.KeepAlive(spinButton)
@@ -137644,10 +137644,10 @@ func (textView *TextViewInstance) GetCursorLocations(iter *TextIter) (gdk.Rectan
 
 	_ = strong
 	_ = carg2
-	panic("unimplemented conversion of gdk.Rectangle (C.GdkRectangle)")
+	panic("unimplemented conversion of gdk.Rectangle (GdkRectangle)")
 	_ = weak
 	_ = carg3
-	panic("unimplemented conversion of gdk.Rectangle (C.GdkRectangle)")
+	panic("unimplemented conversion of gdk.Rectangle (GdkRectangle)")
 
 	return strong, weak
 }
@@ -137842,7 +137842,7 @@ func (textView *TextViewInstance) GetIterAtLocation(x int32, y int32) (TextIter,
 
 	_ = iter
 	_ = carg1
-	panic("unimplemented conversion of TextIter (C.GtkTextIter)")
+	panic("unimplemented conversion of TextIter (GtkTextIter)")
 	if cret != 0 {
 		goret = true
 	}
@@ -137899,7 +137899,7 @@ func (textView *TextViewInstance) GetIterAtPosition(x int32, y int32) (TextIter,
 
 	_ = iter
 	_ = carg1
-	panic("unimplemented conversion of TextIter (C.GtkTextIter)")
+	panic("unimplemented conversion of TextIter (GtkTextIter)")
 	trailing = int32(carg2)
 	if cret != 0 {
 		goret = true
@@ -137938,7 +137938,7 @@ func (textView *TextViewInstance) GetIterLocation(iter *TextIter) gdk.Rectangle 
 
 	_ = location
 	_ = carg2
-	panic("unimplemented conversion of gdk.Rectangle (C.GdkRectangle)")
+	panic("unimplemented conversion of gdk.Rectangle (GdkRectangle)")
 
 	return location
 }
@@ -138025,7 +138025,7 @@ func (textView *TextViewInstance) GetLineAtY(y int32) (TextIter, int32) {
 
 	_ = targetIter
 	_ = carg1
-	panic("unimplemented conversion of TextIter (C.GtkTextIter)")
+	panic("unimplemented conversion of TextIter (GtkTextIter)")
 	lineTop = int32(carg3)
 
 	return targetIter, lineTop
@@ -138288,7 +138288,7 @@ func (textView *TextViewInstance) GetVisibleRect() gdk.Rectangle {
 
 	_ = visibleRect
 	_ = carg1
-	panic("unimplemented conversion of gdk.Rectangle (C.GdkRectangle)")
+	panic("unimplemented conversion of gdk.Rectangle (GdkRectangle)")
 
 	return visibleRect
 }
@@ -144495,7 +144495,7 @@ func (treeView *TreeViewInstance) EnableModelDragDest(targets []TargetEntry, act
 	_ = targets
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []TargetEntry (*C.GtkTargetEntry)")
+	panic("unimplemented conversion of []TargetEntry (const GtkTargetEntry*)")
 	carg3 = C.GdkDragAction(actions)
 
 	C.gtk_tree_view_enable_model_drag_dest(carg0, carg1, carg2, carg3)
@@ -144527,7 +144527,7 @@ func (treeView *TreeViewInstance) EnableModelDragSource(startButtonMask gdk.Modi
 	_ = targets
 	_ = carg2
 	_ = carg3
-	panic("unimplemented conversion of []TargetEntry (*C.GtkTargetEntry)")
+	panic("unimplemented conversion of []TargetEntry (const GtkTargetEntry*)")
 	carg4 = C.GdkDragAction(actions)
 
 	C.gtk_tree_view_enable_model_drag_source(carg0, carg1, carg2, carg3, carg4)
@@ -144675,7 +144675,7 @@ func (treeView *TreeViewInstance) GetBackgroundArea(path *TreePath, column TreeV
 
 	_ = rect
 	_ = carg3
-	panic("unimplemented conversion of gdk.Rectangle (C.GdkRectangle)")
+	panic("unimplemented conversion of gdk.Rectangle (GdkRectangle)")
 
 	return rect
 }
@@ -144750,7 +144750,7 @@ func (treeView *TreeViewInstance) GetCellArea(path *TreePath, column TreeViewCol
 
 	_ = rect
 	_ = carg3
-	panic("unimplemented conversion of gdk.Rectangle (C.GdkRectangle)")
+	panic("unimplemented conversion of gdk.Rectangle (GdkRectangle)")
 
 	return rect
 }
@@ -145542,7 +145542,7 @@ func (treeView *TreeViewInstance) GetVisibleRect() gdk.Rectangle {
 
 	_ = visibleRect
 	_ = carg1
-	panic("unimplemented conversion of gdk.Rectangle (C.GdkRectangle)")
+	panic("unimplemented conversion of gdk.Rectangle (GdkRectangle)")
 
 	return visibleRect
 }
@@ -151694,7 +151694,7 @@ func (colorsel *ColorSelectionInstance) GetCurrentRGBA() gdk.RGBA {
 
 	_ = rgba
 	_ = carg1
-	panic("unimplemented conversion of gdk.RGBA (C.GdkRGBA)")
+	panic("unimplemented conversion of gdk.RGBA (GdkRGBA)")
 
 	return rgba
 }
@@ -151792,7 +151792,7 @@ func (colorsel *ColorSelectionInstance) GetPreviousRGBA() gdk.RGBA {
 
 	_ = rgba
 	_ = carg1
-	panic("unimplemented conversion of gdk.RGBA (C.GdkRGBA)")
+	panic("unimplemented conversion of gdk.RGBA (GdkRGBA)")
 
 	return rgba
 }
@@ -152775,7 +152775,7 @@ func (comboBox *ComboBoxInstance) GetActiveIter() (TreeIter, bool) {
 
 	_ = iter
 	_ = carg1
-	panic("unimplemented conversion of TreeIter (C.GtkTreeIter)")
+	panic("unimplemented conversion of TreeIter (GtkTreeIter)")
 	if cret != 0 {
 		goret = true
 	}
@@ -157817,7 +157817,7 @@ func UnsafeApplyFrameOverrides[Instance Frame](gclass unsafe.Pointer, overrides 
 				frame = UnsafeFrameFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				_ = allocation
 				_ = carg1
-				panic("unimplemented conversion of *Allocation (*C.GtkAllocation)")
+				panic("unimplemented conversion of *Allocation (GtkAllocation*)")
 
 				overrides.ComputeChildAllocation(frame, allocation)
 			},
@@ -157839,7 +157839,7 @@ func (frame *FrameInstance) ParentComputeChildAllocation(allocation *Allocation)
 
 	_ = allocation
 	_ = carg1
-	panic("unimplemented conversion of *Allocation (*C.GtkAllocation)")
+	panic("unimplemented conversion of *Allocation (GtkAllocation*)")
 
 	C._gotk4_gtk3_Frame_virtual_compute_child_allocation(unsafe.Pointer(parentclass.compute_child_allocation), carg0, carg1)
 	runtime.KeepAlive(frame)
@@ -167305,7 +167305,7 @@ func UnsafeApplyOverlayOverrides[Instance Overlay](gclass unsafe.Pointer, overri
 				widget = UnsafeWidgetFromGlibNone(unsafe.Pointer(carg1))
 				_ = allocation
 				_ = carg2
-				panic("unimplemented conversion of *Allocation (*C.GtkAllocation)")
+				panic("unimplemented conversion of *Allocation (GtkAllocation*)")
 
 				goret = overrides.GetChildPosition(overlay, widget, allocation)
 
@@ -167344,7 +167344,7 @@ func (overlay *OverlayInstance) ParentGetChildPosition(widget Widget, allocation
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 	_ = allocation
 	_ = carg2
-	panic("unimplemented conversion of *Allocation (*C.GtkAllocation)")
+	panic("unimplemented conversion of *Allocation (GtkAllocation*)")
 
 	cret = C._gotk4_gtk3_Overlay_virtual_get_child_position(unsafe.Pointer(parentclass.get_child_position), carg0, carg1, carg2)
 	runtime.KeepAlive(overlay)
@@ -168062,7 +168062,7 @@ func (popover *PopoverInstance) GetPointingTo() (gdk.Rectangle, bool) {
 
 	_ = rect
 	_ = carg1
-	panic("unimplemented conversion of gdk.Rectangle (C.GdkRectangle)")
+	panic("unimplemented conversion of gdk.Rectangle (GdkRectangle)")
 	if cret != 0 {
 		goret = true
 	}
@@ -169783,7 +169783,7 @@ func NewScaleButton(size int32, min float64, max float64, step float64, icons []
 	carg4 = C.gdouble(step)
 	_ = icons
 	_ = carg5
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (const gchar**)")
 
 	cret = C.gtk_scale_button_new(carg1, carg2, carg3, carg4, carg5)
 	runtime.KeepAlive(size)
@@ -169951,7 +169951,7 @@ func (button *ScaleButtonInstance) SetIcons(icons []string) {
 	carg0 = (*C.GtkScaleButton)(UnsafeScaleButtonToGlibNone(button))
 	_ = icons
 	_ = carg1
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (const gchar**)")
 
 	C.gtk_scale_button_set_icons(carg0, carg1)
 	runtime.KeepAlive(button)
@@ -193105,7 +193105,7 @@ func (about *AboutDialogInstance) AddCreditSection(sectionName string, people []
 	defer C.free(unsafe.Pointer(carg1))
 	_ = people
 	_ = carg2
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (const gchar**)")
 
 	C.gtk_about_dialog_add_credit_section(carg0, carg1, carg2)
 	runtime.KeepAlive(about)
@@ -193134,7 +193134,7 @@ func (about *AboutDialogInstance) GetArtists() []string {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (const gchar* const*)")
 
 	return goret
 }
@@ -193160,7 +193160,7 @@ func (about *AboutDialogInstance) GetAuthors() []string {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (const gchar* const*)")
 
 	return goret
 }
@@ -193232,7 +193232,7 @@ func (about *AboutDialogInstance) GetDocumenters() []string {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (const gchar* const*)")
 
 	return goret
 }
@@ -193486,7 +193486,7 @@ func (about *AboutDialogInstance) SetArtists(artists []string) {
 	carg0 = (*C.GtkAboutDialog)(UnsafeAboutDialogToGlibNone(about))
 	_ = artists
 	_ = carg1
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (const gchar**)")
 
 	C.gtk_about_dialog_set_artists(carg0, carg1)
 	runtime.KeepAlive(about)
@@ -193508,7 +193508,7 @@ func (about *AboutDialogInstance) SetAuthors(authors []string) {
 	carg0 = (*C.GtkAboutDialog)(UnsafeAboutDialogToGlibNone(about))
 	_ = authors
 	_ = carg1
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (const gchar**)")
 
 	C.gtk_about_dialog_set_authors(carg0, carg1)
 	runtime.KeepAlive(about)
@@ -193576,7 +193576,7 @@ func (about *AboutDialogInstance) SetDocumenters(documenters []string) {
 	carg0 = (*C.GtkAboutDialog)(UnsafeAboutDialogToGlibNone(about))
 	_ = documenters
 	_ = carg1
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (const gchar**)")
 
 	C.gtk_about_dialog_set_documenters(carg0, carg1)
 	runtime.KeepAlive(about)
@@ -197486,7 +197486,7 @@ func (aclass *CellAreaClass) ListCellProperties() (uint, []*gobject.ParamSpec) {
 	nProperties = uint(carg1)
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []*gobject.ParamSpec (**C.GParamSpec)")
+	panic("unimplemented conversion of []*gobject.ParamSpec (GParamSpec**)")
 
 	return nProperties, goret
 }
@@ -198722,7 +198722,7 @@ func (cclass *ContainerClass) InstallChildProperties(pspecs []*gobject.ParamSpec
 	_ = pspecs
 	_ = carg2
 	_ = carg1
-	panic("unimplemented conversion of []*gobject.ParamSpec (**C.GParamSpec)")
+	panic("unimplemented conversion of []*gobject.ParamSpec (GParamSpec**)")
 
 	C.gtk_container_class_install_child_properties(carg0, carg1, carg2)
 	runtime.KeepAlive(cclass)
@@ -198776,7 +198776,7 @@ func (cclass *ContainerClass) ListChildProperties() (uint, []*gobject.ParamSpec)
 	nProperties = uint(carg1)
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []*gobject.ParamSpec (**C.GParamSpec)")
+	panic("unimplemented conversion of []*gobject.ParamSpec (GParamSpec**)")
 
 	return nProperties, goret
 }
@@ -206016,7 +206016,7 @@ func (info *RecentInfo) GetApplications() (uint, []string) {
 	length = uint(carg1)
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (gchar**)")
 
 	return length, goret
 }
@@ -206119,7 +206119,7 @@ func (info *RecentInfo) GetGroups() (uint, []string) {
 	length = uint(carg1)
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (gchar**)")
 
 	return length, goret
 }
@@ -207312,7 +207312,7 @@ func (selectionData *SelectionData) GetDataWithLength() (int32, []byte) {
 	length = int32(carg1)
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []byte (*C.guchar)")
+	panic("unimplemented conversion of []byte (const guchar*)")
 
 	return length, goret
 }
@@ -207460,7 +207460,7 @@ func (selectionData *SelectionData) GetURIs() []string {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (gchar**)")
 
 	return goret
 }
@@ -207563,7 +207563,7 @@ func (selectionData *SelectionData) SetURIs(uris []string) bool {
 	carg0 = (*C.GtkSelectionData)(UnsafeSelectionDataToGlibNone(selectionData))
 	_ = uris
 	_ = carg1
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (gchar**)")
 
 	cret = C.gtk_selection_data_set_uris(carg0, carg1)
 	runtime.KeepAlive(selectionData)
@@ -209394,7 +209394,7 @@ func NewTargetList(targets []TargetEntry) *TargetList {
 	_ = targets
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []TargetEntry (*C.GtkTargetEntry)")
+	panic("unimplemented conversion of []TargetEntry (const GtkTargetEntry*)")
 
 	cret = C.gtk_target_list_new(carg1, carg2)
 	runtime.KeepAlive(targets)
@@ -209482,7 +209482,7 @@ func (list *TargetList) AddTable(targets []TargetEntry) {
 	_ = targets
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []TargetEntry (*C.GtkTargetEntry)")
+	panic("unimplemented conversion of []TargetEntry (const GtkTargetEntry*)")
 
 	C.gtk_target_list_add_table(carg0, carg1, carg2)
 	runtime.KeepAlive(list)
@@ -210406,10 +210406,10 @@ func (iter *TextIter) BackwardSearch(str string, flags TextSearchFlags, limit *T
 
 	_ = matchStart
 	_ = carg3
-	panic("unimplemented conversion of TextIter (C.GtkTextIter)")
+	panic("unimplemented conversion of TextIter (GtkTextIter)")
 	_ = matchEnd
 	_ = carg4
-	panic("unimplemented conversion of TextIter (C.GtkTextIter)")
+	panic("unimplemented conversion of TextIter (GtkTextIter)")
 	if cret != 0 {
 		goret = true
 	}
@@ -211375,10 +211375,10 @@ func (iter *TextIter) ForwardSearch(str string, flags TextSearchFlags, limit *Te
 
 	_ = matchStart
 	_ = carg3
-	panic("unimplemented conversion of TextIter (C.GtkTextIter)")
+	panic("unimplemented conversion of TextIter (GtkTextIter)")
 	_ = matchEnd
 	_ = carg4
-	panic("unimplemented conversion of TextIter (C.GtkTextIter)")
+	panic("unimplemented conversion of TextIter (GtkTextIter)")
 	if cret != 0 {
 		goret = true
 	}
@@ -211812,7 +211812,7 @@ func (iter *TextIter) GetAttributes() (TextAttributes, bool) {
 
 	_ = values
 	_ = carg1
-	panic("unimplemented conversion of TextAttributes (C.GtkTextAttributes)")
+	panic("unimplemented conversion of TextAttributes (GtkTextAttributes)")
 	if cret != 0 {
 		goret = true
 	}
@@ -214167,7 +214167,7 @@ func NewTreePathFromIndicesv(indices []int32) *TreePath {
 	_ = indices
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []int32 (*C.gint)")
+	panic("unimplemented conversion of []int32 (gint*)")
 
 	cret = C.gtk_tree_path_new_from_indicesv(carg1, carg2)
 	runtime.KeepAlive(indices)
@@ -214355,7 +214355,7 @@ func (path *TreePath) GetIndicesWithDepth() (int32, []int32) {
 	depth = int32(carg1)
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []int32 (*C.gint)")
+	panic("unimplemented conversion of []int32 (gint*)")
 
 	return depth, goret
 }
@@ -215673,7 +215673,7 @@ func (klass *WidgetClass) ListStyleProperties() (uint, []*gobject.ParamSpec) {
 	nProperties = uint(carg1)
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []*gobject.ParamSpec (**C.GParamSpec)")
+	panic("unimplemented conversion of []*gobject.ParamSpec (GParamSpec**)")
 
 	return nProperties, goret
 }

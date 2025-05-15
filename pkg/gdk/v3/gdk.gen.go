@@ -20,15 +20,15 @@ import (
 // #cgo pkg-config: gdk-3.0
 // #cgo CFLAGS: -Wno-deprecated-declarations
 // #include <gdk/gdk.h>
-// extern C.gboolean _gotk4_glib2_SourceFunc(C.gpointer);
+// extern gboolean _gotk4_glib2_SourceFunc(gpointer);
 // extern void destroyUserdata(gpointer);
-// extern C.void _gotk4_gdk3_Window_from_embedder(*C.GdkWindow, C.gdouble, C.gdouble, *C.gdouble, *C.gdouble);
-// extern C.void _gotk4_gdk3_Window_to_embedder(*C.GdkWindow, C.gdouble, C.gdouble, *C.gdouble, *C.gdouble);
-// C.void _gotk4_gdk3_Window_virtual_from_embedder(void* fnptr, *C.GdkWindow carg0, C.gdouble carg1, C.gdouble carg2, *C.gdouble carg3, *C.gdouble carg4) {
-// 	return ((C.void (*) (*C.GdkWindow, C.gdouble, C.gdouble, *C.gdouble, *C.gdouble))(fnptr))(carg0, carg1, carg2, carg3, carg4);
+// extern void _gotk4_gdk3_Window_from_embedder(GdkWindow*, gdouble, gdouble, gdouble*, gdouble*);
+// extern void _gotk4_gdk3_Window_to_embedder(GdkWindow*, gdouble, gdouble, gdouble*, gdouble*);
+// void _gotk4_gdk3_Window_virtual_from_embedder(void* fnptr, GdkWindow* carg0, gdouble carg1, gdouble carg2, gdouble* carg3, gdouble* carg4) {
+// 	return ((void (*) (GdkWindow*, gdouble, gdouble, gdouble*, gdouble*))(fnptr))(carg0, carg1, carg2, carg3, carg4);
 // }
-// C.void _gotk4_gdk3_Window_virtual_to_embedder(void* fnptr, *C.GdkWindow carg0, C.gdouble carg1, C.gdouble carg2, *C.gdouble carg3, *C.gdouble carg4) {
-// 	return ((C.void (*) (*C.GdkWindow, C.gdouble, C.gdouble, *C.gdouble, *C.gdouble))(fnptr))(carg0, carg1, carg2, carg3, carg4);
+// void _gotk4_gdk3_Window_virtual_to_embedder(void* fnptr, GdkWindow* carg0, gdouble carg1, gdouble carg2, gdouble* carg3, gdouble* carg4) {
+// 	return ((void (*) (GdkWindow*, gdouble, gdouble, gdouble*, gdouble*))(fnptr))(carg0, carg1, carg2, carg3, carg4);
 // }
 import "C"
 
@@ -17331,7 +17331,7 @@ func (monitor *MonitorInstance) GetGeometry() Rectangle {
 
 	_ = geometry
 	_ = carg1
-	panic("unimplemented conversion of Rectangle (C.GdkRectangle)")
+	panic("unimplemented conversion of Rectangle (GdkRectangle)")
 
 	return geometry
 }
@@ -17548,7 +17548,7 @@ func (monitor *MonitorInstance) GetWorkarea() Rectangle {
 
 	_ = workarea
 	_ = carg1
-	panic("unimplemented conversion of Rectangle (C.GdkRectangle)")
+	panic("unimplemented conversion of Rectangle (GdkRectangle)")
 
 	return workarea
 }
@@ -21597,7 +21597,7 @@ func (window *WindowInstance) GetFrameExtents() Rectangle {
 
 	_ = rect
 	_ = carg1
-	panic("unimplemented conversion of Rectangle (C.GdkRectangle)")
+	panic("unimplemented conversion of Rectangle (GdkRectangle)")
 
 	return rect
 }
@@ -23960,10 +23960,10 @@ func UnsafeApplyWindowOverrides[Instance Window](gclass unsafe.Pointer, override
 				embedderY = float64(carg2)
 				_ = offscreenX
 				_ = carg3
-				panic("unimplemented conversion of *float64 (*C.gdouble)")
+				panic("unimplemented conversion of *float64 (gdouble*)")
 				_ = offscreenY
 				_ = carg4
-				panic("unimplemented conversion of *float64 (*C.gdouble)")
+				panic("unimplemented conversion of *float64 (gdouble*)")
 
 				overrides.FromEmbedder(window, embedderX, embedderY, offscreenX, offscreenY)
 			},
@@ -23987,10 +23987,10 @@ func UnsafeApplyWindowOverrides[Instance Window](gclass unsafe.Pointer, override
 				offscreenY = float64(carg2)
 				_ = embedderX
 				_ = carg3
-				panic("unimplemented conversion of *float64 (*C.gdouble)")
+				panic("unimplemented conversion of *float64 (gdouble*)")
 				_ = embedderY
 				_ = carg4
-				panic("unimplemented conversion of *float64 (*C.gdouble)")
+				panic("unimplemented conversion of *float64 (gdouble*)")
 
 				overrides.ToEmbedder(window, offscreenX, offscreenY, embedderX, embedderY)
 			},
@@ -24020,10 +24020,10 @@ func (window *WindowInstance) ParentFromEmbedder(embedderX float64, embedderY fl
 	carg2 = C.gdouble(embedderY)
 	_ = offscreenX
 	_ = carg3
-	panic("unimplemented conversion of *float64 (*C.gdouble)")
+	panic("unimplemented conversion of *float64 (gdouble*)")
 	_ = offscreenY
 	_ = carg4
-	panic("unimplemented conversion of *float64 (*C.gdouble)")
+	panic("unimplemented conversion of *float64 (gdouble*)")
 
 	C._gotk4_gdk3_Window_virtual_from_embedder(unsafe.Pointer(parentclass.from_embedder), carg0, carg1, carg2, carg3, carg4)
 	runtime.KeepAlive(window)
@@ -24055,10 +24055,10 @@ func (window *WindowInstance) ParentToEmbedder(offscreenX float64, offscreenY fl
 	carg2 = C.gdouble(offscreenY)
 	_ = embedderX
 	_ = carg3
-	panic("unimplemented conversion of *float64 (*C.gdouble)")
+	panic("unimplemented conversion of *float64 (gdouble*)")
 	_ = embedderY
 	_ = carg4
-	panic("unimplemented conversion of *float64 (*C.gdouble)")
+	panic("unimplemented conversion of *float64 (gdouble*)")
 
 	C._gotk4_gdk3_Window_virtual_to_embedder(unsafe.Pointer(parentclass.to_embedder), carg0, carg1, carg2, carg3, carg4)
 	runtime.KeepAlive(window)
@@ -26755,7 +26755,7 @@ func (src1 *Rectangle) Intersect(src2 *Rectangle) (Rectangle, bool) {
 
 	_ = dest
 	_ = carg2
-	panic("unimplemented conversion of Rectangle (C.GdkRectangle)")
+	panic("unimplemented conversion of Rectangle (GdkRectangle)")
 	if cret != 0 {
 		goret = true
 	}
@@ -26796,7 +26796,7 @@ func (src1 *Rectangle) Union(src2 *Rectangle) Rectangle {
 
 	_ = dest
 	_ = carg2
-	panic("unimplemented conversion of Rectangle (C.GdkRectangle)")
+	panic("unimplemented conversion of Rectangle (GdkRectangle)")
 
 	return dest
 }

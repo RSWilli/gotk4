@@ -247,7 +247,7 @@ func _gotk4_gtk3_ClipboardURIReceivedFunc(carg1 *C.GtkClipboard, carg2 **C.gchar
 	clipboard = UnsafeClipboardFromGlibNone(unsafe.Pointer(carg1))
 	_ = uris
 	_ = carg2
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (gchar**)")
 
 	fn(clipboard, uris)
 }
@@ -471,7 +471,7 @@ func _gotk4_gtk3_TextBufferDeserializeFunc(carg1 *C.GtkTextBuffer, carg2 *C.GtkT
 	_ = data
 	_ = carg4
 	_ = carg5
-	panic("unimplemented conversion of []uint8 (*C.guint8)")
+	panic("unimplemented conversion of []uint8 (const guint8*)")
 	if carg6 != 0 {
 		createTags = true
 	}
@@ -514,7 +514,7 @@ func _gotk4_gtk3_TextBufferSerializeFunc(carg1 *C.GtkTextBuffer, carg2 *C.GtkTex
 	*carg5 = C.gsize(length)
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []uint8 (*C.guint8)")
+	panic("unimplemented conversion of []uint8 (guint8*)")
 
 	return cret
 }
@@ -664,7 +664,7 @@ func _gotk4_gtk3_TreeModelFilterModifyFunc(carg1 *C.GtkTreeModel, carg2 *C.GtkTr
 
 	_ = value
 	_ = carg3
-	panic("unimplemented conversion of gobject.Value (C.GValue)")
+	panic("unimplemented conversion of gobject.Value (GValue)")
 }
 
 //export _gotk4_gtk3_TreeModelFilterVisibleFunc

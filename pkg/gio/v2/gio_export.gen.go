@@ -192,7 +192,7 @@ func _gotk4_gio2_DBusSubtreeEnumerateFunc(carg1 *C.GDBusConnection, carg2 *C.gch
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (gchar**)")
 
 	return cret
 }
@@ -223,7 +223,7 @@ func _gotk4_gio2_DBusSubtreeIntrospectFunc(carg1 *C.GDBusConnection, carg2 *C.gc
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []*DBusInterfaceInfo (**C.GDBusInterfaceInfo)")
+	panic("unimplemented conversion of []*DBusInterfaceInfo (GDBusInterfaceInfo**)")
 
 	return cret
 }

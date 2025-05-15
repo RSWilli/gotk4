@@ -18,139 +18,139 @@ import (
 // #cgo pkg-config: pango
 // #cgo CFLAGS: -Wno-deprecated-declarations
 // #include <pango/pango.h>
-// extern C.gboolean _gotk4_pango1_AttrFilterFunc(*C.PangoAttribute, C.gpointer);
-// extern C.gboolean _gotk4_pango1_FontsetForEachFunc(*C.PangoFontset, *C.PangoFont, C.gpointer);
-// extern *C.PangoFontDescription _gotk4_pango1_Font_describe(*C.PangoFont);
-// extern *C.PangoFontDescription _gotk4_pango1_Font_describe_absolute(*C.PangoFont);
-// extern *C.PangoCoverage _gotk4_pango1_Font_get_coverage(*C.PangoFont, *C.PangoLanguage);
-// extern *C.PangoFontMap _gotk4_pango1_Font_get_font_map(*C.PangoFont);
-// extern C.void _gotk4_pango1_Font_get_glyph_extents(*C.PangoFont, C.PangoGlyph, C.PangoRectangle, C.PangoRectangle);
-// extern *C.PangoFontMetrics _gotk4_pango1_Font_get_metrics(*C.PangoFont, *C.PangoLanguage);
-// *C.PangoFontDescription _gotk4_pango1_Font_virtual_describe(void* fnptr, *C.PangoFont carg0) {
-// 	return ((*C.PangoFontDescription (*) (*C.PangoFont))(fnptr))(carg0);
+// extern gboolean _gotk4_pango1_AttrFilterFunc(PangoAttribute*, gpointer);
+// extern gboolean _gotk4_pango1_FontsetForEachFunc(PangoFontset*, PangoFont*, gpointer);
+// extern PangoFontDescription* _gotk4_pango1_Font_describe(PangoFont*);
+// extern PangoFontDescription* _gotk4_pango1_Font_describe_absolute(PangoFont*);
+// extern PangoCoverage* _gotk4_pango1_Font_get_coverage(PangoFont*, PangoLanguage*);
+// extern PangoFontMap* _gotk4_pango1_Font_get_font_map(PangoFont*);
+// extern void _gotk4_pango1_Font_get_glyph_extents(PangoFont*, PangoGlyph, PangoRectangle, PangoRectangle);
+// extern PangoFontMetrics* _gotk4_pango1_Font_get_metrics(PangoFont*, PangoLanguage*);
+// PangoFontDescription* _gotk4_pango1_Font_virtual_describe(void* fnptr, PangoFont* carg0) {
+// 	return ((PangoFontDescription* (*) (PangoFont*))(fnptr))(carg0);
 // }
-// *C.PangoFontDescription _gotk4_pango1_Font_virtual_describe_absolute(void* fnptr, *C.PangoFont carg0) {
-// 	return ((*C.PangoFontDescription (*) (*C.PangoFont))(fnptr))(carg0);
+// PangoFontDescription* _gotk4_pango1_Font_virtual_describe_absolute(void* fnptr, PangoFont* carg0) {
+// 	return ((PangoFontDescription* (*) (PangoFont*))(fnptr))(carg0);
 // }
-// *C.PangoCoverage _gotk4_pango1_Font_virtual_get_coverage(void* fnptr, *C.PangoFont carg0, *C.PangoLanguage carg1) {
-// 	return ((*C.PangoCoverage (*) (*C.PangoFont, *C.PangoLanguage))(fnptr))(carg0, carg1);
+// PangoCoverage* _gotk4_pango1_Font_virtual_get_coverage(void* fnptr, PangoFont* carg0, PangoLanguage* carg1) {
+// 	return ((PangoCoverage* (*) (PangoFont*, PangoLanguage*))(fnptr))(carg0, carg1);
 // }
-// *C.PangoFontMap _gotk4_pango1_Font_virtual_get_font_map(void* fnptr, *C.PangoFont carg0) {
-// 	return ((*C.PangoFontMap (*) (*C.PangoFont))(fnptr))(carg0);
+// PangoFontMap* _gotk4_pango1_Font_virtual_get_font_map(void* fnptr, PangoFont* carg0) {
+// 	return ((PangoFontMap* (*) (PangoFont*))(fnptr))(carg0);
 // }
-// C.void _gotk4_pango1_Font_virtual_get_glyph_extents(void* fnptr, *C.PangoFont carg0, C.PangoGlyph carg1, C.PangoRectangle* carg2, C.PangoRectangle* carg3) {
-// 	return ((C.void (*) (*C.PangoFont, C.PangoGlyph, C.PangoRectangle*, C.PangoRectangle*))(fnptr))(carg0, carg1, carg2, carg3);
+// void _gotk4_pango1_Font_virtual_get_glyph_extents(void* fnptr, PangoFont* carg0, PangoGlyph carg1, PangoRectangle* carg2, PangoRectangle* carg3) {
+// 	return ((void (*) (PangoFont*, PangoGlyph, PangoRectangle*, PangoRectangle*))(fnptr))(carg0, carg1, carg2, carg3);
 // }
-// *C.PangoFontMetrics _gotk4_pango1_Font_virtual_get_metrics(void* fnptr, *C.PangoFont carg0, *C.PangoLanguage carg1) {
-// 	return ((*C.PangoFontMetrics (*) (*C.PangoFont, *C.PangoLanguage))(fnptr))(carg0, carg1);
+// PangoFontMetrics* _gotk4_pango1_Font_virtual_get_metrics(void* fnptr, PangoFont* carg0, PangoLanguage* carg1) {
+// 	return ((PangoFontMetrics* (*) (PangoFont*, PangoLanguage*))(fnptr))(carg0, carg1);
 // }
-// extern *C.PangoFontDescription _gotk4_pango1_FontFace_describe(*C.PangoFontFace);
-// extern *C.char _gotk4_pango1_FontFace_get_face_name(*C.PangoFontFace);
-// extern *C.PangoFontFamily _gotk4_pango1_FontFace_get_family(*C.PangoFontFace);
-// extern C.gboolean _gotk4_pango1_FontFace_is_synthesized(*C.PangoFontFace);
-// *C.PangoFontDescription _gotk4_pango1_FontFace_virtual_describe(void* fnptr, *C.PangoFontFace carg0) {
-// 	return ((*C.PangoFontDescription (*) (*C.PangoFontFace))(fnptr))(carg0);
+// extern PangoFontDescription* _gotk4_pango1_FontFace_describe(PangoFontFace*);
+// extern const char* _gotk4_pango1_FontFace_get_face_name(PangoFontFace*);
+// extern PangoFontFamily* _gotk4_pango1_FontFace_get_family(PangoFontFace*);
+// extern gboolean _gotk4_pango1_FontFace_is_synthesized(PangoFontFace*);
+// PangoFontDescription* _gotk4_pango1_FontFace_virtual_describe(void* fnptr, PangoFontFace* carg0) {
+// 	return ((PangoFontDescription* (*) (PangoFontFace*))(fnptr))(carg0);
 // }
-// *C.char _gotk4_pango1_FontFace_virtual_get_face_name(void* fnptr, *C.PangoFontFace carg0) {
-// 	return ((*C.char (*) (*C.PangoFontFace))(fnptr))(carg0);
+// const char* _gotk4_pango1_FontFace_virtual_get_face_name(void* fnptr, PangoFontFace* carg0) {
+// 	return ((const char* (*) (PangoFontFace*))(fnptr))(carg0);
 // }
-// *C.PangoFontFamily _gotk4_pango1_FontFace_virtual_get_family(void* fnptr, *C.PangoFontFace carg0) {
-// 	return ((*C.PangoFontFamily (*) (*C.PangoFontFace))(fnptr))(carg0);
+// PangoFontFamily* _gotk4_pango1_FontFace_virtual_get_family(void* fnptr, PangoFontFace* carg0) {
+// 	return ((PangoFontFamily* (*) (PangoFontFace*))(fnptr))(carg0);
 // }
-// C.gboolean _gotk4_pango1_FontFace_virtual_is_synthesized(void* fnptr, *C.PangoFontFace carg0) {
-// 	return ((C.gboolean (*) (*C.PangoFontFace))(fnptr))(carg0);
+// gboolean _gotk4_pango1_FontFace_virtual_is_synthesized(void* fnptr, PangoFontFace* carg0) {
+// 	return ((gboolean (*) (PangoFontFace*))(fnptr))(carg0);
 // }
-// extern *C.PangoFontFace _gotk4_pango1_FontFamily_get_face(*C.PangoFontFamily, *C.char);
-// extern *C.char _gotk4_pango1_FontFamily_get_name(*C.PangoFontFamily);
-// extern C.gboolean _gotk4_pango1_FontFamily_is_monospace(*C.PangoFontFamily);
-// extern C.gboolean _gotk4_pango1_FontFamily_is_variable(*C.PangoFontFamily);
-// *C.PangoFontFace _gotk4_pango1_FontFamily_virtual_get_face(void* fnptr, *C.PangoFontFamily carg0, *C.char carg1) {
-// 	return ((*C.PangoFontFace (*) (*C.PangoFontFamily, *C.char))(fnptr))(carg0, carg1);
+// extern PangoFontFace* _gotk4_pango1_FontFamily_get_face(PangoFontFamily*, const char*);
+// extern const char* _gotk4_pango1_FontFamily_get_name(PangoFontFamily*);
+// extern gboolean _gotk4_pango1_FontFamily_is_monospace(PangoFontFamily*);
+// extern gboolean _gotk4_pango1_FontFamily_is_variable(PangoFontFamily*);
+// PangoFontFace* _gotk4_pango1_FontFamily_virtual_get_face(void* fnptr, PangoFontFamily* carg0, const char* carg1) {
+// 	return ((PangoFontFace* (*) (PangoFontFamily*, const char*))(fnptr))(carg0, carg1);
 // }
-// *C.char _gotk4_pango1_FontFamily_virtual_get_name(void* fnptr, *C.PangoFontFamily carg0) {
-// 	return ((*C.char (*) (*C.PangoFontFamily))(fnptr))(carg0);
+// const char* _gotk4_pango1_FontFamily_virtual_get_name(void* fnptr, PangoFontFamily* carg0) {
+// 	return ((const char* (*) (PangoFontFamily*))(fnptr))(carg0);
 // }
-// C.gboolean _gotk4_pango1_FontFamily_virtual_is_monospace(void* fnptr, *C.PangoFontFamily carg0) {
-// 	return ((C.gboolean (*) (*C.PangoFontFamily))(fnptr))(carg0);
+// gboolean _gotk4_pango1_FontFamily_virtual_is_monospace(void* fnptr, PangoFontFamily* carg0) {
+// 	return ((gboolean (*) (PangoFontFamily*))(fnptr))(carg0);
 // }
-// C.gboolean _gotk4_pango1_FontFamily_virtual_is_variable(void* fnptr, *C.PangoFontFamily carg0) {
-// 	return ((C.gboolean (*) (*C.PangoFontFamily))(fnptr))(carg0);
+// gboolean _gotk4_pango1_FontFamily_virtual_is_variable(void* fnptr, PangoFontFamily* carg0) {
+// 	return ((gboolean (*) (PangoFontFamily*))(fnptr))(carg0);
 // }
-// extern C.void _gotk4_pango1_FontMap_changed(*C.PangoFontMap);
-// extern *C.PangoFontFamily _gotk4_pango1_FontMap_get_family(*C.PangoFontMap, *C.char);
-// extern C.guint _gotk4_pango1_FontMap_get_serial(*C.PangoFontMap);
-// extern *C.PangoFont _gotk4_pango1_FontMap_load_font(*C.PangoFontMap, *C.PangoContext, *C.PangoFontDescription);
-// extern *C.PangoFontset _gotk4_pango1_FontMap_load_fontset(*C.PangoFontMap, *C.PangoContext, *C.PangoFontDescription, *C.PangoLanguage);
-// C.void _gotk4_pango1_FontMap_virtual_changed(void* fnptr, *C.PangoFontMap carg0) {
-// 	return ((C.void (*) (*C.PangoFontMap))(fnptr))(carg0);
+// extern void _gotk4_pango1_FontMap_changed(PangoFontMap*);
+// extern PangoFontFamily* _gotk4_pango1_FontMap_get_family(PangoFontMap*, const char*);
+// extern guint _gotk4_pango1_FontMap_get_serial(PangoFontMap*);
+// extern PangoFont* _gotk4_pango1_FontMap_load_font(PangoFontMap*, PangoContext*, const PangoFontDescription*);
+// extern PangoFontset* _gotk4_pango1_FontMap_load_fontset(PangoFontMap*, PangoContext*, const PangoFontDescription*, PangoLanguage*);
+// void _gotk4_pango1_FontMap_virtual_changed(void* fnptr, PangoFontMap* carg0) {
+// 	return ((void (*) (PangoFontMap*))(fnptr))(carg0);
 // }
-// *C.PangoFontFamily _gotk4_pango1_FontMap_virtual_get_family(void* fnptr, *C.PangoFontMap carg0, *C.char carg1) {
-// 	return ((*C.PangoFontFamily (*) (*C.PangoFontMap, *C.char))(fnptr))(carg0, carg1);
+// PangoFontFamily* _gotk4_pango1_FontMap_virtual_get_family(void* fnptr, PangoFontMap* carg0, const char* carg1) {
+// 	return ((PangoFontFamily* (*) (PangoFontMap*, const char*))(fnptr))(carg0, carg1);
 // }
-// C.guint _gotk4_pango1_FontMap_virtual_get_serial(void* fnptr, *C.PangoFontMap carg0) {
-// 	return ((C.guint (*) (*C.PangoFontMap))(fnptr))(carg0);
+// guint _gotk4_pango1_FontMap_virtual_get_serial(void* fnptr, PangoFontMap* carg0) {
+// 	return ((guint (*) (PangoFontMap*))(fnptr))(carg0);
 // }
-// *C.PangoFont _gotk4_pango1_FontMap_virtual_load_font(void* fnptr, *C.PangoFontMap carg0, *C.PangoContext carg1, *C.PangoFontDescription carg2) {
-// 	return ((*C.PangoFont (*) (*C.PangoFontMap, *C.PangoContext, *C.PangoFontDescription))(fnptr))(carg0, carg1, carg2);
+// PangoFont* _gotk4_pango1_FontMap_virtual_load_font(void* fnptr, PangoFontMap* carg0, PangoContext* carg1, const PangoFontDescription* carg2) {
+// 	return ((PangoFont* (*) (PangoFontMap*, PangoContext*, const PangoFontDescription*))(fnptr))(carg0, carg1, carg2);
 // }
-// *C.PangoFontset _gotk4_pango1_FontMap_virtual_load_fontset(void* fnptr, *C.PangoFontMap carg0, *C.PangoContext carg1, *C.PangoFontDescription carg2, *C.PangoLanguage carg3) {
-// 	return ((*C.PangoFontset (*) (*C.PangoFontMap, *C.PangoContext, *C.PangoFontDescription, *C.PangoLanguage))(fnptr))(carg0, carg1, carg2, carg3);
+// PangoFontset* _gotk4_pango1_FontMap_virtual_load_fontset(void* fnptr, PangoFontMap* carg0, PangoContext* carg1, const PangoFontDescription* carg2, PangoLanguage* carg3) {
+// 	return ((PangoFontset* (*) (PangoFontMap*, PangoContext*, const PangoFontDescription*, PangoLanguage*))(fnptr))(carg0, carg1, carg2, carg3);
 // }
-// extern *C.PangoFont _gotk4_pango1_Fontset_get_font(*C.PangoFontset, C.guint);
-// extern *C.PangoLanguage _gotk4_pango1_Fontset_get_language(*C.PangoFontset);
-// extern *C.PangoFontMetrics _gotk4_pango1_Fontset_get_metrics(*C.PangoFontset);
-// *C.PangoFont _gotk4_pango1_Fontset_virtual_get_font(void* fnptr, *C.PangoFontset carg0, C.guint carg1) {
-// 	return ((*C.PangoFont (*) (*C.PangoFontset, C.guint))(fnptr))(carg0, carg1);
+// extern PangoFont* _gotk4_pango1_Fontset_get_font(PangoFontset*, guint);
+// extern PangoLanguage* _gotk4_pango1_Fontset_get_language(PangoFontset*);
+// extern PangoFontMetrics* _gotk4_pango1_Fontset_get_metrics(PangoFontset*);
+// PangoFont* _gotk4_pango1_Fontset_virtual_get_font(void* fnptr, PangoFontset* carg0, guint carg1) {
+// 	return ((PangoFont* (*) (PangoFontset*, guint))(fnptr))(carg0, carg1);
 // }
-// *C.PangoLanguage _gotk4_pango1_Fontset_virtual_get_language(void* fnptr, *C.PangoFontset carg0) {
-// 	return ((*C.PangoLanguage (*) (*C.PangoFontset))(fnptr))(carg0);
+// PangoLanguage* _gotk4_pango1_Fontset_virtual_get_language(void* fnptr, PangoFontset* carg0) {
+// 	return ((PangoLanguage* (*) (PangoFontset*))(fnptr))(carg0);
 // }
-// *C.PangoFontMetrics _gotk4_pango1_Fontset_virtual_get_metrics(void* fnptr, *C.PangoFontset carg0) {
-// 	return ((*C.PangoFontMetrics (*) (*C.PangoFontset))(fnptr))(carg0);
+// PangoFontMetrics* _gotk4_pango1_Fontset_virtual_get_metrics(void* fnptr, PangoFontset* carg0) {
+// 	return ((PangoFontMetrics* (*) (PangoFontset*))(fnptr))(carg0);
 // }
-// extern C.void _gotk4_pango1_Renderer_begin(*C.PangoRenderer);
-// extern C.void _gotk4_pango1_Renderer_draw_error_underline(*C.PangoRenderer, C.int, C.int, C.int, C.int);
-// extern C.void _gotk4_pango1_Renderer_draw_glyph(*C.PangoRenderer, *C.PangoFont, C.PangoGlyph, C.double, C.double);
-// extern C.void _gotk4_pango1_Renderer_draw_glyph_item(*C.PangoRenderer, *C.char, *C.PangoGlyphItem, C.int, C.int);
-// extern C.void _gotk4_pango1_Renderer_draw_glyphs(*C.PangoRenderer, *C.PangoFont, *C.PangoGlyphString, C.int, C.int);
-// extern C.void _gotk4_pango1_Renderer_draw_rectangle(*C.PangoRenderer, C.PangoRenderPart, C.int, C.int, C.int, C.int);
-// extern C.void _gotk4_pango1_Renderer_draw_shape(*C.PangoRenderer, *C.PangoAttrShape, C.int, C.int);
-// extern C.void _gotk4_pango1_Renderer_draw_trapezoid(*C.PangoRenderer, C.PangoRenderPart, C.double, C.double, C.double, C.double, C.double, C.double);
-// extern C.void _gotk4_pango1_Renderer_end(*C.PangoRenderer);
-// extern C.void _gotk4_pango1_Renderer_part_changed(*C.PangoRenderer, C.PangoRenderPart);
-// extern C.void _gotk4_pango1_Renderer_prepare_run(*C.PangoRenderer, *C.PangoLayoutRun);
-// C.void _gotk4_pango1_Renderer_virtual_begin(void* fnptr, *C.PangoRenderer carg0) {
-// 	return ((C.void (*) (*C.PangoRenderer))(fnptr))(carg0);
+// extern void _gotk4_pango1_Renderer_begin(PangoRenderer*);
+// extern void _gotk4_pango1_Renderer_draw_error_underline(PangoRenderer*, int, int, int, int);
+// extern void _gotk4_pango1_Renderer_draw_glyph(PangoRenderer*, PangoFont*, PangoGlyph, double, double);
+// extern void _gotk4_pango1_Renderer_draw_glyph_item(PangoRenderer*, const char*, PangoGlyphItem*, int, int);
+// extern void _gotk4_pango1_Renderer_draw_glyphs(PangoRenderer*, PangoFont*, PangoGlyphString*, int, int);
+// extern void _gotk4_pango1_Renderer_draw_rectangle(PangoRenderer*, PangoRenderPart, int, int, int, int);
+// extern void _gotk4_pango1_Renderer_draw_shape(PangoRenderer*, PangoAttrShape*, int, int);
+// extern void _gotk4_pango1_Renderer_draw_trapezoid(PangoRenderer*, PangoRenderPart, double, double, double, double, double, double);
+// extern void _gotk4_pango1_Renderer_end(PangoRenderer*);
+// extern void _gotk4_pango1_Renderer_part_changed(PangoRenderer*, PangoRenderPart);
+// extern void _gotk4_pango1_Renderer_prepare_run(PangoRenderer*, PangoLayoutRun*);
+// void _gotk4_pango1_Renderer_virtual_begin(void* fnptr, PangoRenderer* carg0) {
+// 	return ((void (*) (PangoRenderer*))(fnptr))(carg0);
 // }
-// C.void _gotk4_pango1_Renderer_virtual_draw_error_underline(void* fnptr, *C.PangoRenderer carg0, C.int carg1, C.int carg2, C.int carg3, C.int carg4) {
-// 	return ((C.void (*) (*C.PangoRenderer, C.int, C.int, C.int, C.int))(fnptr))(carg0, carg1, carg2, carg3, carg4);
+// void _gotk4_pango1_Renderer_virtual_draw_error_underline(void* fnptr, PangoRenderer* carg0, int carg1, int carg2, int carg3, int carg4) {
+// 	return ((void (*) (PangoRenderer*, int, int, int, int))(fnptr))(carg0, carg1, carg2, carg3, carg4);
 // }
-// C.void _gotk4_pango1_Renderer_virtual_draw_glyph(void* fnptr, *C.PangoRenderer carg0, *C.PangoFont carg1, C.PangoGlyph carg2, C.double carg3, C.double carg4) {
-// 	return ((C.void (*) (*C.PangoRenderer, *C.PangoFont, C.PangoGlyph, C.double, C.double))(fnptr))(carg0, carg1, carg2, carg3, carg4);
+// void _gotk4_pango1_Renderer_virtual_draw_glyph(void* fnptr, PangoRenderer* carg0, PangoFont* carg1, PangoGlyph carg2, double carg3, double carg4) {
+// 	return ((void (*) (PangoRenderer*, PangoFont*, PangoGlyph, double, double))(fnptr))(carg0, carg1, carg2, carg3, carg4);
 // }
-// C.void _gotk4_pango1_Renderer_virtual_draw_glyph_item(void* fnptr, *C.PangoRenderer carg0, *C.char carg1, *C.PangoGlyphItem carg2, C.int carg3, C.int carg4) {
-// 	return ((C.void (*) (*C.PangoRenderer, *C.char, *C.PangoGlyphItem, C.int, C.int))(fnptr))(carg0, carg1, carg2, carg3, carg4);
+// void _gotk4_pango1_Renderer_virtual_draw_glyph_item(void* fnptr, PangoRenderer* carg0, const char* carg1, PangoGlyphItem* carg2, int carg3, int carg4) {
+// 	return ((void (*) (PangoRenderer*, const char*, PangoGlyphItem*, int, int))(fnptr))(carg0, carg1, carg2, carg3, carg4);
 // }
-// C.void _gotk4_pango1_Renderer_virtual_draw_glyphs(void* fnptr, *C.PangoRenderer carg0, *C.PangoFont carg1, *C.PangoGlyphString carg2, C.int carg3, C.int carg4) {
-// 	return ((C.void (*) (*C.PangoRenderer, *C.PangoFont, *C.PangoGlyphString, C.int, C.int))(fnptr))(carg0, carg1, carg2, carg3, carg4);
+// void _gotk4_pango1_Renderer_virtual_draw_glyphs(void* fnptr, PangoRenderer* carg0, PangoFont* carg1, PangoGlyphString* carg2, int carg3, int carg4) {
+// 	return ((void (*) (PangoRenderer*, PangoFont*, PangoGlyphString*, int, int))(fnptr))(carg0, carg1, carg2, carg3, carg4);
 // }
-// C.void _gotk4_pango1_Renderer_virtual_draw_rectangle(void* fnptr, *C.PangoRenderer carg0, C.PangoRenderPart carg1, C.int carg2, C.int carg3, C.int carg4, C.int carg5) {
-// 	return ((C.void (*) (*C.PangoRenderer, C.PangoRenderPart, C.int, C.int, C.int, C.int))(fnptr))(carg0, carg1, carg2, carg3, carg4, carg5);
+// void _gotk4_pango1_Renderer_virtual_draw_rectangle(void* fnptr, PangoRenderer* carg0, PangoRenderPart carg1, int carg2, int carg3, int carg4, int carg5) {
+// 	return ((void (*) (PangoRenderer*, PangoRenderPart, int, int, int, int))(fnptr))(carg0, carg1, carg2, carg3, carg4, carg5);
 // }
-// C.void _gotk4_pango1_Renderer_virtual_draw_shape(void* fnptr, *C.PangoRenderer carg0, *C.PangoAttrShape carg1, C.int carg2, C.int carg3) {
-// 	return ((C.void (*) (*C.PangoRenderer, *C.PangoAttrShape, C.int, C.int))(fnptr))(carg0, carg1, carg2, carg3);
+// void _gotk4_pango1_Renderer_virtual_draw_shape(void* fnptr, PangoRenderer* carg0, PangoAttrShape* carg1, int carg2, int carg3) {
+// 	return ((void (*) (PangoRenderer*, PangoAttrShape*, int, int))(fnptr))(carg0, carg1, carg2, carg3);
 // }
-// C.void _gotk4_pango1_Renderer_virtual_draw_trapezoid(void* fnptr, *C.PangoRenderer carg0, C.PangoRenderPart carg1, C.double carg2, C.double carg3, C.double carg4, C.double carg5, C.double carg6, C.double carg7) {
-// 	return ((C.void (*) (*C.PangoRenderer, C.PangoRenderPart, C.double, C.double, C.double, C.double, C.double, C.double))(fnptr))(carg0, carg1, carg2, carg3, carg4, carg5, carg6, carg7);
+// void _gotk4_pango1_Renderer_virtual_draw_trapezoid(void* fnptr, PangoRenderer* carg0, PangoRenderPart carg1, double carg2, double carg3, double carg4, double carg5, double carg6, double carg7) {
+// 	return ((void (*) (PangoRenderer*, PangoRenderPart, double, double, double, double, double, double))(fnptr))(carg0, carg1, carg2, carg3, carg4, carg5, carg6, carg7);
 // }
-// C.void _gotk4_pango1_Renderer_virtual_end(void* fnptr, *C.PangoRenderer carg0) {
-// 	return ((C.void (*) (*C.PangoRenderer))(fnptr))(carg0);
+// void _gotk4_pango1_Renderer_virtual_end(void* fnptr, PangoRenderer* carg0) {
+// 	return ((void (*) (PangoRenderer*))(fnptr))(carg0);
 // }
-// C.void _gotk4_pango1_Renderer_virtual_part_changed(void* fnptr, *C.PangoRenderer carg0, C.PangoRenderPart carg1) {
-// 	return ((C.void (*) (*C.PangoRenderer, C.PangoRenderPart))(fnptr))(carg0, carg1);
+// void _gotk4_pango1_Renderer_virtual_part_changed(void* fnptr, PangoRenderer* carg0, PangoRenderPart carg1) {
+// 	return ((void (*) (PangoRenderer*, PangoRenderPart))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_pango1_Renderer_virtual_prepare_run(void* fnptr, *C.PangoRenderer carg0, *C.PangoLayoutRun carg1) {
-// 	return ((C.void (*) (*C.PangoRenderer, *C.PangoLayoutRun))(fnptr))(carg0, carg1);
+// void _gotk4_pango1_Renderer_virtual_prepare_run(void* fnptr, PangoRenderer* carg0, PangoLayoutRun* carg1) {
+// 	return ((void (*) (PangoRenderer*, PangoLayoutRun*))(fnptr))(carg0, carg1);
 // }
 import "C"
 
@@ -4910,7 +4910,7 @@ func Shape(text string, length int32, analysis *Analysis) GlyphString {
 
 	_ = glyphs
 	_ = carg4
-	panic("unimplemented conversion of GlyphString (C.PangoGlyphString)")
+	panic("unimplemented conversion of GlyphString (PangoGlyphString)")
 
 	return glyphs
 }
@@ -4979,7 +4979,7 @@ func ShapeFull(itemText string, itemLength int32, paragraphText string, paragrap
 
 	_ = glyphs
 	_ = carg6
-	panic("unimplemented conversion of GlyphString (C.PangoGlyphString)")
+	panic("unimplemented conversion of GlyphString (PangoGlyphString)")
 
 	return glyphs
 }
@@ -5042,7 +5042,7 @@ func ShapeItem(item *Item, paragraphText string, paragraphLength int32, logAttrs
 
 	_ = glyphs
 	_ = carg5
-	panic("unimplemented conversion of GlyphString (C.PangoGlyphString)")
+	panic("unimplemented conversion of GlyphString (PangoGlyphString)")
 
 	return glyphs
 }
@@ -5114,7 +5114,7 @@ func ShapeWithFlags(itemText string, itemLength int32, paragraphText string, par
 
 	_ = glyphs
 	_ = carg6
-	panic("unimplemented conversion of GlyphString (C.PangoGlyphString)")
+	panic("unimplemented conversion of GlyphString (PangoGlyphString)")
 
 	return glyphs
 }
@@ -5147,7 +5147,7 @@ func SplitFileList(str string) []string {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (**C.char)")
+	panic("unimplemented conversion of []string (char**)")
 
 	return goret
 }
@@ -6503,7 +6503,7 @@ func CoverageFromBytes(bytes []uint8) Coverage {
 	_ = bytes
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []uint8 (*C.guchar)")
+	panic("unimplemented conversion of []uint8 (guchar*)")
 
 	cret = C.pango_coverage_from_bytes(carg1, carg2)
 	runtime.KeepAlive(bytes)
@@ -6642,7 +6642,7 @@ func (coverage *CoverageInstance) ToBytes() ([]uint8) {
 	_ = bytes
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []uint8 (*C.guchar)")
+	panic("unimplemented conversion of []uint8 (guchar*)")
 
 	return bytes
 }
@@ -6951,7 +6951,7 @@ func FontDescriptionsFree(descs []*FontDescription) {
 	_ = descs
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []*FontDescription (**C.PangoFontDescription)")
+	panic("unimplemented conversion of []*FontDescription (PangoFontDescription**)")
 
 	C.pango_font_descriptions_free(carg1, carg2)
 	runtime.KeepAlive(descs)
@@ -7182,10 +7182,10 @@ func (font *FontInstance) GetGlyphExtents(glyph Glyph) (Rectangle, Rectangle) {
 
 	_ = inkRect
 	_ = carg2
-	panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
+	panic("unimplemented conversion of Rectangle (PangoRectangle)")
 	_ = logicalRect
 	_ = carg3
-	panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
+	panic("unimplemented conversion of Rectangle (PangoRectangle)")
 
 	return inkRect, logicalRect
 }
@@ -7502,10 +7502,10 @@ func UnsafeApplyFontOverrides[Instance Font](gclass unsafe.Pointer, overrides Fo
 
 				_ = inkRect
 				_ = carg2
-				panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
+				panic("unimplemented conversion of Rectangle (PangoRectangle)")
 				_ = logicalRect
 				_ = carg3
-				panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
+				panic("unimplemented conversion of Rectangle (PangoRectangle)")
 			},
 		)
 	}
@@ -7694,10 +7694,10 @@ func (font *FontInstance) ParentGetGlyphExtents(glyph Glyph) (Rectangle, Rectang
 
 	_ = inkRect
 	_ = carg2
-	panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
+	panic("unimplemented conversion of Rectangle (PangoRectangle)")
 	_ = logicalRect
 	_ = carg3
-	panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
+	panic("unimplemented conversion of Rectangle (PangoRectangle)")
 
 	return inkRect, logicalRect
 }
@@ -11799,10 +11799,10 @@ func (layout *LayoutInstance) GetCaretPos(index_ int32) (Rectangle, Rectangle) {
 
 	_ = strongPos
 	_ = carg2
-	panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
+	panic("unimplemented conversion of Rectangle (PangoRectangle)")
 	_ = weakPos
 	_ = carg3
-	panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
+	panic("unimplemented conversion of Rectangle (PangoRectangle)")
 
 	return strongPos, weakPos
 }
@@ -11910,10 +11910,10 @@ func (layout *LayoutInstance) GetCursorPos(index_ int32) (Rectangle, Rectangle) 
 
 	_ = strongPos
 	_ = carg2
-	panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
+	panic("unimplemented conversion of Rectangle (PangoRectangle)")
 	_ = weakPos
 	_ = carg3
-	panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
+	panic("unimplemented conversion of Rectangle (PangoRectangle)")
 
 	return strongPos, weakPos
 }
@@ -12010,10 +12010,10 @@ func (layout *LayoutInstance) GetExtents() (Rectangle, Rectangle) {
 
 	_ = inkRect
 	_ = carg1
-	panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
+	panic("unimplemented conversion of Rectangle (PangoRectangle)")
 	_ = logicalRect
 	_ = carg2
-	panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
+	panic("unimplemented conversion of Rectangle (PangoRectangle)")
 
 	return inkRect, logicalRect
 }
@@ -12391,7 +12391,7 @@ func (layout *LayoutInstance) GetLogAttrsReadonly() (int32, []LogAttr) {
 	nAttrs = int32(carg1)
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []LogAttr (*C.PangoLogAttr)")
+	panic("unimplemented conversion of []LogAttr (const PangoLogAttr*)")
 
 	return nAttrs, goret
 }
@@ -12426,10 +12426,10 @@ func (layout *LayoutInstance) GetPixelExtents() (Rectangle, Rectangle) {
 
 	_ = inkRect
 	_ = carg1
-	panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
+	panic("unimplemented conversion of Rectangle (PangoRectangle)")
 	_ = logicalRect
 	_ = carg2
-	panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
+	panic("unimplemented conversion of Rectangle (PangoRectangle)")
 
 	return inkRect, logicalRect
 }
@@ -12791,7 +12791,7 @@ func (layout *LayoutInstance) IndexToPos(index_ int32) Rectangle {
 
 	_ = pos
 	_ = carg2
-	panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
+	panic("unimplemented conversion of Rectangle (PangoRectangle)")
 
 	return pos
 }
@@ -15149,7 +15149,7 @@ func UnsafeApplyRendererOverrides[Instance Renderer](gclass unsafe.Pointer, over
 				renderer = UnsafeRendererFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				_ = run
 				_ = carg1
-				panic("unimplemented conversion of *LayoutRun (*C.PangoLayoutRun)")
+				panic("unimplemented conversion of *LayoutRun (PangoLayoutRun*)")
 
 				overrides.PrepareRun(renderer, run)
 			},
@@ -15518,7 +15518,7 @@ func (renderer *RendererInstance) ParentPrepareRun(run *LayoutRun) {
 
 	_ = run
 	_ = carg1
-	panic("unimplemented conversion of *LayoutRun (*C.PangoLayoutRun)")
+	panic("unimplemented conversion of *LayoutRun (PangoLayoutRun*)")
 
 	C._gotk4_pango1_Renderer_virtual_prepare_run(unsafe.Pointer(parentclass.prepare_run), carg0, carg1)
 	runtime.KeepAlive(renderer)
@@ -20371,10 +20371,10 @@ func (glyphs *GlyphString) Extents(font Font) (Rectangle, Rectangle) {
 
 	_ = inkRect
 	_ = carg2
-	panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
+	panic("unimplemented conversion of Rectangle (PangoRectangle)")
 	_ = logicalRect
 	_ = carg3
-	panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
+	panic("unimplemented conversion of Rectangle (PangoRectangle)")
 
 	return inkRect, logicalRect
 }
@@ -20424,10 +20424,10 @@ func (glyphs *GlyphString) ExtentsRange(start int32, end int32, font Font) (Rect
 
 	_ = inkRect
 	_ = carg4
-	panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
+	panic("unimplemented conversion of Rectangle (PangoRectangle)")
 	_ = logicalRect
 	_ = carg5
-	panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
+	panic("unimplemented conversion of Rectangle (PangoRectangle)")
 
 	return inkRect, logicalRect
 }
@@ -21156,7 +21156,7 @@ func LanguageGetPreferred() []*Language {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []*Language (**C.PangoLanguage)")
+	panic("unimplemented conversion of []*Language (PangoLanguage**)")
 
 	return goret
 }
@@ -21248,7 +21248,7 @@ func (language *Language) GetScripts() (int32, []Script) {
 	numScripts = int32(carg1)
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []Script (*C.PangoScript)")
+	panic("unimplemented conversion of []Script (const PangoScript*)")
 
 	return numScripts, goret
 }
@@ -21586,7 +21586,7 @@ func (iter *LayoutIter) GetCharExtents() Rectangle {
 
 	_ = logicalRect
 	_ = carg1
-	panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
+	panic("unimplemented conversion of Rectangle (PangoRectangle)")
 
 	return logicalRect
 }
@@ -21616,10 +21616,10 @@ func (iter *LayoutIter) GetClusterExtents() (Rectangle, Rectangle) {
 
 	_ = inkRect
 	_ = carg1
-	panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
+	panic("unimplemented conversion of Rectangle (PangoRectangle)")
 	_ = logicalRect
 	_ = carg2
-	panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
+	panic("unimplemented conversion of Rectangle (PangoRectangle)")
 
 	return inkRect, logicalRect
 }
@@ -21700,10 +21700,10 @@ func (iter *LayoutIter) GetLayoutExtents() (Rectangle, Rectangle) {
 
 	_ = inkRect
 	_ = carg1
-	panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
+	panic("unimplemented conversion of Rectangle (PangoRectangle)")
 	_ = logicalRect
 	_ = carg2
-	panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
+	panic("unimplemented conversion of Rectangle (PangoRectangle)")
 
 	return inkRect, logicalRect
 }
@@ -21765,10 +21765,10 @@ func (iter *LayoutIter) GetLineExtents() (Rectangle, Rectangle) {
 
 	_ = inkRect
 	_ = carg1
-	panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
+	panic("unimplemented conversion of Rectangle (PangoRectangle)")
 	_ = logicalRect
 	_ = carg2
-	panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
+	panic("unimplemented conversion of Rectangle (PangoRectangle)")
 
 	return inkRect, logicalRect
 }
@@ -21868,7 +21868,7 @@ func (iter *LayoutIter) GetRun() *LayoutRun {
 	if cret != nil {
 		_ = goret
 		_ = cret
-		panic("unimplemented conversion of *LayoutRun (*C.PangoLayoutRun)")
+		panic("unimplemented conversion of *LayoutRun (PangoLayoutRun*)")
 	}
 
 	return goret
@@ -21928,10 +21928,10 @@ func (iter *LayoutIter) GetRunExtents() (Rectangle, Rectangle) {
 
 	_ = inkRect
 	_ = carg1
-	panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
+	panic("unimplemented conversion of Rectangle (PangoRectangle)")
 	_ = logicalRect
 	_ = carg2
-	panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
+	panic("unimplemented conversion of Rectangle (PangoRectangle)")
 
 	return inkRect, logicalRect
 }
@@ -21966,7 +21966,7 @@ func (iter *LayoutIter) GetRunReadonly() *LayoutRun {
 	if cret != nil {
 		_ = goret
 		_ = cret
-		panic("unimplemented conversion of *LayoutRun (*C.PangoLayoutRun)")
+		panic("unimplemented conversion of *LayoutRun (PangoLayoutRun*)")
 	}
 
 	return goret
@@ -22198,10 +22198,10 @@ func (line *LayoutLine) GetExtents() (Rectangle, Rectangle) {
 
 	_ = inkRect
 	_ = carg1
-	panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
+	panic("unimplemented conversion of Rectangle (PangoRectangle)")
 	_ = logicalRect
 	_ = carg2
-	panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
+	panic("unimplemented conversion of Rectangle (PangoRectangle)")
 
 	return inkRect, logicalRect
 }
@@ -22288,10 +22288,10 @@ func (layoutLine *LayoutLine) GetPixelExtents() (Rectangle, Rectangle) {
 
 	_ = inkRect
 	_ = carg1
-	panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
+	panic("unimplemented conversion of Rectangle (PangoRectangle)")
 	_ = logicalRect
 	_ = carg2
-	panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
+	panic("unimplemented conversion of Rectangle (PangoRectangle)")
 
 	return inkRect, logicalRect
 }

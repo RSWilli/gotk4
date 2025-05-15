@@ -681,7 +681,7 @@ func (box *Box) Expand(point *Point3D) Box {
 
 	_ = res
 	_ = carg2
-	panic("unimplemented conversion of Box (C.graphene_box_t)")
+	panic("unimplemented conversion of Box (graphene_box_t)")
 
 	return res
 }
@@ -716,7 +716,7 @@ func (box *Box) ExpandScalar(scalar float32) Box {
 
 	_ = res
 	_ = carg2
-	panic("unimplemented conversion of Box (C.graphene_box_t)")
+	panic("unimplemented conversion of Box (graphene_box_t)")
 
 	return res
 }
@@ -749,7 +749,7 @@ func (box *Box) ExpandVec3(vec *Vec3) Box {
 
 	_ = res
 	_ = carg2
-	panic("unimplemented conversion of Box (C.graphene_box_t)")
+	panic("unimplemented conversion of Box (graphene_box_t)")
 
 	return res
 }
@@ -775,7 +775,7 @@ func (box *Box) GetBoundingSphere() Sphere {
 
 	_ = sphere
 	_ = carg1
-	panic("unimplemented conversion of Sphere (C.graphene_sphere_t)")
+	panic("unimplemented conversion of Sphere (graphene_sphere_t)")
 
 	return sphere
 }
@@ -801,7 +801,7 @@ func (box *Box) GetCenter() Point3D {
 
 	_ = center
 	_ = carg1
-	panic("unimplemented conversion of Point3D (C.graphene_point3d_t)")
+	panic("unimplemented conversion of Point3D (graphene_point3d_t)")
 
 	return center
 }
@@ -873,7 +873,7 @@ func (box *Box) GetMax() Point3D {
 
 	_ = max
 	_ = carg1
-	panic("unimplemented conversion of Point3D (C.graphene_point3d_t)")
+	panic("unimplemented conversion of Point3D (graphene_point3d_t)")
 
 	return max
 }
@@ -899,7 +899,7 @@ func (box *Box) GetMin() Point3D {
 
 	_ = min
 	_ = carg1
-	panic("unimplemented conversion of Point3D (C.graphene_point3d_t)")
+	panic("unimplemented conversion of Point3D (graphene_point3d_t)")
 
 	return min
 }
@@ -925,7 +925,7 @@ func (box *Box) GetSize() Vec3 {
 
 	_ = size
 	_ = carg1
-	panic("unimplemented conversion of Vec3 (C.graphene_vec3_t)")
+	panic("unimplemented conversion of Vec3 (graphene_vec3_t)")
 
 	return size
 }
@@ -1047,7 +1047,7 @@ func (box *Box) InitFromPoints(points []Point3D) *Box {
 	_ = points
 	_ = carg2
 	_ = carg1
-	panic("unimplemented conversion of []Point3D (*C.graphene_point3d_t)")
+	panic("unimplemented conversion of []Point3D (const graphene_point3d_t*)")
 
 	cret = C.graphene_box_init_from_points(carg0, carg1, carg2)
 	runtime.KeepAlive(box)
@@ -1124,7 +1124,7 @@ func (box *Box) InitFromVectors(vectors []Vec3) *Box {
 	_ = vectors
 	_ = carg2
 	_ = carg1
-	panic("unimplemented conversion of []Vec3 (*C.graphene_vec3_t)")
+	panic("unimplemented conversion of []Vec3 (const graphene_vec3_t*)")
 
 	cret = C.graphene_box_init_from_vectors(carg0, carg1, carg2)
 	runtime.KeepAlive(box)
@@ -1170,7 +1170,7 @@ func (a *Box) Intersection(b *Box) (Box, bool) {
 
 	_ = res
 	_ = carg2
-	panic("unimplemented conversion of Box (C.graphene_box_t)")
+	panic("unimplemented conversion of Box (graphene_box_t)")
 	if cret != 0 {
 		goret = true
 	}
@@ -1205,7 +1205,7 @@ func (a *Box) Union(b *Box) Box {
 
 	_ = res
 	_ = carg2
-	panic("unimplemented conversion of Box (C.graphene_box_t)")
+	panic("unimplemented conversion of Box (graphene_box_t)")
 
 	return res
 }
@@ -1832,7 +1832,7 @@ func (e *Euler) Reorder(order EulerOrder) Euler {
 
 	_ = res
 	_ = carg2
-	panic("unimplemented conversion of Euler (C.graphene_euler_t)")
+	panic("unimplemented conversion of Euler (graphene_euler_t)")
 
 	return res
 }
@@ -1872,7 +1872,7 @@ func (e *Euler) ToMatrix() Matrix {
 
 	_ = res
 	_ = carg1
-	panic("unimplemented conversion of Matrix (C.graphene_matrix_t)")
+	panic("unimplemented conversion of Matrix (graphene_matrix_t)")
 
 	return res
 }
@@ -1897,7 +1897,7 @@ func (e *Euler) ToQuaternion() Quaternion {
 
 	_ = res
 	_ = carg1
-	panic("unimplemented conversion of Quaternion (C.graphene_quaternion_t)")
+	panic("unimplemented conversion of Quaternion (graphene_quaternion_t)")
 
 	return res
 }
@@ -1923,7 +1923,7 @@ func (e *Euler) ToVec3() Vec3 {
 
 	_ = res
 	_ = carg1
-	panic("unimplemented conversion of Vec3 (C.graphene_vec3_t)")
+	panic("unimplemented conversion of Vec3 (graphene_vec3_t)")
 
 	return res
 }
@@ -2414,19 +2414,19 @@ func (m *Matrix) Decompose() (Vec3, Vec3, Quaternion, Vec3, Vec4, bool) {
 
 	_ = translate
 	_ = carg1
-	panic("unimplemented conversion of Vec3 (C.graphene_vec3_t)")
+	panic("unimplemented conversion of Vec3 (graphene_vec3_t)")
 	_ = scale
 	_ = carg2
-	panic("unimplemented conversion of Vec3 (C.graphene_vec3_t)")
+	panic("unimplemented conversion of Vec3 (graphene_vec3_t)")
 	_ = rotate
 	_ = carg3
-	panic("unimplemented conversion of Quaternion (C.graphene_quaternion_t)")
+	panic("unimplemented conversion of Quaternion (graphene_quaternion_t)")
 	_ = shear
 	_ = carg4
-	panic("unimplemented conversion of Vec3 (C.graphene_vec3_t)")
+	panic("unimplemented conversion of Vec3 (graphene_vec3_t)")
 	_ = perspective
 	_ = carg5
-	panic("unimplemented conversion of Vec4 (C.graphene_vec4_t)")
+	panic("unimplemented conversion of Vec4 (graphene_vec4_t)")
 	if cret != 0 {
 		goret = true
 	}
@@ -2571,7 +2571,7 @@ func (m *Matrix) GetRow(index_ uint) Vec4 {
 
 	_ = res
 	_ = carg2
-	panic("unimplemented conversion of Vec4 (C.graphene_vec4_t)")
+	panic("unimplemented conversion of Vec4 (graphene_vec4_t)")
 
 	return res
 }
@@ -2831,7 +2831,7 @@ func (m *Matrix) InitFromFloat(v [16]float32) *Matrix {
 	carg0 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(m))
 	_ = v
 	_ = carg1
-	panic("unimplemented conversion of [16]float32 (*C.float)")
+	panic("unimplemented conversion of [16]float32 (const float*)")
 
 	cret = C.graphene_matrix_init_from_float(carg0, carg1)
 	runtime.KeepAlive(m)
@@ -3315,7 +3315,7 @@ func (a *Matrix) Interpolate(b *Matrix, factor float64) Matrix {
 
 	_ = res
 	_ = carg3
-	panic("unimplemented conversion of Matrix (C.graphene_matrix_t)")
+	panic("unimplemented conversion of Matrix (graphene_matrix_t)")
 
 	return res
 }
@@ -3344,7 +3344,7 @@ func (m *Matrix) Inverse() (Matrix, bool) {
 
 	_ = res
 	_ = carg1
-	panic("unimplemented conversion of Matrix (C.graphene_matrix_t)")
+	panic("unimplemented conversion of Matrix (graphene_matrix_t)")
 	if cret != 0 {
 		goret = true
 	}
@@ -3484,7 +3484,7 @@ func (a *Matrix) Multiply(b *Matrix) Matrix {
 
 	_ = res
 	_ = carg2
-	panic("unimplemented conversion of Matrix (C.graphene_matrix_t)")
+	panic("unimplemented conversion of Matrix (graphene_matrix_t)")
 
 	return res
 }
@@ -3547,7 +3547,7 @@ func (m *Matrix) Normalize() Matrix {
 
 	_ = res
 	_ = carg1
-	panic("unimplemented conversion of Matrix (C.graphene_matrix_t)")
+	panic("unimplemented conversion of Matrix (graphene_matrix_t)")
 
 	return res
 }
@@ -3580,7 +3580,7 @@ func (m *Matrix) Perspective(depth float32) Matrix {
 
 	_ = res
 	_ = carg2
-	panic("unimplemented conversion of Matrix (C.graphene_matrix_t)")
+	panic("unimplemented conversion of Matrix (graphene_matrix_t)")
 
 	return res
 }
@@ -3628,7 +3628,7 @@ func (m *Matrix) ProjectPoint(p *Point) Point {
 
 	_ = res
 	_ = carg2
-	panic("unimplemented conversion of Point (C.graphene_point_t)")
+	panic("unimplemented conversion of Point (graphene_point_t)")
 
 	return res
 }
@@ -3663,7 +3663,7 @@ func (m *Matrix) ProjectRect(r *Rect) Quad {
 
 	_ = res
 	_ = carg2
-	panic("unimplemented conversion of Quad (C.graphene_quad_t)")
+	panic("unimplemented conversion of Quad (graphene_quad_t)")
 
 	return res
 }
@@ -3699,7 +3699,7 @@ func (m *Matrix) ProjectRectBounds(r *Rect) Rect {
 
 	_ = res
 	_ = carg2
-	panic("unimplemented conversion of Rect (C.graphene_rect_t)")
+	panic("unimplemented conversion of Rect (graphene_rect_t)")
 
 	return res
 }
@@ -4022,7 +4022,7 @@ func (m *Matrix) TransformBounds(r *Rect) Rect {
 
 	_ = res
 	_ = carg2
-	panic("unimplemented conversion of Rect (C.graphene_rect_t)")
+	panic("unimplemented conversion of Rect (graphene_rect_t)")
 
 	return res
 }
@@ -4058,7 +4058,7 @@ func (m *Matrix) TransformBox(b *Box) Box {
 
 	_ = res
 	_ = carg2
-	panic("unimplemented conversion of Box (C.graphene_box_t)")
+	panic("unimplemented conversion of Box (graphene_box_t)")
 
 	return res
 }
@@ -4097,7 +4097,7 @@ func (m *Matrix) TransformPoint(p *Point) Point {
 
 	_ = res
 	_ = carg2
-	panic("unimplemented conversion of Point (C.graphene_point_t)")
+	panic("unimplemented conversion of Point (graphene_point_t)")
 
 	return res
 }
@@ -4135,7 +4135,7 @@ func (m *Matrix) TransformPoint3D(p *Point3D) Point3D {
 
 	_ = res
 	_ = carg2
-	panic("unimplemented conversion of Point3D (C.graphene_point3d_t)")
+	panic("unimplemented conversion of Point3D (graphene_point3d_t)")
 
 	return res
 }
@@ -4168,7 +4168,7 @@ func (m *Matrix) TransformRay(r *Ray) Ray {
 
 	_ = res
 	_ = carg2
-	panic("unimplemented conversion of Ray (C.graphene_ray_t)")
+	panic("unimplemented conversion of Ray (graphene_ray_t)")
 
 	return res
 }
@@ -4205,7 +4205,7 @@ func (m *Matrix) TransformRect(r *Rect) Quad {
 
 	_ = res
 	_ = carg2
-	panic("unimplemented conversion of Quad (C.graphene_quad_t)")
+	panic("unimplemented conversion of Quad (graphene_quad_t)")
 
 	return res
 }
@@ -4239,7 +4239,7 @@ func (m *Matrix) TransformSphere(s *Sphere) Sphere {
 
 	_ = res
 	_ = carg2
-	panic("unimplemented conversion of Sphere (C.graphene_sphere_t)")
+	panic("unimplemented conversion of Sphere (graphene_sphere_t)")
 
 	return res
 }
@@ -4277,7 +4277,7 @@ func (m *Matrix) TransformVec3(v *Vec3) Vec3 {
 
 	_ = res
 	_ = carg2
-	panic("unimplemented conversion of Vec3 (C.graphene_vec3_t)")
+	panic("unimplemented conversion of Vec3 (graphene_vec3_t)")
 
 	return res
 }
@@ -4311,7 +4311,7 @@ func (m *Matrix) TransformVec4(v *Vec4) Vec4 {
 
 	_ = res
 	_ = carg2
-	panic("unimplemented conversion of Vec4 (C.graphene_vec4_t)")
+	panic("unimplemented conversion of Vec4 (graphene_vec4_t)")
 
 	return res
 }
@@ -4360,7 +4360,7 @@ func (m *Matrix) Transpose() Matrix {
 
 	_ = res
 	_ = carg1
-	panic("unimplemented conversion of Matrix (C.graphene_matrix_t)")
+	panic("unimplemented conversion of Matrix (graphene_matrix_t)")
 
 	return res
 }
@@ -4399,7 +4399,7 @@ func (projection *Matrix) UnprojectPoint3D(modelview *Matrix, point *Point3D) Po
 
 	_ = res
 	_ = carg3
-	panic("unimplemented conversion of Point3D (C.graphene_point3d_t)")
+	panic("unimplemented conversion of Point3D (graphene_point3d_t)")
 
 	return res
 }
@@ -4437,7 +4437,7 @@ func (m *Matrix) UntransformBounds(r *Rect, bounds *Rect) Rect {
 
 	_ = res
 	_ = carg3
-	panic("unimplemented conversion of Rect (C.graphene_rect_t)")
+	panic("unimplemented conversion of Rect (graphene_rect_t)")
 
 	return res
 }
@@ -4478,7 +4478,7 @@ func (m *Matrix) UntransformPoint(p *Point, bounds *Rect) (Point, bool) {
 
 	_ = res
 	_ = carg3
-	panic("unimplemented conversion of Point (C.graphene_point_t)")
+	panic("unimplemented conversion of Point (graphene_point_t)")
 	if cret != 0 {
 		goret = true
 	}
@@ -4695,7 +4695,7 @@ func (p *Plane) GetNormal() Vec3 {
 
 	_ = normal
 	_ = carg1
-	panic("unimplemented conversion of Vec3 (C.graphene_vec3_t)")
+	panic("unimplemented conversion of Vec3 (graphene_vec3_t)")
 
 	return normal
 }
@@ -4901,7 +4901,7 @@ func (p *Plane) Negate() Plane {
 
 	_ = res
 	_ = carg1
-	panic("unimplemented conversion of Plane (C.graphene_plane_t)")
+	panic("unimplemented conversion of Plane (graphene_plane_t)")
 
 	return res
 }
@@ -4927,7 +4927,7 @@ func (p *Plane) Normalize() Plane {
 
 	_ = res
 	_ = carg1
-	panic("unimplemented conversion of Plane (C.graphene_plane_t)")
+	panic("unimplemented conversion of Plane (graphene_plane_t)")
 
 	return res
 }
@@ -4972,7 +4972,7 @@ func (p *Plane) Transform(matrix *Matrix, normalMatrix *Matrix) Plane {
 
 	_ = res
 	_ = carg3
-	panic("unimplemented conversion of Plane (C.graphene_plane_t)")
+	panic("unimplemented conversion of Plane (graphene_plane_t)")
 
 	return res
 }
@@ -5316,7 +5316,7 @@ func (a *Point) Interpolate(b *Point, factor float64) Point {
 
 	_ = res
 	_ = carg3
-	panic("unimplemented conversion of Point (C.graphene_point_t)")
+	panic("unimplemented conversion of Point (graphene_point_t)")
 
 	return res
 }
@@ -5379,7 +5379,7 @@ func (p *Point) ToVec2() Vec2 {
 
 	_ = v
 	_ = carg1
-	panic("unimplemented conversion of Vec2 (C.graphene_vec2_t)")
+	panic("unimplemented conversion of Vec2 (graphene_vec2_t)")
 
 	return v
 }
@@ -5528,7 +5528,7 @@ func (a *Point3D) Cross(b *Point3D) Point3D {
 
 	_ = res
 	_ = carg2
-	panic("unimplemented conversion of Point3D (C.graphene_point3d_t)")
+	panic("unimplemented conversion of Point3D (graphene_point3d_t)")
 
 	return res
 }
@@ -5564,7 +5564,7 @@ func (a *Point3D) Distance(b *Point3D) (Vec3, float32) {
 
 	_ = delta
 	_ = carg2
-	panic("unimplemented conversion of Vec3 (C.graphene_vec3_t)")
+	panic("unimplemented conversion of Vec3 (graphene_vec3_t)")
 	goret = float32(cret)
 
 	return delta, goret
@@ -5765,7 +5765,7 @@ func (a *Point3D) Interpolate(b *Point3D, factor float64) Point3D {
 
 	_ = res
 	_ = carg3
-	panic("unimplemented conversion of Point3D (C.graphene_point3d_t)")
+	panic("unimplemented conversion of Point3D (graphene_point3d_t)")
 
 	return res
 }
@@ -5853,7 +5853,7 @@ func (p *Point3D) Normalize() Point3D {
 
 	_ = res
 	_ = carg1
-	panic("unimplemented conversion of Point3D (C.graphene_point3d_t)")
+	panic("unimplemented conversion of Point3D (graphene_point3d_t)")
 
 	return res
 }
@@ -5900,7 +5900,7 @@ func (p *Point3D) NormalizeViewport(viewport *Rect, zNear float32, zFar float32)
 
 	_ = res
 	_ = carg4
-	panic("unimplemented conversion of Point3D (C.graphene_point3d_t)")
+	panic("unimplemented conversion of Point3D (graphene_point3d_t)")
 
 	return res
 }
@@ -5933,7 +5933,7 @@ func (p *Point3D) Scale(factor float32) Point3D {
 
 	_ = res
 	_ = carg2
-	panic("unimplemented conversion of Point3D (C.graphene_point3d_t)")
+	panic("unimplemented conversion of Point3D (graphene_point3d_t)")
 
 	return res
 }
@@ -5959,7 +5959,7 @@ func (p *Point3D) ToVec3() Vec3 {
 
 	_ = v
 	_ = carg1
-	panic("unimplemented conversion of Vec3 (C.graphene_vec3_t)")
+	panic("unimplemented conversion of Vec3 (graphene_vec3_t)")
 
 	return v
 }
@@ -6086,7 +6086,7 @@ func (q *Quad) Bounds() Rect {
 
 	_ = r
 	_ = carg1
-	panic("unimplemented conversion of Rect (C.graphene_rect_t)")
+	panic("unimplemented conversion of Rect (graphene_rect_t)")
 
 	return r
 }
@@ -6214,7 +6214,7 @@ func (q *Quad) InitFromPoints(points [4]Point) *Quad {
 	carg0 = (*C.graphene_quad_t)(UnsafeQuadToGlibNone(q))
 	_ = points
 	_ = carg1
-	panic("unimplemented conversion of [4]Point (*C.graphene_point_t)")
+	panic("unimplemented conversion of [4]Point (const graphene_point_t*)")
 
 	cret = C.graphene_quad_init_from_points(carg0, carg1)
 	runtime.KeepAlive(q)
@@ -6387,7 +6387,7 @@ func (a *Quaternion) Add(b *Quaternion) Quaternion {
 
 	_ = res
 	_ = carg2
-	panic("unimplemented conversion of Quaternion (C.graphene_quaternion_t)")
+	panic("unimplemented conversion of Quaternion (graphene_quaternion_t)")
 
 	return res
 }
@@ -6782,7 +6782,7 @@ func (q *Quaternion) Invert() Quaternion {
 
 	_ = res
 	_ = carg1
-	panic("unimplemented conversion of Quaternion (C.graphene_quaternion_t)")
+	panic("unimplemented conversion of Quaternion (graphene_quaternion_t)")
 
 	return res
 }
@@ -6814,7 +6814,7 @@ func (a *Quaternion) Multiply(b *Quaternion) Quaternion {
 
 	_ = res
 	_ = carg2
-	panic("unimplemented conversion of Quaternion (C.graphene_quaternion_t)")
+	panic("unimplemented conversion of Quaternion (graphene_quaternion_t)")
 
 	return res
 }
@@ -6840,7 +6840,7 @@ func (q *Quaternion) Normalize() Quaternion {
 
 	_ = res
 	_ = carg1
-	panic("unimplemented conversion of Quaternion (C.graphene_quaternion_t)")
+	panic("unimplemented conversion of Quaternion (graphene_quaternion_t)")
 
 	return res
 }
@@ -6873,7 +6873,7 @@ func (q *Quaternion) Scale(factor float32) Quaternion {
 
 	_ = res
 	_ = carg2
-	panic("unimplemented conversion of Quaternion (C.graphene_quaternion_t)")
+	panic("unimplemented conversion of Quaternion (graphene_quaternion_t)")
 
 	return res
 }
@@ -6912,7 +6912,7 @@ func (a *Quaternion) Slerp(b *Quaternion, factor float32) Quaternion {
 
 	_ = res
 	_ = carg3
-	panic("unimplemented conversion of Quaternion (C.graphene_quaternion_t)")
+	panic("unimplemented conversion of Quaternion (graphene_quaternion_t)")
 
 	return res
 }
@@ -6941,7 +6941,7 @@ func (q *Quaternion) ToAngleVec3() (float32, Vec3) {
 	angle = float32(carg1)
 	_ = axis
 	_ = carg2
-	panic("unimplemented conversion of Vec3 (C.graphene_vec3_t)")
+	panic("unimplemented conversion of Vec3 (graphene_vec3_t)")
 
 	return angle, axis
 }
@@ -7003,7 +7003,7 @@ func (q *Quaternion) ToMatrix() Matrix {
 
 	_ = m
 	_ = carg1
-	panic("unimplemented conversion of Matrix (C.graphene_matrix_t)")
+	panic("unimplemented conversion of Matrix (graphene_matrix_t)")
 
 	return m
 }
@@ -7066,7 +7066,7 @@ func (q *Quaternion) ToVec4() Vec4 {
 
 	_ = res
 	_ = carg1
-	panic("unimplemented conversion of Vec4 (C.graphene_vec4_t)")
+	panic("unimplemented conversion of Vec4 (graphene_vec4_t)")
 
 	return res
 }
@@ -7233,7 +7233,7 @@ func (r *Ray) GetClosestPointToPoint(p *Point3D) Point3D {
 
 	_ = res
 	_ = carg2
-	panic("unimplemented conversion of Point3D (C.graphene_point3d_t)")
+	panic("unimplemented conversion of Point3D (graphene_point3d_t)")
 
 	return res
 }
@@ -7258,7 +7258,7 @@ func (r *Ray) GetDirection() Vec3 {
 
 	_ = direction
 	_ = carg1
-	panic("unimplemented conversion of Vec3 (C.graphene_vec3_t)")
+	panic("unimplemented conversion of Vec3 (graphene_vec3_t)")
 
 	return direction
 }
@@ -7351,7 +7351,7 @@ func (r *Ray) GetOrigin() Point3D {
 
 	_ = origin
 	_ = carg1
-	panic("unimplemented conversion of Point3D (C.graphene_point3d_t)")
+	panic("unimplemented conversion of Point3D (graphene_point3d_t)")
 
 	return origin
 }
@@ -7384,7 +7384,7 @@ func (r *Ray) GetPositionAt(t float32) Point3D {
 
 	_ = position
 	_ = carg2
-	panic("unimplemented conversion of Point3D (C.graphene_point3d_t)")
+	panic("unimplemented conversion of Point3D (graphene_point3d_t)")
 
 	return position
 }
@@ -7961,7 +7961,7 @@ func (r *Rect) Expand(p *Point) Rect {
 
 	_ = res
 	_ = carg2
-	panic("unimplemented conversion of Rect (C.graphene_rect_t)")
+	panic("unimplemented conversion of Rect (graphene_rect_t)")
 
 	return res
 }
@@ -8009,7 +8009,7 @@ func (r *Rect) GetBottomLeft() Point {
 
 	_ = p
 	_ = carg1
-	panic("unimplemented conversion of Point (C.graphene_point_t)")
+	panic("unimplemented conversion of Point (graphene_point_t)")
 
 	return p
 }
@@ -8034,7 +8034,7 @@ func (r *Rect) GetBottomRight() Point {
 
 	_ = p
 	_ = carg1
-	panic("unimplemented conversion of Point (C.graphene_point_t)")
+	panic("unimplemented conversion of Point (graphene_point_t)")
 
 	return p
 }
@@ -8059,7 +8059,7 @@ func (r *Rect) GetCenter() Point {
 
 	_ = p
 	_ = carg1
-	panic("unimplemented conversion of Point (C.graphene_point_t)")
+	panic("unimplemented conversion of Point (graphene_point_t)")
 
 	return p
 }
@@ -8107,7 +8107,7 @@ func (r *Rect) GetTopLeft() Point {
 
 	_ = p
 	_ = carg1
-	panic("unimplemented conversion of Point (C.graphene_point_t)")
+	panic("unimplemented conversion of Point (graphene_point_t)")
 
 	return p
 }
@@ -8132,7 +8132,7 @@ func (r *Rect) GetTopRight() Point {
 
 	_ = p
 	_ = carg1
-	panic("unimplemented conversion of Point (C.graphene_point_t)")
+	panic("unimplemented conversion of Point (graphene_point_t)")
 
 	return p
 }
@@ -8377,7 +8377,7 @@ func (r *Rect) InsetR(dX float32, dY float32) Rect {
 
 	_ = res
 	_ = carg3
-	panic("unimplemented conversion of Rect (C.graphene_rect_t)")
+	panic("unimplemented conversion of Rect (graphene_rect_t)")
 
 	return res
 }
@@ -8415,7 +8415,7 @@ func (a *Rect) Interpolate(b *Rect, factor float64) Rect {
 
 	_ = res
 	_ = carg3
-	panic("unimplemented conversion of Rect (C.graphene_rect_t)")
+	panic("unimplemented conversion of Rect (graphene_rect_t)")
 
 	return res
 }
@@ -8458,7 +8458,7 @@ func (a *Rect) Intersection(b *Rect) (Rect, bool) {
 
 	_ = res
 	_ = carg2
-	panic("unimplemented conversion of Rect (C.graphene_rect_t)")
+	panic("unimplemented conversion of Rect (graphene_rect_t)")
 	if cret != 0 {
 		goret = true
 	}
@@ -8518,7 +8518,7 @@ func (r *Rect) NormalizeR() Rect {
 
 	_ = res
 	_ = carg1
-	panic("unimplemented conversion of Rect (C.graphene_rect_t)")
+	panic("unimplemented conversion of Rect (graphene_rect_t)")
 
 	return res
 }
@@ -8593,7 +8593,7 @@ func (r *Rect) OffsetR(dX float32, dY float32) Rect {
 
 	_ = res
 	_ = carg3
-	panic("unimplemented conversion of Rect (C.graphene_rect_t)")
+	panic("unimplemented conversion of Rect (graphene_rect_t)")
 
 	return res
 }
@@ -8629,7 +8629,7 @@ func (r *Rect) Round() Rect {
 
 	_ = res
 	_ = carg1
-	panic("unimplemented conversion of Rect (C.graphene_rect_t)")
+	panic("unimplemented conversion of Rect (graphene_rect_t)")
 
 	return res
 }
@@ -8675,7 +8675,7 @@ func (r *Rect) RoundExtents() Rect {
 
 	_ = res
 	_ = carg1
-	panic("unimplemented conversion of Rect (C.graphene_rect_t)")
+	panic("unimplemented conversion of Rect (graphene_rect_t)")
 
 	return res
 }
@@ -8740,7 +8740,7 @@ func (r *Rect) Scale(sH float32, sV float32) Rect {
 
 	_ = res
 	_ = carg3
-	panic("unimplemented conversion of Rect (C.graphene_rect_t)")
+	panic("unimplemented conversion of Rect (graphene_rect_t)")
 
 	return res
 }
@@ -8776,7 +8776,7 @@ func (a *Rect) Union(b *Rect) Rect {
 
 	_ = res
 	_ = carg2
-	panic("unimplemented conversion of Rect (C.graphene_rect_t)")
+	panic("unimplemented conversion of Rect (graphene_rect_t)")
 
 	return res
 }
@@ -9151,7 +9151,7 @@ func (a *Size) Interpolate(b *Size, factor float64) Size {
 
 	_ = res
 	_ = carg3
-	panic("unimplemented conversion of Size (C.graphene_size_t)")
+	panic("unimplemented conversion of Size (graphene_size_t)")
 
 	return res
 }
@@ -9183,7 +9183,7 @@ func (s *Size) Scale(factor float32) Size {
 
 	_ = res
 	_ = carg2
-	panic("unimplemented conversion of Size (C.graphene_size_t)")
+	panic("unimplemented conversion of Size (graphene_size_t)")
 
 	return res
 }
@@ -9404,7 +9404,7 @@ func (s *Sphere) GetBoundingBox() Box {
 
 	_ = box
 	_ = carg1
-	panic("unimplemented conversion of Box (C.graphene_box_t)")
+	panic("unimplemented conversion of Box (graphene_box_t)")
 
 	return box
 }
@@ -9430,7 +9430,7 @@ func (s *Sphere) GetCenter() Point3D {
 
 	_ = center
 	_ = carg1
-	panic("unimplemented conversion of Point3D (C.graphene_point3d_t)")
+	panic("unimplemented conversion of Point3D (graphene_point3d_t)")
 
 	return center
 }
@@ -9522,7 +9522,7 @@ func (s *Sphere) InitFromPoints(points []Point3D, center *Point3D) *Sphere {
 	_ = points
 	_ = carg2
 	_ = carg1
-	panic("unimplemented conversion of []Point3D (*C.graphene_point3d_t)")
+	panic("unimplemented conversion of []Point3D (const graphene_point3d_t*)")
 	if center != nil {
 		carg3 = (*C.graphene_point3d_t)(UnsafePoint3DToGlibNone(center))
 	}
@@ -9566,7 +9566,7 @@ func (s *Sphere) InitFromVectors(vectors []Vec3, center *Point3D) *Sphere {
 	_ = vectors
 	_ = carg2
 	_ = carg1
-	panic("unimplemented conversion of []Vec3 (*C.graphene_vec3_t)")
+	panic("unimplemented conversion of []Vec3 (const graphene_vec3_t*)")
 	if center != nil {
 		carg3 = (*C.graphene_point3d_t)(UnsafePoint3DToGlibNone(center))
 	}
@@ -9636,7 +9636,7 @@ func (s *Sphere) Translate(point *Point3D) Sphere {
 
 	_ = res
 	_ = carg2
-	panic("unimplemented conversion of Sphere (C.graphene_sphere_t)")
+	panic("unimplemented conversion of Sphere (graphene_sphere_t)")
 
 	return res
 }
@@ -9875,7 +9875,7 @@ func (t *Triangle) GetBarycoords(p *Point3D) (Vec2, bool) {
 
 	_ = res
 	_ = carg2
-	panic("unimplemented conversion of Vec2 (C.graphene_vec2_t)")
+	panic("unimplemented conversion of Vec2 (graphene_vec2_t)")
 	if cret != 0 {
 		goret = true
 	}
@@ -9903,7 +9903,7 @@ func (t *Triangle) GetBoundingBox() Box {
 
 	_ = res
 	_ = carg1
-	panic("unimplemented conversion of Box (C.graphene_box_t)")
+	panic("unimplemented conversion of Box (graphene_box_t)")
 
 	return res
 }
@@ -9932,7 +9932,7 @@ func (t *Triangle) GetMidpoint() Point3D {
 
 	_ = res
 	_ = carg1
-	panic("unimplemented conversion of Point3D (C.graphene_point3d_t)")
+	panic("unimplemented conversion of Point3D (graphene_point3d_t)")
 
 	return res
 }
@@ -9957,7 +9957,7 @@ func (t *Triangle) GetNormal() Vec3 {
 
 	_ = res
 	_ = carg1
-	panic("unimplemented conversion of Vec3 (C.graphene_vec3_t)")
+	panic("unimplemented conversion of Vec3 (graphene_vec3_t)")
 
 	return res
 }
@@ -9982,7 +9982,7 @@ func (t *Triangle) GetPlane() Plane {
 
 	_ = res
 	_ = carg1
-	panic("unimplemented conversion of Plane (C.graphene_plane_t)")
+	panic("unimplemented conversion of Plane (graphene_plane_t)")
 
 	return res
 }
@@ -10017,13 +10017,13 @@ func (t *Triangle) GetPoints() (Point3D, Point3D, Point3D) {
 
 	_ = a
 	_ = carg1
-	panic("unimplemented conversion of Point3D (C.graphene_point3d_t)")
+	panic("unimplemented conversion of Point3D (graphene_point3d_t)")
 	_ = b
 	_ = carg2
-	panic("unimplemented conversion of Point3D (C.graphene_point3d_t)")
+	panic("unimplemented conversion of Point3D (graphene_point3d_t)")
 	_ = c
 	_ = carg3
-	panic("unimplemented conversion of Point3D (C.graphene_point3d_t)")
+	panic("unimplemented conversion of Point3D (graphene_point3d_t)")
 
 	return a, b, c
 }
@@ -10084,7 +10084,7 @@ func (t *Triangle) GetUv(p *Point3D, uvA *Vec2, uvB *Vec2, uvC *Vec2) (Vec2, boo
 
 	_ = res
 	_ = carg5
-	panic("unimplemented conversion of Vec2 (C.graphene_vec2_t)")
+	panic("unimplemented conversion of Vec2 (graphene_vec2_t)")
 	if cret != 0 {
 		goret = true
 	}
@@ -10118,13 +10118,13 @@ func (t *Triangle) GetVertices() (Vec3, Vec3, Vec3) {
 
 	_ = a
 	_ = carg1
-	panic("unimplemented conversion of Vec3 (C.graphene_vec3_t)")
+	panic("unimplemented conversion of Vec3 (graphene_vec3_t)")
 	_ = b
 	_ = carg2
-	panic("unimplemented conversion of Vec3 (C.graphene_vec3_t)")
+	panic("unimplemented conversion of Vec3 (graphene_vec3_t)")
 	_ = c
 	_ = carg3
-	panic("unimplemented conversion of Vec3 (C.graphene_vec3_t)")
+	panic("unimplemented conversion of Vec3 (graphene_vec3_t)")
 
 	return a, b, c
 }
@@ -10154,13 +10154,13 @@ func (t *Triangle) InitFromFloat(a [3]float32, b [3]float32, c [3]float32) *Tria
 	carg0 = (*C.graphene_triangle_t)(UnsafeTriangleToGlibNone(t))
 	_ = a
 	_ = carg1
-	panic("unimplemented conversion of [3]float32 (*C.float)")
+	panic("unimplemented conversion of [3]float32 (const float*)")
 	_ = b
 	_ = carg2
-	panic("unimplemented conversion of [3]float32 (*C.float)")
+	panic("unimplemented conversion of [3]float32 (const float*)")
 	_ = c
 	_ = carg3
-	panic("unimplemented conversion of [3]float32 (*C.float)")
+	panic("unimplemented conversion of [3]float32 (const float*)")
 
 	cret = C.graphene_triangle_init_from_float(carg0, carg1, carg2, carg3)
 	runtime.KeepAlive(t)
@@ -10471,7 +10471,7 @@ func (a *Vec2) Add(b *Vec2) Vec2 {
 
 	_ = res
 	_ = carg2
-	panic("unimplemented conversion of Vec2 (C.graphene_vec2_t)")
+	panic("unimplemented conversion of Vec2 (graphene_vec2_t)")
 
 	return res
 }
@@ -10505,7 +10505,7 @@ func (a *Vec2) Divide(b *Vec2) Vec2 {
 
 	_ = res
 	_ = carg2
-	panic("unimplemented conversion of Vec2 (C.graphene_vec2_t)")
+	panic("unimplemented conversion of Vec2 (graphene_vec2_t)")
 
 	return res
 }
@@ -10674,7 +10674,7 @@ func (v *Vec2) InitFromFloat(src [2]float32) *Vec2 {
 	carg0 = (*C.graphene_vec2_t)(UnsafeVec2ToGlibNone(v))
 	_ = src
 	_ = carg1
-	panic("unimplemented conversion of [2]float32 (*C.float)")
+	panic("unimplemented conversion of [2]float32 (const float*)")
 
 	cret = C.graphene_vec2_init_from_float(carg0, carg1)
 	runtime.KeepAlive(v)
@@ -10748,7 +10748,7 @@ func (v1 *Vec2) Interpolate(v2 *Vec2, factor float64) Vec2 {
 
 	_ = res
 	_ = carg3
-	panic("unimplemented conversion of Vec2 (C.graphene_vec2_t)")
+	panic("unimplemented conversion of Vec2 (graphene_vec2_t)")
 
 	return res
 }
@@ -10804,7 +10804,7 @@ func (a *Vec2) Max(b *Vec2) Vec2 {
 
 	_ = res
 	_ = carg2
-	panic("unimplemented conversion of Vec2 (C.graphene_vec2_t)")
+	panic("unimplemented conversion of Vec2 (graphene_vec2_t)")
 
 	return res
 }
@@ -10837,7 +10837,7 @@ func (a *Vec2) Min(b *Vec2) Vec2 {
 
 	_ = res
 	_ = carg2
-	panic("unimplemented conversion of Vec2 (C.graphene_vec2_t)")
+	panic("unimplemented conversion of Vec2 (graphene_vec2_t)")
 
 	return res
 }
@@ -10870,7 +10870,7 @@ func (a *Vec2) Multiply(b *Vec2) Vec2 {
 
 	_ = res
 	_ = carg2
-	panic("unimplemented conversion of Vec2 (C.graphene_vec2_t)")
+	panic("unimplemented conversion of Vec2 (graphene_vec2_t)")
 
 	return res
 }
@@ -10932,7 +10932,7 @@ func (v *Vec2) Negate() Vec2 {
 
 	_ = res
 	_ = carg1
-	panic("unimplemented conversion of Vec2 (C.graphene_vec2_t)")
+	panic("unimplemented conversion of Vec2 (graphene_vec2_t)")
 
 	return res
 }
@@ -10958,7 +10958,7 @@ func (v *Vec2) Normalize() Vec2 {
 
 	_ = res
 	_ = carg1
-	panic("unimplemented conversion of Vec2 (C.graphene_vec2_t)")
+	panic("unimplemented conversion of Vec2 (graphene_vec2_t)")
 
 	return res
 }
@@ -10990,7 +10990,7 @@ func (v *Vec2) Scale(factor float32) Vec2 {
 
 	_ = res
 	_ = carg2
-	panic("unimplemented conversion of Vec2 (C.graphene_vec2_t)")
+	panic("unimplemented conversion of Vec2 (graphene_vec2_t)")
 
 	return res
 }
@@ -11024,7 +11024,7 @@ func (a *Vec2) Subtract(b *Vec2) Vec2 {
 
 	_ = res
 	_ = carg2
-	panic("unimplemented conversion of Vec2 (C.graphene_vec2_t)")
+	panic("unimplemented conversion of Vec2 (graphene_vec2_t)")
 
 	return res
 }
@@ -11260,7 +11260,7 @@ func (a *Vec3) Add(b *Vec3) Vec3 {
 
 	_ = res
 	_ = carg2
-	panic("unimplemented conversion of Vec3 (C.graphene_vec3_t)")
+	panic("unimplemented conversion of Vec3 (graphene_vec3_t)")
 
 	return res
 }
@@ -11292,7 +11292,7 @@ func (a *Vec3) Cross(b *Vec3) Vec3 {
 
 	_ = res
 	_ = carg2
-	panic("unimplemented conversion of Vec3 (C.graphene_vec3_t)")
+	panic("unimplemented conversion of Vec3 (graphene_vec3_t)")
 
 	return res
 }
@@ -11326,7 +11326,7 @@ func (a *Vec3) Divide(b *Vec3) Vec3 {
 
 	_ = res
 	_ = carg2
-	panic("unimplemented conversion of Vec3 (C.graphene_vec3_t)")
+	panic("unimplemented conversion of Vec3 (graphene_vec3_t)")
 
 	return res
 }
@@ -11437,7 +11437,7 @@ func (v *Vec3) GetXY() Vec2 {
 
 	_ = res
 	_ = carg1
-	panic("unimplemented conversion of Vec2 (C.graphene_vec2_t)")
+	panic("unimplemented conversion of Vec2 (graphene_vec2_t)")
 
 	return res
 }
@@ -11463,7 +11463,7 @@ func (v *Vec3) GetXY0() Vec3 {
 
 	_ = res
 	_ = carg1
-	panic("unimplemented conversion of Vec3 (C.graphene_vec3_t)")
+	panic("unimplemented conversion of Vec3 (graphene_vec3_t)")
 
 	return res
 }
@@ -11489,7 +11489,7 @@ func (v *Vec3) GetXYZ0() Vec4 {
 
 	_ = res
 	_ = carg1
-	panic("unimplemented conversion of Vec4 (C.graphene_vec4_t)")
+	panic("unimplemented conversion of Vec4 (graphene_vec4_t)")
 
 	return res
 }
@@ -11515,7 +11515,7 @@ func (v *Vec3) GetXYZ1() Vec4 {
 
 	_ = res
 	_ = carg1
-	panic("unimplemented conversion of Vec4 (C.graphene_vec4_t)")
+	panic("unimplemented conversion of Vec4 (graphene_vec4_t)")
 
 	return res
 }
@@ -11548,7 +11548,7 @@ func (v *Vec3) GetXyzw(w float32) Vec4 {
 
 	_ = res
 	_ = carg2
-	panic("unimplemented conversion of Vec4 (C.graphene_vec4_t)")
+	panic("unimplemented conversion of Vec4 (graphene_vec4_t)")
 
 	return res
 }
@@ -11658,7 +11658,7 @@ func (v *Vec3) InitFromFloat(src [3]float32) *Vec3 {
 	carg0 = (*C.graphene_vec3_t)(UnsafeVec3ToGlibNone(v))
 	_ = src
 	_ = carg1
-	panic("unimplemented conversion of [3]float32 (*C.float)")
+	panic("unimplemented conversion of [3]float32 (const float*)")
 
 	cret = C.graphene_vec3_init_from_float(carg0, carg1)
 	runtime.KeepAlive(v)
@@ -11733,7 +11733,7 @@ func (v1 *Vec3) Interpolate(v2 *Vec3, factor float64) Vec3 {
 
 	_ = res
 	_ = carg3
-	panic("unimplemented conversion of Vec3 (C.graphene_vec3_t)")
+	panic("unimplemented conversion of Vec3 (graphene_vec3_t)")
 
 	return res
 }
@@ -11789,7 +11789,7 @@ func (a *Vec3) Max(b *Vec3) Vec3 {
 
 	_ = res
 	_ = carg2
-	panic("unimplemented conversion of Vec3 (C.graphene_vec3_t)")
+	panic("unimplemented conversion of Vec3 (graphene_vec3_t)")
 
 	return res
 }
@@ -11822,7 +11822,7 @@ func (a *Vec3) Min(b *Vec3) Vec3 {
 
 	_ = res
 	_ = carg2
-	panic("unimplemented conversion of Vec3 (C.graphene_vec3_t)")
+	panic("unimplemented conversion of Vec3 (graphene_vec3_t)")
 
 	return res
 }
@@ -11854,7 +11854,7 @@ func (a *Vec3) Multiply(b *Vec3) Vec3 {
 
 	_ = res
 	_ = carg2
-	panic("unimplemented conversion of Vec3 (C.graphene_vec3_t)")
+	panic("unimplemented conversion of Vec3 (graphene_vec3_t)")
 
 	return res
 }
@@ -11916,7 +11916,7 @@ func (v *Vec3) Negate() Vec3 {
 
 	_ = res
 	_ = carg1
-	panic("unimplemented conversion of Vec3 (C.graphene_vec3_t)")
+	panic("unimplemented conversion of Vec3 (graphene_vec3_t)")
 
 	return res
 }
@@ -11941,7 +11941,7 @@ func (v *Vec3) Normalize() Vec3 {
 
 	_ = res
 	_ = carg1
-	panic("unimplemented conversion of Vec3 (C.graphene_vec3_t)")
+	panic("unimplemented conversion of Vec3 (graphene_vec3_t)")
 
 	return res
 }
@@ -11973,7 +11973,7 @@ func (v *Vec3) Scale(factor float32) Vec3 {
 
 	_ = res
 	_ = carg2
-	panic("unimplemented conversion of Vec3 (C.graphene_vec3_t)")
+	panic("unimplemented conversion of Vec3 (graphene_vec3_t)")
 
 	return res
 }
@@ -12007,7 +12007,7 @@ func (a *Vec3) Subtract(b *Vec3) Vec3 {
 
 	_ = res
 	_ = carg2
-	panic("unimplemented conversion of Vec3 (C.graphene_vec3_t)")
+	panic("unimplemented conversion of Vec3 (graphene_vec3_t)")
 
 	return res
 }
@@ -12263,7 +12263,7 @@ func (a *Vec4) Add(b *Vec4) Vec4 {
 
 	_ = res
 	_ = carg2
-	panic("unimplemented conversion of Vec4 (C.graphene_vec4_t)")
+	panic("unimplemented conversion of Vec4 (graphene_vec4_t)")
 
 	return res
 }
@@ -12297,7 +12297,7 @@ func (a *Vec4) Divide(b *Vec4) Vec4 {
 
 	_ = res
 	_ = carg2
-	panic("unimplemented conversion of Vec4 (C.graphene_vec4_t)")
+	panic("unimplemented conversion of Vec4 (graphene_vec4_t)")
 
 	return res
 }
@@ -12431,7 +12431,7 @@ func (v *Vec4) GetXY() Vec2 {
 
 	_ = res
 	_ = carg1
-	panic("unimplemented conversion of Vec2 (C.graphene_vec2_t)")
+	panic("unimplemented conversion of Vec2 (graphene_vec2_t)")
 
 	return res
 }
@@ -12457,7 +12457,7 @@ func (v *Vec4) GetXYZ() Vec3 {
 
 	_ = res
 	_ = carg1
-	panic("unimplemented conversion of Vec3 (C.graphene_vec3_t)")
+	panic("unimplemented conversion of Vec3 (graphene_vec3_t)")
 
 	return res
 }
@@ -12571,7 +12571,7 @@ func (v *Vec4) InitFromFloat(src [4]float32) *Vec4 {
 	carg0 = (*C.graphene_vec4_t)(UnsafeVec4ToGlibNone(v))
 	_ = src
 	_ = carg1
-	panic("unimplemented conversion of [4]float32 (*C.float)")
+	panic("unimplemented conversion of [4]float32 (const float*)")
 
 	cret = C.graphene_vec4_init_from_float(carg0, carg1)
 	runtime.KeepAlive(v)
@@ -12720,7 +12720,7 @@ func (v1 *Vec4) Interpolate(v2 *Vec4, factor float64) Vec4 {
 
 	_ = res
 	_ = carg3
-	panic("unimplemented conversion of Vec4 (C.graphene_vec4_t)")
+	panic("unimplemented conversion of Vec4 (graphene_vec4_t)")
 
 	return res
 }
@@ -12776,7 +12776,7 @@ func (a *Vec4) Max(b *Vec4) Vec4 {
 
 	_ = res
 	_ = carg2
-	panic("unimplemented conversion of Vec4 (C.graphene_vec4_t)")
+	panic("unimplemented conversion of Vec4 (graphene_vec4_t)")
 
 	return res
 }
@@ -12809,7 +12809,7 @@ func (a *Vec4) Min(b *Vec4) Vec4 {
 
 	_ = res
 	_ = carg2
-	panic("unimplemented conversion of Vec4 (C.graphene_vec4_t)")
+	panic("unimplemented conversion of Vec4 (graphene_vec4_t)")
 
 	return res
 }
@@ -12841,7 +12841,7 @@ func (a *Vec4) Multiply(b *Vec4) Vec4 {
 
 	_ = res
 	_ = carg2
-	panic("unimplemented conversion of Vec4 (C.graphene_vec4_t)")
+	panic("unimplemented conversion of Vec4 (graphene_vec4_t)")
 
 	return res
 }
@@ -12903,7 +12903,7 @@ func (v *Vec4) Negate() Vec4 {
 
 	_ = res
 	_ = carg1
-	panic("unimplemented conversion of Vec4 (C.graphene_vec4_t)")
+	panic("unimplemented conversion of Vec4 (graphene_vec4_t)")
 
 	return res
 }
@@ -12929,7 +12929,7 @@ func (v *Vec4) Normalize() Vec4 {
 
 	_ = res
 	_ = carg1
-	panic("unimplemented conversion of Vec4 (C.graphene_vec4_t)")
+	panic("unimplemented conversion of Vec4 (graphene_vec4_t)")
 
 	return res
 }
@@ -12961,7 +12961,7 @@ func (v *Vec4) Scale(factor float32) Vec4 {
 
 	_ = res
 	_ = carg2
-	panic("unimplemented conversion of Vec4 (C.graphene_vec4_t)")
+	panic("unimplemented conversion of Vec4 (graphene_vec4_t)")
 
 	return res
 }
@@ -12995,7 +12995,7 @@ func (a *Vec4) Subtract(b *Vec4) Vec4 {
 
 	_ = res
 	_ = carg2
-	panic("unimplemented conversion of Vec4 (C.graphene_vec4_t)")
+	panic("unimplemented conversion of Vec4 (graphene_vec4_t)")
 
 	return res
 }

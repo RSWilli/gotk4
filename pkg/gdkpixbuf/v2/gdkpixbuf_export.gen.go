@@ -29,10 +29,10 @@ func _gotk4_gdkpixbuf2_PixbufModuleSizeFunc(carg1 *C.gint, carg2 *C.gint, carg3 
 
 	_ = width
 	_ = carg1
-	panic("unimplemented conversion of *int32 (*C.gint)")
+	panic("unimplemented conversion of *int32 (gint*)")
 	_ = height
 	_ = carg2
-	panic("unimplemented conversion of *int32 (*C.gint)")
+	panic("unimplemented conversion of *int32 (gint*)")
 
 	fn(width, height)
 }
@@ -81,7 +81,7 @@ func _gotk4_gdkpixbuf2_PixbufSaveFunc(carg1 *C.gchar, carg2 C.gsize, carg3 **C.G
 	_ = buf
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of string (*C.gchar)")
+	panic("unimplemented conversion of string (const gchar*)")
 
 	goret, err = fn(buf)
 

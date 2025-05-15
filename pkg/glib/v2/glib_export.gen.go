@@ -52,7 +52,7 @@ func _gotk4_glib2_LogWriterFunc(carg1 C.GLogLevelFlags, carg2 *C.GLogField, carg
 	_ = fields
 	_ = carg2
 	_ = carg3
-	panic("unimplemented conversion of []LogField (*C.GLogField)")
+	panic("unimplemented conversion of []LogField (const GLogField*)")
 
 	goret = fn(logLevel, fields)
 

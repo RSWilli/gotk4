@@ -18,1586 +18,1586 @@ import (
 // #cgo pkg-config: gio-2.0
 // #cgo CFLAGS: -Wno-deprecated-declarations
 // #include <gio/gio.h>
-// extern *C.GDBusMessage _gotk4_gio2_DBusMessageFilterFunction(*C.GDBusConnection, *C.GDBusMessage, C.gboolean, C.gpointer);
-// extern *C.GFile _gotk4_gio2_VFSFileLookupFunc(*C.GVfs, *C.char, C.gpointer);
-// extern C.gboolean _gotk4_glib2_SourceFunc(C.gpointer);
-// extern C.void _gotk4_gio2_AsyncReadyCallback(*C.GObject, *C.GAsyncResult, C.gpointer);
+// extern GDBusMessage* _gotk4_gio2_DBusMessageFilterFunction(GDBusConnection*, GDBusMessage*, gboolean, gpointer);
+// extern GFile* _gotk4_gio2_VFSFileLookupFunc(GVfs*, const char*, gpointer);
+// extern gboolean _gotk4_glib2_SourceFunc(gpointer);
+// extern void _gotk4_gio2_AsyncReadyCallback(GObject*, GAsyncResult*, gpointer);
 // extern void destroyUserdata(gpointer);
-// extern C.gboolean _gotk4_gio2_Action_get_enabled(*C.GAction);
-// extern *C.gchar _gotk4_gio2_Action_get_name(*C.GAction);
-// extern *C.GVariantType _gotk4_gio2_Action_get_parameter_type(*C.GAction);
-// extern *C.GVariantType _gotk4_gio2_Action_get_state_type(*C.GAction);
-// C.gboolean _gotk4_gio2_Action_virtual_get_enabled(void* fnptr, *C.GAction carg0) {
-// 	return ((C.gboolean (*) (*C.GAction))(fnptr))(carg0);
-// }
-// *C.gchar _gotk4_gio2_Action_virtual_get_name(void* fnptr, *C.GAction carg0) {
-// 	return ((*C.gchar (*) (*C.GAction))(fnptr))(carg0);
-// }
-// *C.GVariantType _gotk4_gio2_Action_virtual_get_parameter_type(void* fnptr, *C.GAction carg0) {
-// 	return ((*C.GVariantType (*) (*C.GAction))(fnptr))(carg0);
-// }
-// *C.GVariantType _gotk4_gio2_Action_virtual_get_state_type(void* fnptr, *C.GAction carg0) {
-// 	return ((*C.GVariantType (*) (*C.GAction))(fnptr))(carg0);
-// }
-// extern C.void _gotk4_gio2_ActionGroup_action_added(*C.GActionGroup, *C.gchar);
-// extern C.void _gotk4_gio2_ActionGroup_action_enabled_changed(*C.GActionGroup, *C.gchar, C.gboolean);
-// extern C.void _gotk4_gio2_ActionGroup_action_removed(*C.GActionGroup, *C.gchar);
-// extern C.gboolean _gotk4_gio2_ActionGroup_get_action_enabled(*C.GActionGroup, *C.gchar);
-// extern *C.GVariantType _gotk4_gio2_ActionGroup_get_action_parameter_type(*C.GActionGroup, *C.gchar);
-// extern *C.GVariantType _gotk4_gio2_ActionGroup_get_action_state_type(*C.GActionGroup, *C.gchar);
-// extern C.gboolean _gotk4_gio2_ActionGroup_has_action(*C.GActionGroup, *C.gchar);
-// extern **C.gchar _gotk4_gio2_ActionGroup_list_actions(*C.GActionGroup);
-// C.void _gotk4_gio2_ActionGroup_virtual_action_added(void* fnptr, *C.GActionGroup carg0, *C.gchar carg1) {
-// 	return ((C.void (*) (*C.GActionGroup, *C.gchar))(fnptr))(carg0, carg1);
-// }
-// C.void _gotk4_gio2_ActionGroup_virtual_action_enabled_changed(void* fnptr, *C.GActionGroup carg0, *C.gchar carg1, C.gboolean carg2) {
-// 	return ((C.void (*) (*C.GActionGroup, *C.gchar, C.gboolean))(fnptr))(carg0, carg1, carg2);
-// }
-// C.void _gotk4_gio2_ActionGroup_virtual_action_removed(void* fnptr, *C.GActionGroup carg0, *C.gchar carg1) {
-// 	return ((C.void (*) (*C.GActionGroup, *C.gchar))(fnptr))(carg0, carg1);
-// }
-// C.gboolean _gotk4_gio2_ActionGroup_virtual_get_action_enabled(void* fnptr, *C.GActionGroup carg0, *C.gchar carg1) {
-// 	return ((C.gboolean (*) (*C.GActionGroup, *C.gchar))(fnptr))(carg0, carg1);
-// }
-// *C.GVariantType _gotk4_gio2_ActionGroup_virtual_get_action_parameter_type(void* fnptr, *C.GActionGroup carg0, *C.gchar carg1) {
-// 	return ((*C.GVariantType (*) (*C.GActionGroup, *C.gchar))(fnptr))(carg0, carg1);
-// }
-// *C.GVariantType _gotk4_gio2_ActionGroup_virtual_get_action_state_type(void* fnptr, *C.GActionGroup carg0, *C.gchar carg1) {
-// 	return ((*C.GVariantType (*) (*C.GActionGroup, *C.gchar))(fnptr))(carg0, carg1);
-// }
-// C.gboolean _gotk4_gio2_ActionGroup_virtual_has_action(void* fnptr, *C.GActionGroup carg0, *C.gchar carg1) {
-// 	return ((C.gboolean (*) (*C.GActionGroup, *C.gchar))(fnptr))(carg0, carg1);
-// }
-// **C.gchar _gotk4_gio2_ActionGroup_virtual_list_actions(void* fnptr, *C.GActionGroup carg0) {
-// 	return ((**C.gchar (*) (*C.GActionGroup))(fnptr))(carg0);
-// }
-// extern C.void _gotk4_gio2_ActionMap_add_action(*C.GActionMap, *C.GAction);
-// extern *C.GAction _gotk4_gio2_ActionMap_lookup_action(*C.GActionMap, *C.gchar);
-// extern C.void _gotk4_gio2_ActionMap_remove_action(*C.GActionMap, *C.gchar);
-// C.void _gotk4_gio2_ActionMap_virtual_add_action(void* fnptr, *C.GActionMap carg0, *C.GAction carg1) {
-// 	return ((C.void (*) (*C.GActionMap, *C.GAction))(fnptr))(carg0, carg1);
-// }
-// *C.GAction _gotk4_gio2_ActionMap_virtual_lookup_action(void* fnptr, *C.GActionMap carg0, *C.gchar carg1) {
-// 	return ((*C.GAction (*) (*C.GActionMap, *C.gchar))(fnptr))(carg0, carg1);
+// extern gboolean _gotk4_gio2_Action_get_enabled(GAction*);
+// extern const gchar* _gotk4_gio2_Action_get_name(GAction*);
+// extern const GVariantType* _gotk4_gio2_Action_get_parameter_type(GAction*);
+// extern const GVariantType* _gotk4_gio2_Action_get_state_type(GAction*);
+// gboolean _gotk4_gio2_Action_virtual_get_enabled(void* fnptr, GAction* carg0) {
+// 	return ((gboolean (*) (GAction*))(fnptr))(carg0);
+// }
+// const gchar* _gotk4_gio2_Action_virtual_get_name(void* fnptr, GAction* carg0) {
+// 	return ((const gchar* (*) (GAction*))(fnptr))(carg0);
+// }
+// const GVariantType* _gotk4_gio2_Action_virtual_get_parameter_type(void* fnptr, GAction* carg0) {
+// 	return ((const GVariantType* (*) (GAction*))(fnptr))(carg0);
+// }
+// const GVariantType* _gotk4_gio2_Action_virtual_get_state_type(void* fnptr, GAction* carg0) {
+// 	return ((const GVariantType* (*) (GAction*))(fnptr))(carg0);
+// }
+// extern void _gotk4_gio2_ActionGroup_action_added(GActionGroup*, const gchar*);
+// extern void _gotk4_gio2_ActionGroup_action_enabled_changed(GActionGroup*, const gchar*, gboolean);
+// extern void _gotk4_gio2_ActionGroup_action_removed(GActionGroup*, const gchar*);
+// extern gboolean _gotk4_gio2_ActionGroup_get_action_enabled(GActionGroup*, const gchar*);
+// extern const GVariantType* _gotk4_gio2_ActionGroup_get_action_parameter_type(GActionGroup*, const gchar*);
+// extern const GVariantType* _gotk4_gio2_ActionGroup_get_action_state_type(GActionGroup*, const gchar*);
+// extern gboolean _gotk4_gio2_ActionGroup_has_action(GActionGroup*, const gchar*);
+// extern gchar** _gotk4_gio2_ActionGroup_list_actions(GActionGroup*);
+// void _gotk4_gio2_ActionGroup_virtual_action_added(void* fnptr, GActionGroup* carg0, const gchar* carg1) {
+// 	return ((void (*) (GActionGroup*, const gchar*))(fnptr))(carg0, carg1);
+// }
+// void _gotk4_gio2_ActionGroup_virtual_action_enabled_changed(void* fnptr, GActionGroup* carg0, const gchar* carg1, gboolean carg2) {
+// 	return ((void (*) (GActionGroup*, const gchar*, gboolean))(fnptr))(carg0, carg1, carg2);
+// }
+// void _gotk4_gio2_ActionGroup_virtual_action_removed(void* fnptr, GActionGroup* carg0, const gchar* carg1) {
+// 	return ((void (*) (GActionGroup*, const gchar*))(fnptr))(carg0, carg1);
+// }
+// gboolean _gotk4_gio2_ActionGroup_virtual_get_action_enabled(void* fnptr, GActionGroup* carg0, const gchar* carg1) {
+// 	return ((gboolean (*) (GActionGroup*, const gchar*))(fnptr))(carg0, carg1);
+// }
+// const GVariantType* _gotk4_gio2_ActionGroup_virtual_get_action_parameter_type(void* fnptr, GActionGroup* carg0, const gchar* carg1) {
+// 	return ((const GVariantType* (*) (GActionGroup*, const gchar*))(fnptr))(carg0, carg1);
+// }
+// const GVariantType* _gotk4_gio2_ActionGroup_virtual_get_action_state_type(void* fnptr, GActionGroup* carg0, const gchar* carg1) {
+// 	return ((const GVariantType* (*) (GActionGroup*, const gchar*))(fnptr))(carg0, carg1);
+// }
+// gboolean _gotk4_gio2_ActionGroup_virtual_has_action(void* fnptr, GActionGroup* carg0, const gchar* carg1) {
+// 	return ((gboolean (*) (GActionGroup*, const gchar*))(fnptr))(carg0, carg1);
+// }
+// gchar** _gotk4_gio2_ActionGroup_virtual_list_actions(void* fnptr, GActionGroup* carg0) {
+// 	return ((gchar** (*) (GActionGroup*))(fnptr))(carg0);
+// }
+// extern void _gotk4_gio2_ActionMap_add_action(GActionMap*, GAction*);
+// extern GAction* _gotk4_gio2_ActionMap_lookup_action(GActionMap*, const gchar*);
+// extern void _gotk4_gio2_ActionMap_remove_action(GActionMap*, const gchar*);
+// void _gotk4_gio2_ActionMap_virtual_add_action(void* fnptr, GActionMap* carg0, GAction* carg1) {
+// 	return ((void (*) (GActionMap*, GAction*))(fnptr))(carg0, carg1);
+// }
+// GAction* _gotk4_gio2_ActionMap_virtual_lookup_action(void* fnptr, GActionMap* carg0, const gchar* carg1) {
+// 	return ((GAction* (*) (GActionMap*, const gchar*))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gio2_ActionMap_virtual_remove_action(void* fnptr, *C.GActionMap carg0, *C.gchar carg1) {
-// 	return ((C.void (*) (*C.GActionMap, *C.gchar))(fnptr))(carg0, carg1);
-// }
-// extern C.gboolean _gotk4_gio2_AppInfo_add_supports_type(*C.GAppInfo, *C.char, GError*);
-// extern C.gboolean _gotk4_gio2_AppInfo_can_delete(*C.GAppInfo);
-// extern C.gboolean _gotk4_gio2_AppInfo_can_remove_supports_type(*C.GAppInfo);
-// extern C.gboolean _gotk4_gio2_AppInfo_do_delete(*C.GAppInfo);
-// extern *C.GAppInfo _gotk4_gio2_AppInfo_dup(*C.GAppInfo);
-// extern C.gboolean _gotk4_gio2_AppInfo_equal(*C.GAppInfo, *C.GAppInfo);
-// extern *C.char _gotk4_gio2_AppInfo_get_commandline(*C.GAppInfo);
-// extern *C.char _gotk4_gio2_AppInfo_get_description(*C.GAppInfo);
-// extern *C.char _gotk4_gio2_AppInfo_get_display_name(*C.GAppInfo);
-// extern *C.char _gotk4_gio2_AppInfo_get_executable(*C.GAppInfo);
-// extern *C.GIcon _gotk4_gio2_AppInfo_get_icon(*C.GAppInfo);
-// extern *C.char _gotk4_gio2_AppInfo_get_id(*C.GAppInfo);
-// extern *C.char _gotk4_gio2_AppInfo_get_name(*C.GAppInfo);
-// extern **C.char _gotk4_gio2_AppInfo_get_supported_types(*C.GAppInfo);
-// extern C.gboolean _gotk4_gio2_AppInfo_launch_uris_finish(*C.GAppInfo, *C.GAsyncResult, GError*);
-// extern C.gboolean _gotk4_gio2_AppInfo_remove_supports_type(*C.GAppInfo, *C.char, GError*);
-// extern C.gboolean _gotk4_gio2_AppInfo_set_as_default_for_extension(*C.GAppInfo, *C.char, GError*);
-// extern C.gboolean _gotk4_gio2_AppInfo_set_as_default_for_type(*C.GAppInfo, *C.char, GError*);
-// extern C.gboolean _gotk4_gio2_AppInfo_set_as_last_used_for_type(*C.GAppInfo, *C.char, GError*);
-// extern C.gboolean _gotk4_gio2_AppInfo_should_show(*C.GAppInfo);
-// extern C.gboolean _gotk4_gio2_AppInfo_supports_files(*C.GAppInfo);
-// extern C.gboolean _gotk4_gio2_AppInfo_supports_uris(*C.GAppInfo);
-// C.gboolean _gotk4_gio2_AppInfo_virtual_add_supports_type(void* fnptr, *C.GAppInfo carg0, *C.char carg1, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GAppInfo, *C.char, GError**))(fnptr))(carg0, carg1, _cerr);
-// }
-// C.gboolean _gotk4_gio2_AppInfo_virtual_can_delete(void* fnptr, *C.GAppInfo carg0) {
-// 	return ((C.gboolean (*) (*C.GAppInfo))(fnptr))(carg0);
-// }
-// C.gboolean _gotk4_gio2_AppInfo_virtual_can_remove_supports_type(void* fnptr, *C.GAppInfo carg0) {
-// 	return ((C.gboolean (*) (*C.GAppInfo))(fnptr))(carg0);
-// }
-// C.gboolean _gotk4_gio2_AppInfo_virtual_do_delete(void* fnptr, *C.GAppInfo carg0) {
-// 	return ((C.gboolean (*) (*C.GAppInfo))(fnptr))(carg0);
-// }
-// *C.GAppInfo _gotk4_gio2_AppInfo_virtual_dup(void* fnptr, *C.GAppInfo carg0) {
-// 	return ((*C.GAppInfo (*) (*C.GAppInfo))(fnptr))(carg0);
+// void _gotk4_gio2_ActionMap_virtual_remove_action(void* fnptr, GActionMap* carg0, const gchar* carg1) {
+// 	return ((void (*) (GActionMap*, const gchar*))(fnptr))(carg0, carg1);
+// }
+// extern gboolean _gotk4_gio2_AppInfo_add_supports_type(GAppInfo*, const char*, GError*);
+// extern gboolean _gotk4_gio2_AppInfo_can_delete(GAppInfo*);
+// extern gboolean _gotk4_gio2_AppInfo_can_remove_supports_type(GAppInfo*);
+// extern gboolean _gotk4_gio2_AppInfo_do_delete(GAppInfo*);
+// extern GAppInfo* _gotk4_gio2_AppInfo_dup(GAppInfo*);
+// extern gboolean _gotk4_gio2_AppInfo_equal(GAppInfo*, GAppInfo*);
+// extern const char* _gotk4_gio2_AppInfo_get_commandline(GAppInfo*);
+// extern const char* _gotk4_gio2_AppInfo_get_description(GAppInfo*);
+// extern const char* _gotk4_gio2_AppInfo_get_display_name(GAppInfo*);
+// extern const char* _gotk4_gio2_AppInfo_get_executable(GAppInfo*);
+// extern GIcon* _gotk4_gio2_AppInfo_get_icon(GAppInfo*);
+// extern const char* _gotk4_gio2_AppInfo_get_id(GAppInfo*);
+// extern const char* _gotk4_gio2_AppInfo_get_name(GAppInfo*);
+// extern const char** _gotk4_gio2_AppInfo_get_supported_types(GAppInfo*);
+// extern gboolean _gotk4_gio2_AppInfo_launch_uris_finish(GAppInfo*, GAsyncResult*, GError*);
+// extern gboolean _gotk4_gio2_AppInfo_remove_supports_type(GAppInfo*, const char*, GError*);
+// extern gboolean _gotk4_gio2_AppInfo_set_as_default_for_extension(GAppInfo*, const char*, GError*);
+// extern gboolean _gotk4_gio2_AppInfo_set_as_default_for_type(GAppInfo*, const char*, GError*);
+// extern gboolean _gotk4_gio2_AppInfo_set_as_last_used_for_type(GAppInfo*, const char*, GError*);
+// extern gboolean _gotk4_gio2_AppInfo_should_show(GAppInfo*);
+// extern gboolean _gotk4_gio2_AppInfo_supports_files(GAppInfo*);
+// extern gboolean _gotk4_gio2_AppInfo_supports_uris(GAppInfo*);
+// gboolean _gotk4_gio2_AppInfo_virtual_add_supports_type(void* fnptr, GAppInfo* carg0, const char* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GAppInfo*, const char*, GError**))(fnptr))(carg0, carg1, _cerr);
+// }
+// gboolean _gotk4_gio2_AppInfo_virtual_can_delete(void* fnptr, GAppInfo* carg0) {
+// 	return ((gboolean (*) (GAppInfo*))(fnptr))(carg0);
+// }
+// gboolean _gotk4_gio2_AppInfo_virtual_can_remove_supports_type(void* fnptr, GAppInfo* carg0) {
+// 	return ((gboolean (*) (GAppInfo*))(fnptr))(carg0);
+// }
+// gboolean _gotk4_gio2_AppInfo_virtual_do_delete(void* fnptr, GAppInfo* carg0) {
+// 	return ((gboolean (*) (GAppInfo*))(fnptr))(carg0);
+// }
+// GAppInfo* _gotk4_gio2_AppInfo_virtual_dup(void* fnptr, GAppInfo* carg0) {
+// 	return ((GAppInfo* (*) (GAppInfo*))(fnptr))(carg0);
 // }
-// C.gboolean _gotk4_gio2_AppInfo_virtual_equal(void* fnptr, *C.GAppInfo carg0, *C.GAppInfo carg1) {
-// 	return ((C.gboolean (*) (*C.GAppInfo, *C.GAppInfo))(fnptr))(carg0, carg1);
-// }
-// *C.char _gotk4_gio2_AppInfo_virtual_get_commandline(void* fnptr, *C.GAppInfo carg0) {
-// 	return ((*C.char (*) (*C.GAppInfo))(fnptr))(carg0);
+// gboolean _gotk4_gio2_AppInfo_virtual_equal(void* fnptr, GAppInfo* carg0, GAppInfo* carg1) {
+// 	return ((gboolean (*) (GAppInfo*, GAppInfo*))(fnptr))(carg0, carg1);
+// }
+// const char* _gotk4_gio2_AppInfo_virtual_get_commandline(void* fnptr, GAppInfo* carg0) {
+// 	return ((const char* (*) (GAppInfo*))(fnptr))(carg0);
 // }
-// *C.char _gotk4_gio2_AppInfo_virtual_get_description(void* fnptr, *C.GAppInfo carg0) {
-// 	return ((*C.char (*) (*C.GAppInfo))(fnptr))(carg0);
+// const char* _gotk4_gio2_AppInfo_virtual_get_description(void* fnptr, GAppInfo* carg0) {
+// 	return ((const char* (*) (GAppInfo*))(fnptr))(carg0);
 // }
-// *C.char _gotk4_gio2_AppInfo_virtual_get_display_name(void* fnptr, *C.GAppInfo carg0) {
-// 	return ((*C.char (*) (*C.GAppInfo))(fnptr))(carg0);
+// const char* _gotk4_gio2_AppInfo_virtual_get_display_name(void* fnptr, GAppInfo* carg0) {
+// 	return ((const char* (*) (GAppInfo*))(fnptr))(carg0);
 // }
-// *C.char _gotk4_gio2_AppInfo_virtual_get_executable(void* fnptr, *C.GAppInfo carg0) {
-// 	return ((*C.char (*) (*C.GAppInfo))(fnptr))(carg0);
+// const char* _gotk4_gio2_AppInfo_virtual_get_executable(void* fnptr, GAppInfo* carg0) {
+// 	return ((const char* (*) (GAppInfo*))(fnptr))(carg0);
 // }
-// *C.GIcon _gotk4_gio2_AppInfo_virtual_get_icon(void* fnptr, *C.GAppInfo carg0) {
-// 	return ((*C.GIcon (*) (*C.GAppInfo))(fnptr))(carg0);
+// GIcon* _gotk4_gio2_AppInfo_virtual_get_icon(void* fnptr, GAppInfo* carg0) {
+// 	return ((GIcon* (*) (GAppInfo*))(fnptr))(carg0);
 // }
-// *C.char _gotk4_gio2_AppInfo_virtual_get_id(void* fnptr, *C.GAppInfo carg0) {
-// 	return ((*C.char (*) (*C.GAppInfo))(fnptr))(carg0);
+// const char* _gotk4_gio2_AppInfo_virtual_get_id(void* fnptr, GAppInfo* carg0) {
+// 	return ((const char* (*) (GAppInfo*))(fnptr))(carg0);
 // }
-// *C.char _gotk4_gio2_AppInfo_virtual_get_name(void* fnptr, *C.GAppInfo carg0) {
-// 	return ((*C.char (*) (*C.GAppInfo))(fnptr))(carg0);
+// const char* _gotk4_gio2_AppInfo_virtual_get_name(void* fnptr, GAppInfo* carg0) {
+// 	return ((const char* (*) (GAppInfo*))(fnptr))(carg0);
 // }
-// **C.char _gotk4_gio2_AppInfo_virtual_get_supported_types(void* fnptr, *C.GAppInfo carg0) {
-// 	return ((**C.char (*) (*C.GAppInfo))(fnptr))(carg0);
+// const char** _gotk4_gio2_AppInfo_virtual_get_supported_types(void* fnptr, GAppInfo* carg0) {
+// 	return ((const char** (*) (GAppInfo*))(fnptr))(carg0);
 // }
-// C.gboolean _gotk4_gio2_AppInfo_virtual_launch_uris_finish(void* fnptr, *C.GAppInfo carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GAppInfo, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
+// gboolean _gotk4_gio2_AppInfo_virtual_launch_uris_finish(void* fnptr, GAppInfo* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GAppInfo*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// C.gboolean _gotk4_gio2_AppInfo_virtual_remove_supports_type(void* fnptr, *C.GAppInfo carg0, *C.char carg1, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GAppInfo, *C.char, GError**))(fnptr))(carg0, carg1, _cerr);
+// gboolean _gotk4_gio2_AppInfo_virtual_remove_supports_type(void* fnptr, GAppInfo* carg0, const char* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GAppInfo*, const char*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// C.gboolean _gotk4_gio2_AppInfo_virtual_set_as_default_for_extension(void* fnptr, *C.GAppInfo carg0, *C.char carg1, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GAppInfo, *C.char, GError**))(fnptr))(carg0, carg1, _cerr);
+// gboolean _gotk4_gio2_AppInfo_virtual_set_as_default_for_extension(void* fnptr, GAppInfo* carg0, const char* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GAppInfo*, const char*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// C.gboolean _gotk4_gio2_AppInfo_virtual_set_as_default_for_type(void* fnptr, *C.GAppInfo carg0, *C.char carg1, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GAppInfo, *C.char, GError**))(fnptr))(carg0, carg1, _cerr);
+// gboolean _gotk4_gio2_AppInfo_virtual_set_as_default_for_type(void* fnptr, GAppInfo* carg0, const char* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GAppInfo*, const char*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// C.gboolean _gotk4_gio2_AppInfo_virtual_set_as_last_used_for_type(void* fnptr, *C.GAppInfo carg0, *C.char carg1, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GAppInfo, *C.char, GError**))(fnptr))(carg0, carg1, _cerr);
+// gboolean _gotk4_gio2_AppInfo_virtual_set_as_last_used_for_type(void* fnptr, GAppInfo* carg0, const char* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GAppInfo*, const char*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// C.gboolean _gotk4_gio2_AppInfo_virtual_should_show(void* fnptr, *C.GAppInfo carg0) {
-// 	return ((C.gboolean (*) (*C.GAppInfo))(fnptr))(carg0);
+// gboolean _gotk4_gio2_AppInfo_virtual_should_show(void* fnptr, GAppInfo* carg0) {
+// 	return ((gboolean (*) (GAppInfo*))(fnptr))(carg0);
 // }
-// C.gboolean _gotk4_gio2_AppInfo_virtual_supports_files(void* fnptr, *C.GAppInfo carg0) {
-// 	return ((C.gboolean (*) (*C.GAppInfo))(fnptr))(carg0);
+// gboolean _gotk4_gio2_AppInfo_virtual_supports_files(void* fnptr, GAppInfo* carg0) {
+// 	return ((gboolean (*) (GAppInfo*))(fnptr))(carg0);
 // }
-// C.gboolean _gotk4_gio2_AppInfo_virtual_supports_uris(void* fnptr, *C.GAppInfo carg0) {
-// 	return ((C.gboolean (*) (*C.GAppInfo))(fnptr))(carg0);
+// gboolean _gotk4_gio2_AppInfo_virtual_supports_uris(void* fnptr, GAppInfo* carg0) {
+// 	return ((gboolean (*) (GAppInfo*))(fnptr))(carg0);
 // }
-// extern C.gboolean _gotk4_gio2_AsyncInitable_init_finish(*C.GAsyncInitable, *C.GAsyncResult, GError*);
-// C.gboolean _gotk4_gio2_AsyncInitable_virtual_init_finish(void* fnptr, *C.GAsyncInitable carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GAsyncInitable, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
+// extern gboolean _gotk4_gio2_AsyncInitable_init_finish(GAsyncInitable*, GAsyncResult*, GError*);
+// gboolean _gotk4_gio2_AsyncInitable_virtual_init_finish(void* fnptr, GAsyncInitable* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GAsyncInitable*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// extern *C.GObject _gotk4_gio2_AsyncResult_get_source_object(*C.GAsyncResult);
-// *C.GObject _gotk4_gio2_AsyncResult_virtual_get_source_object(void* fnptr, *C.GAsyncResult carg0) {
-// 	return ((*C.GObject (*) (*C.GAsyncResult))(fnptr))(carg0);
+// extern GObject* _gotk4_gio2_AsyncResult_get_source_object(GAsyncResult*);
+// GObject* _gotk4_gio2_AsyncResult_virtual_get_source_object(void* fnptr, GAsyncResult* carg0) {
+// 	return ((GObject* (*) (GAsyncResult*))(fnptr))(carg0);
 // }
-// extern C.GConverterResult _gotk4_gio2_Converter_convert(*C.GConverter, *C.void, C.gsize, *C.void, C.gsize, C.GConverterFlags, C.gsize, C.gsize, GError*);
-// extern C.void _gotk4_gio2_Converter_reset(*C.GConverter);
-// C.GConverterResult _gotk4_gio2_Converter_virtual_convert(void* fnptr, *C.GConverter carg0, *C.void carg1, C.gsize carg2, *C.void carg3, C.gsize carg4, C.GConverterFlags carg5, C.gsize* carg6, C.gsize* carg7, GError** _cerr) {
-// 	return ((C.GConverterResult (*) (*C.GConverter, *C.void, C.gsize, *C.void, C.gsize, C.GConverterFlags, C.gsize*, C.gsize*, GError**))(fnptr))(carg0, carg1, carg2, carg3, carg4, carg5, carg6, carg7, _cerr);
+// extern GConverterResult _gotk4_gio2_Converter_convert(GConverter*, void*, gsize, void*, gsize, GConverterFlags, gsize, gsize, GError*);
+// extern void _gotk4_gio2_Converter_reset(GConverter*);
+// GConverterResult _gotk4_gio2_Converter_virtual_convert(void* fnptr, GConverter* carg0, void* carg1, gsize carg2, void* carg3, gsize carg4, GConverterFlags carg5, gsize* carg6, gsize* carg7, GError** _cerr) {
+// 	return ((GConverterResult (*) (GConverter*, void*, gsize, void*, gsize, GConverterFlags, gsize*, gsize*, GError**))(fnptr))(carg0, carg1, carg2, carg3, carg4, carg5, carg6, carg7, _cerr);
 // }
-// C.void _gotk4_gio2_Converter_virtual_reset(void* fnptr, *C.GConverter carg0) {
-// 	return ((C.void (*) (*C.GConverter))(fnptr))(carg0);
+// void _gotk4_gio2_Converter_virtual_reset(void* fnptr, GConverter* carg0) {
+// 	return ((void (*) (GConverter*))(fnptr))(carg0);
 // }
-// extern *C.GDBusObject _gotk4_gio2_DBusInterface_dup_object(*C.GDBusInterface);
-// extern *C.GDBusInterfaceInfo _gotk4_gio2_DBusInterface_get_info(*C.GDBusInterface);
-// extern C.void _gotk4_gio2_DBusInterface_set_object(*C.GDBusInterface, *C.GDBusObject);
-// *C.GDBusObject _gotk4_gio2_DBusInterface_virtual_dup_object(void* fnptr, *C.GDBusInterface carg0) {
-// 	return ((*C.GDBusObject (*) (*C.GDBusInterface))(fnptr))(carg0);
-// }
-// *C.GDBusInterfaceInfo _gotk4_gio2_DBusInterface_virtual_get_info(void* fnptr, *C.GDBusInterface carg0) {
-// 	return ((*C.GDBusInterfaceInfo (*) (*C.GDBusInterface))(fnptr))(carg0);
-// }
-// C.void _gotk4_gio2_DBusInterface_virtual_set_object(void* fnptr, *C.GDBusInterface carg0, *C.GDBusObject carg1) {
-// 	return ((C.void (*) (*C.GDBusInterface, *C.GDBusObject))(fnptr))(carg0, carg1);
-// }
-// extern *C.GDBusInterface _gotk4_gio2_DBusObject_get_interface(*C.GDBusObject, *C.gchar);
-// extern *C.GList _gotk4_gio2_DBusObject_get_interfaces(*C.GDBusObject);
-// extern *C.gchar _gotk4_gio2_DBusObject_get_object_path(*C.GDBusObject);
-// extern C.void _gotk4_gio2_DBusObject_interface_added(*C.GDBusObject, *C.GDBusInterface);
-// extern C.void _gotk4_gio2_DBusObject_interface_removed(*C.GDBusObject, *C.GDBusInterface);
-// *C.GDBusInterface _gotk4_gio2_DBusObject_virtual_get_interface(void* fnptr, *C.GDBusObject carg0, *C.gchar carg1) {
-// 	return ((*C.GDBusInterface (*) (*C.GDBusObject, *C.gchar))(fnptr))(carg0, carg1);
-// }
-// *C.GList _gotk4_gio2_DBusObject_virtual_get_interfaces(void* fnptr, *C.GDBusObject carg0) {
-// 	return ((*C.GList (*) (*C.GDBusObject))(fnptr))(carg0);
-// }
-// *C.gchar _gotk4_gio2_DBusObject_virtual_get_object_path(void* fnptr, *C.GDBusObject carg0) {
-// 	return ((*C.gchar (*) (*C.GDBusObject))(fnptr))(carg0);
-// }
-// C.void _gotk4_gio2_DBusObject_virtual_interface_added(void* fnptr, *C.GDBusObject carg0, *C.GDBusInterface carg1) {
-// 	return ((C.void (*) (*C.GDBusObject, *C.GDBusInterface))(fnptr))(carg0, carg1);
-// }
-// C.void _gotk4_gio2_DBusObject_virtual_interface_removed(void* fnptr, *C.GDBusObject carg0, *C.GDBusInterface carg1) {
-// 	return ((C.void (*) (*C.GDBusObject, *C.GDBusInterface))(fnptr))(carg0, carg1);
-// }
-// extern *C.GDBusInterface _gotk4_gio2_DBusObjectManager_get_interface(*C.GDBusObjectManager, *C.gchar, *C.gchar);
-// extern *C.GDBusObject _gotk4_gio2_DBusObjectManager_get_object(*C.GDBusObjectManager, *C.gchar);
-// extern *C.gchar _gotk4_gio2_DBusObjectManager_get_object_path(*C.GDBusObjectManager);
-// extern *C.GList _gotk4_gio2_DBusObjectManager_get_objects(*C.GDBusObjectManager);
-// extern C.void _gotk4_gio2_DBusObjectManager_interface_added(*C.GDBusObjectManager, *C.GDBusObject, *C.GDBusInterface);
-// extern C.void _gotk4_gio2_DBusObjectManager_interface_removed(*C.GDBusObjectManager, *C.GDBusObject, *C.GDBusInterface);
-// extern C.void _gotk4_gio2_DBusObjectManager_object_added(*C.GDBusObjectManager, *C.GDBusObject);
-// extern C.void _gotk4_gio2_DBusObjectManager_object_removed(*C.GDBusObjectManager, *C.GDBusObject);
-// *C.GDBusInterface _gotk4_gio2_DBusObjectManager_virtual_get_interface(void* fnptr, *C.GDBusObjectManager carg0, *C.gchar carg1, *C.gchar carg2) {
-// 	return ((*C.GDBusInterface (*) (*C.GDBusObjectManager, *C.gchar, *C.gchar))(fnptr))(carg0, carg1, carg2);
-// }
-// *C.GDBusObject _gotk4_gio2_DBusObjectManager_virtual_get_object(void* fnptr, *C.GDBusObjectManager carg0, *C.gchar carg1) {
-// 	return ((*C.GDBusObject (*) (*C.GDBusObjectManager, *C.gchar))(fnptr))(carg0, carg1);
-// }
-// *C.gchar _gotk4_gio2_DBusObjectManager_virtual_get_object_path(void* fnptr, *C.GDBusObjectManager carg0) {
-// 	return ((*C.gchar (*) (*C.GDBusObjectManager))(fnptr))(carg0);
+// extern GDBusObject* _gotk4_gio2_DBusInterface_dup_object(GDBusInterface*);
+// extern GDBusInterfaceInfo* _gotk4_gio2_DBusInterface_get_info(GDBusInterface*);
+// extern void _gotk4_gio2_DBusInterface_set_object(GDBusInterface*, GDBusObject*);
+// GDBusObject* _gotk4_gio2_DBusInterface_virtual_dup_object(void* fnptr, GDBusInterface* carg0) {
+// 	return ((GDBusObject* (*) (GDBusInterface*))(fnptr))(carg0);
+// }
+// GDBusInterfaceInfo* _gotk4_gio2_DBusInterface_virtual_get_info(void* fnptr, GDBusInterface* carg0) {
+// 	return ((GDBusInterfaceInfo* (*) (GDBusInterface*))(fnptr))(carg0);
+// }
+// void _gotk4_gio2_DBusInterface_virtual_set_object(void* fnptr, GDBusInterface* carg0, GDBusObject* carg1) {
+// 	return ((void (*) (GDBusInterface*, GDBusObject*))(fnptr))(carg0, carg1);
+// }
+// extern GDBusInterface* _gotk4_gio2_DBusObject_get_interface(GDBusObject*, const gchar*);
+// extern GList* _gotk4_gio2_DBusObject_get_interfaces(GDBusObject*);
+// extern const gchar* _gotk4_gio2_DBusObject_get_object_path(GDBusObject*);
+// extern void _gotk4_gio2_DBusObject_interface_added(GDBusObject*, GDBusInterface*);
+// extern void _gotk4_gio2_DBusObject_interface_removed(GDBusObject*, GDBusInterface*);
+// GDBusInterface* _gotk4_gio2_DBusObject_virtual_get_interface(void* fnptr, GDBusObject* carg0, const gchar* carg1) {
+// 	return ((GDBusInterface* (*) (GDBusObject*, const gchar*))(fnptr))(carg0, carg1);
+// }
+// GList* _gotk4_gio2_DBusObject_virtual_get_interfaces(void* fnptr, GDBusObject* carg0) {
+// 	return ((GList* (*) (GDBusObject*))(fnptr))(carg0);
+// }
+// const gchar* _gotk4_gio2_DBusObject_virtual_get_object_path(void* fnptr, GDBusObject* carg0) {
+// 	return ((const gchar* (*) (GDBusObject*))(fnptr))(carg0);
+// }
+// void _gotk4_gio2_DBusObject_virtual_interface_added(void* fnptr, GDBusObject* carg0, GDBusInterface* carg1) {
+// 	return ((void (*) (GDBusObject*, GDBusInterface*))(fnptr))(carg0, carg1);
+// }
+// void _gotk4_gio2_DBusObject_virtual_interface_removed(void* fnptr, GDBusObject* carg0, GDBusInterface* carg1) {
+// 	return ((void (*) (GDBusObject*, GDBusInterface*))(fnptr))(carg0, carg1);
+// }
+// extern GDBusInterface* _gotk4_gio2_DBusObjectManager_get_interface(GDBusObjectManager*, const gchar*, const gchar*);
+// extern GDBusObject* _gotk4_gio2_DBusObjectManager_get_object(GDBusObjectManager*, const gchar*);
+// extern const gchar* _gotk4_gio2_DBusObjectManager_get_object_path(GDBusObjectManager*);
+// extern GList* _gotk4_gio2_DBusObjectManager_get_objects(GDBusObjectManager*);
+// extern void _gotk4_gio2_DBusObjectManager_interface_added(GDBusObjectManager*, GDBusObject*, GDBusInterface*);
+// extern void _gotk4_gio2_DBusObjectManager_interface_removed(GDBusObjectManager*, GDBusObject*, GDBusInterface*);
+// extern void _gotk4_gio2_DBusObjectManager_object_added(GDBusObjectManager*, GDBusObject*);
+// extern void _gotk4_gio2_DBusObjectManager_object_removed(GDBusObjectManager*, GDBusObject*);
+// GDBusInterface* _gotk4_gio2_DBusObjectManager_virtual_get_interface(void* fnptr, GDBusObjectManager* carg0, const gchar* carg1, const gchar* carg2) {
+// 	return ((GDBusInterface* (*) (GDBusObjectManager*, const gchar*, const gchar*))(fnptr))(carg0, carg1, carg2);
+// }
+// GDBusObject* _gotk4_gio2_DBusObjectManager_virtual_get_object(void* fnptr, GDBusObjectManager* carg0, const gchar* carg1) {
+// 	return ((GDBusObject* (*) (GDBusObjectManager*, const gchar*))(fnptr))(carg0, carg1);
+// }
+// const gchar* _gotk4_gio2_DBusObjectManager_virtual_get_object_path(void* fnptr, GDBusObjectManager* carg0) {
+// 	return ((const gchar* (*) (GDBusObjectManager*))(fnptr))(carg0);
 // }
-// *C.GList _gotk4_gio2_DBusObjectManager_virtual_get_objects(void* fnptr, *C.GDBusObjectManager carg0) {
-// 	return ((*C.GList (*) (*C.GDBusObjectManager))(fnptr))(carg0);
+// GList* _gotk4_gio2_DBusObjectManager_virtual_get_objects(void* fnptr, GDBusObjectManager* carg0) {
+// 	return ((GList* (*) (GDBusObjectManager*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gio2_DBusObjectManager_virtual_interface_added(void* fnptr, *C.GDBusObjectManager carg0, *C.GDBusObject carg1, *C.GDBusInterface carg2) {
-// 	return ((C.void (*) (*C.GDBusObjectManager, *C.GDBusObject, *C.GDBusInterface))(fnptr))(carg0, carg1, carg2);
+// void _gotk4_gio2_DBusObjectManager_virtual_interface_added(void* fnptr, GDBusObjectManager* carg0, GDBusObject* carg1, GDBusInterface* carg2) {
+// 	return ((void (*) (GDBusObjectManager*, GDBusObject*, GDBusInterface*))(fnptr))(carg0, carg1, carg2);
 // }
-// C.void _gotk4_gio2_DBusObjectManager_virtual_interface_removed(void* fnptr, *C.GDBusObjectManager carg0, *C.GDBusObject carg1, *C.GDBusInterface carg2) {
-// 	return ((C.void (*) (*C.GDBusObjectManager, *C.GDBusObject, *C.GDBusInterface))(fnptr))(carg0, carg1, carg2);
+// void _gotk4_gio2_DBusObjectManager_virtual_interface_removed(void* fnptr, GDBusObjectManager* carg0, GDBusObject* carg1, GDBusInterface* carg2) {
+// 	return ((void (*) (GDBusObjectManager*, GDBusObject*, GDBusInterface*))(fnptr))(carg0, carg1, carg2);
 // }
-// C.void _gotk4_gio2_DBusObjectManager_virtual_object_added(void* fnptr, *C.GDBusObjectManager carg0, *C.GDBusObject carg1) {
-// 	return ((C.void (*) (*C.GDBusObjectManager, *C.GDBusObject))(fnptr))(carg0, carg1);
+// void _gotk4_gio2_DBusObjectManager_virtual_object_added(void* fnptr, GDBusObjectManager* carg0, GDBusObject* carg1) {
+// 	return ((void (*) (GDBusObjectManager*, GDBusObject*))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gio2_DBusObjectManager_virtual_object_removed(void* fnptr, *C.GDBusObjectManager carg0, *C.GDBusObject carg1) {
-// 	return ((C.void (*) (*C.GDBusObjectManager, *C.GDBusObject))(fnptr))(carg0, carg1);
+// void _gotk4_gio2_DBusObjectManager_virtual_object_removed(void* fnptr, GDBusObjectManager* carg0, GDBusObject* carg1) {
+// 	return ((void (*) (GDBusObjectManager*, GDBusObject*))(fnptr))(carg0, carg1);
 // }
-// extern C.GIOCondition _gotk4_gio2_DatagramBased_condition_check(*C.GDatagramBased, C.GIOCondition);
-// extern C.gboolean _gotk4_gio2_DatagramBased_condition_wait(*C.GDatagramBased, C.GIOCondition, C.gint64, *C.GCancellable, GError*);
-// extern *C.GSource _gotk4_gio2_DatagramBased_create_source(*C.GDatagramBased, C.GIOCondition, *C.GCancellable);
-// extern C.gint _gotk4_gio2_DatagramBased_receive_messages(*C.GDatagramBased, *C.GInputMessage, C.guint, C.gint, C.gint64, *C.GCancellable, GError*);
-// extern C.gint _gotk4_gio2_DatagramBased_send_messages(*C.GDatagramBased, *C.GOutputMessage, C.guint, C.gint, C.gint64, *C.GCancellable, GError*);
-// C.GIOCondition _gotk4_gio2_DatagramBased_virtual_condition_check(void* fnptr, *C.GDatagramBased carg0, C.GIOCondition carg1) {
-// 	return ((C.GIOCondition (*) (*C.GDatagramBased, C.GIOCondition))(fnptr))(carg0, carg1);
+// extern GIOCondition _gotk4_gio2_DatagramBased_condition_check(GDatagramBased*, GIOCondition);
+// extern gboolean _gotk4_gio2_DatagramBased_condition_wait(GDatagramBased*, GIOCondition, gint64, GCancellable*, GError*);
+// extern GSource* _gotk4_gio2_DatagramBased_create_source(GDatagramBased*, GIOCondition, GCancellable*);
+// extern gint _gotk4_gio2_DatagramBased_receive_messages(GDatagramBased*, GInputMessage*, guint, gint, gint64, GCancellable*, GError*);
+// extern gint _gotk4_gio2_DatagramBased_send_messages(GDatagramBased*, GOutputMessage*, guint, gint, gint64, GCancellable*, GError*);
+// GIOCondition _gotk4_gio2_DatagramBased_virtual_condition_check(void* fnptr, GDatagramBased* carg0, GIOCondition carg1) {
+// 	return ((GIOCondition (*) (GDatagramBased*, GIOCondition))(fnptr))(carg0, carg1);
 // }
-// C.gboolean _gotk4_gio2_DatagramBased_virtual_condition_wait(void* fnptr, *C.GDatagramBased carg0, C.GIOCondition carg1, C.gint64 carg2, *C.GCancellable carg3, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GDatagramBased, C.GIOCondition, C.gint64, *C.GCancellable, GError**))(fnptr))(carg0, carg1, carg2, carg3, _cerr);
+// gboolean _gotk4_gio2_DatagramBased_virtual_condition_wait(void* fnptr, GDatagramBased* carg0, GIOCondition carg1, gint64 carg2, GCancellable* carg3, GError** _cerr) {
+// 	return ((gboolean (*) (GDatagramBased*, GIOCondition, gint64, GCancellable*, GError**))(fnptr))(carg0, carg1, carg2, carg3, _cerr);
 // }
-// *C.GSource _gotk4_gio2_DatagramBased_virtual_create_source(void* fnptr, *C.GDatagramBased carg0, C.GIOCondition carg1, *C.GCancellable carg2) {
-// 	return ((*C.GSource (*) (*C.GDatagramBased, C.GIOCondition, *C.GCancellable))(fnptr))(carg0, carg1, carg2);
+// GSource* _gotk4_gio2_DatagramBased_virtual_create_source(void* fnptr, GDatagramBased* carg0, GIOCondition carg1, GCancellable* carg2) {
+// 	return ((GSource* (*) (GDatagramBased*, GIOCondition, GCancellable*))(fnptr))(carg0, carg1, carg2);
 // }
-// C.gint _gotk4_gio2_DatagramBased_virtual_receive_messages(void* fnptr, *C.GDatagramBased carg0, *C.GInputMessage carg1, C.guint carg2, C.gint carg3, C.gint64 carg4, *C.GCancellable carg5, GError** _cerr) {
-// 	return ((C.gint (*) (*C.GDatagramBased, *C.GInputMessage, C.guint, C.gint, C.gint64, *C.GCancellable, GError**))(fnptr))(carg0, carg1, carg2, carg3, carg4, carg5, _cerr);
+// gint _gotk4_gio2_DatagramBased_virtual_receive_messages(void* fnptr, GDatagramBased* carg0, GInputMessage* carg1, guint carg2, gint carg3, gint64 carg4, GCancellable* carg5, GError** _cerr) {
+// 	return ((gint (*) (GDatagramBased*, GInputMessage*, guint, gint, gint64, GCancellable*, GError**))(fnptr))(carg0, carg1, carg2, carg3, carg4, carg5, _cerr);
 // }
-// C.gint _gotk4_gio2_DatagramBased_virtual_send_messages(void* fnptr, *C.GDatagramBased carg0, *C.GOutputMessage carg1, C.guint carg2, C.gint carg3, C.gint64 carg4, *C.GCancellable carg5, GError** _cerr) {
-// 	return ((C.gint (*) (*C.GDatagramBased, *C.GOutputMessage, C.guint, C.gint, C.gint64, *C.GCancellable, GError**))(fnptr))(carg0, carg1, carg2, carg3, carg4, carg5, _cerr);
+// gint _gotk4_gio2_DatagramBased_virtual_send_messages(void* fnptr, GDatagramBased* carg0, GOutputMessage* carg1, guint carg2, gint carg3, gint64 carg4, GCancellable* carg5, GError** _cerr) {
+// 	return ((gint (*) (GDatagramBased*, GOutputMessage*, guint, gint, gint64, GCancellable*, GError**))(fnptr))(carg0, carg1, carg2, carg3, carg4, carg5, _cerr);
 // }
-// extern C.gboolean _gotk4_gio2_Drive_can_eject(*C.GDrive);
-// extern C.gboolean _gotk4_gio2_Drive_can_poll_for_media(*C.GDrive);
-// extern C.gboolean _gotk4_gio2_Drive_can_start(*C.GDrive);
-// extern C.gboolean _gotk4_gio2_Drive_can_start_degraded(*C.GDrive);
-// extern C.gboolean _gotk4_gio2_Drive_can_stop(*C.GDrive);
-// extern C.void _gotk4_gio2_Drive_changed(*C.GDrive);
-// extern C.void _gotk4_gio2_Drive_disconnected(*C.GDrive);
-// extern C.void _gotk4_gio2_Drive_eject_button(*C.GDrive);
-// extern C.gboolean _gotk4_gio2_Drive_eject_finish(*C.GDrive, *C.GAsyncResult, GError*);
-// extern C.gboolean _gotk4_gio2_Drive_eject_with_operation_finish(*C.GDrive, *C.GAsyncResult, GError*);
-// extern **C.char _gotk4_gio2_Drive_enumerate_identifiers(*C.GDrive);
-// extern *C.GIcon _gotk4_gio2_Drive_get_icon(*C.GDrive);
-// extern *C.char _gotk4_gio2_Drive_get_identifier(*C.GDrive, *C.char);
-// extern *C.char _gotk4_gio2_Drive_get_name(*C.GDrive);
-// extern *C.gchar _gotk4_gio2_Drive_get_sort_key(*C.GDrive);
-// extern C.GDriveStartStopType _gotk4_gio2_Drive_get_start_stop_type(*C.GDrive);
-// extern *C.GIcon _gotk4_gio2_Drive_get_symbolic_icon(*C.GDrive);
-// extern *C.GList _gotk4_gio2_Drive_get_volumes(*C.GDrive);
-// extern C.gboolean _gotk4_gio2_Drive_has_media(*C.GDrive);
-// extern C.gboolean _gotk4_gio2_Drive_has_volumes(*C.GDrive);
-// extern C.gboolean _gotk4_gio2_Drive_is_media_check_automatic(*C.GDrive);
-// extern C.gboolean _gotk4_gio2_Drive_is_media_removable(*C.GDrive);
-// extern C.gboolean _gotk4_gio2_Drive_is_removable(*C.GDrive);
-// extern C.gboolean _gotk4_gio2_Drive_poll_for_media_finish(*C.GDrive, *C.GAsyncResult, GError*);
-// extern C.gboolean _gotk4_gio2_Drive_start_finish(*C.GDrive, *C.GAsyncResult, GError*);
-// extern C.void _gotk4_gio2_Drive_stop_button(*C.GDrive);
-// extern C.gboolean _gotk4_gio2_Drive_stop_finish(*C.GDrive, *C.GAsyncResult, GError*);
-// C.gboolean _gotk4_gio2_Drive_virtual_can_eject(void* fnptr, *C.GDrive carg0) {
-// 	return ((C.gboolean (*) (*C.GDrive))(fnptr))(carg0);
+// extern gboolean _gotk4_gio2_Drive_can_eject(GDrive*);
+// extern gboolean _gotk4_gio2_Drive_can_poll_for_media(GDrive*);
+// extern gboolean _gotk4_gio2_Drive_can_start(GDrive*);
+// extern gboolean _gotk4_gio2_Drive_can_start_degraded(GDrive*);
+// extern gboolean _gotk4_gio2_Drive_can_stop(GDrive*);
+// extern void _gotk4_gio2_Drive_changed(GDrive*);
+// extern void _gotk4_gio2_Drive_disconnected(GDrive*);
+// extern void _gotk4_gio2_Drive_eject_button(GDrive*);
+// extern gboolean _gotk4_gio2_Drive_eject_finish(GDrive*, GAsyncResult*, GError*);
+// extern gboolean _gotk4_gio2_Drive_eject_with_operation_finish(GDrive*, GAsyncResult*, GError*);
+// extern char** _gotk4_gio2_Drive_enumerate_identifiers(GDrive*);
+// extern GIcon* _gotk4_gio2_Drive_get_icon(GDrive*);
+// extern char* _gotk4_gio2_Drive_get_identifier(GDrive*, const char*);
+// extern char* _gotk4_gio2_Drive_get_name(GDrive*);
+// extern const gchar* _gotk4_gio2_Drive_get_sort_key(GDrive*);
+// extern GDriveStartStopType _gotk4_gio2_Drive_get_start_stop_type(GDrive*);
+// extern GIcon* _gotk4_gio2_Drive_get_symbolic_icon(GDrive*);
+// extern GList* _gotk4_gio2_Drive_get_volumes(GDrive*);
+// extern gboolean _gotk4_gio2_Drive_has_media(GDrive*);
+// extern gboolean _gotk4_gio2_Drive_has_volumes(GDrive*);
+// extern gboolean _gotk4_gio2_Drive_is_media_check_automatic(GDrive*);
+// extern gboolean _gotk4_gio2_Drive_is_media_removable(GDrive*);
+// extern gboolean _gotk4_gio2_Drive_is_removable(GDrive*);
+// extern gboolean _gotk4_gio2_Drive_poll_for_media_finish(GDrive*, GAsyncResult*, GError*);
+// extern gboolean _gotk4_gio2_Drive_start_finish(GDrive*, GAsyncResult*, GError*);
+// extern void _gotk4_gio2_Drive_stop_button(GDrive*);
+// extern gboolean _gotk4_gio2_Drive_stop_finish(GDrive*, GAsyncResult*, GError*);
+// gboolean _gotk4_gio2_Drive_virtual_can_eject(void* fnptr, GDrive* carg0) {
+// 	return ((gboolean (*) (GDrive*))(fnptr))(carg0);
 // }
-// C.gboolean _gotk4_gio2_Drive_virtual_can_poll_for_media(void* fnptr, *C.GDrive carg0) {
-// 	return ((C.gboolean (*) (*C.GDrive))(fnptr))(carg0);
+// gboolean _gotk4_gio2_Drive_virtual_can_poll_for_media(void* fnptr, GDrive* carg0) {
+// 	return ((gboolean (*) (GDrive*))(fnptr))(carg0);
 // }
-// C.gboolean _gotk4_gio2_Drive_virtual_can_start(void* fnptr, *C.GDrive carg0) {
-// 	return ((C.gboolean (*) (*C.GDrive))(fnptr))(carg0);
+// gboolean _gotk4_gio2_Drive_virtual_can_start(void* fnptr, GDrive* carg0) {
+// 	return ((gboolean (*) (GDrive*))(fnptr))(carg0);
 // }
-// C.gboolean _gotk4_gio2_Drive_virtual_can_start_degraded(void* fnptr, *C.GDrive carg0) {
-// 	return ((C.gboolean (*) (*C.GDrive))(fnptr))(carg0);
+// gboolean _gotk4_gio2_Drive_virtual_can_start_degraded(void* fnptr, GDrive* carg0) {
+// 	return ((gboolean (*) (GDrive*))(fnptr))(carg0);
 // }
-// C.gboolean _gotk4_gio2_Drive_virtual_can_stop(void* fnptr, *C.GDrive carg0) {
-// 	return ((C.gboolean (*) (*C.GDrive))(fnptr))(carg0);
+// gboolean _gotk4_gio2_Drive_virtual_can_stop(void* fnptr, GDrive* carg0) {
+// 	return ((gboolean (*) (GDrive*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gio2_Drive_virtual_changed(void* fnptr, *C.GDrive carg0) {
-// 	return ((C.void (*) (*C.GDrive))(fnptr))(carg0);
+// void _gotk4_gio2_Drive_virtual_changed(void* fnptr, GDrive* carg0) {
+// 	return ((void (*) (GDrive*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gio2_Drive_virtual_disconnected(void* fnptr, *C.GDrive carg0) {
-// 	return ((C.void (*) (*C.GDrive))(fnptr))(carg0);
+// void _gotk4_gio2_Drive_virtual_disconnected(void* fnptr, GDrive* carg0) {
+// 	return ((void (*) (GDrive*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gio2_Drive_virtual_eject_button(void* fnptr, *C.GDrive carg0) {
-// 	return ((C.void (*) (*C.GDrive))(fnptr))(carg0);
+// void _gotk4_gio2_Drive_virtual_eject_button(void* fnptr, GDrive* carg0) {
+// 	return ((void (*) (GDrive*))(fnptr))(carg0);
 // }
-// C.gboolean _gotk4_gio2_Drive_virtual_eject_finish(void* fnptr, *C.GDrive carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GDrive, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
-// }
-// C.gboolean _gotk4_gio2_Drive_virtual_eject_with_operation_finish(void* fnptr, *C.GDrive carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GDrive, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
-// }
-// **C.char _gotk4_gio2_Drive_virtual_enumerate_identifiers(void* fnptr, *C.GDrive carg0) {
-// 	return ((**C.char (*) (*C.GDrive))(fnptr))(carg0);
-// }
-// *C.GIcon _gotk4_gio2_Drive_virtual_get_icon(void* fnptr, *C.GDrive carg0) {
-// 	return ((*C.GIcon (*) (*C.GDrive))(fnptr))(carg0);
-// }
-// *C.char _gotk4_gio2_Drive_virtual_get_identifier(void* fnptr, *C.GDrive carg0, *C.char carg1) {
-// 	return ((*C.char (*) (*C.GDrive, *C.char))(fnptr))(carg0, carg1);
-// }
-// *C.char _gotk4_gio2_Drive_virtual_get_name(void* fnptr, *C.GDrive carg0) {
-// 	return ((*C.char (*) (*C.GDrive))(fnptr))(carg0);
-// }
-// *C.gchar _gotk4_gio2_Drive_virtual_get_sort_key(void* fnptr, *C.GDrive carg0) {
-// 	return ((*C.gchar (*) (*C.GDrive))(fnptr))(carg0);
-// }
-// C.GDriveStartStopType _gotk4_gio2_Drive_virtual_get_start_stop_type(void* fnptr, *C.GDrive carg0) {
-// 	return ((C.GDriveStartStopType (*) (*C.GDrive))(fnptr))(carg0);
-// }
-// *C.GIcon _gotk4_gio2_Drive_virtual_get_symbolic_icon(void* fnptr, *C.GDrive carg0) {
-// 	return ((*C.GIcon (*) (*C.GDrive))(fnptr))(carg0);
-// }
-// *C.GList _gotk4_gio2_Drive_virtual_get_volumes(void* fnptr, *C.GDrive carg0) {
-// 	return ((*C.GList (*) (*C.GDrive))(fnptr))(carg0);
-// }
-// C.gboolean _gotk4_gio2_Drive_virtual_has_media(void* fnptr, *C.GDrive carg0) {
-// 	return ((C.gboolean (*) (*C.GDrive))(fnptr))(carg0);
-// }
-// C.gboolean _gotk4_gio2_Drive_virtual_has_volumes(void* fnptr, *C.GDrive carg0) {
-// 	return ((C.gboolean (*) (*C.GDrive))(fnptr))(carg0);
-// }
-// C.gboolean _gotk4_gio2_Drive_virtual_is_media_check_automatic(void* fnptr, *C.GDrive carg0) {
-// 	return ((C.gboolean (*) (*C.GDrive))(fnptr))(carg0);
-// }
-// C.gboolean _gotk4_gio2_Drive_virtual_is_media_removable(void* fnptr, *C.GDrive carg0) {
-// 	return ((C.gboolean (*) (*C.GDrive))(fnptr))(carg0);
-// }
-// C.gboolean _gotk4_gio2_Drive_virtual_is_removable(void* fnptr, *C.GDrive carg0) {
-// 	return ((C.gboolean (*) (*C.GDrive))(fnptr))(carg0);
-// }
-// C.gboolean _gotk4_gio2_Drive_virtual_poll_for_media_finish(void* fnptr, *C.GDrive carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GDrive, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
-// }
-// C.gboolean _gotk4_gio2_Drive_virtual_start_finish(void* fnptr, *C.GDrive carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GDrive, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
-// }
-// C.void _gotk4_gio2_Drive_virtual_stop_button(void* fnptr, *C.GDrive carg0) {
-// 	return ((C.void (*) (*C.GDrive))(fnptr))(carg0);
-// }
-// C.gboolean _gotk4_gio2_Drive_virtual_stop_finish(void* fnptr, *C.GDrive carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GDrive, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
-// }
-// extern C.gboolean _gotk4_gio2_DtlsConnection_accept_certificate(*C.GDtlsConnection, *C.GTlsCertificate, C.GTlsCertificateFlags);
-// extern *C.gchar _gotk4_gio2_DtlsConnection_get_negotiated_protocol(*C.GDtlsConnection);
-// extern C.gboolean _gotk4_gio2_DtlsConnection_handshake(*C.GDtlsConnection, *C.GCancellable, GError*);
-// extern C.gboolean _gotk4_gio2_DtlsConnection_handshake_finish(*C.GDtlsConnection, *C.GAsyncResult, GError*);
-// extern C.void _gotk4_gio2_DtlsConnection_set_advertised_protocols(*C.GDtlsConnection, **C.gchar);
-// extern C.gboolean _gotk4_gio2_DtlsConnection_shutdown(*C.GDtlsConnection, C.gboolean, C.gboolean, *C.GCancellable, GError*);
-// extern C.gboolean _gotk4_gio2_DtlsConnection_shutdown_finish(*C.GDtlsConnection, *C.GAsyncResult, GError*);
-// C.gboolean _gotk4_gio2_DtlsConnection_virtual_accept_certificate(void* fnptr, *C.GDtlsConnection carg0, *C.GTlsCertificate carg1, C.GTlsCertificateFlags carg2) {
-// 	return ((C.gboolean (*) (*C.GDtlsConnection, *C.GTlsCertificate, C.GTlsCertificateFlags))(fnptr))(carg0, carg1, carg2);
-// }
-// *C.gchar _gotk4_gio2_DtlsConnection_virtual_get_negotiated_protocol(void* fnptr, *C.GDtlsConnection carg0) {
-// 	return ((*C.gchar (*) (*C.GDtlsConnection))(fnptr))(carg0);
-// }
-// C.gboolean _gotk4_gio2_DtlsConnection_virtual_handshake(void* fnptr, *C.GDtlsConnection carg0, *C.GCancellable carg1, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GDtlsConnection, *C.GCancellable, GError**))(fnptr))(carg0, carg1, _cerr);
-// }
-// C.gboolean _gotk4_gio2_DtlsConnection_virtual_handshake_finish(void* fnptr, *C.GDtlsConnection carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GDtlsConnection, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
-// }
-// C.void _gotk4_gio2_DtlsConnection_virtual_set_advertised_protocols(void* fnptr, *C.GDtlsConnection carg0, **C.gchar carg1) {
-// 	return ((C.void (*) (*C.GDtlsConnection, **C.gchar))(fnptr))(carg0, carg1);
-// }
-// C.gboolean _gotk4_gio2_DtlsConnection_virtual_shutdown(void* fnptr, *C.GDtlsConnection carg0, C.gboolean carg1, C.gboolean carg2, *C.GCancellable carg3, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GDtlsConnection, C.gboolean, C.gboolean, *C.GCancellable, GError**))(fnptr))(carg0, carg1, carg2, carg3, _cerr);
-// }
-// C.gboolean _gotk4_gio2_DtlsConnection_virtual_shutdown_finish(void* fnptr, *C.GDtlsConnection carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GDtlsConnection, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
-// }
-// extern *C.GFileOutputStream _gotk4_gio2_File_append_to(*C.GFile, C.GFileCreateFlags, *C.GCancellable, GError*);
-// extern *C.GFileOutputStream _gotk4_gio2_File_append_to_finish(*C.GFile, *C.GAsyncResult, GError*);
-// extern C.gboolean _gotk4_gio2_File_copy_finish(*C.GFile, *C.GAsyncResult, GError*);
-// extern *C.GFileOutputStream _gotk4_gio2_File_create(*C.GFile, C.GFileCreateFlags, *C.GCancellable, GError*);
-// extern *C.GFileOutputStream _gotk4_gio2_File_create_finish(*C.GFile, *C.GAsyncResult, GError*);
-// extern *C.GFileIOStream _gotk4_gio2_File_create_readwrite(*C.GFile, C.GFileCreateFlags, *C.GCancellable, GError*);
-// extern *C.GFileIOStream _gotk4_gio2_File_create_readwrite_finish(*C.GFile, *C.GAsyncResult, GError*);
-// extern C.gboolean _gotk4_gio2_File_delete_file(*C.GFile, *C.GCancellable, GError*);
-// extern C.gboolean _gotk4_gio2_File_delete_file_finish(*C.GFile, *C.GAsyncResult, GError*);
-// extern *C.GFile _gotk4_gio2_File_dup(*C.GFile);
-// extern C.gboolean _gotk4_gio2_File_eject_mountable_finish(*C.GFile, *C.GAsyncResult, GError*);
-// extern C.gboolean _gotk4_gio2_File_eject_mountable_with_operation_finish(*C.GFile, *C.GAsyncResult, GError*);
-// extern *C.GFileEnumerator _gotk4_gio2_File_enumerate_children(*C.GFile, *C.char, C.GFileQueryInfoFlags, *C.GCancellable, GError*);
-// extern *C.GFileEnumerator _gotk4_gio2_File_enumerate_children_finish(*C.GFile, *C.GAsyncResult, GError*);
-// extern C.gboolean _gotk4_gio2_File_equal(*C.GFile, *C.GFile);
-// extern *C.GMount _gotk4_gio2_File_find_enclosing_mount(*C.GFile, *C.GCancellable, GError*);
-// extern *C.GMount _gotk4_gio2_File_find_enclosing_mount_finish(*C.GFile, *C.GAsyncResult, GError*);
-// extern *C.char _gotk4_gio2_File_get_basename(*C.GFile);
-// extern *C.GFile _gotk4_gio2_File_get_child_for_display_name(*C.GFile, *C.char, GError*);
-// extern *C.GFile _gotk4_gio2_File_get_parent(*C.GFile);
-// extern *C.char _gotk4_gio2_File_get_parse_name(*C.GFile);
-// extern *C.char _gotk4_gio2_File_get_path(*C.GFile);
-// extern *C.char _gotk4_gio2_File_get_relative_path(*C.GFile, *C.GFile);
-// extern *C.char _gotk4_gio2_File_get_uri(*C.GFile);
-// extern *C.char _gotk4_gio2_File_get_uri_scheme(*C.GFile);
-// extern C.gboolean _gotk4_gio2_File_has_uri_scheme(*C.GFile, *C.char);
-// extern C.guint _gotk4_gio2_File_hash(*C.GFile);
-// extern C.gboolean _gotk4_gio2_File_is_native(*C.GFile);
-// extern C.gboolean _gotk4_gio2_File_make_directory(*C.GFile, *C.GCancellable, GError*);
-// extern C.gboolean _gotk4_gio2_File_make_directory_finish(*C.GFile, *C.GAsyncResult, GError*);
-// extern C.gboolean _gotk4_gio2_File_make_symbolic_link(*C.GFile, *C.char, *C.GCancellable, GError*);
-// extern C.gboolean _gotk4_gio2_File_make_symbolic_link_finish(*C.GFile, *C.GAsyncResult, GError*);
-// extern C.gboolean _gotk4_gio2_File_measure_disk_usage_finish(*C.GFile, *C.GAsyncResult, C.guint64, C.guint64, C.guint64, GError*);
-// extern *C.GFileMonitor _gotk4_gio2_File_monitor_dir(*C.GFile, C.GFileMonitorFlags, *C.GCancellable, GError*);
-// extern *C.GFileMonitor _gotk4_gio2_File_monitor_file(*C.GFile, C.GFileMonitorFlags, *C.GCancellable, GError*);
-// extern C.gboolean _gotk4_gio2_File_mount_enclosing_volume_finish(*C.GFile, *C.GAsyncResult, GError*);
-// extern *C.GFile _gotk4_gio2_File_mount_mountable_finish(*C.GFile, *C.GAsyncResult, GError*);
-// extern C.gboolean _gotk4_gio2_File_move_finish(*C.GFile, *C.GAsyncResult, GError*);
-// extern *C.GFileIOStream _gotk4_gio2_File_open_readwrite(*C.GFile, *C.GCancellable, GError*);
-// extern *C.GFileIOStream _gotk4_gio2_File_open_readwrite_finish(*C.GFile, *C.GAsyncResult, GError*);
-// extern C.gboolean _gotk4_gio2_File_poll_mountable_finish(*C.GFile, *C.GAsyncResult, GError*);
-// extern C.gboolean _gotk4_gio2_File_prefix_matches(*C.GFile, *C.GFile);
-// extern *C.GFileInfo _gotk4_gio2_File_query_filesystem_info(*C.GFile, *C.char, *C.GCancellable, GError*);
-// extern *C.GFileInfo _gotk4_gio2_File_query_filesystem_info_finish(*C.GFile, *C.GAsyncResult, GError*);
-// extern *C.GFileInfo _gotk4_gio2_File_query_info(*C.GFile, *C.char, C.GFileQueryInfoFlags, *C.GCancellable, GError*);
-// extern *C.GFileInfo _gotk4_gio2_File_query_info_finish(*C.GFile, *C.GAsyncResult, GError*);
-// extern *C.GFileAttributeInfoList _gotk4_gio2_File_query_settable_attributes(*C.GFile, *C.GCancellable, GError*);
-// extern *C.GFileAttributeInfoList _gotk4_gio2_File_query_writable_namespaces(*C.GFile, *C.GCancellable, GError*);
-// extern *C.GFileInputStream _gotk4_gio2_File_read_finish(*C.GFile, *C.GAsyncResult, GError*);
-// extern *C.GFileInputStream _gotk4_gio2_File_read_fn(*C.GFile, *C.GCancellable, GError*);
-// extern *C.GFileOutputStream _gotk4_gio2_File_replace(*C.GFile, *C.char, C.gboolean, C.GFileCreateFlags, *C.GCancellable, GError*);
-// extern *C.GFileOutputStream _gotk4_gio2_File_replace_finish(*C.GFile, *C.GAsyncResult, GError*);
-// extern *C.GFileIOStream _gotk4_gio2_File_replace_readwrite(*C.GFile, *C.char, C.gboolean, C.GFileCreateFlags, *C.GCancellable, GError*);
-// extern *C.GFileIOStream _gotk4_gio2_File_replace_readwrite_finish(*C.GFile, *C.GAsyncResult, GError*);
-// extern *C.GFile _gotk4_gio2_File_resolve_relative_path(*C.GFile, *C.char);
-// extern C.gboolean _gotk4_gio2_File_set_attributes_finish(*C.GFile, *C.GAsyncResult, *C.GFileInfo, GError*);
-// extern C.gboolean _gotk4_gio2_File_set_attributes_from_info(*C.GFile, *C.GFileInfo, C.GFileQueryInfoFlags, *C.GCancellable, GError*);
-// extern *C.GFile _gotk4_gio2_File_set_display_name(*C.GFile, *C.char, *C.GCancellable, GError*);
-// extern *C.GFile _gotk4_gio2_File_set_display_name_finish(*C.GFile, *C.GAsyncResult, GError*);
-// extern C.gboolean _gotk4_gio2_File_start_mountable_finish(*C.GFile, *C.GAsyncResult, GError*);
-// extern C.gboolean _gotk4_gio2_File_stop_mountable_finish(*C.GFile, *C.GAsyncResult, GError*);
-// extern C.gboolean _gotk4_gio2_File_trash(*C.GFile, *C.GCancellable, GError*);
-// extern C.gboolean _gotk4_gio2_File_trash_finish(*C.GFile, *C.GAsyncResult, GError*);
-// extern C.gboolean _gotk4_gio2_File_unmount_mountable_finish(*C.GFile, *C.GAsyncResult, GError*);
-// extern C.gboolean _gotk4_gio2_File_unmount_mountable_with_operation_finish(*C.GFile, *C.GAsyncResult, GError*);
-// *C.GFileOutputStream _gotk4_gio2_File_virtual_append_to(void* fnptr, *C.GFile carg0, C.GFileCreateFlags carg1, *C.GCancellable carg2, GError** _cerr) {
-// 	return ((*C.GFileOutputStream (*) (*C.GFile, C.GFileCreateFlags, *C.GCancellable, GError**))(fnptr))(carg0, carg1, carg2, _cerr);
-// }
-// *C.GFileOutputStream _gotk4_gio2_File_virtual_append_to_finish(void* fnptr, *C.GFile carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((*C.GFileOutputStream (*) (*C.GFile, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
-// }
-// C.gboolean _gotk4_gio2_File_virtual_copy_finish(void* fnptr, *C.GFile carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GFile, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
-// }
-// *C.GFileOutputStream _gotk4_gio2_File_virtual_create(void* fnptr, *C.GFile carg0, C.GFileCreateFlags carg1, *C.GCancellable carg2, GError** _cerr) {
-// 	return ((*C.GFileOutputStream (*) (*C.GFile, C.GFileCreateFlags, *C.GCancellable, GError**))(fnptr))(carg0, carg1, carg2, _cerr);
-// }
-// *C.GFileOutputStream _gotk4_gio2_File_virtual_create_finish(void* fnptr, *C.GFile carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((*C.GFileOutputStream (*) (*C.GFile, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
-// }
-// *C.GFileIOStream _gotk4_gio2_File_virtual_create_readwrite(void* fnptr, *C.GFile carg0, C.GFileCreateFlags carg1, *C.GCancellable carg2, GError** _cerr) {
-// 	return ((*C.GFileIOStream (*) (*C.GFile, C.GFileCreateFlags, *C.GCancellable, GError**))(fnptr))(carg0, carg1, carg2, _cerr);
-// }
-// *C.GFileIOStream _gotk4_gio2_File_virtual_create_readwrite_finish(void* fnptr, *C.GFile carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((*C.GFileIOStream (*) (*C.GFile, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
-// }
-// C.gboolean _gotk4_gio2_File_virtual_delete_file(void* fnptr, *C.GFile carg0, *C.GCancellable carg1, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GFile, *C.GCancellable, GError**))(fnptr))(carg0, carg1, _cerr);
-// }
-// C.gboolean _gotk4_gio2_File_virtual_delete_file_finish(void* fnptr, *C.GFile carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GFile, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
-// }
-// *C.GFile _gotk4_gio2_File_virtual_dup(void* fnptr, *C.GFile carg0) {
-// 	return ((*C.GFile (*) (*C.GFile))(fnptr))(carg0);
-// }
-// C.gboolean _gotk4_gio2_File_virtual_eject_mountable_finish(void* fnptr, *C.GFile carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GFile, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
-// }
-// C.gboolean _gotk4_gio2_File_virtual_eject_mountable_with_operation_finish(void* fnptr, *C.GFile carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GFile, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
-// }
-// *C.GFileEnumerator _gotk4_gio2_File_virtual_enumerate_children(void* fnptr, *C.GFile carg0, *C.char carg1, C.GFileQueryInfoFlags carg2, *C.GCancellable carg3, GError** _cerr) {
-// 	return ((*C.GFileEnumerator (*) (*C.GFile, *C.char, C.GFileQueryInfoFlags, *C.GCancellable, GError**))(fnptr))(carg0, carg1, carg2, carg3, _cerr);
-// }
-// *C.GFileEnumerator _gotk4_gio2_File_virtual_enumerate_children_finish(void* fnptr, *C.GFile carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((*C.GFileEnumerator (*) (*C.GFile, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
-// }
-// C.gboolean _gotk4_gio2_File_virtual_equal(void* fnptr, *C.GFile carg0, *C.GFile carg1) {
-// 	return ((C.gboolean (*) (*C.GFile, *C.GFile))(fnptr))(carg0, carg1);
-// }
-// *C.GMount _gotk4_gio2_File_virtual_find_enclosing_mount(void* fnptr, *C.GFile carg0, *C.GCancellable carg1, GError** _cerr) {
-// 	return ((*C.GMount (*) (*C.GFile, *C.GCancellable, GError**))(fnptr))(carg0, carg1, _cerr);
+// gboolean _gotk4_gio2_Drive_virtual_eject_finish(void* fnptr, GDrive* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GDrive*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
+// }
+// gboolean _gotk4_gio2_Drive_virtual_eject_with_operation_finish(void* fnptr, GDrive* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GDrive*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
+// }
+// char** _gotk4_gio2_Drive_virtual_enumerate_identifiers(void* fnptr, GDrive* carg0) {
+// 	return ((char** (*) (GDrive*))(fnptr))(carg0);
+// }
+// GIcon* _gotk4_gio2_Drive_virtual_get_icon(void* fnptr, GDrive* carg0) {
+// 	return ((GIcon* (*) (GDrive*))(fnptr))(carg0);
+// }
+// char* _gotk4_gio2_Drive_virtual_get_identifier(void* fnptr, GDrive* carg0, const char* carg1) {
+// 	return ((char* (*) (GDrive*, const char*))(fnptr))(carg0, carg1);
+// }
+// char* _gotk4_gio2_Drive_virtual_get_name(void* fnptr, GDrive* carg0) {
+// 	return ((char* (*) (GDrive*))(fnptr))(carg0);
+// }
+// const gchar* _gotk4_gio2_Drive_virtual_get_sort_key(void* fnptr, GDrive* carg0) {
+// 	return ((const gchar* (*) (GDrive*))(fnptr))(carg0);
+// }
+// GDriveStartStopType _gotk4_gio2_Drive_virtual_get_start_stop_type(void* fnptr, GDrive* carg0) {
+// 	return ((GDriveStartStopType (*) (GDrive*))(fnptr))(carg0);
+// }
+// GIcon* _gotk4_gio2_Drive_virtual_get_symbolic_icon(void* fnptr, GDrive* carg0) {
+// 	return ((GIcon* (*) (GDrive*))(fnptr))(carg0);
+// }
+// GList* _gotk4_gio2_Drive_virtual_get_volumes(void* fnptr, GDrive* carg0) {
+// 	return ((GList* (*) (GDrive*))(fnptr))(carg0);
+// }
+// gboolean _gotk4_gio2_Drive_virtual_has_media(void* fnptr, GDrive* carg0) {
+// 	return ((gboolean (*) (GDrive*))(fnptr))(carg0);
+// }
+// gboolean _gotk4_gio2_Drive_virtual_has_volumes(void* fnptr, GDrive* carg0) {
+// 	return ((gboolean (*) (GDrive*))(fnptr))(carg0);
+// }
+// gboolean _gotk4_gio2_Drive_virtual_is_media_check_automatic(void* fnptr, GDrive* carg0) {
+// 	return ((gboolean (*) (GDrive*))(fnptr))(carg0);
+// }
+// gboolean _gotk4_gio2_Drive_virtual_is_media_removable(void* fnptr, GDrive* carg0) {
+// 	return ((gboolean (*) (GDrive*))(fnptr))(carg0);
+// }
+// gboolean _gotk4_gio2_Drive_virtual_is_removable(void* fnptr, GDrive* carg0) {
+// 	return ((gboolean (*) (GDrive*))(fnptr))(carg0);
+// }
+// gboolean _gotk4_gio2_Drive_virtual_poll_for_media_finish(void* fnptr, GDrive* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GDrive*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
+// }
+// gboolean _gotk4_gio2_Drive_virtual_start_finish(void* fnptr, GDrive* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GDrive*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
+// }
+// void _gotk4_gio2_Drive_virtual_stop_button(void* fnptr, GDrive* carg0) {
+// 	return ((void (*) (GDrive*))(fnptr))(carg0);
+// }
+// gboolean _gotk4_gio2_Drive_virtual_stop_finish(void* fnptr, GDrive* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GDrive*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
+// }
+// extern gboolean _gotk4_gio2_DtlsConnection_accept_certificate(GDtlsConnection*, GTlsCertificate*, GTlsCertificateFlags);
+// extern const gchar* _gotk4_gio2_DtlsConnection_get_negotiated_protocol(GDtlsConnection*);
+// extern gboolean _gotk4_gio2_DtlsConnection_handshake(GDtlsConnection*, GCancellable*, GError*);
+// extern gboolean _gotk4_gio2_DtlsConnection_handshake_finish(GDtlsConnection*, GAsyncResult*, GError*);
+// extern void _gotk4_gio2_DtlsConnection_set_advertised_protocols(GDtlsConnection*, const gchar* const*);
+// extern gboolean _gotk4_gio2_DtlsConnection_shutdown(GDtlsConnection*, gboolean, gboolean, GCancellable*, GError*);
+// extern gboolean _gotk4_gio2_DtlsConnection_shutdown_finish(GDtlsConnection*, GAsyncResult*, GError*);
+// gboolean _gotk4_gio2_DtlsConnection_virtual_accept_certificate(void* fnptr, GDtlsConnection* carg0, GTlsCertificate* carg1, GTlsCertificateFlags carg2) {
+// 	return ((gboolean (*) (GDtlsConnection*, GTlsCertificate*, GTlsCertificateFlags))(fnptr))(carg0, carg1, carg2);
+// }
+// const gchar* _gotk4_gio2_DtlsConnection_virtual_get_negotiated_protocol(void* fnptr, GDtlsConnection* carg0) {
+// 	return ((const gchar* (*) (GDtlsConnection*))(fnptr))(carg0);
+// }
+// gboolean _gotk4_gio2_DtlsConnection_virtual_handshake(void* fnptr, GDtlsConnection* carg0, GCancellable* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GDtlsConnection*, GCancellable*, GError**))(fnptr))(carg0, carg1, _cerr);
+// }
+// gboolean _gotk4_gio2_DtlsConnection_virtual_handshake_finish(void* fnptr, GDtlsConnection* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GDtlsConnection*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
+// }
+// void _gotk4_gio2_DtlsConnection_virtual_set_advertised_protocols(void* fnptr, GDtlsConnection* carg0, const gchar* const* carg1) {
+// 	return ((void (*) (GDtlsConnection*, const gchar* const*))(fnptr))(carg0, carg1);
+// }
+// gboolean _gotk4_gio2_DtlsConnection_virtual_shutdown(void* fnptr, GDtlsConnection* carg0, gboolean carg1, gboolean carg2, GCancellable* carg3, GError** _cerr) {
+// 	return ((gboolean (*) (GDtlsConnection*, gboolean, gboolean, GCancellable*, GError**))(fnptr))(carg0, carg1, carg2, carg3, _cerr);
+// }
+// gboolean _gotk4_gio2_DtlsConnection_virtual_shutdown_finish(void* fnptr, GDtlsConnection* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GDtlsConnection*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
+// }
+// extern GFileOutputStream* _gotk4_gio2_File_append_to(GFile*, GFileCreateFlags, GCancellable*, GError*);
+// extern GFileOutputStream* _gotk4_gio2_File_append_to_finish(GFile*, GAsyncResult*, GError*);
+// extern gboolean _gotk4_gio2_File_copy_finish(GFile*, GAsyncResult*, GError*);
+// extern GFileOutputStream* _gotk4_gio2_File_create(GFile*, GFileCreateFlags, GCancellable*, GError*);
+// extern GFileOutputStream* _gotk4_gio2_File_create_finish(GFile*, GAsyncResult*, GError*);
+// extern GFileIOStream* _gotk4_gio2_File_create_readwrite(GFile*, GFileCreateFlags, GCancellable*, GError*);
+// extern GFileIOStream* _gotk4_gio2_File_create_readwrite_finish(GFile*, GAsyncResult*, GError*);
+// extern gboolean _gotk4_gio2_File_delete_file(GFile*, GCancellable*, GError*);
+// extern gboolean _gotk4_gio2_File_delete_file_finish(GFile*, GAsyncResult*, GError*);
+// extern GFile* _gotk4_gio2_File_dup(GFile*);
+// extern gboolean _gotk4_gio2_File_eject_mountable_finish(GFile*, GAsyncResult*, GError*);
+// extern gboolean _gotk4_gio2_File_eject_mountable_with_operation_finish(GFile*, GAsyncResult*, GError*);
+// extern GFileEnumerator* _gotk4_gio2_File_enumerate_children(GFile*, const char*, GFileQueryInfoFlags, GCancellable*, GError*);
+// extern GFileEnumerator* _gotk4_gio2_File_enumerate_children_finish(GFile*, GAsyncResult*, GError*);
+// extern gboolean _gotk4_gio2_File_equal(GFile*, GFile*);
+// extern GMount* _gotk4_gio2_File_find_enclosing_mount(GFile*, GCancellable*, GError*);
+// extern GMount* _gotk4_gio2_File_find_enclosing_mount_finish(GFile*, GAsyncResult*, GError*);
+// extern char* _gotk4_gio2_File_get_basename(GFile*);
+// extern GFile* _gotk4_gio2_File_get_child_for_display_name(GFile*, const char*, GError*);
+// extern GFile* _gotk4_gio2_File_get_parent(GFile*);
+// extern char* _gotk4_gio2_File_get_parse_name(GFile*);
+// extern char* _gotk4_gio2_File_get_path(GFile*);
+// extern char* _gotk4_gio2_File_get_relative_path(GFile*, GFile*);
+// extern char* _gotk4_gio2_File_get_uri(GFile*);
+// extern char* _gotk4_gio2_File_get_uri_scheme(GFile*);
+// extern gboolean _gotk4_gio2_File_has_uri_scheme(GFile*, const char*);
+// extern guint _gotk4_gio2_File_hash(GFile*);
+// extern gboolean _gotk4_gio2_File_is_native(GFile*);
+// extern gboolean _gotk4_gio2_File_make_directory(GFile*, GCancellable*, GError*);
+// extern gboolean _gotk4_gio2_File_make_directory_finish(GFile*, GAsyncResult*, GError*);
+// extern gboolean _gotk4_gio2_File_make_symbolic_link(GFile*, const char*, GCancellable*, GError*);
+// extern gboolean _gotk4_gio2_File_make_symbolic_link_finish(GFile*, GAsyncResult*, GError*);
+// extern gboolean _gotk4_gio2_File_measure_disk_usage_finish(GFile*, GAsyncResult*, guint64, guint64, guint64, GError*);
+// extern GFileMonitor* _gotk4_gio2_File_monitor_dir(GFile*, GFileMonitorFlags, GCancellable*, GError*);
+// extern GFileMonitor* _gotk4_gio2_File_monitor_file(GFile*, GFileMonitorFlags, GCancellable*, GError*);
+// extern gboolean _gotk4_gio2_File_mount_enclosing_volume_finish(GFile*, GAsyncResult*, GError*);
+// extern GFile* _gotk4_gio2_File_mount_mountable_finish(GFile*, GAsyncResult*, GError*);
+// extern gboolean _gotk4_gio2_File_move_finish(GFile*, GAsyncResult*, GError*);
+// extern GFileIOStream* _gotk4_gio2_File_open_readwrite(GFile*, GCancellable*, GError*);
+// extern GFileIOStream* _gotk4_gio2_File_open_readwrite_finish(GFile*, GAsyncResult*, GError*);
+// extern gboolean _gotk4_gio2_File_poll_mountable_finish(GFile*, GAsyncResult*, GError*);
+// extern gboolean _gotk4_gio2_File_prefix_matches(GFile*, GFile*);
+// extern GFileInfo* _gotk4_gio2_File_query_filesystem_info(GFile*, const char*, GCancellable*, GError*);
+// extern GFileInfo* _gotk4_gio2_File_query_filesystem_info_finish(GFile*, GAsyncResult*, GError*);
+// extern GFileInfo* _gotk4_gio2_File_query_info(GFile*, const char*, GFileQueryInfoFlags, GCancellable*, GError*);
+// extern GFileInfo* _gotk4_gio2_File_query_info_finish(GFile*, GAsyncResult*, GError*);
+// extern GFileAttributeInfoList* _gotk4_gio2_File_query_settable_attributes(GFile*, GCancellable*, GError*);
+// extern GFileAttributeInfoList* _gotk4_gio2_File_query_writable_namespaces(GFile*, GCancellable*, GError*);
+// extern GFileInputStream* _gotk4_gio2_File_read_finish(GFile*, GAsyncResult*, GError*);
+// extern GFileInputStream* _gotk4_gio2_File_read_fn(GFile*, GCancellable*, GError*);
+// extern GFileOutputStream* _gotk4_gio2_File_replace(GFile*, const char*, gboolean, GFileCreateFlags, GCancellable*, GError*);
+// extern GFileOutputStream* _gotk4_gio2_File_replace_finish(GFile*, GAsyncResult*, GError*);
+// extern GFileIOStream* _gotk4_gio2_File_replace_readwrite(GFile*, const char*, gboolean, GFileCreateFlags, GCancellable*, GError*);
+// extern GFileIOStream* _gotk4_gio2_File_replace_readwrite_finish(GFile*, GAsyncResult*, GError*);
+// extern GFile* _gotk4_gio2_File_resolve_relative_path(GFile*, const char*);
+// extern gboolean _gotk4_gio2_File_set_attributes_finish(GFile*, GAsyncResult*, GFileInfo*, GError*);
+// extern gboolean _gotk4_gio2_File_set_attributes_from_info(GFile*, GFileInfo*, GFileQueryInfoFlags, GCancellable*, GError*);
+// extern GFile* _gotk4_gio2_File_set_display_name(GFile*, const char*, GCancellable*, GError*);
+// extern GFile* _gotk4_gio2_File_set_display_name_finish(GFile*, GAsyncResult*, GError*);
+// extern gboolean _gotk4_gio2_File_start_mountable_finish(GFile*, GAsyncResult*, GError*);
+// extern gboolean _gotk4_gio2_File_stop_mountable_finish(GFile*, GAsyncResult*, GError*);
+// extern gboolean _gotk4_gio2_File_trash(GFile*, GCancellable*, GError*);
+// extern gboolean _gotk4_gio2_File_trash_finish(GFile*, GAsyncResult*, GError*);
+// extern gboolean _gotk4_gio2_File_unmount_mountable_finish(GFile*, GAsyncResult*, GError*);
+// extern gboolean _gotk4_gio2_File_unmount_mountable_with_operation_finish(GFile*, GAsyncResult*, GError*);
+// GFileOutputStream* _gotk4_gio2_File_virtual_append_to(void* fnptr, GFile* carg0, GFileCreateFlags carg1, GCancellable* carg2, GError** _cerr) {
+// 	return ((GFileOutputStream* (*) (GFile*, GFileCreateFlags, GCancellable*, GError**))(fnptr))(carg0, carg1, carg2, _cerr);
+// }
+// GFileOutputStream* _gotk4_gio2_File_virtual_append_to_finish(void* fnptr, GFile* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((GFileOutputStream* (*) (GFile*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
+// }
+// gboolean _gotk4_gio2_File_virtual_copy_finish(void* fnptr, GFile* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GFile*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
+// }
+// GFileOutputStream* _gotk4_gio2_File_virtual_create(void* fnptr, GFile* carg0, GFileCreateFlags carg1, GCancellable* carg2, GError** _cerr) {
+// 	return ((GFileOutputStream* (*) (GFile*, GFileCreateFlags, GCancellable*, GError**))(fnptr))(carg0, carg1, carg2, _cerr);
+// }
+// GFileOutputStream* _gotk4_gio2_File_virtual_create_finish(void* fnptr, GFile* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((GFileOutputStream* (*) (GFile*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
+// }
+// GFileIOStream* _gotk4_gio2_File_virtual_create_readwrite(void* fnptr, GFile* carg0, GFileCreateFlags carg1, GCancellable* carg2, GError** _cerr) {
+// 	return ((GFileIOStream* (*) (GFile*, GFileCreateFlags, GCancellable*, GError**))(fnptr))(carg0, carg1, carg2, _cerr);
+// }
+// GFileIOStream* _gotk4_gio2_File_virtual_create_readwrite_finish(void* fnptr, GFile* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((GFileIOStream* (*) (GFile*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
+// }
+// gboolean _gotk4_gio2_File_virtual_delete_file(void* fnptr, GFile* carg0, GCancellable* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GFile*, GCancellable*, GError**))(fnptr))(carg0, carg1, _cerr);
+// }
+// gboolean _gotk4_gio2_File_virtual_delete_file_finish(void* fnptr, GFile* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GFile*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
+// }
+// GFile* _gotk4_gio2_File_virtual_dup(void* fnptr, GFile* carg0) {
+// 	return ((GFile* (*) (GFile*))(fnptr))(carg0);
+// }
+// gboolean _gotk4_gio2_File_virtual_eject_mountable_finish(void* fnptr, GFile* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GFile*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
+// }
+// gboolean _gotk4_gio2_File_virtual_eject_mountable_with_operation_finish(void* fnptr, GFile* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GFile*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
+// }
+// GFileEnumerator* _gotk4_gio2_File_virtual_enumerate_children(void* fnptr, GFile* carg0, const char* carg1, GFileQueryInfoFlags carg2, GCancellable* carg3, GError** _cerr) {
+// 	return ((GFileEnumerator* (*) (GFile*, const char*, GFileQueryInfoFlags, GCancellable*, GError**))(fnptr))(carg0, carg1, carg2, carg3, _cerr);
+// }
+// GFileEnumerator* _gotk4_gio2_File_virtual_enumerate_children_finish(void* fnptr, GFile* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((GFileEnumerator* (*) (GFile*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
+// }
+// gboolean _gotk4_gio2_File_virtual_equal(void* fnptr, GFile* carg0, GFile* carg1) {
+// 	return ((gboolean (*) (GFile*, GFile*))(fnptr))(carg0, carg1);
+// }
+// GMount* _gotk4_gio2_File_virtual_find_enclosing_mount(void* fnptr, GFile* carg0, GCancellable* carg1, GError** _cerr) {
+// 	return ((GMount* (*) (GFile*, GCancellable*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// *C.GMount _gotk4_gio2_File_virtual_find_enclosing_mount_finish(void* fnptr, *C.GFile carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((*C.GMount (*) (*C.GFile, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
+// GMount* _gotk4_gio2_File_virtual_find_enclosing_mount_finish(void* fnptr, GFile* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((GMount* (*) (GFile*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// *C.char _gotk4_gio2_File_virtual_get_basename(void* fnptr, *C.GFile carg0) {
-// 	return ((*C.char (*) (*C.GFile))(fnptr))(carg0);
+// char* _gotk4_gio2_File_virtual_get_basename(void* fnptr, GFile* carg0) {
+// 	return ((char* (*) (GFile*))(fnptr))(carg0);
 // }
-// *C.GFile _gotk4_gio2_File_virtual_get_child_for_display_name(void* fnptr, *C.GFile carg0, *C.char carg1, GError** _cerr) {
-// 	return ((*C.GFile (*) (*C.GFile, *C.char, GError**))(fnptr))(carg0, carg1, _cerr);
+// GFile* _gotk4_gio2_File_virtual_get_child_for_display_name(void* fnptr, GFile* carg0, const char* carg1, GError** _cerr) {
+// 	return ((GFile* (*) (GFile*, const char*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// *C.GFile _gotk4_gio2_File_virtual_get_parent(void* fnptr, *C.GFile carg0) {
-// 	return ((*C.GFile (*) (*C.GFile))(fnptr))(carg0);
+// GFile* _gotk4_gio2_File_virtual_get_parent(void* fnptr, GFile* carg0) {
+// 	return ((GFile* (*) (GFile*))(fnptr))(carg0);
 // }
-// *C.char _gotk4_gio2_File_virtual_get_parse_name(void* fnptr, *C.GFile carg0) {
-// 	return ((*C.char (*) (*C.GFile))(fnptr))(carg0);
+// char* _gotk4_gio2_File_virtual_get_parse_name(void* fnptr, GFile* carg0) {
+// 	return ((char* (*) (GFile*))(fnptr))(carg0);
 // }
-// *C.char _gotk4_gio2_File_virtual_get_path(void* fnptr, *C.GFile carg0) {
-// 	return ((*C.char (*) (*C.GFile))(fnptr))(carg0);
+// char* _gotk4_gio2_File_virtual_get_path(void* fnptr, GFile* carg0) {
+// 	return ((char* (*) (GFile*))(fnptr))(carg0);
 // }
-// *C.char _gotk4_gio2_File_virtual_get_relative_path(void* fnptr, *C.GFile carg0, *C.GFile carg1) {
-// 	return ((*C.char (*) (*C.GFile, *C.GFile))(fnptr))(carg0, carg1);
+// char* _gotk4_gio2_File_virtual_get_relative_path(void* fnptr, GFile* carg0, GFile* carg1) {
+// 	return ((char* (*) (GFile*, GFile*))(fnptr))(carg0, carg1);
 // }
-// *C.char _gotk4_gio2_File_virtual_get_uri(void* fnptr, *C.GFile carg0) {
-// 	return ((*C.char (*) (*C.GFile))(fnptr))(carg0);
+// char* _gotk4_gio2_File_virtual_get_uri(void* fnptr, GFile* carg0) {
+// 	return ((char* (*) (GFile*))(fnptr))(carg0);
 // }
-// *C.char _gotk4_gio2_File_virtual_get_uri_scheme(void* fnptr, *C.GFile carg0) {
-// 	return ((*C.char (*) (*C.GFile))(fnptr))(carg0);
+// char* _gotk4_gio2_File_virtual_get_uri_scheme(void* fnptr, GFile* carg0) {
+// 	return ((char* (*) (GFile*))(fnptr))(carg0);
 // }
-// C.gboolean _gotk4_gio2_File_virtual_has_uri_scheme(void* fnptr, *C.GFile carg0, *C.char carg1) {
-// 	return ((C.gboolean (*) (*C.GFile, *C.char))(fnptr))(carg0, carg1);
+// gboolean _gotk4_gio2_File_virtual_has_uri_scheme(void* fnptr, GFile* carg0, const char* carg1) {
+// 	return ((gboolean (*) (GFile*, const char*))(fnptr))(carg0, carg1);
 // }
-// C.guint _gotk4_gio2_File_virtual_hash(void* fnptr, *C.GFile carg0) {
-// 	return ((C.guint (*) (*C.GFile))(fnptr))(carg0);
+// guint _gotk4_gio2_File_virtual_hash(void* fnptr, GFile* carg0) {
+// 	return ((guint (*) (GFile*))(fnptr))(carg0);
 // }
-// C.gboolean _gotk4_gio2_File_virtual_is_native(void* fnptr, *C.GFile carg0) {
-// 	return ((C.gboolean (*) (*C.GFile))(fnptr))(carg0);
+// gboolean _gotk4_gio2_File_virtual_is_native(void* fnptr, GFile* carg0) {
+// 	return ((gboolean (*) (GFile*))(fnptr))(carg0);
 // }
-// C.gboolean _gotk4_gio2_File_virtual_make_directory(void* fnptr, *C.GFile carg0, *C.GCancellable carg1, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GFile, *C.GCancellable, GError**))(fnptr))(carg0, carg1, _cerr);
+// gboolean _gotk4_gio2_File_virtual_make_directory(void* fnptr, GFile* carg0, GCancellable* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GFile*, GCancellable*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// C.gboolean _gotk4_gio2_File_virtual_make_directory_finish(void* fnptr, *C.GFile carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GFile, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
+// gboolean _gotk4_gio2_File_virtual_make_directory_finish(void* fnptr, GFile* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GFile*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// C.gboolean _gotk4_gio2_File_virtual_make_symbolic_link(void* fnptr, *C.GFile carg0, *C.char carg1, *C.GCancellable carg2, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GFile, *C.char, *C.GCancellable, GError**))(fnptr))(carg0, carg1, carg2, _cerr);
+// gboolean _gotk4_gio2_File_virtual_make_symbolic_link(void* fnptr, GFile* carg0, const char* carg1, GCancellable* carg2, GError** _cerr) {
+// 	return ((gboolean (*) (GFile*, const char*, GCancellable*, GError**))(fnptr))(carg0, carg1, carg2, _cerr);
 // }
-// C.gboolean _gotk4_gio2_File_virtual_make_symbolic_link_finish(void* fnptr, *C.GFile carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GFile, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
+// gboolean _gotk4_gio2_File_virtual_make_symbolic_link_finish(void* fnptr, GFile* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GFile*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// C.gboolean _gotk4_gio2_File_virtual_measure_disk_usage_finish(void* fnptr, *C.GFile carg0, *C.GAsyncResult carg1, C.guint64* carg2, C.guint64* carg3, C.guint64* carg4, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GFile, *C.GAsyncResult, C.guint64*, C.guint64*, C.guint64*, GError**))(fnptr))(carg0, carg1, carg2, carg3, carg4, _cerr);
+// gboolean _gotk4_gio2_File_virtual_measure_disk_usage_finish(void* fnptr, GFile* carg0, GAsyncResult* carg1, guint64* carg2, guint64* carg3, guint64* carg4, GError** _cerr) {
+// 	return ((gboolean (*) (GFile*, GAsyncResult*, guint64*, guint64*, guint64*, GError**))(fnptr))(carg0, carg1, carg2, carg3, carg4, _cerr);
 // }
-// *C.GFileMonitor _gotk4_gio2_File_virtual_monitor_dir(void* fnptr, *C.GFile carg0, C.GFileMonitorFlags carg1, *C.GCancellable carg2, GError** _cerr) {
-// 	return ((*C.GFileMonitor (*) (*C.GFile, C.GFileMonitorFlags, *C.GCancellable, GError**))(fnptr))(carg0, carg1, carg2, _cerr);
+// GFileMonitor* _gotk4_gio2_File_virtual_monitor_dir(void* fnptr, GFile* carg0, GFileMonitorFlags carg1, GCancellable* carg2, GError** _cerr) {
+// 	return ((GFileMonitor* (*) (GFile*, GFileMonitorFlags, GCancellable*, GError**))(fnptr))(carg0, carg1, carg2, _cerr);
 // }
-// *C.GFileMonitor _gotk4_gio2_File_virtual_monitor_file(void* fnptr, *C.GFile carg0, C.GFileMonitorFlags carg1, *C.GCancellable carg2, GError** _cerr) {
-// 	return ((*C.GFileMonitor (*) (*C.GFile, C.GFileMonitorFlags, *C.GCancellable, GError**))(fnptr))(carg0, carg1, carg2, _cerr);
+// GFileMonitor* _gotk4_gio2_File_virtual_monitor_file(void* fnptr, GFile* carg0, GFileMonitorFlags carg1, GCancellable* carg2, GError** _cerr) {
+// 	return ((GFileMonitor* (*) (GFile*, GFileMonitorFlags, GCancellable*, GError**))(fnptr))(carg0, carg1, carg2, _cerr);
 // }
-// C.gboolean _gotk4_gio2_File_virtual_mount_enclosing_volume_finish(void* fnptr, *C.GFile carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GFile, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
+// gboolean _gotk4_gio2_File_virtual_mount_enclosing_volume_finish(void* fnptr, GFile* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GFile*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// *C.GFile _gotk4_gio2_File_virtual_mount_mountable_finish(void* fnptr, *C.GFile carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((*C.GFile (*) (*C.GFile, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
+// GFile* _gotk4_gio2_File_virtual_mount_mountable_finish(void* fnptr, GFile* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((GFile* (*) (GFile*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// C.gboolean _gotk4_gio2_File_virtual_move_finish(void* fnptr, *C.GFile carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GFile, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
+// gboolean _gotk4_gio2_File_virtual_move_finish(void* fnptr, GFile* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GFile*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// *C.GFileIOStream _gotk4_gio2_File_virtual_open_readwrite(void* fnptr, *C.GFile carg0, *C.GCancellable carg1, GError** _cerr) {
-// 	return ((*C.GFileIOStream (*) (*C.GFile, *C.GCancellable, GError**))(fnptr))(carg0, carg1, _cerr);
+// GFileIOStream* _gotk4_gio2_File_virtual_open_readwrite(void* fnptr, GFile* carg0, GCancellable* carg1, GError** _cerr) {
+// 	return ((GFileIOStream* (*) (GFile*, GCancellable*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// *C.GFileIOStream _gotk4_gio2_File_virtual_open_readwrite_finish(void* fnptr, *C.GFile carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((*C.GFileIOStream (*) (*C.GFile, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
+// GFileIOStream* _gotk4_gio2_File_virtual_open_readwrite_finish(void* fnptr, GFile* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((GFileIOStream* (*) (GFile*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// C.gboolean _gotk4_gio2_File_virtual_poll_mountable_finish(void* fnptr, *C.GFile carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GFile, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
+// gboolean _gotk4_gio2_File_virtual_poll_mountable_finish(void* fnptr, GFile* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GFile*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// C.gboolean _gotk4_gio2_File_virtual_prefix_matches(void* fnptr, *C.GFile carg0, *C.GFile carg1) {
-// 	return ((C.gboolean (*) (*C.GFile, *C.GFile))(fnptr))(carg0, carg1);
+// gboolean _gotk4_gio2_File_virtual_prefix_matches(void* fnptr, GFile* carg0, GFile* carg1) {
+// 	return ((gboolean (*) (GFile*, GFile*))(fnptr))(carg0, carg1);
 // }
-// *C.GFileInfo _gotk4_gio2_File_virtual_query_filesystem_info(void* fnptr, *C.GFile carg0, *C.char carg1, *C.GCancellable carg2, GError** _cerr) {
-// 	return ((*C.GFileInfo (*) (*C.GFile, *C.char, *C.GCancellable, GError**))(fnptr))(carg0, carg1, carg2, _cerr);
+// GFileInfo* _gotk4_gio2_File_virtual_query_filesystem_info(void* fnptr, GFile* carg0, const char* carg1, GCancellable* carg2, GError** _cerr) {
+// 	return ((GFileInfo* (*) (GFile*, const char*, GCancellable*, GError**))(fnptr))(carg0, carg1, carg2, _cerr);
 // }
-// *C.GFileInfo _gotk4_gio2_File_virtual_query_filesystem_info_finish(void* fnptr, *C.GFile carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((*C.GFileInfo (*) (*C.GFile, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
+// GFileInfo* _gotk4_gio2_File_virtual_query_filesystem_info_finish(void* fnptr, GFile* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((GFileInfo* (*) (GFile*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// *C.GFileInfo _gotk4_gio2_File_virtual_query_info(void* fnptr, *C.GFile carg0, *C.char carg1, C.GFileQueryInfoFlags carg2, *C.GCancellable carg3, GError** _cerr) {
-// 	return ((*C.GFileInfo (*) (*C.GFile, *C.char, C.GFileQueryInfoFlags, *C.GCancellable, GError**))(fnptr))(carg0, carg1, carg2, carg3, _cerr);
+// GFileInfo* _gotk4_gio2_File_virtual_query_info(void* fnptr, GFile* carg0, const char* carg1, GFileQueryInfoFlags carg2, GCancellable* carg3, GError** _cerr) {
+// 	return ((GFileInfo* (*) (GFile*, const char*, GFileQueryInfoFlags, GCancellable*, GError**))(fnptr))(carg0, carg1, carg2, carg3, _cerr);
 // }
-// *C.GFileInfo _gotk4_gio2_File_virtual_query_info_finish(void* fnptr, *C.GFile carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((*C.GFileInfo (*) (*C.GFile, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
+// GFileInfo* _gotk4_gio2_File_virtual_query_info_finish(void* fnptr, GFile* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((GFileInfo* (*) (GFile*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// *C.GFileAttributeInfoList _gotk4_gio2_File_virtual_query_settable_attributes(void* fnptr, *C.GFile carg0, *C.GCancellable carg1, GError** _cerr) {
-// 	return ((*C.GFileAttributeInfoList (*) (*C.GFile, *C.GCancellable, GError**))(fnptr))(carg0, carg1, _cerr);
+// GFileAttributeInfoList* _gotk4_gio2_File_virtual_query_settable_attributes(void* fnptr, GFile* carg0, GCancellable* carg1, GError** _cerr) {
+// 	return ((GFileAttributeInfoList* (*) (GFile*, GCancellable*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// *C.GFileAttributeInfoList _gotk4_gio2_File_virtual_query_writable_namespaces(void* fnptr, *C.GFile carg0, *C.GCancellable carg1, GError** _cerr) {
-// 	return ((*C.GFileAttributeInfoList (*) (*C.GFile, *C.GCancellable, GError**))(fnptr))(carg0, carg1, _cerr);
+// GFileAttributeInfoList* _gotk4_gio2_File_virtual_query_writable_namespaces(void* fnptr, GFile* carg0, GCancellable* carg1, GError** _cerr) {
+// 	return ((GFileAttributeInfoList* (*) (GFile*, GCancellable*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// *C.GFileInputStream _gotk4_gio2_File_virtual_read_finish(void* fnptr, *C.GFile carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((*C.GFileInputStream (*) (*C.GFile, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
-// }
-// *C.GFileInputStream _gotk4_gio2_File_virtual_read_fn(void* fnptr, *C.GFile carg0, *C.GCancellable carg1, GError** _cerr) {
-// 	return ((*C.GFileInputStream (*) (*C.GFile, *C.GCancellable, GError**))(fnptr))(carg0, carg1, _cerr);
-// }
-// *C.GFileOutputStream _gotk4_gio2_File_virtual_replace(void* fnptr, *C.GFile carg0, *C.char carg1, C.gboolean carg2, C.GFileCreateFlags carg3, *C.GCancellable carg4, GError** _cerr) {
-// 	return ((*C.GFileOutputStream (*) (*C.GFile, *C.char, C.gboolean, C.GFileCreateFlags, *C.GCancellable, GError**))(fnptr))(carg0, carg1, carg2, carg3, carg4, _cerr);
-// }
-// *C.GFileOutputStream _gotk4_gio2_File_virtual_replace_finish(void* fnptr, *C.GFile carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((*C.GFileOutputStream (*) (*C.GFile, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
-// }
-// *C.GFileIOStream _gotk4_gio2_File_virtual_replace_readwrite(void* fnptr, *C.GFile carg0, *C.char carg1, C.gboolean carg2, C.GFileCreateFlags carg3, *C.GCancellable carg4, GError** _cerr) {
-// 	return ((*C.GFileIOStream (*) (*C.GFile, *C.char, C.gboolean, C.GFileCreateFlags, *C.GCancellable, GError**))(fnptr))(carg0, carg1, carg2, carg3, carg4, _cerr);
-// }
-// *C.GFileIOStream _gotk4_gio2_File_virtual_replace_readwrite_finish(void* fnptr, *C.GFile carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((*C.GFileIOStream (*) (*C.GFile, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
-// }
-// *C.GFile _gotk4_gio2_File_virtual_resolve_relative_path(void* fnptr, *C.GFile carg0, *C.char carg1) {
-// 	return ((*C.GFile (*) (*C.GFile, *C.char))(fnptr))(carg0, carg1);
-// }
-// C.gboolean _gotk4_gio2_File_virtual_set_attributes_finish(void* fnptr, *C.GFile carg0, *C.GAsyncResult carg1, *C.GFileInfo* carg2, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GFile, *C.GAsyncResult, *C.GFileInfo*, GError**))(fnptr))(carg0, carg1, carg2, _cerr);
+// GFileInputStream* _gotk4_gio2_File_virtual_read_finish(void* fnptr, GFile* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((GFileInputStream* (*) (GFile*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
+// }
+// GFileInputStream* _gotk4_gio2_File_virtual_read_fn(void* fnptr, GFile* carg0, GCancellable* carg1, GError** _cerr) {
+// 	return ((GFileInputStream* (*) (GFile*, GCancellable*, GError**))(fnptr))(carg0, carg1, _cerr);
+// }
+// GFileOutputStream* _gotk4_gio2_File_virtual_replace(void* fnptr, GFile* carg0, const char* carg1, gboolean carg2, GFileCreateFlags carg3, GCancellable* carg4, GError** _cerr) {
+// 	return ((GFileOutputStream* (*) (GFile*, const char*, gboolean, GFileCreateFlags, GCancellable*, GError**))(fnptr))(carg0, carg1, carg2, carg3, carg4, _cerr);
+// }
+// GFileOutputStream* _gotk4_gio2_File_virtual_replace_finish(void* fnptr, GFile* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((GFileOutputStream* (*) (GFile*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
+// }
+// GFileIOStream* _gotk4_gio2_File_virtual_replace_readwrite(void* fnptr, GFile* carg0, const char* carg1, gboolean carg2, GFileCreateFlags carg3, GCancellable* carg4, GError** _cerr) {
+// 	return ((GFileIOStream* (*) (GFile*, const char*, gboolean, GFileCreateFlags, GCancellable*, GError**))(fnptr))(carg0, carg1, carg2, carg3, carg4, _cerr);
+// }
+// GFileIOStream* _gotk4_gio2_File_virtual_replace_readwrite_finish(void* fnptr, GFile* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((GFileIOStream* (*) (GFile*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
+// }
+// GFile* _gotk4_gio2_File_virtual_resolve_relative_path(void* fnptr, GFile* carg0, const char* carg1) {
+// 	return ((GFile* (*) (GFile*, const char*))(fnptr))(carg0, carg1);
+// }
+// gboolean _gotk4_gio2_File_virtual_set_attributes_finish(void* fnptr, GFile* carg0, GAsyncResult* carg1, GFileInfo** carg2, GError** _cerr) {
+// 	return ((gboolean (*) (GFile*, GAsyncResult*, GFileInfo**, GError**))(fnptr))(carg0, carg1, carg2, _cerr);
 // }
-// C.gboolean _gotk4_gio2_File_virtual_set_attributes_from_info(void* fnptr, *C.GFile carg0, *C.GFileInfo carg1, C.GFileQueryInfoFlags carg2, *C.GCancellable carg3, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GFile, *C.GFileInfo, C.GFileQueryInfoFlags, *C.GCancellable, GError**))(fnptr))(carg0, carg1, carg2, carg3, _cerr);
+// gboolean _gotk4_gio2_File_virtual_set_attributes_from_info(void* fnptr, GFile* carg0, GFileInfo* carg1, GFileQueryInfoFlags carg2, GCancellable* carg3, GError** _cerr) {
+// 	return ((gboolean (*) (GFile*, GFileInfo*, GFileQueryInfoFlags, GCancellable*, GError**))(fnptr))(carg0, carg1, carg2, carg3, _cerr);
 // }
-// *C.GFile _gotk4_gio2_File_virtual_set_display_name(void* fnptr, *C.GFile carg0, *C.char carg1, *C.GCancellable carg2, GError** _cerr) {
-// 	return ((*C.GFile (*) (*C.GFile, *C.char, *C.GCancellable, GError**))(fnptr))(carg0, carg1, carg2, _cerr);
+// GFile* _gotk4_gio2_File_virtual_set_display_name(void* fnptr, GFile* carg0, const char* carg1, GCancellable* carg2, GError** _cerr) {
+// 	return ((GFile* (*) (GFile*, const char*, GCancellable*, GError**))(fnptr))(carg0, carg1, carg2, _cerr);
 // }
-// *C.GFile _gotk4_gio2_File_virtual_set_display_name_finish(void* fnptr, *C.GFile carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((*C.GFile (*) (*C.GFile, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
+// GFile* _gotk4_gio2_File_virtual_set_display_name_finish(void* fnptr, GFile* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((GFile* (*) (GFile*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// C.gboolean _gotk4_gio2_File_virtual_start_mountable_finish(void* fnptr, *C.GFile carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GFile, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
+// gboolean _gotk4_gio2_File_virtual_start_mountable_finish(void* fnptr, GFile* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GFile*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// C.gboolean _gotk4_gio2_File_virtual_stop_mountable_finish(void* fnptr, *C.GFile carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GFile, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
+// gboolean _gotk4_gio2_File_virtual_stop_mountable_finish(void* fnptr, GFile* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GFile*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// C.gboolean _gotk4_gio2_File_virtual_trash(void* fnptr, *C.GFile carg0, *C.GCancellable carg1, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GFile, *C.GCancellable, GError**))(fnptr))(carg0, carg1, _cerr);
+// gboolean _gotk4_gio2_File_virtual_trash(void* fnptr, GFile* carg0, GCancellable* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GFile*, GCancellable*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// C.gboolean _gotk4_gio2_File_virtual_trash_finish(void* fnptr, *C.GFile carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GFile, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
+// gboolean _gotk4_gio2_File_virtual_trash_finish(void* fnptr, GFile* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GFile*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// C.gboolean _gotk4_gio2_File_virtual_unmount_mountable_finish(void* fnptr, *C.GFile carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GFile, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
+// gboolean _gotk4_gio2_File_virtual_unmount_mountable_finish(void* fnptr, GFile* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GFile*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// C.gboolean _gotk4_gio2_File_virtual_unmount_mountable_with_operation_finish(void* fnptr, *C.GFile carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GFile, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
+// gboolean _gotk4_gio2_File_virtual_unmount_mountable_with_operation_finish(void* fnptr, GFile* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GFile*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// extern C.gboolean _gotk4_gio2_Icon_equal(*C.GIcon, *C.GIcon);
-// extern C.guint _gotk4_gio2_Icon_hash(*C.GIcon);
-// C.gboolean _gotk4_gio2_Icon_virtual_equal(void* fnptr, *C.GIcon carg0, *C.GIcon carg1) {
-// 	return ((C.gboolean (*) (*C.GIcon, *C.GIcon))(fnptr))(carg0, carg1);
+// extern gboolean _gotk4_gio2_Icon_equal(GIcon*, GIcon*);
+// extern guint _gotk4_gio2_Icon_hash(GIcon*);
+// gboolean _gotk4_gio2_Icon_virtual_equal(void* fnptr, GIcon* carg0, GIcon* carg1) {
+// 	return ((gboolean (*) (GIcon*, GIcon*))(fnptr))(carg0, carg1);
 // }
-// C.guint _gotk4_gio2_Icon_virtual_hash(void* fnptr, *C.GIcon carg0) {
-// 	return ((C.guint (*) (*C.GIcon))(fnptr))(carg0);
+// guint _gotk4_gio2_Icon_virtual_hash(void* fnptr, GIcon* carg0) {
+// 	return ((guint (*) (GIcon*))(fnptr))(carg0);
 // }
-// extern C.gboolean _gotk4_gio2_Initable_init(*C.GInitable, *C.GCancellable, GError*);
-// C.gboolean _gotk4_gio2_Initable_virtual_init(void* fnptr, *C.GInitable carg0, *C.GCancellable carg1, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GInitable, *C.GCancellable, GError**))(fnptr))(carg0, carg1, _cerr);
+// extern gboolean _gotk4_gio2_Initable_init(GInitable*, GCancellable*, GError*);
+// gboolean _gotk4_gio2_Initable_virtual_init(void* fnptr, GInitable* carg0, GCancellable* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GInitable*, GCancellable*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// extern C.GType _gotk4_gio2_ListModel_get_item_type(*C.GListModel);
-// extern C.guint _gotk4_gio2_ListModel_get_n_items(*C.GListModel);
-// C.GType _gotk4_gio2_ListModel_virtual_get_item_type(void* fnptr, *C.GListModel carg0) {
-// 	return ((C.GType (*) (*C.GListModel))(fnptr))(carg0);
+// extern GType _gotk4_gio2_ListModel_get_item_type(GListModel*);
+// extern guint _gotk4_gio2_ListModel_get_n_items(GListModel*);
+// GType _gotk4_gio2_ListModel_virtual_get_item_type(void* fnptr, GListModel* carg0) {
+// 	return ((GType (*) (GListModel*))(fnptr))(carg0);
 // }
-// C.guint _gotk4_gio2_ListModel_virtual_get_n_items(void* fnptr, *C.GListModel carg0) {
-// 	return ((C.guint (*) (*C.GListModel))(fnptr))(carg0);
+// guint _gotk4_gio2_ListModel_virtual_get_n_items(void* fnptr, GListModel* carg0) {
+// 	return ((guint (*) (GListModel*))(fnptr))(carg0);
 // }
-// extern *C.GInputStream _gotk4_gio2_LoadableIcon_load(*C.GLoadableIcon, C.int, *C.char, *C.GCancellable, GError*);
-// extern *C.GInputStream _gotk4_gio2_LoadableIcon_load_finish(*C.GLoadableIcon, *C.GAsyncResult, *C.char, GError*);
-// *C.GInputStream _gotk4_gio2_LoadableIcon_virtual_load(void* fnptr, *C.GLoadableIcon carg0, C.int carg1, *C.char* carg2, *C.GCancellable carg3, GError** _cerr) {
-// 	return ((*C.GInputStream (*) (*C.GLoadableIcon, C.int, *C.char*, *C.GCancellable, GError**))(fnptr))(carg0, carg1, carg2, carg3, _cerr);
+// extern GInputStream* _gotk4_gio2_LoadableIcon_load(GLoadableIcon*, int, char*, GCancellable*, GError*);
+// extern GInputStream* _gotk4_gio2_LoadableIcon_load_finish(GLoadableIcon*, GAsyncResult*, char*, GError*);
+// GInputStream* _gotk4_gio2_LoadableIcon_virtual_load(void* fnptr, GLoadableIcon* carg0, int carg1, char** carg2, GCancellable* carg3, GError** _cerr) {
+// 	return ((GInputStream* (*) (GLoadableIcon*, int, char**, GCancellable*, GError**))(fnptr))(carg0, carg1, carg2, carg3, _cerr);
 // }
-// *C.GInputStream _gotk4_gio2_LoadableIcon_virtual_load_finish(void* fnptr, *C.GLoadableIcon carg0, *C.GAsyncResult carg1, *C.char* carg2, GError** _cerr) {
-// 	return ((*C.GInputStream (*) (*C.GLoadableIcon, *C.GAsyncResult, *C.char*, GError**))(fnptr))(carg0, carg1, carg2, _cerr);
+// GInputStream* _gotk4_gio2_LoadableIcon_virtual_load_finish(void* fnptr, GLoadableIcon* carg0, GAsyncResult* carg1, char** carg2, GError** _cerr) {
+// 	return ((GInputStream* (*) (GLoadableIcon*, GAsyncResult*, char**, GError**))(fnptr))(carg0, carg1, carg2, _cerr);
 // }
-// extern C.void _gotk4_gio2_MemoryMonitor_low_memory_warning(*C.GMemoryMonitor, C.GMemoryMonitorWarningLevel);
-// C.void _gotk4_gio2_MemoryMonitor_virtual_low_memory_warning(void* fnptr, *C.GMemoryMonitor carg0, C.GMemoryMonitorWarningLevel carg1) {
-// 	return ((C.void (*) (*C.GMemoryMonitor, C.GMemoryMonitorWarningLevel))(fnptr))(carg0, carg1);
+// extern void _gotk4_gio2_MemoryMonitor_low_memory_warning(GMemoryMonitor*, GMemoryMonitorWarningLevel);
+// void _gotk4_gio2_MemoryMonitor_virtual_low_memory_warning(void* fnptr, GMemoryMonitor* carg0, GMemoryMonitorWarningLevel carg1) {
+// 	return ((void (*) (GMemoryMonitor*, GMemoryMonitorWarningLevel))(fnptr))(carg0, carg1);
 // }
-// extern C.gboolean _gotk4_gio2_Mount_can_eject(*C.GMount);
-// extern C.gboolean _gotk4_gio2_Mount_can_unmount(*C.GMount);
-// extern C.void _gotk4_gio2_Mount_changed(*C.GMount);
-// extern C.gboolean _gotk4_gio2_Mount_eject_finish(*C.GMount, *C.GAsyncResult, GError*);
-// extern C.gboolean _gotk4_gio2_Mount_eject_with_operation_finish(*C.GMount, *C.GAsyncResult, GError*);
-// extern *C.GFile _gotk4_gio2_Mount_get_default_location(*C.GMount);
-// extern *C.GDrive _gotk4_gio2_Mount_get_drive(*C.GMount);
-// extern *C.GIcon _gotk4_gio2_Mount_get_icon(*C.GMount);
-// extern *C.char _gotk4_gio2_Mount_get_name(*C.GMount);
-// extern *C.GFile _gotk4_gio2_Mount_get_root(*C.GMount);
-// extern *C.gchar _gotk4_gio2_Mount_get_sort_key(*C.GMount);
-// extern *C.GIcon _gotk4_gio2_Mount_get_symbolic_icon(*C.GMount);
-// extern *C.char _gotk4_gio2_Mount_get_uuid(*C.GMount);
-// extern *C.GVolume _gotk4_gio2_Mount_get_volume(*C.GMount);
-// extern **C.gchar _gotk4_gio2_Mount_guess_content_type_finish(*C.GMount, *C.GAsyncResult, GError*);
-// extern **C.gchar _gotk4_gio2_Mount_guess_content_type_sync(*C.GMount, C.gboolean, *C.GCancellable, GError*);
-// extern C.void _gotk4_gio2_Mount_pre_unmount(*C.GMount);
-// extern C.gboolean _gotk4_gio2_Mount_remount_finish(*C.GMount, *C.GAsyncResult, GError*);
-// extern C.gboolean _gotk4_gio2_Mount_unmount_finish(*C.GMount, *C.GAsyncResult, GError*);
-// extern C.gboolean _gotk4_gio2_Mount_unmount_with_operation_finish(*C.GMount, *C.GAsyncResult, GError*);
-// extern C.void _gotk4_gio2_Mount_unmounted(*C.GMount);
-// C.gboolean _gotk4_gio2_Mount_virtual_can_eject(void* fnptr, *C.GMount carg0) {
-// 	return ((C.gboolean (*) (*C.GMount))(fnptr))(carg0);
+// extern gboolean _gotk4_gio2_Mount_can_eject(GMount*);
+// extern gboolean _gotk4_gio2_Mount_can_unmount(GMount*);
+// extern void _gotk4_gio2_Mount_changed(GMount*);
+// extern gboolean _gotk4_gio2_Mount_eject_finish(GMount*, GAsyncResult*, GError*);
+// extern gboolean _gotk4_gio2_Mount_eject_with_operation_finish(GMount*, GAsyncResult*, GError*);
+// extern GFile* _gotk4_gio2_Mount_get_default_location(GMount*);
+// extern GDrive* _gotk4_gio2_Mount_get_drive(GMount*);
+// extern GIcon* _gotk4_gio2_Mount_get_icon(GMount*);
+// extern char* _gotk4_gio2_Mount_get_name(GMount*);
+// extern GFile* _gotk4_gio2_Mount_get_root(GMount*);
+// extern const gchar* _gotk4_gio2_Mount_get_sort_key(GMount*);
+// extern GIcon* _gotk4_gio2_Mount_get_symbolic_icon(GMount*);
+// extern char* _gotk4_gio2_Mount_get_uuid(GMount*);
+// extern GVolume* _gotk4_gio2_Mount_get_volume(GMount*);
+// extern gchar** _gotk4_gio2_Mount_guess_content_type_finish(GMount*, GAsyncResult*, GError*);
+// extern gchar** _gotk4_gio2_Mount_guess_content_type_sync(GMount*, gboolean, GCancellable*, GError*);
+// extern void _gotk4_gio2_Mount_pre_unmount(GMount*);
+// extern gboolean _gotk4_gio2_Mount_remount_finish(GMount*, GAsyncResult*, GError*);
+// extern gboolean _gotk4_gio2_Mount_unmount_finish(GMount*, GAsyncResult*, GError*);
+// extern gboolean _gotk4_gio2_Mount_unmount_with_operation_finish(GMount*, GAsyncResult*, GError*);
+// extern void _gotk4_gio2_Mount_unmounted(GMount*);
+// gboolean _gotk4_gio2_Mount_virtual_can_eject(void* fnptr, GMount* carg0) {
+// 	return ((gboolean (*) (GMount*))(fnptr))(carg0);
 // }
-// C.gboolean _gotk4_gio2_Mount_virtual_can_unmount(void* fnptr, *C.GMount carg0) {
-// 	return ((C.gboolean (*) (*C.GMount))(fnptr))(carg0);
+// gboolean _gotk4_gio2_Mount_virtual_can_unmount(void* fnptr, GMount* carg0) {
+// 	return ((gboolean (*) (GMount*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gio2_Mount_virtual_changed(void* fnptr, *C.GMount carg0) {
-// 	return ((C.void (*) (*C.GMount))(fnptr))(carg0);
+// void _gotk4_gio2_Mount_virtual_changed(void* fnptr, GMount* carg0) {
+// 	return ((void (*) (GMount*))(fnptr))(carg0);
 // }
-// C.gboolean _gotk4_gio2_Mount_virtual_eject_finish(void* fnptr, *C.GMount carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GMount, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
+// gboolean _gotk4_gio2_Mount_virtual_eject_finish(void* fnptr, GMount* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GMount*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// C.gboolean _gotk4_gio2_Mount_virtual_eject_with_operation_finish(void* fnptr, *C.GMount carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GMount, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
+// gboolean _gotk4_gio2_Mount_virtual_eject_with_operation_finish(void* fnptr, GMount* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GMount*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// *C.GFile _gotk4_gio2_Mount_virtual_get_default_location(void* fnptr, *C.GMount carg0) {
-// 	return ((*C.GFile (*) (*C.GMount))(fnptr))(carg0);
+// GFile* _gotk4_gio2_Mount_virtual_get_default_location(void* fnptr, GMount* carg0) {
+// 	return ((GFile* (*) (GMount*))(fnptr))(carg0);
 // }
-// *C.GDrive _gotk4_gio2_Mount_virtual_get_drive(void* fnptr, *C.GMount carg0) {
-// 	return ((*C.GDrive (*) (*C.GMount))(fnptr))(carg0);
+// GDrive* _gotk4_gio2_Mount_virtual_get_drive(void* fnptr, GMount* carg0) {
+// 	return ((GDrive* (*) (GMount*))(fnptr))(carg0);
 // }
-// *C.GIcon _gotk4_gio2_Mount_virtual_get_icon(void* fnptr, *C.GMount carg0) {
-// 	return ((*C.GIcon (*) (*C.GMount))(fnptr))(carg0);
+// GIcon* _gotk4_gio2_Mount_virtual_get_icon(void* fnptr, GMount* carg0) {
+// 	return ((GIcon* (*) (GMount*))(fnptr))(carg0);
 // }
-// *C.char _gotk4_gio2_Mount_virtual_get_name(void* fnptr, *C.GMount carg0) {
-// 	return ((*C.char (*) (*C.GMount))(fnptr))(carg0);
+// char* _gotk4_gio2_Mount_virtual_get_name(void* fnptr, GMount* carg0) {
+// 	return ((char* (*) (GMount*))(fnptr))(carg0);
 // }
-// *C.GFile _gotk4_gio2_Mount_virtual_get_root(void* fnptr, *C.GMount carg0) {
-// 	return ((*C.GFile (*) (*C.GMount))(fnptr))(carg0);
+// GFile* _gotk4_gio2_Mount_virtual_get_root(void* fnptr, GMount* carg0) {
+// 	return ((GFile* (*) (GMount*))(fnptr))(carg0);
 // }
-// *C.gchar _gotk4_gio2_Mount_virtual_get_sort_key(void* fnptr, *C.GMount carg0) {
-// 	return ((*C.gchar (*) (*C.GMount))(fnptr))(carg0);
+// const gchar* _gotk4_gio2_Mount_virtual_get_sort_key(void* fnptr, GMount* carg0) {
+// 	return ((const gchar* (*) (GMount*))(fnptr))(carg0);
 // }
-// *C.GIcon _gotk4_gio2_Mount_virtual_get_symbolic_icon(void* fnptr, *C.GMount carg0) {
-// 	return ((*C.GIcon (*) (*C.GMount))(fnptr))(carg0);
+// GIcon* _gotk4_gio2_Mount_virtual_get_symbolic_icon(void* fnptr, GMount* carg0) {
+// 	return ((GIcon* (*) (GMount*))(fnptr))(carg0);
 // }
-// *C.char _gotk4_gio2_Mount_virtual_get_uuid(void* fnptr, *C.GMount carg0) {
-// 	return ((*C.char (*) (*C.GMount))(fnptr))(carg0);
+// char* _gotk4_gio2_Mount_virtual_get_uuid(void* fnptr, GMount* carg0) {
+// 	return ((char* (*) (GMount*))(fnptr))(carg0);
 // }
-// *C.GVolume _gotk4_gio2_Mount_virtual_get_volume(void* fnptr, *C.GMount carg0) {
-// 	return ((*C.GVolume (*) (*C.GMount))(fnptr))(carg0);
+// GVolume* _gotk4_gio2_Mount_virtual_get_volume(void* fnptr, GMount* carg0) {
+// 	return ((GVolume* (*) (GMount*))(fnptr))(carg0);
 // }
-// **C.gchar _gotk4_gio2_Mount_virtual_guess_content_type_finish(void* fnptr, *C.GMount carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((**C.gchar (*) (*C.GMount, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
+// gchar** _gotk4_gio2_Mount_virtual_guess_content_type_finish(void* fnptr, GMount* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((gchar** (*) (GMount*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// **C.gchar _gotk4_gio2_Mount_virtual_guess_content_type_sync(void* fnptr, *C.GMount carg0, C.gboolean carg1, *C.GCancellable carg2, GError** _cerr) {
-// 	return ((**C.gchar (*) (*C.GMount, C.gboolean, *C.GCancellable, GError**))(fnptr))(carg0, carg1, carg2, _cerr);
+// gchar** _gotk4_gio2_Mount_virtual_guess_content_type_sync(void* fnptr, GMount* carg0, gboolean carg1, GCancellable* carg2, GError** _cerr) {
+// 	return ((gchar** (*) (GMount*, gboolean, GCancellable*, GError**))(fnptr))(carg0, carg1, carg2, _cerr);
 // }
-// C.void _gotk4_gio2_Mount_virtual_pre_unmount(void* fnptr, *C.GMount carg0) {
-// 	return ((C.void (*) (*C.GMount))(fnptr))(carg0);
+// void _gotk4_gio2_Mount_virtual_pre_unmount(void* fnptr, GMount* carg0) {
+// 	return ((void (*) (GMount*))(fnptr))(carg0);
 // }
-// C.gboolean _gotk4_gio2_Mount_virtual_remount_finish(void* fnptr, *C.GMount carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GMount, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
+// gboolean _gotk4_gio2_Mount_virtual_remount_finish(void* fnptr, GMount* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GMount*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// C.gboolean _gotk4_gio2_Mount_virtual_unmount_finish(void* fnptr, *C.GMount carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GMount, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
+// gboolean _gotk4_gio2_Mount_virtual_unmount_finish(void* fnptr, GMount* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GMount*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// C.gboolean _gotk4_gio2_Mount_virtual_unmount_with_operation_finish(void* fnptr, *C.GMount carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GMount, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
+// gboolean _gotk4_gio2_Mount_virtual_unmount_with_operation_finish(void* fnptr, GMount* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GMount*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// C.void _gotk4_gio2_Mount_virtual_unmounted(void* fnptr, *C.GMount carg0) {
-// 	return ((C.void (*) (*C.GMount))(fnptr))(carg0);
+// void _gotk4_gio2_Mount_virtual_unmounted(void* fnptr, GMount* carg0) {
+// 	return ((void (*) (GMount*))(fnptr))(carg0);
 // }
-// extern C.gboolean _gotk4_gio2_NetworkMonitor_can_reach(*C.GNetworkMonitor, *C.GSocketConnectable, *C.GCancellable, GError*);
-// extern C.gboolean _gotk4_gio2_NetworkMonitor_can_reach_finish(*C.GNetworkMonitor, *C.GAsyncResult, GError*);
-// extern C.void _gotk4_gio2_NetworkMonitor_network_changed(*C.GNetworkMonitor, C.gboolean);
-// C.gboolean _gotk4_gio2_NetworkMonitor_virtual_can_reach(void* fnptr, *C.GNetworkMonitor carg0, *C.GSocketConnectable carg1, *C.GCancellable carg2, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GNetworkMonitor, *C.GSocketConnectable, *C.GCancellable, GError**))(fnptr))(carg0, carg1, carg2, _cerr);
+// extern gboolean _gotk4_gio2_NetworkMonitor_can_reach(GNetworkMonitor*, GSocketConnectable*, GCancellable*, GError*);
+// extern gboolean _gotk4_gio2_NetworkMonitor_can_reach_finish(GNetworkMonitor*, GAsyncResult*, GError*);
+// extern void _gotk4_gio2_NetworkMonitor_network_changed(GNetworkMonitor*, gboolean);
+// gboolean _gotk4_gio2_NetworkMonitor_virtual_can_reach(void* fnptr, GNetworkMonitor* carg0, GSocketConnectable* carg1, GCancellable* carg2, GError** _cerr) {
+// 	return ((gboolean (*) (GNetworkMonitor*, GSocketConnectable*, GCancellable*, GError**))(fnptr))(carg0, carg1, carg2, _cerr);
 // }
-// C.gboolean _gotk4_gio2_NetworkMonitor_virtual_can_reach_finish(void* fnptr, *C.GNetworkMonitor carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GNetworkMonitor, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
+// gboolean _gotk4_gio2_NetworkMonitor_virtual_can_reach_finish(void* fnptr, GNetworkMonitor* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GNetworkMonitor*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// C.void _gotk4_gio2_NetworkMonitor_virtual_network_changed(void* fnptr, *C.GNetworkMonitor carg0, C.gboolean carg1) {
-// 	return ((C.void (*) (*C.GNetworkMonitor, C.gboolean))(fnptr))(carg0, carg1);
+// void _gotk4_gio2_NetworkMonitor_virtual_network_changed(void* fnptr, GNetworkMonitor* carg0, gboolean carg1) {
+// 	return ((void (*) (GNetworkMonitor*, gboolean))(fnptr))(carg0, carg1);
 // }
-// extern C.gboolean _gotk4_gio2_PollableInputStream_can_poll(*C.GPollableInputStream);
-// extern *C.GSource _gotk4_gio2_PollableInputStream_create_source(*C.GPollableInputStream, *C.GCancellable);
-// extern C.gboolean _gotk4_gio2_PollableInputStream_is_readable(*C.GPollableInputStream);
-// C.gboolean _gotk4_gio2_PollableInputStream_virtual_can_poll(void* fnptr, *C.GPollableInputStream carg0) {
-// 	return ((C.gboolean (*) (*C.GPollableInputStream))(fnptr))(carg0);
+// extern gboolean _gotk4_gio2_PollableInputStream_can_poll(GPollableInputStream*);
+// extern GSource* _gotk4_gio2_PollableInputStream_create_source(GPollableInputStream*, GCancellable*);
+// extern gboolean _gotk4_gio2_PollableInputStream_is_readable(GPollableInputStream*);
+// gboolean _gotk4_gio2_PollableInputStream_virtual_can_poll(void* fnptr, GPollableInputStream* carg0) {
+// 	return ((gboolean (*) (GPollableInputStream*))(fnptr))(carg0);
 // }
-// *C.GSource _gotk4_gio2_PollableInputStream_virtual_create_source(void* fnptr, *C.GPollableInputStream carg0, *C.GCancellable carg1) {
-// 	return ((*C.GSource (*) (*C.GPollableInputStream, *C.GCancellable))(fnptr))(carg0, carg1);
+// GSource* _gotk4_gio2_PollableInputStream_virtual_create_source(void* fnptr, GPollableInputStream* carg0, GCancellable* carg1) {
+// 	return ((GSource* (*) (GPollableInputStream*, GCancellable*))(fnptr))(carg0, carg1);
 // }
-// C.gboolean _gotk4_gio2_PollableInputStream_virtual_is_readable(void* fnptr, *C.GPollableInputStream carg0) {
-// 	return ((C.gboolean (*) (*C.GPollableInputStream))(fnptr))(carg0);
+// gboolean _gotk4_gio2_PollableInputStream_virtual_is_readable(void* fnptr, GPollableInputStream* carg0) {
+// 	return ((gboolean (*) (GPollableInputStream*))(fnptr))(carg0);
 // }
-// extern C.gboolean _gotk4_gio2_PollableOutputStream_can_poll(*C.GPollableOutputStream);
-// extern *C.GSource _gotk4_gio2_PollableOutputStream_create_source(*C.GPollableOutputStream, *C.GCancellable);
-// extern C.gboolean _gotk4_gio2_PollableOutputStream_is_writable(*C.GPollableOutputStream);
-// extern C.gssize _gotk4_gio2_PollableOutputStream_write_nonblocking(*C.GPollableOutputStream, *C.void, C.gsize, GError*);
-// extern C.GPollableReturn _gotk4_gio2_PollableOutputStream_writev_nonblocking(*C.GPollableOutputStream, *C.GOutputVector, C.gsize, C.gsize, GError*);
-// C.gboolean _gotk4_gio2_PollableOutputStream_virtual_can_poll(void* fnptr, *C.GPollableOutputStream carg0) {
-// 	return ((C.gboolean (*) (*C.GPollableOutputStream))(fnptr))(carg0);
+// extern gboolean _gotk4_gio2_PollableOutputStream_can_poll(GPollableOutputStream*);
+// extern GSource* _gotk4_gio2_PollableOutputStream_create_source(GPollableOutputStream*, GCancellable*);
+// extern gboolean _gotk4_gio2_PollableOutputStream_is_writable(GPollableOutputStream*);
+// extern gssize _gotk4_gio2_PollableOutputStream_write_nonblocking(GPollableOutputStream*, void*, gsize, GError*);
+// extern GPollableReturn _gotk4_gio2_PollableOutputStream_writev_nonblocking(GPollableOutputStream*, const GOutputVector*, gsize, gsize, GError*);
+// gboolean _gotk4_gio2_PollableOutputStream_virtual_can_poll(void* fnptr, GPollableOutputStream* carg0) {
+// 	return ((gboolean (*) (GPollableOutputStream*))(fnptr))(carg0);
 // }
-// *C.GSource _gotk4_gio2_PollableOutputStream_virtual_create_source(void* fnptr, *C.GPollableOutputStream carg0, *C.GCancellable carg1) {
-// 	return ((*C.GSource (*) (*C.GPollableOutputStream, *C.GCancellable))(fnptr))(carg0, carg1);
-// }
-// C.gboolean _gotk4_gio2_PollableOutputStream_virtual_is_writable(void* fnptr, *C.GPollableOutputStream carg0) {
-// 	return ((C.gboolean (*) (*C.GPollableOutputStream))(fnptr))(carg0);
-// }
-// C.gssize _gotk4_gio2_PollableOutputStream_virtual_write_nonblocking(void* fnptr, *C.GPollableOutputStream carg0, *C.void carg1, C.gsize carg2, GError** _cerr) {
-// 	return ((C.gssize (*) (*C.GPollableOutputStream, *C.void, C.gsize, GError**))(fnptr))(carg0, carg1, carg2, _cerr);
+// GSource* _gotk4_gio2_PollableOutputStream_virtual_create_source(void* fnptr, GPollableOutputStream* carg0, GCancellable* carg1) {
+// 	return ((GSource* (*) (GPollableOutputStream*, GCancellable*))(fnptr))(carg0, carg1);
+// }
+// gboolean _gotk4_gio2_PollableOutputStream_virtual_is_writable(void* fnptr, GPollableOutputStream* carg0) {
+// 	return ((gboolean (*) (GPollableOutputStream*))(fnptr))(carg0);
+// }
+// gssize _gotk4_gio2_PollableOutputStream_virtual_write_nonblocking(void* fnptr, GPollableOutputStream* carg0, void* carg1, gsize carg2, GError** _cerr) {
+// 	return ((gssize (*) (GPollableOutputStream*, void*, gsize, GError**))(fnptr))(carg0, carg1, carg2, _cerr);
 // }
-// C.GPollableReturn _gotk4_gio2_PollableOutputStream_virtual_writev_nonblocking(void* fnptr, *C.GPollableOutputStream carg0, *C.GOutputVector carg1, C.gsize carg2, C.gsize* carg3, GError** _cerr) {
-// 	return ((C.GPollableReturn (*) (*C.GPollableOutputStream, *C.GOutputVector, C.gsize, C.gsize*, GError**))(fnptr))(carg0, carg1, carg2, carg3, _cerr);
+// GPollableReturn _gotk4_gio2_PollableOutputStream_virtual_writev_nonblocking(void* fnptr, GPollableOutputStream* carg0, const GOutputVector* carg1, gsize carg2, gsize* carg3, GError** _cerr) {
+// 	return ((GPollableReturn (*) (GPollableOutputStream*, const GOutputVector*, gsize, gsize*, GError**))(fnptr))(carg0, carg1, carg2, carg3, _cerr);
 // }
-// extern *C.GIOStream _gotk4_gio2_Proxy_connect(*C.GProxy, *C.GIOStream, *C.GProxyAddress, *C.GCancellable, GError*);
-// extern *C.GIOStream _gotk4_gio2_Proxy_connect_finish(*C.GProxy, *C.GAsyncResult, GError*);
-// extern C.gboolean _gotk4_gio2_Proxy_supports_hostname(*C.GProxy);
-// *C.GIOStream _gotk4_gio2_Proxy_virtual_connect(void* fnptr, *C.GProxy carg0, *C.GIOStream carg1, *C.GProxyAddress carg2, *C.GCancellable carg3, GError** _cerr) {
-// 	return ((*C.GIOStream (*) (*C.GProxy, *C.GIOStream, *C.GProxyAddress, *C.GCancellable, GError**))(fnptr))(carg0, carg1, carg2, carg3, _cerr);
+// extern GIOStream* _gotk4_gio2_Proxy_connect(GProxy*, GIOStream*, GProxyAddress*, GCancellable*, GError*);
+// extern GIOStream* _gotk4_gio2_Proxy_connect_finish(GProxy*, GAsyncResult*, GError*);
+// extern gboolean _gotk4_gio2_Proxy_supports_hostname(GProxy*);
+// GIOStream* _gotk4_gio2_Proxy_virtual_connect(void* fnptr, GProxy* carg0, GIOStream* carg1, GProxyAddress* carg2, GCancellable* carg3, GError** _cerr) {
+// 	return ((GIOStream* (*) (GProxy*, GIOStream*, GProxyAddress*, GCancellable*, GError**))(fnptr))(carg0, carg1, carg2, carg3, _cerr);
 // }
-// *C.GIOStream _gotk4_gio2_Proxy_virtual_connect_finish(void* fnptr, *C.GProxy carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((*C.GIOStream (*) (*C.GProxy, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
+// GIOStream* _gotk4_gio2_Proxy_virtual_connect_finish(void* fnptr, GProxy* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((GIOStream* (*) (GProxy*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// C.gboolean _gotk4_gio2_Proxy_virtual_supports_hostname(void* fnptr, *C.GProxy carg0) {
-// 	return ((C.gboolean (*) (*C.GProxy))(fnptr))(carg0);
+// gboolean _gotk4_gio2_Proxy_virtual_supports_hostname(void* fnptr, GProxy* carg0) {
+// 	return ((gboolean (*) (GProxy*))(fnptr))(carg0);
 // }
-// extern C.gboolean _gotk4_gio2_ProxyResolver_is_supported(*C.GProxyResolver);
-// extern **C.gchar _gotk4_gio2_ProxyResolver_lookup(*C.GProxyResolver, *C.gchar, *C.GCancellable, GError*);
-// extern **C.gchar _gotk4_gio2_ProxyResolver_lookup_finish(*C.GProxyResolver, *C.GAsyncResult, GError*);
-// C.gboolean _gotk4_gio2_ProxyResolver_virtual_is_supported(void* fnptr, *C.GProxyResolver carg0) {
-// 	return ((C.gboolean (*) (*C.GProxyResolver))(fnptr))(carg0);
+// extern gboolean _gotk4_gio2_ProxyResolver_is_supported(GProxyResolver*);
+// extern gchar** _gotk4_gio2_ProxyResolver_lookup(GProxyResolver*, const gchar*, GCancellable*, GError*);
+// extern gchar** _gotk4_gio2_ProxyResolver_lookup_finish(GProxyResolver*, GAsyncResult*, GError*);
+// gboolean _gotk4_gio2_ProxyResolver_virtual_is_supported(void* fnptr, GProxyResolver* carg0) {
+// 	return ((gboolean (*) (GProxyResolver*))(fnptr))(carg0);
 // }
-// **C.gchar _gotk4_gio2_ProxyResolver_virtual_lookup(void* fnptr, *C.GProxyResolver carg0, *C.gchar carg1, *C.GCancellable carg2, GError** _cerr) {
-// 	return ((**C.gchar (*) (*C.GProxyResolver, *C.gchar, *C.GCancellable, GError**))(fnptr))(carg0, carg1, carg2, _cerr);
+// gchar** _gotk4_gio2_ProxyResolver_virtual_lookup(void* fnptr, GProxyResolver* carg0, const gchar* carg1, GCancellable* carg2, GError** _cerr) {
+// 	return ((gchar** (*) (GProxyResolver*, const gchar*, GCancellable*, GError**))(fnptr))(carg0, carg1, carg2, _cerr);
 // }
-// **C.gchar _gotk4_gio2_ProxyResolver_virtual_lookup_finish(void* fnptr, *C.GProxyResolver carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((**C.gchar (*) (*C.GProxyResolver, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
+// gchar** _gotk4_gio2_ProxyResolver_virtual_lookup_finish(void* fnptr, GProxyResolver* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((gchar** (*) (GProxyResolver*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// extern C.gboolean _gotk4_gio2_Seekable_can_seek(*C.GSeekable);
-// extern C.gboolean _gotk4_gio2_Seekable_can_truncate(*C.GSeekable);
-// extern C.gboolean _gotk4_gio2_Seekable_seek(*C.GSeekable, C.goffset, C.GSeekType, *C.GCancellable, GError*);
-// extern C.goffset _gotk4_gio2_Seekable_tell(*C.GSeekable);
-// extern C.gboolean _gotk4_gio2_Seekable_truncate_fn(*C.GSeekable, C.goffset, *C.GCancellable, GError*);
-// C.gboolean _gotk4_gio2_Seekable_virtual_can_seek(void* fnptr, *C.GSeekable carg0) {
-// 	return ((C.gboolean (*) (*C.GSeekable))(fnptr))(carg0);
+// extern gboolean _gotk4_gio2_Seekable_can_seek(GSeekable*);
+// extern gboolean _gotk4_gio2_Seekable_can_truncate(GSeekable*);
+// extern gboolean _gotk4_gio2_Seekable_seek(GSeekable*, goffset, GSeekType, GCancellable*, GError*);
+// extern goffset _gotk4_gio2_Seekable_tell(GSeekable*);
+// extern gboolean _gotk4_gio2_Seekable_truncate_fn(GSeekable*, goffset, GCancellable*, GError*);
+// gboolean _gotk4_gio2_Seekable_virtual_can_seek(void* fnptr, GSeekable* carg0) {
+// 	return ((gboolean (*) (GSeekable*))(fnptr))(carg0);
 // }
-// C.gboolean _gotk4_gio2_Seekable_virtual_can_truncate(void* fnptr, *C.GSeekable carg0) {
-// 	return ((C.gboolean (*) (*C.GSeekable))(fnptr))(carg0);
+// gboolean _gotk4_gio2_Seekable_virtual_can_truncate(void* fnptr, GSeekable* carg0) {
+// 	return ((gboolean (*) (GSeekable*))(fnptr))(carg0);
 // }
-// C.gboolean _gotk4_gio2_Seekable_virtual_seek(void* fnptr, *C.GSeekable carg0, C.goffset carg1, C.GSeekType carg2, *C.GCancellable carg3, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GSeekable, C.goffset, C.GSeekType, *C.GCancellable, GError**))(fnptr))(carg0, carg1, carg2, carg3, _cerr);
+// gboolean _gotk4_gio2_Seekable_virtual_seek(void* fnptr, GSeekable* carg0, goffset carg1, GSeekType carg2, GCancellable* carg3, GError** _cerr) {
+// 	return ((gboolean (*) (GSeekable*, goffset, GSeekType, GCancellable*, GError**))(fnptr))(carg0, carg1, carg2, carg3, _cerr);
 // }
-// C.goffset _gotk4_gio2_Seekable_virtual_tell(void* fnptr, *C.GSeekable carg0) {
-// 	return ((C.goffset (*) (*C.GSeekable))(fnptr))(carg0);
+// goffset _gotk4_gio2_Seekable_virtual_tell(void* fnptr, GSeekable* carg0) {
+// 	return ((goffset (*) (GSeekable*))(fnptr))(carg0);
 // }
-// C.gboolean _gotk4_gio2_Seekable_virtual_truncate_fn(void* fnptr, *C.GSeekable carg0, C.goffset carg1, *C.GCancellable carg2, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GSeekable, C.goffset, *C.GCancellable, GError**))(fnptr))(carg0, carg1, carg2, _cerr);
+// gboolean _gotk4_gio2_Seekable_virtual_truncate_fn(void* fnptr, GSeekable* carg0, goffset carg1, GCancellable* carg2, GError** _cerr) {
+// 	return ((gboolean (*) (GSeekable*, goffset, GCancellable*, GError**))(fnptr))(carg0, carg1, carg2, _cerr);
 // }
-// extern *C.GSocketAddressEnumerator _gotk4_gio2_SocketConnectable_enumerate(*C.GSocketConnectable);
-// extern *C.GSocketAddressEnumerator _gotk4_gio2_SocketConnectable_proxy_enumerate(*C.GSocketConnectable);
-// extern *C.gchar _gotk4_gio2_SocketConnectable_to_string(*C.GSocketConnectable);
-// *C.GSocketAddressEnumerator _gotk4_gio2_SocketConnectable_virtual_enumerate(void* fnptr, *C.GSocketConnectable carg0) {
-// 	return ((*C.GSocketAddressEnumerator (*) (*C.GSocketConnectable))(fnptr))(carg0);
+// extern GSocketAddressEnumerator* _gotk4_gio2_SocketConnectable_enumerate(GSocketConnectable*);
+// extern GSocketAddressEnumerator* _gotk4_gio2_SocketConnectable_proxy_enumerate(GSocketConnectable*);
+// extern gchar* _gotk4_gio2_SocketConnectable_to_string(GSocketConnectable*);
+// GSocketAddressEnumerator* _gotk4_gio2_SocketConnectable_virtual_enumerate(void* fnptr, GSocketConnectable* carg0) {
+// 	return ((GSocketAddressEnumerator* (*) (GSocketConnectable*))(fnptr))(carg0);
 // }
-// *C.GSocketAddressEnumerator _gotk4_gio2_SocketConnectable_virtual_proxy_enumerate(void* fnptr, *C.GSocketConnectable carg0) {
-// 	return ((*C.GSocketAddressEnumerator (*) (*C.GSocketConnectable))(fnptr))(carg0);
+// GSocketAddressEnumerator* _gotk4_gio2_SocketConnectable_virtual_proxy_enumerate(void* fnptr, GSocketConnectable* carg0) {
+// 	return ((GSocketAddressEnumerator* (*) (GSocketConnectable*))(fnptr))(carg0);
 // }
-// *C.gchar _gotk4_gio2_SocketConnectable_virtual_to_string(void* fnptr, *C.GSocketConnectable carg0) {
-// 	return ((*C.gchar (*) (*C.GSocketConnectable))(fnptr))(carg0);
+// gchar* _gotk4_gio2_SocketConnectable_virtual_to_string(void* fnptr, GSocketConnectable* carg0) {
+// 	return ((gchar* (*) (GSocketConnectable*))(fnptr))(carg0);
 // }
-// extern *C.GTlsDatabase _gotk4_gio2_TlsBackend_get_default_database(*C.GTlsBackend);
-// extern C.gboolean _gotk4_gio2_TlsBackend_supports_dtls(*C.GTlsBackend);
-// extern C.gboolean _gotk4_gio2_TlsBackend_supports_tls(*C.GTlsBackend);
-// *C.GTlsDatabase _gotk4_gio2_TlsBackend_virtual_get_default_database(void* fnptr, *C.GTlsBackend carg0) {
-// 	return ((*C.GTlsDatabase (*) (*C.GTlsBackend))(fnptr))(carg0);
+// extern GTlsDatabase* _gotk4_gio2_TlsBackend_get_default_database(GTlsBackend*);
+// extern gboolean _gotk4_gio2_TlsBackend_supports_dtls(GTlsBackend*);
+// extern gboolean _gotk4_gio2_TlsBackend_supports_tls(GTlsBackend*);
+// GTlsDatabase* _gotk4_gio2_TlsBackend_virtual_get_default_database(void* fnptr, GTlsBackend* carg0) {
+// 	return ((GTlsDatabase* (*) (GTlsBackend*))(fnptr))(carg0);
 // }
-// C.gboolean _gotk4_gio2_TlsBackend_virtual_supports_dtls(void* fnptr, *C.GTlsBackend carg0) {
-// 	return ((C.gboolean (*) (*C.GTlsBackend))(fnptr))(carg0);
+// gboolean _gotk4_gio2_TlsBackend_virtual_supports_dtls(void* fnptr, GTlsBackend* carg0) {
+// 	return ((gboolean (*) (GTlsBackend*))(fnptr))(carg0);
 // }
-// C.gboolean _gotk4_gio2_TlsBackend_virtual_supports_tls(void* fnptr, *C.GTlsBackend carg0) {
-// 	return ((C.gboolean (*) (*C.GTlsBackend))(fnptr))(carg0);
+// gboolean _gotk4_gio2_TlsBackend_virtual_supports_tls(void* fnptr, GTlsBackend* carg0) {
+// 	return ((gboolean (*) (GTlsBackend*))(fnptr))(carg0);
 // }
-// extern C.void _gotk4_gio2_TlsClientConnection_copy_session_state(*C.GTlsClientConnection, *C.GTlsClientConnection);
-// C.void _gotk4_gio2_TlsClientConnection_virtual_copy_session_state(void* fnptr, *C.GTlsClientConnection carg0, *C.GTlsClientConnection carg1) {
-// 	return ((C.void (*) (*C.GTlsClientConnection, *C.GTlsClientConnection))(fnptr))(carg0, carg1);
+// extern void _gotk4_gio2_TlsClientConnection_copy_session_state(GTlsClientConnection*, GTlsClientConnection*);
+// void _gotk4_gio2_TlsClientConnection_virtual_copy_session_state(void* fnptr, GTlsClientConnection* carg0, GTlsClientConnection* carg1) {
+// 	return ((void (*) (GTlsClientConnection*, GTlsClientConnection*))(fnptr))(carg0, carg1);
 // }
-// extern C.gboolean _gotk4_gio2_Volume_can_eject(*C.GVolume);
-// extern C.gboolean _gotk4_gio2_Volume_can_mount(*C.GVolume);
-// extern C.void _gotk4_gio2_Volume_changed(*C.GVolume);
-// extern C.gboolean _gotk4_gio2_Volume_eject_finish(*C.GVolume, *C.GAsyncResult, GError*);
-// extern C.gboolean _gotk4_gio2_Volume_eject_with_operation_finish(*C.GVolume, *C.GAsyncResult, GError*);
-// extern **C.char _gotk4_gio2_Volume_enumerate_identifiers(*C.GVolume);
-// extern *C.GFile _gotk4_gio2_Volume_get_activation_root(*C.GVolume);
-// extern *C.GDrive _gotk4_gio2_Volume_get_drive(*C.GVolume);
-// extern *C.GIcon _gotk4_gio2_Volume_get_icon(*C.GVolume);
-// extern *C.char _gotk4_gio2_Volume_get_identifier(*C.GVolume, *C.char);
-// extern *C.GMount _gotk4_gio2_Volume_get_mount(*C.GVolume);
-// extern *C.char _gotk4_gio2_Volume_get_name(*C.GVolume);
-// extern *C.gchar _gotk4_gio2_Volume_get_sort_key(*C.GVolume);
-// extern *C.GIcon _gotk4_gio2_Volume_get_symbolic_icon(*C.GVolume);
-// extern *C.char _gotk4_gio2_Volume_get_uuid(*C.GVolume);
-// extern C.gboolean _gotk4_gio2_Volume_mount_finish(*C.GVolume, *C.GAsyncResult, GError*);
-// extern C.void _gotk4_gio2_Volume_removed(*C.GVolume);
-// extern C.gboolean _gotk4_gio2_Volume_should_automount(*C.GVolume);
-// C.gboolean _gotk4_gio2_Volume_virtual_can_eject(void* fnptr, *C.GVolume carg0) {
-// 	return ((C.gboolean (*) (*C.GVolume))(fnptr))(carg0);
+// extern gboolean _gotk4_gio2_Volume_can_eject(GVolume*);
+// extern gboolean _gotk4_gio2_Volume_can_mount(GVolume*);
+// extern void _gotk4_gio2_Volume_changed(GVolume*);
+// extern gboolean _gotk4_gio2_Volume_eject_finish(GVolume*, GAsyncResult*, GError*);
+// extern gboolean _gotk4_gio2_Volume_eject_with_operation_finish(GVolume*, GAsyncResult*, GError*);
+// extern char** _gotk4_gio2_Volume_enumerate_identifiers(GVolume*);
+// extern GFile* _gotk4_gio2_Volume_get_activation_root(GVolume*);
+// extern GDrive* _gotk4_gio2_Volume_get_drive(GVolume*);
+// extern GIcon* _gotk4_gio2_Volume_get_icon(GVolume*);
+// extern char* _gotk4_gio2_Volume_get_identifier(GVolume*, const char*);
+// extern GMount* _gotk4_gio2_Volume_get_mount(GVolume*);
+// extern char* _gotk4_gio2_Volume_get_name(GVolume*);
+// extern const gchar* _gotk4_gio2_Volume_get_sort_key(GVolume*);
+// extern GIcon* _gotk4_gio2_Volume_get_symbolic_icon(GVolume*);
+// extern char* _gotk4_gio2_Volume_get_uuid(GVolume*);
+// extern gboolean _gotk4_gio2_Volume_mount_finish(GVolume*, GAsyncResult*, GError*);
+// extern void _gotk4_gio2_Volume_removed(GVolume*);
+// extern gboolean _gotk4_gio2_Volume_should_automount(GVolume*);
+// gboolean _gotk4_gio2_Volume_virtual_can_eject(void* fnptr, GVolume* carg0) {
+// 	return ((gboolean (*) (GVolume*))(fnptr))(carg0);
 // }
-// C.gboolean _gotk4_gio2_Volume_virtual_can_mount(void* fnptr, *C.GVolume carg0) {
-// 	return ((C.gboolean (*) (*C.GVolume))(fnptr))(carg0);
+// gboolean _gotk4_gio2_Volume_virtual_can_mount(void* fnptr, GVolume* carg0) {
+// 	return ((gboolean (*) (GVolume*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gio2_Volume_virtual_changed(void* fnptr, *C.GVolume carg0) {
-// 	return ((C.void (*) (*C.GVolume))(fnptr))(carg0);
+// void _gotk4_gio2_Volume_virtual_changed(void* fnptr, GVolume* carg0) {
+// 	return ((void (*) (GVolume*))(fnptr))(carg0);
 // }
-// C.gboolean _gotk4_gio2_Volume_virtual_eject_finish(void* fnptr, *C.GVolume carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GVolume, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
+// gboolean _gotk4_gio2_Volume_virtual_eject_finish(void* fnptr, GVolume* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GVolume*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// C.gboolean _gotk4_gio2_Volume_virtual_eject_with_operation_finish(void* fnptr, *C.GVolume carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GVolume, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
+// gboolean _gotk4_gio2_Volume_virtual_eject_with_operation_finish(void* fnptr, GVolume* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GVolume*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// **C.char _gotk4_gio2_Volume_virtual_enumerate_identifiers(void* fnptr, *C.GVolume carg0) {
-// 	return ((**C.char (*) (*C.GVolume))(fnptr))(carg0);
+// char** _gotk4_gio2_Volume_virtual_enumerate_identifiers(void* fnptr, GVolume* carg0) {
+// 	return ((char** (*) (GVolume*))(fnptr))(carg0);
 // }
-// *C.GFile _gotk4_gio2_Volume_virtual_get_activation_root(void* fnptr, *C.GVolume carg0) {
-// 	return ((*C.GFile (*) (*C.GVolume))(fnptr))(carg0);
+// GFile* _gotk4_gio2_Volume_virtual_get_activation_root(void* fnptr, GVolume* carg0) {
+// 	return ((GFile* (*) (GVolume*))(fnptr))(carg0);
 // }
-// *C.GDrive _gotk4_gio2_Volume_virtual_get_drive(void* fnptr, *C.GVolume carg0) {
-// 	return ((*C.GDrive (*) (*C.GVolume))(fnptr))(carg0);
+// GDrive* _gotk4_gio2_Volume_virtual_get_drive(void* fnptr, GVolume* carg0) {
+// 	return ((GDrive* (*) (GVolume*))(fnptr))(carg0);
 // }
-// *C.GIcon _gotk4_gio2_Volume_virtual_get_icon(void* fnptr, *C.GVolume carg0) {
-// 	return ((*C.GIcon (*) (*C.GVolume))(fnptr))(carg0);
+// GIcon* _gotk4_gio2_Volume_virtual_get_icon(void* fnptr, GVolume* carg0) {
+// 	return ((GIcon* (*) (GVolume*))(fnptr))(carg0);
 // }
-// *C.char _gotk4_gio2_Volume_virtual_get_identifier(void* fnptr, *C.GVolume carg0, *C.char carg1) {
-// 	return ((*C.char (*) (*C.GVolume, *C.char))(fnptr))(carg0, carg1);
+// char* _gotk4_gio2_Volume_virtual_get_identifier(void* fnptr, GVolume* carg0, const char* carg1) {
+// 	return ((char* (*) (GVolume*, const char*))(fnptr))(carg0, carg1);
 // }
-// *C.GMount _gotk4_gio2_Volume_virtual_get_mount(void* fnptr, *C.GVolume carg0) {
-// 	return ((*C.GMount (*) (*C.GVolume))(fnptr))(carg0);
+// GMount* _gotk4_gio2_Volume_virtual_get_mount(void* fnptr, GVolume* carg0) {
+// 	return ((GMount* (*) (GVolume*))(fnptr))(carg0);
 // }
-// *C.char _gotk4_gio2_Volume_virtual_get_name(void* fnptr, *C.GVolume carg0) {
-// 	return ((*C.char (*) (*C.GVolume))(fnptr))(carg0);
+// char* _gotk4_gio2_Volume_virtual_get_name(void* fnptr, GVolume* carg0) {
+// 	return ((char* (*) (GVolume*))(fnptr))(carg0);
 // }
-// *C.gchar _gotk4_gio2_Volume_virtual_get_sort_key(void* fnptr, *C.GVolume carg0) {
-// 	return ((*C.gchar (*) (*C.GVolume))(fnptr))(carg0);
+// const gchar* _gotk4_gio2_Volume_virtual_get_sort_key(void* fnptr, GVolume* carg0) {
+// 	return ((const gchar* (*) (GVolume*))(fnptr))(carg0);
 // }
-// *C.GIcon _gotk4_gio2_Volume_virtual_get_symbolic_icon(void* fnptr, *C.GVolume carg0) {
-// 	return ((*C.GIcon (*) (*C.GVolume))(fnptr))(carg0);
+// GIcon* _gotk4_gio2_Volume_virtual_get_symbolic_icon(void* fnptr, GVolume* carg0) {
+// 	return ((GIcon* (*) (GVolume*))(fnptr))(carg0);
 // }
-// *C.char _gotk4_gio2_Volume_virtual_get_uuid(void* fnptr, *C.GVolume carg0) {
-// 	return ((*C.char (*) (*C.GVolume))(fnptr))(carg0);
+// char* _gotk4_gio2_Volume_virtual_get_uuid(void* fnptr, GVolume* carg0) {
+// 	return ((char* (*) (GVolume*))(fnptr))(carg0);
 // }
-// C.gboolean _gotk4_gio2_Volume_virtual_mount_finish(void* fnptr, *C.GVolume carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GVolume, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
+// gboolean _gotk4_gio2_Volume_virtual_mount_finish(void* fnptr, GVolume* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GVolume*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// C.void _gotk4_gio2_Volume_virtual_removed(void* fnptr, *C.GVolume carg0) {
-// 	return ((C.void (*) (*C.GVolume))(fnptr))(carg0);
+// void _gotk4_gio2_Volume_virtual_removed(void* fnptr, GVolume* carg0) {
+// 	return ((void (*) (GVolume*))(fnptr))(carg0);
 // }
-// C.gboolean _gotk4_gio2_Volume_virtual_should_automount(void* fnptr, *C.GVolume carg0) {
-// 	return ((C.gboolean (*) (*C.GVolume))(fnptr))(carg0);
+// gboolean _gotk4_gio2_Volume_virtual_should_automount(void* fnptr, GVolume* carg0) {
+// 	return ((gboolean (*) (GVolume*))(fnptr))(carg0);
 // }
-// extern C.void _gotk4_gio2_AppLaunchContext_launch_failed(*C.GAppLaunchContext, *C.char);
-// C.void _gotk4_gio2_AppLaunchContext_virtual_launch_failed(void* fnptr, *C.GAppLaunchContext carg0, *C.char carg1) {
-// 	return ((C.void (*) (*C.GAppLaunchContext, *C.char))(fnptr))(carg0, carg1);
+// extern void _gotk4_gio2_AppLaunchContext_launch_failed(GAppLaunchContext*, const char*);
+// void _gotk4_gio2_AppLaunchContext_virtual_launch_failed(void* fnptr, GAppLaunchContext* carg0, const char* carg1) {
+// 	return ((void (*) (GAppLaunchContext*, const char*))(fnptr))(carg0, carg1);
 // }
-// extern C.void _gotk4_gio2_Application_activate(*C.GApplication);
-// extern C.void _gotk4_gio2_Application_add_platform_data(*C.GApplication, *C.GVariantBuilder);
-// extern C.int _gotk4_gio2_Application_command_line(*C.GApplication, *C.GApplicationCommandLine);
-// extern C.gboolean _gotk4_gio2_Application_dbus_register(*C.GApplication, *C.GDBusConnection, *C.gchar, GError*);
-// extern C.void _gotk4_gio2_Application_dbus_unregister(*C.GApplication, *C.GDBusConnection, *C.gchar);
-// extern C.gint _gotk4_gio2_Application_handle_local_options(*C.GApplication, *C.GVariantDict);
-// extern C.gboolean _gotk4_gio2_Application_name_lost(*C.GApplication);
-// extern C.void _gotk4_gio2_Application_open(*C.GApplication, **C.GFile, C.gint, *C.gchar);
-// extern C.void _gotk4_gio2_Application_quit_mainloop(*C.GApplication);
-// extern C.void _gotk4_gio2_Application_run_mainloop(*C.GApplication);
-// extern C.void _gotk4_gio2_Application_shutdown(*C.GApplication);
-// extern C.void _gotk4_gio2_Application_startup(*C.GApplication);
-// C.void _gotk4_gio2_Application_virtual_activate(void* fnptr, *C.GApplication carg0) {
-// 	return ((C.void (*) (*C.GApplication))(fnptr))(carg0);
+// extern void _gotk4_gio2_Application_activate(GApplication*);
+// extern void _gotk4_gio2_Application_add_platform_data(GApplication*, GVariantBuilder*);
+// extern int _gotk4_gio2_Application_command_line(GApplication*, GApplicationCommandLine*);
+// extern gboolean _gotk4_gio2_Application_dbus_register(GApplication*, GDBusConnection*, const gchar*, GError*);
+// extern void _gotk4_gio2_Application_dbus_unregister(GApplication*, GDBusConnection*, const gchar*);
+// extern gint _gotk4_gio2_Application_handle_local_options(GApplication*, GVariantDict*);
+// extern gboolean _gotk4_gio2_Application_name_lost(GApplication*);
+// extern void _gotk4_gio2_Application_open(GApplication*, GFile**, gint, const gchar*);
+// extern void _gotk4_gio2_Application_quit_mainloop(GApplication*);
+// extern void _gotk4_gio2_Application_run_mainloop(GApplication*);
+// extern void _gotk4_gio2_Application_shutdown(GApplication*);
+// extern void _gotk4_gio2_Application_startup(GApplication*);
+// void _gotk4_gio2_Application_virtual_activate(void* fnptr, GApplication* carg0) {
+// 	return ((void (*) (GApplication*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gio2_Application_virtual_add_platform_data(void* fnptr, *C.GApplication carg0, *C.GVariantBuilder carg1) {
-// 	return ((C.void (*) (*C.GApplication, *C.GVariantBuilder))(fnptr))(carg0, carg1);
+// void _gotk4_gio2_Application_virtual_add_platform_data(void* fnptr, GApplication* carg0, GVariantBuilder* carg1) {
+// 	return ((void (*) (GApplication*, GVariantBuilder*))(fnptr))(carg0, carg1);
 // }
-// C.int _gotk4_gio2_Application_virtual_command_line(void* fnptr, *C.GApplication carg0, *C.GApplicationCommandLine carg1) {
-// 	return ((C.int (*) (*C.GApplication, *C.GApplicationCommandLine))(fnptr))(carg0, carg1);
+// int _gotk4_gio2_Application_virtual_command_line(void* fnptr, GApplication* carg0, GApplicationCommandLine* carg1) {
+// 	return ((int (*) (GApplication*, GApplicationCommandLine*))(fnptr))(carg0, carg1);
 // }
-// C.gboolean _gotk4_gio2_Application_virtual_dbus_register(void* fnptr, *C.GApplication carg0, *C.GDBusConnection carg1, *C.gchar carg2, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GApplication, *C.GDBusConnection, *C.gchar, GError**))(fnptr))(carg0, carg1, carg2, _cerr);
+// gboolean _gotk4_gio2_Application_virtual_dbus_register(void* fnptr, GApplication* carg0, GDBusConnection* carg1, const gchar* carg2, GError** _cerr) {
+// 	return ((gboolean (*) (GApplication*, GDBusConnection*, const gchar*, GError**))(fnptr))(carg0, carg1, carg2, _cerr);
 // }
-// C.void _gotk4_gio2_Application_virtual_dbus_unregister(void* fnptr, *C.GApplication carg0, *C.GDBusConnection carg1, *C.gchar carg2) {
-// 	return ((C.void (*) (*C.GApplication, *C.GDBusConnection, *C.gchar))(fnptr))(carg0, carg1, carg2);
+// void _gotk4_gio2_Application_virtual_dbus_unregister(void* fnptr, GApplication* carg0, GDBusConnection* carg1, const gchar* carg2) {
+// 	return ((void (*) (GApplication*, GDBusConnection*, const gchar*))(fnptr))(carg0, carg1, carg2);
 // }
-// C.gint _gotk4_gio2_Application_virtual_handle_local_options(void* fnptr, *C.GApplication carg0, *C.GVariantDict carg1) {
-// 	return ((C.gint (*) (*C.GApplication, *C.GVariantDict))(fnptr))(carg0, carg1);
+// gint _gotk4_gio2_Application_virtual_handle_local_options(void* fnptr, GApplication* carg0, GVariantDict* carg1) {
+// 	return ((gint (*) (GApplication*, GVariantDict*))(fnptr))(carg0, carg1);
 // }
-// C.gboolean _gotk4_gio2_Application_virtual_name_lost(void* fnptr, *C.GApplication carg0) {
-// 	return ((C.gboolean (*) (*C.GApplication))(fnptr))(carg0);
+// gboolean _gotk4_gio2_Application_virtual_name_lost(void* fnptr, GApplication* carg0) {
+// 	return ((gboolean (*) (GApplication*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gio2_Application_virtual_open(void* fnptr, *C.GApplication carg0, **C.GFile carg1, C.gint carg2, *C.gchar carg3) {
-// 	return ((C.void (*) (*C.GApplication, **C.GFile, C.gint, *C.gchar))(fnptr))(carg0, carg1, carg2, carg3);
+// void _gotk4_gio2_Application_virtual_open(void* fnptr, GApplication* carg0, GFile** carg1, gint carg2, const gchar* carg3) {
+// 	return ((void (*) (GApplication*, GFile**, gint, const gchar*))(fnptr))(carg0, carg1, carg2, carg3);
 // }
-// C.void _gotk4_gio2_Application_virtual_quit_mainloop(void* fnptr, *C.GApplication carg0) {
-// 	return ((C.void (*) (*C.GApplication))(fnptr))(carg0);
+// void _gotk4_gio2_Application_virtual_quit_mainloop(void* fnptr, GApplication* carg0) {
+// 	return ((void (*) (GApplication*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gio2_Application_virtual_run_mainloop(void* fnptr, *C.GApplication carg0) {
-// 	return ((C.void (*) (*C.GApplication))(fnptr))(carg0);
+// void _gotk4_gio2_Application_virtual_run_mainloop(void* fnptr, GApplication* carg0) {
+// 	return ((void (*) (GApplication*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gio2_Application_virtual_shutdown(void* fnptr, *C.GApplication carg0) {
-// 	return ((C.void (*) (*C.GApplication))(fnptr))(carg0);
+// void _gotk4_gio2_Application_virtual_shutdown(void* fnptr, GApplication* carg0) {
+// 	return ((void (*) (GApplication*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gio2_Application_virtual_startup(void* fnptr, *C.GApplication carg0) {
-// 	return ((C.void (*) (*C.GApplication))(fnptr))(carg0);
+// void _gotk4_gio2_Application_virtual_startup(void* fnptr, GApplication* carg0) {
+// 	return ((void (*) (GApplication*))(fnptr))(carg0);
 // }
-// extern C.void _gotk4_gio2_ApplicationCommandLine_done(*C.GApplicationCommandLine);
-// extern *C.GInputStream _gotk4_gio2_ApplicationCommandLine_get_stdin(*C.GApplicationCommandLine);
-// extern C.void _gotk4_gio2_ApplicationCommandLine_print_literal(*C.GApplicationCommandLine, *C.gchar);
-// extern C.void _gotk4_gio2_ApplicationCommandLine_printerr_literal(*C.GApplicationCommandLine, *C.gchar);
-// C.void _gotk4_gio2_ApplicationCommandLine_virtual_done(void* fnptr, *C.GApplicationCommandLine carg0) {
-// 	return ((C.void (*) (*C.GApplicationCommandLine))(fnptr))(carg0);
+// extern void _gotk4_gio2_ApplicationCommandLine_done(GApplicationCommandLine*);
+// extern GInputStream* _gotk4_gio2_ApplicationCommandLine_get_stdin(GApplicationCommandLine*);
+// extern void _gotk4_gio2_ApplicationCommandLine_print_literal(GApplicationCommandLine*, const gchar*);
+// extern void _gotk4_gio2_ApplicationCommandLine_printerr_literal(GApplicationCommandLine*, const gchar*);
+// void _gotk4_gio2_ApplicationCommandLine_virtual_done(void* fnptr, GApplicationCommandLine* carg0) {
+// 	return ((void (*) (GApplicationCommandLine*))(fnptr))(carg0);
 // }
-// *C.GInputStream _gotk4_gio2_ApplicationCommandLine_virtual_get_stdin(void* fnptr, *C.GApplicationCommandLine carg0) {
-// 	return ((*C.GInputStream (*) (*C.GApplicationCommandLine))(fnptr))(carg0);
+// GInputStream* _gotk4_gio2_ApplicationCommandLine_virtual_get_stdin(void* fnptr, GApplicationCommandLine* carg0) {
+// 	return ((GInputStream* (*) (GApplicationCommandLine*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gio2_ApplicationCommandLine_virtual_print_literal(void* fnptr, *C.GApplicationCommandLine carg0, *C.gchar carg1) {
-// 	return ((C.void (*) (*C.GApplicationCommandLine, *C.gchar))(fnptr))(carg0, carg1);
+// void _gotk4_gio2_ApplicationCommandLine_virtual_print_literal(void* fnptr, GApplicationCommandLine* carg0, const gchar* carg1) {
+// 	return ((void (*) (GApplicationCommandLine*, const gchar*))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gio2_ApplicationCommandLine_virtual_printerr_literal(void* fnptr, *C.GApplicationCommandLine carg0, *C.gchar carg1) {
-// 	return ((C.void (*) (*C.GApplicationCommandLine, *C.gchar))(fnptr))(carg0, carg1);
+// void _gotk4_gio2_ApplicationCommandLine_virtual_printerr_literal(void* fnptr, GApplicationCommandLine* carg0, const gchar* carg1) {
+// 	return ((void (*) (GApplicationCommandLine*, const gchar*))(fnptr))(carg0, carg1);
 // }
-// extern C.void _gotk4_gio2_DBusInterfaceSkeleton_flush(*C.GDBusInterfaceSkeleton);
-// extern C.gboolean _gotk4_gio2_DBusInterfaceSkeleton_g_authorize_method(*C.GDBusInterfaceSkeleton, *C.GDBusMethodInvocation);
-// extern *C.GDBusInterfaceInfo _gotk4_gio2_DBusInterfaceSkeleton_get_info(*C.GDBusInterfaceSkeleton);
-// extern *C.GDBusInterfaceVTable _gotk4_gio2_DBusInterfaceSkeleton_get_vtable(*C.GDBusInterfaceSkeleton);
-// C.void _gotk4_gio2_DBusInterfaceSkeleton_virtual_flush(void* fnptr, *C.GDBusInterfaceSkeleton carg0) {
-// 	return ((C.void (*) (*C.GDBusInterfaceSkeleton))(fnptr))(carg0);
+// extern void _gotk4_gio2_DBusInterfaceSkeleton_flush(GDBusInterfaceSkeleton*);
+// extern gboolean _gotk4_gio2_DBusInterfaceSkeleton_g_authorize_method(GDBusInterfaceSkeleton*, GDBusMethodInvocation*);
+// extern GDBusInterfaceInfo* _gotk4_gio2_DBusInterfaceSkeleton_get_info(GDBusInterfaceSkeleton*);
+// extern GDBusInterfaceVTable* _gotk4_gio2_DBusInterfaceSkeleton_get_vtable(GDBusInterfaceSkeleton*);
+// void _gotk4_gio2_DBusInterfaceSkeleton_virtual_flush(void* fnptr, GDBusInterfaceSkeleton* carg0) {
+// 	return ((void (*) (GDBusInterfaceSkeleton*))(fnptr))(carg0);
 // }
-// C.gboolean _gotk4_gio2_DBusInterfaceSkeleton_virtual_g_authorize_method(void* fnptr, *C.GDBusInterfaceSkeleton carg0, *C.GDBusMethodInvocation carg1) {
-// 	return ((C.gboolean (*) (*C.GDBusInterfaceSkeleton, *C.GDBusMethodInvocation))(fnptr))(carg0, carg1);
+// gboolean _gotk4_gio2_DBusInterfaceSkeleton_virtual_g_authorize_method(void* fnptr, GDBusInterfaceSkeleton* carg0, GDBusMethodInvocation* carg1) {
+// 	return ((gboolean (*) (GDBusInterfaceSkeleton*, GDBusMethodInvocation*))(fnptr))(carg0, carg1);
 // }
-// *C.GDBusInterfaceInfo _gotk4_gio2_DBusInterfaceSkeleton_virtual_get_info(void* fnptr, *C.GDBusInterfaceSkeleton carg0) {
-// 	return ((*C.GDBusInterfaceInfo (*) (*C.GDBusInterfaceSkeleton))(fnptr))(carg0);
+// GDBusInterfaceInfo* _gotk4_gio2_DBusInterfaceSkeleton_virtual_get_info(void* fnptr, GDBusInterfaceSkeleton* carg0) {
+// 	return ((GDBusInterfaceInfo* (*) (GDBusInterfaceSkeleton*))(fnptr))(carg0);
 // }
-// *C.GDBusInterfaceVTable _gotk4_gio2_DBusInterfaceSkeleton_virtual_get_vtable(void* fnptr, *C.GDBusInterfaceSkeleton carg0) {
-// 	return ((*C.GDBusInterfaceVTable (*) (*C.GDBusInterfaceSkeleton))(fnptr))(carg0);
+// GDBusInterfaceVTable* _gotk4_gio2_DBusInterfaceSkeleton_virtual_get_vtable(void* fnptr, GDBusInterfaceSkeleton* carg0) {
+// 	return ((GDBusInterfaceVTable* (*) (GDBusInterfaceSkeleton*))(fnptr))(carg0);
 // }
-// extern C.gboolean _gotk4_gio2_DBusObjectSkeleton_authorize_method(*C.GDBusObjectSkeleton, *C.GDBusInterfaceSkeleton, *C.GDBusMethodInvocation);
-// C.gboolean _gotk4_gio2_DBusObjectSkeleton_virtual_authorize_method(void* fnptr, *C.GDBusObjectSkeleton carg0, *C.GDBusInterfaceSkeleton carg1, *C.GDBusMethodInvocation carg2) {
-// 	return ((C.gboolean (*) (*C.GDBusObjectSkeleton, *C.GDBusInterfaceSkeleton, *C.GDBusMethodInvocation))(fnptr))(carg0, carg1, carg2);
+// extern gboolean _gotk4_gio2_DBusObjectSkeleton_authorize_method(GDBusObjectSkeleton*, GDBusInterfaceSkeleton*, GDBusMethodInvocation*);
+// gboolean _gotk4_gio2_DBusObjectSkeleton_virtual_authorize_method(void* fnptr, GDBusObjectSkeleton* carg0, GDBusInterfaceSkeleton* carg1, GDBusMethodInvocation* carg2) {
+// 	return ((gboolean (*) (GDBusObjectSkeleton*, GDBusInterfaceSkeleton*, GDBusMethodInvocation*))(fnptr))(carg0, carg1, carg2);
 // }
-// extern C.gboolean _gotk4_gio2_DebugControllerDBus_authorize(*C.GDebugControllerDBus, *C.GDBusMethodInvocation);
-// C.gboolean _gotk4_gio2_DebugControllerDBus_virtual_authorize(void* fnptr, *C.GDebugControllerDBus carg0, *C.GDBusMethodInvocation carg1) {
-// 	return ((C.gboolean (*) (*C.GDebugControllerDBus, *C.GDBusMethodInvocation))(fnptr))(carg0, carg1);
+// extern gboolean _gotk4_gio2_DebugControllerDBus_authorize(GDebugControllerDBus*, GDBusMethodInvocation*);
+// gboolean _gotk4_gio2_DebugControllerDBus_virtual_authorize(void* fnptr, GDebugControllerDBus* carg0, GDBusMethodInvocation* carg1) {
+// 	return ((gboolean (*) (GDebugControllerDBus*, GDBusMethodInvocation*))(fnptr))(carg0, carg1);
 // }
-// extern C.gboolean _gotk4_gio2_FileEnumerator_close_finish(*C.GFileEnumerator, *C.GAsyncResult, GError*);
-// extern C.gboolean _gotk4_gio2_FileEnumerator_close_fn(*C.GFileEnumerator, *C.GCancellable, GError*);
-// extern *C.GFileInfo _gotk4_gio2_FileEnumerator_next_file(*C.GFileEnumerator, *C.GCancellable, GError*);
-// extern *C.GList _gotk4_gio2_FileEnumerator_next_files_finish(*C.GFileEnumerator, *C.GAsyncResult, GError*);
-// C.gboolean _gotk4_gio2_FileEnumerator_virtual_close_finish(void* fnptr, *C.GFileEnumerator carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GFileEnumerator, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
+// extern gboolean _gotk4_gio2_FileEnumerator_close_finish(GFileEnumerator*, GAsyncResult*, GError*);
+// extern gboolean _gotk4_gio2_FileEnumerator_close_fn(GFileEnumerator*, GCancellable*, GError*);
+// extern GFileInfo* _gotk4_gio2_FileEnumerator_next_file(GFileEnumerator*, GCancellable*, GError*);
+// extern GList* _gotk4_gio2_FileEnumerator_next_files_finish(GFileEnumerator*, GAsyncResult*, GError*);
+// gboolean _gotk4_gio2_FileEnumerator_virtual_close_finish(void* fnptr, GFileEnumerator* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GFileEnumerator*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// C.gboolean _gotk4_gio2_FileEnumerator_virtual_close_fn(void* fnptr, *C.GFileEnumerator carg0, *C.GCancellable carg1, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GFileEnumerator, *C.GCancellable, GError**))(fnptr))(carg0, carg1, _cerr);
+// gboolean _gotk4_gio2_FileEnumerator_virtual_close_fn(void* fnptr, GFileEnumerator* carg0, GCancellable* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GFileEnumerator*, GCancellable*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// *C.GFileInfo _gotk4_gio2_FileEnumerator_virtual_next_file(void* fnptr, *C.GFileEnumerator carg0, *C.GCancellable carg1, GError** _cerr) {
-// 	return ((*C.GFileInfo (*) (*C.GFileEnumerator, *C.GCancellable, GError**))(fnptr))(carg0, carg1, _cerr);
+// GFileInfo* _gotk4_gio2_FileEnumerator_virtual_next_file(void* fnptr, GFileEnumerator* carg0, GCancellable* carg1, GError** _cerr) {
+// 	return ((GFileInfo* (*) (GFileEnumerator*, GCancellable*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// *C.GList _gotk4_gio2_FileEnumerator_virtual_next_files_finish(void* fnptr, *C.GFileEnumerator carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((*C.GList (*) (*C.GFileEnumerator, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
+// GList* _gotk4_gio2_FileEnumerator_virtual_next_files_finish(void* fnptr, GFileEnumerator* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((GList* (*) (GFileEnumerator*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// extern C.gboolean _gotk4_gio2_FileMonitor_cancel(*C.GFileMonitor);
-// extern C.void _gotk4_gio2_FileMonitor_changed(*C.GFileMonitor, *C.GFile, *C.GFile, C.GFileMonitorEvent);
-// C.gboolean _gotk4_gio2_FileMonitor_virtual_cancel(void* fnptr, *C.GFileMonitor carg0) {
-// 	return ((C.gboolean (*) (*C.GFileMonitor))(fnptr))(carg0);
+// extern gboolean _gotk4_gio2_FileMonitor_cancel(GFileMonitor*);
+// extern void _gotk4_gio2_FileMonitor_changed(GFileMonitor*, GFile*, GFile*, GFileMonitorEvent);
+// gboolean _gotk4_gio2_FileMonitor_virtual_cancel(void* fnptr, GFileMonitor* carg0) {
+// 	return ((gboolean (*) (GFileMonitor*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gio2_FileMonitor_virtual_changed(void* fnptr, *C.GFileMonitor carg0, *C.GFile carg1, *C.GFile carg2, C.GFileMonitorEvent carg3) {
-// 	return ((C.void (*) (*C.GFileMonitor, *C.GFile, *C.GFile, C.GFileMonitorEvent))(fnptr))(carg0, carg1, carg2, carg3);
+// void _gotk4_gio2_FileMonitor_virtual_changed(void* fnptr, GFileMonitor* carg0, GFile* carg1, GFile* carg2, GFileMonitorEvent carg3) {
+// 	return ((void (*) (GFileMonitor*, GFile*, GFile*, GFileMonitorEvent))(fnptr))(carg0, carg1, carg2, carg3);
 // }
-// extern C.void _gotk4_gio2_FilenameCompleter_got_completion_data(*C.GFilenameCompleter);
-// C.void _gotk4_gio2_FilenameCompleter_virtual_got_completion_data(void* fnptr, *C.GFilenameCompleter carg0) {
-// 	return ((C.void (*) (*C.GFilenameCompleter))(fnptr))(carg0);
+// extern void _gotk4_gio2_FilenameCompleter_got_completion_data(GFilenameCompleter*);
+// void _gotk4_gio2_FilenameCompleter_virtual_got_completion_data(void* fnptr, GFilenameCompleter* carg0) {
+// 	return ((void (*) (GFilenameCompleter*))(fnptr))(carg0);
 // }
-// extern C.gboolean _gotk4_gio2_IOStream_close_finish(*C.GIOStream, *C.GAsyncResult, GError*);
-// extern C.gboolean _gotk4_gio2_IOStream_close_fn(*C.GIOStream, *C.GCancellable, GError*);
-// extern *C.GInputStream _gotk4_gio2_IOStream_get_input_stream(*C.GIOStream);
-// extern *C.GOutputStream _gotk4_gio2_IOStream_get_output_stream(*C.GIOStream);
-// C.gboolean _gotk4_gio2_IOStream_virtual_close_finish(void* fnptr, *C.GIOStream carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GIOStream, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
+// extern gboolean _gotk4_gio2_IOStream_close_finish(GIOStream*, GAsyncResult*, GError*);
+// extern gboolean _gotk4_gio2_IOStream_close_fn(GIOStream*, GCancellable*, GError*);
+// extern GInputStream* _gotk4_gio2_IOStream_get_input_stream(GIOStream*);
+// extern GOutputStream* _gotk4_gio2_IOStream_get_output_stream(GIOStream*);
+// gboolean _gotk4_gio2_IOStream_virtual_close_finish(void* fnptr, GIOStream* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GIOStream*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// C.gboolean _gotk4_gio2_IOStream_virtual_close_fn(void* fnptr, *C.GIOStream carg0, *C.GCancellable carg1, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GIOStream, *C.GCancellable, GError**))(fnptr))(carg0, carg1, _cerr);
+// gboolean _gotk4_gio2_IOStream_virtual_close_fn(void* fnptr, GIOStream* carg0, GCancellable* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GIOStream*, GCancellable*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// *C.GInputStream _gotk4_gio2_IOStream_virtual_get_input_stream(void* fnptr, *C.GIOStream carg0) {
-// 	return ((*C.GInputStream (*) (*C.GIOStream))(fnptr))(carg0);
+// GInputStream* _gotk4_gio2_IOStream_virtual_get_input_stream(void* fnptr, GIOStream* carg0) {
+// 	return ((GInputStream* (*) (GIOStream*))(fnptr))(carg0);
 // }
-// *C.GOutputStream _gotk4_gio2_IOStream_virtual_get_output_stream(void* fnptr, *C.GIOStream carg0) {
-// 	return ((*C.GOutputStream (*) (*C.GIOStream))(fnptr))(carg0);
+// GOutputStream* _gotk4_gio2_IOStream_virtual_get_output_stream(void* fnptr, GIOStream* carg0) {
+// 	return ((GOutputStream* (*) (GIOStream*))(fnptr))(carg0);
 // }
-// extern *C.gchar _gotk4_gio2_InetAddress_to_string(*C.GInetAddress);
-// *C.gchar _gotk4_gio2_InetAddress_virtual_to_string(void* fnptr, *C.GInetAddress carg0) {
-// 	return ((*C.gchar (*) (*C.GInetAddress))(fnptr))(carg0);
+// extern gchar* _gotk4_gio2_InetAddress_to_string(GInetAddress*);
+// gchar* _gotk4_gio2_InetAddress_virtual_to_string(void* fnptr, GInetAddress* carg0) {
+// 	return ((gchar* (*) (GInetAddress*))(fnptr))(carg0);
 // }
-// extern C.gboolean _gotk4_gio2_InputStream_close_finish(*C.GInputStream, *C.GAsyncResult, GError*);
-// extern C.gboolean _gotk4_gio2_InputStream_close_fn(*C.GInputStream, *C.GCancellable, GError*);
-// extern C.gssize _gotk4_gio2_InputStream_read_finish(*C.GInputStream, *C.GAsyncResult, GError*);
-// extern C.gssize _gotk4_gio2_InputStream_skip(*C.GInputStream, C.gsize, *C.GCancellable, GError*);
-// extern C.gssize _gotk4_gio2_InputStream_skip_finish(*C.GInputStream, *C.GAsyncResult, GError*);
-// C.gboolean _gotk4_gio2_InputStream_virtual_close_finish(void* fnptr, *C.GInputStream carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GInputStream, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
+// extern gboolean _gotk4_gio2_InputStream_close_finish(GInputStream*, GAsyncResult*, GError*);
+// extern gboolean _gotk4_gio2_InputStream_close_fn(GInputStream*, GCancellable*, GError*);
+// extern gssize _gotk4_gio2_InputStream_read_finish(GInputStream*, GAsyncResult*, GError*);
+// extern gssize _gotk4_gio2_InputStream_skip(GInputStream*, gsize, GCancellable*, GError*);
+// extern gssize _gotk4_gio2_InputStream_skip_finish(GInputStream*, GAsyncResult*, GError*);
+// gboolean _gotk4_gio2_InputStream_virtual_close_finish(void* fnptr, GInputStream* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GInputStream*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// C.gboolean _gotk4_gio2_InputStream_virtual_close_fn(void* fnptr, *C.GInputStream carg0, *C.GCancellable carg1, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GInputStream, *C.GCancellable, GError**))(fnptr))(carg0, carg1, _cerr);
+// gboolean _gotk4_gio2_InputStream_virtual_close_fn(void* fnptr, GInputStream* carg0, GCancellable* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GInputStream*, GCancellable*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// C.gssize _gotk4_gio2_InputStream_virtual_read_finish(void* fnptr, *C.GInputStream carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((C.gssize (*) (*C.GInputStream, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
+// gssize _gotk4_gio2_InputStream_virtual_read_finish(void* fnptr, GInputStream* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((gssize (*) (GInputStream*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// C.gssize _gotk4_gio2_InputStream_virtual_skip(void* fnptr, *C.GInputStream carg0, C.gsize carg1, *C.GCancellable carg2, GError** _cerr) {
-// 	return ((C.gssize (*) (*C.GInputStream, C.gsize, *C.GCancellable, GError**))(fnptr))(carg0, carg1, carg2, _cerr);
+// gssize _gotk4_gio2_InputStream_virtual_skip(void* fnptr, GInputStream* carg0, gsize carg1, GCancellable* carg2, GError** _cerr) {
+// 	return ((gssize (*) (GInputStream*, gsize, GCancellable*, GError**))(fnptr))(carg0, carg1, carg2, _cerr);
 // }
-// C.gssize _gotk4_gio2_InputStream_virtual_skip_finish(void* fnptr, *C.GInputStream carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((C.gssize (*) (*C.GInputStream, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
+// gssize _gotk4_gio2_InputStream_virtual_skip_finish(void* fnptr, GInputStream* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((gssize (*) (GInputStream*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// extern C.gboolean _gotk4_gio2_MenuLinkIter_get_next(*C.GMenuLinkIter, *C.gchar, *C.GMenuModel);
-// C.gboolean _gotk4_gio2_MenuLinkIter_virtual_get_next(void* fnptr, *C.GMenuLinkIter carg0, *C.gchar* carg1, *C.GMenuModel* carg2) {
-// 	return ((C.gboolean (*) (*C.GMenuLinkIter, *C.gchar*, *C.GMenuModel*))(fnptr))(carg0, carg1, carg2);
+// extern gboolean _gotk4_gio2_MenuLinkIter_get_next(GMenuLinkIter*, const gchar*, GMenuModel*);
+// gboolean _gotk4_gio2_MenuLinkIter_virtual_get_next(void* fnptr, GMenuLinkIter* carg0, const gchar** carg1, GMenuModel** carg2) {
+// 	return ((gboolean (*) (GMenuLinkIter*, const gchar**, GMenuModel**))(fnptr))(carg0, carg1, carg2);
 // }
-// extern *C.GMenuModel _gotk4_gio2_MenuModel_get_item_link(*C.GMenuModel, C.gint, *C.gchar);
-// extern C.gint _gotk4_gio2_MenuModel_get_n_items(*C.GMenuModel);
-// extern C.gboolean _gotk4_gio2_MenuModel_is_mutable(*C.GMenuModel);
-// extern *C.GMenuAttributeIter _gotk4_gio2_MenuModel_iterate_item_attributes(*C.GMenuModel, C.gint);
-// extern *C.GMenuLinkIter _gotk4_gio2_MenuModel_iterate_item_links(*C.GMenuModel, C.gint);
-// *C.GMenuModel _gotk4_gio2_MenuModel_virtual_get_item_link(void* fnptr, *C.GMenuModel carg0, C.gint carg1, *C.gchar carg2) {
-// 	return ((*C.GMenuModel (*) (*C.GMenuModel, C.gint, *C.gchar))(fnptr))(carg0, carg1, carg2);
+// extern GMenuModel* _gotk4_gio2_MenuModel_get_item_link(GMenuModel*, gint, const gchar*);
+// extern gint _gotk4_gio2_MenuModel_get_n_items(GMenuModel*);
+// extern gboolean _gotk4_gio2_MenuModel_is_mutable(GMenuModel*);
+// extern GMenuAttributeIter* _gotk4_gio2_MenuModel_iterate_item_attributes(GMenuModel*, gint);
+// extern GMenuLinkIter* _gotk4_gio2_MenuModel_iterate_item_links(GMenuModel*, gint);
+// GMenuModel* _gotk4_gio2_MenuModel_virtual_get_item_link(void* fnptr, GMenuModel* carg0, gint carg1, const gchar* carg2) {
+// 	return ((GMenuModel* (*) (GMenuModel*, gint, const gchar*))(fnptr))(carg0, carg1, carg2);
 // }
-// C.gint _gotk4_gio2_MenuModel_virtual_get_n_items(void* fnptr, *C.GMenuModel carg0) {
-// 	return ((C.gint (*) (*C.GMenuModel))(fnptr))(carg0);
+// gint _gotk4_gio2_MenuModel_virtual_get_n_items(void* fnptr, GMenuModel* carg0) {
+// 	return ((gint (*) (GMenuModel*))(fnptr))(carg0);
 // }
-// C.gboolean _gotk4_gio2_MenuModel_virtual_is_mutable(void* fnptr, *C.GMenuModel carg0) {
-// 	return ((C.gboolean (*) (*C.GMenuModel))(fnptr))(carg0);
+// gboolean _gotk4_gio2_MenuModel_virtual_is_mutable(void* fnptr, GMenuModel* carg0) {
+// 	return ((gboolean (*) (GMenuModel*))(fnptr))(carg0);
 // }
-// *C.GMenuAttributeIter _gotk4_gio2_MenuModel_virtual_iterate_item_attributes(void* fnptr, *C.GMenuModel carg0, C.gint carg1) {
-// 	return ((*C.GMenuAttributeIter (*) (*C.GMenuModel, C.gint))(fnptr))(carg0, carg1);
+// GMenuAttributeIter* _gotk4_gio2_MenuModel_virtual_iterate_item_attributes(void* fnptr, GMenuModel* carg0, gint carg1) {
+// 	return ((GMenuAttributeIter* (*) (GMenuModel*, gint))(fnptr))(carg0, carg1);
 // }
-// *C.GMenuLinkIter _gotk4_gio2_MenuModel_virtual_iterate_item_links(void* fnptr, *C.GMenuModel carg0, C.gint carg1) {
-// 	return ((*C.GMenuLinkIter (*) (*C.GMenuModel, C.gint))(fnptr))(carg0, carg1);
+// GMenuLinkIter* _gotk4_gio2_MenuModel_virtual_iterate_item_links(void* fnptr, GMenuModel* carg0, gint carg1) {
+// 	return ((GMenuLinkIter* (*) (GMenuModel*, gint))(fnptr))(carg0, carg1);
 // }
-// extern C.void _gotk4_gio2_MountOperation_aborted(*C.GMountOperation);
-// extern C.void _gotk4_gio2_MountOperation_ask_password(*C.GMountOperation, *C.char, *C.char, *C.char, C.GAskPasswordFlags);
-// extern C.void _gotk4_gio2_MountOperation_ask_question(*C.GMountOperation, *C.char, **C.char);
-// extern C.void _gotk4_gio2_MountOperation_reply(*C.GMountOperation, C.GMountOperationResult);
-// extern C.void _gotk4_gio2_MountOperation_show_unmount_progress(*C.GMountOperation, *C.gchar, C.gint64, C.gint64);
-// C.void _gotk4_gio2_MountOperation_virtual_aborted(void* fnptr, *C.GMountOperation carg0) {
-// 	return ((C.void (*) (*C.GMountOperation))(fnptr))(carg0);
+// extern void _gotk4_gio2_MountOperation_aborted(GMountOperation*);
+// extern void _gotk4_gio2_MountOperation_ask_password(GMountOperation*, const char*, const char*, const char*, GAskPasswordFlags);
+// extern void _gotk4_gio2_MountOperation_ask_question(GMountOperation*, const char*, const char**);
+// extern void _gotk4_gio2_MountOperation_reply(GMountOperation*, GMountOperationResult);
+// extern void _gotk4_gio2_MountOperation_show_unmount_progress(GMountOperation*, const gchar*, gint64, gint64);
+// void _gotk4_gio2_MountOperation_virtual_aborted(void* fnptr, GMountOperation* carg0) {
+// 	return ((void (*) (GMountOperation*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gio2_MountOperation_virtual_ask_password(void* fnptr, *C.GMountOperation carg0, *C.char carg1, *C.char carg2, *C.char carg3, C.GAskPasswordFlags carg4) {
-// 	return ((C.void (*) (*C.GMountOperation, *C.char, *C.char, *C.char, C.GAskPasswordFlags))(fnptr))(carg0, carg1, carg2, carg3, carg4);
+// void _gotk4_gio2_MountOperation_virtual_ask_password(void* fnptr, GMountOperation* carg0, const char* carg1, const char* carg2, const char* carg3, GAskPasswordFlags carg4) {
+// 	return ((void (*) (GMountOperation*, const char*, const char*, const char*, GAskPasswordFlags))(fnptr))(carg0, carg1, carg2, carg3, carg4);
 // }
-// C.void _gotk4_gio2_MountOperation_virtual_ask_question(void* fnptr, *C.GMountOperation carg0, *C.char carg1, **C.char carg2) {
-// 	return ((C.void (*) (*C.GMountOperation, *C.char, **C.char))(fnptr))(carg0, carg1, carg2);
+// void _gotk4_gio2_MountOperation_virtual_ask_question(void* fnptr, GMountOperation* carg0, const char* carg1, const char** carg2) {
+// 	return ((void (*) (GMountOperation*, const char*, const char**))(fnptr))(carg0, carg1, carg2);
 // }
-// C.void _gotk4_gio2_MountOperation_virtual_reply(void* fnptr, *C.GMountOperation carg0, C.GMountOperationResult carg1) {
-// 	return ((C.void (*) (*C.GMountOperation, C.GMountOperationResult))(fnptr))(carg0, carg1);
+// void _gotk4_gio2_MountOperation_virtual_reply(void* fnptr, GMountOperation* carg0, GMountOperationResult carg1) {
+// 	return ((void (*) (GMountOperation*, GMountOperationResult))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gio2_MountOperation_virtual_show_unmount_progress(void* fnptr, *C.GMountOperation carg0, *C.gchar carg1, C.gint64 carg2, C.gint64 carg3) {
-// 	return ((C.void (*) (*C.GMountOperation, *C.gchar, C.gint64, C.gint64))(fnptr))(carg0, carg1, carg2, carg3);
+// void _gotk4_gio2_MountOperation_virtual_show_unmount_progress(void* fnptr, GMountOperation* carg0, const gchar* carg1, gint64 carg2, gint64 carg3) {
+// 	return ((void (*) (GMountOperation*, const gchar*, gint64, gint64))(fnptr))(carg0, carg1, carg2, carg3);
 // }
-// extern C.gboolean _gotk4_gio2_OutputStream_close_finish(*C.GOutputStream, *C.GAsyncResult, GError*);
-// extern C.gboolean _gotk4_gio2_OutputStream_close_fn(*C.GOutputStream, *C.GCancellable, GError*);
-// extern C.gboolean _gotk4_gio2_OutputStream_flush(*C.GOutputStream, *C.GCancellable, GError*);
-// extern C.gboolean _gotk4_gio2_OutputStream_flush_finish(*C.GOutputStream, *C.GAsyncResult, GError*);
-// extern C.gssize _gotk4_gio2_OutputStream_splice(*C.GOutputStream, *C.GInputStream, C.GOutputStreamSpliceFlags, *C.GCancellable, GError*);
-// extern C.gssize _gotk4_gio2_OutputStream_splice_finish(*C.GOutputStream, *C.GAsyncResult, GError*);
-// extern C.gssize _gotk4_gio2_OutputStream_write_finish(*C.GOutputStream, *C.GAsyncResult, GError*);
-// extern C.gssize _gotk4_gio2_OutputStream_write_fn(*C.GOutputStream, *C.void, C.gsize, *C.GCancellable, GError*);
-// extern C.gboolean _gotk4_gio2_OutputStream_writev_finish(*C.GOutputStream, *C.GAsyncResult, C.gsize, GError*);
-// extern C.gboolean _gotk4_gio2_OutputStream_writev_fn(*C.GOutputStream, *C.GOutputVector, C.gsize, C.gsize, *C.GCancellable, GError*);
-// C.gboolean _gotk4_gio2_OutputStream_virtual_close_finish(void* fnptr, *C.GOutputStream carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GOutputStream, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
+// extern gboolean _gotk4_gio2_OutputStream_close_finish(GOutputStream*, GAsyncResult*, GError*);
+// extern gboolean _gotk4_gio2_OutputStream_close_fn(GOutputStream*, GCancellable*, GError*);
+// extern gboolean _gotk4_gio2_OutputStream_flush(GOutputStream*, GCancellable*, GError*);
+// extern gboolean _gotk4_gio2_OutputStream_flush_finish(GOutputStream*, GAsyncResult*, GError*);
+// extern gssize _gotk4_gio2_OutputStream_splice(GOutputStream*, GInputStream*, GOutputStreamSpliceFlags, GCancellable*, GError*);
+// extern gssize _gotk4_gio2_OutputStream_splice_finish(GOutputStream*, GAsyncResult*, GError*);
+// extern gssize _gotk4_gio2_OutputStream_write_finish(GOutputStream*, GAsyncResult*, GError*);
+// extern gssize _gotk4_gio2_OutputStream_write_fn(GOutputStream*, void*, gsize, GCancellable*, GError*);
+// extern gboolean _gotk4_gio2_OutputStream_writev_finish(GOutputStream*, GAsyncResult*, gsize, GError*);
+// extern gboolean _gotk4_gio2_OutputStream_writev_fn(GOutputStream*, const GOutputVector*, gsize, gsize, GCancellable*, GError*);
+// gboolean _gotk4_gio2_OutputStream_virtual_close_finish(void* fnptr, GOutputStream* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GOutputStream*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// C.gboolean _gotk4_gio2_OutputStream_virtual_close_fn(void* fnptr, *C.GOutputStream carg0, *C.GCancellable carg1, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GOutputStream, *C.GCancellable, GError**))(fnptr))(carg0, carg1, _cerr);
+// gboolean _gotk4_gio2_OutputStream_virtual_close_fn(void* fnptr, GOutputStream* carg0, GCancellable* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GOutputStream*, GCancellable*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// C.gboolean _gotk4_gio2_OutputStream_virtual_flush(void* fnptr, *C.GOutputStream carg0, *C.GCancellable carg1, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GOutputStream, *C.GCancellable, GError**))(fnptr))(carg0, carg1, _cerr);
+// gboolean _gotk4_gio2_OutputStream_virtual_flush(void* fnptr, GOutputStream* carg0, GCancellable* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GOutputStream*, GCancellable*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// C.gboolean _gotk4_gio2_OutputStream_virtual_flush_finish(void* fnptr, *C.GOutputStream carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GOutputStream, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
+// gboolean _gotk4_gio2_OutputStream_virtual_flush_finish(void* fnptr, GOutputStream* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GOutputStream*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// C.gssize _gotk4_gio2_OutputStream_virtual_splice(void* fnptr, *C.GOutputStream carg0, *C.GInputStream carg1, C.GOutputStreamSpliceFlags carg2, *C.GCancellable carg3, GError** _cerr) {
-// 	return ((C.gssize (*) (*C.GOutputStream, *C.GInputStream, C.GOutputStreamSpliceFlags, *C.GCancellable, GError**))(fnptr))(carg0, carg1, carg2, carg3, _cerr);
+// gssize _gotk4_gio2_OutputStream_virtual_splice(void* fnptr, GOutputStream* carg0, GInputStream* carg1, GOutputStreamSpliceFlags carg2, GCancellable* carg3, GError** _cerr) {
+// 	return ((gssize (*) (GOutputStream*, GInputStream*, GOutputStreamSpliceFlags, GCancellable*, GError**))(fnptr))(carg0, carg1, carg2, carg3, _cerr);
 // }
-// C.gssize _gotk4_gio2_OutputStream_virtual_splice_finish(void* fnptr, *C.GOutputStream carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((C.gssize (*) (*C.GOutputStream, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
+// gssize _gotk4_gio2_OutputStream_virtual_splice_finish(void* fnptr, GOutputStream* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((gssize (*) (GOutputStream*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// C.gssize _gotk4_gio2_OutputStream_virtual_write_finish(void* fnptr, *C.GOutputStream carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((C.gssize (*) (*C.GOutputStream, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
+// gssize _gotk4_gio2_OutputStream_virtual_write_finish(void* fnptr, GOutputStream* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((gssize (*) (GOutputStream*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// C.gssize _gotk4_gio2_OutputStream_virtual_write_fn(void* fnptr, *C.GOutputStream carg0, *C.void carg1, C.gsize carg2, *C.GCancellable carg3, GError** _cerr) {
-// 	return ((C.gssize (*) (*C.GOutputStream, *C.void, C.gsize, *C.GCancellable, GError**))(fnptr))(carg0, carg1, carg2, carg3, _cerr);
+// gssize _gotk4_gio2_OutputStream_virtual_write_fn(void* fnptr, GOutputStream* carg0, void* carg1, gsize carg2, GCancellable* carg3, GError** _cerr) {
+// 	return ((gssize (*) (GOutputStream*, void*, gsize, GCancellable*, GError**))(fnptr))(carg0, carg1, carg2, carg3, _cerr);
 // }
-// C.gboolean _gotk4_gio2_OutputStream_virtual_writev_finish(void* fnptr, *C.GOutputStream carg0, *C.GAsyncResult carg1, C.gsize* carg2, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GOutputStream, *C.GAsyncResult, C.gsize*, GError**))(fnptr))(carg0, carg1, carg2, _cerr);
+// gboolean _gotk4_gio2_OutputStream_virtual_writev_finish(void* fnptr, GOutputStream* carg0, GAsyncResult* carg1, gsize* carg2, GError** _cerr) {
+// 	return ((gboolean (*) (GOutputStream*, GAsyncResult*, gsize*, GError**))(fnptr))(carg0, carg1, carg2, _cerr);
 // }
-// C.gboolean _gotk4_gio2_OutputStream_virtual_writev_fn(void* fnptr, *C.GOutputStream carg0, *C.GOutputVector carg1, C.gsize carg2, C.gsize* carg3, *C.GCancellable carg4, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GOutputStream, *C.GOutputVector, C.gsize, C.gsize*, *C.GCancellable, GError**))(fnptr))(carg0, carg1, carg2, carg3, carg4, _cerr);
+// gboolean _gotk4_gio2_OutputStream_virtual_writev_fn(void* fnptr, GOutputStream* carg0, const GOutputVector* carg1, gsize carg2, gsize* carg3, GCancellable* carg4, GError** _cerr) {
+// 	return ((gboolean (*) (GOutputStream*, const GOutputVector*, gsize, gsize*, GCancellable*, GError**))(fnptr))(carg0, carg1, carg2, carg3, carg4, _cerr);
 // }
-// extern C.gboolean _gotk4_gio2_Permission_acquire(*C.GPermission, *C.GCancellable, GError*);
-// extern C.gboolean _gotk4_gio2_Permission_acquire_finish(*C.GPermission, *C.GAsyncResult, GError*);
-// extern C.gboolean _gotk4_gio2_Permission_release(*C.GPermission, *C.GCancellable, GError*);
-// extern C.gboolean _gotk4_gio2_Permission_release_finish(*C.GPermission, *C.GAsyncResult, GError*);
-// C.gboolean _gotk4_gio2_Permission_virtual_acquire(void* fnptr, *C.GPermission carg0, *C.GCancellable carg1, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GPermission, *C.GCancellable, GError**))(fnptr))(carg0, carg1, _cerr);
+// extern gboolean _gotk4_gio2_Permission_acquire(GPermission*, GCancellable*, GError*);
+// extern gboolean _gotk4_gio2_Permission_acquire_finish(GPermission*, GAsyncResult*, GError*);
+// extern gboolean _gotk4_gio2_Permission_release(GPermission*, GCancellable*, GError*);
+// extern gboolean _gotk4_gio2_Permission_release_finish(GPermission*, GAsyncResult*, GError*);
+// gboolean _gotk4_gio2_Permission_virtual_acquire(void* fnptr, GPermission* carg0, GCancellable* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GPermission*, GCancellable*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// C.gboolean _gotk4_gio2_Permission_virtual_acquire_finish(void* fnptr, *C.GPermission carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GPermission, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
+// gboolean _gotk4_gio2_Permission_virtual_acquire_finish(void* fnptr, GPermission* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GPermission*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// C.gboolean _gotk4_gio2_Permission_virtual_release(void* fnptr, *C.GPermission carg0, *C.GCancellable carg1, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GPermission, *C.GCancellable, GError**))(fnptr))(carg0, carg1, _cerr);
+// gboolean _gotk4_gio2_Permission_virtual_release(void* fnptr, GPermission* carg0, GCancellable* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GPermission*, GCancellable*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// C.gboolean _gotk4_gio2_Permission_virtual_release_finish(void* fnptr, *C.GPermission carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GPermission, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
+// gboolean _gotk4_gio2_Permission_virtual_release_finish(void* fnptr, GPermission* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GPermission*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// extern *C.gchar _gotk4_gio2_Resolver_lookup_by_address(*C.GResolver, *C.GInetAddress, *C.GCancellable, GError*);
-// extern *C.gchar _gotk4_gio2_Resolver_lookup_by_address_finish(*C.GResolver, *C.GAsyncResult, GError*);
-// extern *C.GList _gotk4_gio2_Resolver_lookup_by_name(*C.GResolver, *C.gchar, *C.GCancellable, GError*);
-// extern *C.GList _gotk4_gio2_Resolver_lookup_by_name_finish(*C.GResolver, *C.GAsyncResult, GError*);
-// extern *C.GList _gotk4_gio2_Resolver_lookup_by_name_with_flags(*C.GResolver, *C.gchar, C.GResolverNameLookupFlags, *C.GCancellable, GError*);
-// extern *C.GList _gotk4_gio2_Resolver_lookup_by_name_with_flags_finish(*C.GResolver, *C.GAsyncResult, GError*);
-// extern *C.GList _gotk4_gio2_Resolver_lookup_service_finish(*C.GResolver, *C.GAsyncResult, GError*);
-// extern C.void _gotk4_gio2_Resolver_reload(*C.GResolver);
-// *C.gchar _gotk4_gio2_Resolver_virtual_lookup_by_address(void* fnptr, *C.GResolver carg0, *C.GInetAddress carg1, *C.GCancellable carg2, GError** _cerr) {
-// 	return ((*C.gchar (*) (*C.GResolver, *C.GInetAddress, *C.GCancellable, GError**))(fnptr))(carg0, carg1, carg2, _cerr);
+// extern gchar* _gotk4_gio2_Resolver_lookup_by_address(GResolver*, GInetAddress*, GCancellable*, GError*);
+// extern gchar* _gotk4_gio2_Resolver_lookup_by_address_finish(GResolver*, GAsyncResult*, GError*);
+// extern GList* _gotk4_gio2_Resolver_lookup_by_name(GResolver*, const gchar*, GCancellable*, GError*);
+// extern GList* _gotk4_gio2_Resolver_lookup_by_name_finish(GResolver*, GAsyncResult*, GError*);
+// extern GList* _gotk4_gio2_Resolver_lookup_by_name_with_flags(GResolver*, const gchar*, GResolverNameLookupFlags, GCancellable*, GError*);
+// extern GList* _gotk4_gio2_Resolver_lookup_by_name_with_flags_finish(GResolver*, GAsyncResult*, GError*);
+// extern GList* _gotk4_gio2_Resolver_lookup_service_finish(GResolver*, GAsyncResult*, GError*);
+// extern void _gotk4_gio2_Resolver_reload(GResolver*);
+// gchar* _gotk4_gio2_Resolver_virtual_lookup_by_address(void* fnptr, GResolver* carg0, GInetAddress* carg1, GCancellable* carg2, GError** _cerr) {
+// 	return ((gchar* (*) (GResolver*, GInetAddress*, GCancellable*, GError**))(fnptr))(carg0, carg1, carg2, _cerr);
 // }
-// *C.gchar _gotk4_gio2_Resolver_virtual_lookup_by_address_finish(void* fnptr, *C.GResolver carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((*C.gchar (*) (*C.GResolver, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
+// gchar* _gotk4_gio2_Resolver_virtual_lookup_by_address_finish(void* fnptr, GResolver* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((gchar* (*) (GResolver*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// *C.GList _gotk4_gio2_Resolver_virtual_lookup_by_name(void* fnptr, *C.GResolver carg0, *C.gchar carg1, *C.GCancellable carg2, GError** _cerr) {
-// 	return ((*C.GList (*) (*C.GResolver, *C.gchar, *C.GCancellable, GError**))(fnptr))(carg0, carg1, carg2, _cerr);
+// GList* _gotk4_gio2_Resolver_virtual_lookup_by_name(void* fnptr, GResolver* carg0, const gchar* carg1, GCancellable* carg2, GError** _cerr) {
+// 	return ((GList* (*) (GResolver*, const gchar*, GCancellable*, GError**))(fnptr))(carg0, carg1, carg2, _cerr);
 // }
-// *C.GList _gotk4_gio2_Resolver_virtual_lookup_by_name_finish(void* fnptr, *C.GResolver carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((*C.GList (*) (*C.GResolver, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
+// GList* _gotk4_gio2_Resolver_virtual_lookup_by_name_finish(void* fnptr, GResolver* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((GList* (*) (GResolver*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// *C.GList _gotk4_gio2_Resolver_virtual_lookup_by_name_with_flags(void* fnptr, *C.GResolver carg0, *C.gchar carg1, C.GResolverNameLookupFlags carg2, *C.GCancellable carg3, GError** _cerr) {
-// 	return ((*C.GList (*) (*C.GResolver, *C.gchar, C.GResolverNameLookupFlags, *C.GCancellable, GError**))(fnptr))(carg0, carg1, carg2, carg3, _cerr);
+// GList* _gotk4_gio2_Resolver_virtual_lookup_by_name_with_flags(void* fnptr, GResolver* carg0, const gchar* carg1, GResolverNameLookupFlags carg2, GCancellable* carg3, GError** _cerr) {
+// 	return ((GList* (*) (GResolver*, const gchar*, GResolverNameLookupFlags, GCancellable*, GError**))(fnptr))(carg0, carg1, carg2, carg3, _cerr);
 // }
-// *C.GList _gotk4_gio2_Resolver_virtual_lookup_by_name_with_flags_finish(void* fnptr, *C.GResolver carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((*C.GList (*) (*C.GResolver, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
+// GList* _gotk4_gio2_Resolver_virtual_lookup_by_name_with_flags_finish(void* fnptr, GResolver* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((GList* (*) (GResolver*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// *C.GList _gotk4_gio2_Resolver_virtual_lookup_service_finish(void* fnptr, *C.GResolver carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((*C.GList (*) (*C.GResolver, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
+// GList* _gotk4_gio2_Resolver_virtual_lookup_service_finish(void* fnptr, GResolver* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((GList* (*) (GResolver*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// C.void _gotk4_gio2_Resolver_virtual_reload(void* fnptr, *C.GResolver carg0) {
-// 	return ((C.void (*) (*C.GResolver))(fnptr))(carg0);
+// void _gotk4_gio2_Resolver_virtual_reload(void* fnptr, GResolver* carg0) {
+// 	return ((void (*) (GResolver*))(fnptr))(carg0);
 // }
-// extern C.gboolean _gotk4_gio2_Settings_change_event(*C.GSettings, *C.GQuark, C.gint);
-// extern C.void _gotk4_gio2_Settings_changed(*C.GSettings, *C.gchar);
-// extern C.gboolean _gotk4_gio2_Settings_writable_change_event(*C.GSettings, C.GQuark);
-// extern C.void _gotk4_gio2_Settings_writable_changed(*C.GSettings, *C.gchar);
-// C.gboolean _gotk4_gio2_Settings_virtual_change_event(void* fnptr, *C.GSettings carg0, *C.GQuark carg1, C.gint carg2) {
-// 	return ((C.gboolean (*) (*C.GSettings, *C.GQuark, C.gint))(fnptr))(carg0, carg1, carg2);
+// extern gboolean _gotk4_gio2_Settings_change_event(GSettings*, const GQuark*, gint);
+// extern void _gotk4_gio2_Settings_changed(GSettings*, const gchar*);
+// extern gboolean _gotk4_gio2_Settings_writable_change_event(GSettings*, GQuark);
+// extern void _gotk4_gio2_Settings_writable_changed(GSettings*, const gchar*);
+// gboolean _gotk4_gio2_Settings_virtual_change_event(void* fnptr, GSettings* carg0, const GQuark* carg1, gint carg2) {
+// 	return ((gboolean (*) (GSettings*, const GQuark*, gint))(fnptr))(carg0, carg1, carg2);
 // }
-// C.void _gotk4_gio2_Settings_virtual_changed(void* fnptr, *C.GSettings carg0, *C.gchar carg1) {
-// 	return ((C.void (*) (*C.GSettings, *C.gchar))(fnptr))(carg0, carg1);
+// void _gotk4_gio2_Settings_virtual_changed(void* fnptr, GSettings* carg0, const gchar* carg1) {
+// 	return ((void (*) (GSettings*, const gchar*))(fnptr))(carg0, carg1);
 // }
-// C.gboolean _gotk4_gio2_Settings_virtual_writable_change_event(void* fnptr, *C.GSettings carg0, C.GQuark carg1) {
-// 	return ((C.gboolean (*) (*C.GSettings, C.GQuark))(fnptr))(carg0, carg1);
+// gboolean _gotk4_gio2_Settings_virtual_writable_change_event(void* fnptr, GSettings* carg0, GQuark carg1) {
+// 	return ((gboolean (*) (GSettings*, GQuark))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gio2_Settings_virtual_writable_changed(void* fnptr, *C.GSettings carg0, *C.gchar carg1) {
-// 	return ((C.void (*) (*C.GSettings, *C.gchar))(fnptr))(carg0, carg1);
+// void _gotk4_gio2_Settings_virtual_writable_changed(void* fnptr, GSettings* carg0, const gchar* carg1) {
+// 	return ((void (*) (GSettings*, const gchar*))(fnptr))(carg0, carg1);
 // }
-// extern C.GSocketFamily _gotk4_gio2_SocketAddress_get_family(*C.GSocketAddress);
-// extern C.gssize _gotk4_gio2_SocketAddress_get_native_size(*C.GSocketAddress);
-// C.GSocketFamily _gotk4_gio2_SocketAddress_virtual_get_family(void* fnptr, *C.GSocketAddress carg0) {
-// 	return ((C.GSocketFamily (*) (*C.GSocketAddress))(fnptr))(carg0);
+// extern GSocketFamily _gotk4_gio2_SocketAddress_get_family(GSocketAddress*);
+// extern gssize _gotk4_gio2_SocketAddress_get_native_size(GSocketAddress*);
+// GSocketFamily _gotk4_gio2_SocketAddress_virtual_get_family(void* fnptr, GSocketAddress* carg0) {
+// 	return ((GSocketFamily (*) (GSocketAddress*))(fnptr))(carg0);
 // }
-// C.gssize _gotk4_gio2_SocketAddress_virtual_get_native_size(void* fnptr, *C.GSocketAddress carg0) {
-// 	return ((C.gssize (*) (*C.GSocketAddress))(fnptr))(carg0);
+// gssize _gotk4_gio2_SocketAddress_virtual_get_native_size(void* fnptr, GSocketAddress* carg0) {
+// 	return ((gssize (*) (GSocketAddress*))(fnptr))(carg0);
 // }
-// extern *C.GSocketAddress _gotk4_gio2_SocketAddressEnumerator_next(*C.GSocketAddressEnumerator, *C.GCancellable, GError*);
-// extern *C.GSocketAddress _gotk4_gio2_SocketAddressEnumerator_next_finish(*C.GSocketAddressEnumerator, *C.GAsyncResult, GError*);
-// *C.GSocketAddress _gotk4_gio2_SocketAddressEnumerator_virtual_next(void* fnptr, *C.GSocketAddressEnumerator carg0, *C.GCancellable carg1, GError** _cerr) {
-// 	return ((*C.GSocketAddress (*) (*C.GSocketAddressEnumerator, *C.GCancellable, GError**))(fnptr))(carg0, carg1, _cerr);
+// extern GSocketAddress* _gotk4_gio2_SocketAddressEnumerator_next(GSocketAddressEnumerator*, GCancellable*, GError*);
+// extern GSocketAddress* _gotk4_gio2_SocketAddressEnumerator_next_finish(GSocketAddressEnumerator*, GAsyncResult*, GError*);
+// GSocketAddress* _gotk4_gio2_SocketAddressEnumerator_virtual_next(void* fnptr, GSocketAddressEnumerator* carg0, GCancellable* carg1, GError** _cerr) {
+// 	return ((GSocketAddress* (*) (GSocketAddressEnumerator*, GCancellable*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// *C.GSocketAddress _gotk4_gio2_SocketAddressEnumerator_virtual_next_finish(void* fnptr, *C.GSocketAddressEnumerator carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((*C.GSocketAddress (*) (*C.GSocketAddressEnumerator, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
+// GSocketAddress* _gotk4_gio2_SocketAddressEnumerator_virtual_next_finish(void* fnptr, GSocketAddressEnumerator* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((GSocketAddress* (*) (GSocketAddressEnumerator*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// extern C.void _gotk4_gio2_SocketClient_event(*C.GSocketClient, C.GSocketClientEvent, *C.GSocketConnectable, *C.GIOStream);
-// C.void _gotk4_gio2_SocketClient_virtual_event(void* fnptr, *C.GSocketClient carg0, C.GSocketClientEvent carg1, *C.GSocketConnectable carg2, *C.GIOStream carg3) {
-// 	return ((C.void (*) (*C.GSocketClient, C.GSocketClientEvent, *C.GSocketConnectable, *C.GIOStream))(fnptr))(carg0, carg1, carg2, carg3);
+// extern void _gotk4_gio2_SocketClient_event(GSocketClient*, GSocketClientEvent, GSocketConnectable*, GIOStream*);
+// void _gotk4_gio2_SocketClient_virtual_event(void* fnptr, GSocketClient* carg0, GSocketClientEvent carg1, GSocketConnectable* carg2, GIOStream* carg3) {
+// 	return ((void (*) (GSocketClient*, GSocketClientEvent, GSocketConnectable*, GIOStream*))(fnptr))(carg0, carg1, carg2, carg3);
 // }
-// extern C.int _gotk4_gio2_SocketControlMessage_get_level(*C.GSocketControlMessage);
-// extern C.gsize _gotk4_gio2_SocketControlMessage_get_size(*C.GSocketControlMessage);
-// extern C.int _gotk4_gio2_SocketControlMessage_get_type(*C.GSocketControlMessage);
-// C.int _gotk4_gio2_SocketControlMessage_virtual_get_level(void* fnptr, *C.GSocketControlMessage carg0) {
-// 	return ((C.int (*) (*C.GSocketControlMessage))(fnptr))(carg0);
+// extern int _gotk4_gio2_SocketControlMessage_get_level(GSocketControlMessage*);
+// extern gsize _gotk4_gio2_SocketControlMessage_get_size(GSocketControlMessage*);
+// extern int _gotk4_gio2_SocketControlMessage_get_type(GSocketControlMessage*);
+// int _gotk4_gio2_SocketControlMessage_virtual_get_level(void* fnptr, GSocketControlMessage* carg0) {
+// 	return ((int (*) (GSocketControlMessage*))(fnptr))(carg0);
 // }
-// C.gsize _gotk4_gio2_SocketControlMessage_virtual_get_size(void* fnptr, *C.GSocketControlMessage carg0) {
-// 	return ((C.gsize (*) (*C.GSocketControlMessage))(fnptr))(carg0);
+// gsize _gotk4_gio2_SocketControlMessage_virtual_get_size(void* fnptr, GSocketControlMessage* carg0) {
+// 	return ((gsize (*) (GSocketControlMessage*))(fnptr))(carg0);
 // }
-// C.int _gotk4_gio2_SocketControlMessage_virtual_get_type(void* fnptr, *C.GSocketControlMessage carg0) {
-// 	return ((C.int (*) (*C.GSocketControlMessage))(fnptr))(carg0);
+// int _gotk4_gio2_SocketControlMessage_virtual_get_type(void* fnptr, GSocketControlMessage* carg0) {
+// 	return ((int (*) (GSocketControlMessage*))(fnptr))(carg0);
 // }
-// extern C.void _gotk4_gio2_SocketListener_changed(*C.GSocketListener);
-// extern C.void _gotk4_gio2_SocketListener_event(*C.GSocketListener, C.GSocketListenerEvent, *C.GSocket);
-// C.void _gotk4_gio2_SocketListener_virtual_changed(void* fnptr, *C.GSocketListener carg0) {
-// 	return ((C.void (*) (*C.GSocketListener))(fnptr))(carg0);
+// extern void _gotk4_gio2_SocketListener_changed(GSocketListener*);
+// extern void _gotk4_gio2_SocketListener_event(GSocketListener*, GSocketListenerEvent, GSocket*);
+// void _gotk4_gio2_SocketListener_virtual_changed(void* fnptr, GSocketListener* carg0) {
+// 	return ((void (*) (GSocketListener*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gio2_SocketListener_virtual_event(void* fnptr, *C.GSocketListener carg0, C.GSocketListenerEvent carg1, *C.GSocket carg2) {
-// 	return ((C.void (*) (*C.GSocketListener, C.GSocketListenerEvent, *C.GSocket))(fnptr))(carg0, carg1, carg2);
+// void _gotk4_gio2_SocketListener_virtual_event(void* fnptr, GSocketListener* carg0, GSocketListenerEvent carg1, GSocket* carg2) {
+// 	return ((void (*) (GSocketListener*, GSocketListenerEvent, GSocket*))(fnptr))(carg0, carg1, carg2);
 // }
-// extern C.gboolean _gotk4_gio2_SocketService_incoming(*C.GSocketService, *C.GSocketConnection, *C.GObject);
-// C.gboolean _gotk4_gio2_SocketService_virtual_incoming(void* fnptr, *C.GSocketService carg0, *C.GSocketConnection carg1, *C.GObject carg2) {
-// 	return ((C.gboolean (*) (*C.GSocketService, *C.GSocketConnection, *C.GObject))(fnptr))(carg0, carg1, carg2);
+// extern gboolean _gotk4_gio2_SocketService_incoming(GSocketService*, GSocketConnection*, GObject*);
+// gboolean _gotk4_gio2_SocketService_virtual_incoming(void* fnptr, GSocketService* carg0, GSocketConnection* carg1, GObject* carg2) {
+// 	return ((gboolean (*) (GSocketService*, GSocketConnection*, GObject*))(fnptr))(carg0, carg1, carg2);
 // }
-// extern C.gboolean _gotk4_gio2_ThreadedSocketService_run(*C.GThreadedSocketService, *C.GSocketConnection, *C.GObject);
-// C.gboolean _gotk4_gio2_ThreadedSocketService_virtual_run(void* fnptr, *C.GThreadedSocketService carg0, *C.GSocketConnection carg1, *C.GObject carg2) {
-// 	return ((C.gboolean (*) (*C.GThreadedSocketService, *C.GSocketConnection, *C.GObject))(fnptr))(carg0, carg1, carg2);
+// extern gboolean _gotk4_gio2_ThreadedSocketService_run(GThreadedSocketService*, GSocketConnection*, GObject*);
+// gboolean _gotk4_gio2_ThreadedSocketService_virtual_run(void* fnptr, GThreadedSocketService* carg0, GSocketConnection* carg1, GObject* carg2) {
+// 	return ((gboolean (*) (GThreadedSocketService*, GSocketConnection*, GObject*))(fnptr))(carg0, carg1, carg2);
 // }
-// extern C.GTlsCertificateFlags _gotk4_gio2_TlsCertificate_verify(*C.GTlsCertificate, *C.GSocketConnectable, *C.GTlsCertificate);
-// C.GTlsCertificateFlags _gotk4_gio2_TlsCertificate_virtual_verify(void* fnptr, *C.GTlsCertificate carg0, *C.GSocketConnectable carg1, *C.GTlsCertificate carg2) {
-// 	return ((C.GTlsCertificateFlags (*) (*C.GTlsCertificate, *C.GSocketConnectable, *C.GTlsCertificate))(fnptr))(carg0, carg1, carg2);
+// extern GTlsCertificateFlags _gotk4_gio2_TlsCertificate_verify(GTlsCertificate*, GSocketConnectable*, GTlsCertificate*);
+// GTlsCertificateFlags _gotk4_gio2_TlsCertificate_virtual_verify(void* fnptr, GTlsCertificate* carg0, GSocketConnectable* carg1, GTlsCertificate* carg2) {
+// 	return ((GTlsCertificateFlags (*) (GTlsCertificate*, GSocketConnectable*, GTlsCertificate*))(fnptr))(carg0, carg1, carg2);
 // }
-// extern C.gboolean _gotk4_gio2_TlsConnection_accept_certificate(*C.GTlsConnection, *C.GTlsCertificate, C.GTlsCertificateFlags);
-// extern *C.gchar _gotk4_gio2_TlsConnection_get_negotiated_protocol(*C.GTlsConnection);
-// extern C.gboolean _gotk4_gio2_TlsConnection_handshake(*C.GTlsConnection, *C.GCancellable, GError*);
-// extern C.gboolean _gotk4_gio2_TlsConnection_handshake_finish(*C.GTlsConnection, *C.GAsyncResult, GError*);
-// C.gboolean _gotk4_gio2_TlsConnection_virtual_accept_certificate(void* fnptr, *C.GTlsConnection carg0, *C.GTlsCertificate carg1, C.GTlsCertificateFlags carg2) {
-// 	return ((C.gboolean (*) (*C.GTlsConnection, *C.GTlsCertificate, C.GTlsCertificateFlags))(fnptr))(carg0, carg1, carg2);
+// extern gboolean _gotk4_gio2_TlsConnection_accept_certificate(GTlsConnection*, GTlsCertificate*, GTlsCertificateFlags);
+// extern const gchar* _gotk4_gio2_TlsConnection_get_negotiated_protocol(GTlsConnection*);
+// extern gboolean _gotk4_gio2_TlsConnection_handshake(GTlsConnection*, GCancellable*, GError*);
+// extern gboolean _gotk4_gio2_TlsConnection_handshake_finish(GTlsConnection*, GAsyncResult*, GError*);
+// gboolean _gotk4_gio2_TlsConnection_virtual_accept_certificate(void* fnptr, GTlsConnection* carg0, GTlsCertificate* carg1, GTlsCertificateFlags carg2) {
+// 	return ((gboolean (*) (GTlsConnection*, GTlsCertificate*, GTlsCertificateFlags))(fnptr))(carg0, carg1, carg2);
 // }
-// *C.gchar _gotk4_gio2_TlsConnection_virtual_get_negotiated_protocol(void* fnptr, *C.GTlsConnection carg0) {
-// 	return ((*C.gchar (*) (*C.GTlsConnection))(fnptr))(carg0);
+// const gchar* _gotk4_gio2_TlsConnection_virtual_get_negotiated_protocol(void* fnptr, GTlsConnection* carg0) {
+// 	return ((const gchar* (*) (GTlsConnection*))(fnptr))(carg0);
 // }
-// C.gboolean _gotk4_gio2_TlsConnection_virtual_handshake(void* fnptr, *C.GTlsConnection carg0, *C.GCancellable carg1, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GTlsConnection, *C.GCancellable, GError**))(fnptr))(carg0, carg1, _cerr);
+// gboolean _gotk4_gio2_TlsConnection_virtual_handshake(void* fnptr, GTlsConnection* carg0, GCancellable* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GTlsConnection*, GCancellable*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// C.gboolean _gotk4_gio2_TlsConnection_virtual_handshake_finish(void* fnptr, *C.GTlsConnection carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GTlsConnection, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
+// gboolean _gotk4_gio2_TlsConnection_virtual_handshake_finish(void* fnptr, GTlsConnection* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GTlsConnection*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// extern *C.gchar _gotk4_gio2_TlsDatabase_create_certificate_handle(*C.GTlsDatabase, *C.GTlsCertificate);
-// extern *C.GTlsCertificate _gotk4_gio2_TlsDatabase_lookup_certificate_for_handle(*C.GTlsDatabase, *C.gchar, *C.GTlsInteraction, C.GTlsDatabaseLookupFlags, *C.GCancellable, GError*);
-// extern *C.GTlsCertificate _gotk4_gio2_TlsDatabase_lookup_certificate_for_handle_finish(*C.GTlsDatabase, *C.GAsyncResult, GError*);
-// extern *C.GTlsCertificate _gotk4_gio2_TlsDatabase_lookup_certificate_issuer(*C.GTlsDatabase, *C.GTlsCertificate, *C.GTlsInteraction, C.GTlsDatabaseLookupFlags, *C.GCancellable, GError*);
-// extern *C.GTlsCertificate _gotk4_gio2_TlsDatabase_lookup_certificate_issuer_finish(*C.GTlsDatabase, *C.GAsyncResult, GError*);
-// extern *C.GList _gotk4_gio2_TlsDatabase_lookup_certificates_issued_by_finish(*C.GTlsDatabase, *C.GAsyncResult, GError*);
-// extern C.GTlsCertificateFlags _gotk4_gio2_TlsDatabase_verify_chain(*C.GTlsDatabase, *C.GTlsCertificate, *C.gchar, *C.GSocketConnectable, *C.GTlsInteraction, C.GTlsDatabaseVerifyFlags, *C.GCancellable, GError*);
-// extern C.GTlsCertificateFlags _gotk4_gio2_TlsDatabase_verify_chain_finish(*C.GTlsDatabase, *C.GAsyncResult, GError*);
-// *C.gchar _gotk4_gio2_TlsDatabase_virtual_create_certificate_handle(void* fnptr, *C.GTlsDatabase carg0, *C.GTlsCertificate carg1) {
-// 	return ((*C.gchar (*) (*C.GTlsDatabase, *C.GTlsCertificate))(fnptr))(carg0, carg1);
-// }
-// *C.GTlsCertificate _gotk4_gio2_TlsDatabase_virtual_lookup_certificate_for_handle(void* fnptr, *C.GTlsDatabase carg0, *C.gchar carg1, *C.GTlsInteraction carg2, C.GTlsDatabaseLookupFlags carg3, *C.GCancellable carg4, GError** _cerr) {
-// 	return ((*C.GTlsCertificate (*) (*C.GTlsDatabase, *C.gchar, *C.GTlsInteraction, C.GTlsDatabaseLookupFlags, *C.GCancellable, GError**))(fnptr))(carg0, carg1, carg2, carg3, carg4, _cerr);
-// }
-// *C.GTlsCertificate _gotk4_gio2_TlsDatabase_virtual_lookup_certificate_for_handle_finish(void* fnptr, *C.GTlsDatabase carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((*C.GTlsCertificate (*) (*C.GTlsDatabase, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
+// extern gchar* _gotk4_gio2_TlsDatabase_create_certificate_handle(GTlsDatabase*, GTlsCertificate*);
+// extern GTlsCertificate* _gotk4_gio2_TlsDatabase_lookup_certificate_for_handle(GTlsDatabase*, const gchar*, GTlsInteraction*, GTlsDatabaseLookupFlags, GCancellable*, GError*);
+// extern GTlsCertificate* _gotk4_gio2_TlsDatabase_lookup_certificate_for_handle_finish(GTlsDatabase*, GAsyncResult*, GError*);
+// extern GTlsCertificate* _gotk4_gio2_TlsDatabase_lookup_certificate_issuer(GTlsDatabase*, GTlsCertificate*, GTlsInteraction*, GTlsDatabaseLookupFlags, GCancellable*, GError*);
+// extern GTlsCertificate* _gotk4_gio2_TlsDatabase_lookup_certificate_issuer_finish(GTlsDatabase*, GAsyncResult*, GError*);
+// extern GList* _gotk4_gio2_TlsDatabase_lookup_certificates_issued_by_finish(GTlsDatabase*, GAsyncResult*, GError*);
+// extern GTlsCertificateFlags _gotk4_gio2_TlsDatabase_verify_chain(GTlsDatabase*, GTlsCertificate*, const gchar*, GSocketConnectable*, GTlsInteraction*, GTlsDatabaseVerifyFlags, GCancellable*, GError*);
+// extern GTlsCertificateFlags _gotk4_gio2_TlsDatabase_verify_chain_finish(GTlsDatabase*, GAsyncResult*, GError*);
+// gchar* _gotk4_gio2_TlsDatabase_virtual_create_certificate_handle(void* fnptr, GTlsDatabase* carg0, GTlsCertificate* carg1) {
+// 	return ((gchar* (*) (GTlsDatabase*, GTlsCertificate*))(fnptr))(carg0, carg1);
+// }
+// GTlsCertificate* _gotk4_gio2_TlsDatabase_virtual_lookup_certificate_for_handle(void* fnptr, GTlsDatabase* carg0, const gchar* carg1, GTlsInteraction* carg2, GTlsDatabaseLookupFlags carg3, GCancellable* carg4, GError** _cerr) {
+// 	return ((GTlsCertificate* (*) (GTlsDatabase*, const gchar*, GTlsInteraction*, GTlsDatabaseLookupFlags, GCancellable*, GError**))(fnptr))(carg0, carg1, carg2, carg3, carg4, _cerr);
+// }
+// GTlsCertificate* _gotk4_gio2_TlsDatabase_virtual_lookup_certificate_for_handle_finish(void* fnptr, GTlsDatabase* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((GTlsCertificate* (*) (GTlsDatabase*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// *C.GTlsCertificate _gotk4_gio2_TlsDatabase_virtual_lookup_certificate_issuer(void* fnptr, *C.GTlsDatabase carg0, *C.GTlsCertificate carg1, *C.GTlsInteraction carg2, C.GTlsDatabaseLookupFlags carg3, *C.GCancellable carg4, GError** _cerr) {
-// 	return ((*C.GTlsCertificate (*) (*C.GTlsDatabase, *C.GTlsCertificate, *C.GTlsInteraction, C.GTlsDatabaseLookupFlags, *C.GCancellable, GError**))(fnptr))(carg0, carg1, carg2, carg3, carg4, _cerr);
+// GTlsCertificate* _gotk4_gio2_TlsDatabase_virtual_lookup_certificate_issuer(void* fnptr, GTlsDatabase* carg0, GTlsCertificate* carg1, GTlsInteraction* carg2, GTlsDatabaseLookupFlags carg3, GCancellable* carg4, GError** _cerr) {
+// 	return ((GTlsCertificate* (*) (GTlsDatabase*, GTlsCertificate*, GTlsInteraction*, GTlsDatabaseLookupFlags, GCancellable*, GError**))(fnptr))(carg0, carg1, carg2, carg3, carg4, _cerr);
 // }
-// *C.GTlsCertificate _gotk4_gio2_TlsDatabase_virtual_lookup_certificate_issuer_finish(void* fnptr, *C.GTlsDatabase carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((*C.GTlsCertificate (*) (*C.GTlsDatabase, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
+// GTlsCertificate* _gotk4_gio2_TlsDatabase_virtual_lookup_certificate_issuer_finish(void* fnptr, GTlsDatabase* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((GTlsCertificate* (*) (GTlsDatabase*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// *C.GList _gotk4_gio2_TlsDatabase_virtual_lookup_certificates_issued_by_finish(void* fnptr, *C.GTlsDatabase carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((*C.GList (*) (*C.GTlsDatabase, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
+// GList* _gotk4_gio2_TlsDatabase_virtual_lookup_certificates_issued_by_finish(void* fnptr, GTlsDatabase* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((GList* (*) (GTlsDatabase*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// C.GTlsCertificateFlags _gotk4_gio2_TlsDatabase_virtual_verify_chain(void* fnptr, *C.GTlsDatabase carg0, *C.GTlsCertificate carg1, *C.gchar carg2, *C.GSocketConnectable carg3, *C.GTlsInteraction carg4, C.GTlsDatabaseVerifyFlags carg5, *C.GCancellable carg6, GError** _cerr) {
-// 	return ((C.GTlsCertificateFlags (*) (*C.GTlsDatabase, *C.GTlsCertificate, *C.gchar, *C.GSocketConnectable, *C.GTlsInteraction, C.GTlsDatabaseVerifyFlags, *C.GCancellable, GError**))(fnptr))(carg0, carg1, carg2, carg3, carg4, carg5, carg6, _cerr);
+// GTlsCertificateFlags _gotk4_gio2_TlsDatabase_virtual_verify_chain(void* fnptr, GTlsDatabase* carg0, GTlsCertificate* carg1, const gchar* carg2, GSocketConnectable* carg3, GTlsInteraction* carg4, GTlsDatabaseVerifyFlags carg5, GCancellable* carg6, GError** _cerr) {
+// 	return ((GTlsCertificateFlags (*) (GTlsDatabase*, GTlsCertificate*, const gchar*, GSocketConnectable*, GTlsInteraction*, GTlsDatabaseVerifyFlags, GCancellable*, GError**))(fnptr))(carg0, carg1, carg2, carg3, carg4, carg5, carg6, _cerr);
 // }
-// C.GTlsCertificateFlags _gotk4_gio2_TlsDatabase_virtual_verify_chain_finish(void* fnptr, *C.GTlsDatabase carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((C.GTlsCertificateFlags (*) (*C.GTlsDatabase, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
+// GTlsCertificateFlags _gotk4_gio2_TlsDatabase_virtual_verify_chain_finish(void* fnptr, GTlsDatabase* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((GTlsCertificateFlags (*) (GTlsDatabase*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// extern C.GTlsInteractionResult _gotk4_gio2_TlsInteraction_ask_password(*C.GTlsInteraction, *C.GTlsPassword, *C.GCancellable, GError*);
-// extern C.GTlsInteractionResult _gotk4_gio2_TlsInteraction_ask_password_finish(*C.GTlsInteraction, *C.GAsyncResult, GError*);
-// extern C.GTlsInteractionResult _gotk4_gio2_TlsInteraction_request_certificate(*C.GTlsInteraction, *C.GTlsConnection, C.GTlsCertificateRequestFlags, *C.GCancellable, GError*);
-// extern C.GTlsInteractionResult _gotk4_gio2_TlsInteraction_request_certificate_finish(*C.GTlsInteraction, *C.GAsyncResult, GError*);
-// C.GTlsInteractionResult _gotk4_gio2_TlsInteraction_virtual_ask_password(void* fnptr, *C.GTlsInteraction carg0, *C.GTlsPassword carg1, *C.GCancellable carg2, GError** _cerr) {
-// 	return ((C.GTlsInteractionResult (*) (*C.GTlsInteraction, *C.GTlsPassword, *C.GCancellable, GError**))(fnptr))(carg0, carg1, carg2, _cerr);
+// extern GTlsInteractionResult _gotk4_gio2_TlsInteraction_ask_password(GTlsInteraction*, GTlsPassword*, GCancellable*, GError*);
+// extern GTlsInteractionResult _gotk4_gio2_TlsInteraction_ask_password_finish(GTlsInteraction*, GAsyncResult*, GError*);
+// extern GTlsInteractionResult _gotk4_gio2_TlsInteraction_request_certificate(GTlsInteraction*, GTlsConnection*, GTlsCertificateRequestFlags, GCancellable*, GError*);
+// extern GTlsInteractionResult _gotk4_gio2_TlsInteraction_request_certificate_finish(GTlsInteraction*, GAsyncResult*, GError*);
+// GTlsInteractionResult _gotk4_gio2_TlsInteraction_virtual_ask_password(void* fnptr, GTlsInteraction* carg0, GTlsPassword* carg1, GCancellable* carg2, GError** _cerr) {
+// 	return ((GTlsInteractionResult (*) (GTlsInteraction*, GTlsPassword*, GCancellable*, GError**))(fnptr))(carg0, carg1, carg2, _cerr);
 // }
-// C.GTlsInteractionResult _gotk4_gio2_TlsInteraction_virtual_ask_password_finish(void* fnptr, *C.GTlsInteraction carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((C.GTlsInteractionResult (*) (*C.GTlsInteraction, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
+// GTlsInteractionResult _gotk4_gio2_TlsInteraction_virtual_ask_password_finish(void* fnptr, GTlsInteraction* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((GTlsInteractionResult (*) (GTlsInteraction*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// C.GTlsInteractionResult _gotk4_gio2_TlsInteraction_virtual_request_certificate(void* fnptr, *C.GTlsInteraction carg0, *C.GTlsConnection carg1, C.GTlsCertificateRequestFlags carg2, *C.GCancellable carg3, GError** _cerr) {
-// 	return ((C.GTlsInteractionResult (*) (*C.GTlsInteraction, *C.GTlsConnection, C.GTlsCertificateRequestFlags, *C.GCancellable, GError**))(fnptr))(carg0, carg1, carg2, carg3, _cerr);
+// GTlsInteractionResult _gotk4_gio2_TlsInteraction_virtual_request_certificate(void* fnptr, GTlsInteraction* carg0, GTlsConnection* carg1, GTlsCertificateRequestFlags carg2, GCancellable* carg3, GError** _cerr) {
+// 	return ((GTlsInteractionResult (*) (GTlsInteraction*, GTlsConnection*, GTlsCertificateRequestFlags, GCancellable*, GError**))(fnptr))(carg0, carg1, carg2, carg3, _cerr);
 // }
-// C.GTlsInteractionResult _gotk4_gio2_TlsInteraction_virtual_request_certificate_finish(void* fnptr, *C.GTlsInteraction carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((C.GTlsInteractionResult (*) (*C.GTlsInteraction, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
+// GTlsInteractionResult _gotk4_gio2_TlsInteraction_virtual_request_certificate_finish(void* fnptr, GTlsInteraction* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((GTlsInteractionResult (*) (GTlsInteraction*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// extern *C.gchar _gotk4_gio2_TlsPassword_get_default_warning(*C.GTlsPassword);
-// extern *C.guchar _gotk4_gio2_TlsPassword_get_value(*C.GTlsPassword, C.gsize);
-// *C.gchar _gotk4_gio2_TlsPassword_virtual_get_default_warning(void* fnptr, *C.GTlsPassword carg0) {
-// 	return ((*C.gchar (*) (*C.GTlsPassword))(fnptr))(carg0);
+// extern const gchar* _gotk4_gio2_TlsPassword_get_default_warning(GTlsPassword*);
+// extern const guchar* _gotk4_gio2_TlsPassword_get_value(GTlsPassword*, gsize);
+// const gchar* _gotk4_gio2_TlsPassword_virtual_get_default_warning(void* fnptr, GTlsPassword* carg0) {
+// 	return ((const gchar* (*) (GTlsPassword*))(fnptr))(carg0);
 // }
-// *C.guchar _gotk4_gio2_TlsPassword_virtual_get_value(void* fnptr, *C.GTlsPassword carg0, C.gsize* carg1) {
-// 	return ((*C.guchar (*) (*C.GTlsPassword, C.gsize*))(fnptr))(carg0, carg1);
+// const guchar* _gotk4_gio2_TlsPassword_virtual_get_value(void* fnptr, GTlsPassword* carg0, gsize* carg1) {
+// 	return ((const guchar* (*) (GTlsPassword*, gsize*))(fnptr))(carg0, carg1);
 // }
-// extern C.void _gotk4_gio2_Vfs_add_writable_namespaces(*C.GVfs, *C.GFileAttributeInfoList);
-// extern *C.GFile _gotk4_gio2_Vfs_get_file_for_path(*C.GVfs, *C.char);
-// extern *C.GFile _gotk4_gio2_Vfs_get_file_for_uri(*C.GVfs, *C.char);
-// extern **C.gchar _gotk4_gio2_Vfs_get_supported_uri_schemes(*C.GVfs);
-// extern C.gboolean _gotk4_gio2_Vfs_is_active(*C.GVfs);
-// extern C.void _gotk4_gio2_Vfs_local_file_moved(*C.GVfs, *C.char, *C.char);
-// extern C.void _gotk4_gio2_Vfs_local_file_removed(*C.GVfs, *C.char);
-// extern C.gboolean _gotk4_gio2_Vfs_local_file_set_attributes(*C.GVfs, *C.char, *C.GFileInfo, C.GFileQueryInfoFlags, *C.GCancellable, GError*);
-// extern *C.GFile _gotk4_gio2_Vfs_parse_name(*C.GVfs, *C.char);
-// C.void _gotk4_gio2_Vfs_virtual_add_writable_namespaces(void* fnptr, *C.GVfs carg0, *C.GFileAttributeInfoList carg1) {
-// 	return ((C.void (*) (*C.GVfs, *C.GFileAttributeInfoList))(fnptr))(carg0, carg1);
+// extern void _gotk4_gio2_Vfs_add_writable_namespaces(GVfs*, GFileAttributeInfoList*);
+// extern GFile* _gotk4_gio2_Vfs_get_file_for_path(GVfs*, const char*);
+// extern GFile* _gotk4_gio2_Vfs_get_file_for_uri(GVfs*, const char*);
+// extern const gchar* const* _gotk4_gio2_Vfs_get_supported_uri_schemes(GVfs*);
+// extern gboolean _gotk4_gio2_Vfs_is_active(GVfs*);
+// extern void _gotk4_gio2_Vfs_local_file_moved(GVfs*, const char*, const char*);
+// extern void _gotk4_gio2_Vfs_local_file_removed(GVfs*, const char*);
+// extern gboolean _gotk4_gio2_Vfs_local_file_set_attributes(GVfs*, const char*, GFileInfo*, GFileQueryInfoFlags, GCancellable*, GError*);
+// extern GFile* _gotk4_gio2_Vfs_parse_name(GVfs*, const char*);
+// void _gotk4_gio2_Vfs_virtual_add_writable_namespaces(void* fnptr, GVfs* carg0, GFileAttributeInfoList* carg1) {
+// 	return ((void (*) (GVfs*, GFileAttributeInfoList*))(fnptr))(carg0, carg1);
 // }
-// *C.GFile _gotk4_gio2_Vfs_virtual_get_file_for_path(void* fnptr, *C.GVfs carg0, *C.char carg1) {
-// 	return ((*C.GFile (*) (*C.GVfs, *C.char))(fnptr))(carg0, carg1);
+// GFile* _gotk4_gio2_Vfs_virtual_get_file_for_path(void* fnptr, GVfs* carg0, const char* carg1) {
+// 	return ((GFile* (*) (GVfs*, const char*))(fnptr))(carg0, carg1);
 // }
-// *C.GFile _gotk4_gio2_Vfs_virtual_get_file_for_uri(void* fnptr, *C.GVfs carg0, *C.char carg1) {
-// 	return ((*C.GFile (*) (*C.GVfs, *C.char))(fnptr))(carg0, carg1);
+// GFile* _gotk4_gio2_Vfs_virtual_get_file_for_uri(void* fnptr, GVfs* carg0, const char* carg1) {
+// 	return ((GFile* (*) (GVfs*, const char*))(fnptr))(carg0, carg1);
 // }
-// **C.gchar _gotk4_gio2_Vfs_virtual_get_supported_uri_schemes(void* fnptr, *C.GVfs carg0) {
-// 	return ((**C.gchar (*) (*C.GVfs))(fnptr))(carg0);
+// const gchar* const* _gotk4_gio2_Vfs_virtual_get_supported_uri_schemes(void* fnptr, GVfs* carg0) {
+// 	return ((const gchar* const* (*) (GVfs*))(fnptr))(carg0);
 // }
-// C.gboolean _gotk4_gio2_Vfs_virtual_is_active(void* fnptr, *C.GVfs carg0) {
-// 	return ((C.gboolean (*) (*C.GVfs))(fnptr))(carg0);
+// gboolean _gotk4_gio2_Vfs_virtual_is_active(void* fnptr, GVfs* carg0) {
+// 	return ((gboolean (*) (GVfs*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gio2_Vfs_virtual_local_file_moved(void* fnptr, *C.GVfs carg0, *C.char carg1, *C.char carg2) {
-// 	return ((C.void (*) (*C.GVfs, *C.char, *C.char))(fnptr))(carg0, carg1, carg2);
+// void _gotk4_gio2_Vfs_virtual_local_file_moved(void* fnptr, GVfs* carg0, const char* carg1, const char* carg2) {
+// 	return ((void (*) (GVfs*, const char*, const char*))(fnptr))(carg0, carg1, carg2);
 // }
-// C.void _gotk4_gio2_Vfs_virtual_local_file_removed(void* fnptr, *C.GVfs carg0, *C.char carg1) {
-// 	return ((C.void (*) (*C.GVfs, *C.char))(fnptr))(carg0, carg1);
+// void _gotk4_gio2_Vfs_virtual_local_file_removed(void* fnptr, GVfs* carg0, const char* carg1) {
+// 	return ((void (*) (GVfs*, const char*))(fnptr))(carg0, carg1);
 // }
-// C.gboolean _gotk4_gio2_Vfs_virtual_local_file_set_attributes(void* fnptr, *C.GVfs carg0, *C.char carg1, *C.GFileInfo carg2, C.GFileQueryInfoFlags carg3, *C.GCancellable carg4, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GVfs, *C.char, *C.GFileInfo, C.GFileQueryInfoFlags, *C.GCancellable, GError**))(fnptr))(carg0, carg1, carg2, carg3, carg4, _cerr);
+// gboolean _gotk4_gio2_Vfs_virtual_local_file_set_attributes(void* fnptr, GVfs* carg0, const char* carg1, GFileInfo* carg2, GFileQueryInfoFlags carg3, GCancellable* carg4, GError** _cerr) {
+// 	return ((gboolean (*) (GVfs*, const char*, GFileInfo*, GFileQueryInfoFlags, GCancellable*, GError**))(fnptr))(carg0, carg1, carg2, carg3, carg4, _cerr);
 // }
-// *C.GFile _gotk4_gio2_Vfs_virtual_parse_name(void* fnptr, *C.GVfs carg0, *C.char carg1) {
-// 	return ((*C.GFile (*) (*C.GVfs, *C.char))(fnptr))(carg0, carg1);
+// GFile* _gotk4_gio2_Vfs_virtual_parse_name(void* fnptr, GVfs* carg0, const char* carg1) {
+// 	return ((GFile* (*) (GVfs*, const char*))(fnptr))(carg0, carg1);
 // }
-// extern C.void _gotk4_gio2_VolumeMonitor_drive_changed(*C.GVolumeMonitor, *C.GDrive);
-// extern C.void _gotk4_gio2_VolumeMonitor_drive_connected(*C.GVolumeMonitor, *C.GDrive);
-// extern C.void _gotk4_gio2_VolumeMonitor_drive_disconnected(*C.GVolumeMonitor, *C.GDrive);
-// extern C.void _gotk4_gio2_VolumeMonitor_drive_eject_button(*C.GVolumeMonitor, *C.GDrive);
-// extern C.void _gotk4_gio2_VolumeMonitor_drive_stop_button(*C.GVolumeMonitor, *C.GDrive);
-// extern *C.GList _gotk4_gio2_VolumeMonitor_get_connected_drives(*C.GVolumeMonitor);
-// extern *C.GMount _gotk4_gio2_VolumeMonitor_get_mount_for_uuid(*C.GVolumeMonitor, *C.char);
-// extern *C.GList _gotk4_gio2_VolumeMonitor_get_mounts(*C.GVolumeMonitor);
-// extern *C.GVolume _gotk4_gio2_VolumeMonitor_get_volume_for_uuid(*C.GVolumeMonitor, *C.char);
-// extern *C.GList _gotk4_gio2_VolumeMonitor_get_volumes(*C.GVolumeMonitor);
-// extern C.void _gotk4_gio2_VolumeMonitor_mount_added(*C.GVolumeMonitor, *C.GMount);
-// extern C.void _gotk4_gio2_VolumeMonitor_mount_changed(*C.GVolumeMonitor, *C.GMount);
-// extern C.void _gotk4_gio2_VolumeMonitor_mount_pre_unmount(*C.GVolumeMonitor, *C.GMount);
-// extern C.void _gotk4_gio2_VolumeMonitor_mount_removed(*C.GVolumeMonitor, *C.GMount);
-// extern C.void _gotk4_gio2_VolumeMonitor_volume_added(*C.GVolumeMonitor, *C.GVolume);
-// extern C.void _gotk4_gio2_VolumeMonitor_volume_changed(*C.GVolumeMonitor, *C.GVolume);
-// extern C.void _gotk4_gio2_VolumeMonitor_volume_removed(*C.GVolumeMonitor, *C.GVolume);
-// C.void _gotk4_gio2_VolumeMonitor_virtual_drive_changed(void* fnptr, *C.GVolumeMonitor carg0, *C.GDrive carg1) {
-// 	return ((C.void (*) (*C.GVolumeMonitor, *C.GDrive))(fnptr))(carg0, carg1);
+// extern void _gotk4_gio2_VolumeMonitor_drive_changed(GVolumeMonitor*, GDrive*);
+// extern void _gotk4_gio2_VolumeMonitor_drive_connected(GVolumeMonitor*, GDrive*);
+// extern void _gotk4_gio2_VolumeMonitor_drive_disconnected(GVolumeMonitor*, GDrive*);
+// extern void _gotk4_gio2_VolumeMonitor_drive_eject_button(GVolumeMonitor*, GDrive*);
+// extern void _gotk4_gio2_VolumeMonitor_drive_stop_button(GVolumeMonitor*, GDrive*);
+// extern GList* _gotk4_gio2_VolumeMonitor_get_connected_drives(GVolumeMonitor*);
+// extern GMount* _gotk4_gio2_VolumeMonitor_get_mount_for_uuid(GVolumeMonitor*, const char*);
+// extern GList* _gotk4_gio2_VolumeMonitor_get_mounts(GVolumeMonitor*);
+// extern GVolume* _gotk4_gio2_VolumeMonitor_get_volume_for_uuid(GVolumeMonitor*, const char*);
+// extern GList* _gotk4_gio2_VolumeMonitor_get_volumes(GVolumeMonitor*);
+// extern void _gotk4_gio2_VolumeMonitor_mount_added(GVolumeMonitor*, GMount*);
+// extern void _gotk4_gio2_VolumeMonitor_mount_changed(GVolumeMonitor*, GMount*);
+// extern void _gotk4_gio2_VolumeMonitor_mount_pre_unmount(GVolumeMonitor*, GMount*);
+// extern void _gotk4_gio2_VolumeMonitor_mount_removed(GVolumeMonitor*, GMount*);
+// extern void _gotk4_gio2_VolumeMonitor_volume_added(GVolumeMonitor*, GVolume*);
+// extern void _gotk4_gio2_VolumeMonitor_volume_changed(GVolumeMonitor*, GVolume*);
+// extern void _gotk4_gio2_VolumeMonitor_volume_removed(GVolumeMonitor*, GVolume*);
+// void _gotk4_gio2_VolumeMonitor_virtual_drive_changed(void* fnptr, GVolumeMonitor* carg0, GDrive* carg1) {
+// 	return ((void (*) (GVolumeMonitor*, GDrive*))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gio2_VolumeMonitor_virtual_drive_connected(void* fnptr, *C.GVolumeMonitor carg0, *C.GDrive carg1) {
-// 	return ((C.void (*) (*C.GVolumeMonitor, *C.GDrive))(fnptr))(carg0, carg1);
+// void _gotk4_gio2_VolumeMonitor_virtual_drive_connected(void* fnptr, GVolumeMonitor* carg0, GDrive* carg1) {
+// 	return ((void (*) (GVolumeMonitor*, GDrive*))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gio2_VolumeMonitor_virtual_drive_disconnected(void* fnptr, *C.GVolumeMonitor carg0, *C.GDrive carg1) {
-// 	return ((C.void (*) (*C.GVolumeMonitor, *C.GDrive))(fnptr))(carg0, carg1);
+// void _gotk4_gio2_VolumeMonitor_virtual_drive_disconnected(void* fnptr, GVolumeMonitor* carg0, GDrive* carg1) {
+// 	return ((void (*) (GVolumeMonitor*, GDrive*))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gio2_VolumeMonitor_virtual_drive_eject_button(void* fnptr, *C.GVolumeMonitor carg0, *C.GDrive carg1) {
-// 	return ((C.void (*) (*C.GVolumeMonitor, *C.GDrive))(fnptr))(carg0, carg1);
+// void _gotk4_gio2_VolumeMonitor_virtual_drive_eject_button(void* fnptr, GVolumeMonitor* carg0, GDrive* carg1) {
+// 	return ((void (*) (GVolumeMonitor*, GDrive*))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gio2_VolumeMonitor_virtual_drive_stop_button(void* fnptr, *C.GVolumeMonitor carg0, *C.GDrive carg1) {
-// 	return ((C.void (*) (*C.GVolumeMonitor, *C.GDrive))(fnptr))(carg0, carg1);
+// void _gotk4_gio2_VolumeMonitor_virtual_drive_stop_button(void* fnptr, GVolumeMonitor* carg0, GDrive* carg1) {
+// 	return ((void (*) (GVolumeMonitor*, GDrive*))(fnptr))(carg0, carg1);
 // }
-// *C.GList _gotk4_gio2_VolumeMonitor_virtual_get_connected_drives(void* fnptr, *C.GVolumeMonitor carg0) {
-// 	return ((*C.GList (*) (*C.GVolumeMonitor))(fnptr))(carg0);
+// GList* _gotk4_gio2_VolumeMonitor_virtual_get_connected_drives(void* fnptr, GVolumeMonitor* carg0) {
+// 	return ((GList* (*) (GVolumeMonitor*))(fnptr))(carg0);
 // }
-// *C.GMount _gotk4_gio2_VolumeMonitor_virtual_get_mount_for_uuid(void* fnptr, *C.GVolumeMonitor carg0, *C.char carg1) {
-// 	return ((*C.GMount (*) (*C.GVolumeMonitor, *C.char))(fnptr))(carg0, carg1);
+// GMount* _gotk4_gio2_VolumeMonitor_virtual_get_mount_for_uuid(void* fnptr, GVolumeMonitor* carg0, const char* carg1) {
+// 	return ((GMount* (*) (GVolumeMonitor*, const char*))(fnptr))(carg0, carg1);
 // }
-// *C.GList _gotk4_gio2_VolumeMonitor_virtual_get_mounts(void* fnptr, *C.GVolumeMonitor carg0) {
-// 	return ((*C.GList (*) (*C.GVolumeMonitor))(fnptr))(carg0);
+// GList* _gotk4_gio2_VolumeMonitor_virtual_get_mounts(void* fnptr, GVolumeMonitor* carg0) {
+// 	return ((GList* (*) (GVolumeMonitor*))(fnptr))(carg0);
 // }
-// *C.GVolume _gotk4_gio2_VolumeMonitor_virtual_get_volume_for_uuid(void* fnptr, *C.GVolumeMonitor carg0, *C.char carg1) {
-// 	return ((*C.GVolume (*) (*C.GVolumeMonitor, *C.char))(fnptr))(carg0, carg1);
+// GVolume* _gotk4_gio2_VolumeMonitor_virtual_get_volume_for_uuid(void* fnptr, GVolumeMonitor* carg0, const char* carg1) {
+// 	return ((GVolume* (*) (GVolumeMonitor*, const char*))(fnptr))(carg0, carg1);
 // }
-// *C.GList _gotk4_gio2_VolumeMonitor_virtual_get_volumes(void* fnptr, *C.GVolumeMonitor carg0) {
-// 	return ((*C.GList (*) (*C.GVolumeMonitor))(fnptr))(carg0);
+// GList* _gotk4_gio2_VolumeMonitor_virtual_get_volumes(void* fnptr, GVolumeMonitor* carg0) {
+// 	return ((GList* (*) (GVolumeMonitor*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gio2_VolumeMonitor_virtual_mount_added(void* fnptr, *C.GVolumeMonitor carg0, *C.GMount carg1) {
-// 	return ((C.void (*) (*C.GVolumeMonitor, *C.GMount))(fnptr))(carg0, carg1);
+// void _gotk4_gio2_VolumeMonitor_virtual_mount_added(void* fnptr, GVolumeMonitor* carg0, GMount* carg1) {
+// 	return ((void (*) (GVolumeMonitor*, GMount*))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gio2_VolumeMonitor_virtual_mount_changed(void* fnptr, *C.GVolumeMonitor carg0, *C.GMount carg1) {
-// 	return ((C.void (*) (*C.GVolumeMonitor, *C.GMount))(fnptr))(carg0, carg1);
+// void _gotk4_gio2_VolumeMonitor_virtual_mount_changed(void* fnptr, GVolumeMonitor* carg0, GMount* carg1) {
+// 	return ((void (*) (GVolumeMonitor*, GMount*))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gio2_VolumeMonitor_virtual_mount_pre_unmount(void* fnptr, *C.GVolumeMonitor carg0, *C.GMount carg1) {
-// 	return ((C.void (*) (*C.GVolumeMonitor, *C.GMount))(fnptr))(carg0, carg1);
+// void _gotk4_gio2_VolumeMonitor_virtual_mount_pre_unmount(void* fnptr, GVolumeMonitor* carg0, GMount* carg1) {
+// 	return ((void (*) (GVolumeMonitor*, GMount*))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gio2_VolumeMonitor_virtual_mount_removed(void* fnptr, *C.GVolumeMonitor carg0, *C.GMount carg1) {
-// 	return ((C.void (*) (*C.GVolumeMonitor, *C.GMount))(fnptr))(carg0, carg1);
+// void _gotk4_gio2_VolumeMonitor_virtual_mount_removed(void* fnptr, GVolumeMonitor* carg0, GMount* carg1) {
+// 	return ((void (*) (GVolumeMonitor*, GMount*))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gio2_VolumeMonitor_virtual_volume_added(void* fnptr, *C.GVolumeMonitor carg0, *C.GVolume carg1) {
-// 	return ((C.void (*) (*C.GVolumeMonitor, *C.GVolume))(fnptr))(carg0, carg1);
+// void _gotk4_gio2_VolumeMonitor_virtual_volume_added(void* fnptr, GVolumeMonitor* carg0, GVolume* carg1) {
+// 	return ((void (*) (GVolumeMonitor*, GVolume*))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gio2_VolumeMonitor_virtual_volume_changed(void* fnptr, *C.GVolumeMonitor carg0, *C.GVolume carg1) {
-// 	return ((C.void (*) (*C.GVolumeMonitor, *C.GVolume))(fnptr))(carg0, carg1);
+// void _gotk4_gio2_VolumeMonitor_virtual_volume_changed(void* fnptr, GVolumeMonitor* carg0, GVolume* carg1) {
+// 	return ((void (*) (GVolumeMonitor*, GVolume*))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gio2_VolumeMonitor_virtual_volume_removed(void* fnptr, *C.GVolumeMonitor carg0, *C.GVolume carg1) {
-// 	return ((C.void (*) (*C.GVolumeMonitor, *C.GVolume))(fnptr))(carg0, carg1);
+// void _gotk4_gio2_VolumeMonitor_virtual_volume_removed(void* fnptr, GVolumeMonitor* carg0, GVolume* carg1) {
+// 	return ((void (*) (GVolumeMonitor*, GVolume*))(fnptr))(carg0, carg1);
 // }
-// extern C.gboolean _gotk4_gio2_FileIOStream_can_seek(*C.GFileIOStream);
-// extern C.gboolean _gotk4_gio2_FileIOStream_can_truncate(*C.GFileIOStream);
-// extern *C.char _gotk4_gio2_FileIOStream_get_etag(*C.GFileIOStream);
-// extern *C.GFileInfo _gotk4_gio2_FileIOStream_query_info(*C.GFileIOStream, *C.char, *C.GCancellable, GError*);
-// extern *C.GFileInfo _gotk4_gio2_FileIOStream_query_info_finish(*C.GFileIOStream, *C.GAsyncResult, GError*);
-// extern C.gboolean _gotk4_gio2_FileIOStream_seek(*C.GFileIOStream, C.goffset, C.GSeekType, *C.GCancellable, GError*);
-// extern C.goffset _gotk4_gio2_FileIOStream_tell(*C.GFileIOStream);
-// extern C.gboolean _gotk4_gio2_FileIOStream_truncate_fn(*C.GFileIOStream, C.goffset, *C.GCancellable, GError*);
-// C.gboolean _gotk4_gio2_FileIOStream_virtual_can_seek(void* fnptr, *C.GFileIOStream carg0) {
-// 	return ((C.gboolean (*) (*C.GFileIOStream))(fnptr))(carg0);
+// extern gboolean _gotk4_gio2_FileIOStream_can_seek(GFileIOStream*);
+// extern gboolean _gotk4_gio2_FileIOStream_can_truncate(GFileIOStream*);
+// extern char* _gotk4_gio2_FileIOStream_get_etag(GFileIOStream*);
+// extern GFileInfo* _gotk4_gio2_FileIOStream_query_info(GFileIOStream*, const char*, GCancellable*, GError*);
+// extern GFileInfo* _gotk4_gio2_FileIOStream_query_info_finish(GFileIOStream*, GAsyncResult*, GError*);
+// extern gboolean _gotk4_gio2_FileIOStream_seek(GFileIOStream*, goffset, GSeekType, GCancellable*, GError*);
+// extern goffset _gotk4_gio2_FileIOStream_tell(GFileIOStream*);
+// extern gboolean _gotk4_gio2_FileIOStream_truncate_fn(GFileIOStream*, goffset, GCancellable*, GError*);
+// gboolean _gotk4_gio2_FileIOStream_virtual_can_seek(void* fnptr, GFileIOStream* carg0) {
+// 	return ((gboolean (*) (GFileIOStream*))(fnptr))(carg0);
 // }
-// C.gboolean _gotk4_gio2_FileIOStream_virtual_can_truncate(void* fnptr, *C.GFileIOStream carg0) {
-// 	return ((C.gboolean (*) (*C.GFileIOStream))(fnptr))(carg0);
+// gboolean _gotk4_gio2_FileIOStream_virtual_can_truncate(void* fnptr, GFileIOStream* carg0) {
+// 	return ((gboolean (*) (GFileIOStream*))(fnptr))(carg0);
 // }
-// *C.char _gotk4_gio2_FileIOStream_virtual_get_etag(void* fnptr, *C.GFileIOStream carg0) {
-// 	return ((*C.char (*) (*C.GFileIOStream))(fnptr))(carg0);
+// char* _gotk4_gio2_FileIOStream_virtual_get_etag(void* fnptr, GFileIOStream* carg0) {
+// 	return ((char* (*) (GFileIOStream*))(fnptr))(carg0);
 // }
-// *C.GFileInfo _gotk4_gio2_FileIOStream_virtual_query_info(void* fnptr, *C.GFileIOStream carg0, *C.char carg1, *C.GCancellable carg2, GError** _cerr) {
-// 	return ((*C.GFileInfo (*) (*C.GFileIOStream, *C.char, *C.GCancellable, GError**))(fnptr))(carg0, carg1, carg2, _cerr);
+// GFileInfo* _gotk4_gio2_FileIOStream_virtual_query_info(void* fnptr, GFileIOStream* carg0, const char* carg1, GCancellable* carg2, GError** _cerr) {
+// 	return ((GFileInfo* (*) (GFileIOStream*, const char*, GCancellable*, GError**))(fnptr))(carg0, carg1, carg2, _cerr);
 // }
-// *C.GFileInfo _gotk4_gio2_FileIOStream_virtual_query_info_finish(void* fnptr, *C.GFileIOStream carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((*C.GFileInfo (*) (*C.GFileIOStream, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
+// GFileInfo* _gotk4_gio2_FileIOStream_virtual_query_info_finish(void* fnptr, GFileIOStream* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((GFileInfo* (*) (GFileIOStream*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// C.gboolean _gotk4_gio2_FileIOStream_virtual_seek(void* fnptr, *C.GFileIOStream carg0, C.goffset carg1, C.GSeekType carg2, *C.GCancellable carg3, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GFileIOStream, C.goffset, C.GSeekType, *C.GCancellable, GError**))(fnptr))(carg0, carg1, carg2, carg3, _cerr);
+// gboolean _gotk4_gio2_FileIOStream_virtual_seek(void* fnptr, GFileIOStream* carg0, goffset carg1, GSeekType carg2, GCancellable* carg3, GError** _cerr) {
+// 	return ((gboolean (*) (GFileIOStream*, goffset, GSeekType, GCancellable*, GError**))(fnptr))(carg0, carg1, carg2, carg3, _cerr);
 // }
-// C.goffset _gotk4_gio2_FileIOStream_virtual_tell(void* fnptr, *C.GFileIOStream carg0) {
-// 	return ((C.goffset (*) (*C.GFileIOStream))(fnptr))(carg0);
+// goffset _gotk4_gio2_FileIOStream_virtual_tell(void* fnptr, GFileIOStream* carg0) {
+// 	return ((goffset (*) (GFileIOStream*))(fnptr))(carg0);
 // }
-// C.gboolean _gotk4_gio2_FileIOStream_virtual_truncate_fn(void* fnptr, *C.GFileIOStream carg0, C.goffset carg1, *C.GCancellable carg2, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GFileIOStream, C.goffset, *C.GCancellable, GError**))(fnptr))(carg0, carg1, carg2, _cerr);
+// gboolean _gotk4_gio2_FileIOStream_virtual_truncate_fn(void* fnptr, GFileIOStream* carg0, goffset carg1, GCancellable* carg2, GError** _cerr) {
+// 	return ((gboolean (*) (GFileIOStream*, goffset, GCancellable*, GError**))(fnptr))(carg0, carg1, carg2, _cerr);
 // }
-// extern C.gboolean _gotk4_gio2_FileInputStream_can_seek(*C.GFileInputStream);
-// extern *C.GFileInfo _gotk4_gio2_FileInputStream_query_info(*C.GFileInputStream, *C.char, *C.GCancellable, GError*);
-// extern *C.GFileInfo _gotk4_gio2_FileInputStream_query_info_finish(*C.GFileInputStream, *C.GAsyncResult, GError*);
-// extern C.gboolean _gotk4_gio2_FileInputStream_seek(*C.GFileInputStream, C.goffset, C.GSeekType, *C.GCancellable, GError*);
-// extern C.goffset _gotk4_gio2_FileInputStream_tell(*C.GFileInputStream);
-// C.gboolean _gotk4_gio2_FileInputStream_virtual_can_seek(void* fnptr, *C.GFileInputStream carg0) {
-// 	return ((C.gboolean (*) (*C.GFileInputStream))(fnptr))(carg0);
+// extern gboolean _gotk4_gio2_FileInputStream_can_seek(GFileInputStream*);
+// extern GFileInfo* _gotk4_gio2_FileInputStream_query_info(GFileInputStream*, const char*, GCancellable*, GError*);
+// extern GFileInfo* _gotk4_gio2_FileInputStream_query_info_finish(GFileInputStream*, GAsyncResult*, GError*);
+// extern gboolean _gotk4_gio2_FileInputStream_seek(GFileInputStream*, goffset, GSeekType, GCancellable*, GError*);
+// extern goffset _gotk4_gio2_FileInputStream_tell(GFileInputStream*);
+// gboolean _gotk4_gio2_FileInputStream_virtual_can_seek(void* fnptr, GFileInputStream* carg0) {
+// 	return ((gboolean (*) (GFileInputStream*))(fnptr))(carg0);
 // }
-// *C.GFileInfo _gotk4_gio2_FileInputStream_virtual_query_info(void* fnptr, *C.GFileInputStream carg0, *C.char carg1, *C.GCancellable carg2, GError** _cerr) {
-// 	return ((*C.GFileInfo (*) (*C.GFileInputStream, *C.char, *C.GCancellable, GError**))(fnptr))(carg0, carg1, carg2, _cerr);
+// GFileInfo* _gotk4_gio2_FileInputStream_virtual_query_info(void* fnptr, GFileInputStream* carg0, const char* carg1, GCancellable* carg2, GError** _cerr) {
+// 	return ((GFileInfo* (*) (GFileInputStream*, const char*, GCancellable*, GError**))(fnptr))(carg0, carg1, carg2, _cerr);
 // }
-// *C.GFileInfo _gotk4_gio2_FileInputStream_virtual_query_info_finish(void* fnptr, *C.GFileInputStream carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((*C.GFileInfo (*) (*C.GFileInputStream, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
+// GFileInfo* _gotk4_gio2_FileInputStream_virtual_query_info_finish(void* fnptr, GFileInputStream* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((GFileInfo* (*) (GFileInputStream*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// C.gboolean _gotk4_gio2_FileInputStream_virtual_seek(void* fnptr, *C.GFileInputStream carg0, C.goffset carg1, C.GSeekType carg2, *C.GCancellable carg3, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GFileInputStream, C.goffset, C.GSeekType, *C.GCancellable, GError**))(fnptr))(carg0, carg1, carg2, carg3, _cerr);
+// gboolean _gotk4_gio2_FileInputStream_virtual_seek(void* fnptr, GFileInputStream* carg0, goffset carg1, GSeekType carg2, GCancellable* carg3, GError** _cerr) {
+// 	return ((gboolean (*) (GFileInputStream*, goffset, GSeekType, GCancellable*, GError**))(fnptr))(carg0, carg1, carg2, carg3, _cerr);
 // }
-// C.goffset _gotk4_gio2_FileInputStream_virtual_tell(void* fnptr, *C.GFileInputStream carg0) {
-// 	return ((C.goffset (*) (*C.GFileInputStream))(fnptr))(carg0);
+// goffset _gotk4_gio2_FileInputStream_virtual_tell(void* fnptr, GFileInputStream* carg0) {
+// 	return ((goffset (*) (GFileInputStream*))(fnptr))(carg0);
 // }
-// extern C.gboolean _gotk4_gio2_FileOutputStream_can_seek(*C.GFileOutputStream);
-// extern C.gboolean _gotk4_gio2_FileOutputStream_can_truncate(*C.GFileOutputStream);
-// extern *C.char _gotk4_gio2_FileOutputStream_get_etag(*C.GFileOutputStream);
-// extern *C.GFileInfo _gotk4_gio2_FileOutputStream_query_info(*C.GFileOutputStream, *C.char, *C.GCancellable, GError*);
-// extern *C.GFileInfo _gotk4_gio2_FileOutputStream_query_info_finish(*C.GFileOutputStream, *C.GAsyncResult, GError*);
-// extern C.gboolean _gotk4_gio2_FileOutputStream_seek(*C.GFileOutputStream, C.goffset, C.GSeekType, *C.GCancellable, GError*);
-// extern C.goffset _gotk4_gio2_FileOutputStream_tell(*C.GFileOutputStream);
-// extern C.gboolean _gotk4_gio2_FileOutputStream_truncate_fn(*C.GFileOutputStream, C.goffset, *C.GCancellable, GError*);
-// C.gboolean _gotk4_gio2_FileOutputStream_virtual_can_seek(void* fnptr, *C.GFileOutputStream carg0) {
-// 	return ((C.gboolean (*) (*C.GFileOutputStream))(fnptr))(carg0);
+// extern gboolean _gotk4_gio2_FileOutputStream_can_seek(GFileOutputStream*);
+// extern gboolean _gotk4_gio2_FileOutputStream_can_truncate(GFileOutputStream*);
+// extern char* _gotk4_gio2_FileOutputStream_get_etag(GFileOutputStream*);
+// extern GFileInfo* _gotk4_gio2_FileOutputStream_query_info(GFileOutputStream*, const char*, GCancellable*, GError*);
+// extern GFileInfo* _gotk4_gio2_FileOutputStream_query_info_finish(GFileOutputStream*, GAsyncResult*, GError*);
+// extern gboolean _gotk4_gio2_FileOutputStream_seek(GFileOutputStream*, goffset, GSeekType, GCancellable*, GError*);
+// extern goffset _gotk4_gio2_FileOutputStream_tell(GFileOutputStream*);
+// extern gboolean _gotk4_gio2_FileOutputStream_truncate_fn(GFileOutputStream*, goffset, GCancellable*, GError*);
+// gboolean _gotk4_gio2_FileOutputStream_virtual_can_seek(void* fnptr, GFileOutputStream* carg0) {
+// 	return ((gboolean (*) (GFileOutputStream*))(fnptr))(carg0);
 // }
-// C.gboolean _gotk4_gio2_FileOutputStream_virtual_can_truncate(void* fnptr, *C.GFileOutputStream carg0) {
-// 	return ((C.gboolean (*) (*C.GFileOutputStream))(fnptr))(carg0);
+// gboolean _gotk4_gio2_FileOutputStream_virtual_can_truncate(void* fnptr, GFileOutputStream* carg0) {
+// 	return ((gboolean (*) (GFileOutputStream*))(fnptr))(carg0);
 // }
-// *C.char _gotk4_gio2_FileOutputStream_virtual_get_etag(void* fnptr, *C.GFileOutputStream carg0) {
-// 	return ((*C.char (*) (*C.GFileOutputStream))(fnptr))(carg0);
+// char* _gotk4_gio2_FileOutputStream_virtual_get_etag(void* fnptr, GFileOutputStream* carg0) {
+// 	return ((char* (*) (GFileOutputStream*))(fnptr))(carg0);
 // }
-// *C.GFileInfo _gotk4_gio2_FileOutputStream_virtual_query_info(void* fnptr, *C.GFileOutputStream carg0, *C.char carg1, *C.GCancellable carg2, GError** _cerr) {
-// 	return ((*C.GFileInfo (*) (*C.GFileOutputStream, *C.char, *C.GCancellable, GError**))(fnptr))(carg0, carg1, carg2, _cerr);
+// GFileInfo* _gotk4_gio2_FileOutputStream_virtual_query_info(void* fnptr, GFileOutputStream* carg0, const char* carg1, GCancellable* carg2, GError** _cerr) {
+// 	return ((GFileInfo* (*) (GFileOutputStream*, const char*, GCancellable*, GError**))(fnptr))(carg0, carg1, carg2, _cerr);
 // }
-// *C.GFileInfo _gotk4_gio2_FileOutputStream_virtual_query_info_finish(void* fnptr, *C.GFileOutputStream carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((*C.GFileInfo (*) (*C.GFileOutputStream, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
+// GFileInfo* _gotk4_gio2_FileOutputStream_virtual_query_info_finish(void* fnptr, GFileOutputStream* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((GFileInfo* (*) (GFileOutputStream*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// C.gboolean _gotk4_gio2_FileOutputStream_virtual_seek(void* fnptr, *C.GFileOutputStream carg0, C.goffset carg1, C.GSeekType carg2, *C.GCancellable carg3, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GFileOutputStream, C.goffset, C.GSeekType, *C.GCancellable, GError**))(fnptr))(carg0, carg1, carg2, carg3, _cerr);
+// gboolean _gotk4_gio2_FileOutputStream_virtual_seek(void* fnptr, GFileOutputStream* carg0, goffset carg1, GSeekType carg2, GCancellable* carg3, GError** _cerr) {
+// 	return ((gboolean (*) (GFileOutputStream*, goffset, GSeekType, GCancellable*, GError**))(fnptr))(carg0, carg1, carg2, carg3, _cerr);
 // }
-// C.goffset _gotk4_gio2_FileOutputStream_virtual_tell(void* fnptr, *C.GFileOutputStream carg0) {
-// 	return ((C.goffset (*) (*C.GFileOutputStream))(fnptr))(carg0);
+// goffset _gotk4_gio2_FileOutputStream_virtual_tell(void* fnptr, GFileOutputStream* carg0) {
+// 	return ((goffset (*) (GFileOutputStream*))(fnptr))(carg0);
 // }
-// C.gboolean _gotk4_gio2_FileOutputStream_virtual_truncate_fn(void* fnptr, *C.GFileOutputStream carg0, C.goffset carg1, *C.GCancellable carg2, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GFileOutputStream, C.goffset, *C.GCancellable, GError**))(fnptr))(carg0, carg1, carg2, _cerr);
+// gboolean _gotk4_gio2_FileOutputStream_virtual_truncate_fn(void* fnptr, GFileOutputStream* carg0, goffset carg1, GCancellable* carg2, GError** _cerr) {
+// 	return ((gboolean (*) (GFileOutputStream*, goffset, GCancellable*, GError**))(fnptr))(carg0, carg1, carg2, _cerr);
 // }
-// extern C.gssize _gotk4_gio2_BufferedInputStream_fill(*C.GBufferedInputStream, C.gssize, *C.GCancellable, GError*);
-// extern C.gssize _gotk4_gio2_BufferedInputStream_fill_finish(*C.GBufferedInputStream, *C.GAsyncResult, GError*);
-// C.gssize _gotk4_gio2_BufferedInputStream_virtual_fill(void* fnptr, *C.GBufferedInputStream carg0, C.gssize carg1, *C.GCancellable carg2, GError** _cerr) {
-// 	return ((C.gssize (*) (*C.GBufferedInputStream, C.gssize, *C.GCancellable, GError**))(fnptr))(carg0, carg1, carg2, _cerr);
+// extern gssize _gotk4_gio2_BufferedInputStream_fill(GBufferedInputStream*, gssize, GCancellable*, GError*);
+// extern gssize _gotk4_gio2_BufferedInputStream_fill_finish(GBufferedInputStream*, GAsyncResult*, GError*);
+// gssize _gotk4_gio2_BufferedInputStream_virtual_fill(void* fnptr, GBufferedInputStream* carg0, gssize carg1, GCancellable* carg2, GError** _cerr) {
+// 	return ((gssize (*) (GBufferedInputStream*, gssize, GCancellable*, GError**))(fnptr))(carg0, carg1, carg2, _cerr);
 // }
-// C.gssize _gotk4_gio2_BufferedInputStream_virtual_fill_finish(void* fnptr, *C.GBufferedInputStream carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((C.gssize (*) (*C.GBufferedInputStream, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
+// gssize _gotk4_gio2_BufferedInputStream_virtual_fill_finish(void* fnptr, GBufferedInputStream* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((gssize (*) (GBufferedInputStream*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
 import "C"
 
@@ -2731,11 +2731,11 @@ func DBusErrorRegisterErrorDomain(errorDomainQuarkName string, quarkVolatile *ui
 	defer C.free(unsafe.Pointer(carg1))
 	_ = quarkVolatile
 	_ = carg2
-	panic("unimplemented conversion of *uint (*C.gsize)")
+	panic("unimplemented conversion of *uint (volatile gsize*)")
 	_ = entries
 	_ = carg3
 	_ = carg4
-	panic("unimplemented conversion of []DBusErrorEntry (*C.GDBusErrorEntry)")
+	panic("unimplemented conversion of []DBusErrorEntry (const GDBusErrorEntry*)")
 
 	C.g_dbus_error_register_error_domain(carg1, carg2, carg3, carg4)
 	runtime.KeepAlive(errorDomainQuarkName)
@@ -8324,7 +8324,7 @@ func ContentTypeGetMIMEDirs() []string {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (const gchar* const*)")
 
 	return goret
 }
@@ -8419,7 +8419,7 @@ func ContentTypeGuess(filename string, data []byte) (bool, string) {
 	_ = data
 	_ = carg2
 	_ = carg3
-	panic("unimplemented conversion of []byte (*C.guchar)")
+	panic("unimplemented conversion of []byte (const guchar*)")
 
 	cret = C.g_content_type_guess(carg1, carg2, carg3, &carg4)
 	runtime.KeepAlive(filename)
@@ -8472,7 +8472,7 @@ func ContentTypeGuessForTree(root File) []string {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (gchar**)")
 
 	return goret
 }
@@ -8617,7 +8617,7 @@ func ContentTypeSetMIMEDirs(dirs []string) {
 
 	_ = dirs
 	_ = carg1
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (const gchar* const*)")
 
 	C.g_content_type_set_mime_dirs(carg1)
 	runtime.KeepAlive(dirs)
@@ -8934,7 +8934,7 @@ func DBusEscapeObjectPathBytestring(bytes []uint8) string {
 
 	_ = bytes
 	_ = carg1
-	panic("unimplemented conversion of []uint8 (*C.guint8)")
+	panic("unimplemented conversion of []uint8 (const guint8*)")
 
 	cret = C.g_dbus_escape_object_path_bytestring(carg1)
 	runtime.KeepAlive(bytes)
@@ -9270,7 +9270,7 @@ func DBusUnescapeObjectPath(s string) []uint8 {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []uint8 (*C.guint8)")
+	panic("unimplemented conversion of []uint8 (guint8*)")
 
 	return goret
 }
@@ -9512,7 +9512,7 @@ func PollableStreamRead(cancellable context.Context, stream InputStream, buffer 
 	_ = buffer
 	_ = carg2
 	_ = carg3
-	panic("unimplemented conversion of []byte (*C.void)")
+	panic("unimplemented conversion of []byte (void*)")
 	if blocking {
 		carg4 = C.TRUE
 	}
@@ -9575,7 +9575,7 @@ func PollableStreamWrite(cancellable context.Context, stream OutputStream, buffe
 	_ = buffer
 	_ = carg2
 	_ = carg3
-	panic("unimplemented conversion of []byte (*C.void)")
+	panic("unimplemented conversion of []byte (void*)")
 	if blocking {
 		carg4 = C.TRUE
 	}
@@ -9649,7 +9649,7 @@ func PollableStreamWriteAll(cancellable context.Context, stream OutputStream, bu
 	_ = buffer
 	_ = carg2
 	_ = carg3
-	panic("unimplemented conversion of []byte (*C.void)")
+	panic("unimplemented conversion of []byte (void*)")
 	if blocking {
 		carg4 = C.TRUE
 	}
@@ -9712,7 +9712,7 @@ func ResourcesEnumerateChildren(path string, lookupFlags ResourceLookupFlags) ([
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (**C.char)")
+	panic("unimplemented conversion of []string (char**)")
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -11196,7 +11196,7 @@ func (actionGroup *ActionGroupInstance) ListActions() []string {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (gchar**)")
 
 	return goret
 }
@@ -11524,7 +11524,7 @@ func UnsafeApplyActionGroupOverrides[Instance ActionGroup](gclass unsafe.Pointer
 
 				_ = goret
 				_ = cret
-				panic("unimplemented conversion of []string (**C.gchar)")
+				panic("unimplemented conversion of []string (gchar**)")
 
 				return cret
 			},
@@ -11804,7 +11804,7 @@ func (actionGroup *ActionGroupInstance) ParentListActions() []string {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (gchar**)")
 
 	return goret
 }
@@ -12107,7 +12107,7 @@ func (actionMap *ActionMapInstance) RemoveActionEntries(entries []ActionEntry) {
 	_ = entries
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []ActionEntry (*C.GActionEntry)")
+	panic("unimplemented conversion of []ActionEntry (const GActionEntry*)")
 
 	C.g_action_map_remove_action_entries(carg0, carg1, carg2)
 	runtime.KeepAlive(actionMap)
@@ -13890,7 +13890,7 @@ func (appinfo *AppInfoInstance) GetSupportedTypes() []string {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (**C.char)")
+	panic("unimplemented conversion of []string (const char**)")
 
 	return goret
 }
@@ -14726,7 +14726,7 @@ func UnsafeApplyAppInfoOverrides[Instance AppInfo](gclass unsafe.Pointer, overri
 
 				_ = goret
 				_ = cret
-				panic("unimplemented conversion of []string (**C.char)")
+				panic("unimplemented conversion of []string (const char**)")
 
 				return cret
 			},
@@ -15331,7 +15331,7 @@ func (appinfo *AppInfoInstance) ParentGetSupportedTypes() []string {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (**C.char)")
+	panic("unimplemented conversion of []string (const char**)")
 
 	return goret
 }
@@ -16840,11 +16840,11 @@ func (converter *ConverterInstance) Convert(inbuf []byte, outbuf []byte, flags C
 	_ = inbuf
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []byte (*C.void)")
+	panic("unimplemented conversion of []byte (void*)")
 	_ = outbuf
 	_ = carg3
 	_ = carg4
-	panic("unimplemented conversion of []byte (*C.void)")
+	panic("unimplemented conversion of []byte (void*)")
 	carg5 = C.GConverterFlags(flags)
 
 	cret = C.g_converter_convert(carg0, carg1, carg2, carg3, carg4, carg5, &carg6, &carg7, &_cerr)
@@ -17055,11 +17055,11 @@ func UnsafeApplyConverterOverrides[Instance Converter](gclass unsafe.Pointer, ov
 				_ = inbuf
 				_ = carg1
 				_ = carg2
-				panic("unimplemented conversion of []byte (*C.void)")
+				panic("unimplemented conversion of []byte (void*)")
 				_ = outbuf
 				_ = carg3
 				_ = carg4
-				panic("unimplemented conversion of []byte (*C.void)")
+				panic("unimplemented conversion of []byte (void*)")
 				flags = ConverterFlags(carg5)
 
 				bytesRead, bytesWritten, goret, _goerr = overrides.Convert(converter, inbuf, outbuf, flags)
@@ -17209,11 +17209,11 @@ func (converter *ConverterInstance) ParentConvert(inbuf []byte, outbuf []byte, f
 	_ = inbuf
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []byte (*C.void)")
+	panic("unimplemented conversion of []byte (void*)")
 	_ = outbuf
 	_ = carg3
 	_ = carg4
-	panic("unimplemented conversion of []byte (*C.void)")
+	panic("unimplemented conversion of []byte (void*)")
 	carg5 = C.GConverterFlags(flags)
 
 	cret = C._gotk4_gio2_Converter_virtual_convert(unsafe.Pointer(parentclass.convert), carg0, carg1, carg2, carg3, carg4, carg5, &carg6, &carg7, &_cerr)
@@ -17969,7 +17969,7 @@ func UnsafeApplyDBusObjectOverrides[Instance DBusObject](gclass unsafe.Pointer, 
 
 				_ = goret
 				_ = cret
-				panic("unimplemented conversion of []DBusInterface (*C.GList)")
+				panic("unimplemented conversion of []DBusInterface (GList*)")
 
 				return cret
 			},
@@ -18712,7 +18712,7 @@ func UnsafeApplyDBusObjectManagerOverrides[Instance DBusObjectManager](gclass un
 
 				_ = goret
 				_ = cret
-				panic("unimplemented conversion of []DBusObject (*C.GList)")
+				panic("unimplemented conversion of []DBusObject (GList*)")
 
 				return cret
 			},
@@ -19814,7 +19814,7 @@ func (datagramBased *DatagramBasedInstance) ReceiveMessages(cancellable context.
 	_ = messages
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []InputMessage (*C.GInputMessage)")
+	panic("unimplemented conversion of []InputMessage (GInputMessage*)")
 	carg3 = C.gint(flags)
 	carg4 = C.gint64(timeout)
 
@@ -19909,7 +19909,7 @@ func (datagramBased *DatagramBasedInstance) SendMessages(cancellable context.Con
 	_ = messages
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []OutputMessage (*C.GOutputMessage)")
+	panic("unimplemented conversion of []OutputMessage (GOutputMessage*)")
 	carg3 = C.gint(flags)
 	carg4 = C.gint64(timeout)
 
@@ -20259,7 +20259,7 @@ func UnsafeApplyDatagramBasedOverrides[Instance DatagramBased](gclass unsafe.Poi
 				_ = messages
 				_ = carg1
 				_ = carg2
-				panic("unimplemented conversion of []InputMessage (*C.GInputMessage)")
+				panic("unimplemented conversion of []InputMessage (GInputMessage*)")
 				flags = int32(carg3)
 				timeout = int64(carg4)
 
@@ -20294,7 +20294,7 @@ func UnsafeApplyDatagramBasedOverrides[Instance DatagramBased](gclass unsafe.Poi
 				_ = messages
 				_ = carg1
 				_ = carg2
-				panic("unimplemented conversion of []OutputMessage (*C.GOutputMessage)")
+				panic("unimplemented conversion of []OutputMessage (GOutputMessage*)")
 				flags = int32(carg3)
 				timeout = int64(carg4)
 
@@ -20567,7 +20567,7 @@ func (datagramBased *DatagramBasedInstance) ParentReceiveMessages(cancellable co
 	_ = messages
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []InputMessage (*C.GInputMessage)")
+	panic("unimplemented conversion of []InputMessage (GInputMessage*)")
 	carg3 = C.gint(flags)
 	carg4 = C.gint64(timeout)
 
@@ -20664,7 +20664,7 @@ func (datagramBased *DatagramBasedInstance) ParentSendMessages(cancellable conte
 	_ = messages
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []OutputMessage (*C.GOutputMessage)")
+	panic("unimplemented conversion of []OutputMessage (GOutputMessage*)")
 	carg3 = C.gint(flags)
 	carg4 = C.gint64(timeout)
 
@@ -21671,7 +21671,7 @@ func (drive *DriveInstance) EnumerateIdentifiers() []string {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (**C.char)")
+	panic("unimplemented conversion of []string (char**)")
 
 	return goret
 }
@@ -22733,7 +22733,7 @@ func UnsafeApplyDriveOverrides[Instance Drive](gclass unsafe.Pointer, overrides 
 
 				_ = goret
 				_ = cret
-				panic("unimplemented conversion of []string (**C.char)")
+				panic("unimplemented conversion of []string (char**)")
 
 				return cret
 			},
@@ -22882,7 +22882,7 @@ func UnsafeApplyDriveOverrides[Instance Drive](gclass unsafe.Pointer, overrides 
 
 				_ = goret
 				_ = cret
-				panic("unimplemented conversion of []Volume (*C.GList)")
+				panic("unimplemented conversion of []Volume (GList*)")
 
 				return cret
 			},
@@ -23368,7 +23368,7 @@ func (drive *DriveInstance) ParentEnumerateIdentifiers() []string {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (**C.char)")
+	panic("unimplemented conversion of []string (char**)")
 
 	return goret
 }
@@ -25137,7 +25137,7 @@ func (conn *DtlsConnectionInstance) SetAdvertisedProtocols(protocols []string) {
 	carg0 = (*C.GDtlsConnection)(UnsafeDtlsConnectionToGlibNone(conn))
 	_ = protocols
 	_ = carg1
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (const gchar* const*)")
 
 	C.g_dtls_connection_set_advertised_protocols(carg0, carg1)
 	runtime.KeepAlive(conn)
@@ -25774,7 +25774,7 @@ func UnsafeApplyDtlsConnectionOverrides[Instance DtlsConnection](gclass unsafe.P
 				conn = UnsafeDtlsConnectionFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				_ = protocols
 				_ = carg1
-				panic("unimplemented conversion of []string (**C.gchar)")
+				panic("unimplemented conversion of []string (const gchar* const*)")
 
 				overrides.SetAdvertisedProtocols(conn, protocols)
 			},
@@ -26048,7 +26048,7 @@ func (conn *DtlsConnectionInstance) ParentSetAdvertisedProtocols(protocols []str
 
 	_ = protocols
 	_ = carg1
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (const gchar* const*)")
 
 	C._gotk4_gio2_DtlsConnection_virtual_set_advertised_protocols(unsafe.Pointer(parentclass.set_advertised_protocols), carg0, carg1)
 	runtime.KeepAlive(conn)
@@ -30297,7 +30297,7 @@ func NewFileBuildFilenamev(args []string) File {
 
 	_ = args
 	_ = carg1
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (const gchar* const*)")
 
 	cret = C.g_file_new_build_filenamev(carg1)
 	runtime.KeepAlive(args)
@@ -32604,7 +32604,7 @@ func (file *FileInstance) LoadContents(cancellable context.Context) (string, str
 	_ = contents
 	_ = carg2
 	_ = carg3
-	panic("unimplemented conversion of string (*C.char)")
+	panic("unimplemented conversion of string (char*)")
 	if carg4 != nil {
 		etagOut = C.GoString((*C.char)(unsafe.Pointer(carg4)))
 		defer C.free(unsafe.Pointer(carg4))
@@ -32705,7 +32705,7 @@ func (file *FileInstance) LoadContentsFinish(res AsyncResult) (string, string, b
 	_ = contents
 	_ = carg2
 	_ = carg3
-	panic("unimplemented conversion of string (*C.char)")
+	panic("unimplemented conversion of string (char*)")
 	if carg4 != nil {
 		etagOut = C.GoString((*C.char)(unsafe.Pointer(carg4)))
 		defer C.free(unsafe.Pointer(carg4))
@@ -32765,7 +32765,7 @@ func (file *FileInstance) LoadPartialContentsFinish(res AsyncResult) (string, st
 	_ = contents
 	_ = carg2
 	_ = carg3
-	panic("unimplemented conversion of string (*C.char)")
+	panic("unimplemented conversion of string (char*)")
 	if carg4 != nil {
 		etagOut = C.GoString((*C.char)(unsafe.Pointer(carg4)))
 		defer C.free(unsafe.Pointer(carg4))
@@ -34727,7 +34727,7 @@ func (file *FileInstance) ReplaceContents(cancellable context.Context, contents 
 	_ = contents
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of string (*C.char)")
+	panic("unimplemented conversion of string (const char*)")
 	if etag != "" {
 		carg3 = (*C.char)(unsafe.Pointer(C.CString(etag)))
 		defer C.free(unsafe.Pointer(carg3))
@@ -34811,7 +34811,7 @@ func (file *FileInstance) ReplaceContentsAsync(cancellable context.Context, cont
 	_ = contents
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of string (*C.char)")
+	panic("unimplemented conversion of string (const char*)")
 	if etag != "" {
 		carg3 = (*C.char)(unsafe.Pointer(C.CString(etag)))
 		defer C.free(unsafe.Pointer(carg3))
@@ -45639,7 +45639,7 @@ func (mount *MountInstance) GuessContentTypeFinish(result AsyncResult) ([]string
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (gchar**)")
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -45694,7 +45694,7 @@ func (mount *MountInstance) GuessContentTypeSync(cancellable context.Context, fo
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (gchar**)")
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -46603,7 +46603,7 @@ func UnsafeApplyMountOverrides[Instance Mount](gclass unsafe.Pointer, overrides 
 
 				_ = goret
 				_ = cret
-				panic("unimplemented conversion of []string (**C.gchar)")
+				panic("unimplemented conversion of []string (gchar**)")
 				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
 
 				return cret
@@ -46635,7 +46635,7 @@ func UnsafeApplyMountOverrides[Instance Mount](gclass unsafe.Pointer, overrides 
 
 				_ = goret
 				_ = cret
-				panic("unimplemented conversion of []string (**C.gchar)")
+				panic("unimplemented conversion of []string (gchar**)")
 				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
 
 				return cret
@@ -47171,7 +47171,7 @@ func (mount *MountInstance) ParentGuessContentTypeFinish(result AsyncResult) ([]
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (gchar**)")
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -47228,7 +47228,7 @@ func (mount *MountInstance) ParentGuessContentTypeSync(cancellable context.Conte
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (gchar**)")
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -49152,7 +49152,7 @@ func (stream *PollableOutputStreamInstance) WriteNonblocking(cancellable context
 	_ = buffer
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []byte (*C.void)")
+	panic("unimplemented conversion of []byte (void*)")
 
 	cret = C.g_pollable_output_stream_write_nonblocking(carg0, carg1, carg2, carg3, &_cerr)
 	runtime.KeepAlive(stream)
@@ -49219,7 +49219,7 @@ func (stream *PollableOutputStreamInstance) WritevNonblocking(cancellable contex
 	_ = vectors
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []OutputVector (*C.GOutputVector)")
+	panic("unimplemented conversion of []OutputVector (const GOutputVector*)")
 
 	cret = C.g_pollable_output_stream_writev_nonblocking(carg0, carg1, carg2, &carg3, carg4, &_cerr)
 	runtime.KeepAlive(stream)
@@ -49450,7 +49450,7 @@ func UnsafeApplyPollableOutputStreamOverrides[Instance PollableOutputStream](gcl
 				_ = buffer
 				_ = carg1
 				_ = carg2
-				panic("unimplemented conversion of []byte (*C.void)")
+				panic("unimplemented conversion of []byte (void*)")
 
 				goret, _goerr = overrides.WriteNonblocking(stream, buffer)
 
@@ -49478,7 +49478,7 @@ func UnsafeApplyPollableOutputStreamOverrides[Instance PollableOutputStream](gcl
 				_ = vectors
 				_ = carg1
 				_ = carg2
-				panic("unimplemented conversion of []OutputVector (*C.GOutputVector)")
+				panic("unimplemented conversion of []OutputVector (const GOutputVector*)")
 
 				bytesWritten, goret, _goerr = overrides.WritevNonblocking(stream, vectors)
 
@@ -49647,7 +49647,7 @@ func (stream *PollableOutputStreamInstance) ParentWriteNonblocking(buffer []byte
 	_ = buffer
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []byte (*C.void)")
+	panic("unimplemented conversion of []byte (void*)")
 
 	cret = C._gotk4_gio2_PollableOutputStream_virtual_write_nonblocking(unsafe.Pointer(parentclass.write_nonblocking), carg0, carg1, carg2, &_cerr)
 	runtime.KeepAlive(stream)
@@ -49710,7 +49710,7 @@ func (stream *PollableOutputStreamInstance) ParentWritevNonblocking(vectors []Ou
 	_ = vectors
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []OutputVector (*C.GOutputVector)")
+	panic("unimplemented conversion of []OutputVector (const GOutputVector*)")
 
 	cret = C._gotk4_gio2_PollableOutputStream_virtual_writev_nonblocking(unsafe.Pointer(parentclass.writev_nonblocking), carg0, carg1, carg2, &carg3, &_cerr)
 	runtime.KeepAlive(stream)
@@ -50776,7 +50776,7 @@ func (resolver *ProxyResolverInstance) Lookup(cancellable context.Context, uri s
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (gchar**)")
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -50851,7 +50851,7 @@ func (resolver *ProxyResolverInstance) LookupFinish(result AsyncResult) ([]strin
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (gchar**)")
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -50966,7 +50966,7 @@ func UnsafeApplyProxyResolverOverrides[Instance ProxyResolver](gclass unsafe.Poi
 
 				_ = goret
 				_ = cret
-				panic("unimplemented conversion of []string (**C.gchar)")
+				panic("unimplemented conversion of []string (gchar**)")
 				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
 
 				return cret
@@ -50992,7 +50992,7 @@ func UnsafeApplyProxyResolverOverrides[Instance ProxyResolver](gclass unsafe.Poi
 
 				_ = goret
 				_ = cret
-				panic("unimplemented conversion of []string (**C.gchar)")
+				panic("unimplemented conversion of []string (gchar**)")
 				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
 
 				return cret
@@ -51082,7 +51082,7 @@ func (resolver *ProxyResolverInstance) ParentLookup(cancellable context.Context,
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (gchar**)")
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -51124,7 +51124,7 @@ func (resolver *ProxyResolverInstance) ParentLookupFinish(result AsyncResult) ([
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (gchar**)")
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -54726,7 +54726,7 @@ func (volume *VolumeInstance) EnumerateIdentifiers() []string {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (**C.char)")
+	panic("unimplemented conversion of []string (char**)")
 
 	return goret
 }
@@ -55449,7 +55449,7 @@ func UnsafeApplyVolumeOverrides[Instance Volume](gclass unsafe.Pointer, override
 
 				_ = goret
 				_ = cret
-				panic("unimplemented conversion of []string (**C.char)")
+				panic("unimplemented conversion of []string (char**)")
 
 				return cret
 			},
@@ -55886,7 +55886,7 @@ func (volume *VolumeInstance) ParentEnumerateIdentifiers() []string {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (**C.char)")
+	panic("unimplemented conversion of []string (char**)")
 
 	return goret
 }
@@ -56962,7 +56962,7 @@ func (_context *AppLaunchContextInstance) GetEnvironment() []string {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (**C.char)")
+	panic("unimplemented conversion of []string (char**)")
 
 	return goret
 }
@@ -58506,7 +58506,7 @@ func (application *ApplicationInstance) AddMainOptionEntries(entries []glib.Opti
 	carg0 = (*C.GApplication)(UnsafeApplicationToGlibNone(application))
 	_ = entries
 	_ = carg1
-	panic("unimplemented conversion of []glib.OptionEntry (*C.GOptionEntry)")
+	panic("unimplemented conversion of []glib.OptionEntry (const GOptionEntry*)")
 
 	C.g_application_add_main_option_entries(carg0, carg1)
 	runtime.KeepAlive(application)
@@ -58919,7 +58919,7 @@ func (application *ApplicationInstance) Open(files []File, hint string) {
 	_ = files
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []File (**C.GFile)")
+	panic("unimplemented conversion of []File (GFile**)")
 	carg3 = (*C.gchar)(unsafe.Pointer(C.CString(hint)))
 	defer C.free(unsafe.Pointer(carg3))
 
@@ -59135,7 +59135,7 @@ func (application *ApplicationInstance) Run(argv []string) int32 {
 	_ = argv
 	_ = carg2
 	_ = carg1
-	panic("unimplemented conversion of []string (**C.char)")
+	panic("unimplemented conversion of []string (char**)")
 
 	cret = C.g_application_run(carg0, carg1, carg2)
 	runtime.KeepAlive(application)
@@ -59931,7 +59931,7 @@ func UnsafeApplyApplicationOverrides[Instance Application](gclass unsafe.Pointer
 				_ = files
 				_ = carg1
 				_ = carg2
-				panic("unimplemented conversion of []File (**C.GFile)")
+				panic("unimplemented conversion of []File (GFile**)")
 				hint = C.GoString((*C.char)(unsafe.Pointer(carg3)))
 
 				overrides.Open(application, files, hint)
@@ -60244,7 +60244,7 @@ func (application *ApplicationInstance) ParentOpen(files []File, hint string) {
 	_ = files
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []File (**C.GFile)")
+	panic("unimplemented conversion of []File (GFile**)")
 	carg3 = (*C.gchar)(unsafe.Pointer(C.CString(hint)))
 	defer C.free(unsafe.Pointer(carg3))
 
@@ -60944,7 +60944,7 @@ func (cmdline *ApplicationCommandLineInstance) GetArguments() (int32, []string) 
 	argc = int32(carg1)
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (gchar**)")
 
 	return argc, goret
 }
@@ -61015,7 +61015,7 @@ func (cmdline *ApplicationCommandLineInstance) GetEnviron() []string {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (const gchar* const*)")
 
 	return goret
 }
@@ -66031,7 +66031,7 @@ func NewDBusMessageFromBlob(blob []uint8, capabilities DBusCapabilityFlags) (DBu
 	_ = blob
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []uint8 (*C.guchar)")
+	panic("unimplemented conversion of []uint8 (guchar*)")
 	carg3 = C.GDBusCapabilityFlags(capabilities)
 
 	cret = C.g_dbus_message_new_from_blob(carg1, carg2, carg3, &_cerr)
@@ -66156,7 +66156,7 @@ func DBusMessageBytesNeeded(blob []uint8) (int, error) {
 	_ = blob
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []uint8 (*C.guchar)")
+	panic("unimplemented conversion of []uint8 (guchar*)")
 
 	cret = C.g_dbus_message_bytes_needed(carg1, carg2, &_cerr)
 	runtime.KeepAlive(blob)
@@ -66377,7 +66377,7 @@ func (message *DBusMessageInstance) GetHeaderFields() []byte {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []byte (*C.guchar)")
+	panic("unimplemented conversion of []byte (guchar*)")
 
 	return goret
 }
@@ -67019,7 +67019,7 @@ func (message *DBusMessageInstance) ToBlob(capabilities DBusCapabilityFlags) (ui
 	outSize = uint(carg1)
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []byte (*C.guchar)")
+	panic("unimplemented conversion of []byte (guchar*)")
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -69478,7 +69478,7 @@ func (proxy *DBusProxyInstance) GetCachedPropertyNames() []string {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (gchar**)")
 
 	return goret
 }
@@ -72162,7 +72162,7 @@ func UnsafeApplyFileEnumeratorOverrides[Instance FileEnumerator](gclass unsafe.P
 
 				_ = goret
 				_ = cret
-				panic("unimplemented conversion of []FileInfo (*C.GList)")
+				panic("unimplemented conversion of []FileInfo (GList*)")
 				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
 
 				return cret
@@ -73779,7 +73779,7 @@ func (info *FileInfoInstance) GetAttributeStringv(attribute string) []string {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (**C.char)")
+	panic("unimplemented conversion of []string (char**)")
 
 	return goret
 }
@@ -74459,7 +74459,7 @@ func (info *FileInfoInstance) ListAttributes(nameSpace string) []string {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (**C.char)")
+	panic("unimplemented conversion of []string (char**)")
 
 	return goret
 }
@@ -74773,7 +74773,7 @@ func (info *FileInfoInstance) SetAttributeStringv(attribute string, attrValue []
 	defer C.free(unsafe.Pointer(carg1))
 	_ = attrValue
 	_ = carg2
-	panic("unimplemented conversion of []string (**C.char)")
+	panic("unimplemented conversion of []string (char**)")
 
 	C.g_file_info_set_attribute_stringv(carg0, carg1, carg2)
 	runtime.KeepAlive(info)
@@ -75775,7 +75775,7 @@ func (completer *FilenameCompleterInstance) GetCompletions(initialText string) [
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (**C.char)")
+	panic("unimplemented conversion of []string (char**)")
 
 	return goret
 }
@@ -78813,7 +78813,7 @@ func (stream *InputStreamInstance) Read(cancellable context.Context, buffer []by
 	_ = buffer
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []byte (*C.void)")
+	panic("unimplemented conversion of []byte (void*)")
 
 	cret = C.g_input_stream_read(carg0, carg1, carg2, carg3, &_cerr)
 	runtime.KeepAlive(stream)
@@ -78880,7 +78880,7 @@ func (stream *InputStreamInstance) ReadAll(cancellable context.Context, buffer [
 	_ = buffer
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []byte (*C.void)")
+	panic("unimplemented conversion of []byte (void*)")
 
 	cret = C.g_input_stream_read_all(carg0, carg1, carg2, &carg3, carg4, &_cerr)
 	runtime.KeepAlive(stream)
@@ -78939,7 +78939,7 @@ func (stream *InputStreamInstance) ReadAllAsync(cancellable context.Context, buf
 	_ = buffer
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []byte (*C.void)")
+	panic("unimplemented conversion of []byte (void*)")
 	carg3 = C.int(ioPriority)
 	if callback != nil {
 		carg5 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
@@ -79055,7 +79055,7 @@ func (stream *InputStreamInstance) ReadAsync(cancellable context.Context, buffer
 	_ = buffer
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []byte (*C.void)")
+	panic("unimplemented conversion of []byte (void*)")
 	carg3 = C.int(ioPriority)
 	if callback != nil {
 		carg5 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
@@ -83330,7 +83330,7 @@ func UnsafeApplyMountOperationOverrides[Instance MountOperation](gclass unsafe.P
 				message = C.GoString((*C.char)(unsafe.Pointer(carg1)))
 				_ = choices
 				_ = carg2
-				panic("unimplemented conversion of []string (**C.char)")
+				panic("unimplemented conversion of []string (const char**)")
 
 				overrides.AskQuestion(op, message, choices)
 			},
@@ -83442,7 +83442,7 @@ func (op *MountOperationInstance) ParentAskQuestion(message string, choices []st
 	defer C.free(unsafe.Pointer(carg1))
 	_ = choices
 	_ = carg2
-	panic("unimplemented conversion of []string (**C.char)")
+	panic("unimplemented conversion of []string (const char**)")
 
 	C._gotk4_gio2_MountOperation_virtual_ask_question(unsafe.Pointer(parentclass.ask_question), carg0, carg1, carg2)
 	runtime.KeepAlive(op)
@@ -86103,7 +86103,7 @@ func (stream *OutputStreamInstance) Write(cancellable context.Context, buffer []
 	_ = buffer
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []byte (*C.void)")
+	panic("unimplemented conversion of []byte (void*)")
 
 	cret = C.g_output_stream_write(carg0, carg1, carg2, carg3, &_cerr)
 	runtime.KeepAlive(stream)
@@ -86170,7 +86170,7 @@ func (stream *OutputStreamInstance) WriteAll(cancellable context.Context, buffer
 	_ = buffer
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []byte (*C.void)")
+	panic("unimplemented conversion of []byte (void*)")
 
 	cret = C.g_output_stream_write_all(carg0, carg1, carg2, &carg3, carg4, &_cerr)
 	runtime.KeepAlive(stream)
@@ -86233,7 +86233,7 @@ func (stream *OutputStreamInstance) WriteAllAsync(cancellable context.Context, b
 	_ = buffer
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []byte (*C.void)")
+	panic("unimplemented conversion of []byte (void*)")
 	carg3 = C.int(ioPriority)
 	if callback != nil {
 		carg5 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
@@ -86360,7 +86360,7 @@ func (stream *OutputStreamInstance) WriteAsync(cancellable context.Context, buff
 	_ = buffer
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []byte (*C.void)")
+	panic("unimplemented conversion of []byte (void*)")
 	carg3 = C.int(ioPriority)
 	if callback != nil {
 		carg5 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
@@ -86602,7 +86602,7 @@ func (stream *OutputStreamInstance) Writev(cancellable context.Context, vectors 
 	_ = vectors
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []OutputVector (*C.GOutputVector)")
+	panic("unimplemented conversion of []OutputVector (const GOutputVector*)")
 
 	cret = C.g_output_stream_writev(carg0, carg1, carg2, &carg3, carg4, &_cerr)
 	runtime.KeepAlive(stream)
@@ -86676,7 +86676,7 @@ func (stream *OutputStreamInstance) WritevAll(cancellable context.Context, vecto
 	_ = vectors
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []OutputVector (*C.GOutputVector)")
+	panic("unimplemented conversion of []OutputVector (GOutputVector*)")
 
 	cret = C.g_output_stream_writev_all(carg0, carg1, carg2, &carg3, carg4, &_cerr)
 	runtime.KeepAlive(stream)
@@ -86740,7 +86740,7 @@ func (stream *OutputStreamInstance) WritevAllAsync(cancellable context.Context, 
 	_ = vectors
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []OutputVector (*C.GOutputVector)")
+	panic("unimplemented conversion of []OutputVector (GOutputVector*)")
 	carg3 = C.int(ioPriority)
 	if callback != nil {
 		carg5 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
@@ -86862,7 +86862,7 @@ func (stream *OutputStreamInstance) WritevAsync(cancellable context.Context, vec
 	_ = vectors
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []OutputVector (*C.GOutputVector)")
+	panic("unimplemented conversion of []OutputVector (const GOutputVector*)")
 	carg3 = C.int(ioPriority)
 	if callback != nil {
 		carg5 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
@@ -87323,7 +87323,7 @@ func UnsafeApplyOutputStreamOverrides[Instance OutputStream](gclass unsafe.Point
 				_ = buffer
 				_ = carg1
 				_ = carg2
-				panic("unimplemented conversion of []byte (*C.void)")
+				panic("unimplemented conversion of []byte (void*)")
 
 				goret, _goerr = overrides.WriteFn(stream, cancellable, buffer)
 
@@ -87383,7 +87383,7 @@ func UnsafeApplyOutputStreamOverrides[Instance OutputStream](gclass unsafe.Point
 				_ = vectors
 				_ = carg1
 				_ = carg2
-				panic("unimplemented conversion of []OutputVector (*C.GOutputVector)")
+				panic("unimplemented conversion of []OutputVector (const GOutputVector*)")
 
 				bytesWritten, goret, _goerr = overrides.WritevFn(stream, cancellable, vectors)
 
@@ -87742,7 +87742,7 @@ func (stream *OutputStreamInstance) ParentWriteFn(cancellable context.Context, b
 	_ = buffer
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []byte (*C.void)")
+	panic("unimplemented conversion of []byte (void*)")
 
 	cret = C._gotk4_gio2_OutputStream_virtual_write_fn(unsafe.Pointer(parentclass.write_fn), carg0, carg1, carg2, carg3, &_cerr)
 	runtime.KeepAlive(stream)
@@ -87859,7 +87859,7 @@ func (stream *OutputStreamInstance) ParentWritevFn(cancellable context.Context, 
 	_ = vectors
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []OutputVector (*C.GOutputVector)")
+	panic("unimplemented conversion of []OutputVector (const GOutputVector*)")
 
 	cret = C._gotk4_gio2_OutputStream_virtual_writev_fn(unsafe.Pointer(parentclass.writev_fn), carg0, carg1, carg2, &carg3, carg4, &_cerr)
 	runtime.KeepAlive(stream)
@@ -90641,7 +90641,7 @@ func UnsafeApplyResolverOverrides[Instance Resolver](gclass unsafe.Pointer, over
 
 				_ = goret
 				_ = cret
-				panic("unimplemented conversion of []InetAddress (*C.GList)")
+				panic("unimplemented conversion of []InetAddress (GList*)")
 				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
 
 				return cret
@@ -90667,7 +90667,7 @@ func UnsafeApplyResolverOverrides[Instance Resolver](gclass unsafe.Pointer, over
 
 				_ = goret
 				_ = cret
-				panic("unimplemented conversion of []InetAddress (*C.GList)")
+				panic("unimplemented conversion of []InetAddress (GList*)")
 				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
 
 				return cret
@@ -90699,7 +90699,7 @@ func UnsafeApplyResolverOverrides[Instance Resolver](gclass unsafe.Pointer, over
 
 				_ = goret
 				_ = cret
-				panic("unimplemented conversion of []InetAddress (*C.GList)")
+				panic("unimplemented conversion of []InetAddress (GList*)")
 				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
 
 				return cret
@@ -90725,7 +90725,7 @@ func UnsafeApplyResolverOverrides[Instance Resolver](gclass unsafe.Pointer, over
 
 				_ = goret
 				_ = cret
-				panic("unimplemented conversion of []InetAddress (*C.GList)")
+				panic("unimplemented conversion of []InetAddress (GList*)")
 				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
 
 				return cret
@@ -90751,7 +90751,7 @@ func UnsafeApplyResolverOverrides[Instance Resolver](gclass unsafe.Pointer, over
 
 				_ = goret
 				_ = cret
-				panic("unimplemented conversion of []*SrvTarget (*C.GList)")
+				panic("unimplemented conversion of []*SrvTarget (GList*)")
 				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
 
 				return cret
@@ -92249,7 +92249,7 @@ func SettingsListRelocatableSchemas() []string {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (const gchar* const*)")
 
 	return goret
 }
@@ -92275,7 +92275,7 @@ func SettingsListSchemas() []string {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (const gchar* const*)")
 
 	return goret
 }
@@ -92733,7 +92733,7 @@ func (settings *SettingsInstance) GetStrv(key string) []string {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (gchar**)")
 
 	return goret
 }
@@ -92875,7 +92875,7 @@ func (settings *SettingsInstance) ListChildren() []string {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (gchar**)")
 
 	return goret
 }
@@ -92909,7 +92909,7 @@ func (settings *SettingsInstance) ListKeys() []string {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (gchar**)")
 
 	return goret
 }
@@ -93290,7 +93290,7 @@ func (settings *SettingsInstance) SetStrv(key string, value []string) bool {
 	defer C.free(unsafe.Pointer(carg1))
 	_ = value
 	_ = carg2
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (const gchar* const*)")
 
 	cret = C.g_settings_set_strv(carg0, carg1, carg2)
 	runtime.KeepAlive(settings)
@@ -93528,7 +93528,7 @@ func UnsafeApplySettingsOverrides[Instance Settings](gclass unsafe.Pointer, over
 				settings = UnsafeSettingsFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				_ = keys
 				_ = carg1
-				panic("unimplemented conversion of *glib.Quark (*C.GQuark)")
+				panic("unimplemented conversion of *glib.Quark (const GQuark*)")
 				nKeys = int32(carg2)
 
 				goret = overrides.ChangeEvent(settings, keys, nKeys)
@@ -93622,7 +93622,7 @@ func (settings *SettingsInstance) ParentChangeEvent(keys *glib.Quark, nKeys int3
 
 	_ = keys
 	_ = carg1
-	panic("unimplemented conversion of *glib.Quark (*C.GQuark)")
+	panic("unimplemented conversion of *glib.Quark (const GQuark*)")
 	carg2 = C.gint(nKeys)
 
 	cret = C._gotk4_gio2_Settings_virtual_change_event(unsafe.Pointer(parentclass.change_event), carg0, carg1, carg2)
@@ -95099,7 +95099,7 @@ func NewSimpleProxyResolver(defaultProxy string, ignoreHosts []string) ProxyReso
 	}
 	_ = ignoreHosts
 	_ = carg2
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (gchar**)")
 
 	cret = C.g_simple_proxy_resolver_new(carg1, carg2)
 	runtime.KeepAlive(defaultProxy)
@@ -95158,7 +95158,7 @@ func (resolver *SimpleProxyResolverInstance) SetIgnoreHosts(ignoreHosts []string
 	carg0 = (*C.GSimpleProxyResolver)(UnsafeSimpleProxyResolverToGlibNone(resolver))
 	_ = ignoreHosts
 	_ = carg1
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (gchar**)")
 
 	C.g_simple_proxy_resolver_set_ignore_hosts(carg0, carg1)
 	runtime.KeepAlive(resolver)
@@ -97957,7 +97957,7 @@ func (socket *SocketInstance) Receive(cancellable context.Context, buffer string
 	_ = buffer
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of string (*C.gchar)")
+	panic("unimplemented conversion of string (gchar*)")
 
 	cret = C.g_socket_receive(carg0, carg1, carg2, carg3, &_cerr)
 	runtime.KeepAlive(socket)
@@ -98132,7 +98132,7 @@ func (socket *SocketInstance) ReceiveFrom(cancellable context.Context, buffer st
 	_ = buffer
 	_ = carg2
 	_ = carg3
-	panic("unimplemented conversion of string (*C.gchar)")
+	panic("unimplemented conversion of string (gchar*)")
 
 	cret = C.g_socket_receive_from(carg0, &carg1, carg2, carg3, carg4, &_cerr)
 	runtime.KeepAlive(socket)
@@ -98231,7 +98231,7 @@ func (socket *SocketInstance) ReceiveMessages(cancellable context.Context, messa
 	_ = messages
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []InputMessage (*C.GInputMessage)")
+	panic("unimplemented conversion of []InputMessage (GInputMessage*)")
 	carg3 = C.gint(flags)
 
 	cret = C.g_socket_receive_messages(carg0, carg1, carg2, carg3, carg4, &_cerr)
@@ -98284,7 +98284,7 @@ func (socket *SocketInstance) ReceiveWithBlocking(cancellable context.Context, b
 	_ = buffer
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of string (*C.gchar)")
+	panic("unimplemented conversion of string (gchar*)")
 	if blocking {
 		carg3 = C.TRUE
 	}
@@ -98348,7 +98348,7 @@ func (socket *SocketInstance) Send(cancellable context.Context, buffer string) (
 	_ = buffer
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of string (*C.gchar)")
+	panic("unimplemented conversion of string (const gchar*)")
 
 	cret = C.g_socket_send(carg0, carg1, carg2, carg3, &_cerr)
 	runtime.KeepAlive(socket)
@@ -98447,11 +98447,11 @@ func (socket *SocketInstance) SendMessage(cancellable context.Context, address S
 	_ = vectors
 	_ = carg2
 	_ = carg3
-	panic("unimplemented conversion of []OutputVector (*C.GOutputVector)")
+	panic("unimplemented conversion of []OutputVector (GOutputVector*)")
 	_ = messages
 	_ = carg4
 	_ = carg5
-	panic("unimplemented conversion of []SocketControlMessage (**C.GSocketControlMessage)")
+	panic("unimplemented conversion of []SocketControlMessage (GSocketControlMessage**)")
 	carg6 = C.gint(flags)
 
 	cret = C.g_socket_send_message(carg0, carg1, carg2, carg3, carg4, carg5, carg6, carg7, &_cerr)
@@ -98523,11 +98523,11 @@ func (socket *SocketInstance) SendMessageWithTimeout(cancellable context.Context
 	_ = vectors
 	_ = carg2
 	_ = carg3
-	panic("unimplemented conversion of []OutputVector (*C.GOutputVector)")
+	panic("unimplemented conversion of []OutputVector (const GOutputVector*)")
 	_ = messages
 	_ = carg4
 	_ = carg5
-	panic("unimplemented conversion of []SocketControlMessage (**C.GSocketControlMessage)")
+	panic("unimplemented conversion of []SocketControlMessage (GSocketControlMessage**)")
 	carg6 = C.gint(flags)
 	carg7 = C.gint64(timeoutUs)
 
@@ -98617,7 +98617,7 @@ func (socket *SocketInstance) SendMessages(cancellable context.Context, messages
 	_ = messages
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []OutputMessage (*C.GOutputMessage)")
+	panic("unimplemented conversion of []OutputMessage (GOutputMessage*)")
 	carg3 = C.gint(flags)
 
 	cret = C.g_socket_send_messages(carg0, carg1, carg2, carg3, carg4, &_cerr)
@@ -98675,7 +98675,7 @@ func (socket *SocketInstance) SendTo(cancellable context.Context, address Socket
 	_ = buffer
 	_ = carg2
 	_ = carg3
-	panic("unimplemented conversion of string (*C.gchar)")
+	panic("unimplemented conversion of string (const gchar*)")
 
 	cret = C.g_socket_send_to(carg0, carg1, carg2, carg3, carg4, &_cerr)
 	runtime.KeepAlive(socket)
@@ -98727,7 +98727,7 @@ func (socket *SocketInstance) SendWithBlocking(cancellable context.Context, buff
 	_ = buffer
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of string (*C.gchar)")
+	panic("unimplemented conversion of string (const gchar*)")
 	if blocking {
 		carg3 = C.TRUE
 	}
@@ -105394,7 +105394,7 @@ func (task *TaskInstance) PropagateValue() (gobject.Value, bool, error) {
 
 	_ = value
 	_ = carg1
-	panic("unimplemented conversion of gobject.Value (C.GValue)")
+	panic("unimplemented conversion of gobject.Value (GValue)")
 	if cret != 0 {
 		goret = true
 	}
@@ -106594,7 +106594,7 @@ func NewThemedIconFromNames(iconnames []string) ThemedIcon {
 	_ = iconnames
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []string (**C.char)")
+	panic("unimplemented conversion of []string (char**)")
 
 	cret = C.g_themed_icon_new_from_names(carg1, carg2)
 	runtime.KeepAlive(iconnames)
@@ -106691,7 +106691,7 @@ func (icon *ThemedIconInstance) GetNames() []string {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (const gchar* const*)")
 
 	return goret
 }
@@ -107476,7 +107476,7 @@ func NewTlsCertificateFromPKCS12(data []uint8, password string) (TlsCertificate,
 	_ = data
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []uint8 (*C.guint8)")
+	panic("unimplemented conversion of []uint8 (const guint8*)")
 	if password != "" {
 		carg3 = (*C.gchar)(unsafe.Pointer(C.CString(password)))
 		defer C.free(unsafe.Pointer(carg3))
@@ -109017,7 +109017,7 @@ func (conn *TlsConnectionInstance) SetAdvertisedProtocols(protocols []string) {
 	carg0 = (*C.GTlsConnection)(UnsafeTlsConnectionToGlibNone(conn))
 	_ = protocols
 	_ = carg1
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (const gchar* const*)")
 
 	C.g_tls_connection_set_advertised_protocols(carg0, carg1)
 	runtime.KeepAlive(conn)
@@ -111260,7 +111260,7 @@ func UnsafeApplyTlsDatabaseOverrides[Instance TlsDatabase](gclass unsafe.Pointer
 
 				_ = goret
 				_ = cret
-				panic("unimplemented conversion of []TlsCertificate (*C.GList)")
+				panic("unimplemented conversion of []TlsCertificate (GList*)")
 				*_cerr = (*C.GError)(glib.UnsafeErrorToGlibFull(_goerr))
 
 				return cret
@@ -113376,10 +113376,10 @@ func (password *TlsPasswordInstance) GetValue() (uint, []byte) {
 
 	_ = length
 	_ = carg1
-	panic("unimplemented conversion of uint (C.gsize)")
+	panic("unimplemented conversion of uint (gsize)")
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []byte (*C.guchar)")
+	panic("unimplemented conversion of []byte (const guchar*)")
 
 	return length, goret
 }
@@ -113470,7 +113470,7 @@ func (password *TlsPasswordInstance) SetValue(value []byte) {
 	_ = value
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []byte (*C.guchar)")
+	panic("unimplemented conversion of []byte (const guchar*)")
 
 	C.g_tls_password_set_value(carg0, carg1, carg2)
 	runtime.KeepAlive(password)
@@ -113573,10 +113573,10 @@ func UnsafeApplyTlsPasswordOverrides[Instance TlsPassword](gclass unsafe.Pointer
 
 				_ = length
 				_ = carg1
-				panic("unimplemented conversion of uint (C.gsize)")
+				panic("unimplemented conversion of uint (gsize)")
 				_ = goret
 				_ = cret
-				panic("unimplemented conversion of []byte (*C.guchar)")
+				panic("unimplemented conversion of []byte (const guchar*)")
 
 				return cret
 			},
@@ -113637,10 +113637,10 @@ func (password *TlsPasswordInstance) ParentGetValue() (uint, []byte) {
 
 	_ = length
 	_ = carg1
-	panic("unimplemented conversion of uint (C.gsize)")
+	panic("unimplemented conversion of uint (gsize)")
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []byte (*C.guchar)")
+	panic("unimplemented conversion of []byte (const guchar*)")
 
 	return length, goret
 }
@@ -114058,7 +114058,7 @@ func (vfs *VfsInstance) GetSupportedURISchemes() []string {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (const gchar* const*)")
 
 	return goret
 }
@@ -114409,7 +114409,7 @@ func UnsafeApplyVfsOverrides[Instance Vfs](gclass unsafe.Pointer, overrides VfsO
 
 				_ = goret
 				_ = cret
-				panic("unimplemented conversion of []string (**C.gchar)")
+				panic("unimplemented conversion of []string (const gchar* const*)")
 
 				return cret
 			},
@@ -114641,7 +114641,7 @@ func (vfs *VfsInstance) ParentGetSupportedURISchemes() []string {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (const gchar* const*)")
 
 	return goret
 }
@@ -115729,7 +115729,7 @@ func UnsafeApplyVolumeMonitorOverrides[Instance VolumeMonitor](gclass unsafe.Poi
 
 				_ = goret
 				_ = cret
-				panic("unimplemented conversion of []Drive (*C.GList)")
+				panic("unimplemented conversion of []Drive (GList*)")
 
 				return cret
 			},
@@ -115775,7 +115775,7 @@ func UnsafeApplyVolumeMonitorOverrides[Instance VolumeMonitor](gclass unsafe.Poi
 
 				_ = goret
 				_ = cret
-				panic("unimplemented conversion of []Mount (*C.GList)")
+				panic("unimplemented conversion of []Mount (GList*)")
 
 				return cret
 			},
@@ -115821,7 +115821,7 @@ func UnsafeApplyVolumeMonitorOverrides[Instance VolumeMonitor](gclass unsafe.Poi
 
 				_ = goret
 				_ = cret
-				panic("unimplemented conversion of []Volume (*C.GList)")
+				panic("unimplemented conversion of []Volume (GList*)")
 
 				return cret
 			},
@@ -122604,7 +122604,7 @@ func (stream *BufferedInputStreamInstance) Peek(buffer []byte, offset uint) uint
 	_ = buffer
 	_ = carg1
 	_ = carg3
-	panic("unimplemented conversion of []byte (*C.void)")
+	panic("unimplemented conversion of []byte (void*)")
 	carg2 = C.gsize(offset)
 
 	cret = C.g_buffered_input_stream_peek(carg0, carg1, carg2, carg3)
@@ -122645,7 +122645,7 @@ func (stream *BufferedInputStreamInstance) PeekBuffer() (uint, []byte) {
 	count = uint(carg1)
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []byte (*C.void)")
+	panic("unimplemented conversion of []byte (void*)")
 
 	return count, goret
 }
@@ -124321,7 +124321,7 @@ func (stream *DataInputStreamInstance) ReadLine(cancellable context.Context) (ui
 	length = uint(carg1)
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of string (*C.char)")
+	panic("unimplemented conversion of string (char*)")
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -124404,7 +124404,7 @@ func (stream *DataInputStreamInstance) ReadLineFinish(result AsyncResult) (uint,
 	length = uint(carg2)
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of string (*C.char)")
+	panic("unimplemented conversion of string (char*)")
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -126739,7 +126739,7 @@ func DBusAnnotationInfoLookup(annotations []*DBusAnnotationInfo, name string) st
 
 	_ = annotations
 	_ = carg1
-	panic("unimplemented conversion of []*DBusAnnotationInfo (**C.GDBusAnnotationInfo)")
+	panic("unimplemented conversion of []*DBusAnnotationInfo (GDBusAnnotationInfo**)")
 	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
 	defer C.free(unsafe.Pointer(carg2))
 
@@ -132819,7 +132819,7 @@ func (resource *Resource) EnumerateChildren(path string, lookupFlags ResourceLoo
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (**C.char)")
+	panic("unimplemented conversion of []string (char**)")
 	if _cerr != nil {
 		_goerr = glib.UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -133402,7 +133402,7 @@ func (schema *SettingsSchema) ListChildren() []string {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (gchar**)")
 
 	return goret
 }
@@ -133431,7 +133431,7 @@ func (schema *SettingsSchema) ListKeys() []string {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (**C.gchar)")
+	panic("unimplemented conversion of []string (gchar**)")
 
 	return goret
 }

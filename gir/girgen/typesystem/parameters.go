@@ -124,8 +124,8 @@ func (p *Param) GoType() string {
 }
 
 func (p *Param) CType() string {
-	if p.GirCGoType != "" {
-		return p.GirCGoType
+	if p.GirCType != "" {
+		return p.GirCType
 	}
 
 	return p.Type.Type.CType(p.CTypePointers)

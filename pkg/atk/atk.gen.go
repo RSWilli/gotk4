@@ -16,581 +16,581 @@ import (
 // #cgo pkg-config: atk
 // #cgo CFLAGS: -Wno-deprecated-declarations
 // #include <atk/atk.h>
-// extern C.gboolean _gotk4_atk1_Action_do_action(*C.AtkAction, C.gint);
-// extern *C.gchar _gotk4_atk1_Action_get_description(*C.AtkAction, C.gint);
-// extern *C.gchar _gotk4_atk1_Action_get_keybinding(*C.AtkAction, C.gint);
-// extern *C.gchar _gotk4_atk1_Action_get_localized_name(*C.AtkAction, C.gint);
-// extern C.gint _gotk4_atk1_Action_get_n_actions(*C.AtkAction);
-// extern *C.gchar _gotk4_atk1_Action_get_name(*C.AtkAction, C.gint);
-// extern C.gboolean _gotk4_atk1_Action_set_description(*C.AtkAction, C.gint, *C.gchar);
-// C.gboolean _gotk4_atk1_Action_virtual_do_action(void* fnptr, *C.AtkAction carg0, C.gint carg1) {
-// 	return ((C.gboolean (*) (*C.AtkAction, C.gint))(fnptr))(carg0, carg1);
-// }
-// *C.gchar _gotk4_atk1_Action_virtual_get_description(void* fnptr, *C.AtkAction carg0, C.gint carg1) {
-// 	return ((*C.gchar (*) (*C.AtkAction, C.gint))(fnptr))(carg0, carg1);
-// }
-// *C.gchar _gotk4_atk1_Action_virtual_get_keybinding(void* fnptr, *C.AtkAction carg0, C.gint carg1) {
-// 	return ((*C.gchar (*) (*C.AtkAction, C.gint))(fnptr))(carg0, carg1);
-// }
-// *C.gchar _gotk4_atk1_Action_virtual_get_localized_name(void* fnptr, *C.AtkAction carg0, C.gint carg1) {
-// 	return ((*C.gchar (*) (*C.AtkAction, C.gint))(fnptr))(carg0, carg1);
-// }
-// C.gint _gotk4_atk1_Action_virtual_get_n_actions(void* fnptr, *C.AtkAction carg0) {
-// 	return ((C.gint (*) (*C.AtkAction))(fnptr))(carg0);
-// }
-// *C.gchar _gotk4_atk1_Action_virtual_get_name(void* fnptr, *C.AtkAction carg0, C.gint carg1) {
-// 	return ((*C.gchar (*) (*C.AtkAction, C.gint))(fnptr))(carg0, carg1);
+// extern gboolean _gotk4_atk1_Action_do_action(AtkAction*, gint);
+// extern const gchar* _gotk4_atk1_Action_get_description(AtkAction*, gint);
+// extern const gchar* _gotk4_atk1_Action_get_keybinding(AtkAction*, gint);
+// extern const gchar* _gotk4_atk1_Action_get_localized_name(AtkAction*, gint);
+// extern gint _gotk4_atk1_Action_get_n_actions(AtkAction*);
+// extern const gchar* _gotk4_atk1_Action_get_name(AtkAction*, gint);
+// extern gboolean _gotk4_atk1_Action_set_description(AtkAction*, gint, const gchar*);
+// gboolean _gotk4_atk1_Action_virtual_do_action(void* fnptr, AtkAction* carg0, gint carg1) {
+// 	return ((gboolean (*) (AtkAction*, gint))(fnptr))(carg0, carg1);
+// }
+// const gchar* _gotk4_atk1_Action_virtual_get_description(void* fnptr, AtkAction* carg0, gint carg1) {
+// 	return ((const gchar* (*) (AtkAction*, gint))(fnptr))(carg0, carg1);
+// }
+// const gchar* _gotk4_atk1_Action_virtual_get_keybinding(void* fnptr, AtkAction* carg0, gint carg1) {
+// 	return ((const gchar* (*) (AtkAction*, gint))(fnptr))(carg0, carg1);
+// }
+// const gchar* _gotk4_atk1_Action_virtual_get_localized_name(void* fnptr, AtkAction* carg0, gint carg1) {
+// 	return ((const gchar* (*) (AtkAction*, gint))(fnptr))(carg0, carg1);
+// }
+// gint _gotk4_atk1_Action_virtual_get_n_actions(void* fnptr, AtkAction* carg0) {
+// 	return ((gint (*) (AtkAction*))(fnptr))(carg0);
+// }
+// const gchar* _gotk4_atk1_Action_virtual_get_name(void* fnptr, AtkAction* carg0, gint carg1) {
+// 	return ((const gchar* (*) (AtkAction*, gint))(fnptr))(carg0, carg1);
 // }
-// C.gboolean _gotk4_atk1_Action_virtual_set_description(void* fnptr, *C.AtkAction carg0, C.gint carg1, *C.gchar carg2) {
-// 	return ((C.gboolean (*) (*C.AtkAction, C.gint, *C.gchar))(fnptr))(carg0, carg1, carg2);
-// }
-// extern C.void _gotk4_atk1_Component_bounds_changed(*C.AtkComponent, *C.AtkRectangle);
-// extern C.gboolean _gotk4_atk1_Component_contains(*C.AtkComponent, C.gint, C.gint, C.AtkCoordType);
-// extern C.gdouble _gotk4_atk1_Component_get_alpha(*C.AtkComponent);
-// extern C.void _gotk4_atk1_Component_get_extents(*C.AtkComponent, C.gint, C.gint, C.gint, C.gint, C.AtkCoordType);
-// extern C.AtkLayer _gotk4_atk1_Component_get_layer(*C.AtkComponent);
-// extern C.gint _gotk4_atk1_Component_get_mdi_zorder(*C.AtkComponent);
-// extern C.gboolean _gotk4_atk1_Component_grab_focus(*C.AtkComponent);
-// extern *C.AtkObject _gotk4_atk1_Component_ref_accessible_at_point(*C.AtkComponent, C.gint, C.gint, C.AtkCoordType);
-// extern C.gboolean _gotk4_atk1_Component_scroll_to(*C.AtkComponent, C.AtkScrollType);
-// extern C.gboolean _gotk4_atk1_Component_scroll_to_point(*C.AtkComponent, C.AtkCoordType, C.gint, C.gint);
-// extern C.gboolean _gotk4_atk1_Component_set_extents(*C.AtkComponent, C.gint, C.gint, C.gint, C.gint, C.AtkCoordType);
-// extern C.gboolean _gotk4_atk1_Component_set_position(*C.AtkComponent, C.gint, C.gint, C.AtkCoordType);
-// extern C.gboolean _gotk4_atk1_Component_set_size(*C.AtkComponent, C.gint, C.gint);
-// C.void _gotk4_atk1_Component_virtual_bounds_changed(void* fnptr, *C.AtkComponent carg0, *C.AtkRectangle carg1) {
-// 	return ((C.void (*) (*C.AtkComponent, *C.AtkRectangle))(fnptr))(carg0, carg1);
-// }
-// C.gboolean _gotk4_atk1_Component_virtual_contains(void* fnptr, *C.AtkComponent carg0, C.gint carg1, C.gint carg2, C.AtkCoordType carg3) {
-// 	return ((C.gboolean (*) (*C.AtkComponent, C.gint, C.gint, C.AtkCoordType))(fnptr))(carg0, carg1, carg2, carg3);
-// }
-// C.gdouble _gotk4_atk1_Component_virtual_get_alpha(void* fnptr, *C.AtkComponent carg0) {
-// 	return ((C.gdouble (*) (*C.AtkComponent))(fnptr))(carg0);
-// }
-// C.void _gotk4_atk1_Component_virtual_get_extents(void* fnptr, *C.AtkComponent carg0, C.gint* carg1, C.gint* carg2, C.gint* carg3, C.gint* carg4, C.AtkCoordType carg5) {
-// 	return ((C.void (*) (*C.AtkComponent, C.gint*, C.gint*, C.gint*, C.gint*, C.AtkCoordType))(fnptr))(carg0, carg1, carg2, carg3, carg4, carg5);
-// }
-// C.AtkLayer _gotk4_atk1_Component_virtual_get_layer(void* fnptr, *C.AtkComponent carg0) {
-// 	return ((C.AtkLayer (*) (*C.AtkComponent))(fnptr))(carg0);
-// }
-// C.gint _gotk4_atk1_Component_virtual_get_mdi_zorder(void* fnptr, *C.AtkComponent carg0) {
-// 	return ((C.gint (*) (*C.AtkComponent))(fnptr))(carg0);
-// }
-// C.gboolean _gotk4_atk1_Component_virtual_grab_focus(void* fnptr, *C.AtkComponent carg0) {
-// 	return ((C.gboolean (*) (*C.AtkComponent))(fnptr))(carg0);
-// }
-// *C.AtkObject _gotk4_atk1_Component_virtual_ref_accessible_at_point(void* fnptr, *C.AtkComponent carg0, C.gint carg1, C.gint carg2, C.AtkCoordType carg3) {
-// 	return ((*C.AtkObject (*) (*C.AtkComponent, C.gint, C.gint, C.AtkCoordType))(fnptr))(carg0, carg1, carg2, carg3);
-// }
-// C.gboolean _gotk4_atk1_Component_virtual_scroll_to(void* fnptr, *C.AtkComponent carg0, C.AtkScrollType carg1) {
-// 	return ((C.gboolean (*) (*C.AtkComponent, C.AtkScrollType))(fnptr))(carg0, carg1);
-// }
-// C.gboolean _gotk4_atk1_Component_virtual_scroll_to_point(void* fnptr, *C.AtkComponent carg0, C.AtkCoordType carg1, C.gint carg2, C.gint carg3) {
-// 	return ((C.gboolean (*) (*C.AtkComponent, C.AtkCoordType, C.gint, C.gint))(fnptr))(carg0, carg1, carg2, carg3);
-// }
-// C.gboolean _gotk4_atk1_Component_virtual_set_extents(void* fnptr, *C.AtkComponent carg0, C.gint carg1, C.gint carg2, C.gint carg3, C.gint carg4, C.AtkCoordType carg5) {
-// 	return ((C.gboolean (*) (*C.AtkComponent, C.gint, C.gint, C.gint, C.gint, C.AtkCoordType))(fnptr))(carg0, carg1, carg2, carg3, carg4, carg5);
-// }
-// C.gboolean _gotk4_atk1_Component_virtual_set_position(void* fnptr, *C.AtkComponent carg0, C.gint carg1, C.gint carg2, C.AtkCoordType carg3) {
-// 	return ((C.gboolean (*) (*C.AtkComponent, C.gint, C.gint, C.AtkCoordType))(fnptr))(carg0, carg1, carg2, carg3);
-// }
-// C.gboolean _gotk4_atk1_Component_virtual_set_size(void* fnptr, *C.AtkComponent carg0, C.gint carg1, C.gint carg2) {
-// 	return ((C.gboolean (*) (*C.AtkComponent, C.gint, C.gint))(fnptr))(carg0, carg1, carg2);
-// }
-// extern C.gint _gotk4_atk1_Document_get_current_page_number(*C.AtkDocument);
-// extern *C.gchar _gotk4_atk1_Document_get_document_attribute_value(*C.AtkDocument, *C.gchar);
-// extern C.gint _gotk4_atk1_Document_get_page_count(*C.AtkDocument);
-// extern C.gboolean _gotk4_atk1_Document_set_document_attribute(*C.AtkDocument, *C.gchar, *C.gchar);
-// C.gint _gotk4_atk1_Document_virtual_get_current_page_number(void* fnptr, *C.AtkDocument carg0) {
-// 	return ((C.gint (*) (*C.AtkDocument))(fnptr))(carg0);
-// }
-// *C.gchar _gotk4_atk1_Document_virtual_get_document_attribute_value(void* fnptr, *C.AtkDocument carg0, *C.gchar carg1) {
-// 	return ((*C.gchar (*) (*C.AtkDocument, *C.gchar))(fnptr))(carg0, carg1);
-// }
-// C.gint _gotk4_atk1_Document_virtual_get_page_count(void* fnptr, *C.AtkDocument carg0) {
-// 	return ((C.gint (*) (*C.AtkDocument))(fnptr))(carg0);
+// gboolean _gotk4_atk1_Action_virtual_set_description(void* fnptr, AtkAction* carg0, gint carg1, const gchar* carg2) {
+// 	return ((gboolean (*) (AtkAction*, gint, const gchar*))(fnptr))(carg0, carg1, carg2);
+// }
+// extern void _gotk4_atk1_Component_bounds_changed(AtkComponent*, AtkRectangle*);
+// extern gboolean _gotk4_atk1_Component_contains(AtkComponent*, gint, gint, AtkCoordType);
+// extern gdouble _gotk4_atk1_Component_get_alpha(AtkComponent*);
+// extern void _gotk4_atk1_Component_get_extents(AtkComponent*, gint, gint, gint, gint, AtkCoordType);
+// extern AtkLayer _gotk4_atk1_Component_get_layer(AtkComponent*);
+// extern gint _gotk4_atk1_Component_get_mdi_zorder(AtkComponent*);
+// extern gboolean _gotk4_atk1_Component_grab_focus(AtkComponent*);
+// extern AtkObject* _gotk4_atk1_Component_ref_accessible_at_point(AtkComponent*, gint, gint, AtkCoordType);
+// extern gboolean _gotk4_atk1_Component_scroll_to(AtkComponent*, AtkScrollType);
+// extern gboolean _gotk4_atk1_Component_scroll_to_point(AtkComponent*, AtkCoordType, gint, gint);
+// extern gboolean _gotk4_atk1_Component_set_extents(AtkComponent*, gint, gint, gint, gint, AtkCoordType);
+// extern gboolean _gotk4_atk1_Component_set_position(AtkComponent*, gint, gint, AtkCoordType);
+// extern gboolean _gotk4_atk1_Component_set_size(AtkComponent*, gint, gint);
+// void _gotk4_atk1_Component_virtual_bounds_changed(void* fnptr, AtkComponent* carg0, AtkRectangle* carg1) {
+// 	return ((void (*) (AtkComponent*, AtkRectangle*))(fnptr))(carg0, carg1);
+// }
+// gboolean _gotk4_atk1_Component_virtual_contains(void* fnptr, AtkComponent* carg0, gint carg1, gint carg2, AtkCoordType carg3) {
+// 	return ((gboolean (*) (AtkComponent*, gint, gint, AtkCoordType))(fnptr))(carg0, carg1, carg2, carg3);
+// }
+// gdouble _gotk4_atk1_Component_virtual_get_alpha(void* fnptr, AtkComponent* carg0) {
+// 	return ((gdouble (*) (AtkComponent*))(fnptr))(carg0);
+// }
+// void _gotk4_atk1_Component_virtual_get_extents(void* fnptr, AtkComponent* carg0, gint* carg1, gint* carg2, gint* carg3, gint* carg4, AtkCoordType carg5) {
+// 	return ((void (*) (AtkComponent*, gint*, gint*, gint*, gint*, AtkCoordType))(fnptr))(carg0, carg1, carg2, carg3, carg4, carg5);
+// }
+// AtkLayer _gotk4_atk1_Component_virtual_get_layer(void* fnptr, AtkComponent* carg0) {
+// 	return ((AtkLayer (*) (AtkComponent*))(fnptr))(carg0);
+// }
+// gint _gotk4_atk1_Component_virtual_get_mdi_zorder(void* fnptr, AtkComponent* carg0) {
+// 	return ((gint (*) (AtkComponent*))(fnptr))(carg0);
+// }
+// gboolean _gotk4_atk1_Component_virtual_grab_focus(void* fnptr, AtkComponent* carg0) {
+// 	return ((gboolean (*) (AtkComponent*))(fnptr))(carg0);
+// }
+// AtkObject* _gotk4_atk1_Component_virtual_ref_accessible_at_point(void* fnptr, AtkComponent* carg0, gint carg1, gint carg2, AtkCoordType carg3) {
+// 	return ((AtkObject* (*) (AtkComponent*, gint, gint, AtkCoordType))(fnptr))(carg0, carg1, carg2, carg3);
+// }
+// gboolean _gotk4_atk1_Component_virtual_scroll_to(void* fnptr, AtkComponent* carg0, AtkScrollType carg1) {
+// 	return ((gboolean (*) (AtkComponent*, AtkScrollType))(fnptr))(carg0, carg1);
+// }
+// gboolean _gotk4_atk1_Component_virtual_scroll_to_point(void* fnptr, AtkComponent* carg0, AtkCoordType carg1, gint carg2, gint carg3) {
+// 	return ((gboolean (*) (AtkComponent*, AtkCoordType, gint, gint))(fnptr))(carg0, carg1, carg2, carg3);
+// }
+// gboolean _gotk4_atk1_Component_virtual_set_extents(void* fnptr, AtkComponent* carg0, gint carg1, gint carg2, gint carg3, gint carg4, AtkCoordType carg5) {
+// 	return ((gboolean (*) (AtkComponent*, gint, gint, gint, gint, AtkCoordType))(fnptr))(carg0, carg1, carg2, carg3, carg4, carg5);
+// }
+// gboolean _gotk4_atk1_Component_virtual_set_position(void* fnptr, AtkComponent* carg0, gint carg1, gint carg2, AtkCoordType carg3) {
+// 	return ((gboolean (*) (AtkComponent*, gint, gint, AtkCoordType))(fnptr))(carg0, carg1, carg2, carg3);
+// }
+// gboolean _gotk4_atk1_Component_virtual_set_size(void* fnptr, AtkComponent* carg0, gint carg1, gint carg2) {
+// 	return ((gboolean (*) (AtkComponent*, gint, gint))(fnptr))(carg0, carg1, carg2);
+// }
+// extern gint _gotk4_atk1_Document_get_current_page_number(AtkDocument*);
+// extern const gchar* _gotk4_atk1_Document_get_document_attribute_value(AtkDocument*, const gchar*);
+// extern gint _gotk4_atk1_Document_get_page_count(AtkDocument*);
+// extern gboolean _gotk4_atk1_Document_set_document_attribute(AtkDocument*, const gchar*, const gchar*);
+// gint _gotk4_atk1_Document_virtual_get_current_page_number(void* fnptr, AtkDocument* carg0) {
+// 	return ((gint (*) (AtkDocument*))(fnptr))(carg0);
+// }
+// const gchar* _gotk4_atk1_Document_virtual_get_document_attribute_value(void* fnptr, AtkDocument* carg0, const gchar* carg1) {
+// 	return ((const gchar* (*) (AtkDocument*, const gchar*))(fnptr))(carg0, carg1);
+// }
+// gint _gotk4_atk1_Document_virtual_get_page_count(void* fnptr, AtkDocument* carg0) {
+// 	return ((gint (*) (AtkDocument*))(fnptr))(carg0);
 // }
-// C.gboolean _gotk4_atk1_Document_virtual_set_document_attribute(void* fnptr, *C.AtkDocument carg0, *C.gchar carg1, *C.gchar carg2) {
-// 	return ((C.gboolean (*) (*C.AtkDocument, *C.gchar, *C.gchar))(fnptr))(carg0, carg1, carg2);
-// }
-// extern C.void _gotk4_atk1_EditableText_copy_text(*C.AtkEditableText, C.gint, C.gint);
-// extern C.void _gotk4_atk1_EditableText_cut_text(*C.AtkEditableText, C.gint, C.gint);
-// extern C.void _gotk4_atk1_EditableText_delete_text(*C.AtkEditableText, C.gint, C.gint);
-// extern C.void _gotk4_atk1_EditableText_insert_text(*C.AtkEditableText, *C.gchar, C.gint, *C.gint);
-// extern C.void _gotk4_atk1_EditableText_paste_text(*C.AtkEditableText, C.gint);
-// extern C.void _gotk4_atk1_EditableText_set_text_contents(*C.AtkEditableText, *C.gchar);
-// C.void _gotk4_atk1_EditableText_virtual_copy_text(void* fnptr, *C.AtkEditableText carg0, C.gint carg1, C.gint carg2) {
-// 	return ((C.void (*) (*C.AtkEditableText, C.gint, C.gint))(fnptr))(carg0, carg1, carg2);
+// gboolean _gotk4_atk1_Document_virtual_set_document_attribute(void* fnptr, AtkDocument* carg0, const gchar* carg1, const gchar* carg2) {
+// 	return ((gboolean (*) (AtkDocument*, const gchar*, const gchar*))(fnptr))(carg0, carg1, carg2);
+// }
+// extern void _gotk4_atk1_EditableText_copy_text(AtkEditableText*, gint, gint);
+// extern void _gotk4_atk1_EditableText_cut_text(AtkEditableText*, gint, gint);
+// extern void _gotk4_atk1_EditableText_delete_text(AtkEditableText*, gint, gint);
+// extern void _gotk4_atk1_EditableText_insert_text(AtkEditableText*, const gchar*, gint, gint*);
+// extern void _gotk4_atk1_EditableText_paste_text(AtkEditableText*, gint);
+// extern void _gotk4_atk1_EditableText_set_text_contents(AtkEditableText*, const gchar*);
+// void _gotk4_atk1_EditableText_virtual_copy_text(void* fnptr, AtkEditableText* carg0, gint carg1, gint carg2) {
+// 	return ((void (*) (AtkEditableText*, gint, gint))(fnptr))(carg0, carg1, carg2);
 // }
-// C.void _gotk4_atk1_EditableText_virtual_cut_text(void* fnptr, *C.AtkEditableText carg0, C.gint carg1, C.gint carg2) {
-// 	return ((C.void (*) (*C.AtkEditableText, C.gint, C.gint))(fnptr))(carg0, carg1, carg2);
+// void _gotk4_atk1_EditableText_virtual_cut_text(void* fnptr, AtkEditableText* carg0, gint carg1, gint carg2) {
+// 	return ((void (*) (AtkEditableText*, gint, gint))(fnptr))(carg0, carg1, carg2);
 // }
-// C.void _gotk4_atk1_EditableText_virtual_delete_text(void* fnptr, *C.AtkEditableText carg0, C.gint carg1, C.gint carg2) {
-// 	return ((C.void (*) (*C.AtkEditableText, C.gint, C.gint))(fnptr))(carg0, carg1, carg2);
+// void _gotk4_atk1_EditableText_virtual_delete_text(void* fnptr, AtkEditableText* carg0, gint carg1, gint carg2) {
+// 	return ((void (*) (AtkEditableText*, gint, gint))(fnptr))(carg0, carg1, carg2);
 // }
-// C.void _gotk4_atk1_EditableText_virtual_insert_text(void* fnptr, *C.AtkEditableText carg0, *C.gchar carg1, C.gint carg2, *C.gint carg3) {
-// 	return ((C.void (*) (*C.AtkEditableText, *C.gchar, C.gint, *C.gint))(fnptr))(carg0, carg1, carg2, carg3);
-// }
-// C.void _gotk4_atk1_EditableText_virtual_paste_text(void* fnptr, *C.AtkEditableText carg0, C.gint carg1) {
-// 	return ((C.void (*) (*C.AtkEditableText, C.gint))(fnptr))(carg0, carg1);
-// }
-// C.void _gotk4_atk1_EditableText_virtual_set_text_contents(void* fnptr, *C.AtkEditableText carg0, *C.gchar carg1) {
-// 	return ((C.void (*) (*C.AtkEditableText, *C.gchar))(fnptr))(carg0, carg1);
-// }
-// extern *C.AtkHyperlink _gotk4_atk1_HyperlinkImpl_get_hyperlink(*C.AtkHyperlinkImpl);
-// *C.AtkHyperlink _gotk4_atk1_HyperlinkImpl_virtual_get_hyperlink(void* fnptr, *C.AtkHyperlinkImpl carg0) {
-// 	return ((*C.AtkHyperlink (*) (*C.AtkHyperlinkImpl))(fnptr))(carg0);
-// }
-// extern *C.AtkHyperlink _gotk4_atk1_Hypertext_get_link(*C.AtkHypertext, C.gint);
-// extern C.gint _gotk4_atk1_Hypertext_get_link_index(*C.AtkHypertext, C.gint);
-// extern C.gint _gotk4_atk1_Hypertext_get_n_links(*C.AtkHypertext);
-// extern C.void _gotk4_atk1_Hypertext_link_selected(*C.AtkHypertext, C.gint);
-// *C.AtkHyperlink _gotk4_atk1_Hypertext_virtual_get_link(void* fnptr, *C.AtkHypertext carg0, C.gint carg1) {
-// 	return ((*C.AtkHyperlink (*) (*C.AtkHypertext, C.gint))(fnptr))(carg0, carg1);
-// }
-// C.gint _gotk4_atk1_Hypertext_virtual_get_link_index(void* fnptr, *C.AtkHypertext carg0, C.gint carg1) {
-// 	return ((C.gint (*) (*C.AtkHypertext, C.gint))(fnptr))(carg0, carg1);
-// }
-// C.gint _gotk4_atk1_Hypertext_virtual_get_n_links(void* fnptr, *C.AtkHypertext carg0) {
-// 	return ((C.gint (*) (*C.AtkHypertext))(fnptr))(carg0);
-// }
-// C.void _gotk4_atk1_Hypertext_virtual_link_selected(void* fnptr, *C.AtkHypertext carg0, C.gint carg1) {
-// 	return ((C.void (*) (*C.AtkHypertext, C.gint))(fnptr))(carg0, carg1);
-// }
-// extern *C.gchar _gotk4_atk1_Image_get_image_description(*C.AtkImage);
-// extern *C.gchar _gotk4_atk1_Image_get_image_locale(*C.AtkImage);
-// extern C.void _gotk4_atk1_Image_get_image_position(*C.AtkImage, C.gint, C.gint, C.AtkCoordType);
-// extern C.void _gotk4_atk1_Image_get_image_size(*C.AtkImage, C.gint, C.gint);
-// extern C.gboolean _gotk4_atk1_Image_set_image_description(*C.AtkImage, *C.gchar);
-// *C.gchar _gotk4_atk1_Image_virtual_get_image_description(void* fnptr, *C.AtkImage carg0) {
-// 	return ((*C.gchar (*) (*C.AtkImage))(fnptr))(carg0);
-// }
-// *C.gchar _gotk4_atk1_Image_virtual_get_image_locale(void* fnptr, *C.AtkImage carg0) {
-// 	return ((*C.gchar (*) (*C.AtkImage))(fnptr))(carg0);
-// }
-// C.void _gotk4_atk1_Image_virtual_get_image_position(void* fnptr, *C.AtkImage carg0, C.gint* carg1, C.gint* carg2, C.AtkCoordType carg3) {
-// 	return ((C.void (*) (*C.AtkImage, C.gint*, C.gint*, C.AtkCoordType))(fnptr))(carg0, carg1, carg2, carg3);
-// }
-// C.void _gotk4_atk1_Image_virtual_get_image_size(void* fnptr, *C.AtkImage carg0, C.gint* carg1, C.gint* carg2) {
-// 	return ((C.void (*) (*C.AtkImage, C.gint*, C.gint*))(fnptr))(carg0, carg1, carg2);
-// }
-// C.gboolean _gotk4_atk1_Image_virtual_set_image_description(void* fnptr, *C.AtkImage carg0, *C.gchar carg1) {
-// 	return ((C.gboolean (*) (*C.AtkImage, *C.gchar))(fnptr))(carg0, carg1);
-// }
-// extern C.gboolean _gotk4_atk1_Selection_add_selection(*C.AtkSelection, C.gint);
-// extern C.gboolean _gotk4_atk1_Selection_clear_selection(*C.AtkSelection);
-// extern C.gint _gotk4_atk1_Selection_get_selection_count(*C.AtkSelection);
-// extern C.gboolean _gotk4_atk1_Selection_is_child_selected(*C.AtkSelection, C.gint);
-// extern *C.AtkObject _gotk4_atk1_Selection_ref_selection(*C.AtkSelection, C.gint);
-// extern C.gboolean _gotk4_atk1_Selection_remove_selection(*C.AtkSelection, C.gint);
-// extern C.gboolean _gotk4_atk1_Selection_select_all_selection(*C.AtkSelection);
-// extern C.void _gotk4_atk1_Selection_selection_changed(*C.AtkSelection);
-// C.gboolean _gotk4_atk1_Selection_virtual_add_selection(void* fnptr, *C.AtkSelection carg0, C.gint carg1) {
-// 	return ((C.gboolean (*) (*C.AtkSelection, C.gint))(fnptr))(carg0, carg1);
-// }
-// C.gboolean _gotk4_atk1_Selection_virtual_clear_selection(void* fnptr, *C.AtkSelection carg0) {
-// 	return ((C.gboolean (*) (*C.AtkSelection))(fnptr))(carg0);
-// }
-// C.gint _gotk4_atk1_Selection_virtual_get_selection_count(void* fnptr, *C.AtkSelection carg0) {
-// 	return ((C.gint (*) (*C.AtkSelection))(fnptr))(carg0);
-// }
-// C.gboolean _gotk4_atk1_Selection_virtual_is_child_selected(void* fnptr, *C.AtkSelection carg0, C.gint carg1) {
-// 	return ((C.gboolean (*) (*C.AtkSelection, C.gint))(fnptr))(carg0, carg1);
-// }
-// *C.AtkObject _gotk4_atk1_Selection_virtual_ref_selection(void* fnptr, *C.AtkSelection carg0, C.gint carg1) {
-// 	return ((*C.AtkObject (*) (*C.AtkSelection, C.gint))(fnptr))(carg0, carg1);
-// }
-// C.gboolean _gotk4_atk1_Selection_virtual_remove_selection(void* fnptr, *C.AtkSelection carg0, C.gint carg1) {
-// 	return ((C.gboolean (*) (*C.AtkSelection, C.gint))(fnptr))(carg0, carg1);
-// }
-// C.gboolean _gotk4_atk1_Selection_virtual_select_all_selection(void* fnptr, *C.AtkSelection carg0) {
-// 	return ((C.gboolean (*) (*C.AtkSelection))(fnptr))(carg0);
-// }
-// C.void _gotk4_atk1_Selection_virtual_selection_changed(void* fnptr, *C.AtkSelection carg0) {
-// 	return ((C.void (*) (*C.AtkSelection))(fnptr))(carg0);
-// }
-// extern *C.gchar _gotk4_atk1_StreamableContent_get_mime_type(*C.AtkStreamableContent, C.gint);
-// extern C.gint _gotk4_atk1_StreamableContent_get_n_mime_types(*C.AtkStreamableContent);
-// extern *C.GIOChannel _gotk4_atk1_StreamableContent_get_stream(*C.AtkStreamableContent, *C.gchar);
-// extern *C.gchar _gotk4_atk1_StreamableContent_get_uri(*C.AtkStreamableContent, *C.gchar);
-// *C.gchar _gotk4_atk1_StreamableContent_virtual_get_mime_type(void* fnptr, *C.AtkStreamableContent carg0, C.gint carg1) {
-// 	return ((*C.gchar (*) (*C.AtkStreamableContent, C.gint))(fnptr))(carg0, carg1);
-// }
-// C.gint _gotk4_atk1_StreamableContent_virtual_get_n_mime_types(void* fnptr, *C.AtkStreamableContent carg0) {
-// 	return ((C.gint (*) (*C.AtkStreamableContent))(fnptr))(carg0);
-// }
-// *C.GIOChannel _gotk4_atk1_StreamableContent_virtual_get_stream(void* fnptr, *C.AtkStreamableContent carg0, *C.gchar carg1) {
-// 	return ((*C.GIOChannel (*) (*C.AtkStreamableContent, *C.gchar))(fnptr))(carg0, carg1);
-// }
-// *C.gchar _gotk4_atk1_StreamableContent_virtual_get_uri(void* fnptr, *C.AtkStreamableContent carg0, *C.gchar carg1) {
-// 	return ((*C.gchar (*) (*C.AtkStreamableContent, *C.gchar))(fnptr))(carg0, carg1);
-// }
-// extern C.gboolean _gotk4_atk1_Table_add_column_selection(*C.AtkTable, C.gint);
-// extern C.gboolean _gotk4_atk1_Table_add_row_selection(*C.AtkTable, C.gint);
-// extern C.void _gotk4_atk1_Table_column_deleted(*C.AtkTable, C.gint, C.gint);
-// extern C.void _gotk4_atk1_Table_column_inserted(*C.AtkTable, C.gint, C.gint);
-// extern C.void _gotk4_atk1_Table_column_reordered(*C.AtkTable);
-// extern *C.AtkObject _gotk4_atk1_Table_get_caption(*C.AtkTable);
-// extern *C.gchar _gotk4_atk1_Table_get_column_description(*C.AtkTable, C.gint);
-// extern C.gint _gotk4_atk1_Table_get_column_extent_at(*C.AtkTable, C.gint, C.gint);
-// extern *C.AtkObject _gotk4_atk1_Table_get_column_header(*C.AtkTable, C.gint);
-// extern C.gint _gotk4_atk1_Table_get_n_columns(*C.AtkTable);
-// extern C.gint _gotk4_atk1_Table_get_n_rows(*C.AtkTable);
-// extern *C.gchar _gotk4_atk1_Table_get_row_description(*C.AtkTable, C.gint);
-// extern C.gint _gotk4_atk1_Table_get_row_extent_at(*C.AtkTable, C.gint, C.gint);
-// extern *C.AtkObject _gotk4_atk1_Table_get_row_header(*C.AtkTable, C.gint);
-// extern C.gint _gotk4_atk1_Table_get_selected_columns(*C.AtkTable, **C.gint);
-// extern C.gint _gotk4_atk1_Table_get_selected_rows(*C.AtkTable, **C.gint);
-// extern *C.AtkObject _gotk4_atk1_Table_get_summary(*C.AtkTable);
-// extern C.gboolean _gotk4_atk1_Table_is_column_selected(*C.AtkTable, C.gint);
-// extern C.gboolean _gotk4_atk1_Table_is_row_selected(*C.AtkTable, C.gint);
-// extern C.gboolean _gotk4_atk1_Table_is_selected(*C.AtkTable, C.gint, C.gint);
-// extern C.void _gotk4_atk1_Table_model_changed(*C.AtkTable);
-// extern *C.AtkObject _gotk4_atk1_Table_ref_at(*C.AtkTable, C.gint, C.gint);
-// extern C.gboolean _gotk4_atk1_Table_remove_column_selection(*C.AtkTable, C.gint);
-// extern C.gboolean _gotk4_atk1_Table_remove_row_selection(*C.AtkTable, C.gint);
-// extern C.void _gotk4_atk1_Table_row_deleted(*C.AtkTable, C.gint, C.gint);
-// extern C.void _gotk4_atk1_Table_row_inserted(*C.AtkTable, C.gint, C.gint);
-// extern C.void _gotk4_atk1_Table_row_reordered(*C.AtkTable);
-// extern C.void _gotk4_atk1_Table_set_caption(*C.AtkTable, *C.AtkObject);
-// extern C.void _gotk4_atk1_Table_set_column_description(*C.AtkTable, C.gint, *C.gchar);
-// extern C.void _gotk4_atk1_Table_set_column_header(*C.AtkTable, C.gint, *C.AtkObject);
-// extern C.void _gotk4_atk1_Table_set_row_description(*C.AtkTable, C.gint, *C.gchar);
-// extern C.void _gotk4_atk1_Table_set_row_header(*C.AtkTable, C.gint, *C.AtkObject);
-// extern C.void _gotk4_atk1_Table_set_summary(*C.AtkTable, *C.AtkObject);
-// C.gboolean _gotk4_atk1_Table_virtual_add_column_selection(void* fnptr, *C.AtkTable carg0, C.gint carg1) {
-// 	return ((C.gboolean (*) (*C.AtkTable, C.gint))(fnptr))(carg0, carg1);
+// void _gotk4_atk1_EditableText_virtual_insert_text(void* fnptr, AtkEditableText* carg0, const gchar* carg1, gint carg2, gint* carg3) {
+// 	return ((void (*) (AtkEditableText*, const gchar*, gint, gint*))(fnptr))(carg0, carg1, carg2, carg3);
+// }
+// void _gotk4_atk1_EditableText_virtual_paste_text(void* fnptr, AtkEditableText* carg0, gint carg1) {
+// 	return ((void (*) (AtkEditableText*, gint))(fnptr))(carg0, carg1);
+// }
+// void _gotk4_atk1_EditableText_virtual_set_text_contents(void* fnptr, AtkEditableText* carg0, const gchar* carg1) {
+// 	return ((void (*) (AtkEditableText*, const gchar*))(fnptr))(carg0, carg1);
+// }
+// extern AtkHyperlink* _gotk4_atk1_HyperlinkImpl_get_hyperlink(AtkHyperlinkImpl*);
+// AtkHyperlink* _gotk4_atk1_HyperlinkImpl_virtual_get_hyperlink(void* fnptr, AtkHyperlinkImpl* carg0) {
+// 	return ((AtkHyperlink* (*) (AtkHyperlinkImpl*))(fnptr))(carg0);
+// }
+// extern AtkHyperlink* _gotk4_atk1_Hypertext_get_link(AtkHypertext*, gint);
+// extern gint _gotk4_atk1_Hypertext_get_link_index(AtkHypertext*, gint);
+// extern gint _gotk4_atk1_Hypertext_get_n_links(AtkHypertext*);
+// extern void _gotk4_atk1_Hypertext_link_selected(AtkHypertext*, gint);
+// AtkHyperlink* _gotk4_atk1_Hypertext_virtual_get_link(void* fnptr, AtkHypertext* carg0, gint carg1) {
+// 	return ((AtkHyperlink* (*) (AtkHypertext*, gint))(fnptr))(carg0, carg1);
+// }
+// gint _gotk4_atk1_Hypertext_virtual_get_link_index(void* fnptr, AtkHypertext* carg0, gint carg1) {
+// 	return ((gint (*) (AtkHypertext*, gint))(fnptr))(carg0, carg1);
+// }
+// gint _gotk4_atk1_Hypertext_virtual_get_n_links(void* fnptr, AtkHypertext* carg0) {
+// 	return ((gint (*) (AtkHypertext*))(fnptr))(carg0);
+// }
+// void _gotk4_atk1_Hypertext_virtual_link_selected(void* fnptr, AtkHypertext* carg0, gint carg1) {
+// 	return ((void (*) (AtkHypertext*, gint))(fnptr))(carg0, carg1);
+// }
+// extern const gchar* _gotk4_atk1_Image_get_image_description(AtkImage*);
+// extern const gchar* _gotk4_atk1_Image_get_image_locale(AtkImage*);
+// extern void _gotk4_atk1_Image_get_image_position(AtkImage*, gint, gint, AtkCoordType);
+// extern void _gotk4_atk1_Image_get_image_size(AtkImage*, gint, gint);
+// extern gboolean _gotk4_atk1_Image_set_image_description(AtkImage*, const gchar*);
+// const gchar* _gotk4_atk1_Image_virtual_get_image_description(void* fnptr, AtkImage* carg0) {
+// 	return ((const gchar* (*) (AtkImage*))(fnptr))(carg0);
+// }
+// const gchar* _gotk4_atk1_Image_virtual_get_image_locale(void* fnptr, AtkImage* carg0) {
+// 	return ((const gchar* (*) (AtkImage*))(fnptr))(carg0);
+// }
+// void _gotk4_atk1_Image_virtual_get_image_position(void* fnptr, AtkImage* carg0, gint* carg1, gint* carg2, AtkCoordType carg3) {
+// 	return ((void (*) (AtkImage*, gint*, gint*, AtkCoordType))(fnptr))(carg0, carg1, carg2, carg3);
+// }
+// void _gotk4_atk1_Image_virtual_get_image_size(void* fnptr, AtkImage* carg0, gint* carg1, gint* carg2) {
+// 	return ((void (*) (AtkImage*, gint*, gint*))(fnptr))(carg0, carg1, carg2);
+// }
+// gboolean _gotk4_atk1_Image_virtual_set_image_description(void* fnptr, AtkImage* carg0, const gchar* carg1) {
+// 	return ((gboolean (*) (AtkImage*, const gchar*))(fnptr))(carg0, carg1);
+// }
+// extern gboolean _gotk4_atk1_Selection_add_selection(AtkSelection*, gint);
+// extern gboolean _gotk4_atk1_Selection_clear_selection(AtkSelection*);
+// extern gint _gotk4_atk1_Selection_get_selection_count(AtkSelection*);
+// extern gboolean _gotk4_atk1_Selection_is_child_selected(AtkSelection*, gint);
+// extern AtkObject* _gotk4_atk1_Selection_ref_selection(AtkSelection*, gint);
+// extern gboolean _gotk4_atk1_Selection_remove_selection(AtkSelection*, gint);
+// extern gboolean _gotk4_atk1_Selection_select_all_selection(AtkSelection*);
+// extern void _gotk4_atk1_Selection_selection_changed(AtkSelection*);
+// gboolean _gotk4_atk1_Selection_virtual_add_selection(void* fnptr, AtkSelection* carg0, gint carg1) {
+// 	return ((gboolean (*) (AtkSelection*, gint))(fnptr))(carg0, carg1);
+// }
+// gboolean _gotk4_atk1_Selection_virtual_clear_selection(void* fnptr, AtkSelection* carg0) {
+// 	return ((gboolean (*) (AtkSelection*))(fnptr))(carg0);
+// }
+// gint _gotk4_atk1_Selection_virtual_get_selection_count(void* fnptr, AtkSelection* carg0) {
+// 	return ((gint (*) (AtkSelection*))(fnptr))(carg0);
+// }
+// gboolean _gotk4_atk1_Selection_virtual_is_child_selected(void* fnptr, AtkSelection* carg0, gint carg1) {
+// 	return ((gboolean (*) (AtkSelection*, gint))(fnptr))(carg0, carg1);
+// }
+// AtkObject* _gotk4_atk1_Selection_virtual_ref_selection(void* fnptr, AtkSelection* carg0, gint carg1) {
+// 	return ((AtkObject* (*) (AtkSelection*, gint))(fnptr))(carg0, carg1);
+// }
+// gboolean _gotk4_atk1_Selection_virtual_remove_selection(void* fnptr, AtkSelection* carg0, gint carg1) {
+// 	return ((gboolean (*) (AtkSelection*, gint))(fnptr))(carg0, carg1);
+// }
+// gboolean _gotk4_atk1_Selection_virtual_select_all_selection(void* fnptr, AtkSelection* carg0) {
+// 	return ((gboolean (*) (AtkSelection*))(fnptr))(carg0);
+// }
+// void _gotk4_atk1_Selection_virtual_selection_changed(void* fnptr, AtkSelection* carg0) {
+// 	return ((void (*) (AtkSelection*))(fnptr))(carg0);
+// }
+// extern const gchar* _gotk4_atk1_StreamableContent_get_mime_type(AtkStreamableContent*, gint);
+// extern gint _gotk4_atk1_StreamableContent_get_n_mime_types(AtkStreamableContent*);
+// extern GIOChannel* _gotk4_atk1_StreamableContent_get_stream(AtkStreamableContent*, const gchar*);
+// extern const gchar* _gotk4_atk1_StreamableContent_get_uri(AtkStreamableContent*, const gchar*);
+// const gchar* _gotk4_atk1_StreamableContent_virtual_get_mime_type(void* fnptr, AtkStreamableContent* carg0, gint carg1) {
+// 	return ((const gchar* (*) (AtkStreamableContent*, gint))(fnptr))(carg0, carg1);
+// }
+// gint _gotk4_atk1_StreamableContent_virtual_get_n_mime_types(void* fnptr, AtkStreamableContent* carg0) {
+// 	return ((gint (*) (AtkStreamableContent*))(fnptr))(carg0);
+// }
+// GIOChannel* _gotk4_atk1_StreamableContent_virtual_get_stream(void* fnptr, AtkStreamableContent* carg0, const gchar* carg1) {
+// 	return ((GIOChannel* (*) (AtkStreamableContent*, const gchar*))(fnptr))(carg0, carg1);
+// }
+// const gchar* _gotk4_atk1_StreamableContent_virtual_get_uri(void* fnptr, AtkStreamableContent* carg0, const gchar* carg1) {
+// 	return ((const gchar* (*) (AtkStreamableContent*, const gchar*))(fnptr))(carg0, carg1);
+// }
+// extern gboolean _gotk4_atk1_Table_add_column_selection(AtkTable*, gint);
+// extern gboolean _gotk4_atk1_Table_add_row_selection(AtkTable*, gint);
+// extern void _gotk4_atk1_Table_column_deleted(AtkTable*, gint, gint);
+// extern void _gotk4_atk1_Table_column_inserted(AtkTable*, gint, gint);
+// extern void _gotk4_atk1_Table_column_reordered(AtkTable*);
+// extern AtkObject* _gotk4_atk1_Table_get_caption(AtkTable*);
+// extern const gchar* _gotk4_atk1_Table_get_column_description(AtkTable*, gint);
+// extern gint _gotk4_atk1_Table_get_column_extent_at(AtkTable*, gint, gint);
+// extern AtkObject* _gotk4_atk1_Table_get_column_header(AtkTable*, gint);
+// extern gint _gotk4_atk1_Table_get_n_columns(AtkTable*);
+// extern gint _gotk4_atk1_Table_get_n_rows(AtkTable*);
+// extern const gchar* _gotk4_atk1_Table_get_row_description(AtkTable*, gint);
+// extern gint _gotk4_atk1_Table_get_row_extent_at(AtkTable*, gint, gint);
+// extern AtkObject* _gotk4_atk1_Table_get_row_header(AtkTable*, gint);
+// extern gint _gotk4_atk1_Table_get_selected_columns(AtkTable*, gint**);
+// extern gint _gotk4_atk1_Table_get_selected_rows(AtkTable*, gint**);
+// extern AtkObject* _gotk4_atk1_Table_get_summary(AtkTable*);
+// extern gboolean _gotk4_atk1_Table_is_column_selected(AtkTable*, gint);
+// extern gboolean _gotk4_atk1_Table_is_row_selected(AtkTable*, gint);
+// extern gboolean _gotk4_atk1_Table_is_selected(AtkTable*, gint, gint);
+// extern void _gotk4_atk1_Table_model_changed(AtkTable*);
+// extern AtkObject* _gotk4_atk1_Table_ref_at(AtkTable*, gint, gint);
+// extern gboolean _gotk4_atk1_Table_remove_column_selection(AtkTable*, gint);
+// extern gboolean _gotk4_atk1_Table_remove_row_selection(AtkTable*, gint);
+// extern void _gotk4_atk1_Table_row_deleted(AtkTable*, gint, gint);
+// extern void _gotk4_atk1_Table_row_inserted(AtkTable*, gint, gint);
+// extern void _gotk4_atk1_Table_row_reordered(AtkTable*);
+// extern void _gotk4_atk1_Table_set_caption(AtkTable*, AtkObject*);
+// extern void _gotk4_atk1_Table_set_column_description(AtkTable*, gint, const gchar*);
+// extern void _gotk4_atk1_Table_set_column_header(AtkTable*, gint, AtkObject*);
+// extern void _gotk4_atk1_Table_set_row_description(AtkTable*, gint, const gchar*);
+// extern void _gotk4_atk1_Table_set_row_header(AtkTable*, gint, AtkObject*);
+// extern void _gotk4_atk1_Table_set_summary(AtkTable*, AtkObject*);
+// gboolean _gotk4_atk1_Table_virtual_add_column_selection(void* fnptr, AtkTable* carg0, gint carg1) {
+// 	return ((gboolean (*) (AtkTable*, gint))(fnptr))(carg0, carg1);
 // }
-// C.gboolean _gotk4_atk1_Table_virtual_add_row_selection(void* fnptr, *C.AtkTable carg0, C.gint carg1) {
-// 	return ((C.gboolean (*) (*C.AtkTable, C.gint))(fnptr))(carg0, carg1);
-// }
-// C.void _gotk4_atk1_Table_virtual_column_deleted(void* fnptr, *C.AtkTable carg0, C.gint carg1, C.gint carg2) {
-// 	return ((C.void (*) (*C.AtkTable, C.gint, C.gint))(fnptr))(carg0, carg1, carg2);
-// }
-// C.void _gotk4_atk1_Table_virtual_column_inserted(void* fnptr, *C.AtkTable carg0, C.gint carg1, C.gint carg2) {
-// 	return ((C.void (*) (*C.AtkTable, C.gint, C.gint))(fnptr))(carg0, carg1, carg2);
+// gboolean _gotk4_atk1_Table_virtual_add_row_selection(void* fnptr, AtkTable* carg0, gint carg1) {
+// 	return ((gboolean (*) (AtkTable*, gint))(fnptr))(carg0, carg1);
+// }
+// void _gotk4_atk1_Table_virtual_column_deleted(void* fnptr, AtkTable* carg0, gint carg1, gint carg2) {
+// 	return ((void (*) (AtkTable*, gint, gint))(fnptr))(carg0, carg1, carg2);
+// }
+// void _gotk4_atk1_Table_virtual_column_inserted(void* fnptr, AtkTable* carg0, gint carg1, gint carg2) {
+// 	return ((void (*) (AtkTable*, gint, gint))(fnptr))(carg0, carg1, carg2);
 // }
-// C.void _gotk4_atk1_Table_virtual_column_reordered(void* fnptr, *C.AtkTable carg0) {
-// 	return ((C.void (*) (*C.AtkTable))(fnptr))(carg0);
+// void _gotk4_atk1_Table_virtual_column_reordered(void* fnptr, AtkTable* carg0) {
+// 	return ((void (*) (AtkTable*))(fnptr))(carg0);
 // }
-// *C.AtkObject _gotk4_atk1_Table_virtual_get_caption(void* fnptr, *C.AtkTable carg0) {
-// 	return ((*C.AtkObject (*) (*C.AtkTable))(fnptr))(carg0);
+// AtkObject* _gotk4_atk1_Table_virtual_get_caption(void* fnptr, AtkTable* carg0) {
+// 	return ((AtkObject* (*) (AtkTable*))(fnptr))(carg0);
 // }
-// *C.gchar _gotk4_atk1_Table_virtual_get_column_description(void* fnptr, *C.AtkTable carg0, C.gint carg1) {
-// 	return ((*C.gchar (*) (*C.AtkTable, C.gint))(fnptr))(carg0, carg1);
+// const gchar* _gotk4_atk1_Table_virtual_get_column_description(void* fnptr, AtkTable* carg0, gint carg1) {
+// 	return ((const gchar* (*) (AtkTable*, gint))(fnptr))(carg0, carg1);
 // }
-// C.gint _gotk4_atk1_Table_virtual_get_column_extent_at(void* fnptr, *C.AtkTable carg0, C.gint carg1, C.gint carg2) {
-// 	return ((C.gint (*) (*C.AtkTable, C.gint, C.gint))(fnptr))(carg0, carg1, carg2);
+// gint _gotk4_atk1_Table_virtual_get_column_extent_at(void* fnptr, AtkTable* carg0, gint carg1, gint carg2) {
+// 	return ((gint (*) (AtkTable*, gint, gint))(fnptr))(carg0, carg1, carg2);
 // }
-// *C.AtkObject _gotk4_atk1_Table_virtual_get_column_header(void* fnptr, *C.AtkTable carg0, C.gint carg1) {
-// 	return ((*C.AtkObject (*) (*C.AtkTable, C.gint))(fnptr))(carg0, carg1);
-// }
-// C.gint _gotk4_atk1_Table_virtual_get_n_columns(void* fnptr, *C.AtkTable carg0) {
-// 	return ((C.gint (*) (*C.AtkTable))(fnptr))(carg0);
-// }
-// C.gint _gotk4_atk1_Table_virtual_get_n_rows(void* fnptr, *C.AtkTable carg0) {
-// 	return ((C.gint (*) (*C.AtkTable))(fnptr))(carg0);
-// }
-// *C.gchar _gotk4_atk1_Table_virtual_get_row_description(void* fnptr, *C.AtkTable carg0, C.gint carg1) {
-// 	return ((*C.gchar (*) (*C.AtkTable, C.gint))(fnptr))(carg0, carg1);
-// }
-// C.gint _gotk4_atk1_Table_virtual_get_row_extent_at(void* fnptr, *C.AtkTable carg0, C.gint carg1, C.gint carg2) {
-// 	return ((C.gint (*) (*C.AtkTable, C.gint, C.gint))(fnptr))(carg0, carg1, carg2);
-// }
-// *C.AtkObject _gotk4_atk1_Table_virtual_get_row_header(void* fnptr, *C.AtkTable carg0, C.gint carg1) {
-// 	return ((*C.AtkObject (*) (*C.AtkTable, C.gint))(fnptr))(carg0, carg1);
-// }
-// C.gint _gotk4_atk1_Table_virtual_get_selected_columns(void* fnptr, *C.AtkTable carg0, **C.gint carg1) {
-// 	return ((C.gint (*) (*C.AtkTable, **C.gint))(fnptr))(carg0, carg1);
-// }
-// C.gint _gotk4_atk1_Table_virtual_get_selected_rows(void* fnptr, *C.AtkTable carg0, **C.gint carg1) {
-// 	return ((C.gint (*) (*C.AtkTable, **C.gint))(fnptr))(carg0, carg1);
-// }
-// *C.AtkObject _gotk4_atk1_Table_virtual_get_summary(void* fnptr, *C.AtkTable carg0) {
-// 	return ((*C.AtkObject (*) (*C.AtkTable))(fnptr))(carg0);
-// }
-// C.gboolean _gotk4_atk1_Table_virtual_is_column_selected(void* fnptr, *C.AtkTable carg0, C.gint carg1) {
-// 	return ((C.gboolean (*) (*C.AtkTable, C.gint))(fnptr))(carg0, carg1);
-// }
-// C.gboolean _gotk4_atk1_Table_virtual_is_row_selected(void* fnptr, *C.AtkTable carg0, C.gint carg1) {
-// 	return ((C.gboolean (*) (*C.AtkTable, C.gint))(fnptr))(carg0, carg1);
-// }
-// C.gboolean _gotk4_atk1_Table_virtual_is_selected(void* fnptr, *C.AtkTable carg0, C.gint carg1, C.gint carg2) {
-// 	return ((C.gboolean (*) (*C.AtkTable, C.gint, C.gint))(fnptr))(carg0, carg1, carg2);
-// }
-// C.void _gotk4_atk1_Table_virtual_model_changed(void* fnptr, *C.AtkTable carg0) {
-// 	return ((C.void (*) (*C.AtkTable))(fnptr))(carg0);
-// }
-// *C.AtkObject _gotk4_atk1_Table_virtual_ref_at(void* fnptr, *C.AtkTable carg0, C.gint carg1, C.gint carg2) {
-// 	return ((*C.AtkObject (*) (*C.AtkTable, C.gint, C.gint))(fnptr))(carg0, carg1, carg2);
-// }
-// C.gboolean _gotk4_atk1_Table_virtual_remove_column_selection(void* fnptr, *C.AtkTable carg0, C.gint carg1) {
-// 	return ((C.gboolean (*) (*C.AtkTable, C.gint))(fnptr))(carg0, carg1);
-// }
-// C.gboolean _gotk4_atk1_Table_virtual_remove_row_selection(void* fnptr, *C.AtkTable carg0, C.gint carg1) {
-// 	return ((C.gboolean (*) (*C.AtkTable, C.gint))(fnptr))(carg0, carg1);
-// }
-// C.void _gotk4_atk1_Table_virtual_row_deleted(void* fnptr, *C.AtkTable carg0, C.gint carg1, C.gint carg2) {
-// 	return ((C.void (*) (*C.AtkTable, C.gint, C.gint))(fnptr))(carg0, carg1, carg2);
-// }
-// C.void _gotk4_atk1_Table_virtual_row_inserted(void* fnptr, *C.AtkTable carg0, C.gint carg1, C.gint carg2) {
-// 	return ((C.void (*) (*C.AtkTable, C.gint, C.gint))(fnptr))(carg0, carg1, carg2);
-// }
-// C.void _gotk4_atk1_Table_virtual_row_reordered(void* fnptr, *C.AtkTable carg0) {
-// 	return ((C.void (*) (*C.AtkTable))(fnptr))(carg0);
-// }
-// C.void _gotk4_atk1_Table_virtual_set_caption(void* fnptr, *C.AtkTable carg0, *C.AtkObject carg1) {
-// 	return ((C.void (*) (*C.AtkTable, *C.AtkObject))(fnptr))(carg0, carg1);
-// }
-// C.void _gotk4_atk1_Table_virtual_set_column_description(void* fnptr, *C.AtkTable carg0, C.gint carg1, *C.gchar carg2) {
-// 	return ((C.void (*) (*C.AtkTable, C.gint, *C.gchar))(fnptr))(carg0, carg1, carg2);
-// }
-// C.void _gotk4_atk1_Table_virtual_set_column_header(void* fnptr, *C.AtkTable carg0, C.gint carg1, *C.AtkObject carg2) {
-// 	return ((C.void (*) (*C.AtkTable, C.gint, *C.AtkObject))(fnptr))(carg0, carg1, carg2);
-// }
-// C.void _gotk4_atk1_Table_virtual_set_row_description(void* fnptr, *C.AtkTable carg0, C.gint carg1, *C.gchar carg2) {
-// 	return ((C.void (*) (*C.AtkTable, C.gint, *C.gchar))(fnptr))(carg0, carg1, carg2);
-// }
-// C.void _gotk4_atk1_Table_virtual_set_row_header(void* fnptr, *C.AtkTable carg0, C.gint carg1, *C.AtkObject carg2) {
-// 	return ((C.void (*) (*C.AtkTable, C.gint, *C.AtkObject))(fnptr))(carg0, carg1, carg2);
+// AtkObject* _gotk4_atk1_Table_virtual_get_column_header(void* fnptr, AtkTable* carg0, gint carg1) {
+// 	return ((AtkObject* (*) (AtkTable*, gint))(fnptr))(carg0, carg1);
+// }
+// gint _gotk4_atk1_Table_virtual_get_n_columns(void* fnptr, AtkTable* carg0) {
+// 	return ((gint (*) (AtkTable*))(fnptr))(carg0);
+// }
+// gint _gotk4_atk1_Table_virtual_get_n_rows(void* fnptr, AtkTable* carg0) {
+// 	return ((gint (*) (AtkTable*))(fnptr))(carg0);
+// }
+// const gchar* _gotk4_atk1_Table_virtual_get_row_description(void* fnptr, AtkTable* carg0, gint carg1) {
+// 	return ((const gchar* (*) (AtkTable*, gint))(fnptr))(carg0, carg1);
+// }
+// gint _gotk4_atk1_Table_virtual_get_row_extent_at(void* fnptr, AtkTable* carg0, gint carg1, gint carg2) {
+// 	return ((gint (*) (AtkTable*, gint, gint))(fnptr))(carg0, carg1, carg2);
+// }
+// AtkObject* _gotk4_atk1_Table_virtual_get_row_header(void* fnptr, AtkTable* carg0, gint carg1) {
+// 	return ((AtkObject* (*) (AtkTable*, gint))(fnptr))(carg0, carg1);
+// }
+// gint _gotk4_atk1_Table_virtual_get_selected_columns(void* fnptr, AtkTable* carg0, gint** carg1) {
+// 	return ((gint (*) (AtkTable*, gint**))(fnptr))(carg0, carg1);
+// }
+// gint _gotk4_atk1_Table_virtual_get_selected_rows(void* fnptr, AtkTable* carg0, gint** carg1) {
+// 	return ((gint (*) (AtkTable*, gint**))(fnptr))(carg0, carg1);
+// }
+// AtkObject* _gotk4_atk1_Table_virtual_get_summary(void* fnptr, AtkTable* carg0) {
+// 	return ((AtkObject* (*) (AtkTable*))(fnptr))(carg0);
+// }
+// gboolean _gotk4_atk1_Table_virtual_is_column_selected(void* fnptr, AtkTable* carg0, gint carg1) {
+// 	return ((gboolean (*) (AtkTable*, gint))(fnptr))(carg0, carg1);
+// }
+// gboolean _gotk4_atk1_Table_virtual_is_row_selected(void* fnptr, AtkTable* carg0, gint carg1) {
+// 	return ((gboolean (*) (AtkTable*, gint))(fnptr))(carg0, carg1);
+// }
+// gboolean _gotk4_atk1_Table_virtual_is_selected(void* fnptr, AtkTable* carg0, gint carg1, gint carg2) {
+// 	return ((gboolean (*) (AtkTable*, gint, gint))(fnptr))(carg0, carg1, carg2);
+// }
+// void _gotk4_atk1_Table_virtual_model_changed(void* fnptr, AtkTable* carg0) {
+// 	return ((void (*) (AtkTable*))(fnptr))(carg0);
+// }
+// AtkObject* _gotk4_atk1_Table_virtual_ref_at(void* fnptr, AtkTable* carg0, gint carg1, gint carg2) {
+// 	return ((AtkObject* (*) (AtkTable*, gint, gint))(fnptr))(carg0, carg1, carg2);
+// }
+// gboolean _gotk4_atk1_Table_virtual_remove_column_selection(void* fnptr, AtkTable* carg0, gint carg1) {
+// 	return ((gboolean (*) (AtkTable*, gint))(fnptr))(carg0, carg1);
+// }
+// gboolean _gotk4_atk1_Table_virtual_remove_row_selection(void* fnptr, AtkTable* carg0, gint carg1) {
+// 	return ((gboolean (*) (AtkTable*, gint))(fnptr))(carg0, carg1);
+// }
+// void _gotk4_atk1_Table_virtual_row_deleted(void* fnptr, AtkTable* carg0, gint carg1, gint carg2) {
+// 	return ((void (*) (AtkTable*, gint, gint))(fnptr))(carg0, carg1, carg2);
+// }
+// void _gotk4_atk1_Table_virtual_row_inserted(void* fnptr, AtkTable* carg0, gint carg1, gint carg2) {
+// 	return ((void (*) (AtkTable*, gint, gint))(fnptr))(carg0, carg1, carg2);
+// }
+// void _gotk4_atk1_Table_virtual_row_reordered(void* fnptr, AtkTable* carg0) {
+// 	return ((void (*) (AtkTable*))(fnptr))(carg0);
+// }
+// void _gotk4_atk1_Table_virtual_set_caption(void* fnptr, AtkTable* carg0, AtkObject* carg1) {
+// 	return ((void (*) (AtkTable*, AtkObject*))(fnptr))(carg0, carg1);
+// }
+// void _gotk4_atk1_Table_virtual_set_column_description(void* fnptr, AtkTable* carg0, gint carg1, const gchar* carg2) {
+// 	return ((void (*) (AtkTable*, gint, const gchar*))(fnptr))(carg0, carg1, carg2);
+// }
+// void _gotk4_atk1_Table_virtual_set_column_header(void* fnptr, AtkTable* carg0, gint carg1, AtkObject* carg2) {
+// 	return ((void (*) (AtkTable*, gint, AtkObject*))(fnptr))(carg0, carg1, carg2);
+// }
+// void _gotk4_atk1_Table_virtual_set_row_description(void* fnptr, AtkTable* carg0, gint carg1, const gchar* carg2) {
+// 	return ((void (*) (AtkTable*, gint, const gchar*))(fnptr))(carg0, carg1, carg2);
+// }
+// void _gotk4_atk1_Table_virtual_set_row_header(void* fnptr, AtkTable* carg0, gint carg1, AtkObject* carg2) {
+// 	return ((void (*) (AtkTable*, gint, AtkObject*))(fnptr))(carg0, carg1, carg2);
 // }
-// C.void _gotk4_atk1_Table_virtual_set_summary(void* fnptr, *C.AtkTable carg0, *C.AtkObject carg1) {
-// 	return ((C.void (*) (*C.AtkTable, *C.AtkObject))(fnptr))(carg0, carg1);
+// void _gotk4_atk1_Table_virtual_set_summary(void* fnptr, AtkTable* carg0, AtkObject* carg1) {
+// 	return ((void (*) (AtkTable*, AtkObject*))(fnptr))(carg0, carg1);
 // }
-// extern C.gint _gotk4_atk1_TableCell_get_column_span(*C.AtkTableCell);
-// extern C.gboolean _gotk4_atk1_TableCell_get_position(*C.AtkTableCell, C.gint, C.gint);
-// extern C.gboolean _gotk4_atk1_TableCell_get_row_column_span(*C.AtkTableCell, C.gint, C.gint, C.gint, C.gint);
-// extern C.gint _gotk4_atk1_TableCell_get_row_span(*C.AtkTableCell);
-// extern *C.AtkObject _gotk4_atk1_TableCell_get_table(*C.AtkTableCell);
-// C.gint _gotk4_atk1_TableCell_virtual_get_column_span(void* fnptr, *C.AtkTableCell carg0) {
-// 	return ((C.gint (*) (*C.AtkTableCell))(fnptr))(carg0);
+// extern gint _gotk4_atk1_TableCell_get_column_span(AtkTableCell*);
+// extern gboolean _gotk4_atk1_TableCell_get_position(AtkTableCell*, gint, gint);
+// extern gboolean _gotk4_atk1_TableCell_get_row_column_span(AtkTableCell*, gint, gint, gint, gint);
+// extern gint _gotk4_atk1_TableCell_get_row_span(AtkTableCell*);
+// extern AtkObject* _gotk4_atk1_TableCell_get_table(AtkTableCell*);
+// gint _gotk4_atk1_TableCell_virtual_get_column_span(void* fnptr, AtkTableCell* carg0) {
+// 	return ((gint (*) (AtkTableCell*))(fnptr))(carg0);
 // }
-// C.gboolean _gotk4_atk1_TableCell_virtual_get_position(void* fnptr, *C.AtkTableCell carg0, C.gint* carg1, C.gint* carg2) {
-// 	return ((C.gboolean (*) (*C.AtkTableCell, C.gint*, C.gint*))(fnptr))(carg0, carg1, carg2);
-// }
-// C.gboolean _gotk4_atk1_TableCell_virtual_get_row_column_span(void* fnptr, *C.AtkTableCell carg0, C.gint* carg1, C.gint* carg2, C.gint* carg3, C.gint* carg4) {
-// 	return ((C.gboolean (*) (*C.AtkTableCell, C.gint*, C.gint*, C.gint*, C.gint*))(fnptr))(carg0, carg1, carg2, carg3, carg4);
-// }
-// C.gint _gotk4_atk1_TableCell_virtual_get_row_span(void* fnptr, *C.AtkTableCell carg0) {
-// 	return ((C.gint (*) (*C.AtkTableCell))(fnptr))(carg0);
+// gboolean _gotk4_atk1_TableCell_virtual_get_position(void* fnptr, AtkTableCell* carg0, gint* carg1, gint* carg2) {
+// 	return ((gboolean (*) (AtkTableCell*, gint*, gint*))(fnptr))(carg0, carg1, carg2);
+// }
+// gboolean _gotk4_atk1_TableCell_virtual_get_row_column_span(void* fnptr, AtkTableCell* carg0, gint* carg1, gint* carg2, gint* carg3, gint* carg4) {
+// 	return ((gboolean (*) (AtkTableCell*, gint*, gint*, gint*, gint*))(fnptr))(carg0, carg1, carg2, carg3, carg4);
+// }
+// gint _gotk4_atk1_TableCell_virtual_get_row_span(void* fnptr, AtkTableCell* carg0) {
+// 	return ((gint (*) (AtkTableCell*))(fnptr))(carg0);
 // }
-// *C.AtkObject _gotk4_atk1_TableCell_virtual_get_table(void* fnptr, *C.AtkTableCell carg0) {
-// 	return ((*C.AtkObject (*) (*C.AtkTableCell))(fnptr))(carg0);
+// AtkObject* _gotk4_atk1_TableCell_virtual_get_table(void* fnptr, AtkTableCell* carg0) {
+// 	return ((AtkObject* (*) (AtkTableCell*))(fnptr))(carg0);
 // }
-// extern C.gboolean _gotk4_atk1_Text_add_selection(*C.AtkText, C.gint, C.gint);
-// extern **C.AtkTextRange _gotk4_atk1_Text_get_bounded_ranges(*C.AtkText, *C.AtkTextRectangle, C.AtkCoordType, C.AtkTextClipType, C.AtkTextClipType);
-// extern C.gint _gotk4_atk1_Text_get_caret_offset(*C.AtkText);
-// extern C.gunichar _gotk4_atk1_Text_get_character_at_offset(*C.AtkText, C.gint);
-// extern C.gint _gotk4_atk1_Text_get_character_count(*C.AtkText);
-// extern C.void _gotk4_atk1_Text_get_character_extents(*C.AtkText, C.gint, C.gint, C.gint, C.gint, C.gint, C.AtkCoordType);
-// extern C.gint _gotk4_atk1_Text_get_n_selections(*C.AtkText);
-// extern C.gint _gotk4_atk1_Text_get_offset_at_point(*C.AtkText, C.gint, C.gint, C.AtkCoordType);
-// extern C.void _gotk4_atk1_Text_get_range_extents(*C.AtkText, C.gint, C.gint, C.AtkCoordType, C.AtkTextRectangle);
-// extern *C.gchar _gotk4_atk1_Text_get_selection(*C.AtkText, C.gint, C.gint, C.gint);
-// extern *C.gchar _gotk4_atk1_Text_get_string_at_offset(*C.AtkText, C.gint, C.AtkTextGranularity, C.gint, C.gint);
-// extern *C.gchar _gotk4_atk1_Text_get_text(*C.AtkText, C.gint, C.gint);
-// extern C.gboolean _gotk4_atk1_Text_remove_selection(*C.AtkText, C.gint);
-// extern C.gboolean _gotk4_atk1_Text_scroll_substring_to(*C.AtkText, C.gint, C.gint, C.AtkScrollType);
-// extern C.gboolean _gotk4_atk1_Text_scroll_substring_to_point(*C.AtkText, C.gint, C.gint, C.AtkCoordType, C.gint, C.gint);
-// extern C.gboolean _gotk4_atk1_Text_set_caret_offset(*C.AtkText, C.gint);
-// extern C.gboolean _gotk4_atk1_Text_set_selection(*C.AtkText, C.gint, C.gint, C.gint);
-// extern C.void _gotk4_atk1_Text_text_attributes_changed(*C.AtkText);
-// extern C.void _gotk4_atk1_Text_text_caret_moved(*C.AtkText, C.gint);
-// extern C.void _gotk4_atk1_Text_text_changed(*C.AtkText, C.gint, C.gint);
-// extern C.void _gotk4_atk1_Text_text_selection_changed(*C.AtkText);
-// C.gboolean _gotk4_atk1_Text_virtual_add_selection(void* fnptr, *C.AtkText carg0, C.gint carg1, C.gint carg2) {
-// 	return ((C.gboolean (*) (*C.AtkText, C.gint, C.gint))(fnptr))(carg0, carg1, carg2);
-// }
-// **C.AtkTextRange _gotk4_atk1_Text_virtual_get_bounded_ranges(void* fnptr, *C.AtkText carg0, *C.AtkTextRectangle carg1, C.AtkCoordType carg2, C.AtkTextClipType carg3, C.AtkTextClipType carg4) {
-// 	return ((**C.AtkTextRange (*) (*C.AtkText, *C.AtkTextRectangle, C.AtkCoordType, C.AtkTextClipType, C.AtkTextClipType))(fnptr))(carg0, carg1, carg2, carg3, carg4);
-// }
-// C.gint _gotk4_atk1_Text_virtual_get_caret_offset(void* fnptr, *C.AtkText carg0) {
-// 	return ((C.gint (*) (*C.AtkText))(fnptr))(carg0);
-// }
-// C.gunichar _gotk4_atk1_Text_virtual_get_character_at_offset(void* fnptr, *C.AtkText carg0, C.gint carg1) {
-// 	return ((C.gunichar (*) (*C.AtkText, C.gint))(fnptr))(carg0, carg1);
+// extern gboolean _gotk4_atk1_Text_add_selection(AtkText*, gint, gint);
+// extern AtkTextRange** _gotk4_atk1_Text_get_bounded_ranges(AtkText*, AtkTextRectangle*, AtkCoordType, AtkTextClipType, AtkTextClipType);
+// extern gint _gotk4_atk1_Text_get_caret_offset(AtkText*);
+// extern gunichar _gotk4_atk1_Text_get_character_at_offset(AtkText*, gint);
+// extern gint _gotk4_atk1_Text_get_character_count(AtkText*);
+// extern void _gotk4_atk1_Text_get_character_extents(AtkText*, gint, gint, gint, gint, gint, AtkCoordType);
+// extern gint _gotk4_atk1_Text_get_n_selections(AtkText*);
+// extern gint _gotk4_atk1_Text_get_offset_at_point(AtkText*, gint, gint, AtkCoordType);
+// extern void _gotk4_atk1_Text_get_range_extents(AtkText*, gint, gint, AtkCoordType, AtkTextRectangle);
+// extern gchar* _gotk4_atk1_Text_get_selection(AtkText*, gint, gint, gint);
+// extern gchar* _gotk4_atk1_Text_get_string_at_offset(AtkText*, gint, AtkTextGranularity, gint, gint);
+// extern gchar* _gotk4_atk1_Text_get_text(AtkText*, gint, gint);
+// extern gboolean _gotk4_atk1_Text_remove_selection(AtkText*, gint);
+// extern gboolean _gotk4_atk1_Text_scroll_substring_to(AtkText*, gint, gint, AtkScrollType);
+// extern gboolean _gotk4_atk1_Text_scroll_substring_to_point(AtkText*, gint, gint, AtkCoordType, gint, gint);
+// extern gboolean _gotk4_atk1_Text_set_caret_offset(AtkText*, gint);
+// extern gboolean _gotk4_atk1_Text_set_selection(AtkText*, gint, gint, gint);
+// extern void _gotk4_atk1_Text_text_attributes_changed(AtkText*);
+// extern void _gotk4_atk1_Text_text_caret_moved(AtkText*, gint);
+// extern void _gotk4_atk1_Text_text_changed(AtkText*, gint, gint);
+// extern void _gotk4_atk1_Text_text_selection_changed(AtkText*);
+// gboolean _gotk4_atk1_Text_virtual_add_selection(void* fnptr, AtkText* carg0, gint carg1, gint carg2) {
+// 	return ((gboolean (*) (AtkText*, gint, gint))(fnptr))(carg0, carg1, carg2);
+// }
+// AtkTextRange** _gotk4_atk1_Text_virtual_get_bounded_ranges(void* fnptr, AtkText* carg0, AtkTextRectangle* carg1, AtkCoordType carg2, AtkTextClipType carg3, AtkTextClipType carg4) {
+// 	return ((AtkTextRange** (*) (AtkText*, AtkTextRectangle*, AtkCoordType, AtkTextClipType, AtkTextClipType))(fnptr))(carg0, carg1, carg2, carg3, carg4);
+// }
+// gint _gotk4_atk1_Text_virtual_get_caret_offset(void* fnptr, AtkText* carg0) {
+// 	return ((gint (*) (AtkText*))(fnptr))(carg0);
+// }
+// gunichar _gotk4_atk1_Text_virtual_get_character_at_offset(void* fnptr, AtkText* carg0, gint carg1) {
+// 	return ((gunichar (*) (AtkText*, gint))(fnptr))(carg0, carg1);
 // }
-// C.gint _gotk4_atk1_Text_virtual_get_character_count(void* fnptr, *C.AtkText carg0) {
-// 	return ((C.gint (*) (*C.AtkText))(fnptr))(carg0);
+// gint _gotk4_atk1_Text_virtual_get_character_count(void* fnptr, AtkText* carg0) {
+// 	return ((gint (*) (AtkText*))(fnptr))(carg0);
 // }
-// C.void _gotk4_atk1_Text_virtual_get_character_extents(void* fnptr, *C.AtkText carg0, C.gint carg1, C.gint* carg2, C.gint* carg3, C.gint* carg4, C.gint* carg5, C.AtkCoordType carg6) {
-// 	return ((C.void (*) (*C.AtkText, C.gint, C.gint*, C.gint*, C.gint*, C.gint*, C.AtkCoordType))(fnptr))(carg0, carg1, carg2, carg3, carg4, carg5, carg6);
+// void _gotk4_atk1_Text_virtual_get_character_extents(void* fnptr, AtkText* carg0, gint carg1, gint* carg2, gint* carg3, gint* carg4, gint* carg5, AtkCoordType carg6) {
+// 	return ((void (*) (AtkText*, gint, gint*, gint*, gint*, gint*, AtkCoordType))(fnptr))(carg0, carg1, carg2, carg3, carg4, carg5, carg6);
 // }
-// C.gint _gotk4_atk1_Text_virtual_get_n_selections(void* fnptr, *C.AtkText carg0) {
-// 	return ((C.gint (*) (*C.AtkText))(fnptr))(carg0);
-// }
-// C.gint _gotk4_atk1_Text_virtual_get_offset_at_point(void* fnptr, *C.AtkText carg0, C.gint carg1, C.gint carg2, C.AtkCoordType carg3) {
-// 	return ((C.gint (*) (*C.AtkText, C.gint, C.gint, C.AtkCoordType))(fnptr))(carg0, carg1, carg2, carg3);
-// }
-// C.void _gotk4_atk1_Text_virtual_get_range_extents(void* fnptr, *C.AtkText carg0, C.gint carg1, C.gint carg2, C.AtkCoordType carg3, C.AtkTextRectangle* carg4) {
-// 	return ((C.void (*) (*C.AtkText, C.gint, C.gint, C.AtkCoordType, C.AtkTextRectangle*))(fnptr))(carg0, carg1, carg2, carg3, carg4);
-// }
-// *C.gchar _gotk4_atk1_Text_virtual_get_selection(void* fnptr, *C.AtkText carg0, C.gint carg1, C.gint* carg2, C.gint* carg3) {
-// 	return ((*C.gchar (*) (*C.AtkText, C.gint, C.gint*, C.gint*))(fnptr))(carg0, carg1, carg2, carg3);
-// }
-// *C.gchar _gotk4_atk1_Text_virtual_get_string_at_offset(void* fnptr, *C.AtkText carg0, C.gint carg1, C.AtkTextGranularity carg2, C.gint* carg3, C.gint* carg4) {
-// 	return ((*C.gchar (*) (*C.AtkText, C.gint, C.AtkTextGranularity, C.gint*, C.gint*))(fnptr))(carg0, carg1, carg2, carg3, carg4);
-// }
-// *C.gchar _gotk4_atk1_Text_virtual_get_text(void* fnptr, *C.AtkText carg0, C.gint carg1, C.gint carg2) {
-// 	return ((*C.gchar (*) (*C.AtkText, C.gint, C.gint))(fnptr))(carg0, carg1, carg2);
-// }
-// C.gboolean _gotk4_atk1_Text_virtual_remove_selection(void* fnptr, *C.AtkText carg0, C.gint carg1) {
-// 	return ((C.gboolean (*) (*C.AtkText, C.gint))(fnptr))(carg0, carg1);
-// }
-// C.gboolean _gotk4_atk1_Text_virtual_scroll_substring_to(void* fnptr, *C.AtkText carg0, C.gint carg1, C.gint carg2, C.AtkScrollType carg3) {
-// 	return ((C.gboolean (*) (*C.AtkText, C.gint, C.gint, C.AtkScrollType))(fnptr))(carg0, carg1, carg2, carg3);
-// }
-// C.gboolean _gotk4_atk1_Text_virtual_scroll_substring_to_point(void* fnptr, *C.AtkText carg0, C.gint carg1, C.gint carg2, C.AtkCoordType carg3, C.gint carg4, C.gint carg5) {
-// 	return ((C.gboolean (*) (*C.AtkText, C.gint, C.gint, C.AtkCoordType, C.gint, C.gint))(fnptr))(carg0, carg1, carg2, carg3, carg4, carg5);
-// }
-// C.gboolean _gotk4_atk1_Text_virtual_set_caret_offset(void* fnptr, *C.AtkText carg0, C.gint carg1) {
-// 	return ((C.gboolean (*) (*C.AtkText, C.gint))(fnptr))(carg0, carg1);
-// }
-// C.gboolean _gotk4_atk1_Text_virtual_set_selection(void* fnptr, *C.AtkText carg0, C.gint carg1, C.gint carg2, C.gint carg3) {
-// 	return ((C.gboolean (*) (*C.AtkText, C.gint, C.gint, C.gint))(fnptr))(carg0, carg1, carg2, carg3);
-// }
-// C.void _gotk4_atk1_Text_virtual_text_attributes_changed(void* fnptr, *C.AtkText carg0) {
-// 	return ((C.void (*) (*C.AtkText))(fnptr))(carg0);
-// }
-// C.void _gotk4_atk1_Text_virtual_text_caret_moved(void* fnptr, *C.AtkText carg0, C.gint carg1) {
-// 	return ((C.void (*) (*C.AtkText, C.gint))(fnptr))(carg0, carg1);
-// }
-// C.void _gotk4_atk1_Text_virtual_text_changed(void* fnptr, *C.AtkText carg0, C.gint carg1, C.gint carg2) {
-// 	return ((C.void (*) (*C.AtkText, C.gint, C.gint))(fnptr))(carg0, carg1, carg2);
-// }
-// C.void _gotk4_atk1_Text_virtual_text_selection_changed(void* fnptr, *C.AtkText carg0) {
-// 	return ((C.void (*) (*C.AtkText))(fnptr))(carg0);
-// }
-// extern C.gdouble _gotk4_atk1_Value_get_increment(*C.AtkValue);
-// extern *C.AtkRange _gotk4_atk1_Value_get_range(*C.AtkValue);
-// extern *C.GSList _gotk4_atk1_Value_get_sub_ranges(*C.AtkValue);
-// extern C.void _gotk4_atk1_Value_get_value_and_text(*C.AtkValue, C.gdouble, *C.gchar);
-// extern C.void _gotk4_atk1_Value_set_value(*C.AtkValue, C.gdouble);
-// C.gdouble _gotk4_atk1_Value_virtual_get_increment(void* fnptr, *C.AtkValue carg0) {
-// 	return ((C.gdouble (*) (*C.AtkValue))(fnptr))(carg0);
-// }
-// *C.AtkRange _gotk4_atk1_Value_virtual_get_range(void* fnptr, *C.AtkValue carg0) {
-// 	return ((*C.AtkRange (*) (*C.AtkValue))(fnptr))(carg0);
-// }
-// *C.GSList _gotk4_atk1_Value_virtual_get_sub_ranges(void* fnptr, *C.AtkValue carg0) {
-// 	return ((*C.GSList (*) (*C.AtkValue))(fnptr))(carg0);
-// }
-// C.void _gotk4_atk1_Value_virtual_get_value_and_text(void* fnptr, *C.AtkValue carg0, C.gdouble* carg1, *C.gchar* carg2) {
-// 	return ((C.void (*) (*C.AtkValue, C.gdouble*, *C.gchar*))(fnptr))(carg0, carg1, carg2);
+// gint _gotk4_atk1_Text_virtual_get_n_selections(void* fnptr, AtkText* carg0) {
+// 	return ((gint (*) (AtkText*))(fnptr))(carg0);
+// }
+// gint _gotk4_atk1_Text_virtual_get_offset_at_point(void* fnptr, AtkText* carg0, gint carg1, gint carg2, AtkCoordType carg3) {
+// 	return ((gint (*) (AtkText*, gint, gint, AtkCoordType))(fnptr))(carg0, carg1, carg2, carg3);
+// }
+// void _gotk4_atk1_Text_virtual_get_range_extents(void* fnptr, AtkText* carg0, gint carg1, gint carg2, AtkCoordType carg3, AtkTextRectangle* carg4) {
+// 	return ((void (*) (AtkText*, gint, gint, AtkCoordType, AtkTextRectangle*))(fnptr))(carg0, carg1, carg2, carg3, carg4);
+// }
+// gchar* _gotk4_atk1_Text_virtual_get_selection(void* fnptr, AtkText* carg0, gint carg1, gint* carg2, gint* carg3) {
+// 	return ((gchar* (*) (AtkText*, gint, gint*, gint*))(fnptr))(carg0, carg1, carg2, carg3);
+// }
+// gchar* _gotk4_atk1_Text_virtual_get_string_at_offset(void* fnptr, AtkText* carg0, gint carg1, AtkTextGranularity carg2, gint* carg3, gint* carg4) {
+// 	return ((gchar* (*) (AtkText*, gint, AtkTextGranularity, gint*, gint*))(fnptr))(carg0, carg1, carg2, carg3, carg4);
+// }
+// gchar* _gotk4_atk1_Text_virtual_get_text(void* fnptr, AtkText* carg0, gint carg1, gint carg2) {
+// 	return ((gchar* (*) (AtkText*, gint, gint))(fnptr))(carg0, carg1, carg2);
+// }
+// gboolean _gotk4_atk1_Text_virtual_remove_selection(void* fnptr, AtkText* carg0, gint carg1) {
+// 	return ((gboolean (*) (AtkText*, gint))(fnptr))(carg0, carg1);
+// }
+// gboolean _gotk4_atk1_Text_virtual_scroll_substring_to(void* fnptr, AtkText* carg0, gint carg1, gint carg2, AtkScrollType carg3) {
+// 	return ((gboolean (*) (AtkText*, gint, gint, AtkScrollType))(fnptr))(carg0, carg1, carg2, carg3);
+// }
+// gboolean _gotk4_atk1_Text_virtual_scroll_substring_to_point(void* fnptr, AtkText* carg0, gint carg1, gint carg2, AtkCoordType carg3, gint carg4, gint carg5) {
+// 	return ((gboolean (*) (AtkText*, gint, gint, AtkCoordType, gint, gint))(fnptr))(carg0, carg1, carg2, carg3, carg4, carg5);
+// }
+// gboolean _gotk4_atk1_Text_virtual_set_caret_offset(void* fnptr, AtkText* carg0, gint carg1) {
+// 	return ((gboolean (*) (AtkText*, gint))(fnptr))(carg0, carg1);
+// }
+// gboolean _gotk4_atk1_Text_virtual_set_selection(void* fnptr, AtkText* carg0, gint carg1, gint carg2, gint carg3) {
+// 	return ((gboolean (*) (AtkText*, gint, gint, gint))(fnptr))(carg0, carg1, carg2, carg3);
+// }
+// void _gotk4_atk1_Text_virtual_text_attributes_changed(void* fnptr, AtkText* carg0) {
+// 	return ((void (*) (AtkText*))(fnptr))(carg0);
+// }
+// void _gotk4_atk1_Text_virtual_text_caret_moved(void* fnptr, AtkText* carg0, gint carg1) {
+// 	return ((void (*) (AtkText*, gint))(fnptr))(carg0, carg1);
+// }
+// void _gotk4_atk1_Text_virtual_text_changed(void* fnptr, AtkText* carg0, gint carg1, gint carg2) {
+// 	return ((void (*) (AtkText*, gint, gint))(fnptr))(carg0, carg1, carg2);
+// }
+// void _gotk4_atk1_Text_virtual_text_selection_changed(void* fnptr, AtkText* carg0) {
+// 	return ((void (*) (AtkText*))(fnptr))(carg0);
+// }
+// extern gdouble _gotk4_atk1_Value_get_increment(AtkValue*);
+// extern AtkRange* _gotk4_atk1_Value_get_range(AtkValue*);
+// extern GSList* _gotk4_atk1_Value_get_sub_ranges(AtkValue*);
+// extern void _gotk4_atk1_Value_get_value_and_text(AtkValue*, gdouble, gchar*);
+// extern void _gotk4_atk1_Value_set_value(AtkValue*, const gdouble);
+// gdouble _gotk4_atk1_Value_virtual_get_increment(void* fnptr, AtkValue* carg0) {
+// 	return ((gdouble (*) (AtkValue*))(fnptr))(carg0);
+// }
+// AtkRange* _gotk4_atk1_Value_virtual_get_range(void* fnptr, AtkValue* carg0) {
+// 	return ((AtkRange* (*) (AtkValue*))(fnptr))(carg0);
+// }
+// GSList* _gotk4_atk1_Value_virtual_get_sub_ranges(void* fnptr, AtkValue* carg0) {
+// 	return ((GSList* (*) (AtkValue*))(fnptr))(carg0);
+// }
+// void _gotk4_atk1_Value_virtual_get_value_and_text(void* fnptr, AtkValue* carg0, gdouble* carg1, gchar** carg2) {
+// 	return ((void (*) (AtkValue*, gdouble*, gchar**))(fnptr))(carg0, carg1, carg2);
 // }
-// C.void _gotk4_atk1_Value_virtual_set_value(void* fnptr, *C.AtkValue carg0, C.gdouble carg1) {
-// 	return ((C.void (*) (*C.AtkValue, C.gdouble))(fnptr))(carg0, carg1);
+// void _gotk4_atk1_Value_virtual_set_value(void* fnptr, AtkValue* carg0, const gdouble carg1) {
+// 	return ((void (*) (AtkValue*, const gdouble))(fnptr))(carg0, carg1);
 // }
-// extern C.gint _gotk4_atk1_Hyperlink_get_end_index(*C.AtkHyperlink);
-// extern C.gint _gotk4_atk1_Hyperlink_get_n_anchors(*C.AtkHyperlink);
-// extern *C.AtkObject _gotk4_atk1_Hyperlink_get_object(*C.AtkHyperlink, C.gint);
-// extern C.gint _gotk4_atk1_Hyperlink_get_start_index(*C.AtkHyperlink);
-// extern *C.gchar _gotk4_atk1_Hyperlink_get_uri(*C.AtkHyperlink, C.gint);
-// extern C.gboolean _gotk4_atk1_Hyperlink_is_valid(*C.AtkHyperlink);
-// extern C.void _gotk4_atk1_Hyperlink_link_activated(*C.AtkHyperlink);
-// extern C.guint _gotk4_atk1_Hyperlink_link_state(*C.AtkHyperlink);
-// C.gint _gotk4_atk1_Hyperlink_virtual_get_end_index(void* fnptr, *C.AtkHyperlink carg0) {
-// 	return ((C.gint (*) (*C.AtkHyperlink))(fnptr))(carg0);
+// extern gint _gotk4_atk1_Hyperlink_get_end_index(AtkHyperlink*);
+// extern gint _gotk4_atk1_Hyperlink_get_n_anchors(AtkHyperlink*);
+// extern AtkObject* _gotk4_atk1_Hyperlink_get_object(AtkHyperlink*, gint);
+// extern gint _gotk4_atk1_Hyperlink_get_start_index(AtkHyperlink*);
+// extern gchar* _gotk4_atk1_Hyperlink_get_uri(AtkHyperlink*, gint);
+// extern gboolean _gotk4_atk1_Hyperlink_is_valid(AtkHyperlink*);
+// extern void _gotk4_atk1_Hyperlink_link_activated(AtkHyperlink*);
+// extern guint _gotk4_atk1_Hyperlink_link_state(AtkHyperlink*);
+// gint _gotk4_atk1_Hyperlink_virtual_get_end_index(void* fnptr, AtkHyperlink* carg0) {
+// 	return ((gint (*) (AtkHyperlink*))(fnptr))(carg0);
 // }
-// C.gint _gotk4_atk1_Hyperlink_virtual_get_n_anchors(void* fnptr, *C.AtkHyperlink carg0) {
-// 	return ((C.gint (*) (*C.AtkHyperlink))(fnptr))(carg0);
+// gint _gotk4_atk1_Hyperlink_virtual_get_n_anchors(void* fnptr, AtkHyperlink* carg0) {
+// 	return ((gint (*) (AtkHyperlink*))(fnptr))(carg0);
 // }
-// *C.AtkObject _gotk4_atk1_Hyperlink_virtual_get_object(void* fnptr, *C.AtkHyperlink carg0, C.gint carg1) {
-// 	return ((*C.AtkObject (*) (*C.AtkHyperlink, C.gint))(fnptr))(carg0, carg1);
+// AtkObject* _gotk4_atk1_Hyperlink_virtual_get_object(void* fnptr, AtkHyperlink* carg0, gint carg1) {
+// 	return ((AtkObject* (*) (AtkHyperlink*, gint))(fnptr))(carg0, carg1);
 // }
-// C.gint _gotk4_atk1_Hyperlink_virtual_get_start_index(void* fnptr, *C.AtkHyperlink carg0) {
-// 	return ((C.gint (*) (*C.AtkHyperlink))(fnptr))(carg0);
+// gint _gotk4_atk1_Hyperlink_virtual_get_start_index(void* fnptr, AtkHyperlink* carg0) {
+// 	return ((gint (*) (AtkHyperlink*))(fnptr))(carg0);
 // }
-// *C.gchar _gotk4_atk1_Hyperlink_virtual_get_uri(void* fnptr, *C.AtkHyperlink carg0, C.gint carg1) {
-// 	return ((*C.gchar (*) (*C.AtkHyperlink, C.gint))(fnptr))(carg0, carg1);
+// gchar* _gotk4_atk1_Hyperlink_virtual_get_uri(void* fnptr, AtkHyperlink* carg0, gint carg1) {
+// 	return ((gchar* (*) (AtkHyperlink*, gint))(fnptr))(carg0, carg1);
 // }
-// C.gboolean _gotk4_atk1_Hyperlink_virtual_is_valid(void* fnptr, *C.AtkHyperlink carg0) {
-// 	return ((C.gboolean (*) (*C.AtkHyperlink))(fnptr))(carg0);
+// gboolean _gotk4_atk1_Hyperlink_virtual_is_valid(void* fnptr, AtkHyperlink* carg0) {
+// 	return ((gboolean (*) (AtkHyperlink*))(fnptr))(carg0);
 // }
-// C.void _gotk4_atk1_Hyperlink_virtual_link_activated(void* fnptr, *C.AtkHyperlink carg0) {
-// 	return ((C.void (*) (*C.AtkHyperlink))(fnptr))(carg0);
+// void _gotk4_atk1_Hyperlink_virtual_link_activated(void* fnptr, AtkHyperlink* carg0) {
+// 	return ((void (*) (AtkHyperlink*))(fnptr))(carg0);
 // }
-// C.guint _gotk4_atk1_Hyperlink_virtual_link_state(void* fnptr, *C.AtkHyperlink carg0) {
-// 	return ((C.guint (*) (*C.AtkHyperlink))(fnptr))(carg0);
+// guint _gotk4_atk1_Hyperlink_virtual_link_state(void* fnptr, AtkHyperlink* carg0) {
+// 	return ((guint (*) (AtkHyperlink*))(fnptr))(carg0);
 // }
-// extern C.void _gotk4_atk1_Object_focus_event(*C.AtkObject, C.gboolean);
-// extern *C.gchar _gotk4_atk1_Object_get_description(*C.AtkObject);
-// extern C.gint _gotk4_atk1_Object_get_index_in_parent(*C.AtkObject);
-// extern C.gint _gotk4_atk1_Object_get_n_children(*C.AtkObject);
-// extern *C.gchar _gotk4_atk1_Object_get_name(*C.AtkObject);
-// extern *C.gchar _gotk4_atk1_Object_get_object_locale(*C.AtkObject);
-// extern *C.AtkObject _gotk4_atk1_Object_get_parent(*C.AtkObject);
-// extern C.AtkRole _gotk4_atk1_Object_get_role(*C.AtkObject);
-// extern C.void _gotk4_atk1_Object_property_change(*C.AtkObject, *C.AtkPropertyValues);
-// extern *C.AtkRelationSet _gotk4_atk1_Object_ref_relation_set(*C.AtkObject);
-// extern *C.AtkStateSet _gotk4_atk1_Object_ref_state_set(*C.AtkObject);
-// extern C.void _gotk4_atk1_Object_set_description(*C.AtkObject, *C.gchar);
-// extern C.void _gotk4_atk1_Object_set_name(*C.AtkObject, *C.gchar);
-// extern C.void _gotk4_atk1_Object_set_parent(*C.AtkObject, *C.AtkObject);
-// extern C.void _gotk4_atk1_Object_set_role(*C.AtkObject, C.AtkRole);
-// extern C.void _gotk4_atk1_Object_state_change(*C.AtkObject, *C.gchar, C.gboolean);
-// extern C.void _gotk4_atk1_Object_visible_data_changed(*C.AtkObject);
-// C.void _gotk4_atk1_Object_virtual_focus_event(void* fnptr, *C.AtkObject carg0, C.gboolean carg1) {
-// 	return ((C.void (*) (*C.AtkObject, C.gboolean))(fnptr))(carg0, carg1);
+// extern void _gotk4_atk1_Object_focus_event(AtkObject*, gboolean);
+// extern const gchar* _gotk4_atk1_Object_get_description(AtkObject*);
+// extern gint _gotk4_atk1_Object_get_index_in_parent(AtkObject*);
+// extern gint _gotk4_atk1_Object_get_n_children(AtkObject*);
+// extern const gchar* _gotk4_atk1_Object_get_name(AtkObject*);
+// extern const gchar* _gotk4_atk1_Object_get_object_locale(AtkObject*);
+// extern AtkObject* _gotk4_atk1_Object_get_parent(AtkObject*);
+// extern AtkRole _gotk4_atk1_Object_get_role(AtkObject*);
+// extern void _gotk4_atk1_Object_property_change(AtkObject*, AtkPropertyValues*);
+// extern AtkRelationSet* _gotk4_atk1_Object_ref_relation_set(AtkObject*);
+// extern AtkStateSet* _gotk4_atk1_Object_ref_state_set(AtkObject*);
+// extern void _gotk4_atk1_Object_set_description(AtkObject*, const gchar*);
+// extern void _gotk4_atk1_Object_set_name(AtkObject*, const gchar*);
+// extern void _gotk4_atk1_Object_set_parent(AtkObject*, AtkObject*);
+// extern void _gotk4_atk1_Object_set_role(AtkObject*, AtkRole);
+// extern void _gotk4_atk1_Object_state_change(AtkObject*, const gchar*, gboolean);
+// extern void _gotk4_atk1_Object_visible_data_changed(AtkObject*);
+// void _gotk4_atk1_Object_virtual_focus_event(void* fnptr, AtkObject* carg0, gboolean carg1) {
+// 	return ((void (*) (AtkObject*, gboolean))(fnptr))(carg0, carg1);
 // }
-// *C.gchar _gotk4_atk1_Object_virtual_get_description(void* fnptr, *C.AtkObject carg0) {
-// 	return ((*C.gchar (*) (*C.AtkObject))(fnptr))(carg0);
+// const gchar* _gotk4_atk1_Object_virtual_get_description(void* fnptr, AtkObject* carg0) {
+// 	return ((const gchar* (*) (AtkObject*))(fnptr))(carg0);
 // }
-// C.gint _gotk4_atk1_Object_virtual_get_index_in_parent(void* fnptr, *C.AtkObject carg0) {
-// 	return ((C.gint (*) (*C.AtkObject))(fnptr))(carg0);
+// gint _gotk4_atk1_Object_virtual_get_index_in_parent(void* fnptr, AtkObject* carg0) {
+// 	return ((gint (*) (AtkObject*))(fnptr))(carg0);
 // }
-// C.gint _gotk4_atk1_Object_virtual_get_n_children(void* fnptr, *C.AtkObject carg0) {
-// 	return ((C.gint (*) (*C.AtkObject))(fnptr))(carg0);
+// gint _gotk4_atk1_Object_virtual_get_n_children(void* fnptr, AtkObject* carg0) {
+// 	return ((gint (*) (AtkObject*))(fnptr))(carg0);
 // }
-// *C.gchar _gotk4_atk1_Object_virtual_get_name(void* fnptr, *C.AtkObject carg0) {
-// 	return ((*C.gchar (*) (*C.AtkObject))(fnptr))(carg0);
+// const gchar* _gotk4_atk1_Object_virtual_get_name(void* fnptr, AtkObject* carg0) {
+// 	return ((const gchar* (*) (AtkObject*))(fnptr))(carg0);
 // }
-// *C.gchar _gotk4_atk1_Object_virtual_get_object_locale(void* fnptr, *C.AtkObject carg0) {
-// 	return ((*C.gchar (*) (*C.AtkObject))(fnptr))(carg0);
+// const gchar* _gotk4_atk1_Object_virtual_get_object_locale(void* fnptr, AtkObject* carg0) {
+// 	return ((const gchar* (*) (AtkObject*))(fnptr))(carg0);
 // }
-// *C.AtkObject _gotk4_atk1_Object_virtual_get_parent(void* fnptr, *C.AtkObject carg0) {
-// 	return ((*C.AtkObject (*) (*C.AtkObject))(fnptr))(carg0);
+// AtkObject* _gotk4_atk1_Object_virtual_get_parent(void* fnptr, AtkObject* carg0) {
+// 	return ((AtkObject* (*) (AtkObject*))(fnptr))(carg0);
 // }
-// C.AtkRole _gotk4_atk1_Object_virtual_get_role(void* fnptr, *C.AtkObject carg0) {
-// 	return ((C.AtkRole (*) (*C.AtkObject))(fnptr))(carg0);
+// AtkRole _gotk4_atk1_Object_virtual_get_role(void* fnptr, AtkObject* carg0) {
+// 	return ((AtkRole (*) (AtkObject*))(fnptr))(carg0);
 // }
-// C.void _gotk4_atk1_Object_virtual_property_change(void* fnptr, *C.AtkObject carg0, *C.AtkPropertyValues carg1) {
-// 	return ((C.void (*) (*C.AtkObject, *C.AtkPropertyValues))(fnptr))(carg0, carg1);
+// void _gotk4_atk1_Object_virtual_property_change(void* fnptr, AtkObject* carg0, AtkPropertyValues* carg1) {
+// 	return ((void (*) (AtkObject*, AtkPropertyValues*))(fnptr))(carg0, carg1);
 // }
-// *C.AtkRelationSet _gotk4_atk1_Object_virtual_ref_relation_set(void* fnptr, *C.AtkObject carg0) {
-// 	return ((*C.AtkRelationSet (*) (*C.AtkObject))(fnptr))(carg0);
+// AtkRelationSet* _gotk4_atk1_Object_virtual_ref_relation_set(void* fnptr, AtkObject* carg0) {
+// 	return ((AtkRelationSet* (*) (AtkObject*))(fnptr))(carg0);
 // }
-// *C.AtkStateSet _gotk4_atk1_Object_virtual_ref_state_set(void* fnptr, *C.AtkObject carg0) {
-// 	return ((*C.AtkStateSet (*) (*C.AtkObject))(fnptr))(carg0);
+// AtkStateSet* _gotk4_atk1_Object_virtual_ref_state_set(void* fnptr, AtkObject* carg0) {
+// 	return ((AtkStateSet* (*) (AtkObject*))(fnptr))(carg0);
 // }
-// C.void _gotk4_atk1_Object_virtual_set_description(void* fnptr, *C.AtkObject carg0, *C.gchar carg1) {
-// 	return ((C.void (*) (*C.AtkObject, *C.gchar))(fnptr))(carg0, carg1);
+// void _gotk4_atk1_Object_virtual_set_description(void* fnptr, AtkObject* carg0, const gchar* carg1) {
+// 	return ((void (*) (AtkObject*, const gchar*))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_atk1_Object_virtual_set_name(void* fnptr, *C.AtkObject carg0, *C.gchar carg1) {
-// 	return ((C.void (*) (*C.AtkObject, *C.gchar))(fnptr))(carg0, carg1);
+// void _gotk4_atk1_Object_virtual_set_name(void* fnptr, AtkObject* carg0, const gchar* carg1) {
+// 	return ((void (*) (AtkObject*, const gchar*))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_atk1_Object_virtual_set_parent(void* fnptr, *C.AtkObject carg0, *C.AtkObject carg1) {
-// 	return ((C.void (*) (*C.AtkObject, *C.AtkObject))(fnptr))(carg0, carg1);
+// void _gotk4_atk1_Object_virtual_set_parent(void* fnptr, AtkObject* carg0, AtkObject* carg1) {
+// 	return ((void (*) (AtkObject*, AtkObject*))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_atk1_Object_virtual_set_role(void* fnptr, *C.AtkObject carg0, C.AtkRole carg1) {
-// 	return ((C.void (*) (*C.AtkObject, C.AtkRole))(fnptr))(carg0, carg1);
+// void _gotk4_atk1_Object_virtual_set_role(void* fnptr, AtkObject* carg0, AtkRole carg1) {
+// 	return ((void (*) (AtkObject*, AtkRole))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_atk1_Object_virtual_state_change(void* fnptr, *C.AtkObject carg0, *C.gchar carg1, C.gboolean carg2) {
-// 	return ((C.void (*) (*C.AtkObject, *C.gchar, C.gboolean))(fnptr))(carg0, carg1, carg2);
+// void _gotk4_atk1_Object_virtual_state_change(void* fnptr, AtkObject* carg0, const gchar* carg1, gboolean carg2) {
+// 	return ((void (*) (AtkObject*, const gchar*, gboolean))(fnptr))(carg0, carg1, carg2);
 // }
-// C.void _gotk4_atk1_Object_virtual_visible_data_changed(void* fnptr, *C.AtkObject carg0) {
-// 	return ((C.void (*) (*C.AtkObject))(fnptr))(carg0);
+// void _gotk4_atk1_Object_virtual_visible_data_changed(void* fnptr, AtkObject* carg0) {
+// 	return ((void (*) (AtkObject*))(fnptr))(carg0);
 // }
-// extern C.void _gotk4_atk1_ObjectFactory_invalidate(*C.AtkObjectFactory);
-// C.void _gotk4_atk1_ObjectFactory_virtual_invalidate(void* fnptr, *C.AtkObjectFactory carg0) {
-// 	return ((C.void (*) (*C.AtkObjectFactory))(fnptr))(carg0);
+// extern void _gotk4_atk1_ObjectFactory_invalidate(AtkObjectFactory*);
+// void _gotk4_atk1_ObjectFactory_virtual_invalidate(void* fnptr, AtkObjectFactory* carg0) {
+// 	return ((void (*) (AtkObjectFactory*))(fnptr))(carg0);
 // }
-// extern *C.gchar _gotk4_atk1_Plug_get_object_id(*C.AtkPlug);
-// *C.gchar _gotk4_atk1_Plug_virtual_get_object_id(void* fnptr, *C.AtkPlug carg0) {
-// 	return ((*C.gchar (*) (*C.AtkPlug))(fnptr))(carg0);
+// extern gchar* _gotk4_atk1_Plug_get_object_id(AtkPlug*);
+// gchar* _gotk4_atk1_Plug_virtual_get_object_id(void* fnptr, AtkPlug* carg0) {
+// 	return ((gchar* (*) (AtkPlug*))(fnptr))(carg0);
 // }
-// extern C.void _gotk4_atk1_Socket_embed(*C.AtkSocket, *C.gchar);
-// C.void _gotk4_atk1_Socket_virtual_embed(void* fnptr, *C.AtkSocket carg0, *C.gchar carg1) {
-// 	return ((C.void (*) (*C.AtkSocket, *C.gchar))(fnptr))(carg0, carg1);
+// extern void _gotk4_atk1_Socket_embed(AtkSocket*, const gchar*);
+// void _gotk4_atk1_Socket_virtual_embed(void* fnptr, AtkSocket* carg0, const gchar* carg1) {
+// 	return ((void (*) (AtkSocket*, const gchar*))(fnptr))(carg0, carg1);
 // }
 import "C"
 
@@ -7418,7 +7418,7 @@ func (text *EditableTextInstance) InsertText(str string, length int32, position 
 	carg2 = C.gint(length)
 	_ = position
 	_ = carg3
-	panic("unimplemented conversion of *int32 (*C.gint)")
+	panic("unimplemented conversion of *int32 (gint*)")
 
 	C.atk_editable_text_insert_text(carg0, carg1, carg2, carg3)
 	runtime.KeepAlive(text)
@@ -7606,7 +7606,7 @@ func UnsafeApplyEditableTextOverrides[Instance EditableText](gclass unsafe.Point
 				length = int32(carg2)
 				_ = position
 				_ = carg3
-				panic("unimplemented conversion of *int32 (*C.gint)")
+				panic("unimplemented conversion of *int32 (gint*)")
 
 				overrides.InsertText(text, str, length, position)
 			},
@@ -7750,7 +7750,7 @@ func (text *EditableTextInstance) ParentInsertText(str string, length int32, pos
 	carg2 = C.gint(length)
 	_ = position
 	_ = carg3
-	panic("unimplemented conversion of *int32 (*C.gint)")
+	panic("unimplemented conversion of *int32 (gint*)")
 
 	C._gotk4_atk1_EditableText_virtual_insert_text(unsafe.Pointer(parentclass.insert_text), carg0, carg1, carg2, carg3)
 	runtime.KeepAlive(text)
@@ -11972,7 +11972,7 @@ func (table *TableInstance) GetSelectedColumns(selected **int32) int32 {
 	carg0 = (*C.AtkTable)(UnsafeTableToGlibNone(table))
 	_ = selected
 	_ = carg1
-	panic("unimplemented conversion of **int32 (**C.gint)")
+	panic("unimplemented conversion of **int32 (gint**)")
 
 	cret = C.atk_table_get_selected_columns(carg0, carg1)
 	runtime.KeepAlive(table)
@@ -12005,7 +12005,7 @@ func (table *TableInstance) GetSelectedRows(selected **int32) int32 {
 	carg0 = (*C.AtkTable)(UnsafeTableToGlibNone(table))
 	_ = selected
 	_ = carg1
-	panic("unimplemented conversion of **int32 (**C.gint)")
+	panic("unimplemented conversion of **int32 (gint**)")
 
 	cret = C.atk_table_get_selected_rows(carg0, carg1)
 	runtime.KeepAlive(table)
@@ -13092,7 +13092,7 @@ func UnsafeApplyTableOverrides[Instance Table](gclass unsafe.Pointer, overrides 
 				table = UnsafeTableFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				_ = selected
 				_ = carg1
-				panic("unimplemented conversion of **int32 (**C.gint)")
+				panic("unimplemented conversion of **int32 (gint**)")
 
 				goret = overrides.GetSelectedColumns(table, selected)
 
@@ -13116,7 +13116,7 @@ func UnsafeApplyTableOverrides[Instance Table](gclass unsafe.Pointer, overrides 
 				table = UnsafeTableFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				_ = selected
 				_ = carg1
-				panic("unimplemented conversion of **int32 (**C.gint)")
+				panic("unimplemented conversion of **int32 (gint**)")
 
 				goret = overrides.GetSelectedRows(table, selected)
 
@@ -13901,7 +13901,7 @@ func (table *TableInstance) ParentGetSelectedColumns(selected **int32) int32 {
 
 	_ = selected
 	_ = carg1
-	panic("unimplemented conversion of **int32 (**C.gint)")
+	panic("unimplemented conversion of **int32 (gint**)")
 
 	cret = C._gotk4_atk1_Table_virtual_get_selected_columns(unsafe.Pointer(parentclass.get_selected_columns), carg0, carg1)
 	runtime.KeepAlive(table)
@@ -13936,7 +13936,7 @@ func (table *TableInstance) ParentGetSelectedRows(selected **int32) int32 {
 
 	_ = selected
 	_ = carg1
-	panic("unimplemented conversion of **int32 (**C.gint)")
+	panic("unimplemented conversion of **int32 (gint**)")
 
 	cret = C._gotk4_atk1_Table_virtual_get_selected_rows(unsafe.Pointer(parentclass.get_selected_rows), carg0, carg1)
 	runtime.KeepAlive(table)
@@ -15875,7 +15875,7 @@ func (text *TextInstance) GetBoundedRanges(rect *TextRectangle, coordType CoordT
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []*TextRange (**C.AtkTextRange)")
+	panic("unimplemented conversion of []*TextRange (AtkTextRange**)")
 
 	return goret
 }
@@ -16110,7 +16110,7 @@ func (text *TextInstance) GetRangeExtents(startOffset int32, endOffset int32, co
 
 	_ = rect
 	_ = carg4
-	panic("unimplemented conversion of TextRectangle (C.AtkTextRectangle)")
+	panic("unimplemented conversion of TextRectangle (AtkTextRectangle)")
 
 	return rect
 }
@@ -16919,7 +16919,7 @@ func UnsafeApplyTextOverrides[Instance Text](gclass unsafe.Pointer, overrides Te
 
 				_ = goret
 				_ = cret
-				panic("unimplemented conversion of []*TextRange (**C.AtkTextRange)")
+				panic("unimplemented conversion of []*TextRange (AtkTextRange**)")
 
 				return cret
 			},
@@ -17083,7 +17083,7 @@ func UnsafeApplyTextOverrides[Instance Text](gclass unsafe.Pointer, overrides Te
 
 				_ = rect
 				_ = carg4
-				panic("unimplemented conversion of TextRectangle (C.AtkTextRectangle)")
+				panic("unimplemented conversion of TextRectangle (AtkTextRectangle)")
 			},
 		)
 	}
@@ -17450,7 +17450,7 @@ func (text *TextInstance) ParentGetBoundedRanges(rect *TextRectangle, coordType 
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []*TextRange (**C.AtkTextRange)")
+	panic("unimplemented conversion of []*TextRange (AtkTextRange**)")
 
 	return goret
 }
@@ -17696,7 +17696,7 @@ func (text *TextInstance) ParentGetRangeExtents(startOffset int32, endOffset int
 
 	_ = rect
 	_ = carg4
-	panic("unimplemented conversion of TextRectangle (C.AtkTextRectangle)")
+	panic("unimplemented conversion of TextRectangle (AtkTextRectangle)")
 
 	return rect
 }
@@ -18795,7 +18795,7 @@ func UnsafeApplyValueOverrides[Instance Value](gclass unsafe.Pointer, overrides 
 
 				_ = goret
 				_ = cret
-				panic("unimplemented conversion of []*Range (*C.GSList)")
+				panic("unimplemented conversion of []*Range (GSList*)")
 
 				return cret
 			},
@@ -23157,7 +23157,7 @@ func NewRelation(targets []Object, relationship RelationType) Relation {
 	_ = targets
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []Object (**C.AtkObject)")
+	panic("unimplemented conversion of []Object (AtkObject**)")
 	carg3 = C.AtkRelationType(relationship)
 
 	cret = C.atk_relation_new(carg1, carg2, carg3)
@@ -24304,7 +24304,7 @@ func (set *StateSetInstance) AddStates(types []StateType) {
 	_ = types
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []StateType (*C.AtkStateType)")
+	panic("unimplemented conversion of []StateType (AtkStateType*)")
 
 	C.atk_state_set_add_states(carg0, carg1, carg2)
 	runtime.KeepAlive(set)
@@ -24408,7 +24408,7 @@ func (set *StateSetInstance) ContainsStates(types []StateType) bool {
 	_ = types
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []StateType (*C.AtkStateType)")
+	panic("unimplemented conversion of []StateType (AtkStateType*)")
 
 	cret = C.atk_state_set_contains_states(carg0, carg1, carg2)
 	runtime.KeepAlive(set)

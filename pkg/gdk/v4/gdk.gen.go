@@ -21,58 +21,58 @@ import (
 // #cgo pkg-config: gtk4
 // #cgo CFLAGS: -Wno-deprecated-declarations
 // #include <gdk/gdk.h>
-// extern C.void _gotk4_gio2_AsyncReadyCallback(*C.GObject, *C.GAsyncResult, C.gpointer);
-// extern *C.GdkPaintable _gotk4_gdk4_Paintable_get_current_image(*C.GdkPaintable);
-// extern C.GdkPaintableFlags _gotk4_gdk4_Paintable_get_flags(*C.GdkPaintable);
-// extern C.double _gotk4_gdk4_Paintable_get_intrinsic_aspect_ratio(*C.GdkPaintable);
-// extern C.int _gotk4_gdk4_Paintable_get_intrinsic_height(*C.GdkPaintable);
-// extern C.int _gotk4_gdk4_Paintable_get_intrinsic_width(*C.GdkPaintable);
-// extern C.void _gotk4_gdk4_Paintable_snapshot(*C.GdkPaintable, *C.GdkSnapshot, C.double, C.double);
-// *C.GdkPaintable _gotk4_gdk4_Paintable_virtual_get_current_image(void* fnptr, *C.GdkPaintable carg0) {
-// 	return ((*C.GdkPaintable (*) (*C.GdkPaintable))(fnptr))(carg0);
+// extern void _gotk4_gio2_AsyncReadyCallback(GObject*, GAsyncResult*, gpointer);
+// extern GdkPaintable* _gotk4_gdk4_Paintable_get_current_image(GdkPaintable*);
+// extern GdkPaintableFlags _gotk4_gdk4_Paintable_get_flags(GdkPaintable*);
+// extern double _gotk4_gdk4_Paintable_get_intrinsic_aspect_ratio(GdkPaintable*);
+// extern int _gotk4_gdk4_Paintable_get_intrinsic_height(GdkPaintable*);
+// extern int _gotk4_gdk4_Paintable_get_intrinsic_width(GdkPaintable*);
+// extern void _gotk4_gdk4_Paintable_snapshot(GdkPaintable*, GdkSnapshot*, double, double);
+// GdkPaintable* _gotk4_gdk4_Paintable_virtual_get_current_image(void* fnptr, GdkPaintable* carg0) {
+// 	return ((GdkPaintable* (*) (GdkPaintable*))(fnptr))(carg0);
 // }
-// C.GdkPaintableFlags _gotk4_gdk4_Paintable_virtual_get_flags(void* fnptr, *C.GdkPaintable carg0) {
-// 	return ((C.GdkPaintableFlags (*) (*C.GdkPaintable))(fnptr))(carg0);
+// GdkPaintableFlags _gotk4_gdk4_Paintable_virtual_get_flags(void* fnptr, GdkPaintable* carg0) {
+// 	return ((GdkPaintableFlags (*) (GdkPaintable*))(fnptr))(carg0);
 // }
-// C.double _gotk4_gdk4_Paintable_virtual_get_intrinsic_aspect_ratio(void* fnptr, *C.GdkPaintable carg0) {
-// 	return ((C.double (*) (*C.GdkPaintable))(fnptr))(carg0);
+// double _gotk4_gdk4_Paintable_virtual_get_intrinsic_aspect_ratio(void* fnptr, GdkPaintable* carg0) {
+// 	return ((double (*) (GdkPaintable*))(fnptr))(carg0);
 // }
-// C.int _gotk4_gdk4_Paintable_virtual_get_intrinsic_height(void* fnptr, *C.GdkPaintable carg0) {
-// 	return ((C.int (*) (*C.GdkPaintable))(fnptr))(carg0);
+// int _gotk4_gdk4_Paintable_virtual_get_intrinsic_height(void* fnptr, GdkPaintable* carg0) {
+// 	return ((int (*) (GdkPaintable*))(fnptr))(carg0);
 // }
-// C.int _gotk4_gdk4_Paintable_virtual_get_intrinsic_width(void* fnptr, *C.GdkPaintable carg0) {
-// 	return ((C.int (*) (*C.GdkPaintable))(fnptr))(carg0);
+// int _gotk4_gdk4_Paintable_virtual_get_intrinsic_width(void* fnptr, GdkPaintable* carg0) {
+// 	return ((int (*) (GdkPaintable*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gdk4_Paintable_virtual_snapshot(void* fnptr, *C.GdkPaintable carg0, *C.GdkSnapshot carg1, C.double carg2, C.double carg3) {
-// 	return ((C.void (*) (*C.GdkPaintable, *C.GdkSnapshot, C.double, C.double))(fnptr))(carg0, carg1, carg2, carg3);
+// void _gotk4_gdk4_Paintable_virtual_snapshot(void* fnptr, GdkPaintable* carg0, GdkSnapshot* carg1, double carg2, double carg3) {
+// 	return ((void (*) (GdkPaintable*, GdkSnapshot*, double, double))(fnptr))(carg0, carg1, carg2, carg3);
 // }
-// extern C.void _gotk4_gdk4_ContentProvider_attach_clipboard(*C.GdkContentProvider, *C.GdkClipboard);
-// extern C.void _gotk4_gdk4_ContentProvider_content_changed(*C.GdkContentProvider);
-// extern C.void _gotk4_gdk4_ContentProvider_detach_clipboard(*C.GdkContentProvider, *C.GdkClipboard);
-// extern C.gboolean _gotk4_gdk4_ContentProvider_get_value(*C.GdkContentProvider, C.GValue, GError*);
-// extern *C.GdkContentFormats _gotk4_gdk4_ContentProvider_ref_formats(*C.GdkContentProvider);
-// extern *C.GdkContentFormats _gotk4_gdk4_ContentProvider_ref_storable_formats(*C.GdkContentProvider);
-// extern C.gboolean _gotk4_gdk4_ContentProvider_write_mime_type_finish(*C.GdkContentProvider, *C.GAsyncResult, GError*);
-// C.void _gotk4_gdk4_ContentProvider_virtual_attach_clipboard(void* fnptr, *C.GdkContentProvider carg0, *C.GdkClipboard carg1) {
-// 	return ((C.void (*) (*C.GdkContentProvider, *C.GdkClipboard))(fnptr))(carg0, carg1);
+// extern void _gotk4_gdk4_ContentProvider_attach_clipboard(GdkContentProvider*, GdkClipboard*);
+// extern void _gotk4_gdk4_ContentProvider_content_changed(GdkContentProvider*);
+// extern void _gotk4_gdk4_ContentProvider_detach_clipboard(GdkContentProvider*, GdkClipboard*);
+// extern gboolean _gotk4_gdk4_ContentProvider_get_value(GdkContentProvider*, GValue, GError*);
+// extern GdkContentFormats* _gotk4_gdk4_ContentProvider_ref_formats(GdkContentProvider*);
+// extern GdkContentFormats* _gotk4_gdk4_ContentProvider_ref_storable_formats(GdkContentProvider*);
+// extern gboolean _gotk4_gdk4_ContentProvider_write_mime_type_finish(GdkContentProvider*, GAsyncResult*, GError*);
+// void _gotk4_gdk4_ContentProvider_virtual_attach_clipboard(void* fnptr, GdkContentProvider* carg0, GdkClipboard* carg1) {
+// 	return ((void (*) (GdkContentProvider*, GdkClipboard*))(fnptr))(carg0, carg1);
 // }
-// C.void _gotk4_gdk4_ContentProvider_virtual_content_changed(void* fnptr, *C.GdkContentProvider carg0) {
-// 	return ((C.void (*) (*C.GdkContentProvider))(fnptr))(carg0);
+// void _gotk4_gdk4_ContentProvider_virtual_content_changed(void* fnptr, GdkContentProvider* carg0) {
+// 	return ((void (*) (GdkContentProvider*))(fnptr))(carg0);
 // }
-// C.void _gotk4_gdk4_ContentProvider_virtual_detach_clipboard(void* fnptr, *C.GdkContentProvider carg0, *C.GdkClipboard carg1) {
-// 	return ((C.void (*) (*C.GdkContentProvider, *C.GdkClipboard))(fnptr))(carg0, carg1);
+// void _gotk4_gdk4_ContentProvider_virtual_detach_clipboard(void* fnptr, GdkContentProvider* carg0, GdkClipboard* carg1) {
+// 	return ((void (*) (GdkContentProvider*, GdkClipboard*))(fnptr))(carg0, carg1);
 // }
-// C.gboolean _gotk4_gdk4_ContentProvider_virtual_get_value(void* fnptr, *C.GdkContentProvider carg0, C.GValue* carg1, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GdkContentProvider, C.GValue*, GError**))(fnptr))(carg0, carg1, _cerr);
+// gboolean _gotk4_gdk4_ContentProvider_virtual_get_value(void* fnptr, GdkContentProvider* carg0, GValue* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GdkContentProvider*, GValue*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
-// *C.GdkContentFormats _gotk4_gdk4_ContentProvider_virtual_ref_formats(void* fnptr, *C.GdkContentProvider carg0) {
-// 	return ((*C.GdkContentFormats (*) (*C.GdkContentProvider))(fnptr))(carg0);
+// GdkContentFormats* _gotk4_gdk4_ContentProvider_virtual_ref_formats(void* fnptr, GdkContentProvider* carg0) {
+// 	return ((GdkContentFormats* (*) (GdkContentProvider*))(fnptr))(carg0);
 // }
-// *C.GdkContentFormats _gotk4_gdk4_ContentProvider_virtual_ref_storable_formats(void* fnptr, *C.GdkContentProvider carg0) {
-// 	return ((*C.GdkContentFormats (*) (*C.GdkContentProvider))(fnptr))(carg0);
+// GdkContentFormats* _gotk4_gdk4_ContentProvider_virtual_ref_storable_formats(void* fnptr, GdkContentProvider* carg0) {
+// 	return ((GdkContentFormats* (*) (GdkContentProvider*))(fnptr))(carg0);
 // }
-// C.gboolean _gotk4_gdk4_ContentProvider_virtual_write_mime_type_finish(void* fnptr, *C.GdkContentProvider carg0, *C.GAsyncResult carg1, GError** _cerr) {
-// 	return ((C.gboolean (*) (*C.GdkContentProvider, *C.GAsyncResult, GError**))(fnptr))(carg0, carg1, _cerr);
+// gboolean _gotk4_gdk4_ContentProvider_virtual_write_mime_type_finish(void* fnptr, GdkContentProvider* carg0, GAsyncResult* carg1, GError** _cerr) {
+// 	return ((gboolean (*) (GdkContentProvider*, GAsyncResult*, GError**))(fnptr))(carg0, carg1, _cerr);
 // }
 import "C"
 
@@ -7523,7 +7523,7 @@ func ContentDeserializeFinish(result gio.AsyncResult) (gobject.Value, bool, erro
 
 	_ = value
 	_ = carg2
-	panic("unimplemented conversion of gobject.Value (C.GValue)")
+	panic("unimplemented conversion of gobject.Value (GValue)")
 	if cret != 0 {
 		goret = true
 	}
@@ -11750,7 +11750,7 @@ func (clipboard *ClipboardInstance) ReadAsync(cancellable context.Context, mimeT
 	}
 	_ = mimeTypes
 	_ = carg1
-	panic("unimplemented conversion of []string (**C.char)")
+	panic("unimplemented conversion of []string (const char**)")
 	carg2 = C.int(ioPriority)
 	if callback != nil {
 		carg4 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
@@ -12797,7 +12797,7 @@ func NewContentProviderUnion(providers []ContentProvider) ContentProvider {
 	_ = providers
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []ContentProvider (**C.GdkContentProvider)")
+	panic("unimplemented conversion of []ContentProvider (GdkContentProvider**)")
 
 	cret = C.gdk_content_provider_new_union(carg1, carg2)
 	runtime.KeepAlive(providers)
@@ -12853,7 +12853,7 @@ func (provider *ContentProviderInstance) GetValue() (gobject.Value, bool, error)
 
 	_ = value
 	_ = carg1
-	panic("unimplemented conversion of gobject.Value (C.GValue)")
+	panic("unimplemented conversion of gobject.Value (GValue)")
 	if cret != 0 {
 		goret = true
 	}
@@ -13160,7 +13160,7 @@ func UnsafeApplyContentProviderOverrides[Instance ContentProvider](gclass unsafe
 
 				_ = value
 				_ = carg1
-				panic("unimplemented conversion of gobject.Value (C.GValue)")
+				panic("unimplemented conversion of gobject.Value (GValue)")
 				if goret {
 					cret = C.TRUE
 				}
@@ -13322,7 +13322,7 @@ func (provider *ContentProviderInstance) ParentGetValue() (gobject.Value, bool, 
 
 	_ = value
 	_ = carg1
-	panic("unimplemented conversion of gobject.Value (C.GValue)")
+	panic("unimplemented conversion of gobject.Value (GValue)")
 	if cret != 0 {
 		goret = true
 	}
@@ -18577,7 +18577,7 @@ func (self *DropInstance) ReadAsync(cancellable context.Context, mimeTypes []str
 	}
 	_ = mimeTypes
 	_ = carg1
-	panic("unimplemented conversion of []string (**C.char)")
+	panic("unimplemented conversion of []string (const char**)")
 	carg2 = C.int(ioPriority)
 	if callback != nil {
 		carg4 = (*[0]byte)(C._gotk4_gio2_AsyncReadyCallback)
@@ -21749,7 +21749,7 @@ func (monitor *MonitorInstance) GetGeometry() Rectangle {
 
 	_ = geometry
 	_ = carg1
-	panic("unimplemented conversion of Rectangle (C.GdkRectangle)")
+	panic("unimplemented conversion of Rectangle (GdkRectangle)")
 
 	return geometry
 }
@@ -24772,7 +24772,7 @@ func NewContentFormats(mimeTypes []string) *ContentFormats {
 	_ = mimeTypes
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []string (**C.char)")
+	panic("unimplemented conversion of []string (const char**)")
 
 	cret = C.gdk_content_formats_new(carg1, carg2)
 	runtime.KeepAlive(mimeTypes)
@@ -24941,7 +24941,7 @@ func (formats *ContentFormats) GetGTypes() (uint, []gobject.Type) {
 	nGtypes = uint(carg1)
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []gobject.Type (*C.GType)")
+	panic("unimplemented conversion of []gobject.Type (const GType*)")
 
 	return nGtypes, goret
 }
@@ -24974,7 +24974,7 @@ func (formats *ContentFormats) GetMIMETypes() (uint, []string) {
 	nMimeTypes = uint(carg1)
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (**C.char)")
+	panic("unimplemented conversion of []string (const char* const*)")
 
 	return nMimeTypes, goret
 }
@@ -26189,7 +26189,7 @@ func NewFileListFromArray(files []gio.File) *FileList {
 	_ = files
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []gio.File (**C.GFile)")
+	panic("unimplemented conversion of []gio.File (GFile**)")
 
 	cret = C.gdk_file_list_new_from_array(carg1, carg2)
 	runtime.KeepAlive(files)
@@ -27884,7 +27884,7 @@ func (src1 *Rectangle) Intersect(src2 *Rectangle) (Rectangle, bool) {
 
 	_ = dest
 	_ = carg2
-	panic("unimplemented conversion of Rectangle (C.GdkRectangle)")
+	panic("unimplemented conversion of Rectangle (GdkRectangle)")
 	if cret != 0 {
 		goret = true
 	}
@@ -27926,7 +27926,7 @@ func (src1 *Rectangle) Union(src2 *Rectangle) Rectangle {
 
 	_ = dest
 	_ = carg2
-	panic("unimplemented conversion of Rectangle (C.GdkRectangle)")
+	panic("unimplemented conversion of Rectangle (GdkRectangle)")
 
 	return dest
 }

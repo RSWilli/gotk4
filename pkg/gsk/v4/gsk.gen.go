@@ -19,7 +19,7 @@ import (
 // #cgo pkg-config: gtk4
 // #cgo CFLAGS: -Wno-deprecated-declarations
 // #include <gsk/gsk.h>
-// extern C.gboolean _gotk4_gsk4_PathForEachFunc(C.GskPathOperation, *C.graphene_point_t, C.gsize, C.float, C.gpointer);
+// extern gboolean _gotk4_gsk4_PathForEachFunc(GskPathOperation, const graphene_point_t*, gsize, float, gpointer);
 import "C"
 
 // GType values.
@@ -2500,7 +2500,7 @@ func (self *Path) GetBounds() (graphene.Rect, bool) {
 
 	_ = bounds
 	_ = carg1
-	panic("unimplemented conversion of graphene.Rect (C.graphene_rect_t)")
+	panic("unimplemented conversion of graphene.Rect (graphene_rect_t)")
 	if cret != 0 {
 		goret = true
 	}
@@ -2549,7 +2549,7 @@ func (self *Path) GetClosestPoint(point *graphene.Point, threshold float32) (Pat
 
 	_ = result
 	_ = carg3
-	panic("unimplemented conversion of PathPoint (C.GskPathPoint)")
+	panic("unimplemented conversion of PathPoint (GskPathPoint)")
 	distance = float32(carg4)
 	if cret != 0 {
 		goret = true
@@ -2584,7 +2584,7 @@ func (self *Path) GetEndPoint() (PathPoint, bool) {
 
 	_ = result
 	_ = carg1
-	panic("unimplemented conversion of PathPoint (C.GskPathPoint)")
+	panic("unimplemented conversion of PathPoint (GskPathPoint)")
 	if cret != 0 {
 		goret = true
 	}
@@ -2618,7 +2618,7 @@ func (self *Path) GetStartPoint() (PathPoint, bool) {
 
 	_ = result
 	_ = carg1
-	panic("unimplemented conversion of PathPoint (C.GskPathPoint)")
+	panic("unimplemented conversion of PathPoint (GskPathPoint)")
 	if cret != 0 {
 		goret = true
 	}
@@ -2662,7 +2662,7 @@ func (self *Path) GetStrokeBounds(stroke *Stroke) (graphene.Rect, bool) {
 
 	_ = bounds
 	_ = carg2
-	panic("unimplemented conversion of graphene.Rect (C.graphene_rect_t)")
+	panic("unimplemented conversion of graphene.Rect (graphene_rect_t)")
 	if cret != 0 {
 		goret = true
 	}
@@ -4045,7 +4045,7 @@ func (self *PathMeasure) GetPoint(distance float32) (PathPoint, bool) {
 
 	_ = result
 	_ = carg2
-	panic("unimplemented conversion of PathPoint (C.GskPathPoint)")
+	panic("unimplemented conversion of PathPoint (GskPathPoint)")
 	if cret != 0 {
 		goret = true
 	}
@@ -4312,7 +4312,7 @@ func (point *PathPoint) GetCurvature(path *Path, direction PathDirection) (graph
 
 	_ = center
 	_ = carg3
-	panic("unimplemented conversion of graphene.Point (C.graphene_point_t)")
+	panic("unimplemented conversion of graphene.Point (graphene_point_t)")
 	goret = float32(cret)
 
 	return center, goret
@@ -4377,7 +4377,7 @@ func (point *PathPoint) GetPosition(path *Path) graphene.Point {
 
 	_ = position
 	_ = carg2
-	panic("unimplemented conversion of graphene.Point (C.graphene_point_t)")
+	panic("unimplemented conversion of graphene.Point (graphene_point_t)")
 
 	return position
 }
@@ -4466,7 +4466,7 @@ func (point *PathPoint) GetTangent(path *Path, direction PathDirection) graphene
 
 	_ = tangent
 	_ = carg3
-	panic("unimplemented conversion of graphene.Vec2 (C.graphene_vec2_t)")
+	panic("unimplemented conversion of graphene.Vec2 (graphene_vec2_t)")
 
 	return tangent
 }
@@ -5264,7 +5264,7 @@ func (self *Stroke) GetDash() (uint, []float32) {
 	nDash = uint(carg1)
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []float32 (*C.float)")
+	panic("unimplemented conversion of []float32 (const float*)")
 
 	return nDash, goret
 }
@@ -5427,7 +5427,7 @@ func (self *Stroke) SetDash(dash []float32) {
 	_ = dash
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []float32 (*C.float)")
+	panic("unimplemented conversion of []float32 (const float*)")
 
 	C.gsk_stroke_set_dash(carg0, carg1, carg2)
 	runtime.KeepAlive(self)
@@ -6271,7 +6271,7 @@ func (self *Transform) ToMatrix() graphene.Matrix {
 
 	_ = outMatrix
 	_ = carg1
-	panic("unimplemented conversion of graphene.Matrix (C.graphene_matrix_t)")
+	panic("unimplemented conversion of graphene.Matrix (graphene_matrix_t)")
 
 	return outMatrix
 }
@@ -6407,7 +6407,7 @@ func (self *Transform) TransformBounds(rect *graphene.Rect) graphene.Rect {
 
 	_ = outRect
 	_ = carg2
-	panic("unimplemented conversion of graphene.Rect (C.graphene_rect_t)")
+	panic("unimplemented conversion of graphene.Rect (graphene_rect_t)")
 
 	return outRect
 }
@@ -6440,7 +6440,7 @@ func (self *Transform) TransformPoint(point *graphene.Point) graphene.Point {
 
 	_ = outPoint
 	_ = carg2
-	panic("unimplemented conversion of graphene.Point (C.graphene_point_t)")
+	panic("unimplemented conversion of graphene.Point (graphene_point_t)")
 
 	return outPoint
 }

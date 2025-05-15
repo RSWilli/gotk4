@@ -14,7 +14,7 @@ import (
 // #cgo pkg-config: gtk4-wayland
 // #cgo CFLAGS: -Wno-deprecated-declarations
 // #include <gdk/wayland/gdkwayland.h>
-// extern C.void _gotk4_gdkwayland4_WaylandToplevelExported(*C.GdkToplevel, *C.char, C.gpointer);
+// extern void _gotk4_gdkwayland4_WaylandToplevelExported(GdkToplevel*, const char*, gpointer);
 // extern void destroyUserdata(gpointer);
 import "C"
 
