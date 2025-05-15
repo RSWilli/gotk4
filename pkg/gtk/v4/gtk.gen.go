@@ -66,25 +66,25 @@ import (
 // C.gboolean _gotk4_gtk4_AccessibleRange_virtual_set_current_value(void* fnptr, *C.GtkAccessibleRange carg0, C.double carg1) {
 // 	return ((C.gboolean (*) (*C.GtkAccessibleRange, C.double))(fnptr))(carg0, carg1);
 // }
-// extern C.unsigned int _gotk4_gtk4_AccessibleText_get_caret_position(*C.GtkAccessibleText);
-// extern *C.GBytes _gotk4_gtk4_AccessibleText_get_contents(*C.GtkAccessibleText, C.unsigned int, C.unsigned int);
-// extern *C.GBytes _gotk4_gtk4_AccessibleText_get_contents_at(*C.GtkAccessibleText, C.unsigned int, C.GtkAccessibleTextGranularity, C.unsigned int, C.unsigned int);
-// extern C.gboolean _gotk4_gtk4_AccessibleText_get_extents(*C.GtkAccessibleText, C.unsigned int, C.unsigned int, *C.graphene_rect_t);
-// extern C.gboolean _gotk4_gtk4_AccessibleText_get_offset(*C.GtkAccessibleText, *C.graphene_point_t, C.unsigned int);
-// C.unsigned int _gotk4_gtk4_AccessibleText_virtual_get_caret_position(void* fnptr, *C.GtkAccessibleText carg0) {
-// 	return ((C.unsigned int (*) (*C.GtkAccessibleText))(fnptr))(carg0);
+// extern C.uint _gotk4_gtk4_AccessibleText_get_caret_position(*C.GtkAccessibleText);
+// extern *C.GBytes _gotk4_gtk4_AccessibleText_get_contents(*C.GtkAccessibleText, C.uint, C.uint);
+// extern *C.GBytes _gotk4_gtk4_AccessibleText_get_contents_at(*C.GtkAccessibleText, C.uint, C.GtkAccessibleTextGranularity, C.uint, C.uint);
+// extern C.gboolean _gotk4_gtk4_AccessibleText_get_extents(*C.GtkAccessibleText, C.uint, C.uint, *C.graphene_rect_t);
+// extern C.gboolean _gotk4_gtk4_AccessibleText_get_offset(*C.GtkAccessibleText, *C.graphene_point_t, C.uint);
+// C.uint _gotk4_gtk4_AccessibleText_virtual_get_caret_position(void* fnptr, *C.GtkAccessibleText carg0) {
+// 	return ((C.uint (*) (*C.GtkAccessibleText))(fnptr))(carg0);
 // }
-// *C.GBytes _gotk4_gtk4_AccessibleText_virtual_get_contents(void* fnptr, *C.GtkAccessibleText carg0, C.unsigned int carg1, C.unsigned int carg2) {
-// 	return ((*C.GBytes (*) (*C.GtkAccessibleText, C.unsigned int, C.unsigned int))(fnptr))(carg0, carg1, carg2);
+// *C.GBytes _gotk4_gtk4_AccessibleText_virtual_get_contents(void* fnptr, *C.GtkAccessibleText carg0, C.uint carg1, C.uint carg2) {
+// 	return ((*C.GBytes (*) (*C.GtkAccessibleText, C.uint, C.uint))(fnptr))(carg0, carg1, carg2);
 // }
-// *C.GBytes _gotk4_gtk4_AccessibleText_virtual_get_contents_at(void* fnptr, *C.GtkAccessibleText carg0, C.unsigned int carg1, C.GtkAccessibleTextGranularity carg2, C.unsigned int* carg3, C.unsigned int* carg4) {
-// 	return ((*C.GBytes (*) (*C.GtkAccessibleText, C.unsigned int, C.GtkAccessibleTextGranularity, C.unsigned int*, C.unsigned int*))(fnptr))(carg0, carg1, carg2, carg3, carg4);
+// *C.GBytes _gotk4_gtk4_AccessibleText_virtual_get_contents_at(void* fnptr, *C.GtkAccessibleText carg0, C.uint carg1, C.GtkAccessibleTextGranularity carg2, C.uint* carg3, C.uint* carg4) {
+// 	return ((*C.GBytes (*) (*C.GtkAccessibleText, C.uint, C.GtkAccessibleTextGranularity, C.uint*, C.uint*))(fnptr))(carg0, carg1, carg2, carg3, carg4);
 // }
-// C.gboolean _gotk4_gtk4_AccessibleText_virtual_get_extents(void* fnptr, *C.GtkAccessibleText carg0, C.unsigned int carg1, C.unsigned int carg2, *C.graphene_rect_t carg3) {
-// 	return ((C.gboolean (*) (*C.GtkAccessibleText, C.unsigned int, C.unsigned int, *C.graphene_rect_t))(fnptr))(carg0, carg1, carg2, carg3);
+// C.gboolean _gotk4_gtk4_AccessibleText_virtual_get_extents(void* fnptr, *C.GtkAccessibleText carg0, C.uint carg1, C.uint carg2, *C.graphene_rect_t carg3) {
+// 	return ((C.gboolean (*) (*C.GtkAccessibleText, C.uint, C.uint, *C.graphene_rect_t))(fnptr))(carg0, carg1, carg2, carg3);
 // }
-// C.gboolean _gotk4_gtk4_AccessibleText_virtual_get_offset(void* fnptr, *C.GtkAccessibleText carg0, *C.graphene_point_t carg1, C.unsigned int* carg2) {
-// 	return ((C.gboolean (*) (*C.GtkAccessibleText, *C.graphene_point_t, C.unsigned int*))(fnptr))(carg0, carg1, carg2);
+// C.gboolean _gotk4_gtk4_AccessibleText_virtual_get_offset(void* fnptr, *C.GtkAccessibleText carg0, *C.graphene_point_t carg1, C.uint* carg2) {
+// 	return ((C.gboolean (*) (*C.GtkAccessibleText, *C.graphene_point_t, C.uint*))(fnptr))(carg0, carg1, carg2);
 // }
 // extern *C.char _gotk4_gtk4_Actionable_get_action_name(*C.GtkActionable);
 // extern C.void _gotk4_gtk4_Actionable_set_action_name(*C.GtkActionable, *C.char);
@@ -12214,13 +12214,13 @@ func (self *AccessibleTextInstance) UpdateCaretPosition() {
 func (self *AccessibleTextInstance) UpdateContents(change AccessibleTextContentChange, start uint, end uint) {
 	var carg0 *C.GtkAccessibleText             // in, none, converted
 	var carg1 C.GtkAccessibleTextContentChange // in, none, casted
-	var carg2 C.unsigned int                   // in, none, casted
-	var carg3 C.unsigned int                   // in, none, casted
+	var carg2 C.uint                           // in, none, casted
+	var carg3 C.uint                           // in, none, casted
 
 	carg0 = (*C.GtkAccessibleText)(UnsafeAccessibleTextToGlibNone(self))
 	carg1 = C.GtkAccessibleTextContentChange(change)
-	carg2 = C.unsigned int(start)
-	carg3 = C.unsigned int(end)
+	carg2 = C.uint(start)
+	carg3 = C.uint(end)
 
 	C.gtk_accessible_text_update_contents(carg0, carg1, carg2, carg3)
 	runtime.KeepAlive(self)
@@ -12331,7 +12331,7 @@ func UnsafeApplyAccessibleTextOverrides[Instance AccessibleText](gclass unsafe.P
 		classdata.StoreVirtualMethod(
 			unsafe.Pointer(pclass),
 			"_gotk4_gtk4_AccessibleText_get_caret_position",
-			func(carg0 *C.GtkAccessibleText) (cret C.unsigned int) {
+			func(carg0 *C.GtkAccessibleText) (cret C.uint) {
 				var self  Instance // go GtkAccessibleText subclass
 				var goret uint     // return, none, casted
 
@@ -12339,7 +12339,7 @@ func UnsafeApplyAccessibleTextOverrides[Instance AccessibleText](gclass unsafe.P
 
 				goret = overrides.GetCaretPosition(self)
 
-				cret = C.unsigned int(goret)
+				cret = C.uint(goret)
 
 				return cret
 			},
@@ -12351,7 +12351,7 @@ func UnsafeApplyAccessibleTextOverrides[Instance AccessibleText](gclass unsafe.P
 		classdata.StoreVirtualMethod(
 			unsafe.Pointer(pclass),
 			"_gotk4_gtk4_AccessibleText_get_contents",
-			func(carg0 *C.GtkAccessibleText, carg1 C.unsigned int, carg2 C.unsigned int) (cret *C.GBytes) {
+			func(carg0 *C.GtkAccessibleText, carg1 C.uint, carg2 C.uint) (cret *C.GBytes) {
 				var self  Instance    // go GtkAccessibleText subclass
 				var start uint        // in, none, casted
 				var end   uint        // in, none, casted
@@ -12375,7 +12375,7 @@ func UnsafeApplyAccessibleTextOverrides[Instance AccessibleText](gclass unsafe.P
 		classdata.StoreVirtualMethod(
 			unsafe.Pointer(pclass),
 			"_gotk4_gtk4_AccessibleText_get_contents_at",
-			func(carg0 *C.GtkAccessibleText, carg1 C.unsigned int, carg2 C.GtkAccessibleTextGranularity, carg3 *C.unsigned int, carg4 *C.unsigned int) (cret *C.GBytes) {
+			func(carg0 *C.GtkAccessibleText, carg1 C.uint, carg2 C.GtkAccessibleTextGranularity, carg3 *C.uint, carg4 *C.uint) (cret *C.GBytes) {
 				var self        Instance                  // go GtkAccessibleText subclass
 				var offset      uint                      // in, none, casted
 				var granularity AccessibleTextGranularity // in, none, casted
@@ -12389,8 +12389,8 @@ func UnsafeApplyAccessibleTextOverrides[Instance AccessibleText](gclass unsafe.P
 
 				start, end, goret = overrides.GetContentsAt(self, offset, granularity)
 
-				*carg3 = C.unsigned int(start)
-				*carg4 = C.unsigned int(end)
+				*carg3 = C.uint(start)
+				*carg4 = C.uint(end)
 				cret = (*C.GBytes)(glib.UnsafeBytesToGlibFull(goret))
 
 				return cret
@@ -12403,7 +12403,7 @@ func UnsafeApplyAccessibleTextOverrides[Instance AccessibleText](gclass unsafe.P
 		classdata.StoreVirtualMethod(
 			unsafe.Pointer(pclass),
 			"_gotk4_gtk4_AccessibleText_get_extents",
-			func(carg0 *C.GtkAccessibleText, carg1 C.unsigned int, carg2 C.unsigned int, carg3 *C.graphene_rect_t) (cret C.gboolean) {
+			func(carg0 *C.GtkAccessibleText, carg1 C.uint, carg2 C.uint, carg3 *C.graphene_rect_t) (cret C.gboolean) {
 				var self    Instance       // go GtkAccessibleText subclass
 				var start   uint           // in, none, casted
 				var end     uint           // in, none, casted
@@ -12431,7 +12431,7 @@ func UnsafeApplyAccessibleTextOverrides[Instance AccessibleText](gclass unsafe.P
 		classdata.StoreVirtualMethod(
 			unsafe.Pointer(pclass),
 			"_gotk4_gtk4_AccessibleText_get_offset",
-			func(carg0 *C.GtkAccessibleText, carg1 *C.graphene_point_t, carg2 *C.unsigned int) (cret C.gboolean) {
+			func(carg0 *C.GtkAccessibleText, carg1 *C.graphene_point_t, carg2 *C.uint) (cret C.gboolean) {
 				var self   Instance        // go GtkAccessibleText subclass
 				var point  *graphene.Point // in, none, converted
 				var offset uint            // out, full, casted
@@ -12442,7 +12442,7 @@ func UnsafeApplyAccessibleTextOverrides[Instance AccessibleText](gclass unsafe.P
 
 				offset, goret = overrides.GetOffset(self, point)
 
-				*carg2 = C.unsigned int(offset)
+				*carg2 = C.uint(offset)
 				if goret {
 					cret = C.TRUE
 				}
@@ -12463,7 +12463,7 @@ func UnsafeApplyAccessibleTextOverrides[Instance AccessibleText](gclass unsafe.P
 // Retrieves the position of the caret inside the accessible object.
 func (self *AccessibleTextInstance) ParentGetCaretPosition() uint {
 	var carg0 *C.GtkAccessibleText
-	var cret  C.unsigned int // return, none, casted
+	var cret  C.uint // return, none, casted
 
 	parentclass := (*C.GtkAccessibleTextInterface)(classdata.PeekParentInterface(UnsafeAccessibleTextToGlibNone(self), uint64(TypeAccessibleText)))
 
@@ -12496,14 +12496,14 @@ func (self *AccessibleTextInstance) ParentGetCaretPosition() uint {
 // of the accessible object.
 func (self *AccessibleTextInstance) ParentGetContents(start uint, end uint) *glib.Bytes {
 	var carg0 *C.GtkAccessibleText
-	var carg1 C.unsigned int // in, none, casted
-	var carg2 C.unsigned int // in, none, casted
-	var cret  *C.GBytes      // return, full, converted
+	var carg1 C.uint    // in, none, casted
+	var carg2 C.uint    // in, none, casted
+	var cret  *C.GBytes // return, full, converted
 
 	parentclass := (*C.GtkAccessibleTextInterface)(classdata.PeekParentInterface(UnsafeAccessibleTextToGlibNone(self), uint64(TypeAccessibleText)))
 
-	carg1 = C.unsigned int(start)
-	carg2 = C.unsigned int(end)
+	carg1 = C.uint(start)
+	carg2 = C.uint(end)
 
 	cret = C._gotk4_gtk4_AccessibleText_virtual_get_contents(unsafe.Pointer(parentclass.get_contents), carg0, carg1, carg2)
 	runtime.KeepAlive(self)
@@ -12537,15 +12537,15 @@ func (self *AccessibleTextInstance) ParentGetContents(start uint, end uint) *gli
 // The @start and @end values contain the boundaries of the text.
 func (self *AccessibleTextInstance) ParentGetContentsAt(offset uint, granularity AccessibleTextGranularity) (uint, uint, *glib.Bytes) {
 	var carg0 *C.GtkAccessibleText
-	var carg1 C.unsigned int                 // in, none, casted
+	var carg1 C.uint                         // in, none, casted
 	var carg2 C.GtkAccessibleTextGranularity // in, none, casted
-	var carg3 C.unsigned int                 // out, full, casted
-	var carg4 C.unsigned int                 // out, full, casted
+	var carg3 C.uint                         // out, full, casted
+	var carg4 C.uint                         // out, full, casted
 	var cret  *C.GBytes                      // return, full, converted
 
 	parentclass := (*C.GtkAccessibleTextInterface)(classdata.PeekParentInterface(UnsafeAccessibleTextToGlibNone(self), uint64(TypeAccessibleText)))
 
-	carg1 = C.unsigned int(offset)
+	carg1 = C.uint(offset)
 	carg2 = C.GtkAccessibleTextGranularity(granularity)
 
 	cret = C._gotk4_gtk4_AccessibleText_virtual_get_contents_at(unsafe.Pointer(parentclass.get_contents_at), carg0, carg1, carg2, &carg3, &carg4)
@@ -12581,15 +12581,15 @@ func (self *AccessibleTextInstance) ParentGetContentsAt(offset uint, granularity
 // Obtains the extents of a range of text, in widget coordinates.
 func (self *AccessibleTextInstance) ParentGetExtents(start uint, end uint, extents *graphene.Rect) bool {
 	var carg0 *C.GtkAccessibleText
-	var carg1 C.unsigned int     // in, none, casted
-	var carg2 C.unsigned int     // in, none, casted
+	var carg1 C.uint             // in, none, casted
+	var carg2 C.uint             // in, none, casted
 	var carg3 *C.graphene_rect_t // in, none, converted
 	var cret  C.gboolean         // return
 
 	parentclass := (*C.GtkAccessibleTextInterface)(classdata.PeekParentInterface(UnsafeAccessibleTextToGlibNone(self), uint64(TypeAccessibleText)))
 
-	carg1 = C.unsigned int(start)
-	carg2 = C.unsigned int(end)
+	carg1 = C.uint(start)
+	carg2 = C.uint(end)
 	carg3 = (*C.graphene_rect_t)(graphene.UnsafeRectToGlibNone(extents))
 
 	cret = C._gotk4_gtk4_AccessibleText_virtual_get_extents(unsafe.Pointer(parentclass.get_extents), carg0, carg1, carg2, carg3)
@@ -12623,7 +12623,7 @@ func (self *AccessibleTextInstance) ParentGetExtents(start uint, end uint, exten
 func (self *AccessibleTextInstance) ParentGetOffset(point *graphene.Point) (uint, bool) {
 	var carg0 *C.GtkAccessibleText
 	var carg1 *C.graphene_point_t // in, none, converted
-	var carg2 C.unsigned int      // out, full, casted
+	var carg2 C.uint              // out, full, casted
 	var cret  C.gboolean          // return
 
 	parentclass := (*C.GtkAccessibleTextInterface)(classdata.PeekParentInterface(UnsafeAccessibleTextToGlibNone(self), uint64(TypeAccessibleText)))

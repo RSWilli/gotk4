@@ -1039,7 +1039,7 @@ func (box *Box) InitFromBox(src *Box) *Box {
 // graphene_box_empty().
 func (box *Box) InitFromPoints(points []Point3D) *Box {
 	var carg0 *C.graphene_box_t     // in, none, converted
-	var carg1 C.unsigned int        // implicit
+	var carg1 C.uint                // implicit
 	var carg2 *C.graphene_point3d_t // in, transfer: none, C Pointers: 1, Name: array[Point3D], array (inner: *typesystem.Record, length-by: carg1)
 	var cret  *C.graphene_box_t     // return, none, converted
 
@@ -1116,7 +1116,7 @@ func (box *Box) InitFromVec3(min *Vec3, max *Vec3) *Box {
 // graphene_box_empty().
 func (box *Box) InitFromVectors(vectors []Vec3) *Box {
 	var carg0 *C.graphene_box_t  // in, none, converted
-	var carg1 C.unsigned int     // implicit
+	var carg1 C.uint             // implicit
 	var carg2 *C.graphene_vec3_t // in, transfer: none, C Pointers: 1, Name: array[Vec3], array (inner: *typesystem.Record, length-by: carg1)
 	var cret  *C.graphene_box_t  // return, none, converted
 
@@ -2557,11 +2557,11 @@ func (a *Matrix) EqualFast(b *Matrix) bool {
 // Retrieves the given row vector at @index_ inside a matrix.
 func (m *Matrix) GetRow(index_ uint) Vec4 {
 	var carg0 *C.graphene_matrix_t // in, none, converted
-	var carg1 C.unsigned int       // in, none, casted
+	var carg1 C.uint               // in, none, casted
 	var carg2 C.graphene_vec4_t    // out, transfer: none, C Pointers: 0, Name: Vec4, caller-allocates
 
 	carg0 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(m))
-	carg1 = C.unsigned int(index_)
+	carg1 = C.uint(index_)
 
 	C.graphene_matrix_get_row(carg0, carg1, &carg2)
 	runtime.KeepAlive(m)
@@ -2590,13 +2590,13 @@ func (m *Matrix) GetRow(index_ uint) Vec4 {
 // Retrieves the value at the given @row and @col index.
 func (m *Matrix) GetValue(row uint, col uint) float32 {
 	var carg0 *C.graphene_matrix_t // in, none, converted
-	var carg1 C.unsigned int       // in, none, casted
-	var carg2 C.unsigned int       // in, none, casted
+	var carg1 C.uint               // in, none, casted
+	var carg2 C.uint               // in, none, casted
 	var cret  C.float              // return, none, casted
 
 	carg0 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(m))
-	carg1 = C.unsigned int(row)
-	carg2 = C.unsigned int(col)
+	carg1 = C.uint(row)
+	carg2 = C.uint(col)
 
 	cret = C.graphene_matrix_get_value(carg0, carg1, carg2)
 	runtime.KeepAlive(m)
@@ -6136,11 +6136,11 @@ func (q *Quad) Contains(p *Point) bool {
 // Retrieves the point of a #graphene_quad_t at the given index.
 func (q *Quad) GetPoint(index_ uint) *Point {
 	var carg0 *C.graphene_quad_t  // in, none, converted
-	var carg1 C.unsigned int      // in, none, casted
+	var carg1 C.uint              // in, none, casted
 	var cret  *C.graphene_point_t // return, none, converted
 
 	carg0 = (*C.graphene_quad_t)(UnsafeQuadToGlibNone(q))
-	carg1 = C.unsigned int(index_)
+	carg1 = C.uint(index_)
 
 	cret = C.graphene_quad_get_point(carg0, carg1)
 	runtime.KeepAlive(q)
@@ -9513,7 +9513,7 @@ func (s *Sphere) Init(center *Point3D, radius float32) *Sphere {
 // of the 3D volume that encompasses all @points.
 func (s *Sphere) InitFromPoints(points []Point3D, center *Point3D) *Sphere {
 	var carg0 *C.graphene_sphere_t  // in, none, converted
-	var carg1 C.unsigned int        // implicit
+	var carg1 C.uint                // implicit
 	var carg2 *C.graphene_point3d_t // in, transfer: none, C Pointers: 1, Name: array[Point3D], array (inner: *typesystem.Record, length-by: carg1)
 	var carg3 *C.graphene_point3d_t // in, none, converted, nullable
 	var cret  *C.graphene_sphere_t  // return, none, converted
@@ -9557,7 +9557,7 @@ func (s *Sphere) InitFromPoints(points []Point3D, center *Point3D) *Sphere {
 // of the 3D volume that encompasses all @vectors.
 func (s *Sphere) InitFromVectors(vectors []Vec3, center *Point3D) *Sphere {
 	var carg0 *C.graphene_sphere_t  // in, none, converted
-	var carg1 C.unsigned int        // implicit
+	var carg1 C.uint                // implicit
 	var carg2 *C.graphene_vec3_t    // in, transfer: none, C Pointers: 1, Name: array[Vec3], array (inner: *typesystem.Record, length-by: carg1)
 	var carg3 *C.graphene_point3d_t // in, none, converted, nullable
 	var cret  *C.graphene_sphere_t  // return, none, converted

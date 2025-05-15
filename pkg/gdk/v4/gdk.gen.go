@@ -16993,11 +16993,11 @@ func (self *DmabufTextureBuilderInstance) GetDisplay() Display {
 // Gets the file descriptor for a plane.
 func (self *DmabufTextureBuilderInstance) GetFd(plane uint) int32 {
 	var carg0 *C.GdkDmabufTextureBuilder // in, none, converted
-	var carg1 C.unsigned int             // in, none, casted
+	var carg1 C.uint                     // in, none, casted
 	var cret  C.int                      // return, none, casted
 
 	carg0 = (*C.GdkDmabufTextureBuilder)(UnsafeDmabufTextureBuilderToGlibNone(self))
-	carg1 = C.unsigned int(plane)
+	carg1 = C.uint(plane)
 
 	cret = C.gdk_dmabuf_texture_builder_get_fd(carg0, carg1)
 	runtime.KeepAlive(self)
@@ -17046,7 +17046,7 @@ func (self *DmabufTextureBuilderInstance) GetFourcc() uint32 {
 // 0 if the height wasn't set.
 func (self *DmabufTextureBuilderInstance) GetHeight() uint {
 	var carg0 *C.GdkDmabufTextureBuilder // in, none, converted
-	var cret  C.unsigned int             // return, none, casted
+	var cret  C.uint                     // return, none, casted
 
 	carg0 = (*C.GdkDmabufTextureBuilder)(UnsafeDmabufTextureBuilderToGlibNone(self))
 
@@ -17092,7 +17092,7 @@ func (self *DmabufTextureBuilderInstance) GetModifier() uint64 {
 // Gets the number of planes.
 func (self *DmabufTextureBuilderInstance) GetNPlanes() uint {
 	var carg0 *C.GdkDmabufTextureBuilder // in, none, converted
-	var cret  C.unsigned int             // return, none, casted
+	var cret  C.uint                     // return, none, casted
 
 	carg0 = (*C.GdkDmabufTextureBuilder)(UnsafeDmabufTextureBuilderToGlibNone(self))
 
@@ -17119,11 +17119,11 @@ func (self *DmabufTextureBuilderInstance) GetNPlanes() uint {
 // Gets the offset value for a plane.
 func (self *DmabufTextureBuilderInstance) GetOffset(plane uint) uint {
 	var carg0 *C.GdkDmabufTextureBuilder // in, none, converted
-	var carg1 C.unsigned int             // in, none, casted
-	var cret  C.unsigned int             // return, none, casted
+	var carg1 C.uint                     // in, none, casted
+	var cret  C.uint                     // return, none, casted
 
 	carg0 = (*C.GdkDmabufTextureBuilder)(UnsafeDmabufTextureBuilderToGlibNone(self))
-	carg1 = C.unsigned int(plane)
+	carg1 = C.uint(plane)
 
 	cret = C.gdk_dmabuf_texture_builder_get_offset(carg0, carg1)
 	runtime.KeepAlive(self)
@@ -17174,11 +17174,11 @@ func (self *DmabufTextureBuilderInstance) GetPremultiplied() bool {
 // Gets the stride value for a plane.
 func (self *DmabufTextureBuilderInstance) GetStride(plane uint) uint {
 	var carg0 *C.GdkDmabufTextureBuilder // in, none, converted
-	var carg1 C.unsigned int             // in, none, casted
-	var cret  C.unsigned int             // return, none, casted
+	var carg1 C.uint                     // in, none, casted
+	var cret  C.uint                     // return, none, casted
 
 	carg0 = (*C.GdkDmabufTextureBuilder)(UnsafeDmabufTextureBuilderToGlibNone(self))
-	carg1 = C.unsigned int(plane)
+	carg1 = C.uint(plane)
 
 	cret = C.gdk_dmabuf_texture_builder_get_stride(carg0, carg1)
 	runtime.KeepAlive(self)
@@ -17227,7 +17227,7 @@ func (self *DmabufTextureBuilderInstance) GetUpdateTexture() Texture {
 // 0 if the width wasn't set.
 func (self *DmabufTextureBuilderInstance) GetWidth() uint {
 	var carg0 *C.GdkDmabufTextureBuilder // in, none, converted
-	var cret  C.unsigned int             // return, none, casted
+	var cret  C.uint                     // return, none, casted
 
 	carg0 = (*C.GdkDmabufTextureBuilder)(UnsafeDmabufTextureBuilderToGlibNone(self))
 
@@ -17299,11 +17299,11 @@ func (self *DmabufTextureBuilderInstance) SetDisplay(display Display) {
 // Sets the file descriptor for a plane.
 func (self *DmabufTextureBuilderInstance) SetFd(plane uint, fd int32) {
 	var carg0 *C.GdkDmabufTextureBuilder // in, none, converted
-	var carg1 C.unsigned int             // in, none, casted
+	var carg1 C.uint                     // in, none, casted
 	var carg2 C.int                      // in, none, casted
 
 	carg0 = (*C.GdkDmabufTextureBuilder)(UnsafeDmabufTextureBuilderToGlibNone(self))
-	carg1 = C.unsigned int(plane)
+	carg1 = C.uint(plane)
 	carg2 = C.int(fd)
 
 	C.gdk_dmabuf_texture_builder_set_fd(carg0, carg1, carg2)
@@ -17346,10 +17346,10 @@ func (self *DmabufTextureBuilderInstance) SetFourcc(fourcc uint32) {
 // The height must be set before calling [method@Gdk.DmabufTextureBuilder.build].
 func (self *DmabufTextureBuilderInstance) SetHeight(height uint) {
 	var carg0 *C.GdkDmabufTextureBuilder // in, none, converted
-	var carg1 C.unsigned int             // in, none, casted
+	var carg1 C.uint                     // in, none, casted
 
 	carg0 = (*C.GdkDmabufTextureBuilder)(UnsafeDmabufTextureBuilderToGlibNone(self))
-	carg1 = C.unsigned int(height)
+	carg1 = C.uint(height)
 
 	C.gdk_dmabuf_texture_builder_set_height(carg0, carg1)
 	runtime.KeepAlive(self)
@@ -17384,10 +17384,10 @@ func (self *DmabufTextureBuilderInstance) SetModifier(modifier uint64) {
 // Sets the number of planes of the texture.
 func (self *DmabufTextureBuilderInstance) SetNPlanes(nPlanes uint) {
 	var carg0 *C.GdkDmabufTextureBuilder // in, none, converted
-	var carg1 C.unsigned int             // in, none, casted
+	var carg1 C.uint                     // in, none, casted
 
 	carg0 = (*C.GdkDmabufTextureBuilder)(UnsafeDmabufTextureBuilderToGlibNone(self))
-	carg1 = C.unsigned int(nPlanes)
+	carg1 = C.uint(nPlanes)
 
 	C.gdk_dmabuf_texture_builder_set_n_planes(carg0, carg1)
 	runtime.KeepAlive(self)
@@ -17404,12 +17404,12 @@ func (self *DmabufTextureBuilderInstance) SetNPlanes(nPlanes uint) {
 // Sets the offset for a plane.
 func (self *DmabufTextureBuilderInstance) SetOffset(plane uint, offset uint) {
 	var carg0 *C.GdkDmabufTextureBuilder // in, none, converted
-	var carg1 C.unsigned int             // in, none, casted
-	var carg2 C.unsigned int             // in, none, casted
+	var carg1 C.uint                     // in, none, casted
+	var carg2 C.uint                     // in, none, casted
 
 	carg0 = (*C.GdkDmabufTextureBuilder)(UnsafeDmabufTextureBuilderToGlibNone(self))
-	carg1 = C.unsigned int(plane)
-	carg2 = C.unsigned int(offset)
+	carg1 = C.uint(plane)
+	carg2 = C.uint(offset)
 
 	C.gdk_dmabuf_texture_builder_set_offset(carg0, carg1, carg2)
 	runtime.KeepAlive(self)
@@ -17453,12 +17453,12 @@ func (self *DmabufTextureBuilderInstance) SetPremultiplied(premultiplied bool) {
 // The stride must be set for all planes before calling [method@Gdk.DmabufTextureBuilder.build].
 func (self *DmabufTextureBuilderInstance) SetStride(plane uint, stride uint) {
 	var carg0 *C.GdkDmabufTextureBuilder // in, none, converted
-	var carg1 C.unsigned int             // in, none, casted
-	var carg2 C.unsigned int             // in, none, casted
+	var carg1 C.uint                     // in, none, casted
+	var carg2 C.uint                     // in, none, casted
 
 	carg0 = (*C.GdkDmabufTextureBuilder)(UnsafeDmabufTextureBuilderToGlibNone(self))
-	carg1 = C.unsigned int(plane)
-	carg2 = C.unsigned int(stride)
+	carg1 = C.uint(plane)
+	carg2 = C.uint(stride)
 
 	C.gdk_dmabuf_texture_builder_set_stride(carg0, carg1, carg2)
 	runtime.KeepAlive(self)
@@ -17499,10 +17499,10 @@ func (self *DmabufTextureBuilderInstance) SetUpdateTexture(texture Texture) {
 // The width must be set before calling [method@Gdk.DmabufTextureBuilder.build].
 func (self *DmabufTextureBuilderInstance) SetWidth(width uint) {
 	var carg0 *C.GdkDmabufTextureBuilder // in, none, converted
-	var carg1 C.unsigned int             // in, none, casted
+	var carg1 C.uint                     // in, none, casted
 
 	carg0 = (*C.GdkDmabufTextureBuilder)(UnsafeDmabufTextureBuilderToGlibNone(self))
-	carg1 = C.unsigned int(width)
+	carg1 = C.uint(width)
 
 	C.gdk_dmabuf_texture_builder_set_width(carg0, carg1)
 	runtime.KeepAlive(self)

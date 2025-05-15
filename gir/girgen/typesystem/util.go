@@ -52,10 +52,28 @@ func CTypeFromAnytype(t gir.AnyType) string {
 	}
 }
 
-func ctypeToCgoType(ctype string) string {
+// cgoPrimitiveTypes contains edge cases for referencing C primitive types from
+// CGo.
+//
+// See https://gist.github.com/zchee/b9c99695463d8902cd33.
+var cgoPrimitiveTypes = map[string]string{
+	"long long": "longlong",
+
+	"unsigned char":      "uchar",
+	"unsigned int":       "uint",
+	"unsigned short":     "ushort",
+	"unsigned long":      "ulong",
+	"unsigned long long": "ulonglong",
+}
+
+func CtypeToCgoType(ctype string) string {
 	pointers := CountCTypePointers(ctype)
 
 	base := trimCTypePointers(cleanCType(ctype))
+
+	if replace, ok := cgoPrimitiveTypes[base]; ok {
+		base = replace
+	}
 
 	return GetPointers(pointers) + "C." + base
 }

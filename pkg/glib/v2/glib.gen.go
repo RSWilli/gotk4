@@ -14012,7 +14012,7 @@ func (bookmark *BookmarkFile) GetApplicationInfo(uri string, name string) (strin
 	var carg1 *C.char          // in, none, string
 	var carg2 *C.char          // in, none, string
 	var carg3 *C.char          // out, full, string
-	var carg4 C.unsigned int   // out, full, casted
+	var carg4 C.uint           // out, full, casted
 	var carg5 *C.GDateTime     // out, none, converted
 	var cret  C.gboolean       // return
 	var _cerr *C.GError        // out, full, converted, nullable
