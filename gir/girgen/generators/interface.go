@@ -28,6 +28,11 @@ type InterfaceGenerator struct {
 	Overrides *GoOverridesGenerator
 }
 
+// InterfaceInstanceStructFieldName is the name of the field where we store the gobject.Object.
+// It cannot be embedded, because we are embedding the interface struct in the
+// interface instance struct, which creates ambiguous selector compile errors.
+const InterfaceInstanceStructFieldName = "Instance"
+
 func (g *InterfaceGenerator) Generate(w *file.Package) {
 	w.GoImport("unsafe")
 	w.GoImport("runtime")
@@ -38,7 +43,7 @@ func (g *InterfaceGenerator) Generate(w *file.Package) {
 	fmt.Fprintf(w.Go(), "type %s struct {\n", g.GoType(0))
 	fmt.Fprintf(w.Go(), "\t_ [0]func() // equal guard\n")
 
-	fmt.Fprintf(w.Go(), "\t%s\n", g.Parent.NamespacedGoType(0))
+	fmt.Fprintf(w.Go(), "\t%s %s\n", InterfaceInstanceStructFieldName, g.Parent.NamespacedGoType(0))
 
 	// for _, inter := range g.Prerequesite {
 	// 	fmt.Fprintf(w.Go(), "\t*%s\n", inter.GoType(0))
@@ -54,9 +59,10 @@ func (g *InterfaceGenerator) Generate(w *file.Package) {
 		fmt.Fprintf(w.Go(), "%sExtManual // handwritten functions\n", g.GoInterfaceName)
 	}
 
-	fmt.Fprintf(w.Go(), "%s\n", g.Parent.NamespacedGoType(1))
+	// fmt.Fprintf(w.Go(), "%s\n", g.Parent.NamespacedGoType(1)) Cannot inherit from base type because we do not embed it
 
 	fmt.Fprintf(w.Go(), "%s() *%s\n", g.GoPrivateUpcastMethod, g.GoType(0))
+
 	// fmt.Fprintln(w.Go(), g.Parent.WithForeignNamespace(g.Parent.Type.GoInterfaceName))
 	// for inter := range g.PrerequesitesGoInterfaceNames() {
 	// 	fmt.Fprintln(w.Go(), inter)
@@ -86,7 +92,7 @@ func (g *InterfaceGenerator) Generate(w *file.Package) {
 	fmt.Fprintf(w.Go(), "return &%s{\n", g.GoType(0))
 	w.Go().Indent()
 
-	fmt.Fprintf(w.Go(), "%s: *%s,\n", g.Parent.Type.GoType(0), baseClassIdentifier)
+	fmt.Fprintf(w.Go(), "%s: *%s,\n", InterfaceInstanceStructFieldName, baseClassIdentifier)
 	w.Go().Unindent()
 
 	fmt.Fprintf(w.Go(), "}\n")
@@ -122,7 +128,7 @@ func (g *InterfaceGenerator) Generate(w *file.Package) {
 	mkTransfer := func(transfername, baseTransferName string) {
 		fmt.Fprintf(w.Go(), "func %s(c %s) unsafe.Pointer {\n", transfername, g.GoInterfaceName)
 		fmt.Fprintf(w.Go(), "\ti := c.%s()\n", g.GoPrivateUpcastMethod)
-		fmt.Fprintf(w.Go(), "\treturn %s(i)\n", baseTransferName)
+		fmt.Fprintf(w.Go(), "\treturn %s(&i.%s)\n", baseTransferName, InterfaceInstanceStructFieldName)
 		fmt.Fprintf(w.Go(), "}\n\n")
 	}
 
@@ -184,7 +190,7 @@ func wrapInterface(w file.CodeWriter, t typesystem.CouldBeForeign[*typesystem.In
 
 	w.Indent()
 
-	fmt.Fprintf(w, "%s: *%s,\n", t.Type.Parent.Type.GoType(0), baseClassIdentifier)
+	fmt.Fprintf(w, "%s: *%s,\n", InterfaceInstanceStructFieldName, baseClassIdentifier)
 
 	w.Unindent()
 
