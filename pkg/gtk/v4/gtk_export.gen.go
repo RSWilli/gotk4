@@ -25,8 +25,8 @@ func _gotk4_gtk4_AssistantPageFunc(carg1 C.int, carg2 C.gpointer) (cret C.int) {
 		fn = v.(AssistantPageFunc)
 	}
 
-	var currentPage int32 // in, none, casted, casted C.gint
-	var goret       int32 // return, none, casted, casted C.gint
+	var currentPage int32 // in, none, casted
+	var goret       int32 // return, none, casted
 
 	currentPage = int32(carg1)
 
@@ -248,7 +248,7 @@ func _gotk4_gtk4_FlowBoxSortFunc(carg1 *C.GtkFlowBoxChild, carg2 *C.GtkFlowBoxCh
 
 	var child1 FlowBoxChild // in, none, converted
 	var child2 FlowBoxChild // in, none, converted
-	var goret  int32        // return, none, casted, casted C.gint
+	var goret  int32        // return, none, casted
 
 	child1 = UnsafeFlowBoxChildFromGlibNone(unsafe.Pointer(carg1))
 	child2 = UnsafeFlowBoxChildFromGlibNone(unsafe.Pointer(carg2))
@@ -318,7 +318,7 @@ func _gotk4_gtk4_ListBoxSortFunc(carg1 *C.GtkListBoxRow, carg2 *C.GtkListBoxRow,
 
 	var row1  ListBoxRow // in, none, converted
 	var row2  ListBoxRow // in, none, converted
-	var goret int32      // return, none, casted, casted C.gint
+	var goret int32      // return, none, casted
 
 	row1 = UnsafeListBoxRowFromGlibNone(unsafe.Pointer(carg1))
 	row2 = UnsafeListBoxRowFromGlibNone(unsafe.Pointer(carg2))
@@ -382,8 +382,8 @@ func _gotk4_gtk4_ScaleFormatValueFunc(carg1 *C.GtkScale, carg2 C.double, carg3 C
 	}
 
 	var scale Scale   // in, none, converted
-	var value float64 // in, none, casted, casted C.gdouble
-	var goret string  // return, full, string, casted *C.gchar
+	var value float64 // in, none, casted
+	var goret string  // return, full, string
 
 	scale = UnsafeScaleFromGlibNone(unsafe.Pointer(carg1))
 	value = float64(carg2)
@@ -480,10 +480,10 @@ func _gotk4_gtk4_AccessibleRange_set_current_value(carg0 *C.GtkAccessibleRange, 
 }
 
 //export _gotk4_gtk4_AccessibleText_get_caret_position
-func _gotk4_gtk4_AccessibleText_get_caret_position(carg0 *C.GtkAccessibleText) (cret C.uint) {
-	var fn func(carg0 *C.GtkAccessibleText) (cret C.uint)
+func _gotk4_gtk4_AccessibleText_get_caret_position(carg0 *C.GtkAccessibleText) (cret C.unsigned int) {
+	var fn func(carg0 *C.GtkAccessibleText) (cret C.unsigned int)
 	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gtk4_AccessibleText_get_caret_position").(func(carg0 *C.GtkAccessibleText) (cret C.uint))
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gtk4_AccessibleText_get_caret_position").(func(carg0 *C.GtkAccessibleText) (cret C.unsigned int))
 		if fn == nil {
 			panic("_gotk4_gtk4_AccessibleText_get_caret_position: no function pointer found")
 		}
@@ -492,10 +492,10 @@ func _gotk4_gtk4_AccessibleText_get_caret_position(carg0 *C.GtkAccessibleText) (
 }
 
 //export _gotk4_gtk4_AccessibleText_get_contents
-func _gotk4_gtk4_AccessibleText_get_contents(carg0 *C.GtkAccessibleText, carg1 C.uint, carg2 C.uint) (cret *C.GBytes) {
-	var fn func(carg0 *C.GtkAccessibleText, carg1 C.uint, carg2 C.uint) (cret *C.GBytes)
+func _gotk4_gtk4_AccessibleText_get_contents(carg0 *C.GtkAccessibleText, carg1 C.unsigned int, carg2 C.unsigned int) (cret *C.GBytes) {
+	var fn func(carg0 *C.GtkAccessibleText, carg1 C.unsigned int, carg2 C.unsigned int) (cret *C.GBytes)
 	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gtk4_AccessibleText_get_contents").(func(carg0 *C.GtkAccessibleText, carg1 C.uint, carg2 C.uint) (cret *C.GBytes))
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gtk4_AccessibleText_get_contents").(func(carg0 *C.GtkAccessibleText, carg1 C.unsigned int, carg2 C.unsigned int) (cret *C.GBytes))
 		if fn == nil {
 			panic("_gotk4_gtk4_AccessibleText_get_contents: no function pointer found")
 		}
@@ -504,10 +504,10 @@ func _gotk4_gtk4_AccessibleText_get_contents(carg0 *C.GtkAccessibleText, carg1 C
 }
 
 //export _gotk4_gtk4_AccessibleText_get_contents_at
-func _gotk4_gtk4_AccessibleText_get_contents_at(carg0 *C.GtkAccessibleText, carg1 C.uint, carg2 C.GtkAccessibleTextGranularity, carg3 *C.uint, carg4 *C.uint) (cret *C.GBytes) {
-	var fn func(carg0 *C.GtkAccessibleText, carg1 C.uint, carg2 C.GtkAccessibleTextGranularity, carg3 *C.uint, carg4 *C.uint) (cret *C.GBytes)
+func _gotk4_gtk4_AccessibleText_get_contents_at(carg0 *C.GtkAccessibleText, carg1 C.unsigned int, carg2 C.GtkAccessibleTextGranularity, carg3 *C.unsigned int, carg4 *C.unsigned int) (cret *C.GBytes) {
+	var fn func(carg0 *C.GtkAccessibleText, carg1 C.unsigned int, carg2 C.GtkAccessibleTextGranularity, carg3 *C.unsigned int, carg4 *C.unsigned int) (cret *C.GBytes)
 	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gtk4_AccessibleText_get_contents_at").(func(carg0 *C.GtkAccessibleText, carg1 C.uint, carg2 C.GtkAccessibleTextGranularity, carg3 *C.uint, carg4 *C.uint) (cret *C.GBytes))
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gtk4_AccessibleText_get_contents_at").(func(carg0 *C.GtkAccessibleText, carg1 C.unsigned int, carg2 C.GtkAccessibleTextGranularity, carg3 *C.unsigned int, carg4 *C.unsigned int) (cret *C.GBytes))
 		if fn == nil {
 			panic("_gotk4_gtk4_AccessibleText_get_contents_at: no function pointer found")
 		}
@@ -516,10 +516,10 @@ func _gotk4_gtk4_AccessibleText_get_contents_at(carg0 *C.GtkAccessibleText, carg
 }
 
 //export _gotk4_gtk4_AccessibleText_get_extents
-func _gotk4_gtk4_AccessibleText_get_extents(carg0 *C.GtkAccessibleText, carg1 C.uint, carg2 C.uint, carg3 *C.graphene_rect_t) (cret C.gboolean) {
-	var fn func(carg0 *C.GtkAccessibleText, carg1 C.uint, carg2 C.uint, carg3 *C.graphene_rect_t) (cret C.gboolean)
+func _gotk4_gtk4_AccessibleText_get_extents(carg0 *C.GtkAccessibleText, carg1 C.unsigned int, carg2 C.unsigned int, carg3 *C.graphene_rect_t) (cret C.gboolean) {
+	var fn func(carg0 *C.GtkAccessibleText, carg1 C.unsigned int, carg2 C.unsigned int, carg3 *C.graphene_rect_t) (cret C.gboolean)
 	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gtk4_AccessibleText_get_extents").(func(carg0 *C.GtkAccessibleText, carg1 C.uint, carg2 C.uint, carg3 *C.graphene_rect_t) (cret C.gboolean))
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gtk4_AccessibleText_get_extents").(func(carg0 *C.GtkAccessibleText, carg1 C.unsigned int, carg2 C.unsigned int, carg3 *C.graphene_rect_t) (cret C.gboolean))
 		if fn == nil {
 			panic("_gotk4_gtk4_AccessibleText_get_extents: no function pointer found")
 		}
@@ -528,10 +528,10 @@ func _gotk4_gtk4_AccessibleText_get_extents(carg0 *C.GtkAccessibleText, carg1 C.
 }
 
 //export _gotk4_gtk4_AccessibleText_get_offset
-func _gotk4_gtk4_AccessibleText_get_offset(carg0 *C.GtkAccessibleText, carg1 *C.graphene_point_t, carg2 *C.uint) (cret C.gboolean) {
-	var fn func(carg0 *C.GtkAccessibleText, carg1 *C.graphene_point_t, carg2 *C.uint) (cret C.gboolean)
+func _gotk4_gtk4_AccessibleText_get_offset(carg0 *C.GtkAccessibleText, carg1 *C.graphene_point_t, carg2 *C.unsigned int) (cret C.gboolean) {
+	var fn func(carg0 *C.GtkAccessibleText, carg1 *C.graphene_point_t, carg2 *C.unsigned int) (cret C.gboolean)
 	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gtk4_AccessibleText_get_offset").(func(carg0 *C.GtkAccessibleText, carg1 *C.graphene_point_t, carg2 *C.uint) (cret C.gboolean))
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gtk4_AccessibleText_get_offset").(func(carg0 *C.GtkAccessibleText, carg1 *C.graphene_point_t, carg2 *C.unsigned int) (cret C.gboolean))
 		if fn == nil {
 			panic("_gotk4_gtk4_AccessibleText_get_offset: no function pointer found")
 		}

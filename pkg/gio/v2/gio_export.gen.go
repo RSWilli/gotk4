@@ -192,7 +192,7 @@ func _gotk4_gio2_DBusSubtreeEnumerateFunc(carg1 *C.GDBusConnection, carg2 *C.gch
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (gchar**)")
+	panic("unimplemented conversion of []string (**C.gchar)")
 
 	return cret
 }
@@ -223,7 +223,7 @@ func _gotk4_gio2_DBusSubtreeIntrospectFunc(carg1 *C.GDBusConnection, carg2 *C.gc
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []*DBusInterfaceInfo (GDBusInterfaceInfo**)")
+	panic("unimplemented conversion of []*DBusInterfaceInfo (**C.GDBusInterfaceInfo)")
 
 	return cret
 }
@@ -240,7 +240,7 @@ func _gotk4_gio2_VFSFileLookupFunc(carg1 *C.GVfs, carg2 *C.char, carg3 C.gpointe
 	}
 
 	var vfs        Vfs    // in, none, converted
-	var identifier string // in, none, string, casted *C.gchar
+	var identifier string // in, none, string
 	var goret      File   // return, full, converted
 
 	vfs = UnsafeVfsFromGlibNone(unsafe.Pointer(carg1))
@@ -697,18 +697,6 @@ func _gotk4_gio2_AppInfo_supports_uris(carg0 *C.GAppInfo) (cret C.gboolean) {
 	return fn(carg0)
 }
 
-//export _gotk4_gio2_AsyncInitable_init_async
-func _gotk4_gio2_AsyncInitable_init_async(carg0 *C.GAsyncInitable, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
-	var fn func(carg0 *C.GAsyncInitable, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_AsyncInitable_init_async").(func(carg0 *C.GAsyncInitable, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_AsyncInitable_init_async: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4)
-}
-
 //export _gotk4_gio2_AsyncInitable_init_finish
 func _gotk4_gio2_AsyncInitable_init_finish(carg0 *C.GAsyncInitable, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
 	var fn func(carg0 *C.GAsyncInitable, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean)
@@ -734,10 +722,10 @@ func _gotk4_gio2_AsyncResult_get_source_object(carg0 *C.GAsyncResult) (cret *C.G
 }
 
 //export _gotk4_gio2_Converter_convert
-func _gotk4_gio2_Converter_convert(carg0 *C.GConverter, carg1 unsafe.Pointer, carg2 C.gsize, carg3 unsafe.Pointer, carg4 C.gsize, carg5 C.GConverterFlags, carg6 *C.gsize, carg7 *C.gsize, _cerr **C.GError) (cret C.GConverterResult) {
-	var fn func(carg0 *C.GConverter, carg1 unsafe.Pointer, carg2 C.gsize, carg3 unsafe.Pointer, carg4 C.gsize, carg5 C.GConverterFlags, carg6 *C.gsize, carg7 *C.gsize, _cerr **C.GError) (cret C.GConverterResult)
+func _gotk4_gio2_Converter_convert(carg0 *C.GConverter, carg1 *C.void, carg2 C.gsize, carg3 *C.void, carg4 C.gsize, carg5 C.GConverterFlags, carg6 *C.gsize, carg7 *C.gsize, _cerr **C.GError) (cret C.GConverterResult) {
+	var fn func(carg0 *C.GConverter, carg1 *C.void, carg2 C.gsize, carg3 *C.void, carg4 C.gsize, carg5 C.GConverterFlags, carg6 *C.gsize, carg7 *C.gsize, _cerr **C.GError) (cret C.GConverterResult)
 	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_Converter_convert").(func(carg0 *C.GConverter, carg1 unsafe.Pointer, carg2 C.gsize, carg3 unsafe.Pointer, carg4 C.gsize, carg5 C.GConverterFlags, carg6 *C.gsize, carg7 *C.gsize, _cerr **C.GError) (cret C.GConverterResult))
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_Converter_convert").(func(carg0 *C.GConverter, carg1 *C.void, carg2 C.gsize, carg3 *C.void, carg4 C.gsize, carg5 C.GConverterFlags, carg6 *C.gsize, carg7 *C.gsize, _cerr **C.GError) (cret C.GConverterResult))
 		if fn == nil {
 			panic("_gotk4_gio2_Converter_convert: no function pointer found")
 		}
@@ -1093,18 +1081,6 @@ func _gotk4_gio2_Drive_disconnected(carg0 *C.GDrive) {
 	fn(carg0)
 }
 
-//export _gotk4_gio2_Drive_eject
-func _gotk4_gio2_Drive_eject(carg0 *C.GDrive, carg1 C.GMountUnmountFlags, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
-	var fn func(carg0 *C.GDrive, carg1 C.GMountUnmountFlags, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_Drive_eject").(func(carg0 *C.GDrive, carg1 C.GMountUnmountFlags, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_Drive_eject: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4)
-}
-
 //export _gotk4_gio2_Drive_eject_button
 func _gotk4_gio2_Drive_eject_button(carg0 *C.GDrive) {
 	var fn func(carg0 *C.GDrive)
@@ -1127,18 +1103,6 @@ func _gotk4_gio2_Drive_eject_finish(carg0 *C.GDrive, carg1 *C.GAsyncResult, _cer
 		}
 	}
 	return fn(carg0, carg1, _cerr)
-}
-
-//export _gotk4_gio2_Drive_eject_with_operation
-func _gotk4_gio2_Drive_eject_with_operation(carg0 *C.GDrive, carg1 C.GMountUnmountFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
-	var fn func(carg0 *C.GDrive, carg1 C.GMountUnmountFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_Drive_eject_with_operation").(func(carg0 *C.GDrive, carg1 C.GMountUnmountFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_Drive_eject_with_operation: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4, carg5)
 }
 
 //export _gotk4_gio2_Drive_eject_with_operation_finish
@@ -1309,18 +1273,6 @@ func _gotk4_gio2_Drive_is_removable(carg0 *C.GDrive) (cret C.gboolean) {
 	return fn(carg0)
 }
 
-//export _gotk4_gio2_Drive_poll_for_media
-func _gotk4_gio2_Drive_poll_for_media(carg0 *C.GDrive, carg1 *C.GCancellable, carg2 C.GAsyncReadyCallback, carg3 C.gpointer) {
-	var fn func(carg0 *C.GDrive, carg1 *C.GCancellable, carg2 C.GAsyncReadyCallback, carg3 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_Drive_poll_for_media").(func(carg0 *C.GDrive, carg1 *C.GCancellable, carg2 C.GAsyncReadyCallback, carg3 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_Drive_poll_for_media: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3)
-}
-
 //export _gotk4_gio2_Drive_poll_for_media_finish
 func _gotk4_gio2_Drive_poll_for_media_finish(carg0 *C.GDrive, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
 	var fn func(carg0 *C.GDrive, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean)
@@ -1333,18 +1285,6 @@ func _gotk4_gio2_Drive_poll_for_media_finish(carg0 *C.GDrive, carg1 *C.GAsyncRes
 	return fn(carg0, carg1, _cerr)
 }
 
-//export _gotk4_gio2_Drive_start
-func _gotk4_gio2_Drive_start(carg0 *C.GDrive, carg1 C.GDriveStartFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
-	var fn func(carg0 *C.GDrive, carg1 C.GDriveStartFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_Drive_start").(func(carg0 *C.GDrive, carg1 C.GDriveStartFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_Drive_start: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4, carg5)
-}
-
 //export _gotk4_gio2_Drive_start_finish
 func _gotk4_gio2_Drive_start_finish(carg0 *C.GDrive, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
 	var fn func(carg0 *C.GDrive, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean)
@@ -1355,18 +1295,6 @@ func _gotk4_gio2_Drive_start_finish(carg0 *C.GDrive, carg1 *C.GAsyncResult, _cer
 		}
 	}
 	return fn(carg0, carg1, _cerr)
-}
-
-//export _gotk4_gio2_Drive_stop
-func _gotk4_gio2_Drive_stop(carg0 *C.GDrive, carg1 C.GMountUnmountFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
-	var fn func(carg0 *C.GDrive, carg1 C.GMountUnmountFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_Drive_stop").(func(carg0 *C.GDrive, carg1 C.GMountUnmountFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_Drive_stop: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4, carg5)
 }
 
 //export _gotk4_gio2_Drive_stop_button
@@ -1429,18 +1357,6 @@ func _gotk4_gio2_DtlsConnection_handshake(carg0 *C.GDtlsConnection, carg1 *C.GCa
 	return fn(carg0, carg1, _cerr)
 }
 
-//export _gotk4_gio2_DtlsConnection_handshake_async
-func _gotk4_gio2_DtlsConnection_handshake_async(carg0 *C.GDtlsConnection, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
-	var fn func(carg0 *C.GDtlsConnection, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_DtlsConnection_handshake_async").(func(carg0 *C.GDtlsConnection, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_DtlsConnection_handshake_async: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4)
-}
-
 //export _gotk4_gio2_DtlsConnection_handshake_finish
 func _gotk4_gio2_DtlsConnection_handshake_finish(carg0 *C.GDtlsConnection, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
 	var fn func(carg0 *C.GDtlsConnection, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean)
@@ -1477,18 +1393,6 @@ func _gotk4_gio2_DtlsConnection_shutdown(carg0 *C.GDtlsConnection, carg1 C.gbool
 	return fn(carg0, carg1, carg2, carg3, _cerr)
 }
 
-//export _gotk4_gio2_DtlsConnection_shutdown_async
-func _gotk4_gio2_DtlsConnection_shutdown_async(carg0 *C.GDtlsConnection, carg1 C.gboolean, carg2 C.gboolean, carg3 C.int, carg4 *C.GCancellable, carg5 C.GAsyncReadyCallback, carg6 C.gpointer) {
-	var fn func(carg0 *C.GDtlsConnection, carg1 C.gboolean, carg2 C.gboolean, carg3 C.int, carg4 *C.GCancellable, carg5 C.GAsyncReadyCallback, carg6 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_DtlsConnection_shutdown_async").(func(carg0 *C.GDtlsConnection, carg1 C.gboolean, carg2 C.gboolean, carg3 C.int, carg4 *C.GCancellable, carg5 C.GAsyncReadyCallback, carg6 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_DtlsConnection_shutdown_async: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4, carg5, carg6)
-}
-
 //export _gotk4_gio2_DtlsConnection_shutdown_finish
 func _gotk4_gio2_DtlsConnection_shutdown_finish(carg0 *C.GDtlsConnection, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
 	var fn func(carg0 *C.GDtlsConnection, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean)
@@ -1511,18 +1415,6 @@ func _gotk4_gio2_File_append_to(carg0 *C.GFile, carg1 C.GFileCreateFlags, carg2 
 		}
 	}
 	return fn(carg0, carg1, carg2, _cerr)
-}
-
-//export _gotk4_gio2_File_append_to_async
-func _gotk4_gio2_File_append_to_async(carg0 *C.GFile, carg1 C.GFileCreateFlags, carg2 C.int, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
-	var fn func(carg0 *C.GFile, carg1 C.GFileCreateFlags, carg2 C.int, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_File_append_to_async").(func(carg0 *C.GFile, carg1 C.GFileCreateFlags, carg2 C.int, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_File_append_to_async: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4, carg5)
 }
 
 //export _gotk4_gio2_File_append_to_finish
@@ -1561,18 +1453,6 @@ func _gotk4_gio2_File_create(carg0 *C.GFile, carg1 C.GFileCreateFlags, carg2 *C.
 	return fn(carg0, carg1, carg2, _cerr)
 }
 
-//export _gotk4_gio2_File_create_async
-func _gotk4_gio2_File_create_async(carg0 *C.GFile, carg1 C.GFileCreateFlags, carg2 C.int, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
-	var fn func(carg0 *C.GFile, carg1 C.GFileCreateFlags, carg2 C.int, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_File_create_async").(func(carg0 *C.GFile, carg1 C.GFileCreateFlags, carg2 C.int, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_File_create_async: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4, carg5)
-}
-
 //export _gotk4_gio2_File_create_finish
 func _gotk4_gio2_File_create_finish(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GFileOutputStream) {
 	var fn func(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GFileOutputStream)
@@ -1595,18 +1475,6 @@ func _gotk4_gio2_File_create_readwrite(carg0 *C.GFile, carg1 C.GFileCreateFlags,
 		}
 	}
 	return fn(carg0, carg1, carg2, _cerr)
-}
-
-//export _gotk4_gio2_File_create_readwrite_async
-func _gotk4_gio2_File_create_readwrite_async(carg0 *C.GFile, carg1 C.GFileCreateFlags, carg2 C.int, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
-	var fn func(carg0 *C.GFile, carg1 C.GFileCreateFlags, carg2 C.int, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_File_create_readwrite_async").(func(carg0 *C.GFile, carg1 C.GFileCreateFlags, carg2 C.int, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_File_create_readwrite_async: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4, carg5)
 }
 
 //export _gotk4_gio2_File_create_readwrite_finish
@@ -1633,18 +1501,6 @@ func _gotk4_gio2_File_delete_file(carg0 *C.GFile, carg1 *C.GCancellable, _cerr *
 	return fn(carg0, carg1, _cerr)
 }
 
-//export _gotk4_gio2_File_delete_file_async
-func _gotk4_gio2_File_delete_file_async(carg0 *C.GFile, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
-	var fn func(carg0 *C.GFile, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_File_delete_file_async").(func(carg0 *C.GFile, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_File_delete_file_async: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4)
-}
-
 //export _gotk4_gio2_File_delete_file_finish
 func _gotk4_gio2_File_delete_file_finish(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
 	var fn func(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean)
@@ -1669,18 +1525,6 @@ func _gotk4_gio2_File_dup(carg0 *C.GFile) (cret *C.GFile) {
 	return fn(carg0)
 }
 
-//export _gotk4_gio2_File_eject_mountable
-func _gotk4_gio2_File_eject_mountable(carg0 *C.GFile, carg1 C.GMountUnmountFlags, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
-	var fn func(carg0 *C.GFile, carg1 C.GMountUnmountFlags, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_File_eject_mountable").(func(carg0 *C.GFile, carg1 C.GMountUnmountFlags, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_File_eject_mountable: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4)
-}
-
 //export _gotk4_gio2_File_eject_mountable_finish
 func _gotk4_gio2_File_eject_mountable_finish(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
 	var fn func(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean)
@@ -1691,18 +1535,6 @@ func _gotk4_gio2_File_eject_mountable_finish(carg0 *C.GFile, carg1 *C.GAsyncResu
 		}
 	}
 	return fn(carg0, carg1, _cerr)
-}
-
-//export _gotk4_gio2_File_eject_mountable_with_operation
-func _gotk4_gio2_File_eject_mountable_with_operation(carg0 *C.GFile, carg1 C.GMountUnmountFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
-	var fn func(carg0 *C.GFile, carg1 C.GMountUnmountFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_File_eject_mountable_with_operation").(func(carg0 *C.GFile, carg1 C.GMountUnmountFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_File_eject_mountable_with_operation: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4, carg5)
 }
 
 //export _gotk4_gio2_File_eject_mountable_with_operation_finish
@@ -1727,18 +1559,6 @@ func _gotk4_gio2_File_enumerate_children(carg0 *C.GFile, carg1 *C.char, carg2 C.
 		}
 	}
 	return fn(carg0, carg1, carg2, carg3, _cerr)
-}
-
-//export _gotk4_gio2_File_enumerate_children_async
-func _gotk4_gio2_File_enumerate_children_async(carg0 *C.GFile, carg1 *C.char, carg2 C.GFileQueryInfoFlags, carg3 C.int, carg4 *C.GCancellable, carg5 C.GAsyncReadyCallback, carg6 C.gpointer) {
-	var fn func(carg0 *C.GFile, carg1 *C.char, carg2 C.GFileQueryInfoFlags, carg3 C.int, carg4 *C.GCancellable, carg5 C.GAsyncReadyCallback, carg6 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_File_enumerate_children_async").(func(carg0 *C.GFile, carg1 *C.char, carg2 C.GFileQueryInfoFlags, carg3 C.int, carg4 *C.GCancellable, carg5 C.GAsyncReadyCallback, carg6 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_File_enumerate_children_async: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4, carg5, carg6)
 }
 
 //export _gotk4_gio2_File_enumerate_children_finish
@@ -1775,18 +1595,6 @@ func _gotk4_gio2_File_find_enclosing_mount(carg0 *C.GFile, carg1 *C.GCancellable
 		}
 	}
 	return fn(carg0, carg1, _cerr)
-}
-
-//export _gotk4_gio2_File_find_enclosing_mount_async
-func _gotk4_gio2_File_find_enclosing_mount_async(carg0 *C.GFile, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
-	var fn func(carg0 *C.GFile, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_File_find_enclosing_mount_async").(func(carg0 *C.GFile, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_File_find_enclosing_mount_async: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4)
 }
 
 //export _gotk4_gio2_File_find_enclosing_mount_finish
@@ -1945,18 +1753,6 @@ func _gotk4_gio2_File_make_directory(carg0 *C.GFile, carg1 *C.GCancellable, _cer
 	return fn(carg0, carg1, _cerr)
 }
 
-//export _gotk4_gio2_File_make_directory_async
-func _gotk4_gio2_File_make_directory_async(carg0 *C.GFile, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
-	var fn func(carg0 *C.GFile, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_File_make_directory_async").(func(carg0 *C.GFile, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_File_make_directory_async: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4)
-}
-
 //export _gotk4_gio2_File_make_directory_finish
 func _gotk4_gio2_File_make_directory_finish(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
 	var fn func(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean)
@@ -1979,18 +1775,6 @@ func _gotk4_gio2_File_make_symbolic_link(carg0 *C.GFile, carg1 *C.char, carg2 *C
 		}
 	}
 	return fn(carg0, carg1, carg2, _cerr)
-}
-
-//export _gotk4_gio2_File_make_symbolic_link_async
-func _gotk4_gio2_File_make_symbolic_link_async(carg0 *C.GFile, carg1 *C.char, carg2 C.int, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
-	var fn func(carg0 *C.GFile, carg1 *C.char, carg2 C.int, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_File_make_symbolic_link_async").(func(carg0 *C.GFile, carg1 *C.char, carg2 C.int, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_File_make_symbolic_link_async: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4, carg5)
 }
 
 //export _gotk4_gio2_File_make_symbolic_link_finish
@@ -2041,18 +1825,6 @@ func _gotk4_gio2_File_monitor_file(carg0 *C.GFile, carg1 C.GFileMonitorFlags, ca
 	return fn(carg0, carg1, carg2, _cerr)
 }
 
-//export _gotk4_gio2_File_mount_enclosing_volume
-func _gotk4_gio2_File_mount_enclosing_volume(carg0 *C.GFile, carg1 C.GMountMountFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
-	var fn func(carg0 *C.GFile, carg1 C.GMountMountFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_File_mount_enclosing_volume").(func(carg0 *C.GFile, carg1 C.GMountMountFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_File_mount_enclosing_volume: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4, carg5)
-}
-
 //export _gotk4_gio2_File_mount_enclosing_volume_finish
 func _gotk4_gio2_File_mount_enclosing_volume_finish(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
 	var fn func(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean)
@@ -2063,18 +1835,6 @@ func _gotk4_gio2_File_mount_enclosing_volume_finish(carg0 *C.GFile, carg1 *C.GAs
 		}
 	}
 	return fn(carg0, carg1, _cerr)
-}
-
-//export _gotk4_gio2_File_mount_mountable
-func _gotk4_gio2_File_mount_mountable(carg0 *C.GFile, carg1 C.GMountMountFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
-	var fn func(carg0 *C.GFile, carg1 C.GMountMountFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_File_mount_mountable").(func(carg0 *C.GFile, carg1 C.GMountMountFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_File_mount_mountable: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4, carg5)
 }
 
 //export _gotk4_gio2_File_mount_mountable_finish
@@ -2113,18 +1873,6 @@ func _gotk4_gio2_File_open_readwrite(carg0 *C.GFile, carg1 *C.GCancellable, _cer
 	return fn(carg0, carg1, _cerr)
 }
 
-//export _gotk4_gio2_File_open_readwrite_async
-func _gotk4_gio2_File_open_readwrite_async(carg0 *C.GFile, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
-	var fn func(carg0 *C.GFile, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_File_open_readwrite_async").(func(carg0 *C.GFile, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_File_open_readwrite_async: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4)
-}
-
 //export _gotk4_gio2_File_open_readwrite_finish
 func _gotk4_gio2_File_open_readwrite_finish(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GFileIOStream) {
 	var fn func(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GFileIOStream)
@@ -2135,18 +1883,6 @@ func _gotk4_gio2_File_open_readwrite_finish(carg0 *C.GFile, carg1 *C.GAsyncResul
 		}
 	}
 	return fn(carg0, carg1, _cerr)
-}
-
-//export _gotk4_gio2_File_poll_mountable
-func _gotk4_gio2_File_poll_mountable(carg0 *C.GFile, carg1 *C.GCancellable, carg2 C.GAsyncReadyCallback, carg3 C.gpointer) {
-	var fn func(carg0 *C.GFile, carg1 *C.GCancellable, carg2 C.GAsyncReadyCallback, carg3 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_File_poll_mountable").(func(carg0 *C.GFile, carg1 *C.GCancellable, carg2 C.GAsyncReadyCallback, carg3 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_File_poll_mountable: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3)
 }
 
 //export _gotk4_gio2_File_poll_mountable_finish
@@ -2185,18 +1921,6 @@ func _gotk4_gio2_File_query_filesystem_info(carg0 *C.GFile, carg1 *C.char, carg2
 	return fn(carg0, carg1, carg2, _cerr)
 }
 
-//export _gotk4_gio2_File_query_filesystem_info_async
-func _gotk4_gio2_File_query_filesystem_info_async(carg0 *C.GFile, carg1 *C.char, carg2 C.int, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
-	var fn func(carg0 *C.GFile, carg1 *C.char, carg2 C.int, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_File_query_filesystem_info_async").(func(carg0 *C.GFile, carg1 *C.char, carg2 C.int, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_File_query_filesystem_info_async: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4, carg5)
-}
-
 //export _gotk4_gio2_File_query_filesystem_info_finish
 func _gotk4_gio2_File_query_filesystem_info_finish(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GFileInfo) {
 	var fn func(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GFileInfo)
@@ -2219,18 +1943,6 @@ func _gotk4_gio2_File_query_info(carg0 *C.GFile, carg1 *C.char, carg2 C.GFileQue
 		}
 	}
 	return fn(carg0, carg1, carg2, carg3, _cerr)
-}
-
-//export _gotk4_gio2_File_query_info_async
-func _gotk4_gio2_File_query_info_async(carg0 *C.GFile, carg1 *C.char, carg2 C.GFileQueryInfoFlags, carg3 C.int, carg4 *C.GCancellable, carg5 C.GAsyncReadyCallback, carg6 C.gpointer) {
-	var fn func(carg0 *C.GFile, carg1 *C.char, carg2 C.GFileQueryInfoFlags, carg3 C.int, carg4 *C.GCancellable, carg5 C.GAsyncReadyCallback, carg6 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_File_query_info_async").(func(carg0 *C.GFile, carg1 *C.char, carg2 C.GFileQueryInfoFlags, carg3 C.int, carg4 *C.GCancellable, carg5 C.GAsyncReadyCallback, carg6 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_File_query_info_async: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4, carg5, carg6)
 }
 
 //export _gotk4_gio2_File_query_info_finish
@@ -2269,18 +1981,6 @@ func _gotk4_gio2_File_query_writable_namespaces(carg0 *C.GFile, carg1 *C.GCancel
 	return fn(carg0, carg1, _cerr)
 }
 
-//export _gotk4_gio2_File_read_async
-func _gotk4_gio2_File_read_async(carg0 *C.GFile, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
-	var fn func(carg0 *C.GFile, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_File_read_async").(func(carg0 *C.GFile, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_File_read_async: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4)
-}
-
 //export _gotk4_gio2_File_read_finish
 func _gotk4_gio2_File_read_finish(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GFileInputStream) {
 	var fn func(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GFileInputStream)
@@ -2317,18 +2017,6 @@ func _gotk4_gio2_File_replace(carg0 *C.GFile, carg1 *C.char, carg2 C.gboolean, c
 	return fn(carg0, carg1, carg2, carg3, carg4, _cerr)
 }
 
-//export _gotk4_gio2_File_replace_async
-func _gotk4_gio2_File_replace_async(carg0 *C.GFile, carg1 *C.char, carg2 C.gboolean, carg3 C.GFileCreateFlags, carg4 C.int, carg5 *C.GCancellable, carg6 C.GAsyncReadyCallback, carg7 C.gpointer) {
-	var fn func(carg0 *C.GFile, carg1 *C.char, carg2 C.gboolean, carg3 C.GFileCreateFlags, carg4 C.int, carg5 *C.GCancellable, carg6 C.GAsyncReadyCallback, carg7 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_File_replace_async").(func(carg0 *C.GFile, carg1 *C.char, carg2 C.gboolean, carg3 C.GFileCreateFlags, carg4 C.int, carg5 *C.GCancellable, carg6 C.GAsyncReadyCallback, carg7 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_File_replace_async: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4, carg5, carg6, carg7)
-}
-
 //export _gotk4_gio2_File_replace_finish
 func _gotk4_gio2_File_replace_finish(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GFileOutputStream) {
 	var fn func(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GFileOutputStream)
@@ -2353,18 +2041,6 @@ func _gotk4_gio2_File_replace_readwrite(carg0 *C.GFile, carg1 *C.char, carg2 C.g
 	return fn(carg0, carg1, carg2, carg3, carg4, _cerr)
 }
 
-//export _gotk4_gio2_File_replace_readwrite_async
-func _gotk4_gio2_File_replace_readwrite_async(carg0 *C.GFile, carg1 *C.char, carg2 C.gboolean, carg3 C.GFileCreateFlags, carg4 C.int, carg5 *C.GCancellable, carg6 C.GAsyncReadyCallback, carg7 C.gpointer) {
-	var fn func(carg0 *C.GFile, carg1 *C.char, carg2 C.gboolean, carg3 C.GFileCreateFlags, carg4 C.int, carg5 *C.GCancellable, carg6 C.GAsyncReadyCallback, carg7 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_File_replace_readwrite_async").(func(carg0 *C.GFile, carg1 *C.char, carg2 C.gboolean, carg3 C.GFileCreateFlags, carg4 C.int, carg5 *C.GCancellable, carg6 C.GAsyncReadyCallback, carg7 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_File_replace_readwrite_async: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4, carg5, carg6, carg7)
-}
-
 //export _gotk4_gio2_File_replace_readwrite_finish
 func _gotk4_gio2_File_replace_readwrite_finish(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GFileIOStream) {
 	var fn func(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GFileIOStream)
@@ -2387,18 +2063,6 @@ func _gotk4_gio2_File_resolve_relative_path(carg0 *C.GFile, carg1 *C.char) (cret
 		}
 	}
 	return fn(carg0, carg1)
-}
-
-//export _gotk4_gio2_File_set_attributes_async
-func _gotk4_gio2_File_set_attributes_async(carg0 *C.GFile, carg1 *C.GFileInfo, carg2 C.GFileQueryInfoFlags, carg3 C.int, carg4 *C.GCancellable, carg5 C.GAsyncReadyCallback, carg6 C.gpointer) {
-	var fn func(carg0 *C.GFile, carg1 *C.GFileInfo, carg2 C.GFileQueryInfoFlags, carg3 C.int, carg4 *C.GCancellable, carg5 C.GAsyncReadyCallback, carg6 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_File_set_attributes_async").(func(carg0 *C.GFile, carg1 *C.GFileInfo, carg2 C.GFileQueryInfoFlags, carg3 C.int, carg4 *C.GCancellable, carg5 C.GAsyncReadyCallback, carg6 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_File_set_attributes_async: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4, carg5, carg6)
 }
 
 //export _gotk4_gio2_File_set_attributes_finish
@@ -2437,18 +2101,6 @@ func _gotk4_gio2_File_set_display_name(carg0 *C.GFile, carg1 *C.char, carg2 *C.G
 	return fn(carg0, carg1, carg2, _cerr)
 }
 
-//export _gotk4_gio2_File_set_display_name_async
-func _gotk4_gio2_File_set_display_name_async(carg0 *C.GFile, carg1 *C.char, carg2 C.int, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
-	var fn func(carg0 *C.GFile, carg1 *C.char, carg2 C.int, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_File_set_display_name_async").(func(carg0 *C.GFile, carg1 *C.char, carg2 C.int, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_File_set_display_name_async: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4, carg5)
-}
-
 //export _gotk4_gio2_File_set_display_name_finish
 func _gotk4_gio2_File_set_display_name_finish(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GFile) {
 	var fn func(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GFile)
@@ -2461,18 +2113,6 @@ func _gotk4_gio2_File_set_display_name_finish(carg0 *C.GFile, carg1 *C.GAsyncRes
 	return fn(carg0, carg1, _cerr)
 }
 
-//export _gotk4_gio2_File_start_mountable
-func _gotk4_gio2_File_start_mountable(carg0 *C.GFile, carg1 C.GDriveStartFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
-	var fn func(carg0 *C.GFile, carg1 C.GDriveStartFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_File_start_mountable").(func(carg0 *C.GFile, carg1 C.GDriveStartFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_File_start_mountable: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4, carg5)
-}
-
 //export _gotk4_gio2_File_start_mountable_finish
 func _gotk4_gio2_File_start_mountable_finish(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
 	var fn func(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean)
@@ -2483,18 +2123,6 @@ func _gotk4_gio2_File_start_mountable_finish(carg0 *C.GFile, carg1 *C.GAsyncResu
 		}
 	}
 	return fn(carg0, carg1, _cerr)
-}
-
-//export _gotk4_gio2_File_stop_mountable
-func _gotk4_gio2_File_stop_mountable(carg0 *C.GFile, carg1 C.GMountUnmountFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
-	var fn func(carg0 *C.GFile, carg1 C.GMountUnmountFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_File_stop_mountable").(func(carg0 *C.GFile, carg1 C.GMountUnmountFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_File_stop_mountable: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4, carg5)
 }
 
 //export _gotk4_gio2_File_stop_mountable_finish
@@ -2521,18 +2149,6 @@ func _gotk4_gio2_File_trash(carg0 *C.GFile, carg1 *C.GCancellable, _cerr **C.GEr
 	return fn(carg0, carg1, _cerr)
 }
 
-//export _gotk4_gio2_File_trash_async
-func _gotk4_gio2_File_trash_async(carg0 *C.GFile, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
-	var fn func(carg0 *C.GFile, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_File_trash_async").(func(carg0 *C.GFile, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_File_trash_async: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4)
-}
-
 //export _gotk4_gio2_File_trash_finish
 func _gotk4_gio2_File_trash_finish(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
 	var fn func(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean)
@@ -2545,18 +2161,6 @@ func _gotk4_gio2_File_trash_finish(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr 
 	return fn(carg0, carg1, _cerr)
 }
 
-//export _gotk4_gio2_File_unmount_mountable
-func _gotk4_gio2_File_unmount_mountable(carg0 *C.GFile, carg1 C.GMountUnmountFlags, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
-	var fn func(carg0 *C.GFile, carg1 C.GMountUnmountFlags, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_File_unmount_mountable").(func(carg0 *C.GFile, carg1 C.GMountUnmountFlags, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_File_unmount_mountable: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4)
-}
-
 //export _gotk4_gio2_File_unmount_mountable_finish
 func _gotk4_gio2_File_unmount_mountable_finish(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
 	var fn func(carg0 *C.GFile, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean)
@@ -2567,18 +2171,6 @@ func _gotk4_gio2_File_unmount_mountable_finish(carg0 *C.GFile, carg1 *C.GAsyncRe
 		}
 	}
 	return fn(carg0, carg1, _cerr)
-}
-
-//export _gotk4_gio2_File_unmount_mountable_with_operation
-func _gotk4_gio2_File_unmount_mountable_with_operation(carg0 *C.GFile, carg1 C.GMountUnmountFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
-	var fn func(carg0 *C.GFile, carg1 C.GMountUnmountFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_File_unmount_mountable_with_operation").(func(carg0 *C.GFile, carg1 C.GMountUnmountFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_File_unmount_mountable_with_operation: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4, carg5)
 }
 
 //export _gotk4_gio2_File_unmount_mountable_with_operation_finish
@@ -2665,18 +2257,6 @@ func _gotk4_gio2_LoadableIcon_load(carg0 *C.GLoadableIcon, carg1 C.int, carg2 **
 	return fn(carg0, carg1, carg2, carg3, _cerr)
 }
 
-//export _gotk4_gio2_LoadableIcon_load_async
-func _gotk4_gio2_LoadableIcon_load_async(carg0 *C.GLoadableIcon, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
-	var fn func(carg0 *C.GLoadableIcon, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_LoadableIcon_load_async").(func(carg0 *C.GLoadableIcon, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_LoadableIcon_load_async: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4)
-}
-
 //export _gotk4_gio2_LoadableIcon_load_finish
 func _gotk4_gio2_LoadableIcon_load_finish(carg0 *C.GLoadableIcon, carg1 *C.GAsyncResult, carg2 **C.char, _cerr **C.GError) (cret *C.GInputStream) {
 	var fn func(carg0 *C.GLoadableIcon, carg1 *C.GAsyncResult, carg2 **C.char, _cerr **C.GError) (cret *C.GInputStream)
@@ -2737,18 +2317,6 @@ func _gotk4_gio2_Mount_changed(carg0 *C.GMount) {
 	fn(carg0)
 }
 
-//export _gotk4_gio2_Mount_eject
-func _gotk4_gio2_Mount_eject(carg0 *C.GMount, carg1 C.GMountUnmountFlags, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
-	var fn func(carg0 *C.GMount, carg1 C.GMountUnmountFlags, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_Mount_eject").(func(carg0 *C.GMount, carg1 C.GMountUnmountFlags, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_Mount_eject: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4)
-}
-
 //export _gotk4_gio2_Mount_eject_finish
 func _gotk4_gio2_Mount_eject_finish(carg0 *C.GMount, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
 	var fn func(carg0 *C.GMount, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean)
@@ -2759,18 +2327,6 @@ func _gotk4_gio2_Mount_eject_finish(carg0 *C.GMount, carg1 *C.GAsyncResult, _cer
 		}
 	}
 	return fn(carg0, carg1, _cerr)
-}
-
-//export _gotk4_gio2_Mount_eject_with_operation
-func _gotk4_gio2_Mount_eject_with_operation(carg0 *C.GMount, carg1 C.GMountUnmountFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
-	var fn func(carg0 *C.GMount, carg1 C.GMountUnmountFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_Mount_eject_with_operation").(func(carg0 *C.GMount, carg1 C.GMountUnmountFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_Mount_eject_with_operation: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4, carg5)
 }
 
 //export _gotk4_gio2_Mount_eject_with_operation_finish
@@ -2893,18 +2449,6 @@ func _gotk4_gio2_Mount_get_volume(carg0 *C.GMount) (cret *C.GVolume) {
 	return fn(carg0)
 }
 
-//export _gotk4_gio2_Mount_guess_content_type
-func _gotk4_gio2_Mount_guess_content_type(carg0 *C.GMount, carg1 C.gboolean, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
-	var fn func(carg0 *C.GMount, carg1 C.gboolean, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_Mount_guess_content_type").(func(carg0 *C.GMount, carg1 C.gboolean, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_Mount_guess_content_type: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4)
-}
-
 //export _gotk4_gio2_Mount_guess_content_type_finish
 func _gotk4_gio2_Mount_guess_content_type_finish(carg0 *C.GMount, carg1 *C.GAsyncResult, _cerr **C.GError) (cret **C.gchar) {
 	var fn func(carg0 *C.GMount, carg1 *C.GAsyncResult, _cerr **C.GError) (cret **C.gchar)
@@ -2941,18 +2485,6 @@ func _gotk4_gio2_Mount_pre_unmount(carg0 *C.GMount) {
 	fn(carg0)
 }
 
-//export _gotk4_gio2_Mount_remount
-func _gotk4_gio2_Mount_remount(carg0 *C.GMount, carg1 C.GMountMountFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
-	var fn func(carg0 *C.GMount, carg1 C.GMountMountFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_Mount_remount").(func(carg0 *C.GMount, carg1 C.GMountMountFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_Mount_remount: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4, carg5)
-}
-
 //export _gotk4_gio2_Mount_remount_finish
 func _gotk4_gio2_Mount_remount_finish(carg0 *C.GMount, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
 	var fn func(carg0 *C.GMount, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean)
@@ -2965,18 +2497,6 @@ func _gotk4_gio2_Mount_remount_finish(carg0 *C.GMount, carg1 *C.GAsyncResult, _c
 	return fn(carg0, carg1, _cerr)
 }
 
-//export _gotk4_gio2_Mount_unmount
-func _gotk4_gio2_Mount_unmount(carg0 *C.GMount, carg1 C.GMountUnmountFlags, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
-	var fn func(carg0 *C.GMount, carg1 C.GMountUnmountFlags, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_Mount_unmount").(func(carg0 *C.GMount, carg1 C.GMountUnmountFlags, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_Mount_unmount: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4)
-}
-
 //export _gotk4_gio2_Mount_unmount_finish
 func _gotk4_gio2_Mount_unmount_finish(carg0 *C.GMount, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
 	var fn func(carg0 *C.GMount, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean)
@@ -2987,18 +2507,6 @@ func _gotk4_gio2_Mount_unmount_finish(carg0 *C.GMount, carg1 *C.GAsyncResult, _c
 		}
 	}
 	return fn(carg0, carg1, _cerr)
-}
-
-//export _gotk4_gio2_Mount_unmount_with_operation
-func _gotk4_gio2_Mount_unmount_with_operation(carg0 *C.GMount, carg1 C.GMountUnmountFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
-	var fn func(carg0 *C.GMount, carg1 C.GMountUnmountFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_Mount_unmount_with_operation").(func(carg0 *C.GMount, carg1 C.GMountUnmountFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_Mount_unmount_with_operation: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4, carg5)
 }
 
 //export _gotk4_gio2_Mount_unmount_with_operation_finish
@@ -3035,18 +2543,6 @@ func _gotk4_gio2_NetworkMonitor_can_reach(carg0 *C.GNetworkMonitor, carg1 *C.GSo
 		}
 	}
 	return fn(carg0, carg1, carg2, _cerr)
-}
-
-//export _gotk4_gio2_NetworkMonitor_can_reach_async
-func _gotk4_gio2_NetworkMonitor_can_reach_async(carg0 *C.GNetworkMonitor, carg1 *C.GSocketConnectable, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
-	var fn func(carg0 *C.GNetworkMonitor, carg1 *C.GSocketConnectable, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_NetworkMonitor_can_reach_async").(func(carg0 *C.GNetworkMonitor, carg1 *C.GSocketConnectable, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_NetworkMonitor_can_reach_async: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4)
 }
 
 //export _gotk4_gio2_NetworkMonitor_can_reach_finish
@@ -3146,10 +2642,10 @@ func _gotk4_gio2_PollableOutputStream_is_writable(carg0 *C.GPollableOutputStream
 }
 
 //export _gotk4_gio2_PollableOutputStream_write_nonblocking
-func _gotk4_gio2_PollableOutputStream_write_nonblocking(carg0 *C.GPollableOutputStream, carg1 unsafe.Pointer, carg2 C.gsize, _cerr **C.GError) (cret C.gssize) {
-	var fn func(carg0 *C.GPollableOutputStream, carg1 unsafe.Pointer, carg2 C.gsize, _cerr **C.GError) (cret C.gssize)
+func _gotk4_gio2_PollableOutputStream_write_nonblocking(carg0 *C.GPollableOutputStream, carg1 *C.void, carg2 C.gsize, _cerr **C.GError) (cret C.gssize) {
+	var fn func(carg0 *C.GPollableOutputStream, carg1 *C.void, carg2 C.gsize, _cerr **C.GError) (cret C.gssize)
 	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_PollableOutputStream_write_nonblocking").(func(carg0 *C.GPollableOutputStream, carg1 unsafe.Pointer, carg2 C.gsize, _cerr **C.GError) (cret C.gssize))
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_PollableOutputStream_write_nonblocking").(func(carg0 *C.GPollableOutputStream, carg1 *C.void, carg2 C.gsize, _cerr **C.GError) (cret C.gssize))
 		if fn == nil {
 			panic("_gotk4_gio2_PollableOutputStream_write_nonblocking: no function pointer found")
 		}
@@ -3179,18 +2675,6 @@ func _gotk4_gio2_Proxy_connect(carg0 *C.GProxy, carg1 *C.GIOStream, carg2 *C.GPr
 		}
 	}
 	return fn(carg0, carg1, carg2, carg3, _cerr)
-}
-
-//export _gotk4_gio2_Proxy_connect_async
-func _gotk4_gio2_Proxy_connect_async(carg0 *C.GProxy, carg1 *C.GIOStream, carg2 *C.GProxyAddress, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
-	var fn func(carg0 *C.GProxy, carg1 *C.GIOStream, carg2 *C.GProxyAddress, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_Proxy_connect_async").(func(carg0 *C.GProxy, carg1 *C.GIOStream, carg2 *C.GProxyAddress, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_Proxy_connect_async: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4, carg5)
 }
 
 //export _gotk4_gio2_Proxy_connect_finish
@@ -3239,18 +2723,6 @@ func _gotk4_gio2_ProxyResolver_lookup(carg0 *C.GProxyResolver, carg1 *C.gchar, c
 		}
 	}
 	return fn(carg0, carg1, carg2, _cerr)
-}
-
-//export _gotk4_gio2_ProxyResolver_lookup_async
-func _gotk4_gio2_ProxyResolver_lookup_async(carg0 *C.GProxyResolver, carg1 *C.gchar, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
-	var fn func(carg0 *C.GProxyResolver, carg1 *C.gchar, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_ProxyResolver_lookup_async").(func(carg0 *C.GProxyResolver, carg1 *C.gchar, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_ProxyResolver_lookup_async: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4)
 }
 
 //export _gotk4_gio2_ProxyResolver_lookup_finish
@@ -3445,18 +2917,6 @@ func _gotk4_gio2_Volume_changed(carg0 *C.GVolume) {
 	fn(carg0)
 }
 
-//export _gotk4_gio2_Volume_eject
-func _gotk4_gio2_Volume_eject(carg0 *C.GVolume, carg1 C.GMountUnmountFlags, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
-	var fn func(carg0 *C.GVolume, carg1 C.GMountUnmountFlags, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_Volume_eject").(func(carg0 *C.GVolume, carg1 C.GMountUnmountFlags, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_Volume_eject: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4)
-}
-
 //export _gotk4_gio2_Volume_eject_finish
 func _gotk4_gio2_Volume_eject_finish(carg0 *C.GVolume, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
 	var fn func(carg0 *C.GVolume, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean)
@@ -3467,18 +2927,6 @@ func _gotk4_gio2_Volume_eject_finish(carg0 *C.GVolume, carg1 *C.GAsyncResult, _c
 		}
 	}
 	return fn(carg0, carg1, _cerr)
-}
-
-//export _gotk4_gio2_Volume_eject_with_operation
-func _gotk4_gio2_Volume_eject_with_operation(carg0 *C.GVolume, carg1 C.GMountUnmountFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
-	var fn func(carg0 *C.GVolume, carg1 C.GMountUnmountFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_Volume_eject_with_operation").(func(carg0 *C.GVolume, carg1 C.GMountUnmountFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_Volume_eject_with_operation: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4, carg5)
 }
 
 //export _gotk4_gio2_Volume_eject_with_operation_finish
@@ -3623,18 +3071,6 @@ func _gotk4_gio2_Volume_mount_finish(carg0 *C.GVolume, carg1 *C.GAsyncResult, _c
 		}
 	}
 	return fn(carg0, carg1, _cerr)
-}
-
-//export _gotk4_gio2_Volume_mount_fn
-func _gotk4_gio2_Volume_mount_fn(carg0 *C.GVolume, carg1 C.GMountMountFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
-	var fn func(carg0 *C.GVolume, carg1 C.GMountMountFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_Volume_mount_fn").(func(carg0 *C.GVolume, carg1 C.GMountMountFlags, carg2 *C.GMountOperation, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_Volume_mount_fn: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4, carg5)
 }
 
 //export _gotk4_gio2_Volume_removed
@@ -3937,18 +3373,6 @@ func _gotk4_gio2_DebugControllerDBus_authorize(carg0 *C.GDebugControllerDBus, ca
 	return fn(carg0, carg1)
 }
 
-//export _gotk4_gio2_FileEnumerator_close_async
-func _gotk4_gio2_FileEnumerator_close_async(carg0 *C.GFileEnumerator, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
-	var fn func(carg0 *C.GFileEnumerator, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_FileEnumerator_close_async").(func(carg0 *C.GFileEnumerator, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_FileEnumerator_close_async: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4)
-}
-
 //export _gotk4_gio2_FileEnumerator_close_finish
 func _gotk4_gio2_FileEnumerator_close_finish(carg0 *C.GFileEnumerator, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
 	var fn func(carg0 *C.GFileEnumerator, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean)
@@ -3983,18 +3407,6 @@ func _gotk4_gio2_FileEnumerator_next_file(carg0 *C.GFileEnumerator, carg1 *C.GCa
 		}
 	}
 	return fn(carg0, carg1, _cerr)
-}
-
-//export _gotk4_gio2_FileEnumerator_next_files_async
-func _gotk4_gio2_FileEnumerator_next_files_async(carg0 *C.GFileEnumerator, carg1 C.int, carg2 C.int, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
-	var fn func(carg0 *C.GFileEnumerator, carg1 C.int, carg2 C.int, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_FileEnumerator_next_files_async").(func(carg0 *C.GFileEnumerator, carg1 C.int, carg2 C.int, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_FileEnumerator_next_files_async: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4, carg5)
 }
 
 //export _gotk4_gio2_FileEnumerator_next_files_finish
@@ -4043,18 +3455,6 @@ func _gotk4_gio2_FilenameCompleter_got_completion_data(carg0 *C.GFilenameComplet
 		}
 	}
 	fn(carg0)
-}
-
-//export _gotk4_gio2_IOStream_close_async
-func _gotk4_gio2_IOStream_close_async(carg0 *C.GIOStream, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
-	var fn func(carg0 *C.GIOStream, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_IOStream_close_async").(func(carg0 *C.GIOStream, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_IOStream_close_async: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4)
 }
 
 //export _gotk4_gio2_IOStream_close_finish
@@ -4117,18 +3517,6 @@ func _gotk4_gio2_InetAddress_to_string(carg0 *C.GInetAddress) (cret *C.gchar) {
 	return fn(carg0)
 }
 
-//export _gotk4_gio2_InputStream_close_async
-func _gotk4_gio2_InputStream_close_async(carg0 *C.GInputStream, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
-	var fn func(carg0 *C.GInputStream, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_InputStream_close_async").(func(carg0 *C.GInputStream, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_InputStream_close_async: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4)
-}
-
 //export _gotk4_gio2_InputStream_close_finish
 func _gotk4_gio2_InputStream_close_finish(carg0 *C.GInputStream, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
 	var fn func(carg0 *C.GInputStream, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean)
@@ -4165,18 +3553,6 @@ func _gotk4_gio2_InputStream_read_finish(carg0 *C.GInputStream, carg1 *C.GAsyncR
 	return fn(carg0, carg1, _cerr)
 }
 
-//export _gotk4_gio2_InputStream_read_fn
-func _gotk4_gio2_InputStream_read_fn(carg0 *C.GInputStream, carg1 *C.void, carg2 C.gsize, carg3 *C.GCancellable, _cerr **C.GError) (cret C.gssize) {
-	var fn func(carg0 *C.GInputStream, carg1 *C.void, carg2 C.gsize, carg3 *C.GCancellable, _cerr **C.GError) (cret C.gssize)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_InputStream_read_fn").(func(carg0 *C.GInputStream, carg1 *C.void, carg2 C.gsize, carg3 *C.GCancellable, _cerr **C.GError) (cret C.gssize))
-		if fn == nil {
-			panic("_gotk4_gio2_InputStream_read_fn: no function pointer found")
-		}
-	}
-	return fn(carg0, carg1, carg2, carg3, _cerr)
-}
-
 //export _gotk4_gio2_InputStream_skip
 func _gotk4_gio2_InputStream_skip(carg0 *C.GInputStream, carg1 C.gsize, carg2 *C.GCancellable, _cerr **C.GError) (cret C.gssize) {
 	var fn func(carg0 *C.GInputStream, carg1 C.gsize, carg2 *C.GCancellable, _cerr **C.GError) (cret C.gssize)
@@ -4187,18 +3563,6 @@ func _gotk4_gio2_InputStream_skip(carg0 *C.GInputStream, carg1 C.gsize, carg2 *C
 		}
 	}
 	return fn(carg0, carg1, carg2, _cerr)
-}
-
-//export _gotk4_gio2_InputStream_skip_async
-func _gotk4_gio2_InputStream_skip_async(carg0 *C.GInputStream, carg1 C.gsize, carg2 C.int, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
-	var fn func(carg0 *C.GInputStream, carg1 C.gsize, carg2 C.int, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_InputStream_skip_async").(func(carg0 *C.GInputStream, carg1 C.gsize, carg2 C.int, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_InputStream_skip_async: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4, carg5)
 }
 
 //export _gotk4_gio2_InputStream_skip_finish
@@ -4345,18 +3709,6 @@ func _gotk4_gio2_MountOperation_show_unmount_progress(carg0 *C.GMountOperation, 
 	fn(carg0, carg1, carg2, carg3)
 }
 
-//export _gotk4_gio2_OutputStream_close_async
-func _gotk4_gio2_OutputStream_close_async(carg0 *C.GOutputStream, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
-	var fn func(carg0 *C.GOutputStream, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_OutputStream_close_async").(func(carg0 *C.GOutputStream, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_OutputStream_close_async: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4)
-}
-
 //export _gotk4_gio2_OutputStream_close_finish
 func _gotk4_gio2_OutputStream_close_finish(carg0 *C.GOutputStream, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
 	var fn func(carg0 *C.GOutputStream, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean)
@@ -4393,18 +3745,6 @@ func _gotk4_gio2_OutputStream_flush(carg0 *C.GOutputStream, carg1 *C.GCancellabl
 	return fn(carg0, carg1, _cerr)
 }
 
-//export _gotk4_gio2_OutputStream_flush_async
-func _gotk4_gio2_OutputStream_flush_async(carg0 *C.GOutputStream, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
-	var fn func(carg0 *C.GOutputStream, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_OutputStream_flush_async").(func(carg0 *C.GOutputStream, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_OutputStream_flush_async: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4)
-}
-
 //export _gotk4_gio2_OutputStream_flush_finish
 func _gotk4_gio2_OutputStream_flush_finish(carg0 *C.GOutputStream, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
 	var fn func(carg0 *C.GOutputStream, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean)
@@ -4429,18 +3769,6 @@ func _gotk4_gio2_OutputStream_splice(carg0 *C.GOutputStream, carg1 *C.GInputStre
 	return fn(carg0, carg1, carg2, carg3, _cerr)
 }
 
-//export _gotk4_gio2_OutputStream_splice_async
-func _gotk4_gio2_OutputStream_splice_async(carg0 *C.GOutputStream, carg1 *C.GInputStream, carg2 C.GOutputStreamSpliceFlags, carg3 C.int, carg4 *C.GCancellable, carg5 C.GAsyncReadyCallback, carg6 C.gpointer) {
-	var fn func(carg0 *C.GOutputStream, carg1 *C.GInputStream, carg2 C.GOutputStreamSpliceFlags, carg3 C.int, carg4 *C.GCancellable, carg5 C.GAsyncReadyCallback, carg6 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_OutputStream_splice_async").(func(carg0 *C.GOutputStream, carg1 *C.GInputStream, carg2 C.GOutputStreamSpliceFlags, carg3 C.int, carg4 *C.GCancellable, carg5 C.GAsyncReadyCallback, carg6 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_OutputStream_splice_async: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4, carg5, carg6)
-}
-
 //export _gotk4_gio2_OutputStream_splice_finish
 func _gotk4_gio2_OutputStream_splice_finish(carg0 *C.GOutputStream, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gssize) {
 	var fn func(carg0 *C.GOutputStream, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gssize)
@@ -4451,18 +3779,6 @@ func _gotk4_gio2_OutputStream_splice_finish(carg0 *C.GOutputStream, carg1 *C.GAs
 		}
 	}
 	return fn(carg0, carg1, _cerr)
-}
-
-//export _gotk4_gio2_OutputStream_write_async
-func _gotk4_gio2_OutputStream_write_async(carg0 *C.GOutputStream, carg1 unsafe.Pointer, carg2 C.gsize, carg3 C.int, carg4 *C.GCancellable, carg5 C.GAsyncReadyCallback, carg6 C.gpointer) {
-	var fn func(carg0 *C.GOutputStream, carg1 unsafe.Pointer, carg2 C.gsize, carg3 C.int, carg4 *C.GCancellable, carg5 C.GAsyncReadyCallback, carg6 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_OutputStream_write_async").(func(carg0 *C.GOutputStream, carg1 unsafe.Pointer, carg2 C.gsize, carg3 C.int, carg4 *C.GCancellable, carg5 C.GAsyncReadyCallback, carg6 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_OutputStream_write_async: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4, carg5, carg6)
 }
 
 //export _gotk4_gio2_OutputStream_write_finish
@@ -4478,27 +3794,15 @@ func _gotk4_gio2_OutputStream_write_finish(carg0 *C.GOutputStream, carg1 *C.GAsy
 }
 
 //export _gotk4_gio2_OutputStream_write_fn
-func _gotk4_gio2_OutputStream_write_fn(carg0 *C.GOutputStream, carg1 unsafe.Pointer, carg2 C.gsize, carg3 *C.GCancellable, _cerr **C.GError) (cret C.gssize) {
-	var fn func(carg0 *C.GOutputStream, carg1 unsafe.Pointer, carg2 C.gsize, carg3 *C.GCancellable, _cerr **C.GError) (cret C.gssize)
+func _gotk4_gio2_OutputStream_write_fn(carg0 *C.GOutputStream, carg1 *C.void, carg2 C.gsize, carg3 *C.GCancellable, _cerr **C.GError) (cret C.gssize) {
+	var fn func(carg0 *C.GOutputStream, carg1 *C.void, carg2 C.gsize, carg3 *C.GCancellable, _cerr **C.GError) (cret C.gssize)
 	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_OutputStream_write_fn").(func(carg0 *C.GOutputStream, carg1 unsafe.Pointer, carg2 C.gsize, carg3 *C.GCancellable, _cerr **C.GError) (cret C.gssize))
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_OutputStream_write_fn").(func(carg0 *C.GOutputStream, carg1 *C.void, carg2 C.gsize, carg3 *C.GCancellable, _cerr **C.GError) (cret C.gssize))
 		if fn == nil {
 			panic("_gotk4_gio2_OutputStream_write_fn: no function pointer found")
 		}
 	}
 	return fn(carg0, carg1, carg2, carg3, _cerr)
-}
-
-//export _gotk4_gio2_OutputStream_writev_async
-func _gotk4_gio2_OutputStream_writev_async(carg0 *C.GOutputStream, carg1 *C.GOutputVector, carg2 C.gsize, carg3 C.int, carg4 *C.GCancellable, carg5 C.GAsyncReadyCallback, carg6 C.gpointer) {
-	var fn func(carg0 *C.GOutputStream, carg1 *C.GOutputVector, carg2 C.gsize, carg3 C.int, carg4 *C.GCancellable, carg5 C.GAsyncReadyCallback, carg6 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_OutputStream_writev_async").(func(carg0 *C.GOutputStream, carg1 *C.GOutputVector, carg2 C.gsize, carg3 C.int, carg4 *C.GCancellable, carg5 C.GAsyncReadyCallback, carg6 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_OutputStream_writev_async: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4, carg5, carg6)
 }
 
 //export _gotk4_gio2_OutputStream_writev_finish
@@ -4537,18 +3841,6 @@ func _gotk4_gio2_Permission_acquire(carg0 *C.GPermission, carg1 *C.GCancellable,
 	return fn(carg0, carg1, _cerr)
 }
 
-//export _gotk4_gio2_Permission_acquire_async
-func _gotk4_gio2_Permission_acquire_async(carg0 *C.GPermission, carg1 *C.GCancellable, carg2 C.GAsyncReadyCallback, carg3 C.gpointer) {
-	var fn func(carg0 *C.GPermission, carg1 *C.GCancellable, carg2 C.GAsyncReadyCallback, carg3 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_Permission_acquire_async").(func(carg0 *C.GPermission, carg1 *C.GCancellable, carg2 C.GAsyncReadyCallback, carg3 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_Permission_acquire_async: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3)
-}
-
 //export _gotk4_gio2_Permission_acquire_finish
 func _gotk4_gio2_Permission_acquire_finish(carg0 *C.GPermission, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
 	var fn func(carg0 *C.GPermission, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean)
@@ -4571,18 +3863,6 @@ func _gotk4_gio2_Permission_release(carg0 *C.GPermission, carg1 *C.GCancellable,
 		}
 	}
 	return fn(carg0, carg1, _cerr)
-}
-
-//export _gotk4_gio2_Permission_release_async
-func _gotk4_gio2_Permission_release_async(carg0 *C.GPermission, carg1 *C.GCancellable, carg2 C.GAsyncReadyCallback, carg3 C.gpointer) {
-	var fn func(carg0 *C.GPermission, carg1 *C.GCancellable, carg2 C.GAsyncReadyCallback, carg3 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_Permission_release_async").(func(carg0 *C.GPermission, carg1 *C.GCancellable, carg2 C.GAsyncReadyCallback, carg3 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_Permission_release_async: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3)
 }
 
 //export _gotk4_gio2_Permission_release_finish
@@ -4609,18 +3889,6 @@ func _gotk4_gio2_Resolver_lookup_by_address(carg0 *C.GResolver, carg1 *C.GInetAd
 	return fn(carg0, carg1, carg2, _cerr)
 }
 
-//export _gotk4_gio2_Resolver_lookup_by_address_async
-func _gotk4_gio2_Resolver_lookup_by_address_async(carg0 *C.GResolver, carg1 *C.GInetAddress, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
-	var fn func(carg0 *C.GResolver, carg1 *C.GInetAddress, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_Resolver_lookup_by_address_async").(func(carg0 *C.GResolver, carg1 *C.GInetAddress, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_Resolver_lookup_by_address_async: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4)
-}
-
 //export _gotk4_gio2_Resolver_lookup_by_address_finish
 func _gotk4_gio2_Resolver_lookup_by_address_finish(carg0 *C.GResolver, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.gchar) {
 	var fn func(carg0 *C.GResolver, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.gchar)
@@ -4643,18 +3911,6 @@ func _gotk4_gio2_Resolver_lookup_by_name(carg0 *C.GResolver, carg1 *C.gchar, car
 		}
 	}
 	return fn(carg0, carg1, carg2, _cerr)
-}
-
-//export _gotk4_gio2_Resolver_lookup_by_name_async
-func _gotk4_gio2_Resolver_lookup_by_name_async(carg0 *C.GResolver, carg1 *C.gchar, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
-	var fn func(carg0 *C.GResolver, carg1 *C.gchar, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_Resolver_lookup_by_name_async").(func(carg0 *C.GResolver, carg1 *C.gchar, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_Resolver_lookup_by_name_async: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4)
 }
 
 //export _gotk4_gio2_Resolver_lookup_by_name_finish
@@ -4681,18 +3937,6 @@ func _gotk4_gio2_Resolver_lookup_by_name_with_flags(carg0 *C.GResolver, carg1 *C
 	return fn(carg0, carg1, carg2, carg3, _cerr)
 }
 
-//export _gotk4_gio2_Resolver_lookup_by_name_with_flags_async
-func _gotk4_gio2_Resolver_lookup_by_name_with_flags_async(carg0 *C.GResolver, carg1 *C.gchar, carg2 C.GResolverNameLookupFlags, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
-	var fn func(carg0 *C.GResolver, carg1 *C.gchar, carg2 C.GResolverNameLookupFlags, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_Resolver_lookup_by_name_with_flags_async").(func(carg0 *C.GResolver, carg1 *C.gchar, carg2 C.GResolverNameLookupFlags, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_Resolver_lookup_by_name_with_flags_async: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4, carg5)
-}
-
 //export _gotk4_gio2_Resolver_lookup_by_name_with_flags_finish
 func _gotk4_gio2_Resolver_lookup_by_name_with_flags_finish(carg0 *C.GResolver, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GList) {
 	var fn func(carg0 *C.GResolver, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GList)
@@ -4703,30 +3947,6 @@ func _gotk4_gio2_Resolver_lookup_by_name_with_flags_finish(carg0 *C.GResolver, c
 		}
 	}
 	return fn(carg0, carg1, _cerr)
-}
-
-//export _gotk4_gio2_Resolver_lookup_records_async
-func _gotk4_gio2_Resolver_lookup_records_async(carg0 *C.GResolver, carg1 *C.gchar, carg2 C.GResolverRecordType, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
-	var fn func(carg0 *C.GResolver, carg1 *C.gchar, carg2 C.GResolverRecordType, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_Resolver_lookup_records_async").(func(carg0 *C.GResolver, carg1 *C.gchar, carg2 C.GResolverRecordType, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_Resolver_lookup_records_async: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4, carg5)
-}
-
-//export _gotk4_gio2_Resolver_lookup_service_async
-func _gotk4_gio2_Resolver_lookup_service_async(carg0 *C.GResolver, carg1 *C.gchar, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
-	var fn func(carg0 *C.GResolver, carg1 *C.gchar, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_Resolver_lookup_service_async").(func(carg0 *C.GResolver, carg1 *C.gchar, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_Resolver_lookup_service_async: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4)
 }
 
 //export _gotk4_gio2_Resolver_lookup_service_finish
@@ -4835,18 +4055,6 @@ func _gotk4_gio2_SocketAddressEnumerator_next(carg0 *C.GSocketAddressEnumerator,
 		}
 	}
 	return fn(carg0, carg1, _cerr)
-}
-
-//export _gotk4_gio2_SocketAddressEnumerator_next_async
-func _gotk4_gio2_SocketAddressEnumerator_next_async(carg0 *C.GSocketAddressEnumerator, carg1 *C.GCancellable, carg2 C.GAsyncReadyCallback, carg3 C.gpointer) {
-	var fn func(carg0 *C.GSocketAddressEnumerator, carg1 *C.GCancellable, carg2 C.GAsyncReadyCallback, carg3 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_SocketAddressEnumerator_next_async").(func(carg0 *C.GSocketAddressEnumerator, carg1 *C.GCancellable, carg2 C.GAsyncReadyCallback, carg3 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_SocketAddressEnumerator_next_async: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3)
 }
 
 //export _gotk4_gio2_SocketAddressEnumerator_next_finish
@@ -5005,18 +4213,6 @@ func _gotk4_gio2_TlsConnection_handshake(carg0 *C.GTlsConnection, carg1 *C.GCanc
 	return fn(carg0, carg1, _cerr)
 }
 
-//export _gotk4_gio2_TlsConnection_handshake_async
-func _gotk4_gio2_TlsConnection_handshake_async(carg0 *C.GTlsConnection, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
-	var fn func(carg0 *C.GTlsConnection, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_TlsConnection_handshake_async").(func(carg0 *C.GTlsConnection, carg1 C.int, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_TlsConnection_handshake_async: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4)
-}
-
 //export _gotk4_gio2_TlsConnection_handshake_finish
 func _gotk4_gio2_TlsConnection_handshake_finish(carg0 *C.GTlsConnection, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
 	var fn func(carg0 *C.GTlsConnection, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean)
@@ -5053,18 +4249,6 @@ func _gotk4_gio2_TlsDatabase_lookup_certificate_for_handle(carg0 *C.GTlsDatabase
 	return fn(carg0, carg1, carg2, carg3, carg4, _cerr)
 }
 
-//export _gotk4_gio2_TlsDatabase_lookup_certificate_for_handle_async
-func _gotk4_gio2_TlsDatabase_lookup_certificate_for_handle_async(carg0 *C.GTlsDatabase, carg1 *C.gchar, carg2 *C.GTlsInteraction, carg3 C.GTlsDatabaseLookupFlags, carg4 *C.GCancellable, carg5 C.GAsyncReadyCallback, carg6 C.gpointer) {
-	var fn func(carg0 *C.GTlsDatabase, carg1 *C.gchar, carg2 *C.GTlsInteraction, carg3 C.GTlsDatabaseLookupFlags, carg4 *C.GCancellable, carg5 C.GAsyncReadyCallback, carg6 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_TlsDatabase_lookup_certificate_for_handle_async").(func(carg0 *C.GTlsDatabase, carg1 *C.gchar, carg2 *C.GTlsInteraction, carg3 C.GTlsDatabaseLookupFlags, carg4 *C.GCancellable, carg5 C.GAsyncReadyCallback, carg6 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_TlsDatabase_lookup_certificate_for_handle_async: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4, carg5, carg6)
-}
-
 //export _gotk4_gio2_TlsDatabase_lookup_certificate_for_handle_finish
 func _gotk4_gio2_TlsDatabase_lookup_certificate_for_handle_finish(carg0 *C.GTlsDatabase, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GTlsCertificate) {
 	var fn func(carg0 *C.GTlsDatabase, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GTlsCertificate)
@@ -5087,18 +4271,6 @@ func _gotk4_gio2_TlsDatabase_lookup_certificate_issuer(carg0 *C.GTlsDatabase, ca
 		}
 	}
 	return fn(carg0, carg1, carg2, carg3, carg4, _cerr)
-}
-
-//export _gotk4_gio2_TlsDatabase_lookup_certificate_issuer_async
-func _gotk4_gio2_TlsDatabase_lookup_certificate_issuer_async(carg0 *C.GTlsDatabase, carg1 *C.GTlsCertificate, carg2 *C.GTlsInteraction, carg3 C.GTlsDatabaseLookupFlags, carg4 *C.GCancellable, carg5 C.GAsyncReadyCallback, carg6 C.gpointer) {
-	var fn func(carg0 *C.GTlsDatabase, carg1 *C.GTlsCertificate, carg2 *C.GTlsInteraction, carg3 C.GTlsDatabaseLookupFlags, carg4 *C.GCancellable, carg5 C.GAsyncReadyCallback, carg6 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_TlsDatabase_lookup_certificate_issuer_async").(func(carg0 *C.GTlsDatabase, carg1 *C.GTlsCertificate, carg2 *C.GTlsInteraction, carg3 C.GTlsDatabaseLookupFlags, carg4 *C.GCancellable, carg5 C.GAsyncReadyCallback, carg6 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_TlsDatabase_lookup_certificate_issuer_async: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4, carg5, carg6)
 }
 
 //export _gotk4_gio2_TlsDatabase_lookup_certificate_issuer_finish
@@ -5137,18 +4309,6 @@ func _gotk4_gio2_TlsDatabase_verify_chain(carg0 *C.GTlsDatabase, carg1 *C.GTlsCe
 	return fn(carg0, carg1, carg2, carg3, carg4, carg5, carg6, _cerr)
 }
 
-//export _gotk4_gio2_TlsDatabase_verify_chain_async
-func _gotk4_gio2_TlsDatabase_verify_chain_async(carg0 *C.GTlsDatabase, carg1 *C.GTlsCertificate, carg2 *C.gchar, carg3 *C.GSocketConnectable, carg4 *C.GTlsInteraction, carg5 C.GTlsDatabaseVerifyFlags, carg6 *C.GCancellable, carg7 C.GAsyncReadyCallback, carg8 C.gpointer) {
-	var fn func(carg0 *C.GTlsDatabase, carg1 *C.GTlsCertificate, carg2 *C.gchar, carg3 *C.GSocketConnectable, carg4 *C.GTlsInteraction, carg5 C.GTlsDatabaseVerifyFlags, carg6 *C.GCancellable, carg7 C.GAsyncReadyCallback, carg8 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_TlsDatabase_verify_chain_async").(func(carg0 *C.GTlsDatabase, carg1 *C.GTlsCertificate, carg2 *C.gchar, carg3 *C.GSocketConnectable, carg4 *C.GTlsInteraction, carg5 C.GTlsDatabaseVerifyFlags, carg6 *C.GCancellable, carg7 C.GAsyncReadyCallback, carg8 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_TlsDatabase_verify_chain_async: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4, carg5, carg6, carg7, carg8)
-}
-
 //export _gotk4_gio2_TlsDatabase_verify_chain_finish
 func _gotk4_gio2_TlsDatabase_verify_chain_finish(carg0 *C.GTlsDatabase, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.GTlsCertificateFlags) {
 	var fn func(carg0 *C.GTlsDatabase, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.GTlsCertificateFlags)
@@ -5173,18 +4333,6 @@ func _gotk4_gio2_TlsInteraction_ask_password(carg0 *C.GTlsInteraction, carg1 *C.
 	return fn(carg0, carg1, carg2, _cerr)
 }
 
-//export _gotk4_gio2_TlsInteraction_ask_password_async
-func _gotk4_gio2_TlsInteraction_ask_password_async(carg0 *C.GTlsInteraction, carg1 *C.GTlsPassword, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer) {
-	var fn func(carg0 *C.GTlsInteraction, carg1 *C.GTlsPassword, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_TlsInteraction_ask_password_async").(func(carg0 *C.GTlsInteraction, carg1 *C.GTlsPassword, carg2 *C.GCancellable, carg3 C.GAsyncReadyCallback, carg4 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_TlsInteraction_ask_password_async: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4)
-}
-
 //export _gotk4_gio2_TlsInteraction_ask_password_finish
 func _gotk4_gio2_TlsInteraction_ask_password_finish(carg0 *C.GTlsInteraction, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.GTlsInteractionResult) {
 	var fn func(carg0 *C.GTlsInteraction, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.GTlsInteractionResult)
@@ -5207,18 +4355,6 @@ func _gotk4_gio2_TlsInteraction_request_certificate(carg0 *C.GTlsInteraction, ca
 		}
 	}
 	return fn(carg0, carg1, carg2, carg3, _cerr)
-}
-
-//export _gotk4_gio2_TlsInteraction_request_certificate_async
-func _gotk4_gio2_TlsInteraction_request_certificate_async(carg0 *C.GTlsInteraction, carg1 *C.GTlsConnection, carg2 C.GTlsCertificateRequestFlags, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
-	var fn func(carg0 *C.GTlsInteraction, carg1 *C.GTlsConnection, carg2 C.GTlsCertificateRequestFlags, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_TlsInteraction_request_certificate_async").(func(carg0 *C.GTlsInteraction, carg1 *C.GTlsConnection, carg2 C.GTlsCertificateRequestFlags, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_TlsInteraction_request_certificate_async: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4, carg5)
 }
 
 //export _gotk4_gio2_TlsInteraction_request_certificate_finish
@@ -5617,18 +4753,6 @@ func _gotk4_gio2_FileIOStream_query_info(carg0 *C.GFileIOStream, carg1 *C.char, 
 	return fn(carg0, carg1, carg2, _cerr)
 }
 
-//export _gotk4_gio2_FileIOStream_query_info_async
-func _gotk4_gio2_FileIOStream_query_info_async(carg0 *C.GFileIOStream, carg1 *C.char, carg2 C.int, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
-	var fn func(carg0 *C.GFileIOStream, carg1 *C.char, carg2 C.int, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_FileIOStream_query_info_async").(func(carg0 *C.GFileIOStream, carg1 *C.char, carg2 C.int, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_FileIOStream_query_info_async: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4, carg5)
-}
-
 //export _gotk4_gio2_FileIOStream_query_info_finish
 func _gotk4_gio2_FileIOStream_query_info_finish(carg0 *C.GFileIOStream, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GFileInfo) {
 	var fn func(carg0 *C.GFileIOStream, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GFileInfo)
@@ -5699,18 +4823,6 @@ func _gotk4_gio2_FileInputStream_query_info(carg0 *C.GFileInputStream, carg1 *C.
 		}
 	}
 	return fn(carg0, carg1, carg2, _cerr)
-}
-
-//export _gotk4_gio2_FileInputStream_query_info_async
-func _gotk4_gio2_FileInputStream_query_info_async(carg0 *C.GFileInputStream, carg1 *C.char, carg2 C.int, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
-	var fn func(carg0 *C.GFileInputStream, carg1 *C.char, carg2 C.int, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_FileInputStream_query_info_async").(func(carg0 *C.GFileInputStream, carg1 *C.char, carg2 C.int, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_FileInputStream_query_info_async: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4, carg5)
 }
 
 //export _gotk4_gio2_FileInputStream_query_info_finish
@@ -5797,18 +4909,6 @@ func _gotk4_gio2_FileOutputStream_query_info(carg0 *C.GFileOutputStream, carg1 *
 	return fn(carg0, carg1, carg2, _cerr)
 }
 
-//export _gotk4_gio2_FileOutputStream_query_info_async
-func _gotk4_gio2_FileOutputStream_query_info_async(carg0 *C.GFileOutputStream, carg1 *C.char, carg2 C.int, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
-	var fn func(carg0 *C.GFileOutputStream, carg1 *C.char, carg2 C.int, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_FileOutputStream_query_info_async").(func(carg0 *C.GFileOutputStream, carg1 *C.char, carg2 C.int, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_FileOutputStream_query_info_async: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4, carg5)
-}
-
 //export _gotk4_gio2_FileOutputStream_query_info_finish
 func _gotk4_gio2_FileOutputStream_query_info_finish(carg0 *C.GFileOutputStream, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GFileInfo) {
 	var fn func(carg0 *C.GFileOutputStream, carg1 *C.GAsyncResult, _cerr **C.GError) (cret *C.GFileInfo)
@@ -5867,18 +4967,6 @@ func _gotk4_gio2_BufferedInputStream_fill(carg0 *C.GBufferedInputStream, carg1 C
 		}
 	}
 	return fn(carg0, carg1, carg2, _cerr)
-}
-
-//export _gotk4_gio2_BufferedInputStream_fill_async
-func _gotk4_gio2_BufferedInputStream_fill_async(carg0 *C.GBufferedInputStream, carg1 C.gssize, carg2 C.int, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer) {
-	var fn func(carg0 *C.GBufferedInputStream, carg1 C.gssize, carg2 C.int, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_BufferedInputStream_fill_async").(func(carg0 *C.GBufferedInputStream, carg1 C.gssize, carg2 C.int, carg3 *C.GCancellable, carg4 C.GAsyncReadyCallback, carg5 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gio2_BufferedInputStream_fill_async: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4, carg5)
 }
 
 //export _gotk4_gio2_BufferedInputStream_fill_finish

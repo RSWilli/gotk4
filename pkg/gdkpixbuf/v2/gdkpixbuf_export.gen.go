@@ -29,10 +29,10 @@ func _gotk4_gdkpixbuf2_PixbufModuleSizeFunc(carg1 *C.gint, carg2 *C.gint, carg3 
 
 	_ = width
 	_ = carg1
-	panic("unimplemented conversion of *int32 (gint*)")
+	panic("unimplemented conversion of *int32 (*C.gint)")
 	_ = height
 	_ = carg2
-	panic("unimplemented conversion of *int32 (gint*)")
+	panic("unimplemented conversion of *int32 (*C.gint)")
 
 	fn(width, height)
 }
@@ -49,10 +49,10 @@ func _gotk4_gdkpixbuf2_PixbufModuleUpdatedFunc(carg1 *C.GdkPixbuf, carg2 C.int, 
 	}
 
 	var pixbuf Pixbuf // in, none, converted
-	var x      int32  // in, none, casted, casted C.gint
-	var y      int32  // in, none, casted, casted C.gint
-	var width  int32  // in, none, casted, casted C.gint
-	var height int32  // in, none, casted, casted C.gint
+	var x      int32  // in, none, casted
+	var y      int32  // in, none, casted
+	var width  int32  // in, none, casted
+	var height int32  // in, none, casted
 
 	pixbuf = UnsafePixbufFromGlibNone(unsafe.Pointer(carg1))
 	x = int32(carg2)
@@ -81,7 +81,7 @@ func _gotk4_gdkpixbuf2_PixbufSaveFunc(carg1 *C.gchar, carg2 C.gsize, carg3 **C.G
 	_ = buf
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of string (const gchar*)")
+	panic("unimplemented conversion of string (*C.gchar)")
 
 	goret, err = fn(buf)
 

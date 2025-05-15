@@ -78,8 +78,8 @@ func (e X11DeviceType) String() string {
 //
 // Returns the device ID as seen by XInput2.
 func X11DeviceGetID(device X11DeviceXI2) int32 {
-	var carg1 *C.GdkDevice // in, none, converted, casted *C.GdkX11DeviceXI2
-	var cret  C.int        // return, none, casted, casted C.gint
+	var carg1 *C.GdkDevice // in, none, converted
+	var cret  C.int        // return, none, casted
 
 	carg1 = (*C.GdkDevice)(UnsafeX11DeviceXI2ToGlibNone(device))
 
@@ -107,8 +107,8 @@ func X11DeviceGetID(device X11DeviceXI2) int32 {
 // Returns the `GdkDevice` that wraps the given device ID.
 func X11DeviceManagerLookup(deviceManager X11DeviceManagerXI2, deviceId int32) X11DeviceXI2 {
 	var carg1 *C.GdkX11DeviceManagerXI2 // in, none, converted
-	var carg2 C.int                     // in, none, casted, casted C.gint
-	var cret  *C.GdkDevice              // return, none, converted, casted *C.GdkX11DeviceXI2, nullable
+	var carg2 C.int                     // in, none, casted
+	var cret  *C.GdkDevice              // return, none, converted, nullable
 
 	carg1 = (*C.GdkX11DeviceManagerXI2)(UnsafeX11DeviceManagerXI2ToGlibNone(deviceManager))
 	carg2 = C.int(deviceId)
@@ -135,11 +135,11 @@ func X11DeviceManagerLookup(deviceManager X11DeviceManagerXI2, deviceId int32) X
 //
 // Frees the data returned from gdk_x11_display_string_to_compound_text().
 func X11FreeCompoundText(ctext *uint8) {
-	var carg1 *C.guchar // in, transfer: none, C Pointers: 1, Name: guint8, casted *C.guint8
+	var carg1 *C.guchar // in, transfer: none, C Pointers: 1, Name: guint8
 
 	_ = ctext
 	_ = carg1
-	panic("unimplemented conversion of *uint8 (guchar*)")
+	panic("unimplemented conversion of *uint8 (*C.guchar)")
 
 	C.gdk_x11_free_compound_text(carg1)
 	runtime.KeepAlive(ctext)
@@ -159,7 +159,7 @@ func X11FreeCompoundText(ctext *uint8) {
 //
 // Routine to get the current X server time stamp.
 func X11GetServerTime(surface X11Surface) uint32 {
-	var carg1 *C.GdkSurface // in, none, converted, casted *C.GdkX11Surface
+	var carg1 *C.GdkSurface // in, none, converted
 	var cret  C.guint32     // return, none, casted
 
 	carg1 = (*C.GdkSurface)(UnsafeX11SurfaceToGlibNone(surface))
@@ -606,7 +606,7 @@ func X11DisplayOpen(displayName string) gdk.Display {
 // of the `WM_CLASS` property on toplevel windows; see the ICCCM.
 func X11DisplaySetProgramClass(display gdk.Display, programClass string) {
 	var carg1 *C.GdkDisplay // in, none, converted
-	var carg2 *C.char       // in, none, string, casted *C.gchar
+	var carg2 *C.char       // in, none, string
 
 	carg1 = (*C.GdkDisplay)(gdk.UnsafeDisplayToGlibNone(display))
 	carg2 = (*C.char)(unsafe.Pointer(C.CString(programClass)))
@@ -631,8 +631,8 @@ func X11DisplaySetProgramClass(display gdk.Display, programClass string) {
 // If you don’t need to use the return value,
 // gdk_x11_display_error_trap_pop_ignored() would be more efficient.
 func (display *X11DisplayInstance) ErrorTrapPop() int32 {
-	var carg0 *C.GdkDisplay // in, none, converted, casted *C.GdkX11Display
-	var cret  C.int         // return, none, casted, casted C.gint
+	var carg0 *C.GdkDisplay // in, none, converted
+	var cret  C.int         // return, none, casted
 
 	carg0 = (*C.GdkDisplay)(UnsafeX11DisplayToGlibNone(display))
 
@@ -653,7 +653,7 @@ func (display *X11DisplayInstance) ErrorTrapPop() int32 {
 // range of requests to ignore errors for, and ignores those errors
 // if they arrive asynchronously.
 func (display *X11DisplayInstance) ErrorTrapPopIgnored() {
-	var carg0 *C.GdkDisplay // in, none, converted, casted *C.GdkX11Display
+	var carg0 *C.GdkDisplay // in, none, converted
 
 	carg0 = (*C.GdkDisplay)(UnsafeX11DisplayToGlibNone(display))
 
@@ -669,7 +669,7 @@ func (display *X11DisplayInstance) ErrorTrapPopIgnored() {
 // gdk_x11_display_error_trap_pop_ignored()to lift a trap pushed
 // with this function.
 func (display *X11DisplayInstance) ErrorTrapPush() {
-	var carg0 *C.GdkDisplay // in, none, converted, casted *C.GdkX11Display
+	var carg0 *C.GdkDisplay // in, none, converted
 
 	carg0 = (*C.GdkDisplay)(UnsafeX11DisplayToGlibNone(display))
 
@@ -687,7 +687,7 @@ func (display *X11DisplayInstance) ErrorTrapPush() {
 // on @display. This surface is implicitly created by GDK.
 // See gdk_x11_surface_set_group().
 func (display *X11DisplayInstance) GetDefaultGroup() gdk.Surface {
-	var carg0 *C.GdkDisplay // in, none, converted, casted *C.GdkX11Display
+	var carg0 *C.GdkDisplay // in, none, converted
 	var cret  *C.GdkSurface // return, none, converted
 
 	carg0 = (*C.GdkDisplay)(UnsafeX11DisplayToGlibNone(display))
@@ -712,9 +712,9 @@ func (display *X11DisplayInstance) GetDefaultGroup() gdk.Surface {
 //
 // Retrieves the version of the EGL implementation.
 func (display *X11DisplayInstance) GetEglVersion() (int32, int32, bool) {
-	var carg0 *C.GdkDisplay // in, none, converted, casted *C.GdkX11Display
-	var carg1 C.int         // out, full, casted, casted C.gint
-	var carg2 C.int         // out, full, casted, casted C.gint
+	var carg0 *C.GdkDisplay // in, none, converted
+	var carg1 C.int         // out, full, casted
+	var carg2 C.int         // out, full, casted
 	var cret  C.gboolean    // return
 
 	carg0 = (*C.GdkDisplay)(UnsafeX11DisplayToGlibNone(display))
@@ -745,9 +745,9 @@ func (display *X11DisplayInstance) GetEglVersion() (int32, int32, bool) {
 //
 // Retrieves the version of the GLX implementation.
 func (display *X11DisplayInstance) GetGLXVersion() (int32, int32, bool) {
-	var carg0 *C.GdkDisplay // in, none, converted, casted *C.GdkX11Display
-	var carg1 C.int         // out, full, casted, casted C.gint
-	var carg2 C.int         // out, full, casted, casted C.gint
+	var carg0 *C.GdkDisplay // in, none, converted
+	var carg1 C.int         // out, full, casted
+	var carg2 C.int         // out, full, casted
 	var cret  C.gboolean    // return
 
 	carg0 = (*C.GdkDisplay)(UnsafeX11DisplayToGlibNone(display))
@@ -784,7 +784,7 @@ func (display *X11DisplayInstance) GetGLXVersion() (int32, int32, bool) {
 // If no monitor is the designated primary monitor, any monitor
 // (usually the first) may be returned.
 func (display *X11DisplayInstance) GetPrimaryMonitor() gdk.Monitor {
-	var carg0 *C.GdkDisplay // in, none, converted, casted *C.GdkX11Display
+	var carg0 *C.GdkDisplay // in, none, converted
 	var cret  *C.GdkMonitor // return, none, converted
 
 	carg0 = (*C.GdkDisplay)(UnsafeX11DisplayToGlibNone(display))
@@ -807,7 +807,7 @@ func (display *X11DisplayInstance) GetPrimaryMonitor() gdk.Monitor {
 //
 // Retrieves the `GdkX11Screen` of the @display.
 func (display *X11DisplayInstance) GetScreen() X11Screen {
-	var carg0 *C.GdkDisplay   // in, none, converted, casted *C.GdkX11Display
+	var carg0 *C.GdkDisplay   // in, none, converted
 	var cret  *C.GdkX11Screen // return, none, converted
 
 	carg0 = (*C.GdkDisplay)(UnsafeX11DisplayToGlibNone(display))
@@ -833,7 +833,7 @@ func (display *X11DisplayInstance) GetScreen() X11Screen {
 // by user interaction such as key presses or pointer
 // movements. See gdk_x11_surface_set_user_time().
 func (display *X11DisplayInstance) GetUserTime() uint32 {
-	var carg0 *C.GdkDisplay // in, none, converted, casted *C.GdkX11Display
+	var carg0 *C.GdkDisplay // in, none, converted
 	var cret  C.guint32     // return, none, casted
 
 	carg0 = (*C.GdkDisplay)(UnsafeX11DisplayToGlibNone(display))
@@ -855,7 +855,7 @@ func (display *X11DisplayInstance) GetUserTime() uint32 {
 // 
 // gdk_x11_display_grab()/gdk_x11_display_ungrab() calls can be nested.
 func (display *X11DisplayInstance) Grab() {
-	var carg0 *C.GdkDisplay // in, none, converted, casted *C.GdkX11Display
+	var carg0 *C.GdkDisplay // in, none, converted
 
 	carg0 = (*C.GdkDisplay)(UnsafeX11DisplayToGlibNone(display))
 
@@ -877,8 +877,8 @@ func (display *X11DisplayInstance) Grab() {
 // Once the scale is set by this call it will not change in response
 // to later user configuration changes.
 func (display *X11DisplayInstance) SetSurfaceScale(scale int32) {
-	var carg0 *C.GdkDisplay // in, none, converted, casted *C.GdkX11Display
-	var carg1 C.int         // in, none, casted, casted C.gint
+	var carg0 *C.GdkDisplay // in, none, converted
+	var carg1 C.int         // in, none, casted
 
 	carg0 = (*C.GdkDisplay)(UnsafeX11DisplayToGlibNone(display))
 	carg1 = C.int(scale)
@@ -893,7 +893,7 @@ func (display *X11DisplayInstance) SetSurfaceScale(scale int32) {
 // Ungrab @display after it has been grabbed with
 // gdk_x11_display_grab().
 func (display *X11DisplayInstance) Ungrab() {
-	var carg0 *C.GdkDisplay // in, none, converted, casted *C.GdkX11Display
+	var carg0 *C.GdkDisplay // in, none, converted
 
 	carg0 = (*C.GdkDisplay)(UnsafeX11DisplayToGlibNone(display))
 
@@ -1114,7 +1114,7 @@ func UnsafeX11MonitorToGlibFull(c X11Monitor) unsafe.Pointer {
 // The returned geometry is in ”application pixels”, not in ”device pixels”
 // (see [method@Gdk.Monitor.get_scale_factor]).
 func (monitor *X11MonitorInstance) GetWorkarea() gdk.Rectangle {
-	var carg0 *C.GdkMonitor  // in, none, converted, casted *C.GdkX11Monitor
+	var carg0 *C.GdkMonitor  // in, none, converted
 	var carg1 C.GdkRectangle // out, transfer: none, C Pointers: 0, Name: Rectangle, caller-allocates
 
 	carg0 = (*C.GdkMonitor)(UnsafeX11MonitorToGlibNone(monitor))
@@ -1126,7 +1126,7 @@ func (monitor *X11MonitorInstance) GetWorkarea() gdk.Rectangle {
 
 	_ = workarea
 	_ = carg1
-	panic("unimplemented conversion of gdk.Rectangle (GdkRectangle)")
+	panic("unimplemented conversion of gdk.Rectangle (C.GdkRectangle)")
 
 	return workarea
 }
@@ -1309,7 +1309,7 @@ func (screen *X11ScreenInstance) GetNumberOfDesktops() uint32 {
 // Returns the index of a `GdkX11Screen`.
 func (screen *X11ScreenInstance) GetScreenNumber() int32 {
 	var carg0 *C.GdkX11Screen // in, none, converted
-	var cret  C.int           // return, none, casted, casted C.gint
+	var cret  C.int           // return, none, casted
 
 	carg0 = (*C.GdkX11Screen)(UnsafeX11ScreenToGlibNone(screen))
 
@@ -1332,7 +1332,7 @@ func (screen *X11ScreenInstance) GetScreenNumber() int32 {
 // Returns the name of the window manager for @screen.
 func (screen *X11ScreenInstance) GetWindowManagerName() string {
 	var carg0 *C.GdkX11Screen // in, none, converted
-	var cret  *C.char         // return, none, string, casted *C.gchar
+	var cret  *C.char         // return, none, string
 
 	carg0 = (*C.GdkX11Screen)(UnsafeX11ScreenToGlibNone(screen))
 
@@ -1370,7 +1370,7 @@ func (screen *X11ScreenInstance) GetWindowManagerName() string {
 // a window manager change.
 func (screen *X11ScreenInstance) SupportsNetWmHint(propertyName string) bool {
 	var carg0 *C.GdkX11Screen // in, none, converted
-	var carg1 *C.char         // in, none, string, casted *C.gchar
+	var carg1 *C.char         // in, none, string
 	var cret  C.gboolean      // return
 
 	carg0 = (*C.GdkX11Screen)(UnsafeX11ScreenToGlibNone(screen))
@@ -1587,7 +1587,7 @@ func UnsafeX11SurfaceToGlibFull(c X11Surface) unsafe.Pointer {
 //
 // Gets the number of the workspace @surface is on.
 func (surface *X11SurfaceInstance) GetDesktop() uint32 {
-	var carg0 *C.GdkSurface // in, none, converted, casted *C.GdkX11Surface
+	var carg0 *C.GdkSurface // in, none, converted
 	var cret  C.guint32     // return, none, casted
 
 	carg0 = (*C.GdkSurface)(UnsafeX11SurfaceToGlibNone(surface))
@@ -1610,7 +1610,7 @@ func (surface *X11SurfaceInstance) GetDesktop() uint32 {
 //
 // Returns the group this surface belongs to.
 func (surface *X11SurfaceInstance) GetGroup() gdk.Surface {
-	var carg0 *C.GdkSurface // in, none, converted, casted *C.GdkX11Surface
+	var carg0 *C.GdkSurface // in, none, converted
 	var cret  *C.GdkSurface // return, none, converted, nullable
 
 	carg0 = (*C.GdkSurface)(UnsafeX11SurfaceToGlibNone(surface))
@@ -1634,7 +1634,7 @@ func (surface *X11SurfaceInstance) GetGroup() gdk.Surface {
 // in the [Extended Window Manager Hints](http://www.freedesktop.org/Standards/wm-spec) specification.
 // Will not do anything if the surface is already on all workspaces.
 func (surface *X11SurfaceInstance) MoveToCurrentDesktop() {
-	var carg0 *C.GdkSurface // in, none, converted, casted *C.GdkX11Surface
+	var carg0 *C.GdkSurface // in, none, converted
 
 	carg0 = (*C.GdkSurface)(UnsafeX11SurfaceToGlibNone(surface))
 
@@ -1652,7 +1652,7 @@ func (surface *X11SurfaceInstance) MoveToCurrentDesktop() {
 // window manager that supports multiple workspaces, as described
 // in the [Extended Window Manager Hints](http://www.freedesktop.org/Standards/wm-spec) specification.
 func (surface *X11SurfaceInstance) MoveToDesktop(desktop uint32) {
-	var carg0 *C.GdkSurface // in, none, converted, casted *C.GdkX11Surface
+	var carg0 *C.GdkSurface // in, none, converted
 	var carg1 C.guint32     // in, none, casted
 
 	carg0 = (*C.GdkSurface)(UnsafeX11SurfaceToGlibNone(surface))
@@ -1676,7 +1676,7 @@ func (surface *X11SurfaceInstance) MoveToDesktop(desktop uint32) {
 // synchronziation may need to be disabled. This is the case for a surface
 // embedded via the XEMBED protocol.
 func (surface *X11SurfaceInstance) SetFrameSyncEnabled(frameSyncEnabled bool) {
-	var carg0 *C.GdkSurface // in, none, converted, casted *C.GdkX11Surface
+	var carg0 *C.GdkSurface // in, none, converted
 	var carg1 C.gboolean    // in
 
 	carg0 = (*C.GdkSurface)(UnsafeX11SurfaceToGlibNone(surface))
@@ -1698,7 +1698,7 @@ func (surface *X11SurfaceInstance) SetFrameSyncEnabled(frameSyncEnabled bool) {
 // Sets the group leader of @surface to be @leader.
 // See the ICCCM for details.
 func (surface *X11SurfaceInstance) SetGroup(leader gdk.Surface) {
-	var carg0 *C.GdkSurface // in, none, converted, casted *C.GdkX11Surface
+	var carg0 *C.GdkSurface // in, none, converted
 	var carg1 *C.GdkSurface // in, none, converted
 
 	carg0 = (*C.GdkSurface)(UnsafeX11SurfaceToGlibNone(surface))
@@ -1718,7 +1718,7 @@ func (surface *X11SurfaceInstance) SetGroup(leader gdk.Surface) {
 // Sets a hint on @surface that pagers should not
 // display it. See the EWMH for details.
 func (surface *X11SurfaceInstance) SetSkipPagerHint(skipsPager bool) {
-	var carg0 *C.GdkSurface // in, none, converted, casted *C.GdkX11Surface
+	var carg0 *C.GdkSurface // in, none, converted
 	var carg1 C.gboolean    // in
 
 	carg0 = (*C.GdkSurface)(UnsafeX11SurfaceToGlibNone(surface))
@@ -1740,7 +1740,7 @@ func (surface *X11SurfaceInstance) SetSkipPagerHint(skipsPager bool) {
 // Sets a hint on @surface that taskbars should not
 // display it. See the EWMH for details.
 func (surface *X11SurfaceInstance) SetSkipTaskbarHint(skipsTaskbar bool) {
-	var carg0 *C.GdkSurface // in, none, converted, casted *C.GdkX11Surface
+	var carg0 *C.GdkSurface // in, none, converted
 	var carg1 C.gboolean    // in
 
 	carg0 = (*C.GdkSurface)(UnsafeX11SurfaceToGlibNone(surface))
@@ -1769,8 +1769,8 @@ func (surface *X11SurfaceInstance) SetSkipTaskbarHint(skipsTaskbar bool) {
 // function should only be used by applications which do not use GTK
 // to create toplevel surfaces.
 func (surface *X11SurfaceInstance) SetThemeVariant(variant string) {
-	var carg0 *C.GdkSurface // in, none, converted, casted *C.GdkX11Surface
-	var carg1 *C.char       // in, none, string, casted *C.gchar
+	var carg0 *C.GdkSurface // in, none, converted
+	var carg1 *C.char       // in, none, string
 
 	carg0 = (*C.GdkSurface)(UnsafeX11SurfaceToGlibNone(surface))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(variant)))
@@ -1790,7 +1790,7 @@ func (surface *X11SurfaceInstance) SetThemeVariant(variant string) {
 // Sets a hint on @surface that it needs user attention.
 // See the ICCCM for details.
 func (surface *X11SurfaceInstance) SetUrgencyHint(urgent bool) {
-	var carg0 *C.GdkSurface // in, none, converted, casted *C.GdkX11Surface
+	var carg0 *C.GdkSurface // in, none, converted
 	var carg1 C.gboolean    // in
 
 	carg0 = (*C.GdkSurface)(UnsafeX11SurfaceToGlibNone(surface))
@@ -1822,7 +1822,7 @@ func (surface *X11SurfaceInstance) SetUrgencyHint(urgent bool) {
 // function should only be used by applications which handle input
 // events bypassing GDK.
 func (surface *X11SurfaceInstance) SetUserTime(timestamp uint32) {
-	var carg0 *C.GdkSurface // in, none, converted, casted *C.GdkX11Surface
+	var carg0 *C.GdkSurface // in, none, converted
 	var carg1 C.guint32     // in, none, casted
 
 	carg0 = (*C.GdkSurface)(UnsafeX11SurfaceToGlibNone(surface))
@@ -1844,8 +1844,8 @@ func (surface *X11SurfaceInstance) SetUserTime(timestamp uint32) {
 // property of type UTF8_STRING.  If the given @surface is
 // not a toplevel surface, it is ignored.
 func (surface *X11SurfaceInstance) SetUTF8Property(name string, value string) {
-	var carg0 *C.GdkSurface // in, none, converted, casted *C.GdkX11Surface
-	var carg1 *C.char       // in, none, string, casted *C.gchar
+	var carg0 *C.GdkSurface // in, none, converted
+	var carg1 *C.char       // in, none, string
 	var carg2 *C.char       // in, none, string, nullable-string
 
 	carg0 = (*C.GdkSurface)(UnsafeX11SurfaceToGlibNone(surface))

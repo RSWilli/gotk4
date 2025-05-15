@@ -43,7 +43,7 @@ func init() {
 // See [func@PangoCairo.context_set_resolution]
 func ContextGetResolution(_context pango.Context) float64 {
 	var carg1 *C.PangoContext // in, none, converted
-	var cret  C.double        // return, none, casted, casted C.gdouble
+	var cret  C.double        // return, none, casted
 
 	carg1 = (*C.PangoContext)(pango.UnsafeContextToGlibNone(_context))
 
@@ -73,7 +73,7 @@ func ContextGetResolution(_context pango.Context) float64 {
 // be 13 units high. (10 * 96. / 72. = 13.3).
 func ContextSetResolution(_context pango.Context, dpi float64) {
 	var carg1 *C.PangoContext // in, none, converted
-	var carg2 C.double        // in, none, casted, casted C.gdouble
+	var carg2 C.double        // in, none, casted
 
 	carg1 = (*C.PangoContext)(pango.UnsafeContextToGlibNone(_context))
 	carg2 = C.double(dpi)
@@ -86,7 +86,7 @@ func ContextSetResolution(_context pango.Context, dpi float64) {
 // FontInstance is the instance type used by all types implementing PangoCairoFont. It is used internally by the bindings. Users should use the interface [Font] instead.
 type FontInstance struct {
 	_ [0]func() // equal guard
-	gobject.ObjectInstance
+	Instance gobject.ObjectInstance
 }
 
 var _ Font = (*FontInstance)(nil)
@@ -99,7 +99,6 @@ var _ Font = (*FontInstance)(nil)
 // The actual type of the font will depend on the particular
 // font technology Cairo was compiled to use.
 type Font interface {
-	gobject.Object
 	upcastToPangoCairoFont() *FontInstance
 
 	// chain up virtual methods:
@@ -109,7 +108,7 @@ var _ Font = (*FontInstance)(nil)
 
 func unsafeWrapFont(base *gobject.ObjectInstance) *FontInstance {
 	return &FontInstance{
-		ObjectInstance: *base,
+		Instance: *base,
 	}
 }
 
@@ -139,13 +138,13 @@ func UnsafeFontFromGlibBorrow(c unsafe.Pointer) Font {
 // UnsafeFontToGlibNone is used to convert the instance to it's C value PangoCairoFont. This is used by the bindings internally.
 func UnsafeFontToGlibNone(c Font) unsafe.Pointer {
 	i := c.upcastToPangoCairoFont()
-	return gobject.UnsafeObjectToGlibNone(i)
+	return gobject.UnsafeObjectToGlibNone(&i.Instance)
 }
 
 // UnsafeFontToGlibFull is used to convert the instance to it's C value PangoCairoFont, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeFontToGlibFull(c Font) unsafe.Pointer {
 	i := c.upcastToPangoCairoFont()
-	return gobject.UnsafeObjectToGlibFull(i)
+	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
 // FontOverrides is the struct used to override the default implementation of virtual methods.
@@ -161,7 +160,7 @@ func UnsafeApplyFontOverrides[Instance Font](gclass unsafe.Pointer, overrides Fo
 // FontMapInstance is the instance type used by all types implementing PangoCairoFontMap. It is used internally by the bindings. Users should use the interface [FontMap] instead.
 type FontMapInstance struct {
 	_ [0]func() // equal guard
-	gobject.ObjectInstance
+	Instance gobject.ObjectInstance
 }
 
 var _ FontMap = (*FontMapInstance)(nil)
@@ -174,7 +173,6 @@ var _ FontMap = (*FontMapInstance)(nil)
 // The actual type of the font map will depend on the particular
 // font technology Cairo was compiled to use.
 type FontMap interface {
-	gobject.Object
 	upcastToPangoCairoFontMap() *FontMapInstance
 
 	// GetResolution wraps pango_cairo_font_map_get_resolution
@@ -227,7 +225,7 @@ var _ FontMap = (*FontMapInstance)(nil)
 
 func unsafeWrapFontMap(base *gobject.ObjectInstance) *FontMapInstance {
 	return &FontMapInstance{
-		ObjectInstance: *base,
+		Instance: *base,
 	}
 }
 
@@ -257,13 +255,13 @@ func UnsafeFontMapFromGlibBorrow(c unsafe.Pointer) FontMap {
 // UnsafeFontMapToGlibNone is used to convert the instance to it's C value PangoCairoFontMap. This is used by the bindings internally.
 func UnsafeFontMapToGlibNone(c FontMap) unsafe.Pointer {
 	i := c.upcastToPangoCairoFontMap()
-	return gobject.UnsafeObjectToGlibNone(i)
+	return gobject.UnsafeObjectToGlibNone(&i.Instance)
 }
 
 // UnsafeFontMapToGlibFull is used to convert the instance to it's C value PangoCairoFontMap, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeFontMapToGlibFull(c FontMap) unsafe.Pointer {
 	i := c.upcastToPangoCairoFontMap()
-	return gobject.UnsafeObjectToGlibFull(i)
+	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
 // FontMapGetDefault wraps pango_cairo_font_map_get_default
@@ -346,7 +344,7 @@ func NewFontMap() pango.FontMap {
 // See [method@PangoCairo.FontMap.set_resolution].
 func (fontmap *FontMapInstance) GetResolution() float64 {
 	var carg0 *C.PangoCairoFontMap // in, none, converted
-	var cret  C.double             // return, none, casted, casted C.gdouble
+	var cret  C.double             // return, none, casted
 
 	carg0 = (*C.PangoCairoFontMap)(UnsafeFontMapToGlibNone(fontmap))
 
@@ -401,7 +399,7 @@ func (fontmap *FontMapInstance) SetDefault() {
 // units high. (10 * 96. / 72. = 13.3).
 func (fontmap *FontMapInstance) SetResolution(dpi float64) {
 	var carg0 *C.PangoCairoFontMap // in, none, converted
-	var carg1 C.double             // in, none, casted, casted C.gdouble
+	var carg1 C.double             // in, none, casted
 
 	carg0 = (*C.PangoCairoFontMap)(UnsafeFontMapToGlibNone(fontmap))
 	carg1 = C.double(dpi)

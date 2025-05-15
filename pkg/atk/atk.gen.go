@@ -16,581 +16,581 @@ import (
 // #cgo pkg-config: atk
 // #cgo CFLAGS: -Wno-deprecated-declarations
 // #include <atk/atk.h>
-// extern gboolean _gotk4_atk1_Action_do_action(AtkAction*, gint);
-// extern gchar* _gotk4_atk1_Action_get_description(AtkAction*, gint);
-// extern gchar* _gotk4_atk1_Action_get_keybinding(AtkAction*, gint);
-// extern gchar* _gotk4_atk1_Action_get_localized_name(AtkAction*, gint);
-// extern gint _gotk4_atk1_Action_get_n_actions(AtkAction*);
-// extern gchar* _gotk4_atk1_Action_get_name(AtkAction*, gint);
-// extern gboolean _gotk4_atk1_Action_set_description(AtkAction*, gint, gchar*);
-// gboolean _gotk4_atk1_Action_virtual_do_action(void* fnptr, AtkAction* carg0, gint carg1) {
-// 	return ((gboolean (*) (AtkAction*, gint))(fnptr))(carg0, carg1);
-// }
-// gchar* _gotk4_atk1_Action_virtual_get_description(void* fnptr, AtkAction* carg0, gint carg1) {
-// 	return ((gchar* (*) (AtkAction*, gint))(fnptr))(carg0, carg1);
-// }
-// gchar* _gotk4_atk1_Action_virtual_get_keybinding(void* fnptr, AtkAction* carg0, gint carg1) {
-// 	return ((gchar* (*) (AtkAction*, gint))(fnptr))(carg0, carg1);
-// }
-// gchar* _gotk4_atk1_Action_virtual_get_localized_name(void* fnptr, AtkAction* carg0, gint carg1) {
-// 	return ((gchar* (*) (AtkAction*, gint))(fnptr))(carg0, carg1);
-// }
-// gint _gotk4_atk1_Action_virtual_get_n_actions(void* fnptr, AtkAction* carg0) {
-// 	return ((gint (*) (AtkAction*))(fnptr))(carg0);
-// }
-// gchar* _gotk4_atk1_Action_virtual_get_name(void* fnptr, AtkAction* carg0, gint carg1) {
-// 	return ((gchar* (*) (AtkAction*, gint))(fnptr))(carg0, carg1);
+// extern C.gboolean _gotk4_atk1_Action_do_action(*C.AtkAction, C.gint);
+// extern *C.gchar _gotk4_atk1_Action_get_description(*C.AtkAction, C.gint);
+// extern *C.gchar _gotk4_atk1_Action_get_keybinding(*C.AtkAction, C.gint);
+// extern *C.gchar _gotk4_atk1_Action_get_localized_name(*C.AtkAction, C.gint);
+// extern C.gint _gotk4_atk1_Action_get_n_actions(*C.AtkAction);
+// extern *C.gchar _gotk4_atk1_Action_get_name(*C.AtkAction, C.gint);
+// extern C.gboolean _gotk4_atk1_Action_set_description(*C.AtkAction, C.gint, *C.gchar);
+// C.gboolean _gotk4_atk1_Action_virtual_do_action(void* fnptr, *C.AtkAction carg0, C.gint carg1) {
+// 	return ((C.gboolean (*) (*C.AtkAction, C.gint))(fnptr))(carg0, carg1);
+// }
+// *C.gchar _gotk4_atk1_Action_virtual_get_description(void* fnptr, *C.AtkAction carg0, C.gint carg1) {
+// 	return ((*C.gchar (*) (*C.AtkAction, C.gint))(fnptr))(carg0, carg1);
+// }
+// *C.gchar _gotk4_atk1_Action_virtual_get_keybinding(void* fnptr, *C.AtkAction carg0, C.gint carg1) {
+// 	return ((*C.gchar (*) (*C.AtkAction, C.gint))(fnptr))(carg0, carg1);
+// }
+// *C.gchar _gotk4_atk1_Action_virtual_get_localized_name(void* fnptr, *C.AtkAction carg0, C.gint carg1) {
+// 	return ((*C.gchar (*) (*C.AtkAction, C.gint))(fnptr))(carg0, carg1);
+// }
+// C.gint _gotk4_atk1_Action_virtual_get_n_actions(void* fnptr, *C.AtkAction carg0) {
+// 	return ((C.gint (*) (*C.AtkAction))(fnptr))(carg0);
+// }
+// *C.gchar _gotk4_atk1_Action_virtual_get_name(void* fnptr, *C.AtkAction carg0, C.gint carg1) {
+// 	return ((*C.gchar (*) (*C.AtkAction, C.gint))(fnptr))(carg0, carg1);
 // }
-// gboolean _gotk4_atk1_Action_virtual_set_description(void* fnptr, AtkAction* carg0, gint carg1, gchar* carg2) {
-// 	return ((gboolean (*) (AtkAction*, gint, gchar*))(fnptr))(carg0, carg1, carg2);
-// }
-// extern void _gotk4_atk1_Component_bounds_changed(AtkComponent*, AtkRectangle*);
-// extern gboolean _gotk4_atk1_Component_contains(AtkComponent*, gint, gint, AtkCoordType);
-// extern gdouble _gotk4_atk1_Component_get_alpha(AtkComponent*);
-// extern void _gotk4_atk1_Component_get_extents(AtkComponent*, gint, gint, gint, gint, AtkCoordType);
-// extern AtkLayer _gotk4_atk1_Component_get_layer(AtkComponent*);
-// extern gint _gotk4_atk1_Component_get_mdi_zorder(AtkComponent*);
-// extern gboolean _gotk4_atk1_Component_grab_focus(AtkComponent*);
-// extern AtkObject* _gotk4_atk1_Component_ref_accessible_at_point(AtkComponent*, gint, gint, AtkCoordType);
-// extern gboolean _gotk4_atk1_Component_scroll_to(AtkComponent*, AtkScrollType);
-// extern gboolean _gotk4_atk1_Component_scroll_to_point(AtkComponent*, AtkCoordType, gint, gint);
-// extern gboolean _gotk4_atk1_Component_set_extents(AtkComponent*, gint, gint, gint, gint, AtkCoordType);
-// extern gboolean _gotk4_atk1_Component_set_position(AtkComponent*, gint, gint, AtkCoordType);
-// extern gboolean _gotk4_atk1_Component_set_size(AtkComponent*, gint, gint);
-// void _gotk4_atk1_Component_virtual_bounds_changed(void* fnptr, AtkComponent* carg0, AtkRectangle* carg1) {
-// 	return ((void (*) (AtkComponent*, AtkRectangle*))(fnptr))(carg0, carg1);
-// }
-// gboolean _gotk4_atk1_Component_virtual_contains(void* fnptr, AtkComponent* carg0, gint carg1, gint carg2, AtkCoordType carg3) {
-// 	return ((gboolean (*) (AtkComponent*, gint, gint, AtkCoordType))(fnptr))(carg0, carg1, carg2, carg3);
-// }
-// gdouble _gotk4_atk1_Component_virtual_get_alpha(void* fnptr, AtkComponent* carg0) {
-// 	return ((gdouble (*) (AtkComponent*))(fnptr))(carg0);
-// }
-// void _gotk4_atk1_Component_virtual_get_extents(void* fnptr, AtkComponent* carg0, gint* carg1, gint* carg2, gint* carg3, gint* carg4, AtkCoordType carg5) {
-// 	return ((void (*) (AtkComponent*, gint*, gint*, gint*, gint*, AtkCoordType))(fnptr))(carg0, carg1, carg2, carg3, carg4, carg5);
-// }
-// AtkLayer _gotk4_atk1_Component_virtual_get_layer(void* fnptr, AtkComponent* carg0) {
-// 	return ((AtkLayer (*) (AtkComponent*))(fnptr))(carg0);
-// }
-// gint _gotk4_atk1_Component_virtual_get_mdi_zorder(void* fnptr, AtkComponent* carg0) {
-// 	return ((gint (*) (AtkComponent*))(fnptr))(carg0);
-// }
-// gboolean _gotk4_atk1_Component_virtual_grab_focus(void* fnptr, AtkComponent* carg0) {
-// 	return ((gboolean (*) (AtkComponent*))(fnptr))(carg0);
-// }
-// AtkObject* _gotk4_atk1_Component_virtual_ref_accessible_at_point(void* fnptr, AtkComponent* carg0, gint carg1, gint carg2, AtkCoordType carg3) {
-// 	return ((AtkObject* (*) (AtkComponent*, gint, gint, AtkCoordType))(fnptr))(carg0, carg1, carg2, carg3);
-// }
-// gboolean _gotk4_atk1_Component_virtual_scroll_to(void* fnptr, AtkComponent* carg0, AtkScrollType carg1) {
-// 	return ((gboolean (*) (AtkComponent*, AtkScrollType))(fnptr))(carg0, carg1);
-// }
-// gboolean _gotk4_atk1_Component_virtual_scroll_to_point(void* fnptr, AtkComponent* carg0, AtkCoordType carg1, gint carg2, gint carg3) {
-// 	return ((gboolean (*) (AtkComponent*, AtkCoordType, gint, gint))(fnptr))(carg0, carg1, carg2, carg3);
-// }
-// gboolean _gotk4_atk1_Component_virtual_set_extents(void* fnptr, AtkComponent* carg0, gint carg1, gint carg2, gint carg3, gint carg4, AtkCoordType carg5) {
-// 	return ((gboolean (*) (AtkComponent*, gint, gint, gint, gint, AtkCoordType))(fnptr))(carg0, carg1, carg2, carg3, carg4, carg5);
-// }
-// gboolean _gotk4_atk1_Component_virtual_set_position(void* fnptr, AtkComponent* carg0, gint carg1, gint carg2, AtkCoordType carg3) {
-// 	return ((gboolean (*) (AtkComponent*, gint, gint, AtkCoordType))(fnptr))(carg0, carg1, carg2, carg3);
-// }
-// gboolean _gotk4_atk1_Component_virtual_set_size(void* fnptr, AtkComponent* carg0, gint carg1, gint carg2) {
-// 	return ((gboolean (*) (AtkComponent*, gint, gint))(fnptr))(carg0, carg1, carg2);
-// }
-// extern gint _gotk4_atk1_Document_get_current_page_number(AtkDocument*);
-// extern gchar* _gotk4_atk1_Document_get_document_attribute_value(AtkDocument*, gchar*);
-// extern gint _gotk4_atk1_Document_get_page_count(AtkDocument*);
-// extern gboolean _gotk4_atk1_Document_set_document_attribute(AtkDocument*, gchar*, gchar*);
-// gint _gotk4_atk1_Document_virtual_get_current_page_number(void* fnptr, AtkDocument* carg0) {
-// 	return ((gint (*) (AtkDocument*))(fnptr))(carg0);
-// }
-// gchar* _gotk4_atk1_Document_virtual_get_document_attribute_value(void* fnptr, AtkDocument* carg0, gchar* carg1) {
-// 	return ((gchar* (*) (AtkDocument*, gchar*))(fnptr))(carg0, carg1);
-// }
-// gint _gotk4_atk1_Document_virtual_get_page_count(void* fnptr, AtkDocument* carg0) {
-// 	return ((gint (*) (AtkDocument*))(fnptr))(carg0);
+// C.gboolean _gotk4_atk1_Action_virtual_set_description(void* fnptr, *C.AtkAction carg0, C.gint carg1, *C.gchar carg2) {
+// 	return ((C.gboolean (*) (*C.AtkAction, C.gint, *C.gchar))(fnptr))(carg0, carg1, carg2);
+// }
+// extern C.void _gotk4_atk1_Component_bounds_changed(*C.AtkComponent, *C.AtkRectangle);
+// extern C.gboolean _gotk4_atk1_Component_contains(*C.AtkComponent, C.gint, C.gint, C.AtkCoordType);
+// extern C.gdouble _gotk4_atk1_Component_get_alpha(*C.AtkComponent);
+// extern C.void _gotk4_atk1_Component_get_extents(*C.AtkComponent, C.gint, C.gint, C.gint, C.gint, C.AtkCoordType);
+// extern C.AtkLayer _gotk4_atk1_Component_get_layer(*C.AtkComponent);
+// extern C.gint _gotk4_atk1_Component_get_mdi_zorder(*C.AtkComponent);
+// extern C.gboolean _gotk4_atk1_Component_grab_focus(*C.AtkComponent);
+// extern *C.AtkObject _gotk4_atk1_Component_ref_accessible_at_point(*C.AtkComponent, C.gint, C.gint, C.AtkCoordType);
+// extern C.gboolean _gotk4_atk1_Component_scroll_to(*C.AtkComponent, C.AtkScrollType);
+// extern C.gboolean _gotk4_atk1_Component_scroll_to_point(*C.AtkComponent, C.AtkCoordType, C.gint, C.gint);
+// extern C.gboolean _gotk4_atk1_Component_set_extents(*C.AtkComponent, C.gint, C.gint, C.gint, C.gint, C.AtkCoordType);
+// extern C.gboolean _gotk4_atk1_Component_set_position(*C.AtkComponent, C.gint, C.gint, C.AtkCoordType);
+// extern C.gboolean _gotk4_atk1_Component_set_size(*C.AtkComponent, C.gint, C.gint);
+// C.void _gotk4_atk1_Component_virtual_bounds_changed(void* fnptr, *C.AtkComponent carg0, *C.AtkRectangle carg1) {
+// 	return ((C.void (*) (*C.AtkComponent, *C.AtkRectangle))(fnptr))(carg0, carg1);
+// }
+// C.gboolean _gotk4_atk1_Component_virtual_contains(void* fnptr, *C.AtkComponent carg0, C.gint carg1, C.gint carg2, C.AtkCoordType carg3) {
+// 	return ((C.gboolean (*) (*C.AtkComponent, C.gint, C.gint, C.AtkCoordType))(fnptr))(carg0, carg1, carg2, carg3);
+// }
+// C.gdouble _gotk4_atk1_Component_virtual_get_alpha(void* fnptr, *C.AtkComponent carg0) {
+// 	return ((C.gdouble (*) (*C.AtkComponent))(fnptr))(carg0);
+// }
+// C.void _gotk4_atk1_Component_virtual_get_extents(void* fnptr, *C.AtkComponent carg0, C.gint* carg1, C.gint* carg2, C.gint* carg3, C.gint* carg4, C.AtkCoordType carg5) {
+// 	return ((C.void (*) (*C.AtkComponent, C.gint*, C.gint*, C.gint*, C.gint*, C.AtkCoordType))(fnptr))(carg0, carg1, carg2, carg3, carg4, carg5);
+// }
+// C.AtkLayer _gotk4_atk1_Component_virtual_get_layer(void* fnptr, *C.AtkComponent carg0) {
+// 	return ((C.AtkLayer (*) (*C.AtkComponent))(fnptr))(carg0);
+// }
+// C.gint _gotk4_atk1_Component_virtual_get_mdi_zorder(void* fnptr, *C.AtkComponent carg0) {
+// 	return ((C.gint (*) (*C.AtkComponent))(fnptr))(carg0);
+// }
+// C.gboolean _gotk4_atk1_Component_virtual_grab_focus(void* fnptr, *C.AtkComponent carg0) {
+// 	return ((C.gboolean (*) (*C.AtkComponent))(fnptr))(carg0);
+// }
+// *C.AtkObject _gotk4_atk1_Component_virtual_ref_accessible_at_point(void* fnptr, *C.AtkComponent carg0, C.gint carg1, C.gint carg2, C.AtkCoordType carg3) {
+// 	return ((*C.AtkObject (*) (*C.AtkComponent, C.gint, C.gint, C.AtkCoordType))(fnptr))(carg0, carg1, carg2, carg3);
+// }
+// C.gboolean _gotk4_atk1_Component_virtual_scroll_to(void* fnptr, *C.AtkComponent carg0, C.AtkScrollType carg1) {
+// 	return ((C.gboolean (*) (*C.AtkComponent, C.AtkScrollType))(fnptr))(carg0, carg1);
+// }
+// C.gboolean _gotk4_atk1_Component_virtual_scroll_to_point(void* fnptr, *C.AtkComponent carg0, C.AtkCoordType carg1, C.gint carg2, C.gint carg3) {
+// 	return ((C.gboolean (*) (*C.AtkComponent, C.AtkCoordType, C.gint, C.gint))(fnptr))(carg0, carg1, carg2, carg3);
+// }
+// C.gboolean _gotk4_atk1_Component_virtual_set_extents(void* fnptr, *C.AtkComponent carg0, C.gint carg1, C.gint carg2, C.gint carg3, C.gint carg4, C.AtkCoordType carg5) {
+// 	return ((C.gboolean (*) (*C.AtkComponent, C.gint, C.gint, C.gint, C.gint, C.AtkCoordType))(fnptr))(carg0, carg1, carg2, carg3, carg4, carg5);
+// }
+// C.gboolean _gotk4_atk1_Component_virtual_set_position(void* fnptr, *C.AtkComponent carg0, C.gint carg1, C.gint carg2, C.AtkCoordType carg3) {
+// 	return ((C.gboolean (*) (*C.AtkComponent, C.gint, C.gint, C.AtkCoordType))(fnptr))(carg0, carg1, carg2, carg3);
+// }
+// C.gboolean _gotk4_atk1_Component_virtual_set_size(void* fnptr, *C.AtkComponent carg0, C.gint carg1, C.gint carg2) {
+// 	return ((C.gboolean (*) (*C.AtkComponent, C.gint, C.gint))(fnptr))(carg0, carg1, carg2);
+// }
+// extern C.gint _gotk4_atk1_Document_get_current_page_number(*C.AtkDocument);
+// extern *C.gchar _gotk4_atk1_Document_get_document_attribute_value(*C.AtkDocument, *C.gchar);
+// extern C.gint _gotk4_atk1_Document_get_page_count(*C.AtkDocument);
+// extern C.gboolean _gotk4_atk1_Document_set_document_attribute(*C.AtkDocument, *C.gchar, *C.gchar);
+// C.gint _gotk4_atk1_Document_virtual_get_current_page_number(void* fnptr, *C.AtkDocument carg0) {
+// 	return ((C.gint (*) (*C.AtkDocument))(fnptr))(carg0);
+// }
+// *C.gchar _gotk4_atk1_Document_virtual_get_document_attribute_value(void* fnptr, *C.AtkDocument carg0, *C.gchar carg1) {
+// 	return ((*C.gchar (*) (*C.AtkDocument, *C.gchar))(fnptr))(carg0, carg1);
+// }
+// C.gint _gotk4_atk1_Document_virtual_get_page_count(void* fnptr, *C.AtkDocument carg0) {
+// 	return ((C.gint (*) (*C.AtkDocument))(fnptr))(carg0);
 // }
-// gboolean _gotk4_atk1_Document_virtual_set_document_attribute(void* fnptr, AtkDocument* carg0, gchar* carg1, gchar* carg2) {
-// 	return ((gboolean (*) (AtkDocument*, gchar*, gchar*))(fnptr))(carg0, carg1, carg2);
-// }
-// extern void _gotk4_atk1_EditableText_copy_text(AtkEditableText*, gint, gint);
-// extern void _gotk4_atk1_EditableText_cut_text(AtkEditableText*, gint, gint);
-// extern void _gotk4_atk1_EditableText_delete_text(AtkEditableText*, gint, gint);
-// extern void _gotk4_atk1_EditableText_insert_text(AtkEditableText*, gchar*, gint, gint*);
-// extern void _gotk4_atk1_EditableText_paste_text(AtkEditableText*, gint);
-// extern void _gotk4_atk1_EditableText_set_text_contents(AtkEditableText*, gchar*);
-// void _gotk4_atk1_EditableText_virtual_copy_text(void* fnptr, AtkEditableText* carg0, gint carg1, gint carg2) {
-// 	return ((void (*) (AtkEditableText*, gint, gint))(fnptr))(carg0, carg1, carg2);
+// C.gboolean _gotk4_atk1_Document_virtual_set_document_attribute(void* fnptr, *C.AtkDocument carg0, *C.gchar carg1, *C.gchar carg2) {
+// 	return ((C.gboolean (*) (*C.AtkDocument, *C.gchar, *C.gchar))(fnptr))(carg0, carg1, carg2);
+// }
+// extern C.void _gotk4_atk1_EditableText_copy_text(*C.AtkEditableText, C.gint, C.gint);
+// extern C.void _gotk4_atk1_EditableText_cut_text(*C.AtkEditableText, C.gint, C.gint);
+// extern C.void _gotk4_atk1_EditableText_delete_text(*C.AtkEditableText, C.gint, C.gint);
+// extern C.void _gotk4_atk1_EditableText_insert_text(*C.AtkEditableText, *C.gchar, C.gint, *C.gint);
+// extern C.void _gotk4_atk1_EditableText_paste_text(*C.AtkEditableText, C.gint);
+// extern C.void _gotk4_atk1_EditableText_set_text_contents(*C.AtkEditableText, *C.gchar);
+// C.void _gotk4_atk1_EditableText_virtual_copy_text(void* fnptr, *C.AtkEditableText carg0, C.gint carg1, C.gint carg2) {
+// 	return ((C.void (*) (*C.AtkEditableText, C.gint, C.gint))(fnptr))(carg0, carg1, carg2);
 // }
-// void _gotk4_atk1_EditableText_virtual_cut_text(void* fnptr, AtkEditableText* carg0, gint carg1, gint carg2) {
-// 	return ((void (*) (AtkEditableText*, gint, gint))(fnptr))(carg0, carg1, carg2);
+// C.void _gotk4_atk1_EditableText_virtual_cut_text(void* fnptr, *C.AtkEditableText carg0, C.gint carg1, C.gint carg2) {
+// 	return ((C.void (*) (*C.AtkEditableText, C.gint, C.gint))(fnptr))(carg0, carg1, carg2);
 // }
-// void _gotk4_atk1_EditableText_virtual_delete_text(void* fnptr, AtkEditableText* carg0, gint carg1, gint carg2) {
-// 	return ((void (*) (AtkEditableText*, gint, gint))(fnptr))(carg0, carg1, carg2);
+// C.void _gotk4_atk1_EditableText_virtual_delete_text(void* fnptr, *C.AtkEditableText carg0, C.gint carg1, C.gint carg2) {
+// 	return ((C.void (*) (*C.AtkEditableText, C.gint, C.gint))(fnptr))(carg0, carg1, carg2);
 // }
-// void _gotk4_atk1_EditableText_virtual_insert_text(void* fnptr, AtkEditableText* carg0, gchar* carg1, gint carg2, gint* carg3) {
-// 	return ((void (*) (AtkEditableText*, gchar*, gint, gint*))(fnptr))(carg0, carg1, carg2, carg3);
-// }
-// void _gotk4_atk1_EditableText_virtual_paste_text(void* fnptr, AtkEditableText* carg0, gint carg1) {
-// 	return ((void (*) (AtkEditableText*, gint))(fnptr))(carg0, carg1);
-// }
-// void _gotk4_atk1_EditableText_virtual_set_text_contents(void* fnptr, AtkEditableText* carg0, gchar* carg1) {
-// 	return ((void (*) (AtkEditableText*, gchar*))(fnptr))(carg0, carg1);
-// }
-// extern AtkHyperlink* _gotk4_atk1_HyperlinkImpl_get_hyperlink(AtkHyperlinkImpl*);
-// AtkHyperlink* _gotk4_atk1_HyperlinkImpl_virtual_get_hyperlink(void* fnptr, AtkHyperlinkImpl* carg0) {
-// 	return ((AtkHyperlink* (*) (AtkHyperlinkImpl*))(fnptr))(carg0);
-// }
-// extern AtkHyperlink* _gotk4_atk1_Hypertext_get_link(AtkHypertext*, gint);
-// extern gint _gotk4_atk1_Hypertext_get_link_index(AtkHypertext*, gint);
-// extern gint _gotk4_atk1_Hypertext_get_n_links(AtkHypertext*);
-// extern void _gotk4_atk1_Hypertext_link_selected(AtkHypertext*, gint);
-// AtkHyperlink* _gotk4_atk1_Hypertext_virtual_get_link(void* fnptr, AtkHypertext* carg0, gint carg1) {
-// 	return ((AtkHyperlink* (*) (AtkHypertext*, gint))(fnptr))(carg0, carg1);
-// }
-// gint _gotk4_atk1_Hypertext_virtual_get_link_index(void* fnptr, AtkHypertext* carg0, gint carg1) {
-// 	return ((gint (*) (AtkHypertext*, gint))(fnptr))(carg0, carg1);
-// }
-// gint _gotk4_atk1_Hypertext_virtual_get_n_links(void* fnptr, AtkHypertext* carg0) {
-// 	return ((gint (*) (AtkHypertext*))(fnptr))(carg0);
-// }
-// void _gotk4_atk1_Hypertext_virtual_link_selected(void* fnptr, AtkHypertext* carg0, gint carg1) {
-// 	return ((void (*) (AtkHypertext*, gint))(fnptr))(carg0, carg1);
-// }
-// extern gchar* _gotk4_atk1_Image_get_image_description(AtkImage*);
-// extern gchar* _gotk4_atk1_Image_get_image_locale(AtkImage*);
-// extern void _gotk4_atk1_Image_get_image_position(AtkImage*, gint, gint, AtkCoordType);
-// extern void _gotk4_atk1_Image_get_image_size(AtkImage*, gint, gint);
-// extern gboolean _gotk4_atk1_Image_set_image_description(AtkImage*, gchar*);
-// gchar* _gotk4_atk1_Image_virtual_get_image_description(void* fnptr, AtkImage* carg0) {
-// 	return ((gchar* (*) (AtkImage*))(fnptr))(carg0);
-// }
-// gchar* _gotk4_atk1_Image_virtual_get_image_locale(void* fnptr, AtkImage* carg0) {
-// 	return ((gchar* (*) (AtkImage*))(fnptr))(carg0);
-// }
-// void _gotk4_atk1_Image_virtual_get_image_position(void* fnptr, AtkImage* carg0, gint* carg1, gint* carg2, AtkCoordType carg3) {
-// 	return ((void (*) (AtkImage*, gint*, gint*, AtkCoordType))(fnptr))(carg0, carg1, carg2, carg3);
-// }
-// void _gotk4_atk1_Image_virtual_get_image_size(void* fnptr, AtkImage* carg0, gint* carg1, gint* carg2) {
-// 	return ((void (*) (AtkImage*, gint*, gint*))(fnptr))(carg0, carg1, carg2);
-// }
-// gboolean _gotk4_atk1_Image_virtual_set_image_description(void* fnptr, AtkImage* carg0, gchar* carg1) {
-// 	return ((gboolean (*) (AtkImage*, gchar*))(fnptr))(carg0, carg1);
-// }
-// extern gboolean _gotk4_atk1_Selection_add_selection(AtkSelection*, gint);
-// extern gboolean _gotk4_atk1_Selection_clear_selection(AtkSelection*);
-// extern gint _gotk4_atk1_Selection_get_selection_count(AtkSelection*);
-// extern gboolean _gotk4_atk1_Selection_is_child_selected(AtkSelection*, gint);
-// extern AtkObject* _gotk4_atk1_Selection_ref_selection(AtkSelection*, gint);
-// extern gboolean _gotk4_atk1_Selection_remove_selection(AtkSelection*, gint);
-// extern gboolean _gotk4_atk1_Selection_select_all_selection(AtkSelection*);
-// extern void _gotk4_atk1_Selection_selection_changed(AtkSelection*);
-// gboolean _gotk4_atk1_Selection_virtual_add_selection(void* fnptr, AtkSelection* carg0, gint carg1) {
-// 	return ((gboolean (*) (AtkSelection*, gint))(fnptr))(carg0, carg1);
-// }
-// gboolean _gotk4_atk1_Selection_virtual_clear_selection(void* fnptr, AtkSelection* carg0) {
-// 	return ((gboolean (*) (AtkSelection*))(fnptr))(carg0);
-// }
-// gint _gotk4_atk1_Selection_virtual_get_selection_count(void* fnptr, AtkSelection* carg0) {
-// 	return ((gint (*) (AtkSelection*))(fnptr))(carg0);
-// }
-// gboolean _gotk4_atk1_Selection_virtual_is_child_selected(void* fnptr, AtkSelection* carg0, gint carg1) {
-// 	return ((gboolean (*) (AtkSelection*, gint))(fnptr))(carg0, carg1);
-// }
-// AtkObject* _gotk4_atk1_Selection_virtual_ref_selection(void* fnptr, AtkSelection* carg0, gint carg1) {
-// 	return ((AtkObject* (*) (AtkSelection*, gint))(fnptr))(carg0, carg1);
-// }
-// gboolean _gotk4_atk1_Selection_virtual_remove_selection(void* fnptr, AtkSelection* carg0, gint carg1) {
-// 	return ((gboolean (*) (AtkSelection*, gint))(fnptr))(carg0, carg1);
-// }
-// gboolean _gotk4_atk1_Selection_virtual_select_all_selection(void* fnptr, AtkSelection* carg0) {
-// 	return ((gboolean (*) (AtkSelection*))(fnptr))(carg0);
-// }
-// void _gotk4_atk1_Selection_virtual_selection_changed(void* fnptr, AtkSelection* carg0) {
-// 	return ((void (*) (AtkSelection*))(fnptr))(carg0);
-// }
-// extern gchar* _gotk4_atk1_StreamableContent_get_mime_type(AtkStreamableContent*, gint);
-// extern gint _gotk4_atk1_StreamableContent_get_n_mime_types(AtkStreamableContent*);
-// extern GIOChannel* _gotk4_atk1_StreamableContent_get_stream(AtkStreamableContent*, gchar*);
-// extern gchar* _gotk4_atk1_StreamableContent_get_uri(AtkStreamableContent*, gchar*);
-// gchar* _gotk4_atk1_StreamableContent_virtual_get_mime_type(void* fnptr, AtkStreamableContent* carg0, gint carg1) {
-// 	return ((gchar* (*) (AtkStreamableContent*, gint))(fnptr))(carg0, carg1);
-// }
-// gint _gotk4_atk1_StreamableContent_virtual_get_n_mime_types(void* fnptr, AtkStreamableContent* carg0) {
-// 	return ((gint (*) (AtkStreamableContent*))(fnptr))(carg0);
-// }
-// GIOChannel* _gotk4_atk1_StreamableContent_virtual_get_stream(void* fnptr, AtkStreamableContent* carg0, gchar* carg1) {
-// 	return ((GIOChannel* (*) (AtkStreamableContent*, gchar*))(fnptr))(carg0, carg1);
-// }
-// gchar* _gotk4_atk1_StreamableContent_virtual_get_uri(void* fnptr, AtkStreamableContent* carg0, gchar* carg1) {
-// 	return ((gchar* (*) (AtkStreamableContent*, gchar*))(fnptr))(carg0, carg1);
-// }
-// extern gboolean _gotk4_atk1_Table_add_column_selection(AtkTable*, gint);
-// extern gboolean _gotk4_atk1_Table_add_row_selection(AtkTable*, gint);
-// extern void _gotk4_atk1_Table_column_deleted(AtkTable*, gint, gint);
-// extern void _gotk4_atk1_Table_column_inserted(AtkTable*, gint, gint);
-// extern void _gotk4_atk1_Table_column_reordered(AtkTable*);
-// extern AtkObject* _gotk4_atk1_Table_get_caption(AtkTable*);
-// extern gchar* _gotk4_atk1_Table_get_column_description(AtkTable*, gint);
-// extern gint _gotk4_atk1_Table_get_column_extent_at(AtkTable*, gint, gint);
-// extern AtkObject* _gotk4_atk1_Table_get_column_header(AtkTable*, gint);
-// extern gint _gotk4_atk1_Table_get_n_columns(AtkTable*);
-// extern gint _gotk4_atk1_Table_get_n_rows(AtkTable*);
-// extern gchar* _gotk4_atk1_Table_get_row_description(AtkTable*, gint);
-// extern gint _gotk4_atk1_Table_get_row_extent_at(AtkTable*, gint, gint);
-// extern AtkObject* _gotk4_atk1_Table_get_row_header(AtkTable*, gint);
-// extern gint _gotk4_atk1_Table_get_selected_columns(AtkTable*, gint**);
-// extern gint _gotk4_atk1_Table_get_selected_rows(AtkTable*, gint**);
-// extern AtkObject* _gotk4_atk1_Table_get_summary(AtkTable*);
-// extern gboolean _gotk4_atk1_Table_is_column_selected(AtkTable*, gint);
-// extern gboolean _gotk4_atk1_Table_is_row_selected(AtkTable*, gint);
-// extern gboolean _gotk4_atk1_Table_is_selected(AtkTable*, gint, gint);
-// extern void _gotk4_atk1_Table_model_changed(AtkTable*);
-// extern AtkObject* _gotk4_atk1_Table_ref_at(AtkTable*, gint, gint);
-// extern gboolean _gotk4_atk1_Table_remove_column_selection(AtkTable*, gint);
-// extern gboolean _gotk4_atk1_Table_remove_row_selection(AtkTable*, gint);
-// extern void _gotk4_atk1_Table_row_deleted(AtkTable*, gint, gint);
-// extern void _gotk4_atk1_Table_row_inserted(AtkTable*, gint, gint);
-// extern void _gotk4_atk1_Table_row_reordered(AtkTable*);
-// extern void _gotk4_atk1_Table_set_caption(AtkTable*, AtkObject*);
-// extern void _gotk4_atk1_Table_set_column_description(AtkTable*, gint, gchar*);
-// extern void _gotk4_atk1_Table_set_column_header(AtkTable*, gint, AtkObject*);
-// extern void _gotk4_atk1_Table_set_row_description(AtkTable*, gint, gchar*);
-// extern void _gotk4_atk1_Table_set_row_header(AtkTable*, gint, AtkObject*);
-// extern void _gotk4_atk1_Table_set_summary(AtkTable*, AtkObject*);
-// gboolean _gotk4_atk1_Table_virtual_add_column_selection(void* fnptr, AtkTable* carg0, gint carg1) {
-// 	return ((gboolean (*) (AtkTable*, gint))(fnptr))(carg0, carg1);
+// C.void _gotk4_atk1_EditableText_virtual_insert_text(void* fnptr, *C.AtkEditableText carg0, *C.gchar carg1, C.gint carg2, *C.gint carg3) {
+// 	return ((C.void (*) (*C.AtkEditableText, *C.gchar, C.gint, *C.gint))(fnptr))(carg0, carg1, carg2, carg3);
+// }
+// C.void _gotk4_atk1_EditableText_virtual_paste_text(void* fnptr, *C.AtkEditableText carg0, C.gint carg1) {
+// 	return ((C.void (*) (*C.AtkEditableText, C.gint))(fnptr))(carg0, carg1);
+// }
+// C.void _gotk4_atk1_EditableText_virtual_set_text_contents(void* fnptr, *C.AtkEditableText carg0, *C.gchar carg1) {
+// 	return ((C.void (*) (*C.AtkEditableText, *C.gchar))(fnptr))(carg0, carg1);
+// }
+// extern *C.AtkHyperlink _gotk4_atk1_HyperlinkImpl_get_hyperlink(*C.AtkHyperlinkImpl);
+// *C.AtkHyperlink _gotk4_atk1_HyperlinkImpl_virtual_get_hyperlink(void* fnptr, *C.AtkHyperlinkImpl carg0) {
+// 	return ((*C.AtkHyperlink (*) (*C.AtkHyperlinkImpl))(fnptr))(carg0);
+// }
+// extern *C.AtkHyperlink _gotk4_atk1_Hypertext_get_link(*C.AtkHypertext, C.gint);
+// extern C.gint _gotk4_atk1_Hypertext_get_link_index(*C.AtkHypertext, C.gint);
+// extern C.gint _gotk4_atk1_Hypertext_get_n_links(*C.AtkHypertext);
+// extern C.void _gotk4_atk1_Hypertext_link_selected(*C.AtkHypertext, C.gint);
+// *C.AtkHyperlink _gotk4_atk1_Hypertext_virtual_get_link(void* fnptr, *C.AtkHypertext carg0, C.gint carg1) {
+// 	return ((*C.AtkHyperlink (*) (*C.AtkHypertext, C.gint))(fnptr))(carg0, carg1);
+// }
+// C.gint _gotk4_atk1_Hypertext_virtual_get_link_index(void* fnptr, *C.AtkHypertext carg0, C.gint carg1) {
+// 	return ((C.gint (*) (*C.AtkHypertext, C.gint))(fnptr))(carg0, carg1);
+// }
+// C.gint _gotk4_atk1_Hypertext_virtual_get_n_links(void* fnptr, *C.AtkHypertext carg0) {
+// 	return ((C.gint (*) (*C.AtkHypertext))(fnptr))(carg0);
+// }
+// C.void _gotk4_atk1_Hypertext_virtual_link_selected(void* fnptr, *C.AtkHypertext carg0, C.gint carg1) {
+// 	return ((C.void (*) (*C.AtkHypertext, C.gint))(fnptr))(carg0, carg1);
+// }
+// extern *C.gchar _gotk4_atk1_Image_get_image_description(*C.AtkImage);
+// extern *C.gchar _gotk4_atk1_Image_get_image_locale(*C.AtkImage);
+// extern C.void _gotk4_atk1_Image_get_image_position(*C.AtkImage, C.gint, C.gint, C.AtkCoordType);
+// extern C.void _gotk4_atk1_Image_get_image_size(*C.AtkImage, C.gint, C.gint);
+// extern C.gboolean _gotk4_atk1_Image_set_image_description(*C.AtkImage, *C.gchar);
+// *C.gchar _gotk4_atk1_Image_virtual_get_image_description(void* fnptr, *C.AtkImage carg0) {
+// 	return ((*C.gchar (*) (*C.AtkImage))(fnptr))(carg0);
+// }
+// *C.gchar _gotk4_atk1_Image_virtual_get_image_locale(void* fnptr, *C.AtkImage carg0) {
+// 	return ((*C.gchar (*) (*C.AtkImage))(fnptr))(carg0);
+// }
+// C.void _gotk4_atk1_Image_virtual_get_image_position(void* fnptr, *C.AtkImage carg0, C.gint* carg1, C.gint* carg2, C.AtkCoordType carg3) {
+// 	return ((C.void (*) (*C.AtkImage, C.gint*, C.gint*, C.AtkCoordType))(fnptr))(carg0, carg1, carg2, carg3);
+// }
+// C.void _gotk4_atk1_Image_virtual_get_image_size(void* fnptr, *C.AtkImage carg0, C.gint* carg1, C.gint* carg2) {
+// 	return ((C.void (*) (*C.AtkImage, C.gint*, C.gint*))(fnptr))(carg0, carg1, carg2);
+// }
+// C.gboolean _gotk4_atk1_Image_virtual_set_image_description(void* fnptr, *C.AtkImage carg0, *C.gchar carg1) {
+// 	return ((C.gboolean (*) (*C.AtkImage, *C.gchar))(fnptr))(carg0, carg1);
+// }
+// extern C.gboolean _gotk4_atk1_Selection_add_selection(*C.AtkSelection, C.gint);
+// extern C.gboolean _gotk4_atk1_Selection_clear_selection(*C.AtkSelection);
+// extern C.gint _gotk4_atk1_Selection_get_selection_count(*C.AtkSelection);
+// extern C.gboolean _gotk4_atk1_Selection_is_child_selected(*C.AtkSelection, C.gint);
+// extern *C.AtkObject _gotk4_atk1_Selection_ref_selection(*C.AtkSelection, C.gint);
+// extern C.gboolean _gotk4_atk1_Selection_remove_selection(*C.AtkSelection, C.gint);
+// extern C.gboolean _gotk4_atk1_Selection_select_all_selection(*C.AtkSelection);
+// extern C.void _gotk4_atk1_Selection_selection_changed(*C.AtkSelection);
+// C.gboolean _gotk4_atk1_Selection_virtual_add_selection(void* fnptr, *C.AtkSelection carg0, C.gint carg1) {
+// 	return ((C.gboolean (*) (*C.AtkSelection, C.gint))(fnptr))(carg0, carg1);
+// }
+// C.gboolean _gotk4_atk1_Selection_virtual_clear_selection(void* fnptr, *C.AtkSelection carg0) {
+// 	return ((C.gboolean (*) (*C.AtkSelection))(fnptr))(carg0);
+// }
+// C.gint _gotk4_atk1_Selection_virtual_get_selection_count(void* fnptr, *C.AtkSelection carg0) {
+// 	return ((C.gint (*) (*C.AtkSelection))(fnptr))(carg0);
+// }
+// C.gboolean _gotk4_atk1_Selection_virtual_is_child_selected(void* fnptr, *C.AtkSelection carg0, C.gint carg1) {
+// 	return ((C.gboolean (*) (*C.AtkSelection, C.gint))(fnptr))(carg0, carg1);
+// }
+// *C.AtkObject _gotk4_atk1_Selection_virtual_ref_selection(void* fnptr, *C.AtkSelection carg0, C.gint carg1) {
+// 	return ((*C.AtkObject (*) (*C.AtkSelection, C.gint))(fnptr))(carg0, carg1);
+// }
+// C.gboolean _gotk4_atk1_Selection_virtual_remove_selection(void* fnptr, *C.AtkSelection carg0, C.gint carg1) {
+// 	return ((C.gboolean (*) (*C.AtkSelection, C.gint))(fnptr))(carg0, carg1);
+// }
+// C.gboolean _gotk4_atk1_Selection_virtual_select_all_selection(void* fnptr, *C.AtkSelection carg0) {
+// 	return ((C.gboolean (*) (*C.AtkSelection))(fnptr))(carg0);
+// }
+// C.void _gotk4_atk1_Selection_virtual_selection_changed(void* fnptr, *C.AtkSelection carg0) {
+// 	return ((C.void (*) (*C.AtkSelection))(fnptr))(carg0);
+// }
+// extern *C.gchar _gotk4_atk1_StreamableContent_get_mime_type(*C.AtkStreamableContent, C.gint);
+// extern C.gint _gotk4_atk1_StreamableContent_get_n_mime_types(*C.AtkStreamableContent);
+// extern *C.GIOChannel _gotk4_atk1_StreamableContent_get_stream(*C.AtkStreamableContent, *C.gchar);
+// extern *C.gchar _gotk4_atk1_StreamableContent_get_uri(*C.AtkStreamableContent, *C.gchar);
+// *C.gchar _gotk4_atk1_StreamableContent_virtual_get_mime_type(void* fnptr, *C.AtkStreamableContent carg0, C.gint carg1) {
+// 	return ((*C.gchar (*) (*C.AtkStreamableContent, C.gint))(fnptr))(carg0, carg1);
+// }
+// C.gint _gotk4_atk1_StreamableContent_virtual_get_n_mime_types(void* fnptr, *C.AtkStreamableContent carg0) {
+// 	return ((C.gint (*) (*C.AtkStreamableContent))(fnptr))(carg0);
+// }
+// *C.GIOChannel _gotk4_atk1_StreamableContent_virtual_get_stream(void* fnptr, *C.AtkStreamableContent carg0, *C.gchar carg1) {
+// 	return ((*C.GIOChannel (*) (*C.AtkStreamableContent, *C.gchar))(fnptr))(carg0, carg1);
+// }
+// *C.gchar _gotk4_atk1_StreamableContent_virtual_get_uri(void* fnptr, *C.AtkStreamableContent carg0, *C.gchar carg1) {
+// 	return ((*C.gchar (*) (*C.AtkStreamableContent, *C.gchar))(fnptr))(carg0, carg1);
+// }
+// extern C.gboolean _gotk4_atk1_Table_add_column_selection(*C.AtkTable, C.gint);
+// extern C.gboolean _gotk4_atk1_Table_add_row_selection(*C.AtkTable, C.gint);
+// extern C.void _gotk4_atk1_Table_column_deleted(*C.AtkTable, C.gint, C.gint);
+// extern C.void _gotk4_atk1_Table_column_inserted(*C.AtkTable, C.gint, C.gint);
+// extern C.void _gotk4_atk1_Table_column_reordered(*C.AtkTable);
+// extern *C.AtkObject _gotk4_atk1_Table_get_caption(*C.AtkTable);
+// extern *C.gchar _gotk4_atk1_Table_get_column_description(*C.AtkTable, C.gint);
+// extern C.gint _gotk4_atk1_Table_get_column_extent_at(*C.AtkTable, C.gint, C.gint);
+// extern *C.AtkObject _gotk4_atk1_Table_get_column_header(*C.AtkTable, C.gint);
+// extern C.gint _gotk4_atk1_Table_get_n_columns(*C.AtkTable);
+// extern C.gint _gotk4_atk1_Table_get_n_rows(*C.AtkTable);
+// extern *C.gchar _gotk4_atk1_Table_get_row_description(*C.AtkTable, C.gint);
+// extern C.gint _gotk4_atk1_Table_get_row_extent_at(*C.AtkTable, C.gint, C.gint);
+// extern *C.AtkObject _gotk4_atk1_Table_get_row_header(*C.AtkTable, C.gint);
+// extern C.gint _gotk4_atk1_Table_get_selected_columns(*C.AtkTable, **C.gint);
+// extern C.gint _gotk4_atk1_Table_get_selected_rows(*C.AtkTable, **C.gint);
+// extern *C.AtkObject _gotk4_atk1_Table_get_summary(*C.AtkTable);
+// extern C.gboolean _gotk4_atk1_Table_is_column_selected(*C.AtkTable, C.gint);
+// extern C.gboolean _gotk4_atk1_Table_is_row_selected(*C.AtkTable, C.gint);
+// extern C.gboolean _gotk4_atk1_Table_is_selected(*C.AtkTable, C.gint, C.gint);
+// extern C.void _gotk4_atk1_Table_model_changed(*C.AtkTable);
+// extern *C.AtkObject _gotk4_atk1_Table_ref_at(*C.AtkTable, C.gint, C.gint);
+// extern C.gboolean _gotk4_atk1_Table_remove_column_selection(*C.AtkTable, C.gint);
+// extern C.gboolean _gotk4_atk1_Table_remove_row_selection(*C.AtkTable, C.gint);
+// extern C.void _gotk4_atk1_Table_row_deleted(*C.AtkTable, C.gint, C.gint);
+// extern C.void _gotk4_atk1_Table_row_inserted(*C.AtkTable, C.gint, C.gint);
+// extern C.void _gotk4_atk1_Table_row_reordered(*C.AtkTable);
+// extern C.void _gotk4_atk1_Table_set_caption(*C.AtkTable, *C.AtkObject);
+// extern C.void _gotk4_atk1_Table_set_column_description(*C.AtkTable, C.gint, *C.gchar);
+// extern C.void _gotk4_atk1_Table_set_column_header(*C.AtkTable, C.gint, *C.AtkObject);
+// extern C.void _gotk4_atk1_Table_set_row_description(*C.AtkTable, C.gint, *C.gchar);
+// extern C.void _gotk4_atk1_Table_set_row_header(*C.AtkTable, C.gint, *C.AtkObject);
+// extern C.void _gotk4_atk1_Table_set_summary(*C.AtkTable, *C.AtkObject);
+// C.gboolean _gotk4_atk1_Table_virtual_add_column_selection(void* fnptr, *C.AtkTable carg0, C.gint carg1) {
+// 	return ((C.gboolean (*) (*C.AtkTable, C.gint))(fnptr))(carg0, carg1);
 // }
-// gboolean _gotk4_atk1_Table_virtual_add_row_selection(void* fnptr, AtkTable* carg0, gint carg1) {
-// 	return ((gboolean (*) (AtkTable*, gint))(fnptr))(carg0, carg1);
-// }
-// void _gotk4_atk1_Table_virtual_column_deleted(void* fnptr, AtkTable* carg0, gint carg1, gint carg2) {
-// 	return ((void (*) (AtkTable*, gint, gint))(fnptr))(carg0, carg1, carg2);
-// }
-// void _gotk4_atk1_Table_virtual_column_inserted(void* fnptr, AtkTable* carg0, gint carg1, gint carg2) {
-// 	return ((void (*) (AtkTable*, gint, gint))(fnptr))(carg0, carg1, carg2);
+// C.gboolean _gotk4_atk1_Table_virtual_add_row_selection(void* fnptr, *C.AtkTable carg0, C.gint carg1) {
+// 	return ((C.gboolean (*) (*C.AtkTable, C.gint))(fnptr))(carg0, carg1);
+// }
+// C.void _gotk4_atk1_Table_virtual_column_deleted(void* fnptr, *C.AtkTable carg0, C.gint carg1, C.gint carg2) {
+// 	return ((C.void (*) (*C.AtkTable, C.gint, C.gint))(fnptr))(carg0, carg1, carg2);
+// }
+// C.void _gotk4_atk1_Table_virtual_column_inserted(void* fnptr, *C.AtkTable carg0, C.gint carg1, C.gint carg2) {
+// 	return ((C.void (*) (*C.AtkTable, C.gint, C.gint))(fnptr))(carg0, carg1, carg2);
 // }
-// void _gotk4_atk1_Table_virtual_column_reordered(void* fnptr, AtkTable* carg0) {
-// 	return ((void (*) (AtkTable*))(fnptr))(carg0);
+// C.void _gotk4_atk1_Table_virtual_column_reordered(void* fnptr, *C.AtkTable carg0) {
+// 	return ((C.void (*) (*C.AtkTable))(fnptr))(carg0);
 // }
-// AtkObject* _gotk4_atk1_Table_virtual_get_caption(void* fnptr, AtkTable* carg0) {
-// 	return ((AtkObject* (*) (AtkTable*))(fnptr))(carg0);
+// *C.AtkObject _gotk4_atk1_Table_virtual_get_caption(void* fnptr, *C.AtkTable carg0) {
+// 	return ((*C.AtkObject (*) (*C.AtkTable))(fnptr))(carg0);
 // }
-// gchar* _gotk4_atk1_Table_virtual_get_column_description(void* fnptr, AtkTable* carg0, gint carg1) {
-// 	return ((gchar* (*) (AtkTable*, gint))(fnptr))(carg0, carg1);
+// *C.gchar _gotk4_atk1_Table_virtual_get_column_description(void* fnptr, *C.AtkTable carg0, C.gint carg1) {
+// 	return ((*C.gchar (*) (*C.AtkTable, C.gint))(fnptr))(carg0, carg1);
 // }
-// gint _gotk4_atk1_Table_virtual_get_column_extent_at(void* fnptr, AtkTable* carg0, gint carg1, gint carg2) {
-// 	return ((gint (*) (AtkTable*, gint, gint))(fnptr))(carg0, carg1, carg2);
+// C.gint _gotk4_atk1_Table_virtual_get_column_extent_at(void* fnptr, *C.AtkTable carg0, C.gint carg1, C.gint carg2) {
+// 	return ((C.gint (*) (*C.AtkTable, C.gint, C.gint))(fnptr))(carg0, carg1, carg2);
 // }
-// AtkObject* _gotk4_atk1_Table_virtual_get_column_header(void* fnptr, AtkTable* carg0, gint carg1) {
-// 	return ((AtkObject* (*) (AtkTable*, gint))(fnptr))(carg0, carg1);
-// }
-// gint _gotk4_atk1_Table_virtual_get_n_columns(void* fnptr, AtkTable* carg0) {
-// 	return ((gint (*) (AtkTable*))(fnptr))(carg0);
-// }
-// gint _gotk4_atk1_Table_virtual_get_n_rows(void* fnptr, AtkTable* carg0) {
-// 	return ((gint (*) (AtkTable*))(fnptr))(carg0);
-// }
-// gchar* _gotk4_atk1_Table_virtual_get_row_description(void* fnptr, AtkTable* carg0, gint carg1) {
-// 	return ((gchar* (*) (AtkTable*, gint))(fnptr))(carg0, carg1);
-// }
-// gint _gotk4_atk1_Table_virtual_get_row_extent_at(void* fnptr, AtkTable* carg0, gint carg1, gint carg2) {
-// 	return ((gint (*) (AtkTable*, gint, gint))(fnptr))(carg0, carg1, carg2);
-// }
-// AtkObject* _gotk4_atk1_Table_virtual_get_row_header(void* fnptr, AtkTable* carg0, gint carg1) {
-// 	return ((AtkObject* (*) (AtkTable*, gint))(fnptr))(carg0, carg1);
-// }
-// gint _gotk4_atk1_Table_virtual_get_selected_columns(void* fnptr, AtkTable* carg0, gint** carg1) {
-// 	return ((gint (*) (AtkTable*, gint**))(fnptr))(carg0, carg1);
-// }
-// gint _gotk4_atk1_Table_virtual_get_selected_rows(void* fnptr, AtkTable* carg0, gint** carg1) {
-// 	return ((gint (*) (AtkTable*, gint**))(fnptr))(carg0, carg1);
-// }
-// AtkObject* _gotk4_atk1_Table_virtual_get_summary(void* fnptr, AtkTable* carg0) {
-// 	return ((AtkObject* (*) (AtkTable*))(fnptr))(carg0);
-// }
-// gboolean _gotk4_atk1_Table_virtual_is_column_selected(void* fnptr, AtkTable* carg0, gint carg1) {
-// 	return ((gboolean (*) (AtkTable*, gint))(fnptr))(carg0, carg1);
-// }
-// gboolean _gotk4_atk1_Table_virtual_is_row_selected(void* fnptr, AtkTable* carg0, gint carg1) {
-// 	return ((gboolean (*) (AtkTable*, gint))(fnptr))(carg0, carg1);
-// }
-// gboolean _gotk4_atk1_Table_virtual_is_selected(void* fnptr, AtkTable* carg0, gint carg1, gint carg2) {
-// 	return ((gboolean (*) (AtkTable*, gint, gint))(fnptr))(carg0, carg1, carg2);
-// }
-// void _gotk4_atk1_Table_virtual_model_changed(void* fnptr, AtkTable* carg0) {
-// 	return ((void (*) (AtkTable*))(fnptr))(carg0);
-// }
-// AtkObject* _gotk4_atk1_Table_virtual_ref_at(void* fnptr, AtkTable* carg0, gint carg1, gint carg2) {
-// 	return ((AtkObject* (*) (AtkTable*, gint, gint))(fnptr))(carg0, carg1, carg2);
-// }
-// gboolean _gotk4_atk1_Table_virtual_remove_column_selection(void* fnptr, AtkTable* carg0, gint carg1) {
-// 	return ((gboolean (*) (AtkTable*, gint))(fnptr))(carg0, carg1);
-// }
-// gboolean _gotk4_atk1_Table_virtual_remove_row_selection(void* fnptr, AtkTable* carg0, gint carg1) {
-// 	return ((gboolean (*) (AtkTable*, gint))(fnptr))(carg0, carg1);
-// }
-// void _gotk4_atk1_Table_virtual_row_deleted(void* fnptr, AtkTable* carg0, gint carg1, gint carg2) {
-// 	return ((void (*) (AtkTable*, gint, gint))(fnptr))(carg0, carg1, carg2);
-// }
-// void _gotk4_atk1_Table_virtual_row_inserted(void* fnptr, AtkTable* carg0, gint carg1, gint carg2) {
-// 	return ((void (*) (AtkTable*, gint, gint))(fnptr))(carg0, carg1, carg2);
-// }
-// void _gotk4_atk1_Table_virtual_row_reordered(void* fnptr, AtkTable* carg0) {
-// 	return ((void (*) (AtkTable*))(fnptr))(carg0);
-// }
-// void _gotk4_atk1_Table_virtual_set_caption(void* fnptr, AtkTable* carg0, AtkObject* carg1) {
-// 	return ((void (*) (AtkTable*, AtkObject*))(fnptr))(carg0, carg1);
-// }
-// void _gotk4_atk1_Table_virtual_set_column_description(void* fnptr, AtkTable* carg0, gint carg1, gchar* carg2) {
-// 	return ((void (*) (AtkTable*, gint, gchar*))(fnptr))(carg0, carg1, carg2);
-// }
-// void _gotk4_atk1_Table_virtual_set_column_header(void* fnptr, AtkTable* carg0, gint carg1, AtkObject* carg2) {
-// 	return ((void (*) (AtkTable*, gint, AtkObject*))(fnptr))(carg0, carg1, carg2);
-// }
-// void _gotk4_atk1_Table_virtual_set_row_description(void* fnptr, AtkTable* carg0, gint carg1, gchar* carg2) {
-// 	return ((void (*) (AtkTable*, gint, gchar*))(fnptr))(carg0, carg1, carg2);
-// }
-// void _gotk4_atk1_Table_virtual_set_row_header(void* fnptr, AtkTable* carg0, gint carg1, AtkObject* carg2) {
-// 	return ((void (*) (AtkTable*, gint, AtkObject*))(fnptr))(carg0, carg1, carg2);
+// *C.AtkObject _gotk4_atk1_Table_virtual_get_column_header(void* fnptr, *C.AtkTable carg0, C.gint carg1) {
+// 	return ((*C.AtkObject (*) (*C.AtkTable, C.gint))(fnptr))(carg0, carg1);
+// }
+// C.gint _gotk4_atk1_Table_virtual_get_n_columns(void* fnptr, *C.AtkTable carg0) {
+// 	return ((C.gint (*) (*C.AtkTable))(fnptr))(carg0);
+// }
+// C.gint _gotk4_atk1_Table_virtual_get_n_rows(void* fnptr, *C.AtkTable carg0) {
+// 	return ((C.gint (*) (*C.AtkTable))(fnptr))(carg0);
+// }
+// *C.gchar _gotk4_atk1_Table_virtual_get_row_description(void* fnptr, *C.AtkTable carg0, C.gint carg1) {
+// 	return ((*C.gchar (*) (*C.AtkTable, C.gint))(fnptr))(carg0, carg1);
+// }
+// C.gint _gotk4_atk1_Table_virtual_get_row_extent_at(void* fnptr, *C.AtkTable carg0, C.gint carg1, C.gint carg2) {
+// 	return ((C.gint (*) (*C.AtkTable, C.gint, C.gint))(fnptr))(carg0, carg1, carg2);
+// }
+// *C.AtkObject _gotk4_atk1_Table_virtual_get_row_header(void* fnptr, *C.AtkTable carg0, C.gint carg1) {
+// 	return ((*C.AtkObject (*) (*C.AtkTable, C.gint))(fnptr))(carg0, carg1);
+// }
+// C.gint _gotk4_atk1_Table_virtual_get_selected_columns(void* fnptr, *C.AtkTable carg0, **C.gint carg1) {
+// 	return ((C.gint (*) (*C.AtkTable, **C.gint))(fnptr))(carg0, carg1);
+// }
+// C.gint _gotk4_atk1_Table_virtual_get_selected_rows(void* fnptr, *C.AtkTable carg0, **C.gint carg1) {
+// 	return ((C.gint (*) (*C.AtkTable, **C.gint))(fnptr))(carg0, carg1);
+// }
+// *C.AtkObject _gotk4_atk1_Table_virtual_get_summary(void* fnptr, *C.AtkTable carg0) {
+// 	return ((*C.AtkObject (*) (*C.AtkTable))(fnptr))(carg0);
+// }
+// C.gboolean _gotk4_atk1_Table_virtual_is_column_selected(void* fnptr, *C.AtkTable carg0, C.gint carg1) {
+// 	return ((C.gboolean (*) (*C.AtkTable, C.gint))(fnptr))(carg0, carg1);
+// }
+// C.gboolean _gotk4_atk1_Table_virtual_is_row_selected(void* fnptr, *C.AtkTable carg0, C.gint carg1) {
+// 	return ((C.gboolean (*) (*C.AtkTable, C.gint))(fnptr))(carg0, carg1);
+// }
+// C.gboolean _gotk4_atk1_Table_virtual_is_selected(void* fnptr, *C.AtkTable carg0, C.gint carg1, C.gint carg2) {
+// 	return ((C.gboolean (*) (*C.AtkTable, C.gint, C.gint))(fnptr))(carg0, carg1, carg2);
+// }
+// C.void _gotk4_atk1_Table_virtual_model_changed(void* fnptr, *C.AtkTable carg0) {
+// 	return ((C.void (*) (*C.AtkTable))(fnptr))(carg0);
+// }
+// *C.AtkObject _gotk4_atk1_Table_virtual_ref_at(void* fnptr, *C.AtkTable carg0, C.gint carg1, C.gint carg2) {
+// 	return ((*C.AtkObject (*) (*C.AtkTable, C.gint, C.gint))(fnptr))(carg0, carg1, carg2);
+// }
+// C.gboolean _gotk4_atk1_Table_virtual_remove_column_selection(void* fnptr, *C.AtkTable carg0, C.gint carg1) {
+// 	return ((C.gboolean (*) (*C.AtkTable, C.gint))(fnptr))(carg0, carg1);
+// }
+// C.gboolean _gotk4_atk1_Table_virtual_remove_row_selection(void* fnptr, *C.AtkTable carg0, C.gint carg1) {
+// 	return ((C.gboolean (*) (*C.AtkTable, C.gint))(fnptr))(carg0, carg1);
+// }
+// C.void _gotk4_atk1_Table_virtual_row_deleted(void* fnptr, *C.AtkTable carg0, C.gint carg1, C.gint carg2) {
+// 	return ((C.void (*) (*C.AtkTable, C.gint, C.gint))(fnptr))(carg0, carg1, carg2);
+// }
+// C.void _gotk4_atk1_Table_virtual_row_inserted(void* fnptr, *C.AtkTable carg0, C.gint carg1, C.gint carg2) {
+// 	return ((C.void (*) (*C.AtkTable, C.gint, C.gint))(fnptr))(carg0, carg1, carg2);
+// }
+// C.void _gotk4_atk1_Table_virtual_row_reordered(void* fnptr, *C.AtkTable carg0) {
+// 	return ((C.void (*) (*C.AtkTable))(fnptr))(carg0);
+// }
+// C.void _gotk4_atk1_Table_virtual_set_caption(void* fnptr, *C.AtkTable carg0, *C.AtkObject carg1) {
+// 	return ((C.void (*) (*C.AtkTable, *C.AtkObject))(fnptr))(carg0, carg1);
+// }
+// C.void _gotk4_atk1_Table_virtual_set_column_description(void* fnptr, *C.AtkTable carg0, C.gint carg1, *C.gchar carg2) {
+// 	return ((C.void (*) (*C.AtkTable, C.gint, *C.gchar))(fnptr))(carg0, carg1, carg2);
+// }
+// C.void _gotk4_atk1_Table_virtual_set_column_header(void* fnptr, *C.AtkTable carg0, C.gint carg1, *C.AtkObject carg2) {
+// 	return ((C.void (*) (*C.AtkTable, C.gint, *C.AtkObject))(fnptr))(carg0, carg1, carg2);
+// }
+// C.void _gotk4_atk1_Table_virtual_set_row_description(void* fnptr, *C.AtkTable carg0, C.gint carg1, *C.gchar carg2) {
+// 	return ((C.void (*) (*C.AtkTable, C.gint, *C.gchar))(fnptr))(carg0, carg1, carg2);
+// }
+// C.void _gotk4_atk1_Table_virtual_set_row_header(void* fnptr, *C.AtkTable carg0, C.gint carg1, *C.AtkObject carg2) {
+// 	return ((C.void (*) (*C.AtkTable, C.gint, *C.AtkObject))(fnptr))(carg0, carg1, carg2);
 // }
-// void _gotk4_atk1_Table_virtual_set_summary(void* fnptr, AtkTable* carg0, AtkObject* carg1) {
-// 	return ((void (*) (AtkTable*, AtkObject*))(fnptr))(carg0, carg1);
+// C.void _gotk4_atk1_Table_virtual_set_summary(void* fnptr, *C.AtkTable carg0, *C.AtkObject carg1) {
+// 	return ((C.void (*) (*C.AtkTable, *C.AtkObject))(fnptr))(carg0, carg1);
 // }
-// extern gint _gotk4_atk1_TableCell_get_column_span(AtkTableCell*);
-// extern gboolean _gotk4_atk1_TableCell_get_position(AtkTableCell*, gint, gint);
-// extern gboolean _gotk4_atk1_TableCell_get_row_column_span(AtkTableCell*, gint, gint, gint, gint);
-// extern gint _gotk4_atk1_TableCell_get_row_span(AtkTableCell*);
-// extern AtkObject* _gotk4_atk1_TableCell_get_table(AtkTableCell*);
-// gint _gotk4_atk1_TableCell_virtual_get_column_span(void* fnptr, AtkTableCell* carg0) {
-// 	return ((gint (*) (AtkTableCell*))(fnptr))(carg0);
+// extern C.gint _gotk4_atk1_TableCell_get_column_span(*C.AtkTableCell);
+// extern C.gboolean _gotk4_atk1_TableCell_get_position(*C.AtkTableCell, C.gint, C.gint);
+// extern C.gboolean _gotk4_atk1_TableCell_get_row_column_span(*C.AtkTableCell, C.gint, C.gint, C.gint, C.gint);
+// extern C.gint _gotk4_atk1_TableCell_get_row_span(*C.AtkTableCell);
+// extern *C.AtkObject _gotk4_atk1_TableCell_get_table(*C.AtkTableCell);
+// C.gint _gotk4_atk1_TableCell_virtual_get_column_span(void* fnptr, *C.AtkTableCell carg0) {
+// 	return ((C.gint (*) (*C.AtkTableCell))(fnptr))(carg0);
 // }
-// gboolean _gotk4_atk1_TableCell_virtual_get_position(void* fnptr, AtkTableCell* carg0, gint* carg1, gint* carg2) {
-// 	return ((gboolean (*) (AtkTableCell*, gint*, gint*))(fnptr))(carg0, carg1, carg2);
-// }
-// gboolean _gotk4_atk1_TableCell_virtual_get_row_column_span(void* fnptr, AtkTableCell* carg0, gint* carg1, gint* carg2, gint* carg3, gint* carg4) {
-// 	return ((gboolean (*) (AtkTableCell*, gint*, gint*, gint*, gint*))(fnptr))(carg0, carg1, carg2, carg3, carg4);
-// }
-// gint _gotk4_atk1_TableCell_virtual_get_row_span(void* fnptr, AtkTableCell* carg0) {
-// 	return ((gint (*) (AtkTableCell*))(fnptr))(carg0);
+// C.gboolean _gotk4_atk1_TableCell_virtual_get_position(void* fnptr, *C.AtkTableCell carg0, C.gint* carg1, C.gint* carg2) {
+// 	return ((C.gboolean (*) (*C.AtkTableCell, C.gint*, C.gint*))(fnptr))(carg0, carg1, carg2);
+// }
+// C.gboolean _gotk4_atk1_TableCell_virtual_get_row_column_span(void* fnptr, *C.AtkTableCell carg0, C.gint* carg1, C.gint* carg2, C.gint* carg3, C.gint* carg4) {
+// 	return ((C.gboolean (*) (*C.AtkTableCell, C.gint*, C.gint*, C.gint*, C.gint*))(fnptr))(carg0, carg1, carg2, carg3, carg4);
+// }
+// C.gint _gotk4_atk1_TableCell_virtual_get_row_span(void* fnptr, *C.AtkTableCell carg0) {
+// 	return ((C.gint (*) (*C.AtkTableCell))(fnptr))(carg0);
 // }
-// AtkObject* _gotk4_atk1_TableCell_virtual_get_table(void* fnptr, AtkTableCell* carg0) {
-// 	return ((AtkObject* (*) (AtkTableCell*))(fnptr))(carg0);
+// *C.AtkObject _gotk4_atk1_TableCell_virtual_get_table(void* fnptr, *C.AtkTableCell carg0) {
+// 	return ((*C.AtkObject (*) (*C.AtkTableCell))(fnptr))(carg0);
 // }
-// extern gboolean _gotk4_atk1_Text_add_selection(AtkText*, gint, gint);
-// extern AtkTextRange** _gotk4_atk1_Text_get_bounded_ranges(AtkText*, AtkTextRectangle*, AtkCoordType, AtkTextClipType, AtkTextClipType);
-// extern gint _gotk4_atk1_Text_get_caret_offset(AtkText*);
-// extern gunichar _gotk4_atk1_Text_get_character_at_offset(AtkText*, gint);
-// extern gint _gotk4_atk1_Text_get_character_count(AtkText*);
-// extern void _gotk4_atk1_Text_get_character_extents(AtkText*, gint, gint, gint, gint, gint, AtkCoordType);
-// extern gint _gotk4_atk1_Text_get_n_selections(AtkText*);
-// extern gint _gotk4_atk1_Text_get_offset_at_point(AtkText*, gint, gint, AtkCoordType);
-// extern void _gotk4_atk1_Text_get_range_extents(AtkText*, gint, gint, AtkCoordType, AtkTextRectangle);
-// extern gchar* _gotk4_atk1_Text_get_selection(AtkText*, gint, gint, gint);
-// extern gchar* _gotk4_atk1_Text_get_string_at_offset(AtkText*, gint, AtkTextGranularity, gint, gint);
-// extern gchar* _gotk4_atk1_Text_get_text(AtkText*, gint, gint);
-// extern gboolean _gotk4_atk1_Text_remove_selection(AtkText*, gint);
-// extern gboolean _gotk4_atk1_Text_scroll_substring_to(AtkText*, gint, gint, AtkScrollType);
-// extern gboolean _gotk4_atk1_Text_scroll_substring_to_point(AtkText*, gint, gint, AtkCoordType, gint, gint);
-// extern gboolean _gotk4_atk1_Text_set_caret_offset(AtkText*, gint);
-// extern gboolean _gotk4_atk1_Text_set_selection(AtkText*, gint, gint, gint);
-// extern void _gotk4_atk1_Text_text_attributes_changed(AtkText*);
-// extern void _gotk4_atk1_Text_text_caret_moved(AtkText*, gint);
-// extern void _gotk4_atk1_Text_text_changed(AtkText*, gint, gint);
-// extern void _gotk4_atk1_Text_text_selection_changed(AtkText*);
-// gboolean _gotk4_atk1_Text_virtual_add_selection(void* fnptr, AtkText* carg0, gint carg1, gint carg2) {
-// 	return ((gboolean (*) (AtkText*, gint, gint))(fnptr))(carg0, carg1, carg2);
-// }
-// AtkTextRange** _gotk4_atk1_Text_virtual_get_bounded_ranges(void* fnptr, AtkText* carg0, AtkTextRectangle* carg1, AtkCoordType carg2, AtkTextClipType carg3, AtkTextClipType carg4) {
-// 	return ((AtkTextRange** (*) (AtkText*, AtkTextRectangle*, AtkCoordType, AtkTextClipType, AtkTextClipType))(fnptr))(carg0, carg1, carg2, carg3, carg4);
-// }
-// gint _gotk4_atk1_Text_virtual_get_caret_offset(void* fnptr, AtkText* carg0) {
-// 	return ((gint (*) (AtkText*))(fnptr))(carg0);
-// }
-// gunichar _gotk4_atk1_Text_virtual_get_character_at_offset(void* fnptr, AtkText* carg0, gint carg1) {
-// 	return ((gunichar (*) (AtkText*, gint))(fnptr))(carg0, carg1);
+// extern C.gboolean _gotk4_atk1_Text_add_selection(*C.AtkText, C.gint, C.gint);
+// extern **C.AtkTextRange _gotk4_atk1_Text_get_bounded_ranges(*C.AtkText, *C.AtkTextRectangle, C.AtkCoordType, C.AtkTextClipType, C.AtkTextClipType);
+// extern C.gint _gotk4_atk1_Text_get_caret_offset(*C.AtkText);
+// extern C.gunichar _gotk4_atk1_Text_get_character_at_offset(*C.AtkText, C.gint);
+// extern C.gint _gotk4_atk1_Text_get_character_count(*C.AtkText);
+// extern C.void _gotk4_atk1_Text_get_character_extents(*C.AtkText, C.gint, C.gint, C.gint, C.gint, C.gint, C.AtkCoordType);
+// extern C.gint _gotk4_atk1_Text_get_n_selections(*C.AtkText);
+// extern C.gint _gotk4_atk1_Text_get_offset_at_point(*C.AtkText, C.gint, C.gint, C.AtkCoordType);
+// extern C.void _gotk4_atk1_Text_get_range_extents(*C.AtkText, C.gint, C.gint, C.AtkCoordType, C.AtkTextRectangle);
+// extern *C.gchar _gotk4_atk1_Text_get_selection(*C.AtkText, C.gint, C.gint, C.gint);
+// extern *C.gchar _gotk4_atk1_Text_get_string_at_offset(*C.AtkText, C.gint, C.AtkTextGranularity, C.gint, C.gint);
+// extern *C.gchar _gotk4_atk1_Text_get_text(*C.AtkText, C.gint, C.gint);
+// extern C.gboolean _gotk4_atk1_Text_remove_selection(*C.AtkText, C.gint);
+// extern C.gboolean _gotk4_atk1_Text_scroll_substring_to(*C.AtkText, C.gint, C.gint, C.AtkScrollType);
+// extern C.gboolean _gotk4_atk1_Text_scroll_substring_to_point(*C.AtkText, C.gint, C.gint, C.AtkCoordType, C.gint, C.gint);
+// extern C.gboolean _gotk4_atk1_Text_set_caret_offset(*C.AtkText, C.gint);
+// extern C.gboolean _gotk4_atk1_Text_set_selection(*C.AtkText, C.gint, C.gint, C.gint);
+// extern C.void _gotk4_atk1_Text_text_attributes_changed(*C.AtkText);
+// extern C.void _gotk4_atk1_Text_text_caret_moved(*C.AtkText, C.gint);
+// extern C.void _gotk4_atk1_Text_text_changed(*C.AtkText, C.gint, C.gint);
+// extern C.void _gotk4_atk1_Text_text_selection_changed(*C.AtkText);
+// C.gboolean _gotk4_atk1_Text_virtual_add_selection(void* fnptr, *C.AtkText carg0, C.gint carg1, C.gint carg2) {
+// 	return ((C.gboolean (*) (*C.AtkText, C.gint, C.gint))(fnptr))(carg0, carg1, carg2);
+// }
+// **C.AtkTextRange _gotk4_atk1_Text_virtual_get_bounded_ranges(void* fnptr, *C.AtkText carg0, *C.AtkTextRectangle carg1, C.AtkCoordType carg2, C.AtkTextClipType carg3, C.AtkTextClipType carg4) {
+// 	return ((**C.AtkTextRange (*) (*C.AtkText, *C.AtkTextRectangle, C.AtkCoordType, C.AtkTextClipType, C.AtkTextClipType))(fnptr))(carg0, carg1, carg2, carg3, carg4);
+// }
+// C.gint _gotk4_atk1_Text_virtual_get_caret_offset(void* fnptr, *C.AtkText carg0) {
+// 	return ((C.gint (*) (*C.AtkText))(fnptr))(carg0);
+// }
+// C.gunichar _gotk4_atk1_Text_virtual_get_character_at_offset(void* fnptr, *C.AtkText carg0, C.gint carg1) {
+// 	return ((C.gunichar (*) (*C.AtkText, C.gint))(fnptr))(carg0, carg1);
 // }
-// gint _gotk4_atk1_Text_virtual_get_character_count(void* fnptr, AtkText* carg0) {
-// 	return ((gint (*) (AtkText*))(fnptr))(carg0);
+// C.gint _gotk4_atk1_Text_virtual_get_character_count(void* fnptr, *C.AtkText carg0) {
+// 	return ((C.gint (*) (*C.AtkText))(fnptr))(carg0);
 // }
-// void _gotk4_atk1_Text_virtual_get_character_extents(void* fnptr, AtkText* carg0, gint carg1, gint* carg2, gint* carg3, gint* carg4, gint* carg5, AtkCoordType carg6) {
-// 	return ((void (*) (AtkText*, gint, gint*, gint*, gint*, gint*, AtkCoordType))(fnptr))(carg0, carg1, carg2, carg3, carg4, carg5, carg6);
+// C.void _gotk4_atk1_Text_virtual_get_character_extents(void* fnptr, *C.AtkText carg0, C.gint carg1, C.gint* carg2, C.gint* carg3, C.gint* carg4, C.gint* carg5, C.AtkCoordType carg6) {
+// 	return ((C.void (*) (*C.AtkText, C.gint, C.gint*, C.gint*, C.gint*, C.gint*, C.AtkCoordType))(fnptr))(carg0, carg1, carg2, carg3, carg4, carg5, carg6);
 // }
-// gint _gotk4_atk1_Text_virtual_get_n_selections(void* fnptr, AtkText* carg0) {
-// 	return ((gint (*) (AtkText*))(fnptr))(carg0);
-// }
-// gint _gotk4_atk1_Text_virtual_get_offset_at_point(void* fnptr, AtkText* carg0, gint carg1, gint carg2, AtkCoordType carg3) {
-// 	return ((gint (*) (AtkText*, gint, gint, AtkCoordType))(fnptr))(carg0, carg1, carg2, carg3);
-// }
-// void _gotk4_atk1_Text_virtual_get_range_extents(void* fnptr, AtkText* carg0, gint carg1, gint carg2, AtkCoordType carg3, AtkTextRectangle* carg4) {
-// 	return ((void (*) (AtkText*, gint, gint, AtkCoordType, AtkTextRectangle*))(fnptr))(carg0, carg1, carg2, carg3, carg4);
-// }
-// gchar* _gotk4_atk1_Text_virtual_get_selection(void* fnptr, AtkText* carg0, gint carg1, gint* carg2, gint* carg3) {
-// 	return ((gchar* (*) (AtkText*, gint, gint*, gint*))(fnptr))(carg0, carg1, carg2, carg3);
-// }
-// gchar* _gotk4_atk1_Text_virtual_get_string_at_offset(void* fnptr, AtkText* carg0, gint carg1, AtkTextGranularity carg2, gint* carg3, gint* carg4) {
-// 	return ((gchar* (*) (AtkText*, gint, AtkTextGranularity, gint*, gint*))(fnptr))(carg0, carg1, carg2, carg3, carg4);
-// }
-// gchar* _gotk4_atk1_Text_virtual_get_text(void* fnptr, AtkText* carg0, gint carg1, gint carg2) {
-// 	return ((gchar* (*) (AtkText*, gint, gint))(fnptr))(carg0, carg1, carg2);
-// }
-// gboolean _gotk4_atk1_Text_virtual_remove_selection(void* fnptr, AtkText* carg0, gint carg1) {
-// 	return ((gboolean (*) (AtkText*, gint))(fnptr))(carg0, carg1);
-// }
-// gboolean _gotk4_atk1_Text_virtual_scroll_substring_to(void* fnptr, AtkText* carg0, gint carg1, gint carg2, AtkScrollType carg3) {
-// 	return ((gboolean (*) (AtkText*, gint, gint, AtkScrollType))(fnptr))(carg0, carg1, carg2, carg3);
-// }
-// gboolean _gotk4_atk1_Text_virtual_scroll_substring_to_point(void* fnptr, AtkText* carg0, gint carg1, gint carg2, AtkCoordType carg3, gint carg4, gint carg5) {
-// 	return ((gboolean (*) (AtkText*, gint, gint, AtkCoordType, gint, gint))(fnptr))(carg0, carg1, carg2, carg3, carg4, carg5);
-// }
-// gboolean _gotk4_atk1_Text_virtual_set_caret_offset(void* fnptr, AtkText* carg0, gint carg1) {
-// 	return ((gboolean (*) (AtkText*, gint))(fnptr))(carg0, carg1);
-// }
-// gboolean _gotk4_atk1_Text_virtual_set_selection(void* fnptr, AtkText* carg0, gint carg1, gint carg2, gint carg3) {
-// 	return ((gboolean (*) (AtkText*, gint, gint, gint))(fnptr))(carg0, carg1, carg2, carg3);
-// }
-// void _gotk4_atk1_Text_virtual_text_attributes_changed(void* fnptr, AtkText* carg0) {
-// 	return ((void (*) (AtkText*))(fnptr))(carg0);
-// }
-// void _gotk4_atk1_Text_virtual_text_caret_moved(void* fnptr, AtkText* carg0, gint carg1) {
-// 	return ((void (*) (AtkText*, gint))(fnptr))(carg0, carg1);
-// }
-// void _gotk4_atk1_Text_virtual_text_changed(void* fnptr, AtkText* carg0, gint carg1, gint carg2) {
-// 	return ((void (*) (AtkText*, gint, gint))(fnptr))(carg0, carg1, carg2);
-// }
-// void _gotk4_atk1_Text_virtual_text_selection_changed(void* fnptr, AtkText* carg0) {
-// 	return ((void (*) (AtkText*))(fnptr))(carg0);
-// }
-// extern gdouble _gotk4_atk1_Value_get_increment(AtkValue*);
-// extern AtkRange* _gotk4_atk1_Value_get_range(AtkValue*);
-// extern GSList* _gotk4_atk1_Value_get_sub_ranges(AtkValue*);
-// extern void _gotk4_atk1_Value_get_value_and_text(AtkValue*, gdouble, gchar*);
-// extern void _gotk4_atk1_Value_set_value(AtkValue*, gdouble);
-// gdouble _gotk4_atk1_Value_virtual_get_increment(void* fnptr, AtkValue* carg0) {
-// 	return ((gdouble (*) (AtkValue*))(fnptr))(carg0);
-// }
-// AtkRange* _gotk4_atk1_Value_virtual_get_range(void* fnptr, AtkValue* carg0) {
-// 	return ((AtkRange* (*) (AtkValue*))(fnptr))(carg0);
-// }
-// GSList* _gotk4_atk1_Value_virtual_get_sub_ranges(void* fnptr, AtkValue* carg0) {
-// 	return ((GSList* (*) (AtkValue*))(fnptr))(carg0);
-// }
-// void _gotk4_atk1_Value_virtual_get_value_and_text(void* fnptr, AtkValue* carg0, gdouble* carg1, gchar** carg2) {
-// 	return ((void (*) (AtkValue*, gdouble*, gchar**))(fnptr))(carg0, carg1, carg2);
+// C.gint _gotk4_atk1_Text_virtual_get_n_selections(void* fnptr, *C.AtkText carg0) {
+// 	return ((C.gint (*) (*C.AtkText))(fnptr))(carg0);
+// }
+// C.gint _gotk4_atk1_Text_virtual_get_offset_at_point(void* fnptr, *C.AtkText carg0, C.gint carg1, C.gint carg2, C.AtkCoordType carg3) {
+// 	return ((C.gint (*) (*C.AtkText, C.gint, C.gint, C.AtkCoordType))(fnptr))(carg0, carg1, carg2, carg3);
+// }
+// C.void _gotk4_atk1_Text_virtual_get_range_extents(void* fnptr, *C.AtkText carg0, C.gint carg1, C.gint carg2, C.AtkCoordType carg3, C.AtkTextRectangle* carg4) {
+// 	return ((C.void (*) (*C.AtkText, C.gint, C.gint, C.AtkCoordType, C.AtkTextRectangle*))(fnptr))(carg0, carg1, carg2, carg3, carg4);
+// }
+// *C.gchar _gotk4_atk1_Text_virtual_get_selection(void* fnptr, *C.AtkText carg0, C.gint carg1, C.gint* carg2, C.gint* carg3) {
+// 	return ((*C.gchar (*) (*C.AtkText, C.gint, C.gint*, C.gint*))(fnptr))(carg0, carg1, carg2, carg3);
+// }
+// *C.gchar _gotk4_atk1_Text_virtual_get_string_at_offset(void* fnptr, *C.AtkText carg0, C.gint carg1, C.AtkTextGranularity carg2, C.gint* carg3, C.gint* carg4) {
+// 	return ((*C.gchar (*) (*C.AtkText, C.gint, C.AtkTextGranularity, C.gint*, C.gint*))(fnptr))(carg0, carg1, carg2, carg3, carg4);
+// }
+// *C.gchar _gotk4_atk1_Text_virtual_get_text(void* fnptr, *C.AtkText carg0, C.gint carg1, C.gint carg2) {
+// 	return ((*C.gchar (*) (*C.AtkText, C.gint, C.gint))(fnptr))(carg0, carg1, carg2);
+// }
+// C.gboolean _gotk4_atk1_Text_virtual_remove_selection(void* fnptr, *C.AtkText carg0, C.gint carg1) {
+// 	return ((C.gboolean (*) (*C.AtkText, C.gint))(fnptr))(carg0, carg1);
+// }
+// C.gboolean _gotk4_atk1_Text_virtual_scroll_substring_to(void* fnptr, *C.AtkText carg0, C.gint carg1, C.gint carg2, C.AtkScrollType carg3) {
+// 	return ((C.gboolean (*) (*C.AtkText, C.gint, C.gint, C.AtkScrollType))(fnptr))(carg0, carg1, carg2, carg3);
+// }
+// C.gboolean _gotk4_atk1_Text_virtual_scroll_substring_to_point(void* fnptr, *C.AtkText carg0, C.gint carg1, C.gint carg2, C.AtkCoordType carg3, C.gint carg4, C.gint carg5) {
+// 	return ((C.gboolean (*) (*C.AtkText, C.gint, C.gint, C.AtkCoordType, C.gint, C.gint))(fnptr))(carg0, carg1, carg2, carg3, carg4, carg5);
+// }
+// C.gboolean _gotk4_atk1_Text_virtual_set_caret_offset(void* fnptr, *C.AtkText carg0, C.gint carg1) {
+// 	return ((C.gboolean (*) (*C.AtkText, C.gint))(fnptr))(carg0, carg1);
+// }
+// C.gboolean _gotk4_atk1_Text_virtual_set_selection(void* fnptr, *C.AtkText carg0, C.gint carg1, C.gint carg2, C.gint carg3) {
+// 	return ((C.gboolean (*) (*C.AtkText, C.gint, C.gint, C.gint))(fnptr))(carg0, carg1, carg2, carg3);
+// }
+// C.void _gotk4_atk1_Text_virtual_text_attributes_changed(void* fnptr, *C.AtkText carg0) {
+// 	return ((C.void (*) (*C.AtkText))(fnptr))(carg0);
+// }
+// C.void _gotk4_atk1_Text_virtual_text_caret_moved(void* fnptr, *C.AtkText carg0, C.gint carg1) {
+// 	return ((C.void (*) (*C.AtkText, C.gint))(fnptr))(carg0, carg1);
+// }
+// C.void _gotk4_atk1_Text_virtual_text_changed(void* fnptr, *C.AtkText carg0, C.gint carg1, C.gint carg2) {
+// 	return ((C.void (*) (*C.AtkText, C.gint, C.gint))(fnptr))(carg0, carg1, carg2);
+// }
+// C.void _gotk4_atk1_Text_virtual_text_selection_changed(void* fnptr, *C.AtkText carg0) {
+// 	return ((C.void (*) (*C.AtkText))(fnptr))(carg0);
+// }
+// extern C.gdouble _gotk4_atk1_Value_get_increment(*C.AtkValue);
+// extern *C.AtkRange _gotk4_atk1_Value_get_range(*C.AtkValue);
+// extern *C.GSList _gotk4_atk1_Value_get_sub_ranges(*C.AtkValue);
+// extern C.void _gotk4_atk1_Value_get_value_and_text(*C.AtkValue, C.gdouble, *C.gchar);
+// extern C.void _gotk4_atk1_Value_set_value(*C.AtkValue, C.gdouble);
+// C.gdouble _gotk4_atk1_Value_virtual_get_increment(void* fnptr, *C.AtkValue carg0) {
+// 	return ((C.gdouble (*) (*C.AtkValue))(fnptr))(carg0);
+// }
+// *C.AtkRange _gotk4_atk1_Value_virtual_get_range(void* fnptr, *C.AtkValue carg0) {
+// 	return ((*C.AtkRange (*) (*C.AtkValue))(fnptr))(carg0);
+// }
+// *C.GSList _gotk4_atk1_Value_virtual_get_sub_ranges(void* fnptr, *C.AtkValue carg0) {
+// 	return ((*C.GSList (*) (*C.AtkValue))(fnptr))(carg0);
+// }
+// C.void _gotk4_atk1_Value_virtual_get_value_and_text(void* fnptr, *C.AtkValue carg0, C.gdouble* carg1, *C.gchar* carg2) {
+// 	return ((C.void (*) (*C.AtkValue, C.gdouble*, *C.gchar*))(fnptr))(carg0, carg1, carg2);
 // }
-// void _gotk4_atk1_Value_virtual_set_value(void* fnptr, AtkValue* carg0, gdouble carg1) {
-// 	return ((void (*) (AtkValue*, gdouble))(fnptr))(carg0, carg1);
+// C.void _gotk4_atk1_Value_virtual_set_value(void* fnptr, *C.AtkValue carg0, C.gdouble carg1) {
+// 	return ((C.void (*) (*C.AtkValue, C.gdouble))(fnptr))(carg0, carg1);
 // }
-// extern gint _gotk4_atk1_Hyperlink_get_end_index(AtkHyperlink*);
-// extern gint _gotk4_atk1_Hyperlink_get_n_anchors(AtkHyperlink*);
-// extern AtkObject* _gotk4_atk1_Hyperlink_get_object(AtkHyperlink*, gint);
-// extern gint _gotk4_atk1_Hyperlink_get_start_index(AtkHyperlink*);
-// extern gchar* _gotk4_atk1_Hyperlink_get_uri(AtkHyperlink*, gint);
-// extern gboolean _gotk4_atk1_Hyperlink_is_valid(AtkHyperlink*);
-// extern void _gotk4_atk1_Hyperlink_link_activated(AtkHyperlink*);
-// extern guint _gotk4_atk1_Hyperlink_link_state(AtkHyperlink*);
-// gint _gotk4_atk1_Hyperlink_virtual_get_end_index(void* fnptr, AtkHyperlink* carg0) {
-// 	return ((gint (*) (AtkHyperlink*))(fnptr))(carg0);
+// extern C.gint _gotk4_atk1_Hyperlink_get_end_index(*C.AtkHyperlink);
+// extern C.gint _gotk4_atk1_Hyperlink_get_n_anchors(*C.AtkHyperlink);
+// extern *C.AtkObject _gotk4_atk1_Hyperlink_get_object(*C.AtkHyperlink, C.gint);
+// extern C.gint _gotk4_atk1_Hyperlink_get_start_index(*C.AtkHyperlink);
+// extern *C.gchar _gotk4_atk1_Hyperlink_get_uri(*C.AtkHyperlink, C.gint);
+// extern C.gboolean _gotk4_atk1_Hyperlink_is_valid(*C.AtkHyperlink);
+// extern C.void _gotk4_atk1_Hyperlink_link_activated(*C.AtkHyperlink);
+// extern C.guint _gotk4_atk1_Hyperlink_link_state(*C.AtkHyperlink);
+// C.gint _gotk4_atk1_Hyperlink_virtual_get_end_index(void* fnptr, *C.AtkHyperlink carg0) {
+// 	return ((C.gint (*) (*C.AtkHyperlink))(fnptr))(carg0);
 // }
-// gint _gotk4_atk1_Hyperlink_virtual_get_n_anchors(void* fnptr, AtkHyperlink* carg0) {
-// 	return ((gint (*) (AtkHyperlink*))(fnptr))(carg0);
+// C.gint _gotk4_atk1_Hyperlink_virtual_get_n_anchors(void* fnptr, *C.AtkHyperlink carg0) {
+// 	return ((C.gint (*) (*C.AtkHyperlink))(fnptr))(carg0);
 // }
-// AtkObject* _gotk4_atk1_Hyperlink_virtual_get_object(void* fnptr, AtkHyperlink* carg0, gint carg1) {
-// 	return ((AtkObject* (*) (AtkHyperlink*, gint))(fnptr))(carg0, carg1);
+// *C.AtkObject _gotk4_atk1_Hyperlink_virtual_get_object(void* fnptr, *C.AtkHyperlink carg0, C.gint carg1) {
+// 	return ((*C.AtkObject (*) (*C.AtkHyperlink, C.gint))(fnptr))(carg0, carg1);
 // }
-// gint _gotk4_atk1_Hyperlink_virtual_get_start_index(void* fnptr, AtkHyperlink* carg0) {
-// 	return ((gint (*) (AtkHyperlink*))(fnptr))(carg0);
+// C.gint _gotk4_atk1_Hyperlink_virtual_get_start_index(void* fnptr, *C.AtkHyperlink carg0) {
+// 	return ((C.gint (*) (*C.AtkHyperlink))(fnptr))(carg0);
 // }
-// gchar* _gotk4_atk1_Hyperlink_virtual_get_uri(void* fnptr, AtkHyperlink* carg0, gint carg1) {
-// 	return ((gchar* (*) (AtkHyperlink*, gint))(fnptr))(carg0, carg1);
+// *C.gchar _gotk4_atk1_Hyperlink_virtual_get_uri(void* fnptr, *C.AtkHyperlink carg0, C.gint carg1) {
+// 	return ((*C.gchar (*) (*C.AtkHyperlink, C.gint))(fnptr))(carg0, carg1);
 // }
-// gboolean _gotk4_atk1_Hyperlink_virtual_is_valid(void* fnptr, AtkHyperlink* carg0) {
-// 	return ((gboolean (*) (AtkHyperlink*))(fnptr))(carg0);
+// C.gboolean _gotk4_atk1_Hyperlink_virtual_is_valid(void* fnptr, *C.AtkHyperlink carg0) {
+// 	return ((C.gboolean (*) (*C.AtkHyperlink))(fnptr))(carg0);
 // }
-// void _gotk4_atk1_Hyperlink_virtual_link_activated(void* fnptr, AtkHyperlink* carg0) {
-// 	return ((void (*) (AtkHyperlink*))(fnptr))(carg0);
+// C.void _gotk4_atk1_Hyperlink_virtual_link_activated(void* fnptr, *C.AtkHyperlink carg0) {
+// 	return ((C.void (*) (*C.AtkHyperlink))(fnptr))(carg0);
 // }
-// guint _gotk4_atk1_Hyperlink_virtual_link_state(void* fnptr, AtkHyperlink* carg0) {
-// 	return ((guint (*) (AtkHyperlink*))(fnptr))(carg0);
+// C.guint _gotk4_atk1_Hyperlink_virtual_link_state(void* fnptr, *C.AtkHyperlink carg0) {
+// 	return ((C.guint (*) (*C.AtkHyperlink))(fnptr))(carg0);
 // }
-// extern void _gotk4_atk1_Object_focus_event(AtkObject*, gboolean);
-// extern gchar* _gotk4_atk1_Object_get_description(AtkObject*);
-// extern gint _gotk4_atk1_Object_get_index_in_parent(AtkObject*);
-// extern gint _gotk4_atk1_Object_get_n_children(AtkObject*);
-// extern gchar* _gotk4_atk1_Object_get_name(AtkObject*);
-// extern gchar* _gotk4_atk1_Object_get_object_locale(AtkObject*);
-// extern AtkObject* _gotk4_atk1_Object_get_parent(AtkObject*);
-// extern AtkRole _gotk4_atk1_Object_get_role(AtkObject*);
-// extern void _gotk4_atk1_Object_property_change(AtkObject*, AtkPropertyValues*);
-// extern AtkRelationSet* _gotk4_atk1_Object_ref_relation_set(AtkObject*);
-// extern AtkStateSet* _gotk4_atk1_Object_ref_state_set(AtkObject*);
-// extern void _gotk4_atk1_Object_set_description(AtkObject*, gchar*);
-// extern void _gotk4_atk1_Object_set_name(AtkObject*, gchar*);
-// extern void _gotk4_atk1_Object_set_parent(AtkObject*, AtkObject*);
-// extern void _gotk4_atk1_Object_set_role(AtkObject*, AtkRole);
-// extern void _gotk4_atk1_Object_state_change(AtkObject*, gchar*, gboolean);
-// extern void _gotk4_atk1_Object_visible_data_changed(AtkObject*);
-// void _gotk4_atk1_Object_virtual_focus_event(void* fnptr, AtkObject* carg0, gboolean carg1) {
-// 	return ((void (*) (AtkObject*, gboolean))(fnptr))(carg0, carg1);
+// extern C.void _gotk4_atk1_Object_focus_event(*C.AtkObject, C.gboolean);
+// extern *C.gchar _gotk4_atk1_Object_get_description(*C.AtkObject);
+// extern C.gint _gotk4_atk1_Object_get_index_in_parent(*C.AtkObject);
+// extern C.gint _gotk4_atk1_Object_get_n_children(*C.AtkObject);
+// extern *C.gchar _gotk4_atk1_Object_get_name(*C.AtkObject);
+// extern *C.gchar _gotk4_atk1_Object_get_object_locale(*C.AtkObject);
+// extern *C.AtkObject _gotk4_atk1_Object_get_parent(*C.AtkObject);
+// extern C.AtkRole _gotk4_atk1_Object_get_role(*C.AtkObject);
+// extern C.void _gotk4_atk1_Object_property_change(*C.AtkObject, *C.AtkPropertyValues);
+// extern *C.AtkRelationSet _gotk4_atk1_Object_ref_relation_set(*C.AtkObject);
+// extern *C.AtkStateSet _gotk4_atk1_Object_ref_state_set(*C.AtkObject);
+// extern C.void _gotk4_atk1_Object_set_description(*C.AtkObject, *C.gchar);
+// extern C.void _gotk4_atk1_Object_set_name(*C.AtkObject, *C.gchar);
+// extern C.void _gotk4_atk1_Object_set_parent(*C.AtkObject, *C.AtkObject);
+// extern C.void _gotk4_atk1_Object_set_role(*C.AtkObject, C.AtkRole);
+// extern C.void _gotk4_atk1_Object_state_change(*C.AtkObject, *C.gchar, C.gboolean);
+// extern C.void _gotk4_atk1_Object_visible_data_changed(*C.AtkObject);
+// C.void _gotk4_atk1_Object_virtual_focus_event(void* fnptr, *C.AtkObject carg0, C.gboolean carg1) {
+// 	return ((C.void (*) (*C.AtkObject, C.gboolean))(fnptr))(carg0, carg1);
 // }
-// gchar* _gotk4_atk1_Object_virtual_get_description(void* fnptr, AtkObject* carg0) {
-// 	return ((gchar* (*) (AtkObject*))(fnptr))(carg0);
+// *C.gchar _gotk4_atk1_Object_virtual_get_description(void* fnptr, *C.AtkObject carg0) {
+// 	return ((*C.gchar (*) (*C.AtkObject))(fnptr))(carg0);
 // }
-// gint _gotk4_atk1_Object_virtual_get_index_in_parent(void* fnptr, AtkObject* carg0) {
-// 	return ((gint (*) (AtkObject*))(fnptr))(carg0);
+// C.gint _gotk4_atk1_Object_virtual_get_index_in_parent(void* fnptr, *C.AtkObject carg0) {
+// 	return ((C.gint (*) (*C.AtkObject))(fnptr))(carg0);
 // }
-// gint _gotk4_atk1_Object_virtual_get_n_children(void* fnptr, AtkObject* carg0) {
-// 	return ((gint (*) (AtkObject*))(fnptr))(carg0);
+// C.gint _gotk4_atk1_Object_virtual_get_n_children(void* fnptr, *C.AtkObject carg0) {
+// 	return ((C.gint (*) (*C.AtkObject))(fnptr))(carg0);
 // }
-// gchar* _gotk4_atk1_Object_virtual_get_name(void* fnptr, AtkObject* carg0) {
-// 	return ((gchar* (*) (AtkObject*))(fnptr))(carg0);
+// *C.gchar _gotk4_atk1_Object_virtual_get_name(void* fnptr, *C.AtkObject carg0) {
+// 	return ((*C.gchar (*) (*C.AtkObject))(fnptr))(carg0);
 // }
-// gchar* _gotk4_atk1_Object_virtual_get_object_locale(void* fnptr, AtkObject* carg0) {
-// 	return ((gchar* (*) (AtkObject*))(fnptr))(carg0);
+// *C.gchar _gotk4_atk1_Object_virtual_get_object_locale(void* fnptr, *C.AtkObject carg0) {
+// 	return ((*C.gchar (*) (*C.AtkObject))(fnptr))(carg0);
 // }
-// AtkObject* _gotk4_atk1_Object_virtual_get_parent(void* fnptr, AtkObject* carg0) {
-// 	return ((AtkObject* (*) (AtkObject*))(fnptr))(carg0);
+// *C.AtkObject _gotk4_atk1_Object_virtual_get_parent(void* fnptr, *C.AtkObject carg0) {
+// 	return ((*C.AtkObject (*) (*C.AtkObject))(fnptr))(carg0);
 // }
-// AtkRole _gotk4_atk1_Object_virtual_get_role(void* fnptr, AtkObject* carg0) {
-// 	return ((AtkRole (*) (AtkObject*))(fnptr))(carg0);
+// C.AtkRole _gotk4_atk1_Object_virtual_get_role(void* fnptr, *C.AtkObject carg0) {
+// 	return ((C.AtkRole (*) (*C.AtkObject))(fnptr))(carg0);
 // }
-// void _gotk4_atk1_Object_virtual_property_change(void* fnptr, AtkObject* carg0, AtkPropertyValues* carg1) {
-// 	return ((void (*) (AtkObject*, AtkPropertyValues*))(fnptr))(carg0, carg1);
+// C.void _gotk4_atk1_Object_virtual_property_change(void* fnptr, *C.AtkObject carg0, *C.AtkPropertyValues carg1) {
+// 	return ((C.void (*) (*C.AtkObject, *C.AtkPropertyValues))(fnptr))(carg0, carg1);
 // }
-// AtkRelationSet* _gotk4_atk1_Object_virtual_ref_relation_set(void* fnptr, AtkObject* carg0) {
-// 	return ((AtkRelationSet* (*) (AtkObject*))(fnptr))(carg0);
+// *C.AtkRelationSet _gotk4_atk1_Object_virtual_ref_relation_set(void* fnptr, *C.AtkObject carg0) {
+// 	return ((*C.AtkRelationSet (*) (*C.AtkObject))(fnptr))(carg0);
 // }
-// AtkStateSet* _gotk4_atk1_Object_virtual_ref_state_set(void* fnptr, AtkObject* carg0) {
-// 	return ((AtkStateSet* (*) (AtkObject*))(fnptr))(carg0);
+// *C.AtkStateSet _gotk4_atk1_Object_virtual_ref_state_set(void* fnptr, *C.AtkObject carg0) {
+// 	return ((*C.AtkStateSet (*) (*C.AtkObject))(fnptr))(carg0);
 // }
-// void _gotk4_atk1_Object_virtual_set_description(void* fnptr, AtkObject* carg0, gchar* carg1) {
-// 	return ((void (*) (AtkObject*, gchar*))(fnptr))(carg0, carg1);
+// C.void _gotk4_atk1_Object_virtual_set_description(void* fnptr, *C.AtkObject carg0, *C.gchar carg1) {
+// 	return ((C.void (*) (*C.AtkObject, *C.gchar))(fnptr))(carg0, carg1);
 // }
-// void _gotk4_atk1_Object_virtual_set_name(void* fnptr, AtkObject* carg0, gchar* carg1) {
-// 	return ((void (*) (AtkObject*, gchar*))(fnptr))(carg0, carg1);
+// C.void _gotk4_atk1_Object_virtual_set_name(void* fnptr, *C.AtkObject carg0, *C.gchar carg1) {
+// 	return ((C.void (*) (*C.AtkObject, *C.gchar))(fnptr))(carg0, carg1);
 // }
-// void _gotk4_atk1_Object_virtual_set_parent(void* fnptr, AtkObject* carg0, AtkObject* carg1) {
-// 	return ((void (*) (AtkObject*, AtkObject*))(fnptr))(carg0, carg1);
+// C.void _gotk4_atk1_Object_virtual_set_parent(void* fnptr, *C.AtkObject carg0, *C.AtkObject carg1) {
+// 	return ((C.void (*) (*C.AtkObject, *C.AtkObject))(fnptr))(carg0, carg1);
 // }
-// void _gotk4_atk1_Object_virtual_set_role(void* fnptr, AtkObject* carg0, AtkRole carg1) {
-// 	return ((void (*) (AtkObject*, AtkRole))(fnptr))(carg0, carg1);
+// C.void _gotk4_atk1_Object_virtual_set_role(void* fnptr, *C.AtkObject carg0, C.AtkRole carg1) {
+// 	return ((C.void (*) (*C.AtkObject, C.AtkRole))(fnptr))(carg0, carg1);
 // }
-// void _gotk4_atk1_Object_virtual_state_change(void* fnptr, AtkObject* carg0, gchar* carg1, gboolean carg2) {
-// 	return ((void (*) (AtkObject*, gchar*, gboolean))(fnptr))(carg0, carg1, carg2);
+// C.void _gotk4_atk1_Object_virtual_state_change(void* fnptr, *C.AtkObject carg0, *C.gchar carg1, C.gboolean carg2) {
+// 	return ((C.void (*) (*C.AtkObject, *C.gchar, C.gboolean))(fnptr))(carg0, carg1, carg2);
 // }
-// void _gotk4_atk1_Object_virtual_visible_data_changed(void* fnptr, AtkObject* carg0) {
-// 	return ((void (*) (AtkObject*))(fnptr))(carg0);
+// C.void _gotk4_atk1_Object_virtual_visible_data_changed(void* fnptr, *C.AtkObject carg0) {
+// 	return ((C.void (*) (*C.AtkObject))(fnptr))(carg0);
 // }
-// extern void _gotk4_atk1_ObjectFactory_invalidate(AtkObjectFactory*);
-// void _gotk4_atk1_ObjectFactory_virtual_invalidate(void* fnptr, AtkObjectFactory* carg0) {
-// 	return ((void (*) (AtkObjectFactory*))(fnptr))(carg0);
+// extern C.void _gotk4_atk1_ObjectFactory_invalidate(*C.AtkObjectFactory);
+// C.void _gotk4_atk1_ObjectFactory_virtual_invalidate(void* fnptr, *C.AtkObjectFactory carg0) {
+// 	return ((C.void (*) (*C.AtkObjectFactory))(fnptr))(carg0);
 // }
-// extern gchar* _gotk4_atk1_Plug_get_object_id(AtkPlug*);
-// gchar* _gotk4_atk1_Plug_virtual_get_object_id(void* fnptr, AtkPlug* carg0) {
-// 	return ((gchar* (*) (AtkPlug*))(fnptr))(carg0);
+// extern *C.gchar _gotk4_atk1_Plug_get_object_id(*C.AtkPlug);
+// *C.gchar _gotk4_atk1_Plug_virtual_get_object_id(void* fnptr, *C.AtkPlug carg0) {
+// 	return ((*C.gchar (*) (*C.AtkPlug))(fnptr))(carg0);
 // }
-// extern void _gotk4_atk1_Socket_embed(AtkSocket*, gchar*);
-// void _gotk4_atk1_Socket_virtual_embed(void* fnptr, AtkSocket* carg0, gchar* carg1) {
-// 	return ((void (*) (AtkSocket*, gchar*))(fnptr))(carg0, carg1);
+// extern C.void _gotk4_atk1_Socket_embed(*C.AtkSocket, *C.gchar);
+// C.void _gotk4_atk1_Socket_virtual_embed(void* fnptr, *C.AtkSocket carg0, *C.gchar carg1) {
+// 	return ((C.void (*) (*C.AtkSocket, *C.gchar))(fnptr))(carg0, carg1);
 // }
 import "C"
 
@@ -3480,7 +3480,7 @@ func RemoveKeyEventListener(listenerId uint) {
 // ActionInstance is the instance type used by all types implementing AtkAction. It is used internally by the bindings. Users should use the interface [Action] instead.
 type ActionInstance struct {
 	_ [0]func() // equal guard
-	gobject.ObjectInstance
+	Instance gobject.ObjectInstance
 }
 
 var _ Action = (*ActionInstance)(nil)
@@ -3508,7 +3508,6 @@ var _ Action = (*ActionInstance)(nil)
 // exposing redundant actions if possible.  By convention we have been
 // using "mouse centric" terminology for #AtkAction names.
 type Action interface {
-	gobject.Object
 	upcastToAtkAction() *ActionInstance
 
 	// DoAction wraps atk_action_do_action
@@ -3632,7 +3631,8 @@ type Action interface {
 	// chain up virtual methods:
 
 	// ParentDoAction calls the default implementations of the do_action virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- i int32: the action index corresponding to the action to be performed 
@@ -3644,7 +3644,8 @@ type Action interface {
 	// Perform the specified action on the object.
 	ParentDoAction(i int32) bool
 	// ParentGetDescription calls the default implementations of the get_description virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- i int32: the action index corresponding to the action to be performed 
@@ -3656,7 +3657,8 @@ type Action interface {
 	// Returns a description of the specified action of the object.
 	ParentGetDescription(i int32) string
 	// ParentGetKeybinding calls the default implementations of the get_keybinding virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- i int32: the action index corresponding to the action to be performed 
@@ -3689,7 +3691,8 @@ type Action interface {
 	// it would be represented by ";;Ctrl+N" and ";;Strg+N" respectively.
 	ParentGetKeybinding(i int32) string
 	// ParentGetLocalizedName calls the default implementations of the get_localized_name virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- i int32: the action index corresponding to the action to be performed 
@@ -3701,7 +3704,8 @@ type Action interface {
 	// Returns the localized name of the specified action of the object.
 	ParentGetLocalizedName(i int32) string
 	// ParentGetNActions calls the default implementations of the get_n_actions virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
@@ -3711,7 +3715,8 @@ type Action interface {
 	// "default" action of the object.
 	ParentGetNActions() int32
 	// ParentGetName calls the default implementations of the get_name virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- i int32: the action index corresponding to the action to be performed 
@@ -3736,7 +3741,8 @@ type Action interface {
 	// NIL.
 	ParentGetName(i int32) string
 	// ParentSetDescription calls the default implementations of the set_description virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- i int32: the action index corresponding to the action to be performed 
@@ -3754,7 +3760,7 @@ var _ Action = (*ActionInstance)(nil)
 
 func unsafeWrapAction(base *gobject.ObjectInstance) *ActionInstance {
 	return &ActionInstance{
-		ObjectInstance: *base,
+		Instance: *base,
 	}
 }
 
@@ -3784,13 +3790,13 @@ func UnsafeActionFromGlibBorrow(c unsafe.Pointer) Action {
 // UnsafeActionToGlibNone is used to convert the instance to it's C value AtkAction. This is used by the bindings internally.
 func UnsafeActionToGlibNone(c Action) unsafe.Pointer {
 	i := c.upcastToAtkAction()
-	return gobject.UnsafeObjectToGlibNone(i)
+	return gobject.UnsafeObjectToGlibNone(&i.Instance)
 }
 
 // UnsafeActionToGlibFull is used to convert the instance to it's C value AtkAction, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeActionToGlibFull(c Action) unsafe.Pointer {
 	i := c.upcastToAtkAction()
-	return gobject.UnsafeObjectToGlibFull(i)
+	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
 // DoAction wraps atk_action_do_action
@@ -4052,7 +4058,8 @@ func (action *ActionInstance) SetActionDescription(i int32, desc string) bool {
 // ActionOverrides is the struct used to override the default implementation of virtual methods.
 // it is generic over the extending instance type.
 type ActionOverrides[Instance Action] struct {
-	// DoAction allows you to override the implementation of the virtual method do_action.
+	// // DoAction allows you to override the implementation of the virtual method do_action.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- i int32: the action index corresponding to the action to be performed 
@@ -4063,7 +4070,8 @@ type ActionOverrides[Instance Action] struct {
 	//
 	// Perform the specified action on the object.
 	DoAction func(Instance, int32) bool
-	// GetDescription allows you to override the implementation of the virtual method get_description.
+	// // GetDescription allows you to override the implementation of the virtual method get_description.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- i int32: the action index corresponding to the action to be performed 
@@ -4074,7 +4082,8 @@ type ActionOverrides[Instance Action] struct {
 	//
 	// Returns a description of the specified action of the object.
 	GetDescription func(Instance, int32) string
-	// GetKeybinding allows you to override the implementation of the virtual method get_keybinding.
+	// // GetKeybinding allows you to override the implementation of the virtual method get_keybinding.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- i int32: the action index corresponding to the action to be performed 
@@ -4106,7 +4115,8 @@ type ActionOverrides[Instance Action] struct {
 	// for the German locale. If, hypothetically, this menu item lacked a mnemonic,
 	// it would be represented by ";;Ctrl+N" and ";;Strg+N" respectively.
 	GetKeybinding func(Instance, int32) string
-	// GetLocalizedName allows you to override the implementation of the virtual method get_localized_name.
+	// // GetLocalizedName allows you to override the implementation of the virtual method get_localized_name.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- i int32: the action index corresponding to the action to be performed 
@@ -4117,7 +4127,8 @@ type ActionOverrides[Instance Action] struct {
 	//
 	// Returns the localized name of the specified action of the object.
 	GetLocalizedName func(Instance, int32) string
-	// GetNActions allows you to override the implementation of the virtual method get_n_actions.
+	// // GetNActions allows you to override the implementation of the virtual method get_n_actions.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
@@ -4126,7 +4137,8 @@ type ActionOverrides[Instance Action] struct {
 	// If there are more than one, the first one is considered the
 	// "default" action of the object.
 	GetNActions func(Instance) int32
-	// GetName allows you to override the implementation of the virtual method get_name.
+	// // GetName allows you to override the implementation of the virtual method get_name.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- i int32: the action index corresponding to the action to be performed 
@@ -4150,7 +4162,8 @@ type ActionOverrides[Instance Action] struct {
 	// i.e. the result of some actions via atk_action_do_action() may be
 	// NIL.
 	GetName func(Instance, int32) string
-	// SetDescription allows you to override the implementation of the virtual method set_description.
+	// // SetDescription allows you to override the implementation of the virtual method set_description.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- i int32: the action index corresponding to the action to be performed 
@@ -4341,7 +4354,8 @@ func UnsafeApplyActionOverrides[Instance Action](gclass unsafe.Pointer, override
 }
 
 // ParentDoAction calls the default implementations of the do_action virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- i int32: the action index corresponding to the action to be performed 
@@ -4374,7 +4388,8 @@ func (action *ActionInstance) ParentDoAction(i int32) bool {
 }
 
 // ParentGetDescription calls the default implementations of the get_description virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- i int32: the action index corresponding to the action to be performed 
@@ -4407,7 +4422,8 @@ func (action *ActionInstance) ParentGetDescription(i int32) string {
 }
 
 // ParentGetKeybinding calls the default implementations of the get_keybinding virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- i int32: the action index corresponding to the action to be performed 
@@ -4461,7 +4477,8 @@ func (action *ActionInstance) ParentGetKeybinding(i int32) string {
 }
 
 // ParentGetLocalizedName calls the default implementations of the get_localized_name virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- i int32: the action index corresponding to the action to be performed 
@@ -4494,7 +4511,8 @@ func (action *ActionInstance) ParentGetLocalizedName(i int32) string {
 }
 
 // ParentGetNActions calls the default implementations of the get_n_actions virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret int32 
@@ -4519,7 +4537,8 @@ func (action *ActionInstance) ParentGetNActions() int32 {
 }
 
 // ParentGetName calls the default implementations of the get_name virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- i int32: the action index corresponding to the action to be performed 
@@ -4565,7 +4584,8 @@ func (action *ActionInstance) ParentGetName(i int32) string {
 }
 
 // ParentSetDescription calls the default implementations of the set_description virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- i int32: the action index corresponding to the action to be performed 
@@ -4605,7 +4625,7 @@ func (action *ActionInstance) ParentSetDescription(i int32, desc string) bool {
 // ComponentInstance is the instance type used by all types implementing AtkComponent. It is used internally by the bindings. Users should use the interface [Component] instead.
 type ComponentInstance struct {
 	_ [0]func() // equal guard
-	gobject.ObjectInstance
+	Instance gobject.ObjectInstance
 }
 
 var _ Component = (*ComponentInstance)(nil)
@@ -4627,7 +4647,6 @@ var _ Component = (*ComponentInstance)(nil)
 // transparent background, in which case text glyph bounding box
 // information is provided by #AtkText.
 type Component interface {
-	gobject.Object
 	upcastToAtkComponent() *ComponentInstance
 
 	// Contains wraps atk_component_contains
@@ -4808,13 +4827,15 @@ type Component interface {
 	// chain up virtual methods:
 
 	// ParentBoundsChanged calls the default implementations of the bounds_changed virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- bounds *Rectangle 
 	ParentBoundsChanged(bounds *Rectangle)
 	// ParentContains calls the default implementations of the contains virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- x int32: x coordinate 
@@ -4833,7 +4854,8 @@ type Component interface {
 	// re-implement it.
 	ParentContains(x int32, y int32, coordType CoordType) bool
 	// ParentGetAlpha calls the default implementations of the get_alpha virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret float64 
@@ -4843,7 +4865,8 @@ type Component interface {
 	// (fully opaque).
 	ParentGetAlpha() float64
 	// ParentGetExtents calls the default implementations of the get_extents virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- coordType CoordType: specifies whether the coordinates are relative to the screen
@@ -4862,7 +4885,8 @@ type Component interface {
 	// support), all of x, y, width, height are set to -1.
 	ParentGetExtents(coordType CoordType) (int32, int32, int32, int32)
 	// ParentGetLayer calls the default implementations of the get_layer virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Layer 
@@ -4870,7 +4894,8 @@ type Component interface {
 	// Gets the layer of the component.
 	ParentGetLayer() Layer
 	// ParentGetMDIZOrder calls the default implementations of the get_mdi_zorder virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
@@ -4879,7 +4904,8 @@ type Component interface {
 	// if the layer of the component is not ATK_LAYER_MDI or ATK_LAYER_WINDOW.
 	ParentGetMDIZOrder() int32
 	// ParentGrabFocus calls the default implementations of the grab_focus virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
@@ -4887,7 +4913,8 @@ type Component interface {
 	// Grabs focus for this @component.
 	ParentGrabFocus() bool
 	// ParentRefAccessibleAtPoint calls the default implementations of the ref_accessible_at_point virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- x int32: x coordinate 
@@ -4903,7 +4930,8 @@ type Component interface {
 	// coordinate point specified by @x and @y.
 	ParentRefAccessibleAtPoint(x int32, y int32, coordType CoordType) Object
 	// ParentScrollTo calls the default implementations of the scroll_to virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- typ ScrollType: specify where the object should be made visible. 
@@ -4919,7 +4947,8 @@ type Component interface {
 	// object shows up on the screen, given its current position within the parents.
 	ParentScrollTo(typ ScrollType) bool
 	// ParentScrollToPoint calls the default implementations of the scroll_to_point virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- coords CoordType: specify whether coordinates are relative to the screen or to the
@@ -4935,7 +4964,8 @@ type Component interface {
 	// scrolling all necessary parents.
 	ParentScrollToPoint(coords CoordType, x int32, y int32) bool
 	// ParentSetExtents calls the default implementations of the set_extents virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- x int32: x coordinate 
@@ -4952,7 +4982,8 @@ type Component interface {
 	// Sets the extents of @component.
 	ParentSetExtents(x int32, y int32, width int32, height int32, coordType CoordType) bool
 	// ParentSetPosition calls the default implementations of the set_position virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- x int32: x coordinate 
@@ -4970,7 +5001,8 @@ type Component interface {
 	// this just moves @component in its parent.
 	ParentSetPosition(x int32, y int32, coordType CoordType) bool
 	// ParentSetSize calls the default implementations of the set_size virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- width int32: width to set for @component 
@@ -4988,7 +5020,7 @@ var _ Component = (*ComponentInstance)(nil)
 
 func unsafeWrapComponent(base *gobject.ObjectInstance) *ComponentInstance {
 	return &ComponentInstance{
-		ObjectInstance: *base,
+		Instance: *base,
 	}
 }
 
@@ -5018,13 +5050,13 @@ func UnsafeComponentFromGlibBorrow(c unsafe.Pointer) Component {
 // UnsafeComponentToGlibNone is used to convert the instance to it's C value AtkComponent. This is used by the bindings internally.
 func UnsafeComponentToGlibNone(c Component) unsafe.Pointer {
 	i := c.upcastToAtkComponent()
-	return gobject.UnsafeObjectToGlibNone(i)
+	return gobject.UnsafeObjectToGlibNone(&i.Instance)
 }
 
 // UnsafeComponentToGlibFull is used to convert the instance to it's C value AtkComponent, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeComponentToGlibFull(c Component) unsafe.Pointer {
 	i := c.upcastToAtkComponent()
-	return gobject.UnsafeObjectToGlibFull(i)
+	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
 // Contains wraps atk_component_contains
@@ -5469,18 +5501,20 @@ func (component *ComponentInstance) SetSize(width int32, height int32) bool {
 // The 'bounds-changed" signal is emitted when the position or
 // size of the component changes.
 func (o *ComponentInstance) ConnectBoundsChanged(fn func(Component, Rectangle)) gobject.SignalHandle {
-	return o.Connect("bounds-changed", fn)
+	return o.Instance.Connect("bounds-changed", fn)
 }
 
 // ComponentOverrides is the struct used to override the default implementation of virtual methods.
 // it is generic over the extending instance type.
 type ComponentOverrides[Instance Component] struct {
-	// BoundsChanged allows you to override the implementation of the virtual method bounds_changed.
+	// // BoundsChanged allows you to override the implementation of the virtual method bounds_changed.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- bounds *Rectangle 
 	BoundsChanged func(Instance, *Rectangle)
-	// Contains allows you to override the implementation of the virtual method contains.
+	// // Contains allows you to override the implementation of the virtual method contains.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- x int32: x coordinate 
@@ -5498,7 +5532,8 @@ type ComponentOverrides[Instance Component] struct {
 	// this virtual method. In general there are little reason to
 	// re-implement it.
 	Contains func(Instance, int32, int32, CoordType) bool
-	// GetAlpha allows you to override the implementation of the virtual method get_alpha.
+	// // GetAlpha allows you to override the implementation of the virtual method get_alpha.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret float64 
@@ -5507,7 +5542,8 @@ type ComponentOverrides[Instance Component] struct {
 	// @component, on a scale from 0 (fully transparent) to 1.0
 	// (fully opaque).
 	GetAlpha func(Instance) float64
-	// GetExtents allows you to override the implementation of the virtual method get_extents.
+	// // GetExtents allows you to override the implementation of the virtual method get_extents.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- coordType CoordType: specifies whether the coordinates are relative to the screen
@@ -5525,14 +5561,16 @@ type ComponentOverrides[Instance Component] struct {
 	// If the extent can not be obtained (e.g. a non-embedded plug or missing
 	// support), all of x, y, width, height are set to -1.
 	GetExtents func(Instance, CoordType) (int32, int32, int32, int32)
-	// GetLayer allows you to override the implementation of the virtual method get_layer.
+	// // GetLayer allows you to override the implementation of the virtual method get_layer.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Layer 
 	//
 	// Gets the layer of the component.
 	GetLayer func(Instance) Layer
-	// GetMDIZOrder allows you to override the implementation of the virtual method get_mdi_zorder.
+	// // GetMDIZOrder allows you to override the implementation of the virtual method get_mdi_zorder.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
@@ -5540,14 +5578,16 @@ type ComponentOverrides[Instance Component] struct {
 	// Gets the zorder of the component. The value G_MININT will be returned
 	// if the layer of the component is not ATK_LAYER_MDI or ATK_LAYER_WINDOW.
 	GetMDIZOrder func(Instance) int32
-	// GrabFocus allows you to override the implementation of the virtual method grab_focus.
+	// // GrabFocus allows you to override the implementation of the virtual method grab_focus.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
 	//
 	// Grabs focus for this @component.
 	GrabFocus func(Instance) bool
-	// RefAccessibleAtPoint allows you to override the implementation of the virtual method ref_accessible_at_point.
+	// // RefAccessibleAtPoint allows you to override the implementation of the virtual method ref_accessible_at_point.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- x int32: x coordinate 
@@ -5562,7 +5602,8 @@ type ComponentOverrides[Instance Component] struct {
 	// Gets a reference to the accessible child, if one exists, at the
 	// coordinate point specified by @x and @y.
 	RefAccessibleAtPoint func(Instance, int32, int32, CoordType) Object
-	// ScrollTo allows you to override the implementation of the virtual method scroll_to.
+	// // ScrollTo allows you to override the implementation of the virtual method scroll_to.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- typ ScrollType: specify where the object should be made visible. 
@@ -5577,7 +5618,8 @@ type ComponentOverrides[Instance Component] struct {
 	// @component in its parent, this only makes the parents scroll so that the
 	// object shows up on the screen, given its current position within the parents.
 	ScrollTo func(Instance, ScrollType) bool
-	// ScrollToPoint allows you to override the implementation of the virtual method scroll_to_point.
+	// // ScrollToPoint allows you to override the implementation of the virtual method scroll_to_point.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- coords CoordType: specify whether coordinates are relative to the screen or to the
@@ -5592,7 +5634,8 @@ type ComponentOverrides[Instance Component] struct {
 	// Move the top-left of @component to a given position of the screen by
 	// scrolling all necessary parents.
 	ScrollToPoint func(Instance, CoordType, int32, int32) bool
-	// SetExtents allows you to override the implementation of the virtual method set_extents.
+	// // SetExtents allows you to override the implementation of the virtual method set_extents.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- x int32: x coordinate 
@@ -5608,7 +5651,8 @@ type ComponentOverrides[Instance Component] struct {
 	//
 	// Sets the extents of @component.
 	SetExtents func(Instance, int32, int32, int32, int32, CoordType) bool
-	// SetPosition allows you to override the implementation of the virtual method set_position.
+	// // SetPosition allows you to override the implementation of the virtual method set_position.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- x int32: x coordinate 
@@ -5625,7 +5669,8 @@ type ComponentOverrides[Instance Component] struct {
 	// Contrary to atk_component_scroll_to, this does not trigger any scrolling,
 	// this just moves @component in its parent.
 	SetPosition func(Instance, int32, int32, CoordType) bool
-	// SetSize allows you to override the implementation of the virtual method set_size.
+	// // SetSize allows you to override the implementation of the virtual method set_size.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- width int32: width to set for @component 
@@ -5965,7 +6010,8 @@ func UnsafeApplyComponentOverrides[Instance Component](gclass unsafe.Pointer, ov
 }
 
 // ParentBoundsChanged calls the default implementations of the bounds_changed virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- bounds *Rectangle 
@@ -5983,7 +6029,8 @@ func (component *ComponentInstance) ParentBoundsChanged(bounds *Rectangle) {
 }
 
 // ParentContains calls the default implementations of the contains virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- x int32: x coordinate 
@@ -6029,7 +6076,8 @@ func (component *ComponentInstance) ParentContains(x int32, y int32, coordType C
 }
 
 // ParentGetAlpha calls the default implementations of the get_alpha virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret float64 
@@ -6054,7 +6102,8 @@ func (component *ComponentInstance) ParentGetAlpha() float64 {
 }
 
 // ParentGetExtents calls the default implementations of the get_extents virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- coordType CoordType: specifies whether the coordinates are relative to the screen
@@ -6101,7 +6150,8 @@ func (component *ComponentInstance) ParentGetExtents(coordType CoordType) (int32
 }
 
 // ParentGetLayer calls the default implementations of the get_layer virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret Layer 
@@ -6124,7 +6174,8 @@ func (component *ComponentInstance) ParentGetLayer() Layer {
 }
 
 // ParentGetMDIZOrder calls the default implementations of the get_mdi_zorder virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret int32 
@@ -6148,7 +6199,8 @@ func (component *ComponentInstance) ParentGetMDIZOrder() int32 {
 }
 
 // ParentGrabFocus calls the default implementations of the grab_focus virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -6173,7 +6225,8 @@ func (component *ComponentInstance) ParentGrabFocus() bool {
 }
 
 // ParentRefAccessibleAtPoint calls the default implementations of the ref_accessible_at_point virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- x int32: x coordinate 
@@ -6216,7 +6269,8 @@ func (component *ComponentInstance) ParentRefAccessibleAtPoint(x int32, y int32,
 }
 
 // ParentScrollTo calls the default implementations of the scroll_to virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- typ ScrollType: specify where the object should be made visible. 
@@ -6253,7 +6307,8 @@ func (component *ComponentInstance) ParentScrollTo(typ ScrollType) bool {
 }
 
 // ParentScrollToPoint calls the default implementations of the scroll_to_point virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- coords CoordType: specify whether coordinates are relative to the screen or to the
@@ -6296,7 +6351,8 @@ func (component *ComponentInstance) ParentScrollToPoint(coords CoordType, x int3
 }
 
 // ParentSetExtents calls the default implementations of the set_extents virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- x int32: x coordinate 
@@ -6346,7 +6402,8 @@ func (component *ComponentInstance) ParentSetExtents(x int32, y int32, width int
 }
 
 // ParentSetPosition calls the default implementations of the set_position virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- x int32: x coordinate 
@@ -6391,7 +6448,8 @@ func (component *ComponentInstance) ParentSetPosition(x int32, y int32, coordTyp
 }
 
 // ParentSetSize calls the default implementations of the set_size virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- width int32: width to set for @component 
@@ -6430,7 +6488,7 @@ func (component *ComponentInstance) ParentSetSize(width int32, height int32) boo
 // DocumentInstance is the instance type used by all types implementing AtkDocument. It is used internally by the bindings. Users should use the interface [Document] instead.
 type DocumentInstance struct {
 	_ [0]func() // equal guard
-	gobject.ObjectInstance
+	Instance gobject.ObjectInstance
 }
 
 var _ Document = (*DocumentInstance)(nil)
@@ -6448,7 +6506,6 @@ var _ Document = (*DocumentInstance)(nil)
 // cases where one document contains "embedded content" which can
 // reasonably be considered a document in its own right.
 type Document interface {
-	gobject.Object
 	upcastToAtkDocument() *DocumentInstance
 
 	// GetAttributeValue wraps atk_document_get_attribute_value
@@ -6539,7 +6596,8 @@ type Document interface {
 	// chain up virtual methods:
 
 	// ParentGetCurrentPageNumber calls the default implementations of the get_current_page_number virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
@@ -6547,7 +6605,8 @@ type Document interface {
 	// Retrieves the current page number inside @document.
 	ParentGetCurrentPageNumber() int32
 	// ParentGetDocumentAttributeValue calls the default implementations of the get_document_attribute_value virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- attributeName string: a character string representing the name of the attribute
@@ -6560,7 +6619,8 @@ type Document interface {
 	// Retrieves the value of the given @attribute_name inside @document.
 	ParentGetDocumentAttributeValue(attributeName string) string
 	// ParentGetPageCount calls the default implementations of the get_page_count virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
@@ -6568,7 +6628,8 @@ type Document interface {
 	// Retrieves the total number of pages inside @document.
 	ParentGetPageCount() int32
 	// ParentSetDocumentAttribute calls the default implementations of the set_document_attribute virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- attributeName string: a character string representing the name of the attribute
@@ -6587,7 +6648,7 @@ var _ Document = (*DocumentInstance)(nil)
 
 func unsafeWrapDocument(base *gobject.ObjectInstance) *DocumentInstance {
 	return &DocumentInstance{
-		ObjectInstance: *base,
+		Instance: *base,
 	}
 }
 
@@ -6617,13 +6678,13 @@ func UnsafeDocumentFromGlibBorrow(c unsafe.Pointer) Document {
 // UnsafeDocumentToGlibNone is used to convert the instance to it's C value AtkDocument. This is used by the bindings internally.
 func UnsafeDocumentToGlibNone(c Document) unsafe.Pointer {
 	i := c.upcastToAtkDocument()
-	return gobject.UnsafeObjectToGlibNone(i)
+	return gobject.UnsafeObjectToGlibNone(&i.Instance)
 }
 
 // UnsafeDocumentToGlibFull is used to convert the instance to it's C value AtkDocument, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeDocumentToGlibFull(c Document) unsafe.Pointer {
 	i := c.upcastToAtkDocument()
-	return gobject.UnsafeObjectToGlibFull(i)
+	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
 // GetAttributeValue wraps atk_document_get_attribute_value
@@ -6751,7 +6812,7 @@ func (document *DocumentInstance) SetAttributeValue(attributeName string, attrib
 // change to one of the document attributes returned by
 // atk_document_get_attributes.
 func (o *DocumentInstance) ConnectDocumentAttributeChanged(fn func(Document, string, string)) gobject.SignalHandle {
-	return o.Connect("document-attribute-changed", fn)
+	return o.Instance.Connect("document-attribute-changed", fn)
 }
 
 // ConnectLoadComplete connects the provided callback to the "load-complete" signal
@@ -6766,7 +6827,7 @@ func (o *DocumentInstance) ConnectDocumentAttributeChanged(fn func(Document, str
 // (Dynamic document contents should be exposed via other
 // signals.)
 func (o *DocumentInstance) ConnectLoadComplete(fn func(Document)) gobject.SignalHandle {
-	return o.Connect("load-complete", fn)
+	return o.Instance.Connect("load-complete", fn)
 }
 
 // ConnectLoadStopped connects the provided callback to the "load-stopped" signal
@@ -6778,7 +6839,7 @@ func (o *DocumentInstance) ConnectLoadComplete(fn func(Document)) gobject.Signal
 // while blocking on a file or network read) unless a
 // user-significant timeout has occurred.
 func (o *DocumentInstance) ConnectLoadStopped(fn func(Document)) gobject.SignalHandle {
-	return o.Connect("load-stopped", fn)
+	return o.Instance.Connect("load-stopped", fn)
 }
 
 // ConnectPageChanged connects the provided callback to the "page-changed" signal
@@ -6787,7 +6848,7 @@ func (o *DocumentInstance) ConnectLoadStopped(fn func(Document)) gobject.SignalH
 // a document changes, e.g. pressing page up/down in a document
 // viewer.
 func (o *DocumentInstance) ConnectPageChanged(fn func(Document, int32)) gobject.SignalHandle {
-	return o.Connect("page-changed", fn)
+	return o.Instance.Connect("page-changed", fn)
 }
 
 // ConnectReload connects the provided callback to the "reload" signal
@@ -6798,20 +6859,22 @@ func (o *DocumentInstance) ConnectPageChanged(fn func(Document, int32)) gobject.
 // signal should follow, which clients may await before
 // interrogating ATK for the latest document content.
 func (o *DocumentInstance) ConnectReload(fn func(Document)) gobject.SignalHandle {
-	return o.Connect("reload", fn)
+	return o.Instance.Connect("reload", fn)
 }
 
 // DocumentOverrides is the struct used to override the default implementation of virtual methods.
 // it is generic over the extending instance type.
 type DocumentOverrides[Instance Document] struct {
-	// GetCurrentPageNumber allows you to override the implementation of the virtual method get_current_page_number.
+	// // GetCurrentPageNumber allows you to override the implementation of the virtual method get_current_page_number.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
 	//
 	// Retrieves the current page number inside @document.
 	GetCurrentPageNumber func(Instance) int32
-	// GetDocumentAttributeValue allows you to override the implementation of the virtual method get_document_attribute_value.
+	// // GetDocumentAttributeValue allows you to override the implementation of the virtual method get_document_attribute_value.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- attributeName string: a character string representing the name of the attribute
@@ -6823,14 +6886,16 @@ type DocumentOverrides[Instance Document] struct {
 	//
 	// Retrieves the value of the given @attribute_name inside @document.
 	GetDocumentAttributeValue func(Instance, string) string
-	// GetPageCount allows you to override the implementation of the virtual method get_page_count.
+	// // GetPageCount allows you to override the implementation of the virtual method get_page_count.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
 	//
 	// Retrieves the total number of pages inside @document.
 	GetPageCount func(Instance) int32
-	// SetDocumentAttribute allows you to override the implementation of the virtual method set_document_attribute.
+	// // SetDocumentAttribute allows you to override the implementation of the virtual method set_document_attribute.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- attributeName string: a character string representing the name of the attribute
@@ -6943,7 +7008,8 @@ func UnsafeApplyDocumentOverrides[Instance Document](gclass unsafe.Pointer, over
 }
 
 // ParentGetCurrentPageNumber calls the default implementations of the get_current_page_number virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret int32 
@@ -6966,7 +7032,8 @@ func (document *DocumentInstance) ParentGetCurrentPageNumber() int32 {
 }
 
 // ParentGetDocumentAttributeValue calls the default implementations of the get_document_attribute_value virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- attributeName string: a character string representing the name of the attribute
@@ -7001,7 +7068,8 @@ func (document *DocumentInstance) ParentGetDocumentAttributeValue(attributeName 
 }
 
 // ParentGetPageCount calls the default implementations of the get_page_count virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret int32 
@@ -7024,7 +7092,8 @@ func (document *DocumentInstance) ParentGetPageCount() int32 {
 }
 
 // ParentSetDocumentAttribute calls the default implementations of the set_document_attribute virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- attributeName string: a character string representing the name of the attribute
@@ -7066,7 +7135,7 @@ func (document *DocumentInstance) ParentSetDocumentAttribute(attributeName strin
 // EditableTextInstance is the instance type used by all types implementing AtkEditableText. It is used internally by the bindings. Users should use the interface [EditableText] instead.
 type EditableTextInstance struct {
 	_ [0]func() // equal guard
-	gobject.ObjectInstance
+	Instance gobject.ObjectInstance
 }
 
 var _ EditableText = (*EditableTextInstance)(nil)
@@ -7085,7 +7154,6 @@ var _ EditableText = (*EditableTextInstance)(nil)
 // 
 // See [iface@AtkText]
 type EditableText interface {
-	gobject.Object
 	upcastToAtkEditableText() *EditableTextInstance
 
 	// CopyText wraps atk_editable_text_copy_text
@@ -7149,7 +7217,8 @@ type EditableText interface {
 	// chain up virtual methods:
 
 	// ParentCopyText calls the default implementations of the copy_text virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- startPos int32: start position 
@@ -7159,7 +7228,8 @@ type EditableText interface {
 	// to the clipboard.
 	ParentCopyText(startPos int32, endPos int32)
 	// ParentCutText calls the default implementations of the cut_text virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- startPos int32: start position 
@@ -7169,7 +7239,8 @@ type EditableText interface {
 	// to the clipboard and then delete from the widget.
 	ParentCutText(startPos int32, endPos int32)
 	// ParentDeleteText calls the default implementations of the delete_text virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- startPos int32: start position 
@@ -7178,7 +7249,8 @@ type EditableText interface {
 	// Delete text @start_pos up to, but not including @end_pos.
 	ParentDeleteText(startPos int32, endPos int32)
 	// ParentInsertText calls the default implementations of the insert_text virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- str string: the text to insert 
@@ -7190,7 +7262,8 @@ type EditableText interface {
 	// Insert text at a given position.
 	ParentInsertText(str string, length int32, position *int32)
 	// ParentPasteText calls the default implementations of the paste_text virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- position int32: position to paste 
@@ -7198,7 +7271,8 @@ type EditableText interface {
 	// Paste text from clipboard to specified @position.
 	ParentPasteText(position int32)
 	// ParentSetTextContents calls the default implementations of the set_text_contents virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- str string: string to set for text contents of @text 
@@ -7211,7 +7285,7 @@ var _ EditableText = (*EditableTextInstance)(nil)
 
 func unsafeWrapEditableText(base *gobject.ObjectInstance) *EditableTextInstance {
 	return &EditableTextInstance{
-		ObjectInstance: *base,
+		Instance: *base,
 	}
 }
 
@@ -7241,13 +7315,13 @@ func UnsafeEditableTextFromGlibBorrow(c unsafe.Pointer) EditableText {
 // UnsafeEditableTextToGlibNone is used to convert the instance to it's C value AtkEditableText. This is used by the bindings internally.
 func UnsafeEditableTextToGlibNone(c EditableText) unsafe.Pointer {
 	i := c.upcastToAtkEditableText()
-	return gobject.UnsafeObjectToGlibNone(i)
+	return gobject.UnsafeObjectToGlibNone(&i.Instance)
 }
 
 // UnsafeEditableTextToGlibFull is used to convert the instance to it's C value AtkEditableText, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeEditableTextToGlibFull(c EditableText) unsafe.Pointer {
 	i := c.upcastToAtkEditableText()
-	return gobject.UnsafeObjectToGlibFull(i)
+	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
 // CopyText wraps atk_editable_text_copy_text
@@ -7344,7 +7418,7 @@ func (text *EditableTextInstance) InsertText(str string, length int32, position 
 	carg2 = C.gint(length)
 	_ = position
 	_ = carg3
-	panic("unimplemented conversion of *int32 (gint*)")
+	panic("unimplemented conversion of *int32 (*C.gint)")
 
 	C.atk_editable_text_insert_text(carg0, carg1, carg2, carg3)
 	runtime.KeepAlive(text)
@@ -7395,7 +7469,8 @@ func (text *EditableTextInstance) SetTextContents(str string) {
 // EditableTextOverrides is the struct used to override the default implementation of virtual methods.
 // it is generic over the extending instance type.
 type EditableTextOverrides[Instance EditableText] struct {
-	// CopyText allows you to override the implementation of the virtual method copy_text.
+	// // CopyText allows you to override the implementation of the virtual method copy_text.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- startPos int32: start position 
@@ -7404,7 +7479,8 @@ type EditableTextOverrides[Instance EditableText] struct {
 	// Copy text from @start_pos up to, but not including @end_pos
 	// to the clipboard.
 	CopyText func(Instance, int32, int32)
-	// CutText allows you to override the implementation of the virtual method cut_text.
+	// // CutText allows you to override the implementation of the virtual method cut_text.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- startPos int32: start position 
@@ -7413,7 +7489,8 @@ type EditableTextOverrides[Instance EditableText] struct {
 	// Copy text from @start_pos up to, but not including @end_pos
 	// to the clipboard and then delete from the widget.
 	CutText func(Instance, int32, int32)
-	// DeleteText allows you to override the implementation of the virtual method delete_text.
+	// // DeleteText allows you to override the implementation of the virtual method delete_text.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- startPos int32: start position 
@@ -7421,7 +7498,8 @@ type EditableTextOverrides[Instance EditableText] struct {
 	//
 	// Delete text @start_pos up to, but not including @end_pos.
 	DeleteText func(Instance, int32, int32)
-	// InsertText allows you to override the implementation of the virtual method insert_text.
+	// // InsertText allows you to override the implementation of the virtual method insert_text.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- str string: the text to insert 
@@ -7432,14 +7510,16 @@ type EditableTextOverrides[Instance EditableText] struct {
 	//
 	// Insert text at a given position.
 	InsertText func(Instance, string, int32, *int32)
-	// PasteText allows you to override the implementation of the virtual method paste_text.
+	// // PasteText allows you to override the implementation of the virtual method paste_text.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- position int32: position to paste 
 	//
 	// Paste text from clipboard to specified @position.
 	PasteText func(Instance, int32)
-	// SetTextContents allows you to override the implementation of the virtual method set_text_contents.
+	// // SetTextContents allows you to override the implementation of the virtual method set_text_contents.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- str string: string to set for text contents of @text 
@@ -7526,7 +7606,7 @@ func UnsafeApplyEditableTextOverrides[Instance EditableText](gclass unsafe.Point
 				length = int32(carg2)
 				_ = position
 				_ = carg3
-				panic("unimplemented conversion of *int32 (gint*)")
+				panic("unimplemented conversion of *int32 (*C.gint)")
 
 				overrides.InsertText(text, str, length, position)
 			},
@@ -7569,7 +7649,8 @@ func UnsafeApplyEditableTextOverrides[Instance EditableText](gclass unsafe.Point
 }
 
 // ParentCopyText calls the default implementations of the copy_text virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- startPos int32: start position 
@@ -7594,7 +7675,8 @@ func (text *EditableTextInstance) ParentCopyText(startPos int32, endPos int32) {
 }
 
 // ParentCutText calls the default implementations of the cut_text virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- startPos int32: start position 
@@ -7619,7 +7701,8 @@ func (text *EditableTextInstance) ParentCutText(startPos int32, endPos int32) {
 }
 
 // ParentDeleteText calls the default implementations of the delete_text virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- startPos int32: start position 
@@ -7643,7 +7726,8 @@ func (text *EditableTextInstance) ParentDeleteText(startPos int32, endPos int32)
 }
 
 // ParentInsertText calls the default implementations of the insert_text virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- str string: the text to insert 
@@ -7666,7 +7750,7 @@ func (text *EditableTextInstance) ParentInsertText(str string, length int32, pos
 	carg2 = C.gint(length)
 	_ = position
 	_ = carg3
-	panic("unimplemented conversion of *int32 (gint*)")
+	panic("unimplemented conversion of *int32 (*C.gint)")
 
 	C._gotk4_atk1_EditableText_virtual_insert_text(unsafe.Pointer(parentclass.insert_text), carg0, carg1, carg2, carg3)
 	runtime.KeepAlive(text)
@@ -7676,7 +7760,8 @@ func (text *EditableTextInstance) ParentInsertText(str string, length int32, pos
 }
 
 // ParentPasteText calls the default implementations of the paste_text virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- position int32: position to paste 
@@ -7696,7 +7781,8 @@ func (text *EditableTextInstance) ParentPasteText(position int32) {
 }
 
 // ParentSetTextContents calls the default implementations of the set_text_contents virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- str string: string to set for text contents of @text 
@@ -7719,7 +7805,7 @@ func (text *EditableTextInstance) ParentSetTextContents(str string) {
 // HyperlinkImplInstance is the instance type used by all types implementing AtkHyperlinkImpl. It is used internally by the bindings. Users should use the interface [HyperlinkImpl] instead.
 type HyperlinkImplInstance struct {
 	_ [0]func() // equal guard
-	gobject.ObjectInstance
+	Instance gobject.ObjectInstance
 }
 
 var _ HyperlinkImpl = (*HyperlinkImplInstance)(nil)
@@ -7732,7 +7818,6 @@ var _ HyperlinkImpl = (*HyperlinkImplInstance)(nil)
 // AtkHyperlink in that AtkHyperlink is an object type, rather than an
 // interface, and thus cannot be directly queried. FTW
 type HyperlinkImpl interface {
-	gobject.Object
 	upcastToAtkHyperlinkImpl() *HyperlinkImplInstance
 
 	// GetHyperlink wraps atk_hyperlink_impl_get_hyperlink
@@ -7747,7 +7832,8 @@ type HyperlinkImpl interface {
 	// chain up virtual methods:
 
 	// ParentGetHyperlink calls the default implementations of the get_hyperlink virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Hyperlink 
@@ -7760,7 +7846,7 @@ var _ HyperlinkImpl = (*HyperlinkImplInstance)(nil)
 
 func unsafeWrapHyperlinkImpl(base *gobject.ObjectInstance) *HyperlinkImplInstance {
 	return &HyperlinkImplInstance{
-		ObjectInstance: *base,
+		Instance: *base,
 	}
 }
 
@@ -7790,13 +7876,13 @@ func UnsafeHyperlinkImplFromGlibBorrow(c unsafe.Pointer) HyperlinkImpl {
 // UnsafeHyperlinkImplToGlibNone is used to convert the instance to it's C value AtkHyperlinkImpl. This is used by the bindings internally.
 func UnsafeHyperlinkImplToGlibNone(c HyperlinkImpl) unsafe.Pointer {
 	i := c.upcastToAtkHyperlinkImpl()
-	return gobject.UnsafeObjectToGlibNone(i)
+	return gobject.UnsafeObjectToGlibNone(&i.Instance)
 }
 
 // UnsafeHyperlinkImplToGlibFull is used to convert the instance to it's C value AtkHyperlinkImpl, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeHyperlinkImplToGlibFull(c HyperlinkImpl) unsafe.Pointer {
 	i := c.upcastToAtkHyperlinkImpl()
-	return gobject.UnsafeObjectToGlibFull(i)
+	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
 // GetHyperlink wraps atk_hyperlink_impl_get_hyperlink
@@ -7825,7 +7911,8 @@ func (impl *HyperlinkImplInstance) GetHyperlink() Hyperlink {
 // HyperlinkImplOverrides is the struct used to override the default implementation of virtual methods.
 // it is generic over the extending instance type.
 type HyperlinkImplOverrides[Instance HyperlinkImpl] struct {
-	// GetHyperlink allows you to override the implementation of the virtual method get_hyperlink.
+	// // GetHyperlink allows you to override the implementation of the virtual method get_hyperlink.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Hyperlink 
@@ -7861,7 +7948,8 @@ func UnsafeApplyHyperlinkImplOverrides[Instance HyperlinkImpl](gclass unsafe.Poi
 }
 
 // ParentGetHyperlink calls the default implementations of the get_hyperlink virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret Hyperlink 
@@ -7886,7 +7974,7 @@ func (impl *HyperlinkImplInstance) ParentGetHyperlink() Hyperlink {
 // HypertextInstance is the instance type used by all types implementing AtkHypertext. It is used internally by the bindings. Users should use the interface [Hypertext] instead.
 type HypertextInstance struct {
 	_ [0]func() // equal guard
-	gobject.ObjectInstance
+	Instance gobject.ObjectInstance
 }
 
 var _ Hypertext = (*HypertextInstance)(nil)
@@ -7904,7 +7992,6 @@ var _ Hypertext = (*HypertextInstance)(nil)
 // Hypertext instances have textual content; they may implement Image
 // as well, and Hyperlinks need not have non-zero text offsets.
 type Hypertext interface {
-	gobject.Object
 	upcastToAtkHypertext() *HypertextInstance
 
 	// GetLink wraps atk_hypertext_get_link
@@ -7951,7 +8038,8 @@ type Hypertext interface {
 	// chain up virtual methods:
 
 	// ParentGetLink calls the default implementations of the get_link virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- linkIndex int32: an integer specifying the desired link 
@@ -7964,7 +8052,8 @@ type Hypertext interface {
 	// @link_index
 	ParentGetLink(linkIndex int32) Hyperlink
 	// ParentGetLinkIndex calls the default implementations of the get_link_index virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- charIndex int32: a character index 
@@ -7977,7 +8066,8 @@ type Hypertext interface {
 	// the character specified by @char_index.
 	ParentGetLinkIndex(charIndex int32) int32
 	// ParentGetNLinks calls the default implementations of the get_n_links virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
@@ -7985,7 +8075,8 @@ type Hypertext interface {
 	// Gets the number of links within this hypertext document.
 	ParentGetNLinks() int32
 	// ParentLinkSelected calls the default implementations of the link_selected virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- linkIndex int32 
@@ -7996,7 +8087,7 @@ var _ Hypertext = (*HypertextInstance)(nil)
 
 func unsafeWrapHypertext(base *gobject.ObjectInstance) *HypertextInstance {
 	return &HypertextInstance{
-		ObjectInstance: *base,
+		Instance: *base,
 	}
 }
 
@@ -8026,13 +8117,13 @@ func UnsafeHypertextFromGlibBorrow(c unsafe.Pointer) Hypertext {
 // UnsafeHypertextToGlibNone is used to convert the instance to it's C value AtkHypertext. This is used by the bindings internally.
 func UnsafeHypertextToGlibNone(c Hypertext) unsafe.Pointer {
 	i := c.upcastToAtkHypertext()
-	return gobject.UnsafeObjectToGlibNone(i)
+	return gobject.UnsafeObjectToGlibNone(&i.Instance)
 }
 
 // UnsafeHypertextToGlibFull is used to convert the instance to it's C value AtkHypertext, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeHypertextToGlibFull(c Hypertext) unsafe.Pointer {
 	i := c.upcastToAtkHypertext()
-	return gobject.UnsafeObjectToGlibFull(i)
+	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
 // GetLink wraps atk_hypertext_get_link
@@ -8126,13 +8217,14 @@ func (hypertext *HypertextInstance) GetNLinks() int32 {
 // object when one of the hyperlinks associated with the object
 // is selected.
 func (o *HypertextInstance) ConnectLinkSelected(fn func(Hypertext, int32)) gobject.SignalHandle {
-	return o.Connect("link-selected", fn)
+	return o.Instance.Connect("link-selected", fn)
 }
 
 // HypertextOverrides is the struct used to override the default implementation of virtual methods.
 // it is generic over the extending instance type.
 type HypertextOverrides[Instance Hypertext] struct {
-	// GetLink allows you to override the implementation of the virtual method get_link.
+	// // GetLink allows you to override the implementation of the virtual method get_link.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- linkIndex int32: an integer specifying the desired link 
@@ -8144,7 +8236,8 @@ type HypertextOverrides[Instance Hypertext] struct {
 	// Gets the link in this hypertext document at index
 	// @link_index
 	GetLink func(Instance, int32) Hyperlink
-	// GetLinkIndex allows you to override the implementation of the virtual method get_link_index.
+	// // GetLinkIndex allows you to override the implementation of the virtual method get_link_index.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- charIndex int32: a character index 
@@ -8156,14 +8249,16 @@ type HypertextOverrides[Instance Hypertext] struct {
 	// Gets the index into the array of hyperlinks that is associated with
 	// the character specified by @char_index.
 	GetLinkIndex func(Instance, int32) int32
-	// GetNLinks allows you to override the implementation of the virtual method get_n_links.
+	// // GetNLinks allows you to override the implementation of the virtual method get_n_links.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
 	//
 	// Gets the number of links within this hypertext document.
 	GetNLinks func(Instance) int32
-	// LinkSelected allows you to override the implementation of the virtual method link_selected.
+	// // LinkSelected allows you to override the implementation of the virtual method link_selected.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- linkIndex int32 
@@ -8258,7 +8353,8 @@ func UnsafeApplyHypertextOverrides[Instance Hypertext](gclass unsafe.Pointer, ov
 }
 
 // ParentGetLink calls the default implementations of the get_link virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- linkIndex int32: an integer specifying the desired link 
@@ -8290,7 +8386,8 @@ func (hypertext *HypertextInstance) ParentGetLink(linkIndex int32) Hyperlink {
 }
 
 // ParentGetLinkIndex calls the default implementations of the get_link_index virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- charIndex int32: a character index 
@@ -8322,7 +8419,8 @@ func (hypertext *HypertextInstance) ParentGetLinkIndex(charIndex int32) int32 {
 }
 
 // ParentGetNLinks calls the default implementations of the get_n_links virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret int32 
@@ -8345,7 +8443,8 @@ func (hypertext *HypertextInstance) ParentGetNLinks() int32 {
 }
 
 // ParentLinkSelected calls the default implementations of the link_selected virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- linkIndex int32 
@@ -8365,7 +8464,7 @@ func (hypertext *HypertextInstance) ParentLinkSelected(linkIndex int32) {
 // ImageInstance is the instance type used by all types implementing AtkImage. It is used internally by the bindings. Users should use the interface [Image] instead.
 type ImageInstance struct {
 	_ [0]func() // equal guard
-	gobject.ObjectInstance
+	Instance gobject.ObjectInstance
 }
 
 var _ Image = (*ImageInstance)(nil)
@@ -8389,7 +8488,6 @@ var _ Image = (*ImageInstance)(nil)
 // presentation of the most significant information present in the
 // image.
 type Image interface {
-	gobject.Object
 	upcastToAtkImage() *ImageInstance
 
 	// GetImageDescription wraps atk_image_get_image_description
@@ -8456,7 +8554,8 @@ type Image interface {
 	// chain up virtual methods:
 
 	// ParentGetImageDescription calls the default implementations of the get_image_description virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret string 
@@ -8464,7 +8563,8 @@ type Image interface {
 	// Get a textual description of this image.
 	ParentGetImageDescription() string
 	// ParentGetImageLocale calls the default implementations of the get_image_locale virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret string (nullable) 
@@ -8472,7 +8572,8 @@ type Image interface {
 	// Retrieves the locale identifier associated to the #AtkImage.
 	ParentGetImageLocale() string
 	// ParentGetImagePosition calls the default implementations of the get_image_position virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- coordType CoordType: specifies whether the coordinates are relative to the screen
@@ -8490,7 +8591,8 @@ type Image interface {
 	// to -1.
 	ParentGetImagePosition(coordType CoordType) (int32, int32)
 	// ParentGetImageSize calls the default implementations of the get_image_size virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- width int32: filled with the image width, or -1 if the value cannot be obtained. 
@@ -8504,7 +8606,8 @@ type Image interface {
 	// to -1.
 	ParentGetImageSize() (int32, int32)
 	// ParentSetImageDescription calls the default implementations of the set_image_description virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- description string: a string description to set for @image 
@@ -8521,7 +8624,7 @@ var _ Image = (*ImageInstance)(nil)
 
 func unsafeWrapImage(base *gobject.ObjectInstance) *ImageInstance {
 	return &ImageInstance{
-		ObjectInstance: *base,
+		Instance: *base,
 	}
 }
 
@@ -8551,13 +8654,13 @@ func UnsafeImageFromGlibBorrow(c unsafe.Pointer) Image {
 // UnsafeImageToGlibNone is used to convert the instance to it's C value AtkImage. This is used by the bindings internally.
 func UnsafeImageToGlibNone(c Image) unsafe.Pointer {
 	i := c.upcastToAtkImage()
-	return gobject.UnsafeObjectToGlibNone(i)
+	return gobject.UnsafeObjectToGlibNone(&i.Instance)
 }
 
 // UnsafeImageToGlibFull is used to convert the instance to it's C value AtkImage, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeImageToGlibFull(c Image) unsafe.Pointer {
 	i := c.upcastToAtkImage()
-	return gobject.UnsafeObjectToGlibFull(i)
+	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
 // GetImageDescription wraps atk_image_get_image_description
@@ -8715,21 +8818,24 @@ func (image *ImageInstance) SetImageDescription(description string) bool {
 // ImageOverrides is the struct used to override the default implementation of virtual methods.
 // it is generic over the extending instance type.
 type ImageOverrides[Instance Image] struct {
-	// GetImageDescription allows you to override the implementation of the virtual method get_image_description.
+	// // GetImageDescription allows you to override the implementation of the virtual method get_image_description.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret string 
 	//
 	// Get a textual description of this image.
 	GetImageDescription func(Instance) string
-	// GetImageLocale allows you to override the implementation of the virtual method get_image_locale.
+	// // GetImageLocale allows you to override the implementation of the virtual method get_image_locale.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret string (nullable) 
 	//
 	// Retrieves the locale identifier associated to the #AtkImage.
 	GetImageLocale func(Instance) string
-	// GetImagePosition allows you to override the implementation of the virtual method get_image_position.
+	// // GetImagePosition allows you to override the implementation of the virtual method get_image_position.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- coordType CoordType: specifies whether the coordinates are relative to the screen
@@ -8746,7 +8852,8 @@ type ImageOverrides[Instance Image] struct {
 	// If the position can not be obtained (e.g. missing support), x and y are set
 	// to -1.
 	GetImagePosition func(Instance, CoordType) (int32, int32)
-	// GetImageSize allows you to override the implementation of the virtual method get_image_size.
+	// // GetImageSize allows you to override the implementation of the virtual method get_image_size.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- width int32: filled with the image width, or -1 if the value cannot be obtained. 
@@ -8759,7 +8866,8 @@ type ImageOverrides[Instance Image] struct {
 	// If the size can not be obtained (e.g. missing support), x and y are set
 	// to -1.
 	GetImageSize func(Instance) (int32, int32)
-	// SetImageDescription allows you to override the implementation of the virtual method set_image_description.
+	// // SetImageDescription allows you to override the implementation of the virtual method set_image_description.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- description string: a string description to set for @image 
@@ -8889,7 +8997,8 @@ func UnsafeApplyImageOverrides[Instance Image](gclass unsafe.Pointer, overrides 
 }
 
 // ParentGetImageDescription calls the default implementations of the get_image_description virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret string 
@@ -8912,7 +9021,8 @@ func (image *ImageInstance) ParentGetImageDescription() string {
 }
 
 // ParentGetImageLocale calls the default implementations of the get_image_locale virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret string (nullable) 
@@ -8937,7 +9047,8 @@ func (image *ImageInstance) ParentGetImageLocale() string {
 }
 
 // ParentGetImagePosition calls the default implementations of the get_image_position virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- coordType CoordType: specifies whether the coordinates are relative to the screen
@@ -8977,7 +9088,8 @@ func (image *ImageInstance) ParentGetImagePosition(coordType CoordType) (int32, 
 }
 
 // ParentGetImageSize calls the default implementations of the get_image_size virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- width int32: filled with the image width, or -1 if the value cannot be obtained. 
@@ -9009,7 +9121,8 @@ func (image *ImageInstance) ParentGetImageSize() (int32, int32) {
 }
 
 // ParentSetImageDescription calls the default implementations of the set_image_description virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- description string: a string description to set for @image 
@@ -9045,7 +9158,7 @@ func (image *ImageInstance) ParentSetImageDescription(description string) bool {
 // ImplementorIfaceInstance is the instance type used by all types implementing AtkImplementorIface. It is used internally by the bindings. Users should use the interface [ImplementorIface] instead.
 type ImplementorIfaceInstance struct {
 	_ [0]func() // equal guard
-	gobject.ObjectInstance
+	Instance gobject.ObjectInstance
 }
 
 var _ ImplementorIface = (*ImplementorIfaceInstance)(nil)
@@ -9056,7 +9169,6 @@ var _ ImplementorIface = (*ImplementorIfaceInstance)(nil)
 // AtkObject peers may be obtained via calls to
 // iface-&gt;(ref_accessible)(implementor);
 type ImplementorIface interface {
-	gobject.Object
 	upcastToAtkImplementorIface() *ImplementorIfaceInstance
 
 	// chain up virtual methods:
@@ -9066,7 +9178,7 @@ var _ ImplementorIface = (*ImplementorIfaceInstance)(nil)
 
 func unsafeWrapImplementorIface(base *gobject.ObjectInstance) *ImplementorIfaceInstance {
 	return &ImplementorIfaceInstance{
-		ObjectInstance: *base,
+		Instance: *base,
 	}
 }
 
@@ -9096,13 +9208,13 @@ func UnsafeImplementorIfaceFromGlibBorrow(c unsafe.Pointer) ImplementorIface {
 // UnsafeImplementorIfaceToGlibNone is used to convert the instance to it's C value AtkImplementorIface. This is used by the bindings internally.
 func UnsafeImplementorIfaceToGlibNone(c ImplementorIface) unsafe.Pointer {
 	i := c.upcastToAtkImplementorIface()
-	return gobject.UnsafeObjectToGlibNone(i)
+	return gobject.UnsafeObjectToGlibNone(&i.Instance)
 }
 
 // UnsafeImplementorIfaceToGlibFull is used to convert the instance to it's C value AtkImplementorIface, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeImplementorIfaceToGlibFull(c ImplementorIface) unsafe.Pointer {
 	i := c.upcastToAtkImplementorIface()
-	return gobject.UnsafeObjectToGlibFull(i)
+	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
 // ImplementorIfaceOverrides is the struct used to override the default implementation of virtual methods.
@@ -9118,7 +9230,7 @@ func UnsafeApplyImplementorIfaceOverrides[Instance ImplementorIface](gclass unsa
 // SelectionInstance is the instance type used by all types implementing AtkSelection. It is used internally by the bindings. Users should use the interface [Selection] instead.
 type SelectionInstance struct {
 	_ [0]func() // equal guard
-	gobject.ObjectInstance
+	Instance gobject.ObjectInstance
 }
 
 var _ Selection = (*SelectionInstance)(nil)
@@ -9138,7 +9250,6 @@ var _ Selection = (*SelectionInstance)(nil)
 // are accomplished a other ATK interfaces - #AtkSelection is limited
 // to the selection/deselection of children.
 type Selection interface {
-	gobject.Object
 	upcastToAtkSelection() *SelectionInstance
 
 	// AddSelection wraps atk_selection_add_selection
@@ -9240,7 +9351,8 @@ type Selection interface {
 	// chain up virtual methods:
 
 	// ParentAddSelection calls the default implementations of the add_selection virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- i int32: a #gint specifying the child index. 
@@ -9253,7 +9365,8 @@ type Selection interface {
 	// object's selection.
 	ParentAddSelection(i int32) bool
 	// ParentClearSelection calls the default implementations of the clear_selection virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
@@ -9262,7 +9375,8 @@ type Selection interface {
 	// are selected.
 	ParentClearSelection() bool
 	// ParentGetSelectionCount calls the default implementations of the get_selection_count virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
@@ -9274,7 +9388,8 @@ type Selection interface {
 	// atk_get_accessible_value() convenience method.
 	ParentGetSelectionCount() int32
 	// ParentIsChildSelected calls the default implementations of the is_child_selected virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- i int32: a #gint specifying the child index. 
@@ -9290,7 +9405,8 @@ type Selection interface {
 	// atk_get_accessible_value() convenience method.
 	ParentIsChildSelected(i int32) bool
 	// ParentRefSelection calls the default implementations of the ref_selection virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- i int32: a #gint specifying the index in the selection set.  (e.g. the
@@ -9308,7 +9424,8 @@ type Selection interface {
 	// atk_get_accessible_value() convenience method.
 	ParentRefSelection(i int32) Object
 	// ParentRemoveSelection calls the default implementations of the remove_selection virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- i int32: a #gint specifying the index in the selection set.  (e.g. the
@@ -9321,7 +9438,8 @@ type Selection interface {
 	// Removes the specified child of the object from the object's selection.
 	ParentRemoveSelection(i int32) bool
 	// ParentSelectAllSelection calls the default implementations of the select_all_selection virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
@@ -9330,7 +9448,7 @@ type Selection interface {
 	// supports multiple selections.
 	ParentSelectAllSelection() bool
 	// ParentSelectionChanged calls the default implementations of the selection_changed virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
 	ParentSelectionChanged()
 }
 
@@ -9338,7 +9456,7 @@ var _ Selection = (*SelectionInstance)(nil)
 
 func unsafeWrapSelection(base *gobject.ObjectInstance) *SelectionInstance {
 	return &SelectionInstance{
-		ObjectInstance: *base,
+		Instance: *base,
 	}
 }
 
@@ -9368,13 +9486,13 @@ func UnsafeSelectionFromGlibBorrow(c unsafe.Pointer) Selection {
 // UnsafeSelectionToGlibNone is used to convert the instance to it's C value AtkSelection. This is used by the bindings internally.
 func UnsafeSelectionToGlibNone(c Selection) unsafe.Pointer {
 	i := c.upcastToAtkSelection()
-	return gobject.UnsafeObjectToGlibNone(i)
+	return gobject.UnsafeObjectToGlibNone(&i.Instance)
 }
 
 // UnsafeSelectionToGlibFull is used to convert the instance to it's C value AtkSelection, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeSelectionToGlibFull(c Selection) unsafe.Pointer {
 	i := c.upcastToAtkSelection()
-	return gobject.UnsafeObjectToGlibFull(i)
+	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
 // AddSelection wraps atk_selection_add_selection
@@ -9601,13 +9719,14 @@ func (selection *SelectionInstance) SelectAllSelection() bool {
 // The "selection-changed" signal is emitted by an object which
 // implements AtkSelection interface when the selection changes.
 func (o *SelectionInstance) ConnectSelectionChanged(fn func(Selection)) gobject.SignalHandle {
-	return o.Connect("selection-changed", fn)
+	return o.Instance.Connect("selection-changed", fn)
 }
 
 // SelectionOverrides is the struct used to override the default implementation of virtual methods.
 // it is generic over the extending instance type.
 type SelectionOverrides[Instance Selection] struct {
-	// AddSelection allows you to override the implementation of the virtual method add_selection.
+	// // AddSelection allows you to override the implementation of the virtual method add_selection.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- i int32: a #gint specifying the child index. 
@@ -9619,7 +9738,8 @@ type SelectionOverrides[Instance Selection] struct {
 	// Adds the specified accessible child of the object to the
 	// object's selection.
 	AddSelection func(Instance, int32) bool
-	// ClearSelection allows you to override the implementation of the virtual method clear_selection.
+	// // ClearSelection allows you to override the implementation of the virtual method clear_selection.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
@@ -9627,7 +9747,8 @@ type SelectionOverrides[Instance Selection] struct {
 	// Clears the selection in the object so that no children in the object
 	// are selected.
 	ClearSelection func(Instance) bool
-	// GetSelectionCount allows you to override the implementation of the virtual method get_selection_count.
+	// // GetSelectionCount allows you to override the implementation of the virtual method get_selection_count.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
@@ -9638,7 +9759,8 @@ type SelectionOverrides[Instance Selection] struct {
 	// use type checking/interface checking macros or the
 	// atk_get_accessible_value() convenience method.
 	GetSelectionCount func(Instance) int32
-	// IsChildSelected allows you to override the implementation of the virtual method is_child_selected.
+	// // IsChildSelected allows you to override the implementation of the virtual method is_child_selected.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- i int32: a #gint specifying the child index. 
@@ -9653,7 +9775,8 @@ type SelectionOverrides[Instance Selection] struct {
 	// use type checking/interface checking macros or the
 	// atk_get_accessible_value() convenience method.
 	IsChildSelected func(Instance, int32) bool
-	// RefSelection allows you to override the implementation of the virtual method ref_selection.
+	// // RefSelection allows you to override the implementation of the virtual method ref_selection.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- i int32: a #gint specifying the index in the selection set.  (e.g. the
@@ -9670,7 +9793,8 @@ type SelectionOverrides[Instance Selection] struct {
 	// use type checking/interface checking macros or the
 	// atk_get_accessible_value() convenience method.
 	RefSelection func(Instance, int32) Object
-	// RemoveSelection allows you to override the implementation of the virtual method remove_selection.
+	// // RemoveSelection allows you to override the implementation of the virtual method remove_selection.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- i int32: a #gint specifying the index in the selection set.  (e.g. the
@@ -9682,7 +9806,8 @@ type SelectionOverrides[Instance Selection] struct {
 	//
 	// Removes the specified child of the object from the object's selection.
 	RemoveSelection func(Instance, int32) bool
-	// SelectAllSelection allows you to override the implementation of the virtual method select_all_selection.
+	// // SelectAllSelection allows you to override the implementation of the virtual method select_all_selection.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
@@ -9690,7 +9815,7 @@ type SelectionOverrides[Instance Selection] struct {
 	// Causes every child of the object to be selected if the object
 	// supports multiple selections.
 	SelectAllSelection func(Instance) bool
-	// SelectionChanged allows you to override the implementation of the virtual method selection_changed.
+	// // SelectionChanged allows you to override the implementation of the virtual method selection_changed.
 	SelectionChanged func(Instance)
 }
 
@@ -9876,7 +10001,8 @@ func UnsafeApplySelectionOverrides[Instance Selection](gclass unsafe.Pointer, ov
 }
 
 // ParentAddSelection calls the default implementations of the add_selection virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- i int32: a #gint specifying the child index. 
@@ -9910,7 +10036,8 @@ func (selection *SelectionInstance) ParentAddSelection(i int32) bool {
 }
 
 // ParentClearSelection calls the default implementations of the clear_selection virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -9936,7 +10063,8 @@ func (selection *SelectionInstance) ParentClearSelection() bool {
 }
 
 // ParentGetSelectionCount calls the default implementations of the get_selection_count virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret int32 
@@ -9963,7 +10091,8 @@ func (selection *SelectionInstance) ParentGetSelectionCount() int32 {
 }
 
 // ParentIsChildSelected calls the default implementations of the is_child_selected virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- i int32: a #gint specifying the child index. 
@@ -10000,7 +10129,8 @@ func (selection *SelectionInstance) ParentIsChildSelected(i int32) bool {
 }
 
 // ParentRefSelection calls the default implementations of the ref_selection virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- i int32: a #gint specifying the index in the selection set.  (e.g. the
@@ -10039,7 +10169,8 @@ func (selection *SelectionInstance) ParentRefSelection(i int32) Object {
 }
 
 // ParentRemoveSelection calls the default implementations of the remove_selection virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- i int32: a #gint specifying the index in the selection set.  (e.g. the
@@ -10073,7 +10204,8 @@ func (selection *SelectionInstance) ParentRemoveSelection(i int32) bool {
 }
 
 // ParentSelectAllSelection calls the default implementations of the select_all_selection virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -10099,7 +10231,7 @@ func (selection *SelectionInstance) ParentSelectAllSelection() bool {
 }
 
 // ParentSelectionChanged calls the default implementations of the selection_changed virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
 func (selection *SelectionInstance) ParentSelectionChanged() {
 	var carg0 *C.AtkSelection
 
@@ -10112,7 +10244,7 @@ func (selection *SelectionInstance) ParentSelectionChanged() {
 // StreamableContentInstance is the instance type used by all types implementing AtkStreamableContent. It is used internally by the bindings. Users should use the interface [StreamableContent] instead.
 type StreamableContentInstance struct {
 	_ [0]func() // equal guard
-	gobject.ObjectInstance
+	Instance gobject.ObjectInstance
 }
 
 var _ StreamableContent = (*StreamableContentInstance)(nil)
@@ -10138,7 +10270,6 @@ var _ StreamableContent = (*StreamableContentInstance)(nil)
 // tied to the current user-agent view of the a particular document,
 // but may in some cases give access to the underlying model data.
 type StreamableContent interface {
-	gobject.Object
 	upcastToAtkStreamableContent() *StreamableContentInstance
 
 	// GetMIMEType wraps atk_streamable_content_get_mime_type
@@ -10198,7 +10329,8 @@ type StreamableContent interface {
 	// chain up virtual methods:
 
 	// ParentGetMIMEType calls the default implementations of the get_mime_type virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- i int32: a gint representing the position of the mime type starting from 0 
@@ -10211,7 +10343,8 @@ type StreamableContent interface {
 	// type is at position 0, the second at position 1, and so on.
 	ParentGetMIMEType(i int32) string
 	// ParentGetNMIMETypes calls the default implementations of the get_n_mime_types virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
@@ -10219,7 +10352,8 @@ type StreamableContent interface {
 	// Gets the number of mime types supported by this object.
 	ParentGetNMIMETypes() int32
 	// ParentGetStream calls the default implementations of the get_stream virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- mimeType string: a gchar* representing the mime type 
@@ -10231,7 +10365,8 @@ type StreamableContent interface {
 	// Gets the content in the specified mime type.
 	ParentGetStream(mimeType string) *glib.IOChannel
 	// ParentGetURI calls the default implementations of the get_uri virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- mimeType string: a gchar* representing the mime type, or NULL to request a URI
@@ -10256,7 +10391,7 @@ var _ StreamableContent = (*StreamableContentInstance)(nil)
 
 func unsafeWrapStreamableContent(base *gobject.ObjectInstance) *StreamableContentInstance {
 	return &StreamableContentInstance{
-		ObjectInstance: *base,
+		Instance: *base,
 	}
 }
 
@@ -10286,13 +10421,13 @@ func UnsafeStreamableContentFromGlibBorrow(c unsafe.Pointer) StreamableContent {
 // UnsafeStreamableContentToGlibNone is used to convert the instance to it's C value AtkStreamableContent. This is used by the bindings internally.
 func UnsafeStreamableContentToGlibNone(c StreamableContent) unsafe.Pointer {
 	i := c.upcastToAtkStreamableContent()
-	return gobject.UnsafeObjectToGlibNone(i)
+	return gobject.UnsafeObjectToGlibNone(&i.Instance)
 }
 
 // UnsafeStreamableContentToGlibFull is used to convert the instance to it's C value AtkStreamableContent, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeStreamableContentToGlibFull(c StreamableContent) unsafe.Pointer {
 	i := c.upcastToAtkStreamableContent()
-	return gobject.UnsafeObjectToGlibFull(i)
+	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
 // GetMIMEType wraps atk_streamable_content_get_mime_type
@@ -10424,7 +10559,8 @@ func (streamable *StreamableContentInstance) GetURI(mimeType string) string {
 // StreamableContentOverrides is the struct used to override the default implementation of virtual methods.
 // it is generic over the extending instance type.
 type StreamableContentOverrides[Instance StreamableContent] struct {
-	// GetMIMEType allows you to override the implementation of the virtual method get_mime_type.
+	// // GetMIMEType allows you to override the implementation of the virtual method get_mime_type.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- i int32: a gint representing the position of the mime type starting from 0 
@@ -10436,14 +10572,16 @@ type StreamableContentOverrides[Instance StreamableContent] struct {
 	// Gets the character string of the specified mime type. The first mime
 	// type is at position 0, the second at position 1, and so on.
 	GetMIMEType func(Instance, int32) string
-	// GetNMIMETypes allows you to override the implementation of the virtual method get_n_mime_types.
+	// // GetNMIMETypes allows you to override the implementation of the virtual method get_n_mime_types.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
 	//
 	// Gets the number of mime types supported by this object.
 	GetNMIMETypes func(Instance) int32
-	// GetStream allows you to override the implementation of the virtual method get_stream.
+	// // GetStream allows you to override the implementation of the virtual method get_stream.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- mimeType string: a gchar* representing the mime type 
@@ -10454,7 +10592,8 @@ type StreamableContentOverrides[Instance StreamableContent] struct {
 	//
 	// Gets the content in the specified mime type.
 	GetStream func(Instance, string) *glib.IOChannel
-	// GetURI allows you to override the implementation of the virtual method get_uri.
+	// // GetURI allows you to override the implementation of the virtual method get_uri.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- mimeType string: a gchar* representing the mime type, or NULL to request a URI
@@ -10572,7 +10711,8 @@ func UnsafeApplyStreamableContentOverrides[Instance StreamableContent](gclass un
 }
 
 // ParentGetMIMEType calls the default implementations of the get_mime_type virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- i int32: a gint representing the position of the mime type starting from 0 
@@ -10604,7 +10744,8 @@ func (streamable *StreamableContentInstance) ParentGetMIMEType(i int32) string {
 }
 
 // ParentGetNMIMETypes calls the default implementations of the get_n_mime_types virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret int32 
@@ -10627,7 +10768,8 @@ func (streamable *StreamableContentInstance) ParentGetNMIMETypes() int32 {
 }
 
 // ParentGetStream calls the default implementations of the get_stream virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- mimeType string: a gchar* representing the mime type 
@@ -10659,7 +10801,8 @@ func (streamable *StreamableContentInstance) ParentGetStream(mimeType string) *g
 }
 
 // ParentGetURI calls the default implementations of the get_uri virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- mimeType string: a gchar* representing the mime type, or NULL to request a URI
@@ -10703,7 +10846,7 @@ func (streamable *StreamableContentInstance) ParentGetURI(mimeType string) strin
 // TableInstance is the instance type used by all types implementing AtkTable. It is used internally by the bindings. Users should use the interface [Table] instead.
 type TableInstance struct {
 	_ [0]func() // equal guard
-	gobject.ObjectInstance
+	Instance gobject.ObjectInstance
 }
 
 var _ Table = (*TableInstance)(nil)
@@ -10741,7 +10884,6 @@ var _ Table = (*TableInstance)(nil)
 // expose other kind of children, like rows or captions. Right now,
 // index-based methods are deprecated.
 type Table interface {
-	gobject.Object
 	upcastToAtkTable() *TableInstance
 
 	// AddColumnSelection wraps atk_table_add_column_selection
@@ -11077,7 +11219,8 @@ type Table interface {
 	// chain up virtual methods:
 
 	// ParentAddColumnSelection calls the default implementations of the add_column_selection virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- column int32: a #gint representing a column in @table 
@@ -11089,7 +11232,8 @@ type Table interface {
 	// Adds the specified @column to the selection.
 	ParentAddColumnSelection(column int32) bool
 	// ParentAddRowSelection calls the default implementations of the add_row_selection virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- row int32: a #gint representing a row in @table 
@@ -11101,24 +11245,27 @@ type Table interface {
 	// Adds the specified @row to the selection.
 	ParentAddRowSelection(row int32) bool
 	// ParentColumnDeleted calls the default implementations of the column_deleted virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- column int32 
 	// 	- numDeleted int32 
 	ParentColumnDeleted(column int32, numDeleted int32)
 	// ParentColumnInserted calls the default implementations of the column_inserted virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- column int32 
 	// 	- numInserted int32 
 	ParentColumnInserted(column int32, numInserted int32)
 	// ParentColumnReordered calls the default implementations of the column_reordered virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
 	ParentColumnReordered()
 	// ParentGetCaption calls the default implementations of the get_caption virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Object (nullable) 
@@ -11126,7 +11273,8 @@ type Table interface {
 	// Gets the caption for the @table.
 	ParentGetCaption() Object
 	// ParentGetColumnDescription calls the default implementations of the get_column_description virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- column int32: a #gint representing a column in @table 
@@ -11138,7 +11286,8 @@ type Table interface {
 	// Gets the description text of the specified @column in the table
 	ParentGetColumnDescription(column int32) string
 	// ParentGetColumnExtentAt calls the default implementations of the get_column_extent_at virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- row int32: a #gint representing a row in @table 
@@ -11152,7 +11301,8 @@ type Table interface {
 	// at the specified @row and @column in the @table.
 	ParentGetColumnExtentAt(row int32, column int32) int32
 	// ParentGetColumnHeader calls the default implementations of the get_column_header virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- column int32: a #gint representing a column in the table 
@@ -11164,7 +11314,8 @@ type Table interface {
 	// Gets the column header of a specified column in an accessible table.
 	ParentGetColumnHeader(column int32) Object
 	// ParentGetNColumns calls the default implementations of the get_n_columns virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
@@ -11172,7 +11323,8 @@ type Table interface {
 	// Gets the number of columns in the table.
 	ParentGetNColumns() int32
 	// ParentGetNRows calls the default implementations of the get_n_rows virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
@@ -11180,7 +11332,8 @@ type Table interface {
 	// Gets the number of rows in the table.
 	ParentGetNRows() int32
 	// ParentGetRowDescription calls the default implementations of the get_row_description virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- row int32: a #gint representing a row in @table 
@@ -11192,7 +11345,8 @@ type Table interface {
 	// Gets the description text of the specified row in the table
 	ParentGetRowDescription(row int32) string
 	// ParentGetRowExtentAt calls the default implementations of the get_row_extent_at virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- row int32: a #gint representing a row in @table 
@@ -11206,7 +11360,8 @@ type Table interface {
 	// at a specified @row and @column in the @table.
 	ParentGetRowExtentAt(row int32, column int32) int32
 	// ParentGetRowHeader calls the default implementations of the get_row_header virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- row int32: a #gint representing a row in the table 
@@ -11218,7 +11373,8 @@ type Table interface {
 	// Gets the row header of a specified row in an accessible table.
 	ParentGetRowHeader(row int32) Object
 	// ParentGetSelectedColumns calls the default implementations of the get_selected_columns virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- selected **int32: a #gint** that is to contain the selected columns numbers 
@@ -11231,7 +11387,8 @@ type Table interface {
 	// the selected column numbers. This array should be freed by the caller.
 	ParentGetSelectedColumns(selected **int32) int32
 	// ParentGetSelectedRows calls the default implementations of the get_selected_rows virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- selected **int32: a #gint** that is to contain the selected row numbers 
@@ -11244,7 +11401,8 @@ type Table interface {
 	// the selected row numbers. This array should be freed by the caller.
 	ParentGetSelectedRows(selected **int32) int32
 	// ParentGetSummary calls the default implementations of the get_summary virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Object 
@@ -11252,7 +11410,8 @@ type Table interface {
 	// Gets the summary description of the table.
 	ParentGetSummary() Object
 	// ParentIsColumnSelected calls the default implementations of the is_column_selected virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- column int32: a #gint representing a column in @table 
@@ -11265,7 +11424,8 @@ type Table interface {
 	// is selected
 	ParentIsColumnSelected(column int32) bool
 	// ParentIsRowSelected calls the default implementations of the is_row_selected virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- row int32: a #gint representing a row in @table 
@@ -11278,7 +11438,8 @@ type Table interface {
 	// is selected
 	ParentIsRowSelected(row int32) bool
 	// ParentIsSelected calls the default implementations of the is_selected virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- row int32: a #gint representing a row in @table 
@@ -11292,10 +11453,11 @@ type Table interface {
 	// at the specified @row and @column is selected
 	ParentIsSelected(row int32, column int32) bool
 	// ParentModelChanged calls the default implementations of the model_changed virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
 	ParentModelChanged()
 	// ParentRefAt calls the default implementations of the ref_at virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- row int32: a #gint representing a row in @table 
@@ -11309,7 +11471,8 @@ type Table interface {
 	// should implement the interface #AtkTableCell
 	ParentRefAt(row int32, column int32) Object
 	// ParentRemoveColumnSelection calls the default implementations of the remove_column_selection virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- column int32: a #gint representing a column in @table 
@@ -11321,7 +11484,8 @@ type Table interface {
 	// Adds the specified @column to the selection.
 	ParentRemoveColumnSelection(column int32) bool
 	// ParentRemoveRowSelection calls the default implementations of the remove_row_selection virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- row int32: a #gint representing a row in @table 
@@ -11333,24 +11497,27 @@ type Table interface {
 	// Removes the specified @row from the selection.
 	ParentRemoveRowSelection(row int32) bool
 	// ParentRowDeleted calls the default implementations of the row_deleted virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- row int32 
 	// 	- numDeleted int32 
 	ParentRowDeleted(row int32, numDeleted int32)
 	// ParentRowInserted calls the default implementations of the row_inserted virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- row int32 
 	// 	- numInserted int32 
 	ParentRowInserted(row int32, numInserted int32)
 	// ParentRowReordered calls the default implementations of the row_reordered virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
 	ParentRowReordered()
 	// ParentSetCaption calls the default implementations of the set_caption virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- caption Object: a #AtkObject representing the caption to set for @table 
@@ -11358,7 +11525,8 @@ type Table interface {
 	// Sets the caption for the table.
 	ParentSetCaption(caption Object)
 	// ParentSetColumnDescription calls the default implementations of the set_column_description virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- column int32: a #gint representing a column in @table 
@@ -11368,7 +11536,8 @@ type Table interface {
 	// Sets the description text for the specified @column of the @table.
 	ParentSetColumnDescription(column int32, description string)
 	// ParentSetColumnHeader calls the default implementations of the set_column_header virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- column int32: a #gint representing a column in @table 
@@ -11377,7 +11546,8 @@ type Table interface {
 	// Sets the specified column header to @header.
 	ParentSetColumnHeader(column int32, header Object)
 	// ParentSetRowDescription calls the default implementations of the set_row_description virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- row int32: a #gint representing a row in @table 
@@ -11387,7 +11557,8 @@ type Table interface {
 	// Sets the description text for the specified @row of @table.
 	ParentSetRowDescription(row int32, description string)
 	// ParentSetRowHeader calls the default implementations of the set_row_header virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- row int32: a #gint representing a row in @table 
@@ -11396,7 +11567,8 @@ type Table interface {
 	// Sets the specified row header to @header.
 	ParentSetRowHeader(row int32, header Object)
 	// ParentSetSummary calls the default implementations of the set_summary virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- accessible Object: an #AtkObject representing the summary description
@@ -11410,7 +11582,7 @@ var _ Table = (*TableInstance)(nil)
 
 func unsafeWrapTable(base *gobject.ObjectInstance) *TableInstance {
 	return &TableInstance{
-		ObjectInstance: *base,
+		Instance: *base,
 	}
 }
 
@@ -11440,13 +11612,13 @@ func UnsafeTableFromGlibBorrow(c unsafe.Pointer) Table {
 // UnsafeTableToGlibNone is used to convert the instance to it's C value AtkTable. This is used by the bindings internally.
 func UnsafeTableToGlibNone(c Table) unsafe.Pointer {
 	i := c.upcastToAtkTable()
-	return gobject.UnsafeObjectToGlibNone(i)
+	return gobject.UnsafeObjectToGlibNone(&i.Instance)
 }
 
 // UnsafeTableToGlibFull is used to convert the instance to it's C value AtkTable, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeTableToGlibFull(c Table) unsafe.Pointer {
 	i := c.upcastToAtkTable()
-	return gobject.UnsafeObjectToGlibFull(i)
+	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
 // AddColumnSelection wraps atk_table_add_column_selection
@@ -11800,7 +11972,7 @@ func (table *TableInstance) GetSelectedColumns(selected **int32) int32 {
 	carg0 = (*C.AtkTable)(UnsafeTableToGlibNone(table))
 	_ = selected
 	_ = carg1
-	panic("unimplemented conversion of **int32 (gint**)")
+	panic("unimplemented conversion of **int32 (**C.gint)")
 
 	cret = C.atk_table_get_selected_columns(carg0, carg1)
 	runtime.KeepAlive(table)
@@ -11833,7 +12005,7 @@ func (table *TableInstance) GetSelectedRows(selected **int32) int32 {
 	carg0 = (*C.AtkTable)(UnsafeTableToGlibNone(table))
 	_ = selected
 	_ = carg1
-	panic("unimplemented conversion of **int32 (gint**)")
+	panic("unimplemented conversion of **int32 (**C.gint)")
 
 	cret = C.atk_table_get_selected_rows(carg0, carg1)
 	runtime.KeepAlive(table)
@@ -12211,7 +12383,7 @@ func (table *TableInstance) SetSummary(accessible Object) {
 // The "column-deleted" signal is emitted by an object which
 // implements the AtkTable interface when a column is deleted.
 func (o *TableInstance) ConnectColumnDeleted(fn func(Table, int32, int32)) gobject.SignalHandle {
-	return o.Connect("column-deleted", fn)
+	return o.Instance.Connect("column-deleted", fn)
 }
 
 // ConnectColumnInserted connects the provided callback to the "column-inserted" signal
@@ -12219,7 +12391,7 @@ func (o *TableInstance) ConnectColumnDeleted(fn func(Table, int32, int32)) gobje
 // The "column-inserted" signal is emitted by an object which
 // implements the AtkTable interface when a column is inserted.
 func (o *TableInstance) ConnectColumnInserted(fn func(Table, int32, int32)) gobject.SignalHandle {
-	return o.Connect("column-inserted", fn)
+	return o.Instance.Connect("column-inserted", fn)
 }
 
 // ConnectColumnReordered connects the provided callback to the "column-reordered" signal
@@ -12228,7 +12400,7 @@ func (o *TableInstance) ConnectColumnInserted(fn func(Table, int32, int32)) gobj
 // implements the AtkTable interface when the columns are
 // reordered.
 func (o *TableInstance) ConnectColumnReordered(fn func(Table)) gobject.SignalHandle {
-	return o.Connect("column-reordered", fn)
+	return o.Instance.Connect("column-reordered", fn)
 }
 
 // ConnectModelChanged connects the provided callback to the "model-changed" signal
@@ -12237,7 +12409,7 @@ func (o *TableInstance) ConnectColumnReordered(fn func(Table)) gobject.SignalHan
 // implements the AtkTable interface when the model displayed by
 // the table changes.
 func (o *TableInstance) ConnectModelChanged(fn func(Table)) gobject.SignalHandle {
-	return o.Connect("model-changed", fn)
+	return o.Instance.Connect("model-changed", fn)
 }
 
 // ConnectRowDeleted connects the provided callback to the "row-deleted" signal
@@ -12245,7 +12417,7 @@ func (o *TableInstance) ConnectModelChanged(fn func(Table)) gobject.SignalHandle
 // The "row-deleted" signal is emitted by an object which
 // implements the AtkTable interface when a row is deleted.
 func (o *TableInstance) ConnectRowDeleted(fn func(Table, int32, int32)) gobject.SignalHandle {
-	return o.Connect("row-deleted", fn)
+	return o.Instance.Connect("row-deleted", fn)
 }
 
 // ConnectRowInserted connects the provided callback to the "row-inserted" signal
@@ -12253,7 +12425,7 @@ func (o *TableInstance) ConnectRowDeleted(fn func(Table, int32, int32)) gobject.
 // The "row-inserted" signal is emitted by an object which
 // implements the AtkTable interface when a row is inserted.
 func (o *TableInstance) ConnectRowInserted(fn func(Table, int32, int32)) gobject.SignalHandle {
-	return o.Connect("row-inserted", fn)
+	return o.Instance.Connect("row-inserted", fn)
 }
 
 // ConnectRowReordered connects the provided callback to the "row-reordered" signal
@@ -12262,13 +12434,14 @@ func (o *TableInstance) ConnectRowInserted(fn func(Table, int32, int32)) gobject
 // implements the AtkTable interface when the rows are
 // reordered.
 func (o *TableInstance) ConnectRowReordered(fn func(Table)) gobject.SignalHandle {
-	return o.Connect("row-reordered", fn)
+	return o.Instance.Connect("row-reordered", fn)
 }
 
 // TableOverrides is the struct used to override the default implementation of virtual methods.
 // it is generic over the extending instance type.
 type TableOverrides[Instance Table] struct {
-	// AddColumnSelection allows you to override the implementation of the virtual method add_column_selection.
+	// // AddColumnSelection allows you to override the implementation of the virtual method add_column_selection.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- column int32: a #gint representing a column in @table 
@@ -12279,7 +12452,8 @@ type TableOverrides[Instance Table] struct {
 	//
 	// Adds the specified @column to the selection.
 	AddColumnSelection func(Instance, int32) bool
-	// AddRowSelection allows you to override the implementation of the virtual method add_row_selection.
+	// // AddRowSelection allows you to override the implementation of the virtual method add_row_selection.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- row int32: a #gint representing a row in @table 
@@ -12290,28 +12464,32 @@ type TableOverrides[Instance Table] struct {
 	//
 	// Adds the specified @row to the selection.
 	AddRowSelection func(Instance, int32) bool
-	// ColumnDeleted allows you to override the implementation of the virtual method column_deleted.
+	// // ColumnDeleted allows you to override the implementation of the virtual method column_deleted.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- column int32 
 	// 	- numDeleted int32 
 	ColumnDeleted func(Instance, int32, int32)
-	// ColumnInserted allows you to override the implementation of the virtual method column_inserted.
+	// // ColumnInserted allows you to override the implementation of the virtual method column_inserted.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- column int32 
 	// 	- numInserted int32 
 	ColumnInserted func(Instance, int32, int32)
-	// ColumnReordered allows you to override the implementation of the virtual method column_reordered.
+	// // ColumnReordered allows you to override the implementation of the virtual method column_reordered.
 	ColumnReordered func(Instance)
-	// GetCaption allows you to override the implementation of the virtual method get_caption.
+	// // GetCaption allows you to override the implementation of the virtual method get_caption.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Object (nullable) 
 	//
 	// Gets the caption for the @table.
 	GetCaption func(Instance) Object
-	// GetColumnDescription allows you to override the implementation of the virtual method get_column_description.
+	// // GetColumnDescription allows you to override the implementation of the virtual method get_column_description.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- column int32: a #gint representing a column in @table 
@@ -12322,7 +12500,8 @@ type TableOverrides[Instance Table] struct {
 	//
 	// Gets the description text of the specified @column in the table
 	GetColumnDescription func(Instance, int32) string
-	// GetColumnExtentAt allows you to override the implementation of the virtual method get_column_extent_at.
+	// // GetColumnExtentAt allows you to override the implementation of the virtual method get_column_extent_at.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- row int32: a #gint representing a row in @table 
@@ -12335,7 +12514,8 @@ type TableOverrides[Instance Table] struct {
 	// Gets the number of columns occupied by the accessible object
 	// at the specified @row and @column in the @table.
 	GetColumnExtentAt func(Instance, int32, int32) int32
-	// GetColumnHeader allows you to override the implementation of the virtual method get_column_header.
+	// // GetColumnHeader allows you to override the implementation of the virtual method get_column_header.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- column int32: a #gint representing a column in the table 
@@ -12346,21 +12526,24 @@ type TableOverrides[Instance Table] struct {
 	//
 	// Gets the column header of a specified column in an accessible table.
 	GetColumnHeader func(Instance, int32) Object
-	// GetNColumns allows you to override the implementation of the virtual method get_n_columns.
+	// // GetNColumns allows you to override the implementation of the virtual method get_n_columns.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
 	//
 	// Gets the number of columns in the table.
 	GetNColumns func(Instance) int32
-	// GetNRows allows you to override the implementation of the virtual method get_n_rows.
+	// // GetNRows allows you to override the implementation of the virtual method get_n_rows.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
 	//
 	// Gets the number of rows in the table.
 	GetNRows func(Instance) int32
-	// GetRowDescription allows you to override the implementation of the virtual method get_row_description.
+	// // GetRowDescription allows you to override the implementation of the virtual method get_row_description.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- row int32: a #gint representing a row in @table 
@@ -12371,7 +12554,8 @@ type TableOverrides[Instance Table] struct {
 	//
 	// Gets the description text of the specified row in the table
 	GetRowDescription func(Instance, int32) string
-	// GetRowExtentAt allows you to override the implementation of the virtual method get_row_extent_at.
+	// // GetRowExtentAt allows you to override the implementation of the virtual method get_row_extent_at.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- row int32: a #gint representing a row in @table 
@@ -12384,7 +12568,8 @@ type TableOverrides[Instance Table] struct {
 	// Gets the number of rows occupied by the accessible object
 	// at a specified @row and @column in the @table.
 	GetRowExtentAt func(Instance, int32, int32) int32
-	// GetRowHeader allows you to override the implementation of the virtual method get_row_header.
+	// // GetRowHeader allows you to override the implementation of the virtual method get_row_header.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- row int32: a #gint representing a row in the table 
@@ -12395,7 +12580,8 @@ type TableOverrides[Instance Table] struct {
 	//
 	// Gets the row header of a specified row in an accessible table.
 	GetRowHeader func(Instance, int32) Object
-	// GetSelectedColumns allows you to override the implementation of the virtual method get_selected_columns.
+	// // GetSelectedColumns allows you to override the implementation of the virtual method get_selected_columns.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- selected **int32: a #gint** that is to contain the selected columns numbers 
@@ -12407,7 +12593,8 @@ type TableOverrides[Instance Table] struct {
 	// Gets the selected columns of the table by initializing **selected with
 	// the selected column numbers. This array should be freed by the caller.
 	GetSelectedColumns func(Instance, **int32) int32
-	// GetSelectedRows allows you to override the implementation of the virtual method get_selected_rows.
+	// // GetSelectedRows allows you to override the implementation of the virtual method get_selected_rows.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- selected **int32: a #gint** that is to contain the selected row numbers 
@@ -12419,14 +12606,16 @@ type TableOverrides[Instance Table] struct {
 	// Gets the selected rows of the table by initializing **selected with
 	// the selected row numbers. This array should be freed by the caller.
 	GetSelectedRows func(Instance, **int32) int32
-	// GetSummary allows you to override the implementation of the virtual method get_summary.
+	// // GetSummary allows you to override the implementation of the virtual method get_summary.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Object 
 	//
 	// Gets the summary description of the table.
 	GetSummary func(Instance) Object
-	// IsColumnSelected allows you to override the implementation of the virtual method is_column_selected.
+	// // IsColumnSelected allows you to override the implementation of the virtual method is_column_selected.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- column int32: a #gint representing a column in @table 
@@ -12438,7 +12627,8 @@ type TableOverrides[Instance Table] struct {
 	// Gets a boolean value indicating whether the specified @column
 	// is selected
 	IsColumnSelected func(Instance, int32) bool
-	// IsRowSelected allows you to override the implementation of the virtual method is_row_selected.
+	// // IsRowSelected allows you to override the implementation of the virtual method is_row_selected.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- row int32: a #gint representing a row in @table 
@@ -12450,7 +12640,8 @@ type TableOverrides[Instance Table] struct {
 	// Gets a boolean value indicating whether the specified @row
 	// is selected
 	IsRowSelected func(Instance, int32) bool
-	// IsSelected allows you to override the implementation of the virtual method is_selected.
+	// // IsSelected allows you to override the implementation of the virtual method is_selected.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- row int32: a #gint representing a row in @table 
@@ -12463,9 +12654,10 @@ type TableOverrides[Instance Table] struct {
 	// Gets a boolean value indicating whether the accessible object
 	// at the specified @row and @column is selected
 	IsSelected func(Instance, int32, int32) bool
-	// ModelChanged allows you to override the implementation of the virtual method model_changed.
+	// // ModelChanged allows you to override the implementation of the virtual method model_changed.
 	ModelChanged func(Instance)
-	// RefAt allows you to override the implementation of the virtual method ref_at.
+	// // RefAt allows you to override the implementation of the virtual method ref_at.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- row int32: a #gint representing a row in @table 
@@ -12478,7 +12670,8 @@ type TableOverrides[Instance Table] struct {
 	// Get a reference to the table cell at @row, @column. This cell
 	// should implement the interface #AtkTableCell
 	RefAt func(Instance, int32, int32) Object
-	// RemoveColumnSelection allows you to override the implementation of the virtual method remove_column_selection.
+	// // RemoveColumnSelection allows you to override the implementation of the virtual method remove_column_selection.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- column int32: a #gint representing a column in @table 
@@ -12489,7 +12682,8 @@ type TableOverrides[Instance Table] struct {
 	//
 	// Adds the specified @column to the selection.
 	RemoveColumnSelection func(Instance, int32) bool
-	// RemoveRowSelection allows you to override the implementation of the virtual method remove_row_selection.
+	// // RemoveRowSelection allows you to override the implementation of the virtual method remove_row_selection.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- row int32: a #gint representing a row in @table 
@@ -12500,28 +12694,32 @@ type TableOverrides[Instance Table] struct {
 	//
 	// Removes the specified @row from the selection.
 	RemoveRowSelection func(Instance, int32) bool
-	// RowDeleted allows you to override the implementation of the virtual method row_deleted.
+	// // RowDeleted allows you to override the implementation of the virtual method row_deleted.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- row int32 
 	// 	- numDeleted int32 
 	RowDeleted func(Instance, int32, int32)
-	// RowInserted allows you to override the implementation of the virtual method row_inserted.
+	// // RowInserted allows you to override the implementation of the virtual method row_inserted.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- row int32 
 	// 	- numInserted int32 
 	RowInserted func(Instance, int32, int32)
-	// RowReordered allows you to override the implementation of the virtual method row_reordered.
+	// // RowReordered allows you to override the implementation of the virtual method row_reordered.
 	RowReordered func(Instance)
-	// SetCaption allows you to override the implementation of the virtual method set_caption.
+	// // SetCaption allows you to override the implementation of the virtual method set_caption.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- caption Object: a #AtkObject representing the caption to set for @table 
 	//
 	// Sets the caption for the table.
 	SetCaption func(Instance, Object)
-	// SetColumnDescription allows you to override the implementation of the virtual method set_column_description.
+	// // SetColumnDescription allows you to override the implementation of the virtual method set_column_description.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- column int32: a #gint representing a column in @table 
@@ -12530,7 +12728,8 @@ type TableOverrides[Instance Table] struct {
 	//
 	// Sets the description text for the specified @column of the @table.
 	SetColumnDescription func(Instance, int32, string)
-	// SetColumnHeader allows you to override the implementation of the virtual method set_column_header.
+	// // SetColumnHeader allows you to override the implementation of the virtual method set_column_header.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- column int32: a #gint representing a column in @table 
@@ -12538,7 +12737,8 @@ type TableOverrides[Instance Table] struct {
 	//
 	// Sets the specified column header to @header.
 	SetColumnHeader func(Instance, int32, Object)
-	// SetRowDescription allows you to override the implementation of the virtual method set_row_description.
+	// // SetRowDescription allows you to override the implementation of the virtual method set_row_description.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- row int32: a #gint representing a row in @table 
@@ -12547,7 +12747,8 @@ type TableOverrides[Instance Table] struct {
 	//
 	// Sets the description text for the specified @row of @table.
 	SetRowDescription func(Instance, int32, string)
-	// SetRowHeader allows you to override the implementation of the virtual method set_row_header.
+	// // SetRowHeader allows you to override the implementation of the virtual method set_row_header.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- row int32: a #gint representing a row in @table 
@@ -12555,7 +12756,8 @@ type TableOverrides[Instance Table] struct {
 	//
 	// Sets the specified row header to @header.
 	SetRowHeader func(Instance, int32, Object)
-	// SetSummary allows you to override the implementation of the virtual method set_summary.
+	// // SetSummary allows you to override the implementation of the virtual method set_summary.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- accessible Object: an #AtkObject representing the summary description
@@ -12890,7 +13092,7 @@ func UnsafeApplyTableOverrides[Instance Table](gclass unsafe.Pointer, overrides 
 				table = UnsafeTableFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				_ = selected
 				_ = carg1
-				panic("unimplemented conversion of **int32 (gint**)")
+				panic("unimplemented conversion of **int32 (**C.gint)")
 
 				goret = overrides.GetSelectedColumns(table, selected)
 
@@ -12914,7 +13116,7 @@ func UnsafeApplyTableOverrides[Instance Table](gclass unsafe.Pointer, overrides 
 				table = UnsafeTableFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				_ = selected
 				_ = carg1
-				panic("unimplemented conversion of **int32 (gint**)")
+				panic("unimplemented conversion of **int32 (**C.gint)")
 
 				goret = overrides.GetSelectedRows(table, selected)
 
@@ -13271,7 +13473,8 @@ func UnsafeApplyTableOverrides[Instance Table](gclass unsafe.Pointer, overrides 
 }
 
 // ParentAddColumnSelection calls the default implementations of the add_column_selection virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- column int32: a #gint representing a column in @table 
@@ -13304,7 +13507,8 @@ func (table *TableInstance) ParentAddColumnSelection(column int32) bool {
 }
 
 // ParentAddRowSelection calls the default implementations of the add_row_selection virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- row int32: a #gint representing a row in @table 
@@ -13337,7 +13541,8 @@ func (table *TableInstance) ParentAddRowSelection(row int32) bool {
 }
 
 // ParentColumnDeleted calls the default implementations of the column_deleted virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- column int32 
@@ -13359,7 +13564,8 @@ func (table *TableInstance) ParentColumnDeleted(column int32, numDeleted int32) 
 }
 
 // ParentColumnInserted calls the default implementations of the column_inserted virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- column int32 
@@ -13381,7 +13587,7 @@ func (table *TableInstance) ParentColumnInserted(column int32, numInserted int32
 }
 
 // ParentColumnReordered calls the default implementations of the column_reordered virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
 func (table *TableInstance) ParentColumnReordered() {
 	var carg0 *C.AtkTable
 
@@ -13392,7 +13598,8 @@ func (table *TableInstance) ParentColumnReordered() {
 }
 
 // ParentGetCaption calls the default implementations of the get_caption virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret Object (nullable) 
@@ -13417,7 +13624,8 @@ func (table *TableInstance) ParentGetCaption() Object {
 }
 
 // ParentGetColumnDescription calls the default implementations of the get_column_description virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- column int32: a #gint representing a column in @table 
@@ -13448,7 +13656,8 @@ func (table *TableInstance) ParentGetColumnDescription(column int32) string {
 }
 
 // ParentGetColumnExtentAt calls the default implementations of the get_column_extent_at virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- row int32: a #gint representing a row in @table 
@@ -13484,7 +13693,8 @@ func (table *TableInstance) ParentGetColumnExtentAt(row int32, column int32) int
 }
 
 // ParentGetColumnHeader calls the default implementations of the get_column_header virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- column int32: a #gint representing a column in the table 
@@ -13517,7 +13727,8 @@ func (table *TableInstance) ParentGetColumnHeader(column int32) Object {
 }
 
 // ParentGetNColumns calls the default implementations of the get_n_columns virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret int32 
@@ -13540,7 +13751,8 @@ func (table *TableInstance) ParentGetNColumns() int32 {
 }
 
 // ParentGetNRows calls the default implementations of the get_n_rows virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret int32 
@@ -13563,7 +13775,8 @@ func (table *TableInstance) ParentGetNRows() int32 {
 }
 
 // ParentGetRowDescription calls the default implementations of the get_row_description virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- row int32: a #gint representing a row in @table 
@@ -13596,7 +13809,8 @@ func (table *TableInstance) ParentGetRowDescription(row int32) string {
 }
 
 // ParentGetRowExtentAt calls the default implementations of the get_row_extent_at virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- row int32: a #gint representing a row in @table 
@@ -13632,7 +13846,8 @@ func (table *TableInstance) ParentGetRowExtentAt(row int32, column int32) int32 
 }
 
 // ParentGetRowHeader calls the default implementations of the get_row_header virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- row int32: a #gint representing a row in the table 
@@ -13665,7 +13880,8 @@ func (table *TableInstance) ParentGetRowHeader(row int32) Object {
 }
 
 // ParentGetSelectedColumns calls the default implementations of the get_selected_columns virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- selected **int32: a #gint** that is to contain the selected columns numbers 
@@ -13685,7 +13901,7 @@ func (table *TableInstance) ParentGetSelectedColumns(selected **int32) int32 {
 
 	_ = selected
 	_ = carg1
-	panic("unimplemented conversion of **int32 (gint**)")
+	panic("unimplemented conversion of **int32 (**C.gint)")
 
 	cret = C._gotk4_atk1_Table_virtual_get_selected_columns(unsafe.Pointer(parentclass.get_selected_columns), carg0, carg1)
 	runtime.KeepAlive(table)
@@ -13699,7 +13915,8 @@ func (table *TableInstance) ParentGetSelectedColumns(selected **int32) int32 {
 }
 
 // ParentGetSelectedRows calls the default implementations of the get_selected_rows virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- selected **int32: a #gint** that is to contain the selected row numbers 
@@ -13719,7 +13936,7 @@ func (table *TableInstance) ParentGetSelectedRows(selected **int32) int32 {
 
 	_ = selected
 	_ = carg1
-	panic("unimplemented conversion of **int32 (gint**)")
+	panic("unimplemented conversion of **int32 (**C.gint)")
 
 	cret = C._gotk4_atk1_Table_virtual_get_selected_rows(unsafe.Pointer(parentclass.get_selected_rows), carg0, carg1)
 	runtime.KeepAlive(table)
@@ -13733,7 +13950,8 @@ func (table *TableInstance) ParentGetSelectedRows(selected **int32) int32 {
 }
 
 // ParentGetSummary calls the default implementations of the get_summary virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret Object 
@@ -13756,7 +13974,8 @@ func (table *TableInstance) ParentGetSummary() Object {
 }
 
 // ParentIsColumnSelected calls the default implementations of the is_column_selected virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- column int32: a #gint representing a column in @table 
@@ -13790,7 +14009,8 @@ func (table *TableInstance) ParentIsColumnSelected(column int32) bool {
 }
 
 // ParentIsRowSelected calls the default implementations of the is_row_selected virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- row int32: a #gint representing a row in @table 
@@ -13824,7 +14044,8 @@ func (table *TableInstance) ParentIsRowSelected(row int32) bool {
 }
 
 // ParentIsSelected calls the default implementations of the is_selected virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- row int32: a #gint representing a row in @table 
@@ -13862,7 +14083,7 @@ func (table *TableInstance) ParentIsSelected(row int32, column int32) bool {
 }
 
 // ParentModelChanged calls the default implementations of the model_changed virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
 func (table *TableInstance) ParentModelChanged() {
 	var carg0 *C.AtkTable
 
@@ -13873,7 +14094,8 @@ func (table *TableInstance) ParentModelChanged() {
 }
 
 // ParentRefAt calls the default implementations of the ref_at virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- row int32: a #gint representing a row in @table 
@@ -13909,7 +14131,8 @@ func (table *TableInstance) ParentRefAt(row int32, column int32) Object {
 }
 
 // ParentRemoveColumnSelection calls the default implementations of the remove_column_selection virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- column int32: a #gint representing a column in @table 
@@ -13942,7 +14165,8 @@ func (table *TableInstance) ParentRemoveColumnSelection(column int32) bool {
 }
 
 // ParentRemoveRowSelection calls the default implementations of the remove_row_selection virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- row int32: a #gint representing a row in @table 
@@ -13975,7 +14199,8 @@ func (table *TableInstance) ParentRemoveRowSelection(row int32) bool {
 }
 
 // ParentRowDeleted calls the default implementations of the row_deleted virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- row int32 
@@ -13997,7 +14222,8 @@ func (table *TableInstance) ParentRowDeleted(row int32, numDeleted int32) {
 }
 
 // ParentRowInserted calls the default implementations of the row_inserted virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- row int32 
@@ -14019,7 +14245,7 @@ func (table *TableInstance) ParentRowInserted(row int32, numInserted int32) {
 }
 
 // ParentRowReordered calls the default implementations of the row_reordered virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
 func (table *TableInstance) ParentRowReordered() {
 	var carg0 *C.AtkTable
 
@@ -14030,7 +14256,8 @@ func (table *TableInstance) ParentRowReordered() {
 }
 
 // ParentSetCaption calls the default implementations of the set_caption virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- caption Object: a #AtkObject representing the caption to set for @table 
@@ -14050,7 +14277,8 @@ func (table *TableInstance) ParentSetCaption(caption Object) {
 }
 
 // ParentSetColumnDescription calls the default implementations of the set_column_description virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- column int32: a #gint representing a column in @table 
@@ -14076,7 +14304,8 @@ func (table *TableInstance) ParentSetColumnDescription(column int32, description
 }
 
 // ParentSetColumnHeader calls the default implementations of the set_column_header virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- column int32: a #gint representing a column in @table 
@@ -14100,7 +14329,8 @@ func (table *TableInstance) ParentSetColumnHeader(column int32, header Object) {
 }
 
 // ParentSetRowDescription calls the default implementations of the set_row_description virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- row int32: a #gint representing a row in @table 
@@ -14126,7 +14356,8 @@ func (table *TableInstance) ParentSetRowDescription(row int32, description strin
 }
 
 // ParentSetRowHeader calls the default implementations of the set_row_header virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- row int32: a #gint representing a row in @table 
@@ -14150,7 +14381,8 @@ func (table *TableInstance) ParentSetRowHeader(row int32, header Object) {
 }
 
 // ParentSetSummary calls the default implementations of the set_summary virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- accessible Object: an #AtkObject representing the summary description
@@ -14173,7 +14405,7 @@ func (table *TableInstance) ParentSetSummary(accessible Object) {
 // TableCellInstance is the instance type used by all types implementing AtkTableCell. It is used internally by the bindings. Users should use the interface [TableCell] instead.
 type TableCellInstance struct {
 	_ [0]func() // equal guard
-	gobject.ObjectInstance
+	Instance gobject.ObjectInstance
 }
 
 var _ TableCell = (*TableCellInstance)(nil)
@@ -14188,7 +14420,6 @@ var _ TableCell = (*TableCellInstance)(nil)
 // 
 // See [iface@AtkTable]
 type TableCell interface {
-	gobject.Object
 	upcastToAtkTableCell() *TableCellInstance
 
 	// GetColumnSpan wraps atk_table_cell_get_column_span
@@ -14245,7 +14476,8 @@ type TableCell interface {
 	// chain up virtual methods:
 
 	// ParentGetColumnSpan calls the default implementations of the get_column_span virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
@@ -14253,7 +14485,8 @@ type TableCell interface {
 	// Returns the number of columns occupied by this cell accessible.
 	ParentGetColumnSpan() int32
 	// ParentGetPosition calls the default implementations of the get_position virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- row int32: the row of the given cell. 
@@ -14263,7 +14496,8 @@ type TableCell interface {
 	// Retrieves the tabular position of this cell.
 	ParentGetPosition() (int32, int32, bool)
 	// ParentGetRowColumnSpan calls the default implementations of the get_row_column_span virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- row int32: the row index of the given cell. 
@@ -14279,7 +14513,8 @@ type TableCell interface {
 	// on the object.
 	ParentGetRowColumnSpan() (int32, int32, int32, int32, bool)
 	// ParentGetRowSpan calls the default implementations of the get_row_span virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
@@ -14287,7 +14522,8 @@ type TableCell interface {
 	// Returns the number of rows occupied by this cell accessible.
 	ParentGetRowSpan() int32
 	// ParentGetTable calls the default implementations of the get_table virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Object 
@@ -14300,7 +14536,7 @@ var _ TableCell = (*TableCellInstance)(nil)
 
 func unsafeWrapTableCell(base *gobject.ObjectInstance) *TableCellInstance {
 	return &TableCellInstance{
-		ObjectInstance: *base,
+		Instance: *base,
 	}
 }
 
@@ -14330,13 +14566,13 @@ func UnsafeTableCellFromGlibBorrow(c unsafe.Pointer) TableCell {
 // UnsafeTableCellToGlibNone is used to convert the instance to it's C value AtkTableCell. This is used by the bindings internally.
 func UnsafeTableCellToGlibNone(c TableCell) unsafe.Pointer {
 	i := c.upcastToAtkTableCell()
-	return gobject.UnsafeObjectToGlibNone(i)
+	return gobject.UnsafeObjectToGlibNone(&i.Instance)
 }
 
 // UnsafeTableCellToGlibFull is used to convert the instance to it's C value AtkTableCell, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeTableCellToGlibFull(c TableCell) unsafe.Pointer {
 	i := c.upcastToAtkTableCell()
-	return gobject.UnsafeObjectToGlibFull(i)
+	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
 // GetColumnSpan wraps atk_table_cell_get_column_span
@@ -14489,14 +14725,16 @@ func (cell *TableCellInstance) GetTable() Object {
 // TableCellOverrides is the struct used to override the default implementation of virtual methods.
 // it is generic over the extending instance type.
 type TableCellOverrides[Instance TableCell] struct {
-	// GetColumnSpan allows you to override the implementation of the virtual method get_column_span.
+	// // GetColumnSpan allows you to override the implementation of the virtual method get_column_span.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
 	//
 	// Returns the number of columns occupied by this cell accessible.
 	GetColumnSpan func(Instance) int32
-	// GetPosition allows you to override the implementation of the virtual method get_position.
+	// // GetPosition allows you to override the implementation of the virtual method get_position.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- row int32: the row of the given cell. 
@@ -14505,7 +14743,8 @@ type TableCellOverrides[Instance TableCell] struct {
 	//
 	// Retrieves the tabular position of this cell.
 	GetPosition func(Instance) (int32, int32, bool)
-	// GetRowColumnSpan allows you to override the implementation of the virtual method get_row_column_span.
+	// // GetRowColumnSpan allows you to override the implementation of the virtual method get_row_column_span.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- row int32: the row index of the given cell. 
@@ -14520,14 +14759,16 @@ type TableCellOverrides[Instance TableCell] struct {
 	// will implement this function by calling get_row_span and get_column_span
 	// on the object.
 	GetRowColumnSpan func(Instance) (int32, int32, int32, int32, bool)
-	// GetRowSpan allows you to override the implementation of the virtual method get_row_span.
+	// // GetRowSpan allows you to override the implementation of the virtual method get_row_span.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
 	//
 	// Returns the number of rows occupied by this cell accessible.
 	GetRowSpan func(Instance) int32
-	// GetTable allows you to override the implementation of the virtual method get_table.
+	// // GetTable allows you to override the implementation of the virtual method get_table.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Object 
@@ -14659,7 +14900,8 @@ func UnsafeApplyTableCellOverrides[Instance TableCell](gclass unsafe.Pointer, ov
 }
 
 // ParentGetColumnSpan calls the default implementations of the get_column_span virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret int32 
@@ -14682,7 +14924,8 @@ func (cell *TableCellInstance) ParentGetColumnSpan() int32 {
 }
 
 // ParentGetPosition calls the default implementations of the get_position virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- row int32: the row of the given cell. 
@@ -14715,7 +14958,8 @@ func (cell *TableCellInstance) ParentGetPosition() (int32, int32, bool) {
 }
 
 // ParentGetRowColumnSpan calls the default implementations of the get_row_column_span virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- row int32: the row index of the given cell. 
@@ -14760,7 +15004,8 @@ func (cell *TableCellInstance) ParentGetRowColumnSpan() (int32, int32, int32, in
 }
 
 // ParentGetRowSpan calls the default implementations of the get_row_span virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret int32 
@@ -14783,7 +15028,8 @@ func (cell *TableCellInstance) ParentGetRowSpan() int32 {
 }
 
 // ParentGetTable calls the default implementations of the get_table virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret Object 
@@ -14808,7 +15054,7 @@ func (cell *TableCellInstance) ParentGetTable() Object {
 // TextInstance is the instance type used by all types implementing AtkText. It is used internally by the bindings. Users should use the interface [Text] instead.
 type TextInstance struct {
 	_ [0]func() // equal guard
-	gobject.ObjectInstance
+	Instance gobject.ObjectInstance
 }
 
 var _ Text = (*TextInstance)(nil)
@@ -14837,7 +15083,6 @@ var _ Text = (*TextInstance)(nil)
 // character length; also bounding box glyph-to-offset mapping may be
 // complex for languages which use ligatures.
 type Text interface {
-	gobject.Object
 	upcastToAtkText() *TextInstance
 
 	// AddTextSelection wraps atk_text_add_selection
@@ -15176,7 +15421,8 @@ type Text interface {
 	// chain up virtual methods:
 
 	// ParentAddSelection calls the default implementations of the add_selection virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- startOffset int32: the starting character offset of the selected region 
@@ -15189,7 +15435,8 @@ type Text interface {
 	// Adds a selection bounded by the specified offsets.
 	ParentAddSelection(startOffset int32, endOffset int32) bool
 	// ParentGetBoundedRanges calls the default implementations of the get_bounded_ranges virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- rect *TextRectangle: An AtkTextRectangle giving the dimensions of the bounding box. 
@@ -15204,7 +15451,8 @@ type Text interface {
 	// Get the ranges of text in the specified bounding box.
 	ParentGetBoundedRanges(rect *TextRectangle, coordType CoordType, xClipType TextClipType, yClipType TextClipType) []*TextRange
 	// ParentGetCaretOffset calls the default implementations of the get_caret_offset virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
@@ -15212,7 +15460,8 @@ type Text interface {
 	// Gets the offset of the position of the caret (cursor).
 	ParentGetCaretOffset() int32
 	// ParentGetCharacterAtOffset calls the default implementations of the get_character_at_offset virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- offset int32: a character offset within @text 
@@ -15224,7 +15473,8 @@ type Text interface {
 	// Gets the specified text.
 	ParentGetCharacterAtOffset(offset int32) uint32
 	// ParentGetCharacterCount calls the default implementations of the get_character_count virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
@@ -15232,7 +15482,8 @@ type Text interface {
 	// Gets the character count.
 	ParentGetCharacterCount() int32
 	// ParentGetCharacterExtents calls the default implementations of the get_character_extents virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- offset int32: The offset of the text character for which bounding information is required. 
@@ -15252,7 +15503,8 @@ type Text interface {
 	//     a particular text offset.
 	ParentGetCharacterExtents(offset int32, coords CoordType) (int32, int32, int32, int32)
 	// ParentGetNSelections calls the default implementations of the get_n_selections virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
@@ -15260,7 +15512,8 @@ type Text interface {
 	// Gets the number of selected regions.
 	ParentGetNSelections() int32
 	// ParentGetOffsetAtPoint calls the default implementations of the get_offset_at_point virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- x int32: screen x-position of character 
@@ -15277,7 +15530,8 @@ type Text interface {
 	// depending on @coords.
 	ParentGetOffsetAtPoint(x int32, y int32, coords CoordType) int32
 	// ParentGetRangeExtents calls the default implementations of the get_range_extents virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- startOffset int32: The offset of the first text character for which boundary
@@ -15296,7 +15550,8 @@ type Text interface {
 	// fields are set to -1.
 	ParentGetRangeExtents(startOffset int32, endOffset int32, coordType CoordType) TextRectangle
 	// ParentGetSelection calls the default implementations of the get_selection virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- selectionNum int32: The selection number.  The selected regions are
@@ -15315,7 +15570,8 @@ type Text interface {
 	// Gets the text from the specified selection.
 	ParentGetSelection(selectionNum int32) (int32, int32, string)
 	// ParentGetStringAtOffset calls the default implementations of the get_string_at_offset virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- offset int32: position 
@@ -15361,7 +15617,8 @@ type Text interface {
 	// of the following paragraph after the offset.
 	ParentGetStringAtOffset(offset int32, granularity TextGranularity) (int32, int32, string)
 	// ParentGetText calls the default implementations of the get_text virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- startOffset int32: a starting character offset within @text 
@@ -15374,7 +15631,8 @@ type Text interface {
 	// Gets the specified text.
 	ParentGetText(startOffset int32, endOffset int32) string
 	// ParentRemoveSelection calls the default implementations of the remove_selection virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- selectionNum int32: The selection number.  The selected regions are
@@ -15390,7 +15648,8 @@ type Text interface {
 	// Removes the specified selection.
 	ParentRemoveSelection(selectionNum int32) bool
 	// ParentScrollSubstringTo calls the default implementations of the scroll_substring_to virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- startOffset int32: start offset in the @text 
@@ -15404,7 +15663,8 @@ type Text interface {
 	// Makes a substring of @text visible on the screen by scrolling all necessary parents.
 	ParentScrollSubstringTo(startOffset int32, endOffset int32, typ ScrollType) bool
 	// ParentScrollSubstringToPoint calls the default implementations of the scroll_substring_to_point virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- startOffset int32: start offset in the @text 
@@ -15422,7 +15682,8 @@ type Text interface {
 	// by scrolling all necessary parents.
 	ParentScrollSubstringToPoint(startOffset int32, endOffset int32, coords CoordType, x int32, y int32) bool
 	// ParentSetCaretOffset calls the default implementations of the set_caret_offset virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- offset int32: the character offset of the new caret position 
@@ -15450,7 +15711,8 @@ type Text interface {
 	// caret position into view while minimizing unnecessary scroll motion.
 	ParentSetCaretOffset(offset int32) bool
 	// ParentSetSelection calls the default implementations of the set_selection virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- selectionNum int32: The selection number.  The selected regions are
@@ -15469,16 +15731,18 @@ type Text interface {
 	// Changes the start and end offset of the specified selection.
 	ParentSetSelection(selectionNum int32, startOffset int32, endOffset int32) bool
 	// ParentTextAttributesChanged calls the default implementations of the text_attributes_changed virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
 	ParentTextAttributesChanged()
 	// ParentTextCaretMoved calls the default implementations of the text_caret_moved virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- location int32 
 	ParentTextCaretMoved(location int32)
 	// ParentTextChanged calls the default implementations of the text_changed virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- position int32 
@@ -15489,7 +15753,7 @@ type Text interface {
 	//   it should not be overriden.
 	ParentTextChanged(position int32, length int32)
 	// ParentTextSelectionChanged calls the default implementations of the text_selection_changed virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
 	ParentTextSelectionChanged()
 }
 
@@ -15497,7 +15761,7 @@ var _ Text = (*TextInstance)(nil)
 
 func unsafeWrapText(base *gobject.ObjectInstance) *TextInstance {
 	return &TextInstance{
-		ObjectInstance: *base,
+		Instance: *base,
 	}
 }
 
@@ -15527,13 +15791,13 @@ func UnsafeTextFromGlibBorrow(c unsafe.Pointer) Text {
 // UnsafeTextToGlibNone is used to convert the instance to it's C value AtkText. This is used by the bindings internally.
 func UnsafeTextToGlibNone(c Text) unsafe.Pointer {
 	i := c.upcastToAtkText()
-	return gobject.UnsafeObjectToGlibNone(i)
+	return gobject.UnsafeObjectToGlibNone(&i.Instance)
 }
 
 // UnsafeTextToGlibFull is used to convert the instance to it's C value AtkText, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeTextToGlibFull(c Text) unsafe.Pointer {
 	i := c.upcastToAtkText()
-	return gobject.UnsafeObjectToGlibFull(i)
+	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
 // AddTextSelection wraps atk_text_add_selection
@@ -15611,7 +15875,7 @@ func (text *TextInstance) GetBoundedRanges(rect *TextRectangle, coordType CoordT
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []*TextRange (AtkTextRange**)")
+	panic("unimplemented conversion of []*TextRange (**C.AtkTextRange)")
 
 	return goret
 }
@@ -15846,7 +16110,7 @@ func (text *TextInstance) GetRangeExtents(startOffset int32, endOffset int32, co
 
 	_ = rect
 	_ = carg4
-	panic("unimplemented conversion of TextRectangle (AtkTextRectangle)")
+	panic("unimplemented conversion of TextRectangle (C.AtkTextRectangle)")
 
 	return rect
 }
@@ -16231,7 +16495,7 @@ func (text *TextInstance) SetSelection(selectionNum int32, startOffset int32, en
 // attributes of the text of an object which implements AtkText
 // changes.
 func (o *TextInstance) ConnectTextAttributesChanged(fn func(Text)) gobject.SignalHandle {
-	return o.Connect("text-attributes-changed", fn)
+	return o.Instance.Connect("text-attributes-changed", fn)
 }
 
 // ConnectTextCaretMoved connects the provided callback to the "text-caret-moved" signal
@@ -16240,7 +16504,7 @@ func (o *TextInstance) ConnectTextAttributesChanged(fn func(Text)) gobject.Signa
 // position of the text of an object which implements AtkText
 // changes.
 func (o *TextInstance) ConnectTextCaretMoved(fn func(Text, int32)) gobject.SignalHandle {
-	return o.Connect("text-caret-moved", fn)
+	return o.Instance.Connect("text-caret-moved", fn)
 }
 
 // ConnectTextChanged connects the provided callback to the "text-changed" signal
@@ -16251,7 +16515,7 @@ func (o *TextInstance) ConnectTextCaretMoved(fn func(Text, int32)) gobject.Signa
 // "delete" which identifies whether the text change was an
 // insertion or a deletion.
 func (o *TextInstance) ConnectTextChanged(fn func(Text, int32, int32)) gobject.SignalHandle {
-	return o.Connect("text-changed", fn)
+	return o.Instance.Connect("text-changed", fn)
 }
 
 // ConnectTextInsert connects the provided callback to the "text-insert" signal
@@ -16261,7 +16525,7 @@ func (o *TextInstance) ConnectTextChanged(fn func(Text, int32, int32)) gobject.S
 // (e.g. typing or pasting text), the "system" detail should be
 // included.
 func (o *TextInstance) ConnectTextInsert(fn func(Text, int32, int32, string)) gobject.SignalHandle {
-	return o.Connect("text-insert", fn)
+	return o.Instance.Connect("text-insert", fn)
 }
 
 // ConnectTextRemove connects the provided callback to the "text-remove" signal
@@ -16271,7 +16535,7 @@ func (o *TextInstance) ConnectTextInsert(fn func(Text, int32, int32, string)) go
 // (e.g. typing or pasting text), the "system" detail should be
 // included.
 func (o *TextInstance) ConnectTextRemove(fn func(Text, int32, int32, string)) gobject.SignalHandle {
-	return o.Connect("text-remove", fn)
+	return o.Instance.Connect("text-remove", fn)
 }
 
 // ConnectTextSelectionChanged connects the provided callback to the "text-selection-changed" signal
@@ -16279,13 +16543,14 @@ func (o *TextInstance) ConnectTextRemove(fn func(Text, int32, int32, string)) go
 // The "text-selection-changed" signal is emitted when the
 // selected text of an object which implements AtkText changes.
 func (o *TextInstance) ConnectTextSelectionChanged(fn func(Text)) gobject.SignalHandle {
-	return o.Connect("text-selection-changed", fn)
+	return o.Instance.Connect("text-selection-changed", fn)
 }
 
 // TextOverrides is the struct used to override the default implementation of virtual methods.
 // it is generic over the extending instance type.
 type TextOverrides[Instance Text] struct {
-	// AddSelection allows you to override the implementation of the virtual method add_selection.
+	// // AddSelection allows you to override the implementation of the virtual method add_selection.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- startOffset int32: the starting character offset of the selected region 
@@ -16297,7 +16562,8 @@ type TextOverrides[Instance Text] struct {
 	//
 	// Adds a selection bounded by the specified offsets.
 	AddSelection func(Instance, int32, int32) bool
-	// GetBoundedRanges allows you to override the implementation of the virtual method get_bounded_ranges.
+	// // GetBoundedRanges allows you to override the implementation of the virtual method get_bounded_ranges.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- rect *TextRectangle: An AtkTextRectangle giving the dimensions of the bounding box. 
@@ -16311,14 +16577,16 @@ type TextOverrides[Instance Text] struct {
 	//
 	// Get the ranges of text in the specified bounding box.
 	GetBoundedRanges func(Instance, *TextRectangle, CoordType, TextClipType, TextClipType) []*TextRange
-	// GetCaretOffset allows you to override the implementation of the virtual method get_caret_offset.
+	// // GetCaretOffset allows you to override the implementation of the virtual method get_caret_offset.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
 	//
 	// Gets the offset of the position of the caret (cursor).
 	GetCaretOffset func(Instance) int32
-	// GetCharacterAtOffset allows you to override the implementation of the virtual method get_character_at_offset.
+	// // GetCharacterAtOffset allows you to override the implementation of the virtual method get_character_at_offset.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- offset int32: a character offset within @text 
@@ -16329,14 +16597,16 @@ type TextOverrides[Instance Text] struct {
 	//
 	// Gets the specified text.
 	GetCharacterAtOffset func(Instance, int32) uint32
-	// GetCharacterCount allows you to override the implementation of the virtual method get_character_count.
+	// // GetCharacterCount allows you to override the implementation of the virtual method get_character_count.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
 	//
 	// Gets the character count.
 	GetCharacterCount func(Instance) int32
-	// GetCharacterExtents allows you to override the implementation of the virtual method get_character_extents.
+	// // GetCharacterExtents allows you to override the implementation of the virtual method get_character_extents.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- offset int32: The offset of the text character for which bounding information is required. 
@@ -16355,14 +16625,16 @@ type TextOverrides[Instance Text] struct {
 	// Get the bounding box containing the glyph representing the character at
 	//     a particular text offset.
 	GetCharacterExtents func(Instance, int32, CoordType) (int32, int32, int32, int32)
-	// GetNSelections allows you to override the implementation of the virtual method get_n_selections.
+	// // GetNSelections allows you to override the implementation of the virtual method get_n_selections.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
 	//
 	// Gets the number of selected regions.
 	GetNSelections func(Instance) int32
-	// GetOffsetAtPoint allows you to override the implementation of the virtual method get_offset_at_point.
+	// // GetOffsetAtPoint allows you to override the implementation of the virtual method get_offset_at_point.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- x int32: screen x-position of character 
@@ -16378,7 +16650,8 @@ type TextOverrides[Instance Text] struct {
 	// are interpreted as being relative to the screen or this widget's window
 	// depending on @coords.
 	GetOffsetAtPoint func(Instance, int32, int32, CoordType) int32
-	// GetRangeExtents allows you to override the implementation of the virtual method get_range_extents.
+	// // GetRangeExtents allows you to override the implementation of the virtual method get_range_extents.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- startOffset int32: The offset of the first text character for which boundary
@@ -16396,7 +16669,8 @@ type TextOverrides[Instance Text] struct {
 	// If the extents can not be obtained (e.g. or missing support), the rectangle
 	// fields are set to -1.
 	GetRangeExtents func(Instance, int32, int32, CoordType) TextRectangle
-	// GetSelection allows you to override the implementation of the virtual method get_selection.
+	// // GetSelection allows you to override the implementation of the virtual method get_selection.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- selectionNum int32: The selection number.  The selected regions are
@@ -16414,7 +16688,8 @@ type TextOverrides[Instance Text] struct {
 	//
 	// Gets the text from the specified selection.
 	GetSelection func(Instance, int32) (int32, int32, string)
-	// GetStringAtOffset allows you to override the implementation of the virtual method get_string_at_offset.
+	// // GetStringAtOffset allows you to override the implementation of the virtual method get_string_at_offset.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- offset int32: position 
@@ -16459,7 +16734,8 @@ type TextOverrides[Instance Text] struct {
 	// is from the start of the paragraph at or before the offset to the start
 	// of the following paragraph after the offset.
 	GetStringAtOffset func(Instance, int32, TextGranularity) (int32, int32, string)
-	// GetText allows you to override the implementation of the virtual method get_text.
+	// // GetText allows you to override the implementation of the virtual method get_text.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- startOffset int32: a starting character offset within @text 
@@ -16471,7 +16747,8 @@ type TextOverrides[Instance Text] struct {
 	//
 	// Gets the specified text.
 	GetText func(Instance, int32, int32) string
-	// RemoveSelection allows you to override the implementation of the virtual method remove_selection.
+	// // RemoveSelection allows you to override the implementation of the virtual method remove_selection.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- selectionNum int32: The selection number.  The selected regions are
@@ -16486,7 +16763,8 @@ type TextOverrides[Instance Text] struct {
 	//
 	// Removes the specified selection.
 	RemoveSelection func(Instance, int32) bool
-	// ScrollSubstringTo allows you to override the implementation of the virtual method scroll_substring_to.
+	// // ScrollSubstringTo allows you to override the implementation of the virtual method scroll_substring_to.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- startOffset int32: start offset in the @text 
@@ -16499,7 +16777,8 @@ type TextOverrides[Instance Text] struct {
 	//
 	// Makes a substring of @text visible on the screen by scrolling all necessary parents.
 	ScrollSubstringTo func(Instance, int32, int32, ScrollType) bool
-	// ScrollSubstringToPoint allows you to override the implementation of the virtual method scroll_substring_to_point.
+	// // ScrollSubstringToPoint allows you to override the implementation of the virtual method scroll_substring_to_point.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- startOffset int32: start offset in the @text 
@@ -16516,7 +16795,8 @@ type TextOverrides[Instance Text] struct {
 	// Move the top-left of a substring of @text to a given position of the screen
 	// by scrolling all necessary parents.
 	ScrollSubstringToPoint func(Instance, int32, int32, CoordType, int32, int32) bool
-	// SetCaretOffset allows you to override the implementation of the virtual method set_caret_offset.
+	// // SetCaretOffset allows you to override the implementation of the virtual method set_caret_offset.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- offset int32: the character offset of the new caret position 
@@ -16543,7 +16823,8 @@ type TextOverrides[Instance Text] struct {
 	// motion or focus navigation operation, this method should try to scroll the new
 	// caret position into view while minimizing unnecessary scroll motion.
 	SetCaretOffset func(Instance, int32) bool
-	// SetSelection allows you to override the implementation of the virtual method set_selection.
+	// // SetSelection allows you to override the implementation of the virtual method set_selection.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- selectionNum int32: The selection number.  The selected regions are
@@ -16561,14 +16842,16 @@ type TextOverrides[Instance Text] struct {
 	//
 	// Changes the start and end offset of the specified selection.
 	SetSelection func(Instance, int32, int32, int32) bool
-	// TextAttributesChanged allows you to override the implementation of the virtual method text_attributes_changed.
+	// // TextAttributesChanged allows you to override the implementation of the virtual method text_attributes_changed.
 	TextAttributesChanged func(Instance)
-	// TextCaretMoved allows you to override the implementation of the virtual method text_caret_moved.
+	// // TextCaretMoved allows you to override the implementation of the virtual method text_caret_moved.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- location int32 
 	TextCaretMoved func(Instance, int32)
-	// TextChanged allows you to override the implementation of the virtual method text_changed.
+	// // TextChanged allows you to override the implementation of the virtual method text_changed.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- position int32 
@@ -16578,7 +16861,7 @@ type TextOverrides[Instance Text] struct {
 	//   text change. This virtual function is deprecated sice 2.9.4 and
 	//   it should not be overriden.
 	TextChanged func(Instance, int32, int32)
-	// TextSelectionChanged allows you to override the implementation of the virtual method text_selection_changed.
+	// // TextSelectionChanged allows you to override the implementation of the virtual method text_selection_changed.
 	TextSelectionChanged func(Instance)
 }
 
@@ -16636,7 +16919,7 @@ func UnsafeApplyTextOverrides[Instance Text](gclass unsafe.Pointer, overrides Te
 
 				_ = goret
 				_ = cret
-				panic("unimplemented conversion of []*TextRange (AtkTextRange**)")
+				panic("unimplemented conversion of []*TextRange (**C.AtkTextRange)")
 
 				return cret
 			},
@@ -16800,7 +17083,7 @@ func UnsafeApplyTextOverrides[Instance Text](gclass unsafe.Pointer, overrides Te
 
 				_ = rect
 				_ = carg4
-				panic("unimplemented conversion of TextRectangle (AtkTextRectangle)")
+				panic("unimplemented conversion of TextRectangle (C.AtkTextRectangle)")
 			},
 		)
 	}
@@ -17089,7 +17372,8 @@ func UnsafeApplyTextOverrides[Instance Text](gclass unsafe.Pointer, overrides Te
 }
 
 // ParentAddSelection calls the default implementations of the add_selection virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- startOffset int32: the starting character offset of the selected region 
@@ -17126,7 +17410,8 @@ func (text *TextInstance) ParentAddSelection(startOffset int32, endOffset int32)
 }
 
 // ParentGetBoundedRanges calls the default implementations of the get_bounded_ranges virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- rect *TextRectangle: An AtkTextRectangle giving the dimensions of the bounding box. 
@@ -17165,13 +17450,14 @@ func (text *TextInstance) ParentGetBoundedRanges(rect *TextRectangle, coordType 
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []*TextRange (AtkTextRange**)")
+	panic("unimplemented conversion of []*TextRange (**C.AtkTextRange)")
 
 	return goret
 }
 
 // ParentGetCaretOffset calls the default implementations of the get_caret_offset virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret int32 
@@ -17194,7 +17480,8 @@ func (text *TextInstance) ParentGetCaretOffset() int32 {
 }
 
 // ParentGetCharacterAtOffset calls the default implementations of the get_character_at_offset virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- offset int32: a character offset within @text 
@@ -17225,7 +17512,8 @@ func (text *TextInstance) ParentGetCharacterAtOffset(offset int32) uint32 {
 }
 
 // ParentGetCharacterCount calls the default implementations of the get_character_count virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret int32 
@@ -17248,7 +17536,8 @@ func (text *TextInstance) ParentGetCharacterCount() int32 {
 }
 
 // ParentGetCharacterExtents calls the default implementations of the get_character_extents virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- offset int32: The offset of the text character for which bounding information is required. 
@@ -17299,7 +17588,8 @@ func (text *TextInstance) ParentGetCharacterExtents(offset int32, coords CoordTy
 }
 
 // ParentGetNSelections calls the default implementations of the get_n_selections virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret int32 
@@ -17322,7 +17612,8 @@ func (text *TextInstance) ParentGetNSelections() int32 {
 }
 
 // ParentGetOffsetAtPoint calls the default implementations of the get_offset_at_point virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- x int32: screen x-position of character 
@@ -17364,7 +17655,8 @@ func (text *TextInstance) ParentGetOffsetAtPoint(x int32, y int32, coords CoordT
 }
 
 // ParentGetRangeExtents calls the default implementations of the get_range_extents virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- startOffset int32: The offset of the first text character for which boundary
@@ -17404,13 +17696,14 @@ func (text *TextInstance) ParentGetRangeExtents(startOffset int32, endOffset int
 
 	_ = rect
 	_ = carg4
-	panic("unimplemented conversion of TextRectangle (AtkTextRectangle)")
+	panic("unimplemented conversion of TextRectangle (C.AtkTextRectangle)")
 
 	return rect
 }
 
 // ParentGetSelection calls the default implementations of the get_selection virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- selectionNum int32: The selection number.  The selected regions are
@@ -17455,7 +17748,8 @@ func (text *TextInstance) ParentGetSelection(selectionNum int32) (int32, int32, 
 }
 
 // ParentGetStringAtOffset calls the default implementations of the get_string_at_offset virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- offset int32: position 
@@ -17532,7 +17826,8 @@ func (text *TextInstance) ParentGetStringAtOffset(offset int32, granularity Text
 }
 
 // ParentGetText calls the default implementations of the get_text virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- startOffset int32: a starting character offset within @text 
@@ -17568,7 +17863,8 @@ func (text *TextInstance) ParentGetText(startOffset int32, endOffset int32) stri
 }
 
 // ParentRemoveSelection calls the default implementations of the remove_selection virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- selectionNum int32: The selection number.  The selected regions are
@@ -17605,7 +17901,8 @@ func (text *TextInstance) ParentRemoveSelection(selectionNum int32) bool {
 }
 
 // ParentScrollSubstringTo calls the default implementations of the scroll_substring_to virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- startOffset int32: start offset in the @text 
@@ -17646,7 +17943,8 @@ func (text *TextInstance) ParentScrollSubstringTo(startOffset int32, endOffset i
 }
 
 // ParentScrollSubstringToPoint calls the default implementations of the scroll_substring_to_point virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- startOffset int32: start offset in the @text 
@@ -17697,7 +17995,8 @@ func (text *TextInstance) ParentScrollSubstringToPoint(startOffset int32, endOff
 }
 
 // ParentSetCaretOffset calls the default implementations of the set_caret_offset virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- offset int32: the character offset of the new caret position 
@@ -17746,7 +18045,8 @@ func (text *TextInstance) ParentSetCaretOffset(offset int32) bool {
 }
 
 // ParentSetSelection calls the default implementations of the set_selection virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- selectionNum int32: The selection number.  The selected regions are
@@ -17792,7 +18092,7 @@ func (text *TextInstance) ParentSetSelection(selectionNum int32, startOffset int
 }
 
 // ParentTextAttributesChanged calls the default implementations of the text_attributes_changed virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
 func (text *TextInstance) ParentTextAttributesChanged() {
 	var carg0 *C.AtkText
 
@@ -17803,7 +18103,8 @@ func (text *TextInstance) ParentTextAttributesChanged() {
 }
 
 // ParentTextCaretMoved calls the default implementations of the text_caret_moved virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- location int32 
@@ -17821,7 +18122,8 @@ func (text *TextInstance) ParentTextCaretMoved(location int32) {
 }
 
 // ParentTextChanged calls the default implementations of the text_changed virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- position int32 
@@ -17847,7 +18149,7 @@ func (text *TextInstance) ParentTextChanged(position int32, length int32) {
 }
 
 // ParentTextSelectionChanged calls the default implementations of the text_selection_changed virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
 func (text *TextInstance) ParentTextSelectionChanged() {
 	var carg0 *C.AtkText
 
@@ -17860,7 +18162,7 @@ func (text *TextInstance) ParentTextSelectionChanged() {
 // ValueInstance is the instance type used by all types implementing AtkValue. It is used internally by the bindings. Users should use the interface [Value] instead.
 type ValueInstance struct {
 	_ [0]func() // equal guard
-	gobject.ObjectInstance
+	Instance gobject.ObjectInstance
 }
 
 var _ Value = (*ValueInstance)(nil)
@@ -18010,7 +18312,6 @@ var _ Value = (*ValueInstance)(nil)
 // &lt;/para&gt;
 // &lt;/refsect1&gt;
 type Value interface {
-	gobject.Object
 	upcastToAtkValue() *ValueInstance
 
 	// GetIncrement wraps atk_value_get_increment
@@ -18093,7 +18394,8 @@ type Value interface {
 	// chain up virtual methods:
 
 	// ParentGetIncrement calls the default implementations of the get_increment virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret float64 
@@ -18104,7 +18406,8 @@ type Value interface {
 	// platform.
 	ParentGetIncrement() float64
 	// ParentGetRange calls the default implementations of the get_range virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret *Range (nullable) 
@@ -18112,7 +18415,8 @@ type Value interface {
 	// Gets the range of this object.
 	ParentGetRange() *Range
 	// ParentGetSubRanges calls the default implementations of the get_sub_ranges virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret []*Range 
@@ -18121,7 +18425,8 @@ type Value interface {
 	// introduction for examples of subranges and when to expose them.
 	ParentGetSubRanges() []*Range
 	// ParentGetValueAndText calls the default implementations of the get_value_and_text virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- value float64: address of #gdouble to put the current value of @obj 
@@ -18133,7 +18438,8 @@ type Value interface {
 	// caller. Can be NULL if no descriptor is available.
 	ParentGetValueAndText() (float64, string)
 	// ParentSetValue calls the default implementations of the set_value virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- newValue float64: a double which is the desired new accessible value. 
@@ -18159,7 +18465,7 @@ var _ Value = (*ValueInstance)(nil)
 
 func unsafeWrapValue(base *gobject.ObjectInstance) *ValueInstance {
 	return &ValueInstance{
-		ObjectInstance: *base,
+		Instance: *base,
 	}
 }
 
@@ -18189,13 +18495,13 @@ func UnsafeValueFromGlibBorrow(c unsafe.Pointer) Value {
 // UnsafeValueToGlibNone is used to convert the instance to it's C value AtkValue. This is used by the bindings internally.
 func UnsafeValueToGlibNone(c Value) unsafe.Pointer {
 	i := c.upcastToAtkValue()
-	return gobject.UnsafeObjectToGlibNone(i)
+	return gobject.UnsafeObjectToGlibNone(&i.Instance)
 }
 
 // UnsafeValueToGlibFull is used to convert the instance to it's C value AtkValue, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeValueToGlibFull(c Value) unsafe.Pointer {
 	i := c.upcastToAtkValue()
-	return gobject.UnsafeObjectToGlibFull(i)
+	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
 // GetIncrement wraps atk_value_get_increment
@@ -18358,13 +18664,14 @@ func (obj *ValueInstance) SetValue(newValue float64) {
 // types their new password. Appropiate value text would be
 // "weak", "acceptable" and "strong".
 func (o *ValueInstance) ConnectValueChanged(fn func(Value, float64, string)) gobject.SignalHandle {
-	return o.Connect("value-changed", fn)
+	return o.Instance.Connect("value-changed", fn)
 }
 
 // ValueOverrides is the struct used to override the default implementation of virtual methods.
 // it is generic over the extending instance type.
 type ValueOverrides[Instance Value] struct {
-	// GetIncrement allows you to override the implementation of the virtual method get_increment.
+	// // GetIncrement allows you to override the implementation of the virtual method get_increment.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret float64 
@@ -18374,14 +18681,16 @@ type ValueOverrides[Instance Value] struct {
 	// mean that it is limited only by the floating point precision of the
 	// platform.
 	GetIncrement func(Instance) float64
-	// GetRange allows you to override the implementation of the virtual method get_range.
+	// // GetRange allows you to override the implementation of the virtual method get_range.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret *Range (nullable) 
 	//
 	// Gets the range of this object.
 	GetRange func(Instance) *Range
-	// GetSubRanges allows you to override the implementation of the virtual method get_sub_ranges.
+	// // GetSubRanges allows you to override the implementation of the virtual method get_sub_ranges.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret []*Range 
@@ -18389,7 +18698,8 @@ type ValueOverrides[Instance Value] struct {
 	// Gets the list of subranges defined for this object. See #AtkValue
 	// introduction for examples of subranges and when to expose them.
 	GetSubRanges func(Instance) []*Range
-	// GetValueAndText allows you to override the implementation of the virtual method get_value_and_text.
+	// // GetValueAndText allows you to override the implementation of the virtual method get_value_and_text.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- value float64: address of #gdouble to put the current value of @obj 
@@ -18400,7 +18710,8 @@ type ValueOverrides[Instance Value] struct {
 	// @obj. @text is a newly created string, that must be freed by the
 	// caller. Can be NULL if no descriptor is available.
 	GetValueAndText func(Instance) (float64, string)
-	// SetValue allows you to override the implementation of the virtual method set_value.
+	// // SetValue allows you to override the implementation of the virtual method set_value.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- newValue float64: a double which is the desired new accessible value. 
@@ -18484,7 +18795,7 @@ func UnsafeApplyValueOverrides[Instance Value](gclass unsafe.Pointer, overrides 
 
 				_ = goret
 				_ = cret
-				panic("unimplemented conversion of []*Range (GSList*)")
+				panic("unimplemented conversion of []*Range (*C.GSList)")
 
 				return cret
 			},
@@ -18530,7 +18841,8 @@ func UnsafeApplyValueOverrides[Instance Value](gclass unsafe.Pointer, overrides 
 }
 
 // ParentGetIncrement calls the default implementations of the get_increment virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret float64 
@@ -18556,7 +18868,8 @@ func (obj *ValueInstance) ParentGetIncrement() float64 {
 }
 
 // ParentGetRange calls the default implementations of the get_range virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret *Range (nullable) 
@@ -18581,7 +18894,8 @@ func (obj *ValueInstance) ParentGetRange() *Range {
 }
 
 // ParentGetSubRanges calls the default implementations of the get_sub_ranges virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret []*Range 
@@ -18612,7 +18926,8 @@ func (obj *ValueInstance) ParentGetSubRanges() []*Range {
 }
 
 // ParentGetValueAndText calls the default implementations of the get_value_and_text virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- value float64: address of #gdouble to put the current value of @obj 
@@ -18643,7 +18958,8 @@ func (obj *ValueInstance) ParentGetValueAndText() (float64, string) {
 }
 
 // ParentSetValue calls the default implementations of the set_value virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- newValue float64: a double which is the desired new accessible value. 
@@ -18678,7 +18994,7 @@ func (obj *ValueInstance) ParentSetValue(newValue float64) {
 // WindowInstance is the instance type used by all types implementing AtkWindow. It is used internally by the bindings. Users should use the interface [Window] instead.
 type WindowInstance struct {
 	_ [0]func() // equal guard
-	gobject.ObjectInstance
+	Instance gobject.ObjectInstance
 }
 
 var _ Window = (*WindowInstance)(nil)
@@ -18693,7 +19009,6 @@ var _ Window = (*WindowInstance)(nil)
 // 
 // See [class@AtkObject]
 type Window interface {
-	gobject.Object
 	upcastToAtkWindow() *WindowInstance
 
 	// ConnectActivate connects the provided callback to the "activate" signal
@@ -18749,7 +19064,7 @@ var _ Window = (*WindowInstance)(nil)
 
 func unsafeWrapWindow(base *gobject.ObjectInstance) *WindowInstance {
 	return &WindowInstance{
-		ObjectInstance: *base,
+		Instance: *base,
 	}
 }
 
@@ -18779,13 +19094,13 @@ func UnsafeWindowFromGlibBorrow(c unsafe.Pointer) Window {
 // UnsafeWindowToGlibNone is used to convert the instance to it's C value AtkWindow. This is used by the bindings internally.
 func UnsafeWindowToGlibNone(c Window) unsafe.Pointer {
 	i := c.upcastToAtkWindow()
-	return gobject.UnsafeObjectToGlibNone(i)
+	return gobject.UnsafeObjectToGlibNone(&i.Instance)
 }
 
 // UnsafeWindowToGlibFull is used to convert the instance to it's C value AtkWindow, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeWindowToGlibFull(c Window) unsafe.Pointer {
 	i := c.upcastToAtkWindow()
-	return gobject.UnsafeObjectToGlibFull(i)
+	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
 // ConnectActivate connects the provided callback to the "activate" signal
@@ -18793,7 +19108,7 @@ func UnsafeWindowToGlibFull(c Window) unsafe.Pointer {
 // The signal #AtkWindow::activate is emitted when a window
 // becomes the active window of the application or session.
 func (o *WindowInstance) ConnectActivate(fn func(Window)) gobject.SignalHandle {
-	return o.Connect("activate", fn)
+	return o.Instance.Connect("activate", fn)
 }
 
 // ConnectCreate connects the provided callback to the "create" signal
@@ -18801,7 +19116,7 @@ func (o *WindowInstance) ConnectActivate(fn func(Window)) gobject.SignalHandle {
 // The signal #AtkWindow::create is emitted when a new window
 // is created.
 func (o *WindowInstance) ConnectCreate(fn func(Window)) gobject.SignalHandle {
-	return o.Connect("create", fn)
+	return o.Instance.Connect("create", fn)
 }
 
 // ConnectDeactivate connects the provided callback to the "deactivate" signal
@@ -18809,7 +19124,7 @@ func (o *WindowInstance) ConnectCreate(fn func(Window)) gobject.SignalHandle {
 // The signal #AtkWindow::deactivate is emitted when a window is
 // no longer the active window of the application or session.
 func (o *WindowInstance) ConnectDeactivate(fn func(Window)) gobject.SignalHandle {
-	return o.Connect("deactivate", fn)
+	return o.Instance.Connect("deactivate", fn)
 }
 
 // ConnectDestroy connects the provided callback to the "destroy" signal
@@ -18817,7 +19132,7 @@ func (o *WindowInstance) ConnectDeactivate(fn func(Window)) gobject.SignalHandle
 // The signal #AtkWindow::destroy is emitted when a window is
 // destroyed.
 func (o *WindowInstance) ConnectDestroy(fn func(Window)) gobject.SignalHandle {
-	return o.Connect("destroy", fn)
+	return o.Instance.Connect("destroy", fn)
 }
 
 // ConnectMaximize connects the provided callback to the "maximize" signal
@@ -18825,7 +19140,7 @@ func (o *WindowInstance) ConnectDestroy(fn func(Window)) gobject.SignalHandle {
 // The signal #AtkWindow::maximize is emitted when a window
 // is maximized.
 func (o *WindowInstance) ConnectMaximize(fn func(Window)) gobject.SignalHandle {
-	return o.Connect("maximize", fn)
+	return o.Instance.Connect("maximize", fn)
 }
 
 // ConnectMinimize connects the provided callback to the "minimize" signal
@@ -18833,7 +19148,7 @@ func (o *WindowInstance) ConnectMaximize(fn func(Window)) gobject.SignalHandle {
 // The signal #AtkWindow::minimize is emitted when a window
 // is minimized.
 func (o *WindowInstance) ConnectMinimize(fn func(Window)) gobject.SignalHandle {
-	return o.Connect("minimize", fn)
+	return o.Instance.Connect("minimize", fn)
 }
 
 // ConnectMove connects the provided callback to the "move" signal
@@ -18841,7 +19156,7 @@ func (o *WindowInstance) ConnectMinimize(fn func(Window)) gobject.SignalHandle {
 // The signal #AtkWindow::move is emitted when a window
 // is moved.
 func (o *WindowInstance) ConnectMove(fn func(Window)) gobject.SignalHandle {
-	return o.Connect("move", fn)
+	return o.Instance.Connect("move", fn)
 }
 
 // ConnectResize connects the provided callback to the "resize" signal
@@ -18849,7 +19164,7 @@ func (o *WindowInstance) ConnectMove(fn func(Window)) gobject.SignalHandle {
 // The signal #AtkWindow::resize is emitted when a window
 // is resized.
 func (o *WindowInstance) ConnectResize(fn func(Window)) gobject.SignalHandle {
-	return o.Connect("resize", fn)
+	return o.Instance.Connect("resize", fn)
 }
 
 // ConnectRestore connects the provided callback to the "restore" signal
@@ -18857,7 +19172,7 @@ func (o *WindowInstance) ConnectResize(fn func(Window)) gobject.SignalHandle {
 // The signal #AtkWindow::restore is emitted when a window
 // is restored.
 func (o *WindowInstance) ConnectRestore(fn func(Window)) gobject.SignalHandle {
-	return o.Connect("restore", fn)
+	return o.Instance.Connect("restore", fn)
 }
 
 // WindowOverrides is the struct used to override the default implementation of virtual methods.
@@ -18977,7 +19292,8 @@ type Hyperlink interface {
 	// chain up virtual methods:
 
 	// ParentGetEndIndex calls the default implementations of the get_end_index virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
@@ -18985,7 +19301,8 @@ type Hyperlink interface {
 	// Gets the index with the hypertext document at which this link ends.
 	ParentGetEndIndex() int32
 	// ParentGetNAnchors calls the default implementations of the get_n_anchors virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
@@ -18993,7 +19310,8 @@ type Hyperlink interface {
 	// Gets the number of anchors associated with this hyperlink.
 	ParentGetNAnchors() int32
 	// ParentGetObject calls the default implementations of the get_object virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- i int32: a (zero-index) integer specifying the desired anchor 
@@ -19010,7 +19328,8 @@ type Hyperlink interface {
 	// Multiple anchors are primarily used by client-side image maps.
 	ParentGetObject(i int32) Object
 	// ParentGetStartIndex calls the default implementations of the get_start_index virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
@@ -19018,7 +19337,8 @@ type Hyperlink interface {
 	// Gets the index with the hypertext document at which this link begins.
 	ParentGetStartIndex() int32
 	// ParentGetURI calls the default implementations of the get_uri virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- i int32: a (zero-index) integer specifying the desired anchor 
@@ -19033,7 +19353,8 @@ type Hyperlink interface {
 	// Multiple anchors are primarily used by client-side image maps.
 	ParentGetURI(i int32) string
 	// ParentIsValid calls the default implementations of the is_valid virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
@@ -19043,10 +19364,11 @@ type Hyperlink interface {
 	// respect to the document it references) and %FALSE otherwise.
 	ParentIsValid() bool
 	// ParentLinkActivated calls the default implementations of the link_activated virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
 	ParentLinkActivated()
 	// ParentLinkState calls the default implementations of the link_state virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret uint 
@@ -19298,21 +19620,24 @@ type HyperlinkOverrides[Instance Hyperlink] struct {
 	// gobject.ObjectOverrides allows you to override virtual methods from the parent class gobject.Object
 	gobject.ObjectOverrides[Instance]
 
-	// GetEndIndex allows you to override the implementation of the virtual method get_end_index.
+	// // GetEndIndex allows you to override the implementation of the virtual method get_end_index.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
 	//
 	// Gets the index with the hypertext document at which this link ends.
 	GetEndIndex func(Instance) int32
-	// GetNAnchors allows you to override the implementation of the virtual method get_n_anchors.
+	// // GetNAnchors allows you to override the implementation of the virtual method get_n_anchors.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
 	//
 	// Gets the number of anchors associated with this hyperlink.
 	GetNAnchors func(Instance) int32
-	// GetObject allows you to override the implementation of the virtual method get_object.
+	// // GetObject allows you to override the implementation of the virtual method get_object.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- i int32: a (zero-index) integer specifying the desired anchor 
@@ -19328,14 +19653,16 @@ type HyperlinkOverrides[Instance Hyperlink] struct {
 	// 
 	// Multiple anchors are primarily used by client-side image maps.
 	GetObject func(Instance, int32) Object
-	// GetStartIndex allows you to override the implementation of the virtual method get_start_index.
+	// // GetStartIndex allows you to override the implementation of the virtual method get_start_index.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
 	//
 	// Gets the index with the hypertext document at which this link begins.
 	GetStartIndex func(Instance) int32
-	// GetURI allows you to override the implementation of the virtual method get_uri.
+	// // GetURI allows you to override the implementation of the virtual method get_uri.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- i int32: a (zero-index) integer specifying the desired anchor 
@@ -19349,7 +19676,8 @@ type HyperlinkOverrides[Instance Hyperlink] struct {
 	// 
 	// Multiple anchors are primarily used by client-side image maps.
 	GetURI func(Instance, int32) string
-	// IsValid allows you to override the implementation of the virtual method is_valid.
+	// // IsValid allows you to override the implementation of the virtual method is_valid.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
@@ -19358,9 +19686,10 @@ type HyperlinkOverrides[Instance Hyperlink] struct {
 	// this method returns %TRUE if the link is still valid (with
 	// respect to the document it references) and %FALSE otherwise.
 	IsValid func(Instance) bool
-	// LinkActivated allows you to override the implementation of the virtual method link_activated.
+	// // LinkActivated allows you to override the implementation of the virtual method link_activated.
 	LinkActivated func(Instance)
-	// LinkState allows you to override the implementation of the virtual method link_state.
+	// // LinkState allows you to override the implementation of the virtual method link_state.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret uint 
@@ -19537,7 +19866,8 @@ func UnsafeApplyHyperlinkOverrides[Instance Hyperlink](gclass unsafe.Pointer, ov
 }
 
 // ParentGetEndIndex calls the default implementations of the get_end_index virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret int32 
@@ -19560,7 +19890,8 @@ func (link_ *HyperlinkInstance) ParentGetEndIndex() int32 {
 }
 
 // ParentGetNAnchors calls the default implementations of the get_n_anchors virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret int32 
@@ -19583,7 +19914,8 @@ func (link_ *HyperlinkInstance) ParentGetNAnchors() int32 {
 }
 
 // ParentGetObject calls the default implementations of the get_object virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- i int32: a (zero-index) integer specifying the desired anchor 
@@ -19619,7 +19951,8 @@ func (link_ *HyperlinkInstance) ParentGetObject(i int32) Object {
 }
 
 // ParentGetStartIndex calls the default implementations of the get_start_index virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret int32 
@@ -19642,7 +19975,8 @@ func (link_ *HyperlinkInstance) ParentGetStartIndex() int32 {
 }
 
 // ParentGetURI calls the default implementations of the get_uri virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- i int32: a (zero-index) integer specifying the desired anchor 
@@ -19677,7 +20011,8 @@ func (link_ *HyperlinkInstance) ParentGetURI(i int32) string {
 }
 
 // ParentIsValid calls the default implementations of the is_valid virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -19704,7 +20039,7 @@ func (link_ *HyperlinkInstance) ParentIsValid() bool {
 }
 
 // ParentLinkActivated calls the default implementations of the link_activated virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
 func (link_ *HyperlinkInstance) ParentLinkActivated() {
 	var carg0 *C.AtkHyperlink
 
@@ -19715,7 +20050,8 @@ func (link_ *HyperlinkInstance) ParentLinkActivated() {
 }
 
 // ParentLinkState calls the default implementations of the link_state virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret uint 
@@ -20189,7 +20525,8 @@ type Object interface {
 	// chain up virtual methods:
 
 	// ParentFocusEvent calls the default implementations of the focus_event virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- focusIn bool 
@@ -20200,7 +20537,8 @@ type Object interface {
 	//   the #AtkObject::state-change "focused" signal instead.
 	ParentFocusEvent(focusIn bool)
 	// ParentGetDescription calls the default implementations of the get_description virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret string 
@@ -20208,7 +20546,8 @@ type Object interface {
 	// Gets the accessible description of the accessible.
 	ParentGetDescription() string
 	// ParentGetIndexInParent calls the default implementations of the get_index_in_parent virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
@@ -20217,13 +20556,15 @@ type Object interface {
 	// accessible does not have an accessible parent.
 	ParentGetIndexInParent() int32
 	// ParentGetNChildren calls the default implementations of the get_n_children virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
 	ParentGetNChildren() int32
 	// ParentGetName calls the default implementations of the get_name virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret string 
@@ -20231,7 +20572,8 @@ type Object interface {
 	// Gets the accessible name of the accessible.
 	ParentGetName() string
 	// ParentGetObjectLocale calls the default implementations of the get_object_locale virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret string 
@@ -20240,7 +20582,8 @@ type Object interface {
 	// of @accessible.
 	ParentGetObjectLocale() string
 	// ParentGetParent calls the default implementations of the get_parent virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Object 
@@ -20255,7 +20598,8 @@ type Object interface {
 	// atk_object_set_parent(), use atk_object_peek_parent().
 	ParentGetParent() Object
 	// ParentGetRole calls the default implementations of the get_role virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Role 
@@ -20263,13 +20607,15 @@ type Object interface {
 	// Gets the role of the accessible.
 	ParentGetRole() Role
 	// ParentPropertyChange calls the default implementations of the property_change virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- values *PropertyValues 
 	ParentPropertyChange(values *PropertyValues)
 	// ParentRefRelationSet calls the default implementations of the ref_relation_set virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret RelationSet 
@@ -20277,7 +20623,8 @@ type Object interface {
 	// Gets the #AtkRelationSet associated with the object.
 	ParentRefRelationSet() RelationSet
 	// ParentRefStateSet calls the default implementations of the ref_state_set virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret StateSet 
@@ -20286,7 +20633,8 @@ type Object interface {
 	// unreference it when it is no longer needed.
 	ParentRefStateSet() StateSet
 	// ParentSetDescription calls the default implementations of the set_description virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- description string: a character string to be set as the accessible description 
@@ -20297,7 +20645,8 @@ type Object interface {
 	// the name to a empty value you can use "".
 	ParentSetDescription(description string)
 	// ParentSetName calls the default implementations of the set_name virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- name string: a character string to be set as the accessible name 
@@ -20308,7 +20657,8 @@ type Object interface {
 	// a empty value you can use "".
 	ParentSetName(name string)
 	// ParentSetParent calls the default implementations of the set_parent virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- parent Object: an #AtkObject to be set as the accessible parent 
@@ -20316,7 +20666,8 @@ type Object interface {
 	// Sets the accessible parent of the accessible. @parent can be NULL.
 	ParentSetParent(parent Object)
 	// ParentSetRole calls the default implementations of the set_role virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- role Role: an #AtkRole to be set as the role 
@@ -20324,14 +20675,15 @@ type Object interface {
 	// Sets the role of the accessible.
 	ParentSetRole(role Role)
 	// ParentStateChange calls the default implementations of the state_change virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- name string 
 	// 	- stateSet bool 
 	ParentStateChange(name string, stateSet bool)
 	// ParentVisibleDataChanged calls the default implementations of the visible_data_changed virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
 	ParentVisibleDataChanged()
 }
 
@@ -21025,7 +21377,8 @@ type ObjectOverrides[Instance Object] struct {
 	// gobject.ObjectOverrides allows you to override virtual methods from the parent class gobject.Object
 	gobject.ObjectOverrides[Instance]
 
-	// FocusEvent allows you to override the implementation of the virtual method focus_event.
+	// // FocusEvent allows you to override the implementation of the virtual method focus_event.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- focusIn bool 
@@ -21035,14 +21388,16 @@ type ObjectOverrides[Instance Object] struct {
 	//   since 2.9.4 and it should not be overriden. Use
 	//   the #AtkObject::state-change "focused" signal instead.
 	FocusEvent func(Instance, bool)
-	// GetDescription allows you to override the implementation of the virtual method get_description.
+	// // GetDescription allows you to override the implementation of the virtual method get_description.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret string 
 	//
 	// Gets the accessible description of the accessible.
 	GetDescription func(Instance) string
-	// GetIndexInParent allows you to override the implementation of the virtual method get_index_in_parent.
+	// // GetIndexInParent allows you to override the implementation of the virtual method get_index_in_parent.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
@@ -21050,19 +21405,22 @@ type ObjectOverrides[Instance Object] struct {
 	// Gets the 0-based index of this accessible in its parent; returns -1 if the
 	// accessible does not have an accessible parent.
 	GetIndexInParent func(Instance) int32
-	// GetNChildren allows you to override the implementation of the virtual method get_n_children.
+	// // GetNChildren allows you to override the implementation of the virtual method get_n_children.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret int32 
 	GetNChildren func(Instance) int32
-	// GetName allows you to override the implementation of the virtual method get_name.
+	// // GetName allows you to override the implementation of the virtual method get_name.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret string 
 	//
 	// Gets the accessible name of the accessible.
 	GetName func(Instance) string
-	// GetObjectLocale allows you to override the implementation of the virtual method get_object_locale.
+	// // GetObjectLocale allows you to override the implementation of the virtual method get_object_locale.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret string 
@@ -21070,7 +21428,8 @@ type ObjectOverrides[Instance Object] struct {
 	// Gets a UTF-8 string indicating the POSIX-style LC_MESSAGES locale
 	// of @accessible.
 	GetObjectLocale func(Instance) string
-	// GetParent allows you to override the implementation of the virtual method get_parent.
+	// // GetParent allows you to override the implementation of the virtual method get_parent.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Object 
@@ -21084,26 +21443,30 @@ type ObjectOverrides[Instance Object] struct {
 	// If you are only interested on the parent assigned with
 	// atk_object_set_parent(), use atk_object_peek_parent().
 	GetParent func(Instance) Object
-	// GetRole allows you to override the implementation of the virtual method get_role.
+	// // GetRole allows you to override the implementation of the virtual method get_role.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Role 
 	//
 	// Gets the role of the accessible.
 	GetRole func(Instance) Role
-	// PropertyChange allows you to override the implementation of the virtual method property_change.
+	// // PropertyChange allows you to override the implementation of the virtual method property_change.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- values *PropertyValues 
 	PropertyChange func(Instance, *PropertyValues)
-	// RefRelationSet allows you to override the implementation of the virtual method ref_relation_set.
+	// // RefRelationSet allows you to override the implementation of the virtual method ref_relation_set.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret RelationSet 
 	//
 	// Gets the #AtkRelationSet associated with the object.
 	RefRelationSet func(Instance) RelationSet
-	// RefStateSet allows you to override the implementation of the virtual method ref_state_set.
+	// // RefStateSet allows you to override the implementation of the virtual method ref_state_set.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret StateSet 
@@ -21111,7 +21474,8 @@ type ObjectOverrides[Instance Object] struct {
 	// Gets a reference to the state set of the accessible; the caller must
 	// unreference it when it is no longer needed.
 	RefStateSet func(Instance) StateSet
-	// SetDescription allows you to override the implementation of the virtual method set_description.
+	// // SetDescription allows you to override the implementation of the virtual method set_description.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- description string: a character string to be set as the accessible description 
@@ -21121,7 +21485,8 @@ type ObjectOverrides[Instance Object] struct {
 	// this aspect NULL is similar to ATK_ROLE_UNKNOWN. If you want to set
 	// the name to a empty value you can use "".
 	SetDescription func(Instance, string)
-	// SetName allows you to override the implementation of the virtual method set_name.
+	// // SetName allows you to override the implementation of the virtual method set_name.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- name string: a character string to be set as the accessible name 
@@ -21131,27 +21496,30 @@ type ObjectOverrides[Instance Object] struct {
 	// NULL is similar to ATK_ROLE_UNKNOWN. If you want to set the name to
 	// a empty value you can use "".
 	SetName func(Instance, string)
-	// SetParent allows you to override the implementation of the virtual method set_parent.
+	// // SetParent allows you to override the implementation of the virtual method set_parent.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- parent Object: an #AtkObject to be set as the accessible parent 
 	//
 	// Sets the accessible parent of the accessible. @parent can be NULL.
 	SetParent func(Instance, Object)
-	// SetRole allows you to override the implementation of the virtual method set_role.
+	// // SetRole allows you to override the implementation of the virtual method set_role.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- role Role: an #AtkRole to be set as the role 
 	//
 	// Sets the role of the accessible.
 	SetRole func(Instance, Role)
-	// StateChange allows you to override the implementation of the virtual method state_change.
+	// // StateChange allows you to override the implementation of the virtual method state_change.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- name string 
 	// 	- stateSet bool 
 	StateChange func(Instance, string, bool)
-	// VisibleDataChanged allows you to override the implementation of the virtual method visible_data_changed.
+	// // VisibleDataChanged allows you to override the implementation of the virtual method visible_data_changed.
 	VisibleDataChanged func(Instance)
 }
 
@@ -21487,7 +21855,8 @@ func UnsafeApplyObjectOverrides[Instance Object](gclass unsafe.Pointer, override
 }
 
 // ParentFocusEvent calls the default implementations of the focus_event virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- focusIn bool 
@@ -21512,7 +21881,8 @@ func (accessible *ObjectInstance) ParentFocusEvent(focusIn bool) {
 }
 
 // ParentGetDescription calls the default implementations of the get_description virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret string 
@@ -21535,7 +21905,8 @@ func (accessible *ObjectInstance) ParentGetDescription() string {
 }
 
 // ParentGetIndexInParent calls the default implementations of the get_index_in_parent virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret int32 
@@ -21559,7 +21930,8 @@ func (accessible *ObjectInstance) ParentGetIndexInParent() int32 {
 }
 
 // ParentGetNChildren calls the default implementations of the get_n_children virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret int32 
@@ -21580,7 +21952,8 @@ func (accessible *ObjectInstance) ParentGetNChildren() int32 {
 }
 
 // ParentGetName calls the default implementations of the get_name virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret string 
@@ -21603,7 +21976,8 @@ func (accessible *ObjectInstance) ParentGetName() string {
 }
 
 // ParentGetObjectLocale calls the default implementations of the get_object_locale virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret string 
@@ -21627,7 +22001,8 @@ func (accessible *ObjectInstance) ParentGetObjectLocale() string {
 }
 
 // ParentGetParent calls the default implementations of the get_parent virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret Object 
@@ -21657,7 +22032,8 @@ func (accessible *ObjectInstance) ParentGetParent() Object {
 }
 
 // ParentGetRole calls the default implementations of the get_role virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret Role 
@@ -21680,7 +22056,8 @@ func (accessible *ObjectInstance) ParentGetRole() Role {
 }
 
 // ParentPropertyChange calls the default implementations of the property_change virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- values *PropertyValues 
@@ -21698,7 +22075,8 @@ func (accessible *ObjectInstance) ParentPropertyChange(values *PropertyValues) {
 }
 
 // ParentRefRelationSet calls the default implementations of the ref_relation_set virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret RelationSet 
@@ -21721,7 +22099,8 @@ func (accessible *ObjectInstance) ParentRefRelationSet() RelationSet {
 }
 
 // ParentRefStateSet calls the default implementations of the ref_state_set virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret StateSet 
@@ -21745,7 +22124,8 @@ func (accessible *ObjectInstance) ParentRefStateSet() StateSet {
 }
 
 // ParentSetDescription calls the default implementations of the set_description virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- description string: a character string to be set as the accessible description 
@@ -21769,7 +22149,8 @@ func (accessible *ObjectInstance) ParentSetDescription(description string) {
 }
 
 // ParentSetName calls the default implementations of the set_name virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- name string: a character string to be set as the accessible name 
@@ -21793,7 +22174,8 @@ func (accessible *ObjectInstance) ParentSetName(name string) {
 }
 
 // ParentSetParent calls the default implementations of the set_parent virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- parent Object: an #AtkObject to be set as the accessible parent 
@@ -21813,7 +22195,8 @@ func (accessible *ObjectInstance) ParentSetParent(parent Object) {
 }
 
 // ParentSetRole calls the default implementations of the set_role virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- role Role: an #AtkRole to be set as the role 
@@ -21833,7 +22216,8 @@ func (accessible *ObjectInstance) ParentSetRole(role Role) {
 }
 
 // ParentStateChange calls the default implementations of the state_change virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- name string 
@@ -21858,7 +22242,7 @@ func (accessible *ObjectInstance) ParentStateChange(name string, stateSet bool) 
 }
 
 // ParentVisibleDataChanged calls the default implementations of the visible_data_changed virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
 func (accessible *ObjectInstance) ParentVisibleDataChanged() {
 	var carg0 *C.AtkObject
 
@@ -21949,7 +22333,7 @@ type ObjectFactory interface {
 	// chain up virtual methods:
 
 	// ParentInvalidate calls the default implementations of the invalidate virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
 	//
 	// Inform @factory that it is no longer being used to create
 	// accessibles. When called, @factory may need to inform
@@ -22074,7 +22458,7 @@ type ObjectFactoryOverrides[Instance ObjectFactory] struct {
 	// gobject.ObjectOverrides allows you to override virtual methods from the parent class gobject.Object
 	gobject.ObjectOverrides[Instance]
 
-	// Invalidate allows you to override the implementation of the virtual method invalidate.
+	// // Invalidate allows you to override the implementation of the virtual method invalidate.
 	//
 	// Inform @factory that it is no longer being used to create
 	// accessibles. When called, @factory may need to inform
@@ -22108,7 +22492,7 @@ func UnsafeApplyObjectFactoryOverrides[Instance ObjectFactory](gclass unsafe.Poi
 }
 
 // ParentInvalidate calls the default implementations of the invalidate virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
 //
 // Inform @factory that it is no longer being used to create
 // accessibles. When called, @factory may need to inform
@@ -22202,7 +22586,8 @@ type Plug interface {
 	// chain up virtual methods:
 
 	// ParentGetObjectID calls the default implementations of the get_object_id virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret string 
@@ -22333,7 +22718,8 @@ type PlugOverrides[Instance Plug] struct {
 	// ObjectOverrides allows you to override virtual methods from the parent class Object
 	ObjectOverrides[Instance]
 
-	// GetObjectID allows you to override the implementation of the virtual method get_object_id.
+	// // GetObjectID allows you to override the implementation of the virtual method get_object_id.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret string 
@@ -22369,7 +22755,8 @@ func UnsafeApplyPlugOverrides[Instance Plug](gclass unsafe.Pointer, overrides Pl
 }
 
 // ParentGetObjectID calls the default implementations of the get_object_id virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret string 
@@ -22770,7 +23157,7 @@ func NewRelation(targets []Object, relationship RelationType) Relation {
 	_ = targets
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []Object (AtkObject**)")
+	panic("unimplemented conversion of []Object (**C.AtkObject)")
 	carg3 = C.AtkRelationType(relationship)
 
 	cret = C.atk_relation_new(carg1, carg2, carg3)
@@ -23413,7 +23800,8 @@ type Socket interface {
 	// chain up virtual methods:
 
 	// ParentEmbed calls the default implementations of the embed virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- plugId string: the ID of an #AtkPlug 
@@ -23551,7 +23939,8 @@ type SocketOverrides[Instance Socket] struct {
 	// ObjectOverrides allows you to override virtual methods from the parent class Object
 	ObjectOverrides[Instance]
 
-	// Embed allows you to override the implementation of the virtual method embed.
+	// // Embed allows you to override the implementation of the virtual method embed.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- plugId string: the ID of an #AtkPlug 
@@ -23595,7 +23984,8 @@ func UnsafeApplySocketOverrides[Instance Socket](gclass unsafe.Pointer, override
 }
 
 // ParentEmbed calls the default implementations of the embed virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- plugId string: the ID of an #AtkPlug 
@@ -23914,7 +24304,7 @@ func (set *StateSetInstance) AddStates(types []StateType) {
 	_ = types
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []StateType (AtkStateType*)")
+	panic("unimplemented conversion of []StateType (*C.AtkStateType)")
 
 	C.atk_state_set_add_states(carg0, carg1, carg2)
 	runtime.KeepAlive(set)
@@ -24018,7 +24408,7 @@ func (set *StateSetInstance) ContainsStates(types []StateType) bool {
 	_ = types
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []StateType (AtkStateType*)")
+	panic("unimplemented conversion of []StateType (*C.AtkStateType)")
 
 	cret = C.atk_state_set_contains_states(carg0, carg1, carg2)
 	runtime.KeepAlive(set)
@@ -24518,40 +24908,40 @@ func unsafeWrapNoOpObject(base *gobject.ObjectInstance) *NoOpObjectInstance {
 			ObjectInstance: *base,
 		},
 		ActionInstance: ActionInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ComponentInstance: ComponentInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		DocumentInstance: DocumentInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		EditableTextInstance: EditableTextInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		HypertextInstance: HypertextInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ImageInstance: ImageInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		SelectionInstance: SelectionInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		TableInstance: TableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		TableCellInstance: TableCellInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		TextInstance: TextInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ValueInstance: ValueInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		WindowInstance: WindowInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }

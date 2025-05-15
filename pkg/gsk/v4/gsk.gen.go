@@ -19,7 +19,7 @@ import (
 // #cgo pkg-config: gtk4
 // #cgo CFLAGS: -Wno-deprecated-declarations
 // #include <gsk/gsk.h>
-// extern gboolean _gotk4_gsk4_PathForEachFunc(GskPathOperation, graphene_point_t*, gsize, float, gpointer);
+// extern C.gboolean _gotk4_gsk4_PathForEachFunc(C.GskPathOperation, *C.graphene_point_t, C.gsize, C.float, C.gpointer);
 import "C"
 
 // GType values.
@@ -2394,7 +2394,7 @@ func UnsafePathToGlibFull(p *Path) unsafe.Pointer {
 // 
 // The `O` command is an extension that is not supported in SVG.
 func PathParse(str string) *Path {
-	var carg1 *C.char    // in, none, string, casted *C.gchar
+	var carg1 *C.char    // in, none, string
 	var cret  *C.GskPath // return, full, converted, nullable
 
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(str)))
@@ -2500,7 +2500,7 @@ func (self *Path) GetBounds() (graphene.Rect, bool) {
 
 	_ = bounds
 	_ = carg1
-	panic("unimplemented conversion of graphene.Rect (graphene_rect_t)")
+	panic("unimplemented conversion of graphene.Rect (C.graphene_rect_t)")
 	if cret != 0 {
 		goret = true
 	}
@@ -2529,9 +2529,9 @@ func (self *Path) GetBounds() (graphene.Rect, bool) {
 func (self *Path) GetClosestPoint(point *graphene.Point, threshold float32) (PathPoint, float32, bool) {
 	var carg0 *C.GskPath          // in, none, converted
 	var carg1 *C.graphene_point_t // in, none, converted
-	var carg2 C.float             // in, none, casted, casted C.gfloat
+	var carg2 C.float             // in, none, casted
 	var carg3 C.GskPathPoint      // out, transfer: none, C Pointers: 0, Name: PathPoint, caller-allocates
-	var carg4 C.float             // out, full, casted, casted C.gfloat
+	var carg4 C.float             // out, full, casted
 	var cret  C.gboolean          // return
 
 	carg0 = (*C.GskPath)(UnsafePathToGlibNone(self))
@@ -2549,7 +2549,7 @@ func (self *Path) GetClosestPoint(point *graphene.Point, threshold float32) (Pat
 
 	_ = result
 	_ = carg3
-	panic("unimplemented conversion of PathPoint (GskPathPoint)")
+	panic("unimplemented conversion of PathPoint (C.GskPathPoint)")
 	distance = float32(carg4)
 	if cret != 0 {
 		goret = true
@@ -2584,7 +2584,7 @@ func (self *Path) GetEndPoint() (PathPoint, bool) {
 
 	_ = result
 	_ = carg1
-	panic("unimplemented conversion of PathPoint (GskPathPoint)")
+	panic("unimplemented conversion of PathPoint (C.GskPathPoint)")
 	if cret != 0 {
 		goret = true
 	}
@@ -2618,7 +2618,7 @@ func (self *Path) GetStartPoint() (PathPoint, bool) {
 
 	_ = result
 	_ = carg1
-	panic("unimplemented conversion of PathPoint (GskPathPoint)")
+	panic("unimplemented conversion of PathPoint (C.GskPathPoint)")
 	if cret != 0 {
 		goret = true
 	}
@@ -2662,7 +2662,7 @@ func (self *Path) GetStrokeBounds(stroke *Stroke) (graphene.Rect, bool) {
 
 	_ = bounds
 	_ = carg2
-	panic("unimplemented conversion of graphene.Rect (graphene_rect_t)")
+	panic("unimplemented conversion of graphene.Rect (C.graphene_rect_t)")
 	if cret != 0 {
 		goret = true
 	}
@@ -2777,7 +2777,7 @@ func (self *Path) IsEmpty() bool {
 // for details.
 func (self *Path) ToString() string {
 	var carg0 *C.GskPath // in, none, converted
-	var cret  *C.char    // return, full, string, casted *C.gchar
+	var cret  *C.char    // return, full, string
 
 	carg0 = (*C.GskPath)(UnsafePathToGlibNone(self))
 
@@ -2952,7 +2952,7 @@ func NewPathBuilder() *PathBuilder {
 func (self *PathBuilder) AddCircle(center *graphene.Point, radius float32) {
 	var carg0 *C.GskPathBuilder   // in, none, converted
 	var carg1 *C.graphene_point_t // in, none, converted
-	var carg2 C.float             // in, none, casted, casted C.gfloat
+	var carg2 C.float             // in, none, casted
 
 	carg0 = (*C.GskPathBuilder)(UnsafePathBuilderToGlibNone(self))
 	carg1 = (*C.graphene_point_t)(graphene.UnsafePointToGlibNone(center))
@@ -3126,10 +3126,10 @@ func (self *PathBuilder) AddSegment(path *Path, start *PathPoint, end *PathPoint
 // &lt;/picture&gt;
 func (self *PathBuilder) ArcTo(x1 float32, y1 float32, x2 float32, y2 float32) {
 	var carg0 *C.GskPathBuilder // in, none, converted
-	var carg1 C.float           // in, none, casted, casted C.gfloat
-	var carg2 C.float           // in, none, casted, casted C.gfloat
-	var carg3 C.float           // in, none, casted, casted C.gfloat
-	var carg4 C.float           // in, none, casted, casted C.gfloat
+	var carg1 C.float           // in, none, casted
+	var carg2 C.float           // in, none, casted
+	var carg3 C.float           // in, none, casted
+	var carg4 C.float           // in, none, casted
 
 	carg0 = (*C.GskPathBuilder)(UnsafePathBuilderToGlibNone(self))
 	carg1 = C.float(x1)
@@ -3191,11 +3191,11 @@ func (self *PathBuilder) Close() {
 // &lt;/picture&gt;
 func (self *PathBuilder) ConicTo(x1 float32, y1 float32, x2 float32, y2 float32, weight float32) {
 	var carg0 *C.GskPathBuilder // in, none, converted
-	var carg1 C.float           // in, none, casted, casted C.gfloat
-	var carg2 C.float           // in, none, casted, casted C.gfloat
-	var carg3 C.float           // in, none, casted, casted C.gfloat
-	var carg4 C.float           // in, none, casted, casted C.gfloat
-	var carg5 C.float           // in, none, casted, casted C.gfloat
+	var carg1 C.float           // in, none, casted
+	var carg2 C.float           // in, none, casted
+	var carg3 C.float           // in, none, casted
+	var carg4 C.float           // in, none, casted
+	var carg5 C.float           // in, none, casted
 
 	carg0 = (*C.GskPathBuilder)(UnsafePathBuilderToGlibNone(self))
 	carg1 = C.float(x1)
@@ -3236,12 +3236,12 @@ func (self *PathBuilder) ConicTo(x1 float32, y1 float32, x2 float32, y2 float32,
 // &lt;/picture&gt;
 func (self *PathBuilder) CubicTo(x1 float32, y1 float32, x2 float32, y2 float32, x3 float32, y3 float32) {
 	var carg0 *C.GskPathBuilder // in, none, converted
-	var carg1 C.float           // in, none, casted, casted C.gfloat
-	var carg2 C.float           // in, none, casted, casted C.gfloat
-	var carg3 C.float           // in, none, casted, casted C.gfloat
-	var carg4 C.float           // in, none, casted, casted C.gfloat
-	var carg5 C.float           // in, none, casted, casted C.gfloat
-	var carg6 C.float           // in, none, casted, casted C.gfloat
+	var carg1 C.float           // in, none, casted
+	var carg2 C.float           // in, none, casted
+	var carg3 C.float           // in, none, casted
+	var carg4 C.float           // in, none, casted
+	var carg5 C.float           // in, none, casted
+	var carg6 C.float           // in, none, casted
 
 	carg0 = (*C.GskPathBuilder)(UnsafePathBuilderToGlibNone(self))
 	carg1 = C.float(x1)
@@ -3312,11 +3312,11 @@ func (self *PathBuilder) GetCurrentPoint() *graphene.Point {
 // @x1, @y1 to @x2, @y2.
 func (self *PathBuilder) HtmlArcTo(x1 float32, y1 float32, x2 float32, y2 float32, radius float32) {
 	var carg0 *C.GskPathBuilder // in, none, converted
-	var carg1 C.float           // in, none, casted, casted C.gfloat
-	var carg2 C.float           // in, none, casted, casted C.gfloat
-	var carg3 C.float           // in, none, casted, casted C.gfloat
-	var carg4 C.float           // in, none, casted, casted C.gfloat
-	var carg5 C.float           // in, none, casted, casted C.gfloat
+	var carg1 C.float           // in, none, casted
+	var carg2 C.float           // in, none, casted
+	var carg3 C.float           // in, none, casted
+	var carg4 C.float           // in, none, casted
+	var carg5 C.float           // in, none, casted
 
 	carg0 = (*C.GskPathBuilder)(UnsafePathBuilderToGlibNone(self))
 	carg1 = C.float(x1)
@@ -3350,8 +3350,8 @@ func (self *PathBuilder) HtmlArcTo(x1 float32, y1 float32, x2 float32, y2 float3
 // &lt;/picture&gt;
 func (self *PathBuilder) LineTo(x float32, y float32) {
 	var carg0 *C.GskPathBuilder // in, none, converted
-	var carg1 C.float           // in, none, casted, casted C.gfloat
-	var carg2 C.float           // in, none, casted, casted C.gfloat
+	var carg1 C.float           // in, none, casted
+	var carg2 C.float           // in, none, casted
 
 	carg0 = (*C.GskPathBuilder)(UnsafePathBuilderToGlibNone(self))
 	carg1 = C.float(x)
@@ -3377,8 +3377,8 @@ func (self *PathBuilder) LineTo(x float32, y float32) {
 // The second call will start a new contour.
 func (self *PathBuilder) MoveTo(x float32, y float32) {
 	var carg0 *C.GskPathBuilder // in, none, converted
-	var carg1 C.float           // in, none, casted, casted C.gfloat
-	var carg2 C.float           // in, none, casted, casted C.gfloat
+	var carg1 C.float           // in, none, casted
+	var carg2 C.float           // in, none, casted
 
 	carg0 = (*C.GskPathBuilder)(UnsafePathBuilderToGlibNone(self))
 	carg1 = C.float(x)
@@ -3410,10 +3410,10 @@ func (self *PathBuilder) MoveTo(x float32, y float32) {
 // &lt;/picture&gt;
 func (self *PathBuilder) QuadTo(x1 float32, y1 float32, x2 float32, y2 float32) {
 	var carg0 *C.GskPathBuilder // in, none, converted
-	var carg1 C.float           // in, none, casted, casted C.gfloat
-	var carg2 C.float           // in, none, casted, casted C.gfloat
-	var carg3 C.float           // in, none, casted, casted C.gfloat
-	var carg4 C.float           // in, none, casted, casted C.gfloat
+	var carg1 C.float           // in, none, casted
+	var carg2 C.float           // in, none, casted
+	var carg3 C.float           // in, none, casted
+	var carg4 C.float           // in, none, casted
 
 	carg0 = (*C.GskPathBuilder)(UnsafePathBuilderToGlibNone(self))
 	carg1 = C.float(x1)
@@ -3446,10 +3446,10 @@ func (self *PathBuilder) QuadTo(x1 float32, y1 float32, x2 float32, y2 float32) 
 // This is the relative version of [method@Gsk.PathBuilder.arc_to].
 func (self *PathBuilder) RelArcTo(x1 float32, y1 float32, x2 float32, y2 float32) {
 	var carg0 *C.GskPathBuilder // in, none, converted
-	var carg1 C.float           // in, none, casted, casted C.gfloat
-	var carg2 C.float           // in, none, casted, casted C.gfloat
-	var carg3 C.float           // in, none, casted, casted C.gfloat
-	var carg4 C.float           // in, none, casted, casted C.gfloat
+	var carg1 C.float           // in, none, casted
+	var carg2 C.float           // in, none, casted
+	var carg3 C.float           // in, none, casted
+	var carg4 C.float           // in, none, casted
 
 	carg0 = (*C.GskPathBuilder)(UnsafePathBuilderToGlibNone(self))
 	carg1 = C.float(x1)
@@ -3484,11 +3484,11 @@ func (self *PathBuilder) RelArcTo(x1 float32, y1 float32, x2 float32, y2 float32
 // This is the relative version of [method@Gsk.PathBuilder.conic_to].
 func (self *PathBuilder) RelConicTo(x1 float32, y1 float32, x2 float32, y2 float32, weight float32) {
 	var carg0 *C.GskPathBuilder // in, none, converted
-	var carg1 C.float           // in, none, casted, casted C.gfloat
-	var carg2 C.float           // in, none, casted, casted C.gfloat
-	var carg3 C.float           // in, none, casted, casted C.gfloat
-	var carg4 C.float           // in, none, casted, casted C.gfloat
-	var carg5 C.float           // in, none, casted, casted C.gfloat
+	var carg1 C.float           // in, none, casted
+	var carg2 C.float           // in, none, casted
+	var carg3 C.float           // in, none, casted
+	var carg4 C.float           // in, none, casted
+	var carg5 C.float           // in, none, casted
 
 	carg0 = (*C.GskPathBuilder)(UnsafePathBuilderToGlibNone(self))
 	carg1 = C.float(x1)
@@ -3526,12 +3526,12 @@ func (self *PathBuilder) RelConicTo(x1 float32, y1 float32, x2 float32, y2 float
 // This is the relative version of [method@Gsk.PathBuilder.cubic_to].
 func (self *PathBuilder) RelCubicTo(x1 float32, y1 float32, x2 float32, y2 float32, x3 float32, y3 float32) {
 	var carg0 *C.GskPathBuilder // in, none, converted
-	var carg1 C.float           // in, none, casted, casted C.gfloat
-	var carg2 C.float           // in, none, casted, casted C.gfloat
-	var carg3 C.float           // in, none, casted, casted C.gfloat
-	var carg4 C.float           // in, none, casted, casted C.gfloat
-	var carg5 C.float           // in, none, casted, casted C.gfloat
-	var carg6 C.float           // in, none, casted, casted C.gfloat
+	var carg1 C.float           // in, none, casted
+	var carg2 C.float           // in, none, casted
+	var carg3 C.float           // in, none, casted
+	var carg4 C.float           // in, none, casted
+	var carg5 C.float           // in, none, casted
+	var carg6 C.float           // in, none, casted
 
 	carg0 = (*C.GskPathBuilder)(UnsafePathBuilderToGlibNone(self))
 	carg1 = C.float(x1)
@@ -3568,11 +3568,11 @@ func (self *PathBuilder) RelCubicTo(x1 float32, y1 float32, x2 float32, y2 float
 // This is the relative version of [method@Gsk.PathBuilder.html_arc_to].
 func (self *PathBuilder) RelHtmlArcTo(x1 float32, y1 float32, x2 float32, y2 float32, radius float32) {
 	var carg0 *C.GskPathBuilder // in, none, converted
-	var carg1 C.float           // in, none, casted, casted C.gfloat
-	var carg2 C.float           // in, none, casted, casted C.gfloat
-	var carg3 C.float           // in, none, casted, casted C.gfloat
-	var carg4 C.float           // in, none, casted, casted C.gfloat
-	var carg5 C.float           // in, none, casted, casted C.gfloat
+	var carg1 C.float           // in, none, casted
+	var carg2 C.float           // in, none, casted
+	var carg3 C.float           // in, none, casted
+	var carg4 C.float           // in, none, casted
+	var carg5 C.float           // in, none, casted
 
 	carg0 = (*C.GskPathBuilder)(UnsafePathBuilderToGlibNone(self))
 	carg1 = C.float(x1)
@@ -3603,8 +3603,8 @@ func (self *PathBuilder) RelHtmlArcTo(x1 float32, y1 float32, x2 float32, y2 flo
 // This is the relative version of [method@Gsk.PathBuilder.line_to].
 func (self *PathBuilder) RelLineTo(x float32, y float32) {
 	var carg0 *C.GskPathBuilder // in, none, converted
-	var carg1 C.float           // in, none, casted, casted C.gfloat
-	var carg2 C.float           // in, none, casted, casted C.gfloat
+	var carg1 C.float           // in, none, casted
+	var carg2 C.float           // in, none, casted
 
 	carg0 = (*C.GskPathBuilder)(UnsafePathBuilderToGlibNone(self))
 	carg1 = C.float(x)
@@ -3629,8 +3629,8 @@ func (self *PathBuilder) RelLineTo(x float32, y float32) {
 // This is the relative version of [method@Gsk.PathBuilder.move_to].
 func (self *PathBuilder) RelMoveTo(x float32, y float32) {
 	var carg0 *C.GskPathBuilder // in, none, converted
-	var carg1 C.float           // in, none, casted, casted C.gfloat
-	var carg2 C.float           // in, none, casted, casted C.gfloat
+	var carg1 C.float           // in, none, casted
+	var carg2 C.float           // in, none, casted
 
 	carg0 = (*C.GskPathBuilder)(UnsafePathBuilderToGlibNone(self))
 	carg1 = C.float(x)
@@ -3659,10 +3659,10 @@ func (self *PathBuilder) RelMoveTo(x float32, y float32) {
 // This is the relative version of [method@Gsk.PathBuilder.quad_to].
 func (self *PathBuilder) RelQuadTo(x1 float32, y1 float32, x2 float32, y2 float32) {
 	var carg0 *C.GskPathBuilder // in, none, converted
-	var carg1 C.float           // in, none, casted, casted C.gfloat
-	var carg2 C.float           // in, none, casted, casted C.gfloat
-	var carg3 C.float           // in, none, casted, casted C.gfloat
-	var carg4 C.float           // in, none, casted, casted C.gfloat
+	var carg1 C.float           // in, none, casted
+	var carg2 C.float           // in, none, casted
+	var carg3 C.float           // in, none, casted
+	var carg4 C.float           // in, none, casted
 
 	carg0 = (*C.GskPathBuilder)(UnsafePathBuilderToGlibNone(self))
 	carg1 = C.float(x1)
@@ -3697,13 +3697,13 @@ func (self *PathBuilder) RelQuadTo(x1 float32, y1 float32, x2 float32, y2 float3
 // This is the relative version of [method@Gsk.PathBuilder.svg_arc_to].
 func (self *PathBuilder) RelSVGArcTo(rx float32, ry float32, xAxisRotation float32, largeArc bool, positiveSweep bool, x float32, y float32) {
 	var carg0 *C.GskPathBuilder // in, none, converted
-	var carg1 C.float           // in, none, casted, casted C.gfloat
-	var carg2 C.float           // in, none, casted, casted C.gfloat
-	var carg3 C.float           // in, none, casted, casted C.gfloat
+	var carg1 C.float           // in, none, casted
+	var carg2 C.float           // in, none, casted
+	var carg3 C.float           // in, none, casted
 	var carg4 C.gboolean        // in
 	var carg5 C.gboolean        // in
-	var carg6 C.float           // in, none, casted, casted C.gfloat
-	var carg7 C.float           // in, none, casted, casted C.gfloat
+	var carg6 C.float           // in, none, casted
+	var carg7 C.float           // in, none, casted
 
 	carg0 = (*C.GskPathBuilder)(UnsafePathBuilderToGlibNone(self))
 	carg1 = C.float(rx)
@@ -3750,13 +3750,13 @@ func (self *PathBuilder) RelSVGArcTo(rx float32, ry float32, xAxisRotation float
 // After this, @x, @y will be the new current point.
 func (self *PathBuilder) SVGArcTo(rx float32, ry float32, xAxisRotation float32, largeArc bool, positiveSweep bool, x float32, y float32) {
 	var carg0 *C.GskPathBuilder // in, none, converted
-	var carg1 C.float           // in, none, casted, casted C.gfloat
-	var carg2 C.float           // in, none, casted, casted C.gfloat
-	var carg3 C.float           // in, none, casted, casted C.gfloat
+	var carg1 C.float           // in, none, casted
+	var carg2 C.float           // in, none, casted
+	var carg3 C.float           // in, none, casted
 	var carg4 C.gboolean        // in
 	var carg5 C.gboolean        // in
-	var carg6 C.float           // in, none, casted, casted C.gfloat
-	var carg7 C.float           // in, none, casted, casted C.gfloat
+	var carg6 C.float           // in, none, casted
+	var carg7 C.float           // in, none, casted
 
 	carg0 = (*C.GskPathBuilder)(UnsafePathBuilderToGlibNone(self))
 	carg1 = C.float(rx)
@@ -3948,7 +3948,7 @@ func NewPathMeasure(path *Path) *PathMeasure {
 // Creates a measure object for the given @path and @tolerance.
 func NewPathMeasureWithTolerance(path *Path, tolerance float32) *PathMeasure {
 	var carg1 *C.GskPath        // in, none, converted
-	var carg2 C.float           // in, none, casted, casted C.gfloat
+	var carg2 C.float           // in, none, casted
 	var cret  *C.GskPathMeasure // return, full, converted
 
 	carg1 = (*C.GskPath)(UnsafePathToGlibNone(path))
@@ -3976,7 +3976,7 @@ func NewPathMeasureWithTolerance(path *Path, tolerance float32) *PathMeasure {
 // The length is cached, so this function does not do any work.
 func (self *PathMeasure) GetLength() float32 {
 	var carg0 *C.GskPathMeasure // in, none, converted
-	var cret  C.float           // return, none, casted, casted C.gfloat
+	var cret  C.float           // return, none, casted
 
 	carg0 = (*C.GskPathMeasure)(UnsafePathMeasureToGlibNone(self))
 
@@ -4029,7 +4029,7 @@ func (self *PathMeasure) GetPath() *Path {
 // An empty path has no points, so `FALSE` is returned in that case.
 func (self *PathMeasure) GetPoint(distance float32) (PathPoint, bool) {
 	var carg0 *C.GskPathMeasure // in, none, converted
-	var carg1 C.float           // in, none, casted, casted C.gfloat
+	var carg1 C.float           // in, none, casted
 	var carg2 C.GskPathPoint    // out, transfer: none, C Pointers: 0, Name: PathPoint, caller-allocates
 	var cret  C.gboolean        // return
 
@@ -4045,7 +4045,7 @@ func (self *PathMeasure) GetPoint(distance float32) (PathPoint, bool) {
 
 	_ = result
 	_ = carg2
-	panic("unimplemented conversion of PathPoint (GskPathPoint)")
+	panic("unimplemented conversion of PathPoint (C.GskPathPoint)")
 	if cret != 0 {
 		goret = true
 	}
@@ -4062,7 +4062,7 @@ func (self *PathMeasure) GetPoint(distance float32) (PathPoint, bool) {
 // Returns the tolerance that the measure was created with.
 func (self *PathMeasure) GetTolerance() float32 {
 	var carg0 *C.GskPathMeasure // in, none, converted
-	var cret  C.float           // return, none, casted, casted C.gfloat
+	var cret  C.float           // return, none, casted
 
 	carg0 = (*C.GskPathMeasure)(UnsafePathMeasureToGlibNone(self))
 
@@ -4180,7 +4180,7 @@ func UnsafePathPointToGlibFull(p *PathPoint) unsafe.Pointer {
 func (point1 *PathPoint) Compare(point2 *PathPoint) int32 {
 	var carg0 *C.GskPathPoint // in, none, converted
 	var carg1 *C.GskPathPoint // in, none, converted
-	var cret  C.int           // return, none, casted, casted C.gint
+	var cret  C.int           // return, none, casted
 
 	carg0 = (*C.GskPathPoint)(UnsafePathPointToGlibNone(point1))
 	carg1 = (*C.GskPathPoint)(UnsafePathPointToGlibNone(point2))
@@ -4296,7 +4296,7 @@ func (point *PathPoint) GetCurvature(path *Path, direction PathDirection) (graph
 	var carg1 *C.GskPath         // in, none, converted
 	var carg2 C.GskPathDirection // in, none, casted
 	var carg3 C.graphene_point_t // out, transfer: none, C Pointers: 0, Name: Point, caller-allocates
-	var cret  C.float            // return, none, casted, casted C.gfloat
+	var cret  C.float            // return, none, casted
 
 	carg0 = (*C.GskPathPoint)(UnsafePathPointToGlibNone(point))
 	carg1 = (*C.GskPath)(UnsafePathToGlibNone(path))
@@ -4312,7 +4312,7 @@ func (point *PathPoint) GetCurvature(path *Path, direction PathDirection) (graph
 
 	_ = center
 	_ = carg3
-	panic("unimplemented conversion of graphene.Point (graphene_point_t)")
+	panic("unimplemented conversion of graphene.Point (C.graphene_point_t)")
 	goret = float32(cret)
 
 	return center, goret
@@ -4333,7 +4333,7 @@ func (point *PathPoint) GetCurvature(path *Path, direction PathDirection) (graph
 func (point *PathPoint) GetDistance(measure *PathMeasure) float32 {
 	var carg0 *C.GskPathPoint   // in, none, converted
 	var carg1 *C.GskPathMeasure // in, none, converted
-	var cret  C.float           // return, none, casted, casted C.gfloat
+	var cret  C.float           // return, none, casted
 
 	carg0 = (*C.GskPathPoint)(UnsafePathPointToGlibNone(point))
 	carg1 = (*C.GskPathMeasure)(UnsafePathMeasureToGlibNone(measure))
@@ -4377,7 +4377,7 @@ func (point *PathPoint) GetPosition(path *Path) graphene.Point {
 
 	_ = position
 	_ = carg2
-	panic("unimplemented conversion of graphene.Point (graphene_point_t)")
+	panic("unimplemented conversion of graphene.Point (C.graphene_point_t)")
 
 	return position
 }
@@ -4403,7 +4403,7 @@ func (point *PathPoint) GetRotation(path *Path, direction PathDirection) float32
 	var carg0 *C.GskPathPoint    // in, none, converted
 	var carg1 *C.GskPath         // in, none, converted
 	var carg2 C.GskPathDirection // in, none, casted
-	var cret  C.float            // return, none, casted, casted C.gfloat
+	var cret  C.float            // return, none, casted
 
 	carg0 = (*C.GskPathPoint)(UnsafePathPointToGlibNone(point))
 	carg1 = (*C.GskPath)(UnsafePathToGlibNone(path))
@@ -4466,7 +4466,7 @@ func (point *PathPoint) GetTangent(path *Path, direction PathDirection) graphene
 
 	_ = tangent
 	_ = carg3
-	panic("unimplemented conversion of graphene.Vec2 (graphene_vec2_t)")
+	panic("unimplemented conversion of graphene.Vec2 (C.graphene_vec2_t)")
 
 	return tangent
 }
@@ -4746,7 +4746,7 @@ func (self *RoundedRect) InitCopy(src *RoundedRect) *RoundedRect {
 func (self *RoundedRect) InitFromRect(bounds *graphene.Rect, radius float32) *RoundedRect {
 	var carg0 *C.GskRoundedRect  // in, none, converted
 	var carg1 *C.graphene_rect_t // in, none, converted
-	var carg2 C.float            // in, none, casted, casted C.gfloat
+	var carg2 C.float            // in, none, casted
 	var cret  *C.GskRoundedRect  // return, none, converted
 
 	carg0 = (*C.GskRoundedRect)(UnsafeRoundedRectToGlibNone(self))
@@ -4869,8 +4869,8 @@ func (self *RoundedRect) Normalize() *RoundedRect {
 // The size and corners of the rectangle are unchanged.
 func (self *RoundedRect) Offset(dx float32, dy float32) *RoundedRect {
 	var carg0 *C.GskRoundedRect // in, none, converted
-	var carg1 C.float           // in, none, casted, casted C.gfloat
-	var carg2 C.float           // in, none, casted, casted C.gfloat
+	var carg1 C.float           // in, none, casted
+	var carg2 C.float           // in, none, casted
 	var cret  *C.GskRoundedRect // return, none, converted
 
 	carg0 = (*C.GskRoundedRect)(UnsafeRoundedRectToGlibNone(self))
@@ -4912,10 +4912,10 @@ func (self *RoundedRect) Offset(dx float32, dy float32) *RoundedRect {
 // negative values for the @top, @right, @bottom or @left.
 func (self *RoundedRect) Shrink(top float32, right float32, bottom float32, left float32) *RoundedRect {
 	var carg0 *C.GskRoundedRect // in, none, converted
-	var carg1 C.float           // in, none, casted, casted C.gfloat
-	var carg2 C.float           // in, none, casted, casted C.gfloat
-	var carg3 C.float           // in, none, casted, casted C.gfloat
-	var carg4 C.float           // in, none, casted, casted C.gfloat
+	var carg1 C.float           // in, none, casted
+	var carg2 C.float           // in, none, casted
+	var carg3 C.float           // in, none, casted
+	var carg4 C.float           // in, none, casted
 	var cret  *C.GskRoundedRect // return, none, converted
 
 	carg0 = (*C.GskRoundedRect)(UnsafeRoundedRectToGlibNone(self))
@@ -5035,8 +5035,8 @@ func UnsafeShaderArgsBuilderToGlibFull(s *ShaderArgsBuilder) unsafe.Pointer {
 // The uniform must be of float type.
 func (builder *ShaderArgsBuilder) SetFloat(idx int32, value float32) {
 	var carg0 *C.GskShaderArgsBuilder // in, none, converted
-	var carg1 C.int                   // in, none, casted, casted C.gint
-	var carg2 C.float                 // in, none, casted, casted C.gfloat
+	var carg1 C.int                   // in, none, casted
+	var carg2 C.float                 // in, none, casted
 
 	carg0 = (*C.GskShaderArgsBuilder)(UnsafeShaderArgsBuilderToGlibNone(builder))
 	carg1 = C.int(idx)
@@ -5202,7 +5202,7 @@ func UnsafeStrokeToGlibFull(s *Stroke) unsafe.Pointer {
 //
 // Creates a new `GskStroke` with the given @line_width.
 func NewStroke(lineWidth float32) *Stroke {
-	var carg1 C.float      // in, none, casted, casted C.gfloat
+	var carg1 C.float      // in, none, casted
 	var cret  *C.GskStroke // return, full, converted
 
 	carg1 = C.float(lineWidth)
@@ -5264,7 +5264,7 @@ func (self *Stroke) GetDash() (uint, []float32) {
 	nDash = uint(carg1)
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []float32 (const float*)")
+	panic("unimplemented conversion of []float32 (*C.float)")
 
 	return nDash, goret
 }
@@ -5278,7 +5278,7 @@ func (self *Stroke) GetDash() (uint, []float32) {
 // Returns the dash_offset of a `GskStroke`.
 func (self *Stroke) GetDashOffset() float32 {
 	var carg0 *C.GskStroke // in, none, converted
-	var cret  C.float      // return, none, casted, casted C.gfloat
+	var cret  C.float      // return, none, casted
 
 	carg0 = (*C.GskStroke)(UnsafeStrokeToGlibNone(self))
 
@@ -5351,7 +5351,7 @@ func (self *Stroke) GetLineJoin() LineJoin {
 // Gets the line width used.
 func (self *Stroke) GetLineWidth() float32 {
 	var carg0 *C.GskStroke // in, none, converted
-	var cret  C.float      // return, none, casted, casted C.gfloat
+	var cret  C.float      // return, none, casted
 
 	carg0 = (*C.GskStroke)(UnsafeStrokeToGlibNone(self))
 
@@ -5374,7 +5374,7 @@ func (self *Stroke) GetLineWidth() float32 {
 // Returns the miter limit of a `GskStroke`.
 func (self *Stroke) GetMiterLimit() float32 {
 	var carg0 *C.GskStroke // in, none, converted
-	var cret  C.float      // return, none, casted, casted C.gfloat
+	var cret  C.float      // return, none, casted
 
 	carg0 = (*C.GskStroke)(UnsafeStrokeToGlibNone(self))
 
@@ -5427,7 +5427,7 @@ func (self *Stroke) SetDash(dash []float32) {
 	_ = dash
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []float32 (const float*)")
+	panic("unimplemented conversion of []float32 (*C.float)")
 
 	C.gsk_stroke_set_dash(carg0, carg1, carg2)
 	runtime.KeepAlive(self)
@@ -5448,7 +5448,7 @@ func (self *Stroke) SetDash(dash []float32) {
 // See [method@Gsk.Stroke.set_dash] for more details on dashing.
 func (self *Stroke) SetDashOffset(offset float32) {
 	var carg0 *C.GskStroke // in, none, converted
-	var carg1 C.float      // in, none, casted, casted C.gfloat
+	var carg1 C.float      // in, none, casted
 
 	carg0 = (*C.GskStroke)(UnsafeStrokeToGlibNone(self))
 	carg1 = C.float(offset)
@@ -5511,7 +5511,7 @@ func (self *Stroke) SetLineJoin(lineJoin LineJoin) {
 // The line width must be &gt; 0.
 func (self *Stroke) SetLineWidth(lineWidth float32) {
 	var carg0 *C.GskStroke // in, none, converted
-	var carg1 C.float      // in, none, casted, casted C.gfloat
+	var carg1 C.float      // in, none, casted
 
 	carg0 = (*C.GskStroke)(UnsafeStrokeToGlibNone(self))
 	carg1 = C.float(lineWidth)
@@ -5537,7 +5537,7 @@ func (self *Stroke) SetLineWidth(lineWidth float32) {
 // `GSK_LINE_JOIN_BEVEL`.
 func (self *Stroke) SetMiterLimit(limit float32) {
 	var carg0 *C.GskStroke // in, none, converted
-	var carg1 C.float      // in, none, casted, casted C.gfloat
+	var carg1 C.float      // in, none, casted
 
 	carg0 = (*C.GskStroke)(UnsafeStrokeToGlibNone(self))
 	carg1 = C.float(limit)
@@ -5682,7 +5682,7 @@ func NewTransform() *Transform {
 // If @string does not describe a valid transform, %FALSE is
 // returned and %NULL is put in @out_transform.
 func TransformParse(str string) (*Transform, bool) {
-	var carg1 *C.char         // in, none, string, casted *C.gchar
+	var carg1 *C.char         // in, none, string
 	var carg2 *C.GskTransform // out, full, converted
 	var cret  C.gboolean      // return
 
@@ -5850,7 +5850,7 @@ func (next *Transform) Matrix(matrix *graphene.Matrix) *Transform {
 // if you want to keep it around.
 func (next *Transform) Perspective(depth float32) *Transform {
 	var carg0 *C.GskTransform // in, none, converted
-	var carg1 C.float         // in, none, casted, casted C.gfloat
+	var carg1 C.float         // in, none, casted
 	var cret  *C.GskTransform // return, full, converted
 
 	carg0 = (*C.GskTransform)(UnsafeTransformToGlibNone(next))
@@ -5884,7 +5884,7 @@ func (next *Transform) Perspective(depth float32) *Transform {
 // if you want to keep it around.
 func (next *Transform) Rotate(angle float32) *Transform {
 	var carg0 *C.GskTransform // in, none, converted
-	var carg1 C.float         // in, none, casted, casted C.gfloat
+	var carg1 C.float         // in, none, casted
 	var cret  *C.GskTransform // return, full, converted, nullable
 
 	carg0 = (*C.GskTransform)(UnsafeTransformToGlibNone(next))
@@ -5922,7 +5922,7 @@ func (next *Transform) Rotate(angle float32) *Transform {
 // if you want to keep it around.
 func (next *Transform) Rotate3D(angle float32, axis *graphene.Vec3) *Transform {
 	var carg0 *C.GskTransform    // in, none, converted
-	var carg1 C.float            // in, none, casted, casted C.gfloat
+	var carg1 C.float            // in, none, casted
 	var carg2 *C.graphene_vec3_t // in, none, converted
 	var cret  *C.GskTransform    // return, full, converted, nullable
 
@@ -5963,8 +5963,8 @@ func (next *Transform) Rotate3D(angle float32, axis *graphene.Vec3) *Transform {
 // if you want to keep it around.
 func (next *Transform) Scale(factorX float32, factorY float32) *Transform {
 	var carg0 *C.GskTransform // in, none, converted
-	var carg1 C.float         // in, none, casted, casted C.gfloat
-	var carg2 C.float         // in, none, casted, casted C.gfloat
+	var carg1 C.float         // in, none, casted
+	var carg2 C.float         // in, none, casted
 	var cret  *C.GskTransform // return, full, converted, nullable
 
 	carg0 = (*C.GskTransform)(UnsafeTransformToGlibNone(next))
@@ -6003,9 +6003,9 @@ func (next *Transform) Scale(factorX float32, factorY float32) *Transform {
 // if you want to keep it around.
 func (next *Transform) Scale3D(factorX float32, factorY float32, factorZ float32) *Transform {
 	var carg0 *C.GskTransform // in, none, converted
-	var carg1 C.float         // in, none, casted, casted C.gfloat
-	var carg2 C.float         // in, none, casted, casted C.gfloat
-	var carg3 C.float         // in, none, casted, casted C.gfloat
+	var carg1 C.float         // in, none, casted
+	var carg2 C.float         // in, none, casted
+	var carg3 C.float         // in, none, casted
 	var cret  *C.GskTransform // return, full, converted, nullable
 
 	carg0 = (*C.GskTransform)(UnsafeTransformToGlibNone(next))
@@ -6045,8 +6045,8 @@ func (next *Transform) Scale3D(factorX float32, factorY float32, factorZ float32
 // if you want to keep it around.
 func (next *Transform) Skew(skewX float32, skewY float32) *Transform {
 	var carg0 *C.GskTransform // in, none, converted
-	var carg1 C.float         // in, none, casted, casted C.gfloat
-	var carg2 C.float         // in, none, casted, casted C.gfloat
+	var carg1 C.float         // in, none, casted
+	var carg2 C.float         // in, none, casted
 	var cret  *C.GskTransform // return, full, converted, nullable
 
 	carg0 = (*C.GskTransform)(UnsafeTransformToGlibNone(next))
@@ -6097,12 +6097,12 @@ func (next *Transform) Skew(skewX float32, skewY float32) *Transform {
 // Cairo.
 func (self *Transform) To2D() (float32, float32, float32, float32, float32, float32) {
 	var carg0 *C.GskTransform // in, none, converted
-	var carg1 C.float         // out, full, casted, casted C.gfloat
-	var carg2 C.float         // out, full, casted, casted C.gfloat
-	var carg3 C.float         // out, full, casted, casted C.gfloat
-	var carg4 C.float         // out, full, casted, casted C.gfloat
-	var carg5 C.float         // out, full, casted, casted C.gfloat
-	var carg6 C.float         // out, full, casted, casted C.gfloat
+	var carg1 C.float         // out, full, casted
+	var carg2 C.float         // out, full, casted
+	var carg3 C.float         // out, full, casted
+	var carg4 C.float         // out, full, casted
+	var carg5 C.float         // out, full, casted
+	var carg6 C.float         // out, full, casted
 
 	carg0 = (*C.GskTransform)(UnsafeTransformToGlibNone(self))
 
@@ -6164,13 +6164,13 @@ func (self *Transform) To2D() (float32, float32, float32, float32, float32, floa
 // to check.
 func (self *Transform) To2DComponents() (float32, float32, float32, float32, float32, float32, float32) {
 	var carg0 *C.GskTransform // in, none, converted
-	var carg1 C.float         // out, full, casted, casted C.gfloat
-	var carg2 C.float         // out, full, casted, casted C.gfloat
-	var carg3 C.float         // out, full, casted, casted C.gfloat
-	var carg4 C.float         // out, full, casted, casted C.gfloat
-	var carg5 C.float         // out, full, casted, casted C.gfloat
-	var carg6 C.float         // out, full, casted, casted C.gfloat
-	var carg7 C.float         // out, full, casted, casted C.gfloat
+	var carg1 C.float         // out, full, casted
+	var carg2 C.float         // out, full, casted
+	var carg3 C.float         // out, full, casted
+	var carg4 C.float         // out, full, casted
+	var carg5 C.float         // out, full, casted
+	var carg6 C.float         // out, full, casted
+	var carg7 C.float         // out, full, casted
 
 	carg0 = (*C.GskTransform)(UnsafeTransformToGlibNone(self))
 
@@ -6226,10 +6226,10 @@ func (self *Transform) To2DComponents() (float32, float32, float32, float32, flo
 // to check.
 func (self *Transform) ToAffine() (float32, float32, float32, float32) {
 	var carg0 *C.GskTransform // in, none, converted
-	var carg1 C.float         // out, full, casted, casted C.gfloat
-	var carg2 C.float         // out, full, casted, casted C.gfloat
-	var carg3 C.float         // out, full, casted, casted C.gfloat
-	var carg4 C.float         // out, full, casted, casted C.gfloat
+	var carg1 C.float         // out, full, casted
+	var carg2 C.float         // out, full, casted
+	var carg3 C.float         // out, full, casted
+	var carg4 C.float         // out, full, casted
 
 	carg0 = (*C.GskTransform)(UnsafeTransformToGlibNone(self))
 
@@ -6271,7 +6271,7 @@ func (self *Transform) ToMatrix() graphene.Matrix {
 
 	_ = outMatrix
 	_ = carg1
-	panic("unimplemented conversion of graphene.Matrix (graphene_matrix_t)")
+	panic("unimplemented conversion of graphene.Matrix (C.graphene_matrix_t)")
 
 	return outMatrix
 }
@@ -6289,7 +6289,7 @@ func (self *Transform) ToMatrix() graphene.Matrix {
 // This is a wrapper around [method@Gsk.Transform.print].
 func (self *Transform) ToString() string {
 	var carg0 *C.GskTransform // in, none, converted
-	var cret  *C.char         // return, full, string, casted *C.gchar
+	var cret  *C.char         // return, full, string
 
 	carg0 = (*C.GskTransform)(UnsafeTransformToGlibNone(self))
 
@@ -6323,8 +6323,8 @@ func (self *Transform) ToString() string {
 // to check.
 func (self *Transform) ToTranslate() (float32, float32) {
 	var carg0 *C.GskTransform // in, none, converted
-	var carg1 C.float         // out, full, casted, casted C.gfloat
-	var carg2 C.float         // out, full, casted, casted C.gfloat
+	var carg1 C.float         // out, full, casted
+	var carg2 C.float         // out, full, casted
 
 	carg0 = (*C.GskTransform)(UnsafeTransformToGlibNone(self))
 
@@ -6407,7 +6407,7 @@ func (self *Transform) TransformBounds(rect *graphene.Rect) graphene.Rect {
 
 	_ = outRect
 	_ = carg2
-	panic("unimplemented conversion of graphene.Rect (graphene_rect_t)")
+	panic("unimplemented conversion of graphene.Rect (C.graphene_rect_t)")
 
 	return outRect
 }
@@ -6440,7 +6440,7 @@ func (self *Transform) TransformPoint(point *graphene.Point) graphene.Point {
 
 	_ = outPoint
 	_ = carg2
-	panic("unimplemented conversion of graphene.Point (graphene_point_t)")
+	panic("unimplemented conversion of graphene.Point (C.graphene_point_t)")
 
 	return outPoint
 }

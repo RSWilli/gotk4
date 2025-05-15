@@ -22,8 +22,8 @@ func _gotk4_gdkwayland4_WaylandToplevelExported(carg1 *C.GdkToplevel, carg2 *C.c
 		fn = v.(WaylandToplevelExported)
 	}
 
-	var toplevel WaylandToplevel // in, none, converted, casted *C.GdkWaylandToplevel
-	var handle   string          // in, none, string, casted *C.gchar
+	var toplevel WaylandToplevel // in, none, converted
+	var handle   string          // in, none, string
 
 	toplevel = UnsafeWaylandToplevelFromGlibNone(unsafe.Pointer(carg1))
 	handle = C.GoString((*C.char)(unsafe.Pointer(carg2)))

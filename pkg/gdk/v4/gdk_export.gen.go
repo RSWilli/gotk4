@@ -155,18 +155,6 @@ func _gotk4_gdk4_ContentProvider_ref_storable_formats(carg0 *C.GdkContentProvide
 	return fn(carg0)
 }
 
-//export _gotk4_gdk4_ContentProvider_write_mime_type_async
-func _gotk4_gdk4_ContentProvider_write_mime_type_async(carg0 *C.GdkContentProvider, carg1 *C.char, carg2 *C.GOutputStream, carg3 C.int, carg4 *C.GCancellable, carg5 C.GAsyncReadyCallback, carg6 C.gpointer) {
-	var fn func(carg0 *C.GdkContentProvider, carg1 *C.char, carg2 *C.GOutputStream, carg3 C.int, carg4 *C.GCancellable, carg5 C.GAsyncReadyCallback, carg6 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gdk4_ContentProvider_write_mime_type_async").(func(carg0 *C.GdkContentProvider, carg1 *C.char, carg2 *C.GOutputStream, carg3 C.int, carg4 *C.GCancellable, carg5 C.GAsyncReadyCallback, carg6 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gdk4_ContentProvider_write_mime_type_async: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4, carg5, carg6)
-}
-
 //export _gotk4_gdk4_ContentProvider_write_mime_type_finish
 func _gotk4_gdk4_ContentProvider_write_mime_type_finish(carg0 *C.GdkContentProvider, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean) {
 	var fn func(carg0 *C.GdkContentProvider, carg1 *C.GAsyncResult, _cerr **C.GError) (cret C.gboolean)

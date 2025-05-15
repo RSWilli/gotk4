@@ -49,7 +49,7 @@ func _gotk4_gsk4_PathForEachFunc(carg1 C.GskPathOperation, carg2 *C.graphene_poi
 	var op     PathOperation   // in, none, casted
 	var pts    *graphene.Point // in, none, converted
 	var nPts   uint            // in, none, casted
-	var weight float32         // in, none, casted, casted C.gfloat
+	var weight float32         // in, none, casted
 	var goret  bool            // return
 
 	op = PathOperation(carg1)

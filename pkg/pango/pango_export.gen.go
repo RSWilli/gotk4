@@ -292,18 +292,6 @@ func _gotk4_pango1_FontMap_load_fontset(carg0 *C.PangoFontMap, carg1 *C.PangoCon
 	return fn(carg0, carg1, carg2, carg3)
 }
 
-//export _gotk4_pango1_Fontset_foreach
-func _gotk4_pango1_Fontset_foreach(carg0 *C.PangoFontset, carg1 C.PangoFontsetForeachFunc, carg2 C.gpointer) {
-	var fn func(carg0 *C.PangoFontset, carg1 C.PangoFontsetForeachFunc, carg2 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_pango1_Fontset_foreach").(func(carg0 *C.PangoFontset, carg1 C.PangoFontsetForeachFunc, carg2 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_pango1_Fontset_foreach: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2)
-}
-
 //export _gotk4_pango1_Fontset_get_font
 func _gotk4_pango1_Fontset_get_font(carg0 *C.PangoFontset, carg1 C.guint) (cret *C.PangoFont) {
 	var fn func(carg0 *C.PangoFontset, carg1 C.guint) (cret *C.PangoFont)

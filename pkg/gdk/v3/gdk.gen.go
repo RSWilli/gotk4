@@ -20,15 +20,15 @@ import (
 // #cgo pkg-config: gdk-3.0
 // #cgo CFLAGS: -Wno-deprecated-declarations
 // #include <gdk/gdk.h>
-// extern gboolean _gotk4_glib2_SourceFunc(gpointer);
+// extern C.gboolean _gotk4_glib2_SourceFunc(C.gpointer);
 // extern void destroyUserdata(gpointer);
-// extern void _gotk4_gdk3_Window_from_embedder(GdkWindow*, gdouble, gdouble, gdouble*, gdouble*);
-// extern void _gotk4_gdk3_Window_to_embedder(GdkWindow*, gdouble, gdouble, gdouble*, gdouble*);
-// void _gotk4_gdk3_Window_virtual_from_embedder(void* fnptr, GdkWindow* carg0, gdouble carg1, gdouble carg2, gdouble* carg3, gdouble* carg4) {
-// 	return ((void (*) (GdkWindow*, gdouble, gdouble, gdouble*, gdouble*))(fnptr))(carg0, carg1, carg2, carg3, carg4);
+// extern C.void _gotk4_gdk3_Window_from_embedder(*C.GdkWindow, C.gdouble, C.gdouble, *C.gdouble, *C.gdouble);
+// extern C.void _gotk4_gdk3_Window_to_embedder(*C.GdkWindow, C.gdouble, C.gdouble, *C.gdouble, *C.gdouble);
+// C.void _gotk4_gdk3_Window_virtual_from_embedder(void* fnptr, *C.GdkWindow carg0, C.gdouble carg1, C.gdouble carg2, *C.gdouble carg3, *C.gdouble carg4) {
+// 	return ((C.void (*) (*C.GdkWindow, C.gdouble, C.gdouble, *C.gdouble, *C.gdouble))(fnptr))(carg0, carg1, carg2, carg3, carg4);
 // }
-// void _gotk4_gdk3_Window_virtual_to_embedder(void* fnptr, GdkWindow* carg0, gdouble carg1, gdouble carg2, gdouble* carg3, gdouble* carg4) {
-// 	return ((void (*) (GdkWindow*, gdouble, gdouble, gdouble*, gdouble*))(fnptr))(carg0, carg1, carg2, carg3, carg4);
+// C.void _gotk4_gdk3_Window_virtual_to_embedder(void* fnptr, *C.GdkWindow carg0, C.gdouble carg1, C.gdouble carg2, *C.gdouble carg3, *C.gdouble carg4) {
+// 	return ((C.void (*) (*C.GdkWindow, C.gdouble, C.gdouble, *C.gdouble, *C.gdouble))(fnptr))(carg0, carg1, carg2, carg3, carg4);
 // }
 import "C"
 
@@ -10538,7 +10538,7 @@ func UTF8ToStringTarget(str string) string {
 // DevicePadInstance is the instance type used by all types implementing GdkDevicePad. It is used internally by the bindings. Users should use the interface [DevicePad] instead.
 type DevicePadInstance struct {
 	_ [0]func() // equal guard
-	gobject.ObjectInstance
+	Instance gobject.ObjectInstance
 }
 
 var _ DevicePad = (*DevicePadInstance)(nil)
@@ -10563,7 +10563,6 @@ var _ DevicePad = (*DevicePadInstance)(nil)
 // mode for a given group will be notified through the #GdkEventPadGroupMode
 // event.
 type DevicePad interface {
-	gobject.Object
 	upcastToGdkDevicePad() *DevicePadInstance
 
 	// GetFeatureGroup wraps gdk_device_pad_get_feature_group
@@ -10623,7 +10622,7 @@ var _ DevicePad = (*DevicePadInstance)(nil)
 
 func unsafeWrapDevicePad(base *gobject.ObjectInstance) *DevicePadInstance {
 	return &DevicePadInstance{
-		ObjectInstance: *base,
+		Instance: *base,
 	}
 }
 
@@ -10653,13 +10652,13 @@ func UnsafeDevicePadFromGlibBorrow(c unsafe.Pointer) DevicePad {
 // UnsafeDevicePadToGlibNone is used to convert the instance to it's C value GdkDevicePad. This is used by the bindings internally.
 func UnsafeDevicePadToGlibNone(c DevicePad) unsafe.Pointer {
 	i := c.upcastToGdkDevicePad()
-	return gobject.UnsafeObjectToGlibNone(i)
+	return gobject.UnsafeObjectToGlibNone(&i.Instance)
 }
 
 // UnsafeDevicePadToGlibFull is used to convert the instance to it's C value GdkDevicePad, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeDevicePadToGlibFull(c DevicePad) unsafe.Pointer {
 	i := c.upcastToGdkDevicePad()
-	return gobject.UnsafeObjectToGlibFull(i)
+	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
 // GetFeatureGroup wraps gdk_device_pad_get_feature_group
@@ -13710,7 +13709,7 @@ func (display *DisplayInstance) GetMaximalCursorSize() (uint, uint) {
 // Gets a monitor associated with this display.
 func (display *DisplayInstance) GetMonitor(monitorNum int32) Monitor {
 	var carg0 *C.GdkDisplay // in, none, converted
-	var carg1 C.int         // in, none, casted, casted C.gint
+	var carg1 C.int         // in, none, casted
 	var cret  *C.GdkMonitor // return, none, converted, nullable
 
 	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
@@ -13744,8 +13743,8 @@ func (display *DisplayInstance) GetMonitor(monitorNum int32) Monitor {
 // or a nearby monitor if the point is not in any monitor.
 func (display *DisplayInstance) GetMonitorAtPoint(x int32, y int32) Monitor {
 	var carg0 *C.GdkDisplay // in, none, converted
-	var carg1 C.int         // in, none, casted, casted C.gint
-	var carg2 C.int         // in, none, casted, casted C.gint
+	var carg1 C.int         // in, none, casted
+	var carg2 C.int         // in, none, casted
 	var cret  *C.GdkMonitor // return, none, converted
 
 	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
@@ -13808,7 +13807,7 @@ func (display *DisplayInstance) GetMonitorAtWindow(window Window) Monitor {
 // #GdkDisplay::monitor-added or #GdkDisplay::monitor-removed signal.
 func (display *DisplayInstance) GetNMonitors() int32 {
 	var carg0 *C.GdkDisplay // in, none, converted
-	var cret  C.int         // return, none, casted, casted C.gint
+	var cret  C.int         // return, none, casted
 
 	carg0 = (*C.GdkDisplay)(UnsafeDisplayToGlibNone(display))
 
@@ -16181,8 +16180,8 @@ func (_context *GLContextInstance) GetForwardCompatible() bool {
 // gdk_gl_context_set_required_version().
 func (_context *GLContextInstance) GetRequiredVersion() (int32, int32) {
 	var carg0 *C.GdkGLContext // in, none, converted
-	var carg1 C.int           // out, full, casted, casted C.gint
-	var carg2 C.int           // out, full, casted, casted C.gint
+	var carg1 C.int           // out, full, casted
+	var carg2 C.int           // out, full, casted
 
 	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(_context))
 
@@ -16260,8 +16259,8 @@ func (_context *GLContextInstance) GetUseES() bool {
 // The @context must be realized prior to calling this function.
 func (_context *GLContextInstance) GetVersion() (int32, int32) {
 	var carg0 *C.GdkGLContext // in, none, converted
-	var carg1 C.int           // out, full, casted, casted C.gint
-	var carg2 C.int           // out, full, casted, casted C.gint
+	var carg1 C.int           // out, full, casted
+	var carg2 C.int           // out, full, casted
 
 	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(_context))
 
@@ -16457,8 +16456,8 @@ func (_context *GLContextInstance) SetForwardCompatible(compatible bool) {
 // this function.
 func (_context *GLContextInstance) SetRequiredVersion(major int32, minor int32) {
 	var carg0 *C.GdkGLContext // in, none, converted
-	var carg1 C.int           // in, none, casted, casted C.gint
-	var carg2 C.int           // in, none, casted, casted C.gint
+	var carg1 C.int           // in, none, casted
+	var carg2 C.int           // in, none, casted
 
 	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(_context))
 	carg1 = C.int(major)
@@ -16491,7 +16490,7 @@ func (_context *GLContextInstance) SetRequiredVersion(major int32, minor int32) 
 // OpenGL ES API, extensions, or shaders.
 func (_context *GLContextInstance) SetUseES(useEs int32) {
 	var carg0 *C.GdkGLContext // in, none, converted
-	var carg1 C.int           // in, none, casted, casted C.gint
+	var carg1 C.int           // in, none, casted
 
 	carg0 = (*C.GdkGLContext)(UnsafeGLContextToGlibNone(_context))
 	carg1 = C.int(useEs)
@@ -17332,7 +17331,7 @@ func (monitor *MonitorInstance) GetGeometry() Rectangle {
 
 	_ = geometry
 	_ = carg1
-	panic("unimplemented conversion of Rectangle (GdkRectangle)")
+	panic("unimplemented conversion of Rectangle (C.GdkRectangle)")
 
 	return geometry
 }
@@ -17346,7 +17345,7 @@ func (monitor *MonitorInstance) GetGeometry() Rectangle {
 // Gets the height in millimeters of the monitor.
 func (monitor *MonitorInstance) GetHeightMm() int32 {
 	var carg0 *C.GdkMonitor // in, none, converted
-	var cret  C.int         // return, none, casted, casted C.gint
+	var cret  C.int         // return, none, casted
 
 	carg0 = (*C.GdkMonitor)(UnsafeMonitorToGlibNone(monitor))
 
@@ -17374,7 +17373,7 @@ func (monitor *MonitorInstance) GetHeightMm() int32 {
 // PNP ID registry is located at https://uefi.org/pnp_id_list
 func (monitor *MonitorInstance) GetManufacturer() string {
 	var carg0 *C.GdkMonitor // in, none, converted
-	var cret  *C.char       // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char       // return, none, string, nullable-string
 
 	carg0 = (*C.GdkMonitor)(UnsafeMonitorToGlibNone(monitor))
 
@@ -17399,7 +17398,7 @@ func (monitor *MonitorInstance) GetManufacturer() string {
 // Gets the a string identifying the monitor model, if available.
 func (monitor *MonitorInstance) GetModel() string {
 	var carg0 *C.GdkMonitor // in, none, converted
-	var cret  *C.char       // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char       // return, none, string, nullable-string
 
 	carg0 = (*C.GdkMonitor)(UnsafeMonitorToGlibNone(monitor))
 
@@ -17427,7 +17426,7 @@ func (monitor *MonitorInstance) GetModel() string {
 // is returned as 60000.
 func (monitor *MonitorInstance) GetRefreshRate() int32 {
 	var carg0 *C.GdkMonitor // in, none, converted
-	var cret  C.int         // return, none, casted, casted C.gint
+	var cret  C.int         // return, none, casted
 
 	carg0 = (*C.GdkMonitor)(UnsafeMonitorToGlibNone(monitor))
 
@@ -17456,7 +17455,7 @@ func (monitor *MonitorInstance) GetRefreshRate() int32 {
 // where it is better to use gdk_window_get_scale_factor() instead.
 func (monitor *MonitorInstance) GetScaleFactor() int32 {
 	var carg0 *C.GdkMonitor // in, none, converted
-	var cret  C.int         // return, none, casted, casted C.gint
+	var cret  C.int         // return, none, casted
 
 	carg0 = (*C.GdkMonitor)(UnsafeMonitorToGlibNone(monitor))
 
@@ -17503,7 +17502,7 @@ func (monitor *MonitorInstance) GetSubpixelLayout() SubpixelLayout {
 // Gets the width in millimeters of the monitor.
 func (monitor *MonitorInstance) GetWidthMm() int32 {
 	var carg0 *C.GdkMonitor // in, none, converted
-	var cret  C.int         // return, none, casted, casted C.gint
+	var cret  C.int         // return, none, casted
 
 	carg0 = (*C.GdkMonitor)(UnsafeMonitorToGlibNone(monitor))
 
@@ -17549,7 +17548,7 @@ func (monitor *MonitorInstance) GetWorkarea() Rectangle {
 
 	_ = workarea
 	_ = carg1
-	panic("unimplemented conversion of Rectangle (GdkRectangle)")
+	panic("unimplemented conversion of Rectangle (C.GdkRectangle)")
 
 	return workarea
 }
@@ -20425,7 +20424,8 @@ type Window interface {
 	// chain up virtual methods:
 
 	// ParentFromEmbedder calls the default implementations of the from_embedder virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- embedderX float64 
@@ -20434,7 +20434,8 @@ type Window interface {
 	// 	- offscreenY *float64 
 	ParentFromEmbedder(embedderX float64, embedderY float64, offscreenX *float64, offscreenY *float64)
 	// ParentToEmbedder calls the default implementations of the to_embedder virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- offscreenX float64 
@@ -21596,7 +21597,7 @@ func (window *WindowInstance) GetFrameExtents() Rectangle {
 
 	_ = rect
 	_ = carg1
-	panic("unimplemented conversion of Rectangle (GdkRectangle)")
+	panic("unimplemented conversion of Rectangle (C.GdkRectangle)")
 
 	return rect
 }
@@ -21714,7 +21715,7 @@ func (window *WindowInstance) GetGroup() Window {
 // size on the X server.
 func (window *WindowInstance) GetHeight() int32 {
 	var carg0 *C.GdkWindow // in, none, converted
-	var cret  C.int        // return, none, casted, casted C.gint
+	var cret  C.int        // return, none, casted
 
 	carg0 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
 
@@ -22180,7 +22181,7 @@ func (window *WindowInstance) GetVisual() Visual {
 // size on the X server.
 func (window *WindowInstance) GetWidth() int32 {
 	var carg0 *C.GdkWindow // in, none, converted
-	var cret  C.int        // return, none, casted, casted C.gint
+	var cret  C.int        // return, none, casted
 
 	carg0 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
 
@@ -23915,7 +23916,8 @@ type WindowOverrides[Instance Window] struct {
 	// gobject.ObjectOverrides allows you to override virtual methods from the parent class gobject.Object
 	gobject.ObjectOverrides[Instance]
 
-	// FromEmbedder allows you to override the implementation of the virtual method from_embedder.
+	// // FromEmbedder allows you to override the implementation of the virtual method from_embedder.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- embedderX float64 
@@ -23923,7 +23925,8 @@ type WindowOverrides[Instance Window] struct {
 	// 	- offscreenX *float64 
 	// 	- offscreenY *float64 
 	FromEmbedder func(Instance, float64, float64, *float64, *float64)
-	// ToEmbedder allows you to override the implementation of the virtual method to_embedder.
+	// // ToEmbedder allows you to override the implementation of the virtual method to_embedder.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- offscreenX float64 
@@ -23957,10 +23960,10 @@ func UnsafeApplyWindowOverrides[Instance Window](gclass unsafe.Pointer, override
 				embedderY = float64(carg2)
 				_ = offscreenX
 				_ = carg3
-				panic("unimplemented conversion of *float64 (gdouble*)")
+				panic("unimplemented conversion of *float64 (*C.gdouble)")
 				_ = offscreenY
 				_ = carg4
-				panic("unimplemented conversion of *float64 (gdouble*)")
+				panic("unimplemented conversion of *float64 (*C.gdouble)")
 
 				overrides.FromEmbedder(window, embedderX, embedderY, offscreenX, offscreenY)
 			},
@@ -23984,10 +23987,10 @@ func UnsafeApplyWindowOverrides[Instance Window](gclass unsafe.Pointer, override
 				offscreenY = float64(carg2)
 				_ = embedderX
 				_ = carg3
-				panic("unimplemented conversion of *float64 (gdouble*)")
+				panic("unimplemented conversion of *float64 (*C.gdouble)")
 				_ = embedderY
 				_ = carg4
-				panic("unimplemented conversion of *float64 (gdouble*)")
+				panic("unimplemented conversion of *float64 (*C.gdouble)")
 
 				overrides.ToEmbedder(window, offscreenX, offscreenY, embedderX, embedderY)
 			},
@@ -23996,7 +23999,8 @@ func UnsafeApplyWindowOverrides[Instance Window](gclass unsafe.Pointer, override
 }
 
 // ParentFromEmbedder calls the default implementations of the from_embedder virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- embedderX float64 
@@ -24016,10 +24020,10 @@ func (window *WindowInstance) ParentFromEmbedder(embedderX float64, embedderY fl
 	carg2 = C.gdouble(embedderY)
 	_ = offscreenX
 	_ = carg3
-	panic("unimplemented conversion of *float64 (gdouble*)")
+	panic("unimplemented conversion of *float64 (*C.gdouble)")
 	_ = offscreenY
 	_ = carg4
-	panic("unimplemented conversion of *float64 (gdouble*)")
+	panic("unimplemented conversion of *float64 (*C.gdouble)")
 
 	C._gotk4_gdk3_Window_virtual_from_embedder(unsafe.Pointer(parentclass.from_embedder), carg0, carg1, carg2, carg3, carg4)
 	runtime.KeepAlive(window)
@@ -24030,7 +24034,8 @@ func (window *WindowInstance) ParentFromEmbedder(embedderX float64, embedderY fl
 }
 
 // ParentToEmbedder calls the default implementations of the to_embedder virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- offscreenX float64 
@@ -24050,10 +24055,10 @@ func (window *WindowInstance) ParentToEmbedder(offscreenX float64, offscreenY fl
 	carg2 = C.gdouble(offscreenY)
 	_ = embedderX
 	_ = carg3
-	panic("unimplemented conversion of *float64 (gdouble*)")
+	panic("unimplemented conversion of *float64 (*C.gdouble)")
 	_ = embedderY
 	_ = carg4
-	panic("unimplemented conversion of *float64 (gdouble*)")
+	panic("unimplemented conversion of *float64 (*C.gdouble)")
 
 	C._gotk4_gdk3_Window_virtual_to_embedder(unsafe.Pointer(parentclass.to_embedder), carg0, carg1, carg2, carg3, carg4)
 	runtime.KeepAlive(window)
@@ -26750,7 +26755,7 @@ func (src1 *Rectangle) Intersect(src2 *Rectangle) (Rectangle, bool) {
 
 	_ = dest
 	_ = carg2
-	panic("unimplemented conversion of Rectangle (GdkRectangle)")
+	panic("unimplemented conversion of Rectangle (C.GdkRectangle)")
 	if cret != 0 {
 		goret = true
 	}
@@ -26791,7 +26796,7 @@ func (src1 *Rectangle) Union(src2 *Rectangle) Rectangle {
 
 	_ = dest
 	_ = carg2
-	panic("unimplemented conversion of Rectangle (GdkRectangle)")
+	panic("unimplemented conversion of Rectangle (C.GdkRectangle)")
 
 	return dest
 }

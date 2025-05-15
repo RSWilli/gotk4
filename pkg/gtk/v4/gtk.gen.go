@@ -23,648 +23,648 @@ import (
 // #cgo pkg-config: gtk4
 // #cgo CFLAGS: -Wno-deprecated-declarations
 // #include <gtk/gtk.h>
-// extern char* _gotk4_gtk4_ScaleFormatValueFunc(GtkScale*, double, gpointer);
-// extern gboolean _gotk4_gtk4_FlowBoxFilterFunc(GtkFlowBoxChild*, gpointer);
-// extern gboolean _gotk4_gtk4_ListBoxFilterFunc(GtkListBoxRow*, gpointer);
-// extern gboolean _gotk4_gtk4_TextCharPredicate(gunichar, gpointer);
-// extern gboolean _gotk4_gtk4_TickCallback(GtkWidget*, GdkFrameClock*, gpointer);
-// extern int _gotk4_gtk4_FlowBoxSortFunc(GtkFlowBoxChild*, GtkFlowBoxChild*, gpointer);
-// extern int _gotk4_gtk4_ListBoxSortFunc(GtkListBoxRow*, GtkListBoxRow*, gpointer);
-// extern void _gotk4_gio2_AsyncReadyCallback(GObject*, GAsyncResult*, gpointer);
-// extern void _gotk4_gtk4_FlowBoxForEachFunc(GtkFlowBox*, GtkFlowBoxChild*, gpointer);
-// extern void _gotk4_gtk4_ListBoxForEachFunc(GtkListBox*, GtkListBoxRow*, gpointer);
-// extern void _gotk4_gtk4_ListBoxUpdateHeaderFunc(GtkListBoxRow*, GtkListBoxRow*, gpointer);
-// extern void _gotk4_gtk4_MenuButtonCreatePopupFunc(GtkMenuButton*, gpointer);
-// extern void _gotk4_gtk4_TextBufferCommitNotify(GtkTextBuffer*, GtkTextBufferNotifyFlags, guint, guint, gpointer);
-// extern void _gotk4_gtk4_TextTagTableForEach(GtkTextTag*, gpointer);
+// extern *C.char _gotk4_gtk4_ScaleFormatValueFunc(*C.GtkScale, C.double, C.gpointer);
+// extern C.gboolean _gotk4_gtk4_FlowBoxFilterFunc(*C.GtkFlowBoxChild, C.gpointer);
+// extern C.gboolean _gotk4_gtk4_ListBoxFilterFunc(*C.GtkListBoxRow, C.gpointer);
+// extern C.gboolean _gotk4_gtk4_TextCharPredicate(C.gunichar, C.gpointer);
+// extern C.gboolean _gotk4_gtk4_TickCallback(*C.GtkWidget, *C.GdkFrameClock, C.gpointer);
+// extern C.int _gotk4_gtk4_FlowBoxSortFunc(*C.GtkFlowBoxChild, *C.GtkFlowBoxChild, C.gpointer);
+// extern C.int _gotk4_gtk4_ListBoxSortFunc(*C.GtkListBoxRow, *C.GtkListBoxRow, C.gpointer);
+// extern C.void _gotk4_gio2_AsyncReadyCallback(*C.GObject, *C.GAsyncResult, C.gpointer);
+// extern C.void _gotk4_gtk4_FlowBoxForEachFunc(*C.GtkFlowBox, *C.GtkFlowBoxChild, C.gpointer);
+// extern C.void _gotk4_gtk4_ListBoxForEachFunc(*C.GtkListBox, *C.GtkListBoxRow, C.gpointer);
+// extern C.void _gotk4_gtk4_ListBoxUpdateHeaderFunc(*C.GtkListBoxRow, *C.GtkListBoxRow, C.gpointer);
+// extern C.void _gotk4_gtk4_MenuButtonCreatePopupFunc(*C.GtkMenuButton, C.gpointer);
+// extern C.void _gotk4_gtk4_TextBufferCommitNotify(*C.GtkTextBuffer, C.GtkTextBufferNotifyFlags, C.guint, C.guint, C.gpointer);
+// extern C.void _gotk4_gtk4_TextTagTableForEach(*C.GtkTextTag, C.gpointer);
 // extern void destroyUserdata(gpointer);
-// extern GtkAccessible* _gotk4_gtk4_Accessible_get_accessible_parent(GtkAccessible*);
-// extern GtkATContext* _gotk4_gtk4_Accessible_get_at_context(GtkAccessible*);
-// extern gboolean _gotk4_gtk4_Accessible_get_bounds(GtkAccessible*, int, int, int, int);
-// extern GtkAccessible* _gotk4_gtk4_Accessible_get_first_accessible_child(GtkAccessible*);
-// extern GtkAccessible* _gotk4_gtk4_Accessible_get_next_accessible_sibling(GtkAccessible*);
-// extern gboolean _gotk4_gtk4_Accessible_get_platform_state(GtkAccessible*, GtkAccessiblePlatformState);
-// GtkAccessible* _gotk4_gtk4_Accessible_virtual_get_accessible_parent(void* fnptr, GtkAccessible* carg0) {
-// 	return ((GtkAccessible* (*) (GtkAccessible*))(fnptr))(carg0);
-// }
-// GtkATContext* _gotk4_gtk4_Accessible_virtual_get_at_context(void* fnptr, GtkAccessible* carg0) {
-// 	return ((GtkATContext* (*) (GtkAccessible*))(fnptr))(carg0);
-// }
-// gboolean _gotk4_gtk4_Accessible_virtual_get_bounds(void* fnptr, GtkAccessible* carg0, int* carg1, int* carg2, int* carg3, int* carg4) {
-// 	return ((gboolean (*) (GtkAccessible*, int*, int*, int*, int*))(fnptr))(carg0, carg1, carg2, carg3, carg4);
-// }
-// GtkAccessible* _gotk4_gtk4_Accessible_virtual_get_first_accessible_child(void* fnptr, GtkAccessible* carg0) {
-// 	return ((GtkAccessible* (*) (GtkAccessible*))(fnptr))(carg0);
-// }
-// GtkAccessible* _gotk4_gtk4_Accessible_virtual_get_next_accessible_sibling(void* fnptr, GtkAccessible* carg0) {
-// 	return ((GtkAccessible* (*) (GtkAccessible*))(fnptr))(carg0);
-// }
-// gboolean _gotk4_gtk4_Accessible_virtual_get_platform_state(void* fnptr, GtkAccessible* carg0, GtkAccessiblePlatformState carg1) {
-// 	return ((gboolean (*) (GtkAccessible*, GtkAccessiblePlatformState))(fnptr))(carg0, carg1);
-// }
-// extern gboolean _gotk4_gtk4_AccessibleRange_set_current_value(GtkAccessibleRange*, double);
-// gboolean _gotk4_gtk4_AccessibleRange_virtual_set_current_value(void* fnptr, GtkAccessibleRange* carg0, double carg1) {
-// 	return ((gboolean (*) (GtkAccessibleRange*, double))(fnptr))(carg0, carg1);
-// }
-// extern uint _gotk4_gtk4_AccessibleText_get_caret_position(GtkAccessibleText*);
-// extern GBytes* _gotk4_gtk4_AccessibleText_get_contents(GtkAccessibleText*, uint, uint);
-// extern GBytes* _gotk4_gtk4_AccessibleText_get_contents_at(GtkAccessibleText*, uint, GtkAccessibleTextGranularity, uint, uint);
-// extern gboolean _gotk4_gtk4_AccessibleText_get_extents(GtkAccessibleText*, uint, uint, graphene_rect_t*);
-// extern gboolean _gotk4_gtk4_AccessibleText_get_offset(GtkAccessibleText*, graphene_point_t*, uint);
-// uint _gotk4_gtk4_AccessibleText_virtual_get_caret_position(void* fnptr, GtkAccessibleText* carg0) {
-// 	return ((uint (*) (GtkAccessibleText*))(fnptr))(carg0);
-// }
-// GBytes* _gotk4_gtk4_AccessibleText_virtual_get_contents(void* fnptr, GtkAccessibleText* carg0, uint carg1, uint carg2) {
-// 	return ((GBytes* (*) (GtkAccessibleText*, uint, uint))(fnptr))(carg0, carg1, carg2);
-// }
-// GBytes* _gotk4_gtk4_AccessibleText_virtual_get_contents_at(void* fnptr, GtkAccessibleText* carg0, uint carg1, GtkAccessibleTextGranularity carg2, uint* carg3, uint* carg4) {
-// 	return ((GBytes* (*) (GtkAccessibleText*, uint, GtkAccessibleTextGranularity, uint*, uint*))(fnptr))(carg0, carg1, carg2, carg3, carg4);
-// }
-// gboolean _gotk4_gtk4_AccessibleText_virtual_get_extents(void* fnptr, GtkAccessibleText* carg0, uint carg1, uint carg2, graphene_rect_t* carg3) {
-// 	return ((gboolean (*) (GtkAccessibleText*, uint, uint, graphene_rect_t*))(fnptr))(carg0, carg1, carg2, carg3);
+// extern *C.GtkAccessible _gotk4_gtk4_Accessible_get_accessible_parent(*C.GtkAccessible);
+// extern *C.GtkATContext _gotk4_gtk4_Accessible_get_at_context(*C.GtkAccessible);
+// extern C.gboolean _gotk4_gtk4_Accessible_get_bounds(*C.GtkAccessible, C.int, C.int, C.int, C.int);
+// extern *C.GtkAccessible _gotk4_gtk4_Accessible_get_first_accessible_child(*C.GtkAccessible);
+// extern *C.GtkAccessible _gotk4_gtk4_Accessible_get_next_accessible_sibling(*C.GtkAccessible);
+// extern C.gboolean _gotk4_gtk4_Accessible_get_platform_state(*C.GtkAccessible, C.GtkAccessiblePlatformState);
+// *C.GtkAccessible _gotk4_gtk4_Accessible_virtual_get_accessible_parent(void* fnptr, *C.GtkAccessible carg0) {
+// 	return ((*C.GtkAccessible (*) (*C.GtkAccessible))(fnptr))(carg0);
+// }
+// *C.GtkATContext _gotk4_gtk4_Accessible_virtual_get_at_context(void* fnptr, *C.GtkAccessible carg0) {
+// 	return ((*C.GtkATContext (*) (*C.GtkAccessible))(fnptr))(carg0);
+// }
+// C.gboolean _gotk4_gtk4_Accessible_virtual_get_bounds(void* fnptr, *C.GtkAccessible carg0, C.int* carg1, C.int* carg2, C.int* carg3, C.int* carg4) {
+// 	return ((C.gboolean (*) (*C.GtkAccessible, C.int*, C.int*, C.int*, C.int*))(fnptr))(carg0, carg1, carg2, carg3, carg4);
+// }
+// *C.GtkAccessible _gotk4_gtk4_Accessible_virtual_get_first_accessible_child(void* fnptr, *C.GtkAccessible carg0) {
+// 	return ((*C.GtkAccessible (*) (*C.GtkAccessible))(fnptr))(carg0);
+// }
+// *C.GtkAccessible _gotk4_gtk4_Accessible_virtual_get_next_accessible_sibling(void* fnptr, *C.GtkAccessible carg0) {
+// 	return ((*C.GtkAccessible (*) (*C.GtkAccessible))(fnptr))(carg0);
+// }
+// C.gboolean _gotk4_gtk4_Accessible_virtual_get_platform_state(void* fnptr, *C.GtkAccessible carg0, C.GtkAccessiblePlatformState carg1) {
+// 	return ((C.gboolean (*) (*C.GtkAccessible, C.GtkAccessiblePlatformState))(fnptr))(carg0, carg1);
+// }
+// extern C.gboolean _gotk4_gtk4_AccessibleRange_set_current_value(*C.GtkAccessibleRange, C.double);
+// C.gboolean _gotk4_gtk4_AccessibleRange_virtual_set_current_value(void* fnptr, *C.GtkAccessibleRange carg0, C.double carg1) {
+// 	return ((C.gboolean (*) (*C.GtkAccessibleRange, C.double))(fnptr))(carg0, carg1);
+// }
+// extern C.unsigned int _gotk4_gtk4_AccessibleText_get_caret_position(*C.GtkAccessibleText);
+// extern *C.GBytes _gotk4_gtk4_AccessibleText_get_contents(*C.GtkAccessibleText, C.unsigned int, C.unsigned int);
+// extern *C.GBytes _gotk4_gtk4_AccessibleText_get_contents_at(*C.GtkAccessibleText, C.unsigned int, C.GtkAccessibleTextGranularity, C.unsigned int, C.unsigned int);
+// extern C.gboolean _gotk4_gtk4_AccessibleText_get_extents(*C.GtkAccessibleText, C.unsigned int, C.unsigned int, *C.graphene_rect_t);
+// extern C.gboolean _gotk4_gtk4_AccessibleText_get_offset(*C.GtkAccessibleText, *C.graphene_point_t, C.unsigned int);
+// C.unsigned int _gotk4_gtk4_AccessibleText_virtual_get_caret_position(void* fnptr, *C.GtkAccessibleText carg0) {
+// 	return ((C.unsigned int (*) (*C.GtkAccessibleText))(fnptr))(carg0);
+// }
+// *C.GBytes _gotk4_gtk4_AccessibleText_virtual_get_contents(void* fnptr, *C.GtkAccessibleText carg0, C.unsigned int carg1, C.unsigned int carg2) {
+// 	return ((*C.GBytes (*) (*C.GtkAccessibleText, C.unsigned int, C.unsigned int))(fnptr))(carg0, carg1, carg2);
+// }
+// *C.GBytes _gotk4_gtk4_AccessibleText_virtual_get_contents_at(void* fnptr, *C.GtkAccessibleText carg0, C.unsigned int carg1, C.GtkAccessibleTextGranularity carg2, C.unsigned int* carg3, C.unsigned int* carg4) {
+// 	return ((*C.GBytes (*) (*C.GtkAccessibleText, C.unsigned int, C.GtkAccessibleTextGranularity, C.unsigned int*, C.unsigned int*))(fnptr))(carg0, carg1, carg2, carg3, carg4);
+// }
+// C.gboolean _gotk4_gtk4_AccessibleText_virtual_get_extents(void* fnptr, *C.GtkAccessibleText carg0, C.unsigned int carg1, C.unsigned int carg2, *C.graphene_rect_t carg3) {
+// 	return ((C.gboolean (*) (*C.GtkAccessibleText, C.unsigned int, C.unsigned int, *C.graphene_rect_t))(fnptr))(carg0, carg1, carg2, carg3);
 // }
-// gboolean _gotk4_gtk4_AccessibleText_virtual_get_offset(void* fnptr, GtkAccessibleText* carg0, graphene_point_t* carg1, uint* carg2) {
-// 	return ((gboolean (*) (GtkAccessibleText*, graphene_point_t*, uint*))(fnptr))(carg0, carg1, carg2);
-// }
-// extern char* _gotk4_gtk4_Actionable_get_action_name(GtkActionable*);
-// extern void _gotk4_gtk4_Actionable_set_action_name(GtkActionable*, char*);
-// char* _gotk4_gtk4_Actionable_virtual_get_action_name(void* fnptr, GtkActionable* carg0) {
-// 	return ((char* (*) (GtkActionable*))(fnptr))(carg0);
+// C.gboolean _gotk4_gtk4_AccessibleText_virtual_get_offset(void* fnptr, *C.GtkAccessibleText carg0, *C.graphene_point_t carg1, C.unsigned int* carg2) {
+// 	return ((C.gboolean (*) (*C.GtkAccessibleText, *C.graphene_point_t, C.unsigned int*))(fnptr))(carg0, carg1, carg2);
+// }
+// extern *C.char _gotk4_gtk4_Actionable_get_action_name(*C.GtkActionable);
+// extern C.void _gotk4_gtk4_Actionable_set_action_name(*C.GtkActionable, *C.char);
+// *C.char _gotk4_gtk4_Actionable_virtual_get_action_name(void* fnptr, *C.GtkActionable carg0) {
+// 	return ((*C.char (*) (*C.GtkActionable))(fnptr))(carg0);
 // }
-// void _gotk4_gtk4_Actionable_virtual_set_action_name(void* fnptr, GtkActionable* carg0, char* carg1) {
-// 	return ((void (*) (GtkActionable*, char*))(fnptr))(carg0, carg1);
-// }
-// extern void _gotk4_gtk4_Buildable_add_child(GtkBuildable*, GtkBuilder*, GObject*, char*);
-// extern char* _gotk4_gtk4_Buildable_get_id(GtkBuildable*);
-// extern GObject* _gotk4_gtk4_Buildable_get_internal_child(GtkBuildable*, GtkBuilder*, char*);
-// extern void _gotk4_gtk4_Buildable_parser_finished(GtkBuildable*, GtkBuilder*);
-// extern void _gotk4_gtk4_Buildable_set_buildable_property(GtkBuildable*, GtkBuilder*, char*, GValue*);
-// extern void _gotk4_gtk4_Buildable_set_id(GtkBuildable*, char*);
-// void _gotk4_gtk4_Buildable_virtual_add_child(void* fnptr, GtkBuildable* carg0, GtkBuilder* carg1, GObject* carg2, char* carg3) {
-// 	return ((void (*) (GtkBuildable*, GtkBuilder*, GObject*, char*))(fnptr))(carg0, carg1, carg2, carg3);
-// }
-// char* _gotk4_gtk4_Buildable_virtual_get_id(void* fnptr, GtkBuildable* carg0) {
-// 	return ((char* (*) (GtkBuildable*))(fnptr))(carg0);
-// }
-// GObject* _gotk4_gtk4_Buildable_virtual_get_internal_child(void* fnptr, GtkBuildable* carg0, GtkBuilder* carg1, char* carg2) {
-// 	return ((GObject* (*) (GtkBuildable*, GtkBuilder*, char*))(fnptr))(carg0, carg1, carg2);
-// }
-// void _gotk4_gtk4_Buildable_virtual_parser_finished(void* fnptr, GtkBuildable* carg0, GtkBuilder* carg1) {
-// 	return ((void (*) (GtkBuildable*, GtkBuilder*))(fnptr))(carg0, carg1);
-// }
-// void _gotk4_gtk4_Buildable_virtual_set_buildable_property(void* fnptr, GtkBuildable* carg0, GtkBuilder* carg1, char* carg2, GValue* carg3) {
-// 	return ((void (*) (GtkBuildable*, GtkBuilder*, char*, GValue*))(fnptr))(carg0, carg1, carg2, carg3);
-// }
-// void _gotk4_gtk4_Buildable_virtual_set_id(void* fnptr, GtkBuildable* carg0, char* carg1) {
-// 	return ((void (*) (GtkBuildable*, char*))(fnptr))(carg0, carg1);
-// }
-// extern GType _gotk4_gtk4_BuilderScope_get_type_from_function(GtkBuilderScope*, GtkBuilder*, char*);
-// extern GType _gotk4_gtk4_BuilderScope_get_type_from_name(GtkBuilderScope*, GtkBuilder*, char*);
-// GType _gotk4_gtk4_BuilderScope_virtual_get_type_from_function(void* fnptr, GtkBuilderScope* carg0, GtkBuilder* carg1, char* carg2) {
-// 	return ((GType (*) (GtkBuilderScope*, GtkBuilder*, char*))(fnptr))(carg0, carg1, carg2);
+// C.void _gotk4_gtk4_Actionable_virtual_set_action_name(void* fnptr, *C.GtkActionable carg0, *C.char carg1) {
+// 	return ((C.void (*) (*C.GtkActionable, *C.char))(fnptr))(carg0, carg1);
+// }
+// extern C.void _gotk4_gtk4_Buildable_add_child(*C.GtkBuildable, *C.GtkBuilder, *C.GObject, *C.char);
+// extern *C.char _gotk4_gtk4_Buildable_get_id(*C.GtkBuildable);
+// extern *C.GObject _gotk4_gtk4_Buildable_get_internal_child(*C.GtkBuildable, *C.GtkBuilder, *C.char);
+// extern C.void _gotk4_gtk4_Buildable_parser_finished(*C.GtkBuildable, *C.GtkBuilder);
+// extern C.void _gotk4_gtk4_Buildable_set_buildable_property(*C.GtkBuildable, *C.GtkBuilder, *C.char, *C.GValue);
+// extern C.void _gotk4_gtk4_Buildable_set_id(*C.GtkBuildable, *C.char);
+// C.void _gotk4_gtk4_Buildable_virtual_add_child(void* fnptr, *C.GtkBuildable carg0, *C.GtkBuilder carg1, *C.GObject carg2, *C.char carg3) {
+// 	return ((C.void (*) (*C.GtkBuildable, *C.GtkBuilder, *C.GObject, *C.char))(fnptr))(carg0, carg1, carg2, carg3);
+// }
+// *C.char _gotk4_gtk4_Buildable_virtual_get_id(void* fnptr, *C.GtkBuildable carg0) {
+// 	return ((*C.char (*) (*C.GtkBuildable))(fnptr))(carg0);
+// }
+// *C.GObject _gotk4_gtk4_Buildable_virtual_get_internal_child(void* fnptr, *C.GtkBuildable carg0, *C.GtkBuilder carg1, *C.char carg2) {
+// 	return ((*C.GObject (*) (*C.GtkBuildable, *C.GtkBuilder, *C.char))(fnptr))(carg0, carg1, carg2);
+// }
+// C.void _gotk4_gtk4_Buildable_virtual_parser_finished(void* fnptr, *C.GtkBuildable carg0, *C.GtkBuilder carg1) {
+// 	return ((C.void (*) (*C.GtkBuildable, *C.GtkBuilder))(fnptr))(carg0, carg1);
+// }
+// C.void _gotk4_gtk4_Buildable_virtual_set_buildable_property(void* fnptr, *C.GtkBuildable carg0, *C.GtkBuilder carg1, *C.char carg2, *C.GValue carg3) {
+// 	return ((C.void (*) (*C.GtkBuildable, *C.GtkBuilder, *C.char, *C.GValue))(fnptr))(carg0, carg1, carg2, carg3);
+// }
+// C.void _gotk4_gtk4_Buildable_virtual_set_id(void* fnptr, *C.GtkBuildable carg0, *C.char carg1) {
+// 	return ((C.void (*) (*C.GtkBuildable, *C.char))(fnptr))(carg0, carg1);
+// }
+// extern C.GType _gotk4_gtk4_BuilderScope_get_type_from_function(*C.GtkBuilderScope, *C.GtkBuilder, *C.char);
+// extern C.GType _gotk4_gtk4_BuilderScope_get_type_from_name(*C.GtkBuilderScope, *C.GtkBuilder, *C.char);
+// C.GType _gotk4_gtk4_BuilderScope_virtual_get_type_from_function(void* fnptr, *C.GtkBuilderScope carg0, *C.GtkBuilder carg1, *C.char carg2) {
+// 	return ((C.GType (*) (*C.GtkBuilderScope, *C.GtkBuilder, *C.char))(fnptr))(carg0, carg1, carg2);
 // }
-// GType _gotk4_gtk4_BuilderScope_virtual_get_type_from_name(void* fnptr, GtkBuilderScope* carg0, GtkBuilder* carg1, char* carg2) {
-// 	return ((GType (*) (GtkBuilderScope*, GtkBuilder*, char*))(fnptr))(carg0, carg1, carg2);
-// }
-// extern gboolean _gotk4_gtk4_Scrollable_get_border(GtkScrollable*, GtkBorder);
-// gboolean _gotk4_gtk4_Scrollable_virtual_get_border(void* fnptr, GtkScrollable* carg0, GtkBorder* carg1) {
-// 	return ((gboolean (*) (GtkScrollable*, GtkBorder*))(fnptr))(carg0, carg1);
-// }
-// extern void _gotk4_gtk4_SectionModel_get_section(GtkSectionModel*, guint, guint, guint);
-// void _gotk4_gtk4_SectionModel_virtual_get_section(void* fnptr, GtkSectionModel* carg0, guint carg1, guint* carg2, guint* carg3) {
-// 	return ((void (*) (GtkSectionModel*, guint, guint*, guint*))(fnptr))(carg0, carg1, carg2, carg3);
-// }
-// extern GtkBitset* _gotk4_gtk4_SelectionModel_get_selection_in_range(GtkSelectionModel*, guint, guint);
-// extern gboolean _gotk4_gtk4_SelectionModel_is_selected(GtkSelectionModel*, guint);
-// extern gboolean _gotk4_gtk4_SelectionModel_select_all(GtkSelectionModel*);
-// extern gboolean _gotk4_gtk4_SelectionModel_select_item(GtkSelectionModel*, guint, gboolean);
-// extern gboolean _gotk4_gtk4_SelectionModel_select_range(GtkSelectionModel*, guint, guint, gboolean);
-// extern gboolean _gotk4_gtk4_SelectionModel_set_selection(GtkSelectionModel*, GtkBitset*, GtkBitset*);
-// extern gboolean _gotk4_gtk4_SelectionModel_unselect_all(GtkSelectionModel*);
-// extern gboolean _gotk4_gtk4_SelectionModel_unselect_item(GtkSelectionModel*, guint);
-// extern gboolean _gotk4_gtk4_SelectionModel_unselect_range(GtkSelectionModel*, guint, guint);
-// GtkBitset* _gotk4_gtk4_SelectionModel_virtual_get_selection_in_range(void* fnptr, GtkSelectionModel* carg0, guint carg1, guint carg2) {
-// 	return ((GtkBitset* (*) (GtkSelectionModel*, guint, guint))(fnptr))(carg0, carg1, carg2);
-// }
-// gboolean _gotk4_gtk4_SelectionModel_virtual_is_selected(void* fnptr, GtkSelectionModel* carg0, guint carg1) {
-// 	return ((gboolean (*) (GtkSelectionModel*, guint))(fnptr))(carg0, carg1);
-// }
-// gboolean _gotk4_gtk4_SelectionModel_virtual_select_all(void* fnptr, GtkSelectionModel* carg0) {
-// 	return ((gboolean (*) (GtkSelectionModel*))(fnptr))(carg0);
-// }
-// gboolean _gotk4_gtk4_SelectionModel_virtual_select_item(void* fnptr, GtkSelectionModel* carg0, guint carg1, gboolean carg2) {
-// 	return ((gboolean (*) (GtkSelectionModel*, guint, gboolean))(fnptr))(carg0, carg1, carg2);
-// }
-// gboolean _gotk4_gtk4_SelectionModel_virtual_select_range(void* fnptr, GtkSelectionModel* carg0, guint carg1, guint carg2, gboolean carg3) {
-// 	return ((gboolean (*) (GtkSelectionModel*, guint, guint, gboolean))(fnptr))(carg0, carg1, carg2, carg3);
-// }
-// gboolean _gotk4_gtk4_SelectionModel_virtual_set_selection(void* fnptr, GtkSelectionModel* carg0, GtkBitset* carg1, GtkBitset* carg2) {
-// 	return ((gboolean (*) (GtkSelectionModel*, GtkBitset*, GtkBitset*))(fnptr))(carg0, carg1, carg2);
-// }
-// gboolean _gotk4_gtk4_SelectionModel_virtual_unselect_all(void* fnptr, GtkSelectionModel* carg0) {
-// 	return ((gboolean (*) (GtkSelectionModel*))(fnptr))(carg0);
-// }
-// gboolean _gotk4_gtk4_SelectionModel_virtual_unselect_item(void* fnptr, GtkSelectionModel* carg0, guint carg1) {
-// 	return ((gboolean (*) (GtkSelectionModel*, guint))(fnptr))(carg0, carg1);
-// }
-// gboolean _gotk4_gtk4_SelectionModel_virtual_unselect_range(void* fnptr, GtkSelectionModel* carg0, guint carg1, guint carg2) {
-// 	return ((gboolean (*) (GtkSelectionModel*, guint, guint))(fnptr))(carg0, carg1, carg2);
-// }
-// extern void _gotk4_gtk4_ShortcutManager_add_controller(GtkShortcutManager*, GtkShortcutController*);
-// extern void _gotk4_gtk4_ShortcutManager_remove_controller(GtkShortcutManager*, GtkShortcutController*);
-// void _gotk4_gtk4_ShortcutManager_virtual_add_controller(void* fnptr, GtkShortcutManager* carg0, GtkShortcutController* carg1) {
-// 	return ((void (*) (GtkShortcutManager*, GtkShortcutController*))(fnptr))(carg0, carg1);
-// }
-// void _gotk4_gtk4_ShortcutManager_virtual_remove_controller(void* fnptr, GtkShortcutManager* carg0, GtkShortcutController* carg1) {
-// 	return ((void (*) (GtkShortcutManager*, GtkShortcutController*))(fnptr))(carg0, carg1);
-// }
-// extern void _gotk4_gtk4_SymbolicPaintable_snapshot_symbolic(GtkSymbolicPaintable*, GdkSnapshot*, double, double, const GdkRGBA*, gsize);
-// void _gotk4_gtk4_SymbolicPaintable_virtual_snapshot_symbolic(void* fnptr, GtkSymbolicPaintable* carg0, GdkSnapshot* carg1, double carg2, double carg3, const GdkRGBA* carg4, gsize carg5) {
-// 	return ((void (*) (GtkSymbolicPaintable*, GdkSnapshot*, double, double, const GdkRGBA*, gsize))(fnptr))(carg0, carg1, carg2, carg3, carg4, carg5);
+// C.GType _gotk4_gtk4_BuilderScope_virtual_get_type_from_name(void* fnptr, *C.GtkBuilderScope carg0, *C.GtkBuilder carg1, *C.char carg2) {
+// 	return ((C.GType (*) (*C.GtkBuilderScope, *C.GtkBuilder, *C.char))(fnptr))(carg0, carg1, carg2);
+// }
+// extern C.gboolean _gotk4_gtk4_Scrollable_get_border(*C.GtkScrollable, C.GtkBorder);
+// C.gboolean _gotk4_gtk4_Scrollable_virtual_get_border(void* fnptr, *C.GtkScrollable carg0, C.GtkBorder* carg1) {
+// 	return ((C.gboolean (*) (*C.GtkScrollable, C.GtkBorder*))(fnptr))(carg0, carg1);
+// }
+// extern C.void _gotk4_gtk4_SectionModel_get_section(*C.GtkSectionModel, C.guint, C.guint, C.guint);
+// C.void _gotk4_gtk4_SectionModel_virtual_get_section(void* fnptr, *C.GtkSectionModel carg0, C.guint carg1, C.guint* carg2, C.guint* carg3) {
+// 	return ((C.void (*) (*C.GtkSectionModel, C.guint, C.guint*, C.guint*))(fnptr))(carg0, carg1, carg2, carg3);
+// }
+// extern *C.GtkBitset _gotk4_gtk4_SelectionModel_get_selection_in_range(*C.GtkSelectionModel, C.guint, C.guint);
+// extern C.gboolean _gotk4_gtk4_SelectionModel_is_selected(*C.GtkSelectionModel, C.guint);
+// extern C.gboolean _gotk4_gtk4_SelectionModel_select_all(*C.GtkSelectionModel);
+// extern C.gboolean _gotk4_gtk4_SelectionModel_select_item(*C.GtkSelectionModel, C.guint, C.gboolean);
+// extern C.gboolean _gotk4_gtk4_SelectionModel_select_range(*C.GtkSelectionModel, C.guint, C.guint, C.gboolean);
+// extern C.gboolean _gotk4_gtk4_SelectionModel_set_selection(*C.GtkSelectionModel, *C.GtkBitset, *C.GtkBitset);
+// extern C.gboolean _gotk4_gtk4_SelectionModel_unselect_all(*C.GtkSelectionModel);
+// extern C.gboolean _gotk4_gtk4_SelectionModel_unselect_item(*C.GtkSelectionModel, C.guint);
+// extern C.gboolean _gotk4_gtk4_SelectionModel_unselect_range(*C.GtkSelectionModel, C.guint, C.guint);
+// *C.GtkBitset _gotk4_gtk4_SelectionModel_virtual_get_selection_in_range(void* fnptr, *C.GtkSelectionModel carg0, C.guint carg1, C.guint carg2) {
+// 	return ((*C.GtkBitset (*) (*C.GtkSelectionModel, C.guint, C.guint))(fnptr))(carg0, carg1, carg2);
+// }
+// C.gboolean _gotk4_gtk4_SelectionModel_virtual_is_selected(void* fnptr, *C.GtkSelectionModel carg0, C.guint carg1) {
+// 	return ((C.gboolean (*) (*C.GtkSelectionModel, C.guint))(fnptr))(carg0, carg1);
+// }
+// C.gboolean _gotk4_gtk4_SelectionModel_virtual_select_all(void* fnptr, *C.GtkSelectionModel carg0) {
+// 	return ((C.gboolean (*) (*C.GtkSelectionModel))(fnptr))(carg0);
+// }
+// C.gboolean _gotk4_gtk4_SelectionModel_virtual_select_item(void* fnptr, *C.GtkSelectionModel carg0, C.guint carg1, C.gboolean carg2) {
+// 	return ((C.gboolean (*) (*C.GtkSelectionModel, C.guint, C.gboolean))(fnptr))(carg0, carg1, carg2);
+// }
+// C.gboolean _gotk4_gtk4_SelectionModel_virtual_select_range(void* fnptr, *C.GtkSelectionModel carg0, C.guint carg1, C.guint carg2, C.gboolean carg3) {
+// 	return ((C.gboolean (*) (*C.GtkSelectionModel, C.guint, C.guint, C.gboolean))(fnptr))(carg0, carg1, carg2, carg3);
+// }
+// C.gboolean _gotk4_gtk4_SelectionModel_virtual_set_selection(void* fnptr, *C.GtkSelectionModel carg0, *C.GtkBitset carg1, *C.GtkBitset carg2) {
+// 	return ((C.gboolean (*) (*C.GtkSelectionModel, *C.GtkBitset, *C.GtkBitset))(fnptr))(carg0, carg1, carg2);
+// }
+// C.gboolean _gotk4_gtk4_SelectionModel_virtual_unselect_all(void* fnptr, *C.GtkSelectionModel carg0) {
+// 	return ((C.gboolean (*) (*C.GtkSelectionModel))(fnptr))(carg0);
+// }
+// C.gboolean _gotk4_gtk4_SelectionModel_virtual_unselect_item(void* fnptr, *C.GtkSelectionModel carg0, C.guint carg1) {
+// 	return ((C.gboolean (*) (*C.GtkSelectionModel, C.guint))(fnptr))(carg0, carg1);
+// }
+// C.gboolean _gotk4_gtk4_SelectionModel_virtual_unselect_range(void* fnptr, *C.GtkSelectionModel carg0, C.guint carg1, C.guint carg2) {
+// 	return ((C.gboolean (*) (*C.GtkSelectionModel, C.guint, C.guint))(fnptr))(carg0, carg1, carg2);
+// }
+// extern C.void _gotk4_gtk4_ShortcutManager_add_controller(*C.GtkShortcutManager, *C.GtkShortcutController);
+// extern C.void _gotk4_gtk4_ShortcutManager_remove_controller(*C.GtkShortcutManager, *C.GtkShortcutController);
+// C.void _gotk4_gtk4_ShortcutManager_virtual_add_controller(void* fnptr, *C.GtkShortcutManager carg0, *C.GtkShortcutController carg1) {
+// 	return ((C.void (*) (*C.GtkShortcutManager, *C.GtkShortcutController))(fnptr))(carg0, carg1);
+// }
+// C.void _gotk4_gtk4_ShortcutManager_virtual_remove_controller(void* fnptr, *C.GtkShortcutManager carg0, *C.GtkShortcutController carg1) {
+// 	return ((C.void (*) (*C.GtkShortcutManager, *C.GtkShortcutController))(fnptr))(carg0, carg1);
+// }
+// extern C.void _gotk4_gtk4_SymbolicPaintable_snapshot_symbolic(*C.GtkSymbolicPaintable, *C.GdkSnapshot, C.double, C.double, *C.GdkRGBA, C.gsize);
+// C.void _gotk4_gtk4_SymbolicPaintable_virtual_snapshot_symbolic(void* fnptr, *C.GtkSymbolicPaintable carg0, *C.GdkSnapshot carg1, C.double carg2, C.double carg3, *C.GdkRGBA carg4, C.gsize carg5) {
+// 	return ((C.void (*) (*C.GtkSymbolicPaintable, *C.GdkSnapshot, C.double, C.double, *C.GdkRGBA, C.gsize))(fnptr))(carg0, carg1, carg2, carg3, carg4, carg5);
 // }
-// extern void _gotk4_gtk4_Adjustment_changed(GtkAdjustment*);
-// extern void _gotk4_gtk4_Adjustment_value_changed(GtkAdjustment*);
-// void _gotk4_gtk4_Adjustment_virtual_changed(void* fnptr, GtkAdjustment* carg0) {
-// 	return ((void (*) (GtkAdjustment*))(fnptr))(carg0);
+// extern C.void _gotk4_gtk4_Adjustment_changed(*C.GtkAdjustment);
+// extern C.void _gotk4_gtk4_Adjustment_value_changed(*C.GtkAdjustment);
+// C.void _gotk4_gtk4_Adjustment_virtual_changed(void* fnptr, *C.GtkAdjustment carg0) {
+// 	return ((C.void (*) (*C.GtkAdjustment))(fnptr))(carg0);
 // }
-// void _gotk4_gtk4_Adjustment_virtual_value_changed(void* fnptr, GtkAdjustment* carg0) {
-// 	return ((void (*) (GtkAdjustment*))(fnptr))(carg0);
+// C.void _gotk4_gtk4_Adjustment_virtual_value_changed(void* fnptr, *C.GtkAdjustment carg0) {
+// 	return ((C.void (*) (*C.GtkAdjustment))(fnptr))(carg0);
 // }
-// extern void _gotk4_gtk4_Application_window_added(GtkApplication*, GtkWindow*);
-// extern void _gotk4_gtk4_Application_window_removed(GtkApplication*, GtkWindow*);
-// void _gotk4_gtk4_Application_virtual_window_added(void* fnptr, GtkApplication* carg0, GtkWindow* carg1) {
-// 	return ((void (*) (GtkApplication*, GtkWindow*))(fnptr))(carg0, carg1);
+// extern C.void _gotk4_gtk4_Application_window_added(*C.GtkApplication, *C.GtkWindow);
+// extern C.void _gotk4_gtk4_Application_window_removed(*C.GtkApplication, *C.GtkWindow);
+// C.void _gotk4_gtk4_Application_virtual_window_added(void* fnptr, *C.GtkApplication carg0, *C.GtkWindow carg1) {
+// 	return ((C.void (*) (*C.GtkApplication, *C.GtkWindow))(fnptr))(carg0, carg1);
 // }
-// void _gotk4_gtk4_Application_virtual_window_removed(void* fnptr, GtkApplication* carg0, GtkWindow* carg1) {
-// 	return ((void (*) (GtkApplication*, GtkWindow*))(fnptr))(carg0, carg1);
-// }
-// extern guint _gotk4_gtk4_EntryBuffer_delete_text(GtkEntryBuffer*, guint, guint);
-// extern void _gotk4_gtk4_EntryBuffer_deleted_text(GtkEntryBuffer*, guint, guint);
-// extern guint _gotk4_gtk4_EntryBuffer_get_length(GtkEntryBuffer*);
-// extern char* _gotk4_gtk4_EntryBuffer_get_text(GtkEntryBuffer*, gsize*);
-// extern guint _gotk4_gtk4_EntryBuffer_insert_text(GtkEntryBuffer*, guint, char*, guint);
-// extern void _gotk4_gtk4_EntryBuffer_inserted_text(GtkEntryBuffer*, guint, char*, guint);
-// guint _gotk4_gtk4_EntryBuffer_virtual_delete_text(void* fnptr, GtkEntryBuffer* carg0, guint carg1, guint carg2) {
-// 	return ((guint (*) (GtkEntryBuffer*, guint, guint))(fnptr))(carg0, carg1, carg2);
+// C.void _gotk4_gtk4_Application_virtual_window_removed(void* fnptr, *C.GtkApplication carg0, *C.GtkWindow carg1) {
+// 	return ((C.void (*) (*C.GtkApplication, *C.GtkWindow))(fnptr))(carg0, carg1);
+// }
+// extern C.guint _gotk4_gtk4_EntryBuffer_delete_text(*C.GtkEntryBuffer, C.guint, C.guint);
+// extern C.void _gotk4_gtk4_EntryBuffer_deleted_text(*C.GtkEntryBuffer, C.guint, C.guint);
+// extern C.guint _gotk4_gtk4_EntryBuffer_get_length(*C.GtkEntryBuffer);
+// extern *C.char _gotk4_gtk4_EntryBuffer_get_text(*C.GtkEntryBuffer, *C.gsize);
+// extern C.guint _gotk4_gtk4_EntryBuffer_insert_text(*C.GtkEntryBuffer, C.guint, *C.char, C.guint);
+// extern C.void _gotk4_gtk4_EntryBuffer_inserted_text(*C.GtkEntryBuffer, C.guint, *C.char, C.guint);
+// C.guint _gotk4_gtk4_EntryBuffer_virtual_delete_text(void* fnptr, *C.GtkEntryBuffer carg0, C.guint carg1, C.guint carg2) {
+// 	return ((C.guint (*) (*C.GtkEntryBuffer, C.guint, C.guint))(fnptr))(carg0, carg1, carg2);
 // }
-// void _gotk4_gtk4_EntryBuffer_virtual_deleted_text(void* fnptr, GtkEntryBuffer* carg0, guint carg1, guint carg2) {
-// 	return ((void (*) (GtkEntryBuffer*, guint, guint))(fnptr))(carg0, carg1, carg2);
+// C.void _gotk4_gtk4_EntryBuffer_virtual_deleted_text(void* fnptr, *C.GtkEntryBuffer carg0, C.guint carg1, C.guint carg2) {
+// 	return ((C.void (*) (*C.GtkEntryBuffer, C.guint, C.guint))(fnptr))(carg0, carg1, carg2);
 // }
-// guint _gotk4_gtk4_EntryBuffer_virtual_get_length(void* fnptr, GtkEntryBuffer* carg0) {
-// 	return ((guint (*) (GtkEntryBuffer*))(fnptr))(carg0);
+// C.guint _gotk4_gtk4_EntryBuffer_virtual_get_length(void* fnptr, *C.GtkEntryBuffer carg0) {
+// 	return ((C.guint (*) (*C.GtkEntryBuffer))(fnptr))(carg0);
 // }
-// char* _gotk4_gtk4_EntryBuffer_virtual_get_text(void* fnptr, GtkEntryBuffer* carg0, gsize* carg1) {
-// 	return ((char* (*) (GtkEntryBuffer*, gsize*))(fnptr))(carg0, carg1);
+// *C.char _gotk4_gtk4_EntryBuffer_virtual_get_text(void* fnptr, *C.GtkEntryBuffer carg0, *C.gsize carg1) {
+// 	return ((*C.char (*) (*C.GtkEntryBuffer, *C.gsize))(fnptr))(carg0, carg1);
 // }
-// guint _gotk4_gtk4_EntryBuffer_virtual_insert_text(void* fnptr, GtkEntryBuffer* carg0, guint carg1, char* carg2, guint carg3) {
-// 	return ((guint (*) (GtkEntryBuffer*, guint, char*, guint))(fnptr))(carg0, carg1, carg2, carg3);
+// C.guint _gotk4_gtk4_EntryBuffer_virtual_insert_text(void* fnptr, *C.GtkEntryBuffer carg0, C.guint carg1, *C.char carg2, C.guint carg3) {
+// 	return ((C.guint (*) (*C.GtkEntryBuffer, C.guint, *C.char, C.guint))(fnptr))(carg0, carg1, carg2, carg3);
 // }
-// void _gotk4_gtk4_EntryBuffer_virtual_inserted_text(void* fnptr, GtkEntryBuffer* carg0, guint carg1, char* carg2, guint carg3) {
-// 	return ((void (*) (GtkEntryBuffer*, guint, char*, guint))(fnptr))(carg0, carg1, carg2, carg3);
-// }
-// extern GtkFilterMatch _gotk4_gtk4_Filter_get_strictness(GtkFilter*);
-// GtkFilterMatch _gotk4_gtk4_Filter_virtual_get_strictness(void* fnptr, GtkFilter* carg0) {
-// 	return ((GtkFilterMatch (*) (GtkFilter*))(fnptr))(carg0);
-// }
-// extern void _gotk4_gtk4_IMContext_activate_osk(GtkIMContext*);
-// extern void _gotk4_gtk4_IMContext_commit(GtkIMContext*, char*);
-// extern gboolean _gotk4_gtk4_IMContext_delete_surrounding(GtkIMContext*, int, int);
-// extern void _gotk4_gtk4_IMContext_focus_in(GtkIMContext*);
-// extern void _gotk4_gtk4_IMContext_focus_out(GtkIMContext*);
-// extern void _gotk4_gtk4_IMContext_get_preedit_string(GtkIMContext*, char*, PangoAttrList*, int);
-// extern gboolean _gotk4_gtk4_IMContext_get_surrounding_with_selection(GtkIMContext*, char*, int, int);
-// extern void _gotk4_gtk4_IMContext_preedit_changed(GtkIMContext*);
-// extern void _gotk4_gtk4_IMContext_preedit_end(GtkIMContext*);
-// extern void _gotk4_gtk4_IMContext_preedit_start(GtkIMContext*);
-// extern void _gotk4_gtk4_IMContext_reset(GtkIMContext*);
-// extern gboolean _gotk4_gtk4_IMContext_retrieve_surrounding(GtkIMContext*);
-// extern void _gotk4_gtk4_IMContext_set_client_widget(GtkIMContext*, GtkWidget*);
-// extern void _gotk4_gtk4_IMContext_set_cursor_location(GtkIMContext*, GdkRectangle*);
-// extern void _gotk4_gtk4_IMContext_set_surrounding_with_selection(GtkIMContext*, char*, int, int, int);
-// extern void _gotk4_gtk4_IMContext_set_use_preedit(GtkIMContext*, gboolean);
-// void _gotk4_gtk4_IMContext_virtual_activate_osk(void* fnptr, GtkIMContext* carg0) {
-// 	return ((void (*) (GtkIMContext*))(fnptr))(carg0);
+// C.void _gotk4_gtk4_EntryBuffer_virtual_inserted_text(void* fnptr, *C.GtkEntryBuffer carg0, C.guint carg1, *C.char carg2, C.guint carg3) {
+// 	return ((C.void (*) (*C.GtkEntryBuffer, C.guint, *C.char, C.guint))(fnptr))(carg0, carg1, carg2, carg3);
+// }
+// extern C.GtkFilterMatch _gotk4_gtk4_Filter_get_strictness(*C.GtkFilter);
+// C.GtkFilterMatch _gotk4_gtk4_Filter_virtual_get_strictness(void* fnptr, *C.GtkFilter carg0) {
+// 	return ((C.GtkFilterMatch (*) (*C.GtkFilter))(fnptr))(carg0);
+// }
+// extern C.void _gotk4_gtk4_IMContext_activate_osk(*C.GtkIMContext);
+// extern C.void _gotk4_gtk4_IMContext_commit(*C.GtkIMContext, *C.char);
+// extern C.gboolean _gotk4_gtk4_IMContext_delete_surrounding(*C.GtkIMContext, C.int, C.int);
+// extern C.void _gotk4_gtk4_IMContext_focus_in(*C.GtkIMContext);
+// extern C.void _gotk4_gtk4_IMContext_focus_out(*C.GtkIMContext);
+// extern C.void _gotk4_gtk4_IMContext_get_preedit_string(*C.GtkIMContext, *C.char, *C.PangoAttrList, C.int);
+// extern C.gboolean _gotk4_gtk4_IMContext_get_surrounding_with_selection(*C.GtkIMContext, *C.char, C.int, C.int);
+// extern C.void _gotk4_gtk4_IMContext_preedit_changed(*C.GtkIMContext);
+// extern C.void _gotk4_gtk4_IMContext_preedit_end(*C.GtkIMContext);
+// extern C.void _gotk4_gtk4_IMContext_preedit_start(*C.GtkIMContext);
+// extern C.void _gotk4_gtk4_IMContext_reset(*C.GtkIMContext);
+// extern C.gboolean _gotk4_gtk4_IMContext_retrieve_surrounding(*C.GtkIMContext);
+// extern C.void _gotk4_gtk4_IMContext_set_client_widget(*C.GtkIMContext, *C.GtkWidget);
+// extern C.void _gotk4_gtk4_IMContext_set_cursor_location(*C.GtkIMContext, *C.GdkRectangle);
+// extern C.void _gotk4_gtk4_IMContext_set_surrounding_with_selection(*C.GtkIMContext, *C.char, C.int, C.int, C.int);
+// extern C.void _gotk4_gtk4_IMContext_set_use_preedit(*C.GtkIMContext, C.gboolean);
+// C.void _gotk4_gtk4_IMContext_virtual_activate_osk(void* fnptr, *C.GtkIMContext carg0) {
+// 	return ((C.void (*) (*C.GtkIMContext))(fnptr))(carg0);
 // }
-// void _gotk4_gtk4_IMContext_virtual_commit(void* fnptr, GtkIMContext* carg0, char* carg1) {
-// 	return ((void (*) (GtkIMContext*, char*))(fnptr))(carg0, carg1);
+// C.void _gotk4_gtk4_IMContext_virtual_commit(void* fnptr, *C.GtkIMContext carg0, *C.char carg1) {
+// 	return ((C.void (*) (*C.GtkIMContext, *C.char))(fnptr))(carg0, carg1);
 // }
-// gboolean _gotk4_gtk4_IMContext_virtual_delete_surrounding(void* fnptr, GtkIMContext* carg0, int carg1, int carg2) {
-// 	return ((gboolean (*) (GtkIMContext*, int, int))(fnptr))(carg0, carg1, carg2);
+// C.gboolean _gotk4_gtk4_IMContext_virtual_delete_surrounding(void* fnptr, *C.GtkIMContext carg0, C.int carg1, C.int carg2) {
+// 	return ((C.gboolean (*) (*C.GtkIMContext, C.int, C.int))(fnptr))(carg0, carg1, carg2);
 // }
-// void _gotk4_gtk4_IMContext_virtual_focus_in(void* fnptr, GtkIMContext* carg0) {
-// 	return ((void (*) (GtkIMContext*))(fnptr))(carg0);
+// C.void _gotk4_gtk4_IMContext_virtual_focus_in(void* fnptr, *C.GtkIMContext carg0) {
+// 	return ((C.void (*) (*C.GtkIMContext))(fnptr))(carg0);
 // }
-// void _gotk4_gtk4_IMContext_virtual_focus_out(void* fnptr, GtkIMContext* carg0) {
-// 	return ((void (*) (GtkIMContext*))(fnptr))(carg0);
+// C.void _gotk4_gtk4_IMContext_virtual_focus_out(void* fnptr, *C.GtkIMContext carg0) {
+// 	return ((C.void (*) (*C.GtkIMContext))(fnptr))(carg0);
 // }
-// void _gotk4_gtk4_IMContext_virtual_get_preedit_string(void* fnptr, GtkIMContext* carg0, char** carg1, PangoAttrList** carg2, int* carg3) {
-// 	return ((void (*) (GtkIMContext*, char**, PangoAttrList**, int*))(fnptr))(carg0, carg1, carg2, carg3);
+// C.void _gotk4_gtk4_IMContext_virtual_get_preedit_string(void* fnptr, *C.GtkIMContext carg0, *C.char* carg1, *C.PangoAttrList* carg2, C.int* carg3) {
+// 	return ((C.void (*) (*C.GtkIMContext, *C.char*, *C.PangoAttrList*, C.int*))(fnptr))(carg0, carg1, carg2, carg3);
 // }
-// gboolean _gotk4_gtk4_IMContext_virtual_get_surrounding_with_selection(void* fnptr, GtkIMContext* carg0, char** carg1, int* carg2, int* carg3) {
-// 	return ((gboolean (*) (GtkIMContext*, char**, int*, int*))(fnptr))(carg0, carg1, carg2, carg3);
+// C.gboolean _gotk4_gtk4_IMContext_virtual_get_surrounding_with_selection(void* fnptr, *C.GtkIMContext carg0, *C.char* carg1, C.int* carg2, C.int* carg3) {
+// 	return ((C.gboolean (*) (*C.GtkIMContext, *C.char*, C.int*, C.int*))(fnptr))(carg0, carg1, carg2, carg3);
 // }
-// void _gotk4_gtk4_IMContext_virtual_preedit_changed(void* fnptr, GtkIMContext* carg0) {
-// 	return ((void (*) (GtkIMContext*))(fnptr))(carg0);
-// }
-// void _gotk4_gtk4_IMContext_virtual_preedit_end(void* fnptr, GtkIMContext* carg0) {
-// 	return ((void (*) (GtkIMContext*))(fnptr))(carg0);
-// }
-// void _gotk4_gtk4_IMContext_virtual_preedit_start(void* fnptr, GtkIMContext* carg0) {
-// 	return ((void (*) (GtkIMContext*))(fnptr))(carg0);
-// }
-// void _gotk4_gtk4_IMContext_virtual_reset(void* fnptr, GtkIMContext* carg0) {
-// 	return ((void (*) (GtkIMContext*))(fnptr))(carg0);
-// }
-// gboolean _gotk4_gtk4_IMContext_virtual_retrieve_surrounding(void* fnptr, GtkIMContext* carg0) {
-// 	return ((gboolean (*) (GtkIMContext*))(fnptr))(carg0);
-// }
-// void _gotk4_gtk4_IMContext_virtual_set_client_widget(void* fnptr, GtkIMContext* carg0, GtkWidget* carg1) {
-// 	return ((void (*) (GtkIMContext*, GtkWidget*))(fnptr))(carg0, carg1);
-// }
-// void _gotk4_gtk4_IMContext_virtual_set_cursor_location(void* fnptr, GtkIMContext* carg0, GdkRectangle* carg1) {
-// 	return ((void (*) (GtkIMContext*, GdkRectangle*))(fnptr))(carg0, carg1);
-// }
-// void _gotk4_gtk4_IMContext_virtual_set_surrounding_with_selection(void* fnptr, GtkIMContext* carg0, char* carg1, int carg2, int carg3, int carg4) {
-// 	return ((void (*) (GtkIMContext*, char*, int, int, int))(fnptr))(carg0, carg1, carg2, carg3, carg4);
-// }
-// void _gotk4_gtk4_IMContext_virtual_set_use_preedit(void* fnptr, GtkIMContext* carg0, gboolean carg1) {
-// 	return ((void (*) (GtkIMContext*, gboolean))(fnptr))(carg0, carg1);
-// }
-// extern void _gotk4_gtk4_LayoutManager_allocate(GtkLayoutManager*, GtkWidget*, int, int, int);
-// extern GtkLayoutChild* _gotk4_gtk4_LayoutManager_create_layout_child(GtkLayoutManager*, GtkWidget*, GtkWidget*);
-// extern GtkSizeRequestMode _gotk4_gtk4_LayoutManager_get_request_mode(GtkLayoutManager*, GtkWidget*);
-// extern void _gotk4_gtk4_LayoutManager_measure(GtkLayoutManager*, GtkWidget*, GtkOrientation, int, int, int, int, int);
-// extern void _gotk4_gtk4_LayoutManager_root(GtkLayoutManager*);
-// extern void _gotk4_gtk4_LayoutManager_unroot(GtkLayoutManager*);
-// void _gotk4_gtk4_LayoutManager_virtual_allocate(void* fnptr, GtkLayoutManager* carg0, GtkWidget* carg1, int carg2, int carg3, int carg4) {
-// 	return ((void (*) (GtkLayoutManager*, GtkWidget*, int, int, int))(fnptr))(carg0, carg1, carg2, carg3, carg4);
-// }
-// GtkLayoutChild* _gotk4_gtk4_LayoutManager_virtual_create_layout_child(void* fnptr, GtkLayoutManager* carg0, GtkWidget* carg1, GtkWidget* carg2) {
-// 	return ((GtkLayoutChild* (*) (GtkLayoutManager*, GtkWidget*, GtkWidget*))(fnptr))(carg0, carg1, carg2);
-// }
-// GtkSizeRequestMode _gotk4_gtk4_LayoutManager_virtual_get_request_mode(void* fnptr, GtkLayoutManager* carg0, GtkWidget* carg1) {
-// 	return ((GtkSizeRequestMode (*) (GtkLayoutManager*, GtkWidget*))(fnptr))(carg0, carg1);
-// }
-// void _gotk4_gtk4_LayoutManager_virtual_measure(void* fnptr, GtkLayoutManager* carg0, GtkWidget* carg1, GtkOrientation carg2, int carg3, int* carg4, int* carg5, int* carg6, int* carg7) {
-// 	return ((void (*) (GtkLayoutManager*, GtkWidget*, GtkOrientation, int, int*, int*, int*, int*))(fnptr))(carg0, carg1, carg2, carg3, carg4, carg5, carg6, carg7);
-// }
-// void _gotk4_gtk4_LayoutManager_virtual_root(void* fnptr, GtkLayoutManager* carg0) {
-// 	return ((void (*) (GtkLayoutManager*))(fnptr))(carg0);
+// C.void _gotk4_gtk4_IMContext_virtual_preedit_changed(void* fnptr, *C.GtkIMContext carg0) {
+// 	return ((C.void (*) (*C.GtkIMContext))(fnptr))(carg0);
+// }
+// C.void _gotk4_gtk4_IMContext_virtual_preedit_end(void* fnptr, *C.GtkIMContext carg0) {
+// 	return ((C.void (*) (*C.GtkIMContext))(fnptr))(carg0);
+// }
+// C.void _gotk4_gtk4_IMContext_virtual_preedit_start(void* fnptr, *C.GtkIMContext carg0) {
+// 	return ((C.void (*) (*C.GtkIMContext))(fnptr))(carg0);
+// }
+// C.void _gotk4_gtk4_IMContext_virtual_reset(void* fnptr, *C.GtkIMContext carg0) {
+// 	return ((C.void (*) (*C.GtkIMContext))(fnptr))(carg0);
+// }
+// C.gboolean _gotk4_gtk4_IMContext_virtual_retrieve_surrounding(void* fnptr, *C.GtkIMContext carg0) {
+// 	return ((C.gboolean (*) (*C.GtkIMContext))(fnptr))(carg0);
+// }
+// C.void _gotk4_gtk4_IMContext_virtual_set_client_widget(void* fnptr, *C.GtkIMContext carg0, *C.GtkWidget carg1) {
+// 	return ((C.void (*) (*C.GtkIMContext, *C.GtkWidget))(fnptr))(carg0, carg1);
+// }
+// C.void _gotk4_gtk4_IMContext_virtual_set_cursor_location(void* fnptr, *C.GtkIMContext carg0, *C.GdkRectangle carg1) {
+// 	return ((C.void (*) (*C.GtkIMContext, *C.GdkRectangle))(fnptr))(carg0, carg1);
+// }
+// C.void _gotk4_gtk4_IMContext_virtual_set_surrounding_with_selection(void* fnptr, *C.GtkIMContext carg0, *C.char carg1, C.int carg2, C.int carg3, C.int carg4) {
+// 	return ((C.void (*) (*C.GtkIMContext, *C.char, C.int, C.int, C.int))(fnptr))(carg0, carg1, carg2, carg3, carg4);
+// }
+// C.void _gotk4_gtk4_IMContext_virtual_set_use_preedit(void* fnptr, *C.GtkIMContext carg0, C.gboolean carg1) {
+// 	return ((C.void (*) (*C.GtkIMContext, C.gboolean))(fnptr))(carg0, carg1);
+// }
+// extern C.void _gotk4_gtk4_LayoutManager_allocate(*C.GtkLayoutManager, *C.GtkWidget, C.int, C.int, C.int);
+// extern *C.GtkLayoutChild _gotk4_gtk4_LayoutManager_create_layout_child(*C.GtkLayoutManager, *C.GtkWidget, *C.GtkWidget);
+// extern C.GtkSizeRequestMode _gotk4_gtk4_LayoutManager_get_request_mode(*C.GtkLayoutManager, *C.GtkWidget);
+// extern C.void _gotk4_gtk4_LayoutManager_measure(*C.GtkLayoutManager, *C.GtkWidget, C.GtkOrientation, C.int, C.int, C.int, C.int, C.int);
+// extern C.void _gotk4_gtk4_LayoutManager_root(*C.GtkLayoutManager);
+// extern C.void _gotk4_gtk4_LayoutManager_unroot(*C.GtkLayoutManager);
+// C.void _gotk4_gtk4_LayoutManager_virtual_allocate(void* fnptr, *C.GtkLayoutManager carg0, *C.GtkWidget carg1, C.int carg2, C.int carg3, C.int carg4) {
+// 	return ((C.void (*) (*C.GtkLayoutManager, *C.GtkWidget, C.int, C.int, C.int))(fnptr))(carg0, carg1, carg2, carg3, carg4);
+// }
+// *C.GtkLayoutChild _gotk4_gtk4_LayoutManager_virtual_create_layout_child(void* fnptr, *C.GtkLayoutManager carg0, *C.GtkWidget carg1, *C.GtkWidget carg2) {
+// 	return ((*C.GtkLayoutChild (*) (*C.GtkLayoutManager, *C.GtkWidget, *C.GtkWidget))(fnptr))(carg0, carg1, carg2);
+// }
+// C.GtkSizeRequestMode _gotk4_gtk4_LayoutManager_virtual_get_request_mode(void* fnptr, *C.GtkLayoutManager carg0, *C.GtkWidget carg1) {
+// 	return ((C.GtkSizeRequestMode (*) (*C.GtkLayoutManager, *C.GtkWidget))(fnptr))(carg0, carg1);
+// }
+// C.void _gotk4_gtk4_LayoutManager_virtual_measure(void* fnptr, *C.GtkLayoutManager carg0, *C.GtkWidget carg1, C.GtkOrientation carg2, C.int carg3, C.int* carg4, C.int* carg5, C.int* carg6, C.int* carg7) {
+// 	return ((C.void (*) (*C.GtkLayoutManager, *C.GtkWidget, C.GtkOrientation, C.int, C.int*, C.int*, C.int*, C.int*))(fnptr))(carg0, carg1, carg2, carg3, carg4, carg5, carg6, carg7);
+// }
+// C.void _gotk4_gtk4_LayoutManager_virtual_root(void* fnptr, *C.GtkLayoutManager carg0) {
+// 	return ((C.void (*) (*C.GtkLayoutManager))(fnptr))(carg0);
 // }
-// void _gotk4_gtk4_LayoutManager_virtual_unroot(void* fnptr, GtkLayoutManager* carg0) {
-// 	return ((void (*) (GtkLayoutManager*))(fnptr))(carg0);
+// C.void _gotk4_gtk4_LayoutManager_virtual_unroot(void* fnptr, *C.GtkLayoutManager carg0) {
+// 	return ((C.void (*) (*C.GtkLayoutManager))(fnptr))(carg0);
 // }
-// extern void _gotk4_gtk4_MediaStream_pause(GtkMediaStream*);
-// extern gboolean _gotk4_gtk4_MediaStream_play(GtkMediaStream*);
-// extern void _gotk4_gtk4_MediaStream_realize(GtkMediaStream*, GdkSurface*);
-// extern void _gotk4_gtk4_MediaStream_seek(GtkMediaStream*, gint64);
-// extern void _gotk4_gtk4_MediaStream_unrealize(GtkMediaStream*, GdkSurface*);
-// extern void _gotk4_gtk4_MediaStream_update_audio(GtkMediaStream*, gboolean, double);
-// void _gotk4_gtk4_MediaStream_virtual_pause(void* fnptr, GtkMediaStream* carg0) {
-// 	return ((void (*) (GtkMediaStream*))(fnptr))(carg0);
+// extern C.void _gotk4_gtk4_MediaStream_pause(*C.GtkMediaStream);
+// extern C.gboolean _gotk4_gtk4_MediaStream_play(*C.GtkMediaStream);
+// extern C.void _gotk4_gtk4_MediaStream_realize(*C.GtkMediaStream, *C.GdkSurface);
+// extern C.void _gotk4_gtk4_MediaStream_seek(*C.GtkMediaStream, C.gint64);
+// extern C.void _gotk4_gtk4_MediaStream_unrealize(*C.GtkMediaStream, *C.GdkSurface);
+// extern C.void _gotk4_gtk4_MediaStream_update_audio(*C.GtkMediaStream, C.gboolean, C.double);
+// C.void _gotk4_gtk4_MediaStream_virtual_pause(void* fnptr, *C.GtkMediaStream carg0) {
+// 	return ((C.void (*) (*C.GtkMediaStream))(fnptr))(carg0);
 // }
-// gboolean _gotk4_gtk4_MediaStream_virtual_play(void* fnptr, GtkMediaStream* carg0) {
-// 	return ((gboolean (*) (GtkMediaStream*))(fnptr))(carg0);
-// }
-// void _gotk4_gtk4_MediaStream_virtual_realize(void* fnptr, GtkMediaStream* carg0, GdkSurface* carg1) {
-// 	return ((void (*) (GtkMediaStream*, GdkSurface*))(fnptr))(carg0, carg1);
-// }
-// void _gotk4_gtk4_MediaStream_virtual_seek(void* fnptr, GtkMediaStream* carg0, gint64 carg1) {
-// 	return ((void (*) (GtkMediaStream*, gint64))(fnptr))(carg0, carg1);
-// }
-// void _gotk4_gtk4_MediaStream_virtual_unrealize(void* fnptr, GtkMediaStream* carg0, GdkSurface* carg1) {
-// 	return ((void (*) (GtkMediaStream*, GdkSurface*))(fnptr))(carg0, carg1);
-// }
-// void _gotk4_gtk4_MediaStream_virtual_update_audio(void* fnptr, GtkMediaStream* carg0, gboolean carg1, double carg2) {
-// 	return ((void (*) (GtkMediaStream*, gboolean, double))(fnptr))(carg0, carg1, carg2);
-// }
-// extern void _gotk4_gtk4_NativeDialog_hide(GtkNativeDialog*);
-// extern void _gotk4_gtk4_NativeDialog_response(GtkNativeDialog*, int);
-// extern void _gotk4_gtk4_NativeDialog_show(GtkNativeDialog*);
-// void _gotk4_gtk4_NativeDialog_virtual_hide(void* fnptr, GtkNativeDialog* carg0) {
-// 	return ((void (*) (GtkNativeDialog*))(fnptr))(carg0);
-// }
-// void _gotk4_gtk4_NativeDialog_virtual_response(void* fnptr, GtkNativeDialog* carg0, int carg1) {
-// 	return ((void (*) (GtkNativeDialog*, int))(fnptr))(carg0, carg1);
-// }
-// void _gotk4_gtk4_NativeDialog_virtual_show(void* fnptr, GtkNativeDialog* carg0) {
-// 	return ((void (*) (GtkNativeDialog*))(fnptr))(carg0);
-// }
-// extern void _gotk4_gtk4_RecentManager_changed(GtkRecentManager*);
-// void _gotk4_gtk4_RecentManager_virtual_changed(void* fnptr, GtkRecentManager* carg0) {
-// 	return ((void (*) (GtkRecentManager*))(fnptr))(carg0);
-// }
-// extern GtkSorterOrder _gotk4_gtk4_Sorter_get_order(GtkSorter*);
-// GtkSorterOrder _gotk4_gtk4_Sorter_virtual_get_order(void* fnptr, GtkSorter* carg0) {
-// 	return ((GtkSorterOrder (*) (GtkSorter*))(fnptr))(carg0);
-// }
-// extern void _gotk4_gtk4_TextBuffer_apply_tag(GtkTextBuffer*, GtkTextTag*, GtkTextIter*, GtkTextIter*);
-// extern void _gotk4_gtk4_TextBuffer_begin_user_action(GtkTextBuffer*);
-// extern void _gotk4_gtk4_TextBuffer_changed(GtkTextBuffer*);
-// extern void _gotk4_gtk4_TextBuffer_delete_range(GtkTextBuffer*, GtkTextIter*, GtkTextIter*);
-// extern void _gotk4_gtk4_TextBuffer_end_user_action(GtkTextBuffer*);
-// extern void _gotk4_gtk4_TextBuffer_insert_child_anchor(GtkTextBuffer*, GtkTextIter*, GtkTextChildAnchor*);
-// extern void _gotk4_gtk4_TextBuffer_insert_paintable(GtkTextBuffer*, GtkTextIter*, GdkPaintable*);
-// extern void _gotk4_gtk4_TextBuffer_insert_text(GtkTextBuffer*, GtkTextIter*, char*, int);
-// extern void _gotk4_gtk4_TextBuffer_mark_deleted(GtkTextBuffer*, GtkTextMark*);
-// extern void _gotk4_gtk4_TextBuffer_mark_set(GtkTextBuffer*, GtkTextIter*, GtkTextMark*);
-// extern void _gotk4_gtk4_TextBuffer_modified_changed(GtkTextBuffer*);
-// extern void _gotk4_gtk4_TextBuffer_paste_done(GtkTextBuffer*, GdkClipboard*);
-// extern void _gotk4_gtk4_TextBuffer_redo(GtkTextBuffer*);
-// extern void _gotk4_gtk4_TextBuffer_remove_tag(GtkTextBuffer*, GtkTextTag*, GtkTextIter*, GtkTextIter*);
-// extern void _gotk4_gtk4_TextBuffer_undo(GtkTextBuffer*);
-// void _gotk4_gtk4_TextBuffer_virtual_apply_tag(void* fnptr, GtkTextBuffer* carg0, GtkTextTag* carg1, GtkTextIter* carg2, GtkTextIter* carg3) {
-// 	return ((void (*) (GtkTextBuffer*, GtkTextTag*, GtkTextIter*, GtkTextIter*))(fnptr))(carg0, carg1, carg2, carg3);
-// }
-// void _gotk4_gtk4_TextBuffer_virtual_begin_user_action(void* fnptr, GtkTextBuffer* carg0) {
-// 	return ((void (*) (GtkTextBuffer*))(fnptr))(carg0);
-// }
-// void _gotk4_gtk4_TextBuffer_virtual_changed(void* fnptr, GtkTextBuffer* carg0) {
-// 	return ((void (*) (GtkTextBuffer*))(fnptr))(carg0);
-// }
-// void _gotk4_gtk4_TextBuffer_virtual_delete_range(void* fnptr, GtkTextBuffer* carg0, GtkTextIter* carg1, GtkTextIter* carg2) {
-// 	return ((void (*) (GtkTextBuffer*, GtkTextIter*, GtkTextIter*))(fnptr))(carg0, carg1, carg2);
-// }
-// void _gotk4_gtk4_TextBuffer_virtual_end_user_action(void* fnptr, GtkTextBuffer* carg0) {
-// 	return ((void (*) (GtkTextBuffer*))(fnptr))(carg0);
-// }
-// void _gotk4_gtk4_TextBuffer_virtual_insert_child_anchor(void* fnptr, GtkTextBuffer* carg0, GtkTextIter* carg1, GtkTextChildAnchor* carg2) {
-// 	return ((void (*) (GtkTextBuffer*, GtkTextIter*, GtkTextChildAnchor*))(fnptr))(carg0, carg1, carg2);
-// }
-// void _gotk4_gtk4_TextBuffer_virtual_insert_paintable(void* fnptr, GtkTextBuffer* carg0, GtkTextIter* carg1, GdkPaintable* carg2) {
-// 	return ((void (*) (GtkTextBuffer*, GtkTextIter*, GdkPaintable*))(fnptr))(carg0, carg1, carg2);
-// }
-// void _gotk4_gtk4_TextBuffer_virtual_insert_text(void* fnptr, GtkTextBuffer* carg0, GtkTextIter* carg1, char* carg2, int carg3) {
-// 	return ((void (*) (GtkTextBuffer*, GtkTextIter*, char*, int))(fnptr))(carg0, carg1, carg2, carg3);
-// }
-// void _gotk4_gtk4_TextBuffer_virtual_mark_deleted(void* fnptr, GtkTextBuffer* carg0, GtkTextMark* carg1) {
-// 	return ((void (*) (GtkTextBuffer*, GtkTextMark*))(fnptr))(carg0, carg1);
-// }
-// void _gotk4_gtk4_TextBuffer_virtual_mark_set(void* fnptr, GtkTextBuffer* carg0, GtkTextIter* carg1, GtkTextMark* carg2) {
-// 	return ((void (*) (GtkTextBuffer*, GtkTextIter*, GtkTextMark*))(fnptr))(carg0, carg1, carg2);
+// C.gboolean _gotk4_gtk4_MediaStream_virtual_play(void* fnptr, *C.GtkMediaStream carg0) {
+// 	return ((C.gboolean (*) (*C.GtkMediaStream))(fnptr))(carg0);
+// }
+// C.void _gotk4_gtk4_MediaStream_virtual_realize(void* fnptr, *C.GtkMediaStream carg0, *C.GdkSurface carg1) {
+// 	return ((C.void (*) (*C.GtkMediaStream, *C.GdkSurface))(fnptr))(carg0, carg1);
+// }
+// C.void _gotk4_gtk4_MediaStream_virtual_seek(void* fnptr, *C.GtkMediaStream carg0, C.gint64 carg1) {
+// 	return ((C.void (*) (*C.GtkMediaStream, C.gint64))(fnptr))(carg0, carg1);
+// }
+// C.void _gotk4_gtk4_MediaStream_virtual_unrealize(void* fnptr, *C.GtkMediaStream carg0, *C.GdkSurface carg1) {
+// 	return ((C.void (*) (*C.GtkMediaStream, *C.GdkSurface))(fnptr))(carg0, carg1);
+// }
+// C.void _gotk4_gtk4_MediaStream_virtual_update_audio(void* fnptr, *C.GtkMediaStream carg0, C.gboolean carg1, C.double carg2) {
+// 	return ((C.void (*) (*C.GtkMediaStream, C.gboolean, C.double))(fnptr))(carg0, carg1, carg2);
+// }
+// extern C.void _gotk4_gtk4_NativeDialog_hide(*C.GtkNativeDialog);
+// extern C.void _gotk4_gtk4_NativeDialog_response(*C.GtkNativeDialog, C.int);
+// extern C.void _gotk4_gtk4_NativeDialog_show(*C.GtkNativeDialog);
+// C.void _gotk4_gtk4_NativeDialog_virtual_hide(void* fnptr, *C.GtkNativeDialog carg0) {
+// 	return ((C.void (*) (*C.GtkNativeDialog))(fnptr))(carg0);
+// }
+// C.void _gotk4_gtk4_NativeDialog_virtual_response(void* fnptr, *C.GtkNativeDialog carg0, C.int carg1) {
+// 	return ((C.void (*) (*C.GtkNativeDialog, C.int))(fnptr))(carg0, carg1);
+// }
+// C.void _gotk4_gtk4_NativeDialog_virtual_show(void* fnptr, *C.GtkNativeDialog carg0) {
+// 	return ((C.void (*) (*C.GtkNativeDialog))(fnptr))(carg0);
+// }
+// extern C.void _gotk4_gtk4_RecentManager_changed(*C.GtkRecentManager);
+// C.void _gotk4_gtk4_RecentManager_virtual_changed(void* fnptr, *C.GtkRecentManager carg0) {
+// 	return ((C.void (*) (*C.GtkRecentManager))(fnptr))(carg0);
+// }
+// extern C.GtkSorterOrder _gotk4_gtk4_Sorter_get_order(*C.GtkSorter);
+// C.GtkSorterOrder _gotk4_gtk4_Sorter_virtual_get_order(void* fnptr, *C.GtkSorter carg0) {
+// 	return ((C.GtkSorterOrder (*) (*C.GtkSorter))(fnptr))(carg0);
+// }
+// extern C.void _gotk4_gtk4_TextBuffer_apply_tag(*C.GtkTextBuffer, *C.GtkTextTag, *C.GtkTextIter, *C.GtkTextIter);
+// extern C.void _gotk4_gtk4_TextBuffer_begin_user_action(*C.GtkTextBuffer);
+// extern C.void _gotk4_gtk4_TextBuffer_changed(*C.GtkTextBuffer);
+// extern C.void _gotk4_gtk4_TextBuffer_delete_range(*C.GtkTextBuffer, *C.GtkTextIter, *C.GtkTextIter);
+// extern C.void _gotk4_gtk4_TextBuffer_end_user_action(*C.GtkTextBuffer);
+// extern C.void _gotk4_gtk4_TextBuffer_insert_child_anchor(*C.GtkTextBuffer, *C.GtkTextIter, *C.GtkTextChildAnchor);
+// extern C.void _gotk4_gtk4_TextBuffer_insert_paintable(*C.GtkTextBuffer, *C.GtkTextIter, *C.GdkPaintable);
+// extern C.void _gotk4_gtk4_TextBuffer_insert_text(*C.GtkTextBuffer, *C.GtkTextIter, *C.char, C.int);
+// extern C.void _gotk4_gtk4_TextBuffer_mark_deleted(*C.GtkTextBuffer, *C.GtkTextMark);
+// extern C.void _gotk4_gtk4_TextBuffer_mark_set(*C.GtkTextBuffer, *C.GtkTextIter, *C.GtkTextMark);
+// extern C.void _gotk4_gtk4_TextBuffer_modified_changed(*C.GtkTextBuffer);
+// extern C.void _gotk4_gtk4_TextBuffer_paste_done(*C.GtkTextBuffer, *C.GdkClipboard);
+// extern C.void _gotk4_gtk4_TextBuffer_redo(*C.GtkTextBuffer);
+// extern C.void _gotk4_gtk4_TextBuffer_remove_tag(*C.GtkTextBuffer, *C.GtkTextTag, *C.GtkTextIter, *C.GtkTextIter);
+// extern C.void _gotk4_gtk4_TextBuffer_undo(*C.GtkTextBuffer);
+// C.void _gotk4_gtk4_TextBuffer_virtual_apply_tag(void* fnptr, *C.GtkTextBuffer carg0, *C.GtkTextTag carg1, *C.GtkTextIter carg2, *C.GtkTextIter carg3) {
+// 	return ((C.void (*) (*C.GtkTextBuffer, *C.GtkTextTag, *C.GtkTextIter, *C.GtkTextIter))(fnptr))(carg0, carg1, carg2, carg3);
+// }
+// C.void _gotk4_gtk4_TextBuffer_virtual_begin_user_action(void* fnptr, *C.GtkTextBuffer carg0) {
+// 	return ((C.void (*) (*C.GtkTextBuffer))(fnptr))(carg0);
+// }
+// C.void _gotk4_gtk4_TextBuffer_virtual_changed(void* fnptr, *C.GtkTextBuffer carg0) {
+// 	return ((C.void (*) (*C.GtkTextBuffer))(fnptr))(carg0);
+// }
+// C.void _gotk4_gtk4_TextBuffer_virtual_delete_range(void* fnptr, *C.GtkTextBuffer carg0, *C.GtkTextIter carg1, *C.GtkTextIter carg2) {
+// 	return ((C.void (*) (*C.GtkTextBuffer, *C.GtkTextIter, *C.GtkTextIter))(fnptr))(carg0, carg1, carg2);
+// }
+// C.void _gotk4_gtk4_TextBuffer_virtual_end_user_action(void* fnptr, *C.GtkTextBuffer carg0) {
+// 	return ((C.void (*) (*C.GtkTextBuffer))(fnptr))(carg0);
+// }
+// C.void _gotk4_gtk4_TextBuffer_virtual_insert_child_anchor(void* fnptr, *C.GtkTextBuffer carg0, *C.GtkTextIter carg1, *C.GtkTextChildAnchor carg2) {
+// 	return ((C.void (*) (*C.GtkTextBuffer, *C.GtkTextIter, *C.GtkTextChildAnchor))(fnptr))(carg0, carg1, carg2);
+// }
+// C.void _gotk4_gtk4_TextBuffer_virtual_insert_paintable(void* fnptr, *C.GtkTextBuffer carg0, *C.GtkTextIter carg1, *C.GdkPaintable carg2) {
+// 	return ((C.void (*) (*C.GtkTextBuffer, *C.GtkTextIter, *C.GdkPaintable))(fnptr))(carg0, carg1, carg2);
+// }
+// C.void _gotk4_gtk4_TextBuffer_virtual_insert_text(void* fnptr, *C.GtkTextBuffer carg0, *C.GtkTextIter carg1, *C.char carg2, C.int carg3) {
+// 	return ((C.void (*) (*C.GtkTextBuffer, *C.GtkTextIter, *C.char, C.int))(fnptr))(carg0, carg1, carg2, carg3);
+// }
+// C.void _gotk4_gtk4_TextBuffer_virtual_mark_deleted(void* fnptr, *C.GtkTextBuffer carg0, *C.GtkTextMark carg1) {
+// 	return ((C.void (*) (*C.GtkTextBuffer, *C.GtkTextMark))(fnptr))(carg0, carg1);
+// }
+// C.void _gotk4_gtk4_TextBuffer_virtual_mark_set(void* fnptr, *C.GtkTextBuffer carg0, *C.GtkTextIter carg1, *C.GtkTextMark carg2) {
+// 	return ((C.void (*) (*C.GtkTextBuffer, *C.GtkTextIter, *C.GtkTextMark))(fnptr))(carg0, carg1, carg2);
 // }
-// void _gotk4_gtk4_TextBuffer_virtual_modified_changed(void* fnptr, GtkTextBuffer* carg0) {
-// 	return ((void (*) (GtkTextBuffer*))(fnptr))(carg0);
+// C.void _gotk4_gtk4_TextBuffer_virtual_modified_changed(void* fnptr, *C.GtkTextBuffer carg0) {
+// 	return ((C.void (*) (*C.GtkTextBuffer))(fnptr))(carg0);
 // }
-// void _gotk4_gtk4_TextBuffer_virtual_paste_done(void* fnptr, GtkTextBuffer* carg0, GdkClipboard* carg1) {
-// 	return ((void (*) (GtkTextBuffer*, GdkClipboard*))(fnptr))(carg0, carg1);
+// C.void _gotk4_gtk4_TextBuffer_virtual_paste_done(void* fnptr, *C.GtkTextBuffer carg0, *C.GdkClipboard carg1) {
+// 	return ((C.void (*) (*C.GtkTextBuffer, *C.GdkClipboard))(fnptr))(carg0, carg1);
 // }
-// void _gotk4_gtk4_TextBuffer_virtual_redo(void* fnptr, GtkTextBuffer* carg0) {
-// 	return ((void (*) (GtkTextBuffer*))(fnptr))(carg0);
+// C.void _gotk4_gtk4_TextBuffer_virtual_redo(void* fnptr, *C.GtkTextBuffer carg0) {
+// 	return ((C.void (*) (*C.GtkTextBuffer))(fnptr))(carg0);
 // }
-// void _gotk4_gtk4_TextBuffer_virtual_remove_tag(void* fnptr, GtkTextBuffer* carg0, GtkTextTag* carg1, GtkTextIter* carg2, GtkTextIter* carg3) {
-// 	return ((void (*) (GtkTextBuffer*, GtkTextTag*, GtkTextIter*, GtkTextIter*))(fnptr))(carg0, carg1, carg2, carg3);
+// C.void _gotk4_gtk4_TextBuffer_virtual_remove_tag(void* fnptr, *C.GtkTextBuffer carg0, *C.GtkTextTag carg1, *C.GtkTextIter carg2, *C.GtkTextIter carg3) {
+// 	return ((C.void (*) (*C.GtkTextBuffer, *C.GtkTextTag, *C.GtkTextIter, *C.GtkTextIter))(fnptr))(carg0, carg1, carg2, carg3);
 // }
-// void _gotk4_gtk4_TextBuffer_virtual_undo(void* fnptr, GtkTextBuffer* carg0) {
-// 	return ((void (*) (GtkTextBuffer*))(fnptr))(carg0);
-// }
-// extern void _gotk4_gtk4_Widget_compute_expand(GtkWidget*, gboolean*, gboolean*);
-// extern gboolean _gotk4_gtk4_Widget_contains(GtkWidget*, double, double);
-// extern void _gotk4_gtk4_Widget_css_changed(GtkWidget*, GtkCssStyleChange*);
-// extern void _gotk4_gtk4_Widget_direction_changed(GtkWidget*, GtkTextDirection);
-// extern gboolean _gotk4_gtk4_Widget_focus(GtkWidget*, GtkDirectionType);
-// extern GtkSizeRequestMode _gotk4_gtk4_Widget_get_request_mode(GtkWidget*);
-// extern gboolean _gotk4_gtk4_Widget_grab_focus(GtkWidget*);
-// extern gboolean _gotk4_gtk4_Widget_keynav_failed(GtkWidget*, GtkDirectionType);
-// extern void _gotk4_gtk4_Widget_map(GtkWidget*);
-// extern void _gotk4_gtk4_Widget_measure(GtkWidget*, GtkOrientation, int, int, int, int, int);
-// extern gboolean _gotk4_gtk4_Widget_mnemonic_activate(GtkWidget*, gboolean);
-// extern void _gotk4_gtk4_Widget_move_focus(GtkWidget*, GtkDirectionType);
-// extern gboolean _gotk4_gtk4_Widget_query_tooltip(GtkWidget*, int, int, gboolean, GtkTooltip*);
-// extern void _gotk4_gtk4_Widget_realize(GtkWidget*);
-// extern void _gotk4_gtk4_Widget_root(GtkWidget*);
-// extern void _gotk4_gtk4_Widget_set_focus_child(GtkWidget*, GtkWidget*);
-// extern void _gotk4_gtk4_Widget_size_allocate(GtkWidget*, int, int, int);
-// extern void _gotk4_gtk4_Widget_snapshot(GtkWidget*, GtkSnapshot*);
-// extern void _gotk4_gtk4_Widget_state_flags_changed(GtkWidget*, GtkStateFlags);
-// extern void _gotk4_gtk4_Widget_system_setting_changed(GtkWidget*, GtkSystemSetting);
-// extern void _gotk4_gtk4_Widget_unmap(GtkWidget*);
-// extern void _gotk4_gtk4_Widget_unrealize(GtkWidget*);
-// extern void _gotk4_gtk4_Widget_unroot(GtkWidget*);
-// void _gotk4_gtk4_Widget_virtual_compute_expand(void* fnptr, GtkWidget* carg0, gboolean* carg1, gboolean* carg2) {
-// 	return ((void (*) (GtkWidget*, gboolean*, gboolean*))(fnptr))(carg0, carg1, carg2);
+// C.void _gotk4_gtk4_TextBuffer_virtual_undo(void* fnptr, *C.GtkTextBuffer carg0) {
+// 	return ((C.void (*) (*C.GtkTextBuffer))(fnptr))(carg0);
+// }
+// extern C.void _gotk4_gtk4_Widget_compute_expand(*C.GtkWidget, *C.gboolean, *C.gboolean);
+// extern C.gboolean _gotk4_gtk4_Widget_contains(*C.GtkWidget, C.double, C.double);
+// extern C.void _gotk4_gtk4_Widget_css_changed(*C.GtkWidget, *C.GtkCssStyleChange);
+// extern C.void _gotk4_gtk4_Widget_direction_changed(*C.GtkWidget, C.GtkTextDirection);
+// extern C.gboolean _gotk4_gtk4_Widget_focus(*C.GtkWidget, C.GtkDirectionType);
+// extern C.GtkSizeRequestMode _gotk4_gtk4_Widget_get_request_mode(*C.GtkWidget);
+// extern C.gboolean _gotk4_gtk4_Widget_grab_focus(*C.GtkWidget);
+// extern C.gboolean _gotk4_gtk4_Widget_keynav_failed(*C.GtkWidget, C.GtkDirectionType);
+// extern C.void _gotk4_gtk4_Widget_map(*C.GtkWidget);
+// extern C.void _gotk4_gtk4_Widget_measure(*C.GtkWidget, C.GtkOrientation, C.int, C.int, C.int, C.int, C.int);
+// extern C.gboolean _gotk4_gtk4_Widget_mnemonic_activate(*C.GtkWidget, C.gboolean);
+// extern C.void _gotk4_gtk4_Widget_move_focus(*C.GtkWidget, C.GtkDirectionType);
+// extern C.gboolean _gotk4_gtk4_Widget_query_tooltip(*C.GtkWidget, C.int, C.int, C.gboolean, *C.GtkTooltip);
+// extern C.void _gotk4_gtk4_Widget_realize(*C.GtkWidget);
+// extern C.void _gotk4_gtk4_Widget_root(*C.GtkWidget);
+// extern C.void _gotk4_gtk4_Widget_set_focus_child(*C.GtkWidget, *C.GtkWidget);
+// extern C.void _gotk4_gtk4_Widget_size_allocate(*C.GtkWidget, C.int, C.int, C.int);
+// extern C.void _gotk4_gtk4_Widget_snapshot(*C.GtkWidget, *C.GtkSnapshot);
+// extern C.void _gotk4_gtk4_Widget_state_flags_changed(*C.GtkWidget, C.GtkStateFlags);
+// extern C.void _gotk4_gtk4_Widget_system_setting_changed(*C.GtkWidget, C.GtkSystemSetting);
+// extern C.void _gotk4_gtk4_Widget_unmap(*C.GtkWidget);
+// extern C.void _gotk4_gtk4_Widget_unrealize(*C.GtkWidget);
+// extern C.void _gotk4_gtk4_Widget_unroot(*C.GtkWidget);
+// C.void _gotk4_gtk4_Widget_virtual_compute_expand(void* fnptr, *C.GtkWidget carg0, *C.gboolean carg1, *C.gboolean carg2) {
+// 	return ((C.void (*) (*C.GtkWidget, *C.gboolean, *C.gboolean))(fnptr))(carg0, carg1, carg2);
 // }
-// gboolean _gotk4_gtk4_Widget_virtual_contains(void* fnptr, GtkWidget* carg0, double carg1, double carg2) {
-// 	return ((gboolean (*) (GtkWidget*, double, double))(fnptr))(carg0, carg1, carg2);
+// C.gboolean _gotk4_gtk4_Widget_virtual_contains(void* fnptr, *C.GtkWidget carg0, C.double carg1, C.double carg2) {
+// 	return ((C.gboolean (*) (*C.GtkWidget, C.double, C.double))(fnptr))(carg0, carg1, carg2);
 // }
-// void _gotk4_gtk4_Widget_virtual_css_changed(void* fnptr, GtkWidget* carg0, GtkCssStyleChange* carg1) {
-// 	return ((void (*) (GtkWidget*, GtkCssStyleChange*))(fnptr))(carg0, carg1);
+// C.void _gotk4_gtk4_Widget_virtual_css_changed(void* fnptr, *C.GtkWidget carg0, *C.GtkCssStyleChange carg1) {
+// 	return ((C.void (*) (*C.GtkWidget, *C.GtkCssStyleChange))(fnptr))(carg0, carg1);
 // }
-// void _gotk4_gtk4_Widget_virtual_direction_changed(void* fnptr, GtkWidget* carg0, GtkTextDirection carg1) {
-// 	return ((void (*) (GtkWidget*, GtkTextDirection))(fnptr))(carg0, carg1);
+// C.void _gotk4_gtk4_Widget_virtual_direction_changed(void* fnptr, *C.GtkWidget carg0, C.GtkTextDirection carg1) {
+// 	return ((C.void (*) (*C.GtkWidget, C.GtkTextDirection))(fnptr))(carg0, carg1);
 // }
-// gboolean _gotk4_gtk4_Widget_virtual_focus(void* fnptr, GtkWidget* carg0, GtkDirectionType carg1) {
-// 	return ((gboolean (*) (GtkWidget*, GtkDirectionType))(fnptr))(carg0, carg1);
+// C.gboolean _gotk4_gtk4_Widget_virtual_focus(void* fnptr, *C.GtkWidget carg0, C.GtkDirectionType carg1) {
+// 	return ((C.gboolean (*) (*C.GtkWidget, C.GtkDirectionType))(fnptr))(carg0, carg1);
 // }
-// GtkSizeRequestMode _gotk4_gtk4_Widget_virtual_get_request_mode(void* fnptr, GtkWidget* carg0) {
-// 	return ((GtkSizeRequestMode (*) (GtkWidget*))(fnptr))(carg0);
+// C.GtkSizeRequestMode _gotk4_gtk4_Widget_virtual_get_request_mode(void* fnptr, *C.GtkWidget carg0) {
+// 	return ((C.GtkSizeRequestMode (*) (*C.GtkWidget))(fnptr))(carg0);
 // }
-// gboolean _gotk4_gtk4_Widget_virtual_grab_focus(void* fnptr, GtkWidget* carg0) {
-// 	return ((gboolean (*) (GtkWidget*))(fnptr))(carg0);
+// C.gboolean _gotk4_gtk4_Widget_virtual_grab_focus(void* fnptr, *C.GtkWidget carg0) {
+// 	return ((C.gboolean (*) (*C.GtkWidget))(fnptr))(carg0);
 // }
-// gboolean _gotk4_gtk4_Widget_virtual_keynav_failed(void* fnptr, GtkWidget* carg0, GtkDirectionType carg1) {
-// 	return ((gboolean (*) (GtkWidget*, GtkDirectionType))(fnptr))(carg0, carg1);
+// C.gboolean _gotk4_gtk4_Widget_virtual_keynav_failed(void* fnptr, *C.GtkWidget carg0, C.GtkDirectionType carg1) {
+// 	return ((C.gboolean (*) (*C.GtkWidget, C.GtkDirectionType))(fnptr))(carg0, carg1);
 // }
-// void _gotk4_gtk4_Widget_virtual_map(void* fnptr, GtkWidget* carg0) {
-// 	return ((void (*) (GtkWidget*))(fnptr))(carg0);
+// C.void _gotk4_gtk4_Widget_virtual_map(void* fnptr, *C.GtkWidget carg0) {
+// 	return ((C.void (*) (*C.GtkWidget))(fnptr))(carg0);
 // }
-// void _gotk4_gtk4_Widget_virtual_measure(void* fnptr, GtkWidget* carg0, GtkOrientation carg1, int carg2, int* carg3, int* carg4, int* carg5, int* carg6) {
-// 	return ((void (*) (GtkWidget*, GtkOrientation, int, int*, int*, int*, int*))(fnptr))(carg0, carg1, carg2, carg3, carg4, carg5, carg6);
+// C.void _gotk4_gtk4_Widget_virtual_measure(void* fnptr, *C.GtkWidget carg0, C.GtkOrientation carg1, C.int carg2, C.int* carg3, C.int* carg4, C.int* carg5, C.int* carg6) {
+// 	return ((C.void (*) (*C.GtkWidget, C.GtkOrientation, C.int, C.int*, C.int*, C.int*, C.int*))(fnptr))(carg0, carg1, carg2, carg3, carg4, carg5, carg6);
 // }
-// gboolean _gotk4_gtk4_Widget_virtual_mnemonic_activate(void* fnptr, GtkWidget* carg0, gboolean carg1) {
-// 	return ((gboolean (*) (GtkWidget*, gboolean))(fnptr))(carg0, carg1);
+// C.gboolean _gotk4_gtk4_Widget_virtual_mnemonic_activate(void* fnptr, *C.GtkWidget carg0, C.gboolean carg1) {
+// 	return ((C.gboolean (*) (*C.GtkWidget, C.gboolean))(fnptr))(carg0, carg1);
 // }
-// void _gotk4_gtk4_Widget_virtual_move_focus(void* fnptr, GtkWidget* carg0, GtkDirectionType carg1) {
-// 	return ((void (*) (GtkWidget*, GtkDirectionType))(fnptr))(carg0, carg1);
+// C.void _gotk4_gtk4_Widget_virtual_move_focus(void* fnptr, *C.GtkWidget carg0, C.GtkDirectionType carg1) {
+// 	return ((C.void (*) (*C.GtkWidget, C.GtkDirectionType))(fnptr))(carg0, carg1);
 // }
-// gboolean _gotk4_gtk4_Widget_virtual_query_tooltip(void* fnptr, GtkWidget* carg0, int carg1, int carg2, gboolean carg3, GtkTooltip* carg4) {
-// 	return ((gboolean (*) (GtkWidget*, int, int, gboolean, GtkTooltip*))(fnptr))(carg0, carg1, carg2, carg3, carg4);
+// C.gboolean _gotk4_gtk4_Widget_virtual_query_tooltip(void* fnptr, *C.GtkWidget carg0, C.int carg1, C.int carg2, C.gboolean carg3, *C.GtkTooltip carg4) {
+// 	return ((C.gboolean (*) (*C.GtkWidget, C.int, C.int, C.gboolean, *C.GtkTooltip))(fnptr))(carg0, carg1, carg2, carg3, carg4);
 // }
-// void _gotk4_gtk4_Widget_virtual_realize(void* fnptr, GtkWidget* carg0) {
-// 	return ((void (*) (GtkWidget*))(fnptr))(carg0);
+// C.void _gotk4_gtk4_Widget_virtual_realize(void* fnptr, *C.GtkWidget carg0) {
+// 	return ((C.void (*) (*C.GtkWidget))(fnptr))(carg0);
 // }
-// void _gotk4_gtk4_Widget_virtual_root(void* fnptr, GtkWidget* carg0) {
-// 	return ((void (*) (GtkWidget*))(fnptr))(carg0);
+// C.void _gotk4_gtk4_Widget_virtual_root(void* fnptr, *C.GtkWidget carg0) {
+// 	return ((C.void (*) (*C.GtkWidget))(fnptr))(carg0);
 // }
-// void _gotk4_gtk4_Widget_virtual_set_focus_child(void* fnptr, GtkWidget* carg0, GtkWidget* carg1) {
-// 	return ((void (*) (GtkWidget*, GtkWidget*))(fnptr))(carg0, carg1);
+// C.void _gotk4_gtk4_Widget_virtual_set_focus_child(void* fnptr, *C.GtkWidget carg0, *C.GtkWidget carg1) {
+// 	return ((C.void (*) (*C.GtkWidget, *C.GtkWidget))(fnptr))(carg0, carg1);
 // }
-// void _gotk4_gtk4_Widget_virtual_size_allocate(void* fnptr, GtkWidget* carg0, int carg1, int carg2, int carg3) {
-// 	return ((void (*) (GtkWidget*, int, int, int))(fnptr))(carg0, carg1, carg2, carg3);
+// C.void _gotk4_gtk4_Widget_virtual_size_allocate(void* fnptr, *C.GtkWidget carg0, C.int carg1, C.int carg2, C.int carg3) {
+// 	return ((C.void (*) (*C.GtkWidget, C.int, C.int, C.int))(fnptr))(carg0, carg1, carg2, carg3);
 // }
-// void _gotk4_gtk4_Widget_virtual_snapshot(void* fnptr, GtkWidget* carg0, GtkSnapshot* carg1) {
-// 	return ((void (*) (GtkWidget*, GtkSnapshot*))(fnptr))(carg0, carg1);
+// C.void _gotk4_gtk4_Widget_virtual_snapshot(void* fnptr, *C.GtkWidget carg0, *C.GtkSnapshot carg1) {
+// 	return ((C.void (*) (*C.GtkWidget, *C.GtkSnapshot))(fnptr))(carg0, carg1);
 // }
-// void _gotk4_gtk4_Widget_virtual_state_flags_changed(void* fnptr, GtkWidget* carg0, GtkStateFlags carg1) {
-// 	return ((void (*) (GtkWidget*, GtkStateFlags))(fnptr))(carg0, carg1);
-// }
-// void _gotk4_gtk4_Widget_virtual_system_setting_changed(void* fnptr, GtkWidget* carg0, GtkSystemSetting carg1) {
-// 	return ((void (*) (GtkWidget*, GtkSystemSetting))(fnptr))(carg0, carg1);
-// }
-// void _gotk4_gtk4_Widget_virtual_unmap(void* fnptr, GtkWidget* carg0) {
-// 	return ((void (*) (GtkWidget*))(fnptr))(carg0);
-// }
-// void _gotk4_gtk4_Widget_virtual_unrealize(void* fnptr, GtkWidget* carg0) {
-// 	return ((void (*) (GtkWidget*))(fnptr))(carg0);
+// C.void _gotk4_gtk4_Widget_virtual_state_flags_changed(void* fnptr, *C.GtkWidget carg0, C.GtkStateFlags carg1) {
+// 	return ((C.void (*) (*C.GtkWidget, C.GtkStateFlags))(fnptr))(carg0, carg1);
+// }
+// C.void _gotk4_gtk4_Widget_virtual_system_setting_changed(void* fnptr, *C.GtkWidget carg0, C.GtkSystemSetting carg1) {
+// 	return ((C.void (*) (*C.GtkWidget, C.GtkSystemSetting))(fnptr))(carg0, carg1);
+// }
+// C.void _gotk4_gtk4_Widget_virtual_unmap(void* fnptr, *C.GtkWidget carg0) {
+// 	return ((C.void (*) (*C.GtkWidget))(fnptr))(carg0);
+// }
+// C.void _gotk4_gtk4_Widget_virtual_unrealize(void* fnptr, *C.GtkWidget carg0) {
+// 	return ((C.void (*) (*C.GtkWidget))(fnptr))(carg0);
 // }
-// void _gotk4_gtk4_Widget_virtual_unroot(void* fnptr, GtkWidget* carg0) {
-// 	return ((void (*) (GtkWidget*))(fnptr))(carg0);
+// C.void _gotk4_gtk4_Widget_virtual_unroot(void* fnptr, *C.GtkWidget carg0) {
+// 	return ((C.void (*) (*C.GtkWidget))(fnptr))(carg0);
 // }
-// extern void _gotk4_gtk4_Window_activate_default(GtkWindow*);
-// extern void _gotk4_gtk4_Window_activate_focus(GtkWindow*);
-// extern gboolean _gotk4_gtk4_Window_close_request(GtkWindow*);
-// extern gboolean _gotk4_gtk4_Window_enable_debugging(GtkWindow*, gboolean);
-// extern void _gotk4_gtk4_Window_keys_changed(GtkWindow*);
-// void _gotk4_gtk4_Window_virtual_activate_default(void* fnptr, GtkWindow* carg0) {
-// 	return ((void (*) (GtkWindow*))(fnptr))(carg0);
+// extern C.void _gotk4_gtk4_Window_activate_default(*C.GtkWindow);
+// extern C.void _gotk4_gtk4_Window_activate_focus(*C.GtkWindow);
+// extern C.gboolean _gotk4_gtk4_Window_close_request(*C.GtkWindow);
+// extern C.gboolean _gotk4_gtk4_Window_enable_debugging(*C.GtkWindow, C.gboolean);
+// extern C.void _gotk4_gtk4_Window_keys_changed(*C.GtkWindow);
+// C.void _gotk4_gtk4_Window_virtual_activate_default(void* fnptr, *C.GtkWindow carg0) {
+// 	return ((C.void (*) (*C.GtkWindow))(fnptr))(carg0);
 // }
-// void _gotk4_gtk4_Window_virtual_activate_focus(void* fnptr, GtkWindow* carg0) {
-// 	return ((void (*) (GtkWindow*))(fnptr))(carg0);
+// C.void _gotk4_gtk4_Window_virtual_activate_focus(void* fnptr, *C.GtkWindow carg0) {
+// 	return ((C.void (*) (*C.GtkWindow))(fnptr))(carg0);
 // }
-// gboolean _gotk4_gtk4_Window_virtual_close_request(void* fnptr, GtkWindow* carg0) {
-// 	return ((gboolean (*) (GtkWindow*))(fnptr))(carg0);
-// }
-// gboolean _gotk4_gtk4_Window_virtual_enable_debugging(void* fnptr, GtkWindow* carg0, gboolean carg1) {
-// 	return ((gboolean (*) (GtkWindow*, gboolean))(fnptr))(carg0, carg1);
-// }
-// void _gotk4_gtk4_Window_virtual_keys_changed(void* fnptr, GtkWindow* carg0) {
-// 	return ((void (*) (GtkWindow*))(fnptr))(carg0);
-// }
-// extern void _gotk4_gtk4_Button_activate(GtkButton*);
-// extern void _gotk4_gtk4_Button_clicked(GtkButton*);
-// void _gotk4_gtk4_Button_virtual_activate(void* fnptr, GtkButton* carg0) {
-// 	return ((void (*) (GtkButton*))(fnptr))(carg0);
-// }
-// void _gotk4_gtk4_Button_virtual_clicked(void* fnptr, GtkButton* carg0) {
-// 	return ((void (*) (GtkButton*))(fnptr))(carg0);
-// }
-// extern void _gotk4_gtk4_CheckButton_activate(GtkCheckButton*);
-// extern void _gotk4_gtk4_CheckButton_toggled(GtkCheckButton*);
-// void _gotk4_gtk4_CheckButton_virtual_activate(void* fnptr, GtkCheckButton* carg0) {
-// 	return ((void (*) (GtkCheckButton*))(fnptr))(carg0);
-// }
-// void _gotk4_gtk4_CheckButton_virtual_toggled(void* fnptr, GtkCheckButton* carg0) {
-// 	return ((void (*) (GtkCheckButton*))(fnptr))(carg0);
-// }
-// extern void _gotk4_gtk4_DrawingArea_resize(GtkDrawingArea*, int, int);
-// void _gotk4_gtk4_DrawingArea_virtual_resize(void* fnptr, GtkDrawingArea* carg0, int carg1, int carg2) {
-// 	return ((void (*) (GtkDrawingArea*, int, int))(fnptr))(carg0, carg1, carg2);
-// }
-// extern void _gotk4_gtk4_Entry_activate(GtkEntry*);
-// void _gotk4_gtk4_Entry_virtual_activate(void* fnptr, GtkEntry* carg0) {
-// 	return ((void (*) (GtkEntry*))(fnptr))(carg0);
-// }
-// extern void _gotk4_gtk4_FlowBoxChild_activate(GtkFlowBoxChild*);
-// void _gotk4_gtk4_FlowBoxChild_virtual_activate(void* fnptr, GtkFlowBoxChild* carg0) {
-// 	return ((void (*) (GtkFlowBoxChild*))(fnptr))(carg0);
+// C.gboolean _gotk4_gtk4_Window_virtual_close_request(void* fnptr, *C.GtkWindow carg0) {
+// 	return ((C.gboolean (*) (*C.GtkWindow))(fnptr))(carg0);
+// }
+// C.gboolean _gotk4_gtk4_Window_virtual_enable_debugging(void* fnptr, *C.GtkWindow carg0, C.gboolean carg1) {
+// 	return ((C.gboolean (*) (*C.GtkWindow, C.gboolean))(fnptr))(carg0, carg1);
+// }
+// C.void _gotk4_gtk4_Window_virtual_keys_changed(void* fnptr, *C.GtkWindow carg0) {
+// 	return ((C.void (*) (*C.GtkWindow))(fnptr))(carg0);
+// }
+// extern C.void _gotk4_gtk4_Button_activate(*C.GtkButton);
+// extern C.void _gotk4_gtk4_Button_clicked(*C.GtkButton);
+// C.void _gotk4_gtk4_Button_virtual_activate(void* fnptr, *C.GtkButton carg0) {
+// 	return ((C.void (*) (*C.GtkButton))(fnptr))(carg0);
+// }
+// C.void _gotk4_gtk4_Button_virtual_clicked(void* fnptr, *C.GtkButton carg0) {
+// 	return ((C.void (*) (*C.GtkButton))(fnptr))(carg0);
+// }
+// extern C.void _gotk4_gtk4_CheckButton_activate(*C.GtkCheckButton);
+// extern C.void _gotk4_gtk4_CheckButton_toggled(*C.GtkCheckButton);
+// C.void _gotk4_gtk4_CheckButton_virtual_activate(void* fnptr, *C.GtkCheckButton carg0) {
+// 	return ((C.void (*) (*C.GtkCheckButton))(fnptr))(carg0);
+// }
+// C.void _gotk4_gtk4_CheckButton_virtual_toggled(void* fnptr, *C.GtkCheckButton carg0) {
+// 	return ((C.void (*) (*C.GtkCheckButton))(fnptr))(carg0);
+// }
+// extern C.void _gotk4_gtk4_DrawingArea_resize(*C.GtkDrawingArea, C.int, C.int);
+// C.void _gotk4_gtk4_DrawingArea_virtual_resize(void* fnptr, *C.GtkDrawingArea carg0, C.int carg1, C.int carg2) {
+// 	return ((C.void (*) (*C.GtkDrawingArea, C.int, C.int))(fnptr))(carg0, carg1, carg2);
+// }
+// extern C.void _gotk4_gtk4_Entry_activate(*C.GtkEntry);
+// C.void _gotk4_gtk4_Entry_virtual_activate(void* fnptr, *C.GtkEntry carg0) {
+// 	return ((C.void (*) (*C.GtkEntry))(fnptr))(carg0);
+// }
+// extern C.void _gotk4_gtk4_FlowBoxChild_activate(*C.GtkFlowBoxChild);
+// C.void _gotk4_gtk4_FlowBoxChild_virtual_activate(void* fnptr, *C.GtkFlowBoxChild carg0) {
+// 	return ((C.void (*) (*C.GtkFlowBoxChild))(fnptr))(carg0);
 // }
-// extern void _gotk4_gtk4_Frame_compute_child_allocation(GtkFrame*, GtkAllocation*);
-// void _gotk4_gtk4_Frame_virtual_compute_child_allocation(void* fnptr, GtkFrame* carg0, GtkAllocation* carg1) {
-// 	return ((void (*) (GtkFrame*, GtkAllocation*))(fnptr))(carg0, carg1);
+// extern C.void _gotk4_gtk4_Frame_compute_child_allocation(*C.GtkFrame, *C.GtkAllocation);
+// C.void _gotk4_gtk4_Frame_virtual_compute_child_allocation(void* fnptr, *C.GtkFrame carg0, *C.GtkAllocation carg1) {
+// 	return ((C.void (*) (*C.GtkFrame, *C.GtkAllocation))(fnptr))(carg0, carg1);
 // }
-// extern gboolean _gotk4_gtk4_GLArea_render(GtkGLArea*, GdkGLContext*);
-// extern void _gotk4_gtk4_GLArea_resize(GtkGLArea*, int, int);
-// gboolean _gotk4_gtk4_GLArea_virtual_render(void* fnptr, GtkGLArea* carg0, GdkGLContext* carg1) {
-// 	return ((gboolean (*) (GtkGLArea*, GdkGLContext*))(fnptr))(carg0, carg1);
+// extern C.gboolean _gotk4_gtk4_GLArea_render(*C.GtkGLArea, *C.GdkGLContext);
+// extern C.void _gotk4_gtk4_GLArea_resize(*C.GtkGLArea, C.int, C.int);
+// C.gboolean _gotk4_gtk4_GLArea_virtual_render(void* fnptr, *C.GtkGLArea carg0, *C.GdkGLContext carg1) {
+// 	return ((C.gboolean (*) (*C.GtkGLArea, *C.GdkGLContext))(fnptr))(carg0, carg1);
 // }
-// void _gotk4_gtk4_GLArea_virtual_resize(void* fnptr, GtkGLArea* carg0, int carg1, int carg2) {
-// 	return ((void (*) (GtkGLArea*, int, int))(fnptr))(carg0, carg1, carg2);
+// C.void _gotk4_gtk4_GLArea_virtual_resize(void* fnptr, *C.GtkGLArea carg0, C.int carg1, C.int carg2) {
+// 	return ((C.void (*) (*C.GtkGLArea, C.int, C.int))(fnptr))(carg0, carg1, carg2);
 // }
-// extern void _gotk4_gtk4_ListBoxRow_activate(GtkListBoxRow*);
-// void _gotk4_gtk4_ListBoxRow_virtual_activate(void* fnptr, GtkListBoxRow* carg0) {
-// 	return ((void (*) (GtkListBoxRow*))(fnptr))(carg0);
+// extern C.void _gotk4_gtk4_ListBoxRow_activate(*C.GtkListBoxRow);
+// C.void _gotk4_gtk4_ListBoxRow_virtual_activate(void* fnptr, *C.GtkListBoxRow carg0) {
+// 	return ((C.void (*) (*C.GtkListBoxRow))(fnptr))(carg0);
 // }
-// extern void _gotk4_gtk4_MediaFile_close(GtkMediaFile*);
-// extern void _gotk4_gtk4_MediaFile_open(GtkMediaFile*);
-// void _gotk4_gtk4_MediaFile_virtual_close(void* fnptr, GtkMediaFile* carg0) {
-// 	return ((void (*) (GtkMediaFile*))(fnptr))(carg0);
+// extern C.void _gotk4_gtk4_MediaFile_close(*C.GtkMediaFile);
+// extern C.void _gotk4_gtk4_MediaFile_open(*C.GtkMediaFile);
+// C.void _gotk4_gtk4_MediaFile_virtual_close(void* fnptr, *C.GtkMediaFile carg0) {
+// 	return ((C.void (*) (*C.GtkMediaFile))(fnptr))(carg0);
 // }
-// void _gotk4_gtk4_MediaFile_virtual_open(void* fnptr, GtkMediaFile* carg0) {
-// 	return ((void (*) (GtkMediaFile*))(fnptr))(carg0);
+// C.void _gotk4_gtk4_MediaFile_virtual_open(void* fnptr, *C.GtkMediaFile carg0) {
+// 	return ((C.void (*) (*C.GtkMediaFile))(fnptr))(carg0);
 // }
-// extern void _gotk4_gtk4_Popover_activate_default(GtkPopover*);
-// extern void _gotk4_gtk4_Popover_closed(GtkPopover*);
-// void _gotk4_gtk4_Popover_virtual_activate_default(void* fnptr, GtkPopover* carg0) {
-// 	return ((void (*) (GtkPopover*))(fnptr))(carg0);
+// extern C.void _gotk4_gtk4_Popover_activate_default(*C.GtkPopover);
+// extern C.void _gotk4_gtk4_Popover_closed(*C.GtkPopover);
+// C.void _gotk4_gtk4_Popover_virtual_activate_default(void* fnptr, *C.GtkPopover carg0) {
+// 	return ((C.void (*) (*C.GtkPopover))(fnptr))(carg0);
 // }
-// void _gotk4_gtk4_Popover_virtual_closed(void* fnptr, GtkPopover* carg0) {
-// 	return ((void (*) (GtkPopover*))(fnptr))(carg0);
+// C.void _gotk4_gtk4_Popover_virtual_closed(void* fnptr, *C.GtkPopover carg0) {
+// 	return ((C.void (*) (*C.GtkPopover))(fnptr))(carg0);
 // }
-// extern void _gotk4_gtk4_Range_adjust_bounds(GtkRange*, double);
-// extern gboolean _gotk4_gtk4_Range_change_value(GtkRange*, GtkScrollType, double);
-// extern void _gotk4_gtk4_Range_get_range_border(GtkRange*, GtkBorder*);
-// extern void _gotk4_gtk4_Range_move_slider(GtkRange*, GtkScrollType);
-// extern void _gotk4_gtk4_Range_value_changed(GtkRange*);
-// void _gotk4_gtk4_Range_virtual_adjust_bounds(void* fnptr, GtkRange* carg0, double carg1) {
-// 	return ((void (*) (GtkRange*, double))(fnptr))(carg0, carg1);
+// extern C.void _gotk4_gtk4_Range_adjust_bounds(*C.GtkRange, C.double);
+// extern C.gboolean _gotk4_gtk4_Range_change_value(*C.GtkRange, C.GtkScrollType, C.double);
+// extern C.void _gotk4_gtk4_Range_get_range_border(*C.GtkRange, *C.GtkBorder);
+// extern C.void _gotk4_gtk4_Range_move_slider(*C.GtkRange, C.GtkScrollType);
+// extern C.void _gotk4_gtk4_Range_value_changed(*C.GtkRange);
+// C.void _gotk4_gtk4_Range_virtual_adjust_bounds(void* fnptr, *C.GtkRange carg0, C.double carg1) {
+// 	return ((C.void (*) (*C.GtkRange, C.double))(fnptr))(carg0, carg1);
 // }
-// gboolean _gotk4_gtk4_Range_virtual_change_value(void* fnptr, GtkRange* carg0, GtkScrollType carg1, double carg2) {
-// 	return ((gboolean (*) (GtkRange*, GtkScrollType, double))(fnptr))(carg0, carg1, carg2);
+// C.gboolean _gotk4_gtk4_Range_virtual_change_value(void* fnptr, *C.GtkRange carg0, C.GtkScrollType carg1, C.double carg2) {
+// 	return ((C.gboolean (*) (*C.GtkRange, C.GtkScrollType, C.double))(fnptr))(carg0, carg1, carg2);
 // }
-// void _gotk4_gtk4_Range_virtual_get_range_border(void* fnptr, GtkRange* carg0, GtkBorder* carg1) {
-// 	return ((void (*) (GtkRange*, GtkBorder*))(fnptr))(carg0, carg1);
+// C.void _gotk4_gtk4_Range_virtual_get_range_border(void* fnptr, *C.GtkRange carg0, *C.GtkBorder carg1) {
+// 	return ((C.void (*) (*C.GtkRange, *C.GtkBorder))(fnptr))(carg0, carg1);
 // }
-// void _gotk4_gtk4_Range_virtual_move_slider(void* fnptr, GtkRange* carg0, GtkScrollType carg1) {
-// 	return ((void (*) (GtkRange*, GtkScrollType))(fnptr))(carg0, carg1);
+// C.void _gotk4_gtk4_Range_virtual_move_slider(void* fnptr, *C.GtkRange carg0, C.GtkScrollType carg1) {
+// 	return ((C.void (*) (*C.GtkRange, C.GtkScrollType))(fnptr))(carg0, carg1);
 // }
-// void _gotk4_gtk4_Range_virtual_value_changed(void* fnptr, GtkRange* carg0) {
-// 	return ((void (*) (GtkRange*))(fnptr))(carg0);
+// C.void _gotk4_gtk4_Range_virtual_value_changed(void* fnptr, *C.GtkRange carg0) {
+// 	return ((C.void (*) (*C.GtkRange))(fnptr))(carg0);
 // }
-// extern void _gotk4_gtk4_Scale_get_layout_offsets(GtkScale*, int, int);
-// void _gotk4_gtk4_Scale_virtual_get_layout_offsets(void* fnptr, GtkScale* carg0, int* carg1, int* carg2) {
-// 	return ((void (*) (GtkScale*, int*, int*))(fnptr))(carg0, carg1, carg2);
+// extern C.void _gotk4_gtk4_Scale_get_layout_offsets(*C.GtkScale, C.int, C.int);
+// C.void _gotk4_gtk4_Scale_virtual_get_layout_offsets(void* fnptr, *C.GtkScale carg0, C.int* carg1, C.int* carg2) {
+// 	return ((C.void (*) (*C.GtkScale, C.int*, C.int*))(fnptr))(carg0, carg1, carg2);
 // }
-// extern void _gotk4_gtk4_ScaleButton_value_changed(GtkScaleButton*, double);
-// void _gotk4_gtk4_ScaleButton_virtual_value_changed(void* fnptr, GtkScaleButton* carg0, double carg1) {
-// 	return ((void (*) (GtkScaleButton*, double))(fnptr))(carg0, carg1);
+// extern C.void _gotk4_gtk4_ScaleButton_value_changed(*C.GtkScaleButton, C.double);
+// C.void _gotk4_gtk4_ScaleButton_virtual_value_changed(void* fnptr, *C.GtkScaleButton carg0, C.double carg1) {
+// 	return ((C.void (*) (*C.GtkScaleButton, C.double))(fnptr))(carg0, carg1);
 // }
-// extern void _gotk4_gtk4_TextView_backspace(GtkTextView*);
-// extern void _gotk4_gtk4_TextView_copy_clipboard(GtkTextView*);
-// extern void _gotk4_gtk4_TextView_cut_clipboard(GtkTextView*);
-// extern void _gotk4_gtk4_TextView_delete_from_cursor(GtkTextView*, GtkDeleteType, int);
-// extern gboolean _gotk4_gtk4_TextView_extend_selection(GtkTextView*, GtkTextExtendSelection, GtkTextIter*, GtkTextIter*, GtkTextIter*);
-// extern void _gotk4_gtk4_TextView_insert_at_cursor(GtkTextView*, char*);
-// extern void _gotk4_gtk4_TextView_insert_emoji(GtkTextView*);
-// extern void _gotk4_gtk4_TextView_move_cursor(GtkTextView*, GtkMovementStep, int, gboolean);
-// extern void _gotk4_gtk4_TextView_paste_clipboard(GtkTextView*);
-// extern void _gotk4_gtk4_TextView_set_anchor(GtkTextView*);
-// extern void _gotk4_gtk4_TextView_snapshot_layer(GtkTextView*, GtkTextViewLayer, GtkSnapshot*);
-// extern void _gotk4_gtk4_TextView_toggle_overwrite(GtkTextView*);
-// void _gotk4_gtk4_TextView_virtual_backspace(void* fnptr, GtkTextView* carg0) {
-// 	return ((void (*) (GtkTextView*))(fnptr))(carg0);
+// extern C.void _gotk4_gtk4_TextView_backspace(*C.GtkTextView);
+// extern C.void _gotk4_gtk4_TextView_copy_clipboard(*C.GtkTextView);
+// extern C.void _gotk4_gtk4_TextView_cut_clipboard(*C.GtkTextView);
+// extern C.void _gotk4_gtk4_TextView_delete_from_cursor(*C.GtkTextView, C.GtkDeleteType, C.int);
+// extern C.gboolean _gotk4_gtk4_TextView_extend_selection(*C.GtkTextView, C.GtkTextExtendSelection, *C.GtkTextIter, *C.GtkTextIter, *C.GtkTextIter);
+// extern C.void _gotk4_gtk4_TextView_insert_at_cursor(*C.GtkTextView, *C.char);
+// extern C.void _gotk4_gtk4_TextView_insert_emoji(*C.GtkTextView);
+// extern C.void _gotk4_gtk4_TextView_move_cursor(*C.GtkTextView, C.GtkMovementStep, C.int, C.gboolean);
+// extern C.void _gotk4_gtk4_TextView_paste_clipboard(*C.GtkTextView);
+// extern C.void _gotk4_gtk4_TextView_set_anchor(*C.GtkTextView);
+// extern C.void _gotk4_gtk4_TextView_snapshot_layer(*C.GtkTextView, C.GtkTextViewLayer, *C.GtkSnapshot);
+// extern C.void _gotk4_gtk4_TextView_toggle_overwrite(*C.GtkTextView);
+// C.void _gotk4_gtk4_TextView_virtual_backspace(void* fnptr, *C.GtkTextView carg0) {
+// 	return ((C.void (*) (*C.GtkTextView))(fnptr))(carg0);
 // }
-// void _gotk4_gtk4_TextView_virtual_copy_clipboard(void* fnptr, GtkTextView* carg0) {
-// 	return ((void (*) (GtkTextView*))(fnptr))(carg0);
+// C.void _gotk4_gtk4_TextView_virtual_copy_clipboard(void* fnptr, *C.GtkTextView carg0) {
+// 	return ((C.void (*) (*C.GtkTextView))(fnptr))(carg0);
 // }
-// void _gotk4_gtk4_TextView_virtual_cut_clipboard(void* fnptr, GtkTextView* carg0) {
-// 	return ((void (*) (GtkTextView*))(fnptr))(carg0);
+// C.void _gotk4_gtk4_TextView_virtual_cut_clipboard(void* fnptr, *C.GtkTextView carg0) {
+// 	return ((C.void (*) (*C.GtkTextView))(fnptr))(carg0);
 // }
-// void _gotk4_gtk4_TextView_virtual_delete_from_cursor(void* fnptr, GtkTextView* carg0, GtkDeleteType carg1, int carg2) {
-// 	return ((void (*) (GtkTextView*, GtkDeleteType, int))(fnptr))(carg0, carg1, carg2);
+// C.void _gotk4_gtk4_TextView_virtual_delete_from_cursor(void* fnptr, *C.GtkTextView carg0, C.GtkDeleteType carg1, C.int carg2) {
+// 	return ((C.void (*) (*C.GtkTextView, C.GtkDeleteType, C.int))(fnptr))(carg0, carg1, carg2);
 // }
-// gboolean _gotk4_gtk4_TextView_virtual_extend_selection(void* fnptr, GtkTextView* carg0, GtkTextExtendSelection carg1, GtkTextIter* carg2, GtkTextIter* carg3, GtkTextIter* carg4) {
-// 	return ((gboolean (*) (GtkTextView*, GtkTextExtendSelection, GtkTextIter*, GtkTextIter*, GtkTextIter*))(fnptr))(carg0, carg1, carg2, carg3, carg4);
+// C.gboolean _gotk4_gtk4_TextView_virtual_extend_selection(void* fnptr, *C.GtkTextView carg0, C.GtkTextExtendSelection carg1, *C.GtkTextIter carg2, *C.GtkTextIter carg3, *C.GtkTextIter carg4) {
+// 	return ((C.gboolean (*) (*C.GtkTextView, C.GtkTextExtendSelection, *C.GtkTextIter, *C.GtkTextIter, *C.GtkTextIter))(fnptr))(carg0, carg1, carg2, carg3, carg4);
 // }
-// void _gotk4_gtk4_TextView_virtual_insert_at_cursor(void* fnptr, GtkTextView* carg0, char* carg1) {
-// 	return ((void (*) (GtkTextView*, char*))(fnptr))(carg0, carg1);
+// C.void _gotk4_gtk4_TextView_virtual_insert_at_cursor(void* fnptr, *C.GtkTextView carg0, *C.char carg1) {
+// 	return ((C.void (*) (*C.GtkTextView, *C.char))(fnptr))(carg0, carg1);
 // }
-// void _gotk4_gtk4_TextView_virtual_insert_emoji(void* fnptr, GtkTextView* carg0) {
-// 	return ((void (*) (GtkTextView*))(fnptr))(carg0);
+// C.void _gotk4_gtk4_TextView_virtual_insert_emoji(void* fnptr, *C.GtkTextView carg0) {
+// 	return ((C.void (*) (*C.GtkTextView))(fnptr))(carg0);
 // }
-// void _gotk4_gtk4_TextView_virtual_move_cursor(void* fnptr, GtkTextView* carg0, GtkMovementStep carg1, int carg2, gboolean carg3) {
-// 	return ((void (*) (GtkTextView*, GtkMovementStep, int, gboolean))(fnptr))(carg0, carg1, carg2, carg3);
+// C.void _gotk4_gtk4_TextView_virtual_move_cursor(void* fnptr, *C.GtkTextView carg0, C.GtkMovementStep carg1, C.int carg2, C.gboolean carg3) {
+// 	return ((C.void (*) (*C.GtkTextView, C.GtkMovementStep, C.int, C.gboolean))(fnptr))(carg0, carg1, carg2, carg3);
 // }
-// void _gotk4_gtk4_TextView_virtual_paste_clipboard(void* fnptr, GtkTextView* carg0) {
-// 	return ((void (*) (GtkTextView*))(fnptr))(carg0);
+// C.void _gotk4_gtk4_TextView_virtual_paste_clipboard(void* fnptr, *C.GtkTextView carg0) {
+// 	return ((C.void (*) (*C.GtkTextView))(fnptr))(carg0);
 // }
-// void _gotk4_gtk4_TextView_virtual_set_anchor(void* fnptr, GtkTextView* carg0) {
-// 	return ((void (*) (GtkTextView*))(fnptr))(carg0);
+// C.void _gotk4_gtk4_TextView_virtual_set_anchor(void* fnptr, *C.GtkTextView carg0) {
+// 	return ((C.void (*) (*C.GtkTextView))(fnptr))(carg0);
 // }
-// void _gotk4_gtk4_TextView_virtual_snapshot_layer(void* fnptr, GtkTextView* carg0, GtkTextViewLayer carg1, GtkSnapshot* carg2) {
-// 	return ((void (*) (GtkTextView*, GtkTextViewLayer, GtkSnapshot*))(fnptr))(carg0, carg1, carg2);
+// C.void _gotk4_gtk4_TextView_virtual_snapshot_layer(void* fnptr, *C.GtkTextView carg0, C.GtkTextViewLayer carg1, *C.GtkSnapshot carg2) {
+// 	return ((C.void (*) (*C.GtkTextView, C.GtkTextViewLayer, *C.GtkSnapshot))(fnptr))(carg0, carg1, carg2);
 // }
-// void _gotk4_gtk4_TextView_virtual_toggle_overwrite(void* fnptr, GtkTextView* carg0) {
-// 	return ((void (*) (GtkTextView*))(fnptr))(carg0);
+// C.void _gotk4_gtk4_TextView_virtual_toggle_overwrite(void* fnptr, *C.GtkTextView carg0) {
+// 	return ((C.void (*) (*C.GtkTextView))(fnptr))(carg0);
 // }
 import "C"
 
@@ -9501,7 +9501,7 @@ func AcceleratorGetDefaultModMask() gdk.ModifierType {
 func AcceleratorGetLabel(acceleratorKey uint, acceleratorMods gdk.ModifierType) string {
 	var carg1 C.guint           // in, none, casted
 	var carg2 C.GdkModifierType // in, none, casted
-	var cret  *C.char           // return, full, string, casted *C.gchar
+	var cret  *C.char           // return, full, string
 
 	carg1 = C.guint(acceleratorKey)
 	carg2 = C.GdkModifierType(acceleratorMods)
@@ -9545,7 +9545,7 @@ func AcceleratorGetLabelWithKeycode(display gdk.Display, acceleratorKey uint, ke
 	var carg2 C.guint           // in, none, casted
 	var carg3 C.guint           // in, none, casted
 	var carg4 C.GdkModifierType // in, none, casted
-	var cret  *C.char           // return, full, string, casted *C.gchar
+	var cret  *C.char           // return, full, string
 
 	if display != nil {
 		carg1 = (*C.GdkDisplay)(gdk.UnsafeDisplayToGlibNone(display))
@@ -9590,7 +9590,7 @@ func AcceleratorGetLabelWithKeycode(display gdk.Display, acceleratorKey uint, ke
 func AcceleratorName(acceleratorKey uint, acceleratorMods gdk.ModifierType) string {
 	var carg1 C.guint           // in, none, casted
 	var carg2 C.GdkModifierType // in, none, casted
-	var cret  *C.char           // return, full, string, casted *C.gchar
+	var cret  *C.char           // return, full, string
 
 	carg1 = C.guint(acceleratorKey)
 	carg2 = C.GdkModifierType(acceleratorMods)
@@ -9631,7 +9631,7 @@ func AcceleratorNameWithKeycode(display gdk.Display, acceleratorKey uint, keycod
 	var carg2 C.guint           // in, none, casted
 	var carg3 C.guint           // in, none, casted
 	var carg4 C.GdkModifierType // in, none, casted
-	var cret  *C.char           // return, full, string, casted *C.gchar
+	var cret  *C.char           // return, full, string
 
 	if display != nil {
 		carg1 = (*C.GdkDisplay)(gdk.UnsafeDisplayToGlibNone(display))
@@ -9691,7 +9691,7 @@ func AcceleratorNameWithKeycode(display gdk.Display, acceleratorKey uint, keycod
 // If the parse operation fails, @accelerator_key and @accelerator_mods will
 // be set to 0 (zero).
 func AcceleratorParse(accelerator string) (uint, gdk.ModifierType, bool) {
-	var carg1 *C.char           // in, none, string, casted *C.gchar
+	var carg1 *C.char           // in, none, string
 	var carg2 C.guint           // out, full, casted
 	var carg3 C.GdkModifierType // out, full, casted
 	var cret  C.gboolean        // return
@@ -9792,7 +9792,7 @@ func CheckVersion(requiredMajor uint, requiredMinor uint, requiredMicro uint) st
 	var carg1 C.guint // in, none, casted
 	var carg2 C.guint // in, none, casted
 	var carg3 C.guint // in, none, casted
-	var cret  *C.char // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char // return, none, string, nullable-string
 
 	carg1 = C.guint(requiredMajor)
 	carg2 = C.guint(requiredMinor)
@@ -9885,16 +9885,16 @@ func DisableSetlocale() {
 // `GtkRequestedSize` struct. If all sizes reach their natural size then
 // the remaining space is returned.
 func DistributeNaturalAllocation(extraSpace int32, sizes []RequestedSize) int32 {
-	var carg1 C.int               // in, none, casted, casted C.gint
+	var carg1 C.int               // in, none, casted
 	var carg2 C.guint             // implicit
 	var carg3 *C.GtkRequestedSize // in, transfer: none, C Pointers: 1, Name: array[RequestedSize], array (inner: *typesystem.Record, length-by: carg2)
-	var cret  C.int               // return, none, casted, casted C.gint
+	var cret  C.int               // return, none, casted
 
 	carg1 = C.int(extraSpace)
 	_ = sizes
 	_ = carg3
 	_ = carg2
-	panic("unimplemented conversion of []RequestedSize (GtkRequestedSize*)")
+	panic("unimplemented conversion of []RequestedSize (*C.GtkRequestedSize)")
 
 	cret = C.gtk_distribute_natural_allocation(carg1, carg2, carg3)
 	runtime.KeepAlive(extraSpace)
@@ -10142,12 +10142,12 @@ func GetMinorVersion() uint {
 // Input values must be in the [0.0, 1.0] range;
 // output values will be in the same range.
 func HSVToRGB(h float32, s float32, v float32) (float32, float32, float32) {
-	var carg1 C.float // in, none, casted, casted C.gfloat
-	var carg2 C.float // in, none, casted, casted C.gfloat
-	var carg3 C.float // in, none, casted, casted C.gfloat
-	var carg4 C.float // out, full, casted, casted C.gfloat
-	var carg5 C.float // out, full, casted, casted C.gfloat
-	var carg6 C.float // out, full, casted, casted C.gfloat
+	var carg1 C.float // in, none, casted
+	var carg2 C.float // in, none, casted
+	var carg3 C.float // in, none, casted
+	var carg4 C.float // out, full, casted
+	var carg5 C.float // out, full, casted
+	var carg6 C.float // out, full, casted
 
 	carg1 = C.float(h)
 	carg2 = C.float(s)
@@ -10262,9 +10262,9 @@ func IsInitialized() bool {
 // 
 // See `g_param_spec_internal()` for details on the property strings.
 func ParamSpecExpression(name string, nick string, blurb string, flags gobject.ParamFlags) *gobject.ParamSpec {
-	var carg1 *C.char       // in, none, string, casted *C.gchar
-	var carg2 *C.char       // in, none, string, casted *C.gchar
-	var carg3 *C.char       // in, none, string, casted *C.gchar
+	var carg1 *C.char       // in, none, string
+	var carg2 *C.char       // in, none, string
+	var carg3 *C.char       // in, none, string
 	var carg4 C.GParamFlags // in, none, casted
 	var cret  *C.GParamSpec // return, full, converted
 
@@ -10308,12 +10308,12 @@ func ParamSpecExpression(name string, nick string, blurb string, flags gobject.P
 // Input values must be in the [0.0, 1.0] range;
 // output values will be in the same range.
 func RGBToHSV(r float32, g float32, b float32) (float32, float32, float32) {
-	var carg1 C.float // in, none, casted, casted C.gfloat
-	var carg2 C.float // in, none, casted, casted C.gfloat
-	var carg3 C.float // in, none, casted, casted C.gfloat
-	var carg4 C.float // out, full, casted, casted C.gfloat
-	var carg5 C.float // out, full, casted, casted C.gfloat
-	var carg6 C.float // out, full, casted, casted C.gfloat
+	var carg1 C.float // in, none, casted
+	var carg2 C.float // in, none, casted
+	var carg3 C.float // in, none, casted
+	var carg4 C.float // out, full, casted
+	var carg5 C.float // out, full, casted
+	var carg6 C.float // out, full, casted
 
 	carg1 = C.float(r)
 	carg2 = C.float(g)
@@ -10366,11 +10366,11 @@ func SetDebugFlags(flags DebugFlags) {
 //
 // Prints an assertion message for gtk_test_accessible_assert_role().
 func TestAccessibleAssertionMessageRole(domain string, file string, line int32, fn string, expr string, accessible Accessible, expectedRole AccessibleRole, actualRole AccessibleRole) {
-	var carg1 *C.char             // in, none, string, casted *C.gchar
-	var carg2 *C.char             // in, none, string, casted *C.gchar
-	var carg3 C.int               // in, none, casted, casted C.gint
-	var carg4 *C.char             // in, none, string, casted *C.gchar
-	var carg5 *C.char             // in, none, string, casted *C.gchar
+	var carg1 *C.char             // in, none, string
+	var carg2 *C.char             // in, none, string
+	var carg3 C.int               // in, none, casted
+	var carg4 *C.char             // in, none, string
+	var carg5 *C.char             // in, none, string
 	var carg6 *C.GtkAccessible    // in, none, converted
 	var carg7 C.GtkAccessibleRole // in, none, casted
 	var carg8 C.GtkAccessibleRole // in, none, casted
@@ -10553,7 +10553,7 @@ func TestListAllTypes() (uint, []gobject.Type) {
 	nTypes = uint(carg1)
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []gobject.Type (const GType*)")
+	panic("unimplemented conversion of []gobject.Type (*C.GType)")
 
 	return nTypes, goret
 }
@@ -10595,7 +10595,7 @@ func TestWidgetWaitForDraw(widget Widget) {
 // AccessibleInstance is the instance type used by all types implementing GtkAccessible. It is used internally by the bindings. Users should use the interface [Accessible] instead.
 type AccessibleInstance struct {
 	_ [0]func() // equal guard
-	gobject.ObjectInstance
+	Instance gobject.ObjectInstance
 }
 
 var _ Accessible = (*AccessibleInstance)(nil)
@@ -10632,7 +10632,6 @@ var _ Accessible = (*AccessibleInstance)(nil)
 // by calling [method@Gtk.Accessible.set_accessible_parent] and
 // updating the sibling by [method@Gtk.Accessible.update_next_accessible_sibling].
 type Accessible interface {
-	gobject.Object
 	upcastToGtkAccessible() *AccessibleInstance
 
 	// Announce wraps gtk_accessible_announce
@@ -10826,7 +10825,8 @@ type Accessible interface {
 	// chain up virtual methods:
 
 	// ParentGetAccessibleParent calls the default implementations of the get_accessible_parent virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Accessible (nullable) 
@@ -10836,7 +10836,8 @@ type Accessible interface {
 	// This function returns `NULL` for top level widgets.
 	ParentGetAccessibleParent() Accessible
 	// ParentGetAtContext calls the default implementations of the get_at_context virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret ATContext (nullable) 
@@ -10844,7 +10845,8 @@ type Accessible interface {
 	// Retrieves the accessible implementation for the given `GtkAccessible`.
 	ParentGetAtContext() ATContext
 	// ParentGetBounds calls the default implementations of the get_bounds virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- x int32: the x coordinate of the top left corner of the accessible 
@@ -10860,7 +10862,8 @@ type Accessible interface {
 	// child widget.
 	ParentGetBounds() (int32, int32, int32, int32, bool)
 	// ParentGetFirstAccessibleChild calls the default implementations of the get_first_accessible_child virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Accessible (nullable) 
@@ -10868,7 +10871,8 @@ type Accessible interface {
 	// Retrieves the first accessible child of an accessible object.
 	ParentGetFirstAccessibleChild() Accessible
 	// ParentGetNextAccessibleSibling calls the default implementations of the get_next_accessible_sibling virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Accessible (nullable) 
@@ -10876,7 +10880,8 @@ type Accessible interface {
 	// Retrieves the next accessible sibling of an accessible object
 	ParentGetNextAccessibleSibling() Accessible
 	// ParentGetPlatformState calls the default implementations of the get_platform_state virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- state AccessiblePlatformState: platform state to query 
@@ -10899,7 +10904,7 @@ var _ Accessible = (*AccessibleInstance)(nil)
 
 func unsafeWrapAccessible(base *gobject.ObjectInstance) *AccessibleInstance {
 	return &AccessibleInstance{
-		ObjectInstance: *base,
+		Instance: *base,
 	}
 }
 
@@ -10929,13 +10934,13 @@ func UnsafeAccessibleFromGlibBorrow(c unsafe.Pointer) Accessible {
 // UnsafeAccessibleToGlibNone is used to convert the instance to it's C value GtkAccessible. This is used by the bindings internally.
 func UnsafeAccessibleToGlibNone(c Accessible) unsafe.Pointer {
 	i := c.upcastToGtkAccessible()
-	return gobject.UnsafeObjectToGlibNone(i)
+	return gobject.UnsafeObjectToGlibNone(&i.Instance)
 }
 
 // UnsafeAccessibleToGlibFull is used to convert the instance to it's C value GtkAccessible, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeAccessibleToGlibFull(c Accessible) unsafe.Pointer {
 	i := c.upcastToGtkAccessible()
-	return gobject.UnsafeObjectToGlibFull(i)
+	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
 // Announce wraps gtk_accessible_announce
@@ -10956,7 +10961,7 @@ func UnsafeAccessibleToGlibFull(c Accessible) unsafe.Pointer {
 // does not interrupts the user's current screen reader output.
 func (self *AccessibleInstance) Announce(message string, priority AccessibleAnnouncementPriority) {
 	var carg0 *C.GtkAccessible                    // in, none, converted
-	var carg1 *C.char                             // in, none, string, casted *C.gchar
+	var carg1 *C.char                             // in, none, string
 	var carg2 C.GtkAccessibleAnnouncementPriority // in, none, casted
 
 	carg0 = (*C.GtkAccessible)(UnsafeAccessibleToGlibNone(self))
@@ -11060,10 +11065,10 @@ func (self *AccessibleInstance) GetAtContext() ATContext {
 // child widget.
 func (self *AccessibleInstance) GetBounds() (int32, int32, int32, int32, bool) {
 	var carg0 *C.GtkAccessible // in, none, converted
-	var carg1 C.int            // out, full, casted, casted C.gint
-	var carg2 C.int            // out, full, casted, casted C.gint
-	var carg3 C.int            // out, full, casted, casted C.gint
-	var carg4 C.int            // out, full, casted, casted C.gint
+	var carg1 C.int            // out, full, casted
+	var carg2 C.int            // out, full, casted
+	var carg3 C.int            // out, full, casted
+	var carg4 C.int            // out, full, casted
 	var cret  C.gboolean       // return
 
 	carg0 = (*C.GtkAccessible)(UnsafeAccessibleToGlibNone(self))
@@ -11315,11 +11320,11 @@ func (self *AccessibleInstance) UpdatePropertyValue(properties []AccessiblePrope
 	_ = properties
 	_ = carg2
 	_ = carg1
-	panic("unimplemented conversion of []AccessibleProperty (GtkAccessibleProperty*)")
+	panic("unimplemented conversion of []AccessibleProperty (*C.GtkAccessibleProperty)")
 	_ = values
 	_ = carg3
 	_ = carg1
-	panic("unimplemented conversion of []gobject.Value (const GValue*)")
+	panic("unimplemented conversion of []gobject.Value (*C.GValue)")
 
 	C.gtk_accessible_update_property_value(carg0, carg1, carg2, carg3)
 	runtime.KeepAlive(self)
@@ -11350,11 +11355,11 @@ func (self *AccessibleInstance) UpdateRelationValue(relations []AccessibleRelati
 	_ = relations
 	_ = carg2
 	_ = carg1
-	panic("unimplemented conversion of []AccessibleRelation (GtkAccessibleRelation*)")
+	panic("unimplemented conversion of []AccessibleRelation (*C.GtkAccessibleRelation)")
 	_ = values
 	_ = carg3
 	_ = carg1
-	panic("unimplemented conversion of []gobject.Value (const GValue*)")
+	panic("unimplemented conversion of []gobject.Value (*C.GValue)")
 
 	C.gtk_accessible_update_relation_value(carg0, carg1, carg2, carg3)
 	runtime.KeepAlive(self)
@@ -11385,11 +11390,11 @@ func (self *AccessibleInstance) UpdateStateValue(states []AccessibleState, value
 	_ = states
 	_ = carg2
 	_ = carg1
-	panic("unimplemented conversion of []AccessibleState (GtkAccessibleState*)")
+	panic("unimplemented conversion of []AccessibleState (*C.GtkAccessibleState)")
 	_ = values
 	_ = carg3
 	_ = carg1
-	panic("unimplemented conversion of []gobject.Value (const GValue*)")
+	panic("unimplemented conversion of []gobject.Value (*C.GValue)")
 
 	C.gtk_accessible_update_state_value(carg0, carg1, carg2, carg3)
 	runtime.KeepAlive(self)
@@ -11400,7 +11405,8 @@ func (self *AccessibleInstance) UpdateStateValue(states []AccessibleState, value
 // AccessibleOverrides is the struct used to override the default implementation of virtual methods.
 // it is generic over the extending instance type.
 type AccessibleOverrides[Instance Accessible] struct {
-	// GetAccessibleParent allows you to override the implementation of the virtual method get_accessible_parent.
+	// // GetAccessibleParent allows you to override the implementation of the virtual method get_accessible_parent.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Accessible (nullable) 
@@ -11409,14 +11415,16 @@ type AccessibleOverrides[Instance Accessible] struct {
 	// 
 	// This function returns `NULL` for top level widgets.
 	GetAccessibleParent func(Instance) Accessible
-	// GetAtContext allows you to override the implementation of the virtual method get_at_context.
+	// // GetAtContext allows you to override the implementation of the virtual method get_at_context.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret ATContext (nullable) 
 	//
 	// Retrieves the accessible implementation for the given `GtkAccessible`.
 	GetAtContext func(Instance) ATContext
-	// GetBounds allows you to override the implementation of the virtual method get_bounds.
+	// // GetBounds allows you to override the implementation of the virtual method get_bounds.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- x int32: the x coordinate of the top left corner of the accessible 
@@ -11431,21 +11439,24 @@ type AccessibleOverrides[Instance Accessible] struct {
 	// implementations, e.g. to get the bounds from an ignored
 	// child widget.
 	GetBounds func(Instance) (int32, int32, int32, int32, bool)
-	// GetFirstAccessibleChild allows you to override the implementation of the virtual method get_first_accessible_child.
+	// // GetFirstAccessibleChild allows you to override the implementation of the virtual method get_first_accessible_child.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Accessible (nullable) 
 	//
 	// Retrieves the first accessible child of an accessible object.
 	GetFirstAccessibleChild func(Instance) Accessible
-	// GetNextAccessibleSibling allows you to override the implementation of the virtual method get_next_accessible_sibling.
+	// // GetNextAccessibleSibling allows you to override the implementation of the virtual method get_next_accessible_sibling.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret Accessible (nullable) 
 	//
 	// Retrieves the next accessible sibling of an accessible object
 	GetNextAccessibleSibling func(Instance) Accessible
-	// GetPlatformState allows you to override the implementation of the virtual method get_platform_state.
+	// // GetPlatformState allows you to override the implementation of the virtual method get_platform_state.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- state AccessiblePlatformState: platform state to query 
@@ -11520,10 +11531,10 @@ func UnsafeApplyAccessibleOverrides[Instance Accessible](gclass unsafe.Pointer, 
 			"_gotk4_gtk4_Accessible_get_bounds",
 			func(carg0 *C.GtkAccessible, carg1 *C.int, carg2 *C.int, carg3 *C.int, carg4 *C.int) (cret C.gboolean) {
 				var self   Instance // go GtkAccessible subclass
-				var x      int32    // out, full, casted, casted C.gint
-				var y      int32    // out, full, casted, casted C.gint
-				var width  int32    // out, full, casted, casted C.gint
-				var height int32    // out, full, casted, casted C.gint
+				var x      int32    // out, full, casted
+				var y      int32    // out, full, casted
+				var width  int32    // out, full, casted
+				var height int32    // out, full, casted
 				var goret  bool     // return
 
 				self = UnsafeAccessibleFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
@@ -11613,7 +11624,8 @@ func UnsafeApplyAccessibleOverrides[Instance Accessible](gclass unsafe.Pointer, 
 }
 
 // ParentGetAccessibleParent calls the default implementations of the get_accessible_parent virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret Accessible (nullable) 
@@ -11640,7 +11652,8 @@ func (self *AccessibleInstance) ParentGetAccessibleParent() Accessible {
 }
 
 // ParentGetAtContext calls the default implementations of the get_at_context virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret ATContext (nullable) 
@@ -11665,7 +11678,8 @@ func (self *AccessibleInstance) ParentGetAtContext() ATContext {
 }
 
 // ParentGetBounds calls the default implementations of the get_bounds virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- x int32: the x coordinate of the top left corner of the accessible 
@@ -11681,10 +11695,10 @@ func (self *AccessibleInstance) ParentGetAtContext() ATContext {
 // child widget.
 func (self *AccessibleInstance) ParentGetBounds() (int32, int32, int32, int32, bool) {
 	var carg0 *C.GtkAccessible
-	var carg1 C.int      // out, full, casted, casted C.gint
-	var carg2 C.int      // out, full, casted, casted C.gint
-	var carg3 C.int      // out, full, casted, casted C.gint
-	var carg4 C.int      // out, full, casted, casted C.gint
+	var carg1 C.int      // out, full, casted
+	var carg2 C.int      // out, full, casted
+	var carg3 C.int      // out, full, casted
+	var carg4 C.int      // out, full, casted
 	var cret  C.gboolean // return
 
 	parentclass := (*C.GtkAccessibleInterface)(classdata.PeekParentInterface(UnsafeAccessibleToGlibNone(self), uint64(TypeAccessible)))
@@ -11710,7 +11724,8 @@ func (self *AccessibleInstance) ParentGetBounds() (int32, int32, int32, int32, b
 }
 
 // ParentGetFirstAccessibleChild calls the default implementations of the get_first_accessible_child virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret Accessible (nullable) 
@@ -11735,7 +11750,8 @@ func (self *AccessibleInstance) ParentGetFirstAccessibleChild() Accessible {
 }
 
 // ParentGetNextAccessibleSibling calls the default implementations of the get_next_accessible_sibling virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret Accessible (nullable) 
@@ -11760,7 +11776,8 @@ func (self *AccessibleInstance) ParentGetNextAccessibleSibling() Accessible {
 }
 
 // ParentGetPlatformState calls the default implementations of the get_platform_state virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- state AccessiblePlatformState: platform state to query 
@@ -11801,7 +11818,7 @@ func (self *AccessibleInstance) ParentGetPlatformState(state AccessiblePlatformS
 // AccessibleRangeInstance is the instance type used by all types implementing GtkAccessibleRange. It is used internally by the bindings. Users should use the interface [AccessibleRange] instead.
 type AccessibleRangeInstance struct {
 	_ [0]func() // equal guard
-	gobject.ObjectInstance
+	Instance gobject.ObjectInstance
 }
 
 var _ AccessibleRange = (*AccessibleRangeInstance)(nil)
@@ -11830,13 +11847,13 @@ var _ AccessibleRange = (*AccessibleRangeInstance)(nil)
 // - `GTK_ACCESSIBLE_PROPERTY_VALUE_NOW`
 // - `GTK_ACCESSIBLE_PROPERTY_VALUE_TEXT`
 type AccessibleRange interface {
-	gobject.Object
 	upcastToGtkAccessibleRange() *AccessibleRangeInstance
 
 	// chain up virtual methods:
 
 	// ParentSetCurrentValue calls the default implementations of the set_current_value virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- value float64: the value to set 
@@ -11856,7 +11873,7 @@ var _ AccessibleRange = (*AccessibleRangeInstance)(nil)
 
 func unsafeWrapAccessibleRange(base *gobject.ObjectInstance) *AccessibleRangeInstance {
 	return &AccessibleRangeInstance{
-		ObjectInstance: *base,
+		Instance: *base,
 	}
 }
 
@@ -11886,19 +11903,20 @@ func UnsafeAccessibleRangeFromGlibBorrow(c unsafe.Pointer) AccessibleRange {
 // UnsafeAccessibleRangeToGlibNone is used to convert the instance to it's C value GtkAccessibleRange. This is used by the bindings internally.
 func UnsafeAccessibleRangeToGlibNone(c AccessibleRange) unsafe.Pointer {
 	i := c.upcastToGtkAccessibleRange()
-	return gobject.UnsafeObjectToGlibNone(i)
+	return gobject.UnsafeObjectToGlibNone(&i.Instance)
 }
 
 // UnsafeAccessibleRangeToGlibFull is used to convert the instance to it's C value GtkAccessibleRange, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeAccessibleRangeToGlibFull(c AccessibleRange) unsafe.Pointer {
 	i := c.upcastToGtkAccessibleRange()
-	return gobject.UnsafeObjectToGlibFull(i)
+	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
 // AccessibleRangeOverrides is the struct used to override the default implementation of virtual methods.
 // it is generic over the extending instance type.
 type AccessibleRangeOverrides[Instance AccessibleRange] struct {
-	// SetCurrentValue allows you to override the implementation of the virtual method set_current_value.
+	// // SetCurrentValue allows you to override the implementation of the virtual method set_current_value.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- value float64: the value to set 
@@ -11926,7 +11944,7 @@ func UnsafeApplyAccessibleRangeOverrides[Instance AccessibleRange](gclass unsafe
 			"_gotk4_gtk4_AccessibleRange_set_current_value",
 			func(carg0 *C.GtkAccessibleRange, carg1 C.double) (cret C.gboolean) {
 				var self  Instance // go GtkAccessibleRange subclass
-				var value float64  // in, none, casted, casted C.gdouble
+				var value float64  // in, none, casted
 				var goret bool     // return
 
 				self = UnsafeAccessibleRangeFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
@@ -11945,7 +11963,8 @@ func UnsafeApplyAccessibleRangeOverrides[Instance AccessibleRange](gclass unsafe
 }
 
 // ParentSetCurrentValue calls the default implementations of the set_current_value virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- value float64: the value to set 
@@ -11960,7 +11979,7 @@ func UnsafeApplyAccessibleRangeOverrides[Instance AccessibleRange](gclass unsafe
 // action.
 func (self *AccessibleRangeInstance) ParentSetCurrentValue(value float64) bool {
 	var carg0 *C.GtkAccessibleRange
-	var carg1 C.double   // in, none, casted, casted C.gdouble
+	var carg1 C.double   // in, none, casted
 	var cret  C.gboolean // return
 
 	parentclass := (*C.GtkAccessibleRangeInterface)(classdata.PeekParentInterface(UnsafeAccessibleRangeToGlibNone(self), uint64(TypeAccessibleRange)))
@@ -11983,7 +12002,7 @@ func (self *AccessibleRangeInstance) ParentSetCurrentValue(value float64) bool {
 // AccessibleTextInstance is the instance type used by all types implementing GtkAccessibleText. It is used internally by the bindings. Users should use the interface [AccessibleText] instead.
 type AccessibleTextInstance struct {
 	_ [0]func() // equal guard
-	gobject.ObjectInstance
+	Instance gobject.ObjectInstance
 }
 
 var _ AccessibleText = (*AccessibleTextInstance)(nil)
@@ -11999,7 +12018,6 @@ var _ AccessibleText = (*AccessibleTextInstance)(nil)
 // [enum@Gtk.AccessibleProperty.DESCRIPTION] properties for accessible
 // objects containing simple, unformatted text.
 type AccessibleText interface {
-	gobject.Object
 	upcastToGtkAccessibleText() *AccessibleTextInstance
 
 	// UpdateCaretPosition wraps gtk_accessible_text_update_caret_position
@@ -12040,7 +12058,8 @@ type AccessibleText interface {
 	// chain up virtual methods:
 
 	// ParentGetCaretPosition calls the default implementations of the get_caret_position virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret uint 
@@ -12048,7 +12067,8 @@ type AccessibleText interface {
 	// Retrieves the position of the caret inside the accessible object.
 	ParentGetCaretPosition() uint
 	// ParentGetContents calls the default implementations of the get_contents virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- start uint: the beginning of the range, in characters 
@@ -12065,7 +12085,8 @@ type AccessibleText interface {
 	// of the accessible object.
 	ParentGetContents(start uint, end uint) *glib.Bytes
 	// ParentGetContentsAt calls the default implementations of the get_contents_at virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- offset uint: the offset, in characters 
@@ -12083,7 +12104,8 @@ type AccessibleText interface {
 	// The @start and @end values contain the boundaries of the text.
 	ParentGetContentsAt(offset uint, granularity AccessibleTextGranularity) (uint, uint, *glib.Bytes)
 	// ParentGetExtents calls the default implementations of the get_extents virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- start uint: the start offset, in characters 
@@ -12098,7 +12120,8 @@ type AccessibleText interface {
 	// Obtains the extents of a range of text, in widget coordinates.
 	ParentGetExtents(start uint, end uint, extents *graphene.Rect) bool
 	// ParentGetOffset calls the default implementations of the get_offset virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- point *graphene.Point: a point in widget coordinates of @self 
@@ -12116,7 +12139,7 @@ var _ AccessibleText = (*AccessibleTextInstance)(nil)
 
 func unsafeWrapAccessibleText(base *gobject.ObjectInstance) *AccessibleTextInstance {
 	return &AccessibleTextInstance{
-		ObjectInstance: *base,
+		Instance: *base,
 	}
 }
 
@@ -12146,13 +12169,13 @@ func UnsafeAccessibleTextFromGlibBorrow(c unsafe.Pointer) AccessibleText {
 // UnsafeAccessibleTextToGlibNone is used to convert the instance to it's C value GtkAccessibleText. This is used by the bindings internally.
 func UnsafeAccessibleTextToGlibNone(c AccessibleText) unsafe.Pointer {
 	i := c.upcastToGtkAccessibleText()
-	return gobject.UnsafeObjectToGlibNone(i)
+	return gobject.UnsafeObjectToGlibNone(&i.Instance)
 }
 
 // UnsafeAccessibleTextToGlibFull is used to convert the instance to it's C value GtkAccessibleText, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeAccessibleTextToGlibFull(c AccessibleText) unsafe.Pointer {
 	i := c.upcastToGtkAccessibleText()
-	return gobject.UnsafeObjectToGlibFull(i)
+	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
 // UpdateCaretPosition wraps gtk_accessible_text_update_caret_position
@@ -12191,13 +12214,13 @@ func (self *AccessibleTextInstance) UpdateCaretPosition() {
 func (self *AccessibleTextInstance) UpdateContents(change AccessibleTextContentChange, start uint, end uint) {
 	var carg0 *C.GtkAccessibleText             // in, none, converted
 	var carg1 C.GtkAccessibleTextContentChange // in, none, casted
-	var carg2 C.uint                           // in, none, casted, casted C.guint
-	var carg3 C.uint                           // in, none, casted, casted C.guint
+	var carg2 C.unsigned int                   // in, none, casted
+	var carg3 C.unsigned int                   // in, none, casted
 
 	carg0 = (*C.GtkAccessibleText)(UnsafeAccessibleTextToGlibNone(self))
 	carg1 = C.GtkAccessibleTextContentChange(change)
-	carg2 = C.uint(start)
-	carg3 = C.uint(end)
+	carg2 = C.unsigned int(start)
+	carg3 = C.unsigned int(end)
 
 	C.gtk_accessible_text_update_contents(carg0, carg1, carg2, carg3)
 	runtime.KeepAlive(self)
@@ -12225,14 +12248,16 @@ func (self *AccessibleTextInstance) UpdateSelectionBound() {
 // AccessibleTextOverrides is the struct used to override the default implementation of virtual methods.
 // it is generic over the extending instance type.
 type AccessibleTextOverrides[Instance AccessibleText] struct {
-	// GetCaretPosition allows you to override the implementation of the virtual method get_caret_position.
+	// // GetCaretPosition allows you to override the implementation of the virtual method get_caret_position.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret uint 
 	//
 	// Retrieves the position of the caret inside the accessible object.
 	GetCaretPosition func(Instance) uint
-	// GetContents allows you to override the implementation of the virtual method get_contents.
+	// // GetContents allows you to override the implementation of the virtual method get_contents.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- start uint: the beginning of the range, in characters 
@@ -12248,7 +12273,8 @@ type AccessibleTextOverrides[Instance AccessibleText] struct {
 	// If @end is `G_MAXUINT`, the end of the range is the full content
 	// of the accessible object.
 	GetContents func(Instance, uint, uint) *glib.Bytes
-	// GetContentsAt allows you to override the implementation of the virtual method get_contents_at.
+	// // GetContentsAt allows you to override the implementation of the virtual method get_contents_at.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- offset uint: the offset, in characters 
@@ -12265,7 +12291,8 @@ type AccessibleTextOverrides[Instance AccessibleText] struct {
 	// 
 	// The @start and @end values contain the boundaries of the text.
 	GetContentsAt func(Instance, uint, AccessibleTextGranularity) (uint, uint, *glib.Bytes)
-	// GetExtents allows you to override the implementation of the virtual method get_extents.
+	// // GetExtents allows you to override the implementation of the virtual method get_extents.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- start uint: the start offset, in characters 
@@ -12279,7 +12306,8 @@ type AccessibleTextOverrides[Instance AccessibleText] struct {
 	//
 	// Obtains the extents of a range of text, in widget coordinates.
 	GetExtents func(Instance, uint, uint, *graphene.Rect) bool
-	// GetOffset allows you to override the implementation of the virtual method get_offset.
+	// // GetOffset allows you to override the implementation of the virtual method get_offset.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- point *graphene.Point: a point in widget coordinates of @self 
@@ -12303,15 +12331,15 @@ func UnsafeApplyAccessibleTextOverrides[Instance AccessibleText](gclass unsafe.P
 		classdata.StoreVirtualMethod(
 			unsafe.Pointer(pclass),
 			"_gotk4_gtk4_AccessibleText_get_caret_position",
-			func(carg0 *C.GtkAccessibleText) (cret C.uint) {
+			func(carg0 *C.GtkAccessibleText) (cret C.unsigned int) {
 				var self  Instance // go GtkAccessibleText subclass
-				var goret uint     // return, none, casted, casted C.guint
+				var goret uint     // return, none, casted
 
 				self = UnsafeAccessibleTextFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
 				goret = overrides.GetCaretPosition(self)
 
-				cret = C.uint(goret)
+				cret = C.unsigned int(goret)
 
 				return cret
 			},
@@ -12323,10 +12351,10 @@ func UnsafeApplyAccessibleTextOverrides[Instance AccessibleText](gclass unsafe.P
 		classdata.StoreVirtualMethod(
 			unsafe.Pointer(pclass),
 			"_gotk4_gtk4_AccessibleText_get_contents",
-			func(carg0 *C.GtkAccessibleText, carg1 C.uint, carg2 C.uint) (cret *C.GBytes) {
+			func(carg0 *C.GtkAccessibleText, carg1 C.unsigned int, carg2 C.unsigned int) (cret *C.GBytes) {
 				var self  Instance    // go GtkAccessibleText subclass
-				var start uint        // in, none, casted, casted C.guint
-				var end   uint        // in, none, casted, casted C.guint
+				var start uint        // in, none, casted
+				var end   uint        // in, none, casted
 				var goret *glib.Bytes // return, full, converted
 
 				self = UnsafeAccessibleTextFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
@@ -12347,12 +12375,12 @@ func UnsafeApplyAccessibleTextOverrides[Instance AccessibleText](gclass unsafe.P
 		classdata.StoreVirtualMethod(
 			unsafe.Pointer(pclass),
 			"_gotk4_gtk4_AccessibleText_get_contents_at",
-			func(carg0 *C.GtkAccessibleText, carg1 C.uint, carg2 C.GtkAccessibleTextGranularity, carg3 *C.uint, carg4 *C.uint) (cret *C.GBytes) {
+			func(carg0 *C.GtkAccessibleText, carg1 C.unsigned int, carg2 C.GtkAccessibleTextGranularity, carg3 *C.unsigned int, carg4 *C.unsigned int) (cret *C.GBytes) {
 				var self        Instance                  // go GtkAccessibleText subclass
-				var offset      uint                      // in, none, casted, casted C.guint
+				var offset      uint                      // in, none, casted
 				var granularity AccessibleTextGranularity // in, none, casted
-				var start       uint                      // out, full, casted, casted C.guint
-				var end         uint                      // out, full, casted, casted C.guint
+				var start       uint                      // out, full, casted
+				var end         uint                      // out, full, casted
 				var goret       *glib.Bytes               // return, full, converted
 
 				self = UnsafeAccessibleTextFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
@@ -12361,8 +12389,8 @@ func UnsafeApplyAccessibleTextOverrides[Instance AccessibleText](gclass unsafe.P
 
 				start, end, goret = overrides.GetContentsAt(self, offset, granularity)
 
-				*carg3 = C.uint(start)
-				*carg4 = C.uint(end)
+				*carg3 = C.unsigned int(start)
+				*carg4 = C.unsigned int(end)
 				cret = (*C.GBytes)(glib.UnsafeBytesToGlibFull(goret))
 
 				return cret
@@ -12375,10 +12403,10 @@ func UnsafeApplyAccessibleTextOverrides[Instance AccessibleText](gclass unsafe.P
 		classdata.StoreVirtualMethod(
 			unsafe.Pointer(pclass),
 			"_gotk4_gtk4_AccessibleText_get_extents",
-			func(carg0 *C.GtkAccessibleText, carg1 C.uint, carg2 C.uint, carg3 *C.graphene_rect_t) (cret C.gboolean) {
+			func(carg0 *C.GtkAccessibleText, carg1 C.unsigned int, carg2 C.unsigned int, carg3 *C.graphene_rect_t) (cret C.gboolean) {
 				var self    Instance       // go GtkAccessibleText subclass
-				var start   uint           // in, none, casted, casted C.guint
-				var end     uint           // in, none, casted, casted C.guint
+				var start   uint           // in, none, casted
+				var end     uint           // in, none, casted
 				var extents *graphene.Rect // in, none, converted
 				var goret   bool           // return
 
@@ -12403,10 +12431,10 @@ func UnsafeApplyAccessibleTextOverrides[Instance AccessibleText](gclass unsafe.P
 		classdata.StoreVirtualMethod(
 			unsafe.Pointer(pclass),
 			"_gotk4_gtk4_AccessibleText_get_offset",
-			func(carg0 *C.GtkAccessibleText, carg1 *C.graphene_point_t, carg2 *C.uint) (cret C.gboolean) {
+			func(carg0 *C.GtkAccessibleText, carg1 *C.graphene_point_t, carg2 *C.unsigned int) (cret C.gboolean) {
 				var self   Instance        // go GtkAccessibleText subclass
 				var point  *graphene.Point // in, none, converted
-				var offset uint            // out, full, casted, casted C.guint
+				var offset uint            // out, full, casted
 				var goret  bool            // return
 
 				self = UnsafeAccessibleTextFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
@@ -12414,7 +12442,7 @@ func UnsafeApplyAccessibleTextOverrides[Instance AccessibleText](gclass unsafe.P
 
 				offset, goret = overrides.GetOffset(self, point)
 
-				*carg2 = C.uint(offset)
+				*carg2 = C.unsigned int(offset)
 				if goret {
 					cret = C.TRUE
 				}
@@ -12426,7 +12454,8 @@ func UnsafeApplyAccessibleTextOverrides[Instance AccessibleText](gclass unsafe.P
 }
 
 // ParentGetCaretPosition calls the default implementations of the get_caret_position virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret uint 
@@ -12434,7 +12463,7 @@ func UnsafeApplyAccessibleTextOverrides[Instance AccessibleText](gclass unsafe.P
 // Retrieves the position of the caret inside the accessible object.
 func (self *AccessibleTextInstance) ParentGetCaretPosition() uint {
 	var carg0 *C.GtkAccessibleText
-	var cret  C.uint // return, none, casted, casted C.guint
+	var cret  C.unsigned int // return, none, casted
 
 	parentclass := (*C.GtkAccessibleTextInterface)(classdata.PeekParentInterface(UnsafeAccessibleTextToGlibNone(self), uint64(TypeAccessibleText)))
 
@@ -12449,7 +12478,8 @@ func (self *AccessibleTextInstance) ParentGetCaretPosition() uint {
 }
 
 // ParentGetContents calls the default implementations of the get_contents virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- start uint: the beginning of the range, in characters 
@@ -12466,14 +12496,14 @@ func (self *AccessibleTextInstance) ParentGetCaretPosition() uint {
 // of the accessible object.
 func (self *AccessibleTextInstance) ParentGetContents(start uint, end uint) *glib.Bytes {
 	var carg0 *C.GtkAccessibleText
-	var carg1 C.uint    // in, none, casted, casted C.guint
-	var carg2 C.uint    // in, none, casted, casted C.guint
-	var cret  *C.GBytes // return, full, converted
+	var carg1 C.unsigned int // in, none, casted
+	var carg2 C.unsigned int // in, none, casted
+	var cret  *C.GBytes      // return, full, converted
 
 	parentclass := (*C.GtkAccessibleTextInterface)(classdata.PeekParentInterface(UnsafeAccessibleTextToGlibNone(self), uint64(TypeAccessibleText)))
 
-	carg1 = C.uint(start)
-	carg2 = C.uint(end)
+	carg1 = C.unsigned int(start)
+	carg2 = C.unsigned int(end)
 
 	cret = C._gotk4_gtk4_AccessibleText_virtual_get_contents(unsafe.Pointer(parentclass.get_contents), carg0, carg1, carg2)
 	runtime.KeepAlive(self)
@@ -12488,7 +12518,8 @@ func (self *AccessibleTextInstance) ParentGetContents(start uint, end uint) *gli
 }
 
 // ParentGetContentsAt calls the default implementations of the get_contents_at virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- offset uint: the offset, in characters 
@@ -12506,15 +12537,15 @@ func (self *AccessibleTextInstance) ParentGetContents(start uint, end uint) *gli
 // The @start and @end values contain the boundaries of the text.
 func (self *AccessibleTextInstance) ParentGetContentsAt(offset uint, granularity AccessibleTextGranularity) (uint, uint, *glib.Bytes) {
 	var carg0 *C.GtkAccessibleText
-	var carg1 C.uint                         // in, none, casted, casted C.guint
+	var carg1 C.unsigned int                 // in, none, casted
 	var carg2 C.GtkAccessibleTextGranularity // in, none, casted
-	var carg3 C.uint                         // out, full, casted, casted C.guint
-	var carg4 C.uint                         // out, full, casted, casted C.guint
+	var carg3 C.unsigned int                 // out, full, casted
+	var carg4 C.unsigned int                 // out, full, casted
 	var cret  *C.GBytes                      // return, full, converted
 
 	parentclass := (*C.GtkAccessibleTextInterface)(classdata.PeekParentInterface(UnsafeAccessibleTextToGlibNone(self), uint64(TypeAccessibleText)))
 
-	carg1 = C.uint(offset)
+	carg1 = C.unsigned int(offset)
 	carg2 = C.GtkAccessibleTextGranularity(granularity)
 
 	cret = C._gotk4_gtk4_AccessibleText_virtual_get_contents_at(unsafe.Pointer(parentclass.get_contents_at), carg0, carg1, carg2, &carg3, &carg4)
@@ -12534,7 +12565,8 @@ func (self *AccessibleTextInstance) ParentGetContentsAt(offset uint, granularity
 }
 
 // ParentGetExtents calls the default implementations of the get_extents virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- start uint: the start offset, in characters 
@@ -12549,15 +12581,15 @@ func (self *AccessibleTextInstance) ParentGetContentsAt(offset uint, granularity
 // Obtains the extents of a range of text, in widget coordinates.
 func (self *AccessibleTextInstance) ParentGetExtents(start uint, end uint, extents *graphene.Rect) bool {
 	var carg0 *C.GtkAccessibleText
-	var carg1 C.uint             // in, none, casted, casted C.guint
-	var carg2 C.uint             // in, none, casted, casted C.guint
+	var carg1 C.unsigned int     // in, none, casted
+	var carg2 C.unsigned int     // in, none, casted
 	var carg3 *C.graphene_rect_t // in, none, converted
 	var cret  C.gboolean         // return
 
 	parentclass := (*C.GtkAccessibleTextInterface)(classdata.PeekParentInterface(UnsafeAccessibleTextToGlibNone(self), uint64(TypeAccessibleText)))
 
-	carg1 = C.uint(start)
-	carg2 = C.uint(end)
+	carg1 = C.unsigned int(start)
+	carg2 = C.unsigned int(end)
 	carg3 = (*C.graphene_rect_t)(graphene.UnsafeRectToGlibNone(extents))
 
 	cret = C._gotk4_gtk4_AccessibleText_virtual_get_extents(unsafe.Pointer(parentclass.get_extents), carg0, carg1, carg2, carg3)
@@ -12576,7 +12608,8 @@ func (self *AccessibleTextInstance) ParentGetExtents(start uint, end uint, exten
 }
 
 // ParentGetOffset calls the default implementations of the get_offset virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- point *graphene.Point: a point in widget coordinates of @self 
@@ -12590,7 +12623,7 @@ func (self *AccessibleTextInstance) ParentGetExtents(start uint, end uint, exten
 func (self *AccessibleTextInstance) ParentGetOffset(point *graphene.Point) (uint, bool) {
 	var carg0 *C.GtkAccessibleText
 	var carg1 *C.graphene_point_t // in, none, converted
-	var carg2 C.uint              // out, full, casted, casted C.guint
+	var carg2 C.unsigned int      // out, full, casted
 	var cret  C.gboolean          // return
 
 	parentclass := (*C.GtkAccessibleTextInterface)(classdata.PeekParentInterface(UnsafeAccessibleTextToGlibNone(self), uint64(TypeAccessibleText)))
@@ -12615,7 +12648,7 @@ func (self *AccessibleTextInstance) ParentGetOffset(point *graphene.Point) (uint
 // ActionableInstance is the instance type used by all types implementing GtkActionable. It is used internally by the bindings. Users should use the interface [Actionable] instead.
 type ActionableInstance struct {
 	_ [0]func() // equal guard
-	gobject.ObjectInstance
+	Instance gobject.ObjectInstance
 }
 
 var _ Actionable = (*ActionableInstance)(nil)
@@ -12636,7 +12669,6 @@ var _ Actionable = (*ActionableInstance)(nil)
 // are added with [method@Gtk.Widget.insert_action_group] will be consulted
 // as well.
 type Actionable interface {
-	gobject.Object
 	upcastToGtkActionable() *ActionableInstance
 
 	// GetActionName wraps gtk_actionable_get_action_name
@@ -12683,7 +12715,8 @@ type Actionable interface {
 	// chain up virtual methods:
 
 	// ParentGetActionName calls the default implementations of the get_action_name virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret string (nullable) 
@@ -12691,7 +12724,8 @@ type Actionable interface {
 	// Gets the action name for @actionable.
 	ParentGetActionName() string
 	// ParentSetActionName calls the default implementations of the set_action_name virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- actionName string (nullable): an action name 
@@ -12716,7 +12750,7 @@ var _ Actionable = (*ActionableInstance)(nil)
 
 func unsafeWrapActionable(base *gobject.ObjectInstance) *ActionableInstance {
 	return &ActionableInstance{
-		ObjectInstance: *base,
+		Instance: *base,
 	}
 }
 
@@ -12746,13 +12780,13 @@ func UnsafeActionableFromGlibBorrow(c unsafe.Pointer) Actionable {
 // UnsafeActionableToGlibNone is used to convert the instance to it's C value GtkActionable. This is used by the bindings internally.
 func UnsafeActionableToGlibNone(c Actionable) unsafe.Pointer {
 	i := c.upcastToGtkActionable()
-	return gobject.UnsafeObjectToGlibNone(i)
+	return gobject.UnsafeObjectToGlibNone(&i.Instance)
 }
 
 // UnsafeActionableToGlibFull is used to convert the instance to it's C value GtkActionable, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeActionableToGlibFull(c Actionable) unsafe.Pointer {
 	i := c.upcastToGtkActionable()
-	return gobject.UnsafeObjectToGlibFull(i)
+	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
 // GetActionName wraps gtk_actionable_get_action_name
@@ -12764,7 +12798,7 @@ func UnsafeActionableToGlibFull(c Actionable) unsafe.Pointer {
 // Gets the action name for @actionable.
 func (actionable *ActionableInstance) GetActionName() string {
 	var carg0 *C.GtkActionable // in, none, converted
-	var cret  *C.char          // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char          // return, none, string, nullable-string
 
 	carg0 = (*C.GtkActionable)(UnsafeActionableToGlibNone(actionable))
 
@@ -12827,7 +12861,7 @@ func (actionable *ActionableInstance) SetActionName(actionName string) {
 // [func@Gio.Action.parse_detailed_name].
 func (actionable *ActionableInstance) SetDetailedActionName(detailedActionName string) {
 	var carg0 *C.GtkActionable // in, none, converted
-	var carg1 *C.char          // in, none, string, casted *C.gchar
+	var carg1 *C.char          // in, none, string
 
 	carg0 = (*C.GtkActionable)(UnsafeActionableToGlibNone(actionable))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(detailedActionName)))
@@ -12841,14 +12875,16 @@ func (actionable *ActionableInstance) SetDetailedActionName(detailedActionName s
 // ActionableOverrides is the struct used to override the default implementation of virtual methods.
 // it is generic over the extending instance type.
 type ActionableOverrides[Instance Actionable] struct {
-	// GetActionName allows you to override the implementation of the virtual method get_action_name.
+	// // GetActionName allows you to override the implementation of the virtual method get_action_name.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret string (nullable) 
 	//
 	// Gets the action name for @actionable.
 	GetActionName func(Instance) string
-	// SetActionName allows you to override the implementation of the virtual method set_action_name.
+	// // SetActionName allows you to override the implementation of the virtual method set_action_name.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- actionName string (nullable): an action name 
@@ -12904,7 +12940,7 @@ func UnsafeApplyActionableOverrides[Instance Actionable](gclass unsafe.Pointer, 
 			"_gotk4_gtk4_Actionable_set_action_name",
 			func(carg0 *C.GtkActionable, carg1 *C.char) {
 				var actionable Instance // go GtkActionable subclass
-				var actionName string   // in, none, string, casted *C.gchar, nullable
+				var actionName string   // in, none, string, nullable-string
 
 				actionable = UnsafeActionableFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg1 != nil {
@@ -12918,7 +12954,8 @@ func UnsafeApplyActionableOverrides[Instance Actionable](gclass unsafe.Pointer, 
 }
 
 // ParentGetActionName calls the default implementations of the get_action_name virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret string (nullable) 
@@ -12926,7 +12963,7 @@ func UnsafeApplyActionableOverrides[Instance Actionable](gclass unsafe.Pointer, 
 // Gets the action name for @actionable.
 func (actionable *ActionableInstance) ParentGetActionName() string {
 	var carg0 *C.GtkActionable
-	var cret  *C.char // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char // return, none, string, nullable-string
 
 	parentclass := (*C.GtkActionableInterface)(classdata.PeekParentInterface(UnsafeActionableToGlibNone(actionable), uint64(TypeActionable)))
 
@@ -12943,7 +12980,8 @@ func (actionable *ActionableInstance) ParentGetActionName() string {
 }
 
 // ParentSetActionName calls the default implementations of the set_action_name virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- actionName string (nullable): an action name 
@@ -12980,7 +13018,7 @@ func (actionable *ActionableInstance) ParentSetActionName(actionName string) {
 // BuildableInstance is the instance type used by all types implementing GtkBuildable. It is used internally by the bindings. Users should use the interface [Buildable] instead.
 type BuildableInstance struct {
 	_ [0]func() // equal guard
-	gobject.ObjectInstance
+	Instance gobject.ObjectInstance
 }
 
 var _ Buildable = (*BuildableInstance)(nil)
@@ -13001,7 +13039,6 @@ var _ Buildable = (*BuildableInstance)(nil)
 // An object only needs to implement this interface if it needs to extend the
 // `GtkBuilder` XML format or run any extra routines at deserialization time.
 type Buildable interface {
-	gobject.Object
 	upcastToGtkBuildable() *BuildableInstance
 
 	// GetBuildableID wraps gtk_buildable_get_buildable_id
@@ -13019,7 +13056,8 @@ type Buildable interface {
 	// chain up virtual methods:
 
 	// ParentAddChild calls the default implementations of the add_child virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- builder Builder: a `GtkBuilder` 
@@ -13030,7 +13068,8 @@ type Buildable interface {
 	// describing how the child should be added.
 	ParentAddChild(builder Builder, child gobject.Object, typ string)
 	// ParentGetID calls the default implementations of the get_id virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret string 
@@ -13039,7 +13078,8 @@ type Buildable interface {
 	//   if you implement @set_id.
 	ParentGetID() string
 	// ParentGetInternalChild calls the default implementations of the get_internal_child virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- builder Builder: a `GtkBuilder` 
@@ -13052,7 +13092,8 @@ type Buildable interface {
 	// Retrieves the internal child called @childname of the @buildable object.
 	ParentGetInternalChild(builder Builder, childname string) gobject.Object
 	// ParentParserFinished calls the default implementations of the parser_finished virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- builder Builder 
@@ -13063,7 +13104,8 @@ type Buildable interface {
 	//  the `GtkWidget:visible` property here.
 	ParentParserFinished(builder Builder)
 	// ParentSetBuildableProperty calls the default implementations of the set_buildable_property virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- builder Builder 
@@ -13077,7 +13119,8 @@ type Buildable interface {
 	//  interface is created.
 	ParentSetBuildableProperty(builder Builder, name string, value *gobject.Value)
 	// ParentSetID calls the default implementations of the set_id virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- id string 
@@ -13093,7 +13136,7 @@ var _ Buildable = (*BuildableInstance)(nil)
 
 func unsafeWrapBuildable(base *gobject.ObjectInstance) *BuildableInstance {
 	return &BuildableInstance{
-		ObjectInstance: *base,
+		Instance: *base,
 	}
 }
 
@@ -13123,13 +13166,13 @@ func UnsafeBuildableFromGlibBorrow(c unsafe.Pointer) Buildable {
 // UnsafeBuildableToGlibNone is used to convert the instance to it's C value GtkBuildable. This is used by the bindings internally.
 func UnsafeBuildableToGlibNone(c Buildable) unsafe.Pointer {
 	i := c.upcastToGtkBuildable()
-	return gobject.UnsafeObjectToGlibNone(i)
+	return gobject.UnsafeObjectToGlibNone(&i.Instance)
 }
 
 // UnsafeBuildableToGlibFull is used to convert the instance to it's C value GtkBuildable, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeBuildableToGlibFull(c Buildable) unsafe.Pointer {
 	i := c.upcastToGtkBuildable()
-	return gobject.UnsafeObjectToGlibFull(i)
+	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
 // GetBuildableID wraps gtk_buildable_get_buildable_id
@@ -13144,7 +13187,7 @@ func UnsafeBuildableToGlibFull(c Buildable) unsafe.Pointer {
 // of the `&lt;object&gt;` tag used to construct the @buildable.
 func (buildable *BuildableInstance) GetBuildableID() string {
 	var carg0 *C.GtkBuildable // in, none, converted
-	var cret  *C.char         // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char         // return, none, string, nullable-string
 
 	carg0 = (*C.GtkBuildable)(UnsafeBuildableToGlibNone(buildable))
 
@@ -13163,7 +13206,8 @@ func (buildable *BuildableInstance) GetBuildableID() string {
 // BuildableOverrides is the struct used to override the default implementation of virtual methods.
 // it is generic over the extending instance type.
 type BuildableOverrides[Instance Buildable] struct {
-	// AddChild allows you to override the implementation of the virtual method add_child.
+	// // AddChild allows you to override the implementation of the virtual method add_child.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- builder Builder: a `GtkBuilder` 
@@ -13173,7 +13217,8 @@ type BuildableOverrides[Instance Buildable] struct {
 	// Adds a child to @buildable. @type is an optional string
 	// describing how the child should be added.
 	AddChild func(Instance, Builder, gobject.Object, string)
-	// GetID allows you to override the implementation of the virtual method get_id.
+	// // GetID allows you to override the implementation of the virtual method get_id.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret string 
@@ -13181,7 +13226,8 @@ type BuildableOverrides[Instance Buildable] struct {
 	// The getter corresponding to @set_id. Implement this
 	//   if you implement @set_id.
 	GetID func(Instance) string
-	// GetInternalChild allows you to override the implementation of the virtual method get_internal_child.
+	// // GetInternalChild allows you to override the implementation of the virtual method get_internal_child.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- builder Builder: a `GtkBuilder` 
@@ -13193,7 +13239,8 @@ type BuildableOverrides[Instance Buildable] struct {
 	//
 	// Retrieves the internal child called @childname of the @buildable object.
 	GetInternalChild func(Instance, Builder, string) gobject.Object
-	// ParserFinished allows you to override the implementation of the virtual method parser_finished.
+	// // ParserFinished allows you to override the implementation of the virtual method parser_finished.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- builder Builder 
@@ -13203,7 +13250,8 @@ type BuildableOverrides[Instance Buildable] struct {
 	//  unless you need to perform special cleanup actions. `GtkWindow` sets
 	//  the `GtkWidget:visible` property here.
 	ParserFinished func(Instance, Builder)
-	// SetBuildableProperty allows you to override the implementation of the virtual method set_buildable_property.
+	// // SetBuildableProperty allows you to override the implementation of the virtual method set_buildable_property.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- builder Builder 
@@ -13216,7 +13264,8 @@ type BuildableOverrides[Instance Buildable] struct {
 	//  (i.e. setting the [property@Gtk.Widget:visible] property) until the whole
 	//  interface is created.
 	SetBuildableProperty func(Instance, Builder, string, *gobject.Value)
-	// SetID allows you to override the implementation of the virtual method set_id.
+	// // SetID allows you to override the implementation of the virtual method set_id.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- id string 
@@ -13242,7 +13291,7 @@ func UnsafeApplyBuildableOverrides[Instance Buildable](gclass unsafe.Pointer, ov
 				var buildable Instance       // go GtkBuildable subclass
 				var builder   Builder        // in, none, converted
 				var child     gobject.Object // in, none, converted
-				var typ       string         // in, none, string, casted *C.gchar, nullable
+				var typ       string         // in, none, string, nullable-string
 
 				buildable = UnsafeBuildableFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				builder = UnsafeBuilderFromGlibNone(unsafe.Pointer(carg1))
@@ -13263,7 +13312,7 @@ func UnsafeApplyBuildableOverrides[Instance Buildable](gclass unsafe.Pointer, ov
 			"_gotk4_gtk4_Buildable_get_id",
 			func(carg0 *C.GtkBuildable) (cret *C.char) {
 				var buildable Instance // go GtkBuildable subclass
-				var goret     string   // return, none, string, casted *C.gchar
+				var goret     string   // return, none, string
 
 				buildable = UnsafeBuildableFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
@@ -13285,7 +13334,7 @@ func UnsafeApplyBuildableOverrides[Instance Buildable](gclass unsafe.Pointer, ov
 			func(carg0 *C.GtkBuildable, carg1 *C.GtkBuilder, carg2 *C.char) (cret *C.GObject) {
 				var buildable Instance       // go GtkBuildable subclass
 				var builder   Builder        // in, none, converted
-				var childname string         // in, none, string, casted *C.gchar
+				var childname string         // in, none, string
 				var goret     gobject.Object // return, none, converted
 
 				buildable = UnsafeBuildableFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
@@ -13326,7 +13375,7 @@ func UnsafeApplyBuildableOverrides[Instance Buildable](gclass unsafe.Pointer, ov
 			func(carg0 *C.GtkBuildable, carg1 *C.GtkBuilder, carg2 *C.char, carg3 *C.GValue) {
 				var buildable Instance       // go GtkBuildable subclass
 				var builder   Builder        // in, none, converted
-				var name      string         // in, none, string, casted *C.gchar
+				var name      string         // in, none, string
 				var value     *gobject.Value // in, none, converted
 
 				buildable = UnsafeBuildableFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
@@ -13346,7 +13395,7 @@ func UnsafeApplyBuildableOverrides[Instance Buildable](gclass unsafe.Pointer, ov
 			"_gotk4_gtk4_Buildable_set_id",
 			func(carg0 *C.GtkBuildable, carg1 *C.char) {
 				var buildable Instance // go GtkBuildable subclass
-				var id        string   // in, none, string, casted *C.gchar
+				var id        string   // in, none, string
 
 				buildable = UnsafeBuildableFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				id = C.GoString((*C.char)(unsafe.Pointer(carg1)))
@@ -13358,7 +13407,8 @@ func UnsafeApplyBuildableOverrides[Instance Buildable](gclass unsafe.Pointer, ov
 }
 
 // ParentAddChild calls the default implementations of the add_child virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- builder Builder: a `GtkBuilder` 
@@ -13390,7 +13440,8 @@ func (buildable *BuildableInstance) ParentAddChild(builder Builder, child gobjec
 }
 
 // ParentGetID calls the default implementations of the get_id virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret string 
@@ -13399,7 +13450,7 @@ func (buildable *BuildableInstance) ParentAddChild(builder Builder, child gobjec
 //   if you implement @set_id.
 func (buildable *BuildableInstance) ParentGetID() string {
 	var carg0 *C.GtkBuildable
-	var cret  *C.char // return, none, string, casted *C.gchar
+	var cret  *C.char // return, none, string
 
 	parentclass := (*C.GtkBuildableIface)(classdata.PeekParentInterface(UnsafeBuildableToGlibNone(buildable), uint64(TypeBuildable)))
 
@@ -13414,7 +13465,8 @@ func (buildable *BuildableInstance) ParentGetID() string {
 }
 
 // ParentGetInternalChild calls the default implementations of the get_internal_child virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- builder Builder: a `GtkBuilder` 
@@ -13428,7 +13480,7 @@ func (buildable *BuildableInstance) ParentGetID() string {
 func (buildable *BuildableInstance) ParentGetInternalChild(builder Builder, childname string) gobject.Object {
 	var carg0 *C.GtkBuildable
 	var carg1 *C.GtkBuilder // in, none, converted
-	var carg2 *C.char       // in, none, string, casted *C.gchar
+	var carg2 *C.char       // in, none, string
 	var cret  *C.GObject    // return, none, converted
 
 	parentclass := (*C.GtkBuildableIface)(classdata.PeekParentInterface(UnsafeBuildableToGlibNone(buildable), uint64(TypeBuildable)))
@@ -13450,7 +13502,8 @@ func (buildable *BuildableInstance) ParentGetInternalChild(builder Builder, chil
 }
 
 // ParentParserFinished calls the default implementations of the parser_finished virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- builder Builder 
@@ -13473,7 +13526,8 @@ func (buildable *BuildableInstance) ParentParserFinished(builder Builder) {
 }
 
 // ParentSetBuildableProperty calls the default implementations of the set_buildable_property virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- builder Builder 
@@ -13488,7 +13542,7 @@ func (buildable *BuildableInstance) ParentParserFinished(builder Builder) {
 func (buildable *BuildableInstance) ParentSetBuildableProperty(builder Builder, name string, value *gobject.Value) {
 	var carg0 *C.GtkBuildable
 	var carg1 *C.GtkBuilder // in, none, converted
-	var carg2 *C.char       // in, none, string, casted *C.gchar
+	var carg2 *C.char       // in, none, string
 	var carg3 *C.GValue     // in, none, converted
 
 	parentclass := (*C.GtkBuildableIface)(classdata.PeekParentInterface(UnsafeBuildableToGlibNone(buildable), uint64(TypeBuildable)))
@@ -13506,7 +13560,8 @@ func (buildable *BuildableInstance) ParentSetBuildableProperty(builder Builder, 
 }
 
 // ParentSetID calls the default implementations of the set_id virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- id string 
@@ -13517,7 +13572,7 @@ func (buildable *BuildableInstance) ParentSetBuildableProperty(builder Builder, 
 //   attribute to it.
 func (buildable *BuildableInstance) ParentSetID(id string) {
 	var carg0 *C.GtkBuildable
-	var carg1 *C.char // in, none, string, casted *C.gchar
+	var carg1 *C.char // in, none, string
 
 	parentclass := (*C.GtkBuildableIface)(classdata.PeekParentInterface(UnsafeBuildableToGlibNone(buildable), uint64(TypeBuildable)))
 
@@ -13532,7 +13587,7 @@ func (buildable *BuildableInstance) ParentSetID(id string) {
 // BuilderScopeInstance is the instance type used by all types implementing GtkBuilderScope. It is used internally by the bindings. Users should use the interface [BuilderScope] instead.
 type BuilderScopeInstance struct {
 	_ [0]func() // equal guard
-	gobject.ObjectInstance
+	Instance gobject.ObjectInstance
 }
 
 var _ BuilderScope = (*BuilderScopeInstance)(nil)
@@ -13558,13 +13613,13 @@ var _ BuilderScope = (*BuilderScopeInstance)(nil)
 // may want to (partially) derive from or fall back to a [class@Gtk.BuilderCScope],
 // as that class implements support for automatic lookups from C symbols.
 type BuilderScope interface {
-	gobject.Object
 	upcastToGtkBuilderScope() *BuilderScopeInstance
 
 	// chain up virtual methods:
 
 	// ParentGetTypeFromFunction calls the default implementations of the get_type_from_function virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- builder Builder 
@@ -13581,7 +13636,8 @@ type BuilderScope interface {
 	//   The default implementation will fail and just return %G_TYPE_INVALID.
 	ParentGetTypeFromFunction(builder Builder, functionName string) gobject.Type
 	// ParentGetTypeFromName calls the default implementations of the get_type_from_name virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- builder Builder 
@@ -13603,7 +13659,7 @@ var _ BuilderScope = (*BuilderScopeInstance)(nil)
 
 func unsafeWrapBuilderScope(base *gobject.ObjectInstance) *BuilderScopeInstance {
 	return &BuilderScopeInstance{
-		ObjectInstance: *base,
+		Instance: *base,
 	}
 }
 
@@ -13633,19 +13689,20 @@ func UnsafeBuilderScopeFromGlibBorrow(c unsafe.Pointer) BuilderScope {
 // UnsafeBuilderScopeToGlibNone is used to convert the instance to it's C value GtkBuilderScope. This is used by the bindings internally.
 func UnsafeBuilderScopeToGlibNone(c BuilderScope) unsafe.Pointer {
 	i := c.upcastToGtkBuilderScope()
-	return gobject.UnsafeObjectToGlibNone(i)
+	return gobject.UnsafeObjectToGlibNone(&i.Instance)
 }
 
 // UnsafeBuilderScopeToGlibFull is used to convert the instance to it's C value GtkBuilderScope, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeBuilderScopeToGlibFull(c BuilderScope) unsafe.Pointer {
 	i := c.upcastToGtkBuilderScope()
-	return gobject.UnsafeObjectToGlibFull(i)
+	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
 // BuilderScopeOverrides is the struct used to override the default implementation of virtual methods.
 // it is generic over the extending instance type.
 type BuilderScopeOverrides[Instance BuilderScope] struct {
-	// GetTypeFromFunction allows you to override the implementation of the virtual method get_type_from_function.
+	// // GetTypeFromFunction allows you to override the implementation of the virtual method get_type_from_function.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- builder Builder 
@@ -13661,7 +13718,8 @@ type BuilderScopeOverrides[Instance BuilderScope] struct {
 	//   The C implementation will use dlsym() and call the resulting function as a `GTypeFunc`.
 	//   The default implementation will fail and just return %G_TYPE_INVALID.
 	GetTypeFromFunction func(Instance, Builder, string) gobject.Type
-	// GetTypeFromName allows you to override the implementation of the virtual method get_type_from_name.
+	// // GetTypeFromName allows you to override the implementation of the virtual method get_type_from_name.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- builder Builder 
@@ -13692,7 +13750,7 @@ func UnsafeApplyBuilderScopeOverrides[Instance BuilderScope](gclass unsafe.Point
 			func(carg0 *C.GtkBuilderScope, carg1 *C.GtkBuilder, carg2 *C.char) (cret C.GType) {
 				var self         Instance     // go GtkBuilderScope subclass
 				var builder      Builder      // in, none, converted
-				var functionName string       // in, none, string, casted *C.gchar
+				var functionName string       // in, none, string
 				var goret        gobject.Type // return, none, casted, alias
 
 				self = UnsafeBuilderScopeFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
@@ -13716,7 +13774,7 @@ func UnsafeApplyBuilderScopeOverrides[Instance BuilderScope](gclass unsafe.Point
 			func(carg0 *C.GtkBuilderScope, carg1 *C.GtkBuilder, carg2 *C.char) (cret C.GType) {
 				var self     Instance     // go GtkBuilderScope subclass
 				var builder  Builder      // in, none, converted
-				var typeName string       // in, none, string, casted *C.gchar
+				var typeName string       // in, none, string
 				var goret    gobject.Type // return, none, casted, alias
 
 				self = UnsafeBuilderScopeFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
@@ -13734,7 +13792,8 @@ func UnsafeApplyBuilderScopeOverrides[Instance BuilderScope](gclass unsafe.Point
 }
 
 // ParentGetTypeFromFunction calls the default implementations of the get_type_from_function virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- builder Builder 
@@ -13752,7 +13811,7 @@ func UnsafeApplyBuilderScopeOverrides[Instance BuilderScope](gclass unsafe.Point
 func (self *BuilderScopeInstance) ParentGetTypeFromFunction(builder Builder, functionName string) gobject.Type {
 	var carg0 *C.GtkBuilderScope
 	var carg1 *C.GtkBuilder // in, none, converted
-	var carg2 *C.char       // in, none, string, casted *C.gchar
+	var carg2 *C.char       // in, none, string
 	var cret  C.GType       // return, none, casted, alias
 
 	parentclass := (*C.GtkBuilderScopeInterface)(classdata.PeekParentInterface(UnsafeBuilderScopeToGlibNone(self), uint64(TypeBuilderScope)))
@@ -13774,7 +13833,8 @@ func (self *BuilderScopeInstance) ParentGetTypeFromFunction(builder Builder, fun
 }
 
 // ParentGetTypeFromName calls the default implementations of the get_type_from_name virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- builder Builder 
@@ -13792,7 +13852,7 @@ func (self *BuilderScopeInstance) ParentGetTypeFromFunction(builder Builder, fun
 func (self *BuilderScopeInstance) ParentGetTypeFromName(builder Builder, typeName string) gobject.Type {
 	var carg0 *C.GtkBuilderScope
 	var carg1 *C.GtkBuilder // in, none, converted
-	var carg2 *C.char       // in, none, string, casted *C.gchar
+	var carg2 *C.char       // in, none, string
 	var cret  C.GType       // return, none, casted, alias
 
 	parentclass := (*C.GtkBuilderScopeInterface)(classdata.PeekParentInterface(UnsafeBuilderScopeToGlibNone(self), uint64(TypeBuilderScope)))
@@ -13816,7 +13876,7 @@ func (self *BuilderScopeInstance) ParentGetTypeFromName(builder Builder, typeNam
 // ConstraintTargetInstance is the instance type used by all types implementing GtkConstraintTarget. It is used internally by the bindings. Users should use the interface [ConstraintTarget] instead.
 type ConstraintTargetInstance struct {
 	_ [0]func() // equal guard
-	gobject.ObjectInstance
+	Instance gobject.ObjectInstance
 }
 
 var _ ConstraintTarget = (*ConstraintTargetInstance)(nil)
@@ -13828,7 +13888,6 @@ var _ ConstraintTarget = (*ConstraintTargetInstance)(nil)
 // 
 // Besides `GtkWidget`, it is also implemented by `GtkConstraintGuide`.
 type ConstraintTarget interface {
-	gobject.Object
 	upcastToGtkConstraintTarget() *ConstraintTargetInstance
 
 	// chain up virtual methods:
@@ -13838,7 +13897,7 @@ var _ ConstraintTarget = (*ConstraintTargetInstance)(nil)
 
 func unsafeWrapConstraintTarget(base *gobject.ObjectInstance) *ConstraintTargetInstance {
 	return &ConstraintTargetInstance{
-		ObjectInstance: *base,
+		Instance: *base,
 	}
 }
 
@@ -13868,13 +13927,13 @@ func UnsafeConstraintTargetFromGlibBorrow(c unsafe.Pointer) ConstraintTarget {
 // UnsafeConstraintTargetToGlibNone is used to convert the instance to it's C value GtkConstraintTarget. This is used by the bindings internally.
 func UnsafeConstraintTargetToGlibNone(c ConstraintTarget) unsafe.Pointer {
 	i := c.upcastToGtkConstraintTarget()
-	return gobject.UnsafeObjectToGlibNone(i)
+	return gobject.UnsafeObjectToGlibNone(&i.Instance)
 }
 
 // UnsafeConstraintTargetToGlibFull is used to convert the instance to it's C value GtkConstraintTarget, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeConstraintTargetToGlibFull(c ConstraintTarget) unsafe.Pointer {
 	i := c.upcastToGtkConstraintTarget()
-	return gobject.UnsafeObjectToGlibFull(i)
+	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
 // ConstraintTargetOverrides is the struct used to override the default implementation of virtual methods.
@@ -13890,7 +13949,7 @@ func UnsafeApplyConstraintTargetOverrides[Instance ConstraintTarget](gclass unsa
 // EditableTextWidgetInstance is the instance type used by all types implementing GtkEditable. It is used internally by the bindings. Users should use the interface [EditableTextWidget] instead.
 type EditableTextWidgetInstance struct {
 	_ [0]func() // equal guard
-	gobject.ObjectInstance
+	Instance gobject.ObjectInstance
 }
 
 var _ EditableTextWidget = (*EditableTextWidgetInstance)(nil)
@@ -14028,7 +14087,6 @@ var _ EditableTextWidget = (*EditableTextWidgetInstance)(nil)
 // 
 // This type has been renamed from Editable.
 type EditableTextWidget interface {
-	gobject.Object
 	upcastToGtkEditable() *EditableTextWidgetInstance
 
 	// ConnectChanged connects the provided callback to the "changed" signal
@@ -14071,7 +14129,7 @@ var _ EditableTextWidget = (*EditableTextWidgetInstance)(nil)
 
 func unsafeWrapEditableTextWidget(base *gobject.ObjectInstance) *EditableTextWidgetInstance {
 	return &EditableTextWidgetInstance{
-		ObjectInstance: *base,
+		Instance: *base,
 	}
 }
 
@@ -14101,13 +14159,13 @@ func UnsafeEditableTextWidgetFromGlibBorrow(c unsafe.Pointer) EditableTextWidget
 // UnsafeEditableTextWidgetToGlibNone is used to convert the instance to it's C value GtkEditable. This is used by the bindings internally.
 func UnsafeEditableTextWidgetToGlibNone(c EditableTextWidget) unsafe.Pointer {
 	i := c.upcastToGtkEditable()
-	return gobject.UnsafeObjectToGlibNone(i)
+	return gobject.UnsafeObjectToGlibNone(&i.Instance)
 }
 
 // UnsafeEditableTextWidgetToGlibFull is used to convert the instance to it's C value GtkEditable, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeEditableTextWidgetToGlibFull(c EditableTextWidget) unsafe.Pointer {
 	i := c.upcastToGtkEditable()
-	return gobject.UnsafeObjectToGlibFull(i)
+	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
 // EditableTextWidgetDelegateGetProperty wraps gtk_editable_delegate_get_property
@@ -14211,7 +14269,7 @@ func EditableTextWidgetDelegateSetProperty(object gobject.Object, propId uint, v
 // the new content, and may cause multiple ::notify::text signals
 // to be emitted).
 func (o *EditableTextWidgetInstance) ConnectChanged(fn func(EditableTextWidget)) gobject.SignalHandle {
-	return o.Connect("changed", fn)
+	return o.Instance.Connect("changed", fn)
 }
 
 // ConnectDeleteText connects the provided callback to the "delete-text" signal
@@ -14226,7 +14284,7 @@ func (o *EditableTextWidgetInstance) ConnectChanged(fn func(EditableTextWidget))
 // The @start_pos and @end_pos parameters are interpreted as for
 // [method@Gtk.Editable.delete_text].
 func (o *EditableTextWidgetInstance) ConnectDeleteText(fn func(EditableTextWidget, int32, int32)) gobject.SignalHandle {
-	return o.Connect("delete-text", fn)
+	return o.Instance.Connect("delete-text", fn)
 }
 
 // ConnectInsertText connects the provided callback to the "insert-text" signal
@@ -14238,7 +14296,7 @@ func (o *EditableTextWidgetInstance) ConnectDeleteText(fn func(EditableTextWidge
 // stopping the signal with g_signal_stop_emission(), it is possible
 // to modify the inserted text, or prevent it from being inserted entirely.
 func (o *EditableTextWidgetInstance) ConnectInsertText(fn func(EditableTextWidget, string, int32, unsafe.Pointer)) gobject.SignalHandle {
-	return o.Connect("insert-text", fn)
+	return o.Instance.Connect("insert-text", fn)
 }
 
 // EditableTextWidgetOverrides is the struct used to override the default implementation of virtual methods.
@@ -14254,7 +14312,7 @@ func UnsafeApplyEditableTextWidgetOverrides[Instance EditableTextWidget](gclass 
 // NativeSurfaceInstance is the instance type used by all types implementing GtkNative. It is used internally by the bindings. Users should use the interface [NativeSurface] instead.
 type NativeSurfaceInstance struct {
 	_ [0]func() // equal guard
-	gobject.ObjectInstance
+	Instance gobject.ObjectInstance
 }
 
 var _ NativeSurface = (*NativeSurfaceInstance)(nil)
@@ -14279,7 +14337,6 @@ var _ NativeSurface = (*NativeSurfaceInstance)(nil)
 // 
 // This type has been renamed from Native.
 type NativeSurface interface {
-	gobject.Object
 	upcastToGtkNative() *NativeSurfaceInstance
 
 	// chain up virtual methods:
@@ -14289,7 +14346,7 @@ var _ NativeSurface = (*NativeSurfaceInstance)(nil)
 
 func unsafeWrapNativeSurface(base *gobject.ObjectInstance) *NativeSurfaceInstance {
 	return &NativeSurfaceInstance{
-		ObjectInstance: *base,
+		Instance: *base,
 	}
 }
 
@@ -14319,13 +14376,13 @@ func UnsafeNativeSurfaceFromGlibBorrow(c unsafe.Pointer) NativeSurface {
 // UnsafeNativeSurfaceToGlibNone is used to convert the instance to it's C value GtkNative. This is used by the bindings internally.
 func UnsafeNativeSurfaceToGlibNone(c NativeSurface) unsafe.Pointer {
 	i := c.upcastToGtkNative()
-	return gobject.UnsafeObjectToGlibNone(i)
+	return gobject.UnsafeObjectToGlibNone(&i.Instance)
 }
 
 // UnsafeNativeSurfaceToGlibFull is used to convert the instance to it's C value GtkNative, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeNativeSurfaceToGlibFull(c NativeSurface) unsafe.Pointer {
 	i := c.upcastToGtkNative()
-	return gobject.UnsafeObjectToGlibFull(i)
+	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
 // NativeSurfaceOverrides is the struct used to override the default implementation of virtual methods.
@@ -14341,7 +14398,7 @@ func UnsafeApplyNativeSurfaceOverrides[Instance NativeSurface](gclass unsafe.Poi
 // OrientableInstance is the instance type used by all types implementing GtkOrientable. It is used internally by the bindings. Users should use the interface [Orientable] instead.
 type OrientableInstance struct {
 	_ [0]func() // equal guard
-	gobject.ObjectInstance
+	Instance gobject.ObjectInstance
 }
 
 var _ Orientable = (*OrientableInstance)(nil)
@@ -14360,7 +14417,6 @@ var _ Orientable = (*OrientableInstance)(nil)
 // automatically acquire the `horizontal` or `vertical` CSS class depending on
 // the value of the [property@Gtk.Orientable:orientation] property.
 type Orientable interface {
-	gobject.Object
 	upcastToGtkOrientable() *OrientableInstance
 
 	// GetOrientation wraps gtk_orientable_get_orientation
@@ -14387,7 +14443,7 @@ var _ Orientable = (*OrientableInstance)(nil)
 
 func unsafeWrapOrientable(base *gobject.ObjectInstance) *OrientableInstance {
 	return &OrientableInstance{
-		ObjectInstance: *base,
+		Instance: *base,
 	}
 }
 
@@ -14417,13 +14473,13 @@ func UnsafeOrientableFromGlibBorrow(c unsafe.Pointer) Orientable {
 // UnsafeOrientableToGlibNone is used to convert the instance to it's C value GtkOrientable. This is used by the bindings internally.
 func UnsafeOrientableToGlibNone(c Orientable) unsafe.Pointer {
 	i := c.upcastToGtkOrientable()
-	return gobject.UnsafeObjectToGlibNone(i)
+	return gobject.UnsafeObjectToGlibNone(&i.Instance)
 }
 
 // UnsafeOrientableToGlibFull is used to convert the instance to it's C value GtkOrientable, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeOrientableToGlibFull(c Orientable) unsafe.Pointer {
 	i := c.upcastToGtkOrientable()
-	return gobject.UnsafeObjectToGlibFull(i)
+	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
 // GetOrientation wraps gtk_orientable_get_orientation
@@ -14481,7 +14537,7 @@ func UnsafeApplyOrientableOverrides[Instance Orientable](gclass unsafe.Pointer, 
 // ScrollableInstance is the instance type used by all types implementing GtkScrollable. It is used internally by the bindings. Users should use the interface [Scrollable] instead.
 type ScrollableInstance struct {
 	_ [0]func() // equal guard
-	gobject.ObjectInstance
+	Instance gobject.ObjectInstance
 }
 
 var _ Scrollable = (*ScrollableInstance)(nil)
@@ -14517,7 +14573,6 @@ var _ Scrollable = (*ScrollableInstance)(nil)
 // - When any of the adjustments emits the [signal@Gtk.Adjustment::value-changed]
 //   signal, the scrollable widget should scroll its contents.
 type Scrollable interface {
-	gobject.Object
 	upcastToGtkScrollable() *ScrollableInstance
 
 	// GetBorder wraps gtk_scrollable_get_border
@@ -14608,7 +14663,8 @@ type Scrollable interface {
 	// chain up virtual methods:
 
 	// ParentGetBorder calls the default implementations of the get_border virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- border Border: return location for the results 
@@ -14627,7 +14683,7 @@ var _ Scrollable = (*ScrollableInstance)(nil)
 
 func unsafeWrapScrollable(base *gobject.ObjectInstance) *ScrollableInstance {
 	return &ScrollableInstance{
-		ObjectInstance: *base,
+		Instance: *base,
 	}
 }
 
@@ -14657,13 +14713,13 @@ func UnsafeScrollableFromGlibBorrow(c unsafe.Pointer) Scrollable {
 // UnsafeScrollableToGlibNone is used to convert the instance to it's C value GtkScrollable. This is used by the bindings internally.
 func UnsafeScrollableToGlibNone(c Scrollable) unsafe.Pointer {
 	i := c.upcastToGtkScrollable()
-	return gobject.UnsafeObjectToGlibNone(i)
+	return gobject.UnsafeObjectToGlibNone(&i.Instance)
 }
 
 // UnsafeScrollableToGlibFull is used to convert the instance to it's C value GtkScrollable, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeScrollableToGlibFull(c Scrollable) unsafe.Pointer {
 	i := c.upcastToGtkScrollable()
-	return gobject.UnsafeObjectToGlibFull(i)
+	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
 // GetBorder wraps gtk_scrollable_get_border
@@ -14694,7 +14750,7 @@ func (scrollable *ScrollableInstance) GetBorder() (Border, bool) {
 
 	_ = border
 	_ = carg1
-	panic("unimplemented conversion of Border (GtkBorder)")
+	panic("unimplemented conversion of Border (C.GtkBorder)")
 	if cret != 0 {
 		goret = true
 	}
@@ -14887,7 +14943,8 @@ func (scrollable *ScrollableInstance) SetVScrollPolicy(policy ScrollablePolicy) 
 // ScrollableOverrides is the struct used to override the default implementation of virtual methods.
 // it is generic over the extending instance type.
 type ScrollableOverrides[Instance Scrollable] struct {
-	// GetBorder allows you to override the implementation of the virtual method get_border.
+	// // GetBorder allows you to override the implementation of the virtual method get_border.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- border Border: return location for the results 
@@ -14923,7 +14980,7 @@ func UnsafeApplyScrollableOverrides[Instance Scrollable](gclass unsafe.Pointer, 
 
 				_ = border
 				_ = carg1
-				panic("unimplemented conversion of Border (GtkBorder)")
+				panic("unimplemented conversion of Border (C.GtkBorder)")
 				if goret {
 					cret = C.TRUE
 				}
@@ -14935,7 +14992,8 @@ func UnsafeApplyScrollableOverrides[Instance Scrollable](gclass unsafe.Pointer, 
 }
 
 // ParentGetBorder calls the default implementations of the get_border virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- border Border: return location for the results 
@@ -14962,7 +15020,7 @@ func (scrollable *ScrollableInstance) ParentGetBorder() (Border, bool) {
 
 	_ = border
 	_ = carg1
-	panic("unimplemented conversion of Border (GtkBorder)")
+	panic("unimplemented conversion of Border (C.GtkBorder)")
 	if cret != 0 {
 		goret = true
 	}
@@ -14973,7 +15031,7 @@ func (scrollable *ScrollableInstance) ParentGetBorder() (Border, bool) {
 // SectionModelInstance is the instance type used by all types implementing GtkSectionModel. It is used internally by the bindings. Users should use the interface [SectionModel] instead.
 type SectionModelInstance struct {
 	_ [0]func() // equal guard
-	gobject.ObjectInstance
+	Instance gobject.ObjectInstance
 }
 
 var _ SectionModel = (*SectionModelInstance)(nil)
@@ -14996,7 +15054,6 @@ var _ SectionModel = (*SectionModelInstance)(nil)
 // The [signal@Gio.ListModel::items-changed] signal has the same effect, all sections in
 // that range are invalidated, too.
 type SectionModel interface {
-	gobject.Object
 	upcastToGtkSectionModel() *SectionModelInstance
 
 	// GetSection wraps gtk_section_model_get_section
@@ -15057,7 +15114,8 @@ type SectionModel interface {
 	// chain up virtual methods:
 
 	// ParentGetSection calls the default implementations of the get_section virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- position uint: the position of the item to query 
@@ -15080,7 +15138,7 @@ var _ SectionModel = (*SectionModelInstance)(nil)
 
 func unsafeWrapSectionModel(base *gobject.ObjectInstance) *SectionModelInstance {
 	return &SectionModelInstance{
-		ObjectInstance: *base,
+		Instance: *base,
 	}
 }
 
@@ -15110,13 +15168,13 @@ func UnsafeSectionModelFromGlibBorrow(c unsafe.Pointer) SectionModel {
 // UnsafeSectionModelToGlibNone is used to convert the instance to it's C value GtkSectionModel. This is used by the bindings internally.
 func UnsafeSectionModelToGlibNone(c SectionModel) unsafe.Pointer {
 	i := c.upcastToGtkSectionModel()
-	return gobject.UnsafeObjectToGlibNone(i)
+	return gobject.UnsafeObjectToGlibNone(&i.Instance)
 }
 
 // UnsafeSectionModelToGlibFull is used to convert the instance to it's C value GtkSectionModel, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeSectionModelToGlibFull(c SectionModel) unsafe.Pointer {
 	i := c.upcastToGtkSectionModel()
-	return gobject.UnsafeObjectToGlibFull(i)
+	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
 // GetSection wraps gtk_section_model_get_section
@@ -15208,13 +15266,14 @@ func (self *SectionModelInstance) SectionsChanged(position uint, nItems uint) {
 // [signal@Gtk.SectionModel::sections-changed] signal for all the items
 // it covers.
 func (o *SectionModelInstance) ConnectSectionsChanged(fn func(SectionModel, uint, uint)) gobject.SignalHandle {
-	return o.Connect("sections-changed", fn)
+	return o.Instance.Connect("sections-changed", fn)
 }
 
 // SectionModelOverrides is the struct used to override the default implementation of virtual methods.
 // it is generic over the extending instance type.
 type SectionModelOverrides[Instance SectionModel] struct {
-	// GetSection allows you to override the implementation of the virtual method get_section.
+	// // GetSection allows you to override the implementation of the virtual method get_section.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- position uint: the position of the item to query 
@@ -15262,7 +15321,8 @@ func UnsafeApplySectionModelOverrides[Instance SectionModel](gclass unsafe.Point
 }
 
 // ParentGetSection calls the default implementations of the get_section virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- position uint: the position of the item to query 
@@ -15304,7 +15364,7 @@ func (self *SectionModelInstance) ParentGetSection(position uint) (uint, uint) {
 // SelectionModelInstance is the instance type used by all types implementing GtkSelectionModel. It is used internally by the bindings. Users should use the interface [SelectionModel] instead.
 type SelectionModelInstance struct {
 	_ [0]func() // equal guard
-	gobject.ObjectInstance
+	Instance gobject.ObjectInstance
 }
 
 var _ SelectionModel = (*SelectionModelInstance)(nil)
@@ -15349,7 +15409,6 @@ var _ SelectionModel = (*SelectionModelInstance)(nil)
 // Selections may happen asynchronously, so the only reliable way to find out
 // when an item was selected is to listen to the signals that indicate selection.
 type SelectionModel interface {
-	gobject.Object
 	upcastToGtkSelectionModel() *SelectionModelInstance
 
 	// GetSelection wraps gtk_selection_model_get_selection
@@ -15533,7 +15592,8 @@ type SelectionModel interface {
 	// chain up virtual methods:
 
 	// ParentGetSelectionInRange calls the default implementations of the get_selection_in_range virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- position uint: start of the queried range 
@@ -15552,7 +15612,8 @@ type SelectionModel interface {
 	// signal.
 	ParentGetSelectionInRange(position uint, nItems uint) *Bitset
 	// ParentIsSelected calls the default implementations of the is_selected virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- position uint: the position of the item to query 
@@ -15564,7 +15625,8 @@ type SelectionModel interface {
 	// Checks if the given item is selected.
 	ParentIsSelected(position uint) bool
 	// ParentSelectAll calls the default implementations of the select_all virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
@@ -15572,7 +15634,8 @@ type SelectionModel interface {
 	// Requests to select all items in the model.
 	ParentSelectAll() bool
 	// ParentSelectItem calls the default implementations of the select_item virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- position uint: the position of the item to select 
@@ -15585,7 +15648,8 @@ type SelectionModel interface {
 	// Requests to select an item in the model.
 	ParentSelectItem(position uint, unselectRest bool) bool
 	// ParentSelectRange calls the default implementations of the select_range virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- position uint: the first item to select 
@@ -15599,7 +15663,8 @@ type SelectionModel interface {
 	// Requests to select a range of items in the model.
 	ParentSelectRange(position uint, nItems uint, unselectRest bool) bool
 	// ParentSetSelection calls the default implementations of the set_selection virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- selected *Bitset: bitmask specifying if items should be selected or unselected 
@@ -15644,7 +15709,8 @@ type SelectionModel interface {
 	// be selected.
 	ParentSetSelection(selected *Bitset, mask *Bitset) bool
 	// ParentUnselectAll calls the default implementations of the unselect_all virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
@@ -15652,7 +15718,8 @@ type SelectionModel interface {
 	// Requests to unselect all items in the model.
 	ParentUnselectAll() bool
 	// ParentUnselectItem calls the default implementations of the unselect_item virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- position uint: the position of the item to unselect 
@@ -15664,7 +15731,8 @@ type SelectionModel interface {
 	// Requests to unselect an item in the model.
 	ParentUnselectItem(position uint) bool
 	// ParentUnselectRange calls the default implementations of the unselect_range virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- position uint: the first item to unselect 
@@ -15682,7 +15750,7 @@ var _ SelectionModel = (*SelectionModelInstance)(nil)
 
 func unsafeWrapSelectionModel(base *gobject.ObjectInstance) *SelectionModelInstance {
 	return &SelectionModelInstance{
-		ObjectInstance: *base,
+		Instance: *base,
 	}
 }
 
@@ -15712,13 +15780,13 @@ func UnsafeSelectionModelFromGlibBorrow(c unsafe.Pointer) SelectionModel {
 // UnsafeSelectionModelToGlibNone is used to convert the instance to it's C value GtkSelectionModel. This is used by the bindings internally.
 func UnsafeSelectionModelToGlibNone(c SelectionModel) unsafe.Pointer {
 	i := c.upcastToGtkSelectionModel()
-	return gobject.UnsafeObjectToGlibNone(i)
+	return gobject.UnsafeObjectToGlibNone(&i.Instance)
 }
 
 // UnsafeSelectionModelToGlibFull is used to convert the instance to it's C value GtkSelectionModel, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeSelectionModelToGlibFull(c SelectionModel) unsafe.Pointer {
 	i := c.upcastToGtkSelectionModel()
-	return gobject.UnsafeObjectToGlibFull(i)
+	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
 // GetSelection wraps gtk_selection_model_get_selection
@@ -16121,13 +16189,14 @@ func (model *SelectionModelInstance) UnselectRange(position uint, nItems uint) b
 // a model to change the selection state of any of the items in the selection
 // model, though it would be rather useless to emit such a signal.
 func (o *SelectionModelInstance) ConnectSelectionChanged(fn func(SelectionModel, uint, uint)) gobject.SignalHandle {
-	return o.Connect("selection-changed", fn)
+	return o.Instance.Connect("selection-changed", fn)
 }
 
 // SelectionModelOverrides is the struct used to override the default implementation of virtual methods.
 // it is generic over the extending instance type.
 type SelectionModelOverrides[Instance SelectionModel] struct {
-	// GetSelectionInRange allows you to override the implementation of the virtual method get_selection_in_range.
+	// // GetSelectionInRange allows you to override the implementation of the virtual method get_selection_in_range.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- position uint: start of the queried range 
@@ -16145,7 +16214,8 @@ type SelectionModelOverrides[Instance SelectionModel] struct {
 	// case is in response to the [signal@Gtk.SelectionModel::selection-changed]
 	// signal.
 	GetSelectionInRange func(Instance, uint, uint) *Bitset
-	// IsSelected allows you to override the implementation of the virtual method is_selected.
+	// // IsSelected allows you to override the implementation of the virtual method is_selected.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- position uint: the position of the item to query 
@@ -16156,14 +16226,16 @@ type SelectionModelOverrides[Instance SelectionModel] struct {
 	//
 	// Checks if the given item is selected.
 	IsSelected func(Instance, uint) bool
-	// SelectAll allows you to override the implementation of the virtual method select_all.
+	// // SelectAll allows you to override the implementation of the virtual method select_all.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
 	//
 	// Requests to select all items in the model.
 	SelectAll func(Instance) bool
-	// SelectItem allows you to override the implementation of the virtual method select_item.
+	// // SelectItem allows you to override the implementation of the virtual method select_item.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- position uint: the position of the item to select 
@@ -16175,7 +16247,8 @@ type SelectionModelOverrides[Instance SelectionModel] struct {
 	//
 	// Requests to select an item in the model.
 	SelectItem func(Instance, uint, bool) bool
-	// SelectRange allows you to override the implementation of the virtual method select_range.
+	// // SelectRange allows you to override the implementation of the virtual method select_range.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- position uint: the first item to select 
@@ -16188,7 +16261,8 @@ type SelectionModelOverrides[Instance SelectionModel] struct {
 	//
 	// Requests to select a range of items in the model.
 	SelectRange func(Instance, uint, uint, bool) bool
-	// SetSelection allows you to override the implementation of the virtual method set_selection.
+	// // SetSelection allows you to override the implementation of the virtual method set_selection.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- selected *Bitset: bitmask specifying if items should be selected or unselected 
@@ -16232,14 +16306,16 @@ type SelectionModelOverrides[Instance SelectionModel] struct {
 	// same bitset, which would mean that every item in the set should
 	// be selected.
 	SetSelection func(Instance, *Bitset, *Bitset) bool
-	// UnselectAll allows you to override the implementation of the virtual method unselect_all.
+	// // UnselectAll allows you to override the implementation of the virtual method unselect_all.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
 	//
 	// Requests to unselect all items in the model.
 	UnselectAll func(Instance) bool
-	// UnselectItem allows you to override the implementation of the virtual method unselect_item.
+	// // UnselectItem allows you to override the implementation of the virtual method unselect_item.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- position uint: the position of the item to unselect 
@@ -16250,7 +16326,8 @@ type SelectionModelOverrides[Instance SelectionModel] struct {
 	//
 	// Requests to unselect an item in the model.
 	UnselectItem func(Instance, uint) bool
-	// UnselectRange allows you to override the implementation of the virtual method unselect_range.
+	// // UnselectRange allows you to override the implementation of the virtual method unselect_range.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- position uint: the first item to unselect 
@@ -16497,7 +16574,8 @@ func UnsafeApplySelectionModelOverrides[Instance SelectionModel](gclass unsafe.P
 }
 
 // ParentGetSelectionInRange calls the default implementations of the get_selection_in_range virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- position uint: start of the queried range 
@@ -16538,7 +16616,8 @@ func (model *SelectionModelInstance) ParentGetSelectionInRange(position uint, nI
 }
 
 // ParentIsSelected calls the default implementations of the is_selected virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- position uint: the position of the item to query 
@@ -16571,7 +16650,8 @@ func (model *SelectionModelInstance) ParentIsSelected(position uint) bool {
 }
 
 // ParentSelectAll calls the default implementations of the select_all virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -16596,7 +16676,8 @@ func (model *SelectionModelInstance) ParentSelectAll() bool {
 }
 
 // ParentSelectItem calls the default implementations of the select_item virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- position uint: the position of the item to select 
@@ -16635,7 +16716,8 @@ func (model *SelectionModelInstance) ParentSelectItem(position uint, unselectRes
 }
 
 // ParentSelectRange calls the default implementations of the select_range virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- position uint: the first item to select 
@@ -16678,7 +16760,8 @@ func (model *SelectionModelInstance) ParentSelectRange(position uint, nItems uin
 }
 
 // ParentSetSelection calls the default implementations of the set_selection virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- selected *Bitset: bitmask specifying if items should be selected or unselected 
@@ -16747,7 +16830,8 @@ func (model *SelectionModelInstance) ParentSetSelection(selected *Bitset, mask *
 }
 
 // ParentUnselectAll calls the default implementations of the unselect_all virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -16772,7 +16856,8 @@ func (model *SelectionModelInstance) ParentUnselectAll() bool {
 }
 
 // ParentUnselectItem calls the default implementations of the unselect_item virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- position uint: the position of the item to unselect 
@@ -16805,7 +16890,8 @@ func (model *SelectionModelInstance) ParentUnselectItem(position uint) bool {
 }
 
 // ParentUnselectRange calls the default implementations of the unselect_range virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- position uint: the first item to unselect 
@@ -16844,7 +16930,7 @@ func (model *SelectionModelInstance) ParentUnselectRange(position uint, nItems u
 // ShortcutManagerInstance is the instance type used by all types implementing GtkShortcutManager. It is used internally by the bindings. Users should use the interface [ShortcutManager] instead.
 type ShortcutManagerInstance struct {
 	_ [0]func() // equal guard
-	gobject.ObjectInstance
+	Instance gobject.ObjectInstance
 }
 
 var _ ShortcutManager = (*ShortcutManagerInstance)(nil)
@@ -16864,13 +16950,13 @@ var _ ShortcutManager = (*ShortcutManagerInstance)(nil)
 // Every widget that implements `GtkShortcutManager` will be used as a
 // %GTK_SHORTCUT_SCOPE_MANAGED.
 type ShortcutManager interface {
-	gobject.Object
 	upcastToGtkShortcutManager() *ShortcutManagerInstance
 
 	// chain up virtual methods:
 
 	// ParentAddController calls the default implementations of the add_controller virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- controller ShortcutController 
@@ -16878,7 +16964,8 @@ type ShortcutManager interface {
 	// Add a `GtkShortcutController` to be managed.
 	ParentAddController(controller ShortcutController)
 	// ParentRemoveController calls the default implementations of the remove_controller virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- controller ShortcutController 
@@ -16892,7 +16979,7 @@ var _ ShortcutManager = (*ShortcutManagerInstance)(nil)
 
 func unsafeWrapShortcutManager(base *gobject.ObjectInstance) *ShortcutManagerInstance {
 	return &ShortcutManagerInstance{
-		ObjectInstance: *base,
+		Instance: *base,
 	}
 }
 
@@ -16922,26 +17009,28 @@ func UnsafeShortcutManagerFromGlibBorrow(c unsafe.Pointer) ShortcutManager {
 // UnsafeShortcutManagerToGlibNone is used to convert the instance to it's C value GtkShortcutManager. This is used by the bindings internally.
 func UnsafeShortcutManagerToGlibNone(c ShortcutManager) unsafe.Pointer {
 	i := c.upcastToGtkShortcutManager()
-	return gobject.UnsafeObjectToGlibNone(i)
+	return gobject.UnsafeObjectToGlibNone(&i.Instance)
 }
 
 // UnsafeShortcutManagerToGlibFull is used to convert the instance to it's C value GtkShortcutManager, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeShortcutManagerToGlibFull(c ShortcutManager) unsafe.Pointer {
 	i := c.upcastToGtkShortcutManager()
-	return gobject.UnsafeObjectToGlibFull(i)
+	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
 // ShortcutManagerOverrides is the struct used to override the default implementation of virtual methods.
 // it is generic over the extending instance type.
 type ShortcutManagerOverrides[Instance ShortcutManager] struct {
-	// AddController allows you to override the implementation of the virtual method add_controller.
+	// // AddController allows you to override the implementation of the virtual method add_controller.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- controller ShortcutController 
 	//
 	// Add a `GtkShortcutController` to be managed.
 	AddController func(Instance, ShortcutController)
-	// RemoveController allows you to override the implementation of the virtual method remove_controller.
+	// // RemoveController allows you to override the implementation of the virtual method remove_controller.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- controller ShortcutController 
@@ -16992,7 +17081,8 @@ func UnsafeApplyShortcutManagerOverrides[Instance ShortcutManager](gclass unsafe
 }
 
 // ParentAddController calls the default implementations of the add_controller virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- controller ShortcutController 
@@ -17012,7 +17102,8 @@ func (self *ShortcutManagerInstance) ParentAddController(controller ShortcutCont
 }
 
 // ParentRemoveController calls the default implementations of the remove_controller virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- controller ShortcutController 
@@ -17035,7 +17126,7 @@ func (self *ShortcutManagerInstance) ParentRemoveController(controller ShortcutC
 // StyleProviderInstance is the instance type used by all types implementing GtkStyleProvider. It is used internally by the bindings. Users should use the interface [StyleProvider] instead.
 type StyleProviderInstance struct {
 	_ [0]func() // equal guard
-	gobject.ObjectInstance
+	Instance gobject.ObjectInstance
 }
 
 var _ StyleProvider = (*StyleProviderInstance)(nil)
@@ -17052,7 +17143,6 @@ var _ StyleProvider = (*StyleProviderInstance)(nil)
 // GTK uses the `GtkStyleProvider` implementation for CSS in
 // [class@Gtk.CssProvider].
 type StyleProvider interface {
-	gobject.Object
 	upcastToGtkStyleProvider() *StyleProviderInstance
 
 	// ConnectGTKPrivateChanged connects the provided callback to the "gtk-private-changed" signal
@@ -17065,7 +17155,7 @@ var _ StyleProvider = (*StyleProviderInstance)(nil)
 
 func unsafeWrapStyleProvider(base *gobject.ObjectInstance) *StyleProviderInstance {
 	return &StyleProviderInstance{
-		ObjectInstance: *base,
+		Instance: *base,
 	}
 }
 
@@ -17095,18 +17185,18 @@ func UnsafeStyleProviderFromGlibBorrow(c unsafe.Pointer) StyleProvider {
 // UnsafeStyleProviderToGlibNone is used to convert the instance to it's C value GtkStyleProvider. This is used by the bindings internally.
 func UnsafeStyleProviderToGlibNone(c StyleProvider) unsafe.Pointer {
 	i := c.upcastToGtkStyleProvider()
-	return gobject.UnsafeObjectToGlibNone(i)
+	return gobject.UnsafeObjectToGlibNone(&i.Instance)
 }
 
 // UnsafeStyleProviderToGlibFull is used to convert the instance to it's C value GtkStyleProvider, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeStyleProviderToGlibFull(c StyleProvider) unsafe.Pointer {
 	i := c.upcastToGtkStyleProvider()
-	return gobject.UnsafeObjectToGlibFull(i)
+	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
 // ConnectGTKPrivateChanged connects the provided callback to the "gtk-private-changed" signal
 func (o *StyleProviderInstance) ConnectGTKPrivateChanged(fn func(StyleProvider)) gobject.SignalHandle {
-	return o.Connect("gtk-private-changed", fn)
+	return o.Instance.Connect("gtk-private-changed", fn)
 }
 
 // StyleProviderOverrides is the struct used to override the default implementation of virtual methods.
@@ -17122,7 +17212,7 @@ func UnsafeApplyStyleProviderOverrides[Instance StyleProvider](gclass unsafe.Poi
 // SymbolicPaintableInstance is the instance type used by all types implementing GtkSymbolicPaintable. It is used internally by the bindings. Users should use the interface [SymbolicPaintable] instead.
 type SymbolicPaintableInstance struct {
 	_ [0]func() // equal guard
-	gobject.ObjectInstance
+	Instance gobject.ObjectInstance
 }
 
 var _ SymbolicPaintable = (*SymbolicPaintableInstance)(nil)
@@ -17142,7 +17232,6 @@ var _ SymbolicPaintable = (*SymbolicPaintableInstance)(nil)
 // 
 // More colors may be added in the future.
 type SymbolicPaintable interface {
-	gobject.Object
 	upcastToGtkSymbolicPaintable() *SymbolicPaintableInstance
 
 	// SnapshotSymbolic wraps gtk_symbolic_paintable_snapshot_symbolic
@@ -17163,7 +17252,8 @@ type SymbolicPaintable interface {
 	// chain up virtual methods:
 
 	// ParentSnapshotSymbolic calls the default implementations of the snapshot_symbolic virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- snapshot gdk.Snapshot: a `GdkSnapshot` to snapshot to 
@@ -17182,7 +17272,7 @@ var _ SymbolicPaintable = (*SymbolicPaintableInstance)(nil)
 
 func unsafeWrapSymbolicPaintable(base *gobject.ObjectInstance) *SymbolicPaintableInstance {
 	return &SymbolicPaintableInstance{
-		ObjectInstance: *base,
+		Instance: *base,
 	}
 }
 
@@ -17212,13 +17302,13 @@ func UnsafeSymbolicPaintableFromGlibBorrow(c unsafe.Pointer) SymbolicPaintable {
 // UnsafeSymbolicPaintableToGlibNone is used to convert the instance to it's C value GtkSymbolicPaintable. This is used by the bindings internally.
 func UnsafeSymbolicPaintableToGlibNone(c SymbolicPaintable) unsafe.Pointer {
 	i := c.upcastToGtkSymbolicPaintable()
-	return gobject.UnsafeObjectToGlibNone(i)
+	return gobject.UnsafeObjectToGlibNone(&i.Instance)
 }
 
 // UnsafeSymbolicPaintableToGlibFull is used to convert the instance to it's C value GtkSymbolicPaintable, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeSymbolicPaintableToGlibFull(c SymbolicPaintable) unsafe.Pointer {
 	i := c.upcastToGtkSymbolicPaintable()
-	return gobject.UnsafeObjectToGlibFull(i)
+	return gobject.UnsafeObjectToGlibFull(&i.Instance)
 }
 
 // SnapshotSymbolic wraps gtk_symbolic_paintable_snapshot_symbolic
@@ -17237,8 +17327,8 @@ func UnsafeSymbolicPaintableToGlibFull(c SymbolicPaintable) unsafe.Pointer {
 func (paintable *SymbolicPaintableInstance) SnapshotSymbolic(snapshot gdk.Snapshot, width float64, height float64, colors []gdk.RGBA) {
 	var carg0 *C.GtkSymbolicPaintable // in, none, converted
 	var carg1 *C.GdkSnapshot          // in, none, converted
-	var carg2 C.double                // in, none, casted, casted C.gdouble
-	var carg3 C.double                // in, none, casted, casted C.gdouble
+	var carg2 C.double                // in, none, casted
+	var carg3 C.double                // in, none, casted
 	var carg4 *C.GdkRGBA              // in, transfer: none, C Pointers: 1, Name: array[RGBA], array (inner: *typesystem.Record, length-by: carg5)
 	var carg5 C.gsize                 // implicit
 
@@ -17249,7 +17339,7 @@ func (paintable *SymbolicPaintableInstance) SnapshotSymbolic(snapshot gdk.Snapsh
 	_ = colors
 	_ = carg4
 	_ = carg5
-	panic("unimplemented conversion of []gdk.RGBA (const GdkRGBA*)")
+	panic("unimplemented conversion of []gdk.RGBA (*C.GdkRGBA)")
 
 	C.gtk_symbolic_paintable_snapshot_symbolic(carg0, carg1, carg2, carg3, carg4, carg5)
 	runtime.KeepAlive(paintable)
@@ -17262,7 +17352,8 @@ func (paintable *SymbolicPaintableInstance) SnapshotSymbolic(snapshot gdk.Snapsh
 // SymbolicPaintableOverrides is the struct used to override the default implementation of virtual methods.
 // it is generic over the extending instance type.
 type SymbolicPaintableOverrides[Instance SymbolicPaintable] struct {
-	// SnapshotSymbolic allows you to override the implementation of the virtual method snapshot_symbolic.
+	// // SnapshotSymbolic allows you to override the implementation of the virtual method snapshot_symbolic.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- snapshot gdk.Snapshot: a `GdkSnapshot` to snapshot to 
@@ -17290,8 +17381,8 @@ func UnsafeApplySymbolicPaintableOverrides[Instance SymbolicPaintable](gclass un
 			func(carg0 *C.GtkSymbolicPaintable, carg1 *C.GdkSnapshot, carg2 C.double, carg3 C.double, carg4 *C.GdkRGBA, carg5 C.gsize) {
 				var paintable Instance     // go GtkSymbolicPaintable subclass
 				var snapshot  gdk.Snapshot // in, none, converted
-				var width     float64      // in, none, casted, casted C.gdouble
-				var height    float64      // in, none, casted, casted C.gdouble
+				var width     float64      // in, none, casted
+				var height    float64      // in, none, casted
 				var colors    []gdk.RGBA   // in, transfer: none, C Pointers: 1, Name: array[RGBA], array (inner: *typesystem.Record, length-by: carg5)
 
 				paintable = UnsafeSymbolicPaintableFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
@@ -17301,7 +17392,7 @@ func UnsafeApplySymbolicPaintableOverrides[Instance SymbolicPaintable](gclass un
 				_ = colors
 				_ = carg4
 				_ = carg5
-				panic("unimplemented conversion of []gdk.RGBA (const GdkRGBA*)")
+				panic("unimplemented conversion of []gdk.RGBA (*C.GdkRGBA)")
 
 				overrides.SnapshotSymbolic(paintable, snapshot, width, height, colors)
 			},
@@ -17310,7 +17401,8 @@ func UnsafeApplySymbolicPaintableOverrides[Instance SymbolicPaintable](gclass un
 }
 
 // ParentSnapshotSymbolic calls the default implementations of the snapshot_symbolic virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- snapshot gdk.Snapshot: a `GdkSnapshot` to snapshot to 
@@ -17325,8 +17417,8 @@ func UnsafeApplySymbolicPaintableOverrides[Instance SymbolicPaintable](gclass un
 func (paintable *SymbolicPaintableInstance) ParentSnapshotSymbolic(snapshot gdk.Snapshot, width float64, height float64, colors []gdk.RGBA) {
 	var carg0 *C.GtkSymbolicPaintable
 	var carg1 *C.GdkSnapshot // in, none, converted
-	var carg2 C.double       // in, none, casted, casted C.gdouble
-	var carg3 C.double       // in, none, casted, casted C.gdouble
+	var carg2 C.double       // in, none, casted
+	var carg3 C.double       // in, none, casted
 	var carg4 *C.GdkRGBA     // in, transfer: none, C Pointers: 1, Name: array[RGBA], array (inner: *typesystem.Record, length-by: carg5)
 	var carg5 C.gsize        // implicit
 
@@ -17338,7 +17430,7 @@ func (paintable *SymbolicPaintableInstance) ParentSnapshotSymbolic(snapshot gdk.
 	_ = colors
 	_ = carg4
 	_ = carg5
-	panic("unimplemented conversion of []gdk.RGBA (const GdkRGBA*)")
+	panic("unimplemented conversion of []gdk.RGBA (*C.GdkRGBA)")
 
 	C._gotk4_gtk4_SymbolicPaintable_virtual_snapshot_symbolic(unsafe.Pointer(parentclass.snapshot_symbolic), carg0, carg1, carg2, carg3, carg4, carg5)
 	runtime.KeepAlive(paintable)
@@ -17745,10 +17837,10 @@ type Adjustment interface {
 	// chain up virtual methods:
 
 	// ParentChanged calls the default implementations of the changed virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
 	ParentChanged()
 	// ParentValueChanged calls the default implementations of the value_changed virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
 	ParentValueChanged()
 }
 
@@ -17810,12 +17902,12 @@ func UnsafeAdjustmentToGlibFull(c Adjustment) unsafe.Pointer {
 //
 // Creates a new `GtkAdjustment`.
 func NewAdjustment(value float64, lower float64, upper float64, stepIncrement float64, pageIncrement float64, pageSize float64) Adjustment {
-	var carg1 C.double         // in, none, casted, casted C.gdouble
-	var carg2 C.double         // in, none, casted, casted C.gdouble
-	var carg3 C.double         // in, none, casted, casted C.gdouble
-	var carg4 C.double         // in, none, casted, casted C.gdouble
-	var carg5 C.double         // in, none, casted, casted C.gdouble
-	var carg6 C.double         // in, none, casted, casted C.gdouble
+	var carg1 C.double         // in, none, casted
+	var carg2 C.double         // in, none, casted
+	var carg3 C.double         // in, none, casted
+	var carg4 C.double         // in, none, casted
+	var carg5 C.double         // in, none, casted
+	var carg6 C.double         // in, none, casted
 	var cret  *C.GtkAdjustment // return, none, converted
 
 	carg1 = C.double(value)
@@ -17858,8 +17950,8 @@ func NewAdjustment(value float64, lower float64, upper float64, stepIncrement fl
 // if the value is changed.
 func (adjustment *AdjustmentInstance) ClampPage(lower float64, upper float64) {
 	var carg0 *C.GtkAdjustment // in, none, converted
-	var carg1 C.double         // in, none, casted, casted C.gdouble
-	var carg2 C.double         // in, none, casted, casted C.gdouble
+	var carg1 C.double         // in, none, casted
+	var carg2 C.double         // in, none, casted
 
 	carg0 = (*C.GtkAdjustment)(UnsafeAdjustmentToGlibNone(adjustment))
 	carg1 = C.double(lower)
@@ -17891,12 +17983,12 @@ func (adjustment *AdjustmentInstance) ClampPage(lower float64, upper float64) {
 // [signal@Gtk.Adjustment::changed] into one.
 func (adjustment *AdjustmentInstance) Configure(value float64, lower float64, upper float64, stepIncrement float64, pageIncrement float64, pageSize float64) {
 	var carg0 *C.GtkAdjustment // in, none, converted
-	var carg1 C.double         // in, none, casted, casted C.gdouble
-	var carg2 C.double         // in, none, casted, casted C.gdouble
-	var carg3 C.double         // in, none, casted, casted C.gdouble
-	var carg4 C.double         // in, none, casted, casted C.gdouble
-	var carg5 C.double         // in, none, casted, casted C.gdouble
-	var carg6 C.double         // in, none, casted, casted C.gdouble
+	var carg1 C.double         // in, none, casted
+	var carg2 C.double         // in, none, casted
+	var carg3 C.double         // in, none, casted
+	var carg4 C.double         // in, none, casted
+	var carg5 C.double         // in, none, casted
+	var carg6 C.double         // in, none, casted
 
 	carg0 = (*C.GtkAdjustment)(UnsafeAdjustmentToGlibNone(adjustment))
 	carg1 = C.double(value)
@@ -17925,7 +18017,7 @@ func (adjustment *AdjustmentInstance) Configure(value float64, lower float64, up
 // Retrieves the minimum value of the adjustment.
 func (adjustment *AdjustmentInstance) GetLower() float64 {
 	var carg0 *C.GtkAdjustment // in, none, converted
-	var cret  C.double         // return, none, casted, casted C.gdouble
+	var cret  C.double         // return, none, casted
 
 	carg0 = (*C.GtkAdjustment)(UnsafeAdjustmentToGlibNone(adjustment))
 
@@ -17948,7 +18040,7 @@ func (adjustment *AdjustmentInstance) GetLower() float64 {
 // Gets the smaller of step increment and page increment.
 func (adjustment *AdjustmentInstance) GetMinimumIncrement() float64 {
 	var carg0 *C.GtkAdjustment // in, none, converted
-	var cret  C.double         // return, none, casted, casted C.gdouble
+	var cret  C.double         // return, none, casted
 
 	carg0 = (*C.GtkAdjustment)(UnsafeAdjustmentToGlibNone(adjustment))
 
@@ -17971,7 +18063,7 @@ func (adjustment *AdjustmentInstance) GetMinimumIncrement() float64 {
 // Retrieves the page increment of the adjustment.
 func (adjustment *AdjustmentInstance) GetPageIncrement() float64 {
 	var carg0 *C.GtkAdjustment // in, none, converted
-	var cret  C.double         // return, none, casted, casted C.gdouble
+	var cret  C.double         // return, none, casted
 
 	carg0 = (*C.GtkAdjustment)(UnsafeAdjustmentToGlibNone(adjustment))
 
@@ -17994,7 +18086,7 @@ func (adjustment *AdjustmentInstance) GetPageIncrement() float64 {
 // Retrieves the page size of the adjustment.
 func (adjustment *AdjustmentInstance) GetPageSize() float64 {
 	var carg0 *C.GtkAdjustment // in, none, converted
-	var cret  C.double         // return, none, casted, casted C.gdouble
+	var cret  C.double         // return, none, casted
 
 	carg0 = (*C.GtkAdjustment)(UnsafeAdjustmentToGlibNone(adjustment))
 
@@ -18017,7 +18109,7 @@ func (adjustment *AdjustmentInstance) GetPageSize() float64 {
 // Retrieves the step increment of the adjustment.
 func (adjustment *AdjustmentInstance) GetStepIncrement() float64 {
 	var carg0 *C.GtkAdjustment // in, none, converted
-	var cret  C.double         // return, none, casted, casted C.gdouble
+	var cret  C.double         // return, none, casted
 
 	carg0 = (*C.GtkAdjustment)(UnsafeAdjustmentToGlibNone(adjustment))
 
@@ -18040,7 +18132,7 @@ func (adjustment *AdjustmentInstance) GetStepIncrement() float64 {
 // Retrieves the maximum value of the adjustment.
 func (adjustment *AdjustmentInstance) GetUpper() float64 {
 	var carg0 *C.GtkAdjustment // in, none, converted
-	var cret  C.double         // return, none, casted, casted C.gdouble
+	var cret  C.double         // return, none, casted
 
 	carg0 = (*C.GtkAdjustment)(UnsafeAdjustmentToGlibNone(adjustment))
 
@@ -18063,7 +18155,7 @@ func (adjustment *AdjustmentInstance) GetUpper() float64 {
 // Gets the current value of the adjustment.
 func (adjustment *AdjustmentInstance) GetValue() float64 {
 	var carg0 *C.GtkAdjustment // in, none, converted
-	var cret  C.double         // return, none, casted, casted C.gdouble
+	var cret  C.double         // return, none, casted
 
 	carg0 = (*C.GtkAdjustment)(UnsafeAdjustmentToGlibNone(adjustment))
 
@@ -18098,7 +18190,7 @@ func (adjustment *AdjustmentInstance) GetValue() float64 {
 // to change, or using [method@Gtk.Adjustment.configure] has the same effect.
 func (adjustment *AdjustmentInstance) SetLower(lower float64) {
 	var carg0 *C.GtkAdjustment // in, none, converted
-	var carg1 C.double         // in, none, casted, casted C.gdouble
+	var carg1 C.double         // in, none, casted
 
 	carg0 = (*C.GtkAdjustment)(UnsafeAdjustmentToGlibNone(adjustment))
 	carg1 = C.double(lower)
@@ -18121,7 +18213,7 @@ func (adjustment *AdjustmentInstance) SetLower(lower float64) {
 // signal when setting multiple adjustment properties.
 func (adjustment *AdjustmentInstance) SetPageIncrement(pageIncrement float64) {
 	var carg0 *C.GtkAdjustment // in, none, converted
-	var carg1 C.double         // in, none, casted, casted C.gdouble
+	var carg1 C.double         // in, none, casted
 
 	carg0 = (*C.GtkAdjustment)(UnsafeAdjustmentToGlibNone(adjustment))
 	carg1 = C.double(pageIncrement)
@@ -18144,7 +18236,7 @@ func (adjustment *AdjustmentInstance) SetPageIncrement(pageIncrement float64) {
 // signal when setting multiple adjustment properties.
 func (adjustment *AdjustmentInstance) SetPageSize(pageSize float64) {
 	var carg0 *C.GtkAdjustment // in, none, converted
-	var carg1 C.double         // in, none, casted, casted C.gdouble
+	var carg1 C.double         // in, none, casted
 
 	carg0 = (*C.GtkAdjustment)(UnsafeAdjustmentToGlibNone(adjustment))
 	carg1 = C.double(pageSize)
@@ -18167,7 +18259,7 @@ func (adjustment *AdjustmentInstance) SetPageSize(pageSize float64) {
 // signal when setting multiple adjustment properties.
 func (adjustment *AdjustmentInstance) SetStepIncrement(stepIncrement float64) {
 	var carg0 *C.GtkAdjustment // in, none, converted
-	var carg1 C.double         // in, none, casted, casted C.gdouble
+	var carg1 C.double         // in, none, casted
 
 	carg0 = (*C.GtkAdjustment)(UnsafeAdjustmentToGlibNone(adjustment))
 	carg1 = C.double(stepIncrement)
@@ -18193,7 +18285,7 @@ func (adjustment *AdjustmentInstance) SetStepIncrement(stepIncrement float64) {
 // signal when setting multiple adjustment properties.
 func (adjustment *AdjustmentInstance) SetUpper(upper float64) {
 	var carg0 *C.GtkAdjustment // in, none, converted
-	var carg1 C.double         // in, none, casted, casted C.gdouble
+	var carg1 C.double         // in, none, casted
 
 	carg0 = (*C.GtkAdjustment)(UnsafeAdjustmentToGlibNone(adjustment))
 	carg1 = C.double(upper)
@@ -18220,7 +18312,7 @@ func (adjustment *AdjustmentInstance) SetUpper(upper float64) {
 // [property@Gtk.Adjustment:upper] - [property@Gtk.Adjustment:page-size].
 func (adjustment *AdjustmentInstance) SetValue(value float64) {
 	var carg0 *C.GtkAdjustment // in, none, converted
-	var carg1 C.double         // in, none, casted, casted C.gdouble
+	var carg1 C.double         // in, none, casted
 
 	carg0 = (*C.GtkAdjustment)(UnsafeAdjustmentToGlibNone(adjustment))
 	carg1 = C.double(value)
@@ -18254,9 +18346,9 @@ type AdjustmentOverrides[Instance Adjustment] struct {
 	// gobject.InitiallyUnownedOverrides allows you to override virtual methods from the parent class gobject.InitiallyUnowned
 	gobject.InitiallyUnownedOverrides[Instance]
 
-	// Changed allows you to override the implementation of the virtual method changed.
+	// // Changed allows you to override the implementation of the virtual method changed.
 	Changed func(Instance)
-	// ValueChanged allows you to override the implementation of the virtual method value_changed.
+	// // ValueChanged allows you to override the implementation of the virtual method value_changed.
 	ValueChanged func(Instance)
 }
 
@@ -18299,7 +18391,7 @@ func UnsafeApplyAdjustmentOverrides[Instance Adjustment](gclass unsafe.Pointer, 
 }
 
 // ParentChanged calls the default implementations of the changed virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
 func (adjustment *AdjustmentInstance) ParentChanged() {
 	var carg0 *C.GtkAdjustment
 
@@ -18310,7 +18402,7 @@ func (adjustment *AdjustmentInstance) ParentChanged() {
 }
 
 // ParentValueChanged calls the default implementations of the value_changed virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
 func (adjustment *AdjustmentInstance) ParentValueChanged() {
 	var carg0 *C.GtkAdjustment
 
@@ -18614,7 +18706,7 @@ func (self *AlertDialogInstance) Choose(cancellable context.Context, parent Wind
 func (self *AlertDialogInstance) ChooseFinish(result gio.AsyncResult) (int32, error) {
 	var carg0 *C.GtkAlertDialog // in, none, converted
 	var carg1 *C.GAsyncResult   // in, none, converted
-	var cret  C.int             // return, none, casted, casted C.gint
+	var cret  C.int             // return, none, casted
 	var _cerr *C.GError         // out, full, converted, nullable
 
 	carg0 = (*C.GtkAlertDialog)(UnsafeAlertDialogToGlibNone(self))
@@ -18655,7 +18747,7 @@ func (self *AlertDialogInstance) GetButtons() []string {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (const char* const*)")
+	panic("unimplemented conversion of []string (**C.char)")
 
 	return goret
 }
@@ -18669,7 +18761,7 @@ func (self *AlertDialogInstance) GetButtons() []string {
 // Returns the index of the cancel button.
 func (self *AlertDialogInstance) GetCancelButton() int32 {
 	var carg0 *C.GtkAlertDialog // in, none, converted
-	var cret  C.int             // return, none, casted, casted C.gint
+	var cret  C.int             // return, none, casted
 
 	carg0 = (*C.GtkAlertDialog)(UnsafeAlertDialogToGlibNone(self))
 
@@ -18692,7 +18784,7 @@ func (self *AlertDialogInstance) GetCancelButton() int32 {
 // Returns the index of the default button.
 func (self *AlertDialogInstance) GetDefaultButton() int32 {
 	var carg0 *C.GtkAlertDialog // in, none, converted
-	var cret  C.int             // return, none, casted, casted C.gint
+	var cret  C.int             // return, none, casted
 
 	carg0 = (*C.GtkAlertDialog)(UnsafeAlertDialogToGlibNone(self))
 
@@ -18715,7 +18807,7 @@ func (self *AlertDialogInstance) GetDefaultButton() int32 {
 // Returns the detail text that will be shown in the alert.
 func (self *AlertDialogInstance) GetDetail() string {
 	var carg0 *C.GtkAlertDialog // in, none, converted
-	var cret  *C.char           // return, none, string, casted *C.gchar
+	var cret  *C.char           // return, none, string
 
 	carg0 = (*C.GtkAlertDialog)(UnsafeAlertDialogToGlibNone(self))
 
@@ -18738,7 +18830,7 @@ func (self *AlertDialogInstance) GetDetail() string {
 // Returns the message that will be shown in the alert.
 func (self *AlertDialogInstance) GetMessage() string {
 	var carg0 *C.GtkAlertDialog // in, none, converted
-	var cret  *C.char           // return, none, string, casted *C.gchar
+	var cret  *C.char           // return, none, string
 
 	carg0 = (*C.GtkAlertDialog)(UnsafeAlertDialogToGlibNone(self))
 
@@ -18792,7 +18884,7 @@ func (self *AlertDialogInstance) SetButtons(labels []string) {
 	carg0 = (*C.GtkAlertDialog)(UnsafeAlertDialogToGlibNone(self))
 	_ = labels
 	_ = carg1
-	panic("unimplemented conversion of []string (const char* const*)")
+	panic("unimplemented conversion of []string (**C.char)")
 
 	C.gtk_alert_dialog_set_buttons(carg0, carg1)
 	runtime.KeepAlive(self)
@@ -18811,7 +18903,7 @@ func (self *AlertDialogInstance) SetButtons(labels []string) {
 // details of how this value is used.
 func (self *AlertDialogInstance) SetCancelButton(button int32) {
 	var carg0 *C.GtkAlertDialog // in, none, converted
-	var carg1 C.int             // in, none, casted, casted C.gint
+	var carg1 C.int             // in, none, casted
 
 	carg0 = (*C.GtkAlertDialog)(UnsafeAlertDialogToGlibNone(self))
 	carg1 = C.int(button)
@@ -18833,7 +18925,7 @@ func (self *AlertDialogInstance) SetCancelButton(button int32) {
 // details of how this value is used.
 func (self *AlertDialogInstance) SetDefaultButton(button int32) {
 	var carg0 *C.GtkAlertDialog // in, none, converted
-	var carg1 C.int             // in, none, casted, casted C.gint
+	var carg1 C.int             // in, none, casted
 
 	carg0 = (*C.GtkAlertDialog)(UnsafeAlertDialogToGlibNone(self))
 	carg1 = C.int(button)
@@ -18852,7 +18944,7 @@ func (self *AlertDialogInstance) SetDefaultButton(button int32) {
 // Sets the detail text that will be shown in the alert.
 func (self *AlertDialogInstance) SetDetail(detail string) {
 	var carg0 *C.GtkAlertDialog // in, none, converted
-	var carg1 *C.char           // in, none, string, casted *C.gchar
+	var carg1 *C.char           // in, none, string
 
 	carg0 = (*C.GtkAlertDialog)(UnsafeAlertDialogToGlibNone(self))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(detail)))
@@ -18872,7 +18964,7 @@ func (self *AlertDialogInstance) SetDetail(detail string) {
 // Sets the message that will be shown in the alert.
 func (self *AlertDialogInstance) SetMessage(message string) {
 	var carg0 *C.GtkAlertDialog // in, none, converted
-	var carg1 *C.char           // in, none, string, casted *C.gchar
+	var carg1 *C.char           // in, none, string
 
 	carg0 = (*C.GtkAlertDialog)(UnsafeAlertDialogToGlibNone(self))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(message)))
@@ -19339,7 +19431,8 @@ type Application interface {
 	// chain up virtual methods:
 
 	// ParentWindowAdded calls the default implementations of the window_added virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- window Window 
@@ -19348,7 +19441,8 @@ type Application interface {
 	//    application through gtk_application_add_window().
 	ParentWindowAdded(window Window)
 	// ParentWindowRemoved calls the default implementations of the window_removed virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- window Window 
@@ -19365,10 +19459,10 @@ func unsafeWrapApplication(base *gobject.ObjectInstance) *ApplicationInstance {
 			ObjectInstance: *base,
 		},
 		ActionGroupInstance: gio.ActionGroupInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ActionMapInstance: gio.ActionMapInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -19505,7 +19599,7 @@ func (application *ApplicationInstance) AddWindow(window Window) {
 // the given action.
 func (application *ApplicationInstance) GetAccelsForAction(detailedActionName string) []string {
 	var carg0 *C.GtkApplication // in, none, converted
-	var carg1 *C.char           // in, none, string, casted *C.gchar
+	var carg1 *C.char           // in, none, string
 	var cret  **C.char          // return, transfer: full, C Pointers: 2, Name: array[utf8], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
 
 	carg0 = (*C.GtkApplication)(UnsafeApplicationToGlibNone(application))
@@ -19520,7 +19614,7 @@ func (application *ApplicationInstance) GetAccelsForAction(detailedActionName st
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (char**)")
+	panic("unimplemented conversion of []string (**C.char)")
 
 	return goret
 }
@@ -19554,7 +19648,7 @@ func (application *ApplicationInstance) GetAccelsForAction(detailedActionName st
 // If you are unsure, check it with [func@Gtk.accelerator_parse] first.
 func (application *ApplicationInstance) GetActionsForAccel(accel string) []string {
 	var carg0 *C.GtkApplication // in, none, converted
-	var carg1 *C.char           // in, none, string, casted *C.gchar
+	var carg1 *C.char           // in, none, string
 	var cret  **C.char          // return, transfer: full, C Pointers: 2, Name: array[utf8], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
 
 	carg0 = (*C.GtkApplication)(UnsafeApplicationToGlibNone(application))
@@ -19569,7 +19663,7 @@ func (application *ApplicationInstance) GetActionsForAccel(accel string) []strin
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (char**)")
+	panic("unimplemented conversion of []string (**C.char)")
 
 	return goret
 }
@@ -19620,7 +19714,7 @@ func (application *ApplicationInstance) GetActiveWindow() Window {
 // for more information.
 func (application *ApplicationInstance) GetMenuByID(id string) gio.Menu {
 	var carg0 *C.GtkApplication // in, none, converted
-	var carg1 *C.char           // in, none, string, casted *C.gchar
+	var carg1 *C.char           // in, none, string
 	var cret  *C.GMenu          // return, none, converted, nullable
 
 	carg0 = (*C.GtkApplication)(UnsafeApplicationToGlibNone(application))
@@ -19827,7 +19921,7 @@ func (application *ApplicationInstance) ListActionDescriptions() []string {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (char**)")
+	panic("unimplemented conversion of []string (**C.char)")
 
 	return goret
 }
@@ -19880,7 +19974,7 @@ func (application *ApplicationInstance) RemoveWindow(window Window) {
 // `g_action_print_detailed_name()`.
 func (application *ApplicationInstance) SetAccelsForAction(detailedActionName string, accels []string) {
 	var carg0 *C.GtkApplication // in, none, converted
-	var carg1 *C.char           // in, none, string, casted *C.gchar
+	var carg1 *C.char           // in, none, string
 	var carg2 **C.char          // in, transfer: none, C Pointers: 2, Name: array[utf8], array (inner: *typesystem.StringPrimitive, zero-terminated)
 
 	carg0 = (*C.GtkApplication)(UnsafeApplicationToGlibNone(application))
@@ -19888,7 +19982,7 @@ func (application *ApplicationInstance) SetAccelsForAction(detailedActionName st
 	defer C.free(unsafe.Pointer(carg1))
 	_ = accels
 	_ = carg2
-	panic("unimplemented conversion of []string (const char* const*)")
+	panic("unimplemented conversion of []string (**C.char)")
 
 	C.gtk_application_set_accels_for_action(carg0, carg1, carg2)
 	runtime.KeepAlive(application)
@@ -19993,7 +20087,8 @@ type ApplicationOverrides[Instance Application] struct {
 	// gio.ApplicationOverrides allows you to override virtual methods from the parent class gio.Application
 	gio.ApplicationOverrides[Instance]
 
-	// WindowAdded allows you to override the implementation of the virtual method window_added.
+	// // WindowAdded allows you to override the implementation of the virtual method window_added.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- window Window 
@@ -20001,7 +20096,8 @@ type ApplicationOverrides[Instance Application] struct {
 	// Signal emitted when a `GtkWindow` is added to
 	//    application through gtk_application_add_window().
 	WindowAdded func(Instance, Window)
-	// WindowRemoved allows you to override the implementation of the virtual method window_removed.
+	// // WindowRemoved allows you to override the implementation of the virtual method window_removed.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- window Window 
@@ -20055,7 +20151,8 @@ func UnsafeApplyApplicationOverrides[Instance Application](gclass unsafe.Pointer
 }
 
 // ParentWindowAdded calls the default implementations of the window_added virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- window Window 
@@ -20076,7 +20173,8 @@ func (application *ApplicationInstance) ParentWindowAdded(window Window) {
 }
 
 // ParentWindowRemoved calls the default implementations of the window_removed virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- window Window 
@@ -20214,7 +20312,7 @@ func unsafeWrapBookmarkList(base *gobject.ObjectInstance) *BookmarkListInstance 
 	return &BookmarkListInstance{
 		ObjectInstance: *base,
 		ListModelInstance: gio.ListModelInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -20298,7 +20396,7 @@ func NewBookmarkList(filename string, attributes string) BookmarkList {
 // Gets the attributes queried on the children.
 func (self *BookmarkListInstance) GetAttributes() string {
 	var carg0 *C.GtkBookmarkList // in, none, converted
-	var cret  *C.char            // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char            // return, none, string, nullable-string
 
 	carg0 = (*C.GtkBookmarkList)(UnsafeBookmarkListToGlibNone(self))
 
@@ -20324,7 +20422,7 @@ func (self *BookmarkListInstance) GetAttributes() string {
 // this list is loading.
 func (self *BookmarkListInstance) GetFilename() string {
 	var carg0 *C.GtkBookmarkList // in, none, converted
-	var cret  *C.char            // return, none, string, casted *C.gchar
+	var cret  *C.char            // return, none, string
 
 	carg0 = (*C.GtkBookmarkList)(UnsafeBookmarkListToGlibNone(self))
 
@@ -20347,7 +20445,7 @@ func (self *BookmarkListInstance) GetFilename() string {
 // Gets the IO priority to use while loading file.
 func (self *BookmarkListInstance) GetIOPriority() int32 {
 	var carg0 *C.GtkBookmarkList // in, none, converted
-	var cret  C.int              // return, none, casted, casted C.gint
+	var cret  C.int              // return, none, casted
 
 	carg0 = (*C.GtkBookmarkList)(UnsafeBookmarkListToGlibNone(self))
 
@@ -20426,7 +20524,7 @@ func (self *BookmarkListInstance) SetAttributes(attributes string) {
 // The default IO priority is %G_PRIORITY_DEFAULT.
 func (self *BookmarkListInstance) SetIOPriority(ioPriority int32) {
 	var carg0 *C.GtkBookmarkList // in, none, converted
-	var carg1 C.int              // in, none, casted, casted C.gint
+	var carg1 C.int              // in, none, casted
 
 	carg0 = (*C.GtkBookmarkList)(UnsafeBookmarkListToGlibNone(self))
 	carg1 = C.int(ioPriority)
@@ -21252,7 +21350,7 @@ func NewBuilder() Builder {
 // the program will be aborted. You should only ever attempt to parse
 // user interface descriptions that are shipped as part of your program.
 func NewBuilderFromFile(filename string) Builder {
-	var carg1 *C.char       // in, none, string, casted *C.gchar
+	var carg1 *C.char       // in, none, string
 	var cret  *C.GtkBuilder // return, full, converted
 
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(filename)))
@@ -21283,7 +21381,7 @@ func NewBuilderFromFile(filename string) Builder {
 // If there is an error locating the resource or parsing the
 // description, then the program will be aborted.
 func NewBuilderFromResource(resourcePath string) Builder {
-	var carg1 *C.char       // in, none, string, casted *C.gchar
+	var carg1 *C.char       // in, none, string
 	var cret  *C.GtkBuilder // return, full, converted
 
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(resourcePath)))
@@ -21319,7 +21417,7 @@ func NewBuilderFromResource(resourcePath string) Builder {
 // aborted. You should not attempt to parse user interface description
 // from untrusted sources.
 func NewBuilderFromString(str string, length int) Builder {
-	var carg1 *C.char       // in, none, string, casted *C.gchar
+	var carg1 *C.char       // in, none, string
 	var carg2 C.gssize      // in, none, casted
 	var cret  *C.GtkBuilder // return, full, converted
 
@@ -21369,7 +21467,7 @@ func NewBuilderFromString(str string, length int) Builder {
 // thing to do when an error is detected is to call `g_error()`.
 func (builder *BuilderInstance) AddFromFile(filename string) (bool, error) {
 	var carg0 *C.GtkBuilder // in, none, converted
-	var carg1 *C.char       // in, none, string, casted *C.gchar
+	var carg1 *C.char       // in, none, string
 	var cret  C.gboolean    // return
 	var _cerr *C.GError     // out, full, converted, nullable
 
@@ -21422,7 +21520,7 @@ func (builder *BuilderInstance) AddFromFile(filename string) (bool, error) {
 // to call g_error().
 func (builder *BuilderInstance) AddFromResource(resourcePath string) (bool, error) {
 	var carg0 *C.GtkBuilder // in, none, converted
-	var carg1 *C.char       // in, none, string, casted *C.gchar
+	var carg1 *C.char       // in, none, string
 	var cret  C.gboolean    // return
 	var _cerr *C.GError     // out, full, converted, nullable
 
@@ -21476,7 +21574,7 @@ func (builder *BuilderInstance) AddFromResource(resourcePath string) (bool, erro
 // to call g_error().
 func (builder *BuilderInstance) AddFromString(buffer string, length int) (bool, error) {
 	var carg0 *C.GtkBuilder // in, none, converted
-	var carg1 *C.char       // in, none, string, casted *C.gchar
+	var carg1 *C.char       // in, none, string
 	var carg2 C.gssize      // in, none, casted
 	var cret  C.gboolean    // return
 	var _cerr *C.GError     // out, full, converted, nullable
@@ -21529,7 +21627,7 @@ func (builder *BuilderInstance) AddFromString(buffer string, length int) (bool, 
 // `GtkTreeModel`), you have to explicitly list all of them in @object_ids.
 func (builder *BuilderInstance) AddObjectsFromFile(filename string, objectIds []string) (bool, error) {
 	var carg0 *C.GtkBuilder // in, none, converted
-	var carg1 *C.char       // in, none, string, casted *C.gchar
+	var carg1 *C.char       // in, none, string
 	var carg2 **C.char      // in, transfer: none, C Pointers: 2, Name: array[utf8], array (inner: *typesystem.StringPrimitive, zero-terminated)
 	var cret  C.gboolean    // return
 	var _cerr *C.GError     // out, full, converted, nullable
@@ -21539,7 +21637,7 @@ func (builder *BuilderInstance) AddObjectsFromFile(filename string, objectIds []
 	defer C.free(unsafe.Pointer(carg1))
 	_ = objectIds
 	_ = carg2
-	panic("unimplemented conversion of []string (const char**)")
+	panic("unimplemented conversion of []string (**C.char)")
 
 	cret = C.gtk_builder_add_objects_from_file(carg0, carg1, carg2, &_cerr)
 	runtime.KeepAlive(builder)
@@ -21584,7 +21682,7 @@ func (builder *BuilderInstance) AddObjectsFromFile(filename string, objectIds []
 // `GtkTreeModel`), you have to explicitly list all of them in @object_ids.
 func (builder *BuilderInstance) AddObjectsFromResource(resourcePath string, objectIds []string) (bool, error) {
 	var carg0 *C.GtkBuilder // in, none, converted
-	var carg1 *C.char       // in, none, string, casted *C.gchar
+	var carg1 *C.char       // in, none, string
 	var carg2 **C.char      // in, transfer: none, C Pointers: 2, Name: array[utf8], array (inner: *typesystem.StringPrimitive, zero-terminated)
 	var cret  C.gboolean    // return
 	var _cerr *C.GError     // out, full, converted, nullable
@@ -21594,7 +21692,7 @@ func (builder *BuilderInstance) AddObjectsFromResource(resourcePath string, obje
 	defer C.free(unsafe.Pointer(carg1))
 	_ = objectIds
 	_ = carg2
-	panic("unimplemented conversion of []string (const char**)")
+	panic("unimplemented conversion of []string (**C.char)")
 
 	cret = C.gtk_builder_add_objects_from_resource(carg0, carg1, carg2, &_cerr)
 	runtime.KeepAlive(builder)
@@ -21639,7 +21737,7 @@ func (builder *BuilderInstance) AddObjectsFromResource(resourcePath string, obje
 // `GtkTreeModel`), you have to explicitly list all of them in @object_ids.
 func (builder *BuilderInstance) AddObjectsFromString(buffer string, length int, objectIds []string) (bool, error) {
 	var carg0 *C.GtkBuilder // in, none, converted
-	var carg1 *C.char       // in, none, string, casted *C.gchar
+	var carg1 *C.char       // in, none, string
 	var carg2 C.gssize      // in, none, casted
 	var carg3 **C.char      // in, transfer: none, C Pointers: 2, Name: array[utf8], array (inner: *typesystem.StringPrimitive, zero-terminated)
 	var cret  C.gboolean    // return
@@ -21651,7 +21749,7 @@ func (builder *BuilderInstance) AddObjectsFromString(buffer string, length int, 
 	carg2 = C.gssize(length)
 	_ = objectIds
 	_ = carg3
-	panic("unimplemented conversion of []string (const char**)")
+	panic("unimplemented conversion of []string (**C.char)")
 
 	cret = C.gtk_builder_add_objects_from_string(carg0, carg1, carg2, carg3, &_cerr)
 	runtime.KeepAlive(builder)
@@ -21688,7 +21786,7 @@ func (builder *BuilderInstance) AddObjectsFromString(buffer string, length int, 
 // if an object has already been added with @name.
 func (builder *BuilderInstance) ExposeObject(name string, object gobject.Object) {
 	var carg0 *C.GtkBuilder // in, none, converted
-	var carg1 *C.char       // in, none, string, casted *C.gchar
+	var carg1 *C.char       // in, none, string
 	var carg2 *C.GObject    // in, none, converted
 
 	carg0 = (*C.GtkBuilder)(UnsafeBuilderToGlibNone(builder))
@@ -21725,7 +21823,7 @@ func (builder *BuilderInstance) ExtendWithTemplate(object gobject.Object, templa
 	var carg0 *C.GtkBuilder // in, none, converted
 	var carg1 *C.GObject    // in, none, converted
 	var carg2 C.GType       // in, none, casted, alias
-	var carg3 *C.char       // in, none, string, casted *C.gchar
+	var carg3 *C.char       // in, none, string
 	var carg4 C.gssize      // in, none, casted
 	var cret  C.gboolean    // return
 	var _cerr *C.GError     // out, full, converted, nullable
@@ -21798,7 +21896,7 @@ func (builder *BuilderInstance) GetCurrentObject() gobject.Object {
 // of the returned object.
 func (builder *BuilderInstance) GetObject(name string) gobject.Object {
 	var carg0 *C.GtkBuilder // in, none, converted
-	var carg1 *C.char       // in, none, string, casted *C.gchar
+	var carg1 *C.char       // in, none, string
 	var cret  *C.GObject    // return, none, converted, nullable
 
 	carg0 = (*C.GtkBuilder)(UnsafeBuilderToGlibNone(builder))
@@ -21883,7 +21981,7 @@ func (builder *BuilderInstance) GetScope() BuilderScope {
 // Gets the translation domain of @builder.
 func (builder *BuilderInstance) GetTranslationDomain() string {
 	var carg0 *C.GtkBuilder // in, none, converted
-	var cret  *C.char       // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char       // return, none, string, nullable-string
 
 	carg0 = (*C.GtkBuilder)(UnsafeBuilderToGlibNone(builder))
 
@@ -21916,7 +22014,7 @@ func (builder *BuilderInstance) GetTranslationDomain() string {
 // the `GtkBuildable` interface on a type.
 func (builder *BuilderInstance) GetTypeFromName(typeName string) gobject.Type {
 	var carg0 *C.GtkBuilder // in, none, converted
-	var carg1 *C.char       // in, none, string, casted *C.gchar
+	var carg1 *C.char       // in, none, string
 	var cret  C.GType       // return, none, casted, alias
 
 	carg0 = (*C.GtkBuilder)(UnsafeBuilderToGlibNone(builder))
@@ -22035,7 +22133,7 @@ func (builder *BuilderInstance) SetTranslationDomain(domain string) {
 func (builder *BuilderInstance) ValueFromString(pspec *gobject.ParamSpec, str string) (gobject.Value, bool, error) {
 	var carg0 *C.GtkBuilder // in, none, converted
 	var carg1 *C.GParamSpec // in, none, converted
-	var carg2 *C.char       // in, none, string, casted *C.gchar
+	var carg2 *C.char       // in, none, string
 	var carg3 C.GValue      // out, transfer: none, C Pointers: 0, Name: Value, caller-allocates
 	var cret  C.gboolean    // return
 	var _cerr *C.GError     // out, full, converted, nullable
@@ -22056,7 +22154,7 @@ func (builder *BuilderInstance) ValueFromString(pspec *gobject.ParamSpec, str st
 
 	_ = value
 	_ = carg3
-	panic("unimplemented conversion of gobject.Value (GValue)")
+	panic("unimplemented conversion of gobject.Value (C.GValue)")
 	if cret != 0 {
 		goret = true
 	}
@@ -22093,7 +22191,7 @@ func (builder *BuilderInstance) ValueFromString(pspec *gobject.ParamSpec, str st
 func (builder *BuilderInstance) ValueFromStringType(typ gobject.Type, str string) (gobject.Value, bool, error) {
 	var carg0 *C.GtkBuilder // in, none, converted
 	var carg1 C.GType       // in, none, casted, alias
-	var carg2 *C.char       // in, none, string, casted *C.gchar
+	var carg2 *C.char       // in, none, string
 	var carg3 C.GValue      // out, transfer: none, C Pointers: 0, Name: Value, caller-allocates
 	var cret  C.gboolean    // return
 	var _cerr *C.GError     // out, full, converted, nullable
@@ -22114,7 +22212,7 @@ func (builder *BuilderInstance) ValueFromStringType(typ gobject.Type, str string
 
 	_ = value
 	_ = carg3
-	panic("unimplemented conversion of gobject.Value (GValue)")
+	panic("unimplemented conversion of gobject.Value (C.GValue)")
 	if cret != 0 {
 		goret = true
 	}
@@ -22209,7 +22307,7 @@ func UnsafeBuilderCScopeToGlibFull(c BuilderCScope) unsafe.Pointer {
 // Calling this function is only necessary if you want to add
 // custom callbacks via [method@Gtk.BuilderCScope.add_callback_symbol].
 func NewBuilderCScope() BuilderCScope {
-	var cret *C.GtkBuilderScope // return, full, converted, casted *C.GtkBuilderCScope
+	var cret *C.GtkBuilderScope // return, full, converted
 
 	cret = C.gtk_builder_cscope_new()
 
@@ -22546,7 +22644,7 @@ func (self *ColorDialogInstance) GetModal() bool {
 // color chooser dialog.
 func (self *ColorDialogInstance) GetTitle() string {
 	var carg0 *C.GtkColorDialog // in, none, converted
-	var cret  *C.char           // return, none, string, casted *C.gchar
+	var cret  *C.char           // return, none, string
 
 	carg0 = (*C.GtkColorDialog)(UnsafeColorDialogToGlibNone(self))
 
@@ -22618,7 +22716,7 @@ func (self *ColorDialogInstance) SetModal(modal bool) {
 // color chooser dialog.
 func (self *ColorDialogInstance) SetTitle(title string) {
 	var carg0 *C.GtkColorDialog // in, none, converted
-	var carg1 *C.char           // in, none, string, casted *C.gchar
+	var carg1 *C.char           // in, none, string
 
 	carg0 = (*C.GtkColorDialog)(UnsafeColorDialogToGlibNone(self))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(title)))
@@ -23073,7 +23171,7 @@ func (self *ColumnViewColumnInstance) GetFactory() ListItemFactory {
 // Gets the fixed width of the column.
 func (self *ColumnViewColumnInstance) GetFixedWidth() int32 {
 	var carg0 *C.GtkColumnViewColumn // in, none, converted
-	var cret  C.int                  // return, none, casted, casted C.gint
+	var cret  C.int                  // return, none, casted
 
 	carg0 = (*C.GtkColumnViewColumn)(UnsafeColumnViewColumnToGlibNone(self))
 
@@ -23122,7 +23220,7 @@ func (self *ColumnViewColumnInstance) GetHeaderMenu() gio.MenuModel {
 // Returns the ID set with gtk_column_view_column_set_id().
 func (self *ColumnViewColumnInstance) GetID() string {
 	var carg0 *C.GtkColumnViewColumn // in, none, converted
-	var cret  *C.char                // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char                // return, none, string, nullable-string
 
 	carg0 = (*C.GtkColumnViewColumn)(UnsafeColumnViewColumnToGlibNone(self))
 
@@ -23197,7 +23295,7 @@ func (self *ColumnViewColumnInstance) GetSorter() Sorter {
 // Returns the title set with gtk_column_view_column_set_title().
 func (self *ColumnViewColumnInstance) GetTitle() string {
 	var carg0 *C.GtkColumnViewColumn // in, none, converted
-	var cret  *C.char                // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char                // return, none, string, nullable-string
 
 	carg0 = (*C.GtkColumnViewColumn)(UnsafeColumnViewColumnToGlibNone(self))
 
@@ -23297,7 +23395,7 @@ func (self *ColumnViewColumnInstance) SetFactory(factory ListItemFactory) {
 // width. Interactive resizing also sets the “fixed-width” property.
 func (self *ColumnViewColumnInstance) SetFixedWidth(fixedWidth int32) {
 	var carg0 *C.GtkColumnViewColumn // in, none, converted
-	var carg1 C.int                  // in, none, casted, casted C.gint
+	var carg1 C.int                  // in, none, casted
 
 	carg0 = (*C.GtkColumnViewColumn)(UnsafeColumnViewColumnToGlibNone(self))
 	carg1 = C.int(fixedWidth)
@@ -23656,7 +23754,7 @@ func UnsafeColumnViewRowToGlibFull(c ColumnViewRow) unsafe.Pointer {
 // Gets the accessible description of @self.
 func (self *ColumnViewRowInstance) GetAccessibleDescription() string {
 	var carg0 *C.GtkColumnViewRow // in, none, converted
-	var cret  *C.char             // return, none, string, casted *C.gchar
+	var cret  *C.char             // return, none, string
 
 	carg0 = (*C.GtkColumnViewRow)(UnsafeColumnViewRowToGlibNone(self))
 
@@ -23679,7 +23777,7 @@ func (self *ColumnViewRowInstance) GetAccessibleDescription() string {
 // Gets the accessible label of @self.
 func (self *ColumnViewRowInstance) GetAccessibleLabel() string {
 	var carg0 *C.GtkColumnViewRow // in, none, converted
-	var cret  *C.char             // return, none, string, casted *C.gchar
+	var cret  *C.char             // return, none, string
 
 	carg0 = (*C.GtkColumnViewRow)(UnsafeColumnViewRowToGlibNone(self))
 
@@ -23836,7 +23934,7 @@ func (self *ColumnViewRowInstance) GetSelected() bool {
 // which may be used by e.g. screen readers.
 func (self *ColumnViewRowInstance) SetAccessibleDescription(description string) {
 	var carg0 *C.GtkColumnViewRow // in, none, converted
-	var carg1 *C.char             // in, none, string, casted *C.gchar
+	var carg1 *C.char             // in, none, string
 
 	carg0 = (*C.GtkColumnViewRow)(UnsafeColumnViewRowToGlibNone(self))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(description)))
@@ -23857,7 +23955,7 @@ func (self *ColumnViewRowInstance) SetAccessibleDescription(description string) 
 // which may be used by e.g. screen readers.
 func (self *ColumnViewRowInstance) SetAccessibleLabel(label string) {
 	var carg0 *C.GtkColumnViewRow // in, none, converted
-	var carg1 *C.char             // in, none, string, casted *C.gchar
+	var carg1 *C.char             // in, none, string
 
 	carg0 = (*C.GtkColumnViewRow)(UnsafeColumnViewRowToGlibNone(self))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(label)))
@@ -24137,7 +24235,7 @@ func UnsafeConstraintToGlibFull(c Constraint) unsafe.Pointer {
 // Retrieves the constant factor added to the source attributes' value.
 func (constraint *ConstraintInstance) GetConstant() float64 {
 	var carg0 *C.GtkConstraint // in, none, converted
-	var cret  C.double         // return, none, casted, casted C.gdouble
+	var cret  C.double         // return, none, casted
 
 	carg0 = (*C.GtkConstraint)(UnsafeConstraintToGlibNone(constraint))
 
@@ -24161,7 +24259,7 @@ func (constraint *ConstraintInstance) GetConstant() float64 {
 // attribute's value.
 func (constraint *ConstraintInstance) GetMultiplier() float64 {
 	var carg0 *C.GtkConstraint // in, none, converted
-	var cret  C.double         // return, none, casted, casted C.gdouble
+	var cret  C.double         // return, none, casted
 
 	carg0 = (*C.GtkConstraint)(UnsafeConstraintToGlibNone(constraint))
 
@@ -24259,7 +24357,7 @@ func (constraint *ConstraintInstance) GetSourceAttribute() ConstraintAttribute {
 // Retrieves the strength of the constraint.
 func (constraint *ConstraintInstance) GetStrength() int32 {
 	var carg0 *C.GtkConstraint // in, none, converted
-	var cret  C.int            // return, none, casted, casted C.gint
+	var cret  C.int            // return, none, casted
 
 	carg0 = (*C.GtkConstraint)(UnsafeConstraintToGlibNone(constraint))
 
@@ -24639,8 +24737,8 @@ func NewConstraintGuide() ConstraintGuide {
 // Gets the maximum size of @guide.
 func (guide *ConstraintGuideInstance) GetMaxSize() (int32, int32) {
 	var carg0 *C.GtkConstraintGuide // in, none, converted
-	var carg1 C.int                 // out, full, casted, casted C.gint
-	var carg2 C.int                 // out, full, casted, casted C.gint
+	var carg1 C.int                 // out, full, casted
+	var carg2 C.int                 // out, full, casted
 
 	carg0 = (*C.GtkConstraintGuide)(UnsafeConstraintGuideToGlibNone(guide))
 
@@ -24666,8 +24764,8 @@ func (guide *ConstraintGuideInstance) GetMaxSize() (int32, int32) {
 // Gets the minimum size of @guide.
 func (guide *ConstraintGuideInstance) GetMinSize() (int32, int32) {
 	var carg0 *C.GtkConstraintGuide // in, none, converted
-	var carg1 C.int                 // out, full, casted, casted C.gint
-	var carg2 C.int                 // out, full, casted, casted C.gint
+	var carg1 C.int                 // out, full, casted
+	var carg2 C.int                 // out, full, casted
 
 	carg0 = (*C.GtkConstraintGuide)(UnsafeConstraintGuideToGlibNone(guide))
 
@@ -24692,7 +24790,7 @@ func (guide *ConstraintGuideInstance) GetMinSize() (int32, int32) {
 // Retrieves the name set using gtk_constraint_guide_set_name().
 func (guide *ConstraintGuideInstance) GetName() string {
 	var carg0 *C.GtkConstraintGuide // in, none, converted
-	var cret  *C.char               // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char               // return, none, string, nullable-string
 
 	carg0 = (*C.GtkConstraintGuide)(UnsafeConstraintGuideToGlibNone(guide))
 
@@ -24718,8 +24816,8 @@ func (guide *ConstraintGuideInstance) GetName() string {
 // Gets the natural size of @guide.
 func (guide *ConstraintGuideInstance) GetNatSize() (int32, int32) {
 	var carg0 *C.GtkConstraintGuide // in, none, converted
-	var carg1 C.int                 // out, full, casted, casted C.gint
-	var carg2 C.int                 // out, full, casted, casted C.gint
+	var carg1 C.int                 // out, full, casted
+	var carg2 C.int                 // out, full, casted
 
 	carg0 = (*C.GtkConstraintGuide)(UnsafeConstraintGuideToGlibNone(guide))
 
@@ -24771,8 +24869,8 @@ func (guide *ConstraintGuideInstance) GetStrength() ConstraintStrength {
 // the constraints will be updated to reflect the new size.
 func (guide *ConstraintGuideInstance) SetMaxSize(width int32, height int32) {
 	var carg0 *C.GtkConstraintGuide // in, none, converted
-	var carg1 C.int                 // in, none, casted, casted C.gint
-	var carg2 C.int                 // in, none, casted, casted C.gint
+	var carg1 C.int                 // in, none, casted
+	var carg2 C.int                 // in, none, casted
 
 	carg0 = (*C.GtkConstraintGuide)(UnsafeConstraintGuideToGlibNone(guide))
 	carg1 = C.int(width)
@@ -24797,8 +24895,8 @@ func (guide *ConstraintGuideInstance) SetMaxSize(width int32, height int32) {
 // the constraints will be updated to reflect the new size.
 func (guide *ConstraintGuideInstance) SetMinSize(width int32, height int32) {
 	var carg0 *C.GtkConstraintGuide // in, none, converted
-	var carg1 C.int                 // in, none, casted, casted C.gint
-	var carg2 C.int                 // in, none, casted, casted C.gint
+	var carg1 C.int                 // in, none, casted
+	var carg2 C.int                 // in, none, casted
 
 	carg0 = (*C.GtkConstraintGuide)(UnsafeConstraintGuideToGlibNone(guide))
 	carg1 = C.int(width)
@@ -24847,8 +24945,8 @@ func (guide *ConstraintGuideInstance) SetName(name string) {
 // the constraints will be updated to reflect the new size.
 func (guide *ConstraintGuideInstance) SetNatSize(width int32, height int32) {
 	var carg0 *C.GtkConstraintGuide // in, none, converted
-	var carg1 C.int                 // in, none, casted, casted C.gint
-	var carg2 C.int                 // in, none, casted, casted C.gint
+	var carg1 C.int                 // in, none, casted
+	var carg2 C.int                 // in, none, casted
 
 	carg0 = (*C.GtkConstraintGuide)(UnsafeConstraintGuideToGlibNone(guide))
 	carg1 = C.int(width)
@@ -25177,7 +25275,7 @@ func (cssProvider *CssProviderInstance) LoadFromFile(file gio.File) {
 // This clears any previously loaded information.
 func (cssProvider *CssProviderInstance) LoadFromPath(path string) {
 	var carg0 *C.GtkCssProvider // in, none, converted
-	var carg1 *C.char           // in, none, string, casted *C.gchar
+	var carg1 *C.char           // in, none, string
 
 	carg0 = (*C.GtkCssProvider)(UnsafeCssProviderToGlibNone(cssProvider))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(path)))
@@ -25200,7 +25298,7 @@ func (cssProvider *CssProviderInstance) LoadFromPath(path string) {
 // This clears any previously loaded information.
 func (cssProvider *CssProviderInstance) LoadFromResource(resourcePath string) {
 	var carg0 *C.GtkCssProvider // in, none, converted
-	var carg1 *C.char           // in, none, string, casted *C.gchar
+	var carg1 *C.char           // in, none, string
 
 	carg0 = (*C.GtkCssProvider)(UnsafeCssProviderToGlibNone(cssProvider))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(resourcePath)))
@@ -25222,7 +25320,7 @@ func (cssProvider *CssProviderInstance) LoadFromResource(resourcePath string) {
 // This clears any previously loaded information.
 func (cssProvider *CssProviderInstance) LoadFromString(str string) {
 	var carg0 *C.GtkCssProvider // in, none, converted
-	var carg1 *C.char           // in, none, string, casted *C.gchar
+	var carg1 *C.char           // in, none, string
 
 	carg0 = (*C.GtkCssProvider)(UnsafeCssProviderToGlibNone(cssProvider))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(str)))
@@ -25248,7 +25346,7 @@ func (cssProvider *CssProviderInstance) LoadFromString(str string) {
 // mechanism to load the theme that GTK uses for loading its own theme.
 func (provider *CssProviderInstance) LoadNamed(name string, variant string) {
 	var carg0 *C.GtkCssProvider // in, none, converted
-	var carg1 *C.char           // in, none, string, casted *C.gchar
+	var carg1 *C.char           // in, none, string
 	var carg2 *C.char           // in, none, string, nullable-string
 
 	carg0 = (*C.GtkCssProvider)(UnsafeCssProviderToGlibNone(provider))
@@ -25280,7 +25378,7 @@ func (provider *CssProviderInstance) LoadNamed(name string, variant string) {
 // of this @provider.
 func (provider *CssProviderInstance) ToString() string {
 	var carg0 *C.GtkCssProvider // in, none, converted
-	var cret  *C.char           // return, full, string, casted *C.gchar
+	var cret  *C.char           // return, full, string
 
 	carg0 = (*C.GtkCssProvider)(UnsafeCssProviderToGlibNone(provider))
 
@@ -25483,7 +25581,7 @@ func unsafeWrapDirectoryList(base *gobject.ObjectInstance) *DirectoryListInstanc
 	return &DirectoryListInstance{
 		ObjectInstance: *base,
 		ListModelInstance: gio.ListModelInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -25569,7 +25667,7 @@ func NewDirectoryList(attributes string, file gio.File) DirectoryList {
 // Gets the attributes queried on the children.
 func (self *DirectoryListInstance) GetAttributes() string {
 	var carg0 *C.GtkDirectoryList // in, none, converted
-	var cret  *C.char             // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char             // return, none, string, nullable-string
 
 	carg0 = (*C.GtkDirectoryList)(UnsafeDirectoryListToGlibNone(self))
 
@@ -25651,7 +25749,7 @@ func (self *DirectoryListInstance) GetFile() gio.File {
 // Gets the IO priority set via gtk_directory_list_set_io_priority().
 func (self *DirectoryListInstance) GetIOPriority() int32 {
 	var carg0 *C.GtkDirectoryList // in, none, converted
-	var cret  C.int               // return, none, casted, casted C.gint
+	var cret  C.int               // return, none, casted
 
 	carg0 = (*C.GtkDirectoryList)(UnsafeDirectoryListToGlibNone(self))
 
@@ -25786,7 +25884,7 @@ func (self *DirectoryListInstance) SetFile(file gio.File) {
 // may increase responsiveness.
 func (self *DirectoryListInstance) SetIOPriority(ioPriority int32) {
 	var carg0 *C.GtkDirectoryList // in, none, converted
-	var carg1 C.int               // in, none, casted, casted C.gint
+	var carg1 C.int               // in, none, casted
 
 	carg0 = (*C.GtkDirectoryList)(UnsafeDirectoryListToGlibNone(self))
 	carg1 = C.int(ioPriority)
@@ -26035,7 +26133,8 @@ type EntryBuffer interface {
 	// chain up virtual methods:
 
 	// ParentDeleteText calls the default implementations of the delete_text virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- position uint: position at which to delete text 
@@ -26058,14 +26157,16 @@ type EntryBuffer interface {
 	// not bytes.
 	ParentDeleteText(position uint, nChars uint) uint
 	// ParentDeletedText calls the default implementations of the deleted_text virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- position uint 
 	// 	- nChars uint 
 	ParentDeletedText(position uint, nChars uint)
 	// ParentGetLength calls the default implementations of the get_length virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret uint 
@@ -26073,7 +26174,8 @@ type EntryBuffer interface {
 	// Retrieves the length in characters of the buffer.
 	ParentGetLength() uint
 	// ParentGetText calls the default implementations of the get_text virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- nBytes *uint 
@@ -26083,7 +26185,8 @@ type EntryBuffer interface {
 	// 	- goret string 
 	ParentGetText(nBytes *uint) string
 	// ParentInsertText calls the default implementations of the insert_text virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- position uint: the position at which to insert text. 
@@ -26105,7 +26208,8 @@ type EntryBuffer interface {
 	// Note that the position and length are in characters, not in bytes.
 	ParentInsertText(position uint, chars string, nChars uint) uint
 	// ParentInsertedText calls the default implementations of the inserted_text virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- position uint 
@@ -26169,7 +26273,7 @@ func UnsafeEntryBufferToGlibFull(c EntryBuffer) unsafe.Pointer {
 // Optionally, specify initial text to set in the buffer.
 func NewEntryBuffer(initialChars string, nInitialChars int32) EntryBuffer {
 	var carg1 *C.char           // in, none, string, nullable-string
-	var carg2 C.int             // in, none, casted, casted C.gint
+	var carg2 C.int             // in, none, casted
 	var cret  *C.GtkEntryBuffer // return, full, converted
 
 	if initialChars != "" {
@@ -26214,7 +26318,7 @@ func NewEntryBuffer(initialChars string, nInitialChars int32) EntryBuffer {
 func (buffer *EntryBufferInstance) DeleteText(position uint, nChars int32) uint {
 	var carg0 *C.GtkEntryBuffer // in, none, converted
 	var carg1 C.guint           // in, none, casted
-	var carg2 C.int             // in, none, casted, casted C.gint
+	var carg2 C.int             // in, none, casted
 	var cret  C.guint           // return, none, casted
 
 	carg0 = (*C.GtkEntryBuffer)(UnsafeEntryBufferToGlibNone(buffer))
@@ -26268,7 +26372,7 @@ func (buffer *EntryBufferInstance) EmitDeletedText(position uint, nChars uint) {
 func (buffer *EntryBufferInstance) EmitInsertedText(position uint, chars string, nChars uint) {
 	var carg0 *C.GtkEntryBuffer // in, none, converted
 	var carg1 C.guint           // in, none, casted
-	var carg2 *C.char           // in, none, string, casted *C.gchar
+	var carg2 *C.char           // in, none, string
 	var carg3 C.guint           // in, none, casted
 
 	carg0 = (*C.GtkEntryBuffer)(UnsafeEntryBufferToGlibNone(buffer))
@@ -26341,7 +26445,7 @@ func (buffer *EntryBufferInstance) GetLength() uint {
 // Retrieves the maximum allowed length of the text in @buffer.
 func (buffer *EntryBufferInstance) GetMaxLength() int32 {
 	var carg0 *C.GtkEntryBuffer // in, none, converted
-	var cret  C.int             // return, none, casted, casted C.gint
+	var cret  C.int             // return, none, casted
 
 	carg0 = (*C.GtkEntryBuffer)(UnsafeEntryBufferToGlibNone(buffer))
 
@@ -26367,7 +26471,7 @@ func (buffer *EntryBufferInstance) GetMaxLength() int32 {
 // unless this object emits a signal, or is finalized.
 func (buffer *EntryBufferInstance) GetText() string {
 	var carg0 *C.GtkEntryBuffer // in, none, converted
-	var cret  *C.char           // return, none, string, casted *C.gchar
+	var cret  *C.char           // return, none, string
 
 	carg0 = (*C.GtkEntryBuffer)(UnsafeEntryBufferToGlibNone(buffer))
 
@@ -26405,8 +26509,8 @@ func (buffer *EntryBufferInstance) GetText() string {
 func (buffer *EntryBufferInstance) InsertText(position uint, chars string, nChars int32) uint {
 	var carg0 *C.GtkEntryBuffer // in, none, converted
 	var carg1 C.guint           // in, none, casted
-	var carg2 *C.char           // in, none, string, casted *C.gchar
-	var carg3 C.int             // in, none, casted, casted C.gint
+	var carg2 *C.char           // in, none, string
+	var carg3 C.int             // in, none, casted
 	var cret  C.guint           // return, none, casted
 
 	carg0 = (*C.GtkEntryBuffer)(UnsafeEntryBufferToGlibNone(buffer))
@@ -26442,7 +26546,7 @@ func (buffer *EntryBufferInstance) InsertText(position uint, chars string, nChar
 // they will be truncated to fit.
 func (buffer *EntryBufferInstance) SetMaxLength(maxLength int32) {
 	var carg0 *C.GtkEntryBuffer // in, none, converted
-	var carg1 C.int             // in, none, casted, casted C.gint
+	var carg1 C.int             // in, none, casted
 
 	carg0 = (*C.GtkEntryBuffer)(UnsafeEntryBufferToGlibNone(buffer))
 	carg1 = C.int(maxLength)
@@ -26468,8 +26572,8 @@ func (buffer *EntryBufferInstance) SetMaxLength(maxLength int32) {
 // Note that @n_chars is in characters, not in bytes.
 func (buffer *EntryBufferInstance) SetText(chars string, nChars int32) {
 	var carg0 *C.GtkEntryBuffer // in, none, converted
-	var carg1 *C.char           // in, none, string, casted *C.gchar
-	var carg2 C.int             // in, none, casted, casted C.gint
+	var carg1 *C.char           // in, none, string
+	var carg2 C.int             // in, none, casted
 
 	carg0 = (*C.GtkEntryBuffer)(UnsafeEntryBufferToGlibNone(buffer))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(chars)))
@@ -26505,7 +26609,8 @@ type EntryBufferOverrides[Instance EntryBuffer] struct {
 	// gobject.ObjectOverrides allows you to override virtual methods from the parent class gobject.Object
 	gobject.ObjectOverrides[Instance]
 
-	// DeleteText allows you to override the implementation of the virtual method delete_text.
+	// // DeleteText allows you to override the implementation of the virtual method delete_text.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- position uint: position at which to delete text 
@@ -26527,20 +26632,23 @@ type EntryBufferOverrides[Instance EntryBuffer] struct {
 	// Note that the positions are specified in characters,
 	// not bytes.
 	DeleteText func(Instance, uint, uint) uint
-	// DeletedText allows you to override the implementation of the virtual method deleted_text.
+	// // DeletedText allows you to override the implementation of the virtual method deleted_text.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- position uint 
 	// 	- nChars uint 
 	DeletedText func(Instance, uint, uint)
-	// GetLength allows you to override the implementation of the virtual method get_length.
+	// // GetLength allows you to override the implementation of the virtual method get_length.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret uint 
 	//
 	// Retrieves the length in characters of the buffer.
 	GetLength func(Instance) uint
-	// GetText allows you to override the implementation of the virtual method get_text.
+	// // GetText allows you to override the implementation of the virtual method get_text.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- nBytes *uint 
@@ -26549,7 +26657,8 @@ type EntryBufferOverrides[Instance EntryBuffer] struct {
 	// 
 	// 	- goret string 
 	GetText func(Instance, *uint) string
-	// InsertText allows you to override the implementation of the virtual method insert_text.
+	// // InsertText allows you to override the implementation of the virtual method insert_text.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- position uint: the position at which to insert text. 
@@ -26570,7 +26679,8 @@ type EntryBufferOverrides[Instance EntryBuffer] struct {
 	// 
 	// Note that the position and length are in characters, not in bytes.
 	InsertText func(Instance, uint, string, uint) uint
-	// InsertedText allows you to override the implementation of the virtual method inserted_text.
+	// // InsertedText allows you to override the implementation of the virtual method inserted_text.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- position uint 
@@ -26657,12 +26767,12 @@ func UnsafeApplyEntryBufferOverrides[Instance EntryBuffer](gclass unsafe.Pointer
 			func(carg0 *C.GtkEntryBuffer, carg1 *C.gsize) (cret *C.char) {
 				var buffer Instance // go GtkEntryBuffer subclass
 				var nBytes *uint    // in, transfer: none, C Pointers: 1, Name: gsize
-				var goret  string   // return, none, string, casted *C.gchar
+				var goret  string   // return, none, string
 
 				buffer = UnsafeEntryBufferFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				_ = nBytes
 				_ = carg1
-				panic("unimplemented conversion of *uint (gsize*)")
+				panic("unimplemented conversion of *uint (*C.gsize)")
 
 				goret = overrides.GetText(buffer, nBytes)
 
@@ -26682,7 +26792,7 @@ func UnsafeApplyEntryBufferOverrides[Instance EntryBuffer](gclass unsafe.Pointer
 			func(carg0 *C.GtkEntryBuffer, carg1 C.guint, carg2 *C.char, carg3 C.guint) (cret C.guint) {
 				var buffer   Instance // go GtkEntryBuffer subclass
 				var position uint     // in, none, casted
-				var chars    string   // in, none, string, casted *C.gchar
+				var chars    string   // in, none, string
 				var nChars   uint     // in, none, casted
 				var goret    uint     // return, none, casted
 
@@ -26708,7 +26818,7 @@ func UnsafeApplyEntryBufferOverrides[Instance EntryBuffer](gclass unsafe.Pointer
 			func(carg0 *C.GtkEntryBuffer, carg1 C.guint, carg2 *C.char, carg3 C.guint) {
 				var buffer   Instance // go GtkEntryBuffer subclass
 				var position uint     // in, none, casted
-				var chars    string   // in, none, string, casted *C.gchar
+				var chars    string   // in, none, string
 				var nChars   uint     // in, none, casted
 
 				buffer = UnsafeEntryBufferFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
@@ -26723,7 +26833,8 @@ func UnsafeApplyEntryBufferOverrides[Instance EntryBuffer](gclass unsafe.Pointer
 }
 
 // ParentDeleteText calls the default implementations of the delete_text virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- position uint: position at which to delete text 
@@ -26768,7 +26879,8 @@ func (buffer *EntryBufferInstance) ParentDeleteText(position uint, nChars uint) 
 }
 
 // ParentDeletedText calls the default implementations of the deleted_text virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- position uint 
@@ -26790,7 +26902,8 @@ func (buffer *EntryBufferInstance) ParentDeletedText(position uint, nChars uint)
 }
 
 // ParentGetLength calls the default implementations of the get_length virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret uint 
@@ -26813,7 +26926,8 @@ func (buffer *EntryBufferInstance) ParentGetLength() uint {
 }
 
 // ParentGetText calls the default implementations of the get_text virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- nBytes *uint 
@@ -26824,13 +26938,13 @@ func (buffer *EntryBufferInstance) ParentGetLength() uint {
 func (buffer *EntryBufferInstance) ParentGetText(nBytes *uint) string {
 	var carg0 *C.GtkEntryBuffer
 	var carg1 *C.gsize // in, transfer: none, C Pointers: 1, Name: gsize
-	var cret  *C.char  // return, none, string, casted *C.gchar
+	var cret  *C.char  // return, none, string
 
 	parentclass := (*C.GtkEntryBufferClass)(classdata.PeekParentClass(UnsafeEntryBufferToGlibNone(buffer)))
 
 	_ = nBytes
 	_ = carg1
-	panic("unimplemented conversion of *uint (gsize*)")
+	panic("unimplemented conversion of *uint (*C.gsize)")
 
 	cret = C._gotk4_gtk4_EntryBuffer_virtual_get_text(unsafe.Pointer(parentclass.get_text), carg0, carg1)
 	runtime.KeepAlive(buffer)
@@ -26844,7 +26958,8 @@ func (buffer *EntryBufferInstance) ParentGetText(nBytes *uint) string {
 }
 
 // ParentInsertText calls the default implementations of the insert_text virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- position uint: the position at which to insert text. 
@@ -26867,7 +26982,7 @@ func (buffer *EntryBufferInstance) ParentGetText(nBytes *uint) string {
 func (buffer *EntryBufferInstance) ParentInsertText(position uint, chars string, nChars uint) uint {
 	var carg0 *C.GtkEntryBuffer
 	var carg1 C.guint // in, none, casted
-	var carg2 *C.char // in, none, string, casted *C.gchar
+	var carg2 *C.char // in, none, string
 	var carg3 C.guint // in, none, casted
 	var cret  C.guint // return, none, casted
 
@@ -26892,7 +27007,8 @@ func (buffer *EntryBufferInstance) ParentInsertText(position uint, chars string,
 }
 
 // ParentInsertedText calls the default implementations of the inserted_text virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- position uint 
@@ -26901,7 +27017,7 @@ func (buffer *EntryBufferInstance) ParentInsertText(position uint, chars string,
 func (buffer *EntryBufferInstance) ParentInsertedText(position uint, chars string, nChars uint) {
 	var carg0 *C.GtkEntryBuffer
 	var carg1 C.guint // in, none, casted
-	var carg2 *C.char // in, none, string, casted *C.gchar
+	var carg2 *C.char // in, none, string
 	var carg3 C.guint // in, none, casted
 
 	parentclass := (*C.GtkEntryBufferClass)(classdata.PeekParentClass(UnsafeEntryBufferToGlibNone(buffer)))
@@ -27208,7 +27324,7 @@ func (controller *EventControllerInstance) GetCurrentEventTime() uint32 {
 // Gets the name of @controller.
 func (controller *EventControllerInstance) GetName() string {
 	var carg0 *C.GtkEventController // in, none, converted
-	var cret  *C.char               // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char               // return, none, string, nullable-string
 
 	carg0 = (*C.GtkEventController)(UnsafeEventControllerToGlibNone(controller))
 
@@ -28833,7 +28949,7 @@ func NewFileDialog() FileDialog {
 // Retrieves the text used by the dialog on its accept button.
 func (self *FileDialogInstance) GetAcceptLabel() string {
 	var carg0 *C.GtkFileDialog // in, none, converted
-	var cret  *C.char          // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char          // return, none, string, nullable-string
 
 	carg0 = (*C.GtkFileDialog)(UnsafeFileDialogToGlibNone(self))
 
@@ -28962,7 +29078,7 @@ func (self *FileDialogInstance) GetInitialFolder() gio.File {
 // Gets the name for the file that should be initially set.
 func (self *FileDialogInstance) GetInitialName() string {
 	var carg0 *C.GtkFileDialog // in, none, converted
-	var cret  *C.char          // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char          // return, none, string, nullable-string
 
 	carg0 = (*C.GtkFileDialog)(UnsafeFileDialogToGlibNone(self))
 
@@ -29015,7 +29131,7 @@ func (self *FileDialogInstance) GetModal() bool {
 // file chooser dialog.
 func (self *FileDialogInstance) GetTitle() string {
 	var carg0 *C.GtkFileDialog // in, none, converted
-	var cret  *C.char          // return, none, string, casted *C.gchar
+	var cret  *C.char          // return, none, string
 
 	carg0 = (*C.GtkFileDialog)(UnsafeFileDialogToGlibNone(self))
 
@@ -29610,7 +29726,7 @@ func (self *FileDialogInstance) SetModal(modal bool) {
 // file chooser dialog.
 func (self *FileDialogInstance) SetTitle(title string) {
 	var carg0 *C.GtkFileDialog // in, none, converted
-	var carg1 *C.char          // in, none, string, casted *C.gchar
+	var carg1 *C.char          // in, none, string
 
 	carg0 = (*C.GtkFileDialog)(UnsafeFileDialogToGlibNone(self))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(title)))
@@ -30279,7 +30395,8 @@ type Filter interface {
 	// chain up virtual methods:
 
 	// ParentGetStrictness calls the default implementations of the get_strictness virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret FilterMatch 
@@ -30418,7 +30535,8 @@ type FilterOverrides[Instance Filter] struct {
 	// gobject.ObjectOverrides allows you to override virtual methods from the parent class gobject.Object
 	gobject.ObjectOverrides[Instance]
 
-	// GetStrictness allows you to override the implementation of the virtual method get_strictness.
+	// // GetStrictness allows you to override the implementation of the virtual method get_strictness.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret FilterMatch 
@@ -30464,7 +30582,8 @@ func UnsafeApplyFilterOverrides[Instance Filter](gclass unsafe.Pointer, override
 }
 
 // ParentGetStrictness calls the default implementations of the get_strictness virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret FilterMatch 
@@ -30649,7 +30768,7 @@ func unsafeWrapFilterListModel(base *gobject.ObjectInstance) *FilterListModelIns
 	return &FilterListModelInstance{
 		ObjectInstance: *base,
 		ListModelInstance: gio.ListModelInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -31018,7 +31137,7 @@ func unsafeWrapFlattenListModel(base *gobject.ObjectInstance) *FlattenListModelI
 	return &FlattenListModelInstance{
 		ObjectInstance: *base,
 		ListModelInstance: gio.ListModelInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -31788,7 +31907,7 @@ func (self *FontDialogInstance) ChooseFontAndFeaturesFinish(result gio.AsyncResu
 	var carg0 *C.GtkFontDialog        // in, none, converted
 	var carg1 *C.GAsyncResult         // in, none, converted
 	var carg2 *C.PangoFontDescription // out, full, converted
-	var carg3 *C.char                 // out, full, string, casted *C.gchar
+	var carg3 *C.char                 // out, full, string
 	var carg4 *C.PangoLanguage        // out, full, converted
 	var cret  C.gboolean              // return
 	var _cerr *C.GError               // out, full, converted, nullable
@@ -31973,7 +32092,7 @@ func (self *FontDialogInstance) GetModal() bool {
 // font chooser dialog.
 func (self *FontDialogInstance) GetTitle() string {
 	var carg0 *C.GtkFontDialog // in, none, converted
-	var cret  *C.char          // return, none, string, casted *C.gchar
+	var cret  *C.char          // return, none, string
 
 	carg0 = (*C.GtkFontDialog)(UnsafeFontDialogToGlibNone(self))
 
@@ -32087,7 +32206,7 @@ func (self *FontDialogInstance) SetModal(modal bool) {
 // font chooser dialog.
 func (self *FontDialogInstance) SetTitle(title string) {
 	var carg0 *C.GtkFontDialog // in, none, converted
-	var carg1 *C.char          // in, none, string, casted *C.gchar
+	var carg1 *C.char          // in, none, string
 
 	carg0 = (*C.GtkFontDialog)(UnsafeFontDialogToGlibNone(self))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(title)))
@@ -32595,7 +32714,7 @@ func (gesture *GestureInstance) GetBoundingBox() (gdk.Rectangle, bool) {
 
 	_ = rect
 	_ = carg1
-	panic("unimplemented conversion of gdk.Rectangle (GdkRectangle)")
+	panic("unimplemented conversion of gdk.Rectangle (C.GdkRectangle)")
 	if cret != 0 {
 		goret = true
 	}
@@ -32618,8 +32737,8 @@ func (gesture *GestureInstance) GetBoundingBox() (gdk.Rectangle, bool) {
 // Otherwise, %FALSE will be returned.
 func (gesture *GestureInstance) GetBoundingBoxCenter() (float64, float64, bool) {
 	var carg0 *C.GtkGesture // in, none, converted
-	var carg1 C.double      // out, full, casted, casted C.gdouble
-	var carg2 C.double      // out, full, casted, casted C.gdouble
+	var carg1 C.double      // out, full, casted
+	var carg2 C.double      // out, full, casted
 	var cret  C.gboolean    // return
 
 	carg0 = (*C.GtkGesture)(UnsafeGestureToGlibNone(gesture))
@@ -32743,8 +32862,8 @@ func (gesture *GestureInstance) GetLastUpdatedSequence() *gdk.EventSequence {
 func (gesture *GestureInstance) GetPoint(sequence *gdk.EventSequence) (float64, float64, bool) {
 	var carg0 *C.GtkGesture       // in, none, converted
 	var carg1 *C.GdkEventSequence // in, none, converted, nullable
-	var carg2 C.double            // out, full, casted, casted C.gdouble
-	var carg3 C.double            // out, full, casted, casted C.gdouble
+	var carg2 C.double            // out, full, casted
+	var carg3 C.double            // out, full, casted
 	var cret  C.gboolean          // return
 
 	carg0 = (*C.GtkGesture)(UnsafeGestureToGlibNone(gesture))
@@ -33251,7 +33370,7 @@ func NewGestureRotate() Gesture {
 // not active, 0 is returned.
 func (gesture *GestureRotateInstance) GetAngleDelta() float64 {
 	var carg0 *C.GtkGestureRotate // in, none, converted
-	var cret  C.double            // return, none, casted, casted C.gdouble
+	var cret  C.double            // return, none, casted
 
 	carg0 = (*C.GtkGestureRotate)(UnsafeGestureRotateToGlibNone(gesture))
 
@@ -33804,7 +33923,7 @@ func NewGestureStylus() Gesture {
 func (gesture *GestureStylusInstance) GetAxis(axis gdk.AxisUse) (float64, bool) {
 	var carg0 *C.GtkGestureStylus // in, none, converted
 	var carg1 C.GdkAxisUse        // in, none, casted
-	var carg2 C.double            // out, full, casted, casted C.gdouble
+	var carg2 C.double            // out, full, casted
 	var cret  C.gboolean          // return
 
 	carg0 = (*C.GtkGestureStylus)(UnsafeGestureStylusToGlibNone(gesture))
@@ -34062,8 +34181,8 @@ func NewGestureSwipe() Gesture {
 // last events processed.
 func (gesture *GestureSwipeInstance) GetVelocity() (float64, float64, bool) {
 	var carg0 *C.GtkGestureSwipe // in, none, converted
-	var carg1 C.double           // out, full, casted, casted C.gdouble
-	var carg2 C.double           // out, full, casted, casted C.gdouble
+	var carg1 C.double           // out, full, casted
+	var carg2 C.double           // out, full, casted
 	var cret  C.gboolean         // return
 
 	carg0 = (*C.GtkGestureSwipe)(UnsafeGestureSwipeToGlibNone(gesture))
@@ -34208,7 +34327,7 @@ func NewGestureZoom() Gesture {
 // active, 1 is returned.
 func (gesture *GestureZoomInstance) GetScaleDelta() float64 {
 	var carg0 *C.GtkGestureZoom // in, none, converted
-	var cret  C.double          // return, none, casted, casted C.gdouble
+	var cret  C.double          // return, none, casted
 
 	carg0 = (*C.GtkGestureZoom)(UnsafeGestureZoomToGlibNone(gesture))
 
@@ -34490,10 +34609,11 @@ type IMContext interface {
 	// chain up virtual methods:
 
 	// ParentActivateOSK calls the default implementations of the activate_osk virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
 	ParentActivateOSK()
 	// ParentCommit calls the default implementations of the commit virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- str string 
@@ -34501,7 +34621,8 @@ type IMContext interface {
 	// Default handler of the [signal@Gtk.IMContext::commit] signal.
 	ParentCommit(str string)
 	// ParentDeleteSurrounding calls the default implementations of the delete_surrounding virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- offset int32: offset from cursor position in chars;
@@ -34531,7 +34652,7 @@ type IMContext interface {
 	// It is not useful for applications.
 	ParentDeleteSurrounding(offset int32, nChars int32) bool
 	// ParentFocusIn calls the default implementations of the focus_in virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
 	//
 	// Notify the input method that the widget to which this
 	// input context corresponds has gained focus.
@@ -34540,7 +34661,7 @@ type IMContext interface {
 	// feedback to reflect this change.
 	ParentFocusIn()
 	// ParentFocusOut calls the default implementations of the focus_out virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
 	//
 	// Notify the input method that the widget to which this
 	// input context corresponds has lost focus.
@@ -34549,7 +34670,8 @@ type IMContext interface {
 	// feedback or reset the contexts state to reflect this change.
 	ParentFocusOut()
 	// ParentGetPreeditString calls the default implementations of the get_preedit_string virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- str string: location to store the retrieved
@@ -34566,7 +34688,8 @@ type IMContext interface {
 	// This string should be displayed inserted at the insertion point.
 	ParentGetPreeditString() (string, *pango.AttrList, int32)
 	// ParentGetSurroundingWithSelection calls the default implementations of the get_surrounding_with_selection virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- text string: location to store a UTF-8 encoded
@@ -34596,23 +34719,23 @@ type IMContext interface {
 	// function without context.
 	ParentGetSurroundingWithSelection() (string, int32, int32, bool)
 	// ParentPreeditChanged calls the default implementations of the preedit_changed virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
 	//
 	// Default handler of the [signal@Gtk.IMContext::preedit-changed]
 	//   signal.
 	ParentPreeditChanged()
 	// ParentPreeditEnd calls the default implementations of the preedit_end virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
 	//
 	// Default handler of the [signal@Gtk.IMContext::preedit-end] signal.
 	ParentPreeditEnd()
 	// ParentPreeditStart calls the default implementations of the preedit_start virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
 	//
 	// Default handler of the [signal@Gtk.IMContext::preedit-start] signal.
 	ParentPreeditStart()
 	// ParentReset calls the default implementations of the reset virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
 	//
 	// Notify the input method that a change such as a change in cursor
 	// position has been made.
@@ -34620,7 +34743,8 @@ type IMContext interface {
 	// This will typically cause the input method to clear the preedit state.
 	ParentReset()
 	// ParentRetrieveSurrounding calls the default implementations of the retrieve_surrounding virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
@@ -34629,7 +34753,8 @@ type IMContext interface {
 	//   [signal@Gtk.IMContext::retrieve-surrounding] signal.
 	ParentRetrieveSurrounding() bool
 	// ParentSetClientWidget calls the default implementations of the set_client_widget virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- widget Widget (nullable): the client widget. This may be %NULL to indicate
@@ -34642,7 +34767,8 @@ type IMContext interface {
 	// also be used for purposes internal to the input method.
 	ParentSetClientWidget(widget Widget)
 	// ParentSetCursorLocation calls the default implementations of the set_cursor_location virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- area *gdk.Rectangle: new location 
@@ -34653,7 +34779,8 @@ type IMContext interface {
 	// The location is relative to the client widget.
 	ParentSetCursorLocation(area *gdk.Rectangle)
 	// ParentSetSurroundingWithSelection calls the default implementations of the set_surrounding_with_selection virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- text string: text surrounding the insertion point, as UTF-8.
@@ -34668,7 +34795,8 @@ type IMContext interface {
 	// have no effect if called at other times.
 	ParentSetSurroundingWithSelection(text string, len int32, cursorIndex int32, anchorIndex int32)
 	// ParentSetUsePreedit calls the default implementations of the set_use_preedit virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- usePreedit bool: whether the IM context should use the preedit string. 
@@ -34752,8 +34880,8 @@ func UnsafeIMContextToGlibFull(c IMContext) unsafe.Pointer {
 // It is not useful for applications.
 func (_context *IMContextInstance) DeleteSurrounding(offset int32, nChars int32) bool {
 	var carg0 *C.GtkIMContext // in, none, converted
-	var carg1 C.int           // in, none, casted, casted C.gint
-	var carg2 C.int           // in, none, casted, casted C.gint
+	var carg1 C.int           // in, none, casted
+	var carg2 C.int           // in, none, casted
 	var cret  C.gboolean      // return
 
 	carg0 = (*C.GtkIMContext)(UnsafeIMContextToGlibNone(_context))
@@ -34801,7 +34929,7 @@ func (_context *IMContextInstance) FilterKey(press bool, surface gdk.Surface, de
 	var carg4 C.guint32         // in, none, casted
 	var carg5 C.guint           // in, none, casted
 	var carg6 C.GdkModifierType // in, none, casted
-	var carg7 C.int             // in, none, casted, casted C.gint
+	var carg7 C.int             // in, none, casted
 	var cret  C.gboolean        // return
 
 	carg0 = (*C.GtkIMContext)(UnsafeIMContextToGlibNone(_context))
@@ -34884,9 +35012,9 @@ func (_context *IMContextInstance) FocusOut() {
 // This string should be displayed inserted at the insertion point.
 func (_context *IMContextInstance) GetPreeditString() (string, *pango.AttrList, int32) {
 	var carg0 *C.GtkIMContext  // in, none, converted
-	var carg1 *C.char          // out, full, string, casted *C.gchar
+	var carg1 *C.char          // out, full, string
 	var carg2 *C.PangoAttrList // out, full, converted
-	var carg3 C.int            // out, full, casted, casted C.gint
+	var carg3 C.int            // out, full, casted
 
 	carg0 = (*C.GtkIMContext)(UnsafeIMContextToGlibNone(_context))
 
@@ -34936,9 +35064,9 @@ func (_context *IMContextInstance) GetPreeditString() (string, *pango.AttrList, 
 // function without context.
 func (_context *IMContextInstance) GetSurroundingWithSelection() (string, int32, int32, bool) {
 	var carg0 *C.GtkIMContext // in, none, converted
-	var carg1 *C.char         // out, full, string, casted *C.gchar
-	var carg2 C.int           // out, full, casted, casted C.gint
-	var carg3 C.int           // out, full, casted, casted C.gint
+	var carg1 *C.char         // out, full, string
+	var carg2 C.int           // out, full, casted
+	var carg3 C.int           // out, full, casted
 	var cret  C.gboolean      // return
 
 	carg0 = (*C.GtkIMContext)(UnsafeIMContextToGlibNone(_context))
@@ -35041,10 +35169,10 @@ func (_context *IMContextInstance) SetCursorLocation(area *gdk.Rectangle) {
 // have no effect if called at other times.
 func (_context *IMContextInstance) SetSurroundingWithSelection(text string, len int32, cursorIndex int32, anchorIndex int32) {
 	var carg0 *C.GtkIMContext // in, none, converted
-	var carg1 *C.char         // in, none, string, casted *C.gchar
-	var carg2 C.int           // in, none, casted, casted C.gint
-	var carg3 C.int           // in, none, casted, casted C.gint
-	var carg4 C.int           // in, none, casted, casted C.gint
+	var carg1 *C.char         // in, none, string
+	var carg2 C.int           // in, none, casted
+	var carg3 C.int           // in, none, casted
+	var carg4 C.int           // in, none, casted
 
 	carg0 = (*C.GtkIMContext)(UnsafeIMContextToGlibNone(_context))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(text)))
@@ -35153,16 +35281,18 @@ type IMContextOverrides[Instance IMContext] struct {
 	// gobject.ObjectOverrides allows you to override virtual methods from the parent class gobject.Object
 	gobject.ObjectOverrides[Instance]
 
-	// ActivateOSK allows you to override the implementation of the virtual method activate_osk.
+	// // ActivateOSK allows you to override the implementation of the virtual method activate_osk.
 	ActivateOSK func(Instance)
-	// Commit allows you to override the implementation of the virtual method commit.
+	// // Commit allows you to override the implementation of the virtual method commit.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- str string 
 	//
 	// Default handler of the [signal@Gtk.IMContext::commit] signal.
 	Commit func(Instance, string)
-	// DeleteSurrounding allows you to override the implementation of the virtual method delete_surrounding.
+	// // DeleteSurrounding allows you to override the implementation of the virtual method delete_surrounding.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- offset int32: offset from cursor position in chars;
@@ -35191,7 +35321,7 @@ type IMContextOverrides[Instance IMContext] struct {
 	// substitutions in the existing text in response to new input.
 	// It is not useful for applications.
 	DeleteSurrounding func(Instance, int32, int32) bool
-	// FocusIn allows you to override the implementation of the virtual method focus_in.
+	// // FocusIn allows you to override the implementation of the virtual method focus_in.
 	//
 	// Notify the input method that the widget to which this
 	// input context corresponds has gained focus.
@@ -35199,7 +35329,7 @@ type IMContextOverrides[Instance IMContext] struct {
 	// The input method may, for example, change the displayed
 	// feedback to reflect this change.
 	FocusIn func(Instance)
-	// FocusOut allows you to override the implementation of the virtual method focus_out.
+	// // FocusOut allows you to override the implementation of the virtual method focus_out.
 	//
 	// Notify the input method that the widget to which this
 	// input context corresponds has lost focus.
@@ -35207,7 +35337,8 @@ type IMContextOverrides[Instance IMContext] struct {
 	// The input method may, for example, change the displayed
 	// feedback or reset the contexts state to reflect this change.
 	FocusOut func(Instance)
-	// GetPreeditString allows you to override the implementation of the virtual method get_preedit_string.
+	// // GetPreeditString allows you to override the implementation of the virtual method get_preedit_string.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- str string: location to store the retrieved
@@ -35223,7 +35354,8 @@ type IMContextOverrides[Instance IMContext] struct {
 	// 
 	// This string should be displayed inserted at the insertion point.
 	GetPreeditString func(Instance) (string, *pango.AttrList, int32)
-	// GetSurroundingWithSelection allows you to override the implementation of the virtual method get_surrounding_with_selection.
+	// // GetSurroundingWithSelection allows you to override the implementation of the virtual method get_surrounding_with_selection.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- text string: location to store a UTF-8 encoded
@@ -35252,27 +35384,28 @@ type IMContextOverrides[Instance IMContext] struct {
 	// `::retrieve-surrounding` signal, so input methods must be prepared to
 	// function without context.
 	GetSurroundingWithSelection func(Instance) (string, int32, int32, bool)
-	// PreeditChanged allows you to override the implementation of the virtual method preedit_changed.
+	// // PreeditChanged allows you to override the implementation of the virtual method preedit_changed.
 	//
 	// Default handler of the [signal@Gtk.IMContext::preedit-changed]
 	//   signal.
 	PreeditChanged func(Instance)
-	// PreeditEnd allows you to override the implementation of the virtual method preedit_end.
+	// // PreeditEnd allows you to override the implementation of the virtual method preedit_end.
 	//
 	// Default handler of the [signal@Gtk.IMContext::preedit-end] signal.
 	PreeditEnd func(Instance)
-	// PreeditStart allows you to override the implementation of the virtual method preedit_start.
+	// // PreeditStart allows you to override the implementation of the virtual method preedit_start.
 	//
 	// Default handler of the [signal@Gtk.IMContext::preedit-start] signal.
 	PreeditStart func(Instance)
-	// Reset allows you to override the implementation of the virtual method reset.
+	// // Reset allows you to override the implementation of the virtual method reset.
 	//
 	// Notify the input method that a change such as a change in cursor
 	// position has been made.
 	// 
 	// This will typically cause the input method to clear the preedit state.
 	Reset func(Instance)
-	// RetrieveSurrounding allows you to override the implementation of the virtual method retrieve_surrounding.
+	// // RetrieveSurrounding allows you to override the implementation of the virtual method retrieve_surrounding.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
@@ -35280,7 +35413,8 @@ type IMContextOverrides[Instance IMContext] struct {
 	// Default handler of the
 	//   [signal@Gtk.IMContext::retrieve-surrounding] signal.
 	RetrieveSurrounding func(Instance) bool
-	// SetClientWidget allows you to override the implementation of the virtual method set_client_widget.
+	// // SetClientWidget allows you to override the implementation of the virtual method set_client_widget.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- widget Widget (nullable): the client widget. This may be %NULL to indicate
@@ -35292,7 +35426,8 @@ type IMContextOverrides[Instance IMContext] struct {
 	// used in order to correctly position status windows, and may
 	// also be used for purposes internal to the input method.
 	SetClientWidget func(Instance, Widget)
-	// SetCursorLocation allows you to override the implementation of the virtual method set_cursor_location.
+	// // SetCursorLocation allows you to override the implementation of the virtual method set_cursor_location.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- area *gdk.Rectangle: new location 
@@ -35302,7 +35437,8 @@ type IMContextOverrides[Instance IMContext] struct {
 	// 
 	// The location is relative to the client widget.
 	SetCursorLocation func(Instance, *gdk.Rectangle)
-	// SetSurroundingWithSelection allows you to override the implementation of the virtual method set_surrounding_with_selection.
+	// // SetSurroundingWithSelection allows you to override the implementation of the virtual method set_surrounding_with_selection.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- text string: text surrounding the insertion point, as UTF-8.
@@ -35316,7 +35452,8 @@ type IMContextOverrides[Instance IMContext] struct {
 	// [signal@Gtk.IMContext::retrieve_surrounding] signal, and will likely
 	// have no effect if called at other times.
 	SetSurroundingWithSelection func(Instance, string, int32, int32, int32)
-	// SetUsePreedit allows you to override the implementation of the virtual method set_use_preedit.
+	// // SetUsePreedit allows you to override the implementation of the virtual method set_use_preedit.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- usePreedit bool: whether the IM context should use the preedit string. 
@@ -35359,7 +35496,7 @@ func UnsafeApplyIMContextOverrides[Instance IMContext](gclass unsafe.Pointer, ov
 			"_gotk4_gtk4_IMContext_commit",
 			func(carg0 *C.GtkIMContext, carg1 *C.char) {
 				var _context Instance // go GtkIMContext subclass
-				var str      string   // in, none, string, casted *C.gchar
+				var str      string   // in, none, string
 
 				_context = UnsafeIMContextFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				str = C.GoString((*C.char)(unsafe.Pointer(carg1)))
@@ -35376,8 +35513,8 @@ func UnsafeApplyIMContextOverrides[Instance IMContext](gclass unsafe.Pointer, ov
 			"_gotk4_gtk4_IMContext_delete_surrounding",
 			func(carg0 *C.GtkIMContext, carg1 C.int, carg2 C.int) (cret C.gboolean) {
 				var _context Instance // go GtkIMContext subclass
-				var offset   int32    // in, none, casted, casted C.gint
-				var nChars   int32    // in, none, casted, casted C.gint
+				var offset   int32    // in, none, casted
+				var nChars   int32    // in, none, casted
 				var goret    bool     // return
 
 				_context = UnsafeIMContextFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
@@ -35432,9 +35569,9 @@ func UnsafeApplyIMContextOverrides[Instance IMContext](gclass unsafe.Pointer, ov
 			"_gotk4_gtk4_IMContext_get_preedit_string",
 			func(carg0 *C.GtkIMContext, carg1 **C.char, carg2 **C.PangoAttrList, carg3 *C.int) {
 				var _context  Instance        // go GtkIMContext subclass
-				var str       string          // out, full, string, casted *C.gchar
+				var str       string          // out, full, string
 				var attrs     *pango.AttrList // out, full, converted
-				var cursorPos int32           // out, full, casted, casted C.gint
+				var cursorPos int32           // out, full, casted
 
 				_context = UnsafeIMContextFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
@@ -35454,9 +35591,9 @@ func UnsafeApplyIMContextOverrides[Instance IMContext](gclass unsafe.Pointer, ov
 			"_gotk4_gtk4_IMContext_get_surrounding_with_selection",
 			func(carg0 *C.GtkIMContext, carg1 **C.char, carg2 *C.int, carg3 *C.int) (cret C.gboolean) {
 				var _context    Instance // go GtkIMContext subclass
-				var text        string   // out, full, string, casted *C.gchar
-				var cursorIndex int32    // out, full, casted, casted C.gint
-				var anchorIndex int32    // out, full, casted, casted C.gint
+				var text        string   // out, full, string
+				var cursorIndex int32    // out, full, casted
+				var anchorIndex int32    // out, full, casted
 				var goret       bool     // return
 
 				_context = UnsafeIMContextFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
@@ -35600,10 +35737,10 @@ func UnsafeApplyIMContextOverrides[Instance IMContext](gclass unsafe.Pointer, ov
 			"_gotk4_gtk4_IMContext_set_surrounding_with_selection",
 			func(carg0 *C.GtkIMContext, carg1 *C.char, carg2 C.int, carg3 C.int, carg4 C.int) {
 				var _context    Instance // go GtkIMContext subclass
-				var text        string   // in, none, string, casted *C.gchar
-				var len         int32    // in, none, casted, casted C.gint
-				var cursorIndex int32    // in, none, casted, casted C.gint
-				var anchorIndex int32    // in, none, casted, casted C.gint
+				var text        string   // in, none, string
+				var len         int32    // in, none, casted
+				var cursorIndex int32    // in, none, casted
+				var anchorIndex int32    // in, none, casted
 
 				_context = UnsafeIMContextFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				text = C.GoString((*C.char)(unsafe.Pointer(carg1)))
@@ -35637,7 +35774,7 @@ func UnsafeApplyIMContextOverrides[Instance IMContext](gclass unsafe.Pointer, ov
 }
 
 // ParentActivateOSK calls the default implementations of the activate_osk virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
 func (_context *IMContextInstance) ParentActivateOSK() {
 	var carg0 *C.GtkIMContext
 
@@ -35648,7 +35785,8 @@ func (_context *IMContextInstance) ParentActivateOSK() {
 }
 
 // ParentCommit calls the default implementations of the commit virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- str string 
@@ -35656,7 +35794,7 @@ func (_context *IMContextInstance) ParentActivateOSK() {
 // Default handler of the [signal@Gtk.IMContext::commit] signal.
 func (_context *IMContextInstance) ParentCommit(str string) {
 	var carg0 *C.GtkIMContext
-	var carg1 *C.char // in, none, string, casted *C.gchar
+	var carg1 *C.char // in, none, string
 
 	parentclass := (*C.GtkIMContextClass)(classdata.PeekParentClass(UnsafeIMContextToGlibNone(_context)))
 
@@ -35669,7 +35807,8 @@ func (_context *IMContextInstance) ParentCommit(str string) {
 }
 
 // ParentDeleteSurrounding calls the default implementations of the delete_surrounding virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- offset int32: offset from cursor position in chars;
@@ -35699,8 +35838,8 @@ func (_context *IMContextInstance) ParentCommit(str string) {
 // It is not useful for applications.
 func (_context *IMContextInstance) ParentDeleteSurrounding(offset int32, nChars int32) bool {
 	var carg0 *C.GtkIMContext
-	var carg1 C.int      // in, none, casted, casted C.gint
-	var carg2 C.int      // in, none, casted, casted C.gint
+	var carg1 C.int      // in, none, casted
+	var carg2 C.int      // in, none, casted
 	var cret  C.gboolean // return
 
 	parentclass := (*C.GtkIMContextClass)(classdata.PeekParentClass(UnsafeIMContextToGlibNone(_context)))
@@ -35723,7 +35862,7 @@ func (_context *IMContextInstance) ParentDeleteSurrounding(offset int32, nChars 
 }
 
 // ParentFocusIn calls the default implementations of the focus_in virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
 //
 // Notify the input method that the widget to which this
 // input context corresponds has gained focus.
@@ -35740,7 +35879,7 @@ func (_context *IMContextInstance) ParentFocusIn() {
 }
 
 // ParentFocusOut calls the default implementations of the focus_out virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
 //
 // Notify the input method that the widget to which this
 // input context corresponds has lost focus.
@@ -35757,7 +35896,8 @@ func (_context *IMContextInstance) ParentFocusOut() {
 }
 
 // ParentGetPreeditString calls the default implementations of the get_preedit_string virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- str string: location to store the retrieved
@@ -35774,9 +35914,9 @@ func (_context *IMContextInstance) ParentFocusOut() {
 // This string should be displayed inserted at the insertion point.
 func (_context *IMContextInstance) ParentGetPreeditString() (string, *pango.AttrList, int32) {
 	var carg0 *C.GtkIMContext
-	var carg1 *C.char          // out, full, string, casted *C.gchar
+	var carg1 *C.char          // out, full, string
 	var carg2 *C.PangoAttrList // out, full, converted
-	var carg3 C.int            // out, full, casted, casted C.gint
+	var carg3 C.int            // out, full, casted
 
 	parentclass := (*C.GtkIMContextClass)(classdata.PeekParentClass(UnsafeIMContextToGlibNone(_context)))
 
@@ -35796,7 +35936,8 @@ func (_context *IMContextInstance) ParentGetPreeditString() (string, *pango.Attr
 }
 
 // ParentGetSurroundingWithSelection calls the default implementations of the get_surrounding_with_selection virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- text string: location to store a UTF-8 encoded
@@ -35826,9 +35967,9 @@ func (_context *IMContextInstance) ParentGetPreeditString() (string, *pango.Attr
 // function without context.
 func (_context *IMContextInstance) ParentGetSurroundingWithSelection() (string, int32, int32, bool) {
 	var carg0 *C.GtkIMContext
-	var carg1 *C.char    // out, full, string, casted *C.gchar
-	var carg2 C.int      // out, full, casted, casted C.gint
-	var carg3 C.int      // out, full, casted, casted C.gint
+	var carg1 *C.char    // out, full, string
+	var carg2 C.int      // out, full, casted
+	var carg3 C.int      // out, full, casted
 	var cret  C.gboolean // return
 
 	parentclass := (*C.GtkIMContextClass)(classdata.PeekParentClass(UnsafeIMContextToGlibNone(_context)))
@@ -35853,7 +35994,7 @@ func (_context *IMContextInstance) ParentGetSurroundingWithSelection() (string, 
 }
 
 // ParentPreeditChanged calls the default implementations of the preedit_changed virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
 //
 // Default handler of the [signal@Gtk.IMContext::preedit-changed]
 //   signal.
@@ -35867,7 +36008,7 @@ func (_context *IMContextInstance) ParentPreeditChanged() {
 }
 
 // ParentPreeditEnd calls the default implementations of the preedit_end virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
 //
 // Default handler of the [signal@Gtk.IMContext::preedit-end] signal.
 func (_context *IMContextInstance) ParentPreeditEnd() {
@@ -35880,7 +36021,7 @@ func (_context *IMContextInstance) ParentPreeditEnd() {
 }
 
 // ParentPreeditStart calls the default implementations of the preedit_start virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
 //
 // Default handler of the [signal@Gtk.IMContext::preedit-start] signal.
 func (_context *IMContextInstance) ParentPreeditStart() {
@@ -35893,7 +36034,7 @@ func (_context *IMContextInstance) ParentPreeditStart() {
 }
 
 // ParentReset calls the default implementations of the reset virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
 //
 // Notify the input method that a change such as a change in cursor
 // position has been made.
@@ -35909,7 +36050,8 @@ func (_context *IMContextInstance) ParentReset() {
 }
 
 // ParentRetrieveSurrounding calls the default implementations of the retrieve_surrounding virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -35935,7 +36077,8 @@ func (_context *IMContextInstance) ParentRetrieveSurrounding() bool {
 }
 
 // ParentSetClientWidget calls the default implementations of the set_client_widget virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- widget Widget (nullable): the client widget. This may be %NULL to indicate
@@ -35962,7 +36105,8 @@ func (_context *IMContextInstance) ParentSetClientWidget(widget Widget) {
 }
 
 // ParentSetCursorLocation calls the default implementations of the set_cursor_location virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- area *gdk.Rectangle: new location 
@@ -35985,7 +36129,8 @@ func (_context *IMContextInstance) ParentSetCursorLocation(area *gdk.Rectangle) 
 }
 
 // ParentSetSurroundingWithSelection calls the default implementations of the set_surrounding_with_selection virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- text string: text surrounding the insertion point, as UTF-8.
@@ -36000,10 +36145,10 @@ func (_context *IMContextInstance) ParentSetCursorLocation(area *gdk.Rectangle) 
 // have no effect if called at other times.
 func (_context *IMContextInstance) ParentSetSurroundingWithSelection(text string, len int32, cursorIndex int32, anchorIndex int32) {
 	var carg0 *C.GtkIMContext
-	var carg1 *C.char // in, none, string, casted *C.gchar
-	var carg2 C.int   // in, none, casted, casted C.gint
-	var carg3 C.int   // in, none, casted, casted C.gint
-	var carg4 C.int   // in, none, casted, casted C.gint
+	var carg1 *C.char // in, none, string
+	var carg2 C.int   // in, none, casted
+	var carg3 C.int   // in, none, casted
+	var carg4 C.int   // in, none, casted
 
 	parentclass := (*C.GtkIMContextClass)(classdata.PeekParentClass(UnsafeIMContextToGlibNone(_context)))
 
@@ -36022,7 +36167,8 @@ func (_context *IMContextInstance) ParentSetSurroundingWithSelection(text string
 }
 
 // ParentSetUsePreedit calls the default implementations of the set_use_preedit virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- usePreedit bool: whether the IM context should use the preedit string. 
@@ -36207,7 +36353,7 @@ func NewIMContextSimple() IMContext {
 // Adds an additional table from the X11 compose file.
 func (contextSimple *IMContextSimpleInstance) AddComposeFile(composeFile string) {
 	var carg0 *C.GtkIMContextSimple // in, none, converted
-	var carg1 *C.char               // in, none, string, casted *C.gchar
+	var carg1 *C.char               // in, none, string
 
 	carg0 = (*C.GtkIMContextSimple)(UnsafeIMContextSimpleToGlibNone(contextSimple))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(composeFile)))
@@ -36374,7 +36520,7 @@ func NewIMMulticontext() IMContext {
 // Gets the id of the currently active delegate of the @context.
 func (_context *IMMulticontextInstance) GetContextID() string {
 	var carg0 *C.GtkIMMulticontext // in, none, converted
-	var cret  *C.char              // return, none, string, casted *C.gchar
+	var cret  *C.char              // return, none, string
 
 	carg0 = (*C.GtkIMMulticontext)(UnsafeIMMulticontextToGlibNone(_context))
 
@@ -36523,7 +36669,7 @@ func unsafeWrapIconPaintable(base *gobject.ObjectInstance) *IconPaintableInstanc
 	return &IconPaintableInstance{
 		ObjectInstance: *base,
 		PaintableInstance: gdk.PaintableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -36578,8 +36724,8 @@ func UnsafeIconPaintableToGlibFull(c IconPaintable) unsafe.Pointer {
 // The icon can then be rendered by using it as a `GdkPaintable`.
 func NewIconPaintableForFile(file gio.File, size int32, scale int32) IconPaintable {
 	var carg1 *C.GFile            // in, none, converted
-	var carg2 C.int               // in, none, casted, casted C.gint
-	var carg3 C.int               // in, none, casted, casted C.gint
+	var carg2 C.int               // in, none, casted
+	var carg3 C.int               // in, none, casted
 	var cret  *C.GtkIconPaintable // return, full, converted
 
 	carg1 = (*C.GFile)(gio.UnsafeFileToGlibNone(file))
@@ -36642,7 +36788,7 @@ func (self *IconPaintableInstance) GetFile() gio.File {
 // returns %NULL.
 func (self *IconPaintableInstance) GetIconName() string {
 	var carg0 *C.GtkIconPaintable // in, none, converted
-	var cret  *C.char             // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char             // return, none, string, nullable
 
 	carg0 = (*C.GtkIconPaintable)(UnsafeIconPaintableToGlibNone(self))
 
@@ -37075,7 +37221,7 @@ func IconThemeGetForDisplay(display gdk.Display) IconTheme {
 // available as part of the icon theme.
 func (self *IconThemeInstance) AddResourcePath(path string) {
 	var carg0 *C.GtkIconTheme // in, none, converted
-	var carg1 *C.char         // in, none, string, casted *C.gchar
+	var carg1 *C.char         // in, none, string
 
 	carg0 = (*C.GtkIconTheme)(UnsafeIconThemeToGlibNone(self))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(path)))
@@ -37097,7 +37243,7 @@ func (self *IconThemeInstance) AddResourcePath(path string) {
 // See [method@Gtk.IconTheme.set_search_path].
 func (self *IconThemeInstance) AddSearchPath(path string) {
 	var carg0 *C.GtkIconTheme // in, none, converted
-	var carg1 *C.char         // in, none, string, casted *C.gchar
+	var carg1 *C.char         // in, none, string
 
 	carg0 = (*C.GtkIconTheme)(UnsafeIconThemeToGlibNone(self))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(path)))
@@ -37154,7 +37300,7 @@ func (self *IconThemeInstance) GetIconNames() []string {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (char**)")
+	panic("unimplemented conversion of []string (**C.char)")
 
 	return goret
 }
@@ -37176,7 +37322,7 @@ func (self *IconThemeInstance) GetIconNames() []string {
 // format. The array is zero-terminated.
 func (self *IconThemeInstance) GetIconSizes(iconName string) []int32 {
 	var carg0 *C.GtkIconTheme // in, none, converted
-	var carg1 *C.char         // in, none, string, casted *C.gchar
+	var carg1 *C.char         // in, none, string
 	var cret  *C.int          // return, transfer: full, C Pointers: 1, Name: array[gint], scope: , array (inner: *typesystem.CastablePrimitive, zero-terminated)
 
 	carg0 = (*C.GtkIconTheme)(UnsafeIconThemeToGlibNone(self))
@@ -37191,7 +37337,7 @@ func (self *IconThemeInstance) GetIconSizes(iconName string) []int32 {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []int32 (int*)")
+	panic("unimplemented conversion of []int32 (*C.int)")
 
 	return goret
 }
@@ -37218,7 +37364,7 @@ func (self *IconThemeInstance) GetResourcePath() []string {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (char**)")
+	panic("unimplemented conversion of []string (**C.char)")
 
 	return goret
 }
@@ -37245,7 +37391,7 @@ func (self *IconThemeInstance) GetSearchPath() []string {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (char**)")
+	panic("unimplemented conversion of []string (**C.char)")
 
 	return goret
 }
@@ -37259,7 +37405,7 @@ func (self *IconThemeInstance) GetSearchPath() []string {
 // Gets the current icon theme name.
 func (self *IconThemeInstance) GetThemeName() string {
 	var carg0 *C.GtkIconTheme // in, none, converted
-	var cret  *C.char         // return, full, string, casted *C.gchar
+	var cret  *C.char         // return, full, string
 
 	carg0 = (*C.GtkIconTheme)(UnsafeIconThemeToGlibNone(self))
 
@@ -37321,7 +37467,7 @@ func (self *IconThemeInstance) HasGIcon(gicon gio.Icon) bool {
 // for a particular name.
 func (self *IconThemeInstance) HasIcon(iconName string) bool {
 	var carg0 *C.GtkIconTheme // in, none, converted
-	var carg1 *C.char         // in, none, string, casted *C.gchar
+	var carg1 *C.char         // in, none, string
 	var cret  C.gboolean      // return
 
 	carg0 = (*C.GtkIconTheme)(UnsafeIconThemeToGlibNone(self))
@@ -37362,8 +37508,8 @@ func (self *IconThemeInstance) HasIcon(iconName string) bool {
 func (self *IconThemeInstance) LookupByGIcon(icon gio.Icon, size int32, scale int32, direction TextDirection, flags IconLookupFlags) IconPaintable {
 	var carg0 *C.GtkIconTheme      // in, none, converted
 	var carg1 *C.GIcon             // in, none, converted
-	var carg2 C.int                // in, none, casted, casted C.gint
-	var carg3 C.int                // in, none, casted, casted C.gint
+	var carg2 C.int                // in, none, casted
+	var carg3 C.int                // in, none, casted
 	var carg4 C.GtkTextDirection   // in, none, casted
 	var carg5 C.GtkIconLookupFlags // in, none, casted
 	var cret  *C.GtkIconPaintable  // return, full, converted
@@ -37423,10 +37569,10 @@ func (self *IconThemeInstance) LookupByGIcon(icon gio.Icon, size int32, scale in
 // GtkWidgetClass.css-changed() function.
 func (self *IconThemeInstance) LookupIcon(iconName string, fallbacks []string, size int32, scale int32, direction TextDirection, flags IconLookupFlags) IconPaintable {
 	var carg0 *C.GtkIconTheme      // in, none, converted
-	var carg1 *C.char              // in, none, string, casted *C.gchar
+	var carg1 *C.char              // in, none, string
 	var carg2 **C.char             // in, transfer: none, C Pointers: 2, Name: array[utf8], nullable, array (inner: *typesystem.StringPrimitive, zero-terminated)
-	var carg3 C.int                // in, none, casted, casted C.gint
-	var carg4 C.int                // in, none, casted, casted C.gint
+	var carg3 C.int                // in, none, casted
+	var carg4 C.int                // in, none, casted
 	var carg5 C.GtkTextDirection   // in, none, casted
 	var carg6 C.GtkIconLookupFlags // in, none, casted
 	var cret  *C.GtkIconPaintable  // return, full, converted
@@ -37436,7 +37582,7 @@ func (self *IconThemeInstance) LookupIcon(iconName string, fallbacks []string, s
 	defer C.free(unsafe.Pointer(carg1))
 	_ = fallbacks
 	_ = carg2
-	panic("unimplemented conversion of []string (const char**)")
+	panic("unimplemented conversion of []string (**C.char)")
 	carg3 = C.int(size)
 	carg4 = C.int(scale)
 	carg5 = C.GtkTextDirection(direction)
@@ -37484,7 +37630,7 @@ func (self *IconThemeInstance) SetResourcePath(path []string) {
 	carg0 = (*C.GtkIconTheme)(UnsafeIconThemeToGlibNone(self))
 	_ = path
 	_ = carg1
-	panic("unimplemented conversion of []string (const char* const*)")
+	panic("unimplemented conversion of []string (**C.char)")
 
 	C.gtk_icon_theme_set_resource_path(carg0, carg1)
 	runtime.KeepAlive(self)
@@ -37520,7 +37666,7 @@ func (self *IconThemeInstance) SetSearchPath(path []string) {
 	carg0 = (*C.GtkIconTheme)(UnsafeIconThemeToGlibNone(self))
 	_ = path
 	_ = carg1
-	panic("unimplemented conversion of []string (const char* const*)")
+	panic("unimplemented conversion of []string (**C.char)")
 
 	C.gtk_icon_theme_set_search_path(carg0, carg1)
 	runtime.KeepAlive(self)
@@ -37886,7 +38032,8 @@ type LayoutManager interface {
 	// chain up virtual methods:
 
 	// ParentAllocate calls the default implementations of the allocate virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- widget Widget: the `GtkWidget` using @manager 
@@ -37899,7 +38046,8 @@ type LayoutManager interface {
 	// the @widget using the layout management policy of @manager.
 	ParentAllocate(widget Widget, width int32, height int32, baseline int32)
 	// ParentCreateLayoutChild calls the default implementations of the create_layout_child virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- widget Widget: the widget using the @manager 
@@ -37912,7 +38060,8 @@ type LayoutManager interface {
 	// Create a `GtkLayoutChild` instance for the given @for_child widget.
 	ParentCreateLayoutChild(widget Widget, forChild Widget) LayoutChild
 	// ParentGetRequestMode calls the default implementations of the get_request_mode virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- widget Widget 
@@ -37926,7 +38075,8 @@ type LayoutManager interface {
 	//   or "height for width"; see `GtkSizeRequestMode`
 	ParentGetRequestMode(widget Widget) SizeRequestMode
 	// ParentMeasure calls the default implementations of the measure virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- widget Widget: the `GtkWidget` using @manager 
@@ -37956,13 +38106,13 @@ type LayoutManager interface {
 	// more details.
 	ParentMeasure(widget Widget, orientation Orientation, forSize int32) (int32, int32, int32, int32)
 	// ParentRoot calls the default implementations of the root virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
 	//
 	// a virtual function, called when the widget using the layout
 	//   manager is attached to a `GtkRoot`
 	ParentRoot()
 	// ParentUnroot calls the default implementations of the unroot virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
 	//
 	// a virtual function, called when the widget using the layout
 	//   manager is detached from a `GtkRoot`
@@ -38023,9 +38173,9 @@ func UnsafeLayoutManagerToGlibFull(c LayoutManager) unsafe.Pointer {
 func (manager *LayoutManagerInstance) Allocate(widget Widget, width int32, height int32, baseline int32) {
 	var carg0 *C.GtkLayoutManager // in, none, converted
 	var carg1 *C.GtkWidget        // in, none, converted
-	var carg2 C.int               // in, none, casted, casted C.gint
-	var carg3 C.int               // in, none, casted, casted C.gint
-	var carg4 C.int               // in, none, casted, casted C.gint
+	var carg2 C.int               // in, none, casted
+	var carg3 C.int               // in, none, casted
+	var carg4 C.int               // in, none, casted
 
 	carg0 = (*C.GtkLayoutManager)(UnsafeLayoutManagerToGlibNone(manager))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
@@ -38174,11 +38324,11 @@ func (manager *LayoutManagerInstance) Measure(widget Widget, orientation Orienta
 	var carg0 *C.GtkLayoutManager // in, none, converted
 	var carg1 *C.GtkWidget        // in, none, converted
 	var carg2 C.GtkOrientation    // in, none, casted
-	var carg3 C.int               // in, none, casted, casted C.gint
-	var carg4 C.int               // out, full, casted, casted C.gint
-	var carg5 C.int               // out, full, casted, casted C.gint
-	var carg6 C.int               // out, full, casted, casted C.gint
-	var carg7 C.int               // out, full, casted, casted C.gint
+	var carg3 C.int               // in, none, casted
+	var carg4 C.int               // out, full, casted
+	var carg5 C.int               // out, full, casted
+	var carg6 C.int               // out, full, casted
+	var carg7 C.int               // out, full, casted
 
 	carg0 = (*C.GtkLayoutManager)(UnsafeLayoutManagerToGlibNone(manager))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
@@ -38210,7 +38360,8 @@ type LayoutManagerOverrides[Instance LayoutManager] struct {
 	// gobject.ObjectOverrides allows you to override virtual methods from the parent class gobject.Object
 	gobject.ObjectOverrides[Instance]
 
-	// Allocate allows you to override the implementation of the virtual method allocate.
+	// // Allocate allows you to override the implementation of the virtual method allocate.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- widget Widget: the `GtkWidget` using @manager 
@@ -38222,7 +38373,8 @@ type LayoutManagerOverrides[Instance LayoutManager] struct {
 	// a @widget, and computes the position and sizes of the children of
 	// the @widget using the layout management policy of @manager.
 	Allocate func(Instance, Widget, int32, int32, int32)
-	// CreateLayoutChild allows you to override the implementation of the virtual method create_layout_child.
+	// // CreateLayoutChild allows you to override the implementation of the virtual method create_layout_child.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- widget Widget: the widget using the @manager 
@@ -38234,7 +38386,8 @@ type LayoutManagerOverrides[Instance LayoutManager] struct {
 	//
 	// Create a `GtkLayoutChild` instance for the given @for_child widget.
 	CreateLayoutChild func(Instance, Widget, Widget) LayoutChild
-	// GetRequestMode allows you to override the implementation of the virtual method get_request_mode.
+	// // GetRequestMode allows you to override the implementation of the virtual method get_request_mode.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- widget Widget 
@@ -38247,7 +38400,8 @@ type LayoutManagerOverrides[Instance LayoutManager] struct {
 	//   request mode for the layout manager; for instance, "width for height"
 	//   or "height for width"; see `GtkSizeRequestMode`
 	GetRequestMode func(Instance, Widget) SizeRequestMode
-	// Measure allows you to override the implementation of the virtual method measure.
+	// // Measure allows you to override the implementation of the virtual method measure.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- widget Widget: the `GtkWidget` using @manager 
@@ -38276,12 +38430,12 @@ type LayoutManagerOverrides[Instance LayoutManager] struct {
 	// See the [class@Gtk.Widget] documentation on layout management for
 	// more details.
 	Measure func(Instance, Widget, Orientation, int32) (int32, int32, int32, int32)
-	// Root allows you to override the implementation of the virtual method root.
+	// // Root allows you to override the implementation of the virtual method root.
 	//
 	// a virtual function, called when the widget using the layout
 	//   manager is attached to a `GtkRoot`
 	Root func(Instance)
-	// Unroot allows you to override the implementation of the virtual method unroot.
+	// // Unroot allows you to override the implementation of the virtual method unroot.
 	//
 	// a virtual function, called when the widget using the layout
 	//   manager is detached from a `GtkRoot`
@@ -38303,9 +38457,9 @@ func UnsafeApplyLayoutManagerOverrides[Instance LayoutManager](gclass unsafe.Poi
 			func(carg0 *C.GtkLayoutManager, carg1 *C.GtkWidget, carg2 C.int, carg3 C.int, carg4 C.int) {
 				var manager  Instance // go GtkLayoutManager subclass
 				var widget   Widget   // in, none, converted
-				var width    int32    // in, none, casted, casted C.gint
-				var height   int32    // in, none, casted, casted C.gint
-				var baseline int32    // in, none, casted, casted C.gint
+				var width    int32    // in, none, casted
+				var height   int32    // in, none, casted
+				var baseline int32    // in, none, casted
 
 				manager = UnsafeLayoutManagerFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				widget = UnsafeWidgetFromGlibNone(unsafe.Pointer(carg1))
@@ -38373,11 +38527,11 @@ func UnsafeApplyLayoutManagerOverrides[Instance LayoutManager](gclass unsafe.Poi
 				var manager         Instance    // go GtkLayoutManager subclass
 				var widget          Widget      // in, none, converted
 				var orientation     Orientation // in, none, casted
-				var forSize         int32       // in, none, casted, casted C.gint
-				var minimum         int32       // out, full, casted, casted C.gint
-				var natural         int32       // out, full, casted, casted C.gint
-				var minimumBaseline int32       // out, full, casted, casted C.gint
-				var naturalBaseline int32       // out, full, casted, casted C.gint
+				var forSize         int32       // in, none, casted
+				var minimum         int32       // out, full, casted
+				var natural         int32       // out, full, casted
+				var minimumBaseline int32       // out, full, casted
+				var naturalBaseline int32       // out, full, casted
 
 				manager = UnsafeLayoutManagerFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				widget = UnsafeWidgetFromGlibNone(unsafe.Pointer(carg1))
@@ -38426,7 +38580,8 @@ func UnsafeApplyLayoutManagerOverrides[Instance LayoutManager](gclass unsafe.Poi
 }
 
 // ParentAllocate calls the default implementations of the allocate virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- widget Widget: the `GtkWidget` using @manager 
@@ -38440,9 +38595,9 @@ func UnsafeApplyLayoutManagerOverrides[Instance LayoutManager](gclass unsafe.Poi
 func (manager *LayoutManagerInstance) ParentAllocate(widget Widget, width int32, height int32, baseline int32) {
 	var carg0 *C.GtkLayoutManager
 	var carg1 *C.GtkWidget // in, none, converted
-	var carg2 C.int        // in, none, casted, casted C.gint
-	var carg3 C.int        // in, none, casted, casted C.gint
-	var carg4 C.int        // in, none, casted, casted C.gint
+	var carg2 C.int        // in, none, casted
+	var carg3 C.int        // in, none, casted
+	var carg4 C.int        // in, none, casted
 
 	parentclass := (*C.GtkLayoutManagerClass)(classdata.PeekParentClass(UnsafeLayoutManagerToGlibNone(manager)))
 
@@ -38460,7 +38615,8 @@ func (manager *LayoutManagerInstance) ParentAllocate(widget Widget, width int32,
 }
 
 // ParentCreateLayoutChild calls the default implementations of the create_layout_child virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- widget Widget: the widget using the @manager 
@@ -38495,7 +38651,8 @@ func (manager *LayoutManagerInstance) ParentCreateLayoutChild(widget Widget, for
 }
 
 // ParentGetRequestMode calls the default implementations of the get_request_mode virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- widget Widget 
@@ -38528,7 +38685,8 @@ func (manager *LayoutManagerInstance) ParentGetRequestMode(widget Widget) SizeRe
 }
 
 // ParentMeasure calls the default implementations of the measure virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- widget Widget: the `GtkWidget` using @manager 
@@ -38560,11 +38718,11 @@ func (manager *LayoutManagerInstance) ParentMeasure(widget Widget, orientation O
 	var carg0 *C.GtkLayoutManager
 	var carg1 *C.GtkWidget     // in, none, converted
 	var carg2 C.GtkOrientation // in, none, casted
-	var carg3 C.int            // in, none, casted, casted C.gint
-	var carg4 C.int            // out, full, casted, casted C.gint
-	var carg5 C.int            // out, full, casted, casted C.gint
-	var carg6 C.int            // out, full, casted, casted C.gint
-	var carg7 C.int            // out, full, casted, casted C.gint
+	var carg3 C.int            // in, none, casted
+	var carg4 C.int            // out, full, casted
+	var carg5 C.int            // out, full, casted
+	var carg6 C.int            // out, full, casted
+	var carg7 C.int            // out, full, casted
 
 	parentclass := (*C.GtkLayoutManagerClass)(classdata.PeekParentClass(UnsafeLayoutManagerToGlibNone(manager)))
 
@@ -38592,7 +38750,7 @@ func (manager *LayoutManagerInstance) ParentMeasure(widget Widget, orientation O
 }
 
 // ParentRoot calls the default implementations of the root virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
 //
 // a virtual function, called when the widget using the layout
 //   manager is attached to a `GtkRoot`
@@ -38606,7 +38764,7 @@ func (manager *LayoutManagerInstance) ParentRoot() {
 }
 
 // ParentUnroot calls the default implementations of the unroot virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
 //
 // a virtual function, called when the widget using the layout
 //   manager is detached from a `GtkRoot`
@@ -39122,7 +39280,7 @@ func UnsafeListItemToGlibFull(c ListItem) unsafe.Pointer {
 // Gets the accessible description of @self.
 func (self *ListItemInstance) GetAccessibleDescription() string {
 	var carg0 *C.GtkListItem // in, none, converted
-	var cret  *C.char        // return, none, string, casted *C.gchar
+	var cret  *C.char        // return, none, string
 
 	carg0 = (*C.GtkListItem)(UnsafeListItemToGlibNone(self))
 
@@ -39145,7 +39303,7 @@ func (self *ListItemInstance) GetAccessibleDescription() string {
 // Gets the accessible label of @self.
 func (self *ListItemInstance) GetAccessibleLabel() string {
 	var carg0 *C.GtkListItem // in, none, converted
-	var cret  *C.char        // return, none, string, casted *C.gchar
+	var cret  *C.char        // return, none, string
 
 	carg0 = (*C.GtkListItem)(UnsafeListItemToGlibNone(self))
 
@@ -39328,7 +39486,7 @@ func (self *ListItemInstance) GetSelected() bool {
 // which may be used by e.g. screen readers.
 func (self *ListItemInstance) SetAccessibleDescription(description string) {
 	var carg0 *C.GtkListItem // in, none, converted
-	var carg1 *C.char        // in, none, string, casted *C.gchar
+	var carg1 *C.char        // in, none, string
 
 	carg0 = (*C.GtkListItem)(UnsafeListItemToGlibNone(self))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(description)))
@@ -39349,7 +39507,7 @@ func (self *ListItemInstance) SetAccessibleDescription(description string) {
 // which may be used by e.g. screen readers.
 func (self *ListItemInstance) SetAccessibleLabel(label string) {
 	var carg0 *C.GtkListItem // in, none, converted
-	var carg1 *C.char        // in, none, string, casted *C.gchar
+	var carg1 *C.char        // in, none, string
 
 	carg0 = (*C.GtkListItem)(UnsafeListItemToGlibNone(self))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(label)))
@@ -39659,7 +39817,7 @@ func unsafeWrapMapListModel(base *gobject.ObjectInstance) *MapListModelInstance 
 	return &MapListModelInstance{
 		ObjectInstance: *base,
 		ListModelInstance: gio.ListModelInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -40195,20 +40353,22 @@ type MediaStream interface {
 	// chain up virtual methods:
 
 	// ParentPause calls the default implementations of the pause virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
 	//
 	// Pauses playback of the stream.
 	// 
 	// If the stream is not playing, do nothing.
 	ParentPause()
 	// ParentPlay calls the default implementations of the play virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
 	ParentPlay() bool
 	// ParentRealize calls the default implementations of the realize virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- surface gdk.Surface: a `GdkSurface` 
@@ -40231,7 +40391,8 @@ type MediaStream interface {
 	// It is not required to call this function to make a media stream work.
 	ParentRealize(surface gdk.Surface)
 	// ParentSeek calls the default implementations of the seek virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- timestamp int64: timestamp to seek to. 
@@ -40249,7 +40410,8 @@ type MediaStream interface {
 	// any pending seek.
 	ParentSeek(timestamp int64)
 	// ParentUnrealize calls the default implementations of the unrealize virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- surface gdk.Surface: the `GdkSurface` the stream was realized with 
@@ -40260,7 +40422,8 @@ type MediaStream interface {
 	// allocated from @surface.
 	ParentUnrealize(surface gdk.Surface)
 	// ParentUpdateAudio calls the default implementations of the update_audio virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- muted bool 
@@ -40272,7 +40435,7 @@ func unsafeWrapMediaStream(base *gobject.ObjectInstance) *MediaStreamInstance {
 	return &MediaStreamInstance{
 		ObjectInstance: *base,
 		PaintableInstance: gdk.PaintableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -40541,7 +40704,7 @@ func (self *MediaStreamInstance) GetTimestamp() int64 {
 // See [method@Gtk.MediaStream.set_volume] for details.
 func (self *MediaStreamInstance) GetVolume() float64 {
 	var carg0 *C.GtkMediaStream // in, none, converted
-	var cret  C.double          // return, none, casted, casted C.gdouble
+	var cret  C.double          // return, none, casted
 
 	carg0 = (*C.GtkMediaStream)(UnsafeMediaStreamToGlibNone(self))
 
@@ -40913,7 +41076,7 @@ func (self *MediaStreamInstance) SetPlaying(playing bool) {
 // When the stream is unmuted, the new volume setting will take effect.
 func (self *MediaStreamInstance) SetVolume(volume float64) {
 	var carg0 *C.GtkMediaStream // in, none, converted
-	var carg1 C.double          // in, none, casted, casted C.gdouble
+	var carg1 C.double          // in, none, casted
 
 	carg0 = (*C.GtkMediaStream)(UnsafeMediaStreamToGlibNone(self))
 	carg1 = C.double(volume)
@@ -41055,18 +41218,20 @@ type MediaStreamOverrides[Instance MediaStream] struct {
 	// gobject.ObjectOverrides allows you to override virtual methods from the parent class gobject.Object
 	gobject.ObjectOverrides[Instance]
 
-	// Pause allows you to override the implementation of the virtual method pause.
+	// // Pause allows you to override the implementation of the virtual method pause.
 	//
 	// Pauses playback of the stream.
 	// 
 	// If the stream is not playing, do nothing.
 	Pause func(Instance)
-	// Play allows you to override the implementation of the virtual method play.
+	// // Play allows you to override the implementation of the virtual method play.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
 	Play func(Instance) bool
-	// Realize allows you to override the implementation of the virtual method realize.
+	// // Realize allows you to override the implementation of the virtual method realize.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- surface gdk.Surface: a `GdkSurface` 
@@ -41088,7 +41253,8 @@ type MediaStreamOverrides[Instance MediaStream] struct {
 	// 
 	// It is not required to call this function to make a media stream work.
 	Realize func(Instance, gdk.Surface)
-	// Seek allows you to override the implementation of the virtual method seek.
+	// // Seek allows you to override the implementation of the virtual method seek.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- timestamp int64: timestamp to seek to. 
@@ -41105,7 +41271,8 @@ type MediaStreamOverrides[Instance MediaStream] struct {
 	// ongoing seek operation, the new seek will override
 	// any pending seek.
 	Seek func(Instance, int64)
-	// Unrealize allows you to override the implementation of the virtual method unrealize.
+	// // Unrealize allows you to override the implementation of the virtual method unrealize.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- surface gdk.Surface: the `GdkSurface` the stream was realized with 
@@ -41115,7 +41282,8 @@ type MediaStreamOverrides[Instance MediaStream] struct {
 	// This causes the stream to release all resources it had
 	// allocated from @surface.
 	Unrealize func(Instance, gdk.Surface)
-	// UpdateAudio allows you to override the implementation of the virtual method update_audio.
+	// // UpdateAudio allows you to override the implementation of the virtual method update_audio.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- muted bool 
@@ -41226,7 +41394,7 @@ func UnsafeApplyMediaStreamOverrides[Instance MediaStream](gclass unsafe.Pointer
 			func(carg0 *C.GtkMediaStream, carg1 C.gboolean, carg2 C.double) {
 				var self   Instance // go GtkMediaStream subclass
 				var muted  bool     // in
-				var volume float64  // in, none, casted, casted C.gdouble
+				var volume float64  // in, none, casted
 
 				self = UnsafeMediaStreamFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg1 != 0 {
@@ -41241,7 +41409,7 @@ func UnsafeApplyMediaStreamOverrides[Instance MediaStream](gclass unsafe.Pointer
 }
 
 // ParentPause calls the default implementations of the pause virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
 //
 // Pauses playback of the stream.
 // 
@@ -41256,7 +41424,8 @@ func (self *MediaStreamInstance) ParentPause() {
 }
 
 // ParentPlay calls the default implementations of the play virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -41279,7 +41448,8 @@ func (self *MediaStreamInstance) ParentPlay() bool {
 }
 
 // ParentRealize calls the default implementations of the realize virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- surface gdk.Surface: a `GdkSurface` 
@@ -41314,7 +41484,8 @@ func (self *MediaStreamInstance) ParentRealize(surface gdk.Surface) {
 }
 
 // ParentSeek calls the default implementations of the seek virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- timestamp int64: timestamp to seek to. 
@@ -41344,7 +41515,8 @@ func (self *MediaStreamInstance) ParentSeek(timestamp int64) {
 }
 
 // ParentUnrealize calls the default implementations of the unrealize virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- surface gdk.Surface: the `GdkSurface` the stream was realized with 
@@ -41367,7 +41539,8 @@ func (self *MediaStreamInstance) ParentUnrealize(surface gdk.Surface) {
 }
 
 // ParentUpdateAudio calls the default implementations of the update_audio virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- muted bool 
@@ -41375,7 +41548,7 @@ func (self *MediaStreamInstance) ParentUnrealize(surface gdk.Surface) {
 func (self *MediaStreamInstance) ParentUpdateAudio(muted bool, volume float64) {
 	var carg0 *C.GtkMediaStream
 	var carg1 C.gboolean // in
-	var carg2 C.double   // in, none, casted, casted C.gdouble
+	var carg2 C.double   // in, none, casted
 
 	parentclass := (*C.GtkMediaStreamClass)(classdata.PeekParentClass(UnsafeMediaStreamToGlibNone(self)))
 
@@ -41762,7 +41935,7 @@ func unsafeWrapMultiFilter(base *gobject.ObjectInstance) *MultiFilterInstance {
 			ObjectInstance: *base,
 		},
 		ListModelInstance: gio.ListModelInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -41887,7 +42060,7 @@ func unsafeWrapMultiSelection(base *gobject.ObjectInstance) *MultiSelectionInsta
 	return &MultiSelectionInstance{
 		ObjectInstance: *base,
 		ListModelInstance: gio.ListModelInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -42188,7 +42361,7 @@ type NativeDialog interface {
 	// chain up virtual methods:
 
 	// ParentHide calls the default implementations of the hide virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
 	//
 	// Hides the dialog if it is visible, aborting any interaction.
 	// 
@@ -42199,7 +42372,8 @@ type NativeDialog interface {
 	// If the dialog is not visible this does nothing.
 	ParentHide()
 	// ParentResponse calls the default implementations of the response virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- responseId int32 
@@ -42207,7 +42381,7 @@ type NativeDialog interface {
 	// class handler for the `GtkNativeDialog::response` signal
 	ParentResponse(responseId int32)
 	// ParentShow calls the default implementations of the show virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
 	//
 	// Shows the dialog on the display.
 	// 
@@ -42314,7 +42488,7 @@ func (self *NativeDialogInstance) GetModal() bool {
 // Gets the title of the `GtkNativeDialog`.
 func (self *NativeDialogInstance) GetTitle() string {
 	var carg0 *C.GtkNativeDialog // in, none, converted
-	var cret  *C.char            // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char            // return, none, string, nullable-string
 
 	carg0 = (*C.GtkNativeDialog)(UnsafeNativeDialogToGlibNone(self))
 
@@ -42434,7 +42608,7 @@ func (self *NativeDialogInstance) SetModal(modal bool) {
 // Sets the title of the `GtkNativeDialog.`
 func (self *NativeDialogInstance) SetTitle(title string) {
 	var carg0 *C.GtkNativeDialog // in, none, converted
-	var carg1 *C.char            // in, none, string, casted *C.gchar
+	var carg1 *C.char            // in, none, string
 
 	carg0 = (*C.GtkNativeDialog)(UnsafeNativeDialogToGlibNone(self))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(title)))
@@ -42508,7 +42682,7 @@ type NativeDialogOverrides[Instance NativeDialog] struct {
 	// gobject.ObjectOverrides allows you to override virtual methods from the parent class gobject.Object
 	gobject.ObjectOverrides[Instance]
 
-	// Hide allows you to override the implementation of the virtual method hide.
+	// // Hide allows you to override the implementation of the virtual method hide.
 	//
 	// Hides the dialog if it is visible, aborting any interaction.
 	// 
@@ -42518,14 +42692,15 @@ type NativeDialogOverrides[Instance NativeDialog] struct {
 	// 
 	// If the dialog is not visible this does nothing.
 	Hide func(Instance)
-	// Response allows you to override the implementation of the virtual method response.
+	// // Response allows you to override the implementation of the virtual method response.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- responseId int32 
 	//
 	// class handler for the `GtkNativeDialog::response` signal
 	Response func(Instance, int32)
-	// Show allows you to override the implementation of the virtual method show.
+	// // Show allows you to override the implementation of the virtual method show.
 	//
 	// Shows the dialog on the display.
 	// 
@@ -42566,7 +42741,7 @@ func UnsafeApplyNativeDialogOverrides[Instance NativeDialog](gclass unsafe.Point
 			"_gotk4_gtk4_NativeDialog_response",
 			func(carg0 *C.GtkNativeDialog, carg1 C.int) {
 				var self       Instance // go GtkNativeDialog subclass
-				var responseId int32    // in, none, casted, casted C.gint
+				var responseId int32    // in, none, casted
 
 				self = UnsafeNativeDialogFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				responseId = int32(carg1)
@@ -42593,7 +42768,7 @@ func UnsafeApplyNativeDialogOverrides[Instance NativeDialog](gclass unsafe.Point
 }
 
 // ParentHide calls the default implementations of the hide virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
 //
 // Hides the dialog if it is visible, aborting any interaction.
 // 
@@ -42612,7 +42787,8 @@ func (self *NativeDialogInstance) ParentHide() {
 }
 
 // ParentResponse calls the default implementations of the response virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- responseId int32 
@@ -42620,7 +42796,7 @@ func (self *NativeDialogInstance) ParentHide() {
 // class handler for the `GtkNativeDialog::response` signal
 func (self *NativeDialogInstance) ParentResponse(responseId int32) {
 	var carg0 *C.GtkNativeDialog
-	var carg1 C.int // in, none, casted, casted C.gint
+	var carg1 C.int // in, none, casted
 
 	parentclass := (*C.GtkNativeDialogClass)(classdata.PeekParentClass(UnsafeNativeDialogToGlibNone(self)))
 
@@ -42632,7 +42808,7 @@ func (self *NativeDialogInstance) ParentResponse(responseId int32) {
 }
 
 // ParentShow calls the default implementations of the show virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
 //
 // Shows the dialog on the display.
 // 
@@ -42726,7 +42902,7 @@ func unsafeWrapNoSelection(base *gobject.ObjectInstance) *NoSelectionInstance {
 	return &NoSelectionInstance{
 		ObjectInstance: *base,
 		ListModelInstance: gio.ListModelInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -43521,10 +43697,10 @@ func NewPadController(group gio.ActionGroup, pad gdk.Device) PadController {
 func (controller *PadControllerInstance) SetAction(typ PadActionType, index int32, mode int32, label string, actionName string) {
 	var carg0 *C.GtkPadController // in, none, converted
 	var carg1 C.GtkPadActionType  // in, none, casted
-	var carg2 C.int               // in, none, casted, casted C.gint
-	var carg3 C.int               // in, none, casted, casted C.gint
-	var carg4 *C.char             // in, none, string, casted *C.gchar
-	var carg5 *C.char             // in, none, string, casted *C.gchar
+	var carg2 C.int               // in, none, casted
+	var carg3 C.int               // in, none, casted
+	var carg4 *C.char             // in, none, string
+	var carg5 *C.char             // in, none, string
 
 	carg0 = (*C.GtkPadController)(UnsafePadControllerToGlibNone(controller))
 	carg1 = C.GtkPadActionType(typ)
@@ -43563,7 +43739,7 @@ func (controller *PadControllerInstance) SetActionEntries(entries []PadActionEnt
 	_ = entries
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []PadActionEntry (const GtkPadActionEntry*)")
+	panic("unimplemented conversion of []PadActionEntry (*C.GtkPadActionEntry)")
 
 	C.gtk_pad_controller_set_action_entries(carg0, carg1, carg2)
 	runtime.KeepAlive(controller)
@@ -43957,7 +44133,7 @@ func NewPageSetup() PageSetup {
 // page setup, or %NULL if an error occurred.
 // See [method@Gtk.PageSetup.to_file].
 func NewPageSetupFromFile(fileName string) (PageSetup, error) {
-	var carg1 *C.char         // in, none, string, casted *C.gchar
+	var carg1 *C.char         // in, none, string
 	var cret  *C.GtkPageSetup // return, full, converted
 	var _cerr *C.GError       // out, full, converted, nullable
 
@@ -44060,7 +44236,7 @@ func (other *PageSetupInstance) Copy() PageSetup {
 func (setup *PageSetupInstance) GetBottomMargin(unit Unit) float64 {
 	var carg0 *C.GtkPageSetup // in, none, converted
 	var carg1 C.GtkUnit       // in, none, casted
-	var cret  C.double        // return, none, casted, casted C.gdouble
+	var cret  C.double        // return, none, casted
 
 	carg0 = (*C.GtkPageSetup)(UnsafePageSetupToGlibNone(setup))
 	carg1 = C.GtkUnit(unit)
@@ -44090,7 +44266,7 @@ func (setup *PageSetupInstance) GetBottomMargin(unit Unit) float64 {
 func (setup *PageSetupInstance) GetLeftMargin(unit Unit) float64 {
 	var carg0 *C.GtkPageSetup // in, none, converted
 	var carg1 C.GtkUnit       // in, none, casted
-	var cret  C.double        // return, none, casted, casted C.gdouble
+	var cret  C.double        // return, none, casted
 
 	carg0 = (*C.GtkPageSetup)(UnsafePageSetupToGlibNone(setup))
 	carg1 = C.GtkUnit(unit)
@@ -44147,7 +44323,7 @@ func (setup *PageSetupInstance) GetOrientation() PageOrientation {
 func (setup *PageSetupInstance) GetPageHeight(unit Unit) float64 {
 	var carg0 *C.GtkPageSetup // in, none, converted
 	var carg1 C.GtkUnit       // in, none, casted
-	var cret  C.double        // return, none, casted, casted C.gdouble
+	var cret  C.double        // return, none, casted
 
 	carg0 = (*C.GtkPageSetup)(UnsafePageSetupToGlibNone(setup))
 	carg1 = C.GtkUnit(unit)
@@ -44181,7 +44357,7 @@ func (setup *PageSetupInstance) GetPageHeight(unit Unit) float64 {
 func (setup *PageSetupInstance) GetPageWidth(unit Unit) float64 {
 	var carg0 *C.GtkPageSetup // in, none, converted
 	var carg1 C.GtkUnit       // in, none, casted
-	var cret  C.double        // return, none, casted, casted C.gdouble
+	var cret  C.double        // return, none, casted
 
 	carg0 = (*C.GtkPageSetup)(UnsafePageSetupToGlibNone(setup))
 	carg1 = C.GtkUnit(unit)
@@ -44215,7 +44391,7 @@ func (setup *PageSetupInstance) GetPageWidth(unit Unit) float64 {
 func (setup *PageSetupInstance) GetPaperHeight(unit Unit) float64 {
 	var carg0 *C.GtkPageSetup // in, none, converted
 	var carg1 C.GtkUnit       // in, none, casted
-	var cret  C.double        // return, none, casted, casted C.gdouble
+	var cret  C.double        // return, none, casted
 
 	carg0 = (*C.GtkPageSetup)(UnsafePageSetupToGlibNone(setup))
 	carg1 = C.GtkUnit(unit)
@@ -44272,7 +44448,7 @@ func (setup *PageSetupInstance) GetPaperSize() *PaperSize {
 func (setup *PageSetupInstance) GetPaperWidth(unit Unit) float64 {
 	var carg0 *C.GtkPageSetup // in, none, converted
 	var carg1 C.GtkUnit       // in, none, casted
-	var cret  C.double        // return, none, casted, casted C.gdouble
+	var cret  C.double        // return, none, casted
 
 	carg0 = (*C.GtkPageSetup)(UnsafePageSetupToGlibNone(setup))
 	carg1 = C.GtkUnit(unit)
@@ -44302,7 +44478,7 @@ func (setup *PageSetupInstance) GetPaperWidth(unit Unit) float64 {
 func (setup *PageSetupInstance) GetRightMargin(unit Unit) float64 {
 	var carg0 *C.GtkPageSetup // in, none, converted
 	var carg1 C.GtkUnit       // in, none, casted
-	var cret  C.double        // return, none, casted, casted C.gdouble
+	var cret  C.double        // return, none, casted
 
 	carg0 = (*C.GtkPageSetup)(UnsafePageSetupToGlibNone(setup))
 	carg1 = C.GtkUnit(unit)
@@ -44332,7 +44508,7 @@ func (setup *PageSetupInstance) GetRightMargin(unit Unit) float64 {
 func (setup *PageSetupInstance) GetTopMargin(unit Unit) float64 {
 	var carg0 *C.GtkPageSetup // in, none, converted
 	var carg1 C.GtkUnit       // in, none, casted
-	var cret  C.double        // return, none, casted, casted C.gdouble
+	var cret  C.double        // return, none, casted
 
 	carg0 = (*C.GtkPageSetup)(UnsafePageSetupToGlibNone(setup))
 	carg1 = C.GtkUnit(unit)
@@ -44364,7 +44540,7 @@ func (setup *PageSetupInstance) GetTopMargin(unit Unit) float64 {
 // See [method@Gtk.PageSetup.to_file].
 func (setup *PageSetupInstance) LoadFile(fileName string) (bool, error) {
 	var carg0 *C.GtkPageSetup // in, none, converted
-	var carg1 *C.char         // in, none, string, casted *C.gchar
+	var carg1 *C.char         // in, none, string
 	var cret  C.gboolean      // return
 	var _cerr *C.GError       // out, full, converted, nullable
 
@@ -44446,7 +44622,7 @@ func (setup *PageSetupInstance) LoadKeyFile(keyFile *glib.KeyFile, groupName str
 // Sets the bottom margin of the `GtkPageSetup`.
 func (setup *PageSetupInstance) SetBottomMargin(margin float64, unit Unit) {
 	var carg0 *C.GtkPageSetup // in, none, converted
-	var carg1 C.double        // in, none, casted, casted C.gdouble
+	var carg1 C.double        // in, none, casted
 	var carg2 C.GtkUnit       // in, none, casted
 
 	carg0 = (*C.GtkPageSetup)(UnsafePageSetupToGlibNone(setup))
@@ -44469,7 +44645,7 @@ func (setup *PageSetupInstance) SetBottomMargin(margin float64, unit Unit) {
 // Sets the left margin of the `GtkPageSetup`.
 func (setup *PageSetupInstance) SetLeftMargin(margin float64, unit Unit) {
 	var carg0 *C.GtkPageSetup // in, none, converted
-	var carg1 C.double        // in, none, casted, casted C.gdouble
+	var carg1 C.double        // in, none, casted
 	var carg2 C.GtkUnit       // in, none, casted
 
 	carg0 = (*C.GtkPageSetup)(UnsafePageSetupToGlibNone(setup))
@@ -44553,7 +44729,7 @@ func (setup *PageSetupInstance) SetPaperSizeAndDefaultMargins(size *PaperSize) {
 // Sets the right margin of the `GtkPageSetup`.
 func (setup *PageSetupInstance) SetRightMargin(margin float64, unit Unit) {
 	var carg0 *C.GtkPageSetup // in, none, converted
-	var carg1 C.double        // in, none, casted, casted C.gdouble
+	var carg1 C.double        // in, none, casted
 	var carg2 C.GtkUnit       // in, none, casted
 
 	carg0 = (*C.GtkPageSetup)(UnsafePageSetupToGlibNone(setup))
@@ -44576,7 +44752,7 @@ func (setup *PageSetupInstance) SetRightMargin(margin float64, unit Unit) {
 // Sets the top margin of the `GtkPageSetup`.
 func (setup *PageSetupInstance) SetTopMargin(margin float64, unit Unit) {
 	var carg0 *C.GtkPageSetup // in, none, converted
-	var carg1 C.double        // in, none, casted, casted C.gdouble
+	var carg1 C.double        // in, none, casted
 	var carg2 C.GtkUnit       // in, none, casted
 
 	carg0 = (*C.GtkPageSetup)(UnsafePageSetupToGlibNone(setup))
@@ -44603,7 +44779,7 @@ func (setup *PageSetupInstance) SetTopMargin(margin float64, unit Unit) {
 // This function saves the information from @setup to @file_name.
 func (setup *PageSetupInstance) ToFile(fileName string) (bool, error) {
 	var carg0 *C.GtkPageSetup // in, none, converted
-	var carg1 *C.char         // in, none, string, casted *C.gchar
+	var carg1 *C.char         // in, none, string
 	var cret  C.gboolean      // return
 	var _cerr *C.GError       // out, full, converted, nullable
 
@@ -44986,7 +45162,7 @@ type RecentManager interface {
 	// chain up virtual methods:
 
 	// ParentChanged calls the default implementations of the changed virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
 	ParentChanged()
 }
 
@@ -45109,7 +45285,7 @@ func RecentManagerGetDefault() RecentManager {
 // applications that have registered it.
 func (manager *RecentManagerInstance) AddFull(uri string, recentData *RecentData) bool {
 	var carg0 *C.GtkRecentManager // in, none, converted
-	var carg1 *C.char             // in, none, string, casted *C.gchar
+	var carg1 *C.char             // in, none, string
 	var carg2 *C.GtkRecentData    // in, none, converted
 	var cret  C.gboolean          // return
 
@@ -45153,7 +45329,7 @@ func (manager *RecentManagerInstance) AddFull(uri string, recentData *RecentData
 // define the metadata for the resource pointed by @uri.
 func (manager *RecentManagerInstance) AddItem(uri string) bool {
 	var carg0 *C.GtkRecentManager // in, none, converted
-	var carg1 *C.char             // in, none, string, casted *C.gchar
+	var carg1 *C.char             // in, none, string
 	var cret  C.gboolean          // return
 
 	carg0 = (*C.GtkRecentManager)(UnsafeRecentManagerToGlibNone(manager))
@@ -45217,7 +45393,7 @@ func (manager *RecentManagerInstance) GetItems() []*RecentInfo {
 // with @uri inside the recent manager.
 func (manager *RecentManagerInstance) HasItem(uri string) bool {
 	var carg0 *C.GtkRecentManager // in, none, converted
-	var carg1 *C.char             // in, none, string, casted *C.gchar
+	var carg1 *C.char             // in, none, string
 	var cret  C.gboolean          // return
 
 	carg0 = (*C.GtkRecentManager)(UnsafeRecentManagerToGlibNone(manager))
@@ -45253,7 +45429,7 @@ func (manager *RecentManagerInstance) HasItem(uri string) bool {
 // like its MIME type, or its display name.
 func (manager *RecentManagerInstance) LookupItem(uri string) (*RecentInfo, error) {
 	var carg0 *C.GtkRecentManager // in, none, converted
-	var carg1 *C.char             // in, none, string, casted *C.gchar
+	var carg1 *C.char             // in, none, string
 	var cret  *C.GtkRecentInfo    // return, full, converted, nullable
 	var _cerr *C.GError           // out, full, converted, nullable
 
@@ -45297,7 +45473,7 @@ func (manager *RecentManagerInstance) LookupItem(uri string) (*RecentInfo, error
 // by the URIs, but only the URI used in the recently used resources list.
 func (manager *RecentManagerInstance) MoveItem(uri string, newUri string) (bool, error) {
 	var carg0 *C.GtkRecentManager // in, none, converted
-	var carg1 *C.char             // in, none, string, casted *C.gchar
+	var carg1 *C.char             // in, none, string
 	var carg2 *C.char             // in, none, string, nullable-string
 	var cret  C.gboolean          // return
 	var _cerr *C.GError           // out, full, converted, nullable
@@ -45338,7 +45514,7 @@ func (manager *RecentManagerInstance) MoveItem(uri string, newUri string) (bool,
 // Purges every item from the recently used resources list.
 func (manager *RecentManagerInstance) PurgeItems() (int32, error) {
 	var carg0 *C.GtkRecentManager // in, none, converted
-	var cret  C.int               // return, none, casted, casted C.gint
+	var cret  C.int               // return, none, casted
 	var _cerr *C.GError           // out, full, converted, nullable
 
 	carg0 = (*C.GtkRecentManager)(UnsafeRecentManagerToGlibNone(manager))
@@ -45372,7 +45548,7 @@ func (manager *RecentManagerInstance) PurgeItems() (int32, error) {
 // list handled by a recent manager.
 func (manager *RecentManagerInstance) RemoveItem(uri string) (bool, error) {
 	var carg0 *C.GtkRecentManager // in, none, converted
-	var carg1 *C.char             // in, none, string, casted *C.gchar
+	var carg1 *C.char             // in, none, string
 	var cret  C.gboolean          // return
 	var _cerr *C.GError           // out, full, converted, nullable
 
@@ -45414,7 +45590,7 @@ type RecentManagerOverrides[Instance RecentManager] struct {
 	// gobject.ObjectOverrides allows you to override virtual methods from the parent class gobject.Object
 	gobject.ObjectOverrides[Instance]
 
-	// Changed allows you to override the implementation of the virtual method changed.
+	// // Changed allows you to override the implementation of the virtual method changed.
 	Changed func(Instance)
 }
 
@@ -45442,7 +45618,7 @@ func UnsafeApplyRecentManagerOverrides[Instance RecentManager](gclass unsafe.Poi
 }
 
 // ParentChanged calls the default implementations of the changed virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
 func (manager *RecentManagerInstance) ParentChanged() {
 	var carg0 *C.GtkRecentManager
 
@@ -45526,7 +45702,7 @@ func unsafeWrapSelectionFilterModel(base *gobject.ObjectInstance) *SelectionFilt
 	return &SelectionFilterModelInstance{
 		ObjectInstance: *base,
 		ListModelInstance: gio.ListModelInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -45844,7 +46020,7 @@ func SettingsGetForDisplay(display gdk.Display) Settings {
 // value for this setting.
 func (settings *SettingsInstance) ResetProperty(name string) {
 	var carg0 *C.GtkSettings // in, none, converted
-	var carg1 *C.char        // in, none, string, casted *C.gchar
+	var carg1 *C.char        // in, none, string
 
 	carg0 = (*C.GtkSettings)(UnsafeSettingsToGlibNone(settings))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
@@ -46248,7 +46424,7 @@ func UnsafeShortcutActionToGlibFull(c ShortcutAction) unsafe.Pointer {
 // - `action(NAME)`, for a `GtkNamedAction` for the action named `NAME`
 // - `signal(NAME)`, for a `GtkSignalAction` for the signal `NAME`
 func ShortcutActionParseString(str string) ShortcutAction {
-	var carg1 *C.char              // in, none, string, casted *C.gchar
+	var carg1 *C.char              // in, none, string
 	var cret  *C.GtkShortcutAction // return, full, converted, nullable
 
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(str)))
@@ -46278,7 +46454,7 @@ func ShortcutActionParseString(str string) ShortcutAction {
 // to help when debugging.
 func (self *ShortcutActionInstance) ToString() string {
 	var carg0 *C.GtkShortcutAction // in, none, converted
-	var cret  *C.char              // return, full, string, casted *C.gchar
+	var cret  *C.char              // return, full, string
 
 	carg0 = (*C.GtkShortcutAction)(UnsafeShortcutActionToGlibNone(self))
 
@@ -46434,7 +46610,7 @@ func unsafeWrapShortcutController(base *gobject.ObjectInstance) *ShortcutControl
 			ObjectInstance: *base,
 		},
 		ListModelInstance: gio.ListModelInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -46800,7 +46976,7 @@ func UnsafeShortcutTriggerToGlibFull(c ShortcutTrigger) unsafe.Pointer {
 // triggers in XML files, such as GtkBuilder ui files. Use `&amp;lt;` instead of
 // `&lt;` and `&amp;gt;` instead of `&gt;`.
 func ShortcutTriggerParseString(str string) ShortcutTrigger {
-	var carg1 *C.char               // in, none, string, casted *C.gchar
+	var carg1 *C.char               // in, none, string
 	var cret  *C.GtkShortcutTrigger // return, full, converted, nullable
 
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(str)))
@@ -46843,7 +47019,7 @@ func ShortcutTriggerParseString(str string) ShortcutTrigger {
 func (self *ShortcutTriggerInstance) ToLabel(display gdk.Display) string {
 	var carg0 *C.GtkShortcutTrigger // in, none, converted
 	var carg1 *C.GdkDisplay         // in, none, converted
-	var cret  *C.char               // return, full, string, casted *C.gchar
+	var cret  *C.char               // return, full, string
 
 	carg0 = (*C.GtkShortcutTrigger)(UnsafeShortcutTriggerToGlibNone(self))
 	carg1 = (*C.GdkDisplay)(gdk.UnsafeDisplayToGlibNone(display))
@@ -46872,7 +47048,7 @@ func (self *ShortcutTriggerInstance) ToLabel(display gdk.Display) string {
 // to help when debugging.
 func (self *ShortcutTriggerInstance) ToString() string {
 	var carg0 *C.GtkShortcutTrigger // in, none, converted
-	var cret  *C.char               // return, full, string, casted *C.gchar
+	var cret  *C.char               // return, full, string
 
 	carg0 = (*C.GtkShortcutTrigger)(UnsafeShortcutTriggerToGlibNone(self))
 
@@ -46971,8 +47147,8 @@ func UnsafeSignalActionToGlibFull(c SignalAction) unsafe.Pointer {
 // 
 // It will also unpack the args into arguments passed to the signal.
 func NewSignalAction(signalName string) SignalAction {
-	var carg1 *C.char              // in, none, string, casted *C.gchar
-	var cret  *C.GtkShortcutAction // return, full, converted, casted *C.GtkSignalAction
+	var carg1 *C.char              // in, none, string
+	var cret  *C.GtkShortcutAction // return, full, converted
 
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(signalName)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -46996,7 +47172,7 @@ func NewSignalAction(signalName string) SignalAction {
 // Returns the name of the signal that will be emitted.
 func (self *SignalActionInstance) GetSignalName() string {
 	var carg0 *C.GtkSignalAction // in, none, converted
-	var cret  *C.char            // return, none, string, casted *C.gchar
+	var cret  *C.char            // return, none, string
 
 	carg0 = (*C.GtkSignalAction)(UnsafeSignalActionToGlibNone(self))
 
@@ -47339,7 +47515,7 @@ func unsafeWrapSingleSelection(base *gobject.ObjectInstance) *SingleSelectionIns
 	return &SingleSelectionInstance{
 		ObjectInstance: *base,
 		ListModelInstance: gio.ListModelInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -48066,7 +48242,7 @@ func unsafeWrapSliceListModel(base *gobject.ObjectInstance) *SliceListModelInsta
 	return &SliceListModelInstance{
 		ObjectInstance: *base,
 		ListModelInstance: gio.ListModelInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -48882,7 +49058,7 @@ func UnsafeSnapshotToGlibFull(c Snapshot) unsafe.Pointer {
 //
 // Creates a new `GtkSnapshot`.
 func NewSnapshot() Snapshot {
-	var cret *C.GtkSnapshot // return, full, converted, casted *C.Snapshot
+	var cret *C.GtkSnapshot // return, full, converted
 
 	cret = C.gtk_snapshot_new()
 
@@ -48907,7 +49083,7 @@ func NewSnapshot() Snapshot {
 // 
 // The four sides of the border can have different widths and colors.
 func (snapshot *SnapshotInstance) AppendBorder(outline *gsk.RoundedRect, borderWidth [4]float32, borderColor [4]gdk.RGBA) {
-	var carg0 *C.GtkSnapshot    // in, none, converted, casted *C.Snapshot
+	var carg0 *C.GtkSnapshot    // in, none, converted
 	var carg1 *C.GskRoundedRect // in, none, converted
 	var carg2 *C.float          // in, transfer: none, C Pointers: 1, Name: array[gfloat], array (inner: *typesystem.CastablePrimitive, fixed-size: 4)
 	var carg3 *C.GdkRGBA        // in, transfer: none, C Pointers: 1, Name: array[RGBA], array (inner: *typesystem.Record, fixed-size: 4)
@@ -48916,10 +49092,10 @@ func (snapshot *SnapshotInstance) AppendBorder(outline *gsk.RoundedRect, borderW
 	carg1 = (*C.GskRoundedRect)(gsk.UnsafeRoundedRectToGlibNone(outline))
 	_ = borderWidth
 	_ = carg2
-	panic("unimplemented conversion of [4]float32 (const float*)")
+	panic("unimplemented conversion of [4]float32 (*C.float)")
 	_ = borderColor
 	_ = carg3
-	panic("unimplemented conversion of [4]gdk.RGBA (const GdkRGBA*)")
+	panic("unimplemented conversion of [4]gdk.RGBA (*C.GdkRGBA)")
 
 	C.gtk_snapshot_append_border(carg0, carg1, carg2, carg3)
 	runtime.KeepAlive(snapshot)
@@ -48942,7 +49118,7 @@ func (snapshot *SnapshotInstance) AppendBorder(outline *gsk.RoundedRect, borderW
 // You should try to avoid calling this function if
 // @color is transparent.
 func (snapshot *SnapshotInstance) AppendColor(color *gdk.RGBA, bounds *graphene.Rect) {
-	var carg0 *C.GtkSnapshot     // in, none, converted, casted *C.Snapshot
+	var carg0 *C.GtkSnapshot     // in, none, converted
 	var carg1 *C.GdkRGBA         // in, none, converted
 	var carg2 *C.graphene_rect_t // in, none, converted
 
@@ -48968,10 +49144,10 @@ func (snapshot *SnapshotInstance) AppendColor(color *gdk.RGBA, bounds *graphene.
 //
 // Appends a conic gradient node with the given stops to @snapshot.
 func (snapshot *SnapshotInstance) AppendConicGradient(bounds *graphene.Rect, center *graphene.Point, rotation float32, stops []gsk.ColorStop) {
-	var carg0 *C.GtkSnapshot      // in, none, converted, casted *C.Snapshot
+	var carg0 *C.GtkSnapshot      // in, none, converted
 	var carg1 *C.graphene_rect_t  // in, none, converted
 	var carg2 *C.graphene_point_t // in, none, converted
-	var carg3 C.float             // in, none, casted, casted C.gfloat
+	var carg3 C.float             // in, none, casted
 	var carg4 *C.GskColorStop     // in, transfer: none, C Pointers: 1, Name: array[ColorStop], array (inner: *typesystem.Record, length-by: carg5)
 	var carg5 C.gsize             // implicit
 
@@ -48982,7 +49158,7 @@ func (snapshot *SnapshotInstance) AppendConicGradient(bounds *graphene.Rect, cen
 	_ = stops
 	_ = carg4
 	_ = carg5
-	panic("unimplemented conversion of []gsk.ColorStop (const GskColorStop*)")
+	panic("unimplemented conversion of []gsk.ColorStop (*C.GskColorStop)")
 
 	C.gtk_snapshot_append_conic_gradient(carg0, carg1, carg2, carg3, carg4, carg5)
 	runtime.KeepAlive(snapshot)
@@ -49006,7 +49182,7 @@ func (snapshot *SnapshotInstance) AppendConicGradient(bounds *graphene.Rect, cen
 // to fill a path with more complex content than
 // a color.
 func (snapshot *SnapshotInstance) AppendFill(path *gsk.Path, fillRule gsk.FillRule, color *gdk.RGBA) {
-	var carg0 *C.GtkSnapshot // in, none, converted, casted *C.Snapshot
+	var carg0 *C.GtkSnapshot // in, none, converted
 	var carg1 *C.GskPath     // in, none, converted
 	var carg2 C.GskFillRule  // in, none, casted
 	var carg3 *C.GdkRGBA     // in, none, converted
@@ -49036,13 +49212,13 @@ func (snapshot *SnapshotInstance) AppendFill(path *gsk.Path, fillRule gsk.FillRu
 //
 // Appends an inset shadow into the box given by @outline.
 func (snapshot *SnapshotInstance) AppendInsetShadow(outline *gsk.RoundedRect, color *gdk.RGBA, dx float32, dy float32, spread float32, blurRadius float32) {
-	var carg0 *C.GtkSnapshot    // in, none, converted, casted *C.Snapshot
+	var carg0 *C.GtkSnapshot    // in, none, converted
 	var carg1 *C.GskRoundedRect // in, none, converted
 	var carg2 *C.GdkRGBA        // in, none, converted
-	var carg3 C.float           // in, none, casted, casted C.gfloat
-	var carg4 C.float           // in, none, casted, casted C.gfloat
-	var carg5 C.float           // in, none, casted, casted C.gfloat
-	var carg6 C.float           // in, none, casted, casted C.gfloat
+	var carg3 C.float           // in, none, casted
+	var carg4 C.float           // in, none, casted
+	var carg5 C.float           // in, none, casted
+	var carg6 C.float           // in, none, casted
 
 	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	carg1 = (*C.GskRoundedRect)(gsk.UnsafeRoundedRectToGlibNone(outline))
@@ -49077,7 +49253,7 @@ func (snapshot *SnapshotInstance) AppendInsetShadow(outline *gsk.RoundedRect, co
 // Note that if the layout does not produce any visible output, then nodes
 // may not be added to the @snapshot.
 func (snapshot *SnapshotInstance) AppendLayout(layout pango.Layout, color *gdk.RGBA) {
-	var carg0 *C.GtkSnapshot // in, none, converted, casted *C.Snapshot
+	var carg0 *C.GtkSnapshot // in, none, converted
 	var carg1 *C.PangoLayout // in, none, converted
 	var carg2 *C.GdkRGBA     // in, none, converted
 
@@ -49102,7 +49278,7 @@ func (snapshot *SnapshotInstance) AppendLayout(layout pango.Layout, color *gdk.R
 //
 // Appends a linear gradient node with the given stops to @snapshot.
 func (snapshot *SnapshotInstance) AppendLinearGradient(bounds *graphene.Rect, startPoint *graphene.Point, endPoint *graphene.Point, stops []gsk.ColorStop) {
-	var carg0 *C.GtkSnapshot      // in, none, converted, casted *C.Snapshot
+	var carg0 *C.GtkSnapshot      // in, none, converted
 	var carg1 *C.graphene_rect_t  // in, none, converted
 	var carg2 *C.graphene_point_t // in, none, converted
 	var carg3 *C.graphene_point_t // in, none, converted
@@ -49116,7 +49292,7 @@ func (snapshot *SnapshotInstance) AppendLinearGradient(bounds *graphene.Rect, st
 	_ = stops
 	_ = carg4
 	_ = carg5
-	panic("unimplemented conversion of []gsk.ColorStop (const GskColorStop*)")
+	panic("unimplemented conversion of []gsk.ColorStop (*C.GskColorStop)")
 
 	C.gtk_snapshot_append_linear_gradient(carg0, carg1, carg2, carg3, carg4, carg5)
 	runtime.KeepAlive(snapshot)
@@ -49139,13 +49315,13 @@ func (snapshot *SnapshotInstance) AppendLinearGradient(bounds *graphene.Rect, st
 //
 // Appends an outset shadow node around the box given by @outline.
 func (snapshot *SnapshotInstance) AppendOutsetShadow(outline *gsk.RoundedRect, color *gdk.RGBA, dx float32, dy float32, spread float32, blurRadius float32) {
-	var carg0 *C.GtkSnapshot    // in, none, converted, casted *C.Snapshot
+	var carg0 *C.GtkSnapshot    // in, none, converted
 	var carg1 *C.GskRoundedRect // in, none, converted
 	var carg2 *C.GdkRGBA        // in, none, converted
-	var carg3 C.float           // in, none, casted, casted C.gfloat
-	var carg4 C.float           // in, none, casted, casted C.gfloat
-	var carg5 C.float           // in, none, casted, casted C.gfloat
-	var carg6 C.float           // in, none, casted, casted C.gfloat
+	var carg3 C.float           // in, none, casted
+	var carg4 C.float           // in, none, casted
+	var carg5 C.float           // in, none, casted
+	var carg6 C.float           // in, none, casted
 
 	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	carg1 = (*C.GskRoundedRect)(gsk.UnsafeRoundedRectToGlibNone(outline))
@@ -49179,13 +49355,13 @@ func (snapshot *SnapshotInstance) AppendOutsetShadow(outline *gsk.RoundedRect, c
 //
 // Appends a radial gradient node with the given stops to @snapshot.
 func (snapshot *SnapshotInstance) AppendRadialGradient(bounds *graphene.Rect, center *graphene.Point, hradius float32, vradius float32, start float32, end float32, stops []gsk.ColorStop) {
-	var carg0 *C.GtkSnapshot      // in, none, converted, casted *C.Snapshot
+	var carg0 *C.GtkSnapshot      // in, none, converted
 	var carg1 *C.graphene_rect_t  // in, none, converted
 	var carg2 *C.graphene_point_t // in, none, converted
-	var carg3 C.float             // in, none, casted, casted C.gfloat
-	var carg4 C.float             // in, none, casted, casted C.gfloat
-	var carg5 C.float             // in, none, casted, casted C.gfloat
-	var carg6 C.float             // in, none, casted, casted C.gfloat
+	var carg3 C.float             // in, none, casted
+	var carg4 C.float             // in, none, casted
+	var carg5 C.float             // in, none, casted
+	var carg6 C.float             // in, none, casted
 	var carg7 *C.GskColorStop     // in, transfer: none, C Pointers: 1, Name: array[ColorStop], array (inner: *typesystem.Record, length-by: carg8)
 	var carg8 C.gsize             // implicit
 
@@ -49199,7 +49375,7 @@ func (snapshot *SnapshotInstance) AppendRadialGradient(bounds *graphene.Rect, ce
 	_ = stops
 	_ = carg7
 	_ = carg8
-	panic("unimplemented conversion of []gsk.ColorStop (const GskColorStop*)")
+	panic("unimplemented conversion of []gsk.ColorStop (*C.GskColorStop)")
 
 	C.gtk_snapshot_append_radial_gradient(carg0, carg1, carg2, carg3, carg4, carg5, carg6, carg7, carg8)
 	runtime.KeepAlive(snapshot)
@@ -49223,7 +49399,7 @@ func (snapshot *SnapshotInstance) AppendRadialGradient(bounds *graphene.Rect, ce
 //
 // Appends a repeating linear gradient node with the given stops to @snapshot.
 func (snapshot *SnapshotInstance) AppendRepeatingLinearGradient(bounds *graphene.Rect, startPoint *graphene.Point, endPoint *graphene.Point, stops []gsk.ColorStop) {
-	var carg0 *C.GtkSnapshot      // in, none, converted, casted *C.Snapshot
+	var carg0 *C.GtkSnapshot      // in, none, converted
 	var carg1 *C.graphene_rect_t  // in, none, converted
 	var carg2 *C.graphene_point_t // in, none, converted
 	var carg3 *C.graphene_point_t // in, none, converted
@@ -49237,7 +49413,7 @@ func (snapshot *SnapshotInstance) AppendRepeatingLinearGradient(bounds *graphene
 	_ = stops
 	_ = carg4
 	_ = carg5
-	panic("unimplemented conversion of []gsk.ColorStop (const GskColorStop*)")
+	panic("unimplemented conversion of []gsk.ColorStop (*C.GskColorStop)")
 
 	C.gtk_snapshot_append_repeating_linear_gradient(carg0, carg1, carg2, carg3, carg4, carg5)
 	runtime.KeepAlive(snapshot)
@@ -49261,13 +49437,13 @@ func (snapshot *SnapshotInstance) AppendRepeatingLinearGradient(bounds *graphene
 //
 // Appends a repeating radial gradient node with the given stops to @snapshot.
 func (snapshot *SnapshotInstance) AppendRepeatingRadialGradient(bounds *graphene.Rect, center *graphene.Point, hradius float32, vradius float32, start float32, end float32, stops []gsk.ColorStop) {
-	var carg0 *C.GtkSnapshot      // in, none, converted, casted *C.Snapshot
+	var carg0 *C.GtkSnapshot      // in, none, converted
 	var carg1 *C.graphene_rect_t  // in, none, converted
 	var carg2 *C.graphene_point_t // in, none, converted
-	var carg3 C.float             // in, none, casted, casted C.gfloat
-	var carg4 C.float             // in, none, casted, casted C.gfloat
-	var carg5 C.float             // in, none, casted, casted C.gfloat
-	var carg6 C.float             // in, none, casted, casted C.gfloat
+	var carg3 C.float             // in, none, casted
+	var carg4 C.float             // in, none, casted
+	var carg5 C.float             // in, none, casted
+	var carg6 C.float             // in, none, casted
 	var carg7 *C.GskColorStop     // in, transfer: none, C Pointers: 1, Name: array[ColorStop], array (inner: *typesystem.Record, length-by: carg8)
 	var carg8 C.gsize             // implicit
 
@@ -49281,7 +49457,7 @@ func (snapshot *SnapshotInstance) AppendRepeatingRadialGradient(bounds *graphene
 	_ = stops
 	_ = carg7
 	_ = carg8
-	panic("unimplemented conversion of []gsk.ColorStop (const GskColorStop*)")
+	panic("unimplemented conversion of []gsk.ColorStop (*C.GskColorStop)")
 
 	C.gtk_snapshot_append_repeating_radial_gradient(carg0, carg1, carg2, carg3, carg4, carg5, carg6, carg7, carg8)
 	runtime.KeepAlive(snapshot)
@@ -49310,7 +49486,7 @@ func (snapshot *SnapshotInstance) AppendRepeatingRadialGradient(bounds *graphene
 // this function provides control about how the filter
 // that is used when scaling.
 func (snapshot *SnapshotInstance) AppendScaledTexture(texture gdk.Texture, filter gsk.ScalingFilter, bounds *graphene.Rect) {
-	var carg0 *C.GtkSnapshot     // in, none, converted, casted *C.Snapshot
+	var carg0 *C.GtkSnapshot     // in, none, converted
 	var carg1 *C.GdkTexture      // in, none, converted
 	var carg2 C.GskScalingFilter // in, none, casted
 	var carg3 *C.graphene_rect_t // in, none, converted
@@ -49341,7 +49517,7 @@ func (snapshot *SnapshotInstance) AppendScaledTexture(texture gdk.Texture, filte
 // to stroke a path with more complex content than
 // a color.
 func (snapshot *SnapshotInstance) AppendStroke(path *gsk.Path, stroke *gsk.Stroke, color *gdk.RGBA) {
-	var carg0 *C.GtkSnapshot // in, none, converted, casted *C.Snapshot
+	var carg0 *C.GtkSnapshot // in, none, converted
 	var carg1 *C.GskPath     // in, none, converted
 	var carg2 *C.GskStroke   // in, none, converted
 	var carg3 *C.GdkRGBA     // in, none, converted
@@ -49373,7 +49549,7 @@ func (snapshot *SnapshotInstance) AppendStroke(path *gsk.Path, stroke *gsk.Strok
 // linear filtering is used. See [method@Gtk.Snapshot.append_scaled_texture]
 // if you need other filtering, such as nearest-neighbour.
 func (snapshot *SnapshotInstance) AppendTexture(texture gdk.Texture, bounds *graphene.Rect) {
-	var carg0 *C.GtkSnapshot     // in, none, converted, casted *C.Snapshot
+	var carg0 *C.GtkSnapshot     // in, none, converted
 	var carg1 *C.GdkTexture      // in, none, converted
 	var carg2 *C.graphene_rect_t // in, none, converted
 
@@ -49397,8 +49573,8 @@ func (snapshot *SnapshotInstance) AppendTexture(texture gdk.Texture, bounds *gra
 // 
 // See [method@Gsk.Transform.perspective] for a discussion on the details.
 func (snapshot *SnapshotInstance) Perspective(depth float32) {
-	var carg0 *C.GtkSnapshot // in, none, converted, casted *C.Snapshot
-	var carg1 C.float        // in, none, casted, casted C.gfloat
+	var carg0 *C.GtkSnapshot // in, none, converted
+	var carg1 C.float        // in, none, casted
 
 	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	carg1 = C.float(depth)
@@ -49413,7 +49589,7 @@ func (snapshot *SnapshotInstance) Perspective(depth float32) {
 // Removes the top element from the stack of render nodes,
 // and appends it to the node underneath it.
 func (snapshot *SnapshotInstance) Pop() {
-	var carg0 *C.GtkSnapshot // in, none, converted, casted *C.Snapshot
+	var carg0 *C.GtkSnapshot // in, none, converted
 
 	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 
@@ -49437,7 +49613,7 @@ func (snapshot *SnapshotInstance) Pop() {
 // Calling this function requires two subsequent calls
 // to [method@Gtk.Snapshot.pop].
 func (snapshot *SnapshotInstance) PushBlend(blendMode gsk.BlendMode) {
-	var carg0 *C.GtkSnapshot // in, none, converted, casted *C.Snapshot
+	var carg0 *C.GtkSnapshot // in, none, converted
 	var carg1 C.GskBlendMode // in, none, casted
 
 	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
@@ -49458,8 +49634,8 @@ func (snapshot *SnapshotInstance) PushBlend(blendMode gsk.BlendMode) {
 // 
 // The image is recorded until the next call to [method@Gtk.Snapshot.pop].
 func (snapshot *SnapshotInstance) PushBlur(radius float64) {
-	var carg0 *C.GtkSnapshot // in, none, converted, casted *C.Snapshot
-	var carg1 C.double       // in, none, casted, casted C.gdouble
+	var carg0 *C.GtkSnapshot // in, none, converted
+	var carg1 C.double       // in, none, casted
 
 	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	carg1 = C.double(radius)
@@ -49479,7 +49655,7 @@ func (snapshot *SnapshotInstance) PushBlur(radius float64) {
 // 
 // The image is recorded until the next call to [method@Gtk.Snapshot.pop].
 func (snapshot *SnapshotInstance) PushClip(bounds *graphene.Rect) {
-	var carg0 *C.GtkSnapshot     // in, none, converted, casted *C.Snapshot
+	var carg0 *C.GtkSnapshot     // in, none, converted
 	var carg1 *C.graphene_rect_t // in, none, converted
 
 	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
@@ -49509,7 +49685,7 @@ func (snapshot *SnapshotInstance) PushClip(bounds *graphene.Rect) {
 // 
 // The image is recorded until the next call to [method@Gtk.Snapshot.pop].
 func (snapshot *SnapshotInstance) PushColorMatrix(colorMatrix *graphene.Matrix, colorOffset *graphene.Vec4) {
-	var carg0 *C.GtkSnapshot       // in, none, converted, casted *C.Snapshot
+	var carg0 *C.GtkSnapshot       // in, none, converted
 	var carg1 *C.graphene_matrix_t // in, none, converted
 	var carg2 *C.graphene_vec4_t   // in, none, converted
 
@@ -49539,8 +49715,8 @@ func (snapshot *SnapshotInstance) PushColorMatrix(colorMatrix *graphene.Matrix, 
 // Calling this function requires two subsequent calls
 // to [method@Gtk.Snapshot.pop].
 func (snapshot *SnapshotInstance) PushCrossFade(progress float64) {
-	var carg0 *C.GtkSnapshot // in, none, converted, casted *C.Snapshot
-	var carg1 C.double       // in, none, casted, casted C.gdouble
+	var carg0 *C.GtkSnapshot // in, none, converted
+	var carg1 C.double       // in, none, casted
 
 	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	carg1 = C.double(progress)
@@ -49565,7 +49741,7 @@ func (snapshot *SnapshotInstance) PushCrossFade(progress float64) {
 // If you want to fill the path with a color, [method@Gtk.Snapshot.append_fill]
 // may be more convenient.
 func (snapshot *SnapshotInstance) PushFill(path *gsk.Path, fillRule gsk.FillRule) {
-	var carg0 *C.GtkSnapshot // in, none, converted, casted *C.Snapshot
+	var carg0 *C.GtkSnapshot // in, none, converted
 	var carg1 *C.GskPath     // in, none, converted
 	var carg2 C.GskFillRule  // in, none, casted
 
@@ -49593,7 +49769,7 @@ func (snapshot *SnapshotInstance) PushFill(path *gsk.Path, fillRule gsk.FillRule
 // 
 // Calling this function requires 2 subsequent calls to gtk_snapshot_pop().
 func (snapshot *SnapshotInstance) PushMask(maskMode gsk.MaskMode) {
-	var carg0 *C.GtkSnapshot // in, none, converted, casted *C.Snapshot
+	var carg0 *C.GtkSnapshot // in, none, converted
 	var carg1 C.GskMaskMode  // in, none, casted
 
 	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
@@ -49614,8 +49790,8 @@ func (snapshot *SnapshotInstance) PushMask(maskMode gsk.MaskMode) {
 // 
 // The image is recorded until the next call to [method@Gtk.Snapshot.pop].
 func (snapshot *SnapshotInstance) PushOpacity(opacity float64) {
-	var carg0 *C.GtkSnapshot // in, none, converted, casted *C.Snapshot
-	var carg1 C.double       // in, none, casted, casted C.gdouble
+	var carg0 *C.GtkSnapshot // in, none, converted
+	var carg1 C.double       // in, none, casted
 
 	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	carg1 = C.double(opacity)
@@ -49637,7 +49813,7 @@ func (snapshot *SnapshotInstance) PushOpacity(opacity float64) {
 // 
 // The child is recorded until the next call to [method@Gtk.Snapshot.pop].
 func (snapshot *SnapshotInstance) PushRepeat(bounds *graphene.Rect, childBounds *graphene.Rect) {
-	var carg0 *C.GtkSnapshot     // in, none, converted, casted *C.Snapshot
+	var carg0 *C.GtkSnapshot     // in, none, converted
 	var carg1 *C.graphene_rect_t // in, none, converted
 	var carg2 *C.graphene_rect_t // in, none, converted, nullable
 
@@ -49663,7 +49839,7 @@ func (snapshot *SnapshotInstance) PushRepeat(bounds *graphene.Rect, childBounds 
 // 
 // The image is recorded until the next call to [method@Gtk.Snapshot.pop].
 func (snapshot *SnapshotInstance) PushRoundedClip(bounds *gsk.RoundedRect) {
-	var carg0 *C.GtkSnapshot    // in, none, converted, casted *C.Snapshot
+	var carg0 *C.GtkSnapshot    // in, none, converted
 	var carg1 *C.GskRoundedRect // in, none, converted
 
 	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
@@ -49684,7 +49860,7 @@ func (snapshot *SnapshotInstance) PushRoundedClip(bounds *gsk.RoundedRect) {
 // 
 // The image is recorded until the next call to [method@Gtk.Snapshot.pop].
 func (snapshot *SnapshotInstance) PushShadow(shadow []gsk.Shadow) {
-	var carg0 *C.GtkSnapshot // in, none, converted, casted *C.Snapshot
+	var carg0 *C.GtkSnapshot // in, none, converted
 	var carg1 *C.GskShadow   // in, transfer: none, C Pointers: 1, Name: array[Shadow], array (inner: *typesystem.Record, length-by: carg2)
 	var carg2 C.gsize        // implicit
 
@@ -49692,7 +49868,7 @@ func (snapshot *SnapshotInstance) PushShadow(shadow []gsk.Shadow) {
 	_ = shadow
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []gsk.Shadow (const GskShadow*)")
+	panic("unimplemented conversion of []gsk.Shadow (*C.GskShadow)")
 
 	C.gtk_snapshot_push_shadow(carg0, carg1, carg2)
 	runtime.KeepAlive(snapshot)
@@ -49718,7 +49894,7 @@ func (snapshot *SnapshotInstance) PushShadow(shadow []gsk.Shadow) {
 // If you want to stroke the path with a color, [method@Gtk.Snapshot.append_stroke]
 // may be more convenient.
 func (snapshot *SnapshotInstance) PushStroke(path *gsk.Path, stroke *gsk.Stroke) {
-	var carg0 *C.GtkSnapshot // in, none, converted, casted *C.Snapshot
+	var carg0 *C.GtkSnapshot // in, none, converted
 	var carg1 *C.GskPath     // in, none, converted
 	var carg2 *C.GskStroke   // in, none, converted
 
@@ -49738,7 +49914,7 @@ func (snapshot *SnapshotInstance) PushStroke(path *gsk.Path, stroke *gsk.Stroke)
 // [method@Snapshot.save] and removes that state from the stack of
 // saved states.
 func (snapshot *SnapshotInstance) Restore() {
-	var carg0 *C.GtkSnapshot // in, none, converted, casted *C.Snapshot
+	var carg0 *C.GtkSnapshot // in, none, converted
 
 	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 
@@ -49758,8 +49934,8 @@ func (snapshot *SnapshotInstance) Restore() {
 // 
 // To rotate around axes other than the Z axis, use [method@Gsk.Transform.rotate_3d].
 func (snapshot *SnapshotInstance) Rotate(angle float32) {
-	var carg0 *C.GtkSnapshot // in, none, converted, casted *C.Snapshot
-	var carg1 C.float        // in, none, casted, casted C.gfloat
+	var carg0 *C.GtkSnapshot // in, none, converted
+	var carg1 C.float        // in, none, casted
 
 	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	carg1 = C.float(angle)
@@ -49780,8 +49956,8 @@ func (snapshot *SnapshotInstance) Rotate(angle float32) {
 // 
 // For a rotation in 2D space, use [method@Gsk.Transform.rotate].
 func (snapshot *SnapshotInstance) Rotate3D(angle float32, axis *graphene.Vec3) {
-	var carg0 *C.GtkSnapshot     // in, none, converted, casted *C.Snapshot
-	var carg1 C.float            // in, none, casted, casted C.gfloat
+	var carg0 *C.GtkSnapshot     // in, none, converted
+	var carg1 C.float            // in, none, casted
 	var carg2 *C.graphene_vec3_t // in, none, converted
 
 	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
@@ -49809,7 +49985,7 @@ func (snapshot *SnapshotInstance) Rotate3D(angle float32, axis *graphene.Vec3) {
 // It is necessary to clear all saved states with corresponding
 // calls to `gtk_snapshot_restore()`.
 func (snapshot *SnapshotInstance) Save() {
-	var carg0 *C.GtkSnapshot // in, none, converted, casted *C.Snapshot
+	var carg0 *C.GtkSnapshot // in, none, converted
 
 	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 
@@ -49829,9 +50005,9 @@ func (snapshot *SnapshotInstance) Save() {
 // 
 // Use [method@Gtk.Snapshot.scale_3d] to scale in all 3 dimensions.
 func (snapshot *SnapshotInstance) Scale(factorX float32, factorY float32) {
-	var carg0 *C.GtkSnapshot // in, none, converted, casted *C.Snapshot
-	var carg1 C.float        // in, none, casted, casted C.gfloat
-	var carg2 C.float        // in, none, casted, casted C.gfloat
+	var carg0 *C.GtkSnapshot // in, none, converted
+	var carg1 C.float        // in, none, casted
+	var carg2 C.float        // in, none, casted
 
 	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	carg1 = C.float(factorX)
@@ -49853,10 +50029,10 @@ func (snapshot *SnapshotInstance) Scale(factorX float32, factorY float32) {
 //
 // Scales @snapshot's coordinate system by the given factors.
 func (snapshot *SnapshotInstance) Scale3D(factorX float32, factorY float32, factorZ float32) {
-	var carg0 *C.GtkSnapshot // in, none, converted, casted *C.Snapshot
-	var carg1 C.float        // in, none, casted, casted C.gfloat
-	var carg2 C.float        // in, none, casted, casted C.gfloat
-	var carg3 C.float        // in, none, casted, casted C.gfloat
+	var carg0 *C.GtkSnapshot // in, none, converted
+	var carg1 C.float        // in, none, casted
+	var carg2 C.float        // in, none, casted
+	var carg3 C.float        // in, none, casted
 
 	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	carg1 = C.float(factorX)
@@ -49888,7 +50064,7 @@ func (snapshot *SnapshotInstance) Scale3D(factorX float32, factorY float32, fact
 // add more nodes to @snapshot. The only function that should
 // be called after this is [method@GObject.Object.unref].
 func (snapshot *SnapshotInstance) ToPaintable(size *graphene.Size) gdk.Paintable {
-	var carg0 *C.GtkSnapshot     // in, none, converted, casted *C.Snapshot
+	var carg0 *C.GtkSnapshot     // in, none, converted
 	var carg1 *C.graphene_size_t // in, none, converted, nullable
 	var cret  *C.GdkPaintable    // return, full, converted, nullable
 
@@ -49918,7 +50094,7 @@ func (snapshot *SnapshotInstance) ToPaintable(size *graphene.Size) gdk.Paintable
 //
 // Transforms @snapshot's coordinate system with the given @transform.
 func (snapshot *SnapshotInstance) Transform(transform *gsk.Transform) {
-	var carg0 *C.GtkSnapshot  // in, none, converted, casted *C.Snapshot
+	var carg0 *C.GtkSnapshot  // in, none, converted
 	var carg1 *C.GskTransform // in, none, converted, nullable
 
 	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
@@ -49939,7 +50115,7 @@ func (snapshot *SnapshotInstance) Transform(transform *gsk.Transform) {
 //
 // Transforms @snapshot's coordinate system with the given @matrix.
 func (snapshot *SnapshotInstance) TransformMatrix(matrix *graphene.Matrix) {
-	var carg0 *C.GtkSnapshot       // in, none, converted, casted *C.Snapshot
+	var carg0 *C.GtkSnapshot       // in, none, converted
 	var carg1 *C.graphene_matrix_t // in, none, converted
 
 	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
@@ -49958,7 +50134,7 @@ func (snapshot *SnapshotInstance) TransformMatrix(matrix *graphene.Matrix) {
 //
 // Translates @snapshot's coordinate system by @point in 2-dimensional space.
 func (snapshot *SnapshotInstance) Translate(point *graphene.Point) {
-	var carg0 *C.GtkSnapshot      // in, none, converted, casted *C.Snapshot
+	var carg0 *C.GtkSnapshot      // in, none, converted
 	var carg1 *C.graphene_point_t // in, none, converted
 
 	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
@@ -49977,7 +50153,7 @@ func (snapshot *SnapshotInstance) Translate(point *graphene.Point) {
 //
 // Translates @snapshot's coordinate system by @point.
 func (snapshot *SnapshotInstance) Translate3D(point *graphene.Point3D) {
-	var carg0 *C.GtkSnapshot        // in, none, converted, casted *C.Snapshot
+	var carg0 *C.GtkSnapshot        // in, none, converted
 	var carg1 *C.graphene_point3d_t // in, none, converted
 
 	carg0 = (*C.GtkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
@@ -50147,7 +50323,7 @@ func unsafeWrapSortListModel(base *gobject.ObjectInstance) *SortListModelInstanc
 	return &SortListModelInstance{
 		ObjectInstance: *base,
 		ListModelInstance: gio.ListModelInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -50586,7 +50762,8 @@ type Sorter interface {
 	// chain up virtual methods:
 
 	// ParentGetOrder calls the default implementations of the get_order virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret SorterOrder 
@@ -50719,7 +50896,8 @@ type SorterOverrides[Instance Sorter] struct {
 	// gobject.ObjectOverrides allows you to override virtual methods from the parent class gobject.Object
 	gobject.ObjectOverrides[Instance]
 
-	// GetOrder allows you to override the implementation of the virtual method get_order.
+	// // GetOrder allows you to override the implementation of the virtual method get_order.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret SorterOrder 
@@ -50762,7 +50940,8 @@ func UnsafeApplySorterOverrides[Instance Sorter](gclass unsafe.Pointer, override
 }
 
 // ParentGetOrder calls the default implementations of the get_order virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret SorterOrder 
@@ -51010,7 +51189,7 @@ func (self *StackPageInstance) GetChild() Widget {
 // Returns the icon name of the page.
 func (self *StackPageInstance) GetIconName() string {
 	var carg0 *C.GtkStackPage // in, none, converted
-	var cret  *C.char         // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char         // return, none, string, nullable-string
 
 	carg0 = (*C.GtkStackPage)(UnsafeStackPageToGlibNone(self))
 
@@ -51035,7 +51214,7 @@ func (self *StackPageInstance) GetIconName() string {
 // Returns the name of the page.
 func (self *StackPageInstance) GetName() string {
 	var carg0 *C.GtkStackPage // in, none, converted
-	var cret  *C.char         // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char         // return, none, string, nullable-string
 
 	carg0 = (*C.GtkStackPage)(UnsafeStackPageToGlibNone(self))
 
@@ -51085,7 +51264,7 @@ func (self *StackPageInstance) GetNeedsAttention() bool {
 // Gets the page title.
 func (self *StackPageInstance) GetTitle() string {
 	var carg0 *C.GtkStackPage // in, none, converted
-	var cret  *C.char         // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char         // return, none, string, nullable-string
 
 	carg0 = (*C.GtkStackPage)(UnsafeStackPageToGlibNone(self))
 
@@ -51163,7 +51342,7 @@ func (self *StackPageInstance) GetVisible() bool {
 // Sets the icon name of the page.
 func (self *StackPageInstance) SetIconName(setting string) {
 	var carg0 *C.GtkStackPage // in, none, converted
-	var carg1 *C.char         // in, none, string, casted *C.gchar
+	var carg1 *C.char         // in, none, string
 
 	carg0 = (*C.GtkStackPage)(UnsafeStackPageToGlibNone(self))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(setting)))
@@ -51183,7 +51362,7 @@ func (self *StackPageInstance) SetIconName(setting string) {
 // Sets the name of the page.
 func (self *StackPageInstance) SetName(setting string) {
 	var carg0 *C.GtkStackPage // in, none, converted
-	var carg1 *C.char         // in, none, string, casted *C.gchar
+	var carg1 *C.char         // in, none, string
 
 	carg0 = (*C.GtkStackPage)(UnsafeStackPageToGlibNone(self))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(setting)))
@@ -51224,7 +51403,7 @@ func (self *StackPageInstance) SetNeedsAttention(setting bool) {
 // Sets the page title.
 func (self *StackPageInstance) SetTitle(setting string) {
 	var carg0 *C.GtkStackPage // in, none, converted
-	var carg1 *C.char         // in, none, string, casted *C.gchar
+	var carg1 *C.char         // in, none, string
 
 	carg0 = (*C.GtkStackPage)(UnsafeStackPageToGlibNone(self))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(setting)))
@@ -51455,7 +51634,7 @@ func (self *StringFilterInstance) GetMatchMode() StringFilterMatchMode {
 // Gets the search term.
 func (self *StringFilterInstance) GetSearch() string {
 	var carg0 *C.GtkStringFilter // in, none, converted
-	var cret  *C.char            // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char            // return, none, string, nullable-string
 
 	carg0 = (*C.GtkStringFilter)(UnsafeStringFilterToGlibNone(self))
 
@@ -51702,7 +51881,7 @@ func unsafeWrapStringList(base *gobject.ObjectInstance) *StringListInstance {
 	return &StringListInstance{
 		ObjectInstance: *base,
 		ListModelInstance: gio.ListModelInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -51757,7 +51936,7 @@ func NewStringList(_strings []string) StringList {
 
 	_ = _strings
 	_ = carg1
-	panic("unimplemented conversion of []string (const char* const*)")
+	panic("unimplemented conversion of []string (**C.char)")
 
 	cret = C.gtk_string_list_new(carg1)
 	runtime.KeepAlive(_strings)
@@ -51781,7 +51960,7 @@ func NewStringList(_strings []string) StringList {
 // [method@Gtk.StringList.take] for a way to avoid that.
 func (self *StringListInstance) Append(str string) {
 	var carg0 *C.GtkStringList // in, none, converted
-	var carg1 *C.char          // in, none, string, casted *C.gchar
+	var carg1 *C.char          // in, none, string
 
 	carg0 = (*C.GtkStringList)(UnsafeStringListToGlibNone(self))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(str)))
@@ -51811,7 +51990,7 @@ func (self *StringListInstance) Append(str string) {
 func (self *StringListInstance) GetString(position uint) string {
 	var carg0 *C.GtkStringList // in, none, converted
 	var carg1 C.guint          // in, none, casted
-	var cret  *C.char          // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char          // return, none, string, nullable-string
 
 	carg0 = (*C.GtkStringList)(UnsafeStringListToGlibNone(self))
 	carg1 = C.guint(position)
@@ -51882,7 +52061,7 @@ func (self *StringListInstance) Splice(position uint, nRemovals uint, additions 
 	carg2 = C.guint(nRemovals)
 	_ = additions
 	_ = carg3
-	panic("unimplemented conversion of []string (const char* const*)")
+	panic("unimplemented conversion of []string (**C.char)")
 
 	C.gtk_string_list_splice(carg0, carg1, carg2, carg3)
 	runtime.KeepAlive(self)
@@ -51908,7 +52087,7 @@ func (self *StringListInstance) Splice(position uint, nRemovals uint, additions 
 // ```
 func (self *StringListInstance) Take(str string) {
 	var carg0 *C.GtkStringList // in, none, converted
-	var carg1 *C.char          // in, full, string, casted *C.gchar
+	var carg1 *C.char          // in, full, string
 
 	carg0 = (*C.GtkStringList)(UnsafeStringListToGlibNone(self))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(str)))
@@ -52040,7 +52219,7 @@ func UnsafeStringObjectToGlibFull(c StringObject) unsafe.Pointer {
 //
 // Wraps a string in an object for use with `GListModel`.
 func NewStringObject(str string) StringObject {
-	var carg1 *C.char            // in, none, string, casted *C.gchar
+	var carg1 *C.char            // in, none, string
 	var cret  *C.GtkStringObject // return, full, converted
 
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(str)))
@@ -52065,7 +52244,7 @@ func NewStringObject(str string) StringObject {
 // Returns the string contained in a `GtkStringObject`.
 func (self *StringObjectInstance) GetString() string {
 	var carg0 *C.GtkStringObject // in, none, converted
-	var cret  *C.char            // return, none, string, casted *C.gchar
+	var cret  *C.char            // return, none, string
 
 	carg0 = (*C.GtkStringObject)(UnsafeStringObjectToGlibNone(self))
 
@@ -53558,7 +53737,8 @@ type TextBuffer interface {
 	// chain up virtual methods:
 
 	// ParentApplyTag calls the default implementations of the apply_tag virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- tag TextTag: a `GtkTextTag` 
@@ -53572,7 +53752,7 @@ type TextBuffer interface {
 	// not have to be in order.
 	ParentApplyTag(tag TextTag, start *TextIter, end *TextIter)
 	// ParentBeginUserAction calls the default implementations of the begin_user_action virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
 	//
 	// Called to indicate that the buffer operations between here and a
 	// call to gtk_text_buffer_end_user_action() are part of a single
@@ -53594,12 +53774,13 @@ type TextBuffer interface {
 	// solely of a single call to one of those functions.
 	ParentBeginUserAction()
 	// ParentChanged calls the default implementations of the changed virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
 	//
 	// The class handler for the `GtkTextBuffer::changed` signal.
 	ParentChanged()
 	// ParentDeleteRange calls the default implementations of the delete_range virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- start *TextIter 
@@ -53608,7 +53789,7 @@ type TextBuffer interface {
 	// The class handler for the `GtkTextBuffer::delete-range` signal.
 	ParentDeleteRange(start *TextIter, end *TextIter)
 	// ParentEndUserAction calls the default implementations of the end_user_action virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
 	//
 	// Ends a user-visible operation.
 	// 
@@ -53617,7 +53798,8 @@ type TextBuffer interface {
 	// See that function for a full explanation.
 	ParentEndUserAction()
 	// ParentInsertChildAnchor calls the default implementations of the insert_child_anchor virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- iter *TextIter: location to insert the anchor 
@@ -53638,7 +53820,8 @@ type TextBuffer interface {
 	// reference to the anchor, so you can unref it after insertion.
 	ParentInsertChildAnchor(iter *TextIter, anchor TextChildAnchor)
 	// ParentInsertPaintable calls the default implementations of the insert_paintable virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- iter *TextIter: location to insert the paintable 
@@ -53655,7 +53838,8 @@ type TextBuffer interface {
 	// [method@Gtk.TextBuffer.get_text].
 	ParentInsertPaintable(iter *TextIter, paintable gdk.Paintable)
 	// ParentInsertText calls the default implementations of the insert_text virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- pos *TextIter 
@@ -53665,7 +53849,8 @@ type TextBuffer interface {
 	// The class handler for the `GtkTextBuffer::insert-text` signal.
 	ParentInsertText(pos *TextIter, newText string, newTextLength int32)
 	// ParentMarkDeleted calls the default implementations of the mark_deleted virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- mark TextMark 
@@ -53673,7 +53858,8 @@ type TextBuffer interface {
 	// The class handler for the `GtkTextBuffer::mark-deleted` signal.
 	ParentMarkDeleted(mark TextMark)
 	// ParentMarkSet calls the default implementations of the mark_set virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- location *TextIter 
@@ -53682,12 +53868,13 @@ type TextBuffer interface {
 	// The class handler for the `GtkTextBuffer::mark-set` signal.
 	ParentMarkSet(location *TextIter, mark TextMark)
 	// ParentModifiedChanged calls the default implementations of the modified_changed virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
 	//
 	// The class handler for the `GtkTextBuffer::modified-changed` signal.
 	ParentModifiedChanged()
 	// ParentPasteDone calls the default implementations of the paste_done virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- clipboard gdk.Clipboard 
@@ -53695,12 +53882,13 @@ type TextBuffer interface {
 	// The class handler for the `GtkTextBuffer::paste-done` signal.
 	ParentPasteDone(clipboard gdk.Clipboard)
 	// ParentRedo calls the default implementations of the redo virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
 	//
 	// Redoes the next redoable action on the buffer, if there is one.
 	ParentRedo()
 	// ParentRemoveTag calls the default implementations of the remove_tag virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- tag TextTag: a `GtkTextTag` 
@@ -53714,7 +53902,7 @@ type TextBuffer interface {
 	// to be in order.
 	ParentRemoveTag(tag TextTag, start *TextIter, end *TextIter)
 	// ParentUndo calls the default implementations of the undo virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
 	//
 	// Undoes the last undoable action on the buffer, if there is one.
 	ParentUndo()
@@ -53936,7 +54124,7 @@ func (buffer *TextBufferInstance) ApplyTag(tag TextTag, start *TextIter, end *Te
 // [method@Gtk.TextBuffer.apply_tag].
 func (buffer *TextBufferInstance) ApplyTagByName(name string, start *TextIter, end *TextIter) {
 	var carg0 *C.GtkTextBuffer // in, none, converted
-	var carg1 *C.char          // in, none, string, casted *C.gchar
+	var carg1 *C.char          // in, none, string
 	var carg2 *C.GtkTextIter   // in, none, converted
 	var carg3 *C.GtkTextIter   // in, none, converted
 
@@ -54321,7 +54509,7 @@ func (buffer *TextBufferInstance) DeleteMark(mark TextMark) {
 // See [method@Gtk.TextBuffer.delete_mark] for details.
 func (buffer *TextBufferInstance) DeleteMarkByName(name string) {
 	var carg0 *C.GtkTextBuffer // in, none, converted
-	var carg1 *C.char          // in, none, string, casted *C.gchar
+	var carg1 *C.char          // in, none, string
 
 	carg0 = (*C.GtkTextBuffer)(UnsafeTextBufferToGlibNone(buffer))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
@@ -54438,10 +54626,10 @@ func (buffer *TextBufferInstance) GetBounds() (TextIter, TextIter) {
 
 	_ = start
 	_ = carg1
-	panic("unimplemented conversion of TextIter (GtkTextIter)")
+	panic("unimplemented conversion of TextIter (C.GtkTextIter)")
 	_ = end
 	_ = carg2
-	panic("unimplemented conversion of TextIter (GtkTextIter)")
+	panic("unimplemented conversion of TextIter (C.GtkTextIter)")
 
 	return start, end
 }
@@ -54511,7 +54699,7 @@ func (buffer *TextBufferInstance) GetCanUndo() bool {
 // The character count is cached, so this function is very fast.
 func (buffer *TextBufferInstance) GetCharCount() int32 {
 	var carg0 *C.GtkTextBuffer // in, none, converted
-	var cret  C.int            // return, none, casted, casted C.gint
+	var cret  C.int            // return, none, casted
 
 	carg0 = (*C.GtkTextBuffer)(UnsafeTextBufferToGlibNone(buffer))
 
@@ -54582,7 +54770,7 @@ func (buffer *TextBufferInstance) GetEndIter() TextIter {
 
 	_ = iter
 	_ = carg1
-	panic("unimplemented conversion of TextIter (GtkTextIter)")
+	panic("unimplemented conversion of TextIter (C.GtkTextIter)")
 
 	return iter
 }
@@ -54666,7 +54854,7 @@ func (buffer *TextBufferInstance) GetIterAtChildAnchor(anchor TextChildAnchor) T
 
 	_ = iter
 	_ = carg1
-	panic("unimplemented conversion of TextIter (GtkTextIter)")
+	panic("unimplemented conversion of TextIter (C.GtkTextIter)")
 
 	return iter
 }
@@ -54688,7 +54876,7 @@ func (buffer *TextBufferInstance) GetIterAtChildAnchor(anchor TextChildAnchor) T
 // in the @buffer, the end iterator is returned.
 func (buffer *TextBufferInstance) GetIterAtLine(lineNumber int32) (TextIter, bool) {
 	var carg0 *C.GtkTextBuffer // in, none, converted
-	var carg2 C.int            // in, none, casted, casted C.gint
+	var carg2 C.int            // in, none, casted
 	var carg1 C.GtkTextIter    // out, transfer: none, C Pointers: 0, Name: TextIter, caller-allocates
 	var cret  C.gboolean       // return
 
@@ -54704,7 +54892,7 @@ func (buffer *TextBufferInstance) GetIterAtLine(lineNumber int32) (TextIter, boo
 
 	_ = iter
 	_ = carg1
-	panic("unimplemented conversion of TextIter (GtkTextIter)")
+	panic("unimplemented conversion of TextIter (C.GtkTextIter)")
 	if cret != 0 {
 		goret = true
 	}
@@ -54734,8 +54922,8 @@ func (buffer *TextBufferInstance) GetIterAtLine(lineNumber int32) (TextIter, boo
 // end of the line, the iterator at the end of the line is returned.
 func (buffer *TextBufferInstance) GetIterAtLineIndex(lineNumber int32, byteIndex int32) (TextIter, bool) {
 	var carg0 *C.GtkTextBuffer // in, none, converted
-	var carg2 C.int            // in, none, casted, casted C.gint
-	var carg3 C.int            // in, none, casted, casted C.gint
+	var carg2 C.int            // in, none, casted
+	var carg3 C.int            // in, none, casted
 	var carg1 C.GtkTextIter    // out, transfer: none, C Pointers: 0, Name: TextIter, caller-allocates
 	var cret  C.gboolean       // return
 
@@ -54753,7 +54941,7 @@ func (buffer *TextBufferInstance) GetIterAtLineIndex(lineNumber int32, byteIndex
 
 	_ = iter
 	_ = carg1
-	panic("unimplemented conversion of TextIter (GtkTextIter)")
+	panic("unimplemented conversion of TextIter (C.GtkTextIter)")
 	if cret != 0 {
 		goret = true
 	}
@@ -54783,8 +54971,8 @@ func (buffer *TextBufferInstance) GetIterAtLineIndex(lineNumber int32, byteIndex
 // end of the line, the iterator at the end of the line is returned.
 func (buffer *TextBufferInstance) GetIterAtLineOffset(lineNumber int32, charOffset int32) (TextIter, bool) {
 	var carg0 *C.GtkTextBuffer // in, none, converted
-	var carg2 C.int            // in, none, casted, casted C.gint
-	var carg3 C.int            // in, none, casted, casted C.gint
+	var carg2 C.int            // in, none, casted
+	var carg3 C.int            // in, none, casted
 	var carg1 C.GtkTextIter    // out, transfer: none, C Pointers: 0, Name: TextIter, caller-allocates
 	var cret  C.gboolean       // return
 
@@ -54802,7 +54990,7 @@ func (buffer *TextBufferInstance) GetIterAtLineOffset(lineNumber int32, charOffs
 
 	_ = iter
 	_ = carg1
-	panic("unimplemented conversion of TextIter (GtkTextIter)")
+	panic("unimplemented conversion of TextIter (C.GtkTextIter)")
 	if cret != 0 {
 		goret = true
 	}
@@ -54837,7 +55025,7 @@ func (buffer *TextBufferInstance) GetIterAtMark(mark TextMark) TextIter {
 
 	_ = iter
 	_ = carg1
-	panic("unimplemented conversion of TextIter (GtkTextIter)")
+	panic("unimplemented conversion of TextIter (C.GtkTextIter)")
 
 	return iter
 }
@@ -54860,7 +55048,7 @@ func (buffer *TextBufferInstance) GetIterAtMark(mark TextMark) TextIter {
 // the iterator one past the last valid character in the buffer.
 func (buffer *TextBufferInstance) GetIterAtOffset(charOffset int32) TextIter {
 	var carg0 *C.GtkTextBuffer // in, none, converted
-	var carg2 C.int            // in, none, casted, casted C.gint
+	var carg2 C.int            // in, none, casted
 	var carg1 C.GtkTextIter    // out, transfer: none, C Pointers: 0, Name: TextIter, caller-allocates
 
 	carg0 = (*C.GtkTextBuffer)(UnsafeTextBufferToGlibNone(buffer))
@@ -54874,7 +55062,7 @@ func (buffer *TextBufferInstance) GetIterAtOffset(charOffset int32) TextIter {
 
 	_ = iter
 	_ = carg1
-	panic("unimplemented conversion of TextIter (GtkTextIter)")
+	panic("unimplemented conversion of TextIter (C.GtkTextIter)")
 
 	return iter
 }
@@ -54890,7 +55078,7 @@ func (buffer *TextBufferInstance) GetIterAtOffset(charOffset int32) TextIter {
 // This value is cached, so the function is very fast.
 func (buffer *TextBufferInstance) GetLineCount() int32 {
 	var carg0 *C.GtkTextBuffer // in, none, converted
-	var cret  C.int            // return, none, casted, casted C.gint
+	var cret  C.int            // return, none, casted
 
 	carg0 = (*C.GtkTextBuffer)(UnsafeTextBufferToGlibNone(buffer))
 
@@ -54918,7 +55106,7 @@ func (buffer *TextBufferInstance) GetLineCount() int32 {
 // mark exists in the buffer.
 func (buffer *TextBufferInstance) GetMark(name string) TextMark {
 	var carg0 *C.GtkTextBuffer // in, none, converted
-	var carg1 *C.char          // in, none, string, casted *C.gchar
+	var carg1 *C.char          // in, none, string
 	var cret  *C.GtkTextMark   // return, none, converted, nullable
 
 	carg0 = (*C.GtkTextBuffer)(UnsafeTextBufferToGlibNone(buffer))
@@ -55060,10 +55248,10 @@ func (buffer *TextBufferInstance) GetSelectionBounds() (TextIter, TextIter, bool
 
 	_ = start
 	_ = carg1
-	panic("unimplemented conversion of TextIter (GtkTextIter)")
+	panic("unimplemented conversion of TextIter (C.GtkTextIter)")
 	_ = end
 	_ = carg2
-	panic("unimplemented conversion of TextIter (GtkTextIter)")
+	panic("unimplemented conversion of TextIter (C.GtkTextIter)")
 	if cret != 0 {
 		goret = true
 	}
@@ -55124,7 +55312,7 @@ func (buffer *TextBufferInstance) GetSlice(start *TextIter, end *TextIter, inclu
 	var carg1 *C.GtkTextIter   // in, none, converted
 	var carg2 *C.GtkTextIter   // in, none, converted
 	var carg3 C.gboolean       // in
-	var cret  *C.char          // return, full, string, casted *C.gchar
+	var cret  *C.char          // return, full, string
 
 	carg0 = (*C.GtkTextBuffer)(UnsafeTextBufferToGlibNone(buffer))
 	carg1 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(start))
@@ -55170,7 +55358,7 @@ func (buffer *TextBufferInstance) GetStartIter() TextIter {
 
 	_ = iter
 	_ = carg1
-	panic("unimplemented conversion of TextIter (GtkTextIter)")
+	panic("unimplemented conversion of TextIter (C.GtkTextIter)")
 
 	return iter
 }
@@ -55223,7 +55411,7 @@ func (buffer *TextBufferInstance) GetText(start *TextIter, end *TextIter, includ
 	var carg1 *C.GtkTextIter   // in, none, converted
 	var carg2 *C.GtkTextIter   // in, none, converted
 	var carg3 C.gboolean       // in
-	var cret  *C.char          // return, full, string, casted *C.gchar
+	var cret  *C.char          // return, full, string
 
 	carg0 = (*C.GtkTextBuffer)(UnsafeTextBufferToGlibNone(buffer))
 	carg1 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(start))
@@ -55265,8 +55453,8 @@ func (buffer *TextBufferInstance) GetText(start *TextIter, end *TextIter, includ
 func (buffer *TextBufferInstance) Insert(iter *TextIter, text string, len int32) {
 	var carg0 *C.GtkTextBuffer // in, none, converted
 	var carg1 *C.GtkTextIter   // in, none, converted
-	var carg2 *C.char          // in, none, string, casted *C.gchar
-	var carg3 C.int            // in, none, casted, casted C.gint
+	var carg2 *C.char          // in, none, string
+	var carg3 C.int            // in, none, casted
 
 	carg0 = (*C.GtkTextBuffer)(UnsafeTextBufferToGlibNone(buffer))
 	carg1 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
@@ -55294,8 +55482,8 @@ func (buffer *TextBufferInstance) Insert(iter *TextIter, text string, len int32)
 // using the current cursor position as the insertion point.
 func (buffer *TextBufferInstance) InsertAtCursor(text string, len int32) {
 	var carg0 *C.GtkTextBuffer // in, none, converted
-	var carg1 *C.char          // in, none, string, casted *C.gchar
-	var carg2 C.int            // in, none, casted, casted C.gint
+	var carg1 *C.char          // in, none, string
+	var carg2 C.int            // in, none, casted
 
 	carg0 = (*C.GtkTextBuffer)(UnsafeTextBufferToGlibNone(buffer))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(text)))
@@ -55369,8 +55557,8 @@ func (buffer *TextBufferInstance) InsertChildAnchor(iter *TextIter, anchor TextC
 func (buffer *TextBufferInstance) InsertInteractive(iter *TextIter, text string, len int32, defaultEditable bool) bool {
 	var carg0 *C.GtkTextBuffer // in, none, converted
 	var carg1 *C.GtkTextIter   // in, none, converted
-	var carg2 *C.char          // in, none, string, casted *C.gchar
-	var carg3 C.int            // in, none, casted, casted C.gint
+	var carg2 *C.char          // in, none, string
+	var carg3 C.int            // in, none, casted
 	var carg4 C.gboolean       // in
 	var cret  C.gboolean       // return
 
@@ -55421,8 +55609,8 @@ func (buffer *TextBufferInstance) InsertInteractive(iter *TextIter, text string,
 // result of [method@Gtk.TextView.get_editable] is appropriate here.
 func (buffer *TextBufferInstance) InsertInteractiveAtCursor(text string, len int32, defaultEditable bool) bool {
 	var carg0 *C.GtkTextBuffer // in, none, converted
-	var carg1 *C.char          // in, none, string, casted *C.gchar
-	var carg2 C.int            // in, none, casted, casted C.gint
+	var carg1 *C.char          // in, none, string
+	var carg2 C.int            // in, none, casted
 	var carg3 C.gboolean       // in
 	var cret  C.gboolean       // return
 
@@ -55466,8 +55654,8 @@ func (buffer *TextBufferInstance) InsertInteractiveAtCursor(text string, len int
 func (buffer *TextBufferInstance) InsertMarkup(iter *TextIter, markup string, len int32) {
 	var carg0 *C.GtkTextBuffer // in, none, converted
 	var carg1 *C.GtkTextIter   // in, none, converted
-	var carg2 *C.char          // in, none, string, casted *C.gchar
-	var carg3 C.int            // in, none, casted, casted C.gint
+	var carg2 *C.char          // in, none, string
+	var carg3 C.int            // in, none, casted
 
 	carg0 = (*C.GtkTextBuffer)(UnsafeTextBufferToGlibNone(buffer))
 	carg1 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
@@ -55641,7 +55829,7 @@ func (buffer *TextBufferInstance) MoveMark(mark TextMark, where *TextIter) {
 // See [method@Gtk.TextBuffer.move_mark] for details.
 func (buffer *TextBufferInstance) MoveMarkByName(name string, where *TextIter) {
 	var carg0 *C.GtkTextBuffer // in, none, converted
-	var carg1 *C.char          // in, none, string, casted *C.gchar
+	var carg1 *C.char          // in, none, string
 	var carg2 *C.GtkTextIter   // in, none, converted
 
 	carg0 = (*C.GtkTextBuffer)(UnsafeTextBufferToGlibNone(buffer))
@@ -55852,7 +56040,7 @@ func (buffer *TextBufferInstance) RemoveTag(tag TextTag, start *TextIter, end *T
 // [method@Gtk.TextBuffer.remove_tag].
 func (buffer *TextBufferInstance) RemoveTagByName(name string, start *TextIter, end *TextIter) {
 	var carg0 *C.GtkTextBuffer // in, none, converted
-	var carg1 *C.char          // in, none, string, casted *C.gchar
+	var carg1 *C.char          // in, none, string
 	var carg2 *C.GtkTextIter   // in, none, converted
 	var carg3 *C.GtkTextIter   // in, none, converted
 
@@ -55999,8 +56187,8 @@ func (buffer *TextBufferInstance) SetModified(setting bool) {
 // @text must be valid UTF-8.
 func (buffer *TextBufferInstance) SetText(text string, len int32) {
 	var carg0 *C.GtkTextBuffer // in, none, converted
-	var carg1 *C.char          // in, none, string, casted *C.gchar
-	var carg2 C.int            // in, none, casted, casted C.gint
+	var carg1 *C.char          // in, none, string
+	var carg2 C.int            // in, none, casted
 
 	carg0 = (*C.GtkTextBuffer)(UnsafeTextBufferToGlibNone(buffer))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(text)))
@@ -56228,7 +56416,8 @@ type TextBufferOverrides[Instance TextBuffer] struct {
 	// gobject.ObjectOverrides allows you to override virtual methods from the parent class gobject.Object
 	gobject.ObjectOverrides[Instance]
 
-	// ApplyTag allows you to override the implementation of the virtual method apply_tag.
+	// // ApplyTag allows you to override the implementation of the virtual method apply_tag.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- tag TextTag: a `GtkTextTag` 
@@ -56241,7 +56430,7 @@ type TextBufferOverrides[Instance TextBuffer] struct {
 	// @tag to the given range. @start and @end do
 	// not have to be in order.
 	ApplyTag func(Instance, TextTag, *TextIter, *TextIter)
-	// BeginUserAction allows you to override the implementation of the virtual method begin_user_action.
+	// // BeginUserAction allows you to override the implementation of the virtual method begin_user_action.
 	//
 	// Called to indicate that the buffer operations between here and a
 	// call to gtk_text_buffer_end_user_action() are part of a single
@@ -56262,11 +56451,12 @@ type TextBufferOverrides[Instance TextBuffer] struct {
 	// so there's no need to add extra calls if you user action consists
 	// solely of a single call to one of those functions.
 	BeginUserAction func(Instance)
-	// Changed allows you to override the implementation of the virtual method changed.
+	// // Changed allows you to override the implementation of the virtual method changed.
 	//
 	// The class handler for the `GtkTextBuffer::changed` signal.
 	Changed func(Instance)
-	// DeleteRange allows you to override the implementation of the virtual method delete_range.
+	// // DeleteRange allows you to override the implementation of the virtual method delete_range.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- start *TextIter 
@@ -56274,7 +56464,7 @@ type TextBufferOverrides[Instance TextBuffer] struct {
 	//
 	// The class handler for the `GtkTextBuffer::delete-range` signal.
 	DeleteRange func(Instance, *TextIter, *TextIter)
-	// EndUserAction allows you to override the implementation of the virtual method end_user_action.
+	// // EndUserAction allows you to override the implementation of the virtual method end_user_action.
 	//
 	// Ends a user-visible operation.
 	// 
@@ -56282,7 +56472,8 @@ type TextBufferOverrides[Instance TextBuffer] struct {
 	// [method@Gtk.TextBuffer.begin_user_action].
 	// See that function for a full explanation.
 	EndUserAction func(Instance)
-	// InsertChildAnchor allows you to override the implementation of the virtual method insert_child_anchor.
+	// // InsertChildAnchor allows you to override the implementation of the virtual method insert_child_anchor.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- iter *TextIter: location to insert the anchor 
@@ -56302,7 +56493,8 @@ type TextBufferOverrides[Instance TextBuffer] struct {
 	// convenient alternative to this function. The buffer will add a
 	// reference to the anchor, so you can unref it after insertion.
 	InsertChildAnchor func(Instance, *TextIter, TextChildAnchor)
-	// InsertPaintable allows you to override the implementation of the virtual method insert_paintable.
+	// // InsertPaintable allows you to override the implementation of the virtual method insert_paintable.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- iter *TextIter: location to insert the paintable 
@@ -56318,7 +56510,8 @@ type TextBufferOverrides[Instance TextBuffer] struct {
 	// variants do not. e.g. see [method@Gtk.TextBuffer.get_slice] and
 	// [method@Gtk.TextBuffer.get_text].
 	InsertPaintable func(Instance, *TextIter, gdk.Paintable)
-	// InsertText allows you to override the implementation of the virtual method insert_text.
+	// // InsertText allows you to override the implementation of the virtual method insert_text.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- pos *TextIter 
@@ -56327,14 +56520,16 @@ type TextBufferOverrides[Instance TextBuffer] struct {
 	//
 	// The class handler for the `GtkTextBuffer::insert-text` signal.
 	InsertText func(Instance, *TextIter, string, int32)
-	// MarkDeleted allows you to override the implementation of the virtual method mark_deleted.
+	// // MarkDeleted allows you to override the implementation of the virtual method mark_deleted.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- mark TextMark 
 	//
 	// The class handler for the `GtkTextBuffer::mark-deleted` signal.
 	MarkDeleted func(Instance, TextMark)
-	// MarkSet allows you to override the implementation of the virtual method mark_set.
+	// // MarkSet allows you to override the implementation of the virtual method mark_set.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- location *TextIter 
@@ -56342,22 +56537,24 @@ type TextBufferOverrides[Instance TextBuffer] struct {
 	//
 	// The class handler for the `GtkTextBuffer::mark-set` signal.
 	MarkSet func(Instance, *TextIter, TextMark)
-	// ModifiedChanged allows you to override the implementation of the virtual method modified_changed.
+	// // ModifiedChanged allows you to override the implementation of the virtual method modified_changed.
 	//
 	// The class handler for the `GtkTextBuffer::modified-changed` signal.
 	ModifiedChanged func(Instance)
-	// PasteDone allows you to override the implementation of the virtual method paste_done.
+	// // PasteDone allows you to override the implementation of the virtual method paste_done.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- clipboard gdk.Clipboard 
 	//
 	// The class handler for the `GtkTextBuffer::paste-done` signal.
 	PasteDone func(Instance, gdk.Clipboard)
-	// Redo allows you to override the implementation of the virtual method redo.
+	// // Redo allows you to override the implementation of the virtual method redo.
 	//
 	// Redoes the next redoable action on the buffer, if there is one.
 	Redo func(Instance)
-	// RemoveTag allows you to override the implementation of the virtual method remove_tag.
+	// // RemoveTag allows you to override the implementation of the virtual method remove_tag.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- tag TextTag: a `GtkTextTag` 
@@ -56370,7 +56567,7 @@ type TextBufferOverrides[Instance TextBuffer] struct {
 	// of @tag from the given range. @start and @end don’t have
 	// to be in order.
 	RemoveTag func(Instance, TextTag, *TextIter, *TextIter)
-	// Undo allows you to override the implementation of the virtual method undo.
+	// // Undo allows you to override the implementation of the virtual method undo.
 	//
 	// Undoes the last undoable action on the buffer, if there is one.
 	Undo func(Instance)
@@ -56514,8 +56711,8 @@ func UnsafeApplyTextBufferOverrides[Instance TextBuffer](gclass unsafe.Pointer, 
 			func(carg0 *C.GtkTextBuffer, carg1 *C.GtkTextIter, carg2 *C.char, carg3 C.int) {
 				var buffer        Instance  // go GtkTextBuffer subclass
 				var pos           *TextIter // in, none, converted
-				var newText       string    // in, none, string, casted *C.gchar
-				var newTextLength int32     // in, none, casted, casted C.gint
+				var newText       string    // in, none, string
+				var newTextLength int32     // in, none, casted
 
 				buffer = UnsafeTextBufferFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				pos = UnsafeTextIterFromGlibNone(unsafe.Pointer(carg1))
@@ -56648,7 +56845,8 @@ func UnsafeApplyTextBufferOverrides[Instance TextBuffer](gclass unsafe.Pointer, 
 }
 
 // ParentApplyTag calls the default implementations of the apply_tag virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- tag TextTag: a `GtkTextTag` 
@@ -56680,7 +56878,7 @@ func (buffer *TextBufferInstance) ParentApplyTag(tag TextTag, start *TextIter, e
 }
 
 // ParentBeginUserAction calls the default implementations of the begin_user_action virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
 //
 // Called to indicate that the buffer operations between here and a
 // call to gtk_text_buffer_end_user_action() are part of a single
@@ -56710,7 +56908,7 @@ func (buffer *TextBufferInstance) ParentBeginUserAction() {
 }
 
 // ParentChanged calls the default implementations of the changed virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
 //
 // The class handler for the `GtkTextBuffer::changed` signal.
 func (buffer *TextBufferInstance) ParentChanged() {
@@ -56723,7 +56921,8 @@ func (buffer *TextBufferInstance) ParentChanged() {
 }
 
 // ParentDeleteRange calls the default implementations of the delete_range virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- start *TextIter 
@@ -56747,7 +56946,7 @@ func (buffer *TextBufferInstance) ParentDeleteRange(start *TextIter, end *TextIt
 }
 
 // ParentEndUserAction calls the default implementations of the end_user_action virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
 //
 // Ends a user-visible operation.
 // 
@@ -56764,7 +56963,8 @@ func (buffer *TextBufferInstance) ParentEndUserAction() {
 }
 
 // ParentInsertChildAnchor calls the default implementations of the insert_child_anchor virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- iter *TextIter: location to insert the anchor 
@@ -56800,7 +57000,8 @@ func (buffer *TextBufferInstance) ParentInsertChildAnchor(iter *TextIter, anchor
 }
 
 // ParentInsertPaintable calls the default implementations of the insert_paintable virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- iter *TextIter: location to insert the paintable 
@@ -56832,7 +57033,8 @@ func (buffer *TextBufferInstance) ParentInsertPaintable(iter *TextIter, paintabl
 }
 
 // ParentInsertText calls the default implementations of the insert_text virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- pos *TextIter 
@@ -56843,8 +57045,8 @@ func (buffer *TextBufferInstance) ParentInsertPaintable(iter *TextIter, paintabl
 func (buffer *TextBufferInstance) ParentInsertText(pos *TextIter, newText string, newTextLength int32) {
 	var carg0 *C.GtkTextBuffer
 	var carg1 *C.GtkTextIter // in, none, converted
-	var carg2 *C.char        // in, none, string, casted *C.gchar
-	var carg3 C.int          // in, none, casted, casted C.gint
+	var carg2 *C.char        // in, none, string
+	var carg3 C.int          // in, none, casted
 
 	parentclass := (*C.GtkTextBufferClass)(classdata.PeekParentClass(UnsafeTextBufferToGlibNone(buffer)))
 
@@ -56861,7 +57063,8 @@ func (buffer *TextBufferInstance) ParentInsertText(pos *TextIter, newText string
 }
 
 // ParentMarkDeleted calls the default implementations of the mark_deleted virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- mark TextMark 
@@ -56881,7 +57084,8 @@ func (buffer *TextBufferInstance) ParentMarkDeleted(mark TextMark) {
 }
 
 // ParentMarkSet calls the default implementations of the mark_set virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- location *TextIter 
@@ -56905,7 +57109,7 @@ func (buffer *TextBufferInstance) ParentMarkSet(location *TextIter, mark TextMar
 }
 
 // ParentModifiedChanged calls the default implementations of the modified_changed virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
 //
 // The class handler for the `GtkTextBuffer::modified-changed` signal.
 func (buffer *TextBufferInstance) ParentModifiedChanged() {
@@ -56918,7 +57122,8 @@ func (buffer *TextBufferInstance) ParentModifiedChanged() {
 }
 
 // ParentPasteDone calls the default implementations of the paste_done virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- clipboard gdk.Clipboard 
@@ -56938,7 +57143,7 @@ func (buffer *TextBufferInstance) ParentPasteDone(clipboard gdk.Clipboard) {
 }
 
 // ParentRedo calls the default implementations of the redo virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
 //
 // Redoes the next redoable action on the buffer, if there is one.
 func (buffer *TextBufferInstance) ParentRedo() {
@@ -56951,7 +57156,8 @@ func (buffer *TextBufferInstance) ParentRedo() {
 }
 
 // ParentRemoveTag calls the default implementations of the remove_tag virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- tag TextTag: a `GtkTextTag` 
@@ -56983,7 +57189,7 @@ func (buffer *TextBufferInstance) ParentRemoveTag(tag TextTag, start *TextIter, 
 }
 
 // ParentUndo calls the default implementations of the undo virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
 //
 // Undoes the last undoable action on the buffer, if there is one.
 func (buffer *TextBufferInstance) ParentUndo() {
@@ -57147,7 +57353,7 @@ func NewTextChildAnchor() TextChildAnchor {
 // Usually you would then insert it into a `GtkTextBuffer` with
 // [method@Gtk.TextBuffer.insert_child_anchor].
 func NewTextChildAnchorWithReplacement(character string) TextChildAnchor {
-	var carg1 *C.char               // in, none, string, casted *C.gchar
+	var carg1 *C.char               // in, none, string
 	var cret  *C.GtkTextChildAnchor // return, full, converted
 
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(character)))
@@ -57221,7 +57427,7 @@ func (anchor *TextChildAnchorInstance) GetWidgets() (uint, []Widget) {
 	outLen = uint(carg1)
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []Widget (GtkWidget**)")
+	panic("unimplemented conversion of []Widget (**C.GtkWidget)")
 
 	return outLen, goret
 }
@@ -57557,7 +57763,7 @@ func (mark *TextMarkInstance) GetLeftGravity() bool {
 // Returns %NULL for anonymous marks.
 func (mark *TextMarkInstance) GetName() string {
 	var carg0 *C.GtkTextMark // in, none, converted
-	var cret  *C.char        // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char        // return, none, string, nullable-string
 
 	carg0 = (*C.GtkTextMark)(UnsafeTextMarkToGlibNone(mark))
 
@@ -57848,7 +58054,7 @@ func (tag *TextTagInstance) Changed(sizeChanged bool) {
 // Get the tag priority.
 func (tag *TextTagInstance) GetPriority() int32 {
 	var carg0 *C.GtkTextTag // in, none, converted
-	var cret  C.int         // return, none, casted, casted C.gint
+	var cret  C.int         // return, none, casted
 
 	carg0 = (*C.GtkTextTag)(UnsafeTextTagToGlibNone(tag))
 
@@ -57884,7 +58090,7 @@ func (tag *TextTagInstance) GetPriority() int32 {
 // which adds the tag to the buffer’s table automatically.
 func (tag *TextTagInstance) SetPriority(priority int32) {
 	var carg0 *C.GtkTextTag // in, none, converted
-	var carg1 C.int         // in, none, casted, casted C.gint
+	var carg1 C.int         // in, none, casted
 
 	carg0 = (*C.GtkTextTag)(UnsafeTextTagToGlibNone(tag))
 	carg1 = C.int(priority)
@@ -58178,7 +58384,7 @@ func (table *TextTagTableInstance) ForEach(fn TextTagTableForEach) {
 // Returns the size of the table (number of tags)
 func (table *TextTagTableInstance) GetSize() int32 {
 	var carg0 *C.GtkTextTagTable // in, none, converted
-	var cret  C.int              // return, none, casted, casted C.gint
+	var cret  C.int              // return, none, casted
 
 	carg0 = (*C.GtkTextTagTable)(UnsafeTextTagTableToGlibNone(table))
 
@@ -58205,7 +58411,7 @@ func (table *TextTagTableInstance) GetSize() int32 {
 // Look up a named tag.
 func (table *TextTagTableInstance) Lookup(name string) TextTag {
 	var carg0 *C.GtkTextTagTable // in, none, converted
-	var carg1 *C.char            // in, none, string, casted *C.gchar
+	var carg1 *C.char            // in, none, string
 	var cret  *C.GtkTextTag      // return, none, converted, nullable
 
 	carg0 = (*C.GtkTextTagTable)(UnsafeTextTagTableToGlibNone(table))
@@ -58726,7 +58932,7 @@ func unsafeWrapTreeListModel(base *gobject.ObjectInstance) *TreeListModelInstanc
 	return &TreeListModelInstance{
 		ObjectInstance: *base,
 		ListModelInstance: gio.ListModelInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -59812,7 +60018,7 @@ func NewUriLauncher(uri string) UriLauncher {
 // Gets the uri that will be opened.
 func (self *UriLauncherInstance) GetURI() string {
 	var carg0 *C.GtkUriLauncher // in, none, converted
-	var cret  *C.char           // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char           // return, none, string, nullable-string
 
 	carg0 = (*C.GtkUriLauncher)(UnsafeUriLauncherToGlibNone(self))
 
@@ -62646,7 +62852,8 @@ type Widget interface {
 	// chain up virtual methods:
 
 	// ParentComputeExpand calls the default implementations of the compute_expand virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- hexpandP *bool 
@@ -62656,7 +62863,8 @@ type Widget interface {
 	//   widget extra space when possible.
 	ParentComputeExpand(hexpandP *bool, vexpandP *bool)
 	// ParentContains calls the default implementations of the contains virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- x float64: X coordinate to test, relative to @widget's origin 
@@ -62672,7 +62880,8 @@ type Widget interface {
 	// (0, 0) is assumed to be the top left of @widget's content area.
 	ParentContains(x float64, y float64) bool
 	// ParentCSSChanged calls the default implementations of the css_changed virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- change *CssStyleChange 
@@ -62683,7 +62892,8 @@ type Widget interface {
 	//   all the default CSS properties, so implementations must chain up.
 	ParentCSSChanged(change *CssStyleChange)
 	// ParentDirectionChanged calls the default implementations of the direction_changed virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- previousDirection TextDirection 
@@ -62692,7 +62902,8 @@ type Widget interface {
 	//   widget changes.
 	ParentDirectionChanged(previousDirection TextDirection)
 	// ParentFocus calls the default implementations of the focus virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- direction DirectionType 
@@ -62704,7 +62915,8 @@ type Widget interface {
 	// Vfunc for gtk_widget_child_focus()
 	ParentFocus(direction DirectionType) bool
 	// ParentGetRequestMode calls the default implementations of the get_request_mode virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret SizeRequestMode 
@@ -62718,7 +62930,8 @@ type Widget interface {
 	// allocation capabilities.
 	ParentGetRequestMode() SizeRequestMode
 	// ParentGrabFocus calls the default implementations of the grab_focus virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
@@ -62733,7 +62946,8 @@ type Widget interface {
 	// is allowed, should not have an effect, and return %TRUE.
 	ParentGrabFocus() bool
 	// ParentKeynavFailed calls the default implementations of the keynav_failed virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- direction DirectionType: direction of focus movement 
@@ -62771,14 +62985,15 @@ type Widget interface {
 	// interfaces that require entering license keys.
 	ParentKeynavFailed(direction DirectionType) bool
 	// ParentMap calls the default implementations of the map virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
 	//
 	// Causes a widget to be mapped if it isn’t already.
 	// 
 	// This function is only for use in widget implementations.
 	ParentMap()
 	// ParentMeasure calls the default implementations of the measure virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- orientation Orientation: the orientation to measure 
@@ -62807,7 +63022,8 @@ type Widget interface {
 	// a more details on implementing `GtkWidgetClass.measure()`.
 	ParentMeasure(orientation Orientation, forSize int32) (int32, int32, int32, int32)
 	// ParentMnemonicActivate calls the default implementations of the mnemonic_activate virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- groupCycling bool: %TRUE if there are other widgets with the same mnemonic 
@@ -62821,7 +63037,8 @@ type Widget interface {
 	// See [signal@Gtk.Widget::mnemonic-activate].
 	ParentMnemonicActivate(groupCycling bool) bool
 	// ParentMoveFocus calls the default implementations of the move_focus virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- direction DirectionType 
@@ -62829,7 +63046,8 @@ type Widget interface {
 	// Signal emitted when a change of focus is requested
 	ParentMoveFocus(direction DirectionType)
 	// ParentQueryTooltip calls the default implementations of the query_tooltip virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- x int32 
@@ -62846,7 +63064,7 @@ type Widget interface {
 	//   widget; or emitted when widget got focus in keyboard mode.
 	ParentQueryTooltip(x int32, y int32, keyboardTooltip bool, tooltip Tooltip) bool
 	// ParentRealize calls the default implementations of the realize virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
 	//
 	// Creates the GDK resources associated with a widget.
 	// 
@@ -62866,13 +63084,14 @@ type Widget interface {
 	// [signal@Gtk.Widget::realize].
 	ParentRealize()
 	// ParentRoot calls the default implementations of the root virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
 	//
 	// Called when the widget gets added to a `GtkRoot` widget. Must
 	//   chain up
 	ParentRoot()
 	// ParentSetFocusChild calls the default implementations of the set_focus_child virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- child Widget (nullable): a direct child widget of @widget or %NULL
@@ -62885,7 +63104,8 @@ type Widget interface {
 	// [method@Gtk.Widget.grab_focus] on it.
 	ParentSetFocusChild(child Widget)
 	// ParentSizeAllocate calls the default implementations of the size_allocate virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- width int32 
@@ -62896,7 +63116,8 @@ type Widget interface {
 	//   not have a layout manager.
 	ParentSizeAllocate(width int32, height int32, baseline int32)
 	// ParentSnapshot calls the default implementations of the snapshot virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- snapshot Snapshot 
@@ -62904,7 +63125,8 @@ type Widget interface {
 	// Vfunc called when a new snapshot of the widget has to be taken.
 	ParentSnapshot(snapshot Snapshot)
 	// ParentStateFlagsChanged calls the default implementations of the state_flags_changed virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- previousStateFlags StateFlags 
@@ -62913,7 +63135,8 @@ type Widget interface {
 	//   see gtk_widget_get_state_flags().
 	ParentStateFlagsChanged(previousStateFlags StateFlags)
 	// ParentSystemSettingChanged calls the default implementations of the system_setting_changed virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- settings SystemSetting 
@@ -62921,14 +63144,14 @@ type Widget interface {
 	// Emitted when a system setting was changed. Must chain up.
 	ParentSystemSettingChanged(settings SystemSetting)
 	// ParentUnmap calls the default implementations of the unmap virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
 	//
 	// Causes a widget to be unmapped if it’s currently mapped.
 	// 
 	// This function is only for use in widget implementations.
 	ParentUnmap()
 	// ParentUnrealize calls the default implementations of the unrealize virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
 	//
 	// Causes a widget to be unrealized (frees all GDK resources
 	// associated with the widget).
@@ -62936,7 +63159,7 @@ type Widget interface {
 	// This function is only useful in widget implementations.
 	ParentUnrealize()
 	// ParentUnroot calls the default implementations of the unroot virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
 	//
 	// Called when the widget is about to be removed from its
 	//   `GtkRoot` widget. Must chain up
@@ -63034,7 +63257,7 @@ func WidgetSetDefaultDirection(dir TextDirection) {
 // gtk_widget_class_install_action().
 func (widget *WidgetInstance) ActionSetEnabled(actionName string, enabled bool) {
 	var carg0 *C.GtkWidget // in, none, converted
-	var carg1 *C.char      // in, none, string, casted *C.gchar
+	var carg1 *C.char      // in, none, string
 	var carg2 C.gboolean   // in
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
@@ -63139,7 +63362,7 @@ func (widget *WidgetInstance) AddController(controller EventController) {
 // style again.
 func (widget *WidgetInstance) AddCSSClass(cssClass string) {
 	var carg0 *C.GtkWidget // in, none, converted
-	var carg1 *C.char      // in, none, string, casted *C.gchar
+	var carg1 *C.char      // in, none, string
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(cssClass)))
@@ -63251,9 +63474,9 @@ func (widget *WidgetInstance) AddTickCallback(callback TickCallback) uint {
 // [method@Gtk.Widget.size_allocate].
 func (widget *WidgetInstance) Allocate(width int32, height int32, baseline int32, transform *gsk.Transform) {
 	var carg0 *C.GtkWidget    // in, none, converted
-	var carg1 C.int           // in, none, casted, casted C.gint
-	var carg2 C.int           // in, none, casted, casted C.gint
-	var carg3 C.int           // in, none, casted, casted C.gint
+	var carg1 C.int           // in, none, casted
+	var carg2 C.int           // in, none, casted
+	var carg3 C.int           // in, none, casted
 	var carg4 *C.GskTransform // in, full, converted, nullable
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
@@ -63364,7 +63587,7 @@ func (widget *WidgetInstance) ComputeBounds(target Widget) (graphene.Rect, bool)
 
 	_ = outBounds
 	_ = carg2
-	panic("unimplemented conversion of graphene.Rect (graphene_rect_t)")
+	panic("unimplemented conversion of graphene.Rect (C.graphene_rect_t)")
 	if cret != 0 {
 		goret = true
 	}
@@ -63455,7 +63678,7 @@ func (widget *WidgetInstance) ComputePoint(target Widget, point *graphene.Point)
 
 	_ = outPoint
 	_ = carg3
-	panic("unimplemented conversion of graphene.Point (graphene_point_t)")
+	panic("unimplemented conversion of graphene.Point (C.graphene_point_t)")
 	if cret != 0 {
 		goret = true
 	}
@@ -63502,7 +63725,7 @@ func (widget *WidgetInstance) ComputeTransform(target Widget) (graphene.Matrix, 
 
 	_ = outTransform
 	_ = carg2
-	panic("unimplemented conversion of graphene.Matrix (graphene_matrix_t)")
+	panic("unimplemented conversion of graphene.Matrix (C.graphene_matrix_t)")
 	if cret != 0 {
 		goret = true
 	}
@@ -63527,8 +63750,8 @@ func (widget *WidgetInstance) ComputeTransform(target Widget) (graphene.Matrix, 
 // (0, 0) is assumed to be the top left of @widget's content area.
 func (widget *WidgetInstance) Contains(x float64, y float64) bool {
 	var carg0 *C.GtkWidget // in, none, converted
-	var carg1 C.double     // in, none, casted, casted C.gdouble
-	var carg2 C.double     // in, none, casted, casted C.gdouble
+	var carg1 C.double     // in, none, casted
+	var carg2 C.double     // in, none, casted
 	var cret  C.gboolean   // return
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
@@ -63675,10 +63898,10 @@ func (widget *WidgetInstance) DisposeTemplate(widgetType gobject.Type) {
 // Checks to see if a drag movement has passed the GTK drag threshold.
 func (widget *WidgetInstance) DragCheckThreshold(startX int32, startY int32, currentX int32, currentY int32) bool {
 	var carg0 *C.GtkWidget // in, none, converted
-	var carg1 C.int        // in, none, casted, casted C.gint
-	var carg2 C.int        // in, none, casted, casted C.gint
-	var carg3 C.int        // in, none, casted, casted C.gint
-	var carg4 C.int        // in, none, casted, casted C.gint
+	var carg1 C.int        // in, none, casted
+	var carg2 C.int        // in, none, casted
+	var carg3 C.int        // in, none, casted
+	var carg4 C.int        // in, none, casted
 	var cret  C.gboolean   // return
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
@@ -63775,7 +63998,7 @@ func (widget *WidgetInstance) GetAncestor(widgetType gobject.Type) Widget {
 // child widgets in `GtkWidget`Class.size_allocate().
 func (widget *WidgetInstance) GetBaseline() int32 {
 	var carg0 *C.GtkWidget // in, none, converted
-	var cret  C.int        // return, none, casted, casted C.gint
+	var cret  C.int        // return, none, casted
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 
@@ -63927,7 +64150,7 @@ func (widget *WidgetInstance) GetColor() gdk.RGBA {
 
 	_ = color
 	_ = carg1
-	panic("unimplemented conversion of gdk.RGBA (GdkRGBA)")
+	panic("unimplemented conversion of gdk.RGBA (C.GdkRGBA)")
 
 	return color
 }
@@ -63952,7 +64175,7 @@ func (widget *WidgetInstance) GetCSSClasses() []string {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (char**)")
+	panic("unimplemented conversion of []string (**C.char)")
 
 	return goret
 }
@@ -63966,7 +64189,7 @@ func (widget *WidgetInstance) GetCSSClasses() []string {
 // Returns the CSS name that is used for @self.
 func (self *WidgetInstance) GetCSSName() string {
 	var carg0 *C.GtkWidget // in, none, converted
-	var cret  *C.char      // return, none, string, casted *C.gchar
+	var cret  *C.char      // return, none, string
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(self))
 
@@ -64315,7 +64538,7 @@ func (widget *WidgetInstance) GetHasTooltip() bool {
 // system [overview](coordinates.html).
 func (widget *WidgetInstance) GetHeight() int32 {
 	var carg0 *C.GtkWidget // in, none, converted
-	var cret  C.int        // return, none, casted, casted C.gint
+	var cret  C.int        // return, none, casted
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 
@@ -64491,7 +64714,7 @@ func (widget *WidgetInstance) GetMapped() bool {
 // Gets the bottom margin of @widget.
 func (widget *WidgetInstance) GetMarginBottom() int32 {
 	var carg0 *C.GtkWidget // in, none, converted
-	var cret  C.int        // return, none, casted, casted C.gint
+	var cret  C.int        // return, none, casted
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 
@@ -64514,7 +64737,7 @@ func (widget *WidgetInstance) GetMarginBottom() int32 {
 // Gets the end margin of @widget.
 func (widget *WidgetInstance) GetMarginEnd() int32 {
 	var carg0 *C.GtkWidget // in, none, converted
-	var cret  C.int        // return, none, casted, casted C.gint
+	var cret  C.int        // return, none, casted
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 
@@ -64537,7 +64760,7 @@ func (widget *WidgetInstance) GetMarginEnd() int32 {
 // Gets the start margin of @widget.
 func (widget *WidgetInstance) GetMarginStart() int32 {
 	var carg0 *C.GtkWidget // in, none, converted
-	var cret  C.int        // return, none, casted, casted C.gint
+	var cret  C.int        // return, none, casted
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 
@@ -64560,7 +64783,7 @@ func (widget *WidgetInstance) GetMarginStart() int32 {
 // Gets the top margin of @widget.
 func (widget *WidgetInstance) GetMarginTop() int32 {
 	var carg0 *C.GtkWidget // in, none, converted
-	var cret  C.int        // return, none, casted, casted C.gint
+	var cret  C.int        // return, none, casted
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 
@@ -64585,7 +64808,7 @@ func (widget *WidgetInstance) GetMarginTop() int32 {
 // See [method@Gtk.Widget.set_name] for the significance of widget names.
 func (widget *WidgetInstance) GetName() string {
 	var carg0 *C.GtkWidget // in, none, converted
-	var cret  *C.char      // return, none, string, casted *C.gchar
+	var cret  *C.char      // return, none, string
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 
@@ -64637,7 +64860,7 @@ func (widget *WidgetInstance) GetNextSibling() Widget {
 // See [method@Gtk.Widget.set_opacity].
 func (widget *WidgetInstance) GetOpacity() float64 {
 	var carg0 *C.GtkWidget // in, none, converted
-	var cret  C.double     // return, none, casted, casted C.gdouble
+	var cret  C.double     // return, none, casted
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 
@@ -64766,10 +64989,10 @@ func (widget *WidgetInstance) GetPreferredSize() (Requisition, Requisition) {
 
 	_ = minimumSize
 	_ = carg1
-	panic("unimplemented conversion of Requisition (GtkRequisition)")
+	panic("unimplemented conversion of Requisition (C.GtkRequisition)")
 	_ = naturalSize
 	_ = carg2
-	panic("unimplemented conversion of Requisition (GtkRequisition)")
+	panic("unimplemented conversion of Requisition (C.GtkRequisition)")
 
 	return minimumSize, naturalSize
 }
@@ -64928,7 +65151,7 @@ func (widget *WidgetInstance) GetRequestMode() SizeRequestMode {
 // See [method@Gdk.Surface.get_scale_factor].
 func (widget *WidgetInstance) GetScaleFactor() int32 {
 	var carg0 *C.GtkWidget // in, none, converted
-	var cret  C.int        // return, none, casted, casted C.gint
+	var cret  C.int        // return, none, casted
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 
@@ -65027,7 +65250,7 @@ func (widget *WidgetInstance) GetSettings() Settings {
 func (widget *WidgetInstance) GetSize(orientation Orientation) int32 {
 	var carg0 *C.GtkWidget     // in, none, converted
 	var carg1 C.GtkOrientation // in, none, casted
-	var cret  C.int            // return, none, casted, casted C.gint
+	var cret  C.int            // return, none, casted
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 	carg1 = C.GtkOrientation(orientation)
@@ -65061,8 +65284,8 @@ func (widget *WidgetInstance) GetSize(orientation Orientation) int32 {
 // this function.
 func (widget *WidgetInstance) GetSizeRequest() (int32, int32) {
 	var carg0 *C.GtkWidget // in, none, converted
-	var carg1 C.int        // out, full, casted, casted C.gint
-	var carg2 C.int        // out, full, casted, casted C.gint
+	var carg1 C.int        // out, full, casted
+	var carg2 C.int        // out, full, casted
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 
@@ -65133,7 +65356,7 @@ func (widget *WidgetInstance) GetStateFlags() StateFlags {
 func (widget *WidgetInstance) GetTemplateChild(widgetType gobject.Type, name string) gobject.Object {
 	var carg0 *C.GtkWidget // in, none, converted
 	var carg1 C.GType      // in, none, casted, alias
-	var carg2 *C.char      // in, none, string, casted *C.gchar
+	var carg2 *C.char      // in, none, string
 	var cret  *C.GObject   // return, none, converted
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
@@ -65166,7 +65389,7 @@ func (widget *WidgetInstance) GetTemplateChild(widgetType gobject.Type, name str
 // function returns %NULL.
 func (widget *WidgetInstance) GetTooltipMarkup() string {
 	var carg0 *C.GtkWidget // in, none, converted
-	var cret  *C.char      // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char      // return, none, string, nullable-string
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 
@@ -65195,7 +65418,7 @@ func (widget *WidgetInstance) GetTooltipMarkup() string {
 // this function will return the escaped text.
 func (widget *WidgetInstance) GetTooltipText() string {
 	var carg0 *C.GtkWidget // in, none, converted
-	var cret  *C.char      // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char      // return, none, string, nullable-string
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 
@@ -65342,7 +65565,7 @@ func (widget *WidgetInstance) GetVisible() bool {
 // system [overview](coordinates.html).
 func (widget *WidgetInstance) GetWidth() int32 {
 	var carg0 *C.GtkWidget // in, none, converted
-	var cret  C.int        // return, none, casted, casted C.gint
+	var cret  C.int        // return, none, casted
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 
@@ -65402,7 +65625,7 @@ func (widget *WidgetInstance) GrabFocus() bool {
 // Returns whether @css_class is currently applied to @widget.
 func (widget *WidgetInstance) HasCSSClass(cssClass string) bool {
 	var carg0 *C.GtkWidget // in, none, converted
-	var carg1 *C.char      // in, none, string, casted *C.gchar
+	var carg1 *C.char      // in, none, string
 	var cret  C.gboolean   // return
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
@@ -65593,7 +65816,7 @@ func (widget *WidgetInstance) InitTemplate() {
 // removed from @widget.
 func (widget *WidgetInstance) InsertActionGroup(name string, group gio.ActionGroup) {
 	var carg0 *C.GtkWidget    // in, none, converted
-	var carg1 *C.char         // in, none, string, casted *C.gchar
+	var carg1 *C.char         // in, none, string
 	var carg2 *C.GActionGroup // in, none, converted, nullable
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
@@ -65977,11 +66200,11 @@ func (widget *WidgetInstance) Map() {
 func (widget *WidgetInstance) Measure(orientation Orientation, forSize int32) (int32, int32, int32, int32) {
 	var carg0 *C.GtkWidget     // in, none, converted
 	var carg1 C.GtkOrientation // in, none, casted
-	var carg2 C.int            // in, none, casted, casted C.gint
-	var carg3 C.int            // out, full, casted, casted C.gint
-	var carg4 C.int            // out, full, casted, casted C.gint
-	var carg5 C.int            // out, full, casted, casted C.gint
-	var carg6 C.int            // out, full, casted, casted C.gint
+	var carg2 C.int            // in, none, casted
+	var carg3 C.int            // out, full, casted
+	var carg4 C.int            // out, full, casted
+	var carg5 C.int            // out, full, casted
+	var carg6 C.int            // out, full, casted
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 	carg1 = C.GtkOrientation(orientation)
@@ -66130,8 +66353,8 @@ func (widget *WidgetInstance) ObserveControllers() gio.ListModel {
 // delivering events.
 func (widget *WidgetInstance) Pick(x float64, y float64, flags PickFlags) Widget {
 	var carg0 *C.GtkWidget   // in, none, converted
-	var carg1 C.double       // in, none, casted, casted C.gdouble
-	var carg2 C.double       // in, none, casted, casted C.gdouble
+	var carg1 C.double       // in, none, casted
+	var carg2 C.double       // in, none, casted
 	var carg3 C.GtkPickFlags // in, none, casted
 	var cret  *C.GtkWidget   // return, none, converted, nullable
 
@@ -66280,7 +66503,7 @@ func (widget *WidgetInstance) RemoveController(controller EventController) {
 // After this, the style of @widget will stop matching for @css_class.
 func (widget *WidgetInstance) RemoveCSSClass(cssClass string) {
 	var carg0 *C.GtkWidget // in, none, converted
-	var carg1 *C.char      // in, none, string, casted *C.gchar
+	var carg1 *C.char      // in, none, string
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(cssClass)))
@@ -66445,7 +66668,7 @@ func (widget *WidgetInstance) SetCSSClasses(classes []string) {
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 	_ = classes
 	_ = carg1
-	panic("unimplemented conversion of []string (const char**)")
+	panic("unimplemented conversion of []string (**C.char)")
 
 	C.gtk_widget_set_css_classes(carg0, carg1)
 	runtime.KeepAlive(widget)
@@ -66807,7 +67030,7 @@ func (widget *WidgetInstance) SetLayoutManager(layoutManager LayoutManager) {
 // Sets the bottom margin of @widget.
 func (widget *WidgetInstance) SetMarginBottom(margin int32) {
 	var carg0 *C.GtkWidget // in, none, converted
-	var carg1 C.int        // in, none, casted, casted C.gint
+	var carg1 C.int        // in, none, casted
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 	carg1 = C.int(margin)
@@ -66826,7 +67049,7 @@ func (widget *WidgetInstance) SetMarginBottom(margin int32) {
 // Sets the end margin of @widget.
 func (widget *WidgetInstance) SetMarginEnd(margin int32) {
 	var carg0 *C.GtkWidget // in, none, converted
-	var carg1 C.int        // in, none, casted, casted C.gint
+	var carg1 C.int        // in, none, casted
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 	carg1 = C.int(margin)
@@ -66845,7 +67068,7 @@ func (widget *WidgetInstance) SetMarginEnd(margin int32) {
 // Sets the start margin of @widget.
 func (widget *WidgetInstance) SetMarginStart(margin int32) {
 	var carg0 *C.GtkWidget // in, none, converted
-	var carg1 C.int        // in, none, casted, casted C.gint
+	var carg1 C.int        // in, none, casted
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 	carg1 = C.int(margin)
@@ -66864,7 +67087,7 @@ func (widget *WidgetInstance) SetMarginStart(margin int32) {
 // Sets the top margin of @widget.
 func (widget *WidgetInstance) SetMarginTop(margin int32) {
 	var carg0 *C.GtkWidget // in, none, converted
-	var carg1 C.int        // in, none, casted, casted C.gint
+	var carg1 C.int        // in, none, casted
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 	carg1 = C.int(margin)
@@ -66893,7 +67116,7 @@ func (widget *WidgetInstance) SetMarginTop(margin int32) {
 // of alphanumeric symbols, dashes and underscores will suffice.
 func (widget *WidgetInstance) SetName(name string) {
 	var carg0 *C.GtkWidget // in, none, converted
-	var carg1 *C.char      // in, none, string, casted *C.gchar
+	var carg1 *C.char      // in, none, string
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
@@ -66934,7 +67157,7 @@ func (widget *WidgetInstance) SetName(name string) {
 // even if they are attached to a toplevel that is translucent.
 func (widget *WidgetInstance) SetOpacity(opacity float64) {
 	var carg0 *C.GtkWidget // in, none, converted
-	var carg1 C.double     // in, none, casted, casted C.gdouble
+	var carg1 C.double     // in, none, casted
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 	carg1 = C.double(opacity)
@@ -67090,8 +67313,8 @@ func (widget *WidgetInstance) SetSensitive(sensitive bool) {
 // of `GtkWidget`.
 func (widget *WidgetInstance) SetSizeRequest(width int32, height int32) {
 	var carg0 *C.GtkWidget // in, none, converted
-	var carg1 C.int        // in, none, casted, casted C.gint
-	var carg2 C.int        // in, none, casted, casted C.gint
+	var carg1 C.int        // in, none, casted
+	var carg2 C.int        // in, none, casted
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 	carg1 = C.int(width)
@@ -67329,12 +67552,12 @@ func (widget *WidgetInstance) ShouldLayout() bool {
 func (widget *WidgetInstance) SizeAllocate(allocation *Allocation, baseline int32) {
 	var carg0 *C.GtkWidget     // in, none, converted
 	var carg1 *C.GtkAllocation // in, transfer: none, C Pointers: 1, Name: Allocation
-	var carg2 C.int            // in, none, casted, casted C.gint
+	var carg2 C.int            // in, none, casted
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 	_ = allocation
 	_ = carg1
-	panic("unimplemented conversion of *Allocation (GtkAllocation*)")
+	panic("unimplemented conversion of *Allocation (*C.GtkAllocation)")
 	carg2 = C.int(baseline)
 
 	C.gtk_widget_size_allocate(carg0, carg1, carg2)
@@ -67369,7 +67592,7 @@ func (widget *WidgetInstance) SizeAllocate(allocation *Allocation, baseline int3
 func (widget *WidgetInstance) SnapshotChild(child Widget, snapshot Snapshot) {
 	var carg0 *C.GtkWidget   // in, none, converted
 	var carg1 *C.GtkWidget   // in, none, converted
-	var carg2 *C.GtkSnapshot // in, none, converted, casted *C.Snapshot
+	var carg2 *C.GtkSnapshot // in, none, converted
 
 	carg0 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(child))
@@ -67608,7 +67831,8 @@ type WidgetOverrides[Instance Widget] struct {
 	// gobject.InitiallyUnownedOverrides allows you to override virtual methods from the parent class gobject.InitiallyUnowned
 	gobject.InitiallyUnownedOverrides[Instance]
 
-	// ComputeExpand allows you to override the implementation of the virtual method compute_expand.
+	// // ComputeExpand allows you to override the implementation of the virtual method compute_expand.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- hexpandP *bool 
@@ -67617,7 +67841,8 @@ type WidgetOverrides[Instance Widget] struct {
 	// Computes whether a container should give this
 	//   widget extra space when possible.
 	ComputeExpand func(Instance, *bool, *bool)
-	// Contains allows you to override the implementation of the virtual method contains.
+	// // Contains allows you to override the implementation of the virtual method contains.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- x float64: X coordinate to test, relative to @widget's origin 
@@ -67632,7 +67857,8 @@ type WidgetOverrides[Instance Widget] struct {
 	// The coordinates for (@x, @y) must be in widget coordinates, so
 	// (0, 0) is assumed to be the top left of @widget's content area.
 	Contains func(Instance, float64, float64) bool
-	// CSSChanged allows you to override the implementation of the virtual method css_changed.
+	// // CSSChanged allows you to override the implementation of the virtual method css_changed.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- change *CssStyleChange 
@@ -67642,7 +67868,8 @@ type WidgetOverrides[Instance Widget] struct {
 	//   redraws accordingly. The default implementation will take care of this for
 	//   all the default CSS properties, so implementations must chain up.
 	CSSChanged func(Instance, *CssStyleChange)
-	// DirectionChanged allows you to override the implementation of the virtual method direction_changed.
+	// // DirectionChanged allows you to override the implementation of the virtual method direction_changed.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- previousDirection TextDirection 
@@ -67650,7 +67877,8 @@ type WidgetOverrides[Instance Widget] struct {
 	// Signal emitted when the text direction of a
 	//   widget changes.
 	DirectionChanged func(Instance, TextDirection)
-	// Focus allows you to override the implementation of the virtual method focus.
+	// // Focus allows you to override the implementation of the virtual method focus.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- direction DirectionType 
@@ -67661,7 +67889,8 @@ type WidgetOverrides[Instance Widget] struct {
 	//
 	// Vfunc for gtk_widget_child_focus()
 	Focus func(Instance, DirectionType) bool
-	// GetRequestMode allows you to override the implementation of the virtual method get_request_mode.
+	// // GetRequestMode allows you to override the implementation of the virtual method get_request_mode.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret SizeRequestMode 
@@ -67674,7 +67903,8 @@ type WidgetOverrides[Instance Widget] struct {
 	// either in context of their children or in context of their
 	// allocation capabilities.
 	GetRequestMode func(Instance) SizeRequestMode
-	// GrabFocus allows you to override the implementation of the virtual method grab_focus.
+	// // GrabFocus allows you to override the implementation of the virtual method grab_focus.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
@@ -67688,7 +67918,8 @@ type WidgetOverrides[Instance Widget] struct {
 	// Calling [method@Gtk.Widget.grab_focus] on an already focused widget
 	// is allowed, should not have an effect, and return %TRUE.
 	GrabFocus func(Instance) bool
-	// KeynavFailed allows you to override the implementation of the virtual method keynav_failed.
+	// // KeynavFailed allows you to override the implementation of the virtual method keynav_failed.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- direction DirectionType: direction of focus movement 
@@ -67725,13 +67956,14 @@ type WidgetOverrides[Instance Widget] struct {
 	// the entire row with the cursor keys, as e.g. known from user
 	// interfaces that require entering license keys.
 	KeynavFailed func(Instance, DirectionType) bool
-	// Map allows you to override the implementation of the virtual method map.
+	// // Map allows you to override the implementation of the virtual method map.
 	//
 	// Causes a widget to be mapped if it isn’t already.
 	// 
 	// This function is only for use in widget implementations.
 	Map func(Instance)
-	// Measure allows you to override the implementation of the virtual method measure.
+	// // Measure allows you to override the implementation of the virtual method measure.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- orientation Orientation: the orientation to measure 
@@ -67759,7 +67991,8 @@ type WidgetOverrides[Instance Widget] struct {
 	// See [GtkWidget’s geometry management section](class.Widget.html#height-for-width-geometry-management) for
 	// a more details on implementing `GtkWidgetClass.measure()`.
 	Measure func(Instance, Orientation, int32) (int32, int32, int32, int32)
-	// MnemonicActivate allows you to override the implementation of the virtual method mnemonic_activate.
+	// // MnemonicActivate allows you to override the implementation of the virtual method mnemonic_activate.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- groupCycling bool: %TRUE if there are other widgets with the same mnemonic 
@@ -67772,14 +68005,16 @@ type WidgetOverrides[Instance Widget] struct {
 	// 
 	// See [signal@Gtk.Widget::mnemonic-activate].
 	MnemonicActivate func(Instance, bool) bool
-	// MoveFocus allows you to override the implementation of the virtual method move_focus.
+	// // MoveFocus allows you to override the implementation of the virtual method move_focus.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- direction DirectionType 
 	//
 	// Signal emitted when a change of focus is requested
 	MoveFocus func(Instance, DirectionType)
-	// QueryTooltip allows you to override the implementation of the virtual method query_tooltip.
+	// // QueryTooltip allows you to override the implementation of the virtual method query_tooltip.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- x int32 
@@ -67795,7 +68030,7 @@ type WidgetOverrides[Instance Widget] struct {
 	//   hover timeout has expired with the cursor hovering “above”
 	//   widget; or emitted when widget got focus in keyboard mode.
 	QueryTooltip func(Instance, int32, int32, bool, Tooltip) bool
-	// Realize allows you to override the implementation of the virtual method realize.
+	// // Realize allows you to override the implementation of the virtual method realize.
 	//
 	// Creates the GDK resources associated with a widget.
 	// 
@@ -67814,12 +68049,13 @@ type WidgetOverrides[Instance Widget] struct {
 	// called after the widget is realized automatically, such as
 	// [signal@Gtk.Widget::realize].
 	Realize func(Instance)
-	// Root allows you to override the implementation of the virtual method root.
+	// // Root allows you to override the implementation of the virtual method root.
 	//
 	// Called when the widget gets added to a `GtkRoot` widget. Must
 	//   chain up
 	Root func(Instance)
-	// SetFocusChild allows you to override the implementation of the virtual method set_focus_child.
+	// // SetFocusChild allows you to override the implementation of the virtual method set_focus_child.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- child Widget (nullable): a direct child widget of @widget or %NULL
@@ -67831,7 +68067,8 @@ type WidgetOverrides[Instance Widget] struct {
 	// If you want a certain widget to get the input focus, call
 	// [method@Gtk.Widget.grab_focus] on it.
 	SetFocusChild func(Instance, Widget)
-	// SizeAllocate allows you to override the implementation of the virtual method size_allocate.
+	// // SizeAllocate allows you to override the implementation of the virtual method size_allocate.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- width int32 
@@ -67841,14 +68078,16 @@ type WidgetOverrides[Instance Widget] struct {
 	// Called to set the allocation, if the widget does
 	//   not have a layout manager.
 	SizeAllocate func(Instance, int32, int32, int32)
-	// Snapshot allows you to override the implementation of the virtual method snapshot.
+	// // Snapshot allows you to override the implementation of the virtual method snapshot.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- snapshot Snapshot 
 	//
 	// Vfunc called when a new snapshot of the widget has to be taken.
 	Snapshot func(Instance, Snapshot)
-	// StateFlagsChanged allows you to override the implementation of the virtual method state_flags_changed.
+	// // StateFlagsChanged allows you to override the implementation of the virtual method state_flags_changed.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- previousStateFlags StateFlags 
@@ -67856,27 +68095,28 @@ type WidgetOverrides[Instance Widget] struct {
 	// Signal emitted when the widget state changes,
 	//   see gtk_widget_get_state_flags().
 	StateFlagsChanged func(Instance, StateFlags)
-	// SystemSettingChanged allows you to override the implementation of the virtual method system_setting_changed.
+	// // SystemSettingChanged allows you to override the implementation of the virtual method system_setting_changed.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- settings SystemSetting 
 	//
 	// Emitted when a system setting was changed. Must chain up.
 	SystemSettingChanged func(Instance, SystemSetting)
-	// Unmap allows you to override the implementation of the virtual method unmap.
+	// // Unmap allows you to override the implementation of the virtual method unmap.
 	//
 	// Causes a widget to be unmapped if it’s currently mapped.
 	// 
 	// This function is only for use in widget implementations.
 	Unmap func(Instance)
-	// Unrealize allows you to override the implementation of the virtual method unrealize.
+	// // Unrealize allows you to override the implementation of the virtual method unrealize.
 	//
 	// Causes a widget to be unrealized (frees all GDK resources
 	// associated with the widget).
 	// 
 	// This function is only useful in widget implementations.
 	Unrealize func(Instance)
-	// Unroot allows you to override the implementation of the virtual method unroot.
+	// // Unroot allows you to override the implementation of the virtual method unroot.
 	//
 	// Called when the widget is about to be removed from its
 	//   `GtkRoot` widget. Must chain up
@@ -67903,10 +68143,10 @@ func UnsafeApplyWidgetOverrides[Instance Widget](gclass unsafe.Pointer, override
 				widget = UnsafeWidgetFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				_ = hexpandP
 				_ = carg1
-				panic("unimplemented conversion of *bool (gboolean*)")
+				panic("unimplemented conversion of *bool (*C.gboolean)")
 				_ = vexpandP
 				_ = carg2
-				panic("unimplemented conversion of *bool (gboolean*)")
+				panic("unimplemented conversion of *bool (*C.gboolean)")
 
 				overrides.ComputeExpand(widget, hexpandP, vexpandP)
 			},
@@ -67920,8 +68160,8 @@ func UnsafeApplyWidgetOverrides[Instance Widget](gclass unsafe.Pointer, override
 			"_gotk4_gtk4_Widget_contains",
 			func(carg0 *C.GtkWidget, carg1 C.double, carg2 C.double) (cret C.gboolean) {
 				var widget Instance // go GtkWidget subclass
-				var x      float64  // in, none, casted, casted C.gdouble
-				var y      float64  // in, none, casted, casted C.gdouble
+				var x      float64  // in, none, casted
+				var y      float64  // in, none, casted
 				var goret  bool     // return
 
 				widget = UnsafeWidgetFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
@@ -68086,11 +68326,11 @@ func UnsafeApplyWidgetOverrides[Instance Widget](gclass unsafe.Pointer, override
 			func(carg0 *C.GtkWidget, carg1 C.GtkOrientation, carg2 C.int, carg3 *C.int, carg4 *C.int, carg5 *C.int, carg6 *C.int) {
 				var widget          Instance    // go GtkWidget subclass
 				var orientation     Orientation // in, none, casted
-				var forSize         int32       // in, none, casted, casted C.gint
-				var minimum         int32       // out, full, casted, casted C.gint
-				var natural         int32       // out, full, casted, casted C.gint
-				var minimumBaseline int32       // out, full, casted, casted C.gint
-				var naturalBaseline int32       // out, full, casted, casted C.gint
+				var forSize         int32       // in, none, casted
+				var minimum         int32       // out, full, casted
+				var natural         int32       // out, full, casted
+				var minimumBaseline int32       // out, full, casted
+				var naturalBaseline int32       // out, full, casted
 
 				widget = UnsafeWidgetFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				orientation = Orientation(carg1)
@@ -68156,8 +68396,8 @@ func UnsafeApplyWidgetOverrides[Instance Widget](gclass unsafe.Pointer, override
 			"_gotk4_gtk4_Widget_query_tooltip",
 			func(carg0 *C.GtkWidget, carg1 C.int, carg2 C.int, carg3 C.gboolean, carg4 *C.GtkTooltip) (cret C.gboolean) {
 				var widget          Instance // go GtkWidget subclass
-				var x               int32    // in, none, casted, casted C.gint
-				var y               int32    // in, none, casted, casted C.gint
+				var x               int32    // in, none, casted
+				var y               int32    // in, none, casted
 				var keyboardTooltip bool     // in
 				var tooltip         Tooltip  // in, none, converted
 				var goret           bool     // return
@@ -68237,9 +68477,9 @@ func UnsafeApplyWidgetOverrides[Instance Widget](gclass unsafe.Pointer, override
 			"_gotk4_gtk4_Widget_size_allocate",
 			func(carg0 *C.GtkWidget, carg1 C.int, carg2 C.int, carg3 C.int) {
 				var widget   Instance // go GtkWidget subclass
-				var width    int32    // in, none, casted, casted C.gint
-				var height   int32    // in, none, casted, casted C.gint
-				var baseline int32    // in, none, casted, casted C.gint
+				var width    int32    // in, none, casted
+				var height   int32    // in, none, casted
+				var baseline int32    // in, none, casted
 
 				widget = UnsafeWidgetFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				width = int32(carg1)
@@ -68258,7 +68498,7 @@ func UnsafeApplyWidgetOverrides[Instance Widget](gclass unsafe.Pointer, override
 			"_gotk4_gtk4_Widget_snapshot",
 			func(carg0 *C.GtkWidget, carg1 *C.GtkSnapshot) {
 				var widget   Instance // go GtkWidget subclass
-				var snapshot Snapshot // in, none, converted, casted *C.Snapshot
+				var snapshot Snapshot // in, none, converted
 
 				widget = UnsafeWidgetFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				snapshot = UnsafeSnapshotFromGlibNone(unsafe.Pointer(carg1))
@@ -68349,7 +68589,8 @@ func UnsafeApplyWidgetOverrides[Instance Widget](gclass unsafe.Pointer, override
 }
 
 // ParentComputeExpand calls the default implementations of the compute_expand virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- hexpandP *bool 
@@ -68366,10 +68607,10 @@ func (widget *WidgetInstance) ParentComputeExpand(hexpandP *bool, vexpandP *bool
 
 	_ = hexpandP
 	_ = carg1
-	panic("unimplemented conversion of *bool (gboolean*)")
+	panic("unimplemented conversion of *bool (*C.gboolean)")
 	_ = vexpandP
 	_ = carg2
-	panic("unimplemented conversion of *bool (gboolean*)")
+	panic("unimplemented conversion of *bool (*C.gboolean)")
 
 	C._gotk4_gtk4_Widget_virtual_compute_expand(unsafe.Pointer(parentclass.compute_expand), carg0, carg1, carg2)
 	runtime.KeepAlive(widget)
@@ -68378,7 +68619,8 @@ func (widget *WidgetInstance) ParentComputeExpand(hexpandP *bool, vexpandP *bool
 }
 
 // ParentContains calls the default implementations of the contains virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- x float64: X coordinate to test, relative to @widget's origin 
@@ -68394,8 +68636,8 @@ func (widget *WidgetInstance) ParentComputeExpand(hexpandP *bool, vexpandP *bool
 // (0, 0) is assumed to be the top left of @widget's content area.
 func (widget *WidgetInstance) ParentContains(x float64, y float64) bool {
 	var carg0 *C.GtkWidget
-	var carg1 C.double   // in, none, casted, casted C.gdouble
-	var carg2 C.double   // in, none, casted, casted C.gdouble
+	var carg1 C.double   // in, none, casted
+	var carg2 C.double   // in, none, casted
 	var cret  C.gboolean // return
 
 	parentclass := (*C.GtkWidgetClass)(classdata.PeekParentClass(UnsafeWidgetToGlibNone(widget)))
@@ -68418,7 +68660,8 @@ func (widget *WidgetInstance) ParentContains(x float64, y float64) bool {
 }
 
 // ParentCSSChanged calls the default implementations of the css_changed virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- change *CssStyleChange 
@@ -68441,7 +68684,8 @@ func (widget *WidgetInstance) ParentCSSChanged(change *CssStyleChange) {
 }
 
 // ParentDirectionChanged calls the default implementations of the direction_changed virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- previousDirection TextDirection 
@@ -68462,7 +68706,8 @@ func (widget *WidgetInstance) ParentDirectionChanged(previousDirection TextDirec
 }
 
 // ParentFocus calls the default implementations of the focus virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- direction DirectionType 
@@ -68495,7 +68740,8 @@ func (widget *WidgetInstance) ParentFocus(direction DirectionType) bool {
 }
 
 // ParentGetRequestMode calls the default implementations of the get_request_mode virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret SizeRequestMode 
@@ -68524,7 +68770,8 @@ func (widget *WidgetInstance) ParentGetRequestMode() SizeRequestMode {
 }
 
 // ParentGrabFocus calls the default implementations of the grab_focus virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -68556,7 +68803,8 @@ func (widget *WidgetInstance) ParentGrabFocus() bool {
 }
 
 // ParentKeynavFailed calls the default implementations of the keynav_failed virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- direction DirectionType: direction of focus movement 
@@ -68615,7 +68863,7 @@ func (widget *WidgetInstance) ParentKeynavFailed(direction DirectionType) bool {
 }
 
 // ParentMap calls the default implementations of the map virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
 //
 // Causes a widget to be mapped if it isn’t already.
 // 
@@ -68630,7 +68878,8 @@ func (widget *WidgetInstance) ParentMap() {
 }
 
 // ParentMeasure calls the default implementations of the measure virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- orientation Orientation: the orientation to measure 
@@ -68660,11 +68909,11 @@ func (widget *WidgetInstance) ParentMap() {
 func (widget *WidgetInstance) ParentMeasure(orientation Orientation, forSize int32) (int32, int32, int32, int32) {
 	var carg0 *C.GtkWidget
 	var carg1 C.GtkOrientation // in, none, casted
-	var carg2 C.int            // in, none, casted, casted C.gint
-	var carg3 C.int            // out, full, casted, casted C.gint
-	var carg4 C.int            // out, full, casted, casted C.gint
-	var carg5 C.int            // out, full, casted, casted C.gint
-	var carg6 C.int            // out, full, casted, casted C.gint
+	var carg2 C.int            // in, none, casted
+	var carg3 C.int            // out, full, casted
+	var carg4 C.int            // out, full, casted
+	var carg5 C.int            // out, full, casted
+	var carg6 C.int            // out, full, casted
 
 	parentclass := (*C.GtkWidgetClass)(classdata.PeekParentClass(UnsafeWidgetToGlibNone(widget)))
 
@@ -68690,7 +68939,8 @@ func (widget *WidgetInstance) ParentMeasure(orientation Orientation, forSize int
 }
 
 // ParentMnemonicActivate calls the default implementations of the mnemonic_activate virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- groupCycling bool: %TRUE if there are other widgets with the same mnemonic 
@@ -68727,7 +68977,8 @@ func (widget *WidgetInstance) ParentMnemonicActivate(groupCycling bool) bool {
 }
 
 // ParentMoveFocus calls the default implementations of the move_focus virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- direction DirectionType 
@@ -68747,7 +68998,8 @@ func (widget *WidgetInstance) ParentMoveFocus(direction DirectionType) {
 }
 
 // ParentQueryTooltip calls the default implementations of the query_tooltip virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- x int32 
@@ -68764,8 +69016,8 @@ func (widget *WidgetInstance) ParentMoveFocus(direction DirectionType) {
 //   widget; or emitted when widget got focus in keyboard mode.
 func (widget *WidgetInstance) ParentQueryTooltip(x int32, y int32, keyboardTooltip bool, tooltip Tooltip) bool {
 	var carg0 *C.GtkWidget
-	var carg1 C.int         // in, none, casted, casted C.gint
-	var carg2 C.int         // in, none, casted, casted C.gint
+	var carg1 C.int         // in, none, casted
+	var carg2 C.int         // in, none, casted
 	var carg3 C.gboolean    // in
 	var carg4 *C.GtkTooltip // in, none, converted
 	var cret  C.gboolean    // return
@@ -68796,7 +69048,7 @@ func (widget *WidgetInstance) ParentQueryTooltip(x int32, y int32, keyboardToolt
 }
 
 // ParentRealize calls the default implementations of the realize virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
 //
 // Creates the GDK resources associated with a widget.
 // 
@@ -68824,7 +69076,7 @@ func (widget *WidgetInstance) ParentRealize() {
 }
 
 // ParentRoot calls the default implementations of the root virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
 //
 // Called when the widget gets added to a `GtkRoot` widget. Must
 //   chain up
@@ -68838,7 +69090,8 @@ func (widget *WidgetInstance) ParentRoot() {
 }
 
 // ParentSetFocusChild calls the default implementations of the set_focus_child virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- child Widget (nullable): a direct child widget of @widget or %NULL
@@ -68865,7 +69118,8 @@ func (widget *WidgetInstance) ParentSetFocusChild(child Widget) {
 }
 
 // ParentSizeAllocate calls the default implementations of the size_allocate virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- width int32 
@@ -68876,9 +69130,9 @@ func (widget *WidgetInstance) ParentSetFocusChild(child Widget) {
 //   not have a layout manager.
 func (widget *WidgetInstance) ParentSizeAllocate(width int32, height int32, baseline int32) {
 	var carg0 *C.GtkWidget
-	var carg1 C.int // in, none, casted, casted C.gint
-	var carg2 C.int // in, none, casted, casted C.gint
-	var carg3 C.int // in, none, casted, casted C.gint
+	var carg1 C.int // in, none, casted
+	var carg2 C.int // in, none, casted
+	var carg3 C.int // in, none, casted
 
 	parentclass := (*C.GtkWidgetClass)(classdata.PeekParentClass(UnsafeWidgetToGlibNone(widget)))
 
@@ -68894,7 +69148,8 @@ func (widget *WidgetInstance) ParentSizeAllocate(width int32, height int32, base
 }
 
 // ParentSnapshot calls the default implementations of the snapshot virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- snapshot Snapshot 
@@ -68902,7 +69157,7 @@ func (widget *WidgetInstance) ParentSizeAllocate(width int32, height int32, base
 // Vfunc called when a new snapshot of the widget has to be taken.
 func (widget *WidgetInstance) ParentSnapshot(snapshot Snapshot) {
 	var carg0 *C.GtkWidget
-	var carg1 *C.GtkSnapshot // in, none, converted, casted *C.Snapshot
+	var carg1 *C.GtkSnapshot // in, none, converted
 
 	parentclass := (*C.GtkWidgetClass)(classdata.PeekParentClass(UnsafeWidgetToGlibNone(widget)))
 
@@ -68914,7 +69169,8 @@ func (widget *WidgetInstance) ParentSnapshot(snapshot Snapshot) {
 }
 
 // ParentStateFlagsChanged calls the default implementations of the state_flags_changed virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- previousStateFlags StateFlags 
@@ -68935,7 +69191,8 @@ func (widget *WidgetInstance) ParentStateFlagsChanged(previousStateFlags StateFl
 }
 
 // ParentSystemSettingChanged calls the default implementations of the system_setting_changed virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- settings SystemSetting 
@@ -68955,7 +69212,7 @@ func (widget *WidgetInstance) ParentSystemSettingChanged(settings SystemSetting)
 }
 
 // ParentUnmap calls the default implementations of the unmap virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
 //
 // Causes a widget to be unmapped if it’s currently mapped.
 // 
@@ -68970,7 +69227,7 @@ func (widget *WidgetInstance) ParentUnmap() {
 }
 
 // ParentUnrealize calls the default implementations of the unrealize virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
 //
 // Causes a widget to be unrealized (frees all GDK resources
 // associated with the widget).
@@ -68986,7 +69243,7 @@ func (widget *WidgetInstance) ParentUnrealize() {
 }
 
 // ParentUnroot calls the default implementations of the unroot virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
 //
 // Called when the widget is about to be removed from its
 //   `GtkRoot` widget. Must chain up
@@ -69086,7 +69343,7 @@ func unsafeWrapWidgetPaintable(base *gobject.ObjectInstance) *WidgetPaintableIns
 	return &WidgetPaintableInstance{
 		ObjectInstance: *base,
 		PaintableInstance: gdk.PaintableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -69137,7 +69394,7 @@ func UnsafeWidgetPaintableToGlibFull(c WidgetPaintable) unsafe.Pointer {
 // Creates a new widget paintable observing the given widget.
 func NewWidgetPaintable(widget Widget) WidgetPaintable {
 	var carg1 *C.GtkWidget    // in, none, converted, nullable
-	var cret  *C.GdkPaintable // return, full, converted, casted *C.GtkWidgetPaintable
+	var cret  *C.GdkPaintable // return, full, converted
 
 	if widget != nil {
 		carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
@@ -70042,17 +70299,18 @@ type Window interface {
 	// chain up virtual methods:
 
 	// ParentActivateDefault calls the default implementations of the activate_default virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
 	//
 	// Activates the default widget for the window.
 	ParentActivateDefault()
 	// ParentActivateFocus calls the default implementations of the activate_focus virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
 	//
 	// Activates the current focused widget within the window.
 	ParentActivateFocus()
 	// ParentCloseRequest calls the default implementations of the close_request virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
@@ -70060,7 +70318,8 @@ type Window interface {
 	// Class handler for the `GtkWindow::close-request` signal.
 	ParentCloseRequest() bool
 	// ParentEnableDebugging calls the default implementations of the enable_debugging virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- toggle bool 
@@ -70073,7 +70332,7 @@ type Window interface {
 	//   keybinding signal.
 	ParentEnableDebugging(toggle bool) bool
 	// ParentKeysChanged calls the default implementations of the keys_changed virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
 	//
 	// Signal gets emitted when the set of accelerators or
 	//   mnemonics that are associated with window changes.
@@ -70165,7 +70424,7 @@ func NewWindow() Widget {
 // be modified. It is only valid until the next call to
 // [func@Gtk.Window.set_default_icon_name].
 func WindowGetDefaultIconName() string {
-	var cret *C.char // return, none, string, casted *C.gchar, nullable
+	var cret *C.char // return, none, string, nullable-string
 
 	cret = C.gtk_window_get_default_icon_name()
 
@@ -70274,7 +70533,7 @@ func WindowSetAutoStartupNotification(setting bool) {
 // haven't had [method@Gtk.Window.set_icon_name]
 // called on them.
 func WindowSetDefaultIconName(name string) {
-	var carg1 *C.char // in, none, string, casted *C.gchar
+	var carg1 *C.char // in, none, string
 
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -70482,8 +70741,8 @@ func (window *WindowInstance) GetDecorated() bool {
 // across restarts of applications](https://developer.gnome.org/documentation/tutorials/save-state.html).
 func (window *WindowInstance) GetDefaultSize() (int32, int32) {
 	var carg0 *C.GtkWindow // in, none, converted
-	var carg1 C.int        // out, full, casted, casted C.gint
-	var carg2 C.int        // out, full, casted, casted C.gint
+	var carg1 C.int        // out, full, casted
+	var carg2 C.int        // out, full, casted
 
 	carg0 = (*C.GtkWindow)(UnsafeWindowToGlibNone(window))
 
@@ -70714,7 +70973,7 @@ func (window *WindowInstance) GetHideOnClose() bool {
 // Returns the name of the themed icon for the window.
 func (window *WindowInstance) GetIconName() string {
 	var carg0 *C.GtkWindow // in, none, converted
-	var cret  *C.char      // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char      // return, none, string, nullable-string
 
 	carg0 = (*C.GtkWindow)(UnsafeWindowToGlibNone(window))
 
@@ -70814,7 +71073,7 @@ func (window *WindowInstance) GetResizable() bool {
 // Retrieves the title of the window.
 func (window *WindowInstance) GetTitle() string {
 	var carg0 *C.GtkWindow // in, none, converted
-	var cret  *C.char      // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char      // return, none, string, nullable-string
 
 	carg0 = (*C.GtkWindow)(UnsafeWindowToGlibNone(window))
 
@@ -71228,8 +71487,8 @@ func (window *WindowInstance) SetDecorated(setting bool) {
 // or shrinking windows.
 func (window *WindowInstance) SetDefaultSize(width int32, height int32) {
 	var carg0 *C.GtkWindow // in, none, converted
-	var carg1 C.int        // in, none, casted, casted C.gint
-	var carg2 C.int        // in, none, casted, casted C.gint
+	var carg1 C.int        // in, none, casted
+	var carg2 C.int        // in, none, casted
 
 	carg0 = (*C.GtkWindow)(UnsafeWindowToGlibNone(window))
 	carg1 = C.int(width)
@@ -71565,7 +71824,7 @@ func (window *WindowInstance) SetResizable(resizable bool) {
 // This function is only useful on X11, not with other GTK targets.
 func (window *WindowInstance) SetStartupID(startupId string) {
 	var carg0 *C.GtkWindow // in, none, converted
-	var carg1 *C.char      // in, none, string, casted *C.gchar
+	var carg1 *C.char      // in, none, string
 
 	carg0 = (*C.GtkWindow)(UnsafeWindowToGlibNone(window))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(startupId)))
@@ -71797,22 +72056,24 @@ type WindowOverrides[Instance Window] struct {
 	// WidgetOverrides allows you to override virtual methods from the parent class Widget
 	WidgetOverrides[Instance]
 
-	// ActivateDefault allows you to override the implementation of the virtual method activate_default.
+	// // ActivateDefault allows you to override the implementation of the virtual method activate_default.
 	//
 	// Activates the default widget for the window.
 	ActivateDefault func(Instance)
-	// ActivateFocus allows you to override the implementation of the virtual method activate_focus.
+	// // ActivateFocus allows you to override the implementation of the virtual method activate_focus.
 	//
 	// Activates the current focused widget within the window.
 	ActivateFocus func(Instance)
-	// CloseRequest allows you to override the implementation of the virtual method close_request.
+	// // CloseRequest allows you to override the implementation of the virtual method close_request.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
 	//
 	// Class handler for the `GtkWindow::close-request` signal.
 	CloseRequest func(Instance) bool
-	// EnableDebugging allows you to override the implementation of the virtual method enable_debugging.
+	// // EnableDebugging allows you to override the implementation of the virtual method enable_debugging.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- toggle bool 
@@ -71824,7 +72085,7 @@ type WindowOverrides[Instance Window] struct {
 	// Class handler for the `GtkWindow::enable-debugging`
 	//   keybinding signal.
 	EnableDebugging func(Instance, bool) bool
-	// KeysChanged allows you to override the implementation of the virtual method keys_changed.
+	// // KeysChanged allows you to override the implementation of the virtual method keys_changed.
 	//
 	// Signal gets emitted when the set of accelerators or
 	//   mnemonics that are associated with window changes.
@@ -71933,7 +72194,7 @@ func UnsafeApplyWindowOverrides[Instance Window](gclass unsafe.Pointer, override
 }
 
 // ParentActivateDefault calls the default implementations of the activate_default virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
 //
 // Activates the default widget for the window.
 func (window *WindowInstance) ParentActivateDefault() {
@@ -71946,7 +72207,7 @@ func (window *WindowInstance) ParentActivateDefault() {
 }
 
 // ParentActivateFocus calls the default implementations of the activate_focus virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
 //
 // Activates the current focused widget within the window.
 func (window *WindowInstance) ParentActivateFocus() {
@@ -71959,7 +72220,8 @@ func (window *WindowInstance) ParentActivateFocus() {
 }
 
 // ParentCloseRequest calls the default implementations of the close_request virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -71984,7 +72246,8 @@ func (window *WindowInstance) ParentCloseRequest() bool {
 }
 
 // ParentEnableDebugging calls the default implementations of the enable_debugging virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- toggle bool 
@@ -72020,7 +72283,7 @@ func (window *WindowInstance) ParentEnableDebugging(toggle bool) bool {
 }
 
 // ParentKeysChanged calls the default implementations of the keys_changed virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
 //
 // Signal gets emitted when the set of accelerators or
 //   mnemonics that are associated with window changes.
@@ -72262,7 +72525,7 @@ func NewWindowControls(side PackType) Widget {
 // Gets the decoration layout of this `GtkWindowControls`.
 func (self *WindowControlsInstance) GetDecorationLayout() string {
 	var carg0 *C.GtkWindowControls // in, none, converted
-	var cret  *C.char              // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char              // return, none, string, nullable-string
 
 	carg0 = (*C.GtkWindowControls)(UnsafeWindowControlsToGlibNone(self))
 
@@ -73254,16 +73517,16 @@ func unsafeWrapAboutDialog(base *gobject.ObjectInstance) *AboutDialogInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ShortcutManagerInstance: ShortcutManagerInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -73330,7 +73593,7 @@ func NewAboutDialog() Widget {
 // Creates a new section in the "Credits" page.
 func (about *AboutDialogInstance) AddCreditSection(sectionName string, people []string) {
 	var carg0 *C.GtkAboutDialog // in, none, converted
-	var carg1 *C.char           // in, none, string, casted *C.gchar
+	var carg1 *C.char           // in, none, string
 	var carg2 **C.char          // in, transfer: none, C Pointers: 2, Name: array[utf8], array (inner: *typesystem.StringPrimitive, zero-terminated)
 
 	carg0 = (*C.GtkAboutDialog)(UnsafeAboutDialogToGlibNone(about))
@@ -73338,7 +73601,7 @@ func (about *AboutDialogInstance) AddCreditSection(sectionName string, people []
 	defer C.free(unsafe.Pointer(carg1))
 	_ = people
 	_ = carg2
-	panic("unimplemented conversion of []string (const char**)")
+	panic("unimplemented conversion of []string (**C.char)")
 
 	C.gtk_about_dialog_add_credit_section(carg0, carg1, carg2)
 	runtime.KeepAlive(about)
@@ -73367,7 +73630,7 @@ func (about *AboutDialogInstance) GetArtists() []string {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (const char* const*)")
+	panic("unimplemented conversion of []string (**C.char)")
 
 	return goret
 }
@@ -73393,7 +73656,7 @@ func (about *AboutDialogInstance) GetAuthors() []string {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (const char* const*)")
+	panic("unimplemented conversion of []string (**C.char)")
 
 	return goret
 }
@@ -73407,7 +73670,7 @@ func (about *AboutDialogInstance) GetAuthors() []string {
 // Returns the comments string.
 func (about *AboutDialogInstance) GetComments() string {
 	var carg0 *C.GtkAboutDialog // in, none, converted
-	var cret  *C.char           // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char           // return, none, string, nullable-string
 
 	carg0 = (*C.GtkAboutDialog)(UnsafeAboutDialogToGlibNone(about))
 
@@ -73432,7 +73695,7 @@ func (about *AboutDialogInstance) GetComments() string {
 // Returns the copyright string.
 func (about *AboutDialogInstance) GetCopyright() string {
 	var carg0 *C.GtkAboutDialog // in, none, converted
-	var cret  *C.char           // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char           // return, none, string, nullable-string
 
 	carg0 = (*C.GtkAboutDialog)(UnsafeAboutDialogToGlibNone(about))
 
@@ -73469,7 +73732,7 @@ func (about *AboutDialogInstance) GetDocumenters() []string {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (const char* const*)")
+	panic("unimplemented conversion of []string (**C.char)")
 
 	return goret
 }
@@ -73483,7 +73746,7 @@ func (about *AboutDialogInstance) GetDocumenters() []string {
 // Returns the license information.
 func (about *AboutDialogInstance) GetLicense() string {
 	var carg0 *C.GtkAboutDialog // in, none, converted
-	var cret  *C.char           // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char           // return, none, string, nullable-string
 
 	carg0 = (*C.GtkAboutDialog)(UnsafeAboutDialogToGlibNone(about))
 
@@ -73556,7 +73819,7 @@ func (about *AboutDialogInstance) GetLogo() gdk.Paintable {
 // Returns the icon name displayed as logo in the about dialog.
 func (about *AboutDialogInstance) GetLogoIconName() string {
 	var carg0 *C.GtkAboutDialog // in, none, converted
-	var cret  *C.char           // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char           // return, none, string, nullable-string
 
 	carg0 = (*C.GtkAboutDialog)(UnsafeAboutDialogToGlibNone(about))
 
@@ -73581,7 +73844,7 @@ func (about *AboutDialogInstance) GetLogoIconName() string {
 // Returns the program name displayed in the about dialog.
 func (about *AboutDialogInstance) GetProgramName() string {
 	var carg0 *C.GtkAboutDialog // in, none, converted
-	var cret  *C.char           // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char           // return, none, string, nullable-string
 
 	carg0 = (*C.GtkAboutDialog)(UnsafeAboutDialogToGlibNone(about))
 
@@ -73606,7 +73869,7 @@ func (about *AboutDialogInstance) GetProgramName() string {
 // Returns the system information that is shown in the about dialog.
 func (about *AboutDialogInstance) GetSystemInformation() string {
 	var carg0 *C.GtkAboutDialog // in, none, converted
-	var cret  *C.char           // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char           // return, none, string, nullable-string
 
 	carg0 = (*C.GtkAboutDialog)(UnsafeAboutDialogToGlibNone(about))
 
@@ -73632,7 +73895,7 @@ func (about *AboutDialogInstance) GetSystemInformation() string {
 // in the credits page.
 func (about *AboutDialogInstance) GetTranslatorCredits() string {
 	var carg0 *C.GtkAboutDialog // in, none, converted
-	var cret  *C.char           // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char           // return, none, string, nullable-string
 
 	carg0 = (*C.GtkAboutDialog)(UnsafeAboutDialogToGlibNone(about))
 
@@ -73657,7 +73920,7 @@ func (about *AboutDialogInstance) GetTranslatorCredits() string {
 // Returns the version string.
 func (about *AboutDialogInstance) GetVersion() string {
 	var carg0 *C.GtkAboutDialog // in, none, converted
-	var cret  *C.char           // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char           // return, none, string, nullable-string
 
 	carg0 = (*C.GtkAboutDialog)(UnsafeAboutDialogToGlibNone(about))
 
@@ -73682,7 +73945,7 @@ func (about *AboutDialogInstance) GetVersion() string {
 // Returns the website URL.
 func (about *AboutDialogInstance) GetWebsite() string {
 	var carg0 *C.GtkAboutDialog // in, none, converted
-	var cret  *C.char           // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char           // return, none, string, nullable-string
 
 	carg0 = (*C.GtkAboutDialog)(UnsafeAboutDialogToGlibNone(about))
 
@@ -73707,7 +73970,7 @@ func (about *AboutDialogInstance) GetWebsite() string {
 // Returns the label used for the website link.
 func (about *AboutDialogInstance) GetWebsiteLabel() string {
 	var carg0 *C.GtkAboutDialog // in, none, converted
-	var cret  *C.char           // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char           // return, none, string, nullable-string
 
 	carg0 = (*C.GtkAboutDialog)(UnsafeAboutDialogToGlibNone(about))
 
@@ -73765,7 +74028,7 @@ func (about *AboutDialogInstance) SetArtists(artists []string) {
 	carg0 = (*C.GtkAboutDialog)(UnsafeAboutDialogToGlibNone(about))
 	_ = artists
 	_ = carg1
-	panic("unimplemented conversion of []string (const char**)")
+	panic("unimplemented conversion of []string (**C.char)")
 
 	C.gtk_about_dialog_set_artists(carg0, carg1)
 	runtime.KeepAlive(about)
@@ -73787,7 +74050,7 @@ func (about *AboutDialogInstance) SetAuthors(authors []string) {
 	carg0 = (*C.GtkAboutDialog)(UnsafeAboutDialogToGlibNone(about))
 	_ = authors
 	_ = carg1
-	panic("unimplemented conversion of []string (const char**)")
+	panic("unimplemented conversion of []string (**C.char)")
 
 	C.gtk_about_dialog_set_authors(carg0, carg1)
 	runtime.KeepAlive(about)
@@ -73858,7 +74121,7 @@ func (about *AboutDialogInstance) SetDocumenters(documenters []string) {
 	carg0 = (*C.GtkAboutDialog)(UnsafeAboutDialogToGlibNone(about))
 	_ = documenters
 	_ = carg1
-	panic("unimplemented conversion of []string (const char**)")
+	panic("unimplemented conversion of []string (**C.char)")
 
 	C.gtk_about_dialog_set_documenters(carg0, carg1)
 	runtime.KeepAlive(about)
@@ -74101,7 +74364,7 @@ func (about *AboutDialogInstance) SetWebsite(website string) {
 // Sets the label to be used for the website link.
 func (about *AboutDialogInstance) SetWebsiteLabel(websiteLabel string) {
 	var carg0 *C.GtkAboutDialog // in, none, converted
-	var carg1 *C.char           // in, none, string, casted *C.gchar
+	var carg1 *C.char           // in, none, string
 
 	carg0 = (*C.GtkAboutDialog)(UnsafeAboutDialogToGlibNone(about))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(websiteLabel)))
@@ -74275,13 +74538,13 @@ func unsafeWrapActionBar(base *gobject.ObjectInstance) *ActionBarInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -74561,7 +74824,7 @@ func UnsafeActivateActionToGlibFull(c ActivateAction) unsafe.Pointer {
 // This is an action that calls gtk_widget_activate()
 // on the given widget upon activation.
 func ActivateActionGet() ActivateAction {
-	var cret *C.GtkShortcutAction // return, none, converted, casted *C.GtkActivateAction
+	var cret *C.GtkShortcutAction // return, none, converted
 
 	cret = C.gtk_activate_action_get()
 
@@ -74775,11 +75038,11 @@ func unsafeWrapAnyFilter(base *gobject.ObjectInstance) *AnyFilterInstance {
 				ObjectInstance: *base,
 			},
 			ListModelInstance: gio.ListModelInstance{
-				ObjectInstance: *base,
+				Instance: *base,
 			},
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -75005,22 +75268,22 @@ func unsafeWrapApplicationWindow(base *gobject.ObjectInstance) *ApplicationWindo
 			},
 		},
 		ActionGroupInstance: gio.ActionGroupInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ActionMapInstance: gio.ActionMapInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ShortcutManagerInstance: ShortcutManagerInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -75384,13 +75647,13 @@ func unsafeWrapAspectFrame(base *gobject.ObjectInstance) *AspectFrameInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -75446,9 +75709,9 @@ func UnsafeAspectFrameToGlibFull(c AspectFrame) unsafe.Pointer {
 //
 // Create a new `GtkAspectFrame`.
 func NewAspectFrame(xalign float32, yalign float32, ratio float32, obeyChild bool) Widget {
-	var carg1 C.float      // in, none, casted, casted C.gfloat
-	var carg2 C.float      // in, none, casted, casted C.gfloat
-	var carg3 C.float      // in, none, casted, casted C.gfloat
+	var carg1 C.float      // in, none, casted
+	var carg2 C.float      // in, none, casted
+	var carg3 C.float      // in, none, casted
 	var carg4 C.gboolean   // in
 	var cret  *C.GtkWidget // return, none, converted
 
@@ -75532,7 +75795,7 @@ func (self *AspectFrameInstance) GetObeyChild() bool {
 // Returns the desired aspect ratio of the child.
 func (self *AspectFrameInstance) GetRatio() float32 {
 	var carg0 *C.GtkAspectFrame // in, none, converted
-	var cret  C.float           // return, none, casted, casted C.gfloat
+	var cret  C.float           // return, none, casted
 
 	carg0 = (*C.GtkAspectFrame)(UnsafeAspectFrameToGlibNone(self))
 
@@ -75556,7 +75819,7 @@ func (self *AspectFrameInstance) GetRatio() float32 {
 // allocation of the `GtkAspectFrame`.
 func (self *AspectFrameInstance) GetXAlign() float32 {
 	var carg0 *C.GtkAspectFrame // in, none, converted
-	var cret  C.float           // return, none, casted, casted C.gfloat
+	var cret  C.float           // return, none, casted
 
 	carg0 = (*C.GtkAspectFrame)(UnsafeAspectFrameToGlibNone(self))
 
@@ -75580,7 +75843,7 @@ func (self *AspectFrameInstance) GetXAlign() float32 {
 // allocation of the `GtkAspectFrame`.
 func (self *AspectFrameInstance) GetYAlign() float32 {
 	var carg0 *C.GtkAspectFrame // in, none, converted
-	var cret  C.float           // return, none, casted, casted C.gfloat
+	var cret  C.float           // return, none, casted
 
 	carg0 = (*C.GtkAspectFrame)(UnsafeAspectFrameToGlibNone(self))
 
@@ -75648,7 +75911,7 @@ func (self *AspectFrameInstance) SetObeyChild(obeyChild bool) {
 // Sets the desired aspect ratio of the child.
 func (self *AspectFrameInstance) SetRatio(ratio float32) {
 	var carg0 *C.GtkAspectFrame // in, none, converted
-	var carg1 C.float           // in, none, casted, casted C.gfloat
+	var carg1 C.float           // in, none, casted
 
 	carg0 = (*C.GtkAspectFrame)(UnsafeAspectFrameToGlibNone(self))
 	carg1 = C.float(ratio)
@@ -75668,7 +75931,7 @@ func (self *AspectFrameInstance) SetRatio(ratio float32) {
 // of the `GtkAspectFrame`.
 func (self *AspectFrameInstance) SetXAlign(xalign float32) {
 	var carg0 *C.GtkAspectFrame // in, none, converted
-	var carg1 C.float           // in, none, casted, casted C.gfloat
+	var carg1 C.float           // in, none, casted
 
 	carg0 = (*C.GtkAspectFrame)(UnsafeAspectFrameToGlibNone(self))
 	carg1 = C.float(xalign)
@@ -75688,7 +75951,7 @@ func (self *AspectFrameInstance) SetXAlign(xalign float32) {
 // of the `GtkAspectFrame`.
 func (self *AspectFrameInstance) SetYAlign(yalign float32) {
 	var carg0 *C.GtkAspectFrame // in, none, converted
-	var carg1 C.float           // in, none, casted, casted C.gfloat
+	var carg1 C.float           // in, none, casted
 
 	carg0 = (*C.GtkAspectFrame)(UnsafeAspectFrameToGlibNone(self))
 	carg1 = C.float(yalign)
@@ -76181,16 +76444,16 @@ func unsafeWrapBox(base *gobject.ObjectInstance) *BoxInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		OrientableInstance: OrientableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -76242,7 +76505,7 @@ func UnsafeBoxToGlibFull(c Box) unsafe.Pointer {
 // Creates a new `GtkBox`.
 func NewBox(orientation Orientation, spacing int32) Widget {
 	var carg1 C.GtkOrientation // in, none, casted
-	var carg2 C.int            // in, none, casted, casted C.gint
+	var carg2 C.int            // in, none, casted
 	var cret  *C.GtkWidget     // return, none, converted
 
 	carg1 = C.GtkOrientation(orientation)
@@ -76287,7 +76550,7 @@ func (box *BoxInstance) Append(child Widget) {
 // Gets the value set by gtk_box_set_baseline_child().
 func (box *BoxInstance) GetBaselineChild() int32 {
 	var carg0 *C.GtkBox // in, none, converted
-	var cret  C.int     // return, none, casted, casted C.gint
+	var cret  C.int     // return, none, casted
 
 	carg0 = (*C.GtkBox)(UnsafeBoxToGlibNone(box))
 
@@ -76359,7 +76622,7 @@ func (box *BoxInstance) GetHomogeneous() bool {
 // Gets the value set by gtk_box_set_spacing().
 func (box *BoxInstance) GetSpacing() int32 {
 	var carg0 *C.GtkBox // in, none, converted
-	var cret  C.int     // return, none, casted, casted C.gint
+	var cret  C.int     // return, none, casted
 
 	carg0 = (*C.GtkBox)(UnsafeBoxToGlibNone(box))
 
@@ -76482,7 +76745,7 @@ func (box *BoxInstance) ReorderChildAfter(child Widget, sibling Widget) {
 // This affects only vertical boxes.
 func (box *BoxInstance) SetBaselineChild(child int32) {
 	var carg0 *C.GtkBox // in, none, converted
-	var carg1 C.int     // in, none, casted, casted C.gint
+	var carg1 C.int     // in, none, casted
 
 	carg0 = (*C.GtkBox)(UnsafeBoxToGlibNone(box))
 	carg1 = C.int(child)
@@ -76549,7 +76812,7 @@ func (box *BoxInstance) SetHomogeneous(homogeneous bool) {
 // Sets the number of pixels to place between children of @box.
 func (box *BoxInstance) SetSpacing(spacing int32) {
 	var carg0 *C.GtkBox // in, none, converted
-	var carg1 C.int     // in, none, casted, casted C.gint
+	var carg1 C.int     // in, none, casted
 
 	carg0 = (*C.GtkBox)(UnsafeBoxToGlibNone(box))
 	carg1 = C.int(spacing)
@@ -76712,7 +76975,7 @@ func unsafeWrapBoxLayout(base *gobject.ObjectInstance) *BoxLayoutInstance {
 			ObjectInstance: *base,
 		},
 		OrientableInstance: OrientableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -76786,7 +77049,7 @@ func NewBoxLayout(orientation Orientation) LayoutManager {
 // Gets the value set by gtk_box_layout_set_baseline_child().
 func (boxLayout *BoxLayoutInstance) GetBaselineChild() int32 {
 	var carg0 *C.GtkBoxLayout // in, none, converted
-	var cret  C.int           // return, none, casted, casted C.gint
+	var cret  C.int           // return, none, casted
 
 	carg0 = (*C.GtkBoxLayout)(UnsafeBoxLayoutToGlibNone(boxLayout))
 
@@ -76881,7 +77144,7 @@ func (boxLayout *BoxLayoutInstance) GetSpacing() uint {
 // in vertical layout.
 func (boxLayout *BoxLayoutInstance) SetBaselineChild(child int32) {
 	var carg0 *C.GtkBoxLayout // in, none, converted
-	var carg1 C.int           // in, none, casted, casted C.gint
+	var carg1 C.int           // in, none, casted
 
 	carg0 = (*C.GtkBoxLayout)(UnsafeBoxLayoutToGlibNone(boxLayout))
 	carg1 = C.int(child)
@@ -77155,7 +77418,7 @@ func NewBuilderListItemFactoryFromBytes(scope BuilderScope, bytes *glib.Bytes) L
 // using data read from the given @resource_path to pass to `GtkBuilder`.
 func NewBuilderListItemFactoryFromResource(scope BuilderScope, resourcePath string) ListItemFactory {
 	var carg1 *C.GtkBuilderScope    // in, none, converted, nullable
-	var carg2 *C.char               // in, none, string, casted *C.gchar
+	var carg2 *C.char               // in, none, string
 	var cret  *C.GtkListItemFactory // return, full, converted
 
 	if scope != nil {
@@ -77208,7 +77471,7 @@ func (self *BuilderListItemFactoryInstance) GetBytes() *glib.Bytes {
 // If the data references a resource, gets the path of that resource.
 func (self *BuilderListItemFactoryInstance) GetResource() string {
 	var carg0 *C.GtkBuilderListItemFactory // in, none, converted
-	var cret  *C.char                      // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char                      // return, none, string, nullable-string
 
 	carg0 = (*C.GtkBuilderListItemFactory)(UnsafeBuilderListItemFactoryToGlibNone(self))
 
@@ -77454,14 +77717,14 @@ type Button interface {
 	// chain up virtual methods:
 
 	// ParentActivate calls the default implementations of the activate virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
 	//
 	// Signal that causes the button to animate press then
 	//    release. Applications should never connect to this signal, but use
 	//    the @clicked signal.
 	ParentActivate()
 	// ParentClicked calls the default implementations of the clicked virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
 	//
 	// Signal emitted when the button has been activated (pressed and released).
 	ParentClicked()
@@ -77475,16 +77738,16 @@ func unsafeWrapButton(base *gobject.ObjectInstance) *ButtonInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ActionableInstance: ActionableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -77559,7 +77822,7 @@ func NewButton() Widget {
 // displayed instead. If the current icon theme is changed, the icon
 // will be updated appropriately.
 func NewButtonFromIconName(iconName string) Widget {
-	var carg1 *C.char      // in, none, string, casted *C.gchar
+	var carg1 *C.char      // in, none, string
 	var cret  *C.GtkWidget // return, none, converted
 
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(iconName)))
@@ -77587,7 +77850,7 @@ func NewButtonFromIconName(iconName string) Widget {
 //
 // Creates a `GtkButton` widget with a `GtkLabel` child.
 func NewButtonWithLabel(label string) Widget {
-	var carg1 *C.char      // in, none, string, casted *C.gchar
+	var carg1 *C.char      // in, none, string
 	var cret  *C.GtkWidget // return, none, converted
 
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(label)))
@@ -77622,7 +77885,7 @@ func NewButtonWithLabel(label string) Widget {
 // accelerator called a mnemonic. Pressing &lt;kbd&gt;Alt&lt;/kbd&gt; and that key
 // activates the button.
 func NewButtonWithMnemonic(label string) Widget {
-	var carg1 *C.char      // in, none, string, casted *C.gchar
+	var carg1 *C.char      // in, none, string
 	var cret  *C.GtkWidget // return, none, converted
 
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(label)))
@@ -77727,7 +77990,7 @@ func (button *ButtonInstance) GetHasFrame() bool {
 // an empty button with [ctor@Gtk.Button.new] to use as a container.
 func (button *ButtonInstance) GetIconName() string {
 	var carg0 *C.GtkButton // in, none, converted
-	var cret  *C.char      // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char      // return, none, string, nullable-string
 
 	carg0 = (*C.GtkButton)(UnsafeButtonToGlibNone(button))
 
@@ -77756,7 +78019,7 @@ func (button *ButtonInstance) GetIconName() string {
 // an empty button with [ctor@Gtk.Button.new] to use as a container.
 func (button *ButtonInstance) GetLabel() string {
 	var carg0 *C.GtkButton // in, none, converted
-	var cret  *C.char      // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char      // return, none, string, nullable-string
 
 	carg0 = (*C.GtkButton)(UnsafeButtonToGlibNone(button))
 
@@ -77887,7 +78150,7 @@ func (button *ButtonInstance) SetHasFrame(hasFrame bool) {
 // be removed and replaced with the image.
 func (button *ButtonInstance) SetIconName(iconName string) {
 	var carg0 *C.GtkButton // in, none, converted
-	var carg1 *C.char      // in, none, string, casted *C.gchar
+	var carg1 *C.char      // in, none, string
 
 	carg0 = (*C.GtkButton)(UnsafeButtonToGlibNone(button))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(iconName)))
@@ -77909,7 +78172,7 @@ func (button *ButtonInstance) SetIconName(iconName string) {
 // This will also clear any previously set labels.
 func (button *ButtonInstance) SetLabel(label string) {
 	var carg0 *C.GtkButton // in, none, converted
-	var carg1 *C.char      // in, none, string, casted *C.gchar
+	var carg1 *C.char      // in, none, string
 
 	carg0 = (*C.GtkButton)(UnsafeButtonToGlibNone(button))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(label)))
@@ -77970,13 +78233,13 @@ type ButtonOverrides[Instance Button] struct {
 	// WidgetOverrides allows you to override virtual methods from the parent class Widget
 	WidgetOverrides[Instance]
 
-	// Activate allows you to override the implementation of the virtual method activate.
+	// // Activate allows you to override the implementation of the virtual method activate.
 	//
 	// Signal that causes the button to animate press then
 	//    release. Applications should never connect to this signal, but use
 	//    the @clicked signal.
 	Activate func(Instance)
-	// Clicked allows you to override the implementation of the virtual method clicked.
+	// // Clicked allows you to override the implementation of the virtual method clicked.
 	//
 	// Signal emitted when the button has been activated (pressed and released).
 	Clicked func(Instance)
@@ -78021,7 +78284,7 @@ func UnsafeApplyButtonOverrides[Instance Button](gclass unsafe.Pointer, override
 }
 
 // ParentActivate calls the default implementations of the activate virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
 //
 // Signal that causes the button to animate press then
 //    release. Applications should never connect to this signal, but use
@@ -78036,7 +78299,7 @@ func (button *ButtonInstance) ParentActivate() {
 }
 
 // ParentClicked calls the default implementations of the clicked virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
 //
 // Signal emitted when the button has been activated (pressed and released).
 func (button *ButtonInstance) ParentClicked() {
@@ -78352,13 +78615,13 @@ func unsafeWrapCalendar(base *gobject.ObjectInstance) *CalendarInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -78462,7 +78725,7 @@ func (self *CalendarInstance) GetDate() *glib.DateTime {
 // Gets the day of the selected date.
 func (self *CalendarInstance) GetDay() int32 {
 	var carg0 *C.GtkCalendar // in, none, converted
-	var cret  C.int          // return, none, casted, casted C.gint
+	var cret  C.int          // return, none, casted
 
 	carg0 = (*C.GtkCalendar)(UnsafeCalendarToGlibNone(self))
 
@@ -78517,7 +78780,7 @@ func (calendar *CalendarInstance) GetDayIsMarked(day uint) bool {
 // Gets the month of the selected date.
 func (self *CalendarInstance) GetMonth() int32 {
 	var carg0 *C.GtkCalendar // in, none, converted
-	var cret  C.int          // return, none, casted, casted C.gint
+	var cret  C.int          // return, none, casted
 
 	carg0 = (*C.GtkCalendar)(UnsafeCalendarToGlibNone(self))
 
@@ -78626,7 +78889,7 @@ func (self *CalendarInstance) GetShowWeekNumbers() bool {
 // Gets the year of the selected date.
 func (self *CalendarInstance) GetYear() int32 {
 	var carg0 *C.GtkCalendar // in, none, converted
-	var cret  C.int          // return, none, casted, casted C.gint
+	var cret  C.int          // return, none, casted
 
 	carg0 = (*C.GtkCalendar)(UnsafeCalendarToGlibNone(self))
 
@@ -78690,7 +78953,7 @@ func (self *CalendarInstance) SelectDay(date *glib.DateTime) {
 // month is February, fails.
 func (self *CalendarInstance) SetDay(day int32) {
 	var carg0 *C.GtkCalendar // in, none, converted
-	var carg1 C.int          // in, none, casted, casted C.gint
+	var carg1 C.int          // in, none, casted
 
 	carg0 = (*C.GtkCalendar)(UnsafeCalendarToGlibNone(self))
 	carg1 = C.int(day)
@@ -78712,7 +78975,7 @@ func (self *CalendarInstance) SetDay(day int32) {
 // when the day is 31, fails.
 func (self *CalendarInstance) SetMonth(month int32) {
 	var carg0 *C.GtkCalendar // in, none, converted
-	var carg1 C.int          // in, none, casted, casted C.gint
+	var carg1 C.int          // in, none, casted
 
 	carg0 = (*C.GtkCalendar)(UnsafeCalendarToGlibNone(self))
 	carg1 = C.int(month)
@@ -78801,7 +79064,7 @@ func (self *CalendarInstance) SetShowWeekNumbers(value bool) {
 // the date is 2024-02-29, fails.
 func (self *CalendarInstance) SetYear(year int32) {
 	var carg0 *C.GtkCalendar // in, none, converted
-	var carg1 C.int          // in, none, casted, casted C.gint
+	var carg1 C.int          // in, none, casted
 
 	carg0 = (*C.GtkCalendar)(UnsafeCalendarToGlibNone(self))
 	carg1 = C.int(year)
@@ -79088,16 +79351,16 @@ func unsafeWrapCenterBox(base *gobject.ObjectInstance) *CenterBoxInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		OrientableInstance: OrientableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -80143,10 +80406,10 @@ type CheckButton interface {
 	// chain up virtual methods:
 
 	// ParentActivate calls the default implementations of the activate virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
 	ParentActivate()
 	// ParentToggled calls the default implementations of the toggled virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
 	ParentToggled()
 }
 
@@ -80158,16 +80421,16 @@ func unsafeWrapCheckButton(base *gobject.ObjectInstance) *CheckButtonInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ActionableInstance: ActionableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -80369,7 +80632,7 @@ func (checkButton *CheckButtonInstance) GetInconsistent() bool {
 // Returns the label of the check button or `NULL` if [property@CheckButton:child] is set.
 func (self *CheckButtonInstance) GetLabel() string {
 	var carg0 *C.GtkCheckButton // in, none, converted
-	var cret  *C.char           // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char           // return, none, string, nullable-string
 
 	carg0 = (*C.GtkCheckButton)(UnsafeCheckButtonToGlibNone(self))
 
@@ -80600,9 +80863,9 @@ type CheckButtonOverrides[Instance CheckButton] struct {
 	// WidgetOverrides allows you to override virtual methods from the parent class Widget
 	WidgetOverrides[Instance]
 
-	// Activate allows you to override the implementation of the virtual method activate.
+	// // Activate allows you to override the implementation of the virtual method activate.
 	Activate func(Instance)
-	// Toggled allows you to override the implementation of the virtual method toggled.
+	// // Toggled allows you to override the implementation of the virtual method toggled.
 	Toggled func(Instance)
 }
 
@@ -80645,7 +80908,7 @@ func UnsafeApplyCheckButtonOverrides[Instance CheckButton](gclass unsafe.Pointer
 }
 
 // ParentActivate calls the default implementations of the activate virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
 func (checkButton *CheckButtonInstance) ParentActivate() {
 	var carg0 *C.GtkCheckButton
 
@@ -80656,7 +80919,7 @@ func (checkButton *CheckButtonInstance) ParentActivate() {
 }
 
 // ParentToggled calls the default implementations of the toggled virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
 func (checkButton *CheckButtonInstance) ParentToggled() {
 	var carg0 *C.GtkCheckButton
 
@@ -80788,13 +81051,13 @@ func unsafeWrapColorDialogButton(base *gobject.ObjectInstance) *ColorDialogButto
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -81380,16 +81643,16 @@ func unsafeWrapColumnView(base *gobject.ObjectInstance) *ColumnViewInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ScrollableInstance: ScrollableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -83004,7 +83267,7 @@ func unsafeWrapConstraintLayout(base *gobject.ObjectInstance) *ConstraintLayoutI
 			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -83733,13 +83996,13 @@ func unsafeWrapDragIcon(base *gobject.ObjectInstance) *DragIconInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -83862,8 +84125,8 @@ func DragIconCreateWidgetForValue(value *gobject.Value) Widget {
 func DragIconSetFromPaintable(drag gdk.Drag, paintable gdk.Paintable, hotX int32, hotY int32) {
 	var carg1 *C.GdkDrag      // in, none, converted
 	var carg2 *C.GdkPaintable // in, none, converted
-	var carg3 C.int           // in, none, casted, casted C.gint
-	var carg4 C.int           // in, none, casted, casted C.gint
+	var carg3 C.int           // in, none, casted
+	var carg4 C.int           // in, none, casted
 
 	carg1 = (*C.GdkDrag)(gdk.UnsafeDragToGlibNone(drag))
 	carg2 = (*C.GdkPaintable)(gdk.UnsafePaintableToGlibNone(paintable))
@@ -84394,8 +84657,8 @@ func (source *DragSourceInstance) SetContent(content gdk.ContentProvider) {
 func (source *DragSourceInstance) SetIcon(paintable gdk.Paintable, hotX int32, hotY int32) {
 	var carg0 *C.GtkDragSource // in, none, converted
 	var carg1 *C.GdkPaintable  // in, none, converted, nullable
-	var carg2 C.int            // in, none, casted, casted C.gint
-	var carg3 C.int            // in, none, casted, casted C.gint
+	var carg2 C.int            // in, none, casted
+	var carg3 C.int            // in, none, casted
 
 	carg0 = (*C.GtkDragSource)(UnsafeDragSourceToGlibNone(source))
 	if paintable != nil {
@@ -84612,7 +84875,8 @@ type DrawingArea interface {
 	// chain up virtual methods:
 
 	// ParentResize calls the default implementations of the resize virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- width int32 
@@ -84628,13 +84892,13 @@ func unsafeWrapDrawingArea(base *gobject.ObjectInstance) *DrawingAreaInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -84700,7 +84964,7 @@ func NewDrawingArea() Widget {
 // Retrieves the content height of the `GtkDrawingArea`.
 func (self *DrawingAreaInstance) GetContentHeight() int32 {
 	var carg0 *C.GtkDrawingArea // in, none, converted
-	var cret  C.int             // return, none, casted, casted C.gint
+	var cret  C.int             // return, none, casted
 
 	carg0 = (*C.GtkDrawingArea)(UnsafeDrawingAreaToGlibNone(self))
 
@@ -84723,7 +84987,7 @@ func (self *DrawingAreaInstance) GetContentHeight() int32 {
 // Retrieves the content width of the `GtkDrawingArea`.
 func (self *DrawingAreaInstance) GetContentWidth() int32 {
 	var carg0 *C.GtkDrawingArea // in, none, converted
-	var cret  C.int             // return, none, casted, casted C.gint
+	var cret  C.int             // return, none, casted
 
 	carg0 = (*C.GtkDrawingArea)(UnsafeDrawingAreaToGlibNone(self))
 
@@ -84753,7 +85017,7 @@ func (self *DrawingAreaInstance) GetContentWidth() int32 {
 // If the height is set to 0 (the default), the drawing area may disappear.
 func (self *DrawingAreaInstance) SetContentHeight(height int32) {
 	var carg0 *C.GtkDrawingArea // in, none, converted
-	var carg1 C.int             // in, none, casted, casted C.gint
+	var carg1 C.int             // in, none, casted
 
 	carg0 = (*C.GtkDrawingArea)(UnsafeDrawingAreaToGlibNone(self))
 	carg1 = C.int(height)
@@ -84779,7 +85043,7 @@ func (self *DrawingAreaInstance) SetContentHeight(height int32) {
 // If the width is set to 0 (the default), the drawing area may disappear.
 func (self *DrawingAreaInstance) SetContentWidth(width int32) {
 	var carg0 *C.GtkDrawingArea // in, none, converted
-	var carg1 C.int             // in, none, casted, casted C.gint
+	var carg1 C.int             // in, none, casted
 
 	carg0 = (*C.GtkDrawingArea)(UnsafeDrawingAreaToGlibNone(self))
 	carg1 = C.int(width)
@@ -84806,7 +85070,8 @@ type DrawingAreaOverrides[Instance DrawingArea] struct {
 	// WidgetOverrides allows you to override virtual methods from the parent class Widget
 	WidgetOverrides[Instance]
 
-	// Resize allows you to override the implementation of the virtual method resize.
+	// // Resize allows you to override the implementation of the virtual method resize.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- width int32 
@@ -84828,8 +85093,8 @@ func UnsafeApplyDrawingAreaOverrides[Instance DrawingArea](gclass unsafe.Pointer
 			"_gotk4_gtk4_DrawingArea_resize",
 			func(carg0 *C.GtkDrawingArea, carg1 C.int, carg2 C.int) {
 				var area   Instance // go GtkDrawingArea subclass
-				var width  int32    // in, none, casted, casted C.gint
-				var height int32    // in, none, casted, casted C.gint
+				var width  int32    // in, none, casted
+				var height int32    // in, none, casted
 
 				area = UnsafeDrawingAreaFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				width = int32(carg1)
@@ -84842,15 +85107,16 @@ func UnsafeApplyDrawingAreaOverrides[Instance DrawingArea](gclass unsafe.Pointer
 }
 
 // ParentResize calls the default implementations of the resize virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- width int32 
 // 	- height int32 
 func (area *DrawingAreaInstance) ParentResize(width int32, height int32) {
 	var carg0 *C.GtkDrawingArea
-	var carg1 C.int // in, none, casted, casted C.gint
-	var carg2 C.int // in, none, casted, casted C.gint
+	var carg1 C.int // in, none, casted
+	var carg2 C.int // in, none, casted
 
 	parentclass := (*C.GtkDrawingAreaClass)(classdata.PeekParentClass(UnsafeDrawingAreaToGlibNone(area)))
 
@@ -85344,13 +85610,13 @@ func unsafeWrapDropDown(base *gobject.ObjectInstance) *DropDownInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -85406,7 +85672,7 @@ func NewDropDownFromStrings(_strings []string) Widget {
 
 	_ = _strings
 	_ = carg1
-	panic("unimplemented conversion of []string (const char* const*)")
+	panic("unimplemented conversion of []string (**C.char)")
 
 	cret = C.gtk_drop_down_new_from_strings(carg1)
 	runtime.KeepAlive(_strings)
@@ -86243,7 +86509,7 @@ func (self *DropTargetInstance) GetGTypes() (uint, []gobject.Type) {
 	nTypes = uint(carg1)
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []gobject.Type (const GType*)")
+	panic("unimplemented conversion of []gobject.Type (*C.GType)")
 
 	return nTypes, goret
 }
@@ -86353,7 +86619,7 @@ func (self *DropTargetInstance) SetGTypes(types []gobject.Type) {
 	_ = types
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []gobject.Type (GType*)")
+	panic("unimplemented conversion of []gobject.Type (*C.GType)")
 
 	C.gtk_drop_target_set_gtypes(carg0, carg1, carg2)
 	runtime.KeepAlive(self)
@@ -86946,13 +87212,13 @@ func unsafeWrapEditableLabel(base *gobject.ObjectInstance) *EditableLabelInstanc
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -87002,7 +87268,7 @@ func UnsafeEditableLabelToGlibFull(c EditableLabel) unsafe.Pointer {
 //
 // Creates a new `GtkEditableLabel` widget.
 func NewEditableLabel(str string) Widget {
-	var carg1 *C.char      // in, none, string, casted *C.gchar
+	var carg1 *C.char      // in, none, string
 	var cret  *C.GtkWidget // return, none, converted
 
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(str)))
@@ -87903,7 +88169,7 @@ type Entry interface {
 	// chain up virtual methods:
 
 	// ParentActivate calls the default implementations of the activate virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
 	//
 	// Class handler for the `GtkEntry::activate` signal. The default
 	//   implementation activates the gtk.activate-default action.
@@ -87918,13 +88184,13 @@ func unsafeWrapEntry(base *gobject.ObjectInstance) *EntryInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -88044,7 +88310,7 @@ func (entry *EntryInstance) GetActivatesDefault() bool {
 // See also: [property@Gtk.Editable:xalign]
 func (entry *EntryInstance) GetAlignment() float32 {
 	var carg0 *C.GtkEntry // in, none, converted
-	var cret  C.float     // return, none, casted, casted C.gfloat
+	var cret  C.float     // return, none, casted
 
 	carg0 = (*C.GtkEntry)(UnsafeEntryToGlibNone(entry))
 
@@ -88119,7 +88385,7 @@ func (entry *EntryInstance) GetBuffer() EntryBuffer {
 // current  DND operation, or -1.
 func (entry *EntryInstance) GetCurrentIconDragSource() int32 {
 	var carg0 *C.GtkEntry // in, none, converted
-	var cret  C.int       // return, none, casted, casted C.gint
+	var cret  C.int       // return, none, casted
 
 	carg0 = (*C.GtkEntry)(UnsafeEntryToGlibNone(entry))
 
@@ -88250,7 +88516,7 @@ func (entry *EntryInstance) GetIconArea(iconPos EntryIconPosition) gdk.Rectangle
 
 	_ = iconArea
 	_ = carg2
-	panic("unimplemented conversion of gdk.Rectangle (GdkRectangle)")
+	panic("unimplemented conversion of gdk.Rectangle (C.GdkRectangle)")
 
 	return iconArea
 }
@@ -88274,9 +88540,9 @@ func (entry *EntryInstance) GetIconArea(iconPos EntryIconPosition) gdk.Rectangle
 //  [signal@Gtk.Widget::query-tooltip] signal handler.
 func (entry *EntryInstance) GetIconAtPos(x int32, y int32) int32 {
 	var carg0 *C.GtkEntry // in, none, converted
-	var carg1 C.int       // in, none, casted, casted C.gint
-	var carg2 C.int       // in, none, casted, casted C.gint
-	var cret  C.int       // return, none, casted, casted C.gint
+	var carg1 C.int       // in, none, casted
+	var carg2 C.int       // in, none, casted
+	var cret  C.int       // return, none, casted
 
 	carg0 = (*C.GtkEntry)(UnsafeEntryToGlibNone(entry))
 	carg1 = C.int(x)
@@ -88346,7 +88612,7 @@ func (entry *EntryInstance) GetIconGIcon(iconPos EntryIconPosition) gio.Icon {
 func (entry *EntryInstance) GetIconName(iconPos EntryIconPosition) string {
 	var carg0 *C.GtkEntry            // in, none, converted
 	var carg1 C.GtkEntryIconPosition // in, none, casted
-	var cret  *C.char                // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char                // return, none, string, nullable-string
 
 	carg0 = (*C.GtkEntry)(UnsafeEntryToGlibNone(entry))
 	carg1 = C.GtkEntryIconPosition(iconPos)
@@ -88479,7 +88745,7 @@ func (entry *EntryInstance) GetIconStorageType(iconPos EntryIconPosition) ImageT
 func (entry *EntryInstance) GetIconTooltipMarkup(iconPos EntryIconPosition) string {
 	var carg0 *C.GtkEntry            // in, none, converted
 	var carg1 C.GtkEntryIconPosition // in, none, casted
-	var cret  *C.char                // return, full, string, casted *C.gchar, nullable
+	var cret  *C.char                // return, full, string, nullable-string
 
 	carg0 = (*C.GtkEntry)(UnsafeEntryToGlibNone(entry))
 	carg1 = C.GtkEntryIconPosition(iconPos)
@@ -88513,7 +88779,7 @@ func (entry *EntryInstance) GetIconTooltipMarkup(iconPos EntryIconPosition) stri
 func (entry *EntryInstance) GetIconTooltipText(iconPos EntryIconPosition) string {
 	var carg0 *C.GtkEntry            // in, none, converted
 	var carg1 C.GtkEntryIconPosition // in, none, casted
-	var cret  *C.char                // return, full, string, casted *C.gchar, nullable
+	var cret  *C.char                // return, full, string, nullable-string
 
 	carg0 = (*C.GtkEntry)(UnsafeEntryToGlibNone(entry))
 	carg1 = C.GtkEntryIconPosition(iconPos)
@@ -88613,7 +88879,7 @@ func (entry *EntryInstance) GetInvisibleChar() uint32 {
 // See [method@Gtk.Entry.set_max_length].
 func (entry *EntryInstance) GetMaxLength() int32 {
 	var carg0 *C.GtkEntry // in, none, converted
-	var cret  C.int       // return, none, casted, casted C.gint
+	var cret  C.int       // return, none, casted
 
 	carg0 = (*C.GtkEntry)(UnsafeEntryToGlibNone(entry))
 
@@ -88662,7 +88928,7 @@ func (entry *EntryInstance) GetOverwriteMode() bool {
 // is empty and unfocused
 func (entry *EntryInstance) GetPlaceholderText() string {
 	var carg0 *C.GtkEntry // in, none, converted
-	var cret  *C.char     // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char     // return, none, string, nullable-string
 
 	carg0 = (*C.GtkEntry)(UnsafeEntryToGlibNone(entry))
 
@@ -88689,7 +88955,7 @@ func (entry *EntryInstance) GetPlaceholderText() string {
 // See [method@Gtk.Entry.set_progress_fraction].
 func (entry *EntryInstance) GetProgressFraction() float64 {
 	var carg0 *C.GtkEntry // in, none, converted
-	var cret  C.double    // return, none, casted, casted C.gdouble
+	var cret  C.double    // return, none, casted
 
 	carg0 = (*C.GtkEntry)(UnsafeEntryToGlibNone(entry))
 
@@ -88713,7 +88979,7 @@ func (entry *EntryInstance) GetProgressFraction() float64 {
 // gtk_entry_set_progress_pulse_step().
 func (entry *EntryInstance) GetProgressPulseStep() float64 {
 	var carg0 *C.GtkEntry // in, none, converted
-	var cret  C.double    // return, none, casted, casted C.gdouble
+	var cret  C.double    // return, none, casted
 
 	carg0 = (*C.GtkEntry)(UnsafeEntryToGlibNone(entry))
 
@@ -88911,7 +89177,7 @@ func (entry *EntryInstance) SetActivatesDefault(setting bool) {
 // See also: [property@Gtk.Editable:xalign]
 func (entry *EntryInstance) SetAlignment(xalign float32) {
 	var carg0 *C.GtkEntry // in, none, converted
-	var carg1 C.float     // in, none, casted, casted C.gfloat
+	var carg1 C.float     // in, none, casted
 
 	carg0 = (*C.GtkEntry)(UnsafeEntryToGlibNone(entry))
 	carg1 = C.float(xalign)
@@ -89343,7 +89609,7 @@ func (entry *EntryInstance) SetInvisibleChar(ch uint32) {
 // calling [method@Gtk.EntryBuffer.set_max_length] on it.
 func (entry *EntryInstance) SetMaxLength(max int32) {
 	var carg0 *C.GtkEntry // in, none, converted
-	var carg1 C.int       // in, none, casted, casted C.gint
+	var carg1 C.int       // in, none, casted
 
 	carg0 = (*C.GtkEntry)(UnsafeEntryToGlibNone(entry))
 	carg1 = C.int(max)
@@ -89411,7 +89677,7 @@ func (entry *EntryInstance) SetPlaceholderText(text string) {
 // The fraction should be between 0.0 and 1.0, inclusive.
 func (entry *EntryInstance) SetProgressFraction(fraction float64) {
 	var carg0 *C.GtkEntry // in, none, converted
-	var carg1 C.double    // in, none, casted, casted C.gdouble
+	var carg1 C.double    // in, none, casted
 
 	carg0 = (*C.GtkEntry)(UnsafeEntryToGlibNone(entry))
 	carg1 = C.double(fraction)
@@ -89434,7 +89700,7 @@ func (entry *EntryInstance) SetProgressFraction(fraction float64) {
 // the progress.
 func (entry *EntryInstance) SetProgressPulseStep(fraction float64) {
 	var carg0 *C.GtkEntry // in, none, converted
-	var carg1 C.double    // in, none, casted, casted C.gdouble
+	var carg1 C.double    // in, none, casted
 
 	carg0 = (*C.GtkEntry)(UnsafeEntryToGlibNone(entry))
 	carg1 = C.double(fraction)
@@ -89544,7 +89810,7 @@ type EntryOverrides[Instance Entry] struct {
 	// WidgetOverrides allows you to override virtual methods from the parent class Widget
 	WidgetOverrides[Instance]
 
-	// Activate allows you to override the implementation of the virtual method activate.
+	// // Activate allows you to override the implementation of the virtual method activate.
 	//
 	// Class handler for the `GtkEntry::activate` signal. The default
 	//   implementation activates the gtk.activate-default action.
@@ -89575,7 +89841,7 @@ func UnsafeApplyEntryOverrides[Instance Entry](gclass unsafe.Pointer, overrides 
 }
 
 // ParentActivate calls the default implementations of the activate virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
 //
 // Class handler for the `GtkEntry::activate` signal. The default
 //   implementation activates the gtk.activate-default action.
@@ -89642,11 +89908,11 @@ func unsafeWrapEveryFilter(base *gobject.ObjectInstance) *EveryFilterInstance {
 				ObjectInstance: *base,
 			},
 			ListModelInstance: gio.ListModelInstance{
-				ObjectInstance: *base,
+				Instance: *base,
 			},
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -89966,13 +90232,13 @@ func unsafeWrapExpander(base *gobject.ObjectInstance) *ExpanderInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -90145,7 +90411,7 @@ func (expander *ExpanderInstance) GetExpanded() bool {
 // container.
 func (expander *ExpanderInstance) GetLabel() string {
 	var carg0 *C.GtkExpander // in, none, converted
-	var cret  *C.char        // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char        // return, none, string, nullable-string
 
 	carg0 = (*C.GtkExpander)(UnsafeExpanderToGlibNone(expander))
 
@@ -90574,7 +90840,7 @@ func unsafeWrapFileFilter(base *gobject.ObjectInstance) *FileFilterInstance {
 			ObjectInstance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -90653,7 +90919,7 @@ func NewFileFilter() FileFilter {
 // Adds a rule allowing a given mime type to @filter.
 func (filter *FileFilterInstance) AddMIMEType(mimeType string) {
 	var carg0 *C.GtkFileFilter // in, none, converted
-	var carg1 *C.char          // in, none, string, casted *C.gchar
+	var carg1 *C.char          // in, none, string
 
 	carg0 = (*C.GtkFileFilter)(UnsafeFileFilterToGlibNone(filter))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(mimeType)))
@@ -90677,7 +90943,7 @@ func (filter *FileFilterInstance) AddMIMEType(mimeType string) {
 // other platforms, it doesn't.
 func (filter *FileFilterInstance) AddPattern(pattern string) {
 	var carg0 *C.GtkFileFilter // in, none, converted
-	var carg1 *C.char          // in, none, string, casted *C.gchar
+	var carg1 *C.char          // in, none, string
 
 	carg0 = (*C.GtkFileFilter)(UnsafeFileFilterToGlibNone(filter))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(pattern)))
@@ -90719,7 +90985,7 @@ func (filter *FileFilterInstance) AddPixbufFormats() {
 // are *always* case-insensitive.
 func (filter *FileFilterInstance) AddSuffix(suffix string) {
 	var carg0 *C.GtkFileFilter // in, none, converted
-	var carg1 *C.char          // in, none, string, casted *C.gchar
+	var carg1 *C.char          // in, none, string
 
 	carg0 = (*C.GtkFileFilter)(UnsafeFileFilterToGlibNone(filter))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(suffix)))
@@ -90755,7 +91021,7 @@ func (filter *FileFilterInstance) GetAttributes() []string {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (const char**)")
+	panic("unimplemented conversion of []string (**C.char)")
 
 	return goret
 }
@@ -90771,7 +91037,7 @@ func (filter *FileFilterInstance) GetAttributes() []string {
 // See [method@Gtk.FileFilter.set_name].
 func (filter *FileFilterInstance) GetName() string {
 	var carg0 *C.GtkFileFilter // in, none, converted
-	var cret  *C.char          // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char          // return, none, string, nullable-string
 
 	carg0 = (*C.GtkFileFilter)(UnsafeFileFilterToGlibNone(filter))
 
@@ -90955,13 +91221,13 @@ func unsafeWrapFixed(base *gobject.ObjectInstance) *FixedInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -91036,8 +91302,8 @@ func NewFixed() Widget {
 func (fixed *FixedInstance) GetChildPosition(widget Widget) (float64, float64) {
 	var carg0 *C.GtkFixed  // in, none, converted
 	var carg1 *C.GtkWidget // in, none, converted
-	var carg2 C.double     // out, full, casted, casted C.gdouble
-	var carg3 C.double     // out, full, casted, casted C.gdouble
+	var carg2 C.double     // out, full, casted
+	var carg3 C.double     // out, full, casted
 
 	carg0 = (*C.GtkFixed)(UnsafeFixedToGlibNone(fixed))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
@@ -91101,8 +91367,8 @@ func (fixed *FixedInstance) GetChildTransform(widget Widget) *gsk.Transform {
 func (fixed *FixedInstance) Move(widget Widget, x float64, y float64) {
 	var carg0 *C.GtkFixed  // in, none, converted
 	var carg1 *C.GtkWidget // in, none, converted
-	var carg2 C.double     // in, none, casted, casted C.gdouble
-	var carg3 C.double     // in, none, casted, casted C.gdouble
+	var carg2 C.double     // in, none, casted
+	var carg3 C.double     // in, none, casted
 
 	carg0 = (*C.GtkFixed)(UnsafeFixedToGlibNone(fixed))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
@@ -91128,8 +91394,8 @@ func (fixed *FixedInstance) Move(widget Widget, x float64, y float64) {
 func (fixed *FixedInstance) Put(widget Widget, x float64, y float64) {
 	var carg0 *C.GtkFixed  // in, none, converted
 	var carg1 *C.GtkWidget // in, none, converted
-	var carg2 C.double     // in, none, casted, casted C.gdouble
-	var carg3 C.double     // in, none, casted, casted C.gdouble
+	var carg2 C.double     // in, none, casted
+	var carg3 C.double     // in, none, casted
 
 	carg0 = (*C.GtkFixed)(UnsafeFixedToGlibNone(fixed))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
@@ -92035,16 +92301,16 @@ func unsafeWrapFlowBox(base *gobject.ObjectInstance) *FlowBoxInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		OrientableInstance: OrientableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -92163,7 +92429,7 @@ func (box *FlowBoxInstance) GetActivateOnSingleClick() bool {
 // Gets the nth child in the @box.
 func (box *FlowBoxInstance) GetChildAtIndex(idx int32) FlowBoxChild {
 	var carg0 *C.GtkFlowBox      // in, none, converted
-	var carg1 C.int              // in, none, casted, casted C.gint
+	var carg1 C.int              // in, none, casted
 	var cret  *C.GtkFlowBoxChild // return, none, converted, nullable
 
 	carg0 = (*C.GtkFlowBox)(UnsafeFlowBoxToGlibNone(box))
@@ -92198,8 +92464,8 @@ func (box *FlowBoxInstance) GetChildAtIndex(idx int32) FlowBoxChild {
 // Both @x and @y are assumed to be relative to the origin of @box.
 func (box *FlowBoxInstance) GetChildAtPos(x int32, y int32) FlowBoxChild {
 	var carg0 *C.GtkFlowBox      // in, none, converted
-	var carg1 C.int              // in, none, casted, casted C.gint
-	var carg2 C.int              // in, none, casted, casted C.gint
+	var carg1 C.int              // in, none, casted
+	var carg2 C.int              // in, none, casted
 	var cret  *C.GtkFlowBoxChild // return, none, converted, nullable
 
 	carg0 = (*C.GtkFlowBox)(UnsafeFlowBoxToGlibNone(box))
@@ -92407,7 +92673,7 @@ func (box *FlowBoxInstance) GetSelectionMode() SelectionMode {
 func (box *FlowBoxInstance) Insert(widget Widget, position int32) {
 	var carg0 *C.GtkFlowBox // in, none, converted
 	var carg1 *C.GtkWidget  // in, none, converted
-	var carg2 C.int         // in, none, casted, casted C.gint
+	var carg2 C.int         // in, none, casted
 
 	carg0 = (*C.GtkFlowBox)(UnsafeFlowBoxToGlibNone(box))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(widget))
@@ -93056,7 +93322,7 @@ type FlowBoxChild interface {
 	// chain up virtual methods:
 
 	// ParentActivate calls the default implementations of the activate virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
 	ParentActivate()
 }
 
@@ -93068,13 +93334,13 @@ func unsafeWrapFlowBoxChild(base *gobject.ObjectInstance) *FlowBoxChildInstance 
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -93197,7 +93463,7 @@ func (self *FlowBoxChildInstance) GetChild() Widget {
 // Gets the current index of the @child in its `GtkFlowBox` container.
 func (child *FlowBoxChildInstance) GetIndex() int32 {
 	var carg0 *C.GtkFlowBoxChild // in, none, converted
-	var cret  C.int              // return, none, casted, casted C.gint
+	var cret  C.int              // return, none, casted
 
 	carg0 = (*C.GtkFlowBoxChild)(UnsafeFlowBoxChildToGlibNone(child))
 
@@ -93279,7 +93545,7 @@ type FlowBoxChildOverrides[Instance FlowBoxChild] struct {
 	// WidgetOverrides allows you to override virtual methods from the parent class Widget
 	WidgetOverrides[Instance]
 
-	// Activate allows you to override the implementation of the virtual method activate.
+	// // Activate allows you to override the implementation of the virtual method activate.
 	Activate func(Instance)
 }
 
@@ -93307,7 +93573,7 @@ func UnsafeApplyFlowBoxChildOverrides[Instance FlowBoxChild](gclass unsafe.Point
 }
 
 // ParentActivate calls the default implementations of the activate virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
 func (child *FlowBoxChildInstance) ParentActivate() {
 	var carg0 *C.GtkFlowBoxChild
 
@@ -93532,13 +93798,13 @@ func unsafeWrapFontDialogButton(base *gobject.ObjectInstance) *FontDialogButtonI
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -93680,7 +93946,7 @@ func (self *FontDialogButtonInstance) GetFontDesc() *pango.FontDescription {
 // `GTK_FONT_LEVEL_FEATURES`.
 func (self *FontDialogButtonInstance) GetFontFeatures() string {
 	var carg0 *C.GtkFontDialogButton // in, none, converted
-	var cret  *C.char                // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char                // return, none, string, nullable-string
 
 	carg0 = (*C.GtkFontDialogButton)(UnsafeFontDialogButtonToGlibNone(self))
 
@@ -94140,7 +94406,8 @@ type Frame interface {
 	// chain up virtual methods:
 
 	// ParentComputeChildAllocation calls the default implementations of the compute_child_allocation virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- allocation *Allocation 
@@ -94155,13 +94422,13 @@ func unsafeWrapFrame(base *gobject.ObjectInstance) *FrameInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -94268,7 +94535,7 @@ func (frame *FrameInstance) GetChild() Widget {
 // is returned.
 func (frame *FrameInstance) GetLabel() string {
 	var carg0 *C.GtkFrame // in, none, converted
-	var cret  *C.char     // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char     // return, none, string, nullable-string
 
 	carg0 = (*C.GtkFrame)(UnsafeFrameToGlibNone(frame))
 
@@ -94293,7 +94560,7 @@ func (frame *FrameInstance) GetLabel() string {
 // Retrieves the X alignment of the frame’s label.
 func (frame *FrameInstance) GetLabelAlign() float32 {
 	var carg0 *C.GtkFrame // in, none, converted
-	var cret  C.float     // return, none, casted, casted C.gfloat
+	var cret  C.float     // return, none, casted
 
 	carg0 = (*C.GtkFrame)(UnsafeFrameToGlibNone(frame))
 
@@ -94389,7 +94656,7 @@ func (frame *FrameInstance) SetLabel(label string) {
 // The default value for a newly created frame is 0.0.
 func (frame *FrameInstance) SetLabelAlign(xalign float32) {
 	var carg0 *C.GtkFrame // in, none, converted
-	var carg1 C.float     // in, none, casted, casted C.gfloat
+	var carg1 C.float     // in, none, casted
 
 	carg0 = (*C.GtkFrame)(UnsafeFrameToGlibNone(frame))
 	carg1 = C.float(xalign)
@@ -94429,7 +94696,8 @@ type FrameOverrides[Instance Frame] struct {
 	// WidgetOverrides allows you to override virtual methods from the parent class Widget
 	WidgetOverrides[Instance]
 
-	// ComputeChildAllocation allows you to override the implementation of the virtual method compute_child_allocation.
+	// // ComputeChildAllocation allows you to override the implementation of the virtual method compute_child_allocation.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- allocation *Allocation 
@@ -94455,7 +94723,7 @@ func UnsafeApplyFrameOverrides[Instance Frame](gclass unsafe.Pointer, overrides 
 				frame = UnsafeFrameFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				_ = allocation
 				_ = carg1
-				panic("unimplemented conversion of *Allocation (GtkAllocation*)")
+				panic("unimplemented conversion of *Allocation (*C.GtkAllocation)")
 
 				overrides.ComputeChildAllocation(frame, allocation)
 			},
@@ -94464,7 +94732,8 @@ func UnsafeApplyFrameOverrides[Instance Frame](gclass unsafe.Pointer, overrides 
 }
 
 // ParentComputeChildAllocation calls the default implementations of the compute_child_allocation virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- allocation *Allocation 
@@ -94476,7 +94745,7 @@ func (frame *FrameInstance) ParentComputeChildAllocation(allocation *Allocation)
 
 	_ = allocation
 	_ = carg1
-	panic("unimplemented conversion of *Allocation (GtkAllocation*)")
+	panic("unimplemented conversion of *Allocation (*C.GtkAllocation)")
 
 	C._gotk4_gtk4_Frame_virtual_compute_child_allocation(unsafe.Pointer(parentclass.compute_child_allocation), carg0, carg1)
 	runtime.KeepAlive(frame)
@@ -94856,7 +95125,8 @@ type GLArea interface {
 	// chain up virtual methods:
 
 	// ParentRender calls the default implementations of the render virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- _context gdk.GLContext 
@@ -94868,7 +95138,8 @@ type GLArea interface {
 	// class closure for the `GtkGLArea::render` signal
 	ParentRender(_context gdk.GLContext) bool
 	// ParentResize calls the default implementations of the resize virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- width int32 
@@ -94886,13 +95157,13 @@ func unsafeWrapGLArea(base *gobject.ObjectInstance) *GLAreaInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -95156,8 +95427,8 @@ func (area *GLAreaInstance) GetHasStencilBuffer() bool {
 // See [method@Gtk.GLArea.set_required_version].
 func (area *GLAreaInstance) GetRequiredVersion() (int32, int32) {
 	var carg0 *C.GtkGLArea // in, none, converted
-	var carg1 C.int        // out, full, casted, casted C.gint
-	var carg2 C.int        // out, full, casted, casted C.gint
+	var carg1 C.int        // out, full, casted
+	var carg2 C.int        // out, full, casted
 
 	carg0 = (*C.GtkGLArea)(UnsafeGLAreaToGlibNone(area))
 
@@ -95353,8 +95624,8 @@ func (area *GLAreaInstance) SetHasStencilBuffer(hasStencilBuffer bool) {
 // This function must be called before the area has been realized.
 func (area *GLAreaInstance) SetRequiredVersion(major int32, minor int32) {
 	var carg0 *C.GtkGLArea // in, none, converted
-	var carg1 C.int        // in, none, casted, casted C.gint
-	var carg2 C.int        // in, none, casted, casted C.gint
+	var carg1 C.int        // in, none, casted
+	var carg2 C.int        // in, none, casted
 
 	carg0 = (*C.GtkGLArea)(UnsafeGLAreaToGlibNone(area))
 	carg1 = C.int(major)
@@ -95414,7 +95685,8 @@ type GLAreaOverrides[Instance GLArea] struct {
 	// WidgetOverrides allows you to override virtual methods from the parent class Widget
 	WidgetOverrides[Instance]
 
-	// Render allows you to override the implementation of the virtual method render.
+	// // Render allows you to override the implementation of the virtual method render.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- _context gdk.GLContext 
@@ -95425,7 +95697,8 @@ type GLAreaOverrides[Instance GLArea] struct {
 	//
 	// class closure for the `GtkGLArea::render` signal
 	Render func(Instance, gdk.GLContext) bool
-	// Resize allows you to override the implementation of the virtual method resize.
+	// // Resize allows you to override the implementation of the virtual method resize.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- width int32 
@@ -95473,8 +95746,8 @@ func UnsafeApplyGLAreaOverrides[Instance GLArea](gclass unsafe.Pointer, override
 			"_gotk4_gtk4_GLArea_resize",
 			func(carg0 *C.GtkGLArea, carg1 C.int, carg2 C.int) {
 				var area   Instance // go GtkGLArea subclass
-				var width  int32    // in, none, casted, casted C.gint
-				var height int32    // in, none, casted, casted C.gint
+				var width  int32    // in, none, casted
+				var height int32    // in, none, casted
 
 				area = UnsafeGLAreaFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				width = int32(carg1)
@@ -95487,7 +95760,8 @@ func UnsafeApplyGLAreaOverrides[Instance GLArea](gclass unsafe.Pointer, override
 }
 
 // ParentRender calls the default implementations of the render virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- _context gdk.GLContext 
@@ -95520,7 +95794,8 @@ func (area *GLAreaInstance) ParentRender(_context gdk.GLContext) bool {
 }
 
 // ParentResize calls the default implementations of the resize virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- width int32 
@@ -95529,8 +95804,8 @@ func (area *GLAreaInstance) ParentRender(_context gdk.GLContext) bool {
 // class closeure for the `GtkGLArea::resize` signal
 func (area *GLAreaInstance) ParentResize(width int32, height int32) {
 	var carg0 *C.GtkGLArea
-	var carg1 C.int // in, none, casted, casted C.gint
-	var carg2 C.int // in, none, casted, casted C.gint
+	var carg1 C.int // in, none, casted
+	var carg2 C.int // in, none, casted
 
 	parentclass := (*C.GtkGLAreaClass)(classdata.PeekParentClass(UnsafeGLAreaToGlibNone(area)))
 
@@ -95865,8 +96140,8 @@ func NewGestureDrag() Gesture {
 // as an offset to the starting drag point.
 func (gesture *GestureDragInstance) GetOffset() (float64, float64, bool) {
 	var carg0 *C.GtkGestureDrag // in, none, converted
-	var carg1 C.double          // out, full, casted, casted C.gdouble
-	var carg2 C.double          // out, full, casted, casted C.gdouble
+	var carg1 C.double          // out, full, casted
+	var carg2 C.double          // out, full, casted
 	var cret  C.gboolean        // return
 
 	carg0 = (*C.GtkGestureDrag)(UnsafeGestureDragToGlibNone(gesture))
@@ -95902,8 +96177,8 @@ func (gesture *GestureDragInstance) GetOffset() (float64, float64, bool) {
 // in widget-relative coordinates.
 func (gesture *GestureDragInstance) GetStartPoint() (float64, float64, bool) {
 	var carg0 *C.GtkGestureDrag // in, none, converted
-	var carg1 C.double          // out, full, casted, casted C.gdouble
-	var carg2 C.double          // out, full, casted, casted C.gdouble
+	var carg1 C.double          // out, full, casted
+	var carg2 C.double          // out, full, casted
 	var cret  C.gboolean        // return
 
 	carg0 = (*C.GtkGestureDrag)(UnsafeGestureDragToGlibNone(gesture))
@@ -96078,7 +96353,7 @@ func NewGestureLongPress() Gesture {
 // Returns the delay factor.
 func (gesture *GestureLongPressInstance) GetDelayFactor() float64 {
 	var carg0 *C.GtkGestureLongPress // in, none, converted
-	var cret  C.double               // return, none, casted, casted C.gdouble
+	var cret  C.double               // return, none, casted
 
 	carg0 = (*C.GtkGestureLongPress)(UnsafeGestureLongPressToGlibNone(gesture))
 
@@ -96104,7 +96379,7 @@ func (gesture *GestureLongPressInstance) GetDelayFactor() float64 {
 // Valid values are in the range [0.5..2.0].
 func (gesture *GestureLongPressInstance) SetDelayFactor(delayFactor float64) {
 	var carg0 *C.GtkGestureLongPress // in, none, converted
-	var carg1 C.double               // in, none, casted, casted C.gdouble
+	var carg1 C.double               // in, none, casted
 
 	carg0 = (*C.GtkGestureLongPress)(UnsafeGestureLongPressToGlibNone(gesture))
 	carg1 = C.double(delayFactor)
@@ -96436,13 +96711,13 @@ func unsafeWrapGraphicsOffload(base *gobject.ObjectInstance) *GraphicsOffloadIns
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -97070,16 +97345,16 @@ func unsafeWrapGrid(base *gobject.ObjectInstance) *GridInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		OrientableInstance: OrientableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -97154,10 +97429,10 @@ func NewGrid() Widget {
 func (grid *GridInstance) Attach(child Widget, column int32, row int32, width int32, height int32) {
 	var carg0 *C.GtkGrid   // in, none, converted
 	var carg1 *C.GtkWidget // in, none, converted
-	var carg2 C.int        // in, none, casted, casted C.gint
-	var carg3 C.int        // in, none, casted, casted C.gint
-	var carg4 C.int        // in, none, casted, casted C.gint
-	var carg5 C.int        // in, none, casted, casted C.gint
+	var carg2 C.int        // in, none, casted
+	var carg3 C.int        // in, none, casted
+	var carg4 C.int        // in, none, casted
+	var carg5 C.int        // in, none, casted
 
 	carg0 = (*C.GtkGrid)(UnsafeGridToGlibNone(grid))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(child))
@@ -97200,8 +97475,8 @@ func (grid *GridInstance) AttachNextTo(child Widget, sibling Widget, side Positi
 	var carg1 *C.GtkWidget      // in, none, converted
 	var carg2 *C.GtkWidget      // in, none, converted, nullable
 	var carg3 C.GtkPositionType // in, none, casted
-	var carg4 C.int             // in, none, casted, casted C.gint
-	var carg5 C.int             // in, none, casted, casted C.gint
+	var carg4 C.int             // in, none, casted
+	var carg5 C.int             // in, none, casted
 
 	carg0 = (*C.GtkGrid)(UnsafeGridToGlibNone(grid))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(child))
@@ -97230,7 +97505,7 @@ func (grid *GridInstance) AttachNextTo(child Widget, sibling Widget, side Positi
 // Returns which row defines the global baseline of @grid.
 func (grid *GridInstance) GetBaselineRow() int32 {
 	var carg0 *C.GtkGrid // in, none, converted
-	var cret  C.int      // return, none, casted, casted C.gint
+	var cret  C.int      // return, none, casted
 
 	carg0 = (*C.GtkGrid)(UnsafeGridToGlibNone(grid))
 
@@ -97259,8 +97534,8 @@ func (grid *GridInstance) GetBaselineRow() int32 {
 // cell at @column, @row.
 func (grid *GridInstance) GetChildAt(column int32, row int32) Widget {
 	var carg0 *C.GtkGrid   // in, none, converted
-	var carg1 C.int        // in, none, casted, casted C.gint
-	var carg2 C.int        // in, none, casted, casted C.gint
+	var carg1 C.int        // in, none, casted
+	var carg2 C.int        // in, none, casted
 	var cret  *C.GtkWidget // return, none, converted, nullable
 
 	carg0 = (*C.GtkGrid)(UnsafeGridToGlibNone(grid))
@@ -97344,7 +97619,7 @@ func (grid *GridInstance) GetColumnSpacing() uint {
 // See [method@Gtk.Grid.set_row_baseline_position].
 func (grid *GridInstance) GetRowBaselinePosition(row int32) BaselinePosition {
 	var carg0 *C.GtkGrid            // in, none, converted
-	var carg1 C.int                 // in, none, casted, casted C.gint
+	var carg1 C.int                 // in, none, casted
 	var cret  C.GtkBaselinePosition // return, none, casted
 
 	carg0 = (*C.GtkGrid)(UnsafeGridToGlibNone(grid))
@@ -97422,7 +97697,7 @@ func (grid *GridInstance) GetRowSpacing() uint {
 // position are grown to span the new column.
 func (grid *GridInstance) InsertColumn(position int32) {
 	var carg0 *C.GtkGrid // in, none, converted
-	var carg1 C.int      // in, none, casted, casted C.gint
+	var carg1 C.int      // in, none, casted
 
 	carg0 = (*C.GtkGrid)(UnsafeGridToGlibNone(grid))
 	carg1 = C.int(position)
@@ -97474,7 +97749,7 @@ func (grid *GridInstance) InsertNextTo(sibling Widget, side PositionType) {
 // position are grown to span the new row.
 func (grid *GridInstance) InsertRow(position int32) {
 	var carg0 *C.GtkGrid // in, none, converted
-	var carg1 C.int      // in, none, casted, casted C.gint
+	var carg1 C.int      // in, none, casted
 
 	carg0 = (*C.GtkGrid)(UnsafeGridToGlibNone(grid))
 	carg1 = C.int(position)
@@ -97501,10 +97776,10 @@ func (grid *GridInstance) InsertRow(position int32) {
 func (grid *GridInstance) QueryChild(child Widget) (int32, int32, int32, int32) {
 	var carg0 *C.GtkGrid   // in, none, converted
 	var carg1 *C.GtkWidget // in, none, converted
-	var carg2 C.int        // out, full, casted, casted C.gint
-	var carg3 C.int        // out, full, casted, casted C.gint
-	var carg4 C.int        // out, full, casted, casted C.gint
-	var carg5 C.int        // out, full, casted, casted C.gint
+	var carg2 C.int        // out, full, casted
+	var carg3 C.int        // out, full, casted
+	var carg4 C.int        // out, full, casted
+	var carg5 C.int        // out, full, casted
 
 	carg0 = (*C.GtkGrid)(UnsafeGridToGlibNone(grid))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(child))
@@ -97562,7 +97837,7 @@ func (grid *GridInstance) Remove(child Widget) {
 // are moved to the left.
 func (grid *GridInstance) RemoveColumn(position int32) {
 	var carg0 *C.GtkGrid // in, none, converted
-	var carg1 C.int      // in, none, casted, casted C.gint
+	var carg1 C.int      // in, none, casted
 
 	carg0 = (*C.GtkGrid)(UnsafeGridToGlibNone(grid))
 	carg1 = C.int(position)
@@ -97586,7 +97861,7 @@ func (grid *GridInstance) RemoveColumn(position int32) {
 // are moved up.
 func (grid *GridInstance) RemoveRow(position int32) {
 	var carg0 *C.GtkGrid // in, none, converted
-	var carg1 C.int      // in, none, casted, casted C.gint
+	var carg1 C.int      // in, none, casted
 
 	carg0 = (*C.GtkGrid)(UnsafeGridToGlibNone(grid))
 	carg1 = C.int(position)
@@ -97609,7 +97884,7 @@ func (grid *GridInstance) RemoveRow(position int32) {
 // parent of the @grid.
 func (grid *GridInstance) SetBaselineRow(row int32) {
 	var carg0 *C.GtkGrid // in, none, converted
-	var carg1 C.int      // in, none, casted, casted C.gint
+	var carg1 C.int      // in, none, casted
 
 	carg0 = (*C.GtkGrid)(UnsafeGridToGlibNone(grid))
 	carg1 = C.int(row)
@@ -97672,7 +97947,7 @@ func (grid *GridInstance) SetColumnSpacing(spacing uint) {
 // The default baseline position is %GTK_BASELINE_POSITION_CENTER.
 func (grid *GridInstance) SetRowBaselinePosition(row int32, pos BaselinePosition) {
 	var carg0 *C.GtkGrid            // in, none, converted
-	var carg1 C.int                 // in, none, casted, casted C.gint
+	var carg1 C.int                 // in, none, casted
 	var carg2 C.GtkBaselinePosition // in, none, casted
 
 	carg0 = (*C.GtkGrid)(UnsafeGridToGlibNone(grid))
@@ -97977,7 +98252,7 @@ func NewGridLayout() LayoutManager {
 // Retrieves the row set with gtk_grid_layout_set_baseline_row().
 func (grid *GridLayoutInstance) GetBaselineRow() int32 {
 	var carg0 *C.GtkGridLayout // in, none, converted
-	var cret  C.int            // return, none, casted, casted C.gint
+	var cret  C.int            // return, none, casted
 
 	carg0 = (*C.GtkGridLayout)(UnsafeGridLayoutToGlibNone(grid))
 
@@ -98057,7 +98332,7 @@ func (grid *GridLayoutInstance) GetColumnSpacing() uint {
 // is returned.
 func (grid *GridLayoutInstance) GetRowBaselinePosition(row int32) BaselinePosition {
 	var carg0 *C.GtkGridLayout      // in, none, converted
-	var carg1 C.int                 // in, none, casted, casted C.gint
+	var carg1 C.int                 // in, none, casted
 	var cret  C.GtkBaselinePosition // return, none, casted
 
 	carg0 = (*C.GtkGridLayout)(UnsafeGridLayoutToGlibNone(grid))
@@ -98135,7 +98410,7 @@ func (grid *GridLayoutInstance) GetRowSpacing() uint {
 // parent of the @grid.
 func (grid *GridLayoutInstance) SetBaselineRow(row int32) {
 	var carg0 *C.GtkGridLayout // in, none, converted
-	var carg1 C.int            // in, none, casted, casted C.gint
+	var carg1 C.int            // in, none, casted
 
 	carg0 = (*C.GtkGridLayout)(UnsafeGridLayoutToGlibNone(grid))
 	carg1 = C.int(row)
@@ -98196,7 +98471,7 @@ func (grid *GridLayoutInstance) SetColumnSpacing(spacing uint) {
 // grid, in case that row is assigned more space than is requested.
 func (grid *GridLayoutInstance) SetRowBaselinePosition(row int32, pos BaselinePosition) {
 	var carg0 *C.GtkGridLayout      // in, none, converted
-	var carg1 C.int                 // in, none, casted, casted C.gint
+	var carg1 C.int                 // in, none, casted
 	var carg2 C.GtkBaselinePosition // in, none, casted
 
 	carg0 = (*C.GtkGridLayout)(UnsafeGridLayoutToGlibNone(grid))
@@ -98422,7 +98697,7 @@ func UnsafeGridLayoutChildToGlibFull(c GridLayoutChild) unsafe.Pointer {
 // Retrieves the column number to which @child attaches its left side.
 func (child *GridLayoutChildInstance) GetColumn() int32 {
 	var carg0 *C.GtkGridLayoutChild // in, none, converted
-	var cret  C.int                 // return, none, casted, casted C.gint
+	var cret  C.int                 // return, none, casted
 
 	carg0 = (*C.GtkGridLayoutChild)(UnsafeGridLayoutChildToGlibNone(child))
 
@@ -98445,7 +98720,7 @@ func (child *GridLayoutChildInstance) GetColumn() int32 {
 // Retrieves the number of columns that @child spans to.
 func (child *GridLayoutChildInstance) GetColumnSpan() int32 {
 	var carg0 *C.GtkGridLayoutChild // in, none, converted
-	var cret  C.int                 // return, none, casted, casted C.gint
+	var cret  C.int                 // return, none, casted
 
 	carg0 = (*C.GtkGridLayoutChild)(UnsafeGridLayoutChildToGlibNone(child))
 
@@ -98468,7 +98743,7 @@ func (child *GridLayoutChildInstance) GetColumnSpan() int32 {
 // Retrieves the row number to which @child attaches its top side.
 func (child *GridLayoutChildInstance) GetRow() int32 {
 	var carg0 *C.GtkGridLayoutChild // in, none, converted
-	var cret  C.int                 // return, none, casted, casted C.gint
+	var cret  C.int                 // return, none, casted
 
 	carg0 = (*C.GtkGridLayoutChild)(UnsafeGridLayoutChildToGlibNone(child))
 
@@ -98491,7 +98766,7 @@ func (child *GridLayoutChildInstance) GetRow() int32 {
 // Retrieves the number of rows that @child spans to.
 func (child *GridLayoutChildInstance) GetRowSpan() int32 {
 	var carg0 *C.GtkGridLayoutChild // in, none, converted
-	var cret  C.int                 // return, none, casted, casted C.gint
+	var cret  C.int                 // return, none, casted
 
 	carg0 = (*C.GtkGridLayoutChild)(UnsafeGridLayoutChildToGlibNone(child))
 
@@ -98514,7 +98789,7 @@ func (child *GridLayoutChildInstance) GetRowSpan() int32 {
 // Sets the column number to attach the left side of @child.
 func (child *GridLayoutChildInstance) SetColumn(column int32) {
 	var carg0 *C.GtkGridLayoutChild // in, none, converted
-	var carg1 C.int                 // in, none, casted, casted C.gint
+	var carg1 C.int                 // in, none, casted
 
 	carg0 = (*C.GtkGridLayoutChild)(UnsafeGridLayoutChildToGlibNone(child))
 	carg1 = C.int(column)
@@ -98533,7 +98808,7 @@ func (child *GridLayoutChildInstance) SetColumn(column int32) {
 // Sets the number of columns @child spans to.
 func (child *GridLayoutChildInstance) SetColumnSpan(span int32) {
 	var carg0 *C.GtkGridLayoutChild // in, none, converted
-	var carg1 C.int                 // in, none, casted, casted C.gint
+	var carg1 C.int                 // in, none, casted
 
 	carg0 = (*C.GtkGridLayoutChild)(UnsafeGridLayoutChildToGlibNone(child))
 	carg1 = C.int(span)
@@ -98552,7 +98827,7 @@ func (child *GridLayoutChildInstance) SetColumnSpan(span int32) {
 // Sets the row to place @child in.
 func (child *GridLayoutChildInstance) SetRow(row int32) {
 	var carg0 *C.GtkGridLayoutChild // in, none, converted
-	var carg1 C.int                 // in, none, casted, casted C.gint
+	var carg1 C.int                 // in, none, casted
 
 	carg0 = (*C.GtkGridLayoutChild)(UnsafeGridLayoutChildToGlibNone(child))
 	carg1 = C.int(row)
@@ -98571,7 +98846,7 @@ func (child *GridLayoutChildInstance) SetRow(row int32) {
 // Sets the number of rows @child spans to.
 func (child *GridLayoutChildInstance) SetRowSpan(span int32) {
 	var carg0 *C.GtkGridLayoutChild // in, none, converted
-	var carg1 C.int                 // in, none, casted, casted C.gint
+	var carg1 C.int                 // in, none, casted
 
 	carg0 = (*C.GtkGridLayoutChild)(UnsafeGridLayoutChildToGlibNone(child))
 	carg1 = C.int(span)
@@ -98832,13 +99107,13 @@ func unsafeWrapHeaderBar(base *gobject.ObjectInstance) *HeaderBarInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -98904,7 +99179,7 @@ func NewHeaderBar() Widget {
 // Gets the decoration layout of the `GtkHeaderBar`.
 func (bar *HeaderBarInstance) GetDecorationLayout() string {
 	var carg0 *C.GtkHeaderBar // in, none, converted
-	var cret  *C.char         // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char         // return, none, string, nullable-string
 
 	carg0 = (*C.GtkHeaderBar)(UnsafeHeaderBarToGlibNone(bar))
 
@@ -99338,13 +99613,13 @@ func unsafeWrapImage(base *gobject.ObjectInstance) *ImageInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -99425,7 +99700,7 @@ func NewImage() Widget {
 // of the returned image is not defined, it will be whatever
 // is appropriate for displaying the file.
 func NewImageFromFile(filename string) Widget {
-	var carg1 *C.char      // in, none, string, casted *C.gchar
+	var carg1 *C.char      // in, none, string
 	var cret  *C.GtkWidget // return, none, converted
 
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(filename)))
@@ -99566,7 +99841,7 @@ func NewImageFromPaintable(paintable gdk.Paintable) Widget {
 // the returned image is not defined, it will be whatever is
 // appropriate for displaying the file.
 func NewImageFromResource(resourcePath string) Widget {
-	var carg1 *C.char      // in, none, string, casted *C.gchar
+	var carg1 *C.char      // in, none, string
 	var cret  *C.GtkWidget // return, none, converted
 
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(resourcePath)))
@@ -99638,7 +99913,7 @@ func (image *ImageInstance) GetGIcon() gio.Icon {
 // be freed.
 func (image *ImageInstance) GetIconName() string {
 	var carg0 *C.GtkImage // in, none, converted
-	var cret  *C.char     // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char     // return, none, string, nullable-string
 
 	carg0 = (*C.GtkImage)(UnsafeImageToGlibNone(image))
 
@@ -99716,7 +99991,7 @@ func (image *ImageInstance) GetPaintable() gdk.Paintable {
 // Gets the pixel size used for named icons.
 func (image *ImageInstance) GetPixelSize() int32 {
 	var carg0 *C.GtkImage // in, none, converted
-	var cret  C.int       // return, none, casted, casted C.gint
+	var cret  C.int       // return, none, casted
 
 	carg0 = (*C.GtkImage)(UnsafeImageToGlibNone(image))
 
@@ -99904,7 +100179,7 @@ func (image *ImageInstance) SetIconSize(iconSize IconSize) {
 // of the icon size set by [method@Gtk.Image.set_from_icon_name].
 func (image *ImageInstance) SetPixelSize(pixelSize int32) {
 	var carg0 *C.GtkImage // in, none, converted
-	var carg1 C.int       // in, none, casted, casted C.gint
+	var carg1 C.int       // in, none, casted
 
 	carg0 = (*C.GtkImage)(UnsafeImageToGlibNone(image))
 	carg1 = C.int(pixelSize)
@@ -100163,16 +100438,16 @@ func unsafeWrapInscription(base *gobject.ObjectInstance) *InscriptionInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		AccessibleTextInstance: AccessibleTextInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -100374,7 +100649,7 @@ func (self *InscriptionInstance) GetNatLines() uint {
 // Gets the text that is displayed.
 func (self *InscriptionInstance) GetText() string {
 	var carg0 *C.GtkInscription // in, none, converted
-	var cret  *C.char           // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char           // return, none, string, nullable-string
 
 	carg0 = (*C.GtkInscription)(UnsafeInscriptionToGlibNone(self))
 
@@ -100449,7 +100724,7 @@ func (self *InscriptionInstance) GetWrapMode() pango.WrapMode {
 // See the [property@Gtk.Inscription:xalign] property.
 func (self *InscriptionInstance) GetXAlign() float32 {
 	var carg0 *C.GtkInscription // in, none, converted
-	var cret  C.float           // return, none, casted, casted C.gfloat
+	var cret  C.float           // return, none, casted
 
 	carg0 = (*C.GtkInscription)(UnsafeInscriptionToGlibNone(self))
 
@@ -100474,7 +100749,7 @@ func (self *InscriptionInstance) GetXAlign() float32 {
 // See the [property@Gtk.Inscription:yalign] property.
 func (self *InscriptionInstance) GetYAlign() float32 {
 	var carg0 *C.GtkInscription // in, none, converted
-	var cret  C.float           // return, none, casted, casted C.gfloat
+	var cret  C.float           // return, none, casted
 
 	carg0 = (*C.GtkInscription)(UnsafeInscriptionToGlibNone(self))
 
@@ -100690,7 +100965,7 @@ func (self *InscriptionInstance) SetWrapMode(wrapMode pango.WrapMode) {
 // See the [property@Gtk.Inscription:xalign] property.
 func (self *InscriptionInstance) SetXAlign(xalign float32) {
 	var carg0 *C.GtkInscription // in, none, converted
-	var carg1 C.float           // in, none, casted, casted C.gfloat
+	var carg1 C.float           // in, none, casted
 
 	carg0 = (*C.GtkInscription)(UnsafeInscriptionToGlibNone(self))
 	carg1 = C.float(xalign)
@@ -100711,7 +100986,7 @@ func (self *InscriptionInstance) SetXAlign(xalign float32) {
 // See the [property@Gtk.Inscription:yalign] property.
 func (self *InscriptionInstance) SetYAlign(yalign float32) {
 	var carg0 *C.GtkInscription // in, none, converted
-	var carg1 C.float           // in, none, casted, casted C.gfloat
+	var carg1 C.float           // in, none, casted
 
 	carg0 = (*C.GtkInscription)(UnsafeInscriptionToGlibNone(self))
 	carg1 = C.float(yalign)
@@ -101804,16 +102079,16 @@ func unsafeWrapLabel(base *gobject.ObjectInstance) *LabelInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		AccessibleTextInstance: AccessibleTextInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -101975,7 +102250,7 @@ func (self *LabelInstance) GetAttributes() *pango.AttrList {
 // handler or for use in a [signal@Gtk.Widget::query-tooltip] handler.
 func (self *LabelInstance) GetCurrentURI() string {
 	var carg0 *C.GtkLabel // in, none, converted
-	var cret  *C.char     // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char     // return, none, string, nullable-string
 
 	carg0 = (*C.GtkLabel)(UnsafeLabelToGlibNone(self))
 
@@ -102080,7 +102355,7 @@ func (self *LabelInstance) GetJustify() Justification {
 // mnemonics and Pango markup. (See [method@Gtk.Label.get_text]).
 func (self *LabelInstance) GetLabel() string {
 	var carg0 *C.GtkLabel // in, none, converted
-	var cret  *C.char     // return, none, string, casted *C.gchar
+	var cret  *C.char     // return, none, string
 
 	carg0 = (*C.GtkLabel)(UnsafeLabelToGlibNone(self))
 
@@ -102139,8 +102414,8 @@ func (self *LabelInstance) GetLayout() pango.Layout {
 // or [const@Pango.SCALE].
 func (self *LabelInstance) GetLayoutOffsets() (int32, int32) {
 	var carg0 *C.GtkLabel // in, none, converted
-	var carg1 C.int       // out, full, casted, casted C.gint
-	var carg2 C.int       // out, full, casted, casted C.gint
+	var carg1 C.int       // out, full, casted
+	var carg2 C.int       // out, full, casted
 
 	carg0 = (*C.GtkLabel)(UnsafeLabelToGlibNone(self))
 
@@ -102168,7 +102443,7 @@ func (self *LabelInstance) GetLayoutOffsets() (int32, int32) {
 // See [method@Gtk.Label.set_lines].
 func (self *LabelInstance) GetLines() int32 {
 	var carg0 *C.GtkLabel // in, none, converted
-	var cret  C.int       // return, none, casted, casted C.gint
+	var cret  C.int       // return, none, casted
 
 	carg0 = (*C.GtkLabel)(UnsafeLabelToGlibNone(self))
 
@@ -102193,7 +102468,7 @@ func (self *LabelInstance) GetLines() int32 {
 // See [method@Gtk.Label.set_width_chars].
 func (self *LabelInstance) GetMaxWidthChars() int32 {
 	var carg0 *C.GtkLabel // in, none, converted
-	var cret  C.int       // return, none, casted, casted C.gint
+	var cret  C.int       // return, none, casted
 
 	carg0 = (*C.GtkLabel)(UnsafeLabelToGlibNone(self))
 
@@ -102323,8 +102598,8 @@ func (self *LabelInstance) GetSelectable() bool {
 // Gets the selected range of characters in the label.
 func (self *LabelInstance) GetSelectionBounds() (int32, int32, bool) {
 	var carg0 *C.GtkLabel // in, none, converted
-	var carg1 C.int       // out, full, casted, casted C.gint
-	var carg2 C.int       // out, full, casted, casted C.gint
+	var carg1 C.int       // out, full, casted
+	var carg2 C.int       // out, full, casted
 	var cret  C.gboolean  // return
 
 	carg0 = (*C.GtkLabel)(UnsafeLabelToGlibNone(self))
@@ -102411,7 +102686,7 @@ func (self *LabelInstance) GetTabs() *pango.TabArray {
 // [method@Gtk.Label.get_label])
 func (self *LabelInstance) GetText() string {
 	var carg0 *C.GtkLabel // in, none, converted
-	var cret  *C.char     // return, none, string, casted *C.gchar
+	var cret  *C.char     // return, none, string
 
 	carg0 = (*C.GtkLabel)(UnsafeLabelToGlibNone(self))
 
@@ -102490,7 +102765,7 @@ func (self *LabelInstance) GetUseUnderline() bool {
 // See [method@Gtk.Label.set_width_chars].
 func (self *LabelInstance) GetWidthChars() int32 {
 	var carg0 *C.GtkLabel // in, none, converted
-	var cret  C.int       // return, none, casted, casted C.gint
+	var cret  C.int       // return, none, casted
 
 	carg0 = (*C.GtkLabel)(UnsafeLabelToGlibNone(self))
 
@@ -102567,7 +102842,7 @@ func (self *LabelInstance) GetWrapMode() pango.WrapMode {
 // See the [property@Gtk.Label:xalign] property.
 func (self *LabelInstance) GetXAlign() float32 {
 	var carg0 *C.GtkLabel // in, none, converted
-	var cret  C.float     // return, none, casted, casted C.gfloat
+	var cret  C.float     // return, none, casted
 
 	carg0 = (*C.GtkLabel)(UnsafeLabelToGlibNone(self))
 
@@ -102592,7 +102867,7 @@ func (self *LabelInstance) GetXAlign() float32 {
 // See the [property@Gtk.Label:yalign] property.
 func (self *LabelInstance) GetYAlign() float32 {
 	var carg0 *C.GtkLabel // in, none, converted
-	var cret  C.float     // return, none, casted, casted C.gfloat
+	var cret  C.float     // return, none, casted
 
 	carg0 = (*C.GtkLabel)(UnsafeLabelToGlibNone(self))
 
@@ -102620,8 +102895,8 @@ func (self *LabelInstance) GetYAlign() float32 {
 // @end_offset are -1, then the end of the label will be substituted.
 func (self *LabelInstance) SelectRegion(startOffset int32, endOffset int32) {
 	var carg0 *C.GtkLabel // in, none, converted
-	var carg1 C.int       // in, none, casted, casted C.gint
-	var carg2 C.int       // in, none, casted, casted C.gint
+	var carg1 C.int       // in, none, casted
+	var carg2 C.int       // in, none, casted
 
 	carg0 = (*C.GtkLabel)(UnsafeLabelToGlibNone(self))
 	carg1 = C.int(startOffset)
@@ -102744,7 +103019,7 @@ func (self *LabelInstance) SetJustify(jtype Justification) {
 // and [property@Gtk.Label:use-markup] properties.
 func (self *LabelInstance) SetLabel(str string) {
 	var carg0 *C.GtkLabel // in, none, converted
-	var carg1 *C.char     // in, none, string, casted *C.gchar
+	var carg1 *C.char     // in, none, string
 
 	carg0 = (*C.GtkLabel)(UnsafeLabelToGlibNone(self))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(str)))
@@ -102768,7 +103043,7 @@ func (self *LabelInstance) SetLabel(str string) {
 // Set this to -1 if you don’t want to limit the number of lines.
 func (self *LabelInstance) SetLines(lines int32) {
 	var carg0 *C.GtkLabel // in, none, converted
-	var carg1 C.int       // in, none, casted, casted C.gint
+	var carg1 C.int       // in, none, casted
 
 	carg0 = (*C.GtkLabel)(UnsafeLabelToGlibNone(self))
 	carg1 = C.int(lines)
@@ -102813,7 +103088,7 @@ func (self *LabelInstance) SetLines(lines int32) {
 // See also: [method@Gtk.Label.set_text]
 func (self *LabelInstance) SetMarkup(str string) {
 	var carg0 *C.GtkLabel // in, none, converted
-	var carg1 *C.char     // in, none, string, casted *C.gchar
+	var carg1 *C.char     // in, none, string
 
 	carg0 = (*C.GtkLabel)(UnsafeLabelToGlibNone(self))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(str)))
@@ -102841,7 +103116,7 @@ func (self *LabelInstance) SetMarkup(str string) {
 // automatically, or explicitly using [method@Gtk.Label.set_mnemonic_widget].
 func (self *LabelInstance) SetMarkupWithMnemonic(str string) {
 	var carg0 *C.GtkLabel // in, none, converted
-	var carg1 *C.char     // in, none, string, casted *C.gchar
+	var carg1 *C.char     // in, none, string
 
 	carg0 = (*C.GtkLabel)(UnsafeLabelToGlibNone(self))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(str)))
@@ -102861,7 +103136,7 @@ func (self *LabelInstance) SetMarkupWithMnemonic(str string) {
 // Sets the desired maximum width in characters of @label to @n_chars.
 func (self *LabelInstance) SetMaxWidthChars(nChars int32) {
 	var carg0 *C.GtkLabel // in, none, converted
-	var carg1 C.int       // in, none, casted, casted C.gint
+	var carg1 C.int       // in, none, casted
 
 	carg0 = (*C.GtkLabel)(UnsafeLabelToGlibNone(self))
 	carg1 = C.int(nChars)
@@ -103016,7 +103291,7 @@ func (self *LabelInstance) SetTabs(tabs *pango.TabArray) {
 // See also: [method@Gtk.Label.set_markup]
 func (self *LabelInstance) SetText(str string) {
 	var carg0 *C.GtkLabel // in, none, converted
-	var carg1 *C.char     // in, none, string, casted *C.gchar
+	var carg1 *C.char     // in, none, string
 
 	carg0 = (*C.GtkLabel)(UnsafeLabelToGlibNone(self))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(str)))
@@ -103041,7 +103316,7 @@ func (self *LabelInstance) SetText(str string) {
 // automatically, or explicitly using [method@Gtk.Label.set_mnemonic_widget].
 func (self *LabelInstance) SetTextWithMnemonic(str string) {
 	var carg0 *C.GtkLabel // in, none, converted
-	var carg1 *C.char     // in, none, string, casted *C.gchar
+	var carg1 *C.char     // in, none, string
 
 	carg0 = (*C.GtkLabel)(UnsafeLabelToGlibNone(self))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(str)))
@@ -103105,7 +103380,7 @@ func (self *LabelInstance) SetUseUnderline(setting bool) {
 // Sets the desired width in characters of @label to @n_chars.
 func (self *LabelInstance) SetWidthChars(nChars int32) {
 	var carg0 *C.GtkLabel // in, none, converted
-	var carg1 C.int       // in, none, casted, casted C.gint
+	var carg1 C.int       // in, none, casted
 
 	carg0 = (*C.GtkLabel)(UnsafeLabelToGlibNone(self))
 	carg1 = C.int(nChars)
@@ -103183,7 +103458,7 @@ func (self *LabelInstance) SetWrapMode(wrapMode pango.WrapMode) {
 // See the [property@Gtk.Label:xalign] property.
 func (self *LabelInstance) SetXAlign(xalign float32) {
 	var carg0 *C.GtkLabel // in, none, converted
-	var carg1 C.float     // in, none, casted, casted C.gfloat
+	var carg1 C.float     // in, none, casted
 
 	carg0 = (*C.GtkLabel)(UnsafeLabelToGlibNone(self))
 	carg1 = C.float(xalign)
@@ -103204,7 +103479,7 @@ func (self *LabelInstance) SetXAlign(xalign float32) {
 // See the [property@Gtk.Label:yalign] property.
 func (self *LabelInstance) SetYAlign(yalign float32) {
 	var carg0 *C.GtkLabel // in, none, converted
-	var carg1 C.float     // in, none, casted, casted C.gfloat
+	var carg1 C.float     // in, none, casted
 
 	carg0 = (*C.GtkLabel)(UnsafeLabelToGlibNone(self))
 	carg1 = C.float(yalign)
@@ -103545,19 +103820,19 @@ func unsafeWrapLevelBar(base *gobject.ObjectInstance) *LevelBarInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		AccessibleRangeInstance: AccessibleRangeInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		OrientableInstance: OrientableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -103627,8 +103902,8 @@ func NewLevelBar() Widget {
 //
 // Creates a new `GtkLevelBar` for the specified interval.
 func NewLevelBarForInterval(minValue float64, maxValue float64) Widget {
-	var carg1 C.double     // in, none, casted, casted C.gdouble
-	var carg2 C.double     // in, none, casted, casted C.gdouble
+	var carg1 C.double     // in, none, casted
+	var carg2 C.double     // in, none, casted
 	var cret  *C.GtkWidget // return, none, converted
 
 	carg1 = C.double(minValue)
@@ -103663,8 +103938,8 @@ func NewLevelBarForInterval(minValue float64, maxValue float64) Widget {
 // replaced by @value.
 func (self *LevelBarInstance) AddOffsetValue(name string, value float64) {
 	var carg0 *C.GtkLevelBar // in, none, converted
-	var carg1 *C.char        // in, none, string, casted *C.gchar
-	var carg2 C.double       // in, none, casted, casted C.gdouble
+	var carg1 *C.char        // in, none, string
+	var carg2 C.double       // in, none, casted
 
 	carg0 = (*C.GtkLevelBar)(UnsafeLevelBarToGlibNone(self))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
@@ -103711,7 +103986,7 @@ func (self *LevelBarInstance) GetInverted() bool {
 // Returns the `max-value` of the `GtkLevelBar`.
 func (self *LevelBarInstance) GetMaxValue() float64 {
 	var carg0 *C.GtkLevelBar // in, none, converted
-	var cret  C.double       // return, none, casted, casted C.gdouble
+	var cret  C.double       // return, none, casted
 
 	carg0 = (*C.GtkLevelBar)(UnsafeLevelBarToGlibNone(self))
 
@@ -103734,7 +104009,7 @@ func (self *LevelBarInstance) GetMaxValue() float64 {
 // Returns the `min-value` of the `GtkLevelBar`.
 func (self *LevelBarInstance) GetMinValue() float64 {
 	var carg0 *C.GtkLevelBar // in, none, converted
-	var cret  C.double       // return, none, casted, casted C.gdouble
+	var cret  C.double       // return, none, casted
 
 	carg0 = (*C.GtkLevelBar)(UnsafeLevelBarToGlibNone(self))
 
@@ -103786,7 +104061,7 @@ func (self *LevelBarInstance) GetMode() LevelBarMode {
 func (self *LevelBarInstance) GetOffsetValue(name string) (float64, bool) {
 	var carg0 *C.GtkLevelBar // in, none, converted
 	var carg1 *C.char        // in, none, string, nullable-string
-	var carg2 C.double       // out, full, casted, casted C.gdouble
+	var carg2 C.double       // out, full, casted
 	var cret  C.gboolean     // return
 
 	carg0 = (*C.GtkLevelBar)(UnsafeLevelBarToGlibNone(self))
@@ -103819,7 +104094,7 @@ func (self *LevelBarInstance) GetOffsetValue(name string) (float64, bool) {
 // Returns the `value` of the `GtkLevelBar`.
 func (self *LevelBarInstance) GetValue() float64 {
 	var carg0 *C.GtkLevelBar // in, none, converted
-	var cret  C.double       // return, none, casted, casted C.gdouble
+	var cret  C.double       // return, none, casted
 
 	carg0 = (*C.GtkLevelBar)(UnsafeLevelBarToGlibNone(self))
 
@@ -103891,7 +104166,7 @@ func (self *LevelBarInstance) SetInverted(inverted bool) {
 // this function.
 func (self *LevelBarInstance) SetMaxValue(value float64) {
 	var carg0 *C.GtkLevelBar // in, none, converted
-	var carg1 C.double       // in, none, casted, casted C.gdouble
+	var carg1 C.double       // in, none, casted
 
 	carg0 = (*C.GtkLevelBar)(UnsafeLevelBarToGlibNone(self))
 	carg1 = C.double(value)
@@ -103913,7 +104188,7 @@ func (self *LevelBarInstance) SetMaxValue(value float64) {
 // this function.
 func (self *LevelBarInstance) SetMinValue(value float64) {
 	var carg0 *C.GtkLevelBar // in, none, converted
-	var carg1 C.double       // in, none, casted, casted C.gdouble
+	var carg1 C.double       // in, none, casted
 
 	carg0 = (*C.GtkLevelBar)(UnsafeLevelBarToGlibNone(self))
 	carg1 = C.double(value)
@@ -103952,7 +104227,7 @@ func (self *LevelBarInstance) SetMode(mode LevelBarMode) {
 // Sets the value of the `GtkLevelBar`.
 func (self *LevelBarInstance) SetValue(value float64) {
 	var carg0 *C.GtkLevelBar // in, none, converted
-	var carg1 C.double       // in, none, casted, casted C.gdouble
+	var carg1 C.double       // in, none, casted
 
 	carg0 = (*C.GtkLevelBar)(UnsafeLevelBarToGlibNone(self))
 	carg1 = C.double(value)
@@ -104092,16 +104367,16 @@ func unsafeWrapLinkButton(base *gobject.ObjectInstance) *LinkButtonInstance {
 				},
 			},
 			AccessibleInstance: AccessibleInstance{
-				ObjectInstance: *base,
+				Instance: *base,
 			},
 			ActionableInstance: ActionableInstance{
-				ObjectInstance: *base,
+				Instance: *base,
 			},
 			BuildableInstance: BuildableInstance{
-				ObjectInstance: *base,
+				Instance: *base,
 			},
 			ConstraintTargetInstance: ConstraintTargetInstance{
-				ObjectInstance: *base,
+				Instance: *base,
 			},
 		},
 	}
@@ -104152,7 +104427,7 @@ func UnsafeLinkButtonToGlibFull(c LinkButton) unsafe.Pointer {
 //
 // Creates a new `GtkLinkButton` with the URI as its text.
 func NewLinkButton(uri string) Widget {
-	var carg1 *C.char      // in, none, string, casted *C.gchar
+	var carg1 *C.char      // in, none, string
 	var cret  *C.GtkWidget // return, none, converted
 
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(uri)))
@@ -104181,7 +104456,7 @@ func NewLinkButton(uri string) Widget {
 //
 // Creates a new `GtkLinkButton` containing a label.
 func NewLinkButtonWithLabel(uri string, label string) Widget {
-	var carg1 *C.char      // in, none, string, casted *C.gchar
+	var carg1 *C.char      // in, none, string
 	var carg2 *C.char      // in, none, string, nullable-string
 	var cret  *C.GtkWidget // return, none, converted
 
@@ -104212,7 +104487,7 @@ func NewLinkButtonWithLabel(uri string, label string) Widget {
 // Retrieves the URI of the `GtkLinkButton`.
 func (linkButton *LinkButtonInstance) GetURI() string {
 	var carg0 *C.GtkLinkButton // in, none, converted
-	var cret  *C.char          // return, none, string, casted *C.gchar
+	var cret  *C.char          // return, none, string
 
 	carg0 = (*C.GtkLinkButton)(UnsafeLinkButtonToGlibNone(linkButton))
 
@@ -104267,7 +104542,7 @@ func (linkButton *LinkButtonInstance) GetVisited() bool {
 // As a side-effect this unsets the “visited” state of the button.
 func (linkButton *LinkButtonInstance) SetURI(uri string) {
 	var carg0 *C.GtkLinkButton // in, none, converted
-	var carg1 *C.char          // in, none, string, casted *C.gchar
+	var carg1 *C.char          // in, none, string
 
 	carg0 = (*C.GtkLinkButton)(UnsafeLinkButtonToGlibNone(linkButton))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(uri)))
@@ -104393,19 +104668,19 @@ func unsafeWrapListBase(base *gobject.ObjectInstance) *ListBaseInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		OrientableInstance: OrientableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ScrollableInstance: ScrollableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -104934,13 +105209,13 @@ func unsafeWrapListBox(base *gobject.ObjectInstance) *ListBoxInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -105126,7 +105401,7 @@ func (box *ListBoxInstance) GetAdjustment() Adjustment {
 // list, %NULL is returned.
 func (box *ListBoxInstance) GetRowAtIndex(index_ int32) ListBoxRow {
 	var carg0 *C.GtkListBox    // in, none, converted
-	var carg1 C.int            // in, none, casted, casted C.gint
+	var carg1 C.int            // in, none, casted
 	var cret  *C.GtkListBoxRow // return, none, converted, nullable
 
 	carg0 = (*C.GtkListBox)(UnsafeListBoxToGlibNone(box))
@@ -105158,7 +105433,7 @@ func (box *ListBoxInstance) GetRowAtIndex(index_ int32) ListBoxRow {
 // Gets the row at the @y position.
 func (box *ListBoxInstance) GetRowAtY(y int32) ListBoxRow {
 	var carg0 *C.GtkListBox    // in, none, converted
-	var carg1 C.int            // in, none, casted, casted C.gint
+	var carg1 C.int            // in, none, casted
 	var cret  *C.GtkListBoxRow // return, none, converted, nullable
 
 	carg0 = (*C.GtkListBox)(UnsafeListBoxToGlibNone(box))
@@ -105302,7 +105577,7 @@ func (box *ListBoxInstance) GetShowSeparators() bool {
 func (box *ListBoxInstance) Insert(child Widget, position int32) {
 	var carg0 *C.GtkListBox // in, none, converted
 	var carg1 *C.GtkWidget  // in, none, converted
-	var carg2 C.int         // in, none, casted, casted C.gint
+	var carg2 C.int         // in, none, casted
 
 	carg0 = (*C.GtkListBox)(UnsafeListBoxToGlibNone(box))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(child))
@@ -105978,7 +106253,7 @@ type ListBoxRow interface {
 	// chain up virtual methods:
 
 	// ParentActivate calls the default implementations of the activate virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
 	ParentActivate()
 }
 
@@ -105990,16 +106265,16 @@ func unsafeWrapListBoxRow(base *gobject.ObjectInstance) *ListBoxRowInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ActionableInstance: ActionableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -106174,7 +106449,7 @@ func (row *ListBoxRowInstance) GetHeader() Widget {
 // Gets the current index of the @row in its `GtkListBox` container.
 func (row *ListBoxRowInstance) GetIndex() int32 {
 	var carg0 *C.GtkListBoxRow // in, none, converted
-	var cret  C.int            // return, none, casted, casted C.gint
+	var cret  C.int            // return, none, casted
 
 	carg0 = (*C.GtkListBoxRow)(UnsafeListBoxRowToGlibNone(row))
 
@@ -106345,7 +106620,7 @@ type ListBoxRowOverrides[Instance ListBoxRow] struct {
 	// WidgetOverrides allows you to override virtual methods from the parent class Widget
 	WidgetOverrides[Instance]
 
-	// Activate allows you to override the implementation of the virtual method activate.
+	// // Activate allows you to override the implementation of the virtual method activate.
 	Activate func(Instance)
 }
 
@@ -106373,7 +106648,7 @@ func UnsafeApplyListBoxRowOverrides[Instance ListBoxRow](gclass unsafe.Pointer, 
 }
 
 // ParentActivate calls the default implementations of the activate virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
 func (row *ListBoxRowInstance) ParentActivate() {
 	var carg0 *C.GtkListBoxRow
 
@@ -106684,19 +106959,19 @@ func unsafeWrapListView(base *gobject.ObjectInstance) *ListViewInstance {
 				},
 			},
 			AccessibleInstance: AccessibleInstance{
-				ObjectInstance: *base,
+				Instance: *base,
 			},
 			BuildableInstance: BuildableInstance{
-				ObjectInstance: *base,
+				Instance: *base,
 			},
 			ConstraintTargetInstance: ConstraintTargetInstance{
-				ObjectInstance: *base,
+				Instance: *base,
 			},
 			OrientableInstance: OrientableInstance{
-				ObjectInstance: *base,
+				Instance: *base,
 			},
 			ScrollableInstance: ScrollableInstance{
-				ObjectInstance: *base,
+				Instance: *base,
 			},
 		},
 	}
@@ -107206,13 +107481,13 @@ func unsafeWrapMediaControls(base *gobject.ObjectInstance) *MediaControlsInstanc
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -107462,10 +107737,10 @@ type MediaFile interface {
 	// chain up virtual methods:
 
 	// ParentClose calls the default implementations of the close virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
 	ParentClose()
 	// ParentOpen calls the default implementations of the open virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
 	ParentOpen()
 }
 
@@ -107474,7 +107749,7 @@ func unsafeWrapMediaFile(base *gobject.ObjectInstance) *MediaFileInstance {
 		MediaStreamInstance: MediaStreamInstance{
 			ObjectInstance: *base,
 			PaintableInstance: gdk.PaintableInstance{
-				ObjectInstance: *base,
+				Instance: *base,
 			},
 		},
 	}
@@ -107521,7 +107796,7 @@ func UnsafeMediaFileToGlibFull(c MediaFile) unsafe.Pointer {
 //
 // Creates a new empty media file.
 func NewMediaFile() MediaFile {
-	var cret *C.GtkMediaStream // return, full, converted, casted *C.GtkMediaFile
+	var cret *C.GtkMediaStream // return, full, converted
 
 	cret = C.gtk_media_file_new()
 
@@ -107545,7 +107820,7 @@ func NewMediaFile() MediaFile {
 // Creates a new media file to play @file.
 func NewMediaFileForFile(file gio.File) MediaFile {
 	var carg1 *C.GFile          // in, none, converted
-	var cret  *C.GtkMediaStream // return, full, converted, casted *C.GtkMediaFile
+	var cret  *C.GtkMediaStream // return, full, converted
 
 	carg1 = (*C.GFile)(gio.UnsafeFileToGlibNone(file))
 
@@ -107574,8 +107849,8 @@ func NewMediaFileForFile(file gio.File) MediaFile {
 // This is a utility function that converts the given @filename
 // to a `GFile` and calls [ctor@Gtk.MediaFile.new_for_file].
 func NewMediaFileForFilename(filename string) MediaFile {
-	var carg1 *C.char           // in, none, string, casted *C.gchar
-	var cret  *C.GtkMediaStream // return, full, converted, casted *C.GtkMediaFile
+	var carg1 *C.char           // in, none, string
+	var cret  *C.GtkMediaStream // return, full, converted
 
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(filename)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -107606,7 +107881,7 @@ func NewMediaFileForFilename(filename string) MediaFile {
 // the stream should implement the `GSeekable` interface.
 func NewMediaFileForInputStream(stream gio.InputStream) MediaFile {
 	var carg1 *C.GInputStream   // in, none, converted
-	var cret  *C.GtkMediaStream // return, full, converted, casted *C.GtkMediaFile
+	var cret  *C.GtkMediaStream // return, full, converted
 
 	carg1 = (*C.GInputStream)(gio.UnsafeInputStreamToGlibNone(stream))
 
@@ -107635,8 +107910,8 @@ func NewMediaFileForInputStream(stream gio.InputStream) MediaFile {
 // This is a utility function that converts the given @resource
 // to a `GFile` and calls [ctor@Gtk.MediaFile.new_for_file].
 func NewMediaFileForResource(resourcePath string) MediaFile {
-	var carg1 *C.char           // in, none, string, casted *C.gchar
-	var cret  *C.GtkMediaStream // return, full, converted, casted *C.GtkMediaFile
+	var carg1 *C.char           // in, none, string
+	var cret  *C.GtkMediaStream // return, full, converted
 
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(resourcePath)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -107824,9 +108099,9 @@ type MediaFileOverrides[Instance MediaFile] struct {
 	// MediaStreamOverrides allows you to override virtual methods from the parent class MediaStream
 	MediaStreamOverrides[Instance]
 
-	// Close allows you to override the implementation of the virtual method close.
+	// // Close allows you to override the implementation of the virtual method close.
 	Close func(Instance)
-	// Open allows you to override the implementation of the virtual method open.
+	// // Open allows you to override the implementation of the virtual method open.
 	Open func(Instance)
 }
 
@@ -107869,7 +108144,7 @@ func UnsafeApplyMediaFileOverrides[Instance MediaFile](gclass unsafe.Pointer, ov
 }
 
 // ParentClose calls the default implementations of the close virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
 func (self *MediaFileInstance) ParentClose() {
 	var carg0 *C.GtkMediaFile
 
@@ -107880,7 +108155,7 @@ func (self *MediaFileInstance) ParentClose() {
 }
 
 // ParentOpen calls the default implementations of the open virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
 func (self *MediaFileInstance) ParentOpen() {
 	var carg0 *C.GtkMediaFile
 
@@ -108296,13 +108571,13 @@ func unsafeWrapMenuButton(base *gobject.ObjectInstance) *MenuButtonInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -108522,7 +108797,7 @@ func (menuButton *MenuButtonInstance) GetHasFrame() bool {
 // Gets the name of the icon shown in the button.
 func (menuButton *MenuButtonInstance) GetIconName() string {
 	var carg0 *C.GtkMenuButton // in, none, converted
-	var cret  *C.char          // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char          // return, none, string, nullable-string
 
 	carg0 = (*C.GtkMenuButton)(UnsafeMenuButtonToGlibNone(menuButton))
 
@@ -108547,7 +108822,7 @@ func (menuButton *MenuButtonInstance) GetIconName() string {
 // Gets the label shown in the button
 func (menuButton *MenuButtonInstance) GetLabel() string {
 	var carg0 *C.GtkMenuButton // in, none, converted
-	var cret  *C.char          // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char          // return, none, string, nullable-string
 
 	carg0 = (*C.GtkMenuButton)(UnsafeMenuButtonToGlibNone(menuButton))
 
@@ -108892,7 +109167,7 @@ func (menuButton *MenuButtonInstance) SetHasFrame(hasFrame bool) {
 // will be shown next to the icon.
 func (menuButton *MenuButtonInstance) SetIconName(iconName string) {
 	var carg0 *C.GtkMenuButton // in, none, converted
-	var carg1 *C.char          // in, none, string, casted *C.gchar
+	var carg1 *C.char          // in, none, string
 
 	carg0 = (*C.GtkMenuButton)(UnsafeMenuButtonToGlibNone(menuButton))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(iconName)))
@@ -108918,7 +109193,7 @@ func (menuButton *MenuButtonInstance) SetIconName(iconName string) {
 // arrow will be shown next to the label.
 func (menuButton *MenuButtonInstance) SetLabel(label string) {
 	var carg0 *C.GtkMenuButton // in, none, converted
-	var carg1 *C.char          // in, none, string, casted *C.gchar
+	var carg1 *C.char          // in, none, string
 
 	carg0 = (*C.GtkMenuButton)(UnsafeMenuButtonToGlibNone(menuButton))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(label)))
@@ -109108,7 +109383,7 @@ func UnsafeMnemonicActionToGlibFull(c MnemonicAction) unsafe.Pointer {
 // This is an action that calls gtk_widget_mnemonic_activate()
 // on the given widget upon activation.
 func MnemonicActionGet() MnemonicAction {
-	var cret *C.GtkShortcutAction // return, none, converted, casted *C.GtkMnemonicAction
+	var cret *C.GtkShortcutAction // return, none, converted
 
 	cret = C.gtk_mnemonic_action_get()
 
@@ -109205,7 +109480,7 @@ func UnsafeMnemonicTriggerToGlibFull(c MnemonicTrigger) unsafe.Pointer {
 // modifiers is detected.
 func NewMnemonicTrigger(keyval uint) MnemonicTrigger {
 	var carg1 C.guint               // in, none, casted
-	var cret  *C.GtkShortcutTrigger // return, full, converted, casted *C.GtkMnemonicTrigger
+	var cret  *C.GtkShortcutTrigger // return, full, converted
 
 	carg1 = C.guint(keyval)
 
@@ -109298,10 +109573,10 @@ func unsafeWrapMultiSorter(base *gobject.ObjectInstance) *MultiSorterInstance {
 			ObjectInstance: *base,
 		},
 		ListModelInstance: gio.ListModelInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -109531,8 +109806,8 @@ func UnsafeNamedActionToGlibFull(c NamedAction) unsafe.Pointer {
 // See [method@Gtk.Widget.insert_action_group] for
 // how to add actions to widgets.
 func NewNamedAction(name string) NamedAction {
-	var carg1 *C.char              // in, none, string, casted *C.gchar
-	var cret  *C.GtkShortcutAction // return, full, converted, casted *C.GtkNamedAction
+	var carg1 *C.char              // in, none, string
+	var cret  *C.GtkShortcutAction // return, full, converted
 
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -109556,7 +109831,7 @@ func NewNamedAction(name string) NamedAction {
 // Returns the name of the action that will be activated.
 func (self *NamedActionInstance) GetActionName() string {
 	var carg0 *C.GtkNamedAction // in, none, converted
-	var cret  *C.char           // return, none, string, casted *C.gchar
+	var cret  *C.char           // return, none, string
 
 	carg0 = (*C.GtkNamedAction)(UnsafeNamedActionToGlibNone(self))
 
@@ -109639,7 +109914,7 @@ func UnsafeNeverTriggerToGlibFull(c NeverTrigger) unsafe.Pointer {
 // Use this trigger instead of %NULL because it implements
 // all virtual functions.
 func NeverTriggerGet() NeverTrigger {
-	var cret *C.GtkShortcutTrigger // return, none, converted, casted *C.GtkNeverTrigger
+	var cret *C.GtkShortcutTrigger // return, none, converted
 
 	cret = C.gtk_never_trigger_get()
 
@@ -110413,13 +110688,13 @@ func unsafeWrapNotebook(base *gobject.ObjectInstance) *NotebookInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -110493,7 +110768,7 @@ func (notebook *NotebookInstance) AppendPage(child Widget, tabLabel Widget) int3
 	var carg0 *C.GtkNotebook // in, none, converted
 	var carg1 *C.GtkWidget   // in, none, converted
 	var carg2 *C.GtkWidget   // in, none, converted, nullable
-	var cret  C.int          // return, none, casted, casted C.gint
+	var cret  C.int          // return, none, casted
 
 	carg0 = (*C.GtkNotebook)(UnsafeNotebookToGlibNone(notebook))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(child))
@@ -110538,7 +110813,7 @@ func (notebook *NotebookInstance) AppendPageMenu(child Widget, tabLabel Widget, 
 	var carg1 *C.GtkWidget   // in, none, converted
 	var carg2 *C.GtkWidget   // in, none, converted, nullable
 	var carg3 *C.GtkWidget   // in, none, converted, nullable
-	var cret  C.int          // return, none, casted, casted C.gint
+	var cret  C.int          // return, none, casted
 
 	carg0 = (*C.GtkNotebook)(UnsafeNotebookToGlibNone(notebook))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(child))
@@ -110629,7 +110904,7 @@ func (notebook *NotebookInstance) GetActionWidget(packType PackType) Widget {
 // Returns the page number of the current page.
 func (notebook *NotebookInstance) GetCurrentPage() int32 {
 	var carg0 *C.GtkNotebook // in, none, converted
-	var cret  C.int          // return, none, casted, casted C.gint
+	var cret  C.int          // return, none, casted
 
 	carg0 = (*C.GtkNotebook)(UnsafeNotebookToGlibNone(notebook))
 
@@ -110652,7 +110927,7 @@ func (notebook *NotebookInstance) GetCurrentPage() int32 {
 // Gets the current group name for @notebook.
 func (notebook *NotebookInstance) GetGroupName() string {
 	var carg0 *C.GtkNotebook // in, none, converted
-	var cret  *C.char        // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char        // return, none, string, nullable-string
 
 	carg0 = (*C.GtkNotebook)(UnsafeNotebookToGlibNone(notebook))
 
@@ -110715,7 +110990,7 @@ func (notebook *NotebookInstance) GetMenuLabel(child Widget) Widget {
 func (notebook *NotebookInstance) GetMenuLabelText(child Widget) string {
 	var carg0 *C.GtkNotebook // in, none, converted
 	var carg1 *C.GtkWidget   // in, none, converted
-	var cret  *C.char        // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char        // return, none, string, nullable-string
 
 	carg0 = (*C.GtkNotebook)(UnsafeNotebookToGlibNone(notebook))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(child))
@@ -110742,7 +111017,7 @@ func (notebook *NotebookInstance) GetMenuLabelText(child Widget) string {
 // Gets the number of pages in a notebook.
 func (notebook *NotebookInstance) GetNPages() int32 {
 	var carg0 *C.GtkNotebook // in, none, converted
-	var cret  C.int          // return, none, casted, casted C.gint
+	var cret  C.int          // return, none, casted
 
 	carg0 = (*C.GtkNotebook)(UnsafeNotebookToGlibNone(notebook))
 
@@ -110770,7 +111045,7 @@ func (notebook *NotebookInstance) GetNPages() int32 {
 // Returns the child widget contained in page number @page_num.
 func (notebook *NotebookInstance) GetNthPage(pageNum int32) Widget {
 	var carg0 *C.GtkNotebook // in, none, converted
-	var carg1 C.int          // in, none, casted, casted C.gint
+	var carg1 C.int          // in, none, casted
 	var cret  *C.GtkWidget   // return, none, converted, nullable
 
 	carg0 = (*C.GtkNotebook)(UnsafeNotebookToGlibNone(notebook))
@@ -111003,7 +111278,7 @@ func (notebook *NotebookInstance) GetTabLabel(child Widget) Widget {
 func (notebook *NotebookInstance) GetTabLabelText(child Widget) string {
 	var carg0 *C.GtkNotebook // in, none, converted
 	var carg1 *C.GtkWidget   // in, none, converted
-	var cret  *C.char        // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char        // return, none, string, nullable-string
 
 	carg0 = (*C.GtkNotebook)(UnsafeNotebookToGlibNone(notebook))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(child))
@@ -111095,8 +111370,8 @@ func (notebook *NotebookInstance) InsertPage(child Widget, tabLabel Widget, posi
 	var carg0 *C.GtkNotebook // in, none, converted
 	var carg1 *C.GtkWidget   // in, none, converted
 	var carg2 *C.GtkWidget   // in, none, converted, nullable
-	var carg3 C.int          // in, none, casted, casted C.gint
-	var cret  C.int          // return, none, casted, casted C.gint
+	var carg3 C.int          // in, none, casted
+	var cret  C.int          // return, none, casted
 
 	carg0 = (*C.GtkNotebook)(UnsafeNotebookToGlibNone(notebook))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(child))
@@ -111145,8 +111420,8 @@ func (notebook *NotebookInstance) InsertPageMenu(child Widget, tabLabel Widget, 
 	var carg1 *C.GtkWidget   // in, none, converted
 	var carg2 *C.GtkWidget   // in, none, converted, nullable
 	var carg3 *C.GtkWidget   // in, none, converted, nullable
-	var carg4 C.int          // in, none, casted, casted C.gint
-	var cret  C.int          // return, none, casted, casted C.gint
+	var carg4 C.int          // in, none, casted
+	var cret  C.int          // return, none, casted
 
 	carg0 = (*C.GtkNotebook)(UnsafeNotebookToGlibNone(notebook))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(child))
@@ -111201,7 +111476,7 @@ func (notebook *NotebookInstance) NextPage() {
 func (notebook *NotebookInstance) PageNum(child Widget) int32 {
 	var carg0 *C.GtkNotebook // in, none, converted
 	var carg1 *C.GtkWidget   // in, none, converted
-	var cret  C.int          // return, none, casted, casted C.gint
+	var cret  C.int          // return, none, casted
 
 	carg0 = (*C.GtkNotebook)(UnsafeNotebookToGlibNone(notebook))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(child))
@@ -111261,7 +111536,7 @@ func (notebook *NotebookInstance) PrependPage(child Widget, tabLabel Widget) int
 	var carg0 *C.GtkNotebook // in, none, converted
 	var carg1 *C.GtkWidget   // in, none, converted
 	var carg2 *C.GtkWidget   // in, none, converted, nullable
-	var cret  C.int          // return, none, casted, casted C.gint
+	var cret  C.int          // return, none, casted
 
 	carg0 = (*C.GtkNotebook)(UnsafeNotebookToGlibNone(notebook))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(child))
@@ -111306,7 +111581,7 @@ func (notebook *NotebookInstance) PrependPageMenu(child Widget, tabLabel Widget,
 	var carg1 *C.GtkWidget   // in, none, converted
 	var carg2 *C.GtkWidget   // in, none, converted, nullable
 	var carg3 *C.GtkWidget   // in, none, converted, nullable
-	var cret  C.int          // return, none, casted, casted C.gint
+	var cret  C.int          // return, none, casted
 
 	carg0 = (*C.GtkNotebook)(UnsafeNotebookToGlibNone(notebook))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(child))
@@ -111355,7 +111630,7 @@ func (notebook *NotebookInstance) PrevPage() {
 // in the notebook.
 func (notebook *NotebookInstance) RemovePage(pageNum int32) {
 	var carg0 *C.GtkNotebook // in, none, converted
-	var carg1 C.int          // in, none, casted, casted C.gint
+	var carg1 C.int          // in, none, casted
 
 	carg0 = (*C.GtkNotebook)(UnsafeNotebookToGlibNone(notebook))
 	carg1 = C.int(pageNum)
@@ -111380,7 +111655,7 @@ func (notebook *NotebookInstance) RemovePage(pageNum int32) {
 func (notebook *NotebookInstance) ReorderChild(child Widget, position int32) {
 	var carg0 *C.GtkNotebook // in, none, converted
 	var carg1 *C.GtkWidget   // in, none, converted
-	var carg2 C.int          // in, none, casted, casted C.gint
+	var carg2 C.int          // in, none, casted
 
 	carg0 = (*C.GtkNotebook)(UnsafeNotebookToGlibNone(notebook))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(child))
@@ -111436,7 +111711,7 @@ func (notebook *NotebookInstance) SetActionWidget(widget Widget, packType PackTy
 // adding them to a notebook.
 func (notebook *NotebookInstance) SetCurrentPage(pageNum int32) {
 	var carg0 *C.GtkNotebook // in, none, converted
-	var carg1 C.int          // in, none, casted, casted C.gint
+	var carg1 C.int          // in, none, casted
 
 	carg0 = (*C.GtkNotebook)(UnsafeNotebookToGlibNone(notebook))
 	carg1 = C.int(pageNum)
@@ -111509,7 +111784,7 @@ func (notebook *NotebookInstance) SetMenuLabel(child Widget, menuLabel Widget) {
 func (notebook *NotebookInstance) SetMenuLabelText(child Widget, menuText string) {
 	var carg0 *C.GtkNotebook // in, none, converted
 	var carg1 *C.GtkWidget   // in, none, converted
-	var carg2 *C.char        // in, none, string, casted *C.gchar
+	var carg2 *C.char        // in, none, string
 
 	carg0 = (*C.GtkNotebook)(UnsafeNotebookToGlibNone(notebook))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(child))
@@ -111698,7 +111973,7 @@ func (notebook *NotebookInstance) SetTabLabel(child Widget, tabLabel Widget) {
 func (notebook *NotebookInstance) SetTabLabelText(child Widget, tabText string) {
 	var carg0 *C.GtkNotebook // in, none, converted
 	var carg1 *C.GtkWidget   // in, none, converted
-	var carg2 *C.char        // in, none, string, casted *C.gchar
+	var carg2 *C.char        // in, none, string
 
 	carg0 = (*C.GtkNotebook)(UnsafeNotebookToGlibNone(notebook))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(child))
@@ -111923,7 +112198,7 @@ func UnsafeNothingActionToGlibFull(c NothingAction) unsafe.Pointer {
 // This is an action that does nothing and where
 // activating it always fails.
 func NothingActionGet() NothingAction {
-	var cret *C.GtkShortcutAction // return, none, converted, casted *C.GtkNothingAction
+	var cret *C.GtkShortcutAction // return, none, converted
 
 	cret = C.gtk_nothing_action_get()
 
@@ -112261,13 +112536,13 @@ func unsafeWrapOverlay(base *gobject.ObjectInstance) *OverlayInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -112861,19 +113136,19 @@ func unsafeWrapPaned(base *gobject.ObjectInstance) *PanedInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		AccessibleRangeInstance: AccessibleRangeInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		OrientableInstance: OrientableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -112972,7 +113247,7 @@ func (paned *PanedInstance) GetEndChild() Widget {
 // Obtains the position of the divider between the two panes.
 func (paned *PanedInstance) GetPosition() int32 {
 	var carg0 *C.GtkPaned // in, none, converted
-	var cret  C.int       // return, none, casted, casted C.gint
+	var cret  C.int       // return, none, casted
 
 	carg0 = (*C.GtkPaned)(UnsafePanedToGlibNone(paned))
 
@@ -113169,7 +113444,7 @@ func (paned *PanedInstance) SetEndChild(child Widget) {
 // Sets the position of the divider between the two panes.
 func (paned *PanedInstance) SetPosition(position int32) {
 	var carg0 *C.GtkPaned // in, none, converted
-	var carg1 C.int       // in, none, casted, casted C.gint
+	var carg1 C.int       // in, none, casted
 
 	carg0 = (*C.GtkPaned)(UnsafePanedToGlibNone(paned))
 	carg1 = C.int(position)
@@ -113492,13 +113767,13 @@ func unsafeWrapPasswordEntry(base *gobject.ObjectInstance) *PasswordEntryInstanc
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -113871,13 +114146,13 @@ func unsafeWrapPicture(base *gobject.ObjectInstance) *PictureInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -114079,7 +114354,7 @@ func NewPictureForResource(resourcePath string) Widget {
 // The returned string will be %NULL if the picture cannot be described textually.
 func (self *PictureInstance) GetAlternativeText() string {
 	var carg0 *C.GtkPicture // in, none, converted
-	var cret  *C.char       // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char       // return, none, string, nullable-string
 
 	carg0 = (*C.GtkPicture)(UnsafePictureToGlibNone(self))
 
@@ -114740,10 +115015,10 @@ type Popover interface {
 	// chain up virtual methods:
 
 	// ParentActivateDefault calls the default implementations of the activate_default virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
 	ParentActivateDefault()
 	// ParentClosed calls the default implementations of the closed virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
 	ParentClosed()
 }
 
@@ -114755,16 +115030,16 @@ func unsafeWrapPopover(base *gobject.ObjectInstance) *PopoverInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ShortcutManagerInstance: ShortcutManagerInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -114960,8 +115235,8 @@ func (popover *PopoverInstance) GetMnemonicsVisible() bool {
 // Gets the offset previous set with [method@Gtk.Popover.set_offset()].
 func (popover *PopoverInstance) GetOffset() (int32, int32) {
 	var carg0 *C.GtkPopover // in, none, converted
-	var carg1 C.int         // out, full, casted, casted C.gint
-	var carg2 C.int         // out, full, casted, casted C.gint
+	var carg1 C.int         // out, full, casted
+	var carg2 C.int         // out, full, casted
 
 	carg0 = (*C.GtkPopover)(UnsafePopoverToGlibNone(popover))
 
@@ -115005,7 +115280,7 @@ func (popover *PopoverInstance) GetPointingTo() (gdk.Rectangle, bool) {
 
 	_ = rect
 	_ = carg1
-	panic("unimplemented conversion of gdk.Rectangle (GdkRectangle)")
+	panic("unimplemented conversion of gdk.Rectangle (C.GdkRectangle)")
 	if cret != 0 {
 		goret = true
 	}
@@ -115238,8 +115513,8 @@ func (popover *PopoverInstance) SetMnemonicsVisible(mnemonicsVisible bool) {
 // for positioning the popover.
 func (popover *PopoverInstance) SetOffset(xOffset int32, yOffset int32) {
 	var carg0 *C.GtkPopover // in, none, converted
-	var carg1 C.int         // in, none, casted, casted C.gint
-	var carg2 C.int         // in, none, casted, casted C.gint
+	var carg1 C.int         // in, none, casted
+	var carg2 C.int         // in, none, casted
 
 	carg0 = (*C.GtkPopover)(UnsafePopoverToGlibNone(popover))
 	carg1 = C.int(xOffset)
@@ -115324,9 +115599,9 @@ type PopoverOverrides[Instance Popover] struct {
 	// WidgetOverrides allows you to override virtual methods from the parent class Widget
 	WidgetOverrides[Instance]
 
-	// ActivateDefault allows you to override the implementation of the virtual method activate_default.
+	// // ActivateDefault allows you to override the implementation of the virtual method activate_default.
 	ActivateDefault func(Instance)
-	// Closed allows you to override the implementation of the virtual method closed.
+	// // Closed allows you to override the implementation of the virtual method closed.
 	Closed func(Instance)
 }
 
@@ -115369,7 +115644,7 @@ func UnsafeApplyPopoverOverrides[Instance Popover](gclass unsafe.Pointer, overri
 }
 
 // ParentActivateDefault calls the default implementations of the activate_default virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
 func (popover *PopoverInstance) ParentActivateDefault() {
 	var carg0 *C.GtkPopover
 
@@ -115380,7 +115655,7 @@ func (popover *PopoverInstance) ParentActivateDefault() {
 }
 
 // ParentClosed calls the default implementations of the closed virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
 func (popover *PopoverInstance) ParentClosed() {
 	var carg0 *C.GtkPopover
 
@@ -115625,16 +115900,16 @@ func unsafeWrapPopoverMenu(base *gobject.ObjectInstance) *PopoverMenuInstance {
 				},
 			},
 			AccessibleInstance: AccessibleInstance{
-				ObjectInstance: *base,
+				Instance: *base,
 			},
 			BuildableInstance: BuildableInstance{
-				ObjectInstance: *base,
+				Instance: *base,
 			},
 			ConstraintTargetInstance: ConstraintTargetInstance{
-				ObjectInstance: *base,
+				Instance: *base,
 			},
 			ShortcutManagerInstance: ShortcutManagerInstance{
-				ObjectInstance: *base,
+				Instance: *base,
 			},
 		},
 	}
@@ -115769,7 +116044,7 @@ func NewPopoverMenuFromModelFull(model gio.MenuModel, flags PopoverMenuFlags) Wi
 func (popover *PopoverMenuInstance) AddChild(child Widget, id string) bool {
 	var carg0 *C.GtkPopoverMenu // in, none, converted
 	var carg1 *C.GtkWidget      // in, none, converted
-	var carg2 *C.char           // in, none, string, casted *C.gchar
+	var carg2 *C.char           // in, none, string
 	var cret  C.gboolean        // return
 
 	carg0 = (*C.GtkPopoverMenu)(UnsafePopoverMenuToGlibNone(popover))
@@ -116025,13 +116300,13 @@ func unsafeWrapPopoverMenuBar(base *gobject.ObjectInstance) *PopoverMenuBarInsta
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -116116,7 +116391,7 @@ func NewPopoverMenuBarFromModel(model gio.MenuModel) Widget {
 func (bar *PopoverMenuBarInstance) AddChild(child Widget, id string) bool {
 	var carg0 *C.GtkPopoverMenuBar // in, none, converted
 	var carg1 *C.GtkWidget         // in, none, converted
-	var carg2 *C.char              // in, none, string, casted *C.gchar
+	var carg2 *C.char              // in, none, string
 	var cret  C.gboolean           // return
 
 	carg0 = (*C.GtkPopoverMenuBar)(UnsafePopoverMenuBarToGlibNone(bar))
@@ -116444,19 +116719,19 @@ func unsafeWrapProgressBar(base *gobject.ObjectInstance) *ProgressBarInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		AccessibleRangeInstance: AccessibleRangeInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		OrientableInstance: OrientableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -116547,7 +116822,7 @@ func (pbar *ProgressBarInstance) GetEllipsize() pango.EllipsizeMode {
 // Returns the current fraction of the task that’s been completed.
 func (pbar *ProgressBarInstance) GetFraction() float64 {
 	var carg0 *C.GtkProgressBar // in, none, converted
-	var cret  C.double          // return, none, casted, casted C.gdouble
+	var cret  C.double          // return, none, casted
 
 	carg0 = (*C.GtkProgressBar)(UnsafeProgressBarToGlibNone(pbar))
 
@@ -116597,7 +116872,7 @@ func (pbar *ProgressBarInstance) GetInverted() bool {
 // See [method@Gtk.ProgressBar.set_pulse_step].
 func (pbar *ProgressBarInstance) GetPulseStep() float64 {
 	var carg0 *C.GtkProgressBar // in, none, converted
-	var cret  C.double          // return, none, casted, casted C.gdouble
+	var cret  C.double          // return, none, casted
 
 	carg0 = (*C.GtkProgressBar)(UnsafeProgressBarToGlibNone(pbar))
 
@@ -116650,7 +116925,7 @@ func (pbar *ProgressBarInstance) GetShowText() bool {
 // so will become invalid if you change the text in the progress bar.
 func (pbar *ProgressBarInstance) GetText() string {
 	var carg0 *C.GtkProgressBar // in, none, converted
-	var cret  *C.char           // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char           // return, none, string, nullable-string
 
 	carg0 = (*C.GtkProgressBar)(UnsafeProgressBarToGlibNone(pbar))
 
@@ -116717,7 +116992,7 @@ func (pbar *ProgressBarInstance) SetEllipsize(mode pango.EllipsizeMode) {
 // The fraction should be between 0.0 and 1.0, inclusive.
 func (pbar *ProgressBarInstance) SetFraction(fraction float64) {
 	var carg0 *C.GtkProgressBar // in, none, converted
-	var carg1 C.double          // in, none, casted, casted C.gdouble
+	var carg1 C.double          // in, none, casted
 
 	carg0 = (*C.GtkProgressBar)(UnsafeProgressBarToGlibNone(pbar))
 	carg1 = C.double(fraction)
@@ -116764,7 +117039,7 @@ func (pbar *ProgressBarInstance) SetInverted(inverted bool) {
 // is called.
 func (pbar *ProgressBarInstance) SetPulseStep(fraction float64) {
 	var carg0 *C.GtkProgressBar // in, none, converted
-	var carg1 C.double          // in, none, casted, casted C.gdouble
+	var carg1 C.double          // in, none, casted
 
 	carg0 = (*C.GtkProgressBar)(UnsafeProgressBarToGlibNone(pbar))
 	carg1 = C.double(fraction)
@@ -117161,13 +117436,15 @@ type Range interface {
 	// chain up virtual methods:
 
 	// ParentAdjustBounds calls the default implementations of the adjust_bounds virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- newValue float64 
 	ParentAdjustBounds(newValue float64)
 	// ParentChangeValue calls the default implementations of the change_value virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- scroll ScrollType 
@@ -117178,19 +117455,21 @@ type Range interface {
 	// 	- goret bool 
 	ParentChangeValue(scroll ScrollType, newValue float64) bool
 	// ParentGetRangeBorder calls the default implementations of the get_range_border virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- border_ *Border 
 	ParentGetRangeBorder(border_ *Border)
 	// ParentMoveSlider calls the default implementations of the move_slider virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- scroll ScrollType 
 	ParentMoveSlider(scroll ScrollType)
 	// ParentValueChanged calls the default implementations of the value_changed virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
 	ParentValueChanged()
 }
 
@@ -117202,19 +117481,19 @@ func unsafeWrapRange(base *gobject.ObjectInstance) *RangeInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		AccessibleRangeInstance: AccessibleRangeInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		OrientableInstance: OrientableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -117284,7 +117563,7 @@ func (_range *RangeInstance) GetAdjustment() Adjustment {
 // Gets the current position of the fill level indicator.
 func (_range *RangeInstance) GetFillLevel() float64 {
 	var carg0 *C.GtkRange // in, none, converted
-	var cret  C.double    // return, none, casted, casted C.gdouble
+	var cret  C.double    // return, none, casted
 
 	carg0 = (*C.GtkRange)(UnsafeRangeToGlibNone(_range))
 
@@ -117375,7 +117654,7 @@ func (_range *RangeInstance) GetRangeRect() gdk.Rectangle {
 
 	_ = rangeRect
 	_ = carg1
-	panic("unimplemented conversion of gdk.Rectangle (GdkRectangle)")
+	panic("unimplemented conversion of gdk.Rectangle (C.GdkRectangle)")
 
 	return rangeRect
 }
@@ -117417,7 +117696,7 @@ func (_range *RangeInstance) GetRestrictToFillLevel() bool {
 // See [signal@Gtk.Range::change-value].
 func (_range *RangeInstance) GetRoundDigits() int32 {
 	var carg0 *C.GtkRange // in, none, converted
-	var cret  C.int       // return, none, casted, casted C.gint
+	var cret  C.int       // return, none, casted
 
 	carg0 = (*C.GtkRange)(UnsafeRangeToGlibNone(_range))
 
@@ -117469,8 +117748,8 @@ func (_range *RangeInstance) GetShowFillLevel() bool {
 // This function is useful mainly for `GtkRange` subclasses.
 func (_range *RangeInstance) GetSliderRange() (int32, int32) {
 	var carg0 *C.GtkRange // in, none, converted
-	var carg1 C.int       // out, full, casted, casted C.gint
-	var carg2 C.int       // out, full, casted, casted C.gint
+	var carg1 C.int       // out, full, casted
+	var carg2 C.int       // out, full, casted
 
 	carg0 = (*C.GtkRange)(UnsafeRangeToGlibNone(_range))
 
@@ -117522,7 +117801,7 @@ func (_range *RangeInstance) GetSliderSizeFixed() bool {
 // Gets the current value of the range.
 func (_range *RangeInstance) GetValue() float64 {
 	var carg0 *C.GtkRange // in, none, converted
-	var cret  C.double    // return, none, casted, casted C.gdouble
+	var cret  C.double    // return, none, casted
 
 	carg0 = (*C.GtkRange)(UnsafeRangeToGlibNone(_range))
 
@@ -117588,7 +117867,7 @@ func (_range *RangeInstance) SetAdjustment(adjustment Adjustment) {
 // enabled.
 func (_range *RangeInstance) SetFillLevel(fillLevel float64) {
 	var carg0 *C.GtkRange // in, none, converted
-	var carg1 C.double    // in, none, casted, casted C.gdouble
+	var carg1 C.double    // in, none, casted
 
 	carg0 = (*C.GtkRange)(UnsafeRangeToGlibNone(_range))
 	carg1 = C.double(fillLevel)
@@ -117638,8 +117917,8 @@ func (_range *RangeInstance) SetFlippable(flippable bool) {
 // is used for example when moving via Page Up or Page Down keys.
 func (_range *RangeInstance) SetIncrements(step float64, page float64) {
 	var carg0 *C.GtkRange // in, none, converted
-	var carg1 C.double    // in, none, casted, casted C.gdouble
-	var carg2 C.double    // in, none, casted, casted C.gdouble
+	var carg1 C.double    // in, none, casted
+	var carg2 C.double    // in, none, casted
 
 	carg0 = (*C.GtkRange)(UnsafeRangeToGlibNone(_range))
 	carg1 = C.double(step)
@@ -117691,8 +117970,8 @@ func (_range *RangeInstance) SetInverted(setting bool) {
 // between @min and @max - page-size.)
 func (_range *RangeInstance) SetRange(min float64, max float64) {
 	var carg0 *C.GtkRange // in, none, converted
-	var carg1 C.double    // in, none, casted, casted C.gdouble
-	var carg2 C.double    // in, none, casted, casted C.gdouble
+	var carg1 C.double    // in, none, casted
+	var carg2 C.double    // in, none, casted
 
 	carg0 = (*C.GtkRange)(UnsafeRangeToGlibNone(_range))
 	carg1 = C.double(min)
@@ -117740,7 +118019,7 @@ func (_range *RangeInstance) SetRestrictToFillLevel(restrictToFillLevel bool) {
 // See [signal@Gtk.Range::change-value].
 func (_range *RangeInstance) SetRoundDigits(roundDigits int32) {
 	var carg0 *C.GtkRange // in, none, converted
-	var carg1 C.int       // in, none, casted, casted C.gint
+	var carg1 C.int       // in, none, casted
 
 	carg0 = (*C.GtkRange)(UnsafeRangeToGlibNone(_range))
 	carg1 = C.int(roundDigits)
@@ -117811,7 +118090,7 @@ func (_range *RangeInstance) SetSliderSizeFixed(sizeFixed bool) {
 // [signal@Gtk.Range::value-changed] signal if the value changes.
 func (_range *RangeInstance) SetValue(value float64) {
 	var carg0 *C.GtkRange // in, none, converted
-	var carg1 C.double    // in, none, casted, casted C.gdouble
+	var carg1 C.double    // in, none, casted
 
 	carg0 = (*C.GtkRange)(UnsafeRangeToGlibNone(_range))
 	carg1 = C.double(value)
@@ -117869,12 +118148,14 @@ type RangeOverrides[Instance Range] struct {
 	// WidgetOverrides allows you to override virtual methods from the parent class Widget
 	WidgetOverrides[Instance]
 
-	// AdjustBounds allows you to override the implementation of the virtual method adjust_bounds.
+	// // AdjustBounds allows you to override the implementation of the virtual method adjust_bounds.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- newValue float64 
 	AdjustBounds func(Instance, float64)
-	// ChangeValue allows you to override the implementation of the virtual method change_value.
+	// // ChangeValue allows you to override the implementation of the virtual method change_value.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- scroll ScrollType 
@@ -117884,17 +118165,19 @@ type RangeOverrides[Instance Range] struct {
 	// 
 	// 	- goret bool 
 	ChangeValue func(Instance, ScrollType, float64) bool
-	// GetRangeBorder allows you to override the implementation of the virtual method get_range_border.
+	// // GetRangeBorder allows you to override the implementation of the virtual method get_range_border.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- border_ *Border 
 	GetRangeBorder func(Instance, *Border)
-	// MoveSlider allows you to override the implementation of the virtual method move_slider.
+	// // MoveSlider allows you to override the implementation of the virtual method move_slider.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- scroll ScrollType 
 	MoveSlider func(Instance, ScrollType)
-	// ValueChanged allows you to override the implementation of the virtual method value_changed.
+	// // ValueChanged allows you to override the implementation of the virtual method value_changed.
 	ValueChanged func(Instance)
 }
 
@@ -117912,7 +118195,7 @@ func UnsafeApplyRangeOverrides[Instance Range](gclass unsafe.Pointer, overrides 
 			"_gotk4_gtk4_Range_adjust_bounds",
 			func(carg0 *C.GtkRange, carg1 C.double) {
 				var _range   Instance // go GtkRange subclass
-				var newValue float64  // in, none, casted, casted C.gdouble
+				var newValue float64  // in, none, casted
 
 				_range = UnsafeRangeFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				newValue = float64(carg1)
@@ -117930,7 +118213,7 @@ func UnsafeApplyRangeOverrides[Instance Range](gclass unsafe.Pointer, overrides 
 			func(carg0 *C.GtkRange, carg1 C.GtkScrollType, carg2 C.double) (cret C.gboolean) {
 				var _range   Instance   // go GtkRange subclass
 				var scroll   ScrollType // in, none, casted
-				var newValue float64    // in, none, casted, casted C.gdouble
+				var newValue float64    // in, none, casted
 				var goret    bool       // return
 
 				_range = UnsafeRangeFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
@@ -117999,13 +118282,14 @@ func UnsafeApplyRangeOverrides[Instance Range](gclass unsafe.Pointer, overrides 
 }
 
 // ParentAdjustBounds calls the default implementations of the adjust_bounds virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- newValue float64 
 func (_range *RangeInstance) ParentAdjustBounds(newValue float64) {
 	var carg0 *C.GtkRange
-	var carg1 C.double // in, none, casted, casted C.gdouble
+	var carg1 C.double // in, none, casted
 
 	parentclass := (*C.GtkRangeClass)(classdata.PeekParentClass(UnsafeRangeToGlibNone(_range)))
 
@@ -118017,7 +118301,8 @@ func (_range *RangeInstance) ParentAdjustBounds(newValue float64) {
 }
 
 // ParentChangeValue calls the default implementations of the change_value virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- scroll ScrollType 
@@ -118029,7 +118314,7 @@ func (_range *RangeInstance) ParentAdjustBounds(newValue float64) {
 func (_range *RangeInstance) ParentChangeValue(scroll ScrollType, newValue float64) bool {
 	var carg0 *C.GtkRange
 	var carg1 C.GtkScrollType // in, none, casted
-	var carg2 C.double        // in, none, casted, casted C.gdouble
+	var carg2 C.double        // in, none, casted
 	var cret  C.gboolean      // return
 
 	parentclass := (*C.GtkRangeClass)(classdata.PeekParentClass(UnsafeRangeToGlibNone(_range)))
@@ -118052,7 +118337,8 @@ func (_range *RangeInstance) ParentChangeValue(scroll ScrollType, newValue float
 }
 
 // ParentGetRangeBorder calls the default implementations of the get_range_border virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- border_ *Border 
@@ -118070,7 +118356,8 @@ func (_range *RangeInstance) ParentGetRangeBorder(border_ *Border) {
 }
 
 // ParentMoveSlider calls the default implementations of the move_slider virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- scroll ScrollType 
@@ -118088,7 +118375,7 @@ func (_range *RangeInstance) ParentMoveSlider(scroll ScrollType) {
 }
 
 // ParentValueChanged calls the default implementations of the value_changed virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
 func (_range *RangeInstance) ParentValueChanged() {
 	var carg0 *C.GtkRange
 
@@ -118264,13 +118551,13 @@ func unsafeWrapRevealer(base *gobject.ObjectInstance) *RevealerInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -118802,7 +119089,8 @@ type Scale interface {
 	// chain up virtual methods:
 
 	// ParentGetLayoutOffsets calls the default implementations of the get_layout_offsets virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- x int32: location to store X offset of layout 
@@ -118828,19 +119116,19 @@ func unsafeWrapScale(base *gobject.ObjectInstance) *ScaleInstance {
 				},
 			},
 			AccessibleInstance: AccessibleInstance{
-				ObjectInstance: *base,
+				Instance: *base,
 			},
 			AccessibleRangeInstance: AccessibleRangeInstance{
-				ObjectInstance: *base,
+				Instance: *base,
 			},
 			BuildableInstance: BuildableInstance{
-				ObjectInstance: *base,
+				Instance: *base,
 			},
 			ConstraintTargetInstance: ConstraintTargetInstance{
-				ObjectInstance: *base,
+				Instance: *base,
 			},
 			OrientableInstance: OrientableInstance{
-				ObjectInstance: *base,
+				Instance: *base,
 			},
 		},
 	}
@@ -118939,9 +119227,9 @@ func NewScale(orientation Orientation, adjustment Adjustment) Widget {
 // for your needs, use [method@Gtk.Scale.set_digits] to correct it.
 func NewScaleWithRange(orientation Orientation, min float64, max float64, step float64) Widget {
 	var carg1 C.GtkOrientation // in, none, casted
-	var carg2 C.double         // in, none, casted, casted C.gdouble
-	var carg3 C.double         // in, none, casted, casted C.gdouble
-	var carg4 C.double         // in, none, casted, casted C.gdouble
+	var carg2 C.double         // in, none, casted
+	var carg3 C.double         // in, none, casted
+	var carg4 C.double         // in, none, casted
 	var cret  *C.GtkWidget     // return, none, converted
 
 	carg1 = C.GtkOrientation(orientation)
@@ -118985,7 +119273,7 @@ func NewScaleWithRange(orientation Orientation, min float64, max float64, step f
 // To remove marks from a scale, use [method@Gtk.Scale.clear_marks].
 func (scale *ScaleInstance) AddMark(value float64, position PositionType, markup string) {
 	var carg0 *C.GtkScale       // in, none, converted
-	var carg1 C.double          // in, none, casted, casted C.gdouble
+	var carg1 C.double          // in, none, casted
 	var carg2 C.GtkPositionType // in, none, casted
 	var carg3 *C.char           // in, none, string, nullable-string
 
@@ -119025,7 +119313,7 @@ func (scale *ScaleInstance) ClearMarks() {
 // Gets the number of decimal places that are displayed in the value.
 func (scale *ScaleInstance) GetDigits() int32 {
 	var carg0 *C.GtkScale // in, none, converted
-	var cret  C.int       // return, none, casted, casted C.gint
+	var cret  C.int       // return, none, casted
 
 	carg0 = (*C.GtkScale)(UnsafeScaleToGlibNone(scale))
 
@@ -119135,8 +119423,8 @@ func (scale *ScaleInstance) GetLayout() pango.Layout {
 // values are undefined.
 func (scale *ScaleInstance) GetLayoutOffsets() (int32, int32) {
 	var carg0 *C.GtkScale // in, none, converted
-	var carg1 C.int       // out, full, casted, casted C.gint
-	var carg2 C.int       // out, full, casted, casted C.gint
+	var carg1 C.int       // out, full, casted
+	var carg2 C.int       // out, full, casted
 
 	carg0 = (*C.GtkScale)(UnsafeScaleToGlibNone(scale))
 
@@ -119196,7 +119484,7 @@ func (scale *ScaleInstance) GetValuePos() PositionType {
 // value yourself.
 func (scale *ScaleInstance) SetDigits(digits int32) {
 	var carg0 *C.GtkScale // in, none, converted
-	var carg1 C.int       // in, none, casted, casted C.gint
+	var carg1 C.int       // in, none, casted
 
 	carg0 = (*C.GtkScale)(UnsafeScaleToGlibNone(scale))
 	carg1 = C.int(digits)
@@ -119311,7 +119599,8 @@ type ScaleOverrides[Instance Scale] struct {
 	// RangeOverrides allows you to override virtual methods from the parent class Range
 	RangeOverrides[Instance]
 
-	// GetLayoutOffsets allows you to override the implementation of the virtual method get_layout_offsets.
+	// // GetLayoutOffsets allows you to override the implementation of the virtual method get_layout_offsets.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- x int32: location to store X offset of layout 
@@ -119342,8 +119631,8 @@ func UnsafeApplyScaleOverrides[Instance Scale](gclass unsafe.Pointer, overrides 
 			"_gotk4_gtk4_Scale_get_layout_offsets",
 			func(carg0 *C.GtkScale, carg1 *C.int, carg2 *C.int) {
 				var scale Instance // go GtkScale subclass
-				var x     int32    // out, full, casted, casted C.gint
-				var y     int32    // out, full, casted, casted C.gint
+				var x     int32    // out, full, casted
+				var y     int32    // out, full, casted
 
 				scale = UnsafeScaleFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
@@ -119357,7 +119646,8 @@ func UnsafeApplyScaleOverrides[Instance Scale](gclass unsafe.Pointer, overrides 
 }
 
 // ParentGetLayoutOffsets calls the default implementations of the get_layout_offsets virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- x int32: location to store X offset of layout 
@@ -119373,8 +119663,8 @@ func UnsafeApplyScaleOverrides[Instance Scale](gclass unsafe.Pointer, overrides 
 // values are undefined.
 func (scale *ScaleInstance) ParentGetLayoutOffsets() (int32, int32) {
 	var carg0 *C.GtkScale
-	var carg1 C.int // out, full, casted, casted C.gint
-	var carg2 C.int // out, full, casted, casted C.gint
+	var carg1 C.int // out, full, casted
+	var carg2 C.int // out, full, casted
 
 	parentclass := (*C.GtkScaleClass)(classdata.PeekParentClass(UnsafeScaleToGlibNone(scale)))
 
@@ -119590,7 +119880,8 @@ type ScaleButton interface {
 	// chain up virtual methods:
 
 	// ParentValueChanged calls the default implementations of the value_changed virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- value float64 
@@ -119605,19 +119896,19 @@ func unsafeWrapScaleButton(base *gobject.ObjectInstance) *ScaleButtonInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		AccessibleRangeInstance: AccessibleRangeInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		OrientableInstance: OrientableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -119676,9 +119967,9 @@ func UnsafeScaleButtonToGlibFull(c ScaleButton) unsafe.Pointer {
 // The new scale button has a range between @min and @max,
 // with a stepping of @step.
 func NewScaleButton(min float64, max float64, step float64, icons []string) Widget {
-	var carg1 C.double     // in, none, casted, casted C.gdouble
-	var carg2 C.double     // in, none, casted, casted C.gdouble
-	var carg3 C.double     // in, none, casted, casted C.gdouble
+	var carg1 C.double     // in, none, casted
+	var carg2 C.double     // in, none, casted
+	var carg3 C.double     // in, none, casted
 	var carg4 **C.char     // in, transfer: none, C Pointers: 2, Name: array[utf8], nullable, array (inner: *typesystem.StringPrimitive, zero-terminated)
 	var cret  *C.GtkWidget // return, none, converted
 
@@ -119687,7 +119978,7 @@ func NewScaleButton(min float64, max float64, step float64, icons []string) Widg
 	carg3 = C.double(step)
 	_ = icons
 	_ = carg4
-	panic("unimplemented conversion of []string (const char**)")
+	panic("unimplemented conversion of []string (**C.char)")
 
 	cret = C.gtk_scale_button_new(carg1, carg2, carg3, carg4)
 	runtime.KeepAlive(min)
@@ -119789,7 +120080,7 @@ func (button *ScaleButtonInstance) GetHasFrame() bool {
 // Retrieves the minus button of the `GtkScaleButton`.
 func (button *ScaleButtonInstance) GetMinusButton() Button {
 	var carg0 *C.GtkScaleButton // in, none, converted
-	var cret  *C.GtkWidget      // return, none, converted, casted *C.GtkButton
+	var cret  *C.GtkWidget      // return, none, converted
 
 	carg0 = (*C.GtkScaleButton)(UnsafeScaleButtonToGlibNone(button))
 
@@ -119812,7 +120103,7 @@ func (button *ScaleButtonInstance) GetMinusButton() Button {
 // Retrieves the plus button of the `GtkScaleButton.`
 func (button *ScaleButtonInstance) GetPlusButton() Button {
 	var carg0 *C.GtkScaleButton // in, none, converted
-	var cret  *C.GtkWidget      // return, none, converted, casted *C.GtkButton
+	var cret  *C.GtkWidget      // return, none, converted
 
 	carg0 = (*C.GtkScaleButton)(UnsafeScaleButtonToGlibNone(button))
 
@@ -119858,7 +120149,7 @@ func (button *ScaleButtonInstance) GetPopup() Widget {
 // Gets the current value of the scale button.
 func (button *ScaleButtonInstance) GetValue() float64 {
 	var carg0 *C.GtkScaleButton // in, none, converted
-	var cret  C.double          // return, none, casted, casted C.gdouble
+	var cret  C.double          // return, none, casted
 
 	carg0 = (*C.GtkScaleButton)(UnsafeScaleButtonToGlibNone(button))
 
@@ -119929,7 +120220,7 @@ func (button *ScaleButtonInstance) SetIcons(icons []string) {
 	carg0 = (*C.GtkScaleButton)(UnsafeScaleButtonToGlibNone(button))
 	_ = icons
 	_ = carg1
-	panic("unimplemented conversion of []string (const char**)")
+	panic("unimplemented conversion of []string (**C.char)")
 
 	C.gtk_scale_button_set_icons(carg0, carg1)
 	runtime.KeepAlive(button)
@@ -119951,7 +120242,7 @@ func (button *ScaleButtonInstance) SetIcons(icons []string) {
 // signal if the value changes.
 func (button *ScaleButtonInstance) SetValue(value float64) {
 	var carg0 *C.GtkScaleButton // in, none, converted
-	var carg1 C.double          // in, none, casted, casted C.gdouble
+	var carg1 C.double          // in, none, casted
 
 	carg0 = (*C.GtkScaleButton)(UnsafeScaleButtonToGlibNone(button))
 	carg1 = C.double(value)
@@ -119997,7 +120288,8 @@ type ScaleButtonOverrides[Instance ScaleButton] struct {
 	// WidgetOverrides allows you to override virtual methods from the parent class Widget
 	WidgetOverrides[Instance]
 
-	// ValueChanged allows you to override the implementation of the virtual method value_changed.
+	// // ValueChanged allows you to override the implementation of the virtual method value_changed.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- value float64 
@@ -120018,7 +120310,7 @@ func UnsafeApplyScaleButtonOverrides[Instance ScaleButton](gclass unsafe.Pointer
 			"_gotk4_gtk4_ScaleButton_value_changed",
 			func(carg0 *C.GtkScaleButton, carg1 C.double) {
 				var button Instance // go GtkScaleButton subclass
-				var value  float64  // in, none, casted, casted C.gdouble
+				var value  float64  // in, none, casted
 
 				button = UnsafeScaleButtonFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				value = float64(carg1)
@@ -120030,13 +120322,14 @@ func UnsafeApplyScaleButtonOverrides[Instance ScaleButton](gclass unsafe.Pointer
 }
 
 // ParentValueChanged calls the default implementations of the value_changed virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- value float64 
 func (button *ScaleButtonInstance) ParentValueChanged(value float64) {
 	var carg0 *C.GtkScaleButton
-	var carg1 C.double // in, none, casted, casted C.gdouble
+	var carg1 C.double // in, none, casted
 
 	parentclass := (*C.GtkScaleButtonClass)(classdata.PeekParentClass(UnsafeScaleButtonToGlibNone(button)))
 
@@ -120166,19 +120459,19 @@ func unsafeWrapScrollbar(base *gobject.ObjectInstance) *ScrollbarInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		AccessibleRangeInstance: AccessibleRangeInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		OrientableInstance: OrientableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -120758,13 +121051,13 @@ func unsafeWrapScrolledWindow(base *gobject.ObjectInstance) *ScrolledWindowInsta
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -120958,7 +121251,7 @@ func (scrolledWindow *ScrolledWindowInstance) GetKineticScrolling() bool {
 // Returns the maximum content height set.
 func (scrolledWindow *ScrolledWindowInstance) GetMaxContentHeight() int32 {
 	var carg0 *C.GtkScrolledWindow // in, none, converted
-	var cret  C.int                // return, none, casted, casted C.gint
+	var cret  C.int                // return, none, casted
 
 	carg0 = (*C.GtkScrolledWindow)(UnsafeScrolledWindowToGlibNone(scrolledWindow))
 
@@ -120981,7 +121274,7 @@ func (scrolledWindow *ScrolledWindowInstance) GetMaxContentHeight() int32 {
 // Returns the maximum content width set.
 func (scrolledWindow *ScrolledWindowInstance) GetMaxContentWidth() int32 {
 	var carg0 *C.GtkScrolledWindow // in, none, converted
-	var cret  C.int                // return, none, casted, casted C.gint
+	var cret  C.int                // return, none, casted
 
 	carg0 = (*C.GtkScrolledWindow)(UnsafeScrolledWindowToGlibNone(scrolledWindow))
 
@@ -121004,7 +121297,7 @@ func (scrolledWindow *ScrolledWindowInstance) GetMaxContentWidth() int32 {
 // Gets the minimal content height of @scrolled_window.
 func (scrolledWindow *ScrolledWindowInstance) GetMinContentHeight() int32 {
 	var carg0 *C.GtkScrolledWindow // in, none, converted
-	var cret  C.int                // return, none, casted, casted C.gint
+	var cret  C.int                // return, none, casted
 
 	carg0 = (*C.GtkScrolledWindow)(UnsafeScrolledWindowToGlibNone(scrolledWindow))
 
@@ -121027,7 +121320,7 @@ func (scrolledWindow *ScrolledWindowInstance) GetMinContentHeight() int32 {
 // Gets the minimum content width of @scrolled_window.
 func (scrolledWindow *ScrolledWindowInstance) GetMinContentWidth() int32 {
 	var carg0 *C.GtkScrolledWindow // in, none, converted
-	var cret  C.int                // return, none, casted, casted C.gint
+	var cret  C.int                // return, none, casted
 
 	carg0 = (*C.GtkScrolledWindow)(UnsafeScrolledWindowToGlibNone(scrolledWindow))
 
@@ -121328,7 +121621,7 @@ func (scrolledWindow *ScrolledWindowInstance) SetKineticScrolling(kineticScrolli
 // smaller than [property@Gtk.ScrolledWindow:min-content-height].
 func (scrolledWindow *ScrolledWindowInstance) SetMaxContentHeight(height int32) {
 	var carg0 *C.GtkScrolledWindow // in, none, converted
-	var carg1 C.int                // in, none, casted, casted C.gint
+	var carg1 C.int                // in, none, casted
 
 	carg0 = (*C.GtkScrolledWindow)(UnsafeScrolledWindowToGlibNone(scrolledWindow))
 	carg1 = C.int(height)
@@ -121353,7 +121646,7 @@ func (scrolledWindow *ScrolledWindowInstance) SetMaxContentHeight(height int32) 
 // value smaller than [property@Gtk.ScrolledWindow:min-content-width].
 func (scrolledWindow *ScrolledWindowInstance) SetMaxContentWidth(width int32) {
 	var carg0 *C.GtkScrolledWindow // in, none, converted
-	var carg1 C.int                // in, none, casted, casted C.gint
+	var carg1 C.int                // in, none, casted
 
 	carg0 = (*C.GtkScrolledWindow)(UnsafeScrolledWindowToGlibNone(scrolledWindow))
 	carg1 = C.int(width)
@@ -121378,7 +121671,7 @@ func (scrolledWindow *ScrolledWindowInstance) SetMaxContentWidth(width int32) {
 // value greater than [property@Gtk.ScrolledWindow:max-content-height].
 func (scrolledWindow *ScrolledWindowInstance) SetMinContentHeight(height int32) {
 	var carg0 *C.GtkScrolledWindow // in, none, converted
-	var carg1 C.int                // in, none, casted, casted C.gint
+	var carg1 C.int                // in, none, casted
 
 	carg0 = (*C.GtkScrolledWindow)(UnsafeScrolledWindowToGlibNone(scrolledWindow))
 	carg1 = C.int(height)
@@ -121403,7 +121696,7 @@ func (scrolledWindow *ScrolledWindowInstance) SetMinContentHeight(height int32) 
 // value greater than [property@Gtk.ScrolledWindow:max-content-width].
 func (scrolledWindow *ScrolledWindowInstance) SetMinContentWidth(width int32) {
 	var carg0 *C.GtkScrolledWindow // in, none, converted
-	var carg1 C.int                // in, none, casted, casted C.gint
+	var carg1 C.int                // in, none, casted
 
 	carg0 = (*C.GtkScrolledWindow)(UnsafeScrolledWindowToGlibNone(scrolledWindow))
 	carg1 = C.int(width)
@@ -121788,13 +122081,13 @@ func unsafeWrapSearchBar(base *gobject.ObjectInstance) *SearchBarInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -122287,13 +122580,13 @@ func unsafeWrapSearchEntry(base *gobject.ObjectInstance) *SearchEntryInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -122430,7 +122723,7 @@ func (entry *SearchEntryInstance) GetKeyCaptureWidget() Widget {
 // Gets the placeholder text associated with @entry.
 func (entry *SearchEntryInstance) GetPlaceholderText() string {
 	var carg0 *C.GtkSearchEntry // in, none, converted
-	var cret  *C.char           // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char           // return, none, string, nullable-string
 
 	carg0 = (*C.GtkSearchEntry)(UnsafeSearchEntryToGlibNone(entry))
 
@@ -122705,16 +122998,16 @@ func unsafeWrapSeparator(base *gobject.ObjectInstance) *SeparatorInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		OrientableInstance: OrientableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -122845,13 +123138,13 @@ func unsafeWrapShortcutLabel(base *gobject.ObjectInstance) *ShortcutLabelInstanc
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -122901,7 +123194,7 @@ func UnsafeShortcutLabelToGlibFull(c ShortcutLabel) unsafe.Pointer {
 //
 // Creates a new `GtkShortcutLabel` with @accelerator set.
 func NewShortcutLabel(accelerator string) Widget {
-	var carg1 *C.char      // in, none, string, casted *C.gchar
+	var carg1 *C.char      // in, none, string
 	var cret  *C.GtkWidget // return, none, converted
 
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(accelerator)))
@@ -122926,7 +123219,7 @@ func NewShortcutLabel(accelerator string) Widget {
 // Retrieves the current accelerator of @self.
 func (self *ShortcutLabelInstance) GetAccelerator() string {
 	var carg0 *C.GtkShortcutLabel // in, none, converted
-	var cret  *C.char             // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char             // return, none, string, nullable-string
 
 	carg0 = (*C.GtkShortcutLabel)(UnsafeShortcutLabelToGlibNone(self))
 
@@ -122951,7 +123244,7 @@ func (self *ShortcutLabelInstance) GetAccelerator() string {
 // Retrieves the text that is displayed when no accelerator is set.
 func (self *ShortcutLabelInstance) GetDisabledText() string {
 	var carg0 *C.GtkShortcutLabel // in, none, converted
-	var cret  *C.char             // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char             // return, none, string, nullable-string
 
 	carg0 = (*C.GtkShortcutLabel)(UnsafeShortcutLabelToGlibNone(self))
 
@@ -122976,7 +123269,7 @@ func (self *ShortcutLabelInstance) GetDisabledText() string {
 // Sets the accelerator to be displayed by @self.
 func (self *ShortcutLabelInstance) SetAccelerator(accelerator string) {
 	var carg0 *C.GtkShortcutLabel // in, none, converted
-	var carg1 *C.char             // in, none, string, casted *C.gchar
+	var carg1 *C.char             // in, none, string
 
 	carg0 = (*C.GtkShortcutLabel)(UnsafeShortcutLabelToGlibNone(self))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(accelerator)))
@@ -122996,7 +123289,7 @@ func (self *ShortcutLabelInstance) SetAccelerator(accelerator string) {
 // Sets the text to be displayed by @self when no accelerator is set.
 func (self *ShortcutLabelInstance) SetDisabledText(disabledText string) {
 	var carg0 *C.GtkShortcutLabel // in, none, converted
-	var carg1 *C.char             // in, none, string, casted *C.gchar
+	var carg1 *C.char             // in, none, string
 
 	carg0 = (*C.GtkShortcutLabel)(UnsafeShortcutLabelToGlibNone(self))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(disabledText)))
@@ -123060,16 +123353,16 @@ func unsafeWrapShortcutsGroup(base *gobject.ObjectInstance) *ShortcutsGroupInsta
 				},
 			},
 			AccessibleInstance: AccessibleInstance{
-				ObjectInstance: *base,
+				Instance: *base,
 			},
 			BuildableInstance: BuildableInstance{
-				ObjectInstance: *base,
+				Instance: *base,
 			},
 			ConstraintTargetInstance: ConstraintTargetInstance{
-				ObjectInstance: *base,
+				Instance: *base,
 			},
 			OrientableInstance: OrientableInstance{
-				ObjectInstance: *base,
+				Instance: *base,
 			},
 		},
 	}
@@ -123208,16 +123501,16 @@ func unsafeWrapShortcutsSection(base *gobject.ObjectInstance) *ShortcutsSectionI
 				},
 			},
 			AccessibleInstance: AccessibleInstance{
-				ObjectInstance: *base,
+				Instance: *base,
 			},
 			BuildableInstance: BuildableInstance{
-				ObjectInstance: *base,
+				Instance: *base,
 			},
 			ConstraintTargetInstance: ConstraintTargetInstance{
-				ObjectInstance: *base,
+				Instance: *base,
 			},
 			OrientableInstance: OrientableInstance{
-				ObjectInstance: *base,
+				Instance: *base,
 			},
 		},
 	}
@@ -123326,13 +123619,13 @@ func unsafeWrapShortcutsShortcut(base *gobject.ObjectInstance) *ShortcutsShortcu
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -123493,16 +123786,16 @@ func unsafeWrapShortcutsWindow(base *gobject.ObjectInstance) *ShortcutsWindowIns
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ShortcutManagerInstance: ShortcutManagerInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -124051,19 +124344,19 @@ func unsafeWrapSpinButton(base *gobject.ObjectInstance) *SpinButtonInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		AccessibleRangeInstance: AccessibleRangeInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		OrientableInstance: OrientableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -124117,7 +124410,7 @@ func UnsafeSpinButtonToGlibFull(c SpinButton) unsafe.Pointer {
 // Creates a new `GtkSpinButton`.
 func NewSpinButton(adjustment Adjustment, climbRate float64, digits uint) Widget {
 	var carg1 *C.GtkAdjustment // in, none, converted, nullable
-	var carg2 C.double         // in, none, casted, casted C.gdouble
+	var carg2 C.double         // in, none, casted
 	var carg3 C.guint          // in, none, casted
 	var cret  *C.GtkWidget     // return, none, converted
 
@@ -124165,9 +124458,9 @@ func NewSpinButton(adjustment Adjustment, climbRate float64, digits uint) Widget
 // is not suitable for your needs, use
 // [method@Gtk.SpinButton.set_digits] to correct it.
 func NewSpinButtonWithRange(min float64, max float64, step float64) Widget {
-	var carg1 C.double     // in, none, casted, casted C.gdouble
-	var carg2 C.double     // in, none, casted, casted C.gdouble
-	var carg3 C.double     // in, none, casted, casted C.gdouble
+	var carg1 C.double     // in, none, casted
+	var carg2 C.double     // in, none, casted
+	var carg3 C.double     // in, none, casted
 	var cret  *C.GtkWidget // return, none, converted
 
 	carg1 = C.double(min)
@@ -124202,7 +124495,7 @@ func NewSpinButtonWithRange(min float64, max float64, step float64) Widget {
 func (spinButton *SpinButtonInstance) Configure(adjustment Adjustment, climbRate float64, digits uint) {
 	var carg0 *C.GtkSpinButton // in, none, converted
 	var carg1 *C.GtkAdjustment // in, none, converted, nullable
-	var carg2 C.double         // in, none, casted, casted C.gdouble
+	var carg2 C.double         // in, none, casted
 	var carg3 C.guint          // in, none, casted
 
 	carg0 = (*C.GtkSpinButton)(UnsafeSpinButtonToGlibNone(spinButton))
@@ -124276,7 +124569,7 @@ func (spinButton *SpinButtonInstance) GetAdjustment() Adjustment {
 // Returns the acceleration rate for repeated changes.
 func (spinButton *SpinButtonInstance) GetClimbRate() float64 {
 	var carg0 *C.GtkSpinButton // in, none, converted
-	var cret  C.double         // return, none, casted, casted C.gdouble
+	var cret  C.double         // return, none, casted
 
 	carg0 = (*C.GtkSpinButton)(UnsafeSpinButtonToGlibNone(spinButton))
 
@@ -124326,8 +124619,8 @@ func (spinButton *SpinButtonInstance) GetDigits() uint {
 // See [method@Gtk.SpinButton.set_increments].
 func (spinButton *SpinButtonInstance) GetIncrements() (float64, float64) {
 	var carg0 *C.GtkSpinButton // in, none, converted
-	var carg1 C.double         // out, full, casted, casted C.gdouble
-	var carg2 C.double         // out, full, casted, casted C.gdouble
+	var carg1 C.double         // out, full, casted
+	var carg2 C.double         // out, full, casted
 
 	carg0 = (*C.GtkSpinButton)(UnsafeSpinButtonToGlibNone(spinButton))
 
@@ -124380,8 +124673,8 @@ func (spinButton *SpinButtonInstance) GetNumeric() bool {
 // See [method@Gtk.SpinButton.set_range].
 func (spinButton *SpinButtonInstance) GetRange() (float64, float64) {
 	var carg0 *C.GtkSpinButton // in, none, converted
-	var carg1 C.double         // out, full, casted, casted C.gdouble
-	var carg2 C.double         // out, full, casted, casted C.gdouble
+	var carg1 C.double         // out, full, casted
+	var carg2 C.double         // out, full, casted
 
 	carg0 = (*C.GtkSpinButton)(UnsafeSpinButtonToGlibNone(spinButton))
 
@@ -124456,7 +124749,7 @@ func (spinButton *SpinButtonInstance) GetUpdatePolicy() SpinButtonUpdatePolicy {
 // Get the value in the @spin_button.
 func (spinButton *SpinButtonInstance) GetValue() float64 {
 	var carg0 *C.GtkSpinButton // in, none, converted
-	var cret  C.double         // return, none, casted, casted C.gdouble
+	var cret  C.double         // return, none, casted
 
 	carg0 = (*C.GtkSpinButton)(UnsafeSpinButtonToGlibNone(spinButton))
 
@@ -124479,7 +124772,7 @@ func (spinButton *SpinButtonInstance) GetValue() float64 {
 // Get the value @spin_button represented as an integer.
 func (spinButton *SpinButtonInstance) GetValueAsInt() int32 {
 	var carg0 *C.GtkSpinButton // in, none, converted
-	var cret  C.int            // return, none, casted, casted C.gint
+	var cret  C.int            // return, none, casted
 
 	carg0 = (*C.GtkSpinButton)(UnsafeSpinButtonToGlibNone(spinButton))
 
@@ -124573,7 +124866,7 @@ func (spinButton *SpinButtonInstance) SetAdjustment(adjustment Adjustment) {
 // hold down a button or key.
 func (spinButton *SpinButtonInstance) SetClimbRate(climbRate float64) {
 	var carg0 *C.GtkSpinButton // in, none, converted
-	var carg1 C.double         // in, none, casted, casted C.gdouble
+	var carg1 C.double         // in, none, casted
 
 	carg0 = (*C.GtkSpinButton)(UnsafeSpinButtonToGlibNone(spinButton))
 	carg1 = C.double(climbRate)
@@ -124618,8 +124911,8 @@ func (spinButton *SpinButtonInstance) SetDigits(digits uint) {
 // the spin button’s arrows are activated.
 func (spinButton *SpinButtonInstance) SetIncrements(step float64, page float64) {
 	var carg0 *C.GtkSpinButton // in, none, converted
-	var carg1 C.double         // in, none, casted, casted C.gdouble
-	var carg2 C.double         // in, none, casted, casted C.gdouble
+	var carg1 C.double         // in, none, casted
+	var carg2 C.double         // in, none, casted
 
 	carg0 = (*C.GtkSpinButton)(UnsafeSpinButtonToGlibNone(spinButton))
 	carg1 = C.double(step)
@@ -124666,8 +124959,8 @@ func (spinButton *SpinButtonInstance) SetNumeric(numeric bool) {
 // to fit within the range, otherwise it will remain unchanged.
 func (spinButton *SpinButtonInstance) SetRange(min float64, max float64) {
 	var carg0 *C.GtkSpinButton // in, none, converted
-	var carg1 C.double         // in, none, casted, casted C.gdouble
-	var carg2 C.double         // in, none, casted, casted C.gdouble
+	var carg1 C.double         // in, none, casted
+	var carg2 C.double         // in, none, casted
 
 	carg0 = (*C.GtkSpinButton)(UnsafeSpinButtonToGlibNone(spinButton))
 	carg1 = C.double(min)
@@ -124733,7 +125026,7 @@ func (spinButton *SpinButtonInstance) SetUpdatePolicy(policy SpinButtonUpdatePol
 // Sets the value of @spin_button.
 func (spinButton *SpinButtonInstance) SetValue(value float64) {
 	var carg0 *C.GtkSpinButton // in, none, converted
-	var carg1 C.double         // in, none, casted, casted C.gdouble
+	var carg1 C.double         // in, none, casted
 
 	carg0 = (*C.GtkSpinButton)(UnsafeSpinButtonToGlibNone(spinButton))
 	carg1 = C.double(value)
@@ -124778,7 +125071,7 @@ func (spinButton *SpinButtonInstance) SetWrap(wrap bool) {
 func (spinButton *SpinButtonInstance) Spin(direction SpinType, increment float64) {
 	var carg0 *C.GtkSpinButton // in, none, converted
 	var carg1 C.GtkSpinType    // in, none, casted
-	var carg2 C.double         // in, none, casted, casted C.gdouble
+	var carg2 C.double         // in, none, casted
 
 	carg0 = (*C.GtkSpinButton)(UnsafeSpinButtonToGlibNone(spinButton))
 	carg1 = C.GtkSpinType(direction)
@@ -124955,13 +125248,13 @@ func unsafeWrapSpinner(base *gobject.ObjectInstance) *SpinnerInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -125436,13 +125729,13 @@ func unsafeWrapStack(base *gobject.ObjectInstance) *StackInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -125589,7 +125882,7 @@ func (stack *StackInstance) AddTitled(child Widget, name string, title string) S
 	var carg0 *C.GtkStack     // in, none, converted
 	var carg1 *C.GtkWidget    // in, none, converted
 	var carg2 *C.char         // in, none, string, nullable-string
-	var carg3 *C.char         // in, none, string, casted *C.gchar
+	var carg3 *C.char         // in, none, string
 	var cret  *C.GtkStackPage // return, none, converted
 
 	carg0 = (*C.GtkStack)(UnsafeStackToGlibNone(stack))
@@ -125629,7 +125922,7 @@ func (stack *StackInstance) AddTitled(child Widget, name string, title string) S
 // Returns %NULL if there is no child with this name.
 func (stack *StackInstance) GetChildByName(name string) Widget {
 	var carg0 *C.GtkStack  // in, none, converted
-	var carg1 *C.char      // in, none, string, casted *C.gchar
+	var carg1 *C.char      // in, none, string
 	var cret  *C.GtkWidget // return, none, converted, nullable
 
 	carg0 = (*C.GtkStack)(UnsafeStackToGlibNone(stack))
@@ -125894,7 +126187,7 @@ func (stack *StackInstance) GetVisibleChild() Widget {
 // Returns %NULL if there is no visible child.
 func (stack *StackInstance) GetVisibleChildName() string {
 	var carg0 *C.GtkStack // in, none, converted
-	var cret  *C.char     // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char     // return, none, string, nullable-string
 
 	carg0 = (*C.GtkStack)(UnsafeStackToGlibNone(stack))
 
@@ -126093,7 +126386,7 @@ func (stack *StackInstance) SetVisibleChild(child Widget) {
 // child of @stack.
 func (stack *StackInstance) SetVisibleChildFull(name string, transition StackTransitionType) {
 	var carg0 *C.GtkStack              // in, none, converted
-	var carg1 *C.char                  // in, none, string, casted *C.gchar
+	var carg1 *C.char                  // in, none, string
 	var carg2 C.GtkStackTransitionType // in, none, casted
 
 	carg0 = (*C.GtkStack)(UnsafeStackToGlibNone(stack))
@@ -126124,7 +126417,7 @@ func (stack *StackInstance) SetVisibleChildFull(name string, transition StackTra
 // child of @stack.
 func (stack *StackInstance) SetVisibleChildName(name string) {
 	var carg0 *C.GtkStack // in, none, converted
-	var carg1 *C.char     // in, none, string, casted *C.gchar
+	var carg1 *C.char     // in, none, string
 
 	carg0 = (*C.GtkStack)(UnsafeStackToGlibNone(stack))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
@@ -126200,13 +126493,13 @@ func unsafeWrapStackSidebar(base *gobject.ObjectInstance) *StackSidebarInstance 
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -126392,16 +126685,16 @@ func unsafeWrapStackSwitcher(base *gobject.ObjectInstance) *StackSwitcherInstanc
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		OrientableInstance: OrientableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -126632,16 +126925,16 @@ func unsafeWrapSwitch(base *gobject.ObjectInstance) *SwitchInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ActionableInstance: ActionableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -127444,16 +127737,16 @@ func unsafeWrapText(base *gobject.ObjectInstance) *TextInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		AccessibleTextInstance: AccessibleTextInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -127576,10 +127869,10 @@ func (self *TextInstance) ComputeCursorExtents(position uint) (graphene.Rect, gr
 
 	_ = strong
 	_ = carg2
-	panic("unimplemented conversion of graphene.Rect (graphene_rect_t)")
+	panic("unimplemented conversion of graphene.Rect (C.graphene_rect_t)")
 	_ = weak
 	_ = carg3
-	panic("unimplemented conversion of graphene.Rect (graphene_rect_t)")
+	panic("unimplemented conversion of graphene.Rect (C.graphene_rect_t)")
 
 	return strong, weak
 }
@@ -127803,7 +128096,7 @@ func (self *TextInstance) GetInvisibleChar() uint32 {
 // calling [method@Gtk.EntryBuffer.get_max_length] on it.
 func (self *TextInstance) GetMaxLength() int32 {
 	var carg0 *C.GtkText // in, none, converted
-	var cret  C.int      // return, none, casted, casted C.gint
+	var cret  C.int      // return, none, casted
 
 	carg0 = (*C.GtkText)(UnsafeTextToGlibNone(self))
 
@@ -127856,7 +128149,7 @@ func (self *TextInstance) GetOverwriteMode() bool {
 // If no placeholder text has been set, %NULL will be returned.
 func (self *TextInstance) GetPlaceholderText() string {
 	var carg0 *C.GtkText // in, none, converted
-	var cret  *C.char    // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char    // return, none, string, nullable-string
 
 	carg0 = (*C.GtkText)(UnsafeTextToGlibNone(self))
 
@@ -128230,7 +128523,7 @@ func (self *TextInstance) SetInvisibleChar(ch uint32) {
 // calling [method@Gtk.EntryBuffer.set_max_length] on it.
 func (self *TextInstance) SetMaxLength(length int32) {
 	var carg0 *C.GtkText // in, none, converted
-	var carg1 C.int      // in, none, casted, casted C.gint
+	var carg1 C.int      // in, none, casted
 
 	carg0 = (*C.GtkText)(UnsafeTextToGlibNone(self))
 	carg1 = C.int(length)
@@ -129720,25 +130013,26 @@ type TextView interface {
 	// chain up virtual methods:
 
 	// ParentBackspace calls the default implementations of the backspace virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
 	//
 	// The class handler for the `GtkTextView::backspace`
 	//   keybinding signal.
 	ParentBackspace()
 	// ParentCopyClipboard calls the default implementations of the copy_clipboard virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
 	//
 	// The class handler for the `GtkTextView::copy-clipboard`
 	//   keybinding signal.
 	ParentCopyClipboard()
 	// ParentCutClipboard calls the default implementations of the cut_clipboard virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
 	//
 	// The class handler for the `GtkTextView::cut-clipboard`
 	//   keybinding signal
 	ParentCutClipboard()
 	// ParentDeleteFromCursor calls the default implementations of the delete_from_cursor virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- typ DeleteType 
@@ -129748,7 +130042,8 @@ type TextView interface {
 	//   keybinding signal.
 	ParentDeleteFromCursor(typ DeleteType, count int32)
 	// ParentExtendSelection calls the default implementations of the extend_selection virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- granularity TextExtendSelection 
@@ -129763,7 +130058,8 @@ type TextView interface {
 	// The class handler for the `GtkTextView::extend-selection` signal.
 	ParentExtendSelection(granularity TextExtendSelection, location *TextIter, start *TextIter, end *TextIter) bool
 	// ParentInsertAtCursor calls the default implementations of the insert_at_cursor virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- str string 
@@ -129772,12 +130068,13 @@ type TextView interface {
 	//   keybinding signal.
 	ParentInsertAtCursor(str string)
 	// ParentInsertEmoji calls the default implementations of the insert_emoji virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
 	//
 	// The class handler for the `GtkTextView::insert-emoji` signal.
 	ParentInsertEmoji()
 	// ParentMoveCursor calls the default implementations of the move_cursor virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- step MovementStep 
@@ -129788,19 +130085,20 @@ type TextView interface {
 	//   keybinding signal.
 	ParentMoveCursor(step MovementStep, count int32, extendSelection bool)
 	// ParentPasteClipboard calls the default implementations of the paste_clipboard virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
 	//
 	// The class handler for the `GtkTextView::paste-clipboard`
 	//   keybinding signal.
 	ParentPasteClipboard()
 	// ParentSetAnchor calls the default implementations of the set_anchor virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
 	//
 	// The class handler for the `GtkTextView::set-anchor`
 	//   keybinding signal.
 	ParentSetAnchor()
 	// ParentSnapshotLayer calls the default implementations of the snapshot_layer virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- layer TextViewLayer 
@@ -129813,7 +130111,7 @@ type TextView interface {
 	//   layers the drawing is done in the buffer coordinate space.
 	ParentSnapshotLayer(layer TextViewLayer, snapshot Snapshot)
 	// ParentToggleOverwrite calls the default implementations of the toggle_overwrite virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
 	//
 	// The class handler for the `GtkTextView::toggle-overwrite`
 	//   keybinding signal.
@@ -129828,19 +130126,19 @@ func unsafeWrapTextView(base *gobject.ObjectInstance) *TextViewInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		AccessibleTextInstance: AccessibleTextInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ScrollableInstance: ScrollableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -129978,8 +130276,8 @@ func (textView *TextViewInstance) AddChildAtAnchor(child Widget, anchor TextChil
 func (textView *TextViewInstance) AddOverlay(child Widget, xpos int32, ypos int32) {
 	var carg0 *C.GtkTextView // in, none, converted
 	var carg1 *C.GtkWidget   // in, none, converted
-	var carg2 C.int          // in, none, casted, casted C.gint
-	var carg3 C.int          // in, none, casted, casted C.gint
+	var carg2 C.int          // in, none, casted
+	var carg3 C.int          // in, none, casted
 
 	carg0 = (*C.GtkTextView)(UnsafeTextViewToGlibNone(textView))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(child))
@@ -130090,10 +130388,10 @@ func (textView *TextViewInstance) BackwardDisplayLineStart(iter *TextIter) bool 
 func (textView *TextViewInstance) BufferToWindowCoords(win TextWindowType, bufferX int32, bufferY int32) (int32, int32) {
 	var carg0 *C.GtkTextView      // in, none, converted
 	var carg1 C.GtkTextWindowType // in, none, casted
-	var carg2 C.int               // in, none, casted, casted C.gint
-	var carg3 C.int               // in, none, casted, casted C.gint
-	var carg4 C.int               // out, full, casted, casted C.gint
-	var carg5 C.int               // out, full, casted, casted C.gint
+	var carg2 C.int               // in, none, casted
+	var carg3 C.int               // in, none, casted
+	var carg4 C.int               // out, full, casted
+	var carg5 C.int               // out, full, casted
 
 	carg0 = (*C.GtkTextView)(UnsafeTextViewToGlibNone(textView))
 	carg1 = C.GtkTextWindowType(win)
@@ -130231,7 +130529,7 @@ func (textView *TextViewInstance) GetAcceptsTab() bool {
 // Gets the bottom margin for text in the @text_view.
 func (textView *TextViewInstance) GetBottomMargin() int32 {
 	var carg0 *C.GtkTextView // in, none, converted
-	var cret  C.int          // return, none, casted, casted C.gint
+	var cret  C.int          // return, none, casted
 
 	carg0 = (*C.GtkTextView)(UnsafeTextViewToGlibNone(textView))
 
@@ -130322,10 +130620,10 @@ func (textView *TextViewInstance) GetCursorLocations(iter *TextIter) (gdk.Rectan
 
 	_ = strong
 	_ = carg2
-	panic("unimplemented conversion of gdk.Rectangle (GdkRectangle)")
+	panic("unimplemented conversion of gdk.Rectangle (C.GdkRectangle)")
 	_ = weak
 	_ = carg3
-	panic("unimplemented conversion of gdk.Rectangle (GdkRectangle)")
+	panic("unimplemented conversion of gdk.Rectangle (C.GdkRectangle)")
 
 	return strong, weak
 }
@@ -130455,7 +130753,7 @@ func (textView *TextViewInstance) GetGutter(win TextWindowType) Widget {
 // The indentation may be negative.
 func (textView *TextViewInstance) GetIndent() int32 {
 	var carg0 *C.GtkTextView // in, none, converted
-	var cret  C.int          // return, none, casted, casted C.gint
+	var cret  C.int          // return, none, casted
 
 	carg0 = (*C.GtkTextView)(UnsafeTextViewToGlibNone(textView))
 
@@ -130535,8 +130833,8 @@ func (textView *TextViewInstance) GetInputPurpose() InputPurpose {
 // [method@Gtk.TextView.window_to_buffer_coords].
 func (textView *TextViewInstance) GetIterAtLocation(x int32, y int32) (TextIter, bool) {
 	var carg0 *C.GtkTextView // in, none, converted
-	var carg2 C.int          // in, none, casted, casted C.gint
-	var carg3 C.int          // in, none, casted, casted C.gint
+	var carg2 C.int          // in, none, casted
+	var carg3 C.int          // in, none, casted
 	var carg1 C.GtkTextIter  // out, transfer: none, C Pointers: 0, Name: TextIter, caller-allocates
 	var cret  C.gboolean     // return
 
@@ -130554,7 +130852,7 @@ func (textView *TextViewInstance) GetIterAtLocation(x int32, y int32) (TextIter,
 
 	_ = iter
 	_ = carg1
-	panic("unimplemented conversion of TextIter (GtkTextIter)")
+	panic("unimplemented conversion of TextIter (C.GtkTextIter)")
 	if cret != 0 {
 		goret = true
 	}
@@ -130590,10 +130888,10 @@ func (textView *TextViewInstance) GetIterAtLocation(x int32, y int32) (TextIter,
 // which returns cursor locations, i.e. positions between characters.
 func (textView *TextViewInstance) GetIterAtPosition(x int32, y int32) (TextIter, int32, bool) {
 	var carg0 *C.GtkTextView // in, none, converted
-	var carg3 C.int          // in, none, casted, casted C.gint
-	var carg4 C.int          // in, none, casted, casted C.gint
+	var carg3 C.int          // in, none, casted
+	var carg4 C.int          // in, none, casted
 	var carg1 C.GtkTextIter  // out, transfer: none, C Pointers: 0, Name: TextIter, caller-allocates
-	var carg2 C.int          // out, full, casted, casted C.gint
+	var carg2 C.int          // out, full, casted
 	var cret  C.gboolean     // return
 
 	carg0 = (*C.GtkTextView)(UnsafeTextViewToGlibNone(textView))
@@ -130611,7 +130909,7 @@ func (textView *TextViewInstance) GetIterAtPosition(x int32, y int32) (TextIter,
 
 	_ = iter
 	_ = carg1
-	panic("unimplemented conversion of TextIter (GtkTextIter)")
+	panic("unimplemented conversion of TextIter (C.GtkTextIter)")
 	trailing = int32(carg2)
 	if cret != 0 {
 		goret = true
@@ -130651,7 +130949,7 @@ func (textView *TextViewInstance) GetIterLocation(iter *TextIter) gdk.Rectangle 
 
 	_ = location
 	_ = carg2
-	panic("unimplemented conversion of gdk.Rectangle (GdkRectangle)")
+	panic("unimplemented conversion of gdk.Rectangle (C.GdkRectangle)")
 
 	return location
 }
@@ -130692,7 +130990,7 @@ func (textView *TextViewInstance) GetJustification() Justification {
 // Tags in the buffer may override the default.
 func (textView *TextViewInstance) GetLeftMargin() int32 {
 	var carg0 *C.GtkTextView // in, none, converted
-	var cret  C.int          // return, none, casted, casted C.gint
+	var cret  C.int          // return, none, casted
 
 	carg0 = (*C.GtkTextView)(UnsafeTextViewToGlibNone(textView))
 
@@ -130726,9 +131024,9 @@ func (textView *TextViewInstance) GetLeftMargin() int32 {
 // of the line.
 func (textView *TextViewInstance) GetLineAtY(y int32) (TextIter, int32) {
 	var carg0 *C.GtkTextView // in, none, converted
-	var carg2 C.int          // in, none, casted, casted C.gint
+	var carg2 C.int          // in, none, casted
 	var carg1 C.GtkTextIter  // out, transfer: none, C Pointers: 0, Name: TextIter, caller-allocates
-	var carg3 C.int          // out, full, casted, casted C.gint
+	var carg3 C.int          // out, full, casted
 
 	carg0 = (*C.GtkTextView)(UnsafeTextViewToGlibNone(textView))
 	carg2 = C.int(y)
@@ -130742,7 +131040,7 @@ func (textView *TextViewInstance) GetLineAtY(y int32) (TextIter, int32) {
 
 	_ = targetIter
 	_ = carg1
-	panic("unimplemented conversion of TextIter (GtkTextIter)")
+	panic("unimplemented conversion of TextIter (C.GtkTextIter)")
 	lineTop = int32(carg3)
 
 	return targetIter, lineTop
@@ -130767,8 +131065,8 @@ func (textView *TextViewInstance) GetLineAtY(y int32) (TextIter, int32) {
 func (textView *TextViewInstance) GetLineYrange(iter *TextIter) (int32, int32) {
 	var carg0 *C.GtkTextView // in, none, converted
 	var carg1 *C.GtkTextIter // in, none, converted
-	var carg2 C.int          // out, full, casted, casted C.gint
-	var carg3 C.int          // out, full, casted, casted C.gint
+	var carg2 C.int          // out, full, casted
+	var carg3 C.int          // out, full, casted
 
 	carg0 = (*C.GtkTextView)(UnsafeTextViewToGlibNone(textView))
 	carg1 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
@@ -130874,7 +131172,7 @@ func (textView *TextViewInstance) GetOverwrite() bool {
 // is equal to the line space between each paragraph.
 func (textView *TextViewInstance) GetPixelsAboveLines() int32 {
 	var carg0 *C.GtkTextView // in, none, converted
-	var cret  C.int          // return, none, casted, casted C.gint
+	var cret  C.int          // return, none, casted
 
 	carg0 = (*C.GtkTextView)(UnsafeTextViewToGlibNone(textView))
 
@@ -130900,7 +131198,7 @@ func (textView *TextViewInstance) GetPixelsAboveLines() int32 {
 // the value returned by [method@Gtk.TextView.get_pixels_above_lines].
 func (textView *TextViewInstance) GetPixelsBelowLines() int32 {
 	var carg0 *C.GtkTextView // in, none, converted
-	var cret  C.int          // return, none, casted, casted C.gint
+	var cret  C.int          // return, none, casted
 
 	carg0 = (*C.GtkTextView)(UnsafeTextViewToGlibNone(textView))
 
@@ -130924,7 +131222,7 @@ func (textView *TextViewInstance) GetPixelsBelowLines() int32 {
 // inside a paragraph.
 func (textView *TextViewInstance) GetPixelsInsideWrap() int32 {
 	var carg0 *C.GtkTextView // in, none, converted
-	var cret  C.int          // return, none, casted, casted C.gint
+	var cret  C.int          // return, none, casted
 
 	carg0 = (*C.GtkTextView)(UnsafeTextViewToGlibNone(textView))
 
@@ -130949,7 +131247,7 @@ func (textView *TextViewInstance) GetPixelsInsideWrap() int32 {
 // Tags in the buffer may override the default.
 func (textView *TextViewInstance) GetRightMargin() int32 {
 	var carg0 *C.GtkTextView // in, none, converted
-	var cret  C.int          // return, none, casted, casted C.gint
+	var cret  C.int          // return, none, casted
 
 	carg0 = (*C.GtkTextView)(UnsafeTextViewToGlibNone(textView))
 
@@ -131027,7 +131325,7 @@ func (textView *TextViewInstance) GetTabs() *pango.TabArray {
 // Gets the top margin for text in the @text_view.
 func (textView *TextViewInstance) GetTopMargin() int32 {
 	var carg0 *C.GtkTextView // in, none, converted
-	var cret  C.int          // return, none, casted, casted C.gint
+	var cret  C.int          // return, none, casted
 
 	carg0 = (*C.GtkTextView)(UnsafeTextViewToGlibNone(textView))
 
@@ -131065,7 +131363,7 @@ func (textView *TextViewInstance) GetVisibleRect() gdk.Rectangle {
 
 	_ = visibleRect
 	_ = carg1
-	panic("unimplemented conversion of gdk.Rectangle (GdkRectangle)")
+	panic("unimplemented conversion of gdk.Rectangle (C.GdkRectangle)")
 
 	return visibleRect
 }
@@ -131140,8 +131438,8 @@ func (textView *TextViewInstance) MoveMarkOnscreen(mark TextMark) bool {
 func (textView *TextViewInstance) MoveOverlay(child Widget, xpos int32, ypos int32) {
 	var carg0 *C.GtkTextView // in, none, converted
 	var carg1 *C.GtkWidget   // in, none, converted
-	var carg2 C.int          // in, none, casted, casted C.gint
-	var carg3 C.int          // in, none, casted, casted C.gint
+	var carg2 C.int          // in, none, casted
+	var carg3 C.int          // in, none, casted
 
 	carg0 = (*C.GtkTextView)(UnsafeTextViewToGlibNone(textView))
 	carg1 = (*C.GtkWidget)(UnsafeWidgetToGlibNone(child))
@@ -131182,7 +131480,7 @@ func (textView *TextViewInstance) MoveOverlay(child Widget, xpos int32, ypos int
 func (textView *TextViewInstance) MoveVisually(iter *TextIter, count int32) bool {
 	var carg0 *C.GtkTextView // in, none, converted
 	var carg1 *C.GtkTextIter // in, none, converted
-	var carg2 C.int          // in, none, casted, casted C.gint
+	var carg2 C.int          // in, none, casted
 	var cret  C.gboolean     // return
 
 	carg0 = (*C.GtkTextView)(UnsafeTextViewToGlibNone(textView))
@@ -131335,10 +131633,10 @@ func (textView *TextViewInstance) ScrollMarkOnscreen(mark TextMark) {
 func (textView *TextViewInstance) ScrollToIter(iter *TextIter, withinMargin float64, useAlign bool, xalign float64, yalign float64) bool {
 	var carg0 *C.GtkTextView // in, none, converted
 	var carg1 *C.GtkTextIter // in, none, converted
-	var carg2 C.double       // in, none, casted, casted C.gdouble
+	var carg2 C.double       // in, none, casted
 	var carg3 C.gboolean     // in
-	var carg4 C.double       // in, none, casted, casted C.gdouble
-	var carg5 C.double       // in, none, casted, casted C.gdouble
+	var carg4 C.double       // in, none, casted
+	var carg5 C.double       // in, none, casted
 	var cret  C.gboolean     // return
 
 	carg0 = (*C.GtkTextView)(UnsafeTextViewToGlibNone(textView))
@@ -131389,10 +131687,10 @@ func (textView *TextViewInstance) ScrollToIter(iter *TextIter, withinMargin floa
 func (textView *TextViewInstance) ScrollToMark(mark TextMark, withinMargin float64, useAlign bool, xalign float64, yalign float64) {
 	var carg0 *C.GtkTextView // in, none, converted
 	var carg1 *C.GtkTextMark // in, none, converted
-	var carg2 C.double       // in, none, casted, casted C.gdouble
+	var carg2 C.double       // in, none, casted
 	var carg3 C.gboolean     // in
-	var carg4 C.double       // in, none, casted, casted C.gdouble
-	var carg5 C.double       // in, none, casted, casted C.gdouble
+	var carg4 C.double       // in, none, casted
+	var carg5 C.double       // in, none, casted
 
 	carg0 = (*C.GtkTextView)(UnsafeTextViewToGlibNone(textView))
 	carg1 = (*C.GtkTextMark)(UnsafeTextMarkToGlibNone(mark))
@@ -131453,7 +131751,7 @@ func (textView *TextViewInstance) SetAcceptsTab(acceptsTab bool) {
 // In CSS terms, the value set here is padding.
 func (textView *TextViewInstance) SetBottomMargin(bottomMargin int32) {
 	var carg0 *C.GtkTextView // in, none, converted
-	var carg1 C.int          // in, none, casted, casted C.gint
+	var carg1 C.int          // in, none, casted
 
 	carg0 = (*C.GtkTextView)(UnsafeTextViewToGlibNone(textView))
 	carg1 = C.int(bottomMargin)
@@ -131603,7 +131901,7 @@ func (textView *TextViewInstance) SetGutter(win TextWindowType, widget Widget) {
 // Tags in the buffer may override the default.
 func (textView *TextViewInstance) SetIndent(indent int32) {
 	var carg0 *C.GtkTextView // in, none, converted
-	var carg1 C.int          // in, none, casted, casted C.gint
+	var carg1 C.int          // in, none, casted
 
 	carg0 = (*C.GtkTextView)(UnsafeTextViewToGlibNone(textView))
 	carg1 = C.int(indent)
@@ -131692,7 +131990,7 @@ func (textView *TextViewInstance) SetJustification(justification Justification) 
 // In CSS terms, the value set here is padding.
 func (textView *TextViewInstance) SetLeftMargin(leftMargin int32) {
 	var carg0 *C.GtkTextView // in, none, converted
-	var carg1 C.int          // in, none, casted, casted C.gint
+	var carg1 C.int          // in, none, casted
 
 	carg0 = (*C.GtkTextView)(UnsafeTextViewToGlibNone(textView))
 	carg1 = C.int(leftMargin)
@@ -131756,7 +132054,7 @@ func (textView *TextViewInstance) SetOverwrite(overwrite bool) {
 // Tags in the buffer for @text_view may override the defaults.
 func (textView *TextViewInstance) SetPixelsAboveLines(pixelsAboveLines int32) {
 	var carg0 *C.GtkTextView // in, none, converted
-	var carg1 C.int          // in, none, casted, casted C.gint
+	var carg1 C.int          // in, none, casted
 
 	carg0 = (*C.GtkTextView)(UnsafeTextViewToGlibNone(textView))
 	carg1 = C.int(pixelsAboveLines)
@@ -131778,7 +132076,7 @@ func (textView *TextViewInstance) SetPixelsAboveLines(pixelsAboveLines int32) {
 // May be overridden by tags applied to @text_view’s buffer.
 func (textView *TextViewInstance) SetPixelsBelowLines(pixelsBelowLines int32) {
 	var carg0 *C.GtkTextView // in, none, converted
-	var carg1 C.int          // in, none, casted, casted C.gint
+	var carg1 C.int          // in, none, casted
 
 	carg0 = (*C.GtkTextView)(UnsafeTextViewToGlibNone(textView))
 	carg1 = C.int(pixelsBelowLines)
@@ -131800,7 +132098,7 @@ func (textView *TextViewInstance) SetPixelsBelowLines(pixelsBelowLines int32) {
 // May be overridden by tags in @text_view’s buffer.
 func (textView *TextViewInstance) SetPixelsInsideWrap(pixelsInsideWrap int32) {
 	var carg0 *C.GtkTextView // in, none, converted
-	var carg1 C.int          // in, none, casted, casted C.gint
+	var carg1 C.int          // in, none, casted
 
 	carg0 = (*C.GtkTextView)(UnsafeTextViewToGlibNone(textView))
 	carg1 = C.int(pixelsInsideWrap)
@@ -131824,7 +132122,7 @@ func (textView *TextViewInstance) SetPixelsInsideWrap(pixelsInsideWrap int32) {
 // In CSS terms, the value set here is padding.
 func (textView *TextViewInstance) SetRightMargin(rightMargin int32) {
 	var carg0 *C.GtkTextView // in, none, converted
-	var carg1 C.int          // in, none, casted, casted C.gint
+	var carg1 C.int          // in, none, casted
 
 	carg0 = (*C.GtkTextView)(UnsafeTextViewToGlibNone(textView))
 	carg1 = C.int(rightMargin)
@@ -131867,7 +132165,7 @@ func (textView *TextViewInstance) SetTabs(tabs *pango.TabArray) {
 // In CSS terms, the value set here is padding.
 func (textView *TextViewInstance) SetTopMargin(topMargin int32) {
 	var carg0 *C.GtkTextView // in, none, converted
-	var carg1 C.int          // in, none, casted, casted C.gint
+	var carg1 C.int          // in, none, casted
 
 	carg0 = (*C.GtkTextView)(UnsafeTextViewToGlibNone(textView))
 	carg1 = C.int(topMargin)
@@ -131949,10 +132247,10 @@ func (textView *TextViewInstance) StartsDisplayLine(iter *TextIter) bool {
 func (textView *TextViewInstance) WindowToBufferCoords(win TextWindowType, windowX int32, windowY int32) (int32, int32) {
 	var carg0 *C.GtkTextView      // in, none, converted
 	var carg1 C.GtkTextWindowType // in, none, casted
-	var carg2 C.int               // in, none, casted, casted C.gint
-	var carg3 C.int               // in, none, casted, casted C.gint
-	var carg4 C.int               // out, full, casted, casted C.gint
-	var carg5 C.int               // out, full, casted, casted C.gint
+	var carg2 C.int               // in, none, casted
+	var carg3 C.int               // in, none, casted
+	var carg4 C.int               // out, full, casted
+	var carg5 C.int               // out, full, casted
 
 	carg0 = (*C.GtkTextView)(UnsafeTextViewToGlibNone(textView))
 	carg1 = C.GtkTextWindowType(win)
@@ -132191,22 +132489,23 @@ type TextViewOverrides[Instance TextView] struct {
 	// WidgetOverrides allows you to override virtual methods from the parent class Widget
 	WidgetOverrides[Instance]
 
-	// Backspace allows you to override the implementation of the virtual method backspace.
+	// // Backspace allows you to override the implementation of the virtual method backspace.
 	//
 	// The class handler for the `GtkTextView::backspace`
 	//   keybinding signal.
 	Backspace func(Instance)
-	// CopyClipboard allows you to override the implementation of the virtual method copy_clipboard.
+	// // CopyClipboard allows you to override the implementation of the virtual method copy_clipboard.
 	//
 	// The class handler for the `GtkTextView::copy-clipboard`
 	//   keybinding signal.
 	CopyClipboard func(Instance)
-	// CutClipboard allows you to override the implementation of the virtual method cut_clipboard.
+	// // CutClipboard allows you to override the implementation of the virtual method cut_clipboard.
 	//
 	// The class handler for the `GtkTextView::cut-clipboard`
 	//   keybinding signal
 	CutClipboard func(Instance)
-	// DeleteFromCursor allows you to override the implementation of the virtual method delete_from_cursor.
+	// // DeleteFromCursor allows you to override the implementation of the virtual method delete_from_cursor.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- typ DeleteType 
@@ -132215,7 +132514,8 @@ type TextViewOverrides[Instance TextView] struct {
 	// The class handler for the `GtkTextView::delete-from-cursor`
 	//   keybinding signal.
 	DeleteFromCursor func(Instance, DeleteType, int32)
-	// ExtendSelection allows you to override the implementation of the virtual method extend_selection.
+	// // ExtendSelection allows you to override the implementation of the virtual method extend_selection.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- granularity TextExtendSelection 
@@ -132229,7 +132529,8 @@ type TextViewOverrides[Instance TextView] struct {
 	//
 	// The class handler for the `GtkTextView::extend-selection` signal.
 	ExtendSelection func(Instance, TextExtendSelection, *TextIter, *TextIter, *TextIter) bool
-	// InsertAtCursor allows you to override the implementation of the virtual method insert_at_cursor.
+	// // InsertAtCursor allows you to override the implementation of the virtual method insert_at_cursor.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- str string 
@@ -132237,11 +132538,12 @@ type TextViewOverrides[Instance TextView] struct {
 	// The class handler for the `GtkTextView::insert-at-cursor`
 	//   keybinding signal.
 	InsertAtCursor func(Instance, string)
-	// InsertEmoji allows you to override the implementation of the virtual method insert_emoji.
+	// // InsertEmoji allows you to override the implementation of the virtual method insert_emoji.
 	//
 	// The class handler for the `GtkTextView::insert-emoji` signal.
 	InsertEmoji func(Instance)
-	// MoveCursor allows you to override the implementation of the virtual method move_cursor.
+	// // MoveCursor allows you to override the implementation of the virtual method move_cursor.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- step MovementStep 
@@ -132251,17 +132553,18 @@ type TextViewOverrides[Instance TextView] struct {
 	// The class handler for the `GtkTextView::move-cursor`
 	//   keybinding signal.
 	MoveCursor func(Instance, MovementStep, int32, bool)
-	// PasteClipboard allows you to override the implementation of the virtual method paste_clipboard.
+	// // PasteClipboard allows you to override the implementation of the virtual method paste_clipboard.
 	//
 	// The class handler for the `GtkTextView::paste-clipboard`
 	//   keybinding signal.
 	PasteClipboard func(Instance)
-	// SetAnchor allows you to override the implementation of the virtual method set_anchor.
+	// // SetAnchor allows you to override the implementation of the virtual method set_anchor.
 	//
 	// The class handler for the `GtkTextView::set-anchor`
 	//   keybinding signal.
 	SetAnchor func(Instance)
-	// SnapshotLayer allows you to override the implementation of the virtual method snapshot_layer.
+	// // SnapshotLayer allows you to override the implementation of the virtual method snapshot_layer.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- layer TextViewLayer 
@@ -132273,7 +132576,7 @@ type TextViewOverrides[Instance TextView] struct {
 	//   text. In the %GTK_TEXT_VIEW_LAYER_BELOW_TEXT and %GTK_TEXT_VIEW_LAYER_ABOVE_TEXT
 	//   layers the drawing is done in the buffer coordinate space.
 	SnapshotLayer func(Instance, TextViewLayer, Snapshot)
-	// ToggleOverwrite allows you to override the implementation of the virtual method toggle_overwrite.
+	// // ToggleOverwrite allows you to override the implementation of the virtual method toggle_overwrite.
 	//
 	// The class handler for the `GtkTextView::toggle-overwrite`
 	//   keybinding signal.
@@ -132340,7 +132643,7 @@ func UnsafeApplyTextViewOverrides[Instance TextView](gclass unsafe.Pointer, over
 			func(carg0 *C.GtkTextView, carg1 C.GtkDeleteType, carg2 C.int) {
 				var textView Instance   // go GtkTextView subclass
 				var typ      DeleteType // in, none, casted
-				var count    int32      // in, none, casted, casted C.gint
+				var count    int32      // in, none, casted
 
 				textView = UnsafeTextViewFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				typ = DeleteType(carg1)
@@ -132388,7 +132691,7 @@ func UnsafeApplyTextViewOverrides[Instance TextView](gclass unsafe.Pointer, over
 			"_gotk4_gtk4_TextView_insert_at_cursor",
 			func(carg0 *C.GtkTextView, carg1 *C.char) {
 				var textView Instance // go GtkTextView subclass
-				var str      string   // in, none, string, casted *C.gchar
+				var str      string   // in, none, string
 
 				textView = UnsafeTextViewFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				str = C.GoString((*C.char)(unsafe.Pointer(carg1)))
@@ -132421,7 +132724,7 @@ func UnsafeApplyTextViewOverrides[Instance TextView](gclass unsafe.Pointer, over
 			func(carg0 *C.GtkTextView, carg1 C.GtkMovementStep, carg2 C.int, carg3 C.gboolean) {
 				var textView        Instance     // go GtkTextView subclass
 				var step            MovementStep // in, none, casted
-				var count           int32        // in, none, casted, casted C.gint
+				var count           int32        // in, none, casted
 				var extendSelection bool         // in
 
 				textView = UnsafeTextViewFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
@@ -132474,7 +132777,7 @@ func UnsafeApplyTextViewOverrides[Instance TextView](gclass unsafe.Pointer, over
 			func(carg0 *C.GtkTextView, carg1 C.GtkTextViewLayer, carg2 *C.GtkSnapshot) {
 				var textView Instance      // go GtkTextView subclass
 				var layer    TextViewLayer // in, none, casted
-				var snapshot Snapshot      // in, none, converted, casted *C.Snapshot
+				var snapshot Snapshot      // in, none, converted
 
 				textView = UnsafeTextViewFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				layer = TextViewLayer(carg1)
@@ -132502,7 +132805,7 @@ func UnsafeApplyTextViewOverrides[Instance TextView](gclass unsafe.Pointer, over
 }
 
 // ParentBackspace calls the default implementations of the backspace virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
 //
 // The class handler for the `GtkTextView::backspace`
 //   keybinding signal.
@@ -132516,7 +132819,7 @@ func (textView *TextViewInstance) ParentBackspace() {
 }
 
 // ParentCopyClipboard calls the default implementations of the copy_clipboard virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
 //
 // The class handler for the `GtkTextView::copy-clipboard`
 //   keybinding signal.
@@ -132530,7 +132833,7 @@ func (textView *TextViewInstance) ParentCopyClipboard() {
 }
 
 // ParentCutClipboard calls the default implementations of the cut_clipboard virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
 //
 // The class handler for the `GtkTextView::cut-clipboard`
 //   keybinding signal
@@ -132544,7 +132847,8 @@ func (textView *TextViewInstance) ParentCutClipboard() {
 }
 
 // ParentDeleteFromCursor calls the default implementations of the delete_from_cursor virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- typ DeleteType 
@@ -132555,7 +132859,7 @@ func (textView *TextViewInstance) ParentCutClipboard() {
 func (textView *TextViewInstance) ParentDeleteFromCursor(typ DeleteType, count int32) {
 	var carg0 *C.GtkTextView
 	var carg1 C.GtkDeleteType // in, none, casted
-	var carg2 C.int           // in, none, casted, casted C.gint
+	var carg2 C.int           // in, none, casted
 
 	parentclass := (*C.GtkTextViewClass)(classdata.PeekParentClass(UnsafeTextViewToGlibNone(textView)))
 
@@ -132569,7 +132873,8 @@ func (textView *TextViewInstance) ParentDeleteFromCursor(typ DeleteType, count i
 }
 
 // ParentExtendSelection calls the default implementations of the extend_selection virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- granularity TextExtendSelection 
@@ -132614,7 +132919,8 @@ func (textView *TextViewInstance) ParentExtendSelection(granularity TextExtendSe
 }
 
 // ParentInsertAtCursor calls the default implementations of the insert_at_cursor virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- str string 
@@ -132623,7 +132929,7 @@ func (textView *TextViewInstance) ParentExtendSelection(granularity TextExtendSe
 //   keybinding signal.
 func (textView *TextViewInstance) ParentInsertAtCursor(str string) {
 	var carg0 *C.GtkTextView
-	var carg1 *C.char // in, none, string, casted *C.gchar
+	var carg1 *C.char // in, none, string
 
 	parentclass := (*C.GtkTextViewClass)(classdata.PeekParentClass(UnsafeTextViewToGlibNone(textView)))
 
@@ -132636,7 +132942,7 @@ func (textView *TextViewInstance) ParentInsertAtCursor(str string) {
 }
 
 // ParentInsertEmoji calls the default implementations of the insert_emoji virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
 //
 // The class handler for the `GtkTextView::insert-emoji` signal.
 func (textView *TextViewInstance) ParentInsertEmoji() {
@@ -132649,7 +132955,8 @@ func (textView *TextViewInstance) ParentInsertEmoji() {
 }
 
 // ParentMoveCursor calls the default implementations of the move_cursor virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- step MovementStep 
@@ -132661,7 +132968,7 @@ func (textView *TextViewInstance) ParentInsertEmoji() {
 func (textView *TextViewInstance) ParentMoveCursor(step MovementStep, count int32, extendSelection bool) {
 	var carg0 *C.GtkTextView
 	var carg1 C.GtkMovementStep // in, none, casted
-	var carg2 C.int             // in, none, casted, casted C.gint
+	var carg2 C.int             // in, none, casted
 	var carg3 C.gboolean        // in
 
 	parentclass := (*C.GtkTextViewClass)(classdata.PeekParentClass(UnsafeTextViewToGlibNone(textView)))
@@ -132680,7 +132987,7 @@ func (textView *TextViewInstance) ParentMoveCursor(step MovementStep, count int3
 }
 
 // ParentPasteClipboard calls the default implementations of the paste_clipboard virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
 //
 // The class handler for the `GtkTextView::paste-clipboard`
 //   keybinding signal.
@@ -132694,7 +133001,7 @@ func (textView *TextViewInstance) ParentPasteClipboard() {
 }
 
 // ParentSetAnchor calls the default implementations of the set_anchor virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
 //
 // The class handler for the `GtkTextView::set-anchor`
 //   keybinding signal.
@@ -132708,7 +133015,8 @@ func (textView *TextViewInstance) ParentSetAnchor() {
 }
 
 // ParentSnapshotLayer calls the default implementations of the snapshot_layer virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- layer TextViewLayer 
@@ -132722,7 +133030,7 @@ func (textView *TextViewInstance) ParentSetAnchor() {
 func (textView *TextViewInstance) ParentSnapshotLayer(layer TextViewLayer, snapshot Snapshot) {
 	var carg0 *C.GtkTextView
 	var carg1 C.GtkTextViewLayer // in, none, casted
-	var carg2 *C.GtkSnapshot     // in, none, converted, casted *C.Snapshot
+	var carg2 *C.GtkSnapshot     // in, none, converted
 
 	parentclass := (*C.GtkTextViewClass)(classdata.PeekParentClass(UnsafeTextViewToGlibNone(textView)))
 
@@ -132736,7 +133044,7 @@ func (textView *TextViewInstance) ParentSnapshotLayer(layer TextViewLayer, snaps
 }
 
 // ParentToggleOverwrite calls the default implementations of the toggle_overwrite virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
 //
 // The class handler for the `GtkTextView::toggle-overwrite`
 //   keybinding signal.
@@ -132925,16 +133233,16 @@ func unsafeWrapToggleButton(base *gobject.ObjectInstance) *ToggleButtonInstance 
 				},
 			},
 			AccessibleInstance: AccessibleInstance{
-				ObjectInstance: *base,
+				Instance: *base,
 			},
 			ActionableInstance: ActionableInstance{
-				ObjectInstance: *base,
+				Instance: *base,
 			},
 			BuildableInstance: BuildableInstance{
-				ObjectInstance: *base,
+				Instance: *base,
 			},
 			ConstraintTargetInstance: ConstraintTargetInstance{
-				ObjectInstance: *base,
+				Instance: *base,
 			},
 		},
 	}
@@ -133006,7 +133314,7 @@ func NewToggleButton() Widget {
 //
 // Creates a new toggle button with a text label.
 func NewToggleButtonWithLabel(label string) Widget {
-	var carg1 *C.char      // in, none, string, casted *C.gchar
+	var carg1 *C.char      // in, none, string
 	var cret  *C.GtkWidget // return, none, converted
 
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(label)))
@@ -133038,7 +133346,7 @@ func NewToggleButtonWithLabel(label string) Widget {
 // The label will be created using [ctor@Gtk.Label.new_with_mnemonic],
 // so underscores in @label indicate the mnemonic for the button.
 func NewToggleButtonWithMnemonic(label string) Widget {
-	var carg1 *C.char      // in, none, string, casted *C.gchar
+	var carg1 *C.char      // in, none, string
 	var cret  *C.GtkWidget // return, none, converted
 
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(label)))
@@ -133377,13 +133685,13 @@ func unsafeWrapTreeExpander(base *gobject.ObjectInstance) *TreeExpanderInstance 
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -133870,13 +134178,13 @@ func unsafeWrapVideo(base *gobject.ObjectInstance) *VideoInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -134482,16 +134790,16 @@ func unsafeWrapViewport(base *gobject.ObjectInstance) *ViewportInstance {
 			},
 		},
 		AccessibleInstance: AccessibleInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		BuildableInstance: BuildableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ConstraintTargetInstance: ConstraintTargetInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 		ScrollableInstance: ScrollableInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -134760,16 +135068,16 @@ func unsafeWrapEmojiChooser(base *gobject.ObjectInstance) *EmojiChooserInstance 
 				},
 			},
 			AccessibleInstance: AccessibleInstance{
-				ObjectInstance: *base,
+				Instance: *base,
 			},
 			BuildableInstance: BuildableInstance{
-				ObjectInstance: *base,
+				Instance: *base,
 			},
 			ConstraintTargetInstance: ConstraintTargetInstance{
-				ObjectInstance: *base,
+				Instance: *base,
 			},
 			ShortcutManagerInstance: ShortcutManagerInstance{
-				ObjectInstance: *base,
+				Instance: *base,
 			},
 		},
 	}
@@ -135052,19 +135360,19 @@ func unsafeWrapGridView(base *gobject.ObjectInstance) *GridViewInstance {
 				},
 			},
 			AccessibleInstance: AccessibleInstance{
-				ObjectInstance: *base,
+				Instance: *base,
 			},
 			BuildableInstance: BuildableInstance{
-				ObjectInstance: *base,
+				Instance: *base,
 			},
 			ConstraintTargetInstance: ConstraintTargetInstance{
-				ObjectInstance: *base,
+				Instance: *base,
 			},
 			OrientableInstance: OrientableInstance{
-				ObjectInstance: *base,
+				Instance: *base,
 			},
 			ScrollableInstance: ScrollableInstance{
-				ObjectInstance: *base,
+				Instance: *base,
 			},
 		},
 	}
@@ -135715,7 +136023,7 @@ func NewAccessibleListFromArray(accessibles []Accessible) *AccessibleList {
 	_ = accessibles
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []Accessible (GtkAccessible**)")
+	panic("unimplemented conversion of []Accessible (**C.GtkAccessible)")
 
 	cret = C.gtk_accessible_list_new_from_array(carg1, carg2)
 	runtime.KeepAlive(accessibles)
@@ -137255,7 +137563,7 @@ func BitsetIterInitAt(set *Bitset, target uint) (BitsetIter, uint, bool) {
 
 	_ = iter
 	_ = carg1
-	panic("unimplemented conversion of BitsetIter (GtkBitsetIter)")
+	panic("unimplemented conversion of BitsetIter (C.GtkBitsetIter)")
 	value = uint(carg4)
 	if cret != 0 {
 		goret = true
@@ -137297,7 +137605,7 @@ func BitsetIterInitFirst(set *Bitset) (BitsetIter, uint, bool) {
 
 	_ = iter
 	_ = carg1
-	panic("unimplemented conversion of BitsetIter (GtkBitsetIter)")
+	panic("unimplemented conversion of BitsetIter (C.GtkBitsetIter)")
 	value = uint(carg3)
 	if cret != 0 {
 		goret = true
@@ -137339,7 +137647,7 @@ func BitsetIterInitLast(set *Bitset) (BitsetIter, uint, bool) {
 
 	_ = iter
 	_ = carg1
-	panic("unimplemented conversion of BitsetIter (GtkBitsetIter)")
+	panic("unimplemented conversion of BitsetIter (C.GtkBitsetIter)")
 	value = uint(carg3)
 	if cret != 0 {
 		goret = true
@@ -137878,7 +138186,7 @@ func UnsafeBuildableParseContextToGlibFull(b *BuildableParseContext) unsafe.Poin
 // elements, see gtk_buildable_parse_context_get_element_stack().
 func (_context *BuildableParseContext) GetElement() string {
 	var carg0 *C.GtkBuildableParseContext // in, none, converted
-	var cret  *C.char                     // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char                     // return, none, string, nullable-string
 
 	carg0 = (*C.GtkBuildableParseContext)(UnsafeBuildableParseContextToGlibNone(_context))
 
@@ -137907,8 +138215,8 @@ func (_context *BuildableParseContext) GetElement() string {
 // "the best number we could come up with for error messages."
 func (_context *BuildableParseContext) GetPosition() (int32, int32) {
 	var carg0 *C.GtkBuildableParseContext // in, none, converted
-	var carg1 C.int                       // out, full, casted, casted C.gint
-	var carg2 C.int                       // out, full, casted, casted C.gint
+	var carg1 C.int                       // out, full, casted
+	var carg2 C.int                       // out, full, casted
 
 	carg0 = (*C.GtkBuildableParseContext)(UnsafeBuildableParseContextToGlibNone(_context))
 
@@ -139737,7 +140045,7 @@ func (section *CssSection) GetStartLocation() *CssLocation {
 // [method@Gtk.CssSection.print].
 func (section *CssSection) ToString() string {
 	var carg0 *C.GtkCssSection // in, none, converted
-	var cret  *C.char          // return, full, string, casted *C.gchar
+	var cret  *C.char          // return, full, string
 
 	carg0 = (*C.GtkCssSection)(UnsafeCssSectionToGlibNone(section))
 
@@ -143840,10 +144148,10 @@ func NewPaperSize(name string) *PaperSize {
 // Creates a new `GtkPaperSize` object with the
 // given parameters.
 func NewPaperSizeCustom(name string, displayName string, width float64, height float64, unit Unit) *PaperSize {
-	var carg1 *C.char         // in, none, string, casted *C.gchar
-	var carg2 *C.char         // in, none, string, casted *C.gchar
-	var carg3 C.double        // in, none, casted, casted C.gdouble
-	var carg4 C.double        // in, none, casted, casted C.gdouble
+	var carg1 *C.char         // in, none, string
+	var carg2 *C.char         // in, none, string
+	var carg3 C.double        // in, none, casted
+	var carg4 C.double        // in, none, casted
 	var carg5 C.GtkUnit       // in, none, casted
 	var cret  *C.GtkPaperSize // return, full, converted
 
@@ -143888,9 +144196,9 @@ func NewPaperSizeCustom(name string, displayName string, width float64, height f
 // @width and @height are used to
 // construct a custom `GtkPaperSize` object.
 func NewPaperSizeFromIPP(ippName string, width float64, height float64) *PaperSize {
-	var carg1 *C.char         // in, none, string, casted *C.gchar
-	var carg2 C.double        // in, none, casted, casted C.gdouble
-	var carg3 C.double        // in, none, casted, casted C.gdouble
+	var carg1 *C.char         // in, none, string
+	var carg2 C.double        // in, none, casted
+	var carg3 C.double        // in, none, casted
 	var cret  *C.GtkPaperSize // return, full, converted
 
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(ippName)))
@@ -143972,10 +144280,10 @@ func NewPaperSizeFromKeyFile(keyFile *glib.KeyFile, groupName string) (*PaperSiz
 // @ppd_display_name, @width and @height are used to
 // construct a custom `GtkPaperSize` object.
 func NewPaperSizeFromPPD(ppdName string, ppdDisplayName string, width float64, height float64) *PaperSize {
-	var carg1 *C.char         // in, none, string, casted *C.gchar
-	var carg2 *C.char         // in, none, string, casted *C.gchar
-	var carg3 C.double        // in, none, casted, casted C.gdouble
-	var carg4 C.double        // in, none, casted, casted C.gdouble
+	var carg1 *C.char         // in, none, string
+	var carg2 *C.char         // in, none, string
+	var carg3 C.double        // in, none, casted
+	var carg4 C.double        // in, none, casted
 	var cret  *C.GtkPaperSize // return, full, converted
 
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(ppdName)))
@@ -144007,7 +144315,7 @@ func NewPaperSizeFromPPD(ppdName string, ppdDisplayName string, width float64, h
 // Returns the name of the default paper size, which
 // depends on the current locale.
 func PaperSizeGetDefault() string {
-	var cret *C.char // return, none, string, casted *C.gchar
+	var cret *C.char // return, none, string
 
 	cret = C.gtk_paper_size_get_default()
 
@@ -144092,7 +144400,7 @@ func (other *PaperSize) Copy() *PaperSize {
 func (size *PaperSize) GetDefaultBottomMargin(unit Unit) float64 {
 	var carg0 *C.GtkPaperSize // in, none, converted
 	var carg1 C.GtkUnit       // in, none, casted
-	var cret  C.double        // return, none, casted, casted C.gdouble
+	var cret  C.double        // return, none, casted
 
 	carg0 = (*C.GtkPaperSize)(UnsafePaperSizeToGlibNone(size))
 	carg1 = C.GtkUnit(unit)
@@ -144122,7 +144430,7 @@ func (size *PaperSize) GetDefaultBottomMargin(unit Unit) float64 {
 func (size *PaperSize) GetDefaultLeftMargin(unit Unit) float64 {
 	var carg0 *C.GtkPaperSize // in, none, converted
 	var carg1 C.GtkUnit       // in, none, casted
-	var cret  C.double        // return, none, casted, casted C.gdouble
+	var cret  C.double        // return, none, casted
 
 	carg0 = (*C.GtkPaperSize)(UnsafePaperSizeToGlibNone(size))
 	carg1 = C.GtkUnit(unit)
@@ -144152,7 +144460,7 @@ func (size *PaperSize) GetDefaultLeftMargin(unit Unit) float64 {
 func (size *PaperSize) GetDefaultRightMargin(unit Unit) float64 {
 	var carg0 *C.GtkPaperSize // in, none, converted
 	var carg1 C.GtkUnit       // in, none, casted
-	var cret  C.double        // return, none, casted, casted C.gdouble
+	var cret  C.double        // return, none, casted
 
 	carg0 = (*C.GtkPaperSize)(UnsafePaperSizeToGlibNone(size))
 	carg1 = C.GtkUnit(unit)
@@ -144182,7 +144490,7 @@ func (size *PaperSize) GetDefaultRightMargin(unit Unit) float64 {
 func (size *PaperSize) GetDefaultTopMargin(unit Unit) float64 {
 	var carg0 *C.GtkPaperSize // in, none, converted
 	var carg1 C.GtkUnit       // in, none, casted
-	var cret  C.double        // return, none, casted, casted C.gdouble
+	var cret  C.double        // return, none, casted
 
 	carg0 = (*C.GtkPaperSize)(UnsafePaperSizeToGlibNone(size))
 	carg1 = C.GtkUnit(unit)
@@ -144207,7 +144515,7 @@ func (size *PaperSize) GetDefaultTopMargin(unit Unit) float64 {
 // Gets the human-readable name of the `GtkPaperSize`.
 func (size *PaperSize) GetDisplayName() string {
 	var carg0 *C.GtkPaperSize // in, none, converted
-	var cret  *C.char         // return, none, string, casted *C.gchar
+	var cret  *C.char         // return, none, string
 
 	carg0 = (*C.GtkPaperSize)(UnsafePaperSizeToGlibNone(size))
 
@@ -144236,7 +144544,7 @@ func (size *PaperSize) GetDisplayName() string {
 func (size *PaperSize) GetHeight(unit Unit) float64 {
 	var carg0 *C.GtkPaperSize // in, none, converted
 	var carg1 C.GtkUnit       // in, none, casted
-	var cret  C.double        // return, none, casted, casted C.gdouble
+	var cret  C.double        // return, none, casted
 
 	carg0 = (*C.GtkPaperSize)(UnsafePaperSizeToGlibNone(size))
 	carg1 = C.GtkUnit(unit)
@@ -144261,7 +144569,7 @@ func (size *PaperSize) GetHeight(unit Unit) float64 {
 // Gets the name of the `GtkPaperSize`.
 func (size *PaperSize) GetName() string {
 	var carg0 *C.GtkPaperSize // in, none, converted
-	var cret  *C.char         // return, none, string, casted *C.gchar
+	var cret  *C.char         // return, none, string
 
 	carg0 = (*C.GtkPaperSize)(UnsafePaperSizeToGlibNone(size))
 
@@ -144285,7 +144593,7 @@ func (size *PaperSize) GetName() string {
 // may be %NULL.
 func (size *PaperSize) GetPPDName() string {
 	var carg0 *C.GtkPaperSize // in, none, converted
-	var cret  *C.char         // return, none, string, casted *C.gchar
+	var cret  *C.char         // return, none, string
 
 	carg0 = (*C.GtkPaperSize)(UnsafePaperSizeToGlibNone(size))
 
@@ -144314,7 +144622,7 @@ func (size *PaperSize) GetPPDName() string {
 func (size *PaperSize) GetWidth(unit Unit) float64 {
 	var carg0 *C.GtkPaperSize // in, none, converted
 	var carg1 C.GtkUnit       // in, none, casted
-	var cret  C.double        // return, none, casted, casted C.gdouble
+	var cret  C.double        // return, none, casted
 
 	carg0 = (*C.GtkPaperSize)(UnsafePaperSizeToGlibNone(size))
 	carg1 = C.GtkUnit(unit)
@@ -144423,8 +144731,8 @@ func (size *PaperSize) IsIPP() bool {
 // Changes the dimensions of a @size to @width x @height.
 func (size *PaperSize) SetSize(width float64, height float64, unit Unit) {
 	var carg0 *C.GtkPaperSize // in, none, converted
-	var carg1 C.double        // in, none, casted, casted C.gdouble
-	var carg2 C.double        // in, none, casted, casted C.gdouble
+	var carg1 C.double        // in, none, casted
+	var carg2 C.double        // in, none, casted
 	var carg3 C.GtkUnit       // in, none, casted
 
 	carg0 = (*C.GtkPaperSize)(UnsafePaperSizeToGlibNone(size))
@@ -144450,7 +144758,7 @@ func (size *PaperSize) SetSize(width float64, height float64, unit Unit) {
 func (size *PaperSize) ToKeyFile(keyFile *glib.KeyFile, groupName string) {
 	var carg0 *C.GtkPaperSize // in, none, converted
 	var carg1 *C.GKeyFile     // in, none, converted
-	var carg2 *C.char         // in, none, string, casted *C.gchar
+	var carg2 *C.char         // in, none, string
 
 	carg0 = (*C.GtkPaperSize)(UnsafePaperSizeToGlibNone(size))
 	carg1 = (*C.GKeyFile)(glib.UnsafeKeyFileToGlibNone(keyFile))
@@ -144910,7 +145218,7 @@ func (info *RecentInfo) GetAdded() *glib.DateTime {
 // of the resource pointed by @info.
 func (info *RecentInfo) GetAge() int32 {
 	var carg0 *C.GtkRecentInfo // in, none, converted
-	var cret  C.int            // return, none, casted, casted C.gint
+	var cret  C.int            // return, none, casted
 
 	carg0 = (*C.GtkRecentInfo)(UnsafeRecentInfoToGlibNone(info))
 
@@ -144946,8 +145254,8 @@ func (info *RecentInfo) GetAge() int32 {
 // storage specification, they will be expanded.
 func (info *RecentInfo) GetApplicationInfo(appName string) (string, uint, *glib.DateTime, bool) {
 	var carg0 *C.GtkRecentInfo // in, none, converted
-	var carg1 *C.char          // in, none, string, casted *C.gchar
-	var carg2 *C.char          // out, none, string, casted *C.gchar
+	var carg1 *C.char          // in, none, string
+	var carg2 *C.char          // out, none, string
 	var carg3 C.guint          // out, full, casted
 	var carg4 *C.GDateTime     // out, none, converted
 	var cret  C.gboolean       // return
@@ -144999,7 +145307,7 @@ func (info *RecentInfo) GetApplications() (uint, []string) {
 	length = uint(carg1)
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (char**)")
+	panic("unimplemented conversion of []string (**C.char)")
 
 	return length, goret
 }
@@ -145013,7 +145321,7 @@ func (info *RecentInfo) GetApplications() (uint, []string) {
 // Gets the (short) description of the resource.
 func (info *RecentInfo) GetDescription() string {
 	var carg0 *C.GtkRecentInfo // in, none, converted
-	var cret  *C.char          // return, none, string, casted *C.gchar
+	var cret  *C.char          // return, none, string
 
 	carg0 = (*C.GtkRecentInfo)(UnsafeRecentInfoToGlibNone(info))
 
@@ -145039,7 +145347,7 @@ func (info *RecentInfo) GetDescription() string {
 // of the resource is obtained.
 func (info *RecentInfo) GetDisplayName() string {
 	var carg0 *C.GtkRecentInfo // in, none, converted
-	var cret  *C.char          // return, none, string, casted *C.gchar
+	var cret  *C.char          // return, none, string
 
 	carg0 = (*C.GtkRecentInfo)(UnsafeRecentInfoToGlibNone(info))
 
@@ -145105,7 +145413,7 @@ func (info *RecentInfo) GetGroups() (uint, []string) {
 	length = uint(carg1)
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (char**)")
+	panic("unimplemented conversion of []string (**C.char)")
 
 	return length, goret
 }
@@ -145119,7 +145427,7 @@ func (info *RecentInfo) GetGroups() (uint, []string) {
 // Gets the MIME type of the resource.
 func (info *RecentInfo) GetMIMEType() string {
 	var carg0 *C.GtkRecentInfo // in, none, converted
-	var cret  *C.char          // return, none, string, casted *C.gchar
+	var cret  *C.char          // return, none, string
 
 	carg0 = (*C.GtkRecentInfo)(UnsafeRecentInfoToGlibNone(info))
 
@@ -145199,7 +145507,7 @@ func (info *RecentInfo) GetPrivateHint() bool {
 // to “file:///foo/bar.txt” will yield “bar.txt”.
 func (info *RecentInfo) GetShortName() string {
 	var carg0 *C.GtkRecentInfo // in, none, converted
-	var cret  *C.char          // return, full, string, casted *C.gchar
+	var cret  *C.char          // return, full, string
 
 	carg0 = (*C.GtkRecentInfo)(UnsafeRecentInfoToGlibNone(info))
 
@@ -145223,7 +145531,7 @@ func (info *RecentInfo) GetShortName() string {
 // Gets the URI of the resource.
 func (info *RecentInfo) GetURI() string {
 	var carg0 *C.GtkRecentInfo // in, none, converted
-	var cret  *C.char          // return, none, string, casted *C.gchar
+	var cret  *C.char          // return, none, string
 
 	carg0 = (*C.GtkRecentInfo)(UnsafeRecentInfoToGlibNone(info))
 
@@ -145250,7 +145558,7 @@ func (info *RecentInfo) GetURI() string {
 // of [method@Gtk.RecentInfo.get_uri].
 func (info *RecentInfo) GetURIDisplay() string {
 	var carg0 *C.GtkRecentInfo // in, none, converted
-	var cret  *C.char          // return, full, string, casted *C.gchar, nullable
+	var cret  *C.char          // return, full, string, nullable-string
 
 	carg0 = (*C.GtkRecentInfo)(UnsafeRecentInfoToGlibNone(info))
 
@@ -145304,7 +145612,7 @@ func (info *RecentInfo) GetVisited() *glib.DateTime {
 // Checks whether an application registered this resource using @app_name.
 func (info *RecentInfo) HasApplication(appName string) bool {
 	var carg0 *C.GtkRecentInfo // in, none, converted
-	var carg1 *C.char          // in, none, string, casted *C.gchar
+	var carg1 *C.char          // in, none, string
 	var cret  C.gboolean       // return
 
 	carg0 = (*C.GtkRecentInfo)(UnsafeRecentInfoToGlibNone(info))
@@ -145338,7 +145646,7 @@ func (info *RecentInfo) HasApplication(appName string) bool {
 // registered for the recently used item @info.
 func (info *RecentInfo) HasGroup(groupName string) bool {
 	var carg0 *C.GtkRecentInfo // in, none, converted
-	var carg1 *C.char          // in, none, string, casted *C.gchar
+	var carg1 *C.char          // in, none, string
 	var cret  C.gboolean       // return
 
 	carg0 = (*C.GtkRecentInfo)(UnsafeRecentInfoToGlibNone(info))
@@ -145394,7 +145702,7 @@ func (info *RecentInfo) IsLocal() bool {
 // recently used resource represented by @info.
 func (info *RecentInfo) LastApplication() string {
 	var carg0 *C.GtkRecentInfo // in, none, converted
-	var cret  *C.char          // return, full, string, casted *C.gchar
+	var cret  *C.char          // return, full, string
 
 	carg0 = (*C.GtkRecentInfo)(UnsafeRecentInfoToGlibNone(info))
 
@@ -147398,7 +147706,7 @@ func (iter *TextIter) BackwardChar() bool {
 // the function does nothing and returns %FALSE.
 func (iter *TextIter) BackwardChars(count int32) bool {
 	var carg0 *C.GtkTextIter // in, none, converted
-	var carg1 C.int          // in, none, casted, casted C.gint
+	var carg1 C.int          // in, none, casted
 	var cret  C.gboolean     // return
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
@@ -147457,7 +147765,7 @@ func (iter *TextIter) BackwardCursorPosition() bool {
 // See [method@Gtk.TextIter.forward_cursor_position] for details.
 func (iter *TextIter) BackwardCursorPositions(count int32) bool {
 	var carg0 *C.GtkTextIter // in, none, converted
-	var carg1 C.int          // in, none, casted, casted C.gint
+	var carg1 C.int          // in, none, casted
 	var cret  C.gboolean     // return
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
@@ -147573,7 +147881,7 @@ func (iter *TextIter) BackwardLine() bool {
 // moves forward by 0 - @count lines.
 func (iter *TextIter) BackwardLines(count int32) bool {
 	var carg0 *C.GtkTextIter // in, none, converted
-	var carg1 C.int          // in, none, casted, casted C.gint
+	var carg1 C.int          // in, none, casted
 	var cret  C.gboolean     // return
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
@@ -147612,7 +147920,7 @@ func (iter *TextIter) BackwardLines(count int32) bool {
 // even if there is a possible @match_start before or at @iter.
 func (iter *TextIter) BackwardSearch(str string, flags TextSearchFlags, limit *TextIter) (TextIter, TextIter, bool) {
 	var carg0 *C.GtkTextIter       // in, none, converted
-	var carg1 *C.char              // in, none, string, casted *C.gchar
+	var carg1 *C.char              // in, none, string
 	var carg2 C.GtkTextSearchFlags // in, none, casted
 	var carg5 *C.GtkTextIter       // in, none, converted, nullable
 	var carg3 C.GtkTextIter        // out, transfer: none, C Pointers: 0, Name: TextIter, optional, caller-allocates
@@ -147639,10 +147947,10 @@ func (iter *TextIter) BackwardSearch(str string, flags TextSearchFlags, limit *T
 
 	_ = matchStart
 	_ = carg3
-	panic("unimplemented conversion of TextIter (GtkTextIter)")
+	panic("unimplemented conversion of TextIter (C.GtkTextIter)")
 	_ = matchEnd
 	_ = carg4
-	panic("unimplemented conversion of TextIter (GtkTextIter)")
+	panic("unimplemented conversion of TextIter (C.GtkTextIter)")
 	if cret != 0 {
 		goret = true
 	}
@@ -147696,7 +148004,7 @@ func (iter *TextIter) BackwardSentenceStart() bool {
 // If @count is negative, moves forward instead of backward.
 func (iter *TextIter) BackwardSentenceStarts(count int32) bool {
 	var carg0 *C.GtkTextIter // in, none, converted
-	var carg1 C.int          // in, none, casted, casted C.gint
+	var carg1 C.int          // in, none, casted
 	var cret  C.gboolean     // return
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
@@ -147799,7 +148107,7 @@ func (iter *TextIter) BackwardVisibleCursorPosition() bool {
 // See [method@Gtk.TextIter.backward_cursor_position] for details.
 func (iter *TextIter) BackwardVisibleCursorPositions(count int32) bool {
 	var carg0 *C.GtkTextIter // in, none, converted
-	var carg1 C.int          // in, none, casted, casted C.gint
+	var carg1 C.int          // in, none, casted
 	var cret  C.gboolean     // return
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
@@ -147873,7 +148181,7 @@ func (iter *TextIter) BackwardVisibleLine() bool {
 // moves forward by 0 - @count lines.
 func (iter *TextIter) BackwardVisibleLines(count int32) bool {
 	var carg0 *C.GtkTextIter // in, none, converted
-	var carg1 C.int          // in, none, casted, casted C.gint
+	var carg1 C.int          // in, none, casted
 	var cret  C.gboolean     // return
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
@@ -147936,7 +148244,7 @@ func (iter *TextIter) BackwardVisibleWordStart() bool {
 // Calls [method@Gtk.TextIter.backward_visible_word_start] up to @count times.
 func (iter *TextIter) BackwardVisibleWordStarts(count int32) bool {
 	var carg0 *C.GtkTextIter // in, none, converted
-	var carg1 C.int          // in, none, casted, casted C.gint
+	var carg1 C.int          // in, none, casted
 	var cret  C.gboolean     // return
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
@@ -147999,7 +148307,7 @@ func (iter *TextIter) BackwardWordStart() bool {
 // Calls [method@Gtk.TextIter.backward_word_start] up to @count times.
 func (iter *TextIter) BackwardWordStarts(count int32) bool {
 	var carg0 *C.GtkTextIter // in, none, converted
-	var carg1 C.int          // in, none, casted, casted C.gint
+	var carg1 C.int          // in, none, casted
 	var cret  C.gboolean     // return
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
@@ -148077,7 +148385,7 @@ func (iter *TextIter) CanInsert(defaultEditability bool) bool {
 func (lhs *TextIter) Compare(rhs *TextIter) int32 {
 	var carg0 *C.GtkTextIter // in, none, converted
 	var carg1 *C.GtkTextIter // in, none, converted
-	var cret  C.int          // return, none, casted, casted C.gint
+	var cret  C.int          // return, none, casted
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(lhs))
 	carg1 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(rhs))
@@ -148392,7 +148700,7 @@ func (iter *TextIter) ForwardChar() bool {
 // is 0, the function does nothing and returns %FALSE.
 func (iter *TextIter) ForwardChars(count int32) bool {
 	var carg0 *C.GtkTextIter // in, none, converted
-	var carg1 C.int          // in, none, casted, casted C.gint
+	var carg1 C.int          // in, none, casted
 	var cret  C.gboolean     // return
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
@@ -148465,7 +148773,7 @@ func (iter *TextIter) ForwardCursorPosition() bool {
 // See [method@Gtk.TextIter.forward_cursor_position] for details.
 func (iter *TextIter) ForwardCursorPositions(count int32) bool {
 	var carg0 *C.GtkTextIter // in, none, converted
-	var carg1 C.int          // in, none, casted, casted C.gint
+	var carg1 C.int          // in, none, casted
 	var cret  C.gboolean     // return
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
@@ -148581,7 +148889,7 @@ func (iter *TextIter) ForwardLine() bool {
 // moves backward by 0 - @count lines.
 func (iter *TextIter) ForwardLines(count int32) bool {
 	var carg0 *C.GtkTextIter // in, none, converted
-	var carg1 C.int          // in, none, casted, casted C.gint
+	var carg1 C.int          // in, none, casted
 	var cret  C.gboolean     // return
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
@@ -148626,7 +148934,7 @@ func (iter *TextIter) ForwardLines(count int32) bool {
 // even if there is a possible @match_end after or at @iter.
 func (iter *TextIter) ForwardSearch(str string, flags TextSearchFlags, limit *TextIter) (TextIter, TextIter, bool) {
 	var carg0 *C.GtkTextIter       // in, none, converted
-	var carg1 *C.char              // in, none, string, casted *C.gchar
+	var carg1 *C.char              // in, none, string
 	var carg2 C.GtkTextSearchFlags // in, none, casted
 	var carg5 *C.GtkTextIter       // in, none, converted, nullable
 	var carg3 C.GtkTextIter        // out, transfer: none, C Pointers: 0, Name: TextIter, optional, caller-allocates
@@ -148653,10 +148961,10 @@ func (iter *TextIter) ForwardSearch(str string, flags TextSearchFlags, limit *Te
 
 	_ = matchStart
 	_ = carg3
-	panic("unimplemented conversion of TextIter (GtkTextIter)")
+	panic("unimplemented conversion of TextIter (C.GtkTextIter)")
 	_ = matchEnd
 	_ = carg4
-	panic("unimplemented conversion of TextIter (GtkTextIter)")
+	panic("unimplemented conversion of TextIter (C.GtkTextIter)")
 	if cret != 0 {
 		goret = true
 	}
@@ -148710,7 +149018,7 @@ func (iter *TextIter) ForwardSentenceEnd() bool {
 // If @count is negative, moves backward instead of forward.
 func (iter *TextIter) ForwardSentenceEnds(count int32) bool {
 	var carg0 *C.GtkTextIter // in, none, converted
-	var carg1 C.int          // in, none, casted, casted C.gint
+	var carg1 C.int          // in, none, casted
 	var cret  C.gboolean     // return
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
@@ -148864,7 +149172,7 @@ func (iter *TextIter) ForwardVisibleCursorPosition() bool {
 // See [method@Gtk.TextIter.forward_cursor_position] for details.
 func (iter *TextIter) ForwardVisibleCursorPositions(count int32) bool {
 	var carg0 *C.GtkTextIter // in, none, converted
-	var carg1 C.int          // in, none, casted, casted C.gint
+	var carg1 C.int          // in, none, casted
 	var cret  C.gboolean     // return
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
@@ -148935,7 +149243,7 @@ func (iter *TextIter) ForwardVisibleLine() bool {
 // moves backward by 0 - @count lines.
 func (iter *TextIter) ForwardVisibleLines(count int32) bool {
 	var carg0 *C.GtkTextIter // in, none, converted
-	var carg1 C.int          // in, none, casted, casted C.gint
+	var carg1 C.int          // in, none, casted
 	var cret  C.gboolean     // return
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
@@ -148998,7 +149306,7 @@ func (iter *TextIter) ForwardVisibleWordEnd() bool {
 // Calls [method@Gtk.TextIter.forward_visible_word_end] up to @count times.
 func (iter *TextIter) ForwardVisibleWordEnds(count int32) bool {
 	var carg0 *C.GtkTextIter // in, none, converted
-	var carg1 C.int          // in, none, casted, casted C.gint
+	var carg1 C.int          // in, none, casted
 	var cret  C.gboolean     // return
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
@@ -149061,7 +149369,7 @@ func (iter *TextIter) ForwardWordEnd() bool {
 // Calls [method@Gtk.TextIter.forward_word_end] up to @count times.
 func (iter *TextIter) ForwardWordEnds(count int32) bool {
 	var carg0 *C.GtkTextIter // in, none, converted
-	var carg1 C.int          // in, none, casted, casted C.gint
+	var carg1 C.int          // in, none, casted
 	var cret  C.gboolean     // return
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
@@ -149113,7 +149421,7 @@ func (iter *TextIter) GetBuffer() TextBuffer {
 // including the paragraph delimiters.
 func (iter *TextIter) GetBytesInLine() int32 {
 	var carg0 *C.GtkTextIter // in, none, converted
-	var cret  C.int          // return, none, casted, casted C.gint
+	var cret  C.int          // return, none, casted
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
 
@@ -149168,7 +149476,7 @@ func (iter *TextIter) GetChar() uint32 {
 // including the paragraph delimiters.
 func (iter *TextIter) GetCharsInLine() int32 {
 	var carg0 *C.GtkTextIter // in, none, converted
-	var cret  C.int          // return, none, casted, casted C.gint
+	var cret  C.int          // return, none, casted
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
 
@@ -149248,7 +149556,7 @@ func (iter *TextIter) GetLanguage() *pango.Language {
 // with 0 for the first line in the buffer.
 func (iter *TextIter) GetLine() int32 {
 	var carg0 *C.GtkTextIter // in, none, converted
-	var cret  C.int          // return, none, casted, casted C.gint
+	var cret  C.int          // return, none, casted
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
 
@@ -149276,7 +149584,7 @@ func (iter *TextIter) GetLine() int32 {
 // number of bytes to represent.
 func (iter *TextIter) GetLineIndex() int32 {
 	var carg0 *C.GtkTextIter // in, none, converted
-	var cret  C.int          // return, none, casted, casted C.gint
+	var cret  C.int          // return, none, casted
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
 
@@ -149302,7 +149610,7 @@ func (iter *TextIter) GetLineIndex() int32 {
 // The first character on the line has offset 0.
 func (iter *TextIter) GetLineOffset() int32 {
 	var carg0 *C.GtkTextIter // in, none, converted
-	var cret  C.int          // return, none, casted, casted C.gint
+	var cret  C.int          // return, none, casted
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
 
@@ -149366,7 +149674,7 @@ func (iter *TextIter) GetMarks() []TextMark {
 // an offset back into an iterator.
 func (iter *TextIter) GetOffset() int32 {
 	var carg0 *C.GtkTextIter // in, none, converted
-	var cret  C.int          // return, none, casted, casted C.gint
+	var cret  C.int          // return, none, casted
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
 
@@ -149430,7 +149738,7 @@ func (iter *TextIter) GetPaintable() gdk.Paintable {
 func (start *TextIter) GetSlice(end *TextIter) string {
 	var carg0 *C.GtkTextIter // in, none, converted
 	var carg1 *C.GtkTextIter // in, none, converted
-	var cret  *C.char        // return, full, string, casted *C.gchar
+	var cret  *C.char        // return, full, string
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(start))
 	carg1 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(end))
@@ -149503,7 +149811,7 @@ func (iter *TextIter) GetTags() []TextTag {
 func (start *TextIter) GetText(end *TextIter) string {
 	var carg0 *C.GtkTextIter // in, none, converted
 	var carg1 *C.GtkTextIter // in, none, converted
-	var cret  *C.char        // return, full, string, casted *C.gchar
+	var cret  *C.char        // return, full, string
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(start))
 	carg1 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(end))
@@ -149578,7 +149886,7 @@ func (iter *TextIter) GetToggledTags(toggledOn bool) []TextTag {
 // toggled on.
 func (iter *TextIter) GetVisibleLineIndex() int32 {
 	var carg0 *C.GtkTextIter // in, none, converted
-	var cret  C.int          // return, none, casted, casted C.gint
+	var cret  C.int          // return, none, casted
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
 
@@ -149604,7 +149912,7 @@ func (iter *TextIter) GetVisibleLineIndex() int32 {
 // toggled on.
 func (iter *TextIter) GetVisibleLineOffset() int32 {
 	var carg0 *C.GtkTextIter // in, none, converted
-	var cret  C.int          // return, none, casted, casted C.gint
+	var cret  C.int          // return, none, casted
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
 
@@ -149637,7 +149945,7 @@ func (iter *TextIter) GetVisibleLineOffset() int32 {
 func (start *TextIter) GetVisibleSlice(end *TextIter) string {
 	var carg0 *C.GtkTextIter // in, none, converted
 	var carg1 *C.GtkTextIter // in, none, converted
-	var cret  *C.char        // return, full, string, casted *C.gchar
+	var cret  *C.char        // return, full, string
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(start))
 	carg1 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(end))
@@ -149673,7 +149981,7 @@ func (start *TextIter) GetVisibleSlice(end *TextIter) string {
 func (start *TextIter) GetVisibleText(end *TextIter) string {
 	var carg0 *C.GtkTextIter // in, none, converted
 	var carg1 *C.GtkTextIter // in, none, converted
-	var cret  *C.char        // return, full, string, casted *C.gchar
+	var cret  *C.char        // return, full, string
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(start))
 	carg1 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(end))
@@ -149949,7 +150257,7 @@ func (first *TextIter) Order(second *TextIter) {
 // in the buffer, moves @iter to the start of the last line in the buffer.
 func (iter *TextIter) SetLine(lineNumber int32) {
 	var carg0 *C.GtkTextIter // in, none, converted
-	var carg1 C.int          // in, none, casted, casted C.gint
+	var carg1 C.int          // in, none, casted
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
 	carg1 = C.int(lineNumber)
@@ -149971,7 +150279,7 @@ func (iter *TextIter) SetLine(lineNumber int32) {
 // encoded character.
 func (iter *TextIter) SetLineIndex(byteOnLine int32) {
 	var carg0 *C.GtkTextIter // in, none, converted
-	var carg1 C.int          // in, none, casted, casted C.gint
+	var carg1 C.int          // in, none, casted
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
 	carg1 = C.int(byteOnLine)
@@ -149995,7 +150303,7 @@ func (iter *TextIter) SetLineIndex(byteOnLine int32) {
 // index rather than a character offset.
 func (iter *TextIter) SetLineOffset(charOnLine int32) {
 	var carg0 *C.GtkTextIter // in, none, converted
-	var carg1 C.int          // in, none, casted, casted C.gint
+	var carg1 C.int          // in, none, casted
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
 	carg1 = C.int(charOnLine)
@@ -150017,7 +150325,7 @@ func (iter *TextIter) SetLineOffset(charOnLine int32) {
 // of the entire text buffer, starting with 0.
 func (iter *TextIter) SetOffset(charOffset int32) {
 	var carg0 *C.GtkTextIter // in, none, converted
-	var carg1 C.int          // in, none, casted, casted C.gint
+	var carg1 C.int          // in, none, casted
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
 	carg1 = C.int(charOffset)
@@ -150038,7 +150346,7 @@ func (iter *TextIter) SetOffset(charOffset int32) {
 // in the index.
 func (iter *TextIter) SetVisibleLineIndex(byteOnLine int32) {
 	var carg0 *C.GtkTextIter // in, none, converted
-	var carg1 C.int          // in, none, casted, casted C.gint
+	var carg1 C.int          // in, none, casted
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
 	carg1 = C.int(byteOnLine)
@@ -150059,7 +150367,7 @@ func (iter *TextIter) SetVisibleLineIndex(byteOnLine int32) {
 // counted in the offset.
 func (iter *TextIter) SetVisibleLineOffset(charOnLine int32) {
 	var carg0 *C.GtkTextIter // in, none, converted
-	var carg1 C.int          // in, none, casted, casted C.gint
+	var carg1 C.int          // in, none, casted
 
 	carg0 = (*C.GtkTextIter)(UnsafeTextIterToGlibNone(iter))
 	carg1 = C.int(charOnLine)
@@ -151212,7 +151520,7 @@ func (widgetClass *WidgetClass) AddShortcut(shortcut Shortcut) {
 // initializer after calling [method@Gtk.WidgetClass.set_template].
 func (widgetClass *WidgetClass) BindTemplateChildFull(name string, internalChild bool, structOffset int) {
 	var carg0 *C.GtkWidgetClass // in, none, converted
-	var carg1 *C.char           // in, none, string, casted *C.gchar
+	var carg1 *C.char           // in, none, string
 	var carg2 C.gboolean        // in
 	var carg3 C.gssize          // in, none, casted
 
@@ -151296,7 +151604,7 @@ func (widgetClass *WidgetClass) GetActivateSignal() uint {
 // See [method@Gtk.WidgetClass.set_css_name] for details.
 func (widgetClass *WidgetClass) GetCSSName() string {
 	var carg0 *C.GtkWidgetClass // in, none, converted
-	var cret  *C.char           // return, none, string, casted *C.gchar
+	var cret  *C.char           // return, none, string
 
 	carg0 = (*C.GtkWidgetClass)(UnsafeWidgetClassToGlibNone(widgetClass))
 
@@ -151361,8 +151669,8 @@ func (widgetClass *WidgetClass) GetLayoutManagerType() gobject.Type {
 // of the same type as the property.
 func (widgetClass *WidgetClass) InstallPropertyAction(actionName string, propertyName string) {
 	var carg0 *C.GtkWidgetClass // in, none, converted
-	var carg1 *C.char           // in, none, string, casted *C.gchar
-	var carg2 *C.char           // in, none, string, casted *C.gchar
+	var carg1 *C.char           // in, none, string
+	var carg2 *C.char           // in, none, string
 
 	carg0 = (*C.GtkWidgetClass)(UnsafeWidgetClassToGlibNone(widgetClass))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(actionName)))
@@ -151403,9 +151711,9 @@ func (widgetClass *WidgetClass) QueryAction(index_ uint) (gobject.Type, string, 
 	var carg0 *C.GtkWidgetClass // in, none, converted
 	var carg1 C.guint           // in, none, casted
 	var carg2 C.GType           // out, none, casted, alias
-	var carg3 *C.char           // out, none, string, casted *C.gchar
+	var carg3 *C.char           // out, none, string
 	var carg4 *C.GVariantType   // out, none, converted, nullable
-	var carg5 *C.char           // out, none, string, casted *C.gchar, nullable
+	var carg5 *C.char           // out, none, string, nullable-string
 	var cret  C.gboolean        // return
 
 	carg0 = (*C.GtkWidgetClass)(UnsafeWidgetClassToGlibNone(widgetClass))
@@ -151498,7 +151806,7 @@ func (widgetClass *WidgetClass) SetActivateSignal(signalId uint) {
 // g_signal_new() or g_signal_newv() before calling this function.
 func (widgetClass *WidgetClass) SetActivateSignalFromName(signalName string) {
 	var carg0 *C.GtkWidgetClass // in, none, converted
-	var carg1 *C.char           // in, none, string, casted *C.gchar
+	var carg1 *C.char           // in, none, string
 
 	carg0 = (*C.GtkWidgetClass)(UnsafeWidgetClassToGlibNone(widgetClass))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(signalName)))
@@ -151522,7 +151830,7 @@ func (widgetClass *WidgetClass) SetActivateSignalFromName(signalName string) {
 // uses the name "widget".
 func (widgetClass *WidgetClass) SetCSSName(name string) {
 	var carg0 *C.GtkWidgetClass // in, none, converted
-	var carg1 *C.char           // in, none, string, casted *C.gchar
+	var carg1 *C.char           // in, none, string
 
 	carg0 = (*C.GtkWidgetClass)(UnsafeWidgetClassToGlibNone(widgetClass))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
@@ -151599,7 +151907,7 @@ func (widgetClass *WidgetClass) SetTemplate(templateBytes *glib.Bytes) {
 // initializer.
 func (widgetClass *WidgetClass) SetTemplateFromResource(resourceName string) {
 	var carg0 *C.GtkWidgetClass // in, none, converted
-	var carg1 *C.char           // in, none, string, casted *C.gchar
+	var carg1 *C.char           // in, none, string
 
 	carg0 = (*C.GtkWidgetClass)(UnsafeWidgetClassToGlibNone(widgetClass))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(resourceName)))

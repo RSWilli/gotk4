@@ -366,7 +366,7 @@ func (pixdata *Pixdata) Deserialize(stream []uint8) (bool, error) {
 	_ = stream
 	_ = carg2
 	_ = carg1
-	panic("unimplemented conversion of []uint8 (const guint8*)")
+	panic("unimplemented conversion of []uint8 (*C.guint8)")
 
 	cret = C.gdk_pixdata_deserialize(carg0, carg1, carg2, &_cerr)
 	runtime.KeepAlive(pixdata)
@@ -414,7 +414,7 @@ func (pixdata *Pixdata) Serialize() (uint, []uint8) {
 	streamLengthP = uint(carg1)
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []uint8 (guint8*)")
+	panic("unimplemented conversion of []uint8 (*C.guint8)")
 
 	return streamLengthP, goret
 }

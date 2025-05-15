@@ -247,7 +247,7 @@ func _gotk4_gtk3_ClipboardURIReceivedFunc(carg1 *C.GtkClipboard, carg2 **C.gchar
 	clipboard = UnsafeClipboardFromGlibNone(unsafe.Pointer(carg1))
 	_ = uris
 	_ = carg2
-	panic("unimplemented conversion of []string (gchar**)")
+	panic("unimplemented conversion of []string (**C.gchar)")
 
 	fn(clipboard, uris)
 }
@@ -471,7 +471,7 @@ func _gotk4_gtk3_TextBufferDeserializeFunc(carg1 *C.GtkTextBuffer, carg2 *C.GtkT
 	_ = data
 	_ = carg4
 	_ = carg5
-	panic("unimplemented conversion of []uint8 (const guint8*)")
+	panic("unimplemented conversion of []uint8 (*C.guint8)")
 	if carg6 != 0 {
 		createTags = true
 	}
@@ -514,7 +514,7 @@ func _gotk4_gtk3_TextBufferSerializeFunc(carg1 *C.GtkTextBuffer, carg2 *C.GtkTex
 	*carg5 = C.gsize(length)
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []uint8 (guint8*)")
+	panic("unimplemented conversion of []uint8 (*C.guint8)")
 
 	return cret
 }
@@ -664,7 +664,7 @@ func _gotk4_gtk3_TreeModelFilterModifyFunc(carg1 *C.GtkTreeModel, carg2 *C.GtkTr
 
 	_ = value
 	_ = carg3
-	panic("unimplemented conversion of gobject.Value (GValue)")
+	panic("unimplemented conversion of gobject.Value (C.GValue)")
 }
 
 //export _gotk4_gtk3_TreeModelFilterVisibleFunc
@@ -1490,18 +1490,6 @@ func _gotk4_gtk3_CellLayout_reorder(carg0 *C.GtkCellLayout, carg1 *C.GtkCellRend
 	fn(carg0, carg1, carg2)
 }
 
-//export _gotk4_gtk3_CellLayout_set_cell_data_func
-func _gotk4_gtk3_CellLayout_set_cell_data_func(carg0 *C.GtkCellLayout, carg1 *C.GtkCellRenderer, carg2 C.GtkCellLayoutDataFunc, carg3 C.gpointer, carg4 C.GDestroyNotify) {
-	var fn func(carg0 *C.GtkCellLayout, carg1 *C.GtkCellRenderer, carg2 C.GtkCellLayoutDataFunc, carg3 C.gpointer, carg4 C.GDestroyNotify)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gtk3_CellLayout_set_cell_data_func").(func(carg0 *C.GtkCellLayout, carg1 *C.GtkCellRenderer, carg2 C.GtkCellLayoutDataFunc, carg3 C.gpointer, carg4 C.GDestroyNotify))
-		if fn == nil {
-			panic("_gotk4_gtk3_CellLayout_set_cell_data_func: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4)
-}
-
 //export _gotk4_gtk3_ColorChooser_add_palette
 func _gotk4_gtk3_ColorChooser_add_palette(carg0 *C.GtkColorChooser, carg1 C.GtkOrientation, carg2 C.gint, carg3 C.gint, carg4 *C.GdkRGBA) {
 	var fn func(carg0 *C.GtkColorChooser, carg1 C.GtkOrientation, carg2 C.gint, carg3 C.gint, carg4 *C.GdkRGBA)
@@ -1706,18 +1694,6 @@ func _gotk4_gtk3_FontChooser_get_font_size(carg0 *C.GtkFontChooser) (cret C.gint
 	return fn(carg0)
 }
 
-//export _gotk4_gtk3_FontChooser_set_filter_func
-func _gotk4_gtk3_FontChooser_set_filter_func(carg0 *C.GtkFontChooser, carg1 C.GtkFontFilterFunc, carg2 C.gpointer, carg3 C.GDestroyNotify) {
-	var fn func(carg0 *C.GtkFontChooser, carg1 C.GtkFontFilterFunc, carg2 C.gpointer, carg3 C.GDestroyNotify)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gtk3_FontChooser_set_filter_func").(func(carg0 *C.GtkFontChooser, carg1 C.GtkFontFilterFunc, carg2 C.gpointer, carg3 C.GDestroyNotify))
-		if fn == nil {
-			panic("_gotk4_gtk3_FontChooser_set_filter_func: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3)
-}
-
 //export _gotk4_gtk3_FontChooser_set_font_map
 func _gotk4_gtk3_FontChooser_set_font_map(carg0 *C.GtkFontChooser, carg1 *C.PangoFontMap) {
 	var fn func(carg0 *C.GtkFontChooser, carg1 *C.PangoFontMap)
@@ -1908,18 +1884,6 @@ func _gotk4_gtk3_RecentChooser_set_current_uri(carg0 *C.GtkRecentChooser, carg1 
 		}
 	}
 	return fn(carg0, carg1, _cerr)
-}
-
-//export _gotk4_gtk3_RecentChooser_set_sort_func
-func _gotk4_gtk3_RecentChooser_set_sort_func(carg0 *C.GtkRecentChooser, carg1 C.GtkRecentSortFunc, carg2 C.gpointer, carg3 C.GDestroyNotify) {
-	var fn func(carg0 *C.GtkRecentChooser, carg1 C.GtkRecentSortFunc, carg2 C.gpointer, carg3 C.GDestroyNotify)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gtk3_RecentChooser_set_sort_func").(func(carg0 *C.GtkRecentChooser, carg1 C.GtkRecentSortFunc, carg2 C.gpointer, carg3 C.GDestroyNotify))
-		if fn == nil {
-			panic("_gotk4_gtk3_RecentChooser_set_sort_func: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3)
 }
 
 //export _gotk4_gtk3_RecentChooser_unselect_all
@@ -2390,18 +2354,6 @@ func _gotk4_gtk3_TreeSortable_has_default_sort_func(carg0 *C.GtkTreeSortable) (c
 	return fn(carg0)
 }
 
-//export _gotk4_gtk3_TreeSortable_set_default_sort_func
-func _gotk4_gtk3_TreeSortable_set_default_sort_func(carg0 *C.GtkTreeSortable, carg1 C.GtkTreeIterCompareFunc, carg2 C.gpointer, carg3 C.GDestroyNotify) {
-	var fn func(carg0 *C.GtkTreeSortable, carg1 C.GtkTreeIterCompareFunc, carg2 C.gpointer, carg3 C.GDestroyNotify)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gtk3_TreeSortable_set_default_sort_func").(func(carg0 *C.GtkTreeSortable, carg1 C.GtkTreeIterCompareFunc, carg2 C.gpointer, carg3 C.GDestroyNotify))
-		if fn == nil {
-			panic("_gotk4_gtk3_TreeSortable_set_default_sort_func: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3)
-}
-
 //export _gotk4_gtk3_TreeSortable_set_sort_column_id
 func _gotk4_gtk3_TreeSortable_set_sort_column_id(carg0 *C.GtkTreeSortable, carg1 C.gint, carg2 C.GtkSortType) {
 	var fn func(carg0 *C.GtkTreeSortable, carg1 C.gint, carg2 C.GtkSortType)
@@ -2412,18 +2364,6 @@ func _gotk4_gtk3_TreeSortable_set_sort_column_id(carg0 *C.GtkTreeSortable, carg1
 		}
 	}
 	fn(carg0, carg1, carg2)
-}
-
-//export _gotk4_gtk3_TreeSortable_set_sort_func
-func _gotk4_gtk3_TreeSortable_set_sort_func(carg0 *C.GtkTreeSortable, carg1 C.gint, carg2 C.GtkTreeIterCompareFunc, carg3 C.gpointer, carg4 C.GDestroyNotify) {
-	var fn func(carg0 *C.GtkTreeSortable, carg1 C.gint, carg2 C.GtkTreeIterCompareFunc, carg3 C.gpointer, carg4 C.GDestroyNotify)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gtk3_TreeSortable_set_sort_func").(func(carg0 *C.GtkTreeSortable, carg1 C.gint, carg2 C.GtkTreeIterCompareFunc, carg3 C.gpointer, carg4 C.GDestroyNotify))
-		if fn == nil {
-			panic("_gotk4_gtk3_TreeSortable_set_sort_func: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4)
 }
 
 //export _gotk4_gtk3_TreeSortable_sort_column_changed
@@ -2604,30 +2544,6 @@ func _gotk4_gtk3_CellArea_focus(carg0 *C.GtkCellArea, carg1 C.GtkDirectionType) 
 		}
 	}
 	return fn(carg0, carg1)
-}
-
-//export _gotk4_gtk3_CellArea_foreach
-func _gotk4_gtk3_CellArea_foreach(carg0 *C.GtkCellArea, carg1 C.GtkCellCallback, carg2 C.gpointer) {
-	var fn func(carg0 *C.GtkCellArea, carg1 C.GtkCellCallback, carg2 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gtk3_CellArea_foreach").(func(carg0 *C.GtkCellArea, carg1 C.GtkCellCallback, carg2 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gtk3_CellArea_foreach: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2)
-}
-
-//export _gotk4_gtk3_CellArea_foreach_alloc
-func _gotk4_gtk3_CellArea_foreach_alloc(carg0 *C.GtkCellArea, carg1 *C.GtkCellAreaContext, carg2 *C.GtkWidget, carg3 *C.GdkRectangle, carg4 *C.GdkRectangle, carg5 C.GtkCellAllocCallback, carg6 C.gpointer) {
-	var fn func(carg0 *C.GtkCellArea, carg1 *C.GtkCellAreaContext, carg2 *C.GtkWidget, carg3 *C.GdkRectangle, carg4 *C.GdkRectangle, carg5 C.GtkCellAllocCallback, carg6 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gtk3_CellArea_foreach_alloc").(func(carg0 *C.GtkCellArea, carg1 *C.GtkCellAreaContext, carg2 *C.GtkWidget, carg3 *C.GdkRectangle, carg4 *C.GdkRectangle, carg5 C.GtkCellAllocCallback, carg6 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gtk3_CellArea_foreach_alloc: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3, carg4, carg5, carg6)
 }
 
 //export _gotk4_gtk3_CellArea_get_cell_property
@@ -4968,18 +4884,6 @@ func _gotk4_gtk3_Container_composite_name(carg0 *C.GtkContainer, carg1 *C.GtkWid
 		}
 	}
 	return fn(carg0, carg1)
-}
-
-//export _gotk4_gtk3_Container_forall
-func _gotk4_gtk3_Container_forall(carg0 *C.GtkContainer, carg1 C.gboolean, carg2 C.GtkCallback, carg3 C.gpointer) {
-	var fn func(carg0 *C.GtkContainer, carg1 C.gboolean, carg2 C.GtkCallback, carg3 C.gpointer)
-	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gtk3_Container_forall").(func(carg0 *C.GtkContainer, carg1 C.gboolean, carg2 C.GtkCallback, carg3 C.gpointer))
-		if fn == nil {
-			panic("_gotk4_gtk3_Container_forall: no function pointer found")
-		}
-	}
-	fn(carg0, carg1, carg2, carg3)
 }
 
 //export _gotk4_gtk3_Container_get_child_property

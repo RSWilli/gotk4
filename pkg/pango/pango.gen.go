@@ -18,143 +18,139 @@ import (
 // #cgo pkg-config: pango
 // #cgo CFLAGS: -Wno-deprecated-declarations
 // #include <pango/pango.h>
-// extern gboolean _gotk4_pango1_AttrFilterFunc(PangoAttribute*, gpointer);
-// extern gboolean _gotk4_pango1_FontsetForEachFunc(PangoFontset*, PangoFont*, gpointer);
-// extern PangoFontDescription* _gotk4_pango1_Font_describe(PangoFont*);
-// extern PangoFontDescription* _gotk4_pango1_Font_describe_absolute(PangoFont*);
-// extern PangoCoverage* _gotk4_pango1_Font_get_coverage(PangoFont*, PangoLanguage*);
-// extern PangoFontMap* _gotk4_pango1_Font_get_font_map(PangoFont*);
-// extern void _gotk4_pango1_Font_get_glyph_extents(PangoFont*, PangoGlyph, PangoRectangle, PangoRectangle);
-// extern PangoFontMetrics* _gotk4_pango1_Font_get_metrics(PangoFont*, PangoLanguage*);
-// PangoFontDescription* _gotk4_pango1_Font_virtual_describe(void* fnptr, PangoFont* carg0) {
-// 	return ((PangoFontDescription* (*) (PangoFont*))(fnptr))(carg0);
+// extern C.gboolean _gotk4_pango1_AttrFilterFunc(*C.PangoAttribute, C.gpointer);
+// extern C.gboolean _gotk4_pango1_FontsetForEachFunc(*C.PangoFontset, *C.PangoFont, C.gpointer);
+// extern *C.PangoFontDescription _gotk4_pango1_Font_describe(*C.PangoFont);
+// extern *C.PangoFontDescription _gotk4_pango1_Font_describe_absolute(*C.PangoFont);
+// extern *C.PangoCoverage _gotk4_pango1_Font_get_coverage(*C.PangoFont, *C.PangoLanguage);
+// extern *C.PangoFontMap _gotk4_pango1_Font_get_font_map(*C.PangoFont);
+// extern C.void _gotk4_pango1_Font_get_glyph_extents(*C.PangoFont, C.PangoGlyph, C.PangoRectangle, C.PangoRectangle);
+// extern *C.PangoFontMetrics _gotk4_pango1_Font_get_metrics(*C.PangoFont, *C.PangoLanguage);
+// *C.PangoFontDescription _gotk4_pango1_Font_virtual_describe(void* fnptr, *C.PangoFont carg0) {
+// 	return ((*C.PangoFontDescription (*) (*C.PangoFont))(fnptr))(carg0);
 // }
-// PangoFontDescription* _gotk4_pango1_Font_virtual_describe_absolute(void* fnptr, PangoFont* carg0) {
-// 	return ((PangoFontDescription* (*) (PangoFont*))(fnptr))(carg0);
+// *C.PangoFontDescription _gotk4_pango1_Font_virtual_describe_absolute(void* fnptr, *C.PangoFont carg0) {
+// 	return ((*C.PangoFontDescription (*) (*C.PangoFont))(fnptr))(carg0);
 // }
-// PangoCoverage* _gotk4_pango1_Font_virtual_get_coverage(void* fnptr, PangoFont* carg0, PangoLanguage* carg1) {
-// 	return ((PangoCoverage* (*) (PangoFont*, PangoLanguage*))(fnptr))(carg0, carg1);
+// *C.PangoCoverage _gotk4_pango1_Font_virtual_get_coverage(void* fnptr, *C.PangoFont carg0, *C.PangoLanguage carg1) {
+// 	return ((*C.PangoCoverage (*) (*C.PangoFont, *C.PangoLanguage))(fnptr))(carg0, carg1);
 // }
-// PangoFontMap* _gotk4_pango1_Font_virtual_get_font_map(void* fnptr, PangoFont* carg0) {
-// 	return ((PangoFontMap* (*) (PangoFont*))(fnptr))(carg0);
+// *C.PangoFontMap _gotk4_pango1_Font_virtual_get_font_map(void* fnptr, *C.PangoFont carg0) {
+// 	return ((*C.PangoFontMap (*) (*C.PangoFont))(fnptr))(carg0);
 // }
-// void _gotk4_pango1_Font_virtual_get_glyph_extents(void* fnptr, PangoFont* carg0, PangoGlyph carg1, PangoRectangle* carg2, PangoRectangle* carg3) {
-// 	return ((void (*) (PangoFont*, PangoGlyph, PangoRectangle*, PangoRectangle*))(fnptr))(carg0, carg1, carg2, carg3);
+// C.void _gotk4_pango1_Font_virtual_get_glyph_extents(void* fnptr, *C.PangoFont carg0, C.PangoGlyph carg1, C.PangoRectangle* carg2, C.PangoRectangle* carg3) {
+// 	return ((C.void (*) (*C.PangoFont, C.PangoGlyph, C.PangoRectangle*, C.PangoRectangle*))(fnptr))(carg0, carg1, carg2, carg3);
 // }
-// PangoFontMetrics* _gotk4_pango1_Font_virtual_get_metrics(void* fnptr, PangoFont* carg0, PangoLanguage* carg1) {
-// 	return ((PangoFontMetrics* (*) (PangoFont*, PangoLanguage*))(fnptr))(carg0, carg1);
+// *C.PangoFontMetrics _gotk4_pango1_Font_virtual_get_metrics(void* fnptr, *C.PangoFont carg0, *C.PangoLanguage carg1) {
+// 	return ((*C.PangoFontMetrics (*) (*C.PangoFont, *C.PangoLanguage))(fnptr))(carg0, carg1);
 // }
-// extern PangoFontDescription* _gotk4_pango1_FontFace_describe(PangoFontFace*);
-// extern char* _gotk4_pango1_FontFace_get_face_name(PangoFontFace*);
-// extern PangoFontFamily* _gotk4_pango1_FontFace_get_family(PangoFontFace*);
-// extern gboolean _gotk4_pango1_FontFace_is_synthesized(PangoFontFace*);
-// PangoFontDescription* _gotk4_pango1_FontFace_virtual_describe(void* fnptr, PangoFontFace* carg0) {
-// 	return ((PangoFontDescription* (*) (PangoFontFace*))(fnptr))(carg0);
+// extern *C.PangoFontDescription _gotk4_pango1_FontFace_describe(*C.PangoFontFace);
+// extern *C.char _gotk4_pango1_FontFace_get_face_name(*C.PangoFontFace);
+// extern *C.PangoFontFamily _gotk4_pango1_FontFace_get_family(*C.PangoFontFace);
+// extern C.gboolean _gotk4_pango1_FontFace_is_synthesized(*C.PangoFontFace);
+// *C.PangoFontDescription _gotk4_pango1_FontFace_virtual_describe(void* fnptr, *C.PangoFontFace carg0) {
+// 	return ((*C.PangoFontDescription (*) (*C.PangoFontFace))(fnptr))(carg0);
 // }
-// char* _gotk4_pango1_FontFace_virtual_get_face_name(void* fnptr, PangoFontFace* carg0) {
-// 	return ((char* (*) (PangoFontFace*))(fnptr))(carg0);
+// *C.char _gotk4_pango1_FontFace_virtual_get_face_name(void* fnptr, *C.PangoFontFace carg0) {
+// 	return ((*C.char (*) (*C.PangoFontFace))(fnptr))(carg0);
 // }
-// PangoFontFamily* _gotk4_pango1_FontFace_virtual_get_family(void* fnptr, PangoFontFace* carg0) {
-// 	return ((PangoFontFamily* (*) (PangoFontFace*))(fnptr))(carg0);
+// *C.PangoFontFamily _gotk4_pango1_FontFace_virtual_get_family(void* fnptr, *C.PangoFontFace carg0) {
+// 	return ((*C.PangoFontFamily (*) (*C.PangoFontFace))(fnptr))(carg0);
 // }
-// gboolean _gotk4_pango1_FontFace_virtual_is_synthesized(void* fnptr, PangoFontFace* carg0) {
-// 	return ((gboolean (*) (PangoFontFace*))(fnptr))(carg0);
+// C.gboolean _gotk4_pango1_FontFace_virtual_is_synthesized(void* fnptr, *C.PangoFontFace carg0) {
+// 	return ((C.gboolean (*) (*C.PangoFontFace))(fnptr))(carg0);
 // }
-// extern PangoFontFace* _gotk4_pango1_FontFamily_get_face(PangoFontFamily*, char*);
-// extern char* _gotk4_pango1_FontFamily_get_name(PangoFontFamily*);
-// extern gboolean _gotk4_pango1_FontFamily_is_monospace(PangoFontFamily*);
-// extern gboolean _gotk4_pango1_FontFamily_is_variable(PangoFontFamily*);
-// PangoFontFace* _gotk4_pango1_FontFamily_virtual_get_face(void* fnptr, PangoFontFamily* carg0, char* carg1) {
-// 	return ((PangoFontFace* (*) (PangoFontFamily*, char*))(fnptr))(carg0, carg1);
+// extern *C.PangoFontFace _gotk4_pango1_FontFamily_get_face(*C.PangoFontFamily, *C.char);
+// extern *C.char _gotk4_pango1_FontFamily_get_name(*C.PangoFontFamily);
+// extern C.gboolean _gotk4_pango1_FontFamily_is_monospace(*C.PangoFontFamily);
+// extern C.gboolean _gotk4_pango1_FontFamily_is_variable(*C.PangoFontFamily);
+// *C.PangoFontFace _gotk4_pango1_FontFamily_virtual_get_face(void* fnptr, *C.PangoFontFamily carg0, *C.char carg1) {
+// 	return ((*C.PangoFontFace (*) (*C.PangoFontFamily, *C.char))(fnptr))(carg0, carg1);
 // }
-// char* _gotk4_pango1_FontFamily_virtual_get_name(void* fnptr, PangoFontFamily* carg0) {
-// 	return ((char* (*) (PangoFontFamily*))(fnptr))(carg0);
+// *C.char _gotk4_pango1_FontFamily_virtual_get_name(void* fnptr, *C.PangoFontFamily carg0) {
+// 	return ((*C.char (*) (*C.PangoFontFamily))(fnptr))(carg0);
 // }
-// gboolean _gotk4_pango1_FontFamily_virtual_is_monospace(void* fnptr, PangoFontFamily* carg0) {
-// 	return ((gboolean (*) (PangoFontFamily*))(fnptr))(carg0);
+// C.gboolean _gotk4_pango1_FontFamily_virtual_is_monospace(void* fnptr, *C.PangoFontFamily carg0) {
+// 	return ((C.gboolean (*) (*C.PangoFontFamily))(fnptr))(carg0);
 // }
-// gboolean _gotk4_pango1_FontFamily_virtual_is_variable(void* fnptr, PangoFontFamily* carg0) {
-// 	return ((gboolean (*) (PangoFontFamily*))(fnptr))(carg0);
+// C.gboolean _gotk4_pango1_FontFamily_virtual_is_variable(void* fnptr, *C.PangoFontFamily carg0) {
+// 	return ((C.gboolean (*) (*C.PangoFontFamily))(fnptr))(carg0);
 // }
-// extern void _gotk4_pango1_FontMap_changed(PangoFontMap*);
-// extern PangoFontFamily* _gotk4_pango1_FontMap_get_family(PangoFontMap*, char*);
-// extern guint _gotk4_pango1_FontMap_get_serial(PangoFontMap*);
-// extern PangoFont* _gotk4_pango1_FontMap_load_font(PangoFontMap*, PangoContext*, PangoFontDescription*);
-// extern PangoFontset* _gotk4_pango1_FontMap_load_fontset(PangoFontMap*, PangoContext*, PangoFontDescription*, PangoLanguage*);
-// void _gotk4_pango1_FontMap_virtual_changed(void* fnptr, PangoFontMap* carg0) {
-// 	return ((void (*) (PangoFontMap*))(fnptr))(carg0);
+// extern C.void _gotk4_pango1_FontMap_changed(*C.PangoFontMap);
+// extern *C.PangoFontFamily _gotk4_pango1_FontMap_get_family(*C.PangoFontMap, *C.char);
+// extern C.guint _gotk4_pango1_FontMap_get_serial(*C.PangoFontMap);
+// extern *C.PangoFont _gotk4_pango1_FontMap_load_font(*C.PangoFontMap, *C.PangoContext, *C.PangoFontDescription);
+// extern *C.PangoFontset _gotk4_pango1_FontMap_load_fontset(*C.PangoFontMap, *C.PangoContext, *C.PangoFontDescription, *C.PangoLanguage);
+// C.void _gotk4_pango1_FontMap_virtual_changed(void* fnptr, *C.PangoFontMap carg0) {
+// 	return ((C.void (*) (*C.PangoFontMap))(fnptr))(carg0);
 // }
-// PangoFontFamily* _gotk4_pango1_FontMap_virtual_get_family(void* fnptr, PangoFontMap* carg0, char* carg1) {
-// 	return ((PangoFontFamily* (*) (PangoFontMap*, char*))(fnptr))(carg0, carg1);
+// *C.PangoFontFamily _gotk4_pango1_FontMap_virtual_get_family(void* fnptr, *C.PangoFontMap carg0, *C.char carg1) {
+// 	return ((*C.PangoFontFamily (*) (*C.PangoFontMap, *C.char))(fnptr))(carg0, carg1);
 // }
-// guint _gotk4_pango1_FontMap_virtual_get_serial(void* fnptr, PangoFontMap* carg0) {
-// 	return ((guint (*) (PangoFontMap*))(fnptr))(carg0);
+// C.guint _gotk4_pango1_FontMap_virtual_get_serial(void* fnptr, *C.PangoFontMap carg0) {
+// 	return ((C.guint (*) (*C.PangoFontMap))(fnptr))(carg0);
 // }
-// PangoFont* _gotk4_pango1_FontMap_virtual_load_font(void* fnptr, PangoFontMap* carg0, PangoContext* carg1, PangoFontDescription* carg2) {
-// 	return ((PangoFont* (*) (PangoFontMap*, PangoContext*, PangoFontDescription*))(fnptr))(carg0, carg1, carg2);
+// *C.PangoFont _gotk4_pango1_FontMap_virtual_load_font(void* fnptr, *C.PangoFontMap carg0, *C.PangoContext carg1, *C.PangoFontDescription carg2) {
+// 	return ((*C.PangoFont (*) (*C.PangoFontMap, *C.PangoContext, *C.PangoFontDescription))(fnptr))(carg0, carg1, carg2);
 // }
-// PangoFontset* _gotk4_pango1_FontMap_virtual_load_fontset(void* fnptr, PangoFontMap* carg0, PangoContext* carg1, PangoFontDescription* carg2, PangoLanguage* carg3) {
-// 	return ((PangoFontset* (*) (PangoFontMap*, PangoContext*, PangoFontDescription*, PangoLanguage*))(fnptr))(carg0, carg1, carg2, carg3);
+// *C.PangoFontset _gotk4_pango1_FontMap_virtual_load_fontset(void* fnptr, *C.PangoFontMap carg0, *C.PangoContext carg1, *C.PangoFontDescription carg2, *C.PangoLanguage carg3) {
+// 	return ((*C.PangoFontset (*) (*C.PangoFontMap, *C.PangoContext, *C.PangoFontDescription, *C.PangoLanguage))(fnptr))(carg0, carg1, carg2, carg3);
 // }
-// extern void _gotk4_pango1_Fontset_foreach(PangoFontset*, PangoFontsetForeachFunc, gpointer);
-// extern PangoFont* _gotk4_pango1_Fontset_get_font(PangoFontset*, guint);
-// extern PangoLanguage* _gotk4_pango1_Fontset_get_language(PangoFontset*);
-// extern PangoFontMetrics* _gotk4_pango1_Fontset_get_metrics(PangoFontset*);
-// void _gotk4_pango1_Fontset_virtual_foreach(void* fnptr, PangoFontset* carg0, PangoFontsetForeachFunc carg1, gpointer carg2) {
-// 	return ((void (*) (PangoFontset*, PangoFontsetForeachFunc, gpointer))(fnptr))(carg0, carg1, carg2);
+// extern *C.PangoFont _gotk4_pango1_Fontset_get_font(*C.PangoFontset, C.guint);
+// extern *C.PangoLanguage _gotk4_pango1_Fontset_get_language(*C.PangoFontset);
+// extern *C.PangoFontMetrics _gotk4_pango1_Fontset_get_metrics(*C.PangoFontset);
+// *C.PangoFont _gotk4_pango1_Fontset_virtual_get_font(void* fnptr, *C.PangoFontset carg0, C.guint carg1) {
+// 	return ((*C.PangoFont (*) (*C.PangoFontset, C.guint))(fnptr))(carg0, carg1);
 // }
-// PangoFont* _gotk4_pango1_Fontset_virtual_get_font(void* fnptr, PangoFontset* carg0, guint carg1) {
-// 	return ((PangoFont* (*) (PangoFontset*, guint))(fnptr))(carg0, carg1);
+// *C.PangoLanguage _gotk4_pango1_Fontset_virtual_get_language(void* fnptr, *C.PangoFontset carg0) {
+// 	return ((*C.PangoLanguage (*) (*C.PangoFontset))(fnptr))(carg0);
 // }
-// PangoLanguage* _gotk4_pango1_Fontset_virtual_get_language(void* fnptr, PangoFontset* carg0) {
-// 	return ((PangoLanguage* (*) (PangoFontset*))(fnptr))(carg0);
+// *C.PangoFontMetrics _gotk4_pango1_Fontset_virtual_get_metrics(void* fnptr, *C.PangoFontset carg0) {
+// 	return ((*C.PangoFontMetrics (*) (*C.PangoFontset))(fnptr))(carg0);
 // }
-// PangoFontMetrics* _gotk4_pango1_Fontset_virtual_get_metrics(void* fnptr, PangoFontset* carg0) {
-// 	return ((PangoFontMetrics* (*) (PangoFontset*))(fnptr))(carg0);
+// extern C.void _gotk4_pango1_Renderer_begin(*C.PangoRenderer);
+// extern C.void _gotk4_pango1_Renderer_draw_error_underline(*C.PangoRenderer, C.int, C.int, C.int, C.int);
+// extern C.void _gotk4_pango1_Renderer_draw_glyph(*C.PangoRenderer, *C.PangoFont, C.PangoGlyph, C.double, C.double);
+// extern C.void _gotk4_pango1_Renderer_draw_glyph_item(*C.PangoRenderer, *C.char, *C.PangoGlyphItem, C.int, C.int);
+// extern C.void _gotk4_pango1_Renderer_draw_glyphs(*C.PangoRenderer, *C.PangoFont, *C.PangoGlyphString, C.int, C.int);
+// extern C.void _gotk4_pango1_Renderer_draw_rectangle(*C.PangoRenderer, C.PangoRenderPart, C.int, C.int, C.int, C.int);
+// extern C.void _gotk4_pango1_Renderer_draw_shape(*C.PangoRenderer, *C.PangoAttrShape, C.int, C.int);
+// extern C.void _gotk4_pango1_Renderer_draw_trapezoid(*C.PangoRenderer, C.PangoRenderPart, C.double, C.double, C.double, C.double, C.double, C.double);
+// extern C.void _gotk4_pango1_Renderer_end(*C.PangoRenderer);
+// extern C.void _gotk4_pango1_Renderer_part_changed(*C.PangoRenderer, C.PangoRenderPart);
+// extern C.void _gotk4_pango1_Renderer_prepare_run(*C.PangoRenderer, *C.PangoLayoutRun);
+// C.void _gotk4_pango1_Renderer_virtual_begin(void* fnptr, *C.PangoRenderer carg0) {
+// 	return ((C.void (*) (*C.PangoRenderer))(fnptr))(carg0);
 // }
-// extern void _gotk4_pango1_Renderer_begin(PangoRenderer*);
-// extern void _gotk4_pango1_Renderer_draw_error_underline(PangoRenderer*, int, int, int, int);
-// extern void _gotk4_pango1_Renderer_draw_glyph(PangoRenderer*, PangoFont*, PangoGlyph, double, double);
-// extern void _gotk4_pango1_Renderer_draw_glyph_item(PangoRenderer*, char*, PangoGlyphItem*, int, int);
-// extern void _gotk4_pango1_Renderer_draw_glyphs(PangoRenderer*, PangoFont*, PangoGlyphString*, int, int);
-// extern void _gotk4_pango1_Renderer_draw_rectangle(PangoRenderer*, PangoRenderPart, int, int, int, int);
-// extern void _gotk4_pango1_Renderer_draw_shape(PangoRenderer*, PangoAttrShape*, int, int);
-// extern void _gotk4_pango1_Renderer_draw_trapezoid(PangoRenderer*, PangoRenderPart, double, double, double, double, double, double);
-// extern void _gotk4_pango1_Renderer_end(PangoRenderer*);
-// extern void _gotk4_pango1_Renderer_part_changed(PangoRenderer*, PangoRenderPart);
-// extern void _gotk4_pango1_Renderer_prepare_run(PangoRenderer*, PangoLayoutRun*);
-// void _gotk4_pango1_Renderer_virtual_begin(void* fnptr, PangoRenderer* carg0) {
-// 	return ((void (*) (PangoRenderer*))(fnptr))(carg0);
+// C.void _gotk4_pango1_Renderer_virtual_draw_error_underline(void* fnptr, *C.PangoRenderer carg0, C.int carg1, C.int carg2, C.int carg3, C.int carg4) {
+// 	return ((C.void (*) (*C.PangoRenderer, C.int, C.int, C.int, C.int))(fnptr))(carg0, carg1, carg2, carg3, carg4);
 // }
-// void _gotk4_pango1_Renderer_virtual_draw_error_underline(void* fnptr, PangoRenderer* carg0, int carg1, int carg2, int carg3, int carg4) {
-// 	return ((void (*) (PangoRenderer*, int, int, int, int))(fnptr))(carg0, carg1, carg2, carg3, carg4);
+// C.void _gotk4_pango1_Renderer_virtual_draw_glyph(void* fnptr, *C.PangoRenderer carg0, *C.PangoFont carg1, C.PangoGlyph carg2, C.double carg3, C.double carg4) {
+// 	return ((C.void (*) (*C.PangoRenderer, *C.PangoFont, C.PangoGlyph, C.double, C.double))(fnptr))(carg0, carg1, carg2, carg3, carg4);
 // }
-// void _gotk4_pango1_Renderer_virtual_draw_glyph(void* fnptr, PangoRenderer* carg0, PangoFont* carg1, PangoGlyph carg2, double carg3, double carg4) {
-// 	return ((void (*) (PangoRenderer*, PangoFont*, PangoGlyph, double, double))(fnptr))(carg0, carg1, carg2, carg3, carg4);
+// C.void _gotk4_pango1_Renderer_virtual_draw_glyph_item(void* fnptr, *C.PangoRenderer carg0, *C.char carg1, *C.PangoGlyphItem carg2, C.int carg3, C.int carg4) {
+// 	return ((C.void (*) (*C.PangoRenderer, *C.char, *C.PangoGlyphItem, C.int, C.int))(fnptr))(carg0, carg1, carg2, carg3, carg4);
 // }
-// void _gotk4_pango1_Renderer_virtual_draw_glyph_item(void* fnptr, PangoRenderer* carg0, char* carg1, PangoGlyphItem* carg2, int carg3, int carg4) {
-// 	return ((void (*) (PangoRenderer*, char*, PangoGlyphItem*, int, int))(fnptr))(carg0, carg1, carg2, carg3, carg4);
+// C.void _gotk4_pango1_Renderer_virtual_draw_glyphs(void* fnptr, *C.PangoRenderer carg0, *C.PangoFont carg1, *C.PangoGlyphString carg2, C.int carg3, C.int carg4) {
+// 	return ((C.void (*) (*C.PangoRenderer, *C.PangoFont, *C.PangoGlyphString, C.int, C.int))(fnptr))(carg0, carg1, carg2, carg3, carg4);
 // }
-// void _gotk4_pango1_Renderer_virtual_draw_glyphs(void* fnptr, PangoRenderer* carg0, PangoFont* carg1, PangoGlyphString* carg2, int carg3, int carg4) {
-// 	return ((void (*) (PangoRenderer*, PangoFont*, PangoGlyphString*, int, int))(fnptr))(carg0, carg1, carg2, carg3, carg4);
+// C.void _gotk4_pango1_Renderer_virtual_draw_rectangle(void* fnptr, *C.PangoRenderer carg0, C.PangoRenderPart carg1, C.int carg2, C.int carg3, C.int carg4, C.int carg5) {
+// 	return ((C.void (*) (*C.PangoRenderer, C.PangoRenderPart, C.int, C.int, C.int, C.int))(fnptr))(carg0, carg1, carg2, carg3, carg4, carg5);
 // }
-// void _gotk4_pango1_Renderer_virtual_draw_rectangle(void* fnptr, PangoRenderer* carg0, PangoRenderPart carg1, int carg2, int carg3, int carg4, int carg5) {
-// 	return ((void (*) (PangoRenderer*, PangoRenderPart, int, int, int, int))(fnptr))(carg0, carg1, carg2, carg3, carg4, carg5);
+// C.void _gotk4_pango1_Renderer_virtual_draw_shape(void* fnptr, *C.PangoRenderer carg0, *C.PangoAttrShape carg1, C.int carg2, C.int carg3) {
+// 	return ((C.void (*) (*C.PangoRenderer, *C.PangoAttrShape, C.int, C.int))(fnptr))(carg0, carg1, carg2, carg3);
 // }
-// void _gotk4_pango1_Renderer_virtual_draw_shape(void* fnptr, PangoRenderer* carg0, PangoAttrShape* carg1, int carg2, int carg3) {
-// 	return ((void (*) (PangoRenderer*, PangoAttrShape*, int, int))(fnptr))(carg0, carg1, carg2, carg3);
+// C.void _gotk4_pango1_Renderer_virtual_draw_trapezoid(void* fnptr, *C.PangoRenderer carg0, C.PangoRenderPart carg1, C.double carg2, C.double carg3, C.double carg4, C.double carg5, C.double carg6, C.double carg7) {
+// 	return ((C.void (*) (*C.PangoRenderer, C.PangoRenderPart, C.double, C.double, C.double, C.double, C.double, C.double))(fnptr))(carg0, carg1, carg2, carg3, carg4, carg5, carg6, carg7);
 // }
-// void _gotk4_pango1_Renderer_virtual_draw_trapezoid(void* fnptr, PangoRenderer* carg0, PangoRenderPart carg1, double carg2, double carg3, double carg4, double carg5, double carg6, double carg7) {
-// 	return ((void (*) (PangoRenderer*, PangoRenderPart, double, double, double, double, double, double))(fnptr))(carg0, carg1, carg2, carg3, carg4, carg5, carg6, carg7);
+// C.void _gotk4_pango1_Renderer_virtual_end(void* fnptr, *C.PangoRenderer carg0) {
+// 	return ((C.void (*) (*C.PangoRenderer))(fnptr))(carg0);
 // }
-// void _gotk4_pango1_Renderer_virtual_end(void* fnptr, PangoRenderer* carg0) {
-// 	return ((void (*) (PangoRenderer*))(fnptr))(carg0);
+// C.void _gotk4_pango1_Renderer_virtual_part_changed(void* fnptr, *C.PangoRenderer carg0, C.PangoRenderPart carg1) {
+// 	return ((C.void (*) (*C.PangoRenderer, C.PangoRenderPart))(fnptr))(carg0, carg1);
 // }
-// void _gotk4_pango1_Renderer_virtual_part_changed(void* fnptr, PangoRenderer* carg0, PangoRenderPart carg1) {
-// 	return ((void (*) (PangoRenderer*, PangoRenderPart))(fnptr))(carg0, carg1);
-// }
-// void _gotk4_pango1_Renderer_virtual_prepare_run(void* fnptr, PangoRenderer* carg0, PangoLayoutRun* carg1) {
-// 	return ((void (*) (PangoRenderer*, PangoLayoutRun*))(fnptr))(carg0, carg1);
+// C.void _gotk4_pango1_Renderer_virtual_prepare_run(void* fnptr, *C.PangoRenderer carg0, *C.PangoLayoutRun carg1) {
+// 	return ((C.void (*) (*C.PangoRenderer, *C.PangoLayoutRun))(fnptr))(carg0, carg1);
 // }
 import "C"
 
@@ -637,7 +633,7 @@ func (e AttrType) String() string {
 // not be modified or freed.
 func AttrTypeGetName(typ AttrType) string {
 	var carg1 C.PangoAttrType // in, none, casted
-	var cret  *C.char         // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char         // return, none, string, nullable-string
 
 	carg1 = C.PangoAttrType(typ)
 
@@ -668,7 +664,7 @@ func AttrTypeGetName(typ AttrType) string {
 // The attribute type name can be accessed later
 // by using [func@Pango.AttrType.get_name].
 func AttrTypeRegister(name string) AttrType {
-	var carg1 *C.char         // in, none, string, casted *C.gchar
+	var carg1 *C.char         // in, none, string
 	var cret  C.PangoAttrType // return, none, casted
 
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
@@ -1361,7 +1357,7 @@ func GravityGetForScriptAndWidth(script Script, wide bool, baseGravity Gravity, 
 // you should multiply it by (180. / G_PI).
 func GravityToRotation(gravity Gravity) float64 {
 	var carg1 C.PangoGravity // in, none, casted
-	var cret  C.double       // return, none, casted, casted C.gdouble
+	var cret  C.double       // return, none, casted
 
 	carg1 = C.PangoGravity(gravity)
 
@@ -3303,7 +3299,7 @@ func NewAttrBackground(red uint16, green uint16, blue uint16) *Attribute {
 //   &lt;img alt="Baseline Shift" src="baseline-shift-light.png"&gt;
 // &lt;/picture&gt;
 func NewAttrBaselineShift(shift int32) *Attribute {
-	var carg1 C.int             // in, none, casted, casted C.gint
+	var carg1 C.int             // in, none, casted
 	var cret  *C.PangoAttribute // return, full, converted
 
 	carg1 = C.int(shift)
@@ -3365,7 +3361,7 @@ func NewAttrFallback(enableFallback bool) *Attribute {
 //
 // Create a new font family attribute.
 func NewAttrFamily(family string) *Attribute {
-	var carg1 *C.char           // in, none, string, casted *C.gchar
+	var carg1 *C.char           // in, none, string
 	var cret  *C.PangoAttribute // return, full, converted
 
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(family)))
@@ -3574,7 +3570,7 @@ func NewAttrInsertHyphens(insertHyphens bool) *Attribute {
 //
 // Create a new letter-spacing attribute.
 func NewAttrLetterSpacing(letterSpacing int32) *Attribute {
-	var carg1 C.int             // in, none, casted, casted C.gint
+	var carg1 C.int             // in, none, casted
 	var cret  *C.PangoAttribute // return, full, converted
 
 	carg1 = C.int(letterSpacing)
@@ -3606,7 +3602,7 @@ func NewAttrLetterSpacing(letterSpacing int32) *Attribute {
 // [method@Pango.LayoutLine.get_pixel_extents] and
 // [method@Pango.LayoutIter.get_line_extents].
 func NewAttrLineHeight(factor float64) *Attribute {
-	var carg1 C.double          // in, none, casted, casted C.gdouble
+	var carg1 C.double          // in, none, casted
 	var cret  *C.PangoAttribute // return, full, converted
 
 	carg1 = C.double(factor)
@@ -3638,7 +3634,7 @@ func NewAttrLineHeight(factor float64) *Attribute {
 // [method@Pango.LayoutLine.get_pixel_extents] and
 // [method@Pango.LayoutIter.get_line_extents].
 func AttrLineHeightNewAbsolute(height int32) *Attribute {
-	var carg1 C.int             // in, none, casted, casted C.gint
+	var carg1 C.int             // in, none, casted
 	var cret  *C.PangoAttribute // return, full, converted
 
 	carg1 = C.int(height)
@@ -3731,7 +3727,7 @@ func NewAttrOverline(overline Overline) *Attribute {
 //
 // Create a new baseline displacement attribute.
 func NewAttrRise(rise int32) *Attribute {
-	var carg1 C.int             // in, none, casted, casted C.gint
+	var carg1 C.int             // in, none, casted
 	var cret  *C.PangoAttribute // return, full, converted
 
 	carg1 = C.int(rise)
@@ -3761,7 +3757,7 @@ func NewAttrRise(rise int32) *Attribute {
 // The base font for the affected text will have
 // its size multiplied by @scale_factor.
 func NewAttrScale(scaleFactor float64) *Attribute {
-	var carg1 C.double          // in, none, casted, casted C.gdouble
+	var carg1 C.double          // in, none, casted
 	var cret  *C.PangoAttribute // return, full, converted
 
 	carg1 = C.double(scaleFactor)
@@ -4218,10 +4214,10 @@ func FindBaseDir(text string, length int32) Direction {
 // and @next_paragraph_start are filled with the length of @text
 // (an index one off the end).
 func FindParagraphBoundary(text string, length int32) (int32, int32) {
-	var carg1 *C.char // in, none, string, casted *C.gchar
-	var carg2 C.int   // in, none, casted, casted C.gint
-	var carg3 C.int   // out, full, casted, casted C.gint
-	var carg4 C.int   // out, full, casted, casted C.gint
+	var carg1 *C.char // in, none, string
+	var carg2 C.int   // in, none, casted
+	var carg3 C.int   // out, full, casted
+	var carg4 C.int   // out, full, casted
 
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(text)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -4343,9 +4339,9 @@ func IsZeroWidth(ch uint32) bool {
 // in the same @cached_iter).
 func Itemize(_context Context, text string, startIndex int32, length int32, attrs *AttrList, cachedIter *AttrIterator) []*Item {
 	var carg1 *C.PangoContext      // in, none, converted
-	var carg2 *C.char              // in, none, string, casted *C.gchar
-	var carg3 C.int                // in, none, casted, casted C.gint
-	var carg4 C.int                // in, none, casted, casted C.gint
+	var carg2 *C.char              // in, none, string
+	var carg3 C.int                // in, none, casted
+	var carg4 C.int                // in, none, casted
 	var carg5 *C.PangoAttrList     // in, none, converted
 	var carg6 *C.PangoAttrIterator // in, none, converted, nullable
 	var cret  *C.GList             // container, transfer: full
@@ -4408,9 +4404,9 @@ func Itemize(_context Context, text string, startIndex int32, length int32, attr
 func ItemizeWithBaseDir(_context Context, baseDir Direction, text string, startIndex int32, length int32, attrs *AttrList, cachedIter *AttrIterator) []*Item {
 	var carg1 *C.PangoContext      // in, none, converted
 	var carg2 C.PangoDirection     // in, none, casted
-	var carg3 *C.char              // in, none, string, casted *C.gchar
-	var carg4 C.int                // in, none, casted, casted C.gint
-	var carg5 C.int                // in, none, casted, casted C.gint
+	var carg3 *C.char              // in, none, string
+	var carg4 C.int                // in, none, casted
+	var carg5 C.int                // in, none, casted
 	var carg6 *C.PangoAttrList     // in, none, converted
 	var carg7 *C.PangoAttrIterator // in, none, converted, nullable
 	var cret  *C.GList             // container, transfer: full
@@ -4472,7 +4468,7 @@ func ItemizeWithBaseDir(_context Context, baseDir Direction, text string, startI
 func MarkupParserFinish(_context *glib.MarkupParseContext) (*AttrList, string, uint32, bool, error) {
 	var carg1 *C.GMarkupParseContext // in, none, converted
 	var carg2 *C.PangoAttrList       // out, full, converted
-	var carg3 *C.char                // out, full, string, casted *C.gchar
+	var carg3 *C.char                // out, full, string
 	var carg4 C.gunichar             // out, full, casted
 	var cret  C.gboolean             // return
 	var _cerr *C.GError              // out, full, converted, nullable
@@ -4581,8 +4577,8 @@ func ParseEnum(typ gobject.Type, str string, warn bool) (int32, string, bool) {
 	var carg1 C.GType    // in, none, casted, alias
 	var carg2 *C.char    // in, none, string, nullable-string
 	var carg4 C.gboolean // in
-	var carg3 C.int      // out, full, casted, casted C.gint
-	var carg5 *C.char    // out, full, string, casted *C.gchar
+	var carg3 C.int      // out, full, casted
+	var carg5 *C.char    // out, full, string
 	var cret  C.gboolean // return
 
 	carg1 = C.GType(typ)
@@ -4647,11 +4643,11 @@ func ParseEnum(typ gobject.Type, str string, warn bool) (int32, string, bool) {
 // If any error happens, none of the output arguments are touched except
 // for @error.
 func ParseMarkup(markupText string, length int32, accelMarker uint32) (*AttrList, string, uint32, bool, error) {
-	var carg1 *C.char          // in, none, string, casted *C.gchar
-	var carg2 C.int            // in, none, casted, casted C.gint
+	var carg1 *C.char          // in, none, string
+	var carg2 C.int            // in, none, casted
 	var carg3 C.gunichar       // in, none, casted
 	var carg4 *C.PangoAttrList // out, full, converted
-	var carg5 *C.char          // out, full, string, casted *C.gchar
+	var carg5 *C.char          // out, full, string
 	var carg6 C.gunichar       // out, full, casted
 	var cret  C.gboolean       // return
 	var _cerr *C.GError        // out, full, converted, nullable
@@ -4706,7 +4702,7 @@ func ParseMarkup(markupText string, length int32, accelMarker uint32) (*AttrList
 // "extra_expanded" and "ultra_expanded". Case variations are
 // ignored and the '_' characters may be omitted.
 func ParseStretch(str string, warn bool) (Stretch, bool) {
-	var carg1 *C.char        // in, none, string, casted *C.gchar
+	var carg1 *C.char        // in, none, string
 	var carg3 C.gboolean     // in
 	var carg2 C.PangoStretch // out, full, casted
 	var cret  C.gboolean     // return
@@ -4750,7 +4746,7 @@ func ParseStretch(str string, warn bool) (Stretch, bool) {
 // variations being
 // ignored.
 func ParseStyle(str string, warn bool) (Style, bool) {
-	var carg1 *C.char      // in, none, string, casted *C.gchar
+	var carg1 *C.char      // in, none, string
 	var carg3 C.gboolean   // in
 	var carg2 C.PangoStyle // out, full, casted
 	var cret  C.gboolean   // return
@@ -4794,7 +4790,7 @@ func ParseStyle(str string, warn bool) (Style, bool) {
 // "petite-caps", "all-petite-caps", "unicase" and "title-caps",
 // case variations being ignored.
 func ParseVariant(str string, warn bool) (Variant, bool) {
-	var carg1 *C.char        // in, none, string, casted *C.gchar
+	var carg1 *C.char        // in, none, string
 	var carg3 C.gboolean     // in
 	var carg2 C.PangoVariant // out, full, casted
 	var cret  C.gboolean     // return
@@ -4838,7 +4834,7 @@ func ParseVariant(str string, warn bool) (Variant, bool) {
 // "ultrabold", "bold", "normal", "light", "ultraleight"
 // and integers. Case variations are ignored.
 func ParseWeight(str string, warn bool) (Weight, bool) {
-	var carg1 *C.char       // in, none, string, casted *C.gchar
+	var carg1 *C.char       // in, none, string
 	var carg3 C.gboolean    // in
 	var carg2 C.PangoWeight // out, full, casted
 	var cret  C.gboolean    // return
@@ -4895,8 +4891,8 @@ func ParseWeight(str string, warn bool) (Weight, bool) {
 // so you need to subtract the item offset from their indices before
 // calling [func@Pango.shape].
 func Shape(text string, length int32, analysis *Analysis) GlyphString {
-	var carg1 *C.char            // in, none, string, casted *C.gchar
-	var carg2 C.int              // in, none, casted, casted C.gint
+	var carg1 *C.char            // in, none, string
+	var carg2 C.int              // in, none, casted
 	var carg3 *C.PangoAnalysis   // in, none, converted
 	var carg4 C.PangoGlyphString // out, transfer: none, C Pointers: 0, Name: GlyphString, caller-allocates
 
@@ -4914,7 +4910,7 @@ func Shape(text string, length int32, analysis *Analysis) GlyphString {
 
 	_ = glyphs
 	_ = carg4
-	panic("unimplemented conversion of GlyphString (PangoGlyphString)")
+	panic("unimplemented conversion of GlyphString (C.PangoGlyphString)")
 
 	return glyphs
 }
@@ -4955,10 +4951,10 @@ func Shape(text string, length int32, analysis *Analysis) GlyphString {
 // to subtract the item offset from their indices before calling
 // [func@Pango.shape_full].
 func ShapeFull(itemText string, itemLength int32, paragraphText string, paragraphLength int32, analysis *Analysis) GlyphString {
-	var carg1 *C.char            // in, none, string, casted *C.gchar
-	var carg2 C.int              // in, none, casted, casted C.gint
+	var carg1 *C.char            // in, none, string
+	var carg2 C.int              // in, none, casted
 	var carg3 *C.char            // in, none, string, nullable-string
-	var carg4 C.int              // in, none, casted, casted C.gint
+	var carg4 C.int              // in, none, casted
 	var carg5 *C.PangoAnalysis   // in, none, converted
 	var carg6 C.PangoGlyphString // out, transfer: none, C Pointers: 0, Name: GlyphString, caller-allocates
 
@@ -4983,7 +4979,7 @@ func ShapeFull(itemText string, itemLength int32, paragraphText string, paragrap
 
 	_ = glyphs
 	_ = carg6
-	panic("unimplemented conversion of GlyphString (PangoGlyphString)")
+	panic("unimplemented conversion of GlyphString (C.PangoGlyphString)")
 
 	return glyphs
 }
@@ -5019,7 +5015,7 @@ func ShapeFull(itemText string, itemLength int32, paragraphText string, paragrap
 func ShapeItem(item *Item, paragraphText string, paragraphLength int32, logAttrs *LogAttr, flags ShapeFlags) GlyphString {
 	var carg1 *C.PangoItem       // in, none, converted
 	var carg2 *C.char            // in, none, string, nullable-string
-	var carg3 C.int              // in, none, casted, casted C.gint
+	var carg3 C.int              // in, none, casted
 	var carg4 *C.PangoLogAttr    // in, none, converted, nullable
 	var carg6 C.PangoShapeFlags  // in, none, casted
 	var carg5 C.PangoGlyphString // out, transfer: none, C Pointers: 0, Name: GlyphString, caller-allocates
@@ -5046,7 +5042,7 @@ func ShapeItem(item *Item, paragraphText string, paragraphLength int32, logAttrs
 
 	_ = glyphs
 	_ = carg5
-	panic("unimplemented conversion of GlyphString (PangoGlyphString)")
+	panic("unimplemented conversion of GlyphString (C.PangoGlyphString)")
 
 	return glyphs
 }
@@ -5087,10 +5083,10 @@ func ShapeItem(item *Item, paragraphText string, paragraphLength int32, logAttrs
 // to subtract the item offset from their indices before calling
 // [func@Pango.shape_with_flags].
 func ShapeWithFlags(itemText string, itemLength int32, paragraphText string, paragraphLength int32, analysis *Analysis, flags ShapeFlags) GlyphString {
-	var carg1 *C.char            // in, none, string, casted *C.gchar
-	var carg2 C.int              // in, none, casted, casted C.gint
+	var carg1 *C.char            // in, none, string
+	var carg2 C.int              // in, none, casted
 	var carg3 *C.char            // in, none, string, nullable-string
-	var carg4 C.int              // in, none, casted, casted C.gint
+	var carg4 C.int              // in, none, casted
 	var carg5 *C.PangoAnalysis   // in, none, converted
 	var carg7 C.PangoShapeFlags  // in, none, casted
 	var carg6 C.PangoGlyphString // out, transfer: none, C Pointers: 0, Name: GlyphString, caller-allocates
@@ -5118,7 +5114,7 @@ func ShapeWithFlags(itemText string, itemLength int32, paragraphText string, par
 
 	_ = glyphs
 	_ = carg6
-	panic("unimplemented conversion of GlyphString (PangoGlyphString)")
+	panic("unimplemented conversion of GlyphString (C.PangoGlyphString)")
 
 	return glyphs
 }
@@ -5138,7 +5134,7 @@ func ShapeWithFlags(itemText string, itemLength int32, paragraphText string, par
 //
 // Deprecated: (since 1.38.0) 
 func SplitFileList(str string) []string {
-	var carg1 *C.char  // in, none, string, casted *C.gchar
+	var carg1 *C.char  // in, none, string
 	var cret  **C.char // return, transfer: full, C Pointers: 2, Name: array[utf8], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
 
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(str)))
@@ -5151,7 +5147,7 @@ func SplitFileList(str string) []string {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (char**)")
+	panic("unimplemented conversion of []string (**C.char)")
 
 	return goret
 }
@@ -5170,8 +5166,8 @@ func SplitFileList(str string) []string {
 //
 // Deprecated: (since 1.38.0) 
 func TrimString(str string) string {
-	var carg1 *C.char // in, none, string, casted *C.gchar
-	var cret  *C.char // return, full, string, casted *C.gchar
+	var carg1 *C.char // in, none, string
+	var cret  *C.char // return, full, string
 
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(str)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -5237,8 +5233,8 @@ func UnicharDirection(ch uint32) Direction {
 // The conversion is done by multiplying @d by %PANGO_SCALE and
 // rounding the result to nearest integer.
 func UnitsFromDouble(d float64) int32 {
-	var carg1 C.double // in, none, casted, casted C.gdouble
-	var cret  C.int    // return, none, casted, casted C.gint
+	var carg1 C.double // in, none, casted
+	var cret  C.int    // return, none, casted
 
 	carg1 = C.double(d)
 
@@ -5266,8 +5262,8 @@ func UnitsFromDouble(d float64) int32 {
 // 
 // The conversion is done by dividing @i by %PANGO_SCALE.
 func UnitsToDouble(i int32) float64 {
-	var carg1 C.int    // in, none, casted, casted C.gint
-	var cret  C.double // return, none, casted, casted C.gdouble
+	var carg1 C.int    // in, none, casted
+	var cret  C.double // return, none, casted
 
 	carg1 = C.int(i)
 
@@ -5293,7 +5289,7 @@ func UnitsToDouble(i int32) float64 {
 // returns the encoded version available at compile-time. A version
 // number can be encoded into an integer using PANGO_VERSION_ENCODE().
 func Version() int32 {
-	var cret C.int // return, none, casted, casted C.gint
+	var cret C.int // return, none, casted
 
 	cret = C.pango_version()
 
@@ -5334,10 +5330,10 @@ func Version() int32 {
 // 
 // For compile-time version checking use PANGO_VERSION_CHECK().
 func VersionCheck(requiredMajor int32, requiredMinor int32, requiredMicro int32) string {
-	var carg1 C.int   // in, none, casted, casted C.gint
-	var carg2 C.int   // in, none, casted, casted C.gint
-	var carg3 C.int   // in, none, casted, casted C.gint
-	var cret  *C.char // return, none, string, casted *C.gchar, nullable
+	var carg1 C.int   // in, none, casted
+	var carg2 C.int   // in, none, casted
+	var carg3 C.int   // in, none, casted
+	var cret  *C.char // return, none, string, nullable-string
 
 	carg1 = C.int(requiredMajor)
 	carg2 = C.int(requiredMinor)
@@ -5368,7 +5364,7 @@ func VersionCheck(requiredMajor int32, requiredMinor int32, requiredMicro int32)
 // This is similar to the macro %PANGO_VERSION_STRING except that the
 // macro returns the version available at compile-time.
 func VersionString() string {
-	var cret *C.char // return, none, string, casted *C.gchar
+	var cret *C.char // return, none, string
 
 	cret = C.pango_version_string()
 
@@ -6507,7 +6503,7 @@ func CoverageFromBytes(bytes []uint8) Coverage {
 	_ = bytes
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []uint8 (guchar*)")
+	panic("unimplemented conversion of []uint8 (*C.guchar)")
 
 	cret = C.pango_coverage_from_bytes(carg1, carg2)
 	runtime.KeepAlive(bytes)
@@ -6557,7 +6553,7 @@ func (coverage *CoverageInstance) Copy() Coverage {
 // Determine whether a particular index is covered by @coverage.
 func (coverage *CoverageInstance) Get(index_ int32) CoverageLevel {
 	var carg0 *C.PangoCoverage     // in, none, converted
-	var carg1 C.int                // in, none, casted, casted C.gint
+	var carg1 C.int                // in, none, casted
 	var cret  C.PangoCoverageLevel // return, none, casted
 
 	carg0 = (*C.PangoCoverage)(UnsafeCoverageToGlibNone(coverage))
@@ -6607,7 +6603,7 @@ func (coverage *CoverageInstance) Max(other Coverage) {
 // Modify a particular index within @coverage
 func (coverage *CoverageInstance) Set(index_ int32, level CoverageLevel) {
 	var carg0 *C.PangoCoverage     // in, none, converted
-	var carg1 C.int                // in, none, casted, casted C.gint
+	var carg1 C.int                // in, none, casted
 	var carg2 C.PangoCoverageLevel // in, none, casted
 
 	carg0 = (*C.PangoCoverage)(UnsafeCoverageToGlibNone(coverage))
@@ -6646,7 +6642,7 @@ func (coverage *CoverageInstance) ToBytes() ([]uint8) {
 	_ = bytes
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []uint8 (guchar*)")
+	panic("unimplemented conversion of []uint8 (*C.guchar)")
 
 	return bytes
 }
@@ -6803,7 +6799,8 @@ type Font interface {
 	// chain up virtual methods:
 
 	// ParentDescribe calls the default implementations of the describe virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret *FontDescription 
@@ -6814,13 +6811,15 @@ type Font interface {
 	// the font size in device units.
 	ParentDescribe() *FontDescription
 	// ParentDescribeAbsolute calls the default implementations of the describe_absolute virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret *FontDescription 
 	ParentDescribeAbsolute() *FontDescription
 	// ParentGetCoverage calls the default implementations of the get_coverage virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- language *Language: the language tag 
@@ -6832,7 +6831,8 @@ type Font interface {
 	// Computes the coverage map for a given font and language tag.
 	ParentGetCoverage(language *Language) Coverage
 	// ParentGetFontMap calls the default implementations of the get_font_map virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret FontMap (nullable) 
@@ -6850,7 +6850,8 @@ type Font interface {
 	// as a `PangoContext` holds a reference to the font map.
 	ParentGetFontMap() FontMap
 	// ParentGetGlyphExtents calls the default implementations of the get_glyph_extents virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- glyph Glyph: the glyph index 
@@ -6873,7 +6874,8 @@ type Font interface {
 	// output variables and returns.
 	ParentGetGlyphExtents(glyph Glyph) (Rectangle, Rectangle)
 	// ParentGetMetrics calls the default implementations of the get_metrics virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- language *Language (nullable): language tag used to determine which script
@@ -6949,7 +6951,7 @@ func FontDescriptionsFree(descs []*FontDescription) {
 	_ = descs
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []*FontDescription (PangoFontDescription**)")
+	panic("unimplemented conversion of []*FontDescription (**C.PangoFontDescription)")
 
 	C.pango_font_descriptions_free(carg1, carg2)
 	runtime.KeepAlive(descs)
@@ -7180,10 +7182,10 @@ func (font *FontInstance) GetGlyphExtents(glyph Glyph) (Rectangle, Rectangle) {
 
 	_ = inkRect
 	_ = carg2
-	panic("unimplemented conversion of Rectangle (PangoRectangle)")
+	panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
 	_ = logicalRect
 	_ = carg3
-	panic("unimplemented conversion of Rectangle (PangoRectangle)")
+	panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
 
 	return inkRect, logicalRect
 }
@@ -7298,7 +7300,8 @@ type FontOverrides[Instance Font] struct {
 	// gobject.ObjectOverrides allows you to override virtual methods from the parent class gobject.Object
 	gobject.ObjectOverrides[Instance]
 
-	// Describe allows you to override the implementation of the virtual method describe.
+	// // Describe allows you to override the implementation of the virtual method describe.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret *FontDescription 
@@ -7308,12 +7311,14 @@ type FontOverrides[Instance Font] struct {
 	// Use [method@Pango.Font.describe_with_absolute_size] if you want
 	// the font size in device units.
 	Describe func(Instance) *FontDescription
-	// DescribeAbsolute allows you to override the implementation of the virtual method describe_absolute.
+	// // DescribeAbsolute allows you to override the implementation of the virtual method describe_absolute.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret *FontDescription 
 	DescribeAbsolute func(Instance) *FontDescription
-	// GetCoverage allows you to override the implementation of the virtual method get_coverage.
+	// // GetCoverage allows you to override the implementation of the virtual method get_coverage.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- language *Language: the language tag 
@@ -7324,7 +7329,8 @@ type FontOverrides[Instance Font] struct {
 	//
 	// Computes the coverage map for a given font and language tag.
 	GetCoverage func(Instance, *Language) Coverage
-	// GetFontMap allows you to override the implementation of the virtual method get_font_map.
+	// // GetFontMap allows you to override the implementation of the virtual method get_font_map.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret FontMap (nullable) 
@@ -7341,7 +7347,8 @@ type FontOverrides[Instance Font] struct {
 	// font map is kept alive. In most uses this is not an issue
 	// as a `PangoContext` holds a reference to the font map.
 	GetFontMap func(Instance) FontMap
-	// GetGlyphExtents allows you to override the implementation of the virtual method get_glyph_extents.
+	// // GetGlyphExtents allows you to override the implementation of the virtual method get_glyph_extents.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- glyph Glyph: the glyph index 
@@ -7363,7 +7370,8 @@ type FontOverrides[Instance Font] struct {
 	// If @font is %NULL, this function gracefully sets some sane values in the
 	// output variables and returns.
 	GetGlyphExtents func(Instance, Glyph) (Rectangle, Rectangle)
-	// GetMetrics allows you to override the implementation of the virtual method get_metrics.
+	// // GetMetrics allows you to override the implementation of the virtual method get_metrics.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- language *Language (nullable): language tag used to determine which script
@@ -7494,10 +7502,10 @@ func UnsafeApplyFontOverrides[Instance Font](gclass unsafe.Pointer, overrides Fo
 
 				_ = inkRect
 				_ = carg2
-				panic("unimplemented conversion of Rectangle (PangoRectangle)")
+				panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
 				_ = logicalRect
 				_ = carg3
-				panic("unimplemented conversion of Rectangle (PangoRectangle)")
+				panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
 			},
 		)
 	}
@@ -7528,7 +7536,8 @@ func UnsafeApplyFontOverrides[Instance Font](gclass unsafe.Pointer, overrides Fo
 }
 
 // ParentDescribe calls the default implementations of the describe virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret *FontDescription 
@@ -7554,7 +7563,8 @@ func (font *FontInstance) ParentDescribe() *FontDescription {
 }
 
 // ParentDescribeAbsolute calls the default implementations of the describe_absolute virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret *FontDescription 
@@ -7575,7 +7585,8 @@ func (font *FontInstance) ParentDescribeAbsolute() *FontDescription {
 }
 
 // ParentGetCoverage calls the default implementations of the get_coverage virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- language *Language: the language tag 
@@ -7606,7 +7617,8 @@ func (font *FontInstance) ParentGetCoverage(language *Language) Coverage {
 }
 
 // ParentGetFontMap calls the default implementations of the get_font_map virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret FontMap (nullable) 
@@ -7641,7 +7653,8 @@ func (font *FontInstance) ParentGetFontMap() FontMap {
 }
 
 // ParentGetGlyphExtents calls the default implementations of the get_glyph_extents virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- glyph Glyph: the glyph index 
@@ -7681,16 +7694,17 @@ func (font *FontInstance) ParentGetGlyphExtents(glyph Glyph) (Rectangle, Rectang
 
 	_ = inkRect
 	_ = carg2
-	panic("unimplemented conversion of Rectangle (PangoRectangle)")
+	panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
 	_ = logicalRect
 	_ = carg3
-	panic("unimplemented conversion of Rectangle (PangoRectangle)")
+	panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
 
 	return inkRect, logicalRect
 }
 
 // ParentGetMetrics calls the default implementations of the get_metrics virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- language *Language (nullable): language tag used to determine which script
@@ -7821,7 +7835,8 @@ type FontFace interface {
 	// chain up virtual methods:
 
 	// ParentDescribe calls the default implementations of the describe virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret *FontDescription 
@@ -7833,7 +7848,8 @@ type FontFace interface {
 	// will be unset.
 	ParentDescribe() *FontDescription
 	// ParentGetFaceName calls the default implementations of the get_face_name virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret string 
@@ -7845,7 +7861,8 @@ type FontFace interface {
 	// face for the same style).
 	ParentGetFaceName() string
 	// ParentGetFamily calls the default implementations of the get_family virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret FontFamily 
@@ -7853,7 +7870,8 @@ type FontFace interface {
 	// Gets the `PangoFontFamily` that @face belongs to.
 	ParentGetFamily() FontFamily
 	// ParentIsSynthesized calls the default implementations of the is_synthesized virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
@@ -7945,7 +7963,7 @@ func (face *FontFaceInstance) Describe() *FontDescription {
 // face for the same style).
 func (face *FontFaceInstance) GetFaceName() string {
 	var carg0 *C.PangoFontFace // in, none, converted
-	var cret  *C.char          // return, none, string, casted *C.gchar
+	var cret  *C.char          // return, none, string
 
 	carg0 = (*C.PangoFontFace)(UnsafeFontFaceToGlibNone(face))
 
@@ -8017,7 +8035,8 @@ type FontFaceOverrides[Instance FontFace] struct {
 	// gobject.ObjectOverrides allows you to override virtual methods from the parent class gobject.Object
 	gobject.ObjectOverrides[Instance]
 
-	// Describe allows you to override the implementation of the virtual method describe.
+	// // Describe allows you to override the implementation of the virtual method describe.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret *FontDescription 
@@ -8028,7 +8047,8 @@ type FontFaceOverrides[Instance FontFace] struct {
 	// variant, weight and stretch of the face, but its size field
 	// will be unset.
 	Describe func(Instance) *FontDescription
-	// GetFaceName allows you to override the implementation of the virtual method get_face_name.
+	// // GetFaceName allows you to override the implementation of the virtual method get_face_name.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret string 
@@ -8039,14 +8059,16 @@ type FontFaceOverrides[Instance FontFace] struct {
 	// with the same name (e.g. a variable and a non-variable
 	// face for the same style).
 	GetFaceName func(Instance) string
-	// GetFamily allows you to override the implementation of the virtual method get_family.
+	// // GetFamily allows you to override the implementation of the virtual method get_family.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret FontFamily 
 	//
 	// Gets the `PangoFontFamily` that @face belongs to.
 	GetFamily func(Instance) FontFamily
-	// IsSynthesized allows you to override the implementation of the virtual method is_synthesized.
+	// // IsSynthesized allows you to override the implementation of the virtual method is_synthesized.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
@@ -8093,7 +8115,7 @@ func UnsafeApplyFontFaceOverrides[Instance FontFace](gclass unsafe.Pointer, over
 			"_gotk4_pango1_FontFace_get_face_name",
 			func(carg0 *C.PangoFontFace) (cret *C.char) {
 				var face  Instance // go PangoFontFace subclass
-				var goret string   // return, none, string, casted *C.gchar
+				var goret string   // return, none, string
 
 				face = UnsafeFontFaceFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
@@ -8151,7 +8173,8 @@ func UnsafeApplyFontFaceOverrides[Instance FontFace](gclass unsafe.Pointer, over
 }
 
 // ParentDescribe calls the default implementations of the describe virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret *FontDescription 
@@ -8178,7 +8201,8 @@ func (face *FontFaceInstance) ParentDescribe() *FontDescription {
 }
 
 // ParentGetFaceName calls the default implementations of the get_face_name virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret string 
@@ -8190,7 +8214,7 @@ func (face *FontFaceInstance) ParentDescribe() *FontDescription {
 // face for the same style).
 func (face *FontFaceInstance) ParentGetFaceName() string {
 	var carg0 *C.PangoFontFace
-	var cret  *C.char // return, none, string, casted *C.gchar
+	var cret  *C.char // return, none, string
 
 	parentclass := (*C.PangoFontFaceClass)(classdata.PeekParentClass(UnsafeFontFaceToGlibNone(face)))
 
@@ -8205,7 +8229,8 @@ func (face *FontFaceInstance) ParentGetFaceName() string {
 }
 
 // ParentGetFamily calls the default implementations of the get_family virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret FontFamily 
@@ -8228,7 +8253,8 @@ func (face *FontFaceInstance) ParentGetFamily() FontFamily {
 }
 
 // ParentIsSynthesized calls the default implementations of the is_synthesized virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -8367,7 +8393,8 @@ type FontFamily interface {
 	// chain up virtual methods:
 
 	// ParentGetFace calls the default implementations of the get_face virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- name string (nullable): the name of a face. If the name is %NULL,
@@ -8381,7 +8408,8 @@ type FontFamily interface {
 	// Gets the `PangoFontFace` of @family with the given name.
 	ParentGetFace(name string) FontFace
 	// ParentGetName calls the default implementations of the get_name virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret string 
@@ -8393,7 +8421,8 @@ type FontFamily interface {
 	// this family is desired.
 	ParentGetName() string
 	// ParentIsMonospace calls the default implementations of the is_monospace virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
@@ -8414,7 +8443,8 @@ type FontFamily interface {
 	// be affected by double-width characters.
 	ParentIsMonospace() bool
 	// ParentIsVariable calls the default implementations of the is_variable virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
@@ -8431,7 +8461,7 @@ func unsafeWrapFontFamily(base *gobject.ObjectInstance) *FontFamilyInstance {
 	return &FontFamilyInstance{
 		ObjectInstance: *base,
 		ListModelInstance: gio.ListModelInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -8519,7 +8549,7 @@ func (family *FontFamilyInstance) GetFace(name string) FontFace {
 // this family is desired.
 func (family *FontFamilyInstance) GetName() string {
 	var carg0 *C.PangoFontFamily // in, none, converted
-	var cret  *C.char            // return, none, string, casted *C.gchar
+	var cret  *C.char            // return, none, string
 
 	carg0 = (*C.PangoFontFamily)(UnsafeFontFamilyToGlibNone(family))
 
@@ -8606,7 +8636,8 @@ type FontFamilyOverrides[Instance FontFamily] struct {
 	// gobject.ObjectOverrides allows you to override virtual methods from the parent class gobject.Object
 	gobject.ObjectOverrides[Instance]
 
-	// GetFace allows you to override the implementation of the virtual method get_face.
+	// // GetFace allows you to override the implementation of the virtual method get_face.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- name string (nullable): the name of a face. If the name is %NULL,
@@ -8619,7 +8650,8 @@ type FontFamilyOverrides[Instance FontFamily] struct {
 	//
 	// Gets the `PangoFontFace` of @family with the given name.
 	GetFace func(Instance, string) FontFace
-	// GetName allows you to override the implementation of the virtual method get_name.
+	// // GetName allows you to override the implementation of the virtual method get_name.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret string 
@@ -8630,7 +8662,8 @@ type FontFamilyOverrides[Instance FontFamily] struct {
 	// be used in a `PangoFontDescription` to specify that a face from
 	// this family is desired.
 	GetName func(Instance) string
-	// IsMonospace allows you to override the implementation of the virtual method is_monospace.
+	// // IsMonospace allows you to override the implementation of the virtual method is_monospace.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
@@ -8650,7 +8683,8 @@ type FontFamilyOverrides[Instance FontFamily] struct {
 	// results of [method@Pango.FontMetrics.get_approximate_char_width] may
 	// be affected by double-width characters.
 	IsMonospace func(Instance) bool
-	// IsVariable allows you to override the implementation of the virtual method is_variable.
+	// // IsVariable allows you to override the implementation of the virtual method is_variable.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
@@ -8677,7 +8711,7 @@ func UnsafeApplyFontFamilyOverrides[Instance FontFamily](gclass unsafe.Pointer, 
 			"_gotk4_pango1_FontFamily_get_face",
 			func(carg0 *C.PangoFontFamily, carg1 *C.char) (cret *C.PangoFontFace) {
 				var family Instance // go PangoFontFamily subclass
-				var name   string   // in, none, string, casted *C.gchar, nullable
+				var name   string   // in, none, string, nullable-string
 				var goret  FontFace // return, none, converted, nullable
 
 				family = UnsafeFontFamilyFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
@@ -8703,7 +8737,7 @@ func UnsafeApplyFontFamilyOverrides[Instance FontFamily](gclass unsafe.Pointer, 
 			"_gotk4_pango1_FontFamily_get_name",
 			func(carg0 *C.PangoFontFamily) (cret *C.char) {
 				var family Instance // go PangoFontFamily subclass
-				var goret  string   // return, none, string, casted *C.gchar
+				var goret  string   // return, none, string
 
 				family = UnsafeFontFamilyFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 
@@ -8763,7 +8797,8 @@ func UnsafeApplyFontFamilyOverrides[Instance FontFamily](gclass unsafe.Pointer, 
 }
 
 // ParentGetFace calls the default implementations of the get_face virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- name string (nullable): the name of a face. If the name is %NULL,
@@ -8801,7 +8836,8 @@ func (family *FontFamilyInstance) ParentGetFace(name string) FontFace {
 }
 
 // ParentGetName calls the default implementations of the get_name virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret string 
@@ -8813,7 +8849,7 @@ func (family *FontFamilyInstance) ParentGetFace(name string) FontFace {
 // this family is desired.
 func (family *FontFamilyInstance) ParentGetName() string {
 	var carg0 *C.PangoFontFamily
-	var cret  *C.char // return, none, string, casted *C.gchar
+	var cret  *C.char // return, none, string
 
 	parentclass := (*C.PangoFontFamilyClass)(classdata.PeekParentClass(UnsafeFontFamilyToGlibNone(family)))
 
@@ -8828,7 +8864,8 @@ func (family *FontFamilyInstance) ParentGetName() string {
 }
 
 // ParentIsMonospace calls the default implementations of the is_monospace virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -8866,7 +8903,8 @@ func (family *FontFamilyInstance) ParentIsMonospace() bool {
 }
 
 // ParentIsVariable calls the default implementations of the is_variable virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret bool 
@@ -9069,7 +9107,7 @@ type FontMap interface {
 	// chain up virtual methods:
 
 	// ParentChanged calls the default implementations of the changed virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
 	//
 	// Forces a change in the context, which will cause any `PangoContext`
 	// using this fontmap to change.
@@ -9080,7 +9118,8 @@ type FontMap interface {
 	// context and such data is changed.
 	ParentChanged()
 	// ParentGetFamily calls the default implementations of the get_family virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- name string: a family name 
@@ -9092,7 +9131,8 @@ type FontMap interface {
 	// Gets a font family by name.
 	ParentGetFamily(name string) FontFamily
 	// ParentGetSerial calls the default implementations of the get_serial virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret uint 
@@ -9111,7 +9151,8 @@ type FontMap interface {
 	// like in `PangoContext`.
 	ParentGetSerial() uint
 	// ParentLoadFont calls the default implementations of the load_font virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- _context Context: the `PangoContext` the font will be used with 
@@ -9124,7 +9165,8 @@ type FontMap interface {
 	// Load the font in the fontmap that is the closest match for @desc.
 	ParentLoadFont(_context Context, desc *FontDescription) Font
 	// ParentLoadFontset calls the default implementations of the load_fontset virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- _context Context: the `PangoContext` the font will be used with 
@@ -9144,7 +9186,7 @@ func unsafeWrapFontMap(base *gobject.ObjectInstance) *FontMapInstance {
 	return &FontMapInstance{
 		ObjectInstance: *base,
 		ListModelInstance: gio.ListModelInstance{
-			ObjectInstance: *base,
+			Instance: *base,
 		},
 	}
 }
@@ -9199,7 +9241,7 @@ func UnsafeFontMapToGlibFull(c FontMap) unsafe.Pointer {
 // fonts with the same name.
 func (fontmap *FontMapInstance) AddFontFile(filename string) (bool, error) {
 	var carg0 *C.PangoFontMap // in, none, converted
-	var carg1 *C.char         // in, none, string, casted *C.gchar
+	var carg1 *C.char         // in, none, string
 	var cret  C.gboolean      // return
 	var _cerr *C.GError       // out, full, converted, nullable
 
@@ -9286,7 +9328,7 @@ func (fontmap *FontMapInstance) CreateContext() Context {
 // Gets a font family by name.
 func (fontmap *FontMapInstance) GetFamily(name string) FontFamily {
 	var carg0 *C.PangoFontMap    // in, none, converted
-	var carg1 *C.char            // in, none, string, casted *C.gchar
+	var carg1 *C.char            // in, none, string
 	var cret  *C.PangoFontFamily // return, none, converted
 
 	carg0 = (*C.PangoFontMap)(UnsafeFontMapToGlibNone(fontmap))
@@ -9439,7 +9481,7 @@ func (fontmap *FontMapInstance) LoadFontset(_context Context, desc *FontDescript
 func (fontmap *FontMapInstance) ReloadFont(font Font, scale float64, _context Context, variations string) Font {
 	var carg0 *C.PangoFontMap // in, none, converted
 	var carg1 *C.PangoFont    // in, none, converted
-	var carg2 C.double        // in, none, casted, casted C.gdouble
+	var carg2 C.double        // in, none, casted
 	var carg3 *C.PangoContext // in, none, converted, nullable
 	var carg4 *C.char         // in, none, string, nullable-string
 	var cret  *C.PangoFont    // return, full, converted
@@ -9475,7 +9517,7 @@ type FontMapOverrides[Instance FontMap] struct {
 	// gobject.ObjectOverrides allows you to override virtual methods from the parent class gobject.Object
 	gobject.ObjectOverrides[Instance]
 
-	// Changed allows you to override the implementation of the virtual method changed.
+	// // Changed allows you to override the implementation of the virtual method changed.
 	//
 	// Forces a change in the context, which will cause any `PangoContext`
 	// using this fontmap to change.
@@ -9485,7 +9527,8 @@ type FontMapOverrides[Instance FontMap] struct {
 	// call this function if they have attached extra data to the
 	// context and such data is changed.
 	Changed func(Instance)
-	// GetFamily allows you to override the implementation of the virtual method get_family.
+	// // GetFamily allows you to override the implementation of the virtual method get_family.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- name string: a family name 
@@ -9496,7 +9539,8 @@ type FontMapOverrides[Instance FontMap] struct {
 	//
 	// Gets a font family by name.
 	GetFamily func(Instance, string) FontFamily
-	// GetSerial allows you to override the implementation of the virtual method get_serial.
+	// // GetSerial allows you to override the implementation of the virtual method get_serial.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret uint 
@@ -9514,7 +9558,8 @@ type FontMapOverrides[Instance FontMap] struct {
 	// This can be used to automatically detect changes to a `PangoFontMap`,
 	// like in `PangoContext`.
 	GetSerial func(Instance) uint
-	// LoadFont allows you to override the implementation of the virtual method load_font.
+	// // LoadFont allows you to override the implementation of the virtual method load_font.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- _context Context: the `PangoContext` the font will be used with 
@@ -9526,7 +9571,8 @@ type FontMapOverrides[Instance FontMap] struct {
 	//
 	// Load the font in the fontmap that is the closest match for @desc.
 	LoadFont func(Instance, Context, *FontDescription) Font
-	// LoadFontset allows you to override the implementation of the virtual method load_fontset.
+	// // LoadFontset allows you to override the implementation of the virtual method load_fontset.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- _context Context: the `PangoContext` the font will be used with 
@@ -9571,7 +9617,7 @@ func UnsafeApplyFontMapOverrides[Instance FontMap](gclass unsafe.Pointer, overri
 			"_gotk4_pango1_FontMap_get_family",
 			func(carg0 *C.PangoFontMap, carg1 *C.char) (cret *C.PangoFontFamily) {
 				var fontmap Instance   // go PangoFontMap subclass
-				var name    string     // in, none, string, casted *C.gchar
+				var name    string     // in, none, string
 				var goret   FontFamily // return, none, converted
 
 				fontmap = UnsafeFontMapFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
@@ -9662,7 +9708,7 @@ func UnsafeApplyFontMapOverrides[Instance FontMap](gclass unsafe.Pointer, overri
 }
 
 // ParentChanged calls the default implementations of the changed virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
 //
 // Forces a change in the context, which will cause any `PangoContext`
 // using this fontmap to change.
@@ -9681,7 +9727,8 @@ func (fontmap *FontMapInstance) ParentChanged() {
 }
 
 // ParentGetFamily calls the default implementations of the get_family virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- name string: a family name 
@@ -9693,7 +9740,7 @@ func (fontmap *FontMapInstance) ParentChanged() {
 // Gets a font family by name.
 func (fontmap *FontMapInstance) ParentGetFamily(name string) FontFamily {
 	var carg0 *C.PangoFontMap
-	var carg1 *C.char            // in, none, string, casted *C.gchar
+	var carg1 *C.char            // in, none, string
 	var cret  *C.PangoFontFamily // return, none, converted
 
 	parentclass := (*C.PangoFontMapClass)(classdata.PeekParentClass(UnsafeFontMapToGlibNone(fontmap)))
@@ -9713,7 +9760,8 @@ func (fontmap *FontMapInstance) ParentGetFamily(name string) FontFamily {
 }
 
 // ParentGetSerial calls the default implementations of the get_serial virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret uint 
@@ -9747,7 +9795,8 @@ func (fontmap *FontMapInstance) ParentGetSerial() uint {
 }
 
 // ParentLoadFont calls the default implementations of the load_font virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- _context Context: the `PangoContext` the font will be used with 
@@ -9784,7 +9833,8 @@ func (fontmap *FontMapInstance) ParentLoadFont(_context Context, desc *FontDescr
 }
 
 // ParentLoadFontset calls the default implementations of the load_fontset virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- _context Context: the `PangoContext` the font will be used with 
@@ -9906,19 +9956,9 @@ type Fontset interface {
 
 	// chain up virtual methods:
 
-	// ParentForEach calls the default implementations of the foreach virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
-	// The function takes the following parameters:
-	// 
-	// 	- fn FontsetForEachFunc: Callback function 
-	//
-	// Iterates through all the fonts in a fontset, calling @func for
-	// each one.
-	// 
-	// If @func returns %TRUE, that stops the iteration.
-	ParentForEach(fn FontsetForEachFunc)
 	// ParentGetFont calls the default implementations of the get_font virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- wc uint: a Unicode character 
@@ -9931,7 +9971,8 @@ type Fontset interface {
 	// glyph for a Unicode character.
 	ParentGetFont(wc uint) Font
 	// ParentGetLanguage calls the default implementations of the get_language virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret *Language 
@@ -9939,7 +9980,8 @@ type Fontset interface {
 	// a function to get the language of the fontset.
 	ParentGetLanguage() *Language
 	// ParentGetMetrics calls the default implementations of the get_metrics virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret *FontMetrics 
@@ -10072,17 +10114,8 @@ type FontsetOverrides[Instance Fontset] struct {
 	// gobject.ObjectOverrides allows you to override virtual methods from the parent class gobject.Object
 	gobject.ObjectOverrides[Instance]
 
-	// ForEach allows you to override the implementation of the virtual method foreach.
-	// The function takes the following parameters:
+	// // GetFont allows you to override the implementation of the virtual method get_font.
 	// 
-	// 	- fn FontsetForEachFunc: Callback function 
-	//
-	// Iterates through all the fonts in a fontset, calling @func for
-	// each one.
-	// 
-	// If @func returns %TRUE, that stops the iteration.
-	ForEach func(Instance, FontsetForEachFunc)
-	// GetFont allows you to override the implementation of the virtual method get_font.
 	// The function takes the following parameters:
 	// 
 	// 	- wc uint: a Unicode character 
@@ -10094,14 +10127,16 @@ type FontsetOverrides[Instance Fontset] struct {
 	// Returns the font in the fontset that contains the best
 	// glyph for a Unicode character.
 	GetFont func(Instance, uint) Font
-	// GetLanguage allows you to override the implementation of the virtual method get_language.
+	// // GetLanguage allows you to override the implementation of the virtual method get_language.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret *Language 
 	//
 	// a function to get the language of the fontset.
 	GetLanguage func(Instance) *Language
-	// GetMetrics allows you to override the implementation of the virtual method get_metrics.
+	// // GetMetrics allows you to override the implementation of the virtual method get_metrics.
+	// 
 	// The function returns the following values:
 	// 
 	// 	- goret *FontMetrics 
@@ -10116,26 +10151,6 @@ func UnsafeApplyFontsetOverrides[Instance Fontset](gclass unsafe.Pointer, overri
 	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
 
 	pclass := (*C.PangoFontsetClass)(gclass)
-
-	if overrides.ForEach != nil {
-		pclass.foreach = (*[0]byte)(C._gotk4_pango1_Fontset_foreach)
-		classdata.StoreVirtualMethod(
-			unsafe.Pointer(pclass),
-			"_gotk4_pango1_Fontset_foreach",
-			func(carg0 *C.PangoFontset, carg1 C.PangoFontsetForeachFunc, carg2 C.gpointer) {
-				var fontset Instance           // go PangoFontset subclass
-				var fn      FontsetForEachFunc // in, transfer: none, C Pointers: 0, Name: FontsetForeachFunc, closure: carg2
-
-				fontset = UnsafeFontsetFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
-				_ = fn
-				_ = carg1
-				_ = carg2
-				panic("unimplemented conversion of FontsetForEachFunc (PangoFontsetForeachFunc)")
-
-				overrides.ForEach(fontset, fn)
-			},
-		)
-	}
 
 	if overrides.GetFont != nil {
 		pclass.get_font = (*[0]byte)(C._gotk4_pango1_Fontset_get_font)
@@ -10200,34 +10215,9 @@ func UnsafeApplyFontsetOverrides[Instance Fontset](gclass unsafe.Pointer, overri
 	}
 }
 
-// ParentForEach calls the default implementations of the foreach virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
-// The function takes the following parameters:
-// 
-// 	- fn FontsetForEachFunc: Callback function 
-//
-// Iterates through all the fonts in a fontset, calling @func for
-// each one.
-// 
-// If @func returns %TRUE, that stops the iteration.
-func (fontset *FontsetInstance) ParentForEach(fn FontsetForEachFunc) {
-	var carg0 *C.PangoFontset
-	var carg1 C.PangoFontsetForeachFunc // callback, scope: call, closure: carg2
-	var carg2 C.gpointer                // implicit
-
-	parentclass := (*C.PangoFontsetClass)(classdata.PeekParentClass(UnsafeFontsetToGlibNone(fontset)))
-
-	carg1 = (*[0]byte)(C._gotk4_pango1_FontsetForEachFunc)
-	carg2 = C.gpointer(userdata.Register(fn))
-	defer userdata.Delete(unsafe.Pointer(carg2))
-
-	C._gotk4_pango1_Fontset_virtual_foreach(unsafe.Pointer(parentclass.foreach), carg0, carg1, carg2)
-	runtime.KeepAlive(fontset)
-	runtime.KeepAlive(fn)
-}
-
 // ParentGetFont calls the default implementations of the get_font virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- wc uint: a Unicode character 
@@ -10259,7 +10249,8 @@ func (fontset *FontsetInstance) ParentGetFont(wc uint) Font {
 }
 
 // ParentGetLanguage calls the default implementations of the get_language virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret *Language 
@@ -10282,7 +10273,8 @@ func (fontset *FontsetInstance) ParentGetLanguage() *Language {
 }
 
 // ParentGetMetrics calls the default implementations of the get_metrics virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function returns the following values:
 // 
 // 	- goret *FontMetrics 
@@ -10467,7 +10459,7 @@ func (fontset *FontsetSimpleInstance) Append(font Font) {
 // Returns the number of fonts in the fontset.
 func (fontset *FontsetSimpleInstance) Size() int32 {
 	var carg0 *C.PangoFontsetSimple // in, none, converted
-	var cret  C.int                 // return, none, casted, casted C.gint
+	var cret  C.int                 // return, none, casted
 
 	carg0 = (*C.PangoFontsetSimple)(UnsafeFontsetSimpleToGlibNone(fontset))
 
@@ -11753,7 +11745,7 @@ func (layout *LayoutInstance) GetAutoDir() bool {
 // Gets the Y position of baseline of the first line in @layout.
 func (layout *LayoutInstance) GetBaseline() int32 {
 	var carg0 *C.PangoLayout // in, none, converted
-	var cret  C.int          // return, none, casted, casted C.gint
+	var cret  C.int          // return, none, casted
 
 	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
 
@@ -11791,7 +11783,7 @@ func (layout *LayoutInstance) GetBaseline() int32 {
 // &lt;/picture&gt;
 func (layout *LayoutInstance) GetCaretPos(index_ int32) (Rectangle, Rectangle) {
 	var carg0 *C.PangoLayout   // in, none, converted
-	var carg1 C.int            // in, none, casted, casted C.gint
+	var carg1 C.int            // in, none, casted
 	var carg2 C.PangoRectangle // out, transfer: none, C Pointers: 0, Name: Rectangle, optional, caller-allocates
 	var carg3 C.PangoRectangle // out, transfer: none, C Pointers: 0, Name: Rectangle, optional, caller-allocates
 
@@ -11807,10 +11799,10 @@ func (layout *LayoutInstance) GetCaretPos(index_ int32) (Rectangle, Rectangle) {
 
 	_ = strongPos
 	_ = carg2
-	panic("unimplemented conversion of Rectangle (PangoRectangle)")
+	panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
 	_ = weakPos
 	_ = carg3
-	panic("unimplemented conversion of Rectangle (PangoRectangle)")
+	panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
 
 	return strongPos, weakPos
 }
@@ -11902,7 +11894,7 @@ func (layout *LayoutInstance) GetContext() Context {
 // will insert it at the end.
 func (layout *LayoutInstance) GetCursorPos(index_ int32) (Rectangle, Rectangle) {
 	var carg0 *C.PangoLayout   // in, none, converted
-	var carg1 C.int            // in, none, casted, casted C.gint
+	var carg1 C.int            // in, none, casted
 	var carg2 C.PangoRectangle // out, transfer: none, C Pointers: 0, Name: Rectangle, optional, caller-allocates
 	var carg3 C.PangoRectangle // out, transfer: none, C Pointers: 0, Name: Rectangle, optional, caller-allocates
 
@@ -11918,10 +11910,10 @@ func (layout *LayoutInstance) GetCursorPos(index_ int32) (Rectangle, Rectangle) 
 
 	_ = strongPos
 	_ = carg2
-	panic("unimplemented conversion of Rectangle (PangoRectangle)")
+	panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
 	_ = weakPos
 	_ = carg3
-	panic("unimplemented conversion of Rectangle (PangoRectangle)")
+	panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
 
 	return strongPos, weakPos
 }
@@ -11939,7 +11931,7 @@ func (layout *LayoutInstance) GetCursorPos(index_ int32) (Rectangle, Rectangle) 
 // Gets the text direction at the given character position in @layout.
 func (layout *LayoutInstance) GetDirection(index int32) Direction {
 	var carg0 *C.PangoLayout   // in, none, converted
-	var carg1 C.int            // in, none, casted, casted C.gint
+	var carg1 C.int            // in, none, casted
 	var cret  C.PangoDirection // return, none, casted
 
 	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
@@ -12018,10 +12010,10 @@ func (layout *LayoutInstance) GetExtents() (Rectangle, Rectangle) {
 
 	_ = inkRect
 	_ = carg1
-	panic("unimplemented conversion of Rectangle (PangoRectangle)")
+	panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
 	_ = logicalRect
 	_ = carg2
-	panic("unimplemented conversion of Rectangle (PangoRectangle)")
+	panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
 
 	return inkRect, logicalRect
 }
@@ -12062,7 +12054,7 @@ func (layout *LayoutInstance) GetFontDescription() *FontDescription {
 // See [method@Pango.Layout.set_height] for details.
 func (layout *LayoutInstance) GetHeight() int32 {
 	var carg0 *C.PangoLayout // in, none, converted
-	var cret  C.int          // return, none, casted, casted C.gint
+	var cret  C.int          // return, none, casted
 
 	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
 
@@ -12087,7 +12079,7 @@ func (layout *LayoutInstance) GetHeight() int32 {
 // A negative value indicates a hanging indentation.
 func (layout *LayoutInstance) GetIndent() int32 {
 	var carg0 *C.PangoLayout // in, none, converted
-	var cret  C.int          // return, none, casted, casted C.gint
+	var cret  C.int          // return, none, casted
 
 	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
 
@@ -12193,7 +12185,7 @@ func (layout *LayoutInstance) GetJustifyLastLine() bool {
 // plan to modify the contents of the line (glyphs, glyph widths, etc.).
 func (layout *LayoutInstance) GetLine(line int32) *LayoutLine {
 	var carg0 *C.PangoLayout     // in, none, converted
-	var carg1 C.int              // in, none, casted, casted C.gint
+	var carg1 C.int              // in, none, casted
 	var cret  *C.PangoLayoutLine // return, none, converted, nullable
 
 	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
@@ -12221,7 +12213,7 @@ func (layout *LayoutInstance) GetLine(line int32) *LayoutLine {
 // Retrieves the count of lines for the @layout.
 func (layout *LayoutInstance) GetLineCount() int32 {
 	var carg0 *C.PangoLayout // in, none, converted
-	var cret  C.int          // return, none, casted, casted C.gint
+	var cret  C.int          // return, none, casted
 
 	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
 
@@ -12253,7 +12245,7 @@ func (layout *LayoutInstance) GetLineCount() int32 {
 // (glyphs, glyph widths, etc.).
 func (layout *LayoutInstance) GetLineReadonly(line int32) *LayoutLine {
 	var carg0 *C.PangoLayout     // in, none, converted
-	var carg1 C.int              // in, none, casted, casted C.gint
+	var carg1 C.int              // in, none, casted
 	var cret  *C.PangoLayoutLine // return, none, converted, nullable
 
 	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
@@ -12283,7 +12275,7 @@ func (layout *LayoutInstance) GetLineReadonly(line int32) *LayoutLine {
 // See [method@Pango.Layout.set_line_spacing].
 func (layout *LayoutInstance) GetLineSpacing() float32 {
 	var carg0 *C.PangoLayout // in, none, converted
-	var cret  C.float        // return, none, casted, casted C.gfloat
+	var cret  C.float        // return, none, casted
 
 	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
 
@@ -12399,7 +12391,7 @@ func (layout *LayoutInstance) GetLogAttrsReadonly() (int32, []LogAttr) {
 	nAttrs = int32(carg1)
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []LogAttr (const PangoLogAttr*)")
+	panic("unimplemented conversion of []LogAttr (*C.PangoLogAttr)")
 
 	return nAttrs, goret
 }
@@ -12434,10 +12426,10 @@ func (layout *LayoutInstance) GetPixelExtents() (Rectangle, Rectangle) {
 
 	_ = inkRect
 	_ = carg1
-	panic("unimplemented conversion of Rectangle (PangoRectangle)")
+	panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
 	_ = logicalRect
 	_ = carg2
-	panic("unimplemented conversion of Rectangle (PangoRectangle)")
+	panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
 
 	return inkRect, logicalRect
 }
@@ -12457,8 +12449,8 @@ func (layout *LayoutInstance) GetPixelExtents() (Rectangle, Rectangle) {
 // around [method@Pango.Layout.get_pixel_extents].
 func (layout *LayoutInstance) GetPixelSize() (int32, int32) {
 	var carg0 *C.PangoLayout // in, none, converted
-	var carg1 C.int          // out, full, casted, casted C.gint
-	var carg2 C.int          // out, full, casted, casted C.gint
+	var carg1 C.int          // out, full, casted
+	var carg2 C.int          // out, full, casted
 
 	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
 
@@ -12548,8 +12540,8 @@ func (layout *LayoutInstance) GetSingleParagraphMode() bool {
 // This is simply a convenience function around [method@Pango.Layout.get_extents].
 func (layout *LayoutInstance) GetSize() (int32, int32) {
 	var carg0 *C.PangoLayout // in, none, converted
-	var carg1 C.int          // out, full, casted, casted C.gint
-	var carg2 C.int          // out, full, casted, casted C.gint
+	var carg1 C.int          // out, full, casted
+	var carg2 C.int          // out, full, casted
 
 	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
 
@@ -12574,7 +12566,7 @@ func (layout *LayoutInstance) GetSize() (int32, int32) {
 // Gets the amount of spacing between the lines of the layout.
 func (layout *LayoutInstance) GetSpacing() int32 {
 	var carg0 *C.PangoLayout // in, none, converted
-	var cret  C.int          // return, none, casted, casted C.gint
+	var cret  C.int          // return, none, casted
 
 	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
 
@@ -12629,7 +12621,7 @@ func (layout *LayoutInstance) GetTabs() *TabArray {
 // The returned text should not be freed or modified.
 func (layout *LayoutInstance) GetText() string {
 	var carg0 *C.PangoLayout // in, none, converted
-	var cret  *C.char        // return, none, string, casted *C.gchar
+	var cret  *C.char        // return, none, string
 
 	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
 
@@ -12657,7 +12649,7 @@ func (layout *LayoutInstance) GetText() string {
 // certain font supports all the characters in the string.
 func (layout *LayoutInstance) GetUnknownGlyphsCount() int32 {
 	var carg0 *C.PangoLayout // in, none, converted
-	var cret  C.int          // return, none, casted, casted C.gint
+	var cret  C.int          // return, none, casted
 
 	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
 
@@ -12680,7 +12672,7 @@ func (layout *LayoutInstance) GetUnknownGlyphsCount() int32 {
 // Gets the width to which the lines of the `PangoLayout` should wrap.
 func (layout *LayoutInstance) GetWidth() int32 {
 	var carg0 *C.PangoLayout // in, none, converted
-	var cret  C.int          // return, none, casted, casted C.gint
+	var cret  C.int          // return, none, casted
 
 	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
 
@@ -12741,10 +12733,10 @@ func (layout *LayoutInstance) GetWrap() WrapMode {
 // The X position is measured from the left edge of the line.
 func (layout *LayoutInstance) IndexToLineX(index_ int32, trailing bool) (int32, int32) {
 	var carg0 *C.PangoLayout // in, none, converted
-	var carg1 C.int          // in, none, casted, casted C.gint
+	var carg1 C.int          // in, none, casted
 	var carg2 C.gboolean     // in
-	var carg3 C.int          // out, full, casted, casted C.gint
-	var carg4 C.int          // out, full, casted, casted C.gint
+	var carg3 C.int          // out, full, casted
+	var carg4 C.int          // out, full, casted
 
 	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
 	carg1 = C.int(index_)
@@ -12785,7 +12777,7 @@ func (layout *LayoutInstance) IndexToLineX(index_ int32, trailing bool) (int32, 
 // is right-to-left, then `pos-&gt;width` will be negative.
 func (layout *LayoutInstance) IndexToPos(index_ int32) Rectangle {
 	var carg0 *C.PangoLayout   // in, none, converted
-	var carg1 C.int            // in, none, casted, casted C.gint
+	var carg1 C.int            // in, none, casted
 	var carg2 C.PangoRectangle // out, transfer: none, C Pointers: 0, Name: Rectangle, caller-allocates
 
 	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
@@ -12799,7 +12791,7 @@ func (layout *LayoutInstance) IndexToPos(index_ int32) Rectangle {
 
 	_ = pos
 	_ = carg2
-	panic("unimplemented conversion of Rectangle (PangoRectangle)")
+	panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
 
 	return pos
 }
@@ -12908,11 +12900,11 @@ func (layout *LayoutInstance) IsWrapped() bool {
 func (layout *LayoutInstance) MoveCursorVisually(strong bool, oldIndex int32, oldTrailing int32, direction int32) (int32, int32) {
 	var carg0 *C.PangoLayout // in, none, converted
 	var carg1 C.gboolean     // in
-	var carg2 C.int          // in, none, casted, casted C.gint
-	var carg3 C.int          // in, none, casted, casted C.gint
-	var carg4 C.int          // in, none, casted, casted C.gint
-	var carg5 C.int          // out, full, casted, casted C.gint
-	var carg6 C.int          // out, full, casted, casted C.gint
+	var carg2 C.int          // in, none, casted
+	var carg3 C.int          // in, none, casted
+	var carg4 C.int          // in, none, casted
+	var carg5 C.int          // out, full, casted
+	var carg6 C.int          // out, full, casted
 
 	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
 	if strong {
@@ -13149,7 +13141,7 @@ func (layout *LayoutInstance) SetFontDescription(desc *FontDescription) {
 // future.
 func (layout *LayoutInstance) SetHeight(height int32) {
 	var carg0 *C.PangoLayout // in, none, converted
-	var carg1 C.int          // in, none, casted, casted C.gint
+	var carg1 C.int          // in, none, casted
 
 	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
 	carg1 = C.int(height)
@@ -13177,7 +13169,7 @@ func (layout *LayoutInstance) SetHeight(height int32) {
 // The default value is 0.
 func (layout *LayoutInstance) SetIndent(indent int32) {
 	var carg0 *C.PangoLayout // in, none, converted
-	var carg1 C.int          // in, none, casted, casted C.gint
+	var carg1 C.int          // in, none, casted
 
 	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
 	carg1 = C.int(indent)
@@ -13275,7 +13267,7 @@ func (layout *LayoutInstance) SetJustifyLastLine(justify bool) {
 // property, see [func@Pango.attr_line_height_new].
 func (layout *LayoutInstance) SetLineSpacing(factor float32) {
 	var carg0 *C.PangoLayout // in, none, converted
-	var carg1 C.float        // in, none, casted, casted C.gfloat
+	var carg1 C.float        // in, none, casted
 
 	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
 	carg1 = C.float(factor)
@@ -13303,8 +13295,8 @@ func (layout *LayoutInstance) SetLineSpacing(factor float32) {
 // but the markup text isn't scanned for accelerators.
 func (layout *LayoutInstance) SetMarkup(markup string, length int32) {
 	var carg0 *C.PangoLayout // in, none, converted
-	var carg1 *C.char        // in, none, string, casted *C.gchar
-	var carg2 C.int          // in, none, casted, casted C.gint
+	var carg1 *C.char        // in, none, string
+	var carg2 C.int          // in, none, casted
 
 	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(markup)))
@@ -13346,8 +13338,8 @@ func (layout *LayoutInstance) SetMarkup(markup string, length int32) {
 // literal @accel_marker character.
 func (layout *LayoutInstance) SetMarkupWithAccel(markup string, length int32, accelMarker uint32) uint32 {
 	var carg0 *C.PangoLayout // in, none, converted
-	var carg1 *C.char        // in, none, string, casted *C.gchar
-	var carg2 C.int          // in, none, casted, casted C.gint
+	var carg1 *C.char        // in, none, string
+	var carg2 C.int          // in, none, casted
 	var carg3 C.gunichar     // in, none, casted
 	var carg4 C.gunichar     // out, full, casted
 
@@ -13422,7 +13414,7 @@ func (layout *LayoutInstance) SetSingleParagraphMode(setting bool) {
 // property, see [func@Pango.attr_line_height_new].
 func (layout *LayoutInstance) SetSpacing(spacing int32) {
 	var carg0 *C.PangoLayout // in, none, converted
-	var carg1 C.int          // in, none, casted, casted C.gint
+	var carg1 C.int          // in, none, casted
 
 	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
 	carg1 = C.int(spacing)
@@ -13487,8 +13479,8 @@ func (layout *LayoutInstance) SetTabs(tabs *TabArray) {
 // not clear attributes.
 func (layout *LayoutInstance) SetText(text string, length int32) {
 	var carg0 *C.PangoLayout // in, none, converted
-	var carg1 *C.char        // in, none, string, casted *C.gchar
-	var carg2 C.int          // in, none, casted, casted C.gint
+	var carg1 *C.char        // in, none, string
+	var carg2 C.int          // in, none, casted
 
 	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(text)))
@@ -13514,7 +13506,7 @@ func (layout *LayoutInstance) SetText(text string, length int32) {
 // The default value is -1: no width set.
 func (layout *LayoutInstance) SetWidth(width int32) {
 	var carg0 *C.PangoLayout // in, none, converted
-	var carg1 C.int          // in, none, casted, casted C.gint
+	var carg1 C.int          // in, none, casted
 
 	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
 	carg1 = C.int(width)
@@ -13573,7 +13565,7 @@ func (layout *LayoutInstance) SetWrap(wrap WrapMode) {
 func (layout *LayoutInstance) WriteToFile(flags LayoutSerializeFlags, filename string) (bool, error) {
 	var carg0 *C.PangoLayout              // in, none, converted
 	var carg1 C.PangoLayoutSerializeFlags // in, none, casted
-	var carg2 *C.char                     // in, none, string, casted *C.gchar
+	var carg2 *C.char                     // in, none, string
 	var cret  C.gboolean                  // return
 	var _cerr *C.GError                   // out, full, converted, nullable
 
@@ -13627,10 +13619,10 @@ func (layout *LayoutInstance) WriteToFile(flags LayoutSerializeFlags, filename s
 // %FALSE; on an exact hit, it returns %TRUE.
 func (layout *LayoutInstance) XYToIndex(x int32, y int32) (int32, int32, bool) {
 	var carg0 *C.PangoLayout // in, none, converted
-	var carg1 C.int          // in, none, casted, casted C.gint
-	var carg2 C.int          // in, none, casted, casted C.gint
-	var carg3 C.int          // out, full, casted, casted C.gint
-	var carg4 C.int          // out, full, casted, casted C.gint
+	var carg1 C.int          // in, none, casted
+	var carg2 C.int          // in, none, casted
+	var carg3 C.int          // out, full, casted
+	var carg4 C.int          // out, full, casted
 	var cret  C.gboolean     // return
 
 	carg0 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
@@ -13951,12 +13943,13 @@ type Renderer interface {
 	// chain up virtual methods:
 
 	// ParentBegin calls the default implementations of the begin virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
 	//
 	// Do renderer-specific initialization before drawing
 	ParentBegin()
 	// ParentDrawErrorUnderline calls the default implementations of the draw_error_underline virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- x int32: X coordinate of underline, in Pango units in user coordinate system 
@@ -13975,7 +13968,8 @@ type Renderer interface {
 	// Use [method@Pango.Renderer.activate] to activate a renderer.
 	ParentDrawErrorUnderline(x int32, y int32, width int32, height int32)
 	// ParentDrawGlyph calls the default implementations of the draw_glyph virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- font Font: a `PangoFont` 
@@ -13986,7 +13980,8 @@ type Renderer interface {
 	// Draws a single glyph with coordinates in device space.
 	ParentDrawGlyph(font Font, glyph Glyph, x float64, y float64)
 	// ParentDrawGlyphItem calls the default implementations of the draw_glyph_item virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- text string (nullable): the UTF-8 text that @glyph_item refers to 
@@ -14016,7 +14011,8 @@ type Renderer interface {
 	// [method@Pango.Renderer.draw_glyphs].
 	ParentDrawGlyphItem(text string, glyphItem *GlyphItem, x int32, y int32)
 	// ParentDrawGlyphs calls the default implementations of the draw_glyphs virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- font Font: a `PangoFont` 
@@ -14029,7 +14025,8 @@ type Renderer interface {
 	// Draws the glyphs in @glyphs with the specified `PangoRenderer`.
 	ParentDrawGlyphs(font Font, glyphs *GlyphString, x int32, y int32)
 	// ParentDrawRectangle calls the default implementations of the draw_rectangle virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- part RenderPart: type of object this rectangle is part of 
@@ -14047,7 +14044,8 @@ type Renderer interface {
 	// Use [method@Pango.Renderer.activate] to activate a renderer.
 	ParentDrawRectangle(part RenderPart, x int32, y int32, width int32, height int32)
 	// ParentDrawShape calls the default implementations of the draw_shape virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- attr *AttrShape 
@@ -14059,7 +14057,8 @@ type Renderer interface {
 	//   in user coordinates.
 	ParentDrawShape(attr *AttrShape, x int32, y int32)
 	// ParentDrawTrapezoid calls the default implementations of the draw_trapezoid virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- part RenderPart: type of object this trapezoid is part of 
@@ -14074,12 +14073,13 @@ type Renderer interface {
 	// using the given `PangoRenderer`; coordinates are in device space.
 	ParentDrawTrapezoid(part RenderPart, y1 float64, x11 float64, x21 float64, y2 float64, x12 float64, x22 float64)
 	// ParentEnd calls the default implementations of the end virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
 	//
 	// Do renderer-specific cleanup after drawing
 	ParentEnd()
 	// ParentPartChanged calls the default implementations of the part_changed virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- part RenderPart: the part for which rendering has changed. 
@@ -14101,7 +14101,8 @@ type Renderer interface {
 	// changes to colors. (See [method@Pango.Renderer.set_color])
 	ParentPartChanged(part RenderPart)
 	// ParentPrepareRun calls the default implementations of the prepare_run virtual method.
-	// This functions behavior is not defined when the parent does not implement the virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- run *LayoutRun 
@@ -14203,10 +14204,10 @@ func (renderer *RendererInstance) Deactivate() {
 // Use [method@Pango.Renderer.activate] to activate a renderer.
 func (renderer *RendererInstance) DrawErrorUnderline(x int32, y int32, width int32, height int32) {
 	var carg0 *C.PangoRenderer // in, none, converted
-	var carg1 C.int            // in, none, casted, casted C.gint
-	var carg2 C.int            // in, none, casted, casted C.gint
-	var carg3 C.int            // in, none, casted, casted C.gint
-	var carg4 C.int            // in, none, casted, casted C.gint
+	var carg1 C.int            // in, none, casted
+	var carg2 C.int            // in, none, casted
+	var carg3 C.int            // in, none, casted
+	var carg4 C.int            // in, none, casted
 
 	carg0 = (*C.PangoRenderer)(UnsafeRendererToGlibNone(renderer))
 	carg1 = C.int(x)
@@ -14236,8 +14237,8 @@ func (renderer *RendererInstance) DrawGlyph(font Font, glyph Glyph, x float64, y
 	var carg0 *C.PangoRenderer // in, none, converted
 	var carg1 *C.PangoFont     // in, none, converted
 	var carg2 C.PangoGlyph     // in, none, casted, alias
-	var carg3 C.double         // in, none, casted, casted C.gdouble
-	var carg4 C.double         // in, none, casted, casted C.gdouble
+	var carg3 C.double         // in, none, casted
+	var carg4 C.double         // in, none, casted
 
 	carg0 = (*C.PangoRenderer)(UnsafeRendererToGlibNone(renderer))
 	carg1 = (*C.PangoFont)(UnsafeFontToGlibNone(font))
@@ -14286,8 +14287,8 @@ func (renderer *RendererInstance) DrawGlyphItem(text string, glyphItem *GlyphIte
 	var carg0 *C.PangoRenderer  // in, none, converted
 	var carg1 *C.char           // in, none, string, nullable-string
 	var carg2 *C.PangoGlyphItem // in, none, converted
-	var carg3 C.int             // in, none, casted, casted C.gint
-	var carg4 C.int             // in, none, casted, casted C.gint
+	var carg3 C.int             // in, none, casted
+	var carg4 C.int             // in, none, casted
 
 	carg0 = (*C.PangoRenderer)(UnsafeRendererToGlibNone(renderer))
 	if text != "" {
@@ -14322,8 +14323,8 @@ func (renderer *RendererInstance) DrawGlyphs(font Font, glyphs *GlyphString, x i
 	var carg0 *C.PangoRenderer    // in, none, converted
 	var carg1 *C.PangoFont        // in, none, converted
 	var carg2 *C.PangoGlyphString // in, none, converted
-	var carg3 C.int               // in, none, casted, casted C.gint
-	var carg4 C.int               // in, none, casted, casted C.gint
+	var carg3 C.int               // in, none, casted
+	var carg4 C.int               // in, none, casted
 
 	carg0 = (*C.PangoRenderer)(UnsafeRendererToGlibNone(renderer))
 	carg1 = (*C.PangoFont)(UnsafeFontToGlibNone(font))
@@ -14356,8 +14357,8 @@ func (renderer *RendererInstance) DrawGlyphs(font Font, glyphs *GlyphString, x i
 func (renderer *RendererInstance) DrawLayout(layout Layout, x int32, y int32) {
 	var carg0 *C.PangoRenderer // in, none, converted
 	var carg1 *C.PangoLayout   // in, none, converted
-	var carg2 C.int            // in, none, casted, casted C.gint
-	var carg3 C.int            // in, none, casted, casted C.gint
+	var carg2 C.int            // in, none, casted
+	var carg3 C.int            // in, none, casted
 
 	carg0 = (*C.PangoRenderer)(UnsafeRendererToGlibNone(renderer))
 	carg1 = (*C.PangoLayout)(UnsafeLayoutToGlibNone(layout))
@@ -14389,8 +14390,8 @@ func (renderer *RendererInstance) DrawLayout(layout Layout, x int32, y int32) {
 func (renderer *RendererInstance) DrawLayoutLine(line *LayoutLine, x int32, y int32) {
 	var carg0 *C.PangoRenderer   // in, none, converted
 	var carg1 *C.PangoLayoutLine // in, none, converted
-	var carg2 C.int              // in, none, casted, casted C.gint
-	var carg3 C.int              // in, none, casted, casted C.gint
+	var carg2 C.int              // in, none, casted
+	var carg3 C.int              // in, none, casted
 
 	carg0 = (*C.PangoRenderer)(UnsafeRendererToGlibNone(renderer))
 	carg1 = (*C.PangoLayoutLine)(UnsafeLayoutLineToGlibNone(line))
@@ -14424,10 +14425,10 @@ func (renderer *RendererInstance) DrawLayoutLine(line *LayoutLine, x int32, y in
 func (renderer *RendererInstance) DrawRectangle(part RenderPart, x int32, y int32, width int32, height int32) {
 	var carg0 *C.PangoRenderer  // in, none, converted
 	var carg1 C.PangoRenderPart // in, none, casted
-	var carg2 C.int             // in, none, casted, casted C.gint
-	var carg3 C.int             // in, none, casted, casted C.gint
-	var carg4 C.int             // in, none, casted, casted C.gint
-	var carg5 C.int             // in, none, casted, casted C.gint
+	var carg2 C.int             // in, none, casted
+	var carg3 C.int             // in, none, casted
+	var carg4 C.int             // in, none, casted
+	var carg5 C.int             // in, none, casted
 
 	carg0 = (*C.PangoRenderer)(UnsafeRendererToGlibNone(renderer))
 	carg1 = C.PangoRenderPart(part)
@@ -14462,12 +14463,12 @@ func (renderer *RendererInstance) DrawRectangle(part RenderPart, x int32, y int3
 func (renderer *RendererInstance) DrawTrapezoid(part RenderPart, y1 float64, x11 float64, x21 float64, y2 float64, x12 float64, x22 float64) {
 	var carg0 *C.PangoRenderer  // in, none, converted
 	var carg1 C.PangoRenderPart // in, none, casted
-	var carg2 C.double          // in, none, casted, casted C.gdouble
-	var carg3 C.double          // in, none, casted, casted C.gdouble
-	var carg4 C.double          // in, none, casted, casted C.gdouble
-	var carg5 C.double          // in, none, casted, casted C.gdouble
-	var carg6 C.double          // in, none, casted, casted C.gdouble
-	var carg7 C.double          // in, none, casted, casted C.gdouble
+	var carg2 C.double          // in, none, casted
+	var carg3 C.double          // in, none, casted
+	var carg4 C.double          // in, none, casted
+	var carg5 C.double          // in, none, casted
+	var carg6 C.double          // in, none, casted
+	var carg7 C.double          // in, none, casted
 
 	carg0 = (*C.PangoRenderer)(UnsafeRendererToGlibNone(renderer))
 	carg1 = C.PangoRenderPart(part)
@@ -14755,11 +14756,12 @@ type RendererOverrides[Instance Renderer] struct {
 	// gobject.ObjectOverrides allows you to override virtual methods from the parent class gobject.Object
 	gobject.ObjectOverrides[Instance]
 
-	// Begin allows you to override the implementation of the virtual method begin.
+	// // Begin allows you to override the implementation of the virtual method begin.
 	//
 	// Do renderer-specific initialization before drawing
 	Begin func(Instance)
-	// DrawErrorUnderline allows you to override the implementation of the virtual method draw_error_underline.
+	// // DrawErrorUnderline allows you to override the implementation of the virtual method draw_error_underline.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- x int32: X coordinate of underline, in Pango units in user coordinate system 
@@ -14777,7 +14779,8 @@ type RendererOverrides[Instance Renderer] struct {
 	// This should be called while @renderer is already active.
 	// Use [method@Pango.Renderer.activate] to activate a renderer.
 	DrawErrorUnderline func(Instance, int32, int32, int32, int32)
-	// DrawGlyph allows you to override the implementation of the virtual method draw_glyph.
+	// // DrawGlyph allows you to override the implementation of the virtual method draw_glyph.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- font Font: a `PangoFont` 
@@ -14787,7 +14790,8 @@ type RendererOverrides[Instance Renderer] struct {
 	//
 	// Draws a single glyph with coordinates in device space.
 	DrawGlyph func(Instance, Font, Glyph, float64, float64)
-	// DrawGlyphItem allows you to override the implementation of the virtual method draw_glyph_item.
+	// // DrawGlyphItem allows you to override the implementation of the virtual method draw_glyph_item.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- text string (nullable): the UTF-8 text that @glyph_item refers to 
@@ -14816,7 +14820,8 @@ type RendererOverrides[Instance Renderer] struct {
 	// The default implementation of this method simply falls back to
 	// [method@Pango.Renderer.draw_glyphs].
 	DrawGlyphItem func(Instance, string, *GlyphItem, int32, int32)
-	// DrawGlyphs allows you to override the implementation of the virtual method draw_glyphs.
+	// // DrawGlyphs allows you to override the implementation of the virtual method draw_glyphs.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- font Font: a `PangoFont` 
@@ -14828,7 +14833,8 @@ type RendererOverrides[Instance Renderer] struct {
 	//
 	// Draws the glyphs in @glyphs with the specified `PangoRenderer`.
 	DrawGlyphs func(Instance, Font, *GlyphString, int32, int32)
-	// DrawRectangle allows you to override the implementation of the virtual method draw_rectangle.
+	// // DrawRectangle allows you to override the implementation of the virtual method draw_rectangle.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- part RenderPart: type of object this rectangle is part of 
@@ -14845,7 +14851,8 @@ type RendererOverrides[Instance Renderer] struct {
 	// This should be called while @renderer is already active.
 	// Use [method@Pango.Renderer.activate] to activate a renderer.
 	DrawRectangle func(Instance, RenderPart, int32, int32, int32, int32)
-	// DrawShape allows you to override the implementation of the virtual method draw_shape.
+	// // DrawShape allows you to override the implementation of the virtual method draw_shape.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- attr *AttrShape 
@@ -14856,7 +14863,8 @@ type RendererOverrides[Instance Renderer] struct {
 	//   @x, @y are the coordinates of the left edge of the baseline,
 	//   in user coordinates.
 	DrawShape func(Instance, *AttrShape, int32, int32)
-	// DrawTrapezoid allows you to override the implementation of the virtual method draw_trapezoid.
+	// // DrawTrapezoid allows you to override the implementation of the virtual method draw_trapezoid.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- part RenderPart: type of object this trapezoid is part of 
@@ -14870,11 +14878,12 @@ type RendererOverrides[Instance Renderer] struct {
 	// Draws a trapezoid with the parallel sides aligned with the X axis
 	// using the given `PangoRenderer`; coordinates are in device space.
 	DrawTrapezoid func(Instance, RenderPart, float64, float64, float64, float64, float64, float64)
-	// End allows you to override the implementation of the virtual method end.
+	// // End allows you to override the implementation of the virtual method end.
 	//
 	// Do renderer-specific cleanup after drawing
 	End func(Instance)
-	// PartChanged allows you to override the implementation of the virtual method part_changed.
+	// // PartChanged allows you to override the implementation of the virtual method part_changed.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- part RenderPart: the part for which rendering has changed. 
@@ -14895,7 +14904,8 @@ type RendererOverrides[Instance Renderer] struct {
 	// might be joined together. Pango automatically calls this for
 	// changes to colors. (See [method@Pango.Renderer.set_color])
 	PartChanged func(Instance, RenderPart)
-	// PrepareRun allows you to override the implementation of the virtual method prepare_run.
+	// // PrepareRun allows you to override the implementation of the virtual method prepare_run.
+	// 
 	// The function takes the following parameters:
 	// 
 	// 	- run *LayoutRun 
@@ -14933,10 +14943,10 @@ func UnsafeApplyRendererOverrides[Instance Renderer](gclass unsafe.Pointer, over
 			"_gotk4_pango1_Renderer_draw_error_underline",
 			func(carg0 *C.PangoRenderer, carg1 C.int, carg2 C.int, carg3 C.int, carg4 C.int) {
 				var renderer Instance // go PangoRenderer subclass
-				var x        int32    // in, none, casted, casted C.gint
-				var y        int32    // in, none, casted, casted C.gint
-				var width    int32    // in, none, casted, casted C.gint
-				var height   int32    // in, none, casted, casted C.gint
+				var x        int32    // in, none, casted
+				var y        int32    // in, none, casted
+				var width    int32    // in, none, casted
+				var height   int32    // in, none, casted
 
 				renderer = UnsafeRendererFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				x = int32(carg1)
@@ -14958,8 +14968,8 @@ func UnsafeApplyRendererOverrides[Instance Renderer](gclass unsafe.Pointer, over
 				var renderer Instance // go PangoRenderer subclass
 				var font     Font     // in, none, converted
 				var glyph    Glyph    // in, none, casted, alias
-				var x        float64  // in, none, casted, casted C.gdouble
-				var y        float64  // in, none, casted, casted C.gdouble
+				var x        float64  // in, none, casted
+				var y        float64  // in, none, casted
 
 				renderer = UnsafeRendererFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				font = UnsafeFontFromGlibNone(unsafe.Pointer(carg1))
@@ -14979,10 +14989,10 @@ func UnsafeApplyRendererOverrides[Instance Renderer](gclass unsafe.Pointer, over
 			"_gotk4_pango1_Renderer_draw_glyph_item",
 			func(carg0 *C.PangoRenderer, carg1 *C.char, carg2 *C.PangoGlyphItem, carg3 C.int, carg4 C.int) {
 				var renderer  Instance   // go PangoRenderer subclass
-				var text      string     // in, none, string, casted *C.gchar, nullable
+				var text      string     // in, none, string, nullable-string
 				var glyphItem *GlyphItem // in, none, converted
-				var x         int32      // in, none, casted, casted C.gint
-				var y         int32      // in, none, casted, casted C.gint
+				var x         int32      // in, none, casted
+				var y         int32      // in, none, casted
 
 				renderer = UnsafeRendererFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				if carg1 != nil {
@@ -15006,8 +15016,8 @@ func UnsafeApplyRendererOverrides[Instance Renderer](gclass unsafe.Pointer, over
 				var renderer Instance     // go PangoRenderer subclass
 				var font     Font         // in, none, converted
 				var glyphs   *GlyphString // in, none, converted
-				var x        int32        // in, none, casted, casted C.gint
-				var y        int32        // in, none, casted, casted C.gint
+				var x        int32        // in, none, casted
+				var y        int32        // in, none, casted
 
 				renderer = UnsafeRendererFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				font = UnsafeFontFromGlibNone(unsafe.Pointer(carg1))
@@ -15028,10 +15038,10 @@ func UnsafeApplyRendererOverrides[Instance Renderer](gclass unsafe.Pointer, over
 			func(carg0 *C.PangoRenderer, carg1 C.PangoRenderPart, carg2 C.int, carg3 C.int, carg4 C.int, carg5 C.int) {
 				var renderer Instance   // go PangoRenderer subclass
 				var part     RenderPart // in, none, casted
-				var x        int32      // in, none, casted, casted C.gint
-				var y        int32      // in, none, casted, casted C.gint
-				var width    int32      // in, none, casted, casted C.gint
-				var height   int32      // in, none, casted, casted C.gint
+				var x        int32      // in, none, casted
+				var y        int32      // in, none, casted
+				var width    int32      // in, none, casted
+				var height   int32      // in, none, casted
 
 				renderer = UnsafeRendererFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				part = RenderPart(carg1)
@@ -15053,8 +15063,8 @@ func UnsafeApplyRendererOverrides[Instance Renderer](gclass unsafe.Pointer, over
 			func(carg0 *C.PangoRenderer, carg1 *C.PangoAttrShape, carg2 C.int, carg3 C.int) {
 				var renderer Instance   // go PangoRenderer subclass
 				var attr     *AttrShape // in, none, converted
-				var x        int32      // in, none, casted, casted C.gint
-				var y        int32      // in, none, casted, casted C.gint
+				var x        int32      // in, none, casted
+				var y        int32      // in, none, casted
 
 				renderer = UnsafeRendererFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				attr = UnsafeAttrShapeFromGlibNone(unsafe.Pointer(carg1))
@@ -15074,12 +15084,12 @@ func UnsafeApplyRendererOverrides[Instance Renderer](gclass unsafe.Pointer, over
 			func(carg0 *C.PangoRenderer, carg1 C.PangoRenderPart, carg2 C.double, carg3 C.double, carg4 C.double, carg5 C.double, carg6 C.double, carg7 C.double) {
 				var renderer Instance   // go PangoRenderer subclass
 				var part     RenderPart // in, none, casted
-				var y1       float64    // in, none, casted, casted C.gdouble
-				var x11      float64    // in, none, casted, casted C.gdouble
-				var x21      float64    // in, none, casted, casted C.gdouble
-				var y2       float64    // in, none, casted, casted C.gdouble
-				var x12      float64    // in, none, casted, casted C.gdouble
-				var x22      float64    // in, none, casted, casted C.gdouble
+				var y1       float64    // in, none, casted
+				var x11      float64    // in, none, casted
+				var x21      float64    // in, none, casted
+				var y2       float64    // in, none, casted
+				var x12      float64    // in, none, casted
+				var x22      float64    // in, none, casted
 
 				renderer = UnsafeRendererFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				part = RenderPart(carg1)
@@ -15139,7 +15149,7 @@ func UnsafeApplyRendererOverrides[Instance Renderer](gclass unsafe.Pointer, over
 				renderer = UnsafeRendererFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
 				_ = run
 				_ = carg1
-				panic("unimplemented conversion of *LayoutRun (PangoLayoutRun*)")
+				panic("unimplemented conversion of *LayoutRun (*C.PangoLayoutRun)")
 
 				overrides.PrepareRun(renderer, run)
 			},
@@ -15148,7 +15158,7 @@ func UnsafeApplyRendererOverrides[Instance Renderer](gclass unsafe.Pointer, over
 }
 
 // ParentBegin calls the default implementations of the begin virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
 //
 // Do renderer-specific initialization before drawing
 func (renderer *RendererInstance) ParentBegin() {
@@ -15161,7 +15171,8 @@ func (renderer *RendererInstance) ParentBegin() {
 }
 
 // ParentDrawErrorUnderline calls the default implementations of the draw_error_underline virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- x int32: X coordinate of underline, in Pango units in user coordinate system 
@@ -15180,10 +15191,10 @@ func (renderer *RendererInstance) ParentBegin() {
 // Use [method@Pango.Renderer.activate] to activate a renderer.
 func (renderer *RendererInstance) ParentDrawErrorUnderline(x int32, y int32, width int32, height int32) {
 	var carg0 *C.PangoRenderer
-	var carg1 C.int // in, none, casted, casted C.gint
-	var carg2 C.int // in, none, casted, casted C.gint
-	var carg3 C.int // in, none, casted, casted C.gint
-	var carg4 C.int // in, none, casted, casted C.gint
+	var carg1 C.int // in, none, casted
+	var carg2 C.int // in, none, casted
+	var carg3 C.int // in, none, casted
+	var carg4 C.int // in, none, casted
 
 	parentclass := (*C.PangoRendererClass)(classdata.PeekParentClass(UnsafeRendererToGlibNone(renderer)))
 
@@ -15201,7 +15212,8 @@ func (renderer *RendererInstance) ParentDrawErrorUnderline(x int32, y int32, wid
 }
 
 // ParentDrawGlyph calls the default implementations of the draw_glyph virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- font Font: a `PangoFont` 
@@ -15214,8 +15226,8 @@ func (renderer *RendererInstance) ParentDrawGlyph(font Font, glyph Glyph, x floa
 	var carg0 *C.PangoRenderer
 	var carg1 *C.PangoFont // in, none, converted
 	var carg2 C.PangoGlyph // in, none, casted, alias
-	var carg3 C.double     // in, none, casted, casted C.gdouble
-	var carg4 C.double     // in, none, casted, casted C.gdouble
+	var carg3 C.double     // in, none, casted
+	var carg4 C.double     // in, none, casted
 
 	parentclass := (*C.PangoRendererClass)(classdata.PeekParentClass(UnsafeRendererToGlibNone(renderer)))
 
@@ -15233,7 +15245,8 @@ func (renderer *RendererInstance) ParentDrawGlyph(font Font, glyph Glyph, x floa
 }
 
 // ParentDrawGlyphItem calls the default implementations of the draw_glyph_item virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- text string (nullable): the UTF-8 text that @glyph_item refers to 
@@ -15265,8 +15278,8 @@ func (renderer *RendererInstance) ParentDrawGlyphItem(text string, glyphItem *Gl
 	var carg0 *C.PangoRenderer
 	var carg1 *C.char           // in, none, string, nullable-string
 	var carg2 *C.PangoGlyphItem // in, none, converted
-	var carg3 C.int             // in, none, casted, casted C.gint
-	var carg4 C.int             // in, none, casted, casted C.gint
+	var carg3 C.int             // in, none, casted
+	var carg4 C.int             // in, none, casted
 
 	parentclass := (*C.PangoRendererClass)(classdata.PeekParentClass(UnsafeRendererToGlibNone(renderer)))
 
@@ -15287,7 +15300,8 @@ func (renderer *RendererInstance) ParentDrawGlyphItem(text string, glyphItem *Gl
 }
 
 // ParentDrawGlyphs calls the default implementations of the draw_glyphs virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- font Font: a `PangoFont` 
@@ -15302,8 +15316,8 @@ func (renderer *RendererInstance) ParentDrawGlyphs(font Font, glyphs *GlyphStrin
 	var carg0 *C.PangoRenderer
 	var carg1 *C.PangoFont        // in, none, converted
 	var carg2 *C.PangoGlyphString // in, none, converted
-	var carg3 C.int               // in, none, casted, casted C.gint
-	var carg4 C.int               // in, none, casted, casted C.gint
+	var carg3 C.int               // in, none, casted
+	var carg4 C.int               // in, none, casted
 
 	parentclass := (*C.PangoRendererClass)(classdata.PeekParentClass(UnsafeRendererToGlibNone(renderer)))
 
@@ -15321,7 +15335,8 @@ func (renderer *RendererInstance) ParentDrawGlyphs(font Font, glyphs *GlyphStrin
 }
 
 // ParentDrawRectangle calls the default implementations of the draw_rectangle virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- part RenderPart: type of object this rectangle is part of 
@@ -15340,10 +15355,10 @@ func (renderer *RendererInstance) ParentDrawGlyphs(font Font, glyphs *GlyphStrin
 func (renderer *RendererInstance) ParentDrawRectangle(part RenderPart, x int32, y int32, width int32, height int32) {
 	var carg0 *C.PangoRenderer
 	var carg1 C.PangoRenderPart // in, none, casted
-	var carg2 C.int             // in, none, casted, casted C.gint
-	var carg3 C.int             // in, none, casted, casted C.gint
-	var carg4 C.int             // in, none, casted, casted C.gint
-	var carg5 C.int             // in, none, casted, casted C.gint
+	var carg2 C.int             // in, none, casted
+	var carg3 C.int             // in, none, casted
+	var carg4 C.int             // in, none, casted
+	var carg5 C.int             // in, none, casted
 
 	parentclass := (*C.PangoRendererClass)(classdata.PeekParentClass(UnsafeRendererToGlibNone(renderer)))
 
@@ -15363,7 +15378,8 @@ func (renderer *RendererInstance) ParentDrawRectangle(part RenderPart, x int32, 
 }
 
 // ParentDrawShape calls the default implementations of the draw_shape virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- attr *AttrShape 
@@ -15376,8 +15392,8 @@ func (renderer *RendererInstance) ParentDrawRectangle(part RenderPart, x int32, 
 func (renderer *RendererInstance) ParentDrawShape(attr *AttrShape, x int32, y int32) {
 	var carg0 *C.PangoRenderer
 	var carg1 *C.PangoAttrShape // in, none, converted
-	var carg2 C.int             // in, none, casted, casted C.gint
-	var carg3 C.int             // in, none, casted, casted C.gint
+	var carg2 C.int             // in, none, casted
+	var carg3 C.int             // in, none, casted
 
 	parentclass := (*C.PangoRendererClass)(classdata.PeekParentClass(UnsafeRendererToGlibNone(renderer)))
 
@@ -15393,7 +15409,8 @@ func (renderer *RendererInstance) ParentDrawShape(attr *AttrShape, x int32, y in
 }
 
 // ParentDrawTrapezoid calls the default implementations of the draw_trapezoid virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- part RenderPart: type of object this trapezoid is part of 
@@ -15409,12 +15426,12 @@ func (renderer *RendererInstance) ParentDrawShape(attr *AttrShape, x int32, y in
 func (renderer *RendererInstance) ParentDrawTrapezoid(part RenderPart, y1 float64, x11 float64, x21 float64, y2 float64, x12 float64, x22 float64) {
 	var carg0 *C.PangoRenderer
 	var carg1 C.PangoRenderPart // in, none, casted
-	var carg2 C.double          // in, none, casted, casted C.gdouble
-	var carg3 C.double          // in, none, casted, casted C.gdouble
-	var carg4 C.double          // in, none, casted, casted C.gdouble
-	var carg5 C.double          // in, none, casted, casted C.gdouble
-	var carg6 C.double          // in, none, casted, casted C.gdouble
-	var carg7 C.double          // in, none, casted, casted C.gdouble
+	var carg2 C.double          // in, none, casted
+	var carg3 C.double          // in, none, casted
+	var carg4 C.double          // in, none, casted
+	var carg5 C.double          // in, none, casted
+	var carg6 C.double          // in, none, casted
+	var carg7 C.double          // in, none, casted
 
 	parentclass := (*C.PangoRendererClass)(classdata.PeekParentClass(UnsafeRendererToGlibNone(renderer)))
 
@@ -15438,7 +15455,7 @@ func (renderer *RendererInstance) ParentDrawTrapezoid(part RenderPart, y1 float6
 }
 
 // ParentEnd calls the default implementations of the end virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
 //
 // Do renderer-specific cleanup after drawing
 func (renderer *RendererInstance) ParentEnd() {
@@ -15451,7 +15468,8 @@ func (renderer *RendererInstance) ParentEnd() {
 }
 
 // ParentPartChanged calls the default implementations of the part_changed virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- part RenderPart: the part for which rendering has changed. 
@@ -15485,7 +15503,8 @@ func (renderer *RendererInstance) ParentPartChanged(part RenderPart) {
 }
 
 // ParentPrepareRun calls the default implementations of the prepare_run virtual method.
-// This functions behavior is not defined when the parent does not implement the virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
 // The function takes the following parameters:
 // 
 // 	- run *LayoutRun 
@@ -15499,7 +15518,7 @@ func (renderer *RendererInstance) ParentPrepareRun(run *LayoutRun) {
 
 	_ = run
 	_ = carg1
-	panic("unimplemented conversion of *LayoutRun (PangoLayoutRun*)")
+	panic("unimplemented conversion of *LayoutRun (*C.PangoLayoutRun)")
 
 	C._gotk4_pango1_Renderer_virtual_prepare_run(unsafe.Pointer(parentclass.prepare_run), carg0, carg1)
 	runtime.KeepAlive(renderer)
@@ -15965,7 +15984,7 @@ func UnsafeAttrFontFeaturesToGlibFull(a *AttrFontFeatures) unsafe.Pointer {
 // You can use this attribute to select OpenType font features like small-caps,
 // alternative glyphs, ligatures, etc. for fonts that support them.
 func NewAttrFontFeatures(features string) *Attribute {
-	var carg1 *C.char           // in, none, string, casted *C.gchar
+	var carg1 *C.char           // in, none, string
 	var cret  *C.PangoAttribute // return, full, converted
 
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(features)))
@@ -16260,8 +16279,8 @@ func (iterator *AttrIterator) Next() bool {
 // a signed integer are clamped to %G_MAXINT.
 func (iterator *AttrIterator) Range() (int32, int32) {
 	var carg0 *C.PangoAttrIterator // in, none, converted
-	var carg1 C.int                // out, full, casted, casted C.gint
-	var carg2 C.int                // out, full, casted, casted C.gint
+	var carg1 C.int                // out, full, casted
+	var carg2 C.int                // out, full, casted
 
 	carg0 = (*C.PangoAttrIterator)(UnsafeAttrIteratorToGlibNone(iterator))
 
@@ -16498,7 +16517,7 @@ func NewAttrList() *AttrList {
 // This is the counterpart to [method@Pango.AttrList.to_string].
 // See that functions for details about the format.
 func AttrListFromString(text string) *AttrList {
-	var carg1 *C.char          // in, none, string, casted *C.gchar
+	var carg1 *C.char          // in, none, string
 	var cret  *C.PangoAttrList // return, full, converted, nullable
 
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(text)))
@@ -16776,8 +16795,8 @@ func (list *AttrList) InsertBefore(attr *Attribute) {
 func (list *AttrList) Splice(other *AttrList, pos int32, len int32) {
 	var carg0 *C.PangoAttrList // in, none, converted
 	var carg1 *C.PangoAttrList // in, none, converted
-	var carg2 C.int            // in, none, casted, casted C.gint
-	var carg3 C.int            // in, none, casted, casted C.gint
+	var carg2 C.int            // in, none, casted
+	var carg3 C.int            // in, none, casted
 
 	carg0 = (*C.PangoAttrList)(UnsafeAttrListToGlibNone(list))
 	carg1 = (*C.PangoAttrList)(UnsafeAttrListToGlibNone(other))
@@ -16833,7 +16852,7 @@ func (list *AttrList) Splice(other *AttrList, pos int32, len int32) {
 // Note that shape attributes can not be serialized.
 func (list *AttrList) ToString() string {
 	var carg0 *C.PangoAttrList // in, none, converted
-	var cret  *C.char          // return, full, string, casted *C.gchar
+	var cret  *C.char          // return, full, string
 
 	carg0 = (*C.PangoAttrList)(UnsafeAttrListToGlibNone(list))
 
@@ -16872,9 +16891,9 @@ func (list *AttrList) ToString() string {
 // behind @pos + @remove.
 func (list *AttrList) Update(pos int32, remove int32, add int32) {
 	var carg0 *C.PangoAttrList // in, none, converted
-	var carg1 C.int            // in, none, casted, casted C.gint
-	var carg2 C.int            // in, none, casted, casted C.gint
-	var carg3 C.int            // in, none, casted, casted C.gint
+	var carg1 C.int            // in, none, casted
+	var carg2 C.int            // in, none, casted
+	var carg3 C.int            // in, none, casted
 
 	carg0 = (*C.PangoAttrList)(UnsafeAttrListToGlibNone(list))
 	carg1 = C.int(pos)
@@ -17064,7 +17083,7 @@ func UnsafeAttrSizeToGlibFull(a *AttrSize) unsafe.Pointer {
 //
 // Create a new font-size attribute in fractional points.
 func NewAttrSize(size int32) *Attribute {
-	var carg1 C.int             // in, none, casted, casted C.gint
+	var carg1 C.int             // in, none, casted
 	var cret  *C.PangoAttribute // return, full, converted
 
 	carg1 = C.int(size)
@@ -17091,7 +17110,7 @@ func NewAttrSize(size int32) *Attribute {
 //
 // Create a new font-size attribute in device units.
 func NewAttrSizeAbsolute(size int32) *Attribute {
-	var carg1 C.int             // in, none, casted, casted C.gint
+	var carg1 C.int             // in, none, casted
 	var cret  *C.PangoAttribute // return, full, converted
 
 	carg1 = C.int(size)
@@ -17709,7 +17728,7 @@ func (src *Color) Copy() *Color {
 // `#fff`, `#ffffff`, `#fffffffff` and `#ffffffffffff`.)
 func (color *Color) Parse(spec string) bool {
 	var carg0 *C.PangoColor // in, none, converted
-	var carg1 *C.char       // in, none, string, casted *C.gchar
+	var carg1 *C.char       // in, none, string
 	var cret  C.gboolean    // return
 
 	carg0 = (*C.PangoColor)(UnsafeColorToGlibNone(color))
@@ -17757,7 +17776,7 @@ func (color *Color) Parse(spec string) bool {
 // solid color).
 func (color *Color) ParseWithAlpha(spec string) (uint16, bool) {
 	var carg0 *C.PangoColor // in, none, converted
-	var carg2 *C.char       // in, none, string, casted *C.gchar
+	var carg2 *C.char       // in, none, string
 	var carg1 C.guint16     // out, full, casted
 	var cret  C.gboolean    // return
 
@@ -17793,7 +17812,7 @@ func (color *Color) ParseWithAlpha(spec string) (uint16, bool) {
 // red, green, and blue components respectively.
 func (color *Color) ToString() string {
 	var carg0 *C.PangoColor // in, none, converted
-	var cret  *C.char       // return, full, string, casted *C.gchar
+	var cret  *C.char       // return, full, string
 
 	carg0 = (*C.PangoColor)(UnsafeColorToGlibNone(color))
 
@@ -18045,7 +18064,7 @@ func NewFontDescription() *FontDescription {
 // 
 //     Cantarell Italic Light 15 @‍wght=200 #‍tnum=1
 func FontDescriptionFromString(str string) *FontDescription {
-	var carg1 *C.char                 // in, none, string, casted *C.gchar
+	var carg1 *C.char                 // in, none, string
 	var cret  *C.PangoFontDescription // return, full, converted
 
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(str)))
@@ -18213,7 +18232,7 @@ func (desc1 *FontDescription) Equal(desc2 *FontDescription) bool {
 // See [method@Pango.FontDescription.set_family].
 func (desc *FontDescription) GetFamily() string {
 	var carg0 *C.PangoFontDescription // in, none, converted
-	var cret  *C.char                 // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char                 // return, none, string, nullable-string
 
 	carg0 = (*C.PangoFontDescription)(UnsafeFontDescriptionToGlibNone(desc))
 
@@ -18240,7 +18259,7 @@ func (desc *FontDescription) GetFamily() string {
 // See [method@Pango.FontDescription.set_features].
 func (desc *FontDescription) GetFeatures() string {
 	var carg0 *C.PangoFontDescription // in, none, converted
-	var cret  *C.char                 // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char                 // return, none, string, nullable-string
 
 	carg0 = (*C.PangoFontDescription)(UnsafeFontDescriptionToGlibNone(desc))
 
@@ -18444,7 +18463,7 @@ func (desc *FontDescription) GetVariant() Variant {
 // See [method@Pango.FontDescription.set_variations].
 func (desc *FontDescription) GetVariations() string {
 	var carg0 *C.PangoFontDescription // in, none, converted
-	var cret  *C.char                 // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char                 // return, none, string, nullable-string
 
 	carg0 = (*C.PangoFontDescription)(UnsafeFontDescriptionToGlibNone(desc))
 
@@ -18595,7 +18614,7 @@ func (desc *FontDescription) MergeStatic(descToMerge *FontDescription, replaceEx
 // which sets the font size in points.
 func (desc *FontDescription) SetAbsoluteSize(size float64) {
 	var carg0 *C.PangoFontDescription // in, none, converted
-	var carg1 C.double                // in, none, casted, casted C.gdouble
+	var carg1 C.double                // in, none, casted
 
 	carg0 = (*C.PangoFontDescription)(UnsafeFontDescriptionToGlibNone(desc))
 	carg1 = C.double(size)
@@ -18620,7 +18639,7 @@ func (desc *FontDescription) SetAbsoluteSize(size float64) {
 // separated list of family names for this field.
 func (desc *FontDescription) SetFamily(family string) {
 	var carg0 *C.PangoFontDescription // in, none, converted
-	var carg1 *C.char                 // in, none, string, casted *C.gchar
+	var carg1 *C.char                 // in, none, string
 
 	carg0 = (*C.PangoFontDescription)(UnsafeFontDescriptionToGlibNone(desc))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(family)))
@@ -18646,7 +18665,7 @@ func (desc *FontDescription) SetFamily(family string) {
 // string such as a C string literal, or if @desc is only needed temporarily.
 func (desc *FontDescription) SetFamilyStatic(family string) {
 	var carg0 *C.PangoFontDescription // in, none, converted
-	var carg1 *C.char                 // in, none, string, casted *C.gchar
+	var carg1 *C.char                 // in, none, string
 
 	carg0 = (*C.PangoFontDescription)(UnsafeFontDescriptionToGlibNone(desc))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(family)))
@@ -18718,7 +18737,7 @@ func (desc *FontDescription) SetFeatures(features string) {
 // or if @desc is only needed temporarily.
 func (desc *FontDescription) SetFeaturesStatic(features string) {
 	var carg0 *C.PangoFontDescription // in, none, converted
-	var carg1 *C.char                 // in, none, string, casted *C.gchar
+	var carg1 *C.char                 // in, none, string
 
 	carg0 = (*C.PangoFontDescription)(UnsafeFontDescriptionToGlibNone(desc))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(features)))
@@ -18910,7 +18929,7 @@ func (desc *FontDescription) SetVariations(variations string) {
 // or if @desc is only needed temporarily.
 func (desc *FontDescription) SetVariationsStatic(variations string) {
 	var carg0 *C.PangoFontDescription // in, none, converted
-	var carg1 *C.char                 // in, none, string, casted *C.gchar
+	var carg1 *C.char                 // in, none, string
 
 	carg0 = (*C.PangoFontDescription)(UnsafeFontDescriptionToGlibNone(desc))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(variations)))
@@ -18959,7 +18978,7 @@ func (desc *FontDescription) SetWeight(weight Weight) {
 // lower case only.
 func (desc *FontDescription) ToFilename() string {
 	var carg0 *C.PangoFontDescription // in, none, converted
-	var cret  *C.char                 // return, full, string, casted *C.gchar, nullable
+	var cret  *C.char                 // return, full, string, nullable-string
 
 	carg0 = (*C.PangoFontDescription)(UnsafeFontDescriptionToGlibNone(desc))
 
@@ -18990,7 +19009,7 @@ func (desc *FontDescription) ToFilename() string {
 // the last word of the list is a valid style option.
 func (desc *FontDescription) ToString() string {
 	var carg0 *C.PangoFontDescription // in, none, converted
-	var cret  *C.char                 // return, full, string, casted *C.gchar
+	var cret  *C.char                 // return, full, string
 
 	carg0 = (*C.PangoFontDescription)(UnsafeFontDescriptionToGlibNone(desc))
 
@@ -19254,7 +19273,7 @@ func UnsafeFontMetricsToGlibFull(f *FontMetrics) unsafe.Pointer {
 // text will be wider and narrower than this.
 func (metrics *FontMetrics) GetApproximateCharWidth() int32 {
 	var carg0 *C.PangoFontMetrics // in, none, converted
-	var cret  C.int               // return, none, casted, casted C.gint
+	var cret  C.int               // return, none, casted
 
 	carg0 = (*C.PangoFontMetrics)(UnsafeFontMetricsToGlibNone(metrics))
 
@@ -19283,7 +19302,7 @@ func (metrics *FontMetrics) GetApproximateCharWidth() int32 {
 // pango_font_metrics_get_approximate_char_width() for digits.
 func (metrics *FontMetrics) GetApproximateDigitWidth() int32 {
 	var carg0 *C.PangoFontMetrics // in, none, converted
-	var cret  C.int               // return, none, casted, casted C.gint
+	var cret  C.int               // return, none, casted
 
 	carg0 = (*C.PangoFontMetrics)(UnsafeFontMetricsToGlibNone(metrics))
 
@@ -19311,7 +19330,7 @@ func (metrics *FontMetrics) GetApproximateDigitWidth() int32 {
 // figure where the ink will be.)
 func (metrics *FontMetrics) GetAscent() int32 {
 	var carg0 *C.PangoFontMetrics // in, none, converted
-	var cret  C.int               // return, none, casted, casted C.gint
+	var cret  C.int               // return, none, casted
 
 	carg0 = (*C.PangoFontMetrics)(UnsafeFontMetricsToGlibNone(metrics))
 
@@ -19339,7 +19358,7 @@ func (metrics *FontMetrics) GetAscent() int32 {
 // to figure where the ink will be.)
 func (metrics *FontMetrics) GetDescent() int32 {
 	var carg0 *C.PangoFontMetrics // in, none, converted
-	var cret  C.int               // return, none, casted, casted C.gint
+	var cret  C.int               // return, none, casted
 
 	carg0 = (*C.PangoFontMetrics)(UnsafeFontMetricsToGlibNone(metrics))
 
@@ -19367,7 +19386,7 @@ func (metrics *FontMetrics) GetDescent() int32 {
 // If the line height is not available, 0 is returned.
 func (metrics *FontMetrics) GetHeight() int32 {
 	var carg0 *C.PangoFontMetrics // in, none, converted
-	var cret  C.int               // return, none, casted, casted C.gint
+	var cret  C.int               // return, none, casted
 
 	carg0 = (*C.PangoFontMetrics)(UnsafeFontMetricsToGlibNone(metrics))
 
@@ -19393,7 +19412,7 @@ func (metrics *FontMetrics) GetHeight() int32 {
 // baseline of the top of the strikethrough.
 func (metrics *FontMetrics) GetStrikethroughPosition() int32 {
 	var carg0 *C.PangoFontMetrics // in, none, converted
-	var cret  C.int               // return, none, casted, casted C.gint
+	var cret  C.int               // return, none, casted
 
 	carg0 = (*C.PangoFontMetrics)(UnsafeFontMetricsToGlibNone(metrics))
 
@@ -19416,7 +19435,7 @@ func (metrics *FontMetrics) GetStrikethroughPosition() int32 {
 // Gets the suggested thickness to draw for the strikethrough.
 func (metrics *FontMetrics) GetStrikethroughThickness() int32 {
 	var carg0 *C.PangoFontMetrics // in, none, converted
-	var cret  C.int               // return, none, casted, casted C.gint
+	var cret  C.int               // return, none, casted
 
 	carg0 = (*C.PangoFontMetrics)(UnsafeFontMetricsToGlibNone(metrics))
 
@@ -19443,7 +19462,7 @@ func (metrics *FontMetrics) GetStrikethroughThickness() int32 {
 // the baseline, this value is typically negative.
 func (metrics *FontMetrics) GetUnderlinePosition() int32 {
 	var carg0 *C.PangoFontMetrics // in, none, converted
-	var cret  C.int               // return, none, casted, casted C.gint
+	var cret  C.int               // return, none, casted
 
 	carg0 = (*C.PangoFontMetrics)(UnsafeFontMetricsToGlibNone(metrics))
 
@@ -19466,7 +19485,7 @@ func (metrics *FontMetrics) GetUnderlinePosition() int32 {
 // Gets the suggested thickness to draw for the underline.
 func (metrics *FontMetrics) GetUnderlineThickness() int32 {
 	var carg0 *C.PangoFontMetrics // in, none, converted
-	var cret  C.int               // return, none, casted, casted C.gint
+	var cret  C.int               // return, none, casted
 
 	carg0 = (*C.PangoFontMetrics)(UnsafeFontMetricsToGlibNone(metrics))
 
@@ -19813,7 +19832,7 @@ func UnsafeGlyphItemToGlibFull(g *GlyphItem) unsafe.Pointer {
 // as one of the elements in the list.
 func (glyphItem *GlyphItem) ApplyAttrs(text string, list *AttrList) []*GlyphItem {
 	var carg0 *C.PangoGlyphItem // in, none, converted
-	var carg1 *C.char           // in, none, string, casted *C.gchar
+	var carg1 *C.char           // in, none, string
 	var carg2 *C.PangoAttrList  // in, none, converted
 	var cret  *C.GSList         // container, transfer: full
 
@@ -19891,8 +19910,8 @@ func (orig *GlyphItem) Copy() *GlyphItem {
 // it internally.)
 func (orig *GlyphItem) Split(text string, splitIndex int32) *GlyphItem {
 	var carg0 *C.PangoGlyphItem // in, none, converted
-	var carg1 *C.char           // in, none, string, casted *C.gchar
-	var carg2 C.int             // in, none, casted, casted C.gint
+	var carg1 *C.char           // in, none, string
+	var carg2 C.int             // in, none, casted
 	var cret  *C.PangoGlyphItem // return, full, converted, nullable
 
 	carg0 = (*C.PangoGlyphItem)(UnsafeGlyphItemToGlibNone(orig))
@@ -20074,7 +20093,7 @@ func (orig *GlyphItemIter) Copy() *GlyphItemIter {
 func (iter *GlyphItemIter) InitEnd(glyphItem *GlyphItem, text string) bool {
 	var carg0 *C.PangoGlyphItemIter // in, none, converted
 	var carg1 *C.PangoGlyphItem     // in, none, converted
-	var carg2 *C.char               // in, none, string, casted *C.gchar
+	var carg2 *C.char               // in, none, string
 	var cret  C.gboolean            // return
 
 	carg0 = (*C.PangoGlyphItemIter)(UnsafeGlyphItemIterToGlibNone(iter))
@@ -20114,7 +20133,7 @@ func (iter *GlyphItemIter) InitEnd(glyphItem *GlyphItem, text string) bool {
 func (iter *GlyphItemIter) InitStart(glyphItem *GlyphItem, text string) bool {
 	var carg0 *C.PangoGlyphItemIter // in, none, converted
 	var carg1 *C.PangoGlyphItem     // in, none, converted
-	var carg2 *C.char               // in, none, string, casted *C.gchar
+	var carg2 *C.char               // in, none, string
 	var cret  C.gboolean            // return
 
 	carg0 = (*C.PangoGlyphItemIter)(UnsafeGlyphItemIterToGlibNone(iter))
@@ -20352,10 +20371,10 @@ func (glyphs *GlyphString) Extents(font Font) (Rectangle, Rectangle) {
 
 	_ = inkRect
 	_ = carg2
-	panic("unimplemented conversion of Rectangle (PangoRectangle)")
+	panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
 	_ = logicalRect
 	_ = carg3
-	panic("unimplemented conversion of Rectangle (PangoRectangle)")
+	panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
 
 	return inkRect, logicalRect
 }
@@ -20383,8 +20402,8 @@ func (glyphs *GlyphString) Extents(font Font) (Rectangle, Rectangle) {
 // not at the start of the entire glyph string).
 func (glyphs *GlyphString) ExtentsRange(start int32, end int32, font Font) (Rectangle, Rectangle) {
 	var carg0 *C.PangoGlyphString // in, none, converted
-	var carg1 C.int               // in, none, casted, casted C.gint
-	var carg2 C.int               // in, none, casted, casted C.gint
+	var carg1 C.int               // in, none, casted
+	var carg2 C.int               // in, none, casted
 	var carg3 *C.PangoFont        // in, none, converted
 	var carg4 C.PangoRectangle    // out, transfer: none, C Pointers: 0, Name: Rectangle, optional, caller-allocates
 	var carg5 C.PangoRectangle    // out, transfer: none, C Pointers: 0, Name: Rectangle, optional, caller-allocates
@@ -20405,10 +20424,10 @@ func (glyphs *GlyphString) ExtentsRange(start int32, end int32, font Font) (Rect
 
 	_ = inkRect
 	_ = carg4
-	panic("unimplemented conversion of Rectangle (PangoRectangle)")
+	panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
 	_ = logicalRect
 	_ = carg5
-	panic("unimplemented conversion of Rectangle (PangoRectangle)")
+	panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
 
 	return inkRect, logicalRect
 }
@@ -20427,7 +20446,7 @@ func (glyphs *GlyphString) ExtentsRange(start int32, end int32, font Font) (Rect
 // @geometry.width for each glyph in the @glyphs.
 func (glyphs *GlyphString) GetWidth() int32 {
 	var carg0 *C.PangoGlyphString // in, none, converted
-	var cret  C.int               // return, none, casted, casted C.gint
+	var cret  C.int               // return, none, casted
 
 	carg0 = (*C.PangoGlyphString)(UnsafeGlyphStringToGlibNone(glyphs))
 
@@ -20469,12 +20488,12 @@ func (glyphs *GlyphString) GetWidth() int32 {
 // &lt;/picture&gt;
 func (glyphs *GlyphString) IndexToX(text string, length int32, analysis *Analysis, index_ int32, trailing bool) int32 {
 	var carg0 *C.PangoGlyphString // in, none, converted
-	var carg1 *C.char             // in, none, string, casted *C.gchar
-	var carg2 C.int               // in, none, casted, casted C.gint
+	var carg1 *C.char             // in, none, string
+	var carg2 C.int               // in, none, casted
 	var carg3 *C.PangoAnalysis    // in, none, converted
-	var carg4 C.int               // in, none, casted, casted C.gint
+	var carg4 C.int               // in, none, casted
 	var carg5 C.gboolean          // in
-	var carg6 C.int               // out, full, casted, casted C.gint
+	var carg6 C.int               // out, full, casted
 
 	carg0 = (*C.PangoGlyphString)(UnsafeGlyphStringToGlibNone(glyphs))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(text)))
@@ -20525,13 +20544,13 @@ func (glyphs *GlyphString) IndexToX(text string, length int32, analysis *Analysi
 // clusters.
 func (glyphs *GlyphString) IndexToXFull(text string, length int32, analysis *Analysis, attrs *LogAttr, index_ int32, trailing bool) int32 {
 	var carg0 *C.PangoGlyphString // in, none, converted
-	var carg1 *C.char             // in, none, string, casted *C.gchar
-	var carg2 C.int               // in, none, casted, casted C.gint
+	var carg1 *C.char             // in, none, string
+	var carg2 C.int               // in, none, casted
 	var carg3 *C.PangoAnalysis    // in, none, converted
 	var carg4 *C.PangoLogAttr     // in, none, converted, nullable
-	var carg5 C.int               // in, none, casted, casted C.gint
+	var carg5 C.int               // in, none, casted
 	var carg6 C.gboolean          // in
-	var carg7 C.int               // out, full, casted, casted C.gint
+	var carg7 C.int               // out, full, casted
 
 	carg0 = (*C.PangoGlyphString)(UnsafeGlyphStringToGlibNone(glyphs))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(text)))
@@ -20571,7 +20590,7 @@ func (glyphs *GlyphString) IndexToXFull(text string, length int32, analysis *Ana
 // Resize a glyph string to the given length.
 func (str *GlyphString) SetSize(newLen int32) {
 	var carg0 *C.PangoGlyphString // in, none, converted
-	var carg1 C.int               // in, none, casted, casted C.gint
+	var carg1 C.int               // in, none, casted
 
 	carg0 = (*C.PangoGlyphString)(UnsafeGlyphStringToGlibNone(str))
 	carg1 = C.int(newLen)
@@ -20607,12 +20626,12 @@ func (str *GlyphString) SetSize(newLen int32) {
 // attributes for the text to compute the valid cursor position.
 func (glyphs *GlyphString) XToIndex(text string, length int32, analysis *Analysis, xPos int32) (int32, int32) {
 	var carg0 *C.PangoGlyphString // in, none, converted
-	var carg1 *C.char             // in, none, string, casted *C.gchar
-	var carg2 C.int               // in, none, casted, casted C.gint
+	var carg1 *C.char             // in, none, string
+	var carg2 C.int               // in, none, casted
 	var carg3 *C.PangoAnalysis    // in, none, converted
-	var carg4 C.int               // in, none, casted, casted C.gint
-	var carg5 C.int               // out, full, casted, casted C.gint
-	var carg6 C.int               // out, full, casted, casted C.gint
+	var carg4 C.int               // in, none, casted
+	var carg5 C.int               // out, full, casted
+	var carg6 C.int               // out, full, casted
 
 	carg0 = (*C.PangoGlyphString)(UnsafeGlyphStringToGlibNone(glyphs))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(text)))
@@ -20877,7 +20896,7 @@ func (item *Item) Copy() *Item {
 // that case, this function returns -1.
 func (item *Item) GetCharOffset() int32 {
 	var carg0 *C.PangoItem // in, none, converted
-	var cret  C.int        // return, none, casted, casted C.gint
+	var cret  C.int        // return, none, casted
 
 	carg0 = (*C.PangoItem)(UnsafeItemToGlibNone(item))
 
@@ -20917,8 +20936,8 @@ func (item *Item) GetCharOffset() int32 {
 // itself.
 func (orig *Item) Split(splitIndex int32, splitOffset int32) *Item {
 	var carg0 *C.PangoItem // in, none, converted
-	var carg1 C.int        // in, none, casted, casted C.gint
-	var carg2 C.int        // in, none, casted, casted C.gint
+	var carg1 C.int        // in, none, casted
+	var carg2 C.int        // in, none, casted
 	var cret  *C.PangoItem // return, full, converted
 
 	carg0 = (*C.PangoItem)(UnsafeItemToGlibNone(orig))
@@ -21137,7 +21156,7 @@ func LanguageGetPreferred() []*Language {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []*Language (PangoLanguage**)")
+	panic("unimplemented conversion of []*Language (**C.PangoLanguage)")
 
 	return goret
 }
@@ -21169,7 +21188,7 @@ func LanguageGetPreferred() []*Language {
 // ```
 func (language *Language) GetSampleString() string {
 	var carg0 *C.PangoLanguage // in, none, converted
-	var cret  *C.char          // return, none, string, casted *C.gchar
+	var cret  *C.char          // return, none, string
 
 	carg0 = (*C.PangoLanguage)(UnsafeLanguageToGlibNone(language))
 
@@ -21215,7 +21234,7 @@ func (language *Language) GetSampleString() string {
 // may have more values. Callers need to handle unknown values.
 func (language *Language) GetScripts() (int32, []Script) {
 	var carg0 *C.PangoLanguage // in, none, converted
-	var carg1 C.int            // out, full, casted, casted C.gint
+	var carg1 C.int            // out, full, casted
 	var cret  *C.PangoScript   // return, transfer: none, C Pointers: 1, Name: array[Script], scope: , nullable, array (inner: *typesystem.Enum)
 
 	carg0 = (*C.PangoLanguage)(UnsafeLanguageToGlibNone(language))
@@ -21229,7 +21248,7 @@ func (language *Language) GetScripts() (int32, []Script) {
 	numScripts = int32(carg1)
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []Script (const PangoScript*)")
+	panic("unimplemented conversion of []Script (*C.PangoScript)")
 
 	return numScripts, goret
 }
@@ -21299,7 +21318,7 @@ func (language *Language) IncludesScript(script Script) bool {
 // of the tag, and the character after it in the tag is '-'.
 func (language *Language) Matches(rangeList string) bool {
 	var carg0 *C.PangoLanguage // in, none, converted
-	var carg1 *C.char          // in, none, string, casted *C.gchar
+	var carg1 *C.char          // in, none, string
 	var cret  C.gboolean       // return
 
 	carg0 = (*C.PangoLanguage)(UnsafeLanguageToGlibNone(language))
@@ -21330,7 +21349,7 @@ func (language *Language) Matches(rangeList string) bool {
 // Returns (transfer none): a string representing the language tag
 func (language *Language) ToString() string {
 	var carg0 *C.PangoLanguage // in, none, converted
-	var cret  *C.char          // return, none, string, casted *C.gchar
+	var cret  *C.char          // return, none, string
 
 	carg0 = (*C.PangoLanguage)(UnsafeLanguageToGlibNone(language))
 
@@ -21527,7 +21546,7 @@ func (iter *LayoutIter) Copy() *LayoutIter {
 // Layout coordinates have the origin at the top left of the entire layout.
 func (iter *LayoutIter) GetBaseline() int32 {
 	var carg0 *C.PangoLayoutIter // in, none, converted
-	var cret  C.int              // return, none, casted, casted C.gint
+	var cret  C.int              // return, none, casted
 
 	carg0 = (*C.PangoLayoutIter)(UnsafeLayoutIterToGlibNone(iter))
 
@@ -21567,7 +21586,7 @@ func (iter *LayoutIter) GetCharExtents() Rectangle {
 
 	_ = logicalRect
 	_ = carg1
-	panic("unimplemented conversion of Rectangle (PangoRectangle)")
+	panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
 
 	return logicalRect
 }
@@ -21597,10 +21616,10 @@ func (iter *LayoutIter) GetClusterExtents() (Rectangle, Rectangle) {
 
 	_ = inkRect
 	_ = carg1
-	panic("unimplemented conversion of Rectangle (PangoRectangle)")
+	panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
 	_ = logicalRect
 	_ = carg2
-	panic("unimplemented conversion of Rectangle (PangoRectangle)")
+	panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
 
 	return inkRect, logicalRect
 }
@@ -21619,7 +21638,7 @@ func (iter *LayoutIter) GetClusterExtents() (Rectangle, Rectangle) {
 // layout, if on the %NULL run (see [method@Pango.LayoutIter.get_run]).
 func (iter *LayoutIter) GetIndex() int32 {
 	var carg0 *C.PangoLayoutIter // in, none, converted
-	var cret  C.int              // return, none, casted, casted C.gint
+	var cret  C.int              // return, none, casted
 
 	carg0 = (*C.PangoLayoutIter)(UnsafeLayoutIterToGlibNone(iter))
 
@@ -21681,10 +21700,10 @@ func (iter *LayoutIter) GetLayoutExtents() (Rectangle, Rectangle) {
 
 	_ = inkRect
 	_ = carg1
-	panic("unimplemented conversion of Rectangle (PangoRectangle)")
+	panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
 	_ = logicalRect
 	_ = carg2
-	panic("unimplemented conversion of Rectangle (PangoRectangle)")
+	panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
 
 	return inkRect, logicalRect
 }
@@ -21746,10 +21765,10 @@ func (iter *LayoutIter) GetLineExtents() (Rectangle, Rectangle) {
 
 	_ = inkRect
 	_ = carg1
-	panic("unimplemented conversion of Rectangle (PangoRectangle)")
+	panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
 	_ = logicalRect
 	_ = carg2
-	panic("unimplemented conversion of Rectangle (PangoRectangle)")
+	panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
 
 	return inkRect, logicalRect
 }
@@ -21803,8 +21822,8 @@ func (iter *LayoutIter) GetLineReadonly() *LayoutLine {
 // may be gaps between the ranges returned by this function.
 func (iter *LayoutIter) GetLineYrange() (int32, int32) {
 	var carg0 *C.PangoLayoutIter // in, none, converted
-	var carg1 C.int              // out, full, casted, casted C.gint
-	var carg2 C.int              // out, full, casted, casted C.gint
+	var carg1 C.int              // out, full, casted
+	var carg2 C.int              // out, full, casted
 
 	carg0 = (*C.PangoLayoutIter)(UnsafeLayoutIterToGlibNone(iter))
 
@@ -21849,7 +21868,7 @@ func (iter *LayoutIter) GetRun() *LayoutRun {
 	if cret != nil {
 		_ = goret
 		_ = cret
-		panic("unimplemented conversion of *LayoutRun (PangoLayoutRun*)")
+		panic("unimplemented conversion of *LayoutRun (*C.PangoLayoutRun)")
 	}
 
 	return goret
@@ -21870,7 +21889,7 @@ func (iter *LayoutIter) GetRun() *LayoutRun {
 // example due to superscript or subscript positioning.
 func (iter *LayoutIter) GetRunBaseline() int32 {
 	var carg0 *C.PangoLayoutIter // in, none, converted
-	var cret  C.int              // return, none, casted, casted C.gint
+	var cret  C.int              // return, none, casted
 
 	carg0 = (*C.PangoLayoutIter)(UnsafeLayoutIterToGlibNone(iter))
 
@@ -21909,10 +21928,10 @@ func (iter *LayoutIter) GetRunExtents() (Rectangle, Rectangle) {
 
 	_ = inkRect
 	_ = carg1
-	panic("unimplemented conversion of Rectangle (PangoRectangle)")
+	panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
 	_ = logicalRect
 	_ = carg2
-	panic("unimplemented conversion of Rectangle (PangoRectangle)")
+	panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
 
 	return inkRect, logicalRect
 }
@@ -21947,7 +21966,7 @@ func (iter *LayoutIter) GetRunReadonly() *LayoutRun {
 	if cret != nil {
 		_ = goret
 		_ = cret
-		panic("unimplemented conversion of *LayoutRun (PangoLayoutRun*)")
+		panic("unimplemented conversion of *LayoutRun (*C.PangoLayoutRun)")
 	}
 
 	return goret
@@ -22179,10 +22198,10 @@ func (line *LayoutLine) GetExtents() (Rectangle, Rectangle) {
 
 	_ = inkRect
 	_ = carg1
-	panic("unimplemented conversion of Rectangle (PangoRectangle)")
+	panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
 	_ = logicalRect
 	_ = carg2
-	panic("unimplemented conversion of Rectangle (PangoRectangle)")
+	panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
 
 	return inkRect, logicalRect
 }
@@ -22202,7 +22221,7 @@ func (line *LayoutLine) GetExtents() (Rectangle, Rectangle) {
 // [method@Pango.Layout.set_line_spacing].
 func (line *LayoutLine) GetHeight() int32 {
 	var carg0 *C.PangoLayoutLine // in, none, converted
-	var carg1 C.int              // out, full, casted, casted C.gint
+	var carg1 C.int              // out, full, casted
 
 	carg0 = (*C.PangoLayoutLine)(UnsafeLayoutLineToGlibNone(line))
 
@@ -22225,7 +22244,7 @@ func (line *LayoutLine) GetHeight() int32 {
 // Returns the length of the line, in bytes.
 func (line *LayoutLine) GetLength() int32 {
 	var carg0 *C.PangoLayoutLine // in, none, converted
-	var cret  C.int              // return, none, casted, casted C.gint
+	var cret  C.int              // return, none, casted
 
 	carg0 = (*C.PangoLayoutLine)(UnsafeLayoutLineToGlibNone(line))
 
@@ -22269,10 +22288,10 @@ func (layoutLine *LayoutLine) GetPixelExtents() (Rectangle, Rectangle) {
 
 	_ = inkRect
 	_ = carg1
-	panic("unimplemented conversion of Rectangle (PangoRectangle)")
+	panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
 	_ = logicalRect
 	_ = carg2
-	panic("unimplemented conversion of Rectangle (PangoRectangle)")
+	panic("unimplemented conversion of Rectangle (C.PangoRectangle)")
 
 	return inkRect, logicalRect
 }
@@ -22310,7 +22329,7 @@ func (line *LayoutLine) GetResolvedDirection() Direction {
 // into the text of the layout.
 func (line *LayoutLine) GetStartIndex() int32 {
 	var carg0 *C.PangoLayoutLine // in, none, converted
-	var cret  C.int              // return, none, casted, casted C.gint
+	var cret  C.int              // return, none, casted
 
 	carg0 = (*C.PangoLayoutLine)(UnsafeLayoutLineToGlibNone(line))
 
@@ -22340,9 +22359,9 @@ func (line *LayoutLine) GetStartIndex() int32 {
 // Converts an index within a line to a X position.
 func (line *LayoutLine) IndexToX(index_ int32, trailing bool) int32 {
 	var carg0 *C.PangoLayoutLine // in, none, converted
-	var carg1 C.int              // in, none, casted, casted C.gint
+	var carg1 C.int              // in, none, casted
 	var carg2 C.gboolean         // in
-	var carg3 C.int              // out, full, casted, casted C.gint
+	var carg3 C.int              // out, full, casted
 
 	carg0 = (*C.PangoLayoutLine)(UnsafeLayoutLineToGlibNone(line))
 	carg1 = C.int(index_)
@@ -22415,9 +22434,9 @@ func (line *LayoutLine) IsParagraphStart() bool {
 // grapheme. The reverse is true for a left-to-right line.
 func (line *LayoutLine) XToIndex(xPos int32) (int32, int32, bool) {
 	var carg0 *C.PangoLayoutLine // in, none, converted
-	var carg1 C.int              // in, none, casted, casted C.gint
-	var carg2 C.int              // out, full, casted, casted C.gint
-	var carg3 C.int              // out, full, casted, casted C.gint
+	var carg1 C.int              // in, none, casted
+	var carg2 C.int              // out, full, casted
+	var carg3 C.int              // out, full, casted
 	var cret  C.gboolean         // return
 
 	carg0 = (*C.PangoLayoutLine)(UnsafeLayoutLineToGlibNone(line))
@@ -22649,7 +22668,7 @@ func (matrix *Matrix) Copy() *Matrix {
 // coordinate is needed as well, use [method@Pango.Matrix.get_font_scale_factors].
 func (matrix *Matrix) GetFontScaleFactor() float64 {
 	var carg0 *C.PangoMatrix // in, none, converted
-	var cret  C.double       // return, none, casted, casted C.gdouble
+	var cret  C.double       // return, none, casted
 
 	carg0 = (*C.PangoMatrix)(UnsafeMatrixToGlibNone(matrix))
 
@@ -22679,8 +22698,8 @@ func (matrix *Matrix) GetFontScaleFactor() float64 {
 // Note that output numbers will always be non-negative.
 func (matrix *Matrix) GetFontScaleFactors() (float64, float64) {
 	var carg0 *C.PangoMatrix // in, none, converted
-	var carg1 C.double       // out, full, casted, casted C.gdouble
-	var carg2 C.double       // out, full, casted, casted C.gdouble
+	var carg1 C.double       // out, full, casted
+	var carg2 C.double       // out, full, casted
 
 	carg0 = (*C.PangoMatrix)(UnsafeMatrixToGlibNone(matrix))
 
@@ -22712,7 +22731,7 @@ func (matrix *Matrix) GetFontScaleFactors() (float64, float64) {
 // this is simply λ.
 func (matrix *Matrix) GetSlantRatio() float64 {
 	var carg0 *C.PangoMatrix // in, none, converted
-	var cret  C.double       // return, none, casted, casted C.gdouble
+	var cret  C.double       // return, none, casted
 
 	carg0 = (*C.PangoMatrix)(UnsafeMatrixToGlibNone(matrix))
 
@@ -22737,7 +22756,7 @@ func (matrix *Matrix) GetSlantRatio() float64 {
 // counter-clockwise then applying the original transformation.
 func (matrix *Matrix) Rotate(degrees float64) {
 	var carg0 *C.PangoMatrix // in, none, converted
-	var carg1 C.double       // in, none, casted, casted C.gdouble
+	var carg1 C.double       // in, none, casted
 
 	carg0 = (*C.PangoMatrix)(UnsafeMatrixToGlibNone(matrix))
 	carg1 = C.double(degrees)
@@ -22760,8 +22779,8 @@ func (matrix *Matrix) Rotate(degrees float64) {
 // transformation.
 func (matrix *Matrix) Scale(scaleX float64, scaleY float64) {
 	var carg0 *C.PangoMatrix // in, none, converted
-	var carg1 C.double       // in, none, casted, casted C.gdouble
-	var carg2 C.double       // in, none, casted, casted C.gdouble
+	var carg1 C.double       // in, none, casted
+	var carg2 C.double       // in, none, casted
 
 	carg0 = (*C.PangoMatrix)(UnsafeMatrixToGlibNone(matrix))
 	carg1 = C.double(scaleX)
@@ -22785,8 +22804,8 @@ func (matrix *Matrix) Scale(scaleX float64, scaleY float64) {
 // then applying the original transformation.
 func (matrix *Matrix) Translate(tx float64, ty float64) {
 	var carg0 *C.PangoMatrix // in, none, converted
-	var carg1 C.double       // in, none, casted, casted C.gdouble
-	var carg2 C.double       // in, none, casted, casted C.gdouble
+	var carg1 C.double       // in, none, casted
+	var carg2 C.double       // in, none, casted
 
 	carg0 = (*C.PangoMatrix)(UnsafeMatrixToGlibNone(matrix))
 	carg1 = C.double(tx)
@@ -23017,8 +23036,8 @@ func UnsafeScriptIterToGlibFull(s *ScriptIter) unsafe.Pointer {
 // sure it remains valid until the iterator is freed with
 // [method@Pango.ScriptIter.free].
 func NewScriptIter(text string, length int32) *ScriptIter {
-	var carg1 *C.char            // in, none, string, casted *C.gchar
-	var carg2 C.int              // in, none, casted, casted C.gint
+	var carg1 *C.char            // in, none, string
+	var carg2 C.int              // in, none, casted
 	var cret  *C.PangoScriptIter // return, full, converted
 
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(text)))
@@ -23057,8 +23076,8 @@ func NewScriptIter(text string, length int32) *ScriptIter {
 // values.
 func (iter *ScriptIter) GetRange() (string, string, Script) {
 	var carg0 *C.PangoScriptIter // in, none, converted
-	var carg1 *C.char            // out, none, string, casted *C.gchar
-	var carg2 *C.char            // out, none, string, casted *C.gchar
+	var carg1 *C.char            // out, none, string
+	var carg2 *C.char            // out, none, string
 	var carg3 C.PangoScript      // out, full, casted
 
 	carg0 = (*C.PangoScriptIter)(UnsafeScriptIterToGlibNone(iter))
@@ -23238,7 +23257,7 @@ func NewTabArray(initialSize int32, positionsInPixels bool) *TabArray {
 // This is the counterpart to [method@Pango.TabArray.to_string].
 // See that functions for details about the format.
 func TabArrayFromString(text string) *TabArray {
-	var carg1 *C.char          // in, none, string, casted *C.gchar
+	var carg1 *C.char          // in, none, string
 	var cret  *C.PangoTabArray // return, full, converted, nullable
 
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(text)))
@@ -23299,7 +23318,7 @@ func (src *TabArray) Copy() *TabArray {
 // decimal point according to the current locale.
 func (tabArray *TabArray) GetDecimalPoint(tabIndex int32) uint32 {
 	var carg0 *C.PangoTabArray // in, none, converted
-	var carg1 C.int            // in, none, casted, casted C.gint
+	var carg1 C.int            // in, none, casted
 	var cret  C.gunichar       // return, none, casted
 
 	carg0 = (*C.PangoTabArray)(UnsafeTabArrayToGlibNone(tabArray))
@@ -23438,7 +23457,7 @@ func (tabArray *TabArray) Resize(newSize int32) {
 // to the current locale.
 func (tabArray *TabArray) SetDecimalPoint(tabIndex int32, decimalPoint uint32) {
 	var carg0 *C.PangoTabArray // in, none, converted
-	var carg1 C.int            // in, none, casted, casted C.gint
+	var carg1 C.int            // in, none, casted
 	var carg2 C.gunichar       // in, none, casted
 
 	carg0 = (*C.PangoTabArray)(UnsafeTabArrayToGlibNone(tabArray))
@@ -23538,7 +23557,7 @@ func (tabArray *TabArray) Sort() {
 //     100px 200px center:300px right:400px
 func (tabArray *TabArray) ToString() string {
 	var carg0 *C.PangoTabArray // in, none, converted
-	var cret  *C.char          // return, full, string, casted *C.gchar
+	var cret  *C.char          // return, full, string
 
 	carg0 = (*C.PangoTabArray)(UnsafeTabArrayToGlibNone(tabArray))
 

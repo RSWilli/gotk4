@@ -14,10 +14,10 @@ import (
 // #cgo pkg-config: glib-2.0
 // #cgo CFLAGS: -Wno-deprecated-declarations
 // #include <glib.h>
-// extern GLogWriterOutput _gotk4_glib2_LogWriterFunc(GLogLevelFlags, const GLogField*, gsize, gpointer);
-// extern gboolean _gotk4_glib2_SourceFunc(gpointer);
-// extern void _gotk4_glib2_ChildWatchFunc(GPid, gint, gpointer);
-// extern void _gotk4_glib2_LogFunc(gchar*, GLogLevelFlags, gchar*, gpointer);
+// extern C.GLogWriterOutput _gotk4_glib2_LogWriterFunc(C.GLogLevelFlags, *C.GLogField, C.gsize, C.gpointer);
+// extern C.gboolean _gotk4_glib2_SourceFunc(C.gpointer);
+// extern C.void _gotk4_glib2_ChildWatchFunc(C.GPid, C.gint, C.gpointer);
+// extern C.void _gotk4_glib2_LogFunc(*C.gchar, C.GLogLevelFlags, *C.gchar, C.gpointer);
 // extern void destroyUserdata(gpointer);
 import "C"
 
@@ -5361,11 +5361,11 @@ type ChildWatchFunc func(pid Pid, waitStatus int32)
 // 	- prettyFunction string 
 // 	- expression string 
 func AssertWarning(logDomain string, file string, line int32, prettyFunction string, expression string) {
-	var carg1 *C.char // in, none, string, casted *C.gchar
-	var carg2 *C.char // in, none, string, casted *C.gchar
-	var carg3 C.int   // in, none, casted, casted C.gint
-	var carg4 *C.char // in, none, string, casted *C.gchar
-	var carg5 *C.char // in, none, string, casted *C.gchar
+	var carg1 *C.char // in, none, string
+	var carg2 *C.char // in, none, string
+	var carg3 C.int   // in, none, casted
+	var carg4 *C.char // in, none, string
+	var carg5 *C.char // in, none, string
 
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(logDomain)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -5508,7 +5508,7 @@ func BuildFilenamev(args []string) string {
 
 	_ = args
 	_ = carg1
-	panic("unimplemented conversion of []string (gchar**)")
+	panic("unimplemented conversion of []string (**C.gchar)")
 
 	cret = C.g_build_filenamev(carg1)
 	runtime.KeepAlive(args)
@@ -5546,7 +5546,7 @@ func BuildPathv(separator string, args []string) string {
 	defer C.free(unsafe.Pointer(carg1))
 	_ = args
 	_ = carg2
-	panic("unimplemented conversion of []string (gchar**)")
+	panic("unimplemented conversion of []string (**C.gchar)")
 
 	cret = C.g_build_pathv(carg1, carg2)
 	runtime.KeepAlive(separator)
@@ -5858,7 +5858,7 @@ func ComputeChecksumForData(checksumType ChecksumType, data []uint8) string {
 	_ = data
 	_ = carg2
 	_ = carg3
-	panic("unimplemented conversion of []uint8 (const guchar*)")
+	panic("unimplemented conversion of []uint8 (*C.guchar)")
 
 	cret = C.g_compute_checksum_for_data(carg1, carg2, carg3)
 	runtime.KeepAlive(checksumType)
@@ -5984,11 +5984,11 @@ func ComputeHMACForData(digestType ChecksumType, key []byte, data []byte) string
 	_ = key
 	_ = carg2
 	_ = carg3
-	panic("unimplemented conversion of []byte (const guchar*)")
+	panic("unimplemented conversion of []byte (*C.guchar)")
 	_ = data
 	_ = carg4
 	_ = carg5
-	panic("unimplemented conversion of []byte (const guchar*)")
+	panic("unimplemented conversion of []byte (*C.guchar)")
 
 	cret = C.g_compute_hmac_for_data(carg1, carg2, carg3, carg4, carg5)
 	runtime.KeepAlive(digestType)
@@ -6031,7 +6031,7 @@ func ComputeHMACForString(digestType ChecksumType, key []byte, str string, lengt
 	_ = key
 	_ = carg2
 	_ = carg3
-	panic("unimplemented conversion of []byte (const guchar*)")
+	panic("unimplemented conversion of []byte (*C.guchar)")
 	carg4 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
 	defer C.free(unsafe.Pointer(carg4))
 	carg5 = C.gssize(length)
@@ -6101,7 +6101,7 @@ func Convert(str string, toCodeset string, fromCodeset string) (uint, uint, stri
 	_ = str
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of string (const gchar*)")
+	panic("unimplemented conversion of string (*C.gchar)")
 	carg3 = (*C.gchar)(unsafe.Pointer(C.CString(toCodeset)))
 	defer C.free(unsafe.Pointer(carg3))
 	carg4 = (*C.gchar)(unsafe.Pointer(C.CString(fromCodeset)))
@@ -6121,7 +6121,7 @@ func Convert(str string, toCodeset string, fromCodeset string) (uint, uint, stri
 	bytesWritten = uint(carg6)
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of string (gchar*)")
+	panic("unimplemented conversion of string (*C.gchar)")
 	if _cerr != nil {
 		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -6203,7 +6203,7 @@ func ConvertWithFallback(str string, toCodeset string, fromCodeset string, fallb
 	_ = str
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of string (const gchar*)")
+	panic("unimplemented conversion of string (*C.gchar)")
 	carg3 = (*C.gchar)(unsafe.Pointer(C.CString(toCodeset)))
 	defer C.free(unsafe.Pointer(carg3))
 	carg4 = (*C.gchar)(unsafe.Pointer(C.CString(fromCodeset)))
@@ -6226,7 +6226,7 @@ func ConvertWithFallback(str string, toCodeset string, fromCodeset string, fallb
 	bytesWritten = uint(carg7)
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of string (gchar*)")
+	panic("unimplemented conversion of string (*C.gchar)")
 	if _cerr != nil {
 		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -6519,7 +6519,7 @@ func EnvironGetenv(envp []string, variable string) string {
 
 	_ = envp
 	_ = carg1
-	panic("unimplemented conversion of []string (gchar**)")
+	panic("unimplemented conversion of []string (**C.gchar)")
 	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(variable)))
 	defer C.free(unsafe.Pointer(carg2))
 
@@ -6564,7 +6564,7 @@ func EnvironSetenv(envp []string, variable string, value string, overwrite bool)
 
 	_ = envp
 	_ = carg1
-	panic("unimplemented conversion of []string (gchar**)")
+	panic("unimplemented conversion of []string (**C.gchar)")
 	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(variable)))
 	defer C.free(unsafe.Pointer(carg2))
 	carg3 = (*C.gchar)(unsafe.Pointer(C.CString(value)))
@@ -6583,7 +6583,7 @@ func EnvironSetenv(envp []string, variable string, value string, overwrite bool)
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (gchar**)")
+	panic("unimplemented conversion of []string (**C.gchar)")
 
 	return goret
 }
@@ -6611,7 +6611,7 @@ func EnvironUnsetenv(envp []string, variable string) []string {
 
 	_ = envp
 	_ = carg1
-	panic("unimplemented conversion of []string (gchar**)")
+	panic("unimplemented conversion of []string (**C.gchar)")
 	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(variable)))
 	defer C.free(unsafe.Pointer(carg2))
 
@@ -6623,7 +6623,7 @@ func EnvironUnsetenv(envp []string, variable string) []string {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (gchar**)")
+	panic("unimplemented conversion of []string (**C.gchar)")
 
 	return goret
 }
@@ -6724,7 +6724,7 @@ func FileGetContents(filename string) (string, bool, error) {
 	_ = contents
 	_ = carg2
 	_ = carg3
-	panic("unimplemented conversion of string (gchar*)")
+	panic("unimplemented conversion of string (*C.gchar)")
 	if cret != 0 {
 		goret = true
 	}
@@ -6879,7 +6879,7 @@ func FileSetContents(filename string, contents string) (bool, error) {
 	_ = contents
 	_ = carg2
 	_ = carg3
-	panic("unimplemented conversion of string (const gchar*)")
+	panic("unimplemented conversion of string (*C.gchar)")
 
 	cret = C.g_file_set_contents(carg1, carg2, carg3, &_cerr)
 	runtime.KeepAlive(filename)
@@ -6972,7 +6972,7 @@ func FileSetContentsFull(filename string, contents string, flags FileSetContents
 	var carg2 *C.gchar                // in, transfer: none, C Pointers: 1, Name: array[unknown], array (inner: <nil>, length-by: carg3)
 	var carg3 C.gssize                // implicit
 	var carg4 C.GFileSetContentsFlags // in, none, casted
-	var carg5 C.int                   // in, none, casted, casted C.gint
+	var carg5 C.int                   // in, none, casted
 	var cret  C.gboolean              // return
 	var _cerr *C.GError               // out, full, converted, nullable
 
@@ -6981,7 +6981,7 @@ func FileSetContentsFull(filename string, contents string, flags FileSetContents
 	_ = contents
 	_ = carg2
 	_ = carg3
-	panic("unimplemented conversion of string (const gchar*)")
+	panic("unimplemented conversion of string (*C.gchar)")
 	carg4 = C.GFileSetContentsFlags(flags)
 	carg5 = C.int(mode)
 
@@ -7596,7 +7596,7 @@ func GetApplicationName() string {
 // The string returned in @charset is not allocated, and should not be
 // freed.
 func GetCharset() (string, bool) {
-	var carg1 *C.char    // out, none, string, casted *C.gchar
+	var carg1 *C.char    // out, none, string
 	var cret  C.gboolean // return
 
 	cret = C.g_get_charset(&carg1)
@@ -7658,7 +7658,7 @@ func GetCodeset() string {
 // The string returned in @charset is not allocated, and should not be
 // freed.
 func GetConsoleCharset() (string, bool) {
-	var carg1 *C.char    // out, none, string, casted *C.gchar
+	var carg1 *C.char    // out, none, string
 	var cret  C.gboolean // return
 
 	cret = C.g_get_console_charset(&carg1)
@@ -7728,7 +7728,7 @@ func GetEnviron() []string {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (gchar**)")
+	panic("unimplemented conversion of []string (**C.gchar)")
 
 	return goret
 }
@@ -7829,7 +7829,7 @@ func GetLanguageNames() []string {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (const gchar* const*)")
+	panic("unimplemented conversion of []string (**C.gchar)")
 
 	return goret
 }
@@ -7868,7 +7868,7 @@ func GetLanguageNamesWithCategory(categoryName string) []string {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (const gchar* const*)")
+	panic("unimplemented conversion of []string (**C.gchar)")
 
 	return goret
 }
@@ -7912,7 +7912,7 @@ func GetLocaleVariants(locale string) []string {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (gchar**)")
+	panic("unimplemented conversion of []string (**C.gchar)")
 
 	return goret
 }
@@ -8096,7 +8096,7 @@ func GetSystemConfigDirs() []string {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (const gchar* const*)")
+	panic("unimplemented conversion of []string (**C.gchar)")
 
 	return goret
 }
@@ -8150,7 +8150,7 @@ func GetSystemDataDirs() []string {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (const gchar* const*)")
+	panic("unimplemented conversion of []string (**C.gchar)")
 
 	return goret
 }
@@ -8845,7 +8845,7 @@ func Listenv() []string {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (gchar**)")
+	panic("unimplemented conversion of []string (**C.gchar)")
 
 	return goret
 }
@@ -8907,7 +8907,7 @@ func LocaleFromUTF8(utf8String string, len int) (uint, uint, string, error) {
 	bytesWritten = uint(carg4)
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of string (gchar*)")
+	panic("unimplemented conversion of string (*C.gchar)")
 	if _cerr != nil {
 		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -8960,7 +8960,7 @@ func LocaleToUTF8(opsysstring string) (uint, uint, string, error) {
 	_ = opsysstring
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of string (const gchar*)")
+	panic("unimplemented conversion of string (*C.gchar)")
 
 	cret = C.g_locale_to_utf8(carg1, carg2, &carg3, &carg4, &_cerr)
 	runtime.KeepAlive(opsysstring)
@@ -9250,7 +9250,7 @@ func LogStructuredArray(logLevel LogLevelFlags, fields []LogField) {
 	_ = fields
 	_ = carg2
 	_ = carg3
-	panic("unimplemented conversion of []LogField (const GLogField*)")
+	panic("unimplemented conversion of []LogField (*C.GLogField)")
 
 	C.g_log_structured_array(carg1, carg2, carg3)
 	runtime.KeepAlive(logLevel)
@@ -9390,7 +9390,7 @@ func LogWriterFormatFields(logLevel LogLevelFlags, fields []LogField, useColor b
 	_ = fields
 	_ = carg2
 	_ = carg3
-	panic("unimplemented conversion of []LogField (const GLogField*)")
+	panic("unimplemented conversion of []LogField (*C.GLogField)")
 	if useColor {
 		carg4 = C.TRUE
 	}
@@ -9785,7 +9785,7 @@ func ParseDebugString(str string, keys []DebugKey) uint {
 	_ = keys
 	_ = carg2
 	_ = carg3
-	panic("unimplemented conversion of []DebugKey (const GDebugKey*)")
+	panic("unimplemented conversion of []DebugKey (*C.GDebugKey)")
 
 	cret = C.g_parse_debug_string(carg1, carg2, carg3)
 	runtime.KeepAlive(str)
@@ -10506,7 +10506,7 @@ func ShellParseArgv(commandLine string) ([]string, bool, error) {
 	_ = argvp
 	_ = carg3
 	_ = carg2
-	panic("unimplemented conversion of []string (gchar**)")
+	panic("unimplemented conversion of []string (**C.gchar)")
 	if cret != 0 {
 		goret = true
 	}
@@ -10850,10 +10850,10 @@ func SpawnCommandLineSync(commandLine string) (string, string, int32, bool, erro
 
 	_ = standardOutput
 	_ = carg2
-	panic("unimplemented conversion of string (gchar*)")
+	panic("unimplemented conversion of string (*C.gchar)")
 	_ = standardError
 	_ = carg3
-	panic("unimplemented conversion of string (gchar*)")
+	panic("unimplemented conversion of string (*C.gchar)")
 	waitStatus = int32(carg4)
 	if cret != 0 {
 		goret = true
@@ -11178,7 +11178,7 @@ func UCS4ToUTF8(str []uint32) (int32, int32, string, error) {
 	_ = str
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []uint32 (const gunichar*)")
+	panic("unimplemented conversion of []uint32 (*C.gunichar)")
 
 	cret = C.g_ucs4_to_utf8(carg1, carg2, &carg3, &carg4, &_cerr)
 	runtime.KeepAlive(str)
@@ -11452,7 +11452,7 @@ func UnicharFullyDecompose(ch uint32, compat bool, resultLen uint) (uint32, uint
 
 	_ = result
 	_ = carg3
-	panic("unimplemented conversion of uint32 (gunichar)")
+	panic("unimplemented conversion of uint32 (C.gunichar)")
 	goret = uint(cret)
 
 	return result, goret
@@ -12098,7 +12098,7 @@ func UnicharIszerowidth(c uint32) bool {
 // Converts a single character to UTF-8.
 func UnicharToUTF8(c uint32) (byte, int32) {
 	var carg1 C.gunichar // in, none, casted
-	var carg2 C.char     // out, transfer: none, C Pointers: 0, Name: gchar, optional, caller-allocates
+	var carg2 C.gchar    // out, transfer: none, C Pointers: 0, Name: gchar, optional, caller-allocates
 	var cret  C.gint     // return, none, casted
 
 	carg1 = C.gunichar(c)
@@ -12111,7 +12111,7 @@ func UnicharToUTF8(c uint32) (byte, int32) {
 
 	_ = outbuf
 	_ = carg2
-	panic("unimplemented conversion of byte (gchar)")
+	panic("unimplemented conversion of byte (C.gchar)")
 	goret = int32(cret)
 
 	return outbuf, goret
@@ -12301,7 +12301,7 @@ func UnicodeCanonicalOrdering(str []uint32) {
 	_ = str
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []uint32 (gunichar*)")
+	panic("unimplemented conversion of []uint32 (*C.gunichar)")
 
 	C.g_unicode_canonical_ordering(carg1, carg2)
 	runtime.KeepAlive(str)
@@ -12393,7 +12393,7 @@ func UTF16ToUCS4(str []uint16) (int32, int32, *uint32, error) {
 	_ = str
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []uint16 (const gunichar2*)")
+	panic("unimplemented conversion of []uint16 (*C.gunichar2)")
 
 	cret = C.g_utf16_to_ucs4(carg1, carg2, &carg3, &carg4, &_cerr)
 	runtime.KeepAlive(str)
@@ -12407,7 +12407,7 @@ func UTF16ToUCS4(str []uint16) (int32, int32, *uint32, error) {
 	itemsWritten = int32(carg4)
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of *uint32 (gunichar*)")
+	panic("unimplemented conversion of *uint32 (*C.gunichar)")
 	if _cerr != nil {
 		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -12458,7 +12458,7 @@ func UTF16ToUTF8(str []uint16) (int32, int32, string, error) {
 	_ = str
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []uint16 (const gunichar2*)")
+	panic("unimplemented conversion of []uint16 (*C.gunichar2)")
 
 	cret = C.g_utf16_to_utf8(carg1, carg2, &carg3, &carg4, &_cerr)
 	runtime.KeepAlive(str)
@@ -13399,7 +13399,7 @@ func UTF8ToUCS4(str string, len int32) (int32, int32, *uint32, error) {
 	itemsWritten = int32(carg4)
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of *uint32 (gunichar*)")
+	panic("unimplemented conversion of *uint32 (*C.gunichar)")
 	if _cerr != nil {
 		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -13446,7 +13446,7 @@ func UTF8ToUCS4Fast(str string, len int32) (int32, *uint32) {
 	itemsWritten = int32(carg3)
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of *uint32 (gunichar*)")
+	panic("unimplemented conversion of *uint32 (*C.gunichar)")
 
 	return itemsWritten, goret
 }
@@ -13478,7 +13478,7 @@ func UTF8ToUTF16(str string, len int32) (int32, int32, *uint16, error) {
 	var carg2 C.glong      // in, none, casted
 	var carg3 C.glong      // out, full, casted
 	var carg4 C.glong      // out, full, casted
-	var cret  *C.gunichar2 // return, transfer: full, C Pointers: 1, Name: guint16, scope: , casted *C.guint16
+	var cret  *C.gunichar2 // return, transfer: full, C Pointers: 1, Name: guint16, scope: 
 	var _cerr *C.GError    // out, full, converted, nullable
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(str)))
@@ -13498,7 +13498,7 @@ func UTF8ToUTF16(str string, len int32) (int32, int32, *uint16, error) {
 	itemsWritten = int32(carg4)
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of *uint16 (gunichar2*)")
+	panic("unimplemented conversion of *uint16 (*C.gunichar2)")
 	if _cerr != nil {
 		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -13578,7 +13578,7 @@ func UTF8Validate(str string) (string, bool) {
 	_ = str
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of string (const gchar*)")
+	panic("unimplemented conversion of string (*C.gchar)")
 
 	cret = C.g_utf8_validate(carg1, carg2, &carg3)
 	runtime.KeepAlive(str)
@@ -13618,7 +13618,7 @@ func UTF8ValidateLen(str string) (string, bool) {
 	_ = str
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of string (const gchar*)")
+	panic("unimplemented conversion of string (*C.gchar)")
 
 	cret = C.g_utf8_validate_len(carg1, carg2, &carg3)
 	runtime.KeepAlive(str)
@@ -13956,7 +13956,7 @@ func (bookmark *BookmarkFile) Copy() *BookmarkFile {
 // @error is set to %G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND.
 func (bookmark *BookmarkFile) GetAddedDateTime(uri string) (*DateTime, error) {
 	var carg0 *C.GBookmarkFile // in, none, converted
-	var carg1 *C.char          // in, none, string, casted *C.gchar
+	var carg1 *C.char          // in, none, string
 	var cret  *C.GDateTime     // return, none, converted
 	var _cerr *C.GError        // out, full, converted, nullable
 
@@ -14009,10 +14009,10 @@ func (bookmark *BookmarkFile) GetAddedDateTime(uri string) (*DateTime, error) {
 // set and %FALSE is returned.
 func (bookmark *BookmarkFile) GetApplicationInfo(uri string, name string) (string, uint, *DateTime, bool, error) {
 	var carg0 *C.GBookmarkFile // in, none, converted
-	var carg1 *C.char          // in, none, string, casted *C.gchar
-	var carg2 *C.char          // in, none, string, casted *C.gchar
-	var carg3 *C.char          // out, full, string, casted *C.gchar
-	var carg4 C.uint           // out, full, casted, casted C.guint
+	var carg1 *C.char          // in, none, string
+	var carg2 *C.char          // in, none, string
+	var carg3 *C.char          // out, full, string
+	var carg4 C.unsigned int   // out, full, casted
 	var carg5 *C.GDateTime     // out, none, converted
 	var cret  C.gboolean       // return
 	var _cerr *C.GError        // out, full, converted, nullable
@@ -14087,7 +14087,7 @@ func (bookmark *BookmarkFile) GetApplications(uri string) (uint, []string, error
 	length = uint(carg2)
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (gchar**)")
+	panic("unimplemented conversion of []string (**C.gchar)")
 	if _cerr != nil {
 		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -14177,7 +14177,7 @@ func (bookmark *BookmarkFile) GetGroups(uri string) (uint, []string, error) {
 	length = uint(carg2)
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (gchar**)")
+	panic("unimplemented conversion of []string (**C.gchar)")
 	if _cerr != nil {
 		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -14341,7 +14341,7 @@ func (bookmark *BookmarkFile) GetMIMEType(uri string) (string, error) {
 // @error is set to %G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND.
 func (bookmark *BookmarkFile) GetModifiedDateTime(uri string) (*DateTime, error) {
 	var carg0 *C.GBookmarkFile // in, none, converted
-	var carg1 *C.char          // in, none, string, casted *C.gchar
+	var carg1 *C.char          // in, none, string
 	var cret  *C.GDateTime     // return, none, converted
 	var _cerr *C.GError        // out, full, converted, nullable
 
@@ -14458,7 +14458,7 @@ func (bookmark *BookmarkFile) GetURIs() (uint, []string) {
 	length = uint(carg1)
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (gchar**)")
+	panic("unimplemented conversion of []string (**C.gchar)")
 
 	return length, goret
 }
@@ -14480,7 +14480,7 @@ func (bookmark *BookmarkFile) GetURIs() (uint, []string) {
 // @error is set to %G_BOOKMARK_FILE_ERROR_URI_NOT_FOUND.
 func (bookmark *BookmarkFile) GetVisitedDateTime(uri string) (*DateTime, error) {
 	var carg0 *C.GBookmarkFile // in, none, converted
-	var carg1 *C.char          // in, none, string, casted *C.gchar
+	var carg1 *C.char          // in, none, string
 	var cret  *C.GDateTime     // return, none, converted
 	var _cerr *C.GError        // out, full, converted, nullable
 
@@ -14658,7 +14658,7 @@ func (bookmark *BookmarkFile) LoadFromData(data string) (bool, error) {
 	_ = data
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of string (const gchar*)")
+	panic("unimplemented conversion of string (*C.gchar)")
 
 	cret = C.g_bookmark_file_load_from_data(carg0, carg1, carg2, &_cerr)
 	runtime.KeepAlive(bookmark)
@@ -14971,7 +14971,7 @@ func (bookmark *BookmarkFile) RemoveItem(uri string) (bool, error) {
 // If no bookmark for @uri is found then it is created.
 func (bookmark *BookmarkFile) SetAddedDateTime(uri string, added *DateTime) {
 	var carg0 *C.GBookmarkFile // in, none, converted
-	var carg1 *C.char          // in, none, string, casted *C.gchar
+	var carg1 *C.char          // in, none, string
 	var carg2 *C.GDateTime     // in, none, converted
 
 	carg0 = (*C.GBookmarkFile)(UnsafeBookmarkFileToGlibNone(bookmark))
@@ -15030,10 +15030,10 @@ func (bookmark *BookmarkFile) SetAddedDateTime(uri string, added *DateTime) {
 // for @uri is found, one is created.
 func (bookmark *BookmarkFile) SetApplicationInfo(uri string, name string, exec string, count int32, stamp *DateTime) (bool, error) {
 	var carg0 *C.GBookmarkFile // in, none, converted
-	var carg1 *C.char          // in, none, string, casted *C.gchar
-	var carg2 *C.char          // in, none, string, casted *C.gchar
-	var carg3 *C.char          // in, none, string, casted *C.gchar
-	var carg4 C.int            // in, none, casted, casted C.gint
+	var carg1 *C.char          // in, none, string
+	var carg2 *C.char          // in, none, string
+	var carg3 *C.char          // in, none, string
+	var carg4 C.int            // in, none, casted
 	var carg5 *C.GDateTime     // in, none, converted, nullable
 	var cret  C.gboolean       // return
 	var _cerr *C.GError        // out, full, converted, nullable
@@ -15126,7 +15126,7 @@ func (bookmark *BookmarkFile) SetGroups(uri string, groups []string) {
 	_ = groups
 	_ = carg2
 	_ = carg3
-	panic("unimplemented conversion of []string (const gchar**)")
+	panic("unimplemented conversion of []string (**C.gchar)")
 
 	C.g_bookmark_file_set_groups(carg0, carg1, carg2, carg3)
 	runtime.KeepAlive(bookmark)
@@ -15242,7 +15242,7 @@ func (bookmark *BookmarkFile) SetMIMEType(uri string, mimeType string) {
 // g_bookmark_file_set_visited_date_time().
 func (bookmark *BookmarkFile) SetModifiedDateTime(uri string, modified *DateTime) {
 	var carg0 *C.GBookmarkFile // in, none, converted
-	var carg1 *C.char          // in, none, string, casted *C.gchar
+	var carg1 *C.char          // in, none, string
 	var carg2 *C.GDateTime     // in, none, converted
 
 	carg0 = (*C.GBookmarkFile)(UnsafeBookmarkFileToGlibNone(bookmark))
@@ -15306,7 +15306,7 @@ func (bookmark *BookmarkFile) SetTitle(uri string, title string) {
 // does not affect the "modified" time.
 func (bookmark *BookmarkFile) SetVisitedDateTime(uri string, visited *DateTime) {
 	var carg0 *C.GBookmarkFile // in, none, converted
-	var carg1 *C.char          // in, none, string, casted *C.gchar
+	var carg1 *C.char          // in, none, string
 	var carg2 *C.GDateTime     // in, none, converted
 
 	carg0 = (*C.GBookmarkFile)(UnsafeBookmarkFileToGlibNone(bookmark))
@@ -15347,7 +15347,7 @@ func (bookmark *BookmarkFile) ToData() (uint, string, error) {
 	length = uint(carg1)
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of string (gchar*)")
+	panic("unimplemented conversion of string (*C.gchar)")
 	if _cerr != nil {
 		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -15849,7 +15849,7 @@ func (checksum *Checksum) Update(data []uint8) {
 	_ = data
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []uint8 (const guchar*)")
+	panic("unimplemented conversion of []uint8 (*C.guchar)")
 
 	C.g_checksum_update(carg0, carg1, carg2)
 	runtime.KeepAlive(checksum)
@@ -17928,7 +17928,7 @@ func NewHmac(digestType ChecksumType, key []byte) *Hmac {
 	_ = key
 	_ = carg2
 	_ = carg3
-	panic("unimplemented conversion of []byte (const guchar*)")
+	panic("unimplemented conversion of []byte (*C.guchar)")
 
 	cret = C.g_hmac_new(carg1, carg2, carg3)
 	runtime.KeepAlive(digestType)
@@ -18015,7 +18015,7 @@ func (hmac *Hmac) Update(data []byte) {
 	_ = data
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []byte (const guchar*)")
+	panic("unimplemented conversion of []byte (*C.guchar)")
 
 	C.g_hmac_update(carg0, carg1, carg2)
 	runtime.KeepAlive(hmac)
@@ -18527,7 +18527,7 @@ func (channel *IOChannel) ReadToEnd() (string, IOStatus, error) {
 	_ = strReturn
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of string (gchar*)")
+	panic("unimplemented conversion of string (*C.gchar)")
 	goret = IOStatus(cret)
 	if _cerr != nil {
 		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
@@ -19314,7 +19314,7 @@ func (keyFile *KeyFile) GetBooleanList(groupName string, key string) (uint, []bo
 	length = uint(carg3)
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []bool (gboolean*)")
+	panic("unimplemented conversion of []bool (*C.gboolean)")
 	if _cerr != nil {
 		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -19470,7 +19470,7 @@ func (keyFile *KeyFile) GetDoubleList(groupName string, key string) (uint, []flo
 	length = uint(carg3)
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []float64 (gdouble*)")
+	panic("unimplemented conversion of []float64 (*C.gdouble)")
 	if _cerr != nil {
 		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -19504,7 +19504,7 @@ func (keyFile *KeyFile) GetGroups() (uint, []string) {
 	length = uint(carg1)
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (gchar**)")
+	panic("unimplemented conversion of []string (**C.gchar)")
 
 	return length, goret
 }
@@ -19649,7 +19649,7 @@ func (keyFile *KeyFile) GetIntegerList(groupName string, key string) (uint, []in
 	length = uint(carg3)
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []int32 (gint*)")
+	panic("unimplemented conversion of []int32 (*C.gint)")
 	if _cerr != nil {
 		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -19696,7 +19696,7 @@ func (keyFile *KeyFile) GetKeys(groupName string) (uint, []string, error) {
 	length = uint(carg2)
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (gchar**)")
+	panic("unimplemented conversion of []string (**C.gchar)")
 	if _cerr != nil {
 		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -19879,7 +19879,7 @@ func (keyFile *KeyFile) GetLocaleStringList(groupName string, key string, locale
 	length = uint(carg4)
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (gchar**)")
+	panic("unimplemented conversion of []string (**C.gchar)")
 	if _cerr != nil {
 		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -20008,7 +20008,7 @@ func (keyFile *KeyFile) GetStringList(groupName string, key string) (uint, []str
 	length = uint(carg3)
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (gchar**)")
+	panic("unimplemented conversion of []string (**C.gchar)")
 	if _cerr != nil {
 		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -20324,7 +20324,7 @@ func (keyFile *KeyFile) LoadFromDirs(file string, searchDirs []string, flags Key
 	defer C.free(unsafe.Pointer(carg1))
 	_ = searchDirs
 	_ = carg2
-	panic("unimplemented conversion of []string (const gchar**)")
+	panic("unimplemented conversion of []string (**C.gchar)")
 	carg4 = C.GKeyFileFlags(flags)
 
 	cret = C.g_key_file_load_from_dirs(carg0, carg1, carg2, &carg3, carg4, &_cerr)
@@ -20637,7 +20637,7 @@ func (keyFile *KeyFile) SetBooleanList(groupName string, key string, list []bool
 	_ = list
 	_ = carg3
 	_ = carg4
-	panic("unimplemented conversion of []bool (gboolean*)")
+	panic("unimplemented conversion of []bool (*C.gboolean)")
 
 	C.g_key_file_set_boolean_list(carg0, carg1, carg2, carg3, carg4)
 	runtime.KeepAlive(keyFile)
@@ -20761,7 +20761,7 @@ func (keyFile *KeyFile) SetDoubleList(groupName string, key string, list []float
 	_ = list
 	_ = carg3
 	_ = carg4
-	panic("unimplemented conversion of []float64 (gdouble*)")
+	panic("unimplemented conversion of []float64 (*C.gdouble)")
 
 	C.g_key_file_set_double_list(carg0, carg1, carg2, carg3, carg4)
 	runtime.KeepAlive(keyFile)
@@ -20855,7 +20855,7 @@ func (keyFile *KeyFile) SetIntegerList(groupName string, key string, list []int3
 	_ = list
 	_ = carg3
 	_ = carg4
-	panic("unimplemented conversion of []int32 (gint*)")
+	panic("unimplemented conversion of []int32 (*C.gint)")
 
 	C.g_key_file_set_integer_list(carg0, carg1, carg2, carg3, carg4)
 	runtime.KeepAlive(keyFile)
@@ -20875,10 +20875,10 @@ func (keyFile *KeyFile) SetIntegerList(groupName string, key string, list []int3
 // as separators. The default list separator is ';'.
 func (keyFile *KeyFile) SetListSeparator(separator byte) {
 	var carg0 *C.GKeyFile // in, none, converted
-	var carg1 C.char      // in, none, casted
+	var carg1 C.gchar     // in, none, casted
 
 	carg0 = (*C.GKeyFile)(UnsafeKeyFileToGlibNone(keyFile))
-	carg1 = C.char(separator)
+	carg1 = C.gchar(separator)
 
 	C.g_key_file_set_list_separator(carg0, carg1)
 	runtime.KeepAlive(keyFile)
@@ -20951,7 +20951,7 @@ func (keyFile *KeyFile) SetLocaleStringList(groupName string, key string, locale
 	_ = list
 	_ = carg4
 	_ = carg5
-	panic("unimplemented conversion of []string (const gchar* const*)")
+	panic("unimplemented conversion of []string (**C.gchar)")
 
 	C.g_key_file_set_locale_string_list(carg0, carg1, carg2, carg3, carg4, carg5)
 	runtime.KeepAlive(keyFile)
@@ -21021,7 +21021,7 @@ func (keyFile *KeyFile) SetStringList(groupName string, key string, list []strin
 	_ = list
 	_ = carg3
 	_ = carg4
-	panic("unimplemented conversion of []string (const gchar* const*)")
+	panic("unimplemented conversion of []string (**C.gchar)")
 
 	C.g_key_file_set_string_list(carg0, carg1, carg2, carg3, carg4)
 	runtime.KeepAlive(keyFile)
@@ -21498,7 +21498,7 @@ func (_context *MainContext) Check(maxPriority int32, fds []PollFD) bool {
 	_ = fds
 	_ = carg2
 	_ = carg3
-	panic("unimplemented conversion of []PollFD (GPollFD*)")
+	panic("unimplemented conversion of []PollFD (*C.GPollFD)")
 
 	cret = C.g_main_context_check(carg0, carg1, carg2, carg3)
 	runtime.KeepAlive(_context)
@@ -22862,7 +22862,7 @@ func (matchInfo *MatchInfo) FetchAll() []string {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (gchar**)")
+	panic("unimplemented conversion of []string (**C.gchar)")
 
 	return goret
 }
@@ -23573,7 +23573,7 @@ func (_context *OptionContext) AddMainEntries(entries []OptionEntry, translation
 	carg0 = (*C.GOptionContext)(UnsafeOptionContextToGlibNone(_context))
 	_ = entries
 	_ = carg1
-	panic("unimplemented conversion of []OptionEntry (const GOptionEntry*)")
+	panic("unimplemented conversion of []OptionEntry (*C.GOptionEntry)")
 	if translationDomain != "" {
 		carg2 = (*C.gchar)(unsafe.Pointer(C.CString(translationDomain)))
 		defer C.free(unsafe.Pointer(carg2))
@@ -24127,7 +24127,7 @@ func (group *OptionGroup) AddEntries(entries []OptionEntry) {
 	carg0 = (*C.GOptionGroup)(UnsafeOptionGroupToGlibNone(group))
 	_ = entries
 	_ = carg1
-	panic("unimplemented conversion of []OptionEntry (const GOptionEntry*)")
+	panic("unimplemented conversion of []OptionEntry (*C.GOptionEntry)")
 
 	C.g_option_group_add_entries(carg0, carg1)
 	runtime.KeepAlive(group)
@@ -24276,7 +24276,7 @@ func (buf *PathBuf) Clear() {
 // See also: g_path_buf_to_path()
 func (buf *PathBuf) ClearToPath() string {
 	var carg0 *C.GPathBuf // in, none, converted
-	var cret  *C.char     // return, full, string, casted *C.gchar, nullable
+	var cret  *C.char     // return, full, string, nullable
 
 	carg0 = (*C.GPathBuf)(UnsafePathBufToGlibNone(buf))
 
@@ -24307,7 +24307,7 @@ func (buf *PathBuf) ClearToPath() string {
 // See also: g_path_buf_to_path()
 func (buf *PathBuf) FreeToPath() string {
 	var carg0 *C.GPathBuf // in, none, converted
-	var cret  *C.char     // return, full, string, casted *C.gchar, nullable
+	var cret  *C.char     // return, full, string, nullable
 
 	carg0 = (*C.GPathBuf)(UnsafePathBufToGlibNone(buf))
 
@@ -24466,7 +24466,7 @@ func (buf *PathBuf) Pop() bool {
 // ]|
 func (buf *PathBuf) Push(path string) *PathBuf {
 	var carg0 *C.GPathBuf // in, none, converted
-	var carg1 *C.char     // in, none, string, casted *C.gchar
+	var carg1 *C.char     // in, none, string
 	var cret  *C.GPathBuf // return, none, converted
 
 	carg0 = (*C.GPathBuf)(UnsafePathBufToGlibNone(buf))
@@ -24566,7 +24566,7 @@ func (buf *PathBuf) SetExtension(extension string) bool {
 // ]|
 func (buf *PathBuf) SetFilename(fileName string) bool {
 	var carg0 *C.GPathBuf // in, none, converted
-	var carg1 *C.char     // in, none, string, casted *C.gchar
+	var carg1 *C.char     // in, none, string
 	var cret  C.gboolean  // return
 
 	carg0 = (*C.GPathBuf)(UnsafePathBufToGlibNone(buf))
@@ -24600,7 +24600,7 @@ func (buf *PathBuf) SetFilename(fileName string) bool {
 // If the path buffer is empty, this function returns `NULL`.
 func (buf *PathBuf) ToPath() string {
 	var carg0 *C.GPathBuf // in, none, converted
-	var cret  *C.char     // return, full, string, casted *C.gchar, nullable
+	var cret  *C.char     // return, full, string, nullable
 
 	carg0 = (*C.GPathBuf)(UnsafePathBufToGlibNone(buf))
 
@@ -25077,7 +25077,7 @@ func NewRandWithSeedArray(seed *uint32, seedLength uint) *Rand {
 
 	_ = seed
 	_ = carg1
-	panic("unimplemented conversion of *uint32 (guint32*)")
+	panic("unimplemented conversion of *uint32 (*C.guint32)")
 	carg2 = C.guint(seedLength)
 
 	cret = C.g_rand_new_with_seed_array(carg1, carg2)
@@ -25273,7 +25273,7 @@ func (rand_ *Rand) SetSeedArray(seed *uint32, seedLength uint) {
 	carg0 = (*C.GRand)(UnsafeRandToGlibNone(rand_))
 	_ = seed
 	_ = carg1
-	panic("unimplemented conversion of *uint32 (guint32*)")
+	panic("unimplemented conversion of *uint32 (*C.guint32)")
 	carg2 = C.guint(seedLength)
 
 	C.g_rand_set_seed_array(carg0, carg1, carg2)
@@ -25709,7 +25709,7 @@ func RegexSplitSimple(pattern string, str string, compileOptions RegexCompileFla
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (gchar**)")
+	panic("unimplemented conversion of []string (**C.gchar)")
 
 	return goret
 }
@@ -26120,7 +26120,7 @@ func (regex *Regex) MatchAllFull(str string, startPosition int32, matchOptions R
 	_ = str
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of string (const gchar*)")
+	panic("unimplemented conversion of string (*C.gchar)")
 	carg3 = C.gint(startPosition)
 	carg4 = C.GRegexMatchFlags(matchOptions)
 
@@ -26225,7 +26225,7 @@ func (regex *Regex) MatchFull(str string, startPosition int32, matchOptions Rege
 	_ = str
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of string (const gchar*)")
+	panic("unimplemented conversion of string (*C.gchar)")
 	carg3 = C.gint(startPosition)
 	carg4 = C.GRegexMatchFlags(matchOptions)
 
@@ -26304,7 +26304,7 @@ func (regex *Regex) Replace(str string, startPosition int32, replacement string,
 	_ = str
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of string (const gchar*)")
+	panic("unimplemented conversion of string (*C.gchar)")
 	carg3 = C.gint(startPosition)
 	carg4 = (*C.gchar)(unsafe.Pointer(C.CString(replacement)))
 	defer C.free(unsafe.Pointer(carg4))
@@ -26365,7 +26365,7 @@ func (regex *Regex) ReplaceLiteral(str string, startPosition int32, replacement 
 	_ = str
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of string (const gchar*)")
+	panic("unimplemented conversion of string (*C.gchar)")
 	carg3 = C.gint(startPosition)
 	carg4 = (*C.gchar)(unsafe.Pointer(C.CString(replacement)))
 	defer C.free(unsafe.Pointer(carg4))
@@ -26438,7 +26438,7 @@ func (regex *Regex) Split(str string, matchOptions RegexMatchFlags) []string {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (gchar**)")
+	panic("unimplemented conversion of []string (**C.gchar)")
 
 	return goret
 }
@@ -26493,7 +26493,7 @@ func (regex *Regex) SplitFull(str string, startPosition int32, matchOptions Rege
 	_ = str
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of string (const gchar*)")
+	panic("unimplemented conversion of string (*C.gchar)")
 	carg3 = C.gint(startPosition)
 	carg4 = C.GRegexMatchFlags(matchOptions)
 	carg5 = C.gint(maxTokens)
@@ -26510,7 +26510,7 @@ func (regex *Regex) SplitFull(str string, startPosition int32, matchOptions Rege
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (gchar**)")
+	panic("unimplemented conversion of []string (**C.gchar)")
 	if _cerr != nil {
 		_goerr = UnsafeErrorFromGlibFull(unsafe.Pointer(_cerr))
 	}
@@ -27796,7 +27796,7 @@ func SourceRemove(tag uint) bool {
 // wrong source.
 func SourceSetNameByID(tag uint, name string) {
 	var carg1 C.guint // in, none, casted
-	var carg2 *C.char // in, none, string, casted *C.gchar
+	var carg2 *C.char // in, none, string
 
 	carg1 = C.guint(tag)
 	carg2 = (*C.char)(unsafe.Pointer(C.CString(name)))
@@ -28011,7 +28011,7 @@ func (source *Source) GetID() uint {
 // name may be #NULL if it has never been set with [method@GLib.Source.set_name].
 func (source *Source) GetName() string {
 	var carg0 *C.GSource // in, none, converted
-	var cret  *C.char    // return, none, string, casted *C.gchar, nullable
+	var cret  *C.char    // return, none, string, nullable-string
 
 	carg0 = (*C.GSource)(UnsafeSourceToGlibNone(source))
 
@@ -28367,7 +28367,7 @@ func (source *Source) SetFuncs(funcs *SourceFuncs) {
 // Also see [method@GLib.Source.set_static_name].
 func (source *Source) SetName(name string) {
 	var carg0 *C.GSource // in, none, converted
-	var carg1 *C.char    // in, none, string, casted *C.gchar
+	var carg1 *C.char    // in, none, string
 
 	carg0 = (*C.GSource)(UnsafeSourceToGlibNone(source))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
@@ -28456,7 +28456,7 @@ func (source *Source) SetReadyTime(readyTime int64) {
 // string literals.
 func (source *Source) SetStaticName(name string) {
 	var carg0 *C.GSource // in, none, converted
-	var carg1 *C.char    // in, none, string, casted *C.gchar
+	var carg1 *C.char    // in, none, string
 
 	carg0 = (*C.GSource)(UnsafeSourceToGlibNone(source))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
@@ -29183,7 +29183,7 @@ func (timer *Timer) Elapsed(microseconds *uint32) float64 {
 	carg0 = (*C.GTimer)(UnsafeTimerToGlibNone(timer))
 	_ = microseconds
 	_ = carg1
-	panic("unimplemented conversion of *uint32 (gulong*)")
+	panic("unimplemented conversion of *uint32 (*C.gulong)")
 
 	cret = C.g_timer_elapsed(carg0, carg1)
 	runtime.KeepAlive(timer)
@@ -29814,12 +29814,12 @@ func UriEscapeBytes(unescaped []uint8, reservedCharsAllowed string) string {
 	var carg1 *C.guint8 // in, transfer: none, C Pointers: 1, Name: array[guint8], array (inner: *typesystem.CastablePrimitive, length-by: carg2)
 	var carg2 C.gsize   // implicit
 	var carg3 *C.char   // in, none, string, nullable-string
-	var cret  *C.char   // return, full, string, casted *C.gchar
+	var cret  *C.char   // return, full, string
 
 	_ = unescaped
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []uint8 (const guint8*)")
+	panic("unimplemented conversion of []uint8 (*C.guint8)")
 	if reservedCharsAllowed != "" {
 		carg3 = (*C.char)(unsafe.Pointer(C.CString(reservedCharsAllowed)))
 		defer C.free(unsafe.Pointer(carg3))
@@ -29859,10 +29859,10 @@ func UriEscapeBytes(unescaped []uint8, reservedCharsAllowed string) string {
 // in the URI specification, since those are allowed unescaped in some
 // portions of a URI.
 func UriEscapeString(unescaped string, reservedCharsAllowed string, allowUtf8 bool) string {
-	var carg1 *C.char    // in, none, string, casted *C.gchar
+	var carg1 *C.char    // in, none, string
 	var carg2 *C.char    // in, none, string, nullable-string
 	var carg3 C.gboolean // in
-	var cret  *C.char    // return, full, string, casted *C.gchar
+	var cret  *C.char    // return, full, string
 
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(unescaped)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -30142,7 +30142,7 @@ func UriListExtractURIs(uriList string) []string {
 
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []string (gchar**)")
+	panic("unimplemented conversion of []string (**C.gchar)")
 
 	return goret
 }
@@ -30205,8 +30205,8 @@ func UriParse(uriString string, flags URIFlags) (*Uri, error) {
 // ]|
 // Common schemes include `file`, `https`, `svn+ssh`, etc.
 func UriParseScheme(uri string) string {
-	var carg1 *C.char // in, none, string, casted *C.gchar
-	var cret  *C.char // return, full, string, casted *C.gchar, nullable
+	var carg1 *C.char // in, none, string
+	var cret  *C.char // return, full, string, nullable-string
 
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(uri)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -30245,8 +30245,8 @@ func UriParseScheme(uri string) string {
 // Unlike g_uri_parse_scheme(), the returned scheme is normalized to
 // all-lowercase and does not need to be freed.
 func UriPeekScheme(uri string) string {
-	var carg1 *C.char // in, none, string, casted *C.gchar
-	var cret  *C.char // return, none, string, casted *C.gchar, nullable
+	var carg1 *C.char // in, none, string
+	var cret  *C.char // return, none, string, nullable-string
 
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(uri)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -30630,7 +30630,7 @@ func UriSplitWithUser(uriRef string, flags URIFlags) (string, string, string, st
 // being expanded in an escaped path element, which might confuse pathname
 // handling.
 func UriUnescapeBytes(escapedString string, length int, illegalCharacters string) (*Bytes, error) {
-	var carg1 *C.char   // in, none, string, casted *C.gchar
+	var carg1 *C.char   // in, none, string
 	var carg2 C.gssize  // in, none, casted
 	var carg3 *C.char   // in, none, string, nullable-string
 	var cret  *C.GBytes // return, full, converted
@@ -30688,7 +30688,7 @@ func UriUnescapeSegment(escapedString string, escapedStringEnd string, illegalCh
 	var carg1 *C.char // in, none, string, nullable-string
 	var carg2 *C.char // in, none, string, nullable-string
 	var carg3 *C.char // in, none, string, nullable-string
-	var cret  *C.char // return, full, string, casted *C.gchar, nullable
+	var cret  *C.char // return, full, string, nullable-string
 
 	if escapedString != "" {
 		carg1 = (*C.char)(unsafe.Pointer(C.CString(escapedString)))
@@ -30738,9 +30738,9 @@ func UriUnescapeSegment(escapedString string, escapedStringEnd string, illegalCh
 // want to avoid for instance having a slash being expanded in an
 // escaped path element, which might confuse pathname handling.
 func UriUnescapeString(escapedString string, illegalCharacters string) string {
-	var carg1 *C.char // in, none, string, casted *C.gchar
+	var carg1 *C.char // in, none, string
 	var carg2 *C.char // in, none, string, nullable-string
-	var cret  *C.char // return, full, string, casted *C.gchar, nullable
+	var cret  *C.char // return, full, string, nullable-string
 
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(escapedString)))
 	defer C.free(unsafe.Pointer(carg1))
@@ -31121,7 +31121,7 @@ func (baseUri *Uri) ParseRelative(uriRef string, flags URIFlags) (*Uri, error) {
 // logged, then consider using g_uri_to_string_partial() to redact parts.
 func (uri *Uri) ToString() string {
 	var carg0 *C.GUri // in, none, converted
-	var cret  *C.char // return, full, string, casted *C.gchar
+	var cret  *C.char // return, full, string
 
 	carg0 = (*C.GUri)(UnsafeUriToGlibNone(uri))
 
@@ -31151,7 +31151,7 @@ func (uri *Uri) ToString() string {
 func (uri *Uri) ToStringPartial(flags URIHideFlags) string {
 	var carg0 *C.GUri         // in, none, converted
 	var carg1 C.GUriHideFlags // in, none, casted
-	var cret  *C.char         // return, full, string, casted *C.gchar
+	var cret  *C.char         // return, full, string
 
 	carg0 = (*C.GUri)(UnsafeUriToGlibNone(uri))
 	carg1 = C.GUriHideFlags(flags)
@@ -32159,7 +32159,7 @@ func NewVariantTypeTuple(items []*VariantType) *VariantType {
 	_ = items
 	_ = carg1
 	_ = carg2
-	panic("unimplemented conversion of []*VariantType (const GVariantType* const*)")
+	panic("unimplemented conversion of []*VariantType (**C.GVariantType)")
 
 	cret = C.g_variant_type_new_tuple(carg1, carg2)
 	runtime.KeepAlive(items)

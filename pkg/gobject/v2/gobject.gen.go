@@ -754,7 +754,7 @@ func EnumCompleteTypeInfo(gEnumType Type, constValues *EnumValue) TypeInfo {
 
 	_ = info
 	_ = carg2
-	panic("unimplemented conversion of TypeInfo (GTypeInfo)")
+	panic("unimplemented conversion of TypeInfo (C.GTypeInfo)")
 
 	return info
 }
@@ -966,7 +966,7 @@ func FlagsCompleteTypeInfo(gFlagsType Type, constValues *FlagsValue) TypeInfo {
 
 	_ = info
 	_ = carg2
-	panic("unimplemented conversion of TypeInfo (GTypeInfo)")
+	panic("unimplemented conversion of TypeInfo (C.GTypeInfo)")
 
 	return info
 }
@@ -2612,7 +2612,7 @@ func SignalListIDs(itype Type) (uint, []uint) {
 	nIds = uint(carg2)
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []uint (guint*)")
+	panic("unimplemented conversion of []uint (*C.guint)")
 
 	return nIds, goret
 }
@@ -2994,7 +2994,7 @@ func TypeChildren(typ Type) (uint, []Type) {
 	nChildren = uint(carg2)
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []Type (GType*)")
+	panic("unimplemented conversion of []Type (*C.GType)")
 
 	return nChildren, goret
 }
@@ -3171,7 +3171,7 @@ func TypeFundamentalNext() Type {
 // variable to include `instance-count`).
 func TypeGetInstanceCount(typ Type) int32 {
 	var carg1 C.GType // in, none, casted, alias
-	var cret  C.int   // return, none, casted, casted C.gint
+	var cret  C.int   // return, none, casted
 
 	carg1 = C.GType(typ)
 
@@ -3238,7 +3238,7 @@ func TypeInterfaces(typ Type) (uint, []Type) {
 	nInterfaces = uint(carg2)
 	_ = goret
 	_ = cret
-	panic("unimplemented conversion of []Type (GType*)")
+	panic("unimplemented conversion of []Type (*C.GType)")
 
 	return nInterfaces, goret
 }
