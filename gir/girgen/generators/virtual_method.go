@@ -10,7 +10,8 @@ import (
 )
 
 type VirtualMethodGenerator struct {
-	Doc SubGenerator
+	Doc       SubGenerator
+	ParentDoc SubGenerator
 	*typesystem.VirtualMethod
 
 	// VirtualParamConverters contains all the c->go in param converters needed for the go call
@@ -39,16 +40,10 @@ func (v *VirtualMethodGenerator) Generate(w *file.Package) {
 	v.generateParentCall(w)
 }
 
-func (v *VirtualMethodGenerator) generateParentCallDoc(w file.File) {
-	fmt.Fprintf(w.Go(), "// %s calls the default implementations of the %s virtual method.\n", v.ParentName, v.Invoker.CIndentifier())
-	fmt.Fprintf(w.Go(), "// This functions behavior is not defined when the parent does not implement the virtual method.\n")
-	v.Doc.Generate(w.Go())
-}
-
 func (v *VirtualMethodGenerator) generateParentCall(w *file.Package) {
 	v.generateParentCPreamble(w)
 
-	v.generateParentCallDoc(w)
+	v.ParentDoc.Generate(w.Go())
 
 	// register extern callback types:
 	for _, param := range v.GoParameters {
@@ -356,7 +351,6 @@ func (m *VirtualMethodGenerator) GenerateClassOverrideField(w file.File) {
 		vparams = append(vparams, param.GoType())
 	}
 
-	fmt.Fprintf(w.Go(), "// %s allows you to override the implementation of the virtual method %s.\n", m.GoName, m.Invoker.CIndentifier())
 	m.Doc.Generate(w.Go())
 	fmt.Fprintf(w.Go(), "%s func(%s)%s\n", m.GoName, strings.Join(vparams, ", "), ret)
 }
@@ -443,7 +437,7 @@ func (m *VirtualMethodGenerator) ParentCGoCall() string {
 
 // GenerateInterfaceSignature implements MethodGenerator.
 func (v *VirtualMethodGenerator) GenerateInterfaceSignature(w file.File) {
-	v.generateParentCallDoc(w)
+	v.ParentDoc.Generate(w.Go())
 
 	var ret string
 	if len(v.GoReturns) == 1 {
@@ -456,8 +450,14 @@ func (v *VirtualMethodGenerator) GenerateInterfaceSignature(w file.File) {
 }
 
 func NewVirtualMethodGenerator(vfunc *typesystem.VirtualMethod) *VirtualMethodGenerator {
+	doc := NewGoDocGenerator(vfunc)
 	g := &VirtualMethodGenerator{
-		Doc:           NewGoDocGenerator(vfunc),
+		Doc: doc.WithPrependParagraphs(
+			fmt.Sprintf("// %s allows you to override the implementation of the virtual method %s.\n", vfunc.GoName, vfunc.Invoker.CIndentifier()),
+		),
+		ParentDoc: doc.WithPrependParagraphs(
+			fmt.Sprintf("%s calls the default implementations of the %s virtual method.\nThis function's behavior is not defined when the parent does not implement the virtual method.\n", vfunc.ParentName, vfunc.Invoker.CIndentifier()),
+		),
 		VirtualMethod: vfunc,
 	}
 

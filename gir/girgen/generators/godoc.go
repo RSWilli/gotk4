@@ -96,6 +96,25 @@ func NewGoDocGenerator(documented typesystem.Documented) *GoDocGenerator {
 	return gen
 }
 
+// Copy creates a deep copy of the doc generator.
+func (docg *GoDocGenerator) Copy() *GoDocGenerator {
+	newDocg := &GoDocGenerator{
+		DocParagraphs: make([]string, len(docg.DocParagraphs)),
+		GIRDoc:        docg.GIRDoc,
+	}
+
+	copy(newDocg.DocParagraphs, docg.DocParagraphs)
+
+	return newDocg
+}
+
+// WithPrependParagraph prepends a paragraph to the doc generator without modifying the instance.
+func (docg *GoDocGenerator) WithPrependParagraphs(paragraphs ...string) *GoDocGenerator {
+	newDocg := docg.Copy()
+	newDocg.DocParagraphs = append(paragraphs, newDocg.DocParagraphs...)
+	return newDocg
+}
+
 func documentSignal(sig *typesystem.Signal) string {
 	if sig.Action {
 		return fmt.Sprintf("%s emits the \"%s\" signal", sig.GoName, sig.Name)
