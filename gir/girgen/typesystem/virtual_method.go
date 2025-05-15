@@ -56,6 +56,13 @@ func NewVirtualMethod(e *env, parent ConvertibleType, typestruct *Record, v gir.
 		return nil
 	}
 
+	for _, param := range params.CParameters() {
+		if _, ok := param.Type.Type.(*Callback); ok {
+			e.logger.Warn("skipping because of callback parameter")
+			return nil
+		}
+	}
+
 	field := findTypeStructField(v, typestruct)
 
 	if field == nil {

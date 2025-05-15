@@ -46,18 +46,6 @@ func NewCToGoConverter(p *typesystem.Param) Converter {
 		}
 		return &CToGoNullableConverter{
 			Param:        p,
-			SubConverter: newCToGoExtraMetadateConverter(p),
-		}
-	}
-
-	return newCToGoExtraMetadateConverter(p)
-}
-
-func newCToGoExtraMetadateConverter(p *typesystem.Param) Converter {
-	if t, ok := p.Type.Type.(typesystem.OverriddenCType); ok {
-		return &OverridenCtypeConverter{
-			Param:        p,
-			Type:         t,
 			SubConverter: newCToGoBasicConverter(p),
 		}
 	}

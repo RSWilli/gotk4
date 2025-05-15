@@ -57,6 +57,9 @@ type Param struct {
 	// but only if the Type itself doesn't handle it differently
 	CTypePointers int
 
+	GirCType   string
+	GirCGoType string
+
 	// Skip signifies that the parameter should be skipped in the go call
 	// this happens with params that are only useful in C.
 	Skip bool
@@ -109,6 +112,10 @@ func (p *Param) GoDeclaration() string {
 }
 
 func (p *Param) CGoType() string {
+	if p.GirCGoType != "" {
+		return p.GirCGoType
+	}
+
 	return p.Type.Type.CGoType(p.CTypePointers)
 }
 
@@ -117,6 +124,10 @@ func (p *Param) GoType() string {
 }
 
 func (p *Param) CType() string {
+	if p.GirCGoType != "" {
+		return p.GirCGoType
+	}
+
 	return p.Type.Type.CType(p.CTypePointers)
 }
 
@@ -245,8 +256,6 @@ func NewCallableParameters(e *env, v gir.CallableAttrs) (*Parameters, resolvedSt
 				return nil, notResolvable
 			}
 
-			t = fixCType(t, v.Parameters.InstanceParameter.AnyType)
-
 			pointers := CountCTypePointers(girType.CType)
 
 			if pointers != 1 {
@@ -263,6 +272,8 @@ func NewCallableParameters(e *env, v gir.CallableAttrs) (*Parameters, resolvedSt
 					Namespace: ns,
 					Type:      t,
 				},
+				GirCType:          CTypeFromAnytype(v.Parameters.InstanceParameter.AnyType),
+				GirCGoType:        ctypeToCgoType(CTypeFromAnytype(v.Parameters.InstanceParameter.AnyType)),
 				CTypePointers:     1,
 				TransferOwnership: TransferNone,
 				Skip:              false,
@@ -311,8 +322,6 @@ func NewCallableParameters(e *env, v gir.CallableAttrs) (*Parameters, resolvedSt
 				return nil, maybeResolvable
 			}
 
-			t = fixCType(t, paramType)
-
 			direction := p.Direction
 
 			if direction == "" {
@@ -357,6 +366,8 @@ func NewCallableParameters(e *env, v gir.CallableAttrs) (*Parameters, resolvedSt
 					Type:      t,
 				},
 				CTypePointers:     ctypePointers,
+				GirCType:          CTypeFromAnytype(paramType),
+				GirCGoType:        ctypeToCgoType(CTypeFromAnytype(paramType)),
 				TransferOwnership: transfer,
 				Skip:              p.Skip,
 				Optional:          p.Optional,
@@ -424,8 +435,6 @@ func NewCallableParameters(e *env, v gir.CallableAttrs) (*Parameters, resolvedSt
 			transfer = TransferFull
 		}
 
-		t = fixCType(t, v.ReturnValue.AnyType)
-
 		ctypePointers := CountCTypePointers(CTypeFromAnytype(v.ReturnValue.AnyType))
 
 		ret := &Param{
@@ -438,6 +447,8 @@ func NewCallableParameters(e *env, v gir.CallableAttrs) (*Parameters, resolvedSt
 				Type:      t,
 			},
 			TransferOwnership: transfer,
+			GirCType:          CTypeFromAnytype(v.ReturnValue.AnyType),
+			GirCGoType:        ctypeToCgoType(CTypeFromAnytype(v.ReturnValue.AnyType)),
 			CTypePointers:     ctypePointers,
 			Nullable:          v.ReturnValue.Nullable,
 		}

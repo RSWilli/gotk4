@@ -52,6 +52,14 @@ func CTypeFromAnytype(t gir.AnyType) string {
 	}
 }
 
+func ctypeToCgoType(ctype string) string {
+	pointers := CountCTypePointers(ctype)
+
+	base := trimCTypePointers(cleanCType(ctype))
+
+	return GetPointers(pointers) + "C." + base
+}
+
 func debugCTypeFromAnytype(t gir.AnyType) string {
 	switch {
 	case t.Array != nil:
