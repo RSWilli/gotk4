@@ -83,7 +83,7 @@ func (g *GoOverridesGenerator) Generate(w *file.Package) {
 
 		fmt.Fprintf(w.Go(), "if %s != nil {\n", overridesFnFieldName)
 		w.Go().Indent()
-		fmt.Fprintf(w.Go(), "pclass.%s = (*[0]byte)(C.%s)\n", virtual.Invoker.CIndentifier(), virtual.TrampolineName)
+		fmt.Fprintf(w.Go(), "pclass.%s = (*[0]byte)(C.%s)\n", virtual.Invoker.CGoIndentifier(), virtual.TrampolineName)
 
 		fmt.Fprintf(w.Go(), "classdata.StoreVirtualMethod(\n")
 		w.Go().Indent()
