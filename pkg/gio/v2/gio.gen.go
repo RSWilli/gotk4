@@ -9499,7 +9499,7 @@ func NewPollableSource(pollableStream gobject.Object) *glib.Source {
 func PollableStreamRead(cancellable context.Context, stream InputStream, buffer []byte, blocking bool) (int, error) {
 	var carg5 *C.GCancellable // in, none, converted, nullable
 	var carg1 *C.GInputStream // in, none, converted
-	var carg2 *C.void         // in, transfer: none, C Pointers: 1, Name: array[unknown], array (inner: <nil>, length-by: carg3)
+	var carg2 unsafe.Pointer  // in, transfer: none, C Pointers: 1, Name: array[unknown], array (inner: <nil>, length-by: carg3)
 	var carg3 C.gsize         // implicit
 	var carg4 C.gboolean      // in
 	var cret  C.gssize        // return, none, casted
@@ -9562,7 +9562,7 @@ func PollableStreamRead(cancellable context.Context, stream InputStream, buffer 
 func PollableStreamWrite(cancellable context.Context, stream OutputStream, buffer []byte, blocking bool) (int, error) {
 	var carg5 *C.GCancellable  // in, none, converted, nullable
 	var carg1 *C.GOutputStream // in, none, converted
-	var carg2 *C.void          // in, transfer: none, C Pointers: 1, Name: array[unknown], array (inner: <nil>, length-by: carg3)
+	var carg2 unsafe.Pointer   // in, transfer: none, C Pointers: 1, Name: array[unknown], array (inner: <nil>, length-by: carg3)
 	var carg3 C.gsize          // implicit
 	var carg4 C.gboolean       // in
 	var cret  C.gssize         // return, none, casted
@@ -9635,7 +9635,7 @@ func PollableStreamWrite(cancellable context.Context, stream OutputStream, buffe
 func PollableStreamWriteAll(cancellable context.Context, stream OutputStream, buffer []byte, blocking bool) (uint, bool, error) {
 	var carg6 *C.GCancellable  // in, none, converted, nullable
 	var carg1 *C.GOutputStream // in, none, converted
-	var carg2 *C.void          // in, transfer: none, C Pointers: 1, Name: array[unknown], array (inner: <nil>, length-by: carg3)
+	var carg2 unsafe.Pointer   // in, transfer: none, C Pointers: 1, Name: array[unknown], array (inner: <nil>, length-by: carg3)
 	var carg3 C.gsize          // implicit
 	var carg4 C.gboolean       // in
 	var carg5 C.gsize          // out, full, casted
@@ -16826,9 +16826,9 @@ func UnsafeConverterToGlibFull(c Converter) unsafe.Pointer {
 // (typically %G_IO_ERROR_PARTIAL_INPUT).
 func (converter *ConverterInstance) Convert(inbuf []byte, outbuf []byte, flags ConverterFlags) (uint, uint, ConverterResult, error) {
 	var carg0 *C.GConverter      // in, none, converted
-	var carg1 *C.void            // in, transfer: none, C Pointers: 1, Name: array[unknown], array (inner: <nil>, length-by: carg2)
+	var carg1 unsafe.Pointer     // in, transfer: none, C Pointers: 1, Name: array[unknown], array (inner: <nil>, length-by: carg2)
 	var carg2 C.gsize            // implicit
-	var carg3 *C.void            // in, transfer: none, C Pointers: 1, Name: array[unknown], array (inner: <nil>, length-by: carg4)
+	var carg3 unsafe.Pointer     // in, transfer: none, C Pointers: 1, Name: array[unknown], array (inner: <nil>, length-by: carg4)
 	var carg4 C.gsize            // implicit
 	var carg5 C.GConverterFlags  // in, none, casted
 	var carg6 C.gsize            // out, full, casted
@@ -17041,7 +17041,7 @@ func UnsafeApplyConverterOverrides[Instance Converter](gclass unsafe.Pointer, ov
 		classdata.StoreVirtualMethod(
 			unsafe.Pointer(pclass),
 			"_gotk4_gio2_Converter_convert",
-			func(carg0 *C.GConverter, carg1 *C.void, carg2 C.gsize, carg3 *C.void, carg4 C.gsize, carg5 C.GConverterFlags, carg6 *C.gsize, carg7 *C.gsize, _cerr **C.GError) (cret C.GConverterResult) {
+			func(carg0 *C.GConverter, carg1 unsafe.Pointer, carg2 C.gsize, carg3 unsafe.Pointer, carg4 C.gsize, carg5 C.GConverterFlags, carg6 *C.gsize, carg7 *C.gsize, _cerr **C.GError) (cret C.GConverterResult) {
 				var converter    Instance        // go GConverter subclass
 				var inbuf        []byte          // in, transfer: none, C Pointers: 1, Name: array[unknown], nullable, array (inner: <nil>, length-by: carg2)
 				var outbuf       []byte          // in, transfer: none, C Pointers: 1, Name: array[unknown], array (inner: <nil>, length-by: carg4)
@@ -17194,9 +17194,9 @@ func UnsafeApplyConverterOverrides[Instance Converter](gclass unsafe.Pointer, ov
 // (typically %G_IO_ERROR_PARTIAL_INPUT).
 func (converter *ConverterInstance) ParentConvert(inbuf []byte, outbuf []byte, flags ConverterFlags) (uint, uint, ConverterResult, error) {
 	var carg0 *C.GConverter
-	var carg1 *C.void            // in, transfer: none, C Pointers: 1, Name: array[unknown], nullable, array (inner: <nil>, length-by: carg2)
+	var carg1 unsafe.Pointer     // in, transfer: none, C Pointers: 1, Name: array[unknown], nullable, array (inner: <nil>, length-by: carg2)
 	var carg2 C.gsize            // implicit
-	var carg3 *C.void            // in, transfer: none, C Pointers: 1, Name: array[unknown], array (inner: <nil>, length-by: carg4)
+	var carg3 unsafe.Pointer     // in, transfer: none, C Pointers: 1, Name: array[unknown], array (inner: <nil>, length-by: carg4)
 	var carg4 C.gsize            // implicit
 	var carg5 C.GConverterFlags  // in, none, casted
 	var carg6 C.gsize            // out, full, casted
@@ -49140,7 +49140,7 @@ func (stream *PollableOutputStreamInstance) IsWritable() bool {
 func (stream *PollableOutputStreamInstance) WriteNonblocking(cancellable context.Context, buffer []byte) (int, error) {
 	var carg0 *C.GPollableOutputStream // in, none, converted
 	var carg3 *C.GCancellable          // in, none, converted, nullable
-	var carg1 *C.void                  // in, transfer: none, C Pointers: 1, Name: array[unknown], array (inner: <nil>, length-by: carg2)
+	var carg1 unsafe.Pointer           // in, transfer: none, C Pointers: 1, Name: array[unknown], array (inner: <nil>, length-by: carg2)
 	var carg2 C.gsize                  // implicit
 	var cret  C.gssize                 // return, none, casted
 	var _cerr *C.GError                // out, full, converted, nullable
@@ -49440,7 +49440,7 @@ func UnsafeApplyPollableOutputStreamOverrides[Instance PollableOutputStream](gcl
 		classdata.StoreVirtualMethod(
 			unsafe.Pointer(pclass),
 			"_gotk4_gio2_PollableOutputStream_write_nonblocking",
-			func(carg0 *C.GPollableOutputStream, carg1 *C.void, carg2 C.gsize, _cerr **C.GError) (cret C.gssize) {
+			func(carg0 *C.GPollableOutputStream, carg1 unsafe.Pointer, carg2 C.gsize, _cerr **C.GError) (cret C.gssize) {
 				var stream Instance // go GPollableOutputStream subclass
 				var buffer []byte   // in, transfer: none, C Pointers: 1, Name: array[unknown], nullable, array (inner: <nil>, length-by: carg2)
 				var goret  int      // return, none, casted
@@ -49637,10 +49637,10 @@ func (stream *PollableOutputStreamInstance) ParentIsWritable() bool {
 // g_pollable_output_stream_can_poll() returns %FALSE for @stream.
 func (stream *PollableOutputStreamInstance) ParentWriteNonblocking(buffer []byte) (int, error) {
 	var carg0 *C.GPollableOutputStream
-	var carg1 *C.void   // in, transfer: none, C Pointers: 1, Name: array[unknown], nullable, array (inner: <nil>, length-by: carg2)
-	var carg2 C.gsize   // implicit
-	var cret  C.gssize  // return, none, casted
-	var _cerr *C.GError // out, full, converted, nullable
+	var carg1 unsafe.Pointer // in, transfer: none, C Pointers: 1, Name: array[unknown], nullable, array (inner: <nil>, length-by: carg2)
+	var carg2 C.gsize        // implicit
+	var cret  C.gssize       // return, none, casted
+	var _cerr *C.GError      // out, full, converted, nullable
 
 	parentclass := (*C.GPollableOutputStreamInterface)(classdata.PeekParentInterface(UnsafePollableOutputStreamToGlibNone(stream), uint64(TypePollableOutputStream)))
 
@@ -78801,7 +78801,7 @@ func (stream *InputStreamInstance) IsClosed() bool {
 func (stream *InputStreamInstance) Read(cancellable context.Context, buffer []byte) (int, error) {
 	var carg0 *C.GInputStream // in, none, converted
 	var carg3 *C.GCancellable // in, none, converted, nullable
-	var carg1 *C.void         // in, transfer: none, C Pointers: 1, Name: array[unknown], caller-allocates, array (inner: <nil>, length-by: carg2)
+	var carg1 unsafe.Pointer  // in, transfer: none, C Pointers: 1, Name: array[unknown], caller-allocates, array (inner: <nil>, length-by: carg2)
 	var carg2 C.gsize         // implicit
 	var cret  C.gssize        // return, none, casted
 	var _cerr *C.GError       // out, full, converted, nullable
@@ -78867,7 +78867,7 @@ func (stream *InputStreamInstance) Read(cancellable context.Context, buffer []by
 func (stream *InputStreamInstance) ReadAll(cancellable context.Context, buffer []byte) (uint, bool, error) {
 	var carg0 *C.GInputStream // in, none, converted
 	var carg4 *C.GCancellable // in, none, converted, nullable
-	var carg1 *C.void         // in, transfer: none, C Pointers: 1, Name: array[unknown], caller-allocates, array (inner: <nil>, length-by: carg2)
+	var carg1 unsafe.Pointer  // in, transfer: none, C Pointers: 1, Name: array[unknown], caller-allocates, array (inner: <nil>, length-by: carg2)
 	var carg2 C.gsize         // implicit
 	var carg3 C.gsize         // out, full, casted
 	var cret  C.gboolean      // return
@@ -78926,7 +78926,7 @@ func (stream *InputStreamInstance) ReadAll(cancellable context.Context, buffer [
 func (stream *InputStreamInstance) ReadAllAsync(cancellable context.Context, buffer []byte, ioPriority int32, callback AsyncReadyCallback) {
 	var carg0 *C.GInputStream       // in, none, converted
 	var carg4 *C.GCancellable       // in, none, converted, nullable
-	var carg1 *C.void               // in, transfer: none, C Pointers: 1, Name: array[unknown], caller-allocates, array (inner: <nil>, length-by: carg2)
+	var carg1 unsafe.Pointer        // in, transfer: none, C Pointers: 1, Name: array[unknown], caller-allocates, array (inner: <nil>, length-by: carg2)
 	var carg2 C.gsize               // implicit
 	var carg3 C.int                 // in, none, casted
 	var carg5 C.GAsyncReadyCallback // callback, scope: async, closure: carg6, nullable
@@ -79042,7 +79042,7 @@ func (stream *InputStreamInstance) ReadAllFinish(result AsyncResult) (uint, bool
 func (stream *InputStreamInstance) ReadAsync(cancellable context.Context, buffer []byte, ioPriority int32, callback AsyncReadyCallback) {
 	var carg0 *C.GInputStream       // in, none, converted
 	var carg4 *C.GCancellable       // in, none, converted, nullable
-	var carg1 *C.void               // in, transfer: none, C Pointers: 1, Name: array[unknown], caller-allocates, array (inner: <nil>, length-by: carg2)
+	var carg1 unsafe.Pointer        // in, transfer: none, C Pointers: 1, Name: array[unknown], caller-allocates, array (inner: <nil>, length-by: carg2)
 	var carg2 C.gsize               // implicit
 	var carg3 C.int                 // in, none, casted
 	var carg5 C.GAsyncReadyCallback // callback, scope: async, closure: carg6, nullable
@@ -86091,7 +86091,7 @@ func (stream *OutputStreamInstance) SpliceFinish(result AsyncResult) (int, error
 func (stream *OutputStreamInstance) Write(cancellable context.Context, buffer []byte) (int, error) {
 	var carg0 *C.GOutputStream // in, none, converted
 	var carg3 *C.GCancellable  // in, none, converted, nullable
-	var carg1 *C.void          // in, transfer: none, C Pointers: 1, Name: array[unknown], array (inner: <nil>, length-by: carg2)
+	var carg1 unsafe.Pointer   // in, transfer: none, C Pointers: 1, Name: array[unknown], array (inner: <nil>, length-by: carg2)
 	var carg2 C.gsize          // implicit
 	var cret  C.gssize         // return, none, casted
 	var _cerr *C.GError        // out, full, converted, nullable
@@ -86157,7 +86157,7 @@ func (stream *OutputStreamInstance) Write(cancellable context.Context, buffer []
 func (stream *OutputStreamInstance) WriteAll(cancellable context.Context, buffer []byte) (uint, bool, error) {
 	var carg0 *C.GOutputStream // in, none, converted
 	var carg4 *C.GCancellable  // in, none, converted, nullable
-	var carg1 *C.void          // in, transfer: none, C Pointers: 1, Name: array[unknown], array (inner: <nil>, length-by: carg2)
+	var carg1 unsafe.Pointer   // in, transfer: none, C Pointers: 1, Name: array[unknown], array (inner: <nil>, length-by: carg2)
 	var carg2 C.gsize          // implicit
 	var carg3 C.gsize          // out, full, casted
 	var cret  C.gboolean       // return
@@ -86220,7 +86220,7 @@ func (stream *OutputStreamInstance) WriteAll(cancellable context.Context, buffer
 func (stream *OutputStreamInstance) WriteAllAsync(cancellable context.Context, buffer []byte, ioPriority int32, callback AsyncReadyCallback) {
 	var carg0 *C.GOutputStream      // in, none, converted
 	var carg4 *C.GCancellable       // in, none, converted, nullable
-	var carg1 *C.void               // in, transfer: none, C Pointers: 1, Name: array[unknown], array (inner: <nil>, length-by: carg2)
+	var carg1 unsafe.Pointer        // in, transfer: none, C Pointers: 1, Name: array[unknown], array (inner: <nil>, length-by: carg2)
 	var carg2 C.gsize               // implicit
 	var carg3 C.int                 // in, none, casted
 	var carg5 C.GAsyncReadyCallback // callback, scope: async, closure: carg6, nullable
@@ -86347,7 +86347,7 @@ func (stream *OutputStreamInstance) WriteAllFinish(result AsyncResult) (uint, bo
 func (stream *OutputStreamInstance) WriteAsync(cancellable context.Context, buffer []byte, ioPriority int32, callback AsyncReadyCallback) {
 	var carg0 *C.GOutputStream      // in, none, converted
 	var carg4 *C.GCancellable       // in, none, converted, nullable
-	var carg1 *C.void               // in, transfer: none, C Pointers: 1, Name: array[unknown], array (inner: <nil>, length-by: carg2)
+	var carg1 unsafe.Pointer        // in, transfer: none, C Pointers: 1, Name: array[unknown], array (inner: <nil>, length-by: carg2)
 	var carg2 C.gsize               // implicit
 	var carg3 C.int                 // in, none, casted
 	var carg5 C.GAsyncReadyCallback // callback, scope: async, closure: carg6, nullable
@@ -87309,7 +87309,7 @@ func UnsafeApplyOutputStreamOverrides[Instance OutputStream](gclass unsafe.Point
 		classdata.StoreVirtualMethod(
 			unsafe.Pointer(pclass),
 			"_gotk4_gio2_OutputStream_write_fn",
-			func(carg0 *C.GOutputStream, carg1 *C.void, carg2 C.gsize, carg3 *C.GCancellable, _cerr **C.GError) (cret C.gssize) {
+			func(carg0 *C.GOutputStream, carg1 unsafe.Pointer, carg2 C.gsize, carg3 *C.GCancellable, _cerr **C.GError) (cret C.gssize) {
 				var stream      Instance        // go GOutputStream subclass
 				var cancellable context.Context // in, none, converted, nullable
 				var buffer      []byte          // in, transfer: none, C Pointers: 1, Name: array[unknown], nullable, array (inner: <nil>, length-by: carg2)
@@ -87729,7 +87729,7 @@ func (stream *OutputStreamInstance) ParentWriteFinish(result AsyncResult) (int, 
 func (stream *OutputStreamInstance) ParentWriteFn(cancellable context.Context, buffer []byte) (int, error) {
 	var carg0 *C.GOutputStream
 	var carg3 *C.GCancellable // in, none, converted, nullable
-	var carg1 *C.void         // in, transfer: none, C Pointers: 1, Name: array[unknown], nullable, array (inner: <nil>, length-by: carg2)
+	var carg1 unsafe.Pointer  // in, transfer: none, C Pointers: 1, Name: array[unknown], nullable, array (inner: <nil>, length-by: carg2)
 	var carg2 C.gsize         // implicit
 	var cret  C.gssize        // return, none, casted
 	var _cerr *C.GError       // out, full, converted, nullable
@@ -122595,7 +122595,7 @@ func (stream *BufferedInputStreamInstance) GetBufferSize() uint {
 // offset @offset bytes.
 func (stream *BufferedInputStreamInstance) Peek(buffer []byte, offset uint) uint {
 	var carg0 *C.GBufferedInputStream // in, none, converted
-	var carg1 *C.void                 // in, transfer: none, C Pointers: 1, Name: array[unknown], array (inner: <nil>, length-by: carg3)
+	var carg1 unsafe.Pointer          // in, transfer: none, C Pointers: 1, Name: array[unknown], array (inner: <nil>, length-by: carg3)
 	var carg2 C.gsize                 // in, none, casted
 	var carg3 C.gsize                 // implicit
 	var cret  C.gsize                 // return, none, casted
@@ -122632,7 +122632,7 @@ func (stream *BufferedInputStreamInstance) Peek(buffer []byte, offset uint) uint
 func (stream *BufferedInputStreamInstance) PeekBuffer() (uint, []byte) {
 	var carg0 *C.GBufferedInputStream // in, none, converted
 	var carg1 C.gsize                 // out, full, casted
-	var cret  *C.void                 // return, transfer: none, C Pointers: 1, Name: array[unknown], scope: , array (inner: <nil>)
+	var cret  unsafe.Pointer          // return, transfer: none, C Pointers: 1, Name: array[unknown], scope: , array (inner: <nil>)
 
 	carg0 = (*C.GBufferedInputStream)(UnsafeBufferedInputStreamToGlibNone(stream))
 

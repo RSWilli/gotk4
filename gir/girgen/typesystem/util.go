@@ -67,6 +67,12 @@ var cgoPrimitiveTypes = map[string]string{
 }
 
 func CtypeToCgoType(ctype string) string {
+	if ctype == "void*" {
+		// FIXME: this would need a go import, but we practically always
+		// import unsafe already.
+		return "unsafe.Pointer"
+	}
+
 	pointers := CountCTypePointers(ctype)
 
 	base := trimCTypePointers(cleanCType(ctype))

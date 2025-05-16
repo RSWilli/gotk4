@@ -722,10 +722,10 @@ func _gotk4_gio2_AsyncResult_get_source_object(carg0 *C.GAsyncResult) (cret *C.G
 }
 
 //export _gotk4_gio2_Converter_convert
-func _gotk4_gio2_Converter_convert(carg0 *C.GConverter, carg1 *C.void, carg2 C.gsize, carg3 *C.void, carg4 C.gsize, carg5 C.GConverterFlags, carg6 *C.gsize, carg7 *C.gsize, _cerr **C.GError) (cret C.GConverterResult) {
-	var fn func(carg0 *C.GConverter, carg1 *C.void, carg2 C.gsize, carg3 *C.void, carg4 C.gsize, carg5 C.GConverterFlags, carg6 *C.gsize, carg7 *C.gsize, _cerr **C.GError) (cret C.GConverterResult)
+func _gotk4_gio2_Converter_convert(carg0 *C.GConverter, carg1 unsafe.Pointer, carg2 C.gsize, carg3 unsafe.Pointer, carg4 C.gsize, carg5 C.GConverterFlags, carg6 *C.gsize, carg7 *C.gsize, _cerr **C.GError) (cret C.GConverterResult) {
+	var fn func(carg0 *C.GConverter, carg1 unsafe.Pointer, carg2 C.gsize, carg3 unsafe.Pointer, carg4 C.gsize, carg5 C.GConverterFlags, carg6 *C.gsize, carg7 *C.gsize, _cerr **C.GError) (cret C.GConverterResult)
 	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_Converter_convert").(func(carg0 *C.GConverter, carg1 *C.void, carg2 C.gsize, carg3 *C.void, carg4 C.gsize, carg5 C.GConverterFlags, carg6 *C.gsize, carg7 *C.gsize, _cerr **C.GError) (cret C.GConverterResult))
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_Converter_convert").(func(carg0 *C.GConverter, carg1 unsafe.Pointer, carg2 C.gsize, carg3 unsafe.Pointer, carg4 C.gsize, carg5 C.GConverterFlags, carg6 *C.gsize, carg7 *C.gsize, _cerr **C.GError) (cret C.GConverterResult))
 		if fn == nil {
 			panic("_gotk4_gio2_Converter_convert: no function pointer found")
 		}
@@ -2642,10 +2642,10 @@ func _gotk4_gio2_PollableOutputStream_is_writable(carg0 *C.GPollableOutputStream
 }
 
 //export _gotk4_gio2_PollableOutputStream_write_nonblocking
-func _gotk4_gio2_PollableOutputStream_write_nonblocking(carg0 *C.GPollableOutputStream, carg1 *C.void, carg2 C.gsize, _cerr **C.GError) (cret C.gssize) {
-	var fn func(carg0 *C.GPollableOutputStream, carg1 *C.void, carg2 C.gsize, _cerr **C.GError) (cret C.gssize)
+func _gotk4_gio2_PollableOutputStream_write_nonblocking(carg0 *C.GPollableOutputStream, carg1 unsafe.Pointer, carg2 C.gsize, _cerr **C.GError) (cret C.gssize) {
+	var fn func(carg0 *C.GPollableOutputStream, carg1 unsafe.Pointer, carg2 C.gsize, _cerr **C.GError) (cret C.gssize)
 	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_PollableOutputStream_write_nonblocking").(func(carg0 *C.GPollableOutputStream, carg1 *C.void, carg2 C.gsize, _cerr **C.GError) (cret C.gssize))
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_PollableOutputStream_write_nonblocking").(func(carg0 *C.GPollableOutputStream, carg1 unsafe.Pointer, carg2 C.gsize, _cerr **C.GError) (cret C.gssize))
 		if fn == nil {
 			panic("_gotk4_gio2_PollableOutputStream_write_nonblocking: no function pointer found")
 		}
@@ -3794,10 +3794,10 @@ func _gotk4_gio2_OutputStream_write_finish(carg0 *C.GOutputStream, carg1 *C.GAsy
 }
 
 //export _gotk4_gio2_OutputStream_write_fn
-func _gotk4_gio2_OutputStream_write_fn(carg0 *C.GOutputStream, carg1 *C.void, carg2 C.gsize, carg3 *C.GCancellable, _cerr **C.GError) (cret C.gssize) {
-	var fn func(carg0 *C.GOutputStream, carg1 *C.void, carg2 C.gsize, carg3 *C.GCancellable, _cerr **C.GError) (cret C.gssize)
+func _gotk4_gio2_OutputStream_write_fn(carg0 *C.GOutputStream, carg1 unsafe.Pointer, carg2 C.gsize, carg3 *C.GCancellable, _cerr **C.GError) (cret C.gssize) {
+	var fn func(carg0 *C.GOutputStream, carg1 unsafe.Pointer, carg2 C.gsize, carg3 *C.GCancellable, _cerr **C.GError) (cret C.gssize)
 	{
-		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_OutputStream_write_fn").(func(carg0 *C.GOutputStream, carg1 *C.void, carg2 C.gsize, carg3 *C.GCancellable, _cerr **C.GError) (cret C.gssize))
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_OutputStream_write_fn").(func(carg0 *C.GOutputStream, carg1 unsafe.Pointer, carg2 C.gsize, carg3 *C.GCancellable, _cerr **C.GError) (cret C.gssize))
 		if fn == nil {
 			panic("_gotk4_gio2_OutputStream_write_fn: no function pointer found")
 		}
