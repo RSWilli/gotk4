@@ -253,6 +253,8 @@ func (obj *ObjectInstance) ParentConstructed() {
 
 	parentclass := (*C.GObjectClass)(classdata.PeekParentClass(obj.unsafe()))
 
+	carg0 = (*C.GObject)(obj.unsafe())
+
 	C._gotk4_gobject2_Object_virtual_constructed(unsafe.Pointer(parentclass.constructed), carg0)
 	runtime.KeepAlive(obj)
 }
@@ -265,6 +267,8 @@ func (obj *ObjectInstance) ParentFinalize() {
 	var carg0 *C.GObject
 
 	parentclass := (*C.GObjectClass)(classdata.PeekParentClass(obj.unsafe()))
+
+	carg0 = (*C.GObject)(obj.unsafe())
 
 	C._gotk4_gobject2_Object_virtual_finalize(unsafe.Pointer(parentclass.finalize), carg0)
 	runtime.KeepAlive(obj)
