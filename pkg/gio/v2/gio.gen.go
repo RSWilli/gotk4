@@ -10461,6 +10461,8 @@ func (action *ActionInstance) ParentGetEnabled() bool {
 
 	parentclass := (*C.GActionInterface)(classdata.PeekParentInterface(UnsafeActionToGlibNone(action), uint64(TypeAction)))
 
+	carg0 = (*C.GAction)(UnsafeActionToGlibNone(action))
+
 	cret = C._gotk4_gio2_Action_virtual_get_enabled(unsafe.Pointer(parentclass.get_enabled), carg0)
 	runtime.KeepAlive(action)
 
@@ -10486,6 +10488,8 @@ func (action *ActionInstance) ParentGetName() string {
 	var cret  *C.gchar // return, none, string
 
 	parentclass := (*C.GActionInterface)(classdata.PeekParentInterface(UnsafeActionToGlibNone(action), uint64(TypeAction)))
+
+	carg0 = (*C.GAction)(UnsafeActionToGlibNone(action))
 
 	cret = C._gotk4_gio2_Action_virtual_get_name(unsafe.Pointer(parentclass.get_name), carg0)
 	runtime.KeepAlive(action)
@@ -10518,6 +10522,8 @@ func (action *ActionInstance) ParentGetParameterType() *glib.VariantType {
 	var cret  *C.GVariantType // return, none, converted, nullable
 
 	parentclass := (*C.GActionInterface)(classdata.PeekParentInterface(UnsafeActionToGlibNone(action), uint64(TypeAction)))
+
+	carg0 = (*C.GAction)(UnsafeActionToGlibNone(action))
 
 	cret = C._gotk4_gio2_Action_virtual_get_parameter_type(unsafe.Pointer(parentclass.get_parameter_type), carg0)
 	runtime.KeepAlive(action)
@@ -10555,6 +10561,8 @@ func (action *ActionInstance) ParentGetStateType() *glib.VariantType {
 	var cret  *C.GVariantType // return, none, converted, nullable
 
 	parentclass := (*C.GActionInterface)(classdata.PeekParentInterface(UnsafeActionToGlibNone(action), uint64(TypeAction)))
+
+	carg0 = (*C.GAction)(UnsafeActionToGlibNone(action))
 
 	cret = C._gotk4_gio2_Action_virtual_get_state_type(unsafe.Pointer(parentclass.get_state_type), carg0)
 	runtime.KeepAlive(action)
@@ -11544,10 +11552,11 @@ func UnsafeApplyActionGroupOverrides[Instance ActionGroup](gclass unsafe.Pointer
 // This function should only be called by [type@Gio.ActionGroup] implementations.
 func (actionGroup *ActionGroupInstance) ParentActionAdded(actionName string) {
 	var carg0 *C.GActionGroup
-	var carg1 *C.gchar // in, none, string
+	var carg1 *C.gchar // in, none, converted
 
 	parentclass := (*C.GActionGroupInterface)(classdata.PeekParentInterface(UnsafeActionGroupToGlibNone(actionGroup), uint64(TypeActionGroup)))
 
+	carg0 = (*C.GActionGroup)(UnsafeActionGroupToGlibNone(actionGroup))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(actionName)))
 	defer C.free(unsafe.Pointer(carg1))
 
@@ -11569,11 +11578,12 @@ func (actionGroup *ActionGroupInstance) ParentActionAdded(actionName string) {
 // This function should only be called by [type@Gio.ActionGroup] implementations.
 func (actionGroup *ActionGroupInstance) ParentActionEnabledChanged(actionName string, enabled bool) {
 	var carg0 *C.GActionGroup
-	var carg1 *C.gchar   // in, none, string
-	var carg2 C.gboolean // in
+	var carg1 *C.gchar   // in, none, converted
+	var carg2 C.gboolean // in, none, string
 
 	parentclass := (*C.GActionGroupInterface)(classdata.PeekParentInterface(UnsafeActionGroupToGlibNone(actionGroup), uint64(TypeActionGroup)))
 
+	carg0 = (*C.GActionGroup)(UnsafeActionGroupToGlibNone(actionGroup))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(actionName)))
 	defer C.free(unsafe.Pointer(carg1))
 	if enabled {
@@ -11598,10 +11608,11 @@ func (actionGroup *ActionGroupInstance) ParentActionEnabledChanged(actionName st
 // This function should only be called by [type@Gio.ActionGroup] implementations.
 func (actionGroup *ActionGroupInstance) ParentActionRemoved(actionName string) {
 	var carg0 *C.GActionGroup
-	var carg1 *C.gchar // in, none, string
+	var carg1 *C.gchar // in, none, converted
 
 	parentclass := (*C.GActionGroupInterface)(classdata.PeekParentInterface(UnsafeActionGroupToGlibNone(actionGroup), uint64(TypeActionGroup)))
 
+	carg0 = (*C.GActionGroup)(UnsafeActionGroupToGlibNone(actionGroup))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(actionName)))
 	defer C.free(unsafe.Pointer(carg1))
 
@@ -11627,11 +11638,12 @@ func (actionGroup *ActionGroupInstance) ParentActionRemoved(actionName string) {
 // have its state changed from outside callers.
 func (actionGroup *ActionGroupInstance) ParentGetActionEnabled(actionName string) bool {
 	var carg0 *C.GActionGroup
-	var carg1 *C.gchar   // in, none, string
+	var carg1 *C.gchar   // in, none, converted
 	var cret  C.gboolean // return
 
 	parentclass := (*C.GActionGroupInterface)(classdata.PeekParentInterface(UnsafeActionGroupToGlibNone(actionGroup), uint64(TypeActionGroup)))
 
+	carg0 = (*C.GActionGroup)(UnsafeActionGroupToGlibNone(actionGroup))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(actionName)))
 	defer C.free(unsafe.Pointer(carg1))
 
@@ -11674,11 +11686,12 @@ func (actionGroup *ActionGroupInstance) ParentGetActionEnabled(actionName string
 // with the same name but a different parameter type.
 func (actionGroup *ActionGroupInstance) ParentGetActionParameterType(actionName string) *glib.VariantType {
 	var carg0 *C.GActionGroup
-	var carg1 *C.gchar        // in, none, string
+	var carg1 *C.gchar        // in, none, converted
 	var cret  *C.GVariantType // return, none, converted, nullable
 
 	parentclass := (*C.GActionGroupInterface)(classdata.PeekParentInterface(UnsafeActionGroupToGlibNone(actionGroup), uint64(TypeActionGroup)))
 
+	carg0 = (*C.GActionGroup)(UnsafeActionGroupToGlibNone(actionGroup))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(actionName)))
 	defer C.free(unsafe.Pointer(carg1))
 
@@ -11724,11 +11737,12 @@ func (actionGroup *ActionGroupInstance) ParentGetActionParameterType(actionName 
 // with the same name but a different state type.
 func (actionGroup *ActionGroupInstance) ParentGetActionStateType(actionName string) *glib.VariantType {
 	var carg0 *C.GActionGroup
-	var carg1 *C.gchar        // in, none, string
+	var carg1 *C.gchar        // in, none, converted
 	var cret  *C.GVariantType // return, none, converted, nullable
 
 	parentclass := (*C.GActionGroupInterface)(classdata.PeekParentInterface(UnsafeActionGroupToGlibNone(actionGroup), uint64(TypeActionGroup)))
 
+	carg0 = (*C.GActionGroup)(UnsafeActionGroupToGlibNone(actionGroup))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(actionName)))
 	defer C.free(unsafe.Pointer(carg1))
 
@@ -11759,11 +11773,12 @@ func (actionGroup *ActionGroupInstance) ParentGetActionStateType(actionName stri
 // Checks if the named action exists within @action_group.
 func (actionGroup *ActionGroupInstance) ParentHasAction(actionName string) bool {
 	var carg0 *C.GActionGroup
-	var carg1 *C.gchar   // in, none, string
+	var carg1 *C.gchar   // in, none, converted
 	var cret  C.gboolean // return
 
 	parentclass := (*C.GActionGroupInterface)(classdata.PeekParentInterface(UnsafeActionGroupToGlibNone(actionGroup), uint64(TypeActionGroup)))
 
+	carg0 = (*C.GActionGroup)(UnsafeActionGroupToGlibNone(actionGroup))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(actionName)))
 	defer C.free(unsafe.Pointer(carg1))
 
@@ -11796,6 +11811,8 @@ func (actionGroup *ActionGroupInstance) ParentListActions() []string {
 	var cret  **C.gchar // return, transfer: full, C Pointers: 2, Name: array[utf8], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
 
 	parentclass := (*C.GActionGroupInterface)(classdata.PeekParentInterface(UnsafeActionGroupToGlibNone(actionGroup), uint64(TypeActionGroup)))
+
+	carg0 = (*C.GActionGroup)(UnsafeActionGroupToGlibNone(actionGroup))
 
 	cret = C._gotk4_gio2_ActionGroup_virtual_list_actions(unsafe.Pointer(parentclass.list_actions), carg0)
 	runtime.KeepAlive(actionGroup)
@@ -12239,6 +12256,7 @@ func (actionMap *ActionMapInstance) ParentAddAction(action Action) {
 
 	parentclass := (*C.GActionMapInterface)(classdata.PeekParentInterface(UnsafeActionMapToGlibNone(actionMap), uint64(TypeActionMap)))
 
+	carg0 = (*C.GActionMap)(UnsafeActionMapToGlibNone(actionMap))
 	carg1 = (*C.GAction)(UnsafeActionToGlibNone(action))
 
 	C._gotk4_gio2_ActionMap_virtual_add_action(unsafe.Pointer(parentclass.add_action), carg0, carg1)
@@ -12262,11 +12280,12 @@ func (actionMap *ActionMapInstance) ParentAddAction(action Action) {
 // If no such action exists, returns `NULL`.
 func (actionMap *ActionMapInstance) ParentLookupAction(actionName string) Action {
 	var carg0 *C.GActionMap
-	var carg1 *C.gchar   // in, none, string
+	var carg1 *C.gchar   // in, none, converted
 	var cret  *C.GAction // return, none, converted, nullable
 
 	parentclass := (*C.GActionMapInterface)(classdata.PeekParentInterface(UnsafeActionMapToGlibNone(actionMap), uint64(TypeActionMap)))
 
+	carg0 = (*C.GActionMap)(UnsafeActionMapToGlibNone(actionMap))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(actionName)))
 	defer C.free(unsafe.Pointer(carg1))
 
@@ -12295,10 +12314,11 @@ func (actionMap *ActionMapInstance) ParentLookupAction(actionName string) Action
 // If no action of this name is in the map then nothing happens.
 func (actionMap *ActionMapInstance) ParentRemoveAction(actionName string) {
 	var carg0 *C.GActionMap
-	var carg1 *C.gchar // in, none, string
+	var carg1 *C.gchar // in, none, converted
 
 	parentclass := (*C.GActionMapInterface)(classdata.PeekParentInterface(UnsafeActionMapToGlibNone(actionMap), uint64(TypeActionMap)))
 
+	carg0 = (*C.GActionMap)(UnsafeActionMapToGlibNone(actionMap))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(actionName)))
 	defer C.free(unsafe.Pointer(carg1))
 
@@ -14946,12 +14966,13 @@ func UnsafeApplyAppInfoOverrides[Instance AppInfo](gclass unsafe.Pointer, overri
 // application is capable of opening files with the given content type.
 func (appinfo *AppInfoInstance) ParentAddSupportsType(contentType string) (bool, error) {
 	var carg0 *C.GAppInfo
-	var carg1 *C.char    // in, none, string
+	var carg1 *C.char    // in, none, converted
 	var cret  C.gboolean // return
 	var _cerr *C.GError  // out, full, converted, nullable
 
 	parentclass := (*C.GAppInfoIface)(classdata.PeekParentInterface(UnsafeAppInfoToGlibNone(appinfo), uint64(TypeAppInfo)))
 
+	carg0 = (*C.GAppInfo)(UnsafeAppInfoToGlibNone(appinfo))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(contentType)))
 	defer C.free(unsafe.Pointer(carg1))
 
@@ -14987,6 +15008,8 @@ func (appinfo *AppInfoInstance) ParentCanDelete() bool {
 
 	parentclass := (*C.GAppInfoIface)(classdata.PeekParentInterface(UnsafeAppInfoToGlibNone(appinfo), uint64(TypeAppInfo)))
 
+	carg0 = (*C.GAppInfo)(UnsafeAppInfoToGlibNone(appinfo))
+
 	cret = C._gotk4_gio2_AppInfo_virtual_can_delete(unsafe.Pointer(parentclass.can_delete), carg0)
 	runtime.KeepAlive(appinfo)
 
@@ -15012,6 +15035,8 @@ func (appinfo *AppInfoInstance) ParentCanRemoveSupportsType() bool {
 	var cret  C.gboolean // return
 
 	parentclass := (*C.GAppInfoIface)(classdata.PeekParentInterface(UnsafeAppInfoToGlibNone(appinfo), uint64(TypeAppInfo)))
+
+	carg0 = (*C.GAppInfo)(UnsafeAppInfoToGlibNone(appinfo))
 
 	cret = C._gotk4_gio2_AppInfo_virtual_can_remove_supports_type(unsafe.Pointer(parentclass.can_remove_supports_type), carg0)
 	runtime.KeepAlive(appinfo)
@@ -15043,6 +15068,8 @@ func (appinfo *AppInfoInstance) ParentDoDelete() bool {
 
 	parentclass := (*C.GAppInfoIface)(classdata.PeekParentInterface(UnsafeAppInfoToGlibNone(appinfo), uint64(TypeAppInfo)))
 
+	carg0 = (*C.GAppInfo)(UnsafeAppInfoToGlibNone(appinfo))
+
 	cret = C._gotk4_gio2_AppInfo_virtual_do_delete(unsafe.Pointer(parentclass.do_delete), carg0)
 	runtime.KeepAlive(appinfo)
 
@@ -15068,6 +15095,8 @@ func (appinfo *AppInfoInstance) ParentDup() AppInfo {
 	var cret  *C.GAppInfo // return, full, converted
 
 	parentclass := (*C.GAppInfoIface)(classdata.PeekParentInterface(UnsafeAppInfoToGlibNone(appinfo), uint64(TypeAppInfo)))
+
+	carg0 = (*C.GAppInfo)(UnsafeAppInfoToGlibNone(appinfo))
 
 	cret = C._gotk4_gio2_AppInfo_virtual_dup(unsafe.Pointer(parentclass.dup), carg0)
 	runtime.KeepAlive(appinfo)
@@ -15102,6 +15131,7 @@ func (appinfo1 *AppInfoInstance) ParentEqual(appinfo2 AppInfo) bool {
 
 	parentclass := (*C.GAppInfoIface)(classdata.PeekParentInterface(UnsafeAppInfoToGlibNone(appinfo1), uint64(TypeAppInfo)))
 
+	carg0 = (*C.GAppInfo)(UnsafeAppInfoToGlibNone(appinfo1))
 	carg1 = (*C.GAppInfo)(UnsafeAppInfoToGlibNone(appinfo2))
 
 	cret = C._gotk4_gio2_AppInfo_virtual_equal(unsafe.Pointer(parentclass.equal), carg0, carg1)
@@ -15132,6 +15162,8 @@ func (appinfo *AppInfoInstance) ParentGetCommandline() string {
 
 	parentclass := (*C.GAppInfoIface)(classdata.PeekParentInterface(UnsafeAppInfoToGlibNone(appinfo), uint64(TypeAppInfo)))
 
+	carg0 = (*C.GAppInfo)(UnsafeAppInfoToGlibNone(appinfo))
+
 	cret = C._gotk4_gio2_AppInfo_virtual_get_commandline(unsafe.Pointer(parentclass.get_commandline), carg0)
 	runtime.KeepAlive(appinfo)
 
@@ -15157,6 +15189,8 @@ func (appinfo *AppInfoInstance) ParentGetDescription() string {
 	var cret  *C.char // return, none, string, nullable-string
 
 	parentclass := (*C.GAppInfoIface)(classdata.PeekParentInterface(UnsafeAppInfoToGlibNone(appinfo), uint64(TypeAppInfo)))
+
+	carg0 = (*C.GAppInfo)(UnsafeAppInfoToGlibNone(appinfo))
 
 	cret = C._gotk4_gio2_AppInfo_virtual_get_description(unsafe.Pointer(parentclass.get_description), carg0)
 	runtime.KeepAlive(appinfo)
@@ -15184,6 +15218,8 @@ func (appinfo *AppInfoInstance) ParentGetDisplayName() string {
 	var cret  *C.char // return, none, string
 
 	parentclass := (*C.GAppInfoIface)(classdata.PeekParentInterface(UnsafeAppInfoToGlibNone(appinfo), uint64(TypeAppInfo)))
+
+	carg0 = (*C.GAppInfo)(UnsafeAppInfoToGlibNone(appinfo))
 
 	cret = C._gotk4_gio2_AppInfo_virtual_get_display_name(unsafe.Pointer(parentclass.get_display_name), carg0)
 	runtime.KeepAlive(appinfo)
@@ -15213,6 +15249,8 @@ func (appinfo *AppInfoInstance) ParentGetExecutable() string {
 
 	parentclass := (*C.GAppInfoIface)(classdata.PeekParentInterface(UnsafeAppInfoToGlibNone(appinfo), uint64(TypeAppInfo)))
 
+	carg0 = (*C.GAppInfo)(UnsafeAppInfoToGlibNone(appinfo))
+
 	cret = C._gotk4_gio2_AppInfo_virtual_get_executable(unsafe.Pointer(parentclass.get_executable), carg0)
 	runtime.KeepAlive(appinfo)
 
@@ -15236,6 +15274,8 @@ func (appinfo *AppInfoInstance) ParentGetIcon() Icon {
 	var cret  *C.GIcon // return, none, converted, nullable
 
 	parentclass := (*C.GAppInfoIface)(classdata.PeekParentInterface(UnsafeAppInfoToGlibNone(appinfo), uint64(TypeAppInfo)))
+
+	carg0 = (*C.GAppInfo)(UnsafeAppInfoToGlibNone(appinfo))
 
 	cret = C._gotk4_gio2_AppInfo_virtual_get_icon(unsafe.Pointer(parentclass.get_icon), carg0)
 	runtime.KeepAlive(appinfo)
@@ -15268,6 +15308,8 @@ func (appinfo *AppInfoInstance) ParentGetID() string {
 
 	parentclass := (*C.GAppInfoIface)(classdata.PeekParentInterface(UnsafeAppInfoToGlibNone(appinfo), uint64(TypeAppInfo)))
 
+	carg0 = (*C.GAppInfo)(UnsafeAppInfoToGlibNone(appinfo))
+
 	cret = C._gotk4_gio2_AppInfo_virtual_get_id(unsafe.Pointer(parentclass.get_id), carg0)
 	runtime.KeepAlive(appinfo)
 
@@ -15293,6 +15335,8 @@ func (appinfo *AppInfoInstance) ParentGetName() string {
 	var cret  *C.char // return, none, string
 
 	parentclass := (*C.GAppInfoIface)(classdata.PeekParentInterface(UnsafeAppInfoToGlibNone(appinfo), uint64(TypeAppInfo)))
+
+	carg0 = (*C.GAppInfo)(UnsafeAppInfoToGlibNone(appinfo))
 
 	cret = C._gotk4_gio2_AppInfo_virtual_get_name(unsafe.Pointer(parentclass.get_name), carg0)
 	runtime.KeepAlive(appinfo)
@@ -15323,6 +15367,8 @@ func (appinfo *AppInfoInstance) ParentGetSupportedTypes() []string {
 	var cret  **C.char // return, transfer: none, C Pointers: 2, Name: array[utf8], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
 
 	parentclass := (*C.GAppInfoIface)(classdata.PeekParentInterface(UnsafeAppInfoToGlibNone(appinfo), uint64(TypeAppInfo)))
+
+	carg0 = (*C.GAppInfo)(UnsafeAppInfoToGlibNone(appinfo))
 
 	cret = C._gotk4_gio2_AppInfo_virtual_get_supported_types(unsafe.Pointer(parentclass.get_supported_types), carg0)
 	runtime.KeepAlive(appinfo)
@@ -15357,6 +15403,7 @@ func (appinfo *AppInfoInstance) ParentLaunchURIsFinish(result AsyncResult) (bool
 
 	parentclass := (*C.GAppInfoIface)(classdata.PeekParentInterface(UnsafeAppInfoToGlibNone(appinfo), uint64(TypeAppInfo)))
 
+	carg0 = (*C.GAppInfo)(UnsafeAppInfoToGlibNone(appinfo))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_AppInfo_virtual_launch_uris_finish(unsafe.Pointer(parentclass.launch_uris_finish), carg0, carg1, &_cerr)
@@ -15391,12 +15438,13 @@ func (appinfo *AppInfoInstance) ParentLaunchURIsFinish(result AsyncResult) (bool
 // Removes a supported type from an application, if possible.
 func (appinfo *AppInfoInstance) ParentRemoveSupportsType(contentType string) (bool, error) {
 	var carg0 *C.GAppInfo
-	var carg1 *C.char    // in, none, string
+	var carg1 *C.char    // in, none, converted
 	var cret  C.gboolean // return
 	var _cerr *C.GError  // out, full, converted, nullable
 
 	parentclass := (*C.GAppInfoIface)(classdata.PeekParentInterface(UnsafeAppInfoToGlibNone(appinfo), uint64(TypeAppInfo)))
 
+	carg0 = (*C.GAppInfo)(UnsafeAppInfoToGlibNone(appinfo))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(contentType)))
 	defer C.free(unsafe.Pointer(carg1))
 
@@ -15433,12 +15481,13 @@ func (appinfo *AppInfoInstance) ParentRemoveSupportsType(contentType string) (bo
 // Sets the application as the default handler for the given file extension.
 func (appinfo *AppInfoInstance) ParentSetAsDefaultForExtension(extension string) (bool, error) {
 	var carg0 *C.GAppInfo
-	var carg1 *C.char    // in, none, string
+	var carg1 *C.char    // in, none, converted
 	var cret  C.gboolean // return
 	var _cerr *C.GError  // out, full, converted, nullable
 
 	parentclass := (*C.GAppInfoIface)(classdata.PeekParentInterface(UnsafeAppInfoToGlibNone(appinfo), uint64(TypeAppInfo)))
 
+	carg0 = (*C.GAppInfo)(UnsafeAppInfoToGlibNone(appinfo))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(extension)))
 	defer C.free(unsafe.Pointer(carg1))
 
@@ -15474,12 +15523,13 @@ func (appinfo *AppInfoInstance) ParentSetAsDefaultForExtension(extension string)
 // Sets the application as the default handler for a given type.
 func (appinfo *AppInfoInstance) ParentSetAsDefaultForType(contentType string) (bool, error) {
 	var carg0 *C.GAppInfo
-	var carg1 *C.char    // in, none, string
+	var carg1 *C.char    // in, none, converted
 	var cret  C.gboolean // return
 	var _cerr *C.GError  // out, full, converted, nullable
 
 	parentclass := (*C.GAppInfoIface)(classdata.PeekParentInterface(UnsafeAppInfoToGlibNone(appinfo), uint64(TypeAppInfo)))
 
+	carg0 = (*C.GAppInfo)(UnsafeAppInfoToGlibNone(appinfo))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(contentType)))
 	defer C.free(unsafe.Pointer(carg1))
 
@@ -15518,12 +15568,13 @@ func (appinfo *AppInfoInstance) ParentSetAsDefaultForType(contentType string) (b
 // application for that content type.
 func (appinfo *AppInfoInstance) ParentSetAsLastUsedForType(contentType string) (bool, error) {
 	var carg0 *C.GAppInfo
-	var carg1 *C.char    // in, none, string
+	var carg1 *C.char    // in, none, converted
 	var cret  C.gboolean // return
 	var _cerr *C.GError  // out, full, converted, nullable
 
 	parentclass := (*C.GAppInfoIface)(classdata.PeekParentInterface(UnsafeAppInfoToGlibNone(appinfo), uint64(TypeAppInfo)))
 
+	carg0 = (*C.GAppInfo)(UnsafeAppInfoToGlibNone(appinfo))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(contentType)))
 	defer C.free(unsafe.Pointer(carg1))
 
@@ -15559,6 +15610,8 @@ func (appinfo *AppInfoInstance) ParentShouldShow() bool {
 
 	parentclass := (*C.GAppInfoIface)(classdata.PeekParentInterface(UnsafeAppInfoToGlibNone(appinfo), uint64(TypeAppInfo)))
 
+	carg0 = (*C.GAppInfo)(UnsafeAppInfoToGlibNone(appinfo))
+
 	cret = C._gotk4_gio2_AppInfo_virtual_should_show(unsafe.Pointer(parentclass.should_show), carg0)
 	runtime.KeepAlive(appinfo)
 
@@ -15585,6 +15638,8 @@ func (appinfo *AppInfoInstance) ParentSupportsFiles() bool {
 
 	parentclass := (*C.GAppInfoIface)(classdata.PeekParentInterface(UnsafeAppInfoToGlibNone(appinfo), uint64(TypeAppInfo)))
 
+	carg0 = (*C.GAppInfo)(UnsafeAppInfoToGlibNone(appinfo))
+
 	cret = C._gotk4_gio2_AppInfo_virtual_supports_files(unsafe.Pointer(parentclass.supports_files), carg0)
 	runtime.KeepAlive(appinfo)
 
@@ -15610,6 +15665,8 @@ func (appinfo *AppInfoInstance) ParentSupportsURIs() bool {
 	var cret  C.gboolean // return
 
 	parentclass := (*C.GAppInfoIface)(classdata.PeekParentInterface(UnsafeAppInfoToGlibNone(appinfo), uint64(TypeAppInfo)))
+
+	carg0 = (*C.GAppInfo)(UnsafeAppInfoToGlibNone(appinfo))
 
 	cret = C._gotk4_gio2_AppInfo_virtual_supports_uris(unsafe.Pointer(parentclass.supports_uris), carg0)
 	runtime.KeepAlive(appinfo)
@@ -16090,6 +16147,7 @@ func (initable *AsyncInitableInstance) ParentInitFinish(res AsyncResult) (bool, 
 
 	parentclass := (*C.GAsyncInitableIface)(classdata.PeekParentInterface(UnsafeAsyncInitableToGlibNone(initable), uint64(TypeAsyncInitable)))
 
+	carg0 = (*C.GAsyncInitable)(UnsafeAsyncInitableToGlibNone(initable))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(res))
 
 	cret = C._gotk4_gio2_AsyncInitable_virtual_init_finish(unsafe.Pointer(parentclass.init_finish), carg0, carg1, &_cerr)
@@ -16409,6 +16467,8 @@ func (res *AsyncResultInstance) ParentGetSourceObject() gobject.Object {
 	var cret  *C.GObject // return, full, converted, nullable
 
 	parentclass := (*C.GAsyncResultIface)(classdata.PeekParentInterface(UnsafeAsyncResultToGlibNone(res), uint64(TypeAsyncResult)))
+
+	carg0 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(res))
 
 	cret = C._gotk4_gio2_AsyncResult_virtual_get_source_object(unsafe.Pointer(parentclass.get_source_object), carg0)
 	runtime.KeepAlive(res)
@@ -17194,11 +17254,11 @@ func UnsafeApplyConverterOverrides[Instance Converter](gclass unsafe.Pointer, ov
 // (typically %G_IO_ERROR_PARTIAL_INPUT).
 func (converter *ConverterInstance) ParentConvert(inbuf []byte, outbuf []byte, flags ConverterFlags) (uint, uint, ConverterResult, error) {
 	var carg0 *C.GConverter
-	var carg1 unsafe.Pointer     // in, transfer: none, C Pointers: 1, Name: array[unknown], nullable, array (inner: <nil>, length-by: carg2)
-	var carg2 C.gsize            // implicit
-	var carg3 unsafe.Pointer     // in, transfer: none, C Pointers: 1, Name: array[unknown], array (inner: <nil>, length-by: carg4)
-	var carg4 C.gsize            // implicit
-	var carg5 C.GConverterFlags  // in, none, casted
+	var carg1 unsafe.Pointer     // in, none, converted
+	var carg2 C.gsize            // in, transfer: none, C Pointers: 1, Name: array[unknown], nullable, array (inner: <nil>, length-by: carg2)
+	var carg3 unsafe.Pointer     // implicit
+	var carg4 C.gsize            // in, transfer: none, C Pointers: 1, Name: array[unknown], array (inner: <nil>, length-by: carg4)
+	var carg5 C.GConverterFlags  // implicit
 	var carg6 C.gsize            // out, full, casted
 	var carg7 C.gsize            // out, full, casted
 	var cret  C.GConverterResult // return, none, casted
@@ -17206,6 +17266,7 @@ func (converter *ConverterInstance) ParentConvert(inbuf []byte, outbuf []byte, f
 
 	parentclass := (*C.GConverterIface)(classdata.PeekParentInterface(UnsafeConverterToGlibNone(converter), uint64(TypeConverter)))
 
+	carg0 = (*C.GConverter)(UnsafeConverterToGlibNone(converter))
 	_ = inbuf
 	_ = carg1
 	_ = carg2
@@ -17247,6 +17308,8 @@ func (converter *ConverterInstance) ParentReset() {
 	var carg0 *C.GConverter
 
 	parentclass := (*C.GConverterIface)(classdata.PeekParentInterface(UnsafeConverterToGlibNone(converter), uint64(TypeConverter)))
+
+	carg0 = (*C.GConverter)(UnsafeConverterToGlibNone(converter))
 
 	C._gotk4_gio2_Converter_virtual_reset(unsafe.Pointer(parentclass.reset), carg0)
 	runtime.KeepAlive(converter)
@@ -17560,6 +17623,8 @@ func (interface_ *DBusInterfaceInstance) ParentDupObject() DBusObject {
 
 	parentclass := (*C.GDBusInterfaceIface)(classdata.PeekParentInterface(UnsafeDBusInterfaceToGlibNone(interface_), uint64(TypeDBusInterface)))
 
+	carg0 = (*C.GDBusInterface)(UnsafeDBusInterfaceToGlibNone(interface_))
+
 	cret = C._gotk4_gio2_DBusInterface_virtual_dup_object(unsafe.Pointer(parentclass.dup_object), carg0)
 	runtime.KeepAlive(interface_)
 
@@ -17587,6 +17652,8 @@ func (interface_ *DBusInterfaceInstance) ParentGetInfo() *DBusInterfaceInfo {
 
 	parentclass := (*C.GDBusInterfaceIface)(classdata.PeekParentInterface(UnsafeDBusInterfaceToGlibNone(interface_), uint64(TypeDBusInterface)))
 
+	carg0 = (*C.GDBusInterface)(UnsafeDBusInterfaceToGlibNone(interface_))
+
 	cret = C._gotk4_gio2_DBusInterface_virtual_get_info(unsafe.Pointer(parentclass.get_info), carg0)
 	runtime.KeepAlive(interface_)
 
@@ -17609,10 +17676,11 @@ func (interface_ *DBusInterfaceInstance) ParentGetInfo() *DBusInterfaceInfo {
 // Note that @interface_ will hold a weak reference to @object.
 func (interface_ *DBusInterfaceInstance) ParentSetObject(object DBusObject) {
 	var carg0 *C.GDBusInterface
-	var carg1 *C.GDBusObject // in, none, converted, nullable
+	var carg1 *C.GDBusObject // in, none, converted
 
 	parentclass := (*C.GDBusInterfaceIface)(classdata.PeekParentInterface(UnsafeDBusInterfaceToGlibNone(interface_), uint64(TypeDBusInterface)))
 
+	carg0 = (*C.GDBusInterface)(UnsafeDBusInterfaceToGlibNone(interface_))
 	if object != nil {
 		carg1 = (*C.GDBusObject)(UnsafeDBusObjectToGlibNone(object))
 	}
@@ -18047,11 +18115,12 @@ func UnsafeApplyDBusObjectOverrides[Instance DBusObject](gclass unsafe.Pointer, 
 // @object, if any.
 func (object *DBusObjectInstance) ParentGetInterface(interfaceName string) DBusInterface {
 	var carg0 *C.GDBusObject
-	var carg1 *C.gchar          // in, none, string
+	var carg1 *C.gchar          // in, none, converted
 	var cret  *C.GDBusInterface // return, full, converted, nullable
 
 	parentclass := (*C.GDBusObjectIface)(classdata.PeekParentInterface(UnsafeDBusObjectToGlibNone(object), uint64(TypeDBusObject)))
 
+	carg0 = (*C.GDBusObject)(UnsafeDBusObjectToGlibNone(object))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(interfaceName)))
 	defer C.free(unsafe.Pointer(carg1))
 
@@ -18081,6 +18150,8 @@ func (object *DBusObjectInstance) ParentGetInterfaces() []DBusInterface {
 	var cret  *C.GList // container, transfer: full
 
 	parentclass := (*C.GDBusObjectIface)(classdata.PeekParentInterface(UnsafeDBusObjectToGlibNone(object), uint64(TypeDBusObject)))
+
+	carg0 = (*C.GDBusObject)(UnsafeDBusObjectToGlibNone(object))
 
 	cret = C._gotk4_gio2_DBusObject_virtual_get_interfaces(unsafe.Pointer(parentclass.get_interfaces), carg0)
 	runtime.KeepAlive(object)
@@ -18113,6 +18184,8 @@ func (object *DBusObjectInstance) ParentGetObjectPath() string {
 
 	parentclass := (*C.GDBusObjectIface)(classdata.PeekParentInterface(UnsafeDBusObjectToGlibNone(object), uint64(TypeDBusObject)))
 
+	carg0 = (*C.GDBusObject)(UnsafeDBusObjectToGlibNone(object))
+
 	cret = C._gotk4_gio2_DBusObject_virtual_get_object_path(unsafe.Pointer(parentclass.get_object_path), carg0)
 	runtime.KeepAlive(object)
 
@@ -18137,6 +18210,7 @@ func (object *DBusObjectInstance) ParentInterfaceAdded(interface_ DBusInterface)
 
 	parentclass := (*C.GDBusObjectIface)(classdata.PeekParentInterface(UnsafeDBusObjectToGlibNone(object), uint64(TypeDBusObject)))
 
+	carg0 = (*C.GDBusObject)(UnsafeDBusObjectToGlibNone(object))
 	carg1 = (*C.GDBusInterface)(UnsafeDBusInterfaceToGlibNone(interface_))
 
 	C._gotk4_gio2_DBusObject_virtual_interface_added(unsafe.Pointer(parentclass.interface_added), carg0, carg1)
@@ -18158,6 +18232,7 @@ func (object *DBusObjectInstance) ParentInterfaceRemoved(interface_ DBusInterfac
 
 	parentclass := (*C.GDBusObjectIface)(classdata.PeekParentInterface(UnsafeDBusObjectToGlibNone(object), uint64(TypeDBusObject)))
 
+	carg0 = (*C.GDBusObject)(UnsafeDBusObjectToGlibNone(object))
 	carg1 = (*C.GDBusInterface)(UnsafeDBusInterfaceToGlibNone(interface_))
 
 	C._gotk4_gio2_DBusObject_virtual_interface_removed(unsafe.Pointer(parentclass.interface_removed), carg0, carg1)
@@ -18808,12 +18883,13 @@ func UnsafeApplyDBusObjectManagerOverrides[Instance DBusObjectManager](gclass un
 // any.
 func (manager *DBusObjectManagerInstance) ParentGetInterface(objectPath string, interfaceName string) DBusInterface {
 	var carg0 *C.GDBusObjectManager
-	var carg1 *C.gchar          // in, none, string
+	var carg1 *C.gchar          // in, none, converted
 	var carg2 *C.gchar          // in, none, string
 	var cret  *C.GDBusInterface // return, full, converted, nullable
 
 	parentclass := (*C.GDBusObjectManagerIface)(classdata.PeekParentInterface(UnsafeDBusObjectManagerToGlibNone(manager), uint64(TypeDBusObjectManager)))
 
+	carg0 = (*C.GDBusObjectManager)(UnsafeDBusObjectManagerToGlibNone(manager))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(objectPath)))
 	defer C.free(unsafe.Pointer(carg1))
 	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(interfaceName)))
@@ -18847,11 +18923,12 @@ func (manager *DBusObjectManagerInstance) ParentGetInterface(objectPath string, 
 // Gets the #GDBusObject at @object_path, if any.
 func (manager *DBusObjectManagerInstance) ParentGetObject(objectPath string) DBusObject {
 	var carg0 *C.GDBusObjectManager
-	var carg1 *C.gchar       // in, none, string
+	var carg1 *C.gchar       // in, none, converted
 	var cret  *C.GDBusObject // return, full, converted, nullable
 
 	parentclass := (*C.GDBusObjectManagerIface)(classdata.PeekParentInterface(UnsafeDBusObjectManagerToGlibNone(manager), uint64(TypeDBusObjectManager)))
 
+	carg0 = (*C.GDBusObjectManager)(UnsafeDBusObjectManagerToGlibNone(manager))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(objectPath)))
 	defer C.free(unsafe.Pointer(carg1))
 
@@ -18882,6 +18959,8 @@ func (manager *DBusObjectManagerInstance) ParentGetObjectPath() string {
 
 	parentclass := (*C.GDBusObjectManagerIface)(classdata.PeekParentInterface(UnsafeDBusObjectManagerToGlibNone(manager), uint64(TypeDBusObjectManager)))
 
+	carg0 = (*C.GDBusObjectManager)(UnsafeDBusObjectManagerToGlibNone(manager))
+
 	cret = C._gotk4_gio2_DBusObjectManager_virtual_get_object_path(unsafe.Pointer(parentclass.get_object_path), carg0)
 	runtime.KeepAlive(manager)
 
@@ -18905,6 +18984,8 @@ func (manager *DBusObjectManagerInstance) ParentGetObjects() []DBusObject {
 	var cret  *C.GList // container, transfer: full
 
 	parentclass := (*C.GDBusObjectManagerIface)(classdata.PeekParentInterface(UnsafeDBusObjectManagerToGlibNone(manager), uint64(TypeDBusObjectManager)))
+
+	carg0 = (*C.GDBusObjectManager)(UnsafeDBusObjectManagerToGlibNone(manager))
 
 	cret = C._gotk4_gio2_DBusObjectManager_virtual_get_objects(unsafe.Pointer(parentclass.get_objects), carg0)
 	runtime.KeepAlive(manager)
@@ -18939,6 +19020,7 @@ func (manager *DBusObjectManagerInstance) ParentInterfaceAdded(object DBusObject
 
 	parentclass := (*C.GDBusObjectManagerIface)(classdata.PeekParentInterface(UnsafeDBusObjectManagerToGlibNone(manager), uint64(TypeDBusObjectManager)))
 
+	carg0 = (*C.GDBusObjectManager)(UnsafeDBusObjectManagerToGlibNone(manager))
 	carg1 = (*C.GDBusObject)(UnsafeDBusObjectToGlibNone(object))
 	carg2 = (*C.GDBusInterface)(UnsafeDBusInterfaceToGlibNone(interface_))
 
@@ -18964,6 +19046,7 @@ func (manager *DBusObjectManagerInstance) ParentInterfaceRemoved(object DBusObje
 
 	parentclass := (*C.GDBusObjectManagerIface)(classdata.PeekParentInterface(UnsafeDBusObjectManagerToGlibNone(manager), uint64(TypeDBusObjectManager)))
 
+	carg0 = (*C.GDBusObjectManager)(UnsafeDBusObjectManagerToGlibNone(manager))
 	carg1 = (*C.GDBusObject)(UnsafeDBusObjectToGlibNone(object))
 	carg2 = (*C.GDBusInterface)(UnsafeDBusInterfaceToGlibNone(interface_))
 
@@ -18987,6 +19070,7 @@ func (manager *DBusObjectManagerInstance) ParentObjectAdded(object DBusObject) {
 
 	parentclass := (*C.GDBusObjectManagerIface)(classdata.PeekParentInterface(UnsafeDBusObjectManagerToGlibNone(manager), uint64(TypeDBusObjectManager)))
 
+	carg0 = (*C.GDBusObjectManager)(UnsafeDBusObjectManagerToGlibNone(manager))
 	carg1 = (*C.GDBusObject)(UnsafeDBusObjectToGlibNone(object))
 
 	C._gotk4_gio2_DBusObjectManager_virtual_object_added(unsafe.Pointer(parentclass.object_added), carg0, carg1)
@@ -19008,6 +19092,7 @@ func (manager *DBusObjectManagerInstance) ParentObjectRemoved(object DBusObject)
 
 	parentclass := (*C.GDBusObjectManagerIface)(classdata.PeekParentInterface(UnsafeDBusObjectManagerToGlibNone(manager), uint64(TypeDBusObjectManager)))
 
+	carg0 = (*C.GDBusObjectManager)(UnsafeDBusObjectManagerToGlibNone(manager))
 	carg1 = (*C.GDBusObject)(UnsafeDBusObjectToGlibNone(object))
 
 	C._gotk4_gio2_DBusObjectManager_virtual_object_removed(unsafe.Pointer(parentclass.object_removed), carg0, carg1)
@@ -20358,11 +20443,12 @@ func UnsafeApplyDatagramBasedOverrides[Instance DatagramBased](gclass unsafe.Poi
 // This call never blocks.
 func (datagramBased *DatagramBasedInstance) ParentConditionCheck(condition glib.IOCondition) glib.IOCondition {
 	var carg0 *C.GDatagramBased
-	var carg1 C.GIOCondition // in, none, casted
+	var carg1 C.GIOCondition // in, none, converted
 	var cret  C.GIOCondition // return, none, casted
 
 	parentclass := (*C.GDatagramBasedInterface)(classdata.PeekParentInterface(UnsafeDatagramBasedToGlibNone(datagramBased), uint64(TypeDatagramBased)))
 
+	carg0 = (*C.GDatagramBased)(UnsafeDatagramBasedToGlibNone(datagramBased))
 	carg1 = C.GIOCondition(condition)
 
 	cret = C._gotk4_gio2_DatagramBased_virtual_condition_check(unsafe.Pointer(parentclass.condition_check), carg0, carg1)
@@ -20399,14 +20485,15 @@ func (datagramBased *DatagramBasedInstance) ParentConditionCheck(condition glib.
 // set appropriately (%G_IO_ERROR_CANCELLED or %G_IO_ERROR_TIMED_OUT).
 func (datagramBased *DatagramBasedInstance) ParentConditionWait(cancellable context.Context, condition glib.IOCondition, timeout int64) (bool, error) {
 	var carg0 *C.GDatagramBased
-	var carg3 *C.GCancellable // in, none, converted, nullable
-	var carg1 C.GIOCondition  // in, none, casted
+	var carg3 *C.GCancellable // in, none, converted
+	var carg1 C.GIOCondition  // in, none, converted, nullable
 	var carg2 C.gint64        // in, none, casted
 	var cret  C.gboolean      // return
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	parentclass := (*C.GDatagramBasedInterface)(classdata.PeekParentInterface(UnsafeDatagramBasedToGlibNone(datagramBased), uint64(TypeDatagramBased)))
 
+	carg0 = (*C.GDatagramBased)(UnsafeDatagramBasedToGlibNone(datagramBased))
 	if cancellable != nil {
 		carg3 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -20460,12 +20547,13 @@ func (datagramBased *DatagramBasedInstance) ParentConditionWait(cancellable cont
 // g_cancellable_is_cancelled().
 func (datagramBased *DatagramBasedInstance) ParentCreateSource(cancellable context.Context, condition glib.IOCondition) *glib.Source {
 	var carg0 *C.GDatagramBased
-	var carg2 *C.GCancellable // in, none, converted, nullable
-	var carg1 C.GIOCondition  // in, none, casted
+	var carg2 *C.GCancellable // in, none, converted
+	var carg1 C.GIOCondition  // in, none, converted, nullable
 	var cret  *C.GSource      // return, full, converted
 
 	parentclass := (*C.GDatagramBasedInterface)(classdata.PeekParentInterface(UnsafeDatagramBasedToGlibNone(datagramBased), uint64(TypeDatagramBased)))
 
+	carg0 = (*C.GDatagramBased)(UnsafeDatagramBasedToGlibNone(datagramBased))
 	if cancellable != nil {
 		carg2 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -20551,16 +20639,17 @@ func (datagramBased *DatagramBasedInstance) ParentCreateSource(cancellable conte
 // other error.
 func (datagramBased *DatagramBasedInstance) ParentReceiveMessages(cancellable context.Context, messages []InputMessage, flags int32, timeout int64) (int32, error) {
 	var carg0 *C.GDatagramBased
-	var carg5 *C.GCancellable  // in, none, converted, nullable
-	var carg1 *C.GInputMessage // in, transfer: none, C Pointers: 1, Name: array[InputMessage], array (inner: *typesystem.Record, length-by: carg2)
-	var carg2 C.guint          // implicit
-	var carg3 C.gint           // in, none, casted
+	var carg5 *C.GCancellable  // in, none, converted
+	var carg1 *C.GInputMessage // in, none, converted, nullable
+	var carg2 C.guint          // in, transfer: none, C Pointers: 1, Name: array[InputMessage], array (inner: *typesystem.Record, length-by: carg2)
+	var carg3 C.gint           // implicit
 	var carg4 C.gint64         // in, none, casted
 	var cret  C.gint           // return, none, casted
 	var _cerr *C.GError        // out, full, converted, nullable
 
 	parentclass := (*C.GDatagramBasedInterface)(classdata.PeekParentInterface(UnsafeDatagramBasedToGlibNone(datagramBased), uint64(TypeDatagramBased)))
 
+	carg0 = (*C.GDatagramBased)(UnsafeDatagramBasedToGlibNone(datagramBased))
 	if cancellable != nil {
 		carg5 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -20648,16 +20737,17 @@ func (datagramBased *DatagramBasedInstance) ParentReceiveMessages(cancellable co
 // cancelled, %G_IO_ERROR_CANCELLED is returned as with any other error.
 func (datagramBased *DatagramBasedInstance) ParentSendMessages(cancellable context.Context, messages []OutputMessage, flags int32, timeout int64) (int32, error) {
 	var carg0 *C.GDatagramBased
-	var carg5 *C.GCancellable   // in, none, converted, nullable
-	var carg1 *C.GOutputMessage // in, transfer: none, C Pointers: 1, Name: array[OutputMessage], array (inner: *typesystem.Record, length-by: carg2)
-	var carg2 C.guint           // implicit
-	var carg3 C.gint            // in, none, casted
+	var carg5 *C.GCancellable   // in, none, converted
+	var carg1 *C.GOutputMessage // in, none, converted, nullable
+	var carg2 C.guint           // in, transfer: none, C Pointers: 1, Name: array[OutputMessage], array (inner: *typesystem.Record, length-by: carg2)
+	var carg3 C.gint            // implicit
 	var carg4 C.gint64          // in, none, casted
 	var cret  C.gint            // return, none, casted
 	var _cerr *C.GError         // out, full, converted, nullable
 
 	parentclass := (*C.GDatagramBasedInterface)(classdata.PeekParentInterface(UnsafeDatagramBasedToGlibNone(datagramBased), uint64(TypeDatagramBased)))
 
+	carg0 = (*C.GDatagramBased)(UnsafeDatagramBasedToGlibNone(datagramBased))
 	if cancellable != nil {
 		carg5 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -23107,6 +23197,8 @@ func (drive *DriveInstance) ParentCanEject() bool {
 
 	parentclass := (*C.GDriveIface)(classdata.PeekParentInterface(UnsafeDriveToGlibNone(drive), uint64(TypeDrive)))
 
+	carg0 = (*C.GDrive)(UnsafeDriveToGlibNone(drive))
+
 	cret = C._gotk4_gio2_Drive_virtual_can_eject(unsafe.Pointer(parentclass.can_eject), carg0)
 	runtime.KeepAlive(drive)
 
@@ -23132,6 +23224,8 @@ func (drive *DriveInstance) ParentCanPollForMedia() bool {
 	var cret  C.gboolean // return
 
 	parentclass := (*C.GDriveIface)(classdata.PeekParentInterface(UnsafeDriveToGlibNone(drive), uint64(TypeDrive)))
+
+	carg0 = (*C.GDrive)(UnsafeDriveToGlibNone(drive))
 
 	cret = C._gotk4_gio2_Drive_virtual_can_poll_for_media(unsafe.Pointer(parentclass.can_poll_for_media), carg0)
 	runtime.KeepAlive(drive)
@@ -23159,6 +23253,8 @@ func (drive *DriveInstance) ParentCanStart() bool {
 
 	parentclass := (*C.GDriveIface)(classdata.PeekParentInterface(UnsafeDriveToGlibNone(drive), uint64(TypeDrive)))
 
+	carg0 = (*C.GDrive)(UnsafeDriveToGlibNone(drive))
+
 	cret = C._gotk4_gio2_Drive_virtual_can_start(unsafe.Pointer(parentclass.can_start), carg0)
 	runtime.KeepAlive(drive)
 
@@ -23184,6 +23280,8 @@ func (drive *DriveInstance) ParentCanStartDegraded() bool {
 	var cret  C.gboolean // return
 
 	parentclass := (*C.GDriveIface)(classdata.PeekParentInterface(UnsafeDriveToGlibNone(drive), uint64(TypeDrive)))
+
+	carg0 = (*C.GDrive)(UnsafeDriveToGlibNone(drive))
 
 	cret = C._gotk4_gio2_Drive_virtual_can_start_degraded(unsafe.Pointer(parentclass.can_start_degraded), carg0)
 	runtime.KeepAlive(drive)
@@ -23211,6 +23309,8 @@ func (drive *DriveInstance) ParentCanStop() bool {
 
 	parentclass := (*C.GDriveIface)(classdata.PeekParentInterface(UnsafeDriveToGlibNone(drive), uint64(TypeDrive)))
 
+	carg0 = (*C.GDrive)(UnsafeDriveToGlibNone(drive))
+
 	cret = C._gotk4_gio2_Drive_virtual_can_stop(unsafe.Pointer(parentclass.can_stop), carg0)
 	runtime.KeepAlive(drive)
 
@@ -23232,6 +23332,8 @@ func (drive *DriveInstance) ParentChanged() {
 
 	parentclass := (*C.GDriveIface)(classdata.PeekParentInterface(UnsafeDriveToGlibNone(drive), uint64(TypeDrive)))
 
+	carg0 = (*C.GDrive)(UnsafeDriveToGlibNone(drive))
+
 	C._gotk4_gio2_Drive_virtual_changed(unsafe.Pointer(parentclass.changed), carg0)
 	runtime.KeepAlive(drive)
 }
@@ -23245,6 +23347,8 @@ func (drive *DriveInstance) ParentDisconnected() {
 
 	parentclass := (*C.GDriveIface)(classdata.PeekParentInterface(UnsafeDriveToGlibNone(drive), uint64(TypeDrive)))
 
+	carg0 = (*C.GDrive)(UnsafeDriveToGlibNone(drive))
+
 	C._gotk4_gio2_Drive_virtual_disconnected(unsafe.Pointer(parentclass.disconnected), carg0)
 	runtime.KeepAlive(drive)
 }
@@ -23257,6 +23361,8 @@ func (drive *DriveInstance) ParentEjectButton() {
 	var carg0 *C.GDrive
 
 	parentclass := (*C.GDriveIface)(classdata.PeekParentInterface(UnsafeDriveToGlibNone(drive), uint64(TypeDrive)))
+
+	carg0 = (*C.GDrive)(UnsafeDriveToGlibNone(drive))
 
 	C._gotk4_gio2_Drive_virtual_eject_button(unsafe.Pointer(parentclass.eject_button), carg0)
 	runtime.KeepAlive(drive)
@@ -23285,6 +23391,7 @@ func (drive *DriveInstance) ParentEjectFinish(result AsyncResult) (bool, error) 
 
 	parentclass := (*C.GDriveIface)(classdata.PeekParentInterface(UnsafeDriveToGlibNone(drive), uint64(TypeDrive)))
 
+	carg0 = (*C.GDrive)(UnsafeDriveToGlibNone(drive))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_Drive_virtual_eject_finish(unsafe.Pointer(parentclass.eject_finish), carg0, carg1, &_cerr)
@@ -23326,6 +23433,7 @@ func (drive *DriveInstance) ParentEjectWithOperationFinish(result AsyncResult) (
 
 	parentclass := (*C.GDriveIface)(classdata.PeekParentInterface(UnsafeDriveToGlibNone(drive), uint64(TypeDrive)))
 
+	carg0 = (*C.GDrive)(UnsafeDriveToGlibNone(drive))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_Drive_virtual_eject_with_operation_finish(unsafe.Pointer(parentclass.eject_with_operation_finish), carg0, carg1, &_cerr)
@@ -23361,6 +23469,8 @@ func (drive *DriveInstance) ParentEnumerateIdentifiers() []string {
 
 	parentclass := (*C.GDriveIface)(classdata.PeekParentInterface(UnsafeDriveToGlibNone(drive), uint64(TypeDrive)))
 
+	carg0 = (*C.GDrive)(UnsafeDriveToGlibNone(drive))
+
 	cret = C._gotk4_gio2_Drive_virtual_enumerate_identifiers(unsafe.Pointer(parentclass.enumerate_identifiers), carg0)
 	runtime.KeepAlive(drive)
 
@@ -23386,6 +23496,8 @@ func (drive *DriveInstance) ParentGetIcon() Icon {
 	var cret  *C.GIcon // return, full, converted
 
 	parentclass := (*C.GDriveIface)(classdata.PeekParentInterface(UnsafeDriveToGlibNone(drive), uint64(TypeDrive)))
+
+	carg0 = (*C.GDrive)(UnsafeDriveToGlibNone(drive))
 
 	cret = C._gotk4_gio2_Drive_virtual_get_icon(unsafe.Pointer(parentclass.get_icon), carg0)
 	runtime.KeepAlive(drive)
@@ -23413,11 +23525,12 @@ func (drive *DriveInstance) ParentGetIcon() Icon {
 // %G_DRIVE_IDENTIFIER_KIND_UNIX_DEVICE.
 func (drive *DriveInstance) ParentGetIdentifier(kind string) string {
 	var carg0 *C.GDrive
-	var carg1 *C.char // in, none, string
+	var carg1 *C.char // in, none, converted
 	var cret  *C.char // return, full, string, nullable-string
 
 	parentclass := (*C.GDriveIface)(classdata.PeekParentInterface(UnsafeDriveToGlibNone(drive), uint64(TypeDrive)))
 
+	carg0 = (*C.GDrive)(UnsafeDriveToGlibNone(drive))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(kind)))
 	defer C.free(unsafe.Pointer(carg1))
 
@@ -23449,6 +23562,8 @@ func (drive *DriveInstance) ParentGetName() string {
 
 	parentclass := (*C.GDriveIface)(classdata.PeekParentInterface(UnsafeDriveToGlibNone(drive), uint64(TypeDrive)))
 
+	carg0 = (*C.GDrive)(UnsafeDriveToGlibNone(drive))
+
 	cret = C._gotk4_gio2_Drive_virtual_get_name(unsafe.Pointer(parentclass.get_name), carg0)
 	runtime.KeepAlive(drive)
 
@@ -23473,6 +23588,8 @@ func (drive *DriveInstance) ParentGetSortKey() string {
 	var cret  *C.gchar // return, none, string, nullable-string
 
 	parentclass := (*C.GDriveIface)(classdata.PeekParentInterface(UnsafeDriveToGlibNone(drive), uint64(TypeDrive)))
+
+	carg0 = (*C.GDrive)(UnsafeDriveToGlibNone(drive))
 
 	cret = C._gotk4_gio2_Drive_virtual_get_sort_key(unsafe.Pointer(parentclass.get_sort_key), carg0)
 	runtime.KeepAlive(drive)
@@ -23500,6 +23617,8 @@ func (drive *DriveInstance) ParentGetStartStopType() DriveStartStopType {
 
 	parentclass := (*C.GDriveIface)(classdata.PeekParentInterface(UnsafeDriveToGlibNone(drive), uint64(TypeDrive)))
 
+	carg0 = (*C.GDrive)(UnsafeDriveToGlibNone(drive))
+
 	cret = C._gotk4_gio2_Drive_virtual_get_start_stop_type(unsafe.Pointer(parentclass.get_start_stop_type), carg0)
 	runtime.KeepAlive(drive)
 
@@ -23523,6 +23642,8 @@ func (drive *DriveInstance) ParentGetSymbolicIcon() Icon {
 	var cret  *C.GIcon // return, full, converted
 
 	parentclass := (*C.GDriveIface)(classdata.PeekParentInterface(UnsafeDriveToGlibNone(drive), uint64(TypeDrive)))
+
+	carg0 = (*C.GDrive)(UnsafeDriveToGlibNone(drive))
 
 	cret = C._gotk4_gio2_Drive_virtual_get_symbolic_icon(unsafe.Pointer(parentclass.get_symbolic_icon), carg0)
 	runtime.KeepAlive(drive)
@@ -23550,6 +23671,8 @@ func (drive *DriveInstance) ParentGetVolumes() []Volume {
 	var cret  *C.GList // container, transfer: full
 
 	parentclass := (*C.GDriveIface)(classdata.PeekParentInterface(UnsafeDriveToGlibNone(drive), uint64(TypeDrive)))
+
+	carg0 = (*C.GDrive)(UnsafeDriveToGlibNone(drive))
 
 	cret = C._gotk4_gio2_Drive_virtual_get_volumes(unsafe.Pointer(parentclass.get_volumes), carg0)
 	runtime.KeepAlive(drive)
@@ -23584,6 +23707,8 @@ func (drive *DriveInstance) ParentHasMedia() bool {
 
 	parentclass := (*C.GDriveIface)(classdata.PeekParentInterface(UnsafeDriveToGlibNone(drive), uint64(TypeDrive)))
 
+	carg0 = (*C.GDrive)(UnsafeDriveToGlibNone(drive))
+
 	cret = C._gotk4_gio2_Drive_virtual_has_media(unsafe.Pointer(parentclass.has_media), carg0)
 	runtime.KeepAlive(drive)
 
@@ -23609,6 +23734,8 @@ func (drive *DriveInstance) ParentHasVolumes() bool {
 	var cret  C.gboolean // return
 
 	parentclass := (*C.GDriveIface)(classdata.PeekParentInterface(UnsafeDriveToGlibNone(drive), uint64(TypeDrive)))
+
+	carg0 = (*C.GDrive)(UnsafeDriveToGlibNone(drive))
 
 	cret = C._gotk4_gio2_Drive_virtual_has_volumes(unsafe.Pointer(parentclass.has_volumes), carg0)
 	runtime.KeepAlive(drive)
@@ -23636,6 +23763,8 @@ func (drive *DriveInstance) ParentIsMediaCheckAutomatic() bool {
 
 	parentclass := (*C.GDriveIface)(classdata.PeekParentInterface(UnsafeDriveToGlibNone(drive), uint64(TypeDrive)))
 
+	carg0 = (*C.GDrive)(UnsafeDriveToGlibNone(drive))
+
 	cret = C._gotk4_gio2_Drive_virtual_is_media_check_automatic(unsafe.Pointer(parentclass.is_media_check_automatic), carg0)
 	runtime.KeepAlive(drive)
 
@@ -23661,6 +23790,8 @@ func (drive *DriveInstance) ParentIsMediaRemovable() bool {
 	var cret  C.gboolean // return
 
 	parentclass := (*C.GDriveIface)(classdata.PeekParentInterface(UnsafeDriveToGlibNone(drive), uint64(TypeDrive)))
+
+	carg0 = (*C.GDrive)(UnsafeDriveToGlibNone(drive))
 
 	cret = C._gotk4_gio2_Drive_virtual_is_media_removable(unsafe.Pointer(parentclass.is_media_removable), carg0)
 	runtime.KeepAlive(drive)
@@ -23688,6 +23819,8 @@ func (drive *DriveInstance) ParentIsRemovable() bool {
 	var cret  C.gboolean // return
 
 	parentclass := (*C.GDriveIface)(classdata.PeekParentInterface(UnsafeDriveToGlibNone(drive), uint64(TypeDrive)))
+
+	carg0 = (*C.GDrive)(UnsafeDriveToGlibNone(drive))
 
 	cret = C._gotk4_gio2_Drive_virtual_is_removable(unsafe.Pointer(parentclass.is_removable), carg0)
 	runtime.KeepAlive(drive)
@@ -23722,6 +23855,7 @@ func (drive *DriveInstance) ParentPollForMediaFinish(result AsyncResult) (bool, 
 
 	parentclass := (*C.GDriveIface)(classdata.PeekParentInterface(UnsafeDriveToGlibNone(drive), uint64(TypeDrive)))
 
+	carg0 = (*C.GDrive)(UnsafeDriveToGlibNone(drive))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_Drive_virtual_poll_for_media_finish(unsafe.Pointer(parentclass.poll_for_media_finish), carg0, carg1, &_cerr)
@@ -23762,6 +23896,7 @@ func (drive *DriveInstance) ParentStartFinish(result AsyncResult) (bool, error) 
 
 	parentclass := (*C.GDriveIface)(classdata.PeekParentInterface(UnsafeDriveToGlibNone(drive), uint64(TypeDrive)))
 
+	carg0 = (*C.GDrive)(UnsafeDriveToGlibNone(drive))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_Drive_virtual_start_finish(unsafe.Pointer(parentclass.start_finish), carg0, carg1, &_cerr)
@@ -23790,6 +23925,8 @@ func (drive *DriveInstance) ParentStopButton() {
 
 	parentclass := (*C.GDriveIface)(classdata.PeekParentInterface(UnsafeDriveToGlibNone(drive), uint64(TypeDrive)))
 
+	carg0 = (*C.GDrive)(UnsafeDriveToGlibNone(drive))
+
 	C._gotk4_gio2_Drive_virtual_stop_button(unsafe.Pointer(parentclass.stop_button), carg0)
 	runtime.KeepAlive(drive)
 }
@@ -23815,6 +23952,7 @@ func (drive *DriveInstance) ParentStopFinish(result AsyncResult) (bool, error) {
 
 	parentclass := (*C.GDriveIface)(classdata.PeekParentInterface(UnsafeDriveToGlibNone(drive), uint64(TypeDrive)))
 
+	carg0 = (*C.GDrive)(UnsafeDriveToGlibNone(drive))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_Drive_virtual_stop_finish(unsafe.Pointer(parentclass.stop_finish), carg0, carg1, &_cerr)
@@ -25860,11 +25998,12 @@ func UnsafeApplyDtlsConnectionOverrides[Instance DtlsConnection](gclass unsafe.P
 func (connection *DtlsConnectionInstance) ParentAcceptCertificate(peerCert TlsCertificate, errors TLSCertificateFlags) bool {
 	var carg0 *C.GDtlsConnection
 	var carg1 *C.GTlsCertificate     // in, none, converted
-	var carg2 C.GTlsCertificateFlags // in, none, casted
+	var carg2 C.GTlsCertificateFlags // in, none, converted
 	var cret  C.gboolean             // return
 
 	parentclass := (*C.GDtlsConnectionInterface)(classdata.PeekParentInterface(UnsafeDtlsConnectionToGlibNone(connection), uint64(TypeDtlsConnection)))
 
+	carg0 = (*C.GDtlsConnection)(UnsafeDtlsConnectionToGlibNone(connection))
 	carg1 = (*C.GTlsCertificate)(UnsafeTlsCertificateToGlibNone(peerCert))
 	carg2 = C.GTlsCertificateFlags(errors)
 
@@ -25901,6 +26040,8 @@ func (conn *DtlsConnectionInstance) ParentGetNegotiatedProtocol() string {
 	var cret  *C.gchar // return, none, string, nullable-string
 
 	parentclass := (*C.GDtlsConnectionInterface)(classdata.PeekParentInterface(UnsafeDtlsConnectionToGlibNone(conn), uint64(TypeDtlsConnection)))
+
+	carg0 = (*C.GDtlsConnection)(UnsafeDtlsConnectionToGlibNone(conn))
 
 	cret = C._gotk4_gio2_DtlsConnection_virtual_get_negotiated_protocol(unsafe.Pointer(parentclass.get_negotiated_protocol), carg0)
 	runtime.KeepAlive(conn)
@@ -25954,12 +26095,13 @@ func (conn *DtlsConnectionInstance) ParentGetNegotiatedProtocol() string {
 // handshake.
 func (conn *DtlsConnectionInstance) ParentHandshake(cancellable context.Context) (bool, error) {
 	var carg0 *C.GDtlsConnection
-	var carg1 *C.GCancellable // in, none, converted, nullable
+	var carg1 *C.GCancellable // in, none, converted
 	var cret  C.gboolean      // return
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	parentclass := (*C.GDtlsConnectionInterface)(classdata.PeekParentInterface(UnsafeDtlsConnectionToGlibNone(conn), uint64(TypeDtlsConnection)))
 
+	carg0 = (*C.GDtlsConnection)(UnsafeDtlsConnectionToGlibNone(conn))
 	if cancellable != nil {
 		carg1 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -26003,6 +26145,7 @@ func (conn *DtlsConnectionInstance) ParentHandshakeFinish(result AsyncResult) (b
 
 	parentclass := (*C.GDtlsConnectionInterface)(classdata.PeekParentInterface(UnsafeDtlsConnectionToGlibNone(conn), uint64(TypeDtlsConnection)))
 
+	carg0 = (*C.GDtlsConnection)(UnsafeDtlsConnectionToGlibNone(conn))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_DtlsConnection_virtual_handshake_finish(unsafe.Pointer(parentclass.handshake_finish), carg0, carg1, &_cerr)
@@ -26042,10 +26185,11 @@ func (conn *DtlsConnectionInstance) ParentHandshakeFinish(result AsyncResult) (b
 // for a list of registered protocol IDs.
 func (conn *DtlsConnectionInstance) ParentSetAdvertisedProtocols(protocols []string) {
 	var carg0 *C.GDtlsConnection
-	var carg1 **C.gchar // in, transfer: none, C Pointers: 2, Name: array[utf8], nullable, array (inner: *typesystem.StringPrimitive, zero-terminated)
+	var carg1 **C.gchar // in, none, converted
 
 	parentclass := (*C.GDtlsConnectionInterface)(classdata.PeekParentInterface(UnsafeDtlsConnectionToGlibNone(conn), uint64(TypeDtlsConnection)))
 
+	carg0 = (*C.GDtlsConnection)(UnsafeDtlsConnectionToGlibNone(conn))
 	_ = protocols
 	_ = carg1
 	panic("unimplemented conversion of []string (const gchar* const*)")
@@ -26087,14 +26231,15 @@ func (conn *DtlsConnectionInstance) ParentSetAdvertisedProtocols(protocols []str
 // g_dtls_connection_shutdown() again to complete closing the #GDtlsConnection.
 func (conn *DtlsConnectionInstance) ParentShutdown(cancellable context.Context, shutdownRead bool, shutdownWrite bool) (bool, error) {
 	var carg0 *C.GDtlsConnection
-	var carg3 *C.GCancellable // in, none, converted, nullable
-	var carg1 C.gboolean      // in
+	var carg3 *C.GCancellable // in, none, converted
+	var carg1 C.gboolean      // in, none, converted, nullable
 	var carg2 C.gboolean      // in
 	var cret  C.gboolean      // return
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	parentclass := (*C.GDtlsConnectionInterface)(classdata.PeekParentInterface(UnsafeDtlsConnectionToGlibNone(conn), uint64(TypeDtlsConnection)))
 
+	carg0 = (*C.GDtlsConnection)(UnsafeDtlsConnectionToGlibNone(conn))
 	if cancellable != nil {
 		carg3 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -26146,6 +26291,7 @@ func (conn *DtlsConnectionInstance) ParentShutdownFinish(result AsyncResult) (bo
 
 	parentclass := (*C.GDtlsConnectionInterface)(classdata.PeekParentInterface(UnsafeDtlsConnectionToGlibNone(conn), uint64(TypeDtlsConnection)))
 
+	carg0 = (*C.GDtlsConnection)(UnsafeDtlsConnectionToGlibNone(conn))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_DtlsConnection_virtual_shutdown_finish(unsafe.Pointer(parentclass.shutdown_finish), carg0, carg1, &_cerr)
@@ -39378,13 +39524,14 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 // possible too, and depend on what kind of filesystem the file is on.
 func (file *FileInstance) ParentAppendTo(cancellable context.Context, flags FileCreateFlags) (FileOutputStream, error) {
 	var carg0 *C.GFile
-	var carg2 *C.GCancellable      // in, none, converted, nullable
-	var carg1 C.GFileCreateFlags   // in, none, casted
+	var carg2 *C.GCancellable      // in, none, converted
+	var carg1 C.GFileCreateFlags   // in, none, converted, nullable
 	var cret  *C.GFileOutputStream // return, full, converted
 	var _cerr *C.GError            // out, full, converted, nullable
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file), uint64(TypeFile)))
 
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
 	if cancellable != nil {
 		carg2 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -39428,6 +39575,7 @@ func (file *FileInstance) ParentAppendToFinish(res AsyncResult) (FileOutputStrea
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file), uint64(TypeFile)))
 
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(res))
 
 	cret = C._gotk4_gio2_File_virtual_append_to_finish(unsafe.Pointer(parentclass.append_to_finish), carg0, carg1, &_cerr)
@@ -39466,6 +39614,7 @@ func (file *FileInstance) ParentCopyFinish(res AsyncResult) (bool, error) {
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file), uint64(TypeFile)))
 
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(res))
 
 	cret = C._gotk4_gio2_File_virtual_copy_finish(unsafe.Pointer(parentclass.copy_finish), carg0, carg1, &_cerr)
@@ -39520,13 +39669,14 @@ func (file *FileInstance) ParentCopyFinish(res AsyncResult) (bool, error) {
 // of filesystem the file is on.
 func (file *FileInstance) ParentCreate(cancellable context.Context, flags FileCreateFlags) (FileOutputStream, error) {
 	var carg0 *C.GFile
-	var carg2 *C.GCancellable      // in, none, converted, nullable
-	var carg1 C.GFileCreateFlags   // in, none, casted
+	var carg2 *C.GCancellable      // in, none, converted
+	var carg1 C.GFileCreateFlags   // in, none, converted, nullable
 	var cret  *C.GFileOutputStream // return, full, converted
 	var _cerr *C.GError            // out, full, converted, nullable
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file), uint64(TypeFile)))
 
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
 	if cancellable != nil {
 		carg2 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -39570,6 +39720,7 @@ func (file *FileInstance) ParentCreateFinish(res AsyncResult) (FileOutputStream,
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file), uint64(TypeFile)))
 
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(res))
 
 	cret = C._gotk4_gio2_File_virtual_create_finish(unsafe.Pointer(parentclass.create_finish), carg0, carg1, &_cerr)
@@ -39626,13 +39777,14 @@ func (file *FileInstance) ParentCreateFinish(res AsyncResult) (FileOutputStream,
 // streaming, rather than just opening for reading or writing.
 func (file *FileInstance) ParentCreateReadwrite(cancellable context.Context, flags FileCreateFlags) (FileIOStream, error) {
 	var carg0 *C.GFile
-	var carg2 *C.GCancellable    // in, none, converted, nullable
-	var carg1 C.GFileCreateFlags // in, none, casted
+	var carg2 *C.GCancellable    // in, none, converted
+	var carg1 C.GFileCreateFlags // in, none, converted, nullable
 	var cret  *C.GFileIOStream   // return, full, converted
 	var _cerr *C.GError          // out, full, converted, nullable
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file), uint64(TypeFile)))
 
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
 	if cancellable != nil {
 		carg2 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -39676,6 +39828,7 @@ func (file *FileInstance) ParentCreateReadwriteFinish(res AsyncResult) (FileIOSt
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file), uint64(TypeFile)))
 
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(res))
 
 	cret = C._gotk4_gio2_File_virtual_create_readwrite_finish(unsafe.Pointer(parentclass.create_readwrite_finish), carg0, carg1, &_cerr)
@@ -39729,12 +39882,13 @@ func (file *FileInstance) ParentCreateReadwriteFinish(res AsyncResult) (FileIOSt
 // was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.
 func (file *FileInstance) ParentDeleteFile(cancellable context.Context) (bool, error) {
 	var carg0 *C.GFile
-	var carg1 *C.GCancellable // in, none, converted, nullable
+	var carg1 *C.GCancellable // in, none, converted
 	var cret  C.gboolean      // return
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file), uint64(TypeFile)))
 
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
 	if cancellable != nil {
 		carg1 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -39777,6 +39931,7 @@ func (file *FileInstance) ParentDeleteFileFinish(result AsyncResult) (bool, erro
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file), uint64(TypeFile)))
 
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_File_virtual_delete_file_finish(unsafe.Pointer(parentclass.delete_file_finish), carg0, carg1, &_cerr)
@@ -39819,6 +39974,8 @@ func (file *FileInstance) ParentDup() File {
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file), uint64(TypeFile)))
 
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
+
 	cret = C._gotk4_gio2_File_virtual_dup(unsafe.Pointer(parentclass.dup), carg0)
 	runtime.KeepAlive(file)
 
@@ -39854,6 +40011,7 @@ func (file *FileInstance) ParentEjectMountableFinish(result AsyncResult) (bool, 
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file), uint64(TypeFile)))
 
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_File_virtual_eject_mountable_finish(unsafe.Pointer(parentclass.eject_mountable_finish), carg0, carg1, &_cerr)
@@ -39895,6 +40053,7 @@ func (file *FileInstance) ParentEjectMountableWithOperationFinish(result AsyncRe
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file), uint64(TypeFile)))
 
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_File_virtual_eject_mountable_with_operation_finish(unsafe.Pointer(parentclass.eject_mountable_with_operation_finish), carg0, carg1, &_cerr)
@@ -39956,14 +40115,15 @@ func (file *FileInstance) ParentEjectMountableWithOperationFinish(result AsyncRe
 // error will be returned. Other errors are possible too.
 func (file *FileInstance) ParentEnumerateChildren(cancellable context.Context, attributes string, flags FileQueryInfoFlags) (FileEnumerator, error) {
 	var carg0 *C.GFile
-	var carg3 *C.GCancellable       // in, none, converted, nullable
-	var carg1 *C.char               // in, none, string
-	var carg2 C.GFileQueryInfoFlags // in, none, casted
+	var carg3 *C.GCancellable       // in, none, converted
+	var carg1 *C.char               // in, none, converted, nullable
+	var carg2 C.GFileQueryInfoFlags // in, none, string
 	var cret  *C.GFileEnumerator    // return, full, converted
 	var _cerr *C.GError             // out, full, converted, nullable
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file), uint64(TypeFile)))
 
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
 	if cancellable != nil {
 		carg3 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -40010,6 +40170,7 @@ func (file *FileInstance) ParentEnumerateChildrenFinish(res AsyncResult) (FileEn
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file), uint64(TypeFile)))
 
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(res))
 
 	cret = C._gotk4_gio2_File_virtual_enumerate_children_finish(unsafe.Pointer(parentclass.enumerate_children_finish), carg0, carg1, &_cerr)
@@ -40052,6 +40213,7 @@ func (file1 *FileInstance) ParentEqual(file2 File) bool {
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file1), uint64(TypeFile)))
 
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file1))
 	carg1 = (*C.GFile)(UnsafeFileToGlibNone(file2))
 
 	cret = C._gotk4_gio2_File_virtual_equal(unsafe.Pointer(parentclass.equal), carg0, carg1)
@@ -40091,12 +40253,13 @@ func (file1 *FileInstance) ParentEqual(file2 File) bool {
 // was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.
 func (file *FileInstance) ParentFindEnclosingMount(cancellable context.Context) (Mount, error) {
 	var carg0 *C.GFile
-	var carg1 *C.GCancellable // in, none, converted, nullable
+	var carg1 *C.GCancellable // in, none, converted
 	var cret  *C.GMount       // return, full, converted
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file), uint64(TypeFile)))
 
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
 	if cancellable != nil {
 		carg1 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -40138,6 +40301,7 @@ func (file *FileInstance) ParentFindEnclosingMountFinish(res AsyncResult) (Mount
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file), uint64(TypeFile)))
 
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(res))
 
 	cret = C._gotk4_gio2_File_virtual_find_enclosing_mount_finish(unsafe.Pointer(parentclass.find_enclosing_mount_finish), carg0, carg1, &_cerr)
@@ -40181,6 +40345,8 @@ func (file *FileInstance) ParentGetBasename() string {
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file), uint64(TypeFile)))
 
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
+
 	cret = C._gotk4_gio2_File_virtual_get_basename(unsafe.Pointer(parentclass.get_basename), carg0)
 	runtime.KeepAlive(file)
 
@@ -40216,12 +40382,13 @@ func (file *FileInstance) ParentGetBasename() string {
 // This call does no blocking I/O.
 func (file *FileInstance) ParentGetChildForDisplayName(displayName string) (File, error) {
 	var carg0 *C.GFile
-	var carg1 *C.char   // in, none, string
+	var carg1 *C.char   // in, none, converted
 	var cret  *C.GFile  // return, full, converted
 	var _cerr *C.GError // out, full, converted, nullable
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file), uint64(TypeFile)))
 
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(displayName)))
 	defer C.free(unsafe.Pointer(carg1))
 
@@ -40257,6 +40424,8 @@ func (file *FileInstance) ParentGetParent() File {
 	var cret  *C.GFile // return, full, converted, nullable
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file), uint64(TypeFile)))
+
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
 
 	cret = C._gotk4_gio2_File_virtual_get_parent(unsafe.Pointer(parentclass.get_parent), carg0)
 	runtime.KeepAlive(file)
@@ -40297,6 +40466,8 @@ func (file *FileInstance) ParentGetParseName() string {
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file), uint64(TypeFile)))
 
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
+
 	cret = C._gotk4_gio2_File_virtual_get_parse_name(unsafe.Pointer(parentclass.get_parse_name), carg0)
 	runtime.KeepAlive(file)
 
@@ -40324,6 +40495,8 @@ func (file *FileInstance) ParentGetPath() string {
 	var cret  *C.char // return, full, string, nullable
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file), uint64(TypeFile)))
+
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
 
 	cret = C._gotk4_gio2_File_virtual_get_path(unsafe.Pointer(parentclass.get_path), carg0)
 	runtime.KeepAlive(file)
@@ -40359,6 +40532,7 @@ func (parent *FileInstance) ParentGetRelativePath(descendant File) string {
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(parent), uint64(TypeFile)))
 
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(parent))
 	carg1 = (*C.GFile)(UnsafeFileToGlibNone(descendant))
 
 	cret = C._gotk4_gio2_File_virtual_get_relative_path(unsafe.Pointer(parentclass.get_relative_path), carg0, carg1)
@@ -40390,6 +40564,8 @@ func (file *FileInstance) ParentGetURI() string {
 	var cret  *C.char // return, full, string
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file), uint64(TypeFile)))
+
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
 
 	cret = C._gotk4_gio2_File_virtual_get_uri(unsafe.Pointer(parentclass.get_uri), carg0)
 	runtime.KeepAlive(file)
@@ -40426,6 +40602,8 @@ func (file *FileInstance) ParentGetURIScheme() string {
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file), uint64(TypeFile)))
 
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
+
 	cret = C._gotk4_gio2_File_virtual_get_uri_scheme(unsafe.Pointer(parentclass.get_uri_scheme), carg0)
 	runtime.KeepAlive(file)
 
@@ -40455,11 +40633,12 @@ func (file *FileInstance) ParentGetURIScheme() string {
 // This call does no blocking I/O.
 func (file *FileInstance) ParentHasURIScheme(uriScheme string) bool {
 	var carg0 *C.GFile
-	var carg1 *C.char    // in, none, string
+	var carg1 *C.char    // in, none, converted
 	var cret  C.gboolean // return
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file), uint64(TypeFile)))
 
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(uriScheme)))
 	defer C.free(unsafe.Pointer(carg1))
 
@@ -40491,6 +40670,8 @@ func (file *FileInstance) ParentHash() uint {
 	var cret  C.guint // return, none, casted
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file), uint64(TypeFile)))
+
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
 
 	cret = C._gotk4_gio2_File_virtual_hash(unsafe.Pointer(parentclass.hash), carg0)
 	runtime.KeepAlive(file)
@@ -40525,6 +40706,8 @@ func (file *FileInstance) ParentIsNative() bool {
 	var cret  C.gboolean // return
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file), uint64(TypeFile)))
+
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
 
 	cret = C._gotk4_gio2_File_virtual_is_native(unsafe.Pointer(parentclass.is_native), carg0)
 	runtime.KeepAlive(file)
@@ -40567,12 +40750,13 @@ func (file *FileInstance) ParentIsNative() bool {
 // was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.
 func (file *FileInstance) ParentMakeDirectory(cancellable context.Context) (bool, error) {
 	var carg0 *C.GFile
-	var carg1 *C.GCancellable // in, none, converted, nullable
+	var carg1 *C.GCancellable // in, none, converted
 	var cret  C.gboolean      // return
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file), uint64(TypeFile)))
 
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
 	if cancellable != nil {
 		carg1 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -40616,6 +40800,7 @@ func (file *FileInstance) ParentMakeDirectoryFinish(result AsyncResult) (bool, e
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file), uint64(TypeFile)))
 
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_File_virtual_make_directory_finish(unsafe.Pointer(parentclass.make_directory_finish), carg0, carg1, &_cerr)
@@ -40658,13 +40843,14 @@ func (file *FileInstance) ParentMakeDirectoryFinish(result AsyncResult) (bool, e
 // was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.
 func (file *FileInstance) ParentMakeSymbolicLink(cancellable context.Context, symlinkValue string) (bool, error) {
 	var carg0 *C.GFile
-	var carg2 *C.GCancellable // in, none, converted, nullable
-	var carg1 *C.char         // in, none, string
+	var carg2 *C.GCancellable // in, none, converted
+	var carg1 *C.char         // in, none, converted, nullable
 	var cret  C.gboolean      // return
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file), uint64(TypeFile)))
 
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
 	if cancellable != nil {
 		carg2 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -40711,6 +40897,7 @@ func (file *FileInstance) ParentMakeSymbolicLinkFinish(result AsyncResult) (bool
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file), uint64(TypeFile)))
 
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_File_virtual_make_symbolic_link_finish(unsafe.Pointer(parentclass.make_symbolic_link_finish), carg0, carg1, &_cerr)
@@ -40759,6 +40946,7 @@ func (file *FileInstance) ParentMeasureDiskUsageFinish(result AsyncResult) (uint
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file), uint64(TypeFile)))
 
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_File_virtual_measure_disk_usage_finish(unsafe.Pointer(parentclass.measure_disk_usage_finish), carg0, carg1, &carg2, &carg3, &carg4, &_cerr)
@@ -40812,13 +41000,14 @@ func (file *FileInstance) ParentMeasureDiskUsageFinish(result AsyncResult) (uint
 // you must register individual watches with g_file_monitor().
 func (file *FileInstance) ParentMonitorDir(cancellable context.Context, flags FileMonitorFlags) (FileMonitor, error) {
 	var carg0 *C.GFile
-	var carg2 *C.GCancellable     // in, none, converted, nullable
-	var carg1 C.GFileMonitorFlags // in, none, casted
+	var carg2 *C.GCancellable     // in, none, converted
+	var carg1 C.GFileMonitorFlags // in, none, converted, nullable
 	var cret  *C.GFileMonitor     // return, full, converted
 	var _cerr *C.GError           // out, full, converted, nullable
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file), uint64(TypeFile)))
 
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
 	if cancellable != nil {
 		carg2 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -40870,13 +41059,14 @@ func (file *FileInstance) ParentMonitorDir(cancellable context.Context, flags Fi
 // backend and/or filesystem type.
 func (file *FileInstance) ParentMonitorFile(cancellable context.Context, flags FileMonitorFlags) (FileMonitor, error) {
 	var carg0 *C.GFile
-	var carg2 *C.GCancellable     // in, none, converted, nullable
-	var carg1 C.GFileMonitorFlags // in, none, casted
+	var carg2 *C.GCancellable     // in, none, converted
+	var carg1 C.GFileMonitorFlags // in, none, converted, nullable
 	var cret  *C.GFileMonitor     // return, full, converted
 	var _cerr *C.GError           // out, full, converted, nullable
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file), uint64(TypeFile)))
 
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
 	if cancellable != nil {
 		carg2 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -40919,6 +41109,7 @@ func (location *FileInstance) ParentMountEnclosingVolumeFinish(result AsyncResul
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(location), uint64(TypeFile)))
 
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(location))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_File_virtual_mount_enclosing_volume_finish(unsafe.Pointer(parentclass.mount_enclosing_volume_finish), carg0, carg1, &_cerr)
@@ -40962,6 +41153,7 @@ func (file *FileInstance) ParentMountMountableFinish(result AsyncResult) (File, 
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file), uint64(TypeFile)))
 
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_File_virtual_mount_mountable_finish(unsafe.Pointer(parentclass.mount_mountable_finish), carg0, carg1, &_cerr)
@@ -41001,6 +41193,7 @@ func (file *FileInstance) ParentMoveFinish(result AsyncResult) (bool, error) {
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file), uint64(TypeFile)))
 
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_File_virtual_move_finish(unsafe.Pointer(parentclass.move_finish), carg0, carg1, &_cerr)
@@ -41050,12 +41243,13 @@ func (file *FileInstance) ParentMoveFinish(result AsyncResult) (bool, error) {
 // for reading or writing.
 func (file *FileInstance) ParentOpenReadwrite(cancellable context.Context) (FileIOStream, error) {
 	var carg0 *C.GFile
-	var carg1 *C.GCancellable  // in, none, converted, nullable
+	var carg1 *C.GCancellable  // in, none, converted
 	var cret  *C.GFileIOStream // return, full, converted
 	var _cerr *C.GError        // out, full, converted, nullable
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file), uint64(TypeFile)))
 
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
 	if cancellable != nil {
 		carg1 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -41097,6 +41291,7 @@ func (file *FileInstance) ParentOpenReadwriteFinish(res AsyncResult) (FileIOStre
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file), uint64(TypeFile)))
 
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(res))
 
 	cret = C._gotk4_gio2_File_virtual_open_readwrite_finish(unsafe.Pointer(parentclass.open_readwrite_finish), carg0, carg1, &_cerr)
@@ -41138,6 +41333,7 @@ func (file *FileInstance) ParentPollMountableFinish(result AsyncResult) (bool, e
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file), uint64(TypeFile)))
 
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_File_virtual_poll_mountable_finish(unsafe.Pointer(parentclass.poll_mountable_finish), carg0, carg1, &_cerr)
@@ -41189,6 +41385,7 @@ func (prefix *FileInstance) ParentPrefixMatches(file File) bool {
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(prefix), uint64(TypeFile)))
 
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(prefix))
 	carg1 = (*C.GFile)(UnsafeFileToGlibNone(file))
 
 	cret = C._gotk4_gio2_File_virtual_prefix_matches(unsafe.Pointer(parentclass.prefix_matches), carg0, carg1)
@@ -41245,13 +41442,14 @@ func (prefix *FileInstance) ParentPrefixMatches(file File) bool {
 // kind of filesystem the file is on.
 func (file *FileInstance) ParentQueryFilesystemInfo(cancellable context.Context, attributes string) (FileInfo, error) {
 	var carg0 *C.GFile
-	var carg2 *C.GCancellable // in, none, converted, nullable
-	var carg1 *C.char         // in, none, string
+	var carg2 *C.GCancellable // in, none, converted
+	var carg1 *C.char         // in, none, converted, nullable
 	var cret  *C.GFileInfo    // return, full, converted
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file), uint64(TypeFile)))
 
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
 	if cancellable != nil {
 		carg2 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -41296,6 +41494,7 @@ func (file *FileInstance) ParentQueryFilesystemInfoFinish(res AsyncResult) (File
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file), uint64(TypeFile)))
 
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(res))
 
 	cret = C._gotk4_gio2_File_virtual_query_filesystem_info_finish(unsafe.Pointer(parentclass.query_filesystem_info_finish), carg0, carg1, &_cerr)
@@ -41360,14 +41559,15 @@ func (file *FileInstance) ParentQueryFilesystemInfoFinish(res AsyncResult) (File
 // filesystem the file is on.
 func (file *FileInstance) ParentQueryInfo(cancellable context.Context, attributes string, flags FileQueryInfoFlags) (FileInfo, error) {
 	var carg0 *C.GFile
-	var carg3 *C.GCancellable       // in, none, converted, nullable
-	var carg1 *C.char               // in, none, string
-	var carg2 C.GFileQueryInfoFlags // in, none, casted
+	var carg3 *C.GCancellable       // in, none, converted
+	var carg1 *C.char               // in, none, converted, nullable
+	var carg2 C.GFileQueryInfoFlags // in, none, string
 	var cret  *C.GFileInfo          // return, full, converted
 	var _cerr *C.GError             // out, full, converted, nullable
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file), uint64(TypeFile)))
 
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
 	if cancellable != nil {
 		carg3 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -41414,6 +41614,7 @@ func (file *FileInstance) ParentQueryInfoFinish(res AsyncResult) (FileInfo, erro
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file), uint64(TypeFile)))
 
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(res))
 
 	cret = C._gotk4_gio2_File_virtual_query_info_finish(unsafe.Pointer(parentclass.query_info_finish), carg0, carg1, &_cerr)
@@ -41456,12 +41657,13 @@ func (file *FileInstance) ParentQueryInfoFinish(res AsyncResult) (FileInfo, erro
 // was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.
 func (file *FileInstance) ParentQuerySettableAttributes(cancellable context.Context) (*FileAttributeInfoList, error) {
 	var carg0 *C.GFile
-	var carg1 *C.GCancellable           // in, none, converted, nullable
+	var carg1 *C.GCancellable           // in, none, converted
 	var cret  *C.GFileAttributeInfoList // return, full, converted
 	var _cerr *C.GError                 // out, full, converted, nullable
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file), uint64(TypeFile)))
 
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
 	if cancellable != nil {
 		carg1 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -41503,12 +41705,13 @@ func (file *FileInstance) ParentQuerySettableAttributes(cancellable context.Cont
 // was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.
 func (file *FileInstance) ParentQueryWritableNamespaces(cancellable context.Context) (*FileAttributeInfoList, error) {
 	var carg0 *C.GFile
-	var carg1 *C.GCancellable           // in, none, converted, nullable
+	var carg1 *C.GCancellable           // in, none, converted
 	var cret  *C.GFileAttributeInfoList // return, full, converted
 	var _cerr *C.GError                 // out, full, converted, nullable
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file), uint64(TypeFile)))
 
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
 	if cancellable != nil {
 		carg1 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -41550,6 +41753,7 @@ func (file *FileInstance) ParentReadFinish(res AsyncResult) (FileInputStream, er
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file), uint64(TypeFile)))
 
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(res))
 
 	cret = C._gotk4_gio2_File_virtual_read_finish(unsafe.Pointer(parentclass.read_finish), carg0, carg1, &_cerr)
@@ -41592,12 +41796,13 @@ func (file *FileInstance) ParentReadFinish(res AsyncResult) (FileInputStream, er
 // on what kind of filesystem the file is on.
 func (file *FileInstance) ParentReadFn(cancellable context.Context) (FileInputStream, error) {
 	var carg0 *C.GFile
-	var carg1 *C.GCancellable     // in, none, converted, nullable
+	var carg1 *C.GCancellable     // in, none, converted
 	var cret  *C.GFileInputStream // return, full, converted
 	var _cerr *C.GError           // out, full, converted, nullable
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file), uint64(TypeFile)))
 
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
 	if cancellable != nil {
 		carg1 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -41677,15 +41882,16 @@ func (file *FileInstance) ParentReadFn(cancellable context.Context) (FileInputSt
 // possible too, and depend on what kind of filesystem the file is on.
 func (file *FileInstance) ParentReplace(cancellable context.Context, etag string, makeBackup bool, flags FileCreateFlags) (FileOutputStream, error) {
 	var carg0 *C.GFile
-	var carg4 *C.GCancellable      // in, none, converted, nullable
-	var carg1 *C.char              // in, none, string, nullable-string
-	var carg2 C.gboolean           // in
-	var carg3 C.GFileCreateFlags   // in, none, casted
+	var carg4 *C.GCancellable      // in, none, converted
+	var carg1 *C.char              // in, none, converted, nullable
+	var carg2 C.gboolean           // in, none, string, nullable-string
+	var carg3 C.GFileCreateFlags   // in
 	var cret  *C.GFileOutputStream // return, full, converted
 	var _cerr *C.GError            // out, full, converted, nullable
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file), uint64(TypeFile)))
 
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
 	if cancellable != nil {
 		carg4 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -41738,6 +41944,7 @@ func (file *FileInstance) ParentReplaceFinish(res AsyncResult) (FileOutputStream
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file), uint64(TypeFile)))
 
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(res))
 
 	cret = C._gotk4_gio2_File_virtual_replace_finish(unsafe.Pointer(parentclass.replace_finish), carg0, carg1, &_cerr)
@@ -41784,15 +41991,16 @@ func (file *FileInstance) ParentReplaceFinish(res AsyncResult) (FileOutputStream
 // rather than just opening for reading or writing.
 func (file *FileInstance) ParentReplaceReadwrite(cancellable context.Context, etag string, makeBackup bool, flags FileCreateFlags) (FileIOStream, error) {
 	var carg0 *C.GFile
-	var carg4 *C.GCancellable    // in, none, converted, nullable
-	var carg1 *C.char            // in, none, string, nullable-string
-	var carg2 C.gboolean         // in
-	var carg3 C.GFileCreateFlags // in, none, casted
+	var carg4 *C.GCancellable    // in, none, converted
+	var carg1 *C.char            // in, none, converted, nullable
+	var carg2 C.gboolean         // in, none, string, nullable-string
+	var carg3 C.GFileCreateFlags // in
 	var cret  *C.GFileIOStream   // return, full, converted
 	var _cerr *C.GError          // out, full, converted, nullable
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file), uint64(TypeFile)))
 
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
 	if cancellable != nil {
 		carg4 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -41845,6 +42053,7 @@ func (file *FileInstance) ParentReplaceReadwriteFinish(res AsyncResult) (FileIOS
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file), uint64(TypeFile)))
 
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(res))
 
 	cret = C._gotk4_gio2_File_virtual_replace_readwrite_finish(unsafe.Pointer(parentclass.replace_readwrite_finish), carg0, carg1, &_cerr)
@@ -41881,11 +42090,12 @@ func (file *FileInstance) ParentReplaceReadwriteFinish(res AsyncResult) (FileIOS
 // is done absolutely (without taking @file path as base).
 func (file *FileInstance) ParentResolveRelativePath(relativePath string) File {
 	var carg0 *C.GFile
-	var carg1 *C.char  // in, none, string
+	var carg1 *C.char  // in, none, converted
 	var cret  *C.GFile // return, full, converted
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file), uint64(TypeFile)))
 
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(relativePath)))
 	defer C.free(unsafe.Pointer(carg1))
 
@@ -41923,6 +42133,7 @@ func (file *FileInstance) ParentSetAttributesFinish(result AsyncResult) (FileInf
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file), uint64(TypeFile)))
 
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_File_virtual_set_attributes_finish(unsafe.Pointer(parentclass.set_attributes_finish), carg0, carg1, &carg2, &_cerr)
@@ -41973,14 +42184,15 @@ func (file *FileInstance) ParentSetAttributesFinish(result AsyncResult) (FileInf
 // was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.
 func (file *FileInstance) ParentSetAttributesFromInfo(cancellable context.Context, info FileInfo, flags FileQueryInfoFlags) (bool, error) {
 	var carg0 *C.GFile
-	var carg3 *C.GCancellable       // in, none, converted, nullable
-	var carg1 *C.GFileInfo          // in, none, converted
-	var carg2 C.GFileQueryInfoFlags // in, none, casted
+	var carg3 *C.GCancellable       // in, none, converted
+	var carg1 *C.GFileInfo          // in, none, converted, nullable
+	var carg2 C.GFileQueryInfoFlags // in, none, converted
 	var cret  C.gboolean            // return
 	var _cerr *C.GError             // out, full, converted, nullable
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file), uint64(TypeFile)))
 
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
 	if cancellable != nil {
 		carg3 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -42037,13 +42249,14 @@ func (file *FileInstance) ParentSetAttributesFromInfo(cancellable context.Contex
 // was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.
 func (file *FileInstance) ParentSetDisplayName(cancellable context.Context, displayName string) (File, error) {
 	var carg0 *C.GFile
-	var carg2 *C.GCancellable // in, none, converted, nullable
-	var carg1 *C.char         // in, none, string
+	var carg2 *C.GCancellable // in, none, converted
+	var carg1 *C.char         // in, none, converted, nullable
 	var cret  *C.GFile        // return, full, converted
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file), uint64(TypeFile)))
 
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
 	if cancellable != nil {
 		carg2 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -42088,6 +42301,7 @@ func (file *FileInstance) ParentSetDisplayNameFinish(res AsyncResult) (File, err
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file), uint64(TypeFile)))
 
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(res))
 
 	cret = C._gotk4_gio2_File_virtual_set_display_name_finish(unsafe.Pointer(parentclass.set_display_name_finish), carg0, carg1, &_cerr)
@@ -42129,6 +42343,7 @@ func (file *FileInstance) ParentStartMountableFinish(result AsyncResult) (bool, 
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file), uint64(TypeFile)))
 
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_File_virtual_start_mountable_finish(unsafe.Pointer(parentclass.start_mountable_finish), carg0, carg1, &_cerr)
@@ -42172,6 +42387,7 @@ func (file *FileInstance) ParentStopMountableFinish(result AsyncResult) (bool, e
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file), uint64(TypeFile)))
 
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_File_virtual_stop_mountable_finish(unsafe.Pointer(parentclass.stop_mountable_finish), carg0, carg1, &_cerr)
@@ -42219,12 +42435,13 @@ func (file *FileInstance) ParentStopMountableFinish(result AsyncResult) (bool, e
 // was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.
 func (file *FileInstance) ParentTrash(cancellable context.Context) (bool, error) {
 	var carg0 *C.GFile
-	var carg1 *C.GCancellable // in, none, converted, nullable
+	var carg1 *C.GCancellable // in, none, converted
 	var cret  C.gboolean      // return
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file), uint64(TypeFile)))
 
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
 	if cancellable != nil {
 		carg1 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -42268,6 +42485,7 @@ func (file *FileInstance) ParentTrashFinish(result AsyncResult) (bool, error) {
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file), uint64(TypeFile)))
 
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_File_virtual_trash_finish(unsafe.Pointer(parentclass.trash_finish), carg0, carg1, &_cerr)
@@ -42314,6 +42532,7 @@ func (file *FileInstance) ParentUnmountMountableFinish(result AsyncResult) (bool
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file), uint64(TypeFile)))
 
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_File_virtual_unmount_mountable_finish(unsafe.Pointer(parentclass.unmount_mountable_finish), carg0, carg1, &_cerr)
@@ -42358,6 +42577,7 @@ func (file *FileInstance) ParentUnmountMountableWithOperationFinish(result Async
 
 	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file), uint64(TypeFile)))
 
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_File_virtual_unmount_mountable_with_operation_finish(unsafe.Pointer(parentclass.unmount_mountable_with_operation_finish), carg0, carg1, &_cerr)
@@ -42730,11 +42950,12 @@ func UnsafeApplyIconOverrides[Instance Icon](gclass unsafe.Pointer, overrides Ic
 // Checks if two icons are equal.
 func (icon1 *IconInstance) ParentEqual(icon2 Icon) bool {
 	var carg0 *C.GIcon
-	var carg1 *C.GIcon   // in, none, converted, nullable
+	var carg1 *C.GIcon   // in, none, converted
 	var cret  C.gboolean // return
 
 	parentclass := (*C.GIconIface)(classdata.PeekParentInterface(UnsafeIconToGlibNone(icon1), uint64(TypeIcon)))
 
+	carg0 = (*C.GIcon)(UnsafeIconToGlibNone(icon1))
 	if icon2 != nil {
 		carg1 = (*C.GIcon)(UnsafeIconToGlibNone(icon2))
 	}
@@ -42765,6 +42986,8 @@ func (icon *IconInstance) ParentHash() uint {
 	var cret  C.guint // return, none, casted
 
 	parentclass := (*C.GIconIface)(classdata.PeekParentInterface(UnsafeIconToGlibNone(icon), uint64(TypeIcon)))
+
+	carg0 = (*C.GIcon)(UnsafeIconToGlibNone(icon))
 
 	cret = C._gotk4_gio2_Icon_virtual_hash(unsafe.Pointer(parentclass.hash), carg0)
 	runtime.KeepAlive(icon)
@@ -43180,12 +43403,13 @@ func UnsafeApplyInitableOverrides[Instance Initable](gclass unsafe.Pointer, over
 // instance.
 func (initable *InitableInstance) ParentInit(cancellable context.Context) (bool, error) {
 	var carg0 *C.GInitable
-	var carg1 *C.GCancellable // in, none, converted, nullable
+	var carg1 *C.GCancellable // in, none, converted
 	var cret  C.gboolean      // return
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	parentclass := (*C.GInitableIface)(classdata.PeekParentInterface(UnsafeInitableToGlibNone(initable), uint64(TypeInitable)))
 
+	carg0 = (*C.GInitable)(UnsafeInitableToGlibNone(initable))
 	if cancellable != nil {
 		carg1 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -43706,6 +43930,8 @@ func (list *ListModelInstance) ParentGetItemType() gobject.Type {
 
 	parentclass := (*C.GListModelInterface)(classdata.PeekParentInterface(UnsafeListModelToGlibNone(list), uint64(TypeListModel)))
 
+	carg0 = (*C.GListModel)(UnsafeListModelToGlibNone(list))
+
 	cret = C._gotk4_gio2_ListModel_virtual_get_item_type(unsafe.Pointer(parentclass.get_item_type), carg0)
 	runtime.KeepAlive(list)
 
@@ -43733,6 +43959,8 @@ func (list *ListModelInstance) ParentGetNItems() uint {
 	var cret  C.guint // return, none, casted
 
 	parentclass := (*C.GListModelInterface)(classdata.PeekParentInterface(UnsafeListModelToGlibNone(list), uint64(TypeListModel)))
+
+	carg0 = (*C.GListModel)(UnsafeListModelToGlibNone(list))
 
 	cret = C._gotk4_gio2_ListModel_virtual_get_n_items(unsafe.Pointer(parentclass.get_n_items), carg0)
 	runtime.KeepAlive(list)
@@ -44136,14 +44364,15 @@ func UnsafeApplyLoadableIconOverrides[Instance LoadableIcon](gclass unsafe.Point
 // see g_loadable_icon_load_async().
 func (icon *LoadableIconInstance) ParentLoad(cancellable context.Context, size int32) (string, InputStream, error) {
 	var carg0 *C.GLoadableIcon
-	var carg3 *C.GCancellable // in, none, converted, nullable
-	var carg1 C.int           // in, none, casted
+	var carg3 *C.GCancellable // in, none, converted
+	var carg1 C.int           // in, none, converted, nullable
 	var carg2 *C.char         // out, full, string
 	var cret  *C.GInputStream // return, full, converted
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	parentclass := (*C.GLoadableIconIface)(classdata.PeekParentInterface(UnsafeLoadableIconToGlibNone(icon), uint64(TypeLoadableIcon)))
 
+	carg0 = (*C.GLoadableIcon)(UnsafeLoadableIconToGlibNone(icon))
 	if cancellable != nil {
 		carg3 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -44192,6 +44421,7 @@ func (icon *LoadableIconInstance) ParentLoadFinish(res AsyncResult) (string, Inp
 
 	parentclass := (*C.GLoadableIconIface)(classdata.PeekParentInterface(UnsafeLoadableIconToGlibNone(icon), uint64(TypeLoadableIcon)))
 
+	carg0 = (*C.GLoadableIcon)(UnsafeLoadableIconToGlibNone(icon))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(res))
 
 	cret = C._gotk4_gio2_LoadableIcon_virtual_load_finish(unsafe.Pointer(parentclass.load_finish), carg0, carg1, &carg2, &_cerr)
@@ -44415,10 +44645,11 @@ func UnsafeApplyMemoryMonitorOverrides[Instance MemoryMonitor](gclass unsafe.Poi
 //  #GMemoryMonitor::low-memory-warning signal.
 func (monitor *MemoryMonitorInstance) ParentLowMemoryWarning(level MemoryMonitorWarningLevel) {
 	var carg0 *C.GMemoryMonitor
-	var carg1 C.GMemoryMonitorWarningLevel // in, none, casted
+	var carg1 C.GMemoryMonitorWarningLevel // in, none, converted
 
 	parentclass := (*C.GMemoryMonitorInterface)(classdata.PeekParentInterface(UnsafeMemoryMonitorToGlibNone(monitor), uint64(TypeMemoryMonitor)))
 
+	carg0 = (*C.GMemoryMonitor)(UnsafeMemoryMonitorToGlibNone(monitor))
 	carg1 = C.GMemoryMonitorWarningLevel(level)
 
 	C._gotk4_gio2_MemoryMonitor_virtual_low_memory_warning(unsafe.Pointer(parentclass.low_memory_warning), carg0, carg1)
@@ -46766,6 +46997,8 @@ func (mount *MountInstance) ParentCanEject() bool {
 
 	parentclass := (*C.GMountIface)(classdata.PeekParentInterface(UnsafeMountToGlibNone(mount), uint64(TypeMount)))
 
+	carg0 = (*C.GMount)(UnsafeMountToGlibNone(mount))
+
 	cret = C._gotk4_gio2_Mount_virtual_can_eject(unsafe.Pointer(parentclass.can_eject), carg0)
 	runtime.KeepAlive(mount)
 
@@ -46792,6 +47025,8 @@ func (mount *MountInstance) ParentCanUnmount() bool {
 
 	parentclass := (*C.GMountIface)(classdata.PeekParentInterface(UnsafeMountToGlibNone(mount), uint64(TypeMount)))
 
+	carg0 = (*C.GMount)(UnsafeMountToGlibNone(mount))
+
 	cret = C._gotk4_gio2_Mount_virtual_can_unmount(unsafe.Pointer(parentclass.can_unmount), carg0)
 	runtime.KeepAlive(mount)
 
@@ -46812,6 +47047,8 @@ func (mount *MountInstance) ParentChanged() {
 	var carg0 *C.GMount
 
 	parentclass := (*C.GMountIface)(classdata.PeekParentInterface(UnsafeMountToGlibNone(mount), uint64(TypeMount)))
+
+	carg0 = (*C.GMount)(UnsafeMountToGlibNone(mount))
 
 	C._gotk4_gio2_Mount_virtual_changed(unsafe.Pointer(parentclass.changed), carg0)
 	runtime.KeepAlive(mount)
@@ -46841,6 +47078,7 @@ func (mount *MountInstance) ParentEjectFinish(result AsyncResult) (bool, error) 
 
 	parentclass := (*C.GMountIface)(classdata.PeekParentInterface(UnsafeMountToGlibNone(mount), uint64(TypeMount)))
 
+	carg0 = (*C.GMount)(UnsafeMountToGlibNone(mount))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_Mount_virtual_eject_finish(unsafe.Pointer(parentclass.eject_finish), carg0, carg1, &_cerr)
@@ -46882,6 +47120,7 @@ func (mount *MountInstance) ParentEjectWithOperationFinish(result AsyncResult) (
 
 	parentclass := (*C.GMountIface)(classdata.PeekParentInterface(UnsafeMountToGlibNone(mount), uint64(TypeMount)))
 
+	carg0 = (*C.GMount)(UnsafeMountToGlibNone(mount))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_Mount_virtual_eject_with_operation_finish(unsafe.Pointer(parentclass.eject_with_operation_finish), carg0, carg1, &_cerr)
@@ -46917,6 +47156,8 @@ func (mount *MountInstance) ParentGetDefaultLocation() File {
 
 	parentclass := (*C.GMountIface)(classdata.PeekParentInterface(UnsafeMountToGlibNone(mount), uint64(TypeMount)))
 
+	carg0 = (*C.GMount)(UnsafeMountToGlibNone(mount))
+
 	cret = C._gotk4_gio2_Mount_virtual_get_default_location(unsafe.Pointer(parentclass.get_default_location), carg0)
 	runtime.KeepAlive(mount)
 
@@ -46944,6 +47185,8 @@ func (mount *MountInstance) ParentGetDrive() Drive {
 
 	parentclass := (*C.GMountIface)(classdata.PeekParentInterface(UnsafeMountToGlibNone(mount), uint64(TypeMount)))
 
+	carg0 = (*C.GMount)(UnsafeMountToGlibNone(mount))
+
 	cret = C._gotk4_gio2_Mount_virtual_get_drive(unsafe.Pointer(parentclass.get_drive), carg0)
 	runtime.KeepAlive(mount)
 
@@ -46970,6 +47213,8 @@ func (mount *MountInstance) ParentGetIcon() Icon {
 
 	parentclass := (*C.GMountIface)(classdata.PeekParentInterface(UnsafeMountToGlibNone(mount), uint64(TypeMount)))
 
+	carg0 = (*C.GMount)(UnsafeMountToGlibNone(mount))
+
 	cret = C._gotk4_gio2_Mount_virtual_get_icon(unsafe.Pointer(parentclass.get_icon), carg0)
 	runtime.KeepAlive(mount)
 
@@ -46993,6 +47238,8 @@ func (mount *MountInstance) ParentGetName() string {
 	var cret  *C.char // return, full, string
 
 	parentclass := (*C.GMountIface)(classdata.PeekParentInterface(UnsafeMountToGlibNone(mount), uint64(TypeMount)))
+
+	carg0 = (*C.GMount)(UnsafeMountToGlibNone(mount))
 
 	cret = C._gotk4_gio2_Mount_virtual_get_name(unsafe.Pointer(parentclass.get_name), carg0)
 	runtime.KeepAlive(mount)
@@ -47019,6 +47266,8 @@ func (mount *MountInstance) ParentGetRoot() File {
 
 	parentclass := (*C.GMountIface)(classdata.PeekParentInterface(UnsafeMountToGlibNone(mount), uint64(TypeMount)))
 
+	carg0 = (*C.GMount)(UnsafeMountToGlibNone(mount))
+
 	cret = C._gotk4_gio2_Mount_virtual_get_root(unsafe.Pointer(parentclass.get_root), carg0)
 	runtime.KeepAlive(mount)
 
@@ -47042,6 +47291,8 @@ func (mount *MountInstance) ParentGetSortKey() string {
 	var cret  *C.gchar // return, none, string, nullable-string
 
 	parentclass := (*C.GMountIface)(classdata.PeekParentInterface(UnsafeMountToGlibNone(mount), uint64(TypeMount)))
+
+	carg0 = (*C.GMount)(UnsafeMountToGlibNone(mount))
 
 	cret = C._gotk4_gio2_Mount_virtual_get_sort_key(unsafe.Pointer(parentclass.get_sort_key), carg0)
 	runtime.KeepAlive(mount)
@@ -47068,6 +47319,8 @@ func (mount *MountInstance) ParentGetSymbolicIcon() Icon {
 	var cret  *C.GIcon // return, full, converted
 
 	parentclass := (*C.GMountIface)(classdata.PeekParentInterface(UnsafeMountToGlibNone(mount), uint64(TypeMount)))
+
+	carg0 = (*C.GMount)(UnsafeMountToGlibNone(mount))
 
 	cret = C._gotk4_gio2_Mount_virtual_get_symbolic_icon(unsafe.Pointer(parentclass.get_symbolic_icon), carg0)
 	runtime.KeepAlive(mount)
@@ -47096,6 +47349,8 @@ func (mount *MountInstance) ParentGetUUID() string {
 
 	parentclass := (*C.GMountIface)(classdata.PeekParentInterface(UnsafeMountToGlibNone(mount), uint64(TypeMount)))
 
+	carg0 = (*C.GMount)(UnsafeMountToGlibNone(mount))
+
 	cret = C._gotk4_gio2_Mount_virtual_get_uuid(unsafe.Pointer(parentclass.get_uuid), carg0)
 	runtime.KeepAlive(mount)
 
@@ -47122,6 +47377,8 @@ func (mount *MountInstance) ParentGetVolume() Volume {
 	var cret  *C.GVolume // return, full, converted, nullable
 
 	parentclass := (*C.GMountIface)(classdata.PeekParentInterface(UnsafeMountToGlibNone(mount), uint64(TypeMount)))
+
+	carg0 = (*C.GMount)(UnsafeMountToGlibNone(mount))
 
 	cret = C._gotk4_gio2_Mount_virtual_get_volume(unsafe.Pointer(parentclass.get_volume), carg0)
 	runtime.KeepAlive(mount)
@@ -47160,6 +47417,7 @@ func (mount *MountInstance) ParentGuessContentTypeFinish(result AsyncResult) ([]
 
 	parentclass := (*C.GMountIface)(classdata.PeekParentInterface(UnsafeMountToGlibNone(mount), uint64(TypeMount)))
 
+	carg0 = (*C.GMount)(UnsafeMountToGlibNone(mount))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_Mount_virtual_guess_content_type_finish(unsafe.Pointer(parentclass.guess_content_type_finish), carg0, carg1, &_cerr)
@@ -47204,13 +47462,14 @@ func (mount *MountInstance) ParentGuessContentTypeFinish(result AsyncResult) ([]
 // see g_mount_guess_content_type() for the asynchronous version.
 func (mount *MountInstance) ParentGuessContentTypeSync(cancellable context.Context, forceRescan bool) ([]string, error) {
 	var carg0 *C.GMount
-	var carg2 *C.GCancellable // in, none, converted, nullable
-	var carg1 C.gboolean      // in
+	var carg2 *C.GCancellable // in, none, converted
+	var carg1 C.gboolean      // in, none, converted, nullable
 	var cret  **C.gchar       // return, transfer: full, C Pointers: 2, Name: array[utf8], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	parentclass := (*C.GMountIface)(classdata.PeekParentInterface(UnsafeMountToGlibNone(mount), uint64(TypeMount)))
 
+	carg0 = (*C.GMount)(UnsafeMountToGlibNone(mount))
 	if cancellable != nil {
 		carg2 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -47245,6 +47504,8 @@ func (mount *MountInstance) ParentPreUnmount() {
 
 	parentclass := (*C.GMountIface)(classdata.PeekParentInterface(UnsafeMountToGlibNone(mount), uint64(TypeMount)))
 
+	carg0 = (*C.GMount)(UnsafeMountToGlibNone(mount))
+
 	C._gotk4_gio2_Mount_virtual_pre_unmount(unsafe.Pointer(parentclass.pre_unmount), carg0)
 	runtime.KeepAlive(mount)
 }
@@ -47271,6 +47532,7 @@ func (mount *MountInstance) ParentRemountFinish(result AsyncResult) (bool, error
 
 	parentclass := (*C.GMountIface)(classdata.PeekParentInterface(UnsafeMountToGlibNone(mount), uint64(TypeMount)))
 
+	carg0 = (*C.GMount)(UnsafeMountToGlibNone(mount))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_Mount_virtual_remount_finish(unsafe.Pointer(parentclass.remount_finish), carg0, carg1, &_cerr)
@@ -47314,6 +47576,7 @@ func (mount *MountInstance) ParentUnmountFinish(result AsyncResult) (bool, error
 
 	parentclass := (*C.GMountIface)(classdata.PeekParentInterface(UnsafeMountToGlibNone(mount), uint64(TypeMount)))
 
+	carg0 = (*C.GMount)(UnsafeMountToGlibNone(mount))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_Mount_virtual_unmount_finish(unsafe.Pointer(parentclass.unmount_finish), carg0, carg1, &_cerr)
@@ -47355,6 +47618,7 @@ func (mount *MountInstance) ParentUnmountWithOperationFinish(result AsyncResult)
 
 	parentclass := (*C.GMountIface)(classdata.PeekParentInterface(UnsafeMountToGlibNone(mount), uint64(TypeMount)))
 
+	carg0 = (*C.GMount)(UnsafeMountToGlibNone(mount))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_Mount_virtual_unmount_with_operation_finish(unsafe.Pointer(parentclass.unmount_with_operation_finish), carg0, carg1, &_cerr)
@@ -47382,6 +47646,8 @@ func (mount *MountInstance) ParentUnmounted() {
 	var carg0 *C.GMount
 
 	parentclass := (*C.GMountIface)(classdata.PeekParentInterface(UnsafeMountToGlibNone(mount), uint64(TypeMount)))
+
+	carg0 = (*C.GMount)(UnsafeMountToGlibNone(mount))
 
 	C._gotk4_gio2_Mount_virtual_unmounted(unsafe.Pointer(parentclass.unmounted), carg0)
 	runtime.KeepAlive(mount)
@@ -48056,13 +48322,14 @@ func UnsafeApplyNetworkMonitorOverrides[Instance NetworkMonitor](gclass unsafe.P
 // want to block, you should use g_network_monitor_can_reach_async().
 func (monitor *NetworkMonitorInstance) ParentCanReach(cancellable context.Context, connectable SocketConnectable) (bool, error) {
 	var carg0 *C.GNetworkMonitor
-	var carg2 *C.GCancellable       // in, none, converted, nullable
-	var carg1 *C.GSocketConnectable // in, none, converted
+	var carg2 *C.GCancellable       // in, none, converted
+	var carg1 *C.GSocketConnectable // in, none, converted, nullable
 	var cret  C.gboolean            // return
 	var _cerr *C.GError             // out, full, converted, nullable
 
 	parentclass := (*C.GNetworkMonitorInterface)(classdata.PeekParentInterface(UnsafeNetworkMonitorToGlibNone(monitor), uint64(TypeNetworkMonitor)))
 
+	carg0 = (*C.GNetworkMonitor)(UnsafeNetworkMonitorToGlibNone(monitor))
 	if cancellable != nil {
 		carg2 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -48108,6 +48375,7 @@ func (monitor *NetworkMonitorInstance) ParentCanReachFinish(result AsyncResult) 
 
 	parentclass := (*C.GNetworkMonitorInterface)(classdata.PeekParentInterface(UnsafeNetworkMonitorToGlibNone(monitor), uint64(TypeNetworkMonitor)))
 
+	carg0 = (*C.GNetworkMonitor)(UnsafeNetworkMonitorToGlibNone(monitor))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_NetworkMonitor_virtual_can_reach_finish(unsafe.Pointer(parentclass.can_reach_finish), carg0, carg1, &_cerr)
@@ -48138,10 +48406,11 @@ func (monitor *NetworkMonitorInstance) ParentCanReachFinish(result AsyncResult) 
 //  GNetworkMonitor::network-changed signal.
 func (monitor *NetworkMonitorInstance) ParentNetworkChanged(networkAvailable bool) {
 	var carg0 *C.GNetworkMonitor
-	var carg1 C.gboolean // in
+	var carg1 C.gboolean // in, none, converted
 
 	parentclass := (*C.GNetworkMonitorInterface)(classdata.PeekParentInterface(UnsafeNetworkMonitorToGlibNone(monitor), uint64(TypeNetworkMonitor)))
 
+	carg0 = (*C.GNetworkMonitor)(UnsafeNetworkMonitorToGlibNone(monitor))
 	if networkAvailable {
 		carg1 = C.TRUE
 	}
@@ -48593,6 +48862,8 @@ func (stream *PollableInputStreamInstance) ParentCanPoll() bool {
 
 	parentclass := (*C.GPollableInputStreamInterface)(classdata.PeekParentInterface(UnsafePollableInputStreamToGlibNone(stream), uint64(TypePollableInputStream)))
 
+	carg0 = (*C.GPollableInputStream)(UnsafePollableInputStreamToGlibNone(stream))
+
 	cret = C._gotk4_gio2_PollableInputStream_virtual_can_poll(unsafe.Pointer(parentclass.can_poll), carg0)
 	runtime.KeepAlive(stream)
 
@@ -48629,11 +48900,12 @@ func (stream *PollableInputStreamInstance) ParentCanPoll() bool {
 // g_pollable_input_stream_can_poll() returns %FALSE for @stream.
 func (stream *PollableInputStreamInstance) ParentCreateSource(cancellable context.Context) *glib.Source {
 	var carg0 *C.GPollableInputStream
-	var carg1 *C.GCancellable // in, none, converted, nullable
+	var carg1 *C.GCancellable // in, none, converted
 	var cret  *C.GSource      // return, full, converted
 
 	parentclass := (*C.GPollableInputStreamInterface)(classdata.PeekParentInterface(UnsafePollableInputStreamToGlibNone(stream), uint64(TypePollableInputStream)))
 
+	carg0 = (*C.GPollableInputStream)(UnsafePollableInputStreamToGlibNone(stream))
 	if cancellable != nil {
 		carg1 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -48672,6 +48944,8 @@ func (stream *PollableInputStreamInstance) ParentIsReadable() bool {
 	var cret  C.gboolean // return
 
 	parentclass := (*C.GPollableInputStreamInterface)(classdata.PeekParentInterface(UnsafePollableInputStreamToGlibNone(stream), uint64(TypePollableInputStream)))
+
+	carg0 = (*C.GPollableInputStream)(UnsafePollableInputStreamToGlibNone(stream))
 
 	cret = C._gotk4_gio2_PollableInputStream_virtual_is_readable(unsafe.Pointer(parentclass.is_readable), carg0)
 	runtime.KeepAlive(stream)
@@ -49512,6 +49786,8 @@ func (stream *PollableOutputStreamInstance) ParentCanPoll() bool {
 
 	parentclass := (*C.GPollableOutputStreamInterface)(classdata.PeekParentInterface(UnsafePollableOutputStreamToGlibNone(stream), uint64(TypePollableOutputStream)))
 
+	carg0 = (*C.GPollableOutputStream)(UnsafePollableOutputStreamToGlibNone(stream))
+
 	cret = C._gotk4_gio2_PollableOutputStream_virtual_can_poll(unsafe.Pointer(parentclass.can_poll), carg0)
 	runtime.KeepAlive(stream)
 
@@ -49548,11 +49824,12 @@ func (stream *PollableOutputStreamInstance) ParentCanPoll() bool {
 // g_pollable_output_stream_can_poll() returns %FALSE for @stream.
 func (stream *PollableOutputStreamInstance) ParentCreateSource(cancellable context.Context) *glib.Source {
 	var carg0 *C.GPollableOutputStream
-	var carg1 *C.GCancellable // in, none, converted, nullable
+	var carg1 *C.GCancellable // in, none, converted
 	var cret  *C.GSource      // return, full, converted
 
 	parentclass := (*C.GPollableOutputStreamInterface)(classdata.PeekParentInterface(UnsafePollableOutputStreamToGlibNone(stream), uint64(TypePollableOutputStream)))
 
+	carg0 = (*C.GPollableOutputStream)(UnsafePollableOutputStreamToGlibNone(stream))
 	if cancellable != nil {
 		carg1 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -49591,6 +49868,8 @@ func (stream *PollableOutputStreamInstance) ParentIsWritable() bool {
 	var cret  C.gboolean // return
 
 	parentclass := (*C.GPollableOutputStreamInterface)(classdata.PeekParentInterface(UnsafePollableOutputStreamToGlibNone(stream), uint64(TypePollableOutputStream)))
+
+	carg0 = (*C.GPollableOutputStream)(UnsafePollableOutputStreamToGlibNone(stream))
 
 	cret = C._gotk4_gio2_PollableOutputStream_virtual_is_writable(unsafe.Pointer(parentclass.is_writable), carg0)
 	runtime.KeepAlive(stream)
@@ -49637,13 +49916,14 @@ func (stream *PollableOutputStreamInstance) ParentIsWritable() bool {
 // g_pollable_output_stream_can_poll() returns %FALSE for @stream.
 func (stream *PollableOutputStreamInstance) ParentWriteNonblocking(buffer []byte) (int, error) {
 	var carg0 *C.GPollableOutputStream
-	var carg1 unsafe.Pointer // in, transfer: none, C Pointers: 1, Name: array[unknown], nullable, array (inner: <nil>, length-by: carg2)
-	var carg2 C.gsize        // implicit
+	var carg1 unsafe.Pointer // in, none, converted
+	var carg2 C.gsize        // in, transfer: none, C Pointers: 1, Name: array[unknown], nullable, array (inner: <nil>, length-by: carg2)
 	var cret  C.gssize       // return, none, casted
 	var _cerr *C.GError      // out, full, converted, nullable
 
 	parentclass := (*C.GPollableOutputStreamInterface)(classdata.PeekParentInterface(UnsafePollableOutputStreamToGlibNone(stream), uint64(TypePollableOutputStream)))
 
+	carg0 = (*C.GPollableOutputStream)(UnsafePollableOutputStreamToGlibNone(stream))
 	_ = buffer
 	_ = carg1
 	_ = carg2
@@ -49699,14 +49979,15 @@ func (stream *PollableOutputStreamInstance) ParentWriteNonblocking(buffer []byte
 // g_pollable_output_stream_can_poll() returns %FALSE for @stream.
 func (stream *PollableOutputStreamInstance) ParentWritevNonblocking(vectors []OutputVector) (uint, PollableReturn, error) {
 	var carg0 *C.GPollableOutputStream
-	var carg1 *C.GOutputVector  // in, transfer: none, C Pointers: 1, Name: array[OutputVector], array (inner: *typesystem.Record, length-by: carg2)
-	var carg2 C.gsize           // implicit
+	var carg1 *C.GOutputVector  // in, none, converted
+	var carg2 C.gsize           // in, transfer: none, C Pointers: 1, Name: array[OutputVector], array (inner: *typesystem.Record, length-by: carg2)
 	var carg3 C.gsize           // out, full, casted
 	var cret  C.GPollableReturn // return, none, casted
 	var _cerr *C.GError         // out, full, converted, nullable
 
 	parentclass := (*C.GPollableOutputStreamInterface)(classdata.PeekParentInterface(UnsafePollableOutputStreamToGlibNone(stream), uint64(TypePollableOutputStream)))
 
+	carg0 = (*C.GPollableOutputStream)(UnsafePollableOutputStreamToGlibNone(stream))
 	_ = vectors
 	_ = carg1
 	_ = carg2
@@ -50389,14 +50670,15 @@ func UnsafeApplyProxyOverrides[Instance Proxy](gclass unsafe.Pointer, overrides 
 // required, wraps the #GIOStream to handle proxy payload.
 func (proxy *ProxyInstance) ParentConnect(cancellable context.Context, connection IOStream, proxyAddress ProxyAddress) (IOStream, error) {
 	var carg0 *C.GProxy
-	var carg3 *C.GCancellable  // in, none, converted, nullable
-	var carg1 *C.GIOStream     // in, none, converted
+	var carg3 *C.GCancellable  // in, none, converted
+	var carg1 *C.GIOStream     // in, none, converted, nullable
 	var carg2 *C.GProxyAddress // in, none, converted
 	var cret  *C.GIOStream     // return, full, converted
 	var _cerr *C.GError        // out, full, converted, nullable
 
 	parentclass := (*C.GProxyInterface)(classdata.PeekParentInterface(UnsafeProxyToGlibNone(proxy), uint64(TypeProxy)))
 
+	carg0 = (*C.GProxy)(UnsafeProxyToGlibNone(proxy))
 	if cancellable != nil {
 		carg3 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -50441,6 +50723,7 @@ func (proxy *ProxyInstance) ParentConnectFinish(result AsyncResult) (IOStream, e
 
 	parentclass := (*C.GProxyInterface)(classdata.PeekParentInterface(UnsafeProxyToGlibNone(proxy), uint64(TypeProxy)))
 
+	carg0 = (*C.GProxy)(UnsafeProxyToGlibNone(proxy))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_Proxy_virtual_connect_finish(unsafe.Pointer(parentclass.connect_finish), carg0, carg1, &_cerr)
@@ -50477,6 +50760,8 @@ func (proxy *ProxyInstance) ParentSupportsHostname() bool {
 	var cret  C.gboolean // return
 
 	parentclass := (*C.GProxyInterface)(classdata.PeekParentInterface(UnsafeProxyToGlibNone(proxy), uint64(TypeProxy)))
+
+	carg0 = (*C.GProxy)(UnsafeProxyToGlibNone(proxy))
 
 	cret = C._gotk4_gio2_Proxy_virtual_supports_hostname(unsafe.Pointer(parentclass.supports_hostname), carg0)
 	runtime.KeepAlive(proxy)
@@ -51017,6 +51302,8 @@ func (resolver *ProxyResolverInstance) ParentIsSupported() bool {
 
 	parentclass := (*C.GProxyResolverInterface)(classdata.PeekParentInterface(UnsafeProxyResolverToGlibNone(resolver), uint64(TypeProxyResolver)))
 
+	carg0 = (*C.GProxyResolver)(UnsafeProxyResolverToGlibNone(resolver))
+
 	cret = C._gotk4_gio2_ProxyResolver_virtual_is_supported(unsafe.Pointer(parentclass.is_supported), carg0)
 	runtime.KeepAlive(resolver)
 
@@ -51059,13 +51346,14 @@ func (resolver *ProxyResolverInstance) ParentIsSupported() bool {
 // returned array of proxies.
 func (resolver *ProxyResolverInstance) ParentLookup(cancellable context.Context, uri string) ([]string, error) {
 	var carg0 *C.GProxyResolver
-	var carg2 *C.GCancellable // in, none, converted, nullable
-	var carg1 *C.gchar        // in, none, string
+	var carg2 *C.GCancellable // in, none, converted
+	var carg1 *C.gchar        // in, none, converted, nullable
 	var cret  **C.gchar       // return, transfer: full, C Pointers: 2, Name: array[utf8], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	parentclass := (*C.GProxyResolverInterface)(classdata.PeekParentInterface(UnsafeProxyResolverToGlibNone(resolver), uint64(TypeProxyResolver)))
 
+	carg0 = (*C.GProxyResolver)(UnsafeProxyResolverToGlibNone(resolver))
 	if cancellable != nil {
 		carg2 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -51113,6 +51401,7 @@ func (resolver *ProxyResolverInstance) ParentLookupFinish(result AsyncResult) ([
 
 	parentclass := (*C.GProxyResolverInterface)(classdata.PeekParentInterface(UnsafeProxyResolverToGlibNone(resolver), uint64(TypeProxyResolver)))
 
+	carg0 = (*C.GProxyResolver)(UnsafeProxyResolverToGlibNone(resolver))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_ProxyResolver_virtual_lookup_finish(unsafe.Pointer(parentclass.lookup_finish), carg0, carg1, &_cerr)
@@ -51865,6 +52154,8 @@ func (seekable *SeekableInstance) ParentCanSeek() bool {
 
 	parentclass := (*C.GSeekableIface)(classdata.PeekParentInterface(UnsafeSeekableToGlibNone(seekable), uint64(TypeSeekable)))
 
+	carg0 = (*C.GSeekable)(UnsafeSeekableToGlibNone(seekable))
+
 	cret = C._gotk4_gio2_Seekable_virtual_can_seek(unsafe.Pointer(parentclass.can_seek), carg0)
 	runtime.KeepAlive(seekable)
 
@@ -51891,6 +52182,8 @@ func (seekable *SeekableInstance) ParentCanTruncate() bool {
 	var cret  C.gboolean // return
 
 	parentclass := (*C.GSeekableIface)(classdata.PeekParentInterface(UnsafeSeekableToGlibNone(seekable), uint64(TypeSeekable)))
+
+	carg0 = (*C.GSeekable)(UnsafeSeekableToGlibNone(seekable))
 
 	cret = C._gotk4_gio2_Seekable_virtual_can_truncate(unsafe.Pointer(parentclass.can_truncate), carg0)
 	runtime.KeepAlive(seekable)
@@ -51934,14 +52227,15 @@ func (seekable *SeekableInstance) ParentCanTruncate() bool {
 // was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.
 func (seekable *SeekableInstance) ParentSeek(cancellable context.Context, offset int64, typ glib.SeekType) (bool, error) {
 	var carg0 *C.GSeekable
-	var carg3 *C.GCancellable // in, none, converted, nullable
-	var carg1 C.goffset       // in, none, casted
+	var carg3 *C.GCancellable // in, none, converted
+	var carg1 C.goffset       // in, none, converted, nullable
 	var carg2 C.GSeekType     // in, none, casted
 	var cret  C.gboolean      // return
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	parentclass := (*C.GSeekableIface)(classdata.PeekParentInterface(UnsafeSeekableToGlibNone(seekable), uint64(TypeSeekable)))
 
+	carg0 = (*C.GSeekable)(UnsafeSeekableToGlibNone(seekable))
 	if cancellable != nil {
 		carg3 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -51981,6 +52275,8 @@ func (seekable *SeekableInstance) ParentTell() int64 {
 
 	parentclass := (*C.GSeekableIface)(classdata.PeekParentInterface(UnsafeSeekableToGlibNone(seekable), uint64(TypeSeekable)))
 
+	carg0 = (*C.GSeekable)(UnsafeSeekableToGlibNone(seekable))
+
 	cret = C._gotk4_gio2_Seekable_virtual_tell(unsafe.Pointer(parentclass.tell), carg0)
 	runtime.KeepAlive(seekable)
 
@@ -52015,13 +52311,14 @@ func (seekable *SeekableInstance) ParentTell() int64 {
 // partial result will be returned, without an error.
 func (seekable *SeekableInstance) ParentTruncateFn(cancellable context.Context, offset int64) (bool, error) {
 	var carg0 *C.GSeekable
-	var carg2 *C.GCancellable // in, none, converted, nullable
-	var carg1 C.goffset       // in, none, casted
+	var carg2 *C.GCancellable // in, none, converted
+	var carg1 C.goffset       // in, none, converted, nullable
 	var cret  C.gboolean      // return
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	parentclass := (*C.GSeekableIface)(classdata.PeekParentInterface(UnsafeSeekableToGlibNone(seekable), uint64(TypeSeekable)))
 
+	carg0 = (*C.GSeekable)(UnsafeSeekableToGlibNone(seekable))
 	if cancellable != nil {
 		carg2 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -52441,6 +52738,8 @@ func (connectable *SocketConnectableInstance) ParentEnumerate() SocketAddressEnu
 
 	parentclass := (*C.GSocketConnectableIface)(classdata.PeekParentInterface(UnsafeSocketConnectableToGlibNone(connectable), uint64(TypeSocketConnectable)))
 
+	carg0 = (*C.GSocketConnectable)(UnsafeSocketConnectableToGlibNone(connectable))
+
 	cret = C._gotk4_gio2_SocketConnectable_virtual_enumerate(unsafe.Pointer(parentclass.enumerate), carg0)
 	runtime.KeepAlive(connectable)
 
@@ -52471,6 +52770,8 @@ func (connectable *SocketConnectableInstance) ParentProxyEnumerate() SocketAddre
 
 	parentclass := (*C.GSocketConnectableIface)(classdata.PeekParentInterface(UnsafeSocketConnectableToGlibNone(connectable), uint64(TypeSocketConnectable)))
 
+	carg0 = (*C.GSocketConnectable)(UnsafeSocketConnectableToGlibNone(connectable))
+
 	cret = C._gotk4_gio2_SocketConnectable_virtual_proxy_enumerate(unsafe.Pointer(parentclass.proxy_enumerate), carg0)
 	runtime.KeepAlive(connectable)
 
@@ -52500,6 +52801,8 @@ func (connectable *SocketConnectableInstance) ParentToString() string {
 	var cret  *C.gchar // return, full, string
 
 	parentclass := (*C.GSocketConnectableIface)(classdata.PeekParentInterface(UnsafeSocketConnectableToGlibNone(connectable), uint64(TypeSocketConnectable)))
+
+	carg0 = (*C.GSocketConnectable)(UnsafeSocketConnectableToGlibNone(connectable))
 
 	cret = C._gotk4_gio2_SocketConnectable_virtual_to_string(unsafe.Pointer(parentclass.to_string), carg0)
 	runtime.KeepAlive(connectable)
@@ -53069,6 +53372,8 @@ func (backend *TlsBackendInstance) ParentGetDefaultDatabase() TlsDatabase {
 
 	parentclass := (*C.GTlsBackendInterface)(classdata.PeekParentInterface(UnsafeTlsBackendToGlibNone(backend), uint64(TypeTlsBackend)))
 
+	carg0 = (*C.GTlsBackend)(UnsafeTlsBackendToGlibNone(backend))
+
 	cret = C._gotk4_gio2_TlsBackend_virtual_get_default_database(unsafe.Pointer(parentclass.get_default_database), carg0)
 	runtime.KeepAlive(backend)
 
@@ -53093,6 +53398,8 @@ func (backend *TlsBackendInstance) ParentSupportsDTLS() bool {
 	var cret  C.gboolean // return
 
 	parentclass := (*C.GTlsBackendInterface)(classdata.PeekParentInterface(UnsafeTlsBackendToGlibNone(backend), uint64(TypeTlsBackend)))
+
+	carg0 = (*C.GTlsBackend)(UnsafeTlsBackendToGlibNone(backend))
 
 	cret = C._gotk4_gio2_TlsBackend_virtual_supports_dtls(unsafe.Pointer(parentclass.supports_dtls), carg0)
 	runtime.KeepAlive(backend)
@@ -53120,6 +53427,8 @@ func (backend *TlsBackendInstance) ParentSupportsTLS() bool {
 	var cret  C.gboolean // return
 
 	parentclass := (*C.GTlsBackendInterface)(classdata.PeekParentInterface(UnsafeTlsBackendToGlibNone(backend), uint64(TypeTlsBackend)))
+
+	carg0 = (*C.GTlsBackend)(UnsafeTlsBackendToGlibNone(backend))
 
 	cret = C._gotk4_gio2_TlsBackend_virtual_supports_tls(unsafe.Pointer(parentclass.supports_tls), carg0)
 	runtime.KeepAlive(backend)
@@ -53704,6 +54013,7 @@ func (conn *TlsClientConnectionInstance) ParentCopySessionState(source TlsClient
 
 	parentclass := (*C.GTlsClientConnectionInterface)(classdata.PeekParentInterface(UnsafeTlsClientConnectionToGlibNone(conn), uint64(TypeTlsClientConnection)))
 
+	carg0 = (*C.GTlsClientConnection)(UnsafeTlsClientConnectionToGlibNone(conn))
 	carg1 = (*C.GTlsClientConnection)(UnsafeTlsClientConnectionToGlibNone(source))
 
 	C._gotk4_gio2_TlsClientConnection_virtual_copy_session_state(unsafe.Pointer(parentclass.copy_session_state), carg0, carg1)
@@ -55729,6 +56039,8 @@ func (volume *VolumeInstance) ParentCanEject() bool {
 
 	parentclass := (*C.GVolumeIface)(classdata.PeekParentInterface(UnsafeVolumeToGlibNone(volume), uint64(TypeVolume)))
 
+	carg0 = (*C.GVolume)(UnsafeVolumeToGlibNone(volume))
+
 	cret = C._gotk4_gio2_Volume_virtual_can_eject(unsafe.Pointer(parentclass.can_eject), carg0)
 	runtime.KeepAlive(volume)
 
@@ -55755,6 +56067,8 @@ func (volume *VolumeInstance) ParentCanMount() bool {
 
 	parentclass := (*C.GVolumeIface)(classdata.PeekParentInterface(UnsafeVolumeToGlibNone(volume), uint64(TypeVolume)))
 
+	carg0 = (*C.GVolume)(UnsafeVolumeToGlibNone(volume))
+
 	cret = C._gotk4_gio2_Volume_virtual_can_mount(unsafe.Pointer(parentclass.can_mount), carg0)
 	runtime.KeepAlive(volume)
 
@@ -55775,6 +56089,8 @@ func (volume *VolumeInstance) ParentChanged() {
 	var carg0 *C.GVolume
 
 	parentclass := (*C.GVolumeIface)(classdata.PeekParentInterface(UnsafeVolumeToGlibNone(volume), uint64(TypeVolume)))
+
+	carg0 = (*C.GVolume)(UnsafeVolumeToGlibNone(volume))
 
 	C._gotk4_gio2_Volume_virtual_changed(unsafe.Pointer(parentclass.changed), carg0)
 	runtime.KeepAlive(volume)
@@ -55804,6 +56120,7 @@ func (volume *VolumeInstance) ParentEjectFinish(result AsyncResult) (bool, error
 
 	parentclass := (*C.GVolumeIface)(classdata.PeekParentInterface(UnsafeVolumeToGlibNone(volume), uint64(TypeVolume)))
 
+	carg0 = (*C.GVolume)(UnsafeVolumeToGlibNone(volume))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_Volume_virtual_eject_finish(unsafe.Pointer(parentclass.eject_finish), carg0, carg1, &_cerr)
@@ -55845,6 +56162,7 @@ func (volume *VolumeInstance) ParentEjectWithOperationFinish(result AsyncResult)
 
 	parentclass := (*C.GVolumeIface)(classdata.PeekParentInterface(UnsafeVolumeToGlibNone(volume), uint64(TypeVolume)))
 
+	carg0 = (*C.GVolume)(UnsafeVolumeToGlibNone(volume))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_Volume_virtual_eject_with_operation_finish(unsafe.Pointer(parentclass.eject_with_operation_finish), carg0, carg1, &_cerr)
@@ -55878,6 +56196,8 @@ func (volume *VolumeInstance) ParentEnumerateIdentifiers() []string {
 	var cret  **C.char // return, transfer: full, C Pointers: 2, Name: array[utf8], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
 
 	parentclass := (*C.GVolumeIface)(classdata.PeekParentInterface(UnsafeVolumeToGlibNone(volume), uint64(TypeVolume)))
+
+	carg0 = (*C.GVolume)(UnsafeVolumeToGlibNone(volume))
 
 	cret = C._gotk4_gio2_Volume_virtual_enumerate_identifiers(unsafe.Pointer(parentclass.enumerate_identifiers), carg0)
 	runtime.KeepAlive(volume)
@@ -55930,6 +56250,8 @@ func (volume *VolumeInstance) ParentGetActivationRoot() File {
 
 	parentclass := (*C.GVolumeIface)(classdata.PeekParentInterface(UnsafeVolumeToGlibNone(volume), uint64(TypeVolume)))
 
+	carg0 = (*C.GVolume)(UnsafeVolumeToGlibNone(volume))
+
 	cret = C._gotk4_gio2_Volume_virtual_get_activation_root(unsafe.Pointer(parentclass.get_activation_root), carg0)
 	runtime.KeepAlive(volume)
 
@@ -55955,6 +56277,8 @@ func (volume *VolumeInstance) ParentGetDrive() Drive {
 	var cret  *C.GDrive // return, full, converted, nullable
 
 	parentclass := (*C.GVolumeIface)(classdata.PeekParentInterface(UnsafeVolumeToGlibNone(volume), uint64(TypeVolume)))
+
+	carg0 = (*C.GVolume)(UnsafeVolumeToGlibNone(volume))
 
 	cret = C._gotk4_gio2_Volume_virtual_get_drive(unsafe.Pointer(parentclass.get_drive), carg0)
 	runtime.KeepAlive(volume)
@@ -55982,6 +56306,8 @@ func (volume *VolumeInstance) ParentGetIcon() Icon {
 
 	parentclass := (*C.GVolumeIface)(classdata.PeekParentInterface(UnsafeVolumeToGlibNone(volume), uint64(TypeVolume)))
 
+	carg0 = (*C.GVolume)(UnsafeVolumeToGlibNone(volume))
+
 	cret = C._gotk4_gio2_Volume_virtual_get_icon(unsafe.Pointer(parentclass.get_icon), carg0)
 	runtime.KeepAlive(volume)
 
@@ -56008,11 +56334,12 @@ func (volume *VolumeInstance) ParentGetIcon() Icon {
 // information about volume identifiers.
 func (volume *VolumeInstance) ParentGetIdentifier(kind string) string {
 	var carg0 *C.GVolume
-	var carg1 *C.char // in, none, string
+	var carg1 *C.char // in, none, converted
 	var cret  *C.char // return, full, string, nullable-string
 
 	parentclass := (*C.GVolumeIface)(classdata.PeekParentInterface(UnsafeVolumeToGlibNone(volume), uint64(TypeVolume)))
 
+	carg0 = (*C.GVolume)(UnsafeVolumeToGlibNone(volume))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(kind)))
 	defer C.free(unsafe.Pointer(carg1))
 
@@ -56044,6 +56371,8 @@ func (volume *VolumeInstance) ParentGetMount() Mount {
 
 	parentclass := (*C.GVolumeIface)(classdata.PeekParentInterface(UnsafeVolumeToGlibNone(volume), uint64(TypeVolume)))
 
+	carg0 = (*C.GVolume)(UnsafeVolumeToGlibNone(volume))
+
 	cret = C._gotk4_gio2_Volume_virtual_get_mount(unsafe.Pointer(parentclass.get_mount), carg0)
 	runtime.KeepAlive(volume)
 
@@ -56070,6 +56399,8 @@ func (volume *VolumeInstance) ParentGetName() string {
 
 	parentclass := (*C.GVolumeIface)(classdata.PeekParentInterface(UnsafeVolumeToGlibNone(volume), uint64(TypeVolume)))
 
+	carg0 = (*C.GVolume)(UnsafeVolumeToGlibNone(volume))
+
 	cret = C._gotk4_gio2_Volume_virtual_get_name(unsafe.Pointer(parentclass.get_name), carg0)
 	runtime.KeepAlive(volume)
 
@@ -56094,6 +56425,8 @@ func (volume *VolumeInstance) ParentGetSortKey() string {
 	var cret  *C.gchar // return, none, string, nullable-string
 
 	parentclass := (*C.GVolumeIface)(classdata.PeekParentInterface(UnsafeVolumeToGlibNone(volume), uint64(TypeVolume)))
+
+	carg0 = (*C.GVolume)(UnsafeVolumeToGlibNone(volume))
 
 	cret = C._gotk4_gio2_Volume_virtual_get_sort_key(unsafe.Pointer(parentclass.get_sort_key), carg0)
 	runtime.KeepAlive(volume)
@@ -56121,6 +56454,8 @@ func (volume *VolumeInstance) ParentGetSymbolicIcon() Icon {
 
 	parentclass := (*C.GVolumeIface)(classdata.PeekParentInterface(UnsafeVolumeToGlibNone(volume), uint64(TypeVolume)))
 
+	carg0 = (*C.GVolume)(UnsafeVolumeToGlibNone(volume))
+
 	cret = C._gotk4_gio2_Volume_virtual_get_symbolic_icon(unsafe.Pointer(parentclass.get_symbolic_icon), carg0)
 	runtime.KeepAlive(volume)
 
@@ -56147,6 +56482,8 @@ func (volume *VolumeInstance) ParentGetUUID() string {
 	var cret  *C.char // return, full, string, nullable-string
 
 	parentclass := (*C.GVolumeIface)(classdata.PeekParentInterface(UnsafeVolumeToGlibNone(volume), uint64(TypeVolume)))
+
+	carg0 = (*C.GVolume)(UnsafeVolumeToGlibNone(volume))
 
 	cret = C._gotk4_gio2_Volume_virtual_get_uuid(unsafe.Pointer(parentclass.get_uuid), carg0)
 	runtime.KeepAlive(volume)
@@ -56188,6 +56525,7 @@ func (volume *VolumeInstance) ParentMountFinish(result AsyncResult) (bool, error
 
 	parentclass := (*C.GVolumeIface)(classdata.PeekParentInterface(UnsafeVolumeToGlibNone(volume), uint64(TypeVolume)))
 
+	carg0 = (*C.GVolume)(UnsafeVolumeToGlibNone(volume))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_Volume_virtual_mount_finish(unsafe.Pointer(parentclass.mount_finish), carg0, carg1, &_cerr)
@@ -56216,6 +56554,8 @@ func (volume *VolumeInstance) ParentRemoved() {
 
 	parentclass := (*C.GVolumeIface)(classdata.PeekParentInterface(UnsafeVolumeToGlibNone(volume), uint64(TypeVolume)))
 
+	carg0 = (*C.GVolume)(UnsafeVolumeToGlibNone(volume))
+
 	C._gotk4_gio2_Volume_virtual_removed(unsafe.Pointer(parentclass.removed), carg0)
 	runtime.KeepAlive(volume)
 }
@@ -56233,6 +56573,8 @@ func (volume *VolumeInstance) ParentShouldAutomount() bool {
 	var cret  C.gboolean // return
 
 	parentclass := (*C.GVolumeIface)(classdata.PeekParentInterface(UnsafeVolumeToGlibNone(volume), uint64(TypeVolume)))
+
+	carg0 = (*C.GVolume)(UnsafeVolumeToGlibNone(volume))
 
 	cret = C._gotk4_gio2_Volume_virtual_should_automount(unsafe.Pointer(parentclass.should_automount), carg0)
 	runtime.KeepAlive(volume)
@@ -57107,10 +57449,11 @@ func UnsafeApplyAppLaunchContextOverrides[Instance AppLaunchContext](gclass unsa
 // [method@Gio.AppLaunchContext.get_startup_notify_id].
 func (_context *AppLaunchContextInstance) ParentLaunchFailed(startupNotifyId string) {
 	var carg0 *C.GAppLaunchContext
-	var carg1 *C.char // in, none, string
+	var carg1 *C.char // in, none, converted
 
 	parentclass := (*C.GAppLaunchContextClass)(classdata.PeekParentClass(UnsafeAppLaunchContextToGlibNone(_context)))
 
+	carg0 = (*C.GAppLaunchContext)(UnsafeAppLaunchContextToGlibNone(_context))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(startupNotifyId)))
 	defer C.free(unsafe.Pointer(carg1))
 
@@ -60014,6 +60357,8 @@ func (application *ApplicationInstance) ParentActivate() {
 
 	parentclass := (*C.GApplicationClass)(classdata.PeekParentClass(UnsafeApplicationToGlibNone(application)))
 
+	carg0 = (*C.GApplication)(UnsafeApplicationToGlibNone(application))
+
 	C._gotk4_gio2_Application_virtual_activate(unsafe.Pointer(parentclass.activate), carg0)
 	runtime.KeepAlive(application)
 }
@@ -60033,6 +60378,7 @@ func (application *ApplicationInstance) ParentAddPlatformData(builder *glib.Vari
 
 	parentclass := (*C.GApplicationClass)(classdata.PeekParentClass(UnsafeApplicationToGlibNone(application)))
 
+	carg0 = (*C.GApplication)(UnsafeApplicationToGlibNone(application))
 	carg1 = (*C.GVariantBuilder)(glib.UnsafeVariantBuilderToGlibNone(builder))
 
 	C._gotk4_gio2_Application_virtual_add_platform_data(unsafe.Pointer(parentclass.add_platform_data), carg0, carg1)
@@ -60060,6 +60406,7 @@ func (application *ApplicationInstance) ParentCommandLine(commandLine Applicatio
 
 	parentclass := (*C.GApplicationClass)(classdata.PeekParentClass(UnsafeApplicationToGlibNone(application)))
 
+	carg0 = (*C.GApplication)(UnsafeApplicationToGlibNone(application))
 	carg1 = (*C.GApplicationCommandLine)(UnsafeApplicationCommandLineToGlibNone(commandLine))
 
 	cret = C._gotk4_gio2_Application_virtual_command_line(unsafe.Pointer(parentclass.command_line), carg0, carg1)
@@ -60096,12 +60443,13 @@ func (application *ApplicationInstance) ParentCommandLine(commandLine Applicatio
 func (application *ApplicationInstance) ParentDBusRegister(connection DBusConnection, objectPath string) (bool, error) {
 	var carg0 *C.GApplication
 	var carg1 *C.GDBusConnection // in, none, converted
-	var carg2 *C.gchar           // in, none, string
+	var carg2 *C.gchar           // in, none, converted
 	var cret  C.gboolean         // return
 	var _cerr *C.GError          // out, full, converted, nullable
 
 	parentclass := (*C.GApplicationClass)(classdata.PeekParentClass(UnsafeApplicationToGlibNone(application)))
 
+	carg0 = (*C.GApplication)(UnsafeApplicationToGlibNone(application))
 	carg1 = (*C.GDBusConnection)(UnsafeDBusConnectionToGlibNone(connection))
 	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(objectPath)))
 	defer C.free(unsafe.Pointer(carg2))
@@ -60138,10 +60486,11 @@ func (application *ApplicationInstance) ParentDBusRegister(connection DBusConnec
 func (application *ApplicationInstance) ParentDBusUnregister(connection DBusConnection, objectPath string) {
 	var carg0 *C.GApplication
 	var carg1 *C.GDBusConnection // in, none, converted
-	var carg2 *C.gchar           // in, none, string
+	var carg2 *C.gchar           // in, none, converted
 
 	parentclass := (*C.GApplicationClass)(classdata.PeekParentClass(UnsafeApplicationToGlibNone(application)))
 
+	carg0 = (*C.GApplication)(UnsafeApplicationToGlibNone(application))
 	carg1 = (*C.GDBusConnection)(UnsafeDBusConnectionToGlibNone(connection))
 	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(objectPath)))
 	defer C.free(unsafe.Pointer(carg2))
@@ -60172,6 +60521,7 @@ func (application *ApplicationInstance) ParentHandleLocalOptions(options *glib.V
 
 	parentclass := (*C.GApplicationClass)(classdata.PeekParentClass(UnsafeApplicationToGlibNone(application)))
 
+	carg0 = (*C.GApplication)(UnsafeApplicationToGlibNone(application))
 	carg1 = (*C.GVariantDict)(glib.UnsafeVariantDictToGlibNone(options))
 
 	cret = C._gotk4_gio2_Application_virtual_handle_local_options(unsafe.Pointer(parentclass.handle_local_options), carg0, carg1)
@@ -60198,6 +60548,8 @@ func (application *ApplicationInstance) ParentNameLost() bool {
 	var cret  C.gboolean // return
 
 	parentclass := (*C.GApplicationClass)(classdata.PeekParentClass(UnsafeApplicationToGlibNone(application)))
+
+	carg0 = (*C.GApplication)(UnsafeApplicationToGlibNone(application))
 
 	cret = C._gotk4_gio2_Application_virtual_name_lost(unsafe.Pointer(parentclass.name_lost), carg0)
 	runtime.KeepAlive(application)
@@ -60235,12 +60587,13 @@ func (application *ApplicationInstance) ParentNameLost() bool {
 // and it must have the %G_APPLICATION_HANDLES_OPEN flag set.
 func (application *ApplicationInstance) ParentOpen(files []File, hint string) {
 	var carg0 *C.GApplication
-	var carg1 **C.GFile // in, transfer: none, C Pointers: 2, Name: array[File], array (inner: *typesystem.Interface, length-by: carg2)
-	var carg2 C.gint    // implicit
-	var carg3 *C.gchar  // in, none, string
+	var carg1 **C.GFile // in, none, converted
+	var carg2 C.gint    // in, transfer: none, C Pointers: 2, Name: array[File], array (inner: *typesystem.Interface, length-by: carg2)
+	var carg3 *C.gchar  // implicit
 
 	parentclass := (*C.GApplicationClass)(classdata.PeekParentClass(UnsafeApplicationToGlibNone(application)))
 
+	carg0 = (*C.GApplication)(UnsafeApplicationToGlibNone(application))
 	_ = files
 	_ = carg1
 	_ = carg2
@@ -60265,6 +60618,8 @@ func (application *ApplicationInstance) ParentQuitMainloop() {
 
 	parentclass := (*C.GApplicationClass)(classdata.PeekParentClass(UnsafeApplicationToGlibNone(application)))
 
+	carg0 = (*C.GApplication)(UnsafeApplicationToGlibNone(application))
+
 	C._gotk4_gio2_Application_virtual_quit_mainloop(unsafe.Pointer(parentclass.quit_mainloop), carg0)
 	runtime.KeepAlive(application)
 }
@@ -60281,6 +60636,8 @@ func (application *ApplicationInstance) ParentRunMainloop() {
 
 	parentclass := (*C.GApplicationClass)(classdata.PeekParentClass(UnsafeApplicationToGlibNone(application)))
 
+	carg0 = (*C.GApplication)(UnsafeApplicationToGlibNone(application))
+
 	C._gotk4_gio2_Application_virtual_run_mainloop(unsafe.Pointer(parentclass.run_mainloop), carg0)
 	runtime.KeepAlive(application)
 }
@@ -60295,6 +60652,8 @@ func (application *ApplicationInstance) ParentShutdown() {
 
 	parentclass := (*C.GApplicationClass)(classdata.PeekParentClass(UnsafeApplicationToGlibNone(application)))
 
+	carg0 = (*C.GApplication)(UnsafeApplicationToGlibNone(application))
+
 	C._gotk4_gio2_Application_virtual_shutdown(unsafe.Pointer(parentclass.shutdown), carg0)
 	runtime.KeepAlive(application)
 }
@@ -60307,6 +60666,8 @@ func (application *ApplicationInstance) ParentStartup() {
 	var carg0 *C.GApplication
 
 	parentclass := (*C.GApplicationClass)(classdata.PeekParentClass(UnsafeApplicationToGlibNone(application)))
+
+	carg0 = (*C.GApplication)(UnsafeApplicationToGlibNone(application))
 
 	C._gotk4_gio2_Application_virtual_startup(unsafe.Pointer(parentclass.startup), carg0)
 	runtime.KeepAlive(application)
@@ -61439,6 +61800,8 @@ func (cmdline *ApplicationCommandLineInstance) ParentDone() {
 
 	parentclass := (*C.GApplicationCommandLineClass)(classdata.PeekParentClass(UnsafeApplicationCommandLineToGlibNone(cmdline)))
 
+	carg0 = (*C.GApplicationCommandLine)(UnsafeApplicationCommandLineToGlibNone(cmdline))
+
 	C._gotk4_gio2_ApplicationCommandLine_virtual_done(unsafe.Pointer(parentclass.done), carg0)
 	runtime.KeepAlive(cmdline)
 }
@@ -61466,6 +61829,8 @@ func (cmdline *ApplicationCommandLineInstance) ParentGetStdin() InputStream {
 
 	parentclass := (*C.GApplicationCommandLineClass)(classdata.PeekParentClass(UnsafeApplicationCommandLineToGlibNone(cmdline)))
 
+	carg0 = (*C.GApplicationCommandLine)(UnsafeApplicationCommandLineToGlibNone(cmdline))
+
 	cret = C._gotk4_gio2_ApplicationCommandLine_virtual_get_stdin(unsafe.Pointer(parentclass.get_stdin), carg0)
 	runtime.KeepAlive(cmdline)
 
@@ -61492,10 +61857,11 @@ func (cmdline *ApplicationCommandLineInstance) ParentGetStdin() InputStream {
 // control over, that could include `printf()` escape sequences.
 func (cmdline *ApplicationCommandLineInstance) ParentPrintLiteral(message string) {
 	var carg0 *C.GApplicationCommandLine
-	var carg1 *C.gchar // in, none, string
+	var carg1 *C.gchar // in, none, converted
 
 	parentclass := (*C.GApplicationCommandLineClass)(classdata.PeekParentClass(UnsafeApplicationCommandLineToGlibNone(cmdline)))
 
+	carg0 = (*C.GApplicationCommandLine)(UnsafeApplicationCommandLineToGlibNone(cmdline))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(message)))
 	defer C.free(unsafe.Pointer(carg1))
 
@@ -61518,10 +61884,11 @@ func (cmdline *ApplicationCommandLineInstance) ParentPrintLiteral(message string
 // you don't have control over, that could include `printf()` escape sequences.
 func (cmdline *ApplicationCommandLineInstance) ParentPrinterrLiteral(message string) {
 	var carg0 *C.GApplicationCommandLine
-	var carg1 *C.gchar // in, none, string
+	var carg1 *C.gchar // in, none, converted
 
 	parentclass := (*C.GApplicationCommandLineClass)(classdata.PeekParentClass(UnsafeApplicationCommandLineToGlibNone(cmdline)))
 
+	carg0 = (*C.GApplicationCommandLine)(UnsafeApplicationCommandLineToGlibNone(cmdline))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(message)))
 	defer C.free(unsafe.Pointer(carg1))
 
@@ -65466,6 +65833,8 @@ func (interface_ *DBusInterfaceSkeletonInstance) ParentFlush() {
 
 	parentclass := (*C.GDBusInterfaceSkeletonClass)(classdata.PeekParentClass(UnsafeDBusInterfaceSkeletonToGlibNone(interface_)))
 
+	carg0 = (*C.GDBusInterfaceSkeleton)(UnsafeDBusInterfaceSkeletonToGlibNone(interface_))
+
 	C._gotk4_gio2_DBusInterfaceSkeleton_virtual_flush(unsafe.Pointer(parentclass.flush), carg0)
 	runtime.KeepAlive(interface_)
 }
@@ -65489,6 +65858,7 @@ func (interface_ *DBusInterfaceSkeletonInstance) ParentGAuthorizeMethod(invocati
 
 	parentclass := (*C.GDBusInterfaceSkeletonClass)(classdata.PeekParentClass(UnsafeDBusInterfaceSkeletonToGlibNone(interface_)))
 
+	carg0 = (*C.GDBusInterfaceSkeleton)(UnsafeDBusInterfaceSkeletonToGlibNone(interface_))
 	carg1 = (*C.GDBusMethodInvocation)(UnsafeDBusMethodInvocationToGlibNone(invocation))
 
 	cret = C._gotk4_gio2_DBusInterfaceSkeleton_virtual_g_authorize_method(unsafe.Pointer(parentclass.g_authorize_method), carg0, carg1)
@@ -65519,6 +65889,8 @@ func (interface_ *DBusInterfaceSkeletonInstance) ParentGetInfo() *DBusInterfaceI
 
 	parentclass := (*C.GDBusInterfaceSkeletonClass)(classdata.PeekParentClass(UnsafeDBusInterfaceSkeletonToGlibNone(interface_)))
 
+	carg0 = (*C.GDBusInterfaceSkeleton)(UnsafeDBusInterfaceSkeletonToGlibNone(interface_))
+
 	cret = C._gotk4_gio2_DBusInterfaceSkeleton_virtual_get_info(unsafe.Pointer(parentclass.get_info), carg0)
 	runtime.KeepAlive(interface_)
 
@@ -65544,6 +65916,8 @@ func (interface_ *DBusInterfaceSkeletonInstance) ParentGetVtable() *DBusInterfac
 	var cret  *C.GDBusInterfaceVTable // return, none, converted
 
 	parentclass := (*C.GDBusInterfaceSkeletonClass)(classdata.PeekParentClass(UnsafeDBusInterfaceSkeletonToGlibNone(interface_)))
+
+	carg0 = (*C.GDBusInterfaceSkeleton)(UnsafeDBusInterfaceSkeletonToGlibNone(interface_))
 
 	cret = C._gotk4_gio2_DBusInterfaceSkeleton_virtual_get_vtable(unsafe.Pointer(parentclass.get_vtable), carg0)
 	runtime.KeepAlive(interface_)
@@ -68844,6 +69218,7 @@ func (object *DBusObjectSkeletonInstance) ParentAuthorizeMethod(interface_ DBusI
 
 	parentclass := (*C.GDBusObjectSkeletonClass)(classdata.PeekParentClass(UnsafeDBusObjectSkeletonToGlibNone(object)))
 
+	carg0 = (*C.GDBusObjectSkeleton)(UnsafeDBusObjectSkeletonToGlibNone(object))
 	carg1 = (*C.GDBusInterfaceSkeleton)(UnsafeDBusInterfaceSkeletonToGlibNone(interface_))
 	carg2 = (*C.GDBusMethodInvocation)(UnsafeDBusMethodInvocationToGlibNone(invocation))
 
@@ -70528,6 +70903,7 @@ func (controller *DebugControllerDBusInstance) ParentAuthorize(invocation DBusMe
 
 	parentclass := (*C.GDebugControllerDBusClass)(classdata.PeekParentClass(UnsafeDebugControllerDBusToGlibNone(controller)))
 
+	carg0 = (*C.GDebugControllerDBus)(UnsafeDebugControllerDBusToGlibNone(controller))
 	carg1 = (*C.GDBusMethodInvocation)(UnsafeDBusMethodInvocationToGlibNone(invocation))
 
 	cret = C._gotk4_gio2_DebugControllerDBus_virtual_authorize(unsafe.Pointer(parentclass.authorize), carg0, carg1)
@@ -72201,6 +72577,7 @@ func (enumerator *FileEnumeratorInstance) ParentCloseFinish(result AsyncResult) 
 
 	parentclass := (*C.GFileEnumeratorClass)(classdata.PeekParentClass(UnsafeFileEnumeratorToGlibNone(enumerator)))
 
+	carg0 = (*C.GFileEnumerator)(UnsafeFileEnumeratorToGlibNone(enumerator))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_FileEnumerator_virtual_close_finish(unsafe.Pointer(parentclass.close_finish), carg0, carg1, &_cerr)
@@ -72233,12 +72610,13 @@ func (enumerator *FileEnumeratorInstance) ParentCloseFinish(result AsyncResult) 
 // 	- _goerr error (nullable): an error 
 func (enumerator *FileEnumeratorInstance) ParentCloseFn(cancellable context.Context) (bool, error) {
 	var carg0 *C.GFileEnumerator
-	var carg1 *C.GCancellable // in, none, converted, nullable
+	var carg1 *C.GCancellable // in, none, converted
 	var cret  C.gboolean      // return
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	parentclass := (*C.GFileEnumeratorClass)(classdata.PeekParentClass(UnsafeFileEnumeratorToGlibNone(enumerator)))
 
+	carg0 = (*C.GFileEnumerator)(UnsafeFileEnumeratorToGlibNone(enumerator))
 	if cancellable != nil {
 		carg1 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -72285,12 +72663,13 @@ func (enumerator *FileEnumeratorInstance) ParentCloseFn(cancellable context.Cont
 // be unset.
 func (enumerator *FileEnumeratorInstance) ParentNextFile(cancellable context.Context) (FileInfo, error) {
 	var carg0 *C.GFileEnumerator
-	var carg1 *C.GCancellable // in, none, converted, nullable
+	var carg1 *C.GCancellable // in, none, converted
 	var cret  *C.GFileInfo    // return, full, converted, nullable
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	parentclass := (*C.GFileEnumeratorClass)(classdata.PeekParentClass(UnsafeFileEnumeratorToGlibNone(enumerator)))
 
+	carg0 = (*C.GFileEnumerator)(UnsafeFileEnumeratorToGlibNone(enumerator))
 	if cancellable != nil {
 		carg1 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -72333,6 +72712,7 @@ func (enumerator *FileEnumeratorInstance) ParentNextFilesFinish(result AsyncResu
 
 	parentclass := (*C.GFileEnumeratorClass)(classdata.PeekParentClass(UnsafeFileEnumeratorToGlibNone(enumerator)))
 
+	carg0 = (*C.GFileEnumerator)(UnsafeFileEnumeratorToGlibNone(enumerator))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_FileEnumerator_virtual_next_files_finish(unsafe.Pointer(parentclass.next_files_finish), carg0, carg1, &_cerr)
@@ -75528,6 +75908,8 @@ func (monitor *FileMonitorInstance) ParentCancel() bool {
 
 	parentclass := (*C.GFileMonitorClass)(classdata.PeekParentClass(UnsafeFileMonitorToGlibNone(monitor)))
 
+	carg0 = (*C.GFileMonitor)(UnsafeFileMonitorToGlibNone(monitor))
+
 	cret = C._gotk4_gio2_FileMonitor_virtual_cancel(unsafe.Pointer(parentclass.cancel), carg0)
 	runtime.KeepAlive(monitor)
 
@@ -75552,10 +75934,11 @@ func (monitor *FileMonitorInstance) ParentChanged(file File, otherFile File, eve
 	var carg0 *C.GFileMonitor
 	var carg1 *C.GFile            // in, none, converted
 	var carg2 *C.GFile            // in, none, converted
-	var carg3 C.GFileMonitorEvent // in, none, casted
+	var carg3 C.GFileMonitorEvent // in, none, converted
 
 	parentclass := (*C.GFileMonitorClass)(classdata.PeekParentClass(UnsafeFileMonitorToGlibNone(monitor)))
 
+	carg0 = (*C.GFileMonitor)(UnsafeFileMonitorToGlibNone(monitor))
 	carg1 = (*C.GFile)(UnsafeFileToGlibNone(file))
 	carg2 = (*C.GFile)(UnsafeFileToGlibNone(otherFile))
 	carg3 = C.GFileMonitorEvent(eventType)
@@ -75848,6 +76231,8 @@ func (filenameCompleter *FilenameCompleterInstance) ParentGotCompletionData() {
 	var carg0 *C.GFilenameCompleter
 
 	parentclass := (*C.GFilenameCompleterClass)(classdata.PeekParentClass(UnsafeFilenameCompleterToGlibNone(filenameCompleter)))
+
+	carg0 = (*C.GFilenameCompleter)(UnsafeFilenameCompleterToGlibNone(filenameCompleter))
 
 	C._gotk4_gio2_FilenameCompleter_virtual_got_completion_data(unsafe.Pointer(parentclass.got_completion_data), carg0)
 	runtime.KeepAlive(filenameCompleter)
@@ -76729,6 +77114,7 @@ func (stream *IOStreamInstance) ParentCloseFinish(result AsyncResult) (bool, err
 
 	parentclass := (*C.GIOStreamClass)(classdata.PeekParentClass(UnsafeIOStreamToGlibNone(stream)))
 
+	carg0 = (*C.GIOStream)(UnsafeIOStreamToGlibNone(stream))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_IOStream_virtual_close_finish(unsafe.Pointer(parentclass.close_finish), carg0, carg1, &_cerr)
@@ -76761,12 +77147,13 @@ func (stream *IOStreamInstance) ParentCloseFinish(result AsyncResult) (bool, err
 // 	- _goerr error (nullable): an error 
 func (stream *IOStreamInstance) ParentCloseFn(cancellable context.Context) (bool, error) {
 	var carg0 *C.GIOStream
-	var carg1 *C.GCancellable // in, none, converted, nullable
+	var carg1 *C.GCancellable // in, none, converted
 	var cret  C.gboolean      // return
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	parentclass := (*C.GIOStreamClass)(classdata.PeekParentClass(UnsafeIOStreamToGlibNone(stream)))
 
+	carg0 = (*C.GIOStream)(UnsafeIOStreamToGlibNone(stream))
 	if cancellable != nil {
 		carg1 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -76803,6 +77190,8 @@ func (stream *IOStreamInstance) ParentGetInputStream() InputStream {
 
 	parentclass := (*C.GIOStreamClass)(classdata.PeekParentClass(UnsafeIOStreamToGlibNone(stream)))
 
+	carg0 = (*C.GIOStream)(UnsafeIOStreamToGlibNone(stream))
+
 	cret = C._gotk4_gio2_IOStream_virtual_get_input_stream(unsafe.Pointer(parentclass.get_input_stream), carg0)
 	runtime.KeepAlive(stream)
 
@@ -76827,6 +77216,8 @@ func (stream *IOStreamInstance) ParentGetOutputStream() OutputStream {
 	var cret  *C.GOutputStream // return, none, converted
 
 	parentclass := (*C.GIOStreamClass)(classdata.PeekParentClass(UnsafeIOStreamToGlibNone(stream)))
+
+	carg0 = (*C.GIOStream)(UnsafeIOStreamToGlibNone(stream))
 
 	cret = C._gotk4_gio2_IOStream_virtual_get_output_stream(unsafe.Pointer(parentclass.get_output_stream), carg0)
 	runtime.KeepAlive(stream)
@@ -77563,6 +77954,8 @@ func (address *InetAddressInstance) ParentToString() string {
 	var cret  *C.gchar // return, full, string
 
 	parentclass := (*C.GInetAddressClass)(classdata.PeekParentClass(UnsafeInetAddressToGlibNone(address)))
+
+	carg0 = (*C.GInetAddress)(UnsafeInetAddressToGlibNone(address))
 
 	cret = C._gotk4_gio2_InetAddress_virtual_to_string(unsafe.Pointer(parentclass.to_string), carg0)
 	runtime.KeepAlive(address)
@@ -79692,6 +80085,7 @@ func (stream *InputStreamInstance) ParentCloseFinish(result AsyncResult) (bool, 
 
 	parentclass := (*C.GInputStreamClass)(classdata.PeekParentClass(UnsafeInputStreamToGlibNone(stream)))
 
+	carg0 = (*C.GInputStream)(UnsafeInputStreamToGlibNone(stream))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_InputStream_virtual_close_finish(unsafe.Pointer(parentclass.close_finish), carg0, carg1, &_cerr)
@@ -79724,12 +80118,13 @@ func (stream *InputStreamInstance) ParentCloseFinish(result AsyncResult) (bool, 
 // 	- _goerr error (nullable): an error 
 func (stream *InputStreamInstance) ParentCloseFn(cancellable context.Context) (bool, error) {
 	var carg0 *C.GInputStream
-	var carg1 *C.GCancellable // in, none, converted, nullable
+	var carg1 *C.GCancellable // in, none, converted
 	var cret  C.gboolean      // return
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	parentclass := (*C.GInputStreamClass)(classdata.PeekParentClass(UnsafeInputStreamToGlibNone(stream)))
 
+	carg0 = (*C.GInputStream)(UnsafeInputStreamToGlibNone(stream))
 	if cancellable != nil {
 		carg1 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -79772,6 +80167,7 @@ func (stream *InputStreamInstance) ParentReadFinish(result AsyncResult) (int, er
 
 	parentclass := (*C.GInputStreamClass)(classdata.PeekParentClass(UnsafeInputStreamToGlibNone(stream)))
 
+	carg0 = (*C.GInputStream)(UnsafeInputStreamToGlibNone(stream))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_InputStream_virtual_read_finish(unsafe.Pointer(parentclass.read_finish), carg0, carg1, &_cerr)
@@ -79818,13 +80214,14 @@ func (stream *InputStreamInstance) ParentReadFinish(result AsyncResult) (int, er
 // partial result will be returned, without an error.
 func (stream *InputStreamInstance) ParentSkip(cancellable context.Context, count uint) (int, error) {
 	var carg0 *C.GInputStream
-	var carg2 *C.GCancellable // in, none, converted, nullable
-	var carg1 C.gsize         // in, none, casted
+	var carg2 *C.GCancellable // in, none, converted
+	var carg1 C.gsize         // in, none, converted, nullable
 	var cret  C.gssize        // return, none, casted
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	parentclass := (*C.GInputStreamClass)(classdata.PeekParentClass(UnsafeInputStreamToGlibNone(stream)))
 
+	carg0 = (*C.GInputStream)(UnsafeInputStreamToGlibNone(stream))
 	if cancellable != nil {
 		carg2 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -79867,6 +80264,7 @@ func (stream *InputStreamInstance) ParentSkipFinish(result AsyncResult) (int, er
 
 	parentclass := (*C.GInputStreamClass)(classdata.PeekParentClass(UnsafeInputStreamToGlibNone(stream)))
 
+	carg0 = (*C.GInputStream)(UnsafeInputStreamToGlibNone(stream))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_InputStream_virtual_skip_finish(unsafe.Pointer(parentclass.skip_finish), carg0, carg1, &_cerr)
@@ -81399,6 +81797,8 @@ func (iter *MenuLinkIterInstance) ParentGetNext() (string, MenuModel, bool) {
 
 	parentclass := (*C.GMenuLinkIterClass)(classdata.PeekParentClass(UnsafeMenuLinkIterToGlibNone(iter)))
 
+	carg0 = (*C.GMenuLinkIter)(UnsafeMenuLinkIterToGlibNone(iter))
+
 	cret = C._gotk4_gio2_MenuLinkIter_virtual_get_next(unsafe.Pointer(parentclass.get_next), carg0, &carg1, &carg2)
 	runtime.KeepAlive(iter)
 
@@ -82240,12 +82640,13 @@ func UnsafeApplyMenuModelOverrides[Instance MenuModel](gclass unsafe.Pointer, ov
 // does not exist, %NULL is returned.
 func (model *MenuModelInstance) ParentGetItemLink(itemIndex int32, link string) MenuModel {
 	var carg0 *C.GMenuModel
-	var carg1 C.gint        // in, none, casted
-	var carg2 *C.gchar      // in, none, string
+	var carg1 C.gint        // in, none, converted
+	var carg2 *C.gchar      // in, none, casted
 	var cret  *C.GMenuModel // return, full, converted, nullable
 
 	parentclass := (*C.GMenuModelClass)(classdata.PeekParentClass(UnsafeMenuModelToGlibNone(model)))
 
+	carg0 = (*C.GMenuModel)(UnsafeMenuModelToGlibNone(model))
 	carg1 = C.gint(itemIndex)
 	carg2 = (*C.gchar)(unsafe.Pointer(C.CString(link)))
 	defer C.free(unsafe.Pointer(carg2))
@@ -82278,6 +82679,8 @@ func (model *MenuModelInstance) ParentGetNItems() int32 {
 
 	parentclass := (*C.GMenuModelClass)(classdata.PeekParentClass(UnsafeMenuModelToGlibNone(model)))
 
+	carg0 = (*C.GMenuModel)(UnsafeMenuModelToGlibNone(model))
+
 	cret = C._gotk4_gio2_MenuModel_virtual_get_n_items(unsafe.Pointer(parentclass.get_n_items), carg0)
 	runtime.KeepAlive(model)
 
@@ -82304,6 +82707,8 @@ func (model *MenuModelInstance) ParentIsMutable() bool {
 	var cret  C.gboolean // return
 
 	parentclass := (*C.GMenuModelClass)(classdata.PeekParentClass(UnsafeMenuModelToGlibNone(model)))
+
+	carg0 = (*C.GMenuModel)(UnsafeMenuModelToGlibNone(model))
 
 	cret = C._gotk4_gio2_MenuModel_virtual_is_mutable(unsafe.Pointer(parentclass.is_mutable), carg0)
 	runtime.KeepAlive(model)
@@ -82334,11 +82739,12 @@ func (model *MenuModelInstance) ParentIsMutable() bool {
 // You must free the iterator with g_object_unref() when you are done.
 func (model *MenuModelInstance) ParentIterateItemAttributes(itemIndex int32) MenuAttributeIter {
 	var carg0 *C.GMenuModel
-	var carg1 C.gint                // in, none, casted
+	var carg1 C.gint                // in, none, converted
 	var cret  *C.GMenuAttributeIter // return, full, converted
 
 	parentclass := (*C.GMenuModelClass)(classdata.PeekParentClass(UnsafeMenuModelToGlibNone(model)))
 
+	carg0 = (*C.GMenuModel)(UnsafeMenuModelToGlibNone(model))
 	carg1 = C.gint(itemIndex)
 
 	cret = C._gotk4_gio2_MenuModel_virtual_iterate_item_attributes(unsafe.Pointer(parentclass.iterate_item_attributes), carg0, carg1)
@@ -82369,11 +82775,12 @@ func (model *MenuModelInstance) ParentIterateItemAttributes(itemIndex int32) Men
 // You must free the iterator with g_object_unref() when you are done.
 func (model *MenuModelInstance) ParentIterateItemLinks(itemIndex int32) MenuLinkIter {
 	var carg0 *C.GMenuModel
-	var carg1 C.gint           // in, none, casted
+	var carg1 C.gint           // in, none, converted
 	var cret  *C.GMenuLinkIter // return, full, converted
 
 	parentclass := (*C.GMenuModelClass)(classdata.PeekParentClass(UnsafeMenuModelToGlibNone(model)))
 
+	carg0 = (*C.GMenuModel)(UnsafeMenuModelToGlibNone(model))
 	carg1 = C.gint(itemIndex)
 
 	cret = C._gotk4_gio2_MenuModel_virtual_iterate_item_links(unsafe.Pointer(parentclass.iterate_item_links), carg0, carg1)
@@ -83383,6 +83790,8 @@ func (op *MountOperationInstance) ParentAborted() {
 
 	parentclass := (*C.GMountOperationClass)(classdata.PeekParentClass(UnsafeMountOperationToGlibNone(op)))
 
+	carg0 = (*C.GMountOperation)(UnsafeMountOperationToGlibNone(op))
+
 	C._gotk4_gio2_MountOperation_virtual_aborted(unsafe.Pointer(parentclass.aborted), carg0)
 	runtime.KeepAlive(op)
 }
@@ -83398,13 +83807,14 @@ func (op *MountOperationInstance) ParentAborted() {
 // 	- flags AskPasswordFlags 
 func (op *MountOperationInstance) ParentAskPassword(message string, defaultUser string, defaultDomain string, flags AskPasswordFlags) {
 	var carg0 *C.GMountOperation
-	var carg1 *C.char             // in, none, string
+	var carg1 *C.char             // in, none, converted
 	var carg2 *C.char             // in, none, string
 	var carg3 *C.char             // in, none, string
-	var carg4 C.GAskPasswordFlags // in, none, casted
+	var carg4 C.GAskPasswordFlags // in, none, string
 
 	parentclass := (*C.GMountOperationClass)(classdata.PeekParentClass(UnsafeMountOperationToGlibNone(op)))
 
+	carg0 = (*C.GMountOperation)(UnsafeMountOperationToGlibNone(op))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(message)))
 	defer C.free(unsafe.Pointer(carg1))
 	carg2 = (*C.char)(unsafe.Pointer(C.CString(defaultUser)))
@@ -83433,11 +83843,12 @@ func (op *MountOperationInstance) ParentAskPassword(message string, defaultUser 
 // Virtual implementation of #GMountOperation::ask-question.
 func (op *MountOperationInstance) ParentAskQuestion(message string, choices []string) {
 	var carg0 *C.GMountOperation
-	var carg1 *C.char  // in, none, string
-	var carg2 **C.char // in, transfer: none, C Pointers: 2, Name: array[utf8], array (inner: *typesystem.StringPrimitive, zero-terminated)
+	var carg1 *C.char  // in, none, converted
+	var carg2 **C.char // in, none, string
 
 	parentclass := (*C.GMountOperationClass)(classdata.PeekParentClass(UnsafeMountOperationToGlibNone(op)))
 
+	carg0 = (*C.GMountOperation)(UnsafeMountOperationToGlibNone(op))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(message)))
 	defer C.free(unsafe.Pointer(carg1))
 	_ = choices
@@ -83460,10 +83871,11 @@ func (op *MountOperationInstance) ParentAskQuestion(message string, choices []st
 // Emits the #GMountOperation::reply signal.
 func (op *MountOperationInstance) ParentReply(result MountOperationResult) {
 	var carg0 *C.GMountOperation
-	var carg1 C.GMountOperationResult // in, none, casted
+	var carg1 C.GMountOperationResult // in, none, converted
 
 	parentclass := (*C.GMountOperationClass)(classdata.PeekParentClass(UnsafeMountOperationToGlibNone(op)))
 
+	carg0 = (*C.GMountOperation)(UnsafeMountOperationToGlibNone(op))
 	carg1 = C.GMountOperationResult(result)
 
 	C._gotk4_gio2_MountOperation_virtual_reply(unsafe.Pointer(parentclass.reply), carg0, carg1)
@@ -83481,12 +83893,13 @@ func (op *MountOperationInstance) ParentReply(result MountOperationResult) {
 // 	- bytesLeft int64 
 func (op *MountOperationInstance) ParentShowUnmountProgress(message string, timeLeft int64, bytesLeft int64) {
 	var carg0 *C.GMountOperation
-	var carg1 *C.gchar // in, none, string
-	var carg2 C.gint64 // in, none, casted
+	var carg1 *C.gchar // in, none, converted
+	var carg2 C.gint64 // in, none, string
 	var carg3 C.gint64 // in, none, casted
 
 	parentclass := (*C.GMountOperationClass)(classdata.PeekParentClass(UnsafeMountOperationToGlibNone(op)))
 
+	carg0 = (*C.GMountOperation)(UnsafeMountOperationToGlibNone(op))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(message)))
 	defer C.free(unsafe.Pointer(carg1))
 	carg2 = C.gint64(timeLeft)
@@ -87420,6 +87833,7 @@ func (stream *OutputStreamInstance) ParentCloseFinish(result AsyncResult) (bool,
 
 	parentclass := (*C.GOutputStreamClass)(classdata.PeekParentClass(UnsafeOutputStreamToGlibNone(stream)))
 
+	carg0 = (*C.GOutputStream)(UnsafeOutputStreamToGlibNone(stream))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_OutputStream_virtual_close_finish(unsafe.Pointer(parentclass.close_finish), carg0, carg1, &_cerr)
@@ -87452,12 +87866,13 @@ func (stream *OutputStreamInstance) ParentCloseFinish(result AsyncResult) (bool,
 // 	- _goerr error (nullable): an error 
 func (stream *OutputStreamInstance) ParentCloseFn(cancellable context.Context) (bool, error) {
 	var carg0 *C.GOutputStream
-	var carg1 *C.GCancellable // in, none, converted, nullable
+	var carg1 *C.GCancellable // in, none, converted
 	var cret  C.gboolean      // return
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	parentclass := (*C.GOutputStreamClass)(classdata.PeekParentClass(UnsafeOutputStreamToGlibNone(stream)))
 
+	carg0 = (*C.GOutputStream)(UnsafeOutputStreamToGlibNone(stream))
 	if cancellable != nil {
 		carg1 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -87502,12 +87917,13 @@ func (stream *OutputStreamInstance) ParentCloseFn(cancellable context.Context) (
 // was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.
 func (stream *OutputStreamInstance) ParentFlush(cancellable context.Context) (bool, error) {
 	var carg0 *C.GOutputStream
-	var carg1 *C.GCancellable // in, none, converted, nullable
+	var carg1 *C.GCancellable // in, none, converted
 	var cret  C.gboolean      // return
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	parentclass := (*C.GOutputStreamClass)(classdata.PeekParentClass(UnsafeOutputStreamToGlibNone(stream)))
 
+	carg0 = (*C.GOutputStream)(UnsafeOutputStreamToGlibNone(stream))
 	if cancellable != nil {
 		carg1 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -87550,6 +87966,7 @@ func (stream *OutputStreamInstance) ParentFlushFinish(result AsyncResult) (bool,
 
 	parentclass := (*C.GOutputStreamClass)(classdata.PeekParentClass(UnsafeOutputStreamToGlibNone(stream)))
 
+	carg0 = (*C.GOutputStream)(UnsafeOutputStreamToGlibNone(stream))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_OutputStream_virtual_flush_finish(unsafe.Pointer(parentclass.flush_finish), carg0, carg1, &_cerr)
@@ -87586,14 +88003,15 @@ func (stream *OutputStreamInstance) ParentFlushFinish(result AsyncResult) (bool,
 // Splices an input stream into an output stream.
 func (stream *OutputStreamInstance) ParentSplice(cancellable context.Context, source InputStream, flags OutputStreamSpliceFlags) (int, error) {
 	var carg0 *C.GOutputStream
-	var carg3 *C.GCancellable            // in, none, converted, nullable
-	var carg1 *C.GInputStream            // in, none, converted
-	var carg2 C.GOutputStreamSpliceFlags // in, none, casted
+	var carg3 *C.GCancellable            // in, none, converted
+	var carg1 *C.GInputStream            // in, none, converted, nullable
+	var carg2 C.GOutputStreamSpliceFlags // in, none, converted
 	var cret  C.gssize                   // return, none, casted
 	var _cerr *C.GError                  // out, full, converted, nullable
 
 	parentclass := (*C.GOutputStreamClass)(classdata.PeekParentClass(UnsafeOutputStreamToGlibNone(stream)))
 
+	carg0 = (*C.GOutputStream)(UnsafeOutputStreamToGlibNone(stream))
 	if cancellable != nil {
 		carg3 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -87638,6 +88056,7 @@ func (stream *OutputStreamInstance) ParentSpliceFinish(result AsyncResult) (int,
 
 	parentclass := (*C.GOutputStreamClass)(classdata.PeekParentClass(UnsafeOutputStreamToGlibNone(stream)))
 
+	carg0 = (*C.GOutputStream)(UnsafeOutputStreamToGlibNone(stream))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_OutputStream_virtual_splice_finish(unsafe.Pointer(parentclass.splice_finish), carg0, carg1, &_cerr)
@@ -87676,6 +88095,7 @@ func (stream *OutputStreamInstance) ParentWriteFinish(result AsyncResult) (int, 
 
 	parentclass := (*C.GOutputStreamClass)(classdata.PeekParentClass(UnsafeOutputStreamToGlibNone(stream)))
 
+	carg0 = (*C.GOutputStream)(UnsafeOutputStreamToGlibNone(stream))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_OutputStream_virtual_write_finish(unsafe.Pointer(parentclass.write_finish), carg0, carg1, &_cerr)
@@ -87728,14 +88148,15 @@ func (stream *OutputStreamInstance) ParentWriteFinish(result AsyncResult) (int, 
 // On error -1 is returned and @error is set accordingly.
 func (stream *OutputStreamInstance) ParentWriteFn(cancellable context.Context, buffer []byte) (int, error) {
 	var carg0 *C.GOutputStream
-	var carg3 *C.GCancellable // in, none, converted, nullable
-	var carg1 unsafe.Pointer  // in, transfer: none, C Pointers: 1, Name: array[unknown], nullable, array (inner: <nil>, length-by: carg2)
-	var carg2 C.gsize         // implicit
+	var carg3 *C.GCancellable // in, none, converted
+	var carg1 unsafe.Pointer  // in, none, converted, nullable
+	var carg2 C.gsize         // in, transfer: none, C Pointers: 1, Name: array[unknown], nullable, array (inner: <nil>, length-by: carg2)
 	var cret  C.gssize        // return, none, casted
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	parentclass := (*C.GOutputStreamClass)(classdata.PeekParentClass(UnsafeOutputStreamToGlibNone(stream)))
 
+	carg0 = (*C.GOutputStream)(UnsafeOutputStreamToGlibNone(stream))
 	if cancellable != nil {
 		carg3 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -87783,6 +88204,7 @@ func (stream *OutputStreamInstance) ParentWritevFinish(result AsyncResult) (uint
 
 	parentclass := (*C.GOutputStreamClass)(classdata.PeekParentClass(UnsafeOutputStreamToGlibNone(stream)))
 
+	carg0 = (*C.GOutputStream)(UnsafeOutputStreamToGlibNone(stream))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_OutputStream_virtual_writev_finish(unsafe.Pointer(parentclass.writev_finish), carg0, carg1, &carg2, &_cerr)
@@ -87844,15 +88266,16 @@ func (stream *OutputStreamInstance) ParentWritevFinish(result AsyncResult) (uint
 // the aggregate buffer size must not exceed %G_MAXSSIZE bytes.
 func (stream *OutputStreamInstance) ParentWritevFn(cancellable context.Context, vectors []OutputVector) (uint, bool, error) {
 	var carg0 *C.GOutputStream
-	var carg4 *C.GCancellable  // in, none, converted, nullable
-	var carg1 *C.GOutputVector // in, transfer: none, C Pointers: 1, Name: array[OutputVector], array (inner: *typesystem.Record, length-by: carg2)
-	var carg2 C.gsize          // implicit
+	var carg4 *C.GCancellable  // in, none, converted
+	var carg1 *C.GOutputVector // in, none, converted, nullable
+	var carg2 C.gsize          // in, transfer: none, C Pointers: 1, Name: array[OutputVector], array (inner: *typesystem.Record, length-by: carg2)
 	var carg3 C.gsize          // out, full, casted
 	var cret  C.gboolean       // return
 	var _cerr *C.GError        // out, full, converted, nullable
 
 	parentclass := (*C.GOutputStreamClass)(classdata.PeekParentClass(UnsafeOutputStreamToGlibNone(stream)))
 
+	carg0 = (*C.GOutputStream)(UnsafeOutputStreamToGlibNone(stream))
 	if cancellable != nil {
 		carg4 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -88843,12 +89266,13 @@ func UnsafeApplyPermissionOverrides[Instance Permission](gclass unsafe.Pointer, 
 // the non-blocking version.
 func (permission *PermissionInstance) ParentAcquire(cancellable context.Context) (bool, error) {
 	var carg0 *C.GPermission
-	var carg1 *C.GCancellable // in, none, converted, nullable
+	var carg1 *C.GCancellable // in, none, converted
 	var cret  C.gboolean      // return
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	parentclass := (*C.GPermissionClass)(classdata.PeekParentClass(UnsafePermissionToGlibNone(permission)))
 
+	carg0 = (*C.GPermission)(UnsafePermissionToGlibNone(permission))
 	if cancellable != nil {
 		carg1 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -88895,6 +89319,7 @@ func (permission *PermissionInstance) ParentAcquireFinish(result AsyncResult) (b
 
 	parentclass := (*C.GPermissionClass)(classdata.PeekParentClass(UnsafePermissionToGlibNone(permission)))
 
+	carg0 = (*C.GPermission)(UnsafePermissionToGlibNone(permission))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_Permission_virtual_acquire_finish(unsafe.Pointer(parentclass.acquire_finish), carg0, carg1, &_cerr)
@@ -88943,12 +89368,13 @@ func (permission *PermissionInstance) ParentAcquireFinish(result AsyncResult) (b
 // the non-blocking version.
 func (permission *PermissionInstance) ParentRelease(cancellable context.Context) (bool, error) {
 	var carg0 *C.GPermission
-	var carg1 *C.GCancellable // in, none, converted, nullable
+	var carg1 *C.GCancellable // in, none, converted
 	var cret  C.gboolean      // return
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	parentclass := (*C.GPermissionClass)(classdata.PeekParentClass(UnsafePermissionToGlibNone(permission)))
 
+	carg0 = (*C.GPermission)(UnsafePermissionToGlibNone(permission))
 	if cancellable != nil {
 		carg1 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -88995,6 +89421,7 @@ func (permission *PermissionInstance) ParentReleaseFinish(result AsyncResult) (b
 
 	parentclass := (*C.GPermissionClass)(classdata.PeekParentClass(UnsafePermissionToGlibNone(permission)))
 
+	carg0 = (*C.GPermission)(UnsafePermissionToGlibNone(permission))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_Permission_virtual_release_finish(unsafe.Pointer(parentclass.release_finish), carg0, carg1, &_cerr)
@@ -90799,13 +91226,14 @@ func UnsafeApplyResolverOverrides[Instance Resolver](gclass unsafe.Pointer, over
 // %G_IO_ERROR_CANCELLED.
 func (resolver *ResolverInstance) ParentLookupByAddress(cancellable context.Context, address InetAddress) (string, error) {
 	var carg0 *C.GResolver
-	var carg2 *C.GCancellable // in, none, converted, nullable
-	var carg1 *C.GInetAddress // in, none, converted
+	var carg2 *C.GCancellable // in, none, converted
+	var carg1 *C.GInetAddress // in, none, converted, nullable
 	var cret  *C.gchar        // return, full, string
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	parentclass := (*C.GResolverClass)(classdata.PeekParentClass(UnsafeResolverToGlibNone(resolver)))
 
+	carg0 = (*C.GResolver)(UnsafeResolverToGlibNone(resolver))
 	if cancellable != nil {
 		carg2 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -90854,6 +91282,7 @@ func (resolver *ResolverInstance) ParentLookupByAddressFinish(result AsyncResult
 
 	parentclass := (*C.GResolverClass)(classdata.PeekParentClass(UnsafeResolverToGlibNone(resolver)))
 
+	carg0 = (*C.GResolver)(UnsafeResolverToGlibNone(resolver))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_Resolver_virtual_lookup_by_address_finish(unsafe.Pointer(parentclass.lookup_by_address_finish), carg0, carg1, &_cerr)
@@ -90910,13 +91339,14 @@ func (resolver *ResolverInstance) ParentLookupByAddressFinish(result AsyncResult
 // #GSocketConnectable interface.
 func (resolver *ResolverInstance) ParentLookupByName(cancellable context.Context, hostname string) ([]InetAddress, error) {
 	var carg0 *C.GResolver
-	var carg2 *C.GCancellable // in, none, converted, nullable
-	var carg1 *C.gchar        // in, none, string
+	var carg2 *C.GCancellable // in, none, converted
+	var carg1 *C.gchar        // in, none, converted, nullable
 	var cret  *C.GList        // container, transfer: full
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	parentclass := (*C.GResolverClass)(classdata.PeekParentClass(UnsafeResolverToGlibNone(resolver)))
 
+	carg0 = (*C.GResolver)(UnsafeResolverToGlibNone(resolver))
 	if cancellable != nil {
 		carg2 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -90972,6 +91402,7 @@ func (resolver *ResolverInstance) ParentLookupByNameFinish(result AsyncResult) (
 
 	parentclass := (*C.GResolverClass)(classdata.PeekParentClass(UnsafeResolverToGlibNone(resolver)))
 
+	carg0 = (*C.GResolver)(UnsafeResolverToGlibNone(resolver))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_Resolver_virtual_lookup_by_name_finish(unsafe.Pointer(parentclass.lookup_by_name_finish), carg0, carg1, &_cerr)
@@ -91015,14 +91446,15 @@ func (resolver *ResolverInstance) ParentLookupByNameFinish(result AsyncResult) (
 // results with %G_RESOLVER_NAME_LOOKUP_FLAGS_IPV4_ONLY.
 func (resolver *ResolverInstance) ParentLookupByNameWithFlags(cancellable context.Context, hostname string, flags ResolverNameLookupFlags) ([]InetAddress, error) {
 	var carg0 *C.GResolver
-	var carg3 *C.GCancellable            // in, none, converted, nullable
-	var carg1 *C.gchar                   // in, none, string
-	var carg2 C.GResolverNameLookupFlags // in, none, casted
+	var carg3 *C.GCancellable            // in, none, converted
+	var carg1 *C.gchar                   // in, none, converted, nullable
+	var carg2 C.GResolverNameLookupFlags // in, none, string
 	var cret  *C.GList                   // container, transfer: full
 	var _cerr *C.GError                  // out, full, converted, nullable
 
 	parentclass := (*C.GResolverClass)(classdata.PeekParentClass(UnsafeResolverToGlibNone(resolver)))
 
+	carg0 = (*C.GResolver)(UnsafeResolverToGlibNone(resolver))
 	if cancellable != nil {
 		carg3 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -91080,6 +91512,7 @@ func (resolver *ResolverInstance) ParentLookupByNameWithFlagsFinish(result Async
 
 	parentclass := (*C.GResolverClass)(classdata.PeekParentClass(UnsafeResolverToGlibNone(resolver)))
 
+	carg0 = (*C.GResolver)(UnsafeResolverToGlibNone(resolver))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_Resolver_virtual_lookup_by_name_with_flags_finish(unsafe.Pointer(parentclass.lookup_by_name_with_flags_finish), carg0, carg1, &_cerr)
@@ -91130,6 +91563,7 @@ func (resolver *ResolverInstance) ParentLookupServiceFinish(result AsyncResult) 
 
 	parentclass := (*C.GResolverClass)(classdata.PeekParentClass(UnsafeResolverToGlibNone(resolver)))
 
+	carg0 = (*C.GResolver)(UnsafeResolverToGlibNone(resolver))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_Resolver_virtual_lookup_service_finish(unsafe.Pointer(parentclass.lookup_service_finish), carg0, carg1, &_cerr)
@@ -91160,6 +91594,8 @@ func (resolver *ResolverInstance) ParentReload() {
 	var carg0 *C.GResolver
 
 	parentclass := (*C.GResolverClass)(classdata.PeekParentClass(UnsafeResolverToGlibNone(resolver)))
+
+	carg0 = (*C.GResolver)(UnsafeResolverToGlibNone(resolver))
 
 	C._gotk4_gio2_Resolver_virtual_reload(unsafe.Pointer(parentclass.reload), carg0)
 	runtime.KeepAlive(resolver)
@@ -93614,12 +94050,13 @@ func UnsafeApplySettingsOverrides[Instance Settings](gclass unsafe.Pointer, over
 // 	- goret bool 
 func (settings *SettingsInstance) ParentChangeEvent(keys *glib.Quark, nKeys int32) bool {
 	var carg0 *C.GSettings
-	var carg1 *C.GQuark  // in, transfer: none, C Pointers: 1, Name: Quark
-	var carg2 C.gint     // in, none, casted
+	var carg1 *C.GQuark  // in, none, converted
+	var carg2 C.gint     // in, transfer: none, C Pointers: 1, Name: Quark
 	var cret  C.gboolean // return
 
 	parentclass := (*C.GSettingsClass)(classdata.PeekParentClass(UnsafeSettingsToGlibNone(settings)))
 
+	carg0 = (*C.GSettings)(UnsafeSettingsToGlibNone(settings))
 	_ = keys
 	_ = carg1
 	panic("unimplemented conversion of *glib.Quark (const GQuark*)")
@@ -93647,10 +94084,11 @@ func (settings *SettingsInstance) ParentChangeEvent(keys *glib.Quark, nKeys int3
 // 	- key string 
 func (settings *SettingsInstance) ParentChanged(key string) {
 	var carg0 *C.GSettings
-	var carg1 *C.gchar // in, none, string
+	var carg1 *C.gchar // in, none, converted
 
 	parentclass := (*C.GSettingsClass)(classdata.PeekParentClass(UnsafeSettingsToGlibNone(settings)))
 
+	carg0 = (*C.GSettings)(UnsafeSettingsToGlibNone(settings))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(key)))
 	defer C.free(unsafe.Pointer(carg1))
 
@@ -93671,11 +94109,12 @@ func (settings *SettingsInstance) ParentChanged(key string) {
 // 	- goret bool 
 func (settings *SettingsInstance) ParentWritableChangeEvent(key glib.Quark) bool {
 	var carg0 *C.GSettings
-	var carg1 C.GQuark   // in, none, casted, alias
+	var carg1 C.GQuark   // in, none, converted
 	var cret  C.gboolean // return
 
 	parentclass := (*C.GSettingsClass)(classdata.PeekParentClass(UnsafeSettingsToGlibNone(settings)))
 
+	carg0 = (*C.GSettings)(UnsafeSettingsToGlibNone(settings))
 	carg1 = C.GQuark(key)
 
 	cret = C._gotk4_gio2_Settings_virtual_writable_change_event(unsafe.Pointer(parentclass.writable_change_event), carg0, carg1)
@@ -93699,10 +94138,11 @@ func (settings *SettingsInstance) ParentWritableChangeEvent(key glib.Quark) bool
 // 	- key string 
 func (settings *SettingsInstance) ParentWritableChanged(key string) {
 	var carg0 *C.GSettings
-	var carg1 *C.gchar // in, none, string
+	var carg1 *C.gchar // in, none, converted
 
 	parentclass := (*C.GSettingsClass)(classdata.PeekParentClass(UnsafeSettingsToGlibNone(settings)))
 
+	carg0 = (*C.GSettings)(UnsafeSettingsToGlibNone(settings))
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(key)))
 	defer C.free(unsafe.Pointer(carg1))
 
@@ -99386,6 +99826,8 @@ func (address *SocketAddressInstance) ParentGetFamily() SocketFamily {
 
 	parentclass := (*C.GSocketAddressClass)(classdata.PeekParentClass(UnsafeSocketAddressToGlibNone(address)))
 
+	carg0 = (*C.GSocketAddress)(UnsafeSocketAddressToGlibNone(address))
+
 	cret = C._gotk4_gio2_SocketAddress_virtual_get_family(unsafe.Pointer(parentclass.get_family), carg0)
 	runtime.KeepAlive(address)
 
@@ -99411,6 +99853,8 @@ func (address *SocketAddressInstance) ParentGetNativeSize() int {
 	var cret  C.gssize // return, none, casted
 
 	parentclass := (*C.GSocketAddressClass)(classdata.PeekParentClass(UnsafeSocketAddressToGlibNone(address)))
+
+	carg0 = (*C.GSocketAddress)(UnsafeSocketAddressToGlibNone(address))
 
 	cret = C._gotk4_gio2_SocketAddress_virtual_get_native_size(unsafe.Pointer(parentclass.get_native_size), carg0)
 	runtime.KeepAlive(address)
@@ -99884,12 +100328,13 @@ func UnsafeApplySocketAddressEnumeratorOverrides[Instance SocketAddressEnumerato
 // ignored.
 func (enumerator *SocketAddressEnumeratorInstance) ParentNext(cancellable context.Context) (SocketAddress, error) {
 	var carg0 *C.GSocketAddressEnumerator
-	var carg1 *C.GCancellable   // in, none, converted, nullable
+	var carg1 *C.GCancellable   // in, none, converted
 	var cret  *C.GSocketAddress // return, full, converted, nullable
 	var _cerr *C.GError         // out, full, converted, nullable
 
 	parentclass := (*C.GSocketAddressEnumeratorClass)(classdata.PeekParentClass(UnsafeSocketAddressEnumeratorToGlibNone(enumerator)))
 
+	carg0 = (*C.GSocketAddressEnumerator)(UnsafeSocketAddressEnumeratorToGlibNone(enumerator))
 	if cancellable != nil {
 		carg1 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -99935,6 +100380,7 @@ func (enumerator *SocketAddressEnumeratorInstance) ParentNextFinish(result Async
 
 	parentclass := (*C.GSocketAddressEnumeratorClass)(classdata.PeekParentClass(UnsafeSocketAddressEnumeratorToGlibNone(enumerator)))
 
+	carg0 = (*C.GSocketAddressEnumerator)(UnsafeSocketAddressEnumeratorToGlibNone(enumerator))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_SocketAddressEnumerator_virtual_next_finish(unsafe.Pointer(parentclass.next_finish), carg0, carg1, &_cerr)
@@ -101841,12 +102287,13 @@ func UnsafeApplySocketClientOverrides[Instance SocketClient](gclass unsafe.Point
 // 	- connection IOStream 
 func (client *SocketClientInstance) ParentEvent(event SocketClientEvent, connectable SocketConnectable, connection IOStream) {
 	var carg0 *C.GSocketClient
-	var carg1 C.GSocketClientEvent  // in, none, casted
-	var carg2 *C.GSocketConnectable // in, none, converted
+	var carg1 C.GSocketClientEvent  // in, none, converted
+	var carg2 *C.GSocketConnectable // in, none, casted
 	var carg3 *C.GIOStream          // in, none, converted
 
 	parentclass := (*C.GSocketClientClass)(classdata.PeekParentClass(UnsafeSocketClientToGlibNone(client)))
 
+	carg0 = (*C.GSocketClient)(UnsafeSocketClientToGlibNone(client))
 	carg1 = C.GSocketClientEvent(event)
 	carg2 = (*C.GSocketConnectable)(UnsafeSocketConnectableToGlibNone(connectable))
 	carg3 = (*C.GIOStream)(UnsafeIOStreamToGlibNone(connection))
@@ -102721,6 +103168,8 @@ func (message *SocketControlMessageInstance) ParentGetLevel() int32 {
 
 	parentclass := (*C.GSocketControlMessageClass)(classdata.PeekParentClass(UnsafeSocketControlMessageToGlibNone(message)))
 
+	carg0 = (*C.GSocketControlMessage)(UnsafeSocketControlMessageToGlibNone(message))
+
 	cret = C._gotk4_gio2_SocketControlMessage_virtual_get_level(unsafe.Pointer(parentclass.get_level), carg0)
 	runtime.KeepAlive(message)
 
@@ -102746,6 +103195,8 @@ func (message *SocketControlMessageInstance) ParentGetSize() uint {
 
 	parentclass := (*C.GSocketControlMessageClass)(classdata.PeekParentClass(UnsafeSocketControlMessageToGlibNone(message)))
 
+	carg0 = (*C.GSocketControlMessage)(UnsafeSocketControlMessageToGlibNone(message))
+
 	cret = C._gotk4_gio2_SocketControlMessage_virtual_get_size(unsafe.Pointer(parentclass.get_size), carg0)
 	runtime.KeepAlive(message)
 
@@ -102769,6 +103220,8 @@ func (message *SocketControlMessageInstance) ParentGetType() int32 {
 	var cret  C.int // return, none, casted
 
 	parentclass := (*C.GSocketControlMessageClass)(classdata.PeekParentClass(UnsafeSocketControlMessageToGlibNone(message)))
+
+	carg0 = (*C.GSocketControlMessage)(UnsafeSocketControlMessageToGlibNone(message))
 
 	cret = C._gotk4_gio2_SocketControlMessage_virtual_get_type(unsafe.Pointer(parentclass.get_type), carg0)
 	runtime.KeepAlive(message)
@@ -103765,6 +104218,8 @@ func (listener *SocketListenerInstance) ParentChanged() {
 
 	parentclass := (*C.GSocketListenerClass)(classdata.PeekParentClass(UnsafeSocketListenerToGlibNone(listener)))
 
+	carg0 = (*C.GSocketListener)(UnsafeSocketListenerToGlibNone(listener))
+
 	C._gotk4_gio2_SocketListener_virtual_changed(unsafe.Pointer(parentclass.changed), carg0)
 	runtime.KeepAlive(listener)
 }
@@ -103778,11 +104233,12 @@ func (listener *SocketListenerInstance) ParentChanged() {
 // 	- socket Socket 
 func (listener *SocketListenerInstance) ParentEvent(event SocketListenerEvent, socket Socket) {
 	var carg0 *C.GSocketListener
-	var carg1 C.GSocketListenerEvent // in, none, casted
-	var carg2 *C.GSocket             // in, none, converted
+	var carg1 C.GSocketListenerEvent // in, none, converted
+	var carg2 *C.GSocket             // in, none, casted
 
 	parentclass := (*C.GSocketListenerClass)(classdata.PeekParentClass(UnsafeSocketListenerToGlibNone(listener)))
 
+	carg0 = (*C.GSocketListener)(UnsafeSocketListenerToGlibNone(listener))
 	carg1 = C.GSocketListenerEvent(event)
 	carg2 = (*C.GSocket)(UnsafeSocketToGlibNone(socket))
 
@@ -104153,6 +104609,7 @@ func (service *SocketServiceInstance) ParentIncoming(connection SocketConnection
 
 	parentclass := (*C.GSocketServiceClass)(classdata.PeekParentClass(UnsafeSocketServiceToGlibNone(service)))
 
+	carg0 = (*C.GSocketService)(UnsafeSocketServiceToGlibNone(service))
 	carg1 = (*C.GSocketConnection)(UnsafeSocketConnectionToGlibNone(connection))
 	carg2 = (*C.GObject)(gobject.UnsafeObjectToGlibNone(sourceObject))
 
@@ -106927,6 +107384,7 @@ func (service *ThreadedSocketServiceInstance) ParentRun(connection SocketConnect
 
 	parentclass := (*C.GThreadedSocketServiceClass)(classdata.PeekParentClass(UnsafeThreadedSocketServiceToGlibNone(service)))
 
+	carg0 = (*C.GThreadedSocketService)(UnsafeThreadedSocketServiceToGlibNone(service))
 	carg1 = (*C.GSocketConnection)(UnsafeSocketConnectionToGlibNone(connection))
 	carg2 = (*C.GObject)(gobject.UnsafeObjectToGlibNone(sourceObject))
 
@@ -107911,12 +108369,13 @@ func UnsafeApplyTlsCertificateOverrides[Instance TlsCertificate](gclass unsafe.P
 // handle the verification.
 func (cert *TlsCertificateInstance) ParentVerify(identity SocketConnectable, trustedCa TlsCertificate) TLSCertificateFlags {
 	var carg0 *C.GTlsCertificate
-	var carg1 *C.GSocketConnectable  // in, none, converted, nullable
+	var carg1 *C.GSocketConnectable  // in, none, converted
 	var carg2 *C.GTlsCertificate     // in, none, converted, nullable
 	var cret  C.GTlsCertificateFlags // return, none, casted
 
 	parentclass := (*C.GTlsCertificateClass)(classdata.PeekParentClass(UnsafeTlsCertificateToGlibNone(cert)))
 
+	carg0 = (*C.GTlsCertificate)(UnsafeTlsCertificateToGlibNone(cert))
 	if identity != nil {
 		carg1 = (*C.GSocketConnectable)(UnsafeSocketConnectableToGlibNone(identity))
 	}
@@ -109486,11 +109945,12 @@ func UnsafeApplyTlsConnectionOverrides[Instance TlsConnection](gclass unsafe.Poi
 func (connection *TlsConnectionInstance) ParentAcceptCertificate(peerCert TlsCertificate, errors TLSCertificateFlags) bool {
 	var carg0 *C.GTlsConnection
 	var carg1 *C.GTlsCertificate     // in, none, converted
-	var carg2 C.GTlsCertificateFlags // in, none, casted
+	var carg2 C.GTlsCertificateFlags // in, none, converted
 	var cret  C.gboolean             // return
 
 	parentclass := (*C.GTlsConnectionClass)(classdata.PeekParentClass(UnsafeTlsConnectionToGlibNone(connection)))
 
+	carg0 = (*C.GTlsConnection)(UnsafeTlsConnectionToGlibNone(connection))
 	carg1 = (*C.GTlsCertificate)(UnsafeTlsCertificateToGlibNone(peerCert))
 	carg2 = C.GTlsCertificateFlags(errors)
 
@@ -109527,6 +109987,8 @@ func (conn *TlsConnectionInstance) ParentGetNegotiatedProtocol() string {
 	var cret  *C.gchar // return, none, string, nullable-string
 
 	parentclass := (*C.GTlsConnectionClass)(classdata.PeekParentClass(UnsafeTlsConnectionToGlibNone(conn)))
+
+	carg0 = (*C.GTlsConnection)(UnsafeTlsConnectionToGlibNone(conn))
 
 	cret = C._gotk4_gio2_TlsConnection_virtual_get_negotiated_protocol(unsafe.Pointer(parentclass.get_negotiated_protocol), carg0)
 	runtime.KeepAlive(conn)
@@ -109585,12 +110047,13 @@ func (conn *TlsConnectionInstance) ParentGetNegotiatedProtocol() string {
 // handshake.
 func (conn *TlsConnectionInstance) ParentHandshake(cancellable context.Context) (bool, error) {
 	var carg0 *C.GTlsConnection
-	var carg1 *C.GCancellable // in, none, converted, nullable
+	var carg1 *C.GCancellable // in, none, converted
 	var cret  C.gboolean      // return
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	parentclass := (*C.GTlsConnectionClass)(classdata.PeekParentClass(UnsafeTlsConnectionToGlibNone(conn)))
 
+	carg0 = (*C.GTlsConnection)(UnsafeTlsConnectionToGlibNone(conn))
 	if cancellable != nil {
 		carg1 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -109634,6 +110097,7 @@ func (conn *TlsConnectionInstance) ParentHandshakeFinish(result AsyncResult) (bo
 
 	parentclass := (*C.GTlsConnectionClass)(classdata.PeekParentClass(UnsafeTlsConnectionToGlibNone(conn)))
 
+	carg0 = (*C.GTlsConnection)(UnsafeTlsConnectionToGlibNone(conn))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_TlsConnection_virtual_handshake_finish(unsafe.Pointer(parentclass.handshake_finish), carg0, carg1, &_cerr)
@@ -111359,6 +111823,7 @@ func (self *TlsDatabaseInstance) ParentCreateCertificateHandle(certificate TlsCe
 
 	parentclass := (*C.GTlsDatabaseClass)(classdata.PeekParentClass(UnsafeTlsDatabaseToGlibNone(self)))
 
+	carg0 = (*C.GTlsDatabase)(UnsafeTlsDatabaseToGlibNone(self))
 	carg1 = (*C.GTlsCertificate)(UnsafeTlsCertificateToGlibNone(certificate))
 
 	cret = C._gotk4_gio2_TlsDatabase_virtual_create_certificate_handle(unsafe.Pointer(parentclass.create_certificate_handle), carg0, carg1)
@@ -111404,15 +111869,16 @@ func (self *TlsDatabaseInstance) ParentCreateCertificateHandle(certificate TlsCe
 // the lookup operation asynchronously.
 func (self *TlsDatabaseInstance) ParentLookupCertificateForHandle(cancellable context.Context, handle string, interaction TlsInteraction, flags TLSDatabaseLookupFlags) (TlsCertificate, error) {
 	var carg0 *C.GTlsDatabase
-	var carg4 *C.GCancellable           // in, none, converted, nullable
-	var carg1 *C.gchar                  // in, none, string
-	var carg2 *C.GTlsInteraction        // in, none, converted, nullable
-	var carg3 C.GTlsDatabaseLookupFlags // in, none, casted
+	var carg4 *C.GCancellable           // in, none, converted
+	var carg1 *C.gchar                  // in, none, converted, nullable
+	var carg2 *C.GTlsInteraction        // in, none, string
+	var carg3 C.GTlsDatabaseLookupFlags // in, none, converted, nullable
 	var cret  *C.GTlsCertificate        // return, full, converted, nullable
 	var _cerr *C.GError                 // out, full, converted, nullable
 
 	parentclass := (*C.GTlsDatabaseClass)(classdata.PeekParentClass(UnsafeTlsDatabaseToGlibNone(self)))
 
+	carg0 = (*C.GTlsDatabase)(UnsafeTlsDatabaseToGlibNone(self))
 	if cancellable != nil {
 		carg4 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -111468,6 +111934,7 @@ func (self *TlsDatabaseInstance) ParentLookupCertificateForHandleFinish(result A
 
 	parentclass := (*C.GTlsDatabaseClass)(classdata.PeekParentClass(UnsafeTlsDatabaseToGlibNone(self)))
 
+	carg0 = (*C.GTlsDatabase)(UnsafeTlsDatabaseToGlibNone(self))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_TlsDatabase_virtual_lookup_certificate_for_handle_finish(unsafe.Pointer(parentclass.lookup_certificate_for_handle_finish), carg0, carg1, &_cerr)
@@ -111522,15 +111989,16 @@ func (self *TlsDatabaseInstance) ParentLookupCertificateForHandleFinish(result A
 // decisions about TLS certificates.
 func (self *TlsDatabaseInstance) ParentLookupCertificateIssuer(cancellable context.Context, certificate TlsCertificate, interaction TlsInteraction, flags TLSDatabaseLookupFlags) (TlsCertificate, error) {
 	var carg0 *C.GTlsDatabase
-	var carg4 *C.GCancellable           // in, none, converted, nullable
-	var carg1 *C.GTlsCertificate        // in, none, converted
-	var carg2 *C.GTlsInteraction        // in, none, converted, nullable
-	var carg3 C.GTlsDatabaseLookupFlags // in, none, casted
+	var carg4 *C.GCancellable           // in, none, converted
+	var carg1 *C.GTlsCertificate        // in, none, converted, nullable
+	var carg2 *C.GTlsInteraction        // in, none, converted
+	var carg3 C.GTlsDatabaseLookupFlags // in, none, converted, nullable
 	var cret  *C.GTlsCertificate        // return, full, converted
 	var _cerr *C.GError                 // out, full, converted, nullable
 
 	parentclass := (*C.GTlsDatabaseClass)(classdata.PeekParentClass(UnsafeTlsDatabaseToGlibNone(self)))
 
+	carg0 = (*C.GTlsDatabase)(UnsafeTlsDatabaseToGlibNone(self))
 	if cancellable != nil {
 		carg4 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -111580,6 +112048,7 @@ func (self *TlsDatabaseInstance) ParentLookupCertificateIssuerFinish(result Asyn
 
 	parentclass := (*C.GTlsDatabaseClass)(classdata.PeekParentClass(UnsafeTlsDatabaseToGlibNone(self)))
 
+	carg0 = (*C.GTlsDatabase)(UnsafeTlsDatabaseToGlibNone(self))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_TlsDatabase_virtual_lookup_certificate_issuer_finish(unsafe.Pointer(parentclass.lookup_certificate_issuer_finish), carg0, carg1, &_cerr)
@@ -111619,6 +112088,7 @@ func (self *TlsDatabaseInstance) ParentLookupCertificatesIssuedByFinish(result A
 
 	parentclass := (*C.GTlsDatabaseClass)(classdata.PeekParentClass(UnsafeTlsDatabaseToGlibNone(self)))
 
+	carg0 = (*C.GTlsDatabase)(UnsafeTlsDatabaseToGlibNone(self))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_TlsDatabase_virtual_lookup_certificates_issued_by_finish(unsafe.Pointer(parentclass.lookup_certificates_issued_by_finish), carg0, carg1, &_cerr)
@@ -111722,17 +112192,18 @@ func (self *TlsDatabaseInstance) ParentLookupCertificatesIssuedByFinish(result A
 // perform the verification operation asynchronously.
 func (self *TlsDatabaseInstance) ParentVerifyChain(cancellable context.Context, chain TlsCertificate, purpose string, identity SocketConnectable, interaction TlsInteraction, flags TLSDatabaseVerifyFlags) (TLSCertificateFlags, error) {
 	var carg0 *C.GTlsDatabase
-	var carg6 *C.GCancellable           // in, none, converted, nullable
-	var carg1 *C.GTlsCertificate        // in, none, converted
-	var carg2 *C.gchar                  // in, none, string
-	var carg3 *C.GSocketConnectable     // in, none, converted, nullable
+	var carg6 *C.GCancellable           // in, none, converted
+	var carg1 *C.GTlsCertificate        // in, none, converted, nullable
+	var carg2 *C.gchar                  // in, none, converted
+	var carg3 *C.GSocketConnectable     // in, none, string
 	var carg4 *C.GTlsInteraction        // in, none, converted, nullable
-	var carg5 C.GTlsDatabaseVerifyFlags // in, none, casted
+	var carg5 C.GTlsDatabaseVerifyFlags // in, none, converted, nullable
 	var cret  C.GTlsCertificateFlags    // return, none, casted
 	var _cerr *C.GError                 // out, full, converted, nullable
 
 	parentclass := (*C.GTlsDatabaseClass)(classdata.PeekParentClass(UnsafeTlsDatabaseToGlibNone(self)))
 
+	carg0 = (*C.GTlsDatabase)(UnsafeTlsDatabaseToGlibNone(self))
 	if cancellable != nil {
 		carg6 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -111798,6 +112269,7 @@ func (self *TlsDatabaseInstance) ParentVerifyChainFinish(result AsyncResult) (TL
 
 	parentclass := (*C.GTlsDatabaseClass)(classdata.PeekParentClass(UnsafeTlsDatabaseToGlibNone(self)))
 
+	carg0 = (*C.GTlsDatabase)(UnsafeTlsDatabaseToGlibNone(self))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_TlsDatabase_virtual_verify_chain_finish(unsafe.Pointer(parentclass.verify_chain_finish), carg0, carg1, &_cerr)
@@ -112898,13 +113370,14 @@ func UnsafeApplyTlsInteractionOverrides[Instance TlsInteraction](gclass unsafe.P
 // not support immediate cancellation.
 func (interaction *TlsInteractionInstance) ParentAskPassword(cancellable context.Context, password TlsPassword) (TLSInteractionResult, error) {
 	var carg0 *C.GTlsInteraction
-	var carg2 *C.GCancellable         // in, none, converted, nullable
-	var carg1 *C.GTlsPassword         // in, none, converted
+	var carg2 *C.GCancellable         // in, none, converted
+	var carg1 *C.GTlsPassword         // in, none, converted, nullable
 	var cret  C.GTlsInteractionResult // return, none, casted
 	var _cerr *C.GError               // out, full, converted, nullable
 
 	parentclass := (*C.GTlsInteractionClass)(classdata.PeekParentClass(UnsafeTlsInteractionToGlibNone(interaction)))
 
+	carg0 = (*C.GTlsInteraction)(UnsafeTlsInteractionToGlibNone(interaction))
 	if cancellable != nil {
 		carg2 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -112955,6 +113428,7 @@ func (interaction *TlsInteractionInstance) ParentAskPasswordFinish(result AsyncR
 
 	parentclass := (*C.GTlsInteractionClass)(classdata.PeekParentClass(UnsafeTlsInteractionToGlibNone(interaction)))
 
+	carg0 = (*C.GTlsInteraction)(UnsafeTlsInteractionToGlibNone(interaction))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_TlsInteraction_virtual_ask_password_finish(unsafe.Pointer(parentclass.ask_password_finish), carg0, carg1, &_cerr)
@@ -113004,14 +113478,15 @@ func (interaction *TlsInteractionInstance) ParentAskPasswordFinish(result AsyncR
 // not support immediate cancellation.
 func (interaction *TlsInteractionInstance) ParentRequestCertificate(cancellable context.Context, connection TlsConnection, flags TLSCertificateRequestFlags) (TLSInteractionResult, error) {
 	var carg0 *C.GTlsInteraction
-	var carg3 *C.GCancellable               // in, none, converted, nullable
-	var carg1 *C.GTlsConnection             // in, none, converted
-	var carg2 C.GTlsCertificateRequestFlags // in, none, casted
+	var carg3 *C.GCancellable               // in, none, converted
+	var carg1 *C.GTlsConnection             // in, none, converted, nullable
+	var carg2 C.GTlsCertificateRequestFlags // in, none, converted
 	var cret  C.GTlsInteractionResult       // return, none, casted
 	var _cerr *C.GError                     // out, full, converted, nullable
 
 	parentclass := (*C.GTlsInteractionClass)(classdata.PeekParentClass(UnsafeTlsInteractionToGlibNone(interaction)))
 
+	carg0 = (*C.GTlsInteraction)(UnsafeTlsInteractionToGlibNone(interaction))
 	if cancellable != nil {
 		carg3 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -113065,6 +113540,7 @@ func (interaction *TlsInteractionInstance) ParentRequestCertificateFinish(result
 
 	parentclass := (*C.GTlsInteractionClass)(classdata.PeekParentClass(UnsafeTlsInteractionToGlibNone(interaction)))
 
+	carg0 = (*C.GTlsInteraction)(UnsafeTlsInteractionToGlibNone(interaction))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_TlsInteraction_virtual_request_certificate_finish(unsafe.Pointer(parentclass.request_certificate_finish), carg0, carg1, &_cerr)
@@ -113599,6 +114075,8 @@ func (password *TlsPasswordInstance) ParentGetDefaultWarning() string {
 
 	parentclass := (*C.GTlsPasswordClass)(classdata.PeekParentClass(UnsafeTlsPasswordToGlibNone(password)))
 
+	carg0 = (*C.GTlsPassword)(UnsafeTlsPasswordToGlibNone(password))
+
 	cret = C._gotk4_gio2_TlsPassword_virtual_get_default_warning(unsafe.Pointer(parentclass.get_default_warning), carg0)
 	runtime.KeepAlive(password)
 
@@ -113628,6 +114106,8 @@ func (password *TlsPasswordInstance) ParentGetValue() (uint, []byte) {
 	var cret  *C.guchar // return, transfer: none, C Pointers: 1, Name: array[guchar], scope: , array (inner: *typesystem.CastablePrimitive)
 
 	parentclass := (*C.GTlsPasswordClass)(classdata.PeekParentClass(UnsafeTlsPasswordToGlibNone(password)))
+
+	carg0 = (*C.GTlsPassword)(UnsafeTlsPasswordToGlibNone(password))
 
 	cret = C._gotk4_gio2_TlsPassword_virtual_get_value(unsafe.Pointer(parentclass.get_value), carg0, &carg1)
 	runtime.KeepAlive(password)
@@ -114543,6 +115023,7 @@ func (vfs *VfsInstance) ParentAddWritableNamespaces(list *FileAttributeInfoList)
 
 	parentclass := (*C.GVfsClass)(classdata.PeekParentClass(UnsafeVfsToGlibNone(vfs)))
 
+	carg0 = (*C.GVfs)(UnsafeVfsToGlibNone(vfs))
 	carg1 = (*C.GFileAttributeInfoList)(UnsafeFileAttributeInfoListToGlibNone(list))
 
 	C._gotk4_gio2_Vfs_virtual_add_writable_namespaces(unsafe.Pointer(parentclass.add_writable_namespaces), carg0, carg1)
@@ -114564,11 +115045,12 @@ func (vfs *VfsInstance) ParentAddWritableNamespaces(list *FileAttributeInfoList)
 // Gets a #GFile for @path.
 func (vfs *VfsInstance) ParentGetFileForPath(path string) File {
 	var carg0 *C.GVfs
-	var carg1 *C.char  // in, none, string
+	var carg1 *C.char  // in, none, converted
 	var cret  *C.GFile // return, full, converted
 
 	parentclass := (*C.GVfsClass)(classdata.PeekParentClass(UnsafeVfsToGlibNone(vfs)))
 
+	carg0 = (*C.GVfs)(UnsafeVfsToGlibNone(vfs))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(path)))
 	defer C.free(unsafe.Pointer(carg1))
 
@@ -114601,11 +115083,12 @@ func (vfs *VfsInstance) ParentGetFileForPath(path string) File {
 // is malformed or if the URI scheme is not supported.
 func (vfs *VfsInstance) ParentGetFileForURI(uri string) File {
 	var carg0 *C.GVfs
-	var carg1 *C.char  // in, none, string
+	var carg1 *C.char  // in, none, converted
 	var cret  *C.GFile // return, full, converted
 
 	parentclass := (*C.GVfsClass)(classdata.PeekParentClass(UnsafeVfsToGlibNone(vfs)))
 
+	carg0 = (*C.GVfs)(UnsafeVfsToGlibNone(vfs))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(uri)))
 	defer C.free(unsafe.Pointer(carg1))
 
@@ -114634,6 +115117,8 @@ func (vfs *VfsInstance) ParentGetSupportedURISchemes() []string {
 
 	parentclass := (*C.GVfsClass)(classdata.PeekParentClass(UnsafeVfsToGlibNone(vfs)))
 
+	carg0 = (*C.GVfs)(UnsafeVfsToGlibNone(vfs))
+
 	cret = C._gotk4_gio2_Vfs_virtual_get_supported_uri_schemes(unsafe.Pointer(parentclass.get_supported_uri_schemes), carg0)
 	runtime.KeepAlive(vfs)
 
@@ -114660,6 +115145,8 @@ func (vfs *VfsInstance) ParentIsActive() bool {
 
 	parentclass := (*C.GVfsClass)(classdata.PeekParentClass(UnsafeVfsToGlibNone(vfs)))
 
+	carg0 = (*C.GVfs)(UnsafeVfsToGlibNone(vfs))
+
 	cret = C._gotk4_gio2_Vfs_virtual_is_active(unsafe.Pointer(parentclass.is_active), carg0)
 	runtime.KeepAlive(vfs)
 
@@ -114681,11 +115168,12 @@ func (vfs *VfsInstance) ParentIsActive() bool {
 // 	- dest string 
 func (vfs *VfsInstance) ParentLocalFileMoved(source string, dest string) {
 	var carg0 *C.GVfs
-	var carg1 *C.char // in, none, string
+	var carg1 *C.char // in, none, converted
 	var carg2 *C.char // in, none, string
 
 	parentclass := (*C.GVfsClass)(classdata.PeekParentClass(UnsafeVfsToGlibNone(vfs)))
 
+	carg0 = (*C.GVfs)(UnsafeVfsToGlibNone(vfs))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(source)))
 	defer C.free(unsafe.Pointer(carg1))
 	carg2 = (*C.char)(unsafe.Pointer(C.CString(dest)))
@@ -114705,10 +115193,11 @@ func (vfs *VfsInstance) ParentLocalFileMoved(source string, dest string) {
 // 	- filename string 
 func (vfs *VfsInstance) ParentLocalFileRemoved(filename string) {
 	var carg0 *C.GVfs
-	var carg1 *C.char // in, none, string
+	var carg1 *C.char // in, none, converted
 
 	parentclass := (*C.GVfsClass)(classdata.PeekParentClass(UnsafeVfsToGlibNone(vfs)))
 
+	carg0 = (*C.GVfs)(UnsafeVfsToGlibNone(vfs))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(filename)))
 	defer C.free(unsafe.Pointer(carg1))
 
@@ -114733,15 +115222,16 @@ func (vfs *VfsInstance) ParentLocalFileRemoved(filename string) {
 // 	- _goerr error (nullable): an error 
 func (vfs *VfsInstance) ParentLocalFileSetAttributes(cancellable context.Context, filename string, info FileInfo, flags FileQueryInfoFlags) (bool, error) {
 	var carg0 *C.GVfs
-	var carg4 *C.GCancellable       // in, none, converted, nullable
-	var carg1 *C.char               // in, none, string
-	var carg2 *C.GFileInfo          // in, none, converted
-	var carg3 C.GFileQueryInfoFlags // in, none, casted
+	var carg4 *C.GCancellable       // in, none, converted
+	var carg1 *C.char               // in, none, converted, nullable
+	var carg2 *C.GFileInfo          // in, none, string
+	var carg3 C.GFileQueryInfoFlags // in, none, converted
 	var cret  C.gboolean            // return
 	var _cerr *C.GError             // out, full, converted, nullable
 
 	parentclass := (*C.GVfsClass)(classdata.PeekParentClass(UnsafeVfsToGlibNone(vfs)))
 
+	carg0 = (*C.GVfs)(UnsafeVfsToGlibNone(vfs))
 	if cancellable != nil {
 		carg4 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -114786,11 +115276,12 @@ func (vfs *VfsInstance) ParentLocalFileSetAttributes(cancellable context.Context
 // be parsed by the #GVfs module.
 func (vfs *VfsInstance) ParentParseName(parseName string) File {
 	var carg0 *C.GVfs
-	var carg1 *C.char  // in, none, string
+	var carg1 *C.char  // in, none, converted
 	var cret  *C.GFile // return, full, converted
 
 	parentclass := (*C.GVfsClass)(classdata.PeekParentClass(UnsafeVfsToGlibNone(vfs)))
 
+	carg0 = (*C.GVfs)(UnsafeVfsToGlibNone(vfs))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(parseName)))
 	defer C.free(unsafe.Pointer(carg1))
 
@@ -115960,6 +116451,7 @@ func (volumeMonitor *VolumeMonitorInstance) ParentDriveChanged(drive Drive) {
 
 	parentclass := (*C.GVolumeMonitorClass)(classdata.PeekParentClass(UnsafeVolumeMonitorToGlibNone(volumeMonitor)))
 
+	carg0 = (*C.GVolumeMonitor)(UnsafeVolumeMonitorToGlibNone(volumeMonitor))
 	carg1 = (*C.GDrive)(UnsafeDriveToGlibNone(drive))
 
 	C._gotk4_gio2_VolumeMonitor_virtual_drive_changed(unsafe.Pointer(parentclass.drive_changed), carg0, carg1)
@@ -115979,6 +116471,7 @@ func (volumeMonitor *VolumeMonitorInstance) ParentDriveConnected(drive Drive) {
 
 	parentclass := (*C.GVolumeMonitorClass)(classdata.PeekParentClass(UnsafeVolumeMonitorToGlibNone(volumeMonitor)))
 
+	carg0 = (*C.GVolumeMonitor)(UnsafeVolumeMonitorToGlibNone(volumeMonitor))
 	carg1 = (*C.GDrive)(UnsafeDriveToGlibNone(drive))
 
 	C._gotk4_gio2_VolumeMonitor_virtual_drive_connected(unsafe.Pointer(parentclass.drive_connected), carg0, carg1)
@@ -115998,6 +116491,7 @@ func (volumeMonitor *VolumeMonitorInstance) ParentDriveDisconnected(drive Drive)
 
 	parentclass := (*C.GVolumeMonitorClass)(classdata.PeekParentClass(UnsafeVolumeMonitorToGlibNone(volumeMonitor)))
 
+	carg0 = (*C.GVolumeMonitor)(UnsafeVolumeMonitorToGlibNone(volumeMonitor))
 	carg1 = (*C.GDrive)(UnsafeDriveToGlibNone(drive))
 
 	C._gotk4_gio2_VolumeMonitor_virtual_drive_disconnected(unsafe.Pointer(parentclass.drive_disconnected), carg0, carg1)
@@ -116017,6 +116511,7 @@ func (volumeMonitor *VolumeMonitorInstance) ParentDriveEjectButton(drive Drive) 
 
 	parentclass := (*C.GVolumeMonitorClass)(classdata.PeekParentClass(UnsafeVolumeMonitorToGlibNone(volumeMonitor)))
 
+	carg0 = (*C.GVolumeMonitor)(UnsafeVolumeMonitorToGlibNone(volumeMonitor))
 	carg1 = (*C.GDrive)(UnsafeDriveToGlibNone(drive))
 
 	C._gotk4_gio2_VolumeMonitor_virtual_drive_eject_button(unsafe.Pointer(parentclass.drive_eject_button), carg0, carg1)
@@ -116036,6 +116531,7 @@ func (volumeMonitor *VolumeMonitorInstance) ParentDriveStopButton(drive Drive) {
 
 	parentclass := (*C.GVolumeMonitorClass)(classdata.PeekParentClass(UnsafeVolumeMonitorToGlibNone(volumeMonitor)))
 
+	carg0 = (*C.GVolumeMonitor)(UnsafeVolumeMonitorToGlibNone(volumeMonitor))
 	carg1 = (*C.GDrive)(UnsafeDriveToGlibNone(drive))
 
 	C._gotk4_gio2_VolumeMonitor_virtual_drive_stop_button(unsafe.Pointer(parentclass.drive_stop_button), carg0, carg1)
@@ -116059,6 +116555,8 @@ func (volumeMonitor *VolumeMonitorInstance) ParentGetConnectedDrives() []Drive {
 	var cret  *C.GList // container, transfer: full
 
 	parentclass := (*C.GVolumeMonitorClass)(classdata.PeekParentClass(UnsafeVolumeMonitorToGlibNone(volumeMonitor)))
+
+	carg0 = (*C.GVolumeMonitor)(UnsafeVolumeMonitorToGlibNone(volumeMonitor))
 
 	cret = C._gotk4_gio2_VolumeMonitor_virtual_get_connected_drives(unsafe.Pointer(parentclass.get_connected_drives), carg0)
 	runtime.KeepAlive(volumeMonitor)
@@ -116091,11 +116589,12 @@ func (volumeMonitor *VolumeMonitorInstance) ParentGetConnectedDrives() []Drive {
 // Finds a #GMount object by its UUID (see g_mount_get_uuid())
 func (volumeMonitor *VolumeMonitorInstance) ParentGetMountForUUID(uuid string) Mount {
 	var carg0 *C.GVolumeMonitor
-	var carg1 *C.char   // in, none, string
+	var carg1 *C.char   // in, none, converted
 	var cret  *C.GMount // return, full, converted, nullable
 
 	parentclass := (*C.GVolumeMonitorClass)(classdata.PeekParentClass(UnsafeVolumeMonitorToGlibNone(volumeMonitor)))
 
+	carg0 = (*C.GVolumeMonitor)(UnsafeVolumeMonitorToGlibNone(volumeMonitor))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(uuid)))
 	defer C.free(unsafe.Pointer(carg1))
 
@@ -116129,6 +116628,8 @@ func (volumeMonitor *VolumeMonitorInstance) ParentGetMounts() []Mount {
 
 	parentclass := (*C.GVolumeMonitorClass)(classdata.PeekParentClass(UnsafeVolumeMonitorToGlibNone(volumeMonitor)))
 
+	carg0 = (*C.GVolumeMonitor)(UnsafeVolumeMonitorToGlibNone(volumeMonitor))
+
 	cret = C._gotk4_gio2_VolumeMonitor_virtual_get_mounts(unsafe.Pointer(parentclass.get_mounts), carg0)
 	runtime.KeepAlive(volumeMonitor)
 
@@ -116160,11 +116661,12 @@ func (volumeMonitor *VolumeMonitorInstance) ParentGetMounts() []Mount {
 // Finds a #GVolume object by its UUID (see g_volume_get_uuid())
 func (volumeMonitor *VolumeMonitorInstance) ParentGetVolumeForUUID(uuid string) Volume {
 	var carg0 *C.GVolumeMonitor
-	var carg1 *C.char    // in, none, string
+	var carg1 *C.char    // in, none, converted
 	var cret  *C.GVolume // return, full, converted, nullable
 
 	parentclass := (*C.GVolumeMonitorClass)(classdata.PeekParentClass(UnsafeVolumeMonitorToGlibNone(volumeMonitor)))
 
+	carg0 = (*C.GVolumeMonitor)(UnsafeVolumeMonitorToGlibNone(volumeMonitor))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(uuid)))
 	defer C.free(unsafe.Pointer(carg1))
 
@@ -116198,6 +116700,8 @@ func (volumeMonitor *VolumeMonitorInstance) ParentGetVolumes() []Volume {
 
 	parentclass := (*C.GVolumeMonitorClass)(classdata.PeekParentClass(UnsafeVolumeMonitorToGlibNone(volumeMonitor)))
 
+	carg0 = (*C.GVolumeMonitor)(UnsafeVolumeMonitorToGlibNone(volumeMonitor))
+
 	cret = C._gotk4_gio2_VolumeMonitor_virtual_get_volumes(unsafe.Pointer(parentclass.get_volumes), carg0)
 	runtime.KeepAlive(volumeMonitor)
 
@@ -116227,6 +116731,7 @@ func (volumeMonitor *VolumeMonitorInstance) ParentMountAdded(mount Mount) {
 
 	parentclass := (*C.GVolumeMonitorClass)(classdata.PeekParentClass(UnsafeVolumeMonitorToGlibNone(volumeMonitor)))
 
+	carg0 = (*C.GVolumeMonitor)(UnsafeVolumeMonitorToGlibNone(volumeMonitor))
 	carg1 = (*C.GMount)(UnsafeMountToGlibNone(mount))
 
 	C._gotk4_gio2_VolumeMonitor_virtual_mount_added(unsafe.Pointer(parentclass.mount_added), carg0, carg1)
@@ -116246,6 +116751,7 @@ func (volumeMonitor *VolumeMonitorInstance) ParentMountChanged(mount Mount) {
 
 	parentclass := (*C.GVolumeMonitorClass)(classdata.PeekParentClass(UnsafeVolumeMonitorToGlibNone(volumeMonitor)))
 
+	carg0 = (*C.GVolumeMonitor)(UnsafeVolumeMonitorToGlibNone(volumeMonitor))
 	carg1 = (*C.GMount)(UnsafeMountToGlibNone(mount))
 
 	C._gotk4_gio2_VolumeMonitor_virtual_mount_changed(unsafe.Pointer(parentclass.mount_changed), carg0, carg1)
@@ -116265,6 +116771,7 @@ func (volumeMonitor *VolumeMonitorInstance) ParentMountPreUnmount(mount Mount) {
 
 	parentclass := (*C.GVolumeMonitorClass)(classdata.PeekParentClass(UnsafeVolumeMonitorToGlibNone(volumeMonitor)))
 
+	carg0 = (*C.GVolumeMonitor)(UnsafeVolumeMonitorToGlibNone(volumeMonitor))
 	carg1 = (*C.GMount)(UnsafeMountToGlibNone(mount))
 
 	C._gotk4_gio2_VolumeMonitor_virtual_mount_pre_unmount(unsafe.Pointer(parentclass.mount_pre_unmount), carg0, carg1)
@@ -116284,6 +116791,7 @@ func (volumeMonitor *VolumeMonitorInstance) ParentMountRemoved(mount Mount) {
 
 	parentclass := (*C.GVolumeMonitorClass)(classdata.PeekParentClass(UnsafeVolumeMonitorToGlibNone(volumeMonitor)))
 
+	carg0 = (*C.GVolumeMonitor)(UnsafeVolumeMonitorToGlibNone(volumeMonitor))
 	carg1 = (*C.GMount)(UnsafeMountToGlibNone(mount))
 
 	C._gotk4_gio2_VolumeMonitor_virtual_mount_removed(unsafe.Pointer(parentclass.mount_removed), carg0, carg1)
@@ -116303,6 +116811,7 @@ func (volumeMonitor *VolumeMonitorInstance) ParentVolumeAdded(volume Volume) {
 
 	parentclass := (*C.GVolumeMonitorClass)(classdata.PeekParentClass(UnsafeVolumeMonitorToGlibNone(volumeMonitor)))
 
+	carg0 = (*C.GVolumeMonitor)(UnsafeVolumeMonitorToGlibNone(volumeMonitor))
 	carg1 = (*C.GVolume)(UnsafeVolumeToGlibNone(volume))
 
 	C._gotk4_gio2_VolumeMonitor_virtual_volume_added(unsafe.Pointer(parentclass.volume_added), carg0, carg1)
@@ -116322,6 +116831,7 @@ func (volumeMonitor *VolumeMonitorInstance) ParentVolumeChanged(volume Volume) {
 
 	parentclass := (*C.GVolumeMonitorClass)(classdata.PeekParentClass(UnsafeVolumeMonitorToGlibNone(volumeMonitor)))
 
+	carg0 = (*C.GVolumeMonitor)(UnsafeVolumeMonitorToGlibNone(volumeMonitor))
 	carg1 = (*C.GVolume)(UnsafeVolumeToGlibNone(volume))
 
 	C._gotk4_gio2_VolumeMonitor_virtual_volume_changed(unsafe.Pointer(parentclass.volume_changed), carg0, carg1)
@@ -116341,6 +116851,7 @@ func (volumeMonitor *VolumeMonitorInstance) ParentVolumeRemoved(volume Volume) {
 
 	parentclass := (*C.GVolumeMonitorClass)(classdata.PeekParentClass(UnsafeVolumeMonitorToGlibNone(volumeMonitor)))
 
+	carg0 = (*C.GVolumeMonitor)(UnsafeVolumeMonitorToGlibNone(volumeMonitor))
 	carg1 = (*C.GVolume)(UnsafeVolumeToGlibNone(volume))
 
 	C._gotk4_gio2_VolumeMonitor_virtual_volume_removed(unsafe.Pointer(parentclass.volume_removed), carg0, carg1)
@@ -117609,6 +118120,8 @@ func (stream *FileIOStreamInstance) ParentCanSeek() bool {
 
 	parentclass := (*C.GFileIOStreamClass)(classdata.PeekParentClass(UnsafeFileIOStreamToGlibNone(stream)))
 
+	carg0 = (*C.GFileIOStream)(UnsafeFileIOStreamToGlibNone(stream))
+
 	cret = C._gotk4_gio2_FileIOStream_virtual_can_seek(unsafe.Pointer(parentclass.can_seek), carg0)
 	runtime.KeepAlive(stream)
 
@@ -117632,6 +118145,8 @@ func (stream *FileIOStreamInstance) ParentCanTruncate() bool {
 	var cret  C.gboolean // return
 
 	parentclass := (*C.GFileIOStreamClass)(classdata.PeekParentClass(UnsafeFileIOStreamToGlibNone(stream)))
+
+	carg0 = (*C.GFileIOStream)(UnsafeFileIOStreamToGlibNone(stream))
 
 	cret = C._gotk4_gio2_FileIOStream_virtual_can_truncate(unsafe.Pointer(parentclass.can_truncate), carg0)
 	runtime.KeepAlive(stream)
@@ -117660,6 +118175,8 @@ func (stream *FileIOStreamInstance) ParentGetETag() string {
 	var cret  *C.char // return, full, string, nullable-string
 
 	parentclass := (*C.GFileIOStreamClass)(classdata.PeekParentClass(UnsafeFileIOStreamToGlibNone(stream)))
+
+	carg0 = (*C.GFileIOStream)(UnsafeFileIOStreamToGlibNone(stream))
 
 	cret = C._gotk4_gio2_FileIOStream_virtual_get_etag(unsafe.Pointer(parentclass.get_etag), carg0)
 	runtime.KeepAlive(stream)
@@ -117706,13 +118223,14 @@ func (stream *FileIOStreamInstance) ParentGetETag() string {
 // be returned.
 func (stream *FileIOStreamInstance) ParentQueryInfo(cancellable context.Context, attributes string) (FileInfo, error) {
 	var carg0 *C.GFileIOStream
-	var carg2 *C.GCancellable // in, none, converted, nullable
-	var carg1 *C.char         // in, none, string
+	var carg2 *C.GCancellable // in, none, converted
+	var carg1 *C.char         // in, none, converted, nullable
 	var cret  *C.GFileInfo    // return, full, converted
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	parentclass := (*C.GFileIOStreamClass)(classdata.PeekParentClass(UnsafeFileIOStreamToGlibNone(stream)))
 
+	carg0 = (*C.GFileIOStream)(UnsafeFileIOStreamToGlibNone(stream))
 	if cancellable != nil {
 		carg2 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -117757,6 +118275,7 @@ func (stream *FileIOStreamInstance) ParentQueryInfoFinish(result AsyncResult) (F
 
 	parentclass := (*C.GFileIOStreamClass)(classdata.PeekParentClass(UnsafeFileIOStreamToGlibNone(stream)))
 
+	carg0 = (*C.GFileIOStream)(UnsafeFileIOStreamToGlibNone(stream))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_FileIOStream_virtual_query_info_finish(unsafe.Pointer(parentclass.query_info_finish), carg0, carg1, &_cerr)
@@ -117789,14 +118308,15 @@ func (stream *FileIOStreamInstance) ParentQueryInfoFinish(result AsyncResult) (F
 // 	- _goerr error (nullable): an error 
 func (stream *FileIOStreamInstance) ParentSeek(cancellable context.Context, offset int64, typ glib.SeekType) (bool, error) {
 	var carg0 *C.GFileIOStream
-	var carg3 *C.GCancellable // in, none, converted, nullable
-	var carg1 C.goffset       // in, none, casted
+	var carg3 *C.GCancellable // in, none, converted
+	var carg1 C.goffset       // in, none, converted, nullable
 	var carg2 C.GSeekType     // in, none, casted
 	var cret  C.gboolean      // return
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	parentclass := (*C.GFileIOStreamClass)(classdata.PeekParentClass(UnsafeFileIOStreamToGlibNone(stream)))
 
+	carg0 = (*C.GFileIOStream)(UnsafeFileIOStreamToGlibNone(stream))
 	if cancellable != nil {
 		carg3 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -117834,6 +118354,8 @@ func (stream *FileIOStreamInstance) ParentTell() int64 {
 
 	parentclass := (*C.GFileIOStreamClass)(classdata.PeekParentClass(UnsafeFileIOStreamToGlibNone(stream)))
 
+	carg0 = (*C.GFileIOStream)(UnsafeFileIOStreamToGlibNone(stream))
+
 	cret = C._gotk4_gio2_FileIOStream_virtual_tell(unsafe.Pointer(parentclass.tell), carg0)
 	runtime.KeepAlive(stream)
 
@@ -117858,13 +118380,14 @@ func (stream *FileIOStreamInstance) ParentTell() int64 {
 // 	- _goerr error (nullable): an error 
 func (stream *FileIOStreamInstance) ParentTruncateFn(cancellable context.Context, size int64) (bool, error) {
 	var carg0 *C.GFileIOStream
-	var carg2 *C.GCancellable // in, none, converted, nullable
-	var carg1 C.goffset       // in, none, casted
+	var carg2 *C.GCancellable // in, none, converted
+	var carg1 C.goffset       // in, none, converted, nullable
 	var cret  C.gboolean      // return
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	parentclass := (*C.GFileIOStreamClass)(classdata.PeekParentClass(UnsafeFileIOStreamToGlibNone(stream)))
 
+	carg0 = (*C.GFileIOStream)(UnsafeFileIOStreamToGlibNone(stream))
 	if cancellable != nil {
 		carg2 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -118445,6 +118968,8 @@ func (stream *FileInputStreamInstance) ParentCanSeek() bool {
 
 	parentclass := (*C.GFileInputStreamClass)(classdata.PeekParentClass(UnsafeFileInputStreamToGlibNone(stream)))
 
+	carg0 = (*C.GFileInputStream)(UnsafeFileInputStreamToGlibNone(stream))
+
 	cret = C._gotk4_gio2_FileInputStream_virtual_can_seek(unsafe.Pointer(parentclass.can_seek), carg0)
 	runtime.KeepAlive(stream)
 
@@ -118477,13 +119002,14 @@ func (stream *FileInputStreamInstance) ParentCanSeek() bool {
 // any other operations on the stream will fail with %G_IO_ERROR_PENDING.
 func (stream *FileInputStreamInstance) ParentQueryInfo(cancellable context.Context, attributes string) (FileInfo, error) {
 	var carg0 *C.GFileInputStream
-	var carg2 *C.GCancellable // in, none, converted, nullable
-	var carg1 *C.char         // in, none, string
+	var carg2 *C.GCancellable // in, none, converted
+	var carg1 *C.char         // in, none, converted, nullable
 	var cret  *C.GFileInfo    // return, full, converted
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	parentclass := (*C.GFileInputStreamClass)(classdata.PeekParentClass(UnsafeFileInputStreamToGlibNone(stream)))
 
+	carg0 = (*C.GFileInputStream)(UnsafeFileInputStreamToGlibNone(stream))
 	if cancellable != nil {
 		carg2 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -118527,6 +119053,7 @@ func (stream *FileInputStreamInstance) ParentQueryInfoFinish(result AsyncResult)
 
 	parentclass := (*C.GFileInputStreamClass)(classdata.PeekParentClass(UnsafeFileInputStreamToGlibNone(stream)))
 
+	carg0 = (*C.GFileInputStream)(UnsafeFileInputStreamToGlibNone(stream))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_FileInputStream_virtual_query_info_finish(unsafe.Pointer(parentclass.query_info_finish), carg0, carg1, &_cerr)
@@ -118559,14 +119086,15 @@ func (stream *FileInputStreamInstance) ParentQueryInfoFinish(result AsyncResult)
 // 	- _goerr error (nullable): an error 
 func (stream *FileInputStreamInstance) ParentSeek(cancellable context.Context, offset int64, typ glib.SeekType) (bool, error) {
 	var carg0 *C.GFileInputStream
-	var carg3 *C.GCancellable // in, none, converted, nullable
-	var carg1 C.goffset       // in, none, casted
+	var carg3 *C.GCancellable // in, none, converted
+	var carg1 C.goffset       // in, none, converted, nullable
 	var carg2 C.GSeekType     // in, none, casted
 	var cret  C.gboolean      // return
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	parentclass := (*C.GFileInputStreamClass)(classdata.PeekParentClass(UnsafeFileInputStreamToGlibNone(stream)))
 
+	carg0 = (*C.GFileInputStream)(UnsafeFileInputStreamToGlibNone(stream))
 	if cancellable != nil {
 		carg3 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -118603,6 +119131,8 @@ func (stream *FileInputStreamInstance) ParentTell() int64 {
 	var cret  C.goffset // return, none, casted
 
 	parentclass := (*C.GFileInputStreamClass)(classdata.PeekParentClass(UnsafeFileInputStreamToGlibNone(stream)))
+
+	carg0 = (*C.GFileInputStream)(UnsafeFileInputStreamToGlibNone(stream))
 
 	cret = C._gotk4_gio2_FileInputStream_virtual_tell(unsafe.Pointer(parentclass.tell), carg0)
 	runtime.KeepAlive(stream)
@@ -119389,6 +119919,8 @@ func (stream *FileOutputStreamInstance) ParentCanSeek() bool {
 
 	parentclass := (*C.GFileOutputStreamClass)(classdata.PeekParentClass(UnsafeFileOutputStreamToGlibNone(stream)))
 
+	carg0 = (*C.GFileOutputStream)(UnsafeFileOutputStreamToGlibNone(stream))
+
 	cret = C._gotk4_gio2_FileOutputStream_virtual_can_seek(unsafe.Pointer(parentclass.can_seek), carg0)
 	runtime.KeepAlive(stream)
 
@@ -119412,6 +119944,8 @@ func (stream *FileOutputStreamInstance) ParentCanTruncate() bool {
 	var cret  C.gboolean // return
 
 	parentclass := (*C.GFileOutputStreamClass)(classdata.PeekParentClass(UnsafeFileOutputStreamToGlibNone(stream)))
+
+	carg0 = (*C.GFileOutputStream)(UnsafeFileOutputStreamToGlibNone(stream))
 
 	cret = C._gotk4_gio2_FileOutputStream_virtual_can_truncate(unsafe.Pointer(parentclass.can_truncate), carg0)
 	runtime.KeepAlive(stream)
@@ -119440,6 +119974,8 @@ func (stream *FileOutputStreamInstance) ParentGetETag() string {
 	var cret  *C.char // return, full, string, nullable-string
 
 	parentclass := (*C.GFileOutputStreamClass)(classdata.PeekParentClass(UnsafeFileOutputStreamToGlibNone(stream)))
+
+	carg0 = (*C.GFileOutputStream)(UnsafeFileOutputStreamToGlibNone(stream))
 
 	cret = C._gotk4_gio2_FileOutputStream_virtual_get_etag(unsafe.Pointer(parentclass.get_etag), carg0)
 	runtime.KeepAlive(stream)
@@ -119486,13 +120022,14 @@ func (stream *FileOutputStreamInstance) ParentGetETag() string {
 // be returned.
 func (stream *FileOutputStreamInstance) ParentQueryInfo(cancellable context.Context, attributes string) (FileInfo, error) {
 	var carg0 *C.GFileOutputStream
-	var carg2 *C.GCancellable // in, none, converted, nullable
-	var carg1 *C.char         // in, none, string
+	var carg2 *C.GCancellable // in, none, converted
+	var carg1 *C.char         // in, none, converted, nullable
 	var cret  *C.GFileInfo    // return, full, converted
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	parentclass := (*C.GFileOutputStreamClass)(classdata.PeekParentClass(UnsafeFileOutputStreamToGlibNone(stream)))
 
+	carg0 = (*C.GFileOutputStream)(UnsafeFileOutputStreamToGlibNone(stream))
 	if cancellable != nil {
 		carg2 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -119537,6 +120074,7 @@ func (stream *FileOutputStreamInstance) ParentQueryInfoFinish(result AsyncResult
 
 	parentclass := (*C.GFileOutputStreamClass)(classdata.PeekParentClass(UnsafeFileOutputStreamToGlibNone(stream)))
 
+	carg0 = (*C.GFileOutputStream)(UnsafeFileOutputStreamToGlibNone(stream))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_FileOutputStream_virtual_query_info_finish(unsafe.Pointer(parentclass.query_info_finish), carg0, carg1, &_cerr)
@@ -119569,14 +120107,15 @@ func (stream *FileOutputStreamInstance) ParentQueryInfoFinish(result AsyncResult
 // 	- _goerr error (nullable): an error 
 func (stream *FileOutputStreamInstance) ParentSeek(cancellable context.Context, offset int64, typ glib.SeekType) (bool, error) {
 	var carg0 *C.GFileOutputStream
-	var carg3 *C.GCancellable // in, none, converted, nullable
-	var carg1 C.goffset       // in, none, casted
+	var carg3 *C.GCancellable // in, none, converted
+	var carg1 C.goffset       // in, none, converted, nullable
 	var carg2 C.GSeekType     // in, none, casted
 	var cret  C.gboolean      // return
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	parentclass := (*C.GFileOutputStreamClass)(classdata.PeekParentClass(UnsafeFileOutputStreamToGlibNone(stream)))
 
+	carg0 = (*C.GFileOutputStream)(UnsafeFileOutputStreamToGlibNone(stream))
 	if cancellable != nil {
 		carg3 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -119614,6 +120153,8 @@ func (stream *FileOutputStreamInstance) ParentTell() int64 {
 
 	parentclass := (*C.GFileOutputStreamClass)(classdata.PeekParentClass(UnsafeFileOutputStreamToGlibNone(stream)))
 
+	carg0 = (*C.GFileOutputStream)(UnsafeFileOutputStreamToGlibNone(stream))
+
 	cret = C._gotk4_gio2_FileOutputStream_virtual_tell(unsafe.Pointer(parentclass.tell), carg0)
 	runtime.KeepAlive(stream)
 
@@ -119638,13 +120179,14 @@ func (stream *FileOutputStreamInstance) ParentTell() int64 {
 // 	- _goerr error (nullable): an error 
 func (stream *FileOutputStreamInstance) ParentTruncateFn(cancellable context.Context, size int64) (bool, error) {
 	var carg0 *C.GFileOutputStream
-	var carg2 *C.GCancellable // in, none, converted, nullable
-	var carg1 C.goffset       // in, none, casted
+	var carg2 *C.GCancellable // in, none, converted
+	var carg1 C.goffset       // in, none, converted, nullable
 	var cret  C.gboolean      // return
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	parentclass := (*C.GFileOutputStreamClass)(classdata.PeekParentClass(UnsafeFileOutputStreamToGlibNone(stream)))
 
+	carg0 = (*C.GFileOutputStream)(UnsafeFileOutputStreamToGlibNone(stream))
 	if cancellable != nil {
 		carg2 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -122880,13 +123422,14 @@ func UnsafeApplyBufferedInputStreamOverrides[Instance BufferedInputStream](gclas
 // [method@Gio.BufferedInputStream.fill_async].
 func (stream *BufferedInputStreamInstance) ParentFill(cancellable context.Context, count int) (int, error) {
 	var carg0 *C.GBufferedInputStream
-	var carg2 *C.GCancellable // in, none, converted, nullable
-	var carg1 C.gssize        // in, none, casted
+	var carg2 *C.GCancellable // in, none, converted
+	var carg1 C.gssize        // in, none, converted, nullable
 	var cret  C.gssize        // return, none, casted
 	var _cerr *C.GError       // out, full, converted, nullable
 
 	parentclass := (*C.GBufferedInputStreamClass)(classdata.PeekParentClass(UnsafeBufferedInputStreamToGlibNone(stream)))
 
+	carg0 = (*C.GBufferedInputStream)(UnsafeBufferedInputStreamToGlibNone(stream))
 	if cancellable != nil {
 		carg2 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
 	}
@@ -122929,6 +123472,7 @@ func (stream *BufferedInputStreamInstance) ParentFillFinish(result AsyncResult) 
 
 	parentclass := (*C.GBufferedInputStreamClass)(classdata.PeekParentClass(UnsafeBufferedInputStreamToGlibNone(stream)))
 
+	carg0 = (*C.GBufferedInputStream)(UnsafeBufferedInputStreamToGlibNone(stream))
 	carg1 = (*C.GAsyncResult)(UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gio2_BufferedInputStream_virtual_fill_finish(unsafe.Pointer(parentclass.fill_finish), carg0, carg1, &_cerr)

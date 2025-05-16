@@ -8,9 +8,6 @@ import "unsafe"
 // static GObjectClass *_g_object_get_class(GObject *object) {
 //   return (G_OBJECT_GET_CLASS(object));
 // }
-// static GType _g_type_from_instance(gpointer instance) {
-//   return (G_TYPE_FROM_INSTANCE(instance));
-// }
 import "C"
 
 // PeekParentClass returns a c pointer to the parent class of the given GObject instance.

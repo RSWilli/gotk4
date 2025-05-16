@@ -572,7 +572,7 @@ func BoxZero() *Box {
 func (a *Box) ContainsBox(b *Box) bool {
 	var carg0 *C.graphene_box_t // in, none, converted
 	var carg1 *C.graphene_box_t // in, none, converted
-	var cret  C._Bool           // return
+	var cret  C._Bool           // return, none, casted
 
 	carg0 = (*C.graphene_box_t)(UnsafeBoxToGlibNone(a))
 	carg1 = (*C.graphene_box_t)(UnsafeBoxToGlibNone(b))
@@ -583,9 +583,7 @@ func (a *Box) ContainsBox(b *Box) bool {
 
 	var goret bool
 
-	if cret != 0 {
-		goret = true
-	}
+	goret = bool(cret)
 
 	return goret
 }
@@ -604,7 +602,7 @@ func (a *Box) ContainsBox(b *Box) bool {
 func (box *Box) ContainsPoint(point *Point3D) bool {
 	var carg0 *C.graphene_box_t     // in, none, converted
 	var carg1 *C.graphene_point3d_t // in, none, converted
-	var cret  C._Bool               // return
+	var cret  C._Bool               // return, none, casted
 
 	carg0 = (*C.graphene_box_t)(UnsafeBoxToGlibNone(box))
 	carg1 = (*C.graphene_point3d_t)(UnsafePoint3DToGlibNone(point))
@@ -615,9 +613,7 @@ func (box *Box) ContainsPoint(point *Point3D) bool {
 
 	var goret bool
 
-	if cret != 0 {
-		goret = true
-	}
+	goret = bool(cret)
 
 	return goret
 }
@@ -636,7 +632,7 @@ func (box *Box) ContainsPoint(point *Point3D) bool {
 func (a *Box) Equal(b *Box) bool {
 	var carg0 *C.graphene_box_t // in, none, converted
 	var carg1 *C.graphene_box_t // in, none, converted
-	var cret  C._Bool           // return
+	var cret  C._Bool           // return, none, casted
 
 	carg0 = (*C.graphene_box_t)(UnsafeBoxToGlibNone(a))
 	carg1 = (*C.graphene_box_t)(UnsafeBoxToGlibNone(b))
@@ -647,9 +643,7 @@ func (a *Box) Equal(b *Box) bool {
 
 	var goret bool
 
-	if cret != 0 {
-		goret = true
-	}
+	goret = bool(cret)
 
 	return goret
 }
@@ -1156,7 +1150,7 @@ func (a *Box) Intersection(b *Box) (Box, bool) {
 	var carg0 *C.graphene_box_t // in, none, converted
 	var carg1 *C.graphene_box_t // in, none, converted
 	var carg2 C.graphene_box_t  // out, transfer: none, C Pointers: 0, Name: Box, optional, caller-allocates
-	var cret  C._Bool           // return
+	var cret  C._Bool           // return, none, casted
 
 	carg0 = (*C.graphene_box_t)(UnsafeBoxToGlibNone(a))
 	carg1 = (*C.graphene_box_t)(UnsafeBoxToGlibNone(b))
@@ -1171,9 +1165,7 @@ func (a *Box) Intersection(b *Box) (Box, bool) {
 	_ = res
 	_ = carg2
 	panic("unimplemented conversion of Box (graphene_box_t)")
-	if cret != 0 {
-		goret = true
-	}
+	goret = bool(cret)
 
 	return res, goret
 }
@@ -1326,7 +1318,7 @@ func EulerAlloc() *Euler {
 func (a *Euler) Equal(b *Euler) bool {
 	var carg0 *C.graphene_euler_t // in, none, converted
 	var carg1 *C.graphene_euler_t // in, none, converted
-	var cret  C._Bool             // return
+	var cret  C._Bool             // return, none, casted
 
 	carg0 = (*C.graphene_euler_t)(UnsafeEulerToGlibNone(a))
 	carg1 = (*C.graphene_euler_t)(UnsafeEulerToGlibNone(b))
@@ -1337,9 +1329,7 @@ func (a *Euler) Equal(b *Euler) bool {
 
 	var goret bool
 
-	if cret != 0 {
-		goret = true
-	}
+	goret = bool(cret)
 
 	return goret
 }
@@ -2045,7 +2035,7 @@ func FrustumAlloc() *Frustum {
 func (f *Frustum) ContainsPoint(point *Point3D) bool {
 	var carg0 *C.graphene_frustum_t // in, none, converted
 	var carg1 *C.graphene_point3d_t // in, none, converted
-	var cret  C._Bool               // return
+	var cret  C._Bool               // return, none, casted
 
 	carg0 = (*C.graphene_frustum_t)(UnsafeFrustumToGlibNone(f))
 	carg1 = (*C.graphene_point3d_t)(UnsafePoint3DToGlibNone(point))
@@ -2056,9 +2046,7 @@ func (f *Frustum) ContainsPoint(point *Point3D) bool {
 
 	var goret bool
 
-	if cret != 0 {
-		goret = true
-	}
+	goret = bool(cret)
 
 	return goret
 }
@@ -2077,7 +2065,7 @@ func (f *Frustum) ContainsPoint(point *Point3D) bool {
 func (a *Frustum) Equal(b *Frustum) bool {
 	var carg0 *C.graphene_frustum_t // in, none, converted
 	var carg1 *C.graphene_frustum_t // in, none, converted
-	var cret  C._Bool               // return
+	var cret  C._Bool               // return, none, casted
 
 	carg0 = (*C.graphene_frustum_t)(UnsafeFrustumToGlibNone(a))
 	carg1 = (*C.graphene_frustum_t)(UnsafeFrustumToGlibNone(b))
@@ -2088,9 +2076,7 @@ func (a *Frustum) Equal(b *Frustum) bool {
 
 	var goret bool
 
-	if cret != 0 {
-		goret = true
-	}
+	goret = bool(cret)
 
 	return goret
 }
@@ -2222,7 +2208,7 @@ func (f *Frustum) InitFromMatrix(matrix *Matrix) *Frustum {
 func (f *Frustum) IntersectsBox(box *Box) bool {
 	var carg0 *C.graphene_frustum_t // in, none, converted
 	var carg1 *C.graphene_box_t     // in, none, converted
-	var cret  C._Bool               // return
+	var cret  C._Bool               // return, none, casted
 
 	carg0 = (*C.graphene_frustum_t)(UnsafeFrustumToGlibNone(f))
 	carg1 = (*C.graphene_box_t)(UnsafeBoxToGlibNone(box))
@@ -2233,9 +2219,7 @@ func (f *Frustum) IntersectsBox(box *Box) bool {
 
 	var goret bool
 
-	if cret != 0 {
-		goret = true
-	}
+	goret = bool(cret)
 
 	return goret
 }
@@ -2255,7 +2239,7 @@ func (f *Frustum) IntersectsBox(box *Box) bool {
 func (f *Frustum) IntersectsSphere(sphere *Sphere) bool {
 	var carg0 *C.graphene_frustum_t // in, none, converted
 	var carg1 *C.graphene_sphere_t  // in, none, converted
-	var cret  C._Bool               // return
+	var cret  C._Bool               // return, none, casted
 
 	carg0 = (*C.graphene_frustum_t)(UnsafeFrustumToGlibNone(f))
 	carg1 = (*C.graphene_sphere_t)(UnsafeSphereToGlibNone(sphere))
@@ -2266,9 +2250,7 @@ func (f *Frustum) IntersectsSphere(sphere *Sphere) bool {
 
 	var goret bool
 
-	if cret != 0 {
-		goret = true
-	}
+	goret = bool(cret)
 
 	return goret
 }
@@ -2398,7 +2380,7 @@ func (m *Matrix) Decompose() (Vec3, Vec3, Quaternion, Vec3, Vec4, bool) {
 	var carg3 C.graphene_quaternion_t // out, transfer: none, C Pointers: 0, Name: Quaternion, caller-allocates
 	var carg4 C.graphene_vec3_t       // out, transfer: none, C Pointers: 0, Name: Vec3, caller-allocates
 	var carg5 C.graphene_vec4_t       // out, transfer: none, C Pointers: 0, Name: Vec4, caller-allocates
-	var cret  C._Bool                 // return
+	var cret  C._Bool                 // return, none, casted
 
 	carg0 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(m))
 
@@ -2427,9 +2409,7 @@ func (m *Matrix) Decompose() (Vec3, Vec3, Quaternion, Vec3, Vec4, bool) {
 	_ = perspective
 	_ = carg5
 	panic("unimplemented conversion of Vec4 (graphene_vec4_t)")
-	if cret != 0 {
-		goret = true
-	}
+	goret = bool(cret)
 
 	return translate, scale, rotate, shear, perspective, goret
 }
@@ -2471,7 +2451,7 @@ func (m *Matrix) Determinant() float32 {
 func (a *Matrix) Equal(b *Matrix) bool {
 	var carg0 *C.graphene_matrix_t // in, none, converted
 	var carg1 *C.graphene_matrix_t // in, none, converted
-	var cret  C._Bool              // return
+	var cret  C._Bool              // return, none, casted
 
 	carg0 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(a))
 	carg1 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(b))
@@ -2482,9 +2462,7 @@ func (a *Matrix) Equal(b *Matrix) bool {
 
 	var goret bool
 
-	if cret != 0 {
-		goret = true
-	}
+	goret = bool(cret)
 
 	return goret
 }
@@ -2525,7 +2503,7 @@ func (a *Matrix) Equal(b *Matrix) bool {
 func (a *Matrix) EqualFast(b *Matrix) bool {
 	var carg0 *C.graphene_matrix_t // in, none, converted
 	var carg1 *C.graphene_matrix_t // in, none, converted
-	var cret  C._Bool              // return
+	var cret  C._Bool              // return, none, casted
 
 	carg0 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(a))
 	carg1 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(b))
@@ -2536,9 +2514,7 @@ func (a *Matrix) EqualFast(b *Matrix) bool {
 
 	var goret bool
 
-	if cret != 0 {
-		goret = true
-	}
+	goret = bool(cret)
 
 	return goret
 }
@@ -3332,7 +3308,7 @@ func (a *Matrix) Interpolate(b *Matrix, factor float64) Matrix {
 func (m *Matrix) Inverse() (Matrix, bool) {
 	var carg0 *C.graphene_matrix_t // in, none, converted
 	var carg1 C.graphene_matrix_t  // out, transfer: none, C Pointers: 0, Name: Matrix, caller-allocates
-	var cret  C._Bool              // return
+	var cret  C._Bool              // return, none, casted
 
 	carg0 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(m))
 
@@ -3345,9 +3321,7 @@ func (m *Matrix) Inverse() (Matrix, bool) {
 	_ = res
 	_ = carg1
 	panic("unimplemented conversion of Matrix (graphene_matrix_t)")
-	if cret != 0 {
-		goret = true
-	}
+	goret = bool(cret)
 
 	return res, goret
 }
@@ -3362,7 +3336,7 @@ func (m *Matrix) Inverse() (Matrix, bool) {
 // a 2D affine transformation matrix.
 func (m *Matrix) Is2D() bool {
 	var carg0 *C.graphene_matrix_t // in, none, converted
-	var cret  C._Bool              // return
+	var cret  C._Bool              // return, none, casted
 
 	carg0 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(m))
 
@@ -3371,9 +3345,7 @@ func (m *Matrix) Is2D() bool {
 
 	var goret bool
 
-	if cret != 0 {
-		goret = true
-	}
+	goret = bool(cret)
 
 	return goret
 }
@@ -3387,7 +3359,7 @@ func (m *Matrix) Is2D() bool {
 // Checks whether a #graphene_matrix_t has a visible back face.
 func (m *Matrix) IsBackfaceVisible() bool {
 	var carg0 *C.graphene_matrix_t // in, none, converted
-	var cret  C._Bool              // return
+	var cret  C._Bool              // return, none, casted
 
 	carg0 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(m))
 
@@ -3396,9 +3368,7 @@ func (m *Matrix) IsBackfaceVisible() bool {
 
 	var goret bool
 
-	if cret != 0 {
-		goret = true
-	}
+	goret = bool(cret)
 
 	return goret
 }
@@ -3412,7 +3382,7 @@ func (m *Matrix) IsBackfaceVisible() bool {
 // Checks whether the given #graphene_matrix_t is the identity matrix.
 func (m *Matrix) IsIdentity() bool {
 	var carg0 *C.graphene_matrix_t // in, none, converted
-	var cret  C._Bool              // return
+	var cret  C._Bool              // return, none, casted
 
 	carg0 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(m))
 
@@ -3421,9 +3391,7 @@ func (m *Matrix) IsIdentity() bool {
 
 	var goret bool
 
-	if cret != 0 {
-		goret = true
-	}
+	goret = bool(cret)
 
 	return goret
 }
@@ -3437,7 +3405,7 @@ func (m *Matrix) IsIdentity() bool {
 // Checks whether a matrix is singular.
 func (m *Matrix) IsSingular() bool {
 	var carg0 *C.graphene_matrix_t // in, none, converted
-	var cret  C._Bool              // return
+	var cret  C._Bool              // return, none, casted
 
 	carg0 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(m))
 
@@ -3446,9 +3414,7 @@ func (m *Matrix) IsSingular() bool {
 
 	var goret bool
 
-	if cret != 0 {
-		goret = true
-	}
+	goret = bool(cret)
 
 	return goret
 }
@@ -3507,7 +3473,7 @@ func (a *Matrix) Near(b *Matrix, epsilon float32) bool {
 	var carg0 *C.graphene_matrix_t // in, none, converted
 	var carg1 *C.graphene_matrix_t // in, none, converted
 	var carg2 C.float              // in, none, casted
-	var cret  C._Bool              // return
+	var cret  C._Bool              // return, none, casted
 
 	carg0 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(a))
 	carg1 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(b))
@@ -3520,9 +3486,7 @@ func (a *Matrix) Near(b *Matrix, epsilon float32) bool {
 
 	var goret bool
 
-	if cret != 0 {
-		goret = true
-	}
+	goret = bool(cret)
 
 	return goret
 }
@@ -3961,7 +3925,7 @@ func (m *Matrix) To2D() (float64, float64, float64, float64, float64, float64, b
 	var carg4 C.double             // out, full, casted
 	var carg5 C.double             // out, full, casted
 	var carg6 C.double             // out, full, casted
-	var cret  C._Bool              // return
+	var cret  C._Bool              // return, none, casted
 
 	carg0 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(m))
 
@@ -3982,9 +3946,7 @@ func (m *Matrix) To2D() (float64, float64, float64, float64, float64, float64, b
 	yy = float64(carg4)
 	x0 = float64(carg5)
 	y0 = float64(carg6)
-	if cret != 0 {
-		goret = true
-	}
+	goret = bool(cret)
 
 	return xx, yx, xy, yy, x0, y0, goret
 }
@@ -4462,7 +4424,7 @@ func (m *Matrix) UntransformPoint(p *Point, bounds *Rect) (Point, bool) {
 	var carg1 *C.graphene_point_t  // in, none, converted
 	var carg2 *C.graphene_rect_t   // in, none, converted
 	var carg3 C.graphene_point_t   // out, transfer: none, C Pointers: 0, Name: Point, caller-allocates
-	var cret  C._Bool              // return
+	var cret  C._Bool              // return, none, casted
 
 	carg0 = (*C.graphene_matrix_t)(UnsafeMatrixToGlibNone(m))
 	carg1 = (*C.graphene_point_t)(UnsafePointToGlibNone(p))
@@ -4479,9 +4441,7 @@ func (m *Matrix) UntransformPoint(p *Point, bounds *Rect) (Point, bool) {
 	_ = res
 	_ = carg3
 	panic("unimplemented conversion of Point (graphene_point_t)")
-	if cret != 0 {
-		goret = true
-	}
+	goret = bool(cret)
 
 	return res, goret
 }
@@ -4632,7 +4592,7 @@ func (p *Plane) Distance(point *Point3D) float32 {
 func (a *Plane) Equal(b *Plane) bool {
 	var carg0 *C.graphene_plane_t // in, none, converted
 	var carg1 *C.graphene_plane_t // in, none, converted
-	var cret  C._Bool             // return
+	var cret  C._Bool             // return, none, casted
 
 	carg0 = (*C.graphene_plane_t)(UnsafePlaneToGlibNone(a))
 	carg1 = (*C.graphene_plane_t)(UnsafePlaneToGlibNone(b))
@@ -4643,9 +4603,7 @@ func (a *Plane) Equal(b *Plane) bool {
 
 	var goret bool
 
-	if cret != 0 {
-		goret = true
-	}
+	goret = bool(cret)
 
 	return goret
 }
@@ -5169,7 +5127,7 @@ func (a *Point) Distance(b *Point) (float32, float32, float32) {
 func (a *Point) Equal(b *Point) bool {
 	var carg0 *C.graphene_point_t // in, none, converted
 	var carg1 *C.graphene_point_t // in, none, converted
-	var cret  C._Bool             // return
+	var cret  C._Bool             // return, none, casted
 
 	carg0 = (*C.graphene_point_t)(UnsafePointToGlibNone(a))
 	carg1 = (*C.graphene_point_t)(UnsafePointToGlibNone(b))
@@ -5180,9 +5138,7 @@ func (a *Point) Equal(b *Point) bool {
 
 	var goret bool
 
-	if cret != 0 {
-		goret = true
-	}
+	goret = bool(cret)
 
 	return goret
 }
@@ -5338,7 +5294,7 @@ func (a *Point) Near(b *Point, epsilon float32) bool {
 	var carg0 *C.graphene_point_t // in, none, converted
 	var carg1 *C.graphene_point_t // in, none, converted
 	var carg2 C.float             // in, none, casted
-	var cret  C._Bool             // return
+	var cret  C._Bool             // return, none, casted
 
 	carg0 = (*C.graphene_point_t)(UnsafePointToGlibNone(a))
 	carg1 = (*C.graphene_point_t)(UnsafePointToGlibNone(b))
@@ -5351,9 +5307,7 @@ func (a *Point) Near(b *Point, epsilon float32) bool {
 
 	var goret bool
 
-	if cret != 0 {
-		goret = true
-	}
+	goret = bool(cret)
 
 	return goret
 }
@@ -5614,7 +5568,7 @@ func (a *Point3D) Dot(b *Point3D) float32 {
 func (a *Point3D) Equal(b *Point3D) bool {
 	var carg0 *C.graphene_point3d_t // in, none, converted
 	var carg1 *C.graphene_point3d_t // in, none, converted
-	var cret  C._Bool               // return
+	var cret  C._Bool               // return, none, casted
 
 	carg0 = (*C.graphene_point3d_t)(UnsafePoint3DToGlibNone(a))
 	carg1 = (*C.graphene_point3d_t)(UnsafePoint3DToGlibNone(b))
@@ -5625,9 +5579,7 @@ func (a *Point3D) Equal(b *Point3D) bool {
 
 	var goret bool
 
-	if cret != 0 {
-		goret = true
-	}
+	goret = bool(cret)
 
 	return goret
 }
@@ -5811,7 +5763,7 @@ func (a *Point3D) Near(b *Point3D, epsilon float32) bool {
 	var carg0 *C.graphene_point3d_t // in, none, converted
 	var carg1 *C.graphene_point3d_t // in, none, converted
 	var carg2 C.float               // in, none, casted
-	var cret  C._Bool               // return
+	var cret  C._Bool               // return, none, casted
 
 	carg0 = (*C.graphene_point3d_t)(UnsafePoint3DToGlibNone(a))
 	carg1 = (*C.graphene_point3d_t)(UnsafePoint3DToGlibNone(b))
@@ -5824,9 +5776,7 @@ func (a *Point3D) Near(b *Point3D, epsilon float32) bool {
 
 	var goret bool
 
-	if cret != 0 {
-		goret = true
-	}
+	goret = bool(cret)
 
 	return goret
 }
@@ -6105,7 +6055,7 @@ func (q *Quad) Bounds() Rect {
 func (q *Quad) Contains(p *Point) bool {
 	var carg0 *C.graphene_quad_t  // in, none, converted
 	var carg1 *C.graphene_point_t // in, none, converted
-	var cret  C._Bool             // return
+	var cret  C._Bool             // return, none, casted
 
 	carg0 = (*C.graphene_quad_t)(UnsafeQuadToGlibNone(q))
 	carg1 = (*C.graphene_point_t)(UnsafePointToGlibNone(p))
@@ -6116,9 +6066,7 @@ func (q *Quad) Contains(p *Point) bool {
 
 	var goret bool
 
-	if cret != 0 {
-		goret = true
-	}
+	goret = bool(cret)
 
 	return goret
 }
@@ -6436,7 +6384,7 @@ func (a *Quaternion) Dot(b *Quaternion) float32 {
 func (a *Quaternion) Equal(b *Quaternion) bool {
 	var carg0 *C.graphene_quaternion_t // in, none, converted
 	var carg1 *C.graphene_quaternion_t // in, none, converted
-	var cret  C._Bool                  // return
+	var cret  C._Bool                  // return, none, casted
 
 	carg0 = (*C.graphene_quaternion_t)(UnsafeQuaternionToGlibNone(a))
 	carg1 = (*C.graphene_quaternion_t)(UnsafeQuaternionToGlibNone(b))
@@ -6447,9 +6395,7 @@ func (a *Quaternion) Equal(b *Quaternion) bool {
 
 	var goret bool
 
-	if cret != 0 {
-		goret = true
-	}
+	goret = bool(cret)
 
 	return goret
 }
@@ -7187,7 +7133,7 @@ func RayAlloc() *Ray {
 func (a *Ray) Equal(b *Ray) bool {
 	var carg0 *C.graphene_ray_t // in, none, converted
 	var carg1 *C.graphene_ray_t // in, none, converted
-	var cret  C._Bool           // return
+	var cret  C._Bool           // return, none, casted
 
 	carg0 = (*C.graphene_ray_t)(UnsafeRayToGlibNone(a))
 	carg1 = (*C.graphene_ray_t)(UnsafeRayToGlibNone(b))
@@ -7198,9 +7144,7 @@ func (a *Ray) Equal(b *Ray) bool {
 
 	var goret bool
 
-	if cret != 0 {
-		goret = true
-	}
+	goret = bool(cret)
 
 	return goret
 }
@@ -7619,7 +7563,7 @@ func (r *Ray) IntersectTriangle(t *Triangle) (float32, RayIntersectionKind) {
 func (r *Ray) IntersectsBox(b *Box) bool {
 	var carg0 *C.graphene_ray_t // in, none, converted
 	var carg1 *C.graphene_box_t // in, none, converted
-	var cret  C._Bool           // return
+	var cret  C._Bool           // return, none, casted
 
 	carg0 = (*C.graphene_ray_t)(UnsafeRayToGlibNone(r))
 	carg1 = (*C.graphene_box_t)(UnsafeBoxToGlibNone(b))
@@ -7630,9 +7574,7 @@ func (r *Ray) IntersectsBox(b *Box) bool {
 
 	var goret bool
 
-	if cret != 0 {
-		goret = true
-	}
+	goret = bool(cret)
 
 	return goret
 }
@@ -7654,7 +7596,7 @@ func (r *Ray) IntersectsBox(b *Box) bool {
 func (r *Ray) IntersectsSphere(s *Sphere) bool {
 	var carg0 *C.graphene_ray_t    // in, none, converted
 	var carg1 *C.graphene_sphere_t // in, none, converted
-	var cret  C._Bool              // return
+	var cret  C._Bool              // return, none, casted
 
 	carg0 = (*C.graphene_ray_t)(UnsafeRayToGlibNone(r))
 	carg1 = (*C.graphene_sphere_t)(UnsafeSphereToGlibNone(s))
@@ -7665,9 +7607,7 @@ func (r *Ray) IntersectsSphere(s *Sphere) bool {
 
 	var goret bool
 
-	if cret != 0 {
-		goret = true
-	}
+	goret = bool(cret)
 
 	return goret
 }
@@ -7689,7 +7629,7 @@ func (r *Ray) IntersectsSphere(s *Sphere) bool {
 func (r *Ray) IntersectsTriangle(t *Triangle) bool {
 	var carg0 *C.graphene_ray_t      // in, none, converted
 	var carg1 *C.graphene_triangle_t // in, none, converted
-	var cret  C._Bool                // return
+	var cret  C._Bool                // return, none, casted
 
 	carg0 = (*C.graphene_ray_t)(UnsafeRayToGlibNone(r))
 	carg1 = (*C.graphene_triangle_t)(UnsafeTriangleToGlibNone(t))
@@ -7700,9 +7640,7 @@ func (r *Ray) IntersectsTriangle(t *Triangle) bool {
 
 	var goret bool
 
-	if cret != 0 {
-		goret = true
-	}
+	goret = bool(cret)
 
 	return goret
 }
@@ -7851,7 +7789,7 @@ func RectZero() *Rect {
 func (r *Rect) ContainsPoint(p *Point) bool {
 	var carg0 *C.graphene_rect_t  // in, none, converted
 	var carg1 *C.graphene_point_t // in, none, converted
-	var cret  C._Bool             // return
+	var cret  C._Bool             // return, none, casted
 
 	carg0 = (*C.graphene_rect_t)(UnsafeRectToGlibNone(r))
 	carg1 = (*C.graphene_point_t)(UnsafePointToGlibNone(p))
@@ -7862,9 +7800,7 @@ func (r *Rect) ContainsPoint(p *Point) bool {
 
 	var goret bool
 
-	if cret != 0 {
-		goret = true
-	}
+	goret = bool(cret)
 
 	return goret
 }
@@ -7884,7 +7820,7 @@ func (r *Rect) ContainsPoint(p *Point) bool {
 func (a *Rect) ContainsRect(b *Rect) bool {
 	var carg0 *C.graphene_rect_t // in, none, converted
 	var carg1 *C.graphene_rect_t // in, none, converted
-	var cret  C._Bool            // return
+	var cret  C._Bool            // return, none, casted
 
 	carg0 = (*C.graphene_rect_t)(UnsafeRectToGlibNone(a))
 	carg1 = (*C.graphene_rect_t)(UnsafeRectToGlibNone(b))
@@ -7895,9 +7831,7 @@ func (a *Rect) ContainsRect(b *Rect) bool {
 
 	var goret bool
 
-	if cret != 0 {
-		goret = true
-	}
+	goret = bool(cret)
 
 	return goret
 }
@@ -7916,7 +7850,7 @@ func (a *Rect) ContainsRect(b *Rect) bool {
 func (a *Rect) Equal(b *Rect) bool {
 	var carg0 *C.graphene_rect_t // in, none, converted
 	var carg1 *C.graphene_rect_t // in, none, converted
-	var cret  C._Bool            // return
+	var cret  C._Bool            // return, none, casted
 
 	carg0 = (*C.graphene_rect_t)(UnsafeRectToGlibNone(a))
 	carg1 = (*C.graphene_rect_t)(UnsafeRectToGlibNone(b))
@@ -7927,9 +7861,7 @@ func (a *Rect) Equal(b *Rect) bool {
 
 	var goret bool
 
-	if cret != 0 {
-		goret = true
-	}
+	goret = bool(cret)
 
 	return goret
 }
@@ -8444,7 +8376,7 @@ func (a *Rect) Intersection(b *Rect) (Rect, bool) {
 	var carg0 *C.graphene_rect_t // in, none, converted
 	var carg1 *C.graphene_rect_t // in, none, converted
 	var carg2 C.graphene_rect_t  // out, transfer: none, C Pointers: 0, Name: Rect, optional, caller-allocates
-	var cret  C._Bool            // return
+	var cret  C._Bool            // return, none, casted
 
 	carg0 = (*C.graphene_rect_t)(UnsafeRectToGlibNone(a))
 	carg1 = (*C.graphene_rect_t)(UnsafeRectToGlibNone(b))
@@ -8459,9 +8391,7 @@ func (a *Rect) Intersection(b *Rect) (Rect, bool) {
 	_ = res
 	_ = carg2
 	panic("unimplemented conversion of Rect (graphene_rect_t)")
-	if cret != 0 {
-		goret = true
-	}
+	goret = bool(cret)
 
 	return res, goret
 }
@@ -9036,7 +8966,7 @@ func SizeZero() *Size {
 func (a *Size) Equal(b *Size) bool {
 	var carg0 *C.graphene_size_t // in, none, converted
 	var carg1 *C.graphene_size_t // in, none, converted
-	var cret  C._Bool            // return
+	var cret  C._Bool            // return, none, casted
 
 	carg0 = (*C.graphene_size_t)(UnsafeSizeToGlibNone(a))
 	carg1 = (*C.graphene_size_t)(UnsafeSizeToGlibNone(b))
@@ -9047,9 +8977,7 @@ func (a *Size) Equal(b *Size) bool {
 
 	var goret bool
 
-	if cret != 0 {
-		goret = true
-	}
+	goret = bool(cret)
 
 	return goret
 }
@@ -9302,7 +9230,7 @@ func SphereAlloc() *Sphere {
 func (s *Sphere) ContainsPoint(point *Point3D) bool {
 	var carg0 *C.graphene_sphere_t  // in, none, converted
 	var carg1 *C.graphene_point3d_t // in, none, converted
-	var cret  C._Bool               // return
+	var cret  C._Bool               // return, none, casted
 
 	carg0 = (*C.graphene_sphere_t)(UnsafeSphereToGlibNone(s))
 	carg1 = (*C.graphene_point3d_t)(UnsafePoint3DToGlibNone(point))
@@ -9313,9 +9241,7 @@ func (s *Sphere) ContainsPoint(point *Point3D) bool {
 
 	var goret bool
 
-	if cret != 0 {
-		goret = true
-	}
+	goret = bool(cret)
 
 	return goret
 }
@@ -9365,7 +9291,7 @@ func (s *Sphere) Distance(point *Point3D) float32 {
 func (a *Sphere) Equal(b *Sphere) bool {
 	var carg0 *C.graphene_sphere_t // in, none, converted
 	var carg1 *C.graphene_sphere_t // in, none, converted
-	var cret  C._Bool              // return
+	var cret  C._Bool              // return, none, casted
 
 	carg0 = (*C.graphene_sphere_t)(UnsafeSphereToGlibNone(a))
 	carg1 = (*C.graphene_sphere_t)(UnsafeSphereToGlibNone(b))
@@ -9376,9 +9302,7 @@ func (a *Sphere) Equal(b *Sphere) bool {
 
 	var goret bool
 
-	if cret != 0 {
-		goret = true
-	}
+	goret = bool(cret)
 
 	return goret
 }
@@ -9592,7 +9516,7 @@ func (s *Sphere) InitFromVectors(vectors []Vec3, center *Point3D) *Sphere {
 // Checks whether the sphere has a zero radius.
 func (s *Sphere) IsEmpty() bool {
 	var carg0 *C.graphene_sphere_t // in, none, converted
-	var cret  C._Bool              // return
+	var cret  C._Bool              // return, none, casted
 
 	carg0 = (*C.graphene_sphere_t)(UnsafeSphereToGlibNone(s))
 
@@ -9601,9 +9525,7 @@ func (s *Sphere) IsEmpty() bool {
 
 	var goret bool
 
-	if cret != 0 {
-		goret = true
-	}
+	goret = bool(cret)
 
 	return goret
 }
@@ -9754,7 +9676,7 @@ func TriangleAlloc() *Triangle {
 func (t *Triangle) ContainsPoint(p *Point3D) bool {
 	var carg0 *C.graphene_triangle_t // in, none, converted
 	var carg1 *C.graphene_point3d_t  // in, none, converted
-	var cret  C._Bool                // return
+	var cret  C._Bool                // return, none, casted
 
 	carg0 = (*C.graphene_triangle_t)(UnsafeTriangleToGlibNone(t))
 	carg1 = (*C.graphene_point3d_t)(UnsafePoint3DToGlibNone(p))
@@ -9765,9 +9687,7 @@ func (t *Triangle) ContainsPoint(p *Point3D) bool {
 
 	var goret bool
 
-	if cret != 0 {
-		goret = true
-	}
+	goret = bool(cret)
 
 	return goret
 }
@@ -9786,7 +9706,7 @@ func (t *Triangle) ContainsPoint(p *Point3D) bool {
 func (a *Triangle) Equal(b *Triangle) bool {
 	var carg0 *C.graphene_triangle_t // in, none, converted
 	var carg1 *C.graphene_triangle_t // in, none, converted
-	var cret  C._Bool                // return
+	var cret  C._Bool                // return, none, casted
 
 	carg0 = (*C.graphene_triangle_t)(UnsafeTriangleToGlibNone(a))
 	carg1 = (*C.graphene_triangle_t)(UnsafeTriangleToGlibNone(b))
@@ -9797,9 +9717,7 @@ func (a *Triangle) Equal(b *Triangle) bool {
 
 	var goret bool
 
-	if cret != 0 {
-		goret = true
-	}
+	goret = bool(cret)
 
 	return goret
 }
@@ -9859,7 +9777,7 @@ func (t *Triangle) GetBarycoords(p *Point3D) (Vec2, bool) {
 	var carg0 *C.graphene_triangle_t // in, none, converted
 	var carg1 *C.graphene_point3d_t  // in, none, converted, nullable
 	var carg2 C.graphene_vec2_t      // out, transfer: none, C Pointers: 0, Name: Vec2, caller-allocates
-	var cret  C._Bool                // return
+	var cret  C._Bool                // return, none, casted
 
 	carg0 = (*C.graphene_triangle_t)(UnsafeTriangleToGlibNone(t))
 	if p != nil {
@@ -9876,9 +9794,7 @@ func (t *Triangle) GetBarycoords(p *Point3D) (Vec2, bool) {
 	_ = res
 	_ = carg2
 	panic("unimplemented conversion of Vec2 (graphene_vec2_t)")
-	if cret != 0 {
-		goret = true
-	}
+	goret = bool(cret)
 
 	return res, goret
 }
@@ -10062,7 +9978,7 @@ func (t *Triangle) GetUv(p *Point3D, uvA *Vec2, uvB *Vec2, uvC *Vec2) (Vec2, boo
 	var carg3 *C.graphene_vec2_t     // in, none, converted
 	var carg4 *C.graphene_vec2_t     // in, none, converted
 	var carg5 C.graphene_vec2_t      // out, transfer: none, C Pointers: 0, Name: Vec2, caller-allocates
-	var cret  C._Bool                // return
+	var cret  C._Bool                // return, none, casted
 
 	carg0 = (*C.graphene_triangle_t)(UnsafeTriangleToGlibNone(t))
 	if p != nil {
@@ -10085,9 +10001,7 @@ func (t *Triangle) GetUv(p *Point3D, uvA *Vec2, uvB *Vec2, uvC *Vec2) (Vec2, boo
 	_ = res
 	_ = carg5
 	panic("unimplemented conversion of Vec2 (graphene_vec2_t)")
-	if cret != 0 {
-		goret = true
-	}
+	goret = bool(cret)
 
 	return res, goret
 }
@@ -10554,7 +10468,7 @@ func (a *Vec2) Dot(b *Vec2) float32 {
 func (v1 *Vec2) Equal(v2 *Vec2) bool {
 	var carg0 *C.graphene_vec2_t // in, none, converted
 	var carg1 *C.graphene_vec2_t // in, none, converted
-	var cret  C._Bool            // return
+	var cret  C._Bool            // return, none, casted
 
 	carg0 = (*C.graphene_vec2_t)(UnsafeVec2ToGlibNone(v1))
 	carg1 = (*C.graphene_vec2_t)(UnsafeVec2ToGlibNone(v2))
@@ -10565,9 +10479,7 @@ func (v1 *Vec2) Equal(v2 *Vec2) bool {
 
 	var goret bool
 
-	if cret != 0 {
-		goret = true
-	}
+	goret = bool(cret)
 
 	return goret
 }
@@ -10892,7 +10804,7 @@ func (v1 *Vec2) Near(v2 *Vec2, epsilon float32) bool {
 	var carg0 *C.graphene_vec2_t // in, none, converted
 	var carg1 *C.graphene_vec2_t // in, none, converted
 	var carg2 C.float            // in, none, casted
-	var cret  C._Bool            // return
+	var cret  C._Bool            // return, none, casted
 
 	carg0 = (*C.graphene_vec2_t)(UnsafeVec2ToGlibNone(v1))
 	carg1 = (*C.graphene_vec2_t)(UnsafeVec2ToGlibNone(v2))
@@ -10905,9 +10817,7 @@ func (v1 *Vec2) Near(v2 *Vec2, epsilon float32) bool {
 
 	var goret bool
 
-	if cret != 0 {
-		goret = true
-	}
+	goret = bool(cret)
 
 	return goret
 }
@@ -11375,7 +11285,7 @@ func (a *Vec3) Dot(b *Vec3) float32 {
 func (v1 *Vec3) Equal(v2 *Vec3) bool {
 	var carg0 *C.graphene_vec3_t // in, none, converted
 	var carg1 *C.graphene_vec3_t // in, none, converted
-	var cret  C._Bool            // return
+	var cret  C._Bool            // return, none, casted
 
 	carg0 = (*C.graphene_vec3_t)(UnsafeVec3ToGlibNone(v1))
 	carg1 = (*C.graphene_vec3_t)(UnsafeVec3ToGlibNone(v2))
@@ -11386,9 +11296,7 @@ func (v1 *Vec3) Equal(v2 *Vec3) bool {
 
 	var goret bool
 
-	if cret != 0 {
-		goret = true
-	}
+	goret = bool(cret)
 
 	return goret
 }
@@ -11876,7 +11784,7 @@ func (v1 *Vec3) Near(v2 *Vec3, epsilon float32) bool {
 	var carg0 *C.graphene_vec3_t // in, none, converted
 	var carg1 *C.graphene_vec3_t // in, none, converted
 	var carg2 C.float            // in, none, casted
-	var cret  C._Bool            // return
+	var cret  C._Bool            // return, none, casted
 
 	carg0 = (*C.graphene_vec3_t)(UnsafeVec3ToGlibNone(v1))
 	carg1 = (*C.graphene_vec3_t)(UnsafeVec3ToGlibNone(v2))
@@ -11889,9 +11797,7 @@ func (v1 *Vec3) Near(v2 *Vec3, epsilon float32) bool {
 
 	var goret bool
 
-	if cret != 0 {
-		goret = true
-	}
+	goret = bool(cret)
 
 	return goret
 }
@@ -12346,7 +12252,7 @@ func (a *Vec4) Dot(b *Vec4) float32 {
 func (v1 *Vec4) Equal(v2 *Vec4) bool {
 	var carg0 *C.graphene_vec4_t // in, none, converted
 	var carg1 *C.graphene_vec4_t // in, none, converted
-	var cret  C._Bool            // return
+	var cret  C._Bool            // return, none, casted
 
 	carg0 = (*C.graphene_vec4_t)(UnsafeVec4ToGlibNone(v1))
 	carg1 = (*C.graphene_vec4_t)(UnsafeVec4ToGlibNone(v2))
@@ -12357,9 +12263,7 @@ func (v1 *Vec4) Equal(v2 *Vec4) bool {
 
 	var goret bool
 
-	if cret != 0 {
-		goret = true
-	}
+	goret = bool(cret)
 
 	return goret
 }
@@ -12863,7 +12767,7 @@ func (v1 *Vec4) Near(v2 *Vec4, epsilon float32) bool {
 	var carg0 *C.graphene_vec4_t // in, none, converted
 	var carg1 *C.graphene_vec4_t // in, none, converted
 	var carg2 C.float            // in, none, casted
-	var cret  C._Bool            // return
+	var cret  C._Bool            // return, none, casted
 
 	carg0 = (*C.graphene_vec4_t)(UnsafeVec4ToGlibNone(v1))
 	carg1 = (*C.graphene_vec4_t)(UnsafeVec4ToGlibNone(v2))
@@ -12876,9 +12780,7 @@ func (v1 *Vec4) Near(v2 *Vec4, epsilon float32) bool {
 
 	var goret bool
 
-	if cret != 0 {
-		goret = true
-	}
+	goret = bool(cret)
 
 	return goret
 }

@@ -7552,6 +7552,8 @@ func (font *FontInstance) ParentDescribe() *FontDescription {
 
 	parentclass := (*C.PangoFontClass)(classdata.PeekParentClass(UnsafeFontToGlibNone(font)))
 
+	carg0 = (*C.PangoFont)(UnsafeFontToGlibNone(font))
+
 	cret = C._gotk4_pango1_Font_virtual_describe(unsafe.Pointer(parentclass.describe), carg0)
 	runtime.KeepAlive(font)
 
@@ -7573,6 +7575,8 @@ func (font *FontInstance) ParentDescribeAbsolute() *FontDescription {
 	var cret  *C.PangoFontDescription // return, full, converted
 
 	parentclass := (*C.PangoFontClass)(classdata.PeekParentClass(UnsafeFontToGlibNone(font)))
+
+	carg0 = (*C.PangoFont)(UnsafeFontToGlibNone(font))
 
 	cret = C._gotk4_pango1_Font_virtual_describe_absolute(unsafe.Pointer(parentclass.describe_absolute), carg0)
 	runtime.KeepAlive(font)
@@ -7603,6 +7607,7 @@ func (font *FontInstance) ParentGetCoverage(language *Language) Coverage {
 
 	parentclass := (*C.PangoFontClass)(classdata.PeekParentClass(UnsafeFontToGlibNone(font)))
 
+	carg0 = (*C.PangoFont)(UnsafeFontToGlibNone(font))
 	carg1 = (*C.PangoLanguage)(UnsafeLanguageToGlibNone(language))
 
 	cret = C._gotk4_pango1_Font_virtual_get_coverage(unsafe.Pointer(parentclass.get_coverage), carg0, carg1)
@@ -7639,6 +7644,8 @@ func (font *FontInstance) ParentGetFontMap() FontMap {
 	var cret  *C.PangoFontMap // return, none, converted, nullable
 
 	parentclass := (*C.PangoFontClass)(classdata.PeekParentClass(UnsafeFontToGlibNone(font)))
+
+	carg0 = (*C.PangoFont)(UnsafeFontToGlibNone(font))
 
 	cret = C._gotk4_pango1_Font_virtual_get_font_map(unsafe.Pointer(parentclass.get_font_map), carg0)
 	runtime.KeepAlive(font)
@@ -7677,12 +7684,13 @@ func (font *FontInstance) ParentGetFontMap() FontMap {
 // output variables and returns.
 func (font *FontInstance) ParentGetGlyphExtents(glyph Glyph) (Rectangle, Rectangle) {
 	var carg0 *C.PangoFont
-	var carg1 C.PangoGlyph     // in, none, casted, alias
+	var carg1 C.PangoGlyph     // in, none, converted
 	var carg2 C.PangoRectangle // out, transfer: none, C Pointers: 0, Name: Rectangle, optional, caller-allocates
 	var carg3 C.PangoRectangle // out, transfer: none, C Pointers: 0, Name: Rectangle, optional, caller-allocates
 
 	parentclass := (*C.PangoFontClass)(classdata.PeekParentClass(UnsafeFontToGlibNone(font)))
 
+	carg0 = (*C.PangoFont)(UnsafeFontToGlibNone(font))
 	carg1 = C.PangoGlyph(glyph)
 
 	C._gotk4_pango1_Font_virtual_get_glyph_extents(unsafe.Pointer(parentclass.get_glyph_extents), carg0, carg1, &carg2, &carg3)
@@ -7725,11 +7733,12 @@ func (font *FontInstance) ParentGetGlyphExtents(glyph Glyph) (Rectangle, Rectang
 // output variables and returns.
 func (font *FontInstance) ParentGetMetrics(language *Language) *FontMetrics {
 	var carg0 *C.PangoFont
-	var carg1 *C.PangoLanguage    // in, none, converted, nullable
+	var carg1 *C.PangoLanguage    // in, none, converted
 	var cret  *C.PangoFontMetrics // return, full, converted
 
 	parentclass := (*C.PangoFontClass)(classdata.PeekParentClass(UnsafeFontToGlibNone(font)))
 
+	carg0 = (*C.PangoFont)(UnsafeFontToGlibNone(font))
 	if language != nil {
 		carg1 = (*C.PangoLanguage)(UnsafeLanguageToGlibNone(language))
 	}
@@ -8190,6 +8199,8 @@ func (face *FontFaceInstance) ParentDescribe() *FontDescription {
 
 	parentclass := (*C.PangoFontFaceClass)(classdata.PeekParentClass(UnsafeFontFaceToGlibNone(face)))
 
+	carg0 = (*C.PangoFontFace)(UnsafeFontFaceToGlibNone(face))
+
 	cret = C._gotk4_pango1_FontFace_virtual_describe(unsafe.Pointer(parentclass.describe), carg0)
 	runtime.KeepAlive(face)
 
@@ -8218,6 +8229,8 @@ func (face *FontFaceInstance) ParentGetFaceName() string {
 
 	parentclass := (*C.PangoFontFaceClass)(classdata.PeekParentClass(UnsafeFontFaceToGlibNone(face)))
 
+	carg0 = (*C.PangoFontFace)(UnsafeFontFaceToGlibNone(face))
+
 	cret = C._gotk4_pango1_FontFace_virtual_get_face_name(unsafe.Pointer(parentclass.get_face_name), carg0)
 	runtime.KeepAlive(face)
 
@@ -8241,6 +8254,8 @@ func (face *FontFaceInstance) ParentGetFamily() FontFamily {
 	var cret  *C.PangoFontFamily // return, none, converted
 
 	parentclass := (*C.PangoFontFaceClass)(classdata.PeekParentClass(UnsafeFontFaceToGlibNone(face)))
+
+	carg0 = (*C.PangoFontFace)(UnsafeFontFaceToGlibNone(face))
 
 	cret = C._gotk4_pango1_FontFace_virtual_get_family(unsafe.Pointer(parentclass.get_family), carg0)
 	runtime.KeepAlive(face)
@@ -8269,6 +8284,8 @@ func (face *FontFaceInstance) ParentIsSynthesized() bool {
 	var cret  C.gboolean // return
 
 	parentclass := (*C.PangoFontFaceClass)(classdata.PeekParentClass(UnsafeFontFaceToGlibNone(face)))
+
+	carg0 = (*C.PangoFontFace)(UnsafeFontFaceToGlibNone(face))
 
 	cret = C._gotk4_pango1_FontFace_virtual_is_synthesized(unsafe.Pointer(parentclass.is_synthesized), carg0)
 	runtime.KeepAlive(face)
@@ -8812,11 +8829,12 @@ func UnsafeApplyFontFamilyOverrides[Instance FontFamily](gclass unsafe.Pointer, 
 // Gets the `PangoFontFace` of @family with the given name.
 func (family *FontFamilyInstance) ParentGetFace(name string) FontFace {
 	var carg0 *C.PangoFontFamily
-	var carg1 *C.char          // in, none, string, nullable-string
+	var carg1 *C.char          // in, none, converted
 	var cret  *C.PangoFontFace // return, none, converted, nullable
 
 	parentclass := (*C.PangoFontFamilyClass)(classdata.PeekParentClass(UnsafeFontFamilyToGlibNone(family)))
 
+	carg0 = (*C.PangoFontFamily)(UnsafeFontFamilyToGlibNone(family))
 	if name != "" {
 		carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
 		defer C.free(unsafe.Pointer(carg1))
@@ -8852,6 +8870,8 @@ func (family *FontFamilyInstance) ParentGetName() string {
 	var cret  *C.char // return, none, string
 
 	parentclass := (*C.PangoFontFamilyClass)(classdata.PeekParentClass(UnsafeFontFamilyToGlibNone(family)))
+
+	carg0 = (*C.PangoFontFamily)(UnsafeFontFamilyToGlibNone(family))
 
 	cret = C._gotk4_pango1_FontFamily_virtual_get_name(unsafe.Pointer(parentclass.get_name), carg0)
 	runtime.KeepAlive(family)
@@ -8890,6 +8910,8 @@ func (family *FontFamilyInstance) ParentIsMonospace() bool {
 
 	parentclass := (*C.PangoFontFamilyClass)(classdata.PeekParentClass(UnsafeFontFamilyToGlibNone(family)))
 
+	carg0 = (*C.PangoFontFamily)(UnsafeFontFamilyToGlibNone(family))
+
 	cret = C._gotk4_pango1_FontFamily_virtual_is_monospace(unsafe.Pointer(parentclass.is_monospace), carg0)
 	runtime.KeepAlive(family)
 
@@ -8919,6 +8941,8 @@ func (family *FontFamilyInstance) ParentIsVariable() bool {
 	var cret  C.gboolean // return
 
 	parentclass := (*C.PangoFontFamilyClass)(classdata.PeekParentClass(UnsafeFontFamilyToGlibNone(family)))
+
+	carg0 = (*C.PangoFontFamily)(UnsafeFontFamilyToGlibNone(family))
 
 	cret = C._gotk4_pango1_FontFamily_virtual_is_variable(unsafe.Pointer(parentclass.is_variable), carg0)
 	runtime.KeepAlive(family)
@@ -9722,6 +9746,8 @@ func (fontmap *FontMapInstance) ParentChanged() {
 
 	parentclass := (*C.PangoFontMapClass)(classdata.PeekParentClass(UnsafeFontMapToGlibNone(fontmap)))
 
+	carg0 = (*C.PangoFontMap)(UnsafeFontMapToGlibNone(fontmap))
+
 	C._gotk4_pango1_FontMap_virtual_changed(unsafe.Pointer(parentclass.changed), carg0)
 	runtime.KeepAlive(fontmap)
 }
@@ -9740,11 +9766,12 @@ func (fontmap *FontMapInstance) ParentChanged() {
 // Gets a font family by name.
 func (fontmap *FontMapInstance) ParentGetFamily(name string) FontFamily {
 	var carg0 *C.PangoFontMap
-	var carg1 *C.char            // in, none, string
+	var carg1 *C.char            // in, none, converted
 	var cret  *C.PangoFontFamily // return, none, converted
 
 	parentclass := (*C.PangoFontMapClass)(classdata.PeekParentClass(UnsafeFontMapToGlibNone(fontmap)))
 
+	carg0 = (*C.PangoFontMap)(UnsafeFontMapToGlibNone(fontmap))
 	carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
 	defer C.free(unsafe.Pointer(carg1))
 
@@ -9784,6 +9811,8 @@ func (fontmap *FontMapInstance) ParentGetSerial() uint {
 
 	parentclass := (*C.PangoFontMapClass)(classdata.PeekParentClass(UnsafeFontMapToGlibNone(fontmap)))
 
+	carg0 = (*C.PangoFontMap)(UnsafeFontMapToGlibNone(fontmap))
+
 	cret = C._gotk4_pango1_FontMap_virtual_get_serial(unsafe.Pointer(parentclass.get_serial), carg0)
 	runtime.KeepAlive(fontmap)
 
@@ -9815,6 +9844,7 @@ func (fontmap *FontMapInstance) ParentLoadFont(_context Context, desc *FontDescr
 
 	parentclass := (*C.PangoFontMapClass)(classdata.PeekParentClass(UnsafeFontMapToGlibNone(fontmap)))
 
+	carg0 = (*C.PangoFontMap)(UnsafeFontMapToGlibNone(fontmap))
 	carg1 = (*C.PangoContext)(UnsafeContextToGlibNone(_context))
 	carg2 = (*C.PangoFontDescription)(UnsafeFontDescriptionToGlibNone(desc))
 
@@ -9856,6 +9886,7 @@ func (fontmap *FontMapInstance) ParentLoadFontset(_context Context, desc *FontDe
 
 	parentclass := (*C.PangoFontMapClass)(classdata.PeekParentClass(UnsafeFontMapToGlibNone(fontmap)))
 
+	carg0 = (*C.PangoFontMap)(UnsafeFontMapToGlibNone(fontmap))
 	carg1 = (*C.PangoContext)(UnsafeContextToGlibNone(_context))
 	carg2 = (*C.PangoFontDescription)(UnsafeFontDescriptionToGlibNone(desc))
 	carg3 = (*C.PangoLanguage)(UnsafeLanguageToGlibNone(language))
@@ -10230,11 +10261,12 @@ func UnsafeApplyFontsetOverrides[Instance Fontset](gclass unsafe.Pointer, overri
 // glyph for a Unicode character.
 func (fontset *FontsetInstance) ParentGetFont(wc uint) Font {
 	var carg0 *C.PangoFontset
-	var carg1 C.guint      // in, none, casted
+	var carg1 C.guint      // in, none, converted
 	var cret  *C.PangoFont // return, full, converted
 
 	parentclass := (*C.PangoFontsetClass)(classdata.PeekParentClass(UnsafeFontsetToGlibNone(fontset)))
 
+	carg0 = (*C.PangoFontset)(UnsafeFontsetToGlibNone(fontset))
 	carg1 = C.guint(wc)
 
 	cret = C._gotk4_pango1_Fontset_virtual_get_font(unsafe.Pointer(parentclass.get_font), carg0, carg1)
@@ -10262,6 +10294,8 @@ func (fontset *FontsetInstance) ParentGetLanguage() *Language {
 
 	parentclass := (*C.PangoFontsetClass)(classdata.PeekParentClass(UnsafeFontsetToGlibNone(fontset)))
 
+	carg0 = (*C.PangoFontset)(UnsafeFontsetToGlibNone(fontset))
+
 	cret = C._gotk4_pango1_Fontset_virtual_get_language(unsafe.Pointer(parentclass.get_language), carg0)
 	runtime.KeepAlive(fontset)
 
@@ -10285,6 +10319,8 @@ func (fontset *FontsetInstance) ParentGetMetrics() *FontMetrics {
 	var cret  *C.PangoFontMetrics // return, full, converted
 
 	parentclass := (*C.PangoFontsetClass)(classdata.PeekParentClass(UnsafeFontsetToGlibNone(fontset)))
+
+	carg0 = (*C.PangoFontset)(UnsafeFontsetToGlibNone(fontset))
 
 	cret = C._gotk4_pango1_Fontset_virtual_get_metrics(unsafe.Pointer(parentclass.get_metrics), carg0)
 	runtime.KeepAlive(fontset)
@@ -15166,6 +15202,8 @@ func (renderer *RendererInstance) ParentBegin() {
 
 	parentclass := (*C.PangoRendererClass)(classdata.PeekParentClass(UnsafeRendererToGlibNone(renderer)))
 
+	carg0 = (*C.PangoRenderer)(UnsafeRendererToGlibNone(renderer))
+
 	C._gotk4_pango1_Renderer_virtual_begin(unsafe.Pointer(parentclass.begin), carg0)
 	runtime.KeepAlive(renderer)
 }
@@ -15191,13 +15229,14 @@ func (renderer *RendererInstance) ParentBegin() {
 // Use [method@Pango.Renderer.activate] to activate a renderer.
 func (renderer *RendererInstance) ParentDrawErrorUnderline(x int32, y int32, width int32, height int32) {
 	var carg0 *C.PangoRenderer
-	var carg1 C.int // in, none, casted
+	var carg1 C.int // in, none, converted
 	var carg2 C.int // in, none, casted
 	var carg3 C.int // in, none, casted
 	var carg4 C.int // in, none, casted
 
 	parentclass := (*C.PangoRendererClass)(classdata.PeekParentClass(UnsafeRendererToGlibNone(renderer)))
 
+	carg0 = (*C.PangoRenderer)(UnsafeRendererToGlibNone(renderer))
 	carg1 = C.int(x)
 	carg2 = C.int(y)
 	carg3 = C.int(width)
@@ -15225,12 +15264,13 @@ func (renderer *RendererInstance) ParentDrawErrorUnderline(x int32, y int32, wid
 func (renderer *RendererInstance) ParentDrawGlyph(font Font, glyph Glyph, x float64, y float64) {
 	var carg0 *C.PangoRenderer
 	var carg1 *C.PangoFont // in, none, converted
-	var carg2 C.PangoGlyph // in, none, casted, alias
-	var carg3 C.double     // in, none, casted
+	var carg2 C.PangoGlyph // in, none, converted
+	var carg3 C.double     // in, none, casted, alias
 	var carg4 C.double     // in, none, casted
 
 	parentclass := (*C.PangoRendererClass)(classdata.PeekParentClass(UnsafeRendererToGlibNone(renderer)))
 
+	carg0 = (*C.PangoRenderer)(UnsafeRendererToGlibNone(renderer))
 	carg1 = (*C.PangoFont)(UnsafeFontToGlibNone(font))
 	carg2 = C.PangoGlyph(glyph)
 	carg3 = C.double(x)
@@ -15276,13 +15316,14 @@ func (renderer *RendererInstance) ParentDrawGlyph(font Font, glyph Glyph, x floa
 // [method@Pango.Renderer.draw_glyphs].
 func (renderer *RendererInstance) ParentDrawGlyphItem(text string, glyphItem *GlyphItem, x int32, y int32) {
 	var carg0 *C.PangoRenderer
-	var carg1 *C.char           // in, none, string, nullable-string
-	var carg2 *C.PangoGlyphItem // in, none, converted
-	var carg3 C.int             // in, none, casted
+	var carg1 *C.char           // in, none, converted
+	var carg2 *C.PangoGlyphItem // in, none, string, nullable-string
+	var carg3 C.int             // in, none, converted
 	var carg4 C.int             // in, none, casted
 
 	parentclass := (*C.PangoRendererClass)(classdata.PeekParentClass(UnsafeRendererToGlibNone(renderer)))
 
+	carg0 = (*C.PangoRenderer)(UnsafeRendererToGlibNone(renderer))
 	if text != "" {
 		carg1 = (*C.char)(unsafe.Pointer(C.CString(text)))
 		defer C.free(unsafe.Pointer(carg1))
@@ -15316,11 +15357,12 @@ func (renderer *RendererInstance) ParentDrawGlyphs(font Font, glyphs *GlyphStrin
 	var carg0 *C.PangoRenderer
 	var carg1 *C.PangoFont        // in, none, converted
 	var carg2 *C.PangoGlyphString // in, none, converted
-	var carg3 C.int               // in, none, casted
+	var carg3 C.int               // in, none, converted
 	var carg4 C.int               // in, none, casted
 
 	parentclass := (*C.PangoRendererClass)(classdata.PeekParentClass(UnsafeRendererToGlibNone(renderer)))
 
+	carg0 = (*C.PangoRenderer)(UnsafeRendererToGlibNone(renderer))
 	carg1 = (*C.PangoFont)(UnsafeFontToGlibNone(font))
 	carg2 = (*C.PangoGlyphString)(UnsafeGlyphStringToGlibNone(glyphs))
 	carg3 = C.int(x)
@@ -15354,7 +15396,7 @@ func (renderer *RendererInstance) ParentDrawGlyphs(font Font, glyphs *GlyphStrin
 // Use [method@Pango.Renderer.activate] to activate a renderer.
 func (renderer *RendererInstance) ParentDrawRectangle(part RenderPart, x int32, y int32, width int32, height int32) {
 	var carg0 *C.PangoRenderer
-	var carg1 C.PangoRenderPart // in, none, casted
+	var carg1 C.PangoRenderPart // in, none, converted
 	var carg2 C.int             // in, none, casted
 	var carg3 C.int             // in, none, casted
 	var carg4 C.int             // in, none, casted
@@ -15362,6 +15404,7 @@ func (renderer *RendererInstance) ParentDrawRectangle(part RenderPart, x int32, 
 
 	parentclass := (*C.PangoRendererClass)(classdata.PeekParentClass(UnsafeRendererToGlibNone(renderer)))
 
+	carg0 = (*C.PangoRenderer)(UnsafeRendererToGlibNone(renderer))
 	carg1 = C.PangoRenderPart(part)
 	carg2 = C.int(x)
 	carg3 = C.int(y)
@@ -15392,11 +15435,12 @@ func (renderer *RendererInstance) ParentDrawRectangle(part RenderPart, x int32, 
 func (renderer *RendererInstance) ParentDrawShape(attr *AttrShape, x int32, y int32) {
 	var carg0 *C.PangoRenderer
 	var carg1 *C.PangoAttrShape // in, none, converted
-	var carg2 C.int             // in, none, casted
+	var carg2 C.int             // in, none, converted
 	var carg3 C.int             // in, none, casted
 
 	parentclass := (*C.PangoRendererClass)(classdata.PeekParentClass(UnsafeRendererToGlibNone(renderer)))
 
+	carg0 = (*C.PangoRenderer)(UnsafeRendererToGlibNone(renderer))
 	carg1 = (*C.PangoAttrShape)(UnsafeAttrShapeToGlibNone(attr))
 	carg2 = C.int(x)
 	carg3 = C.int(y)
@@ -15425,7 +15469,7 @@ func (renderer *RendererInstance) ParentDrawShape(attr *AttrShape, x int32, y in
 // using the given `PangoRenderer`; coordinates are in device space.
 func (renderer *RendererInstance) ParentDrawTrapezoid(part RenderPart, y1 float64, x11 float64, x21 float64, y2 float64, x12 float64, x22 float64) {
 	var carg0 *C.PangoRenderer
-	var carg1 C.PangoRenderPart // in, none, casted
+	var carg1 C.PangoRenderPart // in, none, converted
 	var carg2 C.double          // in, none, casted
 	var carg3 C.double          // in, none, casted
 	var carg4 C.double          // in, none, casted
@@ -15435,6 +15479,7 @@ func (renderer *RendererInstance) ParentDrawTrapezoid(part RenderPart, y1 float6
 
 	parentclass := (*C.PangoRendererClass)(classdata.PeekParentClass(UnsafeRendererToGlibNone(renderer)))
 
+	carg0 = (*C.PangoRenderer)(UnsafeRendererToGlibNone(renderer))
 	carg1 = C.PangoRenderPart(part)
 	carg2 = C.double(y1)
 	carg3 = C.double(x11)
@@ -15462,6 +15507,8 @@ func (renderer *RendererInstance) ParentEnd() {
 	var carg0 *C.PangoRenderer
 
 	parentclass := (*C.PangoRendererClass)(classdata.PeekParentClass(UnsafeRendererToGlibNone(renderer)))
+
+	carg0 = (*C.PangoRenderer)(UnsafeRendererToGlibNone(renderer))
 
 	C._gotk4_pango1_Renderer_virtual_end(unsafe.Pointer(parentclass.end), carg0)
 	runtime.KeepAlive(renderer)
@@ -15491,10 +15538,11 @@ func (renderer *RendererInstance) ParentEnd() {
 // changes to colors. (See [method@Pango.Renderer.set_color])
 func (renderer *RendererInstance) ParentPartChanged(part RenderPart) {
 	var carg0 *C.PangoRenderer
-	var carg1 C.PangoRenderPart // in, none, casted
+	var carg1 C.PangoRenderPart // in, none, converted
 
 	parentclass := (*C.PangoRendererClass)(classdata.PeekParentClass(UnsafeRendererToGlibNone(renderer)))
 
+	carg0 = (*C.PangoRenderer)(UnsafeRendererToGlibNone(renderer))
 	carg1 = C.PangoRenderPart(part)
 
 	C._gotk4_pango1_Renderer_virtual_part_changed(unsafe.Pointer(parentclass.part_changed), carg0, carg1)
@@ -15512,10 +15560,11 @@ func (renderer *RendererInstance) ParentPartChanged(part RenderPart) {
 // updates the renderer for a new run
 func (renderer *RendererInstance) ParentPrepareRun(run *LayoutRun) {
 	var carg0 *C.PangoRenderer
-	var carg1 *C.PangoLayoutRun // in, transfer: none, C Pointers: 1, Name: LayoutRun
+	var carg1 *C.PangoLayoutRun // in, none, converted
 
 	parentclass := (*C.PangoRendererClass)(classdata.PeekParentClass(UnsafeRendererToGlibNone(renderer)))
 
+	carg0 = (*C.PangoRenderer)(UnsafeRendererToGlibNone(renderer))
 	_ = run
 	_ = carg1
 	panic("unimplemented conversion of *LayoutRun (PangoLayoutRun*)")

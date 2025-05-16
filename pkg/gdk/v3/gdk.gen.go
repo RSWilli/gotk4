@@ -24009,13 +24009,14 @@ func UnsafeApplyWindowOverrides[Instance Window](gclass unsafe.Pointer, override
 // 	- offscreenY *float64 
 func (window *WindowInstance) ParentFromEmbedder(embedderX float64, embedderY float64, offscreenX *float64, offscreenY *float64) {
 	var carg0 *C.GdkWindow
-	var carg1 C.gdouble  // in, none, casted
+	var carg1 C.gdouble  // in, none, converted
 	var carg2 C.gdouble  // in, none, casted
-	var carg3 *C.gdouble // in, transfer: none, C Pointers: 1, Name: gdouble
+	var carg3 *C.gdouble // in, none, casted
 	var carg4 *C.gdouble // in, transfer: none, C Pointers: 1, Name: gdouble
 
 	parentclass := (*C.GdkWindowClass)(classdata.PeekParentClass(UnsafeWindowToGlibNone(window)))
 
+	carg0 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
 	carg1 = C.gdouble(embedderX)
 	carg2 = C.gdouble(embedderY)
 	_ = offscreenX
@@ -24044,13 +24045,14 @@ func (window *WindowInstance) ParentFromEmbedder(embedderX float64, embedderY fl
 // 	- embedderY *float64 
 func (window *WindowInstance) ParentToEmbedder(offscreenX float64, offscreenY float64, embedderX *float64, embedderY *float64) {
 	var carg0 *C.GdkWindow
-	var carg1 C.gdouble  // in, none, casted
+	var carg1 C.gdouble  // in, none, converted
 	var carg2 C.gdouble  // in, none, casted
-	var carg3 *C.gdouble // in, transfer: none, C Pointers: 1, Name: gdouble
+	var carg3 *C.gdouble // in, none, casted
 	var carg4 *C.gdouble // in, transfer: none, C Pointers: 1, Name: gdouble
 
 	parentclass := (*C.GdkWindowClass)(classdata.PeekParentClass(UnsafeWindowToGlibNone(window)))
 
+	carg0 = (*C.GdkWindow)(UnsafeWindowToGlibNone(window))
 	carg1 = C.gdouble(offscreenX)
 	carg2 = C.gdouble(offscreenY)
 	_ = embedderX

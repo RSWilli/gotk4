@@ -9364,6 +9364,8 @@ func (paintable *PaintableInstance) ParentGetCurrentImage() Paintable {
 
 	parentclass := (*C.GdkPaintableInterface)(classdata.PeekParentInterface(UnsafePaintableToGlibNone(paintable), uint64(TypePaintable)))
 
+	carg0 = (*C.GdkPaintable)(UnsafePaintableToGlibNone(paintable))
+
 	cret = C._gotk4_gdk4_Paintable_virtual_get_current_image(unsafe.Pointer(parentclass.get_current_image), carg0)
 	runtime.KeepAlive(paintable)
 
@@ -9391,6 +9393,8 @@ func (paintable *PaintableInstance) ParentGetFlags() PaintableFlags {
 	var cret  C.GdkPaintableFlags // return, none, casted
 
 	parentclass := (*C.GdkPaintableInterface)(classdata.PeekParentInterface(UnsafePaintableToGlibNone(paintable), uint64(TypePaintable)))
+
+	carg0 = (*C.GdkPaintable)(UnsafePaintableToGlibNone(paintable))
 
 	cret = C._gotk4_gdk4_Paintable_virtual_get_flags(unsafe.Pointer(parentclass.get_flags), carg0)
 	runtime.KeepAlive(paintable)
@@ -9432,6 +9436,8 @@ func (paintable *PaintableInstance) ParentGetIntrinsicAspectRatio() float64 {
 
 	parentclass := (*C.GdkPaintableInterface)(classdata.PeekParentInterface(UnsafePaintableToGlibNone(paintable), uint64(TypePaintable)))
 
+	carg0 = (*C.GdkPaintable)(UnsafePaintableToGlibNone(paintable))
+
 	cret = C._gotk4_gdk4_Paintable_virtual_get_intrinsic_aspect_ratio(unsafe.Pointer(parentclass.get_intrinsic_aspect_ratio), carg0)
 	runtime.KeepAlive(paintable)
 
@@ -9464,6 +9470,8 @@ func (paintable *PaintableInstance) ParentGetIntrinsicHeight() int32 {
 	var cret  C.int // return, none, casted
 
 	parentclass := (*C.GdkPaintableInterface)(classdata.PeekParentInterface(UnsafePaintableToGlibNone(paintable), uint64(TypePaintable)))
+
+	carg0 = (*C.GdkPaintable)(UnsafePaintableToGlibNone(paintable))
 
 	cret = C._gotk4_gdk4_Paintable_virtual_get_intrinsic_height(unsafe.Pointer(parentclass.get_intrinsic_height), carg0)
 	runtime.KeepAlive(paintable)
@@ -9498,6 +9506,8 @@ func (paintable *PaintableInstance) ParentGetIntrinsicWidth() int32 {
 
 	parentclass := (*C.GdkPaintableInterface)(classdata.PeekParentInterface(UnsafePaintableToGlibNone(paintable), uint64(TypePaintable)))
 
+	carg0 = (*C.GdkPaintable)(UnsafePaintableToGlibNone(paintable))
+
 	cret = C._gotk4_gdk4_Paintable_virtual_get_intrinsic_width(unsafe.Pointer(parentclass.get_intrinsic_width), carg0)
 	runtime.KeepAlive(paintable)
 
@@ -9525,11 +9535,12 @@ func (paintable *PaintableInstance) ParentGetIntrinsicWidth() int32 {
 func (paintable *PaintableInstance) ParentSnapshot(snapshot Snapshot, width float64, height float64) {
 	var carg0 *C.GdkPaintable
 	var carg1 *C.GdkSnapshot // in, none, converted
-	var carg2 C.double       // in, none, casted
+	var carg2 C.double       // in, none, converted
 	var carg3 C.double       // in, none, casted
 
 	parentclass := (*C.GdkPaintableInterface)(classdata.PeekParentInterface(UnsafePaintableToGlibNone(paintable), uint64(TypePaintable)))
 
+	carg0 = (*C.GdkPaintable)(UnsafePaintableToGlibNone(paintable))
 	carg1 = (*C.GdkSnapshot)(UnsafeSnapshotToGlibNone(snapshot))
 	carg2 = C.double(width)
 	carg3 = C.double(height)
@@ -13250,6 +13261,7 @@ func (provider *ContentProviderInstance) ParentAttachClipboard(clipboard Clipboa
 
 	parentclass := (*C.GdkContentProviderClass)(classdata.PeekParentClass(UnsafeContentProviderToGlibNone(provider)))
 
+	carg0 = (*C.GdkContentProvider)(UnsafeContentProviderToGlibNone(provider))
 	carg1 = (*C.GdkClipboard)(UnsafeClipboardToGlibNone(clipboard))
 
 	C._gotk4_gdk4_ContentProvider_virtual_attach_clipboard(unsafe.Pointer(parentclass.attach_clipboard), carg0, carg1)
@@ -13265,6 +13277,8 @@ func (provider *ContentProviderInstance) ParentContentChanged() {
 	var carg0 *C.GdkContentProvider
 
 	parentclass := (*C.GdkContentProviderClass)(classdata.PeekParentClass(UnsafeContentProviderToGlibNone(provider)))
+
+	carg0 = (*C.GdkContentProvider)(UnsafeContentProviderToGlibNone(provider))
 
 	C._gotk4_gdk4_ContentProvider_virtual_content_changed(unsafe.Pointer(parentclass.content_changed), carg0)
 	runtime.KeepAlive(provider)
@@ -13282,6 +13296,7 @@ func (provider *ContentProviderInstance) ParentDetachClipboard(clipboard Clipboa
 
 	parentclass := (*C.GdkContentProviderClass)(classdata.PeekParentClass(UnsafeContentProviderToGlibNone(provider)))
 
+	carg0 = (*C.GdkContentProvider)(UnsafeContentProviderToGlibNone(provider))
 	carg1 = (*C.GdkClipboard)(UnsafeClipboardToGlibNone(clipboard))
 
 	C._gotk4_gdk4_ContentProvider_virtual_detach_clipboard(unsafe.Pointer(parentclass.detach_clipboard), carg0, carg1)
@@ -13312,6 +13327,8 @@ func (provider *ContentProviderInstance) ParentGetValue() (gobject.Value, bool, 
 	var _cerr *C.GError  // out, full, converted, nullable
 
 	parentclass := (*C.GdkContentProviderClass)(classdata.PeekParentClass(UnsafeContentProviderToGlibNone(provider)))
+
+	carg0 = (*C.GdkContentProvider)(UnsafeContentProviderToGlibNone(provider))
 
 	cret = C._gotk4_gdk4_ContentProvider_virtual_get_value(unsafe.Pointer(parentclass.get_value), carg0, &carg1, &_cerr)
 	runtime.KeepAlive(provider)
@@ -13347,6 +13364,8 @@ func (provider *ContentProviderInstance) ParentRefFormats() *ContentFormats {
 
 	parentclass := (*C.GdkContentProviderClass)(classdata.PeekParentClass(UnsafeContentProviderToGlibNone(provider)))
 
+	carg0 = (*C.GdkContentProvider)(UnsafeContentProviderToGlibNone(provider))
+
 	cret = C._gotk4_gdk4_ContentProvider_virtual_ref_formats(unsafe.Pointer(parentclass.ref_formats), carg0)
 	runtime.KeepAlive(provider)
 
@@ -13375,6 +13394,8 @@ func (provider *ContentProviderInstance) ParentRefStorableFormats() *ContentForm
 	var cret  *C.GdkContentFormats // return, full, converted
 
 	parentclass := (*C.GdkContentProviderClass)(classdata.PeekParentClass(UnsafeContentProviderToGlibNone(provider)))
+
+	carg0 = (*C.GdkContentProvider)(UnsafeContentProviderToGlibNone(provider))
 
 	cret = C._gotk4_gdk4_ContentProvider_virtual_ref_storable_formats(unsafe.Pointer(parentclass.ref_storable_formats), carg0)
 	runtime.KeepAlive(provider)
@@ -13409,6 +13430,7 @@ func (provider *ContentProviderInstance) ParentWriteMIMETypeFinish(result gio.As
 
 	parentclass := (*C.GdkContentProviderClass)(classdata.PeekParentClass(UnsafeContentProviderToGlibNone(provider)))
 
+	carg0 = (*C.GdkContentProvider)(UnsafeContentProviderToGlibNone(provider))
 	carg1 = (*C.GAsyncResult)(gio.UnsafeAsyncResultToGlibNone(result))
 
 	cret = C._gotk4_gdk4_ContentProvider_virtual_write_mime_type_finish(unsafe.Pointer(parentclass.write_mime_type_finish), carg0, carg1, &_cerr)

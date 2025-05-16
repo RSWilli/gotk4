@@ -4449,6 +4449,8 @@ func (loader *PixbufLoaderInstance) ParentAreaPrepared() {
 
 	parentclass := (*C.GdkPixbufLoaderClass)(classdata.PeekParentClass(UnsafePixbufLoaderToGlibNone(loader)))
 
+	carg0 = (*C.GdkPixbufLoader)(UnsafePixbufLoaderToGlibNone(loader))
+
 	C._gotk4_gdkpixbuf2_PixbufLoader_virtual_area_prepared(unsafe.Pointer(parentclass.area_prepared), carg0)
 	runtime.KeepAlive(loader)
 }
@@ -4464,13 +4466,14 @@ func (loader *PixbufLoaderInstance) ParentAreaPrepared() {
 // 	- height int32 
 func (loader *PixbufLoaderInstance) ParentAreaUpdated(x int32, y int32, width int32, height int32) {
 	var carg0 *C.GdkPixbufLoader
-	var carg1 C.int // in, none, casted
+	var carg1 C.int // in, none, converted
 	var carg2 C.int // in, none, casted
 	var carg3 C.int // in, none, casted
 	var carg4 C.int // in, none, casted
 
 	parentclass := (*C.GdkPixbufLoaderClass)(classdata.PeekParentClass(UnsafePixbufLoaderToGlibNone(loader)))
 
+	carg0 = (*C.GdkPixbufLoader)(UnsafePixbufLoaderToGlibNone(loader))
 	carg1 = C.int(x)
 	carg2 = C.int(y)
 	carg3 = C.int(width)
@@ -4491,6 +4494,8 @@ func (loader *PixbufLoaderInstance) ParentClosed() {
 
 	parentclass := (*C.GdkPixbufLoaderClass)(classdata.PeekParentClass(UnsafePixbufLoaderToGlibNone(loader)))
 
+	carg0 = (*C.GdkPixbufLoader)(UnsafePixbufLoaderToGlibNone(loader))
+
 	C._gotk4_gdkpixbuf2_PixbufLoader_virtual_closed(unsafe.Pointer(parentclass.closed), carg0)
 	runtime.KeepAlive(loader)
 }
@@ -4504,11 +4509,12 @@ func (loader *PixbufLoaderInstance) ParentClosed() {
 // 	- height int32 
 func (loader *PixbufLoaderInstance) ParentSizePrepared(width int32, height int32) {
 	var carg0 *C.GdkPixbufLoader
-	var carg1 C.int // in, none, casted
+	var carg1 C.int // in, none, converted
 	var carg2 C.int // in, none, casted
 
 	parentclass := (*C.GdkPixbufLoaderClass)(classdata.PeekParentClass(UnsafePixbufLoaderToGlibNone(loader)))
 
+	carg0 = (*C.GdkPixbufLoader)(UnsafePixbufLoaderToGlibNone(loader))
 	carg1 = C.int(width)
 	carg2 = C.int(height)
 
