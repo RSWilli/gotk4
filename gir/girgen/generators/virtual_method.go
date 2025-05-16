@@ -70,9 +70,8 @@ func (v *VirtualMethodGenerator) generateParentCall(w *file.Package) {
 
 	var decls file.DeclarationWriter
 
-	if v.InstanceParam != nil {
-		fmt.Fprintf(&decls, "var\t%s\t%s\n", v.InstanceParam.CName, v.InstanceParam.CGoType())
-	}
+	fmt.Fprintf(&decls, "var\t%s\t%s\n", v.InstanceParam.CName, v.InstanceParam.CGoType())
+
 	for i, param := range v.GoParameters {
 		conv := v.ParentParamConverters[i]
 		fmt.Fprintf(&decls, "var\t%s\t%s\t// %s\n", param.CName, param.CGoType(), conv.Metadata())
@@ -467,6 +466,8 @@ func NewVirtualMethodGenerator(vfunc *typesystem.VirtualMethod) *VirtualMethodGe
 	for _, param := range vfunc.GoReturns {
 		g.VirtualReturnConverters = append(g.VirtualReturnConverters, convert.NewGoToCConverter(param))
 	}
+
+	g.ParentParamConverters = append(g.ParentParamConverters, convert.NewGoToCConverter(vfunc.InstanceParam))
 
 	for _, param := range vfunc.GoParameters {
 		g.ParentParamConverters = append(g.ParentParamConverters, convert.NewGoToCConverter(param))

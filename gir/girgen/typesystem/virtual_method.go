@@ -56,6 +56,11 @@ func NewVirtualMethod(e *env, parent ConvertibleType, typestruct *Record, v gir.
 		return nil
 	}
 
+	if params.InstanceParam == nil {
+		e.logger.Warn("skipping because of missing instance parameter")
+		return nil
+	}
+
 	for _, param := range params.CParameters() {
 		if _, ok := param.Type.Type.(*Callback); ok {
 			e.logger.Warn("skipping because of callback parameter")
