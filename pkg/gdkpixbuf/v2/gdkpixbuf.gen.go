@@ -41,21 +41,19 @@ import "C"
 
 // GType values.
 var (
-	TypeColorspace      = gobject.Type(C.gdk_colorspace_get_type())
-	TypeInterpType      = gobject.Type(C.gdk_interp_type_get_type())
-	TypePixbufAlphaMode = gobject.Type(C.gdk_pixbuf_alpha_mode_get_type())
-	TypePixbufError     = gobject.Type(C.gdk_pixbuf_error_get_type())
-	TypePixbufRotation  = gobject.Type(C.gdk_pixbuf_rotation_get_type())
-	TypePixbuf          = gobject.Type(C.gdk_pixbuf_get_type())
-	TypePixbufLoader    = gobject.Type(C.gdk_pixbuf_loader_get_type())
-	TypePixbufFormat    = gobject.Type(C.gdk_pixbuf_format_get_type())
+	TypeColorspace     = gobject.Type(C.gdk_colorspace_get_type())
+	TypeInterpType     = gobject.Type(C.gdk_interp_type_get_type())
+	TypePixbufError    = gobject.Type(C.gdk_pixbuf_error_get_type())
+	TypePixbufRotation = gobject.Type(C.gdk_pixbuf_rotation_get_type())
+	TypePixbuf         = gobject.Type(C.gdk_pixbuf_get_type())
+	TypePixbufLoader   = gobject.Type(C.gdk_pixbuf_loader_get_type())
+	TypePixbufFormat   = gobject.Type(C.gdk_pixbuf_format_get_type())
 )
 
 func init() {
 	gobject.RegisterGValueMarshalers([]gobject.TypeMarshaler{
 		gobject.TypeMarshaler{T: TypeColorspace, F: marshalColorspace},
 		gobject.TypeMarshaler{T: TypeInterpType, F: marshalInterpType},
-		gobject.TypeMarshaler{T: TypePixbufAlphaMode, F: marshalPixbufAlphaMode},
 		gobject.TypeMarshaler{T: TypePixbufError, F: marshalPixbufError},
 		gobject.TypeMarshaler{T: TypePixbufRotation, F: marshalPixbufRotation},
 		gobject.TypeMarshaler{T: TypePixbuf, F: marshalPixbufInstance},
@@ -185,63 +183,6 @@ func (e InterpType) String() string {
 		case InterpNearest: return "InterpNearest"
 		case InterpTiles: return "InterpTiles"
 		default: return fmt.Sprintf("InterpType(%d)", e)
-	}
-}
-
-// PixbufAlphaMode wraps GdkPixbufAlphaMode
-//
-// Control the alpha channel for drawables.
-// 
-// These values can be passed to gdk_pixbuf_xlib_render_to_drawable_alpha()
-// in gdk-pixbuf-xlib to control how the alpha channel of an image should
-// be handled.
-// 
-// This function can create a bilevel clipping mask (black and white) and use
-// it while painting the image.
-// 
-// In the future, when the X Window System gets an alpha channel extension,
-// it will be possible to do full alpha compositing onto arbitrary drawables.
-// For now both cases fall back to a bilevel clipping mask.
-//
-// Deprecated: (since 2.42.0) There is no user of GdkPixbufAlphaMode in GdkPixbuf,
-//   and the Xlib utility functions have been split out to their own
-//   library, gdk-pixbuf-xlib
-type PixbufAlphaMode C.int
-
-const (
-	// PixbufAlphaBilevel wraps GDK_PIXBUF_ALPHA_BILEVEL
-	//
-	// A bilevel clipping mask (black and white)
-	//  will be created and used to draw the image.  Pixels below 0.5 opacity
-	//  will be considered fully transparent, and all others will be
-	//  considered fully opaque.
-	PixbufAlphaBilevel PixbufAlphaMode = 0
-	// PixbufAlphaFull wraps GDK_PIXBUF_ALPHA_FULL
-	//
-	// For now falls back to #GDK_PIXBUF_ALPHA_BILEVEL.
-	//  In the future it will do full alpha compositing.
-	PixbufAlphaFull PixbufAlphaMode = 1
-)
-
-func marshalPixbufAlphaMode(p unsafe.Pointer) (any, error) {
-	return PixbufAlphaMode(gobject.ValueFromNative(p).Enum()), nil
-}
-
-var _ gobject.GoValueInitializer = PixbufAlphaMode(0)
-
-func (e PixbufAlphaMode) GoValueType() gobject.Type {
-	return TypePixbufAlphaMode
-}
-
-func (e PixbufAlphaMode) SetGoValue(v *gobject.Value) {
-	v.SetEnum(int(e))
-}
-
-func (e PixbufAlphaMode) String() string {
-	switch e {
-		case PixbufAlphaBilevel: return "PixbufAlphaBilevel"
-		case PixbufAlphaFull: return "PixbufAlphaFull"
-		default: return fmt.Sprintf("PixbufAlphaMode(%d)", e)
 	}
 }
 

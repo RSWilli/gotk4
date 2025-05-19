@@ -33541,28 +33541,6 @@ func NewCssProvider() CssProvider {
 	return goret
 }
 
-// CssProviderGetDefault wraps gtk_css_provider_get_default
-// 
-// The function returns the following values:
-// 
-// 	- goret CssProvider 
-//
-// Returns the provider containing the style settings used as a
-// fallback for all widgets.
-//
-// Deprecated: (since 3.24.0) Use gtk_css_provider_new() instead.
-func CssProviderGetDefault() CssProvider {
-	var cret *C.GtkCssProvider // return, none, converted
-
-	cret = C.gtk_css_provider_get_default()
-
-	var goret CssProvider
-
-	goret = UnsafeCssProviderFromGlibNone(unsafe.Pointer(cret))
-
-	return goret
-}
-
 // CssProviderGetNamed wraps gtk_css_provider_get_named
 // 
 // The function takes the following parameters:
@@ -78184,13 +78162,6 @@ type Container interface {
 	// The adjustments have to be in pixel units and in the same coordinate
 	// system as the allocation for immediate children of the container.
 	SetFocusVAdjustment(Adjustment)
-	// UnsetFocusChain wraps gtk_container_unset_focus_chain
-	//
-	// Removes a focus chain explicitly set with gtk_container_set_focus_chain().
-	//
-	// Deprecated: (since 3.24.0) For overriding focus behavior, use the
-	//     GtkWidgetClass::focus signal.
-	UnsetFocusChain()
 	// ConnectAdd connects the provided callback to the "add" signal
 	ConnectAdd(func(Container, Widget)) gobject.SignalHandle
 	// ConnectCheckResize connects the provided callback to the "check-resize" signal
@@ -78797,21 +78768,6 @@ func (container *ContainerInstance) SetFocusVAdjustment(adjustment Adjustment) {
 	C.gtk_container_set_focus_vadjustment(carg0, carg1)
 	runtime.KeepAlive(container)
 	runtime.KeepAlive(adjustment)
-}
-
-// UnsetFocusChain wraps gtk_container_unset_focus_chain
-//
-// Removes a focus chain explicitly set with gtk_container_set_focus_chain().
-//
-// Deprecated: (since 3.24.0) For overriding focus behavior, use the
-//     GtkWidgetClass::focus signal.
-func (container *ContainerInstance) UnsetFocusChain() {
-	var carg0 *C.GtkContainer // in, none, converted
-
-	carg0 = (*C.GtkContainer)(UnsafeContainerToGlibNone(container))
-
-	C.gtk_container_unset_focus_chain(carg0)
-	runtime.KeepAlive(container)
 }
 
 // ConnectAdd connects the provided callback to the "add" signal

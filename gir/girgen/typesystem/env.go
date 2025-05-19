@@ -109,7 +109,8 @@ type girWithInfoElements interface {
 }
 
 func (e *env) ingoreDeprecated(name string, attrs gir.InfoAttrs) bool {
-	if attrs.Deprecated && attrs.DeprecatedVersion.Less(e.minVersion) {
+	var zeroVersion gir.Version
+	if attrs.Deprecated && e.minVersion != zeroVersion && attrs.DeprecatedVersion.LessEqual(e.minVersion) {
 		e.logger.Info("skipping deprecated", "name", name, "deprecated-since", attrs.DeprecatedVersion, "min-version", e.minVersion)
 		return true
 	}

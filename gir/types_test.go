@@ -6,7 +6,7 @@ import (
 	"github.com/diamondburned/gotk4/gir"
 )
 
-func TestVersionLess(t *testing.T) {
+func TestVersionLessEqual(t *testing.T) {
 	tests := []struct {
 		v1       gir.Version
 		v2       gir.Version
@@ -18,13 +18,13 @@ func TestVersionLess(t *testing.T) {
 		{gir.Version{1, 3, 0}, gir.Version{1, 2, 0}, false}, // Minor version difference
 		{gir.Version{1, 2, 3}, gir.Version{1, 2, 4}, true},  // Patch version difference
 		{gir.Version{1, 2, 4}, gir.Version{1, 2, 3}, false}, // Patch version difference
-		{gir.Version{1, 2, 3}, gir.Version{1, 2, 3}, false}, // Equal versions
+		{gir.Version{1, 2, 3}, gir.Version{1, 2, 3}, true},  // Equal versions
 	}
 
 	for _, tt := range tests {
-		result := tt.v1.Less(tt.v2)
+		result := tt.v1.LessEqual(tt.v2)
 		if result != tt.expected {
-			t.Errorf("Expected %v.Less(%v) to be %v, but got %v", tt.v1, tt.v2, tt.expected, result)
+			t.Errorf("Expected %v.LessEqual(%v) to be %v, but got %v", tt.v1, tt.v2, tt.expected, result)
 		}
 	}
 }
