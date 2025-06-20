@@ -293,6 +293,15 @@ func unsafeWrapX11AppLaunchContext(base *gobject.ObjectInstance) *X11AppLaunchCo
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeX11AppLaunchContext,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapX11AppLaunchContext(inst)
+		},
+	)
+}
+
 func marshalX11AppLaunchContextInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapX11AppLaunchContext(gobject.ValueFromNative(p).Object()), nil
 }
@@ -346,6 +355,15 @@ func unsafeWrapX11Cursor(base *gobject.ObjectInstance) *X11CursorInstance {
 			ObjectInstance: *base,
 		},
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeX11Cursor,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapX11Cursor(inst)
+		},
+	)
 }
 
 func marshalX11CursorInstance(p unsafe.Pointer) (any, error) {
@@ -403,6 +421,15 @@ func unsafeWrapX11DeviceCore(base *gobject.ObjectInstance) *X11DeviceCoreInstanc
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeX11DeviceCore,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapX11DeviceCore(inst)
+		},
+	)
+}
+
 func marshalX11DeviceCoreInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapX11DeviceCore(gobject.ValueFromNative(p).Object()), nil
 }
@@ -456,6 +483,15 @@ func unsafeWrapX11DeviceManagerCore(base *gobject.ObjectInstance) *X11DeviceMana
 			ObjectInstance: *base,
 		},
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeX11DeviceManagerCore,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapX11DeviceManagerCore(inst)
+		},
+	)
 }
 
 func marshalX11DeviceManagerCoreInstance(p unsafe.Pointer) (any, error) {
@@ -515,6 +551,15 @@ func unsafeWrapX11DeviceManagerXI2(base *gobject.ObjectInstance) *X11DeviceManag
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeX11DeviceManagerXI2,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapX11DeviceManagerXI2(inst)
+		},
+	)
+}
+
 func marshalX11DeviceManagerXI2Instance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapX11DeviceManagerXI2(gobject.ValueFromNative(p).Object()), nil
 }
@@ -568,6 +613,15 @@ func unsafeWrapX11DeviceXI2(base *gobject.ObjectInstance) *X11DeviceXI2Instance 
 			ObjectInstance: *base,
 		},
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeX11DeviceXI2,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapX11DeviceXI2(inst)
+		},
+	)
 }
 
 func marshalX11DeviceXI2Instance(p unsafe.Pointer) (any, error) {
@@ -747,6 +801,15 @@ func unsafeWrapX11Display(base *gobject.ObjectInstance) *X11DisplayInstance {
 			ObjectInstance: *base,
 		},
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeX11Display,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapX11Display(inst)
+		},
+	)
 }
 
 func marshalX11DisplayInstance(p unsafe.Pointer) (any, error) {
@@ -1081,6 +1144,15 @@ func unsafeWrapX11DisplayManager(base *gobject.ObjectInstance) *X11DisplayManage
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeX11DisplayManager,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapX11DisplayManager(inst)
+		},
+	)
+}
+
 func marshalX11DisplayManagerInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapX11DisplayManager(gobject.ValueFromNative(p).Object()), nil
 }
@@ -1136,6 +1208,15 @@ func unsafeWrapX11DragContext(base *gobject.ObjectInstance) *X11DragContextInsta
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeX11DragContext,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapX11DragContext(inst)
+		},
+	)
+}
+
 func marshalX11DragContextInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapX11DragContext(gobject.ValueFromNative(p).Object()), nil
 }
@@ -1189,6 +1270,15 @@ func unsafeWrapX11GLContext(base *gobject.ObjectInstance) *X11GLContextInstance 
 			ObjectInstance: *base,
 		},
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeX11GLContext,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapX11GLContext(inst)
+		},
+	)
 }
 
 func marshalX11GLContextInstance(p unsafe.Pointer) (any, error) {
@@ -1276,6 +1366,15 @@ func unsafeWrapX11Keymap(base *gobject.ObjectInstance) *X11KeymapInstance {
 			ObjectInstance: *base,
 		},
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeX11Keymap,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapX11Keymap(inst)
+		},
+	)
 }
 
 func marshalX11KeymapInstance(p unsafe.Pointer) (any, error) {
@@ -1402,6 +1501,15 @@ func unsafeWrapX11Monitor(base *gobject.ObjectInstance) *X11MonitorInstance {
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeX11Monitor,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapX11Monitor(inst)
+		},
+	)
+}
+
 func marshalX11MonitorInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapX11Monitor(gobject.ValueFromNative(p).Object()), nil
 }
@@ -1496,6 +1604,15 @@ func unsafeWrapX11Screen(base *gobject.ObjectInstance) *X11ScreenInstance {
 			ObjectInstance: *base,
 		},
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeX11Screen,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapX11Screen(inst)
+		},
+	)
 }
 
 func marshalX11ScreenInstance(p unsafe.Pointer) (any, error) {
@@ -1654,6 +1771,15 @@ func unsafeWrapX11Visual(base *gobject.ObjectInstance) *X11VisualInstance {
 			ObjectInstance: *base,
 		},
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeX11Visual,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapX11Visual(inst)
+		},
+	)
 }
 
 func marshalX11VisualInstance(p unsafe.Pointer) (any, error) {
@@ -1822,6 +1948,15 @@ func unsafeWrapX11Window(base *gobject.ObjectInstance) *X11WindowInstance {
 			ObjectInstance: *base,
 		},
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeX11Window,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapX11Window(inst)
+		},
+	)
 }
 
 func marshalX11WindowInstance(p unsafe.Pointer) (any, error) {

@@ -30,7 +30,8 @@ const BIG_ENDIAN = 4321
 // DIR_SEPARATOR wraps G_DIR_SEPARATOR
 //
 // The directory separator character.
-// This is '/' on UNIX machines and '\' under Windows.
+// 
+// This is `'/'` on UNIX machines and `'\'` under Windows.
 const DIR_SEPARATOR = 47
 // E wraps G_E
 //
@@ -138,7 +139,7 @@ const MAXUINT8 = 255
 // Like #gtk_micro_version, but from the headers used at
 // application compile time, rather than from the library
 // linked against at application run time.
-const MICRO_VERSION = 5
+const MICRO_VERSION = 2
 // MININT16 wraps G_MININT16
 //
 // The minimum value which can be held in a #gint16.
@@ -162,7 +163,7 @@ const MININT8 = -128
 // Like #gtk_minor_version, but from the headers used at
 // application compile time, rather than from the library
 // linked against at application run time.
-const MINOR_VERSION = 82
+const MINOR_VERSION = 84
 // PDP_ENDIAN wraps G_PDP_ENDIAN
 //
 // Specifies one of the possible types of byte order
@@ -1095,36 +1096,36 @@ const (
 	OptionArgInt OptionArg = 2
 	// OptionArgCallback wraps G_OPTION_ARG_CALLBACK
 	//
-	// The option provides a callback (of type
-	//     #GOptionArgFunc) to parse the extra argument.
+	// The option provides a callback (of type #GOptionArgFunc)
+	//   to parse the extra argument.
 	OptionArgCallback OptionArg = 3
 	// OptionArgFilename wraps G_OPTION_ARG_FILENAME
 	//
 	// The option takes a filename as argument, which will
-	//        be in the GLib filename encoding rather than UTF-8.
+	//      be in the GLib filename encoding rather than UTF-8.
 	OptionArgFilename OptionArg = 4
 	// OptionArgStringArray wraps G_OPTION_ARG_STRING_ARRAY
 	//
 	// The option takes a string argument, multiple
-	//     uses of the option are collected into an array of strings.
+	//   uses of the option are collected into an array of strings.
 	OptionArgStringArray OptionArg = 5
 	// OptionArgFilenameArray wraps G_OPTION_ARG_FILENAME_ARRAY
 	//
 	// The option takes a filename as argument,
-	//     multiple uses of the option are collected into an array of strings.
+	//   multiple uses of the option are collected into an array of strings.
 	OptionArgFilenameArray OptionArg = 6
 	// OptionArgDouble wraps G_OPTION_ARG_DOUBLE
 	//
 	// The option takes a double argument. The argument
-	//     can be formatted either for the user's locale or for the "C" locale.
-	//     Since 2.12
+	//   can be formatted either for the user's locale or for the "C" locale.
+	//   Since 2.12
 	OptionArgDouble OptionArg = 7
 	// OptionArgInt64 wraps G_OPTION_ARG_INT64
 	//
 	// The option takes a 64-bit integer. Like
-	//     %G_OPTION_ARG_INT but for larger numbers. The number can be in
-	//     decimal base, or in hexadecimal (when prefixed with `0x`, for
-	//     example, `0xffffffff`). Since 2.12
+	//   %G_OPTION_ARG_INT but for larger numbers. The number can be in
+	//   decimal base, or in hexadecimal (when prefixed with `0x`, for
+	//   example, `0xffffffff`). Since 2.12
 	OptionArgInt64 OptionArg = 8
 )
 
@@ -1908,7 +1909,7 @@ type TraverseType C.int
 const (
 	// InOrder wraps G_IN_ORDER
 	//
-	// vists a node's left child first, then the node itself,
+	// visits a node's left child first, then the node itself,
 	//              then its right child. This is the one to use if you
 	//              want the output sorted according to the compare
 	//              function.
@@ -1924,9 +1925,9 @@ const (
 	// LevelOrder wraps G_LEVEL_ORDER
 	//
 	// is not implemented for
-	//              [balanced binary trees][glib-Balanced-Binary-Trees].
-	//              For [n-ary trees][glib-N-ary-Trees], it
-	//              vists the root node first, then its children, then
+	//              [balanced binary trees](data-structures.html#binary-trees).
+	//              For [n-ary trees](data-structures.html#n-ary-trees), it
+	//              visits the root node first, then its children, then
 	//              its grandchildren, and so on. Note that this is less
 	//              efficient than the other orders.
 	LevelOrder TraverseType = 3
@@ -2133,18 +2134,22 @@ const (
 	// UnicodeBreakAksara wraps G_UNICODE_BREAK_AKSARA
 	//
 	// Aksara (AK). Since: 2.80
-	// @G_UNICODE_BREAK_AKSARA_PRE_BASE (AP). Since: 2.80
-	// @G_UNICODE_BREAK_AKSARA_START (AS). Since: 2.80
-	// @G_UNICODE_BREAK_VIRAMA_FINAL (VF). Since: 2.80
-	// @G_UNICODE_BREAK_VIRAMA (VI). Since: 2.80
 	UnicodeBreakAksara UnicodeBreakType = 43
 	// UnicodeBreakAksaraPreBase wraps G_UNICODE_BREAK_AKSARA_PRE_BASE
+	//
+	// Aksara Pre-Base (AP). Since: 2.80
 	UnicodeBreakAksaraPreBase UnicodeBreakType = 44
 	// UnicodeBreakAksaraStart wraps G_UNICODE_BREAK_AKSARA_START
+	//
+	// Aksara Start (AS). Since: 2.80
 	UnicodeBreakAksaraStart UnicodeBreakType = 45
 	// UnicodeBreakViramaFinal wraps G_UNICODE_BREAK_VIRAMA_FINAL
+	//
+	// Virama Final (VF). Since: 2.80
 	UnicodeBreakViramaFinal UnicodeBreakType = 46
 	// UnicodeBreakVirama wraps G_UNICODE_BREAK_VIRAMA
+	//
+	// Virama (VI). Since: 2.80
 	UnicodeBreakVirama UnicodeBreakType = 47
 )
 
@@ -2881,6 +2886,34 @@ const (
 	//
 	// Nag Mundari. Since 2.74
 	UnicodeScriptNagMundari UnicodeScript = 164
+	// UnicodeScriptTodhri wraps G_UNICODE_SCRIPT_TODHRI
+	//
+	// Todhri. Since: 2.84
+	UnicodeScriptTodhri UnicodeScript = 165
+	// UnicodeScriptGaray wraps G_UNICODE_SCRIPT_GARAY
+	//
+	// Garay. Since: 2.84
+	UnicodeScriptGaray UnicodeScript = 166
+	// UnicodeScriptTuluTigalari wraps G_UNICODE_SCRIPT_TULU_TIGALARI
+	//
+	// Tulu-Tigalari. Since: 2.84
+	UnicodeScriptTuluTigalari UnicodeScript = 167
+	// UnicodeScriptSunuwar wraps G_UNICODE_SCRIPT_SUNUWAR
+	//
+	// Sunuwar. Since: 2.84
+	UnicodeScriptSunuwar UnicodeScript = 168
+	// UnicodeScriptGurungKhema wraps G_UNICODE_SCRIPT_GURUNG_KHEMA
+	//
+	// Gurung Khema. Since: 2.84
+	UnicodeScriptGurungKhema UnicodeScript = 169
+	// UnicodeScriptKiratRai wraps G_UNICODE_SCRIPT_KIRAT_RAI
+	//
+	// Kirat Rai. Since: 2.84
+	UnicodeScriptKiratRai UnicodeScript = 170
+	// UnicodeScriptOlOnal wraps G_UNICODE_SCRIPT_OL_ONAL
+	//
+	// Ol Onal. Since: 2.84
+	UnicodeScriptOlOnal UnicodeScript = 171
 )
 
 
@@ -2925,6 +2958,7 @@ func (e UnicodeScript) String() string {
 		case UnicodeScriptElbasan: return "UnicodeScriptElbasan"
 		case UnicodeScriptElymaic: return "UnicodeScriptElymaic"
 		case UnicodeScriptEthiopic: return "UnicodeScriptEthiopic"
+		case UnicodeScriptGaray: return "UnicodeScriptGaray"
 		case UnicodeScriptGeorgian: return "UnicodeScriptGeorgian"
 		case UnicodeScriptGlagolitic: return "UnicodeScriptGlagolitic"
 		case UnicodeScriptGothic: return "UnicodeScriptGothic"
@@ -2933,6 +2967,7 @@ func (e UnicodeScript) String() string {
 		case UnicodeScriptGujarati: return "UnicodeScriptGujarati"
 		case UnicodeScriptGunjalaGondi: return "UnicodeScriptGunjalaGondi"
 		case UnicodeScriptGurmukhi: return "UnicodeScriptGurmukhi"
+		case UnicodeScriptGurungKhema: return "UnicodeScriptGurungKhema"
 		case UnicodeScriptHan: return "UnicodeScriptHan"
 		case UnicodeScriptHangul: return "UnicodeScriptHangul"
 		case UnicodeScriptHanifiRohingya: return "UnicodeScriptHanifiRohingya"
@@ -2956,6 +2991,7 @@ func (e UnicodeScript) String() string {
 		case UnicodeScriptKhmer: return "UnicodeScriptKhmer"
 		case UnicodeScriptKhojki: return "UnicodeScriptKhojki"
 		case UnicodeScriptKhudawadi: return "UnicodeScriptKhudawadi"
+		case UnicodeScriptKiratRai: return "UnicodeScriptKiratRai"
 		case UnicodeScriptLao: return "UnicodeScriptLao"
 		case UnicodeScriptLatin: return "UnicodeScriptLatin"
 		case UnicodeScriptLepcha: return "UnicodeScriptLepcha"
@@ -2994,6 +3030,7 @@ func (e UnicodeScript) String() string {
 		case UnicodeScriptNyiakengPuachueHmong: return "UnicodeScriptNyiakengPuachueHmong"
 		case UnicodeScriptOgham: return "UnicodeScriptOgham"
 		case UnicodeScriptOlChiki: return "UnicodeScriptOlChiki"
+		case UnicodeScriptOlOnal: return "UnicodeScriptOlOnal"
 		case UnicodeScriptOldHungarian: return "UnicodeScriptOldHungarian"
 		case UnicodeScriptOldItalic: return "UnicodeScriptOldItalic"
 		case UnicodeScriptOldNorthArabian: return "UnicodeScriptOldNorthArabian"
@@ -3025,6 +3062,7 @@ func (e UnicodeScript) String() string {
 		case UnicodeScriptSoraSompeng: return "UnicodeScriptSoraSompeng"
 		case UnicodeScriptSoyombo: return "UnicodeScriptSoyombo"
 		case UnicodeScriptSundanese: return "UnicodeScriptSundanese"
+		case UnicodeScriptSunuwar: return "UnicodeScriptSunuwar"
 		case UnicodeScriptSylotiNagri: return "UnicodeScriptSylotiNagri"
 		case UnicodeScriptSyriac: return "UnicodeScriptSyriac"
 		case UnicodeScriptTagalog: return "UnicodeScriptTagalog"
@@ -3042,7 +3080,9 @@ func (e UnicodeScript) String() string {
 		case UnicodeScriptTibetan: return "UnicodeScriptTibetan"
 		case UnicodeScriptTifinagh: return "UnicodeScriptTifinagh"
 		case UnicodeScriptTirhuta: return "UnicodeScriptTirhuta"
+		case UnicodeScriptTodhri: return "UnicodeScriptTodhri"
 		case UnicodeScriptToto: return "UnicodeScriptToto"
+		case UnicodeScriptTuluTigalari: return "UnicodeScriptTuluTigalari"
 		case UnicodeScriptUgaritic: return "UnicodeScriptUgaritic"
 		case UnicodeScriptUnknown: return "UnicodeScriptUnknown"
 		case UnicodeScriptVai: return "UnicodeScriptVai"
@@ -4220,7 +4260,7 @@ const (
 	MarkupCollectStrdup MarkupCollectType = 2
 	// MarkupCollectBoolean wraps G_MARKUP_COLLECT_BOOLEAN
 	//
-	// expects a parameter of type (gboolean *)
+	// expects a parameter of type (`gboolean *`)
 	//     and parses the attribute value as a boolean. Sets %FALSE if the
 	//     attribute isn't present. Valid boolean values consist of
 	//     (case-insensitive) "false", "f", "no", "n", "0" and "true", "t",
@@ -4230,7 +4270,7 @@ const (
 	//
 	// as with %G_MARKUP_COLLECT_BOOLEAN, but
 	//     in the case of a missing attribute a value is set that compares
-	//     equal to neither %FALSE nor %TRUE G_MARKUP_COLLECT_OPTIONAL is
+	//     equal to neither %FALSE nor %TRUE %G_MARKUP_COLLECT_OPTIONAL is
 	//     implied
 	MarkupCollectTristate MarkupCollectType = 4
 	// MarkupCollectOptional wraps G_MARKUP_COLLECT_OPTIONAL
@@ -4349,7 +4389,7 @@ type OptionFlags C.gint
 const (
 	// OptionFlagNone wraps G_OPTION_FLAG_NONE
 	//
-	// No flags. Since: 2.42.
+	// No flags.
 	OptionFlagNone OptionFlags = 0
 	// OptionFlagHidden wraps G_OPTION_FLAG_HIDDEN
 	//
@@ -4358,42 +4398,50 @@ const (
 	// OptionFlagInMain wraps G_OPTION_FLAG_IN_MAIN
 	//
 	// The option appears in the main section of the
-	//     `--help` output, even if it is defined in a group.
+	//   `--help` output, even if it is defined in a group.
 	OptionFlagInMain OptionFlags = 2
 	// OptionFlagReverse wraps G_OPTION_FLAG_REVERSE
 	//
 	// For options of the %G_OPTION_ARG_NONE kind, this
-	//     flag indicates that the sense of the option is reversed. i.e. %FALSE will
-	//     be stored into the argument rather than %TRUE.
+	//   flag indicates that the sense of the option is reversed. i.e. %FALSE will
+	//   be stored into the argument rather than %TRUE.
 	OptionFlagReverse OptionFlags = 4
 	// OptionFlagNoArg wraps G_OPTION_FLAG_NO_ARG
 	//
 	// For options of the %G_OPTION_ARG_CALLBACK kind,
-	//     this flag indicates that the callback does not take any argument
-	//     (like a %G_OPTION_ARG_NONE option). Since 2.8
+	//   this flag indicates that the callback does not take any argument
+	//   (like a %G_OPTION_ARG_NONE option). Since 2.8
 	OptionFlagNoArg OptionFlags = 8
 	// OptionFlagFilename wraps G_OPTION_FLAG_FILENAME
 	//
 	// For options of the %G_OPTION_ARG_CALLBACK
-	//     kind, this flag indicates that the argument should be passed to the
-	//     callback in the GLib filename encoding rather than UTF-8. Since 2.8
+	//   kind, this flag indicates that the argument should be passed to the
+	//   callback in the GLib filename encoding rather than UTF-8. Since 2.8
 	OptionFlagFilename OptionFlags = 16
 	// OptionFlagOptionalArg wraps G_OPTION_FLAG_OPTIONAL_ARG
 	//
 	// For options of the %G_OPTION_ARG_CALLBACK
-	//     kind, this flag indicates that the argument supply is optional.
-	//     If no argument is given then data of %GOptionParseFunc will be
-	//     set to NULL. Since 2.8
+	//   kind, this flag indicates that the argument supply is optional.
+	//   If no argument is given then data of %GOptionParseFunc will be
+	//   set to NULL. Since 2.8
 	OptionFlagOptionalArg OptionFlags = 32
 	// OptionFlagNoalias wraps G_OPTION_FLAG_NOALIAS
 	//
 	// This flag turns off the automatic conflict
-	//     resolution which prefixes long option names with `groupname-` if
-	//     there is a conflict. This option should only be used in situations
-	//     where aliasing is necessary to model some legacy commandline interface.
-	//     It is not safe to use this option, unless all option groups are under
-	//     your direct control. Since 2.8.
+	//   resolution which prefixes long option names with `groupname-` if
+	//   there is a conflict. This option should only be used in situations
+	//   where aliasing is necessary to model some legacy commandline interface.
+	//   It is not safe to use this option, unless all option groups are under
+	//   your direct control. Since 2.8.
 	OptionFlagNoalias OptionFlags = 64
+	// OptionFlagDeprecated wraps G_OPTION_FLAG_DEPRECATED
+	//
+	// This flag marks the option as deprecated in the `--help`.
+	// 
+	// You should update the description of the option to describe what
+	// the user should do in response to the deprecation, for instance:
+	// remove the option, or replace it with another one.
+	OptionFlagDeprecated OptionFlags = 128
 )
 
 // Has returns true if o contains other
@@ -4430,6 +4478,9 @@ func (f OptionFlags) String() string {
 	}
 	if (f & OptionFlagNoalias) != 0 {
 		parts = append(parts, "OptionFlagNoalias")
+	}
+	if (f & OptionFlagDeprecated) != 0 {
+		parts = append(parts, "OptionFlagDeprecated")
 	}
 	return "OptionFlags(" + strings.Join(parts, "|") + ")"
 }
@@ -5257,7 +5308,7 @@ func (f URIParamsFlags) String() string {
 // 
 // The function takes the following parameters:
 // 
-// 	- logDomain string: the log domain of the message 
+// 	- logDomain string (nullable): the log domain of the message 
 // 	- logLevel LogLevelFlags: the log level of the message (including the
 //   fatal and recursion flags) 
 // 	- message string: the message to process 
@@ -5269,6 +5320,9 @@ func (f URIParamsFlags) String() string {
 // custom log handler functions behave similarly, so that logging calls in user
 // code do not need modifying to add a new-line character to the message if the
 // log handler is changed.
+// 
+// The `log_domain` parameter can be set to `NULL` or an empty string to use the default
+// application domain.
 // 
 // This is not used if structured logging is enabled; see
 // [Using Structured Logging](logging.html#using-structured-logging).
@@ -7264,7 +7318,7 @@ func FilenameFromURI(uri string) (string, string, error) {
 // Converts a string from UTF-8 to the encoding GLib uses for
 // filenames. Note that on Windows GLib uses UTF-8 for filenames;
 // on other platforms, this function indirectly depends on the
-// [current locale][setlocale].
+// [current locale](running.html#locale).
 // 
 // The input string shall not contain nul characters even if the @len
 // argument is positive. A nul character found inside the string will result
@@ -7376,7 +7430,7 @@ func FilenameToURI(filename string, hostname string) (string, error) {
 // Converts a string which is in the encoding used by GLib for
 // filenames into a UTF-8 string. Note that on Windows GLib uses UTF-8
 // for filenames; on other platforms, this function indirectly depends on
-// the [current locale][setlocale].
+// the [current locale](running.html#locale).
 // 
 // The input string shall not contain nul characters even if the @len
 // argument is positive. A nul character found inside the string will result
@@ -7574,8 +7628,8 @@ func GetApplicationName() string {
 //   name, or %NULL. 
 // 	- goret bool 
 //
-// Obtains the character set for the [current locale][setlocale]; you
-// might use this character set as an argument to g_convert(), to convert
+// Obtains the character set for the [current locale](running.html#locale);
+// you might use this character set as an argument to g_convert(), to convert
 // from the current locale's encoding to some other encoding. (Frequently
 // g_locale_to_utf8() and g_locale_from_utf8() are nice shortcuts, though.)
 // 
@@ -8875,8 +8929,8 @@ func Listenv() []string {
 //
 // Converts a string from UTF-8 to the encoding used for strings by
 // the C runtime (usually the same as that used by the operating
-// system) in the [current locale][setlocale]. On Windows this means
-// the system codepage.
+// system) in the [current locale](running.html#locale).
+// On Windows this means the system codepage.
 // 
 // The input string shall not contain nul characters even if the @len
 // argument is positive. A nul character found inside the string will result
@@ -8940,7 +8994,7 @@ func LocaleFromUTF8(utf8String string, len int) (uint, uint, string, error) {
 //
 // Converts a string which is in the encoding used for strings by
 // the C runtime (usually the same as that used by the operating
-// system) in the [current locale][setlocale] into a UTF-8 string.
+// system) in the [current locale](running.html#locale) into a UTF-8 string.
 // 
 // If the source encoding is not UTF-8 and the conversion output contains a
 // nul character, the error %G_CONVERT_ERROR_EMBEDDED_NUL is set and the
@@ -8994,7 +9048,8 @@ func LocaleToUTF8(opsysstring string) (uint, uint, string, error) {
 // implementations.
 // 
 // Note also that the value of this does not depend on `G_MESSAGES_DEBUG`, nor
-// [func@GLib.log_writer_default_set_debug_domains]; see the docs for [func@GLib.log_set_debug_enabled].
+// `DEBUG_INVOCATION`, nor [func@GLib.log_writer_default_set_debug_domains]; see
+// the docs for [func@GLib.log_set_debug_enabled].
 func LogGetDebugEnabled() bool {
 	var cret C.gboolean // return
 
@@ -9086,7 +9141,7 @@ func LogSetAlwaysFatal(fatalMask LogLevelFlags) LogLevelFlags {
 //
 // Enable or disable debug output from the GLib logging system for all domains.
 // 
-// This value interacts disjunctively with `G_MESSAGES_DEBUG` and
+// This value interacts disjunctively with `G_MESSAGES_DEBUG`, `DEBUG_INVOCATION` and
 // [func@GLib.log_writer_default_set_debug_domains] — if any of them would allow
 // a debug message to be outputted, it will be.
 // 
@@ -9152,7 +9207,7 @@ func LogSetFatalMask(logDomain string, fatalMask LogLevelFlags) LogLevelFlags {
 // 
 // The function takes the following parameters:
 // 
-// 	- logDomain string (nullable): the log domain, or `NULL` for the default `""`
+// 	- logDomain string (nullable): the log domain
 //   application domain 
 // 	- logLevels LogLevelFlags: the log levels to apply the log handler for.
 //   To handle fatal and recursive messages as well, combine
@@ -9168,6 +9223,9 @@ func LogSetFatalMask(logDomain string, fatalMask LogLevelFlags) LogLevelFlags {
 // 
 // This has no effect if structured logging is enabled; see
 // [Using Structured Logging](logging.html#using-structured-logging).
+// 
+// The `log_domain` parameter can be set to `NULL` or an empty string to use the default
+// application domain.
 func LogSetHandlerFull(logDomain string, logLevels LogLevelFlags, logFunc LogFunc) uint {
 	var carg1 *C.gchar         // in, none, string, nullable-string
 	var carg2 C.GLogLevelFlags // in, none, casted
@@ -9307,7 +9365,8 @@ func LogWriterDefaultSetUseStderr(useStderr bool) {
 // 
 // As with [func@GLib.log_default_handler], this function drops debug and informational
 // messages unless their log domain (or `all`) is listed in the space-separated
-// `G_MESSAGES_DEBUG` environment variable, or by [func@GLib.log_writer_default_set_debug_domains].
+// `G_MESSAGES_DEBUG` environment variable, or `DEBUG_INVOCATION=1` is set in
+// the environment, or by [func@GLib.log_writer_default_set_debug_domains].
 // 
 // This can be used when implementing log writers with the same filtering
 // behaviour as the default, but a different destination or output format:
@@ -9318,7 +9377,7 @@ func LogWriterDefaultSetUseStderr(useStderr bool) {
 // ]|
 // 
 // or to skip an expensive computation if it is only needed for a debugging
-// message, and `G_MESSAGES_DEBUG` is not set:
+// message, and `G_MESSAGES_DEBUG` and `DEBUG_INVOCATION` are not set:
 // 
 // ```c
 // if (!g_log_writer_default_would_drop (G_LOG_LEVEL_DEBUG, G_LOG_DOMAIN))
@@ -10361,12 +10420,15 @@ func SetApplicationName(applicationName string) {
 // If you are using #GApplication the program name is set in
 // g_application_run(). In case of GDK or GTK it is set in
 // gdk_init(), which is called by gtk_init() and the
-// #GtkApplication::startup handler. The program name is found by
-// taking the last component of @argv[0].
+// #GtkApplication::startup handler. By default, the program name is
+// found by taking the last component of @argv[0].
 // 
 // Since GLib 2.72, this function can be called multiple times
 // and is fully thread safe. Prior to GLib 2.72, this function
 // could only be called once per process.
+// 
+// See the [GTK documentation](https://docs.gtk.org/gtk4/migrating-3to4.html#set-a-proper-application-id)
+// for requirements on integrating g_set_prgname() with GTK applications.
 func SetPrgname(prgname string) {
 	var carg1 *C.gchar // in, none, string
 
@@ -11158,15 +11220,17 @@ func TimeoutSourceNewSeconds(interval uint) *Source {
 // The function returns the following values:
 // 
 // 	- itemsRead int32: location to store number of
-//     characters read, or %NULL. 
+//   characters read, or `NULL`. 
 // 	- itemsWritten int32: location to store number
-//     of bytes written or %NULL. The value here stored does not include the
-//     trailing 0 byte. 
+//   of bytes written or `NULL`. The value here stored does not include the
+//   trailing nul byte. 
 // 	- goret string 
 // 	- _goerr error (nullable): an error 
 //
 // Convert a string from a 32-bit fixed width representation as UCS-4.
-// to UTF-8. The result will be terminated with a 0 byte.
+// to UTF-8.
+// 
+// The result will be terminated with a nul byte.
 func UCS4ToUTF8(str []uint32) (int32, int32, string, error) {
 	var carg1 *C.gunichar // in, transfer: none, C Pointers: 1, Name: array[gunichar], array (inner: *typesystem.CastablePrimitive, length-by: carg2)
 	var carg2 C.glong     // implicit
@@ -11329,10 +11393,10 @@ func UnicharCompose(a uint32, b uint32) (uint32, bool) {
 // decompositions. It does, however, include algorithmic
 // Hangul Jamo decomposition, as well as 'singleton'
 // decompositions which replace a character by a single
-// other character. In the case of singletons *@b will
+// other character. In the case of singletons `*b` will
 // be set to zero.
 // 
-// If @ch is not decomposable, *@a is set to @ch and *@b
+// If @ch is not decomposable, `*a` is set to @ch and `*b`
 // is set to zero.
 // 
 // Note that the way Unicode decomposition pairs are
@@ -12091,8 +12155,8 @@ func UnicharIszerowidth(c uint32) bool {
 // The function returns the following values:
 // 
 // 	- outbuf byte: output buffer, must have at
-//       least 6 bytes of space. If %NULL, the length will be computed and
-//       returned and nothing will be written to @outbuf. 
+//   least 6 bytes of space. If `NULL`, the length will be computed and
+//   returned and nothing will be written to @outbuf. 
 // 	- goret int32 
 //
 // Converts a single character to UTF-8.
@@ -12235,9 +12299,10 @@ func UnicharType(c uint32) UnicodeType {
 // 
 // 	- goret bool 
 //
-// Checks whether @ch is a valid Unicode character. Some possible
-// integer values of @ch will not be valid. 0 is considered a valid
-// character, though it's normally a string terminator.
+// Checks whether @ch is a valid Unicode character.
+// 
+// Some possible integer values of @ch will not be valid. U+0000 is considered a
+// valid character, though it’s normally a string terminator.
 func UnicharValidate(ch uint32) bool {
 	var carg1 C.gunichar // in, none, casted
 	var cret  C.gboolean // return
@@ -12370,18 +12435,19 @@ func Usleep(microseconds uint32) {
 // 
 // The function returns the following values:
 // 
-// 	- itemsRead int32: location to store number of
-//     words read, or %NULL. If %NULL, then %G_CONVERT_ERROR_PARTIAL_INPUT will
-//     be returned in case @str contains a trailing partial character. If
-//     an error occurs then the index of the invalid input is stored here. 
+// 	- itemsRead int32: location to store number of words read, or
+//   `NULL`. If `NULL`, then [error@GLib.ConvertError.PARTIAL_INPUT] will be
+//   returned in case @str contains a trailing partial character. If
+//   an error occurs then the index of the invalid input is stored here. 
 // 	- itemsWritten int32: location to store number
-//     of characters written, or %NULL. The value stored here does not include
-//     the trailing 0 character. 
+//   of characters written, or `NULL`. The value stored here does not include
+//   the trailing nul character. 
 // 	- goret *uint32 
 // 	- _goerr error (nullable): an error 
 //
-// Convert a string from UTF-16 to UCS-4. The result will be
-// nul-terminated.
+// Convert a string from UTF-16 to UCS-4.
+// 
+// The result will be nul-terminated.
 func UTF16ToUCS4(str []uint16) (int32, int32, *uint32, error) {
 	var carg1 *C.gunichar2 // in, transfer: none, C Pointers: 1, Name: array[guint16], array (inner: *typesystem.CastablePrimitive, length-by: carg2)
 	var carg2 C.glong      // implicit
@@ -12423,29 +12489,30 @@ func UTF16ToUCS4(str []uint16) (int32, int32, *uint32, error) {
 // 
 // The function returns the following values:
 // 
-// 	- itemsRead int32: location to store number of
-//     words read, or %NULL. If %NULL, then %G_CONVERT_ERROR_PARTIAL_INPUT will
-//     be returned in case @str contains a trailing partial character. If
-//     an error occurs then the index of the invalid input is stored here.
-//     It’s guaranteed to be non-negative. 
+// 	- itemsRead int32: location to store number of words read, or
+//   `NULL`. If `NULL`, then [error@GLib.ConvertError.PARTIAL_INPUT] will
+//   be returned in case @str contains a trailing partial character. If
+//   an error occurs then the index of the invalid input is stored here.
+//   It’s guaranteed to be non-negative. 
 // 	- itemsWritten int32: location to store number
-//     of bytes written, or %NULL. The value stored here does not include the
-//     trailing 0 byte. It’s guaranteed to be non-negative. 
+//   of bytes written, or `NULL`. The value stored here does not include the
+//   trailing nul byte. It’s guaranteed to be non-negative. 
 // 	- goret string 
 // 	- _goerr error (nullable): an error 
 //
-// Convert a string from UTF-16 to UTF-8. The result will be
-// terminated with a 0 byte.
+// Convert a string from UTF-16 to UTF-8.
+// 
+// The result will be terminated with a nul byte.
 // 
 // Note that the input is expected to be already in native endianness,
 // an initial byte-order-mark character is not handled specially.
-// g_convert() can be used to convert a byte buffer of UTF-16 data of
+// [func@GLib.convert] can be used to convert a byte buffer of UTF-16 data of
 // ambiguous endianness.
 // 
 // Further note that this function does not validate the result
-// string; it may e.g. include embedded NUL characters. The only
+// string; it may (for example) include embedded nul characters. The only
 // validation done by this function is to ensure that the input can
-// be correctly interpreted as UTF-16, i.e. it doesn't contain
+// be correctly interpreted as UTF-16, i.e. it doesn’t contain
 // unpaired surrogates or partial character sequences.
 func UTF16ToUTF8(str []uint16) (int32, int32, string, error) {
 	var carg1 *C.gunichar2 // in, transfer: none, C Pointers: 1, Name: array[guint16], array (inner: *typesystem.CastablePrimitive, length-by: carg2)
@@ -12534,7 +12601,7 @@ func UTF8Casefold(str string, len int) string {
 // 	- goret int32 
 //
 // Compares two strings for ordering using the linguistically
-// correct rules for the [current locale][setlocale].
+// correct rules for the [current locale](running.html#locale).
 // When sorting a large number of strings, it will be significantly
 // faster to obtain collation keys with g_utf8_collate_key() and
 // compare the keys with strcmp() when sorting instead of sorting
@@ -12583,7 +12650,11 @@ func UTF8Collate(str1 string, str2 string) int32 {
 // with strcmp() will always be the same as comparing the two
 // original keys with g_utf8_collate().
 // 
-// Note that this function depends on the [current locale][setlocale].
+// Note that this function depends on the [current locale](running.html#locale).
+// 
+// Note that the returned string is not guaranteed to be in any
+// encoding, especially UTF-8. The returned value is meant to be
+// used only for comparisons.
 func UTF8CollateKey(str string, len int) string {
 	var carg1 *C.gchar // in, none, string
 	var carg2 C.gssize // in, none, casted
@@ -12626,7 +12697,11 @@ func UTF8CollateKey(str string, len int) string {
 // would like to treat numbers intelligently so that "file1" "file10" "file5"
 // is sorted as "file1" "file5" "file10".
 // 
-// Note that this function depends on the [current locale][setlocale].
+// Note that this function depends on the [current locale](running.html#locale).
+// 
+// Note that the returned string is not guaranteed to be in any
+// encoding, especially UTF-8. The returned value is meant to be
+// used only for comparisons.
 func UTF8CollateKeyForFilename(str string, len int) string {
 	var carg1 *C.gchar // in, none, string
 	var carg2 C.gssize // in, none, casted
@@ -12654,7 +12729,7 @@ func UTF8CollateKeyForFilename(str string, len int) string {
 // 
 // 	- p string: a pointer to a position within a UTF-8 encoded string 
 // 	- end string (nullable): a pointer to the byte following the end of the string,
-//     or %NULL to indicate that the string is nul-terminated 
+//     or `NULL` to indicate that the string is nul-terminated 
 // 
 // The function returns the following values:
 // 
@@ -12666,9 +12741,9 @@ func UTF8CollateKeyForFilename(str string, len int) string {
 // is made to see if the character found is actually valid other than
 // it starts with an appropriate byte.
 // 
-// If @end is %NULL, the return value will never be %NULL: if the end of the
+// If @end is `NULL`, the return value will never be `NULL`: if the end of the
 // string is reached, a pointer to the terminating nul byte is returned. If
-// @end is non-%NULL, the return value will be %NULL if the end of the string
+// @end is non-`NULL`, the return value will be `NULL` if the end of the string
 // is reached.
 func UTF8FindNextChar(p string, end string) string {
 	var carg1 *C.gchar // in, none, string
@@ -12707,7 +12782,7 @@ func UTF8FindNextChar(p string, end string) string {
 // 	- goret string (nullable) 
 //
 // Given a position @p with a UTF-8 encoded string @str, find the start
-// of the previous UTF-8 character starting before @p. Returns %NULL if no
+// of the previous UTF-8 character starting before @p. Returns `NULL` if no
 // UTF-8 characters are present in @str before @p.
 // 
 // @p does not have to be at the beginning of a UTF-8 character. No check
@@ -12750,7 +12825,7 @@ func UTF8FindPrevChar(str string, p string) string {
 // 
 // If @p does not point to a valid UTF-8 encoded character, results
 // are undefined. If you are not sure that the bytes are complete
-// valid Unicode characters, you should use g_utf8_get_char_validated()
+// valid Unicode characters, you should use [func@GLib.utf8_get_char_validated]
 // instead.
 func UTF8GetChar(p string) uint32 {
 	var carg1 *C.gchar   // in, none, string
@@ -12774,18 +12849,19 @@ func UTF8GetChar(p string) uint32 {
 // The function takes the following parameters:
 // 
 // 	- p string: a pointer to Unicode character encoded as UTF-8 
-// 	- maxLen int: the maximum number of bytes to read, or -1 if @p is nul-terminated 
+// 	- maxLen int: the maximum number of bytes to read, or `-1` if @p is nul-terminated 
 // 
 // The function returns the following values:
 // 
 // 	- goret uint32 
 //
 // Convert a sequence of bytes encoded as UTF-8 to a Unicode character.
+// 
 // This function checks for incomplete characters, for invalid characters
 // such as characters that are out of the range of Unicode, and for
 // overlong encodings of valid characters.
 // 
-// Note that g_utf8_get_char_validated() returns (gunichar)-2 if
+// Note that [func@GLib.utf8_get_char_validated] returns `(gunichar)-2` if
 // @max_len is positive and any of the bytes in the first UTF-8 character
 // sequence are nul.
 func UTF8GetCharValidated(p string, maxLen int) uint32 {
@@ -12813,8 +12889,8 @@ func UTF8GetCharValidated(p string, maxLen int) uint32 {
 // The function takes the following parameters:
 // 
 // 	- str string: string to coerce into UTF-8 
-// 	- len int: the maximum length of @str to use, in bytes. If @len &lt; 0,
-//     then the string is nul-terminated. 
+// 	- len int: the maximum length of @str to use, in bytes. If @len is negative,
+//   then the string is nul-terminated. 
 // 
 // The function returns the following values:
 // 
@@ -12932,9 +13008,9 @@ func UTF8Normalize(str string, len int, mode NormalizeMode) string {
 // instead of forwards if @offset is in the last fourth of the string,
 // since moving forward is about 3 times faster than moving backward.
 // 
-// Note that this function doesn't abort when reaching the end of @str.
+// Note that this function doesn’t abort when reaching the end of @str.
 // Therefore you should be sure that @offset is within string boundaries
-// before calling that function. Call g_utf8_strlen() when unsure.
+// before calling that function. Call [func@GLib.utf8_strlen] when unsure.
 // This limitation exists as this function is called frequently during
 // text rendering and therefore has to be as fast as possible.
 func UTF8OffsetToPointer(str string, offset int32) string {
@@ -13009,7 +13085,8 @@ func UTF8PointerToOffset(str string, pos string) int32 {
 // @p does not have to be at the beginning of a UTF-8 character. No check
 // is made to see if the character found is actually valid other than
 // it starts with an appropriate byte. If @p might be the first
-// character of the string, you must use g_utf8_find_prev_char() instead.
+// character of the string, you must use [func@GLib.utf8_find_prev_char]
+// instead.
 func UTF8PrevChar(p string) string {
 	var carg1 *C.gchar // in, none, string
 	var cret  *C.gchar // return, none, string
@@ -13041,7 +13118,8 @@ func UTF8PrevChar(p string) string {
 //
 // Finds the leftmost occurrence of the given Unicode character
 // in a UTF-8 encoded string, while limiting the search to @len bytes.
-// If @len is -1, allow unbounded search.
+// 
+// If @len is `-1`, allow unbounded search.
 func UTF8Strchr(p string, len int, c uint32) string {
 	var carg1 *C.gchar   // in, none, string
 	var carg2 C.gssize   // in, none, casted
@@ -13109,17 +13187,17 @@ func UTF8Strdown(str string, len int) string {
 // 
 // 	- p string: pointer to the start of a UTF-8 encoded string 
 // 	- max int: the maximum number of bytes to examine. If @max
-//       is less than 0, then the string is assumed to be
-//       nul-terminated. If @max is 0, @p will not be examined and
-//       may be %NULL. If @max is greater than 0, up to @max
-//       bytes are examined 
+//   is less than 0, then the string is assumed to be
+//   nul-terminated. If @max is 0, @p will not be examined and
+//   may be `NULL`. If @max is greater than 0, up to @max
+//   bytes are examined 
 // 
 // The function returns the following values:
 // 
 // 	- goret int32 
 //
 // Computes the length of the string in characters, not including
-// the terminating nul character. If the @max'th byte falls in the
+// the terminating nul character. If the @max’th byte falls in the
 // middle of a character, the last (partial) character is not counted.
 func UTF8Strlen(p string, max int) int32 {
 	var carg1 *C.gchar // in, none, string
@@ -13153,10 +13231,12 @@ func UTF8Strlen(p string, max int) int32 {
 // 
 // 	- goret string 
 //
-// Like the standard C strncpy() function, but copies a given number
-// of characters instead of a given number of bytes. The @src string
-// must be valid UTF-8 encoded text. (Use g_utf8_validate() on all
-// text before trying to use UTF-8 utility functions with it.)
+// Like the standard C [`strncpy()`](man:strncpy) function, but copies a given
+// number of characters instead of a given number of bytes.
+// 
+// The @src string must be valid UTF-8 encoded text. (Use
+// [func@GLib.utf8_validate] on all text before trying to use UTF-8 utility
+// functions with it.)
 // 
 // Note you must ensure @dest is at least 4 * @n + 1 to fit the
 // largest possible UTF-8 characters
@@ -13198,7 +13278,8 @@ func UTF8Strncpy(dest string, src string, n uint) string {
 //
 // Find the rightmost occurrence of the given Unicode character
 // in a UTF-8 encoded string, while limiting the search to @len bytes.
-// If @len is -1, allow unbounded search.
+// 
+// If @len is `-1`, allow unbounded search.
 func UTF8Strrchr(p string, len int, c uint32) string {
 	var carg1 *C.gchar   // in, none, string
 	var carg2 C.gssize   // in, none, casted
@@ -13229,16 +13310,17 @@ func UTF8Strrchr(p string, len int, c uint32) string {
 // The function takes the following parameters:
 // 
 // 	- str string: a UTF-8 encoded string 
-// 	- len int: the maximum length of @str to use, in bytes. If @len &lt; 0,
-//     then the string is nul-terminated. 
+// 	- len int: the maximum length of @str to use, in bytes. If @len is negative,
+//   then the string is nul-terminated. 
 // 
 // The function returns the following values:
 // 
 // 	- goret string 
 //
-// Reverses a UTF-8 string. @str must be valid UTF-8 encoded text.
-// (Use g_utf8_validate() on all text before trying to use UTF-8
-// utility functions with it.)
+// Reverses a UTF-8 string.
+// 
+// @str must be valid UTF-8 encoded text. (Use [func@GLib.utf8_validate] on all
+// text before trying to use UTF-8 utility functions with it.)
 // 
 // This function is intended for programmatic uses of reversed strings.
 // It pays no attention to decomposed characters, combining marks, byte
@@ -13246,8 +13328,8 @@ func UTF8Strrchr(p string, len int, c uint32) string {
 // characters which might need special handling when reversing a string
 // for display purposes.
 // 
-// Note that unlike g_strreverse(), this function returns
-// newly-allocated memory, which should be freed with g_free() when
+// Note that unlike [func@GLib.strreverse], this function returns
+// newly-allocated memory, which should be freed with [func@GLib.free] when
 // no longer needed.
 func UTF8Strreverse(str string, len int) string {
 	var carg1 *C.gchar // in, none, string
@@ -13354,26 +13436,27 @@ func UTF8Substring(str string, startPos int32, endPos int32) string {
 // The function takes the following parameters:
 // 
 // 	- str string: a UTF-8 encoded string 
-// 	- len int32: the maximum length of @str to use, in bytes. If @len &lt; 0,
-//     then the string is nul-terminated. 
+// 	- len int32: the maximum length of @str to use, in bytes. If @len is negative,
+//   then the string is nul-terminated. 
 // 
 // The function returns the following values:
 // 
 // 	- itemsRead int32: location to store number of
-//    bytes read, or %NULL.
-//     If %NULL, then %G_CONVERT_ERROR_PARTIAL_INPUT will be
-//     returned in case @str contains a trailing partial
-//     character. If an error occurs then the index of the
-//     invalid input is stored here. 
+//  bytes read, or `NULL`.
+//   If `NULL`, then %G_CONVERT_ERROR_PARTIAL_INPUT will be
+//   returned in case @str contains a trailing partial
+//   character. If an error occurs then the index of the
+//   invalid input is stored here. 
 // 	- itemsWritten int32: location to store number
-//     of characters written or %NULL. The value here stored does not include
-//     the trailing 0 character. 
+//   of characters written or `NULL`. The value here stored does not include
+//   the trailing nul character. 
 // 	- goret *uint32 
 // 	- _goerr error (nullable): an error 
 //
-// Convert a string from UTF-8 to a 32-bit fixed width
-// representation as UCS-4. A trailing 0 character will be added to the
-// string after the converted text.
+// Convert a string from UTF-8 to a 32-bit fixed width representation as UCS-4.
+// 
+// A trailing nul character (U+0000) will be added to the string after the
+// converted text.
 func UTF8ToUCS4(str string, len int32) (int32, int32, *uint32, error) {
 	var carg1 *C.gchar    // in, none, string
 	var carg2 C.glong     // in, none, casted
@@ -13412,19 +13495,20 @@ func UTF8ToUCS4(str string, len int32) (int32, int32, *uint32, error) {
 // The function takes the following parameters:
 // 
 // 	- str string: a UTF-8 encoded string 
-// 	- len int32: the maximum length of @str to use, in bytes. If @len &lt; 0,
-//     then the string is nul-terminated. 
+// 	- len int32: the maximum length of @str to use, in bytes. If @len is negative,
+//   then the string is nul-terminated. 
 // 
 // The function returns the following values:
 // 
 // 	- itemsWritten int32: location to store the
-//     number of characters in the result, or %NULL. 
+//   number of characters in the result, or `NULL`. 
 // 	- goret *uint32 
 //
 // Convert a string from UTF-8 to a 32-bit fixed width
 // representation as UCS-4, assuming valid UTF-8 input.
-// This function is roughly twice as fast as g_utf8_to_ucs4()
-// but does no error checking on the input. A trailing 0 character
+// 
+// This function is roughly twice as fast as [func@GLib.utf8_to_ucs4]
+// but does no error checking on the input. A trailing nul character (U+0000)
 // will be added to the string after the converted text.
 func UTF8ToUCS4Fast(str string, len int32) (int32, *uint32) {
 	var carg1 *C.gchar    // in, none, string
@@ -13457,22 +13541,23 @@ func UTF8ToUCS4Fast(str string, len int32) (int32, *uint32) {
 // 
 // 	- str string: a UTF-8 encoded string 
 // 	- len int32: the maximum length (number of bytes) of @str to use.
-//     If @len &lt; 0, then the string is nul-terminated. 
+//   If @len is negative, then the string is nul-terminated. 
 // 
 // The function returns the following values:
 // 
-// 	- itemsRead int32: location to store number of
-//     bytes read, or %NULL. If %NULL, then %G_CONVERT_ERROR_PARTIAL_INPUT will
-//     be returned in case @str contains a trailing partial character. If
-//     an error occurs then the index of the invalid input is stored here. 
+// 	- itemsRead int32: location to store number of bytes read, or
+//   `NULL`. If `NULL`, then [error@GLib.ConvertError.PARTIAL_INPUT] will
+//   be returned in case @str contains a trailing partial character. If
+//   an error occurs then the index of the invalid input is stored here. 
 // 	- itemsWritten int32: location to store number
-//     of #gunichar2 written, or %NULL. The value stored here does not include
-//     the trailing 0. 
+//   of `gunichar2` written, or `NULL`. The value stored here does not include
+//   the trailing nul. 
 // 	- goret *uint16 
 // 	- _goerr error (nullable): an error 
 //
-// Convert a string from UTF-8 to UTF-16. A 0 character will be
-// added to the result after the converted text.
+// Convert a string from UTF-8 to UTF-16.
+// 
+// A nul character (U+0000) will be added to the result after the converted text.
 func UTF8ToUTF16(str string, len int32) (int32, int32, *uint16, error) {
 	var carg1 *C.gchar     // in, none, string
 	var carg2 C.glong      // in, none, casted
@@ -13554,20 +13639,22 @@ func UTF8TruncateMiddle(str string, truncateLength uint) string {
 // 	- end string: return location for end of valid data 
 // 	- goret bool 
 //
-// Validates UTF-8 encoded text. @str is the text to validate;
-// if @str is nul-terminated, then @max_len can be -1, otherwise
-// @max_len should be the number of bytes to validate.
-// If @end is non-%NULL, then the end of the valid range
-// will be stored there (i.e. the start of the first invalid
-// character if some bytes were invalid, or the end of the text
-// being validated otherwise).
+// Validates UTF-8 encoded text.
 // 
-// Note that g_utf8_validate() returns %FALSE if @max_len is
-// positive and any of the @max_len bytes are nul.
+// @str is the text to validate; if @str is nul-terminated, then @max_len can be
+// `-1`, otherwise @max_len should be the number of bytes to validate.
 // 
-// Returns %TRUE if all of @str was valid. Many GLib and GTK
+// If @end is non-`NULL`, then the end of the valid range will be stored there.
+// This is the first byte of the first invalid character if some bytes were
+// invalid, or the end of the text being validated otherwise — either the
+// trailing nul byte, or the first byte beyond @max_len (if it’s positive).
+// 
+// Note that `g_utf8_validate()` returns `FALSE` if @max_len is  positive and
+// any of the @max_len bytes are nul.
+// 
+// Returns `TRUE` if all of @str was valid. Many GLib and GTK
 // routines require valid UTF-8 as input; so data read from a file
-// or the network should be checked with g_utf8_validate() before
+// or the network should be checked with `g_utf8_validate()` before
 // doing anything else with it.
 func UTF8Validate(str string) (string, bool) {
 	var carg1 *C.gchar   // in, transfer: none, C Pointers: 1, Name: array[unknown], array (inner: <nil>, length-by: carg2)
@@ -13607,8 +13694,8 @@ func UTF8Validate(str string) (string, bool) {
 //
 // Validates UTF-8 encoded text.
 // 
-// As with g_utf8_validate(), but @max_len must be set, and hence this function
-// will always return %FALSE if any of the bytes of @str are nul.
+// As with [func@GLib.utf8_validate], but @max_len must be set, and hence this
+// function will always return `FALSE` if any of the bytes of @str are nul.
 func UTF8ValidateLen(str string) (string, bool) {
 	var carg1 *C.gchar   // in, transfer: none, C Pointers: 1, Name: array[unknown], array (inner: <nil>, length-by: carg2)
 	var carg2 C.gsize    // implicit
@@ -15460,30 +15547,33 @@ func UnsafeByteArrayToGlibFull(b *ByteArray) unsafe.Pointer {
 
 // Bytes wraps GBytes
 //
-// A simple refcounted data type representing an immutable sequence of zero or
-// more bytes from an unspecified origin.
+// A simple reference counted data type representing an immutable sequence of
+// zero or more bytes from an unspecified origin.
 // 
-// The purpose of a #GBytes is to keep the memory region that it holds
+// The purpose of a `GBytes` is to keep the memory region that it holds
 // alive for as long as anyone holds a reference to the bytes.  When
 // the last reference count is dropped, the memory is released. Multiple
-// unrelated callers can use byte data in the #GBytes without coordinating
+// unrelated callers can use byte data in the `GBytes` without coordinating
 // their activities, resting assured that the byte data will not change or
 // move while they hold a reference.
 // 
-// A #GBytes can come from many different origins that may have
+// A `GBytes` can come from many different origins that may have
 // different procedures for freeing the memory region.  Examples are
-// memory from g_malloc(), from memory slices, from a #GMappedFile or
-// memory from other allocators.
+// memory from [func@GLib.malloc], from memory slices, from a
+// [struct@GLib.MappedFile] or memory from other allocators.
 // 
-// #GBytes work well as keys in #GHashTable. Use g_bytes_equal() and
-// g_bytes_hash() as parameters to g_hash_table_new() or g_hash_table_new_full().
-// #GBytes can also be used as keys in a #GTree by passing the g_bytes_compare()
-// function to g_tree_new().
+// `GBytes` work well as keys in [struct@GLib.HashTable]. Use
+// [method@GLib.Bytes.equal] and [method@GLib.Bytes.hash] as parameters to
+// [func@GLib.HashTable.new] or [func@GLib.HashTable.new_full].
+// `GBytes` can also be used as keys in a [struct@GLib.Tree] by passing the
+// [method@GLib.Bytes.compare] function to [ctor@GLib.Tree.new].
 // 
 // The data pointed to by this bytes must not be modified. For a mutable
-// array of bytes see #GByteArray. Use g_bytes_unref_to_array() to create a
-// mutable array for a #GBytes sequence. To create an immutable #GBytes from
-// a mutable #GByteArray, use the g_byte_array_free_to_bytes() function.
+// array of bytes see [struct@GLib.ByteArray]. Use
+// [method@GLib.Bytes.unref_to_array] to create a mutable array for a `GBytes`
+// sequence. To create an immutable `GBytes` from a mutable
+// [struct@GLib.ByteArray], use the [func@GLib.ByteArray.free_to_bytes]
+// function.
 type Bytes struct {
 	*bytes
 }
@@ -15557,9 +15647,9 @@ func UnsafeBytesToGlibFull(b *Bytes) unsafe.Pointer {
 // 
 // 	- goret uint 
 //
-// Get the size of the byte data in the #GBytes.
+// Get the size of the byte data in the [struct@GLib.Bytes].
 // 
-// This function will always return the same value for a given #GBytes.
+// This function will always return the same value for a given `GBytes`.
 func (bytes *Bytes) GetSize() uint {
 	var carg0 *C.GBytes // in, none, converted
 	var cret  C.gsize   // return, none, casted
@@ -15587,17 +15677,18 @@ func (bytes *Bytes) GetSize() uint {
 // 
 // 	- goret *Bytes 
 //
-// Creates a #GBytes which is a subsection of another #GBytes. The @offset +
-// @length may not be longer than the size of @bytes.
+// Creates a [struct@GLib.Bytes] which is a subsection of another `GBytes`.
 // 
-// A reference to @bytes will be held by the newly created #GBytes until
+// The @offset + @length may not be longer than the size of @bytes.
+// 
+// A reference to @bytes will be held by the newly created `GBytes` until
 // the byte data is no longer needed.
 // 
 // Since 2.56, if @offset is 0 and @length matches the size of @bytes, then
 // @bytes will be returned with the reference count incremented by 1. If @bytes
-// is a slice of another #GBytes, then the resulting #GBytes will reference
-// the same #GBytes instead of @bytes. This allows consumers to simplify the
-// usage of #GBytes when asynchronously writing to streams.
+// is a slice of another `GBytes`, then the resulting `GBytes` will reference
+// the same `GBytes` instead of @bytes. This allows consumers to simplify the
+// usage of `GBytes` when asynchronously writing to streams.
 func (bytes *Bytes) NewFromBytes(offset uint, length uint) *Bytes {
 	var carg0 *C.GBytes // in, none, converted
 	var carg1 C.gsize   // in, none, casted
@@ -18410,7 +18501,8 @@ func (channel *IOChannel) GetFlags() IOFlags {
 //
 // This returns the string that #GIOChannel uses to determine
 // where in the file a line break occurs. A value of %NULL
-// indicates autodetection.
+// indicates autodetection. Since 2.84, the return value is always
+// nul-terminated.
 func (channel *IOChannel) GetLineTerm() (int32, string) {
 	var carg0 *C.GIOChannel // in, none, converted
 	var carg1 C.gint        // out, full, casted
@@ -18984,13 +19076,13 @@ func UnsafeIOFuncsToGlibFull(i *IOFuncs) unsafe.Pointer {
 // `GKeyFile` parses .ini-like config files.
 // 
 // `GKeyFile` lets you parse, edit or create files containing groups of
-// key-value pairs, which we call "key files" for lack of a better name.
-// Several freedesktop.org specifications use key files now, e.g the
-// [Desktop Entry Specification](http://freedesktop.org/Standards/desktop-entry-spec)
-// and the [Icon Theme Specification](http://freedesktop.org/Standards/icon-theme-spec).
+// key-value pairs, which we call ‘key files’ for lack of a better name.
+// Several freedesktop.org specifications use key files. For example, the
+// [Desktop Entry Specification](https://specifications.freedesktop.org/desktop-entry-spec/latest/)
+// and the [Icon Theme Specification](https://specifications.freedesktop.org/icon-theme-spec/latest/).
 // 
 // The syntax of key files is described in detail in the
-// [Desktop Entry Specification](http://freedesktop.org/Standards/desktop-entry-spec),
+// [Desktop Entry Specification](https://specifications.freedesktop.org/desktop-entry-spec/latest/),
 // here is a quick summary: Key files consists of groups of key-value pairs, interspersed
 // with comments.
 // 
@@ -19015,30 +19107,32 @@ func UnsafeIOFuncsToGlibFull(i *IOFuncs) unsafe.Pointer {
 // Booleans=true;false;true;true
 // ```
 // 
-// Lines beginning with a '#' and blank lines are considered comments.
+// Lines beginning with a `#` and blank lines are considered comments.
 // 
 // Groups are started by a header line containing the group name enclosed
-// in '[' and ']', and ended implicitly by the start of the next group or
+// in `[` and `]`, and ended implicitly by the start of the next group or
 // the end of the file. Each key-value pair must be contained in a group.
 // 
 // Key-value pairs generally have the form `key=value`, with the exception
 // of localized strings, which have the form `key[locale]=value`, with a
 // locale identifier of the form `lang_COUNTRY@MODIFIER` where `COUNTRY`
-// and `MODIFIER` are optional. Space before and after the '=' character
-// are ignored. Newline, tab, carriage return and backslash characters in
-// value are escaped as `\n`, `\t`, `\r`, and `\\\\`, respectively. To preserve
-// leading spaces in values, these can also be escaped as `\s`.
+// and `MODIFIER` are optional. As a special case, the locale `C` is associated
+// with the untranslated pair `key=value` (since GLib 2.84). Space before and
+// after the `=` character is ignored. Newline, tab, carriage return and
+// backslash characters in value are escaped as `\n`, `\t`, `\r`, and `\\\\`,
+// respectively. To preserve leading spaces in values, these can also be escaped
+// as `\s`.
 // 
 // Key files can store strings (possibly with localized variants), integers,
 // booleans and lists of these. Lists are separated by a separator character,
-// typically ';' or ','. To use the list separator character in a value in
+// typically `;` or `,`. To use the list separator character in a value in
 // a list, it has to be escaped by prefixing it with a backslash.
 // 
 // This syntax is obviously inspired by the .ini files commonly met
 // on Windows, but there are some important differences:
 // 
-// - .ini files use the ';' character to begin comments,
-//   key files use the '#' character.
+// - .ini files use the `;` character to begin comments,
+//   key files use the `#` character.
 // 
 // - Key files do not allow for ungrouped keys meaning only
 //   comments can precede the first group.
@@ -19046,14 +19140,14 @@ func UnsafeIOFuncsToGlibFull(i *IOFuncs) unsafe.Pointer {
 // - Key files are always encoded in UTF-8.
 // 
 // - Key and Group names are case-sensitive. For example, a group called
-//   [GROUP] is a different from [group].
+//   `[GROUP]` is a different from `[group]`.
 // 
-// - .ini files don't have a strongly typed boolean entry type,
-//    they only have GetProfileInt(). In key files, only
-//    true and false (in lower case) are allowed.
+// - .ini files don’t have a strongly typed boolean entry type,
+//    they only have `GetProfileInt()`. In key files, only
+//    `true` and `false` (in lower case) are allowed.
 // 
 // Note that in contrast to the
-// [Desktop Entry Specification](http://freedesktop.org/Standards/desktop-entry-spec),
+// [Desktop Entry Specification](https://specifications.freedesktop.org/desktop-entry-spec/latest/),
 // groups in key files may contain the same key multiple times; the last entry wins.
 // Key files may also contain multiple groups with the same name; they are merged
 // together. Another difference is that keys and group names in key files are not
@@ -19185,9 +19279,11 @@ func UnsafeKeyFileToGlibFull(k *KeyFile) unsafe.Pointer {
 // 
 // 	- goret *KeyFile 
 //
-// Creates a new empty #GKeyFile object. Use
-// g_key_file_load_from_file(), g_key_file_load_from_data(),
-// g_key_file_load_from_dirs() or g_key_file_load_from_data_dirs() to
+// Creates a new empty [struct@GLib.KeyFile] object.
+// 
+// Use [method@GLib.KeyFile.load_from_file],
+// [method@GLib.KeyFile.load_from_data], [method@GLib.KeyFile.load_from_dirs] or
+// [method@GLib.KeyFile.load_from_data_dirs] to
 // read an existing key file.
 func NewKeyFile() *KeyFile {
 	var cret *C.GKeyFile // return, full, converted
@@ -19233,10 +19329,9 @@ func KeyFileErrorQuark() Quark {
 // Returns the value associated with @key under @group_name as a
 // boolean.
 // 
-// If @key cannot be found then %FALSE is returned and @error is set
-// to %G_KEY_FILE_ERROR_KEY_NOT_FOUND. Likewise, if the value
-// associated with @key cannot be interpreted as a boolean then %FALSE
-// is returned and @error is set to %G_KEY_FILE_ERROR_INVALID_VALUE.
+// If @key cannot be found then [error@GLib.KeyFileError.KEY_NOT_FOUND] is
+// returned. Likewise, if the value associated with @key cannot be interpreted
+// as a boolean then [error@GLib.KeyFileError.INVALID_VALUE] is returned.
 func (keyFile *KeyFile) GetBoolean(groupName string, key string) (bool, error) {
 	var carg0 *C.GKeyFile // in, none, converted
 	var carg1 *C.gchar    // in, none, string
@@ -19284,10 +19379,9 @@ func (keyFile *KeyFile) GetBoolean(groupName string, key string) (bool, error) {
 // Returns the values associated with @key under @group_name as
 // booleans.
 // 
-// If @key cannot be found then %NULL is returned and @error is set to
-// %G_KEY_FILE_ERROR_KEY_NOT_FOUND. Likewise, if the values associated
-// with @key cannot be interpreted as booleans then %NULL is returned
-// and @error is set to %G_KEY_FILE_ERROR_INVALID_VALUE.
+// If @key cannot be found then [error@GLib.KeyFileError.KEY_NOT_FOUND] is
+// returned. Likewise, if the values associated with @key cannot be interpreted
+// as booleans then [error@GLib.KeyFileError.INVALID_VALUE] is returned.
 func (keyFile *KeyFile) GetBooleanList(groupName string, key string) (uint, []bool, error) {
 	var carg0 *C.GKeyFile // in, none, converted
 	var carg1 *C.gchar    // in, none, string
@@ -19326,8 +19420,8 @@ func (keyFile *KeyFile) GetBooleanList(groupName string, key string) (uint, []bo
 // 
 // The function takes the following parameters:
 // 
-// 	- groupName string (nullable): a group name, or %NULL 
-// 	- key string (nullable): a key 
+// 	- groupName string (nullable): a group name, or `NULL` to get a top-level comment 
+// 	- key string (nullable): a key, or `NULL` to get a group comment 
 // 
 // The function returns the following values:
 // 
@@ -19335,11 +19429,12 @@ func (keyFile *KeyFile) GetBooleanList(groupName string, key string) (uint, []bo
 // 	- _goerr error (nullable): an error 
 //
 // Retrieves a comment above @key from @group_name.
-// If @key is %NULL then @comment will be read from above
-// @group_name. If both @key and @group_name are %NULL, then
+// 
+// If @key is `NULL` then @comment will be read from above
+// @group_name. If both @key and @group_name are `NULL`, then
 // @comment will be read from above the first group in the file.
 // 
-// Note that the returned string does not include the '#' comment markers,
+// Note that the returned string does not include the `#` comment markers,
 // but does include any whitespace after them (on each line). It includes
 // the line breaks between lines, but does not include the final line break.
 func (keyFile *KeyFile) GetComment(groupName string, key string) (string, error) {
@@ -19388,13 +19483,11 @@ func (keyFile *KeyFile) GetComment(groupName string, key string) (string, error)
 // 	- goret float64 
 // 	- _goerr error (nullable): an error 
 //
-// Returns the value associated with @key under @group_name as a
-// double. If @group_name is %NULL, the start_group is used.
+// Returns the value associated with @key under @group_name as a double.
 // 
-// If @key cannot be found then 0.0 is returned and @error is set to
-// %G_KEY_FILE_ERROR_KEY_NOT_FOUND. Likewise, if the value associated
-// with @key cannot be interpreted as a double then 0.0 is returned
-// and @error is set to %G_KEY_FILE_ERROR_INVALID_VALUE.
+// If @key cannot be found then [error@GLib.KeyFileError.KEY_NOT_FOUND] is
+// returned. Likewise, if the value associated with @key cannot be interpreted
+// as a double then [error@GLib.KeyFileError.INVALID_VALUE] is returned.
 func (keyFile *KeyFile) GetDouble(groupName string, key string) (float64, error) {
 	var carg0 *C.GKeyFile // in, none, converted
 	var carg1 *C.gchar    // in, none, string
@@ -19440,10 +19533,9 @@ func (keyFile *KeyFile) GetDouble(groupName string, key string) (float64, error)
 // Returns the values associated with @key under @group_name as
 // doubles.
 // 
-// If @key cannot be found then %NULL is returned and @error is set to
-// %G_KEY_FILE_ERROR_KEY_NOT_FOUND. Likewise, if the values associated
-// with @key cannot be interpreted as doubles then %NULL is returned
-// and @error is set to %G_KEY_FILE_ERROR_INVALID_VALUE.
+// If @key cannot be found then [error@GLib.KeyFileError.KEY_NOT_FOUND] is
+// returned. Likewise, if the values associated with @key cannot be interpreted
+// as doubles then [error@GLib.KeyFileError.INVALID_VALUE] is returned.
 func (keyFile *KeyFile) GetDoubleList(groupName string, key string) (uint, []float64, error) {
 	var carg0 *C.GKeyFile // in, none, converted
 	var carg1 *C.gchar    // in, none, string
@@ -19482,12 +19574,14 @@ func (keyFile *KeyFile) GetDoubleList(groupName string, key string) (uint, []flo
 // 
 // The function returns the following values:
 // 
-// 	- length uint: return location for the number of returned groups, or %NULL 
+// 	- length uint: return location for the number of returned groups,
+//    or `NULL` to ignore 
 // 	- goret []string 
 //
 // Returns all groups in the key file loaded with @key_file.
-// The array of returned groups will be %NULL-terminated, so
-// @length may optionally be %NULL.
+// 
+// The array of returned groups will be `NULL`-terminated, so
+// @length may optionally be `NULL`.
 func (keyFile *KeyFile) GetGroups() (uint, []string) {
 	var carg0 *C.GKeyFile // in, none, converted
 	var carg1 C.gsize     // out, full, casted
@@ -19513,8 +19607,8 @@ func (keyFile *KeyFile) GetGroups() (uint, []string) {
 // 
 // The function takes the following parameters:
 // 
-// 	- groupName string: a non-%NULL group name 
-// 	- key string: a non-%NULL key 
+// 	- groupName string: a group name 
+// 	- key string: a key 
 // 
 // The function returns the following values:
 // 
@@ -19522,7 +19616,9 @@ func (keyFile *KeyFile) GetGroups() (uint, []string) {
 // 	- _goerr error (nullable): an error 
 //
 // Returns the value associated with @key under @group_name as a signed
-// 64-bit integer. This is similar to g_key_file_get_integer() but can return
+// 64-bit integer.
+// 
+// This is similar to [method@GLib.KeyFile.get_integer] but can return
 // 64-bit results without truncation.
 func (keyFile *KeyFile) GetInt64(groupName string, key string) (int64, error) {
 	var carg0 *C.GKeyFile // in, none, converted
@@ -19568,11 +19664,10 @@ func (keyFile *KeyFile) GetInt64(groupName string, key string) (int64, error) {
 // Returns the value associated with @key under @group_name as an
 // integer.
 // 
-// If @key cannot be found then 0 is returned and @error is set to
-// %G_KEY_FILE_ERROR_KEY_NOT_FOUND. Likewise, if the value associated
-// with @key cannot be interpreted as an integer, or is out of range
-// for a #gint, then 0 is returned
-// and @error is set to %G_KEY_FILE_ERROR_INVALID_VALUE.
+// If @key cannot be found then [error@GLib.KeyFileError.KEY_NOT_FOUND] is
+// returned. Likewise, if the value associated with @key cannot be interpreted
+// as an integer, or is out of range for a `gint`, then
+// [error@GLib.KeyFileError.INVALID_VALUE] is returned.
 func (keyFile *KeyFile) GetInteger(groupName string, key string) (int32, error) {
 	var carg0 *C.GKeyFile // in, none, converted
 	var carg1 *C.gchar    // in, none, string
@@ -19618,11 +19713,10 @@ func (keyFile *KeyFile) GetInteger(groupName string, key string) (int32, error) 
 // Returns the values associated with @key under @group_name as
 // integers.
 // 
-// If @key cannot be found then %NULL is returned and @error is set to
-// %G_KEY_FILE_ERROR_KEY_NOT_FOUND. Likewise, if the values associated
-// with @key cannot be interpreted as integers, or are out of range for
-// #gint, then %NULL is returned
-// and @error is set to %G_KEY_FILE_ERROR_INVALID_VALUE.
+// If @key cannot be found then [error@GLib.KeyFileError.KEY_NOT_FOUND] is
+// returned. Likewise, if the values associated with @key cannot be interpreted
+// as integers, or are out of range for `gint`, then
+// [error@GLib.KeyFileError.INVALID_VALUE] is returned.
 func (keyFile *KeyFile) GetIntegerList(groupName string, key string) (uint, []int32, error) {
 	var carg0 *C.GKeyFile // in, none, converted
 	var carg1 *C.gchar    // in, none, string
@@ -19665,15 +19759,16 @@ func (keyFile *KeyFile) GetIntegerList(groupName string, key string) (uint, []in
 // 
 // The function returns the following values:
 // 
-// 	- length uint: return location for the number of keys returned, or %NULL 
+// 	- length uint: return location for the number of keys returned,
+//    or `NULL` to ignore 
 // 	- goret []string 
 // 	- _goerr error (nullable): an error 
 //
-// Returns all keys for the group name @group_name.  The array of
-// returned keys will be %NULL-terminated, so @length may
-// optionally be %NULL. In the event that the @group_name cannot
-// be found, %NULL is returned and @error is set to
-// %G_KEY_FILE_ERROR_GROUP_NOT_FOUND.
+// Returns all keys for the group name @group_name.
+// 
+// The array of returned keys will be `NULL`-terminated, so @length may
+// optionally be `NULL`. If the @group_name cannot be found,
+// [error@GLib.KeyFileError.GROUP_NOT_FOUND] is returned.
 func (keyFile *KeyFile) GetKeys(groupName string) (uint, []string, error) {
 	var carg0 *C.GKeyFile // in, none, converted
 	var carg1 *C.gchar    // in, none, string
@@ -19710,18 +19805,18 @@ func (keyFile *KeyFile) GetKeys(groupName string) (uint, []string, error) {
 // 
 // 	- groupName string: a group name 
 // 	- key string: a key 
-// 	- locale string (nullable): a locale identifier or %NULL 
+// 	- locale string (nullable): a locale identifier or `NULL` to use the current locale 
 // 
 // The function returns the following values:
 // 
 // 	- goret string (nullable) 
 //
 // Returns the actual locale which the result of
-// g_key_file_get_locale_string() or g_key_file_get_locale_string_list()
-// came from.
+// [method@GLib.KeyFile.get_locale_string] or
+// [method@GLib.KeyFile.get_locale_string_list] came from.
 // 
-// If calling g_key_file_get_locale_string() or
-// g_key_file_get_locale_string_list() with exactly the same @key_file,
+// If calling [method@GLib.KeyFile.get_locale_string] or
+// [method@GLib.KeyFile.get_locale_string_list] with exactly the same @key_file,
 // @group_name, @key and @locale, the result of those functions will
 // have originally been tagged with the locale that is the result of
 // this function.
@@ -19764,7 +19859,7 @@ func (keyFile *KeyFile) GetLocaleForKey(groupName string, key string, locale str
 // 
 // 	- groupName string: a group name 
 // 	- key string: a key 
-// 	- locale string (nullable): a locale identifier or %NULL 
+// 	- locale string (nullable): a locale identifier or `NULL` to use the current locale 
 // 
 // The function returns the following values:
 // 
@@ -19772,15 +19867,19 @@ func (keyFile *KeyFile) GetLocaleForKey(groupName string, key string, locale str
 // 	- _goerr error (nullable): an error 
 //
 // Returns the value associated with @key under @group_name
-// translated in the given @locale if available.  If @locale is
-// %NULL then the current locale is assumed.
+// translated in the given @locale if available.
 // 
-// If @locale is to be non-%NULL, or if the current locale will change over
-// the lifetime of the #GKeyFile, it must be loaded with
-// %G_KEY_FILE_KEEP_TRANSLATIONS in order to load strings for all locales.
+// If @locale is `C` then the untranslated value is returned (since GLib 2.84).
 // 
-// If @key cannot be found then %NULL is returned and @error is set
-// to %G_KEY_FILE_ERROR_KEY_NOT_FOUND. If the value associated
+// If @locale is `NULL` then the current locale is assumed.
+// 
+// If @locale is to be non-`NULL`, or if the current locale will change over
+// the lifetime of the [struct@GLib.KeyFile], it must be loaded with
+// [flags@GLib.KeyFileFlags.KEEP_TRANSLATIONS] in order to load strings for all
+// locales.
+// 
+// If @key cannot be found then [error@GLib.KeyFileError.KEY_NOT_FOUND] is
+// returned. If the value associated
 // with @key cannot be interpreted or no suitable translation can
 // be found then the untranslated value is returned.
 func (keyFile *KeyFile) GetLocaleString(groupName string, key string, locale string) (string, error) {
@@ -19825,28 +19924,33 @@ func (keyFile *KeyFile) GetLocaleString(groupName string, key string, locale str
 // 
 // 	- groupName string: a group name 
 // 	- key string: a key 
-// 	- locale string (nullable): a locale identifier or %NULL 
+// 	- locale string (nullable): a locale identifier or `NULL` to use the current locale 
 // 
 // The function returns the following values:
 // 
-// 	- length uint: return location for the number of returned strings or %NULL 
+// 	- length uint: return location for the number of returned strings
+//    or `NULL` to ignore 
 // 	- goret []string 
 // 	- _goerr error (nullable): an error 
 //
 // Returns the values associated with @key under @group_name
-// translated in the given @locale if available.  If @locale is
-// %NULL then the current locale is assumed.
+// translated in the given @locale if available.
 // 
-// If @locale is to be non-%NULL, or if the current locale will change over
-// the lifetime of the #GKeyFile, it must be loaded with
-// %G_KEY_FILE_KEEP_TRANSLATIONS in order to load strings for all locales.
+// If @locale is `C` then the untranslated value is returned (since GLib 2.84).
 // 
-// If @key cannot be found then %NULL is returned and @error is set
-// to %G_KEY_FILE_ERROR_KEY_NOT_FOUND. If the values associated
+// If @locale is `NULL` then the current locale is assumed.
+// 
+// If @locale is to be non-`NULL`, or if the current locale will change over
+// the lifetime of the [struct@GLib.KeyFile], it must be loaded with
+// [flags@GLib.KeyFileFlags.KEEP_TRANSLATIONS] in order to load strings for all
+// locales.
+// 
+// If @key cannot be found then [error@GLib.KeyFileError.KEY_NOT_FOUND] is
+// returned. If the values associated
 // with @key cannot be interpreted or no suitable translations
 // can be found then the untranslated values are returned. The
-// returned array is %NULL-terminated, so @length may optionally
-// be %NULL.
+// returned array is `NULL`-terminated, so @length may optionally
+// be `NULL`.
 func (keyFile *KeyFile) GetLocaleStringList(groupName string, key string, locale string) (uint, []string, error) {
 	var carg0 *C.GKeyFile // in, none, converted
 	var carg1 *C.gchar    // in, none, string
@@ -19926,13 +20030,13 @@ func (keyFile *KeyFile) GetStartGroup() string {
 // 	- _goerr error (nullable): an error 
 //
 // Returns the string value associated with @key under @group_name.
-// Unlike g_key_file_get_value(), this function handles escape sequences
-// like \s.
 // 
-// In the event the key cannot be found, %NULL is returned and
-// @error is set to %G_KEY_FILE_ERROR_KEY_NOT_FOUND.  In the
-// event that the @group_name cannot be found, %NULL is returned
-// and @error is set to %G_KEY_FILE_ERROR_GROUP_NOT_FOUND.
+// Unlike [method@GLib.KeyFile.get_value], this function handles escape
+// sequences like `\s`.
+// 
+// If the key cannot be found, [error@GLib.KeyFileError.KEY_NOT_FOUND] is
+// returned. If the @group_name cannot be found,
+// [error@GLib.KeyFileError.GROUP_NOT_FOUND] is returned.
 func (keyFile *KeyFile) GetString(groupName string, key string) (string, error) {
 	var carg0 *C.GKeyFile // in, none, converted
 	var carg1 *C.gchar    // in, none, string
@@ -19972,16 +20076,16 @@ func (keyFile *KeyFile) GetString(groupName string, key string) (string, error) 
 // 
 // The function returns the following values:
 // 
-// 	- length uint: return location for the number of returned strings, or %NULL 
+// 	- length uint: return location for the number of returned
+//    strings, or `NULL` to ignore 
 // 	- goret []string 
 // 	- _goerr error (nullable): an error 
 //
 // Returns the values associated with @key under @group_name.
 // 
-// In the event the key cannot be found, %NULL is returned and
-// @error is set to %G_KEY_FILE_ERROR_KEY_NOT_FOUND.  In the
-// event that the @group_name cannot be found, %NULL is returned
-// and @error is set to %G_KEY_FILE_ERROR_GROUP_NOT_FOUND.
+// If the key cannot be found, [error@GLib.KeyFileError.KEY_NOT_FOUND] is
+// returned. If the @group_name cannot be found,
+// [error@GLib.KeyFileError.GROUP_NOT_FOUND] is returned.
 func (keyFile *KeyFile) GetStringList(groupName string, key string) (uint, []string, error) {
 	var carg0 *C.GKeyFile // in, none, converted
 	var carg1 *C.gchar    // in, none, string
@@ -20020,8 +20124,8 @@ func (keyFile *KeyFile) GetStringList(groupName string, key string) (uint, []str
 // 
 // The function takes the following parameters:
 // 
-// 	- groupName string: a non-%NULL group name 
-// 	- key string: a non-%NULL key 
+// 	- groupName string: a group name 
+// 	- key string: a key 
 // 
 // The function returns the following values:
 // 
@@ -20029,7 +20133,9 @@ func (keyFile *KeyFile) GetStringList(groupName string, key string) (uint, []str
 // 	- _goerr error (nullable): an error 
 //
 // Returns the value associated with @key under @group_name as an unsigned
-// 64-bit integer. This is similar to g_key_file_get_integer() but can return
+// 64-bit integer.
+// 
+// This is similar to [method@GLib.KeyFile.get_integer] but can return
 // large positive results without truncation.
 func (keyFile *KeyFile) GetUint64(groupName string, key string) (uint64, error) {
 	var carg0 *C.GKeyFile // in, none, converted
@@ -20073,12 +20179,12 @@ func (keyFile *KeyFile) GetUint64(groupName string, key string) (uint64, error) 
 // 	- _goerr error (nullable): an error 
 //
 // Returns the raw value associated with @key under @group_name.
-// Use g_key_file_get_string() to retrieve an unescaped UTF-8 string.
 // 
-// In the event the key cannot be found, %NULL is returned and
-// @error is set to %G_KEY_FILE_ERROR_KEY_NOT_FOUND.  In the
-// event that the @group_name cannot be found, %NULL is returned
-// and @error is set to %G_KEY_FILE_ERROR_GROUP_NOT_FOUND.
+// Use [method@GLib.KeyFile.get_string] to retrieve an unescaped UTF-8 string.
+// 
+// If the key cannot be found, [error@GLib.KeyFileError.KEY_NOT_FOUND]
+// is returned.  If the @group_name cannot be found,
+// [error@GLib.KeyFileError.GROUP_NOT_FOUND] is returned.
 func (keyFile *KeyFile) GetValue(groupName string, key string) (string, error) {
 	var carg0 *C.GKeyFile // in, none, converted
 	var carg1 *C.gchar    // in, none, string
@@ -20146,16 +20252,18 @@ func (keyFile *KeyFile) HasGroup(groupName string) bool {
 // 
 // The function takes the following parameters:
 // 
-// 	- bytes *Bytes: a #GBytes 
-// 	- flags KeyFileFlags: flags from #GKeyFileFlags 
+// 	- bytes *Bytes: a [struct@GLib.Bytes] 
+// 	- flags KeyFileFlags: flags from [flags@GLib.KeyFileFlags] 
 // 
 // The function returns the following values:
 // 
 // 	- goret bool 
 // 	- _goerr error (nullable): an error 
 //
-// Loads a key file from the data in @bytes into an empty #GKeyFile structure.
-// If the object cannot be created then %error is set to a #GKeyFileError.
+// Loads a key file from the data in @bytes into an empty [struct@GLib.KeyFile]
+// structure.
+// 
+// If the object cannot be created then a [error@GLib.KeyFileError] is returned.
 func (keyFile *KeyFile) LoadFromBytes(bytes *Bytes, flags KeyFileFlags) (bool, error) {
 	var carg0 *C.GKeyFile     // in, none, converted
 	var carg1 *C.GBytes       // in, none, converted
@@ -20190,16 +20298,17 @@ func (keyFile *KeyFile) LoadFromBytes(bytes *Bytes, flags KeyFileFlags) (bool, e
 // The function takes the following parameters:
 // 
 // 	- data string: key file loaded in memory 
-// 	- length uint: the length of @data in bytes (or (gsize)-1 if data is nul-terminated) 
-// 	- flags KeyFileFlags: flags from #GKeyFileFlags 
+// 	- length uint: the length of @data in bytes (or `(gsize)-1` if data is nul-terminated) 
+// 	- flags KeyFileFlags: flags from [flags@GLib.KeyFileFlags] 
 // 
 // The function returns the following values:
 // 
 // 	- goret bool 
 // 	- _goerr error (nullable): an error 
 //
-// Loads a key file from memory into an empty #GKeyFile structure.
-// If the object cannot be created then %error is set to a #GKeyFileError.
+// Loads a key file from memory into an empty [struct@GLib.KeyFile] structure.
+// 
+// If the object cannot be created then a [error@GLib.KeyFileError is returned.
 func (keyFile *KeyFile) LoadFromData(data string, length uint, flags KeyFileFlags) (bool, error) {
 	var carg0 *C.GKeyFile     // in, none, converted
 	var carg1 *C.gchar        // in, none, string
@@ -20238,20 +20347,24 @@ func (keyFile *KeyFile) LoadFromData(data string, length uint, flags KeyFileFlag
 // The function takes the following parameters:
 // 
 // 	- file string: a relative path to a filename to open and parse 
-// 	- flags KeyFileFlags: flags from #GKeyFileFlags 
+// 	- flags KeyFileFlags: flags from [flags@GLib.KeyFileFlags] 
 // 
 // The function returns the following values:
 // 
-// 	- fullPath string: return location for a string containing the full path
-//   of the file, or %NULL 
+// 	- fullPath string: return location for a string
+//    containing the full path of the file, or `NULL` to ignore 
 // 	- goret bool 
 // 	- _goerr error (nullable): an error 
 //
-// This function looks for a key file named @file in the paths
-// returned from g_get_user_data_dir() and g_get_system_data_dirs(),
-// loads the file into @key_file and returns the file's full path in
-// @full_path.  If the file could not be loaded then an %error is
-// set to either a #GFileError or #GKeyFileError.
+// Looks for a key file named @file in the paths returned from
+// [func@GLib.get_user_data_dir] and [func@GLib.get_system_data_dirs].
+// 
+// The search algorithm from [method@GLib.KeyFile.load_from_dirs] is used. If
+// @file is found, it’s loaded into @key_file and its full path is returned in
+// @full_path.
+// 
+// If the file could not be loaded then either a [error@GLib.FileError] or
+// [error@GLib.KeyFileError] is returned.
 func (keyFile *KeyFile) LoadFromDataDirs(file string, flags KeyFileFlags) (string, bool, error) {
 	var carg0 *C.GKeyFile     // in, none, converted
 	var carg1 *C.gchar        // in, none, string
@@ -20291,25 +20404,32 @@ func (keyFile *KeyFile) LoadFromDataDirs(file string, flags KeyFileFlags) (strin
 // The function takes the following parameters:
 // 
 // 	- file string: a relative path to a filename to open and parse 
-// 	- searchDirs []string: %NULL-terminated array of directories to search 
-// 	- flags KeyFileFlags: flags from #GKeyFileFlags 
+// 	- searchDirs []string: `NULL`-terminated
+//    array of directories to search 
+// 	- flags KeyFileFlags: flags from [flags@GLib.KeyFileFlags] 
 // 
 // The function returns the following values:
 // 
-// 	- fullPath string: return location for a string containing the full path
-//   of the file, or %NULL 
+// 	- fullPath string: return location for a string
+//    containing the full path of the file, or `NULL` to ignore 
 // 	- goret bool 
 // 	- _goerr error (nullable): an error 
 //
-// This function looks for a key file named @file in the paths
-// specified in @search_dirs, loads the file into @key_file and
-// returns the file's full path in @full_path.
+// Looks for a key file named @file in the paths specified in @search_dirs,
+// loads the file into @key_file and returns the file’s full path in @full_path.
+// 
+// @search_dirs are checked in the order listed in the array, with the highest
+// priority directory listed first. Within each directory, @file is looked for.
+// If it’s not found, `-` characters in @file are progressively replaced with
+// directory separators to search subdirectories of the search directory. If the
+// file has not been found after all `-` characters have been replaced, the next
+// search directory in @search_dirs is checked.
 // 
 // If the file could not be found in any of the @search_dirs,
-// %G_KEY_FILE_ERROR_NOT_FOUND is returned. If
+// [error@GLib.KeyFileError.NOT_FOUND] is returned. If
 // the file is found but the OS returns an error when opening or reading the
-// file, a %G_FILE_ERROR is returned. If there is a problem parsing the file, a
-// %G_KEY_FILE_ERROR is returned.
+// file, a [error@GLib.FileError] is returned. If there is a problem parsing the
+// file, a [error@GLib.KeyFileError] is returned.
 func (keyFile *KeyFile) LoadFromDirs(file string, searchDirs []string, flags KeyFileFlags) (string, bool, error) {
 	var carg0 *C.GKeyFile     // in, none, converted
 	var carg1 *C.gchar        // in, none, string
@@ -20354,21 +20474,21 @@ func (keyFile *KeyFile) LoadFromDirs(file string, searchDirs []string, flags Key
 // The function takes the following parameters:
 // 
 // 	- file string: the path of a filename to load, in the GLib filename encoding 
-// 	- flags KeyFileFlags: flags from #GKeyFileFlags 
+// 	- flags KeyFileFlags: flags from [flags@GLib.KeyFileFlags] 
 // 
 // The function returns the following values:
 // 
 // 	- goret bool 
 // 	- _goerr error (nullable): an error 
 //
-// Loads a key file into an empty #GKeyFile structure.
+// Loads a key file into an empty [struct@GLib.KeyFile] structure.
 // 
 // If the OS returns an error when opening or reading the file, a
-// %G_FILE_ERROR is returned. If there is a problem parsing the file, a
-// %G_KEY_FILE_ERROR is returned.
+// [error@GLib.FileError] is returned. If there is a problem parsing the file,
+// a [error@GLib.KeyFileError] is returned.
 // 
-// This function will never return a %G_KEY_FILE_ERROR_NOT_FOUND error. If the
-// @file is not found, %G_FILE_ERROR_NOENT is returned.
+// This function will never return a [error@GLib.KeyFileError.NOT_FOUND]
+// error. If the @file is not found, [error@GLib.FileError.NOENT] is returned.
 func (keyFile *KeyFile) LoadFromFile(file string, flags KeyFileFlags) (bool, error) {
 	var carg0 *C.GKeyFile     // in, none, converted
 	var carg1 *C.gchar        // in, none, string
@@ -20403,8 +20523,8 @@ func (keyFile *KeyFile) LoadFromFile(file string, flags KeyFileFlags) (bool, err
 // 
 // The function takes the following parameters:
 // 
-// 	- groupName string (nullable): a group name, or %NULL 
-// 	- key string (nullable): a key 
+// 	- groupName string (nullable): a group name, or `NULL` to get a top-level comment 
+// 	- key string (nullable): a key, or `NULL` to get a group comment 
 // 
 // The function returns the following values:
 // 
@@ -20412,8 +20532,9 @@ func (keyFile *KeyFile) LoadFromFile(file string, flags KeyFileFlags) (bool, err
 // 	- _goerr error (nullable): an error 
 //
 // Removes a comment above @key from @group_name.
-// If @key is %NULL then @comment will be removed above @group_name.
-// If both @key and @group_name are %NULL, then @comment will
+// 
+// If @key is `NULL` then @comment will be removed above @group_name.
+// If both @key and @group_name are `NULL`, then @comment will
 // be removed above the first group in the file.
 func (keyFile *KeyFile) RemoveComment(groupName string, key string) (bool, error) {
 	var carg0 *C.GKeyFile // in, none, converted
@@ -20546,12 +20667,15 @@ func (keyFile *KeyFile) RemoveKey(groupName string, key string) (bool, error) {
 // 	- _goerr error (nullable): an error 
 //
 // Writes the contents of @key_file to @filename using
-// g_file_set_contents(). If you need stricter guarantees about durability of
-// the written file than are provided by g_file_set_contents(), use
-// g_file_set_contents_full() with the return value of g_key_file_to_data().
+// [func@GLib.file_set_contents].
+// 
+// If you need stricter guarantees about durability of
+// the written file than are provided by [func@GLib.file_set_contents], use
+// [func@GLib.file_set_contents_full] with the return value of
+// [method@GLib.KeyFile.to_data].
 // 
 // This function can fail for any of the reasons that
-// g_file_set_contents() may fail.
+// [func@GLib.file_set_contents] may fail.
 func (keyFile *KeyFile) SaveToFile(filename string) (bool, error) {
 	var carg0 *C.GKeyFile // in, none, converted
 	var carg1 *C.gchar    // in, none, string
@@ -20585,9 +20709,10 @@ func (keyFile *KeyFile) SaveToFile(filename string) (bool, error) {
 // 
 // 	- groupName string: a group name 
 // 	- key string: a key 
-// 	- value bool: %TRUE or %FALSE 
+// 	- value bool: true or false 
 //
 // Associates a new boolean value with @key under @group_name.
+// 
 // If @key cannot be found then it is created.
 func (keyFile *KeyFile) SetBoolean(groupName string, key string, value bool) {
 	var carg0 *C.GKeyFile // in, none, converted
@@ -20620,8 +20745,8 @@ func (keyFile *KeyFile) SetBoolean(groupName string, key string, value bool) {
 // 	- list []bool: an array of boolean values 
 //
 // Associates a list of boolean values with @key under @group_name.
+// 
 // If @key cannot be found then it is created.
-// If @group_name is %NULL, the start_group is used.
 func (keyFile *KeyFile) SetBooleanList(groupName string, key string, list []bool) {
 	var carg0 *C.GKeyFile // in, none, converted
 	var carg1 *C.gchar    // in, none, string
@@ -20650,8 +20775,8 @@ func (keyFile *KeyFile) SetBooleanList(groupName string, key string, list []bool
 // 
 // The function takes the following parameters:
 // 
-// 	- groupName string (nullable): a group name, or %NULL 
-// 	- key string (nullable): a key 
+// 	- groupName string (nullable): a group name, or `NULL` to write a top-level comment 
+// 	- key string (nullable): a key, or `NULL` to write a group comment 
 // 	- comment string: a comment 
 // 
 // The function returns the following values:
@@ -20661,11 +20786,11 @@ func (keyFile *KeyFile) SetBooleanList(groupName string, key string, list []bool
 //
 // Places a comment above @key from @group_name.
 // 
-// If @key is %NULL then @comment will be written above @group_name.
-// If both @key and @group_name  are %NULL, then @comment will be
+// If @key is `NULL` then @comment will be written above @group_name.
+// If both @key and @group_name are `NULL`, then @comment will be
 // written above the first group in the file.
 // 
-// Note that this function prepends a '#' comment marker to
+// Note that this function prepends a `#` comment marker to
 // each line of @comment.
 func (keyFile *KeyFile) SetComment(groupName string, key string, comment string) (bool, error) {
 	var carg0 *C.GKeyFile // in, none, converted
@@ -20715,6 +20840,7 @@ func (keyFile *KeyFile) SetComment(groupName string, key string, comment string)
 // 	- value float64: a double value 
 //
 // Associates a new double value with @key under @group_name.
+// 
 // If @key cannot be found then it is created.
 func (keyFile *KeyFile) SetDouble(groupName string, key string, value float64) {
 	var carg0 *C.GKeyFile // in, none, converted
@@ -20744,8 +20870,9 @@ func (keyFile *KeyFile) SetDouble(groupName string, key string, value float64) {
 // 	- key string: a key 
 // 	- list []float64: an array of double values 
 //
-// Associates a list of double values with @key under
-// @group_name.  If @key cannot be found then it is created.
+// Associates a list of double values with @key under @group_name.
+// 
+// If @key cannot be found then it is created.
 func (keyFile *KeyFile) SetDoubleList(groupName string, key string, list []float64) {
 	var carg0 *C.GKeyFile // in, none, converted
 	var carg1 *C.gchar    // in, none, string
@@ -20779,6 +20906,7 @@ func (keyFile *KeyFile) SetDoubleList(groupName string, key string, list []float
 // 	- value int64: an integer value 
 //
 // Associates a new integer value with @key under @group_name.
+// 
 // If @key cannot be found then it is created.
 func (keyFile *KeyFile) SetInt64(groupName string, key string, value int64) {
 	var carg0 *C.GKeyFile // in, none, converted
@@ -20809,6 +20937,7 @@ func (keyFile *KeyFile) SetInt64(groupName string, key string, value int64) {
 // 	- value int32: an integer value 
 //
 // Associates a new integer value with @key under @group_name.
+// 
 // If @key cannot be found then it is created.
 func (keyFile *KeyFile) SetInteger(groupName string, key string, value int32) {
 	var carg0 *C.GKeyFile // in, none, converted
@@ -20839,6 +20968,7 @@ func (keyFile *KeyFile) SetInteger(groupName string, key string, value int32) {
 // 	- list []int32: an array of integer values 
 //
 // Associates a list of integer values with @key under @group_name.
+// 
 // If @key cannot be found then it is created.
 func (keyFile *KeyFile) SetIntegerList(groupName string, key string, list []int32) {
 	var carg0 *C.GKeyFile // in, none, converted
@@ -20870,9 +21000,10 @@ func (keyFile *KeyFile) SetIntegerList(groupName string, key string, list []int3
 // 
 // 	- separator byte: the separator 
 //
-// Sets the character which is used to separate
-// values in lists. Typically ';' or ',' are used
-// as separators. The default list separator is ';'.
+// Sets the character which is used to separate values in lists.
+// 
+// Typically `;` or `,` are used as separators. The default list separator
+// is `;`.
 func (keyFile *KeyFile) SetListSeparator(separator byte) {
 	var carg0 *C.GKeyFile // in, none, converted
 	var carg1 C.gchar     // in, none, casted
@@ -20895,7 +21026,10 @@ func (keyFile *KeyFile) SetListSeparator(separator byte) {
 // 	- str string: a string 
 //
 // Associates a string value for @key and @locale under @group_name.
+// 
 // If the translation for @key cannot be found then it is created.
+// 
+// If @locale is `C` then the untranslated value is set (since GLib 2.84).
 func (keyFile *KeyFile) SetLocaleString(groupName string, key string, locale string, str string) {
 	var carg0 *C.GKeyFile // in, none, converted
 	var carg1 *C.gchar    // in, none, string
@@ -20928,11 +21062,15 @@ func (keyFile *KeyFile) SetLocaleString(groupName string, key string, locale str
 // 	- groupName string: a group name 
 // 	- key string: a key 
 // 	- locale string: a locale identifier 
-// 	- list []string: a %NULL-terminated array of locale string values 
+// 	- list []string: a `NULL`-terminated array of
+//    locale string values 
 //
 // Associates a list of string values for @key and @locale under
-// @group_name.  If the translation for @key cannot be found then
-// it is created.
+// @group_name.
+// 
+// If @locale is `C` then the untranslated value is set (since GLib 2.84).
+// 
+// If the translation for @key cannot be found then it is created.
 func (keyFile *KeyFile) SetLocaleStringList(groupName string, key string, locale string, list []string) {
 	var carg0 *C.GKeyFile // in, none, converted
 	var carg1 *C.gchar    // in, none, string
@@ -20970,9 +21108,10 @@ func (keyFile *KeyFile) SetLocaleStringList(groupName string, key string, locale
 // 	- str string: a string 
 //
 // Associates a new string value with @key under @group_name.
+// 
 // If @key cannot be found then it is created.
 // If @group_name cannot be found then it is created.
-// Unlike g_key_file_set_value(), this function handles characters
+// Unlike [method@GLib.KeyFile.set_value], this function handles characters
 // that need escaping, such as newlines.
 func (keyFile *KeyFile) SetString(groupName string, key string, str string) {
 	var carg0 *C.GKeyFile // in, none, converted
@@ -21001,9 +21140,11 @@ func (keyFile *KeyFile) SetString(groupName string, key string, str string) {
 // 
 // 	- groupName string: a group name 
 // 	- key string: a key 
-// 	- list []string: an array of string values 
+// 	- list []string: an array
+//    of string values 
 //
 // Associates a list of string values for @key under @group_name.
+// 
 // If @key cannot be found then it is created.
 // If @group_name cannot be found then it is created.
 func (keyFile *KeyFile) SetStringList(groupName string, key string, list []string) {
@@ -21039,6 +21180,7 @@ func (keyFile *KeyFile) SetStringList(groupName string, key string, list []strin
 // 	- value uint64: an integer value 
 //
 // Associates a new integer value with @key under @group_name.
+// 
 // If @key cannot be found then it is created.
 func (keyFile *KeyFile) SetUint64(groupName string, key string, value uint64) {
 	var carg0 *C.GKeyFile // in, none, converted
@@ -21073,7 +21215,7 @@ func (keyFile *KeyFile) SetUint64(groupName string, key string, value uint64) {
 // If @key cannot be found then it is created. If @group_name cannot
 // be found then it is created. To set an UTF-8 string which may contain
 // characters that need escaping (such as newlines or spaces), use
-// g_key_file_set_string().
+// [method@GLib.KeyFile.set_string].
 func (keyFile *KeyFile) SetValue(groupName string, key string, value string) {
 	var carg0 *C.GKeyFile // in, none, converted
 	var carg1 *C.gchar    // in, none, string
@@ -21100,14 +21242,13 @@ func (keyFile *KeyFile) SetValue(groupName string, key string, value string) {
 // The function returns the following values:
 // 
 // 	- length uint: return location for the length of the
-//   returned string, or %NULL 
+//   returned string, or `NULL` to ignore 
 // 	- goret string 
 // 	- _goerr error (nullable): an error 
 //
-// This function outputs @key_file as a string.
+// Outputs @key_file as a string.
 // 
-// Note that this function never reports an error,
-// so it is safe to pass %NULL as @error.
+// Note that this function never reports an error.
 func (keyFile *KeyFile) ToData() (uint, string, error) {
 	var carg0 *C.GKeyFile // in, none, converted
 	var carg1 C.gsize     // out, full, casted
@@ -21757,7 +21898,7 @@ func (_context *MainContext) Prepare() (int32, bool) {
 //
 // Acquires @context and sets it as the thread-default context for the
 // current thread. This will cause certain asynchronous operations
-// (such as most [gio][gio]-based I/O) which are
+// (such as most [Gio](../gio/index.html)-based I/O) which are
 // started in this thread to run under @context and deliver their
 // results to its main loop, rather than running under the global
 // default main context in the main thread. Note that calling this function
@@ -23209,7 +23350,7 @@ func (matchInfo *MatchInfo) Next() (bool, error) {
 
 // Node wraps GNode
 //
-// The #GNode struct represents one node in a [n-ary tree][glib-N-ary-Trees].
+// The #GNode struct represents one node in a [n-ary tree](data-structures.html#n-ary-trees).
 type Node struct {
 	*node
 }
@@ -23974,6 +24115,19 @@ func (_context *OptionContext) SetTranslationDomain(domain string) {
 
 // OptionEntry wraps GOptionEntry
 //
+// - %G_OPTION_ARG_NONE: %gboolean
+//     - %G_OPTION_ARG_STRING: %gchar*
+//     - %G_OPTION_ARG_INT: %gint
+//     - %G_OPTION_ARG_FILENAME: %gchar*
+//     - %G_OPTION_ARG_STRING_ARRAY: %gchar**
+//     - %G_OPTION_ARG_FILENAME_ARRAY: %gchar**
+//     - %G_OPTION_ARG_DOUBLE: %gdouble
+// 
+//     If @arg type is %G_OPTION_ARG_STRING or %G_OPTION_ARG_FILENAME,
+//     the location will contain a newly allocated string if the option
+//     was given. That string needs to be freed by the callee using g_free().
+//     Likewise if @arg type is %G_OPTION_ARG_STRING_ARRAY or
+//     %G_OPTION_ARG_FILENAME_ARRAY, the data should be freed using g_strfreev().
 // A GOptionEntry struct defines a single option. To have an effect, they
 // must be added to a #GOptionGroup with g_option_context_add_main_entries()
 // or g_option_group_add_entries().
@@ -26991,7 +27145,7 @@ func UnsafeScannerConfigToGlibFull(s *ScannerConfig) unsafe.Pointer {
 // Sequence wraps GSequence
 //
 // The #GSequence struct is an opaque data type representing a
-// [sequence][glib-Sequences] data type.
+// [sequence](data-structures.html#scalable-lists) data type.
 type Sequence struct {
 	*sequence
 }
@@ -31458,7 +31612,7 @@ func UnsafeVariantBuilderToGlibFull(v *VariantBuilder) unsafe.Pointer {
 // 
 // In most cases it is easier to place a #GVariantBuilder directly on
 // the stack of the calling function and initialise it with
-// g_variant_builder_init().
+// g_variant_builder_init_static().
 func NewVariantBuilder(typ *VariantType) *VariantBuilder {
 	var carg1 *C.GVariantType    // in, none, converted
 	var cret  *C.GVariantBuilder // return, full, converted
@@ -31799,6 +31953,19 @@ func (dict *VariantDict) Remove(key string) bool {
 //
 // A type in the [type@GLib.Variant] type system.
 // 
+// [type@GLib.Variant] types are represented as strings, but have a strict
+// syntax described below. All [type@GLib.VariantType]s passed to GLib must be
+// valid, and they are typically expected to be static (i.e. not provided by
+// user input) as they determine how binary [type@GLib.Variant] data is
+// interpreted.
+// 
+// To convert a static string to a [type@GLib.VariantType] in C, use the
+// [func@GLib.VARIANT_TYPE] casting macro. When GLib is compiled with checks
+// enabled, it will validate the type. To check if an arbitrary string is a
+// valid [type@GLib.VariantType], use [func@GLib.VariantType.string_is_valid].
+// 
+// ## GVariant Type System
+// 
 // This section introduces the [type@GLib.Variant] type system. It is based, in
 // large part, on the D-Bus type system, with two major changes and
 // some minor lifting of restrictions. The
@@ -32012,18 +32179,19 @@ func UnsafeVariantTypeToGlibFull(v *VariantType) unsafe.Pointer {
 // 
 // The function takes the following parameters:
 // 
-// 	- typeString string: a valid GVariant type string 
+// 	- typeString string: a valid [GVariant type string](./struct.VariantType.html#gvariant-type-strings) 
 // 
 // The function returns the following values:
 // 
 // 	- goret *VariantType 
 //
-// Creates a new #GVariantType corresponding to the type string given
-// by @type_string.  It is appropriate to call g_variant_type_free() on
-// the return value.
+// Creates a new [type@GLib.VariantType] corresponding to the type string given
+// by @type_string.
+// 
+// It is appropriate to call [method@GLib.VariantType.free] on the return value.
 // 
 // It is a programmer error to call this function with an invalid type
-// string.  Use g_variant_type_string_is_valid() if you are unsure.
+// string.  Use [func@GLib.VariantType.string_is_valid] if you are unsure.
 func NewVariantType(typeString string) *VariantType {
 	var carg1 *C.gchar        // in, none, string
 	var cret  *C.GVariantType // return, full, converted
@@ -32045,7 +32213,7 @@ func NewVariantType(typeString string) *VariantType {
 // 
 // The function takes the following parameters:
 // 
-// 	- element *VariantType: a #GVariantType 
+// 	- element *VariantType: an element type 
 // 
 // The function returns the following values:
 // 
@@ -32054,7 +32222,7 @@ func NewVariantType(typeString string) *VariantType {
 // Constructs the type corresponding to an array of elements of the
 // type @type.
 // 
-// It is appropriate to call g_variant_type_free() on the return value.
+// It is appropriate to call [method@GLib.VariantType.first] on the return value.
 func NewVariantTypeArray(element *VariantType) *VariantType {
 	var carg1 *C.GVariantType // in, none, converted
 	var cret  *C.GVariantType // return, full, converted
@@ -32075,8 +32243,8 @@ func NewVariantTypeArray(element *VariantType) *VariantType {
 // 
 // The function takes the following parameters:
 // 
-// 	- key *VariantType: a basic #GVariantType 
-// 	- value *VariantType: a #GVariantType 
+// 	- key *VariantType: a basic type to use for the key 
+// 	- value *VariantType: a type to use for the value 
 // 
 // The function returns the following values:
 // 
@@ -32085,7 +32253,7 @@ func NewVariantTypeArray(element *VariantType) *VariantType {
 // Constructs the type corresponding to a dictionary entry with a key
 // of type @key and a value of type @value.
 // 
-// It is appropriate to call g_variant_type_free() on the return value.
+// It is appropriate to call [method@GLib.VariantType.free] on the return value.
 func NewVariantTypeDictEntry(key *VariantType, value *VariantType) *VariantType {
 	var carg1 *C.GVariantType // in, none, converted
 	var carg2 *C.GVariantType // in, none, converted
@@ -32109,16 +32277,16 @@ func NewVariantTypeDictEntry(key *VariantType, value *VariantType) *VariantType 
 // 
 // The function takes the following parameters:
 // 
-// 	- element *VariantType: a #GVariantType 
+// 	- element *VariantType: an element type 
 // 
 // The function returns the following values:
 // 
 // 	- goret *VariantType 
 //
-// Constructs the type corresponding to a maybe instance containing
-// type @type or Nothing.
+// Constructs the type corresponding to a ‘maybe’ instance containing
+// type @type or `Nothing`.
 // 
-// It is appropriate to call g_variant_type_free() on the return value.
+// It is appropriate to call [method@GLib.VariantType.free] on the return value.
 func NewVariantTypeMaybe(element *VariantType) *VariantType {
 	var carg1 *C.GVariantType // in, none, converted
 	var cret  *C.GVariantType // return, full, converted
@@ -32139,7 +32307,7 @@ func NewVariantTypeMaybe(element *VariantType) *VariantType {
 // 
 // The function takes the following parameters:
 // 
-// 	- items []*VariantType: an array of #GVariantTypes, one for each item 
+// 	- items []*VariantType: an array of types, one for each item 
 // 
 // The function returns the following values:
 // 
@@ -32147,10 +32315,10 @@ func NewVariantTypeMaybe(element *VariantType) *VariantType {
 //
 // Constructs a new tuple type, from @items.
 // 
-// @length is the number of items in @items, or -1 to indicate that
-// @items is %NULL-terminated.
+// @length is the number of items in @items, or `-1` to indicate that
+// @items is `NULL`-terminated.
 // 
-// It is appropriate to call g_variant_type_free() on the return value.
+// It is appropriate to call [method@GLib.VariantType.free] on the return value.
 func NewVariantTypeTuple(items []*VariantType) *VariantType {
 	var carg1 **C.GVariantType // in, transfer: none, C Pointers: 2, Name: array[VariantType], array (inner: *typesystem.Record, length-by: carg2)
 	var carg2 C.gint           // implicit
@@ -32233,9 +32401,11 @@ func VariantTypeStringGetDepth_(typeString string) uint {
 // 
 // 	- goret bool 
 //
-// Checks if @type_string is a valid GVariant type string.  This call is
-// equivalent to calling g_variant_type_string_scan() and confirming
-// that the following character is a nul terminator.
+// Checks if @type_string is a valid
+// [GVariant type string](./struct.VariantType.html#gvariant-type-strings).
+// 
+// This call is equivalent to calling [func@GLib.VariantType.string_scan] and
+// confirming that the following character is a nul terminator.
 func VariantTypeStringIsValid(typeString string) bool {
 	var carg1 *C.gchar   // in, none, string
 	var cret  C.gboolean // return
@@ -32260,14 +32430,15 @@ func VariantTypeStringIsValid(typeString string) bool {
 // The function takes the following parameters:
 // 
 // 	- str string: a pointer to any string 
-// 	- limit string (nullable): the end of @string, or %NULL 
+// 	- limit string (nullable): the end of @string 
 // 
 // The function returns the following values:
 // 
-// 	- endptr string: location to store the end pointer, or %NULL 
+// 	- endptr string: location to store the end pointer 
 // 	- goret bool 
 //
 // Scan for a single complete and valid GVariant type string in @string.
+// 
 // The memory pointed to by @limit (or bytes beyond it) is never
 // accessed.
 // 
@@ -32279,7 +32450,7 @@ func VariantTypeStringIsValid(typeString string) bool {
 // string does not end before @limit then %FALSE is returned.
 // 
 // For the simple case of checking if a string is a valid type string,
-// see g_variant_type_string_is_valid().
+// see [func@GLib.VariantType.string_is_valid].
 func VariantTypeStringScan(str string, limit string) (string, bool) {
 	var carg1 *C.gchar   // in, none, string
 	var carg2 *C.gchar   // in, none, string, nullable-string
@@ -32315,8 +32486,10 @@ func VariantTypeStringScan(str string, limit string) (string, bool) {
 // 
 // 	- goret *VariantType 
 //
-// Makes a copy of a #GVariantType.  It is appropriate to call
-// g_variant_type_free() on the return value.  @type may not be %NULL.
+// Makes a copy of a [type@GLib.VariantType].
+// 
+// It is appropriate to call [method@GLib.VariantType.free] on the return value.
+// @type may not be `NULL`.
 func (typ *VariantType) Copy() *VariantType {
 	var carg0 *C.GVariantType // in, none, converted
 	var cret  *C.GVariantType // return, full, converted
@@ -32339,9 +32512,10 @@ func (typ *VariantType) Copy() *VariantType {
 // 
 // 	- goret string 
 //
-// Returns a newly-allocated copy of the type string corresponding to
-// @type.  The returned string is nul-terminated.  It is appropriate to
-// call g_free() on the return value.
+// Returns a newly-allocated copy of the type string corresponding to @type.
+// 
+// The returned string is nul-terminated.  It is appropriate to call
+// [func@GLib.free] on the return value.
 func (typ *VariantType) DupString() string {
 	var carg0 *C.GVariantType // in, none, converted
 	var cret  *C.gchar        // return, full, string
@@ -32365,9 +32539,9 @@ func (typ *VariantType) DupString() string {
 // 
 // 	- goret *VariantType 
 //
-// Determines the element type of an array or maybe type.
+// Determines the element type of an array or ‘maybe’ type.
 // 
-// This function may only be used with array or maybe types.
+// This function may only be used with array or ‘maybe’ types.
 func (typ *VariantType) Element() *VariantType {
 	var carg0 *C.GVariantType // in, none, converted
 	var cret  *C.GVariantType // return, none, converted
@@ -32388,25 +32562,25 @@ func (typ *VariantType) Element() *VariantType {
 // 
 // The function returns the following values:
 // 
-// 	- goret *VariantType 
+// 	- goret *VariantType (nullable) 
 //
 // Determines the first item type of a tuple or dictionary entry
 // type.
 // 
 // This function may only be used with tuple or dictionary entry types,
 // but must not be used with the generic tuple type
-// %G_VARIANT_TYPE_TUPLE.
+// `G_VARIANT_TYPE_TUPLE`.
 // 
 // In the case of a dictionary entry type, this returns the type of
 // the key.
 // 
-// %NULL is returned in case of @type being %G_VARIANT_TYPE_UNIT.
+// `NULL` is returned in case of @type being `G_VARIANT_TYPE_UNIT`.
 // 
-// This call, together with g_variant_type_next() provides an iterator
+// This call, together with [method@GLib.VariantType.next] provides an iterator
 // interface over tuple and dictionary entry types.
 func (typ *VariantType) First() *VariantType {
 	var carg0 *C.GVariantType // in, none, converted
-	var cret  *C.GVariantType // return, none, converted
+	var cret  *C.GVariantType // return, none, converted, nullable
 
 	carg0 = (*C.GVariantType)(UnsafeVariantTypeToGlibNone(typ))
 
@@ -32415,7 +32589,9 @@ func (typ *VariantType) First() *VariantType {
 
 	var goret *VariantType
 
-	goret = UnsafeVariantTypeFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeVariantTypeFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }
@@ -32426,9 +32602,10 @@ func (typ *VariantType) First() *VariantType {
 // 
 // 	- goret uint 
 //
-// Returns the length of the type string corresponding to the given
-// @type.  This function must be used to determine the valid extent of
-// the memory region returned by g_variant_type_peek_string().
+// Returns the length of the type string corresponding to the given @type.
+// 
+// This function must be used to determine the valid extent of
+// the memory region returned by [method@GLib.VariantType.peek_string].
 func (typ *VariantType) GetStringLength() uint {
 	var carg0 *C.GVariantType // in, none, converted
 	var cret  C.gsize         // return, none, casted
@@ -32451,11 +32628,12 @@ func (typ *VariantType) GetStringLength() uint {
 // 
 // 	- goret bool 
 //
-// Determines if the given @type is an array type.  This is true if the
-// type string for @type starts with an 'a'.
+// Determines if the given @type is an array type.
 // 
-// This function returns %TRUE for any indefinite type for which every
-// definite subtype is an array type -- %G_VARIANT_TYPE_ARRAY, for
+// This is true if the type string for @type starts with an `a`.
+// 
+// This function returns true for any indefinite type for which every
+// definite subtype is an array type — `G_VARIANT_TYPE_ARRAY`, for
 // example.
 func (typ *VariantType) IsArray() bool {
 	var carg0 *C.GVariantType // in, none, converted
@@ -32488,8 +32666,8 @@ func (typ *VariantType) IsArray() bool {
 // 
 // Only a basic type may be used as the key of a dictionary entry.
 // 
-// This function returns %FALSE for all indefinite types except
-// %G_VARIANT_TYPE_BASIC.
+// This function returns `FALSE` for all indefinite types except
+// `G_VARIANT_TYPE_BASIC`.
 func (typ *VariantType) IsBasic() bool {
 	var carg0 *C.GVariantType // in, none, converted
 	var cret  C.gboolean      // return
@@ -32519,8 +32697,8 @@ func (typ *VariantType) IsBasic() bool {
 // Container types are any array, maybe, tuple, or dictionary
 // entry types plus the variant type.
 // 
-// This function returns %TRUE for any indefinite type for which every
-// definite subtype is a container -- %G_VARIANT_TYPE_ARRAY, for
+// This function returns true for any indefinite type for which every
+// definite subtype is a container — `G_VARIANT_TYPE_ARRAY`, for
 // example.
 func (typ *VariantType) IsContainer() bool {
 	var carg0 *C.GVariantType // in, none, converted
@@ -32549,13 +32727,13 @@ func (typ *VariantType) IsContainer() bool {
 // Determines if the given @type is definite (ie: not indefinite).
 // 
 // A type is definite if its type string does not contain any indefinite
-// type characters ('*', '?', or 'r').
+// type characters (`*`, `?`, or `r`).
 // 
-// A #GVariant instance may not have an indefinite type, so calling
-// this function on the result of g_variant_get_type() will always
-// result in %TRUE being returned.  Calling this function on an
-// indefinite type like %G_VARIANT_TYPE_ARRAY, however, will result in
-// %FALSE being returned.
+// A [type@GLib.Variant] instance may not have an indefinite type, so calling
+// this function on the result of [method@GLib.Variant.get_type] will always
+// result in true being returned.  Calling this function on an
+// indefinite type like `G_VARIANT_TYPE_ARRAY`, however, will result in
+// `FALSE` being returned.
 func (typ *VariantType) IsDefinite() bool {
 	var carg0 *C.GVariantType // in, none, converted
 	var cret  C.gboolean      // return
@@ -32580,12 +32758,13 @@ func (typ *VariantType) IsDefinite() bool {
 // 
 // 	- goret bool 
 //
-// Determines if the given @type is a dictionary entry type.  This is
-// true if the type string for @type starts with a '{'.
+// Determines if the given @type is a dictionary entry type.
 // 
-// This function returns %TRUE for any indefinite type for which every
-// definite subtype is a dictionary entry type --
-// %G_VARIANT_TYPE_DICT_ENTRY, for example.
+// This is true if the type string for @type starts with a `{`.
+// 
+// This function returns true for any indefinite type for which every
+// definite subtype is a dictionary entry type —
+// `G_VARIANT_TYPE_DICT_ENTRY`, for example.
 func (typ *VariantType) IsDictEntry() bool {
 	var carg0 *C.GVariantType // in, none, converted
 	var cret  C.gboolean      // return
@@ -32610,11 +32789,12 @@ func (typ *VariantType) IsDictEntry() bool {
 // 
 // 	- goret bool 
 //
-// Determines if the given @type is a maybe type.  This is true if the
-// type string for @type starts with an 'm'.
+// Determines if the given @type is a ‘maybe’ type.
 // 
-// This function returns %TRUE for any indefinite type for which every
-// definite subtype is a maybe type -- %G_VARIANT_TYPE_MAYBE, for
+// This is true if the type string for @type starts with an `m`.
+// 
+// This function returns true for any indefinite type for which every
+// definite subtype is a ‘maybe’ type — `G_VARIANT_TYPE_MAYBE`, for
 // example.
 func (typ *VariantType) IsMaybe() bool {
 	var carg0 *C.GVariantType // in, none, converted
@@ -32638,7 +32818,7 @@ func (typ *VariantType) IsMaybe() bool {
 // 
 // The function takes the following parameters:
 // 
-// 	- supertype *VariantType: a #GVariantType 
+// 	- supertype *VariantType: type of potential supertype 
 // 
 // The function returns the following values:
 // 
@@ -32646,7 +32826,7 @@ func (typ *VariantType) IsMaybe() bool {
 //
 // Checks if @type is a subtype of @supertype.
 // 
-// This function returns %TRUE if @type is a subtype of @supertype.  All
+// This function returns true if @type is a subtype of @supertype.  All
 // types are considered to be subtypes of themselves.  Aside from that,
 // only indefinite types can have subtypes.
 func (typ *VariantType) IsSubtypeOf(supertype *VariantType) bool {
@@ -32676,12 +32856,13 @@ func (typ *VariantType) IsSubtypeOf(supertype *VariantType) bool {
 // 
 // 	- goret bool 
 //
-// Determines if the given @type is a tuple type.  This is true if the
-// type string for @type starts with a '(' or if @type is
-// %G_VARIANT_TYPE_TUPLE.
+// Determines if the given @type is a tuple type.
 // 
-// This function returns %TRUE for any indefinite type for which every
-// definite subtype is a tuple type -- %G_VARIANT_TYPE_TUPLE, for
+// This is true if the type string for @type starts with a `(` or if @type is
+// `G_VARIANT_TYPE_TUPLE`.
+// 
+// This function returns true for any indefinite type for which every
+// definite subtype is a tuple type — `G_VARIANT_TYPE_TUPLE`, for
 // example.
 func (typ *VariantType) IsTuple() bool {
 	var carg0 *C.GVariantType // in, none, converted
@@ -32736,7 +32917,7 @@ func (typ *VariantType) IsVariant() bool {
 // 
 // This function may only be used with a dictionary entry type.  Other
 // than the additional restriction, this call is equivalent to
-// g_variant_type_first().
+// [method@GLib.VariantType.first].
 func (typ *VariantType) Key() *VariantType {
 	var carg0 *C.GVariantType // in, none, converted
 	var cret  *C.GVariantType // return, none, converted
@@ -32764,10 +32945,10 @@ func (typ *VariantType) Key() *VariantType {
 // 
 // This function may only be used with tuple or dictionary entry types,
 // but must not be used with the generic tuple type
-// %G_VARIANT_TYPE_TUPLE.
+// `G_VARIANT_TYPE_TUPLE`.
 // 
 // In the case of a dictionary entry type, this function will always
-// return 2.
+// return `2`.
 func (typ *VariantType) NItems() uint {
 	var carg0 *C.GVariantType // in, none, converted
 	var cret  C.gsize         // return, none, casted
@@ -32788,22 +32969,22 @@ func (typ *VariantType) NItems() uint {
 // 
 // The function returns the following values:
 // 
-// 	- goret *VariantType 
+// 	- goret *VariantType (nullable) 
 //
 // Determines the next item type of a tuple or dictionary entry
 // type.
 // 
 // @type must be the result of a previous call to
-// g_variant_type_first() or g_variant_type_next().
+// [method@GLib.VariantType.first] or [method@GLib.VariantType.next].
 // 
 // If called on the key type of a dictionary entry then this call
 // returns the value type.  If called on the value type of a dictionary
-// entry then this call returns %NULL.
+// entry then this call returns `NULL`.
 // 
-// For tuples, %NULL is returned when @type is the last item in a tuple.
+// For tuples, `NULL` is returned when @type is the last item in the tuple.
 func (typ *VariantType) Next() *VariantType {
 	var carg0 *C.GVariantType // in, none, converted
-	var cret  *C.GVariantType // return, none, converted
+	var cret  *C.GVariantType // return, none, converted, nullable
 
 	carg0 = (*C.GVariantType)(UnsafeVariantTypeToGlibNone(typ))
 
@@ -32812,7 +32993,9 @@ func (typ *VariantType) Next() *VariantType {
 
 	var goret *VariantType
 
-	goret = UnsafeVariantTypeFromGlibNone(unsafe.Pointer(cret))
+	if cret != nil {
+		goret = UnsafeVariantTypeFromGlibNone(unsafe.Pointer(cret))
+	}
 
 	return goret
 }

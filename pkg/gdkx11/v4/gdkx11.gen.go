@@ -66,114 +66,6 @@ func (e X11DeviceType) String() string {
 	}
 }
 
-// X11DeviceGetID wraps gdk_x11_device_get_id
-// 
-// The function takes the following parameters:
-// 
-// 	- device X11DeviceXI2: a `GdkDevice` 
-// 
-// The function returns the following values:
-// 
-// 	- goret int32 
-//
-// Returns the device ID as seen by XInput2.
-func X11DeviceGetID(device X11DeviceXI2) int32 {
-	var carg1 *C.GdkDevice // in, none, converted
-	var cret  C.int        // return, none, casted
-
-	carg1 = (*C.GdkDevice)(UnsafeX11DeviceXI2ToGlibNone(device))
-
-	cret = C.gdk_x11_device_get_id(carg1)
-	runtime.KeepAlive(device)
-
-	var goret int32
-
-	goret = int32(cret)
-
-	return goret
-}
-
-// X11DeviceManagerLookup wraps gdk_x11_device_manager_lookup
-// 
-// The function takes the following parameters:
-// 
-// 	- deviceManager X11DeviceManagerXI2: a `GdkDeviceManager` 
-// 	- deviceId int32: a device ID, as understood by the XInput2 protocol 
-// 
-// The function returns the following values:
-// 
-// 	- goret X11DeviceXI2 (nullable) 
-//
-// Returns the `GdkDevice` that wraps the given device ID.
-func X11DeviceManagerLookup(deviceManager X11DeviceManagerXI2, deviceId int32) X11DeviceXI2 {
-	var carg1 *C.GdkX11DeviceManagerXI2 // in, none, converted
-	var carg2 C.int                     // in, none, casted
-	var cret  *C.GdkDevice              // return, none, converted, nullable
-
-	carg1 = (*C.GdkX11DeviceManagerXI2)(UnsafeX11DeviceManagerXI2ToGlibNone(deviceManager))
-	carg2 = C.int(deviceId)
-
-	cret = C.gdk_x11_device_manager_lookup(carg1, carg2)
-	runtime.KeepAlive(deviceManager)
-	runtime.KeepAlive(deviceId)
-
-	var goret X11DeviceXI2
-
-	if cret != nil {
-		goret = UnsafeX11DeviceXI2FromGlibNone(unsafe.Pointer(cret))
-	}
-
-	return goret
-}
-
-// X11FreeCompoundText wraps gdk_x11_free_compound_text
-// 
-// The function takes the following parameters:
-// 
-// 	- ctext *uint8: The pointer stored in @ctext from a call to
-//   gdk_x11_display_string_to_compound_text(). 
-//
-// Frees the data returned from gdk_x11_display_string_to_compound_text().
-func X11FreeCompoundText(ctext *uint8) {
-	var carg1 *C.guchar // in, transfer: none, C Pointers: 1, Name: guint8
-
-	_ = ctext
-	_ = carg1
-	panic("unimplemented conversion of *uint8 (guchar*)")
-
-	C.gdk_x11_free_compound_text(carg1)
-	runtime.KeepAlive(ctext)
-}
-
-// X11GetServerTime wraps gdk_x11_get_server_time
-// 
-// The function takes the following parameters:
-// 
-// 	- surface X11Surface: a `GdkSurface`, used for communication
-//   with the server. The surface must have `GDK_PROPERTY_CHANGE_MASK` in
-//   its events mask or a hang will result. 
-// 
-// The function returns the following values:
-// 
-// 	- goret uint32 
-//
-// Routine to get the current X server time stamp.
-func X11GetServerTime(surface X11Surface) uint32 {
-	var carg1 *C.GdkSurface // in, none, converted
-	var cret  C.guint32     // return, none, casted
-
-	carg1 = (*C.GdkSurface)(UnsafeX11SurfaceToGlibNone(surface))
-
-	cret = C.gdk_x11_get_server_time(carg1)
-	runtime.KeepAlive(surface)
-
-	var goret uint32
-
-	goret = uint32(cret)
-
-	return goret
-}
-
 // X11SetSmClientID wraps gdk_x11_set_sm_client_id
 // 
 // The function takes the following parameters:
@@ -221,6 +113,15 @@ func unsafeWrapX11AppLaunchContext(base *gobject.ObjectInstance) *X11AppLaunchCo
 			},
 		},
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeX11AppLaunchContext,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapX11AppLaunchContext(inst)
+		},
+	)
 }
 
 func marshalX11AppLaunchContextInstance(p unsafe.Pointer) (any, error) {
@@ -276,6 +177,15 @@ func unsafeWrapX11DeviceManagerXI2(base *gobject.ObjectInstance) *X11DeviceManag
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeX11DeviceManagerXI2,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapX11DeviceManagerXI2(inst)
+		},
+	)
+}
+
 func marshalX11DeviceManagerXI2Instance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapX11DeviceManagerXI2(gobject.ValueFromNative(p).Object()), nil
 }
@@ -329,6 +239,15 @@ func unsafeWrapX11DeviceXI2(base *gobject.ObjectInstance) *X11DeviceXI2Instance 
 			ObjectInstance: *base,
 		},
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeX11DeviceXI2,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapX11DeviceXI2(inst)
+		},
+	)
 }
 
 func marshalX11DeviceXI2Instance(p unsafe.Pointer) (any, error) {
@@ -416,26 +335,6 @@ type X11Display interface {
 	// on @display. This surface is implicitly created by GDK.
 	// See gdk_x11_surface_set_group().
 	GetDefaultGroup() gdk.Surface
-	// GetEglVersion wraps gdk_x11_display_get_egl_version
-	// 
-	// The function returns the following values:
-	// 
-	// 	- major int32: return location for the EGL major version 
-	// 	- minor int32: return location for the EGL minor version 
-	// 	- goret bool 
-	//
-	// Retrieves the version of the EGL implementation.
-	GetEglVersion() (int32, int32, bool)
-	// GetGLXVersion wraps gdk_x11_display_get_glx_version
-	// 
-	// The function returns the following values:
-	// 
-	// 	- major int32: return location for the GLX major version 
-	// 	- minor int32: return location for the GLX minor version 
-	// 	- goret bool 
-	//
-	// Retrieves the version of the GLX implementation.
-	GetGLXVersion() (int32, int32, bool)
 	// GetPrimaryMonitor wraps gdk_x11_display_get_primary_monitor
 	// 
 	// The function returns the following values:
@@ -525,6 +424,15 @@ func unsafeWrapX11Display(base *gobject.ObjectInstance) *X11DisplayInstance {
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeX11Display,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapX11Display(inst)
+		},
+	)
+}
+
 func marshalX11DisplayInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapX11Display(gobject.ValueFromNative(p).Object()), nil
 }
@@ -556,41 +464,6 @@ func UnsafeX11DisplayToGlibNone(c X11Display) unsafe.Pointer {
 // UnsafeX11DisplayToGlibFull is used to convert the instance to it's C value GdkX11Display, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeX11DisplayToGlibFull(c X11Display) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
-}
-
-// X11DisplayOpen wraps gdk_x11_display_open
-// 
-// The function takes the following parameters:
-// 
-// 	- displayName string (nullable): name of the X display.
-//   See the XOpenDisplay() for details. 
-// 
-// The function returns the following values:
-// 
-// 	- goret gdk.Display (nullable) 
-//
-// Tries to open a new display to the X server given by
-// @display_name. If opening the display fails, %NULL is
-// returned.
-func X11DisplayOpen(displayName string) gdk.Display {
-	var carg1 *C.char       // in, none, string, nullable-string
-	var cret  *C.GdkDisplay // return, full, converted, nullable
-
-	if displayName != "" {
-		carg1 = (*C.char)(unsafe.Pointer(C.CString(displayName)))
-		defer C.free(unsafe.Pointer(carg1))
-	}
-
-	cret = C.gdk_x11_display_open(carg1)
-	runtime.KeepAlive(displayName)
-
-	var goret gdk.Display
-
-	if cret != nil {
-		goret = gdk.UnsafeDisplayFromGlibFull(unsafe.Pointer(cret))
-	}
-
-	return goret
 }
 
 // X11DisplaySetProgramClass wraps gdk_x11_display_set_program_class
@@ -700,72 +573,6 @@ func (display *X11DisplayInstance) GetDefaultGroup() gdk.Surface {
 	goret = gdk.UnsafeSurfaceFromGlibNone(unsafe.Pointer(cret))
 
 	return goret
-}
-
-// GetEglVersion wraps gdk_x11_display_get_egl_version
-// 
-// The function returns the following values:
-// 
-// 	- major int32: return location for the EGL major version 
-// 	- minor int32: return location for the EGL minor version 
-// 	- goret bool 
-//
-// Retrieves the version of the EGL implementation.
-func (display *X11DisplayInstance) GetEglVersion() (int32, int32, bool) {
-	var carg0 *C.GdkDisplay // in, none, converted
-	var carg1 C.int         // out, full, casted
-	var carg2 C.int         // out, full, casted
-	var cret  C.gboolean    // return
-
-	carg0 = (*C.GdkDisplay)(UnsafeX11DisplayToGlibNone(display))
-
-	cret = C.gdk_x11_display_get_egl_version(carg0, &carg1, &carg2)
-	runtime.KeepAlive(display)
-
-	var major int32
-	var minor int32
-	var goret bool
-
-	major = int32(carg1)
-	minor = int32(carg2)
-	if cret != 0 {
-		goret = true
-	}
-
-	return major, minor, goret
-}
-
-// GetGLXVersion wraps gdk_x11_display_get_glx_version
-// 
-// The function returns the following values:
-// 
-// 	- major int32: return location for the GLX major version 
-// 	- minor int32: return location for the GLX minor version 
-// 	- goret bool 
-//
-// Retrieves the version of the GLX implementation.
-func (display *X11DisplayInstance) GetGLXVersion() (int32, int32, bool) {
-	var carg0 *C.GdkDisplay // in, none, converted
-	var carg1 C.int         // out, full, casted
-	var carg2 C.int         // out, full, casted
-	var cret  C.gboolean    // return
-
-	carg0 = (*C.GdkDisplay)(UnsafeX11DisplayToGlibNone(display))
-
-	cret = C.gdk_x11_display_get_glx_version(carg0, &carg1, &carg2)
-	runtime.KeepAlive(display)
-
-	var major int32
-	var minor int32
-	var goret bool
-
-	major = int32(carg1)
-	minor = int32(carg2)
-	if cret != 0 {
-		goret = true
-	}
-
-	return major, minor, goret
 }
 
 // GetPrimaryMonitor wraps gdk_x11_display_get_primary_monitor
@@ -944,6 +751,15 @@ func unsafeWrapX11Drag(base *gobject.ObjectInstance) *X11DragInstance {
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeX11Drag,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapX11Drag(inst)
+		},
+	)
+}
+
 func marshalX11DragInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapX11Drag(gobject.ValueFromNative(p).Object()), nil
 }
@@ -1001,6 +817,15 @@ func unsafeWrapX11GLContext(base *gobject.ObjectInstance) *X11GLContextInstance 
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeX11GLContext,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapX11GLContext(inst)
+		},
+	)
+}
+
 func marshalX11GLContextInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapX11GLContext(gobject.ValueFromNative(p).Object()), nil
 }
@@ -1046,19 +871,6 @@ var _ X11Monitor = (*X11MonitorInstance)(nil)
 type X11Monitor interface {
 	gdk.Monitor
 	upcastToGdkX11Monitor() *X11MonitorInstance
-
-	// GetWorkarea wraps gdk_x11_monitor_get_workarea
-	// 
-	// The function returns the following values:
-	// 
-	// 	- workarea gdk.Rectangle: a `GdkRectangle` to be filled with the monitor workarea 
-	//
-	// Retrieves the size and position of the “work area” on a monitor
-	// within the display coordinate space.
-	// 
-	// The returned geometry is in ”application pixels”, not in ”device pixels”
-	// (see [method@Gdk.Monitor.get_scale_factor]).
-	GetWorkarea() gdk.Rectangle
 }
 
 func unsafeWrapX11Monitor(base *gobject.ObjectInstance) *X11MonitorInstance {
@@ -1067,6 +879,15 @@ func unsafeWrapX11Monitor(base *gobject.ObjectInstance) *X11MonitorInstance {
 			ObjectInstance: *base,
 		},
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeX11Monitor,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapX11Monitor(inst)
+		},
+	)
 }
 
 func marshalX11MonitorInstance(p unsafe.Pointer) (any, error) {
@@ -1102,35 +923,6 @@ func UnsafeX11MonitorToGlibFull(c X11Monitor) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// GetWorkarea wraps gdk_x11_monitor_get_workarea
-// 
-// The function returns the following values:
-// 
-// 	- workarea gdk.Rectangle: a `GdkRectangle` to be filled with the monitor workarea 
-//
-// Retrieves the size and position of the “work area” on a monitor
-// within the display coordinate space.
-// 
-// The returned geometry is in ”application pixels”, not in ”device pixels”
-// (see [method@Gdk.Monitor.get_scale_factor]).
-func (monitor *X11MonitorInstance) GetWorkarea() gdk.Rectangle {
-	var carg0 *C.GdkMonitor  // in, none, converted
-	var carg1 C.GdkRectangle // out, transfer: none, C Pointers: 0, Name: Rectangle, caller-allocates
-
-	carg0 = (*C.GdkMonitor)(UnsafeX11MonitorToGlibNone(monitor))
-
-	C.gdk_x11_monitor_get_workarea(carg0, &carg1)
-	runtime.KeepAlive(monitor)
-
-	var workarea gdk.Rectangle
-
-	_ = workarea
-	_ = carg1
-	panic("unimplemented conversion of gdk.Rectangle (GdkRectangle)")
-
-	return workarea
-}
-
 // X11ScreenInstance is the instance type used by all types extending GdkX11Screen. It is used internally by the bindings. Users should use the interface [X11Screen] instead.
 type X11ScreenInstance struct {
 	_ [0]func() // equal guard
@@ -1144,67 +936,6 @@ type X11Screen interface {
 	gobject.Object
 	upcastToGdkX11Screen() *X11ScreenInstance
 
-	// GetCurrentDesktop wraps gdk_x11_screen_get_current_desktop
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret uint32 
-	//
-	// Returns the current workspace for @screen when running under a
-	// window manager that supports multiple workspaces, as described
-	// in the
-	// [Extended Window Manager Hints](http://www.freedesktop.org/Standards/wm-spec) specification.
-	GetCurrentDesktop() uint32
-	// GetNumberOfDesktops wraps gdk_x11_screen_get_number_of_desktops
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret uint32 
-	//
-	// Returns the number of workspaces for @screen when running under a
-	// window manager that supports multiple workspaces, as described
-	// in the
-	// [Extended Window Manager Hints](http://www.freedesktop.org/Standards/wm-spec) specification.
-	GetNumberOfDesktops() uint32
-	// GetScreenNumber wraps gdk_x11_screen_get_screen_number
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret int32 
-	//
-	// Returns the index of a `GdkX11Screen`.
-	GetScreenNumber() int32
-	// GetWindowManagerName wraps gdk_x11_screen_get_window_manager_name
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret string 
-	//
-	// Returns the name of the window manager for @screen.
-	GetWindowManagerName() string
-	// SupportsNetWmHint wraps gdk_x11_screen_supports_net_wm_hint
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- propertyName string: name of the WM property 
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret bool 
-	//
-	// This function is specific to the X11 backend of GDK, and indicates
-	// whether the window manager supports a certain hint from the
-	// [Extended Window Manager Hints](http://www.freedesktop.org/Standards/wm-spec) specification.
-	// 
-	// When using this function, keep in mind that the window manager
-	// can change over time; so you shouldn’t use this function in
-	// a way that impacts persistent application state. A common bug
-	// is that your application can start up before the window manager
-	// does when the user logs in, and before the window manager starts
-	// gdk_x11_screen_supports_net_wm_hint() will return %FALSE for every property.
-	// You can monitor the window_manager_changed signal on `GdkX11Screen` to detect
-	// a window manager change.
-	SupportsNetWmHint(string) bool
 	// ConnectWindowManagerChanged connects the provided callback to the "window-manager-changed" signal
 	ConnectWindowManagerChanged(func(X11Screen)) gobject.SignalHandle
 }
@@ -1213,6 +944,15 @@ func unsafeWrapX11Screen(base *gobject.ObjectInstance) *X11ScreenInstance {
 	return &X11ScreenInstance{
 		ObjectInstance: *base,
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeX11Screen,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapX11Screen(inst)
+		},
+	)
 }
 
 func marshalX11ScreenInstance(p unsafe.Pointer) (any, error) {
@@ -1248,148 +988,6 @@ func UnsafeX11ScreenToGlibFull(c X11Screen) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
 }
 
-// GetCurrentDesktop wraps gdk_x11_screen_get_current_desktop
-// 
-// The function returns the following values:
-// 
-// 	- goret uint32 
-//
-// Returns the current workspace for @screen when running under a
-// window manager that supports multiple workspaces, as described
-// in the
-// [Extended Window Manager Hints](http://www.freedesktop.org/Standards/wm-spec) specification.
-func (screen *X11ScreenInstance) GetCurrentDesktop() uint32 {
-	var carg0 *C.GdkX11Screen // in, none, converted
-	var cret  C.guint32       // return, none, casted
-
-	carg0 = (*C.GdkX11Screen)(UnsafeX11ScreenToGlibNone(screen))
-
-	cret = C.gdk_x11_screen_get_current_desktop(carg0)
-	runtime.KeepAlive(screen)
-
-	var goret uint32
-
-	goret = uint32(cret)
-
-	return goret
-}
-
-// GetNumberOfDesktops wraps gdk_x11_screen_get_number_of_desktops
-// 
-// The function returns the following values:
-// 
-// 	- goret uint32 
-//
-// Returns the number of workspaces for @screen when running under a
-// window manager that supports multiple workspaces, as described
-// in the
-// [Extended Window Manager Hints](http://www.freedesktop.org/Standards/wm-spec) specification.
-func (screen *X11ScreenInstance) GetNumberOfDesktops() uint32 {
-	var carg0 *C.GdkX11Screen // in, none, converted
-	var cret  C.guint32       // return, none, casted
-
-	carg0 = (*C.GdkX11Screen)(UnsafeX11ScreenToGlibNone(screen))
-
-	cret = C.gdk_x11_screen_get_number_of_desktops(carg0)
-	runtime.KeepAlive(screen)
-
-	var goret uint32
-
-	goret = uint32(cret)
-
-	return goret
-}
-
-// GetScreenNumber wraps gdk_x11_screen_get_screen_number
-// 
-// The function returns the following values:
-// 
-// 	- goret int32 
-//
-// Returns the index of a `GdkX11Screen`.
-func (screen *X11ScreenInstance) GetScreenNumber() int32 {
-	var carg0 *C.GdkX11Screen // in, none, converted
-	var cret  C.int           // return, none, casted
-
-	carg0 = (*C.GdkX11Screen)(UnsafeX11ScreenToGlibNone(screen))
-
-	cret = C.gdk_x11_screen_get_screen_number(carg0)
-	runtime.KeepAlive(screen)
-
-	var goret int32
-
-	goret = int32(cret)
-
-	return goret
-}
-
-// GetWindowManagerName wraps gdk_x11_screen_get_window_manager_name
-// 
-// The function returns the following values:
-// 
-// 	- goret string 
-//
-// Returns the name of the window manager for @screen.
-func (screen *X11ScreenInstance) GetWindowManagerName() string {
-	var carg0 *C.GdkX11Screen // in, none, converted
-	var cret  *C.char         // return, none, string
-
-	carg0 = (*C.GdkX11Screen)(UnsafeX11ScreenToGlibNone(screen))
-
-	cret = C.gdk_x11_screen_get_window_manager_name(carg0)
-	runtime.KeepAlive(screen)
-
-	var goret string
-
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
-
-	return goret
-}
-
-// SupportsNetWmHint wraps gdk_x11_screen_supports_net_wm_hint
-// 
-// The function takes the following parameters:
-// 
-// 	- propertyName string: name of the WM property 
-// 
-// The function returns the following values:
-// 
-// 	- goret bool 
-//
-// This function is specific to the X11 backend of GDK, and indicates
-// whether the window manager supports a certain hint from the
-// [Extended Window Manager Hints](http://www.freedesktop.org/Standards/wm-spec) specification.
-// 
-// When using this function, keep in mind that the window manager
-// can change over time; so you shouldn’t use this function in
-// a way that impacts persistent application state. A common bug
-// is that your application can start up before the window manager
-// does when the user logs in, and before the window manager starts
-// gdk_x11_screen_supports_net_wm_hint() will return %FALSE for every property.
-// You can monitor the window_manager_changed signal on `GdkX11Screen` to detect
-// a window manager change.
-func (screen *X11ScreenInstance) SupportsNetWmHint(propertyName string) bool {
-	var carg0 *C.GdkX11Screen // in, none, converted
-	var carg1 *C.char         // in, none, string
-	var cret  C.gboolean      // return
-
-	carg0 = (*C.GdkX11Screen)(UnsafeX11ScreenToGlibNone(screen))
-	carg1 = (*C.char)(unsafe.Pointer(C.CString(propertyName)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	cret = C.gdk_x11_screen_supports_net_wm_hint(carg0, carg1)
-	runtime.KeepAlive(screen)
-	runtime.KeepAlive(propertyName)
-
-	var goret bool
-
-	if cret != 0 {
-		goret = true
-	}
-
-	return goret
-}
-
 // ConnectWindowManagerChanged connects the provided callback to the "window-manager-changed" signal
 func (o *X11ScreenInstance) ConnectWindowManagerChanged(fn func(X11Screen)) gobject.SignalHandle {
 	return o.Connect("window-manager-changed", fn)
@@ -1407,135 +1005,6 @@ var _ X11Surface = (*X11SurfaceInstance)(nil)
 type X11Surface interface {
 	gdk.Surface
 	upcastToGdkX11Surface() *X11SurfaceInstance
-
-	// GetDesktop wraps gdk_x11_surface_get_desktop
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret uint32 
-	//
-	// Gets the number of the workspace @surface is on.
-	GetDesktop() uint32
-	// GetGroup wraps gdk_x11_surface_get_group
-	// 
-	// The function returns the following values:
-	// 
-	// 	- goret gdk.Surface (nullable) 
-	//
-	// Returns the group this surface belongs to.
-	GetGroup() gdk.Surface
-	// MoveToCurrentDesktop wraps gdk_x11_surface_move_to_current_desktop
-	//
-	// Moves the surface to the correct workspace when running under a
-	// window manager that supports multiple workspaces, as described
-	// in the [Extended Window Manager Hints](http://www.freedesktop.org/Standards/wm-spec) specification.
-	// Will not do anything if the surface is already on all workspaces.
-	MoveToCurrentDesktop()
-	// MoveToDesktop wraps gdk_x11_surface_move_to_desktop
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- desktop uint32: the number of the workspace to move the surface to 
-	//
-	// Moves the surface to the given workspace when running unde a
-	// window manager that supports multiple workspaces, as described
-	// in the [Extended Window Manager Hints](http://www.freedesktop.org/Standards/wm-spec) specification.
-	MoveToDesktop(uint32)
-	// SetFrameSyncEnabled wraps gdk_x11_surface_set_frame_sync_enabled
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- frameSyncEnabled bool: whether frame-synchronization should be enabled 
-	//
-	// This function can be used to disable frame synchronization for a surface.
-	// Normally frame synchronziation will be enabled or disabled based on whether
-	// the system has a compositor that supports frame synchronization, but if
-	// the surface is not directly managed by the window manager, then frame
-	// synchronziation may need to be disabled. This is the case for a surface
-	// embedded via the XEMBED protocol.
-	SetFrameSyncEnabled(bool)
-	// SetGroup wraps gdk_x11_surface_set_group
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- leader gdk.Surface: a `GdkSurface` 
-	//
-	// Sets the group leader of @surface to be @leader.
-	// See the ICCCM for details.
-	SetGroup(gdk.Surface)
-	// SetSkipPagerHint wraps gdk_x11_surface_set_skip_pager_hint
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- skipsPager bool: %TRUE to skip pagers 
-	//
-	// Sets a hint on @surface that pagers should not
-	// display it. See the EWMH for details.
-	SetSkipPagerHint(bool)
-	// SetSkipTaskbarHint wraps gdk_x11_surface_set_skip_taskbar_hint
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- skipsTaskbar bool: %TRUE to skip taskbars 
-	//
-	// Sets a hint on @surface that taskbars should not
-	// display it. See the EWMH for details.
-	SetSkipTaskbarHint(bool)
-	// SetThemeVariant wraps gdk_x11_surface_set_theme_variant
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- variant string: the theme variant to export 
-	//
-	// GTK applications can request a dark theme variant. In order to
-	// make other applications - namely window managers using GTK for
-	// themeing - aware of this choice, GTK uses this function to
-	// export the requested theme variant as _GTK_THEME_VARIANT property
-	// on toplevel surfaces.
-	// 
-	// Note that this property is automatically updated by GTK, so this
-	// function should only be used by applications which do not use GTK
-	// to create toplevel surfaces.
-	SetThemeVariant(string)
-	// SetUrgencyHint wraps gdk_x11_surface_set_urgency_hint
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- urgent bool: %TRUE to indicate urgenct attention needed 
-	//
-	// Sets a hint on @surface that it needs user attention.
-	// See the ICCCM for details.
-	SetUrgencyHint(bool)
-	// SetUserTime wraps gdk_x11_surface_set_user_time
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- timestamp uint32: An XServer timestamp to which the property should be set 
-	//
-	// The application can use this call to update the _NET_WM_USER_TIME
-	// property on a toplevel surface.  This property stores an Xserver
-	// time which represents the time of the last user input event
-	// received for this surface.  This property may be used by the window
-	// manager to alter the focus, stacking, and/or placement behavior of
-	// surfaces when they are mapped depending on whether the new surface
-	// was created by a user action or is a "pop-up" surface activated by a
-	// timer or some other event.
-	// 
-	// Note that this property is automatically updated by GDK, so this
-	// function should only be used by applications which handle input
-	// events bypassing GDK.
-	SetUserTime(uint32)
-	// SetUTF8Property wraps gdk_x11_surface_set_utf8_property
-	// 
-	// The function takes the following parameters:
-	// 
-	// 	- name string: Property name, will be interned as an X atom 
-	// 	- value string (nullable): Property value, or %NULL to delete 
-	//
-	// This function modifies or removes an arbitrary X11 window
-	// property of type UTF8_STRING.  If the given @surface is
-	// not a toplevel surface, it is ignored.
-	SetUTF8Property(string, string)
 }
 
 func unsafeWrapX11Surface(base *gobject.ObjectInstance) *X11SurfaceInstance {
@@ -1544,6 +1013,15 @@ func unsafeWrapX11Surface(base *gobject.ObjectInstance) *X11SurfaceInstance {
 			ObjectInstance: *base,
 		},
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeX11Surface,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapX11Surface(inst)
+		},
+	)
 }
 
 func marshalX11SurfaceInstance(p unsafe.Pointer) (any, error) {
@@ -1577,289 +1055,6 @@ func UnsafeX11SurfaceToGlibNone(c X11Surface) unsafe.Pointer {
 // UnsafeX11SurfaceToGlibFull is used to convert the instance to it's C value GdkX11Surface, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeX11SurfaceToGlibFull(c X11Surface) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
-}
-
-// GetDesktop wraps gdk_x11_surface_get_desktop
-// 
-// The function returns the following values:
-// 
-// 	- goret uint32 
-//
-// Gets the number of the workspace @surface is on.
-func (surface *X11SurfaceInstance) GetDesktop() uint32 {
-	var carg0 *C.GdkSurface // in, none, converted
-	var cret  C.guint32     // return, none, casted
-
-	carg0 = (*C.GdkSurface)(UnsafeX11SurfaceToGlibNone(surface))
-
-	cret = C.gdk_x11_surface_get_desktop(carg0)
-	runtime.KeepAlive(surface)
-
-	var goret uint32
-
-	goret = uint32(cret)
-
-	return goret
-}
-
-// GetGroup wraps gdk_x11_surface_get_group
-// 
-// The function returns the following values:
-// 
-// 	- goret gdk.Surface (nullable) 
-//
-// Returns the group this surface belongs to.
-func (surface *X11SurfaceInstance) GetGroup() gdk.Surface {
-	var carg0 *C.GdkSurface // in, none, converted
-	var cret  *C.GdkSurface // return, none, converted, nullable
-
-	carg0 = (*C.GdkSurface)(UnsafeX11SurfaceToGlibNone(surface))
-
-	cret = C.gdk_x11_surface_get_group(carg0)
-	runtime.KeepAlive(surface)
-
-	var goret gdk.Surface
-
-	if cret != nil {
-		goret = gdk.UnsafeSurfaceFromGlibNone(unsafe.Pointer(cret))
-	}
-
-	return goret
-}
-
-// MoveToCurrentDesktop wraps gdk_x11_surface_move_to_current_desktop
-//
-// Moves the surface to the correct workspace when running under a
-// window manager that supports multiple workspaces, as described
-// in the [Extended Window Manager Hints](http://www.freedesktop.org/Standards/wm-spec) specification.
-// Will not do anything if the surface is already on all workspaces.
-func (surface *X11SurfaceInstance) MoveToCurrentDesktop() {
-	var carg0 *C.GdkSurface // in, none, converted
-
-	carg0 = (*C.GdkSurface)(UnsafeX11SurfaceToGlibNone(surface))
-
-	C.gdk_x11_surface_move_to_current_desktop(carg0)
-	runtime.KeepAlive(surface)
-}
-
-// MoveToDesktop wraps gdk_x11_surface_move_to_desktop
-// 
-// The function takes the following parameters:
-// 
-// 	- desktop uint32: the number of the workspace to move the surface to 
-//
-// Moves the surface to the given workspace when running unde a
-// window manager that supports multiple workspaces, as described
-// in the [Extended Window Manager Hints](http://www.freedesktop.org/Standards/wm-spec) specification.
-func (surface *X11SurfaceInstance) MoveToDesktop(desktop uint32) {
-	var carg0 *C.GdkSurface // in, none, converted
-	var carg1 C.guint32     // in, none, casted
-
-	carg0 = (*C.GdkSurface)(UnsafeX11SurfaceToGlibNone(surface))
-	carg1 = C.guint32(desktop)
-
-	C.gdk_x11_surface_move_to_desktop(carg0, carg1)
-	runtime.KeepAlive(surface)
-	runtime.KeepAlive(desktop)
-}
-
-// SetFrameSyncEnabled wraps gdk_x11_surface_set_frame_sync_enabled
-// 
-// The function takes the following parameters:
-// 
-// 	- frameSyncEnabled bool: whether frame-synchronization should be enabled 
-//
-// This function can be used to disable frame synchronization for a surface.
-// Normally frame synchronziation will be enabled or disabled based on whether
-// the system has a compositor that supports frame synchronization, but if
-// the surface is not directly managed by the window manager, then frame
-// synchronziation may need to be disabled. This is the case for a surface
-// embedded via the XEMBED protocol.
-func (surface *X11SurfaceInstance) SetFrameSyncEnabled(frameSyncEnabled bool) {
-	var carg0 *C.GdkSurface // in, none, converted
-	var carg1 C.gboolean    // in
-
-	carg0 = (*C.GdkSurface)(UnsafeX11SurfaceToGlibNone(surface))
-	if frameSyncEnabled {
-		carg1 = C.TRUE
-	}
-
-	C.gdk_x11_surface_set_frame_sync_enabled(carg0, carg1)
-	runtime.KeepAlive(surface)
-	runtime.KeepAlive(frameSyncEnabled)
-}
-
-// SetGroup wraps gdk_x11_surface_set_group
-// 
-// The function takes the following parameters:
-// 
-// 	- leader gdk.Surface: a `GdkSurface` 
-//
-// Sets the group leader of @surface to be @leader.
-// See the ICCCM for details.
-func (surface *X11SurfaceInstance) SetGroup(leader gdk.Surface) {
-	var carg0 *C.GdkSurface // in, none, converted
-	var carg1 *C.GdkSurface // in, none, converted
-
-	carg0 = (*C.GdkSurface)(UnsafeX11SurfaceToGlibNone(surface))
-	carg1 = (*C.GdkSurface)(gdk.UnsafeSurfaceToGlibNone(leader))
-
-	C.gdk_x11_surface_set_group(carg0, carg1)
-	runtime.KeepAlive(surface)
-	runtime.KeepAlive(leader)
-}
-
-// SetSkipPagerHint wraps gdk_x11_surface_set_skip_pager_hint
-// 
-// The function takes the following parameters:
-// 
-// 	- skipsPager bool: %TRUE to skip pagers 
-//
-// Sets a hint on @surface that pagers should not
-// display it. See the EWMH for details.
-func (surface *X11SurfaceInstance) SetSkipPagerHint(skipsPager bool) {
-	var carg0 *C.GdkSurface // in, none, converted
-	var carg1 C.gboolean    // in
-
-	carg0 = (*C.GdkSurface)(UnsafeX11SurfaceToGlibNone(surface))
-	if skipsPager {
-		carg1 = C.TRUE
-	}
-
-	C.gdk_x11_surface_set_skip_pager_hint(carg0, carg1)
-	runtime.KeepAlive(surface)
-	runtime.KeepAlive(skipsPager)
-}
-
-// SetSkipTaskbarHint wraps gdk_x11_surface_set_skip_taskbar_hint
-// 
-// The function takes the following parameters:
-// 
-// 	- skipsTaskbar bool: %TRUE to skip taskbars 
-//
-// Sets a hint on @surface that taskbars should not
-// display it. See the EWMH for details.
-func (surface *X11SurfaceInstance) SetSkipTaskbarHint(skipsTaskbar bool) {
-	var carg0 *C.GdkSurface // in, none, converted
-	var carg1 C.gboolean    // in
-
-	carg0 = (*C.GdkSurface)(UnsafeX11SurfaceToGlibNone(surface))
-	if skipsTaskbar {
-		carg1 = C.TRUE
-	}
-
-	C.gdk_x11_surface_set_skip_taskbar_hint(carg0, carg1)
-	runtime.KeepAlive(surface)
-	runtime.KeepAlive(skipsTaskbar)
-}
-
-// SetThemeVariant wraps gdk_x11_surface_set_theme_variant
-// 
-// The function takes the following parameters:
-// 
-// 	- variant string: the theme variant to export 
-//
-// GTK applications can request a dark theme variant. In order to
-// make other applications - namely window managers using GTK for
-// themeing - aware of this choice, GTK uses this function to
-// export the requested theme variant as _GTK_THEME_VARIANT property
-// on toplevel surfaces.
-// 
-// Note that this property is automatically updated by GTK, so this
-// function should only be used by applications which do not use GTK
-// to create toplevel surfaces.
-func (surface *X11SurfaceInstance) SetThemeVariant(variant string) {
-	var carg0 *C.GdkSurface // in, none, converted
-	var carg1 *C.char       // in, none, string
-
-	carg0 = (*C.GdkSurface)(UnsafeX11SurfaceToGlibNone(surface))
-	carg1 = (*C.char)(unsafe.Pointer(C.CString(variant)))
-	defer C.free(unsafe.Pointer(carg1))
-
-	C.gdk_x11_surface_set_theme_variant(carg0, carg1)
-	runtime.KeepAlive(surface)
-	runtime.KeepAlive(variant)
-}
-
-// SetUrgencyHint wraps gdk_x11_surface_set_urgency_hint
-// 
-// The function takes the following parameters:
-// 
-// 	- urgent bool: %TRUE to indicate urgenct attention needed 
-//
-// Sets a hint on @surface that it needs user attention.
-// See the ICCCM for details.
-func (surface *X11SurfaceInstance) SetUrgencyHint(urgent bool) {
-	var carg0 *C.GdkSurface // in, none, converted
-	var carg1 C.gboolean    // in
-
-	carg0 = (*C.GdkSurface)(UnsafeX11SurfaceToGlibNone(surface))
-	if urgent {
-		carg1 = C.TRUE
-	}
-
-	C.gdk_x11_surface_set_urgency_hint(carg0, carg1)
-	runtime.KeepAlive(surface)
-	runtime.KeepAlive(urgent)
-}
-
-// SetUserTime wraps gdk_x11_surface_set_user_time
-// 
-// The function takes the following parameters:
-// 
-// 	- timestamp uint32: An XServer timestamp to which the property should be set 
-//
-// The application can use this call to update the _NET_WM_USER_TIME
-// property on a toplevel surface.  This property stores an Xserver
-// time which represents the time of the last user input event
-// received for this surface.  This property may be used by the window
-// manager to alter the focus, stacking, and/or placement behavior of
-// surfaces when they are mapped depending on whether the new surface
-// was created by a user action or is a "pop-up" surface activated by a
-// timer or some other event.
-// 
-// Note that this property is automatically updated by GDK, so this
-// function should only be used by applications which handle input
-// events bypassing GDK.
-func (surface *X11SurfaceInstance) SetUserTime(timestamp uint32) {
-	var carg0 *C.GdkSurface // in, none, converted
-	var carg1 C.guint32     // in, none, casted
-
-	carg0 = (*C.GdkSurface)(UnsafeX11SurfaceToGlibNone(surface))
-	carg1 = C.guint32(timestamp)
-
-	C.gdk_x11_surface_set_user_time(carg0, carg1)
-	runtime.KeepAlive(surface)
-	runtime.KeepAlive(timestamp)
-}
-
-// SetUTF8Property wraps gdk_x11_surface_set_utf8_property
-// 
-// The function takes the following parameters:
-// 
-// 	- name string: Property name, will be interned as an X atom 
-// 	- value string (nullable): Property value, or %NULL to delete 
-//
-// This function modifies or removes an arbitrary X11 window
-// property of type UTF8_STRING.  If the given @surface is
-// not a toplevel surface, it is ignored.
-func (surface *X11SurfaceInstance) SetUTF8Property(name string, value string) {
-	var carg0 *C.GdkSurface // in, none, converted
-	var carg1 *C.char       // in, none, string
-	var carg2 *C.char       // in, none, string, nullable-string
-
-	carg0 = (*C.GdkSurface)(UnsafeX11SurfaceToGlibNone(surface))
-	carg1 = (*C.char)(unsafe.Pointer(C.CString(name)))
-	defer C.free(unsafe.Pointer(carg1))
-	if value != "" {
-		carg2 = (*C.char)(unsafe.Pointer(C.CString(value)))
-		defer C.free(unsafe.Pointer(carg2))
-	}
-
-	C.gdk_x11_surface_set_utf8_property(carg0, carg1, carg2)
-	runtime.KeepAlive(surface)
-	runtime.KeepAlive(name)
-	runtime.KeepAlive(value)
 }
 
 // X11AppLaunchContextClass wraps GdkX11AppLaunchContextClass

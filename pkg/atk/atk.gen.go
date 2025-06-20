@@ -123,7 +123,7 @@ func init() {
 // Like atk_get_binary_age(), but from the headers used at
 // application compile time, rather than from the library linked
 // against at application run time.
-const BINARY_AGE = 25411
+const BINARY_AGE = 25612
 // INTERFACE_AGE wraps ATK_INTERFACE_AGE
 //
 // Like atk_get_interface_age(), but from the headers used at
@@ -141,13 +141,13 @@ const MAJOR_VERSION = 2
 // Like atk_get_micro_version(), but from the headers used at
 // application compile time, rather than from the library linked
 // against at application run time.
-const MICRO_VERSION = 1
+const MICRO_VERSION = 2
 // MINOR_VERSION wraps ATK_MINOR_VERSION
 //
 // Like atk_get_minor_version(), but from the headers used at
 // application compile time, rather than from the library linked
 // against at application run time.
-const MINOR_VERSION = 54
+const MINOR_VERSION = 56
 // VERSION_MIN_REQUIRED wraps ATK_VERSION_MIN_REQUIRED
 //
 // A macro that should be defined by the user prior to including
@@ -1226,10 +1226,15 @@ const (
 	// A specialized push button to open a menu.
 	// (Since: 2.46)
 	RolePushButtonMenu Role = 127
+	// RoleSwitch wraps ATK_ROLE_SWITCH
+	//
+	// A switch that can be toggled on/off.
+	// (Since: 2.56)
+	RoleSwitch Role = 128
 	// RoleLastDefined wraps ATK_ROLE_LAST_DEFINED
 	//
 	// not a valid role, used for finding end of the enumeration
-	RoleLastDefined Role = 128
+	RoleLastDefined Role = 129
 	// RolePushButton wraps ATK_ROLE_PUSH_BUTTON
 	RolePushButton Role = 42
 )
@@ -1359,6 +1364,7 @@ func (e Role) String() string {
 		case RoleSubscript: return "RoleSubscript"
 		case RoleSuggestion: return "RoleSuggestion"
 		case RoleSuperscript: return "RoleSuperscript"
+		case RoleSwitch: return "RoleSwitch"
 		case RoleTable: return "RoleTable"
 		case RoleTableCell: return "RoleTableCell"
 		case RoleTableColumnHeader: return "RoleTableColumnHeader"
@@ -9492,6 +9498,15 @@ func unsafeWrapHyperlink(base *gobject.ObjectInstance) *HyperlinkInstance {
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeHyperlink,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapHyperlink(inst)
+		},
+	)
+}
+
 func marshalHyperlinkInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapHyperlink(gobject.ValueFromNative(p).Object()), nil
 }
@@ -9790,6 +9805,15 @@ func unsafeWrapMisc(base *gobject.ObjectInstance) *MiscInstance {
 	return &MiscInstance{
 		ObjectInstance: *base,
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeMisc,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapMisc(inst)
+		},
+	)
 }
 
 func marshalMiscInstance(p unsafe.Pointer) (any, error) {
@@ -10197,6 +10221,15 @@ func unsafeWrapObject(base *gobject.ObjectInstance) *ObjectInstance {
 	return &ObjectInstance{
 		ObjectInstance: *base,
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeObject,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapObject(inst)
+		},
+	)
 }
 
 func marshalObjectInstance(p unsafe.Pointer) (any, error) {
@@ -10978,6 +11011,15 @@ func unsafeWrapObjectFactory(base *gobject.ObjectInstance) *ObjectFactoryInstanc
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeObjectFactory,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapObjectFactory(inst)
+		},
+	)
+}
+
 func marshalObjectFactoryInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapObjectFactory(gobject.ValueFromNative(p).Object()), nil
 }
@@ -11179,6 +11221,15 @@ func unsafeWrapPlug(base *gobject.ObjectInstance) *PlugInstance {
 			ObjectInstance: *base,
 		},
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypePlug,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapPlug(inst)
+		},
+	)
 }
 
 func marshalPlugInstance(p unsafe.Pointer) (any, error) {
@@ -11405,6 +11456,15 @@ func unsafeWrapRegistry(base *gobject.ObjectInstance) *RegistryInstance {
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeRegistry,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapRegistry(inst)
+		},
+	)
+}
+
 func marshalRegistryInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapRegistry(gobject.ValueFromNative(p).Object()), nil
 }
@@ -11626,6 +11686,15 @@ func unsafeWrapRelation(base *gobject.ObjectInstance) *RelationInstance {
 	return &RelationInstance{
 		ObjectInstance: *base,
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeRelation,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapRelation(inst)
+		},
+	)
 }
 
 func marshalRelationInstance(p unsafe.Pointer) (any, error) {
@@ -11941,6 +12010,15 @@ func unsafeWrapRelationSet(base *gobject.ObjectInstance) *RelationSetInstance {
 	return &RelationSetInstance{
 		ObjectInstance: *base,
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeRelationSet,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapRelationSet(inst)
+		},
+	)
 }
 
 func marshalRelationSetInstance(p unsafe.Pointer) (any, error) {
@@ -12336,6 +12414,15 @@ func unsafeWrapSocket(base *gobject.ObjectInstance) *SocketInstance {
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeSocket,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapSocket(inst)
+		},
+	)
+}
+
 func marshalSocketInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapSocket(gobject.ValueFromNative(p).Object()), nil
 }
@@ -12633,6 +12720,15 @@ func unsafeWrapStateSet(base *gobject.ObjectInstance) *StateSetInstance {
 	return &StateSetInstance{
 		ObjectInstance: *base,
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeStateSet,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapStateSet(inst)
+		},
+	)
 }
 
 func marshalStateSetInstance(p unsafe.Pointer) (any, error) {
@@ -13060,6 +13156,15 @@ func unsafeWrapUtil(base *gobject.ObjectInstance) *UtilInstance {
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeUtil,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapUtil(inst)
+		},
+	)
+}
+
 func marshalUtilInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapUtil(gobject.ValueFromNative(p).Object()), nil
 }
@@ -13171,6 +13276,15 @@ func unsafeWrapGObjectAccessible(base *gobject.ObjectInstance) *GObjectAccessibl
 			ObjectInstance: *base,
 		},
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeGObjectAccessible,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapGObjectAccessible(inst)
+		},
+	)
 }
 
 func marshalGObjectAccessibleInstance(p unsafe.Pointer) (any, error) {
@@ -13388,6 +13502,15 @@ func unsafeWrapNoOpObject(base *gobject.ObjectInstance) *NoOpObjectInstance {
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeNoOpObject,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapNoOpObject(inst)
+		},
+	)
+}
+
 func marshalNoOpObjectInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapNoOpObject(gobject.ValueFromNative(p).Object()), nil
 }
@@ -13517,6 +13640,15 @@ func unsafeWrapNoOpObjectFactory(base *gobject.ObjectInstance) *NoOpObjectFactor
 			ObjectInstance: *base,
 		},
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeNoOpObjectFactory,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapNoOpObjectFactory(inst)
+		},
+	)
 }
 
 func marshalNoOpObjectFactoryInstance(p unsafe.Pointer) (any, error) {

@@ -507,9 +507,7 @@ func (v *Value) SetBoxed(p unsafe.Pointer) {
 }
 
 // Object is a wrapper around g_value_get_object(). The returned object is taken
-// its own reference. This is called by the marshalers for Object types. To make sure
-// this never calls another marshaler DO NOT use any of the UnsafeConversion functions
-// above.
+// its own reference. This is called by the marshalers for Object types.
 // The marshaler is responsible for wrapping the returned object in the correct type.
 func (v *Value) Object() *ObjectInstance {
 	p := unsafe.Pointer(C.g_value_get_object(v.native()))

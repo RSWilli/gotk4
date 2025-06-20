@@ -1187,6 +1187,15 @@ func unsafeWrapPixbuf(base *gobject.ObjectInstance) *PixbufInstance {
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypePixbuf,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapPixbuf(inst)
+		},
+	)
+}
+
 func marshalPixbufInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapPixbuf(gobject.ValueFromNative(p).Object()), nil
 }
@@ -3856,6 +3865,15 @@ func unsafeWrapPixbufLoader(base *gobject.ObjectInstance) *PixbufLoaderInstance 
 	return &PixbufLoaderInstance{
 		ObjectInstance: *base,
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypePixbufLoader,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapPixbufLoader(inst)
+		},
+	)
 }
 
 func marshalPixbufLoaderInstance(p unsafe.Pointer) (any, error) {

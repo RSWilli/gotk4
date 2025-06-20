@@ -22,11 +22,13 @@ func _gotk4_glib2_LogFunc(carg1 *C.gchar, carg2 C.GLogLevelFlags, carg3 *C.gchar
 		fn = v.(LogFunc)
 	}
 
-	var logDomain string        // in, none, string
+	var logDomain string        // in, none, string, nullable-string
 	var logLevel  LogLevelFlags // in, none, casted
 	var message   string        // in, none, string
 
-	logDomain = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+	if carg1 != nil {
+		logDomain = C.GoString((*C.char)(unsafe.Pointer(carg1)))
+	}
 	logLevel = LogLevelFlags(carg2)
 	message = C.GoString((*C.char)(unsafe.Pointer(carg3)))
 

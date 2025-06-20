@@ -449,6 +449,7 @@ import (
 // extern GFileIOStream* _gotk4_gio2_File_open_readwrite_finish(GFile*, GAsyncResult*, GError*);
 // extern gboolean _gotk4_gio2_File_poll_mountable_finish(GFile*, GAsyncResult*, GError*);
 // extern gboolean _gotk4_gio2_File_prefix_matches(GFile*, GFile*);
+// extern gboolean _gotk4_gio2_File_query_exists(GFile*, GCancellable*);
 // extern GFileInfo* _gotk4_gio2_File_query_filesystem_info(GFile*, const char*, GCancellable*, GError*);
 // extern GFileInfo* _gotk4_gio2_File_query_filesystem_info_finish(GFile*, GAsyncResult*, GError*);
 // extern GFileInfo* _gotk4_gio2_File_query_info(GFile*, const char*, GFileQueryInfoFlags, GCancellable*, GError*);
@@ -597,6 +598,9 @@ import (
 // }
 // gboolean _gotk4_gio2_File_virtual_prefix_matches(void* fnptr, GFile* carg0, GFile* carg1) {
 // 	return ((gboolean (*) (GFile*, GFile*))(fnptr))(carg0, carg1);
+// }
+// gboolean _gotk4_gio2_File_virtual_query_exists(void* fnptr, GFile* carg0, GCancellable* carg1) {
+// 	return ((gboolean (*) (GFile*, GCancellable*))(fnptr))(carg0, carg1);
 // }
 // GFileInfo* _gotk4_gio2_File_virtual_query_filesystem_info(void* fnptr, GFile* carg0, const char* carg1, GCancellable* carg2, GError** _cerr) {
 // 	return ((GFileInfo* (*) (GFile*, const char*, GCancellable*, GError**))(fnptr))(carg0, carg1, carg2, _cerr);
@@ -4360,7 +4364,7 @@ func (e ResourceError) String() string {
 // 
 // 	- goret glib.Quark 
 //
-// Gets the #GResource Error Quark.
+// Gets the [struct@Gio.Resource] Error Quark.
 func ResourceErrorQuark() glib.Quark {
 	var cret C.GQuark // return, none, casted, alias
 
@@ -5305,12 +5309,13 @@ type ApplicationFlags C.gint
 const (
 	// ApplicationFlagsNone wraps G_APPLICATION_FLAGS_NONE
 	//
-	// Default. Deprecated in 2.74, use
-	//   %G_APPLICATION_DEFAULT_FLAGS instead
+	// Default flags.
+	//
+	// Deprecated: (since 2.74.0) Use [flags@Gio.ApplicationFlags.DEFAULT_FLAGS].
 	ApplicationFlagsNone ApplicationFlags = 0
 	// ApplicationDefaultFlags wraps G_APPLICATION_DEFAULT_FLAGS
 	//
-	// Default flags. Since: 2.74
+	// Default flags.
 	ApplicationDefaultFlags ApplicationFlags = 0
 	// ApplicationIsService wraps G_APPLICATION_IS_SERVICE
 	//
@@ -7266,9 +7271,10 @@ func (f ResourceLookupFlags) String() string {
 
 // SettingsBindFlags wraps GSettingsBindFlags
 //
-// Flags used when creating a binding. These flags determine in which
-// direction the binding works. The default is to synchronize in both
-// directions.
+// Flags used when creating a binding.
+// 
+// These flags determine in which direction the binding works. The default is to
+// synchronize in both directions.
 type SettingsBindFlags C.gint
 
 const (
@@ -7278,28 +7284,30 @@ const (
 	SettingsBindDefault SettingsBindFlags = 0
 	// SettingsBindGet wraps G_SETTINGS_BIND_GET
 	//
-	// Update the #GObject property when the setting changes.
-	//     It is an error to use this flag if the property is not writable.
+	// Update the [class@GObject.Object] property when the setting changes.
+	//   It is an error to use this flag if the property is not writable.
 	SettingsBindGet SettingsBindFlags = 1
 	// SettingsBindSet wraps G_SETTINGS_BIND_SET
 	//
-	// Update the setting when the #GObject property changes.
-	//     It is an error to use this flag if the property is not readable.
+	// Update the setting when the [class@GObject.Object] property changes.
+	//   It is an error to use this flag if the property is not readable.
 	SettingsBindSet SettingsBindFlags = 2
 	// SettingsBindNoSensitivity wraps G_SETTINGS_BIND_NO_SENSITIVITY
 	//
-	// Do not try to bind a "sensitivity" property to the writability of the setting
+	// Do not try to bind a ‘sensitivity’ property to the writability of the setting
 	SettingsBindNoSensitivity SettingsBindFlags = 4
 	// SettingsBindGetNoChanges wraps G_SETTINGS_BIND_GET_NO_CHANGES
 	//
-	// When set in addition to %G_SETTINGS_BIND_GET, set the #GObject property
-	//     value initially from the setting, but do not listen for changes of the setting
+	// When set in addition to [flags@Gio.SettingsBindFlags.GET],
+	//   set the [class@GObject.Object] property
+	//   value initially from the setting, but do not listen for changes of the setting
 	SettingsBindGetNoChanges SettingsBindFlags = 8
 	// SettingsBindInvertBoolean wraps G_SETTINGS_BIND_INVERT_BOOLEAN
 	//
-	// When passed to g_settings_bind(), uses a pair of mapping functions that invert
-	//     the boolean value when mapping between the setting and the property.  The setting and property must both
-	//     be booleans.  You cannot pass this flag to g_settings_bind_with_mapping().
+	// When passed to [method@Gio.Settings.bind],
+	//   uses a pair of mapping functions that invert
+	//   the boolean value when mapping between the setting and the property.  The setting and property must both
+	//   be booleans.  You cannot pass this flag to [method@Gio.Settings.bind_with_mapping].
 	SettingsBindInvertBoolean SettingsBindFlags = 16
 )
 
@@ -7715,8 +7723,8 @@ func (f TLSPasswordFlags) String() string {
 // Type definition for a function that will be called back when an asynchronous
 // operation within GIO has been completed. #GAsyncReadyCallback
 // callbacks from #GTask are guaranteed to be invoked in a later
-// iteration of the
-// [thread-default main context][g-main-context-push-thread-default]
+// iteration of the thread-default main context
+// (see [method@GLib.MainContext.push_thread_default])
 // where the #GTask was created. All other users of
 // #GAsyncReadyCallback must likewise call it asynchronously in a
 // later iteration of the main context.
@@ -7730,8 +7738,8 @@ type AsyncReadyCallback func(sourceObject gobject.Object, res AsyncResult)
 // 
 // The function takes the following parameters:
 // 
-// 	- connection DBusConnection: The #GDBusConnection to a message bus. 
-// 	- name string: The name that is requested to be owned. 
+// 	- connection DBusConnection: the connection to a message bus 
+// 	- name string: the name that is requested to be owned 
 //
 // Invoked when a connection to a message bus has been obtained.
 type BusAcquiredCallback func(connection DBusConnection, name string)
@@ -7740,8 +7748,8 @@ type BusAcquiredCallback func(connection DBusConnection, name string)
 // 
 // The function takes the following parameters:
 // 
-// 	- connection DBusConnection: The #GDBusConnection on which to acquired the name. 
-// 	- name string: The name being owned. 
+// 	- connection DBusConnection: the connection on which to acquired the name 
+// 	- name string: the name being owned 
 //
 // Invoked when the name is acquired.
 type BusNameAcquiredCallback func(connection DBusConnection, name string)
@@ -7761,9 +7769,9 @@ type BusNameAppearedCallback func(connection DBusConnection, name string, nameOw
 // 
 // The function takes the following parameters:
 // 
-// 	- connection DBusConnection: The #GDBusConnection on which to acquire the name or %NULL if
-// the connection was disconnected. 
-// 	- name string: The name being owned. 
+// 	- connection DBusConnection: the connect on which to acquire the name or `NULL` if
+//   the connection was disconnected 
+// 	- name string: the name being owned 
 //
 // Invoked when the name is lost or @connection has been closed.
 type BusNameLostCallback func(connection DBusConnection, name string)
@@ -7925,7 +7933,7 @@ type DBusSubtreeIntrospectFunc func(connection DBusConnection, sender string, ob
 // 
 // The function returns the following values:
 // 
-// 	- goret File 
+// 	- goret File (nullable) 
 //
 // This function type is used by g_vfs_register_uri_scheme() to make it
 // possible for a client to associate a URI scheme to a different #GFile
@@ -8076,16 +8084,17 @@ func BusGetSync(cancellable context.Context, busType BusType) (DBusConnection, e
 // 
 // The function takes the following parameters:
 // 
-// 	- ownerId uint: an identifier obtained from g_bus_own_name() 
+// 	- ownerId uint: an identifier obtained from [func@Gio.bus_own_name] 
 //
 // Stops owning a name.
 // 
 // Note that there may still be D-Bus traffic to process (relating to owning
-// and unowning the name) in the current thread-default #GMainContext after
-// this function has returned. You should continue to iterate the #GMainContext
-// until the #GDestroyNotify function passed to g_bus_own_name() is called, in
-// order to avoid memory leaks through callbacks queued on the #GMainContext
-// after it’s stopped being iterated.
+// and unowning the name) in the current thread-default
+// [struct@GLib.MainContext] after this function has returned. You should
+// continue to iterate the [struct@GLib.MainContext] until the
+// [callback@GLib.DestroyNotify] function passed to [func@Gio.bus_own_name] is
+// called, in order to avoid memory leaks through callbacks queued on the
+// [struct@GLib.MainContext] after it’s stopped being iterated.
 func BusUnownName(ownerId uint) {
 	var carg1 C.guint // in, none, casted
 
@@ -9679,8 +9688,8 @@ func PollableStreamWriteAll(cancellable context.Context, stream OutputStream, bu
 // 
 // The function takes the following parameters:
 // 
-// 	- path string: A pathname inside the resource 
-// 	- lookupFlags ResourceLookupFlags: A #GResourceLookupFlags 
+// 	- path string: A path name inside the resource 
+// 	- lookupFlags ResourceLookupFlags: A [flags@Gio.ResourceLookupFlags] 
 // 
 // The function returns the following values:
 // 
@@ -9689,8 +9698,9 @@ func PollableStreamWriteAll(cancellable context.Context, stream OutputStream, bu
 //
 // Returns all the names of children at the specified @path in the set of
 // globally registered resources.
-// The return result is a %NULL terminated list of strings which should
-// be released with g_strfreev().
+// 
+// The return result is a `NULL` terminated list of strings which should
+// be released with [func@GLib.strfreev].
 // 
 // @lookup_flags controls the behaviour of the lookup.
 func ResourcesEnumerateChildren(path string, lookupFlags ResourceLookupFlags) ([]string, error) {
@@ -9724,15 +9734,15 @@ func ResourcesEnumerateChildren(path string, lookupFlags ResourceLookupFlags) ([
 // 
 // The function takes the following parameters:
 // 
-// 	- path string: A pathname inside the resource 
-// 	- lookupFlags ResourceLookupFlags: A #GResourceLookupFlags 
+// 	- path string: A path name inside the resource 
+// 	- lookupFlags ResourceLookupFlags: A [flags@Gio.ResourceLookupFlags] 
 // 
 // The function returns the following values:
 // 
 // 	- size uint: a location to place the length of the contents of the file,
-//    or %NULL if the length is not needed 
-// 	- flags uint32: a location to place the #GResourceFlags about the file,
-//    or %NULL if the flags are not needed 
+//    or `NULL` if the length is not needed 
+// 	- flags uint32: a location to place the [flags@Gio.ResourceFlags] about the file,
+//    or `NULL` if the flags are not needed 
 // 	- goret bool 
 // 	- _goerr error (nullable): an error 
 //
@@ -9773,12 +9783,43 @@ func ResourcesGetInfo(path string, lookupFlags ResourceLookupFlags) (uint, uint3
 	return size, flags, goret, _goerr
 }
 
+// ResourcesHasChildren wraps g_resources_has_children
+// 
+// The function takes the following parameters:
+// 
+// 	- path string: A pathname 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Returns whether the specified @path in the set of
+// globally registered resources has children.
+func ResourcesHasChildren(path string) bool {
+	var carg1 *C.char    // in, none, string
+	var cret  C.gboolean // return
+
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(path)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	cret = C.g_resources_has_children(carg1)
+	runtime.KeepAlive(path)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
 // ResourcesLookupData wraps g_resources_lookup_data
 // 
 // The function takes the following parameters:
 // 
-// 	- path string: A pathname inside the resource 
-// 	- lookupFlags ResourceLookupFlags: A #GResourceLookupFlags 
+// 	- path string: A path name inside the resource 
+// 	- lookupFlags ResourceLookupFlags: A [flags@Gio.ResourceLookupFlags] 
 // 
 // The function returns the following values:
 // 
@@ -9786,15 +9827,15 @@ func ResourcesGetInfo(path string, lookupFlags ResourceLookupFlags) (uint, uint3
 // 	- _goerr error (nullable): an error 
 //
 // Looks for a file at the specified @path in the set of
-// globally registered resources and returns a #GBytes that
+// globally registered resources and returns a [struct@GLib.Bytes] that
 // lets you directly access the data in memory.
 // 
 // The data is always followed by a zero byte, so you
 // can safely use the data as a C string. However, that byte
-// is not included in the size of the GBytes.
+// is not included in the size of the [struct@GLib.Bytes].
 // 
 // For uncompressed resource files this is a pointer directly into
-// the resource bundle, which is typically in some readonly data section
+// the resource bundle, which is typically in some read-only data section
 // in the program binary. For compressed files we allocate memory on
 // the heap and automatically uncompress the data.
 // 
@@ -9828,8 +9869,8 @@ func ResourcesLookupData(path string, lookupFlags ResourceLookupFlags) (*glib.By
 // 
 // The function takes the following parameters:
 // 
-// 	- path string: A pathname inside the resource 
-// 	- lookupFlags ResourceLookupFlags: A #GResourceLookupFlags 
+// 	- path string: A path name inside the resource 
+// 	- lookupFlags ResourceLookupFlags: A [flags@Gio.ResourceLookupFlags] 
 // 
 // The function returns the following values:
 // 
@@ -9837,7 +9878,7 @@ func ResourcesLookupData(path string, lookupFlags ResourceLookupFlags) (*glib.By
 // 	- _goerr error (nullable): an error 
 //
 // Looks for a file at the specified @path in the set of
-// globally registered resources and returns a #GInputStream
+// globally registered resources and returns a [class@Gio.InputStream]
 // that lets you read the data.
 // 
 // @lookup_flags controls the behaviour of the lookup.
@@ -9870,11 +9911,13 @@ func ResourcesOpenStream(path string, lookupFlags ResourceLookupFlags) (InputStr
 // 
 // The function takes the following parameters:
 // 
-// 	- resource *Resource: A #GResource 
+// 	- resource *Resource: A [struct@Gio.Resource] 
 //
 // Registers the resource with the process-global set of resources.
+// 
 // Once a resource is registered the files in it can be accessed
-// with the global resource lookup functions like g_resources_lookup_data().
+// with the global resource lookup functions like
+// [func@Gio.resources_lookup_data].
 func ResourcesRegister(resource *Resource) {
 	var carg1 *C.GResource // in, none, converted
 
@@ -9888,7 +9931,7 @@ func ResourcesRegister(resource *Resource) {
 // 
 // The function takes the following parameters:
 // 
-// 	- resource *Resource: A #GResource 
+// 	- resource *Resource: A [struct@Gio.Resource] 
 //
 // Unregisters the resource from the process-global set of resources.
 func ResourcesUnregister(resource *Resource) {
@@ -27476,13 +27519,17 @@ type File interface {
 	// 	- goret bool 
 	// 	- _goerr error (nullable): an error 
 	//
-	// Creates a directory. Note that this will only create a child directory
+	// Creates a directory.
+	// 
+	// Note that this will only create a child directory
 	// of the immediate parent directory of the path or URI given by the #GFile.
 	// To recursively create directories, see g_file_make_directory_with_parents().
+	// 
 	// This function will fail if the parent directory does not exist, setting
 	// @error to %G_IO_ERROR_NOT_FOUND. If the file system doesn't support
 	// creating directories, this function will fail, setting @error to
-	// %G_IO_ERROR_NOT_SUPPORTED.
+	// %G_IO_ERROR_NOT_SUPPORTED. If the directory already exists,
+	// [error@Gio.IOErrorEnum.EXISTS] will be returned.
 	// 
 	// For a local #GFile the newly created directory will have the default
 	// (current) ownership and permissions of the current process.
@@ -27936,8 +27983,11 @@ type File interface {
 	// 
 	// 	- goret bool 
 	//
-	// Utility function to check if a particular file exists. This is
-	// implemented using g_file_query_info() and as such does blocking I/O.
+	// Utility function to check if a particular file exists.
+	// 
+	// The fallback implementation of this API is using [method@Gio.File.query_info]
+	// and therefore may do blocking I/O. To asynchronously query the existence
+	// of a file, use [method@Gio.File.query_info_async].
 	// 
 	// Note that in many cases it is [racy to first check for file existence](https://en.wikipedia.org/wiki/Time_of_check_to_time_of_use)
 	// and then execute something based on the outcome of that, because the
@@ -28856,8 +28906,8 @@ type File interface {
 	// 
 	// 	- goret bool 
 	//
-	// Checks if @file supports
-	// [thread-default contexts][g-main-context-push-thread-default-context].
+	// Checks if @file supports thread-default main contexts
+	// (see [method@GLib.MainContext.push_thread_default])
 	// If this returns %FALSE, you cannot perform asynchronous operations on
 	// @file in a thread that has a thread-default context.
 	SupportsThreadContexts() bool
@@ -28876,7 +28926,7 @@ type File interface {
 	// Sends @file to the "Trashcan", if possible. This is similar to
 	// deleting it, but the user can recover it before emptying the trashcan.
 	// Trashing is disabled for system mounts by default (see
-	// g_unix_mount_is_system_internal()), so this call can return the
+	// g_unix_mount_entry_is_system_internal()), so this call can return the
 	// %G_IO_ERROR_NOT_SUPPORTED error. Since GLib 2.66, the `x-gvfs-notrash` unix
 	// mount option can be used to disable g_file_trash() support for particular
 	// mounts, the %G_IO_ERROR_NOT_SUPPORTED error will be returned in that case.
@@ -29564,13 +29614,17 @@ type File interface {
 	// 	- goret bool 
 	// 	- _goerr error (nullable): an error 
 	//
-	// Creates a directory. Note that this will only create a child directory
+	// Creates a directory.
+	// 
+	// Note that this will only create a child directory
 	// of the immediate parent directory of the path or URI given by the #GFile.
 	// To recursively create directories, see g_file_make_directory_with_parents().
+	// 
 	// This function will fail if the parent directory does not exist, setting
 	// @error to %G_IO_ERROR_NOT_FOUND. If the file system doesn't support
 	// creating directories, this function will fail, setting @error to
-	// %G_IO_ERROR_NOT_SUPPORTED.
+	// %G_IO_ERROR_NOT_SUPPORTED. If the directory already exists,
+	// [error@Gio.IOErrorEnum.EXISTS] will be returned.
 	// 
 	// For a local #GFile the newly created directory will have the default
 	// (current) ownership and permissions of the current process.
@@ -29839,6 +29893,44 @@ type File interface {
 	// filesystem point of view), because the prefix of @file is an alias
 	// of @prefix.
 	ParentPrefixMatches(file File) bool
+	// ParentQueryExists calls the default implementations of the query_exists virtual method.
+	// This function's behavior is not defined when the parent does not implement the virtual method.
+	// 
+	// The function takes the following parameters:
+	// 
+	// 	- cancellable context.Context (nullable): optional #GCancellable object,
+	//   %NULL to ignore 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	//
+	// Utility function to check if a particular file exists.
+	// 
+	// The fallback implementation of this API is using [method@Gio.File.query_info]
+	// and therefore may do blocking I/O. To asynchronously query the existence
+	// of a file, use [method@Gio.File.query_info_async].
+	// 
+	// Note that in many cases it is [racy to first check for file existence](https://en.wikipedia.org/wiki/Time_of_check_to_time_of_use)
+	// and then execute something based on the outcome of that, because the
+	// file might have been created or removed in between the operations. The
+	// general approach to handling that is to not check, but just do the
+	// operation and handle the errors as they come.
+	// 
+	// As an example of race-free checking, take the case of reading a file,
+	// and if it doesn't exist, creating it. There are two racy versions: read
+	// it, and on error create it; and: check if it exists, if not create it.
+	// These can both result in two processes creating the file (with perhaps
+	// a partially written file as the result). The correct approach is to
+	// always try to create the file with g_file_create() which will either
+	// atomically create the file or fail with a %G_IO_ERROR_EXISTS error.
+	// 
+	// However, in many cases an existence check is useful in a user interface,
+	// for instance to make a menu item sensitive/insensitive, so that you don't
+	// have to fool users that something is possible and then just show an error
+	// dialog. If you do this, you should make sure to also handle the errors
+	// that can happen due to races when you execute the operation.
+	ParentQueryExists(cancellable context.Context) bool
 	// ParentQueryFilesystemInfo calls the default implementations of the query_filesystem_info virtual method.
 	// This function's behavior is not defined when the parent does not implement the virtual method.
 	// 
@@ -30312,7 +30404,7 @@ type File interface {
 	// Sends @file to the "Trashcan", if possible. This is similar to
 	// deleting it, but the user can recover it before emptying the trashcan.
 	// Trashing is disabled for system mounts by default (see
-	// g_unix_mount_is_system_internal()), so this call can return the
+	// g_unix_mount_entry_is_system_internal()), so this call can return the
 	// %G_IO_ERROR_NOT_SUPPORTED error. Since GLib 2.66, the `x-gvfs-notrash` unix
 	// mount option can be used to disable g_file_trash() support for particular
 	// mounts, the %G_IO_ERROR_NOT_SUPPORTED error will be returned in that case.
@@ -32938,13 +33030,17 @@ func (file *FileInstance) LoadPartialContentsFinish(res AsyncResult) (string, st
 // 	- goret bool 
 // 	- _goerr error (nullable): an error 
 //
-// Creates a directory. Note that this will only create a child directory
+// Creates a directory.
+// 
+// Note that this will only create a child directory
 // of the immediate parent directory of the path or URI given by the #GFile.
 // To recursively create directories, see g_file_make_directory_with_parents().
+// 
 // This function will fail if the parent directory does not exist, setting
 // @error to %G_IO_ERROR_NOT_FOUND. If the file system doesn't support
 // creating directories, this function will fail, setting @error to
-// %G_IO_ERROR_NOT_SUPPORTED.
+// %G_IO_ERROR_NOT_SUPPORTED. If the directory already exists,
+// [error@Gio.IOErrorEnum.EXISTS] will be returned.
 // 
 // For a local #GFile the newly created directory will have the default
 // (current) ownership and permissions of the current process.
@@ -34034,8 +34130,11 @@ func (file *FileInstance) QueryDefaultHandlerFinish(result AsyncResult) (AppInfo
 // 
 // 	- goret bool 
 //
-// Utility function to check if a particular file exists. This is
-// implemented using g_file_query_info() and as such does blocking I/O.
+// Utility function to check if a particular file exists.
+// 
+// The fallback implementation of this API is using [method@Gio.File.query_info]
+// and therefore may do blocking I/O. To asynchronously query the existence
+// of a file, use [method@Gio.File.query_info_async].
 // 
 // Note that in many cases it is [racy to first check for file existence](https://en.wikipedia.org/wiki/Time_of_check_to_time_of_use)
 // and then execute something based on the outcome of that, because the
@@ -36163,8 +36262,8 @@ func (file *FileInstance) StopMountableFinish(result AsyncResult) (bool, error) 
 // 
 // 	- goret bool 
 //
-// Checks if @file supports
-// [thread-default contexts][g-main-context-push-thread-default-context].
+// Checks if @file supports thread-default main contexts
+// (see [method@GLib.MainContext.push_thread_default])
 // If this returns %FALSE, you cannot perform asynchronous operations on
 // @file in a thread that has a thread-default context.
 func (file *FileInstance) SupportsThreadContexts() bool {
@@ -36200,7 +36299,7 @@ func (file *FileInstance) SupportsThreadContexts() bool {
 // Sends @file to the "Trashcan", if possible. This is similar to
 // deleting it, but the user can recover it before emptying the trashcan.
 // Trashing is disabled for system mounts by default (see
-// g_unix_mount_is_system_internal()), so this call can return the
+// g_unix_mount_entry_is_system_internal()), so this call can return the
 // %G_IO_ERROR_NOT_SUPPORTED error. Since GLib 2.66, the `x-gvfs-notrash` unix
 // mount option can be used to disable g_file_trash() support for particular
 // mounts, the %G_IO_ERROR_NOT_SUPPORTED error will be returned in that case.
@@ -37035,13 +37134,17 @@ type FileOverrides[Instance File] struct {
 	// 	- goret bool 
 	// 	- _goerr error (nullable): an error 
 	//
-	// Creates a directory. Note that this will only create a child directory
+	// Creates a directory.
+	// 
+	// Note that this will only create a child directory
 	// of the immediate parent directory of the path or URI given by the #GFile.
 	// To recursively create directories, see g_file_make_directory_with_parents().
+	// 
 	// This function will fail if the parent directory does not exist, setting
 	// @error to %G_IO_ERROR_NOT_FOUND. If the file system doesn't support
 	// creating directories, this function will fail, setting @error to
-	// %G_IO_ERROR_NOT_SUPPORTED.
+	// %G_IO_ERROR_NOT_SUPPORTED. If the directory already exists,
+	// [error@Gio.IOErrorEnum.EXISTS] will be returned.
 	// 
 	// For a local #GFile the newly created directory will have the default
 	// (current) ownership and permissions of the current process.
@@ -37297,6 +37400,43 @@ type FileOverrides[Instance File] struct {
 	// filesystem point of view), because the prefix of @file is an alias
 	// of @prefix.
 	PrefixMatches func(Instance, File) bool
+	// // QueryExists allows you to override the implementation of the virtual method query_exists.
+	// 
+	// The function takes the following parameters:
+	// 
+	// 	- cancellable context.Context (nullable): optional #GCancellable object,
+	//   %NULL to ignore 
+	// 
+	// The function returns the following values:
+	// 
+	// 	- goret bool 
+	//
+	// Utility function to check if a particular file exists.
+	// 
+	// The fallback implementation of this API is using [method@Gio.File.query_info]
+	// and therefore may do blocking I/O. To asynchronously query the existence
+	// of a file, use [method@Gio.File.query_info_async].
+	// 
+	// Note that in many cases it is [racy to first check for file existence](https://en.wikipedia.org/wiki/Time_of_check_to_time_of_use)
+	// and then execute something based on the outcome of that, because the
+	// file might have been created or removed in between the operations. The
+	// general approach to handling that is to not check, but just do the
+	// operation and handle the errors as they come.
+	// 
+	// As an example of race-free checking, take the case of reading a file,
+	// and if it doesn't exist, creating it. There are two racy versions: read
+	// it, and on error create it; and: check if it exists, if not create it.
+	// These can both result in two processes creating the file (with perhaps
+	// a partially written file as the result). The correct approach is to
+	// always try to create the file with g_file_create() which will either
+	// atomically create the file or fail with a %G_IO_ERROR_EXISTS error.
+	// 
+	// However, in many cases an existence check is useful in a user interface,
+	// for instance to make a menu item sensitive/insensitive, so that you don't
+	// have to fool users that something is possible and then just show an error
+	// dialog. If you do this, you should make sure to also handle the errors
+	// that can happen due to races when you execute the operation.
+	QueryExists func(Instance, context.Context) bool
 	// // QueryFilesystemInfo allows you to override the implementation of the virtual method query_filesystem_info.
 	// 
 	// The function takes the following parameters:
@@ -37750,7 +37890,7 @@ type FileOverrides[Instance File] struct {
 	// Sends @file to the "Trashcan", if possible. This is similar to
 	// deleting it, but the user can recover it before emptying the trashcan.
 	// Trashing is disabled for system mounts by default (see
-	// g_unix_mount_is_system_internal()), so this call can return the
+	// g_unix_mount_entry_is_system_internal()), so this call can return the
 	// %G_IO_ERROR_NOT_SUPPORTED error. Since GLib 2.66, the `x-gvfs-notrash` unix
 	// mount option can be used to disable g_file_trash() support for particular
 	// mounts, the %G_IO_ERROR_NOT_SUPPORTED error will be returned in that case.
@@ -38860,6 +39000,32 @@ func UnsafeApplyFileOverrides[Instance File](gclass unsafe.Pointer, overrides Fi
 				file = UnsafeFileFromGlibNone(unsafe.Pointer(carg1))
 
 				goret = overrides.PrefixMatches(prefix, file)
+
+				if goret {
+					cret = C.TRUE
+				}
+
+				return cret
+			},
+		)
+	}
+
+	if overrides.QueryExists != nil {
+		pclass.query_exists = (*[0]byte)(C._gotk4_gio2_File_query_exists)
+		classdata.StoreVirtualMethod(
+			unsafe.Pointer(pclass),
+			"_gotk4_gio2_File_query_exists",
+			func(carg0 *C.GFile, carg1 *C.GCancellable) (cret C.gboolean) {
+				var file        Instance        // go GFile subclass
+				var cancellable context.Context // in, none, converted, nullable
+				var goret       bool            // return
+
+				file = UnsafeFileFromGlibBorrow(unsafe.Pointer(carg0)).(Instance)
+				if carg1 != nil {
+					cancellable = NewCancellableContext(unsafe.Pointer(carg1))
+				}
+
+				goret = overrides.QueryExists(file, cancellable)
 
 				if goret {
 					cret = C.TRUE
@@ -40734,13 +40900,17 @@ func (file *FileInstance) ParentIsNative() bool {
 // 	- goret bool 
 // 	- _goerr error (nullable): an error 
 //
-// Creates a directory. Note that this will only create a child directory
+// Creates a directory.
+// 
+// Note that this will only create a child directory
 // of the immediate parent directory of the path or URI given by the #GFile.
 // To recursively create directories, see g_file_make_directory_with_parents().
+// 
 // This function will fail if the parent directory does not exist, setting
 // @error to %G_IO_ERROR_NOT_FOUND. If the file system doesn't support
 // creating directories, this function will fail, setting @error to
-// %G_IO_ERROR_NOT_SUPPORTED.
+// %G_IO_ERROR_NOT_SUPPORTED. If the directory already exists,
+// [error@Gio.IOErrorEnum.EXISTS] will be returned.
 // 
 // For a local #GFile the newly created directory will have the default
 // (current) ownership and permissions of the current process.
@@ -41391,6 +41561,68 @@ func (prefix *FileInstance) ParentPrefixMatches(file File) bool {
 	cret = C._gotk4_gio2_File_virtual_prefix_matches(unsafe.Pointer(parentclass.prefix_matches), carg0, carg1)
 	runtime.KeepAlive(prefix)
 	runtime.KeepAlive(file)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// ParentQueryExists calls the default implementations of the query_exists virtual method.
+// This function's behavior is not defined when the parent does not implement the virtual method.
+// 
+// The function takes the following parameters:
+// 
+// 	- cancellable context.Context (nullable): optional #GCancellable object,
+//   %NULL to ignore 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Utility function to check if a particular file exists.
+// 
+// The fallback implementation of this API is using [method@Gio.File.query_info]
+// and therefore may do blocking I/O. To asynchronously query the existence
+// of a file, use [method@Gio.File.query_info_async].
+// 
+// Note that in many cases it is [racy to first check for file existence](https://en.wikipedia.org/wiki/Time_of_check_to_time_of_use)
+// and then execute something based on the outcome of that, because the
+// file might have been created or removed in between the operations. The
+// general approach to handling that is to not check, but just do the
+// operation and handle the errors as they come.
+// 
+// As an example of race-free checking, take the case of reading a file,
+// and if it doesn't exist, creating it. There are two racy versions: read
+// it, and on error create it; and: check if it exists, if not create it.
+// These can both result in two processes creating the file (with perhaps
+// a partially written file as the result). The correct approach is to
+// always try to create the file with g_file_create() which will either
+// atomically create the file or fail with a %G_IO_ERROR_EXISTS error.
+// 
+// However, in many cases an existence check is useful in a user interface,
+// for instance to make a menu item sensitive/insensitive, so that you don't
+// have to fool users that something is possible and then just show an error
+// dialog. If you do this, you should make sure to also handle the errors
+// that can happen due to races when you execute the operation.
+func (file *FileInstance) ParentQueryExists(cancellable context.Context) bool {
+	var carg0 *C.GFile
+	var carg1 *C.GCancellable // in, none, converted
+	var cret  C.gboolean      // return
+
+	parentclass := (*C.GFileIface)(classdata.PeekParentInterface(UnsafeFileToGlibNone(file), uint64(TypeFile)))
+
+	carg0 = (*C.GFile)(UnsafeFileToGlibNone(file))
+	if cancellable != nil {
+		carg1 = (*C.GCancellable)(UnsafeGCancellableToGlibNone(cancellable))
+	}
+
+	cret = C._gotk4_gio2_File_virtual_query_exists(unsafe.Pointer(parentclass.query_exists), carg0, carg1)
+	runtime.KeepAlive(file)
+	runtime.KeepAlive(cancellable)
 
 	var goret bool
 
@@ -42423,7 +42655,7 @@ func (file *FileInstance) ParentStopMountableFinish(result AsyncResult) (bool, e
 // Sends @file to the "Trashcan", if possible. This is similar to
 // deleting it, but the user can recover it before emptying the trashcan.
 // Trashing is disabled for system mounts by default (see
-// g_unix_mount_is_system_internal()), so this call can return the
+// g_unix_mount_entry_is_system_internal()), so this call can return the
 // %G_IO_ERROR_NOT_SUPPORTED error. Since GLib 2.66, the `x-gvfs-notrash` unix
 // mount option can be used to disable g_file_trash() support for particular
 // mounts, the %G_IO_ERROR_NOT_SUPPORTED error will be returned in that case.
@@ -43065,7 +43297,7 @@ type Initable interface {
 	// If the object is not initialized, or initialization returns with an
 	// error, then all operations on the object except g_object_ref() and
 	// g_object_unref() are considered to be invalid, and have undefined
-	// behaviour. See the [introduction][ginitable] for more details.
+	// behaviour. See the [description][iface@Gio.Initable#description] for more details.
 	// 
 	// Callers should not assume that a class which implements #GInitable can be
 	// initialized multiple times, unless the class explicitly documents itself as
@@ -43119,7 +43351,7 @@ type Initable interface {
 	// If the object is not initialized, or initialization returns with an
 	// error, then all operations on the object except g_object_ref() and
 	// g_object_unref() are considered to be invalid, and have undefined
-	// behaviour. See the [introduction][ginitable] for more details.
+	// behaviour. See the [description][iface@Gio.Initable#description] for more details.
 	// 
 	// Callers should not assume that a class which implements #GInitable can be
 	// initialized multiple times, unless the class explicitly documents itself as
@@ -43214,7 +43446,7 @@ func UnsafeInitableToGlibFull(c Initable) unsafe.Pointer {
 // If the object is not initialized, or initialization returns with an
 // error, then all operations on the object except g_object_ref() and
 // g_object_unref() are considered to be invalid, and have undefined
-// behaviour. See the [introduction][ginitable] for more details.
+// behaviour. See the [description][iface@Gio.Initable#description] for more details.
 // 
 // Callers should not assume that a class which implements #GInitable can be
 // initialized multiple times, unless the class explicitly documents itself as
@@ -43294,7 +43526,7 @@ type InitableOverrides[Instance Initable] struct {
 	// If the object is not initialized, or initialization returns with an
 	// error, then all operations on the object except g_object_ref() and
 	// g_object_unref() are considered to be invalid, and have undefined
-	// behaviour. See the [introduction][ginitable] for more details.
+	// behaviour. See the [description][iface@Gio.Initable#description] for more details.
 	// 
 	// Callers should not assume that a class which implements #GInitable can be
 	// initialized multiple times, unless the class explicitly documents itself as
@@ -43381,7 +43613,7 @@ func UnsafeApplyInitableOverrides[Instance Initable](gclass unsafe.Pointer, over
 // If the object is not initialized, or initialization returns with an
 // error, then all operations on the object except g_object_ref() and
 // g_object_unref() are considered to be invalid, and have undefined
-// behaviour. See the [introduction][ginitable] for more details.
+// behaviour. See the [description][iface@Gio.Initable#description] for more details.
 // 
 // Callers should not assume that a class which implements #GInitable can be
 // initialized multiple times, unless the class explicitly documents itself as
@@ -50026,6 +50258,7 @@ var _ PowerProfileMonitor = (*PowerProfileMonitorInstance)(nil)
 // “Low Power” mode on some systems).
 // 
 // When in “Low Power” mode, it is recommended that applications:
+// 
 // - disable automatic downloads;
 // - reduce the rate of refresh from online sources such as calendar or
 //   email synchronisation;
@@ -57064,6 +57297,15 @@ func unsafeWrapAppInfoMonitor(base *gobject.ObjectInstance) *AppInfoMonitorInsta
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeAppInfoMonitor,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapAppInfoMonitor(inst)
+		},
+	)
+}
+
 func marshalAppInfoMonitorInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapAppInfoMonitor(gobject.ValueFromNative(p).Object()), nil
 }
@@ -57225,6 +57467,15 @@ func unsafeWrapAppLaunchContext(base *gobject.ObjectInstance) *AppLaunchContextI
 	return &AppLaunchContextInstance{
 		ObjectInstance: *base,
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeAppLaunchContext,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapAppLaunchContext(inst)
+		},
+	)
 }
 
 func marshalAppLaunchContextInstance(p unsafe.Pointer) (any, error) {
@@ -58229,10 +58480,10 @@ type Application interface {
 	//
 	// Sets (or unsets) the base resource path of @application.
 	// 
-	// The path is used to automatically load various [application
-	// resources][gresource] such as menu layouts and action descriptions.
-	// The various types of resources will be found at fixed names relative
-	// to the given base path.
+	// The path is used to automatically load various
+	// [application resources][struct@Gio.Resource] such as menu layouts and
+	// action descriptions. The various types of resources will be found at
+	// fixed names relative to the given base path.
 	// 
 	// By default, the resource base path is determined from the application
 	// ID by prefixing '/' and replacing each '.' with '/'.  This is done at
@@ -58529,6 +58780,15 @@ func unsafeWrapApplication(base *gobject.ObjectInstance) *ApplicationInstance {
 	return &ApplicationInstance{
 		ObjectInstance: *base,
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeApplication,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapApplication(inst)
+		},
+	)
 }
 
 func marshalApplicationInstance(p unsafe.Pointer) (any, error) {
@@ -59754,10 +60014,10 @@ func (application *ApplicationInstance) SetOptionContextSummary(summary string) 
 //
 // Sets (or unsets) the base resource path of @application.
 // 
-// The path is used to automatically load various [application
-// resources][gresource] such as menu layouts and action descriptions.
-// The various types of resources will be found at fixed names relative
-// to the given base path.
+// The path is used to automatically load various
+// [application resources][struct@Gio.Resource] such as menu layouts and
+// action descriptions. The various types of resources will be found at
+// fixed names relative to the given base path.
 // 
 // By default, the resource base path is determined from the application
 // ID by prefixing '/' and replacing each '.' with '/'.  This is done at
@@ -60724,7 +60984,7 @@ var _ ApplicationCommandLine = (*ApplicationCommandLineInstance)(nil)
 // The `GApplicationCommandLine` object can provide the @argc and @argv
 // parameters for use with the [struct@GLib.OptionContext] command-line parsing API,
 // with the [method@Gio.ApplicationCommandLine.get_arguments] function. See
-// [gapplication-example-cmdline3.c][gapplication-example-cmdline3]
+// [gapplication-example-cmdline3.c](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gapplication-example-cmdline3.c)
 // for an example.
 // 
 // The exit status of the originally-invoked process may be set and
@@ -61174,6 +61434,15 @@ func unsafeWrapApplicationCommandLine(base *gobject.ObjectInstance) *Application
 	return &ApplicationCommandLineInstance{
 		ObjectInstance: *base,
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeApplicationCommandLine,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapApplicationCommandLine(inst)
+		},
+	)
 }
 
 func marshalApplicationCommandLineInstance(p unsafe.Pointer) (any, error) {
@@ -61955,6 +62224,15 @@ func unsafeWrapBytesIcon(base *gobject.ObjectInstance) *BytesIconInstance {
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeBytesIcon,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapBytesIcon(inst)
+		},
+	)
+}
+
 func marshalBytesIconInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapBytesIcon(gobject.ValueFromNative(p).Object()), nil
 }
@@ -62089,6 +62367,15 @@ func unsafeWrapCharsetConverter(base *gobject.ObjectInstance) *CharsetConverterI
 	return &CharsetConverterInstance{
 		ObjectInstance: *base,
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeCharsetConverter,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapCharsetConverter(inst)
+		},
+	)
 }
 
 func marshalCharsetConverterInstance(p unsafe.Pointer) (any, error) {
@@ -62355,6 +62642,15 @@ func unsafeWrapCredentials(base *gobject.ObjectInstance) *CredentialsInstance {
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeCredentials,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapCredentials(inst)
+		},
+	)
+}
+
 func marshalCredentialsInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapCredentials(gobject.ValueFromNative(p).Object()), nil
 }
@@ -62499,6 +62795,15 @@ func unsafeWrapDBusActionGroup(base *gobject.ObjectInstance) *DBusActionGroupIns
 	return &DBusActionGroupInstance{
 		ObjectInstance: *base,
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeDBusActionGroup,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapDBusActionGroup(inst)
+		},
+	)
 }
 
 func marshalDBusActionGroupInstance(p unsafe.Pointer) (any, error) {
@@ -62703,6 +63008,15 @@ func unsafeWrapDBusAuthObserver(base *gobject.ObjectInstance) *DBusAuthObserverI
 	return &DBusAuthObserverInstance{
 		ObjectInstance: *base,
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeDBusAuthObserver,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapDBusAuthObserver(inst)
+		},
+	)
 }
 
 func marshalDBusAuthObserverInstance(p unsafe.Pointer) (any, error) {
@@ -62968,13 +63282,13 @@ type DBusConnection interface {
 	// %G_IO_ERROR_CLOSED.
 	// 
 	// When @connection has been closed, the #GDBusConnection::closed
-	// signal is emitted in the
-	// [thread-default main context][g-main-context-push-thread-default]
+	// signal is emitted in the thread-default main context
+	// (see [method@GLib.MainContext.push_thread_default])
 	// of the thread that @connection was constructed in.
 	// 
 	// This is an asynchronous method. When the operation is finished,
-	// @callback will be invoked in the
-	// [thread-default main context][g-main-context-push-thread-default]
+	// @callback will be invoked in the thread-default main context
+	// (see [method@GLib.MainContext.push_thread_default])
 	// of the thread you are calling this method from. You can
 	// then call g_dbus_connection_close_finish() to get the result of the
 	// operation. See g_dbus_connection_close_sync() for the synchronous
@@ -63082,15 +63396,15 @@ type DBusConnection interface {
 	//     request is satisfied or %NULL if you don't care about the result 
 	//
 	// Asynchronously flushes @connection, that is, writes all queued
-	// outgoing message to the transport and then flushes the transport
+	// outgoing messages to the transport and then flushes the transport
 	// (using g_output_stream_flush_async()). This is useful in programs
-	// that wants to emit a D-Bus signal and then exit immediately. Without
-	// flushing the connection, there is no guaranteed that the message has
+	// that want to emit a D-Bus signal and then exit immediately. Without
+	// flushing the connection, there is no guarantee that the message has
 	// been sent to the networking buffers in the OS kernel.
 	// 
 	// This is an asynchronous method. When the operation is finished,
-	// @callback will be invoked in the
-	// [thread-default main context][g-main-context-push-thread-default]
+	// @callback will be invoked in the thread-default main context
+	// (see [method@GLib.MainContext.push_thread_default])
 	// of the thread you are calling this method from. You can
 	// then call g_dbus_connection_flush_finish() to get the result of the
 	// operation. See g_dbus_connection_flush_sync() for the synchronous
@@ -63263,7 +63577,8 @@ type DBusConnection interface {
 	// %G_IO_ERROR_CLOSED. If @message is not well-formed,
 	// the operation fails with %G_IO_ERROR_INVALID_ARGUMENT.
 	// 
-	// See this [server][gdbus-server] and [client][gdbus-unix-fd-client]
+	// See this [server][class@Gio.DBusConnection#an-example-d-bus-server]
+	// and [client][class@Gio.DBusConnection#an-example-for-file-descriptor-passing]
 	// for an example of how to use this low-level API to send and receive
 	// UNIX file descriptors.
 	// 
@@ -63304,8 +63619,8 @@ type DBusConnection interface {
 	// the operation fails with %G_IO_ERROR_INVALID_ARGUMENT.
 	// 
 	// This is an asynchronous method. When the operation is finished, @callback
-	// will be invoked in the
-	// [thread-default main context][g-main-context-push-thread-default]
+	// will be invoked in the thread-default main context
+	// (see [method@GLib.MainContext.push_thread_default])
 	// of the thread you are calling this method from. You can then call
 	// g_dbus_connection_send_message_with_reply_finish() to get the result of the operation.
 	// See g_dbus_connection_send_message_with_reply_sync() for the synchronous version.
@@ -63313,7 +63628,8 @@ type DBusConnection interface {
 	// Note that @message must be unlocked, unless @flags contain the
 	// %G_DBUS_SEND_MESSAGE_FLAGS_PRESERVE_SERIAL flag.
 	// 
-	// See this [server][gdbus-server] and [client][gdbus-unix-fd-client]
+	// See this [server][class@Gio.DBusConnection#an-example-d-bus-server]
+	// and [client][class@Gio.DBusConnection#an-example-for-file-descriptor-passing]
 	// for an example of how to use this low-level API to send and receive
 	// UNIX file descriptors.
 	SendMessageWithReply(context.Context, DBusMessage, DBusSendMessageFlags, int32, AsyncReadyCallback) uint32
@@ -63336,7 +63652,8 @@ type DBusConnection interface {
 	// be of type %G_DBUS_MESSAGE_TYPE_ERROR. Use
 	// g_dbus_message_to_gerror() to transcode this to a #GError.
 	// 
-	// See this [server][gdbus-server] and [client][gdbus-unix-fd-client]
+	// See this [server][class@Gio.DBusConnection#an-example-d-bus-server]
+	// and [client][class@Gio.DBusConnection#an-example-for-file-descriptor-passing]
 	// for an example of how to use this low-level API to send and receive
 	// UNIX file descriptors.
 	SendMessageWithReplyFinish(AsyncResult) (DBusMessage, error)
@@ -63381,7 +63698,8 @@ type DBusConnection interface {
 	// be of type %G_DBUS_MESSAGE_TYPE_ERROR. Use
 	// g_dbus_message_to_gerror() to transcode this to a #GError.
 	// 
-	// See this [server][gdbus-server] and [client][gdbus-unix-fd-client]
+	// See this [server][class@Gio.DBusConnection#an-example-d-bus-server]
+	// and [client][class@Gio.DBusConnection#an-example-for-file-descriptor-passing]
 	// for an example of how to use this low-level API to send and receive
 	// UNIX file descriptors.
 	// 
@@ -63510,6 +63828,15 @@ func unsafeWrapDBusConnection(base *gobject.ObjectInstance) *DBusConnectionInsta
 	return &DBusConnectionInstance{
 		ObjectInstance: *base,
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeDBusConnection,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapDBusConnection(inst)
+		},
+	)
 }
 
 func marshalDBusConnectionInstance(p unsafe.Pointer) (any, error) {
@@ -63958,13 +64285,13 @@ func (connection *DBusConnectionInstance) AddFilter(filterFunction DBusMessageFi
 // %G_IO_ERROR_CLOSED.
 // 
 // When @connection has been closed, the #GDBusConnection::closed
-// signal is emitted in the
-// [thread-default main context][g-main-context-push-thread-default]
+// signal is emitted in the thread-default main context
+// (see [method@GLib.MainContext.push_thread_default])
 // of the thread that @connection was constructed in.
 // 
 // This is an asynchronous method. When the operation is finished,
-// @callback will be invoked in the
-// [thread-default main context][g-main-context-push-thread-default]
+// @callback will be invoked in the thread-default main context
+// (see [method@GLib.MainContext.push_thread_default])
 // of the thread you are calling this method from. You can
 // then call g_dbus_connection_close_finish() to get the result of the
 // operation. See g_dbus_connection_close_sync() for the synchronous
@@ -64198,15 +64525,15 @@ func (connection *DBusConnectionInstance) ExportMenuModel(objectPath string, men
 //     request is satisfied or %NULL if you don't care about the result 
 //
 // Asynchronously flushes @connection, that is, writes all queued
-// outgoing message to the transport and then flushes the transport
+// outgoing messages to the transport and then flushes the transport
 // (using g_output_stream_flush_async()). This is useful in programs
-// that wants to emit a D-Bus signal and then exit immediately. Without
-// flushing the connection, there is no guaranteed that the message has
+// that want to emit a D-Bus signal and then exit immediately. Without
+// flushing the connection, there is no guarantee that the message has
 // been sent to the networking buffers in the OS kernel.
 // 
 // This is an asynchronous method. When the operation is finished,
-// @callback will be invoked in the
-// [thread-default main context][g-main-context-push-thread-default]
+// @callback will be invoked in the thread-default main context
+// (see [method@GLib.MainContext.push_thread_default])
 // of the thread you are calling this method from. You can
 // then call g_dbus_connection_flush_finish() to get the result of the
 // operation. See g_dbus_connection_flush_sync() for the synchronous
@@ -64605,7 +64932,8 @@ func (connection *DBusConnectionInstance) RemoveFilter(filterId uint) {
 // %G_IO_ERROR_CLOSED. If @message is not well-formed,
 // the operation fails with %G_IO_ERROR_INVALID_ARGUMENT.
 // 
-// See this [server][gdbus-server] and [client][gdbus-unix-fd-client]
+// See this [server][class@Gio.DBusConnection#an-example-d-bus-server]
+// and [client][class@Gio.DBusConnection#an-example-for-file-descriptor-passing]
 // for an example of how to use this low-level API to send and receive
 // UNIX file descriptors.
 // 
@@ -64677,8 +65005,8 @@ func (connection *DBusConnectionInstance) SendMessage(message DBusMessage, flags
 // the operation fails with %G_IO_ERROR_INVALID_ARGUMENT.
 // 
 // This is an asynchronous method. When the operation is finished, @callback
-// will be invoked in the
-// [thread-default main context][g-main-context-push-thread-default]
+// will be invoked in the thread-default main context
+// (see [method@GLib.MainContext.push_thread_default])
 // of the thread you are calling this method from. You can then call
 // g_dbus_connection_send_message_with_reply_finish() to get the result of the operation.
 // See g_dbus_connection_send_message_with_reply_sync() for the synchronous version.
@@ -64686,7 +65014,8 @@ func (connection *DBusConnectionInstance) SendMessage(message DBusMessage, flags
 // Note that @message must be unlocked, unless @flags contain the
 // %G_DBUS_SEND_MESSAGE_FLAGS_PRESERVE_SERIAL flag.
 // 
-// See this [server][gdbus-server] and [client][gdbus-unix-fd-client]
+// See this [server][class@Gio.DBusConnection#an-example-d-bus-server]
+// and [client][class@Gio.DBusConnection#an-example-for-file-descriptor-passing]
 // for an example of how to use this low-level API to send and receive
 // UNIX file descriptors.
 func (connection *DBusConnectionInstance) SendMessageWithReply(cancellable context.Context, message DBusMessage, flags DBusSendMessageFlags, timeoutMsec int32, callback AsyncReadyCallback) uint32 {
@@ -64745,7 +65074,8 @@ func (connection *DBusConnectionInstance) SendMessageWithReply(cancellable conte
 // be of type %G_DBUS_MESSAGE_TYPE_ERROR. Use
 // g_dbus_message_to_gerror() to transcode this to a #GError.
 // 
-// See this [server][gdbus-server] and [client][gdbus-unix-fd-client]
+// See this [server][class@Gio.DBusConnection#an-example-d-bus-server]
+// and [client][class@Gio.DBusConnection#an-example-for-file-descriptor-passing]
 // for an example of how to use this low-level API to send and receive
 // UNIX file descriptors.
 func (connection *DBusConnectionInstance) SendMessageWithReplyFinish(res AsyncResult) (DBusMessage, error) {
@@ -64813,7 +65143,8 @@ func (connection *DBusConnectionInstance) SendMessageWithReplyFinish(res AsyncRe
 // be of type %G_DBUS_MESSAGE_TYPE_ERROR. Use
 // g_dbus_message_to_gerror() to transcode this to a #GError.
 // 
-// See this [server][gdbus-server] and [client][gdbus-unix-fd-client]
+// See this [server][class@Gio.DBusConnection#an-example-d-bus-server]
+// and [client][class@Gio.DBusConnection#an-example-for-file-descriptor-passing]
 // for an example of how to use this low-level API to send and receive
 // UNIX file descriptors.
 // 
@@ -65297,6 +65628,15 @@ func unsafeWrapDBusInterfaceSkeleton(base *gobject.ObjectInstance) *DBusInterfac
 	return &DBusInterfaceSkeletonInstance{
 		ObjectInstance: *base,
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeDBusInterfaceSkeleton,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapDBusInterfaceSkeleton(inst)
+		},
+	)
 }
 
 func marshalDBusInterfaceSkeletonInstance(p unsafe.Pointer) (any, error) {
@@ -66275,9 +66615,12 @@ type DBusMessage interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- serial uint32: A #guint32. 
+	// 	- serial uint32: A #guint32, which must not be zero. 
 	//
 	// Sets the serial for @message.
+	// 
+	// The [D-Bus specification](https://dbus.freedesktop.org/doc/dbus-specification.html#message-protocol-messages)
+	// does not allow the @serial to be zero.
 	SetSerial(uint32)
 	// SetSignature wraps g_dbus_message_set_signature
 	// 
@@ -66323,6 +66666,15 @@ func unsafeWrapDBusMessage(base *gobject.ObjectInstance) *DBusMessageInstance {
 	return &DBusMessageInstance{
 		ObjectInstance: *base,
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeDBusMessage,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapDBusMessage(inst)
+		},
+	)
 }
 
 func marshalDBusMessageInstance(p unsafe.Pointer) (any, error) {
@@ -67321,9 +67673,12 @@ func (message *DBusMessageInstance) SetSender(value string) {
 // 
 // The function takes the following parameters:
 // 
-// 	- serial uint32: A #guint32. 
+// 	- serial uint32: A #guint32, which must not be zero. 
 //
 // Sets the serial for @message.
+// 
+// The [D-Bus specification](https://dbus.freedesktop.org/doc/dbus-specification.html#message-protocol-messages)
+// does not allow the @serial to be zero.
 func (message *DBusMessageInstance) SetSerial(serial uint32) {
 	var carg0 *C.GDBusMessage // in, none, converted
 	var carg1 C.guint32       // in, none, casted
@@ -67472,9 +67827,14 @@ type DBusMethodInvocation interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the name of the D-Bus interface the method was invoked on.
+	// 
+	// This can be `NULL` if it was not specified by the sender. See
+	// [callback@Gio.DBusInterfaceMethodCallFunc] or the
+	// [D-Bus Specification](https://dbus.freedesktop.org/doc/dbus-specification.html#message-protocol-types-method)
+	// for details on when this can happen and how it should be handled.
 	// 
 	// If this method call is a property Get, Set or GetAll call that has
 	// been redirected to the method call handler then
@@ -67492,7 +67852,8 @@ type DBusMethodInvocation interface {
 	// descriptor passing, that cannot be properly expressed in the
 	// #GVariant API.
 	// 
-	// See this [server][gdbus-server] and [client][gdbus-unix-fd-client]
+	// See this [server][class@Gio.DBusConnection#an-example-d-bus-server]
+	// and [client][class@Gio.DBusConnection#an-example-for-file-descriptor-passing]
 	// for an example of how to use this low-level API to send and receive
 	// UNIX file descriptors.
 	GetMessage() DBusMessage
@@ -67547,9 +67908,12 @@ type DBusMethodInvocation interface {
 	// 
 	// The function returns the following values:
 	// 
-	// 	- goret string 
+	// 	- goret string (nullable) 
 	//
 	// Gets the bus name that invoked the method.
+	// 
+	// This can return %NULL if not specified by the caller, e.g. on peer-to-peer
+	// connections.
 	GetSender() string
 	// ReturnDBusError wraps g_dbus_method_invocation_return_dbus_error
 	// 
@@ -67597,6 +67961,15 @@ func unsafeWrapDBusMethodInvocation(base *gobject.ObjectInstance) *DBusMethodInv
 	return &DBusMethodInvocationInstance{
 		ObjectInstance: *base,
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeDBusMethodInvocation,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapDBusMethodInvocation(inst)
+		},
+	)
 }
 
 func marshalDBusMethodInvocationInstance(p unsafe.Pointer) (any, error) {
@@ -67659,9 +68032,14 @@ func (invocation *DBusMethodInvocationInstance) GetConnection() DBusConnection {
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the name of the D-Bus interface the method was invoked on.
+// 
+// This can be `NULL` if it was not specified by the sender. See
+// [callback@Gio.DBusInterfaceMethodCallFunc] or the
+// [D-Bus Specification](https://dbus.freedesktop.org/doc/dbus-specification.html#message-protocol-types-method)
+// for details on when this can happen and how it should be handled.
 // 
 // If this method call is a property Get, Set or GetAll call that has
 // been redirected to the method call handler then
@@ -67669,7 +68047,7 @@ func (invocation *DBusMethodInvocationInstance) GetConnection() DBusConnection {
 // #GDBusInterfaceVTable for more information.
 func (invocation *DBusMethodInvocationInstance) GetInterfaceName() string {
 	var carg0 *C.GDBusMethodInvocation // in, none, converted
-	var cret  *C.gchar                 // return, none, string
+	var cret  *C.gchar                 // return, none, string, nullable-string
 
 	carg0 = (*C.GDBusMethodInvocation)(UnsafeDBusMethodInvocationToGlibNone(invocation))
 
@@ -67678,7 +68056,9 @@ func (invocation *DBusMethodInvocationInstance) GetInterfaceName() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -67694,7 +68074,8 @@ func (invocation *DBusMethodInvocationInstance) GetInterfaceName() string {
 // descriptor passing, that cannot be properly expressed in the
 // #GVariant API.
 // 
-// See this [server][gdbus-server] and [client][gdbus-unix-fd-client]
+// See this [server][class@Gio.DBusConnection#an-example-d-bus-server]
+// and [client][class@Gio.DBusConnection#an-example-for-file-descriptor-passing]
 // for an example of how to use this low-level API to send and receive
 // UNIX file descriptors.
 func (invocation *DBusMethodInvocationInstance) GetMessage() DBusMessage {
@@ -67828,12 +68209,15 @@ func (invocation *DBusMethodInvocationInstance) GetPropertyInfo() *DBusPropertyI
 // 
 // The function returns the following values:
 // 
-// 	- goret string 
+// 	- goret string (nullable) 
 //
 // Gets the bus name that invoked the method.
+// 
+// This can return %NULL if not specified by the caller, e.g. on peer-to-peer
+// connections.
 func (invocation *DBusMethodInvocationInstance) GetSender() string {
 	var carg0 *C.GDBusMethodInvocation // in, none, converted
-	var cret  *C.gchar                 // return, none, string
+	var cret  *C.gchar                 // return, none, string, nullable-string
 
 	carg0 = (*C.GDBusMethodInvocation)(UnsafeDBusMethodInvocationToGlibNone(invocation))
 
@@ -67842,7 +68226,9 @@ func (invocation *DBusMethodInvocationInstance) GetSender() string {
 
 	var goret string
 
-	goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	if cret != nil {
+		goret = C.GoString((*C.char)(unsafe.Pointer(cret)))
+	}
 
 	return goret
 }
@@ -68068,6 +68454,15 @@ func unsafeWrapDBusObjectManagerClient(base *gobject.ObjectInstance) *DBusObject
 	return &DBusObjectManagerClientInstance{
 		ObjectInstance: *base,
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeDBusObjectManagerClient,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapDBusObjectManagerClient(inst)
+		},
+	)
 }
 
 func marshalDBusObjectManagerClientInstance(p unsafe.Pointer) (any, error) {
@@ -68426,6 +68821,15 @@ func unsafeWrapDBusObjectManagerServer(base *gobject.ObjectInstance) *DBusObject
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeDBusObjectManagerServer,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapDBusObjectManagerServer(inst)
+		},
+	)
+}
+
 func marshalDBusObjectManagerServerInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapDBusObjectManagerServer(gobject.ValueFromNative(p).Object()), nil
 }
@@ -68735,6 +69139,15 @@ func unsafeWrapDBusObjectProxy(base *gobject.ObjectInstance) *DBusObjectProxyIns
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeDBusObjectProxy,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapDBusObjectProxy(inst)
+		},
+	)
+}
+
 func marshalDBusObjectProxyInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapDBusObjectProxy(gobject.ValueFromNative(p).Object()), nil
 }
@@ -68964,6 +69377,15 @@ func unsafeWrapDBusObjectSkeleton(base *gobject.ObjectInstance) *DBusObjectSkele
 	return &DBusObjectSkeletonInstance{
 		ObjectInstance: *base,
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeDBusObjectSkeleton,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapDBusObjectSkeleton(inst)
+		},
+	)
 }
 
 func marshalDBusObjectSkeletonInstance(p unsafe.Pointer) (any, error) {
@@ -69316,6 +69738,8 @@ var _ DBusProxy = (*DBusProxyInstance)(nil)
 // context (see [method@GLib.MainContext.push_thread_default]) of the thread
 // where the instance was constructed.
 // 
+// 
+// ## A watch proxy example
 // An example using a proxy for a well-known name can be found in
 // [`gdbus-example-watch-proxy.c`](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gdbus-example-watch-proxy.c).
 type DBusProxy interface {
@@ -69440,6 +69864,15 @@ func unsafeWrapDBusProxy(base *gobject.ObjectInstance) *DBusProxyInstance {
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeDBusProxy,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapDBusProxy(inst)
+		},
+	)
+}
+
 func marshalDBusProxyInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapDBusProxy(gobject.ValueFromNative(p).Object()), nil
 }
@@ -69559,7 +69992,7 @@ func NewDBusProxyForBusFinish(res AsyncResult) (DBusProxy, error) {
 //
 // Like g_dbus_proxy_new_sync() but takes a #GBusType instead of a #GDBusConnection.
 // 
-// #GDBusProxy is used in this [example][gdbus-wellknown-proxy].
+// #GDBusProxy is used in this [example][class@Gio.DBusProxy#a-watch-proxy-example].
 func NewDBusProxyForBusSync(cancellable context.Context, busType BusType, flags DBusProxyFlags, info *DBusInterfaceInfo, name string, objectPath string, interfaceName string) (DBusProxy, error) {
 	var carg7 *C.GCancellable       // in, none, converted, nullable
 	var carg1 C.GBusType            // in, none, casted
@@ -69644,7 +70077,7 @@ func NewDBusProxyForBusSync(cancellable context.Context, busType BusType, flags 
 // This is a synchronous failable constructor. See g_dbus_proxy_new()
 // and g_dbus_proxy_new_finish() for the asynchronous version.
 // 
-// #GDBusProxy is used in this [example][gdbus-wellknown-proxy].
+// #GDBusProxy is used in this [example][class@Gio.DBusProxy#a-watch-proxy-example].
 func NewDBusProxySync(cancellable context.Context, connection DBusConnection, flags DBusProxyFlags, info *DBusInterfaceInfo, name string, objectPath string, interfaceName string) (DBusProxy, error) {
 	var carg7 *C.GCancellable       // in, none, converted, nullable
 	var carg1 *C.GDBusConnection    // in, none, converted
@@ -69732,7 +70165,7 @@ func NewDBusProxySync(cancellable context.Context, connection DBusConnection, fl
 // 
 // See g_dbus_proxy_new_sync() and for a synchronous version of this constructor.
 // 
-// #GDBusProxy is used in this [example][gdbus-wellknown-proxy].
+// #GDBusProxy is used in this [example][class@Gio.DBusProxy#a-watch-proxy-example].
 func NewDBusProxy(cancellable context.Context, connection DBusConnection, flags DBusProxyFlags, info *DBusInterfaceInfo, name string, objectPath string, interfaceName string, callback AsyncReadyCallback) {
 	var carg7 *C.GCancellable       // in, none, converted, nullable
 	var carg1 *C.GDBusConnection    // in, none, converted
@@ -69791,7 +70224,7 @@ func NewDBusProxy(cancellable context.Context, connection DBusConnection, flags 
 //
 // Like g_dbus_proxy_new() but takes a #GBusType instead of a #GDBusConnection.
 // 
-// #GDBusProxy is used in this [example][gdbus-wellknown-proxy].
+// #GDBusProxy is used in this [example][class@Gio.DBusProxy#a-watch-proxy-example].
 func NewDBusProxyForBus(cancellable context.Context, busType BusType, flags DBusProxyFlags, info *DBusInterfaceInfo, name string, objectPath string, interfaceName string, callback AsyncReadyCallback) {
 	var carg7 *C.GCancellable       // in, none, converted, nullable
 	var carg1 C.GBusType            // in, none, casted
@@ -70242,8 +70675,8 @@ type DBusServer interface {
 	// 
 	// If #GDBusServer:flags contains %G_DBUS_SERVER_FLAGS_RUN_IN_THREAD
 	// then the signal is emitted in a new thread dedicated to the
-	// connection. Otherwise the signal is emitted in the
-	// [thread-default main context][g-main-context-push-thread-default]
+	// connection. Otherwise the signal is emitted in the thread-default
+	// main context (see [method@GLib.MainContext.push_thread_default])
 	// of the thread that @server was constructed in.
 	// 
 	// You are guaranteed that signal handlers for this signal runs
@@ -70257,6 +70690,15 @@ func unsafeWrapDBusServer(base *gobject.ObjectInstance) *DBusServerInstance {
 	return &DBusServerInstance{
 		ObjectInstance: *base,
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeDBusServer,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapDBusServer(inst)
+		},
+	)
 }
 
 func marshalDBusServerInstance(p unsafe.Pointer) (any, error) {
@@ -70323,7 +70765,7 @@ func UnsafeDBusServerToGlibFull(c DBusServer) unsafe.Pointer {
 // The returned #GDBusServer isn't active - you have to start it with
 // g_dbus_server_start().
 // 
-// #GDBusServer is used in this [example][gdbus-peer-to-peer].
+// #GDBusServer is used in this [example](https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gdbus-example-peer.c).
 // 
 // This is a synchronous failable constructor. There is currently no
 // asynchronous version.
@@ -70503,8 +70945,8 @@ func (server *DBusServerInstance) Stop() {
 // 
 // If #GDBusServer:flags contains %G_DBUS_SERVER_FLAGS_RUN_IN_THREAD
 // then the signal is emitted in a new thread dedicated to the
-// connection. Otherwise the signal is emitted in the
-// [thread-default main context][g-main-context-push-thread-default]
+// connection. Otherwise the signal is emitted in the thread-default
+// main context (see [method@GLib.MainContext.push_thread_default])
 // of the thread that @server was constructed in.
 // 
 // You are guaranteed that signal handlers for this signal runs
@@ -70582,7 +71024,7 @@ var _ DebugControllerDBus = (*DebugControllerDBusInstance)(nil)
 //   debug_controller = G_DEBUG_CONTROLLER (g_debug_controller_dbus_new (priv-&gt;connection, NULL, &amp;child_error));
 //   if (debug_controller == NULL)
 //     {
-//       g_error ("Could not register debug controller on bus: %s"),
+//       g_error ("Could not register debug controller on bus: %s",
 //                child_error-&gt;message);
 //     }
 // 
@@ -70700,6 +71142,15 @@ func unsafeWrapDebugControllerDBus(base *gobject.ObjectInstance) *DebugControlle
 	return &DebugControllerDBusInstance{
 		ObjectInstance: *base,
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeDebugControllerDBus,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapDebugControllerDBus(inst)
+		},
+	)
 }
 
 func marshalDebugControllerDBusInstance(p unsafe.Pointer) (any, error) {
@@ -70989,6 +71440,15 @@ func unsafeWrapEmblem(base *gobject.ObjectInstance) *EmblemInstance {
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeEmblem,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapEmblem(inst)
+		},
+	)
+}
+
 func marshalEmblemInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapEmblem(gobject.ValueFromNative(p).Object()), nil
 }
@@ -71182,6 +71642,15 @@ func unsafeWrapEmblemedIcon(base *gobject.ObjectInstance) *EmblemedIconInstance 
 	return &EmblemedIconInstance{
 		ObjectInstance: *base,
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeEmblemedIcon,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapEmblemedIcon(inst)
+		},
+	)
 }
 
 func marshalEmblemedIconInstance(p unsafe.Pointer) (any, error) {
@@ -71772,6 +72241,15 @@ func unsafeWrapFileEnumerator(base *gobject.ObjectInstance) *FileEnumeratorInsta
 	return &FileEnumeratorInstance{
 		ObjectInstance: *base,
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeFileEnumerator,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapFileEnumerator(inst)
+		},
+	)
 }
 
 func marshalFileEnumeratorInstance(p unsafe.Pointer) (any, error) {
@@ -72797,6 +73275,15 @@ func unsafeWrapFileIcon(base *gobject.ObjectInstance) *FileIconInstance {
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeFileIcon,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapFileIcon(inst)
+		},
+	)
+}
+
 func marshalFileIconInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapFileIcon(gobject.ValueFromNative(p).Object()), nil
 }
@@ -72940,8 +73427,8 @@ type FileInfo interface {
 	// 
 	// 	- destInfo FileInfo: destination to copy attributes to. 
 	//
-	// First clears all of the [GFileAttribute][gio-GFileAttribute] of @dest_info,
-	// and then copies all of the file attributes from @src_info to @dest_info.
+	// First clears all of the [GFileAttribute](file-attributes.html#file-attributes) of
+	// @dest_info, and then copies all of the file attributes from @src_info to @dest_info.
 	CopyInto(FileInfo)
 	// Dup wraps g_file_info_dup
 	// 
@@ -72978,9 +73465,24 @@ type FileInfo interface {
 	// 
 	// 	- goret string (nullable) 
 	//
-	// Gets the value of an attribute, formatted as a string.
-	// This escapes things as needed to make the string valid
-	// UTF-8.
+	// Gets the value of an attribute, formatted as a human readable string.
+	// 
+	// This escapes things as needed to make the string valid UTF-8 and readable by
+	// humans. It’s not meant to be a machine readable or reversible escaping
+	// format.
+	// 
+	// To format file name attributes of type
+	// [enum@Gio.FileAttributeType.BYTE_STRING] for output as UTF-8, use
+	// [func@GLib.filename_to_utf8] instead:
+	// ```c
+	// const char *trash_orig_path_byte_string;
+	// g_autofree char *trash_orig_path_utf8 = NULL;
+	// 
+	// trash_orig_path_byte_string = g_file_info_get_attribute_byte_string (info, G_FILE_ATTRIBUTE_TRASH_ORIG_PATH);
+	// trash_orig_path_utf8 = g_filename_to_utf8 (trash_orig_path_byte_string, -1, NULL, NULL, NULL);
+	// if (trash_orig_path_utf8 != NULL)
+	//   g_message ("Some larger UTF-8 string with filename embedded as %s", trash_orig_path_utf8);
+	// ```
 	GetAttributeAsString(string) string
 	// GetAttributeBoolean wraps g_file_info_get_attribute_boolean
 	// 
@@ -73210,7 +73712,7 @@ type FileInfo interface {
 	// 
 	// 	- goret string (nullable) 
 	//
-	// Gets the [entity tag](iface.File.html#entity-tags) for a given
+	// Gets the [entity tag][iface@Gio.File#entity-tags] for a given
 	// #GFileInfo. See %G_FILE_ATTRIBUTE_ETAG_VALUE.
 	// 
 	// It is an error to call this if the #GFileInfo does not contain
@@ -73541,7 +74043,7 @@ type FileInfo interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- contentType string: a content type. See [GContentType][gio-GContentType] 
+	// 	- contentType string: a [content type](content-types.html#content-types). 
 	//
 	// Sets the content type attribute for a given #GFileInfo.
 	// See %G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE.
@@ -73682,6 +74184,15 @@ func unsafeWrapFileInfo(base *gobject.ObjectInstance) *FileInfoInstance {
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeFileInfo,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapFileInfo(inst)
+		},
+	)
+}
+
 func marshalFileInfoInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapFileInfo(gobject.ValueFromNative(p).Object()), nil
 }
@@ -73752,8 +74263,8 @@ func (info *FileInfoInstance) ClearStatus() {
 // 
 // 	- destInfo FileInfo: destination to copy attributes to. 
 //
-// First clears all of the [GFileAttribute][gio-GFileAttribute] of @dest_info,
-// and then copies all of the file attributes from @src_info to @dest_info.
+// First clears all of the [GFileAttribute](file-attributes.html#file-attributes) of
+// @dest_info, and then copies all of the file attributes from @src_info to @dest_info.
 func (srcInfo *FileInfoInstance) CopyInto(destInfo FileInfo) {
 	var carg0 *C.GFileInfo // in, none, converted
 	var carg1 *C.GFileInfo // in, none, converted
@@ -73833,9 +74344,24 @@ func (info *FileInfoInstance) GetAccessDateTime() *glib.DateTime {
 // 
 // 	- goret string (nullable) 
 //
-// Gets the value of an attribute, formatted as a string.
-// This escapes things as needed to make the string valid
-// UTF-8.
+// Gets the value of an attribute, formatted as a human readable string.
+// 
+// This escapes things as needed to make the string valid UTF-8 and readable by
+// humans. It’s not meant to be a machine readable or reversible escaping
+// format.
+// 
+// To format file name attributes of type
+// [enum@Gio.FileAttributeType.BYTE_STRING] for output as UTF-8, use
+// [func@GLib.filename_to_utf8] instead:
+// ```c
+// const char *trash_orig_path_byte_string;
+// g_autofree char *trash_orig_path_utf8 = NULL;
+// 
+// trash_orig_path_byte_string = g_file_info_get_attribute_byte_string (info, G_FILE_ATTRIBUTE_TRASH_ORIG_PATH);
+// trash_orig_path_utf8 = g_filename_to_utf8 (trash_orig_path_byte_string, -1, NULL, NULL, NULL);
+// if (trash_orig_path_utf8 != NULL)
+//   g_message ("Some larger UTF-8 string with filename embedded as %s", trash_orig_path_utf8);
+// ```
 func (info *FileInfoInstance) GetAttributeAsString(attribute string) string {
 	var carg0 *C.GFileInfo // in, none, converted
 	var carg1 *C.char      // in, none, string
@@ -74408,7 +74934,7 @@ func (info *FileInfoInstance) GetEditName() string {
 // 
 // 	- goret string (nullable) 
 //
-// Gets the [entity tag](iface.File.html#entity-tags) for a given
+// Gets the [entity tag][iface@Gio.File#entity-tags] for a given
 // #GFileInfo. See %G_FILE_ATTRIBUTE_ETAG_VALUE.
 // 
 // It is an error to call this if the #GFileInfo does not contain
@@ -75215,7 +75741,7 @@ func (info *FileInfoInstance) SetAttributeUint64(attribute string, attrValue uin
 // 
 // The function takes the following parameters:
 // 
-// 	- contentType string: a content type. See [GContentType][gio-GContentType] 
+// 	- contentType string: a [content type](content-types.html#content-types). 
 //
 // Sets the content type attribute for a given #GFileInfo.
 // See %G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE.
@@ -75567,8 +76093,8 @@ type FileMonitor interface {
 	// implementations only.
 	// 
 	// Implementations are responsible to call this method from the
-	// [thread-default main context][g-main-context-push-thread-default] of the
-	// thread that the monitor was created in.
+	// thread-default main context (see [method@GLib.MainContext.push_thread_default])
+	// of the thread that the monitor was created in.
 	EmitEvent(File, File, FileMonitorEvent)
 	// IsCancelled wraps g_file_monitor_is_cancelled
 	// 
@@ -75648,6 +76174,15 @@ func unsafeWrapFileMonitor(base *gobject.ObjectInstance) *FileMonitorInstance {
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeFileMonitor,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapFileMonitor(inst)
+		},
+	)
+}
+
 func marshalFileMonitorInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapFileMonitor(gobject.ValueFromNative(p).Object()), nil
 }
@@ -75719,8 +76254,8 @@ func (monitor *FileMonitorInstance) Cancel() bool {
 // implementations only.
 // 
 // Implementations are responsible to call this method from the
-// [thread-default main context][g-main-context-push-thread-default] of the
-// thread that the monitor was created in.
+// thread-default main context (see [method@GLib.MainContext.push_thread_default])
+// of the thread that the monitor was created in.
 func (monitor *FileMonitorInstance) EmitEvent(child File, otherFile File, eventType FileMonitorEvent) {
 	var carg0 *C.GFileMonitor     // in, none, converted
 	var carg1 *C.GFile            // in, none, converted
@@ -76042,6 +76577,15 @@ func unsafeWrapFilenameCompleter(base *gobject.ObjectInstance) *FilenameComplete
 	return &FilenameCompleterInstance{
 		ObjectInstance: *base,
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeFilenameCompleter,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapFilenameCompleter(inst)
+		},
+	)
 }
 
 func marshalFilenameCompleterInstance(p unsafe.Pointer) (any, error) {
@@ -76527,6 +77071,15 @@ func unsafeWrapIOStream(base *gobject.ObjectInstance) *IOStreamInstance {
 	return &IOStreamInstance{
 		ObjectInstance: *base,
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeIOStream,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapIOStream(inst)
+		},
+	)
 }
 
 func marshalIOStreamInstance(p unsafe.Pointer) (any, error) {
@@ -77421,6 +77974,15 @@ func unsafeWrapInetAddress(base *gobject.ObjectInstance) *InetAddressInstance {
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeInetAddress,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapInetAddress(inst)
+		},
+	)
+}
+
 func marshalInetAddressInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapInetAddress(gobject.ValueFromNative(p).Object()), nil
 }
@@ -78078,6 +78640,15 @@ func unsafeWrapInetAddressMask(base *gobject.ObjectInstance) *InetAddressMaskIns
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeInetAddressMask,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapInetAddressMask(inst)
+		},
+	)
+}
+
 func marshalInetAddressMaskInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapInetAddressMask(gobject.ValueFromNative(p).Object()), nil
 }
@@ -78504,7 +79075,7 @@ type InputStream interface {
 	// 
 	// 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore. 
 	// 	- buffer []byte: 
-	//     a buffer to read data into (which should be at least count bytes long). 
+	//   a buffer to read data into (which should be at least count bytes long). 
 	// 
 	// The function returns the following values:
 	// 
@@ -78539,7 +79110,7 @@ type InputStream interface {
 	// 
 	// 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore. 
 	// 	- buffer []byte: 
-	//     a buffer to read data into (which should be at least count bytes long). 
+	//   a buffer to read data into (which should be at least count bytes long). 
 	// 
 	// The function returns the following values:
 	// 
@@ -78573,7 +79144,7 @@ type InputStream interface {
 	// 
 	// 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore 
 	// 	- buffer []byte: 
-	//     a buffer to read data into (which should be at least count bytes long) 
+	//   a buffer to read data into (which should be at least count bytes long) 
 	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 	//   to call when the request is satisfied 
@@ -78581,9 +79152,9 @@ type InputStream interface {
 	// Request an asynchronous read of @count bytes from the stream into the
 	// buffer starting at @buffer.
 	// 
-	// This is the asynchronous equivalent of g_input_stream_read_all().
+	// This is the asynchronous equivalent of [method@InputStream.read_all].
 	// 
-	// Call g_input_stream_read_all_finish() to collect the result.
+	// Call [method@InputStream.read_all_finish] to collect the result.
 	// 
 	// Any outstanding I/O request with higher priority (lower numerical
 	// value) will be executed before an outstanding request with lower
@@ -78602,7 +79173,7 @@ type InputStream interface {
 	// 	- _goerr error (nullable): an error 
 	//
 	// Finishes an asynchronous stream read operation started with
-	// g_input_stream_read_all_async().
+	// [method@InputStream.read_all_async].
 	// 
 	// As a special exception to the normal conventions for functions that
 	// use #GError, if this function returns %FALSE (and sets @error) then
@@ -78617,7 +79188,7 @@ type InputStream interface {
 	// 
 	// 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore. 
 	// 	- buffer []byte: 
-	//     a buffer to read data into (which should be at least count bytes long). 
+	//   a buffer to read data into (which should be at least count bytes long). 
 	// 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority)
 	// of the request. 
 	// 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
@@ -78919,6 +79490,15 @@ func unsafeWrapInputStream(base *gobject.ObjectInstance) *InputStreamInstance {
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeInputStream,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapInputStream(inst)
+		},
+	)
+}
+
 func marshalInputStreamInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapInputStream(gobject.ValueFromNative(p).Object()), nil
 }
@@ -79163,7 +79743,7 @@ func (stream *InputStreamInstance) IsClosed() bool {
 // 
 // 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore. 
 // 	- buffer []byte: 
-//     a buffer to read data into (which should be at least count bytes long). 
+//   a buffer to read data into (which should be at least count bytes long). 
 // 
 // The function returns the following values:
 // 
@@ -79230,7 +79810,7 @@ func (stream *InputStreamInstance) Read(cancellable context.Context, buffer []by
 // 
 // 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore. 
 // 	- buffer []byte: 
-//     a buffer to read data into (which should be at least count bytes long). 
+//   a buffer to read data into (which should be at least count bytes long). 
 // 
 // The function returns the following values:
 // 
@@ -79301,7 +79881,7 @@ func (stream *InputStreamInstance) ReadAll(cancellable context.Context, buffer [
 // 
 // 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore 
 // 	- buffer []byte: 
-//     a buffer to read data into (which should be at least count bytes long) 
+//   a buffer to read data into (which should be at least count bytes long) 
 // 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority) of the request 
 // 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
 //   to call when the request is satisfied 
@@ -79309,9 +79889,9 @@ func (stream *InputStreamInstance) ReadAll(cancellable context.Context, buffer [
 // Request an asynchronous read of @count bytes from the stream into the
 // buffer starting at @buffer.
 // 
-// This is the asynchronous equivalent of g_input_stream_read_all().
+// This is the asynchronous equivalent of [method@InputStream.read_all].
 // 
-// Call g_input_stream_read_all_finish() to collect the result.
+// Call [method@InputStream.read_all_finish] to collect the result.
 // 
 // Any outstanding I/O request with higher priority (lower numerical
 // value) will be executed before an outstanding request with lower
@@ -79360,7 +79940,7 @@ func (stream *InputStreamInstance) ReadAllAsync(cancellable context.Context, buf
 // 	- _goerr error (nullable): an error 
 //
 // Finishes an asynchronous stream read operation started with
-// g_input_stream_read_all_async().
+// [method@InputStream.read_all_async].
 // 
 // As a special exception to the normal conventions for functions that
 // use #GError, if this function returns %FALSE (and sets @error) then
@@ -79403,7 +79983,7 @@ func (stream *InputStreamInstance) ReadAllFinish(result AsyncResult) (uint, bool
 // 
 // 	- cancellable context.Context (nullable): optional #GCancellable object, %NULL to ignore. 
 // 	- buffer []byte: 
-//     a buffer to read data into (which should be at least count bytes long). 
+//   a buffer to read data into (which should be at least count bytes long). 
 // 	- ioPriority int32: the [I/O priority](iface.AsyncResult.html#io-priority)
 // of the request. 
 // 	- callback AsyncReadyCallback (nullable): a #GAsyncReadyCallback
@@ -80353,6 +80933,15 @@ func unsafeWrapListStore(base *gobject.ObjectInstance) *ListStoreInstance {
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeListStore,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapListStore(inst)
+		},
+	)
+}
+
 func marshalListStoreInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapListStore(gobject.ValueFromNative(p).Object()), nil
 }
@@ -80526,6 +81115,15 @@ func unsafeWrapMemoryInputStream(base *gobject.ObjectInstance) *MemoryInputStrea
 			ObjectInstance: *base,
 		},
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeMemoryInputStream,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapMemoryInputStream(inst)
+		},
+	)
 }
 
 func marshalMemoryInputStreamInstance(p unsafe.Pointer) (any, error) {
@@ -80717,6 +81315,15 @@ func unsafeWrapMenuAttributeIter(base *gobject.ObjectInstance) *MenuAttributeIte
 	return &MenuAttributeIterInstance{
 		ObjectInstance: *base,
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeMenuAttributeIter,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapMenuAttributeIter(inst)
+		},
+	)
 }
 
 func marshalMenuAttributeIterInstance(p unsafe.Pointer) (any, error) {
@@ -80979,6 +81586,15 @@ func unsafeWrapMenuItem(base *gobject.ObjectInstance) *MenuItemInstance {
 	return &MenuItemInstance{
 		ObjectInstance: *base,
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeMenuItem,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapMenuItem(inst)
+		},
+	)
 }
 
 func marshalMenuItemInstance(p unsafe.Pointer) (any, error) {
@@ -81537,6 +82153,15 @@ func unsafeWrapMenuLinkIter(base *gobject.ObjectInstance) *MenuLinkIterInstance 
 	return &MenuLinkIterInstance{
 		ObjectInstance: *base,
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeMenuLinkIter,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapMenuLinkIter(inst)
+		},
+	)
 }
 
 func marshalMenuLinkIterInstance(p unsafe.Pointer) (any, error) {
@@ -82167,6 +82792,15 @@ func unsafeWrapMenuModel(base *gobject.ObjectInstance) *MenuModelInstance {
 	return &MenuModelInstance{
 		ObjectInstance: *base,
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeMenuModel,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapMenuModel(inst)
+		},
+	)
 }
 
 func marshalMenuModelInstance(p unsafe.Pointer) (any, error) {
@@ -83103,6 +83737,15 @@ func unsafeWrapMountOperation(base *gobject.ObjectInstance) *MountOperationInsta
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeMountOperation,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapMountOperation(inst)
+		},
+	)
+}
+
 func marshalMountOperationInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapMountOperation(gobject.ValueFromNative(p).Object()), nil
 }
@@ -83997,6 +84640,15 @@ func unsafeWrapNetworkAddress(base *gobject.ObjectInstance) *NetworkAddressInsta
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeNetworkAddress,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapNetworkAddress(inst)
+		},
+	)
+}
+
 func marshalNetworkAddressInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapNetworkAddress(gobject.ValueFromNative(p).Object()), nil
 }
@@ -84396,6 +85048,15 @@ func unsafeWrapNetworkService(base *gobject.ObjectInstance) *NetworkServiceInsta
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeNetworkService,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapNetworkService(inst)
+		},
+	)
+}
+
 func marshalNetworkServiceInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapNetworkService(gobject.ValueFromNative(p).Object()), nil
 }
@@ -84780,6 +85441,15 @@ func unsafeWrapNotification(base *gobject.ObjectInstance) *NotificationInstance 
 	return &NotificationInstance{
 		ObjectInstance: *base,
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeNotification,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapNotification(inst)
+		},
+	)
 }
 
 func marshalNotificationInstance(p unsafe.Pointer) (any, error) {
@@ -85906,6 +86576,15 @@ func unsafeWrapOutputStream(base *gobject.ObjectInstance) *OutputStreamInstance 
 	return &OutputStreamInstance{
 		ObjectInstance: *base,
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeOutputStream,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapOutputStream(inst)
+		},
+	)
 }
 
 func marshalOutputStreamInstance(p unsafe.Pointer) (any, error) {
@@ -88618,6 +89297,15 @@ func unsafeWrapPermission(base *gobject.ObjectInstance) *PermissionInstance {
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypePermission,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapPermission(inst)
+		},
+	)
+}
+
 func marshalPermissionInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapPermission(gobject.ValueFromNative(p).Object()), nil
 }
@@ -89540,6 +90228,15 @@ func unsafeWrapPropertyAction(base *gobject.ObjectInstance) *PropertyActionInsta
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypePropertyAction,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapPropertyAction(inst)
+		},
+	)
+}
+
 func marshalPropertyActionInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapPropertyAction(gobject.ValueFromNative(p).Object()), nil
 }
@@ -90057,6 +90754,15 @@ func unsafeWrapResolver(base *gobject.ObjectInstance) *ResolverInstance {
 	return &ResolverInstance{
 		ObjectInstance: *base,
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeResolver,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapResolver(inst)
+		},
+	)
 }
 
 func marshalResolverInstance(p unsafe.Pointer) (any, error) {
@@ -91834,6 +92540,31 @@ var _ Settings = (*SettingsInstance)(nil)
 // `glib-compile-schemas` expects schema files to have the extension
 // `.gschema.override`.
 // 
+// ## Delay-apply mode
+// 
+// By default, values set on a [class@Gio.Settings] instance immediately start
+// to be written to the backend (although these writes may not complete by the
+// time that [method@Gio.Settings.set]) returns; see [func@Gio.Settings.sync]).
+// 
+// In order to allow groups of settings to be changed simultaneously and
+// atomically, GSettings also supports a ‘delay-apply’ mode. In this mode,
+// updated values are kept locally in the [class@Gio.Settings] instance until
+// they are explicitly applied by calling [method@Gio.Settings.apply].
+// 
+// For example, this could be useful for a preferences dialog where the
+// preferences all need to be applied simultaneously when the user clicks ‘Save’.
+// 
+// Switching a [class@Gio.Settings] instance to ‘delay-apply’ mode is a one-time
+// irreversible operation: from that point onwards, *all* changes made to that
+// [class@Gio.Settings] have to be explicitly applied by calling
+// [method@Gio.Settings.apply]. The ‘delay-apply’ mode is also propagated to any
+// child settings objects subsequently created using
+// [method@Gio.Settings.get_child].
+// 
+// At any point, the set of unapplied changes can be queried using
+// [property@Gio.Settings:has-unapplied], and discarded by calling
+// [method@Gio.Settings.revert].
+// 
 // ## Binding
 // 
 // A very convenient feature of GSettings lets you bind [class@GObject.Object]
@@ -91875,6 +92606,70 @@ var _ Settings = (*SettingsInstance)(nil)
 // 
 // ## Build system integration
 // 
+// ### Meson
+// 
+// GSettings is natively supported by Meson’s [GNOME module](https://mesonbuild.com/Gnome-module.html).
+// 
+// You can install the schemas as any other data file:
+// 
+// ```
+// install_data(
+//   'org.foo.MyApp.gschema.xml',
+//   install_dir: get_option('datadir') / 'glib-2.0/schemas',
+// )
+// ```
+// 
+// You can use `gnome.post_install()` function to compile the schemas on
+// installation:
+// 
+// ```
+// gnome = import('gnome')
+// gnome.post_install(
+//   glib_compile_schemas: true,
+// )
+// ```
+// 
+// If an enumerated type defined in a C header file is to be used in a GSettings
+// schema, it can either be defined manually using an `&lt;enum&gt;` element in the
+// schema XML, or it can be extracted automatically from the C header. This
+// approach is preferred, as it ensures the two representations are always
+// synchronised. To do so, you will need to use the `gnome.mkenums()` function
+// with the following templates:
+// 
+// ```
+// schemas_enums = gnome.mkenums('org.foo.MyApp.enums.xml',
+//   comments: '&lt;!-- @comment@ --&gt;',
+//   fhead: '&lt;schemalist&gt;',
+//   vhead: '  &lt;@type@ id="org.foo.MyApp.@EnumName@"&gt;',
+//   vprod: '    &lt;value nick="@valuenick@" value="@valuenum@"/&gt;',
+//   vtail: '  &lt;/@type@&gt;',
+//   ftail: '&lt;/schemalist&gt;',
+//   sources: enum_sources,
+//   install_header: true,
+//   install_dir: get_option('datadir') / 'glib-2.0/schemas',
+// )
+// ```
+// 
+// It is recommended to validate your schemas as part of the test suite for
+// your application:
+// 
+// ```
+// test('validate-schema',
+//   find_program('glib-compile-schemas'),
+//   args: ['--strict', '--dry-run', meson.current_source_dir()],
+// )
+// ```
+// 
+// If your application allows running uninstalled, you should also use the
+// `gnome.compile_schemas()` function to compile the schemas in the current
+// build directory:
+// 
+// ```
+// gnome.compile_schemas()
+// ```
+// 
+// ### Autotools
+// 
 // GSettings comes with autotools integration to simplify compiling and
 // installing schemas. To add GSettings support to an application, add the
 // following to your `configure.ac`:
@@ -91890,25 +92685,6 @@ var _ Settings = (*SettingsInstance)(nil)
 // 
 // @GSETTINGS_RULES@
 // ```
-// 
-// No changes are needed to the build system to mark a schema XML file for
-// translation. Assuming it sets the `gettext-domain` attribute, a schema may
-// be marked for translation by adding it to `POTFILES.in`, assuming gettext
-// 0.19 is in use (the preferred method for translation):
-// ```
-// data/org.foo.MyApp.gschema.xml
-// ```
-// 
-// Alternatively, if intltool 0.50.1 is in use:
-// ```
-// [type: gettext/gsettings]data/org.foo.MyApp.gschema.xml
-// ```
-// 
-// GSettings will use gettext to look up translations for the `&lt;summary&gt;` and
-// `&lt;description&gt;` elements, and also any `&lt;default&gt;` elements which have a
-// `l10n` attribute set. Translations must not be included in the `.gschema.xml`
-// file by the build system, for example by using intltool XML rules with a
-// `.gschema.xml.in` template.
 // 
 // If an enumerated type defined in a C header file is to be used in a GSettings
 // schema, it can either be defined manually using an `&lt;enum&gt;` element in the
@@ -91926,16 +92702,39 @@ var _ Settings = (*SettingsInstance)(nil)
 // automatically included in the schema compilation, install and uninstall
 // rules. It should not be committed to version control or included in
 // `EXTRA_DIST`.
+// 
+// ## Localization
+// 
+// No changes are needed to the build system to mark a schema XML file for
+// translation. Assuming it sets the `gettext-domain` attribute, a schema may
+// be marked for translation by adding it to `POTFILES.in`, assuming gettext
+// 0.19 or newer is in use (the preferred method for translation):
+// ```
+// data/org.foo.MyApp.gschema.xml
+// ```
+// 
+// Alternatively, if intltool 0.50.1 is in use:
+// ```
+// [type: gettext/gsettings]data/org.foo.MyApp.gschema.xml
+// ```
+// 
+// GSettings will use gettext to look up translations for the `&lt;summary&gt;` and
+// `&lt;description&gt;` elements, and also any `&lt;default&gt;` elements which have a
+// `l10n` attribute set.
+// 
+// Translations **must not** be included in the `.gschema.xml` file by the build
+// system, for example by using a rule to generate the XML file from a template.
 type Settings interface {
 	gobject.Object
 	upcastToGSettings() *SettingsInstance
 
 	// Apply wraps g_settings_apply
 	//
-	// Applies any changes that have been made to the settings.  This
-	// function does nothing unless @settings is in 'delay-apply' mode;
-	// see g_settings_delay().  In the normal case settings are always
-	// applied immediately.
+	// Applies any changes that have been made to the settings.
+	// 
+	// This function does nothing unless @settings is in
+	// [‘delay-apply’ mode](class.Settings.html#delay-apply-mode).  In the normal
+	// case settings are always applied immediately.
 	Apply()
 	// CreateAction wraps g_settings_create_action
 	// 
@@ -91947,7 +92746,7 @@ type Settings interface {
 	// 
 	// 	- goret Action 
 	//
-	// Creates a #GAction corresponding to a given #GSettings key.
+	// Creates a [iface@Gio.Action] corresponding to a given [class@Gio.Settings] key.
 	// 
 	// The action has the same name as the key.
 	// 
@@ -91964,9 +92763,12 @@ type Settings interface {
 	CreateAction(string) Action
 	// Delay wraps g_settings_delay
 	//
-	// Changes the #GSettings object into 'delay-apply' mode. In this
+	// Changes the [class@Gio.Settings] object into
+	// [‘delay-apply’ mode](class.Settings.html#delay-apply-mode).
+	// 
+	// In this
 	// mode, changes to @settings are not immediately propagated to the
-	// backend, but kept locally until g_settings_apply() is called.
+	// backend, but kept locally until [method@Gio.Settings.apply] is called.
 	Delay()
 	// GetBoolean wraps g_settings_get_boolean
 	// 
@@ -91980,10 +92782,10 @@ type Settings interface {
 	//
 	// Gets the value that is stored at @key in @settings.
 	// 
-	// A convenience variant of g_settings_get() for booleans.
+	// A convenience variant of [method@Gio.Settings.get] for booleans.
 	// 
-	// It is a programmer error to give a @key that isn't specified as
-	// having a boolean type in the schema for @settings.
+	// It is a programmer error to give a @key that isn’t specified as
+	// having a `b` type in the schema for @settings (see [struct@GLib.VariantType]).
 	GetBoolean(string) bool
 	// GetChild wraps g_settings_get_child
 	// 
@@ -91996,14 +92798,14 @@ type Settings interface {
 	// 	- goret Settings 
 	//
 	// Creates a child settings object which has a base path of
-	// `base-path/@name`, where `base-path` is the base path of
-	// @settings.
+	// `base-path/name`, where `base-path` is the base path of
+	// @settings and `name` is as specified by the caller.
 	// 
 	// The schema for the child settings object must have been declared
 	// in the schema of @settings using a `&lt;child&gt;` element.
 	// 
-	// The created child settings object will inherit the #GSettings:delay-apply
-	// mode from @settings.
+	// The created child settings object will inherit the
+	// [property@Gio.Settings:delay-apply] mode from @settings.
 	GetChild(string) Settings
 	// GetDouble wraps g_settings_get_double
 	// 
@@ -92017,10 +92819,10 @@ type Settings interface {
 	//
 	// Gets the value that is stored at @key in @settings.
 	// 
-	// A convenience variant of g_settings_get() for doubles.
+	// A convenience variant of [method@Gio.Settings.get] for doubles.
 	// 
-	// It is a programmer error to give a @key that isn't specified as
-	// having a 'double' type in the schema for @settings.
+	// It is a programmer error to give a @key that isn’t specified as
+	// having a `d` type in the schema for @settings (see [struct@GLib.VariantType]).
 	GetDouble(string) float64
 	// GetEnum wraps g_settings_get_enum
 	// 
@@ -92038,7 +92840,7 @@ type Settings interface {
 	// In order to use this function the type of the value must be a string
 	// and it must be marked in the schema file as an enumerated type.
 	// 
-	// It is a programmer error to give a @key that isn't contained in the
+	// It is a programmer error to give a @key that isn’t contained in the
 	// schema for @settings or is not marked as an enumerated type.
 	// 
 	// If the value stored in the configuration database is not a valid
@@ -92061,7 +92863,7 @@ type Settings interface {
 	// In order to use this function the type of the value must be an array
 	// of strings and it must be marked in the schema file as a flags type.
 	// 
-	// It is a programmer error to give a @key that isn't contained in the
+	// It is a programmer error to give a @key that isn’t contained in the
 	// schema for @settings or is not marked as a flags type.
 	// 
 	// If the value stored in the configuration database is not a valid
@@ -92074,8 +92876,11 @@ type Settings interface {
 	// 
 	// 	- goret bool 
 	//
-	// Returns whether the #GSettings object has any unapplied
-	// changes.  This can only be the case if it is in 'delayed-apply' mode.
+	// Returns whether the [class@Gio.Settings] object has any unapplied
+	// changes.
+	// 
+	// This can only be the case if it is in
+	// [‘delay-apply’ mode](class.Settings.html#delay-apply-mode).
 	GetHasUnapplied() bool
 	// GetInt wraps g_settings_get_int
 	// 
@@ -92089,10 +92894,10 @@ type Settings interface {
 	//
 	// Gets the value that is stored at @key in @settings.
 	// 
-	// A convenience variant of g_settings_get() for 32-bit integers.
+	// A convenience variant of [method@Gio.Settings.get] for 32-bit integers.
 	// 
-	// It is a programmer error to give a @key that isn't specified as
-	// having a int32 type in the schema for @settings.
+	// It is a programmer error to give a @key that isn’t specified as
+	// having an `i` type in the schema for @settings (see [struct@GLib.VariantType]).
 	GetInt(string) int32
 	// GetInt64 wraps g_settings_get_int64
 	// 
@@ -92106,10 +92911,10 @@ type Settings interface {
 	//
 	// Gets the value that is stored at @key in @settings.
 	// 
-	// A convenience variant of g_settings_get() for 64-bit integers.
+	// A convenience variant of [method@Gio.Settings.get] for 64-bit integers.
 	// 
-	// It is a programmer error to give a @key that isn't specified as
-	// having a int64 type in the schema for @settings.
+	// It is a programmer error to give a @key that isn’t specified as
+	// having an `x` type in the schema for @settings (see [struct@GLib.VariantType]).
 	GetInt64(string) int64
 	// GetString wraps g_settings_get_string
 	// 
@@ -92123,10 +92928,10 @@ type Settings interface {
 	//
 	// Gets the value that is stored at @key in @settings.
 	// 
-	// A convenience variant of g_settings_get() for strings.
+	// A convenience variant of [method@Gio.Settings.get] for strings.
 	// 
-	// It is a programmer error to give a @key that isn't specified as
-	// having a string type in the schema for @settings.
+	// It is a programmer error to give a @key that isn’t specified as
+	// having an `s` type in the schema for @settings (see [struct@GLib.VariantType]).
 	GetString(string) string
 	// GetStrv wraps g_settings_get_strv
 	// 
@@ -92138,10 +92943,10 @@ type Settings interface {
 	// 
 	// 	- goret []string 
 	//
-	// A convenience variant of g_settings_get() for string arrays.
+	// A convenience variant of [method@Gio.Settings.get] for string arrays.
 	// 
-	// It is a programmer error to give a @key that isn't specified as
-	// having an array of strings type in the schema for @settings.
+	// It is a programmer error to give a @key that isn’t specified as
+	// having an `as` type in the schema for @settings (see [struct@GLib.VariantType]).
 	GetStrv(string) []string
 	// GetUint wraps g_settings_get_uint
 	// 
@@ -92155,11 +92960,11 @@ type Settings interface {
 	//
 	// Gets the value that is stored at @key in @settings.
 	// 
-	// A convenience variant of g_settings_get() for 32-bit unsigned
+	// A convenience variant of [method@Gio.Settings.get] for 32-bit unsigned
 	// integers.
 	// 
-	// It is a programmer error to give a @key that isn't specified as
-	// having a uint32 type in the schema for @settings.
+	// It is a programmer error to give a @key that isn’t specified as
+	// having a `u` type in the schema for @settings (see [struct@GLib.VariantType]).
 	GetUint(string) uint
 	// GetUint64 wraps g_settings_get_uint64
 	// 
@@ -92173,11 +92978,11 @@ type Settings interface {
 	//
 	// Gets the value that is stored at @key in @settings.
 	// 
-	// A convenience variant of g_settings_get() for 64-bit unsigned
+	// A convenience variant of [method@Gio.Settings.get] for 64-bit unsigned
 	// integers.
 	// 
-	// It is a programmer error to give a @key that isn't specified as
-	// having a uint64 type in the schema for @settings.
+	// It is a programmer error to give a @key that isn’t specified as
+	// having a `t` type in the schema for @settings (see [struct@GLib.VariantType]).
 	GetUint64(string) uint64
 	// IsWritable wraps g_settings_is_writable
 	// 
@@ -92189,7 +92994,7 @@ type Settings interface {
 	// 
 	// 	- goret bool 
 	//
-	// Finds out if a key can be written or not
+	// Finds out if a key can be written.
 	IsWritable(string) bool
 	// ListChildren wraps g_settings_list_children
 	// 
@@ -92200,13 +93005,13 @@ type Settings interface {
 	// Gets the list of children on @settings.
 	// 
 	// The list is exactly the list of strings for which it is not an error
-	// to call g_settings_get_child().
+	// to call [method@Gio.Settings.get_child].
 	// 
-	// There is little reason to call this function from "normal" code, since
+	// There is little reason to call this function from ‘normal’ code, since
 	// you should already know what children are in your schema. This function
 	// may still be useful there for introspection reasons, however.
 	// 
-	// You should free the return value with g_strfreev() when you are done
+	// You should free the return value with [func@GLib.strfreev] when you are done
 	// with it.
 	ListChildren() []string
 	// ListKeys wraps g_settings_list_keys
@@ -92217,14 +93022,14 @@ type Settings interface {
 	//
 	// Introspects the list of keys on @settings.
 	// 
-	// You should probably not be calling this function from "normal" code
+	// You should probably not be calling this function from ‘normal’ code
 	// (since you should already know what keys are in your schema).  This
 	// function is intended for introspection reasons.
 	// 
-	// You should free the return value with g_strfreev() when you are done
+	// You should free the return value with [func@GLib.strfreev] when you are done
 	// with it.
 	//
-	// Deprecated: (since 2.46.0) Use g_settings_schema_list_keys() instead.
+	// Deprecated: (since 2.46.0) Use [method@Gio.SettingsSchema.list_keys] instead.
 	ListKeys() []string
 	// Reset wraps g_settings_reset
 	// 
@@ -92240,10 +93045,11 @@ type Settings interface {
 	Reset(string)
 	// Revert wraps g_settings_revert
 	//
-	// Reverts all non-applied changes to the settings.  This function
-	// does nothing unless @settings is in 'delay-apply' mode; see
-	// g_settings_delay().  In the normal case settings are always applied
-	// immediately.
+	// Reverts all unapplied changes to the settings.
+	// 
+	// This function does nothing unless @settings is in
+	// [‘delay-apply’ mode](class.Settings.html#delay-apply-mode).  In the normal
+	// case settings are always applied immediately.
 	// 
 	// Change notifications will be emitted for affected keys.
 	Revert()
@@ -92251,7 +93057,7 @@ type Settings interface {
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- key string: the name of the key to set 
+	// 	- key string: the key to set the value for 
 	// 	- value bool: the value to set it to 
 	// 
 	// The function returns the following values:
@@ -92260,16 +93066,16 @@ type Settings interface {
 	//
 	// Sets @key in @settings to @value.
 	// 
-	// A convenience variant of g_settings_set() for booleans.
+	// A convenience variant of [method@Gio.Settings.set] for booleans.
 	// 
-	// It is a programmer error to give a @key that isn't specified as
-	// having a boolean type in the schema for @settings.
+	// It is a programmer error to give a @key that isn’t specified as
+	// having a `b` type in the schema for @settings (see [struct@GLib.VariantType]).
 	SetBoolean(string, bool) bool
 	// SetDouble wraps g_settings_set_double
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- key string: the name of the key to set 
+	// 	- key string: the key to set the value for 
 	// 	- value float64: the value to set it to 
 	// 
 	// The function returns the following values:
@@ -92278,16 +93084,16 @@ type Settings interface {
 	//
 	// Sets @key in @settings to @value.
 	// 
-	// A convenience variant of g_settings_set() for doubles.
+	// A convenience variant of [method@Gio.Settings.set] for doubles.
 	// 
-	// It is a programmer error to give a @key that isn't specified as
-	// having a 'double' type in the schema for @settings.
+	// It is a programmer error to give a @key that isn’t specified as
+	// having a `d` type in the schema for @settings (see [struct@GLib.VariantType]).
 	SetDouble(string, float64) bool
 	// SetEnum wraps g_settings_set_enum
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- key string: a key, within @settings 
+	// 	- key string: the key to set the value for 
 	// 	- value int32: an enumerated value 
 	// 
 	// The function returns the following values:
@@ -92297,19 +93103,19 @@ type Settings interface {
 	// Looks up the enumerated type nick for @value and writes it to @key,
 	// within @settings.
 	// 
-	// It is a programmer error to give a @key that isn't contained in the
+	// It is a programmer error to give a @key that isn’t contained in the
 	// schema for @settings or is not marked as an enumerated type, or for
 	// @value not to be a valid value for the named type.
 	// 
 	// After performing the write, accessing @key directly with
-	// g_settings_get_string() will return the 'nick' associated with
+	// [method@Gio.Settings.get_string] will return the ‘nick’ associated with
 	// @value.
 	SetEnum(string, int32) bool
 	// SetFlags wraps g_settings_set_flags
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- key string: a key, within @settings 
+	// 	- key string: the key to set the value for 
 	// 	- value uint: a flags value 
 	// 
 	// The function returns the following values:
@@ -92320,19 +93126,19 @@ type Settings interface {
 	// them in an array of strings and writes the array to @key, within
 	// @settings.
 	// 
-	// It is a programmer error to give a @key that isn't contained in the
+	// It is a programmer error to give a @key that isn’t contained in the
 	// schema for @settings or is not marked as a flags type, or for @value
 	// to contain any bits that are not value for the named type.
 	// 
 	// After performing the write, accessing @key directly with
-	// g_settings_get_strv() will return an array of 'nicks'; one for each
+	// [method@Gio.Settings.get_strv] will return an array of ‘nicks’; one for each
 	// bit in @value.
 	SetFlags(string, uint) bool
 	// SetInt wraps g_settings_set_int
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- key string: the name of the key to set 
+	// 	- key string: the key to set the value for 
 	// 	- value int32: the value to set it to 
 	// 
 	// The function returns the following values:
@@ -92341,16 +93147,16 @@ type Settings interface {
 	//
 	// Sets @key in @settings to @value.
 	// 
-	// A convenience variant of g_settings_set() for 32-bit integers.
+	// A convenience variant of [method@Gio.Settings.set] for 32-bit integers.
 	// 
-	// It is a programmer error to give a @key that isn't specified as
-	// having a int32 type in the schema for @settings.
+	// It is a programmer error to give a @key that isn’t specified as
+	// having an `i` type in the schema for @settings (see [struct@GLib.VariantType]).
 	SetInt(string, int32) bool
 	// SetInt64 wraps g_settings_set_int64
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- key string: the name of the key to set 
+	// 	- key string: the key to set the value for 
 	// 	- value int64: the value to set it to 
 	// 
 	// The function returns the following values:
@@ -92359,16 +93165,16 @@ type Settings interface {
 	//
 	// Sets @key in @settings to @value.
 	// 
-	// A convenience variant of g_settings_set() for 64-bit integers.
+	// A convenience variant of [method@Gio.Settings.set] for 64-bit integers.
 	// 
-	// It is a programmer error to give a @key that isn't specified as
-	// having a int64 type in the schema for @settings.
+	// It is a programmer error to give a @key that isn’t specified as
+	// having an `x` type in the schema for @settings (see [struct@GLib.VariantType]).
 	SetInt64(string, int64) bool
 	// SetString wraps g_settings_set_string
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- key string: the name of the key to set 
+	// 	- key string: the key to set the value for 
 	// 	- value string: the value to set it to 
 	// 
 	// The function returns the following values:
@@ -92377,17 +93183,17 @@ type Settings interface {
 	//
 	// Sets @key in @settings to @value.
 	// 
-	// A convenience variant of g_settings_set() for strings.
+	// A convenience variant of [method@Gio.Settings.set] for strings.
 	// 
-	// It is a programmer error to give a @key that isn't specified as
-	// having a string type in the schema for @settings.
+	// It is a programmer error to give a @key that isn’t specified as
+	// having an `s` type in the schema for @settings (see [struct@GLib.VariantType]).
 	SetString(string, string) bool
 	// SetStrv wraps g_settings_set_strv
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- key string: the name of the key to set 
-	// 	- value []string (nullable): the value to set it to, or %NULL 
+	// 	- key string: the key to set the value for 
+	// 	- value []string (nullable): the value to set it to 
 	// 
 	// The function returns the following values:
 	// 
@@ -92395,17 +93201,17 @@ type Settings interface {
 	//
 	// Sets @key in @settings to @value.
 	// 
-	// A convenience variant of g_settings_set() for string arrays.  If
-	// @value is %NULL, then @key is set to be the empty array.
+	// A convenience variant of [method@Gio.Settings.set] for string arrays.  If
+	// @value is `NULL`, then @key is set to be the empty array.
 	// 
-	// It is a programmer error to give a @key that isn't specified as
-	// having an array of strings type in the schema for @settings.
+	// It is a programmer error to give a @key that isn’t specified as
+	// having an `as` type in the schema for @settings (see [struct@GLib.VariantType]).
 	SetStrv(string, []string) bool
 	// SetUint wraps g_settings_set_uint
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- key string: the name of the key to set 
+	// 	- key string: the key to set the value for 
 	// 	- value uint: the value to set it to 
 	// 
 	// The function returns the following values:
@@ -92414,17 +93220,17 @@ type Settings interface {
 	//
 	// Sets @key in @settings to @value.
 	// 
-	// A convenience variant of g_settings_set() for 32-bit unsigned
+	// A convenience variant of [method@Gio.Settings.set] for 32-bit unsigned
 	// integers.
 	// 
-	// It is a programmer error to give a @key that isn't specified as
-	// having a uint32 type in the schema for @settings.
+	// It is a programmer error to give a @key that isn’t specified as
+	// having a `u` type in the schema for @settings (see [struct@GLib.VariantType]).
 	SetUint(string, uint) bool
 	// SetUint64 wraps g_settings_set_uint64
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- key string: the name of the key to set 
+	// 	- key string: the key to set the value for 
 	// 	- value uint64: the value to set it to 
 	// 
 	// The function returns the following values:
@@ -92433,73 +93239,77 @@ type Settings interface {
 	//
 	// Sets @key in @settings to @value.
 	// 
-	// A convenience variant of g_settings_set() for 64-bit unsigned
+	// A convenience variant of [method@Gio.Settings.set] for 64-bit unsigned
 	// integers.
 	// 
-	// It is a programmer error to give a @key that isn't specified as
-	// having a uint64 type in the schema for @settings.
+	// It is a programmer error to give a @key that isn’t specified as
+	// having a `t` type in the schema for @settings (see [struct@GLib.VariantType]).
 	SetUint64(string, uint64) bool
 	// ConnectChangeEvent connects the provided callback to the "change-event" signal
 	//
-	// The "change-event" signal is emitted once per change event that
-	// affects this settings object.  You should connect to this signal
+	// Emitted once per change event that affects this settings object.
+	// 
+	// You should connect to this signal
 	// only if you are interested in viewing groups of changes before they
-	// are split out into multiple emissions of the "changed" signal.
-	// For most use cases it is more appropriate to use the "changed" signal.
+	// are split out into multiple emissions of the [signal@Gio.Settings::changed] signal.
+	// For most use cases it is more appropriate to use the [signal@Gio.Settings::changed] signal.
 	// 
 	// In the event that the change event applies to one or more specified
-	// keys, @keys will be an array of #GQuark of length @n_keys.  In the
-	// event that the change event applies to the #GSettings object as a
+	// keys, @keys will be an array of [alias@GLib.Quark]s of length @n_keys.  In the
+	// event that the change event applies to the [class@Gio.Settings] object as a
 	// whole (ie: potentially every key has been changed) then @keys will
-	// be %NULL and @n_keys will be 0.
+	// be `NULL` and @n_keys will be `0`.
 	// 
-	// The default handler for this signal invokes the "changed" signal
+	// The default handler for this signal invokes the [signal@Gio.Settings::changed] signal
 	// for each affected key.  If any other connected handler returns
-	// %TRUE then this default functionality will be suppressed.
+	// true then this default functionality will be suppressed.
 	ConnectChangeEvent(func(Settings, []byte, int32) bool) gobject.SignalHandle
 	// ConnectChanged connects the provided callback to the "changed" signal
 	//
-	// The "changed" signal is emitted when a key has potentially changed.
-	// You should call one of the g_settings_get() calls to check the new
+	// Emitted when a key has potentially changed.
+	// 
+	// You should call one of the [method@Gio.Settings.get] calls to check the new
 	// value.
 	// 
 	// This signal supports detailed connections.  You can connect to the
-	// detailed signal "changed::x" in order to only receive callbacks
-	// when key "x" changes.
+	// detailed signal `changed::x` in order to only receive callbacks
+	// when key `x` changes.
 	// 
 	// Note that @settings only emits this signal if you have read @key at
 	// least once while a signal handler was already connected for @key.
 	ConnectChanged(func(Settings, string)) gobject.SignalHandle
 	// ConnectWritableChangeEvent connects the provided callback to the "writable-change-event" signal
 	//
-	// The "writable-change-event" signal is emitted once per writability
-	// change event that affects this settings object.  You should connect
+	// Emitted once per writability change event that affects this settings object.
+	// 
+	// You should connect
 	// to this signal if you are interested in viewing groups of changes
 	// before they are split out into multiple emissions of the
-	// "writable-changed" signal.  For most use cases it is more
-	// appropriate to use the "writable-changed" signal.
+	// [signal@Gio.Settings::writable-changed] signal.  For most use cases it is more
+	// appropriate to use the [signal@Gio.Settings::writable-changed] signal.
 	// 
 	// In the event that the writability change applies only to a single
-	// key, @key will be set to the #GQuark for that key.  In the event
+	// key, @key will be set to the [alias@GLib.Quark] for that key.  In the event
 	// that the writability change affects the entire settings object,
-	// @key will be 0.
+	// @key will be `0`.
 	// 
-	// The default handler for this signal invokes the "writable-changed"
-	// and "changed" signals for each affected key.  This is done because
+	// The default handler for this signal invokes the [signal@Gio.Settings::writable-changed]
+	// and [signal@Gio.Settings::changed] signals for each affected key.  This is done because
 	// changes in writability might also imply changes in value (if for
 	// example, a new mandatory setting is introduced).  If any other
-	// connected handler returns %TRUE then this default functionality
+	// connected handler returns true then this default functionality
 	// will be suppressed.
 	ConnectWritableChangeEvent(func(Settings, uint) bool) gobject.SignalHandle
 	// ConnectWritableChanged connects the provided callback to the "writable-changed" signal
 	//
-	// The "writable-changed" signal is emitted when the writability of a
-	// key has potentially changed.  You should call
-	// g_settings_is_writable() in order to determine the new status.
+	// Emitted when the writability of a key has potentially changed.
+	// 
+	// You should call [method@Gio.Settings.is_writable] in order to determine the
+	// new status.
 	// 
 	// This signal supports detailed connections.  You can connect to the
-	// detailed signal "writable-changed::x" in order to only receive
-	// callbacks when the writability of "x" changes.
+	// detailed signal `writable-changed::x` in order to only receive
+	// callbacks when the writability of `x` changes.
 	ConnectWritableChanged(func(Settings, string)) gobject.SignalHandle
 
 	// chain up virtual methods:
@@ -92549,6 +93359,15 @@ func unsafeWrapSettings(base *gobject.ObjectInstance) *SettingsInstance {
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeSettings,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapSettings(inst)
+		},
+	)
+}
+
 func marshalSettingsInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapSettings(gobject.ValueFromNative(p).Object()), nil
 }
@@ -92586,25 +93405,25 @@ func UnsafeSettingsToGlibFull(c Settings) unsafe.Pointer {
 // 
 // The function takes the following parameters:
 // 
-// 	- schemaId string: the id of the schema 
+// 	- schemaId string: the ID of the schema 
 // 
 // The function returns the following values:
 // 
 // 	- goret Settings 
 //
-// Creates a new #GSettings object with the schema specified by
+// Creates a new [class@Gio.Settings] object with the schema specified by
 // @schema_id.
 // 
 // It is an error for the schema to not exist: schemas are an
 // essential part of a program, as they provide type information.
 // If schemas need to be dynamically loaded (for example, from an
-// optional runtime dependency), g_settings_schema_source_lookup()
+// optional runtime dependency), [method@Gio.SettingsSchemaSource.lookup]
 // can be used to test for their existence before loading them.
 // 
-// Signals on the newly created #GSettings object will be dispatched
-// via the thread-default #GMainContext in effect at the time of the
-// call to g_settings_new().  The new #GSettings will hold a reference
-// on the context.  See g_main_context_push_thread_default().
+// Signals on the newly created [class@Gio.Settings] object will be dispatched
+// via the thread-default [struct@GLib.MainContext] in effect at the time of the
+// call to [ctor@Gio.Settings.new].  The new [class@Gio.Settings] will hold a reference
+// on the context.  See [method@GLib.MainContext.push_thread_default].
 func NewSettings(schemaId string) Settings {
 	var carg1 *C.gchar     // in, none, string
 	var cret  *C.GSettings // return, full, converted
@@ -92626,25 +93445,25 @@ func NewSettings(schemaId string) Settings {
 // 
 // The function takes the following parameters:
 // 
-// 	- schemaId string: the id of the schema 
+// 	- schemaId string: the ID of the schema 
 // 	- path string: the path to use 
 // 
 // The function returns the following values:
 // 
 // 	- goret Settings 
 //
-// Creates a new #GSettings object with the relocatable schema specified
+// Creates a new [class@Gio.Settings] object with the relocatable schema specified
 // by @schema_id and a given path.
 // 
 // You only need to do this if you want to directly create a settings
-// object with a schema that doesn't have a specified path of its own.
-// That's quite rare.
+// object with a schema that doesn’t have a specified path of its own.
+// That’s quite rare.
 // 
 // It is a programmer error to call this function for a schema that
 // has an explicitly specified path.
 // 
 // It is a programmer error if @path is not a valid path.  A valid path
-// begins and ends with '/' and does not contain two consecutive '/'
+// begins and ends with `/` and does not contain two consecutive `/`
 // characters.
 func NewSettingsWithPath(schemaId string, path string) Settings {
 	var carg1 *C.gchar     // in, none, string
@@ -92720,12 +93539,12 @@ func SettingsListSchemas() []string {
 //
 // Ensures that all pending operations are complete for the default backend.
 // 
-// Writes made to a #GSettings are handled asynchronously.  For this
+// Writes made to a [class@Gio.Settings] are handled asynchronously.  For this
 // reason, it is very unlikely that the changes have it to disk by the
-// time g_settings_set() returns.
+// time [method@Gio.Settings.set] returns.
 // 
 // This call will block until all of the writes have made it to the
-// backend.  Since the mainloop is not running, no change notifications
+// backend.  Since the main loop is not running, no change notifications
 // will be dispatched during this call (but some may be queued by the
 // time the call is done).
 func SettingsSync() {
@@ -92735,10 +93554,11 @@ func SettingsSync() {
 
 // Apply wraps g_settings_apply
 //
-// Applies any changes that have been made to the settings.  This
-// function does nothing unless @settings is in 'delay-apply' mode;
-// see g_settings_delay().  In the normal case settings are always
-// applied immediately.
+// Applies any changes that have been made to the settings.
+// 
+// This function does nothing unless @settings is in
+// [‘delay-apply’ mode](class.Settings.html#delay-apply-mode).  In the normal
+// case settings are always applied immediately.
 func (settings *SettingsInstance) Apply() {
 	var carg0 *C.GSettings // in, none, converted
 
@@ -92758,7 +93578,7 @@ func (settings *SettingsInstance) Apply() {
 // 
 // 	- goret Action 
 //
-// Creates a #GAction corresponding to a given #GSettings key.
+// Creates a [iface@Gio.Action] corresponding to a given [class@Gio.Settings] key.
 // 
 // The action has the same name as the key.
 // 
@@ -92794,9 +93614,12 @@ func (settings *SettingsInstance) CreateAction(key string) Action {
 
 // Delay wraps g_settings_delay
 //
-// Changes the #GSettings object into 'delay-apply' mode. In this
+// Changes the [class@Gio.Settings] object into
+// [‘delay-apply’ mode](class.Settings.html#delay-apply-mode).
+// 
+// In this
 // mode, changes to @settings are not immediately propagated to the
-// backend, but kept locally until g_settings_apply() is called.
+// backend, but kept locally until [method@Gio.Settings.apply] is called.
 func (settings *SettingsInstance) Delay() {
 	var carg0 *C.GSettings // in, none, converted
 
@@ -92818,10 +93641,10 @@ func (settings *SettingsInstance) Delay() {
 //
 // Gets the value that is stored at @key in @settings.
 // 
-// A convenience variant of g_settings_get() for booleans.
+// A convenience variant of [method@Gio.Settings.get] for booleans.
 // 
-// It is a programmer error to give a @key that isn't specified as
-// having a boolean type in the schema for @settings.
+// It is a programmer error to give a @key that isn’t specified as
+// having a `b` type in the schema for @settings (see [struct@GLib.VariantType]).
 func (settings *SettingsInstance) GetBoolean(key string) bool {
 	var carg0 *C.GSettings // in, none, converted
 	var carg1 *C.gchar     // in, none, string
@@ -92855,14 +93678,14 @@ func (settings *SettingsInstance) GetBoolean(key string) bool {
 // 	- goret Settings 
 //
 // Creates a child settings object which has a base path of
-// `base-path/@name`, where `base-path` is the base path of
-// @settings.
+// `base-path/name`, where `base-path` is the base path of
+// @settings and `name` is as specified by the caller.
 // 
 // The schema for the child settings object must have been declared
 // in the schema of @settings using a `&lt;child&gt;` element.
 // 
-// The created child settings object will inherit the #GSettings:delay-apply
-// mode from @settings.
+// The created child settings object will inherit the
+// [property@Gio.Settings:delay-apply] mode from @settings.
 func (settings *SettingsInstance) GetChild(name string) Settings {
 	var carg0 *C.GSettings // in, none, converted
 	var carg1 *C.gchar     // in, none, string
@@ -92895,10 +93718,10 @@ func (settings *SettingsInstance) GetChild(name string) Settings {
 //
 // Gets the value that is stored at @key in @settings.
 // 
-// A convenience variant of g_settings_get() for doubles.
+// A convenience variant of [method@Gio.Settings.get] for doubles.
 // 
-// It is a programmer error to give a @key that isn't specified as
-// having a 'double' type in the schema for @settings.
+// It is a programmer error to give a @key that isn’t specified as
+// having a `d` type in the schema for @settings (see [struct@GLib.VariantType]).
 func (settings *SettingsInstance) GetDouble(key string) float64 {
 	var carg0 *C.GSettings // in, none, converted
 	var carg1 *C.gchar     // in, none, string
@@ -92935,7 +93758,7 @@ func (settings *SettingsInstance) GetDouble(key string) float64 {
 // In order to use this function the type of the value must be a string
 // and it must be marked in the schema file as an enumerated type.
 // 
-// It is a programmer error to give a @key that isn't contained in the
+// It is a programmer error to give a @key that isn’t contained in the
 // schema for @settings or is not marked as an enumerated type.
 // 
 // If the value stored in the configuration database is not a valid
@@ -92977,7 +93800,7 @@ func (settings *SettingsInstance) GetEnum(key string) int32 {
 // In order to use this function the type of the value must be an array
 // of strings and it must be marked in the schema file as a flags type.
 // 
-// It is a programmer error to give a @key that isn't contained in the
+// It is a programmer error to give a @key that isn’t contained in the
 // schema for @settings or is not marked as a flags type.
 // 
 // If the value stored in the configuration database is not a valid
@@ -93009,8 +93832,11 @@ func (settings *SettingsInstance) GetFlags(key string) uint {
 // 
 // 	- goret bool 
 //
-// Returns whether the #GSettings object has any unapplied
-// changes.  This can only be the case if it is in 'delayed-apply' mode.
+// Returns whether the [class@Gio.Settings] object has any unapplied
+// changes.
+// 
+// This can only be the case if it is in
+// [‘delay-apply’ mode](class.Settings.html#delay-apply-mode).
 func (settings *SettingsInstance) GetHasUnapplied() bool {
 	var carg0 *C.GSettings // in, none, converted
 	var cret  C.gboolean   // return
@@ -93041,10 +93867,10 @@ func (settings *SettingsInstance) GetHasUnapplied() bool {
 //
 // Gets the value that is stored at @key in @settings.
 // 
-// A convenience variant of g_settings_get() for 32-bit integers.
+// A convenience variant of [method@Gio.Settings.get] for 32-bit integers.
 // 
-// It is a programmer error to give a @key that isn't specified as
-// having a int32 type in the schema for @settings.
+// It is a programmer error to give a @key that isn’t specified as
+// having an `i` type in the schema for @settings (see [struct@GLib.VariantType]).
 func (settings *SettingsInstance) GetInt(key string) int32 {
 	var carg0 *C.GSettings // in, none, converted
 	var carg1 *C.gchar     // in, none, string
@@ -93077,10 +93903,10 @@ func (settings *SettingsInstance) GetInt(key string) int32 {
 //
 // Gets the value that is stored at @key in @settings.
 // 
-// A convenience variant of g_settings_get() for 64-bit integers.
+// A convenience variant of [method@Gio.Settings.get] for 64-bit integers.
 // 
-// It is a programmer error to give a @key that isn't specified as
-// having a int64 type in the schema for @settings.
+// It is a programmer error to give a @key that isn’t specified as
+// having an `x` type in the schema for @settings (see [struct@GLib.VariantType]).
 func (settings *SettingsInstance) GetInt64(key string) int64 {
 	var carg0 *C.GSettings // in, none, converted
 	var carg1 *C.gchar     // in, none, string
@@ -93113,10 +93939,10 @@ func (settings *SettingsInstance) GetInt64(key string) int64 {
 //
 // Gets the value that is stored at @key in @settings.
 // 
-// A convenience variant of g_settings_get() for strings.
+// A convenience variant of [method@Gio.Settings.get] for strings.
 // 
-// It is a programmer error to give a @key that isn't specified as
-// having a string type in the schema for @settings.
+// It is a programmer error to give a @key that isn’t specified as
+// having an `s` type in the schema for @settings (see [struct@GLib.VariantType]).
 func (settings *SettingsInstance) GetString(key string) string {
 	var carg0 *C.GSettings // in, none, converted
 	var carg1 *C.gchar     // in, none, string
@@ -93148,10 +93974,10 @@ func (settings *SettingsInstance) GetString(key string) string {
 // 
 // 	- goret []string 
 //
-// A convenience variant of g_settings_get() for string arrays.
+// A convenience variant of [method@Gio.Settings.get] for string arrays.
 // 
-// It is a programmer error to give a @key that isn't specified as
-// having an array of strings type in the schema for @settings.
+// It is a programmer error to give a @key that isn’t specified as
+// having an `as` type in the schema for @settings (see [struct@GLib.VariantType]).
 func (settings *SettingsInstance) GetStrv(key string) []string {
 	var carg0 *C.GSettings // in, none, converted
 	var carg1 *C.gchar     // in, none, string
@@ -93186,11 +94012,11 @@ func (settings *SettingsInstance) GetStrv(key string) []string {
 //
 // Gets the value that is stored at @key in @settings.
 // 
-// A convenience variant of g_settings_get() for 32-bit unsigned
+// A convenience variant of [method@Gio.Settings.get] for 32-bit unsigned
 // integers.
 // 
-// It is a programmer error to give a @key that isn't specified as
-// having a uint32 type in the schema for @settings.
+// It is a programmer error to give a @key that isn’t specified as
+// having a `u` type in the schema for @settings (see [struct@GLib.VariantType]).
 func (settings *SettingsInstance) GetUint(key string) uint {
 	var carg0 *C.GSettings // in, none, converted
 	var carg1 *C.gchar     // in, none, string
@@ -93223,11 +94049,11 @@ func (settings *SettingsInstance) GetUint(key string) uint {
 //
 // Gets the value that is stored at @key in @settings.
 // 
-// A convenience variant of g_settings_get() for 64-bit unsigned
+// A convenience variant of [method@Gio.Settings.get] for 64-bit unsigned
 // integers.
 // 
-// It is a programmer error to give a @key that isn't specified as
-// having a uint64 type in the schema for @settings.
+// It is a programmer error to give a @key that isn’t specified as
+// having a `t` type in the schema for @settings (see [struct@GLib.VariantType]).
 func (settings *SettingsInstance) GetUint64(key string) uint64 {
 	var carg0 *C.GSettings // in, none, converted
 	var carg1 *C.gchar     // in, none, string
@@ -93258,7 +94084,7 @@ func (settings *SettingsInstance) GetUint64(key string) uint64 {
 // 
 // 	- goret bool 
 //
-// Finds out if a key can be written or not
+// Finds out if a key can be written.
 func (settings *SettingsInstance) IsWritable(name string) bool {
 	var carg0 *C.GSettings // in, none, converted
 	var carg1 *C.gchar     // in, none, string
@@ -93290,13 +94116,13 @@ func (settings *SettingsInstance) IsWritable(name string) bool {
 // Gets the list of children on @settings.
 // 
 // The list is exactly the list of strings for which it is not an error
-// to call g_settings_get_child().
+// to call [method@Gio.Settings.get_child].
 // 
-// There is little reason to call this function from "normal" code, since
+// There is little reason to call this function from ‘normal’ code, since
 // you should already know what children are in your schema. This function
 // may still be useful there for introspection reasons, however.
 // 
-// You should free the return value with g_strfreev() when you are done
+// You should free the return value with [func@GLib.strfreev] when you are done
 // with it.
 func (settings *SettingsInstance) ListChildren() []string {
 	var carg0 *C.GSettings // in, none, converted
@@ -93324,14 +94150,14 @@ func (settings *SettingsInstance) ListChildren() []string {
 //
 // Introspects the list of keys on @settings.
 // 
-// You should probably not be calling this function from "normal" code
+// You should probably not be calling this function from ‘normal’ code
 // (since you should already know what keys are in your schema).  This
 // function is intended for introspection reasons.
 // 
-// You should free the return value with g_strfreev() when you are done
+// You should free the return value with [func@GLib.strfreev] when you are done
 // with it.
 //
-// Deprecated: (since 2.46.0) Use g_settings_schema_list_keys() instead.
+// Deprecated: (since 2.46.0) Use [method@Gio.SettingsSchema.list_keys] instead.
 func (settings *SettingsInstance) ListKeys() []string {
 	var carg0 *C.GSettings // in, none, converted
 	var cret  **C.gchar    // return, transfer: full, C Pointers: 2, Name: array[utf8], scope: , array (inner: *typesystem.StringPrimitive, zero-terminated)
@@ -93376,10 +94202,11 @@ func (settings *SettingsInstance) Reset(key string) {
 
 // Revert wraps g_settings_revert
 //
-// Reverts all non-applied changes to the settings.  This function
-// does nothing unless @settings is in 'delay-apply' mode; see
-// g_settings_delay().  In the normal case settings are always applied
-// immediately.
+// Reverts all unapplied changes to the settings.
+// 
+// This function does nothing unless @settings is in
+// [‘delay-apply’ mode](class.Settings.html#delay-apply-mode).  In the normal
+// case settings are always applied immediately.
 // 
 // Change notifications will be emitted for affected keys.
 func (settings *SettingsInstance) Revert() {
@@ -93395,7 +94222,7 @@ func (settings *SettingsInstance) Revert() {
 // 
 // The function takes the following parameters:
 // 
-// 	- key string: the name of the key to set 
+// 	- key string: the key to set the value for 
 // 	- value bool: the value to set it to 
 // 
 // The function returns the following values:
@@ -93404,10 +94231,10 @@ func (settings *SettingsInstance) Revert() {
 //
 // Sets @key in @settings to @value.
 // 
-// A convenience variant of g_settings_set() for booleans.
+// A convenience variant of [method@Gio.Settings.set] for booleans.
 // 
-// It is a programmer error to give a @key that isn't specified as
-// having a boolean type in the schema for @settings.
+// It is a programmer error to give a @key that isn’t specified as
+// having a `b` type in the schema for @settings (see [struct@GLib.VariantType]).
 func (settings *SettingsInstance) SetBoolean(key string, value bool) bool {
 	var carg0 *C.GSettings // in, none, converted
 	var carg1 *C.gchar     // in, none, string
@@ -93439,7 +94266,7 @@ func (settings *SettingsInstance) SetBoolean(key string, value bool) bool {
 // 
 // The function takes the following parameters:
 // 
-// 	- key string: the name of the key to set 
+// 	- key string: the key to set the value for 
 // 	- value float64: the value to set it to 
 // 
 // The function returns the following values:
@@ -93448,10 +94275,10 @@ func (settings *SettingsInstance) SetBoolean(key string, value bool) bool {
 //
 // Sets @key in @settings to @value.
 // 
-// A convenience variant of g_settings_set() for doubles.
+// A convenience variant of [method@Gio.Settings.set] for doubles.
 // 
-// It is a programmer error to give a @key that isn't specified as
-// having a 'double' type in the schema for @settings.
+// It is a programmer error to give a @key that isn’t specified as
+// having a `d` type in the schema for @settings (see [struct@GLib.VariantType]).
 func (settings *SettingsInstance) SetDouble(key string, value float64) bool {
 	var carg0 *C.GSettings // in, none, converted
 	var carg1 *C.gchar     // in, none, string
@@ -93481,7 +94308,7 @@ func (settings *SettingsInstance) SetDouble(key string, value float64) bool {
 // 
 // The function takes the following parameters:
 // 
-// 	- key string: a key, within @settings 
+// 	- key string: the key to set the value for 
 // 	- value int32: an enumerated value 
 // 
 // The function returns the following values:
@@ -93491,12 +94318,12 @@ func (settings *SettingsInstance) SetDouble(key string, value float64) bool {
 // Looks up the enumerated type nick for @value and writes it to @key,
 // within @settings.
 // 
-// It is a programmer error to give a @key that isn't contained in the
+// It is a programmer error to give a @key that isn’t contained in the
 // schema for @settings or is not marked as an enumerated type, or for
 // @value not to be a valid value for the named type.
 // 
 // After performing the write, accessing @key directly with
-// g_settings_get_string() will return the 'nick' associated with
+// [method@Gio.Settings.get_string] will return the ‘nick’ associated with
 // @value.
 func (settings *SettingsInstance) SetEnum(key string, value int32) bool {
 	var carg0 *C.GSettings // in, none, converted
@@ -93527,7 +94354,7 @@ func (settings *SettingsInstance) SetEnum(key string, value int32) bool {
 // 
 // The function takes the following parameters:
 // 
-// 	- key string: a key, within @settings 
+// 	- key string: the key to set the value for 
 // 	- value uint: a flags value 
 // 
 // The function returns the following values:
@@ -93538,12 +94365,12 @@ func (settings *SettingsInstance) SetEnum(key string, value int32) bool {
 // them in an array of strings and writes the array to @key, within
 // @settings.
 // 
-// It is a programmer error to give a @key that isn't contained in the
+// It is a programmer error to give a @key that isn’t contained in the
 // schema for @settings or is not marked as a flags type, or for @value
 // to contain any bits that are not value for the named type.
 // 
 // After performing the write, accessing @key directly with
-// g_settings_get_strv() will return an array of 'nicks'; one for each
+// [method@Gio.Settings.get_strv] will return an array of ‘nicks’; one for each
 // bit in @value.
 func (settings *SettingsInstance) SetFlags(key string, value uint) bool {
 	var carg0 *C.GSettings // in, none, converted
@@ -93574,7 +94401,7 @@ func (settings *SettingsInstance) SetFlags(key string, value uint) bool {
 // 
 // The function takes the following parameters:
 // 
-// 	- key string: the name of the key to set 
+// 	- key string: the key to set the value for 
 // 	- value int32: the value to set it to 
 // 
 // The function returns the following values:
@@ -93583,10 +94410,10 @@ func (settings *SettingsInstance) SetFlags(key string, value uint) bool {
 //
 // Sets @key in @settings to @value.
 // 
-// A convenience variant of g_settings_set() for 32-bit integers.
+// A convenience variant of [method@Gio.Settings.set] for 32-bit integers.
 // 
-// It is a programmer error to give a @key that isn't specified as
-// having a int32 type in the schema for @settings.
+// It is a programmer error to give a @key that isn’t specified as
+// having an `i` type in the schema for @settings (see [struct@GLib.VariantType]).
 func (settings *SettingsInstance) SetInt(key string, value int32) bool {
 	var carg0 *C.GSettings // in, none, converted
 	var carg1 *C.gchar     // in, none, string
@@ -93616,7 +94443,7 @@ func (settings *SettingsInstance) SetInt(key string, value int32) bool {
 // 
 // The function takes the following parameters:
 // 
-// 	- key string: the name of the key to set 
+// 	- key string: the key to set the value for 
 // 	- value int64: the value to set it to 
 // 
 // The function returns the following values:
@@ -93625,10 +94452,10 @@ func (settings *SettingsInstance) SetInt(key string, value int32) bool {
 //
 // Sets @key in @settings to @value.
 // 
-// A convenience variant of g_settings_set() for 64-bit integers.
+// A convenience variant of [method@Gio.Settings.set] for 64-bit integers.
 // 
-// It is a programmer error to give a @key that isn't specified as
-// having a int64 type in the schema for @settings.
+// It is a programmer error to give a @key that isn’t specified as
+// having an `x` type in the schema for @settings (see [struct@GLib.VariantType]).
 func (settings *SettingsInstance) SetInt64(key string, value int64) bool {
 	var carg0 *C.GSettings // in, none, converted
 	var carg1 *C.gchar     // in, none, string
@@ -93658,7 +94485,7 @@ func (settings *SettingsInstance) SetInt64(key string, value int64) bool {
 // 
 // The function takes the following parameters:
 // 
-// 	- key string: the name of the key to set 
+// 	- key string: the key to set the value for 
 // 	- value string: the value to set it to 
 // 
 // The function returns the following values:
@@ -93667,10 +94494,10 @@ func (settings *SettingsInstance) SetInt64(key string, value int64) bool {
 //
 // Sets @key in @settings to @value.
 // 
-// A convenience variant of g_settings_set() for strings.
+// A convenience variant of [method@Gio.Settings.set] for strings.
 // 
-// It is a programmer error to give a @key that isn't specified as
-// having a string type in the schema for @settings.
+// It is a programmer error to give a @key that isn’t specified as
+// having an `s` type in the schema for @settings (see [struct@GLib.VariantType]).
 func (settings *SettingsInstance) SetString(key string, value string) bool {
 	var carg0 *C.GSettings // in, none, converted
 	var carg1 *C.gchar     // in, none, string
@@ -93701,8 +94528,8 @@ func (settings *SettingsInstance) SetString(key string, value string) bool {
 // 
 // The function takes the following parameters:
 // 
-// 	- key string: the name of the key to set 
-// 	- value []string (nullable): the value to set it to, or %NULL 
+// 	- key string: the key to set the value for 
+// 	- value []string (nullable): the value to set it to 
 // 
 // The function returns the following values:
 // 
@@ -93710,11 +94537,11 @@ func (settings *SettingsInstance) SetString(key string, value string) bool {
 //
 // Sets @key in @settings to @value.
 // 
-// A convenience variant of g_settings_set() for string arrays.  If
-// @value is %NULL, then @key is set to be the empty array.
+// A convenience variant of [method@Gio.Settings.set] for string arrays.  If
+// @value is `NULL`, then @key is set to be the empty array.
 // 
-// It is a programmer error to give a @key that isn't specified as
-// having an array of strings type in the schema for @settings.
+// It is a programmer error to give a @key that isn’t specified as
+// having an `as` type in the schema for @settings (see [struct@GLib.VariantType]).
 func (settings *SettingsInstance) SetStrv(key string, value []string) bool {
 	var carg0 *C.GSettings // in, none, converted
 	var carg1 *C.gchar     // in, none, string
@@ -93746,7 +94573,7 @@ func (settings *SettingsInstance) SetStrv(key string, value []string) bool {
 // 
 // The function takes the following parameters:
 // 
-// 	- key string: the name of the key to set 
+// 	- key string: the key to set the value for 
 // 	- value uint: the value to set it to 
 // 
 // The function returns the following values:
@@ -93755,11 +94582,11 @@ func (settings *SettingsInstance) SetStrv(key string, value []string) bool {
 //
 // Sets @key in @settings to @value.
 // 
-// A convenience variant of g_settings_set() for 32-bit unsigned
+// A convenience variant of [method@Gio.Settings.set] for 32-bit unsigned
 // integers.
 // 
-// It is a programmer error to give a @key that isn't specified as
-// having a uint32 type in the schema for @settings.
+// It is a programmer error to give a @key that isn’t specified as
+// having a `u` type in the schema for @settings (see [struct@GLib.VariantType]).
 func (settings *SettingsInstance) SetUint(key string, value uint) bool {
 	var carg0 *C.GSettings // in, none, converted
 	var carg1 *C.gchar     // in, none, string
@@ -93789,7 +94616,7 @@ func (settings *SettingsInstance) SetUint(key string, value uint) bool {
 // 
 // The function takes the following parameters:
 // 
-// 	- key string: the name of the key to set 
+// 	- key string: the key to set the value for 
 // 	- value uint64: the value to set it to 
 // 
 // The function returns the following values:
@@ -93798,11 +94625,11 @@ func (settings *SettingsInstance) SetUint(key string, value uint) bool {
 //
 // Sets @key in @settings to @value.
 // 
-// A convenience variant of g_settings_set() for 64-bit unsigned
+// A convenience variant of [method@Gio.Settings.set] for 64-bit unsigned
 // integers.
 // 
-// It is a programmer error to give a @key that isn't specified as
-// having a uint64 type in the schema for @settings.
+// It is a programmer error to give a @key that isn’t specified as
+// having a `t` type in the schema for @settings (see [struct@GLib.VariantType]).
 func (settings *SettingsInstance) SetUint64(key string, value uint64) bool {
 	var carg0 *C.GSettings // in, none, converted
 	var carg1 *C.gchar     // in, none, string
@@ -93830,34 +94657,36 @@ func (settings *SettingsInstance) SetUint64(key string, value uint64) bool {
 
 // ConnectChangeEvent connects the provided callback to the "change-event" signal
 //
-// The "change-event" signal is emitted once per change event that
-// affects this settings object.  You should connect to this signal
+// Emitted once per change event that affects this settings object.
+// 
+// You should connect to this signal
 // only if you are interested in viewing groups of changes before they
-// are split out into multiple emissions of the "changed" signal.
-// For most use cases it is more appropriate to use the "changed" signal.
+// are split out into multiple emissions of the [signal@Gio.Settings::changed] signal.
+// For most use cases it is more appropriate to use the [signal@Gio.Settings::changed] signal.
 // 
 // In the event that the change event applies to one or more specified
-// keys, @keys will be an array of #GQuark of length @n_keys.  In the
-// event that the change event applies to the #GSettings object as a
+// keys, @keys will be an array of [alias@GLib.Quark]s of length @n_keys.  In the
+// event that the change event applies to the [class@Gio.Settings] object as a
 // whole (ie: potentially every key has been changed) then @keys will
-// be %NULL and @n_keys will be 0.
+// be `NULL` and @n_keys will be `0`.
 // 
-// The default handler for this signal invokes the "changed" signal
+// The default handler for this signal invokes the [signal@Gio.Settings::changed] signal
 // for each affected key.  If any other connected handler returns
-// %TRUE then this default functionality will be suppressed.
+// true then this default functionality will be suppressed.
 func (o *SettingsInstance) ConnectChangeEvent(fn func(Settings, []byte, int32) bool) gobject.SignalHandle {
 	return o.Connect("change-event", fn)
 }
 
 // ConnectChanged connects the provided callback to the "changed" signal
 //
-// The "changed" signal is emitted when a key has potentially changed.
-// You should call one of the g_settings_get() calls to check the new
+// Emitted when a key has potentially changed.
+// 
+// You should call one of the [method@Gio.Settings.get] calls to check the new
 // value.
 // 
 // This signal supports detailed connections.  You can connect to the
-// detailed signal "changed::x" in order to only receive callbacks
-// when key "x" changes.
+// detailed signal `changed::x` in order to only receive callbacks
+// when key `x` changes.
 // 
 // Note that @settings only emits this signal if you have read @key at
 // least once while a signal handler was already connected for @key.
@@ -93867,23 +94696,24 @@ func (o *SettingsInstance) ConnectChanged(fn func(Settings, string)) gobject.Sig
 
 // ConnectWritableChangeEvent connects the provided callback to the "writable-change-event" signal
 //
-// The "writable-change-event" signal is emitted once per writability
-// change event that affects this settings object.  You should connect
+// Emitted once per writability change event that affects this settings object.
+// 
+// You should connect
 // to this signal if you are interested in viewing groups of changes
 // before they are split out into multiple emissions of the
-// "writable-changed" signal.  For most use cases it is more
-// appropriate to use the "writable-changed" signal.
+// [signal@Gio.Settings::writable-changed] signal.  For most use cases it is more
+// appropriate to use the [signal@Gio.Settings::writable-changed] signal.
 // 
 // In the event that the writability change applies only to a single
-// key, @key will be set to the #GQuark for that key.  In the event
+// key, @key will be set to the [alias@GLib.Quark] for that key.  In the event
 // that the writability change affects the entire settings object,
-// @key will be 0.
+// @key will be `0`.
 // 
-// The default handler for this signal invokes the "writable-changed"
-// and "changed" signals for each affected key.  This is done because
+// The default handler for this signal invokes the [signal@Gio.Settings::writable-changed]
+// and [signal@Gio.Settings::changed] signals for each affected key.  This is done because
 // changes in writability might also imply changes in value (if for
 // example, a new mandatory setting is introduced).  If any other
-// connected handler returns %TRUE then this default functionality
+// connected handler returns true then this default functionality
 // will be suppressed.
 func (o *SettingsInstance) ConnectWritableChangeEvent(fn func(Settings, uint) bool) gobject.SignalHandle {
 	return o.Connect("writable-change-event", fn)
@@ -93891,13 +94721,14 @@ func (o *SettingsInstance) ConnectWritableChangeEvent(fn func(Settings, uint) bo
 
 // ConnectWritableChanged connects the provided callback to the "writable-changed" signal
 //
-// The "writable-changed" signal is emitted when the writability of a
-// key has potentially changed.  You should call
-// g_settings_is_writable() in order to determine the new status.
+// Emitted when the writability of a key has potentially changed.
+// 
+// You should call [method@Gio.Settings.is_writable] in order to determine the
+// new status.
 // 
 // This signal supports detailed connections.  You can connect to the
-// detailed signal "writable-changed::x" in order to only receive
-// callbacks when the writability of "x" changes.
+// detailed signal `writable-changed::x` in order to only receive
+// callbacks when the writability of `x` changes.
 func (o *SettingsInstance) ConnectWritableChanged(fn func(Settings, string)) gobject.SignalHandle {
 	return o.Connect("writable-changed", fn)
 }
@@ -94216,6 +95047,15 @@ func unsafeWrapSimpleAction(base *gobject.ObjectInstance) *SimpleActionInstance 
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeSimpleAction,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapSimpleAction(inst)
+		},
+	)
+}
+
 func marshalSimpleActionInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapSimpleAction(gobject.ValueFromNative(p).Object()), nil
 }
@@ -94382,6 +95222,15 @@ func unsafeWrapSimpleActionGroup(base *gobject.ObjectInstance) *SimpleActionGrou
 	return &SimpleActionGroupInstance{
 		ObjectInstance: *base,
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeSimpleActionGroup,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapSimpleActionGroup(inst)
+		},
+	)
 }
 
 func marshalSimpleActionGroupInstance(p unsafe.Pointer) (any, error) {
@@ -94756,7 +95605,7 @@ type SimpleAsyncResult interface {
 	// CompleteInIdle wraps g_simple_async_result_complete_in_idle
 	//
 	// Completes an asynchronous function in an idle handler in the
-	// [thread-default main context][g-main-context-push-thread-default]
+	// thread-default main context (see [method@GLib.MainContext.push_thread_default])
 	// of the thread that @simple was initially created in
 	// (and re-pushes that context around the invocation of the callback).
 	// 
@@ -94878,6 +95727,15 @@ func unsafeWrapSimpleAsyncResult(base *gobject.ObjectInstance) *SimpleAsyncResul
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeSimpleAsyncResult,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapSimpleAsyncResult(inst)
+		},
+	)
+}
+
 func marshalSimpleAsyncResultInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapSimpleAsyncResult(gobject.ValueFromNative(p).Object()), nil
 }
@@ -94977,7 +95835,7 @@ func (simple *SimpleAsyncResultInstance) Complete() {
 // CompleteInIdle wraps g_simple_async_result_complete_in_idle
 //
 // Completes an asynchronous function in an idle handler in the
-// [thread-default main context][g-main-context-push-thread-default]
+// thread-default main context (see [method@GLib.MainContext.push_thread_default])
 // of the thread that @simple was initially created in
 // (and re-pushes that context around the invocation of the callback).
 // 
@@ -95247,6 +96105,15 @@ func unsafeWrapSimpleIOStream(base *gobject.ObjectInstance) *SimpleIOStreamInsta
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeSimpleIOStream,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapSimpleIOStream(inst)
+		},
+	)
+}
+
 func marshalSimpleIOStreamInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapSimpleIOStream(gobject.ValueFromNative(p).Object()), nil
 }
@@ -95339,6 +96206,15 @@ func unsafeWrapSimplePermission(base *gobject.ObjectInstance) *SimplePermissionI
 			ObjectInstance: *base,
 		},
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeSimplePermission,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapSimplePermission(inst)
+		},
+	)
 }
 
 func marshalSimplePermissionInstance(p unsafe.Pointer) (any, error) {
@@ -95476,6 +96352,15 @@ func unsafeWrapSimpleProxyResolver(base *gobject.ObjectInstance) *SimpleProxyRes
 	return &SimpleProxyResolverInstance{
 		ObjectInstance: *base,
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeSimpleProxyResolver,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapSimpleProxyResolver(inst)
+		},
+	)
 }
 
 func marshalSimpleProxyResolverInstance(p unsafe.Pointer) (any, error) {
@@ -96923,6 +97808,15 @@ func unsafeWrapSocket(base *gobject.ObjectInstance) *SocketInstance {
 	return &SocketInstance{
 		ObjectInstance: *base,
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeSocket,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapSocket(inst)
+		},
+	)
 }
 
 func marshalSocketInstance(p unsafe.Pointer) (any, error) {
@@ -99657,6 +100551,15 @@ func unsafeWrapSocketAddress(base *gobject.ObjectInstance) *SocketAddressInstanc
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeSocketAddress,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapSocketAddress(inst)
+		},
+	)
+}
+
 func marshalSocketAddressInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapSocketAddress(gobject.ValueFromNative(p).Object()), nil
 }
@@ -99941,7 +100844,7 @@ type SocketAddressEnumerator interface {
 	// If @enumerator is expected to yield addresses, but for some reason
 	// is unable to (eg, because of a DNS error), then the first call to
 	// g_socket_address_enumerator_next() will return an appropriate error
-	// in *@error. However, if the first call to
+	// in `*error`. However, if the first call to
 	// g_socket_address_enumerator_next() succeeds, then any further
 	// internal errors (other than @cancellable being triggered) will be
 	// ignored.
@@ -100000,7 +100903,7 @@ type SocketAddressEnumerator interface {
 	// If @enumerator is expected to yield addresses, but for some reason
 	// is unable to (eg, because of a DNS error), then the first call to
 	// g_socket_address_enumerator_next() will return an appropriate error
-	// in *@error. However, if the first call to
+	// in `*error`. However, if the first call to
 	// g_socket_address_enumerator_next() succeeds, then any further
 	// internal errors (other than @cancellable being triggered) will be
 	// ignored.
@@ -100028,6 +100931,15 @@ func unsafeWrapSocketAddressEnumerator(base *gobject.ObjectInstance) *SocketAddr
 	return &SocketAddressEnumeratorInstance{
 		ObjectInstance: *base,
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeSocketAddressEnumerator,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapSocketAddressEnumerator(inst)
+		},
+	)
 }
 
 func marshalSocketAddressEnumeratorInstance(p unsafe.Pointer) (any, error) {
@@ -100083,7 +100995,7 @@ func UnsafeSocketAddressEnumeratorToGlibFull(c SocketAddressEnumerator) unsafe.P
 // If @enumerator is expected to yield addresses, but for some reason
 // is unable to (eg, because of a DNS error), then the first call to
 // g_socket_address_enumerator_next() will return an appropriate error
-// in *@error. However, if the first call to
+// in `*error`. However, if the first call to
 // g_socket_address_enumerator_next() succeeds, then any further
 // internal errors (other than @cancellable being triggered) will be
 // ignored.
@@ -100216,7 +101128,7 @@ type SocketAddressEnumeratorOverrides[Instance SocketAddressEnumerator] struct {
 	// If @enumerator is expected to yield addresses, but for some reason
 	// is unable to (eg, because of a DNS error), then the first call to
 	// g_socket_address_enumerator_next() will return an appropriate error
-	// in *@error. However, if the first call to
+	// in `*error`. However, if the first call to
 	// g_socket_address_enumerator_next() succeeds, then any further
 	// internal errors (other than @cancellable being triggered) will be
 	// ignored.
@@ -100322,7 +101234,7 @@ func UnsafeApplySocketAddressEnumeratorOverrides[Instance SocketAddressEnumerato
 // If @enumerator is expected to yield addresses, but for some reason
 // is unable to (eg, because of a DNS error), then the first call to
 // g_socket_address_enumerator_next() will return an appropriate error
-// in *@error. However, if the first call to
+// in `*error`. However, if the first call to
 // g_socket_address_enumerator_next() succeeds, then any further
 // internal errors (other than @cancellable being triggered) will be
 // ignored.
@@ -101032,6 +101944,15 @@ func unsafeWrapSocketClient(base *gobject.ObjectInstance) *SocketClientInstance 
 	return &SocketClientInstance{
 		ObjectInstance: *base,
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeSocketClient,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapSocketClient(inst)
+		},
+	)
 }
 
 func marshalSocketClientInstance(p unsafe.Pointer) (any, error) {
@@ -102463,6 +103384,15 @@ func unsafeWrapSocketConnection(base *gobject.ObjectInstance) *SocketConnectionI
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeSocketConnection,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapSocketConnection(inst)
+		},
+	)
+}
+
 func marshalSocketConnectionInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapSocketConnection(gobject.ValueFromNative(p).Object()), nil
 }
@@ -102944,6 +103874,15 @@ func unsafeWrapSocketControlMessage(base *gobject.ObjectInstance) *SocketControl
 	return &SocketControlMessageInstance{
 		ObjectInstance: *base,
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeSocketControlMessage,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapSocketControlMessage(inst)
+		},
+	)
 }
 
 func marshalSocketControlMessageInstance(p unsafe.Pointer) (any, error) {
@@ -103550,6 +104489,15 @@ func unsafeWrapSocketListener(base *gobject.ObjectInstance) *SocketListenerInsta
 	return &SocketListenerInstance{
 		ObjectInstance: *base,
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeSocketListener,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapSocketListener(inst)
+		},
+	)
 }
 
 func marshalSocketListenerInstance(p unsafe.Pointer) (any, error) {
@@ -104390,6 +105338,15 @@ func unsafeWrapSocketService(base *gobject.ObjectInstance) *SocketServiceInstanc
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeSocketService,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapSocketService(inst)
+		},
+	)
+}
+
 func marshalSocketServiceInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapSocketService(gobject.ValueFromNative(p).Object()), nil
 }
@@ -104931,9 +105888,9 @@ var _ Task = (*TaskInstance)(nil)
 // 
 // You can use [method@Gio.Task.run_in_thread] to turn a synchronous
 // operation into an asynchronous one, by running it in a thread.
-// When it completes, the result will be dispatched to the thread-default main
-// context (see [method@GLib.MainContext.push_thread_default]) where the `GTask`
-// was created.
+// When it completes, the result will be dispatched to the thread-default
+// main context (see [method@GLib.MainContext.push_thread_default])
+// where the `GTask` was created.
 // 
 // Running a task in a thread:
 // ```c
@@ -105223,8 +106180,8 @@ type Task interface {
 	// 	- goret *glib.MainContext 
 	//
 	// Gets the #GMainContext that @task will return its result in (that
-	// is, the context that was the
-	// [thread-default main context][g-main-context-push-thread-default]
+	// is, the context that was the thread-default main context
+	// (see [method@GLib.MainContext.push_thread_default])
 	// at the point when @task was created).
 	// 
 	// This will always return a non-%NULL value, even if the task's
@@ -105430,8 +106387,7 @@ type Task interface {
 	// name of the #GSource used for idle completion of the task.
 	// 
 	// This function may only be called before the @task is first used in a thread
-	// other than the one it was constructed in. It is called automatically by
-	// g_task_set_source_tag() if not called already.
+	// other than the one it was constructed in.
 	SetName(string)
 	// SetPriority wraps g_task_set_priority
 	// 
@@ -105496,6 +106452,9 @@ type Task interface {
 	// Sets @task’s name, used in debugging and profiling.
 	// 
 	// This is a variant of g_task_set_name() that avoids copying @name.
+	// 
+	// This function is called automatically by [method@Gio.Task.set_source_tag]
+	// unless a name is set.
 	SetStaticName(string)
 }
 
@@ -105503,6 +106462,15 @@ func unsafeWrapTask(base *gobject.ObjectInstance) *TaskInstance {
 	return &TaskInstance{
 		ObjectInstance: *base,
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeTask,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapTask(inst)
+		},
+	)
 }
 
 func marshalTaskInstance(p unsafe.Pointer) (any, error) {
@@ -105623,8 +106591,8 @@ func (task *TaskInstance) GetCompleted() bool {
 // 	- goret *glib.MainContext 
 //
 // Gets the #GMainContext that @task will return its result in (that
-// is, the context that was the
-// [thread-default main context][g-main-context-push-thread-default]
+// is, the context that was the thread-default main context
+// (see [method@GLib.MainContext.push_thread_default])
 // at the point when @task was created).
 // 
 // This will always return a non-%NULL value, even if the task's
@@ -106076,8 +107044,7 @@ func (task *TaskInstance) SetCheckCancellable(checkCancellable bool) {
 // name of the #GSource used for idle completion of the task.
 // 
 // This function may only be called before the @task is first used in a thread
-// other than the one it was constructed in. It is called automatically by
-// g_task_set_source_tag() if not called already.
+// other than the one it was constructed in.
 func (task *TaskInstance) SetName(name string) {
 	var carg0 *C.GTask // in, none, converted
 	var carg1 *C.gchar // in, none, string, nullable-string
@@ -106189,6 +107156,9 @@ func (task *TaskInstance) SetReturnOnCancel(returnOnCancel bool) bool {
 // Sets @task’s name, used in debugging and profiling.
 // 
 // This is a variant of g_task_set_name() that avoids copying @name.
+// 
+// This function is called automatically by [method@Gio.Task.set_source_tag]
+// unless a name is set.
 func (task *TaskInstance) SetStaticName(name string) {
 	var carg0 *C.GTask // in, none, converted
 	var carg1 *C.gchar // in, none, string, nullable-string
@@ -106257,6 +107227,15 @@ func unsafeWrapTcpConnection(base *gobject.ObjectInstance) *TcpConnectionInstanc
 			},
 		},
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeTcpConnection,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapTcpConnection(inst)
+		},
+	)
 }
 
 func marshalTcpConnectionInstance(p unsafe.Pointer) (any, error) {
@@ -106429,6 +107408,15 @@ func unsafeWrapTcpWrapperConnection(base *gobject.ObjectInstance) *TcpWrapperCon
 			},
 		},
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeTcpWrapperConnection,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapTcpWrapperConnection(inst)
+		},
+	)
 }
 
 func marshalTcpWrapperConnectionInstance(p unsafe.Pointer) (any, error) {
@@ -106714,6 +107702,15 @@ func unsafeWrapTestDBus(base *gobject.ObjectInstance) *TestDBusInstance {
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeTestDBus,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapTestDBus(inst)
+		},
+	)
+}
+
 func marshalTestDBusInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapTestDBus(gobject.ValueFromNative(p).Object()), nil
 }
@@ -106969,6 +107966,15 @@ func unsafeWrapThemedIcon(base *gobject.ObjectInstance) *ThemedIconInstance {
 	return &ThemedIconInstance{
 		ObjectInstance: *base,
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeThemedIcon,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapThemedIcon(inst)
+		},
+	)
 }
 
 func marshalThemedIconInstance(p unsafe.Pointer) (any, error) {
@@ -107238,6 +108244,15 @@ func unsafeWrapThreadedSocketService(base *gobject.ObjectInstance) *ThreadedSock
 			},
 		},
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeThreadedSocketService,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapThreadedSocketService(inst)
+		},
+	)
 }
 
 func marshalThreadedSocketServiceInstance(p unsafe.Pointer) (any, error) {
@@ -107603,6 +108618,15 @@ func unsafeWrapTlsCertificate(base *gobject.ObjectInstance) *TlsCertificateInsta
 	return &TlsCertificateInstance{
 		ObjectInstance: *base,
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeTlsCertificate,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapTlsCertificate(inst)
+		},
+	)
 }
 
 func marshalTlsCertificateInstance(p unsafe.Pointer) (any, error) {
@@ -108931,6 +109955,15 @@ func unsafeWrapTlsConnection(base *gobject.ObjectInstance) *TlsConnectionInstanc
 			ObjectInstance: *base,
 		},
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeTlsConnection,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapTlsConnection(inst)
+		},
+	)
 }
 
 func marshalTlsConnectionInstance(p unsafe.Pointer) (any, error) {
@@ -110677,6 +111710,15 @@ func unsafeWrapTlsDatabase(base *gobject.ObjectInstance) *TlsDatabaseInstance {
 	return &TlsDatabaseInstance{
 		ObjectInstance: *base,
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeTlsDatabase,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapTlsDatabase(inst)
+		},
+	)
 }
 
 func marshalTlsDatabaseInstance(p unsafe.Pointer) (any, error) {
@@ -112668,6 +113710,15 @@ func unsafeWrapTlsInteraction(base *gobject.ObjectInstance) *TlsInteractionInsta
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeTlsInteraction,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapTlsInteraction(inst)
+		},
+	)
+}
+
 func marshalTlsInteractionInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapTlsInteraction(gobject.ValueFromNative(p).Object()), nil
 }
@@ -113714,6 +114765,15 @@ func unsafeWrapTlsPassword(base *gobject.ObjectInstance) *TlsPasswordInstance {
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeTlsPassword,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapTlsPassword(inst)
+		},
+	)
+}
+
 func marshalTlsPasswordInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapTlsPassword(gobject.ValueFromNative(p).Object()), nil
 }
@@ -114379,6 +115439,15 @@ func unsafeWrapVfs(base *gobject.ObjectInstance) *VfsInstance {
 	return &VfsInstance{
 		ObjectInstance: *base,
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeVfs,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapVfs(inst)
+		},
+	)
 }
 
 func marshalVfsInstance(p unsafe.Pointer) (any, error) {
@@ -115610,6 +116679,15 @@ func unsafeWrapVolumeMonitor(base *gobject.ObjectInstance) *VolumeMonitorInstanc
 	return &VolumeMonitorInstance{
 		ObjectInstance: *base,
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeVolumeMonitor,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapVolumeMonitor(inst)
+		},
+	)
 }
 
 func marshalVolumeMonitorInstance(p unsafe.Pointer) (any, error) {
@@ -116934,6 +118012,15 @@ func unsafeWrapZlibCompressor(base *gobject.ObjectInstance) *ZlibCompressorInsta
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeZlibCompressor,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapZlibCompressor(inst)
+		},
+	)
+}
+
 func marshalZlibCompressorInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapZlibCompressor(gobject.ValueFromNative(p).Object()), nil
 }
@@ -117129,6 +118216,15 @@ func unsafeWrapZlibDecompressor(base *gobject.ObjectInstance) *ZlibDecompressorI
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeZlibDecompressor,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapZlibDecompressor(inst)
+		},
+	)
+}
+
 func marshalZlibDecompressorInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapZlibDecompressor(gobject.ValueFromNative(p).Object()), nil
 }
@@ -117282,6 +118378,15 @@ func unsafeWrapDBusMenuModel(base *gobject.ObjectInstance) *DBusMenuModelInstanc
 			ObjectInstance: *base,
 		},
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeDBusMenuModel,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapDBusMenuModel(inst)
+		},
+	)
 }
 
 func marshalDBusMenuModelInstance(p unsafe.Pointer) (any, error) {
@@ -117591,6 +118696,15 @@ func unsafeWrapFileIOStream(base *gobject.ObjectInstance) *FileIOStreamInstance 
 			Instance: *base,
 		},
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeFileIOStream,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapFileIOStream(inst)
+		},
+	)
 }
 
 func marshalFileIOStreamInstance(p unsafe.Pointer) (any, error) {
@@ -118593,6 +119707,15 @@ func unsafeWrapFileInputStream(base *gobject.ObjectInstance) *FileInputStreamIns
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeFileInputStream,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapFileInputStream(inst)
+		},
+	)
+}
+
 func marshalFileInputStreamInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapFileInputStream(gobject.ValueFromNative(p).Object()), nil
 }
@@ -119391,6 +120514,15 @@ func unsafeWrapFileOutputStream(base *gobject.ObjectInstance) *FileOutputStreamI
 			Instance: *base,
 		},
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeFileOutputStream,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapFileOutputStream(inst)
+		},
+	)
 }
 
 func marshalFileOutputStreamInstance(p unsafe.Pointer) (any, error) {
@@ -120291,6 +121423,15 @@ func unsafeWrapFilterInputStream(base *gobject.ObjectInstance) *FilterInputStrea
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeFilterInputStream,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapFilterInputStream(inst)
+		},
+	)
+}
+
 func marshalFilterInputStreamInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapFilterInputStream(gobject.ValueFromNative(p).Object()), nil
 }
@@ -120487,6 +121628,15 @@ func unsafeWrapFilterOutputStream(base *gobject.ObjectInstance) *FilterOutputStr
 			ObjectInstance: *base,
 		},
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeFilterOutputStream,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapFilterOutputStream(inst)
+		},
+	)
 }
 
 func marshalFilterOutputStreamInstance(p unsafe.Pointer) (any, error) {
@@ -120701,6 +121851,15 @@ func unsafeWrapInetSocketAddress(base *gobject.ObjectInstance) *InetSocketAddres
 			Instance: *base,
 		},
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeInetSocketAddress,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapInetSocketAddress(inst)
+		},
+	)
 }
 
 func marshalInetSocketAddressInstance(p unsafe.Pointer) (any, error) {
@@ -121018,6 +122177,15 @@ func unsafeWrapMemoryOutputStream(base *gobject.ObjectInstance) *MemoryOutputStr
 			Instance: *base,
 		},
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeMemoryOutputStream,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapMemoryOutputStream(inst)
+		},
+	)
 }
 
 func marshalMemoryOutputStreamInstance(p unsafe.Pointer) (any, error) {
@@ -121407,6 +122575,15 @@ func unsafeWrapMenu(base *gobject.ObjectInstance) *MenuInstance {
 			ObjectInstance: *base,
 		},
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeMenu,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapMenu(inst)
+		},
+	)
 }
 
 func marshalMenuInstance(p unsafe.Pointer) (any, error) {
@@ -121911,6 +123088,15 @@ func unsafeWrapNativeSocketAddress(base *gobject.ObjectInstance) *NativeSocketAd
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeNativeSocketAddress,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapNativeSocketAddress(inst)
+		},
+	)
+}
+
 func marshalNativeSocketAddressInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapNativeSocketAddress(gobject.ValueFromNative(p).Object()), nil
 }
@@ -122006,6 +123192,15 @@ func unsafeWrapNativeVolumeMonitor(base *gobject.ObjectInstance) *NativeVolumeMo
 			ObjectInstance: *base,
 		},
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeNativeVolumeMonitor,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapNativeVolumeMonitor(inst)
+		},
+	)
 }
 
 func marshalNativeVolumeMonitorInstance(p unsafe.Pointer) (any, error) {
@@ -122172,6 +123367,15 @@ func unsafeWrapProxyAddress(base *gobject.ObjectInstance) *ProxyAddressInstance 
 			},
 		},
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeProxyAddress,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapProxyAddress(inst)
+		},
+	)
 }
 
 func marshalProxyAddressInstance(p unsafe.Pointer) (any, error) {
@@ -122520,6 +123724,15 @@ func unsafeWrapProxyAddressEnumerator(base *gobject.ObjectInstance) *ProxyAddres
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeProxyAddressEnumerator,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapProxyAddressEnumerator(inst)
+		},
+	)
+}
+
 func marshalProxyAddressEnumeratorInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapProxyAddressEnumerator(gobject.ValueFromNative(p).Object()), nil
 }
@@ -122836,6 +124049,15 @@ func unsafeWrapBufferedInputStream(base *gobject.ObjectInstance) *BufferedInputS
 			Instance: *base,
 		},
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeBufferedInputStream,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapBufferedInputStream(inst)
+		},
+	)
 }
 
 func marshalBufferedInputStreamInstance(p unsafe.Pointer) (any, error) {
@@ -123598,6 +124820,15 @@ func unsafeWrapBufferedOutputStream(base *gobject.ObjectInstance) *BufferedOutpu
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeBufferedOutputStream,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapBufferedOutputStream(inst)
+		},
+	)
+}
+
 func marshalBufferedOutputStreamInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapBufferedOutputStream(gobject.ValueFromNative(p).Object()), nil
 }
@@ -123867,6 +125098,15 @@ func unsafeWrapConverterInputStream(base *gobject.ObjectInstance) *ConverterInpu
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeConverterInputStream,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapConverterInputStream(inst)
+		},
+	)
+}
+
 func marshalConverterInputStreamInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapConverterInputStream(gobject.ValueFromNative(p).Object()), nil
 }
@@ -124039,6 +125279,15 @@ func unsafeWrapConverterOutputStream(base *gobject.ObjectInstance) *ConverterOut
 			Instance: *base,
 		},
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeConverterOutputStream,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapConverterOutputStream(inst)
+		},
+	)
 }
 
 func marshalConverterOutputStreamInstance(p unsafe.Pointer) (any, error) {
@@ -124584,6 +125833,15 @@ func unsafeWrapDataInputStream(base *gobject.ObjectInstance) *DataInputStreamIns
 			},
 		},
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeDataInputStream,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapDataInputStream(inst)
+		},
+	)
 }
 
 func marshalDataInputStreamInstance(p unsafe.Pointer) (any, error) {
@@ -125754,6 +127012,15 @@ func unsafeWrapDataOutputStream(base *gobject.ObjectInstance) *DataOutputStreamI
 			Instance: *base,
 		},
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeDataOutputStream,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapDataOutputStream(inst)
+		},
+	)
 }
 
 func marshalDataOutputStreamInstance(p unsafe.Pointer) (any, error) {
@@ -128069,7 +129336,7 @@ func UnsafeDBusNodeInfoToGlibFull(d *DBusNodeInfo) unsafe.Pointer {
 // `&lt;node&gt;` element.
 // 
 // Note that this routine is using a
-// [GMarkup][glib-Simple-XML-Subset-Parser.description]-based
+// [GMarkup](../glib/markup.html)-based
 // parser that only accepts a subset of valid XML documents.
 func NewDBusNodeInfoForXML(xmlData string) (*DBusNodeInfo, error) {
 	var carg1 *C.gchar         // in, none, string
@@ -133238,19 +134505,20 @@ func UnsafeResourceToGlibFull(r *Resource) unsafe.Pointer {
 // 
 // The function takes the following parameters:
 // 
-// 	- data *glib.Bytes: A #GBytes 
+// 	- data *glib.Bytes: A [struct@GLib.Bytes] 
 // 
 // The function returns the following values:
 // 
 // 	- goret *Resource 
 // 	- _goerr error (nullable): an error 
 //
-// Creates a GResource from a reference to the binary resource bundle.
+// Creates a [struct@Gio.Resource] from a reference to the binary resource bundle.
+// 
 // This will keep a reference to @data while the resource lives, so
 // the data should not be modified or freed.
 // 
 // If you want to use this resource in the global resource namespace you need
-// to register it with g_resources_register().
+// to register it with [func@Gio.resources_register].
 // 
 // Note: @data must be backed by memory that is at least pointer aligned.
 // Otherwise this function will internally create a copy of the memory since
@@ -133289,16 +134557,16 @@ func NewResourceFromData(data *glib.Bytes) (*Resource, error) {
 // 	- goret *Resource 
 // 	- _goerr error (nullable): an error 
 //
-// Loads a binary resource bundle and creates a #GResource representation of it, allowing
-// you to query it for data.
+// Loads a binary resource bundle and creates a [struct@Gio.Resource]
+// representation of it, allowing you to query it for data.
 // 
 // If you want to use this resource in the global resource namespace you need
-// to register it with g_resources_register().
+// to register it with [func@Gio.resources_register].
 // 
 // If @filename is empty or the data in it is corrupt,
 // %G_RESOURCE_ERROR_INTERNAL will be returned. If @filename doesn’t exist, or
-// there is an error in reading it, an error from g_mapped_file_new() will be
-// returned.
+// there is an error in reading it, an error from [ctor@GLib.MappedFile.new]
+// will be returned.
 func ResourceLoad(filename string) (*Resource, error) {
 	var carg1 *C.gchar     // in, none, string
 	var cret  *C.GResource // return, full, converted
@@ -133325,8 +134593,8 @@ func ResourceLoad(filename string) (*Resource, error) {
 // 
 // The function takes the following parameters:
 // 
-// 	- path string: A pathname inside the resource 
-// 	- lookupFlags ResourceLookupFlags: A #GResourceLookupFlags 
+// 	- path string: A path name inside the resource 
+// 	- lookupFlags ResourceLookupFlags: A [flags@Gio.ResourceLookupFlags] 
 // 
 // The function returns the following values:
 // 
@@ -133334,10 +134602,11 @@ func ResourceLoad(filename string) (*Resource, error) {
 // 	- _goerr error (nullable): an error 
 //
 // Returns all the names of children at the specified @path in the resource.
-// The return result is a %NULL terminated list of strings which should
-// be released with g_strfreev().
 // 
-// If @path is invalid or does not exist in the #GResource,
+// The return result is a `NULL` terminated list of strings which should
+// be released with [func@GLib.strfreev].
+// 
+// If @path is invalid or does not exist in the [struct@Gio.Resource],
 // %G_RESOURCE_ERROR_NOT_FOUND will be returned.
 // 
 // @lookup_flags controls the behaviour of the lookup.
@@ -133375,15 +134644,15 @@ func (resource *Resource) EnumerateChildren(path string, lookupFlags ResourceLoo
 // 
 // The function takes the following parameters:
 // 
-// 	- path string: A pathname inside the resource 
-// 	- lookupFlags ResourceLookupFlags: A #GResourceLookupFlags 
+// 	- path string: A path name inside the resource 
+// 	- lookupFlags ResourceLookupFlags: A [flags@Gio.ResourceLookupFlags] 
 // 
 // The function returns the following values:
 // 
 // 	- size uint: a location to place the length of the contents of the file,
-//    or %NULL if the length is not needed 
+//    or `NULL` if the length is not needed 
 // 	- flags uint32: a location to place the flags about the file,
-//    or %NULL if the length is not needed 
+//    or `NULL` if the length is not needed 
 // 	- goret bool 
 // 	- _goerr error (nullable): an error 
 //
@@ -133391,6 +134660,9 @@ func (resource *Resource) EnumerateChildren(path string, lookupFlags ResourceLoo
 // if found returns information about it.
 // 
 // @lookup_flags controls the behaviour of the lookup.
+// 
+// The only error this can return is %G_RESOURCE_ERROR_NOT_FOUND, if @path was
+// not found in @resource.
 func (resource *Resource) GetInfo(path string, lookupFlags ResourceLookupFlags) (uint, uint32, bool, error) {
 	var carg0 *C.GResource           // in, none, converted
 	var carg1 *C.char                // in, none, string
@@ -133427,12 +134699,46 @@ func (resource *Resource) GetInfo(path string, lookupFlags ResourceLookupFlags) 
 	return size, flags, goret, _goerr
 }
 
-// LookupData wraps g_resource_lookup_data
+// HasChildren wraps g_resource_has_children
 // 
 // The function takes the following parameters:
 // 
 // 	- path string: A pathname inside the resource 
-// 	- lookupFlags ResourceLookupFlags: A #GResourceLookupFlags 
+// 
+// The function returns the following values:
+// 
+// 	- goret bool 
+//
+// Returns whether the specified @path in the resource
+// has children.
+func (resource *Resource) HasChildren(path string) bool {
+	var carg0 *C.GResource // in, none, converted
+	var carg1 *C.char      // in, none, string
+	var cret  C.gboolean   // return
+
+	carg0 = (*C.GResource)(UnsafeResourceToGlibNone(resource))
+	carg1 = (*C.char)(unsafe.Pointer(C.CString(path)))
+	defer C.free(unsafe.Pointer(carg1))
+
+	cret = C.g_resource_has_children(carg0, carg1)
+	runtime.KeepAlive(resource)
+	runtime.KeepAlive(path)
+
+	var goret bool
+
+	if cret != 0 {
+		goret = true
+	}
+
+	return goret
+}
+
+// LookupData wraps g_resource_lookup_data
+// 
+// The function takes the following parameters:
+// 
+// 	- path string: A path name inside the resource 
+// 	- lookupFlags ResourceLookupFlags: A [flags@Gio.ResourceLookupFlags] 
 // 
 // The function returns the following values:
 // 
@@ -133440,19 +134746,23 @@ func (resource *Resource) GetInfo(path string, lookupFlags ResourceLookupFlags) 
 // 	- _goerr error (nullable): an error 
 //
 // Looks for a file at the specified @path in the resource and
-// returns a #GBytes that lets you directly access the data in
+// returns a [struct@GLib.Bytes] that lets you directly access the data in
 // memory.
 // 
 // The data is always followed by a zero byte, so you
 // can safely use the data as a C string. However, that byte
-// is not included in the size of the GBytes.
+// is not included in the size of the [struct@GLib.Bytes].
 // 
 // For uncompressed resource files this is a pointer directly into
-// the resource bundle, which is typically in some readonly data section
-// in the program binary. For compressed files we allocate memory on
-// the heap and automatically uncompress the data.
+// the resource bundle, which is typically in some read-only data section
+// in the program binary. For compressed files, memory is allocated on
+// the heap and the data is automatically uncompressed.
 // 
 // @lookup_flags controls the behaviour of the lookup.
+// 
+// This can return error %G_RESOURCE_ERROR_NOT_FOUND if @path was not found in
+// @resource, or %G_RESOURCE_ERROR_INTERNAL if decompression of a compressed
+// resource failed.
 func (resource *Resource) LookupData(path string, lookupFlags ResourceLookupFlags) (*glib.Bytes, error) {
 	var carg0 *C.GResource           // in, none, converted
 	var carg1 *C.char                // in, none, string
@@ -133485,8 +134795,8 @@ func (resource *Resource) LookupData(path string, lookupFlags ResourceLookupFlag
 // 
 // The function takes the following parameters:
 // 
-// 	- path string: A pathname inside the resource 
-// 	- lookupFlags ResourceLookupFlags: A #GResourceLookupFlags 
+// 	- path string: A path name inside the resource 
+// 	- lookupFlags ResourceLookupFlags: A [flags@Gio.ResourceLookupFlags] 
 // 
 // The function returns the following values:
 // 
@@ -133494,9 +134804,12 @@ func (resource *Resource) LookupData(path string, lookupFlags ResourceLookupFlag
 // 	- _goerr error (nullable): an error 
 //
 // Looks for a file at the specified @path in the resource and
-// returns a #GInputStream that lets you read the data.
+// returns a [class@Gio.InputStream] that lets you read the data.
 // 
 // @lookup_flags controls the behaviour of the lookup.
+// 
+// The only error this can return is %G_RESOURCE_ERROR_NOT_FOUND, if @path was
+// not found in @resource.
 func (resource *Resource) OpenStream(path string, lookupFlags ResourceLookupFlags) (InputStream, error) {
 	var carg0 *C.GResource           // in, none, converted
 	var carg1 *C.char                // in, none, string
@@ -135179,7 +136492,7 @@ func (target *SrvTarget) GetWeight() uint16 {
 
 // StaticResource wraps GStaticResource
 //
-// #GStaticResource is an opaque data structure and can only be accessed
+// `GStaticResource` is an opaque data structure and can only be accessed
 // using the following functions.
 type StaticResource struct {
 	*staticResource
@@ -135243,10 +136556,11 @@ func UnsafeStaticResourceToGlibFull(s *StaticResource) unsafe.Pointer {
 
 // Fini wraps g_static_resource_fini
 //
-// Finalized a GResource initialized by g_static_resource_init().
+// Finalizes a [struct@Gio.Resource] initialized by
+// [method@Gio.StaticResource.init].
 // 
 // This is normally used by code generated by
-// [glib-compile-resources][glib-compile-resources]
+// [`glib-compile-resources`](glib-compile-resources.html)
 // and is not typically used by other code.
 func (staticResource *StaticResource) Fini() {
 	var carg0 *C.GStaticResource // in, none, converted
@@ -135263,10 +136577,11 @@ func (staticResource *StaticResource) Fini() {
 // 
 // 	- goret *Resource 
 //
-// Gets the GResource that was registered by a call to g_static_resource_init().
+// Gets the [struct@Gio.Resource] that was registered by a call to
+// [method@Gio.StaticResource.init].
 // 
 // This is normally used by code generated by
-// [glib-compile-resources][glib-compile-resources]
+// [`glib-compile-resources`](glib-compile-resources.html)
 // and is not typically used by other code.
 func (staticResource *StaticResource) GetResource() *Resource {
 	var carg0 *C.GStaticResource // in, none, converted
@@ -135286,11 +136601,11 @@ func (staticResource *StaticResource) GetResource() *Resource {
 
 // Init wraps g_static_resource_init
 //
-// Initializes a GResource from static data using a
-// GStaticResource.
+// Initializes a [struct@Gio.Resource] from static data using a
+// [struct@Gio.StaticResource].
 // 
 // This is normally used by code generated by
-// [glib-compile-resources][glib-compile-resources]
+// [`glib-compile-resources`](glib-compile-resources.html)
 // and is not typically used by other code.
 func (staticResource *StaticResource) Init() {
 	var carg0 *C.GStaticResource // in, none, converted

@@ -318,11 +318,13 @@ const (
 	ParamReadwrite ParamFlags = 3
 	// ParamConstruct wraps G_PARAM_CONSTRUCT
 	//
-	// the parameter will be set upon object construction
+	// the parameter will be set upon object construction.
+	//   See [vfunc@Object.constructed] for more details
 	ParamConstruct ParamFlags = 4
 	// ParamConstructOnly wraps G_PARAM_CONSTRUCT_ONLY
 	//
-	// the parameter can only be set upon object construction
+	// the parameter can only be set upon object construction.
+	//   See [vfunc@Object.constructed] for more details
 	ParamConstructOnly ParamFlags = 8
 	// ParamLaxValidation wraps G_PARAM_LAX_VALIDATION
 	//
@@ -464,20 +466,23 @@ const (
 	SignalNoHooks SignalFlags = 64
 	// SignalMustCollect wraps G_SIGNAL_MUST_COLLECT
 	//
-	// Varargs signal emission will always collect the
-	//   arguments, even if there are no signal handlers connected.  Since 2.30.
+	// Varargs signal emission will always collect the arguments, even if there
+	// are no signal handlers connected.
 	SignalMustCollect SignalFlags = 128
 	// SignalDeprecated wraps G_SIGNAL_DEPRECATED
 	//
-	// The signal is deprecated and will be removed
-	//   in a future version. A warning will be generated if it is connected while
-	//   running with G_ENABLE_DIAGNOSTIC=1.  Since 2.32.
+	// The signal is deprecated and will be removed in a future version.
+	// 
+	// A warning will be generated if it is connected while running with
+	// `G_ENABLE_DIAGNOSTIC=1`.
 	SignalDeprecated SignalFlags = 256
 	// SignalAccumulatorFirstRun wraps G_SIGNAL_ACCUMULATOR_FIRST_RUN
 	//
-	// Only used in #GSignalAccumulator accumulator
-	//   functions for the #GSignalInvocationHint::run_type field to mark the first
-	//   call to the accumulator function for a signal emission.  Since 2.68.
+	// The signal accumulator was invoked for the first time.
+	// 
+	// This flag is only used in [callback@GObject.SignalAccumulator][accumulator functions]
+	// for the `run_type` field of the [struct@GObject.SignalInvocationHint], to
+	// mark the first call to the accumulator function for a signal emission.
 	SignalAccumulatorFirstRun SignalFlags = 131072
 )
 
@@ -865,10 +870,10 @@ func EnumGetValueByNick(enumClass *EnumClass, nick string) *EnumValue {
 // The function takes the following parameters:
 // 
 // 	- name string: A nul-terminated string used as the name of the new type. 
-// 	- constStaticValues *EnumValue: An array of #GEnumValue structs for the possible
-//  enumeration values. The array is terminated by a struct with all
-//  members being 0. GObject keeps a reference to the data, so it cannot
-//  be stack-allocated. 
+// 	- constStaticValues []EnumValue: An array of
+//  #GEnumValue structs for the possible enumeration values. The array is
+//  terminated by a struct with all members being 0. GObject keeps a
+//  reference to the data, so it cannot be stack-allocated. 
 // 
 // The function returns the following values:
 // 
@@ -879,14 +884,16 @@ func EnumGetValueByNick(enumClass *EnumClass, nick string) *EnumValue {
 // It is normally more convenient to let [glib-mkenums][glib-mkenums],
 // generate a my_enum_get_type() function from a usual C enumeration
 // definition  than to write one yourself using g_enum_register_static().
-func EnumRegisterStatic(name string, constStaticValues *EnumValue) Type {
+func EnumRegisterStatic(name string, constStaticValues []EnumValue) Type {
 	var carg1 *C.gchar      // in, none, string
-	var carg2 *C.GEnumValue // in, none, converted
+	var carg2 *C.GEnumValue // in, transfer: none, C Pointers: 1, Name: array[EnumValue], array (inner: *typesystem.Record, zero-terminated)
 	var cret  C.GType       // return, none, casted, alias
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
 	defer C.free(unsafe.Pointer(carg1))
-	carg2 = (*C.GEnumValue)(UnsafeEnumValueToGlibNone(constStaticValues))
+	_ = constStaticValues
+	_ = carg2
+	panic("unimplemented conversion of []EnumValue (const GEnumValue*)")
 
 	cret = C.g_enum_register_static(carg1, carg2)
 	runtime.KeepAlive(name)
@@ -1077,9 +1084,10 @@ func FlagsGetValueByNick(flagsClass *FlagsClass, nick string) *FlagsValue {
 // The function takes the following parameters:
 // 
 // 	- name string: A nul-terminated string used as the name of the new type. 
-// 	- constStaticValues *FlagsValue: An array of #GFlagsValue structs for the possible
-//  flags values. The array is terminated by a struct with all members being 0.
-//  GObject keeps a reference to the data, so it cannot be stack-allocated. 
+// 	- constStaticValues []FlagsValue: An array of
+//  #GFlagsValue structs for the possible flags values. The array is
+//  terminated by a struct with all members being 0. GObject keeps a
+//  reference to the data, so it cannot be stack-allocated. 
 // 
 // The function returns the following values:
 // 
@@ -1090,14 +1098,16 @@ func FlagsGetValueByNick(flagsClass *FlagsClass, nick string) *FlagsValue {
 // It is normally more convenient to let [glib-mkenums][glib-mkenums]
 // generate a my_flags_get_type() function from a usual C enumeration
 // definition than to write one yourself using g_flags_register_static().
-func FlagsRegisterStatic(name string, constStaticValues *FlagsValue) Type {
+func FlagsRegisterStatic(name string, constStaticValues []FlagsValue) Type {
 	var carg1 *C.gchar       // in, none, string
-	var carg2 *C.GFlagsValue // in, none, converted
+	var carg2 *C.GFlagsValue // in, transfer: none, C Pointers: 1, Name: array[FlagsValue], array (inner: *typesystem.Record, zero-terminated)
 	var cret  C.GType        // return, none, casted, alias
 
 	carg1 = (*C.gchar)(unsafe.Pointer(C.CString(name)))
 	defer C.free(unsafe.Pointer(carg1))
-	carg2 = (*C.GFlagsValue)(UnsafeFlagsValueToGlibNone(constStaticValues))
+	_ = constStaticValues
+	_ = carg2
+	panic("unimplemented conversion of []FlagsValue (const GFlagsValue*)")
 
 	cret = C.g_flags_register_static(carg1, carg2)
 	runtime.KeepAlive(name)
@@ -3289,11 +3299,12 @@ func TypeIsA(typ Type, isAType Type) bool {
 // 
 // 	- goret string (nullable) 
 //
-// Get the unique name that is assigned to a type ID.  Note that this
-// function (like all other GType API) cannot cope with invalid type
-// IDs. %G_TYPE_INVALID may be passed to this function, as may be any
-// other validly registered type ID, but randomized type IDs should
-// not be passed in and will most likely lead to a crash.
+// Get the unique name that is assigned to a type ID.
+// 
+// Note that this function (like all other GType API) cannot cope with
+// invalid type IDs. %G_TYPE_INVALID may be passed to this function, as
+// may be any other validly registered type ID, but randomized type IDs
+// should not be passed in and will most likely lead to a crash.
 func TypeName(typ Type) string {
 	var carg1 C.GType  // in, none, casted, alias
 	var cret  *C.gchar // return, none, string, nullable-string
@@ -3505,6 +3516,15 @@ func unsafeWrapBindingGroup(base *ObjectInstance) *BindingGroupInstance {
 	}
 }
 
+func init() {
+	RegisterObjectCasting(
+		TypeBindingGroup,
+		func (inst *ObjectInstance) Object {
+			return unsafeWrapBindingGroup(inst)
+		},
+	)
+}
+
 func marshalBindingGroupInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapBindingGroup(ValueFromNative(p).Object()), nil
 }
@@ -3582,6 +3602,15 @@ func unsafeWrapInitiallyUnowned(base *ObjectInstance) *InitiallyUnownedInstance 
 	return &InitiallyUnownedInstance{
 		ObjectInstance: *base,
 	}
+}
+
+func init() {
+	RegisterObjectCasting(
+		TypeInitiallyUnowned,
+		func (inst *ObjectInstance) Object {
+			return unsafeWrapInitiallyUnowned(inst)
+		},
+	)
 }
 
 func marshalInitiallyUnownedInstance(p unsafe.Pointer) (any, error) {
@@ -4469,6 +4498,15 @@ func UnsafeTypeInstanceToGlibFull(t *TypeInstance) unsafe.Pointer {
 
 // TypeValueTable wraps GTypeValueTable
 //
+// - `'i'`: Integers, passed as `collect_values[].v_int`
+//   - `'l'`: Longs, passed as `collect_values[].v_long`
+//   - `'d'`: Doubles, passed as `collect_values[].v_double`
+//   - `'p'`: Pointers, passed as `collect_values[].v_pointer`
+// 
+//   It should be noted that for variable argument list construction,
+//   ANSI C promotes every type smaller than an integer to an int, and
+//   floats to doubles. So for collection of short int or char, `'i'`
+//   needs to be used, and for collection of floats `'d'`.
 // The #GTypeValueTable provides the functions required by the #GValue
 // implementation, to serve as a container for values of a type.
 type TypeValueTable struct {

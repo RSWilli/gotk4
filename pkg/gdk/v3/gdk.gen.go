@@ -10910,6 +10910,15 @@ func unsafeWrapAppLaunchContext(base *gobject.ObjectInstance) *AppLaunchContextI
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeAppLaunchContext,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapAppLaunchContext(inst)
+		},
+	)
+}
+
 func marshalAppLaunchContextInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapAppLaunchContext(gobject.ValueFromNative(p).Object()), nil
 }
@@ -11126,6 +11135,15 @@ func unsafeWrapCursor(base *gobject.ObjectInstance) *CursorInstance {
 	return &CursorInstance{
 		ObjectInstance: *base,
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeCursor,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapCursor(inst)
+		},
+	)
 }
 
 func marshalCursorInstance(p unsafe.Pointer) (any, error) {
@@ -11763,6 +11781,15 @@ func unsafeWrapDevice(base *gobject.ObjectInstance) *DeviceInstance {
 	return &DeviceInstance{
 		ObjectInstance: *base,
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeDevice,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapDevice(inst)
+		},
+	)
 }
 
 func marshalDeviceInstance(p unsafe.Pointer) (any, error) {
@@ -12771,6 +12798,15 @@ func unsafeWrapDeviceManager(base *gobject.ObjectInstance) *DeviceManagerInstanc
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeDeviceManager,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapDeviceManager(inst)
+		},
+	)
+}
+
 func marshalDeviceManagerInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapDeviceManager(gobject.ValueFromNative(p).Object()), nil
 }
@@ -12915,6 +12951,15 @@ func unsafeWrapDeviceTool(base *gobject.ObjectInstance) *DeviceToolInstance {
 	return &DeviceToolInstance{
 		ObjectInstance: *base,
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeDeviceTool,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapDeviceTool(inst)
+		},
+	)
 }
 
 func marshalDeviceToolInstance(p unsafe.Pointer) (any, error) {
@@ -13386,6 +13431,15 @@ func unsafeWrapDisplay(base *gobject.ObjectInstance) *DisplayInstance {
 	return &DisplayInstance{
 		ObjectInstance: *base,
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeDisplay,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapDisplay(inst)
+		},
+	)
 }
 
 func marshalDisplayInstance(p unsafe.Pointer) (any, error) {
@@ -14356,6 +14410,15 @@ func unsafeWrapDisplayManager(base *gobject.ObjectInstance) *DisplayManagerInsta
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeDisplayManager,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapDisplayManager(inst)
+		},
+	)
+}
+
 func marshalDisplayManagerInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapDisplayManager(gobject.ValueFromNative(p).Object()), nil
 }
@@ -14707,6 +14770,15 @@ func unsafeWrapDragContext(base *gobject.ObjectInstance) *DragContextInstance {
 	return &DragContextInstance{
 		ObjectInstance: *base,
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeDragContext,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapDragContext(inst)
+		},
+	)
 }
 
 func marshalDragContextInstance(p unsafe.Pointer) (any, error) {
@@ -15154,6 +15226,15 @@ func unsafeWrapDrawingContext(base *gobject.ObjectInstance) *DrawingContextInsta
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeDrawingContext,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapDrawingContext(inst)
+		},
+	)
+}
+
 func marshalDrawingContextInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapDrawingContext(gobject.ValueFromNative(p).Object()), nil
 }
@@ -15444,6 +15525,15 @@ func unsafeWrapFrameClock(base *gobject.ObjectInstance) *FrameClockInstance {
 	return &FrameClockInstance{
 		ObjectInstance: *base,
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeFrameClock,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapFrameClock(inst)
+		},
+	)
 }
 
 func marshalFrameClockInstance(p unsafe.Pointer) (any, error) {
@@ -16027,6 +16117,15 @@ func unsafeWrapGLContext(base *gobject.ObjectInstance) *GLContextInstance {
 	return &GLContextInstance{
 		ObjectInstance: *base,
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeGLContext,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapGLContext(inst)
+		},
+	)
 }
 
 func marshalGLContextInstance(p unsafe.Pointer) (any, error) {
@@ -16695,6 +16794,15 @@ func unsafeWrapKeymap(base *gobject.ObjectInstance) *KeymapInstance {
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeKeymap,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapKeymap(inst)
+		},
+	)
+}
+
 func marshalKeymapInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapKeymap(gobject.ValueFromNative(p).Object()), nil
 }
@@ -17253,6 +17361,15 @@ func unsafeWrapMonitor(base *gobject.ObjectInstance) *MonitorInstance {
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeMonitor,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapMonitor(inst)
+		},
+	)
+}
+
 func marshalMonitorInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapMonitor(gobject.ValueFromNative(p).Object()), nil
 }
@@ -17780,6 +17897,15 @@ func unsafeWrapScreen(base *gobject.ObjectInstance) *ScreenInstance {
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeScreen,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapScreen(inst)
+		},
+	)
+}
+
 func marshalScreenInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapScreen(gobject.ValueFromNative(p).Object()), nil
 }
@@ -18298,6 +18424,15 @@ func unsafeWrapSeat(base *gobject.ObjectInstance) *SeatInstance {
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeSeat,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapSeat(inst)
+		},
+	)
+}
+
 func marshalSeatInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapSeat(gobject.ValueFromNative(p).Object()), nil
 }
@@ -18600,6 +18735,15 @@ func unsafeWrapVisual(base *gobject.ObjectInstance) *VisualInstance {
 	return &VisualInstance{
 		ObjectInstance: *base,
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeVisual,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapVisual(inst)
+		},
+	)
 }
 
 func marshalVisualInstance(p unsafe.Pointer) (any, error) {
@@ -20449,6 +20593,15 @@ func unsafeWrapWindow(base *gobject.ObjectInstance) *WindowInstance {
 	return &WindowInstance{
 		ObjectInstance: *base,
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeWindow,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapWindow(inst)
+		},
+	)
 }
 
 func marshalWindowInstance(p unsafe.Pointer) (any, error) {

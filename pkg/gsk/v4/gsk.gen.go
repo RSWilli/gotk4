@@ -27,7 +27,6 @@ var (
 	TypeBlendMode          = gobject.Type(C.gsk_blend_mode_get_type())
 	TypeCorner             = gobject.Type(C.gsk_corner_get_type())
 	TypeFillRule           = gobject.Type(C.gsk_fill_rule_get_type())
-	TypeGLUniformType      = gobject.Type(C.gsk_gl_uniform_type_get_type())
 	TypeLineCap            = gobject.Type(C.gsk_line_cap_get_type())
 	TypeLineJoin           = gobject.Type(C.gsk_line_join_get_type())
 	TypeMaskMode           = gobject.Type(C.gsk_mask_mode_get_type())
@@ -38,7 +37,6 @@ var (
 	TypeSerializationError = gobject.Type(C.gsk_serialization_error_get_type())
 	TypeTransformCategory  = gobject.Type(C.gsk_transform_category_get_type())
 	TypePathForeachFlags   = gobject.Type(C.gsk_path_foreach_flags_get_type())
-	TypeGLShader           = gobject.Type(C.gsk_gl_shader_get_type())
 	TypeRenderer           = gobject.Type(C.gsk_renderer_get_type())
 	TypeVulkanRenderer     = gobject.Type(C.gsk_vulkan_renderer_get_type())
 	TypeCairoRenderer      = gobject.Type(C.gsk_cairo_renderer_get_type())
@@ -48,7 +46,6 @@ var (
 	TypePathBuilder        = gobject.Type(C.gsk_path_builder_get_type())
 	TypePathMeasure        = gobject.Type(C.gsk_path_measure_get_type())
 	TypePathPoint          = gobject.Type(C.gsk_path_point_get_type())
-	TypeShaderArgsBuilder  = gobject.Type(C.gsk_shader_args_builder_get_type())
 	TypeStroke             = gobject.Type(C.gsk_stroke_get_type())
 	TypeTransform          = gobject.Type(C.gsk_transform_get_type())
 )
@@ -58,7 +55,6 @@ func init() {
 		gobject.TypeMarshaler{T: TypeBlendMode, F: marshalBlendMode},
 		gobject.TypeMarshaler{T: TypeCorner, F: marshalCorner},
 		gobject.TypeMarshaler{T: TypeFillRule, F: marshalFillRule},
-		gobject.TypeMarshaler{T: TypeGLUniformType, F: marshalGLUniformType},
 		gobject.TypeMarshaler{T: TypeLineCap, F: marshalLineCap},
 		gobject.TypeMarshaler{T: TypeLineJoin, F: marshalLineJoin},
 		gobject.TypeMarshaler{T: TypeMaskMode, F: marshalMaskMode},
@@ -69,7 +65,6 @@ func init() {
 		gobject.TypeMarshaler{T: TypeSerializationError, F: marshalSerializationError},
 		gobject.TypeMarshaler{T: TypeTransformCategory, F: marshalTransformCategory},
 		gobject.TypeMarshaler{T: TypePathForeachFlags, F: marshalPathForEachFlags},
-		gobject.TypeMarshaler{T: TypeGLShader, F: marshalGLShaderInstance},
 		gobject.TypeMarshaler{T: TypeRenderer, F: marshalRendererInstance},
 		gobject.TypeMarshaler{T: TypeVulkanRenderer, F: marshalVulkanRendererInstance},
 		gobject.TypeMarshaler{T: TypeCairoRenderer, F: marshalCairoRendererInstance},
@@ -79,7 +74,6 @@ func init() {
 		gobject.TypeMarshaler{T: TypePathBuilder, F: marshalPathBuilder},
 		gobject.TypeMarshaler{T: TypePathMeasure, F: marshalPathMeasure},
 		gobject.TypeMarshaler{T: TypePathPoint, F: marshalPathPoint},
-		gobject.TypeMarshaler{T: TypeShaderArgsBuilder, F: marshalShaderArgsBuilder},
 		gobject.TypeMarshaler{T: TypeStroke, F: marshalStroke},
 		gobject.TypeMarshaler{T: TypeTransform, F: marshalTransform},
 	})
@@ -252,7 +246,7 @@ func (e Corner) String() string {
 
 // FillRule wraps GskFillRule
 //
-// `GskFillRule` is used to select how paths are filled.
+// Specifies how paths are filled.
 // 
 // Whether or not a point is included in the fill is determined by taking
 // a ray from that point to infinity and looking at intersections with the
@@ -303,78 +297,6 @@ func (e FillRule) String() string {
 		case FillRuleEvenOdd: return "FillRuleEvenOdd"
 		case FillRuleWinding: return "FillRuleWinding"
 		default: return fmt.Sprintf("FillRule(%d)", e)
-	}
-}
-
-// GLUniformType wraps GskGLUniformType
-//
-// This defines the types of the uniforms that `GskGLShaders`
-// declare.
-// 
-// It defines both what the type is called in the GLSL shader
-// code, and what the corresponding C type is on the Gtk side.
-type GLUniformType C.int
-
-const (
-	// GLUniformTypeNone wraps GSK_GL_UNIFORM_TYPE_NONE
-	//
-	// No type, used for uninitialized or unspecified values.
-	GLUniformTypeNone GLUniformType = 0
-	// GLUniformTypeFloat wraps GSK_GL_UNIFORM_TYPE_FLOAT
-	//
-	// A float uniform
-	GLUniformTypeFloat GLUniformType = 1
-	// GLUniformTypeInt wraps GSK_GL_UNIFORM_TYPE_INT
-	//
-	// A GLSL int / gint32 uniform
-	GLUniformTypeInt GLUniformType = 2
-	// GLUniformTypeUint wraps GSK_GL_UNIFORM_TYPE_UINT
-	//
-	// A GLSL uint / guint32 uniform
-	GLUniformTypeUint GLUniformType = 3
-	// GLUniformTypeBool wraps GSK_GL_UNIFORM_TYPE_BOOL
-	//
-	// A GLSL bool / gboolean uniform
-	GLUniformTypeBool GLUniformType = 4
-	// GLUniformTypeVec2 wraps GSK_GL_UNIFORM_TYPE_VEC2
-	//
-	// A GLSL vec2 / graphene_vec2_t uniform
-	GLUniformTypeVec2 GLUniformType = 5
-	// GLUniformTypeVec3 wraps GSK_GL_UNIFORM_TYPE_VEC3
-	//
-	// A GLSL vec3 / graphene_vec3_t uniform
-	GLUniformTypeVec3 GLUniformType = 6
-	// GLUniformTypeVec4 wraps GSK_GL_UNIFORM_TYPE_VEC4
-	//
-	// A GLSL vec4 / graphene_vec4_t uniform
-	GLUniformTypeVec4 GLUniformType = 7
-)
-
-func marshalGLUniformType(p unsafe.Pointer) (any, error) {
-	return GLUniformType(gobject.ValueFromNative(p).Enum()), nil
-}
-
-var _ gobject.GoValueInitializer = GLUniformType(0)
-
-func (e GLUniformType) GoValueType() gobject.Type {
-	return TypeGLUniformType
-}
-
-func (e GLUniformType) SetGoValue(v *gobject.Value) {
-	v.SetEnum(int(e))
-}
-
-func (e GLUniformType) String() string {
-	switch e {
-		case GLUniformTypeBool: return "GLUniformTypeBool"
-		case GLUniformTypeFloat: return "GLUniformTypeFloat"
-		case GLUniformTypeInt: return "GLUniformTypeInt"
-		case GLUniformTypeNone: return "GLUniformTypeNone"
-		case GLUniformTypeUint: return "GLUniformTypeUint"
-		case GLUniformTypeVec2: return "GLUniformTypeVec2"
-		case GLUniformTypeVec3: return "GLUniformTypeVec3"
-		case GLUniformTypeVec4: return "GLUniformTypeVec4"
-		default: return fmt.Sprintf("GLUniformType(%d)", e)
 	}
 }
 
@@ -546,8 +468,7 @@ func (e MaskMode) String() string {
 
 // PathDirection wraps GskPathDirection
 //
-// The values of the `GskPathDirection` enum are used to pick one
-// of the four tangents at a given point on the path.
+// Used to pick one of the four tangents at a given point on the path.
 // 
 // Note that the directions for @GSK_PATH_FROM_START/@GSK_PATH_TO_END and
 // @GSK_PATH_TO_START/@GSK_PATH_FROM_END will coincide for smooth points.
@@ -608,7 +529,7 @@ func (e PathDirection) String() string {
 
 // PathOperation wraps GskPathOperation
 //
-// Path operations are used to describe the segments of a `GskPath`.
+// Describes the segments of a `GskPath`.
 // 
 // More values may be added in the future.
 type PathOperation C.int
@@ -1142,8 +1063,7 @@ type ParseErrorFunc func(start *ParseLocation, end *ParseLocation, err error)
 // 
 // 	- goret bool 
 //
-// Prototype of the callback to iterate through the operations of
-// a path.
+// Type of the callback to iterate through the operations of a path.
 // 
 // For each operation, the callback is given the @op itself, the points
 // that the operation is applied to in @pts, and a @weight for conic
@@ -1153,224 +1073,6 @@ type ParseErrorFunc func(start *ParseLocation, end *ParseLocation, err error)
 // Each contour of the path starts with a @GSK_PATH_MOVE operation.
 // Closed contours end with a @GSK_PATH_CLOSE operation.
 type PathForEachFunc func(op PathOperation, pts *graphene.Point, nPts uint, weight float32) (goret bool)
-
-// GLShaderInstance is the instance type used by all types extending GskGLShader. It is used internally by the bindings. Users should use the interface [GLShader] instead.
-type GLShaderInstance struct {
-	_ [0]func() // equal guard
-	gobject.ObjectInstance
-}
-
-var _ GLShader = (*GLShaderInstance)(nil)
-
-// GLShader wraps GskGLShader
-//
-// A `GskGLShader` is a snippet of GLSL that is meant to run in the
-// fragment shader of the rendering pipeline.
-// 
-// A fragment shader gets the coordinates being rendered as input and
-// produces the pixel values for that particular pixel. Additionally,
-// the shader can declare a set of other input arguments, called
-// uniforms (as they are uniform over all the calls to your shader in
-// each instance of use). A shader can also receive up to 4
-// textures that it can use as input when producing the pixel data.
-// 
-// `GskGLShader` is usually used with gtk_snapshot_push_gl_shader()
-// to produce a [class@Gsk.GLShaderNode] in the rendering hierarchy,
-// and then its input textures are constructed by rendering the child
-// nodes to textures before rendering the shader node itself. (You can
-// pass texture nodes as children if you want to directly use a texture
-// as input).
-// 
-// The actual shader code is GLSL code that gets combined with
-// some other code into the fragment shader. Since the exact
-// capabilities of the GPU driver differs between different OpenGL
-// drivers and hardware, GTK adds some defines that you can use
-// to ensure your GLSL code runs on as many drivers as it can.
-// 
-// If the OpenGL driver is GLES, then the shader language version
-// is set to 100, and GSK_GLES will be defined in the shader.
-// 
-// Otherwise, if the OpenGL driver does not support the 3.2 core profile,
-// then the shader will run with language version 110 for GL2 and 130 for GL3,
-// and GSK_LEGACY will be defined in the shader.
-// 
-// If the OpenGL driver supports the 3.2 code profile, it will be used,
-// the shader language version is set to 150, and GSK_GL3 will be defined
-// in the shader.
-// 
-// The main function the shader must implement is:
-// 
-// ```glsl
-//  void mainImage(out vec4 fragColor,
-//                 in vec2 fragCoord,
-//                 in vec2 resolution,
-//                 in vec2 uv)
-// ```
-// 
-// Where the input @fragCoord is the coordinate of the pixel we're
-// currently rendering, relative to the boundary rectangle that was
-// specified in the `GskGLShaderNode`, and @resolution is the width and
-// height of that rectangle. This is in the typical GTK coordinate
-// system with the origin in the top left. @uv contains the u and v
-// coordinates that can be used to index a texture at the
-// corresponding point. These coordinates are in the [0..1]x[0..1]
-// region, with 0, 0 being in the lower left corder (which is typical
-// for OpenGL).
-// 
-// The output @fragColor should be a RGBA color (with
-// premultiplied alpha) that will be used as the output for the
-// specified pixel location. Note that this output will be
-// automatically clipped to the clip region of the glshader node.
-// 
-// In addition to the function arguments the shader can define
-// up to 4 uniforms for textures which must be called u_textureN
-// (i.e. u_texture1 to u_texture4) as well as any custom uniforms
-// you want of types int, uint, bool, float, vec2, vec3 or vec4.
-// 
-// All textures sources contain premultiplied alpha colors, but if some
-// there are outer sources of colors there is a gsk_premultiply() helper
-// to compute premultiplication when needed.
-// 
-// Note that GTK parses the uniform declarations, so each uniform has to
-// be on a line by itself with no other code, like so:
-// 
-// ```glsl
-// uniform float u_time;
-// uniform vec3 u_color;
-// uniform sampler2D u_texture1;
-// uniform sampler2D u_texture2;
-// ```
-// 
-// GTK uses the "gsk" namespace in the symbols it uses in the
-// shader, so your code should not use any symbols with the prefix gsk
-// or GSK. There are some helper functions declared that you can use:
-// 
-// ```glsl
-// vec4 GskTexture(sampler2D sampler, vec2 texCoords);
-// ```
-// 
-// This samples a texture (e.g. u_texture1) at the specified
-// coordinates, and contains some helper ifdefs to ensure that
-// it works on all OpenGL versions.
-// 
-// You can compile the shader yourself using [method@Gsk.GLShader.compile],
-// otherwise the GSK renderer will do it when it handling the glshader
-// node. If errors occurs, the returned @error will include the glsl
-// sources, so you can see what GSK was passing to the compiler. You
-// can also set GSK_DEBUG=shaders in the environment to see the sources
-// and other relevant information about all shaders that GSK is handling.
-// 
-// # An example shader
-// 
-// ```glsl
-// uniform float position;
-// uniform sampler2D u_texture1;
-// uniform sampler2D u_texture2;
-// 
-// void mainImage(out vec4 fragColor,
-//                in vec2 fragCoord,
-//                in vec2 resolution,
-//                in vec2 uv) {
-//   vec4 source1 = GskTexture(u_texture1, uv);
-//   vec4 source2 = GskTexture(u_texture2, uv);
-// 
-//   fragColor = position * source1 + (1.0 - position) * source2;
-// }
-// ```
-// 
-// # Deprecation
-// 
-// This feature was deprecated in GTK 4.16 after the new rendering infrastructure
-// introduced in 4.14 did not support it.
-// The lack of Vulkan integration would have made it a very hard feature to support.
-// 
-// If you want to use OpenGL directly, you should look at [GtkGLArea](../gtk4/class.GLArea.html)
-// which uses a different approach and is still well supported.
-type GLShader interface {
-	gobject.Object
-	upcastToGskGLShader() *GLShaderInstance
-
-	// chain up virtual methods:
-}
-
-func unsafeWrapGLShader(base *gobject.ObjectInstance) *GLShaderInstance {
-	return &GLShaderInstance{
-		ObjectInstance: *base,
-	}
-}
-
-func marshalGLShaderInstance(p unsafe.Pointer) (any, error) {
-	return unsafeWrapGLShader(gobject.ValueFromNative(p).Object()), nil
-}
-
-// UnsafeGLShaderFromGlibNone is used to convert raw GskGLShader pointers to go while taking a reference and attaching a finalizer. This is used by the bindings internally.
-func UnsafeGLShaderFromGlibNone(c unsafe.Pointer) GLShader {
-	return gobject.UnsafeObjectFromGlibNone(c).(GLShader)
-}
-
-// UnsafeGLShaderFromGlibFull is used to convert raw GskGLShader pointers to go while attaching a finalizer. This is used by the bindings internally.
-func UnsafeGLShaderFromGlibFull(c unsafe.Pointer) GLShader {
-	return gobject.UnsafeObjectFromGlibFull(c).(GLShader)
-}
-
-// UnsafeGLShaderFromGlibBorrow is used to convert raw GskGLShader pointers to go without touching any references. This is used by the bindings internally.
-func UnsafeGLShaderFromGlibBorrow(c unsafe.Pointer) GLShader {
-	return gobject.UnsafeObjectFromGlibBorrow(c).(GLShader)
-}
-
-func (g *GLShaderInstance) upcastToGskGLShader() *GLShaderInstance {
-	return g
-}
-
-// UnsafeGLShaderToGlibNone is used to convert the instance to it's C value GskGLShader. This is used by the bindings internally.
-func UnsafeGLShaderToGlibNone(c GLShader) unsafe.Pointer {
-	return gobject.UnsafeObjectToGlibNone(c)
-}
-
-// UnsafeGLShaderToGlibFull is used to convert the instance to it's C value GskGLShader, while removeing the finalizer. This is used by the bindings internally.
-func UnsafeGLShaderToGlibFull(c GLShader) unsafe.Pointer {
-	return gobject.UnsafeObjectToGlibFull(c)
-}
-
-// GLShaderOverrides is the struct used to override the default implementation of virtual methods.
-// it is generic over the extending instance type.
-type GLShaderOverrides[Instance GLShader] struct {
-	// gobject.ObjectOverrides allows you to override virtual methods from the parent class gobject.Object
-	gobject.ObjectOverrides[Instance]
-
-}
-
-// UnsafeApplyGLShaderOverrides applies the overrides to init the gclass by setting the trampoline functions.
-// This is used by the bindings internally and only exported for visibility to other bindings code.
-func UnsafeApplyGLShaderOverrides[Instance GLShader](gclass unsafe.Pointer, overrides GLShaderOverrides[Instance]) {
-	gobject.UnsafeApplyObjectOverrides(gclass, overrides.ObjectOverrides)
-}
-
-// RegisterGLShaderSubClass is used to register a go subclass of GskGLShader. For this to work safely please implement the
-// virtual methods required by the implementation.
-func RegisterGLShaderSubClass[InstanceT GLShader](
-		name string,
-		classInit func(class *GLShaderClass),
-		constructor func() InstanceT,
-		overrides GLShaderOverrides[InstanceT],
-		signals map[string]gobject.SignalDefinition,
-		interfaceInits ...gobject.SubClassInterfaceInit[InstanceT],
-) gobject.Type {
-	return gobject.UnsafeRegisterSubClass(
-		name,
-		classInit,
-		constructor,
-		overrides,
-		signals,
-		TypeGLShader,
-		UnsafeGLShaderClassFromGlibBorrow,
-		UnsafeApplyGLShaderOverrides,
-		func (obj *gobject.ObjectInstance) gobject.Object {
-			return unsafeWrapGLShader(obj)
-		},
-		interfaceInits...,
-	)
-}
 
 // RendererInstance is the instance type used by all types extending GskRenderer. It is used internally by the bindings. Users should use the interface [Renderer] instead.
 type RendererInstance struct {
@@ -1382,8 +1084,7 @@ var _ Renderer = (*RendererInstance)(nil)
 
 // Renderer wraps GskRenderer
 //
-// `GskRenderer` is a class that renders a scene graph defined via a
-// tree of [class@Gsk.RenderNode] instances.
+// Renders a scene graph defined via a tree of [class@Gsk.RenderNode] instances.
 // 
 // Typically you will use a `GskRenderer` instance to repeatedly call
 // [method@Gsk.Renderer.render] to update the contents of its associated
@@ -1403,9 +1104,9 @@ type Renderer interface {
 	// 
 	// 	- goret gdk.Surface (nullable) 
 	//
-	// Retrieves the `GdkSurface` set using gsk_enderer_realize().
+	// Retrieves the surface that the renderer is associated with.
 	// 
-	// If the renderer has not been realized yet, %NULL will be returned.
+	// If the renderer has not been realized yet, `NULL` will be returned.
 	GetSurface() gdk.Surface
 	// IsRealized wraps gsk_renderer_is_realized
 	// 
@@ -1413,50 +1114,48 @@ type Renderer interface {
 	// 
 	// 	- goret bool 
 	//
-	// Checks whether the @renderer is realized or not.
+	// Checks whether the renderer is realized or not.
 	IsRealized() bool
 	// Realize wraps gsk_renderer_realize
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- surface gdk.Surface (nullable): the `GdkSurface` renderer will be used on 
+	// 	- surface gdk.Surface (nullable): the surface that renderer will be used on 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
 	// 	- _goerr error (nullable): an error 
 	//
-	// Creates the resources needed by the @renderer to render the scene
-	// graph.
+	// Creates the resources needed by the renderer.
 	// 
 	// Since GTK 4.6, the surface may be `NULL`, which allows using
-	// renderers without having to create a surface.
-	// Since GTK 4.14, it is recommended to use [method@Gsk.Renderer.realize_for_display]
-	// instead.
+	// renderers without having to create a surface. Since GTK 4.14,
+	// it is recommended to use [method@Gsk.Renderer.realize_for_display]
+	// for this case.
 	// 
-	// Note that it is mandatory to call [method@Gsk.Renderer.unrealize] before
-	// destroying the renderer.
+	// Note that it is mandatory to call [method@Gsk.Renderer.unrealize]
+	// before destroying the renderer.
 	Realize(gdk.Surface) (bool, error)
 	// RealizeForDisplay wraps gsk_renderer_realize_for_display
 	// 
 	// The function takes the following parameters:
 	// 
-	// 	- display gdk.Display: the `GdkDisplay` renderer will be used on 
+	// 	- display gdk.Display: the display that the renderer will be used on 
 	// 
 	// The function returns the following values:
 	// 
 	// 	- goret bool 
 	// 	- _goerr error (nullable): an error 
 	//
-	// Creates the resources needed by the @renderer to render the scene
-	// graph.
+	// Creates the resources needed by the renderer.
 	// 
-	// Note that it is mandatory to call [method@Gsk.Renderer.unrealize] before
-	// destroying the renderer.
+	// Note that it is mandatory to call [method@Gsk.Renderer.unrealize]
+	// before destroying the renderer.
 	RealizeForDisplay(gdk.Display) (bool, error)
 	// Unrealize wraps gsk_renderer_unrealize
 	//
-	// Releases all the resources created by gsk_renderer_realize().
+	// Releases all the resources created by [method@Gsk.Renderer.realize].
 	Unrealize()
 }
 
@@ -1464,6 +1163,15 @@ func unsafeWrapRenderer(base *gobject.ObjectInstance) *RendererInstance {
 	return &RendererInstance{
 		ObjectInstance: *base,
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeRenderer,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapRenderer(inst)
+		},
+	)
 }
 
 func marshalRendererInstance(p unsafe.Pointer) (any, error) {
@@ -1503,13 +1211,13 @@ func UnsafeRendererToGlibFull(c Renderer) unsafe.Pointer {
 // 
 // The function takes the following parameters:
 // 
-// 	- surface gdk.Surface: a `GdkSurface` 
+// 	- surface gdk.Surface: a surface 
 // 
 // The function returns the following values:
 // 
 // 	- goret Renderer (nullable) 
 //
-// Creates an appropriate `GskRenderer` instance for the given @surface.
+// Creates an appropriate `GskRenderer` instance for the given surface.
 // 
 // If the `GSK_RENDERER` environment variable is set, GSK will
 // try that renderer first, before trying the backend-specific
@@ -1540,9 +1248,9 @@ func NewRendererForSurface(surface gdk.Surface) Renderer {
 // 
 // 	- goret gdk.Surface (nullable) 
 //
-// Retrieves the `GdkSurface` set using gsk_enderer_realize().
+// Retrieves the surface that the renderer is associated with.
 // 
-// If the renderer has not been realized yet, %NULL will be returned.
+// If the renderer has not been realized yet, `NULL` will be returned.
 func (renderer *RendererInstance) GetSurface() gdk.Surface {
 	var carg0 *C.GskRenderer // in, none, converted
 	var cret  *C.GdkSurface  // return, none, converted, nullable
@@ -1567,7 +1275,7 @@ func (renderer *RendererInstance) GetSurface() gdk.Surface {
 // 
 // 	- goret bool 
 //
-// Checks whether the @renderer is realized or not.
+// Checks whether the renderer is realized or not.
 func (renderer *RendererInstance) IsRealized() bool {
 	var carg0 *C.GskRenderer // in, none, converted
 	var cret  C.gboolean     // return
@@ -1590,23 +1298,22 @@ func (renderer *RendererInstance) IsRealized() bool {
 // 
 // The function takes the following parameters:
 // 
-// 	- surface gdk.Surface (nullable): the `GdkSurface` renderer will be used on 
+// 	- surface gdk.Surface (nullable): the surface that renderer will be used on 
 // 
 // The function returns the following values:
 // 
 // 	- goret bool 
 // 	- _goerr error (nullable): an error 
 //
-// Creates the resources needed by the @renderer to render the scene
-// graph.
+// Creates the resources needed by the renderer.
 // 
 // Since GTK 4.6, the surface may be `NULL`, which allows using
-// renderers without having to create a surface.
-// Since GTK 4.14, it is recommended to use [method@Gsk.Renderer.realize_for_display]
-// instead.
+// renderers without having to create a surface. Since GTK 4.14,
+// it is recommended to use [method@Gsk.Renderer.realize_for_display]
+// for this case.
 // 
-// Note that it is mandatory to call [method@Gsk.Renderer.unrealize] before
-// destroying the renderer.
+// Note that it is mandatory to call [method@Gsk.Renderer.unrealize]
+// before destroying the renderer.
 func (renderer *RendererInstance) Realize(surface gdk.Surface) (bool, error) {
 	var carg0 *C.GskRenderer // in, none, converted
 	var carg1 *C.GdkSurface  // in, none, converted, nullable
@@ -1639,18 +1346,17 @@ func (renderer *RendererInstance) Realize(surface gdk.Surface) (bool, error) {
 // 
 // The function takes the following parameters:
 // 
-// 	- display gdk.Display: the `GdkDisplay` renderer will be used on 
+// 	- display gdk.Display: the display that the renderer will be used on 
 // 
 // The function returns the following values:
 // 
 // 	- goret bool 
 // 	- _goerr error (nullable): an error 
 //
-// Creates the resources needed by the @renderer to render the scene
-// graph.
+// Creates the resources needed by the renderer.
 // 
-// Note that it is mandatory to call [method@Gsk.Renderer.unrealize] before
-// destroying the renderer.
+// Note that it is mandatory to call [method@Gsk.Renderer.unrealize]
+// before destroying the renderer.
 func (renderer *RendererInstance) RealizeForDisplay(display gdk.Display) (bool, error) {
 	var carg0 *C.GskRenderer // in, none, converted
 	var carg1 *C.GdkDisplay  // in, none, converted
@@ -1679,7 +1385,7 @@ func (renderer *RendererInstance) RealizeForDisplay(display gdk.Display) (bool, 
 
 // Unrealize wraps gsk_renderer_unrealize
 //
-// Releases all the resources created by gsk_renderer_realize().
+// Releases all the resources created by [method@Gsk.Renderer.realize].
 func (renderer *RendererInstance) Unrealize() {
 	var carg0 *C.GskRenderer // in, none, converted
 
@@ -1699,7 +1405,7 @@ var _ VulkanRenderer = (*VulkanRendererInstance)(nil)
 
 // VulkanRenderer wraps GskVulkanRenderer
 //
-// A GSK renderer that is using Vulkan.
+// Renders a GSK rendernode tree with Vulkan.
 // 
 // This renderer will fail to realize if Vulkan is not supported.
 type VulkanRenderer interface {
@@ -1713,6 +1419,15 @@ func unsafeWrapVulkanRenderer(base *gobject.ObjectInstance) *VulkanRendererInsta
 			ObjectInstance: *base,
 		},
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeVulkanRenderer,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapVulkanRenderer(inst)
+		},
+	)
 }
 
 func marshalVulkanRendererInstance(p unsafe.Pointer) (any, error) {
@@ -1783,7 +1498,7 @@ var _ CairoRenderer = (*CairoRendererInstance)(nil)
 
 // CairoRenderer wraps GskCairoRenderer
 //
-// A GSK renderer that is using cairo.
+// Renders a GSK rendernode tree with cairo.
 // 
 // Since it is using cairo, this renderer cannot support
 // 3D transformations.
@@ -1798,6 +1513,15 @@ func unsafeWrapCairoRenderer(base *gobject.ObjectInstance) *CairoRendererInstanc
 			ObjectInstance: *base,
 		},
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeCairoRenderer,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapCairoRenderer(inst)
+		},
+	)
 }
 
 func marshalCairoRendererInstance(p unsafe.Pointer) (any, error) {
@@ -1869,7 +1593,7 @@ var _ GLRenderer = (*GLRendererInstance)(nil)
 
 // GLRenderer wraps GskGLRenderer
 //
-// A GL based renderer.
+// Renders a GSK rendernode tree with OpenGL.
 // 
 // See [class@Gsk.Renderer].
 type GLRenderer interface {
@@ -1883,6 +1607,15 @@ func unsafeWrapGLRenderer(base *gobject.ObjectInstance) *GLRendererInstance {
 			ObjectInstance: *base,
 		},
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeGLRenderer,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapGLRenderer(inst)
+		},
+	)
 }
 
 func marshalGLRendererInstance(p unsafe.Pointer) (any, error) {
@@ -1924,7 +1657,7 @@ func UnsafeGLRendererToGlibFull(c GLRenderer) unsafe.Pointer {
 // 
 // 	- goret Renderer 
 //
-// Creates a new `GskRenderer` using the new OpenGL renderer.
+// Creates an instance of the GL renderer.
 func NewGLRenderer() Renderer {
 	var cret *C.GskRenderer // return, full, converted
 
@@ -1963,6 +1696,15 @@ func unsafeWrapNglRenderer(base *gobject.ObjectInstance) *NglRendererInstance {
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeNglRenderer,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapNglRenderer(inst)
+		},
+	)
+}
+
 func marshalNglRendererInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapNglRenderer(gobject.ValueFromNative(p).Object()), nil
 }
@@ -1994,25 +1736,6 @@ func UnsafeNglRendererToGlibNone(c NglRenderer) unsafe.Pointer {
 // UnsafeNglRendererToGlibFull is used to convert the instance to it's C value NglRenderer, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeNglRendererToGlibFull(c NglRenderer) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
-}
-
-// NewNglRenderer wraps gsk_ngl_renderer_new
-// 
-// The function returns the following values:
-// 
-// 	- goret Renderer 
-//
-// Creates an instance of the new experimental GL renderer.
-func NewNglRenderer() Renderer {
-	var cret *C.GskRenderer // return, full, converted
-
-	cret = C.gsk_ngl_renderer_new()
-
-	var goret Renderer
-
-	goret = UnsafeRendererFromGlibFull(unsafe.Pointer(cret))
-
-	return goret
 }
 
 // CairoRendererClass wraps GskCairoRendererClass
@@ -2155,8 +1878,6 @@ func (g *GLRendererClass) ParentClass() *RendererClass {
 }
 
 // GLShaderClass wraps GskGLShaderClass
-// 
-// GLShaderClass is the type struct for [GLShader]
 type GLShaderClass struct {
 	*glShaderClass
 }
@@ -2171,6 +1892,31 @@ func UnsafeGLShaderClassFromGlibBorrow(p unsafe.Pointer) *GLShaderClass {
 	return &GLShaderClass{&glShaderClass{(*C.GskGLShaderClass)(p)}}
 }
 
+// UnsafeGLShaderClassFromGlibNone is used to convert raw C.GskGLShaderClass pointers to go without transferring ownership. This is used by the bindings internally.
+func UnsafeGLShaderClassFromGlibNone(p unsafe.Pointer) *GLShaderClass {
+	// FIXME: this has no ref function, what should we do here?
+	wrapped := UnsafeGLShaderClassFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.glShaderClass,
+		func (intern *glShaderClass) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
+}
+
+// UnsafeGLShaderClassFromGlibFull is used to convert raw C.GskGLShaderClass pointers to go while taking ownership. This is used by the bindings internally.
+func UnsafeGLShaderClassFromGlibFull(p unsafe.Pointer) *GLShaderClass {
+	wrapped := UnsafeGLShaderClassFromGlibBorrow(p)
+	runtime.SetFinalizer(
+		wrapped.glShaderClass,
+		func (intern *glShaderClass) {
+			C.free(unsafe.Pointer(intern.native))
+		},
+	)
+	return wrapped
+}
+
 // UnsafeGLShaderClassFree unrefs/frees the underlying resource. This is used by the bindings internally.
 // 
 // After this is called, no other method on [GLShaderClass] is expected to work anymore.
@@ -2183,13 +1929,13 @@ func UnsafeGLShaderClassToGlibNone(g *GLShaderClass) unsafe.Pointer {
 	return unsafe.Pointer(g.native)
 }
 
-// ParentClass returns the type struct of the parent class of this type struct.
-// This essentially casts the underlying c pointer.
-func (g *GLShaderClass) ParentClass() *gobject.ObjectClass {
-	parent := gobject.UnsafeObjectClassFromGlibBorrow(UnsafeGLShaderClassToGlibNone(g))
-	// attach a cleanup to keep the instance alive as long as the parent is referenced
-	runtime.AddCleanup(parent, func(_ *GLShaderClass) {}, g)
-	return parent
+// UnsafeGLShaderClassToGlibFull returns the underlying C pointer and gives up ownership.
+// This is used by the bindings internally.
+func UnsafeGLShaderClassToGlibFull(g *GLShaderClass) unsafe.Pointer {
+	runtime.SetFinalizer(g.glShaderClass, nil)
+	_p := unsafe.Pointer(g.native)
+	g.native = nil // GLShaderClass is invalid from here on
+	return _p
 }
 
 // ParseLocation wraps GskParseLocation
@@ -2257,8 +2003,7 @@ func UnsafeParseLocationToGlibFull(p *ParseLocation) unsafe.Pointer {
 
 // Path wraps GskPath
 //
-// A `GskPath` describes lines and curves that are more complex
-// than simple rectangles.
+// Describes lines and curves that are more complex than simple rectangles.
 // 
 // Paths can used for rendering (filling or stroking) and for animations
 // (e.g. as trajectories).
@@ -2368,8 +2113,7 @@ func UnsafePathToGlibFull(p *Path) unsafe.Pointer {
 // 
 // 	- goret *Path (nullable) 
 //
-// This is a convenience function that constructs a `GskPath`
-// from a serialized form.
+// Constructs a path from a serialized form.
 // 
 // The string is expected to be in (a superset of)
 // [SVG path syntax](https://www.w3.org/TR/SVG11/paths.html#PathData),
@@ -2416,8 +2160,7 @@ func PathParse(str string) *Path {
 // 
 // The function takes the following parameters:
 // 
-// 	- flags PathForEachFlags: flags to pass to the foreach function. See [flags@Gsk.PathForeachFlags]
-//   for details about flags 
+// 	- flags PathForEachFlags: flags to pass to the foreach function 
 // 	- fn PathForEachFunc: the function to call for operations 
 // 
 // The function returns the following values:
@@ -2468,7 +2211,7 @@ func (self *Path) ForEach(flags PathForEachFlags, fn PathForEachFunc) bool {
 // 
 // The function returns the following values:
 // 
-// 	- bounds graphene.Rect: the bounds of the given path 
+// 	- bounds graphene.Rect: return location for the bounds 
 // 	- goret bool 
 //
 // Computes the bounds of the given path.
@@ -2481,10 +2224,10 @@ func (self *Path) ForEach(flags PathForEachFlags, fn PathForEachFunc) bool {
 // This can happen when the path only describes a point or an
 // axis-aligned line.
 // 
-// If the path is empty, `FALSE` is returned and @bounds are set to
+// If the path is empty, false is returned and @bounds are set to
 // graphene_rect_zero(). This is different from the case where the path
 // is a single point at the origin, where the @bounds will also be set to
-// the zero rectangle but `TRUE` will be returned.
+// the zero rectangle but true will be returned.
 func (self *Path) GetBounds() (graphene.Rect, bool) {
 	var carg0 *C.GskPath        // in, none, converted
 	var carg1 C.graphene_rect_t // out, transfer: none, C Pointers: 0, Name: Rect, caller-allocates
@@ -2521,11 +2264,10 @@ func (self *Path) GetBounds() (graphene.Rect, bool) {
 // 	- distance float32: return location for the distance 
 // 	- goret bool 
 //
-// Computes the closest point on the path to the given point
-// and sets the @result to it.
+// Computes the closest point on the path to the given point.
 // 
 // If there is no point closer than the given threshold,
-// `FALSE` is returned.
+// false is returned.
 func (self *Path) GetClosestPoint(point *graphene.Point, threshold float32) (PathPoint, float32, bool) {
 	var carg0 *C.GskPath          // in, none, converted
 	var carg1 *C.graphene_point_t // in, none, converted
@@ -2567,7 +2309,7 @@ func (self *Path) GetClosestPoint(point *graphene.Point, threshold float32) (Pat
 //
 // Gets the end point of the path.
 // 
-// An empty path has no points, so `FALSE`
+// An empty path has no points, so false
 // is returned in this case.
 func (self *Path) GetEndPoint() (PathPoint, bool) {
 	var carg0 *C.GskPath     // in, none, converted
@@ -2601,7 +2343,7 @@ func (self *Path) GetEndPoint() (PathPoint, bool) {
 //
 // Gets the start point of the path.
 // 
-// An empty path has no points, so `FALSE`
+// An empty path has no points, so false
 // is returned in this case.
 func (self *Path) GetStartPoint() (PathPoint, bool) {
 	var carg0 *C.GskPath     // in, none, converted
@@ -2638,7 +2380,7 @@ func (self *Path) GetStartPoint() (PathPoint, bool) {
 // 	- goret bool 
 //
 // Computes the bounds for stroking the given path with the
-// parameters in @stroke.
+// given parameters.
 // 
 // The returned bounds may be larger than necessary, because this
 // function aims to be fast, not accurate. The bounds are guaranteed
@@ -2681,9 +2423,7 @@ func (self *Path) GetStrokeBounds(stroke *Stroke) (graphene.Rect, bool) {
 // 
 // 	- goret bool 
 //
-// Returns whether the given point is inside the area
-// that would be affected if the path was filled according
-// to @fill_rule.
+// Returns whether a point is inside the fill area of a path.
 // 
 // Note that this function assumes that filling a contour
 // implicitly closes it.
@@ -2717,8 +2457,7 @@ func (self *Path) InFill(point *graphene.Point, fillRule FillRule) bool {
 // 
 // 	- goret bool 
 //
-// Returns if the path represents a single closed
-// contour.
+// Returns if the path represents a single closed contour.
 func (self *Path) IsClosed() bool {
 	var carg0 *C.GskPath // in, none, converted
 	var cret  C.gboolean // return
@@ -2768,7 +2507,7 @@ func (self *Path) IsEmpty() bool {
 // 
 // 	- goret string 
 //
-// Converts the path into a string that is suitable for printing.
+// Converts the path into a human-readable string.
 // 
 // You can use this function in a debugger to get a quick overview
 // of the path.
@@ -2794,12 +2533,11 @@ func (self *Path) ToString() string {
 
 // PathBuilder wraps GskPathBuilder
 //
-// `GskPathBuilder` is an auxiliary object for constructing
-// `GskPath` objects.
+// Constructs `GskPath` objects.
 // 
 // A path is constructed like this:
 // 
-// |[&lt;!-- language="C" --&gt;
+// ```c
 // GskPath *
 // construct_path (void)
 // {
@@ -2810,7 +2548,7 @@ func (self *Path) ToString() string {
 //   // add contours to the path here
 // 
 //   return gsk_path_builder_free_to_path (builder);
-// ]|
+// ```
 // 
 // Adding contours to the path can be done in two ways.
 // The easiest option is to use the `gsk_path_builder_add_*` group
@@ -2944,7 +2682,7 @@ func NewPathBuilder() *PathBuilder {
 // 	- center *graphene.Point: the center of the circle 
 // 	- radius float32: the radius of the circle 
 //
-// Adds a circle with the @center and @radius.
+// Adds a circle as a new contour.
 // 
 // The path is going around the circle in clockwise direction.
 // 
@@ -3006,9 +2744,9 @@ func (self *PathBuilder) AddPath(path *Path) {
 // 
 // The function takes the following parameters:
 // 
-// 	- rect *graphene.Rect: The rectangle to create a path for 
+// 	- rect *graphene.Rect: the rectangle to create a path for 
 //
-// Adds @rect as a new contour to the path built by the builder.
+// Adds a rectangle as a new contour.
 // 
 // The path is going around the rectangle in clockwise direction.
 // 
@@ -3051,7 +2789,7 @@ func (self *PathBuilder) AddReversePath(path *Path) {
 // 
 // 	- rect *RoundedRect: the rounded rect 
 //
-// Adds @rect as a new contour to the path built in @self.
+// Adds a rounded rectangle as a new contour.
 // 
 // The path is going around the rectangle in clockwise direction.
 func (self *PathBuilder) AddRoundedRect(rect *RoundedRect) {
@@ -3070,11 +2808,11 @@ func (self *PathBuilder) AddRoundedRect(rect *RoundedRect) {
 // 
 // The function takes the following parameters:
 // 
-// 	- path *Path: the `GskPath` to take the segment to 
+// 	- path *Path: the path to take the segment to 
 // 	- start *PathPoint: the point on @path to start at 
 // 	- end *PathPoint: the point on @path to end at 
 //
-// Adds to @self the segment of @path from @start to @end.
+// Adds a segment of a path to the builder.
 // 
 // If @start is equal to or after @end, the path will first add the
 // segment from @start to the end of the path, and then add the segment
@@ -3295,11 +3033,11 @@ func (self *PathBuilder) GetCurrentPoint() *graphene.Point {
 // 
 // The function takes the following parameters:
 // 
-// 	- x1 float32: X coordinate of first control point 
-// 	- y1 float32: Y coordinate of first control point 
-// 	- x2 float32: X coordinate of second control point 
-// 	- y2 float32: Y coordinate of second control point 
-// 	- radius float32: Radius of the circle 
+// 	- x1 float32: x coordinate of first control point 
+// 	- y1 float32: y coordinate of first control point 
+// 	- x2 float32: x coordinate of second control point 
+// 	- y2 float32: y coordinate of second control point 
+// 	- radius float32: radius of the circle 
 //
 // Implements arc-to according to the HTML Canvas spec.
 // 
@@ -3555,11 +3293,11 @@ func (self *PathBuilder) RelCubicTo(x1 float32, y1 float32, x2 float32, y2 float
 // 
 // The function takes the following parameters:
 // 
-// 	- x1 float32: X coordinate of first control point 
-// 	- y1 float32: Y coordinate of first control point 
-// 	- x2 float32: X coordinate of second control point 
-// 	- y2 float32: Y coordinate of second control point 
-// 	- radius float32: Radius of the circle 
+// 	- x1 float32: x coordinate of first control point 
+// 	- y1 float32: y coordinate of first control point 
+// 	- x2 float32: x coordinate of second control point 
+// 	- y2 float32: y coordinate of second control point 
+// 	- radius float32: radius of the circle 
 //
 // Implements arc-to according to the HTML Canvas spec.
 // 
@@ -3682,13 +3420,13 @@ func (self *PathBuilder) RelQuadTo(x1 float32, y1 float32, x2 float32, y2 float3
 // 
 // The function takes the following parameters:
 // 
-// 	- rx float32: X radius 
-// 	- ry float32: Y radius 
+// 	- rx float32: x radius 
+// 	- ry float32: y radius 
 // 	- xAxisRotation float32: the rotation of the ellipsis 
 // 	- largeArc bool: whether to add the large arc 
 // 	- positiveSweep bool: whether to sweep in the positive direction 
-// 	- x float32: the X coordinate of the endpoint 
-// 	- y float32: the Y coordinate of the endpoint 
+// 	- x float32: x coordinate of the endpoint 
+// 	- y float32: y coordinate of the endpoint 
 //
 // Implements arc-to according to the SVG spec.
 // 
@@ -3733,13 +3471,13 @@ func (self *PathBuilder) RelSVGArcTo(rx float32, ry float32, xAxisRotation float
 // 
 // The function takes the following parameters:
 // 
-// 	- rx float32: X radius 
-// 	- ry float32: Y radius 
+// 	- rx float32: x radius 
+// 	- ry float32: y radius 
 // 	- xAxisRotation float32: the rotation of the ellipsis 
 // 	- largeArc bool: whether to add the large arc 
 // 	- positiveSweep bool: whether to sweep in the positive direction 
-// 	- x float32: the X coordinate of the endpoint 
-// 	- y float32: the Y coordinate of the endpoint 
+// 	- x float32: x coordinate of the endpoint 
+// 	- y float32: y coordinate of the endpoint 
 //
 // Implements arc-to according to the SVG spec.
 // 
@@ -3788,7 +3526,7 @@ func (self *PathBuilder) SVGArcTo(rx float32, ry float32, xAxisRotation float32,
 // 
 // 	- goret *Path 
 //
-// Creates a new `GskPath` from the given builder.
+// Creates a new path from the given builder.
 // 
 // The given `GskPathBuilder` is reset once this function returns;
 // you cannot call this function multiple times on the same builder
@@ -3814,8 +3552,7 @@ func (self *PathBuilder) ToPath() *Path {
 
 // PathMeasure wraps GskPathMeasure
 //
-// `GskPathMeasure` is an object that allows measurements
-// on `GskPath`s such as determining the length of the path.
+// Performs measurements on paths such as determining the length of the path.
 // 
 // Many measuring operations require sampling the path length
 // at intermediate points. Therefore, a `GskPathMeasure` has
@@ -4021,12 +3758,12 @@ func (self *PathMeasure) GetPath() *Path {
 // 
 // The function returns the following values:
 // 
-// 	- result PathPoint: return location for the result 
+// 	- result PathPoint: return location for the point 
 // 	- goret bool 
 //
-// Sets @result to the point at the given distance into the path.
+// Gets the point at the given distance into the path.
 // 
-// An empty path has no points, so `FALSE` is returned in that case.
+// An empty path has no points, so false is returned in that case.
 func (self *PathMeasure) GetPoint(distance float32) (PathPoint, bool) {
 	var carg0 *C.GskPathMeasure // in, none, converted
 	var carg1 C.float           // in, none, casted
@@ -4078,10 +3815,10 @@ func (self *PathMeasure) GetTolerance() float32 {
 
 // PathPoint wraps GskPathPoint
 //
-// `GskPathPoint` is an opaque type representing a point on a path.
+// Represents a point on a path.
 // 
-// It can be queried for properties of the path at that point, such as
-// its tangent or its curvature.
+// It can be queried for properties of the path at that point,
+// such as its tangent or its curvature.
 // 
 // To obtain a `GskPathPoint`, use [method@Gsk.Path.get_closest_point],
 // [method@Gsk.Path.get_start_point], [method@Gsk.Path.get_end_point]
@@ -4170,7 +3907,7 @@ func UnsafePathPointToGlibFull(p *PathPoint) unsafe.Pointer {
 // 
 // The function takes the following parameters:
 // 
-// 	- point2 *PathPoint: another `GskPathPoint` 
+// 	- point2 *PathPoint: another path point 
 // 
 // The function returns the following values:
 // 
@@ -4223,7 +3960,7 @@ func (point *PathPoint) Copy() *PathPoint {
 // 
 // The function takes the following parameters:
 // 
-// 	- point2 *PathPoint: another `GskPathPoint` 
+// 	- point2 *PathPoint: another path point 
 // 
 // The function returns the following values:
 // 
@@ -4267,7 +4004,7 @@ func (point1 *PathPoint) Equal(point2 *PathPoint) bool {
 // 
 // The function returns the following values:
 // 
-// 	- center graphene.Point: Return location for
+// 	- center graphene.Point: return location for
 //   the center of the osculating circle 
 // 	- goret float32 
 //
@@ -4277,15 +4014,15 @@ func (point1 *PathPoint) Equal(point2 *PathPoint) bool {
 // The curvature is the inverse of the radius of the osculating circle.
 // 
 // Lines have a curvature of zero (indicating an osculating circle of
-// infinite radius. In this case, the @center is not modified.
+// infinite radius). In this case, the @center is not modified.
 // 
 // Circles with a radius of zero have `INFINITY` as curvature
 // 
 // Note that certain points on a path may not have a single curvature,
-// such as sharp turns. At such points, there are two curvatures --
-// the (limit of) the curvature of the path going into the point,
-// and the (limit of) the curvature of the path coming out of it.
-// The @direction argument lets you choose which one to get.
+// such as sharp turns. At such points, there are two curvatures — the
+// (limit of) the curvature of the path going into the point, and the
+// (limit of) the curvature of the path coming out of it. The @direction
+// argument lets you choose which one to get.
 // 
 // &lt;picture&gt;
 //   &lt;source srcset="curvature-dark.png" media="(prefers-color-scheme: dark)"&gt;
@@ -4322,14 +4059,14 @@ func (point *PathPoint) GetCurvature(path *Path, direction PathDirection) (graph
 // 
 // The function takes the following parameters:
 // 
-// 	- measure *PathMeasure: a `GskPathMeasure` for the path 
+// 	- measure *PathMeasure: a path measure for the path 
 // 
 // The function returns the following values:
 // 
 // 	- goret float32 
 //
 // Returns the distance from the beginning of the path
-// to @point.
+// to the point.
 func (point *PathPoint) GetDistance(measure *PathMeasure) float32 {
 	var carg0 *C.GskPathPoint   // in, none, converted
 	var carg1 *C.GskPathMeasure // in, none, converted
@@ -4437,12 +4174,12 @@ func (point *PathPoint) GetRotation(path *Path, direction PathDirection) float32
 // 
 // Note that certain points on a path may not have a single
 // tangent, such as sharp turns. At such points, there are
-// two tangents -- the direction of the path going into the
+// two tangents — the direction of the path going into the
 // point, and the direction coming out of it. The @direction
 // argument lets you choose which one to get.
 // 
 // If the path is just a single point (e.g. a circle with
-// radius zero), then @tangent is set to `0, 0`.
+// radius zero), then the tangent is set to `0, 0`.
 // 
 // If you want to orient something in the direction of the
 // path, [method@Gsk.PathPoint.get_rotation] may be more
@@ -4594,7 +4331,7 @@ func UnsafeRoundedRectToGlibFull(r *RoundedRect) unsafe.Pointer {
 // 
 // 	- goret bool 
 //
-// Checks if the given @point is inside the rounded rectangle.
+// Checks if the given point is inside the rounded rectangle.
 func (self *RoundedRect) ContainsPoint(point *graphene.Point) bool {
 	var carg0 *C.GskRoundedRect   // in, none, converted
 	var carg1 *C.graphene_point_t // in, none, converted
@@ -4626,7 +4363,7 @@ func (self *RoundedRect) ContainsPoint(point *graphene.Point) bool {
 // 
 // 	- goret bool 
 //
-// Checks if the given @rect is contained inside the rounded rectangle.
+// Checks if the given rectangle is contained inside the rounded rectangle.
 func (self *RoundedRect) ContainsRect(rect *graphene.Rect) bool {
 	var carg0 *C.GskRoundedRect  // in, none, converted
 	var carg1 *C.graphene_rect_t // in, none, converted
@@ -4662,9 +4399,9 @@ func (self *RoundedRect) ContainsRect(rect *graphene.Rect) bool {
 // 
 // 	- goret *RoundedRect 
 //
-// Initializes the given `GskRoundedRect` with the given values.
+// Initializes a rounded rectangle with the given values.
 // 
-// This function will implicitly normalize the `GskRoundedRect`
+// This function will implicitly normalize the rounded rectangle
 // before returning.
 func (self *RoundedRect) Init(bounds *graphene.Rect, topLeft *graphene.Size, topRight *graphene.Size, bottomRight *graphene.Size, bottomLeft *graphene.Size) *RoundedRect {
 	var carg0 *C.GskRoundedRect  // in, none, converted
@@ -4701,15 +4438,15 @@ func (self *RoundedRect) Init(bounds *graphene.Rect, topLeft *graphene.Size, top
 // 
 // The function takes the following parameters:
 // 
-// 	- src *RoundedRect: a `GskRoundedRect` 
+// 	- src *RoundedRect: another rounded rectangle 
 // 
 // The function returns the following values:
 // 
 // 	- goret *RoundedRect 
 //
-// Initializes @self using the given @src rectangle.
+// Initializes a rounded rectangle with a copy.
 // 
-// This function will not normalize the `GskRoundedRect`,
+// This function will not normalize the rounded rectangle,
 // so make sure the source is normalized.
 func (self *RoundedRect) InitCopy(src *RoundedRect) *RoundedRect {
 	var carg0 *C.GskRoundedRect // in, none, converted
@@ -4741,8 +4478,8 @@ func (self *RoundedRect) InitCopy(src *RoundedRect) *RoundedRect {
 // 
 // 	- goret *RoundedRect 
 //
-// Initializes @self to the given @bounds and sets the radius
-// of all four corners to @radius.
+// Initializes a rounded rectangle to the given bounds
+// and sets the radius of all four corners equally.
 func (self *RoundedRect) InitFromRect(bounds *graphene.Rect, radius float32) *RoundedRect {
 	var carg0 *C.GskRoundedRect  // in, none, converted
 	var carg1 *C.graphene_rect_t // in, none, converted
@@ -4775,7 +4512,8 @@ func (self *RoundedRect) InitFromRect(bounds *graphene.Rect, radius float32) *Ro
 // 
 // 	- goret bool 
 //
-// Checks if part of the given @rect is contained inside the rounded rectangle.
+// Checks if part a rectangle is contained
+// inside the rounded rectangle.
 func (self *RoundedRect) IntersectsRect(rect *graphene.Rect) bool {
 	var carg0 *C.GskRoundedRect  // in, none, converted
 	var carg1 *C.graphene_rect_t // in, none, converted
@@ -4803,8 +4541,8 @@ func (self *RoundedRect) IntersectsRect(rect *graphene.Rect) bool {
 // 
 // 	- goret bool 
 //
-// Checks if all corners of @self are right angles and the
-// rectangle covers all of its bounds.
+// Checks if all corners of a rounded rectangle are right angles
+// and the rectangle covers all of its bounds.
 // 
 // This information can be used to decide if [ctor@Gsk.ClipNode.new]
 // or [ctor@Gsk.RoundedClipNode.new] should be called.
@@ -4832,9 +4570,9 @@ func (self *RoundedRect) IsRectilinear() bool {
 // 
 // 	- goret *RoundedRect 
 //
-// Normalizes the passed rectangle.
+// Normalizes a rounded rectangle.
 // 
-// This function will ensure that the bounds of the rectangle
+// This function will ensure that the bounds of the rounded rectangle
 // are normalized and ensure that the corner values are positive
 // and the corners do not overlap.
 func (self *RoundedRect) Normalize() *RoundedRect {
@@ -4864,9 +4602,9 @@ func (self *RoundedRect) Normalize() *RoundedRect {
 // 
 // 	- goret *RoundedRect 
 //
-// Offsets the bound's origin by @dx and @dy.
+// Offsets the rounded rectangle's origin by @dx and @dy.
 // 
-// The size and corners of the rectangle are unchanged.
+// The size and corners of the rounded rectangle are unchanged.
 func (self *RoundedRect) Offset(dx float32, dy float32) *RoundedRect {
 	var carg0 *C.GskRoundedRect // in, none, converted
 	var carg1 C.float           // in, none, casted
@@ -4893,23 +4631,23 @@ func (self *RoundedRect) Offset(dx float32, dy float32) *RoundedRect {
 // 
 // The function takes the following parameters:
 // 
-// 	- top float32: How far to move the top side downwards 
-// 	- right float32: How far to move the right side to the left 
-// 	- bottom float32: How far to move the bottom side upwards 
-// 	- left float32: How far to move the left side to the right 
+// 	- top float32: how far to move the top side downwards 
+// 	- right float32: how far to move the right side to the left 
+// 	- bottom float32: how far to move the bottom side upwards 
+// 	- left float32: how far to move the left side to the right 
 // 
 // The function returns the following values:
 // 
 // 	- goret *RoundedRect 
 //
-// Shrinks (or grows) the given rectangle by moving the 4 sides
+// Shrinks (or grows) a rounded rectangle by moving the 4 sides
 // according to the offsets given.
 // 
 // The corner radii will be changed in a way that tries to keep
 // the center of the corner circle intact. This emulates CSS behavior.
 // 
-// This function also works for growing rectangles if you pass
-// negative values for the @top, @right, @bottom or @left.
+// This function also works for growing rounded rectangles
+// if you pass negative values for the @top, @right, @bottom or @left.
 func (self *RoundedRect) Shrink(top float32, right float32, bottom float32, left float32) *RoundedRect {
 	var carg0 *C.GskRoundedRect // in, none, converted
 	var carg1 C.float           // in, none, casted
@@ -4936,116 +4674,6 @@ func (self *RoundedRect) Shrink(top float32, right float32, bottom float32, left
 	goret = UnsafeRoundedRectFromGlibNone(unsafe.Pointer(cret))
 
 	return goret
-}
-
-// ShaderArgsBuilder wraps GskShaderArgsBuilder
-//
-// An object to build the uniforms data for a `GskGLShader`.
-type ShaderArgsBuilder struct {
-	*shaderArgsBuilder
-}
-
-// shaderArgsBuilder is the struct that's finalized
-type shaderArgsBuilder struct {
-	native *C.GskShaderArgsBuilder
-}
-
-var _ gobject.GoValueInitializer = (*ShaderArgsBuilder)(nil)
-
-func marshalShaderArgsBuilder(p unsafe.Pointer) (interface{}, error) {
-	b := gobject.ValueFromNative(p).Boxed()
-	return UnsafeShaderArgsBuilderFromGlibBorrow(b), nil
-}
-
-func (r *ShaderArgsBuilder) GoValueType() gobject.Type {
-	return TypeShaderArgsBuilder
-}
-
-func (r *ShaderArgsBuilder) SetGoValue(v *gobject.Value) {
-	v.SetBoxed(unsafe.Pointer(r.native))
-}
-
-// UnsafeShaderArgsBuilderFromGlibBorrow is used to convert raw C.GskShaderArgsBuilder pointers to go. This is used by the bindings internally.
-func UnsafeShaderArgsBuilderFromGlibBorrow(p unsafe.Pointer) *ShaderArgsBuilder {
-	return &ShaderArgsBuilder{&shaderArgsBuilder{(*C.GskShaderArgsBuilder)(p)}}
-}
-
-// UnsafeShaderArgsBuilderFromGlibNone is used to convert raw C.GskShaderArgsBuilder pointers to go without transferring ownership. This is used by the bindings internally.
-func UnsafeShaderArgsBuilderFromGlibNone(p unsafe.Pointer) *ShaderArgsBuilder {
-	C.gsk_shader_args_builder_ref((*C.GskShaderArgsBuilder)(p))
-	wrapped := UnsafeShaderArgsBuilderFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.shaderArgsBuilder,
-		func (intern *shaderArgsBuilder) {
-			C.gsk_shader_args_builder_unref(intern.native)
-		},
-	)
-	return wrapped
-}
-
-// UnsafeShaderArgsBuilderFromGlibFull is used to convert raw C.GskShaderArgsBuilder pointers to go while taking ownership. This is used by the bindings internally.
-func UnsafeShaderArgsBuilderFromGlibFull(p unsafe.Pointer) *ShaderArgsBuilder {
-	wrapped := UnsafeShaderArgsBuilderFromGlibBorrow(p)
-	runtime.SetFinalizer(
-		wrapped.shaderArgsBuilder,
-		func (intern *shaderArgsBuilder) {
-			C.gsk_shader_args_builder_unref(intern.native)
-		},
-	)
-	return wrapped
-}
-
-// UnsafeShaderArgsBuilderRef increases the refcount on the underlying resource. This is used by the bindings internally.
-// 
-// When this is called without an associated call to [ShaderArgsBuilder.UnsafeShaderArgsBuilderUnref], then [ShaderArgsBuilder] will leak memory.
-func UnsafeShaderArgsBuilderRef(s *ShaderArgsBuilder) {
-	C.gsk_shader_args_builder_ref(s.native)
-}
-
-// UnsafeShaderArgsBuilderUnref unrefs/frees the underlying resource. This is used by the bindings internally.
-// 
-// After this is called, no other method on [ShaderArgsBuilder] is expected to work anymore.
-func UnsafeShaderArgsBuilderUnref(s *ShaderArgsBuilder) {
-	C.gsk_shader_args_builder_unref(s.native)
-}
-
-// UnsafeShaderArgsBuilderToGlibNone returns the underlying C pointer. This is used by the bindings internally.
-func UnsafeShaderArgsBuilderToGlibNone(s *ShaderArgsBuilder) unsafe.Pointer {
-	return unsafe.Pointer(s.native)
-}
-
-// UnsafeShaderArgsBuilderToGlibFull returns the underlying C pointer and gives up ownership.
-// This is used by the bindings internally.
-func UnsafeShaderArgsBuilderToGlibFull(s *ShaderArgsBuilder) unsafe.Pointer {
-	runtime.SetFinalizer(s.shaderArgsBuilder, nil)
-	_p := unsafe.Pointer(s.native)
-	s.native = nil // ShaderArgsBuilder is invalid from here on
-	return _p
-}
-
-// SetFloat wraps gsk_shader_args_builder_set_float
-// 
-// The function takes the following parameters:
-// 
-// 	- idx int32: index of the uniform 
-// 	- value float32: value to set the uniform to 
-//
-// Sets the value of the uniform @idx.
-// 
-// The uniform must be of float type.
-func (builder *ShaderArgsBuilder) SetFloat(idx int32, value float32) {
-	var carg0 *C.GskShaderArgsBuilder // in, none, converted
-	var carg1 C.int                   // in, none, casted
-	var carg2 C.float                 // in, none, casted
-
-	carg0 = (*C.GskShaderArgsBuilder)(UnsafeShaderArgsBuilderToGlibNone(builder))
-	carg1 = C.int(idx)
-	carg2 = C.float(value)
-
-	C.gsk_shader_args_builder_set_float(carg0, carg1, carg2)
-	runtime.KeepAlive(builder)
-	runtime.KeepAlive(idx)
-	runtime.KeepAlive(value)
 }
 
 // Shadow wraps GskShadow
@@ -5113,8 +4741,7 @@ func UnsafeShadowToGlibFull(s *Shadow) unsafe.Pointer {
 
 // Stroke wraps GskStroke
 //
-// A `GskStroke` struct collects the parameters that influence
-// the operation of stroking a path.
+// Collects the parameters that are needed when stroking a path.
 type Stroke struct {
 	*stroke
 }
@@ -5223,7 +4850,7 @@ func NewStroke(lineWidth float32) *Stroke {
 // 
 // 	- goret *Stroke 
 //
-// Creates a copy of the given @other stroke.
+// Creates a copy of a `GskStroke`.
 func (other *Stroke) Copy() *Stroke {
 	var carg0 *C.GskStroke // in, none, converted
 	var cret  *C.GskStroke // return, full, converted
@@ -5247,7 +4874,7 @@ func (other *Stroke) Copy() *Stroke {
 // 	- nDash uint: number of elements in the array returned 
 // 	- goret []float32 (nullable) 
 //
-// Gets the dash array in use or `NULL` if dashing is disabled.
+// Gets the dash array in use.
 func (self *Stroke) GetDash() (uint, []float32) {
 	var carg0 *C.GskStroke // in, none, converted
 	var carg1 C.gsize      // out, full, casted
@@ -5275,7 +4902,7 @@ func (self *Stroke) GetDash() (uint, []float32) {
 // 
 // 	- goret float32 
 //
-// Returns the dash_offset of a `GskStroke`.
+// Gets the dash offset.
 func (self *Stroke) GetDashOffset() float32 {
 	var carg0 *C.GskStroke // in, none, converted
 	var cret  C.float      // return, none, casted
@@ -5371,7 +4998,7 @@ func (self *Stroke) GetLineWidth() float32 {
 // 
 // 	- goret float32 
 //
-// Returns the miter limit of a `GskStroke`.
+// Gets the miter limit.
 func (self *Stroke) GetMiterLimit() float32 {
 	var carg0 *C.GskStroke // in, none, converted
 	var cret  C.float      // return, none, casted
@@ -5395,7 +5022,7 @@ func (self *Stroke) GetMiterLimit() float32 {
 // 	- dash []float32 (nullable): 
 //   the array of dashes 
 //
-// Sets the dash pattern to use by this stroke.
+// Sets the dash pattern to use.
 // 
 // A dash pattern is specified by an array of alternating non-negative
 // values. Each value provides the length of alternate "on" and "off"
@@ -5403,8 +5030,8 @@ func (self *Stroke) GetMiterLimit() float32 {
 // 
 // Each "on" segment will have caps applied as if the segment were a
 // separate contour. In particular, it is valid to use an "on" length
-// of 0 with `GSK_LINE_CAP_ROUND` or `GSK_LINE_CAP_SQUARE` to draw dots
-// or squares along a path.
+// of 0 with [enum@Gsk.LineCap.round] or [enum@Gsk.LineCap.square]
+// to draw dots or squares along a path.
 // 
 // If @n_dash is 0, if all elements in @dash are 0, or if there are
 // negative values in @dash, then dashing is disabled.
@@ -5462,7 +5089,7 @@ func (self *Stroke) SetDashOffset(offset float32) {
 // 
 // The function takes the following parameters:
 // 
-// 	- lineCap LineCap: the `GskLineCap` 
+// 	- lineCap LineCap: the line cap 
 //
 // Sets the line cap to be used when stroking.
 // 
@@ -5483,7 +5110,7 @@ func (self *Stroke) SetLineCap(lineCap LineCap) {
 // 
 // The function takes the following parameters:
 // 
-// 	- lineJoin LineJoin: The line join to use 
+// 	- lineJoin LineJoin: the line join to use 
 //
 // Sets the line join to be used when stroking.
 // 
@@ -5527,14 +5154,15 @@ func (self *Stroke) SetLineWidth(lineWidth float32) {
 // 
 // 	- limit float32: the miter limit 
 //
-// Sets the limit for the distance from the corner where sharp
+// Sets the miter limit to be used when stroking.
+// 
+// The miter limit is the distance from the corner where sharp
 // turns of joins get cut off.
 // 
-// The miter limit is in units of line width and must be non-negative.
+// The limit is specfied in units of line width and must be non-negative.
 // 
-// For joins of type `GSK_LINE_JOIN_MITER` that exceed the miter
-// limit, the join gets rendered as if it was of type
-// `GSK_LINE_JOIN_BEVEL`.
+// For joins of type [enum@Gsk.LineJoin.miter] that exceed the miter limit,
+// the join gets rendered as if it was of type [enum@Gsk.LineJoin.bevel].
 func (self *Stroke) SetMiterLimit(limit float32) {
 	var carg0 *C.GskStroke // in, none, converted
 	var carg1 C.float      // in, none, casted
@@ -5549,7 +5177,7 @@ func (self *Stroke) SetMiterLimit(limit float32) {
 
 // Transform wraps GskTransform
 //
-// `GskTransform` is an object to describe transform matrices.
+// Describes a 3D transform.
 // 
 // Unlike `graphene_matrix_t`, `GskTransform` retains the steps in how
 // a transform was constructed, and allows inspecting them. It is modeled
@@ -5649,7 +5277,7 @@ func UnsafeTransformToGlibFull(t *Transform) unsafe.Pointer {
 // Creates a new identity transform.
 // 
 // This function is meant to be used by language
-// bindings. For C code, this is equivalent to using %NULL.
+// bindings. For C code, this is equivalent to using `NULL`.
 func NewTransform() *Transform {
 	var cret *C.GskTransform // return, full, converted
 
@@ -5670,17 +5298,16 @@ func NewTransform() *Transform {
 // 
 // The function returns the following values:
 // 
-// 	- outTransform *Transform: The location to put the transform in 
+// 	- outTransform *Transform: return location for the transform 
 // 	- goret bool 
 //
-// Parses the given @string into a transform and puts it in
-// @out_transform.
+// Parses a given into a transform.
 // 
 // Strings printed via [method@Gsk.Transform.to_string]
 // can be read in again successfully using this function.
 // 
-// If @string does not describe a valid transform, %FALSE is
-// returned and %NULL is put in @out_transform.
+// If @string does not describe a valid transform, false
+// is returned and `NULL` is put in @out_transform.
 func TransformParse(str string) (*Transform, bool) {
 	var carg1 *C.char         // in, none, string
 	var carg2 *C.GskTransform // out, full, converted
@@ -5768,10 +5395,10 @@ func (self *Transform) GetCategory() TransformCategory {
 //
 // Inverts the given transform.
 // 
-// If @self is not invertible, %NULL is returned.
-// Note that inverting %NULL also returns %NULL, which is
-// the correct inverse of %NULL. If you need to differentiate
-// between those cases, you should check @self is not %NULL
+// If @self is not invertible, `NULL` is returned.
+// Note that inverting `NULL` also returns `NULL`, which is
+// the correct inverse of `NULL`. If you need to differentiate
+// between those cases, you should check @self is not `NULL`
 // before calling this function.
 // 
 // This function consumes @self. Use [method@Gsk.Transform.ref] first
@@ -5877,7 +5504,8 @@ func (next *Transform) Perspective(depth float32) *Transform {
 // 
 // 	- goret *Transform (nullable) 
 //
-// Rotates @next @angle degrees in 2D - or in 3D-speak, around the Z axis.
+// Rotates @next by an angle around the Z axis.
+// 
 // The rotation happens around the origin point of (0, 0).
 // 
 // This function consumes @next. Use [method@Gsk.Transform.ref] first
@@ -6078,13 +5706,18 @@ func (next *Transform) Skew(skewX float32, skewY float32) *Transform {
 // 	- outDx float32: return location for the x0 member 
 // 	- outDy float32: return location for the y0 member 
 //
-// Converts a `GskTransform` to a 2D transformation matrix.
+// Converts a transform to a 2D transformation matrix.
 // 
 // @self must be a 2D transformation. If you are not
-// sure, use gsk_transform_get_category() &gt;=
-// %GSK_TRANSFORM_CATEGORY_2D to check.
+// sure, use
 // 
-// The returned values have the following layout:
+//     gsk_transform_get_category() &gt;= GSK_TRANSFORM_CATEGORY_2D
+// 
+// to check.
+// 
+// The returned values are a subset of the full 4x4 matrix that
+// is computed by [method@Gsk.Transform.to_matrix] and have the
+// following layout:
 // 
 // ```
 //   | xx yx |   |  a  b  0 |
@@ -6144,7 +5777,7 @@ func (self *Transform) To2D() (float32, float32, float32, float32, float32, floa
 // 	- outDy float32: return location for the translation
 //   in the y direction 
 //
-// Converts a `GskTransform` to 2D transformation factors.
+// Converts a transform to 2D transformation factors.
 // 
 // To recreate an equivalent transform from the factors returned
 // by this function, use
@@ -6159,7 +5792,7 @@ func (self *Transform) To2D() (float32, float32, float32, float32, float32, floa
 // 
 // @self must be a 2D transformation. If you are not sure, use
 // 
-//     gsk_transform_get_category() &gt;= %GSK_TRANSFORM_CATEGORY_2D
+//     gsk_transform_get_category() &gt;= GSK_TRANSFORM_CATEGORY_2D
 // 
 // to check.
 func (self *Transform) To2DComponents() (float32, float32, float32, float32, float32, float32, float32) {
@@ -6209,19 +5842,21 @@ func (self *Transform) To2DComponents() (float32, float32, float32, float32, flo
 // 	- outDy float32: return location for the translation
 //   in the y direction 
 //
-// Converts a `GskTransform` to 2D affine transformation factors.
+// Converts a transform to 2D affine transformation factors.
 // 
 // To recreate an equivalent transform from the factors returned
 // by this function, use
 // 
-//     gsk_transform_scale (gsk_transform_translate (NULL,
-//                                                   &amp;GRAPHENE_POINT_T (dx, dy)),
-//                          sx, sy)
+//     gsk_transform_scale (
+//         gsk_transform_translate (
+//             NULL,
+//             &amp;GRAPHENE_POINT_T (dx, dy)),
+//         sx, sy)
 // 
 // @self must be a 2D affine transformation. If you are not
 // sure, use
 // 
-//     gsk_transform_get_category() &gt;= %GSK_TRANSFORM_CATEGORY_2D_AFFINE
+//     gsk_transform_get_category() &gt;= GSK_TRANSFORM_CATEGORY_2D_AFFINE
 // 
 // to check.
 func (self *Transform) ToAffine() (float32, float32, float32, float32) {
@@ -6253,9 +5888,9 @@ func (self *Transform) ToAffine() (float32, float32, float32, float32) {
 // 
 // The function returns the following values:
 // 
-// 	- outMatrix graphene.Matrix: The matrix to set 
+// 	- outMatrix graphene.Matrix: return location for the matrix 
 //
-// Computes the actual value of @self and stores it in @out_matrix.
+// Computes the 4x4 matrix for the transform.
 // 
 // The previous value of @out_matrix will be ignored.
 func (self *Transform) ToMatrix() graphene.Matrix {
@@ -6282,7 +5917,7 @@ func (self *Transform) ToMatrix() graphene.Matrix {
 // 
 // 	- goret string 
 //
-// Converts a matrix into a string that is suitable for printing.
+// Converts the transform into a human-readable string.
 // 
 // The resulting string can be parsed with [func@Gsk.Transform.parse].
 // 
@@ -6313,12 +5948,12 @@ func (self *Transform) ToString() string {
 // 	- outDy float32: return location for the translation
 //   in the y direction 
 //
-// Converts a `GskTransform` to a translation operation.
+// Converts a transform to a translation operation.
 // 
 // @self must be a 2D transformation. If you are not
 // sure, use
 // 
-//     gsk_transform_get_category() &gt;= %GSK_TRANSFORM_CATEGORY_2D_TRANSLATE
+//     gsk_transform_get_category() &gt;= GSK_TRANSFORM_CATEGORY_2D_TRANSLATE
 // 
 // to check.
 func (self *Transform) ToTranslate() (float32, float32) {
@@ -6344,7 +5979,7 @@ func (self *Transform) ToTranslate() (float32, float32) {
 // 
 // The function takes the following parameters:
 // 
-// 	- other *Transform (nullable): Transform to apply 
+// 	- other *Transform (nullable): transform to apply 
 // 
 // The function returns the following values:
 // 
@@ -6381,14 +6016,14 @@ func (next *Transform) Transform(other *Transform) *Transform {
 // 
 // The function takes the following parameters:
 // 
-// 	- rect *graphene.Rect: a `graphene_rect_t` 
+// 	- rect *graphene.Rect: the rectangle to transform 
 // 
 // The function returns the following values:
 // 
 // 	- outRect graphene.Rect: return location for the bounds
 //   of the transformed rectangle 
 //
-// Transforms a `graphene_rect_t` using the given transform @self.
+// Transforms a rectangle using the given transform.
 // 
 // The result is the bounding box containing the coplanar quad.
 func (self *Transform) TransformBounds(rect *graphene.Rect) graphene.Rect {
@@ -6416,14 +6051,14 @@ func (self *Transform) TransformBounds(rect *graphene.Rect) graphene.Rect {
 // 
 // The function takes the following parameters:
 // 
-// 	- point *graphene.Point: a `graphene_point_t` 
+// 	- point *graphene.Point: the point to transform 
 // 
 // The function returns the following values:
 // 
 // 	- outPoint graphene.Point: return location for
 //   the transformed point 
 //
-// Transforms a `graphene_point_t` using the given transform @self.
+// Transforms a point using the given transform.
 func (self *Transform) TransformPoint(point *graphene.Point) graphene.Point {
 	var carg0 *C.GskTransform     // in, none, converted
 	var carg1 *C.graphene_point_t // in, none, converted

@@ -77,8 +77,6 @@ func marshalObject(p unsafe.Pointer) (interface{}, error) {
 // UnsafeObjectFromGlibNone is used to convert raw C object pointers to go while taking a reference.
 // the returned Object is casted correctly and needs a manual cast by the user to the correct extending interface
 //
-// This will call the type marshalers internally for conversion. DO NOT call it from any of the marshalers to avoid
-// infinite recursion.
 // This is used by the bindings internally.
 func UnsafeObjectFromGlibNone(p unsafe.Pointer) Object {
 	obj := newObject(p, true)
@@ -89,8 +87,6 @@ func UnsafeObjectFromGlibNone(p unsafe.Pointer) Object {
 // UnsafeObjectFromGlibBorrow is used to convert raw C object pointers to go without taking a reference or touching the
 // floating reference. The returned Object is casted correctly and needs a manual cast by the user to the correct extending interface
 //
-// This will call the type marshalers internally for conversion. DO NOT call it from any of the marshalers to avoid
-// infinite recursion.
 // This is used by the bindings internally.
 func UnsafeObjectFromGlibBorrow(p unsafe.Pointer) Object {
 	obj := wrapObject(p)

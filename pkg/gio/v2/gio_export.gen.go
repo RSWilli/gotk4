@@ -241,14 +241,16 @@ func _gotk4_gio2_VFSFileLookupFunc(carg1 *C.GVfs, carg2 *C.char, carg3 C.gpointe
 
 	var vfs        Vfs    // in, none, converted
 	var identifier string // in, none, string
-	var goret      File   // return, full, converted
+	var goret      File   // return, full, converted, nullable
 
 	vfs = UnsafeVfsFromGlibNone(unsafe.Pointer(carg1))
 	identifier = C.GoString((*C.char)(unsafe.Pointer(carg2)))
 
 	goret = fn(vfs, identifier)
 
-	cret = (*C.GFile)(UnsafeFileToGlibFull(goret))
+	if goret != nil {
+		cret = (*C.GFile)(UnsafeFileToGlibFull(goret))
+	}
 
 	return cret
 }
@@ -1904,6 +1906,18 @@ func _gotk4_gio2_File_prefix_matches(carg0 *C.GFile, carg1 *C.GFile) (cret C.gbo
 		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_File_prefix_matches").(func(carg0 *C.GFile, carg1 *C.GFile) (cret C.gboolean))
 		if fn == nil {
 			panic("_gotk4_gio2_File_prefix_matches: no function pointer found")
+		}
+	}
+	return fn(carg0, carg1)
+}
+
+//export _gotk4_gio2_File_query_exists
+func _gotk4_gio2_File_query_exists(carg0 *C.GFile, carg1 *C.GCancellable) (cret C.gboolean) {
+	var fn func(carg0 *C.GFile, carg1 *C.GCancellable) (cret C.gboolean)
+	{
+		fn = classdata.LoadVirtualMethodFromInstance(unsafe.Pointer(carg0), "_gotk4_gio2_File_query_exists").(func(carg0 *C.GFile, carg1 *C.GCancellable) (cret C.gboolean))
+		if fn == nil {
+			panic("_gotk4_gio2_File_query_exists: no function pointer found")
 		}
 	}
 	return fn(carg0, carg1)

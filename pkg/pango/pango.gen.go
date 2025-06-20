@@ -311,7 +311,7 @@ const VERSION_MAJOR = 1
 // VERSION_MICRO wraps PANGO_VERSION_MICRO
 //
 // The micro component of the version of Pango available at compile-time.
-const VERSION_MICRO = 2
+const VERSION_MICRO = 3
 // VERSION_MINOR wraps PANGO_VERSION_MINOR
 //
 // The minor component of the version of Pango available at compile-time.
@@ -5678,6 +5678,15 @@ func unsafeWrapContext(base *gobject.ObjectInstance) *ContextInstance {
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeContext,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapContext(inst)
+		},
+	)
+}
+
 func marshalContextInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapContext(gobject.ValueFromNative(p).Object()), nil
 }
@@ -6428,6 +6437,15 @@ func unsafeWrapCoverage(base *gobject.ObjectInstance) *CoverageInstance {
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeCoverage,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapCoverage(inst)
+		},
+	)
+}
+
 func marshalCoverageInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapCoverage(gobject.ValueFromNative(p).Object()), nil
 }
@@ -6903,6 +6921,15 @@ func unsafeWrapFont(base *gobject.ObjectInstance) *FontInstance {
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeFont,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapFont(inst)
+		},
+	)
+}
+
 func marshalFontInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapFont(gobject.ValueFromNative(p).Object()), nil
 }
@@ -6944,6 +6971,8 @@ func UnsafeFontToGlibFull(c Font) unsafe.Pointer {
 //   to an array of `PangoFontDescription`, may be %NULL 
 //
 // Frees an array of font descriptions.
+//
+// Deprecated: (since 1.56.0) Just use pango_font_description_free in a loop
 func FontDescriptionsFree(descs []*FontDescription) {
 	var carg1 **C.PangoFontDescription // in, transfer: full, C Pointers: 2, Name: array[FontDescription], nullable, array (inner: *typesystem.Record, length-by: carg2)
 	var carg2 C.int                    // implicit
@@ -7899,6 +7928,15 @@ func unsafeWrapFontFace(base *gobject.ObjectInstance) *FontFaceInstance {
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeFontFace,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapFontFace(inst)
+		},
+	)
+}
+
 func marshalFontFaceInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapFontFace(gobject.ValueFromNative(p).Object()), nil
 }
@@ -8481,6 +8519,15 @@ func unsafeWrapFontFamily(base *gobject.ObjectInstance) *FontFamilyInstance {
 			Instance: *base,
 		},
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeFontFamily,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapFontFamily(inst)
+		},
+	)
 }
 
 func marshalFontFamilyInstance(p unsafe.Pointer) (any, error) {
@@ -9213,6 +9260,15 @@ func unsafeWrapFontMap(base *gobject.ObjectInstance) *FontMapInstance {
 			Instance: *base,
 		},
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeFontMap,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapFontMap(inst)
+		},
+	)
 }
 
 func marshalFontMapInstance(p unsafe.Pointer) (any, error) {
@@ -10027,6 +10083,15 @@ func unsafeWrapFontset(base *gobject.ObjectInstance) *FontsetInstance {
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeFontset,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapFontset(inst)
+		},
+	)
+}
+
 func marshalFontsetInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapFontset(gobject.ValueFromNative(p).Object()), nil
 }
@@ -10403,6 +10468,15 @@ func unsafeWrapFontsetSimple(base *gobject.ObjectInstance) *FontsetSimpleInstanc
 			ObjectInstance: *base,
 		},
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeFontsetSimple,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapFontsetSimple(inst)
+		},
+	)
 }
 
 func marshalFontsetSimpleInstance(p unsafe.Pointer) (any, error) {
@@ -11541,6 +11615,15 @@ func unsafeWrapLayout(base *gobject.ObjectInstance) *LayoutInstance {
 	return &LayoutInstance{
 		ObjectInstance: *base,
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeLayout,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapLayout(inst)
+		},
+	)
 }
 
 func marshalLayoutInstance(p unsafe.Pointer) (any, error) {
@@ -14151,6 +14234,15 @@ func unsafeWrapRenderer(base *gobject.ObjectInstance) *RendererInstance {
 	return &RendererInstance{
 		ObjectInstance: *base,
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeRenderer,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapRenderer(inst)
+		},
+	)
 }
 
 func marshalRendererInstance(p unsafe.Pointer) (any, error) {
@@ -18102,6 +18194,7 @@ func NewFontDescription() *FontDescription {
 // 
 // FEATURES is a comma-separated list of font features of the form
 // \#‍feature1=value,feature2=value,...
+// The =value part can be ommitted if the value is 1.
 // 
 // Any one of the options may be absent. If FAMILY-LIST is absent, then
 // the family_name field of the resulting font description will be

@@ -105,6 +105,15 @@ func unsafeWrapWaylandDevice(base *gobject.ObjectInstance) *WaylandDeviceInstanc
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeWaylandDevice,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapWaylandDevice(inst)
+		},
+	)
+}
+
 func marshalWaylandDeviceInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapWaylandDevice(gobject.ValueFromNative(p).Object()), nil
 }
@@ -216,6 +225,15 @@ func unsafeWrapWaylandDisplay(base *gobject.ObjectInstance) *WaylandDisplayInsta
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeWaylandDisplay,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapWaylandDisplay(inst)
+		},
+	)
+}
+
 func marshalWaylandDisplayInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapWaylandDisplay(gobject.ValueFromNative(p).Object()), nil
 }
@@ -309,6 +327,15 @@ func unsafeWrapWaylandGLContext(base *gobject.ObjectInstance) *WaylandGLContextI
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeWaylandGLContext,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapWaylandGLContext(inst)
+		},
+	)
+}
+
 func marshalWaylandGLContextInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapWaylandGLContext(gobject.ValueFromNative(p).Object()), nil
 }
@@ -368,6 +395,15 @@ func unsafeWrapWaylandMonitor(base *gobject.ObjectInstance) *WaylandMonitorInsta
 			ObjectInstance: *base,
 		},
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeWaylandMonitor,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapWaylandMonitor(inst)
+		},
+	)
 }
 
 func marshalWaylandMonitorInstance(p unsafe.Pointer) (any, error) {
@@ -431,6 +467,15 @@ func unsafeWrapWaylandSeat(base *gobject.ObjectInstance) *WaylandSeatInstance {
 	}
 }
 
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeWaylandSeat,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapWaylandSeat(inst)
+		},
+	)
+}
+
 func marshalWaylandSeatInstance(p unsafe.Pointer) (any, error) {
 	return unsafeWrapWaylandSeat(gobject.ValueFromNative(p).Object()), nil
 }
@@ -482,6 +527,11 @@ var _ WaylandSurface = (*WaylandSurfaceInstance)(nil)
 type WaylandSurface interface {
 	gdk.Surface
 	upcastToGdkWaylandSurface() *WaylandSurfaceInstance
+
+	// ForceNextCommit wraps gdk_wayland_surface_force_next_commit
+	//
+	// Forces next commit.
+	ForceNextCommit()
 }
 
 func unsafeWrapWaylandSurface(base *gobject.ObjectInstance) *WaylandSurfaceInstance {
@@ -490,6 +540,15 @@ func unsafeWrapWaylandSurface(base *gobject.ObjectInstance) *WaylandSurfaceInsta
 			ObjectInstance: *base,
 		},
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeWaylandSurface,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapWaylandSurface(inst)
+		},
+	)
 }
 
 func marshalWaylandSurfaceInstance(p unsafe.Pointer) (any, error) {
@@ -523,6 +582,18 @@ func UnsafeWaylandSurfaceToGlibNone(c WaylandSurface) unsafe.Pointer {
 // UnsafeWaylandSurfaceToGlibFull is used to convert the instance to it's C value GdkWaylandSurface, while removeing the finalizer. This is used by the bindings internally.
 func UnsafeWaylandSurfaceToGlibFull(c WaylandSurface) unsafe.Pointer {
 	return gobject.UnsafeObjectToGlibFull(c)
+}
+
+// ForceNextCommit wraps gdk_wayland_surface_force_next_commit
+//
+// Forces next commit.
+func (surface *WaylandSurfaceInstance) ForceNextCommit() {
+	var carg0 *C.GdkSurface // in, none, converted
+
+	carg0 = (*C.GdkSurface)(UnsafeWaylandSurfaceToGlibNone(surface))
+
+	C.gdk_wayland_surface_force_next_commit(carg0)
+	runtime.KeepAlive(surface)
 }
 
 // WaylandToplevelInstance is the instance type used by all types extending GdkWaylandToplevel. It is used internally by the bindings. Users should use the interface [WaylandToplevel] instead.
@@ -633,6 +704,15 @@ func unsafeWrapWaylandToplevel(base *gobject.ObjectInstance) *WaylandToplevelIns
 			Instance: *base,
 		},
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeWaylandToplevel,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapWaylandToplevel(inst)
+		},
+	)
 }
 
 func marshalWaylandToplevelInstance(p unsafe.Pointer) (any, error) {
@@ -839,6 +919,15 @@ func unsafeWrapWaylandPopup(base *gobject.ObjectInstance) *WaylandPopupInstance 
 			Instance: *base,
 		},
 	}
+}
+
+func init() {
+	gobject.RegisterObjectCasting(
+		TypeWaylandPopup,
+		func (inst *gobject.ObjectInstance) gobject.Object {
+			return unsafeWrapWaylandPopup(inst)
+		},
+	)
 }
 
 func marshalWaylandPopupInstance(p unsafe.Pointer) (any, error) {
