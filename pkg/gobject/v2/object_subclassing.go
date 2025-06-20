@@ -187,6 +187,13 @@ func UnsafeRegisterSubClass[InstanceT Object, ClassT any, OverridesT ObjectOverr
 		return instance, nil
 	})
 
+	RegisterObjectCasting(
+		t,
+		func(inst *ObjectInstance) Object {
+			return loadInstanceFromPrivateData(inst)
+		},
+	)
+
 	return t
 }
 

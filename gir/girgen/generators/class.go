@@ -76,6 +76,8 @@ func (g *ClassGenerator) Generate(w *file.Package) {
 
 	g.generateWrapFunction(w)
 
+	g.generateRegisterObjectCast(w)
+
 	if g.Marshaler != nil {
 		w.RegisterGType(g)
 		g.Marshaler.Generate(w)
@@ -186,6 +188,17 @@ func (g *ClassGenerator) generateWrapFunction(w file.File) {
 	fmt.Fprintf(w.Go(), "}\n")
 	w.Go().Unindent()
 
+	fmt.Fprintf(w.Go(), "}\n\n")
+}
+
+func (g *ClassGenerator) generateRegisterObjectCast(w *file.Package) {
+	fmt.Fprintf(w.Go(), "func init() {\n")
+	fmt.Fprintf(w.Go(), "\t%s(\n", g.BaseClass.WithForeignNamespace("RegisterObjectCasting"))
+	fmt.Fprintf(w.Go(), "\t\t%s,\n", g.GoTypeName())
+	fmt.Fprintf(w.Go(), "\t\tfunc (inst *%s) %s {\n", g.BaseClass.NamespacedGoType(0), g.BaseClass.NamespacedGoType(1))
+	fmt.Fprintf(w.Go(), "\t\t\treturn %s(inst)\n", g.GoWrapBaseClassFunction)
+	fmt.Fprintf(w.Go(), "\t\t},\n")
+	fmt.Fprintf(w.Go(), "\t)\n")
 	fmt.Fprintf(w.Go(), "}\n\n")
 }
 

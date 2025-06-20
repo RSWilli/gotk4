@@ -60,6 +60,11 @@ const (
 
 func init() {
 	RegisterGValueMarshaler(TypeObject, marshalObject)
+
+	RegisterObjectCasting(TypeObject, func(inst *ObjectInstance) Object {
+		// this is the base type, so we can just return the instance
+		return inst
+	})
 }
 
 // marshalObject returns a concrete ObjectInstance, because this is only called when we do not know the actual
@@ -90,18 +95,7 @@ func UnsafeObjectFromGlibNone(p unsafe.Pointer) Object {
 func UnsafeObjectFromGlibBorrow(p unsafe.Pointer) Object {
 	obj := wrapObject(p)
 
-	// this is not entirely race condition free, but cast() takes a reference
-	// on the object which we need to release again
-
-	wasFloating := obj.isFloating()
-
-	casted := obj.cast()
-
-	if wasFloating {
-		casted.unsafeForceFloating()
-	}
-
-	return casted
+	return obj.cast()
 }
 
 // UnsafeObjectFromGlibFull is used to convert raw C object pointers to go.
@@ -335,27 +329,38 @@ func unsafeTypeFromObject(instance unsafe.Pointer) Type {
 }
 
 // cast casts v to the concrete Go type (e.g. *Object to *gtk.Entry).
-//
-//go:nosplit
-//go:nocheckptr
 func (v *ObjectInstance) cast() Object {
 	if v.unsafe() == nil {
 		// nil-typed interface != non-nil-typed nil-value interface
 		return nil
 	}
 
-	var gvalue C.GValue
-	C.g_value_init_from_instance(&gvalue, C.gpointer(v.unsafe()))
+	// re-implement the gvalue marshaling here that takes the type from the instance
+	// and walks up the inheritance chain to find the correct casting function
+	//
+	// we MUST NOT use gvalue here, because that would take a reference on the object,
+	// and that is something the caller should decide
+	//
+	// we also can't ref and unref, because a floating reference would be cleaned up
+	//
+	// we KISS here: just don't touch the reference at all!
 
-	value := ValueFromNative(unsafe.Pointer(&gvalue))
-	defer value.unset()
+	typeFromInstance := v.typeFromInstance()
 
-	// Note that if GoValue successfully unmarshaled into a nil object type,
-	// then the interface would actually be non-nil.
-	if gv := value.GoValue(); gv != nil && gv != InvalidValue {
-		return gv.(Object)
+	for {
+		objectCastingsLock.RLock()
+		castFunc, exists := objectCastings[typeFromInstance]
+		objectCastingsLock.RUnlock()
+
+		if exists {
+			return castFunc(v)
+		}
+
+		if typeFromInstance == TypeObject {
+			// panic here to never block or return nil, Object should always be handled
+			panic("type object must have a casting function registered")
+		}
+
+		typeFromInstance = typeFromInstance.Parent()
 	}
-
-	runtime.KeepAlive(v)
-	return v
 }
