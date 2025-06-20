@@ -41,7 +41,7 @@ func (m Marshaler) GLibGetType() string {
 	return m.GlibGetType
 }
 
-// GLibGetType implements Marshalable.
+// GoTypeName implements Marshalable.
 func (m Marshaler) GoTypeName() string {
 	return m.Gotypename
 }
